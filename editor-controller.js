@@ -331,7 +331,7 @@ function createPrecisionMarkup(analysis, manuscript, template) {
       : "";
     return `
       <div class="precision-empty">
-        ${hintsHtml || `<span class="ew-icon ico-edit-note" aria-hidden="true"></span><p>Escreva mais para ver como o texto conversa com o guia.</p>`}
+        ${hintsHtml || `<span class="material-symbols-outlined">edit_note</span><p>Escreva mais para ver como o texto conversa com o guia.</p>`}
       </div>`;
   }
   const checklist = getChecklistFor(manuscript.id, template?.id);

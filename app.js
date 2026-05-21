@@ -1231,7 +1231,7 @@ const ACTION_HANDLERS = {
   "sp-add-scene": (e) => {
     e.preventDefault();
     const el = document.createElement("div");
-    el.innerHTML = `<div class="sp-block" data-sp-block="scene"><div class="sp-slug-row"><span class="sp-slug-tag">Cena</span><input class="sp-slug-input" data-sp-slug placeholder="INT./EXT. LOCAL — DIA/NOITE" /></div><textarea class="sp-action-area" data-sp-action placeholder="Ação — o que a câmera vê."></textarea><button class="sp-add-dialogue" data-action="sp-add-dialogue" type="button"><span class="ew-icon ico-add" aria-hidden="true"></span> Diálogo</button></div>`;
+    el.innerHTML = `<div class="sp-block" data-sp-block="scene"><div class="sp-slug-row"><span class="sp-slug-tag">Cena</span><input class="sp-slug-input" data-sp-slug placeholder="INT./EXT. LOCAL — DIA/NOITE" /></div><textarea class="sp-action-area" data-sp-action placeholder="Ação — o que a câmera vê."></textarea><button class="sp-add-dialogue" data-action="sp-add-dialogue" type="button"><span class="material-symbols-outlined">add</span> Diálogo</button></div>`;
     const addBtn = specializedEditor.querySelector(".sp-add-scene");
     if (addBtn) specializedEditor.querySelector(".screenplay-editor").insertBefore(el.firstElementChild, addBtn);
   },

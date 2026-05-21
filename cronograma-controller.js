@@ -246,7 +246,7 @@ function renderCronograma() {
       const wordsLabel = words > 0 ? `${words} pal` : "rascunho";
       const time  = new Date(m.createdAt || m.updatedAt).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
       return `<div class="crono-item crono-item-auto" style="--ci-bg:${col.bg};--ci-text:${col.text};--ci-border:${col.border}" data-crono-ms="${m.id}">
-        <span class="ew-icon ico-auto-stories" aria-hidden="true"></span>
+        <span class="material-symbols-outlined">auto_stories</span>
         <span class="crono-item-title">${escapeHtml(m.title)}</span>
         <span class="crono-item-meta"><span>${escapeHtml(m.kind || m.folder || "")}</span><span>${wordsLabel} · ${time}</span></span>
       </div>`;
@@ -259,7 +259,7 @@ function renderCronograma() {
         </button>
         <span class="crono-item-title">${escapeHtml(item.text)}</span>
         <button class="crono-delete" data-action="crono-delete" data-day="${dayKey}" data-item="${item.id}" title="Remover">
-          <span class="ew-icon ico-delete" aria-hidden="true"></span>
+          <span class="material-symbols-outlined">delete</span>
         </button>
       </div>`).join("");
 
@@ -281,10 +281,10 @@ function renderCronograma() {
           ${emptyFutureHtml}
           <div class="crono-add-row">
             <button class="crono-add-btn" data-action="crono-add-task" data-day="${dayKey}">
-              <span class="ew-icon ico-add" aria-hidden="true"></span> Tarefa
+              <span class="material-symbols-outlined">add</span> Tarefa
             </button>
             ${(isToday || isPast) ? `<button class="crono-add-btn crono-add-note" data-action="crono-add-note" data-day="${dayKey}">
-              <span class="ew-icon ico-add" aria-hidden="true"></span> Nota
+              <span class="material-symbols-outlined">add</span> Nota
             </button>` : ""}
           </div>
         </div>

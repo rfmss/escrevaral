@@ -23,7 +23,7 @@ function registerOfflineApp() {
   navigator.serviceWorker
     .register("./service-worker.js")
     .then((registration) => {
-      offlineStatus.innerHTML = '<span class="ew-icon ico-cloud-done" aria-hidden="true"></span>Funciona sem internet';
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Funciona sem internet';
       registration.update();
     })
     .catch(() => {

@@ -47,6 +47,8 @@ Critério de aceite: uma escritora brasileira deve entender a tela sem saber ing
 
 O Vereda usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.
 
+Ler `MAPA_ICONES_METAFORAS.md` sempre que a tarefa tocar em ícone, botão, metáfora, logo, textura, favicon ou estado visual.
+
 Regra: a metáfora deve orientar sem chamar mais atenção que o texto.
 
 | Metáfora | Serve para | Não pode virar |

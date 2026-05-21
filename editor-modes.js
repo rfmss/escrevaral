@@ -138,7 +138,7 @@ function buildScreenplayEditor(text) {
           <textarea class="sp-action-area" data-sp-action
             placeholder="Ação — o que a câmera vê, em presente e 3ª pessoa.">${block.action || ""}</textarea>
           <button class="sp-add-dialogue" data-action="sp-add-dialogue" data-sp-after="${idx}" type="button">
-            <span class="ew-icon ico-add" aria-hidden="true"></span> Diálogo
+            <span class="material-symbols-outlined">add</span> Diálogo
           </button>
         </div>
       `;
@@ -160,7 +160,7 @@ function buildScreenplayEditor(text) {
     <div class="screenplay-editor">
       ${blocksHtml}
       <button class="sp-add-scene" data-action="sp-add-scene" type="button">
-        <span class="ew-icon ico-add" aria-hidden="true"></span> Nova cena
+        <span class="material-symbols-outlined">add</span> Nova cena
       </button>
     </div>
   `;
@@ -250,13 +250,13 @@ function buildTeatroEditor(text) {
       ${html}
       <div class="teatro-add-row">
         <button class="teatro-add-btn" data-action="teatro-add-fala" type="button">
-          <span class="ew-icon ico-add" aria-hidden="true"></span> Fala
+          <span class="material-symbols-outlined">add</span> Fala
         </button>
         <button class="teatro-add-btn" data-action="teatro-add-rubrica" type="button">
-          <span class="ew-icon ico-add" aria-hidden="true"></span> Rubrica
+          <span class="material-symbols-outlined">add</span> Rubrica
         </button>
         <button class="teatro-add-btn" data-action="teatro-add-local" type="button">
-          <span class="ew-icon ico-add" aria-hidden="true"></span> Local
+          <span class="material-symbols-outlined">add</span> Local
         </button>
       </div>
     </div>`;
@@ -339,7 +339,7 @@ function buildENEMEditor(text, template) {
         <div class="enem-footer-actions">
           <span class="enem-placeholder-note" aria-live="polite" data-enem-placeholder-note>${escapeHtml(placeholderNote)}</span>
           <button class="enem-print-btn" data-action="enem-print" type="button" aria-label="Imprimir folha de redação">
-            <span class="ew-icon ico-print" aria-hidden="true"></span>
+            <span class="material-symbols-outlined">print</span>
             Imprimir
           </button>
         </div>
