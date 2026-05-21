@@ -1907,3 +1907,14 @@ mark {
   flex-shrink: 0;
   display: block;
 }
+
+/* Link social na statusbar */
+.statusbar-social {
+  display: inline-flex;
+  align-items: center;
+  color: var(--muted);
+  opacity: 0.55;
+  transition: opacity .15s;
+  text-decoration: none;
+}
+.statusbar-social:hover { opacity: 1; }
