@@ -1,0 +1,232 @@
+{
+  "tile": 128,
+  "columns": 8,
+  "rows": 4,
+  "source": "rafa.pro.br/escrevaral/#editor icons interpreted as wooden skeuomorphic sprites",
+  "icons": {
+    "menu": {
+      "x": 0,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-menu"
+    },
+    "search": {
+      "x": 128,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-search"
+    },
+    "add": {
+      "x": 256,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-add"
+    },
+    "download": {
+      "x": 384,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-download"
+    },
+    "upload_file": {
+      "x": 512,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-upload-file"
+    },
+    "file_save": {
+      "x": 640,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-file-save"
+    },
+    "print": {
+      "x": 768,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-print"
+    },
+    "delete": {
+      "x": 896,
+      "y": 0,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-delete"
+    },
+    "auto_stories": {
+      "x": 0,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-auto-stories"
+    },
+    "menu_book": {
+      "x": 128,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-menu-book"
+    },
+    "edit_note": {
+      "x": 256,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-edit-note"
+    },
+    "article": {
+      "x": 384,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-article"
+    },
+    "fingerprint": {
+      "x": 512,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-fingerprint"
+    },
+    "inventory_2": {
+      "x": 640,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-inventory-2"
+    },
+    "school": {
+      "x": 768,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-school"
+    },
+    "psychology": {
+      "x": 896,
+      "y": 128,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-psychology"
+    },
+    "graphic_eq": {
+      "x": 0,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-graphic-eq"
+    },
+    "language": {
+      "x": 128,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-language"
+    },
+    "library_books": {
+      "x": 256,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-library-books"
+    },
+    "verified": {
+      "x": 384,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-verified"
+    },
+    "cloud_done": {
+      "x": 512,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-cloud-done"
+    },
+    "shield_locked": {
+      "x": 640,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-shield-locked"
+    },
+    "calendar_month": {
+      "x": 768,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-calendar-month"
+    },
+    "timer": {
+      "x": 896,
+      "y": 256,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-timer"
+    },
+    "format_bold": {
+      "x": 0,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-format-bold"
+    },
+    "format_italic": {
+      "x": 128,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-format-italic"
+    },
+    "format_align_left": {
+      "x": 256,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-format-align-left"
+    },
+    "format_align_center": {
+      "x": 384,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-format-align-center"
+    },
+    "format_color_text": {
+      "x": 512,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-format-color-text"
+    },
+    "insert_page_break": {
+      "x": 640,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-insert-page-break"
+    },
+    "left_panel_open": {
+      "x": 768,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-left-panel-open"
+    },
+    "right_panel_close": {
+      "x": 896,
+      "y": 384,
+      "w": 128,
+      "h": 128,
+      "css_class": "ico-right-panel-close"
+    }
+  }
+}

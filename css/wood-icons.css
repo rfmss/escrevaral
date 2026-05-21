@@ -1,0 +1,55 @@
+/* ── Ícones amadeirados — spritesheet skeuomorph ─────────────────────────
+   Cada tile: 128×128px na imagem — exibido em 24×24px na interface.
+   Para 32px usar .ew-icon-32 / para 20px usar .ew-icon-20              */
+
+.ew-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  flex-shrink: 0;
+  background-image: url("../icons/wood/escrevaral_wood_spritesheet.png");
+  background-size: 192px 96px; /* 1024/5.33 × 512/5.33 — exibe em 24px */
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.ew-icon-20 { width: 20px; height: 20px; background-size: 160px 80px; }
+.ew-icon-32 { width: 32px; height: 32px; background-size: 256px 128px; }
+.ew-icon-48 { width: 48px; height: 48px; background-size: 384px 192px; }
+
+/* grade 8 colunas × 4 linhas, tile 128px → em 24px: passo = 24px */
+.ico-menu              { background-position:   -0px   -0px; }
+.ico-search            { background-position: -24px    -0px; }
+.ico-add               { background-position: -48px    -0px; }
+.ico-download          { background-position: -72px    -0px; }
+.ico-upload-file       { background-position: -96px    -0px; }
+.ico-file-save         { background-position: -120px   -0px; }
+.ico-print             { background-position: -144px   -0px; }
+.ico-delete            { background-position: -168px   -0px; }
+
+.ico-auto-stories      { background-position:   -0px  -24px; }
+.ico-menu-book         { background-position: -24px   -24px; }
+.ico-edit-note         { background-position: -48px   -24px; }
+.ico-article           { background-position: -72px   -24px; }
+.ico-fingerprint       { background-position: -96px   -24px; }
+.ico-inventory-2       { background-position: -120px  -24px; }
+.ico-school            { background-position: -144px  -24px; }
+.ico-psychology        { background-position: -168px  -24px; }
+
+.ico-graphic-eq        { background-position:   -0px  -48px; }
+.ico-language          { background-position: -24px   -48px; }
+.ico-library-books     { background-position: -48px   -48px; }
+.ico-verified          { background-position: -72px   -48px; }
+.ico-cloud-done        { background-position: -96px   -48px; }
+.ico-shield-locked     { background-position: -120px  -48px; }
+.ico-calendar-month    { background-position: -144px  -48px; }
+.ico-timer             { background-position: -168px  -48px; }
+
+.ico-format-bold       { background-position:   -0px  -72px; }
+.ico-format-italic     { background-position: -24px   -72px; }
+.ico-format-align-left { background-position: -48px   -72px; }
+.ico-format-align-center { background-position: -72px -72px; }
+.ico-format-color-text { background-position: -96px   -72px; }
+.ico-insert-page-break { background-position: -120px  -72px; }
+.ico-left-panel-open   { background-position: -144px  -72px; }
+.ico-right-panel-close { background-position: -168px  -72px; }
