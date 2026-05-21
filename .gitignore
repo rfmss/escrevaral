@@ -1,0 +1,36 @@
+# Design / binários
+*.psd
+*.ai
+*.sketch
+*.xd
+*.fig
+
+# PDFs e documentos
+*.pdf
+*.docx
+*.doc
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Ambiente
+.env
+.env.local
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Builds
+dist/
+build/
+
+# Logs
+*.log

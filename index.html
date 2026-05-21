@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2e4d43">
+    <title>Escrevaral — Editor de Escrita para Escritores Brasileiros</title>
+    <meta name="description" content="Escrevaral é um editor de escrita offline-first para escritores brasileiros. Escreva, organize seus manuscritos e prove sua autoria sem depender da internet ou de inteligência artificial.">
+    <meta name="keywords" content="editor de escrita, escritores brasileiros, editor offline, manuscrito, literatura brasileira, ferramenta de escrita">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Escrevaral — Editor de Escrita para Escritores Brasileiros">
+    <meta property="og:description" content="Escreva, organize manuscritos e prove sua autoria sem depender da internet. Editor offline-first feito para a literatura brasileira.">
+    <meta property="og:url" content="https://rfmss.github.io/escrevaral/">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Escrevaral — Editor de Escrita para Escritores Brasileiros">
+    <meta name="twitter:description" content="Editor de escrita offline-first para escritores brasileiros. Sem IA, sem nuvem, sem vigilância.">
+    <link rel="canonical" href="https://rfmss.github.io/escrevaral/">
+    <link rel="manifest" href="manifest.webmanifest?v=20260509-14">
+    <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260509-14" type="image/png" sizes="48x48">
+    <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260509-14" type="image/png" sizes="32x32">
+    <link rel="icon" href="favicon_io/tab-favicon-16x16.png?v=20260509-14" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="favicon_io/tab-favicon-180x180.png?v=20260509-14">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/00-tokens.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/01-base.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/02-shell-navigation.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="styles.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-editor-layout.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/04-cronograma.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-editor-modes.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-writing-area.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-guide-reference.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-inspector-precision.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/03-editor-toolbar.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/05-archive.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/07-enem.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/09-print.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/04-analysis-academy.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/06-academy-tools.css?v=20260521-manifesto">
+    <link rel="stylesheet" href="css/08-responsive.css?v=20260521-manifesto">
+  </head>
+  <body>
+    <!-- Camada de aquarela — textura de papel + manchas de tinta -->
+    <div id="watercolor-layer" aria-hidden="true"></div>
+  <!-- SVG filter para distorção dos veios de madeira — zero custo de rede -->
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute;pointer-events:none">
+    <defs>
+      <filter id="wood-distort" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="turbulence" baseFrequency="0.008 0.002" numOctaves="4" seed="7" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+    </defs>
+  </svg>
+
+
+    <div class="app-shell" data-view="editor">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <button class="icon-button mobile-only" data-action="toggle-nav" aria-label="Abrir navegação">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <span class="brand-mark-3d" aria-hidden="true">
+            <span class="brand-mark"></span>
+          </span>
+          <div>
+            <strong>ESCREVARAL</strong>
+            <span>para escritoras e escritores brasileiros</span>
+          </div>
+        </div>
+
+        <nav class="module-tabs" aria-label="Módulos do Escrevaral">
+          <button class="tab is-active" data-view-target="editor">Manuscrito</button>
+          <button class="tab" data-view-target="biblioteca">Biblioteca</button>
+          <button class="tab" data-view-target="autoria">Prova de autoria</button>
+          <button class="tab" data-view-target="arquivo">Arquivo</button>
+          <button class="tab" data-view-target="academia">Academia</button>
+          <button class="tab" data-view-target="cronograma">Cronograma</button>
+        </nav>
+
+        <div class="topbar-actions">
+          <!-- Indicador de prova humana -->
+          <button class="proof-chip" data-proof-chip hidden data-action="switch-view-autoria" title="Integridade da escrita — clique para ver Prova de Autoria" aria-label="Indicador de autoria">
+            <span class="proof-chip-dot" data-proof-chip-dot></span>
+            <span class="proof-chip-value" data-proof-chip-value>—</span>
+          </button>
+
+          <div class="topbar-search" data-topbar-search>
+            <button class="icon-button" data-action="toggle-audio-player" aria-label="Sons ambiente" title="Sons ambiente de escrita">
+            <span class="material-symbols-outlined">headphones</span>
+          </button>
+          <button class="icon-button" data-action="toggle-global-search" aria-label="Buscar no acervo" title="Buscar">
+              <span class="material-symbols-outlined">search</span>
+            </button>
+            <label>
+              <span class="material-symbols-outlined">search</span>
+              <input type="search" data-global-search-input placeholder="Buscar no acervo" aria-label="Buscar no acervo">
+            </label>
+            <div class="global-search-results" data-global-search-results hidden></div>
+          </div>
+          <span class="offline-badge" data-offline-status>
+            <span class="material-symbols-outlined">cloud_done</span>
+            Pronto sem internet
+          </span>
+          <button class="install-button" data-action="install-app" hidden>
+            <span class="material-symbols-outlined">download</span>
+            Instalar
+          </button>
+          <button class="icon-button desk-bg-toggle" data-action="toggle-desk-background" aria-pressed="false" title="Fundo de mesa" aria-label="Fundo de mesa">
+            <span class="material-symbols-outlined">table_bar</span>
+          </button>
+          <button class="icon-button" data-action="toggle-dark-mode" aria-pressed="false" title="Modo escuro" aria-label="Alternar modo escuro">
+            <span class="material-symbols-outlined">dark_mode</span>
+          </button>
+          <button class="icon-button" data-action="toggle-focus" aria-label="Escrever sem distração" title="Escrever sem distração">
+            <span class="material-symbols-outlined">edit_note</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <button class="panel-rail panel-rail-left" data-action="toggle-left-panel" aria-label="Abrir acervo" title="Abrir acervo">
+          <span class="material-symbols-outlined">right_panel_open</span>
+        </button>
+        <aside class="sidebar" data-nav>
+          <button class="panel-toggle panel-toggle-left" data-action="toggle-left-panel" aria-label="Ocultar acervo" title="Ocultar acervo">
+            <span class="material-symbols-outlined">left_panel_close</span>
+          </button>
+          <div class="sidebar-section" data-sidebar-hierarchy>
+            <div class="sidebar-section-header">
+              <div class="eyebrow">Manuscritos</div>
+              <button class="icon-button sidebar-new-btn" data-action="open-create-note" aria-label="Nova nota" title="Nova nota">
+                <span class="material-symbols-outlined">add</span>
+              </button>
+            </div>
+            <div class="manuscript-list" data-manuscript-list></div>
+          </div>
+
+          <div class="sidebar-section" data-sidebar-tools>
+            <div class="eyebrow">Ferramentas</div>
+            <button class="nav-row" data-view-target="biblioteca">
+              <span class="material-symbols-outlined">auto_stories</span>
+              <span class="nav-row-label">Biblioteca<small class="nav-row-sub">gramática e critérios</small></span>
+            </button>
+            <button class="nav-row" data-view-target="autoria">
+              <span class="material-symbols-outlined">fingerprint</span>
+              <span class="nav-row-label">Prova de autoria<small class="nav-row-sub">registros locais</small></span>
+            </button>
+            <button class="nav-row" data-view-target="arquivo">
+              <span class="material-symbols-outlined">inventory_2</span>
+              <span class="nav-row-label">Arquivo<small class="nav-row-sub">notas e cópias</small></span>
+            </button>
+            <button class="nav-row" data-view-target="academia">
+              <span class="material-symbols-outlined">school</span>
+              <span class="nav-row-label">Academia<small class="nav-row-sub">guias e ferramentas</small></span>
+            </button>
+          </div>
+
+        </aside>
+
+        <main class="content-stage">
+          <section class="view view-editor is-active" data-view-panel="editor">
+            <div class="editor-split" data-template-side="left">
+              <aside class="template-reference" data-template-reference>
+                <div class="template-reference-header">
+                  <div>
+                    <p class="eyebrow">Guia de escrita</p>
+                    <strong data-reference-title>Ficção-relâmpago</strong>
+                  </div>
+                  <button class="icon-button" data-action="toggle-template-side" aria-label="Trocar o guia de lado" title="Trocar o guia de lado: esquerda ↔ direita">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                  </button>
+                  <button class="icon-button" data-action="toggle-template-panel" data-template-panel-toggle aria-label="Ocultar guia de escrita" title="Ocultar guia">
+                    <span class="material-symbols-outlined">left_panel_close</span>
+                  </button>
+                </div>
+                <div class="template-reference-tabs" data-reference-tabs></div>
+                <div class="precision-card" data-precision-card></div>
+                <div class="reference-body" data-reference-body></div>
+              </aside>
+
+              <button class="split-resizer" data-template-resizer aria-label="Ajustar largura do guia"></button>
+
+              <article class="paper editor-paper">
+                <div class="editor-mode-bar">
+                  <button class="secondary-button" data-action="toggle-template-panel" data-template-panel-toggle aria-expanded="true">
+                    <span class="material-symbols-outlined">view_sidebar</span>
+                    Guia
+                  </button>
+                  <button class="secondary-button" data-action="open-reader-mode" title="Ler — revisão como leitor" aria-label="Ler como leitor">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    Ler
+                  </button>
+
+                  <button class="icon-button editor-delete-btn" data-action="delete-active-manuscript" aria-label="Apagar esta nota" title="Apagar esta nota">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
+
+                <!-- ── BARRA DE FORMATAÇÃO ── -->
+                <div class="format-bar" data-format-bar>
+                  <!-- Grupo 1: escrita básica — sempre visível e familiar -->
+                  <div class="fmt-group fmt-group-writing">
+                    <button class="fmt-btn" data-fmt="bold" title="Negrito (Ctrl+B)" aria-label="Negrito">
+                      <span class="material-symbols-outlined">format_bold</span>
+                    </button>
+                    <button class="fmt-btn" data-fmt="italic" title="Itálico (Ctrl+I)" aria-label="Itálico">
+                      <span class="material-symbols-outlined">format_italic</span>
+                    </button>
+                    <span class="fmt-sep"></span>
+                    <select class="fmt-select" data-fmt-block aria-label="Tipo de bloco" title="Tipo de bloco">
+                      <option value="p">Parágrafo</option>
+                      <option value="h1">Título</option>
+                      <option value="h2">Subtítulo</option>
+                      <option value="h3">Seção</option>
+                    </select>
+                    <span class="fmt-sep"></span>
+                    <button class="fmt-btn" data-fmt="justifyLeft" title="Alinhar à esquerda" aria-label="Esquerda">
+                      <span class="material-symbols-outlined">format_align_left</span>
+                    </button>
+                    <button class="fmt-btn" data-fmt="justifyCenter" title="Centralizar" aria-label="Centralizar">
+                      <span class="material-symbols-outlined">format_align_center</span>
+                    </button>
+                    <button class="fmt-btn" data-fmt="justifyRight" title="Alinhar à direita" aria-label="Direita">
+                      <span class="material-symbols-outlined">format_align_right</span>
+                    </button>
+                    <button class="fmt-btn" data-fmt="justifyFull" title="Justificar" aria-label="Justificar">
+                      <span class="material-symbols-outlined">format_align_justify</span>
+                    </button>
+                  </div>
+
+                  <!-- Separador editorial — marca passagem para comandos de saída -->
+                  <span class="fmt-sep-editorial" aria-hidden="true"></span>
+
+                  <!-- Grupo 2: saída editorial — visualmente secundário -->
+                  <div class="fmt-group fmt-group-editorial" data-editorial-group>
+                    <button class="fmt-btn fmt-editorial-toggle" data-action="toggle-editorial-group" title="Formato e exportação" aria-label="Mostrar ferramentas de formato" aria-expanded="false">
+                      <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                    <select class="fmt-select editor-preset-select" data-page-preset title="Preset editorial" aria-label="Preset de página">
+                      <option value="draft">Rascunho</option>
+                      <option value="submission">Submissão</option>
+                      <option value="reading">Leitura</option>
+                      <option value="word">Padrão Word / ABNT</option>
+                      <option value="book">Livro A5</option>
+                    </select>
+                    <button class="editor-view-btn" data-action="toggle-page-view" aria-pressed="false" title="Ver texto em página">
+                      <span class="material-symbols-outlined">article</span>
+                      Página
+                    </button>
+                    <span class="fmt-sep"></span>
+                    <button class="fmt-btn" data-action="toggle-grammar-color" data-grammar-btn aria-pressed="false" title="Colorir por classe gramatical" aria-label="Classes gramaticais">
+                      <span class="material-symbols-outlined">format_color_text</span>
+                    </button>
+                    <button class="fmt-btn" data-fmt="pageBreak" title="Quebra de página" aria-label="Quebra de página">
+                      <span class="material-symbols-outlined">insert_page_break</span>
+                    </button>
+                    <button class="fmt-btn" data-action="export-rtf" title="Baixar para Word / LibreOffice" aria-label="Baixar para Word">
+                      <span class="material-symbols-outlined">file_download</span>
+                    </button>
+                    <button class="fmt-btn" data-action="print-pages" title="Imprimir / Salvar como PDF" aria-label="Imprimir">
+                      <span class="material-symbols-outlined">print</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="title-block">
+                  <input class="title-input" value="O Som da Terra Seca" aria-label="Título do manuscrito">
+                  <span class="title-rule"></span>
+                </div>
+                <div class="writing-area" contenteditable="true" spellcheck="true" aria-label="Área de escrita" data-view-mode="flow">
+O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
+
+— Hoje não chove — murmurou, mais por hábito do que por esperança.
+
+O velho Tião pigarreou lá dentro, o som oco batendo nas paredes de taipa. Ele tossia terra desde a seca de oitenta e dois. O rádio de pilha chiava uma moda de viola distante, engolida pela estática e pelo silêncio opressivo que se seguia.
+
+Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. A água da moringa já amargava, gosto de barro e espera. Era o quinto mês sem uma gota. O gado, o pouco que restava, pastava miragens na imensidão amarela.
+                </div>
+                <div class="paged-editor" data-paged-editor></div>
+                <div class="specialized-editor" data-specialized-editor hidden></div>
+              </article>
+            </div>
+          </section>
+
+          <section class="view" data-view-panel="biblioteca">
+            <article class="paper split-paper">
+              <div>
+                <p class="eyebrow">Inspeção lexical</p>
+                <h1 data-lexical-title>Biblioteca</h1>
+                <p class="lexical-hint">Selecione uma palavra no manuscrito e abra a Biblioteca para ver uma leitura local, sem IA e sem rede.</p>
+                <div class="reading-sample" data-lexical-context></div>
+              </div>
+              <aside class="lexical-card" data-lexical-card></aside>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="autoria">
+            <article class="paper certificate-paper">
+              <p class="eyebrow">Prova de autoria</p>
+              <h1>Sinais da sua escrita</h1>
+              <p class="muted">Enquanto você escreve, o Escrevaral guarda sinais do seu processo neste navegador. Sem nuvem, sem envio, sem complicação.</p>
+
+              <div class="proof-scope-note">
+                <span class="material-symbols-outlined" aria-hidden="true">info</span>
+                <div>
+                  <p>Guarda sinais da sua escrita enquanto o texto nasce — neste navegador, sem sair daqui.</p>
+                  <p>Não substitui registro oficial nem orientação jurídica. <strong>Exporte o arquivo</strong> para guardar uma cópia fora do navegador.</p>
+                </div>
+              </div>
+
+              <p class="muted" style="margin-bottom: 1.5rem; font-style: italic;">Enquanto você escreve, o Escrevaral registra o ritmo das suas teclas — não o que digitou, só o tempo entre cada letra. Isso cria um registro técnico do processo de escrita.</p>
+              <div class="certificate-grid">
+                <div class="metric-block">
+                  <span>Sinais de autoria</span>
+                  <strong data-proof-integrity>Aguardando sua escrita</strong>
+                  <small data-proof-status>Escreva no editor para iniciar</small>
+                </div>
+                <div class="metric-block">
+                  <span>Toques registrados</span>
+                  <strong data-proof-organic>0</strong>
+                  <small data-proof-rejected>0 ignorados</small>
+                </div>
+                <div class="metric-block">
+                  <span>Cadência média</span>
+                  <strong data-proof-cadence>—</strong>
+                  <small>Calculada conforme você escreve</small>
+                </div>
+              </div>
+
+              <div class="proof-session-bar">
+                <div>
+                  <span>Sessão ativa</span>
+                  <strong data-proof-session-name>Sessão em aberto</strong>
+                </div>
+                <button class="secondary-button" data-action="new-proof-session">
+                  <span class="material-symbols-outlined">add_circle</span>
+                  Nova sessão
+                </button>
+              </div>
+
+              <div class="proof-actions">
+                <button class="primary-button" data-action="export-proof">
+                  <span class="material-symbols-outlined">download</span>
+                  Guardar cópia da autoria
+                </button>
+                <p>A cópia guarda sinais do seu processo. Só abre aqui no Escrevaral, em Arquivo → Trazer cópia.</p>
+              </div>
+
+              <div class="timeline" data-proof-timeline>
+                <div><span></span><p>Aguardando eventos confiáveis do editor.</p></div>
+              </div>
+
+              <div class="version-panel">
+                <div>
+                  <p class="eyebrow">Histórico local</p>
+                  <h2>Versões do manuscrito</h2>
+                </div>
+                <button class="secondary-button" data-action="create-version">
+                  <span class="material-symbols-outlined">history_edu</span>
+                  Criar versão
+                </button>
+              </div>
+              <div class="version-list" data-version-list>
+                <p class="muted">Nenhuma versão salva ainda.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="arquivo">
+            <article class="archive-view">
+
+              <!-- ── ZONA RETOMAR ── -->
+              <div class="archive-heading">
+                <div>
+                  <p class="eyebrow">Arquivo</p>
+                  <h2 class="archive-heading-title">Notas e manuscritos</h2>
+                </div>
+                <div class="archive-actions">
+                  <div class="archive-action-group">
+                    <button class="secondary-button" data-action="export-manuscript" data-export-format="txt" title="Baixar como texto simples (.txt)">
+                      <span class="material-symbols-outlined">article</span>
+                      Exportar texto
+                    </button>
+                    <button class="secondary-button" data-action="export-manuscript" data-export-format="md" title="Baixar em Markdown (.md)">
+                      <span class="material-symbols-outlined">markdown</span>
+                      Baixar em Markdown
+                    </button>
+                  </div>
+                  <button class="primary-button" data-action="open-create-note">
+                    <span class="material-symbols-outlined">add</span>
+                    Nova nota
+                  </button>
+                </div>
+              </div>
+              <input type="file" accept=".vrda,application/json" data-backup-input hidden>
+
+              <div class="archive-controls">
+                <label class="archive-search">
+                  <span class="material-symbols-outlined">search</span>
+                  <input type="search" placeholder="Buscar no acervo" data-archive-search aria-label="Buscar no acervo">
+                </label>
+                <div class="archive-filter-bar" data-archive-filter-bar></div>
+                <label class="archive-sort">
+                  <span class="material-symbols-outlined">sort</span>
+                  <select data-archive-sort aria-label="Ordenar acervo">
+                    <option value="updated">Atualizados</option>
+                    <option value="title">Título</option>
+                    <option value="progress">Progresso</option>
+                    <option value="type">Tipo</option>
+                  </select>
+                </label>
+              </div>
+
+              <section class="pinned-documents" data-pinned-documents aria-label="Documentos fixados"></section>
+              <section class="ongoing-documents" data-ongoing-documents aria-label="Documentos em andamento"></section>
+              <section class="recent-documents" data-recent-documents aria-label="Documentos recentes"></section>
+
+              <!-- ── ZONA ORGANIZAR ── -->
+              <div class="archive-layout">
+                <div class="project-grid" data-project-grid></div>
+                <aside class="archive-detail-panel">
+                  <!-- Empty state: mostra quando nenhuma nota está selecionada -->
+                  <div class="archive-panel-empty" data-archive-panel-empty hidden>
+                    <span class="material-symbols-outlined">touch_app</span>
+                    <p>Selecione uma nota para ver e editar os detalhes</p>
+                  </div>
+
+                  <!-- Conteúdo: mostra quando há nota selecionada -->
+                  <div class="archive-panel-content" data-archive-panel-content>
+                    <!-- Identidade da nota selecionada -->
+                    <div class="archive-note-identity" data-archive-note-identity hidden>
+                      <strong class="archive-note-title" data-archive-note-title></strong>
+                      <span class="archive-note-kind" data-archive-note-kind></span>
+                    </div>
+
+                    <p class="eyebrow" style="margin-top:12px">Detalhes da nota</p>
+                    <form class="metadata-form" data-metadata-form>
+                      <label>
+                        Formato
+                        <input type="text" name="kind" data-metadata-field="kind" placeholder="ex: Conto, Roteiro, Crônica">
+                      </label>
+                      <label>
+                        Status
+                        <select name="status" data-metadata-field="status">
+                          <option>Em escrita</option>
+                          <option>Revisão</option>
+                          <option>Pausado</option>
+                          <option>Concluído</option>
+                        </select>
+                      </label>
+                      <label>
+                        Marco atual
+                        <input type="text" name="chapter" data-metadata-field="chapter">
+                      </label>
+                      <label class="progress-label-group">
+                        <span>Progresso manual</span>
+                        <small class="progress-hint">Ajuste livre — guias com checklist calculam progresso próprio</small>
+                        <div class="progress-row">
+                          <input type="range" min="0" max="100" step="1" name="progress" data-metadata-field="progress">
+                          <span class="progress-readout" data-progress-readout>0%</span>
+                        </div>
+                      </label>
+                      <label>
+                        Tags
+                        <input type="text" name="tags" data-metadata-field="tags" placeholder="ex: revisão, personagem, capítulo 2">
+                      </label>
+                      <label class="wide-field">
+                        Descrição
+                        <textarea rows="4" name="description" data-metadata-field="description"></textarea>
+                      </label>
+                    </form>
+                    <button class="primary-button" data-action="open-active-manuscript">
+                      <span class="material-symbols-outlined">edit_note</span>
+                      Abrir no editor
+                    </button>
+                  </div>
+                </aside>
+              </div>
+
+              <!-- ── ZONA PROTEGER ── -->
+              <!-- ── ZONA SEGURANÇA E BACKUP — recolhível ── -->
+              <div class="archive-protect-zone">
+                <details class="archive-security-details">
+                  <summary class="archive-security-summary">
+                    <span class="material-symbols-outlined" aria-hidden="true">shield_locked</span>
+                    <span class="archive-security-label">Cópias de segurança</span>
+                    <span class="archive-security-hint">Salvo neste navegador</span>
+                    <span class="material-symbols-outlined archive-security-chevron" aria-hidden="true">expand_more</span>
+                  </summary>
+
+                <div class="backup-warning" data-backup-warning>
+                  <span class="material-symbols-outlined" aria-hidden="true">shield_locked</span>
+                  <div>
+                    <strong>Seu acervo está salvo só neste navegador</strong>
+                    <p data-backup-warning-copy>Limpar os dados do navegador, trocar de aparelho ou desinstalar o site pode apagar seus textos. Guarde uma cópia fora do navegador — ela só abre aqui no Escrevaral, em <strong>Arquivo → Trazer cópia</strong>.</p>
+                  </div>
+                  <button class="secondary-button" data-action="export-backup">
+                    <span class="material-symbols-outlined">file_save</span>
+                    Exportar agora
+                  </button>
+                </div>
+
+                <details class="filesystem-backup-details">
+                  <summary class="filesystem-backup-summary">
+                    <span class="material-symbols-outlined">cloud_sync</span>
+                    <span>Cópia externa automática</span>
+                    <span class="filesystem-backup-inline-status" data-filesystem-backup-inline-status>desativada</span>
+                    <span class="filesystem-backup-cta">Configurar</span>
+                  </summary>
+                  <div class="filesystem-backup" data-filesystem-backup>
+                    <span class="filesystem-dot" data-filesystem-backup-dot></span>
+                    <div>
+                      <strong data-filesystem-backup-status>Cópia externa desativada</strong>
+                      <p data-filesystem-backup-detail>Escolha um arquivo .vrda no seu computador para o Escrevaral sobrescrever automaticamente com uma cópia completa do acervo.</p>
+                    </div>
+                    <label>
+                      <span>Salvar a cada</span>
+                      <input type="range" min="5" max="60" step="5" value="15" data-filesystem-backup-interval aria-label="Frequência da cópia automática">
+                      <b data-filesystem-backup-interval-label>15s</b>
+                    </label>
+                    <div class="filesystem-backup-actions">
+                      <button class="secondary-button" data-action="choose-filesystem-backup">
+                        <span class="material-symbols-outlined">folder_open</span>
+                        Escolher arquivo
+                      </button>
+                      <button class="secondary-button" data-action="save-filesystem-backup" disabled>
+                        <span class="material-symbols-outlined">save</span>
+                        Salvar agora
+                      </button>
+                      <button class="secondary-button" data-action="stop-filesystem-backup" disabled>
+                        <span class="material-symbols-outlined">pause</span>
+                        Pausar
+                      </button>
+                    </div>
+                  </div>
+                </details>
+
+                <div class="archive-backup-actions">
+                  <button class="secondary-button" data-action="export-backup">
+                    <span class="material-symbols-outlined">file_save</span>
+                    Guardar cópia do acervo
+                  </button>
+                  <button class="secondary-button" data-action="import-backup">
+                    <span class="material-symbols-outlined">upload_file</span>
+                    Trazer cópia de volta
+                  </button>
+                  <button class="secondary-button" data-action="export-rtf" title="Baixar para Word / LibreOffice (.rtf)">
+                    <span class="material-symbols-outlined">file_download</span>
+                    Exportar .rtf
+                  </button>
+                </div>
+
+                <div class="archive-danger-zone">
+                  <p class="eyebrow archive-danger-label">Zona de perigo</p>
+                  <div class="archive-danger-content">
+                    <div>
+                      <strong>Zerar acervo</strong>
+                      <p>Apaga permanentemente todos os textos, notas e configurações. Não é reversível.</p>
+                    </div>
+                    <button class="danger-button" data-action="master-reset">
+                      <span class="material-symbols-outlined">delete_forever</span>
+                      Zerar tudo
+                    </button>
+                  </div>
+                </div>
+                </details><!-- /archive-security-details -->
+              </div>
+
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="academia">
+            <article class="academy-view">
+
+              <!-- ── 1. BANNER COMPACTO ── -->
+              <section class="academy-banner">
+                <p class="eyebrow">Academia</p>
+                <h2>Bancada do escritor</h2>
+                <p>Ferramentas de revisão, guias de ofício e trilha de publicação.</p>
+                <button class="academy-resume-link" type="button" data-action="switch-view-editor" data-academy-resume hidden>
+                  <span class="material-symbols-outlined">arrow_back</span>
+                  Continuar com o texto atual
+                </button>
+              </section>
+
+              <!-- ── 2. FERRAMENTAS DE REVISÃO EM TABS ── -->
+              <section class="academy-tools" aria-label="Ferramentas de revisão">
+                <input type="radio" name="academy-tool" id="at-voice" class="at-radio" hidden checked>
+                <input type="radio" name="academy-tool" id="at-rimalab" class="at-radio" hidden>
+                <input type="radio" name="academy-tool" id="at-vocab" class="at-radio" hidden>
+                <input type="radio" name="academy-tool" id="at-biblioteca" class="at-radio" hidden>
+
+                <nav class="academy-tools-tabs" aria-label="Selecionar ferramenta">
+                  <label for="at-voice" class="academy-tool-tab">
+                    <span class="material-symbols-outlined">psychology</span>
+                    Espelho de Voz
+                  </label>
+                  <label for="at-rimalab" class="academy-tool-tab">
+                    <span class="material-symbols-outlined">graphic_eq</span>
+                    RimaLab
+                  </label>
+                  <label for="at-vocab" class="academy-tool-tab">
+                    <span class="material-symbols-outlined">language</span>
+                    Vocabulário
+                  </label>
+                  <label for="at-biblioteca" class="academy-tool-tab">
+                    <span class="material-symbols-outlined">library_books</span>
+                    Biblioteca
+                  </label>
+                </nav>
+
+                <!-- Painel: Espelho de Voz -->
+                <div class="academy-tool-panel at-panel-voice">
+                  <div class="voice-mirror" aria-label="Espelho de Voz">
+                    <div class="voice-mirror-copy">
+                      <p class="eyebrow">Espelho de Voz</p>
+                      <h2>Um espelho do jeito que você escreve</h2>
+                      <p>Cole um conjunto de textos ou use o texto em edição. O Escrevaral lê o texto e devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença.</p>
+                      <div class="voice-actions">
+                        <button class="secondary-button" data-action="voice-use-active">
+                          <span class="material-symbols-outlined">edit_note</span>
+                          Usar o texto em edição
+                        </button>
+                        <button class="primary-button" data-action="voice-analyze">
+                          <span class="material-symbols-outlined">psychology</span>
+                          Analisar voz
+                        </button>
+                      </div>
+                    </div>
+                    <div class="voice-mirror-workbench">
+                      <textarea data-voice-input placeholder="Cole aqui um conto, capítulo, ensaio ou conjunto de textos. Acima de 500 palavras a leitura fica mais estável." aria-label="Texto para o Espelho de Voz"></textarea>
+                      <div class="voice-meta">
+                        <span data-voice-count>0 palavras</span>
+                        <span>lido aqui · nada sai do navegador</span>
+                      </div>
+                      <div class="voice-result" data-voice-result>
+                        <p>O espelho ainda está vazio. Traga texto suficiente para que a voz deixe marcas.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Painel: RimaLab -->
+                <div class="academy-tool-panel at-panel-rimalab">
+                  <div class="rimalab-tool" aria-label="RimaLab">
+                    <div class="rimalab-copy">
+                      <p class="eyebrow">RimaLab</p>
+                      <h2>Rima, ritmo e ouvido para o verso</h2>
+                      <p>Um laboratório local para poema, letra e verso falado. A ferramenta conta sílabas poéticas até a última tônica, sinaliza elisões e compara sons finais sem fingir que poesia cabe inteira numa régua.</p>
+                      <div class="rimalab-actions">
+                        <button class="secondary-button" data-action="rimalab-use-active">
+                          <span class="material-symbols-outlined">edit_note</span>
+                          Usar o texto em edição
+                        </button>
+                        <button class="secondary-button" data-action="export-rimalab">
+                          <span class="material-symbols-outlined">download</span>
+                          Baixar TXT
+                        </button>
+                        <button class="secondary-button" data-action="clear-rimalab">
+                          <span class="material-symbols-outlined">delete_sweep</span>
+                          Limpar
+                        </button>
+                        <button class="secondary-button" data-action="toggle-rimalab-encyclopedia">
+                          <span class="material-symbols-outlined">menu_book</span>
+                          Enciclopédia
+                        </button>
+                      </div>
+                    </div>
+                    <div class="rimalab-workbench" data-rimalab-state="empty">
+                      <textarea data-rimalab-input placeholder="Escreva versos, uma quadra, uma letra de música ou um refrão. Cada linha será lida como verso." aria-label="Editor do RimaLab"></textarea>
+                      <div class="rimalab-meta">
+                        <span data-rimalab-count>0 versos</span>
+                        <span data-rimalab-save>salvo localmente</span>
+                      </div>
+                      <div class="rimalab-dashboard">
+                        <article class="rimalab-isometry" data-rimalab-isometry>
+                          <span></span>
+                          <strong data-rimalab-isometry-title>Aguardando versos</strong>
+                          <p data-rimalab-isometry-copy>Versos com a mesma medida se encontram aqui.</p>
+                        </article>
+                        <article>
+                          <h3>Métrica</h3>
+                          <div class="rimalab-list" data-rimalab-metrics></div>
+                        </article>
+                        <article>
+                          <h3>Rimas consecutivas</h3>
+                          <div class="rimalab-list" data-rimalab-rhymes></div>
+                        </article>
+                        <article>
+                          <h3>Esquema</h3>
+                          <div class="rimalab-scheme" data-rimalab-scheme>—</div>
+                        </article>
+                      </div>
+                      <div class="rimalab-encyclopedia" data-rimalab-encyclopedia hidden></div>
+                      <p class="rimalab-note" data-rimalab-note>A contagem de sílabas é automática — use como apoio, não como sentença.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Painel: Vocabulário Decolonizador -->
+                <div class="academy-tool-panel at-panel-vocab">
+                  <div class="decolonial-tool" aria-label="Vocabulário Decolonizador">
+                    <div class="decolonial-copy">
+                      <p class="eyebrow">Vocabulário Decolonizador</p>
+                      <h2>Revise palavras que podem pesar mais do que parecem</h2>
+                      <p>Consulte termos, alternativas e notas de contexto para escrever com mais precisão histórica, respeito cultural e consciência editorial.</p>
+                      <label class="decolonial-toggle-card">
+                        <input type="checkbox" data-decolonial-observer-toggle>
+                        <span>
+                          <strong>Observar meu manuscrito nesta revisão</strong>
+                          <small>Sinaliza termos que podem carregar racismo, colonialidade, capacitismo, sexismo ou apagamento social. A análise é local e serve como lente crítica, não como veredito automático.</small>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="decolonial-workbench">
+                      <div class="decolonial-observer" data-decolonial-observer hidden>
+                        <div class="decolonial-observer-summary">
+                          <strong data-decolonial-observer-summary>Observador pronto.</strong>
+                          <span>Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra.</span>
+                        </div>
+                        <div class="decolonial-observer-list" data-decolonial-observer-list></div>
+                      </div>
+                      <label class="decolonial-search">
+                        <span class="material-symbols-outlined">search</span>
+                        <input type="search" data-decolonial-search placeholder="Buscar termo, alternativa ou motivo" aria-label="Buscar no vocabulário decolonizador">
+                      </label>
+                      <div class="decolonial-filters" data-decolonial-filters aria-label="Categorias do vocabulário decolonizador"></div>
+                      <div class="decolonial-count" data-decolonial-count></div>
+                      <div class="decolonial-list" data-decolonial-list></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Painel: Biblioteca da Escrita -->
+                <div class="academy-tool-panel at-panel-biblioteca">
+                  <iframe
+                    src="./vereda-biblioteca-escrita.html"
+                    class="academia-biblioteca-frame"
+                    title="Biblioteca da Escrita — 21 livros e 42 critérios"
+                    loading="lazy">
+                  </iframe>
+                </div>
+              </section>
+
+              <!-- ── 3. GUIA DE OFÍCIOS ── -->
+              <section class="template-studio" aria-label="Guia de Ofícios Literários">
+                <div class="template-copy">
+                  <p class="eyebrow">Guia de Ofícios Literários</p>
+                  <h2>Comece pelo ofício que a sua forma pede</h2>
+                  <p>Ficção, roteiro, poesia, não ficção, jornalismo, mercado editorial e objeto livro não nascem do mesmo vazio. Escolha um guia e abra uma mesa preparada para escrever.</p>
+
+                  <label class="template-search">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="search" placeholder="Buscar guia, ENEM, soneto, roteiro..." data-template-search aria-label="Buscar no Guia de Ofícios">
+                  </label>
+                  <div class="craft-tabs" data-craft-tabs></div>
+                  <div class="template-tabs" data-template-tabs></div>
+                </div>
+                <div class="template-phone" aria-live="polite">
+                  <div class="template-phone-bar">
+                    <span>ESCREVARAL</span>
+                    <span class="material-symbols-outlined">offline_bolt</span>
+                  </div>
+                  <div class="template-screen" data-template-screen></div>
+                  <div class="template-nav">
+                    <button class="secondary-button" data-template-prev>
+                      <span class="material-symbols-outlined">arrow_back</span>
+                      Anterior
+                    </button>
+                    <span data-template-step-label>tela 1 de 4</span>
+                    <button class="secondary-button" data-template-next>
+                      Próxima
+                      <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ── 3b. LEITURA EDITORIAL (secundária) ── -->
+              <section class="academy-leitura" aria-label="Leitura editorial">
+                <p class="eyebrow">Leitura editorial</p>
+                <div class="leitura-editorial-grid">
+                  <a href="./vereda-titulo-do-livro.html" class="leitura-editorial-card" data-editorial-page>
+                    <p class="eyebrow">Leitura editorial</p>
+                    <strong>Como escolher o título do livro</strong>
+                    <small>Guia completo com técnicas, exemplos e exercícios →</small>
+                  </a>
+                  <a href="./vereda-primeiras-linhas.html" class="leitura-editorial-card" data-editorial-page>
+                    <p class="eyebrow">Leitura editorial</p>
+                    <strong>Como escrever as primeiras linhas</strong>
+                    <small>Análise de aberturas famosas e exercícios práticos →</small>
+                  </a>
+                  <a href="./vereda-revisao-manuscrito.html" class="leitura-editorial-card" data-editorial-page>
+                    <p class="eyebrow">Leitura editorial</p>
+                    <strong>Como revisar um manuscrito</strong>
+                    <small>As 5 camadas de revisão e a lista cena por cena →</small>
+                  </a>
+                  <a href="./vereda-bloqueio-criativo.html" class="leitura-editorial-card" data-editorial-page>
+                    <p class="eyebrow">Leitura editorial</p>
+                    <strong>Como vencer o bloqueio criativo</strong>
+                    <small>Causas reais e técnicas imediatas para retomar a escrita →</small>
+                  </a>
+                </div>
+              </section>
+
+              <!-- ── 4. DIREITOS DO AUTOR — standalone ── -->
+              <section class="rights-lab" aria-label="Direitos do Autor" data-rights-lab>
+                <div class="rights-copy">
+                  <p class="eyebrow">Direitos do Autor</p>
+                  <h2>Um mapa para não entrar no mercado no escuro</h2>
+                  <p>Direito autoral muda de detalhe, mas algumas perguntas envelhecem bem: o que criei, o que enviei, o que assinei, o que provei e qual órgão preciso consultar agora.</p>
+                  <div class="rights-disclaimer">
+                    <span class="material-symbols-outlined">info</span>
+                    <p><strong>O Escrevaral não dá garantia jurídica.</strong> Ele aponta riscos, preserva rastros e encoraja consulta às fontes oficiais atualizadas antes de registro, contrato, submissão ou litígio.</p>
+                  </div>
+                  <label class="rights-search">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="search" data-rights-search placeholder="Buscar contrato, ISBN, plágio, coautoria..." aria-label="Buscar em Direitos do Autor">
+                  </label>
+                </div>
+                <div class="rights-workbench">
+                  <div class="rights-cards" data-rights-cards></div>
+                  <div class="rights-sources">
+                    <strong>Fontes para conferir no dia</strong>
+                    <div data-rights-sources></div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ── 5. TRILHA DE PUBLICAÇÃO — acordeão colapsável ── -->
+              <details class="academy-publishing-track">
+                <summary>
+                  <span class="material-symbols-outlined">route</span>
+                  Trilha de publicação
+                  <span class="academy-track-sub">Mercado editorial · Objeto livro · Anatomia do livro</span>
+                  <span class="material-symbols-outlined academy-track-chevron">expand_more</span>
+                </summary>
+                <div class="academy-paths">
+                  <article class="academy-path">
+                    <span class="academy-path-number">01</span>
+                    <div class="academy-path-icon">
+                      <span class="material-symbols-outlined">storefront</span>
+                    </div>
+                    <p class="eyebrow">Mercado editorial</p>
+                    <h3>Escolha a rota antes de lançar</h3>
+                    <p>Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao leitor.</p>
+                    <div class="academy-tags">
+                      <span>Independente</span>
+                      <span>Editoras</span>
+                      <span>Submissão</span>
+                    </div>
+                    <button class="secondary-button" data-craft-select="mercado-editorial">
+                      <span class="material-symbols-outlined">route</span>
+                      Ver guias
+                    </button>
+                  </article>
+
+                  <article class="academy-path is-book">
+                    <span class="academy-path-number">02</span>
+                    <div class="academy-path-icon">
+                      <span class="material-symbols-outlined">book_4</span>
+                    </div>
+                    <p class="eyebrow">Objeto livro</p>
+                    <h3>Conheça a arquitetura da obra</h3>
+                    <p>Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras.</p>
+                    <div class="academy-tags">
+                      <span>Capa</span>
+                      <span>Miolo</span>
+                      <span>Glossário</span>
+                    </div>
+                    <button class="secondary-button" data-craft-select="objeto-livro">
+                      <span class="material-symbols-outlined">view_in_ar</span>
+                      Ver guias
+                    </button>
+                  </article>
+
+                  <article class="academy-path is-rights">
+                    <span class="academy-path-number">03</span>
+                    <div class="academy-path-icon">
+                      <span class="material-symbols-outlined">gavel</span>
+                    </div>
+                    <p class="eyebrow">Cuidados com autoria</p>
+                    <h3>Saiba quando guardar prova, fonte e contrato</h3>
+                    <p>Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizada.</p>
+                    <div class="academy-tags">
+                      <span>LDA</span>
+                      <span>Registro</span>
+                      <span>Contratos</span>
+                    </div>
+                    <button class="secondary-button" data-action="scroll-rights">
+                      <span class="material-symbols-outlined">policy</span>
+                      Ver cuidados
+                    </button>
+                  </article>
+                </div>
+
+                <div class="academy-book-anatomy" aria-label="Anatomia visual do livro">
+                  <div class="academy-book">
+                    <div class="academy-book-spine"><span>Lombada</span></div>
+                    <div class="academy-book-cover">
+                      <span class="academy-book-kicker">Capa</span>
+                      <strong>ESCREVARAL</strong>
+                      <small>título · autor · promessa</small>
+                    </div>
+                    <div class="academy-book-pages">
+                      <i></i><i></i><i></i>
+                    </div>
+                  </div>
+                  <div class="academy-anatomy-list">
+                    <div><b>Pré-texto</b><span>folha de rosto, ficha, dedicatória, epígrafe, sumário</span></div>
+                    <div><b>Texto</b><span>partes, capítulos, cenas, mancha tipográfica, fólio</span></div>
+                    <div><b>Pós-texto</b><span>epílogo, notas, referências, sobre o autor, colofão</span></div>
+                  </div>
+                </div>
+              </details>
+
+            </article>
+          </section>
+
+          <section class="view" data-view-panel="cronograma">
+            <div class="cronograma-wrap">
+              <div class="cronograma-header">
+                <div>
+                  <p class="eyebrow">Cronograma</p>
+                  <h2 class="cronograma-title" data-crono-title>Ritmo de escrita em 2026</h2>
+                </div>
+                <div class="cronograma-month-picker">
+                  <button class="icon-button" data-crono-prev aria-label="Mês anterior">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                  </button>
+                  <span class="cronograma-month-label" data-crono-month>Maio</span>
+                  <button class="icon-button crono-shortcut-toggle" data-crono-month-toggle type="button" aria-expanded="false" aria-controls="crono-date-shortcut" aria-label="Olha, clica aqui: é um atalho para escolher uma data" title="Olha, clica aqui: é um atalho">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                  </button>
+                  <button class="icon-button" data-crono-next aria-label="Próximo mês">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                  </button>
+                  <div class="crono-date-shortcut" id="crono-date-shortcut" data-crono-date-shortcut hidden></div>
+                </div>
+              </div>
+              <div class="cronograma-heatmap" data-crono-heatmap></div>
+              <div class="cronograma-timeline" data-crono-timeline></div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="inspector">
+          <button class="panel-toggle panel-toggle-right" data-action="toggle-right-panel" aria-label="Ocultar análise linguística" title="Ocultar análise linguística">
+            <span class="material-symbols-outlined">right_panel_close</span>
+          </button>
+          <div class="inspector-section">
+            <h2>Olhar do texto</h2>
+            <div class="live-number">
+              <strong data-stat="wpm">—</strong>
+              <span data-wpm-label>escreva para ver</span>
+            </div>
+          </div>
+
+          <div class="inspector-section">
+            <h3>Palavras que voltam</h3>
+            <div class="word-cloud" data-word-cloud></div>
+          </div>
+
+          <div class="inspector-section">
+            <h3>Tipos de palavra</h3>
+            <div class="grammar-bar" data-grammar-bar aria-label="Distribuição gramatical"></div>
+            <ul class="legend" data-grammar-legend></ul>
+          </div>
+
+          <div class="inspector-section readability">
+            <h3>Leitura fácil?</h3>
+            <div>
+              <strong data-flesch-score>--</strong>
+              <span data-flesch-label>Escreva para ver</span>
+            </div>
+          </div>
+        </aside>
+        <button class="panel-rail panel-rail-right" data-action="toggle-right-panel" aria-label="Abrir análise linguística" title="Abrir análise linguística">
+          <span class="material-symbols-outlined">left_panel_open</span>
+        </button>
+      </div>
+
+      <div class="focus-toolbar" aria-label="Controles do modo foco">
+        <button class="icon-button" data-action="exit-focus" aria-label="Sair do modo foco" title="Sair (Escape)">
+          <span class="material-symbols-outlined">fullscreen_exit</span>
+        </button>
+        <div class="focus-control">
+          <span class="material-symbols-outlined">format_size</span>
+          <label for="font-size-control">Letra</label>
+          <input id="font-size-control" type="range" min="17" max="24" step="1" value="19" data-focus-setting="fontSize">
+        </div>
+        <div class="focus-control">
+          <span class="material-symbols-outlined">width</span>
+          <label for="width-control">Largura</label>
+          <input id="width-control" type="range" min="620" max="860" step="20" value="720" data-focus-setting="width">
+        </div>
+
+      </div>
+
+      <div class="focus-counter" data-focus-count>0 palavras</div>
+      <div class="focus-ruler" aria-hidden="true"></div>
+
+      <!-- ONBOARDING — primeira entrada -->
+      <div class="create-note-overlay" id="welcome-overlay" data-welcome-overlay hidden>
+        <section class="create-note-panel welcome-panel" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+          <div class="welcome-header">
+            <p class="eyebrow">Oficina literária · Escrevaral</p>
+            <h2 id="welcome-title">Sua mesa de escrita.</h2>
+            <p>Sem IA, sem nuvem — seu texto fica aqui, com você.</p>
+          </div>
+
+          <div class="welcome-options">
+            <button class="welcome-card welcome-card-primary" data-action="welcome-blank">
+              <span class="material-symbols-outlined">edit</span>
+              <strong>Abrir folha de escrita</strong>
+              <small>Apenas você e a página. Sem guia, sem configuração.</small>
+            </button>
+            <button class="welcome-card welcome-card-secondary" data-action="welcome-write">
+              <span class="material-symbols-outlined">auto_stories</span>
+              <strong>Escolher um guia</strong>
+              <small>Conto, roteiro, soneto, crônica, ENEM — o guia certo para o ofício.</small>
+            </button>
+            <div class="welcome-tools">
+              <p class="eyebrow">Ferramentas quando precisar</p>
+              <div class="welcome-tools-row">
+                <button class="welcome-card welcome-card-tool" data-action="welcome-rimalab">
+                  <span class="material-symbols-outlined">graphic_eq</span>
+                  <strong>RimaLab</strong>
+                  <small>Métrica e rima</small>
+                </button>
+                <button class="welcome-card welcome-card-tool" data-action="welcome-voice">
+                  <span class="material-symbols-outlined">psychology</span>
+                  <strong>Espelho de Voz</strong>
+                  <small>Leitura crítica</small>
+                </button>
+                <button class="welcome-card welcome-card-tool" data-action="welcome-autoria">
+                  <span class="material-symbols-outlined">verified</span>
+                  <strong>Prova de autoria</strong>
+                  <small>Sinais da sua autoria</small>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="create-note-overlay" data-create-note-overlay hidden>
+        <section class="create-note-panel" role="dialog" aria-modal="true" aria-labelledby="create-note-title">
+          <div class="create-note-heading">
+            <div>
+              <p class="eyebrow">Começar</p>
+              <h2 id="create-note-title">Nova nota</h2>
+            </div>
+            <button class="icon-button" data-action="close-create-note" aria-label="Fechar">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <div class="create-note-step" data-create-step="1"></div>
+          <div class="create-note-step" data-create-step="2" hidden></div>
+        </section>
+      </div>
+
+      <footer class="statusbar">
+        <span>Escrevaral — para toda a gente que escreve</span>
+        <span data-stat="count">186 palavras · 4 parágrafos</span>
+        <div class="statusbar-goal" data-goal-bar hidden>
+          <div class="goal-bar-fill" data-goal-bar-fill></div>
+          <button class="goal-label" data-action="edit-word-goal" data-goal-label title="Alterar meta">0 / 0 palavras</button>
+        </div>
+        <button class="statusbar-goal-btn" data-action="edit-word-goal" data-goal-set-btn title="Definir meta de palavras">
+          <span class="material-symbols-outlined">flag</span>
+        </button>
+        <div class="statusbar-timer" data-pomodoro title="Temporizador de escrita — 25 minutos">
+          <button class="statusbar-timer-btn" data-action="toggle-pomodoro" aria-label="Iniciar temporizador de escrita">
+            <span class="material-symbols-outlined" data-pomodoro-icon>timer</span>
+          </button>
+          <span class="statusbar-timer-display" data-pomodoro-display>25:00</span>
+        </div>
+        <span data-save-status>Pronto para escrever</span>
+        <span class="statusbar-page-count" data-page-count hidden></span>
+      </footer>
+    </div>
+
+    <!-- Engines — carregam antes de tudo -->
+    <script src="document-engine.js?v=20260521-manifesto" defer></script>
+    <script src="pagination-engine.js?v=20260521-manifesto" defer></script>
+    <script src="lexical-engine.js?v=20260521-manifesto" defer></script>
+    <script src="proof-engine.js?v=20260521-manifesto" defer></script>
+    <script src="vrda-engine.js?v=20260521-manifesto" defer></script>
+    <script src="backup-engine.js?v=20260521-manifesto" defer></script>
+    <script src="filesystem-backup-engine.js?v=20260521-manifesto" defer></script>
+    <script src="archive-engine.js?v=20260521-manifesto" defer></script>
+    <script src="version-engine.js?v=20260521-manifesto" defer></script>
+    <script src="export-engine.js?v=20260521-manifesto" defer></script>
+    <script src="template-engine.js?v=20260521-manifesto" defer></script>
+    <script src="precision-engine.js?v=20260521-manifesto" defer></script>
+    <script src="criterios-data.js?v=20260521-manifesto" defer></script>
+    <script src="syntax-engine.js?v=20260521-manifesto" defer></script>
+    <script src="punctuation-engine.js?v=20260521-manifesto" defer></script>
+    <script src="analise-engine.js?v=20260521-manifesto" defer></script>
+    <script src="voice-engine.js?v=20260521-manifesto" defer></script>
+    <script src="rimalab-engine.js?v=20260521-manifesto" defer></script>
+    <script src="decolonial-engine.js?v=20260521-manifesto" defer></script>
+    <script src="rights-engine.js?v=20260521-manifesto" defer></script>
+    <script src="synonym-data.js?v=20260521-manifesto" defer></script>
+    <!-- State store — define globals e DOM refs antes dos controllers -->
+    <script src="state-store.js?v=20260521-manifesto" defer></script>
+    <!-- Controllers — ordem importa -->
+    <script src="cronograma-controller.js?v=20260521-manifesto" defer></script>
+    <script src="editor-modes.js?v=20260521-manifesto" defer></script>
+    <script src="editor-controller.js?v=20260521-manifesto" defer></script>
+    <script src="proof-controller.js?v=20260521-manifesto" defer></script>
+    <script src="ui-dialog.js?v=20260521-manifesto" defer></script>
+    <script src="academia-controller.js?v=20260521-manifesto" defer></script>
+    <script src="backup-controller.js?v=20260521-manifesto" defer></script>
+    <script src="archive-controller.js?v=20260521-manifesto" defer></script>
+    <script src="grammar-controller.js?v=20260521-manifesto" defer></script>
+    <script src="reader-controller.js?v=20260521-manifesto" defer></script>
+    <script src="pomodoro-controller.js?v=20260521-manifesto" defer></script>
+    <script src="syntax-controller.js?v=20260521-manifesto" defer></script>
+    <!-- App — orquestração central, carrega por último -->
+    <script src="app.js?v=20260521-manifesto" defer></script>
+
+    <!-- Toast de dica contextual da Academia (P11) -->
+    <div id="academia-hint-toast" role="status" aria-live="polite" style="
+      position: fixed;
+      bottom: 40px;
+      right: 24px;
+      z-index: 90;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card, #fff);
+      border: 1px solid var(--line, #e0e0e0);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(26,26,26,0.13);
+      padding: 14px 16px;
+      max-width: 320px;
+      font-size: 13px;
+      color: var(--soft-ink, #555);
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    ">
+      <span class="material-symbols-outlined" style="color: var(--primary, #2e4d43); font-size: 22px; flex-shrink: 0;">school</span>
+      <span>
+        Pausa ativa. A <button data-action="hint-goto-academia" style="background:none;border:none;padding:0;color:var(--primary,#2e4d43);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;">Academia</button> tem guias de ofício e ferramentas prontas para ajudar.
+      </span>
+      <button data-action="hint-dismiss" aria-label="Fechar dica" style="
+        background: none;
+        border: none;
+        padding: 2px;
+        color: var(--muted, #999);
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-left: auto;
+      ">&times;</button>
+    </div>
+
+  <!-- Toast de undo de delete -->
+  <div id="delete-undo-toast" role="status" aria-live="polite" style="
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    z-index: 91;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink, #1a1a1a);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(26,26,26,0.25);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #fff;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    white-space: nowrap;
+  ">
+    <span>Nota apagada.</span>
+    <button id="delete-undo-btn" style="
+      background: none; border: none; padding: 0;
+      color: var(--sage, #a3b18a); font-weight: 700;
+      font-size: 13px; cursor: pointer; text-decoration: underline;
+    ">Desfazer</button>
+  </div>
+
+  <!-- Toast de save automático (primeira digitação) -->
+  <div id="save-hint-toast" role="status" aria-live="polite" style="
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card, #fff);
+    border: 1px solid var(--line, #e0e0e0);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(26,26,26,0.13);
+    padding: 14px 16px;
+    max-width: 380px;
+    font-size: 13px;
+    color: var(--soft-ink, #555);
+    line-height: 1.45;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    white-space: nowrap;
+  ">
+    <span class="material-symbols-outlined" style="color: var(--primary, #2e4d43); font-size: 20px; flex-shrink: 0;">cloud_done</span>
+    <span>Texto salvo aqui, neste navegador. Sem internet, sem nuvem.</span>
+    <button id="save-hint-dismiss" aria-label="Fechar" style="
+      background: none; border: none; padding: 2px;
+      color: var(--muted, #999); cursor: pointer; font-size: 18px;
+      line-height: 1; flex-shrink: 0; margin-left: auto;
+    ">&times;</button>
+  </div>
+
+  <!-- Sons ambiente -->
+  <div id="audio-player-panel" class="audio-panel" hidden>
+    <div class="audio-panel-header">
+      <span class="material-symbols-outlined">headphones</span>
+      <strong>Atmosfera de escrita</strong>
+      <button id="audio-close-btn" class="icon-button" data-action="toggle-audio-player" aria-label="Fechar">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="audio-tracks" id="audio-tracks"></div>
+    <div class="audio-volume">
+      <span class="material-symbols-outlined">volume_down</span>
+      <input type="range" id="audio-volume" min="0" max="1" step="0.05" value="0.5" aria-label="Volume">
+      <span class="material-symbols-outlined">volume_up</span>
+    </div>
+  </div>
+
+  <!-- Modo leitura -->
+  <div id="reader-overlay" class="reader-overlay" hidden>
+    <header class="reader-header">
+      <button class="icon-button" data-action="close-reader-mode" aria-label="Fechar modo leitura">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <span class="reader-title" id="reader-title"></span>
+      <div class="reader-controls">
+        <button class="reader-pill" id="reader-play" data-action="reader-play-pause" aria-label="Rolar o texto automaticamente">
+          <span class="material-symbols-outlined">play_circle</span>
+          <span id="reader-play-label">Rolar</span>
+        </button>
+        <button class="reader-pill" id="reader-speed" data-action="reader-cycle-speed" title="Ritmo de rolagem">
+          <span class="material-symbols-outlined">speed</span>
+          <span id="reader-speed-label">Ritmo 1</span>
+        </button>
+        <button class="reader-pill" id="reader-ruler-btn" data-action="reader-toggle-ruler" title="Linha de leitura">
+          <span class="material-symbols-outlined">view_day</span>
+          Linha-guia
+        </button>
+        <button class="reader-pill" id="reader-font-btn" data-action="reader-cycle-font" title="Tamanho da letra">
+          <span class="material-symbols-outlined">text_fields</span>
+          <span id="reader-font-label">Letra média</span>
+        </button>
+      </div>
+    </header>
+    <div class="reader-canvas" id="reader-canvas">
+      <article class="reader-article" id="reader-article"></article>
+    </div>
+    <div class="reader-ruler" id="reader-ruler" hidden></div>
+  </div>
+
+  <!-- Diálogo customizado (substitui prompt/confirm/alert nativos) -->
+  <div id="vrda-dialog-overlay" class="create-note-overlay" hidden aria-hidden="true">
+    <div class="vrda-dialog" role="dialog" aria-modal="true" aria-labelledby="vrda-dialog-msg">
+      <p id="vrda-dialog-msg" class="vrda-dialog-msg"></p>
+      <input id="vrda-dialog-input" class="vrda-dialog-input" type="text" autocomplete="off">
+      <div class="vrda-dialog-btns">
+        <button id="vrda-dialog-cancel" class="secondary-button" type="button">Cancelar</button>
+        <button id="vrda-dialog-ok" class="primary-button" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip de classe gramatical — segue o mouse -->
+  <div id="grammar-tooltip" class="grammar-tooltip" hidden aria-hidden="true"></div>
+
+  <!-- Popover de palavra — abre ao clicar no editor -->
+  <div id="word-popover" class="word-popover" hidden role="tooltip" aria-live="polite">
+    <div class="word-popover-head">
+      <strong data-popover-word></strong>
+      <span class="word-popover-class" data-popover-class></span>
+    </div>
+    <div class="word-popover-body">
+      <span data-popover-count></span>
+      <button class="word-popover-lexical" data-action="popover-open-lexical">
+        Ver na Biblioteca
+        <span class="material-symbols-outlined">arrow_forward</span>
+      </button>
+    </div>
+    <button class="word-popover-close" data-action="popover-close" aria-label="Fechar">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <!-- Leitor editorial — iframe embutido -->
+  <div id="editorial-overlay" class="editorial-overlay" hidden aria-hidden="true">
+    <div class="editorial-bar">
+      <button class="icon-button" id="editorial-back" aria-label="Voltar ao Escrevaral">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="editorial-bar-title" id="editorial-bar-title">Leitura editorial</span>
+      <button class="icon-button" id="editorial-external" aria-label="Abrir em nova aba" title="Abrir em nova aba">
+        <span class="material-symbols-outlined">open_in_new</span>
+      </button>
+    </div>
+    <iframe id="editorial-frame" class="editorial-frame" src="" title="Leitura editorial" loading="lazy"></iframe>
+  </div>
+
+  </body>
+</html>

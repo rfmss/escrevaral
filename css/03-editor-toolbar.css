@@ -1,0 +1,498 @@
+/* ── META DE PALAVRAS ────────────────────────────────── */
+.statusbar-goal-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 0 4px;
+  display: flex; align-items: center;
+}
+.statusbar-goal-btn:hover { color: var(--primary); }
+.statusbar-goal-btn .material-symbols-outlined { font-size: 15px; }
+
+.statusbar-goal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.goal-bar-fill {
+  height: 3px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--primary) 60%, transparent);
+  transition: width 0.4s ease, background 0.3s;
+  min-width: 4px;
+}
+
+.goal-label {
+  background: none; border: none; cursor: pointer;
+  font-size: 11px; color: var(--muted); white-space: nowrap;
+  padding: 0;
+}
+.goal-label:hover { color: var(--primary); }
+
+
+/* ── SONS AMBIENTE ───────────────────────────────────── */
+.audio-panel[hidden] { display: none; }
+.audio-panel {
+  position: fixed;
+  top: 52px;
+  left: 60px;
+  width: 224px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  z-index: 90;
+  padding: 12px;
+}
+
+.audio-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.audio-panel-header .material-symbols-outlined { font-size: 18px; color: var(--primary); }
+.audio-panel-header strong { flex: 1; font-size: 12px; font-weight: 700; color: var(--ink); }
+
+.audio-tracks { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+
+.audio-track {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 8px;
+  background: var(--surface-low); border: 1px solid transparent;
+  cursor: pointer; font-size: 13px; color: var(--soft-ink);
+  width: 100%; text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+.audio-track:hover { border-color: var(--line); }
+.audio-track.is-active { background: color-mix(in srgb, var(--primary) 8%, transparent); border-color: color-mix(in srgb, var(--primary) 25%, transparent); color: var(--primary); }
+.audio-track .material-symbols-outlined { font-size: 18px; }
+.audio-track span:nth-child(2) { flex: 1; }
+.audio-track .audio-track-playing { font-size: 16px; color: var(--primary); }
+
+.audio-volume {
+  display: flex; align-items: center; gap: 8px;
+}
+.audio-volume .material-symbols-outlined { font-size: 16px; color: var(--muted); }
+.audio-volume input[type="range"] { flex: 1; accent-color: var(--primary); }
+
+
+/* ── POMODORO ────────────────────────────────────────── */
+.focus-pomodoro {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pomodoro-display {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--on-focus, #fff);
+  letter-spacing: -0.02em;
+  min-width: 54px;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.pomodoro-display.is-running { opacity: 1; color: #7affd4; }
+
+
+/* ── VIEW TOGGLE (Fluxo / Páginas) ── */
+.editor-mode-sep {
+  flex: 1;
+}
+.editor-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px;
+}
+.editor-view-btn {
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: background var(--motion-quick), color var(--motion-quick);
+}
+.editor-view-btn.is-active {
+  background: var(--card);
+  color: var(--primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+
+/* ── FORMAT BAR ── */
+.format-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0 12px;
+  /* Separação por espaço, não por linha */
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Grupo de escrita básica — peso visual total */
+.fmt-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Grupo editorial — muted, discreto */
+.fmt-group-editorial {
+  opacity: 0.55;
+  transition: opacity var(--motion-quick);
+}
+.fmt-group-editorial:hover,
+.fmt-group-editorial:focus-within {
+  opacity: 1;
+}
+/* Dark themes: opacidade maior para manter legibilidade mínima */
+[data-theme="cerrado-dark"] .fmt-group-editorial,
+[data-theme="mata-dark"] .fmt-group-editorial,
+[data-theme="amazonia-dark"] .fmt-group-editorial {
+  opacity: 0.75;
+}
+
+/* Separador entre grupos — mais largo e acinzentado */
+.fmt-sep-editorial {
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+  margin: 0 6px;
+  flex-shrink: 0;
+  position: relative;
+}
+.fmt-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 28px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--soft-ink);
+  cursor: pointer;
+  font: inherit;
+  transition: background var(--motion-quick), color var(--motion-quick);
+}
+.fmt-btn .material-symbols-outlined { font-size: 18px; }
+.fmt-btn:hover { background: var(--surface-low); }
+.fmt-btn.is-active {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}
+.fmt-sep {
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+.fmt-select {
+  font: inherit;
+  font-size: 12px;
+  color: var(--soft-ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 3px 6px;
+  cursor: pointer;
+  height: 28px;
+}
+.fmt-select:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+
+/* ── CONTADOR DE PÁGINAS no statusbar ── */
+.statusbar-page-count {
+  opacity: 0.7;
+  font-size: inherit;
+}
+.statusbar-page-count[hidden] { display: none; }
+
+
+
+/* ── COLORAÇÃO GRAMATICAL — toggle no editor ── */
+
+/* Botão ativo */
+[data-grammar-btn][aria-pressed="true"] {
+  background: color-mix(in srgb, #8e44ad 12%, transparent);
+  border-color: #8e44ad;
+  color: #6c3483;
+}
+
+/* Writing area em modo colorido */
+.writing-area.is-grammar-colored {
+  cursor: default;
+  user-select: text;
+}
+
+/* Spans coloridos — pastéis fortes, fora da paleta do app */
+.gw {
+  cursor: default;
+  border-radius: 2px;
+  padding: 0 1.5px;
+}
+
+/* Cores com máxima separação de matiz — distinção imediata, sem vizinhos parecidos */
+.gw-verbo         { color: #c62828; }   /* vermelho vivo      — ação  */
+.gw-substantivo   { color: #1565c0; }   /* azul forte         — coisa */
+.gw-adjetivo      { color: #6a1b9a; }   /* violeta            — qualidade */
+.gw-pronome       { color: #2e7d32; }   /* verde floresta     — pessoa */
+.gw-artigo        { color: #78909c; }   /* cinza azulado      — função */
+.gw-preposicao    { color: #e65100; }   /* laranja escuro     — relação */
+.gw-conjuncao     { color: #880e4f; }   /* magenta escuro     — ligação */
+.gw-adverbio      { color: #00695c; }   /* teal escuro        — modo */
+.gw-numeral       { color: #f9a825; }   /* âmbar brilhante    — quantidade */
+.gw-interjeicao   { color: #d84315; }   /* laranja queimado   — emoção */
+.gw-proprio       { color: #1565c0; font-weight: 700; letter-spacing: 0.01em; } /* azul + bold */
+
+/* Tooltip que segue o mouse */
+.grammar-tooltip {
+  position: fixed;
+  z-index: 300;
+  background: #1a1a1a;
+  color: #fff;
+  max-width: min(420px, calc(100vw - 32px));
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+  white-space: normal;
+  opacity: 0.92;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+}
+.grammar-tooltip[hidden] { display: none; }
+
+
+/* ── INDICADOR DE PROVA HUMANA ── */
+.proof-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--soft-ink);
+  transition: background var(--motion-quick), border-color var(--motion-quick);
+  white-space: nowrap;
+}
+.proof-chip:hover { background: var(--surface-mid); }
+.proof-chip[hidden] { display: none; }
+
+.proof-chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+  transition: background var(--motion-calm);
+}
+/* Estados de cor por integridade */
+.proof-chip[data-level="high"]   .proof-chip-dot { background: #3a7d52; }
+.proof-chip[data-level="medium"] .proof-chip-dot { background: var(--ochre); }
+.proof-chip[data-level="low"]    .proof-chip-dot { background: var(--sienna); }
+.proof-chip[data-level="high"]   { border-color: rgba(58, 125, 82, 0.35); color: #2a5a3a; }
+.proof-chip[data-level="medium"] { border-color: rgba(200, 149, 90, 0.45); }
+.proof-chip[data-level="low"]    { border-color: rgba(160, 82, 45, 0.45); color: var(--sienna); }
+
+
+/* ── POPOVER DE PALAVRA ── */
+.word-popover {
+  position: fixed;
+  z-index: 200;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(26, 26, 26, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px 14px 10px;
+  min-width: 200px;
+  max-width: 280px;
+  animation: surface-in 160ms ease;
+}
+.word-popover[hidden] { display: none; }
+
+.word-popover-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.word-popover-head strong {
+  font-size: 15px;
+  font-family: 'Noto Serif', Georgia, serif;
+  color: var(--ink);
+}
+.word-popover-class {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface-low);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+.word-popover-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+}
+.word-popover-lexical {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.word-popover-lexical .material-symbols-outlined { font-size: 14px; }
+.word-popover-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+.word-popover-close:hover { background: var(--surface-mid); color: var(--ink); }
+.word-popover-close .material-symbols-outlined { font-size: 16px; }
+
+
+
+/* ── Temporizador de escrita — na barra do editor, discreto ── */
+.editor-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0.04em;
+}
+.editor-timer[data-pomodoro-active="true"] .timer-display {
+  color: var(--primary);
+}
+.timer-btn {
+  width: 24px;
+  height: 24px;
+}
+.timer-btn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* ── Temporizador na statusbar ── */
+.statusbar-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+}
+.statusbar-timer[data-pomodoro-active="true"] .statusbar-timer-display {
+  color: var(--primary);
+  font-weight: 600;
+}
+.statusbar-timer-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+.statusbar-timer-btn .material-symbols-outlined { font-size: 14px; }
+.statusbar-timer-display {
+  font-size: 11px;
+  font-family: "Inter", system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  min-width: 32px;
+}
+
+/* Aviso comemorativo ao fim de uma rodada */
+.pomodoro-done-toast {
+  position: fixed;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--primary);
+  color: #fff;
+  font-size: 13px;
+  font-family: "Noto Serif", Georgia, serif;
+  padding: 10px 22px;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+  z-index: 300;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(0,0,0,.18);
+}
+.pomodoro-done-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Pesos da toolbar: saída/revisão mais discreta que escrita ── */
+/* Botões de saída (exportar, imprimir, baixar) */
+.fmt-btn[data-action="export-rtf"],
+.fmt-btn[data-action="print-pages"],
+.fmt-btn[data-action="export-manuscript"] {
+  opacity: 0.55;
+}
+.fmt-btn[data-action="export-rtf"]:hover,
+.fmt-btn[data-action="print-pages"]:hover,
+.fmt-btn[data-action="export-manuscript"]:hover {
+  opacity: 1;
+}
+
+/* Grupo editorial (···): menos presença quando fechado */
+.fmt-group-editorial:not(.is-open) .fmt-editorial-toggle {
+  opacity: 0.65;
+}
+.fmt-group-editorial:not(.is-open) .fmt-editorial-toggle:hover {
+  opacity: 1;
+}
+
+/* Separador entre grupos: mais fino e mais claro */
+.fmt-sep {
+  opacity: 0.4;
+}

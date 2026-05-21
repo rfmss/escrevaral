@@ -1,0 +1,1525 @@
+{
+  "categories": {
+    "territorio": {
+      "label": "território"
+    },
+    "povos": {
+      "label": "povos"
+    },
+    "conhecimento": {
+      "label": "conhecimento"
+    },
+    "estetica": {
+      "label": "estética"
+    },
+    "relacoes": {
+      "label": "relações"
+    },
+    "linguagem": {
+      "label": "linguagem"
+    },
+    "deficiencia": {
+      "label": "deficiência"
+    },
+    "genero": {
+      "label": "gênero"
+    },
+    "classe": {
+      "label": "classe"
+    }
+  },
+  "entries": [
+    {
+      "avoid": "criado mudo",
+      "alternatives": [
+        "mesa de cabeceira",
+        "mesa de apoio"
+      ],
+      "category": "relacoes",
+      "reason": "Remete ao escravizado imóvel ao lado da cama dos senhores, proibido de fazer barulho.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "feito nas coxas",
+      "alternatives": [
+        "mal feito",
+        "feito às pressas",
+        "trabalho descuidado"
+      ],
+      "category": "relacoes",
+      "reason": "Hipótese colonial: telhas moldadas nas coxas de escravizados — origem disputada, mas carga racista reconhecida.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "denegrir",
+      "alternatives": [
+        "difamar",
+        "caluniar",
+        "manchar a reputação"
+      ],
+      "category": "linguagem",
+      "reason": "'Tornar negro' usado como sinônimo de difamar — associa negritude a mancha moral.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "lista negra",
+      "alternatives": [
+        "lista proibida",
+        "lista suja",
+        "lista maldita"
+      ],
+      "category": "linguagem",
+      "reason": "Usa 'negro' como marcador de ilegalidade e punição.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "mercado negro",
+      "alternatives": [
+        "mercado ilegal",
+        "mercado ilícito",
+        "mercado clandestino"
+      ],
+      "category": "linguagem",
+      "reason": "Mesmo mecanismo: negro como sinônimo de proibido.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "magia negra",
+      "alternatives": [
+        "ocultismo",
+        "prática esotérica",
+        "ritual não-cristão"
+      ],
+      "category": "conhecimento",
+      "reason": "Opõe 'branca' (boa) a 'negra' (má) — reproduz hierarquia racial em categoria espiritual.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "ovelha negra",
+      "alternatives": [
+        "o diferente",
+        "o rebelde",
+        "o dissidente"
+      ],
+      "category": "linguagem",
+      "reason": "Usa 'negro' para marcar desvio e inadequação.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "mulata",
+      "alternatives": [
+        "mulher negra",
+        "não use"
+      ],
+      "category": "povos",
+      "reason": "Deriva de 'mula' — compara a pessoa negra a um animal estéril. Objetifica e desumaniza.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mulato",
+      "alternatives": [
+        "pessoa negra",
+        "mestiço",
+        "não use"
+      ],
+      "category": "povos",
+      "reason": "Mesma raiz. Compara descendentes de africanos a híbrido animal.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mulata tipo exportação",
+      "alternatives": [
+        "não use"
+      ],
+      "category": "povos",
+      "reason": "Trata o corpo da mulher negra como mercadoria de exportação.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "da cor do pecado",
+      "alternatives": [
+        "bonita",
+        "atraente"
+      ],
+      "category": "estetica",
+      "reason": "Associa pele negra à erotização e ao pecado cristão — hipersexualiza e condena simultaneamente.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "amanhã é dia de branco",
+      "alternatives": [
+        "não use"
+      ],
+      "category": "relacoes",
+      "reason": "Associa o dia de trabalho organizado ao ideal branco.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "a coisa está preta",
+      "alternatives": [
+        "a coisa está difícil",
+        "a situação está grave"
+      ],
+      "category": "linguagem",
+      "reason": "Usa 'preto' como marcador de situação ruim ou perigosa.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "trabalho de preto",
+      "alternatives": [
+        "trabalho mal feito",
+        "serviço descuidado"
+      ],
+      "category": "relacoes",
+      "reason": "Associa execução ruim à negritude — reproduz o desprezo colonial.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "negro de alma branca",
+      "alternatives": [
+        "pessoa íntegra",
+        "excelente profissional",
+        "não use"
+      ],
+      "category": "relacoes",
+      "reason": "Pressupõe que qualidades positivas de uma pessoa negra são 'brancas'.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "não sou tuas negas",
+      "alternatives": [
+        "não aceito isso",
+        "não me trate assim"
+      ],
+      "category": "relacoes",
+      "reason": "Usa a figura da mulher negra escravizada — que não podia recusar nada — como parâmetro de subserviência.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "samba do crioulo doido",
+      "alternatives": [
+        "confusão",
+        "trapalhada",
+        "bagunça"
+      ],
+      "category": "relacoes",
+      "reason": "Associa ao homem negro a ideia de desordem e irracionalidade.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "ter um pé na cozinha",
+      "alternatives": [
+        "não use"
+      ],
+      "category": "relacoes",
+      "reason": "Forma racista de indicar ascendência afro — remete à cozinha da casa grande como único espaço das mulheres negras.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "inveja branca",
+      "alternatives": [
+        "inveja boa",
+        "admiração"
+      ],
+      "category": "linguagem",
+      "reason": "Associa 'branco' ao inofensivo e bom — reforça hierarquia racial pela via da cor.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "moreno",
+      "alternatives": [
+        "negro",
+        "pardo",
+        "preto",
+        "afro-brasileiro"
+      ],
+      "category": "povos",
+      "reason": "Eufemismo que evita nomear a negritude — apaga identidade racial e dificulta o reconhecimento do racismo.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "crioulo",
+      "alternatives": [
+        "pessoa negra",
+        "afrodescendente"
+      ],
+      "category": "povos",
+      "reason": "Termo histórico para filhos de escravizados nascidos no Brasil — forte conotação pejorativa.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "inhaca",
+      "alternatives": [
+        "mau cheiro",
+        "odor ruim"
+      ],
+      "category": "linguagem",
+      "reason": "Inhaca é ilha em Moçambique. No Brasil colonial, o nome foi associado a odor ruim — ligando o africano ao repulsivo.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo ruim",
+      "alternatives": [
+        "cabelo afro",
+        "cabelo crespo",
+        "cabelo cacheado"
+      ],
+      "category": "estetica",
+      "reason": "Deprecia o cabelo afro como defeito físico.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "carapinha",
+      "alternatives": [
+        "cabelo afro",
+        "cabelo crespo"
+      ],
+      "category": "estetica",
+      "reason": "Depreciativo para cabelo afro — mesmo problema de 'cabelo ruim'.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "produto tabajara",
+      "alternatives": [
+        "produto de má qualidade",
+        "produto falsificado"
+      ],
+      "category": "linguagem",
+      "reason": "Usa nome de povo indígena para designar o falso e o inferior.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "solução tupiniquim",
+      "alternatives": [
+        "solução local",
+        "solução nacional",
+        "alternativa brasileira"
+      ],
+      "category": "linguagem",
+      "reason": "Usa etnia indígena para designar solução improvisada ou inferior.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "de traços finos",
+      "alternatives": [
+        "bonita(o)",
+        "bela(o)",
+        "não use como elogio racial"
+      ],
+      "category": "estetica",
+      "reason": "Aplica padrão estético europeu como elogio — o 'traço fino' como distância da negritude.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "democracia racial",
+      "alternatives": [
+        "mito da democracia racial",
+        "sociedade plurirracial"
+      ],
+      "category": "relacoes",
+      "reason": "Mito que nega o racismo estrutural brasileiro.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "doméstica",
+      "alternatives": [
+        "auxiliar de serviços gerais",
+        "profissional doméstica",
+        "trabalhadora doméstica"
+      ],
+      "category": "relacoes",
+      "reason": "'Domésticas' eram mulheres negras escravizadas consideradas 'domesticadas' como animais.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "moreno claro",
+      "alternatives": [
+        "pardo",
+        "pessoa negra de pele clara"
+      ],
+      "category": "povos",
+      "reason": "Eufemismo duplo que apaga tanto a negritude quanto o marcador racial.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "descobrimento",
+      "alternatives": [
+        "invasão",
+        "chegada europeia",
+        "colonização"
+      ],
+      "category": "territorio",
+      "reason": "Apaga séculos de civilização indígena prévia.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "descoberta",
+      "alternatives": [
+        "chegada",
+        "contato",
+        "invasão"
+      ],
+      "category": "territorio",
+      "reason": "Variante de 'descobrimento' — pressupõe que o que os europeus não conheciam não existia.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "novo mundo",
+      "alternatives": [
+        "Américas",
+        "continente americano",
+        "Abya Yala"
+      ],
+      "category": "territorio",
+      "reason": "'Novo' para quem? O continente já tinha nome e milhões de habitantes.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "terceiro mundo",
+      "alternatives": [
+        "sul global",
+        "países periféricos",
+        "países em desenvolvimento"
+      ],
+      "category": "territorio",
+      "reason": "Hierarquiza nações com o ocidente como norma da Guerra Fria.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "subdesenvolvido",
+      "alternatives": [
+        "periférico",
+        "em desenvolvimento",
+        "historicamente explorado"
+      ],
+      "category": "territorio",
+      "reason": "Implica escala única de progresso definida pelo norte global.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "colônia",
+      "alternatives": [
+        "território colonizado",
+        "povo colonizado"
+      ],
+      "category": "territorio",
+      "reason": "Neutraliza a violência da dominação quando usado sem crítica.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "quilombo remanescente",
+      "alternatives": [
+        "comunidade quilombola",
+        "quilombo",
+        "território quilombola"
+      ],
+      "category": "territorio",
+      "reason": "'Remanescente' sugere sobra — as comunidades são vivas, não resquícios.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "índio",
+      "alternatives": [
+        "indígena",
+        "povo originário",
+        "[nome do povo]"
+      ],
+      "category": "povos",
+      "reason": "Erro geográfico de Colombo — apaga a diversidade de centenas de povos.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mestiçagem",
+      "alternatives": [
+        "hibridismo cultural",
+        "encontro de povos"
+      ],
+      "category": "povos",
+      "reason": "Carrega o projeto racista de embranquecimento da população.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "miscigenação",
+      "alternatives": [
+        "encontro de povos",
+        "diversidade étnica"
+      ],
+      "category": "povos",
+      "reason": "Ligado ao projeto eugenista de branqueamento.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "horda",
+      "alternatives": [
+        "grupo",
+        "coletivo",
+        "povo",
+        "comunidade"
+      ],
+      "category": "povos",
+      "reason": "Desumaniza povos nômades — ancora historicamente a lógica da perseguição.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "tribo",
+      "alternatives": [
+        "povo",
+        "nação",
+        "comunidade",
+        "grupo étnico"
+      ],
+      "category": "povos",
+      "reason": "Diminutivo eurocêntrico que nega complexidade política e social.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "selvagem",
+      "alternatives": [
+        "originário",
+        "não-domesticado"
+      ],
+      "category": "povos",
+      "reason": "Opõe civilizado a selvagem para justificar violência colonial.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "selvageria",
+      "alternatives": [
+        "resistência",
+        "combate",
+        "autodefesa"
+      ],
+      "category": "povos",
+      "reason": "Desumaniza atos de autodefesa de povos colonizados.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "escravo",
+      "alternatives": [
+        "pessoa escravizada",
+        "trabalhador escravizado"
+      ],
+      "category": "povos",
+      "reason": "'Escravo' define a pessoa pela condição imposta — 'pessoa escravizada' restitui a humanidade.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "escrava",
+      "alternatives": [
+        "pessoa escravizada",
+        "mulher escravizada"
+      ],
+      "category": "povos",
+      "reason": "Mesmo princípio — o termo coisifica quem sofreu a violência.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "raça",
+      "alternatives": [
+        "etnia",
+        "grupo étnico-racial"
+      ],
+      "category": "povos",
+      "reason": "Construção social sem base biológica — uso acrítico naturaliza o racismo.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "minoria",
+      "alternatives": [
+        "grupo historicamente marginalizado",
+        "população sub-representada"
+      ],
+      "category": "povos",
+      "reason": "Oculta que são maiorias numéricas tratadas como minorias políticas.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "sertanejo",
+      "alternatives": [
+        "habitante do sertão",
+        "povo do semiárido"
+      ],
+      "category": "povos",
+      "reason": "Romantiza sem nomear as condições históricas de marginalização.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "caboclo",
+      "alternatives": [
+        "ribeirinho",
+        "habitante da floresta",
+        "mestiço"
+      ],
+      "category": "povos",
+      "reason": "Em muitos contextos carrega conotação depreciativa — verifique a aceitação local.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "desbravador",
+      "alternatives": [
+        "colonizador",
+        "explorador",
+        "invasor"
+      ],
+      "category": "relacoes",
+      "reason": "Heroiciza a violência da expansão territorial.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "bandeirante",
+      "alternatives": [
+        "caçador de escravizados",
+        "agente colonial",
+        "colonizador"
+      ],
+      "category": "relacoes",
+      "reason": "Heroiciza quem praticou genocídio e escravização de indígenas.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "pacificação",
+      "alternatives": [
+        "repressão",
+        "subjugação",
+        "rendição forçada"
+      ],
+      "category": "relacoes",
+      "reason": "Eufemismo militar para violência — apresenta o agressor como neutro.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "integração",
+      "alternatives": [
+        "assimilação forçada",
+        "inserção",
+        "inclusão"
+      ],
+      "category": "relacoes",
+      "reason": "No contexto indígena, significou destruição de culturas.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "proteção indígena",
+      "alternatives": [
+        "autonomia indígena",
+        "direitos indígenas",
+        "autodeterminação"
+      ],
+      "category": "relacoes",
+      "reason": "'Proteção' posiciona os povos como tutelados, não como sujeitos de direitos.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "desordem",
+      "alternatives": [
+        "conflito",
+        "tensão",
+        "resistência"
+      ],
+      "category": "relacoes",
+      "reason": "Rotula como caos o que é resposta organizada à opressão.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "progresso",
+      "alternatives": [
+        "desenvolvimento",
+        "transformação",
+        "mudança"
+      ],
+      "category": "relacoes",
+      "reason": "Teleologia ocidental única — há muitos modelos de boa vida.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "contribuição",
+      "alternatives": [
+        "participação forçada",
+        "trabalho escravizado",
+        "produção"
+      ],
+      "category": "relacoes",
+      "reason": "Apaga a violência — sugere participação voluntária onde havia exploração.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "primitivo",
+      "alternatives": [
+        "originário",
+        "ancestral",
+        "pré-colonial"
+      ],
+      "category": "conhecimento",
+      "reason": "Escala evolutiva eurocêntrica que hierarquiza culturas.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "folclore",
+      "alternatives": [
+        "cultura popular",
+        "tradição oral",
+        "saber ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "Rebaixa práticas não-europeias a curiosidades sem valor epistemológico.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "lenda",
+      "alternatives": [
+        "narrativa",
+        "cosmologia",
+        "mitologia",
+        "tradição oral"
+      ],
+      "category": "conhecimento",
+      "reason": "Desqualifica relatos de povos não-ocidentais como ficção.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "pré-história",
+      "alternatives": [
+        "história oral",
+        "período pré-escrita",
+        "período pré-colonial"
+      ],
+      "category": "conhecimento",
+      "reason": "Define como sem história o que simplesmente não usava escrita ocidental.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "aculturação",
+      "alternatives": [
+        "imposição cultural",
+        "apagamento cultural",
+        "dominação simbólica"
+      ],
+      "category": "conhecimento",
+      "reason": "Apresenta como troca o que foi imposição violenta.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "sincretismo",
+      "alternatives": [
+        "diálogo religioso",
+        "resistência religiosa",
+        "tradição de matriz africana"
+      ],
+      "category": "conhecimento",
+      "reason": "Apaga a resistência estratégica das religiões afro-brasileiras.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "magia",
+      "alternatives": [
+        "espiritualidade",
+        "cosmologia",
+        "ritual",
+        "prática religiosa"
+      ],
+      "category": "conhecimento",
+      "reason": "Desqualifica práticas espirituais não-ocidentais como superstição.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "superstição",
+      "alternatives": [
+        "crença",
+        "prática religiosa",
+        "cosmologia popular"
+      ],
+      "category": "conhecimento",
+      "reason": "Hierarquiza o que é 'religião' e o que é 'superstição' a partir da norma cristã.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "pagão",
+      "alternatives": [
+        "praticante de religião originária",
+        "adepto de tradição afro"
+      ],
+      "category": "conhecimento",
+      "reason": "Categoria colonial para legitimar a destruição de práticas religiosas não-cristãs.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "fetiche",
+      "alternatives": [
+        "objeto ritual",
+        "artefato sagrado",
+        "objeto de culto"
+      ],
+      "category": "estetica",
+      "reason": "Ridiculariza objetos sagrados não-cristãos como superstição primitiva.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "canibalismo",
+      "alternatives": [
+        "ritual funerário",
+        "endocanibalismo ritual"
+      ],
+      "category": "conhecimento",
+      "reason": "Acusação usada para desumanizar e justificar escravidão e genocídio.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "civilização ocidental",
+      "alternatives": [
+        "tradição europeia",
+        "cultura europeia",
+        "hegemonia ocidental"
+      ],
+      "category": "conhecimento",
+      "reason": "Eleva uma tradição regional a civilização por excelência.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "exótico",
+      "alternatives": [
+        "singular",
+        "específico",
+        "próprio de"
+      ],
+      "category": "estetica",
+      "reason": "Marca o outro como objeto de curiosidade para um olhar europeu presumidamente neutro.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "arte primitiva",
+      "alternatives": [
+        "arte indígena",
+        "arte africana",
+        "arte [povo específico]"
+      ],
+      "category": "estetica",
+      "reason": "Categoriza produções artísticas de povos não-europeus como etapa inferior.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "dança típica",
+      "alternatives": [
+        "dança tradicional",
+        "dança do povo [x]",
+        "expressão artística"
+      ],
+      "category": "estetica",
+      "reason": "'Típico' exotiza e fixa a cultura como objeto imutável.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "alimentação típica",
+      "alternatives": [
+        "gastronomia tradicional",
+        "culinária do povo [x]"
+      ],
+      "category": "estetica",
+      "reason": "Exotiza e cristaliza práticas vivas.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "resgate cultural",
+      "alternatives": [
+        "valorização cultural",
+        "fortalecimento cultural",
+        "continuidade cultural"
+      ],
+      "category": "estetica",
+      "reason": "Implica que a cultura estava morta — ela resistiu, não desapareceu.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "folclore negro",
+      "alternatives": [
+        "cultura afro-brasileira",
+        "expressão cultural negra"
+      ],
+      "category": "estetica",
+      "reason": "Rebaixa produções culturais negras a curiosidade folclórica.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "língua morta",
+      "alternatives": [
+        "língua em revitalização",
+        "língua sem falantes registrados"
+      ],
+      "category": "linguagem",
+      "reason": "Apaga os esforços de revitalização e os falantes remanescentes.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "dialeto",
+      "alternatives": [
+        "língua",
+        "idioma"
+      ],
+      "category": "linguagem",
+      "reason": "Na prática, rebaixa línguas de povos colonizados frente às 'oficiais'.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "portador de deficiência",
+      "alternatives": [
+        "pessoa com deficiência",
+        "PCD"
+      ],
+      "category": "deficiencia",
+      "reason": "'Portador' implica algo que se carrega e se pode largar — a deficiência não é temporária. ONU e LBI recomendam 'pessoa com deficiência'.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "necessidades especiais",
+      "alternatives": [
+        "pessoa com deficiência"
+      ],
+      "category": "deficiencia",
+      "reason": "Eufemismo que dilui a especificidade — a ONU recomenda nomear a deficiência concretamente.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "portador de necessidades especiais",
+      "alternatives": [
+        "pessoa com deficiência"
+      ],
+      "category": "deficiencia",
+      "reason": "Duplo eufemismo — apaga a realidade e a pessoa ao mesmo tempo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "deficiente",
+      "alternatives": [
+        "pessoa com deficiência",
+        "PCD"
+      ],
+      "category": "deficiencia",
+      "reason": "Define a pessoa pela deficiência, não a deficiência como uma condição da pessoa.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "inválido",
+      "alternatives": [
+        "pessoa com deficiência",
+        "pessoa com deficiência física"
+      ],
+      "category": "deficiencia",
+      "reason": "'Inválido' literalmente nega o valor e a validade da pessoa.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "aleijado",
+      "alternatives": [
+        "pessoa com deficiência física"
+      ],
+      "category": "deficiencia",
+      "reason": "Reforça a ideia de que ter deficiência é um defeito ou uma coisa ruim.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "perneta",
+      "alternatives": [
+        "pessoa com deficiência física",
+        "pessoa amputada"
+      ],
+      "category": "deficiencia",
+      "reason": "Reduz a pessoa ao membro faltante — mesmo princípio de 'aleijado'.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "manco",
+      "alternatives": [
+        "pessoa com deficiência física",
+        "pessoa com mobilidade reduzida"
+      ],
+      "category": "deficiencia",
+      "reason": "Descreve uma característica física de forma pejorativa.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "surdo-mudo",
+      "alternatives": [
+        "pessoa surda",
+        "pessoa com deficiência auditiva"
+      ],
+      "category": "deficiencia",
+      "reason": "Surdez não afeta o aparelho fonador — o termo cria uma deficiência que não existe.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "mudinho",
+      "alternatives": [
+        "pessoa surda",
+        "criança surda"
+      ],
+      "category": "deficiencia",
+      "reason": "Diminutivo infantilizante e impreciso — veja 'surdo-mudo'.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "retardado",
+      "alternatives": [
+        "pessoa com deficiência intelectual"
+      ],
+      "category": "deficiencia",
+      "reason": "Termo clínico obsoleto transformado em insulto — a OMS adotou 'deficiência intelectual' desde 1968.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mongolóide",
+      "alternatives": [
+        "pessoa com síndrome de Down",
+        "pessoa com trissomia 21"
+      ],
+      "category": "deficiencia",
+      "reason": "Associa a condição ao povo mongol de forma equivocada e depreciativa.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mongol",
+      "alternatives": [
+        "pessoa com síndrome de Down"
+      ],
+      "category": "deficiencia",
+      "reason": "Mesmo problema de 'mongolóide' — além de errado, é insulto a um povo.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "débil mental",
+      "alternatives": [
+        "pessoa com deficiência intelectual"
+      ],
+      "category": "deficiencia",
+      "reason": "Terminologia clínica obsoleta e hoje usada como insulto.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "especial",
+      "alternatives": [
+        "pessoa com deficiência"
+      ],
+      "category": "deficiencia",
+      "reason": "Eufemismo que implica a existência de um padrão de normalidade do qual a PCD se desvia.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "criança excepcional",
+      "alternatives": [
+        "criança com deficiência",
+        "criança com deficiência intelectual"
+      ],
+      "category": "deficiencia",
+      "reason": "Eufemismo que obscurece a deficiência em vez de nomear e incluir.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "louco",
+      "alternatives": [
+        "pessoa com transtorno mental",
+        "pessoa em sofrimento psíquico"
+      ],
+      "category": "deficiencia",
+      "reason": "Usado como adjetivo geral deprecia pessoas com transtornos mentais.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "insano",
+      "alternatives": [
+        "descontrolado",
+        "irracional",
+        "fora de si"
+      ],
+      "category": "deficiencia",
+      "reason": "Quando usado fora de contexto clínico, perpetua estigma sobre saúde mental.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "fingir demência",
+      "alternatives": [
+        "fingir desentendimento",
+        "fazer de conta que não entendeu"
+      ],
+      "category": "deficiencia",
+      "reason": "Usa diagnóstico médico sério como metáfora pejorativa.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "pessoa normal",
+      "alternatives": [
+        "pessoa sem deficiência"
+      ],
+      "category": "deficiencia",
+      "reason": "Define como 'normal' quem não tem deficiência — implica que PCD é anormal.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "superar a deficiência",
+      "alternatives": [
+        "viver com deficiência",
+        "adaptar-se",
+        "conviver com"
+      ],
+      "category": "deficiencia",
+      "reason": "Pressupõe que a deficiência é algo a ser vencido, não uma forma de ser no mundo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "confinado à cadeira de rodas",
+      "alternatives": [
+        "usuário de cadeira de rodas",
+        "cadeirante"
+      ],
+      "category": "deficiencia",
+      "reason": "'Confinado' apresenta a cadeira como prisão — ela é instrumento de mobilidade e autonomia.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "preso à cadeira de rodas",
+      "alternatives": [
+        "usuário de cadeira de rodas",
+        "cadeirante"
+      ],
+      "category": "deficiencia",
+      "reason": "Mesmo problema de 'confinado' — trata recurso de mobilidade como limitação.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "lepra",
+      "alternatives": [
+        "hanseníase",
+        "pessoa com hanseníase"
+      ],
+      "category": "deficiencia",
+      "reason": "A Lei 9.010/1995 proíbe o uso de 'lepra' em documentos oficiais no Brasil.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "autista",
+      "alternatives": [
+        "pessoa autista",
+        "pessoa no espectro"
+      ],
+      "category": "deficiencia",
+      "reason": "Quando usado metaforicamente ('você é tão autista') estigmatiza uma condição neurológica.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "histérica",
+      "alternatives": [
+        "exaltada",
+        "agitada",
+        "transtornada"
+      ],
+      "category": "genero",
+      "reason": "'Histeria' deriva de 'útero' (hystera) — diagnóstico colonial que patologizava a emoção feminina. Aplicado quase exclusivamente a mulheres.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "homossexualismo",
+      "alternatives": [
+        "homossexualidade"
+      ],
+      "category": "genero",
+      "reason": "O sufixo '-ismo' categoriza orientação sexual como doença ou distúrbio — a OMS retirou da CID em 1990.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "opção sexual",
+      "alternatives": [
+        "orientação sexual"
+      ],
+      "category": "genero",
+      "reason": "Orientação não é escolha — o termo 'opção' sugere que é uma decisão voluntária e, portanto, passível de 'correção'.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "traveco",
+      "alternatives": [
+        "pessoa travesti",
+        "mulher trans"
+      ],
+      "category": "genero",
+      "reason": "Forma depreciativa de se referir a pessoas travestis — nega identidade e desumaniza.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "transexualismo",
+      "alternatives": [
+        "transexualidade",
+        "ser trans"
+      ],
+      "category": "genero",
+      "reason": "Mesmo problema de 'homossexualismo' — o sufixo patologiza a identidade.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "sexo frágil",
+      "alternatives": [
+        "mulheres",
+        "pessoas do sexo feminino"
+      ],
+      "category": "genero",
+      "reason": "Atribui fragilidade estrutural às mulheres — reforça o paternalismo que sustenta a opressão de gênero.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "coisa de mulher",
+      "alternatives": [
+        "não use — descarte a generalização"
+      ],
+      "category": "genero",
+      "reason": "Restringe práticas, habilidades e comportamentos ao gênero feminino de forma essencializante.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "trabalho de homem",
+      "alternatives": [
+        "trabalho pesado",
+        "trabalho braçal",
+        "trabalho de força"
+      ],
+      "category": "genero",
+      "reason": "Associa masculinidade a trabalho físico e exclui mulheres — reforça divisão sexista do trabalho.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "rainha do lar",
+      "alternatives": [
+        "pessoa responsável pelo lar",
+        "dona de casa"
+      ],
+      "category": "genero",
+      "reason": "Eufemismo que glorifica o trabalho doméstico não remunerado das mulheres sem problematizá-lo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "empoderamento feminino",
+      "alternatives": [
+        "autonomia das mulheres",
+        "direitos das mulheres",
+        "equidade de gênero"
+      ],
+      "category": "genero",
+      "reason": "Quando usado de forma esvaziada pelo marketing, despolitiza uma reivindicação histórica.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "dama",
+      "alternatives": [
+        "mulher",
+        "pessoa",
+        "profissional"
+      ],
+      "category": "genero",
+      "reason": "Em contextos profissionais, o uso de 'dama' enquanto 'senhor' seria usado para homens marca diferença de status.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "feminismo radical",
+      "alternatives": [
+        "movimento feminista",
+        "feminismo"
+      ],
+      "category": "genero",
+      "reason": "'Radical' usado como adjetivo desqualificador — a maioria das pautas feministas são direitos básicos.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "ideologia de gênero",
+      "alternatives": [
+        "estudos de gênero",
+        "perspectiva de gênero"
+      ],
+      "category": "genero",
+      "reason": "Expressão criada para deslegitimar pesquisas e políticas de equidade de gênero.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "kit gay",
+      "alternatives": [
+        "material didático sobre diversidade",
+        "material de educação sexual"
+      ],
+      "category": "genero",
+      "reason": "Expressão inventada para atacar materiais didáticos de educação sexual — nunca existiu como descrito.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "favelado",
+      "alternatives": [
+        "morador de comunidade",
+        "residente da periferia",
+        "habitante de favela"
+      ],
+      "category": "classe",
+      "reason": "Usado de forma pejorativa para estigmatizar pessoas pela origem territorial.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "marginal",
+      "alternatives": [
+        "pessoa em situação de vulnerabilidade",
+        "pessoa em conflito com a lei"
+      ],
+      "category": "classe",
+      "reason": "Associa a 'margem' social à criminalidade — rotula pela condição, não pelo ato.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "vagabundo",
+      "alternatives": [
+        "pessoa desempregada",
+        "pessoa sem trabalho formal"
+      ],
+      "category": "classe",
+      "reason": "Insulto que criminaliza a pobreza e a informalidade.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "malandro",
+      "alternatives": [
+        "pessoa criativa",
+        "trabalhador informal",
+        "empreendedor de sobrevivência"
+      ],
+      "category": "classe",
+      "reason": "Estereótipo que associa a malandragem à classe trabalhadora negra e periférica.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "sem educação",
+      "alternatives": [
+        "sem acesso à educação formal",
+        "com pouco letramento formal"
+      ],
+      "category": "classe",
+      "reason": "Confunde ausência de acesso com ausência de valor — o acesso à educação é desigual, não a capacidade.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "ignorante",
+      "alternatives": [
+        "desinformado",
+        "sem acesso à informação",
+        "sem letramento formal"
+      ],
+      "category": "classe",
+      "reason": "Trata desigualdade de acesso como déficit pessoal — ignora as condições estruturais.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "gentalha",
+      "alternatives": [
+        "não use"
+      ],
+      "category": "classe",
+      "reason": "Desumaniza coletivamente pessoas de baixa renda.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "ralé",
+      "alternatives": [
+        "classe trabalhadora",
+        "população de baixa renda",
+        "periferia"
+      ],
+      "category": "classe",
+      "reason": "Termo classista que desqualifica a classe trabalhadora como massa sem valor.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "suburbano",
+      "alternatives": [
+        "morador de subúrbio",
+        "periférico",
+        "habitante do entorno"
+      ],
+      "category": "classe",
+      "reason": "Quando usado de forma pejorativa, estigmatiza pela localização geográfica.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "povão",
+      "alternatives": [
+        "população",
+        "povo",
+        "cidadãos"
+      ],
+      "category": "classe",
+      "reason": "Diminutivo que marca distância entre quem fala e 'o povo' — carrega condescendência de classe.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "popularesco",
+      "alternatives": [
+        "popular",
+        "de amplo alcance",
+        "acessível"
+      ],
+      "category": "classe",
+      "reason": "Desqualifica produções culturais por serem consumidas pelas classes populares.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "cultura de massa",
+      "alternatives": [
+        "cultura popular",
+        "produção cultural ampla"
+      ],
+      "category": "classe",
+      "reason": "Quando usado pejorativamente, hierarquiza a 'alta cultura' como superior à produção popular.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "povo sem cultura",
+      "alternatives": [
+        "povo com outra cultura",
+        "povo com acesso desigual à cultura formal"
+      ],
+      "category": "classe",
+      "reason": "Confunde 'cultura' com 'cultura letrada eurocêntrica' — todo povo tem cultura.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "assistencialismo",
+      "alternatives": [
+        "política social",
+        "política redistributiva",
+        "proteção social"
+      ],
+      "category": "classe",
+      "reason": "Quando usado de forma depreciativa, ataca políticas de redistribuição sem questionar as causas da desigualdade.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
+      "contextual": false
+    }
+  ]
+}

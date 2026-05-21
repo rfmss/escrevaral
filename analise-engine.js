@@ -1,0 +1,530 @@
+/**
+ * analise-engine.js — Vereda v3
+ * Engine offline de análise textual baseado nos 39 critérios do framework editorial.
+ * Implementa as métricas computáveis sem LLM: regex, listas locais, estatísticas de frase.
+ * Todas as operações são locais — nada é enviado para servidores.
+ *
+ * Métricas implementadas (21/39):
+ *   Economia:   adverbios-mente, voz-passiva, redundancia, negacao-dupla
+ *   Clareza:    comprimento-frase, pronome-ambiguo, tempo-verbal, subordinacao
+ *   Ritmo:      variacao-frase, distribuicao-frase, repeticao-proxima, abertura-fecho
+ *   Voz:        cliche
+ *   Estrutura:  proporcao-partes, transicoes
+ *   POV:        consistencia-pessoa
+ *   Léxico:     verbos-estado, substantivos-vagos
+ *   Norma:      pontuação funcional (via punctuation-engine.js, se carregado)
+ */
+(function analiseEngine(global) {
+  "use strict";
+
+  // ── LISTAS LOCAIS ─────────────────────────────────────────────────────────
+
+  const VERBOS_ESTADO = new Set([
+    "ser","é","são","era","eram","foi","foram","seja","sejam","fosse","fossem",
+    "será","serão","seria","seriam","sendo","sido",
+    "estar","está","estão","estava","estavam","esteve","estiveram","esteja","estejam",
+    "estivesse","estivessem","estará","estarão","estaria","estariam","estando","estado",
+    "ter","tem","têm","tinha","tinham","teve","tiveram","tenha","tenham",
+    "tivesse","tivessem","terá","terão","teria","teriam","tendo","tido",
+    "haver","há","havia","houve","houveram","haja","hajam","houvesse","houvessem",
+    "haverá","haverão","haveria","haveriam","havendo","havido",
+    "ficar","fica","ficam","ficava","ficavam","ficou","ficaram","fique","fiquem",
+    "ficasse","ficassem","ficará","ficarão","ficaria","ficariam","ficando","ficado",
+    "parecer","parece","parecem","parecia","pareciam","pareceu","pareceram",
+    "continuar","continua","continuam","continuava","continuou","continuaram",
+    "permanecer","permanece","permaneceu","permaneceram",
+    "tornar","torna","tornou","tornaram","tornasse",
+    "manter","mantém","manteve","mantiveram","mantenha",
+    "revelar","revela","revelou","revelaram",
+    "mostrar","mostra","mostrou","mostraram",
+    "resultar","resulta","resultou","resultaram",
+    "representar","representa","representou","representaram",
+    "constituir","constitui","constituiu","constituíram",
+    "existir","existe","existem","existia","existiu","existiram",
+  ]);
+
+  const SUBSTANTIVOS_VAGOS = new Set([
+    "coisa","coisas","algo","nada",
+    "aspecto","aspectos",
+    "questão","questões",
+    "fator","fatores",
+    "situação","situações",
+    "problema","problemas",
+    "elemento","elementos",
+    "ponto","pontos",
+    "área","áreas",
+    "contexto","contextos",
+    "processo","processos",
+    "realidade","realidades",
+    "caso","casos",
+    "tipo","tipos",
+    "forma","formas","maneira","maneiras","modo","modos",
+    "parte","partes",
+    "conjunto","conjuntos",
+    "nível","níveis",
+    "âmbito","âmbitos",
+    "setor","setores",
+    "esfera","esferas",
+    "campo","campos",
+    "tema","temas",
+    "assunto","assuntos",
+    "questão","questões",
+    "motivo","motivos",
+    "razão","razões",
+    "causa","causas",
+    "efeito","efeitos",
+    "impacto","impactos",
+    "resultado","resultados",
+    "consequência","consequências",
+  ]);
+
+  const CLIQUES_PT = [
+    "no final das contas","em última análise","ao longo do tempo","nos dias de hoje",
+    "em um mundo cada vez mais","a grosso modo","de certa forma","em linhas gerais",
+    "no que diz respeito","tendo em vista","por outro lado","dito isso","à luz de",
+    "no tocante a","sob essa perspectiva","o fato de que","dado que","haja vista",
+    "conclui-se que","é de suma importância","vale ressaltar","vale destacar",
+    "cabe destacar","cabe ressaltar","nesse contexto","sem sombra de dúvida",
+    "é importante ressaltar","é importante destacar","é importante salientar",
+    "é sabido que","é notório que","é consenso que","é fato que",
+    "diante do exposto","diante disso","sendo assim","dessa forma","desse modo",
+    "portanto fica evidente","fica evidente que","cada vez mais","ao mesmo tempo",
+    "de maneira geral","como já dito","conforme mencionado","como mencionado",
+    "conforme dito","nada mais nada menos","isso posto","em suma","em síntese",
+    "em conclusão","por fim","por último","finalmente","desta forma","neste sentido",
+    "nesse sentido","por conseguinte","consequentemente","assim sendo",
+  ];
+
+  const PLEONASMOS = [
+    ["completamente terminado","terminado"],["subir para cima","subir"],
+    ["descer para baixo","descer"],["entrar para dentro","entrar"],
+    ["sair para fora","sair"],["voltar de volta","voltar"],
+    ["juntamente com","junto com"],["há anos atrás","há anos"],
+    ["resultado final","resultado"],["planejamento futuro","planejamento"],
+    ["nova inovação","inovação"],["elo de ligação","elo"],
+    ["colaborar juntos","colaborar"],["repetir de novo","repetir"],
+    ["certeza absoluta","certeza"],["monopólio exclusivo","monopólio"],
+    ["experiência vivida","experiência"],["acabamento final","acabamento"],
+    ["surpresa inesperada","surpresa"],["encarar de frente","encarar"],
+    ["interagir entre si","interagir"],["ganho extra","ganho adicional"],
+    ["detalhes minuciosos","detalhes"],["relato verbal","relato"],
+    ["outra alternativa","alternativa"],["hemorragia de sangue","hemorragia"],
+  ];
+
+  const NEGACOES_DUPLAS = [
+    /não\s+é\s+(in|im|ir|des|dis|a)\w+/gi,
+    /não\s+são\s+(in|im|ir|des|dis|a)\w+/gi,
+    /não\s+era\s+(in|im|ir|des|dis|a)\w+/gi,
+    /não\s+foi\s+(in|im|ir|des|dis|a)\w+/gi,
+    /nunca\s+é\s+(in|im|ir|des|dis|a)\w+/gi,
+  ];
+
+  const CONECTIVOS_LOGICOS = [
+    "portanto","logo","assim","consequentemente","por conseguinte","dessa forma",
+    "desse modo","sendo assim","então","por isso","por essa razão","por tanto",
+    "todavia","contudo","porém","entretanto","no entanto","apesar disso",
+    "ainda assim","mesmo assim","de toda forma","de todo modo",
+    "além disso","ademais","também","igualmente","da mesma forma","outrossim",
+    "por outro lado","em contrapartida","ao contrário","diferentemente",
+    "primeiro","segundo","terceiro","por fim","finalmente","por último",
+    "inicialmente","em seguida","depois","posteriormente","anteriormente",
+    "por exemplo","como por exemplo","como","tal como","assim como",
+    "de fato","com efeito","realmente","na verdade","efetivamente",
+    "em resumo","em síntese","em suma","concluindo","para concluir",
+    "ou seja","isto é","quer dizer","em outras palavras",
+  ];
+
+  const PALAVRAS_FRACAS_ABERTURA = new Set([
+    "o","a","os","as","um","uma","uns","umas",
+    "que","de","do","da","dos","das","no","na","nos","nas",
+    "e","mas","ou","porém","todavia","contudo","entretanto",
+    "também","ainda","já","só","apenas","muito","bem","mal",
+    "há","houve","teve","foi","era","estava","tinha",
+  ]);
+
+  // ── TOKENIZADORES ─────────────────────────────────────────────────────────
+
+  function tokenizarFrases(texto) {
+    // Divide em sentenças por . ! ? com proteção de abreviações comuns
+    return texto
+      .replace(/\b(Sr|Sra|Dr|Dra|Prof|Profa|etc|vs|al|op|cit|vol|cap|fig|pág)\./gi, "$1⊙")
+      .split(/(?<=[.!?…])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÜÇ])/u)
+      .map(s => s.replace(/⊙/g, ".").trim())
+      .filter(s => s.length > 3);
+  }
+
+  function tokenizarPalavras(frase) {
+    return (frase.match(/[\p{L}''-]+/gu) || []);
+  }
+
+  function normalizar(palavra) {
+    return palavra
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/['']/g, "");
+  }
+
+  function contarPalavras(texto) {
+    return (texto.match(/[\p{L}''-]+/gu) || []).length;
+  }
+
+  function contarSilabas(palavra) {
+    const v = normalizar(palavra).match(/[aeiouáéíóúâêôãõü]/gi);
+    return v ? v.length : 1;
+  }
+
+  // ── STOPWORDS (para análise de repetição) ─────────────────────────────────
+
+  const STOPWORDS = new Set([
+    "a","ao","aos","aquela","aquelas","aquele","aqueles","aquilo","as","ate","atem",
+    "com","como","da","das","de","dela","delas","dele","deles","depois","do","dos",
+    "e","ela","elas","ele","eles","em","entre","era","eram","essa","essas","esse",
+    "esses","esta","estas","este","estes","eu","foi","foram","ha","isso","isto",
+    "ja","lhe","lhes","lo","la","mas","me","mesmo","meu","minha","minhas","meus",
+    "muito","na","nas","nao","nas","nem","no","nos","nossa","nossas","nosso","nossos",
+    "num","numa","o","os","ou","para","pela","pelas","pelo","pelos","por","porque",
+    "quando","que","se","sem","seu","sua","suas","seus","so","sobre","também","te",
+    "tinha","tinham","toda","todas","todo","todos","tu","tua","tuas","teu","teus",
+    "um","uma","uns","umas","voce","vocês","vos","ser","ter","haver","estar","fazer",
+  ]);
+
+  // ── MÉTRICAS: ECONOMIA ────────────────────────────────────────────────────
+
+  function analisarEconomia(texto, frases, totalPalavras) {
+    const palavras = tokenizarPalavras(texto);
+    const lower = texto.toLowerCase();
+
+    // 1. Adverbios -mente
+    const adverbios = palavras.filter(p => normalizar(p).endsWith("mente"));
+    const densidadeAdv = totalPalavras > 0 ? adverbios.length / totalPalavras : 0;
+
+    // 2. Voz passiva aproximada
+    const passiva = [...texto.matchAll(/\b(foi|foram|é|são|era|eram|será|serão|seria|seriam|fosse|fossem|tenha sido|tenham sido|tem sido|têm sido|está sendo|estava sendo|estão sendo)\s+\w+(?:ado|ada|ados|adas|ido|ida|idos|idas)\b/gi)];
+    const propPassiva = frases.length > 0 ? passiva.length / frases.length : 0;
+
+    // 3. Redundância / pleonasmos
+    const redEncontradas = PLEONASMOS.filter(([p]) => lower.includes(p.toLowerCase())).map(([p]) => p);
+
+    // 4. Negação dupla/indireta
+    const negacoes = [];
+    NEGACOES_DUPLAS.forEach(re => {
+      const matches = [...texto.matchAll(re)];
+      negacoes.push(...matches.map(m => m[0]));
+    });
+
+    return {
+      adverbiosMente: { valor: adverbios.length, densidade: +(densidadeAdv * 100).toFixed(1), lista: adverbios.slice(0, 8) },
+      vozPassiva: { ocorrencias: passiva.length, proporcao: +(propPassiva * 100).toFixed(1), exemplos: passiva.slice(0, 3).map(m => m[0]) },
+      redundancia: { ocorrencias: redEncontradas.length, lista: redEncontradas },
+      negacaoDupla: { ocorrencias: negacoes.length, lista: [...new Set(negacoes)].slice(0, 5) },
+    };
+  }
+
+  // ── MÉTRICAS: CLAREZA ─────────────────────────────────────────────────────
+
+  function analisarClareza(frases, totalPalavras) {
+    const comprimentos = frases.map(f => tokenizarPalavras(f).length).filter(n => n > 0);
+    if (!comprimentos.length) return {};
+
+    const media = comprimentos.reduce((a, b) => a + b, 0) / comprimentos.length;
+    const dp = Math.sqrt(comprimentos.reduce((a, b) => a + Math.pow(b - media, 2), 0) / comprimentos.length);
+
+    // Pronomes ambíguos — alta densidade de pronome de 3ª pessoa após múltiplos substantivos
+    const frasesComEleEla = frases.filter(f => {
+      const ws = tokenizarPalavras(f).map(normalizar);
+      const ele = ws.filter(w => ["ele","ela","eles","elas","o","a","os","as","lhe","lhes","lo","la"].includes(w)).length;
+      const subs = ws.filter(w => w.length > 3 && !STOPWORDS.has(w)).length;
+      return ele >= 2 && subs >= 2;
+    });
+
+    // Subordinação: conta conectivos subordinativos por frase
+    const SUBORD = ["que","quando","enquanto","se","porque","pois","embora","ainda que","mesmo que","apesar","caso","para que","a fim","salvo","exceto","conforme","segundo","como"];
+    const frasesComSubord = frases.filter(f => {
+      const lower = f.toLowerCase();
+      const count = SUBORD.filter(s => lower.includes(` ${s} `) || lower.startsWith(`${s} `)).length;
+      return count >= 3;
+    });
+
+    // Coerência de tempo verbal (detecção de mistura presente/passado)
+    const PRES = /\b(é|são|está|estão|tem|têm|faz|fazem|vai|vão|pode|podem|deve|devem|fica|ficam)\b/gi;
+    const PASS = /\b(foi|foram|era|eram|estava|estavam|tinha|tinham|fez|fizeram|foi|foram|pôde|puderam|devia|deviam|ficou|ficaram)\b/gi;
+    let mistura = 0;
+    frases.forEach(f => {
+      const hasPres = PRES.test(f);
+      const hasPass = PASS.test(f);
+      PRES.lastIndex = 0; PASS.lastIndex = 0;
+      if (hasPres && hasPass) mistura++;
+    });
+
+    return {
+      comprimentoMedio: +media.toFixed(1),
+      desvioPadrao: +dp.toFixed(1),
+      frasesLongas: comprimentos.filter(n => n > 35).length,
+      frasesVeryLong: comprimentos.filter(n => n > 50).length,
+      pronomeAmbiguo: { suspeitas: frasesComEleEla.length },
+      subordinacaoExcessiva: { frasesProblematicas: frasesComSubord.length },
+      tempoVerbal: { frasesComMistura: mistura },
+    };
+  }
+
+  // ── MÉTRICAS: RITMO ───────────────────────────────────────────────────────
+
+  function analisarRitmo(texto, frases) {
+    const comprimentos = frases.map(f => tokenizarPalavras(f).length).filter(n => n > 0);
+    if (!comprimentos.length) return {};
+
+    const media = comprimentos.reduce((a, b) => a + b, 0) / comprimentos.length;
+    const dp = Math.sqrt(comprimentos.reduce((a, b) => a + Math.pow(b - media, 2), 0) / comprimentos.length);
+
+    const curtas = comprimentos.filter(n => n < 8).length;
+    const medias = comprimentos.filter(n => n >= 8 && n <= 20).length;
+    const longas = comprimentos.filter(n => n > 20).length;
+    const total = comprimentos.length;
+
+    // Repetição lexical próxima (janela de 3 frases)
+    const lemmas = frases.map(f =>
+      tokenizarPalavras(f).map(normalizar).filter(w => w.length > 3 && !STOPWORDS.has(w))
+    );
+    const repeticoes = [];
+    for (let i = 0; i < lemmas.length; i++) {
+      const janela = new Set([...(lemmas[i-1]||[]), ...(lemmas[i+1]||[]), ...(lemmas[i+2]||[])]);
+      lemmas[i].forEach(w => {
+        if (janela.has(w) && !repeticoes.includes(w)) repeticoes.push(w);
+      });
+    }
+
+    // Abertura/fecho fraco de parágrafo
+    const paragrafos = texto.split(/\n\s*\n/).filter(p => p.trim().length > 20);
+    let aberturasFracas = 0;
+    paragrafos.forEach(p => {
+      const primeiraPalavra = normalizar((tokenizarPalavras(p.trim())[0]) || "");
+      if (PALAVRAS_FRACAS_ABERTURA.has(primeiraPalavra)) aberturasFracas++;
+    });
+
+    return {
+      variacaoFrase: { dp: +dp.toFixed(1), nivel: dp < 4 ? "baixo" : dp < 10 ? "moderado" : "alto" },
+      distribuicaoFrases: {
+        curtas: curtas, curtas_pct: +((curtas/total)*100).toFixed(0),
+        medias: medias, medias_pct: +((medias/total)*100).toFixed(0),
+        longas: longas, longas_pct: +((longas/total)*100).toFixed(0),
+      },
+      repeticaoProxima: { ocorrencias: repeticoes.length, lista: repeticoes.slice(0, 8) },
+      aberturaFracos: { paragrafos: paragrafos.length, aberturasFracas },
+    };
+  }
+
+  // ── MÉTRICAS: VOZ ─────────────────────────────────────────────────────────
+
+  function analisarVoz(texto) {
+    const lower = texto.toLowerCase();
+    const encontrados = CLIQUES_PT.filter(c => lower.includes(c));
+    return {
+      cliches: { ocorrencias: encontrados.length, lista: encontrados.slice(0, 10) },
+    };
+  }
+
+  // ── MÉTRICAS: ESTRUTURA ───────────────────────────────────────────────────
+
+  function analisarEstrutura(texto, frases, totalPalavras) {
+    const paragrafos = texto.split(/\n\s*\n/).filter(p => p.trim().length > 10);
+
+    // Proporção entre partes (intro/miolo/conclusão estimados por posição)
+    let proporcao = null;
+    if (paragrafos.length >= 3) {
+      const pWords = paragrafos.map(p => contarPalavras(p));
+      const total = pWords.reduce((a, b) => a + b, 0);
+      const intro = pWords[0];
+      const conclusao = pWords[pWords.length - 1];
+      proporcao = {
+        intro_pct: +((intro/total)*100).toFixed(0),
+        conclusao_pct: +((conclusao/total)*100).toFixed(0),
+        equilibrado: intro/total < 0.4 && conclusao/total < 0.4,
+      };
+    }
+
+    // Transições entre parágrafos
+    let comTransicao = 0;
+    paragrafos.forEach(p => {
+      const primeiraFrase = p.trim().toLowerCase().slice(0, 80);
+      if (CONECTIVOS_LOGICOS.some(c => primeiraFrase.startsWith(c) || primeiraFrase.includes(` ${c} `))) {
+        comTransicao++;
+      }
+    });
+
+    return {
+      proporcaoPartes: proporcao,
+      transicoes: {
+        paragrafos: paragrafos.length,
+        comTransicao,
+        semTransicao: Math.max(0, paragrafos.length - 1 - comTransicao),
+        proporcao: paragrafos.length > 1 ? +((comTransicao / (paragrafos.length - 1)) * 100).toFixed(0) : 100,
+      },
+    };
+  }
+
+  // ── MÉTRICAS: POV ─────────────────────────────────────────────────────────
+
+  function analisarPov(frases) {
+    const EU = /\b(eu|me|mim|meu|minha|meus|minhas)\b/gi;
+    const NOS = /\b(n[oó]s|nosso|nossa|nossos|nossas|a gente)\b/gi;
+    const ELE = /\b(ele|ela|eles|elas|lhe|lhes|seu|sua|seus|suas)\b/gi;
+    const AUTOR = /\b(o autor|a autora|o escritor|a escritora|o narrador|a narradora)\b/gi;
+
+    let frasesEu = 0, frasesNos = 0, frasesEle = 0, frasesAutor = 0;
+    frases.forEach(f => {
+      if (EU.test(f)) frasesEu++;
+      if (NOS.test(f)) frasesNos++;
+      if (ELE.test(f)) frasesEle++;
+      if (AUTOR.test(f)) frasesAutor++;
+      EU.lastIndex = 0; NOS.lastIndex = 0; ELE.lastIndex = 0; AUTOR.lastIndex = 0;
+    });
+
+    // Inconsistência: texto que mistura muito 1ª e 3ª pessoa sem padrão claro
+    const total = frases.length;
+    const dominante = Math.max(frasesEu, frasesNos, frasesEle);
+    const mistura = (frasesEu > 0 && frasesEle > 0)
+      ? Math.min(frasesEu, frasesEle) / total
+      : 0;
+
+    return {
+      consistenciaPessoa: {
+        frases1a: frasesEu,
+        frases1aPlural: frasesNos,
+        frases3a: frasesEle,
+        frasesAutorRef: frasesAutor,
+        indiceMistura: +((mistura * 100).toFixed(0)),
+        consistente: mistura < 0.1,
+      },
+    };
+  }
+
+  // ── MÉTRICAS: LÉXICO ──────────────────────────────────────────────────────
+
+  function analisarLexico(texto, totalPalavras) {
+    const palavras = tokenizarPalavras(texto);
+    const normas = palavras.map(normalizar);
+
+    const estado = normas.filter(w => VERBOS_ESTADO.has(w));
+    const vagos = normas.filter(w => SUBSTANTIVOS_VAGOS.has(w));
+    const totalVerbs = normas.filter(w =>
+      /^.+(ar|er|ir|ou|ei|ava|ia|ará|erá|sse|endo|ando|indo|ado|ada|ido|ida)$/.test(w)
+    ).length;
+
+    return {
+      verbosEstado: {
+        ocorrencias: estado.length,
+        proporcao: totalVerbs > 0 ? +((estado.length / totalVerbs) * 100).toFixed(1) : 0,
+        nivel: estado.length / Math.max(1, totalPalavras) > 0.08 ? "alto" : estado.length / Math.max(1, totalPalavras) > 0.04 ? "moderado" : "baixo",
+      },
+      substantivosVagos: {
+        ocorrencias: vagos.length,
+        densidade: totalPalavras > 0 ? +((vagos.length / totalPalavras) * 100).toFixed(1) : 0,
+        lista: [...new Set(vagos)].slice(0, 8),
+      },
+    };
+  }
+
+  // ── ANÁLISE PRINCIPAL ─────────────────────────────────────────────────────
+
+  function analisar(texto) {
+    if (!texto || !texto.trim()) return null;
+
+    const frases = tokenizarFrases(texto.trim());
+    const totalPalavras = contarPalavras(texto);
+    const totalFrases = frases.length;
+    const totalParagrafos = texto.split(/\n\s*\n/).filter(p => p.trim().length > 10).length;
+
+    // Legibilidade Flesch-BR
+    const allWords = tokenizarPalavras(texto);
+    const totalSilabas = allWords.reduce((a, w) => a + contarSilabas(w), 0);
+    const totalSentencas = Math.max(1, texto.split(/[.!?]+/).filter(s => s.trim()).length);
+    const flesch = Math.max(0, Math.min(100, Math.round(
+      248.835 - 1.015 * (totalPalavras / totalSentencas) - 84.6 * (totalSilabas / Math.max(1, totalPalavras))
+    )));
+
+    return {
+      meta: {
+        totalPalavras,
+        totalFrases,
+        totalParagrafos,
+        fleschBR: flesch,
+        fleschLabel: flesch >= 80 ? "Fácil" : flesch >= 60 ? "Moderado" : flesch >= 40 ? "Denso" : "Muito denso",
+      },
+      economia:  analisarEconomia(texto, frases, totalPalavras),
+      clareza:   analisarClareza(frases, totalPalavras),
+      ritmo:     analisarRitmo(texto, frases),
+      voz:       analisarVoz(texto),
+      estrutura: analisarEstrutura(texto, frases, totalPalavras),
+      pov:       analisarPov(frases),
+      lexico:    analisarLexico(texto, totalPalavras),
+      norma:     {
+        pontuacao: global.VeredaPunctuation ? global.VeredaPunctuation.analyze(texto) : null,
+      },
+    };
+  }
+
+  // ── INTERPRETAÇÃO: NÍVEL DE ALERTA ────────────────────────────────────────
+
+  function interpretarResultado(resultado) {
+    if (!resultado) return [];
+    const alertas = [];
+    const { economia, clareza, ritmo, voz, lexico, pov, norma } = resultado;
+
+    if (economia.adverbiosMente.densidade > 3)
+      alertas.push({ dim: "economia", id: "adverbios-mente", nivel: economia.adverbiosMente.densidade > 6 ? "alto" : "moderado", msg: `${economia.adverbiosMente.densidade}% de advérbios em -mente. Acima de 3% é sinal de verbo fraco.` });
+
+    if (economia.vozPassiva.proporcao > 20)
+      alertas.push({ dim: "economia", id: "voz-passiva", nivel: economia.vozPassiva.proporcao > 35 ? "alto" : "moderado", msg: `${economia.vozPassiva.proporcao}% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.` });
+
+    if (economia.redundancia.ocorrencias > 0)
+      alertas.push({ dim: "economia", id: "redundancia", nivel: "moderado", msg: `${economia.redundancia.ocorrencias} par(es) redundante(s): ${economia.redundancia.lista.slice(0,2).join(", ")}.` });
+
+    if (economia.negacaoDupla.ocorrencias > 2)
+      alertas.push({ dim: "economia", id: "negacao-dupla", nivel: "moderado", msg: `${economia.negacaoDupla.ocorrencias} negação(ões) dupla(s)/indireta(s). Preferir a forma afirmativa direta.` });
+
+    if (clareza.comprimentoMedio > 30)
+      alertas.push({ dim: "clareza", id: "comprimento-frase", nivel: clareza.comprimentoMedio > 40 ? "alto" : "moderado", msg: `Média de ${clareza.comprimentoMedio} palavras/frase. Acima de 30 aumenta a carga cognitiva.` });
+
+    if (ritmo.variacaoFrase.dp < 4 && resultado.meta.totalFrases > 5)
+      alertas.push({ dim: "ritmo", id: "variacao-frase", nivel: "moderado", msg: `Desvio padrão de comprimento: ${ritmo.variacaoFrase.dp}. Texto com ritmo muito uniforme. Varie o comprimento das frases.` });
+
+    if (ritmo.repeticaoProxima.ocorrencias > 5)
+      alertas.push({ dim: "ritmo", id: "repeticao-proxima", nivel: ritmo.repeticaoProxima.ocorrencias > 10 ? "alto" : "moderado", msg: `${ritmo.repeticaoProxima.ocorrencias} palavras repetidas em frases próximas: ${ritmo.repeticaoProxima.lista.slice(0,4).join(", ")}.` });
+
+    if (voz.cliches.ocorrencias > 0)
+      alertas.push({ dim: "voz", id: "cliche", nivel: voz.cliches.ocorrencias > 3 ? "alto" : "moderado", msg: `${voz.cliches.ocorrencias} clichê(s) detectado(s): ${voz.cliches.lista.slice(0,2).join("; ")}.` });
+
+    if (lexico.verbosEstado.nivel === "alto")
+      alertas.push({ dim: "lexico", id: "verbos-estado", nivel: "moderado", msg: `${lexico.verbosEstado.proporcao}% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.` });
+
+    if (lexico.substantivosVagos.densidade > 2)
+      alertas.push({ dim: "lexico", id: "substantivos-vagos", nivel: "moderado", msg: `${lexico.substantivosVagos.densidade}% de substantivos vagos (coisa, aspecto, questão...). Especifique.` });
+
+    if (!pov.consistenciaPessoa.consistente)
+      alertas.push({ dim: "pov", id: "pessoa-narrativa", nivel: "moderado", msg: `Texto mistura 1ª e 3ª pessoa (${pov.consistenciaPessoa.frases1a} frases em "eu" e ${pov.consistenciaPessoa.frases3a} em "ele/ela"). Verifique se é intencional.` });
+
+    if (norma?.pontuacao?.issues?.length > 0) {
+      const first = norma.pontuacao.issues[0];
+      alertas.push({
+        dim: "norma",
+        id: "pontuacao",
+        nivel: first.severity === "alta" ? "alto" : "moderado",
+        msg: `${norma.pontuacao.issues.length} alerta(s) de pontuação funcional. Principal: ${first.criterio}`,
+      });
+    }
+
+    return alertas.sort((a, b) => (a.nivel === "alto" ? -1 : 1) - (b.nivel === "alto" ? -1 : 1));
+  }
+
+  // ── EXPORT ────────────────────────────────────────────────────────────────
+
+  global.VeredaAnalise = {
+    analisar,
+    interpretarResultado,
+    tokenizarFrases,
+    tokenizarPalavras,
+    normalizar,
+  };
+
+})(window);

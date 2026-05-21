@@ -1,0 +1,172 @@
+/* ── MOBILE PHONE (≤480px) — topbar silenciosa, statusbar essencial ── */
+@media (max-width: 480px) {
+  /* Topbar: esconde áudio e busca — foco em escrita */
+  .topbar [data-action="toggle-audio-player"],
+  .topbar [data-action="toggle-global-search"] {
+    display: none;
+  }
+
+  /* Topbar: Vereda (tema) vira só ícone */
+  .topbar [data-action="toggle-theme-menu"] > span:not(.material-symbols-outlined) {
+    display: none;
+  }
+
+  /* Brand lockup mais compacto */
+  .brand-lockup strong { font-size: 15px; }
+
+  /* Editor paper: menos padding lateral em phones */
+  .editor-paper { padding: clamp(18px, 4vw, 36px); }
+
+  /* Onboarding: 1 coluna em phones muito pequenos */
+  .create-note-options { grid-template-columns: 1fr; }
+
+  /* Ferramentas do onboarding em coluna no phone */
+  .welcome-tools-row { grid-template-columns: 1fr; }
+
+  /* Format-bar estreita: grupo editorial colapsa, só botão ⋯ visível */
+  .fmt-sep-editorial { display: none; }
+  .fmt-group-editorial {
+    position: relative;
+    opacity: 1;
+  }
+  /* Esconde os filhos do grupo editorial por padrão no mobile */
+  .fmt-group-editorial > *:not(.fmt-editorial-toggle) {
+    display: none;
+  }
+  /* Botão ⋯ para revelar o grupo */
+  .fmt-editorial-toggle {
+    display: flex;
+  }
+  /* Quando o grupo está expandido */
+  .fmt-group-editorial.is-open > *:not(.fmt-editorial-toggle) {
+    display: flex;
+  }
+  .fmt-group-editorial.is-open {
+    flex-wrap: wrap;
+    gap: 4px;
+    background: var(--surface-low);
+    border-radius: 6px;
+    padding: 4px;
+    width: 100%;
+  }
+}
+
+/* ── VIEWPORT DE ACEITE 390px — iPhone SE, Android compact ── */
+@media (max-width: 390px) {
+  /* Tabs: reduzir tamanho para caber mais */
+  .module-tabs .tab {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  /* Títulos principais não devem extravasar */
+  .title-input { font-size: clamp(22px, 6vw, 27px); }
+  .paper h1, .archive-heading h1 { font-size: 26px; }
+
+  /* Academia hero: reduzir em telas muito pequenas */
+  .academy-banner h2,
+  .template-copy h2,
+  .rights-copy h2 { font-size: clamp(22px, 7vw, 28px); }
+
+  /* Garantir que textos de status não cortam */
+  .statusbar { font-size: 9px; gap: 8px; }
+  .statusbar > * { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
+
+  /* Arquivo: headings não extravasam */
+  .archive-heading { gap: 6px; }
+  .archive-strip-heading { gap: 4px; }
+
+  /* Welcome: título menor */
+  .welcome-header h2 { font-size: 1.3rem; }
+}
+
+/* ── MOBILE GERAL (≤820px) — melhorias de experiência mobile ── */
+@media (max-width: 820px) {
+  /* Título do manuscrito: clamp menor para não extravazar em mobile */
+  .title-input,
+  .paper h1 {
+    font-size: clamp(22px, 4vw, 34px);
+  }
+
+  /* module-tabs: indica scroll com fade e permite rolagem sem aparecer scrollbar */
+  .module-tabs {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .module-tabs::-webkit-scrollbar { display: none; }
+
+  /* editor-mode-bar: permite quebra para que lixeira não saia da tela */
+  .editor-mode-bar {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* format-bar em mobile: itens não quebram a linha por padrão mas
+     o grupo editorial já colapsa via 08-responsive ≤480px */
+  .format-bar {
+    padding: 4px 8px;
+  }
+
+  /* Inspector/análise: oculta em portrait pequeno (distrai na escrita) */
+  .app-shell:not(.is-right-expanded) .inspector {
+    display: none;
+  }
+}
+
+/* ── TOPBAR: previne vazamento em viewports intermediários ──────────────────
+   Abaixo de 1100px a topbar começa a ficar apertada.                        */
+@media (max-width: 1100px) {
+  /* Brand: reduz mínimo para dar espaço às abas */
+  .brand-lockup {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .brand-lockup > div > span { display: none; }  /* esconde "para escritores brasileiros" */
+
+  /* Ações da topbar: comprime para caber */
+  .topbar-actions { gap: 4px; }
+
+  /* Oculta label do tema, mantém ícone */
+  .topbar [data-action="toggle-theme-menu"] > span:not(.material-symbols-outlined) {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  /* Oculta badge "Funciona sem internet" — só o ícone */
+  .offline-badge { display: none; }
+
+  /* Fundo de mesa: só ícone */
+  .desk-bg-toggle { display: none; }
+}
+
+/* Statusbar: não vaza em telas estreitas */
+.statusbar {
+  overflow: hidden;
+}
+.statusbar > * {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── TOPBAR: compressão progressiva de 1400px até 480px ─────────────────── */
+@media (max-width: 1400px) {
+  /* Comprime topbar: esconde textos secundários, mantém ações e abas */
+  .brand-lockup > div > span { display: none; }
+  .topbar [data-action="toggle-theme-menu"] > span:not(.material-symbols-outlined) { display: none; }
+  .brand-lockup { min-width: 0; flex-shrink: 1; }
+}
+
+@media (max-width: 1200px) {
+  /* Esconde badge "sem internet" — ação mantida pelo ícone */
+  .offline-badge { display: none; }
+}
+
+@media (max-width: 1000px) {
+  /* Esconde "Funciona sem internet" e botão de mesa */
+  .offline-badge,
+  .desk-bg-toggle { display: none; }
+}

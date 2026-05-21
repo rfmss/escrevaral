@@ -1,0 +1,89 @@
+{
+  "encyclopedia": [
+    {
+      "title": "Regra de ouro da métrica",
+      "tags": [
+        "escansão",
+        "última tônica",
+        "oficina"
+      ],
+      "body": "Na contagem poética tradicional, o verso é contado até a última sílaba tônica da última palavra. Sons depois dela não entram na medida clássica.",
+      "sample": "O amor é fogo que arde sem se ver"
+    },
+    {
+      "title": "Soneto",
+      "tags": [
+        "14 versos",
+        "decassílabo",
+        "ABBA ABBA CDC DCD"
+      ],
+      "body": "Forma fixa com dois quartetos e dois tercetos. O decassílabo clássico conta até a última sílaba tônica do verso.",
+      "sample": "Sete anos de pastor Jacó servia\nLabão, pai de Raquel, serrana bela"
+    },
+    {
+      "title": "Sextilha",
+      "tags": [
+        "6 versos",
+        "redondilha maior",
+        "oralidade"
+      ],
+      "body": "Muito usada na poesia popular e no repente. Costuma trabalhar sete sílabas poéticas e rimas alternadas ou emparelhadas.",
+      "sample": "No terreiro a voz levanta\nquando a noite pede chão"
+    },
+    {
+      "title": "Redondilha menor",
+      "tags": [
+        "5 sílabas",
+        "cantável",
+        "popular"
+      ],
+      "body": "Verso breve, forte em canção e poesia oral. A concisão obriga imagem nítida e ritmo rápido.",
+      "sample": "Minha terra tem\num rio parado"
+    },
+    {
+      "title": "Redondilha maior",
+      "tags": [
+        "7 sílabas",
+        "heptassílabo",
+        "música"
+      ],
+      "body": "Uma das medidas mais naturais da língua portuguesa. Aparece em cantiga, cordel, letra de música e poema narrativo.",
+      "sample": "Minha rua não cabe no mapa\nmas me chama pelo nome"
+    }
+  ],
+  "grammarWords": {
+    "amor": "substantivo",
+    "dor": "substantivo",
+    "flor": "substantivo",
+    "mar": "substantivo",
+    "paz": "substantivo",
+    "voz": "substantivo",
+    "vez": "substantivo",
+    "vida": "substantivo",
+    "morte": "substantivo",
+    "saudade": "substantivo",
+    "liberdade": "substantivo",
+    "canção": "substantivo",
+    "razão": "substantivo",
+    "coração": "substantivo",
+    "ser": "verbo",
+    "ver": "verbo",
+    "ter": "verbo",
+    "dar": "verbo",
+    "amar": "verbo",
+    "cantar": "verbo",
+    "sonhar": "verbo",
+    "viver": "verbo",
+    "morrer": "verbo",
+    "belo": "adjetivo",
+    "breve": "adjetivo",
+    "triste": "adjetivo",
+    "forte": "adjetivo",
+    "claro": "adjetivo",
+    "escuro": "adjetivo",
+    "sempre": "advérbio",
+    "nunca": "advérbio",
+    "apenas": "advérbio",
+    "atrás": "advérbio"
+  }
+}

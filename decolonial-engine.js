@@ -1,0 +1,73 @@
+(function decolonialEngine(global) {
+  let categories = {};
+  let entries = [];
+  let _loaded = false;
+
+  async function ensureLoaded() {
+    if (_loaded) return;
+    const data = await fetch(`decolonial-data.json?v=20260514-f3`).then(r => r.json());
+    categories = data.categories;
+    entries    = data.entries;
+    _loaded = true;
+  }
+
+  function normalize(value) {
+    return String(value || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  function createTermPattern(term) {
+    return new RegExp("(^|[^\\p{L}\\p{N}_])(" + escapeRegExp(term) + ")(?=$|[^\\p{L}\\p{N}_])", "giu");
+  }
+
+  function countTerm(text, term) {
+    const pattern = createTermPattern(term);
+    let count = 0;
+    while (pattern.exec(text)) count++;
+    return count;
+  }
+
+  function withCategoryLabel(entry) {
+    return { ...entry, categoryLabel: categories[entry.category]?.label || entry.category };
+  }
+
+  function listCategories() {
+    return Object.entries(categories).map(([id, category]) => ({
+      id, ...category,
+      count: entries.filter(e => e.category === id).length,
+    }));
+  }
+
+  function listEntries(options = {}) {
+    const query = normalize(options.query);
+    const category = options.category || "all";
+    return entries
+      .filter(entry => {
+        const matchesCategory = category === "all" || entry.category === category;
+        const haystack = normalize([entry.avoid, ...entry.alternatives, entry.reason, entry.context, categories[entry.category]?.label].join(" "));
+        return matchesCategory && (!query || haystack.includes(query));
+      })
+      .map(withCategoryLabel);
+  }
+
+  function detectText(text, options = {}) {
+    const category = options.category || "all";
+    const source = String(text || "");
+    if (!source.trim()) return [];
+    return entries
+      .filter(entry => category === "all" || entry.category === category)
+      .map(entry => ({ ...withCategoryLabel(entry), count: countTerm(source, entry.avoid) }))
+      .filter(entry => entry.count > 0);
+  }
+
+  global.VeredaDecolonial = {
+    ensureLoaded,
+    listCategories,
+    listEntries,
+    detectText,
+    isLoaded: () => _loaded,
+  };
+})(window);

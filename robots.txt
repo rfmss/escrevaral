@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Páginas de conteúdo editorial
+Allow: /escrevaral/vereda-titulo-do-livro.html
+Allow: /escrevaral/vereda-primeiras-linhas.html
+
+# Sitemap
+Sitemap: https://rfmss.github.io/escrevaral/sitemap.xml

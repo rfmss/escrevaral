@@ -1,0 +1,413 @@
+{
+  "_fontes": [
+    "Bechara — Lições de Português pela Análise Sintática, 20ª ed. (Nova Fronteira, 2018)",
+    "Celso Cunha & Cintra — Nova Gramática do Português Contemporâneo, 7ª ed. (Lexikon, 2017)"
+  ],
+
+  "conjuncoes": {
+    "coordenativas": {
+      "_nota": "Bechara distingue apenas aditivas, adversativas e alternativas como coordenativas puras. Conclusivas e explicativas são valores discursivos de conectores, não classe gramatical separada — mas mantidos aqui por utilidade prática (NGB).",
+      "aditivas": {
+        "palavras": ["e", "nem", "não só... mas também", "não só... como também", "bem como", "assim como", "tanto... como", "tanto... quanto"],
+        "relacao": "adição",
+        "posicao": "início da oração",
+        "modo_verbal": null,
+        "descricao": "Liga orações de mesmo valor sem matiz especial"
+      },
+      "adversativas": {
+        "palavras": ["mas", "porém", "contudo", "todavia", "entretanto", "no entanto"],
+        "relacao": "oposição",
+        "posicao": "mas: sempre no início; porém/todavia/contudo/entretanto/no entanto: início, meio ou fim",
+        "modo_verbal": null,
+        "descricao": "Acrescenta ideia de contraste, oposição ou ressalva",
+        "_removidos": ["senão (apenas após negação)", "apesar disso (locução adverbial, não conjunção)", "ao passo que (proporcional/adversativa — ver proporcionais)"]
+      },
+      "alternativas": {
+        "palavras": ["ou", "ou... ou", "ora... ora", "já... já", "quer... quer", "seja... seja"],
+        "relacao": "alternância",
+        "posicao": "início da oração",
+        "modo_verbal": null,
+        "descricao": "Indica que ao cumprir-se um fato o outro não se cumpre"
+      },
+      "conclusivas": {
+        "palavras": ["logo", "portanto", "por conseguinte", "assim", "então"],
+        "valor_de": ["pois (posposto ao verbo ou após vírgula)", "por isso"],
+        "relacao": "conclusão",
+        "posicao": "pois conclusivo: sempre posposto (era, pois, um homem...); logo/portanto: variável",
+        "modo_verbal": null,
+        "descricao": "Introduz oração que exprime conclusão ou consequência do que foi dito"
+      },
+      "explicativas": {
+        "palavras": ["pois", "que", "porquanto"],
+        "valor_de": ["porque (quando no início após imperativo ou optativo)"],
+        "relacao": "explicação",
+        "posicao": "pois explicativo: início da oração (diferente do conclusivo posposto)",
+        "modo_verbal": null,
+        "descricao": "A segunda oração justifica a primeira. Frequente após imperativo e optativo"
+      }
+    },
+    "subordinativas": {
+      "causais": {
+        "palavras": ["porque", "pois que", "porquanto", "já que", "uma vez que", "visto que", "visto como"],
+        "valor_especial": {
+          "como": "causal quando no início da oração (Como estava chovendo, ficamos)",
+          "que": "causal coloquial (Corre, que vai chover)"
+        },
+        "relacao": "causa",
+        "funcao": "adjunto adverbial de causa",
+        "posicao": "como causal: obrigatoriamente no início; porque: posição variável",
+        "modo_verbal": "indicativo (fato real)",
+        "descricao": "Indica a causa ou motivo da ação principal"
+      },
+      "concessivas": {
+        "palavras": ["embora", "conquanto", "ainda que", "mesmo que", "posto que", "bem que", "se bem que", "por mais que", "por menos que", "apesar de que", "nem que"],
+        "relacao": "concessão",
+        "funcao": "adjunto adverbial de concessão",
+        "posicao": "antes ou depois da principal",
+        "modo_verbal": "subjuntivo (fato admitido mas não impeditivo)",
+        "descricao": "Admite fato contrário ao da principal, mas incapaz de impedi-la"
+      },
+      "condicionais": {
+        "palavras": ["se", "caso", "contanto que", "salvo se", "dado que", "a menos que", "a não ser que"],
+        "valor_especial": {
+          "desde que": "condicional quando = contanto que (Desde que estudes, passarás); temporal quando indica início de período (Desde que chegou, não parou)",
+          "sem que": "condicional negativa (= se não)"
+        },
+        "relacao": "condição",
+        "funcao": "adjunto adverbial de condição",
+        "posicao": "antes ou depois da principal",
+        "modo_verbal": "subjuntivo (hipótese) ou futuro do subjuntivo (condição futura)",
+        "descricao": "Indica hipótese ou condição necessária para que se realize o fato principal"
+      },
+      "finais": {
+        "palavras": ["para que", "a fim de que"],
+        "valor_especial": {
+          "que": "final após verbo de vontade/mandato (Manda que venha = para que venha)",
+          "porque": "final arcaico/literário (= para que)"
+        },
+        "relacao": "finalidade",
+        "funcao": "adjunto adverbial de finalidade",
+        "modo_verbal": "subjuntivo",
+        "descricao": "Indica a finalidade ou objetivo da ação principal"
+      },
+      "temporais": {
+        "palavras": ["quando", "enquanto", "assim que", "logo que", "depois que", "antes que", "até que", "sempre que", "cada vez que", "todas as vezes que", "mal", "apenas"],
+        "valor_especial": {
+          "mal": "temporal = assim que (Mal chegou, saiu)",
+          "apenas": "temporal = assim que (Apenas terminou, foi embora)",
+          "desde que": "temporal quando indica início de período (Desde que chegou, não parou)"
+        },
+        "relacao": "tempo",
+        "funcao": "adjunto adverbial de tempo",
+        "modo_verbal": "indicativo (fato real) ou subjuntivo futuro (fato eventual futuro)",
+        "descricao": "Indica circunstância de tempo em relação à ação principal"
+      },
+      "consecutivas": {
+        "palavras": ["de forma que", "de maneira que", "de modo que", "de sorte que"],
+        "valor_especial": {
+          "que": "consecutivo quando correlato de tal/tanto/tão/tamanho na oração anterior (Era tão frio que tremia). Sem correlato, que é integrante ou relativo"
+        },
+        "relacao": "consequência",
+        "funcao": "adjunto adverbial de consequência",
+        "modo_verbal": "indicativo",
+        "descricao": "Indica a consequência do que foi declarado na oração anterior"
+      },
+      "comparativas": {
+        "palavras": ["como", "assim como", "bem como", "como se", "que nem", "que", "do que", "qual", "quanto"],
+        "restricoes": {
+          "que/do que": "após mais, menos, maior, menor, melhor, pior",
+          "qual": "após tal",
+          "quanto": "após tanto",
+          "como se": "sempre com subjuntivo imperfeito — comparação hipotética"
+        },
+        "relacao": "comparação",
+        "funcao": "adjunto adverbial de comparação",
+        "modo_verbal": "indicativo ou subjuntivo (como se: sempre subjuntivo imperfeito)",
+        "descricao": "Encerra o segundo membro de uma comparação ou confronto"
+      },
+      "conformativas": {
+        "palavras": ["conforme", "segundo", "consoante", "de acordo com que"],
+        "valor_especial": {
+          "como": "conformativo quando = conforme (Como ia dizendo... = Conforme ia dizendo...)"
+        },
+        "relacao": "conformidade",
+        "funcao": "adjunto adverbial de conformidade",
+        "modo_verbal": "indicativo",
+        "descricao": "Exprime conformidade de um pensamento com o da oração principal (NGB; não distinguida na NGP)"
+      },
+      "proporcionais": {
+        "palavras": ["à medida que", "à proporção que", "ao passo que", "quanto mais... mais", "quanto mais... tanto mais", "quanto mais... menos", "quanto menos... mais", "quanto menos... tanto mais", "quanto menos... menos"],
+        "valor_especial": {
+          "enquanto": "proporcional/adversativo quando = ao passo que (Ele cresce enquanto eu diminuo)"
+        },
+        "relacao": "proporção",
+        "funcao": "adjunto adverbial de proporção",
+        "modo_verbal": "indicativo",
+        "descricao": "Indica fato simultâneo e proporcional ao da oração principal (NGB; não distinguida na NGP)"
+      },
+      "integrantes": {
+        "palavras": ["que", "se"],
+        "restricoes": {
+          "que": "certeza, declaração afirmativa (Sei que virá). Sem preposição para OD; com preposição para OI/CN",
+          "se": "incerteza, dúvida, interrogação indireta (Não sei se virá). Nunca substituível por que"
+        },
+        "relacao": "integração",
+        "funcao": "oração subordinada substantiva (sujeito, OD, OI, predicativo, CN, aposto)",
+        "modo_verbal": "indicativo (declaração) ou subjuntivo (incerteza/desejo)",
+        "descricao": "Introduz oração com função de substantivo em relação à principal"
+      }
+    },
+    "polissemia": {
+      "que": {
+        "valores": [
+          {"valor": "integrante (certeza)", "contexto": "após verbo declarativo/volitivo, sem antecedente nominal (Sei que virá)"},
+          {"valor": "relativo (adjetiva)", "contexto": "após antecedente nominal expresso (O livro que li)"},
+          {"valor": "causal", "contexto": "coloquial após imperativo (Corre, que vai chover)"},
+          {"valor": "final", "contexto": "após verbo de mandato com subjuntivo (Manda que venha)"},
+          {"valor": "consecutivo", "contexto": "correlato de tal/tanto/tão/tamanho na oração anterior"},
+          {"valor": "comparativo", "contexto": "após mais/menos/maior/menor/melhor/pior"},
+          {"valor": "expletivo/enfático", "contexto": "sem função sintática clara, valor enfático (Que belo dia que está!)"}
+        ]
+      },
+      "como": {
+        "valores": [
+          {"valor": "comparativo", "contexto": "paralelo entre dois termos (Canta como um pássaro)"},
+          {"valor": "causal", "contexto": "início absoluto de oração (Como não havia ônibus, fui a pé)"},
+          {"valor": "conformativo", "contexto": "= conforme, substituível por conforme (Como ia dizendo)"},
+          {"valor": "interrogativo indireto", "contexto": "após verbo de cognição (Não sei como fez)"}
+        ]
+      },
+      "porque": {
+        "valores": [
+          {"valor": "causal (subordinativa)", "contexto": "explica a causa — modo indicativo (Fiquei porque chovia)"},
+          {"valor": "final (subordinativa)", "contexto": "arcaico/literário = para que, com subjuntivo"},
+          {"valor": "explicativo (coordenativa)", "contexto": "após imperativo ou optativo, justifica (Venha, porque preciso de você)"}
+        ]
+      },
+      "se": {
+        "valores": [
+          {"valor": "condicional", "contexto": "hipótese, com subjuntivo (Se viesse, ficaria)"},
+          {"valor": "integrante (incerteza)", "contexto": "interrogação indireta após verbo de cognição (Não sei se virá)"},
+          {"valor": "índice de indeterminação", "contexto": "verbo transitivo indireto ou intransitivo, sem sujeito identificável (Vive-se bem aqui)"},
+          {"valor": "partícula apassivadora", "contexto": "verbo transitivo direto + se, sujeito paciente (Vendem-se casas)"},
+          {"valor": "pronome reflexivo", "contexto": "sujeito e objeto idênticos (Ele se machucou)"},
+          {"valor": "pronome recíproco", "contexto": "sujeito plural, ação mútua (Eles se abraçaram)"}
+        ],
+        "desambiguacao_se": {
+          "passo1": "Verbo é transitivo direto? → se como apassivadora (sujeito concorda com verbo)",
+          "passo2": "Verbo é transitivo indireto ou intransitivo? → se como índice de indeterminação (verbo sempre singular)",
+          "passo3": "Sujeito e objeto são o mesmo ser? → reflexivo ou recíproco",
+          "passo4": "Após verbo de cognição/percepção? → integrante (incerteza)",
+          "passo5": "Início de oração subordinada com hipótese? → condicional"
+        }
+      },
+      "pois": {
+        "valores": [
+          {"valor": "conclusivo", "contexto": "posposto a termo da oração (era, pois, necessário)"},
+          {"valor": "explicativo", "contexto": "início de oração após imperativo (Dorme, pois estás cansado)"},
+          {"valor": "causal", "contexto": "equivale a porque em registro formal"}
+        ]
+      },
+      "quando": {
+        "valores": [
+          {"valor": "temporal", "contexto": "mais frequente — indica circunstância de tempo"},
+          {"valor": "condicional", "contexto": "= se, em contexto hipotético (Quando for necessário = se for necessário)"},
+          {"valor": "concessivo", "contexto": "= embora, com valor de oposição (Quando devia falar, ficou calado)"},
+          {"valor": "adversativo", "contexto": "= ao passo que, exprimindo contraste (Ele ria quando eu chorava)"}
+        ]
+      },
+      "enquanto": {
+        "valores": [
+          {"valor": "temporal (simultaneidade)", "contexto": "ações simultâneas (Enquanto dormia, sonhava)"},
+          {"valor": "proporcional/adversativo", "contexto": "= ao passo que, contraste proporcional (Ele cresce enquanto eu diminuo)"}
+        ]
+      }
+    }
+  },
+
+  "tempos_verbais": {
+    "_nota": "Terminações são heurísticas — formas homógrafas exigem contexto para desambiguação. Irregulares centrais listados separadamente.",
+    "modos": {
+      "indicativo": {
+        "presente":               { "uso": "Ação habitual, permanente ou simultânea à fala", "terminacoes_1a": ["o","as","a","amos","ais","am"], "terminacoes_2a": ["o","es","e","emos","eis","em"], "terminacoes_3a": ["o","es","e","imos","is","em"] },
+        "preterito_perfeito":     { "uso": "Ação concluída, pontual, no passado", "terminacoes_1a": ["ei","aste","ou","amos","astes","aram"], "terminacoes_2a": ["i","este","eu","emos","estes","eram"], "terminacoes_3a": ["i","iste","iu","imos","istes","iram"] },
+        "preterito_imperfeito":   { "uso": "Ação habitual, contínua ou simultânea a outra no passado", "terminacoes_1a": ["ava","avas","ava","ávamos","áveis","avam"], "terminacoes_2a3a": ["ia","ias","ia","íamos","íeis","iam"] },
+        "preterito_maisqueperfeito": { "uso": "Ação anterior a outra passada (raro na fala; literário)", "terminacoes_1a": ["ara","aras","ara","áramos","áreis","aram"], "terminacoes_2a": ["era","eras","era","êramos","êreis","eram"], "terminacoes_3a": ["ira","iras","ira","íramos","íreis","iram"] },
+        "futuro_presente":        { "uso": "Ação futura", "terminacoes": ["arei","arás","ará","aremos","areis","arão","erei","erás","erá","eremos","ereis","erão","irei","irás","irá","iremos","ireis","irão"] },
+        "futuro_preterito":       { "uso": "Hipótese, condição, cortesia. Correlata ao imperfeito do subjuntivo", "terminacoes": ["aria","arias","aria","aríamos","aríeis","ariam","eria","erias","eria","eríamos","eríeis","eriam","iria","irias","iria","iríamos","iríeis","iriam"] }
+      },
+      "subjuntivo": {
+        "presente":   { "uso": "Incerteza, desejo, hipótese presente. Contexto: embora/que(desejo)/para que/caso/talvez", "terminacoes_1a": ["e","es","e","emos","eis","em"], "terminacoes_2a3a": ["a","as","a","amos","ais","am"] },
+        "imperfeito": { "uso": "Hipótese passada. Correlata ao futuro do pretérito. Contexto: se(hipótese passada)/embora+passado/como se", "terminacoes_1a": ["asse","asses","asse","ássemos","ásseis","assem"], "terminacoes_2a": ["esse","esses","esse","êssemos","êsseis","essem"], "terminacoes_3a": ["isse","isses","isse","íssemos","ísseis","issem"] },
+        "futuro":     { "uso": "Condição ou tempo futuros. Contexto: quando/se/enquanto/assim que/logo que + futuro", "terminacoes_1a": ["ar","ares","ar","armos","ardes","arem"], "terminacoes_2a": ["er","eres","er","ermos","erdes","erem"], "terminacoes_3a": ["ir","ires","ir","irmos","irdes","irem"] }
+      },
+      "imperativo": {
+        "afirmativo": { "uso": "Ordem, pedido, conselho direto. 2ª pessoa: igual ao presente do indicativo sem -s (fala, come, parte)", "formacao": "2ª sg: presente indicativo - s; 3ª sg/pl e 1ª pl: presente do subjuntivo" },
+        "negativo":   { "uso": "Proibição. Todas as formas do presente do subjuntivo com não", "formacao": "Não + presente do subjuntivo (não fales, não coma, não partam)" }
+      }
+    },
+    "formas_nominais": {
+      "infinitivo_impessoal": {
+        "terminacoes": ["ar","er","ir","or"],
+        "uso": "Forma nominal sem tempo ou pessoa. Núcleo de oração reduzida ou complemento verbal",
+        "desambiguacao_vs_futuro_subjuntivo": "Infinitivo: após preposição ou com função nominal (quero comer, para sair). Futuro do subjuntivo: após conjunção temporal/condicional com valor eventual futuro (quando chegar, se vier, assim que puder)"
+      },
+      "infinitivo_pessoal": {
+        "terminacoes_1a": ["ar","ares","ar","armos","ardes","arem"],
+        "terminacoes_2a": ["er","eres","er","ermos","erdes","erem"],
+        "terminacoes_3a": ["ir","ires","ir","irmos","irdes","irem"],
+        "uso": "Sujeito próprio diferente do da oração anterior, ou ênfase. Obrigatório em orações infinitivas com sujeito expresso",
+        "desambiguacao_vs_futuro_subjuntivo": "Infinitivo pessoal: precedido de preposição ou com função nominal, sujeito próprio identificável. Futuro do subjuntivo: após conjunção temporal/condicional (quando, se, assim que, logo que)"
+      },
+      "gerundio": {
+        "terminacoes": ["ando","endo","indo"],
+        "uso": "Ação simultânea ou imediatamente anterior à principal. Oração reduzida temporal, causal, condicional, concessiva ou modal",
+        "nao_oracional": "Gerúndio não forma oração reduzida quando: (a) parte de locução verbal (está cantando), (b) valor meramente adjetivo (água fervendo = água que ferve), (c) gerúndio modal sem valor de oração (Saiu correndo)"
+      },
+      "participio": {
+        "regulares": ["ado","ada","ados","adas","ido","ida","idos","idas"],
+        "irregulares": {
+          "abrir": "aberto", "cobrir": "coberto", "dizer": "dito", "escrever": "escrito",
+          "fazer": "feito", "pagar": "pago", "pôr": "posto", "vir": "vindo",
+          "ver": "visto", "vir": "vindo", "ganhar": "ganho", "gastar": "gasto",
+          "prender": "preso", "expulsar": "expulso", "aceitar": "aceito"
+        },
+        "abundantes": {
+          "acender": ["acendido","aceso"], "eleger": ["elegido","eleito"],
+          "entregar": ["entregado","entregue"], "imprimir": ["imprimido","impresso"],
+          "limpar": ["limpado","limpo"], "matar": ["matado","morto"],
+          "pagar": ["pagado","pago"], "salvar": ["salvado","salvo"],
+          "soltar": ["soltado","solto"], "tingir": ["tingido","tinto"]
+        },
+        "regra_abundantes": "Com ter/haver: forma regular (tinha acendido). Com ser/estar/ficar: forma irregular/curta (foi aceso, ficou preso)",
+        "nao_oracional": "Particípio não forma oração reduzida quando: (a) parte de locução verbal passiva (foi escrito), (b) função meramente adjetiva concordando com substantivo (homem cansado, porta aberta)"
+      }
+    },
+    "locuções_verbais": {
+      "progressiva":        { "aux": ["estar","andar","ficar","viver"], "forma": "gerúndio", "uso": "Ação em desenvolvimento contínuo" },
+      "perfeito_composto":  { "aux": ["ter","haver"], "forma": "particípio", "uso": "Ação repetida/contínua ligando passado ao presente; particípio invariável" },
+      "passiva_analitica":  { "aux": ["ser","estar","ficar"], "forma": "particípio", "uso": "Voz passiva; particípio concorda com sujeito paciente" },
+      "futuro_perifrástico":{ "aux": ["ir"], "forma": "infinitivo", "uso": "Futuro próximo ou intenção imediata" },
+      "obrigacao":          { "aux": ["dever","ter que","ter de","haver de"], "forma": "infinitivo", "uso": "Obrigação, necessidade ou probabilidade" },
+      "possibilidade":      { "aux": ["poder"], "forma": "infinitivo", "uso": "Possibilidade, permissão ou capacidade" }
+    }
+  },
+
+  "funcoes_sintaticas": {
+    "termos_essenciais": {
+      "sujeito": {
+        "descricao": "Ser sobre quem se enuncia algo. Concorda em número e pessoa com o verbo",
+        "identificacao": [
+          "Concordância verbal: o sujeito é o termo com que o verbo concorda",
+          "Pode estar antes ou depois do verbo (sujeito posposto: Chegaram os alunos)",
+          "Pode estar oculto (desinencial: Chegamos = nós chegamos)",
+          "Pode ser uma oração (subjetiva: É bom que estudes)"
+        ],
+        "nao_usar_pergunta_linear": "A pergunta 'quem?' antes do verbo falha em inversão e sujeito oracional",
+        "tipos": {
+          "simples": "Um só núcleo",
+          "composto": "Mais de um núcleo",
+          "indeterminado_se": "Com verbo transitivo indireto/intransitivo + se (Vive-se bem). Verbo sempre singular",
+          "indeterminado_3pl": "Verbo na 3ª pessoa do plural sem referente claro (Dizem que vai chover)",
+          "oracao_subjetiva": "Uma oração funciona como sujeito (É bom que estudes; Quem corre cansa)",
+          "desinencial": "Oculto mas recuperável pela desinência verbal"
+        }
+      },
+      "predicado": {
+        "verbal":       { "descricao": "Núcleo: verbo significativo. Sujeito pratica ou sofre ação", "verbos": "todos exceto verbos de ligação" },
+        "nominal":      { "descricao": "Verbo de ligação + predicativo do sujeito. Enuncia estado ou qualidade", "verbos_ligacao": ["ser","estar","ficar","parecer","continuar","permanecer","tornar-se","revelar-se","mostrar-se","andar","viver","acabar","chegar"] },
+        "verbonominal": { "descricao": "Verbo significativo + predicativo do sujeito ou do objeto" }
+      }
+    },
+    "termos_integrantes": {
+      "objeto_direto": {
+        "descricao": "Complemento de VTD sem preposição obrigatória",
+        "identificacao": "Torna-se sujeito na voz passiva (Ele leu o livro → O livro foi lido por ele)",
+        "tipos": ["simples", "composto", "oracional (objetiva direta)", "preposicionado (casos especiais: amar a alguém)"]
+      },
+      "objeto_indireto": {
+        "descricao": "Complemento de VTI com preposição obrigatória (a, de, em, por)",
+        "subtipos": {
+          "dativo": "Destinatário ou beneficiário (Dei o livro a Pedro)",
+          "posse": "Posse com dativo (Cortei o cabelo ao menino)",
+          "interesse": "Interesse ou prejuízo (Isso prejudicou a todos)"
+        },
+        "nao_confundir": "Adjunto adverbial preposicionado tem preposição semanticamente motivada, não exigida pela valência do verbo. Teste: retirar o adjunto não altera a transitividade"
+      },
+      "complemento_nominal": {
+        "descricao": "Complemento de substantivo, adjetivo ou advérbio deverbais ou que admitem complementação",
+        "identificacao": "O núcleo é um nome (não verbo): necessidade de ajuda, fiel ao dever, longe de casa"
+      },
+      "agente_da_passiva": {
+        "descricao": "Termo introduzido por 'por' (ou 'de') que indica o praticante da ação em construção passiva",
+        "identificacao": "Aparece apenas em construções passivas analíticas (O livro foi escrito por Machado)"
+      }
+    },
+    "termos_acessorios": {
+      "adjunto_adnominal": {
+        "descricao": "Modifica, determina, qualifica ou quantifica substantivo. Sem preposição necessária",
+        "formas": ["artigo", "adjetivo", "pronome adjetivo", "numeral", "locução adjetiva (de + substantivo)"]
+      },
+      "adjunto_adverbial": {
+        "descricao": "Modifica verbo, adjetivo ou advérbio indicando circunstância. Dispensável sem alterar transitividade",
+        "tipos": ["tempo","lugar","modo","causa","fim","condição","concessão","consequência","comparação","conformidade","proporção","instrumento","companhia","assunto","negação","afirmação"]
+      },
+      "aposto": {
+        "descricao": "Explica, especifica, resume ou desenvolve outro termo da oração",
+        "tipos": {
+          "explicativo": "Separado por vírgulas; informação adicional sobre termo definido (Pedro, meu irmão, chegou)",
+          "especificativo": "Sem vírgula; restringe o sentido (O rei Pedro I foi coroado)",
+          "enumerativo": "Lista que especifica ou resume um termo geral (Preciso de três coisas: coragem, paciência e fé)",
+          "resumitivo": "Resume série anterior introduzido por pronome/substantivo (Coragem, determinação, talento — tudo isso ele tem)",
+          "circunstancial": "Indica circunstância do sujeito (Soldado, nunca recuou — Bechara)",
+          "oracional": "Uma oração faz aposto (Só peço uma coisa: que sejas feliz)",
+          "referente_a_oracao": "Retoma uma oração inteira (Ele chegou tarde, o que nos preocupou)"
+        },
+        "pontuacao": "Explicativo e enumerativo: vírgula, travessão ou parênteses. Especificativo: sem pontuação"
+      },
+      "vocativo": {
+        "descricao": "Chama ou nomeia o interlocutor. Sem relação sintática com a oração. Separado por vírgula",
+        "identificacao": "Pode aparecer no início, meio ou fim. Não concorda com nenhum termo da oração"
+      }
+    },
+    "predicativos": {
+      "do_sujeito": "Qualifica o sujeito via verbo de ligação ou verbo significativo de movimento/estado",
+      "do_objeto": "Qualifica o objeto após: chamar, eleger, considerar, nomear, julgar, tornar, fazer, manter"
+    }
+  },
+
+  "orações_reduzidas": {
+    "_nota": "Oração reduzida: subordinada com verbo em forma nominal e sem conjunção. Nem toda forma nominal constitui oração reduzida.",
+    "de_infinitivo": {
+      "descricao": "Equivale a oração com conjunção + verbo conjugado",
+      "funcoes": ["substantiva (Quero sair = que eu saia)", "adjetiva (Tenho algo a dizer = que deva dizer)", "adverbial: causa, condição, tempo, concessão, fim"],
+      "nao_confundir": ["Infinitivo como parte de locução verbal (estava para sair)", "Infinitivo com valor nominal puro (O saber é poder — sujeito nominal)"]
+    },
+    "de_gerundio": {
+      "descricao": "Ação simultânea ou imediatamente anterior à principal",
+      "funcoes": ["adverbial: causa (Sendo tarde, fomos embora)", "concessão (Mesmo trabalhando muito, não adiantou)", "condição (Estudando, aprenderás)", "temporal (Chegando, avisou)"],
+      "nao_confundir": ["Locução verbal progressiva (está cantando)", "Gerúndio adjetival (água fervendo = que ferve)", "Gerúndio modal não oracional (Saiu correndo)"]
+    },
+    "de_participio": {
+      "descricao": "Ação concluída anterior à principal",
+      "funcoes": ["adverbial: causa (Terminado o serviço, foi embora)", "condição, tempo, concessão"],
+      "nao_confundir": ["Particípio em locução verbal passiva (foi escrito)", "Particípio meramente adjetivo (homem cansado, porta aberta)"]
+    }
+  },
+
+  "figuras_de_sintaxe": {
+    "elipse":     { "descricao": "Omissão de termo subentendido pelo contexto", "sinal": "Lacuna de regência ou concordância resolvida pelo contexto imediato" },
+    "zeugma":     { "descricao": "Elipse de termo já expresso anteriormente", "sinal": "Verbo ou nome presente na primeira oração, ausente nas seguintes com mesma função" },
+    "pleonasmo":  { "descricao": "Repetição de ideia para ênfase (vi com meus próprios olhos)", "sinal": "Redundância semântica intencional; distinguir de pleonasmo vicioso (erro)" },
+    "hiperbato":  { "descricao": "Inversão da ordem direta dos termos", "sinal": "Ordem marcada detectável ao comparar com ordem canônica SVOAd" },
+    "anacoluto":  { "descricao": "Ruptura da construção sintática — termo fica sem função clara", "sinal": "Dependência sintática quebrada; o início da frase não se integra ao resto" },
+    "silepse":    { "descricao": "Concordância com o sentido, não com a forma gramatical", "tipos": "número (A gente fomos), gênero, pessoa" },
+    "assindeto":  { "descricao": "Ausência de conjunção onde seria esperada (vim, vi, venci)", "sinal": "Orações justapostas sem conectivo, ritmo acelerado" },
+    "polissindeto":{ "descricao": "Repetição expressiva de conjunções (e riu, e chorou, e partiu)", "sinal": "Conjunção repetida além do necessário, efeito de acumulação" }
+  },
+
+  "preposicoes": {
+    "simples": ["a","ante","após","até","com","contra","de","desde","em","entre","para","per","perante","por","sem","sob","sobre","trás"],
+    "locuções": ["abaixo de","acerca de","acima de","além de","ao lado de","a partir de","a respeito de","de acordo com","em cima de","em frente a","em vez de","por causa de","por meio de","a fim de","apesar de","antes de","depois de","junto a","ao redor de","a despeito de"]
+  }
+}

@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Título do Livro — Como Escolher e Criar o Título Certo | Escrevaral</title>
+<meta name="description" content="Um guia completo para escritores brasileiros sobre como criar o título perfeito para seu livro. Técnicas, exemplos, exercícios práticos e o gerador de títulos do Escrevaral.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="O Título do Livro — Como Escolher e Criar o Título Certo">
+<meta property="og:description" content="Guia completo para escritores: como criar um título que vende, seduz e representa o livro. Com exercícios práticos e gerador de títulos.">
+<meta property="og:url" content="https://rfmss.github.io/escrevaral/vereda-titulo-do-livro.html">
+<meta property="og:image" content="https://rfmss.github.io/escrevaral/og-titulo.png">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Escrevaral — Editor de Escrita para Escritores Brasileiros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="O Título do Livro — Como Escolher e Criar o Título Certo | Escrevaral">
+<meta name="twitter:image" content="https://rfmss.github.io/escrevaral/og-titulo.png">
+<meta name="twitter:description" content="Guia completo para escritores brasileiros: técnicas, exemplos e exercícios para criar o título certo para o seu livro.">
+<link rel="canonical" href="https://rfmss.github.io/escrevaral/vereda-titulo-do-livro.html">
+<link rel="icon" href="./favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vereda-editorial.css">
+<style>
+  :root {
+    --ink: #2f261e;
+    --paper: #fdf8f2;
+    --cream: #f0e8d0;
+    --aged: #e8d8b0;
+    --vermelho: #8e3f32;
+    --ouro: #b78a3a;
+    --ouro-claro: #d4b15f;
+    --cinza-tinta: #514135;
+    --margem: #89745b;
+    --sombra: rgba(54,38,22,0.12);
+    --ff-titulo: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+    --ff-corpo: 'Crimson Pro', Georgia, serif;
+    --ff-label: 'Josefin Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--ff-corpo);
+    font-size: 19px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ────────────────────────────────────── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(201,146,42,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(139,35,21,0.18) 0%, transparent 60%);
+  }
+
+  .hero-ornamento {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-ornamento::before,
+  .hero-ornamento::after {
+    content: '✦';
+    position: absolute;
+    color: rgba(201,146,42,0.08);
+    font-size: 30vw;
+    line-height: 1;
+  }
+  .hero-ornamento::before { top: -5vw; left: -8vw; }
+  .hero-ornamento::after { bottom: -5vw; right: -8vw; transform: rotate(45deg); }
+
+  .hero-label {
+    font-family: var(--ff-label);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .hero-label::before,
+  .hero-label::after {
+    content: '—';
+    margin: 0 0.8em;
+    opacity: 0.5;
+  }
+
+  .hero h1 {
+    font-family: var(--ff-titulo);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--paper);
+    letter-spacing: -0.02em;
+    position: relative;
+    margin-bottom: 0.2em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--ouro-claro);
+  }
+
+  .hero-sub {
+    font-family: var(--ff-titulo);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--aged);
+    margin-top: 1.5rem;
+    max-width: 560px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .hero-scroll {
+    position: relative;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    color: var(--aged);
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .hero-scroll:hover { opacity: 1; }
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--aged), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ─── TRILHA NAV ──────────────────────────────── */
+  .trilha-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(201,146,42,0.2);
+    padding: 0 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .trilha-nav::-webkit-scrollbar { display: none; }
+
+  .trilha-nav-inner {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .trilha-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 1rem 1.2rem;
+    color: var(--margem);
+    text-decoration: none;
+    font-family: var(--ff-label);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .trilha-nav a:hover,
+  .trilha-nav a.ativo {
+    color: var(--ouro-claro);
+    border-bottom-color: var(--ouro);
+  }
+  .trilha-nav a span.num {
+    color: var(--vermelho);
+    opacity: 0.7;
+  }
+
+  /* ─── SEÇÕES GERAIS ───────────────────────────── */
+  .secao {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .secao-ampla {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .secao-escura {
+    background: var(--cream);
+  }
+
+  .secao-ink {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .secao-ink .label { color: var(--ouro); }
+  .secao-ink p { color: var(--aged); }
+  .secao-ink h2, .secao-ink h3 { color: var(--paper); }
+
+  .label {
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--vermelho);
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+
+  h2.titulo-secao {
+    font-family: var(--ff-titulo);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h2.titulo-secao em { font-style: italic; color: var(--vermelho); }
+
+  .intro-texto {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--cinza-tinta);
+    max-width: 640px;
+  }
+
+  .divisor {
+    width: 60px;
+    height: 1px;
+    background: var(--ouro);
+    margin: 3rem 0;
+  }
+
+  /* ─── MANIFESTO ───────────────────────────────── */
+  .manifesto-bloco {
+    border-left: 3px solid var(--ouro);
+    padding: 1.5rem 2rem;
+    margin: 2.5rem 0;
+    background: rgba(201,146,42,0.05);
+  }
+  .manifesto-bloco p {
+    font-family: var(--ff-titulo);
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .manifesto-bloco cite {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    font-family: var(--ff-label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--margem);
+    font-style: normal;
+  }
+
+  /* ─── ESTUDOS DE CASO ─────────────────────────── */
+  .casos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+    margin-top: 3rem;
+  }
+
+  .caso-card {
+    background: var(--paper);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--aged);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .caso-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--vermelho);
+    transition: height 0.4s ease;
+  }
+  .caso-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--sombra); }
+  .caso-card:hover::before { height: 100%; }
+
+  .caso-numero {
+    font-family: var(--ff-titulo);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--aged);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+  .caso-card:hover .caso-numero { color: var(--ouro); }
+
+  .caso-titulo-livro {
+    font-family: var(--ff-titulo);
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .caso-autor {
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--margem);
+    margin-bottom: 1rem;
+  }
+
+  .caso-texto {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--cinza-tinta);
+  }
+
+  .caso-detalhe {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--aged);
+  }
+  .caso-card.expandido .caso-detalhe { display: block; }
+
+  .caso-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.25rem 0.7rem;
+    background: var(--cream);
+    border: 1px solid var(--aged);
+    font-family: var(--ff-label);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cinza-tinta);
+  }
+
+  /* ─── MITOS ───────────────────────────────────── */
+  .mito-lista {
+    counter-reset: mito;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mito-item {
+    counter-increment: mito;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--aged);
+    align-items: start;
+  }
+  .mito-item:first-child { border-top: 1px solid var(--aged); }
+
+  .mito-num {
+    font-family: var(--ff-titulo);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--aged);
+    line-height: 1;
+    text-align: right;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--aged);
+  }
+
+  .mito-conteudo h3 {
+    font-family: var(--ff-titulo);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--vermelho);
+  }
+
+  .mito-conteudo .mito-verdade {
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  /* ─── PROCESSO VISUAL ─────────────────────────── */
+  .processo-container {
+    margin-top: 3rem;
+  }
+
+  .processo-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--aged);
+    margin-bottom: 0;
+  }
+
+  .processo-tab {
+    padding: 1rem 1.5rem;
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--margem);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.3s;
+  }
+  .processo-tab.ativo {
+    color: var(--vermelho);
+    border-bottom-color: var(--vermelho);
+    background: var(--paper);
+  }
+  .processo-tab:hover:not(.ativo) { color: var(--cinza-tinta); }
+
+  .processo-painel {
+    display: none;
+    padding: 3rem 0;
+    animation: fadeSlide 0.4s ease;
+  }
+  .processo-painel.ativo { display: block; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .processo-etapas {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .etapa {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .etapa-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--ouro);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-titulo);
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--ouro);
+    flex-shrink: 0;
+  }
+
+  .etapa h4 {
+    font-family: var(--ff-titulo);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ─── TRILHA DE EXERCÍCIOS ────────────────────── */
+  .trilha-exercicios {
+    counter-reset: exercicio;
+  }
+
+  .exercicio {
+    counter-increment: exercicio;
+    margin-bottom: 3rem;
+    padding: 2.5rem;
+    background: var(--paper);
+    border: 1px solid var(--aged);
+    position: relative;
+  }
+  .exercicio::before {
+    content: counter(exercicio, decimal-leading-zero);
+    position: absolute;
+    top: -1px; right: 2rem;
+    background: var(--vermelho);
+    color: var(--paper);
+    font-family: var(--ff-label);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .exercicio h3 {
+    font-family: var(--ff-titulo);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+  }
+
+  .exercicio p {
+    font-size: 1rem;
+    color: var(--cinza-tinta);
+    margin-bottom: 1.2rem;
+  }
+
+  .exercicio-input,
+  .exercicio-textarea {
+    width: 100%;
+    background: var(--cream);
+    border: 1px solid var(--aged);
+    border-bottom: 2px solid var(--ink);
+    padding: 0.8rem 1rem;
+    font-family: var(--ff-corpo);
+    font-size: 1.05rem;
+    color: var(--ink);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .exercicio-input:focus,
+  .exercicio-textarea:focus {
+    border-bottom-color: var(--vermelho);
+    background: var(--paper);
+  }
+
+  .exercicio-textarea { min-height: 100px; }
+
+  .btn-exercicio {
+    margin-top: 1rem;
+    padding: 0.7rem 1.8rem;
+    background: transparent;
+    border: 1px solid var(--ink);
+    font-family: var(--ff-label);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--ink);
+  }
+  .btn-exercicio:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .exercicio-resultado {
+    display: none;
+    margin-top: 1.2rem;
+    padding: 1.2rem;
+    background: rgba(201,146,42,0.08);
+    border-left: 3px solid var(--ouro);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    animation: fadeSlide 0.5s ease;
+  }
+  .exercicio-resultado.visivel { display: block; }
+
+  /* ─── FILTRO DE TÍTULO ───────────────────────── */
+  .filtro-titulo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .filtro-titulo-grid { grid-template-columns: 1fr; }
+  }
+
+  .filtro-item {
+    padding: 1.8rem;
+    background: var(--cream);
+    border: 1px solid var(--aged);
+  }
+
+  .filtro-item h4 {
+    font-family: var(--ff-titulo);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--vermelho);
+  }
+
+  .filtro-item ul {
+    list-style: none;
+    padding: 0;
+  }
+  .filtro-item ul li {
+    font-size: 0.95rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding-left: 1em;
+    position: relative;
+    color: var(--cinza-tinta);
+  }
+  .filtro-item ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--ouro);
+    font-size: 0.8em;
+  }
+
+  /* ─── GERADOR INTERATIVO ─────────────────────── */
+  .gerador {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    margin: 3rem 0;
+  }
+
+  .gerador h3 {
+    font-family: var(--ff-titulo);
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+
+  .gerador p {
+    color: var(--aged);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .gerador-campos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .gerador-campos { grid-template-columns: 1fr; }
+  }
+
+  .campo-grupo label {
+    display: block;
+    font-family: var(--ff-label);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    margin-bottom: 0.6rem;
+  }
+
+  .campo-grupo select,
+  .campo-grupo input {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: none;
+    border-bottom: 1px solid rgba(201,146,42,0.4);
+    padding: 0.7rem 0;
+    color: var(--paper);
+    font-family: var(--ff-corpo);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    cursor: pointer;
+  }
+  .campo-grupo select option { background: var(--ink); }
+  .campo-grupo select:focus,
+  .campo-grupo input:focus { border-bottom-color: var(--ouro); }
+
+  .btn-gerar {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: var(--vermelho);
+    border: none;
+    font-family: var(--ff-label);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--paper);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-gerar:hover { background: #a82a1a; }
+
+  .titulos-gerados {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .titulos-gerados { grid-template-columns: 1fr; }
+  }
+
+  .titulo-gerado-item {
+    padding: 1.2rem;
+    border: 1px solid rgba(201,146,42,0.2);
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .titulo-gerado-item:hover { border-color: var(--ouro); background: rgba(201,146,42,0.05); }
+
+  .titulo-gerado-item span.titulo-texto {
+    font-family: var(--ff-titulo);
+    font-size: 1.2rem;
+    font-style: italic;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .titulo-gerado-item span.titulo-tipo {
+    font-family: var(--ff-label);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--margem);
+  }
+
+  /* ─── TESTE DE TÍTULO ─────────────────────────── */
+  .teste-titulo {
+    margin: 3rem 0;
+  }
+
+  .teste-pergunta {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .teste-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    background: var(--cream);
+    border: 1px solid var(--aged);
+    border-left: 3px solid transparent;
+    transition: border-left-color 0.3s;
+  }
+
+  .teste-item.verde { border-left-color: #3a7a4a; }
+  .teste-item.vermelho-item { border-left-color: var(--vermelho); }
+  .teste-item.amarelo { border-left-color: var(--ouro); }
+
+  .teste-item p {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--cinza-tinta);
+  }
+
+  .teste-resposta {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .teste-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--aged);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .teste-btn:hover { background: var(--aged); }
+  .teste-btn.ativo-sim { background: #3a7a4a; border-color: #3a7a4a; color: white; }
+  .teste-btn.ativo-nao { background: var(--vermelho); border-color: var(--vermelho); color: white; }
+
+  .placar-titulo {
+    display: none;
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 1px solid var(--aged);
+    text-align: center;
+    animation: fadeSlide 0.5s ease;
+  }
+  .placar-titulo.visivel { display: block; }
+
+  .placar-numero {
+    font-family: var(--ff-titulo);
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--vermelho);
+    margin-bottom: 0.3rem;
+  }
+
+  /* ─── MANIFESTO FINAL ─────────────────────────── */
+  .manifesto-final {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .manifesto-final::before {
+    content: '"';
+    position: absolute;
+    top: -0.2em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--ff-titulo);
+    font-size: 30vw;
+    color: rgba(201,146,42,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .manifesto-final .label { color: var(--ouro); }
+
+  .manifesto-final h2 {
+    font-family: var(--ff-titulo);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.2;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+  .manifesto-final h2 em { font-style: italic; color: var(--ouro-claro); }
+
+  .manifesto-final p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--aged);
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    position: relative;
+  }
+
+  /* ─── PROGRESSO ───────────────────────────────── */
+  .barra-progresso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--vermelho);
+    z-index: 999;
+    transition: width 0.1s linear;
+    width: 0%;
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 768px) {
+    .casos-grid { grid-template-columns: 1fr; }
+    .mito-item { grid-template-columns: 50px 1fr; }
+    .mito-num { font-size: 2rem; }
+    .processo-tabs { overflow-x: auto; }
+    .processo-tab { padding: 0.8rem 1rem; }
+    .gerador { padding: 2rem 1.5rem; }
+    .exercicio { padding: 1.8rem 1.5rem; }
+    .manifesto-final { padding: 5rem 1.5rem; }
+  }
+
+  /* ─── ANIMAÇÕES DE ENTRADA ────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visivel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<nav class="ed-nav">
+  <a class="ed-brand" href="./index.html">
+    <img src="./icons/vereda-icon.svg" alt="" width="22" height="22" aria-hidden="true">
+    ESCREVARAL
+  </a>
+  <span class="ed-sep">·</span>
+  <a href="./index.html#academia">Academia</a>
+  <span class="ed-sep">·</span>
+  <span class="ed-current">O título do livro</span>
+</nav>
+
+<div class="barra-progresso" id="barraProgresso"></div>
+
+<!-- ═══ HERO ════════════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-ornamento"></div>
+  <span class="label hero-label">Escrevaral · Trilha de Escrita</span>
+  <h1>O <em>Título</em><br>do Livro</h1>
+  <p class="hero-sub">Da névoa ao nome: como escritores encontram as palavras que abrem mundos — e como você vai encontrar as suas.</p>
+  <div class="hero-scroll" onclick="document.getElementById('fundamentos').scrollIntoView({behavior:'smooth'})">
+    Começar a trilha
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── NAVEGAÇÃO DA TRILHA ─── -->
+<nav class="trilha-nav" aria-label="Trilha">
+  <div class="trilha-nav-inner">
+    <a href="#fundamentos"><span class="num">01</span> Fundamentos</a>
+    <a href="#casos"><span class="num">02</span> Estudos de Caso</a>
+    <a href="#mitos"><span class="num">03</span> Mitos & Editores</a>
+    <a href="#processo"><span class="num">04</span> Processo</a>
+    <a href="#naming"><span class="num">05</span> Naming</a>
+    <a href="#exercicios"><span class="num">06</span> Exercícios</a>
+    <a href="#teste"><span class="num">07</span> Teste seu Título</a>
+    <a href="#chegada"><span class="num">08</span> Chegada</a>
+  </div>
+</nav>
+
+<!-- ═══ 01 · FUNDAMENTOS ═════════════════════════════════════ -->
+<section id="fundamentos">
+  <div class="secao">
+    <span class="label reveal">01 — Fundamentos</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">O título não é um rótulo. É um <em>ato de linguagem</em>.</h2>
+    <p class="intro-texto reveal reveal-delay-2">Antes de qualquer coisa, é preciso entender com o quê você está lidando. Um título não nomeia passivamente — ele age. Ele promete, seduz, orienta e, às vezes, engana produtivamente.</p>
+
+    <div class="divisor reveal"></div>
+
+    <div class="manifesto-bloco reveal">
+      <p>"O título é o primeiro parágrafo do livro. Já contém o tom, o tempo, o mundo. Quem lê o título já começou a ler."</p>
+      <cite>— Reflexão da Trilha Escrevaral</cite>
+    </div>
+
+    <p class="reveal" style="margin-top:2rem;">Há três tipos de título, e todo escritor deve reconhecê-los:</p>
+
+    <div class="filtro-titulo-grid reveal" style="margin-top:1.5rem;">
+      <div class="filtro-item">
+        <h4>Título-Objeto</h4>
+        <p style="font-size:0.9rem;margin-bottom:0.8rem;color:var(--cinza-tinta);">Nomeia algo concreto que habita o livro. Parece simples. Nunca é.</p>
+        <ul>
+          <li><em>O Retrato de Dorian Gray</em></li>
+          <li><em>Moby Dick</em></li>
+          <li><em>A Pedra do Reino</em></li>
+          <li><em>O Morro dos Ventos Uivantes</em></li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Título-Gesto</h4>
+        <p style="font-size:0.9rem;margin-bottom:0.8rem;color:var(--cinza-tinta);">Captura uma ação, um movimento. Coloca o leitor em movimento antes de abrir a página.</p>
+        <ul>
+          <li><em>Cem Anos de Solidão</em></li>
+          <li><em>Ensaio sobre a Cegueira</em></li>
+          <li><em>Esperando Godot</em></li>
+          <li><em>Fogo Pálido</em></li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Título-Fratura</h4>
+        <p style="font-size:0.9rem;margin-bottom:0.8rem;color:var(--cinza-tinta);">Cria uma estranheza. Uma fratura na língua que obriga o leitor a parar e pensar.</p>
+        <ul>
+          <li><em>As Intermitências da Morte</em></li>
+          <li><em>A Hora da Estrela</em></li>
+          <li><em>Grande Sertão: Veredas</em></li>
+          <li><em>O Inferno é Aqui Mesmo</em></li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Título-Persona</h4>
+        <p style="font-size:0.9rem;margin-bottom:0.8rem;color:var(--cinza-tinta);">Um nome próprio que carrega um universo. O título é o personagem.</p>
+        <ul>
+          <li><em>Anna Karênina</em></li>
+          <li><em>Macunaíma</em></li>
+          <li><em>Dom Quixote</em></li>
+          <li><em>Madame Bovary</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="manifesto-bloco reveal" style="margin-top:3rem;">
+      <p>"Um título que você precisa explicar para o seu livro funcionar ainda não chegou ao título certo."</p>
+      <cite>— Princípio da Trilha</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 · ESTUDOS DE CASO ════════════════════════════════ -->
+<section id="casos" class="secao-escura">
+  <div class="secao-ampla">
+    <span class="label reveal">02 — Estudos de Caso</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">Os títulos que todo<br>escritor precisa <em>dissecar</em>.</h2>
+    <p class="intro-texto reveal reveal-delay-2">Clique em cada caso para ver a anatomia do título — o que funciona, por quê funciona, e o que ele ensina sobre naming literário.</p>
+
+    <div class="casos-grid reveal">
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">01</div>
+        <div class="caso-titulo-livro">Cem Anos de Solidão</div>
+        <div class="caso-autor">Gabriel García Márquez, 1967</div>
+        <p class="caso-texto">Um número impossível abraçado por um estado de alma. A matemática do épico com a textura do íntimo.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">García Márquez precisou do título antes de começar. Ele conta que parou o carro na estrada quando as palavras chegaram. O título resolve uma contradição: "cem anos" é concreto, épico, histórico; "solidão" é interno, emocional, abstrato. Essa tensão é o romance inteiro. O título não descreve — ele <em>encarna</em>.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Dois substantivos em tensão valem mais que uma frase descritiva. Procure a contradição produtiva dentro da sua história.</p>
+        </div>
+        <span class="caso-tag">Tensão Substantiva</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">02</div>
+        <div class="caso-titulo-livro">A Hora da Estrela</div>
+        <div class="caso-autor">Clarice Lispector, 1977</div>
+        <p class="caso-texto">Um título que promete grandeza para o que poderia ser visto como pequenez. Clarice inverte a hierarquia do mundo.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">O livro tem treze títulos alternativos na abertura — Clarice os lista todos. É um gesto de honestidade: o título é uma escolha, não uma verdade absoluta. "A hora da estrela" é ao mesmo tempo banal (um show, um momento de brilho) e sagrado (a morte como consagração). Macabéa, a nordestina invisível, tem a sua hora.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Faça uma lista de 13 títulos. Todos errados ensinam onde está o certo.</p>
+        </div>
+        <span class="caso-tag">Ironia Sagrada</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">03</div>
+        <div class="caso-titulo-livro">Grande Sertão: Veredas</div>
+        <div class="caso-autor">João Guimarães Rosa, 1956</div>
+        <p class="caso-texto">A pontuação que divide o título é ela mesma o livro: o abismo entre o grande e o miúdo, o épico e o cotidiano.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">O dois-pontos não separa — une em tensão. "Grande Sertão" é o absoluto, o inferno, a ontologia. "Veredas" são os caminhos d'água, o miúdo, o concreto. A pontuação é filosófica. Guimarães Rosa sabia que o título era uma sintaxe, não uma semântica — a forma carrega o sentido tanto quanto as palavras.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> A pontuação e a forma gráfica do título são parte do título. Experimente barras, dois-pontos, reticências.</p>
+        </div>
+        <span class="caso-tag">Sintaxe como Sentido</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">04</div>
+        <div class="caso-titulo-livro">1984</div>
+        <div class="caso-autor">George Orwell, 1949</div>
+        <p class="caso-texto">Um ano. Apenas um ano. E ainda assim, após a publicação, o título contaminou para sempre a palavra "futuro".</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">Orwell escrevia em 1948 e simplesmente inverteu os últimos dígitos. Um título encontrado por jogo. Mas o número funciona porque é concreto o suficiente para parecer iminente e abstrato o suficiente para ser qualquer ano. Títulos numerais têm um poder especial: parecem objetivos mas são fantasmas.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Datas, números e medidas podem ser títulos potentes. A objetividade pode ser a mais perfeita das ficções.</p>
+        </div>
+        <span class="caso-tag">Objetividade Fantasma</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">05</div>
+        <div class="caso-titulo-livro">O Mestre e Margarida</div>
+        <div class="caso-autor">Mikhail Bulgakov, c. 1940</div>
+        <p class="caso-texto">Um título que chegou por último — o livro foi escrito e reescrito por mais de dez anos com outros nomes antes deste.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">Bulgakov tentou nomes como "O Mago de Casco de Cabra", "O Grande Chanceler", "O Engenheiro com Casco". O título final chegou quando o escritor percebeu que a história era, no fundo, sobre dois amores — o do Mestre pelo seu livro, e o de Margarida pelo Mestre. O título revela a estrutura emocional, não o enredo.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Às vezes o título revela a estrutura emocional do livro, não a narrativa. Pergunte: qual é o vínculo que sustenta tudo?</p>
+        </div>
+        <span class="caso-tag">Estrutura Emocional</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">06</div>
+        <div class="caso-titulo-livro">As Intermitências da Morte</div>
+        <div class="caso-autor">José Saramago, 2005</div>
+        <p class="caso-texto">Um substantivo que não deveria existir com um adjetivo que o torna improvável. Saramago força o impossível a parecer categórico.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">"Intermitências" é uma palavra técnica, quase clínica — interrupções com regularidade. Aplicada à morte, que é por definição definitiva, cria um oxímoro perfeito. O título chega com a autoridade de um diagnóstico médico, mas descreve algo sobrenatural. Essa frieza é a estratégia de Saramago para tornar o absurdo palatável.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Linguagem técnica ou científica aplicada ao emocional ou sobrenatural cria uma estranheza produtiva e memorável.</p>
+        </div>
+        <span class="caso-tag">Vocabulário Transplantado</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">07</div>
+        <div class="caso-titulo-livro">Beloved</div>
+        <div class="caso-autor">Toni Morrison, 1987</div>
+        <p class="caso-texto">Uma única palavra. Um adjetivo usado como nome. Uma tumba que é também um chamado.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">A palavra "Beloved" vem da inscrição na lápide de uma criança assassinada pela própria mãe para livrá-la da escravidão. É a palavra com que sepultamos aqueles que amamos: "Amada". Morrison transforma um epíteto funerário em nome, em personagem, em assombração. O título funciona porque é ao mesmo tempo o nome do fantasma e o gesto de amor que o gerou.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> Uma única palavra com carga semântica múltipla pode fazer o trabalho de uma frase inteira. Busque a palavra que carrega mais do que uma função.</p>
+        </div>
+        <span class="caso-tag">Monossilabo Carregado</span>
+      </div>
+
+      <div class="caso-card" onclick="toggleCaso(this)">
+        <div class="caso-numero">08</div>
+        <div class="caso-titulo-livro">Memórias Póstumas de Brás Cubas</div>
+        <div class="caso-autor">Machado de Assis, 1881</div>
+        <p class="caso-texto">Um título que já contém o paradoxo central do livro: um morto que lembra. A ironia está no nome, antes da primeira página.</p>
+        <div class="caso-detalhe">
+          <p style="font-size:0.95rem;line-height:1.7;color:var(--cinza-tinta);">Como pode alguém deixar memórias após a morte? O adjetivo "póstumas" modifica "memórias" de modo impossível — a não ser que o narrador escreva do além. Machado entrega o gênero (memórias), o tempo (póstumo), e o narrador (nome próprio completo, sugerindo um certo da sociedade) em um único título. É uma equação completa.</p>
+          <p style="font-size:0.95rem;margin-top:0.8rem;line-height:1.7;color:var(--cinza-tinta);"><strong>Lição:</strong> O gênero pode fazer parte do título — e subvertê-lo. "Memórias de..." é um clichê; "Memórias Póstumas de..." é a subversão desse clichê.</p>
+        </div>
+        <span class="caso-tag">Subversão de Gênero</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 · MITOS & EDITORES ════════════════════════════════ -->
+<section id="mitos" class="secao-ink">
+  <div class="secao">
+    <span class="label">03 — Mitos & Editores</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">O que eles dizem —<br>e o que é <em>verdade</em>.</h2>
+    <p class="intro-texto reveal reveal-delay-2" style="color:var(--aged);">Há um conjunto de "regras" sobre títulos que circula em oficinas literárias e reuniões editoriais. Algumas têm fundamento. Muitas são superstições vestidas de sabedoria.</p>
+
+    <div class="mito-lista">
+
+      <div class="mito-item reveal">
+        <div class="mito-num">M1</div>
+        <div class="mito-conteudo">
+          <h3>"Título curto é melhor."</h3>
+          <p style="color:var(--aged);">Há pressão real por títulos de uma ou duas palavras — mais fáceis de memorizar, de colocar em spines de livros, de tweetar. <span class="mito-verdade">Mas a lógica confunde facilidade comercial com qualidade literária.</span> "As Aventuras de Augie March", "A Consciência de Zeno", "O Fazedor de Velhos" — títulos longos podem ser os mais precisos. A questão não é tamanho: é se cada palavra tem função.</p>
+        </div>
+      </div>
+
+      <div class="mito-item reveal">
+        <div class="mito-num">M2</div>
+        <div class="mito-conteudo">
+          <h3>"O título precisa deixar claro o que é o livro."</h3>
+          <p style="color:var(--aged);">Editores comerciais adoram este: "o leitor precisa saber o que vai comprar". <span class="mito-verdade">Mas os títulos mais poderosos criam curiosidade, não clareza.</span> "Lolita" não explica nada. "Beloved" não explica nada. "Vidas Secas" entrega muito — porque para aquele livro, a austeridade do título é a própria estética. A pergunta certa não é "está claro?" mas "está vivo?"</p>
+        </div>
+      </div>
+
+      <div class="mito-item reveal">
+        <div class="mito-num">M3</div>
+        <div class="mito-conteudo">
+          <h3>"O editor vai mudar de qualquer forma."</h3>
+          <p style="color:var(--aged);">Às vezes isso acontece. Mas essa crença leva o escritor a se desengajar do próprio título — tratá-lo como provisório, encontrável depois. <span class="mito-verdade">O título que você entrega comunica o livro que você acha que escreveu.</span> Um título fraco sugere que o escritor ainda não compreendeu sua própria obra. O processo de encontrar o título certo é, em si, um ato de compreensão.</p>
+        </div>
+      </div>
+
+      <div class="mito-item reveal">
+        <div class="mito-num">M4</div>
+        <div class="mito-conteudo">
+          <h3>"Pesquise o que vende e escolha algo parecido."</h3>
+          <p style="color:var(--aged);">Esse conselho é dado com boas intenções. <span class="mito-verdade">Mas imitar a estética de título do momento é assinar um passaporte para a datação precoce.</span> Livros que existirão por décadas precisam de títulos com vida própria, não de títulos alugados de um contexto de mercado. Análise de mercado informa; não deve dictar.</p>
+        </div>
+      </div>
+
+      <div class="mito-item reveal">
+        <div class="mito-num">M5</div>
+        <div class="mito-conteudo">
+          <h3>"Pergunte para todo mundo e escolha o mais votado."</h3>
+          <p style="color:var(--aged);">A democracia do título produz títulos médios. <span class="mito-verdade">O título certo para o seu livro é o que ressoa com o seu senso de verdade sobre o que escreveu — não o que agrada ao maior número de pessoas na primeira audição.</span> Consulte leitores de confiança (um ou dois, no máximo). Ouça. Depois decida sozinho. O título é sua assinatura.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="manifesto-bloco reveal" style="margin-top:3rem;background:rgba(201,146,42,0.06);border-color:var(--ouro);">
+      <p style="color:var(--paper);">"Quando você precisar justificar seu título com mais de uma frase para um editor, o problema não é o editor. O título ainda não chegou no lugar certo."</p>
+      <cite style="color:var(--margem);">— Princípio da Trilha Escrevaral</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 · PROCESSO ════════════════════════════════════════ -->
+<section id="processo">
+  <div class="secao">
+    <span class="label reveal">04 — Processo</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">Primeiro o título,<br>ou <em>primeiro o texto</em>?</h2>
+    <p class="intro-texto reveal reveal-delay-2">Não existe uma resposta certa. Existem três modos de trabalho — e cada escritor precisa reconhecer o seu.</p>
+
+    <div class="processo-container reveal">
+      <div class="processo-tabs">
+        <button class="processo-tab ativo" onclick="mudarTab(this,'tab-titulo-primeiro')">Título Primeiro</button>
+        <button class="processo-tab" onclick="mudarTab(this,'tab-texto-primeiro')">Texto Primeiro</button>
+        <button class="processo-tab" onclick="mudarTab(this,'tab-simultaneo')">Simultâneo</button>
+      </div>
+
+      <div id="tab-titulo-primeiro" class="processo-painel ativo">
+        <div class="processo-etapas">
+          <div class="etapa">
+            <div class="etapa-icon">T</div>
+            <div>
+              <h4>O título como bússola</h4>
+              <p style="color:var(--cinza-tinta);">Para alguns escritores, o título chega primeiro e funciona como uma bússola — orienta cada decisão de escrita. García Márquez, Hemingway e Guimarães Rosa trabalharam frequentemente desta forma. O título é um horizonte que o texto persegue.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">⚑</div>
+            <div>
+              <h4>Riscos e vantagens</h4>
+              <p style="color:var(--cinza-tinta);"><strong>Vantagem:</strong> Coerência tonal e estética desde o início. O título filtra o que entra e o que sai do livro. <strong>Risco:</strong> Apego excessivo ao título pode tornar o texto rígido, impedindo que ele evolua para onde precisa ir.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">✦</div>
+            <div>
+              <h4>Como saber se é seu modo</h4>
+              <p style="color:var(--cinza-tinta);">Se você frequentemente sabe o título antes de saber a história completa; se o título te "acende" para escrever; se você testa ideias de livro por seus possíveis títulos — você provavelmente é um escritor de título-primeiro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-texto-primeiro" class="processo-painel">
+        <div class="processo-etapas">
+          <div class="etapa">
+            <div class="etapa-icon">T</div>
+            <div>
+              <h4>O título como destilação</h4>
+              <p style="color:var(--cinza-tinta);">Aqui o texto é escrito com um título provisório ou mesmo sem título. Ao terminar (ou quase terminar), o escritor destila o que o livro se revelou ser. O título não guia — ele nomeia o que já existe. Clarice Lispector e muitos escritores de processo trabalham assim.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">⚑</div>
+            <div>
+              <h4>Riscos e vantagens</h4>
+              <p style="color:var(--cinza-tinta);"><strong>Vantagem:</strong> O título é fiel ao livro real, não ao livro imaginado. Tem precisão. <strong>Risco:</strong> Escritores neste modo frequentemente se agarram a títulos provisórios ruins por tempo demais e, ao final, ficam tão dentro do livro que perdem a distância necessária para nomear bem.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">✦</div>
+            <div>
+              <h4>A técnica da gaveta</h4>
+              <p style="color:var(--cinza-tinta);">Termine o rascunho. Guarde. Espere duas semanas. Abra e escreva uma única frase respondendo: "Este livro é sobre o quê, no fundo?" A resposta a essa pergunta é frequentemente o título.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-simultaneo" class="processo-painel">
+        <div class="processo-etapas">
+          <div class="etapa">
+            <div class="etapa-icon">T</div>
+            <div>
+              <h4>O título que cresce com o livro</h4>
+              <p style="color:var(--cinza-tinta);">Um terceiro modo: o título começa com uma hipótese de trabalho e vai sendo refinado em paralelo com a escrita. A cada novo capítulo, o escritor volta ao título e pergunta: "ainda é esse?" Este modo exige mais disciplina mas produz uma coerência muito orgânica.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">⚑</div>
+            <div>
+              <h4>O diário de títulos</h4>
+              <p style="color:var(--cinza-tinta);">Mantenha uma lista separada de possíveis títulos ao longo da escrita. Data cada um. Ao final, você terá um diário de como a sua compreensão do próprio livro evoluiu. O melhor título muitas vezes não é o último — é o que captura o momento de maior clareza.</p>
+            </div>
+          </div>
+          <div class="etapa">
+            <div class="etapa-icon">✦</div>
+            <div>
+              <h4>O sinal de chegada</h4>
+              <p style="color:var(--cinza-tinta);">Em qualquer modo, o título certo produz um sinal físico reconhecível: uma espécie de assentamento. Não é euforia — é reconhecimento. Como ver alguém que você esperava e que finalmente chegou. Quando esse sinal não vem, o título ainda não chegou.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 · NAMING ══════════════════════════════════════════ -->
+<section id="naming" class="secao-escura">
+  <div class="secao">
+    <span class="label reveal">05 — Naming</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">A arte e a técnica<br>de <em>nomear</em>.</h2>
+    <p class="intro-texto reveal reveal-delay-2">Naming é uma disciplina que vem do branding e da linguística, mas que escritores precisam dominar à sua maneira. Não para seguir fórmulas — para conhecer os mecanismos que fazem um nome funcionar.</p>
+
+    <div class="divisor reveal"></div>
+
+    <div class="filtro-titulo-grid reveal">
+      <div class="filtro-item">
+        <h4>Sonoridade</h4>
+        <ul>
+          <li>Aliteração cria musicalidade e memória</li>
+          <li>Ritmo de sílabas importa tanto quanto sentido</li>
+          <li>Diga o título em voz alta — 10 vezes</li>
+          <li>Grave a si mesmo dizendo o título</li>
+          <li>Ele soa bem em outro idioma?</li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Semântica</h4>
+        <ul>
+          <li>Quantos sentidos a palavra carrega?</li>
+          <li>Há ambiguidade produtiva?</li>
+          <li>O título tem sentido literal e metafórico?</li>
+          <li>A polissemia amplia ou confunde?</li>
+          <li>Qual campo semântico ativa?</li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Originalidade</h4>
+        <ul>
+          <li>Existe outro livro com este título?</li>
+          <li>É uma frase já usada em outros contextos?</li>
+          <li>Parece derivado de outro título famoso?</li>
+          <li>Vai envelhecer bem em 20 anos?</li>
+          <li>Resiste ao contexto cultural do momento?</li>
+        </ul>
+      </div>
+      <div class="filtro-item">
+        <h4>Identidade autoral</h4>
+        <ul>
+          <li>Soa como você — ou como outra voz?</li>
+          <li>Pertence ao universo do seu livro?</li>
+          <li>Poderia ser título de outro livro seu?</li>
+          <li>Revela algo sobre como você pensa?</li>
+          <li>Você se sentiria orgulhoso ao dizer em público?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="manifesto-bloco reveal" style="margin-top:3rem;">
+      <p>"O título perfeito não é aquele que mais pessoas aprovam. É aquele que faz você, o autor, sentir que finalmente disse a coisa certa sobre o livro que escreveu."</p>
+      <cite>— Trilha Escrevaral · Módulo de Naming</cite>
+    </div>
+
+    <!-- GERADOR INTERATIVO -->
+    <div class="gerador reveal" style="margin-top:3rem;">
+      <h3>Laboratório de Títulos</h3>
+      <p>Preencha os campos abaixo e explore combinações de títulos para o seu livro. Use como ponto de partida — não como resposta final.</p>
+      <div class="gerador-campos">
+        <div class="campo-grupo">
+          <label>Palavra central do seu livro</label>
+          <input type="text" id="palavraCentral" placeholder="ex: ausência, fronteira, espelho...">
+        </div>
+        <div class="campo-grupo">
+          <label>Emoção dominante</label>
+          <select id="emocao">
+            <option value="">Escolha...</option>
+            <option value="nostalgia">Nostalgia</option>
+            <option value="medo">Medo / Tensão</option>
+            <option value="amor">Amor / Desejo</option>
+            <option value="raiva">Raiva / Resistência</option>
+            <option value="perda">Perda / Luto</option>
+            <option value="esperanca">Esperança / Transformação</option>
+            <option value="ironia">Ironia / Absurdo</option>
+          </select>
+        </div>
+        <div class="campo-grupo">
+          <label>Tempo da narrativa</label>
+          <select id="tempo">
+            <option value="">Escolha...</option>
+            <option value="passado">Passado / Memória</option>
+            <option value="presente">Presente Urgente</option>
+            <option value="futuro">Futuro / Projeção</option>
+            <option value="atemporal">Atemporal / Mítico</option>
+          </select>
+        </div>
+        <div class="campo-grupo">
+          <label>Estrutura preferida</label>
+          <select id="estrutura">
+            <option value="">Escolha...</option>
+            <option value="objeto">Objeto / Substantivo só</option>
+            <option value="sintagma">Sintagma nominal</option>
+            <option value="frases">Frase com verbo</option>
+            <option value="nome">Nome próprio</option>
+            <option value="numero">Número / Data</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-gerar" onclick="gerarTitulos()">✦ Gerar Combinações de Título</button>
+      <div class="titulos-gerados" id="titulosGerados"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06 · EXERCÍCIOS ══════════════════════════════════════ -->
+<section id="exercicios">
+  <div class="secao">
+    <span class="label reveal">06 — Exercícios</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">A trilha prática:<br><em>seis exercícios</em> para chegar ao seu título.</h2>
+    <p class="intro-texto reveal reveal-delay-2">Estes exercícios não são opcionais. São o caminho. Faça-os em ordem, com o seu livro em mente.</p>
+
+    <div class="trilha-exercicios" style="margin-top:3rem;">
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>A Frase do Leigo</h3>
+        <p>Imagine que você encontra alguém num ônibus que nunca leu literatura. Você tem 15 segundos para descrever o seu livro. O que você diz? Escreva abaixo essa frase espontânea — sem pensar demais.</p>
+        <textarea class="exercicio-textarea" id="ex1" placeholder="Meu livro é sobre..."></textarea>
+        <button class="btn-exercicio" onclick="revelarEx('resultado1', 'ex1', 'frase')">Analisar minha frase</button>
+        <div class="exercicio-resultado" id="resultado1">
+          <strong>O que sua frase revela:</strong><br>
+          A frase que você escreveu instintivamente provavelmente contém o núcleo do seu título. Grife as 2-3 palavras mais carregadas emocionalmente nessa frase. Agora experimente montar um título apenas com elas — sem o resto. O que sobrou quando você tirou o contexto?
+        </div>
+      </div>
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>Os Treze Títulos de Clarice</h3>
+        <p>Escreva 13 títulos possíveis para o seu livro. Sem filtro. O ridículo, o grandioso, o técnico, o poético, o comercial — todos cabem. Só não pode repetir estrutura.</p>
+        <textarea class="exercicio-textarea" id="ex2" placeholder="1.&#10;2.&#10;3.&#10;4.&#10;5.&#10;6.&#10;7.&#10;8.&#10;9.&#10;10.&#10;11.&#10;12.&#10;13." style="min-height:220px;"></textarea>
+        <button class="btn-exercicio" onclick="revelarEx('resultado2', 'ex2', 'treze')">Ver orientação</button>
+        <div class="exercicio-resultado" id="resultado2">
+          <strong>O que fazer com os treze:</strong><br>
+          Elimine os primeiros 5 — são os mais óbvios. Dos 8 restantes, elimine os que parecem "tentar ser literários". Dos que sobram, qual você contaria a um amigo sem vergonha? Esse é o mais honesto. Qual você nunca diria em voz alta? Esse pode ser o mais verdadeiro.
+        </div>
+      </div>
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>A Palavra Proibida</h3>
+        <p>Qual é a palavra que melhor descreve o seu livro — e que por isso mesmo você nunca colocaria no título porque "seria óbvio demais"? Escreva ela.</p>
+        <input type="text" class="exercicio-input" id="ex3" placeholder="A palavra proibida é...">
+        <button class="btn-exercicio" onclick="revelarEx('resultado3', 'ex3', 'proibida')">Ver por que ela importa</button>
+        <div class="exercicio-resultado" id="resultado3">
+          <strong>A lição da palavra proibida:</strong><br>
+          Essa palavra que você evitou pode ser exatamente o que o título precisa — especialmente se você a deformar, deslocar, ou colocar em um contexto inesperado. "Saudade" parece óbvio como título? E "A Anatomia da Saudade"? E "Saudade, Substantivo Masculino"? A proibição geralmente marca onde está o núcleo real.
+        </div>
+      </div>
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>A Última Cena</h3>
+        <p>Escreva a última cena do seu livro em uma única frase — sem revelar o que acontece, mas capturando a atmosfera final. Qual imagem ou sensação fica?</p>
+        <textarea class="exercicio-textarea" id="ex4" placeholder="A última atmosfera do livro é..."></textarea>
+        <button class="btn-exercicio" onclick="revelarEx('resultado4', 'ex4', 'cena')">Extrair título da cena</button>
+        <div class="exercicio-resultado" id="resultado4">
+          <strong>Do final ao título:</strong><br>
+          Muitos dos melhores títulos vêm do final — não do enredo, mas da tonalidade emocional do encerramento. O que o leitor sente quando fecha o livro? Se você conseguiu capturar isso em uma frase, olhe para as palavras centrais dessa frase. Frequentemente, o título do livro está na última sensação que ele produz.
+        </div>
+      </div>
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>O Anti-Título</h3>
+        <p>Escreva o pior título possível para o seu livro — o mais descritivo, mais explicativo, mais sem graça que você conseguir imaginar.</p>
+        <input type="text" class="exercicio-input" id="ex5" placeholder="O pior título possível seria...">
+        <button class="btn-exercicio" onclick="revelarEx('resultado5', 'ex5', 'anti')">Aprender com o fracasso</button>
+        <div class="exercicio-resultado" id="resultado5">
+          <strong>O que o anti-título revela:</strong><br>
+          O anti-título perfeito geralmente segue a estrutura: "A história de [personagem] que [enredo] e aprende que [moral]". Ao identificar o que você quer evitar, você ilumina o que busca: menos explicação, mais evocação; menos enredo, mais estado de alma; menos descrição, mais questão. O anti-título é o mapa negativo do título certo.
+        </div>
+      </div>
+
+      <div class="exercicio reveal">
+        <span class="label">Exercício</span>
+        <h3>O Teste da Voz Alta</h3>
+        <p>Você chegou a um candidato a título. Escreva-o abaixo, então leia em voz alta para uma parede — não para uma pessoa. O que sente?</p>
+        <input type="text" class="exercicio-input" id="ex6" placeholder="Meu título candidato é...">
+        <button class="btn-exercicio" onclick="revelarEx('resultado6', 'ex6', 'voz')">Ver os sinais a observar</button>
+        <div class="exercicio-resultado" id="resultado6">
+          <strong>Os sinais corporais do título certo:</strong><br>
+          Ao dizer o título em voz alta, observe: <br>— Você hesita em alguma sílaba? (pode ser tropeço sonoro) <br>— Você acelera ou desacelera naturalmente? (o ritmo está informando)<br>— Sua voz vai para cima ou para baixo ao final? (a entonação natural revela se é pergunta, afirmação ou mistério)<br>— Você sente vontade de dizer de novo? (esse é o sinal mais confiável de que chegou).
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 · TESTE SEU TÍTULO ════════════════════════════════ -->
+<section id="teste" class="secao-escura">
+  <div class="secao">
+    <span class="label reveal">07 — Teste seu Título</span>
+    <h2 class="titulo-secao reveal reveal-delay-1">Você tem um título?<br><em>Submetai-o ao fogo</em>.</h2>
+    <p class="intro-texto reveal reveal-delay-2">Antes de declarar que chegou ao título, passe-o por estas perguntas. Responda com honestidade — o objetivo não é aprovar, é revelar.</p>
+
+    <div class="teste-titulo reveal" style="margin-top:2.5rem;">
+      <p style="font-family:var(--ff-label);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--margem);margin-bottom:1.5rem;">Marque ✓ para sim e ✗ para não</p>
+      <div class="teste-pergunta" id="testePergunta">
+
+        <div class="teste-item" data-pontos="1">
+          <p>Quando você diz o título em voz alta, sente que ele pertence ao livro — não que foi "escolhido" para ele?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>O título funcionaria mesmo se a capa fosse completamente genérica — ou seja, ele carrega peso por si mesmo?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>Você consegue imaginar esse título em uma frase sobre o livro, sem que ele pareça forçado ou colado de fora?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>O título pode ser lido de mais de uma forma — ou tem pelo menos dois planos de sentido?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>Se você escrevesse outro livro muito diferente, esse título <em>não</em> serviria para ele — é específico demais?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>Você escolheu esse título de forma ativa — não porque não encontrou nada melhor?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>Ao ler o último parágrafo do seu livro e depois o título, eles parecem parte da mesma obra?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+        <div class="teste-item" data-pontos="1">
+          <p>Você ficaria confortável em defender esse título publicamente, sem pedir desculpas por ele?</p>
+          <div class="teste-resposta">
+            <button class="teste-btn" onclick="responderTeste(this, true)">✓</button>
+            <button class="teste-btn" onclick="responderTeste(this, false)">✗</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="placar-titulo" id="placarTitulo">
+        <div class="placar-numero" id="placarNumero">0/8</div>
+        <p id="placarTexto" style="font-family:var(--ff-titulo);font-size:1.3rem;font-style:italic;margin-top:0.5rem;"></p>
+        <p id="placarDetalhe" style="font-size:0.95rem;color:var(--cinza-tinta);margin-top:1rem;max-width:500px;margin-left:auto;margin-right:auto;"></p>
+      </div>
+      <button class="btn-exercicio reveal" onclick="calcularPlacar()" style="margin-top:2rem;">Calcular meu resultado</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 · CHEGADA ═════════════════════════════════════════ -->
+<section id="chegada" class="manifesto-final">
+  <div style="position:relative;z-index:1;">
+    <span class="label">08 — Chegada</span>
+    <h2>Você não precisa de<br>permissão para <em>nomear</em><br>o que escreveu.</h2>
+    <p>A insegurança sobre o título é, muitas vezes, insegurança sobre o próprio livro. Quando o livro está claro para você — quando você sabe o que ele faz no mundo — o título chega.</p>
+    <p>Nenhum editor, nenhuma pesquisa de mercado, nenhum grupo focal vai encontrar o título do seu livro. Essas ferramentas podem validar. Apenas você pode descobrir.</p>
+    <div class="divisor" style="margin:3rem auto;background:var(--ouro);"></div>
+    <p style="font-family:var(--ff-titulo);font-size:1.4rem;font-style:italic;color:var(--paper);line-height:1.6;max-width:500px;margin:0 auto;">O escritor que sabe o nome do livro que escreveu sabe, no fundo, o que foi fazer ali. E isso é tudo.</p>
+    <p style="margin-top:3rem;font-family:var(--ff-label);font-size:0.65rem;letter-spacing:0.25em;color:var(--margem);">ESCREVARAL · TRILHA: O TÍTULO DO LIVRO</p>
+  </div>
+</section>
+
+<script>
+// ─── PROGRESSO ──────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+  document.getElementById('barraProgresso').style.width = pct + '%';
+});
+
+// ─── REVEAL ON SCROLL ───────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visivel');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+// ─── NAV ATIVO ──────────────────────────────────────────────
+const secoes = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.trilha-nav a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('ativo', a.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+secoes.forEach(s => navObserver.observe(s));
+
+// ─── CASOS TOGGLE ───────────────────────────────────────────
+function toggleCaso(card) {
+  const eraExpandido = card.classList.contains('expandido');
+  document.querySelectorAll('.caso-card').forEach(c => c.classList.remove('expandido'));
+  if (!eraExpandido) card.classList.add('expandido');
+}
+
+// ─── PROCESSO TABS ──────────────────────────────────────────
+function mudarTab(btn, painelId) {
+  document.querySelectorAll('.processo-tab').forEach(t => t.classList.remove('ativo'));
+  document.querySelectorAll('.processo-painel').forEach(p => p.classList.remove('ativo'));
+  btn.classList.add('ativo');
+  document.getElementById(painelId).classList.add('ativo');
+}
+
+// ─── EXERCÍCIOS REVEAL ──────────────────────────────────────
+function revelarEx(resultadoId, inputId, tipo) {
+  const el = document.getElementById(resultadoId);
+  el.classList.add('visivel');
+}
+
+// ─── GERADOR DE TÍTULOS ─────────────────────────────────────
+function gerarTitulos() {
+  const palavra = document.getElementById('palavraCentral').value.trim() || 'silêncio';
+  const emocao = document.getElementById('emocao').value;
+  const tempo = document.getElementById('tempo').value;
+  const estrutura = document.getElementById('estrutura').value;
+
+  const complementosTempo = {
+    passado: ['do que ficou', 'que o tempo guarda', 'das origens', 'de antes'],
+    presente: ['que não espera', 'urgente', 'desta hora', 'iminente'],
+    futuro: ['por vir', 'que ainda não tem nome', 'prometido', 'possível'],
+    atemporal: ['sem data', 'eterno', 'de todos os tempos', 'que nunca foi novo']
+  };
+
+  const prefixosEmocao = {
+    nostalgia: ['A geometria de', 'O peso de', 'As ruínas de', 'O perfume de'],
+    medo: ['À beira de', 'O lado escuro de', 'A sombra de', 'Antes de'],
+    amor: ['A forma de', 'O nome de', 'A anatomia de', 'A impossível'],
+    raiva: ['Contra', 'A resistência de', 'O fim de', 'Depois de'],
+    perda: ['O que restou de', 'A ausência de', 'Quando acabou', 'Sem'],
+    esperanca: ['O que ainda', 'A promessa de', 'Apesar de', 'Depois do'],
+    ironia: ['Pequeno manual de', 'Breve história de', 'Notas sobre', 'Elogio do']
+  };
+
+  const combos = [
+    // Estrutura 1: Prefixo + palavra
+    {
+      texto: ((prefixosEmocao[emocao] || prefixosEmocao.nostalgia)[0]) + ' ' + palavra,
+      tipo: 'Sintagma nominal'
+    },
+    // Estrutura 2: A [palavra] + complemento tempo
+    {
+      texto: 'A ' + palavra + ' ' + ((complementosTempo[tempo] || complementosTempo.passado)[0]),
+      tipo: 'Com âncora temporal'
+    },
+    // Estrutura 3: Palavra isolada transformada
+    {
+      texto: palavra.charAt(0).toUpperCase() + palavra.slice(1),
+      tipo: 'Palavra única'
+    },
+    // Estrutura 4: Os/As [palavra]s
+    {
+      texto: 'As ' + palavra + 's',
+      tipo: 'Plural poético'
+    },
+    // Estrutura 5: Substantivo + da/do [palavra]
+    {
+      texto: 'O livro ' + ((complementosTempo[tempo] || complementosTempo.passado)[1]) + ' de ' + palavra,
+      tipo: 'Metaliterário'
+    },
+    // Estrutura 6: Como + verbo + [palavra]
+    {
+      texto: 'Como aprender a ' + palavra,
+      tipo: 'Instrucional invertido'
+    }
+  ];
+
+  const container = document.getElementById('titulosGerados');
+  container.innerHTML = '';
+  combos.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'titulo-gerado-item';
+    div.innerHTML = `<span class="titulo-texto">${c.texto}</span><span class="titulo-tipo">${c.tipo}</span>`;
+    container.appendChild(div);
+  });
+}
+
+// ─── TESTE DE TÍTULO ─────────────────────────────────────────
+let respostas = {};
+function responderTeste(btn, sim) {
+  const item = btn.closest('.teste-item');
+  const botoes = item.querySelectorAll('.teste-btn');
+  botoes.forEach(b => { b.classList.remove('ativo-sim', 'ativo-nao'); });
+  if (sim) {
+    btn.classList.add('ativo-sim');
+    item.classList.add('verde');
+    item.classList.remove('vermelho-item');
+  } else {
+    btn.classList.add('ativo-nao');
+    item.classList.add('vermelho-item');
+    item.classList.remove('verde');
+  }
+  const idx = Array.from(document.querySelectorAll('.teste-item')).indexOf(item);
+  respostas[idx] = sim;
+}
+
+function calcularPlacar() {
+  const total = document.querySelectorAll('.teste-item').length;
+  const sim = Object.values(respostas).filter(Boolean).length;
+  const placar = document.getElementById('placarTitulo');
+  const num = document.getElementById('placarNumero');
+  const texto = document.getElementById('placarTexto');
+  const detalhe = document.getElementById('placarDetalhe');
+
+  num.textContent = sim + '/' + total;
+
+  if (sim >= 7) {
+    num.style.color = '#3a7a4a';
+    texto.textContent = 'O título chegou.';
+    detalhe.textContent = 'Você respondeu com clareza e honestidade. O título que você tem é o seu. Confie nele. Defenda-o.';
+  } else if (sim >= 5) {
+    num.style.color = 'var(--ouro)';
+    texto.textContent = 'Está quase lá.';
+    detalhe.textContent = 'O título tem substância, mas ainda há pontos de atrito. Volte aos exercícios e trabalhe especificamente as perguntas onde você respondeu "não". O título certo está próximo.';
+  } else if (sim >= 3) {
+    num.style.color = 'var(--vermelho)';
+    texto.textContent = 'O livro ainda não tem nome.';
+    detalhe.textContent = 'Não é uma falha — é um diagnóstico. O título atual é um placeholder. Volte aos exercícios, especialmente "Os Treze Títulos de Clarice" e "A Palavra Proibida". O título certo existe. Você ainda não o encontrou.';
+  } else {
+    num.style.color = 'var(--vermelho)';
+    texto.textContent = 'Recomeçar do início.';
+    detalhe.textContent = 'A maioria dos "nãos" sugere que o livro ainda não está claro para você — não apenas o título. Isso pode significar que é hora de reler o manuscrito antes de nomear. O título é consequência da clareza sobre a obra.';
+  }
+
+  placar.classList.add('visivel');
+  placar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+</script>
+
+<!-- ── RODAPÉ DE NAVEGAÇÃO ──────────────────────────── -->
+<footer style="
+  background: var(--ink);
+  color: var(--aged);
+  padding: 4rem 2rem;
+  margin-top: 0;
+">
+  <div style="max-width: 820px; margin: 0 auto;">
+
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 3rem;
+    ">
+      <!-- CTA principal: abrir o editor -->
+      <div style="
+        background: var(--vermelho);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(247,242,232,0.7); margin-bottom: 0.8rem;">Escreva agora</p>
+          <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.8rem; font-weight: 400; color: var(--paper); line-height: 1.2; display: block;">O editor que deixa você escrever</strong>
+          <p style="font-size: 0.9rem; color: rgba(247,242,232,0.75); margin-top: 0.8rem; line-height: 1.6;">Offline, sem IA, sem distrações. O Escrevaral é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html#editor" style="
+          display: inline-block;
+          background: var(--paper);
+          color: var(--ink);
+          font-family: 'Josefin Sans', sans-serif;
+          font-size: 0.65rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+          transition: background 0.3s;
+        " onmouseover="this.style.background='var(--ouro-claro)'" onmouseout="this.style.background='var(--paper)'">
+          Abrir o Escrevaral →
+        </a>
+      </div>
+
+      <!-- Link para a outra página de conteúdo -->
+      <div style="
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(201,146,42,0.15);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: 'Josefin Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ouro); margin-bottom: 0.8rem;">Continue lendo</p>
+          <strong style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; font-weight: 400; color: var(--paper); line-height: 1.3; display: block;">Como estruturar um romance</strong>
+          <p style="font-size: 0.88rem; color: var(--margem); margin-top: 0.8rem; line-height: 1.6;">Dos três atos ao ritmo dos capítulos — a espinha dorsal que sustenta qualquer história longa.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start;">
+          <a href="./vereda-estrutura-romance.html" style="
+            display: inline-block;
+            border: 1px solid rgba(201,146,42,0.4);
+            color: var(--ouro);
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            transition: border-color 0.3s, color 0.3s;
+          " onmouseover="this.style.borderColor='var(--ouro)';this.style.color='var(--ouro-claro)'" onmouseout="this.style.borderColor='rgba(201,146,42,0.4)';this.style.color='var(--ouro)'">
+            Ler o guia →
+          </a>
+          <a href="./vereda-primeiras-linhas.html" style="
+            color: var(--margem);
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            opacity: 0.8;
+          ">
+            Ou: como escrever as primeiras linhas →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="
+      border-top: 1px solid rgba(201,146,42,0.12);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    ">
+      <span style="font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--margem);">
+        Escrevaral — para escritores brasileiros
+      </span>
+      <a href="./index.html#editor" style="font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--margem); text-decoration: none;">
+        rfmss.github.io/escrevaral
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

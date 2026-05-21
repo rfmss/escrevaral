@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Como Começar a Escrever — As Primeiras Linhas do Livro | Escrevaral</title>
+<meta name="description" content="Guia prático para escritores brasileiros sobre como escrever as primeiras linhas de um livro. Técnicas de abertura, exemplos de grandes obras e exercícios para vencer o bloqueio inicial.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Como Começar a Escrever — As Primeiras Linhas do Livro">
+<meta property="og:description" content="Aprenda a escrever aberturas que prendem o leitor. Análise de primeiras linhas famosas, técnicas práticas e exercícios de arranque para escritores brasileiros.">
+<meta property="og:url" content="https://rfmss.github.io/escrevaral/vereda-primeiras-linhas.html">
+<meta property="og:image" content="https://rfmss.github.io/escrevaral/og-primeiras-linhas.png">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Escrevaral — Editor de Escrita para Escritores Brasileiros">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Como Começar a Escrever — As Primeiras Linhas do Livro | Escrevaral">
+<meta name="twitter:image" content="https://rfmss.github.io/escrevaral/og-primeiras-linhas.png">
+<meta name="twitter:description" content="Guia para escritores: como escrever as primeiras linhas de um livro. Exemplos reais, análises e exercícios práticos.">
+<link rel="canonical" href="https://rfmss.github.io/escrevaral/vereda-primeiras-linhas.html">
+<link rel="icon" href="./favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Serif+Text:ital@0;1&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vereda-editorial.css">
+<style>
+:root {
+  --void: #302720;
+  --profundo: #46372d;
+  --ardosia: #e8d8b0;
+  --ardosia-claro: #f0e8d0;
+  --branco: #fdf8f2;
+  --neve: #fdf8f2;
+  --lima: #b78a3a;
+  --lima-escuro: #8a6020;
+  --lima-apagado: rgba(183,138,58,0.08);
+  --cinza: #89745b;
+  --cinza-claro: #a08060;
+  --fio: rgba(82,61,39,0.15);
+  --fio-forte: rgba(82,61,39,0.25);
+  --ff-display: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --ff-corpo: 'DM Serif Text', Georgia, serif;
+  --ff-mono: 'Fira Mono', monospace;
+  --track-w: 3px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: #fdf8f2;
+  color: #2f261e;
+  font-family: var(--ff-corpo);
+  font-size: 19px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ── GRAIN OVERLAY ─────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── PROGRESSO ─────────────────────────────── */
+#progresso {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--lima);
+  z-index: 1000;
+  width: 0;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px var(--lima);
+}
+
+/* ── HERO ──────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-direita { display: none; }
+}
+
+.hero-esquerda {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 3rem 6rem 4rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-direita {
+  background: var(--ardosia);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-trilho {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: var(--track-w);
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    var(--lima) 15%,
+    var(--lima) 55%,
+    rgba(184,242,49,0.3) 75%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+}
+
+.hero-vagao {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.vagao-svg {
+  width: 120px;
+  height: 120px;
+  animation: flotarVagao 4s ease-in-out infinite;
+}
+
+@keyframes flotarVagao {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+.hero-label {
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lima);
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-family: var(--ff-display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--lima);
+  display: block;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--cinza-claro);
+  max-width: 440px;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+.hero-aviso {
+  margin-top: 2.5rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--lima);
+  background: var(--lima-apagado);
+  font-family: var(--ff-mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--cinza-claro);
+  max-width: 420px;
+}
+.hero-aviso strong { color: var(--lima); }
+
+.hero-scroll {
+  margin-top: 3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  cursor: pointer;
+  transition: color 0.3s;
+  border: none;
+  background: none;
+}
+.hero-scroll:hover { color: var(--lima); }
+.hero-scroll-line {
+  width: 50px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ── NAV ────────────────────────────────────── */
+.trilha-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--profundo);
+  border-bottom: 1px solid var(--fio);
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.trilha-nav::-webkit-scrollbar { display: none; }
+.trilha-nav-inner {
+  display: flex;
+  align-items: stretch;
+  max-width: 100%;
+  width: max-content;
+  min-width: 100%;
+}
+.nav-estagio {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+}
+.nav-estagio:hover, .nav-estagio.ativo {
+  color: var(--lima);
+  border-bottom-color: var(--lima);
+  background: var(--lima-apagado);
+}
+.nav-ponto {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── LAYOUT GERAL ──────────────────────────── */
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+.wrap-lg { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+.estagio {
+  padding: 7rem 0;
+  position: relative;
+}
+.estagio + .estagio {
+  border-top: 1px solid var(--fio);
+}
+
+/* Trilho lateral */
+.estagio::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  top: 7rem;
+  font-family: var(--ff-display);
+  font-size: 18vw;
+  font-weight: 900;
+  color: rgba(255,255,255,0.015);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.estagio-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.estagio-codigo {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--lima);
+  background: var(--lima-apagado);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid rgba(184,242,49,0.2);
+}
+.estagio-titulo-tipo {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--cinza);
+  text-transform: uppercase;
+}
+
+h2.titulo-grande {
+  font-family: var(--ff-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+h2.titulo-grande em { font-style: italic; font-weight: 400; color: var(--cinza-claro); }
+
+.texto-intro {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--cinza-claro);
+  max-width: 620px;
+  font-style: italic;
+}
+
+.divisor {
+  width: 40px;
+  height: 2px;
+  background: var(--lima);
+  margin: 2.5rem 0;
+}
+
+/* ── AVISO DE VOZ ─────────────────────────── */
+.aviso-voz {
+  margin: 3rem 0;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(184,242,49,0.25);
+  background: var(--lima-apagado);
+  position: relative;
+}
+.aviso-voz::before {
+  content: '⚠ ATENÇÃO À SUA VOZ';
+  display: block;
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--lima);
+  margin-bottom: 0.8rem;
+}
+.aviso-voz p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--cinza-claro);
+  font-style: italic;
+}
+.aviso-voz strong { color: var(--branco); font-style: normal; }
+
+/* ── LINHAS FAMOSAS ───────────────────────── */
+.linhas-grid {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.linha-item {
+  background: var(--ardosia);
+  border-left: 3px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+}
+.linha-item:hover, .linha-item.aberta {
+  border-left-color: var(--lima);
+  background: var(--ardosia-claro);
+}
+
+.linha-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem 2rem;
+}
+
+.linha-num {
+  font-family: var(--ff-mono);
+  font-size: 0.65rem;
+  color: var(--cinza);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.linha-texto-preview {
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--branco);
+}
+
+.linha-origem {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--lima);
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.linha-expandida {
+  display: none;
+  padding: 0 2rem 2rem 2rem;
+  border-top: 1px solid var(--fio);
+  animation: deslizar 0.4s ease;
+}
+.linha-item.aberta .linha-expandida { display: block; }
+
+@keyframes deslizar {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.linha-citacao-completa {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--neve);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--fio);
+  margin-bottom: 1.5rem;
+}
+
+.linha-analise {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--cinza-claro);
+  margin-bottom: 1rem;
+}
+
+.linha-mecanismo {
+  display: inline-block;
+  padding: 0.25rem 0.8rem;
+  background: var(--lima-apagado);
+  border: 1px solid rgba(184,242,49,0.3);
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--lima);
+  margin-top: 0.5rem;
+}
+
+/* ── PAINEL DE VELOCIDADE ─────────────────── */
+.velocidade-painel {
+  margin: 4rem 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+@media (max-width: 700px) {
+  .velocidade-painel { grid-template-columns: 1fr 1fr; }
+}
+.vel-item {
+  background: var(--ardosia);
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+}
+.vel-valor {
+  font-family: var(--ff-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--lima);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.vel-label {
+  font-family: var(--ff-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinza);
+}
+
+/* ── MONTANHA RUSSA VISUAL ────────────────── */
+.trilho-svg-container {
+  margin: 4rem 0;
+  overflow: visible;
+}
+
+/* ── PARÁGRAFOS ────────────────────────────── */
+.para-grid {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.para-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--fio);
+}
+@media (max-width: 650px) {
+  .para-card { grid-template-columns: 1fr; }
+}
+
+.para-texto {
+  background: var(--ardosia);
+  padding: 2.5rem;
+}
+.para-texto blockquote {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--neve);
+  border: none;
+}
+.para-texto cite {
+  display: block;
+  margin-top: 1rem;
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--lima);
+  font-style: normal;
+}
+
+.para-analise {
+  background: var(--ardosia-claro);
+  padding: 2.5rem;
+}
+.para-analise h4 {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--neve);
+}
+.para-analise p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--cinza-claro);
+}
+
+/* ── FUNÇÕES DO CAPÍTULO ──────────────────── */
+.funcoes-lista {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+@media (max-width: 650px) {
+  .funcoes-lista { grid-template-columns: 1fr; }
+}
+.funcao-item {
+  background: var(--ardosia);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  transition: background 0.3s;
+}
+.funcao-item:hover { background: var(--ardosia-claro); }
+.funcao-icon {
+  width: 60px; height: 60px;
+  border: 1px solid var(--lima);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  color: var(--lima);
+  flex-shrink: 0;
+}
+.funcao-item h4 {
+  font-family: var(--ff-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--neve);
+}
+.funcao-item p {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--cinza-claro);
+}
+
+/* ── ESTRUTURAS DE PARTES ─────────────────── */
+.estruturas-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--fio-forte);
+  margin-bottom: 0;
+  overflow-x: auto;
+}
+.estrutura-tab {
+  padding: 0.9rem 1.5rem;
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--cinza);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+.estrutura-tab.ativo { color: var(--lima); border-bottom-color: var(--lima); background: var(--lima-apagado); }
+.estrutura-painel { display: none; padding: 3rem 0; animation: deslizar 0.4s ease; }
+.estrutura-painel.ativo { display: block; }
+
+.estrutura-visual {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 120px;
+  margin-bottom: 2rem;
+}
+.estrutura-barra {
+  background: var(--ardosia-claro);
+  border-top: 2px solid var(--lima);
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 0.5rem;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.estrutura-barra:hover { background: var(--ardosia); }
+.estrutura-barra-label {
+  font-family: var(--ff-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+/* ── DESCIDA / FINAL ──────────────────────── */
+.descida-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+@media (max-width: 650px) { .descida-grid { grid-template-columns: 1fr; } }
+
+.descida-lado {
+  background: var(--ardosia);
+  padding: 2.5rem;
+}
+.descida-lado.escuro { background: var(--profundo); }
+.descida-lado h4 {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.descida-lado h4.lima { color: var(--lima); }
+.descida-lado h4.cinza { color: var(--cinza); }
+.descida-cita {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--neve);
+  margin-bottom: 1rem;
+}
+.descida-analise {
+  font-size: 0.88rem;
+  color: var(--cinza-claro);
+  line-height: 1.7;
+}
+
+/* ── PRINCÍPIOS DO FINAL ──────────────────── */
+.principios {
+  margin-top: 3rem;
+  counter-reset: prin;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.principio {
+  counter-increment: prin;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--fio);
+  align-items: start;
+}
+.principio:first-child { border-top: 1px solid var(--fio); }
+.prin-num {
+  font-family: var(--ff-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ardosia-claro);
+  text-align: right;
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--fio-forte);
+  line-height: 1;
+}
+.prin-corpo h4 {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--neve);
+  margin-bottom: 0.5rem;
+}
+.prin-corpo p {
+  font-size: 0.95rem;
+  color: var(--cinza-claro);
+  line-height: 1.75;
+}
+
+/* ── EXERCÍCIOS / ARRANQUE ────────────────── */
+.arranque-lista {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  counter-reset: arr;
+}
+.arranque-item {
+  counter-increment: arr;
+  background: var(--ardosia);
+  padding: 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.arranque-item::before {
+  content: counter(arr, decimal-leading-zero);
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  font-family: var(--ff-display);
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+}
+.arranque-item h4 {
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--neve);
+}
+.arranque-item p {
+  font-size: 0.92rem;
+  color: var(--cinza-claro);
+  line-height: 1.75;
+  max-width: 640px;
+}
+.arranque-campo {
+  margin-top: 1.2rem;
+  width: 100%;
+  background: var(--profundo);
+  border: none;
+  border-bottom: 1px solid var(--fio-forte);
+  padding: 0.8rem 0;
+  color: var(--branco);
+  font-family: var(--ff-corpo);
+  font-size: 1rem;
+  font-style: italic;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+.arranque-campo:focus { border-bottom-color: var(--lima); }
+.btn-arranque {
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--fio-forte);
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cinza-claro);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-arranque:hover { border-color: var(--lima); color: var(--lima); background: var(--lima-apagado); }
+
+.arranque-feedback {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-left: 2px solid var(--lima);
+  background: var(--lima-apagado);
+  font-size: 0.88rem;
+  color: var(--cinza-claro);
+  line-height: 1.7;
+  animation: deslizar 0.4s ease;
+}
+.arranque-feedback.visivel { display: block; }
+
+/* ── MANIFESTO FINAL ─────────────────────── */
+.manifesto-fim {
+  background: var(--profundo);
+  border-top: 1px solid var(--fio-forte);
+  padding: 8rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.manifesto-fim::before {
+  content: '01';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--ff-display);
+  font-size: 40vw;
+  font-weight: 900;
+  color: rgba(184,242,49,0.015);
+  line-height: 1;
+  pointer-events: none;
+}
+.manifesto-fim h2 {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+.manifesto-fim h2 em { color: var(--lima); font-style: italic; font-weight: 400; }
+.manifesto-fim p {
+  font-size: 1.05rem;
+  color: var(--cinza-claro);
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  font-style: italic;
+  position: relative;
+}
+.manifesto-fim .assinatura {
+  font-family: var(--ff-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cinza);
+  margin-top: 4rem;
+  position: relative;
+}
+
+/* ── REVEAL ──────────────────────────────── */
+.rev {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.rev.vis { opacity: 1; transform: none; }
+.rev-d1 { transition-delay: 0.1s; }
+.rev-d2 { transition-delay: 0.2s; }
+.rev-d3 { transition-delay: 0.3s; }
+
+@media (max-width: 768px) {
+  .hero-esquerda { padding: 5rem 1.5rem; }
+  .wrap, .wrap-lg { padding: 0 1.5rem; }
+  .estagio { padding: 5rem 0; }
+  .para-card { grid-template-columns: 1fr; }
+  .funcoes-lista { grid-template-columns: 1fr; }
+  .descida-grid { grid-template-columns: 1fr; }
+  .linha-header { grid-template-columns: auto 1fr; }
+  .linha-origem { display: none; }
+  .velocidade-painel { grid-template-columns: repeat(3,1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav class="ed-nav">
+  <a class="ed-brand" href="./index.html">
+    <img src="./icons/vereda-icon.svg" alt="" width="22" height="22" aria-hidden="true">
+    ESCREVARAL
+  </a>
+  <span class="ed-sep">·</span>
+  <a href="./index.html#academia">Academia</a>
+  <span class="ed-sep">·</span>
+  <span class="ed-current">As primeiras linhas</span>
+</nav>
+
+<div id="progresso"></div>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-esquerda">
+    <div class="hero-label">Escrevaral · Trilha de Escrita</div>
+    <h1>Como<br><em>Começar</em><br>um livro.</h1>
+    <p class="hero-sub">Da primeira palavra ao último ponto. A montanha russa da narrativa — estágio a estágio, do mínimo ao máximo, até a descida alucinante.</p>
+    <div class="hero-aviso">
+      <strong>Antes de tudo, leia isto.</strong><br>
+      Tudo aqui é inspiração, não modelo. Os grandes são referência, não mapa. O que é original e precioso em você não está em nenhum desses exemplos — está em você. Use os maiores para entender mecanismos. Nunca os use para imitar a voz.
+    </div>
+    <button class="hero-scroll" onclick="document.getElementById('linhas').scrollIntoView({behavior:'smooth'})">
+      Descer a ladeira <span class="hero-scroll-line"></span>
+    </button>
+  </div>
+
+  <div class="hero-direita">
+    <div class="hero-trilho"></div>
+    <div class="hero-vagao">
+      <svg class="vagao-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vagão da montanha russa estilizado -->
+        <rect x="20" y="55" width="80" height="35" rx="6" fill="#1a1d23" stroke="#b8f231" stroke-width="1.5"/>
+        <rect x="28" y="62" width="18" height="12" rx="2" fill="#b8f231" opacity="0.15"/>
+        <rect x="52" y="62" width="18" height="12" rx="2" fill="#b8f231" opacity="0.15"/>
+        <rect x="76" y="62" width="8" height="12" rx="2" fill="#b8f231" opacity="0.15"/>
+        <circle cx="38" cy="94" r="7" fill="#0e1014" stroke="#b8f231" stroke-width="1.5"/>
+        <circle cx="82" cy="94" r="7" fill="#0e1014" stroke="#b8f231" stroke-width="1.5"/>
+        <circle cx="38" cy="94" r="2" fill="#b8f231"/>
+        <circle cx="82" cy="94" r="2" fill="#b8f231"/>
+        <!-- trilho -->
+        <line x1="10" y1="101" x2="110" y2="101" stroke="#b8f231" stroke-width="1" opacity="0.3"/>
+        <!-- velocidade -->
+        <text x="60" y="78" text-anchor="middle" font-family="serif" font-size="8" fill="#b8f231" opacity="0.6">LINHA 1</text>
+      </svg>
+      <div style="font-family:'Fira Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:#6b7280;margin-top:1rem;text-align:center;">SUBINDO A TRILHA</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NAV ─── -->
+<nav class="trilha-nav">
+  <div class="trilha-nav-inner">
+    <a class="nav-estagio" href="#linhas"><span class="nav-ponto"></span>I · Primeira Linha</a>
+    <a class="nav-estagio" href="#paragrafos"><span class="nav-ponto"></span>II · Primeiro Parágrafo</a>
+    <a class="nav-estagio" href="#capitulo"><span class="nav-ponto"></span>III · Primeiro Capítulo</a>
+    <a class="nav-estagio" href="#partes"><span class="nav-ponto"></span>IV · As Partes</a>
+    <a class="nav-estagio" href="#final"><span class="nav-ponto"></span>V · A Descida</a>
+    <a class="nav-estagio" href="#arranque"><span class="nav-ponto"></span>VI · Seu Arranque</a>
+  </div>
+</nav>
+
+<!-- ═══ I · A PRIMEIRA LINHA ══════════════════════════ -->
+<section class="estagio" id="linhas" data-num="I">
+  <div class="wrap">
+    <div class="estagio-label rev">
+      <span class="estagio-codigo">Estágio I</span>
+      <span class="estagio-titulo-tipo">O mínimo. A faísca. A ignição.</span>
+    </div>
+    <h2 class="titulo-grande rev rev-d1">A Primeira<br><em>Linha</em></h2>
+    <p class="texto-intro rev rev-d2">Uma frase. Às vezes três palavras. Às vezes cinquenta. A primeira linha não precisa ser perfeita — precisa ser necessária. Ela existe para que a segunda possa existir.</p>
+
+    <div class="divisor rev"></div>
+
+    <div class="velocidade-painel rev">
+      <div class="vel-item">
+        <span class="vel-valor">3</span>
+        <span class="vel-label">palavras mínimas</span>
+      </div>
+      <div class="vel-item">
+        <span class="vel-valor">∞</span>
+        <span class="vel-label">possibilidades</span>
+      </div>
+      <div class="vel-item">
+        <span class="vel-valor">1</span>
+        <span class="vel-label">função central</span>
+      </div>
+      <div class="vel-item">
+        <span class="vel-valor">0</span>
+        <span class="vel-label">regras absolutas</span>
+      </div>
+      <div class="vel-item">
+        <span class="vel-valor">↓</span>
+        <span class="vel-label">puxar para baixo</span>
+      </div>
+    </div>
+
+    <p class="rev" style="color:var(--cinza-claro);font-size:0.95rem;margin-bottom:2rem;">Clique em cada linha para ver a anatomia de como funciona.</p>
+
+    <div class="linhas-grid rev">
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">01</span>
+          <span class="linha-texto-preview">Chame-me Ismael.</span>
+          <span class="linha-origem">Melville · Moby Dick</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Chame-me Ismael.</div>
+          <p class="linha-analise">Três palavras. Um imperativo. Um pseudônimo. A linha mais famosa da ficção em língua inglesa funciona porque abre três questões imediatas: Por que "chame-me" e não "meu nome é"? O nome é falso? Por que ele nos diz isso — quem é o leitor nessa equação? A brevidade não é modéstia: é uma armadilha. Você já está dentro do livro antes de perceber que entrou.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> Uma linha pode ser curta o suficiente para caber num segundo e longa o suficiente para durar um século. A questão que ela abre importa mais do que a informação que ela fornece.</p>
+          <span class="linha-mecanismo">Mecanismo: Imperativo + Identidade Suspeita</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">02</span>
+          <span class="linha-texto-preview">Toda família feliz se parece entre si; cada família infeliz é infeliz à sua maneira.</span>
+          <span class="linha-origem">Tolstói · Anna Karênina</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Toda família feliz se parece entre si; cada família infeliz é infeliz à sua maneira.</div>
+          <p class="linha-analise">Uma sentença que parece aforismo filosófico antes de ser ficção. Tolstói anuncia o tema antes do enredo — e faz isso com tamanha autoridade que o leitor não questiona. O ponto-e-vírgula é o centro de gravidade: a primeira metade é o mundo que não existe no livro; a segunda metade é o livro inteiro. É uma estrutura em espelho que antecipa a própria arquitetura da tragédia que virá.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A primeira linha pode ser uma declaração filosófica — se você tiver autoridade para sustentá-la. Mas isso só funciona quando o livro inteiro a justifica.</p>
+          <span class="linha-mecanismo">Mecanismo: Aforismo que Cria Mundo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">03</span>
+          <span class="linha-texto-preview">Hoje mamãe morreu. Ou talvez ontem, não sei.</span>
+          <span class="linha-origem">Camus · O Estrangeiro</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Hoje mamãe morreu. Ou talvez ontem, não sei.</div>
+          <p class="linha-analise">A morte da mãe comunicada com total indiferença temporal. "Ou talvez ontem" não é distração — é o retrato completo de um personagem. Camus entrega o narrador inteiro em duas frases: a frieza afetiva, a ausência de luto, a relação perturbada com o tempo. O leitor não precisa que nos digam que Meursault é diferente — já sente na virada da primeira frase. A linha é ao mesmo tempo informação e caráter.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A voz do narrador pode revelar o personagem inteiro antes que qualquer descrição o faça. O como ele diz é quem ele é.</p>
+          <span class="linha-mecanismo">Mecanismo: Voz como Retrato</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">04</span>
+          <span class="linha-texto-preview">Muitos anos depois, diante do pelotão de fuzilamento, o coronel Aureliano Buendía havia de recordar aquela tarde remota em que seu pai o levou para conhecer o gelo.</span>
+          <span class="linha-origem">García Márquez · Cem Anos de Solidão</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Muitos anos depois, diante do pelotão de fuzilamento, o coronel Aureliano Buendía havia de recordar aquela tarde remota em que seu pai o levou para conhecer o gelo.</div>
+          <p class="linha-analise">Esta linha contém três camadas de tempo em uma única frase: o passado remoto (a tarde com o pai), o presente narrativo implícito, e o futuro já acontecido (o pelotão). É uma linha que dobra o tempo. A morte é anunciada como fato antes de o personagem existir como criança — e o leitor já sabe que sobreviverá, porque está vivo para recordar. O gelo, no final, é o detalhe que ancora a maravilha: no mundo de Macondo, gelo é um milagre.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> Uma única frase pode conter toda a estrutura temporal do livro. O detalhe concreto no final de uma linha longa é o que a salva do excesso.</p>
+          <span class="linha-mecanismo">Mecanismo: Dobra Temporal + Detalhe Âncora</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">05</span>
+          <span class="linha-texto-preview">Foi o melhor dos tempos, foi o pior dos tempos.</span>
+          <span class="linha-origem">Dickens · Um Conto de Duas Cidades</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Foi o melhor dos tempos, foi o pior dos tempos, a era da sabedoria, a era da loucura, a época da crença, a época da incredulidade...</div>
+          <p class="linha-analise">O antítese mais famosa da literatura. Dickens usa a contradição não como paradoxo filosófico mas como retrato de uma época que se define pelo conflito. A linha funciona porque a repetição da estrutura ("foi o... foi o...") cria um ritmo hipnótico que puxa o leitor para dentro antes que ele entenda o que está lendo. É uma linha que se parece com um discurso — e é exatamente isso que Dickens pretendia.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A antítese como estrutura rítmica. O paralelismo não é ornamento — é o argumento. A primeira linha pode ter a cadência de uma oração ou de um manifesto.</p>
+          <span class="linha-mecanismo">Mecanismo: Antítese Rítmica</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">06</span>
+          <span class="linha-texto-preview">Ao despertar certa manhã de sonhos intranquilos, Gregor Samsa encontrou-se em sua cama metamorfoseado num inseto monstruoso.</span>
+          <span class="linha-origem">Kafka · A Metamorfose</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Ao despertar certa manhã de sonhos intranquilos, Gregor Samsa encontrou-se em sua cama metamorfoseado num inseto monstruoso.</div>
+          <p class="linha-analise">O maior impossível da ficção moderna entregue com a frieza de um relatório de incidente. Kafka não explica, não justifica, não hesita. A transformação é um fato antes de ser um problema. O que permite que a linha funcione é exatamente o que ela não faz: não diz "de alguma forma" ou "surpreendentemente" — apenas registra. O absurdo depende da objetividade para sobreviver.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> O sobrenatural ou o impossível em ficção só funciona quando o narrador o trata como rotina. A espanto do leitor é diretamente proporcional à calma do narrador.</p>
+          <span class="linha-mecanismo">Mecanismo: Absurdo com Frieza Documental</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">07</span>
+          <span class="linha-texto-preview">Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja.</span>
+          <span class="linha-origem">Guimarães Rosa · Grande Sertão: Veredas</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja.</div>
+          <p class="linha-analise">"Nonada" — palavra arcaica para "nada de importância" — abre um dos livros mais importantes da literatura brasileira. É uma ironia absoluta: a abertura nega a si mesma, dizendo que o que virá não tem importância, quando terá toda a importância do mundo. Já na segunda frase, Riobaldo fala diretamente ao "senhor" — o leitor está imediatamente dentro de uma conversa, não de uma narrativa. A língua já é reinventada antes da terceira palavra.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A voz pode ser o gênero. Uma única linha pode estabelecer que o leitor está num mundo de linguagem própria — e que terá de aprender essa língua para entender o que vem.</p>
+          <span class="linha-mecanismo">Mecanismo: Língua como Mundo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">08</span>
+          <span class="linha-texto-preview">Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas.</span>
+          <span class="linha-origem">Machado de Assis · Memórias Póstumas</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas.</div>
+          <p class="linha-analise">Antes mesmo do primeiro capítulo, na dedicatória. Machado começa com um gesto literário — a dedicatória — mas a direciona ao verme. É ironia pura, e já nos diz tudo: o narrador está morto e escreve do outro lado da vida, com humor e com distância. A "saudosa lembrança" dedicada a um verme é o tom do livro inteiro em uma frase. Machado entendeu que a dedicatória é a primeira linha real.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> O paratexto — dedicatória, epígrafe, título — é parte do livro. A primeira linha pode não estar na página 1 do capítulo 1.</p>
+          <span class="linha-mecanismo">Mecanismo: Ironia Sepulcral / Paratexto Ativo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">09</span>
+          <span class="linha-texto-preview">Lolita, luz de minha vida, fogo de minhas entranhas. Minha culpa, minha alma.</span>
+          <span class="linha-origem">Nabokov · Lolita</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Lolita, luz de minha vida, fogo de minhas entranhas. Minha culpa, minha alma. Lo-li-ta.</div>
+          <p class="linha-analise">Uma das aberturas mais musicalmente elaboradas da ficção do século XX. Nabokov era poeta antes de prosador, e essa linha é poesia disfarçada de prosa. A aliteração em "L" (Lolita, luz, Lo-li-ta), a sílaba do nome decomposta em seu passo final — o som está fazendo o trabalho de criar obsessão antes do enredo. O narrador também confessa imediatamente: "minha culpa, minha alma" é uma paródia do Mea Culpa da liturgia cristã.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A primeira linha pode ser uma partitura. O som das palavras cria emoção antes que o sentido as alcance.</p>
+          <span class="linha-mecanismo">Mecanismo: Aliteração + Confissão + Ritmo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">10</span>
+          <span class="linha-texto-preview">Estou procurando, estou procurando. Estou tentando entender.</span>
+          <span class="linha-origem">Clarice Lispector · A Paixão Segundo G.H.</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Estou procurando, estou procurando. Estou tentando entender.</div>
+          <p class="linha-analise">Clarice começa com o método antes do objeto. Não diz o que procura — diz que procura. A repetição do verbo não é gagueira: é o estado mental do personagem transferido para a sintaxe. O livro inteiro é essa busca sem nome. A primeira linha é já o livro inteiro em miniatura. E a frase "estou tentando entender" convida o leitor a uma cumplicidade rara: o narrador não sabe mais do que você.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A abertura pode ser um estado, não um evento. Quando o narrador não sabe, o leitor avança. A incerteza compartilhada é um vínculo poderoso.</p>
+          <span class="linha-mecanismo">Mecanismo: Processo sem Objeto + Cumplicidade</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">11</span>
+          <span class="linha-texto-preview">Por muito tempo me deitei cedo.</span>
+          <span class="linha-origem">Proust · Em Busca do Tempo Perdido</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">Por muito tempo me deitei cedo.</div>
+          <p class="linha-analise">Sete palavras que abrem o maior romance do século XX. A linha é aparentemente banal — um hábito de sono. Mas "por muito tempo" situa o narrador no presente olhando para um passado que vai ser escavado durante seis volumes. É a abertura de uma arqueologia. Proust não começa com drama — começa com o ritmo do cotidiano, que é onde a memória vive. A primeira linha do romance mais longo da literatura é também uma das mais quietas.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A grandiosidade de uma obra não exige uma abertura grandiosa. A linha certa pode ser pequena, íntima, quase sussurada — e ainda assim ser o ponto de partida de um universo.</p>
+          <span class="linha-mecanismo">Mecanismo: Banalidade que Contém o Tempo</span>
+        </div>
+      </div>
+
+      <div class="linha-item" onclick="toggleLinha(this)">
+        <div class="linha-header">
+          <span class="linha-num">12</span>
+          <span class="linha-texto-preview">É uma verdade universalmente reconhecida que um homem solteiro em boa situação financeira necessita de uma esposa.</span>
+          <span class="linha-origem">Jane Austen · Orgulho e Preconceito</span>
+        </div>
+        <div class="linha-expandida">
+          <div class="linha-citacao-completa">É uma verdade universalmente reconhecida que um homem solteiro em boa situação financeira necessita de uma esposa.</div>
+          <p class="linha-analise">Austen usa a linguagem das verdades absolutas para dizer exatamente o oposto do que parece. "É uma verdade universalmente reconhecida" é irônico — é o que a sociedade diz, não o que Austen acredita. A linha critica antes de narrar: ela já posiciona o narrador como alguém que vê o absurdo nas convenções que vai descrever. O livro inteiro está nessa primeira frase — incluindo o ponto de vista.</p>
+          <p class="linha-analise"><strong style="color:var(--branco);">O que ensina:</strong> A ironia pode ser uma abertura — quando o narrador finge concordar com o que vai criticar. Mas exige controle absoluto: ironia mal executada parece ingenuidade.</p>
+          <span class="linha-mecanismo">Mecanismo: Ironia Social + Ponto de Vista Implícito</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Você acabou de ler doze aberturas dos maiores. <strong>Agora esqueça os mecanismos e lembre apenas de uma coisa:</strong> cada uma dessas linhas existiu porque aquele escritor específico tinha algo específico a dizer, naquele mundo específico que criou. Nenhuma dessas linhas funcionaria num livro diferente. A sua primeira linha não precisa imitar nenhuma dessas — precisa ser necessária para <em>o seu</em> livro.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ II · O PRIMEIRO PARÁGRAFO ════════════════════════ -->
+<section class="estagio" id="paragrafos" data-num="II" style="background:var(--profundo);">
+  <div class="wrap">
+    <div class="estagio-label rev">
+      <span class="estagio-codigo">Estágio II</span>
+      <span class="estagio-titulo-tipo">Ganhando velocidade. A promessa se expande.</span>
+    </div>
+    <h2 class="titulo-grande rev rev-d1">O Primeiro<br><em>Parágrafo</em></h2>
+    <p class="texto-intro rev rev-d2">Se a primeira linha é a faísca, o primeiro parágrafo é a chama. Ele tem de sustentar o que a linha prometeu e transformar curiosidade em comprometimento.</p>
+
+    <div class="divisor rev"></div>
+
+    <p class="rev" style="color:var(--cinza-claro);font-size:0.95rem;margin-bottom:2rem;">O parágrafo faz o que a linha não pode fazer sozinha: ele instala o leitor dentro de um mundo, de um tempo, de uma voz. Veja como os grandes expandem a primeira linha.</p>
+
+    <div class="para-grid rev">
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Nonada. Tiros que o senhor ouviu foram de briga de homem não, Deus esteja. Alvejei mira em árvore, em pedra de ribeirão, açoite no oco do pau, no boi prêto, que sempre esbarra nas porteiras — essas tolices. E éramos um, dois, apenas..."
+          </blockquote>
+          <cite>Guimarães Rosa · Grande Sertão: Veredas</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Após o "Nonada" inicial, Riobaldo imediatamente começa a se justificar — os tiros não eram o que pareciam. O parágrafo instala a conversa (há um interlocutor), a voz (sintaxe própria, ritmo de fala oral), e o caráter (um homem que precisa explicar, que tem coisas a esconder). Tudo isso antes de qualquer enredo. O mundo de Rosa é a língua de Rosa.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Hoje mamãe morreu. Ou talvez ontem, não sei. Recebi um telegrama do asilo: 'Sua mãe falecida. Enterro amanhã. Sentidos pêsames.' Isso não esclarece nada. Talvez tenha sido ontem."
+          </blockquote>
+          <cite>Camus · O Estrangeiro</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Camus expande a indiferença da linha inicial para o grotesco: o telegrama do asilo é relatado com a mesma neutralidade emocional. O "isso não esclarece nada" — referindo-se à data, não à morte — é perturbador. O parágrafo inteiro é um retrato de alguém para quem a morte da mãe é uma questão logística. Meursault está completo antes de qualquer cena narrativa.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas. [...] Não adotei o processo de Augusto que, segundo dizem, expôs o manuscrito à aprovação de seus amigos."
+          </blockquote>
+          <cite>Machado de Assis · Memórias Póstumas</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Após a dedicatória ao verme, Machado usa o prólogo para instalar a ironia como modo de existência do narrador. Brás Cubas compara-se a Augusto — o imperador romano — com total naturalidade. É um morto que se acha importante e engraçado ao mesmo tempo. O parágrafo instaura a distância irônica que sustentará todo o romance.</p>
+        </div>
+      </div>
+
+      <div class="para-card">
+        <div class="para-texto">
+          <blockquote>
+            "Por muito tempo me deitei cedo. Às vezes, mal apagada a vela, meus olhos se fechavam tão depressa que eu mal tinha tempo de pensar: 'Estou adormecendo.' E meia hora depois acordava..."
+          </blockquote>
+          <cite>Proust · Em Busca do Tempo Perdido</cite>
+        </div>
+        <div class="para-analise">
+          <h4>Como o parágrafo trabalha</h4>
+          <p>Proust expande o hábito em fenomenologia. O ato de adormecer se torna um objeto de análise minuciosa — e já estamos dentro do projeto de Proust: examinar a experiência subjetiva com precisão quase científica. O parágrafo ensina que o ritmo Proust não é lento — é outro tipo de velocidade: a velocidade da atenção ao interior.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Esses parágrafos só funcionam porque cada um é fiel à voz que a primeira linha anunciou. <strong>O maior erro do primeiro parágrafo é mudar de registro:</strong> começar seco e tornar-se poético, ou começar lírico e tornar-se jornalístico. O leitor percebe a traição antes de nomear o desconforto. Sua voz é sua voz — mantenha-a.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ III · O PRIMEIRO CAPÍTULO ═══════════════════════ -->
+<section class="estagio" id="capitulo" data-num="III">
+  <div class="wrap-lg">
+    <div class="wrap">
+      <div class="estagio-label rev">
+        <span class="estagio-codigo">Estágio III</span>
+        <span class="estagio-titulo-tipo">O pico da subida. O contrato com o leitor.</span>
+      </div>
+      <h2 class="titulo-grande rev rev-d1">O Primeiro<br><em>Capítulo</em></h2>
+      <p class="texto-intro rev rev-d2">O primeiro capítulo não é uma introdução. É o livro inteiro em miniatura. Cada elemento que o livro vai precisar precisa estar presente — talvez em semente, mas presente.</p>
+      <div class="divisor rev"></div>
+    </div>
+
+    <!-- SVG montanha russa simplificada -->
+    <div class="trilho-svg-container rev" style="padding:0 2rem;">
+      <svg viewBox="0 0 900 200" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+        <defs>
+          <marker id="seta" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#b8f231"/>
+          </marker>
+        </defs>
+        <!-- Trilho -->
+        <path d="M 30 170 Q 120 170 180 80 Q 240 10 320 10 Q 400 10 450 80 Q 500 150 560 150 Q 620 150 680 80 Q 720 30 780 10 Q 830 5 870 30" 
+              fill="none" stroke="#1a1d23" stroke-width="20" stroke-linecap="round"/>
+        <path d="M 30 170 Q 120 170 180 80 Q 240 10 320 10 Q 400 10 450 80 Q 500 150 560 150 Q 620 150 680 80 Q 720 30 780 10 Q 830 5 870 30" 
+              fill="none" stroke="#b8f231" stroke-width="2" stroke-linecap="round" stroke-dasharray="0"/>
+        <!-- Pontos de estágio -->
+        <circle cx="30" cy="170" r="6" fill="#b8f231"/>
+        <circle cx="180" cy="80" r="6" fill="#b8f231"/>
+        <circle cx="320" cy="10" r="6" fill="#b8f231"/>
+        <circle cx="450" cy="80" r="6" fill="#b8f231"/>
+        <circle cx="560" cy="150" r="6" fill="#b8f231"/>
+        <circle cx="780" cy="10" r="6" fill="#b8f231"/>
+        <circle cx="870" cy="30" r="6" fill="#b8f231"/>
+        <!-- Labels -->
+        <text x="30" y="188" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#6b7280">LINHA</text>
+        <text x="180" y="98" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#6b7280">PARÁGRAFO</text>
+        <text x="320" y="-6" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#b8f231">CAPÍTULO I</text>
+        <text x="450" y="98" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#6b7280">MEIO</text>
+        <text x="560" y="168" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#6b7280">PARTES</text>
+        <text x="780" y="-4" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#b8f231">CLÍMAX</text>
+        <text x="870" y="15" text-anchor="middle" font-family="'Fira Mono',monospace" font-size="9" fill="#6b7280">FINAL</text>
+        <!-- Vagão animado -->
+        <g id="vagao-trilho">
+          <rect x="-15" y="-8" width="30" height="14" rx="3" fill="#1a1d23" stroke="#b8f231" stroke-width="1"/>
+          <circle cx="-8" cy="7" r="3" fill="#0e1014" stroke="#b8f231" stroke-width="1"/>
+          <circle cx="8" cy="7" r="3" fill="#0e1014" stroke="#b8f231" stroke-width="1"/>
+          <animateMotion dur="8s" repeatCount="indefinite" calcMode="linear">
+            <mpath href="#trilho-path"/>
+          </animateMotion>
+        </g>
+        <path id="trilho-path" d="M 30 170 Q 120 170 180 80 Q 240 10 320 10 Q 400 10 450 80 Q 500 150 560 150 Q 620 150 680 80 Q 720 30 780 10 Q 830 5 870 30" fill="none" visibility="hidden"/>
+      </svg>
+    </div>
+
+    <div class="wrap">
+      <p class="rev" style="color:var(--cinza-claro);font-size:1rem;line-height:1.8;margin-bottom:3rem;">O primeiro capítulo é o contrato entre escritor e leitor. Quando o leitor fecha o primeiro capítulo e continua, assinou esse contrato. Para isso, seis coisas precisam acontecer — não necessariamente nessa ordem, não necessariamente de forma explícita.</p>
+
+      <div class="funcoes-lista rev">
+
+        <div class="funcao-item">
+          <div class="funcao-icon">V</div>
+          <div>
+            <h4>Instalar a Voz</h4>
+            <p>O leitor precisa saber com quem vai passar os próximos horas ou dias. Não importa se a voz é simpática — precisa ser interessante. Fascinante, perturbadora, ou estranhamente familiar. Uma voz entediante no primeiro capítulo é uma promessa quebrada.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          <div class="funcao-icon">M</div>
+          <div>
+            <h4>Estabelecer o Mundo</h4>
+            <p>Não a descrição do cenário — o regime de realidade. O leitor precisa saber que tipo de mundo habita: realista, fantástico, histórico, interior. Isso não precisa ser explícito. Deve ser sentido. A linguagem do capítulo já é o mundo.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          <div class="funcao-icon">Q</div>
+          <div>
+            <h4>Abrir uma Questão</h4>
+            <p>Todo primeiro capítulo precisa plantar uma pergunta que o leitor não saberá responder antes de continuar. Não necessariamente um mistério de enredo — pode ser uma questão de personagem, moral, ou existencial. Sem questão, não há razão para virar a página.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          <div class="funcao-icon">T</div>
+          <div>
+            <h4>Estabelecer o Tom</h4>
+            <p>Irônico, lírico, seco, exuberante, melancólico — o tom do primeiro capítulo é uma promessa sobre o tom do livro inteiro. Uma virada radical de tom no capítulo 3 é quase sempre sentida como traição, não como surpresa.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          <div class="funcao-icon">P</div>
+          <div>
+            <h4>Introduzir a Pressão</h4>
+            <p>Algo está em jogo desde o início — mesmo que discretamente. Não precisa ser conflito explícito. Pode ser uma ausência, uma tensão latente, um desequilíbrio que o leitor sente mas não consegue nomear. Onde não há pressão, não há movimento.</p>
+          </div>
+        </div>
+
+        <div class="funcao-item">
+          <div class="funcao-icon">R</div>
+          <div>
+            <h4>Criar um Ritmo Próprio</h4>
+            <p>A velocidade das frases, dos parágrafos, das pausas — é o batimento cardíaco do livro. Um livro de contemplação tem frases longas. Um livro de ação tem frases curtas. O ritmo do primeiro capítulo instrui o corpo do leitor sobre como ler o que vem.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="aviso-voz rev">
+        <p>Escritores iniciantes frequentemente tentam fazer o primeiro capítulo fazer <em>tudo</em> de forma <em>explícita</em>. O resultado é um capítulo afogado em exposição, descrição e apresentação. <strong>Os melhores primeiros capítulos fazem tudo isso implicitamente, pelo que mostram — nunca pelo que explicam.</strong> Confie na cena. Confie na linguagem. O leitor é inteligente.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IV · AS PARTES ════════════════════════════════════ -->
+<section class="estagio" id="partes" data-num="IV" style="background:var(--profundo);">
+  <div class="wrap">
+    <div class="estagio-label rev">
+      <span class="estagio-codigo">Estágio IV</span>
+      <span class="estagio-titulo-tipo">Os loops e curvas. A arquitetura do longo.</span>
+    </div>
+    <h2 class="titulo-grande rev rev-d1">As <em>Partes</em></h2>
+    <p class="texto-intro rev rev-d2">Quando um livro é grande demais para um único arco, divide-se em partes. Cada parte é um livro dentro do livro — com sua própria curva, seu próprio tom, sua própria abertura.</p>
+
+    <div class="divisor rev"></div>
+
+    <div class="rev">
+      <div class="estruturas-tabs">
+        <button class="estrutura-tab ativo" onclick="mudarEstrutura(this,'est-dois')">Dois Movimentos</button>
+        <button class="estrutura-tab" onclick="mudarEstrutura(this,'est-tres')">Três Atos</button>
+        <button class="estrutura-tab" onclick="mudarEstrutura(this,'est-quatro')">Quatro Partes</button>
+        <button class="estrutura-tab" onclick="mudarEstrutura(this,'est-parte-cap')">Parte + Capítulo</button>
+        <button class="estrutura-tab" onclick="mudarEstrutura(this,'est-fragmento')">Fragmentos</button>
+      </div>
+
+      <div id="est-dois" class="estrutura-painel ativo">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra" style="height:80%"><span class="estrutura-barra-label">ANTES</span></div>
+          <div class="estrutura-barra" style="height:100%"><span class="estrutura-barra-label">DEPOIS</span></div>
+        </div>
+        <h4 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--neve);">A estrutura díptica: Antes / Depois</h4>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">Um evento central — uma morte, uma descoberta, uma separação — divide o livro em dois mundos. A Parte I é o mundo antes. A Parte II é o mundo que o evento criou. É a estrutura mais honesta de livros sobre transformação irreversível.</p>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;"><strong style="color:var(--branco);">Exemplos:</strong> <em>O Som e a Fúria</em> (Faulkner) divide perspectivas radicalmente. <em>Atonement</em> (Ian McEwan) usa o antes e o depois como acusação moral. <em>Vidas Secas</em> (Graciliano Ramos) tem a estrutura de uma jornada em dois tempos.</p>
+      </div>
+
+      <div id="est-tres" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra" style="height:60%"><span class="estrutura-barra-label">ASCENSÃO</span></div>
+          <div class="estrutura-barra" style="height:100%"><span class="estrutura-barra-label">CONFLITO</span></div>
+          <div class="estrutura-barra" style="height:40%"><span class="estrutura-barra-label">RESOLUÇÃO</span></div>
+        </div>
+        <h4 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--neve);">Os três atos: a estrutura dramática clássica</h4>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">A divisão aristotélica em começo, meio e fim — mas raramente com pesos iguais. O ato II é invariavelmente o maior e o mais difícil de escrever. É onde a maioria dos livros se perde: o meio sem direção, a saga sem urgência.</p>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;"><strong style="color:var(--branco);">O problema do Ato II:</strong> Sem uma questão clara que o Ato I plantou e o Ato III irá responder, o meio é apenas uma série de cenas. A solução é subdividir o Ato II internamente — cada subcapítulo com seu próprio micro-arco.</p>
+      </div>
+
+      <div id="est-quatro" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra" style="height:55%"><span class="estrutura-barra-label">I</span></div>
+          <div class="estrutura-barra" style="height:90%"><span class="estrutura-barra-label">II</span></div>
+          <div class="estrutura-barra" style="height:100%"><span class="estrutura-barra-label">III</span></div>
+          <div class="estrutura-barra" style="height:35%"><span class="estrutura-barra-label">IV</span></div>
+        </div>
+        <h4 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--neve);">Quatro partes: a sonata narrativa</h4>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">Quatro partes permitem uma estrutura que tem muito em comum com a sonata musical: exposição, desenvolvimento, recapitulação, coda. Anna Karênina usa algo próximo disso — com a quarta parte funcionando quase como epílogo emocional às três anteriores.</p>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;"><strong style="color:var(--branco);">Vantagem:</strong> A quarta parte pode ter tom completamente diferente — um respiro, uma ironia, ou um golpe final. É uma estrutura que dá ao escritor um espaço de liberdade após o clímax.</p>
+      </div>
+
+      <div id="est-parte-cap" class="estrutura-painel">
+        <div class="estrutura-visual">
+          <div class="estrutura-barra" style="height:50%;flex:2"><span class="estrutura-barra-label">PARTE I · 8 CAPs</span></div>
+          <div class="estrutura-barra" style="height:90%;flex:3"><span class="estrutura-barra-label">PARTE II · 12 CAPs</span></div>
+          <div class="estrutura-barra" style="height:30%;flex:1"><span class="estrutura-barra-label">PARTE III · 3 CAPs</span></div>
+        </div>
+        <h4 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--neve);">Partes com capítulos numerados ou nomeados</h4>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">A estrutura mais comum nos romances longos. Partes funcionam como capítulos grandes; capítulos como cenas ou sequências. A assimetria de tamanho entre as partes é intencional — a segunda parte maior indica que é onde o livro vive de fato.</p>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;"><strong style="color:var(--branco);">Sobre nomear partes vs. numerá-las:</strong> Nomes funcionam como títulos-em-miniatura, adiantam tom; números criam expectativa de objetividade e escala. Nem sempre o mais dramático é o melhor.</p>
+      </div>
+
+      <div id="est-fragmento" class="estrutura-painel">
+        <div class="estrutura-visual" style="align-items:center;gap:6px;">
+          <div class="estrutura-barra" style="height:70%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:40%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:90%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:30%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:60%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:80%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:20%;flex:1"><span class="estrutura-barra-label">·</span></div>
+          <div class="estrutura-barra" style="height:100%;flex:1"><span class="estrutura-barra-label">·</span></div>
+        </div>
+        <h4 style="font-family:var(--ff-display);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--neve);">Estrutura fragmentada: a montagem</h4>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;margin-bottom:1rem;">Sem partes convencionais — o livro existe em fragmentos, seções curtas, vozes alternadas, ou capítulos sem numeração linear. A coerência não é estrutural mas temática: o leitor monta o sentido. É a forma mais próxima do funcionamento real da memória e da experiência.</p>
+        <p style="color:var(--cinza-claro);font-size:0.95rem;line-height:1.8;"><strong style="color:var(--branco);">Risco real:</strong> A estrutura fragmentada não é mais fácil — é mais difícil. Exige que cada fragmento funcione como uma peça de mosaico precisa: sem ela, o quadro some. Muitos escritores usam o fragmento para esconder falta de estrutura. Não esconde.</p>
+      </div>
+    </div>
+
+    <div class="aviso-voz rev" style="margin-top:3rem;">
+      <p>A estrutura ideal é a que nasce do material, não a que é imposta a ele. <strong>Antes de decidir em quantas partes seu livro se divide, pergunte: onde está a fratura natural?</strong> Todo livro longo tem um momento onde a realidade do personagem muda de forma irreversível. Essa fratura é onde a próxima parte começa. Não invente estrutura — descubra-a.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ V · A DESCIDA: O FINAL ════════════════════════════ -->
+<section class="estagio" id="final" data-num="V">
+  <div class="wrap">
+    <div class="estagio-label rev">
+      <span class="estagio-codigo">Estágio V</span>
+      <span class="estagio-titulo-tipo">A descida alucinante. O que fica.</span>
+    </div>
+    <h2 class="titulo-grande rev rev-d1">A <em>Descida</em>:<br>Como Terminar</h2>
+    <p class="texto-intro rev rev-d2">Na montanha russa, a descida é o momento de maior velocidade e menor controle. O final de um livro deveria ter algo disso: a sensação de que as coisas se resolvem com uma inevitabilidade que parece ter sido sempre a única possibilidade.</p>
+
+    <div class="divisor rev"></div>
+
+    <p class="rev" style="color:var(--cinza-claro);font-size:0.95rem;margin-bottom:2rem;">As últimas linhas de um livro ecoam as primeiras. Os melhores finais parecem responder, inverter, ou completar a promessa da abertura.</p>
+
+    <div class="descida-grid rev">
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Chame-me Ismael."</p>
+        <p class="descida-analise">A vida antes. O homem que parte. A identidade declarada.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"E eu sou o único que escapou para te contar."</p>
+        <p class="descida-analise">O sobrevivente. A morte de tudo ao redor. A identidade que restou é a do testemunho. Moby Dick termina onde começou: com Ismael, agora diferente.</p>
+      </div>
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Muitos anos depois, diante do pelotão de fuzilamento..."</p>
+        <p class="descida-analise">O futuro já sabido. A morte anunciada desde a primeira linha.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"...pois a estirpe condenada a cem anos de solidão não tinha uma segunda oportunidade sobre a terra."</p>
+        <p class="descida-analise">A abertura prometeu o fim; o fim cumpre a promessa. Cem anos depois, o destino da primeira linha chega. É um círculo perfeito — ou uma espiral.</p>
+      </div>
+
+      <div class="descida-lado">
+        <h4 class="lima">ABERTURA</h4>
+        <p class="descida-cita">"Nonada."</p>
+        <p class="descida-analise">Nada de importância. A negação do que virá.</p>
+      </div>
+      <div class="descida-lado escuro">
+        <h4 class="cinza">ENCERRAMENTO</h4>
+        <p class="descida-cita">"O senhor... Mire veja: o mais importante e bonito, do mundo, é isto: que as pessoas não estão sempre iguais, ainda não foram terminadas — mas que elas vão sempre mudando."</p>
+        <p class="descida-analise">Do "nonada" ao mais importante do mundo: o arco completo. O que era nada se revela a metamorfose humana. O encerramento inverte a abertura.</p>
+      </div>
+
+    </div>
+
+    <div class="principios rev" style="margin-top:3rem;">
+
+      <div class="principio">
+        <div class="prin-num">01</div>
+        <div class="prin-corpo">
+          <h4>O final não resolve — ressoa</h4>
+          <p>Os finais mais poderosos não fecham todas as questões: fecham a questão certa, aquela que importava desde o início, e deixam as demais em aberto com elegância. Resolução total é satisfação momentânea. Ressonância é o que dura.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">02</div>
+        <div class="prin-corpo">
+          <h4>A última linha é a primeira linha do silêncio</h4>
+          <p>Depois da última linha, o leitor fecha o livro e está em silêncio. O que você quer que exista nesse silêncio? Uma pergunta? Uma imagem? Uma emoção sem nome? A última linha não encerra — ela abre o silêncio que vem depois.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">03</div>
+        <div class="prin-corpo">
+          <h4>Finais anticlimáticos são escolhas, não falhas</h4>
+          <p>Nem todo livro precisa de um final dramático. Chékhov, Carver, Lispector — terminam em gestos pequenos, em silêncios, em não-eventos que parecem banais e são devastadores. O anticlimax é uma técnica, não uma desistência.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">04</div>
+        <div class="prin-corpo">
+          <h4>Não confunda o fim da narrativa com o fim do livro</h4>
+          <p>O enredo pode terminar antes do livro. Os últimos parágrafos podem ser o personagem depois da história — ou o narrador refletindo sobre ela — ou uma imagem que existe fora do enredo. Livros que terminam quando o enredo termina frequentemente perdem a nota mais importante.</p>
+        </div>
+      </div>
+
+      <div class="principio">
+        <div class="prin-num">05</div>
+        <div class="prin-corpo">
+          <h4>A última palavra importa</h4>
+          <p>Escritores como Joyce, Woolf e Saramago escolheram a última palavra de seus livros com a mesma atenção que a primeira. A última palavra é o que ecoa. "Sim" fecha o Ulisses. "Sim" é a última coisa que existe do livro mais difícil da literatura.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev">
+      <p>Você vai reescrever o final. Provavelmente mais de uma vez. <strong>O final correto do seu livro não é o final que você planejou — é o final que o próprio livro pede.</strong> Quando você termina de escrever o rascunho, releia apenas a primeira e a última linha. Se elas parecem pertencer ao mesmo livro, você chegou perto. Se parecem pertencer a livros diferentes, o trabalho continua.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ VI · SEU ARRANQUE ═════════════════════════════════ -->
+<section class="estagio" id="arranque" data-num="VI" style="background:var(--profundo);">
+  <div class="wrap">
+    <div class="estagio-label rev">
+      <span class="estagio-codigo">Estágio VI</span>
+      <span class="estagio-titulo-tipo">Você. Agora. Escreva.</span>
+    </div>
+    <h2 class="titulo-grande rev rev-d1">Seu <em>Arranque</em></h2>
+    <p class="texto-intro rev rev-d2">Cinco exercícios para encontrar a sua abertura — não a abertura de um livro genérico, mas a do livro que só você pode escrever.</p>
+
+    <div class="divisor rev"></div>
+
+    <div class="arranque-lista rev">
+
+      <div class="arranque-item">
+        <h4>O Método Kafka: Entregue o impossível como rotina</h4>
+        <p>Escreva uma primeira linha que anuncia algo sobrenatural, absurdo ou impossível — mas com o tom factual de um boletim de ocorrências. Sem surpresa, sem explicação. Apenas o fato insólito.</p>
+        <textarea class="arranque-campo" id="ex1" rows="3" placeholder="[Personagem] [verbo passado] [evento impossível]."></textarea>
+        <button class="btn-arranque" onclick="mostrarFeedback('fb1')">Avaliar minha linha</button>
+        <div class="arranque-feedback" id="fb1">
+          <strong style="color:var(--lima);">O que observar:</strong> A linha funciona quando a objetividade cria o estranhamento — não o vocabulário dramático. Se você usou palavras como "surpreendentemente", "de repente" ou "inacreditavelmente", tire. O impossível se fortalece na frieza. Releia sem nenhum advérbio de intensidade.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Camus: Deixe a voz revelar o personagem</h4>
+        <p>Escreva três frases de abertura onde a voz do narrador — a sintaxe, o vocabulário, o que ele nota e o que ignora — já nos diga quem ele é, sem que você o descreva diretamente.</p>
+        <textarea class="arranque-campo" id="ex2" rows="4" placeholder="Três frases. Sem descrição direta do personagem. Só o que ele diz — e como diz."></textarea>
+        <button class="btn-arranque" onclick="mostrarFeedback('fb2')">Avaliar minha abertura</button>
+        <div class="arranque-feedback" id="fb2">
+          <strong style="color:var(--lima);">Teste de voz:</strong> Cubra o texto e pergunte a alguém de confiança: "Quem é essa pessoa?" Se a resposta for coerente com quem você imaginou — a voz funcionou. Se a resposta for "não sei" ou descrever alguém completamente diferente, a voz ainda não chegou. O personagem não precisa se apresentar; precisa se revelar.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Proust: Comece no banal para chegar ao essencial</h4>
+        <p>Escolha um hábito cotidiano do seu personagem — algo que ele faz todo dia, sem pensar. Escreva duas frases sobre esse hábito, com precisão. Deixe que a terceira frase vaze para o que esse hábito esconde.</p>
+        <textarea class="arranque-campo" id="ex3" rows="4" placeholder="Todo dia, [personagem] fazia [hábito]. [Detalhe preciso]. [Terceira frase: a fissura]."></textarea>
+        <button class="btn-arranque" onclick="mostrarFeedback('fb3')">Avaliar minha abertura</button>
+        <div class="arranque-feedback" id="fb3">
+          <strong style="color:var(--lima);">A terceira frase é o livro:</strong> As duas primeiras constroem rotina. A terceira precisa quebrá-la — não dramaticamente, mas com uma fissura fina: um detalhe que não deveria estar ali, uma hesitação, uma memória inoportuna. Se a terceira frase é tão banal quanto as duas primeiras, ainda não chegou ao que importa.
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Guimarães Rosa: Invente a língua</h4>
+        <p>Escreva uma primeira linha em que uma palavra seja inventada ou deslocada de sua função habitual. A sintaxe pode ser estranha. A ordem pode ser invertida. O leitor não deve entender tudo — mas deve sentir tudo.</p>
+        <textarea class="arranque-campo" id="ex4" rows="3" placeholder="Uma frase onde a língua faz o que a língua não costuma fazer."></textarea>
+        <button class="btn-arranque" onclick="mostrarFeedback('fb4')">Avaliar minha linha</button>
+        <div class="arranque-feedback" id="fb4">
+          <strong style="color:var(--lima);">Cuidado com a afetação:</strong> A língua inventada só funciona quando emerge de uma necessidade real — quando o português convencional é pequeno demais para o que precisa ser dito. Se a sua linha parece difícil por escolha estética sem conteúdo por baixo, é afetação. Releia e pergunte: essa estranheza vem de dentro do mundo do livro ou de fora dele?
+        </div>
+      </div>
+
+      <div class="arranque-item">
+        <h4>O Método Austen: Mente para revelar a verdade</h4>
+        <p>Escreva uma primeira linha que afirma algo que parece verdade absoluta — mas que o livro vai contradizer. Use o tom de uma "verdade universal" para introduzir exatamente o que o livro vai questionar.</p>
+        <textarea class="arranque-campo" id="ex5" rows="3" placeholder="É uma verdade [adjetivo] que [afirmação que o livro vai contradizer]."></textarea>
+        <button class="btn-arranque" onclick="mostrarFeedback('fb5')">Avaliar minha linha</button>
+        <div class="arranque-feedback" id="fb5">
+          <strong style="color:var(--lima);">O teste da ironia:</strong> A linha funciona quando é possível lê-la em dois registros: um sério (para um leitor desavisado) e um irônico (para o leitor que percebe o jogo). Se só funciona em um registro, ou a ironia é óbvia demais ou não existe. A zona certa é aquela onde o leitor sorri — mas não tem certeza se deveria.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="aviso-voz rev" style="margin-top:2rem;">
+      <p>Nenhum desses métodos é uma fórmula. São lentes — maneiras de olhar para o começo do seu livro a partir de ângulos diferentes. <strong>O seu começo real não virá de nenhum exercício: virá do momento em que você esquecer os exercícios e escrever o que precisa ser escrito.</strong> Mas às vezes, para chegar ao que precisa ser escrito, é necessário escrever muitas coisas que não precisam.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO FINAL ═══════════════════════════════════ -->
+<section class="manifesto-fim">
+  <span class="estagio-codigo" style="display:inline-block;margin-bottom:2rem;position:relative;">Chegada</span>
+  <h2>A primeira linha<br>perfeita é a que<br>você <em>escreveu</em>.</h2>
+  <p>Não a que García Márquez escreveria. Não a que Clarice escreveria. A que só existe no começo do livro que só você pode terminar.</p>
+  <p>Comece. O resto da montanha russa se organiza depois. Mas ela não existe sem o primeiro movimento para cima.</p>
+  <p class="assinatura">Escrevaral · Trilha: Como Começar um Livro</p>
+</section>
+
+<script>
+// ── PROGRESSO ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progresso').style.width = ((window.scrollY / h) * 100) + '%';
+});
+
+// ── REVEAL ─────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+// ── NAV ATIVO ──────────────────────────────────────────
+const secs = document.querySelectorAll('section[id]');
+const navAs = document.querySelectorAll('.nav-estagio');
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navAs.forEach(a => a.classList.toggle('ativo', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.25 });
+secs.forEach(s => navObs.observe(s));
+
+// ── LINHAS TOGGLE ──────────────────────────────────────
+function toggleLinha(el) {
+  const era = el.classList.contains('aberta');
+  document.querySelectorAll('.linha-item').forEach(i => i.classList.remove('aberta'));
+  if (!era) el.classList.add('aberta');
+}
+
+// ── ESTRUTURAS TABS ────────────────────────────────────
+function mudarEstrutura(btn, id) {
+  document.querySelectorAll('.estrutura-tab').forEach(t => t.classList.remove('ativo'));
+  document.querySelectorAll('.estrutura-painel').forEach(p => p.classList.remove('ativo'));
+  btn.classList.add('ativo');
+  document.getElementById(id).classList.add('ativo');
+}
+
+// ── FEEDBACK EXERCÍCIOS ────────────────────────────────
+function mostrarFeedback(id) {
+  document.getElementById(id).classList.add('visivel');
+}
+</script>
+
+<!-- ── RODAPÉ DE NAVEGAÇÃO ──────────────────────────── -->
+<footer style="
+  background: var(--profundo);
+  border-top: 1px solid var(--fio);
+  padding: 4rem 2rem;
+">
+  <div style="max-width: 900px; margin: 0 auto;">
+
+    <div style="
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin-bottom: 3rem;
+    ">
+      <!-- CTA principal: abrir o editor -->
+      <div style="
+        background: var(--lima-apagado);
+        border: 1px solid rgba(184,242,49,0.25);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lima); margin-bottom: 0.8rem;">Escreva agora</p>
+          <strong style="font-family: var(--ff-display); font-size: 1.7rem; font-weight: 700; color: var(--branco); line-height: 1.2; display: block;">O editor que deixa você escrever</strong>
+          <p style="font-size: 0.88rem; color: var(--cinza-claro); margin-top: 0.8rem; line-height: 1.6; font-style: italic;">Offline, sem IA, sem distrações. O Escrevaral é um editor de escrita feito para escritores brasileiros.</p>
+        </div>
+        <a href="./index.html#editor" style="
+          display: inline-block;
+          background: var(--lima);
+          color: var(--void);
+          font-family: var(--ff-mono);
+          font-size: 0.62rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 0.8rem 1.8rem;
+          text-decoration: none;
+          align-self: flex-start;
+          font-weight: 500;
+        ">
+          Abrir o Escrevaral →
+        </a>
+      </div>
+
+      <!-- Links para outras páginas de conteúdo -->
+      <div style="
+        background: var(--ardosia);
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1.5rem;
+      ">
+        <div>
+          <p style="font-family: var(--ff-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cinza); margin-bottom: 0.8rem;">Continue lendo</p>
+          <strong style="font-family: var(--ff-display); font-size: 1.4rem; font-weight: 700; color: var(--branco); line-height: 1.3; display: block;">Como estruturar um romance</strong>
+          <p style="font-size: 0.88rem; color: var(--cinza-claro); margin-top: 0.8rem; line-height: 1.6; font-style: italic;">Dos três atos ao ritmo dos capítulos — aprenda a construir a espinha dorsal da sua história.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: flex-start;">
+          <a href="./vereda-estrutura-romance.html" style="
+            display: inline-block;
+            border: 1px solid var(--fio-forte);
+            color: var(--cinza-claro);
+            font-family: var(--ff-mono);
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+          ">
+            Ler o guia →
+          </a>
+          <a href="./vereda-titulo-do-livro.html" style="
+            color: var(--cinza);
+            font-family: var(--ff-mono);
+            font-size: 0.58rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            opacity: 0.7;
+          ">
+            Ou: como escolher o título do livro →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="
+      border-top: 1px solid var(--fio);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    ">
+      <span style="font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cinza);">
+        Escrevaral — para escritores brasileiros
+      </span>
+      <a href="./index.html#editor" style="font-family: var(--ff-mono); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cinza); text-decoration: none;">
+        rfmss.github.io/escrevaral
+      </a>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

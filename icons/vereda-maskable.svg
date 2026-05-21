@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Vereda">
+  <rect width="512" height="512" fill="#2e4d43"/>
+  <circle cx="256" cy="256" r="206" fill="#fdfcfb"/>
+  <path d="M156 130c44 94 73 164 86 212 13-55 52-131 116-228" fill="none" stroke="#2e4d43" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M162 368h196" fill="none" stroke="#a0522d" stroke-width="24" stroke-linecap="round"/>
+</svg>

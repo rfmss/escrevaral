@@ -1,0 +1,122 @@
+{
+  "a": {
+    "file": "synonyms/a.json",
+    "count": 734
+  },
+  "b": {
+    "file": "synonyms/b.json",
+    "count": 282
+  },
+  "c": {
+    "file": "synonyms/c.json",
+    "count": 768
+  },
+  "d": {
+    "file": "synonyms/d.json",
+    "count": 445
+  },
+  "e": {
+    "file": "synonyms/e.json",
+    "count": 566
+  },
+  "f": {
+    "file": "synonyms/f.json",
+    "count": 336
+  },
+  "g": {
+    "file": "synonyms/g.json",
+    "count": 184
+  },
+  "h": {
+    "file": "synonyms/h.json",
+    "count": 87
+  },
+  "i": {
+    "file": "synonyms/i.json",
+    "count": 442
+  },
+  "j": {
+    "file": "synonyms/j.json",
+    "count": 123
+  },
+  "l": {
+    "file": "synonyms/l.json",
+    "count": 244
+  },
+  "m": {
+    "file": "synonyms/m.json",
+    "count": 515
+  },
+  "n": {
+    "file": "synonyms/n.json",
+    "count": 133
+  },
+  "o": {
+    "file": "synonyms/o.json",
+    "count": 165
+  },
+  "p": {
+    "file": "synonyms/p.json",
+    "count": 780
+  },
+  "q": {
+    "file": "synonyms/q.json",
+    "count": 61
+  },
+  "r": {
+    "file": "synonyms/r.json",
+    "count": 397
+  },
+  "s": {
+    "file": "synonyms/s.json",
+    "count": 581
+  },
+  "t": {
+    "file": "synonyms/t.json",
+    "count": 509
+  },
+  "u": {
+    "file": "synonyms/u.json",
+    "count": 75
+  },
+  "v": {
+    "file": "synonyms/v.json",
+    "count": 302
+  },
+  "x": {
+    "file": "synonyms/x.json",
+    "count": 7
+  },
+  "z": {
+    "file": "synonyms/z.json",
+    "count": 15
+  },
+  "á": {
+    "file": "synonyms/á.json",
+    "count": 15
+  },
+  "â": {
+    "file": "synonyms/â.json",
+    "count": 5
+  },
+  "é": {
+    "file": "synonyms/é.json",
+    "count": 5
+  },
+  "ê": {
+    "file": "synonyms/ê.json",
+    "count": 4
+  },
+  "í": {
+    "file": "synonyms/í.json",
+    "count": 12
+  },
+  "ó": {
+    "file": "synonyms/ó.json",
+    "count": 7
+  },
+  "ú": {
+    "file": "synonyms/ú.json",
+    "count": 8
+  }
+}

@@ -1,0 +1,653 @@
+// editor-controller.js — renderização do editor, inspetor e markup de precisão
+// Depende de: state-store.js (globals DOM + state)
+
+function renderActiveManuscript() {
+  const manuscript = getActiveManuscript();
+  if (!manuscript) {
+    titleInput.value = "";
+    writingArea.innerHTML = "";
+    writingArea.dataset.placeholder = "Comece aqui. A primeira frase abre uma vereda.";
+    writingArea.dataset.placeholderIsExample = "";
+    specializedEditor.hidden = true;
+    writingArea.hidden = false;
+    countStat.textContent = "0 palavras · 0 parágrafos";
+    focusCount.textContent = "0 palavras · 0 parágrafos";
+    wpmStat.textContent = "—";
+    return;
+  }
+  titleInput.value = manuscript.title;
+  // Carrega HTML rico se disponível, senão migra texto plano
+  if (manuscript.html) {
+    writingArea.innerHTML = VeredaDocument.sanitizeHtml(manuscript.html);
+  } else {
+    writingArea.innerHTML = VeredaDocument.textToHtml(manuscript.text || "");
+  }
+  // Limpa histórico de undo ao trocar manuscrito
+  VeredaDocument.clearHistory();
+  // Restaura preset editorial do manuscrito
+  if (pagePresetSel) pagePresetSel.value = manuscript.pagePreset || "draft";
+  // Se estiver em modo páginas, re-renderizar com o novo manuscrito
+  if (_currentEditorView === "pages" && pagedEditor) {
+    const _pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, manuscript.pagePreset || "draft", "auto"); updatePageCount(_pc);
+  }
+  updateWritingPlaceholder();
+  renderInspector();
+  renderLexicalView();
+  renderTemplateReference();
+  renderDecolonialObserver();
+  renderMetadataForm();
+  renderProofView();
+  ensureInitialVersion(manuscript);
+  renderVersionList();
+  renderSpecializedEditor(manuscript);
+}
+
+function renderSpecializedEditor(manuscript) {
+  if (!specializedEditor) return;
+  // Se templates ainda não carregaram, aguarda e re-renderiza
+  if (window.VeredaTemplates && !VeredaTemplates.isLoaded()) {
+    VeredaTemplates.ready().then(() => renderSpecializedEditor(manuscript));
+    return;
+  }
+  const template = VeredaTemplates.getTemplate(state.template.selectedId);
+  const mode = template?.editorMode;
+
+  // Personagem: independente do editorMode, activar por tipo
+  if (!mode && manuscript?.type === "personagem") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildPersonagemEditor(manuscript.text || "");
+    titleInput.placeholder = "Nome do personagem";
+    return;
+  }
+
+  const TITLE_PLACEHOLDERS = {
+    soneto:     "Título do soneto",
+    screenplay: "Título do episódio",
+    teatro:     "Título da peça",
+    slam:       "Título do poema",
+    enem:       "Título da redação",
+  };
+  titleInput.placeholder = TITLE_PLACEHOLDERS[mode] || "Título do manuscrito";
+
+  if (mode === "soneto") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildSonetoEditor(manuscript.text);
+  } else if (mode === "screenplay") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildScreenplayEditor(manuscript.text);
+    // Foca o primeiro campo de ação para deixar claro que é editável
+    requestAnimationFrame(() => {
+      const firstAction = specializedEditor.querySelector(".sp-slug-input, .sp-action-area");
+      if (firstAction && !firstAction.value && document.activeElement === document.body) firstAction.focus();
+    });
+  } else if (mode === "teatro") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildTeatroEditor(manuscript.text);
+  } else if (mode === "slam") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildSlamEditor(manuscript.text);
+  } else if (mode === "enem") {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildENEMEditor(manuscript.text, template);
+    requestAnimationFrame(() => updateENEMCounter());
+  } else {
+    writingArea.hidden = false;
+    specializedEditor.hidden = true;
+  }
+}
+
+function renderMetadataForm() {
+  const manuscript = getActiveManuscript();
+  const emptyEl  = document.querySelector("[data-archive-panel-empty]");
+  const contentEl = document.querySelector("[data-archive-panel-content]");
+
+  if (!manuscript) {
+    if (emptyEl)   emptyEl.hidden  = false;
+    if (contentEl) contentEl.hidden = true;
+    return;
+  }
+
+  if (emptyEl)   emptyEl.hidden  = true;
+  if (contentEl) contentEl.hidden = false;
+
+  // Mostra identidade da nota no topo do painel
+  const identityEl  = document.querySelector("[data-archive-note-identity]");
+  const titleEl     = document.querySelector("[data-archive-note-title]");
+  const kindEl      = document.querySelector("[data-archive-note-kind]");
+  if (identityEl && titleEl && kindEl) {
+    identityEl.hidden = false;
+    titleEl.textContent = manuscript.title || "Sem título";
+    const kindLabel = manuscript.kind || manuscript.type || "";
+    const isOpenInEditor = manuscript.id === state.activeId;
+    kindEl.textContent = [kindLabel, isOpenInEditor ? "· aberta no editor" : ""].filter(Boolean).join(" ");
+  }
+
+  metadataFields.forEach((field) => {
+    const value = manuscript[field.dataset.metadataField] ?? "";
+    field.value = Array.isArray(value) ? value.join(", ") : value;
+  });
+
+  progressReadout.textContent = `${manuscript.progress || 0}%`;
+}
+
+let _undoTimer = null;
+function updateCurrentManuscript() {
+  scheduleUndoPush();
+  const manuscript = getActiveManuscript();
+  const nextManuscript = {
+    ...manuscript,
+    title: titleInput.value.trim() || "Manuscrito sem título",
+    text: writingArea.innerText.trim(),
+    html:  writingArea.innerHTML,
+    updatedAt: new Date().toISOString(),
+  };
+
+  updateActiveManuscript(nextManuscript);
+
+  updateWritingStats();
+  renderLexicalView();
+  renderTemplateReference();
+  renderDecolonialObserver();
+  renderMetadataForm();
+  renderManuscriptNavigation();
+  renderProjectGrid();
+  maybeCreateAutoVersion(nextManuscript);
+  queueSave();
+}
+
+function createVoiceMirrorMarkup(analysis, criterios, alertas) {
+  const alertasHtml = alertas && alertas.length ? `
+    <div class="voice-criterios">
+      <h4>Análise editorial — ${alertas.length} ponto(s) de atenção</h4>
+      <div class="voice-alertas">
+        ${alertas.map(a => {
+          const criterio = window.VeredaCriterios ? VeredaCriterios.criterios.find(c => c.id === a.id) : null;
+          const fontes = criterio ? criterio.fontes.slice(0, 3).map(f => {
+            const livro = VeredaCriterios.getLivroPorId(f);
+            return livro ? livro.autor.split(" ").slice(-1)[0] : f;
+          }).join(", ") : "";
+          return `
+          <div class="voice-alerta voice-alerta-${a.nivel}">
+            <span class="voice-alerta-dim">${getDimLabel(a.dim)}</span>
+            <span class="voice-alerta-body">
+              ${escapeHtml(a.msg)}
+              ${fontes ? `<span class="voice-alerta-fonte">${escapeHtml(fontes)}</span>` : ""}
+            </span>
+          </div>`;
+        }).join("")}
+      </div>
+      <p class="voice-criterios-note">18 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 42 critérios →</a></p>
+    </div>
+  ` : "";
+
+  const metaHtml = criterios ? `
+    <div class="voice-metrics">
+      ${createVoiceMetric("Palavras", analysis.counts.words)}
+      ${createVoiceMetric("TTR", `${analysis.metrics.ttr}%`)}
+      ${createVoiceMetric("Pal/frase", analysis.metrics.avgSentence)}
+      ${createVoiceMetric("Legib.", criterios.meta.fleschLabel)}
+      ${createVoiceMetric("Passiva", `${criterios.economia.vozPassiva.proporcao}%`)}
+      ${createVoiceMetric("-mente", `${criterios.economia.adverbiosMente.densidade}%`)}
+    </div>
+  ` : `
+    <div class="voice-metrics">
+      ${createVoiceMetric("Palavras", analysis.counts.words)}
+      ${createVoiceMetric("TTR", `${analysis.metrics.ttr}%`)}
+      ${createVoiceMetric("Densidade", `${analysis.metrics.lexicalDensity}%`)}
+      ${createVoiceMetric("Pal/frase", analysis.metrics.avgSentence)}
+    </div>
+  `;
+
+  return `
+    <div class="voice-result-header">
+      <div>
+        <h3>${escapeHtml(analysis.voice.title)}</h3>
+        <p>${escapeHtml(analysis.voice.description)}</p>
+      </div>
+      <span class="voice-pill">${escapeHtml(analysis.voice.gesture)}</span>
+    </div>
+    ${metaHtml}
+    ${alertasHtml}
+    <div class="voice-columns">
+      ${createVoicePanel("Ecos possíveis", analysis.voice.echoes)}
+      ${createVoicePanel("Forças", analysis.strengths)}
+      ${createVoicePanel("Pontos cegos", analysis.blindSpots)}
+      ${createVoicePanel("Exercícios", analysis.exercises)}
+      ${createVoiceBars("Temperatura", analysis.emotional)}
+      ${createVoiceBars("Campos", analysis.fields)}
+    </div>
+    <p class="voice-disclaimer">${escapeHtml(analysis.disclaimer)}</p>
+  `;
+}
+
+function renderInspector() {
+  const manuscript = getActiveManuscript();
+  const text = manuscript?.text || writingArea.innerText || "";
+  const wordCount = countWords(writingArea.innerText || text);
+  const paragraphs = writingArea.querySelectorAll("p, h1, h2, h3, h4, h5, h6, blockquote, li").length || (text.trim() ? text.trim().split(/\n+/).filter(Boolean).length : 0);
+
+  countStat.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
+  focusCount.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
+  const wpmVal = wordCount > 0 ? Math.max(1, Math.min(82, Math.round(wordCount / 3))) : "—";
+  wpmStat.textContent = wpmVal;
+  const wpmLabel = document.querySelector("[data-wpm-label]");
+  if (wpmLabel) wpmLabel.textContent = wordCount > 0 ? "pal/min · ritmo atual" : "escreva para ver";
+  updateGoalDisplay(wordCount);
+  checkProgress();
+
+  // Inspector: colapsado por padrão, escritor abre quando quiser
+  // Não abre automaticamente — mesa organizada por contexto, não por desbloqueio
+
+  const data = analyzeInspector(text);
+
+  if (!data) {
+    if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras aparecem conforme o texto cresce</span>`;
+    if (grammarBarEl) grammarBarEl.innerHTML = "";
+    if (grammarLegendEl) grammarLegendEl.innerHTML = "";
+    if (fleschScoreEl) fleschScoreEl.textContent = "--";
+    if (fleschLabelEl) fleschLabelEl.innerHTML = "Escreva para ver";
+    return;
+  }
+
+  if (wordCloudEl) wordCloudEl.innerHTML = data.topWords
+    .map(([w, n]) => `<button data-lexical-select="${escapeHtml(w)}">${escapeHtml(w)} (${n})</button>`)
+    .join("");
+
+  if (grammarBarEl) grammarBarEl.innerHTML = data.dist
+    .map(d => `<span style="--w:${d.pct}%;--c:${d.color}"></span>`)
+    .join("");
+
+  if (grammarLegendEl) grammarLegendEl.innerHTML = data.dist
+    .map(d => `<li><i style="--c:${d.color}"></i>${escapeHtml(d.label)} <b>${d.pct}%</b></li>`)
+    .join("");
+
+  if (fleschScoreEl) fleschScoreEl.textContent = data.flesch;
+  if (fleschLabelEl) fleschLabelEl.innerHTML = `${escapeHtml(data.fleschMeta.label)}<br><span class="flesch-sub">${escapeHtml(data.fleschMeta.sub)}</span>`;
+}
+
+function renderTemplateReference() {
+  const template = VeredaTemplates.getTemplate(state.template.selectedId);
+  const manuscript = getActiveManuscript();
+
+  referenceTitle.textContent = template?.label || "";
+  updateWritingPlaceholder(template);
+  referenceTabs.innerHTML = "";
+
+  if (!manuscript) {
+    precisionCard.innerHTML = "";
+    referenceBody.innerHTML = "";
+    return;
+  }
+
+  const wordCount = countWords(manuscript.text || "");
+  const readyForPrecision = wordCount >= 50;
+
+  if (isManuscriptDocument(manuscript)) {
+    precisionCard.innerHTML = readyForPrecision
+      ? createPrecisionMarkup(template ? VeredaPrecision.analyze(template, manuscript.text) : { checks: [] }, manuscript, template)
+      : "";  // guia aparece como companhia, não avaliação, antes de 50 palavras
+  } else {
+    precisionCard.innerHTML = createProjectNotePrecisionMarkup(manuscript);
+  }
+  referenceBody.innerHTML = template ? createReferenceMarkup(template) : "";
+}
+
+function createProjectNotePrecisionMarkup(manuscript) {
+  const type = getArchiveType(manuscript);
+  return `
+    <div class="precision-top">
+      <span>Nota de projeto</span>
+      <strong>--</strong>
+    </div>
+    <div class="precision-meter" aria-label="Acompanhamento indisponível para nota de projeto">
+      <i style="--score: 0%"></i>
+    </div>
+    <p>${escapeHtml(type.label)} não usa acompanhamento de forma.</p>
+    <div class="precision-checks">
+      <div class="precision-check is-passed">
+        <span class="material-symbols-outlined">info</span>
+        <div>
+          <strong>Use como material de apoio</strong>
+          <small>Pesquisa, mundo, personagens e cronologia ajudam o manuscrito, mas não são avaliados como texto final.</small>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function createPrecisionMarkup(analysis, manuscript, template) {
+  if (!manuscript.text?.trim()) {
+    const firstSections = (template?.guidance?.sections || []).slice(0, 3);
+    const hintsHtml = firstSections.length
+      ? `<div class="precision-hints">${firstSections.map(([title, desc]) =>
+          `<div class="precision-hint"><strong>${escapeHtml(title)}</strong><span>${escapeHtml(desc)}</span></div>`
+        ).join("")}</div>`
+      : "";
+    return `
+      <div class="precision-empty">
+        ${hintsHtml || `<span class="material-symbols-outlined">edit_note</span><p>Escreva mais para ver como o texto conversa com o guia.</p>`}
+      </div>`;
+  }
+  const checklist = getChecklistFor(manuscript.id, template?.id);
+
+  const automaticChecks = analysis.checks.filter((c) => c.passed !== undefined);
+  const manualChecks = analysis.checks.filter((c) => c.passed === undefined);
+
+  const automaticHtml = automaticChecks.length
+    ? `
+    <div class="precision-subsection">
+      <div class="precision-subsection-label">
+        <span class="material-symbols-outlined">analytics</span>
+        Pistas do texto
+      </div>
+      ${automaticChecks.map((check) => `
+        <div class="precision-check${check.passed ? " is-passed" : ""}">
+          <span class="precision-check-icon">
+            ${check.passed
+              ? `<span class="material-symbols-outlined">check_circle</span>`
+              : `<span class="material-symbols-outlined is-pending-icon">radio_button_unchecked</span>`}
+          </span>
+          <div>
+            <strong>${escapeHtml(check.label)}</strong>
+            <small>${escapeHtml(check.hint)}</small>
+          </div>
+        </div>
+      `).join("")}
+    </div>`
+    : "";
+
+  const manualHtml = manualChecks.length
+    ? `
+    <div class="precision-subsection precision-subsection-manual">
+      <div class="precision-subsection-label">
+        <span class="material-symbols-outlined">checklist</span>
+        Minha revisão
+      </div>
+      ${manualChecks.map((check) => {
+        const checked = Boolean(checklist[check.label]);
+        return `
+          <label class="precision-check is-manual${checked ? " is-checked" : ""}">
+            <input type="checkbox" data-checklist-criterion="${escapeHtml(check.label)}" ${checked ? "checked" : ""}>
+            <div>
+              <strong>${escapeHtml(check.label)}</strong>
+              <small>${escapeHtml(check.hint)}</small>
+            </div>
+          </label>
+        `;
+      }).join("")}
+    </div>`
+    : "";
+
+  return `
+    <div class="precision-top">
+      <span class="precision-top-label">
+        Como o texto conversa com o guia
+        <span class="precision-hint-anchor" tabindex="0" aria-label="O que é isso?">
+          <span class="material-symbols-outlined">info</span>
+          <span class="precision-hint-tooltip" role="tooltip">
+            O guia sugere elementos para o formato escolhido. Isso mostra o quanto seu texto já cobre esses elementos — é apoio, não nota de prova.
+          </span>
+        </span>
+      </span>
+      <strong>${(analysis.words ?? 0) < 50 ? "Ainda cedo" : `${analysis.score ?? 0}%`}</strong>
+    </div>
+    <div class="precision-meter" aria-label="Como o texto conversa com o guia">
+      <i style="--score: ${analysis.score}%"></i>
+    </div>
+    <p>${(analysis.words ?? 0) < 50 ? "Continue escrevendo" : `${escapeHtml(analysis.status ?? "—")} · ${analysis.words ?? 0}${analysis.limit ? `/${analysis.limit}` : ""} palavras`}</p>
+    <div class="precision-checks">
+      ${automaticHtml}
+      ${manualHtml}
+    </div>
+  `;
+}
+
+function createReferenceMarkup(template) {
+  const guidance = template.guidance || { meta: [], sections: [], reminders: [] };
+  const formatBlock = guidance.format ? createFormatRulesMarkup(guidance.format) : "";
+  const model = template.model ? createModelMarkup(template.model) : "";
+
+  // Blueprint: DNA + construção + conectivos da forma
+  const blueprintBlock = guidance.blueprint ? `
+    <section class="reference-blueprint">
+      <h3>Como esta forma funciona</h3>
+      <div class="blueprint-body">
+        ${escapeHtml(guidance.blueprint).replace(/\n/g, "<br>")}
+      </div>
+    </section>
+  ` : "";
+
+  // Sketch: esqueleto com marcadores — para copiar se quiser começar com estrutura
+  const sketchBlock = guidance.sketch ? `
+    <section class="reference-sketch">
+      <details>
+        <summary>Começar com estrutura</summary>
+        <pre class="sketch-body">${escapeHtml(guidance.sketch)}</pre>
+      </details>
+    </section>
+  ` : "";
+
+  return `
+    ${blueprintBlock}
+    ${formatBlock}
+    <section>
+      <h3>Estrutura</h3>
+      <div class="reference-sections">
+        ${(guidance.sections || [])
+          .map(
+            ([title, description]) => `
+              <article>
+                <strong>${escapeHtml(title)}</strong>
+                <p>${escapeHtml(description)}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+    <section>
+      <h3>Lembretes para escrever melhor</h3>
+      <ul>
+        ${(guidance.reminders || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+      </ul>
+    </section>
+    ${sketchBlock}
+    ${model}
+  `;
+}
+
+function createFormatRulesMarkup(format) {
+  return `
+    <section class="format-rules">
+      <div class="format-rules-header">
+        <span class="material-symbols-outlined">format_shapes</span>
+        <strong>${escapeHtml(format.label)}</strong>
+      </div>
+      <ul class="format-rules-list">
+        ${format.rules.map((rule) => `<li>${escapeHtml(rule)}</li>`).join("")}
+      </ul>
+    </section>
+  `;
+}
+
+function createModelMarkup(model) {
+  const placeholderHtml = model.placeholder
+    ? `<div class="reference-scaffold">
+        <p class="reference-scaffold-caption">Estrutura — substitua cada linha pelo seu verso</p>
+        <pre>${escapeHtml(model.placeholder)}</pre>
+       </div>`
+    : "";
+  return `
+    <section class="reference-model">
+      <h3>Como soa este formato</h3>
+      <article>
+        ${placeholderHtml}
+        <strong>${escapeHtml(model.exemplar)}</strong>
+        <p>${escapeHtml(model.why)}</p>
+        <small>Referências: ${model.references.map(escapeHtml).join(", ")}.</small>
+      </article>
+    </section>
+  `;
+}
+
+function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.template.selectedId)) {
+  const literary = template?.model?.placeholder;
+  writingArea.dataset.placeholder = literary || "Comece aqui. A primeira frase abre uma vereda.";
+  writingArea.dataset.placeholderIsExample = literary ? "true" : "";
+}
+
+function insertPlainTextAtSelection(text) {
+  if (!text) return;
+  // execCommand mantém undo nativo do browser no contenteditable
+  if (!document.execCommand("insertText", false, text)) {
+    // fallback para browsers que bloqueiam execCommand em contextos restritos
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount) return;
+    sel.deleteFromDocument();
+    sel.getRangeAt(0).insertNode(document.createTextNode(text));
+    sel.collapseToEnd();
+  }
+}
+
+writingArea.addEventListener("paste", (e) => {
+  e.preventDefault();
+  const cbd = e.clipboardData || window.clipboardData;
+  const text = cbd ? cbd.getData("text/plain") : "";
+  insertPlainTextAtSelection(text);
+  recordClipboardProof("paste");
+});
+writingArea.addEventListener("cut",   () => recordClipboardProof("cut"));
+writingArea.addEventListener("mouseup", () => captureSelectedWord(true));
+writingArea.addEventListener("keyup", () => captureSelectedWord(false));
+
+// ── UNDO / REDO GLOBAL (intercepta só no modo páginas) ────────────────────
+// No modo fluxo o browser cuida do undo/redo nativo no contenteditable.
+document.addEventListener("keydown", (e) => {
+  const mod = e.ctrlKey || e.metaKey;
+  if (!mod) return;
+  if (_currentEditorView !== "pages") return;
+
+  // Verifica se o foco está dentro de um page-body
+  const inPage = document.activeElement?.closest(".page-body");
+  if (!inPage) return;
+
+  const isUndo = !e.shiftKey && e.key === "z";
+  const isRedo = e.key === "y" || (e.shiftKey && e.key === "z");
+
+  if (!isUndo && !isRedo) return;
+  e.preventDefault();
+
+  const cursor = saveCursorPosition();
+  const current = writingArea.innerHTML;
+  const restored = isUndo
+    ? VeredaDocument.undo(current)
+    : VeredaDocument.redo(current);
+
+  if (restored === null) return;
+
+  writingArea.innerHTML = restored;
+  updateCurrentManuscript();
+
+  const ms = getActiveManuscript();
+  const _pc = VeredaPagination.render(pagedEditor, restored, ms?.pagePreset || "draft", "auto"); updatePageCount(_pc);
+  restoreCursorPosition(cursor);
+});
+
+// ── DICA CONTEXTUAL DA ACADEMIA APÓS PAUSA (P11) ──────
+const academiaHintToast = document.getElementById("academia-hint-toast");
+const HINT_IDLE_MS = 90_000; // 90s de pausa dispara o toast
+const HINT_AUTO_HIDE_MS = 12_000; // some sozinho após 12s
+
+function buildPersonagemEditor(text) {
+  const data = parsePersonagemData(text);
+  return `<div class="personagem-editor">` +
+    PERSONAGEM_FIELDS.map(section => `
+      <div class="persona-section">
+        <h3 class="persona-section-title">${section.section}</h3>
+        <div class="persona-fields">
+          ${section.fields.map(f => `
+            <div class="persona-field${f.wide ? " wide" : ""}${f.narrow ? " narrow" : ""}">
+              <label class="persona-label">${f.label}</label>
+              ${f.area
+                ? `<textarea class="persona-input persona-textarea" data-persona-field="${f.key}" placeholder="${escapeHtml(f.ph)}" rows="3">${escapeHtml(data[f.key] || "")}</textarea>`
+                : `<input class="persona-input" type="text" data-persona-field="${f.key}" placeholder="${escapeHtml(f.ph)}" value="${escapeHtml(data[f.key] || "")}">`
+              }
+            </div>`).join("")}
+        </div>
+      </div>`).join("") +
+  `</div>`;
+}
+
+window.VeredaEditorController = { init: true }; // âncora de boot
+
+// ── Input listeners do Editor ─────────────────────────────────────────────────
+if (metadataForm) {
+  metadataForm.addEventListener("input", () => updateCurrentMetadata());
+  metadataForm.addEventListener("focusout", () => renderMetadataForm());
+  const progressSaved = document.querySelector("[data-progress-saved]");
+  metadataForm.querySelector?.("[data-metadata-field='progress']")?.addEventListener("change", () => {
+    if (progressSaved) {
+      progressSaved.hidden = false;
+      clearTimeout(progressSaved._t);
+      progressSaved._t = setTimeout(() => { progressSaved.hidden = true; }, 2000);
+    }
+  });
+}
+if (templateSearch) templateSearch.addEventListener("input", () => setTemplateSearch(templateSearch.value));
+
+// ── ORA-PRO-NÓBIS PARALLAX ────────────────────────────────────────────────────
+// Folhas nas margens da folha se movem suavemente com o mouse.
+// Apenas desktop (min-width: 821px), apenas tema Scriptorium.
+// Movimento máximo: 4px horizontal, 2px vertical.
+// Respeitia prefers-reduced-motion via CSS — aqui só atualiza vars.
+;(function initLeafParallax() {
+  const DESKTOP_MIN = 821;
+  const MAX_X = 4;
+  const MAX_Y = 2;
+  let rafId = null;
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+
+  function isActive() {
+    return (
+      document.documentElement.dataset.theme === "scriptorium" &&
+      window.innerWidth >= DESKTOP_MIN &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function tick() {
+    currentX = lerp(currentX, targetX, 0.06);
+    currentY = lerp(currentY, targetY, 0.06);
+    const r = document.documentElement;
+    r.style.setProperty("--leaf-x", `${currentX.toFixed(2)}px`);
+    r.style.setProperty("--leaf-y", `${currentY.toFixed(2)}px`);
+    rafId = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isActive()) return;
+    const cx = window.innerWidth  / 2;
+    const cy = window.innerHeight / 2;
+    targetX = ((e.clientX - cx) / cx) * MAX_X;
+    targetY = ((e.clientY - cy) / cy) * MAX_Y;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  });
+
+  document.addEventListener("mouseleave", () => {
+    targetX = 0; targetY = 0;
+  });
+
+  // Pausar quando janela não está em foco
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  });
+}());

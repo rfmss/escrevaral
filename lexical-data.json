@@ -1,0 +1,636 @@
+{
+  "localLexicon": {
+    "agua": {
+      "label": "água",
+      "className": "Substantivo",
+      "field": "Natureza — fluidez, transição, purificação",
+      "note": "A água acompanha processos de mudança. Um personagem que cruza água não volta o mesmo."
+    },
+    "barro": {
+      "label": "barro",
+      "className": "Substantivo masculino",
+      "field": "Terra, origem, matéria",
+      "note": "Concretiza o cenário e aproxima a frase do corpo físico da paisagem."
+    },
+    "maria": {
+      "label": "Maria",
+      "className": "Substantivo próprio",
+      "field": "Personagem, ponto de vista",
+      "note": "Quando reaparece com frequência, pode funcionar como âncora emocional da cena."
+    },
+    "seca": {
+      "label": "seca",
+      "className": "Substantivo feminino ou adjetivo",
+      "field": "Clima, falta, resistência",
+      "note": "A ambiguidade entre condição natural e estado emocional pode enriquecer o trecho."
+    },
+    "sertao": {
+      "label": "sertão",
+      "className": "Substantivo masculino",
+      "field": "Território, travessia, interior",
+      "note": "Pode funcionar como lugar físico e também como estado simbólico da narrativa."
+    },
+    "sol": {
+      "label": "sol",
+      "className": "Substantivo masculino",
+      "field": "Luz, castigo, tempo",
+      "note": "Em prosa de atmosfera, tende a marcar pressão sobre o corpo e a paisagem."
+    },
+    "terra": {
+      "label": "terra",
+      "className": "Substantivo",
+      "field": "Natureza — origem, permanência, materialidade",
+      "note": "Simultaneamente chão, planeta e herança. Em ficção brasileira, carrega peso histórico e territorial."
+    },
+    "vento": {
+      "label": "vento",
+      "className": "Substantivo",
+      "field": "Natureza — invisibilidade, força, passagem",
+      "note": "O vento é o único elemento que não se vê — apenas seus efeitos. Metáfora perfeita para o inconsciente da cena."
+    },
+    "olhos": {
+      "label": "olhos",
+      "className": "Substantivo",
+      "field": "Corpo — gestualidade, presença física",
+      "note": "Os olhos são o atalho mais explorado para revelar estado interior. Prefira o que eles fazem ao que eles parecem."
+    },
+    "maos": {
+      "label": "mãos",
+      "className": "Substantivo",
+      "field": "Corpo — gestualidade, ação, relação",
+      "note": "Mãos são o veículo de intenção do personagem. Um gesto específico substitui uma cena inteira de diálogo."
+    },
+    "voz": {
+      "label": "voz",
+      "className": "Substantivo",
+      "field": "Dicção — voz, timbre, comunicação",
+      "note": "A voz carrega temperatura emocional. Descreva o timbre, a velocidade, o silêncio que a precede."
+    },
+    "rosto": {
+      "label": "rosto",
+      "className": "Substantivo",
+      "field": "Corpo — expressão, presença física",
+      "note": "O rosto é o mapa emocional visível. Mas 'ela estava triste' é mais fraco que 'ela olhou para a janela'."
+    },
+    "corpo": {
+      "label": "corpo",
+      "className": "Substantivo",
+      "field": "Corpo — presença física, materialidade",
+      "note": "O corpo é a âncora da cena no mundo físico. Sem corpo, o personagem flutua no abstrato."
+    },
+    "sangue": {
+      "label": "sangue",
+      "className": "Substantivo",
+      "field": "Corpo — materialidade, vida, violência",
+      "note": "Uma das imagens mais carregadas da narrativa. Use com economia."
+    },
+    "coracao": {
+      "label": "coração",
+      "className": "Substantivo",
+      "field": "Corpo e emoção — vida, sentimento, centro",
+      "note": "Duplamente literal e figurado. Na ficção contemporânea, prefira o literal: o coração como órgão pulsante."
+    },
+    "silencio": {
+      "label": "silêncio",
+      "className": "Substantivo",
+      "field": "Tempo — pausa, ausência, tensão narrativa",
+      "note": "O silêncio é um dos instrumentos mais poderosos da prosa. Ele cria o espaço onde a emoção se instala."
+    },
+    "noite": {
+      "label": "noite",
+      "className": "Substantivo",
+      "field": "Tempo e espaço — atmosfera, limiar, invisibilidade",
+      "note": "A noite convoca o inconsciente da cena. Use-a quando o personagem precisa de espaço para não ser visto."
+    },
+    "dia": {
+      "label": "dia",
+      "className": "Substantivo",
+      "field": "Tempo e espaço — claridade, exposição, começo",
+      "note": "O dia torna tudo visível e responsável. Cenas de tensão à luz do dia têm uma crueldade particular."
+    },
+    "manha": {
+      "label": "manhã",
+      "className": "Substantivo",
+      "field": "Tempo — início, potencial, recomeço",
+      "note": "A manhã reinicia o contador emocional. Use-a para marcar viradas ou falsos recomeços."
+    },
+    "tarde": {
+      "label": "tarde",
+      "className": "Substantivo",
+      "field": "Tempo — declínio, cansaço, acumulação",
+      "note": "A tarde acumula o peso do dia. É onde personagens tomam decisões que pareciam impossíveis pela manhã."
+    },
+    "momento": {
+      "label": "momento",
+      "className": "Substantivo",
+      "field": "Tempo — instante, singularidade, decisão",
+      "note": "O 'momento' interrompe o fluxo do tempo. Use-o para marcar os pontos de virada que o leitor deve guardar."
+    },
+    "tempo": {
+      "label": "tempo",
+      "className": "Substantivo",
+      "field": "Tempo — duração, ritmo, relatividade",
+      "note": "Carrega dois sentidos simultâneos: cronológico e meteorológico. Explore a ambiguidade."
+    },
+    "casa": {
+      "label": "casa",
+      "className": "Substantivo",
+      "field": "Espaço — identidade, pertencimento, memória",
+      "note": "A casa é o personagem que permanece quando os outros partem. Descreva-a pelo desgaste que a habitação imprimiu nela."
+    },
+    "rua": {
+      "label": "rua",
+      "className": "Substantivo",
+      "field": "Espaço — trânsito, exposição, anonimato",
+      "note": "A rua expõe o personagem ao mundo. Nela, ele perde o controle que a casa lhe conferia."
+    },
+    "caminho": {
+      "label": "caminho",
+      "className": "Substantivo",
+      "field": "Espaço e narrativa — trajetória, escolha, destino",
+      "note": "O caminho é a metáfora estrutural da narrativa. Descreva-o pelo que o personagem encontra, não pelo destino."
+    },
+    "quarto": {
+      "label": "quarto",
+      "className": "Substantivo",
+      "field": "Espaço — intimidade, limite, interior",
+      "note": "O quarto é o espaço da vida não performática. É onde o personagem existe sem audiência."
+    },
+    "mar": {
+      "label": "mar",
+      "className": "Substantivo",
+      "field": "Natureza — vastidão, limite, desejo",
+      "note": "O mar é o espelho do que está além do alcance. Use-o quando o personagem contempla o que não pode ter."
+    },
+    "chuva": {
+      "label": "chuva",
+      "className": "Substantivo",
+      "field": "Natureza — dissolução, renovação, melancolia",
+      "note": "Chuva na ficção corre o risco do clichê. Só a use se tiver função narrativa além de criar atmosfera."
+    },
+    "fogo": {
+      "label": "fogo",
+      "className": "Substantivo",
+      "field": "Natureza — transformação, destruição, paixão",
+      "note": "O fogo é irrevogável. O que ele toca não volta ao estado anterior. Use para marcar pontos sem retorno."
+    },
+    "luz": {
+      "label": "luz",
+      "className": "Substantivo",
+      "field": "Luz e sombra — revelação, esperança, visibilidade",
+      "note": "Luz é o instrumento mais antigo de revelação narrativa. Mas a luz que revela também expõe."
+    },
+    "sombra": {
+      "label": "sombra",
+      "className": "Substantivo",
+      "field": "Luz e sombra — ocultação, dúvida, ambiguidade",
+      "note": "A sombra é o espaço onde a ficção acontece — entre o que se vê e o que se suspeita."
+    },
+    "amor": {
+      "label": "amor",
+      "className": "Substantivo",
+      "field": "Emoção — desejo, vínculo, vulnerabilidade",
+      "note": "A palavra mais gasta da língua portuguesa. Mostre-o por ação ou detalhe específico, nunca o nomeie."
+    },
+    "medo": {
+      "label": "medo",
+      "className": "Substantivo",
+      "field": "Emoção — tensão, ameaça, resposta corporal",
+      "note": "Mais eficaz quando corporificado: o coração que acelera, a garganta que fecha, os passos que param."
+    },
+    "saudade": {
+      "label": "saudade",
+      "className": "Substantivo",
+      "field": "Emoção — ausência, tempo, pertencimento",
+      "note": "Designa a presença de uma ausência. Especifique o que foi perdido para que ressoe de verdade."
+    },
+    "vida": {
+      "label": "vida",
+      "className": "Substantivo",
+      "field": "Abstração existencial — ser, continuidade, potencial",
+      "note": "Perigosa por ser óbvia e infinita ao mesmo tempo. Âncora-a num detalhe físico concreto."
+    },
+    "morte": {
+      "label": "morte",
+      "className": "Substantivo",
+      "field": "Abstração existencial — limite, perda, transformação",
+      "note": "Só tem força narrativa quando é específica: a morte de alguém determinado, num momento determinado."
+    },
+    "verdade": {
+      "label": "verdade",
+      "className": "Substantivo",
+      "field": "Abstração ética — honestidade, revelação, conflito",
+      "note": "Na ficção, a verdade é sempre a versão que o narrador escolhe mostrar."
+    },
+    "memoria": {
+      "label": "memória",
+      "className": "Substantivo",
+      "field": "Cognição — passado, identidade, tempo",
+      "note": "A memória na ficção é seletiva e produtiva. Ela reconstrói o que o personagem precisa que tenha acontecido."
+    },
+    "palavra": {
+      "label": "palavra",
+      "className": "Substantivo",
+      "field": "Linguagem — comunicação, poder, limite",
+      "note": "Quando um personagem fala sobre 'palavras', ele geralmente fala sobre o que não consegue dizer."
+    },
+    "sonho": {
+      "label": "sonho",
+      "className": "Substantivo",
+      "field": "Cognição — desejo, inconsciente, realidade alternativa",
+      "note": "Sonhos na ficção são arriscados. Só os use se revelarem algo que o personagem consciente não diria."
+    },
+    "andar": {
+      "label": "andar",
+      "className": "Verbo no infinitivo",
+      "field": "Movimento — deslocamento, ritmo, trajetória",
+      "note": "O mais neutro dos verbos de movimento. Prefira verbos com modo: caminhar devagar, arrastar os pés, deslizar."
+    },
+    "correr": {
+      "label": "correr",
+      "className": "Verbo no infinitivo",
+      "field": "Movimento — urgência, fuga, perseguição",
+      "note": "Quando o personagem corre, a prosa também deveria acelerar — frases curtas, verbos fortes, poucos adjetivos."
+    },
+    "cair": {
+      "label": "cair",
+      "className": "Verbo no infinitivo",
+      "field": "Movimento — perda de controle, virada, consequência",
+      "note": "'Cair' marca um ponto de virada. O que acontece logo depois define o personagem."
+    },
+    "ficar": {
+      "label": "ficar",
+      "className": "Verbo no infinitivo",
+      "field": "Estado — permanência, resistência, passividade",
+      "note": "Pode ser o verbo mais dramático — a recusa de partir, a impossibilidade de avançar."
+    },
+    "dizer": {
+      "label": "dizer",
+      "className": "Verbo no infinitivo",
+      "field": "Dicção — comunicação, enunciação, declaração",
+      "note": "O mais neutro dos verbos de dicção. Substitua por verbos que indiquem a forma: murmurar, gritar, hesitar."
+    },
+    "gritar": {
+      "label": "gritar",
+      "className": "Verbo no infinitivo",
+      "field": "Dicção — urgência emocional, perda de controle",
+      "note": "Um personagem que grita perdeu a capacidade de usar a linguagem com precisão. O grito é uma falência do discurso."
+    },
+    "calar": {
+      "label": "calar",
+      "className": "Verbo no infinitivo",
+      "field": "Dicção — silêncio, retenção, recusa",
+      "note": "'Calar' é mais poderoso que 'não dizer'. Implica uma escolha ativa de silêncio."
+    },
+    "lembrar": {
+      "label": "lembrar",
+      "className": "Verbo no infinitivo",
+      "field": "Cognição — memória, passado, identidade",
+      "note": "Quando o personagem lembra, a narrativa muda de camada temporal. Marque com clareza a fronteira."
+    },
+    "esquecer": {
+      "label": "esquecer",
+      "className": "Verbo no infinitivo",
+      "field": "Cognição — apagamento, defesa, perda",
+      "note": "Pode ser voluntário ou involuntário — a distinção define o peso moral da cena."
+    },
+    "sentir": {
+      "label": "sentir",
+      "className": "Verbo no infinitivo",
+      "field": "Percepção e emoção — experiência direta, presença",
+      "note": "Abre dois caminhos: sensação física ou emoção. Especifique qual para ganhar precisão."
+    },
+    "querer": {
+      "label": "querer",
+      "className": "Verbo no infinitivo",
+      "field": "Desejo — vontade, impulso, conflito",
+      "note": "O que o personagem quer é a mola propulsora de toda narrativa. Torne esse querer específico e contraditório."
+    },
+    "silencioso": {
+      "label": "silencioso",
+      "className": "Adjetivo",
+      "field": "Qualidade — ausência de som, interioridade",
+      "note": "Quando o espaço é silencioso, o que não está sendo dito ganha peso. Use para amplificar o interior."
+    },
+    "escuro": {
+      "label": "escuro",
+      "className": "Adjetivo",
+      "field": "Qualidade sensorial — ausência de luz, invisibilidade",
+      "note": "Quase sempre mais interessante como estado do personagem do que como descrição do ambiente."
+    },
+    "quente": {
+      "label": "quente",
+      "className": "Adjetivo",
+      "field": "Qualidade sensorial — temperatura, urgência",
+      "note": "Temperatura é subestimada na ficção. O calor pode ser sufocante ou acolhedor — a ambiguidade é rica."
+    },
+    "frio": {
+      "label": "frio",
+      "className": "Adjetivo",
+      "field": "Qualidade sensorial — temperatura, distância emocional",
+      "note": "Simultaneamente temperatura e postura emocional. Explore a dupla leitura."
+    },
+    "velho": {
+      "label": "velho",
+      "className": "Adjetivo",
+      "field": "Qualidade temporal — desgaste, história, resistência",
+      "note": "O que é velho carrega história visível. Descreva o desgaste específico — não 'velho', mas 'com a pintura descascada'."
+    },
+    "novo": {
+      "label": "novo",
+      "className": "Adjetivo",
+      "field": "Qualidade temporal — frescor, potencial, ingenuidade",
+      "note": "Implica ainda não testado pelo mundo. O contraste com o velho é uma das tensões mais produtivas da narrativa."
+    },
+    "sozinho": {
+      "label": "sozinho",
+      "className": "Adjetivo",
+      "field": "Estado — solidão, autonomia, abandono",
+      "note": "'Sozinho' é um dos estados mais ricos da ficção — contém tanto a solidão forçada quanto a escolhida."
+    },
+    "calmo": {
+      "label": "calmo",
+      "className": "Adjetivo",
+      "field": "Estado emocional — equilíbrio, contenção, superfície",
+      "note": "A calma narrativa é frequentemente mais tensa que o caos. O leitor sente o que o personagem está contendo."
+    },
+    "cansado": {
+      "label": "cansado",
+      "className": "Adjetivo",
+      "field": "Estado físico — exaustão, limite, saturação",
+      "note": "O cansaço é físico mas revela estado moral. Um personagem cansado parou de lutar — ou quase."
+    }
+  },
+  "functionWords": {
+    "artigos": [
+      "a",
+      "as",
+      "o",
+      "os",
+      "um",
+      "uma",
+      "uns",
+      "umas"
+    ],
+    "contracoes": [
+      "no",
+      "na",
+      "nos",
+      "nas",
+      "do",
+      "da",
+      "dos",
+      "das",
+      "ao",
+      "aos",
+      "à",
+      "às",
+      "pelo",
+      "pela",
+      "pelos",
+      "pelas",
+      "num",
+      "numa",
+      "nuns",
+      "numas",
+      "dum",
+      "duma",
+      "duns",
+      "dumas"
+    ],
+    "conjuncoes": [
+      "e",
+      "nem",
+      "mas",
+      "porem",
+      "contudo",
+      "todavia",
+      "entretanto",
+      "ou",
+      "logo",
+      "portanto",
+      "porque",
+      "pois",
+      "que",
+      "porquanto",
+      "embora",
+      "conquanto",
+      "ainda",
+      "posto",
+      "quando",
+      "enquanto",
+      "se",
+      "caso",
+      "como",
+      "conforme",
+      "segundo",
+      "alem",
+      "ate",
+      "desde",
+      "ja",
+      "ora",
+      "quer",
+      "seja"
+    ],
+    "preposicoes": [
+      "a",
+      "ante",
+      "apos",
+      "ate",
+      "com",
+      "contra",
+      "de",
+      "desde",
+      "em",
+      "entre",
+      "para",
+      "per",
+      "perante",
+      "por",
+      "sem",
+      "sob",
+      "sobre",
+      "tras"
+    ],
+    "pronomes": [
+      "ela",
+      "ele",
+      "eu",
+      "me",
+      "mim",
+      "nos",
+      "nós",
+      "se",
+      "te",
+      "tu",
+      "voce",
+      "você",
+      "eles",
+      "elas",
+      "lhe",
+      "lhes",
+      "lo",
+      "la",
+      "los",
+      "las",
+      "este",
+      "esta",
+      "estes",
+      "estas",
+      "esse",
+      "essa",
+      "esses",
+      "essas",
+      "aquele",
+      "aquela",
+      "aqueles",
+      "aquelas",
+      "isto",
+      "isso",
+      "aquilo",
+      "meu",
+      "minha",
+      "meus",
+      "minhas",
+      "seu",
+      "sua",
+      "seus",
+      "suas",
+      "nosso",
+      "nossa",
+      "nossos",
+      "nossas",
+      "vosso",
+      "vossa",
+      "que",
+      "quem",
+      "qual",
+      "quais",
+      "quanto",
+      "cujo",
+      "cuja"
+    ],
+    "adverbios": [
+      "nao",
+      "não",
+      "ja",
+      "já",
+      "so",
+      "só",
+      "bem",
+      "mal",
+      "muito",
+      "pouco",
+      "mais",
+      "menos",
+      "aqui",
+      "ali",
+      "la",
+      "lá",
+      "ca",
+      "cá",
+      "onde",
+      "aonde",
+      "quando",
+      "como",
+      "quanto",
+      "sempre",
+      "nunca",
+      "jamais",
+      "talvez",
+      "quase",
+      "logo",
+      "ainda",
+      "agora",
+      "ontem",
+      "hoje",
+      "amanha",
+      "amanhã",
+      "antes",
+      "depois",
+      "cedo",
+      "tarde",
+      "assim",
+      "tambem",
+      "também",
+      "ate",
+      "até",
+      "mesmo",
+      "sim",
+      "perto",
+      "longe",
+      "fora",
+      "dentro",
+      "acima",
+      "abaixo",
+      "alem",
+      "além",
+      "entao",
+      "então",
+      "portanto",
+      "pois",
+      "alias",
+      "aliás"
+    ],
+    "adjetivos_comuns": [
+      "triste",
+      "tristes",
+      "forte",
+      "fortes",
+      "belo",
+      "bela",
+      "belos",
+      "belas",
+      "feio",
+      "feia",
+      "feios",
+      "feias",
+      "livre",
+      "livres",
+      "suave",
+      "suaves",
+      "breve",
+      "breves",
+      "nobre",
+      "nobres",
+      "humilde",
+      "humildes",
+      "simples",
+      "leve",
+      "leves",
+      "grave",
+      "graves",
+      "firme",
+      "firmes",
+      "doce",
+      "doces",
+      "pobre",
+      "pobres",
+      "verde",
+      "verdes",
+      "quente",
+      "quentes",
+      "frio",
+      "fria",
+      "frios",
+      "frias",
+      "novo",
+      "nova",
+      "novos",
+      "novas",
+      "velho",
+      "velha",
+      "velhos",
+      "velhas",
+      "bom",
+      "boa",
+      "bons",
+      "boas",
+      "mau",
+      "má",
+      "maus",
+      "más"
+    ]
+  },
+  "_nota_engine": "Verificar maiúscula (substantivo próprio) ANTES de terminações verbais no inferWordClass"
+}

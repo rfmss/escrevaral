@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca da Escrita — Escrevaral</title>
+<style>
+:root {
+  --bg:      #f7f0e2;
+  --bg2:     #ede6cc;
+  --surface: #fdf8f2;
+  --ink:     #2f261e;
+  --ink2:    #514135;
+  --ink3:    #89745b;
+  --accent:  #2e4d43;
+  --accent2: #b78a3a;
+  --rule:    rgba(47,38,30,0.12);
+  --rule2:   rgba(47,38,30,0.07);
+  --serif:   'Cinzel', Georgia, 'Times New Roman', serif;
+  --sans:    -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --mono:    'Courier New', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background: var(--bg); }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+/* TOPBAR */
+.topbar {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-brand {
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 10px;
+}
+.topbar-brand span { opacity: 0.45; font-size: 12px; font-family: var(--sans); letter-spacing: 0; }
+.topbar-tabs { display: flex; }
+.tab-btn {
+  background: none; border: none;
+  color: rgba(247,240,226,0.5);
+  font-family: var(--sans); font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0 14px; height: 48px;
+  cursor: pointer; transition: color 0.15s;
+  border-bottom: 2px solid transparent;
+}
+.tab-btn:hover { color: var(--bg); }
+.tab-btn.active { color: var(--bg); border-bottom-color: var(--accent2); }
+
+/* PAGES */
+.page { display: none; max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+.page.visible { display: block; }
+
+/* HERO */
+.hero { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.6rem; }
+.hero h1 { font-family: var(--serif); font-size: clamp(22px, 3.5vw, 34px); line-height: 1.2; margin-bottom: 0.8rem; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p { font-size: 14px; color: var(--ink2); max-width: 580px; line-height: 1.7; }
+
+/* SECTION BADGE */
+.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 1.25rem; }
+.badge { font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 3px 10px; border-radius: 2px; }
+.badge-world { background: var(--ink); color: var(--bg); }
+.badge-br { background: var(--accent); color: #fff; }
+.section-title { font-family: var(--serif); font-size: 18px; color: var(--ink); }
+
+/* BOOK GRID */
+.book-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 2.5rem; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+@media (max-width: 600px) { .book-grid { grid-template-columns: 1fr; } }
+.book-col { border-right: 1px solid var(--rule); }
+.book-col:last-child { border-right: none; }
+.book-row { display: grid; grid-template-columns: 32px 1fr; gap: 0 12px; padding: 13px 16px; border-bottom: 1px solid var(--rule2); background: var(--surface); transition: background 0.12s; }
+.book-row:last-child { border-bottom: none; }
+.book-row:hover { background: var(--bg2); }
+.book-num { font-family: var(--mono); font-size: 10px; color: var(--ink3); padding-top: 2px; }
+.book-title { font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 1px; }
+.book-author { font-size: 10px; color: var(--ink3); margin-bottom: 5px; }
+.book-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 5px; }
+.book-tag { font-size: 9.5px; padding: 1px 6px; border-radius: 2px; border: 1px solid var(--rule); color: var(--ink2); background: var(--bg); }
+.book-desc { font-size: 11px; color: var(--ink2); line-height: 1.5; }
+
+/* NOTE BOX */
+.note-box { margin-bottom: 1.2rem; padding: 0.9rem 1.1rem; border-left: 3px solid var(--accent2); background: #fdf5e8; border-radius: 0 4px 4px 0; font-size: 12px; color: var(--ink2); line-height: 1.6; }
+.note-box strong { color: var(--ink); }
+
+/* CRITERIA PAGE */
+.dim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 7px; margin-bottom: 1.25rem; }
+.dim-btn { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 11px 13px; cursor: pointer; text-align: left; transition: all 0.12s; }
+.dim-btn:hover { background: var(--bg2); border-color: rgba(47,38,30,0.25); }
+.dim-btn.active { background: var(--ink); border-color: var(--ink); }
+.dim-btn.active .dim-icon { color: var(--accent2); }
+.dim-btn.active .dim-label { color: var(--bg); }
+.dim-btn.active .dim-sub { color: rgba(247,240,226,0.5); }
+.dim-icon { font-size: 17px; display: block; margin-bottom: 5px; color: var(--ink3); }
+.dim-label { font-size: 11.5px; font-weight: 600; color: var(--ink); display: block; }
+.dim-sub { font-size: 9.5px; color: var(--ink3); display: block; margin-top: 2px; }
+
+.detail-panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.panel-head { padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--rule2); background: var(--bg2); display: flex; align-items: flex-start; gap: 12px; }
+.panel-icon-lg { font-size: 22px; flex-shrink: 0; padding-top: 2px; }
+.panel-title { font-family: var(--serif); font-size: 16px; color: var(--ink); margin-bottom: 3px; }
+.panel-desc { font-size: 12px; color: var(--ink2); line-height: 1.55; }
+
+.crit-table { width: 100%; border-collapse: collapse; }
+.crit-table thead th { text-align: left; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink3); padding: 9px 16px; border-bottom: 1px solid var(--rule); background: var(--bg); }
+.crit-table tbody tr { border-bottom: 1px solid var(--rule2); }
+.crit-table tbody tr:last-child { border-bottom: none; }
+.crit-table tbody tr:hover { background: var(--bg2); }
+.crit-table td { padding: 12px 16px; vertical-align: top; }
+.crit-table td:first-child { font-family: var(--mono); font-size: 10px; color: var(--ink3); width: 30px; }
+.crit-name { font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.crit-detail { font-size: 11px; color: var(--ink2); line-height: 1.5; }
+.crit-impl { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+.impl-yes { background: #d4edda; color: #155724; }
+.impl-no  { background: #f8f9fa; color: var(--ink3); border: 1px solid var(--rule); }
+.srcs-cell { width: 120px; }
+.src-pills { display: flex; flex-wrap: wrap; gap: 3px; justify-content: flex-end; }
+.src-pill { font-size: 9px; font-weight: 600; letter-spacing: 0.03em; padding: 2px 5px; border-radius: 2px; white-space: nowrap; }
+
+/* pill colors */
+.sp-king    { background:#EDE9FB;color:#3C2E8A;border:1px solid #C9C0F0; }
+.sp-strunk  { background:#FDEEE8;color:#7A3018;border:1px solid #F5C4AD; }
+.sp-zinsser { background:#E4F5EE;color:#0C5E3F;border:1px solid #9FE1C8; }
+.sp-gardner { background:#FBE9F3;color:#72204A;border:1px solid #F0B8D8; }
+.sp-wood    { background:#E5F0FA;color:#0C447C;border:1px solid #B5D4F4; }
+.sp-leguin  { background:#EAF3DE;color:#274A0A;border:1px solid #BEDB97; }
+.sp-mckee   { background:#FDF0DA;color:#634010;border:1px solid #F5C97A; }
+.sp-klink   { background:#F0EDE8;color:#443C32;border:1px solid #CCC8BE; }
+.sp-clarice { background:#FBE9F3;color:#72204A;border:1px solid #F0B8D8; }
+.sp-salles  { background:#EDE9FB;color:#3C2E8A;border:1px solid #C9C0F0; }
+.sp-bagno   { background:#E4F5EE;color:#0C5E3F;border:1px solid #9FE1C8; }
+.sp-estadao { background:#FDEEE8;color:#7A3018;border:1px solid #F5C4AD; }
+.sp-folha   { background:#FDF0DA;color:#634010;border:1px solid #F5C97A; }
+.sp-lage    { background:#E5F0FA;color:#0C447C;border:1px solid #B5D4F4; }
+.sp-lamott  { background:#EAF3DE;color:#274A0A;border:1px solid #BEDB97; }
+.sp-orwell  { background:#F0EDE8;color:#443C32;border:1px solid #CCC8BE; }
+
+.empty-state { text-align: center; padding: 2.5rem; color: var(--ink3); font-size: 13px; }
+.legend-box { margin-top: 1.5rem; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.legend-title { font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.9rem; }
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 5px; }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-name { font-size: 10.5px; color: var(--ink2); }
+
+/* SOBRE */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1.5rem; }
+@media (max-width: 560px) { .about-grid { grid-template-columns: 1fr; } }
+.about-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1.1rem; }
+.about-card h3 { font-family: var(--serif); font-size: 14px; color: var(--ink); margin-bottom: 0.5rem; }
+.about-card p { font-size: 12px; color: var(--ink2); line-height: 1.6; }
+.dim-summary-list { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 1rem 1.2rem; margin-top: 1.5rem; }
+.dim-row { display: grid; grid-template-columns: 22px 120px 1fr; gap: 7px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--rule2); }
+.dim-row:last-child { border-bottom: none; }
+.dim-icon-sm { font-size: 14px; color: var(--ink3); }
+.dim-name-sm { font-size: 12.5px; font-weight: 600; color: var(--ink); }
+.dim-desc-sm { font-size: 11px; color: var(--ink2); }
+</style>
+<!-- Cinzel carregado pelo app principal via index.html; aqui usamos fallback -->
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-brand">
+    Biblioteca da Escrita
+    <span>· ESCREVARAL</span>
+  </div>
+  <div class="topbar-tabs">
+    <button class="tab-btn active" onclick="showPage('livros', this)">Livros</button>
+    <button class="tab-btn" onclick="showPage('criterios', this)">Critérios</button>
+    <button class="tab-btn" onclick="showPage('sobre', this)">Sobre</button>
+  </div>
+</nav>
+
+<!-- LIVROS -->
+<div class="page visible" id="page-livros">
+  <div class="hero">
+    <p class="eyebrow">Referências fundamentais</p>
+    <h1>As bíblias da <em>escrita</em> — mundo e Brasil</h1>
+    <p>21 livros que embasam os critérios de análise textual do Escrevaral. Cada obra contribui com dimensões específicas e rastreáveis — sem IA, sem envio, apenas leitura e conhecimento local.</p>
+  </div>
+
+  <div class="section-head">
+    <span class="badge badge-world">🌐 Top 10 Mundial</span>
+    <span class="section-title">As bíblias universais do ofício</span>
+  </div>
+  <div class="book-grid" id="booksWorld"></div>
+
+  <div class="section-head">
+    <span class="badge badge-br">🇧🇷 Top 10 Brasil</span>
+    <span class="section-title">Referências fundamentais em português</span>
+  </div>
+  <div class="note-box">
+    <strong>Nota editorial:</strong> O Brasil tem menos livros de craft puro que a tradição anglófona — o conhecimento aparece em ensaios, crônicas, manuais jornalísticos e teoria literária. Esta lista é deliberadamente mais ampla em formato para cobrir o que existe de melhor.
+  </div>
+  <div class="book-grid" id="booksBr"></div>
+</div>
+
+<!-- CRITÉRIOS -->
+<div class="page" id="page-criterios">
+  <div class="hero">
+    <p class="eyebrow">Framework de análise textual</p>
+    <h1>42 critérios em <em>8 dimensões</em></h1>
+    <p>Cada critério tem fonte bibliográfica rastreável. As dimensões cobrem desde o nível molecular da frase até a coerência estrutural do texto inteiro. Os marcados com <span style="background:#d4edda;color:#155724;font-size:10px;padding:1px 5px;border-radius:2px">local</span> são calculados automaticamente no Espelho de Voz.</p>
+  </div>
+  <div class="dim-grid" id="dimGrid"></div>
+  <div class="detail-panel" id="detailPanel">
+    <div class="empty-state">Selecione uma dimensão acima para ver os critérios e suas fontes</div>
+  </div>
+  <div class="legend-box">
+    <p class="legend-title">Legenda de fontes</p>
+    <div class="legend-grid" id="legendGrid"></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<div class="page" id="page-sobre">
+  <div class="hero">
+    <p class="eyebrow">Sobre este framework</p>
+    <h1>Como usar este <em>conhecimento</em></h1>
+    <p>Este framework foi construído para embasar a análise textual offline do Escrevaral. Nada é enviado para servidores — todas as métricas computáveis rodam localmente no seu navegador.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>Computável localmente (18/39)</h3>
+      <p>Economia, Ritmo, Léxico e partes de Clareza e POV rodam com regex, listas locais e estatísticas de frase. Sem LLM, sem rede — no navegador em milissegundos.</p>
+    </div>
+    <div class="about-card">
+      <h3>Requer compreensão semântica (21/39)</h3>
+      <p>Voz, Estrutura e Ponto de Vista exigem compreensão semântica profunda. São os critérios mais valiosos e os que mais diferenciam a análise literária. Ficam como referência de leitura.</p>
+    </div>
+    <div class="about-card">
+      <h3>O freio de Bagno</h3>
+      <p>Qualquer sistema que penalize "a gente foi" ou "pra" reproduz purismo que não corresponde ao português real do Brasil. A ferramenta distingue erro de variação sociolinguística legítima.</p>
+    </div>
+    <div class="about-card">
+      <h3>A lacuna brasileira</h3>
+      <p>O Brasil não tem um equivalente de "On Writing". O conhecimento está disperso em ensaios, crônicas e manuais jornalísticos. Esta lista reúne o que existe de melhor em ptBR.</p>
+    </div>
+  </div>
+  <div style="margin-top:1.5rem;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.9rem">As 8 dimensões em resumo</div>
+  <div class="dim-summary-list" id="dimSummary"></div>
+</div>
+
+<script>
+// Carrega dados do VeredaCriterios se disponível, ou usa fallback local
+const srcNames = {
+  king:'King',strunk:'Strunk',zinsser:'Zinsser',gardner:'Gardner',
+  wood:'Wood',leguin:'Le Guin',mckee:'McKee',klink:'Klink.',
+  clarice:'Clarice',salles:'Salles',bagno:'Bagno',estadao:'Estadão',
+  folha:'Folha',lage:'Lage',lamott:'Lamott',
+  pressfield:'Pressfield',lima:'Lima',werneck:'Werneck',salles2:'Salles²',lajolo:'Lajolo'
+};
+
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('visible');
+  if (btn) btn.classList.add('active');
+}
+
+function renderBooks(livros, containerId) {
+  const el = document.getElementById(containerId);
+  if (!el || !livros) return;
+  const half = Math.ceil(livros.length / 2);
+  const col1 = livros.slice(0, half);
+  const col2 = livros.slice(half);
+  el.innerHTML = `
+    <div class="book-col">${col1.map(b => bookRow(b)).join('')}</div>
+    <div class="book-col">${col2.map(b => bookRow(b)).join('')}</div>
+  `;
+}
+
+function bookRow(b) {
+  const tags = (b.tags||[]).map(t => `<span class="book-tag">${t}</span>`).join('');
+  return `<div class="book-row">
+    <span class="book-num">${b.n}</span>
+    <div>
+      <p class="book-title">${b.titulo}</p>
+      <p class="book-author">${b.autor} · ${b.ano}</p>
+      <div class="book-tags">${tags}</div>
+      <p class="book-desc">${b.desc}</p>
+    </div>
+  </div>`;
+}
+
+function renderDimGrid(dimensoes) {
+  const grid = document.getElementById('dimGrid');
+  if (!grid) return;
+  dimensoes.forEach(d => {
+    const btn = document.createElement('button');
+    btn.className = 'dim-btn';
+    btn.innerHTML = `<span class="dim-icon">${d.icon}</span><span class="dim-label">${d.label}</span><span class="dim-sub">${d.sub}</span>`;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderCriterios(d);
+    });
+    grid.appendChild(btn);
+  });
+}
+
+function renderCriterios(dim) {
+  const panel = document.getElementById('detailPanel');
+  if (!panel || !window.VeredaCriterios) return;
+  const crits = VeredaCriterios.getCriteriosPorDim(dim.id);
+  panel.innerHTML = `
+    <div class="panel-head">
+      <span class="panel-icon-lg">${dim.icon}</span>
+      <div>
+        <p class="panel-title">${dim.label} — ${dim.sub}</p>
+        <p class="panel-desc">${dim.desc}</p>
+      </div>
+    </div>
+    <table class="crit-table">
+      <thead><tr>
+        <th>#</th><th>Critério</th><th class="srcs-cell" style="text-align:right">Fontes</th>
+      </tr></thead>
+      <tbody>
+        ${crits.map(c => `<tr>
+          <td>${c.n}</td>
+          <td>
+            <p class="crit-name">${c.titulo}
+              <span class="crit-impl ${c.implementado ? 'impl-yes' : 'impl-no'}">${c.implementado ? 'local' : 'referência'}</span>
+            </p>
+            <p class="crit-detail">${c.detalhe}</p>
+          </td>
+          <td class="srcs-cell">
+            <div class="src-pills">
+              ${c.fontes.map(s => `<span class="src-pill sp-${s}">${srcNames[s]||s}</span>`).join('')}
+            </div>
+          </td>
+        </tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function renderLegend() {
+  const el = document.getElementById('legendGrid');
+  if (!el) return;
+  const entries = Object.entries(srcNames).slice(0, 15);
+  el.innerHTML = entries.map(([id, name]) => `
+    <div class="legend-item">
+      <span class="src-pill sp-${id}">${name}</span>
+      <span class="legend-name">${getBookTitle(id)}</span>
+    </div>
+  `).join('');
+}
+
+function getBookTitle(id) {
+  if (!window.VeredaCriterios) return '';
+  const b = VeredaCriterios.getLivroPorId(id);
+  return b ? b.titulo : '';
+}
+
+function renderDimSummary(dimensoes) {
+  const el = document.getElementById('dimSummary');
+  if (!el) return;
+  el.innerHTML = dimensoes.map(d => `
+    <div class="dim-row">
+      <span class="dim-icon-sm">${d.icon}</span>
+      <span class="dim-name-sm">${d.label}</span>
+      <span class="dim-desc-sm">${d.sub}</span>
+    </div>
+  `).join('');
+}
+
+// Inicializa quando VeredaCriterios estiver disponível
+function init() {
+  if (window.VeredaCriterios) {
+    const { livros, dimensoes } = VeredaCriterios;
+    renderBooks(livros.world, 'booksWorld');
+    renderBooks(livros.brasil, 'booksBr');
+    renderDimGrid(dimensoes);
+    renderLegend();
+    renderDimSummary(dimensoes);
+  } else {
+    // Tenta novamente em 100ms (pode estar carregando)
+    setTimeout(init, 100);
+  }
+}
+
+// Carrega criterios-data.js se não estiver disponível
+if (!window.VeredaCriterios) {
+  const s = document.createElement('script');
+  s.src = './criterios-data.js';
+  s.onload = init;
+  document.head.appendChild(s);
+} else {
+  init();
+}
+</script>
+</body>
+</html>

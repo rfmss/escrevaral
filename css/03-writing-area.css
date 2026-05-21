@@ -1,0 +1,201 @@
+/* ── HEADINGS NA WRITING-AREA ── */
+.writing-area h1 {
+  font-family: 'Cinzel', "Noto Serif", Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 1.6em 0 0.5em;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+.writing-area h2 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 1.4em 0 0.4em;
+  line-height: 1.3;
+}
+.writing-area h3 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 600;
+  color: var(--soft-ink);
+  margin: 1.2em 0 0.3em;
+  line-height: 1.4;
+  font-style: italic;
+}
+.writing-area p { margin: 0 0 0.6em; }
+.writing-area p:last-child { margin-bottom: 0; }
+.writing-area strong { font-weight: 700; }
+.writing-area em { font-style: italic; }
+
+/* Quebra de página visual */
+.writing-area hr.page-break {
+  border: 0;
+  border-top: 2px dashed var(--border-aged);
+  margin: 2.5em 0;
+  position: relative;
+}
+.writing-area hr.page-break::after {
+  content: "quebra de página";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-low);
+  padding: 0 10px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: "Inter", sans-serif;
+}
+
+/* ── MODO PÁGINAS A4 ── */
+
+/* writing-area some quando o paged-editor está ativo */
+.writing-area[data-view-mode="pages"] { display: none; }
+
+/* Container do editor paginado */
+.paged-editor {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  background: transparent;
+  overflow-x: auto;
+  padding: 32px 20px 48px;
+  margin: 0 calc(-1 * clamp(28px, 5vw, 64px));
+  min-height: 60vh;
+}
+.paged-editor.is-active { display: flex; }
+
+/* Cada folha A4 */
+.manuscript-page {
+  position: relative;
+  width: 210mm;
+  flex: 0 0 auto;
+  height: 297mm;
+  background: #fffdf8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.page-body {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 25mm 20mm 20mm;
+  outline: 0;
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: var(--reading-size);
+  line-height: 1.78;
+  color: var(--ink);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+.page-body:focus { background: #fffef9; }
+.page-body p { margin: 0 0 0.6em; }
+.page-body h1 {
+  font-family: 'Cinzel', "Noto Serif", Georgia, serif;
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--ink); margin: 1.4em 0 0.5em; line-height: 1.2;
+}
+.page-body h2 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 1.2rem; font-weight: 700;
+  margin: 1.2em 0 0.4em;
+}
+.page-body h3 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 1rem; font-weight: 600; font-style: italic;
+  margin: 1em 0 0.3em;
+}
+.page-body strong { font-weight: 700; }
+.page-body em { font-style: italic; }
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 14mm;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  font-family: "Inter", sans-serif;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  flex-shrink: 0;
+}
+
+/* ── PRESETS EDITORIAIS ── */
+
+/* Submissão literária: duplo espaço, margens padrão submissão */
+.paged-editor[data-preset="submission"] .page-body {
+  padding: 30mm 25mm 22mm;
+  font-size: 12pt;
+  line-height: 2;
+}
+
+/* Leitura: fonte maior, margens confortáveis */
+.paged-editor[data-preset="reading"] .page-body {
+  padding: 22mm 18mm 18mm;
+  font-size: 13pt;
+  line-height: 1.9;
+  color: #2a2218;
+}
+
+/* Padrão Word / ABNT: 3cm esq./sup., 2cm dir./inf., Times, 1.5 linhas, indent */
+.paged-editor[data-preset="word"] .page-body {
+  padding: 30mm 20mm 20mm 30mm;
+  font-size: 12pt;
+  line-height: 1.5;
+}
+.paged-editor[data-preset="word"] .page-body p {
+  text-indent: 1.25cm;
+  margin-bottom: 0;
+  text-align: justify;
+}
+.paged-editor[data-preset="word"] .page-body h1,
+.paged-editor[data-preset="word"] .page-body h2,
+.paged-editor[data-preset="word"] .page-body h3 {
+  text-align: center;
+  text-indent: 0;
+  font-family: "Noto Serif", Georgia, serif;
+}
+
+/* Livro impresso: A5, margens compactas, fonte 11pt */
+.manuscript-page.is-a5 {
+  width: 148mm;
+  height: 210mm;
+}
+.paged-editor[data-preset="book"] .page-body {
+  padding: 20mm 15mm 18mm;
+  font-size: 11pt;
+  line-height: 1.55;
+}
+
+.editor-preset-select { max-width: 130px; background: transparent; }
+
+@media (max-width: 900px) {
+  .paged-editor {
+    align-items: flex-start;
+  }
+}
+
+
+/* Modo Página: editor-paper some — o paged-editor é a única folha */
+.app-shell.is-page-mode .editor-paper {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Title input some junto — o título está na página */
+.app-shell.is-page-mode .title-block {
+  display: none;
+}

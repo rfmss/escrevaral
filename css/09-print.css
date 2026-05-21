@@ -1,0 +1,203 @@
+/* ── @MEDIA PRINT — saída documental pura ─────────────────────────────────
+   Vereda desaparece completamente. Só texto e edições do manuscrito.
+   Trata como documento técnico, não captura de interface.           ── */
+@media print {
+
+  /* ── 1. OCULTA TODA A INTERFACE ── */
+  .topbar, .sidebar, .inspector, .statusbar,
+  .format-bar, .editor-mode-bar, .panel-rail,
+  .panel-toggle, .panel-toggle-left, .panel-toggle-right,
+  .template-reference, .focus-toolbar, .focus-counter,
+  .focus-ruler, .proof-chip, #watercolor-layer,
+  .paged-editor .page-footer, .create-note-overlay,
+  .global-search-results, .theme-picker, .offline-badge,
+  .install-button, .editor-split > .panel-rail,
+  [data-action="toggle-left-panel"],
+  [data-action="toggle-right-panel"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* ── 2. PÁGINA LIMPA ── */
+  @page {
+    margin: 2.5cm 2cm 2cm 3cm; /* ABNT-like: esq maior para encadernação */
+    size: A4;
+  }
+
+  @page :first { margin-top: 3cm; }
+
+  html, body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* Remove texturas, sombras, gradientes do Vereda */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── 3. SHELL VIRA DOCUMENTO ── */
+  .app-shell, .workspace, .content-stage {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: white !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    grid-template-rows: none !important;
+    grid-template-columns: none !important;
+  }
+
+  [data-view-panel] { display: none !important; }
+  [data-view-panel="editor"] { display: block !important; }
+
+  /* Editor paper sem card */
+  .editor-paper {
+    background: white !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  /* ── 4. TÍTULO DO MANUSCRITO ── */
+  .title-input {
+    display: block !important;
+    background: transparent !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 16pt !important;
+    font-weight: bold !important;
+    font-family: "Times New Roman", Georgia, serif !important;
+    padding: 0 0 0.4em !important;
+    margin: 0 0 0.2em !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  /* Linha separadora sob o título */
+  .title-input::after {
+    content: "";
+    display: block;
+    border-bottom: 1pt solid #ccc;
+    padding-top: 4pt;
+  }
+
+  /* ── 5. ÁREA DE ESCRITA — MODO FLUXO ── */
+  .writing-area {
+    display: block !important;
+    background: transparent !important;
+    color: black !important;
+    font-family: "Times New Roman", Georgia, serif !important;
+    font-size: 12pt !important;
+    line-height: 1.8 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    /* Remove coloração gramatical e drop-cap na impressão */
+    -webkit-text-fill-color: black !important;
+  }
+
+  .writing-area * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .writing-area p {
+    margin: 0 0 0 !important;
+    text-indent: 1.25cm !important; /* padrão ABNT */
+  }
+
+  .writing-area p:first-child { text-indent: 0 !important; }
+
+  .writing-area h1 { font-size: 14pt !important; text-align: center !important; margin: 0.8em 0 0.4em !important; }
+  .writing-area h2 { font-size: 13pt !important; margin: 0.6em 0 0.3em !important; }
+  .writing-area h3 { font-size: 12pt !important; margin: 0.4em 0 0.2em !important; }
+
+  .writing-area blockquote {
+    margin: 0.5em 4cm !important;
+    font-size: 10pt !important;
+  }
+
+  /* ── 6. MODO PÁGINAS — presets técnicos ── */
+  .paged-editor {
+    display: block !important;
+    background: transparent !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    counter-reset: page-num;
+  }
+
+  .manuscript-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    break-after: page;
+    page-break-after: always;
+    min-height: 0 !important;
+  }
+
+  .manuscript-page:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  /* Número de página via counter CSS */
+  .manuscript-page::after {
+    counter-increment: page-num;
+    content: counter(page-num);
+    display: block;
+    text-align: center;
+    font-size: 9pt;
+    font-family: "Times New Roman", serif;
+    color: black;
+    padding-top: 4mm;
+  }
+
+  /* Preset padrão — fluxo limpo */
+  .paged-editor[data-preset="draft"] .page-body {
+    padding: 0 !important;
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 12pt;
+    line-height: 1.8;
+  }
+
+  /* Preset Word/ABNT */
+  .paged-editor[data-preset="word"] .page-body {
+    padding: 0 !important;
+    font-size: 12pt;
+    line-height: 1.5;
+    font-family: "Times New Roman", serif;
+  }
+
+  .paged-editor[data-preset="word"] .page-body p {
+    text-indent: 1.25cm;
+    margin-bottom: 0;
+    text-align: justify;
+  }
+
+  /* Preset livro */
+  .paged-editor[data-preset="book"] .manuscript-page {
+    break-after: page;
+  }
+
+  .paged-editor[data-preset="book"] .page-body {
+    font-size: 11pt;
+    line-height: 1.6;
+  }
+}

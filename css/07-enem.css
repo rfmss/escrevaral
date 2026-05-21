@@ -1,0 +1,228 @@
+/* ── EDITOR ENEM ─────────────────────────────────────────────────────────── */
+.enem-sheet {
+  display: flex;
+  flex-direction: column;
+  width: min(780px, 100%);
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #c8c0b4;
+  box-shadow: 0 2px 12px rgba(0,0,0,.10);
+  font-family: 'Noto Serif', Georgia, serif;
+}
+
+/* Cabeçalho */
+.enem-header {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 2px solid #1a1a2e;
+  background: #f5f3ef;
+  gap: 0;
+}
+.enem-header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #1a1a2e;
+  border-right: 2px solid #1a1a2e;
+  min-width: 70px;
+}
+.enem-header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 14px;
+  gap: 6px;
+}
+.enem-header-row { display: flex; gap: 16px; }
+.enem-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+.enem-field-sm { max-width: 160px; }
+.enem-field span {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+}
+.enem-field-input {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  background: transparent;
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  padding: 1px 2px;
+  outline: none;
+}
+.enem-field-input:focus { border-bottom-color: #1a1a2e; }
+.enem-header-badge {
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1a1a2e;
+  border-left: 2px solid #1a1a2e;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Corpo — linhas */
+.enem-body {
+  display: flex;
+  position: relative;
+  flex: 1;
+}
+.enem-line-gutter {
+  display: flex;
+  flex-direction: column;
+  width: 32px;
+  flex-shrink: 0;
+  border-right: 1px solid #c8c0b4;
+  background: #f0ece6;
+  padding-top: 4px;
+}
+.enem-line-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 9px;
+  color: #999;
+  flex-shrink: 0;
+}
+.enem-writing-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.enem-placeholder {
+  position: absolute;
+  inset: 0;
+  padding: 4px 14px 4px 10px;
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 15px;
+  line-height: 32px;
+  color: #1a1a2e;
+  opacity: 0.18;
+  pointer-events: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: hidden;
+  transition: opacity 0.2s;
+}
+.enem-placeholder-title {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.enem-placeholder-hidden { opacity: 0; }
+.enem-writing-area {
+  position: relative;
+  width: 100%;
+  min-height: calc(30 * 32px);
+  max-height: calc(30 * 32px);
+  padding: 4px 14px 4px 10px;
+  font-family: 'Noto Serif', Georgia, serif;
+  font-size: 15px;
+  line-height: 32px;
+  color: #1a1a2e;
+  outline: none;
+  overflow: hidden;
+  word-break: break-word;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    #c8c0b4 31px,
+    #c8c0b4 32px
+  );
+  caret-color: #2e4d43;
+}
+
+/* Rodapé */
+.enem-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-top: 1px solid #c8c0b4;
+  background: #f5f3ef;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.enem-line-counter {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.enem-min-hint {
+  font-size: 10px;
+  color: #999;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: #eee;
+  transition: background .2s, color .2s;
+}
+.enem-min-ok  { background: #d4edda; color: #2e6b3e; }
+.enem-min-warn { background: #fff3cd; color: #856404; }
+.enem-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.enem-placeholder-note {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  color: #999;
+  max-width: 300px;
+}
+.enem-print-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid #c8c0b4;
+  border-radius: 4px;
+  background: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  transition: background .15s;
+}
+.enem-print-btn:hover { background: #f0ece6; }
+
+/* ── PRINT ── */
+@media print {
+  body * { visibility: hidden; }
+  .enem-sheet, .enem-sheet * { visibility: visible; }
+  .enem-sheet {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+  .enem-print-btn { display: none; }
+  .enem-footer { display: none; }
+  .enem-placeholder { display: none; }
+  .enem-writing-area {
+    max-height: none;
+    overflow: visible;
+  }
+}
