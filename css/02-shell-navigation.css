@@ -1901,11 +1901,16 @@ mark {
 
 /* Logo Escrevaral — pregador de madeira em A */
 .brand-logo {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
+}
+
+/* brand-lockup: logo + texto colados */
+.brand-lockup {
+  gap: 6px !important;
 }
 
 /* Link social na statusbar */
