@@ -21,7 +21,7 @@ function renderManuscriptNavigation() {
       return `<button class="tree-row companion-row${isCC}" data-manuscript-id="${c.id}">
         <span class="material-symbols-outlined">${ct.icon}</span>${escapeHtml(c.title)}</button>`;
     }).join("") + `<button class="tree-row companion-add-row" data-action="add-companion-note">
-      <span class="material-symbols-outlined">add</span>Nota vinculada</button>` : "";
+      <span class="ew-icon ico-add" aria-hidden="true"></span>Nota vinculada</button>` : "";
 
     return `
       <div class="nav-manuscript-wrap">
@@ -30,7 +30,7 @@ function renderManuscriptNavigation() {
           <span class="nav-ms-title">${escapeHtml(manuscript.title)}</span>
         </button>
         <button class="nav-ms-delete" data-manuscript-delete="${manuscript.id}" title="Apagar nota" aria-label="Apagar nota">
-          <span class="material-symbols-outlined">delete</span>
+          <span class="ew-icon ico-delete" aria-hidden="true"></span>
         </button>
       </div>
       ${companionHtml}
@@ -52,7 +52,7 @@ function renderManuscriptNavigation() {
   });
 
   manuscriptList.innerHTML = html || `<button class="tree-row tree-empty-row" data-action="open-create-note">
-    <span class="material-symbols-outlined">add</span>Criar primeira nota
+    <span class="ew-icon ico-add" aria-hidden="true"></span>Criar primeira nota
   </button>`;
 }
 
@@ -136,12 +136,12 @@ function showMasterResetModal() {
       <h2 id="master-reset-title">Zerar o Vereda</h2>
       <p>Todos os seus textos, notas e configurações serão apagados permanentemente. Esta ação não pode ser desfeita.</p>
       <div class="master-reset-tip">
-        <span class="material-symbols-outlined">shield_locked</span>
+        <span class="ew-icon ico-shield-locked" aria-hidden="true"></span>
         <span>Exporte um backup <strong>.vrda</strong> antes de continuar — ele preserva todo o seu acervo e pode ser reimportado depois.</span>
       </div>
       <div class="master-reset-actions">
         <button class="secondary-button" data-action="export-backup">
-          <span class="material-symbols-outlined">file_save</span>
+          <span class="ew-icon ico-file-save" aria-hidden="true"></span>
           Exportar backup
         </button>
         <button class="secondary-button" data-action="cancel-master-reset">Cancelar</button>
@@ -234,7 +234,7 @@ function renderProjectGrid() {
         : manuscript.progress;
       const isOpenInEditor = manuscript.id === state.activeId;
       const editorBadge = isOpenInEditor
-        ? `<span class="project-editor-badge"><span class="material-symbols-outlined">edit_note</span>Aberta no editor</span>`
+        ? `<span class="project-editor-badge"><span class="ew-icon ico-edit-note" aria-hidden="true"></span>Aberta no editor</span>`
         : "";
 
       return `
@@ -259,7 +259,7 @@ function renderProjectGrid() {
           </div>
           <div class="project-actions" aria-label="Ações de ${escapeHtml(manuscript.title)}">
             <button type="button" data-archive-quick="open" data-archive-document="${manuscript.id}" title="Abrir no editor" aria-label="Abrir ${escapeHtml(manuscript.title)} no editor">
-              <span class="material-symbols-outlined">edit_note</span>
+              <span class="ew-icon ico-edit-note" aria-hidden="true"></span>
               Abrir
             </button>
             <button type="button" data-archive-quick="duplicate" data-archive-document="${manuscript.id}" title="Duplicar nota" aria-label="Duplicar ${escapeHtml(manuscript.title)}">
@@ -267,7 +267,7 @@ function renderProjectGrid() {
             </button>
             <details class="project-export-menu">
               <summary title="Exportar nota">
-                <span class="material-symbols-outlined">file_download</span>
+                <span class="ew-icon ico-download" aria-hidden="true"></span>
               </summary>
               <div class="project-export-options">
                 <button type="button" data-archive-quick="export" data-archive-format="txt" data-archive-document="${manuscript.id}">Exportar texto (.txt)</button>

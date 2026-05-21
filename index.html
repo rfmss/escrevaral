@@ -66,7 +66,7 @@
       <header class="topbar">
         <div class="brand-lockup">
           <button class="icon-button mobile-only" data-action="toggle-nav" aria-label="Abrir navegação">
-            <span class="material-symbols-outlined">menu</span>
+            <span class="ew-icon ico-menu" aria-hidden="true"></span>
           </button>
           <img src="icons/escrevaral-logo.png" alt="Escrevaral" class="brand-logo" width="36" height="36">
           <div>
@@ -96,20 +96,20 @@
             <span class="material-symbols-outlined">headphones</span>
           </button>
           <button class="icon-button" data-action="toggle-global-search" aria-label="Buscar no acervo" title="Buscar">
-              <span class="material-symbols-outlined">search</span>
+              <span class="ew-icon ico-search" aria-hidden="true"></span>
             </button>
             <label>
-              <span class="material-symbols-outlined">search</span>
+              <span class="ew-icon ico-search" aria-hidden="true"></span>
               <input type="search" data-global-search-input placeholder="Buscar no acervo" aria-label="Buscar no acervo">
             </label>
             <div class="global-search-results" data-global-search-results hidden></div>
           </div>
           <span class="offline-badge" data-offline-status>
-            <span class="material-symbols-outlined">cloud_done</span>
+            <span class="ew-icon ico-cloud-done" aria-hidden="true"></span>
             Pronto sem internet
           </span>
           <button class="install-button" data-action="install-app" hidden>
-            <span class="material-symbols-outlined">download</span>
+            <span class="ew-icon ico-download" aria-hidden="true"></span>
             Instalar
           </button>
           <button class="icon-button desk-bg-toggle" data-action="toggle-desk-background" aria-pressed="false" title="Fundo de mesa" aria-label="Fundo de mesa">
@@ -119,24 +119,24 @@
             <span class="material-symbols-outlined">dark_mode</span>
           </button>
           <button class="icon-button" data-action="toggle-focus" aria-label="Escrever sem distração" title="Escrever sem distração">
-            <span class="material-symbols-outlined">edit_note</span>
+            <span class="ew-icon ico-edit-note" aria-hidden="true"></span>
           </button>
         </div>
       </header>
 
       <div class="workspace">
         <button class="panel-rail panel-rail-left" data-action="toggle-left-panel" aria-label="Abrir acervo" title="Abrir acervo">
-          <span class="material-symbols-outlined">right_panel_open</span>
+          <span class="ew-icon ico-left-panel-open" aria-hidden="true"></span>
         </button>
         <aside class="sidebar" data-nav>
           <button class="panel-toggle panel-toggle-left" data-action="toggle-left-panel" aria-label="Ocultar acervo" title="Ocultar acervo">
-            <span class="material-symbols-outlined">left_panel_close</span>
+            <span class="ew-icon ico-right-panel-close" aria-hidden="true"></span>
           </button>
           <div class="sidebar-section" data-sidebar-hierarchy>
             <div class="sidebar-section-header">
               <div class="eyebrow">Manuscritos</div>
               <button class="icon-button sidebar-new-btn" data-action="open-create-note" aria-label="Nova nota" title="Nova nota">
-                <span class="material-symbols-outlined">add</span>
+                <span class="ew-icon ico-add" aria-hidden="true"></span>
               </button>
             </div>
             <div class="manuscript-list" data-manuscript-list></div>
@@ -145,11 +145,11 @@
           <div class="sidebar-section" data-sidebar-tools>
             <div class="eyebrow">Ferramentas</div>
             <button class="nav-row" data-view-target="biblioteca">
-              <span class="material-symbols-outlined">auto_stories</span>
+              <span class="ew-icon ico-auto-stories" aria-hidden="true"></span>
               <span class="nav-row-label">Biblioteca<small class="nav-row-sub">gramática e critérios</small></span>
             </button>
             <button class="nav-row" data-view-target="autoria">
-              <span class="material-symbols-outlined">fingerprint</span>
+              <span class="ew-icon ico-fingerprint" aria-hidden="true"></span>
               <span class="nav-row-label">Prova de autoria<small class="nav-row-sub">registros locais</small></span>
             </button>
             <button class="nav-row" data-view-target="arquivo">
@@ -157,7 +157,7 @@
               <span class="nav-row-label">Arquivo<small class="nav-row-sub">notas e cópias</small></span>
             </button>
             <button class="nav-row" data-view-target="academia">
-              <span class="material-symbols-outlined">school</span>
+              <span class="ew-icon ico-school" aria-hidden="true"></span>
               <span class="nav-row-label">Academia<small class="nav-row-sub">guias e ferramentas</small></span>
             </button>
           </div>
@@ -177,7 +177,7 @@
                     <span class="material-symbols-outlined">swap_horiz</span>
                   </button>
                   <button class="icon-button" data-action="toggle-template-panel" data-template-panel-toggle aria-label="Ocultar guia de escrita" title="Ocultar guia">
-                    <span class="material-symbols-outlined">left_panel_close</span>
+                    <span class="ew-icon ico-right-panel-close" aria-hidden="true"></span>
                   </button>
                 </div>
                 <div class="template-reference-tabs" data-reference-tabs></div>
@@ -194,12 +194,12 @@
                     Guia
                   </button>
                   <button class="secondary-button" data-action="open-reader-mode" title="Ler — revisão como leitor" aria-label="Ler como leitor">
-                    <span class="material-symbols-outlined">menu_book</span>
+                    <span class="ew-icon ico-menu-book" aria-hidden="true"></span>
                     Ler
                   </button>
 
                   <button class="icon-button editor-delete-btn" data-action="delete-active-manuscript" aria-label="Apagar esta nota" title="Apagar esta nota">
-                    <span class="material-symbols-outlined">delete</span>
+                    <span class="ew-icon ico-delete" aria-hidden="true"></span>
                   </button>
                 </div>
 
@@ -208,10 +208,10 @@
                   <!-- Grupo 1: escrita básica — sempre visível e familiar -->
                   <div class="fmt-group fmt-group-writing">
                     <button class="fmt-btn" data-fmt="bold" title="Negrito (Ctrl+B)" aria-label="Negrito">
-                      <span class="material-symbols-outlined">format_bold</span>
+                      <span class="ew-icon ico-format-bold" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-fmt="italic" title="Itálico (Ctrl+I)" aria-label="Itálico">
-                      <span class="material-symbols-outlined">format_italic</span>
+                      <span class="ew-icon ico-format-italic" aria-hidden="true"></span>
                     </button>
                     <span class="fmt-sep"></span>
                     <select class="fmt-select" data-fmt-block aria-label="Tipo de bloco" title="Tipo de bloco">
@@ -222,10 +222,10 @@
                     </select>
                     <span class="fmt-sep"></span>
                     <button class="fmt-btn" data-fmt="justifyLeft" title="Alinhar à esquerda" aria-label="Esquerda">
-                      <span class="material-symbols-outlined">format_align_left</span>
+                      <span class="ew-icon ico-format-align-left" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-fmt="justifyCenter" title="Centralizar" aria-label="Centralizar">
-                      <span class="material-symbols-outlined">format_align_center</span>
+                      <span class="ew-icon ico-format-align-center" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-fmt="justifyRight" title="Alinhar à direita" aria-label="Direita">
                       <span class="material-symbols-outlined">format_align_right</span>
@@ -251,21 +251,21 @@
                       <option value="book">Livro A5</option>
                     </select>
                     <button class="editor-view-btn" data-action="toggle-page-view" aria-pressed="false" title="Ver texto em página">
-                      <span class="material-symbols-outlined">article</span>
+                      <span class="ew-icon ico-article" aria-hidden="true"></span>
                       Página
                     </button>
                     <span class="fmt-sep"></span>
                     <button class="fmt-btn" data-action="toggle-grammar-color" data-grammar-btn aria-pressed="false" title="Colorir por classe gramatical" aria-label="Classes gramaticais">
-                      <span class="material-symbols-outlined">format_color_text</span>
+                      <span class="ew-icon ico-format-color-text" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-fmt="pageBreak" title="Quebra de página" aria-label="Quebra de página">
-                      <span class="material-symbols-outlined">insert_page_break</span>
+                      <span class="ew-icon ico-insert-page-break" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-action="export-rtf" title="Baixar para Word / LibreOffice" aria-label="Baixar para Word">
-                      <span class="material-symbols-outlined">file_download</span>
+                      <span class="ew-icon ico-download" aria-hidden="true"></span>
                     </button>
                     <button class="fmt-btn" data-action="print-pages" title="Imprimir / Salvar como PDF" aria-label="Imprimir">
-                      <span class="material-symbols-outlined">print</span>
+                      <span class="ew-icon ico-print" aria-hidden="true"></span>
                     </button>
                   </div>
                 </div>
@@ -347,7 +347,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
               <div class="proof-actions">
                 <button class="primary-button" data-action="export-proof">
-                  <span class="material-symbols-outlined">download</span>
+                  <span class="ew-icon ico-download" aria-hidden="true"></span>
                   Guardar cópia da autoria
                 </button>
                 <p>A cópia guarda sinais do seu processo. Só abre aqui no Escrevaral, em Arquivo → Trazer cópia.</p>
@@ -385,7 +385,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                 <div class="archive-actions">
                   <div class="archive-action-group">
                     <button class="secondary-button" data-action="export-manuscript" data-export-format="txt" title="Baixar como texto simples (.txt)">
-                      <span class="material-symbols-outlined">article</span>
+                      <span class="ew-icon ico-article" aria-hidden="true"></span>
                       Exportar texto
                     </button>
                     <button class="secondary-button" data-action="export-manuscript" data-export-format="md" title="Baixar em Markdown (.md)">
@@ -394,7 +394,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                     </button>
                   </div>
                   <button class="primary-button" data-action="open-create-note">
-                    <span class="material-symbols-outlined">add</span>
+                    <span class="ew-icon ico-add" aria-hidden="true"></span>
                     Nova nota
                   </button>
                 </div>
@@ -403,7 +403,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
               <div class="archive-controls">
                 <label class="archive-search">
-                  <span class="material-symbols-outlined">search</span>
+                  <span class="ew-icon ico-search" aria-hidden="true"></span>
                   <input type="search" placeholder="Buscar no acervo" data-archive-search aria-label="Buscar no acervo">
                 </label>
                 <div class="archive-filter-bar" data-archive-filter-bar></div>
@@ -477,7 +477,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                       </label>
                     </form>
                     <button class="primary-button" data-action="open-active-manuscript">
-                      <span class="material-symbols-outlined">edit_note</span>
+                      <span class="ew-icon ico-edit-note" aria-hidden="true"></span>
                       Abrir no editor
                     </button>
                   </div>
@@ -502,7 +502,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                     <p data-backup-warning-copy>Limpar os dados do navegador, trocar de aparelho ou desinstalar o site pode apagar seus textos. Guarde uma cópia fora do navegador — ela só abre aqui no Escrevaral, em <strong>Arquivo → Trazer cópia</strong>.</p>
                   </div>
                   <button class="secondary-button" data-action="export-backup">
-                    <span class="material-symbols-outlined">file_save</span>
+                    <span class="ew-icon ico-file-save" aria-hidden="true"></span>
                     Exportar agora
                   </button>
                 </div>
@@ -544,15 +544,15 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
                 <div class="archive-backup-actions">
                   <button class="secondary-button" data-action="export-backup">
-                    <span class="material-symbols-outlined">file_save</span>
+                    <span class="ew-icon ico-file-save" aria-hidden="true"></span>
                     Guardar cópia do acervo
                   </button>
                   <button class="secondary-button" data-action="import-backup">
-                    <span class="material-symbols-outlined">upload_file</span>
+                    <span class="ew-icon ico-upload-file" aria-hidden="true"></span>
                     Trazer cópia de volta
                   </button>
                   <button class="secondary-button" data-action="export-rtf" title="Baixar para Word / LibreOffice (.rtf)">
-                    <span class="material-symbols-outlined">file_download</span>
+                    <span class="ew-icon ico-download" aria-hidden="true"></span>
                     Exportar .rtf
                   </button>
                 </div>
@@ -565,7 +565,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                       <p>Apaga permanentemente todos os textos, notas e configurações. Não é reversível.</p>
                     </div>
                     <button class="danger-button" data-action="master-reset">
-                      <span class="material-symbols-outlined">delete_forever</span>
+                      <span class="ew-icon ico-delete" aria-hidden="true"></span>
                       Zerar tudo
                     </button>
                   </div>
@@ -599,19 +599,19 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
                 <nav class="academy-tools-tabs" aria-label="Selecionar ferramenta">
                   <label for="at-voice" class="academy-tool-tab">
-                    <span class="material-symbols-outlined">psychology</span>
+                    <span class="ew-icon ico-psychology" aria-hidden="true"></span>
                     Espelho de Voz
                   </label>
                   <label for="at-rimalab" class="academy-tool-tab">
-                    <span class="material-symbols-outlined">graphic_eq</span>
+                    <span class="ew-icon ico-graphic-eq" aria-hidden="true"></span>
                     RimaLab
                   </label>
                   <label for="at-vocab" class="academy-tool-tab">
-                    <span class="material-symbols-outlined">language</span>
+                    <span class="ew-icon ico-language" aria-hidden="true"></span>
                     Vocabulário
                   </label>
                   <label for="at-biblioteca" class="academy-tool-tab">
-                    <span class="material-symbols-outlined">library_books</span>
+                    <span class="ew-icon ico-library-books" aria-hidden="true"></span>
                     Biblioteca
                   </label>
                 </nav>
@@ -625,11 +625,11 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                       <p>Cole um conjunto de textos ou use o texto em edição. O Escrevaral lê o texto e devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença.</p>
                       <div class="voice-actions">
                         <button class="secondary-button" data-action="voice-use-active">
-                          <span class="material-symbols-outlined">edit_note</span>
+                          <span class="ew-icon ico-edit-note" aria-hidden="true"></span>
                           Usar o texto em edição
                         </button>
                         <button class="primary-button" data-action="voice-analyze">
-                          <span class="material-symbols-outlined">psychology</span>
+                          <span class="ew-icon ico-psychology" aria-hidden="true"></span>
                           Analisar voz
                         </button>
                       </div>
@@ -656,11 +656,11 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                       <p>Um laboratório local para poema, letra e verso falado. A ferramenta conta sílabas poéticas até a última tônica, sinaliza elisões e compara sons finais sem fingir que poesia cabe inteira numa régua.</p>
                       <div class="rimalab-actions">
                         <button class="secondary-button" data-action="rimalab-use-active">
-                          <span class="material-symbols-outlined">edit_note</span>
+                          <span class="ew-icon ico-edit-note" aria-hidden="true"></span>
                           Usar o texto em edição
                         </button>
                         <button class="secondary-button" data-action="export-rimalab">
-                          <span class="material-symbols-outlined">download</span>
+                          <span class="ew-icon ico-download" aria-hidden="true"></span>
                           Baixar TXT
                         </button>
                         <button class="secondary-button" data-action="clear-rimalab">
@@ -668,7 +668,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                           Limpar
                         </button>
                         <button class="secondary-button" data-action="toggle-rimalab-encyclopedia">
-                          <span class="material-symbols-outlined">menu_book</span>
+                          <span class="ew-icon ico-menu-book" aria-hidden="true"></span>
                           Enciclopédia
                         </button>
                       </div>
@@ -728,7 +728,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                         <div class="decolonial-observer-list" data-decolonial-observer-list></div>
                       </div>
                       <label class="decolonial-search">
-                        <span class="material-symbols-outlined">search</span>
+                        <span class="ew-icon ico-search" aria-hidden="true"></span>
                         <input type="search" data-decolonial-search placeholder="Buscar termo, alternativa ou motivo" aria-label="Buscar no vocabulário decolonizador">
                       </label>
                       <div class="decolonial-filters" data-decolonial-filters aria-label="Categorias do vocabulário decolonizador"></div>
@@ -757,7 +757,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   <p>Ficção, roteiro, poesia, não ficção, jornalismo, mercado editorial e objeto livro não nascem do mesmo vazio. Escolha um guia e abra uma mesa preparada para escrever.</p>
 
                   <label class="template-search">
-                    <span class="material-symbols-outlined">search</span>
+                    <span class="ew-icon ico-search" aria-hidden="true"></span>
                     <input type="search" placeholder="Buscar guia, ENEM, soneto, roteiro..." data-template-search aria-label="Buscar no Guia de Ofícios">
                   </label>
                   <div class="craft-tabs" data-craft-tabs></div>
@@ -821,7 +821,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                     <p><strong>O Escrevaral não dá garantia jurídica.</strong> Ele aponta riscos, preserva rastros e encoraja consulta às fontes oficiais atualizadas antes de registro, contrato, submissão ou litígio.</p>
                   </div>
                   <label class="rights-search">
-                    <span class="material-symbols-outlined">search</span>
+                    <span class="ew-icon ico-search" aria-hidden="true"></span>
                     <input type="search" data-rights-search placeholder="Buscar contrato, ISBN, plágio, coautoria..." aria-label="Buscar em Direitos do Autor">
                   </label>
                 </div>
@@ -937,7 +937,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
                   </button>
                   <span class="cronograma-month-label" data-crono-month>Maio</span>
                   <button class="icon-button crono-shortcut-toggle" data-crono-month-toggle type="button" aria-expanded="false" aria-controls="crono-date-shortcut" aria-label="Olha, clica aqui: é um atalho para escolher uma data" title="Olha, clica aqui: é um atalho">
-                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="ew-icon ico-calendar-month" aria-hidden="true"></span>
                   </button>
                   <button class="icon-button" data-crono-next aria-label="Próximo mês">
                     <span class="material-symbols-outlined">chevron_right</span>
@@ -953,7 +953,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
 
         <aside class="inspector">
           <button class="panel-toggle panel-toggle-right" data-action="toggle-right-panel" aria-label="Ocultar análise linguística" title="Ocultar análise linguística">
-            <span class="material-symbols-outlined">right_panel_close</span>
+            <span class="ew-icon ico-right-panel-close" aria-hidden="true"></span>
           </button>
           <div class="inspector-section">
             <h2>Olhar do texto</h2>
@@ -983,7 +983,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
           </div>
         </aside>
         <button class="panel-rail panel-rail-right" data-action="toggle-right-panel" aria-label="Abrir análise linguística" title="Abrir análise linguística">
-          <span class="material-symbols-outlined">left_panel_open</span>
+          <span class="ew-icon ico-left-panel-open" aria-hidden="true"></span>
         </button>
       </div>
 
@@ -1023,7 +1023,7 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               <small>Apenas você e a página. Sem guia, sem configuração.</small>
             </button>
             <button class="welcome-card welcome-card-secondary" data-action="welcome-write">
-              <span class="material-symbols-outlined">auto_stories</span>
+              <span class="ew-icon ico-auto-stories" aria-hidden="true"></span>
               <strong>Escolher um guia</strong>
               <small>Conto, roteiro, soneto, crônica, ENEM — o guia certo para o ofício.</small>
             </button>
@@ -1031,17 +1031,17 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
               <p class="eyebrow">Ferramentas quando precisar</p>
               <div class="welcome-tools-row">
                 <button class="welcome-card welcome-card-tool" data-action="welcome-rimalab">
-                  <span class="material-symbols-outlined">graphic_eq</span>
+                  <span class="ew-icon ico-graphic-eq" aria-hidden="true"></span>
                   <strong>RimaLab</strong>
                   <small>Métrica e rima</small>
                 </button>
                 <button class="welcome-card welcome-card-tool" data-action="welcome-voice">
-                  <span class="material-symbols-outlined">psychology</span>
+                  <span class="ew-icon ico-psychology" aria-hidden="true"></span>
                   <strong>Espelho de Voz</strong>
                   <small>Leitura crítica</small>
                 </button>
                 <button class="welcome-card welcome-card-tool" data-action="welcome-autoria">
-                  <span class="material-symbols-outlined">verified</span>
+                  <span class="ew-icon ico-verified" aria-hidden="true"></span>
                   <strong>Prova de autoria</strong>
                   <small>Sinais da sua autoria</small>
                 </button>
