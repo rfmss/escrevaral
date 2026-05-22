@@ -129,10 +129,14 @@
     font-size: clamp(22px, 4vw, 34px);
   }
 
-  /* module-tabs: indica scroll com fade e permite rolagem sem aparecer scrollbar */
+  /* module-tabs: scroll horizontal real em mobile — fade sinaliza mais abas */
   .module-tabs {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    display: flex;
+    flex-wrap: nowrap;
+    -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, black 80%, transparent 100%);
   }
   .module-tabs::-webkit-scrollbar { display: none; }
 
@@ -216,6 +220,8 @@
   .brand-lockup > div > span { display: none; }
   .topbar [data-action="toggle-theme-menu"] > span:not(.material-symbols-outlined) { display: none; }
   .brand-lockup { min-width: 0; flex-shrink: 1; }
+  /* Badge offline: só ícone acima de 1200px */
+  .offline-badge-label { display: none; }
 }
 
 @media (max-width: 1200px) {

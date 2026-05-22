@@ -218,7 +218,7 @@
   font-size: 10px;
   font-weight: 650;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  
 }
 
 .crono-moon-row {
@@ -380,7 +380,7 @@
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
   background: #FEF3DC;
   color: #875A00;
   border: 1px solid #F0DFA0;

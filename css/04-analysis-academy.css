@@ -9,7 +9,7 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  
   color: var(--soft-ink);
   padding: 10px 14px;
   background: var(--surface-low);
@@ -34,7 +34,7 @@
   font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  
   color: var(--muted);
   white-space: nowrap;
   flex-shrink: 0;
@@ -143,7 +143,7 @@
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
 }
 
 .rimalab-dashboard {
@@ -191,7 +191,7 @@
   color: var(--primary);
   font-size: 12px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  
 }
 
 .rimalab-list {
@@ -256,7 +256,7 @@
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  
 }
 
 .rimalab-rhyme-badge.is-rica,
@@ -315,7 +315,7 @@
   padding: 4px 7px;
   font-size: 10px;
   font-weight: 900;
-  text-transform: uppercase;
+  
 }
 
 .rimalab-encyclopedia p {
@@ -552,7 +552,7 @@
   font-size: 11px;
   font-weight: 900;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  
 }
 
 .decolonial-list {
@@ -793,7 +793,7 @@
   color: var(--sienna);
   font-size: 10px;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
+  
 }
 
 .rights-watch span,
@@ -817,7 +817,7 @@
   color: var(--primary);
   font-size: 12px;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
+  
 }
 
 .rights-sources > div {
@@ -1195,6 +1195,15 @@
   grid-template-columns: minmax(0, 1fr) 340px;
   gap: 20px;
   align-items: start;
+}
+
+/* Quando o painel de detalhes está vazio (nenhuma nota selecionada),
+   colapsa a coluna direita */
+.archive-layout:has(.archive-panel-empty:not([hidden])) {
+  grid-template-columns: 1fr;
+}
+.archive-layout:has(.archive-panel-empty:not([hidden])) .archive-detail-panel {
+  display: none;
 }
 
 .archive-layout .project-grid {

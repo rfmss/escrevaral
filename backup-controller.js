@@ -96,8 +96,8 @@ async function initializeFilesystemBackup() {
   if (!VeredaFileSystemBackup.isSupported()) {
     setFilesystemBackupState(
       "idle",
-      "Autosave externo indisponível neste navegador",
-      "Chrome, Edge e Opera permitem escolher um arquivo .vrda para autosave. Firefox e Safari ainda bloqueiam esse acesso."
+      "Cópia automática indisponível neste navegador",
+      "Chrome, Edge e Opera permitem escolher um arquivo .vrda para salvar automaticamente. Firefox e Safari ainda bloqueiam esse acesso."
     );
     filesystemBackup.querySelector('[data-action="choose-filesystem-backup"]').disabled = true;
     filesystemBackupInterval.disabled = true;
@@ -109,8 +109,8 @@ async function initializeFilesystemBackup() {
   if (!filesystemBackupHandle) {
     setFilesystemBackupState(
       "idle",
-      "Autosave externo desativado",
-      "Escolha um arquivo .vrda para a Vereda manter uma cópia completa do acervo fora do navegador."
+      "Cópia automática desativada",
+      "Escolha um arquivo .vrda para o Escrevaral manter uma cópia completa do acervo fora do navegador."
     );
     return;
   }
@@ -158,11 +158,11 @@ async function saveFilesystemBackup(manual = false) {
     };
     persistBackupMeta();
     renderBackupWarning();
-    const label = manual ? "Backup externo salvo agora" : `Autosave externo #${filesystemBackupCount}`;
+    const label = manual ? "Cópia externa salva agora" : `Cópia automática #${filesystemBackupCount}`;
     setFilesystemBackupState("ready", label, `${filesystemBackupHandle.name} · ${formatUpdatedAt(backup.exportedAt)}`);
   } catch (error) {
     stopFilesystemBackup();
-    setFilesystemBackupState("error", "Autosave externo pausado", error.message);
+    setFilesystemBackupState("error", "Cópia automática pausada", error.message);
   }
 }
 
@@ -178,7 +178,7 @@ function stopFilesystemBackup(updateUi = true) {
   }
 
   if (updateUi && filesystemBackupHandle) {
-    setFilesystemBackupState("idle", "Autosave externo pausado", `${filesystemBackupHandle.name} continua configurado`);
+    setFilesystemBackupState("idle", "Cópia automática pausada", `${filesystemBackupHandle.name} continua configurado`);
   }
 }
 

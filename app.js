@@ -505,8 +505,7 @@ function addManuscript(manuscript, status) {
   closeCreateNote();
   persistState(status);
   setView("editor");
-  titleInput.focus();
-  titleInput.select();
+  requestAnimationFrame(() => writingArea?.focus());
   checkProgress();
 }
 
@@ -516,7 +515,7 @@ function createQuickNote() {
   const folder = createNoteParentId ? undefined : (CATEGORY_FOLDER[createNoteCategory] || "Notas");
   const manuscript = VeredaArchive.createManuscript({
     id: `nota-${Date.now()}`,
-    title: type.id === "manuscrito" ? `Rascunho ${nextDraftNumber()}` : `${type.label} ${nextNumber}`,
+    title: type.id === "manuscrito" ? "" : `${type.label} ${nextNumber}`,
     text: "",
     type: type.id,
     kind: type.kind,
@@ -535,7 +534,7 @@ function createBlankManuscript() {
   const folder = CATEGORY_FOLDER[createNoteCategory] || "Ficção";
   const manuscript = VeredaArchive.createManuscript({
     id: `${type.id}-${Date.now()}`,
-    title: type.id === "manuscrito" ? `Rascunho ${nextDraftNumber()}` : `${type.label} ${nextNumber}`,
+    title: type.id === "manuscrito" ? "" : `${type.label} ${nextNumber}`,
     text: createProjectNoteText(type),
     type: type.id,
     kind: type.kind,
