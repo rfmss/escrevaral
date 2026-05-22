@@ -53,12 +53,12 @@
   margin-bottom: 32px;
 }
 .academy-banner h2 {
-  font-family: 'Cinzel', "Noto Serif", Georgia, serif;
-  font-size: clamp(20px, 3vw, 28px);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 700;
+  letter-spacing: 0;
   margin: 4px 0 8px;
-  color: var(--primary-deep);
+  color: var(--ink);
 }
 .academy-banner p {
   font-size: 14px;

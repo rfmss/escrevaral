@@ -146,13 +146,15 @@ function renderProofView() {
   const session = getActiveProofSession();
 
   if (!session) {
-    proofSessionName.textContent = "Nota de suporte";
-    proofIntegrity.textContent = "--";
-    proofStatus.textContent = "Prova de autoria só para manuscritos";
-    proofOrganic.textContent = "0";
-    proofRejected.textContent = "0 descartados";
-    proofCadence.textContent = "-- palavras/min";
-    proofTimeline.innerHTML = "<div><span></span><p>Pesquisa, personagem, cena, mundo, cronologia e glossário não geram prova de autoria.</p></div>";
+    proofSessionName.textContent = "Nenhum manuscrito ativo";
+    proofIntegrity.textContent = "—";
+    proofStatus.textContent = "Abra um manuscrito no editor para iniciar o registro";
+    proofOrganic.textContent = "—";
+    proofRejected.textContent = "";
+    proofCadence.textContent = "—";
+    proofTimeline.innerHTML = "";
+    const grid = document.querySelector(".certificate-grid");
+    if (grid) grid.classList.add("is-empty");
     return;
   }
 

@@ -58,15 +58,12 @@
   margin-bottom: 32px;
 }
 .archive-danger-zone {
-  margin-top: 32px;
+  margin-top: 48px;
   padding: 18px 20px;
-  border: 1px solid color-mix(in srgb, var(--sienna) 34%, transparent);
+  border: 1px solid color-mix(in srgb, var(--sienna) 28%, transparent);
+  border-top: 3px solid color-mix(in srgb, var(--sienna) 50%, transparent);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--sienna) 6%, var(--card));
-}
-.archive-danger-label {
-  color: var(--sienna);
-  margin-bottom: 12px;
+  background: color-mix(in srgb, var(--sienna) 4%, var(--card));
 }
 .archive-danger-content {
   display: flex;
@@ -805,9 +802,8 @@
   gap: 12px;
   color: var(--muted);
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .voice-result {

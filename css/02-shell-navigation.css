@@ -510,6 +510,13 @@ html {
   letter-spacing: 0.04em;
 }
 
+.section-label {
+  margin: 0;
+  color: var(--soft-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .tree-row,
 .nav-row {
   width: 100%;
@@ -583,6 +590,30 @@ html {
 .secondary-button:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
+}
+
+.ghost-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color var(--motion-quick);
+}
+.ghost-button:hover { color: var(--soft-ink); }
+.ghost-button .material-symbols-outlined { font-size: 16px; }
+
+.archive-export-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
 }
 
 .sidebar > .primary-button {
@@ -1404,10 +1435,16 @@ html {
 }
 
 .lexical-hint {
-  max-width: 620px;
-  margin: 8px 0 34px;
+  max-width: 480px;
+  margin: 6px 0 28px;
   color: var(--muted);
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Card fantasma: some quando não há conteúdo lexical */
+.lexical-card:empty {
+  display: none;
 }
 
 .inspector {

@@ -2,7 +2,7 @@
 const PLANNER_KEY = "vrda-planner";
 
 const CRONO_MONTHS = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-const CRONO_MONTHS_SHORT = ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"];
+const CRONO_MONTHS_SHORT = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
 const CRONO_WEEKDAYS = ["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
 const CRONO_MOON_PHASES = [
   { key: "nova", label: "NOVA", icon: "●", offset: 0 },
@@ -264,7 +264,7 @@ function renderCronograma() {
       </div>`).join("");
 
     const emptyFutureHtml = !hasActivity && !isToday && !isPast
-      ? `<p class="crono-day-empty">Nenhuma escrita planejada — <button class="crono-add-inline crono-add-btn" data-action="crono-add-task" data-day="${dayKey}">+ Tarefa</button></p>`
+      ? `<p class="crono-day-empty"><button class="crono-add-inline crono-add-btn" data-action="crono-add-task" data-day="${dayKey}">+ planejar</button></p>`
       : "";
 
     return `
