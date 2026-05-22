@@ -68,7 +68,7 @@ function renderSpecializedEditor(manuscript) {
     slam:       "Título do poema",
     enem:       "Título da redação",
   };
-  titleInput.placeholder = TITLE_PLACEHOLDERS[mode] || "Título do manuscrito";
+  titleInput.placeholder = TITLE_PLACEHOLDERS[mode] || "Sem título";
 
   if (mode === "soneto") {
     writingArea.hidden = true;

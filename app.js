@@ -505,7 +505,12 @@ function addManuscript(manuscript, status) {
   closeCreateNote();
   persistState(status);
   setView("editor");
-  requestAnimationFrame(() => writingArea?.focus());
+  requestAnimationFrame(() => {
+    writingArea?.focus();
+    if (document.activeElement !== writingArea) {
+      setTimeout(() => writingArea?.focus(), 60);
+    }
+  });
   checkProgress();
 }
 
@@ -2027,6 +2032,7 @@ function _bootstrap() {
   renderRightsLab();
   updateAcademyParallax();
   applyTemplateLayout();
+  if (window.innerWidth <= 820) state.layout.leftCollapsed = true;
   applyPanelLayout();
   applyColorTheme();
   applyFocusSettings();
