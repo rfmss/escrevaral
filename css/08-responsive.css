@@ -49,16 +49,20 @@
     padding: 4px;
     width: 100%;
   }
-}
 
-/* P2: elementos internos das views respeitam margem mínima em celular */
+  /* P2: margem mínima nas views em celular */
   .archive-security-details,
   .academy-view > *,
   .cronograma-wrap,
   .voice-tool,
   .rimalab-tool,
   .decolonial-tool,
-  .rights-lab {
+  .rights-lab,
+  [data-view-panel="autoria"] > *,
+  .certificate-paper,
+  .proof-session,
+  .proof-actions,
+  .version-panel {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
@@ -130,6 +134,16 @@
   .voice-metrics,
   .academy-paths {
     grid-template-columns: 1fr;
+  }
+
+  /* Prova de autoria: grid 3→1 coluna */
+  .certificate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Corta overflow horizontal em todas as views */
+  .content-stage {
+    overflow-x: hidden;
   }
 }
 
