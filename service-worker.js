@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v205";
-const ASSET_VERSION = "20260522-logo2";
+const CACHE_NAME = "vereda-offline-v206";
+const ASSET_VERSION = "20260522-sprint1";
 
 const CORE_ASSETS = [
   "./",
@@ -63,6 +63,7 @@ const CORE_ASSETS = [
   "./decolonial-data.json",
   "./vereda-biblioteca-escrita.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
+  `./fonts/material-symbols-outlined.woff2`,
   `./icons/escrevarallogo.png?v=${ASSET_VERSION}`,
   `./icons/Logo.svg?v=${ASSET_VERSION}`,
   `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,

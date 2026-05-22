@@ -1,3 +1,11 @@
+/* ── GUTTER PROGRESSIVO ─────────────────────────────────────────────── */
+@media (max-width: 820px) {
+  :root { --page-gutter: clamp(20px, 4vw, 40px); }
+}
+@media (max-width: 480px) {
+  :root { --page-gutter: 20px; }
+}
+
 /* ── MOBILE PHONE (≤480px) — topbar silenciosa, statusbar essencial ── */
 @media (max-width: 480px) {
   /* Topbar: esconde áudio e busca — foco em escrita */
@@ -99,6 +107,22 @@
 
 /* ── MOBILE GERAL (≤820px) — melhorias de experiência mobile ── */
 @media (max-width: 820px) {
+  /* Topbar: áudio e desk-bg somem — só ícones essenciais */
+  .topbar [data-action="toggle-audio-player"],
+  .desk-bg-toggle { display: none; }
+
+  /* Topbar actions: gap menor */
+  .topbar-actions { gap: 2px; }
+
+  /* Sidebar some em views internas — editor mantém o painel lateral */
+  .app-shell[data-view="autoria"] .sidebar,
+  .app-shell[data-view="arquivo"] .sidebar,
+  .app-shell[data-view="academia"] .sidebar,
+  .app-shell[data-view="biblioteca"] .sidebar,
+  .app-shell[data-view="cronograma"] .sidebar {
+    display: none;
+  }
+
   /* Título do manuscrito: clamp menor para não extravazar em mobile */
   .title-input,
   .paper h1 {

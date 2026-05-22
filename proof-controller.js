@@ -162,6 +162,9 @@ function renderProofView() {
   proofSessionName.textContent = session.name;
   proofIntegrity.textContent = summary.integrity > 0 ? `${summary.integrity}%` : "Aguardando sua escrita";
 
+  const grid = document.querySelector(".certificate-grid");
+  if (grid) grid.classList.toggle("is-empty", summary.totalEvents === 0);
+
   // Atualiza chip da topbar
   const chip = document.querySelector("[data-proof-chip]");
   const chipValue = document.querySelector("[data-proof-chip-value]");

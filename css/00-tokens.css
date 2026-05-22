@@ -1,4 +1,5 @@
 :root {
+  --page-gutter: clamp(32px, 5vw, 72px);
   --paper: #fdf8f2;
   --surface: #f9f4ec;
   --surface-low: #f2ebe0;
