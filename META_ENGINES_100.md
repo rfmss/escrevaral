@@ -6,7 +6,7 @@ Objetivo: manter no radar a meta de levar cada engine a 100% de maturidade, por 
 
 Frase-guia:
 
-> Uma mesa limpa que revela ferramentas a medida que o texto pede.
+> Tudo existe desde o começo; cada coisa no seu lugar, nada invade antes da hora.
 
 ## Pilar transversal: portugues brasileiro integral
 

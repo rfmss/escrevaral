@@ -162,9 +162,11 @@ function applyTemplateLayout() {
   templatePanelToggles.forEach((toggle) => {
     const isHeaderToggle = toggle.closest(".template-reference-header");
     const label = state.template.open ? "Ocultar guia de escrita" : "Mostrar guia de escrita";
+    const hasText = countWords(getActiveManuscript()?.text || writingArea?.innerText || "") > 0;
+    const hint = hasText ? label : "Abra o guia para ver a estrutura da forma. A conversa com o guia aparece após as primeiras linhas.";
     toggle.setAttribute("aria-expanded", String(state.template.open));
     toggle.setAttribute("aria-label", label);
-    toggle.title = label;
+    toggle.title = hint;
 
     const icon = toggle.querySelector(".material-symbols-outlined");
     if (icon) {

@@ -51,6 +51,19 @@
   }
 }
 
+/* P2: elementos internos das views respeitam margem mínima em celular */
+  .archive-security-details,
+  .academy-view > *,
+  .cronograma-wrap,
+  .voice-tool,
+  .rimalab-tool,
+  .decolonial-tool,
+  .rights-lab {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
 /* ── VIEWPORT DE ACEITE 390px — iPhone SE, Android compact ── */
 @media (max-width: 390px) {
   /* Tabs: reduzir tamanho para caber mais */
@@ -110,6 +123,13 @@
   /* Inspector/análise: oculta em portrait pequeno (distrai na escrita) */
   .app-shell:not(.is-right-expanded) .inspector {
     display: none;
+  }
+
+  /* P3: TV vertical e tablet portrait — grids de duas colunas colapsam */
+  .archive-layout,
+  .voice-metrics,
+  .academy-paths {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -14,6 +14,8 @@ Ler `META_ENGINES_100.md` no início de toda sessão. Antes de propor ou aplicar
 
 Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
 
+Relatório ativo de auditoria: `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
+
 ---
 
 ## Pilar inegociável: português brasileiro integral
