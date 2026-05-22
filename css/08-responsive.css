@@ -169,6 +169,28 @@
     grid-template-columns: 1fr;
   }
 
+  /* Arquivo: controles em coluna */
+  .archive-controls {
+    grid-template-columns: 1fr;
+  }
+
+  /* Academia: template-studio colapsa para coluna única */
+  .template-studio {
+    grid-template-columns: 1fr;
+  }
+  .template-copy { min-height: 0; }
+  .template-phone { width: 100%; max-width: 380px; margin: 0 auto; }
+
+  /* Arquivo: área de backup e cópias sem overflow */
+  .archive-backup-actions {
+    flex-wrap: wrap;
+  }
+  .archive-security-details,
+  .archive-protect-zone {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   /* Corta overflow horizontal em todas as views */
   .content-stage {
     overflow-x: hidden;

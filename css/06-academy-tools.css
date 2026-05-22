@@ -105,7 +105,10 @@
   display: flex;
   border-bottom: 1px solid var(--line);
   background: var(--surface-low);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.academy-tools-tabs::-webkit-scrollbar { display: none; }
 
 .academy-tool-tab {
   display: flex;

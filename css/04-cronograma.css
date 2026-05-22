@@ -3,6 +3,11 @@
   max-width: 720px;
   margin: 0 auto;
   padding: 48px 32px 80px;
+  overflow-x: hidden;
+}
+
+.cronograma-heatmap {
+  min-width: 0;
 }
 
 .cronograma-header {

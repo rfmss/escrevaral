@@ -302,11 +302,12 @@ function renderCreateCategoryGrid() {
   `).join("");
 
   return `
-    <button class="create-blank-shortcut" data-action="create-quick-note" type="button">
-      <span class="material-symbols-outlined">bolt</span>
-      Começar a escrever agora — sem formato
-    </button>
     <div class="create-cat-grid">
+      <button class="create-cat-card create-cat-card--blank" data-action="create-quick-note" type="button">
+        <span class="material-symbols-outlined">edit_note</span>
+        <strong>Folha em branco</strong>
+        <small>Comece sem guia, sem formato, só escrevendo.</small>
+      </button>
       ${cards}
     </div>
   `;
