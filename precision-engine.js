@@ -35,6 +35,18 @@
       return analyzeRomance(normalizedText, words);
     }
 
+    if (template.id === "ficcao-cientifica") {
+      return analyzeFiccaoCientifica(normalizedText, words);
+    }
+
+    if (template.id === "fantasia-brasileira") {
+      return analyzeFanfaziaBrasileira(normalizedText, words);
+    }
+
+    if (template.id === "policial-noir") {
+      return analyzePolicialNoir(normalizedText, words);
+    }
+
     return analyzeGeneric(template, normalizedText, words);
   }
 
@@ -214,6 +226,75 @@
       createCheck("Ritmo variado", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 12), "Alterne frases curtas de ação com longas de reflexão ou descrição."),
       createCheck("Diálogo ou voz", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "Diálogo que muda a relação dos personagens vale mais do que diálogo de exposição."),
       createCheck("Cena com arco", echo >= 12 || sentences.length >= 20, Math.max(echo, Math.min(100, sentences.length * 5)), "Uma cena que começa em um estado e termina em outro — mínimo de mudança."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeFiccaoCientifica(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const novumHits = countMatches(text, /\b(tecnologia|sistema|nave|planeta|espaço|robô|androide|código|mutação|colônia|rede|algoritmo|vírus|futuro|passado|portal|dimensão|estação|satélite|nanobot|ia|inteligência artificial|realidade virtual)\b/gi);
+    const characterHits = countMatches(text, /\b(ela|ele|eu|comandante|cientista|engenheira|piloto|detetive|agente|androide|humano|criatura)\b/gi);
+    const tensionHits = countMatches(text, /\b(mas|porém|então|de repente|descobriu|percebeu|falhou|quebrou|explodiu|errou|ameaça|alerta|perigo|risco|colapso)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    const checks = [
+      createCheck("Tamanho de cena", words >= 400, Math.min(100, words / 5), "Cenas de FC precisam de espaço para situar o leitor no mundo."),
+      createCheck("Novum presente", novumHits >= 2, Math.min(100, novumHits * 18), "O elemento de FC precisa aparecer nas primeiras páginas — não como catálogo, mas como realidade do personagem."),
+      createCheck("Abertura com ancoragem", firstSentence.length >= 20 && firstSentence.length <= 200, scoreOpening(firstSentence), "A FC pede uma abertura que coloca o leitor no mundo antes de explicá-lo."),
+      createCheck("Personagem em cena", characterHits >= 3, Math.min(100, characterHits * 14), "Tecnologia sem personagem vira manual — coloque alguém em relação com o novum."),
+      createCheck("Conflito com o sistema", tensionHits >= 2, Math.min(100, tensionHits * 22), "FC fica sem força quando o mundo funciona perfeitamente. Introduza uma falha ou ameaça."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 12), "Alterne frase técnica com gesto humano para não virar relatório."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeFanfaziaBrasileira(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const territorioHits = countMatches(text, /\b(cerrado|sertão|caatinga|nordeste|quilombo|favela|terreiro|mata|rio|morro|aldeia|comunidade|roça|mangue)\b/gi);
+    const magiaHits = countMatches(text, /\b(encantado|feitiço|magia|bruxo|benzedeira|rezadeira|orixá|entidade|visagem|assombração|cura|ritual|espírito|ancestral|caboclo|encantaria|pajelança)\b/gi);
+    const sensoryHits = countMatches(text, /\b(cheiro|som|terra|raiz|sangue|luz|sombra|barro|cinza|fumaça|erva|folha|água|fogo|vento)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const tensionHits = countMatches(text, /\b(mas|porém|então|de repente|percebeu|sentiu|ouviu|chamou|respondeu|apareceu|desapareceu|medo|perigo)\b/gi);
+
+    const checks = [
+      createCheck("Tamanho de cena", words >= 300, Math.min(100, words / 3.5), "A fantasia brasileira precisa de espaço para ancorar mundo e personagem."),
+      createCheck("Território reconhecível", territorioHits >= 1, Math.min(100, territorioHits * 30), "Fantasias enraizadas num território brasileiro concreto têm chão para a magia pousar."),
+      createCheck("Magia ou sobrenatural", magiaHits >= 1, Math.min(100, magiaHits * 25), "O elemento fantástico precisa ser tratado como real dentro do mundo, não como adereço."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 18), "Paisagem e corpo ancoram a fantasia — substitua generalização por cheiro, textura e som."),
+      createCheck("Tensão ou movimento", tensionHits >= 2, Math.min(100, tensionHits * 22), "Fantasia sem conflito vira decoração. Introduza uma força que perturba o equilíbrio."),
+      createCheck("Voz e diálogo", dialogueHits >= 1 || paragraphs.length >= 3, Math.min(100, dialogueHits * 20 + paragraphs.length * 12), "A voz da comunidade ou do personagem deve aparecer — em fala, narração ou monólogo interior."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePolicialNoir(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const criminalHits = countMatches(text, /\b(crime|corpo|cadáver|detetive|delegado|suspeito|alibi|pista|evidência|motivo|testemunha|investigação|culpado|delegacia|polícia|assassino|assassinato|morte|sangue|arma|faca|pistola|tiro)\b/gi);
+    const noirHits = countMatches(text, /\b(noite|sombra|beco|chuva|fumaça|neon|bar|whisky|cidade|rua|escuro|calçada|sirene|vidro|traíra|traidor|mentira|segredo)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const tensionHits = countMatches(text, /\b(mas|porém|então|de repente|descobriu|percebeu|suspeita|virou|fugiu|mentiu|escondeu|revelou|confessou|atirou|correu)\b/gi);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const shortSentences = lengths.filter(l => l <= 10).length;
+    const hasNoir = shortSentences >= 3;
+
+    const checks = [
+      createCheck("Crime ou tensão presente", criminalHits >= 2, Math.min(100, criminalHits * 20), "Policial sem crime ou ameaça explícita perde o centro de gravidade do gênero."),
+      createCheck("Atmosfera noir", noirHits >= 2, Math.min(100, noirHits * 22), "Noir vive de atmosfera — cidade noturna, detalhes sombrios, sensação de inevitabilidade."),
+      createCheck("Diálogo cortante", dialogueHits >= 3, Math.min(100, dialogueHits * 12), "Falas curtas e parciais são o motor do noir — cada linha esconde mais do que revela."),
+      createCheck("Ritmo de suspeita", tensionHits >= 2, Math.min(100, tensionHits * 22), "A história precisa criar, manter e trair expectativas com regularidade."),
+      createCheck("Frases de corte", hasNoir, hasNoir ? 90 : Math.min(60, shortSentences * 20), "Frases curtas criam o ritmo sincopado característico do noir."),
+      createCheck("Ponto de observação", firstSentence.length >= 15 && firstSentence.length <= 180, scoreOpening(firstSentence), "A abertura precisa colocar o olhar do narrador na cena, não no backstory."),
     ];
 
     return summarize(checks, words, 0);
