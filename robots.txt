@@ -2,8 +2,13 @@ User-agent: *
 Allow: /
 
 # Páginas de conteúdo editorial
-Allow: /escrevaral/vereda-titulo-do-livro.html
-Allow: /escrevaral/vereda-primeiras-linhas.html
+Allow: /vereda-titulo-do-livro.html
+Allow: /vereda-primeiras-linhas.html
+Allow: /vereda-estrutura-romance.html
+Allow: /vereda-dialogos.html
+Allow: /vereda-personagens.html
+Allow: /vereda-revisao-manuscrito.html
+Allow: /vereda-bloqueio-criativo.html
 
 # Sitemap
-Sitemap: https://rfmss.github.io/escrevaral/sitemap.xml
+Sitemap: https://escrevaral.com/sitemap.xml

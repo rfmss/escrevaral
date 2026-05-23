@@ -1,10 +1,11 @@
 {
+  "id": "https://escrevaral.com/",
   "name": "Escrevaral",
   "short_name": "Escrevaral",
-  "description": "Editor literário brasileiro offline-first, com escrita calma e ferramentas locais para autoria.",
+  "description": "Oficina literária offline-first para escritoras e escritores brasileiros. Escreva, organize manuscritos e prove sua autoria sem depender de internet.",
   "lang": "pt-BR",
-  "start_url": "./#editor",
-  "scope": ".",
+  "start_url": "https://escrevaral.com/#editor",
+  "scope": "https://escrevaral.com/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#fdfcfb",
@@ -32,10 +33,10 @@
       "name": "Manuscrito",
       "short_name": "Editor",
       "description": "Abrir o editor de manuscrito.",
-      "url": "./#editor",
+      "url": "https://escrevaral.com/#editor",
       "icons": [
         {
-          "src": "favicon_io/android-chrome-192x192.png?v=20260522-sprint4",
+          "src": "favicon_io/android-chrome-192x192.png",
           "sizes": "192x192"
         }
       ]
@@ -44,10 +45,10 @@
       "name": "Academia",
       "short_name": "Academia",
       "description": "Abrir o Escrevaral para consultar guias de escrita.",
-      "url": "./#academia",
+      "url": "https://escrevaral.com/#academia",
       "icons": [
         {
-          "src": "favicon_io/android-chrome-192x192.png?v=20260522-sprint4",
+          "src": "favicon_io/android-chrome-192x192.png",
           "sizes": "192x192"
         }
       ]
