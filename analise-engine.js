@@ -380,12 +380,13 @@
       EU.lastIndex = 0; NOS.lastIndex = 0; ELE.lastIndex = 0; AUTOR.lastIndex = 0;
     });
 
-    // Inconsistência: texto que mistura muito 1ª e 3ª pessoa sem padrão claro
-    const total = frases.length;
-    const dominante = Math.max(frasesEu, frasesNos, frasesEle);
-    const mistura = (frasesEu > 0 && frasesEle > 0)
-      ? Math.min(frasesEu, frasesEle) / total
-      : 0;
+    // Inconsistência: só alerta quando AMBAS as perspectivas são relevantes
+    // (>15% do total cada). Evita falso positivo em ficção com diálogos.
+    const total = frases.length || 1;
+    const prop1a  = frasesEu / total;
+    const prop3a  = frasesEle / total;
+    const mistura = Math.min(prop1a, prop3a);
+    const ambosSignificativos = prop1a > 0.15 && prop3a > 0.15;
 
     return {
       consistenciaPessoa: {
@@ -394,7 +395,7 @@
         frases3a: frasesEle,
         frasesAutorRef: frasesAutor,
         indiceMistura: +((mistura * 100).toFixed(0)),
-        consistente: mistura < 0.1,
+        consistente: !ambosSignificativos,
       },
     };
   }
@@ -429,6 +430,7 @@
 
   function analisar(texto) {
     if (!texto || !texto.trim()) return null;
+    if (contarPalavras(texto) < 30) return null;
 
     const frases = tokenizarFrases(texto.trim());
     const totalPalavras = contarPalavras(texto);

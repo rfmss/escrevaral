@@ -18,7 +18,7 @@
         {
           description: "Backup Vereda",
           accept: {
-            "application/vnd.vereda+json": [".vrda"],
+            "application/vnd.vereda+json": [".esc"],
             "application/json": [".json"],
           },
         },

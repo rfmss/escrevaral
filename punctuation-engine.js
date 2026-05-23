@@ -481,6 +481,7 @@
 
   function analyze(text) {
     if (!text?.trim()) return { issues: [], ruleCount: ALL_RULES.length };
+    if (text.trim().split(/\s+/).length < 10) return { issues: [], ruleCount: ALL_RULES.length };
     const issues = [];
     for (const rule of ALL_RULES) {
       try {
@@ -503,7 +504,7 @@
     const base = analyze(text);
     if (!global.syntaxEngine?._isReady()) return base;
 
-    const sentences = text.split(/(?<=[.!?])\s+/).filter(Boolean);
+    const sentences = text.split(/[.!?]+\s+/).filter(Boolean);
     const syntaxIssues = [];
 
     for (const sent of sentences) {

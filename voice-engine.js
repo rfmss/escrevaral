@@ -88,7 +88,7 @@
     return {
       gesture,
       title: titles[gesture],
-      description: `Seu texto tende ao gesto ${gesture}: trabalha ${field} sob temperatura de ${emotion}. Esta leitura nasce de padrões locais de vocabulário, frase, repetição e pontuação.`,
+      description: `${titles[gesture]}: seu texto trabalha ${field} com temperatura de ${emotion}. Leitura heurística — nasce de padrões locais de vocabulário, frase, repetição e pontuação.`,
       echoes: getEchoes(gesture),
     };
   }
@@ -109,14 +109,14 @@
 
   function getEchoes(gesture) {
     const map = {
-      introspectivo: ["introspecção brasileira", "prosa de memória", "romance psicológico"],
-      oral: ["tradição oral", "crônica conversada", "narrativa de voz forte"],
-      imagético: ["conto imagético", "prosa sensorial", "realismo de detalhe"],
-      ensaístico: ["ensaio literário", "crônica reflexiva", "não ficção autoral"],
-      seco: ["prosa concisa", "conto de tensão", "realismo direto"],
-      barroco: ["prosa torrencial", "romance de linguagem", "voz ornamental"],
-      contemplativo: ["crônica lírica", "poesia em prosa", "narrativa atmosférica"],
-      narrativo: ["ficção de cena", "romance de enredo", "conto clássico"],
+      introspectivo: ["Clarice Lispector (A Paixão segundo G.H.)", "Raduan Nassar (Lavoura Arcaica)", "Lygia Fagundes Telles (As Meninas)"],
+      oral: ["João Guimarães Rosa (Primeiras Estórias)", "João Antônio (Malagueta, Perus e Bacanaço)", "Carolina Maria de Jesus (Quarto de Despejo)"],
+      imagético: ["Dalton Trevisan (O Vampiro de Curitiba)", "Rubem Fonseca (Feliz Ano Novo)", "Caio Fernando Abreu (Morangos Mofados)"],
+      ensaístico: ["Graciliano Ramos (Memórias do Cárcere)", "Clarice Lispector (A Descoberta do Mundo)", "Silviano Santiago (Uma Literatura nos Trópicos)"],
+      seco: ["Dalton Trevisan (contos)", "Samuel Rawet (O Profeta e Outros Contos)", "Marcelino Freire (Contos Negreiros)"],
+      barroco: ["João Guimarães Rosa (Grande Sertão: Veredas)", "Osman Lins (Avalovara)", "Hilda Hilst (A Obscena Senhora D)"],
+      contemplativo: ["Lygia Fagundes Telles (Ciranda de Pedra)", "Adélia Prado (Bagagem)", "Manoel de Barros (Poesia Completa)"],
+      narrativo: ["Machado de Assis (Dom Casmurro)", "Autran Dourado (Opera dos Mortos)", "Conceição Evaristo (Ponciá Vicêncio)"],
     };
     return map[gesture] || map.narrativo;
   }
@@ -181,11 +181,15 @@
 
   function scoreLexicons(words, lexicons) {
     const stripped = words.map(stripAccent);
+    const total = Math.max(1, words.length);
     return Object.entries(lexicons)
       .map(([label, items]) => {
         const keys = items.map(stripAccent);
         const hits = stripped.filter((word) => keys.includes(word)).length;
-        return { label, hits, score: Math.min(100, hits * 14) };
+        // densidade por 100 palavras, máx 100 — evita inflação em textos curtos
+        const density = (hits / total) * 100;
+        const score = Math.min(100, Math.round(density * 25));
+        return { label, hits, score };
       })
       .filter((item) => item.hits > 0)
       .sort((a, b) => b.score - a.score || b.hits - a.hits)

@@ -119,6 +119,16 @@ function hideDeleteUndo() {
   toast.style.opacity = "0";
   toast.style.transform = "translateX(-50%) translateY(8px)";
   toast.style.pointerEvents = "none";
+
+  if (_deletedSnapshot?.manuscripts) {
+    _deletedSnapshot.manuscripts.forEach(m => {
+      delete state.proofs[m.id];
+      delete state.proofValidations[m.id];
+      delete state.versions[m.id];
+    });
+    persistState("Nota apagada permanentemente");
+  }
+
   _deletedSnapshot = null;
 }
 

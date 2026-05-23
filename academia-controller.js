@@ -152,11 +152,12 @@ function clearRimaLabText() {
   });
 }
 
-function renderRimaLab() {
+async function renderRimaLab() {
   if (!window.VeredaRimaLab || !rimalabInput || !rimalabMetrics || !rimalabRhymes) {
     return;
   }
 
+  await VeredaRimaLab.ensureLoaded();
   const text = rimalabInput.value;
   const analysis = window.VeredaRimaLab.analyze(text);
 
@@ -386,6 +387,11 @@ function renderRightsLab() {
   }
 
   const query = normalizeSearch(rightsState.query);
+  const manuscript = getActiveManuscript();
+  const relevantId = (!query && manuscript?.kind)
+    ? VeredaRights.getRelevantCard(manuscript.kind)?.id
+    : null;
+
   const cards = window.VeredaRights.getCards().filter((card) => {
     if (!query) {
       return true;
@@ -404,7 +410,7 @@ function renderRightsLab() {
   });
 
   rightsCards.innerHTML = cards.length
-    ? cards.map(createRightsCardMarkup).join("")
+    ? cards.map(card => createRightsCardMarkup(card, card.id === relevantId)).join("")
     : `<div class="rights-empty">Nenhum cuidado encontrado. Tente buscar por contrato, registro, ISBN, IA, plágio ou submissão.</div>`;
 
   rightsSources.innerHTML = window.VeredaRights
@@ -420,13 +426,13 @@ function renderRightsLab() {
     .join("");
 }
 
-function createRightsCardMarkup(card) {
+function createRightsCardMarkup(card, relevant = false) {
   return `
-    <article class="rights-card">
+    <article class="rights-card${relevant ? " rights-card--relevant" : ""}">
       <div class="rights-card-header">
         <span class="material-symbols-outlined">${escapeHtml(card.icon)}</span>
         <div>
-          <p class="eyebrow">${escapeHtml(card.eyebrow)}</p>
+          <p class="eyebrow">${escapeHtml(card.eyebrow)}${relevant ? ' <span class="rights-card-tag">para seu manuscrito</span>' : ""}</p>
           <h3>${escapeHtml(card.title)}</h3>
         </div>
       </div>

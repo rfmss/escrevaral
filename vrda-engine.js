@@ -1,7 +1,8 @@
 (function vrdaEngine(global) {
-  const FORMAT = "vrda";
+  const FORMAT = "esc";
+  const FORMAT_LEGACY = "vrda";
   const SCHEMA_VERSION = 1;
-  const CREATED_WITH = ".vrda - editor";
+  const CREATED_WITH = ".esc - editor";
 
   function createEnvelope(payload) {
     const exportedAt = new Date().toISOString();
@@ -23,7 +24,7 @@
     validateEnvelope(envelope);
 
     if (createChecksum(envelope.payload) !== envelope.checksum) {
-      throw new Error("Arquivo .vrda com checksum inválido.");
+      throw new Error("Arquivo .esc com assinatura inválida.");
     }
 
     return envelope;
@@ -31,23 +32,27 @@
 
   function validateEnvelope(envelope) {
     if (!envelope || typeof envelope !== "object") {
-      throw new Error("Arquivo .vrda ilegível.");
+      throw new Error("Arquivo .esc ilegível.");
     }
 
-    if (envelope.format !== FORMAT) {
-      throw new Error("Este arquivo não é um .vrda válido.");
+    if (envelope.format !== FORMAT && envelope.format !== FORMAT_LEGACY) {
+      throw new Error("Este arquivo não é um .esc válido.");
     }
 
     if (envelope.schemaVersion !== SCHEMA_VERSION) {
-      throw new Error(`Versão .vrda incompatível: ${envelope.schemaVersion || "desconhecida"}.`);
+      const v = envelope.schemaVersion;
+      if (v && v > SCHEMA_VERSION) {
+        throw new Error(`Este arquivo foi exportado por uma versão mais nova do Escrevaral. Atualize o aplicativo para abri-lo.`);
+      }
+      throw new Error(`Formato antigo (versão ${v || "desconhecida"}). Tente exportar novamente pelo Escrevaral.`);
     }
 
     if (!envelope.payload || typeof envelope.payload !== "object") {
-      throw new Error("Arquivo .vrda sem payload.");
+      throw new Error("Arquivo .esc sem conteúdo.");
     }
 
     if (!Array.isArray(envelope.payload.manuscripts) || envelope.payload.manuscripts.length === 0) {
-      throw new Error("Arquivo .vrda sem manuscritos válidos.");
+      throw new Error("Arquivo .esc sem manuscritos válidos.");
     }
   }
 

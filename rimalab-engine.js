@@ -5,12 +5,21 @@
   let ENCYCLOPEDIA = [];
   let GRAMMAR_WORDS = {};
   let _dataLoaded = false;
+  let _loadError  = false;
 
-  fetch(`rimalab-data.json?v=20260514-f3`).then(r => r.json()).then(d => {
-    ENCYCLOPEDIA  = d.encyclopedia  || [];
-    GRAMMAR_WORDS = d.grammarWords  || {};
-    _dataLoaded   = true;
-  }).catch(() => {});
+  async function ensureLoaded() {
+    if (_dataLoaded || _loadError) return;
+    try {
+      const d = await fetch('rimalab-data.json').then(r => r.json());
+      ENCYCLOPEDIA  = d.encyclopedia  || [];
+      GRAMMAR_WORDS = d.grammarWords  || {};
+      _dataLoaded   = true;
+    } catch (_) {
+      _loadError = true;
+    }
+  }
+
+  ensureLoaded();
 
   const ENCYCLOPEDIA_FALLBACK = [
     { title:"Regra de ouro da métrica", tags:["escansão","última tônica","oficina"],
@@ -385,6 +394,9 @@
     syllabify,
     scanVerse,
     getEncyclopedia,
+    ensureLoaded,
+    isLoaded:     () => _dataLoaded,
+    hasLoadError: () => _loadError,
     get encyclopedia() { return getEncyclopedia(); },
   };
 })(typeof window !== "undefined" ? window : globalThis);

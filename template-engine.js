@@ -2,13 +2,18 @@
   let _oficios   = [];
   let _templates = [];
   let _loaded    = false;
+  let _loadError = false;
 
   async function ensureLoaded() {
-    if (_loaded) return;
-    const data  = await fetch(`templates-data.json?v=20260520-blueprints2`).then(r => r.json());
-    _oficios    = data.oficios   || [];
-    _templates  = data.templates || [];
-    _loaded     = true;
+    if (_loaded || _loadError) return;
+    try {
+      const data  = await fetch('templates-data.json').then(r => r.json());
+      _oficios    = data.oficios   || [];
+      _templates  = data.templates || [];
+      _loaded     = true;
+    } catch (_) {
+      _loadError = true;
+    }
   }
 
   // Carregar imediatamente — não bloqueia, resolve antes da interação
@@ -58,6 +63,7 @@
   global.VeredaTemplates = {
     ensureLoaded,
     isLoaded:        () => _loaded,
+    hasLoadError:    () => _loadError,
     ready:           () => _ready,
     createManuscript,
     getStep,

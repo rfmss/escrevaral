@@ -2,6 +2,7 @@
 
 Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + HTML único. Sem framework, sem IA de terceiros, sem envio de dados.
 
+**Pasta oficial de trabalho:** `/home/rafamass/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Veredav3/`
 **Deploy:** push em `main` → rafa.pro.br/veredav3 (GitHub Pages automático)
 **QA local:** `python3 -m http.server 8799` + Playwright headless
 **Repositório:** github.com/rfmss/veredav3

@@ -67,6 +67,32 @@
     };
   }
 
+  function recordStructuralEvent(record, type, wordDelta, timestamp = Date.now()) {
+    const safeRecord = createRecord(record);
+    const activeSession = getActiveSession(safeRecord);
+    const nextSession = createSession(activeSession);
+
+    nextSession.lastEventAt = timestamp;
+    nextSession.updatedAt = new Date(timestamp).toISOString();
+    nextSession.events.push({
+      at: nextSession.updatedAt,
+      interval: null,
+      trusted: true,
+      organic: false,
+      keyType: `structural:${type}`,
+      wordDelta: wordDelta || 0,
+    });
+
+    if (nextSession.events.length > MAX_EVENTS) {
+      nextSession.events = nextSession.events.slice(nextSession.events.length - MAX_EVENTS);
+    }
+
+    return {
+      activeSessionId: nextSession.id,
+      sessions: safeRecord.sessions.map((session) => (session.id === nextSession.id ? nextSession : session)),
+    };
+  }
+
   function recordKeyEvent(record, keyboardEvent, timestamp = Date.now()) {
     const safeRecord = createRecord(record);
     const activeSession = getActiveSession(safeRecord);
@@ -240,6 +266,7 @@
     createProofDocument,
     getActiveSession,
     recordKeyEvent,
+    recordStructuralEvent,
     summarize,
     startSession,
   };

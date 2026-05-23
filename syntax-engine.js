@@ -9,7 +9,7 @@
   async function init() {
     if (_ptc && _data) return true;
     try {
-      _data = await fetch(`syntax-data.json?v=20260516-a`).then(r => r.json());
+      _data = await fetch('syntax-data.json').then(r => r.json());
       _ptc  = global.ptCompromise || null;
       return true;
     } catch (e) {

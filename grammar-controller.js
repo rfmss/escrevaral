@@ -269,17 +269,44 @@ function setEditorViewMode(mode) {
   if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(mode === "pages"));
 }
 
+let _pageObserver = null;
+let _currentVisiblePage = 1;
+
 function updatePageCount(total) {
   if (!pageCountEl) return;
   if (_currentEditorView === "pages" && total > 0) {
-    // Descobre a página atual pelo foco
-    const focused = document.activeElement?.closest(".manuscript-page");
-    const current = focused ? (parseInt(focused.dataset.page, 10) || 1) : 1;
-    pageCountEl.textContent = `p. ${current} / ${total}`;
+    pageCountEl.textContent = `p. ${_currentVisiblePage} / ${total}`;
     pageCountEl.hidden = false;
+    _attachPageObserver(total);
   } else {
     pageCountEl.hidden = true;
+    _detachPageObserver();
   }
+}
+
+function _attachPageObserver(total) {
+  _detachPageObserver();
+  if (!("IntersectionObserver" in window) || !pagedEditor) return;
+  _pageObserver = new IntersectionObserver((entries) => {
+    let best = null;
+    let bestRatio = 0;
+    entries.forEach(entry => {
+      if (entry.intersectionRatio > bestRatio) {
+        bestRatio = entry.intersectionRatio;
+        best = entry.target;
+      }
+    });
+    if (best) {
+      _currentVisiblePage = parseInt(best.dataset.page, 10) || 1;
+      pageCountEl.textContent = `p. ${_currentVisiblePage} / ${total}`;
+    }
+  }, { threshold: [0.3, 0.6, 1.0] });
+  pagedEditor.querySelectorAll(".manuscript-page").forEach(p => _pageObserver.observe(p));
+}
+
+function _detachPageObserver() {
+  if (_pageObserver) { _pageObserver.disconnect(); _pageObserver = null; }
+  _currentVisiblePage = 1;
 }
 
 function updateFormatBarState() {
@@ -488,6 +515,7 @@ writingArea.addEventListener("click", (e) => {
   const word = span.textContent;
   if (!manuscript || !word) return;
   const analysis = VeredaLexical.analyze(word, manuscript?.text || "");
+  if (!analysis) return;
   const count = analysis.count || 0;
   const countText = count > 0 ? `${count} vez${count > 1 ? "es" : ""} no texto` : "";
   state.lexical.selectedWord = VeredaLexical.normalizeWord(word);
@@ -554,11 +582,7 @@ writingArea.addEventListener("click", async (e) => {
 
   await VeredaLexical.ensureLoaded();
   const analysis = VeredaLexical.analyze(clean, manuscript.text);
-  const classMap = {
-    verbo: "verbo", substantivo: "substantivo", adjetivo: "adjetivo",
-    advérbio: "advérbio", pronome: "pronome", artigo: "artigo",
-    preposição: "preposição", conjunção: "conjunção",
-  };
+  if (!analysis) { closeWordPopover(); return; }
   const classLabel = analysis.className || "";
   const count = analysis.count || 0;
   const countText = count === 1 ? "1 vez no texto" : count > 1 ? `${count} vezes no texto` : "";

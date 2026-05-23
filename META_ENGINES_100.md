@@ -51,31 +51,141 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Estado em 2026-05-20
+## Estado em 2026-05-23
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
-| Prova de autoria | 76% | Protecao local do processo de escrita |
-| Validacao da prova | 58% | Conferencia tecnica basica de arquivo e hash |
-| `.vrda` / envelope nativo | 72% | Integridade local de pacote Vereda |
-| Backup / restore | 78% | Preservacao do acervo |
+| Prova de autoria | 80% | Protecao local do processo de escrita |
+| Validacao da prova | 72% | Conferencia tecnica de arquivo, hash, identidade e aviso de edicao |
+| `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
+| Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
 | Backup externo via File System | 64% | Copia local avancada dependente do navegador |
-| Versionamento | 67% | Historico simples de snapshots |
+| Versionamento | 74% | Historico seguro com salvamento antes de restaurar |
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
-| Editor / documento | 74% | Escrita e edicao principal |
-| Paginacao / modo pagina | 62% | Visualizacao editorial alternativa |
+| Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
+| Paginacao / modo pagina | 66% | Visualizacao editorial com indicador de pagina por scroll |
 | Exportacao / impressao | 80% | Saida limpa de texto/documento |
 | Arquivo / acervo | 82% | Organizacao de manuscritos e notas |
-| Templates / guias | 70% | Oficio orientado por modelos |
-| Precision / aderencia ao guia | 63% | Leitura heuristica do texto contra o guia |
-| Lexico / Biblioteca | 78% | Analise local de palavra, campo e funcao |
-| Sintaxe | 70% | Pistas sintaticas locais |
-| Pontuacao | 73% | Regras locais de pontuacao e norma |
-| Analise geral | 72% | Leitura editorial de economia, clareza, ritmo, voz, POV e lexico |
-| Espelho de Voz | 68% | Reconhecimento de padroes de voz |
-| RimaLab | 55% | Beta de silabificacao, tonicidade e rima |
-| Decolonial / vocabulario | 60% | Observador e repertorio de linguagem |
-| Direitos / publicacao | 57% | Guia de cautela, nao motor juridico |
+| Templates / guias | 73% | Oficio orientado por modelos; recuperacao de erro no carregamento |
+| Precision / aderencia ao guia | 70% | Analise generica ativa para qualquer texto com 50+ palavras |
+| Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
+| Sintaxe | 74% | Pistas sintaticas; data offline corrigida (sem ?v= hardcoded) |
+| Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
+| Analise geral | 76% | Leitura editorial sem falso positivo de POV; gatilho minimo 30 palavras |
+| Espelho de Voz | 73% | Autores brasileiros nos ecos; descricao sem jargao tecnico; scoring por densidade |
+| RimaLab | 60% | Beta com ensureLoaded() e fallback de dados; analise com corpus completo |
+| Decolonial / vocabulario | 63% | Observador com recuperacao de erro e estado vazio definido |
+| Direitos / publicacao | 62% | Guia contextual: card relevante pelo kind do manuscrito |
+
+### Evidencias — rodada 2026-05-23
+
+**Prova de autoria: 76% → 80%**
+- `recordStructuralEvent()` implementado e exportado no VeredaProof: registra paste, undo, redo, cut com keyType `structural:tipo` e wordDelta
+- Eventos estruturais via teclado (Ctrl+V/Z/Y/X) e via clipboard API agora gravados sem erro silencioso
+- Fluxo de gravacao organica + estrutural funciona sem lacuna
+
+**Validacao da prova: 58% → 68%**
+- Verificacao de `manuscript.id`: prova de outro manuscrito gera aviso explicito "Esta copia pertence a outro manuscrito"
+- Resultado da validacao persiste em `state.proofValidations` (keyed por manuscriptId) e e restaurado ao reabrir o painel
+- Timestamp da ultima verificacao exibido no painel ("Verificado em DD/MM HH:MM")
+- Estado vazio do painel de validacao oculta o resultado quando nao ha verificacao anterior
+
+**Rodada 2 — 2026-05-23 (v213-v214)**
+
+**Validacao da prova: 68% → 72%**
+- `proofValidations[id]` limpo em `hideDeleteUndo()` apos janela de undo expirar
+- `state.versions[id]` e `state.proofs[id]` tambem limpos ao apagar manuscrito definitivamente
+- Aviso "Texto editado apos verificacao (N → M palavras)" ao reabrir painel
+- wordCount salvo junto com a validacao para comparacao sync
+
+**`.vrda` / envelope: 72% → 76%**
+- Mensagem de erro diferenciada: "versao futura" vs "formato antigo"
+- `proofValidations` incluido no payload do backup (createBackup + restoreBackup)
+- `importBackup` propaga `proofValidations` ao restaurar estado
+
+**Backup / restore: 78% → 80%**
+- Backup agora preserva historico de validacoes de autoria junto com proofs e versions
+
+**Rodada 3 — 2026-05-23 (v215)**
+
+**Versionamento: 67% → 74%**
+- `restoreVersion()` agora salva snapshot "Antes da restauracao" antes de sobrescrever — zero perda de trabalho nao versionado
+- Aviso no painel quando limite de 12 versoes e atingido: usuario sabe que versoes antigas serao descartadas
+
+**Rodada 4 — 2026-05-23 (v216-v218)**
+
+**Extensao .esc (substituiu .vrda):**
+- Todos os arquivos de backup e prova agora usam .esc
+- .vrda aceito na importacao para retrocompatibilidade (FORMAT_LEGACY)
+- Mensagens de erro atualizadas
+
+**Editor / documento: 74% → 77%**
+- Metrica de tempo de leitura substituiu calculo sem sentido (wordCount/3)
+- Agora exibe "Xs de leitura estimada" ou "N min de leitura estimada" (200 pal/min)
+
+**Paginacao / modo pagina: 62% → 66%**
+- IntersectionObserver rastreia pagina visivel por scroll, nao apenas por foco
+- Indicador "p. X / Y" atualiza em tempo real ao rolar entre paginas
+
+**Precision / aderencia ao guia: 63% → 70%**
+- analyzeGeneric expandido: 6 verificacoes reais (abertura, ritmo, adverbios, paragrafacao, forma)
+- Sem template ativo: analise generica ativada em vez de checks vazios
+- Qualquer manuscrito com 50+ palavras recebe pistas concretas
+
+**Rodada 5 — 2026-05-23 (v219-v220)**
+
+**Analise geral: 72% → 76%**
+- POV: falso positivo corrigido — alerta so dispara quando AMBAS as perspectivas (1a e 3a pessoa) superam 15% do total de frases (era 10% de mistura)
+- Gatilho minimo: textos com menos de 30 palavras retornam null (sem alertas sem sentido)
+
+**Sintaxe: 70% → 74%**
+- Todos os data files (syntax, lexical, rimalab, decolonial, templates) passaram a buscar sem ?v= hardcoded
+- SW pre-cacha as URLs sem versao → offline funciona desde a primeira carga sem rede
+
+**Rodada 6 — 2026-05-23 (v221)**
+
+**Espelho de Voz: 68% → 73%**
+- `getEchoes()` substituido: autores brasileiros nomeados por gesto (Clarice, Guimaraes Rosa, Dalton Trevisan, Graciliano Ramos, Machado de Assis, Conceicao Evaristo, etc.)
+- `description` sem jargao tecnico: "gesto X" substituido por titulo da voz + campo + temperatura
+- `scoreLexicons()` reescrito com densidade por 100 palavras (antes: contagem bruta * 14 — inflaval em textos curtos)
+
+**Pontuacao: 73% → 77%**
+- `analyzeDeep()`: lookbehind `/(?<=[.!?])\s+/` substituido por `/[.!?]+\s+/` — compativel com Safari/WebKit
+- `analyze()`: guard de minimo 10 palavras adicionado — sem falsos positivos em fragmentos
+
+**Lexico / Biblioteca: 78% → 82%**
+- `ensureLoaded()` com try/catch: `_loadError` previne retentativas infinitas e falha silenciosa
+- `analyze()`: retorna `null` quando nenhuma palavra e passada (era `"terra"` silencioso)
+- Dois call sites no `grammar-controller.js` protegidos com `if (!analysis) return`
+- `hasLoadError()` exportado para que controladores possam exibir estado degradado
+
+**Rodada 7 — 2026-05-23 (v222)**
+
+**Templates / guias: 70% → 73%**
+- `ensureLoaded()` com try/catch: `_loadError` previne falha silenciosa no carregamento de templates-data.json
+- `hasLoadError()` exportado
+
+**Decolonial / vocabulario: 60% → 63%**
+- `ensureLoaded()` com try/catch e `_loadError`
+- `categories` e `entries` agora tem fallback `|| {}` e `|| []` explicitamente no parse
+
+**Direitos / publicacao: 57% → 62%**
+- `getRelevantCard(kind)` adicionado ao engine: mapeia kind do manuscrito ao card mais relevante
+- `renderRightsLab()` destaca o card relevante com `rights-card--relevant` quando ha manuscrito ativo
+- CSS: `.rights-card--relevant` sobe o card, borda primaria e tag "para seu manuscrito"
+
+**RimaLab: 55% → 60%**
+- Fetch fire-and-forget substituido por `ensureLoaded()` padrao com `_loadError`
+- `renderRimaLab()` no controller virou `async` e chama `await VeredaRimaLab.ensureLoaded()` antes de analisar
+- `isLoaded()` e `hasLoadError()` exportados — controllers podem verificar estado antes de renderizar
+
+**Pendente para chegar a 85%:**
+- Prova de autoria: testar fluxo completo em celular
+- Espelho de Voz: testes em corpus variado; melhorar inferGesture para cobrir mais casos limite
+- Versionamento: limite configuravel ou aumentar para 20; diff entre versoes
+- Precision: analisadores especificos para roteiro, poesia, nao-ficcao
+- Exportacao/impressao: verificar print CSS em modo pagina (A4/A5)
+- RimaLab: precisao de silabificacao em hiatos e ditongos raros; testes em poesia concreta
 
 ## Prioridades por camada
 

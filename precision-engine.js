@@ -141,10 +141,29 @@
   }
 
   function analyzeGeneric(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+
+    // Variedade de comprimento das frases
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const avgLen = lengths.length ? lengths.reduce((a, b) => a + b, 0) / lengths.length : 0;
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    // Densidade de advérbios em -mente
+    const menteHits = countMatches(text, /\w+mente\b/gi);
+    const menteDensity = words > 0 ? menteHits / words : 0;
+
+    // Proporção de frases interrogativas ou exclamativas (dinamismo)
+    const dynamicHits = countMatches(text, /[?!]/g);
+
     const checks = [
-      createCheck("Texto iniciado", words > 0, words > 0 ? 100 : 0, "Comece com um primeiro bloco de escrita."),
-      createCheck("Forma escolhida", Boolean(template?.id), 100, "O texto está ligado a um guia de escrita."),
-      createCheck("Tamanho útil", words >= 50, Math.min(100, words * 2), "Um rascunho maior permite análise melhor."),
+      createCheck("Texto em andamento", words >= 50, Math.min(100, words * 2), "Um rascunho maior permite pistas mais precisas."),
+      createCheck("Abertura com força", firstSentence.length >= 20 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase carrega o convite para o texto inteiro."),
+      createCheck("Variedade de ritmo", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 15), "Alterne frases curtas e longas para criar fluxo e ênfase."),
+      createCheck("Uso moderado de advérbios", menteDensity < 0.04, menteDensity < 0.04 ? 90 : Math.max(20, 90 - Math.round((menteDensity - 0.04) * 1000)), "Advérbios em -mente usados em excesso enfraquecem verbos precisos."),
+      createCheck("Paragrafação presente", paragraphs.length >= 2, Math.min(100, paragraphs.length * 30), "Blocos de texto ajudam a respirar entre as ideias."),
+      createCheck("Forma escolhida", Boolean(template?.id), template?.id ? 100 : 40, "Abrir um guia de escrita ativa análise mais específica."),
     ];
 
     return summarize(checks, words, 0);

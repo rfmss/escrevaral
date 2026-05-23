@@ -8,13 +8,14 @@
         archive: state.archive,
         proofs: state.proofs,
         versions: state.versions,
+        proofValidations: state.proofValidations || {},
     });
   }
 
   function readBackup(file) {
     return new Promise((resolve, reject) => {
-      if (!file.name.endsWith(".vrda")) {
-        reject(new Error("Importe apenas arquivos nativos .vrda."));
+      if (!file.name.endsWith(".esc")) {
+        reject(new Error("Importe apenas arquivos nativos .esc."));
         return;
       }
 
@@ -52,6 +53,7 @@
       archive: data.archive || currentState.archive,
       proofs: data.proofs || {},
       versions: data.versions || {},
+      proofValidations: data.proofValidations || {},
     };
   }
 

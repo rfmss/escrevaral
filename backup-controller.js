@@ -52,7 +52,7 @@ function getBackupWarningState() {
   if (!exportedAt || Number.isNaN(exportedAt.getTime())) {
     return {
       visible: true,
-      copy: "Limpar cache, trocar de aparelho ou remover dados do site pode apagar seus textos locais. Exporte um cópia .vrda para guardar uma cópia fora do navegador.",
+      copy: "Limpar cache, trocar de aparelho ou remover dados do site pode apagar seus textos locais. Exporte um cópia .esc para guardar uma cópia fora do navegador.",
     };
   }
 
@@ -61,7 +61,7 @@ function getBackupWarningState() {
   if (elapsedDays >= BACKUP_WARNING_DAYS) {
     return {
       visible: true,
-      copy: `Seu último cópia .vrda foi há ${elapsedDays} dias. Guarde uma cópia nova antes de limpar o navegador ou trocar de aparelho.`,
+      copy: `Seu último cópia .esc foi há ${elapsedDays} dias. Guarde uma cópia nova antes de limpar o navegador ou trocar de aparelho.`,
     };
   }
 
@@ -97,7 +97,7 @@ async function initializeFilesystemBackup() {
     setFilesystemBackupState(
       "idle",
       "Cópia automática indisponível neste navegador",
-      "Chrome, Edge e Opera permitem escolher um arquivo .vrda para salvar automaticamente. Firefox e Safari ainda bloqueiam esse acesso."
+      "Chrome, Edge e Opera permitem escolher um arquivo .esc para salvar automaticamente. Firefox e Safari ainda bloqueiam esse acesso."
     );
     filesystemBackup.querySelector('[data-action="choose-filesystem-backup"]').disabled = true;
     filesystemBackupInterval.disabled = true;
@@ -110,7 +110,7 @@ async function initializeFilesystemBackup() {
     setFilesystemBackupState(
       "idle",
       "Cópia automática desativada",
-      "Escolha um arquivo .vrda para o Escrevaral manter uma cópia completa do acervo fora do navegador."
+      "Escolha um arquivo .esc para o Escrevaral manter uma cópia completa do acervo fora do navegador."
     );
     return;
   }
@@ -124,7 +124,7 @@ async function initializeFilesystemBackup() {
 async function chooseFilesystemBackup() {
   try {
     const dateStamp = createDateTimeStamp();
-    filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`vereda-acervo-${dateStamp}.vrda`);
+    filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`vereda-acervo-${dateStamp}.esc`);
     filesystemBackupSaveButton.disabled = false;
     filesystemBackupStopButton.disabled = false;
     filesystemBackupCount = 0;
@@ -192,7 +192,7 @@ function updateFilesystemBackupInterval(value) {
 }
 
 function exportBackup() {
-  // Inclui registro de rodadas do temporizador no .vrda
+  // Inclui registro de rodadas do temporizador no .esc
   const timerRounds = (() => {
     try { return JSON.parse(localStorage.getItem("vereda:timer-rounds") || "[]"); }
     catch { return []; }
@@ -202,7 +202,7 @@ function exportBackup() {
   if (timerRounds.length > 0) backup.timerRounds = timerRounds;
   const backupJson = JSON.stringify(backup, null, 2);
   const dateStamp = createDateTimeStamp();
-  downloadFile(backupJson, `vereda-acervo-${dateStamp}.vrda`, "application/vnd.vereda+json");
+  downloadFile(backupJson, `vereda-acervo-${dateStamp}.esc`, "application/vnd.vereda+json");
   backupMeta = {
     exportedAt: backup.exportedAt,
     manuscriptCount: state.manuscripts.length,
@@ -237,6 +237,7 @@ async function importBackup(file) {
     state = VeredaBackup.restoreBackup(state, backup);
     state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
     state.versions = state.versions || {};
+    state.proofValidations = state.proofValidations || {};
     state.archive = {
       ...getDefaultArchiveState(),
       ...state.archive,

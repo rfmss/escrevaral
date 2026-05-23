@@ -234,10 +234,16 @@ function renderInspector() {
 
   countStat.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
   focusCount.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
-  const wpmVal = wordCount > 0 ? Math.max(1, Math.min(82, Math.round(wordCount / 3))) : "—";
-  wpmStat.textContent = wpmVal;
   const wpmLabel = document.querySelector("[data-wpm-label]");
-  if (wpmLabel) wpmLabel.textContent = wordCount > 0 ? "pal/min · ritmo atual" : "escreva para ver";
+  if (wordCount > 0) {
+    const mins = wordCount / 200;
+    const wpmVal = mins < 1 ? `${Math.ceil(mins * 60)}s` : `${Math.ceil(mins)} min`;
+    wpmStat.textContent = wpmVal;
+    if (wpmLabel) wpmLabel.textContent = "de leitura estimada";
+  } else {
+    wpmStat.textContent = "—";
+    if (wpmLabel) wpmLabel.textContent = "escreva para ver";
+  }
   updateGoalDisplay(wordCount);
   checkProgress();
 
@@ -290,7 +296,7 @@ function renderTemplateReference() {
 
   if (isManuscriptDocument(manuscript)) {
     precisionCard.innerHTML = readyForPrecision
-      ? createPrecisionMarkup(template ? VeredaPrecision.analyze(template, manuscript.text) : { checks: [] }, manuscript, template)
+      ? createPrecisionMarkup(VeredaPrecision.analyze(template || {}, manuscript.text), manuscript, template)
       : "";  // guia aparece como companhia, não avaliação, antes de 50 palavras
   } else {
     precisionCard.innerHTML = createProjectNotePrecisionMarkup(manuscript);

@@ -2,13 +2,18 @@
   let categories = {};
   let entries = [];
   let _loaded = false;
+  let _loadError = false;
 
   async function ensureLoaded() {
-    if (_loaded) return;
-    const data = await fetch(`decolonial-data.json?v=20260514-f3`).then(r => r.json());
-    categories = data.categories;
-    entries    = data.entries;
-    _loaded = true;
+    if (_loaded || _loadError) return;
+    try {
+      const data = await fetch('decolonial-data.json').then(r => r.json());
+      categories = data.categories || {};
+      entries    = data.entries    || [];
+      _loaded = true;
+    } catch (_) {
+      _loadError = true;
+    }
   }
 
   function normalize(value) {
@@ -68,6 +73,7 @@
     listCategories,
     listEntries,
     detectText,
-    isLoaded: () => _loaded,
+    isLoaded:     () => _loaded,
+    hasLoadError: () => _loadError,
   };
 })(window);

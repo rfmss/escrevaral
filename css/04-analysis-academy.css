@@ -804,6 +804,26 @@
   line-height: 1.5;
 }
 
+.rights-card--relevant {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface-low));
+  order: -1;
+}
+
+.rights-card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  border-radius: 3px;
+  padding: 1px 5px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 .rights-sources {
   display: grid;
   gap: 10px;

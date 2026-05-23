@@ -75,6 +75,10 @@ function restoreVersion(versionId) {
     return;
   }
 
+  // Salva estado atual antes de restaurar para não perder trabalho não versionado
+  const beforeRestore = VeredaVersions.addSnapshot(state.versions, manuscript, "Antes da restauração");
+  state.versions = beforeRestore.versions;
+
   const restoredManuscript = VeredaVersions.restoreSnapshot(manuscript, snapshot);
   updateActiveManuscript(restoredManuscript);
   renderActiveManuscript();
@@ -221,6 +225,22 @@ function renderProofView() {
     exportBtn.style.cursor = canExport ? "" : "not-allowed";
   }
 
+  // Restaura última validação persistida para este manuscrito
+  const savedValidation = state.proofValidations?.[ms?.id];
+  if (savedValidation && proofValidationResult) {
+    const when = new Date(savedValidation.at).toLocaleString("pt-BR", { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" });
+    const extraLines = [];
+    if (savedValidation.wordCount !== undefined) {
+      const currentWords = countWords(ms?.text || "");
+      if (currentWords !== savedValidation.wordCount) {
+        extraLines.push(`⚠ Texto editado após a verificação (${savedValidation.wordCount} → ${currentWords} palavras) — verifique novamente`);
+      }
+    }
+    showProofValidation(savedValidation.ok, [...savedValidation.lines, ...extraLines, `— Verificado em ${when}`]);
+  } else if (proofValidationResult) {
+    proofValidationResult.hidden = true;
+  }
+
   if (!recentEvents.length) {
     proofTimeline.innerHTML = "<div><span></span><p>Aguardando movimentos de escrita no editor.</p></div>";
     return;
@@ -270,7 +290,12 @@ function renderVersionList() {
     return;
   }
 
-  versionList.innerHTML = versions
+  const atLimit = versions.length >= 12;
+  const limitNote = atLimit
+    ? `<p class="muted" style="margin-bottom:.5rem">Limite de 12 versões atingido — a mais antiga é removida a cada nova versão automática.</p>`
+    : "";
+
+  versionList.innerHTML = limitNote + versions
     .map((version) => {
       const createdAt = new Date(version.createdAt).toLocaleString("pt-BR", {
         day: "2-digit",
@@ -303,7 +328,7 @@ async function exportProof() {
 
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
   const proofJson = JSON.stringify(proofDocument, null, 2);
-  downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.prova.vrda`, "application/json");
+  downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.prova.esc`, "application/json");
   saveStatus.textContent = "Cópia de autoria guardada";
 }
 
@@ -385,9 +410,18 @@ async function validateProofFile(file) {
       lines.push("⚠ Formato não reconhecido como arquivo de autoria Vereda");
     }
 
-    // Título — data.manuscript.title no formato v2
+    // Título e identidade do manuscrito
     const title = data.manuscript?.title || data.manuscriptTitle || data.title;
     if (title) lines.push(`✓ Manuscrito: "${title}"`);
+
+    const proofManuscriptId = data.manuscript?.id;
+    const activeMs = getActiveManuscript();
+    if (proofManuscriptId && activeMs?.id) {
+      if (proofManuscriptId !== activeMs.id) {
+        lines.push("⚠ Esta cópia pertence a outro manuscrito, não ao texto aberto agora");
+        ok = false;
+      }
+    }
 
     // Data — generatedAt (v2) ou exportedAt/createdAt
     const generatedAt = data.generatedAt || data.exportedAt || data.createdAt;
@@ -429,9 +463,18 @@ async function validateProofFile(file) {
 
     lines.push(ok ? "— Cópia pronta para guardar." : "— A cópia tem diferenças em relação ao texto atual.");
     showProofValidation(ok, lines);
+
+    const msForSave = getActiveManuscript();
+    if (msForSave?.id) {
+      state.proofValidations = state.proofValidations || {};
+      state.proofValidations[msForSave.id] = {
+        ok, lines, at: new Date().toISOString(),
+        wordCount: countWords(msForSave.text || ""),
+      };
+    }
     persistState("Autoria validada");
   } catch(e) {
-    showProofValidation(false, ["✗ Não foi possível ler o arquivo.", "Verifique se é um arquivo .prova.vrda exportado pelo Vereda."]);
+    showProofValidation(false, ["✗ Não foi possível ler o arquivo.", "Verifique se é um arquivo .prova.esc exportado pelo Vereda."]);
   }
 }
 

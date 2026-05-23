@@ -2,13 +2,18 @@
   let localLexicon = {};
   let functionWords = { artigos:[], contracoes:[], conjuncoes:[], preposicoes:[], pronomes:[], adverbios:[] };
   let _loaded = false;
+  let _loadError = false;
 
   async function ensureLoaded() {
-    if (_loaded) return;
-    const data = await fetch(`lexical-data.json?v=20260514-f3`).then(r => r.json());
-    localLexicon  = data.localLexicon  || {};
-    functionWords = data.functionWords || functionWords;
-    _loaded = true;
+    if (_loaded || _loadError) return;
+    try {
+      const data = await fetch('lexical-data.json').then(r => r.json());
+      localLexicon  = data.localLexicon  || {};
+      functionWords = data.functionWords || functionWords;
+      _loaded = true;
+    } catch (_) {
+      _loadError = true;
+    }
   }
 
   // Carregar na inicialização (não bloqueia)
@@ -290,7 +295,8 @@
   }
 
   function analyze(word, text) {
-    const selectedWord = word || "terra";
+    if (!word?.trim()) return null;
+    const selectedWord = word.trim();
     const normalized = normalizeWord(selectedWord);
     const lexiconEntry = localLexicon[normalized];
     // Usar classificação contextual quando há texto disponível
@@ -645,5 +651,6 @@
     tokenizeWords,
     ensureLoaded,
     isLoaded: () => _loaded,
+    hasLoadError: () => _loadError,
   };
 })(window);

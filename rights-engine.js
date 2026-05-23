@@ -65,7 +65,7 @@
       title: "Prova é conjunto, não talismã.",
       body:
         "A Prova de Autoria da Vereda registra processo localmente. Ela ajuda a contar a história da escrita, mas não substitui registro oficial, cartório, contrato ou orientação jurídica.",
-      do: ["Exporte o .proof.json.", "Faça backup .vrda.", "Consulte o EDA/FBN para registro formal."],
+      do: ["Exporte o .proof.json.", "Faça backup .esc.", "Consulte o EDA/FBN para registro formal."],
       watch: "Serviços, tabela e atendimento do EDA podem mudar. Confira a fonte oficial no dia.",
       source: "EDA/FBN e serviço gov.br",
     },
@@ -159,10 +159,23 @@
     },
   ];
 
+  // Mapeia kind do manuscrito para o card mais relevante
+  function getRelevantCard(kind) {
+    if (!kind) return null;
+    const k = kind.toLowerCase();
+    if (/roteiro|script|audiovisual|tv|film/.test(k))   return cards.find(c => c.id === "contrato") || null;
+    if (/fanfiction|fan/.test(k))                        return cards.find(c => c.id === "citacao")  || null;
+    if (/coleti|comunidade|tradicion|oral|quilomb/.test(k)) return cards.find(c => c.id === "comunidades") || null;
+    if (/coauto|parceri/.test(k))                        return cards.find(c => c.id === "coautoria") || null;
+    if (/ensaio|reportagem|newsletter|jornali/.test(k))  return cards.find(c => c.id === "submissao") || null;
+    return null;
+  }
+
   global.VeredaRights = {
     getCards: () => cards,
     getSources: () => sources,
     getBots: () => bots,
+    getRelevantCard,
     updatedAt,
   };
 })(window);

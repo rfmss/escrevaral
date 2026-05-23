@@ -298,6 +298,7 @@ function loadState() {
       appearance: getDefaultAppearanceState(),
       proofs: {},
       versions: {},
+      proofValidations: {},
     };
   }
 
@@ -321,6 +322,7 @@ function loadState() {
         appearance: { ...getDefaultAppearanceState(), ...parsed.appearance },
         proofs: parsed.proofs || {},
         versions: parsed.versions || {},
+        proofValidations: parsed.proofValidations || {},
       };
     }
 
@@ -353,6 +355,7 @@ function loadState() {
       },
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
+      proofValidations: parsed.proofValidations || {},
     };
   } catch {
     return {
@@ -366,6 +369,7 @@ function loadState() {
       appearance: getDefaultAppearanceState(),
       proofs: {},
       versions: {},
+      proofValidations: {},
     };
   }
 }
