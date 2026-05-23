@@ -69,10 +69,10 @@ Pergunta padrao da sessao:
 | Templates / guias | 77% | Oficio orientado por modelos; loop infinito corrigido; fallback para rascunho livre |
 | Precision / aderencia ao guia | 76% | Analisadores especificos para roteiro, poesia e romance; generica para demais |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
-| Sintaxe | 74% | Pistas sintaticas; data offline corrigida (sem ?v= hardcoded) |
+| Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
 | Analise geral | 76% | Leitura editorial sem falso positivo de POV; gatilho minimo 30 palavras |
-| Espelho de Voz | 73% | Autores brasileiros nos ecos; descricao sem jargao tecnico; scoring por densidade |
+| Espelho de Voz | 77% | inferGesture reordenado; cidade/conflito no imagetico; seco sem restricao de repeticoes |
 | RimaLab | 68% | Analise por estrofe; silabificador fix para glória-type; verso numerado nas rimas |
 | Decolonial / vocabulario | 67% | Null-safety no observador; estado de erro de carregamento exibido |
 | Direitos / publicacao | 67% | Card relevante por kind com fallback "escrevendo"; data de verificacao das fontes |
@@ -247,9 +247,27 @@ Pergunta padrao da sessao:
 - `renderTemplateStudio()`: guard `hasLoadError()` previne loop infinito quando templates-data.json falha (era: chamada recursiva infinita)
 - `createManuscriptFromTemplate()`: apos `ready()`, verifica `hasLoadError()` e cria rascunho livre ao inves de travar
 
+**Rodada 14 — 2026-05-23 (v229)**
+
+**Espelho de Voz: 73% → 77%**
+- `inferGesture`: reordenacao de prioridades — barroco → ensaistico → seco → imagetico → oral → contemplativo → introspectivo → narrativo
+- "seco": removida restricao `repetitions.length < 6` (Trevisan e Freire usam anafora como recurso); threshold ajustado para `avgSentence < 12`
+- "imagetico": detecta campos `cidade` e `conflito` alem de corpo/casa (Fonseca, Caio F. Abreu, Marcelino Freire)
+- "oral": threshold principal elevado para `>= 4` marcas de dialogo; fallback `>= 2` mantido
+- `semanticFields.conflito`: violencia, crime, faca, golpe adicionados
+- `semanticFields.cidade`: favela, morro, periferia, beco, esquina adicionados
+
+**Rodada 15 — 2026-05-23 (v230)**
+
+**Sintaxe: 74% → 80%**
+- Bug critico: `_isReady()` exigia `_ptc && _data`, mas ptCompromise nunca e carregado → painel nunca renderizava
+- Fix: `_isReady()` agora checa apenas `_data !== null`; ptCompromise e opcional
+- `analisarMorfologiaFallback()` adicionado: tokenizador regex que detecta conjuncoes (via identificarConjuncao), preposicoes (PREPS_OI), verbos (terminacoes morfologicas), gerundios e adverbios em -mente
+- `init()` com `_loadError` flag: idempotente em falha, sem retentativa infinita
+- `_hasLoadError()` exportado; syntax-controller usa ele para evitar loop de init
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
-- Espelho de Voz: melhorar inferGesture para casos limite; testar em corpus variado
 - Precision: analisadores para ficcao-cientifica, fantasia, policial (ficcao especulativa)
 
 ## Prioridades por camada
