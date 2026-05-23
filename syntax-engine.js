@@ -1,28 +1,47 @@
 (function syntaxEngine(global) {
   "use strict";
 
-  let _ptc  = null;
-  let _data = null;
+  let _ptc       = null;
+  let _data      = null;
+  let _loadError = false;
 
   // ── Init ──────────────────────────────────────────────────────────────────
 
   async function init() {
-    if (_ptc && _data) return true;
+    if (_data) return true;          // dados já carregados (ptc é opcional)
+    if (_loadError) return false;    // tentativa anterior falhou — não retenta
     try {
       _data = await fetch('syntax-data.json').then(r => r.json());
       _ptc  = global.ptCompromise || null;
       return true;
     } catch (e) {
       console.warn("[syntax-engine] init falhou:", e);
+      _loadError = true;
       return false;
     }
   }
 
   // ── Morfologia via pt-compromise ──────────────────────────────────────────
 
+  function analisarMorfologiaFallback(texto) {
+    const tokens = texto.match(/[\p{L}'-]+|[.,;:!?—]/gu) || [];
+    return tokens.map((word, i) => {
+      const norm = word.toLowerCase();
+      const tags = [];
+      if (PREPS_OI.has(norm)) tags.push("Preposition");
+      if (_data && identificarConjuncao(word, { posInicio: i === 0 })) tags.push("Conjunction");
+      if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
+      if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+      else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
+      else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
+      else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
+      return { text: word, tags, normal: norm };
+    });
+  }
+
   function analisarMorfologia(texto) {
-    if (!_ptc) return [];
-    return _ptc(texto).json()[0]?.terms || [];
+    if (_ptc) return _ptc(texto).json()[0]?.terms || [];
+    return analisarMorfologiaFallback(texto);
   }
 
   function mapearTag(tags = []) {
@@ -532,7 +551,8 @@
     verificarConcordanciaGenero,
     subtipoOI,
     mapearTag,
-    _isReady: () => !!(_ptc && _data),
+    _isReady:     () => _data !== null,
+    _hasLoadError: () => _loadError,
     VERBOS_LIGACAO,
     VERBOS_PRED_OBJ,
   };

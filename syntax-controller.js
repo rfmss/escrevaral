@@ -126,7 +126,9 @@ document.addEventListener("selectionchange", () => {
     const palavras = texto.split(/\s+/).filter(Boolean).length;
 
     if (palavras >= 3 && writingArea.contains(sel?.anchorNode)) {
-      if (!window.syntaxEngine?._isReady()) {
+      if (window.syntaxEngine?._hasLoadError?.()) {
+        // dados não carregados — silencioso
+      } else if (!window.syntaxEngine?._isReady()) {
         syntaxEngine?.init().then(() => renderSyntaxPanel(texto));
       } else {
         renderSyntaxPanel(texto);
