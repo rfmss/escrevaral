@@ -210,7 +210,7 @@ contato@escrevaral.com
 Endereço decidido nesta sessão:
 
 ```txt
-falatu@escrevaral.com
+oi@escrevaral.com
 ```
 
 Destino real:
@@ -219,19 +219,47 @@ Destino real:
 escrevaral@proton.me
 ```
 
+Endereço de dono do produto:
+
+```txt
+rafamass@escrevaral.com
+```
+
+Destino real:
+
+```txt
+rafamass@proton.me
+```
+
 Observação:
 
-`falatu@escrevaral.com` é o endereço experimental com voz de marca. Ele pode ser usado como convite humano, informal e brasileiro: "fala tu". Para usos mais institucionais, manter `contato@escrevaral.com` como alias paralelo.
+`oi@escrevaral.com` é o endereço público geral. É curto, simpático e fácil de lembrar.
+
+`rafamass@escrevaral.com` é o endereço pessoal/de dono do produto.
+
+`falatu@escrevaral.com` continua sendo uma boa ideia de marca, mas ficou para depois.
 
 Mas o Escrevaral pode ter aliases mais vivos, todos encaminhando para a mesma caixa real.
 
 Sugestão de aliases:
 
 ```txt
+oi@escrevaral.com
+```
+
+Uso: endereço público geral. Curto, humano e direto.
+
+```txt
+rafamass@escrevaral.com
+```
+
+Uso: dono do produto.
+
+```txt
 falatu@escrevaral.com
 ```
 
-Uso: endereço com assinatura de marca. É informal, memorável e combina com uma ferramenta de escrita brasileira.
+Uso futuro: endereço com assinatura de marca. É informal, memorável e combina com uma ferramenta de escrita brasileira.
 
 ```txt
 contato@escrevaral.com
@@ -272,22 +300,22 @@ Uso: contato curto e simpático, se quisermos algo bem leve.
 Recomendação de tom:
 
 ```txt
+oi@escrevaral.com
+```
+
+como endereço público principal,
+
+```txt
+rafamass@escrevaral.com
+```
+
+como endereço de dono do produto, e
+
+```txt
 falatu@escrevaral.com
 ```
 
-como endereço principal com alma de marca,
-
-```txt
-cartas@escrevaral.com
-```
-
-como endereço literário complementar, e
-
-```txt
-contato@escrevaral.com
-```
-
-como endereço institucional.
+como possibilidade de marca para uma etapa futura.
 
 ## Como criar o e-mail no Spaceship sem contratar caixa postal
 
@@ -300,11 +328,21 @@ Domain Manager → escrevaral.com → Email Forwarding
 Configuração recomendada:
 
 ```txt
-Forwarded from: falatu@escrevaral.com
+Forwarded from: oi@escrevaral.com
 Forwarded to: escrevaral@proton.me
 ```
 
-Também criar, se quisermos preservar os caminhos óbvios:
+```txt
+Forwarded from: rafamass@escrevaral.com
+Forwarded to: rafamass@proton.me
+```
+
+Aliases para depois:
+
+```txt
+Forwarded from: falatu@escrevaral.com
+Forwarded to: escrevaral@proton.me
+```
 
 ```txt
 Forwarded from: contato@escrevaral.com
@@ -313,16 +351,6 @@ Forwarded to: escrevaral@proton.me
 
 ```txt
 Forwarded from: cartas@escrevaral.com
-Forwarded to: escrevaral@proton.me
-```
-
-```txt
-Forwarded from: oficina@escrevaral.com
-Forwarded to: escrevaral@proton.me
-```
-
-```txt
-Forwarded from: autoria@escrevaral.com
 Forwarded to: escrevaral@proton.me
 ```
 
@@ -373,9 +401,9 @@ Valor: v=DMARC1; p=none; rua=mailto:contato@escrevaral.com
 Para começar leve:
 
 1. Site no GitHub Pages com `escrevaral.com`.
-2. `falatu@escrevaral.com` como alias público com voz de marca, encaminhando para `escrevaral@proton.me`.
-3. `contato@escrevaral.com` via Email Forwarding, também para `escrevaral@proton.me`.
-4. `cartas@escrevaral.com` como alias poético público.
+2. `oi@escrevaral.com` como alias público geral, encaminhando para `escrevaral@proton.me`.
+3. `rafamass@escrevaral.com` como alias de dono do produto, encaminhando para `rafamass@proton.me`.
+4. Deixar `falatu@`, `contato@` e `cartas@` para depois.
 5. Deixar Spacemail para depois, quando for importante responder diretamente pelo domínio.
 
 ## Checklist de verificação
@@ -395,22 +423,24 @@ https://www.escrevaral.com
 deve redirecionar ou resolver para o mesmo site.
 
 ```txt
+oi@escrevaral.com
+```
+
+deve encaminhar para `escrevaral@proton.me`.
+
+```txt
+rafamass@escrevaral.com
+```
+
+deve encaminhar para `rafamass@proton.me`.
+
+Aliases para depois:
+
+```txt
 falatu@escrevaral.com
-```
-
-deve encaminhar para `escrevaral@proton.me`.
-
-```txt
 contato@escrevaral.com
-```
-
-deve encaminhar para `escrevaral@proton.me`.
-
-```txt
 cartas@escrevaral.com
 ```
-
-deve encaminhar para `escrevaral@proton.me`.
 
 ## Fontes consultadas
 
