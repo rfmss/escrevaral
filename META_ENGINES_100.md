@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 | Precision / aderencia ao guia | 82% | Analisadores para roteiro, poesia, romance, FC, fantasia brasileira e policial/noir |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
-| Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
+| Pontuacao | 82% | 34 regras; PONT-46 (verbos de opiniao + virgula + que); analyzeDeep() no Espelho de Voz |
 | Analise geral | 80% | Feedback positivo quando sem alertas; alerta de Flesch extremo; 18 criterios |
 | Espelho de Voz | 77% | inferGesture reordenado; cidade/conflito no imagetico; seco sem restricao de repeticoes |
 | RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
@@ -276,6 +276,13 @@ Pergunta padrao da sessao:
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
+
+**Rodada 20 — 2026-05-23 (v235)**
+
+**Pontuacao: 77% → 82%**
+- PONT-46 adicionada: vírgula proibida entre verbos cognitivos/perceptivos (achar, pensar, saber, sentir, ver, ouvir, notar, perceber, imaginar, acreditar, esperar, temer, lembrar) e subordinada com "que"
+- `renderVoiceMirror()` é agora async: chama `VeredaPunctuation.analyzeDeep(text)` quando syntaxEngine está pronto — adiciona concordância verbal e apostos ao resultado de pontuação
+- `analyzeDeep()` usava syntax-engine mas nunca era chamado na UI; agora wired ao Espelho de Voz
 
 **Rodada 19 — 2026-05-23 (v234)**
 

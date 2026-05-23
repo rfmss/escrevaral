@@ -354,6 +354,18 @@
       },
     },
 
+    {
+      id: "PONT-46", categoria: "vírgula proibida — verbo de opinião + que",
+      fonte: "Bechara (conclusão b); Moreno p. 60; Cunha & Cintra p. 651",
+      criterio: "Não se usa vírgula entre verbos cognitivos/perceptivos e a subordinada substantiva com 'que'.",
+      exemplo: "Acho que era tarde demais.",
+      contraexemplo: "Acho, que era tarde demais.",
+      severity: "alta",
+      detect(text) {
+        return first(/\b(acho|achei|acha|penso|pensei|pensa|sei|sabia|sabe|sinto|senti|sente|vejo|vi|vê|ouço|ouvi|ouve|noto|notei|nota|percebo|percebi|percebe|imagino|imaginei|imagina|acredito|acreditei|acredita|espero|esperei|espera|temo|temia|lembro|lembrei|lembra),\s+que\b/i, text);
+      },
+    },
+
   ];
 
   // ── REGRAS VIA PADRÃO TEXTUAL AVANÇADO (desbloqueadas pelo syntax-engine) ──

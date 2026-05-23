@@ -23,7 +23,7 @@ function updateVoiceCount() {
   voiceCount.textContent = `${words} ${words === 1 ? "palavra" : "palavras"}`;
 }
 
-function renderVoiceMirror() {
+async function renderVoiceMirror() {
   const text = voiceInput.value.trim();
   const words = countWords(text);
 
@@ -33,8 +33,17 @@ function renderVoiceMirror() {
   }
 
   const analysis = VeredaVoice.analyze(text);
-  const criterios = window.VeredaAnalise ? VeredaAnalise.analisar(text) : null;
-  const alertas   = criterios ? VeredaAnalise.interpretarResultado(criterios) : [];
+  let criterios = window.VeredaAnalise ? VeredaAnalise.analisar(text) : null;
+
+  // Pontuação profunda quando o motor sintático estiver pronto (concordância verbal)
+  if (criterios && window.VeredaPunctuation && window.syntaxEngine?._isReady()) {
+    try {
+      const deep = await VeredaPunctuation.analyzeDeep(text);
+      criterios = { ...criterios, norma: { pontuacao: deep } };
+    } catch (_) { /* silencioso — usa resultado base */ }
+  }
+
+  const alertas = criterios ? VeredaAnalise.interpretarResultado(criterios) : [];
   voiceResult.innerHTML = createVoiceMirrorMarkup(analysis, criterios, alertas);
   saveStatus.textContent = "Espelho de Voz atualizado";
 }
