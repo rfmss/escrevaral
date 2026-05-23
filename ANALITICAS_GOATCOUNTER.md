@@ -90,6 +90,32 @@ Recomendação do Escrevaral:
 
 Usar a versão com `doNotTrack`, mesmo que o GoatCounter não exija. É coerente com a promessa do produto.
 
+## Status de integração
+
+Status em 2026-05-23:
+
+```txt
+Integrado no index.html principal.
+```
+
+Implementação usada:
+
+```html
+<script>
+  if (navigator.doNotTrack !== "1" && window.doNotTrack !== "1") {
+    const goatcounter = document.createElement("script");
+    goatcounter.dataset.goatcounter = "https://escrevaral.goatcounter.com/count";
+    goatcounter.async = true;
+    goatcounter.src = "https://gc.zgo.at/count.js";
+    document.body.appendChild(goatcounter);
+  }
+</script>
+```
+
+Observação:
+
+Se o navegador sinalizar "não rastrear", o script externo nem é carregado.
+
 ## Onde colocar no projeto
 
 Arquivo principal:

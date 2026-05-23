@@ -1378,7 +1378,14 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     <iframe id="editorial-frame" class="editorial-frame" src="" title="Leitura editorial" loading="lazy"></iframe>
   </div>
 
-  <script data-goatcounter="https://escrevaral.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+  <script>
+    if (navigator.doNotTrack !== "1" && window.doNotTrack !== "1") {
+      const goatcounter = document.createElement("script");
+      goatcounter.dataset.goatcounter = "https://escrevaral.goatcounter.com/count";
+      goatcounter.async = true;
+      goatcounter.src = "https://gc.zgo.at/count.js";
+      document.body.appendChild(goatcounter);
+    }
+  </script>
   </body>
 </html>
