@@ -72,7 +72,7 @@ Pergunta padrao da sessao:
 | Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
 | Pontuacao | 82% | 34 regras; PONT-46 (verbos de opiniao + virgula + que); analyzeDeep() no Espelho de Voz |
 | Analise geral | 80% | Feedback positivo quando sem alertas; alerta de Flesch extremo; 18 criterios |
-| Espelho de Voz | 77% | inferGesture reordenado; cidade/conflito no imagetico; seco sem restricao de repeticoes |
+| Espelho de Voz | 82% | Painel "Publico provavel" no render; lexicon ternura adicionado; emocoes expandidas |
 | RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
 | Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
 | Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
@@ -276,6 +276,14 @@ Pergunta padrao da sessao:
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
+
+**Rodada 21 — 2026-05-23 (v236)**
+
+**Espelho de Voz: 77% → 82%**
+- `analysis.audience` era computado mas nunca renderizado; painel "Público provável" adicionado ao Voice Mirror com `core`, `secondary` e `risk`
+- CSS `.voice-audience` com borda primary, background suave e h4 eyebrow
+- Emoções expandidas: melancolia (+5 termos), tensão (+5), luminosidade (+5), ironia (+3), contemplação (+5)
+- Novo campo `ternura` (amor, carinho, afeto, cuidado, abraço, suave, doce, mãe, filho, criança)
 
 **Rodada 20 — 2026-05-23 (v235)**
 

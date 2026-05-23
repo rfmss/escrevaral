@@ -69,6 +69,26 @@
   line-height: 1.5;
 }
 
+.voice-audience {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--primary) 5%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--primary) 18%, transparent);
+}
+.voice-audience h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 0 0 8px;
+}
+.voice-audience p { margin: 0 0 6px; font-size: 13px; line-height: 1.5; }
+.voice-audience p:last-child { margin-bottom: 0; }
+.voice-audience-secondary { color: var(--muted); }
+.voice-audience-risk { font-size: 12px; color: var(--muted); }
+
 .rimalab-tool {
   display: grid;
   grid-template-columns: minmax(250px, 0.62fr) minmax(0, 1.38fr);

@@ -6,11 +6,12 @@
   );
 
   const emotionLexicons = {
-    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra"],
-    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda"],
-    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma"],
-    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso"],
-    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera"],
+    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim"],
+    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto"],
+    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança"],
+    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente"],
+    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio"],
+    ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher"],
   };
 
   const semanticFields = {

@@ -227,6 +227,12 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
       ${createVoiceBars("Temperatura", analysis.emotional)}
       ${createVoiceBars("Campos", analysis.fields)}
     </div>
+    ${analysis.audience ? `<div class="voice-audience">
+      <h4>Público provável</h4>
+      <p>${escapeHtml(analysis.audience.core)}</p>
+      <p class="voice-audience-secondary">${escapeHtml(analysis.audience.secondary)}</p>
+      <p class="voice-audience-risk"><strong>Risco de perda:</strong> ${escapeHtml(analysis.audience.risk)}</p>
+    </div>` : ""}
     <p class="voice-disclaimer">${escapeHtml(analysis.disclaimer)}</p>
   `;
 }
