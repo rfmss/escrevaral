@@ -290,13 +290,13 @@ function renderVersionList() {
     return;
   }
 
-  const atLimit = versions.length >= 12;
+  const atLimit = versions.length >= 20;
   const limitNote = atLimit
-    ? `<p class="muted" style="margin-bottom:.5rem">Limite de 12 versões atingido — a mais antiga é removida a cada nova versão automática.</p>`
+    ? `<p class="muted" style="margin-bottom:.5rem">Limite de 20 versões atingido — a mais antiga é removida a cada nova versão automática.</p>`
     : "";
 
   versionList.innerHTML = limitNote + versions
-    .map((version) => {
+    .map((version, i) => {
       const createdAt = new Date(version.createdAt).toLocaleString("pt-BR", {
         day: "2-digit",
         month: "short",
@@ -304,11 +304,21 @@ function renderVersionList() {
         minute: "2-digit",
       });
 
+      const prev = versions[i + 1];
+      const diff = prev ? VeredaVersions.summarizeDiff(prev.text, version.text) : null;
+      const deltaLabel = diff
+        ? (diff.wordsDelta > 0
+            ? `+${diff.wordsDelta} pal`
+            : diff.wordsDelta < 0
+              ? `${diff.wordsDelta} pal`
+              : "sem alteração de texto")
+        : "";
+
       return `
         <article class="version-item">
           <div>
             <strong>${escapeHtml(version.reason)}</strong>
-            <span>${createdAt} · ${version.wordCount} palavras</span>
+            <span>${createdAt} · ${version.wordCount} palavras${deltaLabel ? ` · <em>${escapeHtml(deltaLabel)}</em>` : ""}</span>
           </div>
           <button class="secondary-button" data-version-restore="${version.id}">Restaurar</button>
         </article>

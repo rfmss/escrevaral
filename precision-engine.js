@@ -23,6 +23,18 @@
       return analyzeEnem(normalizedText, words);
     }
 
+    if (template.oficio === "roteiro" || template.id === "roteiro-tv") {
+      return analyzeRoteiro(normalizedText, words);
+    }
+
+    if (template.oficio === "poesia" || template.id === "poesia-lirica") {
+      return analyzePoesia(normalizedText, words);
+    }
+
+    if (template.id === "romance-comercial" || template.id === "romance-literario") {
+      return analyzeRomance(normalizedText, words);
+    }
+
     return analyzeGeneric(template, normalizedText, words);
   }
 
@@ -138,6 +150,73 @@
     ];
 
     return summarize(checks, words, 450);
+  }
+
+  function analyzeRoteiro(text, words) {
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const actionHits = countMatches(text, /\b(EXT\.|INT\.|CORTE|FADE|CENA|CLOSE|PLANO|PANORÂMICA)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const sluglineHits = countMatches(text, /^(EXT\.|INT\.|EXTERIOR|INTERIOR)\s/gm);
+    const actionDescHits = countMatches(text, /\b(entra|sai|olha|corre|para|abre|fecha|senta|levanta|caminha|pega|larga|vira)\b/gi);
+    const parentheticalHits = countMatches(text, /\([\w\s]+\)/g);
+    const sentences = splitSentences(text);
+
+    const checks = [
+      createCheck("Cenas marcadas", sluglineHits >= 1, Math.min(100, sluglineHits * 34), "Cada nova cena começa com linha de cabeçalho: INT./EXT. LOCAL — DIA/NOITE."),
+      createCheck("Ações visíveis", actionDescHits >= 4, Math.min(100, actionDescHits * 12), "Roteiro descreve o que a câmera vê, não o que o personagem sente."),
+      createCheck("Diálogo presente", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "A fala revela relação de poder, necessidade ou segredo — nunca informação pura."),
+      createCheck("Frases curtas na ação", sentences.length >= 5, Math.min(100, sentences.length * 10), "Linhas de ação idealmente têm 3 linhas ou menos."),
+      createCheck("Ritmo de blocos", paragraphs.length >= 4, Math.min(100, paragraphs.length * 14), "Blocos curtos dão ritmo visual na leitura e agilidade na decupagem."),
+      createCheck("Volume de cena", words >= 100, Math.min(100, words), "Uma cena com menos de 100 palavras pode ser curta demais para respirar."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePoesia(text, words) {
+    const lines = text.split(/\n/).map(s => s.trim()).filter(Boolean);
+    const stanzas = text.split(/\n{2,}/).map(s => s.trim()).filter(Boolean);
+    const imageryHits = countMatches(text, /\b(luz|sombra|água|terra|vento|fogo|olho|mão|boca|corpo|noite|pedra|rio|mar|folha|raiz|chuva|voz|silêncio|osso|sangue|pele)\b/gi);
+    const repetitionHits = countMatches(text, /\b(\w{4,})\b(?=.*\b\1\b)/gi);
+    const questionHits = countMatches(text, /\?/g);
+    const enjambmentHits = lines.filter(l => l.length > 0 && !/[.!?:;,—]$/.test(l)).length;
+    const shortLines = lines.filter(l => l.split(/\s+/).length <= 5).length;
+
+    const checks = [
+      createCheck("Imagens concretas", imageryHits >= 3, Math.min(100, imageryHits * 16), "Poesia vive de imagens que engancham sentido e sensação ao mesmo tempo."),
+      createCheck("Corte de verso ativo", enjambmentHits >= 2, Math.min(100, enjambmentHits * 16), "O encavalgamento (verso que quebra antes da pontuação) cria tensão e ritmo."),
+      createCheck("Variação de verso", shortLines >= 1 && lines.length >= 3, Math.min(100, shortLines * 20 + lines.length * 5), "Versos curtos e longos alternados criam música e ênfase."),
+      createCheck("Estrofes ou blocos", stanzas.length >= 2 || lines.length >= 4, Math.min(100, stanzas.length * 32 + lines.length * 8), "Divisão em estrofes organiza o movimento do poema."),
+      createCheck("Pergunta ou tensão", questionHits >= 1 || repetitionHits >= 1, Math.min(100, questionHits * 38 + repetitionHits * 20), "Perguntas sem resposta e repetições controladas constroem densidade."),
+      createCheck("Compressão do dizer", words <= 200, words <= 200 ? 90 : Math.max(30, 120 - words / 5), "Poesia trabalha com o mínimo que carrega o máximo."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeRomance(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const lastSentence = getLastSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const characterHits = countMatches(text, /\b(ela|ele|eu|mãe|pai|filho|filha|irmão|irmã|nome próprio|homem|mulher|menino|menina)\b/gi);
+    const sensoryHits = countMatches(text, /\b(olhou|sentiu|cheirou|ouviu|tocou|percebeu|viu|notou|reconheceu|enxergou)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const actionHits = countMatches(text, /\b(pegou|correu|abriu|fechou|entrou|saiu|sentou|levantou|disse|respondeu|virou|puxou)\b/gi);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+    const echo = getEchoScore(firstSentence, lastSentence);
+
+    const checks = [
+      createCheck("Tamanho de capítulo", words >= 800, Math.min(100, words / 8), "Capítulos de romance geralmente têm entre 1.500 e 5.000 palavras."),
+      createCheck("Personagem ativo", characterHits >= 4 && actionHits >= 3, Math.min(100, characterHits * 8 + actionHits * 10), "Alguém precisa agir, não apenas existir na cena."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 22), "Percepção do personagem ancorando a cena deixa o leitor dentro, não fora."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 12), "Alterne frases curtas de ação com longas de reflexão ou descrição."),
+      createCheck("Diálogo ou voz", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "Diálogo que muda a relação dos personagens vale mais do que diálogo de exposição."),
+      createCheck("Cena com arco", echo >= 12 || sentences.length >= 20, Math.max(echo, Math.min(100, sentences.length * 5)), "Uma cena que começa em um estado e termina em outro — mínimo de mudança."),
+    ];
+
+    return summarize(checks, words, 0);
   }
 
   function analyzeGeneric(template, text, words) {

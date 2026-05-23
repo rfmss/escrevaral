@@ -1,5 +1,5 @@
 (function versionEngine(global) {
-  const MAX_VERSIONS_PER_MANUSCRIPT = 12;
+  const MAX_VERSIONS_PER_MANUSCRIPT = 20;
   const MIN_TEXT_DELTA = 80;
 
   function createSnapshot(manuscript, reason = "Snapshot manual") {
@@ -68,10 +68,34 @@
     return text.trim() ? text.trim().split(/\s+/).length : 0;
   }
 
+  // Resumo da diferença entre dois textos (palavra e caractere)
+  function summarizeDiff(textBefore, textAfter) {
+    const wBefore = countWords(textBefore || "");
+    const wAfter  = countWords(textAfter  || "");
+    const cBefore = (textBefore || "").length;
+    const cAfter  = (textAfter  || "").length;
+    const wDelta  = wAfter - wBefore;
+    const cDelta  = cAfter - cBefore;
+
+    // Primeira frase que mudou (parágrafo-level diff)
+    const parasB = (textBefore || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const parasA = (textAfter  || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
+    let firstChange = null;
+    for (let i = 0; i < Math.max(parasB.length, parasA.length); i++) {
+      if (parasB[i] !== parasA[i]) {
+        firstChange = (parasA[i] || parasB[i] || "").slice(0, 80);
+        break;
+      }
+    }
+
+    return { wordsBefore: wBefore, wordsAfter: wAfter, wordsDelta: wDelta, charDelta: cDelta, firstChange };
+  }
+
   global.VeredaVersions = {
     addSnapshot,
     getVersionsForManuscript,
     restoreSnapshot,
     shouldCreateAutoSnapshot,
+    summarizeDiff,
   };
 })(window);

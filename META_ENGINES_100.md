@@ -60,14 +60,14 @@ Pergunta padrao da sessao:
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
 | Backup externo via File System | 64% | Copia local avancada dependente do navegador |
-| Versionamento | 74% | Historico seguro com salvamento antes de restaurar |
+| Versionamento | 80% | Historico com 20 versoes, delta de palavras por versao |
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
 | Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
 | Paginacao / modo pagina | 66% | Visualizacao editorial com indicador de pagina por scroll |
 | Exportacao / impressao | 80% | Saida limpa de texto/documento |
 | Arquivo / acervo | 82% | Organizacao de manuscritos e notas |
 | Templates / guias | 73% | Oficio orientado por modelos; recuperacao de erro no carregamento |
-| Precision / aderencia ao guia | 70% | Analise generica ativa para qualquer texto com 50+ palavras |
+| Precision / aderencia ao guia | 76% | Analisadores especificos para roteiro, poesia e romance; generica para demais |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 74% | Pistas sintaticas; data offline corrigida (sem ?v= hardcoded) |
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
@@ -179,13 +179,26 @@ Pergunta padrao da sessao:
 - `renderRimaLab()` no controller virou `async` e chama `await VeredaRimaLab.ensureLoaded()` antes de analisar
 - `isLoaded()` e `hasLoadError()` exportados — controllers podem verificar estado antes de renderizar
 
+**Rodada 8 — 2026-05-23 (v223)**
+
+**Versionamento: 74% → 80%**
+- `MAX_VERSIONS_PER_MANUSCRIPT`: 12 → 20
+- `summarizeDiff(textBefore, textAfter)` adicionado ao engine: retorna `{ wordsBefore, wordsAfter, wordsDelta, charDelta, firstChange }`
+- `renderVersionList()` exibe delta de palavras entre versoes adjacentes (+N pal / -N pal)
+- Aviso "limite de 20 versoes" atualizado
+
+**Precision / aderencia ao guia: 70% → 76%**
+- `analyzeRoteiro()`: 6 checks (cenas marcadas, acoes visiveis, dialogo, frases curtas, blocos, volume)
+- `analyzePoesia()`: 6 checks (imagens concretas, encavalgamento, variacao de verso, estrofes, tensao/pergunta, compressao)
+- `analyzeRomance()`: 6 checks (tamanho de capitulo, personagem ativo, ancoras sensoriais, ritmo, dialogo, arco de cena)
+- Roteamento: `template.oficio === "roteiro"`, `"poesia"`, `template.id === "romance-comercial"/"romance-literario"`
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
-- Espelho de Voz: testes em corpus variado; melhorar inferGesture para cobrir mais casos limite
-- Versionamento: limite configuravel ou aumentar para 20; diff entre versoes
-- Precision: analisadores especificos para roteiro, poesia, nao-ficcao
+- Espelho de Voz: melhorar inferGesture para casos limite; testar em corpus variado
+- Precision: analisadores para ficcao-cientifica, fantasia, policial (ficao especulativa tem especificidade)
 - Exportacao/impressao: verificar print CSS em modo pagina (A4/A5)
-- RimaLab: precisao de silabificacao em hiatos e ditongos raros; testes em poesia concreta
+- RimaLab: precisao de silabificacao em hiatos e ditongos raros
 
 ## Prioridades por camada
 
