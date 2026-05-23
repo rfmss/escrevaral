@@ -298,6 +298,13 @@
     return norm(a) === norm(b);
   }
 
+  // Rima toante: apenas as vogais coincidem (ex: "pedra" / "cena")
+  function soundsMatchToante(a, b) {
+    const vowels = s => s.replace(/[^aeiou]/g, "");
+    const va = vowels(a), vb = vowels(b);
+    return va.length > 0 && va === vb;
+  }
+
   // ── Classificação de rima ─────────────────────────────────────────────────────
   function getGrammaticalClass(word) {
     const w = normalizeWord(word);
@@ -331,7 +338,10 @@
     if (!wA || !wB) return null;
     const sA = getRhymeSound(wA), sB = getRhymeSound(wB);
     const rhymes = soundsMatch(sA, sB);
-    if (!rhymes) return { rhymes:false, classification:"nenhuma", wordA:wA, wordB:wB, soundA:sA, soundB:sB };
+    if (!rhymes) {
+      const toante = soundsMatchToante(sA, sB);
+      return { rhymes: toante, classification: toante ? "toante" : "nenhuma", wordA:wA, wordB:wB, soundA:sA, soundB:sB, classA: toante ? getGrammaticalClass(wA) : undefined, classB: toante ? getGrammaticalClass(wB) : undefined };
+    }
     const clA = getGrammaticalClass(wA), clB = getGrammaticalClass(wB);
     return { rhymes, classification: classifyRhyme(wA,wB,clA,clB,sA,sB), wordA:wA, wordB:wB, soundA:sA, soundB:sB, classA:clA, classB:clB };
   }
@@ -344,7 +354,7 @@
 
     return sounds.map((s, i) => {
       if (!s) return "-";
-      const found = map.find(m => soundsMatch(m.sound, s));
+      const found = map.find(m => soundsMatch(m.sound, s) || soundsMatchToante(m.sound, s));
       if (found) return found.letter;
       const letter = String.fromCharCode(code++);
       map.push({ sound:s, letter });

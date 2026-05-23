@@ -73,9 +73,9 @@ Pergunta padrao da sessao:
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
 | Analise geral | 76% | Leitura editorial sem falso positivo de POV; gatilho minimo 30 palavras |
 | Espelho de Voz | 77% | inferGesture reordenado; cidade/conflito no imagetico; seco sem restricao de repeticoes |
-| RimaLab | 68% | Analise por estrofe; silabificador fix para glória-type; verso numerado nas rimas |
-| Decolonial / vocabulario | 67% | Null-safety no observador; estado de erro de carregamento exibido |
-| Direitos / publicacao | 67% | Card relevante por kind com fallback "escrevendo"; data de verificacao das fontes |
+| RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
+| Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
+| Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
 
 ### Evidencias — rodada 2026-05-23
 
@@ -276,6 +276,21 @@ Pergunta padrao da sessao:
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
+
+**Rodada 17 — 2026-05-23 (v232)**
+
+**RimaLab: 68% → 73%**
+- `soundsMatchToante()`: nova funcao detecta rima toante (assonancia) — apenas vogais coincidem (ex: "pedra" / "cena")
+- `analyzeRhyme()` retorna classification "toante" quando sons nao coincidem mas vogais sim; `rhymes: true` para incluir no esquema
+- `computeRhymeScheme()` usa soundsMatchToante como fallback no mapa de letras: toante recebe a mesma letra de rimas iguais
+- RHYME_TITLES atualizado com descricao de "toante"; badge `.is-toante` adicionado ao CSS
+
+**Decolonial / vocabulario: 67% → 72%**
+- `renderDecolonialTool()`: exibe "Carregando vocabulario..." enquanto `ensureLoaded()` esta em progresso (era silencioso)
+- `renderDecolonialObserver()` chamado automaticamente ao entrar na aba Academia: observador reflete manuscrito ativo sem precisar toggle
+
+**Direitos / publicacao: 67% → 72%**
+- `renderRightsLab()` chamado automaticamente ao entrar na aba Academia: card relevante reflete o manuscrito ativo atual
 
 ## Prioridades por camada
 

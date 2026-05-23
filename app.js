@@ -64,6 +64,10 @@ function setView(viewName, options = {}) {
       const hasActive = getActiveManuscript() !== null;
       resumeLink.hidden = !hasActive;
     }
+    if (window.VeredaAcademiaController) {
+      if (typeof renderDecolonialObserver === "function") renderDecolonialObserver();
+      if (typeof renderRightsLab === "function") renderRightsLab();
+    }
   }
 
   if (options.updateRoute) {

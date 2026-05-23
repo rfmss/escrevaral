@@ -251,6 +251,7 @@ function renderRimaLabRhymes(rhymes) {
     pobre:    "Rima pobre: terminações iguais, mesma classe gramatical",
     rica:     "Rima rica: terminações iguais, classes gramaticais distintas",
     preciosa: "Rima preciosa: terminação rara ou proparoxítona",
+    toante:   "Rima toante: apenas as vogais coincidem (assonância)",
     nenhuma:  "Sem rima",
   };
 
@@ -306,6 +307,7 @@ function renderDecolonialTool() {
     return;
   }
   if (!VeredaDecolonial.isLoaded()) {
+    decolonialList.innerHTML = `<div class="decolonial-empty">Carregando vocabulário…</div>`;
     VeredaDecolonial.ensureLoaded().then(renderDecolonialTool);
     return;
   }

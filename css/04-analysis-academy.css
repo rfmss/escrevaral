@@ -278,6 +278,11 @@
   color: var(--ink);
 }
 
+.rimalab-rhyme-badge.is-toante {
+  background: color-mix(in srgb, var(--primary) 18%, var(--card));
+  color: var(--primary);
+}
+
 .rimalab-scheme {
   color: var(--primary);
   font-family: "Noto Serif", Georgia, serif;
