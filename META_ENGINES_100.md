@@ -67,7 +67,7 @@ Pergunta padrao da sessao:
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
 | Templates / guias | 77% | Oficio orientado por modelos; loop infinito corrigido; fallback para rascunho livre |
-| Precision / aderencia ao guia | 76% | Analisadores especificos para roteiro, poesia e romance; generica para demais |
+| Precision / aderencia ao guia | 82% | Analisadores para roteiro, poesia, romance, FC, fantasia brasileira e policial/noir |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
@@ -266,9 +266,16 @@ Pergunta padrao da sessao:
 - `init()` com `_loadError` flag: idempotente em falha, sem retentativa infinita
 - `_hasLoadError()` exportado; syntax-controller usa ele para evitar loop de init
 
+**Rodada 16 — 2026-05-23 (v231)**
+
+**Precision / aderencia ao guia: 76% → 82%**
+- `analyzeFiccaoCientifica()`: 6 checks — novum presente (tecnologia/nave/mutacao), personagem em relacao ao mundo, conflito com sistema, tamanho de cena, abertura, ritmo
+- `analyzeFanfaziaBrasileira()`: 6 checks — territorio reconhecivel (cerrado/sertao/quilombo), magia/encantaria, ancoras sensoriais, tensao, voz e dialogo
+- `analyzePolicialNoir()`: 6 checks — crime/investigacao presente, atmosfera noir, dialogo cortante, ritmo de suspeita, frases de corte, ponto de observacao
+- Roteamento em `analyze()`: ficcao-cientifica, fantasia-brasileira, policial-noir
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
-- Precision: analisadores para ficcao-cientifica, fantasia, policial (ficcao especulativa)
 
 ## Prioridades por camada
 
