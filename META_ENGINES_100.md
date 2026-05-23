@@ -73,9 +73,9 @@ Pergunta padrao da sessao:
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
 | Analise geral | 76% | Leitura editorial sem falso positivo de POV; gatilho minimo 30 palavras |
 | Espelho de Voz | 73% | Autores brasileiros nos ecos; descricao sem jargao tecnico; scoring por densidade |
-| RimaLab | 60% | Beta com ensureLoaded() e fallback de dados; analise com corpus completo |
-| Decolonial / vocabulario | 63% | Observador com recuperacao de erro e estado vazio definido |
-| Direitos / publicacao | 62% | Guia contextual: card relevante pelo kind do manuscrito |
+| RimaLab | 68% | Analise por estrofe; silabificador fix para glória-type; verso numerado nas rimas |
+| Decolonial / vocabulario | 67% | Null-safety no observador; estado de erro de carregamento exibido |
+| Direitos / publicacao | 67% | Card relevante por kind com fallback "escrevendo"; data de verificacao das fontes |
 
 ### Evidencias — rodada 2026-05-23
 
@@ -216,11 +216,29 @@ Pergunta padrao da sessao:
 - Modal de reinicializacao total: texto "`.vrda`" corrigido para "`.esc`" — consistencia com a extensao vigente
 - Escritor ve a extensao correta no passo de cautela mais critico do acervo
 
+**Rodada 11 — 2026-05-23 (v226)**
+
+**RimaLab: 60% → 68%**
+- `analyzeStanza()` + campo `stanzas[]` no `analyze()`: esquema de rima por estrofe quando texto tem blocos separados por linha em branco
+- Fix `syllabify allowDit`: ditongo crescente liberado quando palavra tem acento gráfico em outra sílaba (glória→gló-ria, série→sé-rie, vitória→vi-tó-ria); acento na vogal atual mantém hiato (ría→rí-a)
+- Controller: esquema per-estrofe exibido ("Est. 1: ABBA · Est. 2: CDC"); verso numerado nas rimas (v.1 × v.4)
+- Label "pobre" corrigido — era exibido como "toante" por engano; tooltips reescritos com definicoes corretas
+
+**Rodada 12 — 2026-05-23 (v227)**
+
+**Decolonial / vocabulario: 63% → 67%**
+- Guard null em `manuscript?.text?.trim()` no observador: sem crash se manuscrito vazio ou ausente
+- Estado de erro exibido quando `_loadError` é true (era estado vazio silencioso)
+
+**Direitos / publicacao: 62% → 67%**
+- `getRelevantCard()`: fallback "escrevendo" para qualquer manuscrito sem kind especifico; mapeamento expandido (poesia, IA)
+- Card relevante exibe kind do manuscrito na tag (não mais texto generico "para seu manuscrito")
+- Data de verificacao das fontes exibida em `rightsSources`
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
 - Espelho de Voz: melhorar inferGesture para casos limite; testar em corpus variado
 - Precision: analisadores para ficcao-cientifica, fantasia, policial (ficcao especulativa)
-- RimaLab: precisao de silabificacao em hiatos e ditongos raros
 - Validacao da prova: melhorar UX do resultado
 
 ## Prioridades por camada
