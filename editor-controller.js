@@ -162,7 +162,7 @@ function updateCurrentManuscript() {
 }
 
 function createVoiceMirrorMarkup(analysis, criterios, alertas) {
-  const alertasHtml = alertas && alertas.length ? `
+  const alertasHtml = criterios && alertas && alertas.length ? `
     <div class="voice-criterios">
       <h4>Análise editorial — ${alertas.length} ponto(s) de atenção</h4>
       <div class="voice-alertas">
@@ -183,6 +183,11 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
         }).join("")}
       </div>
       <p class="voice-criterios-note">18 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 42 critérios →</a></p>
+    </div>
+  ` : criterios ? `
+    <div class="voice-criterios voice-criterios--ok">
+      <h4>Análise editorial — nenhum alerta</h4>
+      <p class="voice-criterios-note">Os 18 critérios computados não detectaram padrões de atenção neste trecho. Isso não substitui a revisão humana.</p>
     </div>
   ` : "";
 

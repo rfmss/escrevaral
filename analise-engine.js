@@ -516,6 +516,9 @@
       });
     }
 
+    if (resultado.meta.fleschBR < 30 && resultado.meta.totalPalavras > 100)
+      alertas.push({ dim: "clareza", id: "flesch-denso", nivel: "moderado", msg: `Legibilidade ${resultado.meta.fleschBR}/100 (${resultado.meta.fleschLabel}). Texto muito exigente — verifique se é intencional para o público-alvo.` });
+
     return alertas.sort((a, b) => (a.nivel === "alto" ? -1 : 1) - (b.nivel === "alto" ? -1 : 1));
   }
 

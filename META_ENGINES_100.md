@@ -71,7 +71,7 @@ Pergunta padrao da sessao:
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
 | Pontuacao | 77% | Regras locais de pontuacao; lookbehind Safari corrigido; minimo 10 palavras |
-| Analise geral | 76% | Leitura editorial sem falso positivo de POV; gatilho minimo 30 palavras |
+| Analise geral | 80% | Feedback positivo quando sem alertas; alerta de Flesch extremo; 18 criterios |
 | Espelho de Voz | 77% | inferGesture reordenado; cidade/conflito no imagetico; seco sem restricao de repeticoes |
 | RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
 | Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
@@ -276,6 +276,13 @@ Pergunta padrao da sessao:
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
+
+**Rodada 19 — 2026-05-23 (v234)**
+
+**Analise geral: 76% → 80%**
+- `interpretarResultado()`: alerta "flesch-denso" adicionado para textos com FleschBR < 30 e > 100 palavras (leitura muito exigente — avalie publico-alvo)
+- `createVoiceMirrorMarkup()`: quando criterios existe mas alertas.length === 0, exibe bloco "nenhum alerta" com texto honesto ("nao substitui revisao humana")
+- `.voice-criterios--ok`: borda e fundo em sage para distinção visual do estado "sem alertas"
 
 **Rodada 18 — 2026-05-23 (v233)**
 
