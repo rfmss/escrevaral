@@ -301,6 +301,10 @@ function toggleRimaLabEncyclopedia() {
 
 function renderDecolonialTool() {
   if (!window.VeredaDecolonial || !decolonialFilters || !decolonialList) return;
+  if (VeredaDecolonial.hasLoadError()) {
+    decolonialList.innerHTML = `<div class="decolonial-empty">Vocabulário não carregado. Verifique a conexão e recarregue a página.</div>`;
+    return;
+  }
   if (!VeredaDecolonial.isLoaded()) {
     VeredaDecolonial.ensureLoaded().then(renderDecolonialTool);
     return;
@@ -364,6 +368,11 @@ function renderDecolonialObserver() {
   }
 
   const manuscript = getActiveManuscript();
+  if (!manuscript?.text?.trim()) {
+    decolonialObserverSummary.textContent = "Sem texto para verificar.";
+    decolonialObserverList.innerHTML = `<div class="decolonial-observer-empty">Ative um manuscrito com texto para usar o observador.</div>`;
+    return;
+  }
   const findings = window.VeredaDecolonial.detectText(manuscript.text);
   const occurrences = findings.reduce((total, item) => total + item.count, 0);
 
@@ -402,9 +411,9 @@ function renderRightsLab() {
 
   const query = normalizeSearch(rightsState.query);
   const manuscript = getActiveManuscript();
-  const relevantId = (!query && manuscript?.kind)
-    ? VeredaRights.getRelevantCard(manuscript.kind)?.id
-    : null;
+  const relevantCard = !query ? VeredaRights.getRelevantCard(manuscript?.kind || "") : null;
+  const relevantId   = relevantCard?.id || null;
+  const relevantKind = (relevantId && manuscript?.kind) ? manuscript.kind : null;
 
   const cards = window.VeredaRights.getCards().filter((card) => {
     if (!query) {
@@ -424,29 +433,35 @@ function renderRightsLab() {
   });
 
   rightsCards.innerHTML = cards.length
-    ? cards.map(card => createRightsCardMarkup(card, card.id === relevantId)).join("")
+    ? cards.map(card => createRightsCardMarkup(card, card.id === relevantId, relevantKind)).join("")
     : `<div class="rights-empty">Nenhum cuidado encontrado. Tente buscar por contrato, registro, ISBN, IA, plágio ou submissão.</div>`;
 
-  rightsSources.innerHTML = window.VeredaRights
-    .getSources()
-    .map(
-      (source) => `
+  const updatedAt = window.VeredaRights.updatedAt;
+  rightsSources.innerHTML =
+    (updatedAt ? `<p class="rights-updated">Referências verificadas em ${escapeHtml(updatedAt.replace(/^(\d{4})-(\d{2})-(\d{2})$/, "$2/$1"))}. Fontes oficiais mudam — confirme antes de agir.</p>` : "") +
+    window.VeredaRights
+      .getSources()
+      .map(
+        (source) => `
         <a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">
           <span>${escapeHtml(source.label)}</span>
           <small>${escapeHtml(source.note)}</small>
         </a>
       `
-    )
-    .join("");
+      )
+      .join("");
 }
 
-function createRightsCardMarkup(card, relevant = false) {
+function createRightsCardMarkup(card, relevant = false, kind = null) {
+  const relevantTag = relevant
+    ? ` <span class="rights-card-tag">${kind ? escapeHtml(kind) : "para seu manuscrito"}</span>`
+    : "";
   return `
     <article class="rights-card${relevant ? " rights-card--relevant" : ""}">
       <div class="rights-card-header">
         <span class="material-symbols-outlined">${escapeHtml(card.icon)}</span>
         <div>
-          <p class="eyebrow">${escapeHtml(card.eyebrow)}${relevant ? ' <span class="rights-card-tag">para seu manuscrito</span>' : ""}</p>
+          <p class="eyebrow">${escapeHtml(card.eyebrow)}${relevantTag}</p>
           <h3>${escapeHtml(card.title)}</h3>
         </div>
       </div>
