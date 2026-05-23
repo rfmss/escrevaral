@@ -56,7 +56,7 @@ Pergunta padrao da sessao:
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
 | Prova de autoria | 80% | Protecao local do processo de escrita |
-| Validacao da prova | 72% | Conferencia tecnica de arquivo, hash, identidade e aviso de edicao |
+| Validacao da prova | 78% | UI de verificacao no painel; veredito com icone; delta de palavras; wordCount comparado |
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
 | Backup externo via File System | 70% | Copia local com clearHandle + botao Esquecer arquivo |
@@ -66,7 +66,7 @@ Pergunta padrao da sessao:
 | Paginacao / modo pagina | 72% | Visualizacao editorial; print CSS completo para todos os presets |
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
-| Templates / guias | 73% | Oficio orientado por modelos; recuperacao de erro no carregamento |
+| Templates / guias | 77% | Oficio orientado por modelos; loop infinito corrigido; fallback para rascunho livre |
 | Precision / aderencia ao guia | 76% | Analisadores especificos para roteiro, poesia e romance; generica para demais |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 74% | Pistas sintaticas; data offline corrigida (sem ?v= hardcoded) |
@@ -235,11 +235,22 @@ Pergunta padrao da sessao:
 - Card relevante exibe kind do manuscrito na tag (não mais texto generico "para seu manuscrito")
 - Data de verificacao das fontes exibida em `rightsSources`
 
+**Rodada 13 — 2026-05-23 (v228)**
+
+**Validacao da prova: 72% → 78%**
+- UI adicionada ao painel de autoria: input file + area de resultado (antes a feature existia no codigo mas nao tinha elementos HTML)
+- `showProofValidation()` redesenhada: icone de status (verified/warning) + veredito em destaque + lista por tipo (✓/⚠/—)
+- wordCount compara registro vs. manuscrito atual: "+N palavras" ou "-N palavras" desde o registro
+- `data-proof-validation` e `data-proof-validate-input` agora existem no DOM
+
+**Templates / guias: 73% → 77%**
+- `renderTemplateStudio()`: guard `hasLoadError()` previne loop infinito quando templates-data.json falha (era: chamada recursiva infinita)
+- `createManuscriptFromTemplate()`: apos `ready()`, verifica `hasLoadError()` e cria rascunho livre ao inves de travar
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
 - Espelho de Voz: melhorar inferGesture para casos limite; testar em corpus variado
 - Precision: analisadores para ficcao-cientifica, fantasia, policial (ficcao especulativa)
-- Validacao da prova: melhorar UX do resultado
 
 ## Prioridades por camada
 
