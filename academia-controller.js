@@ -174,7 +174,13 @@ async function renderRimaLab() {
   renderRimaLabRhymes(analysis.rhymes);
 
   if (rimalabScheme) {
-    rimalabScheme.textContent = analysis.rhymeScheme || "Esquema: escreva ao menos um verso";
+    if (analysis.stanzas) {
+      rimalabScheme.innerHTML = analysis.stanzas
+        .map((st, i) => `<span class="rimalab-stanza-scheme"><em>Est. ${i + 1}</em> ${escapeHtml(st.scheme)}</span>`)
+        .join(" · ");
+    } else {
+      rimalabScheme.textContent = analysis.rhymeScheme || "Esquema: escreva ao menos um verso";
+    }
   }
 }
 
@@ -237,15 +243,23 @@ function renderRimaLabRhymes(rhymes) {
   }
 
   if (!rhymes.length) {
-    rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas entre versos consecutivos aparecem aqui.</p>`;
+    rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas entre os versos aparecem aqui.</p>`;
     return;
   }
+
+  const RHYME_TITLES = {
+    pobre:    "Rima pobre: terminações iguais, mesma classe gramatical",
+    rica:     "Rima rica: terminações iguais, classes gramaticais distintas",
+    preciosa: "Rima preciosa: terminação rara ou proparoxítona",
+    nenhuma:  "Sem rima",
+  };
 
   rimalabRhymes.innerHTML = rhymes
     .map(
       (rhyme) => `
         <article class="rimalab-rhyme-row ${rhyme.rhymes ? "has-rhyme" : ""}">
-          <span class="rimalab-rhyme-badge is-${escapeHtml(rhyme.classification)}" title="${rhyme.classification === "pobre" ? "Rima toante: compartilha apenas a vogal tônica — recurso legítimo da poesia oral brasileira" : rhyme.classification === "rica" ? "Rima rica: consoante + vogal tônica distintos" : "Rima preciosa: terminação rara ou proparoxítona"}">${rhyme.classification === "pobre" ? "toante" : escapeHtml(rhyme.classification)}</span>
+          <span class="rimalab-verse-pair">v.${rhyme.from + 1} × v.${rhyme.to + 1}</span>
+          <span class="rimalab-rhyme-badge is-${escapeHtml(rhyme.classification)}" title="${escapeHtml(RHYME_TITLES[rhyme.classification] || rhyme.classification)}">${escapeHtml(rhyme.classification)}</span>
           <div>
             <b>${escapeHtml(rhyme.wordA)} / ${escapeHtml(rhyme.wordB)}</b>
             <small>/${escapeHtml(rhyme.soundA)}/ · /${escapeHtml(rhyme.soundB)}/${

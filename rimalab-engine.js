@@ -145,12 +145,16 @@
         const t1HasAccent = /[áàâãéèêíîóòôõúùû]/i.test(t1[0] || "");
         const isDit = !t1HasAccent && (DIT_CRESC.has(pair2) || DIT_DECR.has(pair2));
 
-        // Ditongo crescente: 'i'/'u' é glide apenas quando precedido de cluster consonantal (tr, br, gr...)
-        // Rio/fio: 'r'(1) + 'io' → consoante simples → hiato
-        // Pátria/glória: 'tr'(2) + 'ia' → cluster → glide → ditongo crescente
-        const isWordFinal    = (i + 1 >= toks.length - 1);
-        const prevIsCluster  = prevConsonLen > 1; // consonantes ANTES da vogal atual
-        const allowDit = isDit && t1.length === 1 && (!isWordFinal || prevIsCluster);
+        // Ditongo crescente: 'i'/'u' é glide quando:
+        //   a) precedido de cluster (tr, br, gr...) — sempre (pátria, glória)
+        //   b) palavra tem acento gráfico explícito EM OUTRA sílaba e token atual é átono (glória, série, vitória)
+        //   c) não é word-final após consoante simples sem acento explícito (rio, magia, teoria)
+        const isWordFinal          = (i + 1 >= toks.length - 1);
+        const prevIsCluster        = prevConsonLen > 1;
+        const wordHasExplicitTonic = /[áàâãéèêíîóòôõúùû]/i.test(w);
+        const curTokAccented       = /[áàâãéèêíîóòôõúùû]/i.test(t);
+        const allowDit = isDit && t1.length === 1 &&
+          (!isWordFinal || prevIsCluster || (prevConsonLen >= 1 && wordHasExplicitTonic && !curTokAccented));
         if (allowDit) {
           // Ditongo crescente: absorver próxima vogal
           cur += t1; i++;
@@ -348,6 +352,22 @@
     }).join(" ");
   }
 
+  // ── Análise de estrofe ────────────────────────────────────────────────────────
+  function analyzeStanza(stanzaVerses, offset) {
+    const rhymes = [];
+    for (let i = 0; i < stanzaVerses.length - 1; i++) {
+      for (let j = i + 1; j < stanzaVerses.length; j++) {
+        const r = analyzeRhyme(stanzaVerses[i], stanzaVerses[j]);
+        if (r?.rhymes) rhymes.push({ ...r, from: offset + i, to: offset + j });
+      }
+    }
+    return {
+      verses: stanzaVerses,
+      rhymes,
+      scheme: computeRhymeScheme(stanzaVerses),
+    };
+  }
+
   // ── Análise completa ──────────────────────────────────────────────────────────
   function analyze(text) {
     const verses = text.split("\n").map(l => l.trim()).filter(Boolean);
@@ -367,6 +387,19 @@
 
     const scheme = computeRhymeScheme(verses);
 
+    // Estrofes: blocos separados por linhas em branco
+    const stanzaBlocks = text.split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
+    let stanzas = null;
+    if (stanzaBlocks.length > 1) {
+      let offset = 0;
+      stanzas = stanzaBlocks.map(block => {
+        const sv = block.split("\n").map(l => l.trim()).filter(Boolean);
+        const st = analyzeStanza(sv, offset);
+        offset += sv.length;
+        return st;
+      });
+    }
+
     // Nome do metro dominante
     const dominantMetric = metrics.length ? metrics.sort((a,b) => metrics.filter(m=>m===b).length - metrics.filter(m=>m===a).length)[0] : null;
     const dominantName   = dominantMetric ? versoNome(dominantMetric) : "";
@@ -380,6 +413,7 @@
       isIsometric,
       rhymes,
       rhymeScheme: scheme,
+      stanzas,
       totalVerses: verses.length,
       dominantMetric,
       dominantName,

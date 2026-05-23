@@ -243,7 +243,15 @@
 }
 
 .rimalab-rhyme-row {
-  grid-template-columns: 78px minmax(0, 1fr);
+  grid-template-columns: 44px 78px minmax(0, 1fr);
+}
+
+.rimalab-verse-pair {
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-top: 2px;
 }
 
 .rimalab-rhyme-badge {
@@ -275,6 +283,25 @@
   font-family: "Noto Serif", Georgia, serif;
   font-size: 18px;
   font-weight: 800;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.rimalab-stanza-scheme {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 15px;
+}
+
+.rimalab-stanza-scheme em {
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.04em;
 }
 
 .rimalab-encyclopedia {
