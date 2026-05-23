@@ -70,6 +70,15 @@ Advanced DNS
 
 No `Advanced DNS`, conferir ou criar os registros abaixo.
 
+Status em 2026-05-23:
+
+```txt
+Configurado no Spaceship.
+Painel mostra 5 registros em propagação:
+4 registros A para @
+1 registro CNAME para www
+```
+
 ### Domínio raiz
 
 ```txt
