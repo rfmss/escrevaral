@@ -59,11 +59,11 @@ Pergunta padrao da sessao:
 | Validacao da prova | 78% | UI de verificacao no painel; veredito com icone; delta de palavras; wordCount comparado |
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
-| Backup externo via File System | 70% | Copia local com clearHandle + botao Esquecer arquivo |
+| Backup externo via File System | 75% | Permissao expirada detectada; timer reinicia apos save manual; sem loop de erro |
 | Versionamento | 80% | Historico com 20 versoes, delta de palavras por versao |
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
 | Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
-| Paginacao / modo pagina | 72% | Visualizacao editorial; print CSS completo para todos os presets |
+| Paginacao / modo pagina | 77% | Modo persiste em reload; contagem de palavras correta em modo Pagina |
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
 | Templates / guias | 77% | Oficio orientado por modelos; loop infinito corrigido; fallback para rascunho livre |
@@ -276,6 +276,17 @@ Pergunta padrao da sessao:
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
+
+**Rodada 18 — 2026-05-23 (v233)**
+
+**Backup externo: 70% → 75%**
+- `initializeFilesystemBackup()`: checa permissao antes de iniciar o timer — se "prompt", exibe "Permissao expirada — clique em Salvar para reativar" sem iniciar loop de erro
+- `saveFilesystemBackup()`: apos save manual bem-sucedido, retoma o timer se estava parado (permissao re-concedida via gesto do usuario)
+
+**Paginacao / modo pagina: 72% → 77%**
+- Modo Pagina persiste em reload: `setEditorViewMode()` salva `vrda-editor-view` no localStorage; `_bootstrap()` restaura na inicializacao
+- `renderInspector()`: contagem de palavras usa `manuscript.text` como fonte primaria em vez de `writingArea.innerText` — correto em modo Pagina (writingArea fica oculto)
+- Paragrafo count tambem usa `text` como fonte primaria
 
 **Rodada 17 — 2026-05-23 (v232)**
 

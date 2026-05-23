@@ -229,8 +229,9 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
 function renderInspector() {
   const manuscript = getActiveManuscript();
   const text = manuscript?.text || writingArea.innerText || "";
-  const wordCount = countWords(writingArea.innerText || text);
-  const paragraphs = writingArea.querySelectorAll("p, h1, h2, h3, h4, h5, h6, blockquote, li").length || (text.trim() ? text.trim().split(/\n+/).filter(Boolean).length : 0);
+  // Em modo Página writingArea fica oculto; usar manuscript.text como fonte primária
+  const wordCount = countWords(text || writingArea.innerText);
+  const paragraphs = (text.trim() ? text.trim().split(/\n+/).filter(Boolean).length : 0) || writingArea.querySelectorAll("p, h1, h2, h3, h4, h5, h6, blockquote, li").length;
 
   countStat.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
   focusCount.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;

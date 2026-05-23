@@ -2059,6 +2059,9 @@ function _bootstrap() {
   checkFirstVisit();
   persistState("Pronto para escrever");
 
+  // Restaura modo de visualização do editor (página vs. fluxo)
+  if (localStorage.getItem("vrda-editor-view") === "pages") setEditorViewMode("pages");
+
   // Restaura modo escuro (default: off)
   applyDarkMode(localStorage.getItem(DARK_MODE_KEY) === "on");
 

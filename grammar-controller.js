@@ -234,8 +234,11 @@ function handleFormatCommand(cmd) {
   }
 }
 
+const _EDITOR_VIEW_KEY = "vrda-editor-view";
+
 function setEditorViewMode(mode) {
   if (mode === _currentEditorView) return;
+  localStorage.setItem(_EDITOR_VIEW_KEY, mode);
 
   if (mode === "pages") {
     // Fluxo → Páginas: sincronizar HTML e renderizar paged-editor

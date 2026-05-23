@@ -118,6 +118,17 @@ async function initializeFilesystemBackup() {
   filesystemBackupSaveButton.disabled = false;
   filesystemBackupStopButton.disabled = false;
   if (filesystemBackupForgetButton) filesystemBackupForgetButton.disabled = false;
+
+  // Verificar permissão sem gesto: se "prompt", não inicia timer — aguarda clique manual
+  const perm = typeof filesystemBackupHandle.queryPermission === "function"
+    ? await filesystemBackupHandle.queryPermission({ mode: "readwrite" })
+    : "granted";
+
+  if (perm !== "granted") {
+    setFilesystemBackupState("ready", "Permissão expirada — clique em Salvar para reativar", `${filesystemBackupHandle.name} · aguardando confirmação`);
+    return;
+  }
+
   setFilesystemBackupState("ready", "Arquivo no computador lembrado", `${filesystemBackupHandle.name} · cópia automática ativa`);
   startFilesystemBackup();
 }
@@ -162,6 +173,8 @@ async function saveFilesystemBackup(manual = false) {
     renderBackupWarning();
     const label = manual ? "Cópia externa salva agora" : `Cópia automática #${filesystemBackupCount}`;
     setFilesystemBackupState("ready", label, `${filesystemBackupHandle.name} · ${formatUpdatedAt(backup.exportedAt)}`);
+    // Se o timer não estava rodando (permissão expirada), retomar após save manual bem-sucedido
+    if (manual && !filesystemBackupTimer) startFilesystemBackup();
   } catch (error) {
     stopFilesystemBackup();
     setFilesystemBackupState("error", "Cópia automática pausada", error.message);
