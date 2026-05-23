@@ -18,9 +18,9 @@
     casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama"],
     natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu"],
     memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade"],
-    conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga"],
+    conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue"],
     pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender"],
-    cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro"],
+    cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina"],
   };
 
   function analyze(text) {
@@ -95,15 +95,32 @@
 
   function inferGesture({ avgSentence, lexicalDensity, ttr, punctuation, emotional, fields, repetitions }) {
     const topEmotion = getTopItem(emotional)?.label;
-    const topField = getTopItem(fields)?.label;
+    const topField   = getTopItem(fields)?.label;
 
+    // Barroco: frases longas + alta densidade — clareza sintática sacrificada por acumulação
     if (avgSentence > 24 && lexicalDensity > 0.58) return "barroco";
-    if (avgSentence < 11 && repetitions.length < 6) return "seco";
+
+    // Ensaístico: campo do pensamento + densidade — antecede seco para não confundir ensaio curto
     if (topField === "pensamento" && lexicalDensity > 0.52) return "ensaístico";
+
+    // Seco: frases curtas independente de repetições (Trevisan e Freire usam anáfora como recurso)
+    if (avgSentence < 12 && topField !== "pensamento") return "seco";
+
+    // Imagético: corpo, casa, cidade, conflito — superfície concreta, cenas densas
+    if (topField === "corpo" || topField === "casa" || topField === "cidade" || topField === "conflito") return "imagético";
+
+    // Oral: texto com diálogo marcado (threshold > 3 para não classificar uma citação como oral)
+    if (punctuation.dialogue >= 4) return "oral";
+
+    // Contemplativo: emoção de contemplação ou campo da natureza
     if (topEmotion === "contemplacao" || topField === "natureza") return "contemplativo";
-    if (topField === "corpo" || topField === "casa") return "imagético";
+
+    // Oral leve: algum diálogo presente mas abaixo do threshold principal
     if (punctuation.dialogue >= 2) return "oral";
+
+    // Introspectivo: melancolia, memória — interior sem confronto externo
     if (topEmotion === "melancolia" || topField === "memoria") return "introspectivo";
+
     return "narrativo";
   }
 
