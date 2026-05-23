@@ -40,6 +40,38 @@
     ].join("\n");
   }
 
+  // ── EXPORTAÇÃO HTML ──────────────────────────────────
+  function createHtmlExport(manuscript) {
+    const title = xmlEscape(manuscript.title || "Sem título");
+    const body = (manuscript.text || "")
+      .split(/\n+/)
+      .map(function(p) { return p.trim() ? "<p>" + xmlEscape(p) + "</p>" : ""; })
+      .filter(Boolean)
+      .join("\n");
+
+    return [
+      "<!doctype html>",
+      '<html lang="pt-BR">',
+      "<head>",
+      '<meta charset="utf-8">',
+      "<title>" + title + "</title>",
+      "<style>",
+      "  body { font-family: Georgia, serif; font-size: 1.05rem; line-height: 1.8; max-width: 65ch; margin: 2rem auto; color: #222; }",
+      "  h1 { font-size: 1.5rem; margin-bottom: 0.2em; }",
+      "  p { text-indent: 1.25em; margin: 0; }",
+      "  p:first-of-type { text-indent: 0; }",
+      "  .meta { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }",
+      "</style>",
+      "</head>",
+      "<body>",
+      "<h1>" + title + "</h1>",
+      '<p class="meta">' + xmlEscape(manuscript.kind || "") + (manuscript.status ? " · " + xmlEscape(manuscript.status) : "") + "</p>",
+      body,
+      "</body>",
+      "</html>",
+    ].join("\n");
+  }
+
   // ── EXPORTAÇÃO DOCX (OOXML sem biblioteca externa) ────
   function createDocxExport(manuscript) {
     const title = xmlEscape(manuscript.title || "Sem título");
@@ -244,7 +276,18 @@
 
   // ── DISPATCHER PRINCIPAL ──────────────────────────────
   function exportManuscript(manuscript, format) {
+    if (!manuscript) throw new Error("Nenhum manuscrito ativo para exportar.");
+    if (!manuscript.text?.trim()) throw new Error("O manuscrito está vazio. Escreva algo antes de exportar.");
     var slug = slugify(manuscript.title);
+
+    if (format === "html") {
+      return {
+        content: createHtmlExport(manuscript),
+        filename: slug + ".html",
+        mimeType: "text/html;charset=utf-8",
+        binary: false,
+      };
+    }
 
     if (format === "docx") {
       var zipBytes = createDocxExport(manuscript);

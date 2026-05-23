@@ -64,8 +64,8 @@ Pergunta padrao da sessao:
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
 | Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
 | Paginacao / modo pagina | 72% | Visualizacao editorial; print CSS completo para todos os presets |
-| Exportacao / impressao | 80% | Saida limpa de texto/documento |
-| Arquivo / acervo | 82% | Organizacao de manuscritos e notas |
+| Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
+| Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
 | Templates / guias | 73% | Oficio orientado por modelos; recuperacao de erro no carregamento |
 | Precision / aderencia ao guia | 76% | Analisadores especificos para roteiro, poesia e romance; generica para demais |
 | Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
@@ -204,6 +204,17 @@ Pergunta padrao da sessao:
 **Paginacao / modo pagina: 66% → 72%**
 - Print CSS adicionado para presets `submission` (double-space, Times, indent ABNT) e `reading` (Georgia, 11pt)
 - Todos os 5 presets agora tem regras de impressao especificas em 09-print.css
+
+**Rodada 10 — 2026-05-23 (v225)**
+
+**Exportacao / impressao: 80% → 85%**
+- `createHtmlExport(manuscript)` adicionado: gera HTML valido com Georgia serif, paragrafos indentados, meta de tipo/situacao
+- `exportManuscript()` guarda estado vazio: erro claro se manuscrito nulo ou texto em branco (antes: exportava arquivo vazio silenciosamente)
+- Botao HTML adicionado ao painel de arquivo — quatro formatos disponiveis: TXT, MD, HTML, DOCX
+
+**Arquivo / acervo: 82% → 85%**
+- Modal de reinicializacao total: texto "`.vrda`" corrigido para "`.esc`" — consistencia com a extensao vigente
+- Escritor ve a extensao correta no passo de cautela mais critico do acervo
 
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
