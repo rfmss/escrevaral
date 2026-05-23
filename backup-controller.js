@@ -117,6 +117,7 @@ async function initializeFilesystemBackup() {
 
   filesystemBackupSaveButton.disabled = false;
   filesystemBackupStopButton.disabled = false;
+  if (filesystemBackupForgetButton) filesystemBackupForgetButton.disabled = false;
   setFilesystemBackupState("ready", "Arquivo no computador lembrado", `${filesystemBackupHandle.name} · cópia automática ativa`);
   startFilesystemBackup();
 }
@@ -127,6 +128,7 @@ async function chooseFilesystemBackup() {
     filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`vereda-acervo-${dateStamp}.esc`);
     filesystemBackupSaveButton.disabled = false;
     filesystemBackupStopButton.disabled = false;
+    if (filesystemBackupForgetButton) filesystemBackupForgetButton.disabled = false;
     filesystemBackupCount = 0;
     setFilesystemBackupState("ready", "Arquivo no computador configurado", `${filesystemBackupHandle.name} · cópia automática ativa`);
     startFilesystemBackup();
@@ -180,6 +182,20 @@ function stopFilesystemBackup(updateUi = true) {
   if (updateUi && filesystemBackupHandle) {
     setFilesystemBackupState("idle", "Cópia automática pausada", `${filesystemBackupHandle.name} continua configurado`);
   }
+}
+
+async function forgetFilesystemBackup() {
+  stopFilesystemBackup(false);
+  await VeredaFileSystemBackup.clearHandle();
+  filesystemBackupHandle = null;
+  filesystemBackupSaveButton.disabled = true;
+  filesystemBackupStopButton.disabled = true;
+  if (filesystemBackupForgetButton) filesystemBackupForgetButton.disabled = true;
+  setFilesystemBackupState(
+    "idle",
+    "Cópia automática desativada",
+    "Escolha um arquivo .esc para o Escrevaral manter uma cópia completa do acervo fora do navegador."
+  );
 }
 
 function updateFilesystemBackupInterval(value) {

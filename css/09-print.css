@@ -191,6 +191,28 @@
     text-align: justify;
   }
 
+  /* Preset submissão editorial */
+  .paged-editor[data-preset="submission"] .page-body {
+    padding: 0 !important;
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 12pt;
+    line-height: 2.0; /* double-space para revisão editorial */
+  }
+
+  .paged-editor[data-preset="submission"] .page-body p {
+    text-indent: 1.25cm;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* Preset leitura */
+  .paged-editor[data-preset="reading"] .page-body {
+    padding: 0 !important;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11pt;
+    line-height: 1.7;
+  }
+
   /* Preset livro */
   .paged-editor[data-preset="book"] .manuscript-page {
     break-after: page;

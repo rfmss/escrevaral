@@ -113,10 +113,15 @@
     });
   }
 
+  async function clearHandle() {
+    return readStore("readwrite", (store) => requestToPromise(store.delete(HANDLE_KEY))).catch(() => {});
+  }
+
   global.VeredaFileSystemBackup = {
     getStoredHandle,
     isSupported,
     pickBackupFile,
     writeBackup,
+    clearHandle,
   };
 })(window);

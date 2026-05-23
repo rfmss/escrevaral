@@ -104,8 +104,9 @@ const filesystemBackupStatus = document.querySelector("[data-filesystem-backup-s
 const filesystemBackupDetail = document.querySelector("[data-filesystem-backup-detail]");
 const filesystemBackupInterval = document.querySelector("[data-filesystem-backup-interval]");
 const filesystemBackupIntervalLabel = document.querySelector("[data-filesystem-backup-interval-label]");
-const filesystemBackupSaveButton = document.querySelector('[data-action="save-filesystem-backup"]');
-const filesystemBackupStopButton = document.querySelector('[data-action="stop-filesystem-backup"]');
+const filesystemBackupSaveButton   = document.querySelector('[data-action="save-filesystem-backup"]');
+const filesystemBackupStopButton   = document.querySelector('[data-action="stop-filesystem-backup"]');
+const filesystemBackupForgetButton = document.querySelector('[data-action="forget-filesystem-backup"]');
 const metadataForm = document.querySelector("[data-metadata-form]");
 const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");

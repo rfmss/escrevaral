@@ -59,11 +59,11 @@ Pergunta padrao da sessao:
 | Validacao da prova | 72% | Conferencia tecnica de arquivo, hash, identidade e aviso de edicao |
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
-| Backup externo via File System | 64% | Copia local avancada dependente do navegador |
+| Backup externo via File System | 70% | Copia local com clearHandle + botao Esquecer arquivo |
 | Versionamento | 80% | Historico com 20 versoes, delta de palavras por versao |
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
 | Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
-| Paginacao / modo pagina | 66% | Visualizacao editorial com indicador de pagina por scroll |
+| Paginacao / modo pagina | 72% | Visualizacao editorial; print CSS completo para todos os presets |
 | Exportacao / impressao | 80% | Saida limpa de texto/documento |
 | Arquivo / acervo | 82% | Organizacao de manuscritos e notas |
 | Templates / guias | 73% | Oficio orientado por modelos; recuperacao de erro no carregamento |
@@ -193,12 +193,24 @@ Pergunta padrao da sessao:
 - `analyzeRomance()`: 6 checks (tamanho de capitulo, personagem ativo, ancoras sensoriais, ritmo, dialogo, arco de cena)
 - Roteamento: `template.oficio === "roteiro"`, `"poesia"`, `template.id === "romance-comercial"/"romance-literario"`
 
+**Rodada 9 — 2026-05-23 (v224)**
+
+**Backup externo via File System: 64% → 70%**
+- `clearHandle()` adicionado ao engine: deleta o handle do IndexedDB permanentemente
+- `forgetFilesystemBackup()` no controller: para timer + limpa handle + desativa botoes
+- Botao "Esquecer arquivo" adicionado ao HTML — habilitado apenas quando ha handle ativo
+- Acao `"forget-filesystem-backup"` registrada no app.js
+
+**Paginacao / modo pagina: 66% → 72%**
+- Print CSS adicionado para presets `submission` (double-space, Times, indent ABNT) e `reading` (Georgia, 11pt)
+- Todos os 5 presets agora tem regras de impressao especificas em 09-print.css
+
 **Pendente para chegar a 85%:**
 - Prova de autoria: testar fluxo completo em celular
 - Espelho de Voz: melhorar inferGesture para casos limite; testar em corpus variado
-- Precision: analisadores para ficcao-cientifica, fantasia, policial (ficao especulativa tem especificidade)
-- Exportacao/impressao: verificar print CSS em modo pagina (A4/A5)
+- Precision: analisadores para ficcao-cientifica, fantasia, policial (ficcao especulativa)
 - RimaLab: precisao de silabificacao em hiatos e ditongos raros
+- Validacao da prova: melhorar UX do resultado
 
 ## Prioridades por camada
 
