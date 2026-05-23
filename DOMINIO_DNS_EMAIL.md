@@ -130,12 +130,62 @@ Host: www
 Valor: rfmss.github.io
 ```
 
+### Por que o `www` aponta para `rfmss.github.io`
+
+Isso parece estranho, mas está certo.
+
+O DNS não aponta para:
+
+```txt
+rfmss.github.io/escrevaral
+```
+
+porque CNAME não aponta para caminho de URL. Ele aponta para um host.
+
+No GitHub Pages, quem decide qual repositório serve o conteúdo é o domínio personalizado configurado no repositório, não o caminho depois da barra.
+
+Fluxo esperado:
+
+```txt
+www.escrevaral.com → CNAME → rfmss.github.io
+```
+
+O navegador envia:
+
+```txt
+Host: www.escrevaral.com
+```
+
+O GitHub Pages consulta qual site está associado a `escrevaral.com`/`www.escrevaral.com` e entrega o conteúdo do repositório `rfmss/escrevaral`.
+
+Importante:
+
+```txt
+rfmss.github.io
+```
+
+sem domínio personalizado pode continuar abrindo ou redirecionando a página raiz do usuário. Isso não invalida o CNAME do `www`, porque a requisição com `Host: www.escrevaral.com` é tratada de forma diferente.
+
 ## HTTPS
 
 Depois que o DNS propagar:
 
 ```txt
-GitHub → rfmss/escrevaral → Settings → Pages → Enforce HTTPS
+GitHub → rfmss/escrevaral → Settings → Pages
+```
+
+Confirmar:
+
+```txt
+Custom domain: escrevaral.com
+```
+
+Depois salvar e aguardar o GitHub verificar o DNS.
+
+Quando o certificado aparecer como disponível:
+
+```txt
+Enforce HTTPS
 ```
 
 Ativar `Enforce HTTPS` quando o certificado aparecer como disponível.
