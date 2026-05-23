@@ -585,6 +585,11 @@ async function createManuscriptFromTemplate(templateId) {
     persistState("Carregando guias…");
     await VeredaTemplates.ready();
   }
+  if (VeredaTemplates.hasLoadError()) {
+    persistState("Guias não carregados — criando rascunho livre");
+    createManuscriptFromTemplate(null);
+    return;
+  }
 
   const template = VeredaTemplates.getTemplate(templateId);
   if (!template) {
@@ -807,6 +812,10 @@ async function renderLexicalView() {
 }
 
 function renderTemplateStudio() {
+  if (VeredaTemplates.hasLoadError()) {
+    if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Guias não carregados. Verifique a conexão e recarregue a página.</p>`;
+    return;
+  }
   if (!VeredaTemplates.isLoaded()) {
     VeredaTemplates.ready().then(renderTemplateStudio);
     return;

@@ -396,12 +396,21 @@ function showProofValidation(ok, lines) {
   if (!proofValidationResult) return;
   proofValidationResult.hidden = false;
   proofValidationResult.className = `proof-validation-result ${ok ? "is-ok" : "is-fail"}`;
-  // Veredito na frente, detalhes depois
   const veredito = ok
     ? "Este arquivo combina com o texto atual."
     : "Este arquivo não confere com o texto atual ou apresenta divergências.";
-  const details = lines.map(l => `<p class="proof-detail">${escapeHtml(l)}</p>`).join("");
-  proofValidationResult.innerHTML = `<p class="proof-veredito">${escapeHtml(veredito)}</p>${details}`;
+  const icon = ok ? "verified" : "warning";
+  const checks = lines.filter(l => l.startsWith("✓"));
+  const warnings = lines.filter(l => l.startsWith("⚠") || l.startsWith("✗"));
+  const notes = lines.filter(l => l.startsWith("—"));
+  const detailLines = [...checks, ...warnings, ...notes];
+  const details = detailLines.map(l => `<p class="proof-detail">${escapeHtml(l)}</p>`).join("");
+  proofValidationResult.innerHTML =
+    `<div class="proof-veredito-row">` +
+    `<span class="material-symbols-outlined">${icon}</span>` +
+    `<p class="proof-veredito">${escapeHtml(veredito)}</p>` +
+    `</div>` +
+    `<div class="proof-detail-list">${details}</div>`;
 }
 
 async function validateProofFile(file) {
@@ -467,9 +476,18 @@ async function validateProofFile(file) {
     const organic = data.summary?.organicCount ?? data.events?.filter(e => e?.trusted)?.length;
     if (organic != null) lines.push(`✓ Eventos orgânicos: ${organic}`);
 
-    // Palavras
+    // Palavras — compara com manuscrito atual
     const wc = data.manuscript?.wordCount;
-    if (wc) lines.push(`✓ Palavras no registro: ${wc}`);
+    if (wc != null) {
+      const msNow = getActiveManuscript();
+      const wcNow = msNow ? countWords(msNow.text || "") : null;
+      if (wcNow != null && wcNow !== wc) {
+        const delta = wcNow - wc;
+        lines.push(`✓ Palavras no registro: ${wc} → agora: ${wcNow} (${delta > 0 ? "+" : ""}${delta} palavras)`);
+      } else {
+        lines.push(`✓ Palavras no registro: ${wc}`);
+      }
+    }
 
     lines.push(ok ? "— Cópia pronta para guardar." : "— A cópia tem diferenças em relação ao texto atual.");
     showProofValidation(ok, lines);
