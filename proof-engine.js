@@ -142,6 +142,10 @@
     const cadenceWpm = averageInterval ? Math.round(60000 / averageInterval / 5) : 0;
     const integrity = measuredEvents.length ? Math.round((organicEvents.length / measuredEvents.length) * 100) : 0;
 
+    const startMs = safeSession.startedAt ? new Date(safeSession.startedAt).getTime() : 0;
+    const endMs = safeSession.updatedAt ? new Date(safeSession.updatedAt).getTime() : startMs;
+    const durationMin = startMs && endMs > startMs ? Math.round((endMs - startMs) / 60000) : 0;
+
     return {
       startedAt: safeSession.startedAt,
       updatedAt: safeSession.updatedAt,
@@ -152,6 +156,7 @@
       averageInterval,
       cadenceWpm,
       integrity,
+      durationMin,
       status: integrity >= 80 ? "Sólida" : integrity >= 50 ? "Em formação" : "Aguardando escrita",
     };
   }

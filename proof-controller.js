@@ -196,7 +196,8 @@ function renderProofView() {
   const sessionInfo = document.querySelector("[data-proof-session-info]");
   if (sessionInfo && session.startedAt) {
     const started = new Date(session.startedAt).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
-    sessionInfo.textContent = `Iniciada às ${started} · ${summary.organicEvents} movimentos`;
+    const durPart = summary.durationMin > 0 ? ` · ${summary.durationMin} min` : "";
+    sessionInfo.textContent = `Iniciada às ${started}${durPart} · ${summary.organicEvents} movimentos`;
   }
 
   // Critérios mínimos
@@ -500,12 +501,16 @@ async function validateProofFile(file) {
     const lines = [];
     let ok = true;
 
-    // Formato — vereda.proof.v2 é o formato atual
+    // Formato — vereda.proof.v2 é o atual; escrevaral.autoria.v1 é o pacote blockchain
     const format = data.format || data.envelope;
-    if (format && (format.includes("proof") || format.includes("vereda"))) {
-      lines.push(`✓ Formato: ${format}`);
+    const formatosConhecidos = ["vereda.proof.v2","vereda.proof.v1","escrevaral.autoria.v1"];
+    if (format && formatosConhecidos.some(f => format.startsWith(f.split(".").slice(0,2).join(".")))) {
+      const isLegacy = format.includes("v1") && !format.includes("autoria");
+      lines.push(`✓ Formato: ${format}${isLegacy ? " (formato antigo)" : ""}`);
+    } else if (format) {
+      lines.push(`⚠ Formato desconhecido: ${format} — pode ser de outra versão do Escrevaral`);
     } else {
-      lines.push("⚠ Formato não reconhecido como arquivo de autoria Escrevaral");
+      lines.push("⚠ Formato não reconhecido — verifique se é um arquivo .prova.esc exportado pelo Escrevaral");
     }
 
     // Título e identidade do manuscrito
@@ -551,9 +556,11 @@ async function validateProofFile(file) {
       ok = false;
     }
 
-    // Eventos orgânicos
-    const organic = data.summary?.organicCount ?? data.events?.filter(e => e?.trusted)?.length;
-    if (organic != null) lines.push(`✓ Eventos orgânicos: ${organic}`);
+    // Eventos orgânicos — v2 usa summary.organicEvents; v1 usa events[].organic
+    const organic = data.summary?.organicEvents ?? data.summary?.organicCount ?? data.events?.filter(e => e?.organic)?.length;
+    if (organic != null && organic >= 0) {
+      lines.push(`✓ Eventos orgânicos: ${organic}${organic === 0 ? " — nenhum movimento de escrita registrado" : ""}`);
+    }
 
     // Palavras — compara com manuscrito atual
     const wc = data.manuscript?.wordCount;
