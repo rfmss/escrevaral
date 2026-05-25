@@ -249,7 +249,16 @@ function renderInspector() {
   const wpmLabel = document.querySelector("[data-wpm-label]");
   if (wordCount > 0) {
     const mins = wordCount / 200;
-    const wpmVal = mins < 1 ? `${Math.ceil(mins * 60)}s` : `${Math.ceil(mins)} min`;
+    let wpmVal;
+    if (mins < 1) {
+      wpmVal = `${Math.round(mins * 60)}s`;
+    } else if (mins >= 60) {
+      const h = Math.floor(mins / 60);
+      const m = Math.round(mins % 60);
+      wpmVal = m > 0 ? `${h}h ${m}min` : `${h}h`;
+    } else {
+      wpmVal = `~${Math.round(mins)} min`;
+    }
     wpmStat.textContent = wpmVal;
     if (wpmLabel) wpmLabel.textContent = "de leitura estimada";
   } else {
@@ -265,10 +274,10 @@ function renderInspector() {
   const data = analyzeInspector(text);
 
   if (!data) {
-    if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras aparecem conforme o texto cresce</span>`;
+    if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras mais frequentes aparecem aqui conforme o texto cresce</span>`;
     if (grammarBarEl) grammarBarEl.innerHTML = "";
     if (grammarLegendEl) grammarLegendEl.innerHTML = "";
-    if (fleschScoreEl) fleschScoreEl.textContent = "--";
+    if (fleschScoreEl) fleschScoreEl.textContent = "—";
     if (fleschLabelEl) fleschLabelEl.innerHTML = "Escreva para ver";
     return;
   }

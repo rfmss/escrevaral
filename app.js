@@ -1036,12 +1036,15 @@ function analyzeInspector(text) {
   )));
   // P1 — leitura local, não diagnóstico (SoT §3 Princípio 6 + §4 Glossário)
   const fleschMeta =
-    flesch >= 80 ? { label: "Acessível",      sub: "Leitura fluida" } :
-    flesch >= 60 ? { label: "Moderado",       sub: "Público geral" } :
-    flesch >= 40 ? { label: "Denso",          sub: "Pode ser intencional" } :
-                   { label: "Muito denso",    sub: "Leitura exigente" };
+    flesch >= 80 ? { label: "Acessível",           sub: "Leitura fluida" } :
+    flesch >= 60 ? { label: "Moderado",            sub: "Público geral" } :
+    flesch >= 40 ? { label: "Denso",               sub: "Pode ser intencional" } :
+    flesch >= 20 ? { label: "Muito denso",         sub: "Leitura exigente" } :
+                   { label: "Extremamente denso",  sub: "Acadêmico ou especializado" };
 
-  return { topWords, dist, flesch, fleschMeta };
+  const lexicalDensity = total > 0 ? Math.round(((nouns + verbs + adjs) / total) * 100) : 0;
+
+  return { topWords, dist, flesch, fleschMeta, lexicalDensity };
 }
 
 function updateWritingStats() {
