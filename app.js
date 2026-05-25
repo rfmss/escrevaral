@@ -1265,8 +1265,15 @@ const ACTION_HANDLERS = {
     VeredaDocument.downloadRtf(writingArea.innerHTML || ms?.html || "", ms?.pagePreset || "draft", ms?.title || "Manuscrito", ms?.author || "");
   },
   "print-pages": () => {
-    if (_currentEditorView !== "pages") { setEditorViewMode("pages"); setTimeout(() => window.print(), 400); }
-    else window.print();
+    const ms = getActiveManuscript();
+    const preset = ms?.pagePreset || pagePresetSel?.value || "draft";
+    document.documentElement.dataset.printPreset = preset;
+    const doprint = () => {
+      window.print();
+      setTimeout(() => delete document.documentElement.dataset.printPreset, 1000);
+    };
+    if (_currentEditorView !== "pages") { setEditorViewMode("pages"); setTimeout(doprint, 400); }
+    else doprint();
   },
   "toggle-editorial-group": (_, t) => {
     const group = t.closest("[data-editorial-group]");

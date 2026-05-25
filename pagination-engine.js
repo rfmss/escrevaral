@@ -309,7 +309,9 @@ const VeredaPagination = (() => {
     pagedEditor.dataset.preset = preset;
     const isA5 = preset === "book";
 
-    pagedEditor.innerHTML = pages.map((page, i) => `
+    pagedEditor.innerHTML = pages.map((page, i) => {
+      const wc = (page.content.replace(/<[^>]+>/g, " ").match(/[\p{L}''-]+/gu) || []).length;
+      return `
       <section class="manuscript-page${isA5 ? " is-a5" : ""}"
                data-page="${i + 1}"
                data-break="${page.manual ? "manual" : "auto"}">
@@ -318,9 +320,10 @@ const VeredaPagination = (() => {
              aria-label="Página ${i + 1}">${page.content}</div>
         <footer class="page-footer">
           <span class="page-footer-num">${i + 1}</span>
+          <span class="page-footer-wc" aria-label="${wc} palavras nesta página">${wc} pal.</span>
         </footer>
       </section>
-    `).join("");
+    `}).join("");
 
     return pages.length;
   }
