@@ -68,6 +68,20 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-25
+
+**Baseline:** `bb1c789` — paginação 85%, concordância de import, modo páginas mobile corrigido.
+
+**Candidatas a avançar (por impacto e custo):**
+
+1. **Offline / PWA → 85%** (está em 82%): revisar mensagens de erro do SW em cenários de rede intermitente; testar banner de atualização em Playwright após novo deploy.
+2. **RimaLab → 85%** (está em 82%): identificar os gaps que impedem o salto — provavelmente estados vazios, erro de entrada ou esquemas ainda sem cobertura.
+3. **Qualquer engine em 85% → 95%**: escolher uma e levar a confiável-para-produto — candidatas: Versionamento, Exportação/impressão, Arquivo/acervo.
+
+**Backlog técnico registrado (não implementar sem pedido):**
+- `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
+- `pagination-engine.js`: contador de palavras por página no modo páginas — aparece na tabela como promessa, não verificado via Playwright ainda.
+
 ## Estado em 2026-05-25
 
 | Area / engine | Maturidade | Promessa atual |
