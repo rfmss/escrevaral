@@ -58,6 +58,14 @@ function renderSyntaxPanel(texto) {
   const resultado = syntaxEngine.analisarPeriodo(texto);
   const termos    = resultado.termos.filter(t => t.text?.trim() && !/^[.,;:!?]$/.test(t.text));
 
+  if (!termos.length) {
+    syntaxTokensEl.innerHTML = `<span class="syntax-empty">Selecione uma frase com ao menos um verbo para ver a análise.</span>`;
+    syntaxSummaryEl.innerHTML = "";
+    syntaxPanel.hidden = false;
+    if (state.layout.rightCollapsed) togglePanel("right");
+    return;
+  }
+
   // Tokens no painel
   syntaxTokensEl.innerHTML = termos.map(t => {
     const fn     = normalizarFuncao(t.funcao);
@@ -127,8 +135,14 @@ document.addEventListener("selectionchange", () => {
 
     if (palavras >= 3 && writingArea.contains(sel?.anchorNode)) {
       if (window.syntaxEngine?._hasLoadError?.()) {
-        // dados não carregados — silencioso
+        syntaxTokensEl.innerHTML = `<span class="syntax-empty">Dados sintáticos não carregados. Verifique a conexão e recarregue a página.</span>`;
+        syntaxSummaryEl.innerHTML = "";
+        syntaxPanel.hidden = false;
+        if (state.layout.rightCollapsed) togglePanel("right");
       } else if (!window.syntaxEngine?._isReady()) {
+        syntaxTokensEl.innerHTML = `<span class="syntax-empty">Carregando análise…</span>`;
+        syntaxSummaryEl.innerHTML = "";
+        syntaxPanel.hidden = false;
         syntaxEngine?.init().then(() => renderSyntaxPanel(texto));
       } else {
         renderSyntaxPanel(texto);
