@@ -668,7 +668,8 @@
   font-size: 16px;
 }
 
-.decolonial-alternatives span {
+.decolonial-alternatives span,
+.decolonial-alt-copy {
   border: 1px solid color-mix(in srgb, var(--primary) 38%, var(--line));
   border-radius: 999px;
   background: color-mix(in srgb, var(--primary) 10%, var(--card));
@@ -676,6 +677,45 @@
   padding: 3px 9px;
   font-size: 12px;
   font-weight: 900;
+}
+
+.decolonial-alt-copy {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.decolonial-alt-copy:hover {
+  background: color-mix(in srgb, var(--primary) 20%, var(--card));
+}
+
+.decolonial-alt-copy.is-copied {
+  background: color-mix(in srgb, var(--primary) 30%, var(--card));
+  color: var(--ink);
+}
+
+.decolonial-category-group {
+  margin-bottom: 12px;
+}
+
+.decolonial-category-heading {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.decolonial-category-heading b {
+  font-size: 10px;
+  background: var(--surface-mid);
+  border-radius: 999px;
+  padding: 1px 6px;
+  color: var(--soft-ink);
+  font-weight: 700;
 }
 
 .decolonial-entry p {

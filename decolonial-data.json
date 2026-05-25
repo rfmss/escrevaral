@@ -1520,6 +1520,162 @@
       "reason": "Quando usado de forma depreciativa, ataca políticas de redistribuição sem questionar as causas da desigualdade.",
       "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica que justifique o termo.",
       "contextual": false
+    },
+    {
+      "avoid": "terra de ninguém",
+      "alternatives": [
+        "terra habitada",
+        "território indígena",
+        "território ocupado"
+      ],
+      "category": "territorio",
+      "reason": "Apaga a presença de povos que habitavam o território antes da colonização europeia.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação ou contexto histórico-crítico explícito.",
+      "contextual": false
+    },
+    {
+      "avoid": "civilizar",
+      "alternatives": [
+        "colonizar",
+        "impor normas europeias",
+        "assimilar forçadamente"
+      ],
+      "category": "territorio",
+      "reason": "Pressupõe que culturas não europeias carecem de civilização — estrutura central da ideologia colonial.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "missão civilizatória",
+      "alternatives": [
+        "colonização",
+        "imposição cultural",
+        "dominação cultural"
+      ],
+      "category": "territorio",
+      "reason": "Eufemismo para justificar a destruição de culturas sob pretexto de progresso.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "primitivo",
+      "alternatives": [
+        "originário",
+        "ancestral",
+        "de outra tradição cultural"
+      ],
+      "category": "territorio",
+      "reason": "Classifica culturas numa escala evolutiva com a Europa como topo — estrutura do racismo científico.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "bárbaro",
+      "alternatives": [
+        "não europeu",
+        "de outra tradição",
+        "diferente da norma ocidental"
+      ],
+      "category": "territorio",
+      "reason": "Reforça hierarquia civilizatória quando aplicado a povos e culturas não ocidentais.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "lista branca",
+      "alternatives": [
+        "lista autorizada",
+        "lista aprovada",
+        "lista segura"
+      ],
+      "category": "linguagem",
+      "reason": "Associa branco a aprovado/seguro, espelhando a lógica que associa negro a proibido/perigoso.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "trabalho de escravo",
+      "alternatives": [
+        "trabalho exaustivo",
+        "trabalho sem remuneração justa",
+        "superexploração"
+      ],
+      "category": "linguagem",
+      "reason": "Trivializa a escravidão como metáfora — apaga o crime histórico quando nomeia condições ruins.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "coisa de branco",
+      "alternatives": [
+        "coisa elitizada",
+        "coisa cara",
+        "privilégio de classe"
+      ],
+      "category": "linguagem",
+      "reason": "Naturaliza privilégios de classe como atributo racial, escondendo a desigualdade estrutural.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "errado",
+      "alternatives": [
+        "variação regional",
+        "variante não-padrão",
+        "fora da norma culta"
+      ],
+      "category": "linguagem",
+      "reason": "Quando aplicado a variações linguísticas, desqualifica modos legítimos de falar.",
+      "context": "Depende do contexto: revise se o uso desqualifica uma variante linguística ou descreve erro factual.",
+      "contextual": true
+    },
+    {
+      "avoid": "tipo exótico",
+      "alternatives": [
+        "pessoa de outra origem",
+        "pessoa com outra aparência",
+        "fenótipo diverso"
+      ],
+      "category": "estetica",
+      "reason": "Transforma pessoas em objetos de curiosidade estética a partir do olhar eurocêntrico como norma.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "beleza exótica",
+      "alternatives": [
+        "beleza singular",
+        "beleza diversa",
+        "beleza própria"
+      ],
+      "category": "estetica",
+      "reason": "Elogio que mantém o olhar eurocêntrico como parâmetro e coloca o outro como curiosidade.",
+      "context": "Uso sensível: prefira uma alternativa quando não houver citação, personagem ou análise crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "traços africanos",
+      "alternatives": [
+        "características físicas",
+        "fenótipo afrodescendente",
+        "traços de ascendência africana"
+      ],
+      "category": "estetica",
+      "reason": "Reduz a diversidade fenotípica de um continente inteiro a um único conjunto de traços.",
+      "context": "Depende do contexto: revise se o uso descreve fenótipo específico ou generaliza um continente.",
+      "contextual": true
+    },
+    {
+      "avoid": "assimilação",
+      "alternatives": [
+        "integração forçada",
+        "apagamento cultural",
+        "adaptação imposta"
+      ],
+      "category": "relacoes",
+      "reason": "Quando não é crítico, eufemiza a destruição de culturas originais como processo natural de integração.",
+      "context": "Depende do contexto: revise se o uso é descritivo-crítico ou naturaliza o apagamento cultural.",
+      "contextual": true
     }
   ]
 }

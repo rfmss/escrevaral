@@ -422,14 +422,28 @@ function renderDecolonialObserver() {
   }
 
   decolonialObserverSummary.textContent = `${occurrences} ${occurrences === 1 ? "ocorrência" : "ocorrências"} em ${findings.length} ${findings.length === 1 ? "termo" : "termos"}.`;
-  decolonialObserverList.innerHTML = findings
-    .map((entry) => {
-      const alternatives = entry.alternatives.map((alternative) => `<span>${escapeHtml(alternative)}</span>`).join("");
+  // Agrupa por categoria
+  const byCategory = [];
+  const seen = new Set();
+  findings.forEach(entry => {
+    if (!seen.has(entry.categoryLabel)) {
+      seen.add(entry.categoryLabel);
+      byCategory.push({ label: entry.categoryLabel, entries: [] });
+    }
+    byCategory[byCategory.length - 1].entries.push(entry);
+  });
+
+  decolonialObserverList.innerHTML = byCategory.map(({ label, entries: catEntries }) => {
+    const catCount = catEntries.reduce((s, e) => s + e.count, 0);
+    const rows = catEntries.map((entry) => {
+      const alternatives = entry.alternatives.map(
+        (alt) => `<button class="decolonial-alt-copy" data-copy="${escapeHtml(alt)}" title="Copiar alternativa">${escapeHtml(alt)}</button>`
+      ).join("");
       return `
         <article class="decolonial-alert${entry.contextual ? " is-contextual" : ""}">
           <div class="decolonial-alert-header">
             <strong>${escapeHtml(entry.avoid)}</strong>
-            <span>${entry.count}x · ${escapeHtml(entry.categoryLabel)}</span>
+            <span>${entry.count}x</span>
           </div>
           <div class="decolonial-alternatives">
             <i class="material-symbols-outlined" aria-hidden="true">arrow_forward</i>
@@ -437,10 +451,13 @@ function renderDecolonialObserver() {
           </div>
           <p>${escapeHtml(entry.reason)}</p>
           <small>${entry.contextual ? "Depende do contexto — " : ""}${escapeHtml(entry.context)}</small>
-        </article>
-      `;
-    })
-    .join("");
+        </article>`;
+    }).join("");
+    return `<div class="decolonial-category-group">
+      <h4 class="decolonial-category-heading">${escapeHtml(label)} <b>${catCount}x</b></h4>
+      ${rows}
+    </div>`;
+  }).join("");
 }
 
 function renderRightsLab() {
@@ -556,6 +573,20 @@ if (rightsSearch) rightsSearch.addEventListener("input", () => {
 if (decolonialObserverToggle) decolonialObserverToggle.addEventListener("change", () => {
   decolonialState.observerEnabled = decolonialObserverToggle.checked;
   renderDecolonialObserver();
+});
+
+// Clicar em alternativa no observer copia para clipboard
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".decolonial-alt-copy");
+  if (!btn) return;
+  const text = btn.dataset.copy;
+  if (!text) return;
+  navigator.clipboard?.writeText(text).then(() => {
+    const prev = btn.textContent;
+    btn.textContent = "copiado";
+    btn.classList.add("is-copied");
+    setTimeout(() => { btn.textContent = prev; btn.classList.remove("is-copied"); }, 1500);
+  }).catch(() => {});
 });
 if (precisionCard) precisionCard.addEventListener("change", (event) => {
   const t = event.target.closest("[data-checklist-criterion]");
