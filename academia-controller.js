@@ -231,17 +231,23 @@ function renderRimaLabMetrics(scans) {
 
   rimalabMetrics.innerHTML = scans
     .map(
-      (scan, index) => `
+      (scan, index) => {
+        const verseName = scan.name && scan.name !== `${scan.totalSyllables} sílabas`
+          ? ` · ${scan.name}`
+          : "";
+        const elisionText = scan.ellisions.length
+          ? ` · elisão: ${scan.ellisions.map(e => e.replace("⌃", " + ")).map(escapeHtml).join(", ")}`
+          : "";
+        return `
         <article class="rimalab-metric-row">
           <strong>${index + 1}</strong>
           <div>
-            <b>${scan.totalSyllables} sílabas poéticas</b>
-            <span>${escapeHtml(scan.finalWord)} · ${escapeHtml(scan.finalTonicity)}${
-        scan.ellisions.length ? ` · elisão: ${scan.ellisions.map(escapeHtml).join(", ")}` : ""
-      }</span>
+            <b>${scan.totalSyllables} sílabas poéticas${escapeHtml(verseName)}</b>
+            <span>${escapeHtml(scan.finalWord)} · ${escapeHtml(scan.finalTonicity)}${elisionText}</span>
           </div>
         </article>
-      `
+        `;
+      }
     )
     .join("");
 }

@@ -353,9 +353,14 @@
     let code     = 65; // 'A'
 
     return sounds.map((s, i) => {
-      if (!s) return "-";
-      const found = map.find(m => soundsMatch(m.sound, s) || soundsMatchToante(m.sound, s));
-      if (found) return found.letter;
+      if (!s) return "x";
+      // Rima exata (consoante) → letra maiúscula
+      const exactMatch = map.find(m => soundsMatch(m.sound, s));
+      if (exactMatch) return exactMatch.letter;
+      // Rima toante (assonância) → letra minúscula da mesma família
+      const toanteMatch = map.find(m => soundsMatchToante(m.sound, s));
+      if (toanteMatch) return toanteMatch.letter.toLowerCase();
+      // Som novo → atribuir próxima letra
       const letter = String.fromCharCode(code++);
       map.push({ sound:s, letter });
       return letter;
