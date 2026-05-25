@@ -347,7 +347,10 @@ function renderDecolonialTool() {
   renderDecolonialObserver();
 
   if (!entries.length) {
-    decolonialList.innerHTML = `<div class="decolonial-empty">Nenhuma entrada encontrada.</div>`;
+    const emptyMsg = decolonialState.query
+      ? `Nenhuma entrada encontrada para "${escapeHtml(decolonialState.query)}".`
+      : "Nenhuma entrada nesta categoria.";
+    decolonialList.innerHTML = `<div class="decolonial-empty">${emptyMsg}</div>`;
     return;
   }
 
@@ -381,6 +384,19 @@ function renderDecolonialObserver() {
 
   if (!decolonialState.observerEnabled) {
     decolonialObserverList.innerHTML = "";
+    return;
+  }
+
+  if (VeredaDecolonial.hasLoadError()) {
+    decolonialObserverSummary.textContent = "Vocabulário não carregado.";
+    decolonialObserverList.innerHTML = `<div class="decolonial-observer-empty">Vocabulário não carregado. Recarregue a página para tentar novamente.</div>`;
+    return;
+  }
+
+  if (!VeredaDecolonial.isLoaded()) {
+    decolonialObserverSummary.textContent = "Carregando vocabulário…";
+    decolonialObserverList.innerHTML = `<div class="decolonial-observer-empty">Aguarde — carregando o vocabulário decolonial.</div>`;
+    VeredaDecolonial.ensureLoaded().then(renderDecolonialObserver);
     return;
   }
 

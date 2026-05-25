@@ -68,6 +68,9 @@
       .filter(entry => entry.count > 0);
   }
 
+  // Carregar imediatamente — não bloqueia, resolve antes da interação
+  ensureLoaded();
+
   global.VeredaDecolonial = {
     ensureLoaded,
     listCategories,
