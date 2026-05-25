@@ -38,7 +38,12 @@
   }
 
   function parseEnvelope(rawValue) {
-    const envelope = JSON.parse(rawValue);
+    let envelope;
+    try {
+      envelope = JSON.parse(rawValue);
+    } catch {
+      throw new Error("Arquivo .esc ilegível ou corrompido.");
+    }
 
     validateEnvelope(envelope);
 
@@ -52,6 +57,11 @@
   function validateEnvelope(envelope) {
     if (!envelope || typeof envelope !== "object") {
       throw new Error("Arquivo .esc ilegível.");
+    }
+
+    const PROOF_FORMATS = ["vereda.proof", "escrevaral.autoria"];
+    if (PROOF_FORMATS.some(f => typeof envelope.format === "string" && envelope.format.startsWith(f))) {
+      throw new Error("Este arquivo é uma cópia de autoria, não um acervo. Abra a aba Prova de autoria para verificá-lo.");
     }
 
     if (envelope.format !== FORMAT && envelope.format !== FORMAT_LEGACY) {
