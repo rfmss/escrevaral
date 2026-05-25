@@ -12,7 +12,7 @@ Sessão 3 — continuação após compactação de contexto.
 | Validação da prova | 82% | 85% | `aff98cb` |
 | Editor / documento | 82% | 85% | `96621de` |
 | RimaLab | 78% | 82% | `944f84a` |
-| Decolonial / vocabulário | 78% | 82% | `c507fa7` |
+| Decolonial / vocabulário | 78% | 85% | `c507fa7` + `9aa99de` |
 | Versionamento | 80% | 85% | `5f681f2` |
 | Backup / restore | 80% | 85% | `e4af084` |
 | Offline / PWA | 78% | 82% | `52b8d58` |
@@ -92,7 +92,7 @@ Sessão 3 — continuação após compactação de contexto.
 | Espelho de Voz | 85% |
 | Tema Alvorada / Vereda | 88% |
 | RimaLab | 82% |
-| Decolonial | 82% |
+| Decolonial | 85% |
 | Offline / PWA | 82% |
 | .esc / envelope | 82% |
 | Paginação / modo página | 82% |
@@ -105,7 +105,7 @@ Sessão 3 — continuação após compactação de contexto.
 
 Engines abaixo de 85%:
 - RimaLab: 82% → pode avançar para 85% com dicionário de rimas e mais feedbacks
-- Decolonial: 82% → pode avançar com mais categorias ou sugestão de alternativas inline
+- Decolonial: **85%** ✓ — avançado nesta sessão (alternativas clicáveis, agrupamento, 144 entradas)
 - Offline/PWA: 82% → pode avançar com cache size display e install prompt melhorado
 - .esc/envelope: 82% → pode avançar com validação por manuscrito individual
 - Paginação: 82% → pode avançar com ajustes de margem por preset e modo leitura

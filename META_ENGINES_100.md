@@ -74,7 +74,7 @@ Pergunta padrao da sessao:
 | Analise geral | 85% | 16 condicoes de alerta; pronome-ambiguo, tempo-verbal, abertura-fraca; 21 criterios |
 | Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
 | RimaLab | 82% | nameScheme() reconhece 20 esquemas; quarteto alternado, oitava rima, decima espinela |
-| Decolonial / vocabulario | 82% | Busca por relevancia; observer ordenado por frequencia; badge contextual |
+| Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
 | Direitos / publicacao | 78% | Card relevante ao topo; contador de busca; estado vazio com termo buscado |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
 
@@ -85,7 +85,7 @@ Pergunta padrao da sessao:
 - Validacao da prova: 82% → 85% | historico de sessoes, toggle-proof-sessions, CSS proof-sessions-history
 - Editor/documento: 82% → 85% | densidade lexical vísivel, contagem de caracteres, estado vazio diferenciado
 - RimaLab: 78% → 82% | nameScheme() com 20 esquemas canonicos, reindexacao automatica
-- Decolonial: 78% → 82% | busca por relevancia, observer por frequencia, badge contextual ambar
+- Decolonial: 78% → 85% | busca por relevancia, observer agrupado por categoria, alternativas clicáveis, 144 entradas
 - Versionamento: 80% → 85% | previa de 90 chars por versao, contador X/20
 - Backup/restore: 80% → 85% | importacao com palavras, exportacao com KB, concordancia feminina
 - Offline/PWA: 78% → 82% | banner de atualizacao com botao, mensagens corrigidas
