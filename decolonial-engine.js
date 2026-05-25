@@ -49,13 +49,23 @@
   function listEntries(options = {}) {
     const query = normalize(options.query);
     const category = options.category || "all";
-    return entries
+    const filtered = entries
       .filter(entry => {
         const matchesCategory = category === "all" || entry.category === category;
         const haystack = normalize([entry.avoid, ...entry.alternatives, entry.reason, entry.context, categories[entry.category]?.label].join(" "));
         return matchesCategory && (!query || haystack.includes(query));
       })
       .map(withCategoryLabel);
+
+    if (!query) return filtered;
+
+    // Rank by relevance when searching: avoid exact > avoid starts > avoid includes > alternatives > rest
+    return filtered.map(entry => {
+      const av = normalize(entry.avoid);
+      const score = av === query ? 4 : av.startsWith(query) ? 3 : av.includes(query) ? 2
+        : entry.alternatives.some(a => normalize(a).includes(query)) ? 1 : 0;
+      return { ...entry, _score: score };
+    }).sort((a, b) => b._score - a._score);
   }
 
   function detectText(text, options = {}) {

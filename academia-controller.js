@@ -411,7 +411,8 @@ function renderDecolonialObserver() {
     decolonialObserverList.innerHTML = `<div class="decolonial-observer-empty">Ative um manuscrito com texto para usar o observador.</div>`;
     return;
   }
-  const findings = window.VeredaDecolonial.detectText(manuscript.text);
+  const findings = window.VeredaDecolonial.detectText(manuscript.text)
+    .sort((a, b) => b.count - a.count);
   const occurrences = findings.reduce((total, item) => total + item.count, 0);
 
   if (!findings.length) {
@@ -425,7 +426,7 @@ function renderDecolonialObserver() {
     .map((entry) => {
       const alternatives = entry.alternatives.map((alternative) => `<span>${escapeHtml(alternative)}</span>`).join("");
       return `
-        <article class="decolonial-alert">
+        <article class="decolonial-alert${entry.contextual ? " is-contextual" : ""}">
           <div class="decolonial-alert-header">
             <strong>${escapeHtml(entry.avoid)}</strong>
             <span>${entry.count}x · ${escapeHtml(entry.categoryLabel)}</span>
@@ -435,7 +436,7 @@ function renderDecolonialObserver() {
             ${alternatives}
           </div>
           <p>${escapeHtml(entry.reason)}</p>
-          <small>${entry.contextual ? "Atenção ao contexto. " : ""}${escapeHtml(entry.context)}</small>
+          <small>${entry.contextual ? "Depende do contexto — " : ""}${escapeHtml(entry.context)}</small>
         </article>
       `;
     })

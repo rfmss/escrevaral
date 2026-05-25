@@ -527,6 +527,10 @@
   font-weight: 900;
 }
 
+.decolonial-alert.is-contextual {
+  border-left: 3px solid var(--ochre);
+}
+
 .decolonial-alert p {
   margin: 0 0 6px;
   color: var(--soft-ink);
