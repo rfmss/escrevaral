@@ -269,6 +269,89 @@
   border-color: rgba(58, 44, 34, 0.25);
 }
 
+/* Vereda: contraste de navegacao, ferramentas e estados dentro do pergaminho */
+[data-theme="scriptorium"] .module-tabs .tab {
+  color: var(--muted);
+}
+
+[data-theme="scriptorium"] .module-tabs .tab:hover,
+[data-theme="scriptorium"] .module-tabs .tab.is-active {
+  color: var(--primary);
+}
+
+[data-theme="scriptorium"] .tree-row,
+[data-theme="scriptorium"] .nav-row {
+  color: var(--soft-ink);
+}
+
+[data-theme="scriptorium"] .nav-row-sub {
+  color: var(--muted);
+}
+
+[data-theme="scriptorium"] .tree-row.is-current {
+  color: var(--primary);
+}
+
+[data-theme="scriptorium"] .editor-paper .editor-view-btn,
+[data-theme="scriptorium"] .editor-paper .editor-delete-btn,
+[data-theme="scriptorium"] .editor-paper [data-action="open-reader-mode"] {
+  color: #3a2c22;
+}
+
+[data-theme="scriptorium"] .editor-paper .editor-view-btn.is-active {
+  background: rgba(19, 15, 13, 0.08);
+  color: #1c1714;
+}
+
+[data-theme="scriptorium"] .editor-paper .editor-delete-btn {
+  border-left-color: rgba(58, 44, 34, 0.25);
+  opacity: 0.82;
+}
+
+[data-theme="scriptorium"] .editor-paper .editor-delete-btn:hover {
+  color: #8c3a2b;
+  opacity: 0.9;
+}
+
+[data-theme="scriptorium"] .editor-paper .fmt-group-editorial {
+  opacity: 0.82;
+}
+
+[data-theme="scriptorium"] .editor-paper .fmt-group-editorial:not(.is-open) .fmt-editorial-toggle {
+  opacity: 1;
+}
+
+[data-theme="scriptorium"] .certificate-paper .proof-session-bar,
+[data-theme="scriptorium"] .certificate-paper .proof-actions {
+  background: rgba(19, 15, 13, 0.10);
+  border-color: rgba(140, 110, 80, 0.35);
+}
+
+[data-theme="scriptorium"] .crono-month-btn {
+  color: var(--muted);
+  opacity: 1;
+}
+
+[data-theme="scriptorium"] .crono-month-btn:hover {
+  color: var(--soft-ink);
+  opacity: 1;
+}
+
+[data-theme="scriptorium"] .crono-month-btn.is-current {
+  color: var(--primary);
+  opacity: 1;
+}
+
+[data-theme="scriptorium"] #delete-undo-toast {
+  background: var(--surface-high) !important;
+  border: 1px solid var(--line);
+  color: var(--ink) !important;
+}
+
+[data-theme="scriptorium"] #delete-undo-btn {
+  color: var(--ochre) !important;
+}
+
 [data-theme="cerrado-dark"] {
   --paper: #1c1a14;
   --surface: #242015;
@@ -373,4 +456,3 @@
   --cedar: #d0c4f0;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
 }
-

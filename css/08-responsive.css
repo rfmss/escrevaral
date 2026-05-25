@@ -185,6 +185,7 @@
   /* Academia: ferramentas de duas colunas colapsam */
   .rimalab-tool,
   .rimalab-workbench,
+  .voice-mirror,
   .decolonial-tool,
   .rights-lab {
     grid-template-columns: 1fr;
@@ -192,12 +193,32 @@
 
   /* Garantir que textareas e editores não vazam */
   .rimalab-editor,
+  .voice-mirror-copy,
+  .voice-mirror-workbench,
+  .voice-mirror textarea,
   .decolonial-tool textarea,
   .rights-lab textarea,
   .rimalab-tool textarea {
     min-width: 0;
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .voice-mirror {
+    overflow: hidden;
+    padding: 16px;
+  }
+
+  .voice-mirror-copy h2 {
+    max-width: 100%;
+    font-size: 26px;
+    overflow-wrap: anywhere;
+  }
+
+  .voice-mirror-copy p:not(.eyebrow),
+  .voice-actions {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   /* Arquivo: backup externo colapsa */
