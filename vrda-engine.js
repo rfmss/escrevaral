@@ -4,7 +4,7 @@
   const SCHEMA_VERSION = 1;
   const CREATED_WITH = ".esc - editor";
 
-  function createEnvelope(payload) {
+  function createEnvelope(payload, meta = {}) {
     const exportedAt = new Date().toISOString();
     const checksum = createChecksum(payload);
 
@@ -15,6 +15,25 @@
       exportedAt,
       checksum,
       payload,
+      ...meta,
+    };
+  }
+
+  function summarizeEnvelope(envelope) {
+    const manuscripts = Array.isArray(envelope?.payload?.manuscripts) ? envelope.payload.manuscripts : [];
+    const docs = manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito");
+    const notes = manuscripts.filter(m => (m.type || "manuscrito") !== "manuscrito");
+    const totalWords = docs.reduce((sum, m) => {
+      const words = (m.text || "").trim().split(/\s+/).filter(Boolean).length;
+      return sum + words;
+    }, 0);
+    return {
+      manuscriptCount: docs.length,
+      noteCount: notes.length,
+      totalWords,
+      exportedAt: envelope?.exportedAt || null,
+      format: envelope?.format || null,
+      schemaVersion: envelope?.schemaVersion || null,
     };
   }
 
@@ -91,6 +110,7 @@
   global.VeredaVrda = {
     createEnvelope,
     parseEnvelope,
+    summarizeEnvelope,
     schemaVersion: SCHEMA_VERSION,
   };
 })(window);
