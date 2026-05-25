@@ -721,11 +721,30 @@ function cleanSelectedWord(value) {
 async function renderLexicalView() {
   const manuscript = getActiveManuscript();
   if (!manuscript) return;
+
+  if (VeredaLexical.hasLoadError()) {
+    lexicalCard.innerHTML = `<p class="lexical-disclaimer">Vocabulário não carregado. Verifique a conexão e recarregue a página.</p>`;
+    return;
+  }
+
   await VeredaLexical.ensureLoaded();
   const analysis = VeredaLexical.analyze(state.lexical.selectedWord, manuscript.text);
 
+  if (!analysis) {
+    lexicalTitle.textContent = manuscript.title;
+    lexicalContext.innerHTML = "";
+    lexicalCard.innerHTML = "";
+    return;
+  }
+
   lexicalTitle.textContent = manuscript.title;
   lexicalContext.innerHTML = VeredaLexical.createHighlightedContext(manuscript.text, analysis.word, escapeHtml);
+
+  const countLabel = analysis.count === 1
+    ? "1 vez neste texto"
+    : analysis.count > 1
+    ? `${analysis.count} vezes neste texto`
+    : "nenhuma vez encontrada";
 
   // Buscar sinônimos — lazy load da letra correspondente
   let sinonimosHtml = "";
@@ -735,7 +754,7 @@ async function renderLexicalView() {
     if (sins.length) {
       sinonimosHtml = `
         <div class="lexical-synonyms">
-          <dt>Ajuste fino <span class="lexical-syn-note" title="Clique para substituir. Revise concordância e registro após a troca. Ctrl+Z desfaz.">revise após</span></dt>
+          <dt>Trocas possíveis <span class="lexical-syn-note" title="Clique para substituir. Revise concordância e registro após a troca. Ctrl+Z desfaz.">revise após trocar</span></dt>
           <dd class="lexical-syn-list">${sins.map(s =>
             `<button class="lexical-syn-btn" data-replace-word="${escapeHtml(s)}" title="Substituir por '${escapeHtml(s)}' — revise concordância e registro. Desfaça com Ctrl+Z.">${escapeHtml(s)}</button>`
           ).join("")}</dd>
@@ -751,11 +770,11 @@ async function renderLexicalView() {
     <dl>
       <div><dt>Função provável</dt><dd>${escapeHtml(analysis.functionName)}</dd></div>
       <div><dt>Campo</dt><dd>${escapeHtml(analysis.field)}</dd></div>
-      <div><dt>Ocorrências</dt><dd>${analysis.count}</dd></div>
+      <div><dt>Ocorrências</dt><dd>${countLabel}</dd></div>
       ${sinonimosHtml}
-      <div><dt>Origem</dt><dd>Motor local</dd></div>
+      <div><dt>Análise</dt><dd>Regras locais — sem IA, sem envio de dados</dd></div>
     </dl>
-    <p class="lexical-disclaimer">Classificação aproximada por regras locais. Sem IA, sem envio de texto.</p>
+    <p class="lexical-disclaimer">Classificação aproximada. Palavras polissêmicas variam por contexto — use como pista de revisão.</p>
   `;
 
   // Substituir palavra ao clicar num sinônimo — busca a palavra no texto do editor
