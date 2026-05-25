@@ -585,8 +585,19 @@ function createNoteFromDocType(typeId) {
   addManuscript(manuscript, `${type.label} criado`);
 }
 
+function createBlankManuscript() {
+  const manuscript = VeredaArchive.createManuscript({
+    id: `manuscrito-${Date.now()}`,
+    title: `Manuscrito ${nextDraftNumber()}`,
+    text: "",
+    type: "manuscrito",
+    folder: "Ficção",
+  });
+  addManuscript(manuscript, "Rascunho livre criado");
+}
+
 async function createManuscriptFromTemplate(templateId) {
-  if (!templateId) return;
+  if (!templateId) { createBlankManuscript(); return; }
 
   // Garantir que templates-data.json carregou antes de criar
   if (!VeredaTemplates.isLoaded()) {
@@ -595,14 +606,14 @@ async function createManuscriptFromTemplate(templateId) {
   }
   if (VeredaTemplates.hasLoadError()) {
     persistState("Guias não carregados — criando rascunho livre");
-    createManuscriptFromTemplate(null);
+    createBlankManuscript();
     return;
   }
 
   const template = VeredaTemplates.getTemplate(templateId);
   if (!template) {
     persistState("Guia não encontrado — criando rascunho livre");
-    createManuscriptFromTemplate(null);
+    createBlankManuscript();
     return;
   }
 
@@ -844,10 +855,21 @@ function renderTemplateStudio() {
     return;
   }
   if (!VeredaTemplates.isLoaded()) {
+    if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Carregando guias de escrita…</p>`;
     VeredaTemplates.ready().then(renderTemplateStudio);
     return;
   }
-  const activeTemplate = VeredaTemplates.getTemplate(templateState.activeId);
+  let activeTemplate = VeredaTemplates.getTemplate(templateState.activeId);
+  // Fallback: templateState.activeId can become stale — pick first available
+  if (!activeTemplate) {
+    const firstTemplates = VeredaTemplates.listTemplates();
+    activeTemplate = firstTemplates[0] ? VeredaTemplates.getTemplate(firstTemplates[0].id) : null;
+    if (activeTemplate) templateState.activeId = activeTemplate.id;
+  }
+  if (!activeTemplate) {
+    if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Nenhum guia disponível.</p>`;
+    return;
+  }
   templateState.craftId = templateState.craftId || activeTemplate?.oficio || "ficcao";
   const crafts = VeredaTemplates.listOficios();
   const query = normalizeSearch(templateState.query);
@@ -953,12 +975,8 @@ function selectCraft(craftId) {
   const templates = VeredaTemplates.listTemplates({ oficio: craftId });
   const nextTemplate = templates[0];
 
-  if (!nextTemplate) {
-    return;
-  }
-
   templateState = {
-    activeId: nextTemplate.id,
+    activeId: nextTemplate?.id || templateState.activeId,
     step: 0,
     craftId,
     query: "",
