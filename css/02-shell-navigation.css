@@ -1816,6 +1816,56 @@ mark {
   font-size: 15px;
 }
 
+.proof-session-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.proof-sessions-history {
+  margin: 0 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proof-session-history-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.proof-session-history-row:last-child {
+  border-bottom: none;
+}
+
+.proof-session-history-row span:first-child {
+  color: var(--muted);
+  min-width: 140px;
+}
+
+.proof-session-history-row small {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.proof-sessions-empty {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  text-align: center;
+  padding: 8px 0;
+}
+
 .proof-actions {
   display: flex;
   align-items: center;

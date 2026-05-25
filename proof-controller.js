@@ -256,22 +256,55 @@ function renderProofView() {
 
   if (!recentEvents.length) {
     proofTimeline.innerHTML = "<div><span></span><p>Aguardando movimentos de escrita no editor.</p></div>";
-    return;
+  } else {
+    proofTimeline.innerHTML = recentEvents
+      .map((event) => {
+        const time = formatTimeWithSeconds(event.at);
+        const isStructural = event.keyType?.startsWith("structural:");
+        const structType = isStructural ? event.keyType.replace("structural:","") : null;
+        const label = structType
+          ? `ação: ${structType}${event.wordDelta ? ` (Δ${event.wordDelta > 0 ? "+" : ""}${event.wordDelta} pal)` : ""}`
+          : event.organic ? "toque orgânico" : "toque fora do intervalo";
+        const interval = event.interval === null ? "início" : `${event.interval}ms`;
+        return `<div><span></span><p>${time} — ${label} · ${interval}</p></div>`;
+      })
+      .join("");
   }
 
-  proofTimeline.innerHTML = recentEvents
-    .map((event) => {
-      const time = formatTimeWithSeconds(event.at);
-      const isStructural = event.keyType?.startsWith("structural:");
-      const structType = isStructural ? event.keyType.replace("structural:","") : null;
-      const label = structType
-        ? `ação: ${structType}${event.wordDelta ? ` (Δ${event.wordDelta > 0 ? "+" : ""}${event.wordDelta} pal)` : ""}`
-        : event.organic ? "movimento orgânico" : "movimento descartado";
-      const interval = event.interval === null ? "início" : `${event.interval}ms`;
+  // Histórico de sessões anteriores
+  renderProofSessionHistory();
+}
 
-      return `<div><span></span><p>${time} — ${label} · ${interval}</p></div>`;
-    })
-    .join("");
+function renderProofSessionHistory() {
+  const historyEl = document.querySelector("[data-proof-sessions-history]");
+  if (!historyEl || historyEl.hidden) return;
+  const record = getActiveProofRecord();
+  if (!record) { historyEl.innerHTML = ""; return; }
+  const sessions = record.sessions || [];
+  const activeId = record.activeSessionId;
+  const past = sessions.filter(s => s.id !== activeId);
+  if (!past.length) {
+    historyEl.innerHTML = `<p class="proof-sessions-empty">Apenas esta sessão registrada até agora.</p>`;
+    return;
+  }
+  historyEl.innerHTML = past.map(s => {
+    const sum = VeredaProof.summarize(s);
+    const date = s.startedAt ? new Date(s.startedAt).toLocaleString("pt-BR", { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }) : "—";
+    return `<div class="proof-session-history-row">
+      <span>${date}</span>
+      <span>${sum.organicEvents} toques · ${sum.integrity > 0 ? sum.integrity + "%" : "—"}</span>
+      <small>${sum.status}</small>
+    </div>`;
+  }).join("");
+}
+
+function toggleProofSessionHistory() {
+  const historyEl = document.querySelector("[data-proof-sessions-history]");
+  const btn = document.querySelector("[data-action='toggle-proof-sessions']");
+  if (!historyEl) return;
+  historyEl.hidden = !historyEl.hidden;
+  if (btn) btn.setAttribute("aria-expanded", String(!historyEl.hidden));
+  if (!historyEl.hidden) renderProofSessionHistory();
 }
 
 function startNewProofSession() {

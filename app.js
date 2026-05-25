@@ -1257,6 +1257,7 @@ const ACTION_HANDLERS = {
   "export-proof":            () => exportProof(),
   "stamp-blockchain":        () => stampWithOpenTimestamps(),
   "validate-proof-file":     () => document.querySelector("[data-proof-validate-input]")?.click(),
+  "toggle-proof-sessions":   () => toggleProofSessionHistory(),
   "new-proof-session":       () => startNewProofSession(),
   "export-backup":           () => exportBackup(),
   "import-backup":           () => requestBackupImport(),
