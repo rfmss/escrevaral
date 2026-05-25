@@ -488,7 +488,7 @@
 }
 
 .crono-item-manual:hover .crono-delete { opacity: 1; }
-.crono-delete:hover { color: var(--sienna); }
+.crono-delete:hover { color: var(--sienna); background: color-mix(in srgb, var(--sienna) 10%, transparent); }
 .crono-delete .material-symbols-outlined { font-size: 16px; }
 
 /* Add row */

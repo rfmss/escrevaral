@@ -211,10 +211,12 @@ function enterFocusMode() {
   shell.classList.add("is-focus");
   applyFocusSettings();
   focusEditor();
+  document.querySelector('[data-action="toggle-focus"]')?.setAttribute("aria-pressed", "true");
 }
 
 function exitFocusMode() {
   shell.classList.remove("is-focus");
+  document.querySelector('[data-action="toggle-focus"]')?.setAttribute("aria-pressed", "false");
 }
 
 function toggleRuler() {
@@ -2053,6 +2055,7 @@ function toggleAudioPanel() {
   const panel = document.getElementById("audio-player-panel");
   if (!panel) return;
   panel.hidden = !panel.hidden;
+  document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", String(!panel.hidden));
 }
 
 function _toggleTypewriterSound() {
