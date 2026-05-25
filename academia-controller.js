@@ -454,26 +454,26 @@ function renderRightsLab() {
   const relevantId   = relevantCard?.id || null;
   const relevantKind = (relevantId && manuscript?.kind) ? manuscript.kind : null;
 
-  const cards = window.VeredaRights.getCards().filter((card) => {
-    if (!query) {
-      return true;
-    }
-
+  const allCards = window.VeredaRights.getCards();
+  const cards = allCards.filter((card) => {
+    if (!query) return true;
     return normalizeSearch(
-      [
-        card.eyebrow,
-        card.title,
-        card.body,
-        card.watch,
-        card.source,
-        ...(card.do || []),
-      ].join(" ")
+      [card.eyebrow, card.title, card.body, card.watch, card.source, ...(card.do || [])].join(" ")
     ).includes(query);
   });
 
-  rightsCards.innerHTML = cards.length
-    ? cards.map(card => createRightsCardMarkup(card, card.id === relevantId, relevantKind)).join("")
-    : `<div class="rights-empty">Nenhum cuidado encontrado. Tente buscar por contrato, registro, ISBN, IA, plágio ou submissão.</div>`;
+  // Relevant card sobe para o topo quando não há busca ativa
+  const sorted = !query && relevantId
+    ? [...cards].sort((a, b) => (b.id === relevantId ? 1 : 0) - (a.id === relevantId ? 1 : 0))
+    : cards;
+
+  const countLine = sorted.length && sorted.length < allCards.length
+    ? `<p class="rights-count">${sorted.length} de ${allCards.length} cuidados</p>`
+    : "";
+
+  rightsCards.innerHTML = sorted.length
+    ? countLine + sorted.map(card => createRightsCardMarkup(card, card.id === relevantId, relevantKind)).join("")
+    : `<div class="rights-empty">Nenhum cuidado encontrado para "<strong>${escapeHtml(rightsState.query)}</strong>". Tente: contrato, registro, ISBN, IA, plágio, submissão.</div>`;
 
   const updatedAt = window.VeredaRights.updatedAt;
   rightsSources.innerHTML =
