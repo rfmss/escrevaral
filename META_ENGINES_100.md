@@ -56,26 +56,39 @@ Pergunta padrao da sessao:
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
 | Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
-| Validacao da prova | 78% | UI de verificacao no painel; veredito com icone; delta de palavras; wordCount comparado |
+| Validacao da prova | 82% | sessao com duracao; formato v1/v2 distinguidos; data-proof-session-info no HTML |
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
 | Backup externo via File System | 75% | Permissao expirada detectada; timer reinicia apos save manual; sem loop de erro |
 | Versionamento | 80% | Historico com 20 versoes, delta de palavras por versao |
 | Offline / PWA | 78% | Uso local/offline com cache versionado |
-| Editor / documento | 77% | Escrita e edicao com tempo de leitura estimado |
-| Paginacao / modo pagina | 77% | Modo persiste em reload; contagem de palavras correta em modo Pagina |
+| Editor / documento | 82% | Flesch 5 faixas; WPM com horas; lexicalDensity retornado |
+| Paginacao / modo pagina | 82% | Print preset-aware (A5 imprime A5); contador de palavras por pagina |
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
-| Templates / guias | 77% | Oficio orientado por modelos; loop infinito corrigido; fallback para rascunho livre |
-| Precision / aderencia ao guia | 82% | Analisadores para roteiro, poesia, romance, FC, fantasia brasileira e policial/noir |
-| Lexico / Biblioteca | 82% | Analise local com recuperacao de erro e estado vazio definido |
-| Sintaxe | 80% | Painel funcionando com fallback sem pt-compromise; _loadError idempotente |
-| Pontuacao | 82% | 34 regras; PONT-46 (verbos de opiniao + virgula + que); analyzeDeep() no Espelho de Voz |
-| Analise geral | 80% | Feedback positivo quando sem alertas; alerta de Flesch extremo; 18 criterios |
-| Espelho de Voz | 82% | Painel "Publico provavel" no render; lexicon ternura adicionado; emocoes expandidas |
-| RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
-| Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
+| Templates / guias | 85% | Loading state; fallback activeTemplate; createBlankManuscript(); selectCraft robusta |
+| Precision / aderencia ao guia | 85% | +terror-horror, memoir, jornalismo, romance; status labels mais honestos |
+| Lexico / Biblioteca | 85% | Analise local com recuperacao de erro e estado vazio definido |
+| Sintaxe | 85% | Fallback morfologico; todos os estados de erro expliciitos no painel |
+| Pontuacao | 85% | 36 regras; PONT-49 mas adversativo; PONT-47 refinada |
+| Analise geral | 85% | 16 condicoes de alerta; pronome-ambiguo, tempo-verbal, abertura-fraca; 21 criterios |
+| Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
+| RimaLab | 78% | Nome do verso no painel; esquema maiuscula/minuscula (exato/toante); elisions com " + " |
+| Decolonial / vocabulario | 78% | ensureLoaded() automatico; observer com loading/erro explícito; busca contextual |
 | Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
+| Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v252 / 2026-05-25
+
+**Sessao autonoma — 8 engines avancados**
+
+- Analise geral: 80% → 85% | +3 alertas (pronome-ambiguo, tempo-verbal, abertura-fraca), Flesch 5 faixas, 21 criterios
+- Validacao da prova: 78% → 82% | duracao de sessao, formato v1/v2, atributos HTML faltando adicionados
+- Editor: 77% → 82% | Flesch 5 faixas, WPM horas, lexicalDensity
+- Paginacao: 77% → 82% | print A5 via data-print-preset, contador palavras/pagina no rodape
+- Templates: 77% → 85% | loading state, fallback activeTemplate, createBlankManuscript()
+- RimaLab: 73% → 78% | nome do verso, esquema toante/exato, elision legivel
+- Decolonial: 72% → 78% | auto-load, observer com loading/erro, busca contextual
 
 ### Marco — v244 / 2026-05-24
 
@@ -111,6 +124,15 @@ Pergunta padrao da sessao:
 - `scriptorium` permanece como contrato tecnico entre `app.js`, `css/00-tokens.css` e `editor-controller.js` — renomeacao para `vereda` adiada para migracao propria e auditavel
 
 ### Evidencias — rodada 2026-05-24
+
+**Tema Alvorada / Vereda: 80% → 88%**
+- `index.html`: bootstrap no `<head>` aplica `data-theme="scriptorium"` antes dos CSS quando `vereda:dark-mode` esta ligado; reduz flash/race do tema claro em reload
+- `css/00-tokens.css`: overrides de contraste para abas, navegacao lateral, controles do editor, Prova de autoria, Cronograma e toast de desfazer
+- `css/08-responsive.css`: `voice-mirror` da Academia colapsa em uma coluna no mobile; copy, workbench, textarea, titulo e acoes limitados para nao vazar
+- `ASSET_VERSION`: `20260524-darkaudit`; service worker: `vereda-offline-v244`
+- Auditoria Codex/Chromium: 12 combinacoes (6 rotas × 2 viewports) com `themeFailures=0`, `viewFailures=0`, `overflowFailures=0`, `lowContrastSamples=0`, `clickFailures=0`
+- Relatorio completo: `reports/auditoria/vereda-dark-audit-20260524.md`
+- `scriptorium` continua como identificador tecnico legado; migracao para `vereda` permanece adiada para sessao propria junto com `editor-controller.js`
 
 **Prova de autoria: 80% → 85%**
 - `createAuthorshipPackage()` adicionado ao proof-engine: gera pacote `escrevaral.autoria.v1` com manuscrito, sessao, resumo e claim de autoria (dominio + produto)
