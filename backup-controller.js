@@ -5,29 +5,29 @@ function registerOfflineApp() {
   updateConnectionStatus();
 
   if (!("serviceWorker" in navigator)) {
-    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Funciona só com internet por ora';
+    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Sem suporte a uso sem internet';
     return;
   }
 
-  let refreshingAfterUpdate = false;
+  const updateBanner = document.getElementById("update-banner");
+  const updateReloadBtn = document.getElementById("update-reload-btn");
+  const updateDismissBtn = document.getElementById("update-dismiss-btn");
+
+  if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => window.location.reload());
+  if (updateDismissBtn) updateDismissBtn.addEventListener("click", () => { if (updateBanner) updateBanner.hidden = true; });
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (refreshingAfterUpdate) {
-      return;
-    }
-
-    refreshingAfterUpdate = true;
-    window.location.reload();
+    if (updateBanner) updateBanner.hidden = false;
   });
 
   navigator.serviceWorker
     .register("./service-worker.js")
     .then((registration) => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Funciona sem internet';
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
       registration.update();
     })
     .catch(() => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Aguardando conexão';
+      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Sem internet disponível';
     });
 }
 
