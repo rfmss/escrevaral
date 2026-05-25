@@ -79,6 +79,70 @@
 .audio-volume .material-symbols-outlined { font-size: 16px; color: var(--muted); }
 .audio-volume input[type="range"] { flex: 1; accent-color: var(--primary); }
 
+.audio-typewriter {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.audio-typewriter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.audio-typewriter-label .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--primary);
+}
+
+.audio-typewriter-label > span:not(.material-symbols-outlined) {
+  flex: 1;
+}
+
+.audio-typewriter-toggle {
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--line);
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.audio-typewriter-toggle[aria-pressed="true"] {
+  background: var(--primary);
+}
+
+.audio-typewriter-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.audio-typewriter-toggle[aria-pressed="true"] .audio-typewriter-knob {
+  transform: translateX(14px);
+}
+
+.audio-typewriter-hint {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 
 /* ── POMODORO ────────────────────────────────────────── */
 .focus-pomodoro {

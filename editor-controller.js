@@ -487,7 +487,7 @@ function createReferenceMarkup(template) {
       </div>
     </section>
     <section>
-      <h3>Lembretes para escrever melhor</h3>
+      <h3>Lembretes</h3>
       <ul>
         ${(guidance.reminders || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
       </ul>

@@ -83,6 +83,16 @@ function renderBackupWarning() {
   }
 }
 
+function humanizeBackupError(error) {
+  if (error.name === "NotAllowedError") {
+    return "O arquivo de cópia precisa de confirmação — clique em Salvar agora para continuar.";
+  }
+  if (error.name === "NotFoundError") {
+    return "O arquivo de cópia não foi encontrado no computador. Use Esquecer arquivo e escolha um novo arquivo.";
+  }
+  return "Não foi possível salvar a cópia agora. Tente salvar manualmente.";
+}
+
 function setFilesystemBackupState(stateName, status, detail) {
   filesystemBackup.dataset.state = stateName;
   filesystemBackupStatus.textContent = status;
@@ -125,23 +135,23 @@ async function initializeFilesystemBackup() {
     : "granted";
 
   if (perm !== "granted") {
-    setFilesystemBackupState("ready", "Permissão expirada — clique em Salvar para reativar", `${filesystemBackupHandle.name} · aguardando confirmação`);
+    setFilesystemBackupState("ready", "Arquivo de cópia precisa de confirmação", `${filesystemBackupHandle.name} · clique em Salvar agora para continuar`);
     return;
   }
 
-  setFilesystemBackupState("ready", "Arquivo no computador lembrado", `${filesystemBackupHandle.name} · cópia automática ativa`);
+  setFilesystemBackupState("ready", "Arquivo de cópia lembrado", `${filesystemBackupHandle.name} · cópia automática ativa`);
   startFilesystemBackup();
 }
 
 async function chooseFilesystemBackup() {
   try {
     const dateStamp = createDateTimeStamp();
-    filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`vereda-acervo-${dateStamp}.esc`);
+    filesystemBackupHandle = await VeredaFileSystemBackup.pickBackupFile(`escrevaral-acervo-${dateStamp}.esc`);
     filesystemBackupSaveButton.disabled = false;
     filesystemBackupStopButton.disabled = false;
     if (filesystemBackupForgetButton) filesystemBackupForgetButton.disabled = false;
     filesystemBackupCount = 0;
-    setFilesystemBackupState("ready", "Arquivo no computador configurado", `${filesystemBackupHandle.name} · cópia automática ativa`);
+    setFilesystemBackupState("ready", "Arquivo de cópia configurado", `${filesystemBackupHandle.name} · cópia automática ativa`);
     startFilesystemBackup();
     await saveFilesystemBackup(true);
   } catch (error) {
@@ -149,7 +159,7 @@ async function chooseFilesystemBackup() {
       return;
     }
 
-    setFilesystemBackupState("error", "Não foi possível configurar o cópia automática no computador", error.message);
+    setFilesystemBackupState("error", "Não foi possível configurar a cópia automática no computador", humanizeBackupError(error));
   }
 }
 
@@ -159,7 +169,7 @@ async function saveFilesystemBackup(manual = false) {
   }
 
   try {
-    setFilesystemBackupState("saving", "Salvando cópia externa...", filesystemBackupHandle.name);
+    setFilesystemBackupState("saving", "Guardando cópia no computador...", filesystemBackupHandle.name);
     const backup = VeredaBackup.createBackup(state);
     await VeredaFileSystemBackup.writeBackup(filesystemBackupHandle, backup);
     filesystemBackupCount += 1;
@@ -171,13 +181,13 @@ async function saveFilesystemBackup(manual = false) {
     };
     persistBackupMeta();
     renderBackupWarning();
-    const label = manual ? "Cópia externa salva agora" : `Cópia automática #${filesystemBackupCount}`;
+    const label = manual ? "Cópia guardada agora" : "Cópia automática guardada";
     setFilesystemBackupState("ready", label, `${filesystemBackupHandle.name} · ${formatUpdatedAt(backup.exportedAt)}`);
     // Se o timer não estava rodando (permissão expirada), retomar após save manual bem-sucedido
     if (manual && !filesystemBackupTimer) startFilesystemBackup();
   } catch (error) {
     stopFilesystemBackup();
-    setFilesystemBackupState("error", "Cópia automática pausada", error.message);
+    setFilesystemBackupState("error", "Cópia automática pausada", humanizeBackupError(error));
   }
 }
 
@@ -231,7 +241,7 @@ function exportBackup() {
   if (timerRounds.length > 0) backup.timerRounds = timerRounds;
   const backupJson = JSON.stringify(backup, null, 2);
   const dateStamp = createDateTimeStamp();
-  downloadFile(backupJson, `vereda-acervo-${dateStamp}.esc`, "application/vnd.vereda+json");
+  downloadFile(backupJson, `escrevaral-acervo-${dateStamp}.esc`, "application/vnd.vereda+json");
   backupMeta = {
     exportedAt: backup.exportedAt,
     manuscriptCount: state.manuscripts.length,
@@ -287,7 +297,7 @@ async function importBackup(file) {
     renderVersionList();
     renderBackupWarning();
     applyFocusSettings();
-    persistState("Backup importado");
+    persistState("Cópia trazida de volta");
     const { manuscriptCount: msCount, noteCount, totalWords } = envSummary;
     const parts = [
       msCount > 0 ? `${msCount} ${msCount === 1 ? "manuscrito" : "manuscritos"}` : "",

@@ -7,7 +7,6 @@ function useActiveManuscriptForVoice() {
     updateVoiceCount();
     voiceResult.innerHTML = `<p>O Espelho de Voz analisa manuscritos. Notas de pesquisa, mundo, personagem, cena, cronologia e glossário ficam fora dessa leitura.</p>`;
     setView("academia");
-    voiceInput.focus();
     return;
   }
 
@@ -15,7 +14,6 @@ function useActiveManuscriptForVoice() {
   updateVoiceCount();
   renderVoiceMirror();
   setView("academia");
-  voiceInput.focus();
 }
 
 function updateVoiceCount() {
@@ -125,7 +123,6 @@ function useActiveManuscriptForRimaLab() {
   renderRimaLab();
   persistRimaLabText();
   setView("academia");
-  rimalabInput.focus();
 }
 
 function exportRimaLabText() {
@@ -512,24 +509,30 @@ function createRightsCardMarkup(card, relevant = false, kind = null) {
   const relevantTag = relevant
     ? ` <span class="rights-card-tag">${kind ? escapeHtml(kind) : "para seu manuscrito"}</span>`
     : "";
+  const proofLink = card.id === "registro"
+    ? `<button class="rights-proof-link" data-action="go-autoria"><span class="material-symbols-outlined">fingerprint</span>Abrir Prova de autoria</button>`
+    : "";
   return `
     <article class="rights-card${relevant ? " rights-card--relevant" : ""}">
-      <div class="rights-card-header">
-        <span class="material-symbols-outlined">${escapeHtml(card.icon)}</span>
-        <div>
-          <p class="eyebrow">${escapeHtml(card.eyebrow)}${relevantTag}</p>
-          <h3>${escapeHtml(card.title)}</h3>
+      <details${relevant ? " open" : ""}>
+        <summary class="rights-card-header">
+          <span class="material-symbols-outlined">${escapeHtml(card.icon)}</span>
+          <div>
+            <p class="eyebrow">${escapeHtml(card.eyebrow)}${relevantTag}</p>
+            <h3>${escapeHtml(card.title)}</h3>
+          </div>
+        </summary>
+        <p>${escapeHtml(card.body)}</p>
+        <ul>
+          ${card.do.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+        <div class="rights-watch">
+          <strong>Atenção</strong>
+          <span>${escapeHtml(card.watch)}</span>
         </div>
-      </div>
-      <p>${escapeHtml(card.body)}</p>
-      <ul>
-        ${card.do.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-      </ul>
-      <div class="rights-watch">
-        <strong>Atenção</strong>
-        <span>${escapeHtml(card.watch)}</span>
-      </div>
-      <small>${escapeHtml(card.source)}</small>
+        <small>${escapeHtml(card.source)}</small>
+        ${proofLink}
+      </details>
     </article>
   `;
 }
@@ -568,7 +571,15 @@ if (decolonialSearch) decolonialSearch.addEventListener("input", () => {
 });
 if (rightsSearch) rightsSearch.addEventListener("input", () => {
   rightsState.query = rightsSearch.value;
+  if (rightsSearchClear) rightsSearchClear.hidden = !rightsSearch.value;
   renderRightsLab();
+});
+if (rightsSearchClear) rightsSearchClear.addEventListener("click", () => {
+  rightsSearch.value = "";
+  rightsState.query = "";
+  rightsSearchClear.hidden = true;
+  renderRightsLab();
+  rightsSearch.focus();
 });
 if (decolonialObserverToggle) decolonialObserverToggle.addEventListener("change", () => {
   decolonialState.observerEnabled = decolonialObserverToggle.checked;

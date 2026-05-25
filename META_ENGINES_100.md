@@ -25,6 +25,23 @@ Evidencia de maturidade:
 - A tela nao usa backup, autosave, offline, toggle, blueprint, template, inspector, precision, status, modal, tooltip, upload, download, hash, cache ou browser como copy visivel.
 - O tom continua claro, adulto e simpatico; nao vira explicacao infantil.
 
+## Pilar transversal: escrita movel com teclado fisico
+
+O Escrevaral precisa funcionar como oficina portatil. Tablet ou celular com teclado fisico conectado e um cenario natural de escrita longa.
+
+Regra de produto:
+
+- Navegar ou abrir manuscritos em dispositivo touch nao deve forcar teclado virtual quando a pessoa pode querer apenas ler.
+- Quando houver sinal progressivo de teclado fisico, o editor pode receber foco automaticamente como no desktop.
+- A experiencia deve ser silenciosa: sem painel novo, sem configuracao obrigatoria, sem promessa de deteccao perfeita.
+- Focos exigidos por comandos de edicao, substituicao ou formatacao podem permanecer.
+
+Evidencia de maturidade:
+
+- Celular/tablet sem teclado fisico: abrir manuscrito pelo acervo nao levanta teclado virtual de modo agressivo.
+- Tablet/celular com teclado fisico: depois do primeiro sinal de tecla fisica, a escrita segue fluida, sem passos extras.
+- Desktop continua com foco rapido no editor.
+
 ## Protocolo de abertura
 
 Ao abrir o projeto, antes de propor alteracoes:
@@ -59,7 +76,7 @@ Pergunta padrao da sessao:
 | Validacao da prova | 85% | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao |
 | `.esc` / envelope nativo | 82% | summarizeEnvelope(); feedback de importacao com palavras |
 | Backup / restore | 85% | Feedback de importacao com contagem; exportacao com tamanho em KB |
-| Backup externo via File System | 75% | Permissao expirada detectada; timer reinicia apos save manual; sem loop de erro |
+| Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
 | Versionamento | 85% | Previa de texto nas versoes; contador X/20 versoes guardadas |
 | Offline / PWA | 82% | Banner de atualizacao com botao; mensagens de erro claras |
 | Editor / documento | 85% | Densidade lexical no inspector; contagem de caracteres; estado vazio diferenciado |
@@ -75,8 +92,29 @@ Pergunta padrao da sessao:
 | Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
 | RimaLab | 82% | nameScheme() reconhece 20 esquemas; quarteto alternado, oitava rima, decima espinela |
 | Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
-| Direitos / publicacao | 78% | Card relevante ao topo; contador de busca; estado vazio com termo buscado |
+| Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v266 / 2026-05-25
+
+**Direitos / publicação: 78% → 85%**
+
+- Cards recolhíveis via `<details><summary>`: card relevante abre por padrão, demais colapsados
+- Limpar busca: botão X aparece ao digitar; some após limpar; `[hidden]` respeitado com CSS explícito
+- Mapeamento de kind ampliado: `tradução/roteiro` → contrato; `autobiografia/biografia/memória` → registro
+- Link direto "Abrir Prova de autoria" no card "Quero provar autoria" (`data-action="go-autoria"`)
+- `go-autoria` registrado em app.js → `setView("autoria", { updateRoute: true })`
+- QA: 9 cards, 9 details, 1 open, clear toggle, kind mapping, cross-link → #autoria, mobile sem overflow, console limpo
+
+### Marco — v264 / 2026-05-25
+
+**Backup externo via File System: 75% → 85%**
+
+- `humanizeBackupError()` diferencia confirmacao de arquivo, arquivo ausente e falha generica sem expor jargao tecnico
+- Estado "Arquivo de copia precisa de confirmacao" substitui permissao expirada; inline status sincronizado com painel
+- Nomes de copia migrados para `escrevaral-acervo-{data}.esc`; descricao do seletor: "Copia do Escrevaral"
+- Estado sem File System API validado: copia automatica indisponivel e botao desabilitado
+- QA: envelope `.esc` valido, ciclo exportar → importar restaura manuscritos, console Chromium sem erro fatal
 
 ### Marco — v261 / 2026-05-25
 

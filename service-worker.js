@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v262";
-const ASSET_VERSION = "20260525-decolonial3";
+const CACHE_NAME = "vereda-offline-v271";
+const ASSET_VERSION = "20260525-teclaspages";
 
 const CORE_ASSETS = [
   "./",
@@ -38,6 +38,7 @@ const CORE_ASSETS = [
   `./rimalab-engine.js?v=${ASSET_VERSION}`,
   `./decolonial-engine.js?v=${ASSET_VERSION}`,
   `./rights-engine.js?v=${ASSET_VERSION}`,
+  `./typewriter-engine.js?v=${ASSET_VERSION}`,
   `./criterios-data.js?v=${ASSET_VERSION}`,
   `./syntax-engine.js?v=${ASSET_VERSION}`,
   `./punctuation-engine.js?v=${ASSET_VERSION}`,
@@ -77,6 +78,9 @@ const CORE_ASSETS = [
   `./favicon_io/apple-touch-icon.png?v=${ASSET_VERSION}`,
   `./favicon_io/android-chrome-192x192.png?v=${ASSET_VERSION}`,
   `./favicon_io/android-chrome-512x512.png?v=${ASSET_VERSION}`,
+  "./sounds/typewriter.wav",
+  "./sounds/backspace.wav",
+  "./sounds/Enter.wav",
 ];
 
 self.addEventListener("install", (event) => {

@@ -163,13 +163,15 @@
   function getRelevantCard(kind) {
     if (!kind) return cards.find(c => c.id === "escrevendo") || null;
     const k = kind.toLowerCase();
-    if (/roteiro|script|audiovisual|tv|film/.test(k))      return cards.find(c => c.id === "contrato")    || null;
-    if (/fanfiction|fan/.test(k))                           return cards.find(c => c.id === "citacao")     || null;
-    if (/coleti|comunidade|tradicion|oral|quilomb/.test(k)) return cards.find(c => c.id === "comunidades") || null;
-    if (/coauto|parceri/.test(k))                           return cards.find(c => c.id === "coautoria")   || null;
-    if (/ensaio|reportagem|newsletter|jornali/.test(k))     return cards.find(c => c.id === "submissao")   || null;
-    if (/poema|poesia|poetic/.test(k))                      return cards.find(c => c.id === "escrevendo")  || null;
-    if (/ia|intelig|gpt|llm|model/.test(k))                 return cards.find(c => c.id === "ia")          || null;
+    if (/roteiro|script|audiovisual|tv|film/.test(k))               return cards.find(c => c.id === "contrato")    || null;
+    if (/tradu[cç][aã]o|translat/.test(k))                          return cards.find(c => c.id === "contrato")    || null;
+    if (/fanfiction|fan/.test(k))                                    return cards.find(c => c.id === "citacao")     || null;
+    if (/coleti|comunidade|tradicion|oral|quilomb/.test(k))          return cards.find(c => c.id === "comunidades") || null;
+    if (/coauto|parceri/.test(k))                                    return cards.find(c => c.id === "coautoria")   || null;
+    if (/ensaio|reportagem|newsletter|jornali/.test(k))              return cards.find(c => c.id === "submissao")   || null;
+    if (/biografi|autobiografi|mem[oó]ria|relato/.test(k))           return cards.find(c => c.id === "registro")    || null;
+    if (/poema|poesia|poetic/.test(k))                               return cards.find(c => c.id === "escrevendo")  || null;
+    if (/ia|intelig|gpt|llm|model/.test(k))                          return cards.find(c => c.id === "ia")          || null;
     return cards.find(c => c.id === "escrevendo") || null;
   }
 

@@ -10,7 +10,7 @@ Iniciado em: 2026-05-24
 
 ### O que foi decidido
 
-**Definição central do produto (da criadora):**
+**Definição central do produto (do criador):**
 > *"Um lugar de fazer nada, com tudo que precisa."*
 
 Essa frase é o coração de toda a comunicação. Não é slogan — é posição filosófica. Referência declarada: Manuel de Barros ("o lugar de escrever é o lugar de fazer nada").
@@ -85,7 +85,7 @@ Uma ferramenta de escrita feita à mão para escritoras e escritores brasileiros
 Funciona sem internet. Não envia nenhum dado. Não usa inteligência artificial.  
 É sua, inteiramente, enquanto você escreve.
 
-**Definição da criadora:**
+**Definição do criador:**
 > *"Um lugar de fazer nada, com tudo que precisa."*
 
 Essa frase é o coração do projeto. A mesa está equipada — guias, análise, prova de autoria, acervo — mas a sensação é de silêncio. Não tem notificação, não tem sugestão automática, não tem IA tentando terminar sua frase. Tem você e a página.
@@ -261,6 +261,7 @@ Não tem plano pago, não tem funcionalidade bloqueada, não tem "versão pro". 
 
 ## Próximos passos de campanha
 
+- [ ] Usar o painel operacional `lancamento-escrevaral.html` para copiar textos, marcar tarefas e conduzir a sequência do lançamento
 - [ ] Definir canal prioritário para lançamento (Bluesky ou Instagram)
 - [ ] Escolher roteiro de estreia
 - [ ] Gravar Reel (Roteiro 7) com tela real do Escrevaral
@@ -268,3 +269,16 @@ Não tem plano pago, não tem funcionalidade bloqueada, não tem "versão pro". 
 - [ ] Escrever e-mail de lançamento para lista inicial
 - [ ] Submeter ao Product Hunt com tagline principal
 - [ ] Criar kit de apresentação: 1 imagem + 1 frase + 1 link para cada rede
+
+---
+
+## Painel operacional de lançamento
+
+Arquivo criado: `lancamento-escrevaral.html`
+
+Uso: abrir direto no navegador e usar como painel de campanha. Ele guarda checklists no navegador, permite editar e copiar textos para redes, e organiza a sequência Dia 0, Dia 1, Dias 2–3 e Dias 4–7.
+
+Frase de lançamento aprovada:
+> Um lugar de fazer nada, com tudo que precisa. Escreva.
+
+Copy-base do lançamento: apresentar o Escrevaral como oficina literária brasileira, offline, gratuita, sem conta, sem nuvem e sem IA escrevendo pela pessoa. Evitar lista técnica de engines como primeira mensagem; engines entram como prova de cuidado, não como manchete.

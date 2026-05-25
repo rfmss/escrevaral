@@ -64,7 +64,7 @@ arquivos internos. A marca pública, o domínio e o projeto atual são Escrevara
 | escrevaral.io | [ ] pendente | Média |
 | escrevaral.net | [ ] pendente | Baixa |
 
-Registrar .com.br em registro.br (~R$ 40/ano). Associar CPF da criadora.
+Registrar .com.br em registro.br (~R$ 40/ano). Associar CPF do criador.
 
 ---
 
@@ -310,7 +310,7 @@ Prioridade recomendada: criar primeiro subdomínio próprio gratuito, se necess�
 agent.escrevaral.com
 ```
 
-Isso usa o domínio já controlado pela criadora e não depende de TLD Web3 externo.
+Isso usa o domínio já controlado pelo criador e não depende de TLD Web3 externo.
 Só comprar `escrevaral.agent` ou `escrevaral.brave` se for barato, claro e útil
 para presença pública. Não considerar como proteção jurídica forte.
 
@@ -347,6 +347,10 @@ Versão curta para bio:
 Arquivo principal de campanha: `CAMPANHA.md`
 
 Contém: posicionamento, pilares, voz e tom, taglines (incluindo a principal: *"Um lugar de fazer nada, com tudo que precisa"*) e roteiros prontos para redes sociais, vídeo e lançamento.
+
+Painel operacional de lançamento: `lancamento-escrevaral.html`
+
+Uso: abrir direto no navegador. Serve para copiar textos prontos, editar posts, marcar tarefas concluídas e conduzir a sequência de lançamento sem depender de nova conversa com IA.
 
 Âncora filosófica declarada: Manuel de Barros — "o lugar de escrever é o lugar de fazer nada."
 

@@ -984,6 +984,67 @@
   line-height: 1.4;
 }
 
+/* Collapsible rights cards */
+.rights-card details {
+  display: grid;
+  gap: 10px;
+}
+
+.rights-card details > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rights-card details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.rights-proof-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 12px;
+  cursor: pointer;
+  align-self: start;
+}
+
+.rights-proof-link:hover {
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.rights-proof-link .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.rights-search-clear {
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px;
+}
+
+.rights-search-clear[hidden] {
+  display: none;
+}
+
+.rights-search-clear .material-symbols-outlined {
+  font-size: 18px;
+}
+
+.rights-search-clear:hover {
+  color: var(--ink);
+}
+
 .template-studio {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
@@ -1810,103 +1871,3 @@
   color: var(--primary);
   font-size: 36px;
 }
-
-.focus-toolbar,
-.focus-counter,
-.focus-ruler {
-  display: none;
-}
-
-.focus-toolbar {
-  position: fixed;
-  top: 22px;
-  left: 50%;
-  z-index: 50;
-  align-items: center;
-  gap: 10px;
-  transform: translateX(-50%);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--card) 86%, transparent);
-  box-shadow: var(--shadow);
-  padding: 8px;
-  opacity: 0.28;
-  backdrop-filter: blur(14px);
-  transition: opacity var(--motion-quick), transform var(--motion-quick);
-}
-
-.focus-toolbar:hover,
-.focus-toolbar:focus-within {
-  opacity: 1;
-}
-
-.focus-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border-left: 1px solid var(--line);
-  padding-left: 10px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.focus-control input {
-  width: 92px;
-  accent-color: var(--primary);
-}
-
-.focus-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface-low);
-  color: var(--primary);
-  cursor: pointer;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.focus-pill.is-active {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
-}
-
-.focus-counter {
-  position: fixed;
-  right: 28px;
-  bottom: 24px;
-  z-index: 50;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(253, 252, 251, 0.82);
-  color: var(--muted);
-  box-shadow: var(--shadow);
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 700;
-  backdrop-filter: blur(12px);
-  opacity: 0.54;
-}
-
-.focus-ruler {
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  pointer-events: none;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(253, 252, 251, 0.82) 0,
-      rgba(253, 252, 251, 0.82) calc(var(--ruler-y) - 58px),
-      rgba(253, 252, 251, 0) calc(var(--ruler-y) - 58px),
-      rgba(253, 252, 251, 0) calc(var(--ruler-y) + 58px),
-      rgba(253, 252, 251, 0.82) calc(var(--ruler-y) + 58px),
-      rgba(253, 252, 251, 0.82) 100%
-    );
-}
-

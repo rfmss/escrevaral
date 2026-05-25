@@ -159,6 +159,7 @@ const decolonialObserverSummary = document.querySelector("[data-decolonial-obser
 const decolonialObserverList = document.querySelector("[data-decolonial-observer-list]");
 const rightsLab = document.querySelector("[data-rights-lab]");
 const rightsSearch = document.querySelector("[data-rights-search]");
+const rightsSearchClear = document.querySelector("[data-rights-search-clear]");
 const rightsCards = document.querySelector("[data-rights-cards]");
 const rightsSources = document.querySelector("[data-rights-sources]");
 

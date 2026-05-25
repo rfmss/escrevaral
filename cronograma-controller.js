@@ -189,7 +189,7 @@ function renderCronograma() {
   const plannerData = loadPlannerData();
 
   // Title + month label
-  if (titleEl)    titleEl.textContent   = `Ritmo de escrita em ${cronoYear}`;
+  if (titleEl)    titleEl.textContent   = `Seu ritmo em ${cronoYear}`;
   if (monthLabel) monthLabel.textContent = CRONO_MONTHS[cronoMonth];
   renderCronoDateShortcut();
 

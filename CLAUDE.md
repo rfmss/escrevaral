@@ -19,7 +19,22 @@ Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + 
 
 Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
 
-Relatório ativo de auditoria: `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
+Relatórios ativos de auditoria:
+
+- `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
+- `reports/auditoria/vereda-dark-audit-20260524.md` para o estado atual do tema escuro Vereda, contraste, responsividade mobile e decisão de manter `scriptorium` como identificador técnico legado.
+
+---
+
+## Banca economica de agentes
+
+Meta acima de tudo: economizar tokens para funcionar bem em cotas gratuitas e modelos leves, como Gemini Flash. A banca fica em `.claude/agents/`, mas so entra quando economiza erro ou retrabalho.
+
+Regra: tarefa clara e baixo risco segue direto. Se o risco nao for obvio, chamar `banca-coordenadora`. Preferir 0 ou 1 agente; 2 so com dois riscos fortes; 3+ apenas em mudanca estrutural. Cada agente le apenas arquivos ligados ao risco e responde em ate 5 linhas.
+
+Mapa rapido: preservacao -> `guardiao-preservacao`; UX/copy/mobile -> `ux-escritora`; JS/CSS/cache -> `arquiteto-vanilla`; QA -> `auditor-qa`; engines -> `curador-engines`; marca -> `marca-campanha`; direitos/autoria -> `publicacao-direitos`; decisao estrutural -> `codex-par`.
+
+Formato: Tarefa / Risco / Agente necessario / Menor passo / Evidencia.
 
 ---
 
@@ -47,6 +62,22 @@ Regra: benefício humano primeiro; mecanismo técnico só em detalhe, ajuda, doc
 | Dados do navegador | cache |
 
 Critério de aceite: uma escritora brasileira deve entender a tela sem saber inglês técnico e sem aprender vocabulário de desenvolvimento.
+
+---
+
+## Pilar de mobilidade: teclado físico sem atrito
+
+O Escrevaral deve poder ser usado em qualquer lugar, inclusive em tablet ou celular com teclado físico conectado. Esse cenário é parte natural da oficina portátil, não um caso secundário.
+
+Regra de produto:
+
+- Ao abrir ou navegar por manuscritos em dispositivo touch, não forçar foco em campo editável quando a intenção pode ser apenas ler.
+- Se houver sinal de teclado físico, o editor pode receber foco automaticamente como no desktop.
+- Não prometer detecção perfeita de teclado físico: navegador e sistema operacional variam. Tratar como melhoria progressiva e silenciosa.
+- Não criar painel ou configuração visível enquanto a experiência puder ser resolvida por comportamento discreto.
+- Focos necessários para substituição, formatação e comandos de edição podem ser mantidos.
+
+Critério de aceite: em celular/tablet sem teclado físico, abrir um manuscrito não deve empurrar o teclado virtual sem necessidade; com teclado físico, a escrita deve continuar fluida e sem passos extras.
 
 ---
 

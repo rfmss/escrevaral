@@ -613,7 +613,7 @@ function openArchiveManuscript(id) {
   renderMetadataForm();
   persistState("Manuscrito aberto");
   setView("editor");
-  writingArea.focus();
+  focusEditorOnNavigate();
 }
 
 function exportArchiveManuscript(id, format) {

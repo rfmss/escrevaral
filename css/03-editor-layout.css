@@ -518,6 +518,9 @@
 /* Grid do shell no Foco: só o workspace, sem topbar e statusbar */
 .app-shell.is-focus {
   grid-template-rows: minmax(0, 1fr);
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 34%),
+    var(--paper);
 }
 
 /* Workspace ocupa tudo */
@@ -531,22 +534,32 @@
   place-items: start center;
   height: 100%;
   overflow-y: auto;
-  padding: 0;
+  padding: clamp(18px, 5vh, 56px) 0;
 }
 
 .app-shell.is-focus .editor-paper {
   width: var(--focus-width, 720px);
   max-width: min(var(--focus-width, 720px), calc(100vw - 48px));
-  min-height: 100%;
-  padding: 72px clamp(24px, 5vw, 64px) 120px;
+  min-height: min(760px, calc(100dvh - 96px));
+  padding: clamp(52px, 8vh, 82px) clamp(30px, 5vw, 64px) clamp(80px, 10vh, 120px);
   background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 18px 58px color-mix(in srgb, var(--ink) 14%, transparent);
 }
 
 /* Régua de foco (linha horizontal de leitura) */
+.focus-ruler {
+  display: none;
+}
+
 .app-shell.is-focus .focus-ruler {
+  display: none;
+}
+
+.app-shell.is-focus.has-ruler .focus-ruler {
   display: block;
   position: fixed;
-  top: 50%;
+  top: var(--ruler-y, 50%);
   left: 0;
   right: 0;
   height: 2px;
@@ -562,7 +575,7 @@
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  display: none;
   align-items: center;
   gap: 8px;
   background: color-mix(in srgb, var(--surface) 92%, transparent);
@@ -575,13 +588,62 @@
   z-index: 50;
 }
 
+.app-shell.is-focus .focus-toolbar {
+  display: flex;
+  top: auto;
+  bottom: 24px;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+}
+
 .focus-toolbar:hover,
 .focus-toolbar:focus-within {
   opacity: 1;
 }
 
+.focus-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid var(--line);
+  padding-left: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.focus-control input {
+  width: 92px;
+  accent-color: var(--primary);
+}
+
+.focus-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--primary);
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.focus-pill.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.focus-control,
+.focus-pill {
+  flex: 0 0 auto;
+}
+
 /* Contador: canto superior direito, muito discreto */
 .focus-counter {
+  display: none;
   position: fixed;
   top: 16px;
   right: 20px;
@@ -591,4 +653,85 @@
   pointer-events: none;
   font-family: "Inter", system-ui, sans-serif;
   letter-spacing: 0.04em;
+}
+
+.app-shell.is-focus .focus-counter {
+  display: block;
+}
+
+@media (max-width: 680px) {
+  .app-shell.is-focus .editor-split {
+    padding: 12px 0;
+  }
+
+  .app-shell.is-focus .editor-paper {
+    max-width: calc(100vw - 24px);
+    min-height: calc(100dvh - 88px);
+    padding: 44px 24px 96px;
+  }
+
+  .app-shell.is-focus .focus-toolbar {
+    max-width: calc(100vw - 20px);
+    overflow-x: auto;
+    justify-content: flex-start;
+    border-radius: 18px;
+    scrollbar-width: none;
+  }
+
+  .app-shell.is-focus .focus-toolbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .focus-control input {
+    width: 76px;
+  }
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(201, 125, 50, 0.16), transparent 34%),
+    #130f0d;
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .editor-paper {
+  background: var(--parchment);
+  border-color: var(--border-aged);
+  color: var(--forest-ink);
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.42);
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .title-input,
+[data-theme="scriptorium"] .app-shell.is-focus .writing-area,
+[data-theme="scriptorium"] .app-shell.is-focus .writing-area h1,
+[data-theme="scriptorium"] .app-shell.is-focus .writing-area h2,
+[data-theme="scriptorium"] .app-shell.is-focus .writing-area h3 {
+  color: #1c1714;
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .title-rule {
+  background: rgba(58, 44, 34, 0.35);
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .focus-toolbar,
+[data-theme="scriptorium"] .app-shell.is-focus .focus-counter {
+  background: rgba(28, 24, 20, 0.86);
+  border-color: rgba(201, 125, 50, 0.28);
+  color: #e6dcc8;
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .focus-control,
+[data-theme="scriptorium"] .app-shell.is-focus .focus-counter {
+  color: #c8b89a;
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .focus-pill {
+  background: rgba(212, 197, 169, 0.08);
+  border-color: rgba(201, 125, 50, 0.28);
+  color: #e6dcc8;
+}
+
+[data-theme="scriptorium"] .app-shell.is-focus .focus-pill.is-active {
+  background: #c97d32;
+  border-color: #c97d32;
+  color: #130f0d;
 }

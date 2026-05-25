@@ -34,6 +34,47 @@ function updateRouteForView(viewName, mode = "push") {
   window.history.pushState(null, "", nextHash);
 }
 
+const ANALYTICS_VIEW_TITLES = {
+  editor: "Manuscrito",
+  biblioteca: "Biblioteca",
+  autoria: "Prova de autoria",
+  arquivo: "Arquivo",
+  academia: "Academia",
+  cronograma: "Cronograma",
+};
+
+let _pendingAnalyticsView = null;
+let _lastAnalyticsPath = "";
+
+function getAnalyticsPath(viewName = getViewFromRoute()) {
+  const route = VIEW_ROUTES.has(viewName) ? viewName : getViewFromRoute();
+  return `${window.location.pathname}${window.location.search}#${route}`;
+}
+
+function trackAnalyticsView(viewName = getViewFromRoute()) {
+  _pendingAnalyticsView = viewName;
+  if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+  if (!window.goatcounter || typeof window.goatcounter.count !== "function") return;
+
+  const path = getAnalyticsPath(viewName);
+  if (path === _lastAnalyticsPath) return;
+
+  _lastAnalyticsPath = path;
+  _pendingAnalyticsView = null;
+  try {
+    window.goatcounter.count({
+      path,
+      title: `Escrevaral — ${ANALYTICS_VIEW_TITLES[viewName] || "Editor"}`,
+    });
+  } catch {
+    // Analytics nunca deve interromper a escrita.
+  }
+}
+
+window.addEventListener("escrevaral:analytics-ready", () => {
+  trackAnalyticsView(_pendingAnalyticsView || getViewFromRoute());
+});
+
 function setView(viewName, options = {}) {
   if (!VIEW_ROUTES.has(viewName)) {
     return;
@@ -73,6 +114,8 @@ function setView(viewName, options = {}) {
   if (options.updateRoute) {
     updateRouteForView(viewName, options.routeMode);
   }
+
+  trackAnalyticsView(viewName);
 }
 
 function applyPanelLayout() {
@@ -102,7 +145,7 @@ function togglePanel(side) {
   }
 
   applyPanelLayout();
-  persistState("Pronto para escrever");
+  persistState("Pronto");
 }
 
 const DARK_MODE_KEY = "vereda:dark-mode";
@@ -124,11 +167,50 @@ function applyDarkMode(isDark) {
 
 function closeThemeMenu() { /* noop — menu de temas removido */ }
 
+// Sinal progressivo: há teclado físico conectado?
+// Detectado via keydown real enquanto o visualViewport não está encolhido —
+// se a tela já está reduzida, o teclado virtual provavelmente está aberto.
+let _physicalKeyboard = false;
+let _vvhBase = window.visualViewport?.height ?? window.innerHeight;
+document.addEventListener("keydown", (e) => {
+  if (!e.isTrusted) return;
+  const currentHeight = window.visualViewport?.height ?? window.innerHeight;
+  if (currentHeight / _vvhBase < 0.85) return; // viewport encolhido: teclado virtual ativo
+  if (e.key.length === 1 || ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","Tab","Backspace","Delete","Home","End","Enter"].includes(e.key)) {
+    _physicalKeyboard = true;
+  }
+}, { capture: true, passive: true });
+if (window.visualViewport) {
+  window.visualViewport.addEventListener("resize", () => {
+    const ratio = window.visualViewport.height / _vvhBase;
+    if (ratio < 0.85) _physicalKeyboard = false;
+    else _vvhBase = window.visualViewport.height; // altura estável: atualiza base
+  }, { passive: true });
+}
+
+// Foca o editor sem retry agressivo — para momentos em que escrever é a intenção explícita.
+function focusEditor() {
+  if (typeof focusEditorTarget === "function") {
+    focusEditorTarget();
+    return;
+  }
+
+  writingArea?.focus();
+}
+
+// Foca o editor só em dispositivos não-touch ou quando teclado físico detectado —
+// para navegação (abrir manuscrito do arquivo), onde a pessoa pode querer ler antes de escrever.
+function focusEditorOnNavigate() {
+  if (_physicalKeyboard || !window.matchMedia("(pointer: coarse)").matches) {
+    focusEditor();
+  }
+}
+
 function enterFocusMode() {
-  setView("editor");
+  setView("editor", { updateRoute: true });
   shell.classList.add("is-focus");
   applyFocusSettings();
-  writingArea.focus();
+  focusEditor();
 }
 
 function exitFocusMode() {
@@ -169,7 +251,7 @@ function applyTemplateLayout() {
 
   templatePanelToggles.forEach((toggle) => {
     const isHeaderToggle = toggle.closest(".template-reference-header");
-    const label = state.template.open ? "Ocultar guia de escrita" : "Mostrar guia de escrita";
+    const label = state.template.open ? "Ocultar guia" : "Mostrar guia";
     const hasText = countWords(getActiveManuscript()?.text || writingArea?.innerText || "") > 0;
     const hint = hasText ? label : "Abra o guia para ver a estrutura da forma. A conversa com o guia aparece após as primeiras linhas.";
     toggle.setAttribute("aria-expanded", String(state.template.open));
@@ -182,7 +264,7 @@ function applyTemplateLayout() {
     }
     // Atualiza texto visível no botão da barra do editor
     const textNode = [...toggle.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-    if (textNode) textNode.textContent = state.template.open ? " Ocultar guia de escrita" : " Mostrar guia de escrita";
+    if (textNode) textNode.textContent = state.template.open ? " Ocultar guia" : " Mostrar guia";
   });
 }
 
@@ -514,12 +596,7 @@ function addManuscript(manuscript, status) {
   closeCreateNote();
   persistState(status);
   setView("editor");
-  requestAnimationFrame(() => {
-    writingArea?.focus();
-    if (document.activeElement !== writingArea) {
-      setTimeout(() => writingArea?.focus(), 60);
-    }
-  });
+  requestAnimationFrame(() => focusEditor());
   checkProgress();
 }
 
@@ -534,7 +611,7 @@ function createQuickNote() {
     type: type.id,
     kind: type.kind,
     chapter: type.chapter,
-    description: type.id === "manuscrito" ? "Ideia solta, cena breve ou lembrete de escrita." : createProjectNoteDescription(type),
+    description: type.id === "manuscrito" ? "Ideia solta, cena breve ou anotação." : createProjectNoteDescription(type),
     ...(folder ? { folder } : {}),
     ...(createNoteParentId ? { parentId: createNoteParentId } : {}),
   });
@@ -855,7 +932,7 @@ function renderTemplateStudio() {
     return;
   }
   if (!VeredaTemplates.isLoaded()) {
-    if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Carregando guias de escrita…</p>`;
+    if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Carregando guias…</p>`;
     VeredaTemplates.ready().then(renderTemplateStudio);
     return;
   }
@@ -1093,7 +1170,7 @@ function selectReferenceTemplate(templateId) {
   state.template.selectedId = templateId;
   renderTemplateReference();
   renderSpecializedEditor(getActiveManuscript());
-  persistState("Guia de escrita selecionado");
+  persistState("Guia selecionado");
 }
 
 function toggleTemplateSide() {
@@ -1106,7 +1183,7 @@ function toggleTemplateSide() {
 function toggleTemplatePanel() {
   state.template.open = !state.template.open;
   applyTemplateLayout();
-  persistState(state.template.open ? "Guia de escrita aberto" : "Guia de escrita oculto");
+  persistState(state.template.open ? "Guia aberto" : "Guia oculto");
 }
 
 function updateTemplateWidth(clientX) {
@@ -1218,6 +1295,8 @@ const ACTION_HANDLERS = {
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
   "scroll-rights":           () => rightsLab?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "go-autoria":              () => setView("autoria", { updateRoute: true }),
+  "toggle-typewriter-sound": () => _toggleTypewriterSound(),
   
   "voice-use-active":        () => useActiveManuscriptForVoice(),
   "voice-analyze":           () => renderVoiceMirror(),
@@ -1237,7 +1316,7 @@ const ACTION_HANDLERS = {
   "welcome-autoria":         () => handleWelcomeAutoria(),
   "welcome-blank":           () => handleWelcomeBlank(),
   "switch-view-editor":      () => setView("editor", { updateRoute: true }),
-  "open-active-manuscript":  () => { setView("editor"); writingArea.focus(); },
+  "open-active-manuscript":  () => { setView("editor", { updateRoute: true }); focusEditor(); },
   "hint-goto-academia":      () => { hideAcademiaHint(); hintDismissed = true; setView("academia", { updateRoute: true }); },
   "hint-dismiss":            () => { hideAcademiaHint(); hintDismissed = true; },
   "install-app":             () => installApp(),
@@ -1976,6 +2055,29 @@ function toggleAudioPanel() {
   panel.hidden = !panel.hidden;
 }
 
+function _toggleTypewriterSound() {
+  if (!window.VeredaTypewriter) return;
+  VeredaTypewriter.toggle().then(() => {
+    const btn = document.getElementById("typewriter-toggle");
+    if (btn) btn.setAttribute("aria-pressed", String(VeredaTypewriter.isEnabled()));
+  });
+}
+
+function _handleTypewriterKeydown(e) {
+  if (!window.VeredaTypewriter?.isEnabled()) return;
+  if (e.ctrlKey || e.altKey || e.metaKey || e.repeat) return;
+  if (e.key === "Backspace" || e.key === "Delete") VeredaTypewriter.playKey("back");
+  else if (e.key === "Enter") VeredaTypewriter.playKey("enter");
+  else if (e.key.length === 1) VeredaTypewriter.playKey("type");
+}
+
+// Toca apenas nos editores de manuscrito: fluxo e modo Página.
+writingArea?.addEventListener("keydown", _handleTypewriterKeydown, { passive: true });
+pagedEditor?.addEventListener("keydown", (e) => {
+  if (!e.target?.closest(".page-body")) return;
+  _handleTypewriterKeydown(e);
+}, { passive: true });
+
 // ── FICHA DE PERSONAGEM ───────────────────────────────
 const PERSONAGEM_FIELDS = [
   { section:"Identidade",        fields:[
@@ -2110,7 +2212,7 @@ function _bootstrap() {
   registerOfflineApp();
   initializeFilesystemBackup();
   checkFirstVisit();
-  persistState("Pronto para escrever");
+  persistState("Pronto");
 
   // Restaura modo de visualização do editor (página vs. fluxo)
   if (localStorage.getItem("vrda-editor-view") === "pages") setEditorViewMode("pages");
@@ -2124,34 +2226,18 @@ function _bootstrap() {
     const btn = document.querySelector("[data-action='toggle-desk-background']");
     if (btn) btn.setAttribute("aria-pressed", "true");
   }
-}
 
-function _fetchVisitors() {
-  if (!navigator.onLine) return;
-  const el = document.querySelector("[data-visitors]");
-  if (!el) return;
-  fetch("https://escrevaral.goatcounter.com/counter//_.json", { cache: "no-store" })
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (!data || !data.count_unique) return;
-      const n = Number(data.count_unique);
-      if (!n) return;
-      el.textContent = n.toLocaleString("pt-BR") + " leitores";
-      el.removeAttribute("hidden");
-    })
-    .catch(() => {});
+  // Restaura estado do som das teclas (default: off)
+  const typewriterBtn = document.getElementById("typewriter-toggle");
+  if (typewriterBtn && window.VeredaTypewriter?.isEnabled()) {
+    typewriterBtn.setAttribute("aria-pressed", "true");
+  }
 }
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", _bootstrap);
 } else {
   _bootstrap();
-}
-
-if (typeof requestIdleCallback === "function") {
-  requestIdleCallback(() => _fetchVisitors(), { timeout: 8000 });
-} else {
-  setTimeout(_fetchVisitors, 4000);
 }
 
 (function () {

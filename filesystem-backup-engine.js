@@ -9,14 +9,14 @@
 
   async function pickBackupFile(suggestedName) {
     if (!isSupported()) {
-      throw new Error("Autosave externo requer Chrome, Edge ou Opera.");
+      throw new Error("Cópia automática no computador requer Chrome, Edge ou Opera.");
     }
 
     const handle = await global.showSaveFilePicker({
       suggestedName,
       types: [
         {
-          description: "Backup Escrevaral",
+          description: "Cópia do Escrevaral",
           accept: {
             "application/vnd.vereda+json": [".esc"],
             "application/json": [".json"],

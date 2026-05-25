@@ -102,19 +102,45 @@ Implementação usada:
 
 ```html
 <script>
-  if (navigator.doNotTrack !== "1" && window.doNotTrack !== "1") {
+  (() => {
+    if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+
+    window.goatcounter = window.goatcounter || {};
+    window.goatcounter.no_onload = true;
+
     const goatcounter = document.createElement("script");
     goatcounter.dataset.goatcounter = "https://escrevaral.goatcounter.com/count";
     goatcounter.async = true;
     goatcounter.src = "https://gc.zgo.at/count.js";
+    goatcounter.addEventListener("load", () => {
+      window.dispatchEvent(new Event("escrevaral:analytics-ready"));
+    });
     document.body.appendChild(goatcounter);
-  }
+  })();
 </script>
 ```
 
 Observação:
 
 Se o navegador sinalizar "não rastrear", o script externo nem é carregado.
+
+Atualização em 2026-05-25:
+
+Como o Escrevaral é uma aplicação de tela única com rotas em hash (`#editor`, `#cronograma`, `#academia`), o rastreamento passou a ser manual:
+
+```txt
+window.goatcounter.no_onload = true
+```
+
+O `app.js` chama `window.goatcounter.count()` quando a rota muda, registrando caminhos como:
+
+```txt
+/#editor
+/#cronograma
+/#autoria
+```
+
+Também foi removida a busca direta por contador público em `/counter//_.json`. Esse endpoint exige configuração específica no painel do GoatCounter e não é necessário para analítica; o painel do GoatCounter é a fonte de verdade.
 
 ## Onde colocar no projeto
 
