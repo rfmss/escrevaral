@@ -30,7 +30,7 @@ arquivos internos. A marca pública, o domínio e o projeto atual são Escrevara
 - [x] escrevaral@gmail.com — feito — 2026-05-24
 
 ### Automática (já vigente — Lei 9.610/98)
-- [x] Copyright notice no rodapé do site — feito — 2026-05-24 (© 2024–2026 Rafael Massena)
+- [x] Copyright notice no rodapé do site — feito — 2026-05-24 (© 2024–2026 Escrevaral)
 - [x] Domínio escrevaral.com registrado — evidência pública de anterioridade
 - [x] Domínio escrevaral.com protegido por Cloudflare — feito — 2026-05-24
 - [x] Repositório GitHub com commits datados — trilha auditável de criação
