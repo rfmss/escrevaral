@@ -2050,6 +2050,28 @@ mark {
   margin-top: 4px;
 }
 
+.version-preview {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.75;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.version-count-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+
+.version-item > div {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+}
+
 .archive-view {
   width: min(1160px, 100%);
 }

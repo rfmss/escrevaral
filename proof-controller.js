@@ -336,12 +336,11 @@ function renderVersionList() {
     return;
   }
 
-  const atLimit = versions.length >= 20;
-  const limitNote = atLimit
-    ? `<p class="muted" style="margin-bottom:.5rem">Limite de 20 versões atingido — a mais antiga é removida a cada nova versão automática.</p>`
-    : "";
+  const MAX_VERSIONS = 20;
+  const atLimit = versions.length >= MAX_VERSIONS;
+  const countNote = `<p class="muted version-count-note">${versions.length} / ${MAX_VERSIONS} versões guardadas${atLimit ? " — a mais antiga é removida a cada nova versão automática" : ""}.</p>`;
 
-  versionList.innerHTML = limitNote + versions
+  versionList.innerHTML = countNote + versions
     .map((version, i) => {
       const createdAt = new Date(version.createdAt).toLocaleString("pt-BR", {
         day: "2-digit",
@@ -360,11 +359,17 @@ function renderVersionList() {
               : "sem alteração de texto")
         : "";
 
+      const preview = (version.text || "").trim().slice(0, 90).replace(/\n+/g, " ");
+      const previewHtml = preview
+        ? `<small class="version-preview">${escapeHtml(preview)}${version.text?.trim().length > 90 ? "…" : ""}</small>`
+        : "";
+
       return `
         <article class="version-item">
           <div>
             <strong>${escapeHtml(version.reason)}</strong>
             <span>${createdAt} · ${version.wordCount} palavras${deltaLabel ? ` · <em>${escapeHtml(deltaLabel)}</em>` : ""}</span>
+            ${previewHtml}
           </div>
           <button class="secondary-button" data-version-restore="${version.id}">Restaurar</button>
         </article>
