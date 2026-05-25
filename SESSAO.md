@@ -1,76 +1,114 @@
 # Sessão autônoma — 2026-05-25
 
-Objetivo: avançar engines de linguagem em direção a 85%+, engine por engine, com commit a cada avanço.
-Concluída em: 2026-05-25 (sessão 2 — continuação após compactação de contexto)
+Objetivo: avançar engines de linguagem e infraestrutura em direção a 82%+, engine por engine, com commit a cada avanço.
+Sessão 3 — continuação após compactação de contexto.
 
 ---
 
-## Resultado da sessão
+## Resultado da sessão 3
 
 | Engine | % antes | % depois | Commit |
 |---|---:|---:|---|
-| Precision / aderência ao guia | 82% | 85% | `235c3e7`... (era de sessão anterior) |
-| Léxico / Biblioteca | 82% | 85% | sessão anterior |
-| Pontuação | 82% | 85% | sessão anterior |
-| Espelho de Voz | 82% | 85% | sessão anterior |
-| Sintaxe | 80% | 85% | sessão anterior |
-| Análise geral | 80% | 85% | `235c3e7` |
-| Validação da prova | 78% | 82% | `10508ef` |
-| Editor / documento | 77% | 82% | `8e09b3b` |
-| Paginação / modo página | 77% | 82% | `f26317f` |
-| Templates / guias | 77% | 85% | `4cabb83` |
-| RimaLab | 73% | 78% | `cdc7958` |
-| Decolonial / vocabulário | 72% | 78% | `46b3ad9` |
+| Validação da prova | 82% | 85% | `aff98cb` |
+| Editor / documento | 82% | 85% | `96621de` |
+| RimaLab | 78% | 82% | `944f84a` |
+| Decolonial / vocabulário | 78% | 82% | `c507fa7` |
+| Versionamento | 80% | 85% | `5f681f2` |
+| Backup / restore | 80% | 85% | `e4af084` |
+| Offline / PWA | 78% | 82% | `52b8d58` |
+| .esc / envelope | 78% | 82% | `e6c2ef5` |
+| Direitos / publicação | 72% | 78% | `6acc738` |
 
 ---
 
-## O que foi feito nesta sessão (sessão 2)
+## O que foi feito nesta sessão (sessão 3)
 
-### Análise geral 80% → 85%
-- `interpretarResultado()`: +3 condições de alerta (tempo-verbal, pronome-ambíguo, abertura-fraca)
-- `fleschLabel`: 5ª faixa "Extremamente denso" (< 20/100)
-- UI: "18 critérios" → "21 critérios", link "42" → "39 critérios"
+### Validação da prova 82% → 85%
+- Histórico de sessões visível via botão `toggle-proof-sessions` no painel de autoria
+- `renderProofSessionHistory()` / `toggleProofSessionHistory()` em proof-controller.js
+- Action wired em app.js
+- CSS: `.proof-session-bar-actions`, `.proof-sessions-history`, `.proof-session-history-row`
+- Labels de timeline: "toque orgânico" / "toque fora do intervalo"
 
-### Validação da prova 78% → 82%
-- `summarize()`: retorna `durationMin` (duração da sessão)
-- HTML: adicionados `data-proof-cadence-hint` e `data-proof-session-info` (controller esperava mas elementos não existiam)
-- Validação: detecta formato v1 vs v2 vs autoria v1, melhora contagem de organic events
-- Timeline padrão: "Aguardando movimentos de escrita" (consistente com controller)
+### Editor/documento 82% → 85%
+- Inspector exibe "Densidade lexical: X%" na seção de leitura fácil
+- Contagem de caracteres (sem espaços) na barra de palavras: "N palavras · P parágrafos · C car."
+- Nuvem de palavras: estado vazio diferencia texto curto de texto ausente
+- `--` → `—` no estado inicial do Flesch
 
-### Editor/documento 77% → 82%
-- `analyzeInspector()`: 5ª faixa Flesch, retorna `lexicalDensity`
-- Tempo de leitura: segundos para < 1min, "Xh Ymin" para ≥ 60min, `Math.round` em vez de `Math.ceil`
-- Empty state: copy mais claro, "—" em vez de "--"
+### RimaLab 78% → 82%
+- `nameScheme()` reconhece 20 esquemas canônicos: quarteto alternado, oitava rima, décima espinela etc.
+- Reindexação automática normaliza letras antes da busca
+- Painel exibe "(quarteto alternado)" ao lado das letras quando reconhece
 
-### Paginação 77% → 82%
-- Print preset-aware: `data-print-preset="book"` → CSS usa `size: A5`; submissão → margens editoriais
-- Rodapé de página: contagem de palavras por página ("N pal.") ao lado do número
+### Decolonial 78% → 82%
+- `listEntries()` classifica resultados de busca por relevância (avoid exato > parcial > alternativas)
+- Observer: resultados ordenados por frequência (mais recorrente primeiro)
+- Entradas contextuais: `border-left` âmbar + "Depende do contexto —" no texto
 
-### Templates 77% → 85%
-- Loading state em `renderTemplateStudio()`: mostra "Carregando guias…" em vez de tela vazia
-- Fallback para `activeTemplate` nulo: usa primeiro template disponível
-- `createBlankManuscript()`: fallbacks de erro agora criam rascunho real
-- `selectCraft()`: preserva `activeId` quando ofício não tem templates
+### Versionamento 80% → 85%
+- Cada versão exibe primeiros 90 caracteres do texto em itálico
+- Contador "X / 20 versões guardadas" acima da lista
 
-### RimaLab 73% → 78%
-- Nome do verso no painel de métricas: "5 sílabas poéticas · redondilha menor"
-- Esquema diferencia rima exata (maiúscula) de toante (minúscula): "A B a B"
-- Elisions: "elisão: palavra + outra" em vez de "⌃" ilegível
+### Backup/restore 80% → 85%
+- Importação: "15 manuscritos e 3 notas trazidos de volta · X palavras"
+- Exportação: "Cópia guardada · N manuscritos · X KB"
+- Corrige: "Seu último cópia" → "Sua última cópia"
 
-### Decolonial 72% → 78%
-- `ensureLoaded()` chamado automaticamente ao carregar o engine
-- `renderDecolonialObserver()`: estados explícitos de loading e erro de rede
-  (antes: mostrava "nenhum alerta" silenciosamente quando dados não carregados)
-- Empty state de busca contextual: diferencia busca sem resultado vs categoria vazia
+### Offline/PWA 78% → 82%
+- Banner "Nova versão disponível" com botão Recarregar + botão fechar
+- Antes: `controllerchange` recarregava automaticamente (invisível para o escritor)
+- Mensagens corrigidas: SW não suportado, falha de registro
+
+### .esc/envelope 78% → 82%
+- `VeredaVrda.summarizeEnvelope()`: retorna `{manuscriptCount, noteCount, totalWords, exportedAt}`
+- `createEnvelope()` aceita `meta` opcional para campos extras
+- Importação usa `summarizeEnvelope` para feedback com contagem de palavras
+
+### Direitos/publicação 72% → 78%
+- Card relevante ao gênero sobe para o topo quando não há busca
+- Busca parcial exibe "X de N cuidados"
+- Estado vazio inclui o termo buscado
+
+---
+
+## Estado atual (após sessão 3)
+
+| Engine | Maturidade |
+|---|---:|
+| Prova de autoria | 85% |
+| Validação da prova | 85% |
+| Editor / documento | 85% |
+| Versionamento | 85% |
+| Backup / restore | 85% |
+| Exportação / impressão | 85% |
+| Arquivo / acervo | 85% |
+| Templates / guias | 85% |
+| Precision / aderência | 85% |
+| Léxico / Biblioteca | 85% |
+| Sintaxe | 85% |
+| Pontuação | 85% |
+| Análise geral | 85% |
+| Espelho de Voz | 85% |
+| Tema Alvorada / Vereda | 88% |
+| RimaLab | 82% |
+| Decolonial | 82% |
+| Offline / PWA | 82% |
+| .esc / envelope | 82% |
+| Paginação / modo página | 82% |
+| Backup externo via File System | 75% |
+| Direitos / publicação | 78% |
 
 ---
 
 ## Próxima sessão
 
-Todos os 12 engines avançados. Engines abaixo de 85%:
-- Validação da prova: 82% — pode avançar para 85% com exportação melhorada
-- Editor/documento: 82% — pode avançar com undo/redo state melhorado
-- RimaLab: 78% — pode avançar para 82% com mais esquemas nomeados (ABAB = "quarteto alternado")
-- Decolonial: 78% — pode avançar com busca semântica e mais categorias
+Engines abaixo de 85%:
+- RimaLab: 82% → pode avançar para 85% com dicionário de rimas e mais feedbacks
+- Decolonial: 82% → pode avançar com mais categorias ou sugestão de alternativas inline
+- Offline/PWA: 82% → pode avançar com cache size display e install prompt melhorado
+- .esc/envelope: 82% → pode avançar com validação por manuscrito individual
+- Paginação: 82% → pode avançar com ajustes de margem por preset e modo leitura
+- Direitos: 78% → pode avançar para 82% com mais cards (LGPD, acessibilidade)
 
 `git log --oneline -20` para ver todos os commits desta sessão.

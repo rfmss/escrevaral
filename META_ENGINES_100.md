@@ -51,36 +51,50 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Estado em 2026-05-24
+## Estado em 2026-05-25
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
 | Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
-| Validacao da prova | 82% | sessao com duracao; formato v1/v2 distinguidos; data-proof-session-info no HTML |
-| `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
-| Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
+| Validacao da prova | 85% | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao |
+| `.esc` / envelope nativo | 82% | summarizeEnvelope(); feedback de importacao com palavras |
+| Backup / restore | 85% | Feedback de importacao com contagem; exportacao com tamanho em KB |
 | Backup externo via File System | 75% | Permissao expirada detectada; timer reinicia apos save manual; sem loop de erro |
-| Versionamento | 80% | Historico com 20 versoes, delta de palavras por versao |
-| Offline / PWA | 78% | Uso local/offline com cache versionado |
-| Editor / documento | 82% | Flesch 5 faixas; WPM com horas; lexicalDensity retornado |
+| Versionamento | 85% | Previa de texto nas versoes; contador X/20 versoes guardadas |
+| Offline / PWA | 82% | Banner de atualizacao com botao; mensagens de erro claras |
+| Editor / documento | 85% | Densidade lexical no inspector; contagem de caracteres; estado vazio diferenciado |
 | Paginacao / modo pagina | 82% | Print preset-aware (A5 imprime A5); contador de palavras por pagina |
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
 | Templates / guias | 85% | Loading state; fallback activeTemplate; createBlankManuscript(); selectCraft robusta |
 | Precision / aderencia ao guia | 85% | +terror-horror, memoir, jornalismo, romance; status labels mais honestos |
 | Lexico / Biblioteca | 85% | Analise local com recuperacao de erro e estado vazio definido |
-| Sintaxe | 85% | Fallback morfologico; todos os estados de erro expliciitos no painel |
+| Sintaxe | 85% | Fallback morfologico; todos os estados de erro explicitos no painel |
 | Pontuacao | 85% | 36 regras; PONT-49 mas adversativo; PONT-47 refinada |
 | Analise geral | 85% | 16 condicoes de alerta; pronome-ambiguo, tempo-verbal, abertura-fraca; 21 criterios |
 | Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
-| RimaLab | 78% | Nome do verso no painel; esquema maiuscula/minuscula (exato/toante); elisions com " + " |
-| Decolonial / vocabulario | 78% | ensureLoaded() automatico; observer com loading/erro explícito; busca contextual |
-| Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
+| RimaLab | 82% | nameScheme() reconhece 20 esquemas; quarteto alternado, oitava rima, decima espinela |
+| Decolonial / vocabulario | 82% | Busca por relevancia; observer ordenado por frequencia; badge contextual |
+| Direitos / publicacao | 78% | Card relevante ao topo; contador de busca; estado vazio com termo buscado |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v261 / 2026-05-25
+
+**Sessao autonoma 3 — 9 engines avancados**
+
+- Validacao da prova: 82% → 85% | historico de sessoes, toggle-proof-sessions, CSS proof-sessions-history
+- Editor/documento: 82% → 85% | densidade lexical vísivel, contagem de caracteres, estado vazio diferenciado
+- RimaLab: 78% → 82% | nameScheme() com 20 esquemas canonicos, reindexacao automatica
+- Decolonial: 78% → 82% | busca por relevancia, observer por frequencia, badge contextual ambar
+- Versionamento: 80% → 85% | previa de 90 chars por versao, contador X/20
+- Backup/restore: 80% → 85% | importacao com palavras, exportacao com KB, concordancia feminina
+- Offline/PWA: 78% → 82% | banner de atualizacao com botao, mensagens corrigidas
+- .esc/envelope: 78% → 82% | summarizeEnvelope(), createEnvelope com meta opcional
+- Direitos/publicacao: 72% → 78% | card relevante ao topo, contador de busca, empty state
 
 ### Marco — v252 / 2026-05-25
 
-**Sessao autonoma — 8 engines avancados**
+**Sessao autonoma 2 — 8 engines avancados**
 
 - Analise geral: 80% → 85% | +3 alertas (pronome-ambiguo, tempo-verbal, abertura-fraca), Flesch 5 faixas, 21 criterios
 - Validacao da prova: 78% → 82% | duracao de sessao, formato v1/v2, atributos HTML faltando adicionados
