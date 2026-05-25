@@ -1,7 +1,9 @@
 // punctuation-engine.js — análise de pontuação funcional em português brasileiro
 // Fontes: Bechara MGP §§ 597-640 · Cunha & Cintra pp. 648-682
 //         Moreno "Guia prático" · Squarisi "1001 Dicas"
-// 28 regras: 22 por padrão textual + 6 via syntax-engine (analyzeDeep)
+// 36 regras: 23 por padrão textual + 7 via syntax-engine (analyzeDeep)
+// Fix: PONT-46 duplicado resolvido (voz passiva renomeada para PONT-48)
+// Novo: PONT-49 vírgula antes de "mas" adversativo
 
 (function (global) {
   "use strict";
@@ -454,34 +456,55 @@
     },
 
     {
-      id: "PONT-46", categoria: "voz passiva analítica — agente sem preposição 'por'",
+      id: "PONT-48", categoria: "voz passiva analítica — agente sem preposição 'por'",
       fonte: "Bechara Lições §voz passiva; Cunha & Cintra cap.7",
       criterio: "O agente da passiva é introduzido pela preposição 'por' (pelo/pela/pelos/pelas). Não usar 'de' como agente em voz passiva de ação.",
       exemplo: "O romance foi escrito por Machado.",
       contraexemplo: "O romance foi escrito de Machado.",
       severity: "média",
       detect(text) {
-        // "foi/foi/foram" + particípio + "de" (sem ser "pelo/pela")
         return all(/\b(foi|foram|é|são|era|eram|será|serão)\s+\w+(ado|ada|idos|idas|ito|ita|tos|tas|to|ta)\s+de\s+(?!acordo|forma|modo|maneira|jeito)/g, text);
       },
     },
 
     {
-      id: "PONT-47", categoria: "vírgula obrigatória — conjunção 'e' entre orações com sujeitos diferentes",
+      id: "PONT-49", categoria: "vírgula obrigatória — 'mas' adversativo sem vírgula",
+      fonte: "Bechara § 623 (b); Moreno p. 42; Cunha & Cintra p. 657",
+      criterio: "A conjunção adversativa 'mas' ligando orações coordenadas exige vírgula antes.",
+      exemplo: "Ela tentou, mas não conseguiu.",
+      contraexemplo: "Ela tentou mas não conseguiu.",
+      severity: "alta",
+      detect(text) {
+        const issues = [];
+        const re = /\b([a-záàâãéèêíîóòôõúùûç]{3,})\s+mas\s+(?!sim\b)/gi;
+        let m;
+        while ((m = re.exec(text)) !== null) {
+          const before = text.slice(Math.max(0, m.index - 2), m.index + m[1].length);
+          if (!before.endsWith(",")) {
+            issues.push({ fragment: m[0].trim().slice(0, 80), pos: m.index });
+          }
+        }
+        return issues;
+      },
+    },
+
+    {
+      id: "PONT-47", categoria: "vírgula obrigatória — conjunção 'e' entre orações longas com sujeitos diferentes",
       fonte: "Bechara § 623 (b); Moreno p. 44; Cunha & Cintra p. 658",
       criterio: "A conjunção 'e' ligando orações com sujeitos diferentes pede vírgula antes para evitar ambiguidade.",
-      exemplo: "Os Estados Unidos atacaram o Iraque, e a Rússia reagiu.",
-      contraexemplo: "Os Estados Unidos atacaram o Iraque e a Rússia reagiu.",
+      exemplo: "Os Estados Unidos atacaram o Iraque, e a Rússia reagiu imediatamente.",
+      contraexemplo: "Os Estados Unidos atacaram o Iraque e a Rússia reagiu imediatamente.",
       severity: "média",
       detect(text) {
-        // SN + "e" + Maiúscula (novo sujeito sem vírgula antes)
-        // Padrão: palavra minúscula + espaço + "e" + espaço + maiúscula + minúscula
-        return all(/\b[a-záàâãéèêíîóòôõúùûç]{3,}\s+e\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záàâãéèêíîóòôõúùûç]/g, text)
-          .filter(i => {
-            const pos = text.indexOf(i.fragment);
-            const before = text.slice(Math.max(0, pos - 3), pos);
-            return !before.includes(",");
-          });
+        const issues = [];
+        // Padrão mais restrito: verbo + "e" + pronome sujeito (evita falsos positivos com nomes)
+        const re = /\b(chegou|saiu|voltou|entrou|fugiu|correu|falou|disse|respondeu|escreveu|publicou|criou|tentou|conseguiu|percebeu|descobriu)\s+e\s+(ele|ela|eles|elas|eu|nós|você|vocês)\s/gi;
+        let m;
+        while ((m = re.exec(text)) !== null) {
+          const before = text.slice(Math.max(0, m.index - 2), m.index);
+          if (!before.endsWith(",")) issues.push({ fragment: m[0].trim().slice(0, 80), pos: m.index });
+        }
+        return issues;
       },
     },
 
