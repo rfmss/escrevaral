@@ -435,6 +435,53 @@
     };
   }
 
+  // ── Nomeação de esquemas canônicos ────────────────────────────────────────────
+  const SCHEME_NAMES = {
+    // Dísticos
+    "A A":           "dístico rimado",
+    // Tercetos
+    "A A A":         "terceto monorrimo",
+    "A B A":         "terceto",
+    "A B B":         "terceto",
+    // Quartetos
+    "A B A B":       "quarteto alternado",
+    "A A B B":       "quarteto emparelhado",
+    "A B B A":       "quarteto abrazado",
+    "A A A A":       "quarteto monorrimo",
+    "A B C B":       "quarteto popular",
+    // Quintilhas
+    "A A B A B":     "quintilha",
+    "A B A A B":     "quintilha",
+    "A A B B A":     "quintilha",
+    // Sextilhas
+    "A B A B A B":   "sextilha alternada",
+    "A A B C C B":   "sextilha abrazada",
+    "A A B A A B":   "sextilha",
+    "A B C A B C":   "sextilha",
+    // Oitavas
+    "A B A B A B C C": "oitava rima",
+    "A B A B C D C D": "oitava alternada",
+    // Décimas
+    "A B B A A C C D D C": "décima espinela",
+  };
+
+  function nameScheme(schemeStr) {
+    if (!schemeStr) return "";
+    // Normaliza para letras maiúsculas para busca canônica
+    const normalized = schemeStr.toUpperCase();
+    const direct = SCHEME_NAMES[normalized];
+    if (direct) return direct;
+    // Tenta reindexar (A B C → A B A quando padrão bate com renomeação)
+    const letters = normalized.split(" ").filter(l => /[A-Z]/.test(l));
+    const remap = {};
+    let code = 65;
+    const reindexed = letters.map(l => {
+      if (!remap[l]) remap[l] = String.fromCharCode(code++);
+      return remap[l];
+    }).join(" ");
+    return SCHEME_NAMES[reindexed] || "";
+  }
+
   // ── API pública ───────────────────────────────────────────────────────────────
   global.VeredaRimaLab = {
     analyze,
@@ -442,6 +489,7 @@
     classifyTonicity,
     syllabify,
     scanVerse,
+    nameScheme,
     getEncyclopedia,
     ensureLoaded,
     isLoaded:     () => _dataLoaded,

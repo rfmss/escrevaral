@@ -184,11 +184,16 @@ async function renderRimaLab() {
 
   if (rimalabScheme) {
     if (analysis.stanzas) {
-      rimalabScheme.innerHTML = analysis.stanzas
-        .map((st, i) => `<span class="rimalab-stanza-scheme"><em>Est. ${i + 1}</em> ${escapeHtml(st.scheme)}</span>`)
-        .join(" · ");
+      rimalabScheme.innerHTML = analysis.stanzas.map((st, i) => {
+        const name = VeredaRimaLab.nameScheme(st.scheme);
+        return `<span class="rimalab-stanza-scheme"><em>Est. ${i + 1}</em> ${escapeHtml(st.scheme)}${name ? ` <small>(${escapeHtml(name)})</small>` : ""}</span>`;
+      }).join(" · ");
     } else {
-      rimalabScheme.textContent = analysis.rhymeScheme || "Esquema: escreva ao menos um verso";
+      const scheme = analysis.rhymeScheme || "";
+      const name = scheme ? VeredaRimaLab.nameScheme(scheme) : "";
+      rimalabScheme.innerHTML = scheme
+        ? `${escapeHtml(scheme)}${name ? ` <small>(${escapeHtml(name)})</small>` : ""}`
+        : "Esquema: escreva ao menos um verso";
     }
   }
 }
