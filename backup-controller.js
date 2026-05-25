@@ -304,7 +304,8 @@ async function importBackup(file) {
       noteCount > 0 ? `${noteCount} ${noteCount === 1 ? "nota" : "notas"}` : "",
     ].filter(Boolean);
     const wordsPart = totalWords > 0 ? ` · ${totalWords.toLocaleString("pt-BR")} palavras` : "";
-    saveStatus.textContent = parts.length ? `${parts.join(" e ")} trazidos de volta${wordsPart}` : "Acervo restaurado";
+    const singular = (msCount + noteCount) === 1;
+    saveStatus.textContent = parts.length ? `${parts.join(" e ")} ${singular ? "trazido" : "trazidos"} de volta${wordsPart}` : "Acervo restaurado";
     setView("arquivo");
   } catch (error) {
     saveStatus.textContent = error.message;

@@ -80,7 +80,7 @@ Pergunta padrao da sessao:
 | Versionamento | 85% | Previa de texto nas versoes; contador X/20 versoes guardadas |
 | Offline / PWA | 82% | Banner de atualizacao com botao; mensagens de erro claras |
 | Editor / documento | 85% | Densidade lexical no inspector; contagem de caracteres; estado vazio diferenciado |
-| Paginacao / modo pagina | 82% | Print preset-aware (A5 imprime A5); contador de palavras por pagina |
+| Paginacao / modo pagina | 85% | Print preset-aware (A5 imprime A5); contador de palavras por pagina; mobile sem overflow |
 | Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
 | Templates / guias | 85% | Loading state; fallback activeTemplate; createBlankManuscript(); selectCraft robusta |
@@ -94,6 +94,14 @@ Pergunta padrao da sessao:
 | Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
 | Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v275 / 2026-05-25
+
+**Paginacao / modo pagina: 82% → 85%**
+
+- `css/08-responsive.css`: `@media (max-width: 820px)` — `.manuscript-page { width: 100%; height: auto }`, `.page-body { height: auto; overflow: visible }`, `.paged-editor { overflow-x: hidden }`. Remove overflow horizontal em phones (210mm = 793px > 390px viewport)
+- `backup-controller.js`: concordancia verbal no feedback de import — `(msCount + noteCount) === 1` → "trazido" (singular); plural "trazidos" mantido
+- Verificado Playwright: mobile 390px largura_pg=343px sem overflow; desktop 1280px largura_pg=794px sem regressão
 
 ### Marco — v274 / 2026-05-25
 

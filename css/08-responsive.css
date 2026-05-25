@@ -301,3 +301,26 @@
   .offline-badge,
   .desk-bg-toggle { display: none; }
 }
+
+/* ── MODO PÁGINAS — responsivo em telas estreitas ────────────────────────
+   Acima de 820px: páginas A4 em tamanho físico (210mm), scroll horizontal OK.
+   Abaixo de 820px: páginas adaptam à largura do viewport — sem scroll lateral.
+   Proporção A4 e quebras de página mantidas; padding reduzido. ── */
+@media (max-width: 820px) {
+  .paged-editor {
+    overflow-x: hidden;
+    padding: 16px 0 48px;
+    margin: 0;
+  }
+  .manuscript-page {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+  }
+  .page-body {
+    height: auto;
+    overflow: visible;
+    padding: 20px 16px;
+  }
+}
