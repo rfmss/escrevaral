@@ -271,3 +271,9 @@
   .leitura-editorial-grid { grid-template-columns: 1fr; }
 }
 
+.secondary-button[data-action="clear-rimalab"]:hover {
+  color: var(--sienna);
+  border-color: color-mix(in srgb, var(--sienna) 40%, transparent);
+  background: color-mix(in srgb, var(--sienna) 6%, transparent);
+}
+

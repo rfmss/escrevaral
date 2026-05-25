@@ -84,6 +84,7 @@
 
 .editor-delete-btn:hover {
   color: var(--sienna);
-  opacity: 0.85;
+  opacity: 1;
+  background: color-mix(in srgb, var(--sienna) 10%, transparent);
 }
 

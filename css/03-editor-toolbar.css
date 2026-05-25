@@ -192,7 +192,8 @@
   cursor: pointer;
   transition: background var(--motion-quick), color var(--motion-quick);
 }
-.editor-view-btn.is-active {
+.editor-view-btn.is-active,
+.editor-view-btn[aria-pressed="true"] {
   background: var(--card);
   color: var(--primary);
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);

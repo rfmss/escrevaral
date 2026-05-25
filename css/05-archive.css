@@ -302,11 +302,16 @@
   transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
 }
 
-.archive-filter:hover,
+.archive-filter:hover {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  color: var(--primary);
+}
+
 .archive-filter.is-active {
   border-color: var(--primary);
-  background: var(--primary);
-  color: var(--on-primary);
+  background: color-mix(in srgb, var(--primary) 14%, var(--card));
+  color: var(--primary);
 }
 
 .archive-filter .material-symbols-outlined {
@@ -324,8 +329,8 @@
 
 .archive-filter.is-active b,
 .archive-filter:hover b {
-  background: var(--on-primary-soft);
-  color: var(--on-primary);
+  background: color-mix(in srgb, var(--primary) 20%, var(--card));
+  color: var(--primary);
 }
 
 .pinned-documents,
