@@ -74,7 +74,7 @@ Pergunta padrao da sessao:
 |---|---:|---|
 | Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
 | Validacao da prova | 85% | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao |
-| `.esc` / envelope nativo | 82% | summarizeEnvelope(); feedback de importacao com palavras |
+| `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
 | Backup / restore | 85% | Feedback de importacao com contagem; exportacao com tamanho em KB |
 | Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
 | Versionamento | 85% | Previa de texto nas versoes; contador X/20 versoes guardadas |
@@ -94,6 +94,15 @@ Pergunta padrao da sessao:
 | Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
 | Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v274 / 2026-05-25
+
+**.esc / envelope nativo: 82% → 85%**
+
+- `parseEnvelope()`: `JSON.parse` em try/catch → "Arquivo .esc ilegível ou corrompido." (antes: SyntaxError crua do browser)
+- `validateEnvelope()`: detecta `vereda.proof.*` e `escrevaral.autoria.*` antes do check de formato → "Este arquivo é uma cópia de autoria, não um acervo. Abra a aba Prova de autoria para verificá-lo."
+- Ciclo feliz, checksum adulterado, versão futura e extensão errada: sem regressão
+- Backlog registrado: importação assistida de `.vrda` legado (decisão de produto, não bug)
 
 ### Marco — v266 / 2026-05-25
 
