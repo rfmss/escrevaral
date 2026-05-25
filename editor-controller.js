@@ -182,12 +182,12 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
           </div>`;
         }).join("")}
       </div>
-      <p class="voice-criterios-note">18 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 42 critérios →</a></p>
+      <p class="voice-criterios-note">21 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 39 critérios →</a></p>
     </div>
   ` : criterios ? `
     <div class="voice-criterios voice-criterios--ok">
       <h4>Análise editorial — nenhum alerta</h4>
-      <p class="voice-criterios-note">Os 18 critérios computados não detectaram padrões de atenção neste trecho. Isso não substitui a revisão humana.</p>
+      <p class="voice-criterios-note">Os 21 critérios computados não detectaram padrões de atenção neste trecho. Isso não substitui a revisão humana.</p>
     </div>
   ` : "";
 

@@ -4,10 +4,10 @@
  * Implementa as métricas computáveis sem LLM: regex, listas locais, estatísticas de frase.
  * Todas as operações são locais — nada é enviado para servidores.
  *
- * Métricas implementadas (21/39):
+ * Métricas implementadas (21/39) | Condições de alerta: 16
  *   Economia:   adverbios-mente, voz-passiva, redundancia, negacao-dupla
- *   Clareza:    comprimento-frase, pronome-ambiguo, tempo-verbal, subordinacao
- *   Ritmo:      variacao-frase, distribuicao-frase, repeticao-proxima, abertura-fecho
+ *   Clareza:    comprimento-frase, pronome-ambiguo, tempo-verbal, subordinacao, flesch-legib
+ *   Ritmo:      variacao-frase, distribuicao-frase, repeticao-proxima, abertura-fraca
  *   Voz:        cliche
  *   Estrutura:  proporcao-partes, transicoes
  *   POV:        consistencia-pessoa
@@ -451,7 +451,7 @@
         totalFrases,
         totalParagrafos,
         fleschBR: flesch,
-        fleschLabel: flesch >= 80 ? "Fácil" : flesch >= 60 ? "Moderado" : flesch >= 40 ? "Denso" : "Muito denso",
+        fleschLabel: flesch >= 80 ? "Fácil" : flesch >= 60 ? "Moderado" : flesch >= 40 ? "Denso" : flesch >= 20 ? "Muito denso" : "Extremamente denso",
       },
       economia:  analisarEconomia(texto, frases, totalPalavras),
       clareza:   analisarClareza(frases, totalPalavras),
@@ -518,6 +518,15 @@
 
     if (resultado.meta.fleschBR < 30 && resultado.meta.totalPalavras > 100)
       alertas.push({ dim: "clareza", id: "flesch-denso", nivel: "moderado", msg: `Legibilidade ${resultado.meta.fleschBR}/100 (${resultado.meta.fleschLabel}). Texto muito exigente — verifique se é intencional para o público-alvo.` });
+
+    if (clareza.tempoVerbal?.frasesComMistura > 2 && resultado.meta.totalFrases > 10)
+      alertas.push({ dim: "clareza", id: "tempo-verbal", nivel: "moderado", msg: `${clareza.tempoVerbal.frasesComMistura} frases misturam presente e passado na mesma sentença. Verifique se a alternância é intencional ou sinal de inconsistência.` });
+
+    if (clareza.pronomeAmbiguo?.suspeitas > 3)
+      alertas.push({ dim: "clareza", id: "pronome-ambiguo", nivel: "moderado", msg: `${clareza.pronomeAmbiguo.suspeitas} frases com pronomes de 3ª pessoa em contexto denso. Verifique se o referente está claro para o leitor.` });
+
+    if (ritmo.aberturaFracos?.aberturasFracas >= 3 && resultado.meta.totalParagrafos >= 3)
+      alertas.push({ dim: "ritmo", id: "abertura-fraca", nivel: "moderado", msg: `${ritmo.aberturaFracos.aberturasFracas} parágrafos começam com artigo, conjunção ou verbo fraco. Inicie mais parágrafos com substantivo, verbo de ação ou advérbio forte.` });
 
     return alertas.sort((a, b) => (a.nivel === "alto" ? -1 : 1) - (b.nivel === "alto" ? -1 : 1));
   }
