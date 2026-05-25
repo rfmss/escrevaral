@@ -114,8 +114,12 @@ function applyColorTheme() {
 
 function applyDarkMode(isDark) {
   document.documentElement.dataset.theme = isDark ? "scriptorium" : "";
-  const btn = document.querySelector("[data-action=\'toggle-dark-mode\']");
-  if (btn) btn.setAttribute("aria-pressed", String(isDark));
+  const btn = document.querySelector("[data-action='toggle-dark-mode']");
+  if (btn) {
+    btn.setAttribute("aria-pressed", String(isDark));
+    btn.title = isDark ? "Mudar para Alvorada" : "Mudar para Vereda";
+    btn.setAttribute("aria-label", isDark ? "Mudar para Alvorada" : "Mudar para Vereda");
+  }
 }
 
 function closeThemeMenu() { /* noop — menu de temas removido */ }
@@ -1211,6 +1215,7 @@ const ACTION_HANDLERS = {
     if (btn) btn.setAttribute("aria-pressed", String(!isPages));
   },
   "export-proof":            () => exportProof(),
+  "stamp-blockchain":        () => stampWithOpenTimestamps(),
   "validate-proof-file":     () => document.querySelector("[data-proof-validate-input]")?.click(),
   "new-proof-session":       () => startNewProofSession(),
   "export-backup":           () => exportBackup(),
@@ -1405,7 +1410,7 @@ document.addEventListener("keydown", (event) => {
     exitFocusMode();
   }
 
-  if (event.key === "Escape" && themeMenu.classList.contains("is-visible")) {
+  if (event.key === "Escape" && themeMenu?.classList.contains("is-visible")) {
     closeThemeMenu();
   }
 
@@ -2073,8 +2078,45 @@ function _bootstrap() {
   }
 }
 
+function _fetchVisitors() {
+  if (!navigator.onLine) return;
+  const el = document.querySelector("[data-visitors]");
+  if (!el) return;
+  fetch("https://escrevaral.goatcounter.com/counter//_.json", { cache: "no-store" })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (!data || !data.count_unique) return;
+      const n = Number(data.count_unique);
+      if (!n) return;
+      el.textContent = n.toLocaleString("pt-BR") + " leitores";
+      el.removeAttribute("hidden");
+    })
+    .catch(() => {});
+}
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", _bootstrap);
 } else {
   _bootstrap();
 }
+
+if (typeof requestIdleCallback === "function") {
+  requestIdleCallback(() => _fetchVisitors(), { timeout: 8000 });
+} else {
+  setTimeout(_fetchVisitors, 4000);
+}
+
+(function () {
+  const link = document.querySelector("[data-contact-email]");
+  const note = document.querySelector("[data-offline-note]");
+  if (!link || !note) return;
+  let _noteTimer;
+  link.addEventListener("click", function (e) {
+    if (!navigator.onLine) {
+      e.preventDefault();
+      note.removeAttribute("hidden");
+      clearTimeout(_noteTimer);
+      _noteTimer = setTimeout(() => note.setAttribute("hidden", ""), 4000);
+    }
+  });
+})();

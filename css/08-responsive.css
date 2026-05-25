@@ -96,6 +96,7 @@
   /* Garantir que textos de status não cortam */
   .statusbar { font-size: 9px; gap: 8px; }
   .statusbar > * { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
+  .statusbar-copyright { display: none; }
 
   /* Arquivo: headings não extravasam */
   .archive-heading { gap: 6px; }
@@ -180,6 +181,29 @@
   }
   .template-copy { min-height: 0; }
   .template-phone { width: 100%; max-width: 380px; margin: 0 auto; }
+
+  /* Academia: ferramentas de duas colunas colapsam */
+  .rimalab-tool,
+  .rimalab-workbench,
+  .decolonial-tool,
+  .rights-lab {
+    grid-template-columns: 1fr;
+  }
+
+  /* Garantir que textareas e editores não vazam */
+  .rimalab-editor,
+  .decolonial-tool textarea,
+  .rights-lab textarea,
+  .rimalab-tool textarea {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Arquivo: backup externo colapsa */
+  .filesystem-backup {
+    grid-template-columns: 1fr;
+  }
 
   /* Arquivo: área de backup e cópias sem overflow */
   .archive-backup-actions {

@@ -156,6 +156,21 @@
     };
   }
 
+  async function createAuthorshipPackage(record, manuscript) {
+    const proof = await createProofDocument(record, manuscript);
+    return {
+      format: "escrevaral.autoria.v1",
+      generatedAt: proof.generatedAt,
+      author: {
+        domain: "escrevaral.com",
+        produto: "Escrevaral",
+      },
+      manuscript: proof.manuscript,
+      session: proof.session,
+      summary: proof.summary,
+    };
+  }
+
   async function createProofDocument(record, manuscript) {
     const session = getActiveSession(record);
     const summary = summarize(session);
@@ -264,6 +279,7 @@
     createRecord,
     createSession,
     createProofDocument,
+    createAuthorshipPackage,
     getActiveSession,
     recordKeyEvent,
     recordStructuralEvent,

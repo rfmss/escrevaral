@@ -1827,6 +1827,25 @@ mark {
   padding: 16px;
 }
 
+.proof-blockchain-section {
+  margin: 0 0 24px;
+  display: grid;
+  gap: 10px;
+}
+.proof-blockchain-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.proof-stamp-status {
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+.proof-stamp-status[hidden] { display: none; }
+.proof-blockchain-section p { margin: 0; }
+.proof-blockchain-section code { font-size: 0.82em; }
+
 .proof-validate-section {
   margin: 0 0 24px;
   display: grid;

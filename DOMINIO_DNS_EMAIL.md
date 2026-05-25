@@ -1,13 +1,29 @@
-# Domínio, DNS e e-mail — Escrevaral
+# Dominio, DNS, HTTPS e e-mail - Escrevaral
 
-Data: 2026-05-23
+Data-base: 2026-05-24
 
-## Contexto
+Este documento e o caminho das pedras para qualquer pessoa ou IA que precise
+entender como o dominio principal do Escrevaral esta publicado, protegido e
+redirecionando para HTTPS.
 
-Domínio principal do projeto:
+## Contexto atual
+
+Projeto atual:
 
 ```txt
-escrevaral.com
+Escrevaral
+```
+
+Pasta oficial de trabalho:
+
+```txt
+/home/rafamass/escrevaral/
+```
+
+Dominio canonico:
+
+```txt
+https://escrevaral.com/
 ```
 
 Registrador:
@@ -16,300 +32,245 @@ Registrador:
 Spaceship
 ```
 
-Repositório publicado:
+DNS e proxy:
+
+```txt
+Cloudflare Free
+```
+
+Hospedagem:
+
+```txt
+GitHub Pages
+```
+
+Repositorio:
 
 ```txt
 https://github.com/rfmss/escrevaral
 ```
 
-Domínio canônico do site:
+Importante: "Vereda" aparece em arquivos antigos e em partes internas do codigo,
+mas deve ser tratado como legado/historico. A marca e o projeto publico atual sao
+Escrevaral.
+
+## Estado final da configuracao
+
+Em 2026-05-24, o dominio foi migrado para a Cloudflare para resolver o problema
+de acesso quando a pessoa digitava apenas:
 
 ```txt
-https://escrevaral.com/
+escrevaral.com
 ```
 
-## Situação no GitHub
-
-Já foi enviado para o GitHub:
-
-1. `CNAME` com `escrevaral.com`.
-2. `index.html` com `canonical`, `og:url` e JSON-LD apontando para `https://escrevaral.com`.
-3. `robots.txt` apontando para `https://escrevaral.com/sitemap.xml`.
-4. `sitemap.xml` com URLs em `https://escrevaral.com`.
-
-Commit de referência:
+Antes da Cloudflare, o HTTPS direto funcionava:
 
 ```txt
-b379100 seo: domínio escrevaral.com — CNAME, canonical, JSON-LD, sitemap, manifest
+https://escrevaral.com
 ```
 
-## Tela certa no Spaceship
-
-A tela correta é:
+Mas o acesso por HTTP podia travar:
 
 ```txt
-Domain Manager → escrevaral.com → Nameservers & DNS
+http://escrevaral.com
 ```
 
-Na captura, o domínio está usando:
+A solucao adotada foi colocar a Cloudflare na frente do GitHub Pages e ligar
+`Always Use HTTPS`.
+
+## Spaceship
+
+No Spaceship, o dominio `escrevaral.com` NAO gerencia mais os registros DNS.
+Ele apenas aponta para os nameservers da Cloudflare.
+
+Tela:
+
+```txt
+Domain Manager -> escrevaral.com -> Nameservers & DNS
+```
+
+Nameservers atuais:
+
+```txt
+damon.ns.cloudflare.com
+raegan.ns.cloudflare.com
+```
+
+Nameservers antigos removidos:
 
 ```txt
 launch1.spaceship.net
 launch2.spaceship.net
 ```
 
-Isso é bom: como os nameservers estão no Spaceship, os registros podem ser gerenciados no próprio painel.
+Se alguma IA encontrar a mensagem do Spaceship dizendo que produtos de DNS/e-mail
+podem parar, isso foi esperado. Os registros importantes foram importados para a
+Cloudflare antes da troca.
 
-Próximo clique:
+## Cloudflare
 
-```txt
-Advanced DNS
-```
-
-## DNS para GitHub Pages
-
-No `Advanced DNS`, conferir ou criar os registros abaixo.
-
-Status em 2026-05-23:
+Conta:
 
 ```txt
-Configurado no Spaceship.
-Painel mostra 5 registros em propagação:
-4 registros A para @
-1 registro CNAME para www
+dash.cloudflare.com
 ```
 
-### Domínio raiz
+Dominio:
+
+```txt
+escrevaral.com
+```
+
+Plano:
+
+```txt
+Free
+```
+
+Status esperado:
+
+```txt
+Your domain is now protected by Cloudflare
+DNS Setup: Full
+```
+
+Verificacao em 2026-05-24:
+
+```txt
+1.1.1.1 -> damon.ns.cloudflare.com / raegan.ns.cloudflare.com
+8.8.8.8 -> damon.ns.cloudflare.com / raegan.ns.cloudflare.com
+```
+
+Tambem foi confirmado que o HTTPS pela borda da Cloudflare responde com:
+
+```txt
+server: cloudflare
+HTTP/2 200
+```
+
+Durante a propagacao, algum resolvedor local pode continuar pegando GitHub direto
+por um tempo. Nesse caso, esperar cache/TTL e testar em aba anonima ou outra
+rede.
+
+## DNS na Cloudflare
+
+Os registros do site devem ficar com proxy ligado, nuvem laranja.
+
+### Dominio raiz
 
 ```txt
 Tipo: A
-Host: @
-Valor: 185.199.108.153
+Nome: @
+Conteudo: 185.199.108.153
+Proxy status: Proxied
+TTL: Auto
 ```
 
 ```txt
 Tipo: A
-Host: @
-Valor: 185.199.109.153
+Nome: @
+Conteudo: 185.199.109.153
+Proxy status: Proxied
+TTL: Auto
 ```
 
 ```txt
 Tipo: A
-Host: @
-Valor: 185.199.110.153
+Nome: @
+Conteudo: 185.199.110.153
+Proxy status: Proxied
+TTL: Auto
 ```
 
 ```txt
 Tipo: A
-Host: @
-Valor: 185.199.111.153
-```
-
-### IPv6
-
-```txt
-Tipo: AAAA
-Host: @
-Valor: 2606:50c0:8000::153
-```
-
-```txt
-Tipo: AAAA
-Host: @
-Valor: 2606:50c0:8001::153
-```
-
-```txt
-Tipo: AAAA
-Host: @
-Valor: 2606:50c0:8002::153
-```
-
-```txt
-Tipo: AAAA
-Host: @
-Valor: 2606:50c0:8003::153
+Nome: @
+Conteudo: 185.199.111.153
+Proxy status: Proxied
+TTL: Auto
 ```
 
 ### Com www
 
 ```txt
 Tipo: CNAME
-Host: www
-Valor: rfmss.github.io
+Nome: www
+Conteudo: rfmss.github.io
+Proxy status: Proxied
+TTL: Auto
 ```
 
-### Por que o `www` aponta para `rfmss.github.io`
+O `www` aponta para `rfmss.github.io`, nao para `rfmss.github.io/escrevaral`,
+porque CNAME aponta para host, nao para caminho de URL.
 
-Isso parece estranho, mas está certo.
+### IPv6 / AAAA
 
-O DNS não aponta para:
+Nao havia registro `AAAA` problemático quando a migracao foi feita.
+
+Nao adicionar `AAAA` por impulso. Se um dia for ativar IPv6 para GitHub Pages,
+fazer como mudanca consciente e testar depois. A configuracao atual funciona sem
+AAAA.
+
+### E-mail
+
+Os registros de e-mail importados da Spaceship devem ficar como:
 
 ```txt
-rfmss.github.io/escrevaral
+Proxy status: DNS only
 ```
 
-porque CNAME não aponta para caminho de URL. Ele aponta para um host.
-
-No GitHub Pages, quem decide qual repositório serve o conteúdo é o domínio personalizado configurado no repositório, não o caminho depois da barra.
-
-Fluxo esperado:
+Preservar registros:
 
 ```txt
-www.escrevaral.com → CNAME → rfmss.github.io
+MX
+TXT SPF
+TXT DKIM
+TXT DMARC
 ```
 
-O navegador envia:
+Nunca colocar MX/TXT de e-mail como `Proxied`. E-mail sempre fica `DNS only`.
+
+Enderecos planejados/documentados:
 
 ```txt
-Host: www.escrevaral.com
+oi@escrevaral.com -> escrevaral@proton.me
+rafamass@escrevaral.com -> rafamass@proton.me
 ```
 
-O GitHub Pages consulta qual site está associado a `escrevaral.com`/`www.escrevaral.com` e entrega o conteúdo do repositório `rfmss/escrevaral`.
+`oi@escrevaral.com` e o endereco publico geral. E curto, humano e facil de
+lembrar.
 
-Importante:
+`rafamass@escrevaral.com` e o endereco pessoal/de dona do produto.
 
-```txt
-rfmss.github.io
-```
-
-sem domínio personalizado pode continuar abrindo ou redirecionando a página raiz do usuário. Isso não invalida o CNAME do `www`, porque a requisição com `Host: www.escrevaral.com` é tratada de forma diferente.
-
-## HTTPS
-
-Depois que o DNS propagar:
-
-```txt
-GitHub → rfmss/escrevaral → Settings → Pages
-```
-
-Confirmar:
-
-```txt
-Custom domain: escrevaral.com
-```
-
-Depois salvar e aguardar o GitHub verificar o DNS.
-
-Quando o certificado aparecer como disponível:
-
-```txt
-Enforce HTTPS
-```
-
-Ativar `Enforce HTTPS` quando o certificado aparecer como disponível.
-
-## E-mail do Escrevaral
-
-Endereço mínimo necessário:
-
-```txt
-contato@escrevaral.com
-```
-
-Endereço decidido nesta sessão:
-
-```txt
-oi@escrevaral.com
-```
-
-Destino real:
-
-```txt
-escrevaral@proton.me
-```
-
-Endereço de dono do produto:
-
-```txt
-rafamass@escrevaral.com
-```
-
-Destino real:
-
-```txt
-rafamass@proton.me
-```
-
-Observação:
-
-`oi@escrevaral.com` é o endereço público geral. É curto, simpático e fácil de lembrar.
-
-`rafamass@escrevaral.com` é o endereço pessoal/de dono do produto.
-
-`falatu@escrevaral.com` continua sendo uma boa ideia de marca, mas ficou para depois.
-
-Mas o Escrevaral pode ter aliases mais vivos, todos encaminhando para a mesma caixa real.
-
-Sugestão de aliases:
-
-```txt
-oi@escrevaral.com
-```
-
-Uso: endereço público geral. Curto, humano e direto.
-
-```txt
-rafamass@escrevaral.com
-```
-
-Uso: dono do produto.
+Alias de marca para etapa futura:
 
 ```txt
 falatu@escrevaral.com
 ```
 
-Uso futuro: endereço com assinatura de marca. É informal, memorável e combina com uma ferramenta de escrita brasileira.
+Outros aliases possiveis:
 
 ```txt
 contato@escrevaral.com
-```
-
-Uso: endereço público principal.
-
-```txt
 cartas@escrevaral.com
-```
-
-Uso: contato mais literário, bom para rodapé, Mastodon, comunidade e respostas humanas.
-
-```txt
 oficina@escrevaral.com
-```
-
-Uso: conversas sobre escrita, testes, leitores, colaboração e produto.
-
-```txt
 autoria@escrevaral.com
-```
-
-Uso: dúvidas sobre Prova de Autoria.
-
-```txt
 ajuda@escrevaral.com
 ```
 
-Uso: suporte simples.
+Uso sugerido:
 
 ```txt
 oi@escrevaral.com
 ```
 
-Uso: contato curto e simpático, se quisermos algo bem leve.
-
-Recomendação de tom:
-
-```txt
-oi@escrevaral.com
-```
-
-como endereço público principal,
+como endereco publico principal,
 
 ```txt
 rafamass@escrevaral.com
 ```
 
-como endereço de dono do produto, e
+como endereco de dona do produto, e
 
 ```txt
 falatu@escrevaral.com
@@ -317,147 +278,183 @@ falatu@escrevaral.com
 
 como possibilidade de marca para uma etapa futura.
 
-## Como criar o e-mail no Spaceship sem contratar caixa postal
+Observacao importante: encaminhamento recebe mensagens. Para responder como
+`oi@escrevaral.com` ou `rafamass@escrevaral.com`, e preciso configurar envio
+autenticado com um provedor de e-mail, por exemplo Spacemail, Proton, Zoho,
+Google Workspace ou outro provedor com SMTP.
 
-Se o objetivo for apenas receber mensagens em outro e-mail já existente, usar:
+Se o e-mail for alterado no Spaceship ou em outro provedor, a Cloudflare precisa
+receber os novos registros `MX`, `TXT`, `SPF`, `DKIM` e `DMARC`. Depois da
+migracao para Cloudflare, alterar DNS somente no painel da Cloudflare.
 
-```txt
-Domain Manager → escrevaral.com → Email Forwarding
-```
+## SSL/TLS na Cloudflare
 
-Configuração recomendada:
-
-```txt
-Forwarded from: oi@escrevaral.com
-Forwarded to: escrevaral@proton.me
-```
+Tela:
 
 ```txt
-Forwarded from: rafamass@escrevaral.com
-Forwarded to: rafamass@proton.me
+SSL/TLS -> Overview
 ```
 
-Aliases para depois:
+Modo recomendado:
 
 ```txt
-Forwarded from: falatu@escrevaral.com
-Forwarded to: escrevaral@proton.me
+Full (strict)
 ```
+
+Motivo: o GitHub Pages ja emite certificado valido para `escrevaral.com`, entao a
+Cloudflare pode validar o certificado da origem.
+
+Evitar:
 
 ```txt
-Forwarded from: contato@escrevaral.com
-Forwarded to: escrevaral@proton.me
+Flexible
 ```
+
+`Flexible` criptografa do navegador ate a Cloudflare, mas nao necessariamente da
+Cloudflare ate a origem. Para este projeto, nao e o modo certo.
+
+## Edge Certificates
+
+Tela:
 
 ```txt
-Forwarded from: cartas@escrevaral.com
-Forwarded to: escrevaral@proton.me
+SSL/TLS -> Edge Certificates
 ```
 
-Observação importante:
-
-Encaminhamento recebe mensagens. Para responder como `contato@escrevaral.com`, é preciso uma caixa com envio autenticado, por exemplo Spacemail, Proton, Zoho, Google Workspace ou outro provedor com SMTP.
-
-## Se escolher Spacemail
-
-Se o domínio continuar com nameservers do Spaceship, o próprio Spaceship costuma adicionar os registros necessários automaticamente ao ativar o Spacemail.
-
-Se for preciso configurar manualmente, os registros base são:
+Configuracoes esperadas:
 
 ```txt
-Tipo: MX
-Host: @
-Prioridade: 0
-Valor: mx1.spacemail.com
+Always Use HTTPS: ligado
+Automatic HTTPS Rewrites: ligado
+TLS 1.3: ligado
+Universal SSL: ativo
 ```
+
+O que `Always Use HTTPS` resolve:
 
 ```txt
-Tipo: MX
-Host: @
-Prioridade: 0
-Valor: mx2.spacemail.com
+http://escrevaral.com -> https://escrevaral.com
 ```
+
+O que testar depois:
 
 ```txt
-Tipo: TXT
-Host: @
-Valor: v=spf1 include:spf.spacemail.com ~all
+escrevaral.com
+http://escrevaral.com
+https://escrevaral.com
+www.escrevaral.com
 ```
+
+Todos devem chegar ao site seguro.
+
+## HSTS
+
+Nao ativar HSTS agora.
+
+HSTS e util, mas e rigido. Deixar para depois que o dominio estiver estavel por
+alguns dias. Se ativado cedo demais e algo estiver errado, navegadores podem
+continuar forcando HTTPS mesmo durante uma correcao.
+
+## GitHub Pages
+
+No repositorio:
 
 ```txt
-Tipo: TXT
-Host: spacemail._domainkey
-Valor: copiar o valor único gerado pelo Spaceship
+rfmss/escrevaral -> Settings -> Pages
 ```
+
+Confirmar:
 
 ```txt
-Tipo: TXT
-Host: _dmarc
-Valor: v=DMARC1; p=none; rua=mailto:contato@escrevaral.com
+Custom domain: escrevaral.com
+Enforce HTTPS: ligado
 ```
 
-## Decisão recomendada agora
+No repositorio existe o arquivo:
 
-Para começar leve:
+```txt
+CNAME
+```
 
-1. Site no GitHub Pages com `escrevaral.com`.
-2. `oi@escrevaral.com` como alias público geral, encaminhando para `escrevaral@proton.me`.
-3. `rafamass@escrevaral.com` como alias de dono do produto, encaminhando para `rafamass@proton.me`.
-4. Deixar `falatu@`, `contato@` e `cartas@` para depois.
-5. Deixar Spacemail para depois, quando for importante responder diretamente pelo domínio.
+Conteudo esperado:
 
-## Checklist de verificação
+```txt
+escrevaral.com
+```
 
-Depois de configurar:
+## Rotina se algo quebrar
+
+1. Testar primeiro:
 
 ```txt
 https://escrevaral.com
 ```
 
-deve abrir o site.
+2. Testar redirecionamento:
 
 ```txt
-https://www.escrevaral.com
+http://escrevaral.com
 ```
 
-deve redirecionar ou resolver para o mesmo site.
+3. Conferir nameservers no Spaceship:
 
 ```txt
-oi@escrevaral.com
+damon.ns.cloudflare.com
+raegan.ns.cloudflare.com
 ```
 
-deve encaminhar para `escrevaral@proton.me`.
+4. Conferir DNS na Cloudflare:
 
 ```txt
-rafamass@escrevaral.com
+4 registros A para @ -> GitHub Pages -> Proxied
+1 CNAME www -> rfmss.github.io -> Proxied
+MX/TXT de e-mail -> DNS only
 ```
 
-deve encaminhar para `rafamass@proton.me`.
-
-Aliases para depois:
+5. Conferir SSL/TLS:
 
 ```txt
-falatu@escrevaral.com
-contato@escrevaral.com
-cartas@escrevaral.com
+SSL/TLS -> Overview -> Full (strict)
+SSL/TLS -> Edge Certificates -> Always Use HTTPS ligado
 ```
 
-## Fontes consultadas
+6. Se a Cloudflare acabou de ser ativada, aguardar propagacao. Pode ser rapido,
+mas pode levar algumas horas.
 
-GitHub Pages, domínio personalizado:
+7. Testar em aba anonima ou em outra rede se o navegador estiver com cache.
 
-```txt
-https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site
+## Comandos uteis para diagnostico
+
+DNS raiz:
+
+```bash
+dig +short escrevaral.com A
 ```
 
-Spaceship, encaminhamento de e-mail:
+Nameservers:
 
-```txt
-https://www.spaceship.com/knowledgebase/domain-email-forwarding/
+```bash
+dig +short escrevaral.com NS
 ```
 
-Spaceship, registros do Spacemail:
+HTTPS:
 
-```txt
-https://www.spaceship.com/en-GB/knowledgebase/spacemail-dns-records-third-party-domain
+```bash
+curl -I https://escrevaral.com
 ```
+
+HTTP e redirecionamento:
+
+```bash
+curl -I http://escrevaral.com
+```
+
+Certificado:
+
+```bash
+echo | openssl s_client -servername escrevaral.com -connect escrevaral.com:443 2>/dev/null | openssl x509 -noout -subject -issuer -dates
+```
+
+Resultado esperado: certificado valido para `escrevaral.com`, emitido pela
+Cloudflare na borda ou pela Let's Encrypt/GitHub na origem, conforme o ponto do
+teste.

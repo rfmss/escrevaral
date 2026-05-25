@@ -1,17 +1,20 @@
-# Vereda — instruções para Claude
+# Escrevaral — instruções para Claude
 
 Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + HTML único. Sem framework, sem IA de terceiros, sem envio de dados.
 
 **Pasta oficial de trabalho:** `/home/rafamass/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Veredav3/`
-**Deploy:** push em `main` → rafa.pro.br/veredav3 (GitHub Pages automático)
+**Projeto atual:** Escrevaral. "Vereda" é legado/histórico e pode aparecer em nomes internos antigos.
+**Deploy:** push em `main` → https://escrevaral.com (GitHub Pages + Cloudflare)
 **QA local:** `python3 -m http.server 8799` + Playwright headless
-**Repositório:** github.com/rfmss/veredav3
+**Repositório:** github.com/rfmss/escrevaral
 
 ---
 
 ## Leitura obrigatória ao abrir
 
-Ler `META_ENGINES_100.md` no início de toda sessão. Antes de propor ou aplicar mudanças, identificar qual engine a tarefa aproxima de 100% e qual evidência concreta justifica o avanço.
+1. `META_ENGINES_100.md` — estado de maturidade das engines; identificar qual avançar hoje.
+2. `MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal da criadora.
+3. `DOMINIO_DNS_EMAIL.md` — domínio, Cloudflare, HTTPS, DNS e e-mail.
 
 Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
 
@@ -21,7 +24,7 @@ Relatório ativo de auditoria: `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para de
 
 ## Pilar inegociável: português brasileiro integral
 
-Todo texto visível do Vereda deve estar em português brasileiro. Não usar estrangeirismos na interface, mesmo quando parecerem comuns em produto digital.
+Todo texto visível do Escrevaral deve estar em português brasileiro. Não usar estrangeirismos na interface, mesmo quando parecerem comuns em produto digital.
 
 Regra: benefício humano primeiro; mecanismo técnico só em detalhe, ajuda, documentação ou exportação técnica.
 
@@ -48,7 +51,7 @@ Critério de aceite: uma escritora brasileira deve entender a tela sem saber ing
 
 ## Pilar visual: metáforas alinhadas e silenciosas
 
-O Vereda usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.
+O Escrevaral usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.
 
 Ler `MAPA_ICONES_METAFORAS.md` sempre que a tarefa tocar em ícone, botão, metáfora, logo, textura, favicon ou estado visual.
 

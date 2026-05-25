@@ -51,11 +51,11 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Estado em 2026-05-23
+## Estado em 2026-05-24
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
-| Prova de autoria | 80% | Protecao local do processo de escrita |
+| Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
 | Validacao da prova | 78% | UI de verificacao no painel; veredito com icone; delta de palavras; wordCount comparado |
 | `.esc` / envelope nativo | 78% | Integridade local; aceita .vrda legado; erros claros |
 | Backup / restore | 80% | Preservacao do acervo com proofValidations incluido |
@@ -76,6 +76,28 @@ Pergunta padrao da sessao:
 | RimaLab | 73% | Rima toante detectada; toante incluso no esquema; badge CSS toante |
 | Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
 | Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
+
+### Marco — v241 / 2026-05-24
+
+**Primeira integracao estavel do tema escuro**
+
+- Tema escuro: **Vereda** (identificador tecnico legado: `scriptorium`)
+- Tema claro: **Alvorada** (padrao, sem `data-theme`)
+- Lua na topbar alterna Alvorada ↔ Vereda; labels corretos; estado persiste
+- `[data-theme="scriptorium"]` em `css/00-tokens.css`: tokens completos (ambiente escuro, folha em pergaminho #d4c5a9)
+- Overrides especificos: `.certificate-paper`, `.editor-paper`, `.writing-area`, `.fmt-btn`, `.fmt-select`
+- Auditoria Codex: 24 combinacoes (6 areas × 2 temas × 2 viewports) — sem erro fatal, sem overflow mobile
+- Bug `themeMenu?.classList` corrigido (crash no Escape quando menu removido)
+- `scriptorium` permanece como contrato tecnico entre `app.js`, `css/00-tokens.css` e `editor-controller.js` — renomeacao para `vereda` adiada para migracao propria e auditavel
+
+### Evidencias — rodada 2026-05-24
+
+**Prova de autoria: 80% → 85%**
+- `createAuthorshipPackage()` adicionado ao proof-engine: gera pacote `escrevaral.autoria.v1` com manuscrito, sessao, resumo e claim de autoria (dominio + produto)
+- `stampWithOpenTimestamps()` adicionado ao proof-controller: envia hash SHA-256 do pacote ao calendario `a.pool.opentimestamps.org`, baixa `.pacote.esc` + recibo `.ots`
+- Botao "Carimbar na blockchain" no painel de autoria: desabilitado sem texto/eventos, status em tempo real, persiste data do ultimo carimbo em `state.proofStamps`
+- Acao `stamp-blockchain` registrada no app.js
+- Arquivos de prova custodiados no Sync.com sob escrevaral@proton.me
 
 ### Evidencias — rodada 2026-05-23
 

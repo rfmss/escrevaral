@@ -217,12 +217,24 @@ function renderProofView() {
 
   // Botão exportar: guiado quando não há condições mínimas
   const exportBtn = document.querySelector("[data-proof-export-btn]");
+  const canExport = hasText && hasEvents;
   if (exportBtn) {
-    const canExport = hasText && hasEvents;
     exportBtn.disabled = !canExport;
     exportBtn.title = canExport ? "Gerar arquivo de evidência" : "Escreva no editor para ativar";
     exportBtn.style.opacity = canExport ? "" : "0.5";
     exportBtn.style.cursor = canExport ? "" : "not-allowed";
+  }
+
+  // Botão blockchain
+  const stampBtn = document.querySelector("[data-proof-stamp-btn]");
+  if (stampBtn) stampBtn.disabled = !canExport;
+
+  // Último carimbo persistido
+  const stampStatusEl = document.querySelector("[data-proof-stamp-status]");
+  const lastStamp = state.proofStamps?.[ms?.id];
+  if (stampStatusEl && lastStamp && !stampStatusEl.textContent.includes("Enviando") && !stampStatusEl.textContent.includes("Gerando")) {
+    stampStatusEl.hidden = false;
+    stampStatusEl.textContent = `Último carimbo: ${new Date(lastStamp.at).toLocaleDateString("pt-BR")}`;
   }
 
   // Restaura última validação persistida para este manuscrito
@@ -340,6 +352,73 @@ async function exportProof() {
   const proofJson = JSON.stringify(proofDocument, null, 2);
   downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.prova.esc`, "application/json");
   saveStatus.textContent = "Cópia de autoria guardada";
+}
+
+async function stampWithOpenTimestamps() {
+  const manuscript = getActiveManuscript();
+  if (!isManuscriptDocument(manuscript)) return;
+
+  const stampBtn = document.querySelector("[data-proof-stamp-btn]");
+  const stampStatusEl = document.querySelector("[data-proof-stamp-status]");
+  const setStatus = (text) => {
+    if (!stampStatusEl) return;
+    stampStatusEl.hidden = !text;
+    stampStatusEl.textContent = text || "";
+  };
+
+  try {
+    if (stampBtn) stampBtn.disabled = true;
+    setStatus("Gerando pacote de autoria…");
+
+    const pkg = await VeredaProof.createAuthorshipPackage(getActiveProofRecord(), manuscript);
+    const pkgJson = JSON.stringify(pkg, null, 2);
+
+    const encoder = new TextEncoder();
+    const hashBuffer = await crypto.subtle.digest("SHA-256", encoder.encode(pkgJson));
+    const hashBytes = new Uint8Array(hashBuffer);
+    const hashHex = Array.from(hashBytes).map(b => b.toString(16).padStart(2, "0")).join("");
+
+    const slug = slugify(manuscript.title);
+    const date = new Date().toISOString().slice(0, 10);
+
+    // Baixa o pacote de autoria antes de tentar a rede
+    downloadFile(pkgJson, `${slug}-${date}.pacote.esc`, "application/json");
+
+    setStatus("Enviando ao OpenTimestamps…");
+
+    const response = await fetch("https://a.pool.opentimestamps.org/digest", {
+      method: "POST",
+      headers: { "Content-Type": "application/octet-stream" },
+      body: hashBytes,
+    });
+
+    if (!response.ok) throw new Error(`${response.status}`);
+
+    const otsBuffer = await response.arrayBuffer();
+    const otsBlob = new Blob([otsBuffer], { type: "application/octet-stream" });
+    const otsUrl = URL.createObjectURL(otsBlob);
+    const a = document.createElement("a");
+    a.href = otsUrl;
+    a.download = `${slug}-${date}.pacote.esc.ots`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(otsUrl);
+
+    state.proofStamps = state.proofStamps || {};
+    state.proofStamps[manuscript.id] = { at: new Date().toISOString(), hashHex };
+    persistState("Carimbo blockchain registrado");
+
+    setStatus(`Carimbado em ${new Date().toLocaleDateString("pt-BR")}`);
+    saveStatus.textContent = "Carimbo de anterioridade gerado";
+    renderProofView();
+
+  } catch (_err) {
+    setStatus("Sem internet ou serviço indisponível — tente novamente");
+    saveStatus.textContent = "Carimbo não concluído";
+  } finally {
+    if (stampBtn) stampBtn.disabled = false;
+  }
 }
 
 function updateGoalDisplay(wordCount) {

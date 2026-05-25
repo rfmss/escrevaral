@@ -226,6 +226,30 @@
 }
 .statusbar-page-count[hidden] { display: none; }
 
+/* ── AVISO OFFLINE ao clicar em e-mail de contato ── */
+.statusbar-offline-note {
+  font-size: 0.75rem;
+  color: var(--color-warning, #a0622a);
+  white-space: nowrap;
+}
+.statusbar-offline-note[hidden] { display: none; }
+
+/* ── COPYRIGHT ── */
+.statusbar-copyright {
+  font-size: 0.68rem;
+  opacity: 0.4;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ── CONTADOR DE LEITORES (GoatCounter) ── */
+.statusbar-visitors {
+  opacity: 0.55;
+  font-size: inherit;
+}
+.statusbar-visitors[hidden] { display: none; }
+
 
 
 /* ── COLORAÇÃO GRAMATICAL — toggle no editor ── */
