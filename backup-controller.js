@@ -61,7 +61,7 @@ function getBackupWarningState() {
   if (elapsedDays >= BACKUP_WARNING_DAYS) {
     return {
       visible: true,
-      copy: `Seu último cópia .esc foi há ${elapsedDays} dias. Guarde uma cópia nova antes de limpar o navegador ou trocar de aparelho.`,
+      copy: `Sua última cópia .esc foi há ${elapsedDays} dias. Guarde uma cópia nova antes de limpar o navegador ou trocar de aparelho.`,
     };
   }
 
@@ -238,7 +238,9 @@ function exportBackup() {
   };
   persistBackupMeta();
   renderBackupWarning();
-  saveStatus.textContent = "Cópia do acervo guardada";
+  const kb = Math.round(backupJson.length / 1024);
+  const msCount = state.manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito").length;
+  saveStatus.textContent = `Cópia guardada · ${msCount} ${msCount === 1 ? "manuscrito" : "manuscritos"} · ${kb} KB`;
 }
 
 function exportCurrentManuscript(format) {
@@ -285,6 +287,10 @@ async function importBackup(file) {
     renderBackupWarning();
     applyFocusSettings();
     persistState("Backup importado");
+    const msCount = state.manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito").length;
+    const noteCount = state.manuscripts.length - msCount;
+    const summary = [msCount > 0 ? `${msCount} ${msCount === 1 ? "manuscrito" : "manuscritos"}` : "", noteCount > 0 ? `${noteCount} ${noteCount === 1 ? "nota" : "notas"}` : ""].filter(Boolean).join(" e ");
+    saveStatus.textContent = summary ? `${summary} trazidos de volta` : "Acervo restaurado";
     setView("arquivo");
   } catch (error) {
     saveStatus.textContent = error.message;
