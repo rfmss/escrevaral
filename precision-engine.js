@@ -47,6 +47,26 @@
       return analyzePolicialNoir(normalizedText, words);
     }
 
+    if (template.id === "terror-horror") {
+      return analyzeTerrorHorror(normalizedText, words);
+    }
+
+    if (template.id === "memoir") {
+      return analyzeMemoir(normalizedText, words);
+    }
+
+    if (template.id === "romance-sentimental" || template.id === "fanfiction") {
+      return analyzeRomance(normalizedText, words);
+    }
+
+    if (template.id === "livro-reportagem") {
+      return analyzeMemoir(normalizedText, words);
+    }
+
+    if (template.oficio === "jornalismo") {
+      return analyzeJornalismo(normalizedText, words);
+    }
+
     return analyzeGeneric(template, normalizedText, words);
   }
 
@@ -300,6 +320,73 @@
     return summarize(checks, words, 0);
   }
 
+  function analyzeTerrorHorror(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const fearHits = countMatches(text, /\b(medo|terror|pavor|horror|assustador|sombra|escuro|frio|arrepio|grito|sangue|morte|cadáver|fantasma|criatura|monstro|perigo|ameaça|correndo|fugindo|preso|armadilha|silêncio|sussurro|passos|porta|chave|trancado|vítima|predador)\b/gi);
+    const atmosphereHits = countMatches(text, /\b(noite|escuridão|névoa|chuva|vento|crepúsculo|isolado|abandonado|vazio|podre|mohoso|fétido|gelado|úmido|sussurro|rangeu|estalou|gemeu|rasgou)\b/gi);
+    const sensoryHits = countMatches(text, /\b(cheiro|odor|fedor|frio|calor|arrepio|suor|coração|respiração|pulso|tremeu|engoliu|pele|olhos|ouviu|viu|sentiu|tocou)\b/gi);
+    const tensionHits = countMatches(text, /\b(mas|porém|então|de repente|percebeu|descobriu|ouviu|viu|notou|parou|congelou|recuou|correu|escondeu|esperou|não|nunca|ninguém|nada)\b/gi);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const shortSentences = lengths.filter(l => l <= 8).length;
+    const hasRhythm = shortSentences >= 3;
+
+    const checks = [
+      createCheck("Atmosfera de medo", fearHits >= 3 || atmosphereHits >= 2, Math.min(100, fearHits * 14 + atmosphereHits * 18), "Terror precisa de um ambiente que ameaça — antes do monstro aparecer, o lugar já assusta."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 18), "Medo físico: frio na nuca, suor nas mãos, coração acelerado — o corpo do personagem sente antes da mente entender."),
+      createCheck("Abertura perturbadora", firstSentence.length >= 15 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase precisa criar desconforto imediato — algo errado, algo fora do lugar."),
+      createCheck("Tensão sustentada", tensionHits >= 3, Math.min(100, tensionHits * 16), "Terror vive de antecipação — o que pode acontecer assusta mais do que o que já aconteceu."),
+      createCheck("Ritmo cortante", hasRhythm, hasRhythm ? 90 : Math.min(60, shortSentences * 22), "Frases curtas em momentos de clímax criam o pulso do terror. Frases longas desaceleram e criam tensão diferente."),
+      createCheck("Cenário ou presença", atmosphereHits >= 2 || paragraphs.length >= 3, Math.min(100, atmosphereHits * 22 + paragraphs.length * 14), "O espaço em que o perigo existe precisa de detalhes que o escritor escolhe com cuidado."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeMemoir(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const firstPersonHits = countMatches(text, /\b(eu|meu|minha|meus|minhas|me|mim|comigo|fui|estava|senti|lembro|pensei|via|ouvia|dizia|precisava|queria|sabia)\b/gi);
+    const temporalHits = countMatches(text, /\b(quando|naquela|nesse dia|na época|antes|depois|anos|meses|criança|jovem|adulto|hoje|ontem|naquela tarde|naquele momento|àquela hora|de repente|uma vez|sempre|nunca)\b/gi);
+    const sceneHits = countMatches(text, /\b(casa|rua|escola|família|mãe|pai|irmão|irmã|avó|avô|cidade|bairro|quarto|mesa|cozinha|janela|porta|cheiro|voz|mão|olho|corpo|sorriso)\b/gi);
+    const reflectionHits = countMatches(text, /\b(aprendi|percebi|entendi|hoje sei|olhando para trás|naquela época não sabia|só depois|agora entendo|me pergunto|ainda carrego|nunca esqueci|permanece|ficou)\b/gi);
+
+    const checks = [
+      createCheck("Voz em primeira pessoa", firstPersonHits >= 5, Math.min(100, firstPersonHits * 8), "Memória é contada de dentro — o 'eu' que viveu e o 'eu' que narra convivem no texto."),
+      createCheck("Cena específica", sceneHits >= 4, Math.min(100, sceneHits * 12), "Memória de qualidade ancora em cenas concretas — não em abstrações, mas em lugares, pessoas e objetos reais."),
+      createCheck("Âncoras temporais", temporalHits >= 3, Math.min(100, temporalHits * 18), "O leitor precisa saber quando: época, idade, estação, hora — qualquer âncora que situa a cena no tempo."),
+      createCheck("Reflexão sobre a experiência", reflectionHits >= 1, Math.min(100, reflectionHits * 40), "Memória não é só relato — o narrador presente comenta, questiona ou reavalia o que o narrador passado viveu."),
+      createCheck("Abertura com cena", firstSentence.length >= 20, scoreOpening(firstSentence), "Boa memória começa em cena, não em declaração. 'Era um dia comum' é fraco; 'O cheiro de naftalina do guarda-roupa da minha avó' abre um mundo."),
+      createCheck("Tamanho para desenvolver", words >= 300, Math.min(100, words / 3), "Memória precisa de espaço para a cena respirar e a reflexão aparecer sem pressa."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeJornalismo(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const sourceHits = countMatches(text, /\b(segundo|de acordo com|afirmou|declarou|disse|informou|confirmou|revelou|explicou|apontou|pesquisa|estudo|relatório|dados|levantamento|instituto|especialista|fonte)\b/gi);
+    const factHits = countMatches(text, /\b(\d+%|\d+ mil|\d+ bilhões|\d+ milhões|em \d{4}|janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\b/gi);
+    const wHits = countMatches(text, /\b(quem|o que|quando|onde|por que|como|qual)\b/gi);
+    const shortParas = paragraphs.filter(p => p.split(/\s+/).filter(Boolean).length <= 60).length;
+    const hasTightParas = shortParas >= Math.max(2, Math.floor(paragraphs.length * 0.5));
+
+    const checks = [
+      createCheck("Lede informativo", firstSentence.length >= 20 && firstSentence.length <= 250, scoreOpening(firstSentence), "O primeiro parágrafo deve responder ao menos duas perguntas fundamentais: quem, o quê, quando ou onde."),
+      createCheck("Atribuição de fonte", sourceHits >= 1, Math.min(100, sourceHits * 28), "Informação jornalística precisa de origem: quem disse, quem pesquisou, de onde vieram os dados."),
+      createCheck("Dados ou fatos concretos", factHits >= 1, Math.min(100, factHits * 30), "Números, datas e nomes próprios ancoram o texto — generalização sem evidência enfraquece o texto jornalístico."),
+      createCheck("Perguntas fundamentais respondidas", wHits >= 3, Math.min(100, wHits * 18), "Quem, o quê, quando, onde, por que e como — responder ao menos quatro orienta o leitor sem deixar lacunas."),
+      createCheck("Parágrafos curtos", hasTightParas, hasTightParas ? 88 : Math.min(60, shortParas * 18), "Jornalismo respira melhor em parágrafos de até 4 linhas — facilita leitura em tela e em papel."),
+      createCheck("Volume informativo", words >= 200, Math.min(100, words / 2), "Um texto jornalístico com menos de 200 palavras raramente desenvolve argumento, contexto e fonte de forma equilibrada."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
   function analyzeGeneric(template, text, words) {
     const sentences = splitSentences(text);
     const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
@@ -334,7 +421,7 @@
 
     return {
       score,
-      status: score >= 82 ? "Pronto para leitura editorial" : score >= 60 ? "Boa base" : "Em formação",
+      status: score >= 82 ? "Elementos do guia bem cobertos" : score >= 60 ? "Boa base em desenvolvimento" : "Texto em formação",
       words,
       limit,
       checks,
