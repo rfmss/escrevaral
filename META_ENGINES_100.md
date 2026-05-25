@@ -77,6 +77,26 @@ Pergunta padrao da sessao:
 | Decolonial / vocabulario | 72% | Loading state exibido; observador atualiza ao entrar na aba Academia |
 | Direitos / publicacao | 72% | Card relevante atualiza ao entrar na aba Academia (apos troca de manuscrito) |
 
+### Marco — v244 / 2026-05-24
+
+**Vereda dark — contraste completo e anti-flash**
+
+- Bootstrap no `<head>` aplica `data-theme="scriptorium"` antes do CSS carregar — elimina flash branco ao recarregar em Vereda
+- `css/00-tokens.css`: overrides de contraste para abas, navegacao lateral, botoes do editor sobre pergaminho, Prova de autoria (sem vidro escuro), Cronograma (sem opacidade baixa), toast de desfazer
+- `css/08-responsive.css`: `.voice-mirror` colapsa para 1 coluna no mobile sem overflow horizontal
+- Auditoria headless (Codex): 12 combinacoes rota × viewport — `themeFailures 0`, `viewFailures 0`, `overflowFailures 0`, `lowContrastSamples 0`
+- Relatorio: `reports/auditoria/vereda-dark-audit-20260524.md`
+
+### Marco — v243 / 2026-05-24
+
+**Reset limpo — sem marca legada na interface**
+
+- "Zerar o Vereda" → "Zerar o Escrevaral" no modal de reset
+- "Exportar backup" → "Exportar copia de seguranca" (regra portugues-primeiro)
+- Remove "Ficcao-relampago" hardcoded do HTML inicial do painel de guia
+- Fallback do titulo do guia: string vazia → "Escolha um guia"; estado vazio explicito no corpo
+- Placeholder "abre uma vereda" → "abre o caminho" — Vereda agora e so nome do tema escuro
+
 ### Marco — v241 / 2026-05-24
 
 **Primeira integracao estavel do tema escuro**

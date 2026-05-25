@@ -13,8 +13,9 @@ Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + 
 ## Leitura obrigatória ao abrir
 
 1. `META_ENGINES_100.md` — estado de maturidade das engines; identificar qual avançar hoje.
-2. `MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal da criadora.
+2. `MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal do criador.
 3. `DOMINIO_DNS_EMAIL.md` — domínio, Cloudflare, HTTPS, DNS e e-mail.
+4. `CAMPANHA.md` — posicionamento, taglines, voz do produto e roteiros de lançamento.
 
 Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
 

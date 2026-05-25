@@ -335,16 +335,26 @@ Usar esta descrição nos canais (adaptar ao tom de cada plataforma):
 > Escrevaral é uma oficina literária digital para escritores brasileiros.
 > Funciona sem internet, sem cadastro, sem envio de dados.
 > Ferramentas de escrita, revisão e análise — tudo na sua máquina.
-> Criado por Rafaela Massagardi.
+> Criado por Rafael Massena.
 
 Versão curta para bio:
-> Oficina literária offline para escritores brasileiros. Sem internet. Sem cadastro. Feito por escritores, para escritores.
+> Oficina literária offline para escritores brasileiros. Sem internet. Sem cadastro. Criado por Rafael Massena.
+
+---
+
+## Divulgação e marketing
+
+Arquivo principal de campanha: `CAMPANHA.md`
+
+Contém: posicionamento, pilares, voz e tom, taglines (incluindo a principal: *"Um lugar de fazer nada, com tudo que precisa"*) e roteiros prontos para redes sociais, vídeo e lançamento.
+
+Âncora filosófica declarada: Manuel de Barros — "o lugar de escrever é o lugar de fazer nada."
 
 ---
 
 ## Notas para a IA
 
-- "Escrevaral" é neologismo da criadora — nunca sugerir que o nome é genérico ou disponível
-- **Escrevaral** é a marca pública e o projeto atual; "Vereda" é legado/histórico interno
-- A criadora é Rafaela Massagardi — referir como "a criadora" ou pelo nome, nunca como "o desenvolvedor"
+- "Escrevaral" é neologismo do criador — nunca sugerir que o nome é genérico ou disponível
+- **Escrevaral** é a marca pública e o projeto atual; "Vereda" agora é nome do tema escuro — legado histórico como nome de produto
+- O criador é Rafael Massena — referir como "o criador" ou pelo nome, nunca como "a criadora"
 - Toda comunicação segue o tom do produto: adulto, simpático, brasileiro, sem jargão técnico
