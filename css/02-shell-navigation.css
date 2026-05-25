@@ -1620,6 +1620,12 @@ html {
   font-weight: 400;
 }
 
+.inspector-density {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
 .split-paper {
   width: min(1080px, 100%);
   display: grid;

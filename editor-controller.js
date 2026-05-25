@@ -244,7 +244,9 @@ function renderInspector() {
   const wordCount = countWords(text || writingArea.innerText);
   const paragraphs = (text.trim() ? text.trim().split(/\n+/).filter(Boolean).length : 0) || writingArea.querySelectorAll("p, h1, h2, h3, h4, h5, h6, blockquote, li").length;
 
-  countStat.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
+  const charCount = text.replace(/\s/g, "").length;
+  const charPart = wordCount > 0 ? ` · ${charCount} car.` : "";
+  countStat.textContent = `${wordCount} palavras · ${paragraphs} parágrafos${charPart}`;
   focusCount.textContent = `${wordCount} palavras · ${paragraphs} parágrafos`;
   const wpmLabel = document.querySelector("[data-wpm-label]");
   if (wordCount > 0) {
@@ -272,6 +274,7 @@ function renderInspector() {
   // Não abre automaticamente — mesa organizada por contexto, não por desbloqueio
 
   const data = analyzeInspector(text);
+  const densityEl = document.querySelector("[data-lexical-density]");
 
   if (!data) {
     if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras mais frequentes aparecem aqui conforme o texto cresce</span>`;
@@ -279,12 +282,13 @@ function renderInspector() {
     if (grammarLegendEl) grammarLegendEl.innerHTML = "";
     if (fleschScoreEl) fleschScoreEl.textContent = "—";
     if (fleschLabelEl) fleschLabelEl.innerHTML = "Escreva para ver";
+    if (densityEl) densityEl.hidden = true;
     return;
   }
 
-  if (wordCloudEl) wordCloudEl.innerHTML = data.topWords
-    .map(([w, n]) => `<button data-lexical-select="${escapeHtml(w)}">${escapeHtml(w)} (${n})</button>`)
-    .join("");
+  if (wordCloudEl) wordCloudEl.innerHTML = data.topWords.length
+    ? data.topWords.map(([w, n]) => `<button data-lexical-select="${escapeHtml(w)}">${escapeHtml(w)} (${n})</button>`).join("")
+    : `<span class="inspector-empty">Poucas palavras para análise de frequência</span>`;
 
   if (grammarBarEl) grammarBarEl.innerHTML = data.dist
     .map(d => `<span style="--w:${d.pct}%;--c:${d.color}"></span>`)
@@ -296,6 +300,10 @@ function renderInspector() {
 
   if (fleschScoreEl) fleschScoreEl.textContent = data.flesch;
   if (fleschLabelEl) fleschLabelEl.innerHTML = `${escapeHtml(data.fleschMeta.label)}<br><span class="flesch-sub">${escapeHtml(data.fleschMeta.sub)}</span>`;
+  if (densityEl) {
+    densityEl.hidden = false;
+    densityEl.textContent = `Densidade lexical: ${data.lexicalDensity}%`;
+  }
 }
 
 function renderTemplateReference() {
