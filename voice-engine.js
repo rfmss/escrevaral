@@ -18,10 +18,31 @@
     corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça"],
     casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama"],
     natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu"],
-    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade"],
+    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época"],
     conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue"],
     pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender"],
     cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina"],
+    sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra"],
+  };
+
+  const fieldLabels = {
+    corpo: "presença e gestualidade do corpo",
+    casa: "intimidade dos espaços domésticos",
+    natureza: "elementos naturais e paisagem",
+    memoria: "memória e passado",
+    conflito: "tensão e confronto",
+    pensamento: "reflexão e raciocínio",
+    cidade: "espaço urbano e cotidiano",
+    sobrenatural: "o inexplicável e o sobrenatural",
+  };
+
+  const emotionLabels = {
+    melancolia: "melancolia",
+    tensao: "tensão",
+    luminosidade: "luminosidade",
+    ironia: "ironia",
+    contemplacao: "contemplação",
+    ternura: "ternura",
   };
 
   function analyze(text) {
@@ -73,8 +94,10 @@
   }
 
   function createVoiceReading(gesture, context) {
-    const field = getTopItem(context.fields)?.label || "experiência";
-    const emotion = getTopItem(context.emotional)?.label || "atenção";
+    const topField = getTopItem(context.fields);
+    const topEmotion = getTopItem(context.emotional);
+    const fieldDesc = topField ? (fieldLabels[topField.label] || topField.label) : null;
+    const emotionDesc = topEmotion ? (emotionLabels[topEmotion.label] || topEmotion.label) : null;
     const titles = {
       introspectivo: "Voz de interior aceso",
       oral: "Voz de conversa em movimento",
@@ -86,10 +109,14 @@
       narrativo: "Voz de cena em avanço",
     };
 
+    const fieldPart = fieldDesc ? ` com foco em ${fieldDesc}` : "";
+    const emotionPart = emotionDesc ? ` e temperatura de ${emotionDesc}` : "";
+    const description = `${titles[gesture]}${fieldPart}${emotionPart}. Leitura heurística — nasce de padrões locais de vocabulário, frase, repetição e pontuação.`;
+
     return {
       gesture,
       title: titles[gesture],
-      description: `${titles[gesture]}: seu texto trabalha ${field} com temperatura de ${emotion}. Leitura heurística — nasce de padrões locais de vocabulário, frase, repetição e pontuação.`,
+      description,
       echoes: getEchoes(gesture),
     };
   }
@@ -118,6 +145,15 @@
 
     // Oral leve: algum diálogo presente mas abaixo do threshold principal
     if (punctuation.dialogue >= 2) return "oral";
+
+    // Sobrenatural: campo fantasma/magia/entidade
+    if (topField === "sobrenatural") return "contemplativo";
+
+    // Ternura: afeto e cuidado — interior suave, próximo do contemplativo
+    if (topEmotion === "ternura") return "contemplativo";
+
+    // Tensão predominante sem conflito explícito no campo → narrativo com urgência
+    if (topEmotion === "tensao" && topField !== "conflito") return "narrativo";
 
     // Introspectivo: melancolia, memória — interior sem confronto externo
     if (topEmotion === "melancolia" || topField === "memoria") return "introspectivo";
@@ -165,15 +201,22 @@
   }
 
   function getAudience(gesture, { avgSentence, lexicalDensity, fields, emotional }) {
-    const topField = getTopItem(fields)?.label || "voz autoral";
-    const topEmotion = getTopItem(emotional)?.label || "ambiguidade";
+    const topFieldItem = getTopItem(fields);
+    const topEmotionItem = getTopItem(emotional);
+    const topFieldLabel = topFieldItem ? (fieldLabels[topFieldItem.label] || topFieldItem.label) : null;
+    const topEmotionLabel = topEmotionItem ? (emotionLabels[topEmotionItem.label] || topEmotionItem.label) : null;
     const demanding = avgSentence > 24 || lexicalDensity > 0.6;
+
+    const secondaryParts = [topFieldLabel, topEmotionLabel].filter(Boolean);
+    const secondary = secondaryParts.length
+      ? `Leitores atraídos por ${secondaryParts.join(" e ")}.`
+      : "Leitores com interesse em prosa de voz marcada.";
 
     return {
       core: demanding
-        ? `Leitores de prosa literária que aceitam densidade, ambiguidade e atenção ao gesto verbal.`
-        : `Leitores que buscam narrativa legível com marca de voz e imagens recorrentes.`,
-      secondary: `Pessoas interessadas em ${topField} e em textos com temperatura de ${topEmotion}.`,
+        ? "Leitores de prosa literária que aceitam densidade, ambiguidade e atenção ao gesto verbal."
+        : "Leitores que buscam narrativa legível com marca de voz e imagens recorrentes.",
+      secondary,
       risk: demanding
         ? "Leitores que procuram ação imediata ou linguagem transparente podem abandonar cedo."
         : "Leitores que esperam alta experimentação formal podem achar a superfície direta demais.",
