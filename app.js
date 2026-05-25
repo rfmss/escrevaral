@@ -1475,7 +1475,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
   installButton.hidden = true;
-  saveStatus.textContent = "Vereda instalado";
+  saveStatus.textContent = "Escrevaral instalado";
 });
 
 titleInput.addEventListener("input", updateCurrentManuscript);
@@ -2023,7 +2023,7 @@ function _verifyControllers() {
     console.error("[Vereda] Controllers críticos ausentes:", missingCritical);
     document.body.innerHTML = `
       <div style="font:15px/1.6 sans-serif;padding:2rem;max-width:480px;margin:4rem auto;color:#333;border:1px solid #ddd;border-radius:8px">
-        <strong style="color:#c00">Vereda não carregou corretamente.</strong>
+        <strong style="color:#c00">Escrevaral não carregou corretamente.</strong>
         <p>Tente <a href="." style="color:#2e4d43">recarregar a página</a>. Se o problema persistir, limpe o cache do navegador (Ctrl+Shift+R).</p>
         <p style="font-size:12px;color:#999">Módulos ausentes: ${missingCritical.join(", ")}</p>
       </div>`;

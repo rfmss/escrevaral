@@ -12,7 +12,7 @@ const FIRST_VISIT_KEY = "vrda-first-visit";
 
 if (new URLSearchParams(window.location.search).get("reset") === "true") {
   localStorage.clear();
-  window.history.replaceState({}, "Vereda", window.location.pathname);
+  window.history.replaceState({}, "Escrevaral", window.location.pathname);
 }
 
 const _IS_FIRST_VISIT = !localStorage.getItem(STORAGE_KEY) && !localStorage.getItem(FIRST_VISIT_KEY);
@@ -459,4 +459,3 @@ function persistChecklistState(status = "Checklist atualizado") {
 function persistBackupMeta() {
   localStorage.setItem(BACKUP_META_STORAGE_KEY, JSON.stringify(backupMeta));
 }
-

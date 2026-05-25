@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v241";
-const ASSET_VERSION = "20260524-veredafix";
+const CACHE_NAME = "vereda-offline-v243";
+const ASSET_VERSION = "20260524-resetfix";
 
 const CORE_ASSETS = [
   "./",
@@ -69,14 +69,14 @@ const CORE_ASSETS = [
   `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
-  "./favicon_io/site.webmanifest",
+  `./favicon_io/site.webmanifest?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-16x16.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-32x32.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-48x48.png?v=${ASSET_VERSION}`,
   `./favicon_io/tab-favicon-180x180.png?v=${ASSET_VERSION}`,
   `./favicon_io/apple-touch-icon.png?v=${ASSET_VERSION}`,
-  "./favicon_io/android-chrome-192x192.png",
-  "./favicon_io/android-chrome-512x512.png",
+  `./favicon_io/android-chrome-192x192.png?v=${ASSET_VERSION}`,
+  `./favicon_io/android-chrome-512x512.png?v=${ASSET_VERSION}`,
 ];
 
 self.addEventListener("install", (event) => {

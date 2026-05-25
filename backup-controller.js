@@ -42,7 +42,7 @@ async function installApp() {
   installButton.hidden = true;
 
   if (choice.outcome === "accepted") {
-    saveStatus.textContent = "Vereda instalado";
+    saveStatus.textContent = "Escrevaral instalado";
   }
 }
 

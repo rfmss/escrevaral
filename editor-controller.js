@@ -6,7 +6,7 @@ function renderActiveManuscript() {
   if (!manuscript) {
     titleInput.value = "";
     writingArea.innerHTML = "";
-    writingArea.dataset.placeholder = "Comece aqui. A primeira frase abre uma vereda.";
+    writingArea.dataset.placeholder = "Comece aqui. A primeira frase abre o caminho.";
     writingArea.dataset.placeholderIsExample = "";
     specializedEditor.hidden = true;
     writingArea.hidden = false;
@@ -293,7 +293,7 @@ function renderTemplateReference() {
   const template = VeredaTemplates.getTemplate(state.template.selectedId);
   const manuscript = getActiveManuscript();
 
-  referenceTitle.textContent = template?.label || "";
+  referenceTitle.textContent = template?.label || "Escolha um guia";
   updateWritingPlaceholder(template);
   referenceTabs.innerHTML = "";
 
@@ -313,7 +313,7 @@ function renderTemplateReference() {
   } else {
     precisionCard.innerHTML = createProjectNotePrecisionMarkup(manuscript);
   }
-  referenceBody.innerHTML = template ? createReferenceMarkup(template) : "";
+  referenceBody.innerHTML = template ? createReferenceMarkup(template) : `<p class="reference-empty-state">Selecione um guia na Academia ou crie uma nota a partir de um modelo.</p>`;
 }
 
 function createProjectNotePrecisionMarkup(manuscript) {
@@ -516,7 +516,7 @@ function createModelMarkup(model) {
 
 function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.template.selectedId)) {
   const literary = template?.model?.placeholder;
-  writingArea.dataset.placeholder = literary || "Comece aqui. A primeira frase abre uma vereda.";
+  writingArea.dataset.placeholder = literary || "Comece aqui. A primeira frase abre o caminho.";
   writingArea.dataset.placeholderIsExample = literary ? "true" : "";
 }
 

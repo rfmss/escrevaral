@@ -505,7 +505,7 @@ async function validateProofFile(file) {
     if (format && (format.includes("proof") || format.includes("vereda"))) {
       lines.push(`✓ Formato: ${format}`);
     } else {
-      lines.push("⚠ Formato não reconhecido como arquivo de autoria Vereda");
+      lines.push("⚠ Formato não reconhecido como arquivo de autoria Escrevaral");
     }
 
     // Título e identidade do manuscrito
@@ -581,7 +581,7 @@ async function validateProofFile(file) {
     }
     persistState("Autoria validada");
   } catch(e) {
-    showProofValidation(false, ["✗ Não foi possível ler o arquivo.", "Verifique se é um arquivo .prova.esc exportado pelo Vereda."]);
+    showProofValidation(false, ["✗ Não foi possível ler o arquivo.", "Verifique se é um arquivo .prova.esc exportado pelo Escrevaral."]);
   }
 }
 
@@ -593,4 +593,3 @@ if (proofValidateInput) {
 }
 
 window.VeredaProofController = { init: true }; // âncora de boot
-

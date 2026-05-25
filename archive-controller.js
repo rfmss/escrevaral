@@ -143,7 +143,7 @@ function showMasterResetModal() {
   modal.innerHTML = `
     <div class="master-reset-backdrop" data-action="cancel-master-reset"></div>
     <div class="master-reset-panel">
-      <h2 id="master-reset-title">Zerar o Vereda</h2>
+      <h2 id="master-reset-title">Zerar o Escrevaral</h2>
       <p>Todos os seus textos, notas e configurações serão apagados permanentemente. Esta ação não pode ser desfeita.</p>
       <div class="master-reset-tip">
         <span class="material-symbols-outlined">shield_locked</span>
@@ -152,7 +152,7 @@ function showMasterResetModal() {
       <div class="master-reset-actions">
         <button class="secondary-button" data-action="export-backup">
           <span class="material-symbols-outlined">file_save</span>
-          Exportar backup
+          Exportar cópia de segurança
         </button>
         <button class="secondary-button" data-action="cancel-master-reset">Cancelar</button>
         <button class="danger-button" data-action="confirm-master-reset">Apagar tudo mesmo assim</button>

@@ -2815,7 +2815,7 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Slack, Duolingo e o Vereda próprio, pela voz que é consistente sem ser roboto.",
+        "exemplar": "Slack, Duolingo e o Escrevaral próprio, pela voz que é consistente sem ser roboto.",
         "why": "UX writing forte é impossível de notar quando funciona — e impossível de ignorar quando falha.",
         "references": [
           "Torrey Podmajersky",
@@ -4851,7 +4851,7 @@
       "title": "Primeiro mapa de direitos",
       "kind": "Primeiro mapa de direitos",
       "chapter": "Criação e prova",
-      "description": "Guia para entender o que a Vereda orienta, o que a lei protege e quando consultar fonte oficial.",
+      "description": "Guia para entender o que o Escrevaral orienta, o que a lei protege e quando consultar fonte oficial.",
       "guidance": {
         "meta": [
           "Orientação",
@@ -4874,7 +4874,7 @@
           ],
           [
             "Limite",
-            "A Vereda não substitui advogado, órgão oficial ou edital atualizado."
+            "O Escrevaral não substitui advogado, órgão oficial ou edital atualizado."
           ],
           [
             "Rotina",
@@ -4886,15 +4886,15 @@
           "Fonte oficial envelhece melhor que print de blog.",
           "Quando houver dinheiro ou conflito, procure especialista."
         ],
-        "blueprint": "PRIMEIRO MAPA DE DIREITOS\n\nTexto expresso nasce protegido — ideia, gênero e método não bastam.\n\nNo Brasil, o direito autoral nasce com a criação: não precisa de registro para existir. Registro no EDA (Escritório de Direitos Autorais) ou FBN cria evidência com data certa — não cria o direito. O que é protegido: expressão original da ideia. O que não é: a ideia em si, o gênero, o estilo. Contrato editorial cede direitos patrimoniais — direitos morais (autoria) são irrenunciáveis.\n\nLimites: a Vereda gera evidência técnica local — não substitui registro oficial nem consultoria jurídica.",
-        "sketch": "OBRA: [TÍTULO]\nCRIAÇÃO: [DATA / PERÍODO]\n\nO QUE TENHO COMO EVIDÊNCIA:\n[ ] Prova de autoria Vereda (hash local com data)\n[ ] Versões salvas com data (backup com timestamp)\n[ ] Emails ou mensagens com trechos datados\n[ ] Registro EDA/FBN (se feito)\n\nO QUE AINDA PRECISO:\n[ ] Registro oficial (quando houver valor comercial ou risco de conflito)\n[ ] Consultoria jurídica antes de contratos\n\nNOTA: Fonte oficial envelhece melhor que print de blog. Antes de assinar ou litigar, consulte a lei atualizada e, se necessário, um advogado."
+        "blueprint": "PRIMEIRO MAPA DE DIREITOS\n\nTexto expresso nasce protegido — ideia, gênero e método não bastam.\n\nNo Brasil, o direito autoral nasce com a criação: não precisa de registro para existir. Registro no EDA (Escritório de Direitos Autorais) ou FBN cria evidência com data certa — não cria o direito. O que é protegido: expressão original da ideia. O que não é: a ideia em si, o gênero, o estilo. Contrato editorial cede direitos patrimoniais — direitos morais (autoria) são irrenunciáveis.\n\nLimites: o Escrevaral gera evidência técnica local — não substitui registro oficial nem consultoria jurídica.",
+        "sketch": "OBRA: [TÍTULO]\nCRIAÇÃO: [DATA / PERÍODO]\n\nO QUE TENHO COMO EVIDÊNCIA:\n[ ] Prova de autoria Escrevaral (hash local com data)\n[ ] Versões salvas com data (backup com timestamp)\n[ ] Emails ou mensagens com trechos datados\n[ ] Registro EDA/FBN (se feito)\n\nO QUE AINDA PRECISO:\n[ ] Registro oficial (quando houver valor comercial ou risco de conflito)\n[ ] Consultoria jurídica antes de contratos\n\nNOTA: Fonte oficial envelhece melhor que print de blog. Antes de assinar ou litigar, consulte a lei atualizada e, se necessário, um advogado."
       },
       "editorMode": null,
       "steps": [
         {
           "eyebrow": "Ofício",
           "title": "Primeiro mapa de direitos tem uma lógica própria.",
-          "body": "Guia para entender o que a Vereda orienta, o que a lei protege e quando consultar fonte oficial.",
+          "body": "Guia para entender o que o Escrevaral orienta, o que a lei protege e quando consultar fonte oficial.",
           "primary": "Criar primeiro mapa de direitos"
         }
       ],
@@ -4909,7 +4909,7 @@
           "Agentes literários",
           "Feiras literárias"
         ],
-        "placeholder": "A Vereda me mostra o mapa. Antes de assinar, registrar ou litigar, eu confiro a fonte oficial atualizada e, se necessário, consulto especialista."
+        "placeholder": "O Escrevaral me mostra o mapa. Antes de assinar, registrar ou litigar, eu confiro a fonte oficial atualizada e, se necessário, consulto especialista."
       }
     },
     {

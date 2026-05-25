@@ -16,7 +16,7 @@
       suggestedName,
       types: [
         {
-          description: "Backup Vereda",
+          description: "Backup Escrevaral",
           accept: {
             "application/vnd.vereda+json": [".esc"],
             "application/json": [".json"],
