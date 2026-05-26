@@ -1966,7 +1966,7 @@ function shootConfetti() {
   document.body.appendChild(canvas);
   const ctx = canvas.getContext("2d");
 
-  const COLORS = ["#2e4d43","#accec1","#c0845a","#ffdbd0","#7c5cbf","#3a8fd1","#f59e0b","#e05c7a","#44c67a"];
+  const COLORS = ["#150a03","#accec1","#c0845a","#ffdbd0","#7c5cbf","#3a8fd1","#f59e0b","#e05c7a","#44c67a"];
   const SHAPES = ["rect","circle","strip"];
   const TOTAL  = 220;
   const DURATION = 160; // frames até sumir
@@ -2206,7 +2206,7 @@ function _verifyControllers() {
     document.body.innerHTML = `
       <div style="font:15px/1.6 sans-serif;padding:2rem;max-width:480px;margin:4rem auto;color:#333;border:1px solid #ddd;border-radius:8px">
         <strong style="color:#c00">Escrevaral não carregou corretamente.</strong>
-        <p>Tente <a href="." style="color:#2e4d43">recarregar a página</a>. Se o problema persistir, limpe o cache do navegador (Ctrl+Shift+R).</p>
+        <p>Tente <a href="." style="color:#150a03">recarregar a página</a>. Se o problema persistir, limpe o cache do navegador (Ctrl+Shift+R).</p>
         <p style="font-size:12px;color:#999">Módulos ausentes: ${missingCritical.join(", ")}</p>
       </div>`;
     throw new Error(`Boot abortado — controllers ausentes: ${missingCritical.join(", ")}`);
