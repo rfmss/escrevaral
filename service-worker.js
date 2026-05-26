@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v294";
-const ASSET_VERSION = "20260526-paginacao95";
+const CACHE_NAME = "vereda-offline-v295";
+const ASSET_VERSION = "20260526-prenomes95";
 
 const CORE_ASSETS = [
   "./",
@@ -58,6 +58,7 @@ const CORE_ASSETS = [
   `./pomodoro-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
   "./syntax-data.json",
+  "./norma-data.json",
   "./lexical-data.json",
   "./rimalab-data.json",
   "./analise-data.json",

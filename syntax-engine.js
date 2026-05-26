@@ -3,7 +3,16 @@
 
   let _ptc       = null;
   let _data      = null;
+  let _norma     = null;
   let _loadError = false;
+
+  let _PRENOMES_F = new Set();
+  let _PRENOMES_M = new Set();
+
+  // Remove acentos para lookup de prenomes — "Vitória" → "vitoria"
+  function _stripDiac(s) {
+    return s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  }
 
   // ── Init ──────────────────────────────────────────────────────────────────
 
@@ -11,8 +20,15 @@
     if (_data) return true;          // dados já carregados (ptc é opcional)
     if (_loadError) return false;    // tentativa anterior falhou — não retenta
     try {
-      _data = await fetch('syntax-data.json').then(r => r.json());
-      _ptc  = global.ptCompromise || null;
+      [_data, _norma] = await Promise.all([
+        fetch('syntax-data.json').then(r => r.json()),
+        fetch('norma-data.json').then(r => r.json()).catch(() => null),
+      ]);
+      _ptc = global.ptCompromise || null;
+      if (_norma) {
+        _PRENOMES_F = new Set(_norma.prenomes_femininos || []);
+        _PRENOMES_M = new Set(_norma.prenomes_masculinos || []);
+      }
       return true;
     } catch (e) {
       console.warn("[syntax-engine] init falhou:", e);
@@ -61,8 +77,18 @@
           tags.push("ProperNoun");
           tags.push("Noun");
         } else if (i === 0 && /^\p{Lu}/u.test(word)) {
-          // Posição 0 com maiúscula: sempre ambíguo (nome próprio vs verbo inicial).
-          // Não classifica como verbo por terminação — evita Vitória/Maria/Sabia=Verb.
+          // Posição 0 com maiúscula: verificar banco de prenomes antes de tentar morfologia.
+          const normNacc = _stripDiac(norm);
+          const isFemNome = _PRENOMES_F.has(normNacc);
+          const isMascNome = _PRENOMES_M.has(normNacc);
+          if (isFemNome || isMascNome) {
+            tags.push("ProperNoun");
+            tags.push("Noun");
+            if (isFemNome) tags.push("FemaleName");
+            if (isMascNome) tags.push("MaleName");
+          }
+          // Se não está no banco: ambíguo — não classifica como verbo por terminação.
+          // Evita Vitória/Sabia/Seria→Verb quando é nome não listado.
         } else {
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
