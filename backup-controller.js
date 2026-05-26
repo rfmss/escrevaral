@@ -13,21 +13,42 @@ function registerOfflineApp() {
   const updateReloadBtn = document.getElementById("update-reload-btn");
   const updateDismissBtn = document.getElementById("update-dismiss-btn");
 
+  function showUpdateBanner() {
+    if (updateBanner) updateBanner.hidden = false;
+  }
+
   if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => window.location.reload());
   if (updateDismissBtn) updateDismissBtn.addEventListener("click", () => { if (updateBanner) updateBanner.hidden = true; });
 
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (updateBanner) updateBanner.hidden = false;
-  });
+  navigator.serviceWorker.addEventListener("controllerchange", showUpdateBanner);
 
   navigator.serviceWorker
     .register("./service-worker.js")
     .then((registration) => {
       offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
-      registration.update();
+
+      // Detectar SW em espera imediatamente (banner antecipado)
+      if (registration.waiting) showUpdateBanner();
+
+      // Detectar nova versão instalada enquanto app está aberto
+      registration.addEventListener("updatefound", () => {
+        const newWorker = registration.installing;
+        if (!newWorker) return;
+        newWorker.addEventListener("statechange", () => {
+          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+            showUpdateBanner();
+          }
+        });
+      });
+
+      // Verificar atualizações a cada 30 minutos enquanto app estiver aberto
+      setInterval(() => registration.update().catch(() => {}), 30 * 60 * 1000);
     })
-    .catch(() => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">sync_problem</span>Sem internet disponível';
+    .catch((err) => {
+      const msg = err && err.message && err.message.toLowerCase().includes("network")
+        ? "Sem rede — salvamento sem internet indisponível"
+        : "Salvamento sem internet não pôde ser ativado";
+      offlineStatus.innerHTML = `<span class="material-symbols-outlined">sync_problem</span>${msg}`;
     });
 }
 
