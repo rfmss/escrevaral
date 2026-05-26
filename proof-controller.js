@@ -300,15 +300,43 @@ function renderProofSessionHistory() {
     historyEl.innerHTML = `<p class="proof-sessions-empty">Apenas esta sessão registrada até agora.</p>`;
     return;
   }
-  historyEl.innerHTML = past.map(s => {
+
+  const filterActive = historyEl.dataset.filterActive === "true";
+  const visible = filterActive
+    ? past.filter(s => VeredaProof.summarize(s).organicEvents > 0)
+    : past;
+
+  const filterLabel = filterActive ? "Todas as sessões" : "Apenas com escrita";
+  const countNote = visible.length < past.length
+    ? `${visible.length} de ${past.length} sessões`
+    : `${past.length} sessão${past.length !== 1 ? "ões" : ""}`;
+
+  const rows = visible.map(s => {
     const sum = VeredaProof.summarize(s);
-    const date = s.startedAt ? new Date(s.startedAt).toLocaleString("pt-BR", { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" }) : "—";
+    const date = s.startedAt
+      ? new Date(s.startedAt).toLocaleString("pt-BR", { day:"2-digit", month:"short", hour:"2-digit", minute:"2-digit" })
+      : "—";
+    const dur = sum.durationMin > 0 ? ` · ${sum.durationMin} min` : "";
     return `<div class="proof-session-history-row">
-      <span>${date}</span>
+      <span>${date}${dur}</span>
       <span>${sum.organicEvents} toques · ${sum.integrity > 0 ? sum.integrity + "%" : "—"}</span>
       <small>${sum.status}</small>
     </div>`;
-  }).join("");
+  }).join("") || `<p class="proof-sessions-empty">Nenhuma sessão com escrita encontrada.</p>`;
+
+  historyEl.innerHTML =
+    `<div class="proof-sessions-header">` +
+    `<span class="proof-sessions-count">${countNote}</span>` +
+    `<button class="secondary-button proof-filter-btn${filterActive ? " is-active" : ""}" ` +
+    `data-action="toggle-proof-filter" aria-pressed="${filterActive}">${filterLabel}</button>` +
+    `</div>` + rows;
+}
+
+function toggleProofSessionFilter() {
+  const historyEl = document.querySelector("[data-proof-sessions-history]");
+  if (!historyEl) return;
+  historyEl.dataset.filterActive = historyEl.dataset.filterActive === "true" ? "false" : "true";
+  renderProofSessionHistory();
 }
 
 function toggleProofSessionHistory() {

@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v301 — Sintaxe em 99%; Tema em 95%; 14 engines em 95%; 5 restantes em 85%.
+**Baseline:** v302 — Sintaxe em 99%; Tema em 95%; Prova de autoria em 95%; 15 engines em 95%; 3 restantes em 85%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -92,8 +92,8 @@ Pergunta padrao da sessao:
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
-| Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
-| Validacao da prova | 85% | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao |
+| Prova de autoria | **95%** | v302: export com generator/kind/durationMin/totalSessions; histórico com duração + filtro "Apenas com escrita" |
+| Validacao da prova | **95%** | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao; filtro de sessoes vazias |
 | `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
 | Backup / restore | **95%** | Validacao de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posicao do manuscrito corrompido |
 | Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
@@ -155,6 +155,13 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v302 — Prova de autoria 85% → 95%**
+- `proof-engine.js`: `createProofDocument` enriquecido — `generator.app/url`, `session.durationMin`, `session.totalSessions`, `manuscript.kind`; retro-compatível com validação v2
+- `proof-controller.js`: `renderProofSessionHistory` com duração visível em cada linha, header com contagem e botão de filtro "Apenas com escrita" (`data-filter-active` no elemento); `toggleProofSessionFilter()` novo
+- `app.js`: action `toggle-proof-filter` registrada no mapa central
+- `css/02-shell-navigation.css`: `.proof-sessions-header`, `.proof-sessions-count`, `.proof-filter-btn`, `.proof-filter-btn.is-active` com `color-mix` para realce ativo
+- CACHE_NAME: vereda-offline-v302 | ASSET_VERSION: 20260526-prova95
 
 **v301 — Tema Alvorada/Vereda 88% → 95%**
 - `css/00-tokens.css`: 7 overrides de `.syntax-token[data-funcao]` para Vereda — cores luminosas (sujeito #52b888, verbo #6aade0, objeto #e0a04e, adjunto #c07cd8, predicativo #e07470, vocativo #d4a85c, aposto #8ab858) contra o fundo escuro (#261e1a)

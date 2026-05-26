@@ -180,9 +180,14 @@
     const session = getActiveSession(record);
     const summary = summarize(session);
     const textHash = await sha256(manuscript.text || "");
+    const totalSessions = (record?.sessions || []).length;
 
     return {
       format: "vereda.proof.v2",
+      generator: {
+        app: "Escrevaral",
+        url: "https://escrevaral.com",
+      },
       generatedAt: new Date().toISOString(),
       rule: {
         trustedEventsOnly: true,
@@ -194,10 +199,13 @@
         name: session.name,
         startedAt: session.startedAt,
         updatedAt: session.updatedAt,
+        durationMin: summary.durationMin,
+        totalSessions,
       },
       manuscript: {
         id: manuscript.id,
         title: manuscript.title,
+        kind: manuscript.kind || "manuscrito",
         textHash,
         wordCount: countWords(manuscript.text || ""),
       },

@@ -1928,6 +1928,33 @@ mark {
   padding: 8px 0;
 }
 
+.proof-sessions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.proof-sessions-count {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.proof-filter-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  height: auto;
+  min-height: 0;
+  line-height: 1.4;
+}
+
+.proof-filter-btn.is-active {
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface));
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 .proof-actions {
   display: flex;
   align-items: center;
