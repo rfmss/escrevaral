@@ -41,8 +41,21 @@
     return VeredaVrda.parseEnvelope(rawValue);
   }
 
+  function validateBackupStructure(data) {
+    if (!data || typeof data !== "object") throw new Error("Arquivo inválido: estrutura não reconhecida.");
+    if (!Array.isArray(data.manuscripts)) throw new Error("Arquivo inválido: lista de manuscritos ausente ou corrompida.");
+    if (data.manuscripts.length === 0) throw new Error("Arquivo não contém manuscritos.");
+    const broken = data.manuscripts.findIndex((m) => !m || typeof m.id !== "string" || m.id.trim() === "");
+    if (broken !== -1) throw new Error(`Manuscrito na posição ${broken + 1} está corrompido (sem identificador).`);
+    const ids = new Set(data.manuscripts.map((m) => m.id));
+    if (data.activeId && !ids.has(data.activeId)) {
+      data.activeId = data.manuscripts[0].id;
+    }
+  }
+
   function restoreBackup(currentState, backup) {
     const data = backup.payload;
+    validateBackupStructure(data);
 
     return {
       ...currentState,

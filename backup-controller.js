@@ -297,6 +297,7 @@ async function importBackup(file) {
   try {
     const backup = await VeredaBackup.readBackup(file);
     const envSummary = VeredaVrda.summarizeEnvelope(backup);
+    const previousCount = state.manuscripts.length;
     state = VeredaBackup.restoreBackup(state, backup);
     state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
     state.versions = state.versions || {};
@@ -326,7 +327,11 @@ async function importBackup(file) {
     ].filter(Boolean);
     const wordsPart = totalWords > 0 ? ` · ${totalWords.toLocaleString("pt-BR")} palavras` : "";
     const singular = (msCount + noteCount) === 1;
-    saveStatus.textContent = parts.length ? `${parts.join(" e ")} ${singular ? "trazido" : "trazidos"} de volta${wordsPart}` : "Acervo restaurado";
+    const restoredTotal = state.manuscripts.length;
+    const diffPart = restoredTotal !== previousCount
+      ? ` (antes ${previousCount})`
+      : "";
+    saveStatus.textContent = parts.length ? `${parts.join(" e ")} ${singular ? "trazido" : "trazidos"} de volta${wordsPart}${diffPart}` : "Acervo restaurado";
     setView("arquivo");
   } catch (error) {
     saveStatus.textContent = error.message;
