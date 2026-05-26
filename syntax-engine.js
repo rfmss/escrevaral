@@ -108,6 +108,10 @@
             tags.push("Noun");
           } else if (VERBOS_LIGACAO.has(norm) || (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(normNacc))) {
             tags.push("Verb");
+          } else if (/(?:oso|osa|avel|ivel)$/.test(normNacc) && normNacc.length > 5) {
+            tags.push("Adjective");
+          } else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(normNacc)) {
+            tags.push("Verb");
           } else {
             // Sufixos inequívocos em posição 0 — não se confundem com nomes próprios
             if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
@@ -127,8 +131,13 @@
             if (/ia$/.test(norm) && _SUBST_IA.size > 0 && _SUBST_IA.has(nacc)) tags.push("Noun");
             else tags.push("Verb");
           } else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
-          else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) tags.push("Verb");
-          else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm))) tags.push("Verb");
+          else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_na)) tags.push("Verb");
+          else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_na)) {
+            // Guarda contextual: após artigo ou preposição, a forma presente é provavelmente substantivo
+            const _prevNorm = prevToken ? prevToken.toLowerCase() : null;
+            const _prevIsNounCtx = _prevNorm !== null && (ARTIGOS_DEF.has(_prevNorm) || _prevNorm === "a" || PREPS_OI.has(_prevNorm));
+            if (!_prevIsNounCtx) tags.push("Verb");
+          }
         }
       }
       return { text: word, tags, normal: norm };
