@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v304 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; 16 engines em 95%; 2 restantes em 85%.
+**Baseline:** v305 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; 17 engines em 95%; 1 restante em 85% (Paginação).
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -96,7 +96,7 @@ Pergunta padrao da sessao:
 | Validacao da prova | **95%** | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao; filtro de sessoes vazias |
 | `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
 | Backup / restore | **95%** | Validacao de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posicao do manuscrito corrompido |
-| Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
+| Backup externo via File System | **95%** | v305: importação via showOpenFilePicker com confirmação vrdaConfirm; "Trazer do computador" na seção filesystem |
 | Versionamento | **95%** | Baixar versao em TXT; delta de paragrafos; primeira mudanca destacada |
 | Offline / PWA | **95%** | v304: banner com reassurance "notas salvas"; _checkCacheHealth via Cache API; estados com tooltip; copy humanizada |
 | Editor / documento | **95%** | Placeholder dinamico por kind (11 padroes); inspector contextual por kind; focus sem teclado fisico |
@@ -155,6 +155,13 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v305 — Backup externo via File System 85% → 95% — ciclo completo: guardar e trazer do computador**
+- `filesystem-backup-engine.js`: `pickReadFile()` — `showOpenFilePicker()` com accept `.esc/.json`; exportado em `VeredaFileSystemBackup`
+- `backup-controller.js`: `importFromFilesystem()` — abre seletor, trata AbortError silenciosamente, chama `vrdaConfirm` com contagem atual antes de restaurar
+- `index.html`: botão "Trazer do computador" (`folder_shared`) na div `.filesystem-backup-actions`; action `import-from-filesystem`
+- `app.js`: action `import-from-filesystem` registrada no mapa central
+- CACHE_NAME: vereda-offline-v305 | ASSET_VERSION: 20260526-fsback95
 
 **v304 — Offline/PWA 85% → 95% — confiança local e atualização honesta**
 - `index.html`: banner de atualização com `.update-banner-text` — "Nova versão pronta." + "Suas notas estão salvas — pode recarregar sem perder nada."

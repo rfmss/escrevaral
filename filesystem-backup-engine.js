@@ -113,6 +113,27 @@
     });
   }
 
+  async function pickReadFile() {
+    if (!("showOpenFilePicker" in global)) {
+      throw new Error("Leitura via sistema de arquivos requer Chrome, Edge ou Opera.");
+    }
+
+    const [handle] = await global.showOpenFilePicker({
+      types: [
+        {
+          description: "Cópia do Escrevaral",
+          accept: {
+            "application/vnd.vereda+json": [".esc"],
+            "application/json": [".json"],
+          },
+        },
+      ],
+      multiple: false,
+    });
+
+    return handle.getFile();
+  }
+
   async function clearHandle() {
     return readStore("readwrite", (store) => requestToPromise(store.delete(HANDLE_KEY))).catch(() => {});
   }
@@ -121,6 +142,7 @@
     getStoredHandle,
     isSupported,
     pickBackupFile,
+    pickReadFile,
     writeBackup,
     clearHandle,
   };

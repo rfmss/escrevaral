@@ -327,6 +327,29 @@ function requestBackupImport() {
   backupInput.click();
 }
 
+async function importFromFilesystem() {
+  if (!("showOpenFilePicker" in window)) {
+    saveStatus.textContent = "Leitura via sistema de arquivos requer Chrome, Edge ou Opera.";
+    return;
+  }
+
+  let file;
+  try {
+    file = await VeredaFileSystemBackup.pickReadFile();
+  } catch (error) {
+    if (error.name === "AbortError") return;
+    saveStatus.textContent = "Não foi possível abrir o arquivo — tente usar o botão Trazer cópia de volta.";
+    return;
+  }
+
+  const msCount = state.manuscripts.length;
+  const noun = msCount === 1 ? "manuscrito" : "manuscritos";
+  vrdaConfirm(
+    `Trazer a cópia do arquivo "${file.name}" vai substituir o acervo atual (${msCount} ${noun}). Continuar?`,
+    () => importBackup(file)
+  );
+}
+
 async function importBackup(file) {
   if (!file) {
     return;
