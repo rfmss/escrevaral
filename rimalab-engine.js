@@ -537,6 +537,46 @@
     return SCHEME_NAMES[reindexed] || "";
   }
 
+  // ── Exportação da análise em texto ───────────────────────────────────────────
+  function exportAnalysisText(analysis, title) {
+    if (!analysis || analysis.isProse) {
+      return `${title || "RimaLab"}\n${"─".repeat(40)}\n\n${analysis?.proseNote || "Nenhum verso para analisar."}\n`;
+    }
+    const lines = [
+      title || "Análise RimaLab",
+      "═".repeat(48),
+      "",
+      `Versos: ${analysis.totalVerses}`,
+    ];
+    if (analysis.dominantName)  lines.push(`Metro dominante: ${analysis.dominantName} (${analysis.dominantMetric} sílabas)`);
+    if (analysis.isIsometric)   lines.push("Isomet‌ria: versos com a mesma medida");
+    if (analysis.rhymeScheme) {
+      const schemeName = nameScheme(analysis.rhymeScheme);
+      lines.push(`Esquema de rimas: ${analysis.rhymeScheme}${schemeName ? ` (${schemeName})` : ""}`);
+    }
+    lines.push("", "─".repeat(48), "Versos e métricas:", "");
+    analysis.scans.forEach((scan, i) => {
+      const tonicity = scan.finalTonicity ? ` [${scan.finalTonicity}]` : "";
+      lines.push(`  ${i + 1}. ${analysis.verses[i]}`);
+      lines.push(`     ${scan.totalSyllables} sílabas · ${scan.finalWord || ""}${tonicity}${scan.name && scan.name !== `${scan.totalSyllables} sílabas` ? ` · ${scan.name}` : ""}`);
+    });
+    if (analysis.rhymes.length) {
+      lines.push("", "─".repeat(48), "Pares de rima:", "");
+      analysis.rhymes.forEach(r => {
+        lines.push(`  v.${r.from + 1} × v.${r.to + 1}  ${r.wordA} / ${r.wordB}  [${r.classification}]`);
+      });
+    }
+    if (analysis.stanzas) {
+      lines.push("", "─".repeat(48), "Estrofes:", "");
+      analysis.stanzas.forEach((st, i) => {
+        const sn = nameScheme(st.scheme);
+        lines.push(`  Estrofe ${i + 1}: ${st.scheme}${sn ? ` (${sn})` : ""} · ${st.verses.length} versos`);
+      });
+    }
+    lines.push("", ACADEMIC_NOTE, "");
+    return lines.join("\n");
+  }
+
   // ── API pública ───────────────────────────────────────────────────────────────
   global.VeredaRimaLab = {
     analyze,
@@ -545,6 +585,7 @@
     syllabify,
     scanVerse,
     nameScheme,
+    exportAnalysisText,
     getEncyclopedia,
     ensureLoaded,
     isLoaded:     () => _dataLoaded,

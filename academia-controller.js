@@ -137,9 +137,15 @@ function exportRimaLabText() {
     return;
   }
 
-  const title = getActiveManuscript().title || "rimalab";
-  downloadFile(text, `${slugify(title)}-rimalab.txt`, "text/plain;charset=utf-8");
-  saveStatus.textContent = "RimaLab exportado em TXT";
+  const title = getActiveManuscript()?.title || "rimalab";
+  const analysis = window.VeredaRimaLab ? window.VeredaRimaLab.analyze(text) : null;
+  const report = analysis && window.VeredaRimaLab
+    ? window.VeredaRimaLab.exportAnalysisText(analysis, title)
+    : text;
+  downloadFile(report, `${slugify(title)}-rimalab.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = analysis && !analysis.isProse
+    ? "Análise RimaLab exportada em TXT"
+    : "RimaLab exportado em TXT";
 }
 
 function clearRimaLabText() {
