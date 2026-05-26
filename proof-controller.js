@@ -309,7 +309,7 @@ function renderProofSessionHistory() {
   const filterLabel = filterActive ? "Todas as sessões" : "Apenas com escrita";
   const countNote = visible.length < past.length
     ? `${visible.length} de ${past.length} sessões`
-    : `${past.length} sessão${past.length !== 1 ? "ões" : ""}`;
+    : `${past.length} ${past.length !== 1 ? "sessões" : "sessão"}`;
 
   const rows = visible.map(s => {
     const sum = VeredaProof.summarize(s);
