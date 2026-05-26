@@ -345,6 +345,7 @@ function updateCurrentMetadata() {
   } else {
     progressReadout.textContent = `${nextManuscript.progress || 0}%`;
   }
+  if (activeMetadataField === "kind") updateWritingPlaceholder();
   maybeCreateAutoVersion(nextManuscript);
   queueSave();
 }

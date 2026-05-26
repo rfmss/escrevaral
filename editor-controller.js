@@ -279,7 +279,9 @@ function renderInspector() {
   const densityEl = document.querySelector("[data-lexical-density]");
 
   if (!data) {
-    if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras mais frequentes aparecem aqui conforme o texto cresce</span>`;
+    const kind = manuscript?.kind;
+    const kindNote = kind ? ` do seu ${escapeHtml(kind.toLowerCase())}` : "";
+    if (wordCloudEl) wordCloudEl.innerHTML = `<span class="inspector-empty">As palavras${kindNote} aparecem aqui conforme o texto cresce</span>`;
     if (grammarBarEl) grammarBarEl.innerHTML = "";
     if (grammarLegendEl) grammarLegendEl.innerHTML = "";
     if (fleschScoreEl) fleschScoreEl.textContent = "—";
@@ -533,10 +535,40 @@ function createModelMarkup(model) {
   `;
 }
 
+const KIND_PLACEHOLDERS = [
+  [/poema|poesia|soneto|slam|haiku|cordel|verso/,      "A primeira imagem. O silêncio antes do verso."],
+  [/conto|ficção|ficao|narrative|narrativ/,             "A primeira cena, o primeiro gesto, o primeiro fio."],
+  [/romance|novel|capítulo|capitulo/,                   "Onde estamos? Quem está aqui? O que eles querem?"],
+  [/cr[oô]nica/,                                        "Comece no detalhe que te surpreendeu."],
+  [/ensaio|essay|argum/,                                "Qual é a tese que você quer defender?"],
+  [/roteiro|script|screenplay|cena|audiovisual/,        "INT./EXT. LOCAL — DIA. O que a câmera vê?"],
+  [/reportagem|jornalismo|jornali/,                     "Quem, o quê, onde, quando — nessa ordem."],
+  [/biografi|autobiografi|memoir|memória|memoria/,      "Escolha um momento. Coloque-nos nele."],
+  [/carta|letter/,                                      "Escreva como se a pessoa fosse ler agora."],
+  [/drag[aã]o|fant[aá]stico|fantasia|sf|sci.fi/,       "Qual é a regra do mundo? Quebre-a uma vez."],
+  [/terror|horror|suspense|thriller/,                   "O que a personagem ainda não sabe que deveria ter feito?"],
+];
+
+function placeholderByKind(kind) {
+  if (!kind) return null;
+  const k = kind.toLowerCase();
+  for (const [re, text] of KIND_PLACEHOLDERS) {
+    if (re.test(k)) return text;
+  }
+  return null;
+}
+
 function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.template.selectedId)) {
   const literary = template?.model?.placeholder;
-  writingArea.dataset.placeholder = literary || "Comece aqui. A primeira frase abre o caminho.";
-  writingArea.dataset.placeholderIsExample = literary ? "true" : "";
+  if (literary) {
+    writingArea.dataset.placeholder = literary;
+    writingArea.dataset.placeholderIsExample = "true";
+    return;
+  }
+  const kind = getActiveManuscript()?.kind;
+  const byKind = placeholderByKind(kind);
+  writingArea.dataset.placeholder = byKind || "Comece aqui. A primeira frase abre o caminho.";
+  writingArea.dataset.placeholderIsExample = byKind ? "true" : "";
 }
 
 function insertPlainTextAtSelection(text) {
