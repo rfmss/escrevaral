@@ -12,6 +12,7 @@
   let _TOPONIMOS   = new Set();
   let _SIGLAS      = new Set();
   let _SUBST_IA    = new Set();
+  let _VERBOS_PRES = new Set();
 
   // Remove acentos para lookup de prenomes — "Vitória" → "vitoria"
   function _stripDiac(s) {
@@ -36,6 +37,7 @@
         _TOPONIMOS  = new Set(_norma.toponimos_pt_br || []);
         _SIGLAS     = new Set(_norma.siglas_pt_br || []);
         _SUBST_IA   = new Set(_norma.substantivos_ia || []);
+        _VERBOS_PRES = new Set(_norma.verbos_pres_reg || []);
       }
       return true;
     } catch (e) {
@@ -114,6 +116,9 @@
           }
         } else {
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
+          const _na = _stripDiac(norm);
+          if (/(?:oso|osa)$/.test(_na) && _na.length > 5) tags.push("Adjective");
+          if (/(?:avel|ivel)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
           else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) {
@@ -123,6 +128,7 @@
             else tags.push("Verb");
           } else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
           else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) tags.push("Verb");
+          else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm))) tags.push("Verb");
         }
       }
       return { text: word, tags, normal: norm };

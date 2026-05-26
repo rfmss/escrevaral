@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v298 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
+**Baseline:** v299 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -82,7 +82,7 @@ Pergunta padrao da sessao:
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 97%.
-- Sintaxe: adjetivos ainda sem tag no fallback (ex: "bela", "grande", "triste") — limitação conhecida; seria a próxima fronteira mas exige lista ou heurística por sufixo (-oso/-osa/-ável/-ível).
+- Sintaxe: adjetivos sem sufixo claro (bela, grande, triste, bom) ainda sem tag — próxima fronteira mas exige lista léxica; sufixos -oso/-osa/-ável/-ível já cobertos em v299.
 - Sintaxe: multi-palavra toponímica ("Minas Gerais", "Rio de Janeiro") — token inicial já recebe ProperNoun via midSentenceProper; token "Gerais"/"Janeiro" fica sem tag.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
@@ -106,7 +106,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | **99%** | substantivos_ia (121): notícia/história/alegria/família → Noun (não Verb); rio→ProperNoun; pos-0: prenomes→topônimos→substia→verboIRR→sufixos seguros→ambíguo honesto |
+| Sintaxe | **99%** | v299: presente regular (113 formas) → Verb; adjetivos -oso/-osa/-ável/-ível → Adjective; substantivos_ia (121) → Noun; 521 prenomes, 124 irr, 55 topônimos, 45 siglas |
 | Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
@@ -148,6 +148,13 @@ Pergunta padrao da sessao:
 - Posição 0: cadeia prenomes → topônimos → `_SUBST_IA` → VERBOS_LIGACAO+VERBOS_IRR → sufixos seguros
 - Mid-sentence: sufixo -ia agora verifica `_SUBST_IA` antes de marcar `Verb`; `_SUBST_IA` check na posição 0 garante "História" → `Noun`
 - CACHE_NAME: vereda-offline-v298 | ASSET_VERSION: 20260526-subst99
+
+**v299 — presente regular + adjetivos**
+- `verbos_pres_reg` (113 formas): 3ª pessoa sg/pl de verbos regulares -ar/-er/-ir mais comuns em prosa literária; formas ambíguas com substantivos (fala, toca, passa) excluídas
+- Adjetivos: sufixos `-oso/-osa` e `-ável/-ível` → `Adjective` (length > 5, lookup via `_stripDiac` para capturar acento)
+- Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
+- Limite documentado: topônimos multi-palavra ("Minas Gerais", "Rio de Janeiro") — token inicial já ProperNoun via midSentenceProper; token "Gerais"/"Janeiro" sem tag
+- CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
 
 ---
 
