@@ -104,7 +104,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; alertas de concordancia; apostos e voz passiva no resumo |
+| Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; apostos e voz passiva; nomes proprios mid-sentence; posicao-0 maiuscula = ambiguo (limite honesto) |
 | Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
