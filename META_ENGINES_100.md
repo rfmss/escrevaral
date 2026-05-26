@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v306 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; Exportação/impressão desacoplada; 17 engines em 95%; 1 restante em 85% (Paginação).
+**Baseline:** v307 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; Exportação/impressão 95%; 17 engines em 95%; 1 restante em 85% (Paginação).
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -155,6 +155,10 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v307 — Impressão — acabamento de prova (hash completo, hora+tz, afterprint, quebra manual)**
+- `print-engine.js`: sha256Hex → hash completo de 64 chars; rodapé: 16 chars inline + bloco SHA-256 completo abaixo; `formatDateTimePtBr` — data + HH:MM + timezone abreviado (ex: "26 de maio de 2026, 16:21 BRT"); iframe removido em `afterprint` (listener no `contentWindow`) com fallback 30s; `hr.page-break` → `visibility:hidden; break-after:page` no CSS do iframe
+- CACHE_NAME: vereda-offline-v307 | ASSET_VERSION: 20260526-print95b
 
 **v306 — Exportação/impressão — desacoplamento do editor + documento isolado**
 - `print-engine.js`: novo engine — `VeredaPrint.printManuscript(ms, {preset})` — gera documento HTML limpo (título, autor, corpo, rodapé com data + hash SHA-256 16 chars) em iframe invisível e chama `iframe.contentWindow.print()`; limpa `.syntax-token`, `.grammar-mark`, `.proof-chip` do HTML antes de renderizar; 5 presets (draft/word/submission/reading/book) com `@page` válido dentro do iframe

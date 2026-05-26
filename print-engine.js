@@ -13,34 +13,37 @@
 
   function cleanHtml(rawHtml) {
     const doc = new DOMParser().parseFromString(rawHtml || "", "text/html");
-    doc.querySelectorAll(
-      ".syntax-token, [data-grammar-mark], .grammar-mark, .proof-chip, script, style, [data-vrda-tooltip]"
-    ).forEach(el => {
+    doc.querySelectorAll(".syntax-token, [data-grammar-mark], .grammar-mark, .proof-chip, script, style").forEach(el => {
       if (el.tagName === "SCRIPT" || el.tagName === "STYLE") { el.remove(); return; }
       el.replaceWith(doc.createTextNode(el.textContent));
     });
     return doc.body.innerHTML;
   }
 
-  async function sha256Short(text) {
+  async function sha256Hex(text) {
     try {
       const buf = await global.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 16);
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
     } catch {
       return null;
     }
   }
 
-  function formatDatePtBr(date) {
-    return date.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  function formatDateTimePtBr(date) {
+    const datePart = date.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+    const timePart = date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    const tzAbbr   = date.toLocaleTimeString("en-US", { timeZoneName: "short" }).split(" ").pop() || "";
+    return tzAbbr ? `${datePart}, ${timePart} ${tzAbbr}` : `${datePart}, ${timePart}`;
   }
 
   function buildDocumentHtml(ms, cfg, hash) {
-    const title  = esc(ms.title  || "Manuscrito");
-    const author = esc(ms.author || "");
-    const body   = cleanHtml(ms.html || "");
-    const date   = formatDatePtBr(new Date());
-    const hashLine = hash ? ` · Hash do texto: <code>${hash}</code>` : "";
+    const title     = esc(ms.title  || "Manuscrito");
+    const author    = esc(ms.author || "");
+    const body      = cleanHtml(ms.html || "");
+    const stamp     = formatDateTimePtBr(new Date());
+    const shortHash = hash ? hash.slice(0, 16) : null;
+    const footerLine = `${stamp} · Escrevaral${shortHash ? ` · Hash do texto: <code>${shortHash}</code>` : ""}`;
+    const fullHash   = hash ? `<span class="ms-hash-full">SHA-256: <code>${hash}</code></span>` : "";
 
     return `<!doctype html>
 <html lang="pt-BR">
@@ -86,6 +89,16 @@ p.ms-author {
 .ms-body h3 { font-size: ${cfg.fontSize}; margin: 0.4em 0 0.2em; }
 .ms-body blockquote { margin: 0.5em 4cm; font-size: calc(${cfg.fontSize} - 1pt); }
 .ms-body pre { font-family: "Courier New", monospace; font-size: 10pt; white-space: pre-wrap; }
+hr.page-break {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  border: none;
+  break-after: page;
+  page-break-after: always;
+}
+.page-break:not(hr) { break-after: page; }
 .ms-footer {
   font-size: 8pt;
   color: #555;
@@ -94,22 +107,24 @@ p.ms-author {
   padding-top: 0.6em;
 }
 .ms-footer code { font-family: monospace; letter-spacing: 0.03em; }
+.ms-hash-full { display: block; font-size: 7pt; color: #777; word-break: break-all; margin-top: 0.3em; }
+.ms-hash-full code { font-size: 7pt; }
 </style>
 </head>
 <body>
 <h1 class="ms-title">${title}</h1>
 ${author ? `<p class="ms-author">${author}</p>` : ""}
 <div class="ms-body">${body}</div>
-<footer class="ms-footer">${date} · Escrevaral${hashLine}</footer>
+<footer class="ms-footer">${footerLine}${fullHash ? `<br>${fullHash}` : ""}</footer>
 </body>
 </html>`;
   }
 
   async function printManuscript(ms, options) {
-    const preset = (options && options.preset) || ms.pagePreset || "draft";
-    const cfg    = PRESETS[preset] || PRESETS.draft;
-    const plain  = new DOMParser().parseFromString(ms.html || "", "text/html").body.textContent || "";
-    const hash   = await sha256Short(plain);
+    const preset  = (options && options.preset) || ms.pagePreset || "draft";
+    const cfg     = PRESETS[preset] || PRESETS.draft;
+    const plain   = new DOMParser().parseFromString(ms.html || "", "text/html").body.textContent || "";
+    const hash    = await sha256Hex(plain);
     const docHtml = buildDocumentHtml(ms, cfg, hash);
 
     return new Promise((resolve) => {
@@ -119,12 +134,17 @@ ${author ? `<p class="ms-author">${author}</p>` : ""}
       global.document.body.appendChild(iframe);
 
       iframe.addEventListener("load", () => {
-        try {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
-        } finally {
-          setTimeout(() => { iframe.remove(); resolve(); }, 800);
+        const cw = iframe.contentWindow;
+        let settled = false;
+        function finish() {
+          if (settled) return;
+          settled = true;
+          iframe.remove();
+          resolve();
         }
+        cw.addEventListener("afterprint", finish, { once: true });
+        setTimeout(finish, 30000);
+        try { cw.focus(); cw.print(); } catch { finish(); }
       }, { once: true });
 
       iframe.srcdoc = docHtml;
