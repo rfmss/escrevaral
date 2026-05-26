@@ -193,14 +193,16 @@ function renderProjectGrid() {
   }
 
   renderArchiveFilters();
+  renderArchiveStatusBar();
   archiveSearch.value = state.archive.search;
   archiveSort.value = state.archive.sort;
   const searchQuery = normalizeSearch(state.archive.search);
 
   const filteredManuscripts = state.manuscripts.filter((manuscript) => {
     const matchesType = state.archive.filter === "all" || getArchiveType(manuscript).id === state.archive.filter;
+    const matchesStatus = state.archive.statusFilter === "all" || manuscript.status === state.archive.statusFilter;
     const matchesSearch = !searchQuery || createSearchText(manuscript).includes(searchQuery);
-    return matchesType && matchesSearch;
+    return matchesType && matchesStatus && matchesSearch;
   });
   const sortedManuscripts = sortArchiveManuscripts(filteredManuscripts);
 
@@ -442,6 +444,33 @@ function renderArchiveFilters() {
       `;
     })
     .join("");
+}
+
+const ARCHIVE_STATUSES = ["Em escrita", "Revisão", "Pausado", "Concluído"];
+
+function renderArchiveStatusBar() {
+  if (!archiveStatusBar) return;
+  const counts = ARCHIVE_STATUSES.reduce((acc, s) => {
+    acc[s] = state.manuscripts.filter((m) => m.status === s).length;
+    return acc;
+  }, {});
+  const hasAny = ARCHIVE_STATUSES.some((s) => counts[s] > 0);
+  if (!hasAny) { archiveStatusBar.innerHTML = ""; return; }
+  const activeStatus = state.archive.statusFilter || "all";
+  const chips = ARCHIVE_STATUSES
+    .filter((s) => counts[s] > 0 || activeStatus === s)
+    .map((s) => {
+      const isActive = activeStatus === s ? " is-active" : "";
+      return `<button class="archive-filter${isActive}" data-archive-status-filter="${escapeHtml(s)}">${escapeHtml(s)} <b>${counts[s]}</b></button>`;
+    });
+  const allActive = activeStatus === "all" ? " is-active" : "";
+  archiveStatusBar.innerHTML = `<button class="archive-filter${allActive}" data-archive-status-filter="all">Todas as situações</button>` + chips.join("");
+}
+
+function setArchiveStatusFilter(status) {
+  state.archive.statusFilter = status;
+  renderProjectGrid();
+  persistState("Filtro de situação aplicado");
 }
 
 function getArchiveTypeCounts() {

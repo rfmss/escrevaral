@@ -112,6 +112,7 @@ const metadataFields = document.querySelectorAll("[data-metadata-field]");
 const progressReadout = document.querySelector("[data-progress-readout]");
 const versionList = document.querySelector("[data-version-list]");
 const archiveFilterBar = document.querySelector("[data-archive-filter-bar]");
+const archiveStatusBar = document.querySelector("[data-archive-status-bar]");
 const archiveSearch = document.querySelector("[data-archive-search]");
 const archiveSort = document.querySelector("[data-archive-sort]");
 const pinnedDocuments = document.querySelector("[data-pinned-documents]");
@@ -424,6 +425,7 @@ function getDefaultArchiveState() {
     filter: "all",
     search: "",
     sort: "updated",
+    statusFilter: "all",
   };
 }
 

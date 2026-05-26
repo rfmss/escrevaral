@@ -1487,6 +1487,8 @@ document.addEventListener("click", (event) => {
   if (craftSelectTarget)   { event.preventDefault(); selectCraft(craftSelectTarget.dataset.craftSelect); return; }
   if (refTemplateTarget)   { event.preventDefault(); openReferenceTemplate(refTemplateTarget.dataset.referenceTemplate); return; }
   if (archiveFilterTarget) { event.preventDefault(); setArchiveFilter(archiveFilterTarget.dataset.archiveFilter); return; }
+  const archiveStatusTarget = event.target.closest("[data-archive-status-filter]");
+  if (archiveStatusTarget) { event.preventDefault(); setArchiveStatusFilter(archiveStatusTarget.dataset.archiveStatusFilter); return; }
   if (decolonialCatTarget) { event.preventDefault(); decolonialState.category = decolonialCatTarget.dataset.decolonialCategory; renderDecolonialTool(); return; }
   if (createNoteTypeTarget){ event.preventDefault(); setCreateNoteType(createNoteTypeTarget.dataset.createNoteType); return; }
   if (createCategoryTarget){ event.preventDefault(); createNoteCategory = createCategoryTarget.dataset.createCategory; renderCreateNoteStep(2); return; }
