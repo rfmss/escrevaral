@@ -413,7 +413,7 @@
         isIsometric: false,
         rhymes: [],
         rhymeScheme: "",
-        stanzas: null,
+        stanzas: [],
         totalVerses: 0,
         dominantMetric: null,
         dominantName: "",
@@ -441,7 +441,7 @@
 
     // Estrofes: blocos separados por linhas em branco
     const stanzaBlocks = text.split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
-    let stanzas = null;
+    let stanzas = [];
     if (stanzaBlocks.length > 1) {
       let offset = 0;
       stanzas = stanzaBlocks.map(block => {

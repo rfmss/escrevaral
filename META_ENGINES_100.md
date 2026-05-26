@@ -105,10 +105,10 @@ Pergunta padrao da sessao:
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
 | Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; alertas de concordancia; apostos e voz passiva no resumo |
-| Pontuacao | 95% | 38 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
+| Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
-| RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→130 palavras; exportacao da analise em TXT |
+| RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→149 palavras; exportacao da analise em TXT; stanzas sempre array |
 | Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
 | Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
