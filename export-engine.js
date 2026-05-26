@@ -2,74 +2,107 @@
 
   // ── EXPORTAÇÃO TXT ────────────────────────────────────
   function createTextExport(manuscript) {
-    return [
-      manuscript.title,
+    const date = manuscript.createdAt
+      ? new Date(manuscript.createdAt).toLocaleDateString("pt-BR")
+      : "";
+    const lines = [
+      manuscript.title || "Manuscrito",
+      "═".repeat(48),
       "",
-      `Tipo: ${manuscript.kind}`,
-      `Status: ${manuscript.status}`,
-      `Marco atual: ${manuscript.chapter}`,
-      `Progresso: ${manuscript.progress}%`,
-      `Tags: ${formatTags(manuscript.tags)}`,
-      "",
-      manuscript.description,
-      "",
-      "---",
-      "",
-      manuscript.text,
-      "",
-    ].join("\n");
+    ];
+    if (manuscript.kind)        lines.push(`Tipo:        ${manuscript.kind}`);
+    if (manuscript.status)      lines.push(`Situação:    ${manuscript.status}`);
+    if (manuscript.chapter)     lines.push(`Marco:       ${manuscript.chapter}`);
+    if (manuscript.progress != null) lines.push(`Progresso:   ${manuscript.progress}%`);
+    if (date)                   lines.push(`Criado em:   ${date}`);
+    const tags = formatTags(manuscript.tags);
+    if (tags && tags !== "Sem tags") lines.push(`Tags:        ${tags}`);
+    if (manuscript.description && manuscript.description.trim()) {
+      lines.push("", manuscript.description.trim());
+    }
+    lines.push("", "─".repeat(48), "", manuscript.text || "", "");
+    return lines.join("\n");
   }
 
   // ── EXPORTAÇÃO MARKDOWN ───────────────────────────────
   function createMarkdownExport(manuscript) {
-    return [
-      `# ${manuscript.title}`,
-      "",
-      `> ${manuscript.description}`,
-      "",
-      "- Tipo: " + manuscript.kind,
-      "- Status: " + manuscript.status,
-      "- Marco atual: " + manuscript.chapter,
-      "- Progresso: " + manuscript.progress + "%",
-      "- Tags: " + formatTags(manuscript.tags),
-      "",
+    const date = manuscript.createdAt
+      ? new Date(manuscript.createdAt).toISOString().slice(0, 10)
+      : "";
+    const frontmatter = [
       "---",
-      "",
-      normalizeMarkdownBody(manuscript.text),
-      "",
-    ].join("\n");
+      `title: "${(manuscript.title || "").replace(/"/g, '\\"')}"`,
+    ];
+    if (date)                         frontmatter.push(`date: ${date}`);
+    if (manuscript.kind)              frontmatter.push(`tipo: "${manuscript.kind}"`);
+    if (manuscript.status)            frontmatter.push(`situacao: "${manuscript.status}"`);
+    if (manuscript.progress != null)  frontmatter.push(`progresso: ${manuscript.progress}`);
+    const tags = formatTags(manuscript.tags);
+    if (tags && tags !== "Sem tags")  frontmatter.push(`tags: [${tags}]`);
+    frontmatter.push("---");
+
+    const body = [];
+    body.push(`# ${manuscript.title || "Manuscrito"}`, "");
+    if (manuscript.description && manuscript.description.trim()) {
+      body.push(`> ${manuscript.description.trim()}`, "");
+    }
+    body.push(normalizeMarkdownBody(manuscript.text), "");
+    return frontmatter.join("\n") + "\n\n" + body.join("\n");
   }
 
   // ── EXPORTAÇÃO HTML ──────────────────────────────────
   function createHtmlExport(manuscript) {
     const title = xmlEscape(manuscript.title || "Sem título");
+    const date = manuscript.createdAt
+      ? new Date(manuscript.createdAt).toLocaleDateString("pt-BR")
+      : "";
+    const metaParts = [];
+    if (manuscript.kind)    metaParts.push(xmlEscape(manuscript.kind));
+    if (manuscript.status)  metaParts.push(xmlEscape(manuscript.status));
+    if (date)               metaParts.push(date);
     const body = (manuscript.text || "")
       .split(/\n+/)
       .map(function(p) { return p.trim() ? "<p>" + xmlEscape(p) + "</p>" : ""; })
       .filter(Boolean)
       .join("\n");
+    const descHtml = manuscript.description && manuscript.description.trim()
+      ? '<p class="desc">' + xmlEscape(manuscript.description.trim()) + "</p>"
+      : "";
 
     return [
       "<!doctype html>",
       '<html lang="pt-BR">',
       "<head>",
       '<meta charset="utf-8">',
+      '<meta name="viewport" content="width=device-width, initial-scale=1">',
       "<title>" + title + "</title>",
       "<style>",
-      "  body { font-family: Georgia, serif; font-size: 1.05rem; line-height: 1.8; max-width: 65ch; margin: 2rem auto; color: #222; }",
-      "  h1 { font-size: 1.5rem; margin-bottom: 0.2em; }",
-      "  p { text-indent: 1.25em; margin: 0; }",
+      "  *, *::before, *::after { box-sizing: border-box; }",
+      "  body { font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem; line-height: 1.85; max-width: 65ch; margin: 2.5rem auto; padding: 0 1rem; color: #1a1a1a; }",
+      "  h1 { font-size: 1.45rem; margin-bottom: 0.15em; font-weight: bold; }",
+      "  .meta { color: #555; font-size: 0.82rem; margin-bottom: 0.4rem; font-style: italic; }",
+      "  .desc { color: #444; font-size: 0.92rem; margin: 0.5rem 0 1.8rem; border-left: 3px solid #ccc; padding-left: 0.8em; font-style: italic; }",
+      "  hr { border: none; border-top: 1px solid #ddd; margin: 1.5rem 0; }",
+      "  p { text-indent: 1.5em; margin: 0; }",
+      "  p + p { margin-top: 0; }",
       "  p:first-of-type { text-indent: 0; }",
-      "  .meta { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }",
+      "  @media print {",
+      "    body { max-width: none; margin: 0; padding: 2cm 2.5cm; font-size: 12pt; line-height: 1.8; }",
+      "    h1 { font-size: 16pt; page-break-after: avoid; }",
+      "    .meta, .desc { page-break-after: avoid; }",
+      "    p { orphans: 3; widows: 3; }",
+      "  }",
       "</style>",
       "</head>",
       "<body>",
       "<h1>" + title + "</h1>",
-      '<p class="meta">' + xmlEscape(manuscript.kind || "") + (manuscript.status ? " · " + xmlEscape(manuscript.status) : "") + "</p>",
+      metaParts.length ? '<p class="meta">' + metaParts.join(" · ") + "</p>" : "",
+      descHtml,
+      "<hr>",
       body,
       "</body>",
       "</html>",
-    ].join("\n");
+    ].filter(Boolean).join("\n");
   }
 
   // ── EXPORTAÇÃO DOCX (OOXML sem biblioteca externa) ────
