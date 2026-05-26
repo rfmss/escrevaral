@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v295 — Sintaxe em 97%; 13 engines em 95%; 6 restantes em 85–88%.
+**Baseline:** v296 — Sintaxe em 98%; 13 engines em 95%; 6 restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -82,7 +82,7 @@ Pergunta padrao da sessao:
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 97%.
-- Sintaxe: nomes de lugar (Brasília, Rio, Minas) e siglas (ONU) não classificados — próximo passo lógico para avançar a 98%+.
+- Sintaxe: nomes de lugar (Brasília, Rio, Minas) e siglas (ONU) não classificados — próximo passo para 99%+; adjetivos ainda sem tag no fallback.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
 - tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
@@ -105,7 +105,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | **97%** | norma-data.json: ~400 prenomes IBGE (F+M); posicao-0 maiuscula → ProperNoun+FemaleName/MaleName se no banco; ambiguo honesto se fora do banco; fontes Bechara+Cunha&Cintra declaradas |
+| Sintaxe | **98%** | norma-data.json: 521 prenomes unicos IBGE (F+M); artigos inequívocos (o/os/as/um/uma/uns/umas) → Determiner; "A menina..." → Determiner (não Preposição); ambiguo honesto para desconhecidos |
 | Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
@@ -114,16 +114,23 @@ Pergunta padrao da sessao:
 | Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
 
-### Marco — v295 / 2026-05-26 (sessão 5 — norma-data.json + prenomes)
+### Marco — v296 / 2026-05-26 (sessão 5 — norma-data.json + prenomes + artigos)
 
-**Sintaxe: 95% → 97%**
-- `norma-data.json` criado: ~200 prenomes femininos + ~200 masculinos derivados do IBGE; `_fontes` declaradas (Bechara, Cunha&Cintra, Aurélio, IBGE)
+**Sintaxe: 95% → 97% (v295) → 98% (v296)**
+
+**v295 — prenomes IBGE**
+- `norma-data.json` criado: 521 prenomes únicos (222 F + 299 M) derivados do IBGE; `_fontes` declaradas (Bechara, Cunha&Cintra, Aurélio, IBGE)
 - `syntax-engine.js`: carrega `norma-data.json` em paralelo com `syntax-data.json` via `Promise.all`
 - `_stripDiac()`: normaliza "Vitória" → "vitoria" antes do lookup no banco de prenomes
-- Lógica de posição 0: se maiúscula E no banco → `ProperNoun + Noun + FemaleName/MaleName`; se não no banco → ambíguo (comportamento anterior preservado)
-- Maria, Vitória, João, Carlos, Camila, Rosa → agora `ProperNoun` em posição 0
-- Sabia/Seria não está no banco → continua ambíguo (comportamento honesto)
-- CACHE_NAME: vereda-offline-v295 | ASSET_VERSION: 20260526-prenomes95
+- Posição 0: se maiúscula E no banco → `ProperNoun + Noun + FemaleName/MaleName`; se não → ambíguo (honesto)
+- Maria, Vitória, João, Carlos, Camila, Rosa → `ProperNoun` em posição 0
+
+**v296 — artigos/determinantes + deduplicação**
+- `ARTIGOS_DEF`: `o/os/as/um/uma/uns/umas` → `Determiner` (antes: sem tag)
+- `"A"` capital na posição 0 → `Determiner` (antes: `Preposition`)
+- "a" mid-sentence mantém `Preposition` → OI detection à linha 444 já trata como "Artigo / contração"
+- 7 duplicatas removidas de `norma-data.json` (521 → 521 únicos confirmados)
+- CACHE_NAME: vereda-offline-v296 | ASSET_VERSION: 20260526-artigo98
 
 ---
 

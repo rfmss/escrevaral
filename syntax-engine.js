@@ -61,7 +61,14 @@
     return tokens.map((word, i) => {
       const norm = word.toLowerCase();
       const tags = [];
-      if (PREPS_OI.has(norm)) tags.push("Preposition");
+      if (ARTIGOS_DEF.has(norm)) {
+        tags.push("Determiner");
+      } else if (i === 0 && norm === "a") {
+        // "A" maiúsculo no início → artigo definido feminino, não preposição
+        tags.push("Determiner");
+      } else if (PREPS_OI.has(norm)) {
+        tags.push("Preposition");
+      }
       if (_data && identificarConjuncao(word, { posInicio: i === 0 })) tags.push("Conjunction");
       // Pronomes pessoais antes dos padrões verbais — evita falso-positivo em "qualquer", "todos"
       if (PRONOMES_SUBJ.has(norm))      { tags.push("Pronoun"); tags.push("Noun"); }
@@ -259,6 +266,10 @@
 
   // ── Preposições que introduzem OI — Bechara Lições §OI ────────────────────
   const PREPS_OI = new Set(["a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas","para","por","pelo","pela","pelos","pelas"]);
+
+  // ── Artigos definidos/indefinidos inequívocos — Bechara §§ 128-130 ─────────
+  // "a" excluído: ambíguo com preposição — tratado separadamente na posição 0
+  const ARTIGOS_DEF = new Set(["o","os","as","um","uma","uns","umas"]);
 
   // ── Verbos que exigem predicativo do objeto — predicativos §do_objeto ──────
   // Bechara Lições cap.XIV; Cunha&Cintra cap.6
