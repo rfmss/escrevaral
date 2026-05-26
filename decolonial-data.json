@@ -1676,6 +1676,363 @@
       "reason": "Quando não é crítico, eufemiza a destruição de culturas originais como processo natural de integração.",
       "context": "Depende do contexto: revise se o uso é descritivo-crítico ou naturaliza o apagamento cultural.",
       "contextual": true
+    },
+    {
+      "avoid": "interior do país",
+      "category": "territorio",
+      "alternatives": [
+        "regiões interioranas",
+        "cidades do interior",
+        "zonas rurais"
+      ],
+      "reason": "Coloca a capital como referência central e o interior como periférico — reforça hierarquia geográfica.",
+      "context": "Depende do contexto: em narrador que reproduz o ponto de vista urbano intencionalmente, pode ser mantido.",
+      "contextual": true
+    },
+    {
+      "avoid": "lugares remotos",
+      "category": "territorio",
+      "alternatives": [
+        "regiões afastadas dos centros urbanos",
+        "comunidades distantes"
+      ],
+      "reason": "'Remoto' é sempre relativo a quem fala. Para quem vive lá, o lugar é central.",
+      "context": "Avalie se o afastamento é geográfico (aceito) ou valorativo.",
+      "contextual": true
+    },
+    {
+      "avoid": "selva",
+      "category": "territorio",
+      "alternatives": [
+        "floresta",
+        "Amazônia",
+        "mata fechada",
+        "floresta tropical"
+      ],
+      "reason": "'Selva' carrega conotação de caos e perigo herdada da visão colonizadora europeia. 'Floresta' é mais preciso e neutro.",
+      "context": "Em contexto histórico ou narrativo que usa o vocabulário do período, pode ser mantido com consciência crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "região atrasada",
+      "category": "territorio",
+      "alternatives": [
+        "região com menos infraestrutura",
+        "região com acesso desigual a serviços"
+      ],
+      "reason": "O 'atraso' é efeito de uma ordem econômica, não característica intrínseca do lugar ou das pessoas.",
+      "context": "Revise se o narrador reproduz visão de mundo ou descreve realidade material objetiva.",
+      "contextual": false
+    },
+    {
+      "avoid": "favela",
+      "category": "territorio",
+      "alternatives": [
+        "comunidade",
+        "periferia",
+        "território popular"
+      ],
+      "reason": "O termo carrega estigma histórico. 'Comunidade' ou 'território' é preferido por muitas das pessoas que vivem nesses espaços.",
+      "context": "Depende do contexto: moradores podem usar o próprio termo com orgulho e pertencimento.",
+      "contextual": true
+    },
+    {
+      "avoid": "mato",
+      "category": "territorio",
+      "alternatives": [
+        "floresta",
+        "vegetação nativa",
+        "cerrado",
+        "caatinga",
+        "campo"
+      ],
+      "reason": "Quando usado para desqualificar um lugar ou pessoa, reproduz hierarquia urbano-rural.",
+      "context": "Como descrição geográfica literal é neutro. Como qualificação de pessoas ou culturas, problematizar.",
+      "contextual": true
+    },
+    {
+      "avoid": "invasão",
+      "category": "territorio",
+      "alternatives": [
+        "ocupação",
+        "assentamento",
+        "comunidade estabelecida"
+      ],
+      "reason": "O termo 'invasão' criminaliza e delegitima movimentos de acesso à terra por populações sem moradia.",
+      "context": "Em contexto jurídico específico, pode aparecer com marcação crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "sem lei",
+      "category": "territorio",
+      "alternatives": [
+        "território com acesso precário ao Estado",
+        "área com ausência de serviços públicos"
+      ],
+      "reason": "Apaga a organização comunitária própria desses territórios e culpa as vítimas da ausência do Estado.",
+      "context": "Avalie se o narrador critica a ausência do Estado ou naturaliza o abandono.",
+      "contextual": true
+    },
+    {
+      "avoid": "nenhures",
+      "category": "territorio",
+      "alternatives": [
+        "lugar pouco conhecido",
+        "cidade pequena",
+        "comunidade sem visibilidade na mídia"
+      ],
+      "reason": "Naturaliza a invisibilidade de territórios e as pessoas que vivem neles como se não pertencessem ao mapa.",
+      "context": "Depende do contexto narrativo: pode ser mantido com consciência irônica.",
+      "contextual": true
+    },
+    {
+      "avoid": "mundo não descoberto",
+      "category": "territorio",
+      "alternatives": [
+        "território não mapeado pelos europeus",
+        "terra já habitada",
+        "territórios sem contato externo recente"
+      ],
+      "reason": "Reproduz a perspectiva colonial: os povos que já viviam nesses territórios já os 'conheciam'.",
+      "context": "Depende do contexto histórico em que aparece.",
+      "contextual": false
+    },
+    {
+      "avoid": "crença popular",
+      "category": "conhecimento",
+      "alternatives": [
+        "saber popular",
+        "conhecimento tradicional",
+        "prática cultural"
+      ],
+      "reason": "'Crença' pode opor irracional a racional. Muitas práticas tidas como 'crença' têm fundamento acumulado por séculos.",
+      "context": "Depende do contexto: não toda crença é conhecimento — avalie o que está sendo descrito.",
+      "contextual": true
+    },
+    {
+      "avoid": "esotérico",
+      "category": "conhecimento",
+      "alternatives": [
+        "espiritual",
+        "sagrado",
+        "ritual",
+        "prática espiritual"
+      ],
+      "reason": "Frequentemente usado para desqualificar sistemas de saber de origem não-europeia como irracionais.",
+      "context": "No sentido original (restrito a iniciados), pode ser mantido com explicação.",
+      "contextual": true
+    },
+    {
+      "avoid": "mitologia indígena",
+      "category": "conhecimento",
+      "alternatives": [
+        "cosmologia indígena",
+        "narrativas de origem",
+        "tradição oral do povo"
+      ],
+      "reason": "'Mito' pode ser lido como ficção. Para os povos indígenas, são narrativas fundadoras equivalentes às religiões ocidentais.",
+      "context": "Use o nome do povo específico quando possível. 'Indígena' é genérico para centenas de culturas distintas.",
+      "contextual": false
+    },
+    {
+      "avoid": "charlatanismo",
+      "category": "conhecimento",
+      "alternatives": [
+        "prática não validada pela medicina ocidental",
+        "tratamento sem comprovação clínica"
+      ],
+      "reason": "Aplicado a práticas tradicionais, pode desqualificar saberes milenares sem análise cuidadosa.",
+      "context": "Quando há dano comprovado, a crítica é legítima. Evite usar para desqualificar em bloco.",
+      "contextual": true
+    },
+    {
+      "avoid": "superstição",
+      "category": "conhecimento",
+      "alternatives": [
+        "crença tradicional",
+        "prática cultural",
+        "saber oral"
+      ],
+      "reason": "Opõe racionalidade ocidental a práticas de outros povos, hierarquizando formas de conhecimento.",
+      "context": "Em contexto de análise do próprio conceito, pode ser usado com marcação crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "mito fundador",
+      "category": "conhecimento",
+      "alternatives": [
+        "narrativa fundadora",
+        "narrativa histórica hegemônica",
+        "versão oficial da origem"
+      ],
+      "reason": "Pode naturalizar uma versão do passado como neutra quando é escolhida politicamente.",
+      "context": "Na análise crítica de discurso, o uso do próprio termo é intencional e aceito.",
+      "contextual": true
+    },
+    {
+      "avoid": "homem das cavernas",
+      "category": "linguagem",
+      "alternatives": [
+        "pessoa do paleolítico",
+        "ancestral pré-histórico"
+      ],
+      "reason": "Evolucionismo linear aplicado à linguagem cotidiana reforça hierarquia entre populações humanas.",
+      "context": "Em contexto científico sobre paleontologia, o termo descritivo é aceitável com precisão histórica.",
+      "contextual": true
+    },
+    {
+      "avoid": "o negro",
+      "category": "linguagem",
+      "alternatives": [
+        "pessoa negra",
+        "pessoas negras",
+        "homem negro",
+        "mulher negra"
+      ],
+      "reason": "O artigo definido antes de 'negro' substantivado desumaniza: trata como categoria abstrata, não como pessoa.",
+      "context": "Em citação histórica ou análise crítica, pode aparecer com marcação explícita.",
+      "contextual": true
+    },
+    {
+      "avoid": "o índio",
+      "category": "linguagem",
+      "alternatives": [
+        "pessoa indígena",
+        "povo indígena",
+        "nome do povo específico"
+      ],
+      "reason": "O termo 'índio' é um erro histórico de Colombo. 'Indígena' ou o nome do povo específico é mais preciso e respeitoso.",
+      "context": "Em contexto jurídico brasileiro, 'índio' ainda aparece em textos legais — cite com aspas quando necessário.",
+      "contextual": true
+    },
+    {
+      "avoid": "voz de minoria",
+      "category": "linguagem",
+      "alternatives": [
+        "perspectiva sub-representada",
+        "voz historicamente silenciada",
+        "perspectiva marginalizada"
+      ],
+      "reason": "'Minoria' pode dar impressão numérica equivocada e fragiliza a urgência política.",
+      "context": "Depende do contexto: em sentido estritamente quantitativo, pode ser mantido com precisão.",
+      "contextual": true
+    },
+    {
+      "avoid": "crendice",
+      "category": "linguagem",
+      "alternatives": [
+        "prática espiritual",
+        "tradição cultural",
+        "costume transmitido oralmente"
+      ],
+      "reason": "Desqualifica práticas culturais e espirituais de povos não-ocidentais como irracionais ou ingênuas.",
+      "context": "Depende de quem fala e de quem é descrito.",
+      "contextual": true
+    },
+    {
+      "avoid": "raça inferior",
+      "category": "linguagem",
+      "alternatives": [
+        "[termo deve ser eliminado — não há raças inferiores]"
+      ],
+      "reason": "Não há hierarquia biológica entre populações humanas. Racismo explícito.",
+      "context": "Pode aparecer em citação histórica de discurso racista — sempre com marcação crítica explícita.",
+      "contextual": false
+    },
+    {
+      "avoid": "exótico",
+      "category": "estetica",
+      "alternatives": [
+        "particular",
+        "singular",
+        "de outra cultura",
+        "desconhecido para o narrador"
+      ],
+      "reason": "'Exótico' constrói o outro como objeto de curiosidade para um observador europeu-padrão. Naturaliza quem é o centro.",
+      "context": "Em perspectiva que explicita o estranhamento do observador, pode ser intencional.",
+      "contextual": true
+    },
+    {
+      "avoid": "cor local",
+      "category": "estetica",
+      "alternatives": [
+        "especificidade cultural",
+        "contexto regional",
+        "singularidade do lugar"
+      ],
+      "reason": "Reduz culturas a detalhes decorativos que 'colorem' uma narrativa europeia, sem profundidade histórica.",
+      "context": "Em análise literária histórica do Romantismo, o termo é técnico e pode ser citado com explicação.",
+      "contextual": true
+    },
+    {
+      "avoid": "arte primitiva",
+      "category": "estetica",
+      "alternatives": [
+        "arte ancestral",
+        "arte de povos indígenas",
+        "arte tradicional do povo"
+      ],
+      "reason": "Hierarquiza expressões artísticas: 'primitiva' pressupõe estágio inferior em direção à arte 'civilizada' ocidental.",
+      "context": "Em análise crítica do próprio conceito, o termo pode ser citado com marcação.",
+      "contextual": true
+    },
+    {
+      "avoid": "arte ingênua",
+      "category": "estetica",
+      "alternatives": [
+        "arte popular",
+        "arte espontânea",
+        "arte fora da academia"
+      ],
+      "reason": "'Ingênua' sugere falta de sofisticação — frequentemente aplicado a artistas autodidatas de classes populares.",
+      "context": "Em análise técnica do Movimento de Arte Naïf, o uso é histórico e específico.",
+      "contextual": true
+    },
+    {
+      "avoid": "classes baixas",
+      "category": "classe",
+      "alternatives": [
+        "classe trabalhadora",
+        "populações empobrecidas",
+        "trabalhadores"
+      ],
+      "reason": "'Baixas' é hierarquizador: posiciona quem fala como neutro e central, e os referidos como inferiores.",
+      "context": "Avalie se o texto descreve realidade socioeconômica ou reproduz a hierarquia.",
+      "contextual": true
+    },
+    {
+      "avoid": "ralé",
+      "category": "classe",
+      "alternatives": [
+        "população em situação de exclusão",
+        "pessoas em situação de vulnerabilidade"
+      ],
+      "reason": "Desqualifica e desumaniza pessoas em situação de pobreza.",
+      "context": "Em análise sociológica crítica que usa o termo para desnaturalizá-lo, pode aparecer com aspas.",
+      "contextual": true
+    },
+    {
+      "avoid": "sem cultura",
+      "category": "classe",
+      "alternatives": [
+        "sem acesso à educação formal",
+        "com acesso limitado à cultura letrada"
+      ],
+      "reason": "Toda pessoa tem cultura — a expressão confunde 'cultura formal/letrada' com 'cultura' em sentido amplo.",
+      "context": "Revise se o narrador descreve acesso restrito a recursos ou faz julgamento de valor.",
+      "contextual": false
+    },
+    {
+      "avoid": "gente simples",
+      "category": "classe",
+      "alternatives": [
+        "trabalhadores",
+        "moradores",
+        "pessoas de origem popular"
+      ],
+      "reason": "Pode ser patronizante: pressupõe que pessoas de menor renda ou escolaridade têm menor complexidade.",
+      "context": "Depende do tom do narrador e da relação de quem fala com quem é descrito.",
+      "contextual": true
     }
   ]
 }
