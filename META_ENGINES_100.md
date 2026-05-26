@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v297 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
+**Baseline:** v298 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -82,7 +82,8 @@ Pergunta padrao da sessao:
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 97%.
-- Sintaxe: nomes de lugar (Brasília, Rio, Minas) e siglas (ONU) não classificados — próximo passo para 99%+; adjetivos ainda sem tag no fallback.
+- Sintaxe: adjetivos ainda sem tag no fallback (ex: "bela", "grande", "triste") — limitação conhecida; seria a próxima fronteira mas exige lista ou heurística por sufixo (-oso/-osa/-ável/-ível).
+- Sintaxe: multi-palavra toponímica ("Minas Gerais", "Rio de Janeiro") — token inicial já recebe ProperNoun via midSentenceProper; token "Gerais"/"Janeiro" fica sem tag.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
 - tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
@@ -105,7 +106,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | **99%** | norma-data.json: 521 prenomes, 124 verbos irr, 55 topônimos, 45 siglas; pos-0 resolve verbos (Fiz/Fui/Dei/Tem), nomes (Maria/Brasília/ONU), ambíguo honesto (Sabia/Falaria) |
+| Sintaxe | **99%** | substantivos_ia (121): notícia/história/alegria/família → Noun (não Verb); rio→ProperNoun; pos-0: prenomes→topônimos→substia→verboIRR→sufixos seguros→ambíguo honesto |
 | Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
@@ -140,6 +141,13 @@ Pergunta padrao da sessao:
 - Sufixos omitidos na posição 0: `-ia/-aria/-eria` (Vitória/Maria) e `-ar/-er/-ir` (Rosa/Amar)
 - "Fiz/Fui/Foram/Dei/Tem/Soube/Trouxe" → `Verb`; "Brasília/ONU" → `ProperNoun`; "Sabia/Falaria" → ambíguo
 - CACHE_NAME: vereda-offline-v297 | ASSET_VERSION: 20260526-norma99
+
+**v298 — substantivos_ia + fix Rio**
+- `substantivos_ia` (121 entradas): notícia, história, família, alegria, poesia, memória, democracia, filosofia, teoria, etc. → `Noun` em vez de `Verb` (antes: sufixo -ia casava com imperfecto verbal)
+- `rio` adicionado a `toponimos_pt_br` → "Rio" posição 0 → `ProperNoun`; "rio" mid-sentence lowercase → `Verb` (rir) inalterado
+- Posição 0: cadeia prenomes → topônimos → `_SUBST_IA` → VERBOS_LIGACAO+VERBOS_IRR → sufixos seguros
+- Mid-sentence: sufixo -ia agora verifica `_SUBST_IA` antes de marcar `Verb`; `_SUBST_IA` check na posição 0 garante "História" → `Noun`
+- CACHE_NAME: vereda-offline-v298 | ASSET_VERSION: 20260526-subst99
 
 ---
 

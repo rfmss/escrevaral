@@ -11,6 +11,7 @@
   let _VERBOS_IRR  = new Set();
   let _TOPONIMOS   = new Set();
   let _SIGLAS      = new Set();
+  let _SUBST_IA    = new Set();
 
   // Remove acentos para lookup de prenomes — "Vitória" → "vitoria"
   function _stripDiac(s) {
@@ -34,6 +35,7 @@
         _VERBOS_IRR = new Set(_norma.formas_verbais_irr || []);
         _TOPONIMOS  = new Set(_norma.toponimos_pt_br || []);
         _SIGLAS     = new Set(_norma.siglas_pt_br || []);
+        _SUBST_IA   = new Set(_norma.substantivos_ia || []);
       }
       return true;
     } catch (e) {
@@ -100,6 +102,8 @@
             if (isMascNome) tags.push("MaleName");
           } else if (_TOPONIMOS.has(normNacc) || _SIGLAS.has(normNacc)) {
             tags.push("ProperNoun"); tags.push("Noun");
+          } else if (_SUBST_IA.size > 0 && _SUBST_IA.has(normNacc)) {
+            tags.push("Noun");
           } else if (VERBOS_LIGACAO.has(norm) || (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(normNacc))) {
             tags.push("Verb");
           } else {
@@ -112,8 +116,12 @@
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
-          else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
-          else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
+          else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) {
+            // Substantivos femininos terminados em -ia não são verbos (notícia, história, família…)
+            const nacc = _stripDiac(norm);
+            if (/ia$/.test(norm) && _SUBST_IA.size > 0 && _SUBST_IA.has(nacc)) tags.push("Noun");
+            else tags.push("Verb");
+          } else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
           else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) tags.push("Verb");
         }
       }
