@@ -1551,6 +1551,12 @@ document.addEventListener("keydown", (event) => {
     return;
   }
 
+  // Navegar entre páginas em modo Páginas: Ctrl+PageDown / Ctrl+PageUp
+  if (_currentEditorView === "pages" && (event.ctrlKey || event.metaKey)) {
+    if (event.key === "PageDown") { event.preventDefault(); navigatePage(1); return; }
+    if (event.key === "PageUp")  { event.preventDefault(); navigatePage(-1); return; }
+  }
+
   if (event.key === "Escape" && nav.classList.contains("is-open")) {
     nav.classList.remove("is-open");
   }

@@ -275,16 +275,36 @@ function setEditorViewMode(mode) {
 let _pageObserver = null;
 let _currentVisiblePage = 1;
 
+let _totalPageCount = 0;
+
+function _pageStatusText(pageNum, total) {
+  const page = pagedEditor?.querySelector(`.manuscript-page[data-page="${pageNum}"]`);
+  const pageWords = page ? countWords(page.querySelector(".page-body")?.innerText || "") : 0;
+  const wordPart = pageWords > 0 ? ` · ${pageWords} pal.` : "";
+  return `p. ${pageNum} / ${total}${wordPart}`;
+}
+
 function updatePageCount(total) {
   if (!pageCountEl) return;
+  _totalPageCount = total;
   if (_currentEditorView === "pages" && total > 0) {
-    pageCountEl.textContent = `p. ${_currentVisiblePage} / ${total}`;
+    pageCountEl.textContent = _pageStatusText(_currentVisiblePage, total);
     pageCountEl.hidden = false;
     _attachPageObserver(total);
   } else {
     pageCountEl.hidden = true;
     _detachPageObserver();
   }
+}
+
+function navigatePage(delta) {
+  if (_currentEditorView !== "pages" || !pagedEditor) return;
+  const next = _currentVisiblePage + delta;
+  if (next < 1 || next > _totalPageCount) return;
+  const target = pagedEditor.querySelector(`.manuscript-page[data-page="${next}"]`);
+  if (!target) return;
+  target.querySelector(".page-body")?.focus();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function _attachPageObserver(total) {
@@ -301,7 +321,7 @@ function _attachPageObserver(total) {
     });
     if (best) {
       _currentVisiblePage = parseInt(best.dataset.page, 10) || 1;
-      pageCountEl.textContent = `p. ${_currentVisiblePage} / ${total}`;
+      if (pageCountEl) pageCountEl.textContent = _pageStatusText(_currentVisiblePage, total);
     }
   }, { threshold: [0.3, 0.6, 1.0] });
   pagedEditor.querySelectorAll(".manuscript-page").forEach(p => _pageObserver.observe(p));
