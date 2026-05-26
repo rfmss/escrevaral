@@ -22,6 +22,21 @@
       url: "https://www.cbl.org.br/isbn/",
       note: "Agência brasileira do ISBN e serviços editoriais.",
     },
+    {
+      label: "INPI - Marca e Patentes",
+      url: "https://www.gov.br/inpi/pt-br",
+      note: "Registro de marca de autor, nome comercial e proteção de identidade editorial.",
+    },
+    {
+      label: "Domínio Público - Obras Liberadas",
+      url: "http://www.dominiopublico.gov.br/",
+      note: "Acervo federal de obras em domínio público: literatura, música, imagem e audiovisual.",
+    },
+    {
+      label: "ABDR - Reprodução de Obras",
+      url: "https://www.abdr.org.br/",
+      note: "Associação Brasileira de Direitos Reprográficos — licenciamento de reprodução de obras.",
+    },
   ];
 
   const cards = [
@@ -124,6 +139,39 @@
       watch: "Direitos coletivos e patrimônio imaterial pedem atualização constante.",
       source: "LDA, Convenção 169/OIT e normas correlatas",
     },
+    {
+      id: "dominio-publico",
+      icon: "public",
+      eyebrow: "Domínio público",
+      title: "Após 70 anos, a obra entra no domínio público — mas autoria moral permanece.",
+      body:
+        "No Brasil, 70 anos após a morte do autor a obra cai em domínio público (patrimonial). Você pode usar, citar, adaptar e publicar sem autorização — mas continuar citando o autor é obrigação moral e boa prática.",
+      do: ["Confirme a data de morte do autor.", "Cite autoria mesmo em domínio público.", "Observe se a tradução ou edição específica ainda está protegida."],
+      watch: "Obras coletivas, traduções e adaptações têm prazos próprios — a obra-base em domínio público não libera automaticamente a tradução.",
+      source: "Lei 9.610/1998, arts. 41 e 45",
+    },
+    {
+      id: "concurso-premio",
+      icon: "trophy",
+      eyebrow: "Concursos e prêmios",
+      title: "Regulamento de concurso pode capturar direitos sem parecer.",
+      body:
+        "Alguns concursos incluem, no regulamento, cessão parcial ou total de direitos sobre a obra premiada. Vale ler antes de inscrever, especialmente cláusulas de publicação, exclusividade e uso em antologias.",
+      do: ["Leia o regulamento inteiro, não só o edital de abertura.", "Observe cessão de direitos, prazo e exclusividade.", "Guarde a versão inscrita com data."],
+      watch: "Prêmios de prestígio podem ter regulamentos mais restritivos do que os menores. Não presuma padrão.",
+      source: "LDA + regulamento específico do concurso",
+    },
+    {
+      id: "marca-autoral",
+      icon: "badge",
+      eyebrow: "Nome e marca do autor",
+      title: "Pseudônimo e nome artístico podem ser protegidos pelo INPI.",
+      body:
+        "Nome real, pseudônimo e marca de autor têm proteções diferentes. O direito moral assegura o nome na obra; o INPI protege a marca comercial do nome artístico no mercado editorial.",
+      do: ["Pesquise se o pseudônimo já está registrado.", "Use o INPI para registrar nome editorial como marca.", "Diferencie nome-na-obra (moral) de nome-no-mercado (marca)."],
+      watch: "Registro de marca no INPI tem classes, prazos e custos. Confira tabelas atuais no site oficial.",
+      source: "Lei 9.610/1998 art. 12 + Lei 9.279/1996 (Marcas e Patentes)",
+    },
   ];
 
   const bots = [
@@ -163,15 +211,18 @@
   function getRelevantCard(kind) {
     if (!kind) return cards.find(c => c.id === "escrevendo") || null;
     const k = kind.toLowerCase();
-    if (/roteiro|script|audiovisual|tv|film/.test(k))               return cards.find(c => c.id === "contrato")    || null;
-    if (/tradu[cç][aã]o|translat/.test(k))                          return cards.find(c => c.id === "contrato")    || null;
-    if (/fanfiction|fan/.test(k))                                    return cards.find(c => c.id === "citacao")     || null;
-    if (/coleti|comunidade|tradicion|oral|quilomb/.test(k))          return cards.find(c => c.id === "comunidades") || null;
-    if (/coauto|parceri/.test(k))                                    return cards.find(c => c.id === "coautoria")   || null;
-    if (/ensaio|reportagem|newsletter|jornali/.test(k))              return cards.find(c => c.id === "submissao")   || null;
-    if (/biografi|autobiografi|mem[oó]ria|relato/.test(k))           return cards.find(c => c.id === "registro")    || null;
-    if (/poema|poesia|poetic/.test(k))                               return cards.find(c => c.id === "escrevendo")  || null;
-    if (/ia|intelig|gpt|llm|model/.test(k))                          return cards.find(c => c.id === "ia")          || null;
+    if (/roteiro|script|audiovisual|tv|film|podcast|s[eé]rie|docum/.test(k))  return cards.find(c => c.id === "contrato")       || null;
+    if (/tradu[cç][aã]o|translat/.test(k))                                     return cards.find(c => c.id === "contrato")       || null;
+    if (/fanfiction|fan|paro[dó]dia|adapt/.test(k))                            return cards.find(c => c.id === "citacao")        || null;
+    if (/coleti|comunidade|tradicion|oral|quilomb|ind[ií]gen|afro/.test(k))    return cards.find(c => c.id === "comunidades")    || null;
+    if (/coauto|parceri|ghostwrit|colabora/.test(k))                           return cards.find(c => c.id === "coautoria")      || null;
+    if (/ensaio|reportagem|newsletter|jornali|cr[oô]nica/.test(k))             return cards.find(c => c.id === "submissao")      || null;
+    if (/biografi|autobiografi|mem[oó]ria|relato|memoir/.test(k))              return cards.find(c => c.id === "registro")       || null;
+    if (/poema|poesia|poetic|slam|soneto|cordel|haiku/.test(k))                return cards.find(c => c.id === "escrevendo")     || null;
+    if (/ia|intelig|gpt|llm|model|chatbot/.test(k))                            return cards.find(c => c.id === "ia")             || null;
+    if (/concurs|pr[eê]mio|award|edital/.test(k))                              return cards.find(c => c.id === "concurso-premio")|| null;
+    if (/autopublic|isbn|plataforma|amazon|kdp|kobo/.test(k))                  return cards.find(c => c.id === "autoedicao")     || null;
+    if (/dom[ií]nio p[uú]blico|cl[aá]ssico|ant[ií]go|s[eé]culo/.test(k))     return cards.find(c => c.id === "dominio-publico")|| null;
     return cards.find(c => c.id === "escrevendo") || null;
   }
 
