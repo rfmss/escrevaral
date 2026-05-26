@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v300";
-const ASSET_VERSION = "20260526-ctx99";
+const CACHE_NAME = "vereda-offline-v301";
+const ASSET_VERSION = "20260526-tema95";
 
 const CORE_ASSETS = [
   "./",
@@ -57,6 +57,7 @@ const CORE_ASSETS = [
   `./reader-controller.js?v=${ASSET_VERSION}`,
   `./pomodoro-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
+  `./tooltip-controller.js?v=${ASSET_VERSION}`,
   "./syntax-data.json",
   "./norma-data.json",
   "./lexical-data.json",

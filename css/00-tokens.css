@@ -456,3 +456,53 @@
   --cedar: #d0c4f0;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
 }
+
+/* ─── Painel sintático — cores luminosas para tema Vereda ─── */
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"]     { border-color: #52b888; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"]     .syntax-token-label { color: #52b888; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"]       { border-color: #6aade0; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"]       .syntax-token-label { color: #6aade0; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"]      { border-color: #e0a04e; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"]      .syntax-token-label { color: #e0a04e; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"]     { border-color: #c07cd8; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"]     .syntax-token-label { color: #c07cd8; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] { border-color: #e07470; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] .syntax-token-label { color: #e07470; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"]    { border-color: #d4a85c; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"]    .syntax-token-label { color: #d4a85c; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"]      { border-color: #8ab858; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"]      .syntax-token-label { color: #8ab858; }
+
+/* ─── Clone de dica visual — substitui title nativo ─── */
+#vrda-tooltip {
+  position: fixed;
+  z-index: 9999;
+  max-width: min(280px, calc(100vw - 24px));
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 100ms ease, transform 100ms ease;
+  white-space: normal;
+  word-break: break-word;
+}
+
+#vrda-tooltip.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-theme="scriptorium"] #vrda-tooltip {
+  background: var(--surface-high);
+  color: var(--soft-ink);
+  border-color: rgba(201, 125, 50, 0.38);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.48);
+}

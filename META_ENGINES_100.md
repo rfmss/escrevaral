@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v299 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
+**Baseline:** v301 — Sintaxe em 99%; Tema em 95%; 14 engines em 95%; 5 restantes em 85%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -84,9 +84,9 @@ Pergunta padrao da sessao:
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 97%.
 - Sintaxe: adjetivos sem sufixo claro (bela, grande, triste, bom) ainda sem tag — próxima fronteira mas exige lista léxica; sufixos -oso/-osa/-ável/-ível já cobertos em v299.
 - Sintaxe: multi-palavra toponímica — "Minas Gerais": "Minas" fica sem tag na posição 0 (não está em `toponimos_pt_br`); "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro": "Rio" → ProperNoun (está em `toponimos_pt_br`); "de" → Preposição; "Janeiro" → ProperNoun via midSentenceProper.
-- CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
+- CSS dark mode para `.syntax-token` — resolvido em v301: cores luminosas para cada função sintática no tema Vereda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
-- tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
+- tooltip-controller.js: implementado em v301 — MutationObserver intercepta `title` em tempo real; 74 ocorrências migradas automaticamente.
 
 ## Estado em 2026-05-26 (sessão 3 — v290)
 
@@ -113,7 +113,7 @@ Pergunta padrao da sessao:
 | RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→149 palavras; exportacao da analise em TXT; stanzas sempre array |
 | Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
 | Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
-| Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+| Tema Alvorada / Vereda | **95%** | v301: syntax-token luminoso no Vereda; tooltip-controller.js — 74 title→data-vrda-tooltip; clone visual com tema Alvorada/Vereda |
 
 ### Marco — v296 / 2026-05-26 (sessão 5 — norma-data.json + prenomes + artigos)
 
@@ -155,6 +155,13 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v301 — Tema Alvorada/Vereda 88% → 95%**
+- `css/00-tokens.css`: 7 overrides de `.syntax-token[data-funcao]` para Vereda — cores luminosas (sujeito #52b888, verbo #6aade0, objeto #e0a04e, adjunto #c07cd8, predicativo #e07470, vocativo #d4a85c, aposto #8ab858) contra o fundo escuro (#261e1a)
+- `tooltip-controller.js`: novo controller — migra `[title]` → `[data-vrda-tooltip]` + `[aria-label]`; MutationObserver intercepta templates dinâmicos (archive, cronograma, academia); `show/hide/position` com viewport-clamping; eventos `mouseover/mouseout/focusin/focusout/keydown(Esc)/scroll/resize`
+- `css/00-tokens.css`: `#vrda-tooltip` — clone visual temático; Alvorada: `var(--card)` + `var(--ink)`; Vereda: `var(--surface-high)` + `var(--soft-ink)` + borda âmbar; transição 100ms
+- `index.html`: `tooltip-controller.js` carregado via `<script defer>` antes do `app.js`
+- CACHE_NAME: vereda-offline-v301 | ASSET_VERSION: 20260526-tema95
 
 **v300 — guarda contextual + posição-0 completa**
 - Guarda contextual em `_VERBOS_PRES`: se token anterior for artigo (o/a/os/as/um/uma…) ou preposição (da/de/do/para/por…), a forma não recebe tag — "A pergunta surge" → `pergunta` fica sem tag (não vira Verb falso; não recebe Noun)
