@@ -24,18 +24,8 @@
     size: A4;
   }
 
-  /* Preset livro A5 — menor quando o escritor usa esse preset */
-  html[data-print-preset="book"] @page {
-    size: A5;
-    margin: 1.8cm 1.5cm 1.5cm 2cm;
-  }
-
-  /* Preset submissão — margens generosas para anotações editoriais */
-  html[data-print-preset="submission"] @page {
-    size: A4;
-    margin: 3cm 2.5cm 2.5cm 3.5cm;
-  }
-
+  /* Presets de tamanho/margem são gerenciados pelo print-engine.js via iframe —
+     @page não aceita seletor pai; as regras html[data-print-preset] foram removidas. */
   @page :first { margin-top: 3cm; }
 
   html, body {

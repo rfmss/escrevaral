@@ -1387,14 +1387,12 @@ const ACTION_HANDLERS = {
   },
   "print-pages": () => {
     const ms = getActiveManuscript();
-    const preset = ms?.pagePreset || pagePresetSel?.value || "draft";
-    document.documentElement.dataset.printPreset = preset;
-    const doprint = () => {
-      window.print();
-      setTimeout(() => delete document.documentElement.dataset.printPreset, 1000);
-    };
-    if (_currentEditorView !== "pages") { setEditorViewMode("pages"); setTimeout(doprint, 400); }
-    else doprint();
+    if (!ms) return;
+    const preset = ms.pagePreset || pagePresetSel?.value || "draft";
+    VeredaPrint.printManuscript(
+      { title: ms.title, author: ms.author, html: writingArea ? writingArea.innerHTML : (ms.html || "") },
+      { preset }
+    );
   },
   "toggle-editorial-group": (_, t) => {
     const group = t.closest("[data-editorial-group]");

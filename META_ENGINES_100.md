@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v305 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; 17 engines em 95%; 1 restante em 85% (Paginação).
+**Baseline:** v306 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; Exportação/impressão desacoplada; 17 engines em 95%; 1 restante em 85% (Paginação).
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -155,6 +155,13 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v306 — Exportação/impressão — desacoplamento do editor + documento isolado**
+- `print-engine.js`: novo engine — `VeredaPrint.printManuscript(ms, {preset})` — gera documento HTML limpo (título, autor, corpo, rodapé com data + hash SHA-256 16 chars) em iframe invisível e chama `iframe.contentWindow.print()`; limpa `.syntax-token`, `.grammar-mark`, `.proof-chip` do HTML antes de renderizar; 5 presets (draft/word/submission/reading/book) com `@page` válido dentro do iframe
+- `app.js`: `print-pages` reescrito — usa `VeredaPrint.printManuscript` com `writingArea.innerHTML`; remove acoplamento com `setEditorViewMode("pages")` e `window.print()`
+- `css/09-print.css`: remove `html[data-print-preset] @page { ... }` (CSS inválido — `@page` não aceita seletor pai); presets de tamanho gerenciados pelo iframe do `print-engine.js`
+- ENEM: mantém `window.print()` com CSS isolado em `07-enem.css` — caminho adequado, sem conflito
+- CACHE_NAME: vereda-offline-v306 | ASSET_VERSION: 20260526-print95
 
 **v305 — Backup externo via File System 85% → 95% — ciclo completo: guardar e trazer do computador**
 - `filesystem-backup-engine.js`: `pickReadFile()` — `showOpenFilePicker()` com accept `.esc/.json`; exportado em `VeredaFileSystemBackup`
