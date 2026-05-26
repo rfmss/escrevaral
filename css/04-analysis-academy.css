@@ -1156,6 +1156,14 @@
   font-size: 13px;
 }
 
+.template-search-count {
+  font-size: 11px;
+  color: var(--primary);
+  opacity: 0.75;
+  margin: 0 0 6px;
+  padding: 0 2px;
+}
+
 .craft-tabs {
   display: flex;
   flex-wrap: wrap;

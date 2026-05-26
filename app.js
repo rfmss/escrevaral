@@ -954,8 +954,19 @@ function renderTemplateStudio() {
   const query = normalizeSearch(templateState.query);
   const sourceTemplates = query ? VeredaTemplates.listTemplates() : VeredaTemplates.listTemplates({ oficio: templateState.craftId });
   const templates = query
-    ? sourceTemplates.filter((template) => normalizeSearch(`${template.label} ${template.title} ${template.description} ${template.oficio}`).includes(query))
+    ? sourceTemplates.filter((template) => normalizeSearch(`${template.label} ${template.title} ${template.description} ${template.oficio} ${template.id}`).includes(query))
     : sourceTemplates;
+
+  // Search: auto-select first result when active template isn't in results
+  if (query && templates.length > 0 && !templates.find(t => t.id === activeTemplate.id)) {
+    const firstResult = VeredaTemplates.getTemplate(templates[0].id);
+    if (firstResult) {
+      templateState.activeId = firstResult.id;
+      templateState.craftId = firstResult.oficio;
+      activeTemplate = firstResult;
+    }
+  }
+
   const activeStep = VeredaTemplates.getStep(templateState.activeId, templateState.step);
   if (!activeStep) return;
 
@@ -975,20 +986,24 @@ function renderTemplateStudio() {
     })
     .join("");
 
-  templateTabs.innerHTML = templates.length
-    ? templates
-        .map((template) => {
-          const isActive = template.id === activeTemplate.id ? " is-active" : "";
-
-          return `
-            <button class="template-tab${isActive}" data-template-select="${template.id}">
-              <span class="material-symbols-outlined">${template.icon}</span>
-              ${escapeHtml(template.label)}
-            </button>
-          `;
-        })
-        .join("")
-    : `<p class="template-empty">Nenhum guia encontrado para "${escapeHtml(templateState.query)}".</p>`;
+  if (templates.length) {
+    const countLine = query
+      ? `<p class="template-search-count">${templates.length} guia${templates.length !== 1 ? "s" : ""} encontrado${templates.length !== 1 ? "s" : ""}</p>`
+      : "";
+    templateTabs.innerHTML = countLine + templates
+      .map((template) => {
+        const isActive = template.id === activeTemplate.id ? " is-active" : "";
+        return `
+          <button class="template-tab${isActive}" data-template-select="${template.id}" title="${escapeHtml(template.description || "")}">
+            <span class="material-symbols-outlined">${template.icon}</span>
+            ${escapeHtml(template.label)}
+          </button>
+        `;
+      })
+      .join("");
+  } else {
+    templateTabs.innerHTML = `<p class="template-empty">Nenhum guia encontrado para "${escapeHtml(templateState.query)}".</p>`;
+  }
 
   templateStepLabel.textContent = `tela ${activeStep.index + 1} de ${activeStep.total}`;
   templateScreen.innerHTML = createTemplateStepMarkup(activeTemplate, activeStep);
