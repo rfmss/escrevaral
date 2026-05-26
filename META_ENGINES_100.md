@@ -83,7 +83,7 @@ Pergunta padrao da sessao:
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 97%.
 - Sintaxe: adjetivos sem sufixo claro (bela, grande, triste, bom) ainda sem tag — próxima fronteira mas exige lista léxica; sufixos -oso/-osa/-ável/-ível já cobertos em v299.
-- Sintaxe: multi-palavra toponímica ("Minas Gerais", "Rio de Janeiro") — token inicial ("Minas"/"Rio") fica sem tag na posição 0; token seguinte ("Gerais"/"Janeiro") recebe ProperNoun via midSentenceProper mid-sentence.
+- Sintaxe: multi-palavra toponímica — "Minas Gerais": "Minas" fica sem tag na posição 0 (não está em `toponimos_pt_br`); "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro": "Rio" → ProperNoun (está em `toponimos_pt_br`); "de" → Preposição; "Janeiro" → ProperNoun via midSentenceProper.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
 - tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
@@ -153,11 +153,11 @@ Pergunta padrao da sessao:
 - `verbos_pres_reg` (113 formas): 3ª pessoa sg/pl de verbos regulares -ar/-er/-ir mais comuns em prosa literária; formas ambíguas com substantivos (fala, toca, passa) excluídas
 - Adjetivos: sufixos `-oso/-osa` e `-ável/-ível` → `Adjective` (length > 5, lookup via `_stripDiac` para capturar acento)
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
-- Limite documentado: topônimos multi-palavra ("Minas Gerais", "Rio de Janeiro") — token inicial ("Minas"/"Rio") fica sem tag na posição 0; token seguinte ("Gerais"/"Janeiro") recebe ProperNoun via midSentenceProper
+- Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
 
 **v300 — guarda contextual + posição-0 completa**
-- Guarda contextual em `_VERBOS_PRES`: se token anterior for artigo (o/a/os/as/um/uma…) ou preposição (da/de/do/para/por…), a forma não recebe `Verb` — "A pergunta surge" → `pergunta: Noun ctx` (sem tag Verb falso)
+- Guarda contextual em `_VERBOS_PRES`: se token anterior for artigo (o/a/os/as/um/uma…) ou preposição (da/de/do/para/por…), a forma não recebe tag — "A pergunta surge" → `pergunta` fica sem tag (não vira Verb falso; não recebe Noun)
 - Adjetivos por sufixo na posição 0: `-oso/-osa/-ável/-ível` (via `_stripDiac`) → `Adjective`; "Possível seria voltar." → `Adjective`
 - Presente regular na posição 0: `_VERBOS_PRES` inserido na cadeia posição-0 antes dos sufixos inequívocos; "Respira fundo." / "Importa pouco." → `Verb`
 - META corrigida: 56 topônimos (55 era stale, `rio` adicionado em v298); nota multi-palavra atualizada com comportamento real
