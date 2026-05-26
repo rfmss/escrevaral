@@ -13,6 +13,8 @@ const FUNCAO_LABEL = {
   conjuncao:   "Conjunção",
   preposicao:  "Prep.",
   predicativo: "Predicativo",
+  vocativo:    "Vocativo",
+  aposto:      "Aposto",
 };
 
 const FUNCAO_COLOR = {
@@ -28,6 +30,8 @@ const FUNCAO_COLOR = {
 function normalizarFuncao(funcao) {
   if (!funcao) return null;
   const f = funcao.toLowerCase();
+  if (f.includes("vocativo"))   return "vocativo";
+  if (f.includes("aposto"))     return "aposto";
   if (f.includes("sujeito"))    return "sujeito";
   if (f.includes("verbo") || f.includes("predicado")) return "verbo";
   if (f.includes("objeto dir")) return "objeto";
@@ -54,6 +58,7 @@ function buildTooltip(termo) {
 
 function renderSyntaxPanel(texto) {
   if (!window.syntaxEngine?._isReady()) return;
+  if (!syntaxTokensEl || !syntaxSummaryEl || !syntaxPanel) return;
 
   const resultado = syntaxEngine.analisarPeriodo(texto);
   const termos    = resultado.termos.filter(t => t.text?.trim() && !/^[.,;:!?]$/.test(t.text));
@@ -109,6 +114,36 @@ function renderSyntaxPanel(texto) {
     </div>`;
   }
 
+  if (r.vozePassiva) {
+    sumHTML += `<div class="syntax-summary-item">
+      <span class="syntax-summary-label">Voz</span>
+      <span class="syntax-summary-value">Passiva analítica</span>
+    </div>`;
+  }
+
+  if (r.vocativos?.length) {
+    sumHTML += `<div class="syntax-summary-item">
+      <span class="syntax-summary-label">Vocativo</span>
+      <span class="syntax-summary-value">${escapeHtml(r.vocativos.join(", "))}</span>
+    </div>`;
+  }
+
+  if (r.apostos?.length) {
+    const aStr = r.apostos.map(a => `${a.antecedente} → ${a.aposto}`).join("; ");
+    sumHTML += `<div class="syntax-summary-item">
+      <span class="syntax-summary-label">Aposto</span>
+      <span class="syntax-summary-value">${escapeHtml(aStr)}</span>
+    </div>`;
+  }
+
+  if (r.alertas?.length) {
+    const alertaStr = r.alertas.map(a => a.descricao).join(" · ");
+    sumHTML += `<div class="syntax-summary-item syntax-summary-alerta">
+      <span class="syntax-summary-label">Atenção</span>
+      <span class="syntax-summary-value">${escapeHtml(alertaStr)}</span>
+    </div>`;
+  }
+
   syntaxSummaryEl.innerHTML = sumHTML;
 
   // Abrir inspector se estiver fechado
@@ -133,9 +168,10 @@ document.addEventListener("selectionchange", () => {
     const texto = sel?.toString().trim() || "";
     const palavras = texto.split(/\s+/).filter(Boolean).length;
 
-    if (palavras >= 3 && writingArea.contains(sel?.anchorNode)) {
+    if (palavras >= 3 && writingArea?.contains(sel?.anchorNode)) {
+      if (!syntaxTokensEl || !syntaxSummaryEl || !syntaxPanel) return;
       if (window.syntaxEngine?._hasLoadError?.()) {
-        syntaxTokensEl.innerHTML = `<span class="syntax-empty">Dados sintáticos não carregados. Verifique a conexão e recarregue a página.</span>`;
+        syntaxTokensEl.innerHTML = `<span class="syntax-empty">Dados sintáticos não carregados. Recarregue a página.</span>`;
         syntaxSummaryEl.innerHTML = "";
         syntaxPanel.hidden = false;
         if (state.layout.rightCollapsed) togglePanel("right");

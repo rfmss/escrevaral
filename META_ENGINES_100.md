@@ -68,21 +68,22 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-25
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26
 
-**Baseline:** `bb1c789` — paginação 85%, concordância de import, modo páginas mobile corrigido.
+**Baseline:** sintaxe avançada a 95% (v276); painel sintático com pronomes, vocativo, alertas e apostos.
 
 **Candidatas a avançar (por impacto e custo):**
 
 1. **Offline / PWA → 85%** (está em 82%): revisar mensagens de erro do SW em cenários de rede intermitente; testar banner de atualização em Playwright após novo deploy.
 2. **RimaLab → 85%** (está em 82%): identificar os gaps que impedem o salto — provavelmente estados vazios, erro de entrada ou esquemas ainda sem cobertura.
-3. **Qualquer engine em 85% → 95%**: escolher uma e levar a confiável-para-produto — candidatas: Versionamento, Exportação/impressão, Arquivo/acervo.
+3. **Qualquer engine em 85% → 95%**: Pontuação, Análise geral ou Espelho de Voz — escolher uma pelo mesmo caminho que Sintaxe.
 
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
-- `pagination-engine.js`: contador de palavras por página no modo páginas — aparece na tabela como promessa, não verificado via Playwright ainda.
+- Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 95%.
+- CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 
-## Estado em 2026-05-25
+## Estado em 2026-05-26
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
@@ -100,7 +101,7 @@ Pergunta padrao da sessao:
 | Templates / guias | 85% | Loading state; fallback activeTemplate; createBlankManuscript(); selectCraft robusta |
 | Precision / aderencia ao guia | 85% | +terror-horror, memoir, jornalismo, romance; status labels mais honestos |
 | Lexico / Biblioteca | 85% | Analise local com recuperacao de erro e estado vazio definido |
-| Sintaxe | 85% | Fallback morfologico; todos os estados de erro explicitos no painel |
+| Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; alertas de concordancia; apostos e voz passiva no resumo |
 | Pontuacao | 85% | 36 regras; PONT-49 mas adversativo; PONT-47 refinada |
 | Analise geral | 85% | 16 condicoes de alerta; pronome-ambiguo, tempo-verbal, abertura-fraca; 21 criterios |
 | Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
@@ -108,6 +109,18 @@ Pergunta padrao da sessao:
 | Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
 | Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v276 / 2026-05-26
+
+**Sintaxe: 85% → 95%**
+
+- `index.html`: elementos `data-syntax-panel`, `data-syntax-tokens`, `data-syntax-summary` e `data-linguistic-panel` adicionados ao inspector — painel estava sem HTML, funcionalidade silenciosamente quebrada
+- `syntax-engine.js`: `PRONOMES_SUBJ/OBL/INDF/DEM` adicionados ao fallback morfológico — "eu", "ela", "nós", "você", "alguém", "todos" agora reconhecidos como Pronome/Substantivo; evita falso-positivo verbal em palavras como "qualquer"
+- `syntax-engine.js`: detecção de vocativo por pré-varredura em `analisarFuncoes` — primeiro token real seguido de vírgula que não seja conjunção, advérbio ou preposição recebe funcao "Vocativo"; integrado ao resumo
+- `syntax-controller.js`: "vocativo" e "aposto" adicionados a FUNCAO_LABEL, FUNCAO_COLOR e normalizarFuncao; null-guards no selectionchange handler
+- `syntax-controller.js`: voz passiva, vocativos, apostos e alertas de concordância agora renderizados no resumo (estavam computados no engine mas nunca exibidos)
+- `css/03-inspector-precision.css`: CSS completo para `.syntax-token`, `.syntax-token-word/label/tooltip`, variantes de cor por data-funcao, `.syntax-summary-item`, `.syntax-summary-alerta`, `.syn-popover`, `.syn-option`
+- QA Playwright: pronomes "eu"/"ela" como Sujeito, vocativo "João," rotulado, painel alterna sem erro JS, painel linguístico restaura ao desselecionar
 
 ### Marco — v275 / 2026-05-25
 

@@ -88,3 +88,158 @@
   background: color-mix(in srgb, var(--sienna) 10%, transparent);
 }
 
+/* ── Painel de análise sintática ── */
+.syntax-panel-hint {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.syntax-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 5px;
+  margin-bottom: 10px;
+}
+
+.syntax-token {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 2px 6px 3px;
+  border-radius: 4px;
+  background: var(--surface-mid);
+  border: 1px solid var(--line);
+  cursor: default;
+}
+
+.syntax-token:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+.syntax-token-word {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.syntax-token-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.syntax-token[data-funcao="sujeito"]     { border-color: #2a7d52; }
+.syntax-token[data-funcao="sujeito"]     .syntax-token-label { color: #2a7d52; }
+.syntax-token[data-funcao="verbo"]       { border-color: #1a5fa8; }
+.syntax-token[data-funcao="verbo"]       .syntax-token-label { color: #1a5fa8; }
+.syntax-token[data-funcao="objeto"]      { border-color: #b06000; }
+.syntax-token[data-funcao="objeto"]      .syntax-token-label { color: #b06000; }
+.syntax-token[data-funcao="adjunto"]     { border-color: #7a2d8a; }
+.syntax-token[data-funcao="adjunto"]     .syntax-token-label { color: #7a2d8a; }
+.syntax-token[data-funcao="predicativo"] { border-color: #c04030; }
+.syntax-token[data-funcao="predicativo"] .syntax-token-label { color: #c04030; }
+.syntax-token[data-funcao="vocativo"]    { border-color: #c07830; }
+.syntax-token[data-funcao="vocativo"]    .syntax-token-label { color: #c07830; }
+.syntax-token[data-funcao="aposto"]      { border-color: #5a7a3a; }
+.syntax-token[data-funcao="aposto"]      .syntax-token-label { color: #5a7a3a; }
+
+.syntax-token-tooltip {
+  position: fixed;
+  z-index: 1200;
+  background: var(--surface-high);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(0,0,0,.13);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s;
+  max-width: 220px;
+  white-space: normal;
+}
+
+.syntax-token:hover .syntax-token-tooltip,
+.syntax-token:focus .syntax-token-tooltip {
+  opacity: 1;
+}
+
+.syntax-empty {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.syntax-summary {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.syntax-summary-item {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.syntax-summary-label {
+  flex: 0 0 58px;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  padding-top: 1px;
+}
+
+.syntax-summary-value { flex: 1; color: var(--ink); }
+
+.syntax-summary-alerta .syntax-summary-label,
+.syntax-summary-alerta .syntax-summary-value { color: var(--sienna); }
+
+/* ── Sinônimos (popover hover no editor) ── */
+.syn-popover {
+  position: absolute;
+  z-index: 1100;
+  display: none;
+  background: var(--surface-high);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.14);
+  gap: 2px;
+}
+
+.syn-popover.is-visible { display: flex; }
+
+.syn-option {
+  font-size: 12.5px;
+  padding: 5px 11px;
+  border-radius: 5px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s, color 0.1s;
+}
+
+.syn-option:hover {
+  background: var(--surface-mid);
+  color: var(--primary);
+}
+

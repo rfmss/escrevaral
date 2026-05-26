@@ -2231,9 +2231,45 @@ mark {
 .statusbar-social {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
   color: var(--muted);
-  opacity: 0.45;
-  transition: opacity .15s;
+  opacity: 0.58;
+  transition: color .15s, opacity .15s, transform .15s;
   text-decoration: none;
 }
-.statusbar-social:hover { opacity: 1; }
+
+.statusbar-social svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.statusbar-social--mastodon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.statusbar-social--bluesky svg {
+  width: 16px;
+  height: 15px;
+}
+
+.statusbar-social--mail svg {
+  width: 15px;
+  height: 15px;
+}
+
+.statusbar-social--x { --statusbar-social-hover: var(--soft-ink); }
+.statusbar-social--mastodon { --statusbar-social-hover: #6364ff; }
+.statusbar-social--bluesky { --statusbar-social-hover: #1185fe; }
+.statusbar-social--mail { --statusbar-social-hover: var(--ochre); }
+
+.statusbar-social:hover,
+.statusbar-social:focus-visible {
+  color: var(--statusbar-social-hover, var(--primary));
+  opacity: 1;
+  transform: translateY(-1px);
+}

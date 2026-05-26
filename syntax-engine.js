@@ -23,6 +23,23 @@
 
   // ── Morfologia via pt-compromise ──────────────────────────────────────────
 
+  // Pronomes pessoais — para fallback morfológico (Cunha&Cintra cap.8)
+  const PRONOMES_SUBJ = new Set([
+    "eu","tu","ele","ela","nós","vós","vocês","eles","elas","você"
+  ]);
+  const PRONOMES_OBL = new Set([
+    "me","te","lhe","lhes","mim","ti","si","conosco","convosco","vos"
+  ]);
+  const PRONOMES_INDF = new Set([
+    "alguém","ninguém","tudo","nada","algo","qualquer","todo","toda","todos","todas",
+    "outrem","outro","outra","outros","outras","cada","nenhum","nenhuma",
+    "algum","alguma","alguns","algumas"
+  ]);
+  const PRONOMES_DEM = new Set([
+    "este","esta","estes","estas","esse","essa","esses","essas",
+    "aquele","aquela","aqueles","aquelas","isto","isso","aquilo"
+  ]);
+
   function analisarMorfologiaFallback(texto) {
     const tokens = texto.match(/[\p{L}'-]+|[.,;:!?—]/gu) || [];
     return tokens.map((word, i) => {
@@ -30,11 +47,18 @@
       const tags = [];
       if (PREPS_OI.has(norm)) tags.push("Preposition");
       if (_data && identificarConjuncao(word, { posInicio: i === 0 })) tags.push("Conjunction");
-      if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
-      if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
-      else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
-      else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
-      else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
+      // Pronomes pessoais antes dos padrões verbais — evita falso-positivo em "qualquer", "todos"
+      if (PRONOMES_SUBJ.has(norm))      { tags.push("Pronoun"); tags.push("Noun"); }
+      else if (PRONOMES_OBL.has(norm))  { tags.push("Pronoun"); }
+      else if (PRONOMES_INDF.has(norm)) { tags.push("Pronoun"); tags.push("Noun"); }
+      else if (PRONOMES_DEM.has(norm))  { tags.push("Pronoun"); }
+      else {
+        if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
+        if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+        else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
+        else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
+        else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
+      }
       return { text: word, tags, normal: norm };
     });
   }
@@ -305,6 +329,28 @@
     let ultimoVerboText = null;
     let prepVistaAntes = false; // rastreia se havia preposição antes do SN atual
 
+    // Pré-detectar vocativo: primeiro token real seguido de vírgula
+    // que não seja conjunção, advérbio ou preposição conhecida
+    const vocativoPosicoes = new Set();
+    {
+      let i0 = 0;
+      while (i0 < termos.length && /^[.,;:!?—]$/.test((termos[i0].text || "").trim())) i0++;
+      if (i0 + 1 < termos.length) {
+        const cand = termos[i0];
+        const prox = termos[i0 + 1];
+        if ((prox.text || "").trim() === ",") {
+          const txt = (cand.text || "").trim();
+          const norm = txt.toLowerCase();
+          const tags = cand.tags || [];
+          const isConj = _data ? !!identificarConjuncao(txt, { posInicio: true }) : false;
+          const isAdv = tags.includes("Adverb") || ADV_TEMPO.has(norm) || ADV_LUGAR.has(norm) ||
+                        ADV_MODO.has(norm) || ADV_NEGACAO.has(norm) || ADV_AFIRM.has(norm) ||
+                        ADV_INTENS.has(norm) || ADV_DUVIDA.has(norm);
+          if (!isConj && !isAdv && !PREPS_OI.has(norm)) vocativoPosicoes.add(i0);
+        }
+      }
+    }
+
     const textoPeriodo = termos.map(t => (t.text || "").toLowerCase()).join(" ");
     const conjTempCond = [
       ...(_data.conjuncoes.subordinativas?.temporais?.palavras || []),
@@ -320,6 +366,12 @@
       if (!txt || /^[.,;:!?—]$/.test(txt)) {
         resultado.push({ ...t, funcao: null });
         prepVistaAntes = false;
+        continue;
+      }
+
+      // ── Vocativo
+      if (vocativoPosicoes.has(i)) {
+        resultado.push({ ...t, funcao: "Vocativo", tagsLegíveis: mapearTag(tags) });
         continue;
       }
 
@@ -500,6 +552,7 @@
 
     const verbos      = termos.filter(t => t.tags?.includes("Verb") && !t.tags?.includes("Negative"));
     const conjuncoes  = termos.filter(t => t.conjuncao);
+    const vocativos   = termos.filter(t => t.funcao === "Vocativo").map(v => v.text);
     const nOracoes    = Math.max(1, verbos.length);
     const temPassiva  = termos.some(t => t.funcao?.includes("passiva"));
     const temRelativa = termos.some(t => t.funcao?.includes("adjetiva"));
@@ -521,6 +574,7 @@
         tipo: tipoPeriodo,
         vozePassiva: temPassiva,
         temRelativa,
+        vocativos,
         verbos: verbos.map(v => ({
           forma: v.text,
           tempo: v.tempo,
@@ -555,6 +609,10 @@
     _hasLoadError: () => _loadError,
     VERBOS_LIGACAO,
     VERBOS_PRED_OBJ,
+    PRONOMES_SUBJ,
+    PRONOMES_OBL,
+    PRONOMES_INDF,
+    PRONOMES_DEM,
   };
 
 })(window);

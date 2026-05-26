@@ -23,6 +23,7 @@ Relatórios ativos de auditoria:
 
 - `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
 - `reports/auditoria/vereda-dark-audit-20260524.md` para o estado atual do tema escuro Vereda, contraste, responsividade mobile e decisão de manter `scriptorium` como identificador técnico legado.
+- `reports/auditoria/hints-nativos-tooltip-clone-20260526.md` para a decisão de produto sobre não depender de dicas nativas do navegador (`title`) e migrar hints visuais para um clone próprio Alvorada/Vereda.
 
 ---
 
