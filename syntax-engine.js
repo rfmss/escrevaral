@@ -6,8 +6,11 @@
   let _norma     = null;
   let _loadError = false;
 
-  let _PRENOMES_F = new Set();
-  let _PRENOMES_M = new Set();
+  let _PRENOMES_F  = new Set();
+  let _PRENOMES_M  = new Set();
+  let _VERBOS_IRR  = new Set();
+  let _TOPONIMOS   = new Set();
+  let _SIGLAS      = new Set();
 
   // Remove acentos para lookup de prenomes — "Vitória" → "vitoria"
   function _stripDiac(s) {
@@ -28,6 +31,9 @@
       if (_norma) {
         _PRENOMES_F = new Set(_norma.prenomes_femininos || []);
         _PRENOMES_M = new Set(_norma.prenomes_masculinos || []);
+        _VERBOS_IRR = new Set(_norma.formas_verbais_irr || []);
+        _TOPONIMOS  = new Set(_norma.toponimos_pt_br || []);
+        _SIGLAS     = new Set(_norma.siglas_pt_br || []);
       }
       return true;
     } catch (e) {
@@ -84,24 +90,31 @@
           tags.push("ProperNoun");
           tags.push("Noun");
         } else if (i === 0 && /^\p{Lu}/u.test(word)) {
-          // Posição 0 com maiúscula: verificar banco de prenomes antes de tentar morfologia.
+          // Posição 0: prenomes → topônimos/siglas → verbos irr → sufixos seguros → ambíguo
           const normNacc = _stripDiac(norm);
           const isFemNome = _PRENOMES_F.has(normNacc);
           const isMascNome = _PRENOMES_M.has(normNacc);
           if (isFemNome || isMascNome) {
-            tags.push("ProperNoun");
-            tags.push("Noun");
+            tags.push("ProperNoun"); tags.push("Noun");
             if (isFemNome) tags.push("FemaleName");
             if (isMascNome) tags.push("MaleName");
+          } else if (_TOPONIMOS.has(normNacc) || _SIGLAS.has(normNacc)) {
+            tags.push("ProperNoun"); tags.push("Noun");
+          } else if (VERBOS_LIGACAO.has(norm) || (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(normNacc))) {
+            tags.push("Verb");
+          } else {
+            // Sufixos inequívocos em posição 0 — não se confundem com nomes próprios
+            if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+            else if (norm.length > 4 && /(?:aram|eram|iram|ava|avam|ará|erá|irá|asse|esse|isse)$/.test(norm)) tags.push("Verb");
+            // Omitidos em posição 0: -ia/-iria/-aria (Vitória/Maria), -ar/-er/-ir (Rosa/Amar)
           }
-          // Se não está no banco: ambíguo — não classifica como verbo por terminação.
-          // Evita Vitória/Sabia/Seria→Verb quando é nome não listado.
         } else {
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
           else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
           else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
+          else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) tags.push("Verb");
         }
       }
       return { text: word, tags, normal: norm };

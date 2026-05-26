@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v296 — Sintaxe em 98%; 13 engines em 95%; 6 restantes em 85–88%.
+**Baseline:** v297 — Sintaxe em 99%; 13 engines em 95%; 6 restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -105,7 +105,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | **98%** | norma-data.json: 521 prenomes unicos IBGE (F+M); artigos inequívocos (o/os/as/um/uma/uns/umas) → Determiner; "A menina..." → Determiner (não Preposição); ambiguo honesto para desconhecidos |
+| Sintaxe | **99%** | norma-data.json: 521 prenomes, 124 verbos irr, 55 topônimos, 45 siglas; pos-0 resolve verbos (Fiz/Fui/Dei/Tem), nomes (Maria/Brasília/ONU), ambíguo honesto (Sabia/Falaria) |
 | Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
 | Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
@@ -131,6 +131,15 @@ Pergunta padrao da sessao:
 - "a" mid-sentence mantém `Preposition` → OI detection à linha 444 já trata como "Artigo / contração"
 - 7 duplicatas removidas de `norma-data.json` (521 → 521 únicos confirmados)
 - CACHE_NAME: vereda-offline-v296 | ASSET_VERSION: 20260526-artigo98
+
+**v297 — topônimos + siglas + verbos irregulares**
+- `formas_verbais_irr` (124): dar/fazer/ir/ter/poder/querer/saber/vir/pôr/dizer/trazer/ver/ler/haver/caber e outros; lookup com `_stripDiac` + guarda `!PREPS_OI.has(norm)`
+- `toponimos_pt_br` (55): estados, capitais e regiões em token único
+- `siglas_pt_br` (45): ONU, IBGE, STF, USP, ANVISA e outras
+- Posição 0: prenomes → topônimos/siglas → VERBOS_LIGACAO + VERBOS_IRR → sufixos seguros (-ando/-eram/-ava, length>4) → ambíguo honesto
+- Sufixos omitidos na posição 0: `-ia/-aria/-eria` (Vitória/Maria) e `-ar/-er/-ir` (Rosa/Amar)
+- "Fiz/Fui/Foram/Dei/Tem/Soube/Trouxe" → `Verb`; "Brasília/ONU" → `ProperNoun`; "Sabia/Falaria" → ambíguo
+- CACHE_NAME: vereda-offline-v297 | ASSET_VERSION: 20260526-norma99
 
 ---
 
