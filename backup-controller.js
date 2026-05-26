@@ -17,15 +17,24 @@ function registerOfflineApp() {
     if (updateBanner) updateBanner.hidden = false;
   }
 
-  if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => window.location.reload());
+  if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => {
+    if (updateReloadBtn) { updateReloadBtn.disabled = true; updateReloadBtn.textContent = "Recarregando…"; }
+    window.location.reload();
+  });
   if (updateDismissBtn) updateDismissBtn.addEventListener("click", () => { if (updateBanner) updateBanner.hidden = true; });
 
-  navigator.serviceWorker.addEventListener("controllerchange", showUpdateBanner);
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    showUpdateBanner();
+    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
+  });
 
   navigator.serviceWorker
     .register("./service-worker.js")
     .then((registration) => {
-      offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
+      const isControlled = Boolean(navigator.serviceWorker.controller);
+      offlineStatus.innerHTML = isControlled
+        ? '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet'
+        : '<span class="material-symbols-outlined">downloading</span>Preparando uso sem internet…';
 
       // Detectar SW em espera imediatamente (banner antecipado)
       if (registration.waiting) showUpdateBanner();

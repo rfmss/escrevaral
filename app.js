@@ -275,7 +275,7 @@ function updateConnectionStatus() {
     return;
   }
 
-  const label = navigator.onLine ? "Pronto sem internet" : "Sem rede";
+  const label = navigator.onLine ? "Pronto sem internet" : "Sem rede — escrita continua";
   const icon = navigator.onLine ? "cloud_done" : "cloud_off";
   offlineStatus.innerHTML = `<span class="material-symbols-outlined">${icon}</span>${label}`;
 }
