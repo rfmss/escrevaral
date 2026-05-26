@@ -177,6 +177,7 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
             <span class="voice-alerta-dim">${getDimLabel(a.dim)}</span>
             <span class="voice-alerta-body">
               ${escapeHtml(a.msg)}
+              ${a.acao ? `<span class="voice-alerta-acao">${escapeHtml(a.acao)}</span>` : ""}
               ${fontes ? `<span class="voice-alerta-fonte">${escapeHtml(fontes)}</span>` : ""}
             </span>
           </div>`;
@@ -233,6 +234,7 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
       <p class="voice-audience-secondary">${escapeHtml(analysis.audience.secondary)}</p>
       <p class="voice-audience-risk"><strong>Risco de perda:</strong> ${escapeHtml(analysis.audience.risk)}</p>
     </div>` : ""}
+    ${analysis.confiancaNote ? `<p class="voice-confianca-note voice-confianca-${escapeHtml(analysis.confianca)}">${escapeHtml(analysis.confiancaNote)}</p>` : ""}
     <p class="voice-disclaimer">${escapeHtml(analysis.disclaimer)}</p>
   `;
 }

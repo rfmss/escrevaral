@@ -383,9 +383,46 @@
     };
   }
 
+  // ── Detectar se o texto é prosa (sem versos) ─────────────────────────────────
+  function detectarProsa(text) {
+    if (!text?.trim()) return true;
+    const lines = text.split("\n").map(l => l.trim()).filter(Boolean);
+    if (lines.length < 2) return true;
+    // Linhas muito longas (> 100 chars) = prosa quase certamente
+    const linhasLongas = lines.filter(l => l.length > 100).length;
+    if (linhasLongas / lines.length > 0.5) return true;
+    // Todas as linhas terminam com ponto final = prosa
+    const terminamEmPonto = lines.filter(l => /[.!?]$/.test(l)).length;
+    if (terminamEmPonto / lines.length > 0.7 && lines.length > 3) return true;
+    return false;
+  }
+
   // ── Análise completa ──────────────────────────────────────────────────────────
   function analyze(text) {
+    const isProse = detectarProsa(text);
     const verses = text.split("\n").map(l => l.trim()).filter(Boolean);
+
+    if (isProse || verses.length < 2) {
+      return {
+        note: ACADEMIC_NOTE,
+        isProse: true,
+        verses: [],
+        scans: [],
+        metrics: [],
+        uniqueMetrics: [],
+        isIsometric: false,
+        rhymes: [],
+        rhymeScheme: "",
+        stanzas: null,
+        totalVerses: 0,
+        dominantMetric: null,
+        dominantName: "",
+        proseNote: verses.length < 2
+          ? "Escreva ao menos dois versos em linhas separadas para ver a análise."
+          : "O texto parece ser prosa. Cole versos separados por linha para ver métricas e rimas.",
+      };
+    }
+
     const scans  = verses.map(scanVerse);
     const metrics = scans.map(s => s.totalSyllables);
     const uniqueMetrics = [...new Set(metrics)].sort((a,b) => a-b);
@@ -421,6 +458,7 @@
 
     return {
       note: ACADEMIC_NOTE,
+      isProse: false,
       verses,
       scans,
       metrics,
@@ -438,31 +476,48 @@
   // ── Nomeação de esquemas canônicos ────────────────────────────────────────────
   const SCHEME_NAMES = {
     // Dísticos
-    "A A":           "dístico rimado",
+    "A A":               "dístico rimado",
+    "A B":               "dístico solto",
     // Tercetos
-    "A A A":         "terceto monorrimo",
-    "A B A":         "terceto",
-    "A B B":         "terceto",
+    "A A A":             "terceto monorrimo",
+    "A B A":             "terceto",
+    "A B B":             "terceto",
+    "A A B":             "terceto",
+    "A B C":             "terceto solto",
     // Quartetos
-    "A B A B":       "quarteto alternado",
-    "A A B B":       "quarteto emparelhado",
-    "A B B A":       "quarteto abrazado",
-    "A A A A":       "quarteto monorrimo",
-    "A B C B":       "quarteto popular",
+    "A B A B":           "quarteto alternado",
+    "A A B B":           "quarteto emparelhado",
+    "A B B A":           "quarteto abrazado (redondilha)",
+    "A A A A":           "quarteto monorrimo",
+    "A B C B":           "quarteto popular (balada)",
+    "A B A C":           "quarteto",
+    "A B C A":           "quarteto",
+    "A B C D":           "quarteto em verso branco",
     // Quintilhas
-    "A A B A B":     "quintilha",
-    "A B A A B":     "quintilha",
-    "A A B B A":     "quintilha",
+    "A A B A B":         "quintilha",
+    "A B A A B":         "quintilha",
+    "A A B B A":         "quintilha",
+    "A B A B A":         "quintilha alternada",
+    "A B B A B":         "quintilha",
     // Sextilhas
-    "A B A B A B":   "sextilha alternada",
-    "A A B C C B":   "sextilha abrazada",
-    "A A B A A B":   "sextilha",
-    "A B C A B C":   "sextilha",
+    "A B A B A B":       "sextilha alternada",
+    "A A B C C B":       "sextilha abrazada",
+    "A A B A A B":       "sextilha",
+    "A B C A B C":       "sextilha",
+    "A A B B C C":       "sextilha emparelhada",
+    // Sétimas
+    "A B A B C C B":     "sétima",
+    "A A B A A A B":     "sétima",
     // Oitavas
-    "A B A B A B C C": "oitava rima",
-    "A B A B C D C D": "oitava alternada",
+    "A B A B A B C C":   "oitava rima (Camões)",
+    "A B A B C D C D":   "oitava alternada",
+    "A B C A B C D D":   "oitava",
     // Décimas
     "A B B A A C C D D C": "décima espinela",
+    "A B A B C C D E D E": "décima",
+    // Soneto (14 versos: 2 quartetos + 2 tercetos)
+    "A B B A A B B A C D C D C D": "soneto (CDC DCD)",
+    "A B B A A B B A C D E C D E": "soneto (CDE CDE)",
   };
 
   function nameScheme(schemeStr) {

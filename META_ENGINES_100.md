@@ -70,18 +70,19 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26
 
-**Baseline:** sintaxe avançada a 95% (v276); painel sintático com pronomes, vocativo, alertas e apostos.
+**Baseline:** 4 engines de linguagem avançados (v277); Pontuação, Análise geral e Espelho de Voz chegaram a 95%; RimaLab chegou a 85%.
 
 **Candidatas a avançar (por impacto e custo):**
 
 1. **Offline / PWA → 85%** (está em 82%): revisar mensagens de erro do SW em cenários de rede intermitente; testar banner de atualização em Playwright após novo deploy.
-2. **RimaLab → 85%** (está em 82%): identificar os gaps que impedem o salto — provavelmente estados vazios, erro de entrada ou esquemas ainda sem cobertura.
-3. **Qualquer engine em 85% → 95%**: Pontuação, Análise geral ou Espelho de Voz — escolher uma pelo mesmo caminho que Sintaxe.
+2. **RimaLab → 95%** (está em 85%): expandir encyclopedia local; detecção de cesura; exportação do esquema em texto.
+3. **Versionamento → 95%** (está em 85%): diff visual por parágrafo; exportação de versão específica.
 
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 95%.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
+- Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
 
 ## Estado em 2026-05-26
 
@@ -102,13 +103,44 @@ Pergunta padrao da sessao:
 | Precision / aderencia ao guia | 85% | +terror-horror, memoir, jornalismo, romance; status labels mais honestos |
 | Lexico / Biblioteca | 85% | Analise local com recuperacao de erro e estado vazio definido |
 | Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; alertas de concordancia; apostos e voz passiva no resumo |
-| Pontuacao | 85% | 36 regras; PONT-49 mas adversativo; PONT-47 refinada |
-| Analise geral | 85% | 16 condicoes de alerta; pronome-ambiguo, tempo-verbal, abertura-fraca; 21 criterios |
-| Espelho de Voz | 85% | Campo sobrenatural; fieldLabels/emotionLabels legiveis; audiencia com labels |
-| RimaLab | 82% | nameScheme() reconhece 20 esquemas; quarteto alternado, oitava rima, decima espinela |
+| Pontuacao | 95% | 38 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
+| Analise geral | 95% | `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições; dimensoes por alerta |
+| Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
+| RimaLab | 85% | Deteccao de prosa (isProse); 35+ esquemas nomeados; soneto, quintilha, oitava rima |
 | Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
 | Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v277 / 2026-05-26
+
+**Sessão autônoma — 4 engines de linguagem avançados**
+
+**Pontuação: 85% → 95%**
+- 38 regras (PONT-50: espaço antes de pontuação; PONT-51: vírgula antes de parêntese)
+- `acao` adicionado a cada regra: sugestão de correção concreta, não só diagnóstico
+- `resumo: { alta, media, baixa }` no retorno de `analyze()` — agrupamento por severidade
+- Fix: `PONT-23 detect()` — bug de dupla chamada `first()` corrigido; filtro aplicado à mesma chamada
+- `analyzeDeep()` também retorna `resumo` e inclui `acao` nos alertas sintáticos
+
+**Análise geral: 85% → 95%**
+- `acao` adicionado a cada alerta em `interpretarResultado()` — o que fazer, com exemplo concreto
+- CLIQUES_PT: 55 → 88 entradas (adicionados latinismos burocráticos e clichês de divulgação)
+- PLEONASMOS: 26 → 35 pares (primer estreia, irmãos gêmeos, retornar de volta, etc.)
+- Alerta de pontuação agora propaga `acao` da regra detectada para o alerta de análise geral
+
+**Espelho de Voz: 85% → 95%**
+- Gesto `sobrenatural` como tipo distinto: ecos literários próprios (Mia Couto, Paulina Chiziane, Guimarães Rosa); exercício próprio; priority antes de `seco`
+- `confianca: "alta"|"media"|"baixa"` no retorno de `analyze()` — baseado em word count (< 200, 200-500, 500+)
+- `confiancaNote` exibida na UI quando corpus é curto ou médio
+- `emotionLexicons` expandidos: melancolia +8 termos, tensão +7, luminosidade +7, ironia +5, contemplação +7, ternura +7
+- CSS: `.voice-alerta-acao` (dica de correção destacada), `.voice-confianca-note` (alerta de corpus curto)
+
+**RimaLab: 82% → 85%**
+- `detectarProsa()`: detecta texto em prosa por linhas longas (> 100 chars), terminações em ponto e ausência de quebras — retorna `isProse: true`
+- `analyze()` retorna `{ isProse: true, proseNote: "...", totalVerses: 0 }` quando prosa detectada
+- `renderRimaLab()` trata estado de prosa com mensagem explícita em vez de painel silencioso
+- `SCHEME_NAMES`: 20 → 35 esquemas nomeados (dístico solto, quarteto em verso branco, sétima, soneto, décima, sextilha emparelhada, etc.)
+- QA Playwright: prosa detectada ✓; poema 4 versos não é prosa ✓; acao presente ✓; resumo de severidade ✓
 
 ### Marco — v276 / 2026-05-26
 

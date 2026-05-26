@@ -93,6 +93,17 @@
     "conforme dito","nada mais nada menos","isso posto","em suma","em síntese",
     "em conclusão","por fim","por último","finalmente","desta forma","neste sentido",
     "nesse sentido","por conseguinte","consequentemente","assim sendo",
+    // adicionais comuns em textos acadêmicos e jornalísticos
+    "é importante frisar","mister se faz","faz-se necessário","no sentido de",
+    "em termos de","no bojo de","tendo em conta","levando em consideração",
+    "em face de","a título de","no âmbito de","no que concerne",
+    "em virtude de","para todos os efeitos","a despeito de","malgrado",
+    "em que pese","por sua vez","de fato","a priori","a posteriori",
+    "grosso modo","ipso facto","ab initio","sine qua non","stricto sensu",
+    "lato sensu","de plano","em tese","em tela","tem-se que","impõe-se que",
+    "depreende-se que","infere-se que","ao que tudo indica","tudo leva a crer",
+    "não é por acaso que","é mister","é imperioso","é imprescindível frisar",
+    "como sabemos","como é sabido","todos sabemos","não podemos negar que",
   ];
 
   const PLEONASMOS = [
@@ -109,6 +120,14 @@
     ["interagir entre si","interagir"],["ganho extra","ganho adicional"],
     ["detalhes minuciosos","detalhes"],["relato verbal","relato"],
     ["outra alternativa","alternativa"],["hemorragia de sangue","hemorragia"],
+    ["criar novos empregos","criar empregos"],["panorama geral","panorama"],
+    ["excesso de sobras","sobras"],["cadáver morto","cadáver"],
+    ["conviver juntos","conviver"],["premissa prévia","premissa"],
+    ["prever antecipadamente","prever"],["retornar de volta","retornar"],
+    ["comparecer pessoalmente","comparecer"],["biografia de vida","biografia"],
+    ["elo de ligação","elo"],["a razão é porque","a razão é que"],
+    ["onde quer que seja","onde quer que"],["metade da metade","um quarto"],
+    ["dois irmãos gêmeos","gêmeos"],["primeira estreia","estreia"],
   ];
 
   const NEGACOES_DUPLAS = [
@@ -474,59 +493,89 @@
     const { economia, clareza, ritmo, voz, lexico, pov, norma } = resultado;
 
     if (economia.adverbiosMente.densidade > 3)
-      alertas.push({ dim: "economia", id: "adverbios-mente", nivel: economia.adverbiosMente.densidade > 6 ? "alto" : "moderado", msg: `${economia.adverbiosMente.densidade}% de advérbios em -mente. Acima de 3% é sinal de verbo fraco.` });
+      alertas.push({ dim: "economia", id: "adverbios-mente", nivel: economia.adverbiosMente.densidade > 6 ? "alto" : "moderado",
+        msg: `${economia.adverbiosMente.densidade}% de advérbios em -mente. Acima de 3% é sinal de verbo fraco.`,
+        acao: `Troque o advérbio por um verbo mais preciso. Ex.: "andou lentamente" → "arrastou os pés". Palavras afetadas: ${economia.adverbiosMente.lista.slice(0,3).join(", ")}.` });
 
     if (economia.vozPassiva.proporcao > 20)
-      alertas.push({ dim: "economia", id: "voz-passiva", nivel: economia.vozPassiva.proporcao > 35 ? "alto" : "moderado", msg: `${economia.vozPassiva.proporcao}% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.` });
+      alertas.push({ dim: "economia", id: "voz-passiva", nivel: economia.vozPassiva.proporcao > 35 ? "alto" : "moderado",
+        msg: `${economia.vozPassiva.proporcao}% de construções passivas. Acima de 20% indica insegurança ou distância excessiva.`,
+        acao: `Reescreva as passivas na voz ativa: quem age? Identifique o sujeito e ponha-o antes do verbo.` });
 
     if (economia.redundancia.ocorrencias > 0)
-      alertas.push({ dim: "economia", id: "redundancia", nivel: "moderado", msg: `${economia.redundancia.ocorrencias} par(es) redundante(s): ${economia.redundancia.lista.slice(0,2).join(", ")}.` });
+      alertas.push({ dim: "economia", id: "redundancia", nivel: "moderado",
+        msg: `${economia.redundancia.ocorrencias} par(es) redundante(s): ${economia.redundancia.lista.slice(0,2).join(", ")}.`,
+        acao: `Remova a palavra que repete o sentido. Ex.: "subir para cima" → "subir".` });
 
     if (economia.negacaoDupla.ocorrencias > 2)
-      alertas.push({ dim: "economia", id: "negacao-dupla", nivel: "moderado", msg: `${economia.negacaoDupla.ocorrencias} negação(ões) dupla(s)/indireta(s). Preferir a forma afirmativa direta.` });
+      alertas.push({ dim: "economia", id: "negacao-dupla", nivel: "moderado",
+        msg: `${economia.negacaoDupla.ocorrencias} negação(ões) dupla(s)/indireta(s). Preferir a forma afirmativa direta.`,
+        acao: `Prefira a forma afirmativa direta: "não é impossível" → "é possível".` });
 
     if (clareza.comprimentoMedio > 30)
-      alertas.push({ dim: "clareza", id: "comprimento-frase", nivel: clareza.comprimentoMedio > 40 ? "alto" : "moderado", msg: `Média de ${clareza.comprimentoMedio} palavras/frase. Acima de 30 aumenta a carga cognitiva.` });
+      alertas.push({ dim: "clareza", id: "comprimento-frase", nivel: clareza.comprimentoMedio > 40 ? "alto" : "moderado",
+        msg: `Média de ${clareza.comprimentoMedio} palavras/frase. Acima de 30 aumenta a carga cognitiva.`,
+        acao: `Identifique a oração principal e mova os adjuntos para frases independentes. Quebre a sentença em dois períodos.` });
 
     if (ritmo.variacaoFrase.dp < 4 && resultado.meta.totalFrases > 5)
-      alertas.push({ dim: "ritmo", id: "variacao-frase", nivel: "moderado", msg: `Desvio padrão de comprimento: ${ritmo.variacaoFrase.dp}. Texto com ritmo muito uniforme. Varie o comprimento das frases.` });
+      alertas.push({ dim: "ritmo", id: "variacao-frase", nivel: "moderado",
+        msg: `Desvio padrão de comprimento: ${ritmo.variacaoFrase.dp}. Texto com ritmo muito uniforme. Varie o comprimento das frases.`,
+        acao: `Após uma frase longa, escreva uma curta. Depois, uma média. Misture tamanhos deliberadamente.` });
 
     if (ritmo.repeticaoProxima.ocorrencias > 5)
-      alertas.push({ dim: "ritmo", id: "repeticao-proxima", nivel: ritmo.repeticaoProxima.ocorrencias > 10 ? "alto" : "moderado", msg: `${ritmo.repeticaoProxima.ocorrencias} palavras repetidas em frases próximas: ${ritmo.repeticaoProxima.lista.slice(0,4).join(", ")}.` });
+      alertas.push({ dim: "ritmo", id: "repeticao-proxima", nivel: ritmo.repeticaoProxima.ocorrencias > 10 ? "alto" : "moderado",
+        msg: `${ritmo.repeticaoProxima.ocorrencias} palavras repetidas em frases próximas: ${ritmo.repeticaoProxima.lista.slice(0,4).join(", ")}.`,
+        acao: `Substitua a segunda ocorrência por sinônimo, pronome ou elipse. Se a repetição for intencional como motivo, mantenha-a consciente.` });
 
     if (voz.cliches.ocorrencias > 0)
-      alertas.push({ dim: "voz", id: "cliche", nivel: voz.cliches.ocorrencias > 3 ? "alto" : "moderado", msg: `${voz.cliches.ocorrencias} clichê(s) detectado(s): ${voz.cliches.lista.slice(0,2).join("; ")}.` });
+      alertas.push({ dim: "voz", id: "cliche", nivel: voz.cliches.ocorrencias > 3 ? "alto" : "moderado",
+        msg: `${voz.cliches.ocorrencias} clichê(s) detectado(s): ${voz.cliches.lista.slice(0,2).join("; ")}.`,
+        acao: `Substitua cada clichê por uma imagem ou formulação própria. O que você vê quando pensa nessa ideia? Descreva isso.` });
 
     if (lexico.verbosEstado.nivel === "alto")
-      alertas.push({ dim: "lexico", id: "verbos-estado", nivel: "moderado", msg: `${lexico.verbosEstado.proporcao}% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.` });
+      alertas.push({ dim: "lexico", id: "verbos-estado", nivel: "moderado",
+        msg: `${lexico.verbosEstado.proporcao}% dos verbos são de estado (ser, estar, ter...). Substitua por verbos de ação.`,
+        acao: `Troque "é importante" por "importa", "está presente" por "habita", "tem influência" por "influencia".` });
 
     if (lexico.substantivosVagos.densidade > 2)
-      alertas.push({ dim: "lexico", id: "substantivos-vagos", nivel: "moderado", msg: `${lexico.substantivosVagos.densidade}% de substantivos vagos (coisa, aspecto, questão...). Especifique.` });
+      alertas.push({ dim: "lexico", id: "substantivos-vagos", nivel: "moderado",
+        msg: `${lexico.substantivosVagos.densidade}% de substantivos vagos (coisa, aspecto, questão...). Especifique.`,
+        acao: `Substitua cada substantivo vago pelo que ele nomeia: "a questão" → "o prazo", "a coisa" → "o manuscrito".` });
 
     if (!pov.consistenciaPessoa.consistente)
-      alertas.push({ dim: "pov", id: "pessoa-narrativa", nivel: "moderado", msg: `Texto mistura 1ª e 3ª pessoa (${pov.consistenciaPessoa.frases1a} frases em "eu" e ${pov.consistenciaPessoa.frases3a} em "ele/ela"). Verifique se é intencional.` });
+      alertas.push({ dim: "pov", id: "pessoa-narrativa", nivel: "moderado",
+        msg: `Texto mistura 1ª e 3ª pessoa (${pov.consistenciaPessoa.frases1a} frases em "eu" e ${pov.consistenciaPessoa.frases3a} em "ele/ela"). Verifique se é intencional.`,
+        acao: `Se não for diálogo ou citação, escolha um ponto de vista e mantenha-o. Defina: quem narra?` });
 
     if (norma?.pontuacao?.issues?.length > 0) {
       const first = norma.pontuacao.issues[0];
       alertas.push({
-        dim: "norma",
-        id: "pontuacao",
+        dim: "norma", id: "pontuacao",
         nivel: first.severity === "alta" ? "alto" : "moderado",
         msg: `${norma.pontuacao.issues.length} alerta(s) de pontuação funcional. Principal: ${first.criterio}`,
+        acao: first.acao || "Revise a pontuação no trecho indicado.",
       });
     }
 
     if (resultado.meta.fleschBR < 30 && resultado.meta.totalPalavras > 100)
-      alertas.push({ dim: "clareza", id: "flesch-denso", nivel: "moderado", msg: `Legibilidade ${resultado.meta.fleschBR}/100 (${resultado.meta.fleschLabel}). Texto muito exigente — verifique se é intencional para o público-alvo.` });
+      alertas.push({ dim: "clareza", id: "flesch-denso", nivel: "moderado",
+        msg: `Legibilidade ${resultado.meta.fleschBR}/100 (${resultado.meta.fleschLabel}). Texto muito exigente — verifique se é intencional para o público-alvo.`,
+        acao: `Prefira palavras curtas às longas. Quebre frases acima de 25 palavras. Reduza prefixos e substantivos abstratos.` });
 
     if (clareza.tempoVerbal?.frasesComMistura > 2 && resultado.meta.totalFrases > 10)
-      alertas.push({ dim: "clareza", id: "tempo-verbal", nivel: "moderado", msg: `${clareza.tempoVerbal.frasesComMistura} frases misturam presente e passado na mesma sentença. Verifique se a alternância é intencional ou sinal de inconsistência.` });
+      alertas.push({ dim: "clareza", id: "tempo-verbal", nivel: "moderado",
+        msg: `${clareza.tempoVerbal.frasesComMistura} frases misturam presente e passado na mesma sentença. Verifique se a alternância é intencional ou sinal de inconsistência.`,
+        acao: `Escolha um tempo verbal dominante para a narrativa. Se alternar, que seja por efeito consciente — flashback, comparação, reflexão.` });
 
     if (clareza.pronomeAmbiguo?.suspeitas > 3)
-      alertas.push({ dim: "clareza", id: "pronome-ambiguo", nivel: "moderado", msg: `${clareza.pronomeAmbiguo.suspeitas} frases com pronomes de 3ª pessoa em contexto denso. Verifique se o referente está claro para o leitor.` });
+      alertas.push({ dim: "clareza", id: "pronome-ambiguo", nivel: "moderado",
+        msg: `${clareza.pronomeAmbiguo.suspeitas} frases com pronomes de 3ª pessoa em contexto denso. Verifique se o referente está claro para o leitor.`,
+        acao: `Quando dois ou mais personagens aparecem antes de "ele/ela", repita o nome na segunda menção. Clareza supera elegância nesses casos.` });
 
     if (ritmo.aberturaFracos?.aberturasFracas >= 3 && resultado.meta.totalParagrafos >= 3)
-      alertas.push({ dim: "ritmo", id: "abertura-fraca", nivel: "moderado", msg: `${ritmo.aberturaFracos.aberturasFracas} parágrafos começam com artigo, conjunção ou verbo fraco. Inicie mais parágrafos com substantivo, verbo de ação ou advérbio forte.` });
+      alertas.push({ dim: "ritmo", id: "abertura-fraca", nivel: "moderado",
+        msg: `${ritmo.aberturaFracos.aberturasFracas} parágrafos começam com artigo, conjunção ou verbo fraco. Inicie mais parágrafos com substantivo, verbo de ação ou advérbio forte.`,
+        acao: `Reescreva as aberturas: em vez de "O vento...", experimente "Vento" ou "Soprava um vento...". Em vez de "E então...", comece com o que acontece.` });
 
     return alertas.sort((a, b) => (a.nivel === "alto" ? -1 : 1) - (b.nivel === "alto" ? -1 : 1));
   }

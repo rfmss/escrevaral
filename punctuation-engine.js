@@ -1,9 +1,9 @@
 // punctuation-engine.js — análise de pontuação funcional em português brasileiro
 // Fontes: Bechara MGP §§ 597-640 · Cunha & Cintra pp. 648-682
 //         Moreno "Guia prático" · Squarisi "1001 Dicas"
-// 36 regras: 23 por padrão textual + 7 via syntax-engine (analyzeDeep)
-// Fix: PONT-46 duplicado resolvido (voz passiva renomeada para PONT-48)
-// Novo: PONT-49 vírgula antes de "mas" adversativo
+// 38 regras: 25 por padrão textual + 7 via syntax-engine (analyzeDeep) + 2 novas
+// Fix: PONT-23 detect() bug · PONT-46 duplicado resolvido · PONT-48 renomeada
+// Adição: `acao` em todas as regras · `resumo` de severidade no analyze()
 
 (function (global) {
   "use strict";
@@ -22,6 +22,7 @@
       criterio: "Não se usa vírgula entre sujeito simples e verbo.",
       exemplo: "O escritor publicou o romance.",
       contraexemplo: "O escritor, publicou o romance.",
+      acao: "Remova a vírgula entre o sujeito e o verbo.",
       severity: "alta",
       detect(text) {
         return first(/\b([A-ZÀ-Úa-záàâãéèêíîóòôõúùûç][a-záàâãéèêíîóòôõúùûç]+(?: [a-záàâãéèêíîóòôõúùûç]+){0,4}),\s+(é|foi|será|tinha|tem|teve|disse|fez|fala|escreveu|publicou|criou|quis|pode|deve|vai|vem)\b/, text);
@@ -34,6 +35,7 @@
       criterio: "Não se usa vírgula entre verbo de dizer/declarar e o 'que' que inicia a subordinada.",
       exemplo: "O presidente anunciou que vai reunir os ministros.",
       contraexemplo: "O presidente anunciou, que vai reunir os ministros.",
+      acao: "Remova a vírgula entre o verbo de dizer e 'que'.",
       severity: "alta",
       detect(text) {
         return first(/\b(anunciou|disse|declarou|afirmou|revelou|garantiu|prometeu|alegou|respondeu|retrucou|perguntou|contou|narrou|explicou|confessou),\s+que\b/, text);
@@ -46,6 +48,7 @@
       criterio: "A locução adversativa 'e sim' não leva vírgulas internas.",
       exemplo: "Não devemos desanimar, e sim persistir.",
       contraexemplo: "Não devemos desanimar, e, sim, persistir.",
+      acao: "Remova as vírgulas em torno de 'sim': escreva apenas 'e sim'.",
       severity: "baixa",
       detect(text) {
         return first(/,\s*e,\s*sim,\s*/, text);
@@ -60,6 +63,7 @@
       criterio: "Vocativo é sempre isolado por vírgula(s).",
       exemplo: "Maria, venha aqui.",
       contraexemplo: "Maria venha aqui.",
+      acao: "Adicione vírgula depois do nome chamado: 'Maria, venha.'",
       severity: "alta",
       detect(text) {
         const re = /\b([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záàâãéèêíîóòôõúùûç]{2,})\s+(venha|veja|ouça|leia|escreva|faça|diga|olhe|tome|traga|venham|fujam|parem|ouçam)\b/;
@@ -76,13 +80,13 @@
       criterio: "Oração adverbial anteposta à principal exige vírgula ao fim.",
       exemplo: "Quando o sol nasceu, Maria saiu.",
       contraexemplo: "Quando o sol nasceu Maria saiu.",
+      acao: "Adicione vírgula ao final da oração adverbial, antes da oração principal.",
       severity: "alta",
       detect(text) {
         const issues = [];
         const re = /\b(Quando|Embora|Enquanto|Desde que|Logo que|Assim que|Sempre que|Cada vez que|Se|Caso|Contanto que|Conquanto|Posto que|Ainda que|Mesmo que)\b([^,\.!?]{12,70}?)(?=[A-ZÀ-Ú][a-z])/g;
         let m;
         while ((m = re.exec(text)) !== null) {
-          // não disparar se estiver em diálogo (dentro de aspas ou após travessão)
           const before = text.slice(Math.max(0, m.index - 3), m.index);
           if (before.includes('"') || before.includes('—')) continue;
           if (!m[0].includes(",")) issues.push({ fragment: m[0].trim().slice(0, 80), pos: m.index });
@@ -97,6 +101,7 @@
       criterio: "Aposto explicativo é isolado por vírgulas.",
       exemplo: "Machado de Assis, o maior romancista, nasceu no Rio.",
       contraexemplo: "Machado de Assis o maior romancista nasceu no Rio.",
+      acao: "Isole o aposto com vírgulas dos dois lados.",
       severity: "média",
       detect(text) {
         return first(/([A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záàâãéèêíîóòôõúùûçA-Z\s]{4,40})\s+(o|a)\s+(maior|menor|melhor|único|primeiro|principal|grande|mais)\b(?![,])/, text);
@@ -109,9 +114,9 @@
       criterio: "Contudo, todavia, entretanto, no entanto, intercalados ficam obrigatoriamente entre vírgulas.",
       exemplo: "O resultado, contudo, foi satisfatório.",
       contraexemplo: "O resultado contudo foi satisfatório.",
+      acao: "Isole o advérbio adversativo com vírgulas dos dois lados: ', contudo,'.",
       severity: "alta",
       detect(text) {
-        // detecta quando o advérbio não está isolado por vírgulas
         return all(/\b\w+\s+(contudo|todavia|entretanto|no entanto|não obstante|porém)\s+\w+\b(?<![,\-—]\s*\w+\s*(contudo|todavia|entretanto))/g, text)
           .filter(({ fragment }) => !/,\s*(contudo|todavia|entretanto|no entanto|porém),/.test(fragment));
       },
@@ -123,6 +128,7 @@
       criterio: "Adjunto adverbial de mais de 4 palavras anteposto ao verbo exige vírgula.",
       exemplo: "Na Granja do Torto, o presidente se reuniu com os ministros.",
       contraexemplo: "Na Granja do Torto o presidente se reuniu.",
+      acao: "Adicione vírgula ao fim do adjunto adverbial longo, antes do sujeito.",
       severity: "média",
       detect(text) {
         const issues = [];
@@ -141,6 +147,7 @@
       criterio: "'Pois' explicativo (= porque) leva vírgula ANTES, mas não depois.",
       exemplo: "Ela deve estar doente, pois não vem à aula.",
       contraexemplo: "Ela deve estar doente, pois, não vem à aula.",
+      acao: "Remova a vírgula depois de 'pois' explicativo: mantenha apenas a vírgula antes.",
       severity: "média",
       detect(text) {
         return first(/,\s*pois,\s+(?!bem|assim|é)/, text);
@@ -153,6 +160,7 @@
       criterio: "'Pois' conclusivo (= portanto) intercalado exige vírgulas dos dois lados.",
       exemplo: "Pode, pois, sair com os filhos.",
       contraexemplo: "Pode pois sair com os filhos.",
+      acao: "Isole 'pois' conclusivo com vírgulas: 'pode, pois, sair'.",
       severity: "média",
       detect(text) {
         return first(/\b(pode|deve|vai|consegue|fica|está|é|são|tem|têm)\s+pois\s+[a-z]/, text);
@@ -165,10 +173,11 @@
       criterio: "Qualquer elemento intercalado (avaliação, comentário, advérbio frasal) exige vírgulas duplas.",
       exemplo: "A notícia, é verdade, deixou-nos estupefatos.",
       contraexemplo: "A notícia é verdade deixou-nos estupefatos.",
+      acao: "Isole o elemento intercalado com vírgulas dos dois lados.",
       severity: "média",
       detect(text) {
-        return first(/\b\w[\w\s]{1,30}\s+(é verdade|de fato|com efeito|certamente|evidentemente|obviamente|naturalmente|felizmente|infelizmente|surpreendentemente)\s+\w/, text)
-          .filter ? first(/\b\w[\w\s]{1,30}\s+(é verdade|de fato|com efeito|certamente|evidentemente|obviamente)\s+\w/, text).filter(i => !i.fragment.includes(",")) : [];
+        const matches = first(/\b\w[\w\s]{1,30}\s+(é verdade|de fato|com efeito|certamente|evidentemente|obviamente|naturalmente|felizmente|infelizmente|surpreendentemente)\s+\w/, text);
+        return matches.filter(i => !i.fragment.includes(","));
       },
     },
 
@@ -180,6 +189,7 @@
       criterio: "Toda oração declarativa termina em pontuação.",
       exemplo: "A escritora terminou o romance.",
       contraexemplo: "A escritora terminou o romance",
+      acao: "Acrescente ponto final ao término do período.",
       severity: "alta",
       detect(text) {
         const issues = [];
@@ -200,6 +210,7 @@
       criterio: "Dois-pontos não pode separar verbo do complemento que o integra sintaticamente.",
       exemplo: "As cidades eram as seguintes: Tebas, Alexandria e Atenas.",
       contraexemplo: "As cidades mais importantes eram: Tebas, Alexandria e Atenas.",
+      acao: "Remova os dois-pontos e deixe o verbo ligar-se diretamente ao complemento.",
       severity: "alta",
       detect(text) {
         return first(/\b(eram|são|é|foi|serão|incluem|inclui|abrangem|abrange|compreende|compreendem)\s*:(?!\s*"|\s*—|\s*\n)/, text);
@@ -212,6 +223,7 @@
       criterio: "Citação direta formal após verbo de dizer exige dois-pontos antes das aspas.",
       exemplo: 'Machado escreveu: "A eternidade é fácil."',
       contraexemplo: 'Machado escreveu "A eternidade é fácil."',
+      acao: 'Adicione dois-pontos antes das aspas: \'disse: "..."\' ',
       severity: "média",
       detect(text) {
         return first(/\b(disse|escreveu|afirmou|declarou|respondeu|perguntou|gritou|sussurrou|retrucou|anotou|registrou)\s+"[^"]/, text);
@@ -224,9 +236,9 @@
       criterio: "Após dois-pontos, a palavra seguinte é minúscula — exceto em citação textual.",
       exemplo: "Comprou três itens: livro, caneta e papel.",
       contraexemplo: "Comprou três itens: Livro, caneta e papel.",
+      acao: "Coloque a palavra seguinte ao dois-pontos em minúscula, salvo início de citação.",
       severity: "baixa",
       detect(text) {
-        // maiúscula após : que não seja início de citação (")
         return all(/:\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záàâãéèêíîóòôõúùûç]/g, text)
           .filter(({ fragment }) => !fragment.includes('"') && !fragment.includes('—'));
       },
@@ -240,6 +252,7 @@
       criterio: "Diálogo direto usa travessão (—), nunca hífen (-).",
       exemplo: "— Você quer sair? — perguntou ela.",
       contraexemplo: "- Você quer sair? - perguntou ela.",
+      acao: "Substitua o hífen pelo travessão (—) em todas as falas do diálogo.",
       severity: "alta",
       detect(text) {
         return all(/^-\s+[A-ZÀ-Úa-záàâãéèêíîóòôõúùûç]/mg, text);
@@ -254,10 +267,11 @@
       criterio: "Sequência de 3+ verbos coordenados sem vírgula ou ponto e vírgula.",
       exemplo: "Trouxe papel; organizou a mesa; acendeu a luz.",
       contraexemplo: "Trouxe papel organizou a mesa acendeu a luz.",
+      acao: "Separe os verbos coordenados com vírgula ou ponto e vírgula.",
       severity: "média",
       detect(text) {
-        return first(/\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\b/, text)
-          .filter ? first(/\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\b/, text).filter(i => !i.fragment.includes(";") && !i.fragment.includes(",")) : [];
+        const matches = first(/\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\b/, text);
+        return matches.filter(i => !i.fragment.includes(";") && !i.fragment.includes(","));
       },
     },
 
@@ -267,6 +281,7 @@
       criterio: "Contudo, todavia, entretanto, portanto, logo, por conseguinte no início de oração coordenada exigem ponto e vírgula antes, não vírgula simples.",
       exemplo: "Ele nadava bem; contudo, não venceu a correnteza.",
       contraexemplo: "Ele nadava bem, contudo não venceu a correnteza.",
+      acao: "Substitua a vírgula por ponto e vírgula antes do advérbio pospositivo.",
       severity: "alta",
       detect(text) {
         return all(/,\s*(contudo|todavia|entretanto|no entanto|não obstante|portanto|logo|por conseguinte|consequentemente)\s*,/g, text);
@@ -279,11 +294,11 @@
       criterio: "Itens de lista que já contêm vírgulas internas devem ser separados por ponto e vírgula.",
       exemplo: "João, meu tio; Paulo, meu primo; Ana, minha prima.",
       contraexemplo: "João, meu tio, Paulo, meu primo, Ana, minha prima.",
+      acao: "Substitua as vírgulas entre os itens da enumeração por ponto e vírgula.",
       severity: "alta",
       detect(text) {
-        // detecta sequências nome, cargo, nome, cargo sem ponto e vírgula
-        return first(/\b[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+,\s+[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+/, text)
-          .filter ? first(/\b[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+,\s+[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+/, text).filter(i => !i.fragment.includes(";")) : [];
+        const matches = first(/\b[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+,\s+[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+,\s+(?:meu|minha|seu|sua|nosso|o|a)\s+\w+/, text);
+        return matches.filter(i => !i.fragment.includes(";"));
       },
     },
 
@@ -295,6 +310,7 @@
       criterio: "3+ reticências no mesmo parágrafo dilui o efeito de hesitação.",
       exemplo: "Não sei... talvez amanhã.",
       contraexemplo: "Era lindo... o sol... e o mar...",
+      acao: "Reduza a no máximo duas reticências por parágrafo; use ponto ou vírgula nos outros casos.",
       severity: "média",
       detect(text) {
         const issues = [];
@@ -312,6 +328,7 @@
       criterio: "'Etc.' e reticências são redundantes: ambos indicam enumeração aberta.",
       exemplo: "atlas, gramáticas, dicionários, etc.",
       contraexemplo: "atlas, gramáticas, dicionários, etc...",
+      acao: "Use apenas 'etc.' sem reticências adicionais.",
       severity: "média",
       detect(text) {
         return first(/etc\s*\.?\s*\.{2,}/, text);
@@ -326,6 +343,7 @@
       criterio: "Múltiplas exclamações enfraquecem o impacto. Uma basta.",
       exemplo: "Que beleza!",
       contraexemplo: "Que beleza!!!",
+      acao: "Use apenas uma exclamação — a força vem da palavra escolhida, não da quantidade.",
       severity: "média",
       detect(text) {
         return all(/!{2,}/g, text);
@@ -338,6 +356,7 @@
       criterio: "Múltiplos pontos de interrogação são grafismos tolerados só em ficção informal. Evitar em texto culto.",
       exemplo: "Você não viu o arquivo?",
       contraexemplo: "Você não viu o arquivo???",
+      acao: "Use apenas um ponto de interrogação.",
       severity: "baixa",
       detect(text) {
         return all(/\?{2,}/g, text);
@@ -350,6 +369,7 @@
       criterio: "Oração interrogativa indireta (subordinada com 'se/quem/como/onde/quando') não leva ponto de interrogação.",
       exemplo: "Gostaria de saber se os colegas concordam.",
       contraexemplo: "Gostaria de saber se os colegas concordam?",
+      acao: "Remova o ponto de interrogação da oração interrogativa indireta.",
       severity: "alta",
       detect(text) {
         return first(/\b(gostaria de saber|quero saber|não sei|perguntei|perguntou|indagou|não sabe|não sabia|desconheço|ignoramos)\s+(se|quem|como|onde|quando|por que|quanto|qual)\b[^?]{5,100}\?/i, text);
@@ -362,9 +382,39 @@
       criterio: "Não se usa vírgula entre verbos cognitivos/perceptivos e a subordinada substantiva com 'que'.",
       exemplo: "Acho que era tarde demais.",
       contraexemplo: "Acho, que era tarde demais.",
+      acao: "Remova a vírgula antes de 'que' em oração completiva com verbo de opinião.",
       severity: "alta",
       detect(text) {
         return first(/\b(acho|achei|acha|penso|pensei|pensa|sei|sabia|sabe|sinto|senti|sente|vejo|vi|vê|ouço|ouvi|ouve|noto|notei|nota|percebo|percebi|percebe|imagino|imaginei|imagina|acredito|acreditei|acredita|espero|esperei|espera|temo|temia|lembro|lembrei|lembra),\s+que\b/i, text);
+      },
+    },
+
+    // ── NOVAS REGRAS ─────────────────────────────────────────────────────────
+
+    {
+      id: "PONT-50", categoria: "espaço indevido antes de pontuação",
+      fonte: "Moreno p. 18; convenção tipográfica brasileira",
+      criterio: "Ponto, vírgula, ponto e vírgula, dois-pontos, exclamação e interrogação não levam espaço antes.",
+      exemplo: "Ele chegou tarde.",
+      contraexemplo: "Ele chegou tarde .",
+      acao: "Remova o espaço antes da pontuação.",
+      severity: "média",
+      detect(text) {
+        return all(/\s+[.,;:!?]/g, text)
+          .filter(({ fragment }) => !/ (\.{3}|…)/.test(fragment));
+      },
+    },
+
+    {
+      id: "PONT-51", categoria: "vírgula indevida antes de parêntese de abertura",
+      fonte: "Moreno p. 97; Bechara § 634",
+      criterio: "Não se usa vírgula imediatamente antes de parêntese de abertura.",
+      exemplo: "Comprou livros (todos usados) e partiu.",
+      contraexemplo: "Comprou livros, (todos usados) e partiu.",
+      acao: "Remova a vírgula antes do parêntese de abertura.",
+      severity: "baixa",
+      detect(text) {
+        return all(/,\s*\(/g, text);
       },
     },
 
@@ -380,21 +430,18 @@
       criterio: "Oração adjetiva explicativa (referência ao conjunto todo) exige vírgula antes de 'que'.",
       exemplo: "As baleias, que têm sangue quente, precisam respirar.",
       contraexemplo: "As baleias que têm sangue quente precisam respirar. [quando sentido é explicativo]",
+      acao: "Adicione vírgula antes de 'que' se a oração se refere ao conjunto inteiro do antecedente.",
       severity: "alta",
-      // Heurística: nome próprio + "que" sem vírgula → provável explicativa
       detect(text) {
         const issues = [];
-        // Padrão: Nome Próprio direto + "que" (sem vírgula) → falta vírgula
         const re = /\b([A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]{2,}(?:\s+[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+)*)\s+que\b/g;
         let m;
         while ((m = re.exec(text)) !== null) {
           const before = text.slice(Math.max(0, m.index - 3), m.index);
-          // Só flagra se não houver vírgula antes de "que"
           if (!before.includes(",") && !/^(um|uma|o|a|os|as|seu|sua|meu|minha)\s/.test(m[1].toLowerCase())) {
             issues.push({ fragment: m[0].trim(), pos: m.index });
           }
         }
-        // Padrão: "todos os/todas as" + substantivo + "que" sem vírgula → explicativa (classe inteira)
         const reUniv = /\b(todos os|todas as|ambos os|ambas as)\s+[a-záàâãéèêíîóòôõúùûç]+\s+que\b/g;
         while ((m = reUniv.exec(text)) !== null) {
           if (!text.slice(Math.max(0, m.index - 2), m.index).includes(","))
@@ -410,8 +457,8 @@
       criterio: "Oração adjetiva restritiva (delimita o antecedente) não leva vírgula antes de 'que'.",
       exemplo: "Os políticos que são corruptos deveriam perder o mandato.",
       contraexemplo: "Os políticos, que são corruptos, deveriam perder o mandato. [quando sentido é restritivo]",
+      acao: "Remova a vírgula antes de 'que' se a oração restringe e identifica o antecedente.",
       severity: "alta",
-      // Heurística: artigo indefinido + substantivo + vírgula + "que" → vírgula indevida
       detect(text) {
         return all(/\b(um|uma)\s+[a-záàâãéèêíîóòôõúùûç]{3,},\s+que\b/g, text);
       },
@@ -423,9 +470,9 @@
       criterio: "Aposto explicativo (nome + descrição) é isolado por vírgulas.",
       exemplo: "Pedro, meu amigo, chegou tarde.",
       contraexemplo: "Pedro meu amigo chegou tarde.",
+      acao: "Isole o aposto com vírgulas dos dois lados: 'Pedro, meu amigo, chegou.'",
       severity: "média",
       detect(text) {
-        // Nome Próprio + "meu/minha/seu/sua/nosso/nossa" + substantivo sem vírgula
         return all(/\b([A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]{2,})\s+(meu|minha|seu|sua|nosso|nossa|o|a)\s+[a-záàâãéèêíîóòôõúùûç]{3,}\b(?!,)/g, text)
           .filter(i => !i.fragment.includes(","));
       },
@@ -437,16 +484,15 @@
       criterio: "Sujeito plural exige verbo na mesma pessoa e número.",
       exemplo: "Eles chegaram tarde.",
       contraexemplo: "Eles chegou tarde.",
+      acao: "Coloque o verbo no plural para concordar com o sujeito: 'Eles chegaram.'",
       severity: "alta",
       detect(text) {
         const issues = [];
-        // "eles/elas/vocês/todos/todas" + verbo perfeito singular (3ª sg: -ou/-eu/-iu)
         const re = /\b(eles|elas|vocês|todos|todas)\s+([a-záàâãéèêíîóòôõúùûç]+(ou|eu|iu))\b/gi;
         let m;
         while ((m = re.exec(text)) !== null) {
           issues.push({ fragment: m[0].trim(), pos: m.index });
         }
-        // "nós" + verbo perfeito singular (sem -mos)
         const reNos = /\bnós\s+([a-záàâãéèêíîóòôõúùûç]+(ou|eu|iu))\b/gi;
         while ((m = reNos.exec(text)) !== null) {
           issues.push({ fragment: m[0].trim(), pos: m.index });
@@ -461,6 +507,7 @@
       criterio: "O agente da passiva é introduzido pela preposição 'por' (pelo/pela/pelos/pelas). Não usar 'de' como agente em voz passiva de ação.",
       exemplo: "O romance foi escrito por Machado.",
       contraexemplo: "O romance foi escrito de Machado.",
+      acao: "Substitua 'de' por 'por/pelo/pela' como preposição do agente da passiva.",
       severity: "média",
       detect(text) {
         return all(/\b(foi|foram|é|são|era|eram|será|serão)\s+\w+(ado|ada|idos|idas|ito|ita|tos|tas|to|ta)\s+de\s+(?!acordo|forma|modo|maneira|jeito)/g, text);
@@ -473,6 +520,7 @@
       criterio: "A conjunção adversativa 'mas' ligando orações coordenadas exige vírgula antes.",
       exemplo: "Ela tentou, mas não conseguiu.",
       contraexemplo: "Ela tentou mas não conseguiu.",
+      acao: "Adicione vírgula antes de 'mas': 'tentou, mas não conseguiu.'",
       severity: "alta",
       detect(text) {
         const issues = [];
@@ -494,10 +542,10 @@
       criterio: "A conjunção 'e' ligando orações com sujeitos diferentes pede vírgula antes para evitar ambiguidade.",
       exemplo: "Os Estados Unidos atacaram o Iraque, e a Rússia reagiu imediatamente.",
       contraexemplo: "Os Estados Unidos atacaram o Iraque e a Rússia reagiu imediatamente.",
+      acao: "Adicione vírgula antes de 'e' quando os sujeitos são diferentes nas duas orações.",
       severity: "média",
       detect(text) {
         const issues = [];
-        // Padrão mais restrito: verbo + "e" + pronome sujeito (evita falsos positivos com nomes)
         const re = /\b(chegou|saiu|voltou|entrou|fugiu|correu|falou|disse|respondeu|escreveu|publicou|criou|tentou|conseguiu|percebeu|descobriu)\s+e\s+(ele|ela|eles|elas|eu|nós|você|vocês)\s/gi;
         let m;
         while ((m = re.exec(text)) !== null) {
@@ -515,22 +563,27 @@
   const SEVERITY_MAP = Object.fromEntries(ALL_RULES.map(r => [r.id, r.severity || "média"]));
 
   function analyze(text) {
-    if (!text?.trim()) return { issues: [], ruleCount: ALL_RULES.length };
-    if (text.trim().split(/\s+/).length < 10) return { issues: [], ruleCount: ALL_RULES.length };
+    if (!text?.trim()) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 } };
+    if (text.trim().split(/\s+/).length < 10) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 } };
     const issues = [];
     for (const rule of ALL_RULES) {
       try {
         for (const issue of rule.detect(text)) {
           issues.push({
             ruleId: rule.id, categoria: rule.categoria, fonte: rule.fonte,
-            criterio: rule.criterio, exemplo: rule.exemplo,
+            criterio: rule.criterio, exemplo: rule.exemplo, acao: rule.acao || "",
             fragment: issue.fragment, pos: issue.pos ?? -1,
             severity: SEVERITY_MAP[rule.id],
           });
         }
       } catch (_) { /* regex falhou — ignorar */ }
     }
-    return { issues, ruleCount: ALL_RULES.length };
+    const resumo = {
+      alta:  issues.filter(i => i.severity === "alta").length,
+      media: issues.filter(i => i.severity === "média").length,
+      baixa: issues.filter(i => i.severity === "baixa").length,
+    };
+    return { issues, ruleCount: ALL_RULES.length, resumo };
   }
 
   // ── analyzeDeep — usa syntax-engine quando disponível ────────────────────
@@ -553,6 +606,7 @@
             fonte: "syntax-engine + Bechara Lições",
             criterio: alerta.descricao,
             exemplo: "Os meninos chegaram cedo.",
+            acao: "Corrija a concordância verbal para que sujeito e verbo concordem em número e pessoa.",
             fragment: sent.slice(0, 80), pos: text.indexOf(sent),
             severity: "alta",
           });
@@ -567,6 +621,7 @@
               fonte: "syntax-engine + Bechara § 626",
               criterio: "Aposto explicativo isolado por vírgulas.",
               exemplo: `${aposto.antecedente}, ${aposto.aposto}`,
+              acao: "Isole o aposto com vírgulas dos dois lados.",
               fragment: full, pos: aposto.pos ?? text.indexOf(sent),
               severity: "média",
             });
@@ -575,15 +630,22 @@
       } catch (_) {}
     }
 
+    const allIssues = [...base.issues, ...syntaxIssues];
+    const resumo = {
+      alta:  allIssues.filter(i => i.severity === "alta").length,
+      media: allIssues.filter(i => i.severity === "média").length,
+      baixa: allIssues.filter(i => i.severity === "baixa").length,
+    };
     return {
-      issues: [...base.issues, ...syntaxIssues],
+      issues: allIssues,
       ruleCount: ALL_RULES.length + 2,
+      resumo,
     };
   }
 
   function getRules() {
-    return ALL_RULES.map(({ id, categoria, fonte, criterio, exemplo, contraexemplo, severity }) =>
-      ({ id, categoria, fonte, criterio, exemplo, contraexemplo, severity }));
+    return ALL_RULES.map(({ id, categoria, fonte, criterio, exemplo, contraexemplo, acao, severity }) =>
+      ({ id, categoria, fonte, criterio, exemplo, contraexemplo, acao, severity }));
   }
 
   global.VeredaPunctuation = { analyze, analyzeDeep, getRules };

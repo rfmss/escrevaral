@@ -52,6 +52,31 @@
   margin-top: 2px;
   font-style: italic;
 }
+.voice-alerta-acao {
+  display: block;
+  font-size: 11px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface));
+  border-left: 2px solid var(--primary);
+  padding: 4px 8px;
+  margin-top: 5px;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.4;
+}
+.voice-confianca-note {
+  font-size: 11px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin: 0 0 10px;
+  background: color-mix(in srgb, var(--muted) 8%, var(--surface));
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.voice-confianca-note.voice-confianca-baixa {
+  background: color-mix(in srgb, #c07830 8%, var(--surface));
+  border-color: color-mix(in srgb, #c07830 25%, var(--line));
+  color: color-mix(in srgb, #c07830 80%, var(--ink));
+}
 .voice-criterios-note {
   font-size: 10px;
   color: var(--muted);

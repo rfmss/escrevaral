@@ -6,12 +6,12 @@
   );
 
   const emotionLexicons = {
-    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim"],
-    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto"],
-    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança"],
-    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente"],
-    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio"],
-    ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher"],
+    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim", "esquecimento", "desvanecer", "apagar", "distância", "abandono", "luto", "resto", "vestígio"],
+    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto", "perseguição", "armadilha", "traição", "disparo", "confronto", "urgência", "crise"],
+    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança", "amanhecer", "celebração", "leveza", "plenitude", "festa", "graça", "sorte"],
+    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente", "justamente", "realmente", "singular", "curioso", "peculiar", "conveniente", "herói"],
+    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio", "horizonte", "repouso", "contemplar", "observar", "meditar", "divagar", "profundo"],
+    ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher", "proteção", "ternura", "lar", "família", "pertencer", "bençao", "amparo"],
   };
 
   const semanticFields = {
@@ -65,6 +65,14 @@
     const paragraphAverage = paragraphs.length ? sentences.length / paragraphs.length : 0;
     const gesture = inferGesture({ avgSentence, lexicalDensity, ttr, punctuation, emotional, fields, repetitions });
 
+    // Confiança da leitura baseada no tamanho do corpus
+    const confianca = words.length >= 500 ? "alta" : words.length >= 200 ? "média" : "baixa";
+    const confiancaNote = confianca === "baixa"
+      ? "Corpus muito curto: a leitura de voz é instável abaixo de 200 palavras. Resultados como hipótese inicial."
+      : confianca === "média"
+      ? "Corpus médio: a leitura ganha estabilidade acima de 500 palavras."
+      : null;
+
     return {
       counts: {
         words: words.length,
@@ -79,6 +87,8 @@
         sentenceVariation: round(sentenceVariation, 1),
         paragraphAverage: round(paragraphAverage, 1),
       },
+      confianca,
+      confiancaNote,
       punctuation,
       repetitions,
       emotional,
@@ -107,6 +117,7 @@
       barroco: "Voz de acúmulo e vertigem",
       contemplativo: "Voz de demora sensível",
       narrativo: "Voz de cena em avanço",
+      sobrenatural: "Voz de fronteira e encantamento",
     };
 
     const fieldPart = fieldDesc ? ` com foco em ${fieldDesc}` : "";
@@ -131,6 +142,9 @@
     // Ensaístico: campo do pensamento + densidade — antecede seco para não confundir ensaio curto
     if (topField === "pensamento" && lexicalDensity > 0.52) return "ensaístico";
 
+    // Sobrenatural: campo de magia/entidades tem precedência sobre corte seco
+    if (topField === "sobrenatural") return "sobrenatural";
+
     // Seco: frases curtas independente de repetições (Trevisan e Freire usam anáfora como recurso)
     if (avgSentence < 12 && topField !== "pensamento") return "seco";
 
@@ -146,8 +160,7 @@
     // Oral leve: algum diálogo presente mas abaixo do threshold principal
     if (punctuation.dialogue >= 2) return "oral";
 
-    // Sobrenatural: campo fantasma/magia/entidade
-    if (topField === "sobrenatural") return "contemplativo";
+    // (sobrenatural movido para antes de seco — ver acima)
 
     // Ternura: afeto e cuidado — interior suave, próximo do contemplativo
     if (topEmotion === "ternura") return "contemplativo";
@@ -171,6 +184,7 @@
       barroco: ["João Guimarães Rosa (Grande Sertão: Veredas)", "Osman Lins (Avalovara)", "Hilda Hilst (A Obscena Senhora D)"],
       contemplativo: ["Lygia Fagundes Telles (Ciranda de Pedra)", "Adélia Prado (Bagagem)", "Manoel de Barros (Poesia Completa)"],
       narrativo: ["Machado de Assis (Dom Casmurro)", "Autran Dourado (Opera dos Mortos)", "Conceição Evaristo (Ponciá Vicêncio)"],
+      sobrenatural: ["Mia Couto (Um Rio Chamado Tempo)", "Paulina Chiziane (O Alegre Canto da Perdiz)", "João Guimarães Rosa (A Terceira Margem do Rio)"],
     };
     return map[gesture] || map.narrativo;
   }
@@ -233,6 +247,7 @@
       barroco: "Corte 20% de um parágrafo longo e observe o que ainda pulsa.",
       contemplativo: "Introduza uma perturbação concreta no meio da atmosfera.",
       narrativo: "Marque o ponto exato em que algo muda de estado na cena.",
+      sobrenatural: "Descreva o elemento inexplicável pelos sentidos físicos de quem o vive — sem explicar o que é.",
     };
     const repetitionExercise = repetitions.length
       ? `Faça uma versão substituindo metade das ocorrências de "${repetitions[0].word}" por imagem, ação ou silêncio.`

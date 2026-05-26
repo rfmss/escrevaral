@@ -168,11 +168,24 @@ async function renderRimaLab() {
   const analysis = window.VeredaRimaLab.analyze(text);
 
   if (rimalabCount) {
-    rimalabCount.textContent = `${analysis.totalVerses} ${analysis.totalVerses === 1 ? "verso" : "versos"}`;
+    rimalabCount.textContent = analysis.isProse
+      ? "prosa detectada"
+      : `${analysis.totalVerses} ${analysis.totalVerses === 1 ? "verso" : "versos"}`;
   }
 
   if (rimalabNote) {
-    rimalabNote.textContent = analysis.note;
+    rimalabNote.textContent = analysis.proseNote || analysis.note;
+  }
+
+  if (analysis.isProse) {
+    if (rimalabIsometry) {
+      rimalabIsometryTitle && (rimalabIsometryTitle.textContent = "Sem versos detectados");
+      rimalabIsometryCopy && (rimalabIsometryCopy.textContent = analysis.proseNote || "Cole versos em linhas separadas para a análise.");
+    }
+    if (rimalabMetrics) rimalabMetrics.innerHTML = `<p class="rimalab-empty">${escapeHtml(analysis.proseNote || "Escreva versos em linhas separadas.")}</p>`;
+    if (rimalabRhymes) rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas aparecem aqui quando há versos.</p>`;
+    if (rimalabScheme) rimalabScheme.innerHTML = "";
+    return;
   }
 
   renderRimaLabIsometry(analysis);
