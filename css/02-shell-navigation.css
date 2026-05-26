@@ -15,8 +15,16 @@
   font-size: 18px;
 }
 
-.update-banner > span:last-of-type {
+.update-banner-text {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.update-banner-text small {
+  font-size: 11px;
+  color: var(--muted);
 }
 
 .update-banner[hidden] {

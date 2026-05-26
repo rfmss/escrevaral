@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v302 — Sintaxe em 99%; Tema em 95%; Prova de autoria em 95%; 15 engines em 95%; 3 restantes em 85%.
+**Baseline:** v304 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; 16 engines em 95%; 2 restantes em 85%.
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -98,7 +98,7 @@ Pergunta padrao da sessao:
 | Backup / restore | **95%** | Validacao de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posicao do manuscrito corrompido |
 | Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
 | Versionamento | **95%** | Baixar versao em TXT; delta de paragrafos; primeira mudanca destacada |
-| Offline / PWA | **85%** | Deteccao antecipada de atualizacao; verificacao periodica (30min); mensagem de erro honesta |
+| Offline / PWA | **95%** | v304: banner com reassurance "notas salvas"; _checkCacheHealth via Cache API; estados com tooltip; copy humanizada |
 | Editor / documento | **95%** | Placeholder dinamico por kind (11 padroes); inspector contextual por kind; focus sem teclado fisico |
 | Paginacao / modo pagina | 85% | Print preset-aware (A5 imprime A5); contador de palavras por pagina; mobile sem overflow |
 | Exportacao / impressao | **95%** | DOCX no acervo; HTML com CSS de impressao; TXT/MD com data e metadados |
@@ -155,6 +155,13 @@ Pergunta padrao da sessao:
 - Limite documentado: "Corria todo dia." posição-0 continua ambíguo — proteção de posição-0 (-ia omitido) cobre Vitória/Maria; tradeoff explícito
 - Limite documentado: "Minas Gerais" — "Minas" fica sem tag na posição 0; "Gerais" recebe ProperNoun via midSentenceProper. "Rio de Janeiro" não tem esse problema: "Rio" → ProperNoun via `toponimos_pt_br`
 - CACHE_NAME: vereda-offline-v299 | ASSET_VERSION: 20260526-pres99
+
+**v304 — Offline/PWA 85% → 95% — confiança local e atualização honesta**
+- `index.html`: banner de atualização com `.update-banner-text` — "Nova versão pronta." + "Suas notas estão salvas — pode recarregar sem perder nada."
+- `css/02-shell-navigation.css`: `.update-banner-text` (flex column) + `.update-banner-text small` (muted)
+- `backup-controller.js`: `_setOfflineStatus(icon, label, tooltip)` — centraliza estado + `data-vrda-tooltip` + `aria-label`; `_checkCacheHealth()` — conta arquivos no cache via `caches.keys()` e atualiza tooltip; estados: "Modo sem internet indisponível" (sem suporte, com contexto), "Preparando…" (instalando), "Pronto sem internet" (controlado), erros com copy calma
+- `app.js`: `updateConnectionStatus()` com tooltip online/offline embutido; remove dependência de `title` estático
+- CACHE_NAME: vereda-offline-v304 | ASSET_VERSION: 20260526-pwa95
 
 **v302 — Prova de autoria 85% → 95%**
 - `proof-engine.js`: `createProofDocument` enriquecido — `generator.app/url`, `session.durationMin`, `session.totalSessions`, `manuscript.kind`; retro-compatível com validação v2

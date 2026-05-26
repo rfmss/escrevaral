@@ -271,13 +271,16 @@ function applyTemplateLayout() {
 }
 
 function updateConnectionStatus() {
-  if (!offlineStatus) {
-    return;
-  }
-
-  const label = navigator.onLine ? "Pronto sem internet" : "Sem rede — escrita continua";
-  const icon = navigator.onLine ? "cloud_done" : "cloud_off";
+  if (!offlineStatus) return;
+  const online = navigator.onLine;
+  const label = online ? "Pronto sem internet" : "Sem rede — escrita continua";
+  const icon  = online ? "cloud_done" : "cloud_off";
+  const tip   = online
+    ? "O Escrevaral funciona sem conexão — suas notas ficam salvas aqui no navegador."
+    : "Sem conexão — o Escrevaral continua funcionando e suas notas estão a salvo.";
   offlineStatus.innerHTML = `<span class="material-symbols-outlined">${icon}</span>${label}`;
+  offlineStatus.dataset.vrdaTooltip = tip;
+  offlineStatus.setAttribute("aria-label", label);
 }
 
 function syncGuideToManuscript(id) {

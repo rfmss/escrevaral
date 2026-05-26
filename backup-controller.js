@@ -1,11 +1,34 @@
 // backup-controller.js — backup, importação, File System Access e registro offline
 // Depende de: state-store.js, backup-engine.js, filesystem-backup-engine.js, vrda-engine.js
 
+function _setOfflineStatus(icon, label, tooltip) {
+  if (!offlineStatus) return;
+  offlineStatus.innerHTML = `<span class="material-symbols-outlined">${icon}</span>${label}`;
+  offlineStatus.dataset.vrdaTooltip = tooltip || label;
+  offlineStatus.setAttribute("aria-label", label);
+}
+
+function _checkCacheHealth() {
+  if (!("caches" in window)) return;
+  caches.keys().then(names => {
+    const appCache = names.find(n => n.startsWith("vereda-offline-"));
+    if (!appCache) return;
+    return caches.open(appCache).then(c => c.keys()).then(keys => {
+      if (!offlineStatus) return;
+      offlineStatus.dataset.vrdaTooltip = `Cache com ${keys.length} arquivos · oficina disponível sem rede`;
+    });
+  }).catch(() => {});
+}
+
 function registerOfflineApp() {
   updateConnectionStatus();
 
   if (!("serviceWorker" in navigator)) {
-    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_off</span>Sem suporte a uso sem internet';
+    _setOfflineStatus(
+      "cloud_off",
+      "Modo sem internet indisponível",
+      "Seu navegador não suporta o modo sem internet. Suas notas continuam salvas localmente — exporte uma cópia de segurança para protegê-las."
+    );
     return;
   }
 
@@ -18,28 +41,32 @@ function registerOfflineApp() {
   }
 
   if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => {
-    if (updateReloadBtn) { updateReloadBtn.disabled = true; updateReloadBtn.textContent = "Recarregando…"; }
+    updateReloadBtn.disabled = true;
+    updateReloadBtn.textContent = "Recarregando…";
     window.location.reload();
   });
-  if (updateDismissBtn) updateDismissBtn.addEventListener("click", () => { if (updateBanner) updateBanner.hidden = true; });
+  if (updateDismissBtn) updateDismissBtn.addEventListener("click", () => {
+    if (updateBanner) updateBanner.hidden = true;
+  });
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     showUpdateBanner();
-    offlineStatus.innerHTML = '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet';
+    _setOfflineStatus("cloud_done", "Pronto sem internet", "Nova versão ativa — o Escrevaral está atualizado e funciona sem rede.");
   });
 
   navigator.serviceWorker
     .register("./service-worker.js")
     .then((registration) => {
       const isControlled = Boolean(navigator.serviceWorker.controller);
-      offlineStatus.innerHTML = isControlled
-        ? '<span class="material-symbols-outlined">cloud_done</span>Pronto sem internet'
-        : '<span class="material-symbols-outlined">downloading</span>Preparando uso sem internet…';
+      if (isControlled) {
+        _setOfflineStatus("cloud_done", "Pronto sem internet", "O Escrevaral funciona sem conexão — suas notas ficam salvas aqui no navegador.");
+        _checkCacheHealth();
+      } else {
+        _setOfflineStatus("downloading", "Preparando uso sem internet…", "Baixando arquivos para funcionar sem conexão. Pronto em instantes.");
+      }
 
-      // Detectar SW em espera imediatamente (banner antecipado)
       if (registration.waiting) showUpdateBanner();
 
-      // Detectar nova versão instalada enquanto app está aberto
       registration.addEventListener("updatefound", () => {
         const newWorker = registration.installing;
         if (!newWorker) return;
@@ -54,10 +81,12 @@ function registerOfflineApp() {
       setInterval(() => registration.update().catch(() => {}), 30 * 60 * 1000);
     })
     .catch((err) => {
-      const msg = err && err.message && err.message.toLowerCase().includes("network")
-        ? "Sem rede — salvamento sem internet indisponível"
-        : "Salvamento sem internet não pôde ser ativado";
-      offlineStatus.innerHTML = `<span class="material-symbols-outlined">sync_problem</span>${msg}`;
+      const isNetwork = err?.message?.toLowerCase().includes("network");
+      _setOfflineStatus(
+        "sync_problem",
+        isNetwork ? "Modo sem internet não disponível agora" : "Modo sem internet indisponível",
+        "Não foi possível ativar o modo sem internet. Suas notas continuam salvas no navegador — exporte uma cópia de segurança quando puder."
+      );
     });
 }
 
