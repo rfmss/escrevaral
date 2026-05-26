@@ -214,15 +214,16 @@
     if (/roteiro|script|audiovisual|tv|film|podcast|s[eé]rie|docum/.test(k))  return cards.find(c => c.id === "contrato")       || null;
     if (/tradu[cç][aã]o|translat/.test(k))                                     return cards.find(c => c.id === "contrato")       || null;
     if (/fanfiction|fan|paro[dó]dia|adapt/.test(k))                            return cards.find(c => c.id === "citacao")        || null;
-    if (/coleti|comunidade|tradicion|oral|quilomb|ind[ií]gen|afro/.test(k))    return cards.find(c => c.id === "comunidades")    || null;
-    if (/coauto|parceri|ghostwrit|colabora/.test(k))                           return cards.find(c => c.id === "coautoria")      || null;
-    if (/ensaio|reportagem|newsletter|jornali|cr[oô]nica/.test(k))             return cards.find(c => c.id === "submissao")      || null;
-    if (/biografi|autobiografi|mem[oó]ria|relato|memoir/.test(k))              return cards.find(c => c.id === "registro")       || null;
-    if (/poema|poesia|poetic|slam|soneto|cordel|haiku/.test(k))                return cards.find(c => c.id === "escrevendo")     || null;
-    if (/ia|intelig|gpt|llm|model|chatbot/.test(k))                            return cards.find(c => c.id === "ia")             || null;
-    if (/concurs|pr[eê]mio|award|edital/.test(k))                              return cards.find(c => c.id === "concurso-premio")|| null;
-    if (/autopublic|isbn|plataforma|amazon|kdp|kobo/.test(k))                  return cards.find(c => c.id === "autoedicao")     || null;
-    if (/dom[ií]nio p[uú]blico|cl[aá]ssico|ant[ií]go|s[eé]culo/.test(k))     return cards.find(c => c.id === "dominio-publico")|| null;
+    if (/pseud[oô]|nome art[ií]stico|marca autor|inpi|registro de marca/.test(k))            return cards.find(c => c.id === "marca-autoral")   || null;
+    if (/coleti|comunidade|tradicion|\boral\b|quilomb|ind[ií]gen|afro/.test(k))             return cards.find(c => c.id === "comunidades")    || null;
+    if (/coauto|parceri|ghostwrit|colabora/.test(k))                                        return cards.find(c => c.id === "coautoria")      || null;
+    if (/ensaio|reportagem|newsletter|jornali|cr[oô]nica/.test(k))                          return cards.find(c => c.id === "submissao")      || null;
+    if (/biografi|autobiografi|mem[oó]ria|relato|memoir/.test(k))                           return cards.find(c => c.id === "registro")       || null;
+    if (/poema|poesia|poetic|slam|soneto|cordel|haiku/.test(k))                             return cards.find(c => c.id === "escrevendo")     || null;
+    if (/ia|intelig|gpt|llm|model|chatbot/.test(k))                                        return cards.find(c => c.id === "ia")             || null;
+    if (/concurs|pr[eê]mio|award|edital/.test(k))                                          return cards.find(c => c.id === "concurso-premio")|| null;
+    if (/autopublic|isbn|plataforma|amazon|kdp|kobo/.test(k))                              return cards.find(c => c.id === "autoedicao")     || null;
+    if (/dom[ií]nio p[uú]blico|cl[aá]ssico|ant[ií]go|s[eé]culo/.test(k))                 return cards.find(c => c.id === "dominio-publico")|| null;
     return cards.find(c => c.id === "escrevendo") || null;
   }
 

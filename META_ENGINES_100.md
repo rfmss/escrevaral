@@ -110,15 +110,15 @@ Pergunta padrao da sessao:
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
 | RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→130 palavras; exportacao da analise em TXT |
 | Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
-| Direitos / publicacao | **95%** | 9→13 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
+| Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
 
 ### Marco — v287 / 2026-05-26 (sessão 3)
 
 **Direitos / publicação: 85% → 95%**
 - Fontes oficiais 4 → 7: adicionadas INPI (marca autoral), Domínio Público gov.br, ABDR (reprodução reprográfica)
-- Cards de cuidado 9 → 13: `dominio-publico` (70 anos, autoria moral permanente), `concurso-premio` (regulamento pode capturar direitos), `marca-autoral` (pseudônimo/INPI), `coautoria` já existia mas foi consolidado
-- `getRelevantCard()` com regex ampliada: roteiro/audiovisual → `contrato`; concurso/prêmio/edital → `concurso-premio`; autopublicação/ISBN/KDP → `autoedicao`; domínio público/clássico/século → `dominio-publico`
+- Cards de cuidado 9 → 12: `dominio-publico` (70 anos, autoria moral permanente), `concurso-premio` (regulamento pode capturar direitos), `marca-autoral` (pseudônimo/INPI)
+- `getRelevantCard()` com regex ampliada: pseudônimo/INPI/marca autoral → `marca-autoral` (nova, com prioridade); `\boral\b` em vez de `oral` para não capturar `autoral`; concurso/prêmio → `concurso-premio`; autopublicação/ISBN/KDP → `autoedicao`; domínio público/clássico/século → `dominio-publico`
 - CACHE_NAME: vereda-offline-v287 | ASSET_VERSION: 20260526-direitos95
 
 ---
