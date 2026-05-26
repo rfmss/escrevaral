@@ -60,15 +60,14 @@
         if (midSentenceProper) {
           tags.push("ProperNoun");
           tags.push("Noun");
+        } else if (i === 0 && /^\p{Lu}/u.test(word)) {
+          // Posição 0 com maiúscula: sempre ambíguo (nome próprio vs verbo inicial).
+          // Não classifica como verbo por terminação — evita Vitória/Maria/Sabia=Verb.
         } else {
-          // Posição 0 com maiúscula: bloqueia apenas o condicional (-aria/-eria/-iria)
-          // para não classificar "Maria" como verbo — ambíguo, preferimos não marcar.
-          const sentenceStartAmbiguous = i === 0 && /^\p{Lu}/u.test(word) &&
-            /(?:aria|eria|iria)$/.test(norm);
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
-          else if (!sentenceStartAmbiguous && /(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
+          else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) tags.push("Verb");
           else if (VERBOS_LIGACAO.has(norm)) tags.push("Verb");
         }
       }
