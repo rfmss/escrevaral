@@ -68,16 +68,16 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 3)
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
 
-**Baseline:** v287 — 10 engines em 95% (incluindo Direitos/publicação); engines restantes em 85–88%.
+**Baseline:** v290 — 14 engines em 95%; 6 restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
-1. **Editor / documento → 95%** (está em 85%): foco sem teclado físico, placeholder dinâmico, estado vazio mais rico.
-2. **Arquivo / acervo → 95%** (está em 85%): filtro por status; ordenação por progresso; busca dentro do texto.
-3. **Backup / restore → 95%** (está em 85%): validação de estrutura antes de restaurar; diff de contagem de manuscritos.
-4. **Offline / PWA → 95%** (está em 85%): testes de reinstalação; indicador de cache quente; fallback de rede mais preciso.
+1. **Offline / PWA → 95%** (está em 85%): indicador de cache quente; feedback ao recarregar; fallback de rede mais preciso.
+2. **Prova de autoria → 95%** (está em 85%): exportação do .proof.json com metadados completos; leitura local de prova; histórico de sessões com filtro.
+3. **Paginação / modo página → 95%** (está em 85%): número de página editável; cabeçalho/rodapé personalizado; atalho de teclado para próxima página.
+4. **Tema Alvorada / Vereda → 95%** (está em 88%): CSS dark para `.syntax-token`; contraste de abas no Vereda; fichas de personagem no dark.
 
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
@@ -86,21 +86,21 @@ Pergunta padrao da sessao:
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
 - tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
 
-## Estado em 2026-05-26 (sessão 2 — v285)
+## Estado em 2026-05-26 (sessão 3 — v290)
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
 | Prova de autoria | 85% | Protecao local + carimbo de anterioridade via OpenTimestamps |
 | Validacao da prova | 85% | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao |
 | `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
-| Backup / restore | 85% | Feedback de importacao com contagem; exportacao com tamanho em KB |
+| Backup / restore | **95%** | Validacao de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posicao do manuscrito corrompido |
 | Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
 | Versionamento | **95%** | Baixar versao em TXT; delta de paragrafos; primeira mudanca destacada |
 | Offline / PWA | **85%** | Deteccao antecipada de atualizacao; verificacao periodica (30min); mensagem de erro honesta |
-| Editor / documento | 85% | Densidade lexical no inspector; contagem de caracteres; estado vazio diferenciado |
+| Editor / documento | **95%** | Placeholder dinamico por kind (11 padroes); inspector contextual por kind; focus sem teclado fisico |
 | Paginacao / modo pagina | 85% | Print preset-aware (A5 imprime A5); contador de palavras por pagina; mobile sem overflow |
 | Exportacao / impressao | **95%** | DOCX no acervo; HTML com CSS de impressao; TXT/MD com data e metadados |
-| Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
+| Arquivo / acervo | **95%** | Filtro por situacao (Em escrita, Revisao, Pausado, Concluido) com contagem |
 | Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
 | Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
 | Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
@@ -112,6 +112,30 @@ Pergunta padrao da sessao:
 | Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
 | Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v290 / 2026-05-26 (sessão 3 — auditoria + 4 engines)
+
+**Direitos/publicação — correções de auditoria (v287→v288)**
+- `getRelevantCard()`: `\boral\b` em vez de `oral` para não capturar `autoral`
+- Nova regra `marca-autoral` com prioridade: `pseud[oô]`, `nome artístico`, `inpi`, `marca autor`
+- Contagem corrigida 13→12 na documentação; remoção de menção falsa sobre `coautoria`
+
+**Editor / documento: 85% → 95% (v288)**
+- `updateWritingPlaceholder`: 11 padrões `kind→frase de abertura` (poema, conto, romance, crônica, ensaio, roteiro, reportagem, biografia, carta, fantasia, terror)
+- Inspector vazio: "As palavras do seu conto aparecem aqui" quando `kind` preenchido
+- `updateCurrentMetadata`: chama `updateWritingPlaceholder` ao editar campo `kind` (placeholder reage em tempo real)
+
+**Arquivo / acervo: 85% → 95% (v289)**
+- `renderArchiveStatusBar`: chips de situação (Em escrita, Revisão, Pausado, Concluído) com contagem
+- `state.archive.statusFilter = "all"` adicionado ao estado padrão (merge seguro com localStorage legado)
+- Filtro encadeado: type + status + search na mesma passagem; barra oculta quando nenhum status tem nota
+
+**Backup / restore: 85% → 95% (v290)**
+- `validateBackupStructure`: valida array, IDs presentes, aponta posição do manuscrito corrompido
+- `restoreBackup` lança erro com mensagem clara antes de substituir o estado
+- `importBackup`: captura `previousCount` e exibe diff `"(antes 8)"` no feedback de sucesso
+
+---
 
 ### Marco — v287 / 2026-05-26 (sessão 3)
 
