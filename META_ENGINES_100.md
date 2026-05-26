@@ -68,16 +68,16 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 2)
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 3)
 
-**Baseline:** v285 — 9 engines chegaram a 95% nesta sessão; engines restantes em 85%.
+**Baseline:** v287 — 10 engines em 95% (incluindo Direitos/publicação); engines restantes em 85–88%.
 
 **Candidatas a avançar (por impacto e custo):**
 
-1. **Direitos / publicação → 95%** (está em 85%): expandir cards de cuidados; busca mais precisa; mais links de referência.
-2. **Editor / documento → 95%** (está em 85%): foco sem teclado físico, placeholder dinâmico, estado vazio mais rico.
-3. **Arquivo / acervo → 95%** (está em 85%): filtro por status; ordenação por progresso; busca dentro do texto.
-4. **Backup / restore → 95%** (está em 85%): validação de estrutura antes de restaurar; diff de contagem de manuscritos.
+1. **Editor / documento → 95%** (está em 85%): foco sem teclado físico, placeholder dinâmico, estado vazio mais rico.
+2. **Arquivo / acervo → 95%** (está em 85%): filtro por status; ordenação por progresso; busca dentro do texto.
+3. **Backup / restore → 95%** (está em 85%): validação de estrutura antes de restaurar; diff de contagem de manuscritos.
+4. **Offline / PWA → 95%** (está em 85%): testes de reinstalação; indicador de cache quente; fallback de rede mais preciso.
 
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
@@ -110,8 +110,18 @@ Pergunta padrao da sessao:
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
 | RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→130 palavras; exportacao da analise em TXT |
 | Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
-| Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
+| Direitos / publicacao | **95%** | 9→13 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v287 / 2026-05-26 (sessão 3)
+
+**Direitos / publicação: 85% → 95%**
+- Fontes oficiais 4 → 7: adicionadas INPI (marca autoral), Domínio Público gov.br, ABDR (reprodução reprográfica)
+- Cards de cuidado 9 → 13: `dominio-publico` (70 anos, autoria moral permanente), `concurso-premio` (regulamento pode capturar direitos), `marca-autoral` (pseudônimo/INPI), `coautoria` já existia mas foi consolidado
+- `getRelevantCard()` com regex ampliada: roteiro/audiovisual → `contrato`; concurso/prêmio/edital → `concurso-premio`; autopublicação/ISBN/KDP → `autoedicao`; domínio público/clássico/século → `dominio-publico`
+- CACHE_NAME: vereda-offline-v287 | ASSET_VERSION: 20260526-direitos95
+
+---
 
 ### Marco — v285 / 2026-05-26 (sessão 2)
 
