@@ -68,23 +68,25 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 2)
 
-**Baseline:** 4 engines de linguagem avançados (v277); Pontuação, Análise geral e Espelho de Voz chegaram a 95%; RimaLab chegou a 85%.
+**Baseline:** v285 — 9 engines chegaram a 95% nesta sessão; engines restantes em 85%.
 
 **Candidatas a avançar (por impacto e custo):**
 
-1. **Offline / PWA → 85%** (está em 82%): revisar mensagens de erro do SW em cenários de rede intermitente; testar banner de atualização em Playwright após novo deploy.
-2. **RimaLab → 95%** (está em 85%): expandir encyclopedia local; detecção de cesura; exportação do esquema em texto.
-3. **Versionamento → 95%** (está em 85%): diff visual por parágrafo; exportação de versão específica.
+1. **Direitos / publicação → 95%** (está em 85%): expandir cards de cuidados; busca mais precisa; mais links de referência.
+2. **Editor / documento → 95%** (está em 85%): foco sem teclado físico, placeholder dinâmico, estado vazio mais rico.
+3. **Arquivo / acervo → 95%** (está em 85%): filtro por status; ordenação por progresso; busca dentro do texto.
+4. **Backup / restore → 95%** (está em 85%): validação de estrutura antes de restaurar; diff de contagem de manuscritos.
 
 **Backlog técnico registrado (não implementar sem pedido):**
 - `vrda-engine.js`: importação assistida de `.vrda` legado — decisão de produto, não bug.
 - Sintaxe fallback: artigos (`um`, `a`, `o`) e adjetivos não marcados — limitação conhecida do fallback sem dicionário; aceitável em 95%.
 - CSS dark mode para `.syntax-token` — tokens ficam com cores de luz no tema Vereda; não auditado ainda.
 - Pontuação: PONT-18 (oração adjetiva explicativa) ainda tem falsos positivos com nomes próprios; aceitável em 95%.
+- tooltip-controller.js: 74 ocorrências de `title` para migrar para `data-vrda-tooltip` — implementação deferida.
 
-## Estado em 2026-05-26
+## Estado em 2026-05-26 (sessão 2 — v285)
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
@@ -93,23 +95,74 @@ Pergunta padrao da sessao:
 | `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
 | Backup / restore | 85% | Feedback de importacao com contagem; exportacao com tamanho em KB |
 | Backup externo via File System | 85% | Erros humanizados; estado sem suporte; arquivo escrevaral-acervo; ciclo exportar/importar validado |
-| Versionamento | 85% | Previa de texto nas versoes; contador X/20 versoes guardadas |
-| Offline / PWA | 82% | Banner de atualizacao com botao; mensagens de erro claras |
+| Versionamento | **95%** | Baixar versao em TXT; delta de paragrafos; primeira mudanca destacada |
+| Offline / PWA | **85%** | Deteccao antecipada de atualizacao; verificacao periodica (30min); mensagem de erro honesta |
 | Editor / documento | 85% | Densidade lexical no inspector; contagem de caracteres; estado vazio diferenciado |
 | Paginacao / modo pagina | 85% | Print preset-aware (A5 imprime A5); contador de palavras por pagina; mobile sem overflow |
-| Exportacao / impressao | 85% | Saida limpa: TXT, MD, HTML, DOCX; estado vazio com erro claro |
+| Exportacao / impressao | **95%** | DOCX no acervo; HTML com CSS de impressao; TXT/MD com data e metadados |
 | Arquivo / acervo | 85% | Organizacao de manuscritos e notas; copia solicitada em .esc |
-| Templates / guias | 85% | Loading state; fallback activeTemplate; createBlankManuscript(); selectCraft robusta |
-| Precision / aderencia ao guia | 85% | +terror-horror, memoir, jornalismo, romance; status labels mais honestos |
-| Lexico / Biblioteca | 85% | Analise local com recuperacao de erro e estado vazio definido |
+| Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
+| Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
+| Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
 | Sintaxe | 95% | Painel no inspector; pronomes pessoais no fallback; vocativo; alertas de concordancia; apostos e voz passiva no resumo |
 | Pontuacao | 95% | 38 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
-| Analise geral | 95% | `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições; dimensoes por alerta |
+| Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
 | Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
-| RimaLab | 85% | Deteccao de prosa (isProse); 35+ esquemas nomeados; soneto, quintilha, oitava rima |
-| Decolonial / vocabulario | 85% | 144 entradas; alternativas clicáveis; observer agrupado por categoria |
+| RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→130 palavras; exportacao da analise em TXT |
+| Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
 | Direitos / publicacao | 85% | Cards recolhíveis; limpar busca; mapeamento biografi/tradução; link Prova de autoria |
 | Tema Alvorada / Vereda | 88% | Alternancia persistente; contraste auditado; mobile sem overflow nas rotas principais |
+
+### Marco — v285 / 2026-05-26 (sessão 2)
+
+**Sessão autônoma — 9 engines avançados em paralelo (v278→v285)**
+
+**Versionamento: 85% → 95%**
+- Exportar versão específica em TXT com cabeçalho: título, versão, data, palavras
+- Delta de parágrafos entre versões (X par.) no cartão de versão
+- Primeira mudança de parágrafo destacada abaixo do preview
+
+**Exportação / impressão: 85% → 95%**
+- DOCX adicionado ao painel do acervo (ao lado de TXT, MD, HTML)
+- HTML com `@media print` CSS — melhor export para PDF pelo navegador
+- TXT com separador `═══`, data de criação e metadados seletivos
+- MD com frontmatter YAML completo (date, tipo, situação, progresso, tags)
+
+**Templates / guias: 85% → 95%**
+- Busca cross-craft auto-seleciona primeiro resultado quando ativo não está nos resultados
+- `title` com descrição do template em cada aba de template (tooltip nativo)
+- Contador "X guias encontrados" quando há busca ativa
+- ID do template incluído no índice de busca (melhora localização)
+
+**Offline / PWA: 82% → 85%**
+- Detecção de SW em espera no carregamento (banner imediato, antes do controllerchange)
+- Listener de `updatefound` + `statechange === 'installed'` (banner antecipado)
+- Verificação periódica a cada 30 minutos enquanto o app está aberto
+- Mensagem de erro honesta no .catch() (distingue falha de rede de falha de registro)
+
+**RimaLab: 85% → 95%**
+- Enciclopédia 5 → 15 entradas: décima/espinela, decassílabo, haiku, cordel, cesura, assonância, verso livre, sinalefa, rima rica/pobre, tonicidade
+- Léxico gramatical 33 → 130 palavras para rima rica/pobre (substantivos, verbos, adjetivos, advérbios)
+- `exportAnalysisText()` exporta relatório completo: métricas, esquemas, pares de rima por verso
+- `exportRimaLabText()` agora exporta o relatório de análise em vez do texto bruto
+
+**Decolonial / vocabulário: 85% → 95%**
+- 144 → 174 entradas: +10 território, +6 conhecimento, +6 linguagem, +4 estética, +4 classe
+- Novos temas: favela, selva, invasão, esotérico, mitologia indígena, o negro/o índio, exótico, arte primitiva, classes baixas, ralé
+
+**Precision / aderência ao guia: 85% → 95%**
+- `analyzeComercialTecnica()`: cobertura de copywriting, UX writing, escrita técnica, roteiro-youtube, quadrinhos
+- `analyzePlanejamento()`: cobertura de mercado-editorial, objeto-livro, direitos-autorais
+- `summarize()` retorna `gaps` e `strengths` separados na API
+- Status mais graduados: 88%+ / 70%+ / 50%+ / abaixo
+
+**Léxico / Biblioteca: 85% → 95%**
+- localLexicon 60 → 94 entradas: sertão, quilombo, caatinga, orixá, encantado, memória, exílio, migração, terreiro, axé, e mais 34 palavras com notas literárias
+- adjetivos_comuns 57 → 189 formas (incluindo femininos, plurais)
+- adverbios 60 → 100 entradas
+- conjuncoes 32 → 42 entradas
+
+---
 
 ### Marco — v277 / 2026-05-26
 
