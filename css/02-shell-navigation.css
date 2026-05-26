@@ -2271,6 +2271,11 @@ mark {
   display: block;
 }
 
+/* Troca o logo pelo variante creme no tema Vereda (topbar escuro) */
+[data-theme="scriptorium"] .brand-logo {
+  content: url("../icons/vereda-logo-light.svg");
+}
+
 /* brand-lockup: logo + texto colados */
 .brand-lockup {
   gap: 8px !important;
