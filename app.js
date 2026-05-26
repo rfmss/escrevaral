@@ -1446,6 +1446,7 @@ document.addEventListener("click", (event) => {
 
   const archiveTarget      = event.target.closest("[data-archive-select]");
   const versionTarget      = event.target.closest("[data-version-restore]");
+  const versionExportTarget= event.target.closest("[data-version-export]");
   const templateSelectTarget = event.target.closest("[data-template-select]");
   const templateUseTarget  = event.target.closest("[data-template-use]");
   const templateNextTarget = event.target.closest("[data-template-next]");
@@ -1462,6 +1463,7 @@ document.addEventListener("click", (event) => {
 
   if (archiveTarget)       { event.preventDefault(); selectArchiveManuscript(archiveTarget.dataset.archiveSelect); return; }
   if (versionTarget)       { event.preventDefault(); restoreVersion(versionTarget.dataset.versionRestore); return; }
+  if (versionExportTarget) { event.preventDefault(); exportVersion(versionExportTarget.dataset.versionExport); return; }
   if (templateSelectTarget){ event.preventDefault(); selectTemplate(templateSelectTarget.dataset.templateSelect); return; }
   if (templateUseTarget)   { event.preventDefault(); createManuscriptFromTemplate(templateUseTarget.dataset.templateUse); return; }
   if (templateNextTarget)  { event.preventDefault(); changeTemplateStep(1); return; }

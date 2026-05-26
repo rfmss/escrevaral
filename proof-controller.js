@@ -60,6 +60,19 @@ function createManualVersion() {
   persistState("Versão criada");
 }
 
+function exportVersion(versionId) {
+  const manuscript = getActiveManuscript();
+  if (!isManuscriptDocument(manuscript)) return;
+  const snapshot = VeredaVersions.getVersionsForManuscript(state.versions, manuscript.id)
+    .find(v => v.id === versionId);
+  if (!snapshot) return;
+  const date = new Date(snapshot.createdAt).toLocaleDateString("pt-BR").replace(/\//g, "-");
+  const filename = `${slugify(snapshot.title || "versao")}-${date}.txt`;
+  const header = `${snapshot.title || "Manuscrito"}\n${"─".repeat(40)}\nVersão: ${snapshot.reason}\nData: ${new Date(snapshot.createdAt).toLocaleString("pt-BR")}\nPalavras: ${snapshot.wordCount}\n${"─".repeat(40)}\n\n`;
+  downloadFile(header + (snapshot.text || ""), filename, "text/plain;charset=utf-8");
+  saveStatus.textContent = "Versão baixada em TXT";
+}
+
 function restoreVersion(versionId) {
   const manuscript = getActiveManuscript();
 
@@ -364,14 +377,29 @@ function renderVersionList() {
         ? `<small class="version-preview">${escapeHtml(preview)}${version.text?.trim().length > 90 ? "…" : ""}</small>`
         : "";
 
+      // Primeira mudança de parágrafo — mais informativo que o início do texto
+      const firstChangeHtml = diff?.firstChange && diff.firstChange !== preview
+        ? `<small class="version-first-change">↳ ${escapeHtml(diff.firstChange.slice(0, 80))}${diff.firstChange.length > 80 ? "…" : ""}</small>`
+        : "";
+
+      const parasDelta = diff ? Math.abs(
+        (version.text || "").split(/\n+/).filter(Boolean).length -
+        ((versions[i+1]?.text || "").split(/\n+/).filter(Boolean).length)
+      ) : 0;
+      const parasLabel = parasDelta > 0 ? ` · ${parasDelta} par.` : "";
+
       return `
         <article class="version-item">
           <div>
             <strong>${escapeHtml(version.reason)}</strong>
-            <span>${createdAt} · ${version.wordCount} palavras${deltaLabel ? ` · <em>${escapeHtml(deltaLabel)}</em>` : ""}</span>
+            <span>${createdAt} · ${version.wordCount} palavras${deltaLabel ? ` · <em>${escapeHtml(deltaLabel)}</em>` : ""}${parasLabel}</span>
             ${previewHtml}
+            ${firstChangeHtml}
           </div>
-          <button class="secondary-button" data-version-restore="${version.id}">Restaurar</button>
+          <div class="version-actions">
+            <button class="secondary-button version-export-btn" data-version-export="${version.id}" title="Baixar esta versão em TXT">Baixar</button>
+            <button class="secondary-button" data-version-restore="${version.id}">Restaurar</button>
+          </div>
         </article>
       `;
     })

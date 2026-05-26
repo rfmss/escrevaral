@@ -2115,6 +2115,25 @@ mark {
   font-style: italic;
   line-height: 1.4;
 }
+.version-first-change {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--primary);
+  opacity: 0.8;
+  font-style: normal;
+  line-height: 1.4;
+}
+.version-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.version-export-btn {
+  font-size: 11px !important;
+  padding: 4px 10px !important;
+}
 
 .version-count-note {
   font-size: 12px;
