@@ -67,6 +67,14 @@
       return analyzeJornalismo(normalizedText, words);
     }
 
+    if (template.oficio === "comercial-tecnica") {
+      return analyzeComercialTecnica(template, normalizedText, words);
+    }
+
+    if (template.oficio === "mercado-editorial" || template.oficio === "objeto-livro" || template.oficio === "direitos-autorais") {
+      return analyzePlanejamento(template, normalizedText, words);
+    }
+
     return analyzeGeneric(template, normalizedText, words);
   }
 
@@ -387,6 +395,48 @@
     return summarize(checks, words, 0);
   }
 
+  function analyzeComercialTecnica(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+    const callHits = countMatches(text, /\b(clique|acesse|saiba|descubra|faça|experimente|cadastre|baixe|veja|aproveite|solicite|reserve|garanta|compre|assine)\b/gi);
+    const benefitHits = countMatches(text, /\b(vantagem|benefício|resultado|economia|ganho|melhora|solução|facilidade|segurança|eficiência|praticidade|valor|retorno)\b/gi);
+    const concretHits = countMatches(text, /\b(\d+%|\d+ vezes|\d+ anos?|\d+ dias?|\d+ horas?|\d+\s?reais?|\d+\s?R\$)\b/gi);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasTightSentences = lengths.some(l => l <= 8);
+    const hasBullets = /•|-\s|\d+\.\s/.test(text);
+
+    const checks = [
+      createCheck("Abertura com proposta clara", firstSentence.length >= 15 && firstSentence.length <= 180, scoreOpening(firstSentence), "A primeira frase deve responder por que o leitor deveria continuar lendo."),
+      createCheck("Benefício concreto", benefitHits >= 1, Math.min(100, benefitHits * 30), "O que o leitor ganha? Mostre o resultado, não apenas o processo."),
+      createCheck("Dados ou prova", concretHits >= 1, Math.min(100, concretHits * 35), "Números específicos constroem credibilidade — percentual, prazo, preço ou tempo."),
+      createCheck("Chamada para ação", callHits >= 1, Math.min(100, callHits * 40), "Textos comerciais precisam dizer explicitamente o que fazer a seguir."),
+      createCheck("Frases diretas", hasTightSentences, hasTightSentences ? 88 : Math.min(60, lengths.length * 10), "Frases curtas aumentam clareza e ritmo de leitura em textos comerciais."),
+      createCheck("Estrutura escaneável", hasBullets || paragraphs.length >= 3, Math.min(100, (hasBullets ? 50 : 0) + paragraphs.length * 12), "Listas, tópicos ou parágrafos curtos ajudam leitores a encontrar o que precisam."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePlanejamento(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const hasBullets = /•|-\s|\d+\.\s/.test(text);
+    const dateHits = countMatches(text, /\b(\d{1,2}\/\d{1,2}|\d{4}|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez|janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\b/gi);
+    const actionHits = countMatches(text, /\b(enviar|contratar|negociar|publicar|registrar|lançar|submeter|revisar|assinar|contatar|pesquisar|verificar)\b/gi);
+    const firstSentence = getFirstSentence(text);
+
+    const checks = [
+      createCheck("Conteúdo iniciado", words >= 30, Math.min(100, words * 3), "Preencha as seções do guia com as informações reais do seu projeto."),
+      createCheck("Itens ou etapas listadas", hasBullets || paragraphs.length >= 3, Math.min(100, (hasBullets ? 50 : 0) + paragraphs.length * 15), "Listas e etapas tornam o planejamento acionável e revisável."),
+      createCheck("Datas ou prazos", dateHits >= 1, Math.min(100, dateHits * 30), "Datas concretas transformam intenção em comprometimento."),
+      createCheck("Ações concretas", actionHits >= 1, Math.min(100, actionHits * 28), "Verbos de ação (enviar, negociar, publicar) indicam próximos passos reais."),
+      createCheck("Abertura descritiva", firstSentence.length >= 15, firstSentence.length >= 15 ? 85 : Math.min(60, firstSentence.length * 4), "A primeira linha deve situar o contexto do planejamento."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
   function analyzeGeneric(template, text, words) {
     const sentences = splitSentences(text);
     const paragraphs = text.split(/\n+/).map(s => s.trim()).filter(Boolean);
@@ -418,13 +468,21 @@
 
   function summarize(checks, words, limit) {
     const score = Math.round(checks.reduce((total, check) => total + check.score, 0) / checks.length);
+    const gaps = checks.filter(c => c.passed === false);
+    const strengths = checks.filter(c => c.passed === true);
+    const status = score >= 88 ? "Elementos do guia bem cobertos"
+      : score >= 70 ? "Boa base em desenvolvimento"
+      : score >= 50 ? "Ainda em formação"
+      : "Rascunho inicial";
 
     return {
       score,
-      status: score >= 82 ? "Elementos do guia bem cobertos" : score >= 60 ? "Boa base em desenvolvimento" : "Texto em formação",
+      status,
       words,
       limit,
       checks,
+      gaps,
+      strengths,
     };
   }
 
