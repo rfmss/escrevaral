@@ -327,6 +327,39 @@ function requestBackupImport() {
   backupInput.click();
 }
 
+function _formatImportConfirmMessage(envelope, fileName) {
+  const s = VeredaVrda.summarizeEnvelope(envelope);
+  const parts = [
+    s.manuscriptCount > 0 ? `${s.manuscriptCount} ${s.manuscriptCount === 1 ? "manuscrito" : "manuscritos"}` : null,
+    s.noteCount > 0 ? `${s.noteCount} ${s.noteCount === 1 ? "nota" : "notas"}` : null,
+  ].filter(Boolean);
+  const wordsPart = s.totalWords > 0 ? `, ${s.totalWords.toLocaleString("pt-BR")} palavras` : "";
+  let datePart = "";
+  if (s.exportedAt) {
+    try {
+      datePart = ` de ${new Date(s.exportedAt).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" })}`;
+    } catch (_) {}
+  }
+  const currentCount = state.manuscripts.length;
+  const currentNoun = currentCount === 1 ? "manuscrito" : "manuscritos";
+  const fileLabel = fileName ? `"${fileName}"` : "cópia";
+  const content = parts.length ? `${parts.join(" e ")}${wordsPart}` : "acervo";
+  return `${fileLabel}${datePart}: ${content}.\nSubstitui o acervo atual (${currentCount} ${currentNoun}). Continuar?`;
+}
+
+async function _readAndConfirmImport(file) {
+  if (!file) return;
+  let backup;
+  try {
+    backup = await VeredaBackup.readBackup(file);
+  } catch (error) {
+    saveStatus.textContent = error.message;
+    return;
+  }
+  const msg = _formatImportConfirmMessage(backup, file.name);
+  vrdaConfirm(msg, () => _executeImport(file, backup));
+}
+
 async function importFromFilesystem() {
   if (!("showOpenFilePicker" in window)) {
     saveStatus.textContent = "Leitura via sistema de arquivos requer Chrome, Edge ou Opera.";
@@ -342,21 +375,15 @@ async function importFromFilesystem() {
     return;
   }
 
-  const msCount = state.manuscripts.length;
-  const noun = msCount === 1 ? "manuscrito" : "manuscritos";
-  vrdaConfirm(
-    `Trazer a cópia do arquivo "${file.name}" vai substituir o acervo atual (${msCount} ${noun}). Continuar?`,
-    () => importBackup(file)
-  );
+  await _readAndConfirmImport(file);
 }
 
 async function importBackup(file) {
-  if (!file) {
-    return;
-  }
+  await _readAndConfirmImport(file);
+}
 
+async function _executeImport(file, backup) {
   try {
-    const backup = await VeredaBackup.readBackup(file);
     const envSummary = VeredaVrda.summarizeEnvelope(backup);
     const previousCount = state.manuscripts.length;
     state = VeredaBackup.restoreBackup(state, backup);
@@ -397,7 +424,7 @@ async function importBackup(file) {
   } catch (error) {
     saveStatus.textContent = error.message;
   }
-}
+} // _executeImport
 
 const wordCloudEl     = document.querySelector("[data-word-cloud]");
 const grammarBarEl    = document.querySelector("[data-grammar-bar]");

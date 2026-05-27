@@ -1,6 +1,14 @@
 (function backupEngine(global) {
   function createBackup(state) {
-    return VeredaVrda.createEnvelope({
+    const manuscripts = state.manuscripts || [];
+    const docs  = manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito");
+    const notes = manuscripts.filter(m => (m.type || "manuscrito") !== "manuscrito");
+    const totalWords = docs.reduce((sum, m) => {
+      const txt = m.text || (m.html || "").replace(/<[^>]+>/g, " ");
+      return sum + (txt.trim().split(/\s+/).filter(Boolean).length);
+    }, 0);
+    return VeredaVrda.createEnvelope(
+      {
         activeId: state.activeId,
         manuscripts: state.manuscripts,
         focus: state.focus,
@@ -9,7 +17,9 @@
         proofs: state.proofs,
         versions: state.versions,
         proofValidations: state.proofValidations || {},
-    });
+      },
+      { stats: { manuscriptCount: docs.length, noteCount: notes.length, totalWords } }
+    );
   }
 
   function readBackup(file) {
