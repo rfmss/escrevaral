@@ -248,7 +248,7 @@ function setEditorViewMode(mode) {
     document.querySelector(".app-shell")?.classList.add("is-page-mode");
     const manuscript = getActiveManuscript();
     const preset = manuscript?.pagePreset || "draft";
-    const _pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, preset, "auto"); updatePageCount(_pc);
+    const _pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, preset, "auto", getPageRenderOpts()); updatePageCount(_pc);
   } else {
     // Páginas → Fluxo: recolher páginas de volta para o writing-area
     if (pagedEditor.classList.contains("is-active")) {
@@ -288,6 +288,8 @@ function updatePageCount(total) {
   if (!pageCountEl) return;
   _totalPageCount = total;
   if (_currentEditorView === "pages" && total > 0) {
+    const firstPage = pagedEditor?.querySelector(".manuscript-page");
+    _currentVisiblePage = parseInt(firstPage?.dataset.page, 10) || 1;
     pageCountEl.textContent = _pageStatusText(_currentVisiblePage, total);
     pageCountEl.hidden = false;
     _attachPageObserver(total);
@@ -300,7 +302,6 @@ function updatePageCount(total) {
 function navigatePage(delta) {
   if (_currentEditorView !== "pages" || !pagedEditor) return;
   const next = _currentVisiblePage + delta;
-  if (next < 1 || next > _totalPageCount) return;
   const target = pagedEditor.querySelector(`.manuscript-page[data-page="${next}"]`);
   if (!target) return;
   target.querySelector(".page-body")?.focus();

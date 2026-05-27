@@ -300,8 +300,15 @@ const VeredaPagination = (() => {
   }
 
   // ── Renderiza as seções A4/A5 editáveis ─────────────────────────────────
-  function render(pagedEditor, html, preset, mode) {
+  // opts: { startPage: number, headerText: string }
+  function render(pagedEditor, html, preset, mode, opts) {
     preset = preset || "draft";
+    const startPage  = Math.max(1, parseInt((opts || {}).startPage, 10) || 1);
+    const headerText = ((opts || {}).headerText || "").trim();
+    const safeHeader = headerText
+      ? headerText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      : "";
+
     const pages = mode === "auto"
       ? autoPaginate(html, preset)
       : splitIntoPages(html);
@@ -310,16 +317,21 @@ const VeredaPagination = (() => {
     const isA5 = preset === "book";
 
     pagedEditor.innerHTML = pages.map((page, i) => {
+      const pageNum = startPage + i;
       const wc = (page.content.replace(/<[^>]+>/g, " ").match(/[\p{L}''-]+/gu) || []).length;
+      const headerHtml = safeHeader
+        ? `<header class="page-header" aria-hidden="true">${safeHeader}</header>`
+        : "";
       return `
       <section class="manuscript-page${isA5 ? " is-a5" : ""}"
-               data-page="${i + 1}"
+               data-page="${pageNum}"
                data-break="${page.manual ? "manual" : "auto"}">
+        ${headerHtml}
         <div class="page-body" contenteditable="true"
              spellcheck="true"
-             aria-label="Página ${i + 1}">${page.content}</div>
+             aria-label="Página ${pageNum}">${page.content}</div>
         <footer class="page-footer">
-          <span class="page-footer-num">${i + 1}</span>
+          <span class="page-footer-num">${pageNum}</span>
           <span class="page-footer-wc" aria-label="${wc} palavras nesta página">${wc} pal.</span>
         </footer>
       </section>

@@ -381,6 +381,14 @@ function selectArchiveManuscript(id) {
 // Declarado antes de renderActiveManuscript que já o lê na linha ~1022
 let _currentEditorView = "flow";
 
+function getPageRenderOpts() {
+  const ms = getActiveManuscript();
+  return {
+    startPage:  ms?.pageStartNumber  || 1,
+    headerText: ms?.pageHeaderText   || "",
+  };
+}
+
 function scheduleUndoPush() {
   clearTimeout(_undoTimer);
   _undoTimer = setTimeout(() => {
@@ -1961,7 +1969,7 @@ function runPaginationNow() {
   const cursor = markerId ? null : saveCursorPosition();
   const ms = getActiveManuscript();
   const preset = ms?.pagePreset || "draft";
-  const _pc = VeredaPagination.render(pagedEditor, sourceHtml, preset, "auto"); updatePageCount(_pc);
+  const _pc = VeredaPagination.render(pagedEditor, sourceHtml, preset, "auto", getPageRenderOpts()); updatePageCount(_pc);
   if (!restorePaginationCaretMarker(markerId)) restoreCursorPosition(cursor);
   removePaginationCaretMarkers(pagedEditor);
   removePaginationCaretMarkers(writingArea);
@@ -1998,10 +2006,41 @@ if (pagePresetSel) {
     // Re-renderiza as páginas com o novo preset (inclui .is-a5 e data-break)
     if (pagedEditor?.classList.contains("is-active")) {
       const pc = VeredaPagination.render(
-        pagedEditor, writingArea.innerHTML, preset, "auto"
+        pagedEditor, writingArea.innerHTML, preset, "auto", getPageRenderOpts()
       );
       updatePageCount(pc);
     }
+  });
+}
+
+// ── CONTROLES DE PÁGINA: número inicial e cabeçalho ─────────────────────
+const pageStartNumberInput  = document.querySelector("[data-page-start-number]");
+const pageHeaderTextInput   = document.querySelector("[data-page-header-text]");
+
+function _rerenderPagesIfActive() {
+  if (!pagedEditor?.classList.contains("is-active")) return;
+  const ms = getActiveManuscript();
+  const preset = ms?.pagePreset || pagePresetSel?.value || "draft";
+  const pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, preset, "auto", getPageRenderOpts());
+  updatePageCount(pc);
+}
+
+if (pageStartNumberInput) {
+  pageStartNumberInput.addEventListener("change", () => {
+    const ms = getActiveManuscript();
+    const val = Math.max(1, parseInt(pageStartNumberInput.value, 10) || 1);
+    pageStartNumberInput.value = val;
+    if (ms) updateActiveManuscript({ ...ms, pageStartNumber: val });
+    _rerenderPagesIfActive();
+  });
+}
+
+if (pageHeaderTextInput) {
+  pageHeaderTextInput.addEventListener("input", () => {
+    const ms = getActiveManuscript();
+    if (ms) updateActiveManuscript({ ...ms, pageHeaderText: pageHeaderTextInput.value.trim() });
+    clearTimeout(pageHeaderTextInput._t);
+    pageHeaderTextInput._t = setTimeout(_rerenderPagesIfActive, 600);
   });
 }
 

@@ -118,6 +118,62 @@
 .page-body strong { font-weight: 700; }
 .page-body em { font-style: italic; }
 
+/* Cabeçalho de página (aparece quando pageHeaderText está definido) */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10mm;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #bbb;
+  font-family: "Inter", sans-serif;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  padding: 0 6mm;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Controles de configuração de página (número inicial + cabeçalho) */
+.page-settings-inputs {
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+.is-page-mode .page-settings-inputs { display: flex; }
+
+.page-start-input {
+  width: 46px;
+  text-align: center;
+}
+.page-header-input {
+  width: 130px;
+}
+.page-start-input,
+.page-header-input {
+  height: 26px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-family: inherit;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-low);
+  color: var(--soft-ink);
+  outline: none;
+}
+.page-start-input:focus,
+.page-header-input:focus {
+  border-color: var(--primary);
+}
+.page-settings-label {
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 .page-footer {
   display: flex;
   justify-content: space-between;

@@ -26,9 +26,11 @@ function renderActiveManuscript() {
   VeredaDocument.clearHistory();
   // Restaura preset editorial do manuscrito
   if (pagePresetSel) pagePresetSel.value = manuscript.pagePreset || "draft";
+  if (pageStartNumberInput) pageStartNumberInput.value = manuscript.pageStartNumber || 1;
+  if (pageHeaderTextInput)  pageHeaderTextInput.value  = manuscript.pageHeaderText  || "";
   // Se estiver em modo páginas, re-renderizar com o novo manuscrito
   if (_currentEditorView === "pages" && pagedEditor) {
-    const _pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, manuscript.pagePreset || "draft", "auto"); updatePageCount(_pc);
+    const _pc = VeredaPagination.render(pagedEditor, writingArea.innerHTML, manuscript.pagePreset || "draft", "auto", getPageRenderOpts()); updatePageCount(_pc);
   }
   updateWritingPlaceholder();
   renderInspector();
@@ -624,7 +626,7 @@ document.addEventListener("keydown", (e) => {
   updateCurrentManuscript();
 
   const ms = getActiveManuscript();
-  const _pc = VeredaPagination.render(pagedEditor, restored, ms?.pagePreset || "draft", "auto"); updatePageCount(_pc);
+  const _pc = VeredaPagination.render(pagedEditor, restored, ms?.pagePreset || "draft", "auto", getPageRenderOpts()); updatePageCount(_pc);
   restoreCursorPosition(cursor);
 });
 
