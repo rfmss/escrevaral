@@ -210,16 +210,28 @@ function renderProofView() {
   if (cadenceEl) cadenceEl.textContent = summary.cadenceWpm > 0 ? `${summary.cadenceWpm} palavras/min` : "—";
   if (cadenceHintEl) cadenceHintEl.textContent = summary.cadenceWpm > 0 ? "Ritmo orgânico registrado" : "Comece a escrever para calcular";
 
-  // Palavras registradas
+  // Palavras registradas + delta desde último registro
   const wordcountEl = document.querySelector("[data-proof-wordcount]");
   const wordcountHintEl = document.querySelector("[data-proof-wordcount-hint]");
   if (wordcountEl && ms) {
     const wc = countWords(ms.text || "");
     wordcountEl.textContent = wc > 0 ? wc.toLocaleString("pt-BR") : "—";
     if (wordcountHintEl) {
-      const MILESTONES = [100, 500, 1000, 2000, 5000, 10000];
-      const nextMilestone = MILESTONES.find(m => m > wc);
-      wordcountHintEl.textContent = nextMilestone ? `Próximo marco: ${nextMilestone.toLocaleString("pt-BR")} palavras` : "Marco de 10 mil alcançado";
+      const lastExp = state.proofs?.[ms.id]?._lastExportedWords;
+      if (lastExp != null && wc > 0) {
+        const delta = wc - lastExp;
+        const sign = delta > 0 ? "+" : "";
+        const lastAt = state.proofs?.[ms.id]?._lastExportedAt;
+        const dateStr = lastAt ? new Date(lastAt).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}) : "";
+        const deltaTxt = delta !== 0
+          ? `${sign}${delta.toLocaleString("pt-BR")} palavras desde o último registro${dateStr ? ` (${dateStr})` : ""}`
+          : `Texto inalterado desde o último registro${dateStr ? ` (${dateStr})` : ""}`;
+        wordcountHintEl.textContent = deltaTxt;
+      } else {
+        const MILESTONES = [100, 500, 1000, 2000, 5000, 10000];
+        const nextMilestone = MILESTONES.find(m => m > wc);
+        wordcountHintEl.textContent = nextMilestone ? `Próximo marco: ${nextMilestone.toLocaleString("pt-BR")} palavras` : "Marco de 10 mil alcançado";
+      }
     }
   }
 
@@ -464,7 +476,15 @@ async function exportProof() {
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
   const proofJson = JSON.stringify(proofDocument, null, 2);
   downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.prova.esc`, "application/json");
+
+  // Guardar marcador de última exportação para rastrear alterações
+  state.proofs[manuscript.id] = state.proofs[manuscript.id] || {};
+  state.proofs[manuscript.id]._lastExportedWords = countWords(manuscript.text || "");
+  state.proofs[manuscript.id]._lastExportedAt = new Date().toISOString();
+  persistState("Prova exportada");
+
   saveStatus.textContent = "Cópia de autoria guardada";
+  renderProofView();
 }
 
 async function stampWithOpenTimestamps() {
