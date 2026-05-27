@@ -248,6 +248,10 @@ function renderProjectGrid() {
       const editorBadge = isOpenInEditor
         ? `<span class="project-editor-badge"><span class="material-symbols-outlined">edit_note</span>Aberta no editor</span>`
         : "";
+      const createdAtLine = formatCreatedAt(manuscript.createdAt);
+      const badgeChips = typeof VeredaBadges !== "undefined"
+        ? VeredaBadges.renderBadgeChips(manuscript)
+        : "";
 
       return `
         <article class="project-card${featured}${selected}${pinned}" data-archive-select="${manuscript.id}" data-document-type="${type.id}" role="button" tabindex="0">
@@ -259,6 +263,7 @@ function renderProjectGrid() {
           <h2>${escapeHtml(manuscript.title || "Sem título")}</h2>
           ${manuscript.kind && manuscript.kind !== manuscript.title ? `<span class="project-kind">${escapeHtml(manuscript.kind)}</span>` : ""}
           <p>${escapeHtml(cardDescription)}</p>
+          ${createdAtLine ? `<span class="project-created-at">${escapeHtml(createdAtLine)}</span>` : ""}
           ${tags}
           <div class="project-progress" aria-label="Progresso de ${escapeHtml(manuscript.title)}">
             <i style="--progress: ${progressValue}%"></i>
@@ -269,6 +274,7 @@ function renderProjectGrid() {
             <span class="project-meta-badge">${words > 0 ? `${words} palavras` : "rascunho"}</span>
             <span class="project-meta-time">${formatUpdatedAt(manuscript.updatedAt)}</span>
           </div>
+          ${badgeChips ? `<div class="badge-chips-row">${badgeChips}</div>` : ""}
           <div class="project-actions" aria-label="Ações de ${escapeHtml(manuscript.title)}">
             <button type="button" data-archive-quick="open" data-archive-document="${manuscript.id}" title="Abrir no editor" aria-label="Abrir ${escapeHtml(manuscript.title)} no editor">
               <span class="material-symbols-outlined">edit_note</span>
@@ -732,6 +738,48 @@ function normalizeSearch(value = "") {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function formatCreatedAt(createdAt) {
+  if (!createdAt) return null;
+  try {
+    const created = new Date(createdAt);
+    if (Number.isNaN(created.getTime())) return null;
+    const diffMs = Date.now() - created.getTime();
+    const diffDays = Math.floor(diffMs / 86400000);
+    if (diffDays < 0) return null;
+
+    const monthStr = created.toLocaleDateString("pt-BR", {
+      month: "long",
+      year: "numeric",
+    });
+
+    if (diffDays < 1) return "Criado hoje";
+    if (diffDays < 7) {
+      return `Criado há ${diffDays} ${diffDays === 1 ? "dia" : "dias"}`;
+    }
+
+    const years = Math.floor(diffDays / 365);
+    const remainMonths = Math.floor((diffDays % 365) / 30);
+    const totalMonths = Math.floor(diffDays / 30);
+
+    let ageStr;
+    if (years >= 1) {
+      ageStr = `${years} ${years === 1 ? "ano" : "anos"}`;
+      if (remainMonths > 0) {
+        ageStr += ` e ${remainMonths} ${remainMonths === 1 ? "mês" : "meses"}`;
+      }
+    } else if (totalMonths >= 1) {
+      ageStr = `${totalMonths} ${totalMonths === 1 ? "mês" : "meses"}`;
+    } else {
+      const weeks = Math.floor(diffDays / 7);
+      ageStr = `${weeks} ${weeks === 1 ? "semana" : "semanas"}`;
+    }
+
+    return `Criado em ${monthStr} · existe há ${ageStr}`;
+  } catch {
+    return null;
+  }
 }
 
 // ── Input listeners do Arquivo ────────────────────────────────────────────────

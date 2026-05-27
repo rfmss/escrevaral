@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v336";
-const ASSET_VERSION = "20260527-v99u";
+const CACHE_NAME = "vereda-offline-v338";
+const ASSET_VERSION = "20260527-v100";
 
 const CORE_ASSETS = [
   "./",
@@ -22,6 +22,7 @@ const CORE_ASSETS = [
   `./css/06-academy-tools.css?v=${ASSET_VERSION}`,
   `./css/08-responsive.css?v=${ASSET_VERSION}`,
   `./css/10-mobile-nav.css?v=${ASSET_VERSION}`,
+  `./css/11-badges.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,
@@ -31,6 +32,7 @@ const CORE_ASSETS = [
   `./backup-engine.js?v=${ASSET_VERSION}`,
   `./filesystem-backup-engine.js?v=${ASSET_VERSION}`,
   `./archive-engine.js?v=${ASSET_VERSION}`,
+  `./badges-engine.js?v=${ASSET_VERSION}`,
   `./version-engine.js?v=${ASSET_VERSION}`,
   `./export-engine.js?v=${ASSET_VERSION}`,
   `./template-engine.js?v=${ASSET_VERSION}`,
@@ -72,6 +74,8 @@ const CORE_ASSETS = [
   `./icons/escrevarallogo.png?v=${ASSET_VERSION}`,
   `./icons/Logo.svg?v=${ASSET_VERSION}`,
   `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-logo-ink-light.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-logo-ink-dark.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
   `./favicon.svg?v=${ASSET_VERSION}`,

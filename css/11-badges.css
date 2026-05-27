@@ -1,0 +1,72 @@
+/* Marcas do ofício — MVP ---------------------------------------------------- */
+
+/* Linha de metadados no card do Arquivo */
+.project-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.project-meta-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface-low);
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.project-meta-time {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Linha de proveniência: "Criado em março de 2024 · existe há 2 anos" */
+.project-created-at {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 6px 0 0;
+}
+
+/* Chips de marcas conquistadas */
+.badge-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border-radius: 999px;
+  padding: 2px 8px 2px 5px;
+  letter-spacing: 0.01em;
+  cursor: default;
+  user-select: none;
+}
+
+.badge-chip .material-symbols-outlined {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.badge-chip em {
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.65;
+}

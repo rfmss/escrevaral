@@ -726,6 +726,21 @@ function getCreateNoteType() {
 function addManuscript(manuscript, status) {
   deactivateGrammarColor(); // garante que conteúdo colorido não vaze para a nova nota
   state.manuscripts.unshift(manuscript);
+
+  // Marca folha-em-branco — primeira nota raiz do acervo
+  const isFirstRoot = !manuscript.parentId &&
+    state.manuscripts.filter(m => !m.parentId).length === 1;
+  if (isFirstRoot && typeof VeredaBadges !== "undefined") {
+    void VeredaBadges.earnBadge(manuscript, "folha-em-branco").then(updated => {
+      const idx = state.manuscripts.findIndex(m => m.id === updated.id);
+      if (idx !== -1) {
+        state.manuscripts[idx] = updated;
+        persistState("Primeira nota — marca conquistada");
+        renderProjectGrid();
+      }
+    });
+  }
+
   state.activeId = manuscript.id;
   if (!manuscript.templateId) {
     state.template.selectedId = null;
@@ -2494,6 +2509,25 @@ function _bootstrap() {
   registerOfflineApp();
   initializeFilesystemBackup();
   checkFirstVisit();
+
+  // Retroativo: se há notas sem folha-em-branco, conceder silenciosamente na primeira nota raiz
+  if (state.manuscripts.length > 0 && typeof VeredaBadges !== "undefined") {
+    const anyHasBadge = state.manuscripts.some(m => VeredaBadges.hasBadge(m, "folha-em-branco"));
+    if (!anyHasBadge) {
+      const firstRoot = state.manuscripts.find(m => !m.parentId);
+      if (firstRoot) {
+        void VeredaBadges.earnBadge(firstRoot, "folha-em-branco", "retroactive").then(updated => {
+          const idx = state.manuscripts.findIndex(m => m.id === updated.id);
+          if (idx !== -1) {
+            state.manuscripts[idx] = updated;
+            persistState("Marcas do ofício reconhecidas");
+            renderProjectGrid();
+          }
+        });
+      }
+    }
+  }
+
   persistState("Pronto");
 
   // Restaura modo de visualização do editor (página vs. fluxo)
