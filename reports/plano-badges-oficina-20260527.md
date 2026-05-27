@@ -1,8 +1,88 @@
 # Plano — Marcas do Ofício
 
 **Data:** 2026-05-27  
-**Status:** rascunho revisado após análise de quatro especialistas + pivô de conceito — nada implementado  
-**Equipe:** Claude (coordenação) + ux-escritora + marca-campanha + guardiao-preservacao + arquiteto-vanilla  
+**Status:** plano debatido — aguarda reescrita do menor passo antes de implementar  
+**Equipe:** Claude (coordenação) + ux-escritora + marca-campanha + guardiao-preservacao + arquiteto-vanilla + veredito do criador
+
+---
+
+## Veredito do criador (2026-05-27)
+
+> *"A ideia central é forte: marcas como proveniência, não gamificação. Mas o plano ainda mistura três coisas que precisam ficar separadas: coleção estética de autores, registro técnico no `.esc`, e sistema de conquista. Se isso não for separado agora, vira um 'badge system' bonito mas conceitualmente instável."*
+
+### Oito rebates — decisões tomadas
+
+**1. 30 autores vs 15 marcas — inconsistência resolvida**  
+O plano dizia "30 medalhas" mas a arquitetura descrevia 15 marcas no `badges-data.js`. Decisão: **os 30 autores são a direção estética de longo prazo**. O MVP começa com **1 marca** (`folha-em-branco`), expande para **5 marcas** após 2 semanas de uso validado. Os 30 autores são inventário, não backlog imediato.
+
+**2. "Reconhecível sem legenda" → "memorável com legenda"**  
+O critério original era ambicioso demais. Vela, tinteiro, lousa, urna, pena e leque são genéricos. Novo critério: o símbolo precisa ser **memorável com a legenda presente** — o banner com o nome faz parte do design. Isso libera símbolos que funcionam dentro do conjunto mas não fora.
+
+**3. Lobato fora do v1 — substituído**  
+Domínio público confirmado desde 1º de janeiro de 2019 (†1948, não 2018 como estava no plano). Mas o pacote simbólico arrasta marca, personagens, disputa cultural e risco desnecessário. **Substituído no v1 por um dos quatro candidatos:** Graciliano Ramos, Mário de Andrade, Oswald de Andrade ou Cruz e Sousa. Lobato pode voltar após checagem jurídica separada.
+
+**4. Domínio público precisa de tabela de risco**  
+Regra brasileira: 70 anos a partir de 1º de janeiro do ano seguinte à morte (Lei 9.610/98). Em 2026, o corte é autores mortos até **31 de dezembro de 1955**. A tabela do plano precisa de colunas adicionais:
+
+| Coluna nova | O que verifica |
+|---|---|
+| `data de morte verificada` | Fonte — não estimativa |
+| `jurisdição` | BR / PT / outra — impacta o corte |
+| `obra usada como referência` | Qual obra específica embase o símbolo |
+| `risco de marca` | Personagem, título ou símbolo com proteção ativa |
+| `risco iconográfico` | Símbolo genérico demais ou colidindo com terceiros |
+
+Autores com incerteza (†data c.): Adelina Lopes Vieira (~†c.1920) e Alice Moderno (†1946 — em 2026 ainda **não está** em domínio público no Brasil: 2026 < 1946+70+1=2017... espera, †1946 → DP a partir de 2017 → **está em DP**). Verificar caso a caso.
+
+**5. `vereda.badges.v1` separado contradiz a premissa de proveniência**  
+Se a marca é proveniência do manuscrito, o localStorage pode funcionar como **cache**, mas a **fonte de verdade deve viajar no `.esc`**. A arquitetura muda: as marcas são gravadas dentro do manuscrito, não como estado global. Importar vários arquivos com marcas diferentes deve ser legível e não conflitante.
+
+Novo princípio: *cada marca pertence ao manuscrito que a gerou, não ao navegador.*
+
+**6. HMAC sem chave secreta é teatro criptográfico**  
+Se a chave está no JS, não é segredo. Para o MVP: **SHA-256 canônico do claim da marca + assinatura VRDA existente**. Se usar HMAC em fase 2, documentar: de onde vem a chave, se ela viaja no `.esc`, e se o verificador externo precisa dela.
+
+**7. Hash do texto exige snapshot congelado**  
+Se o fingerprint inclui `SHA256(manuscript.text)`, edições futuras quebram a verificação. Campos obrigatórios no momento da conquista:
+
+```js
+{
+  textHashAtEarned: "sha256:...",     // hash do texto naquele instante
+  wordCountAtEarned: 4231,            // palavras naquele instante
+  earnedAt: "2024-03-10T14:22:00Z",  // ISO 8601
+  algorithmVersion: 1                 // para migração futura
+}
+```
+
+Sem esses campos, a marca é impossível de auditar depois.
+
+**8. Retroativo precisa ser rotulado, não escondido**  
+Conceder marca no import é honesto se aparecer como "reconhecida ao importar". Dois campos separados:
+
+```js
+{
+  earnedAt:     "2024-03-10T14:22:00Z",  // quando foi gerada originalmente
+  recognizedAt: "2026-01-15T11:00:00Z",  // quando foi registrada neste dispositivo
+  mode: "native" | "retroactive"         // native = gerada aqui; retroactive = veio do import
+}
+```
+
+---
+
+### MVP recomendado pelo criador
+
+Não começar com 30 medalhas. Começar com:
+
+1. `createdAt` por manuscrito
+2. Linha de tempo no Arquivo (exibir `createdAt` formatado)
+3. **Uma única marca:** `folha-em-branco`
+4. Persistência dessa marca **dentro do `.esc`**, ligada ao manuscrito
+5. Fingerprint simples: `SHA-256(manuscriptId + createdAt + badgeId)` + campos de snapshot
+6. **Sem mostrar marcas não conquistadas**
+
+Após 2 semanas de uso real: expandir para 5 marcas. Os 30 autores são a direção estética, não o backlog do sprint.
+
+---  
 
 ---
 
@@ -374,15 +454,36 @@ Conflita com o produto: requer carteira cripto, gas fees, conexão no momento do
 
 ---
 
-## Menor passo viável
+## Menor passo viável — revisado após veredito do criador
 
-1. Adicionar `createdAt` ao `createManuscript()` (uma linha)
-2. Criar `vereda.badges.v1` no localStorage com shape mínimo
-3. Implementar só `folha-em-branco` — do gatilho ao chip no Arquivo
-4. Incluir `badges` no `.esc` (duas linhas em backup-engine.js)
-5. Exibir `createdAt` formatado no painel do arquivo como linha de metadados
+O MVP muda. A fonte de verdade é o `.esc`, não o localStorage global.
 
-Se ninguém perceber ou comentar em 2 semanas de uso, não expandimos.
+1. Adicionar `createdAt` ao `createManuscript()` — nunca sobrescrever; estimado com flag se veio de arquivo antigo
+2. Exibir `createdAt` formatado no painel do Arquivo como linha de metadados: `"Criado em março de 2024 · 1 ano e 2 meses · 12.340 palavras"`
+3. Implementar só `folha-em-branco` dentro do manuscrito — shape com `earnedAt`, `recognizedAt`, `mode`, `textHashAtEarned`, `wordCountAtEarned`, `algorithmVersion`
+4. Fingerprint: `SHA-256(manuscriptId + createdAt + badgeId)` — sem HMAC no v1
+5. Incluir `badges` **por manuscrito** no `.esc` (não como estado global separado)
+6. Um chip discreto no Arquivo quando a marca existe — **sem exibir marcas não conquistadas**
+
+Dois gatilhos de validação antes de expandir:
+- A escritora importa um `.esc` com marca e a marca aparece corretamente rotulada como `mode: "retroactive"`
+- Abrir o painel do Arquivo exibe `createdAt` sem quebrar o layout em nenhum tamanho de tela
+
+Se nenhuma das duas validações gerar bug em 2 semanas, expandir para 5 marcas.
+
+---
+
+## Tabela de risco de domínio público — a completar antes da implementação dos 30
+
+| N | Nome | †Data verificada | Fonte | Jurisdição | DP desde | Obra referência | Risco marca | Risco iconográfico |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Maria Firmina dos Reis | 1917 | — | BR | 1988 | *Úrsula* | Nenhum | Nenhum |
+| 2 | Nísia Floresta | 1885 | — | BR | 1956 | *Direito das Mulheres* | Nenhum | Nenhum |
+| 20 | Monteiro Lobato | 1948 | Unicamp/UFMG | BR | 2019 | — | ⚠️ personagens Sítio | ⚠️ boneca de pano |
+| 11 | Alice Moderno | 1946 | — | PT/BR | 2017 | — | Verificar | Verificar |
+| 8 | Adelina Lopes Vieira | c.1920 | estimada | PT | c.1991 | — | ⚠️ data incerta | Verificar |
+
+*Tabela parcial — completar para todos os 30 antes de implementar o catálogo completo.*
 
 ---
 
