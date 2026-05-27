@@ -1,36 +1,68 @@
-# Design / binários
+# ── Design / binários ────────────────────────────────────────────
 *.psd
 *.ai
 *.sketch
 *.xd
 *.fig
 
-# PDFs e documentos
+# ── Documentos ───────────────────────────────────────────────────
 *.pdf
 *.docx
 *.doc
 
-# Sistema
+# ── Sistema ──────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Node
+# ── Node ─────────────────────────────────────────────────────────
 node_modules/
 npm-debug.log*
 
-# Ambiente
+# ── Ambiente ─────────────────────────────────────────────────────
 .env
 .env.local
 
-# Editor
+# ── Editor ───────────────────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
 
-# Builds
+# ── Builds ───────────────────────────────────────────────────────
 dist/
 build/
 
-# Logs
+# ── Logs ─────────────────────────────────────────────────────────
 *.log
+
+# ── Ferramentas de IA / CLI local ────────────────────────────────
+.claude/
+.codex/
+
+# ── Acervos locais de livros (pesados, não vão ao repo) ──────────
+Livros/
+LivrosENG/
+livrosPTBR/
+
+# ── Experimentos e rascunhos locais ──────────────────────────────
+dark-ensaio/
+experimentos/
+
+# ── Snapshots e provas locais ────────────────────────────────────
+snapshots/
+
+# ── Screenshots de auditoria (PNG pesados, gerados localmente) ───
+reports/**/*.png
+reports/**/*.jpg
+
+# ── Imagens soltas na raiz (fontes de marca, rascunhos) ──────────
+LogoOK.png
+LogoOK.svg
+LogoOKdark.png
+LogoOKdark.svg
+LogoEscrevaral.png
+"ChatGPT Image*.png"
+ChatGPT\ Image*.png
+
+# ── Páginas não-publicadas / lançamento local ─────────────────────
+lancamento-escrevaral.html
