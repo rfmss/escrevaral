@@ -2326,9 +2326,9 @@ mark {
 .sidebar-new-btn:hover { opacity: 1; }
 .sidebar-new-btn .material-symbols-outlined { font-size: 16px; }
 
-/* Logo Escrevaral — pregador de madeira em A */
+/* Logo Escrevaral — facão */
 .brand-logo {
-  content: url("../icons/escrevaral-logo-ink-dark.svg");
+  content: url("../icons/escrevaral-aba-dark.svg");
   width: 40px;
   height: 40px;
   object-fit: contain;
@@ -2342,7 +2342,7 @@ mark {
 [data-theme="cerrado-dark"] .brand-logo,
 [data-theme="mata-dark"] .brand-logo,
 [data-theme="amazonia-dark"] .brand-logo {
-  content: url("../icons/escrevaral-logo-ink-light.svg");
+  content: url("../icons/escrevaral-aba-light.svg");
   filter: none;
 }
 
