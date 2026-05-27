@@ -2033,6 +2033,252 @@
       "reason": "Pode ser patronizante: pressupõe que pessoas de menor renda ou escolaridade têm menor complexidade.",
       "context": "Depende do tom do narrador e da relação de quem fala com quem é descrito.",
       "contextual": true
+    },
+    {
+      "avoid": "bissexualismo",
+      "alternatives": [
+        "bissexualidade"
+      ],
+      "category": "genero",
+      "reason": "O sufixo '-ismo' classifica orientação sexual como doutrina ou distúrbio. A OMS e o CFM recomendam 'bissexualidade'."
+    },
+    {
+      "avoid": "lesbianismo",
+      "alternatives": [
+        "lesbianidade",
+        "homossexualidade feminina"
+      ],
+      "category": "genero",
+      "reason": "Mesmo problema do '-ismo': patologiza a orientação sexual. Prefira 'lesbianidade'."
+    },
+    {
+      "avoid": "feminazi",
+      "alternatives": [
+        "feminista",
+        "ativista feminista"
+      ],
+      "category": "genero",
+      "reason": "Compara ativismo por direitos das mulheres ao nazismo — desumaniza e invalida a luta por igualdade."
+    },
+    {
+      "avoid": "piranha",
+      "alternatives": [
+        "não use",
+        "mulher de vida amorosa livre"
+      ],
+      "category": "genero",
+      "reason": "Animaliza e pune sexualmente mulheres com vida afetiva ativa; reforça duplo padrão sexual."
+    },
+    {
+      "avoid": "transexualismo",
+      "alternatives": [
+        "transgeneridade",
+        "identidade trans"
+      ],
+      "category": "genero",
+      "reason": "O sufixo '-ismo' foi usado para patologizar identidade trans. 'Transgeneridade' é o termo contemporâneo."
+    },
+    {
+      "avoid": "cross-dresser como insulto",
+      "alternatives": [
+        "pessoa que usa roupas do gênero oposto",
+        "não use como insulto"
+      ],
+      "category": "genero",
+      "reason": "Travestimento é prática cultural e de identidade; usar o termo como ofensa reforça estigma."
+    },
+    {
+      "avoid": "superstição",
+      "alternatives": [
+        "prática cultural",
+        "crença tradicional",
+        "saber ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "Usado para desqualificar religiões e práticas de povos originários e afro-brasileiros frente ao saber europeu."
+    },
+    {
+      "avoid": "curandeirismo",
+      "alternatives": [
+        "medicina tradicional",
+        "fitoterapia",
+        "saber medicinal ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "Quando usado de forma depreciativa, apaga saberes medicinais indígenas e africanos sistematizados por séculos."
+    },
+    {
+      "avoid": "feitiço",
+      "alternatives": [
+        "ritual",
+        "cerimônia",
+        "prática espiritual"
+      ],
+      "category": "conhecimento",
+      "reason": "No contexto de religiões afro-brasileiras e indígenas, o termo foi historicamente usado para criminalizar práticas sagradas."
+    },
+    {
+      "avoid": "medicina primitiva",
+      "alternatives": [
+        "medicina tradicional",
+        "medicina ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "'Primitivo' implica estágio inferior de evolução — apaga a sofisticação de sistemas de saúde milenares."
+    },
+    {
+      "avoid": "bugre",
+      "alternatives": [
+        "indígena",
+        "pessoa originária"
+      ],
+      "category": "povos",
+      "reason": "Pejorativamente usado no Brasil colonial para indígenas resistentes à catequização. Hoje é ofensivo."
+    },
+    {
+      "avoid": "negona/negão como hipersexualização",
+      "alternatives": [
+        "pessoa negra",
+        "mulher negra",
+        "homem negro"
+      ],
+      "category": "povos",
+      "reason": "Quando usados para hipersexualizar corpos negros, reforçam estereótipos coloniais de sexualização racial."
+    },
+    {
+      "avoid": "crioulo",
+      "alternatives": [
+        "pessoa negra",
+        "não use"
+      ],
+      "category": "povos",
+      "reason": "No Brasil colonial, designava escravizados nascidos no país. Hoje é termo ofensivo e racista."
+    },
+    {
+      "avoid": "africano como genérico",
+      "alternatives": [
+        "nigeriano",
+        "angolano",
+        "ganense",
+        "especifique o país ou povo"
+      ],
+      "category": "povos",
+      "reason": "A África tem 54 países e centenas de etnias. Generalizar como 'africano' apaga diversidade e reforça homogeneização colonial."
+    },
+    {
+      "avoid": "neguinho/neguinha",
+      "alternatives": [
+        "não use",
+        "pessoa negra"
+      ],
+      "category": "relacoes",
+      "reason": "Diminutivo racista que infantiliza e desumaniza pessoas negras. Mesmo quando usado com aparente afeto, perpetua hierarquia racial."
+    },
+    {
+      "avoid": "escravo de",
+      "alternatives": [
+        "dependente de",
+        "viciado em",
+        "refém de"
+      ],
+      "category": "relacoes",
+      "reason": "Usar escravidão como metáfora banal apaga a violência histórica do sistema escravocrata e banaliza o sofrimento de milhões."
+    },
+    {
+      "avoid": "arruaceiro",
+      "alternatives": [
+        "manifestante",
+        "pessoa em conflito",
+        "revoltado"
+      ],
+      "category": "relacoes",
+      "reason": "Usado para criminalizar manifestações de pessoas pobres e negras; deslegitima demandas sociais como desordem."
+    },
+    {
+      "avoid": "patrão de forma paternalista",
+      "alternatives": [
+        "empregador",
+        "chefe",
+        "responsável"
+      ],
+      "category": "relacoes",
+      "reason": "No contexto rural e nordestino, reforça relações de poder herdadas do coronelismo — use termos que não reproduzam essa hierarquia."
+    },
+    {
+      "avoid": "mendigo",
+      "alternatives": [
+        "pessoa em situação de rua",
+        "sem-teto"
+      ],
+      "category": "classe",
+      "reason": "O termo mendicância historicamente criminalizou a pobreza. 'Pessoa em situação de rua' nomeia condição sem estigmatizar."
+    },
+    {
+      "avoid": "vagabundo",
+      "alternatives": [
+        "desempregado",
+        "sem trabalho",
+        "em busca de emprego"
+      ],
+      "category": "classe",
+      "reason": "Quando aplicado a pessoas pobres, criminaliza pobreza e associa desemprego a vício ou preguiça."
+    },
+    {
+      "avoid": "pivete",
+      "alternatives": [
+        "criança",
+        "adolescente",
+        "jovem"
+      ],
+      "category": "classe",
+      "reason": "Criminaliza crianças e jovens pobres, especialmente negros. O termo tem origem na repressão policial a infâncias vulnerabilizadas."
+    },
+    {
+      "avoid": "arrastão como pânico",
+      "alternatives": [
+        "ação em grupo",
+        "conflito coletivo",
+        "descreva o ocorrido"
+      ],
+      "category": "classe",
+      "reason": "O pânico moral em torno de 'arrastão' desumaniza grupos de jovens pobres e racializa o medo urbano."
+    },
+    {
+      "avoid": "cabelo pixaim",
+      "alternatives": [
+        "cabelo afro",
+        "cabelo crespo",
+        "cabelo cacheado"
+      ],
+      "category": "estetica",
+      "reason": "Termo depreciativo de origem árabe para textura crespa. Reforça padrão estético eurocêntrico."
+    },
+    {
+      "avoid": "boa aparência em ficção como código racial",
+      "alternatives": [
+        "escreva a aparência concretamente",
+        "descreva traços específicos"
+      ],
+      "category": "estetica",
+      "reason": "Em ficção, 'boa aparência' como eufemismo funcionou historicamente como código racial excludente."
+    },
+    {
+      "avoid": "pele queimada",
+      "alternatives": [
+        "pele morena",
+        "pele parda",
+        "pele marrom"
+      ],
+      "category": "estetica",
+      "reason": "Sugere que pele mais escura é resultado de dano — reforça ideal de pele clara como padrão de beleza."
+    },
+    {
+      "avoid": "traços finos como sinônimo de beleza",
+      "alternatives": [
+        "descreva os traços concretamente"
+      ],
+      "category": "estetica",
+      "reason": "Em narrativas, 'traços finos' como atributo positivo implicitamente hierarquiza fisionomias europeias sobre africanas e indígenas."
     }
   ]
 }

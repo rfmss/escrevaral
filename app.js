@@ -1406,6 +1406,7 @@ const ACTION_HANDLERS = {
   "export-voice-mirror":     () => exportVoiceMirrorText(),
   "rimalab-use-active":      () => useActiveManuscriptForRimaLab(),
   "export-rimalab":          () => exportRimaLabText(),
+  "copy-rimalab":            () => copyRimaLabAnalysis(),
   "export-decolonial":       () => exportDecolonialDetected(),
   "export-analise":          () => exportAnaliseGeral(),
   "check-sw-update":         () => checkForSWUpdate(),

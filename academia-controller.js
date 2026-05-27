@@ -248,6 +248,22 @@ function exportRimaLabText() {
     : "RimaLab exportado em TXT";
 }
 
+function copyRimaLabAnalysis() {
+  if (!rimalabInput) return;
+  const text = rimalabInput.value.trim();
+  if (!text) { saveStatus.textContent = "RimaLab ainda está vazio."; return; }
+  const title = getActiveManuscript()?.title || "rimalab";
+  const analysis = window.VeredaRimaLab ? VeredaRimaLab.analyze(text) : null;
+  const report = analysis && window.VeredaRimaLab
+    ? VeredaRimaLab.exportAnalysisText(analysis, title)
+    : text;
+  navigator.clipboard?.writeText(report).then(() => {
+    saveStatus.textContent = "Análise RimaLab copiada";
+  }).catch(() => {
+    saveStatus.textContent = "Cópia não disponível — use Baixar TXT";
+  });
+}
+
 function clearRimaLabText() {
   if (!rimalabInput) return;
   const doRimaLabClear = () => {
