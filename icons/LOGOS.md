@@ -39,20 +39,22 @@ Estrutura SVG: `fill-rule="evenodd"` com fundo arredondado + marca como knockout
 
 | Arquivo                          | Cor      | Fundo        | Onde é usado                          |
 |----------------------------------|----------|--------------|---------------------------------------|
-| `vereda-logo-dark.svg`           | `#150a03`| transparente | Topbar — tema Alvorada (padrão)       |
-| `vereda-logo-light.svg`          | `#f6f1eb`| transparente | Topbar — tema Vereda (CSS content swap) |
+| `escrevaral-logo-ink-dark.svg`   | `#150a03`| evenodd      | Topbar e marca — temas claros         |
+| `escrevaral-logo-ink-light.svg`  | `#f6f1eb`| evenodd      | Topbar e marca — temas escuros        |
 | `escrevaral-aba-dark.svg`        | `#150a03`| evenodd      | Aba/favicon — tema claro              |
 | `escrevaral-aba-light.svg`       | `#ffffff`| evenodd      | Aba/favicon — tema escuro             |
-| `escrevaral-vereda-dark.svg`     | `#150a03`| evenodd      | Full — versão escura completa         |
-| `escrevaral-alvorada-light.svg`  | `#ffffff`| evenodd      | Full — versão clara completa          |
-| `Logo.svg`                       | `#150a03`| transparente | Alias para integrações externas       |
-| `Logo-tab.svg`                   | `#150a03`| transparente | Alias para integrações externas       |
+| `vereda-logo-dark.svg`           | alias    | SVG externo  | Legado — aponta para `ink-dark`       |
+| `vereda-logo-light.svg`          | alias    | SVG externo  | Legado — aponta para `ink-light`      |
+| `Logo.svg`                       | alias    | SVG externo  | Legado — aponta para `ink-dark`       |
+| `Logo-tab.svg`                   | alias    | SVG externo  | Legado — aponta para `aba-dark`       |
 
 O swap no topbar funciona via CSS em `css/02-shell-navigation.css`:
 ```css
-.brand-logo { /* aponta para vereda-logo-dark.svg no HTML */ }
-[data-theme="scriptorium"] .brand-logo { content: url("../icons/vereda-logo-light.svg"); }
+.brand-logo { content: url("../icons/escrevaral-logo-ink-dark.svg"); }
+[data-theme="scriptorium"] .brand-logo { content: url("../icons/escrevaral-logo-ink-light.svg"); }
 ```
+
+Regra de nomenclatura: `ink-dark` e `ink-light` indicam a cor da tinta do logo, não o tema em que ele aparece. Logo de tinta escura entra em fundo claro; logo de tinta clara entra em fundo escuro.
 
 ---
 

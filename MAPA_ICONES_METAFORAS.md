@@ -76,8 +76,8 @@ Nomes de Material Symbols usados hoje:
 | `icons/Logo.svg` | marca vetorial herdada, usada pelo service worker |
 | `icons/Logo-tab.svg` | marca de aba herdada, usada pelo service worker |
 | `icons/vereda-icon.svg` | icone herdado em paginas editoriais |
-| `icons/vereda-logo-light.svg` | marca herdada clara em `--brand-mark-image` |
-| `icons/vereda-logo-dark.svg` | marca herdada escura em `--brand-mark-image` |
+| `icons/escrevaral-logo-ink-dark.svg` | marca de tinta escura em `--brand-mark-image` para temas claros |
+| `icons/escrevaral-logo-ink-light.svg` | marca de tinta clara em `--brand-mark-image` para temas escuros |
 | `icons/vereda-maskable.svg` | icone instalavel herdado |
 | `favicon_io/tab-favicon-16x16.png` | icone de aba pequeno |
 | `favicon_io/tab-favicon-32x32.png` | icone de aba medio |

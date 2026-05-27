@@ -2328,16 +2328,22 @@ mark {
 
 /* Logo Escrevaral — pregador de madeira em A */
 .brand-logo {
+  content: url("../icons/escrevaral-logo-ink-dark.svg");
   width: 40px;
   height: 40px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
+  filter: none;
 }
 
-/* Fundo escuro (scriptorium): inverte o logo para creme legível */
-[data-theme="scriptorium"] .brand-logo {
-  filter: brightness(0) invert(1) sepia(0.12) saturate(0.7);
+/* Temas escuros usam a arte clara, sem filtro de inversão. */
+[data-theme="scriptorium"] .brand-logo,
+[data-theme="cerrado-dark"] .brand-logo,
+[data-theme="mata-dark"] .brand-logo,
+[data-theme="amazonia-dark"] .brand-logo {
+  content: url("../icons/escrevaral-logo-ink-light.svg");
+  filter: none;
 }
 
 /* brand-lockup: logo + texto colados */

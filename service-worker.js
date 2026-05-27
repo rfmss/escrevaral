@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v338";
-const ASSET_VERSION = "20260527-v100";
+const CACHE_NAME = "vereda-offline-v339";
+const ASSET_VERSION = "20260527-v101";
 
 const CORE_ASSETS = [
   "./",
@@ -78,6 +78,8 @@ const CORE_ASSETS = [
   `./icons/escrevaral-logo-ink-dark.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
   `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-logo-ink-light.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-logo-ink-dark.svg?v=${ASSET_VERSION}`,
   `./favicon.svg?v=${ASSET_VERSION}`,
   `./favicon_io/site.webmanifest?v=${ASSET_VERSION}`,
   `./favicon_io/favicon.ico?v=${ASSET_VERSION}`,
