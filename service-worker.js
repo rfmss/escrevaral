@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v340";
-const ASSET_VERSION = "20260527-v102";
+const CACHE_NAME = "vereda-offline-v341";
+const ASSET_VERSION = "20260527-v103";
 
 const CORE_ASSETS = [
   "./",
@@ -71,15 +71,8 @@ const CORE_ASSETS = [
   "./vereda-biblioteca-escrita.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
   `./fonts/material-symbols-outlined.woff2`,
-  `./icons/escrevarallogo.png?v=${ASSET_VERSION}`,
-  `./icons/Logo.svg?v=${ASSET_VERSION}`,
-  `./icons/Logo-tab.svg?v=${ASSET_VERSION}`,
-  `./icons/escrevaral-logo-ink-light.svg?v=${ASSET_VERSION}`,
-  `./icons/escrevaral-logo-ink-dark.svg?v=${ASSET_VERSION}`,
-  `./icons/vereda-logo-light.svg?v=${ASSET_VERSION}`,
-  `./icons/vereda-logo-dark.svg?v=${ASSET_VERSION}`,
-  `./icons/escrevaral-logo-ink-light.svg?v=${ASSET_VERSION}`,
-  `./icons/escrevaral-logo-ink-dark.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-aba-dark.svg?v=${ASSET_VERSION}`,
+  `./icons/escrevaral-aba-light.svg?v=${ASSET_VERSION}`,
   `./favicon.svg?v=${ASSET_VERSION}`,
   `./favicon_io/site.webmanifest?v=${ASSET_VERSION}`,
   `./favicon_io/favicon.ico?v=${ASSET_VERSION}`,
