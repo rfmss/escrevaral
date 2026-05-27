@@ -403,6 +403,14 @@ function sortArchiveManuscripts(manuscripts) {
       return getArchiveType(a).label.localeCompare(getArchiveType(b).label, "pt-BR") || a.title.localeCompare(b.title, "pt-BR");
     }
 
+    if (sortMode === "words") {
+      const wc = (m) => {
+        const txt = m.text || (m.html || "").replace(/<[^>]+>/g, " ");
+        return (txt.trim().split(/\s+/).filter(Boolean).length);
+      };
+      return wc(b) - wc(a) || a.title.localeCompare(b.title, "pt-BR");
+    }
+
     return getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt);
   });
 }

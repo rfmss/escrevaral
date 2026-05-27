@@ -1403,8 +1403,10 @@ const ACTION_HANDLERS = {
   
   "voice-use-active":        () => useActiveManuscriptForVoice(),
   "voice-analyze":           () => renderVoiceMirror(),
+  "export-voice-mirror":     () => exportVoiceMirrorText(),
   "rimalab-use-active":      () => useActiveManuscriptForRimaLab(),
   "export-rimalab":          () => exportRimaLabText(),
+  "export-decolonial":       () => exportDecolonialDetected(),
   "clear-rimalab":           () => clearRimaLabText(),
   "open-create-note":        () => openCreateNote(),
   "close-create-note":       () => closeCreateNote(),

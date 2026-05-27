@@ -125,6 +125,72 @@ function useActiveManuscriptForRimaLab() {
   setView("academia");
 }
 
+function exportVoiceMirrorText() {
+  const text = voiceInput?.value.trim();
+  if (!text || !window.VeredaVoice) { saveStatus.textContent = "Espelho vazio — analise um texto primeiro."; return; }
+  const a = VeredaVoice.analyze(text);
+  const ms = getActiveManuscript();
+  const title = ms?.title || "texto";
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(52);
+  const lines = [
+    "ESPELHO DE VOZ — Escrevaral",
+    sep,
+    `Texto: ${title}  ·  ${a.counts.words} palavras  ·  ${date}`,
+    "",
+    `Leitura de voz: ${a.voice?.label || "—"}`,
+  ];
+  if (a.voice?.description) lines.push(`${a.voice.description}`);
+  if (a.confiancaNote) lines.push(`\nNota: ${a.confiancaNote}`);
+  lines.push("", "MÉTRICAS", "─".repeat(36));
+  lines.push(`TTR (riqueza de vocabulário): ${a.metrics.ttr}%`);
+  lines.push(`Densidade lexical: ${a.metrics.lexicalDensity}%`);
+  lines.push(`Frase média: ${a.metrics.avgSentence} palavras`);
+  lines.push(`Variação de frase: ${a.metrics.sentenceVariation}`);
+  lines.push(`Frases por parágrafo: ${a.metrics.paragraphAverage}`);
+  if (a.strengths?.length) {
+    lines.push("", "PONTOS FORTES", "─".repeat(36));
+    a.strengths.forEach(s => lines.push(`· ${s}`));
+  }
+  if (a.blindSpots?.length) {
+    lines.push("", "PONTOS CEGOS", "─".repeat(36));
+    a.blindSpots.forEach(b => lines.push(`· ${b}`));
+  }
+  if (a.audience) lines.push("", `Público potencial: ${a.audience}`);
+  lines.push("", sep, a.disclaimer || "");
+  downloadFile(lines.join("\n"), `${slugify(title)}-espelho-voz.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = "Espelho de Voz exportado em TXT";
+}
+
+function exportDecolonialDetected() {
+  const ms = getActiveManuscript();
+  if (!ms || !window.VeredaDecolonial) { saveStatus.textContent = "Nenhum manuscrito ativo."; return; }
+  const found = VeredaDecolonial.detectText(ms.text || (ms.html || "").replace(/<[^>]+>/g, " "));
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(52);
+  const lines = [
+    "VOCABULÁRIO DECOLONIZADOR — Escrevaral",
+    sep,
+    `Manuscrito: ${ms.title || "sem título"}  ·  ${date}`,
+    `Termos detectados: ${found.length}`,
+    "",
+  ];
+  if (!found.length) {
+    lines.push("Nenhum termo da lista foi encontrado neste manuscrito.");
+  } else {
+    found.forEach((entry, i) => {
+      lines.push(`${i + 1}. ${entry.avoid}`);
+      if (entry.alternatives?.length) lines.push(`   Alternativas: ${entry.alternatives.join(", ")}`);
+      if (entry.reason) lines.push(`   Motivo: ${entry.reason}`);
+      if (entry.categoryLabel) lines.push(`   Categoria: ${entry.categoryLabel}`);
+      lines.push("");
+    });
+  }
+  lines.push(sep, "Análise local — nada enviado para fora do navegador.");
+  downloadFile(lines.join("\n"), `${slugify(ms.title || "texto")}-decolonial.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = `${found.length} ${found.length === 1 ? "termo exportado" : "termos exportados"} em TXT`;
+}
+
 function exportRimaLabText() {
   if (!rimalabInput) {
     return;
@@ -483,9 +549,9 @@ function renderRightsLab() {
 
   const query = normalizeSearch(rightsState.query);
   const manuscript = getActiveManuscript();
-  const relevantCard = !query ? VeredaRights.getRelevantCard(manuscript?.kind || "") : null;
-  const relevantId   = relevantCard?.id || null;
-  const relevantKind = (relevantId && manuscript?.kind) ? manuscript.kind : null;
+  const relevantCards = !query ? VeredaRights.getAllRelevantCards(manuscript?.kind || "") : [];
+  const relevantIds   = new Set(relevantCards.map(c => c.id));
+  const relevantKind  = (relevantIds.size && manuscript?.kind) ? manuscript.kind : null;
 
   const allCards = window.VeredaRights.getCards();
   const cards = allCards.filter((card) => {
@@ -495,9 +561,9 @@ function renderRightsLab() {
     ).includes(query);
   });
 
-  // Relevant card sobe para o topo quando não há busca ativa
-  const sorted = !query && relevantId
-    ? [...cards].sort((a, b) => (b.id === relevantId ? 1 : 0) - (a.id === relevantId ? 1 : 0))
+  // Cards relevantes sobem para o topo quando não há busca ativa
+  const sorted = !query && relevantIds.size
+    ? [...cards].sort((a, b) => (relevantIds.has(b.id) ? 1 : 0) - (relevantIds.has(a.id) ? 1 : 0))
     : cards;
 
   const countLine = sorted.length && sorted.length < allCards.length
@@ -505,7 +571,7 @@ function renderRightsLab() {
     : "";
 
   rightsCards.innerHTML = sorted.length
-    ? countLine + sorted.map(card => createRightsCardMarkup(card, card.id === relevantId, relevantKind)).join("")
+    ? countLine + sorted.map(card => createRightsCardMarkup(card, relevantIds.has(card.id), relevantKind)).join("")
     : `<div class="rights-empty">Nenhum cuidado encontrado para "<strong>${escapeHtml(rightsState.query)}</strong>". Tente: contrato, registro, ISBN, IA, plágio, submissão.</div>`;
 
   const updatedAt = window.VeredaRights.updatedAt;

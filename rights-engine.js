@@ -227,11 +227,35 @@
     return cards.find(c => c.id === "escrevendo") || null;
   }
 
+  // Retorna todos os cards relevantes para o kind (multi-match)
+  function getAllRelevantCards(kind) {
+    if (!kind) return [cards.find(c => c.id === "escrevendo")].filter(Boolean);
+    const k = kind.toLowerCase();
+    const matched = new Set();
+    const add = (id) => { const c = cards.find(x => x.id === id); if (c) matched.add(c); };
+    if (/roteiro|script|audiovisual|tv|film|podcast|s[eé]rie|docum/.test(k))   add("contrato");
+    if (/tradu[cç][aã]o|translat/.test(k))                                      add("contrato");
+    if (/fanfiction|fan|paro[dó]dia|adapt/.test(k))                             add("citacao");
+    if (/pseud[oô]|nome art[ií]stico|marca autor|inpi|registro de marca/.test(k)) add("marca-autoral");
+    if (/coleti|comunidade|tradicion|\boral\b|quilomb|ind[ií]gen|afro/.test(k)) add("comunidades");
+    if (/coauto|parceri|ghostwrit|colabora/.test(k))                            add("coautoria");
+    if (/ensaio|reportagem|newsletter|jornali|cr[oô]nica/.test(k))             add("submissao");
+    if (/biografi|autobiografi|mem[oó]ria|relato|memoir/.test(k))              add("registro");
+    if (/poema|poesia|poetic|slam|soneto|cordel|haiku/.test(k))                add("escrevendo");
+    if (/ia|intelig|gpt|llm|model|chatbot/.test(k))                            add("ia");
+    if (/concurs|pr[eê]mio|award|edital/.test(k))                              add("concurso-premio");
+    if (/autopublic|isbn|plataforma|amazon|kdp|kobo/.test(k))                  add("autoedicao");
+    if (/dom[ií]nio p[uú]blico|cl[aá]ssico|ant[ií]go|s[eé]culo/.test(k))    add("dominio-publico");
+    if (!matched.size) add("escrevendo");
+    return [...matched];
+  }
+
   global.VeredaRights = {
     getCards: () => cards,
     getSources: () => sources,
     getBots: () => bots,
     getRelevantCard,
+    getAllRelevantCards,
     updatedAt,
   };
 })(window);
