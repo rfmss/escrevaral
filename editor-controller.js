@@ -321,6 +321,23 @@ function renderInspector() {
     densityEl.hidden = false;
     densityEl.textContent = `Densidade lexical: ${data.lexicalDensity}%`;
   }
+
+  // Perfil de voz salvo (quando escritora roda o Espelho de Voz)
+  const vpSection  = document.querySelector("[data-voice-profile-section]");
+  const vpGesture  = document.querySelector("[data-voice-profile-gesture]");
+  const vpTitle    = document.querySelector("[data-voice-profile-title]");
+  const vpHint     = document.querySelector("[data-voice-profile-hint]");
+  const vp = manuscript?.voiceProfile;
+  if (vp && vpSection) {
+    vpSection.hidden = false;
+    if (vpGesture) vpGesture.textContent = vp.gesture || "";
+    if (vpTitle)   vpTitle.textContent   = vp.title   || "";
+    const confiancaMap = { alta: "leitura estável", média: "corpus médio", baixa: "corpus curto — leitura instável" };
+    const updatedStr = vp.updatedAt ? new Date(vp.updatedAt).toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}) : "";
+    if (vpHint) vpHint.textContent = `${confiancaMap[vp.confianca] || vp.confianca}${updatedStr ? ` · ${updatedStr}` : ""}`;
+  } else if (vpSection) {
+    vpSection.hidden = true;
+  }
 }
 
 function renderTemplateReference() {

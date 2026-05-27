@@ -1712,6 +1712,31 @@ html {
   color: var(--muted);
   margin: 6px 0 0;
 }
+.inspector-voice-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.inspector-voice-gesture {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--primary) 10%, var(--surface));
+  color: var(--primary);
+  white-space: nowrap;
+}
+.inspector-voice-label {
+  font-size: 11.5px;
+  color: var(--soft-ink);
+  line-height: 1.4;
+}
+.inspector-voice-hint {
+  font-size: 10px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
 
 .split-paper {
   width: min(1080px, 100%);

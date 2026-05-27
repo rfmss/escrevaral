@@ -44,6 +44,19 @@ async function renderVoiceMirror() {
   const alertas = criterios ? VeredaAnalise.interpretarResultado(criterios) : [];
   voiceResult.innerHTML = createVoiceMirrorMarkup(analysis, criterios, alertas);
   saveStatus.textContent = "Espelho de Voz atualizado";
+
+  // Salvar perfil de voz no manuscrito ativo para acesso rápido no inspector
+  const ms = getActiveManuscript();
+  if (ms && isManuscriptDocument(ms)) {
+    ms.voiceProfile = {
+      gesture:   analysis.voice.gesture,
+      title:     analysis.voice.title,
+      confianca: analysis.confianca,
+      updatedAt: new Date().toISOString(),
+      words:     analysis.counts.words,
+    };
+    persistState("Espelho de voz salvo");
+  }
 }
 
 function createVoiceMetric(label, value) {
