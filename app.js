@@ -1446,6 +1446,16 @@ const ACTION_HANDLERS = {
   "export-analise":          () => exportAnaliseGeral(),
   "check-sw-update":         () => checkForSWUpdate(),
   "export-precision":        () => exportPrecisionAnalysis(),
+  "copy-manuscript-text":    () => {
+    const ms = getActiveManuscript();
+    const text = ms?.text || writingArea?.innerText || "";
+    if (!text.trim()) { saveStatus.textContent = "Nada para copiar — escreva primeiro."; return; }
+    navigator.clipboard?.writeText(text.trim()).then(() => {
+      saveStatus.textContent = `Texto copiado (${countWords(text)} palavras)`;
+    }).catch(() => {
+      saveStatus.textContent = "Cópia não disponível neste navegador";
+    });
+  },
   "clear-rimalab":           () => clearRimaLabText(),
   "open-create-note":        () => openCreateNote(),
   "close-create-note":       () => closeCreateNote(),
