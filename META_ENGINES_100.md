@@ -70,7 +70,7 @@ Pergunta padrao da sessao:
 
 ## Abertura da próxima sessão — estado em 2026-05-27 (sessão 6 — varredura 95%→99%)
 
-**Baseline:** v329 — Sintaxe 99%; 19 engines em 98–99%; 0 engines em 85%.
+**Baseline:** v331 — Sintaxe 99%; 19 engines em 98–99%; 0 engines em 85%. Responsividade mobile auditada e corrigida (v331).
 
 **O que foi entregue nesta sessão (v316→v329):**
 
@@ -93,9 +93,9 @@ Pergunta padrao da sessao:
 **Próximas fronteiras para 100%:**
 
 1. **Sintaxe 99% → 100%**: adjetivos sem sufixo claro (bela, grande, triste); multi-palavra toponímica ("Minas Gerais"). Custo: alta.
-2. **Paginação 95% → 98%**: salto rápido para número de página específica (campo input com Enter). Custo: baixo.
-3. **`.esc` / envelope 85% → 95%**: leitura confirmada como 95% real — erros já humanizados. Atualizar tabela.
-4. **Tema 95% → 98%**: auditoria visual do dark mode nos novos elementos (health score, rights calc, voice profile chip). Custo: baixo.
+2. **Paginação 98% → 99%**: ✅ salto direto por número feito. Próximo: cabeçalho/rodapé por manuscrito (alto custo — avaliar impacto real).
+3. **Responsividade mobile → 99%**: ✅ bug do Guia corrigido em v331. Próximo: testar fisicamente em aparelho real; verificar modo Página em 320px.
+4. **Tema 95% → 98%**: auditoria visual do dark mode nos novos elementos (health score badge, rights calc, voice profile chip). Custo: baixo.
 
 ## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4 — legado)
 
