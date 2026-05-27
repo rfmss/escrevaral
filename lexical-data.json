@@ -563,6 +563,150 @@
       "className": "Substantivo masculino",
       "field": "Corpo — acolhimento, amparo, infância",
       "note": "O colo é o lugar do amparo. Evoca cuidado, intimidade e dependência — frequente em narrativas de infância."
+    },
+    "raiz": {
+      "label": "raiz",
+      "className": "Substantivo feminino",
+      "field": "Identidade — origem, pertencimento, herança",
+      "note": "A raiz ancora o personagem a um lugar, a uma família, a um passado. Quando uma raiz é cortada, a narrativa é de deslocamento."
+    },
+    "pedra": {
+      "label": "pedra",
+      "className": "Substantivo feminino",
+      "field": "Resistência — permanência, dureza, silêncio mineral",
+      "note": "A pedra não muda, não fala, não cede. Personagens comparados a pedras resistem — ou estão petrificados."
+    },
+    "rio": {
+      "label": "rio",
+      "className": "Substantivo masculino",
+      "field": "Natureza — movimento, passagem, fronteira",
+      "note": "O rio separa e une ao mesmo tempo. Em narrativa brasileira, evoca tanto a Amazônia quanto o sertão e a travessia."
+    },
+    "pele": {
+      "label": "pele",
+      "className": "Substantivo feminino",
+      "field": "Corpo — fronteira entre dentro e fora, raça, toque",
+      "note": "A pele é ao mesmo tempo limite e superfície de contato. Em literatura contemporânea brasileira, é território de identidade racial."
+    },
+    "osso": {
+      "label": "osso",
+      "className": "Substantivo masculino",
+      "field": "Corpo — estrutura, permanência, depois da morte",
+      "note": "O que resta. Quando ossos aparecem na narrativa, o texto está próximo do tempo longo — geração, morte, resistência."
+    },
+    "dor": {
+      "label": "dor",
+      "className": "Substantivo feminino",
+      "field": "Emoção — sofrimento, presença no corpo",
+      "note": "Só funciona quando é específica: onde, como, desde quando. Dor genérica não move o leitor."
+    },
+    "tristeza": {
+      "label": "tristeza",
+      "className": "Substantivo feminino",
+      "field": "Emoção — perda, ausência, luto suave",
+      "note": "Diferente da dor, a tristeza é difusa. Em prosa, mostre o gesto — não nomeie o estado."
+    },
+    "sede": {
+      "label": "sede",
+      "className": "Substantivo feminino",
+      "field": "Corpo e desejo — carência, urgência, sobrevivência",
+      "note": "Ao mesmo tempo urgência física e metáfora de desejo. No sertão nordestino, funciona como os dois ao mesmo tempo."
+    },
+    "janela": {
+      "label": "janela",
+      "className": "Substantivo feminino",
+      "field": "Perspectiva — olhar para fora, limite entre privado e público",
+      "note": "A janela é o ponto de vista. Quem olha pela janela está dentro, mas observa o fora — postura contemplativa ou de exclusão."
+    },
+    "ponte": {
+      "label": "ponte",
+      "className": "Substantivo feminino",
+      "field": "Conexão — passagem, mediação, risco",
+      "note": "A ponte existe porque há um abismo. Em narrativa, atravessar uma ponte é sempre uma decisão."
+    },
+    "volta": {
+      "label": "volta",
+      "className": "Substantivo feminino",
+      "field": "Movimento — retorno, nostalgia, impossibilidade",
+      "note": "A volta na ficção quase nunca é simples: quem volta encontra o lugar mudado, ou descobriu que mudou a si mesmo."
+    },
+    "esperanca": {
+      "label": "esperança",
+      "className": "Substantivo feminino",
+      "field": "Emoção — desejo de futuro, tensão com o presente",
+      "note": "A esperança só tem peso quando há razão para duvidar dela. Personagens que esperam devem ter motivo concreto para continuar."
+    },
+    "paz": {
+      "label": "paz",
+      "className": "Substantivo feminino",
+      "field": "Estado — equilíbrio frágil, ausência de conflito",
+      "note": "A paz na ficção é rara e instável. Quando aparece, frequentemente anuncia a iminência da ruptura."
+    },
+    "historia": {
+      "label": "história",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — relato, passado, construção de sentido",
+      "note": "Quando um personagem conta uma história, ele escolhe o que mostrar. A seleção é o ponto mais revelador."
+    },
+    "cidade": {
+      "label": "cidade",
+      "className": "Substantivo feminino",
+      "field": "Espaço — modernidade, anonimato, contraste interior-litoral",
+      "note": "Na literatura brasileira, a cidade é frequentemente o destino da migração — promessa e decepção coexistindo."
+    },
+    "noite": {
+      "label": "noite",
+      "className": "Substantivo feminino",
+      "field": "Tempo — segredo, risco, descanso ou vigília",
+      "note": "A noite literária não é apenas ausência de luz: é o tempo dos segredos, dos amores e dos medos que o dia esconde."
+    },
+    "olhar": {
+      "label": "olhar",
+      "className": "Substantivo masculino ou verbo",
+      "field": "Percepção — ponto de vista, poder, atenção",
+      "note": "Quem olha tem poder sobre quem é olhado. O olhar define relações de hierarquia e desejo."
+    },
+    "lagrima": {
+      "label": "lágrima",
+      "className": "Substantivo feminino",
+      "field": "Corpo — emoção transbordando, limite da contenção",
+      "note": "A lágrima é o sinal de que o personagem não pôde mais conter. O momento antes dela pode ser mais poderoso que ela."
+    },
+    "capim": {
+      "label": "capim",
+      "className": "Substantivo masculino",
+      "field": "Natureza rural — pastagem, periferia agrária, abandono",
+      "note": "O capim cresce onde ninguém cuida. Em narrativa, sinaliza tempo parado, terreno abandonado, lugar à margem."
+    },
+    "floresta": {
+      "label": "floresta",
+      "className": "Substantivo feminino",
+      "field": "Natureza — Amazônia, mistério, território em disputa",
+      "note": "Em contexto brasileiro, floresta evoca a Amazônia e o debate sobre soberania, destruição e cosmologia indígena."
+    },
+    "rede": {
+      "label": "rede",
+      "className": "Substantivo feminino",
+      "field": "Cultura nordestina — descanso, conversa, cotidiano",
+      "note": "A rede é o ponto de encontro entre trabalho e pausa no interior do Brasil. Quem está na rede está entre dois estados."
+    },
+    "carne": {
+      "label": "carne",
+      "className": "Substantivo feminino",
+      "field": "Corpo — matéria, desejo, vulnerabilidade",
+      "note": "A carne opõe-se ao espírito e ao sonho. Quando aparece, o texto está tratando do peso físico da existência."
+    },
+    "aldeia": {
+      "label": "aldeia",
+      "className": "Substantivo feminino",
+      "field": "Comunidade — coletividade indígena, pertencimento originário",
+      "note": "Usar 'aldeia' em contexto indígena é mais preciso que 'tribo'. Implica organização, território e cosmologia própria."
+    },
+    "livro": {
+      "label": "livro",
+      "className": "Substantivo masculino",
+      "field": "Metalinguagem — narrativa que se dobra sobre si, memória escrita",
+      "note": "Quando um livro aparece na ficção, o texto está falando sobre si mesmo ou sobre o ato de narrar. Use com consciência."
     }
   },
   "functionWords": {
