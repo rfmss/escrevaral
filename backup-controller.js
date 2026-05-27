@@ -90,6 +90,28 @@ function registerOfflineApp() {
     });
 }
 
+async function checkForSWUpdate() {
+  if (!("serviceWorker" in navigator)) {
+    saveStatus.textContent = "Modo sem internet não disponível neste navegador";
+    return;
+  }
+  try {
+    const reg = await navigator.serviceWorker.getRegistration();
+    if (!reg) { saveStatus.textContent = "Nenhuma versão em cache ainda"; return; }
+    saveStatus.textContent = "Verificando nova versão…";
+    await reg.update();
+    if (reg.waiting) {
+      const banner = document.getElementById("update-banner");
+      if (banner) banner.hidden = false;
+      saveStatus.textContent = "Nova versão disponível — recarregue para aplicar";
+    } else {
+      saveStatus.textContent = "Você já está na versão mais recente";
+    }
+  } catch (_) {
+    saveStatus.textContent = "Verificação falhou — tente novamente em instantes";
+  }
+}
+
 async function installApp() {
   if (!deferredInstallPrompt) {
     return;

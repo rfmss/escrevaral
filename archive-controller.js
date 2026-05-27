@@ -463,7 +463,15 @@ function renderArchiveStatusBar() {
     return acc;
   }, {});
   const hasAny = ARCHIVE_STATUSES.some((s) => counts[s] > 0);
-  if (!hasAny) { archiveStatusBar.innerHTML = ""; return; }
+  const docs = state.manuscripts.filter((m) => (m.type || "manuscrito") === "manuscrito");
+  const totalWords = docs.reduce((sum, m) => {
+    const txt = m.text || (m.html || "").replace(/<[^>]+>/g, " ");
+    return sum + (txt.trim().split(/\s+/).filter(Boolean).length);
+  }, 0);
+  const wordStat = totalWords > 0
+    ? `<span class="archive-word-total">${totalWords.toLocaleString("pt-BR")} pal. no acervo</span>`
+    : "";
+  if (!hasAny) { archiveStatusBar.innerHTML = wordStat; return; }
   const activeStatus = state.archive.statusFilter || "all";
   const chips = ARCHIVE_STATUSES
     .filter((s) => counts[s] > 0 || activeStatus === s)
@@ -472,7 +480,7 @@ function renderArchiveStatusBar() {
       return `<button class="archive-filter${isActive}" data-archive-status-filter="${escapeHtml(s)}">${escapeHtml(s)} <b>${counts[s]}</b></button>`;
     });
   const allActive = activeStatus === "all" ? " is-active" : "";
-  archiveStatusBar.innerHTML = `<button class="archive-filter${allActive}" data-archive-status-filter="all">Todas as situações</button>` + chips.join("");
+  archiveStatusBar.innerHTML = `<button class="archive-filter${allActive}" data-archive-status-filter="all">Todas as situações</button>` + chips.join("") + wordStat;
 }
 
 function setArchiveStatusFilter(status) {

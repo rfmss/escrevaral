@@ -210,6 +210,19 @@ function renderProofView() {
   if (cadenceEl) cadenceEl.textContent = summary.cadenceWpm > 0 ? `${summary.cadenceWpm} palavras/min` : "—";
   if (cadenceHintEl) cadenceHintEl.textContent = summary.cadenceWpm > 0 ? "Ritmo orgânico registrado" : "Comece a escrever para calcular";
 
+  // Palavras registradas
+  const wordcountEl = document.querySelector("[data-proof-wordcount]");
+  const wordcountHintEl = document.querySelector("[data-proof-wordcount-hint]");
+  if (wordcountEl && ms) {
+    const wc = countWords(ms.text || "");
+    wordcountEl.textContent = wc > 0 ? wc.toLocaleString("pt-BR") : "—";
+    if (wordcountHintEl) {
+      const MILESTONES = [100, 500, 1000, 2000, 5000, 10000];
+      const nextMilestone = MILESTONES.find(m => m > wc);
+      wordcountHintEl.textContent = nextMilestone ? `Próximo marco: ${nextMilestone.toLocaleString("pt-BR")} palavras` : "Marco de 10 mil alcançado";
+    }
+  }
+
   // Info de sessão
   const sessionInfo = document.querySelector("[data-proof-session-info]");
   if (sessionInfo && session.startedAt) {

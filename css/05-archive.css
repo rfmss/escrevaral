@@ -333,6 +333,15 @@
   color: var(--primary);
 }
 
+.archive-word-total {
+  font-size: 0.72rem;
+  color: var(--muted-ink, var(--ink));
+  opacity: 0.65;
+  padding: 0 6px;
+  align-self: center;
+  white-space: nowrap;
+}
+
 .pinned-documents,
 .ongoing-documents,
 .recent-documents {
