@@ -2326,9 +2326,9 @@ mark {
 .sidebar-new-btn:hover { opacity: 1; }
 .sidebar-new-btn .material-symbols-outlined { font-size: 16px; }
 
-/* Logo Escrevaral — facão */
+/* Logo Escrevaral — facão sem fundo */
 .brand-logo {
-  content: url("../icons/escrevaral-aba-dark.svg");
+  content: url("../icons/escrevaral-nav-dark.svg");
   width: 28px;
   height: 28px;
   object-fit: contain;
@@ -2342,7 +2342,7 @@ mark {
 [data-theme="cerrado-dark"] .brand-logo,
 [data-theme="mata-dark"] .brand-logo,
 [data-theme="amazonia-dark"] .brand-logo {
-  content: url("../icons/escrevaral-aba-light.svg");
+  content: url("../icons/escrevaral-nav-light.svg");
   filter: none;
 }
 

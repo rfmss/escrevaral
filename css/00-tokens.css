@@ -24,7 +24,7 @@
   --highlight-template-end: #f4ede4;
   --tip-bg: #fff3df;
   --tip-ink: #765020;
-  --brand-mark-image: url("../icons/escrevaral-aba-dark.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-dark.svg");
   --line: rgba(178, 163, 140, 0.38);
   --primary: #2a4840;
   --primary-deep: #17362d;
@@ -74,7 +74,7 @@
   --highlight-template-end: #f3eacb;
   --tip-bg: #f3dfad;
   --tip-ink: #4f3516;
-  --brand-mark-image: url("../icons/escrevaral-aba-dark.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-dark.svg");
   --line: rgba(180, 155, 70, 0.32);
   --primary: #c68b2e;
   --primary-deep: #3d3219;
@@ -109,7 +109,7 @@
   --highlight-template-end: #e6eeea;
   --tip-bg: #f4dfc3;
   --tip-ink: #5b3a1f;
-  --brand-mark-image: url("../icons/escrevaral-aba-dark.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-dark.svg");
   --line: rgba(160, 178, 160, 0.36);
   --primary: #1a4533;
   --primary-deep: #0d1f18;
@@ -144,7 +144,7 @@
   --highlight-template-end: #eee8ef;
   --tip-bg: #f7dfce;
   --tip-ink: #633826;
-  --brand-mark-image: url("../icons/escrevaral-aba-dark.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-dark.svg");
   --line: rgba(180, 155, 165, 0.35);
   --primary: #3b2068;
   --primary-deep: #1a0f2e;
@@ -181,7 +181,7 @@
   --highlight-template-end: #201816;
   --tip-bg: #2e2418;
   --tip-ink: #f5e4c0;
-  --brand-mark-image: url("../icons/escrevaral-aba-light.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
   --line: #2e2420;
   --primary: #c97d32;
   --primary-deep: #9e5e20;
@@ -376,7 +376,7 @@
   --highlight-template-end: #2f2a1b;
   --tip-bg: #3d3219;
   --tip-ink: #f5e2a3;
-  --brand-mark-image: url("../icons/escrevaral-aba-light.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
   --line: #4d4022;
   --primary: #e8c84a;
   --primary-deep: #c68b2e;
@@ -411,7 +411,7 @@
   --highlight-template-end: #18352b;
   --tip-bg: #2b3727;
   --tip-ink: #f0c89c;
-  --brand-mark-image: url("../icons/escrevaral-aba-light.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
   --line: #24513d;
   --primary: #e8a060;
   --primary-deep: #2e7d52;
@@ -446,7 +446,7 @@
   --highlight-template-end: #2c2047;
   --tip-bg: #3a2449;
   --tip-ink: #f0c9a0;
-  --brand-mark-image: url("../icons/escrevaral-aba-light.svg");
+  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
   --line: #4c3370;
   --primary: #f0c070;
   --primary-deep: #c45b7e;
