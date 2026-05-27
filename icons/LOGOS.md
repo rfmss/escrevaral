@@ -14,10 +14,12 @@
 
 Ficam nesta pasta (`icons/`). Não editar os arquivos operacionais diretamente — editar a fonte e regenerar.
 
-| Arquivo             | Cor do path | Fundo    | Uso                          |
-|---------------------|-------------|----------|------------------------------|
-| `LogoOK_v2.svg`     | `#f6f1eb`   | transparente | Fonte oficial — versão creme |
-| `LogoOK_v2dark.svg` | `#150a03`   | transparente | Fonte oficial — versão escura |
+| Arquivo             | Formato | Cor do path | Fundo        | Uso                               |
+|---------------------|---------|-------------|--------------|-----------------------------------|
+| `LogoOK_v2.svg`     | SVG     | `#f6f1eb`   | transparente | Fonte vetorial — versão creme     |
+| `LogoOK_v2dark.svg` | SVG     | `#150a03`   | transparente | Fonte vetorial — versão escura    |
+| `LogoOK_v2.png`     | PNG     | `#f6f1eb`   | transparente | Raster 2000×2001 — versão creme (base para PNGs derivados) |
+| `LogoOK_v2dark.png` | PNG     | `#150a03`   | transparente | Raster 2000×2001 — versão escura  |
 
 ---
 
@@ -73,14 +75,15 @@ Margem maior (18%) para respeitar o safe zone do PWA maskable.
 
 ## Como regenerar os PNGs
 
-Requer `cairosvg` e `Pillow` instalados:
+Requer `Pillow` instalado:
 
 ```bash
-pip3 install cairosvg pillow --break-system-packages
+pip3 install pillow --break-system-packages
 ```
 
-Depois rodar o script Python que:
-1. Lê `icons/LogoOK_v2.svg` e extrai o path via `xml.etree.ElementTree`
-2. Monta SVG quadrado (2000×2000) com fundo `#150a03` e path `#f6f1eb`
-3. Renderiza com `cairosvg.svg2png` e achata alpha via `PIL.Image.alpha_composite`
-4. Salva em todos os tamanhos acima
+O script Python usa `LogoOK_v2.png` (2000×2001, transparente) como fonte raster:
+1. Abre `icons/LogoOK_v2.png` com `Image.open().convert('RGBA')`
+2. Cria canvas sólido `#150a03` no tamanho alvo
+3. Redimensiona o logo com `LANCZOS` respeitando a margem (12% favicons, 18% PWA)
+4. Centraliza e compõe com `Image.paste(logo, offset, logo)` usando alpha como máscara
+5. Converte para RGB e salva com `optimize=True`
