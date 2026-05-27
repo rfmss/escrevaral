@@ -163,6 +163,8 @@ const rightsSearch = document.querySelector("[data-rights-search]");
 const rightsSearchClear = document.querySelector("[data-rights-search-clear]");
 const rightsCards = document.querySelector("[data-rights-cards]");
 const rightsSources = document.querySelector("[data-rights-sources]");
+const rightsDeathYear = document.querySelector("[data-rights-death-year]");
+const rightsCalcResult = document.querySelector("[data-rights-calc-result]");
 
 const topbarSearch = document.querySelector("[data-topbar-search]");
 const globalSearchInput = document.querySelector("[data-global-search-input]");

@@ -744,6 +744,25 @@ if (rightsSearchClear) rightsSearchClear.addEventListener("click", () => {
   renderRightsLab();
   rightsSearch.focus();
 });
+if (rightsDeathYear) rightsDeathYear.addEventListener("input", () => {
+  if (!rightsCalcResult) return;
+  const year = parseInt(rightsDeathYear.value, 10);
+  if (!year || year < 1400 || year > new Date().getFullYear()) {
+    rightsCalcResult.textContent = "";
+    return;
+  }
+  const publicDomainYear = year + 70 + 1;
+  const currentYear = new Date().getFullYear();
+  if (publicDomainYear <= currentYear) {
+    rightsCalcResult.textContent = `Domínio público desde ${publicDomainYear} — pode usar livremente.`;
+    rightsCalcResult.className = "rights-calc-result rights-calc-result--ok";
+  } else {
+    const yearsLeft = publicDomainYear - currentYear;
+    rightsCalcResult.textContent = `Domínio público em ${publicDomainYear} — ainda ${yearsLeft} ano${yearsLeft !== 1 ? "s" : ""} protegido${yearsLeft !== 1 ? "s" : ""}.`;
+    rightsCalcResult.className = "rights-calc-result rights-calc-result--pending";
+  }
+});
+
 if (decolonialObserverToggle) decolonialObserverToggle.addEventListener("change", () => {
   decolonialState.observerEnabled = decolonialObserverToggle.checked;
   renderDecolonialObserver();
