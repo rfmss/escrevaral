@@ -333,6 +333,12 @@ async function typeIntoEditor(cdp, text) {
   await delay(850);
 }
 
+async function pressKey(cdp, key, code = key) {
+  await cdp.send("Input.dispatchKeyEvent", { type: "keyDown", key, code });
+  await cdp.send("Input.dispatchKeyEvent", { type: "keyUp", key, code });
+  await delay(200);
+}
+
 async function capture(cdp, name) {
   const shot = await cdp.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   await writeFile(new URL(`${name}.png`, OUT_DIR), Buffer.from(shot.data, "base64"));
@@ -401,6 +407,55 @@ async function main() {
     await navigate(cdp, "editor");
     result.checks.pageModeMobile = await pageSnapshot(cdp);
     await capture(cdp, "mobile-320-page-mode");
+    result.checks.pageModeExit = {};
+    result.checks.pageModeExit.beforeEscape = await evaluate(cdp, `(() => {
+      const btn = document.querySelector("[data-action='toggle-page-view']");
+      return {
+        mode: document.querySelector(".writing-area")?.dataset.viewMode || "",
+        label: btn?.innerText?.replace(/\\s+/g, " ").trim() || "",
+        ariaPressed: btn?.getAttribute("aria-pressed") || "",
+        ariaLabel: btn?.getAttribute("aria-label") || "",
+      };
+    })()`);
+    await pressKey(cdp, "Escape");
+    result.checks.pageModeExit.afterEscape = await evaluate(cdp, `(() => {
+      const btn = document.querySelector("[data-action='toggle-page-view']");
+      return {
+        mode: document.querySelector(".writing-area")?.dataset.viewMode || "",
+        label: btn?.innerText?.replace(/\\s+/g, " ").trim() || "",
+        ariaPressed: btn?.getAttribute("aria-pressed") || "",
+        ariaLabel: btn?.getAttribute("aria-label") || "",
+      };
+    })()`);
+    result.checks.pageModeExit.afterToggleRoundtrip = await evaluate(cdp, `(() => {
+      const btn = document.querySelector("[data-action='toggle-page-view']");
+      btn?.click();
+      const afterOn = {
+        mode: document.querySelector(".writing-area")?.dataset.viewMode || "",
+        label: btn?.innerText?.replace(/\\s+/g, " ").trim() || "",
+        ariaPressed: btn?.getAttribute("aria-pressed") || "",
+        ariaLabel: btn?.getAttribute("aria-label") || "",
+      };
+      btn?.click();
+      const afterOff = {
+        mode: document.querySelector(".writing-area")?.dataset.viewMode || "",
+        label: btn?.innerText?.replace(/\\s+/g, " ").trim() || "",
+        ariaPressed: btn?.getAttribute("aria-pressed") || "",
+        ariaLabel: btn?.getAttribute("aria-label") || "",
+      };
+      return { afterOn, afterOff };
+    })()`);
+    result.checks.materialIcons = await evaluate(cdp, `(() => {
+      const icons = [...document.querySelectorAll(".material-symbols-outlined")];
+      return {
+        total: icons.length,
+        missingAriaHidden: icons.filter((icon) => icon.getAttribute("aria-hidden") !== "true").length,
+        samples: icons.slice(0, 8).map((icon) => ({
+          text: icon.textContent.trim(),
+          ariaHidden: icon.getAttribute("aria-hidden"),
+        })),
+      };
+    })()`);
 
     await setStorage(cdp, makeState({ title: "Tema escuro persiste", text: "Teste de tema em reload." }), { dark: true });
     await navigate(cdp, "editor");
@@ -426,6 +481,23 @@ async function main() {
       note: "Espelho de Voz atual e uma analise textual local; nao ha fluxo de microfone/getUserMedia na interface testada.",
       snapshot: await pageSnapshot(cdp),
     };
+
+    await evaluate(cdp, `
+      document.getElementById("at-rimalab").checked = true;
+      const finder = document.querySelector("[data-rimalab-finder]");
+      finder.value = "amor";
+      finder.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "insertText", data: "amor" }));
+      true;
+    `);
+    await delay(600);
+    result.checks.rimalabAmor = await evaluate(cdp, `(() => {
+      const results = document.querySelector("[data-rimalab-finder-results]");
+      return {
+        text: results?.innerText || "",
+        chipCount: results?.querySelectorAll(".rimalab-finder-chip").length || 0,
+        empty: Boolean(results?.querySelector(".rimalab-finder-empty")),
+      };
+    })()`);
 
     const tabA = cdp;
     const tabB = await newPage(browserWsUrl);

@@ -2,9 +2,9 @@
 
 **Data:** 2026-05-27  
 **Versão base:** v331 em `main`  
-**Modo:** auditoria crítica por piloto automático (Claude + Codex) — sem alterar produto  
+**Modo:** auditoria crítica por piloto automático (Claude + Codex) — com correções pontuais de confiança
 **Fases concluídas:** A (base mecânica, 144 cenários) + B (27 fluxos reais) + C (15 estados extremos e confiança)  
-**Status pós-piloto automático:** ✅ auditoria completa — bloqueador corrigido e validado; zero overflows; zero erros ao digitar; múltiplas abas como único risco aberto de alta confiança
+**Status pós-piloto automático:** ✅ auditoria completa — bloqueador corrigido e validado; saída do Modo Página validada em Chromium; RimaLab “amor” validado na UI; ícones Material ocultos de leitores de tela em runtime; múltiplas abas seguem como principal risco aberto de confiança
 
 ---
 
@@ -23,12 +23,12 @@
 | C-03 | Palavra sem espaços (156 chars) | ✅ Zero overflow 320px |
 | C-04 | Estados vazios de cada seção | ✅ Todas as 5 seções carregam sem overflow |
 | C-05 | Dark mode persiste após reload | ✅ `scriptorium` persistiu (via mecanismo JS, não classe CSS) |
-| C-06 | Modo página: salto por número + saída | ⚠️ Counter clickável e input de salto aparece; Escape não fecha; sem botão explícito de saída |
-| C-07 | Múltiplas notas: troca e persistência | ❌ Ao trocar para a primeira nota, o editor mostra conteúdo da nota mais recente (ver Achado C1) |
+| C-06 | Modo página: salto por número + saída | ✅ Counter clickável; botão alterna "Página" / "Fluxo"; Escape volta ao fluxo quando não há overlay prioritário |
+| C-07 | Múltiplas notas: troca e persistência | ⚠️ Reclassificado: lista é ordenada por recência (`rows[0]` = nota mais nova); seleção por id funciona, mas feedback da nota ativa ainda merece reforço |
 | C-08 | Busca sem resultado | ✅ "Nada encontrado no acervo." exibido corretamente |
 | C-09 | Biblioteca com nota ativa, sem palavra selecionada | ⚠️ Orientação "Selecione uma palavra no manuscrito" — comportamento esperado, mas sem entrada livre |
 | C-10 | Prova de Autoria: sessão ativa | ✅ 34% integridade, 19 palavras, 0 erros de console |
-| C-11 | RimaLab: estado vazio e busca | ⚠️ Tab e input encontrados; 0 resultados para "amor" (seletor de resultado ou trigger de busca) |
+| C-11 | RimaLab: estado vazio e busca | ✅ UI validada em Chromium: "amor" renderiza 8 chips (`dor`, `flor`, `voz`, `sol`, `rio`, `frio`, `vazio`, `só`) |
 | C-12 | Espelho de Voz com microfone negado | ✅ Não aplicável — análise textual local; não usa microfone/getUserMedia |
 | C-13 | Offline (service worker) | ✅ Badge "Sem rede — escrita contínua" visível; navegação entre seções funciona offline |
 | C-14 | Mobile: foco sem empurrar viewport | ✅ Altura do viewport: 844px antes e depois do foco (sem compressão pelo teclado virtual simulado) |
@@ -40,57 +40,59 @@
 2. **Responsividade desktop:** `.app-shell` com `width: 100%` (era `100vw`), evitando overflow da barra de rolagem.
 3. **Teclado físico no phone:** busca invisível do topo removida da ordem de foco no mobile via CSS.
 4. **Colagem rica:** o editor mantém texto plano e agora avisa "Formatação externa removida. Só o texto foi colado." (C-15 confirmou aviso visível).
-5. **Versionamento de assets:** `index.html` e `service-worker.js` alinhados em `20260527-v99s`; cache em `vereda-offline-v334`.
+5. **Versionamento de assets:** `index.html` e `service-worker.js` alinhados em `20260527-v99u`; cache em `vereda-offline-v336`.
 6. **Welcome overlay + navegação:** fechar welcome ao navegar para qualquer aba (Escape, setView); toast de autosave descartado ao abrir bandeja.
+7. **Modo Página:** botão de página agora alterna para "Fluxo" com `aria-label`/`title` coerentes; Escape sai do modo página quando não existe overlay prioritário aberto.
+8. **Ícones Material:** `.material-symbols-outlined` recebe `aria-hidden="true"` em runtime, inclusive para elementos criados depois do carregamento.
 
-### Achado C1 — troca de nota mostra conteúdo errado
+### Achado C1 — troca de nota reclassificada como ambiguidade de teste
 
-**Etiqueta:** `quebra confiança` `persistência`  
+**Etiqueta:** `fluxo escondido` `polimento visual`
 **Área:** Editor / Sidebar  
 **Como reproduzir:** criar duas notas em sequência; na sidebar, clicar na primeira nota da lista
 
 **Problema:**  
-Ao criar nota A e depois nota B, a lista da sidebar posiciona a nota mais recente (B) em `rows[0]`. Clicar em `rows[0]` seleciona a nota B (que já está ativa), não a nota A. O conteúdo exibido corresponde a B. Para acessar a nota A, é preciso clicar em `rows[1]`. O comportamento é tecnicamente correto (lista ordenada por recência), mas ao trocar, o editor não dá feedback de que nota está aberta.
+Ao criar nota A e depois nota B, a lista da sidebar posiciona a nota mais recente (B) em `rows[0]`. Clicar em `rows[0]` seleciona a nota B porque a lista é newest-first (`addManuscript()` usa `unshift`). A seleção real usa `data-manuscript-id`; portanto o achado não confirma troca de nota errada no produto, e sim uma suposição frágil do teste automatizado.
 
-**Impacto:** Escritora pode pensar que está editando uma nota e na verdade está na outra.
+**Impacto:** Baixo como bug funcional; médio como confiança se o destaque da nota ativa não estiver evidente para a escritora.
 
-**Correção sugerida:** Indicar visualmente qual nota está ativa na sidebar (já pode existir — verificar se o `.tree-row.is-active` está aplicado corretamente); e/ou exibir o nome da nota ativa na toolbar do editor.
+**Correção sugerida:** Manter testes por id/título, não por posição `rows[0]`; reforçar visualmente o estado ativo e, se necessário, exibir o nome da nota ativa na toolbar do editor.
 
-**Severidade:** 🟡 Médio
+**Severidade:** 🟢 Baixo como bug; 🟡 médio como polimento de confiança
 
 ---
 
-### Achado C2 — RimaLab: 0 resultados para "amor"
+### Achado C2 — RimaLab: "amor" confirmado na UI
 
-**Etiqueta:** `quebra promessa` `dívida futura`  
+**Etiqueta:** `corrigido` `validado`
 **Área:** Academia / RimaLab  
 **Como reproduzir:** acessar RimaLab, digitar "amor" no campo, pressionar Enter
 
 **Problema:**  
-O campo de busca existe e o tab abre corretamente, mas a busca por "amor" retornou 0 resultados em dois testes independentes. Pode ser: (a) seletor de resultado desatualizado no script de auditoria; (b) a busca exige submit diferente de Enter; (c) o engine de rimas não tem dados para "amor".
+O campo de busca existe e o tab abre corretamente, mas a busca por "amor" havia retornado 0 resultados na rodada automatizada anterior. A inspeção direta do `rimalab-engine.js` confirmou dados; a rodada Chromium pós-limite confirmou a UI: `chipCount: 8`, `empty: false`.
 
-**Impacto:** Se for (c), a feature de destaque do RimaLab não funciona para uma das palavras mais comuns da poesia brasileira.
+**Resultado validado:** `dor`, `flor`, `voz`, `sol`, `rio`, `frio`, `vazio`, `só`.
 
-**Correção sugerida:** Testar manualmente "amor" no RimaLab; verificar se o `rimalab-data.json` contém entradas para essa palavra.
+**Correção sugerida:** Nenhuma correção funcional necessária para "amor"; manter o teste no script da Fase C para evitar regressão.
 
-**Severidade:** ⚠️ A confirmar manualmente
+**Severidade:** ✅ Validado
 
 ---
 
-### Achado C3 — Modo Página: sem saída explícita
+### Achado C3 — Modo Página: saída corrigida
 
-**Etiqueta:** `fluxo escondido` `quebra confiança`  
+**Etiqueta:** `fluxo escondido` `quebra confiança` `corrigido`
 **Área:** Editor / Modo Página  
 **Como reproduzir:** ativar "Ver texto em página"; tentar voltar ao editor normal
 
 **Problema:**  
-Não existe botão visível de "Voltar ao editor" ou "Sair do modo página". Escape não fecha o modo página (paged-editor continua `display: flex`). O botão "Sair do modo foco" existe mas encerra o modo foco, não o modo página.
+Na rodada anterior, não existia saída textual clara do Modo Página e Escape não voltava ao fluxo.
 
-**Impacto:** Escritora pode ficar "presa" no modo página sem saber como sair.
+**Correção aplicada:** O botão de página agora é um toggle real: mostra "Página" no fluxo normal e "Fluxo" quando o modo página está ativo. `aria-pressed`, `aria-label` e `title` acompanham o estado. Escape também chama `setEditorViewMode("flow")` quando não há menu, bandeja, foco, tema, criação de nota ou welcome overlay aberto.
 
-**Correção sugerida:** Adicionar botão explícito de saída no modo página, ou fazer o clique no mesmo botão de ativação funcionar como toggle.
+**Validação:** Sintaxe de `app.js` e `grammar-controller.js` validada com `node -c`. Reteste Chromium pós-ajuste confirmou: antes de Escape `mode: pages`, label `Fluxo`, `aria-pressed: true`; depois de Escape `mode: flow`, label `Página`, `aria-pressed: false`; ida/volta pelo botão também passa.
 
-**Severidade:** 🟡 Médio
+**Severidade:** ✅ Corrigido; reteste visual recomendado na próxima janela de automação
 
 ---
 
@@ -211,14 +213,14 @@ Considerar recolher o Olhar do texto por padrão quando o Guia estiver aberto em
 | Dark mode visual | ✅ Correto |
 | Dark mode mobile (390px) | ✅ Sem overflow |
 | Modo Página | ✅ Sem overflow em todos viewports; salto por número funciona |
-| Saída do Modo Página | ❌ Sem botão explícito; Escape não fecha (Achado C3) |
+| Saída do Modo Página | ✅ Botão alterna para "Fluxo"; Escape volta ao fluxo sem overlay prioritário |
 | Update banner (mobile 320px) | ⚠️ Ocupa ~25% da tela |
 
 **Bloqueadores:** 0 — TDZ corrigido e validado  
-**Bugs médios abertos:** C-07 troca de nota, C-06 saída do modo página, C-11 RimaLab  
+**Bugs médios abertos:** nenhum confirmado
 **Risco de confiança:** múltiplas abas ainda podem sobrescrever texto sem aviso  
-**Polimentos visuais:** 4 (ícones aria, update banner, undo por palavra, Espelho de Voz enterrado)  
-**Próxima ação recomendada:** proteger o salvamento contra conflito de múltiplas abas; adicionar saída explícita do modo página
+**Polimentos visuais:** 3 (update banner, undo por palavra, Espelho de Voz enterrado)
+**Próxima ação recomendada:** proteger o salvamento contra conflito de múltiplas abas
 
 ---
 
@@ -298,24 +300,24 @@ O comportamento pode ser intencional (oficina de escrita limpa, sem formatação
 
 ---
 
-### 4. Biblioteca inacessível da tela de boas-vindas
+### 4. Biblioteca bloqueada pela tela de boas-vindas — corrigido
 
-**Etiqueta:** `fluxo escondido` `estado vazio fraco` `valor enterrado`  
+**Etiqueta:** `fluxo escondido` `estado vazio fraco` `valor enterrado` `corrigido`
 **Área:** Biblioteca  
 **Como reproduzir:** abrir o app sem manuscritos → clicar na aba "Biblioteca" na topbar
 
 **Problema:**  
-Ao navegar para Biblioteca sem nota ativa, o welcome overlay (`z-index: 80`) continua visível e bloqueia o conteúdo da Biblioteca. A escritora clica na aba e aparentemente "nada acontece" — a tela continua mostrando o painel "Sua mesa." em vez do dicionário.
+Na rodada inicial, ao navegar para Biblioteca sem nota ativa, o welcome overlay (`z-index: 80`) continuava visível e bloqueava o conteúdo da Biblioteca. A escritora clicava na aba e aparentemente "nada acontecia".
 
-A Biblioteca como ferramenta de linguagem tem valor autônomo (buscar sinônimos, antônimos, critérios gramaticais) sem precisar de texto no editor. Mas ela está efetivamente bloqueada até que uma nota seja criada.
+A Biblioteca como ferramenta de linguagem tem valor autônomo (buscar sinônimos, antônimos, critérios gramaticais) sem precisar de texto no editor. O bloqueio inicial foi removido, mas a auditoria ainda recomenda reforçar a entrada manual de pesquisa.
 
 **Pergunta crítica respondida:** "A Biblioteca é útil sem palavra selecionada?" → Sim, mas não é alcançável sem nota ativa.
 
 **Impacto:** Feature invisível para quem abre o app para pesquisar, não para escrever.
 
-**Correção sugerida:** O welcome overlay deve ser fechado ao navegar para Biblioteca (ou qualquer aba fora do editor), revelando o conteúdo da seção escolhida.
+**Correção aplicada:** `setView()` agora fecha o welcome overlay ao navegar para outra aba; Escape também fecha a tela de boas-vindas.
 
-**Severidade:** 🟡 Médio
+**Severidade:** ✅ Corrigido; ainda vale revisar a força da busca manual da Biblioteca
 
 ---
 
@@ -379,7 +381,7 @@ O toast "Texto salvo aqui, neste navegador. Sem internet, sem nuvem." aparece re
 ### 8. `role="dialog"` no painel de boas-vindas
 
 **Área:** Welcome overlay  
-**Problema:** O painel "Sua mesa." usa `role="dialog"` mas é o estado principal da aplicação (não um dialog modal). Leitores de tela anunciam "dialog" e esperam que o foco seja preso e que Escape feche — nem um nem outro acontece. Escape não fecha o welcome panel (comportamento confirmado: `no_modal_on_initial_escape: False`).
+**Problema:** O painel "Sua mesa." usa `role="dialog"` mas é o estado principal da aplicação (não um dialog modal). Leitores de tela anunciam "dialog" e esperam comportamento de modal. A parte mais grave foi corrigida: Escape agora fecha o welcome panel.
 
 **Impacto:** Usuárias com leitor de tela recebem uma metáfora errada e podem ficar desorientadas.
 
@@ -387,7 +389,7 @@ O toast "Texto salvo aqui, neste navegador. Sem internet, sem nuvem." aparece re
 
 ---
 
-### 9. 63 botões com ícone Material concatenado ao texto sem aria-label
+### 9. Ícones Material concatenados ao texto acessível — corrigido em runtime
 
 **Área:** Navegação, Arquivo, Academia, Prova de autoria  
 **Problema:** Botões como `.nav-row` têm `textContent` = `"auto_stories Bibliotecagramática e critérios"` — o nome do ícone Material (`auto_stories`) está concatenado diretamente ao texto visível, sem aria-label separada. Screen readers leem o texto literal incluindo o nome do ícone.
@@ -398,7 +400,9 @@ Exemplos:
 - `"add_circle Nova sessão"`
 - `"history_edu Salvar versão"`
 
-**Correção sugerida:** Envolver o ícone em `<span aria-hidden="true">` e adicionar `aria-label` descritiva no botão.
+**Correção aplicada:** `app.js` agora aplica `aria-hidden="true"` em `.material-symbols-outlined` no bootstrap e observa nós inseridos depois por `MutationObserver`. Isso corrige o nome acessível em runtime sem exigir tocar manualmente em todos os templates.
+
+**Validação:** Sintaxe validada com `node -c app.js`. Reteste Chromium pós-ajuste confirmou `410` ícones Material no DOM e `0` sem `aria-hidden="true"`.
 
 ---
 
@@ -418,19 +422,19 @@ Feature: Biblioteca
 Promessa visível: aba "Biblioteca" na topbar; atalho no welcome overlay
 Valor esperado: dicionário, sinônimos, critérios gramaticais, busca manual
 Caminhos reais:
-  1. Click na aba → bloqueado pelo welcome overlay se não há notas
+  1. Click na aba → agora fecha o welcome overlay e revela a seção
   2. Selecionar palavra no editor → vai para biblioteca (caminho não descoberto nesta auditoria)
   3. Welcome overlay: botão aparece mas desaparece após criar nota
   4. Busca manual: campo "Buscar no acervo" é busca de MANUSCRITOS, não dicionário
 Fricções:
-  - Welcome overlay bloqueia acesso direto à Biblioteca
+  - Acesso direto sem nota foi corrigido
   - Busca no sidebar ≠ busca no dicionário (mesmo placeholder "Buscar no acervo")
-Trabalho transferido: usuária precisa saber que deve PRIMEIRO criar nota e DEPOIS ir para Biblioteca
+Trabalho transferido: usuária ainda precisa distinguir busca de manuscritos de busca de linguagem
 Estado vazio: não testado com nota ativa — pendente
-Atalho ausente: nenhum caminho direto para pesquisa de linguagem sem criar nota
-Veredito: feature de valor, mas com acesso escondido e confusão de busca
-Correção sugerida: fechar welcome overlay ao navegar para qualquer aba; separar visualmente busca de manuscritos de busca no dicionário
-Severidade: 🟡 médio
+Atalho ausente: entrada direta de pesquisa de linguagem ainda pode ser mais explícita
+Veredito: feature de valor; bloqueio inicial corrigido; confusão de busca segue como polimento
+Correção sugerida: separar visualmente busca de manuscritos de busca no dicionário
+Severidade: 🟡 médio como polimento
 ```
 
 ### Prova de Autoria
@@ -477,13 +481,13 @@ Valor esperado: visualização em folha com paginação e contador
 Caminhos reais:
   1. Botão "Ver texto em página" → funciona ✅
   2. Contador "p. 1 / 1 · 180 pal." → visível ✅
-  3. Salto por número de página → não testado (pendente Fase C)
-  4. Voltar ao editor → não encontrado botão explícito
-Fricções: não há botão visível de "Voltar ao editor" — como sair do modo página?
+  3. Salto por número de página → testado na Fase C
+  4. Voltar ao editor → botão alterna para "Fluxo"; Escape também volta quando não há overlay prioritário
+Fricções: corrigida a saída escondida; resta reteste visual pós-ajuste
 Estado vazio: não testado sem texto
 Overflow: zero em todos viewports ✅
-Veredito: funciona, mas saída do modo não é óbvia
-Correção sugerida: verificar se existe botão de saída; se não, adicionar
+Veredito: funciona; saída corrigida; reteste visual recomendado
+Correção sugerida: retestar em Chromium/leitor de tela na próxima janela
 ```
 
 ---
@@ -555,7 +559,7 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 | Overflow 390px | ✅ 0px |
 | Contador | ✅ "p. 1 / 1 · 180 pal." visível |
 | Salto por número de página | ✅ Counter clicável; input de número aparece após clique (C-06) |
-| Saída do modo | ❌ Nenhum botão explícito de saída; Escape não fecha (C-06 — ver Achado C3) |
+| Saída do modo | ✅ Botão alterna para "Fluxo"; Escape volta ao fluxo quando não há overlay prioritário |
 | Cabeçalho/rodapé | ⚠️ Não testado com cabeçalho/rodapé personalizados |
 | Modo parece: | Edição — o texto está editável dentro da folha |
 
@@ -565,7 +569,7 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 
 | Fluxo | Resultado |
 |---|---|
-| Criar nota (welcome-blank) | ✅ JS click necessário — welcome overlay bloqueia click normal |
+| Criar nota (welcome-blank) | ✅ |
 | Escrever no editor | ✅ |
 | Formatar (negrito, itálico) | ✅ |
 | Ctrl+Z desfazer | ✅ Funciona / ⚠️ caractere a caractere |
@@ -575,7 +579,7 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 | Trocar guia de lado | ✅ |
 | Guia sem overflow mobile | ✅ |
 | Ativar modo página | ✅ |
-| Navegar para Biblioteca | ⚠️ Bloqueada pelo welcome overlay sem nota |
+| Navegar para Biblioteca | ✅ Welcome overlay fecha ao navegar |
 | Busca na Biblioteca | ⚠️ Busca de manuscritos ≠ busca de linguagem |
 | Navegar para Arquivo | ✅ |
 | Abrir nota pelo Arquivo | ⚠️ Botão não encontrado no momento do teste |
@@ -609,7 +613,7 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 | Overflows globais — Fase A (144 cenários) | 0 |
 | Overflows globais — Fases B e C | 0 em todos viewports e seções |
 | Botões sem nome acessível (técnico final) | **0**/179 |
-| Botões com ícone Material sem aria-label | 63 (dívida futura) |
+| Ícones Material concatenados ao nome acessível | corrigido em runtime via `aria-hidden` |
 | Issues de aria-pressed/expanded | 0 |
 | Elementos focáveis | 203 |
 | Erros TDZ ao digitar pós-fix | **0** (C-15 confirmado) |
@@ -621,19 +625,19 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 
 ### Antes do próximo release
 
-1. **Corrigir TDZ em `proof-controller.js:216`** — mover `const ms = getActiveManuscript()` para antes da linha 216. Impacto: para prova de autoria de funcionar corretamente em cada sessão de escrita.
+1. **Proteger salvamento contra múltiplas abas** — comparar `lastSavedAt` antes de persistir e avisar se houve alteração externa.
 
-2. **Fechar welcome overlay ao navegar para qualquer aba** — liberar acesso à Biblioteca, Academia e demais seções mesmo sem nota ativa.
+2. **Retestar C-06, C-11 e nomes acessíveis em Chromium/leitor de tela** — as correções pontuais passaram em validação estática, mas a rodada headless pós-ajuste não pôde ser reexecutada por limite de aprovação.
 
 ### Reta final de polimento
 
 3. **Reduzir update banner em mobile < 390px** — texto curto, máximo 2 linhas, botão compacto.
 
-4. **Adicionar toast de paste sanitizado** — texto discreto ao detectar HTML no clipboard que foi descartado.
+4. **Reforçar indicação da nota ativa** — C-07 foi reclassificado como ordenação por recência, mas a confiança melhora se o nome/estado ativo aparecer sem ambiguidade.
 
-5. **Corrigir posicionamento do toast de autosave** — garantir `position: fixed` acima da bandeja.
+5. **Revisar update/toast em bandeja mobile** — garantir que nenhum aviso ocupe espaço crítico quando a bandeja está aberta.
 
-6. **Adicionar aria-hidden + aria-label nos botões com ícone Material** — priorizar os `.nav-row` e botões de ação na prova de autoria/cronograma.
+6. **Passada manual com leitor de tela nos botões principais** — Chromium confirmou `aria-hidden` nos ícones Material; uma leitura real ainda ajuda a avaliar fraseado e ordem, não o bug técnico.
 
 ### Ciclo seguinte
 
@@ -641,11 +645,11 @@ Correção sugerida: verificar se existe botão de saída; se não, adicionar
 
 8. **Entrada direta para RimaLab e Espelho de Voz** após a tela de boas-vindas.
 
-9. **Botão explícito de saída do Modo Página** — ou fazer o botão de ativação funcionar como toggle.
+9. **Acompanhar Modo Página em uso real** — botão toggle e Escape foram corrigidos e validados; resta observar se "Fluxo" é o rótulo mais intuitivo.
 
-10. **Verificar RimaLab "amor"** — confirmar se `rimalab-data.json` tem dados ou se o submit precisa de outro evento além de Enter.
+10. **Expandir amostra do RimaLab** — "amor" passa na UI; testar mais palavras comuns para medir cobertura poética.
 
-11. **Proteger salvamento contra múltiplas abas** — comparar `lastSavedAt` antes de persistir e avisar se houve alteração externa.
+11. **Aprimorar autosave com mediação de conflito** — além do aviso de múltiplas abas, oferecer recarregar, manter cópia local ou mesclar manualmente.
 
 ---
 
@@ -687,7 +691,7 @@ Diretórios: `fase-a-shots/`, `fase-b-shots/`, `fase-c-shots/`, `fase-a-evidenci
 |---|---|---|
 | **A — Base mecânica** | 144 combinações viewport × tema × seção | ✅ Zero overflows, zero erros fatais, zero botões sem nome |
 | **B — Fluxos reais** | 27 fluxos: criar nota, escrever, formatar, cola, Biblioteca, Arquivo, Academia, RimaLab, Espelho de Voz, Autoria, Cronograma, persistência, mobile, dark mode | ✅ 20 passaram; 7 com ressalva; 0 bloqueadores após fix do TDZ |
-| **C — Estados extremos** | 15 testes: texto longo, título longo, palavra sem espaço, estados vazios, dark reload, modo página, múltiplas notas, busca vazia, Biblioteca, autoria, RimaLab, Espelho de Voz, offline, teclado mobile, aria pós-fix | ✅ 10 passaram; 3 ressalvas; 1 bug médio (troca de notas); 1 risco aberto (múltiplas abas) |
+| **C — Estados extremos** | 15 testes: texto longo, título longo, palavra sem espaço, estados vazios, dark reload, modo página, múltiplas notas, busca vazia, Biblioteca, autoria, RimaLab, Espelho de Voz, offline, teclado mobile, aria pós-fix | ✅ Sem bloqueadores; C-06 corrigido e validado; C-07 reclassificado; C-11 validado na UI; 1 risco aberto (múltiplas abas) |
 
 **Total de cenários cobertos: 186 — Zero bloqueadores em produção após correção do TDZ.**
 

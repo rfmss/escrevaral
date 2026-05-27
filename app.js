@@ -230,6 +230,24 @@ function applyDarkMode(isDark) {
 
 function closeThemeMenu() { /* noop — menu de temas removido */ }
 
+function hideDecorativeMaterialIcons(root = document) {
+  root.querySelectorAll?.(".material-symbols-outlined:not([aria-hidden])").forEach((icon) => {
+    icon.setAttribute("aria-hidden", "true");
+  });
+}
+
+const materialIconObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    mutation.addedNodes.forEach((node) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      if (node.classList?.contains("material-symbols-outlined")) {
+        node.setAttribute("aria-hidden", "true");
+      }
+      hideDecorativeMaterialIcons(node);
+    });
+  });
+});
+
 // Sinal progressivo: há teclado físico conectado?
 // Detectado via keydown real enquanto o visualViewport não está encolhido —
 // se a tela já está reduzida, o teclado virtual provavelmente está aberto.
@@ -1740,6 +1758,20 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "Escape") {
+    const bandeja = document.getElementById("mobile-bandeja");
+    const bandejaOpen = bandeja ? !bandeja.hidden : false;
+    const hasPriorityOverlay =
+      nav.classList.contains("is-open") ||
+      bandejaOpen ||
+      shell.classList.contains("is-focus") ||
+      themeMenu?.classList.contains("is-visible") ||
+      !createNoteOverlay.hidden ||
+      (welcomeOverlay && !welcomeOverlay.hidden);
+    if (_currentEditorView === "pages" && !hasPriorityOverlay) {
+      event.preventDefault();
+      setEditorViewMode("flow");
+      return;
+    }
     if (nav.classList.contains("is-open")) nav.classList.remove("is-open");
     closeBandeja();
   }
@@ -2434,6 +2466,8 @@ function _verifyControllers() {
 
 function _bootstrap() {
   _verifyControllers();
+  hideDecorativeMaterialIcons();
+  materialIconObserver.observe(document.body, { childList: true, subtree: true });
   applyProgressLevel();
   renderActiveManuscript();
   renderManuscriptNavigation();

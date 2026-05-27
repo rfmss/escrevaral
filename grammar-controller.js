@@ -269,7 +269,14 @@ function setEditorViewMode(mode) {
 
   // Sincroniza o toggle único de página
   const toggleBtn = document.querySelector("[data-action='toggle-page-view']");
-  if (toggleBtn) toggleBtn.setAttribute("aria-pressed", String(mode === "pages"));
+  if (toggleBtn) {
+    const isPages = mode === "pages";
+    const label = toggleBtn.querySelector("[data-page-view-label]");
+    toggleBtn.setAttribute("aria-pressed", String(isPages));
+    toggleBtn.setAttribute("aria-label", isPages ? "Voltar ao fluxo" : "Ver texto em página");
+    toggleBtn.title = isPages ? "Voltar ao fluxo" : "Ver texto em página";
+    if (label) label.textContent = isPages ? "Fluxo" : "Página";
+  }
 }
 
 let _pageObserver = null;

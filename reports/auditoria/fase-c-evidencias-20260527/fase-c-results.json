@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-27T17:33:43.135Z",
+  "createdAt": "2026-05-27T22:52:16.090Z",
   "baseUrl": "http://127.0.0.1:8800/index.html",
   "checks": {
     "proofTyping": {
@@ -13,7 +13,7 @@
         "text": "Texto digitado depois da correcao TDZ.",
         "activeTitle": "Fase C",
         "activeText": "Texto digitado depois da correcao TDZ.",
-        "saveStatus": "SALVO 14:33",
+        "saveStatus": "SALVO 19:52",
         "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
         "welcomeHidden": true,
         "createHidden": true,
@@ -51,7 +51,7 @@
       "text": "Inicio com palavra sem espacos: palavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavra\n\nFim.",
       "activeTitle": "Titulo muito muito muito muito muito longo para testar a confianca visual da folha",
       "activeText": "Inicio com palavra sem espacos: palavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavra\n\nFim.",
-      "saveStatus": "SALVO 14:33",
+      "saveStatus": "SALVO 19:52",
       "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
       "welcomeHidden": true,
       "createHidden": true,
@@ -69,13 +69,79 @@
       "text": "Paragrafo 1. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 2. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 3. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 4. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 5. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 6. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 7. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 8. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 9. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 10. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 11. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 12. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 13. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 14. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 15. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 16. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 17. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 18. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.",
       "activeTitle": "Modo pagina estreito",
       "activeText": "Paragrafo 1. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 2. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 3. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 4. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 5. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 6. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 7. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 8. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 9. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 10. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 11. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 12. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 13. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 14. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 15. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 16. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 17. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 18. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.",
-      "saveStatus": "SALVO 14:33",
+      "saveStatus": "SALVO 19:52",
       "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
       "welcomeHidden": true,
       "createHidden": true,
       "editorMode": "pages",
       "pageCount": 3,
       "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+    },
+    "pageModeExit": {
+      "beforeEscape": {
+        "mode": "pages",
+        "label": "article Fluxo",
+        "ariaPressed": "true",
+        "ariaLabel": "Voltar ao fluxo"
+      },
+      "afterEscape": {
+        "mode": "flow",
+        "label": "article Página",
+        "ariaPressed": "false",
+        "ariaLabel": "Ver texto em página"
+      },
+      "afterToggleRoundtrip": {
+        "afterOn": {
+          "mode": "pages",
+          "label": "article Fluxo",
+          "ariaPressed": "true",
+          "ariaLabel": "Voltar ao fluxo"
+        },
+        "afterOff": {
+          "mode": "flow",
+          "label": "article Página",
+          "ariaPressed": "false",
+          "ariaLabel": "Ver texto em página"
+        }
+      }
+    },
+    "materialIcons": {
+      "total": 410,
+      "missingAriaHidden": 0,
+      "samples": [
+        {
+          "text": "system_update",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "close",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "menu",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "headphones",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "search",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "search",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "cloud_done",
+          "ariaHidden": "true"
+        },
+        {
+          "text": "download",
+          "ariaHidden": "true"
+        }
+      ]
     },
     "darkReload": {
       "beforeReloadTheme": {
@@ -88,7 +154,7 @@
         "text": "Teste de tema em reload.",
         "activeTitle": "Tema escuro persiste",
         "activeText": "Teste de tema em reload.",
-        "saveStatus": "SALVO 14:33",
+        "saveStatus": "SALVO 19:52",
         "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
         "welcomeHidden": true,
         "createHidden": true,
@@ -106,7 +172,7 @@
         "text": "Teste de tema em reload.",
         "activeTitle": "Tema escuro persiste",
         "activeText": "Teste de tema em reload.",
-        "saveStatus": "SALVO 14:33",
+        "saveStatus": "SALVO 19:52",
         "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
         "welcomeHidden": true,
         "createHidden": true,
@@ -125,7 +191,7 @@
       "text": "Texto salvo antes do reload automatico.",
       "activeTitle": "Persistencia",
       "activeText": "Texto salvo antes do reload automatico.",
-      "saveStatus": "SALVO 14:34",
+      "saveStatus": "SALVO 19:52",
       "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
       "welcomeHidden": true,
       "createHidden": true,
@@ -143,7 +209,7 @@
       "text": "",
       "activeTitle": "",
       "activeText": "",
-      "saveStatus": "SALVO 14:34",
+      "saveStatus": "SALVO 19:52",
       "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
       "welcomeHidden": true,
       "createHidden": true,
@@ -164,7 +230,7 @@
         "text": "",
         "activeTitle": "",
         "activeText": "",
-        "saveStatus": "SALVO 14:34",
+        "saveStatus": "SALVO 19:52",
         "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
         "welcomeHidden": true,
         "createHidden": true,
@@ -172,6 +238,11 @@
         "pageCount": 0,
         "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
       }
+    },
+    "rimalabAmor": {
+      "text": "dor\nflor\nvoz\nsol\nrio\nfrio\nvazio\nsó",
+      "chipCount": 8,
+      "empty": false
     },
     "multiTabOverwrite": {
       "final": {
@@ -184,7 +255,7 @@
         "text": "Alteracao feita na aba B com estado antigo.",
         "activeTitle": "Multiplas abas",
         "activeText": "Alteracao feita na aba B com estado antigo.",
-        "saveStatus": "SALVO 14:34",
+        "saveStatus": "SALVO 19:52",
         "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
         "welcomeHidden": true,
         "createHidden": true,
@@ -203,8 +274,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'start_url' ignored, should be same origin as document.",
-          "timestamp": 1779903253676.972,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.126,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -215,8 +286,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'id' ignored, should be same origin as document.",
-          "timestamp": 1779903253677.066,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.546,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -227,8 +298,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'scope' ignored. Start url should be within scope of scope URL.",
-          "timestamp": 1779903253677.097,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.597,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -239,8 +310,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'url' ignored, should be within scope of the manifest.",
-          "timestamp": 1779903253677.132,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.696,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -251,8 +322,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'url' of 'shortcut' not present.",
-          "timestamp": 1779903253677.164,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.784,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -263,8 +334,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'url' ignored, should be within scope of the manifest.",
-          "timestamp": 1779903253677.194,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.817,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -275,8 +346,8 @@
           "source": "other",
           "level": "warning",
           "text": "Manifest: property 'url' of 'shortcut' not present.",
-          "timestamp": 1779903253677.223,
-          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+          "timestamp": 1779922361777.849,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99u"
         }
       }
     },
@@ -291,7 +362,7 @@
           }
         ],
         "executionContextId": 35,
-        "timestamp": 1779903254955.993,
+        "timestamp": 1779922362334.642,
         "stackTrace": {
           "callFrames": [
             {
@@ -310,22 +381,22 @@
             },
             {
               "functionName": "trackAnalyticsView",
-              "scriptId": "42",
-              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99s",
+              "scriptId": "43",
+              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99u",
               "lineNumber": 64,
               "columnNumber": 23
             },
             {
               "functionName": "",
-              "scriptId": "42",
-              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99s",
+              "scriptId": "43",
+              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99u",
               "lineNumber": 74,
               "columnNumber": 2
             },
             {
               "functionName": "",
-              "scriptId": "131",
-              "url": "http://127.0.0.1:8800/index.html?faseC=1779903253447",
+              "scriptId": "127",
+              "url": "http://127.0.0.1:8800/index.html?faseC=1779922361625",
               "lineNumber": 1564,
               "columnNumber": 15
             }
