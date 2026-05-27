@@ -418,6 +418,32 @@
       },
     },
 
+    {
+      id: "PONT-52", categoria: "ponto final duplicado antes de reticências",
+      fonte: "Bechara § 604; Moreno p. 21",
+      criterio: "Quando reticências terminam uma frase completa, não se adiciona ponto final após elas.",
+      exemplo: "Não sei...",
+      contraexemplo: "Não sei....",
+      acao: "Remova o ponto final após as reticências.",
+      severity: "baixa",
+      detect(text) {
+        return all(/\.{3,}\./g, text);
+      },
+    },
+
+    {
+      id: "PONT-53", categoria: "travessão duplo sem espaço externo",
+      fonte: "Bechara § 630; norma editorial brasileira",
+      criterio: "Travessão de inserção exige espaço antes e depois quando isola aposto ou intercalação.",
+      exemplo: "Ela — a mais velha — chegou primeiro.",
+      contraexemplo: "Ela—a mais velha—chegou primeiro.",
+      acao: "Adicione espaço antes e depois do travessão de inserção.",
+      severity: "baixa",
+      detect(text) {
+        return all(/\S—\S/g, text);
+      },
+    },
+
   ];
 
   // ── REGRAS VIA PADRÃO TEXTUAL AVANÇADO (desbloqueadas pelo syntax-engine) ──

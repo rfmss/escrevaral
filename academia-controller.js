@@ -225,6 +225,34 @@ function exportAnaliseGeral() {
   saveStatus.textContent = `${alertas.length} alerta${alertas.length === 1 ? "" : "s"} exportado${alertas.length === 1 ? "" : "s"} em TXT`;
 }
 
+function copyVoiceResult() {
+  const text = voiceInput?.value.trim();
+  if (!text || !window.VeredaVoice) { saveStatus.textContent = "Espelho vazio — analise um texto primeiro."; return; }
+  const a = VeredaVoice.analyze(text);
+  const ms = getActiveManuscript();
+  const title = ms?.title || "texto";
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(52);
+  const lines = [
+    "ESPELHO DE VOZ — Escrevaral",
+    sep,
+    `Texto: ${title}  ·  ${a.counts.words} palavras  ·  ${date}`,
+    `Leitura de voz: ${a.voice?.label || "—"}`,
+    a.voice?.description || "",
+    "",
+    "Forças: " + (a.strengths?.join("; ") || "—"),
+    "Pontos cegos: " + (a.blindSpots?.join("; ") || "—"),
+    "",
+    sep,
+    a.disclaimer || "",
+  ];
+  navigator.clipboard?.writeText(lines.join("\n")).then(() => {
+    saveStatus.textContent = "Resultado copiado";
+  }).catch(() => {
+    saveStatus.textContent = "Cópia não disponível — use Baixar TXT";
+  });
+}
+
 function exportRimaLabText() {
   if (!rimalabInput) {
     return;

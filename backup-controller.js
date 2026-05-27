@@ -366,7 +366,7 @@ function _formatImportConfirmMessage(envelope, fileName) {
   const currentNoun = currentCount === 1 ? "manuscrito" : "manuscritos";
   const fileLabel = fileName ? `"${fileName}"` : "cópia";
   const content = parts.length ? `${parts.join(" e ")}${wordsPart}` : "acervo";
-  return `${fileLabel}${datePart}: ${content}.\nSubstitui o acervo atual (${currentCount} ${currentNoun}). Continuar?`;
+  return `${fileLabel}${datePart}: ${content}.\n✓ Assinatura verificada.\nSubstitui o acervo atual (${currentCount} ${currentNoun}). Continuar?`;
 }
 
 async function _readAndConfirmImport(file) {
