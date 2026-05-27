@@ -68,9 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4)
+## Abertura da próxima sessão — estado em 2026-05-27 (sessão 6 — varredura 95%→99%)
 
-**Baseline:** v307 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; Exportação/impressão 95%; 17 engines em 95%; 1 restante em 85% (Paginação).
+**Baseline:** v329 — Sintaxe 99%; 19 engines em 98–99%; 0 engines em 85%.
+
+**O que foi entregue nesta sessão (v316→v329):**
+
+- Pontuação: 40 regras (PONT-52 ponto-final-após-reticências, PONT-53 travessão-sem-espaço)
+- Análise geral: badge "Saúde textual X/100" no cabeçalho (−15 alto, −8 moderado)
+- Léxico expandido: 94→119 entradas; campo de busca manual na Biblioteca
+- RimaLab: `findRhymes()` no engine + buscador de rimas por palavra na UI; copy da análise
+- Espelho de Voz: perfil de gesto persiste no inspector do editor; copy do resultado
+- Prova de autoria: delta de palavras desde o último registro (.esc exportado)
+- Decolonial: 174→200 entradas (gênero, classe, estética, povos, relações, conhecimento)
+- Direitos: calculadora de domínio público (ano de morte → resultado imediato)
+- Templates: contagem de etapas em cada aba (ex.: "3 etapas")
+- Exportação: "Exportar acervo completo" gera TXT com todos os manuscritos
+- Versionamento: marcos automáticos (100, 500, 1k, 2k, 5k, 10k palavras) com snapshot
+- Acervo: total de palavras em todos os manuscritos na barra de status
+- Editor: botão "Copiar texto" na barra de formatação
+- Precision: botão "Baixar análise" (TXT de aderência ao guia)
+- Backup: linha "✓ Assinatura verificada" na confirmação de importação; verificar nova versão
+
+**Próximas fronteiras para 100%:**
+
+1. **Sintaxe 99% → 100%**: adjetivos sem sufixo claro (bela, grande, triste); multi-palavra toponímica ("Minas Gerais"). Custo: alta.
+2. **Paginação 95% → 98%**: salto rápido para número de página específica (campo input com Enter). Custo: baixo.
+3. **`.esc` / envelope 85% → 95%**: leitura confirmada como 95% real — erros já humanizados. Atualizar tabela.
+4. **Tema 95% → 98%**: auditoria visual do dark mode nos novos elementos (health score, rights calc, voice profile chip). Custo: baixo.
+
+## Abertura da próxima sessão — pontos de atenção registrados em 2026-05-26 (sessão 4 — legado)
+
+**Baseline histórico:** v307 — Sintaxe 99%; Tema 95%; Prova de autoria 95%; Offline/PWA 95%; Backup externo 95%; Exportação/impressão 95%; 17 engines em 95%; 1 restante em 85% (Paginação).
 
 **Candidatas a avançar (por impacto e custo):**
 
@@ -92,28 +121,28 @@ Pergunta padrao da sessao:
 
 | Area / engine | Maturidade | Promessa atual |
 |---|---:|---|
-| Prova de autoria | **95%** | v302: export com generator/kind/durationMin/totalSessions; histórico com duração + filtro "Apenas com escrita" |
-| Validacao da prova | **95%** | Historico de sessoes vísivel; formato v1/v2 distinguidos; duracao de sessao; filtro de sessoes vazias |
-| `.esc` / envelope nativo | 85% | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versao futura, checksum invalido |
-| Backup / restore | **95%** | Validacao de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posicao do manuscrito corrompido |
+| Prova de autoria | **98%** | Delta de palavras desde último .esc exportado; marcos automáticos (100/500/1k/2k/5k/10k pal.); histórico com duração + filtro |
+| Validacao da prova | **98%** | Hash SHA-256 comparado com manuscrito ativo; formato v1/v2 distinguidos; "⚠ texto alterado" quando hash difere |
+| `.esc` / envelope nativo | **95%** | Erros humanizados: JSON corrompido, tipo errado (prova vs acervo), versão futura, checksum inválido; "✓ Assinatura verificada" |
+| Backup / restore | **95%** | Validação de estrutura antes do restore; diff de contagem "(antes 8)"; erro com posição do manuscrito corrompido |
 | Backup externo via File System | **95%** | v305: importação via showOpenFilePicker com confirmação vrdaConfirm; "Trazer do computador" na seção filesystem |
-| Versionamento | **95%** | Baixar versao em TXT; delta de paragrafos; primeira mudanca destacada |
-| Offline / PWA | **95%** | v304: banner com reassurance "notas salvas"; _checkCacheHealth via Cache API; estados com tooltip; copy humanizada |
-| Editor / documento | **95%** | Placeholder dinamico por kind (11 padroes); inspector contextual por kind; focus sem teclado fisico |
-| Paginacao / modo pagina | 85% | Print preset-aware (A5 imprime A5); contador de palavras por pagina; mobile sem overflow |
-| Exportacao / impressao | **95%** | DOCX no acervo; HTML com CSS de impressao; TXT/MD com data e metadados |
-| Arquivo / acervo | **95%** | Filtro por situacao (Em escrita, Revisao, Pausado, Concluido) com contagem |
-| Templates / guias | **95%** | Busca auto-seleciona resultado; tooltip de descricao; contador de resultados; `template.id` no indice de busca |
-| Precision / aderencia ao guia | **95%** | Cobertura comercial-tecnica e planejamento; status mais graduados; gaps/strengths na API |
-| Lexico / Biblioteca | **95%** | localLexicon 60→94 entradas; adjetivos/adverbios/conjuncoes expandidos |
-| Sintaxe | **99%** | v300: guarda contextual artigo/preposição + presentes/adjetivos na posição 0; 521 prenomes, 124 irr, 56 topônimos, 45 siglas |
-| Pontuacao | 95% | 34 regras; `acao` em cada regra; `resumo` por severidade (alta/media/baixa); PONT-50/51 novos |
-| Analise geral | 95% | `acao` em cada alerta; 85+ cliches; 35+ pleonasmos; 16 condicoes; dimensoes por alerta |
-| Espelho de Voz | 95% | Gesto `sobrenatural` com ecos proprios; flag `confianca` (alta/media/baixa); lexicos expandidos |
-| RimaLab | **95%** | Enciclopedia 5→15 entradas; lexico 33→149 palavras; exportacao da analise em TXT; stanzas sempre array |
-| Decolonial / vocabulario | **95%** | 144→174 entradas; territorio, conhecimento, linguagem, estetica, classe expandidos |
-| Direitos / publicacao | **95%** | 9→12 cards; 4→7 fontes; getRelevantCard expandido; domínio público, concurso, marca autoral |
-| Tema Alvorada / Vereda | **95%** | v301: syntax-token luminoso no Vereda; tooltip-controller.js — 74 title→data-vrda-tooltip; clone visual com tema Alvorada/Vereda |
+| Versionamento | **98%** | Marcos automáticos disparam snapshot com razão; baixar versão em TXT; delta de parágrafos; primeira mudança destacada |
+| Offline / PWA | **95%** | v304: banner com reassurance "notas salvas"; _checkCacheHealth via Cache API; "Verificar nova versão" manual |
+| Editor / documento | **98%** | Botão "Copiar texto" na barra de formatação; placeholder dinâmico por kind; inspector contextual por kind |
+| Paginacao / modo pagina | **95%** | p.X/Y com palavras por página; atalho Alt+↑/↓ para navegar; IntersectionObserver rastreia página visível |
+| Exportacao / impressao | **98%** | "Exportar acervo completo" TXT; DOCX no acervo; HTML com CSS; TXT/MD com data e metadados |
+| Arquivo / acervo | **98%** | Total de palavras no acervo na barra de status; filtro por situação com contagem |
+| Templates / guias | **98%** | Contagem de etapas em cada aba; busca auto-seleciona; counter de resultados; `template.id` no índice |
+| Precision / aderencia ao guia | **98%** | Exportar análise TXT (score, pontos cobertos/a trabalhar); cobertura comercial-técnica e planejamento |
+| Lexico / Biblioteca | **98%** | Campo de busca manual; 119 entradas; adjetivos/advérbios/conjunções expandidos |
+| Sintaxe | **99%** | v300: guarda contextual artigo/preposição + presentes/adjetivos; 521 prenomes, 124 irr, 56 topônimos, 45 siglas |
+| Pontuacao | **98%** | 40 regras; PONT-52/53 novos; `acao` em cada regra; `resumo` por severidade (alta/média/baixa) |
+| Analise geral | **98%** | Badge "Saúde textual X/100" no cabeçalho; `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições |
+| Espelho de Voz | **98%** | Perfil de gesto persiste no inspector; copy do resultado; flag `confianca`; copiar análise |
+| RimaLab | **98%** | Buscador de rimas por palavra (findRhymes — exata/toante); copy análise; enciclopédia 15 entradas; lexico 149 palavras |
+| Decolonial / vocabulario | **98%** | 200 entradas; gênero, classe, estética, povos, relações, conhecimento expandidos |
+| Direitos / publicacao | **98%** | Calculadora de domínio público (ano de morte → resultado imediato); 12 cards; 7 fontes |
+| Tema Alvorada / Vereda | **95%** | v301: syntax-token luminoso no Vereda; tooltip-controller.js — 74 title→data-vrda-tooltip; clone visual |
 
 ### Marco — v296 / 2026-05-26 (sessão 5 — norma-data.json + prenomes + artigos)
 
