@@ -618,6 +618,21 @@ function insertPlainTextAtSelection(text) {
   }
 }
 
+function showEditorNotice(message) {
+  const toast = document.getElementById("save-hint-toast");
+  const textEl = toast?.querySelector("span:not(.material-symbols-outlined)");
+  if (!toast || !textEl) return;
+  textEl.textContent = message;
+  toast.style.opacity = "1";
+  toast.style.transform = "translateX(-50%) translateY(0)";
+  toast.style.pointerEvents = "auto";
+  window.setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(-50%) translateY(8px)";
+    toast.style.pointerEvents = "none";
+  }, 5000);
+}
+
 writingArea.addEventListener("paste", (e) => {
   e.preventDefault();
   const cbd = e.clipboardData || window.clipboardData;
@@ -627,8 +642,11 @@ writingArea.addEventListener("paste", (e) => {
   insertPlainTextAtSelection(text);
   recordClipboardProof("paste");
   if (hadExternalMarkup && saveStatus) {
-    saveStatus.textContent = "Texto colado sem formatação externa";
-    saveStatus.title = "O Escrevaral manteve só as palavras para preservar a folha limpa.";
+    window.setTimeout(() => {
+      saveStatus.textContent = "Texto colado sem formatação externa";
+      saveStatus.title = "O Escrevaral manteve só as palavras para preservar a folha limpa.";
+    }, 520);
+    showEditorNotice("Formatação externa removida. Só o texto foi colado.");
   }
 });
 writingArea.addEventListener("cut",   () => recordClipboardProof("cut"));

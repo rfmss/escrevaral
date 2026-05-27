@@ -1,0 +1,337 @@
+{
+  "createdAt": "2026-05-27T17:33:43.135Z",
+  "baseUrl": "http://127.0.0.1:8800/index.html",
+  "checks": {
+    "proofTyping": {
+      "snapshot": {
+        "view": "editor",
+        "theme": "",
+        "overflow": false,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "title": "Fase C",
+        "text": "Texto digitado depois da correcao TDZ.",
+        "activeTitle": "Fase C",
+        "activeText": "Texto digitado depois da correcao TDZ.",
+        "saveStatus": "SALVO 14:33",
+        "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+        "welcomeHidden": true,
+        "createHidden": true,
+        "editorMode": "flow",
+        "pageCount": 0,
+        "focusedLabel": "Área de escrita"
+      },
+      "fatalEvents": []
+    },
+    "richPasteNotice": {
+      "view": "editor",
+      "theme": "",
+      "overflow": false,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "title": "Fase C",
+      "text": "Texto rico coladoTexto digitado depois da correcao TDZ.",
+      "activeTitle": "Fase C",
+      "activeText": "Texto rico coladoTexto digitado depois da correcao TDZ.",
+      "saveStatus": "Salvando...",
+      "saveNotice": "cloud_done Formatação externa removida. Só o texto foi colado. ×",
+      "welcomeHidden": true,
+      "createHidden": true,
+      "editorMode": "flow",
+      "pageCount": 0,
+      "focusedLabel": "Área de escrita"
+    },
+    "longWordMobile": {
+      "view": "editor",
+      "theme": "",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "title": "Titulo muito muito muito muito muito longo para testar a confianca visual da folha",
+      "text": "Inicio com palavra sem espacos: palavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavra\n\nFim.",
+      "activeTitle": "Titulo muito muito muito muito muito longo para testar a confianca visual da folha",
+      "activeText": "Inicio com palavra sem espacos: palavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavrapalavra\n\nFim.",
+      "saveStatus": "SALVO 14:33",
+      "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+      "welcomeHidden": true,
+      "createHidden": true,
+      "editorMode": "flow",
+      "pageCount": 0,
+      "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+    },
+    "pageModeMobile": {
+      "view": "editor",
+      "theme": "",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "title": "Modo pagina estreito",
+      "text": "Paragrafo 1. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 2. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 3. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 4. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 5. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 6. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 7. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 8. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 9. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 10. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 11. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 12. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 13. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 14. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 15. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 16. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 17. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.Paragrafo 18. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.",
+      "activeTitle": "Modo pagina estreito",
+      "activeText": "Paragrafo 1. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 2. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 3. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 4. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 5. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 6. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 7. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 8. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 9. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 10. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 11. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 12. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 13. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 14. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 15. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 16. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 17. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.\n\nParagrafo 18. Esta frase existe para gerar paginas e testar navegacao sem rolagem horizontal.",
+      "saveStatus": "SALVO 14:33",
+      "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+      "welcomeHidden": true,
+      "createHidden": true,
+      "editorMode": "pages",
+      "pageCount": 3,
+      "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+    },
+    "darkReload": {
+      "beforeReloadTheme": {
+        "view": "editor",
+        "theme": "scriptorium",
+        "overflow": false,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "title": "Tema escuro persiste",
+        "text": "Teste de tema em reload.",
+        "activeTitle": "Tema escuro persiste",
+        "activeText": "Teste de tema em reload.",
+        "saveStatus": "SALVO 14:33",
+        "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+        "welcomeHidden": true,
+        "createHidden": true,
+        "editorMode": "flow",
+        "pageCount": 0,
+        "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+      },
+      "afterReload": {
+        "view": "editor",
+        "theme": "scriptorium",
+        "overflow": false,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "title": "Tema escuro persiste",
+        "text": "Teste de tema em reload.",
+        "activeTitle": "Tema escuro persiste",
+        "activeText": "Teste de tema em reload.",
+        "saveStatus": "SALVO 14:33",
+        "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+        "welcomeHidden": true,
+        "createHidden": true,
+        "editorMode": "flow",
+        "pageCount": 0,
+        "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+      }
+    },
+    "reloadPersistence": {
+      "view": "editor",
+      "theme": "",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "title": "Persistencia",
+      "text": "Texto salvo antes do reload automatico.",
+      "activeTitle": "Persistencia",
+      "activeText": "Texto salvo antes do reload automatico.",
+      "saveStatus": "SALVO 14:34",
+      "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+      "welcomeHidden": true,
+      "createHidden": true,
+      "editorMode": "flow",
+      "pageCount": 0,
+      "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+    },
+    "emptyFirstVisitBiblioteca": {
+      "view": "biblioteca",
+      "theme": "",
+      "overflow": false,
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "title": "",
+      "text": "",
+      "activeTitle": "",
+      "activeText": "",
+      "saveStatus": "SALVO 14:34",
+      "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+      "welcomeHidden": true,
+      "createHidden": true,
+      "editorMode": "flow",
+      "pageCount": 0,
+      "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+    },
+    "microphoneDenied": {
+      "applicable": false,
+      "note": "Espelho de Voz atual e uma analise textual local; nao ha fluxo de microfone/getUserMedia na interface testada.",
+      "snapshot": {
+        "view": "academia",
+        "theme": "",
+        "overflow": false,
+        "scrollWidth": 320,
+        "clientWidth": 320,
+        "title": "",
+        "text": "",
+        "activeTitle": "",
+        "activeText": "",
+        "saveStatus": "SALVO 14:34",
+        "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+        "welcomeHidden": true,
+        "createHidden": true,
+        "editorMode": "flow",
+        "pageCount": 0,
+        "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+      }
+    },
+    "multiTabOverwrite": {
+      "final": {
+        "view": "editor",
+        "theme": "",
+        "overflow": false,
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "title": "Multiplas abas",
+        "text": "Alteracao feita na aba B com estado antigo.",
+        "activeTitle": "Multiplas abas",
+        "activeText": "Alteracao feita na aba B com estado antigo.",
+        "saveStatus": "SALVO 14:34",
+        "saveNotice": "cloud_done Texto salvo aqui, neste navegador. Sem internet, sem nuvem. ×",
+        "welcomeHidden": true,
+        "createHidden": true,
+        "editorMode": "flow",
+        "pageCount": 0,
+        "focusedLabel": "system_update Nova versão pronta. Suas notas estão salvas — pode recarregar sem "
+      },
+      "expectation": "Se a aba B persistir estado antigo, a alteracao da aba A desaparece."
+    }
+  },
+  "consoleEvents": [
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'start_url' ignored, should be same origin as document.",
+          "timestamp": 1779903253676.972,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'id' ignored, should be same origin as document.",
+          "timestamp": 1779903253677.066,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'scope' ignored. Start url should be within scope of scope URL.",
+          "timestamp": 1779903253677.097,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'url' ignored, should be within scope of the manifest.",
+          "timestamp": 1779903253677.132,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'url' of 'shortcut' not present.",
+          "timestamp": 1779903253677.164,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'url' ignored, should be within scope of the manifest.",
+          "timestamp": 1779903253677.194,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Log.entryAdded",
+      "params": {
+        "entry": {
+          "source": "other",
+          "level": "warning",
+          "text": "Manifest: property 'url' of 'shortcut' not present.",
+          "timestamp": 1779903253677.223,
+          "url": "http://127.0.0.1:8800/manifest.webmanifest?v=20260527-v99s"
+        }
+      }
+    },
+    {
+      "method": "Runtime.consoleAPICalled",
+      "params": {
+        "type": "warning",
+        "args": [
+          {
+            "type": "string",
+            "value": "goatcounter: not counting because of: localhost"
+          }
+        ],
+        "executionContextId": 35,
+        "timestamp": 1779903254955.993,
+        "stackTrace": {
+          "callFrames": [
+            {
+              "functionName": "warn",
+              "scriptId": "45",
+              "url": "https://gc.zgo.at/count.js",
+              "lineNumber": 79,
+              "columnNumber": 11
+            },
+            {
+              "functionName": "window.goatcounter.count",
+              "scriptId": "45",
+              "url": "https://gc.zgo.at/count.js",
+              "lineNumber": 142,
+              "columnNumber": 10
+            },
+            {
+              "functionName": "trackAnalyticsView",
+              "scriptId": "42",
+              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99s",
+              "lineNumber": 64,
+              "columnNumber": 23
+            },
+            {
+              "functionName": "",
+              "scriptId": "42",
+              "url": "http://127.0.0.1:8800/app.js?v=20260527-v99s",
+              "lineNumber": 74,
+              "columnNumber": 2
+            },
+            {
+              "functionName": "",
+              "scriptId": "131",
+              "url": "http://127.0.0.1:8800/index.html?faseC=1779903253447",
+              "lineNumber": 1564,
+              "columnNumber": 15
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "states": {
+    "texto_longo": {
+      "words": 2600,
+      "overflow_desktop": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_390": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_320": {
+        "sw": 320,
+        "cw": 320,
+        "over": false,
+        "delta": 0
+      },
+      "paged_info": "p. 1 / 1 · 2600 pal.",
+      "errors": []
+    },
+    "titulo_longo": {
+      "injected": true,
+      "errors": []
+    },
+    "palavra_longa_320": {
+      "overflow": {
+        "sw": 320,
+        "cw": 320,
+        "over": false,
+        "delta": 0
+      },
+      "errors": []
+    },
+    "vazios": {
+      "biblioteca": {
+        "text": "menu Escrevaral para escritoras e escritores brasileiros Manuscrito Biblioteca Prova de autoria Arquivo Academia Cronograma — headphones search search",
+        "overflow": {
+          "sw": 1366,
+          "cw": 1366,
+          "over": false,
+          "delta": 0
+        }
+      },
+      "arquivo": {
+        "text": "menu Escrevaral para escritoras e escritores brasileiros Manuscrito Biblioteca Prova de autoria Arquivo Academia Cronograma — headphones search search",
+        "overflow": {
+          "sw": 1366,
+          "cw": 1366,
+          "over": false,
+          "delta": 0
+        }
+      },
+      "autoria": {
+        "text": "menu Escrevaral para escritoras e escritores brasileiros Manuscrito Biblioteca Prova de autoria Arquivo Academia Cronograma — headphones search search",
+        "overflow": {
+          "sw": 1366,
+          "cw": 1366,
+          "over": false,
+          "delta": 0
+        }
+      },
+      "cronograma": {
+        "text": "menu Escrevaral para escritoras e escritores brasileiros Manuscrito Biblioteca Prova de autoria Arquivo Academia Cronograma — headphones search search",
+        "overflow": {
+          "sw": 1366,
+          "cw": 1366,
+          "over": false,
+          "delta": 0
+        }
+      },
+      "academia": {
+        "text": "menu Escrevaral para escritoras e escritores brasileiros Manuscrito Biblioteca Prova de autoria Arquivo Academia Cronograma — headphones search search",
+        "overflow": {
+          "sw": 1366,
+          "cw": 1366,
+          "over": false,
+          "delta": 0
+        }
+      }
+    },
+    "dark_reload": {
+      "btn": "Mudar para Alvorada",
+      "before": {
+        "html": "",
+        "body": "",
+        "ls_theme": null
+      },
+      "after": {
+        "html": "",
+        "body": "",
+        "ls_theme": null,
+        "bg_var": ""
+      },
+      "overflow_mobile": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      },
+      "errors": []
+    },
+    "modo_pagina_avancado": {
+      "state": {
+        "counter_text": "p. 1 / 1 · 1120 pal.",
+        "counter_clickable": false,
+        "nav_btn_count": 0,
+        "page_btn_count": 1
+      },
+      "counter_click": "clicked:p. 1 / 1 · 1120 pal.",
+      "after_click": {
+        "input_appeared": true
+      },
+      "exit_candidates": [
+        {
+          "label": "Sair do modo foco",
+          "text": "fullscreen_exit"
+        },
+        {
+          "label": "Escrever sem distração",
+          "text": "edit_note"
+        }
+      ],
+      "after_escape": "flex",
+      "errors": []
+    },
+    "multiplas_notas": {
+      "count": 3,
+      "switched": true,
+      "A_preserved": false,
+      "after_reload": 3,
+      "errors": []
+    },
+    "busca_sem_resultado": {
+      "result_count": 1,
+      "empty_msg": "Nada encontrado no acervo."
+    },
+    "biblioteca_nota_sem_selecao": {
+      "view_active": true,
+      "has_input": true,
+      "input_val": "",
+      "empty_state": false,
+      "word_count": 0,
+      "text": "Manuscrito sem título Selecione uma palavra no manuscrito para ler seu significado, sinônimos e uso — sem sair daqui. search Saudade é uma palavra única da língua portuguesa. dictionary terra Substant"
+    },
+    "autoria_sessao": {
+      "state": {
+        "integrity": "34%",
+        "wordcount": "19",
+        "organic": "27",
+        "chip_hidden": false
+      },
+      "errors": []
+    },
+    "rimalab": {
+      "tab": true,
+      "empty": {
+        "has_input": true,
+        "results": false,
+        "text": "RimaLab Rima, ritmo e ouvido para o verso Um laboratório local para poema, letra e verso falado. A ferramenta conta sílabas poéticas até a última tôni"
+      },
+      "results": {
+        "count": 0,
+        "sample": null
+      },
+      "errors": []
+    },
+    "espelho_voz": {
+      "tab": "tab-click",
+      "state": {
+        "analyze_btn": "edit_note\n                    ",
+        "mic_btn": null,
+        "has_text": false,
+        "view_text": ""
+      },
+      "errors": []
+    },
+    "offline": {
+      "badge": {
+        "text": "cloud_offSem rede — escrita co",
+        "hidden": false
+      },
+      "nav_ok": true,
+      "errors": []
+    },
+    "mobile_keyboard": {
+      "height_before": 844,
+      "height_after": 844,
+      "compressed": false,
+      "overflow": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "aria_pos_fix": {
+      "aria_issues": [],
+      "btns_no_name": 0,
+      "tzdErros": 0
+    }
+  },
+  "screenshots": [
+    "c01-texto-longo-desktop.png",
+    "c01-texto-longo-390.png",
+    "c01-texto-longo-320.png",
+    "c01-modo-pagina-texto-longo.png",
+    "c02-titulo-longo-desktop.png",
+    "c02-titulo-longo-390.png",
+    "c02-titulo-longo-320.png",
+    "c03-palavra-longa-320.png",
+    "c04-vazio-biblioteca.png",
+    "c04-vazio-arquivo.png",
+    "c04-vazio-autoria.png",
+    "c04-vazio-cronograma.png",
+    "c04-vazio-academia.png",
+    "c05-dark-antes-reload.png",
+    "c05-dark-apos-reload.png",
+    "c05-dark-mobile-390.png",
+    "c06-modo-pagina-multi.png",
+    "c06-counter-click.png",
+    "c06-apos-escape.png",
+    "c06-pagina-320.png",
+    "c06-pagina-390.png",
+    "c07-multiplas-notas.png",
+    "c08-busca-sem-resultado.png",
+    "c09-biblioteca-nota-sem-selecao.png",
+    "c10-autoria-com-sessao.png",
+    "c11-rimalab-aba.png",
+    "c11-rimalab-busca-amor.png",
+    "c12-espelho-voz-inicial.png",
+    "c12-espelho-voz-apos-analise.png",
+    "c13-offline-badge.png",
+    "c13-offline-navegacao.png",
+    "c14-mobile-antes-foco.png",
+    "c14-mobile-apos-foco.png"
+  ],
+  "errors": {}
+}
