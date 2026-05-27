@@ -84,6 +84,7 @@ function setView(viewName, options = {}) {
   exitFocusMode();
   nav.classList.remove("is-open");
   closeBandeja();
+  if (welcomeOverlay && !welcomeOverlay.hidden) closeWelcome();
 
   document.querySelectorAll("[data-view-panel]").forEach((panel) => {
     panel.classList.toggle("is-active", panel.dataset.viewPanel === viewName);
@@ -131,6 +132,7 @@ function openBandeja() {
   if (!bandeja) return;
   const printBtn = bandeja.querySelector("[data-bandeja-print]");
   if (printBtn) printBtn.disabled = !getActiveManuscript();
+  if (typeof hideSaveHint === "function") hideSaveHint();
   bandeja.removeAttribute("hidden");
   requestAnimationFrame(() => bandeja.classList.add("is-open"));
   if (btn) btn.setAttribute("aria-expanded", "true");
@@ -1752,6 +1754,10 @@ document.addEventListener("keydown", (event) => {
 
   if (event.key === "Escape" && !createNoteOverlay.hidden) {
     closeCreateNote();
+  }
+
+  if (event.key === "Escape" && welcomeOverlay && !welcomeOverlay.hidden) {
+    closeWelcome();
   }
 });
 

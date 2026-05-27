@@ -1,0 +1,735 @@
+{
+  "viewports": {
+    "desktop-1366": {
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "overflow": false,
+      "delta": 0
+    },
+    "notebook-1024": {
+      "scrollWidth": 1024,
+      "clientWidth": 1024,
+      "overflow": false,
+      "delta": 0
+    },
+    "tablet-768": {
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflow": false,
+      "delta": 0
+    },
+    "mobile-430": {
+      "scrollWidth": 430,
+      "clientWidth": 430,
+      "overflow": false,
+      "delta": 0
+    },
+    "mobile-390": {
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false,
+      "delta": 0
+    },
+    "mobile-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0
+    }
+  },
+  "console_errors": [],
+  "accessibility": {
+    "total": 179,
+    "missing_count": 0,
+    "missing": []
+  },
+  "aria_states": {
+    "aria_pressed_count": 7,
+    "aria_expanded_count": 10,
+    "issues": []
+  },
+  "modals": {
+    "no_modal_on_initial_escape": false
+  },
+  "keyboard": {
+    "tab_moves_focus": true,
+    "focus_after_6_tabs": {
+      "tag": "A",
+      "id": "",
+      "cls": "statusbar-social statusbar-social--masto",
+      "outline": "rgb(16, 16, 16) auto 1px",
+      "outlineWidth": "1px",
+      "boxShadow": false
+    },
+    "focusable_elements_count": 203
+  },
+  "themes": {
+    "alvorada": {
+      "accessible": true,
+      "overflow_desktop": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "overflow": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "overflow": false,
+        "delta": 0
+      }
+    },
+    "vereda-scriptorium": {
+      "accessible": true,
+      "overflow_desktop": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "overflow": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "overflow": false,
+        "delta": 0
+      }
+    },
+    "cerrado-dark": {
+      "accessible": true,
+      "overflow_desktop": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "overflow": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "overflow": false,
+        "delta": 0
+      }
+    },
+    "mata-dark": {
+      "accessible": true,
+      "overflow_desktop": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "overflow": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "overflow": false,
+        "delta": 0
+      }
+    }
+  },
+  "screenshots": [
+    "desktop-1366-alvorada.png",
+    "notebook-1024-alvorada.png",
+    "tablet-768-alvorada.png",
+    "mobile-430-alvorada.png",
+    "mobile-390-alvorada.png",
+    "mobile-320-alvorada.png",
+    "theme-alvorada-desktop.png",
+    "theme-alvorada-mobile-390.png",
+    "theme-vereda-scriptorium-desktop.png",
+    "theme-vereda-scriptorium-mobile-390.png",
+    "theme-cerrado-dark-desktop.png",
+    "theme-cerrado-dark-mobile-390.png",
+    "theme-mata-dark-desktop.png",
+    "theme-mata-dark-mobile-390.png",
+    "320-home-detail.png",
+    "320-editor.png",
+    "320-biblioteca.png",
+    "320-academia.png",
+    "320-arquivo.png",
+    "320-rimalab.png"
+  ],
+  "buttons_inventory": [
+    {
+      "text": "Recarregar agora",
+      "ariaLabel": "",
+      "id": "update-reload-btn",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "close",
+      "ariaLabel": "Fechar aviso de atualização",
+      "id": "update-dismiss-btn",
+      "cls": "icon-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "menu",
+      "ariaLabel": "Abrir navegação",
+      "id": "",
+      "cls": "icon-button mobile-only",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Manuscrito",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab is-active",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Biblioteca",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Prova de autoria",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Arquivo",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Academia",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "Cronograma",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tab",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "—",
+      "ariaLabel": "Indicador de autoria",
+      "id": "",
+      "cls": "proof-chip",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "headphones",
+      "ariaLabel": "Sons ambiente",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "search",
+      "ariaLabel": "Buscar no acervo",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "download\n            Instalar",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "install-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "table_bar",
+      "ariaLabel": "Fundo de mesa",
+      "id": "",
+      "cls": "icon-button desk-bg-toggle",
+      "ariaPressed": "false",
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "dark_mode",
+      "ariaLabel": "Mudar para Vereda",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": "false",
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "edit_note",
+      "ariaLabel": "Escrever sem distração",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": "false",
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "right_panel_open",
+      "ariaLabel": "Abrir acervo",
+      "id": "",
+      "cls": "panel-rail panel-rail-left",
+      "ariaPressed": null,
+      "ariaExpanded": "true",
+      "disabled": false
+    },
+    {
+      "text": "left_panel_close",
+      "ariaLabel": "Ocultar acervo",
+      "id": "",
+      "cls": "panel-toggle panel-toggle-left",
+      "ariaPressed": null,
+      "ariaExpanded": "true",
+      "disabled": false
+    },
+    {
+      "text": "add",
+      "ariaLabel": "Nova nota",
+      "id": "",
+      "cls": "icon-button sidebar-new-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "addCriar primeira nota",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "tree-row tree-empty-row",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "auto_stories\n              Bibliotecagra",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "nav-row",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "fingerprint\n              Prova de autor",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "nav-row",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "inventory_2\n              Arquivonotas e",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "nav-row",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "school\n              Academiaguias e fer",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "nav-row",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "swap_horiz",
+      "ariaLabel": "Trocar o guia de lado",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "view_sidebar",
+      "ariaLabel": "Mostrar guia",
+      "id": "",
+      "cls": "icon-button",
+      "ariaPressed": null,
+      "ariaExpanded": "false",
+      "disabled": false
+    },
+    {
+      "text": "",
+      "ariaLabel": "Ajustar largura do guia",
+      "id": "",
+      "cls": "split-resizer",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "view_sidebar Mostrar guia",
+      "ariaLabel": "Mostrar guia",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": "false",
+      "disabled": false
+    },
+    {
+      "text": "menu_book\n                    Ler",
+      "ariaLabel": "Ler como leitor",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "delete",
+      "ariaLabel": "Apagar esta nota",
+      "id": "",
+      "cls": "icon-button editor-delete-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_bold",
+      "ariaLabel": "Negrito",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_italic",
+      "ariaLabel": "Itálico",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_align_left",
+      "ariaLabel": "Esquerda",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_align_center",
+      "ariaLabel": "Centralizar",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_align_right",
+      "ariaLabel": "Direita",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_align_justify",
+      "ariaLabel": "Justificar",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "more_horiz",
+      "ariaLabel": "Mostrar ferramentas de formato",
+      "id": "",
+      "cls": "fmt-btn fmt-editorial-toggle",
+      "ariaPressed": null,
+      "ariaExpanded": "false",
+      "disabled": false
+    },
+    {
+      "text": "article\n                      Página",
+      "ariaLabel": "Ver texto em página",
+      "id": "",
+      "cls": "editor-view-btn",
+      "ariaPressed": "false",
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "format_color_text",
+      "ariaLabel": "Classes gramaticais",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": "false",
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "insert_page_break",
+      "ariaLabel": "Quebra de página",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "content_copy",
+      "ariaLabel": "Copiar texto",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "file_download",
+      "ariaLabel": "Baixar para Word",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "print",
+      "ariaLabel": "Imprimir",
+      "id": "",
+      "cls": "fmt-btn",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "history",
+      "ariaLabel": "Ver sessões anteriores",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": "false",
+      "disabled": false
+    },
+    {
+      "text": "add_circle\n                    Nova sess",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "download\n                  Guardar cópia",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "primary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "link\n                    Carimbar na blo",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": true
+    },
+    {
+      "text": "history_edu\n                  Salvar ver",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "add\n                    Nova nota",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "create-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "inventory_2\n          Todos\n          0",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "archive-filter is-active",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "edit_note\n                      Abrir no",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "primary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "article\n                        Texto",
+      "ariaLabel": "Baixar como texto simples (.txt)",
+      "id": "",
+      "cls": "ghost-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "markdown\n                        Markdow",
+      "ariaLabel": "Baixar em Markdown (.md)",
+      "id": "",
+      "cls": "ghost-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "html\n                        HTML",
+      "ariaLabel": "Baixar como página HTML com CSS de impressão (.html)",
+      "id": "",
+      "cls": "ghost-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "description\n                        Word",
+      "ariaLabel": "Baixar para Word e LibreOffice (.docx)",
+      "id": "",
+      "cls": "ghost-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "file_save\n                    Guardar có",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "folder_open\n                        Esco",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": false
+    },
+    {
+      "text": "save\n                        Salvar agor",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": true
+    },
+    {
+      "text": "pause\n                        Pausar",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": true
+    },
+    {
+      "text": "link_off\n                        Esquece",
+      "ariaLabel": "",
+      "id": "",
+      "cls": "secondary-button",
+      "ariaPressed": null,
+      "ariaExpanded": null,
+      "disabled": true
+    }
+  ],
+  "sections_overflow": {
+    "home-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0
+    },
+    "editor-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0,
+      "navigated": true
+    },
+    "biblioteca-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0,
+      "navigated": false
+    },
+    "academia-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0,
+      "navigated": false
+    },
+    "arquivo-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0,
+      "navigated": false
+    },
+    "rimalab-320": {
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "overflow": false,
+      "delta": 0,
+      "navigated": false
+    }
+  }
+}

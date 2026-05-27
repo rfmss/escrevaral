@@ -1,0 +1,424 @@
+{
+  "flows": {
+    "criar_escrever_formatar": {
+      "created": true,
+      "text_visible": true,
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "console_errors": 129
+    },
+    "undo_redo": {
+      "undo": true,
+      "redo": true,
+      "before": "Palavra a ser desfeita",
+      "after_z": "Palavra a ser desfeit",
+      "after_y": "Palavra a ser desfeita"
+    },
+    "paste_rich": {
+      "method": "dispatched",
+      "result": {
+        "text": "Texto negrito com itálico e link.",
+        "has_strong": false,
+        "has_em": false,
+        "html_snippet": "Texto negrito com itálico e link."
+      }
+    },
+    "guia": {
+      "opened": "already-visible:editor-split is-template-colla",
+      "swap": false,
+      "overflow_desktop": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_mobile_320": {
+        "sw": 320,
+        "cw": 320,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_mobile_390": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "modo_pagina": {
+      "activated": true,
+      "overflow_desktop": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_320": {
+        "sw": 320,
+        "cw": 320,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_390": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      },
+      "page_nav": {
+        "nav": null,
+        "counter": "p. 1 / 1 · 180 pal."
+      }
+    },
+    "biblioteca_busca": {
+      "query": "saudade",
+      "results": 405
+    },
+    "biblioteca": {
+      "nav_ok": true,
+      "empty_state": "menu\n          \n          \n          \n            Escrevaral\n            para escritoras e escritore",
+      "search_found": true
+    },
+    "arquivo": {
+      "state": {
+        "items": 0,
+        "filters": 5,
+        "first_item": null
+      },
+      "open_ok": false
+    },
+    "academia": {
+      "state": {
+        "view": true,
+        "tabs": 0,
+        "cards": 0,
+        "text": "menu\n          \n          \n          \n            Escrevaral\n            para escritoras e escritores brasileiros\n          \n        \n\n        \n          Manuscrito\n          Biblioteca\n          Prov"
+      },
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "rimalab": {
+      "state": {
+        "view": false,
+        "input": false,
+        "text": "not found"
+      },
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "voz_mic_denied": {
+      "clicked": false,
+      "state_after": null
+    },
+    "espelho_voz": {
+      "nav": true,
+      "state": {
+        "view": false,
+        "mic_btn": true,
+        "mic_label": null,
+        "text": "not found"
+      },
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "mic_errors": []
+    },
+    "autoria": {
+      "nav": true,
+      "state": {
+        "view": true,
+        "sessions": 3,
+        "hash_chip": true,
+        "export_btn": true,
+        "text": "menu\n          \n          \n          \n            Escrevaral\n            para escritoras e escritores brasileiros\n          \n        \n\n        \n          Manuscrito\n          Biblioteca\n          Prov"
+      },
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      },
+      "overflow_mobile": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "cronograma": {
+      "state": {
+        "view": true,
+        "new_session_btn": false,
+        "sessions": 3,
+        "text": "menu\n          \n          \n          \n            Escrevaral\n            para escritoras e escritores brasileiros\n          \n        \n\n        \n          Manuscrito\n          Biblioteca\n          Prov"
+      },
+      "overflow": {
+        "sw": 1366,
+        "cw": 1366,
+        "over": false,
+        "delta": 0
+      }
+    },
+    "persistencia": {
+      "ls_saved": {
+        "saved": false
+      },
+      "text_after_reload": "Texto de persistência — deve sobreviver ao reload completo da página.",
+      "persisted": true,
+      "theme_after_reload": {
+        "html_class": ""
+      }
+    },
+    "mobile_390": {
+      "editor_overflow": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      },
+      "sections": {
+        "academia": {
+          "sw": 390,
+          "cw": 390,
+          "over": false,
+          "delta": 0
+        },
+        "arquivo": {
+          "sw": 390,
+          "cw": 390,
+          "over": false,
+          "delta": 0
+        },
+        "autoria": {
+          "sw": 390,
+          "cw": 390,
+          "over": false,
+          "delta": 0
+        }
+      }
+    },
+    "dark_mode_reload": {
+      "theme_applied": {
+        "html_class": "",
+        "body_class": ""
+      },
+      "theme_after_reload": {
+        "html_class": "",
+        "body_class": ""
+      },
+      "mobile_overflow": {
+        "sw": 390,
+        "cw": 390,
+        "over": false,
+        "delta": 0
+      }
+    }
+  },
+  "screenshots": [
+    "01-initial.png",
+    "02-note-created.png",
+    "03-typed.png",
+    "04-bold.png",
+    "undo-redo.png",
+    "paste-rich.png",
+    "guia-antes.png",
+    "guia-aberto.png",
+    "guia-mobile-320.png",
+    "guia-mobile-390.png",
+    "modo-pagina-desktop.png",
+    "modo-pagina-320.png",
+    "modo-pagina-390.png",
+    "biblioteca-sem-nota.png",
+    "biblioteca-busca-saudade.png",
+    "biblioteca-com-texto-ativo.png",
+    "arquivo-com-nota.png",
+    "arquivo-nota-aberta.png",
+    "academia-desktop.png",
+    "academia-mobile-390.png",
+    "rimalab-inicial.png",
+    "espelho-voz-inicial.png",
+    "espelho-voz-mic-negado.png",
+    "autoria-inicial.png",
+    "autoria-mobile-390.png",
+    "cronograma-desktop.png",
+    "persistencia-apos-reload.png",
+    "mobile-390-welcome.png",
+    "mobile-390-editor.png",
+    "mobile-390-com-texto.png",
+    "mobile-390-academia.png",
+    "mobile-390-arquivo.png",
+    "mobile-390-autoria.png",
+    "mobile-390-bandeja-aberta.png",
+    "dark-modo-aplicado.png",
+    "dark-apos-reload.png",
+    "dark-mobile-390.png"
+  ],
+  "console_errors_per_flow": {
+    "criar_escrever": [
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization",
+      "Cannot access 'ms' before initialization"
+    ],
+    "undo_redo": [],
+    "paste_rich": [],
+    "guia": [],
+    "modo_pagina": [],
+    "biblioteca": [],
+    "arquivo": [],
+    "academia": [],
+    "rimalab": [],
+    "espelho_voz": [],
+    "autoria": [],
+    "cronograma": [],
+    "persistencia": [],
+    "mobile_390": [],
+    "dark_reload": []
+  }
+}

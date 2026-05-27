@@ -14,6 +14,10 @@
     display: none;
   }
 
+  .topbar-search label {
+    display: none;
+  }
+
   /* Topbar: Vereda (tema) vira só ícone */
   .topbar [data-action="toggle-theme-menu"] > span:not(.material-symbols-outlined) {
     display: none;

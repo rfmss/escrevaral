@@ -622,8 +622,14 @@ writingArea.addEventListener("paste", (e) => {
   e.preventDefault();
   const cbd = e.clipboardData || window.clipboardData;
   const text = cbd ? cbd.getData("text/plain") : "";
+  const html = cbd ? cbd.getData("text/html") : "";
+  const hadExternalMarkup = /<\/?[a-z][\s\S]*>/i.test(html);
   insertPlainTextAtSelection(text);
   recordClipboardProof("paste");
+  if (hadExternalMarkup && saveStatus) {
+    saveStatus.textContent = "Texto colado sem formatação externa";
+    saveStatus.title = "O Escrevaral manteve só as palavras para preservar a folha limpa.";
+  }
 });
 writingArea.addEventListener("cut",   () => recordClipboardProof("cut"));
 writingArea.addEventListener("mouseup", () => captureSelectedWord(true));

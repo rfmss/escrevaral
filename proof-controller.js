@@ -166,6 +166,7 @@ function recordClipboardProof(type) {
 
 function renderProofView() {
   const session = getActiveProofSession();
+  const ms = getActiveManuscript();
 
   if (!session) {
     proofSessionName.textContent = "Nenhum manuscrito ativo";
@@ -244,7 +245,6 @@ function renderProofView() {
   }
 
   // Critérios mínimos
-  const ms = getActiveManuscript();
   const hasText = (ms?.text?.trim().length || 0) > 0;
   const hasEvents = summary.organicEvents > 0;
   const criteriaEl = document.querySelector("[data-proof-criteria]");

@@ -31,6 +31,20 @@
   display: none;
 }
 
+@media (max-width: 390px) {
+  .update-banner {
+    padding: 8px 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .update-banner-text {
+    flex-basis: 100%;
+  }
+  .update-banner-text span { font-size: 12px; }
+  .update-banner-text small { display: none; }
+  .update-banner #update-reload-btn { font-size: 11px; padding: 4px 10px; }
+}
+
 .app-shell {
   width: 100vw;
   max-width: 100vw;
@@ -206,6 +220,7 @@ html {
   width: 0;
   opacity: 0;
   pointer-events: none;
+  visibility: hidden;
   display: flex;
   align-items: center;
   gap: 7px;
@@ -222,6 +237,7 @@ html {
   width: min(300px, 32vw);
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
   padding: 8px 11px;
 }
 
