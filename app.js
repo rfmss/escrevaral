@@ -83,14 +83,19 @@ function setView(viewName, options = {}) {
   shell.dataset.view = viewName;
   exitFocusMode();
   nav.classList.remove("is-open");
+  closeBandeja();
 
   document.querySelectorAll("[data-view-panel]").forEach((panel) => {
     panel.classList.toggle("is-active", panel.dataset.viewPanel === viewName);
   });
 
   document.querySelectorAll("[data-view-target]").forEach((control) => {
-    control.classList.toggle("is-active", control.dataset.viewTarget === viewName);
+    const isActive = control.dataset.viewTarget === viewName;
+    control.classList.toggle("is-active", isActive);
+    control.setAttribute("aria-current", isActive ? "page" : "false");
   });
+
+  updateDockIndicator();
 
   if (viewName === "cronograma") renderCronograma();
 
@@ -116,6 +121,62 @@ function setView(viewName, options = {}) {
   }
 
   trackAnalyticsView(viewName);
+}
+
+// ── NAVEGAÇÃO MÓVEL: bandeja e indicador ─────────────────────────────────
+
+function openBandeja() {
+  const bandeja = document.getElementById("mobile-bandeja");
+  const btn = document.querySelector("[data-action='toggle-bandeja']");
+  if (!bandeja) return;
+  const printBtn = bandeja.querySelector("[data-bandeja-print]");
+  if (printBtn) printBtn.disabled = !getActiveManuscript();
+  bandeja.removeAttribute("hidden");
+  requestAnimationFrame(() => bandeja.classList.add("is-open"));
+  if (btn) btn.setAttribute("aria-expanded", "true");
+  const sheet = bandeja.querySelector(".bandeja-sheet");
+  if (sheet) requestAnimationFrame(() => sheet.focus());
+}
+
+function closeBandeja() {
+  const bandeja = document.getElementById("mobile-bandeja");
+  const btn = document.querySelector("[data-action='toggle-bandeja']");
+  if (!bandeja || bandeja.hidden) return;
+  bandeja.classList.remove("is-open");
+  if (btn) {
+    btn.setAttribute("aria-expanded", "false");
+    btn.focus();
+  }
+  setTimeout(() => { if (!bandeja.classList.contains("is-open")) bandeja.hidden = true; }, 320);
+}
+
+function toggleBandeja() {
+  const bandeja = document.getElementById("mobile-bandeja");
+  if (!bandeja) return;
+  if (bandeja.hidden) openBandeja(); else closeBandeja();
+}
+
+function updateDockIndicator() {
+  const dock = document.getElementById("mobile-dock");
+  if (!dock || window.innerWidth >= 820) return;
+  const indicator = dock.querySelector(".dock-indicator");
+  const activeItem = dock.querySelector(".dock-item.is-active:not(.dock-mais-btn)");
+  if (!indicator) return;
+  if (!activeItem) { indicator.style.opacity = "0"; return; }
+  indicator.style.opacity = "1";
+  const dockRect = dock.getBoundingClientRect();
+  const itemRect = activeItem.getBoundingClientRect();
+  if (window.innerWidth >= 600) {
+    indicator.style.top    = (itemRect.top  - dockRect.top)  + "px";
+    indicator.style.height = itemRect.height + "px";
+    indicator.style.left   = "";
+    indicator.style.width  = "";
+  } else {
+    indicator.style.left   = (itemRect.left - dockRect.left) + "px";
+    indicator.style.width  = itemRect.width + "px";
+    indicator.style.top    = "";
+    indicator.style.height = "";
+  }
 }
 
 function applyPanelLayout() {
@@ -1312,6 +1373,19 @@ const ACTION_HANDLERS = {
   "toggle-global-search":    () => toggleGlobalSearch(),
   "toggle-grammar-color":    () => toggleGrammarColor(),
   "toggle-nav":              () => nav.classList.toggle("is-open"),
+  "toggle-bandeja":          () => toggleBandeja(),
+  "close-bandeja":           () => closeBandeja(),
+  "open-backup-from-bandeja": () => {
+    closeBandeja();
+    setView("arquivo", { updateRoute: true });
+    setTimeout(() => {
+      const zone = document.querySelector(".archive-protect-zone");
+      if (!zone) return;
+      zone.scrollIntoView({ behavior: "smooth", block: "start" });
+      const det = zone.querySelector("details.archive-security-details");
+      if (det && !det.open) det.open = true;
+    }, 200);
+  },
   "toggle-audio-player":     () => toggleAudioPanel(),
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
@@ -1451,6 +1525,11 @@ document.addEventListener("click", (event) => {
   if (cronoShortcutOpen && !event.target.closest(".cronograma-month-picker")) toggleCronoDateShortcut(false);
   if (nav.classList.contains("is-open") && !nav.contains(event.target)) nav.classList.remove("is-open");
 
+  // Fechar bandeja ao clicar em item dentro dela (view-target já fecha via setView; aqui cobre actions)
+  if ((actionTarget || viewTarget) && event.target.closest(".bandeja-nav")) {
+    setTimeout(closeBandeja, 80);
+  }
+
   if (manuscriptDeleteTarget) { event.preventDefault(); event.stopPropagation(); deleteManuscript(manuscriptDeleteTarget.dataset.manuscriptDelete); return; }
   if (manuscriptTarget)  { event.preventDefault(); setActiveManuscript(manuscriptTarget.dataset.manuscriptId); return; }
   if (archivePinTarget)  { event.preventDefault(); event.stopPropagation(); togglePinnedManuscript(archivePinTarget.dataset.archivePin); return; }
@@ -1560,8 +1639,9 @@ document.addEventListener("keydown", (event) => {
     if (event.key === "PageUp")  { event.preventDefault(); navigatePage(-1); return; }
   }
 
-  if (event.key === "Escape" && nav.classList.contains("is-open")) {
-    nav.classList.remove("is-open");
+  if (event.key === "Escape") {
+    if (nav.classList.contains("is-open")) nav.classList.remove("is-open");
+    closeBandeja();
   }
 
   if (event.key === "Escape" && shell.classList.contains("is-focus")) {
@@ -1622,6 +1702,7 @@ focusSettingControls.forEach((control) => {
 window.addEventListener("online", updateConnectionStatus);
 window.addEventListener("offline", updateConnectionStatus);
 window.addEventListener("hashchange", () => setView(getViewFromRoute()));
+window.addEventListener("resize", updateDockIndicator);
 contentStage.addEventListener("scroll", () => requestAnimationFrame(updateAcademyParallax));
 
 window.addEventListener("beforeinstallprompt", (event) => {

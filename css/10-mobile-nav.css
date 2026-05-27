@@ -1,0 +1,326 @@
+/* ── 10-mobile-nav.css ───────────────────────────────────────────────────
+   Dock inferior (≤599px) · Rail lateral (600–819px) · Desktop: oculto.
+   ≥820px usa a navegação existente de tabs + sidebar.
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ─── Token de altura do topbar ─────────────────────────────────── */
+:root { --topbar-h: 53px; } /* logo 52px + 1px border-bottom */
+
+/* ─── Base: dock oculto em desktop ──────────────────────────────── */
+/* .mobile-bandeja usa o atributo [hidden] para controle de visibilidade;
+   não deve ter display:none no base, senão removeAttribute("hidden") não surte efeito. */
+.mobile-dock { display: none; }
+
+/* ══════════════════════════════════════════════════════════════════
+   PHONE — BOTTOM DOCK  (≤599px)
+══════════════════════════════════════════════════════════════════ */
+@media (max-width: 599px) {
+
+  /* Tabs desktop somem */
+  .module-tabs { display: none !important; }
+
+  /* Sidebar e controles de painel somem — dock navega */
+  .sidebar,
+  .panel-rail,
+  .panel-toggle { display: none !important; }
+
+  /* brand-lockup: sem largura mínima fixa no phone */
+  .brand-lockup { min-width: 0; }
+
+  /* Painéis scrolláveis ganham padding inferior para o dock não cobrir */
+  .view { padding-bottom: calc(60px + env(safe-area-inset-bottom)) !important; }
+
+  /* ── DOCK ─────────────────────────────────────────────────────── */
+  .mobile-dock {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: calc(60px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--topbar-bg);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border-top: 1px solid var(--line);
+    z-index: 25;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .dock-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    padding: 6px 4px 4px;
+    transition: color var(--motion-quick);
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .dock-item .material-symbols-outlined {
+    font-size: 22px;
+    font-variation-settings: 'FILL' 0, 'wght' 300;
+    transition: font-variation-settings 160ms ease, color 160ms ease;
+    line-height: 1;
+  }
+
+  .dock-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .dock-item.is-active            { color: var(--primary); }
+  .dock-item.is-active .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 500;
+  }
+
+  /* Itens exclusivos do rail ficam ocultos no dock */
+  .dock-rail-only { display: none !important; }
+
+  /* ── INDICADOR DESLIZANTE (barra no topo do item ativo) ─────── */
+  .dock-indicator {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 0 0 2px 2px;
+    pointer-events: none;
+    transition: left 160ms ease, width 160ms ease, opacity 160ms ease;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   TABLET — RAIL LATERAL  (600–819px)
+══════════════════════════════════════════════════════════════════ */
+@media (min-width: 600px) and (max-width: 819px) {
+
+  .module-tabs { display: none !important; }
+
+  .sidebar,
+  .panel-rail,
+  .panel-toggle { display: none !important; }
+
+  .brand-lockup { min-width: 0; }
+
+  /* Workspace recua para o rail não cobrir conteúdo */
+  .workspace { margin-left: 72px; }
+
+  /* ── RAIL ─────────────────────────────────────────────────────── */
+  .mobile-dock {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: var(--topbar-h);
+    bottom: 0;
+    width: 72px;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    border-right: 1px solid var(--line);
+    z-index: 15;
+    align-items: stretch;
+    padding-top: 8px;
+    overflow: hidden;
+  }
+
+  .dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    padding: 12px 6px;
+    transition: color var(--motion-quick), background var(--motion-quick);
+    font-family: inherit;
+    width: 100%;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .dock-item .material-symbols-outlined {
+    font-size: 22px;
+    font-variation-settings: 'FILL' 0, 'wght' 300;
+    transition: font-variation-settings 160ms ease;
+    line-height: 1;
+  }
+
+  .dock-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .dock-item.is-active {
+    color: var(--primary);
+    background: var(--surface-low);
+  }
+  .dock-item.is-active .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 500;
+  }
+
+  /* No rail "Mais" não existe — todos os destinos ficam visíveis */
+  .dock-mais-btn { display: none !important; }
+
+  /* Itens de rail aparecem */
+  .dock-rail-only { display: flex !important; }
+
+  /* ── INDICADOR VERTICAL (barra na borda direita do item ativo) ─ */
+  .dock-indicator {
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 3px;
+    background: var(--primary);
+    border-radius: 3px 0 0 3px;
+    pointer-events: none;
+    transition: top 160ms ease, height 160ms ease, opacity 160ms ease;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   DESKTOP (≥820px) — navegação existente, ocultar móvel
+══════════════════════════════════════════════════════════════════ */
+@media (min-width: 820px) {
+  .mobile-dock    { display: none !important; }
+  /* bandeja usa [hidden] + pointer-events:none; forçar none em desktop também */
+  .mobile-bandeja { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PRINT
+══════════════════════════════════════════════════════════════════ */
+@media print {
+  .mobile-dock,
+  .mobile-bandeja { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BANDEJA (bottom sheet de opções adicionais)
+══════════════════════════════════════════════════════════════════ */
+
+/* Container: ocupa a tela inteira, invisível por padrão */
+.mobile-bandeja {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+.mobile-bandeja:not([hidden]) {
+  pointer-events: auto;
+}
+
+/* Scrim (fundo escurecido) */
+.bandeja-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-bg);
+  opacity: 0;
+  transition: opacity var(--motion-quick);
+  cursor: pointer;
+}
+.mobile-bandeja.is-open .bandeja-scrim { opacity: 1; }
+
+/* Folha que sobe de baixo */
+.bandeja-sheet {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  border-radius: 16px 16px 0 0;
+  padding: 12px 16px calc(20px + env(safe-area-inset-bottom));
+  transform: translateY(100%);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+  outline: none;
+}
+.mobile-bandeja.is-open .bandeja-sheet { transform: translateY(0); }
+
+/* Alça visual */
+.bandeja-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--surface-high);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+/* Botão fechar (canto superior direito) */
+.bandeja-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  border-radius: 50%;
+  transition: background var(--motion-quick);
+}
+.bandeja-close:hover,
+.bandeja-close:focus-visible { background: var(--surface-low); }
+.bandeja-close .material-symbols-outlined { font-size: 20px; }
+
+/* Lista de itens */
+.bandeja-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bandeja-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--soft-ink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 8px;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+  transition: background var(--motion-quick), color var(--motion-quick);
+  -webkit-tap-highlight-color: transparent;
+}
+.bandeja-item:hover,
+.bandeja-item:focus-visible {
+  background: var(--surface-low);
+  color: var(--ink);
+}
+.bandeja-item .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.bandeja-item:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.bandeja-item:disabled .material-symbols-outlined { color: var(--muted); }

@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v310";
-const ASSET_VERSION = "20260526-logov2";
+const CACHE_NAME = "vereda-offline-v311";
+const ASSET_VERSION = "20260526-mobilenav";
 
 const CORE_ASSETS = [
   "./",
@@ -21,6 +21,7 @@ const CORE_ASSETS = [
   `./css/04-analysis-academy.css?v=${ASSET_VERSION}`,
   `./css/06-academy-tools.css?v=${ASSET_VERSION}`,
   `./css/08-responsive.css?v=${ASSET_VERSION}`,
+  `./css/10-mobile-nav.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,
