@@ -277,11 +277,19 @@ let _currentVisiblePage = 1;
 
 let _totalPageCount = 0;
 
+const _pageCountLabel  = document.querySelector("[data-page-count-label]");
+const _pageJumpInput   = document.querySelector("[data-page-jump-input]");
+
 function _pageStatusText(pageNum, total) {
   const page = pagedEditor?.querySelector(`.manuscript-page[data-page="${pageNum}"]`);
   const pageWords = page ? countWords(page.querySelector(".page-body")?.innerText || "") : 0;
   const wordPart = pageWords > 0 ? ` · ${pageWords} pal.` : "";
   return `p. ${pageNum} / ${total}${wordPart}`;
+}
+
+function _setPageLabel(text) {
+  if (_pageCountLabel) _pageCountLabel.textContent = text;
+  else if (pageCountEl) pageCountEl.textContent = text;
 }
 
 function updatePageCount(total) {
@@ -290,13 +298,54 @@ function updatePageCount(total) {
   if (_currentEditorView === "pages" && total > 0) {
     const firstPage = pagedEditor?.querySelector(".manuscript-page");
     _currentVisiblePage = parseInt(firstPage?.dataset.page, 10) || 1;
-    pageCountEl.textContent = _pageStatusText(_currentVisiblePage, total);
+    _setPageLabel(_pageStatusText(_currentVisiblePage, total));
     pageCountEl.hidden = false;
     _attachPageObserver(total);
+    _initPageJump();
   } else {
     pageCountEl.hidden = true;
     _detachPageObserver();
   }
+}
+
+function _initPageJump() {
+  if (!_pageJumpInput || _pageJumpInput._jumpReady) return;
+  _pageJumpInput._jumpReady = true;
+  if (_pageCountLabel) {
+    _pageCountLabel.style.cursor = "pointer";
+    _pageCountLabel.addEventListener("click", () => {
+      if (!_pageJumpInput) return;
+      _pageJumpInput.max = _totalPageCount;
+      _pageJumpInput.value = _currentVisiblePage;
+      _pageCountLabel.hidden = true;
+      _pageJumpInput.hidden = false;
+      _pageJumpInput.select();
+      _pageJumpInput.focus();
+    });
+  }
+  _pageJumpInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const target = Math.min(Math.max(parseInt(_pageJumpInput.value, 10) || 1, 1), _totalPageCount);
+      navigateToPage(target);
+      _pageJumpInput.hidden = true;
+      if (_pageCountLabel) _pageCountLabel.hidden = false;
+    } else if (e.key === "Escape") {
+      _pageJumpInput.hidden = true;
+      if (_pageCountLabel) _pageCountLabel.hidden = false;
+    }
+  });
+  _pageJumpInput.addEventListener("blur", () => {
+    _pageJumpInput.hidden = true;
+    if (_pageCountLabel) _pageCountLabel.hidden = false;
+  });
+}
+
+function navigateToPage(pageNum) {
+  if (_currentEditorView !== "pages" || !pagedEditor) return;
+  const target = pagedEditor.querySelector(`.manuscript-page[data-page="${pageNum}"]`);
+  if (!target) return;
+  target.querySelector(".page-body")?.focus();
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function navigatePage(delta) {
@@ -322,7 +371,7 @@ function _attachPageObserver(total) {
     });
     if (best) {
       _currentVisiblePage = parseInt(best.dataset.page, 10) || 1;
-      if (pageCountEl) pageCountEl.textContent = _pageStatusText(_currentVisiblePage, total);
+      _setPageLabel(_pageStatusText(_currentVisiblePage, total));
     }
   }, { threshold: [0.3, 0.6, 1.0] });
   pagedEditor.querySelectorAll(".manuscript-page").forEach(p => _pageObserver.observe(p));

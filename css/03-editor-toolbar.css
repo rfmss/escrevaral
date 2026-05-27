@@ -288,8 +288,25 @@
 .statusbar-page-count {
   opacity: 0.7;
   font-size: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
 }
 .statusbar-page-count[hidden] { display: none; }
+[data-page-count-label] { cursor: pointer; }
+[data-page-count-label]:hover { opacity: 0.85; }
+[data-page-jump-input] {
+  width: 48px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: inherit;
+  padding: 0 4px;
+  text-align: center;
+}
+[data-page-jump-input][hidden] { display: none; }
 
 /* ── AVISO OFFLINE ao clicar em e-mail de contato ── */
 .statusbar-offline-note {
