@@ -446,6 +446,10 @@ function createPrecisionMarkup(analysis, manuscript, template) {
       ${automaticHtml}
       ${manualHtml}
     </div>
+    ${(analysis.words ?? 0) >= 50 ? `<button class="ghost-button precision-export-btn" data-action="export-precision" title="Baixar análise de aderência em TXT" aria-label="Baixar análise de aderência">
+      <span class="material-symbols-outlined">download</span>
+      Baixar análise
+    </button>` : ""}
   `;
 }
 

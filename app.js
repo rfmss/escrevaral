@@ -389,6 +389,40 @@ function getPageRenderOpts() {
   };
 }
 
+function exportPrecisionAnalysis() {
+  const ms = getActiveManuscript();
+  if (!ms || !window.VeredaPrecision) { saveStatus.textContent = "Nenhum manuscrito ativo."; return; }
+  const text = ms.text || (ms.html || "").replace(/<[^>]+>/g, " ");
+  if (!text.trim()) { saveStatus.textContent = "Manuscrito vazio."; return; }
+  const template = window.VeredaTemplates?.getTemplate(state.template?.selectedId) || {};
+  const a = VeredaPrecision.analyze(template, text);
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(52);
+  const lines = [
+    "ADERÊNCIA AO GUIA — Escrevaral",
+    sep,
+    `Manuscrito: ${ms.title || "sem título"}  ·  ${a.words} palavras  ·  ${date}`,
+    template.label ? `Guia: ${template.label}` : "Guia: análise genérica",
+    `Aderência: ${a.score}% — ${a.status}`,
+    "",
+  ];
+  const passed = a.checks.filter(c => c.passed);
+  const failed = a.checks.filter(c => !c.passed);
+  if (passed.length) {
+    lines.push("PONTOS COBERTOS", "─".repeat(36));
+    passed.forEach(c => { lines.push(`✓ ${c.label}`); if (c.hint) lines.push(`  ${c.hint}`); });
+    lines.push("");
+  }
+  if (failed.length) {
+    lines.push("PONTOS A TRABALHAR", "─".repeat(36));
+    failed.forEach(c => { lines.push(`○ ${c.label}`); if (c.hint) lines.push(`  ${c.hint}`); });
+    lines.push("");
+  }
+  lines.push(sep, "Análise local — nada enviado para fora do navegador.");
+  downloadFile(lines.join("\n"), `${slugify(ms.title || "texto")}-aderencia.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = `Análise de aderência exportada (${a.score}%)`;
+}
+
 function scheduleUndoPush() {
   clearTimeout(_undoTimer);
   _undoTimer = setTimeout(() => {
@@ -1411,6 +1445,7 @@ const ACTION_HANDLERS = {
   "export-decolonial":       () => exportDecolonialDetected(),
   "export-analise":          () => exportAnaliseGeral(),
   "check-sw-update":         () => checkForSWUpdate(),
+  "export-precision":        () => exportPrecisionAnalysis(),
   "clear-rimalab":           () => clearRimaLabText(),
   "open-create-note":        () => openCreateNote(),
   "close-create-note":       () => closeCreateNote(),
