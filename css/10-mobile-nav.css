@@ -4,7 +4,7 @@
    ──────────────────────────────────────────────────────────────────────── */
 
 /* ─── Token de altura do topbar ─────────────────────────────────── */
-:root { --topbar-h: 53px; } /* logo 52px + 1px border-bottom */
+:root { --topbar-h: 41px; } /* logo 40px + 1px border-bottom */
 
 /* ─── Base: dock oculto em desktop ──────────────────────────────── */
 /* .mobile-bandeja usa o atributo [hidden] para controle de visibilidade;
