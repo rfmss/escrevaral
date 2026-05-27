@@ -6,33 +6,47 @@
 |---------------|-----------|------------------------------------------|
 | Tinta escura  | `#150a03` | Logo no tema Alvorada (fundo claro)      |
 | Pergaminho    | `#f6f1eb` | Logo no tema Vereda (fundo escuro); fundo de PNGs |
-| Fundo de ícone| `#150a03` | Background de todos os PNGs (favicon, PWA, atalho) |
+| Fundo de ícone| `#150a03` | Background dos PNGs de aba (favicon, atalho) |
 
 ---
 
-## Arquivos-fonte
+## Gerações de logo
 
-Ficam nesta pasta (`icons/`). Não editar os arquivos operacionais diretamente — editar a fonte e regenerar.
+### Geração atual (2026-05 — Aba + Full)
 
-| Arquivo             | Formato | Cor do path | Fundo        | Uso                               |
-|---------------------|---------|-------------|--------------|-----------------------------------|
-| `LogoOK_v2.svg`     | SVG     | `#f6f1eb`   | transparente | Fonte vetorial — versão creme     |
-| `LogoOK_v2dark.svg` | SVG     | `#150a03`   | transparente | Fonte vetorial — versão escura    |
-| `LogoOK_v2.png`     | PNG     | `#f6f1eb`   | transparente | Raster 2000×2001 — versão creme (base para PNGs derivados) |
-| `LogoOK_v2dark.png` | PNG     | `#150a03`   | transparente | Raster 2000×2001 — versão escura  |
+Dois variantes:
+- **Aba** — marca gestual simplificada, sem barras horizontais. Otimizado para miniaturização (favicon, PWA).
+- **Full** — marca completa com barras horizontais. Para uso em contextos maiores (open graph, splash).
+
+Estrutura SVG: `fill-rule="evenodd"` com fundo arredondado + marca como knockout transparente.
 
 ---
 
-## Arquivos operacionais (SVG)
+## Arquivos-fonte (pasta raiz — não editar)
 
-Derivados diretos da fonte. Atualizados automaticamente ao rodar o script de build.
+| Arquivo                          | Formato | Cor do path | Variante | Fundo      |
+|----------------------------------|---------|-------------|----------|------------|
+| `EScrevaral_Vereda_Aba.svg`      | SVG     | `#150a03`   | Aba      | transparente (evenodd) |
+| `EScrevaral_Alvorada_Aba.svg`    | SVG     | `#ffffff`   | Aba      | transparente (evenodd) |
+| `EScrevaral_Vereda_Aba.png`      | PNG     | knockout    | Aba      | `#150a03` |
+| `EScrevaral_Alvorada_Aba.png`    | PNG     | knockout    | Aba      | `#ffffff` |
+| `EScrevaral_Vereda_Dark.svg`     | SVG     | `#150a03`   | Full     | transparente (evenodd) |
+| `Escrevaral_Alvorada_Light.svg`  | SVG     | `#ffffff`   | Full     | transparente (evenodd) |
 
-| Arquivo                  | Cor      | Fundo        | Onde é usado                          |
-|--------------------------|----------|--------------|---------------------------------------|
-| `vereda-logo-dark.svg`   | `#150a03`| transparente | Topbar — tema Alvorada (padrão)       |
-| `vereda-logo-light.svg`  | `#f6f1eb`| transparente | Topbar — tema Vereda (CSS content swap) |
-| `Logo.svg`               | `#150a03`| transparente | Alias para integrações externas       |
-| `Logo-tab.svg`           | `#150a03`| transparente | Alias para integrações externas       |
+---
+
+## Arquivos operacionais (SVG — nesta pasta)
+
+| Arquivo                          | Cor      | Fundo        | Onde é usado                          |
+|----------------------------------|----------|--------------|---------------------------------------|
+| `vereda-logo-dark.svg`           | `#150a03`| transparente | Topbar — tema Alvorada (padrão)       |
+| `vereda-logo-light.svg`          | `#f6f1eb`| transparente | Topbar — tema Vereda (CSS content swap) |
+| `escrevaral-aba-dark.svg`        | `#150a03`| evenodd      | Aba/favicon — tema claro              |
+| `escrevaral-aba-light.svg`       | `#ffffff`| evenodd      | Aba/favicon — tema escuro             |
+| `escrevaral-vereda-dark.svg`     | `#150a03`| evenodd      | Full — versão escura completa         |
+| `escrevaral-alvorada-light.svg`  | `#ffffff`| evenodd      | Full — versão clara completa          |
+| `Logo.svg`                       | `#150a03`| transparente | Alias para integrações externas       |
+| `Logo-tab.svg`                   | `#150a03`| transparente | Alias para integrações externas       |
 
 O swap no topbar funciona via CSS em `css/02-shell-navigation.css`:
 ```css
@@ -44,7 +58,7 @@ O swap no topbar funciona via CSS em `css/02-shell-navigation.css`:
 
 ## Arquivos operacionais (PNG)
 
-Gerados via `cairosvg` + achate Pillow. Fundo sólido `#150a03`, logo `#f6f1eb`.
+Gerados a partir de `EScrevaral_Vereda_Aba.png` (1024×1024, RGBA) com Pillow — LANCZOS.
 
 ### Favicons (`favicon_io/`)
 
@@ -59,10 +73,10 @@ Gerados via `cairosvg` + achate Pillow. Fundo sólido `#150a03`, logo `#f6f1eb`.
 | `android-chrome-512x512.png`| 512×512| `site.webmanifest` (splash)                |
 | `favicon-16x16.png`        | 16×16   | Legado                                     |
 | `favicon-32x32.png`        | 32×32   | Legado                                     |
+| `favicon.ico`              | multi   | Fallback ICO (16, 32, 48, 64)              |
+| `tab-favicon.ico`          | multi   | Fallback ICO (16, 32, 48, 64)              |
 
 ### Ícones do app (`icons/`)
-
-Margem maior (18%) para respeitar o safe zone do PWA maskable.
 
 | Arquivo               | Tamanho | Usado em                                           |
 |-----------------------|---------|----------------------------------------------------|
@@ -75,15 +89,17 @@ Margem maior (18%) para respeitar o safe zone do PWA maskable.
 
 ## Como regenerar os PNGs
 
-Requer `Pillow` instalado:
+Requer `Pillow` instalado (`pip3 install pillow --break-system-packages`).
 
-```bash
-pip3 install pillow --break-system-packages
+```python
+from PIL import Image
+
+src = 'EScrevaral_Vereda_Aba.png'
+img = Image.open(src).convert('RGBA')
+
+# Redimensionar para cada tamanho alvo
+img.resize((48, 48), Image.LANCZOS).save('favicon_io/tab-favicon-48x48.png', optimize=True)
+# ... etc
 ```
 
-O script Python usa `LogoOK_v2.png` (2000×2001, transparente) como fonte raster:
-1. Abre `icons/LogoOK_v2.png` com `Image.open().convert('RGBA')`
-2. Cria canvas sólido `#150a03` no tamanho alvo
-3. Redimensiona o logo com `LANCZOS` respeitando a margem (12% favicons, 18% PWA)
-4. Centraliza e compõe com `Image.paste(logo, offset, logo)` usando alpha como máscara
-5. Converte para RGB e salva com `optimize=True`
+`favicon.svg` usa `prefers-color-scheme` para alternar entre `#150a03` (tema claro) e `#ffffff` (tema escuro), com o path das Aba files e `fill-rule="evenodd"`.
