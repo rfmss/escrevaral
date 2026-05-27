@@ -577,6 +577,26 @@
     return lines.join("\n");
   }
 
+  function findRhymes(word, limit = 16) {
+    if (!word || word.length < 2) return [];
+    const target = getRhymeSound(normalizeWord(word));
+    if (!target) return [];
+    const gw = getGrammarWords();
+    const results = [];
+    for (const [w, cls] of Object.entries(gw)) {
+      if (normalizeWord(w) === normalizeWord(word)) continue;
+      const s = getRhymeSound(normalizeWord(w));
+      if (soundsMatch(s, target)) {
+        results.push({ word: w, cls, type: "exata" });
+      } else if (soundsMatchToante(s, target)) {
+        results.push({ word: w, cls, type: "toante" });
+      }
+    }
+    // Exatas primeiro, depois toantes
+    results.sort((a, b) => (a.type === "exata" ? 0 : 1) - (b.type === "exata" ? 0 : 1));
+    return results.slice(0, limit);
+  }
+
   // ── API pública ───────────────────────────────────────────────────────────────
   global.VeredaRimaLab = {
     analyze,
@@ -586,6 +606,8 @@
     scanVerse,
     nameScheme,
     exportAnalysisText,
+    findRhymes,
+    getRhymeSound,
     getEncyclopedia,
     ensureLoaded,
     isLoaded:     () => _dataLoaded,

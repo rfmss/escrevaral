@@ -254,6 +254,47 @@
   font-size: 12px;
   line-height: 1.5;
 }
+.rimalab-finder {
+  margin: 12px 0 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+}
+.rimalab-finder-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.rimalab-finder-row input[type="search"] {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+.rimalab-finder-row input:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+.rimalab-finder-results { display: flex; flex-wrap: wrap; gap: 5px; min-height: 24px; }
+.rimalab-finder-chip {
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--soft-ink);
+  cursor: default;
+}
+.rimalab-finder-chip.is-exata  { border-color: var(--primary); color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--surface)); }
+.rimalab-finder-chip.is-toante { opacity: 0.72; }
+.rimalab-finder-empty { font-size: 12px; color: var(--muted); font-style: italic; }
 
 .rimalab-panel h3 {
   margin: 0 0 10px;

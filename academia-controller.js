@@ -728,6 +728,24 @@ if (rimalabInput) rimalabInput.addEventListener("input", () => {
   window.clearTimeout(rimalabTimer);
   rimalabTimer = window.setTimeout(persistRimaLabText, 350);
 });
+if (rimalabFinder) {
+  rimalabFinder.addEventListener("input", () => {
+    if (!rimalabFinderResults || !window.VeredaRimaLab) return;
+    const word = rimalabFinder.value.trim();
+    if (word.length < 2) { rimalabFinderResults.innerHTML = ""; return; }
+    VeredaRimaLab.ensureLoaded().then(() => {
+      const results = VeredaRimaLab.findRhymes(word);
+      if (!results.length) {
+        rimalabFinderResults.innerHTML = `<span class="rimalab-finder-empty">Nenhuma rima encontrada no vocabulário.</span>`;
+        return;
+      }
+      rimalabFinderResults.innerHTML = results.map(r =>
+        `<span class="rimalab-finder-chip is-${escapeHtml(r.type)}" title="${escapeHtml(r.type === "exata" ? "Rima exata" : "Rima toante (assonância)")}">${escapeHtml(r.word)}</span>`
+      ).join("");
+    });
+  });
+}
+
 if (decolonialSearch) decolonialSearch.addEventListener("input", () => {
   decolonialState.query = decolonialSearch.value;
   renderDecolonialTool();
