@@ -163,10 +163,21 @@ function updateCurrentManuscript() {
   queueSave();
 }
 
+function _calcHealthScore(alertas) {
+  const score = 100 - (alertas.filter(a => a.nivel === "alto").length * 15) - (alertas.filter(a => a.nivel === "moderado").length * 8);
+  return Math.max(0, score);
+}
+
+function _healthScoreBadge(score) {
+  const cls = score >= 85 ? "health-ok" : score >= 60 ? "health-mid" : "health-low";
+  return `<span class="voice-health-score ${cls}" aria-label="Saúde textual: ${score} de 100">${score}<small>/100</small></span>`;
+}
+
 function createVoiceMirrorMarkup(analysis, criterios, alertas) {
+  const healthScore = criterios && alertas ? _calcHealthScore(alertas) : null;
   const alertasHtml = criterios && alertas && alertas.length ? `
     <div class="voice-criterios">
-      <h4>Análise editorial — ${alertas.length} ponto(s) de atenção</h4>
+      <h4>Análise editorial — ${alertas.length} ponto(s) de atenção ${healthScore !== null ? _healthScoreBadge(healthScore) : ""}</h4>
       <div class="voice-alertas">
         ${alertas.map(a => {
           const criterio = window.VeredaCriterios ? VeredaCriterios.criterios.find(c => c.id === a.id) : null;
@@ -185,12 +196,12 @@ function createVoiceMirrorMarkup(analysis, criterios, alertas) {
           </div>`;
         }).join("")}
       </div>
-      <p class="voice-criterios-note">21 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 39 critérios →</a></p>
+      <p class="voice-criterios-note">16 critérios computados localmente, baseados em King, Strunk, Zinsser e outros. <a href="./vereda-biblioteca-escrita.html" target="_blank" rel="noopener">Ver os 39 critérios →</a></p>
     </div>
   ` : criterios ? `
     <div class="voice-criterios voice-criterios--ok">
-      <h4>Análise editorial — nenhum alerta</h4>
-      <p class="voice-criterios-note">Os 21 critérios computados não detectaram padrões de atenção neste trecho. Isso não substitui a revisão humana.</p>
+      <h4>Análise editorial — nenhum alerta ${_healthScoreBadge(100)}</h4>
+      <p class="voice-criterios-note">Os 16 critérios computados não detectaram padrões de atenção neste trecho. Isso não substitui a revisão humana.</p>
     </div>
   ` : "";
 

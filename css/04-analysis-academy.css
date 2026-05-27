@@ -13,13 +13,33 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
-  
   color: var(--soft-ink);
   padding: 10px 14px;
   background: var(--surface-low);
   border-bottom: 1px solid var(--line);
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
+.voice-health-score {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  padding: 1px 7px;
+  border-radius: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+.voice-health-score small {
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+.voice-health-score.health-ok  { background: color-mix(in srgb, var(--sage) 20%, var(--surface)); color: color-mix(in srgb, var(--sage) 80%, var(--ink)); }
+.voice-health-score.health-mid { background: color-mix(in srgb, #c07830 15%, var(--surface)); color: color-mix(in srgb, #c07830 90%, var(--ink)); }
+.voice-health-score.health-low { background: color-mix(in srgb, var(--sienna) 15%, var(--surface)); color: color-mix(in srgb, var(--sienna) 85%, var(--ink)); }
 .voice-alertas { display: flex; flex-direction: column; }
 .voice-alerta {
   display: flex;
@@ -1236,6 +1256,14 @@
   border-color: var(--primary);
   background: var(--card);
   color: var(--primary);
+}
+.template-tab-steps {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .template-phone {

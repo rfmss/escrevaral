@@ -423,6 +423,26 @@ function exportPrecisionAnalysis() {
   saveStatus.textContent = `Análise de aderência exportada (${a.score}%)`;
 }
 
+function exportAcervoCompleto() {
+  const docs = state.manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito" && (m.text || "").trim());
+  if (!docs.length) { saveStatus.textContent = "Nenhum manuscrito com texto para exportar."; return; }
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(60);
+  const lines = [`ACERVO COMPLETO — Escrevaral`, `Gerado em ${date} · ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}`, sep, ""];
+  docs.forEach((ms, i) => {
+    const wc = countWords(ms.text || "");
+    lines.push(`${i + 1}. ${ms.title || "sem título"}  ·  ${wc.toLocaleString("pt-BR")} palavras  ·  ${ms.status || "Em escrita"}`);
+    lines.push("─".repeat(50));
+    lines.push(ms.text.trim());
+    lines.push("", sep, "");
+  });
+  const totalWords = docs.reduce((s, m) => s + countWords(m.text || ""), 0);
+  lines.push(`Total: ${totalWords.toLocaleString("pt-BR")} palavras em ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}.`);
+  const dateSlug = new Date().toISOString().slice(0, 10);
+  downloadFile(lines.join("\n"), `escrevaral-acervo-${dateSlug}.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = `Acervo exportado — ${docs.length} manuscritos, ${totalWords.toLocaleString("pt-BR")} palavras`;
+}
+
 function scheduleUndoPush() {
   clearTimeout(_undoTimer);
   _undoTimer = setTimeout(() => {
@@ -1100,10 +1120,12 @@ function renderTemplateStudio() {
     templateTabs.innerHTML = countLine + templates
       .map((template) => {
         const isActive = template.id === activeTemplate.id ? " is-active" : "";
+        const stepLabel = template.stepCount > 1 ? `<small class="template-tab-steps">${template.stepCount} etapas</small>` : "";
         return `
           <button class="template-tab${isActive}" data-template-select="${template.id}" title="${escapeHtml(template.description || "")}">
             <span class="material-symbols-outlined">${template.icon}</span>
             ${escapeHtml(template.label)}
+            ${stepLabel}
           </button>
         `;
       })
@@ -1446,6 +1468,7 @@ const ACTION_HANDLERS = {
   "export-analise":          () => exportAnaliseGeral(),
   "check-sw-update":         () => checkForSWUpdate(),
   "export-precision":        () => exportPrecisionAnalysis(),
+  "export-acervo":           () => exportAcervoCompleto(),
   "copy-manuscript-text":    () => {
     const ms = getActiveManuscript();
     const text = ms?.text || writingArea?.innerText || "";

@@ -22,7 +22,7 @@
   function listTemplates(options = {}) {
     return _templates
       .filter(t => !options.oficio || t.oficio === options.oficio)
-      .map(({ id, oficio, label, icon, title, description }) => ({ id, oficio, label, icon, title, description }));
+      .map(({ id, oficio, label, icon, title, description, steps }) => ({ id, oficio, label, icon, title, description, stepCount: steps?.length || 1 }));
   }
 
   function listOficios() {
