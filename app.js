@@ -1055,6 +1055,22 @@ async function renderLexicalView() {
   });
 }
 
+if (lexicalSearch) {
+  lexicalSearch.addEventListener("input", () => {
+    const q = lexicalSearch.value.trim().toLowerCase().replace(/[^a-záéíóúâêôãõçàü\-]/g, "");
+    if (q.length >= 2) {
+      state.lexical.selectedWord = q;
+      renderLexicalView();
+    } else if (!q) {
+      state.lexical.selectedWord = "terra";
+      renderLexicalView();
+    }
+  });
+  lexicalSearch.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { lexicalSearch.value = ""; state.lexical.selectedWord = "terra"; renderLexicalView(); }
+  });
+}
+
 function renderTemplateStudio() {
   if (VeredaTemplates.hasLoadError()) {
     if (templateScreen) templateScreen.innerHTML = `<p class="template-empty">Guias não carregados. Verifique a conexão e recarregue a página.</p>`;

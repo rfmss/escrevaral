@@ -82,6 +82,7 @@ const rulerToggle = document.querySelector('[data-action="toggle-ruler"]');
 const lexicalTitle = document.querySelector("[data-lexical-title]");
 const lexicalContext = document.querySelector("[data-lexical-context]");
 const lexicalCard = document.querySelector("[data-lexical-card]");
+const lexicalSearch = document.querySelector("[data-lexical-search]");
 const offlineStatus = document.querySelector("[data-offline-status]");
 const installButton = document.querySelector('[data-action="install-app"]');
 const proofIntegrity = document.querySelector("[data-proof-integrity]");

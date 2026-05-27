@@ -1522,11 +1522,34 @@ html {
 
 .lexical-hint {
   max-width: 480px;
-  margin: 6px 0 28px;
+  margin: 6px 0 14px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.5;
 }
+.lexical-search-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-low);
+  padding: 8px 12px;
+  margin-bottom: 18px;
+  max-width: 340px;
+  cursor: text;
+  color: var(--muted);
+}
+.lexical-search-row input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  width: 100%;
+}
+.lexical-search-row input::placeholder { color: var(--muted); }
 
 /* Instrução some quando há conteúdo */
 .reading-sample:not(:empty) ~ * [data-lexical-hint],
