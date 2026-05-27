@@ -438,9 +438,11 @@
         let m;
         while ((m = re.exec(text)) !== null) {
           const before = text.slice(Math.max(0, m.index - 3), m.index);
-          if (!before.includes(",") && !/^(um|uma|o|a|os|as|seu|sua|meu|minha)\s/.test(m[1].toLowerCase())) {
-            issues.push({ fragment: m[0].trim(), pos: m.index });
-          }
+          if (before.includes(",")) continue;
+          if (/^(um|uma|o|a|os|as|seu|sua|meu|minha)\s/.test(m[1].toLowerCase())) continue;
+          // Nome próprio simples (sem espaço) — ambíguo demais para marcar com segurança
+          if (!/\s/.test(m[1])) continue;
+          issues.push({ fragment: m[0].trim(), pos: m.index });
         }
         const reUniv = /\b(todos os|todas as|ambos os|ambas as)\s+[a-záàâãéèêíîóòôõúùûç]+\s+que\b/g;
         while ((m = reUniv.exec(text)) !== null) {

@@ -191,6 +191,40 @@ function exportDecolonialDetected() {
   saveStatus.textContent = `${found.length} ${found.length === 1 ? "termo exportado" : "termos exportados"} em TXT`;
 }
 
+function exportAnaliseGeral() {
+  const ms = getActiveManuscript();
+  if (!ms || !window.VeredaAnalise) { saveStatus.textContent = "Nenhum manuscrito ativo."; return; }
+  const text = ms.text || (ms.html || "").replace(/<[^>]+>/g, " ");
+  if (!text.trim()) { saveStatus.textContent = "Manuscrito vazio — nada para exportar."; return; }
+  const criterios = VeredaAnalise.analisar(text);
+  const alertas = VeredaAnalise.interpretarResultado(criterios);
+  const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  const sep = "═".repeat(52);
+  const DIM = { economia: "Economia", clareza: "Clareza", ritmo: "Ritmo", voz: "Voz", lexico: "Léxico", pov: "Ponto de vista", norma: "Norma" };
+  const lines = [
+    "ANÁLISE GERAL — Escrevaral",
+    sep,
+    `Manuscrito: ${ms.title || "sem título"}  ·  ${criterios.meta.totalPalavras} palavras  ·  ${date}`,
+    `Legibilidade: ${criterios.meta.fleschBR}/100 — ${criterios.meta.fleschLabel}`,
+    `Frases: ${criterios.meta.totalFrases}  ·  Parágrafos: ${criterios.meta.totalParagrafos}`,
+    "",
+  ];
+  if (!alertas.length) {
+    lines.push("Nenhum alerta neste texto. Ótimo sinal — continue escrevendo.");
+  } else {
+    lines.push(`${alertas.length} alerta${alertas.length === 1 ? "" : "s"} encontrado${alertas.length === 1 ? "" : "s"}:`);
+    lines.push("");
+    alertas.forEach((a, i) => {
+      lines.push(`${i + 1}. [${(DIM[a.dim] || a.dim).toUpperCase()}] ${a.msg}`);
+      if (a.acao) lines.push(`   → ${a.acao}`);
+      lines.push("");
+    });
+  }
+  lines.push(sep, "Análise local — nada enviado para fora do navegador.");
+  downloadFile(lines.join("\n"), `${slugify(ms.title || "texto")}-analise.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = `${alertas.length} alerta${alertas.length === 1 ? "" : "s"} exportado${alertas.length === 1 ? "" : "s"} em TXT`;
+}
+
 function exportRimaLabText() {
   if (!rimalabInput) {
     return;

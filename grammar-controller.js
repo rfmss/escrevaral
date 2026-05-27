@@ -622,9 +622,18 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Escape fecha
+// Escape fecha popover; Alt+PageDown/PageUp navega páginas
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && !wordPopover?.hidden) closeWordPopover();
+  if (e.key === "Escape" && !wordPopover?.hidden) { closeWordPopover(); return; }
+  if (e.altKey && (e.key === "PageDown" || e.key === "ArrowDown") && _currentEditorView === "pages") {
+    e.preventDefault();
+    navigatePage(1);
+    return;
+  }
+  if (e.altKey && (e.key === "PageUp" || e.key === "ArrowUp") && _currentEditorView === "pages") {
+    e.preventDefault();
+    navigatePage(-1);
+  }
 });
 
 // Actions do popover

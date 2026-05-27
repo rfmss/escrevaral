@@ -91,11 +91,26 @@
     return { wordsBefore: wBefore, wordsAfter: wAfter, wordsDelta: wDelta, charDelta: cDelta, firstChange };
   }
 
+  const MILESTONES = [100, 500, 1000, 2000, 5000, 10000];
+
+  function checkMilestone(versions, manuscript) {
+    const words = countWords(manuscript.text || "");
+    const latest = getVersionsForManuscript(versions, manuscript.id)[0];
+    const prevWords = latest ? (latest.wordCount || 0) : 0;
+    for (const m of MILESTONES) {
+      if (prevWords < m && words >= m) {
+        return `Marco: ${m.toLocaleString("pt-BR")} palavra${m === 1 ? "" : "s"}`;
+      }
+    }
+    return null;
+  }
+
   global.VeredaVersions = {
     addSnapshot,
     getVersionsForManuscript,
     restoreSnapshot,
     shouldCreateAutoSnapshot,
+    checkMilestone,
     summarizeDiff,
   };
 })(window);

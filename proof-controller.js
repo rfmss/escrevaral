@@ -32,13 +32,18 @@ function ensureInitialVersion(manuscript) {
 }
 
 function maybeCreateAutoVersion(manuscript) {
-  if (!isManuscriptDocument(manuscript)) {
+  if (!isManuscriptDocument(manuscript)) return;
+
+  const milestoneReason = VeredaVersions.checkMilestone(state.versions, manuscript);
+  if (milestoneReason) {
+    const result = VeredaVersions.addSnapshot(state.versions, manuscript, milestoneReason);
+    state.versions = result.versions;
+    renderVersionList();
+    saveStatus.textContent = `✓ ${milestoneReason} — versão salva`;
     return;
   }
 
-  if (!VeredaVersions.shouldCreateAutoSnapshot(state.versions, manuscript)) {
-    return;
-  }
+  if (!VeredaVersions.shouldCreateAutoSnapshot(state.versions, manuscript)) return;
 
   const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Auto-save relevante");
   state.versions = result.versions;

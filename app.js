@@ -1407,6 +1407,7 @@ const ACTION_HANDLERS = {
   "rimalab-use-active":      () => useActiveManuscriptForRimaLab(),
   "export-rimalab":          () => exportRimaLabText(),
   "export-decolonial":       () => exportDecolonialDetected(),
+  "export-analise":          () => exportAnaliseGeral(),
   "clear-rimalab":           () => clearRimaLabText(),
   "open-create-note":        () => openCreateNote(),
   "close-create-note":       () => closeCreateNote(),
