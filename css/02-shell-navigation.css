@@ -2329,8 +2329,8 @@ mark {
 /* Logo Escrevaral — facão */
 .brand-logo {
   content: url("../icons/escrevaral-aba-dark.svg");
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   flex-shrink: 0;
   display: block;
