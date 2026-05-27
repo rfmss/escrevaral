@@ -82,6 +82,21 @@ Critério de aceite: em celular/tablet sem teclado físico, abrir um manuscrito 
 
 ---
 
+## Pilar de responsividade: sem rolagem horizontal em editores
+
+Rolagem horizontal em telas de escrita é proibida. O editor precisa preservar a borda direita em celular, tablet e desktop; texto, toolbar, guia de escrita, modo página e editores especializados devem quebrar, empilhar ou encolher antes de empurrar a viewport.
+
+Regra de produto:
+
+- `body`, `content-stage`, `.editor-split`, `.editor-paper`, `.writing-area`, `.specialized-editor` e `.paged-editor` não podem produzir rolagem horizontal em mobile.
+- Exceção permitida: menus, trilhos e listas horizontais claramente intencionais, com gesto local e sem deslocar a página inteira.
+- No mobile, painéis auxiliares como Guia de escrita devem empilhar ou virar folha/painel; nunca podem dividir a tela a ponto de esmagar a folha.
+- Toda auditoria mobile deve medir `scrollWidth > clientWidth`, não só olhar screenshot.
+
+Critério de aceite: em 320px, 390px e 430px, a página inteira deve manter `document.scrollingElement.scrollWidth <= document.scrollingElement.clientWidth`; qualquer overflow permitido precisa estar contido no próprio menu.
+
+---
+
 ## Pilar visual: metáforas alinhadas e silenciosas
 
 O Escrevaral usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.

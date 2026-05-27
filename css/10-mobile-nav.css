@@ -4,7 +4,7 @@
    ──────────────────────────────────────────────────────────────────────── */
 
 /* ─── Token de altura do topbar ─────────────────────────────────── */
-:root { --topbar-h: 41px; } /* logo 40px + 1px border-bottom */
+:root { --topbar-h: 58px; } /* acompanha a linha fixa do shell */
 
 /* ─── Base: dock oculto em desktop ──────────────────────────────── */
 /* .mobile-bandeja usa o atributo [hidden] para controle de visibilidade;
@@ -29,6 +29,42 @@
 
   /* Painéis scrolláveis ganham padding inferior para o dock não cobrir */
   .view { padding-bottom: calc(60px + env(safe-area-inset-bottom)) !important; }
+
+  /* O topo fica só como identidade; ações repetidas vivem no dock/bandeja. */
+  .topbar [data-action="toggle-dark-mode"],
+  .topbar [data-action="toggle-focus"],
+  .topbar .statusbar-brand,
+  .statusbar-brand,
+  .statusbar-social {
+    display: none !important;
+  }
+
+  #save-hint-toast,
+  #delete-undo-toast,
+  #academia-hint-toast,
+  .pomodoro-done-toast {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+    max-width: none !important;
+    white-space: normal !important;
+    transform: translateY(8px) !important;
+  }
+
+  #save-hint-toast.is-visible,
+  #delete-undo-toast.is-visible,
+  #academia-hint-toast.is-visible,
+  .pomodoro-done-toast.is-visible {
+    transform: translateY(0) !important;
+  }
+
+  #save-hint-toast > span:not(.material-symbols-outlined),
+  #delete-undo-toast > span,
+  #academia-hint-toast > span:not(.material-symbols-outlined),
+  .pomodoro-done-toast {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 
   /* ── DOCK ─────────────────────────────────────────────────────── */
   .mobile-dock {
