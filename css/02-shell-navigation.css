@@ -2326,24 +2326,15 @@ mark {
 .sidebar-new-btn:hover { opacity: 1; }
 .sidebar-new-btn .material-symbols-outlined { font-size: 16px; }
 
-/* Logo Escrevaral — facão sem fundo */
+/* Logo Escrevaral — facão, cor do texto do tema */
 .brand-logo {
-  content: url("../icons/escrevaral-nav-dark.svg");
+  display: block;
   width: 28px;
   height: 28px;
-  object-fit: contain;
   flex-shrink: 0;
-  display: block;
-  filter: none;
-}
-
-/* Temas escuros usam a arte clara, sem filtro de inversão. */
-[data-theme="scriptorium"] .brand-logo,
-[data-theme="cerrado-dark"] .brand-logo,
-[data-theme="mata-dark"] .brand-logo,
-[data-theme="amazonia-dark"] .brand-logo {
-  content: url("../icons/escrevaral-nav-light.svg");
-  filter: none;
+  background-color: var(--ink);
+  -webkit-mask: url("../icons/escrevaral-nav-dark.svg") center / contain no-repeat;
+  mask: url("../icons/escrevaral-nav-dark.svg") center / contain no-repeat;
 }
 
 /* brand-lockup: logo + texto colados */
