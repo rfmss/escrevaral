@@ -269,6 +269,12 @@
   border-color: rgba(58, 44, 34, 0.25);
 }
 
+/* Vereda: badge de guia — fundo alvorada não herda, precisa de override */
+[data-theme="scriptorium"] .template-eyebrow {
+  background: var(--tip-bg);
+  color: var(--primary);
+}
+
 /* Vereda: contraste de navegacao, ferramentas e estados dentro do pergaminho */
 [data-theme="scriptorium"] .module-tabs .tab {
   color: var(--muted);

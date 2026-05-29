@@ -591,6 +591,7 @@ function toggleGlobalSearch() {
   topbarSearch.classList.toggle("is-open");
 
   if (topbarSearch.classList.contains("is-open")) {
+    globalSearchInput.removeAttribute("tabindex");
     globalSearchInput.focus();
     renderGlobalSearchResults(globalSearchInput.value);
   } else {
@@ -601,6 +602,7 @@ function toggleGlobalSearch() {
 function closeGlobalSearch() {
   topbarSearch.classList.remove("is-open");
   globalSearchResults.hidden = true;
+  globalSearchInput.setAttribute("tabindex", "-1");
 }
 
 function renderGlobalSearchResults(query) {

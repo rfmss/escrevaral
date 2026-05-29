@@ -1,4 +1,25 @@
 
+.tab-conflict-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background: color-mix(in srgb, var(--warning, #e67e22) 12%, var(--surface-low));
+  border-bottom: 1px solid var(--warning, #e67e22);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.tab-conflict-banner .material-symbols-outlined {
+  color: var(--warning, #e67e22);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.tab-conflict-text { flex: 1; }
+
+.tab-conflict-banner[hidden] { display: none; }
+
 .update-banner {
   display: flex;
   align-items: center;
@@ -43,6 +64,24 @@
   .update-banner-text span { font-size: 12px; }
   .update-banner-text small { display: none; }
   .update-banner #update-reload-btn { font-size: 11px; padding: 4px 10px; }
+}
+
+@media (max-width: 380px) {
+  .update-banner {
+    flex-wrap: nowrap;
+    padding: 6px 10px;
+  }
+  .update-banner > .material-symbols-outlined { display: none; }
+  .update-banner-text {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 0;
+  }
+  .tab-conflict-banner {
+    flex-wrap: nowrap;
+    padding: 6px 10px;
+  }
+  .tab-conflict-banner > .material-symbols-outlined { display: none; }
 }
 
 .app-shell {

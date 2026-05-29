@@ -90,6 +90,8 @@
 
   function onKey(e) { if (e.key === "Escape") hide(); }
 
+  function onHideRequest() { hide(); }
+
   function scanAndMigrate(root) {
     root.querySelectorAll("[title]").forEach(migrateTitle);
   }
@@ -103,6 +105,8 @@
     document.addEventListener("focusin", onFocusIn);
     document.addEventListener("focusout", onFocusOut);
     document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", hide, true);
+    document.addEventListener("vrda:hide-tooltip", onHideRequest);
     document.addEventListener("scroll", hide, { capture: true, passive: true });
     window.addEventListener("resize", hide, { passive: true });
 

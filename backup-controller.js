@@ -36,6 +36,21 @@ function registerOfflineApp() {
   const updateReloadBtn = document.getElementById("update-reload-btn");
   const updateDismissBtn = document.getElementById("update-dismiss-btn");
 
+  const tabConflictBanner = document.getElementById("tab-conflict-banner");
+  const tabConflictReload = document.getElementById("tab-conflict-reload");
+  const tabConflictDismiss = document.getElementById("tab-conflict-dismiss");
+  let _tabConflictShown = false;
+
+  document.addEventListener("vrda:tab-conflict", () => {
+    if (_tabConflictShown || !tabConflictBanner) return;
+    _tabConflictShown = true;
+    tabConflictBanner.hidden = false;
+  });
+  if (tabConflictReload) tabConflictReload.addEventListener("click", () => { window.location.reload(); });
+  if (tabConflictDismiss) tabConflictDismiss.addEventListener("click", () => {
+    if (tabConflictBanner) tabConflictBanner.hidden = true;
+  });
+
   function showUpdateBanner() {
     if (updateBanner) updateBanner.hidden = false;
   }

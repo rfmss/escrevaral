@@ -450,6 +450,18 @@ function getDefaultAppearanceState() {
 function persistState(status = "Salvo localmente") {
   const now = new Date();
   state.meta = state.meta || {};
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const storedAt = JSON.parse(raw)?.meta?.lastSavedAt;
+      const ourAt = state.meta.lastSavedAt;
+      if (storedAt && ourAt && storedAt > ourAt) {
+        document.dispatchEvent(new CustomEvent("vrda:tab-conflict"));
+      }
+    }
+  } catch (_) {}
+
   state.meta.lastSavedAt = now.toISOString();
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;

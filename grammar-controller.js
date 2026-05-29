@@ -412,6 +412,7 @@ let _guideSavedHtml = "";
 async function toggleGrammarColor() {
   // Garantir que lexical-data.json carregou antes de classificar
   if (window.VeredaLexical?.ensureLoaded) await VeredaLexical.ensureLoaded();
+  document.dispatchEvent(new CustomEvent("vrda:hide-tooltip"));
 
   const btn = document.querySelector("[data-grammar-btn]");
   const manuscript = getActiveManuscript();
@@ -579,8 +580,22 @@ writingArea.addEventListener("mouseover", (e) => {
 
 writingArea.addEventListener("mousemove", (e) => {
   if (!grammarTooltipEl || grammarTooltipEl.hidden) return;
-  grammarTooltipEl.style.left = `${e.clientX + 14}px`;
-  grammarTooltipEl.style.top  = `${e.clientY - 32}px`;
+  const gap = 14;
+  const pad = 10;
+  const rect = grammarTooltipEl.getBoundingClientRect();
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  let left = e.clientX + gap;
+  let top = e.clientY + gap;
+
+  if (left + rect.width > vw - pad) left = e.clientX - rect.width - gap;
+  if (top + rect.height > vh - pad) top = e.clientY - rect.height - gap;
+
+  left = Math.max(pad, Math.min(left, vw - rect.width - pad));
+  top = Math.max(pad, Math.min(top, vh - rect.height - pad));
+
+  grammarTooltipEl.style.left = `${left}px`;
+  grammarTooltipEl.style.top  = `${top}px`;
 });
 
 writingArea.addEventListener("mouseleave", () => {
@@ -593,6 +608,7 @@ writingArea.addEventListener("click", (e) => {
   const span = e.target.closest("[data-gc]");
   if (!span) return;
   const word = span.textContent;
+  const manuscript = getActiveManuscript();
   if (!manuscript || !word) return;
   const analysis = VeredaLexical.analyze(word, manuscript?.text || "");
   if (!analysis) return;
