@@ -248,7 +248,7 @@ function renderCronograma() {
       return `<div class="crono-item crono-item-auto" style="--ci-bg:${col.bg};--ci-text:${col.text};--ci-border:${col.border}" data-crono-ms="${m.id}">
         <span class="material-symbols-outlined">auto_stories</span>
         <span class="crono-item-title">${escapeHtml(m.title)}</span>
-        <span class="crono-item-meta"><span>${escapeHtml(m.kind || m.folder || "")}</span><span>${wordsLabel} · ${time}</span></span>
+        <span class="crono-item-meta"><span>${escapeHtml(m.kind || m.folder || "")}</span>${(m.kind || m.folder) ? " · " : ""}<span>${wordsLabel} · ${time}</span></span>
       </div>`;
     }).join("");
 

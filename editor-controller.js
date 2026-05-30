@@ -364,7 +364,7 @@ function renderTemplateReference() {
   } else {
     precisionCard.innerHTML = createProjectNotePrecisionMarkup(manuscript);
   }
-  referenceBody.innerHTML = template ? createReferenceMarkup(template) : `<p class="reference-empty-state">Selecione um guia na Academia ou crie uma nota a partir de um modelo.</p>`;
+  referenceBody.innerHTML = template ? createReferenceMarkup(template) : `<div class="reference-empty-state"><p>Um guia acompanha a escrita com a estrutura do ofício escolhido — conto, crônica, soneto, roteiro e mais.</p><button class="reference-pick-guide" data-view-target="academia" data-academia-scroll="template-studio">Escolher guia</button></div>`;
 }
 
 function createProjectNotePrecisionMarkup(manuscript) {
