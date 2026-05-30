@@ -974,6 +974,13 @@ async function renderLexicalView() {
   const manuscript = getActiveManuscript();
   if (!manuscript) return;
 
+  if (!state.lexical.selectedWord) {
+    if (lexicalTitle) lexicalTitle.textContent = manuscript.title;
+    if (lexicalContext) lexicalContext.innerHTML = "";
+    if (lexicalCard) lexicalCard.innerHTML = "";
+    return;
+  }
+
   if (VeredaLexical.hasLoadError()) {
     lexicalCard.innerHTML = `<p class="lexical-disclaimer">Vocabulário não carregado. Verifique a conexão e recarregue a página.</p>`;
     return;
@@ -1097,12 +1104,12 @@ if (lexicalSearch) {
       state.lexical.selectedWord = q;
       renderLexicalView();
     } else if (!q) {
-      state.lexical.selectedWord = "terra";
+      state.lexical.selectedWord = null;
       renderLexicalView();
     }
   });
   lexicalSearch.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { lexicalSearch.value = ""; state.lexical.selectedWord = "terra"; renderLexicalView(); }
+    if (e.key === "Escape") { lexicalSearch.value = ""; state.lexical.selectedWord = null; renderLexicalView(); }
   });
 }
 

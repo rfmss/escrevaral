@@ -792,6 +792,10 @@
   gap: 10px;
 }
 
+.voice-use-active-shortcut {
+  justify-self: start;
+}
+
 .voice-mirror textarea {
   width: 100%;
   min-height: 210px;

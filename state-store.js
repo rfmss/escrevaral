@@ -412,7 +412,7 @@ function getDefaultFocusSettings() {
 
 function getDefaultLexicalState() {
   return {
-    selectedWord: "terra",
+    selectedWord: null,
   };
 }
 

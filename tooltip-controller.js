@@ -92,6 +92,31 @@
 
   function onHideRequest() { hide(); }
 
+  let _touchHideTimer = null;
+  let _lastTouchWasTooltip = false;
+
+  function onTouchStart(e) {
+    const el = e.target.closest("[data-vrda-tooltip],[title]");
+    clearTimeout(_touchHideTimer);
+    if (!el) { hide(); return; }
+    if (el.hasAttribute("title")) migrateTitle(el);
+    if (!el.dataset.vrdaTooltip) { hide(); return; }
+    _lastTouchWasTooltip = true;
+    ensureTip();
+    show(el);
+  }
+
+  function onTouchEnd() {
+    if (!_lastTouchWasTooltip) return;
+    _lastTouchWasTooltip = false;
+    _touchHideTimer = setTimeout(hide, 600);
+  }
+
+  function onPointerDown(e) {
+    if (e.pointerType === "touch") return; // toque: deixar onTouchStart/End controlar
+    hide();
+  }
+
   function scanAndMigrate(root) {
     root.querySelectorAll("[title]").forEach(migrateTitle);
   }
@@ -105,7 +130,9 @@
     document.addEventListener("focusin", onFocusIn);
     document.addEventListener("focusout", onFocusOut);
     document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", hide, true);
+    document.addEventListener("touchstart", onTouchStart, { passive: true });
+    document.addEventListener("touchend", onTouchEnd, { passive: true });
+    document.addEventListener("pointerdown", onPointerDown, true);
     document.addEventListener("vrda:hide-tooltip", onHideRequest);
     document.addEventListener("scroll", hide, { capture: true, passive: true });
     window.addEventListener("resize", hide, { passive: true });
