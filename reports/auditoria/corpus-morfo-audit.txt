@@ -1,0 +1,31 @@
+Corpus de auditoria morfológica — syntax-engine.js
+Mantido para reproduzibilidade da métrica de cobertura.
+Última medição: v355 = 78.2% (fallback puro, sem norma-data.json)
+                  v356 = a re-medir após fixes do Codex
+
+CORPUS_1 — conto literário (Machado-style)
+A realidade era simples e bela. O homem velho olhou para o céu claro e sentiu o coração livre. Ela disse que a vida é boa quando o espírito está forte. Ninguém sabia ao certo o que acontecia ali. Era tarde e o sol novo desaparecia devagar. Ele ficou quieto, pensativo, com os olhos baixos.
+
+CORPUS_2 — redação argumentativa (ENEM-style)
+O problema social é grave e complexo. Muitos jovens pobres não têm acesso à educação de qualidade. A situação difícil exige soluções rápidas e eficazes. Todo cidadão livre tem o direito de viver bem. É preciso agir de forma justa e solidária. O governo federal deve criar políticas públicas novas.
+
+CORPUS_3 — crônica / cotidiano
+Hoje foi um dia longo e cansativo. Acordei cedo, tomei um café quente e saí para trabalhar. O trânsito estava ruim como sempre. Cheguei atrasado e o chefe ficou bravo. Que coisa chata. À tarde as coisas melhoraram um pouco. Fui ao parque, caminhei devagar e me senti mais calmo.
+
+CORPUS_4 — texto formal / acadêmico
+O fenômeno natural é recorrente na região sul do país. Os pesquisadores afirmam que o clima úmido favorece o crescimento de plantas nativas e raras. A análise detalhada dos dados coletados indica que o processo lento de degradação ambiental é preocupante e demanda atenção imediata e rigorosa.
+
+CORPUS_5 — diálogo informal
+Ei, você está bem? Sim, estou ótimo, obrigado. Que bom! A festa foi muito animada e gostosa. Todo mundo ficou feliz. Até o Pedro, que normalmente é sério e fechado, sorriu bastante. Puxa, que alegria! Bah, foi demais mesmo. Quero ir de novo na próxima vez.
+
+---
+MÉTODO DE MEDIÇÃO
+Rodar analisarMorfologiaFallback() com todos os sets hardcoded (sem norma-data.json).
+Filtrar pontuação: /^[.,;:!?—]$/
+Contar tokens sem tags.length === 0 como "sem tag".
+
+LIMITAÇÕES CONHECIDAS
+- Fallback puro não carrega norma-data.json (_VERBOS_IRR, _VERBOS_PRES, prenomes, topônimos)
+- Com JSON, cobertura esperada +4-6 pontos percentuais
+- "com tag" pode ter tag incorreta (baixo como Adjective em "falou baixo")
+- Ambíguos resolvidos pela ordem do else-if, não por contexto

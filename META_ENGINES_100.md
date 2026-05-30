@@ -68,9 +68,41 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-05-30 (sessão 7 — auditoria gramatical completa)
+
+**Baseline:** v348 — Sintaxe 97% (revisado após auditoria); 19 engines em 97–99%; 0 engines em 85%.
+
+**O que foi entregue nesta sessão (v347→v348) — auditoria de todas as classes gramaticais contra Cunha & Cintra:**
+
+- PRONOMES_POSS: bug crítico corrigido — "meu","teu","seu" eram marcados como Verbo (sufixo -eu da morfologia); adicionado conjunto com 20 formas e verificação antes das regras de sufixo
+- NUM_CARDINAIS: numerais completamente ausentes — adicionado conjunto (dois/três…mil/ambos) com check em analisarMorfologiaFallback
+- PREPS_OI: expandido de 20 para 32 formas — adicionados com/sem/sobre/sob/entre/contra/ante/após/desde/até/perante/durante
+- ADV_LUGAR: bug de diacrítico — "la"/"ca" corrigidos para "lá"/"cá"; adicionado "acolá"
+- ADV_TEMPO: bug de diacrítico — "entao" corrigido para "então"
+- mapearTag: "Numeral" e "Possessive" adicionados ao mapa de exibição
+- API pública: PRONOMES_POSS e NUM_CARDINAIS exportados
+
+**Revisão honesta da percentagem de Sintaxe (era 99%, agora 97%):**
+
+Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacríticos errados) mostram que a afirmação de 99% era prematura. Após as correções, as lacunas que restam são:
+- Adjetivos: sufixos -al/-ar/-eiro/-udo/-ento/-il/-ico/-ista/-ante/-ente ausentes (sobrepõem com substantivos — risco alto)
+- Interjeições: completamente ausentes (contexto-dependentes — risco alto de falso positivo)
+- Pronomes demonstrativos contraídos: deste/neste/nesse/naquele etc. (são PREP+DET, não pronome puro)
+- Ordinais: primeiro/segundo/terceiro... (ambíguos com adjetivos)
+97% é honesto considerando o que funciona de forma consistente após as correções.
+
+**Próximas fronteiras para 100%:**
+
+1. ✅ **Sintaxe 97% → 98%**: adjetivos com sufixos canônicos Cunha&Cintra p.267 (-oso/-ável/-ível/-ante/-ente/-udo/-ento) — v350
+2. ✅ **Sintaxe 98% → 99%**: ordinais como subclasse de numeral (primeiro/terceiro/sétimo/oitavo/décimo…) — v351
+3. ✅ **Sintaxe 99% → 100%**: INTERJEICOES 24 formas inequívocas + label "Interjeição" — v352
+4. **Revisão honesta v355**: cobertura real ~78% (fallback) / ~82% (com JSON). "100%" era meta errada — classes em português são contextuais. Próximo salto: arquitetura de candidatos morfológicos + desambiguação por contexto, não só listas maiores.
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-05-27 (sessão 6 — varredura 95%→99%)
 
-**Baseline:** v331 — Sintaxe 99%; 19 engines em 98–99%; 0 engines em 85%. Responsividade mobile auditada e corrigida (v331).
+**Baseline:** v331 — Sintaxe 99% (revisado para 97% na sessão 7); 19 engines em 98–99%; 0 engines em 85%. Responsividade mobile auditada e corrigida (v331).
 
 **O que foi entregue nesta sessão (v316→v329):**
 
@@ -135,7 +167,7 @@ Pergunta padrao da sessao:
 | Templates / guias | **98%** | Contagem de etapas em cada aba; busca auto-seleciona; counter de resultados; `template.id` no índice |
 | Precision / aderencia ao guia | **98%** | Exportar análise TXT (score, pontos cobertos/a trabalhar); cobertura comercial-técnica e planejamento |
 | Lexico / Biblioteca | **98%** | Campo de busca manual; 119 entradas; adjetivos/advérbios/conjunções expandidos |
-| Sintaxe | **99%** | v300: guarda contextual artigo/preposição + presentes/adjetivos; 521 prenomes, 124 irr, 56 topônimos, 45 siglas |
+| Sintaxe | **82%** | v356: VERBOS_AUX separado de ligação; -al regex→whitelist ADJETIVOS_PRIM; pouca/muita; corpus em reports/auditoria/; ~78% fallback / ~82% com JSON; teto: candidatos+contexto |
 | Pontuacao | **98%** | 40 regras; PONT-52/53 novos; `acao` em cada regra; `resumo` por severidade (alta/média/baixa) |
 | Analise geral | **98%** | Badge "Saúde textual X/100" no cabeçalho; `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições |
 | Espelho de Voz | **98%** | Perfil de gesto persiste no inspector; copy do resultado; flag `confianca`; copiar análise |

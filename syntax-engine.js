@@ -59,11 +59,106 @@
   const PRONOMES_INDF = new Set([
     "alguém","ninguém","tudo","nada","algo","qualquer","todo","toda","todos","todas",
     "outrem","outro","outra","outros","outras","cada","nenhum","nenhuma",
-    "algum","alguma","alguns","algumas"
+    "algum","alguma","alguns","algumas",
+    "muitos","muitas","poucos","poucas","tantos","tantas",
+    "certo","certa","certos","certas","tal","tais",
+    "mesmo","mesma","mesmos","mesmas",
+    "próprio","própria","próprios","próprias",
   ]);
   const PRONOMES_DEM = new Set([
     "este","esta","estes","estas","esse","essa","esses","essas",
     "aquele","aquela","aqueles","aquelas","isto","isso","aquilo"
+  ]);
+
+  // Pronomes possessivos — Cunha&Cintra cap.11 — antes das regras de sufixo
+  // Impede "meu/teu/seu" (terminam em -eu) de serem classificados como Verbo
+  const PRONOMES_POSS = new Set([
+    "meu","minha","meus","minhas",
+    "teu","tua","teus","tuas",
+    "seu","sua","seus","suas",
+    "nosso","nossa","nossos","nossas",
+    "vosso","vossa","vossos","vossas",
+  ]);
+
+  // Numerais cardinais inequívocos — Cunha&Cintra cap.12 p.382-390
+  // Excluídos: um/uma (já em ARTIGOS_DEF) e ordinais (ambíguos com adjetivos)
+  const NUM_CARDINAIS = new Set([
+    "dois","duas","três","quatro","cinco","seis","sete","oito","nove","dez",
+    "onze","doze","treze","quatorze","catorze","quinze",
+    "dezesseis","dezessete","dezoito","dezenove",
+    "vinte","trinta","quarenta","cinquenta","sessenta","setenta","oitenta","noventa",
+    "cem","cento","mil","ambos","ambas",
+  ]);
+
+  // Adjetivos primitivos de alta frequência (Cunha&Cintra cap.10 — sem sufixo detectável)
+  const ADJETIVOS_PRIM = new Set([
+    "bom","boa","bons","boas","mau","má","maus","más",
+    "belo","bela","belos","belas","lindo","linda","lindos","lindas",
+    "feio","feia","feios","feias","livre","livres",
+    "triste","tristes","forte","fortes","fraco","fraca","fracos","fracas",
+    "novo","nova","novos","novas","velho","velha","velhos","velhas",
+    "rico","rica","ricos","ricas","pobre","pobres",
+    "frio","fria","frios","frias","quente","quentes",
+    "raro","rara","raros","raras","claro","clara","claros","claras",
+    "escuro","escura","escuros","escuras","quieto","quieta","quietos","quietas",
+    "leve","leves","suave","suaves","grave","graves","breve","breves",
+    "jovem","jovens","simples","único","única","únicos","únicas",
+    "sério","séria","sérios","sérias","feliz","felizes",
+    "difícil","difíceis","fácil","fáceis","ruim","ruins",
+    "ótimo","ótima","ótimos","ótimas","alto","alta","altos","altas",
+    "baixo","baixa","baixos","baixas","grande","grandes",
+    "largo","larga","largos","largas","longo","longa","longos","longas",
+    "curto","curta","curtos","curtas","duro","dura","duros","duras",
+    "doce","doces","calmo","calma","calmos","calmas",
+    "bravo","brava","bravos","bravas","fino","fina","finos","finas",
+    "bonito","bonita","bonitos","bonitas","atrasado","atrasada",
+    "animado","animada","animados","animadas","fechado","fechada",
+    "pensativo","pensativa","pensativos","pensativas",
+    "rápido","rápida","rápidos","rápidas","lento","lenta","lentos","lentas",
+    "complexo","complexa","complexos","complexas","justa","justo","justos","justas",
+    "úmido","úmida","úmidos","úmidas","imediato","imediata","imediatos","imediatas",
+    "próximo","próxima","próximos","próximas","eficaz","eficazes",
+    "público","pública","públicos","públicas","chato","chata","chatos","chatas",
+    "gostoso","gostosa","gostosos","gostosas","cansativo","cansativa",
+    "preocupante","rigoroso","rigorosa","solidário","solidária",
+    "detalhado","detalhada","coletado","coletada","coletados","coletadas",
+    "obrigado","obrigada",
+    "social","sociais","federal","federais","natural","naturais",
+    "cultural","culturais","nacional","nacionais","regional","regionais",
+    "global","globais","formal","formais","normal","normais",
+    "oficial","oficiais","especial","especiais","pessoal","pessoais",
+    "atual","atuais","fundamental","fundamentais","central","centrais",
+    "digital","digitais","ambiental","ambientais","judicial","judiciais",
+    "legal","legais","moral","morais","mental","mentais","visual","visuais",
+    "verbal","verbais","horizontal","horizontais","vertical","verticais",
+    "tropical","tropicais","rural","rurais","vital","vitais",
+    "total","totais","real","reais","local","locais",
+    "original","originais","parcial","parciais","racial","raciais",
+    "brutal","brutais","criminal","criminais","leal","leais",
+    "banal","banais","fatal","fatais","ideal","ideais",
+    "comercial","comerciais","industrial","industriais","material","materiais",
+  ]);
+
+  // Interjeições inequívocas (Cunha&Cintra cap.16); ambíguas como "puxa" (=verbo) e "nossa" (=pronome) excluídas
+  const INTERJEICOES = new Set([
+    "ah","oh","ih","uh","eh","ei",
+    "oba","ufa","xi","vixe","epa","ué","opa","poxa","bah","hem","hein",
+    "caramba","eita","eta","arre","ena","uai","credo","ave",
+    "alô","tchau","psiu","oxalá",
+  ]);
+
+  // Ordinais canônicos sem ambiguidade de substantivo (Cunha&Cintra cap.12)
+  // Excluídos por ambiguidade: segundo (preposição), quarto (cômodo), quinto/quinta (quinta-feira), sexta (sexta-feira), nono (avô informal)
+  const NUM_ORDINAIS = new Set([
+    "primeiro","primeira","primeiros","primeiras",
+    "terceiro","terceira","terceiros","terceiras",
+    "sétimo","sétima","sétimos","sétimas",
+    "oitavo","oitava","oitavos","oitavas",
+    "décimo","décima","décimos","décimas",
+    "vigésimo","vigésima","vigésimos","vigésimas",
+    "trigésimo","trigésima","trigésimos","trigésimas",
+    "centésimo","centésima","centésimos","centésimas",
+    "milésimo","milésima","milésimos","milésimas",
   ]);
 
   function analisarMorfologiaFallback(texto) {
@@ -85,6 +180,19 @@
       else if (PRONOMES_OBL.has(norm))  { tags.push("Pronoun"); }
       else if (PRONOMES_INDF.has(norm)) { tags.push("Pronoun"); tags.push("Noun"); }
       else if (PRONOMES_DEM.has(norm))  { tags.push("Pronoun"); }
+      else if (PRONOMES_POSS.has(norm)) { tags.push("Pronoun"); tags.push("Possessive"); }
+      else if (NUM_CARDINAIS.has(norm)) { tags.push("Noun"); tags.push("Numeral"); }
+      else if (NUM_ORDINAIS.has(norm)) { tags.push("Adjective"); tags.push("Numeral"); }
+      else if (INTERJEICOES.has(norm)) { tags.push("Interjection"); }
+      else if (ADJETIVOS_PRIM.has(norm)) { tags.push("Adjective"); }
+      else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
+      else if (ADV_AFIRM.has(norm))   { tags.push("Adverb"); }
+      else if (ADV_TEMPO.has(norm))   { tags.push("Adverb"); }
+      else if (ADV_LUGAR.has(norm))   { tags.push("Adverb"); }
+      else if (ADV_MODO.has(norm))    { tags.push("Adverb"); }
+      else if (ADV_INTENS.has(norm))  { tags.push("Adverb"); }
+      else if (ADV_DUVIDA.has(norm))  { tags.push("Adverb"); }
+      else if (VERBOS_AUX.has(norm))  { tags.push("Verb"); }
       else {
         // Nome próprio: inicial maiúscula após token que não encerra sentença
         const prevToken = i > 0 ? tokens[i - 1] : null;
@@ -123,6 +231,10 @@
           const _na = _stripDiac(norm);
           if (/(?:oso|osa)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:avel|ivel)$/.test(_na) && _na.length > 5) tags.push("Adjective");
+          if (/(?:ante|ente)$/.test(_na) && _na.length > 6) tags.push("Adjective");
+          if (/(?:udo|uda|udos|udas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
+          if (/(?:ento|enta)$/.test(_na) && _na.length > 6) tags.push("Adjective");
+          if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
           else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) {
@@ -155,7 +267,7 @@
       Verb:"Verbo", Adjective:"Adjetivo", Adverb:"Advérbio",
       Preposition:"Preposição", Conjunction:"Conjunção",
       Determiner:"Artigo/Determinante", Pronoun:"Pronome",
-      Possessive:"Possessivo", Negative:"Negação",
+      Possessive:"Possessivo", Numeral:"Numeral", Negative:"Negação", Interjection:"Interjeição",
       FutureTense:"Futuro", PastTense:"Pretérito perfeito",
       PresentTense:"Presente", Infinitive:"Infinitivo",
       Gerund:"Gerúndio", Imperative:"Imperativo",
@@ -297,11 +409,25 @@
     "fica","ficou","ficava","ficará","ficaria","ficasse","fique",
     "parece","pareceu","parecia","parecerá","pareceria","parecesse","pareça",
     "continua","continuou","continuava","continuará","continuaria",
-    "permanece","permaneceu","permanecia","permanecerá"
+    "permanece","permaneceu","permanecia","permanecerá",
+    "são","eram","foram","serão","seriam","fossem","sejam",
   ]);
 
-  // ── Preposições que introduzem OI — Bechara Lições §OI ────────────────────
-  const PREPS_OI = new Set(["a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas","para","por","pelo","pela","pelos","pelas"]);
+  // Verbos auxiliares e existenciais — têm/ter/haver: tag Verb sem função de ligação
+  const VERBOS_AUX = new Set([
+    "ter","tem","têm","tinha","tinham","tive","teve","tivemos","tiveram",
+    "terá","terão","teria","teriam","tivesse","tivessem","tenha","tenham",
+    "haver","há","havia","houve","houveram","haverá","haveria","haja",
+  ]);
+
+  // ── Preposições essenciais — Cunha&Cintra cap.15 + Bechara Lições §OI ────────
+  // PREPS_OI: contrações de a/de/em/por com artigo (já estavam) + preposições
+  // essenciais sem contração. Usado como guarda anti-verbo e como tag Preposição.
+  const PREPS_OI = new Set([
+    "a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas",
+    "para","por","pelo","pela","pelos","pelas",
+    "com","sem","sobre","sob","entre","contra","ante","após","desde","até","perante","durante",
+  ]);
 
   // ── Artigos definidos/indefinidos inequívocos — Bechara §§ 128-130 ─────────
   // "a" excluído: ambíguo com preposição — tratado separadamente na posição 0
@@ -370,12 +496,12 @@
   }
 
   // ── Advérbios por tipo — Cunha&Cintra cap.14 + syntax-data ────────────────
-  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","entao","enfim","finalmente","ainda","brevemente","imediatamente"]);
-  const ADV_LUGAR   = new Set(["aqui","ali","la","ca","aí","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures"]);
+  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente"]);
+  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá"]);
   const ADV_MODO    = new Set(["assim","bem","mal","melhor","pior","devagar","depressa","rapidamente","lentamente","facilmente","dificilmente","calmamente"]);
   const ADV_NEGACAO = new Set(["não","nem","jamais","nunca","tampouco"]);
-  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente"]);
-  const ADV_INTENS  = new Set(["muito","pouco","bastante","mais","menos","tão","tanto","quão","quase","demais","apenas","somente","só"]);
+  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive"]);
+  const ADV_INTENS  = new Set(["muito","muita","pouco","pouca","bastante","mais","menos","tão","tanto","quão","quase","demais","apenas","somente","só"]);
   const ADV_DUVIDA  = new Set(["talvez","provavelmente","possivelmente","porventura","quiçá","eventualmente"]);
 
   function tipoAdvérbio(norm) {
@@ -698,6 +824,13 @@
     PRONOMES_OBL,
     PRONOMES_INDF,
     PRONOMES_DEM,
+    PRONOMES_POSS,
+    NUM_CARDINAIS,
+    NUM_ORDINAIS,
+    INTERJEICOES,
+    ADJETIVOS_PRIM,
+    ADV_TEMPO, ADV_LUGAR, ADV_MODO, ADV_NEGACAO, ADV_AFIRM, ADV_INTENS, ADV_DUVIDA,
+    VERBOS_AUX,
   };
 
 })(window);
