@@ -91,9 +91,9 @@ Oficina literária gratuita para escritoras e escritores brasileiros. Criado por
 Falam do processo de criar. Apontam para o Escrevaral.
 Voz: primeira pessoa, exceto LinkedIn press kit (terceira).
 
-### Bluesky @rafa.pro.br (300 caracteres — primeira pessoa)
+### Bluesky @rafa.pro.br (256 caracteres — primeira pessoa)
 ```
-Em 2006 um roteiro meu foi premiado em festival — e me levou à publicidade. Convivi com Bechara na ABL em 2010 em Lexicografia. Em 2020 escrevi 366 textos, um por dia. Criei o Escrevaral.com com tudo que não tinha — oficina de escrita gratuita para escritores brasileiros.
+Em 2006 um roteiro meu foi premiado em festival — e me levou à publicidade. Convivi com Bechara na ABL em 2010. Em 2020 escrevi 366 textos, um por dia. Criei o Escrevaral.com com tudo que não tinha — oficina gratuita para escritores brasileiros.
 ```
 
 ### X / Twitter @rafamass (160 caracteres — primeira pessoa)
