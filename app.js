@@ -111,6 +111,11 @@ function setView(viewName, options = {}) {
       const hasActive = getActiveManuscript() !== null;
       resumeLink.hidden = !hasActive;
     }
+    const enemHint = document.querySelector("[data-academy-enem-hint]");
+    if (enemHint) {
+      const ms = getActiveManuscript();
+      enemHint.hidden = !(ms && ms.oficio === "estudo-vestibular");
+    }
     if (window.VeredaAcademiaController) {
       if (typeof renderDecolonialObserver === "function") renderDecolonialObserver();
       if (typeof renderRightsLab === "function") renderRightsLab();

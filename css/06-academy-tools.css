@@ -84,6 +84,33 @@
 .academy-resume-link .material-symbols-outlined { font-size: 18px; }
 .academy-resume-link:hover { text-decoration: underline; }
 
+/* Dica contextual ENEM — aparece apenas em manuscritos vestibular (F4) */
+.academy-enem-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+  max-width: 480px;
+}
+.academy-enem-hint[hidden] { display: none; }
+.academy-enem-hint .material-symbols-outlined { font-size: 18px; color: var(--primary); flex-shrink: 0; margin-top: 1px; }
+.academy-enem-hint p { margin: 0; }
+.academy-enem-hint .link-inline {
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-skip-ink: auto;
+}
+.academy-enem-hint .link-inline:hover { text-decoration-thickness: 2px; }
+
 .academy-leitura {
   margin: 40px 0;
   padding-top: 32px;
