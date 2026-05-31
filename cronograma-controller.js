@@ -182,6 +182,7 @@ function renderCronograma() {
   const heatmap     = document.querySelector("[data-crono-heatmap]");
   const titleEl     = document.querySelector("[data-crono-title]");
   const monthLabel  = document.querySelector("[data-crono-month]");
+  const hint        = document.querySelector("[data-crono-hint]");
   if (!timeline) return;
 
   const TODAY       = new Date();
@@ -202,6 +203,14 @@ function renderCronograma() {
     if (!autoByDay[key]) autoByDay[key] = [];
     autoByDay[key].push(m);
   });
+
+  // Hint: aparece quando o mês atual não tem nenhuma sessão
+  if (hint) {
+    const monthPrefix = `${cronoYear}-${String(cronoMonth+1).padStart(2,"0")}`;
+    const monthHasAuto   = Object.keys(autoByDay).some(k => k.startsWith(monthPrefix));
+    const monthHasManual = Object.keys(plannerData).some(k => k.startsWith(monthPrefix));
+    hint.hidden = monthHasAuto || monthHasManual;
+  }
 
   // Heatmap
   if (heatmap) {

@@ -258,6 +258,34 @@
   transition: background var(--motion-quick), color var(--motion-quick);
 }
 .fmt-btn .material-symbols-outlined { font-size: 18px; }
+
+.fmt-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  display: none;
+}
+
+.fmt-btn-labeled {
+  flex-direction: column;
+  gap: 2px;
+  width: auto;
+  min-width: 30px;
+  padding: 0 6px;
+}
+
+/* Mostrar label quando o grupo editorial estiver aberto */
+.fmt-group-editorial.is-open .fmt-label {
+  display: block;
+}
+
+/* No mobile: label sempre visível */
+@media (max-width: 768px) {
+  .fmt-label { display: block; }
+  .fmt-btn-labeled { padding: 0 5px; }
+}
 .fmt-btn:hover { background: var(--surface-low); }
 .fmt-btn.is-active {
   background: color-mix(in srgb, var(--primary) 12%, transparent);
@@ -425,6 +453,12 @@
 .proof-chip[data-level="high"]   { border-color: rgba(58, 125, 82, 0.35); color: #2a5a3a; }
 .proof-chip[data-level="medium"] { border-color: rgba(200, 149, 90, 0.45); }
 .proof-chip[data-level="low"]    { border-color: rgba(160, 82, 45, 0.45); color: var(--sienna); }
+
+.proof-chip-label {
+  font-weight: 600;
+  opacity: 0.7;
+  letter-spacing: 0.03em;
+}
 
 
 /* ── POPOVER DE PALAVRA ── */

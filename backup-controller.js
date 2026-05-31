@@ -52,7 +52,12 @@ function registerOfflineApp() {
   });
 
   function showUpdateBanner() {
-    if (updateBanner) updateBanner.hidden = false;
+    if (!updateBanner) return;
+    updateBanner.hidden = false;
+    if (window.innerWidth <= 768) {
+      const wa = document.querySelector(".writing-area");
+      if (wa) wa.addEventListener("input", () => { updateBanner.hidden = true; }, { once: true });
+    }
   }
 
   if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => {
