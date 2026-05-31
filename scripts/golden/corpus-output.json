@@ -1,0 +1,7079 @@
+{
+  "gerado_em": "2026-05-31",
+  "total_frases": 81,
+  "frases": [
+    {
+      "frase": "A tarde era bela e o silêncio, livre de culpa, envolvia tudo.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — classificação de \"bela\" e \"livre\"",
+      "gabarito": "\"bela\" = Adjetivo; \"livre\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "tarde",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "tarde"
+            },
+            {
+              "text": "era",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "era"
+            },
+            {
+              "text": "bela",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "bela"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "silêncio",
+              "tags": [],
+              "normal": "silêncio"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "livre",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "livre"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "culpa",
+              "tags": [],
+              "normal": "culpa"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "envolvia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "envolvia"
+            },
+            {
+              "text": "tudo",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "tudo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela tinha um jeito triste de dizer as coisas certas.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — classificação de \"triste\" e \"certas\"",
+      "gabarito": "\"triste\" = Adjetivo; \"certas\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "tinha",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "tinha"
+            },
+            {
+              "text": "um",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "um"
+            },
+            {
+              "text": "jeito",
+              "tags": [],
+              "normal": "jeito"
+            },
+            {
+              "text": "triste",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "triste"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "dizer",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dizer"
+            },
+            {
+              "text": "as",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "as"
+            },
+            {
+              "text": "coisas",
+              "tags": [],
+              "normal": "coisas"
+            },
+            {
+              "text": "certas",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "certas"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O homem grande não precisava falar alto.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — classificação de \"grande\" e \"alto\"",
+      "gabarito": "\"grande\" = Adjetivo; \"alto\" = Adjetivo (não Advérbio neste contexto)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "homem",
+              "tags": [],
+              "normal": "homem"
+            },
+            {
+              "text": "grande",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "grande"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "precisava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "precisava"
+            },
+            {
+              "text": "falar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "falar"
+            },
+            {
+              "text": "alto",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "alto"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Havia qualquer coisa estranha no modo como ela sorria.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — \"estranha\"",
+      "gabarito": "\"estranha\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Havia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "havia"
+            },
+            {
+              "text": "qualquer",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "qualquer"
+            },
+            {
+              "text": "coisa",
+              "tags": [],
+              "normal": "coisa"
+            },
+            {
+              "text": "estranha",
+              "tags": [],
+              "normal": "estranha"
+            },
+            {
+              "text": "no",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "no"
+            },
+            {
+              "text": "modo",
+              "tags": [],
+              "normal": "modo"
+            },
+            {
+              "text": "como",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "como"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "sorria",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sorria"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A mulher forte carregou o peso sem reclamar.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — \"forte\"",
+      "gabarito": "\"forte\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "mulher",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "mulher"
+            },
+            {
+              "text": "forte",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "forte"
+            },
+            {
+              "text": "carregou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "carregou"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "peso",
+              "tags": [],
+              "normal": "peso"
+            },
+            {
+              "text": "sem",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "sem"
+            },
+            {
+              "text": "reclamar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "reclamar"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Era uma noite simples, quente, quase feliz.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — \"simples\", \"quente\", \"feliz\"",
+      "gabarito": "\"simples\" = Adjetivo; \"quente\" = Adjetivo; \"feliz\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Era",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "era"
+            },
+            {
+              "text": "uma",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "uma"
+            },
+            {
+              "text": "noite",
+              "tags": [],
+              "normal": "noite"
+            },
+            {
+              "text": "simples",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "simples"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "quente",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "quente"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "quase",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "quase"
+            },
+            {
+              "text": "feliz",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "feliz"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O texto breve dizia mais do que o longo.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — \"breve\" e \"longo\"",
+      "gabarito": "\"breve\" = Adjetivo; \"longo\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "texto",
+              "tags": [],
+              "normal": "texto"
+            },
+            {
+              "text": "breve",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "breve"
+            },
+            {
+              "text": "dizia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dizia"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "longo",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "longo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Havia algo nobre na forma como ele errava.",
+      "zona": "adjetivo-sem-sufixo",
+      "testa": "Sintaxe — \"nobre\"",
+      "gabarito": "\"nobre\" = Adjetivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Havia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "havia"
+            },
+            {
+              "text": "algo",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "algo"
+            },
+            {
+              "text": "nobre",
+              "tags": [],
+              "normal": "nobre"
+            },
+            {
+              "text": "na",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "na"
+            },
+            {
+              "text": "forma",
+              "tags": [],
+              "normal": "forma"
+            },
+            {
+              "text": "como",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "como"
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "errava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "errava"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O meu ficou para trás quando o trem partiu.",
+      "zona": "pronome-possessivo",
+      "testa": "Sintaxe — \"meu\" como substantivo pronominado",
+      "gabarito": "\"meu\" = Pronome possessivo (substantivado)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "meu",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "meu"
+            },
+            {
+              "text": "ficou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficou"
+            },
+            {
+              "text": "para",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "para"
+            },
+            {
+              "text": "trás",
+              "tags": [],
+              "normal": "trás"
+            },
+            {
+              "text": "quando",
+              "tags": [
+                "Conjunction",
+                "Verb",
+                "Gerund"
+              ],
+              "normal": "quando"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "trem",
+              "tags": [],
+              "normal": "trem"
+            },
+            {
+              "text": "partiu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "partiu"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Cada um cuida do seu, dizia o avô.",
+      "zona": "pronome-possessivo",
+      "testa": "Sintaxe — \"seu\" substantivado",
+      "gabarito": "\"seu\" = Pronome possessivo (substantivado)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Cada",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "cada"
+            },
+            {
+              "text": "um",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "um"
+            },
+            {
+              "text": "cuida",
+              "tags": [],
+              "normal": "cuida"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "seu",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "seu"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "dizia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dizia"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "avô",
+              "tags": [],
+              "normal": "avô"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Teu silêncio diz mais do que tua palavra.",
+      "zona": "pronome-possessivo",
+      "testa": "Sintaxe — \"teu\" e \"tua\"",
+      "gabarito": "\"teu\" = Pronome possessivo; \"tua\" = Pronome possessivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Teu",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "teu"
+            },
+            {
+              "text": "silêncio",
+              "tags": [],
+              "normal": "silêncio"
+            },
+            {
+              "text": "diz",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "diz"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "tua",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "tua"
+            },
+            {
+              "text": "palavra",
+              "tags": [],
+              "normal": "palavra"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Nossa conversa ficou pela metade.",
+      "zona": "pronome-possessivo",
+      "testa": "Sintaxe — \"nossa\"",
+      "gabarito": "\"nossa\" = Pronome possessivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Nossa",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "nossa"
+            },
+            {
+              "text": "conversa",
+              "tags": [],
+              "normal": "conversa"
+            },
+            {
+              "text": "ficou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficou"
+            },
+            {
+              "text": "pela",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "pela"
+            },
+            {
+              "text": "metade",
+              "tags": [],
+              "normal": "metade"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Vossa presença era o suficiente.",
+      "zona": "pronome-possessivo",
+      "testa": "Sintaxe — \"vossa\"",
+      "gabarito": "\"vossa\" = Pronome possessivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Vossa",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "vossa"
+            },
+            {
+              "text": "presença",
+              "tags": [],
+              "normal": "presença"
+            },
+            {
+              "text": "era",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "era"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "suficiente",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "suficiente"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Gostei deste parágrafo mais do que daquele.",
+      "zona": "demonstrativo-contraido",
+      "testa": "Sintaxe — \"deste\" e \"daquele\"",
+      "gabarito": "\"deste\" = Preposição+Demonstrativo; \"daquele\" = Preposição+Demonstrativo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Gostei",
+              "tags": [],
+              "normal": "gostei"
+            },
+            {
+              "text": "deste",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "deste"
+            },
+            {
+              "text": "parágrafo",
+              "tags": [],
+              "normal": "parágrafo"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "daquele",
+              "tags": [],
+              "normal": "daquele"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Neste ponto a narrativa perde o fôlego.",
+      "zona": "demonstrativo-contraido",
+      "testa": "Sintaxe — \"neste\"",
+      "gabarito": "\"neste\" = Preposição+Demonstrativo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Neste",
+              "tags": [],
+              "normal": "neste"
+            },
+            {
+              "text": "ponto",
+              "tags": [],
+              "normal": "ponto"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "narrativa",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "narrativa"
+            },
+            {
+              "text": "perde",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "perde"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "fôlego",
+              "tags": [],
+              "normal": "fôlego"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Falou disso como se fosse óbvio.",
+      "zona": "demonstrativo-contraido",
+      "testa": "Sintaxe — \"disso\"",
+      "gabarito": "\"disso\" = Preposição+Demonstrativo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Falou",
+              "tags": [],
+              "normal": "falou"
+            },
+            {
+              "text": "disso",
+              "tags": [],
+              "normal": "disso"
+            },
+            {
+              "text": "como",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "como"
+            },
+            {
+              "text": "se",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "se"
+            },
+            {
+              "text": "fosse",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "fosse"
+            },
+            {
+              "text": "óbvio",
+              "tags": [],
+              "normal": "óbvio"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Naquele tempo as cartas ainda chegavam.",
+      "zona": "demonstrativo-contraido",
+      "testa": "Sintaxe — \"naquele\"",
+      "gabarito": "\"naquele\" = Preposição+Demonstrativo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Naquele",
+              "tags": [],
+              "normal": "naquele"
+            },
+            {
+              "text": "tempo",
+              "tags": [],
+              "normal": "tempo"
+            },
+            {
+              "text": "as",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "as"
+            },
+            {
+              "text": "cartas",
+              "tags": [],
+              "normal": "cartas"
+            },
+            {
+              "text": "ainda",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "ainda"
+            },
+            {
+              "text": "chegavam",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chegavam"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O primeiro capítulo é sempre o mais difícil.",
+      "zona": "ordinal",
+      "testa": "Sintaxe — \"primeiro\"",
+      "gabarito": "\"primeiro\" = Numeral ordinal",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "primeiro",
+              "tags": [
+                "Adjective",
+                "Numeral"
+              ],
+              "normal": "primeiro"
+            },
+            {
+              "text": "capítulo",
+              "tags": [],
+              "normal": "capítulo"
+            },
+            {
+              "text": "é",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "é"
+            },
+            {
+              "text": "sempre",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "sempre"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": "difícil",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "difícil"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela terminou em segundo lugar sem reclamar.",
+      "zona": "ordinal",
+      "testa": "Sintaxe — \"segundo\" ordinal vs. conjunção",
+      "gabarito": "\"segundo\" = Numeral ordinal (não Conjunção nem Preposição)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "terminou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "terminou"
+            },
+            {
+              "text": "em",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "em"
+            },
+            {
+              "text": "segundo",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "segundo"
+            },
+            {
+              "text": "lugar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "lugar"
+            },
+            {
+              "text": "sem",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "sem"
+            },
+            {
+              "text": "reclamar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "reclamar"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Foi a terceira vez que ele tentou começar o romance.",
+      "zona": "ordinal",
+      "testa": "Sintaxe — \"terceira\"",
+      "gabarito": "\"terceira\" = Numeral ordinal",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Foi",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "foi"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "terceira",
+              "tags": [
+                "Adjective",
+                "Numeral"
+              ],
+              "normal": "terceira"
+            },
+            {
+              "text": "vez",
+              "tags": [],
+              "normal": "vez"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "tentou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "tentou"
+            },
+            {
+              "text": "começar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "começar"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "romance",
+              "tags": [],
+              "normal": "romance"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O quinto andar estava sempre silencioso.",
+      "zona": "ordinal",
+      "testa": "Sintaxe — \"quinto\"",
+      "gabarito": "\"quinto\" = Numeral ordinal",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "quinto",
+              "tags": [],
+              "normal": "quinto"
+            },
+            {
+              "text": "andar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "andar"
+            },
+            {
+              "text": "estava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "estava"
+            },
+            {
+              "text": "sempre",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "sempre"
+            },
+            {
+              "text": "silencioso",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "silencioso"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Chegou na décima fila, resignado.",
+      "zona": "ordinal",
+      "testa": "Sintaxe — \"décima\"",
+      "gabarito": "\"décima\" = Numeral ordinal",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Chegou",
+              "tags": [],
+              "normal": "chegou"
+            },
+            {
+              "text": "na",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "na"
+            },
+            {
+              "text": "décima",
+              "tags": [
+                "Adjective",
+                "Numeral"
+              ],
+              "normal": "décima"
+            },
+            {
+              "text": "fila",
+              "tags": [],
+              "normal": "fila"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "resignado",
+              "tags": [],
+              "normal": "resignado"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ora, isso não é nenhuma novidade, suspirou ela.",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"ora\" como interjeição",
+      "gabarito": "\"ora\" = Interjeição (não Advérbio)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ora",
+              "tags": [],
+              "normal": "ora"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "isso",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "isso"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "é",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "é"
+            },
+            {
+              "text": "nenhuma",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "nenhuma"
+            },
+            {
+              "text": "novidade",
+              "tags": [],
+              "normal": "novidade"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "suspirou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "suspirou"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ei, você ainda está aí?",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"ei\"",
+      "gabarito": "\"ei\" = Interjeição",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ei",
+              "tags": [
+                "Interjection"
+              ],
+              "normal": "ei"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "você",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "você"
+            },
+            {
+              "text": "ainda",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "ainda"
+            },
+            {
+              "text": "está",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "está"
+            },
+            {
+              "text": "aí",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "aí"
+            },
+            {
+              "text": "?",
+              "tags": [],
+              "normal": "?"
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ah, o tempo que se perdeu naquele corredor.",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"ah\"",
+      "gabarito": "\"ah\" = Interjeição",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ah",
+              "tags": [
+                "Interjection"
+              ],
+              "normal": "ah"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "tempo",
+              "tags": [],
+              "normal": "tempo"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "se",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "se"
+            },
+            {
+              "text": "perdeu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "perdeu"
+            },
+            {
+              "text": "naquele",
+              "tags": [],
+              "normal": "naquele"
+            },
+            {
+              "text": "corredor",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "corredor"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Puxa, nunca pensei que chegaria até aqui.",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"puxa\"",
+      "gabarito": "\"puxa\" = Interjeição",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Puxa",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "puxa"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "nunca",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "nunca"
+            },
+            {
+              "text": "pensei",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "pensei"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "chegaria",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chegaria"
+            },
+            {
+              "text": "até",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "até"
+            },
+            {
+              "text": "aqui",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "aqui"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Nossa, que silêncio pesado.",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"nossa\" como interjeição (não possessivo)",
+      "gabarito": "\"nossa\" = Interjeição (contexto exclamativo, não possessivo)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Nossa",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "nossa"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "silêncio",
+              "tags": [],
+              "normal": "silêncio"
+            },
+            {
+              "text": "pesado",
+              "tags": [],
+              "normal": "pesado"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ufa, por fim o dia acabou.",
+      "zona": "interjeccao",
+      "testa": "Sintaxe — \"ufa\"",
+      "gabarito": "\"ufa\" = Interjeição",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ufa",
+              "tags": [
+                "Interjection"
+              ],
+              "normal": "ufa"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "por",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "por"
+            },
+            {
+              "text": "fim",
+              "tags": [],
+              "normal": "fim"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "dia",
+              "tags": [],
+              "normal": "dia"
+            },
+            {
+              "text": "acabou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "acabou"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele entrou — devagar, muito devagar — e fechou a porta.",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — travessão como aposto",
+      "gabarito": "sem alerta; travessão com espaço em aposto é uso válido",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "entrou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "entrou"
+            },
+            {
+              "text": "—",
+              "tags": [],
+              "normal": "—"
+            },
+            {
+              "text": "devagar",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "devagar"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "muito",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "muito"
+            },
+            {
+              "text": "devagar",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "devagar"
+            },
+            {
+              "text": "—",
+              "tags": [],
+              "normal": "—"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "fechou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "fechou"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "porta",
+              "tags": [],
+              "normal": "porta"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela sabia. Sabia e calava. E calando, vivia.",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — fragmentos intencionais",
+      "gabarito": "sem alerta; fragmentação sintática é recurso estilístico",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "sabia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabia"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": "Sabia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabia"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "calava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "calava"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": "E",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "calando",
+              "tags": [
+                "Verb",
+                "Gerund"
+              ],
+              "normal": "calando"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "vivia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "vivia"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A vida era assim: longa; incerta; às vezes, bela.",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — ponto-e-vírgula como ritmo",
+      "gabarito": "sem alerta; ponto-e-vírgula separando itens com vírgula interna é correto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "vida",
+              "tags": [],
+              "normal": "vida"
+            },
+            {
+              "text": "era",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "era"
+            },
+            {
+              "text": "assim",
+              "tags": [
+                "Conjunction",
+                "Adverb"
+              ],
+              "normal": "assim"
+            },
+            {
+              "text": ":",
+              "tags": [],
+              "normal": ":"
+            },
+            {
+              "text": "longa",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "longa"
+            },
+            {
+              "text": ";",
+              "tags": [],
+              "normal": ";"
+            },
+            {
+              "text": "incerta",
+              "tags": [],
+              "normal": "incerta"
+            },
+            {
+              "text": ";",
+              "tags": [],
+              "normal": ";"
+            },
+            {
+              "text": "às",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "às"
+            },
+            {
+              "text": "vezes",
+              "tags": [],
+              "normal": "vezes"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "bela",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "bela"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Onde estará ela agora...",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — reticências no fim de frase interrogativa",
+      "gabarito": "sem alerta; reticências substituindo ponto de interrogação é uso literário válido",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Onde",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "onde"
+            },
+            {
+              "text": "estará",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "estará"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "agora",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "agora"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Não sabia o que dizer — e isso, talvez, fosse a resposta.",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — travessão + vírgulas de aposto encaixado",
+      "gabarito": "sem alerta; estrutura válida com aposto parentético",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "sabia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabia"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "dizer",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dizer"
+            },
+            {
+              "text": "—",
+              "tags": [],
+              "normal": "—"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "isso",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "isso"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "talvez",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "talvez"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "fosse",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "fosse"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "resposta",
+              "tags": [],
+              "normal": "resposta"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Esperou. Esperou muito. Esperou até não poder mais.",
+      "zona": "pontuacao-literaria",
+      "testa": "Pontuação — repetição anafórica com ponto deliberado",
+      "gabarito": "sem alerta; recurso estilístico de anáfora",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Esperou",
+              "tags": [],
+              "normal": "esperou"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": "Esperou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "esperou"
+            },
+            {
+              "text": "muito",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "muito"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            },
+            {
+              "text": "Esperou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "esperou"
+            },
+            {
+              "text": "até",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "até"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "poder",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "poder"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O romance foi escrito em três meses de reclusão.",
+      "zona": "voz-passiva",
+      "testa": "Espelho de Voz — voz passiva analítica",
+      "gabarito": "detectado como voz passiva",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "romance",
+              "tags": [],
+              "normal": "romance"
+            },
+            {
+              "text": "foi",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "foi"
+            },
+            {
+              "text": "escrito",
+              "tags": [],
+              "normal": "escrito"
+            },
+            {
+              "text": "em",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "em"
+            },
+            {
+              "text": "três",
+              "tags": [
+                "Noun",
+                "Numeral"
+              ],
+              "normal": "três"
+            },
+            {
+              "text": "meses",
+              "tags": [],
+              "normal": "meses"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "reclusão",
+              "tags": [],
+              "normal": "reclusão"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Escreve-se muito por aqui quando o inverno chega.",
+      "zona": "voz-passiva",
+      "testa": "Espelho de Voz — voz passiva sintética (pronome apassivador)",
+      "gabarito": "detectado como voz passiva (ou voz indeterminada — ambos aceitáveis)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Escreve-se",
+              "tags": [],
+              "normal": "escreve-se"
+            },
+            {
+              "text": "muito",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "muito"
+            },
+            {
+              "text": "por",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "por"
+            },
+            {
+              "text": "aqui",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "aqui"
+            },
+            {
+              "text": "quando",
+              "tags": [
+                "Conjunction",
+                "Verb",
+                "Gerund"
+              ],
+              "normal": "quando"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "inverno",
+              "tags": [],
+              "normal": "inverno"
+            },
+            {
+              "text": "chega",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chega"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Vendem-se ilusões neste mercado.",
+      "zona": "voz-passiva",
+      "testa": "Espelho de Voz — voz passiva sintética",
+      "gabarito": "detectado como voz passiva",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Vendem-se",
+              "tags": [],
+              "normal": "vendem-se"
+            },
+            {
+              "text": "ilusões",
+              "tags": [],
+              "normal": "ilusões"
+            },
+            {
+              "text": "neste",
+              "tags": [],
+              "normal": "neste"
+            },
+            {
+              "text": "mercado",
+              "tags": [],
+              "normal": "mercado"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A carta foi entregue na manhã seguinte.",
+      "zona": "voz-passiva",
+      "testa": "Espelho de Voz — voz passiva analítica simples",
+      "gabarito": "detectado como voz passiva",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "carta",
+              "tags": [],
+              "normal": "carta"
+            },
+            {
+              "text": "foi",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "foi"
+            },
+            {
+              "text": "entregue",
+              "tags": [],
+              "normal": "entregue"
+            },
+            {
+              "text": "na",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "na"
+            },
+            {
+              "text": "manhã",
+              "tags": [],
+              "normal": "manhã"
+            },
+            {
+              "text": "seguinte",
+              "tags": [],
+              "normal": "seguinte"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Os livros eram lidos em voz alta toda noite.",
+      "zona": "voz-passiva",
+      "testa": "Espelho de Voz — voz passiva analítica no imperfeito",
+      "gabarito": "detectado como voz passiva",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Os",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "os"
+            },
+            {
+              "text": "livros",
+              "tags": [],
+              "normal": "livros"
+            },
+            {
+              "text": "eram",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "eram"
+            },
+            {
+              "text": "lidos",
+              "tags": [],
+              "normal": "lidos"
+            },
+            {
+              "text": "em",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "em"
+            },
+            {
+              "text": "voz",
+              "tags": [],
+              "normal": "voz"
+            },
+            {
+              "text": "alta",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "alta"
+            },
+            {
+              "text": "toda",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "toda"
+            },
+            {
+              "text": "noite",
+              "tags": [],
+              "normal": "noite"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O menino ficou acolá, olhando a procissão passar.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"acolá\" como advérbio legítimo",
+      "gabarito": "sem alerta negativo; \"acolá\" é forma padrão e literária",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "menino",
+              "tags": [],
+              "normal": "menino"
+            },
+            {
+              "text": "ficou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficou"
+            },
+            {
+              "text": "acolá",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "acolá"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "olhando",
+              "tags": [
+                "Verb",
+                "Gerund"
+              ],
+              "normal": "olhando"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "procissão",
+              "tags": [],
+              "normal": "procissão"
+            },
+            {
+              "text": "passar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "passar"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Aquela saia estava encardida de tanto uso.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"encardida\"",
+      "gabarito": "sem alerta; \"encardido/a\" é vocabulário popular legítimo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Aquela",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "aquela"
+            },
+            {
+              "text": "saia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "saia"
+            },
+            {
+              "text": "estava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "estava"
+            },
+            {
+              "text": "encardida",
+              "tags": [],
+              "normal": "encardida"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "tanto",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "tanto"
+            },
+            {
+              "text": "uso",
+              "tags": [],
+              "normal": "uso"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O fuleiro do vizinho apareceu sem avisar.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"fuleiro\"",
+      "gabarito": "sem alerta; vocabulário regional brasileiro válido",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "fuleiro",
+              "tags": [],
+              "normal": "fuleiro"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "vizinho",
+              "tags": [],
+              "normal": "vizinho"
+            },
+            {
+              "text": "apareceu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "apareceu"
+            },
+            {
+              "text": "sem",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "sem"
+            },
+            {
+              "text": "avisar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "avisar"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A menina ficou acanhada diante de tanta gente.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"acanhada\"",
+      "gabarito": "sem alerta; vocabulário brasileiro corrente",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "menina",
+              "tags": [],
+              "normal": "menina"
+            },
+            {
+              "text": "ficou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficou"
+            },
+            {
+              "text": "acanhada",
+              "tags": [],
+              "normal": "acanhada"
+            },
+            {
+              "text": "diante",
+              "tags": [],
+              "normal": "diante"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "tanta",
+              "tags": [],
+              "normal": "tanta"
+            },
+            {
+              "text": "gente",
+              "tags": [],
+              "normal": "gente"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele tinha um jeito xucro de falar que encantava.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"xucro\"",
+      "gabarito": "sem alerta; regionalismo legítimo (especialmente Nordeste/interior)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "tinha",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "tinha"
+            },
+            {
+              "text": "um",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "um"
+            },
+            {
+              "text": "jeito",
+              "tags": [],
+              "normal": "jeito"
+            },
+            {
+              "text": "xucro",
+              "tags": [],
+              "normal": "xucro"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "falar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "falar"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "encantava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "encantava"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A veia da minha avó sempre me chamava de benzinho.",
+      "zona": "vocabulario-regional",
+      "testa": "Decolonial/Léxico — \"veia\" como forma carinhosa regional para \"velha\"",
+      "gabarito": "sem alerta; uso afetivo regional válido",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "veia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "veia"
+            },
+            {
+              "text": "da",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "da"
+            },
+            {
+              "text": "minha",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "minha"
+            },
+            {
+              "text": "avó",
+              "tags": [],
+              "normal": "avó"
+            },
+            {
+              "text": "sempre",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "sempre"
+            },
+            {
+              "text": "me",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "me"
+            },
+            {
+              "text": "chamava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chamava"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "benzinho",
+              "tags": [],
+              "normal": "benzinho"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A chuva cai e vai e trai quem fica.",
+      "zona": "rimalab",
+      "testa": "RimaLab — rima interna (\"cai/vai/trai\")",
+      "gabarito": "detectar rima em \"cai\", \"vai\", \"trai\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "chuva",
+              "tags": [],
+              "normal": "chuva"
+            },
+            {
+              "text": "cai",
+              "tags": [],
+              "normal": "cai"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "vai",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "vai"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "trai",
+              "tags": [],
+              "normal": "trai"
+            },
+            {
+              "text": "quem",
+              "tags": [],
+              "normal": "quem"
+            },
+            {
+              "text": "fica",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "fica"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Noite de medo e frio, o rio some no vazio.",
+      "zona": "rimalab",
+      "testa": "RimaLab — rima entre \"frio/rio/vazio\"",
+      "gabarito": "detectar rima em \"frio\", \"rio\", \"vazio\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Noite",
+              "tags": [],
+              "normal": "noite"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "medo",
+              "tags": [],
+              "normal": "medo"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "frio",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "frio"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "rio",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "rio"
+            },
+            {
+              "text": "some",
+              "tags": [],
+              "normal": "some"
+            },
+            {
+              "text": "no",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "no"
+            },
+            {
+              "text": "vazio",
+              "tags": [],
+              "normal": "vazio"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Saudade salga, alaga, afaga e machuca.",
+      "zona": "rimalab",
+      "testa": "RimaLab — aliteração em \"s\" e assonância em \"a\"",
+      "gabarito": "detectar padrão sonoro; aliteração em s; assonância em a",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Saudade",
+              "tags": [],
+              "normal": "saudade"
+            },
+            {
+              "text": "salga",
+              "tags": [],
+              "normal": "salga"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "alaga",
+              "tags": [],
+              "normal": "alaga"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "afaga",
+              "tags": [],
+              "normal": "afaga"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "machuca",
+              "tags": [],
+              "normal": "machuca"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Lua nua na janela muda.",
+      "zona": "rimalab",
+      "testa": "RimaLab — rima em \"lua/nua/muda\" e aliteração em \"m\"",
+      "gabarito": "detectar rima em \"lua\", \"nua\"; assonância em \"u\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Lua",
+              "tags": [],
+              "normal": "lua"
+            },
+            {
+              "text": "nua",
+              "tags": [],
+              "normal": "nua"
+            },
+            {
+              "text": "na",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "na"
+            },
+            {
+              "text": "janela",
+              "tags": [],
+              "normal": "janela"
+            },
+            {
+              "text": "muda",
+              "tags": [],
+              "normal": "muda"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O amor demora, a dor não mora longe.",
+      "zona": "rimalab",
+      "testa": "RimaLab — \"amor/demora/dor/mora\" — assonância em \"or\"",
+      "gabarito": "detectar assonância em \"or\": amor, demora, dor, mora",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "amor",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "amor"
+            },
+            {
+              "text": "demora",
+              "tags": [],
+              "normal": "demora"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "dor",
+              "tags": [],
+              "normal": "dor"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "mora",
+              "tags": [],
+              "normal": "mora"
+            },
+            {
+              "text": "longe",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "longe"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela foi lá e voltou cá sem nada nas mãos.",
+      "zona": "diacritico",
+      "testa": "Sintaxe — \"lá\" e \"cá\" como advérbios",
+      "gabarito": "\"lá\" = Advérbio de lugar; \"cá\" = Advérbio de lugar",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "foi",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "foi"
+            },
+            {
+              "text": "lá",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "lá"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "voltou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "voltou"
+            },
+            {
+              "text": "cá",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "cá"
+            },
+            {
+              "text": "sem",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "sem"
+            },
+            {
+              "text": "nada",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "nada"
+            },
+            {
+              "text": "nas",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "nas"
+            },
+            {
+              "text": "mãos",
+              "tags": [],
+              "normal": "mãos"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Então ele disse que não voltaria nunca mais.",
+      "zona": "diacritico",
+      "testa": "Sintaxe — \"então\" com acento",
+      "gabarito": "\"então\" = Advérbio (não \"entao\")",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Então",
+              "tags": [
+                "Conjunction",
+                "Adverb"
+              ],
+              "normal": "então"
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "disse",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "disse"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "voltaria",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "voltaria"
+            },
+            {
+              "text": "nunca",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "nunca"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Vá até lá e veja com seus próprios olhos.",
+      "zona": "diacritico",
+      "testa": "Sintaxe — \"lá\" após \"até\"",
+      "gabarito": "\"lá\" = Advérbio de lugar",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Vá",
+              "tags": [],
+              "normal": "vá"
+            },
+            {
+              "text": "até",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "até"
+            },
+            {
+              "text": "lá",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "lá"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "veja",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "veja"
+            },
+            {
+              "text": "com",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "com"
+            },
+            {
+              "text": "seus",
+              "tags": [
+                "Pronoun",
+                "Possessive"
+              ],
+              "normal": "seus"
+            },
+            {
+              "text": "próprios",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "próprios"
+            },
+            {
+              "text": "olhos",
+              "tags": [],
+              "normal": "olhos"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Já não havia mais nada a esperar.",
+      "zona": "diacritico",
+      "testa": "Sintaxe — \"já\" como advérbio de tempo",
+      "gabarito": "\"já\" = Advérbio de tempo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Já",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "já"
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "havia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "havia"
+            },
+            {
+              "text": "mais",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "mais"
+            },
+            {
+              "text": "nada",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "nada"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "esperar",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "esperar"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A escritora e o editor discutiram por horas.",
+      "zona": "concordancia-verbal",
+      "testa": "Sintaxe — concordância com sujeito composto",
+      "gabarito": "verbo no plural; sujeito composto \"escritora e editor\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "escritora",
+              "tags": [],
+              "normal": "escritora"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "editor",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "editor"
+            },
+            {
+              "text": "discutiram",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "discutiram"
+            },
+            {
+              "text": "por",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "por"
+            },
+            {
+              "text": "horas",
+              "tags": [],
+              "normal": "horas"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Chegaram as cartas que esperávamos há meses.",
+      "zona": "concordancia-verbal",
+      "testa": "Sintaxe — sujeito posposto",
+      "gabarito": "concordância correta; sujeito \"cartas\" posposto ao verbo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Chegaram",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chegaram"
+            },
+            {
+              "text": "as",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "as"
+            },
+            {
+              "text": "cartas",
+              "tags": [],
+              "normal": "cartas"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "esperávamos",
+              "tags": [],
+              "normal": "esperávamos"
+            },
+            {
+              "text": "há",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "há"
+            },
+            {
+              "text": "meses",
+              "tags": [],
+              "normal": "meses"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A maioria dos leitores gostou do final.",
+      "zona": "concordancia-verbal",
+      "testa": "Sintaxe — concordância com \"maioria\" (sujeito coletivo)",
+      "gabarito": "verbo no singular é aceito com sujeito coletivo \"maioria\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "maioria",
+              "tags": [
+                "Noun"
+              ],
+              "normal": "maioria"
+            },
+            {
+              "text": "dos",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "dos"
+            },
+            {
+              "text": "leitores",
+              "tags": [],
+              "normal": "leitores"
+            },
+            {
+              "text": "gostou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "gostou"
+            },
+            {
+              "text": "do",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "do"
+            },
+            {
+              "text": "final",
+              "tags": [],
+              "normal": "final"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Nem ela nem ele soube o que dizer.",
+      "zona": "concordancia-verbal",
+      "testa": "Sintaxe — sujeito com \"nem...nem\" (concordância com o mais próximo)",
+      "gabarito": "concordância com o sujeito mais próximo é forma válida",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Nem",
+              "tags": [
+                "Conjunction",
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "nem"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "nem",
+              "tags": [
+                "Conjunction",
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "nem"
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "soube",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "soube"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "dizer",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dizer"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "As palavras eram poucas, mas precisas.",
+      "zona": "concordancia-nominal",
+      "testa": "Sintaxe — \"poucas\" e \"precisas\" como predicativos",
+      "gabarito": "\"poucas\" = Adjetivo predicativo plural; \"precisas\" = Adjetivo predicativo plural",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "As",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "as"
+            },
+            {
+              "text": "palavras",
+              "tags": [],
+              "normal": "palavras"
+            },
+            {
+              "text": "eram",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "eram"
+            },
+            {
+              "text": "poucas",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "poucas"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "mas",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "mas"
+            },
+            {
+              "text": "precisas",
+              "tags": [],
+              "normal": "precisas"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O homem e a mulher ficaram quietos.",
+      "zona": "concordancia-nominal",
+      "testa": "Sintaxe — \"quietos\" concordando com sujeito misto",
+      "gabarito": "\"quietos\" = Adjetivo masculino plural (sujeito misto → masculino)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "homem",
+              "tags": [],
+              "normal": "homem"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "mulher",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "mulher"
+            },
+            {
+              "text": "ficaram",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficaram"
+            },
+            {
+              "text": "quietos",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "quietos"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Meio confusa, ela releu o parágrafo.",
+      "zona": "concordancia-nominal",
+      "testa": "Sintaxe — \"meio\" como advérbio invariável",
+      "gabarito": "\"meio\" = Advérbio (invariável); \"confusa\" = Adjetivo feminino",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Meio",
+              "tags": [],
+              "normal": "meio"
+            },
+            {
+              "text": "confusa",
+              "tags": [],
+              "normal": "confusa"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "releu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "releu"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "parágrafo",
+              "tags": [],
+              "normal": "parágrafo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela assistiu ao espetáculo em silêncio.",
+      "zona": "regencia",
+      "testa": "Sintaxe — \"assistir a\" (transitivo indireto)",
+      "gabarito": "\"assistiu\" = Verbo transitivo indireto; \"ao\" = contração de \"a+o\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "assistiu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "assistiu"
+            },
+            {
+              "text": "ao",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "ao"
+            },
+            {
+              "text": "espetáculo",
+              "tags": [],
+              "normal": "espetáculo"
+            },
+            {
+              "text": "em",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "em"
+            },
+            {
+              "text": "silêncio",
+              "tags": [],
+              "normal": "silêncio"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele implicava com tudo e com todos.",
+      "zona": "regencia",
+      "testa": "Sintaxe — \"implicar com\" (transitivo indireto)",
+      "gabarito": "\"implicava\" = Verbo transitivo indireto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "implicava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "implicava"
+            },
+            {
+              "text": "com",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "com"
+            },
+            {
+              "text": "tudo",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "tudo"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "com",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "com"
+            },
+            {
+              "text": "todos",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "todos"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Precisamos de tempo, não de pressa.",
+      "zona": "regencia",
+      "testa": "Sintaxe — \"precisar de\" (transitivo indireto)",
+      "gabarito": "\"precisamos\" = Verbo transitivo indireto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Precisamos",
+              "tags": [],
+              "normal": "precisamos"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "tempo",
+              "tags": [],
+              "normal": "tempo"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "não",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "não"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "pressa",
+              "tags": [],
+              "normal": "pressa"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela voltou à cidade que abandonara.",
+      "zona": "crase",
+      "testa": "Pontuação/Sintaxe — crase obrigatória antes de \"cidade\" feminino",
+      "gabarito": "sem alerta; crase obrigatória em \"à\" (a+a, feminino)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "voltou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "voltou"
+            },
+            {
+              "text": "à",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "à"
+            },
+            {
+              "text": "cidade",
+              "tags": [],
+              "normal": "cidade"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "abandonara",
+              "tags": [],
+              "normal": "abandonara"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Referiu-se a ela com respeito.",
+      "zona": "crase",
+      "testa": "Pontuação/Sintaxe — crase proibida antes de pronome pessoal",
+      "gabarito": "sem alerta; crase proibida antes de pronome; \"a ela\" correto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Referiu-se",
+              "tags": [],
+              "normal": "referiu-se"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "com",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "com"
+            },
+            {
+              "text": "respeito",
+              "tags": [],
+              "normal": "respeito"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Saiu a pé pelo bairro antigo.",
+      "zona": "crase",
+      "testa": "Pontuação/Sintaxe — crase proibida em locução adverbial masculina",
+      "gabarito": "sem alerta; \"a pé\" correto sem crase",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Saiu",
+              "tags": [],
+              "normal": "saiu"
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "pé",
+              "tags": [],
+              "normal": "pé"
+            },
+            {
+              "text": "pelo",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "pelo"
+            },
+            {
+              "text": "bairro",
+              "tags": [],
+              "normal": "bairro"
+            },
+            {
+              "text": "antigo",
+              "tags": [],
+              "normal": "antigo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Aquela mulher, ninguém sabia de onde vinha.",
+      "zona": "anacoluto",
+      "testa": "Sintaxe — anacoluto (deslocamento do tema)",
+      "gabarito": "sem alerta crítico; anacoluto é figura sintática válida na literatura",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Aquela",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "aquela"
+            },
+            {
+              "text": "mulher",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "mulher"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "ninguém",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ninguém"
+            },
+            {
+              "text": "sabia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabia"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "onde",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "onde"
+            },
+            {
+              "text": "vinha",
+              "tags": [],
+              "normal": "vinha"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele, que nunca chorava, fechou os olhos.",
+      "zona": "anacoluto",
+      "testa": "Sintaxe — oração adjetiva explicativa com relativo",
+      "gabarito": "sem alerta; vírgulas de oração adjetiva explicativa corretas",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "nunca",
+              "tags": [
+                "Adverb",
+                "Negative"
+              ],
+              "normal": "nunca"
+            },
+            {
+              "text": "chorava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "chorava"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "fechou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "fechou"
+            },
+            {
+              "text": "os",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "os"
+            },
+            {
+              "text": "olhos",
+              "tags": [],
+              "normal": "olhos"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O tempo — esse ladrão silencioso — levou tudo.",
+      "zona": "anacoluto",
+      "testa": "Pontuação — aposto com travessão",
+      "gabarito": "sem alerta; aposto entre travessões é uso correto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "tempo",
+              "tags": [],
+              "normal": "tempo"
+            },
+            {
+              "text": "—",
+              "tags": [],
+              "normal": "—"
+            },
+            {
+              "text": "esse",
+              "tags": [
+                "Pronoun"
+              ],
+              "normal": "esse"
+            },
+            {
+              "text": "ladrão",
+              "tags": [],
+              "normal": "ladrão"
+            },
+            {
+              "text": "silencioso",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "silencioso"
+            },
+            {
+              "text": "—",
+              "tags": [],
+              "normal": "—"
+            },
+            {
+              "text": "levou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "levou"
+            },
+            {
+              "text": "tudo",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "tudo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele mal sabia que o mal estava próximo.",
+      "zona": "homofona",
+      "testa": "Sintaxe — \"mal\" como advérbio vs. \"mal\" como substantivo",
+      "gabarito": "primeiro \"mal\" = Advérbio; segundo \"mal\" = Substantivo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "mal",
+              "tags": [
+                "Conjunction",
+                "Adverb"
+              ],
+              "normal": "mal"
+            },
+            {
+              "text": "sabia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabia"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "mal",
+              "tags": [
+                "Conjunction",
+                "Adverb"
+              ],
+              "normal": "mal"
+            },
+            {
+              "text": "estava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "estava"
+            },
+            {
+              "text": "próximo",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "próximo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Tanto faz: ele sempre faz o que quer.",
+      "zona": "homofona",
+      "testa": "Sintaxe — \"faz\" em dois contextos (locução + verbo pleno)",
+      "gabarito": "sem erro; dois usos válidos de \"faz\"",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Tanto",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "tanto"
+            },
+            {
+              "text": "faz",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "faz"
+            },
+            {
+              "text": ":",
+              "tags": [],
+              "normal": ":"
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "sempre",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "sempre"
+            },
+            {
+              "text": "faz",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "faz"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "quer",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "quer"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Sem senso, ele perdeu o senso das coisas.",
+      "zona": "homofona",
+      "testa": "Sintaxe — \"senso\" repetido (não é erro)",
+      "gabarito": "sem alerta; repetição intencional válida",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Sem",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "sem"
+            },
+            {
+              "text": "senso",
+              "tags": [],
+              "normal": "senso"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "perdeu",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "perdeu"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "senso",
+              "tags": [],
+              "normal": "senso"
+            },
+            {
+              "text": "das",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "das"
+            },
+            {
+              "text": "coisas",
+              "tags": [],
+              "normal": "coisas"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O dendê dava ao prato um sabor inconfundível.",
+      "zona": "vocabulario-decolonial",
+      "testa": "Decolonial/Léxico — \"dendê\" como substantivo",
+      "gabarito": "sem alerta negativo; \"dendê\" é vocabulário de herança africana legítimo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "dendê",
+              "tags": [],
+              "normal": "dendê"
+            },
+            {
+              "text": "dava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "dava"
+            },
+            {
+              "text": "ao",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "ao"
+            },
+            {
+              "text": "prato",
+              "tags": [],
+              "normal": "prato"
+            },
+            {
+              "text": "um",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "um"
+            },
+            {
+              "text": "sabor",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "sabor"
+            },
+            {
+              "text": "inconfundível",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "inconfundível"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "A caçula ficou de castigo por três dias.",
+      "zona": "vocabulario-decolonial",
+      "testa": "Decolonial/Léxico — \"caçula\" (origem banto)",
+      "gabarito": "sem alerta; \"caçula\" é vocabulário corrente de origem africana",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "A",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "caçula",
+              "tags": [],
+              "normal": "caçula"
+            },
+            {
+              "text": "ficou",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "ficou"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "castigo",
+              "tags": [],
+              "normal": "castigo"
+            },
+            {
+              "text": "por",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "por"
+            },
+            {
+              "text": "três",
+              "tags": [
+                "Noun",
+                "Numeral"
+              ],
+              "normal": "três"
+            },
+            {
+              "text": "dias",
+              "tags": [],
+              "normal": "dias"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "O xerimbabo da vizinha latia toda madrugada.",
+      "zona": "vocabulario-decolonial",
+      "testa": "Decolonial/Léxico — \"xerimbabo\" (animal de estimação, origem tupi)",
+      "gabarito": "sem alerta; vocabulário de origem indígena legítimo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "O",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "xerimbabo",
+              "tags": [],
+              "normal": "xerimbabo"
+            },
+            {
+              "text": "da",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "da"
+            },
+            {
+              "text": "vizinha",
+              "tags": [],
+              "normal": "vizinha"
+            },
+            {
+              "text": "latia",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "latia"
+            },
+            {
+              "text": "toda",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "toda"
+            },
+            {
+              "text": "madrugada",
+              "tags": [],
+              "normal": "madrugada"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ele tinha um jeito manso, quase catimbau.",
+      "zona": "vocabulario-decolonial",
+      "testa": "Decolonial/Léxico — \"catimbau\" (origem africana/indígena, uso regional)",
+      "gabarito": "sem alerta; uso metafórico de vocabulário cultural válido",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ele",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ele"
+            },
+            {
+              "text": "tinha",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "tinha"
+            },
+            {
+              "text": "um",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "um"
+            },
+            {
+              "text": "jeito",
+              "tags": [],
+              "normal": "jeito"
+            },
+            {
+              "text": "manso",
+              "tags": [],
+              "normal": "manso"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "quase",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "quase"
+            },
+            {
+              "text": "catimbau",
+              "tags": [],
+              "normal": "catimbau"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Em 1945, a guerra termina e o mundo respira.",
+      "zona": "tempo-verbal",
+      "testa": "Sintaxe — presente histórico (praesens historicum)",
+      "gabarito": "\"termina\" e \"respira\" = Verbo Presente (uso como presente histórico é válido)",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Em",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "em"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "a",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "a"
+            },
+            {
+              "text": "guerra",
+              "tags": [],
+              "normal": "guerra"
+            },
+            {
+              "text": "termina",
+              "tags": [],
+              "normal": "termina"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "mundo",
+              "tags": [],
+              "normal": "mundo"
+            },
+            {
+              "text": "respira",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "respira"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Ela entra, olha ao redor e percebe que estava sozinha.",
+      "zona": "tempo-verbal",
+      "testa": "Sintaxe — mistura de presente narrativo e pretérito",
+      "gabarito": "sem alerta; alternância temporal é recurso narrativo",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "entra",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "entra"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "olha",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "olha"
+            },
+            {
+              "text": "ao",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "ao"
+            },
+            {
+              "text": "redor",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "redor"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "percebe",
+              "tags": [],
+              "normal": "percebe"
+            },
+            {
+              "text": "que",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "que"
+            },
+            {
+              "text": "estava",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "estava"
+            },
+            {
+              "text": "sozinha",
+              "tags": [],
+              "normal": "sozinha"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Amanhã eu abro o manuscrito e começo de novo.",
+      "zona": "tempo-verbal",
+      "testa": "Sintaxe — presente com valor de futuro",
+      "gabarito": "\"abro\" e \"começo\" = Verbo Presente com valor de futuro; uso correto",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Amanhã",
+              "tags": [
+                "Adverb"
+              ],
+              "normal": "amanhã"
+            },
+            {
+              "text": "eu",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "eu"
+            },
+            {
+              "text": "abro",
+              "tags": [],
+              "normal": "abro"
+            },
+            {
+              "text": "o",
+              "tags": [
+                "Determiner"
+              ],
+              "normal": "o"
+            },
+            {
+              "text": "manuscrito",
+              "tags": [],
+              "normal": "manuscrito"
+            },
+            {
+              "text": "e",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "e"
+            },
+            {
+              "text": "começo",
+              "tags": [],
+              "normal": "começo"
+            },
+            {
+              "text": "de",
+              "tags": [
+                "Preposition"
+              ],
+              "normal": "de"
+            },
+            {
+              "text": "novo",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "novo"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    },
+    {
+      "frase": "Se ela viesse, tudo seria diferente.",
+      "zona": "tempo-verbal",
+      "testa": "Sintaxe — subjuntivo imperfeito + futuro do pretérito (período hipotético)",
+      "gabarito": "\"viesse\" = Verbo Subjuntivo Imperfeito; \"seria\" = Futuro do Pretérito",
+      "output": {
+        "sintaxe": {
+          "morfologia": [
+            {
+              "text": "Se",
+              "tags": [
+                "Conjunction"
+              ],
+              "normal": "se"
+            },
+            {
+              "text": "ela",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "ela"
+            },
+            {
+              "text": "viesse",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "viesse"
+            },
+            {
+              "text": ",",
+              "tags": [],
+              "normal": ","
+            },
+            {
+              "text": "tudo",
+              "tags": [
+                "Pronoun",
+                "Noun"
+              ],
+              "normal": "tudo"
+            },
+            {
+              "text": "seria",
+              "tags": [
+                "Verb"
+              ],
+              "normal": "seria"
+            },
+            {
+              "text": "diferente",
+              "tags": [
+                "Adjective"
+              ],
+              "normal": "diferente"
+            },
+            {
+              "text": ".",
+              "tags": [],
+              "normal": "."
+            }
+          ],
+          "periodo": {
+            "tipo": null,
+            "ordens": []
+          }
+        },
+        "pontuacao": {
+          "erro": "(r || []).map is not a function"
+        },
+        "voz": {
+          "vozPassiva": null,
+          "vozIndet": null,
+          "vozAtiva": null
+        },
+        "rima": {
+          "disponivel": true,
+          "rimas": [],
+          "assonancia": [],
+          "aliteracao": []
+        }
+      }
+    }
+  ]
+}

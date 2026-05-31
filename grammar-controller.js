@@ -664,8 +664,8 @@ function closeWordPopover() {
   _popoverWord = "";
 }
 
-// Clique no editor → abre popover da palavra
-writingArea.addEventListener("click", async (e) => {
+// Clique no editor (flow ou ENEM) → abre popover da palavra
+async function handleEditorWordClick(e, textSource) {
   const selection = window.getSelection();
   if (selection && !selection.isCollapsed) return; // seleção de texto → não abre
 
@@ -677,7 +677,7 @@ writingArea.addEventListener("click", async (e) => {
   if (!manuscript) return;
 
   await VeredaLexical.ensureLoaded();
-  const analysis = VeredaLexical.analyze(clean, manuscript.text);
+  const analysis = VeredaLexical.analyze(clean, textSource || manuscript.text);
   if (!analysis) { closeWordPopover(); return; }
   const classLabel = analysis.className || "";
   const count = analysis.count || 0;
@@ -685,6 +685,16 @@ writingArea.addEventListener("click", async (e) => {
 
   state.lexical.selectedWord = clean;
   openWordPopover(clean, classLabel, countText, e.clientX, e.clientY);
+}
+
+writingArea.addEventListener("click", (e) => handleEditorWordClick(e));
+
+// Editor paginado ENEM — mesma experiência contextual (delegação, pois é renderizado dinamicamente)
+document.addEventListener("click", (e) => {
+  const enemArea = e.target.closest("[data-enem-area]");
+  if (!enemArea) return;
+  const enemText = enemArea.innerText || "";
+  handleEditorWordClick(e, enemText);
 });
 
 // Fecha ao clicar fora

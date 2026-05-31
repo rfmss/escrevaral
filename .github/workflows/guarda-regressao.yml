@@ -1,0 +1,76 @@
+name: Guarda de Regressão — Corpus Arnaldo
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'   # toda segunda-feira às 8h UTC
+  workflow_dispatch:        # permite rodar manualmente
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  guarda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências
+        run: |
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Iniciar servidor local
+        run: python3 -m http.server 8799 &
+        working-directory: ${{ github.workspace }}
+
+      - name: Aguardar servidor
+        run: sleep 2
+
+      - name: Rodar corpus do Catedrático
+        id: corpus
+        run: |
+          python3 scripts/comparar-golden.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        working-directory: ${{ github.workspace }}
+        continue-on-error: true
+
+      - name: Commitar relatório
+        run: |
+          git config user.name  "Arnaldo Figueiredo [bot]"
+          git config user.email "guarda-regressao@escrevaral"
+          DATA=$(date +%Y-%m-%d)
+          git add reports/agente/
+          git diff --staged --quiet || git commit -m "relatório: guarda de regressão $DATA"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Abrir issue se houver regressão
+        if: steps.corpus.outputs.status == '1'
+        run: |
+          DATA=$(date +%Y-%m-%d)
+          RELATORIO=$(cat reports/agente/${DATA}.md 2>/dev/null || echo "Relatório não encontrado.")
+          # Garante que o label existe antes de usá-lo
+          gh label create "regressao" --color "e11d48" --description "Regressão detectada pelo guarda" 2>/dev/null || true
+          gh issue create \
+            --title "Regressão detectada — $DATA" \
+            --body "$(printf '%s\n\n---\n\n%s' 'O corpus do Catedrático detectou regressão nas engines. Veja o relatório abaixo e decida o que corrigir.' "$RELATORIO")" \
+            --label "regressao"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resumo da execução
+        run: |
+          DATA=$(date +%Y-%m-%d)
+          if [ -f "reports/agente/${DATA}.md" ]; then
+            echo "### Resultado" >> $GITHUB_STEP_SUMMARY
+            cat reports/agente/${DATA}.md >> $GITHUB_STEP_SUMMARY
+          fi

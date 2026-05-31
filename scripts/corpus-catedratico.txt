@@ -1,0 +1,507 @@
+# Corpus Arnaldo Figueiredo — Guarda de Regressão
+# Escrevaral · versão 2026-05-31-v2
+#
+# Formato de cada entrada:
+#   FRASE: texto completo
+#   TESTA: qual engine e qual comportamento
+#   GABARITO: o que a análise correta diria
+#   ZONA: categoria de risco
+#
+# Regra: não alterar gabaritos sem revisão humana.
+# Regra: adicionar novas frases no final, nunca no meio.
+# Total: 90 frases · 18 zonas
+
+---
+
+## ZONA 1 — Adjetivos sem sufixo canônico
+## Risco: engine classifica como substantivo ou desconhecido
+
+FRASE: A tarde era bela e o silêncio, livre de culpa, envolvia tudo.
+TESTA: Sintaxe — classificação de "bela" e "livre"
+GABARITO: "bela" = Adjetivo; "livre" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: Ela tinha um jeito triste de dizer as coisas certas.
+TESTA: Sintaxe — classificação de "triste" e "certas"
+GABARITO: "triste" = Adjetivo; "certas" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: O homem grande não precisava falar alto.
+TESTA: Sintaxe — classificação de "grande" e "alto"
+GABARITO: "grande" = Adjetivo; "alto" = Adjetivo (não Advérbio neste contexto)
+ZONA: adjetivo-sem-sufixo
+
+FRASE: Havia qualquer coisa estranha no modo como ela sorria.
+TESTA: Sintaxe — "estranha"
+GABARITO: "estranha" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: A mulher forte carregou o peso sem reclamar.
+TESTA: Sintaxe — "forte"
+GABARITO: "forte" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: Era uma noite simples, quente, quase feliz.
+TESTA: Sintaxe — "simples", "quente", "feliz"
+GABARITO: "simples" = Adjetivo; "quente" = Adjetivo; "feliz" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: O texto breve dizia mais do que o longo.
+TESTA: Sintaxe — "breve" e "longo"
+GABARITO: "breve" = Adjetivo; "longo" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+FRASE: Havia algo nobre na forma como ele errava.
+TESTA: Sintaxe — "nobre"
+GABARITO: "nobre" = Adjetivo
+ZONA: adjetivo-sem-sufixo
+
+---
+
+## ZONA 2 — Pronomes possessivos ambíguos
+## Risco: sufixo -eu confundido com forma verbal
+
+FRASE: O meu ficou para trás quando o trem partiu.
+TESTA: Sintaxe — "meu" como substantivo pronominado
+GABARITO: "meu" = Pronome possessivo (substantivado)
+ZONA: pronome-possessivo
+
+FRASE: Cada um cuida do seu, dizia o avô.
+TESTA: Sintaxe — "seu" substantivado
+GABARITO: "seu" = Pronome possessivo (substantivado)
+ZONA: pronome-possessivo
+
+FRASE: Teu silêncio diz mais do que tua palavra.
+TESTA: Sintaxe — "teu" e "tua"
+GABARITO: "teu" = Pronome possessivo; "tua" = Pronome possessivo
+ZONA: pronome-possessivo
+
+FRASE: Nossa conversa ficou pela metade.
+TESTA: Sintaxe — "nossa"
+GABARITO: "nossa" = Pronome possessivo
+ZONA: pronome-possessivo
+
+FRASE: Vossa presença era o suficiente.
+TESTA: Sintaxe — "vossa"
+GABARITO: "vossa" = Pronome possessivo
+ZONA: pronome-possessivo
+
+---
+
+## ZONA 3 — Pronomes demonstrativos contraídos
+## Risco: classificação como pronome simples em vez de PREP+DET
+
+FRASE: Gostei deste parágrafo mais do que daquele.
+TESTA: Sintaxe — "deste" e "daquele"
+GABARITO: "deste" = Preposição+Demonstrativo; "daquele" = Preposição+Demonstrativo
+ZONA: demonstrativo-contraido
+
+FRASE: Neste ponto a narrativa perde o fôlego.
+TESTA: Sintaxe — "neste"
+GABARITO: "neste" = Preposição+Demonstrativo
+ZONA: demonstrativo-contraido
+
+FRASE: Falou disso como se fosse óbvio.
+TESTA: Sintaxe — "disso"
+GABARITO: "disso" = Preposição+Demonstrativo
+ZONA: demonstrativo-contraido
+
+FRASE: Naquele tempo as cartas ainda chegavam.
+TESTA: Sintaxe — "naquele"
+GABARITO: "naquele" = Preposição+Demonstrativo
+ZONA: demonstrativo-contraido
+
+---
+
+## ZONA 4 — Ordinais ambíguos com adjetivos
+## Risco: classificação como Adjetivo em vez de Numeral ordinal
+
+FRASE: O primeiro capítulo é sempre o mais difícil.
+TESTA: Sintaxe — "primeiro"
+GABARITO: "primeiro" = Numeral ordinal
+ZONA: ordinal
+
+FRASE: Ela terminou em segundo lugar sem reclamar.
+TESTA: Sintaxe — "segundo" ordinal vs. conjunção
+GABARITO: "segundo" = Numeral ordinal (não Conjunção nem Preposição)
+ZONA: ordinal
+
+FRASE: Foi a terceira vez que ele tentou começar o romance.
+TESTA: Sintaxe — "terceira"
+GABARITO: "terceira" = Numeral ordinal
+ZONA: ordinal
+
+FRASE: O quinto andar estava sempre silencioso.
+TESTA: Sintaxe — "quinto"
+GABARITO: "quinto" = Numeral ordinal
+ZONA: ordinal
+
+FRASE: Chegou na décima fila, resignado.
+TESTA: Sintaxe — "décima"
+GABARITO: "décima" = Numeral ordinal
+ZONA: ordinal
+
+---
+
+## ZONA 5 — Interjeições em contexto literário
+## Risco: classificação como advérbio, substantivo ou desconhecido
+
+FRASE: Ora, isso não é nenhuma novidade, suspirou ela.
+TESTA: Sintaxe — "ora" como interjeição
+GABARITO: "ora" = Interjeição (não Advérbio)
+ZONA: interjeccao
+
+FRASE: Ei, você ainda está aí?
+TESTA: Sintaxe — "ei"
+GABARITO: "ei" = Interjeição
+ZONA: interjeccao
+
+FRASE: Ah, o tempo que se perdeu naquele corredor.
+TESTA: Sintaxe — "ah"
+GABARITO: "ah" = Interjeição
+ZONA: interjeccao
+
+FRASE: Puxa, nunca pensei que chegaria até aqui.
+TESTA: Sintaxe — "puxa"
+GABARITO: "puxa" = Interjeição
+ZONA: interjeccao
+
+FRASE: Nossa, que silêncio pesado.
+TESTA: Sintaxe — "nossa" como interjeição (não possessivo)
+GABARITO: "nossa" = Interjeição (contexto exclamativo, não possessivo)
+ZONA: interjeccao
+
+FRASE: Ufa, por fim o dia acabou.
+TESTA: Sintaxe — "ufa"
+GABARITO: "ufa" = Interjeição
+ZONA: interjeccao
+
+---
+
+## ZONA 6 — Pontuação literária intencional
+## Risco: engine sinaliza como erro o que é estilo
+
+FRASE: Ele entrou — devagar, muito devagar — e fechou a porta.
+TESTA: Pontuação — travessão como aposto
+GABARITO: sem alerta; travessão com espaço em aposto é uso válido
+ZONA: pontuacao-literaria
+
+FRASE: Ela sabia. Sabia e calava. E calando, vivia.
+TESTA: Pontuação — fragmentos intencionais
+GABARITO: sem alerta; fragmentação sintática é recurso estilístico
+ZONA: pontuacao-literaria
+
+FRASE: A vida era assim: longa; incerta; às vezes, bela.
+TESTA: Pontuação — ponto-e-vírgula como ritmo
+GABARITO: sem alerta; ponto-e-vírgula separando itens com vírgula interna é correto
+ZONA: pontuacao-literaria
+
+FRASE: Onde estará ela agora...
+TESTA: Pontuação — reticências no fim de frase interrogativa
+GABARITO: sem alerta; reticências substituindo ponto de interrogação é uso literário válido
+ZONA: pontuacao-literaria
+
+FRASE: Não sabia o que dizer — e isso, talvez, fosse a resposta.
+TESTA: Pontuação — travessão + vírgulas de aposto encaixado
+GABARITO: sem alerta; estrutura válida com aposto parentético
+ZONA: pontuacao-literaria
+
+FRASE: Esperou. Esperou muito. Esperou até não poder mais.
+TESTA: Pontuação — repetição anafórica com ponto deliberado
+GABARITO: sem alerta; recurso estilístico de anáfora
+ZONA: pontuacao-literaria
+
+---
+
+## ZONA 7 — Voz passiva: analítica vs. sintética
+## Risco: Espelho de Voz não detecta voz passiva sintética
+
+FRASE: O romance foi escrito em três meses de reclusão.
+TESTA: Espelho de Voz — voz passiva analítica
+GABARITO: detectado como voz passiva
+ZONA: voz-passiva
+
+FRASE: Escreve-se muito por aqui quando o inverno chega.
+TESTA: Espelho de Voz — voz passiva sintética (pronome apassivador)
+GABARITO: detectado como voz passiva (ou voz indeterminada — ambos aceitáveis)
+ZONA: voz-passiva
+
+FRASE: Vendem-se ilusões neste mercado.
+TESTA: Espelho de Voz — voz passiva sintética
+GABARITO: detectado como voz passiva
+ZONA: voz-passiva
+
+FRASE: A carta foi entregue na manhã seguinte.
+TESTA: Espelho de Voz — voz passiva analítica simples
+GABARITO: detectado como voz passiva
+ZONA: voz-passiva
+
+FRASE: Os livros eram lidos em voz alta toda noite.
+TESTA: Espelho de Voz — voz passiva analítica no imperfeito
+GABARITO: detectado como voz passiva
+ZONA: voz-passiva
+
+---
+
+## ZONA 8 — Vocabulário regional como possível "erro"
+## Risco: Decolonial ou Léxico sinalizarem como incorreto
+
+FRASE: O menino ficou acolá, olhando a procissão passar.
+TESTA: Decolonial/Léxico — "acolá" como advérbio legítimo
+GABARITO: sem alerta negativo; "acolá" é forma padrão e literária
+ZONA: vocabulario-regional
+
+FRASE: Aquela saia estava encardida de tanto uso.
+TESTA: Decolonial/Léxico — "encardida"
+GABARITO: sem alerta; "encardido/a" é vocabulário popular legítimo
+ZONA: vocabulario-regional
+
+FRASE: O fuleiro do vizinho apareceu sem avisar.
+TESTA: Decolonial/Léxico — "fuleiro"
+GABARITO: sem alerta; vocabulário regional brasileiro válido
+ZONA: vocabulario-regional
+
+FRASE: A menina ficou acanhada diante de tanta gente.
+TESTA: Decolonial/Léxico — "acanhada"
+GABARITO: sem alerta; vocabulário brasileiro corrente
+ZONA: vocabulario-regional
+
+FRASE: Ele tinha um jeito xucro de falar que encantava.
+TESTA: Decolonial/Léxico — "xucro"
+GABARITO: sem alerta; regionalismo legítimo (especialmente Nordeste/interior)
+ZONA: vocabulario-regional
+
+FRASE: A veia da minha avó sempre me chamava de benzinho.
+TESTA: Decolonial/Léxico — "veia" como forma carinhosa regional para "velha"
+GABARITO: sem alerta; uso afetivo regional válido
+ZONA: vocabulario-regional
+
+---
+
+## ZONA 9 — Rima e ritmo em verso livre
+## Risco: RimaLab não detectar rima interna ou assonância
+
+FRASE: A chuva cai e vai e trai quem fica.
+TESTA: RimaLab — rima interna ("cai/vai/trai")
+GABARITO: detectar rima em "cai", "vai", "trai"
+ZONA: rimalab
+
+FRASE: Noite de medo e frio, o rio some no vazio.
+TESTA: RimaLab — rima entre "frio/rio/vazio"
+GABARITO: detectar rima em "frio", "rio", "vazio"
+ZONA: rimalab
+
+FRASE: Saudade salga, alaga, afaga e machuca.
+TESTA: RimaLab — aliteração em "s" e assonância em "a"
+GABARITO: detectar padrão sonoro; aliteração em s; assonância em a
+ZONA: rimalab
+
+FRASE: Lua nua na janela muda.
+TESTA: RimaLab — rima em "lua/nua/muda" e aliteração em "m"
+GABARITO: detectar rima em "lua", "nua"; assonância em "u"
+ZONA: rimalab
+
+FRASE: O amor demora, a dor não mora longe.
+TESTA: RimaLab — "amor/demora/dor/mora" — assonância em "or"
+GABARITO: detectar assonância em "or": amor, demora, dor, mora
+ZONA: rimalab
+
+---
+
+## ZONA 10 — Diacríticos e formas corretas
+## Risco: bugs históricos documentados (la/ca sem acento)
+
+FRASE: Ela foi lá e voltou cá sem nada nas mãos.
+TESTA: Sintaxe — "lá" e "cá" como advérbios
+GABARITO: "lá" = Advérbio de lugar; "cá" = Advérbio de lugar
+ZONA: diacritico
+
+FRASE: Então ele disse que não voltaria nunca mais.
+TESTA: Sintaxe — "então" com acento
+GABARITO: "então" = Advérbio (não "entao")
+ZONA: diacritico
+
+FRASE: Vá até lá e veja com seus próprios olhos.
+TESTA: Sintaxe — "lá" após "até"
+GABARITO: "lá" = Advérbio de lugar
+ZONA: diacritico
+
+FRASE: Já não havia mais nada a esperar.
+TESTA: Sintaxe — "já" como advérbio de tempo
+GABARITO: "já" = Advérbio de tempo
+ZONA: diacritico
+
+---
+
+## ZONA 11 — Concordância verbal complexa
+## Risco: engine não detectar sujeito composto ou invertido
+
+FRASE: A escritora e o editor discutiram por horas.
+TESTA: Sintaxe — concordância com sujeito composto
+GABARITO: verbo no plural; sujeito composto "escritora e editor"
+ZONA: concordancia-verbal
+
+FRASE: Chegaram as cartas que esperávamos há meses.
+TESTA: Sintaxe — sujeito posposto
+GABARITO: concordância correta; sujeito "cartas" posposto ao verbo
+ZONA: concordancia-verbal
+
+FRASE: A maioria dos leitores gostou do final.
+TESTA: Sintaxe — concordância com "maioria" (sujeito coletivo)
+GABARITO: verbo no singular é aceito com sujeito coletivo "maioria"
+ZONA: concordancia-verbal
+
+FRASE: Nem ela nem ele soube o que dizer.
+TESTA: Sintaxe — sujeito com "nem...nem" (concordância com o mais próximo)
+GABARITO: concordância com o sujeito mais próximo é forma válida
+ZONA: concordancia-verbal
+
+---
+
+## ZONA 12 — Concordância nominal complexa
+## Risco: engine não identificar adjetivo predicativo correto
+
+FRASE: As palavras eram poucas, mas precisas.
+TESTA: Sintaxe — "poucas" e "precisas" como predicativos
+GABARITO: "poucas" = Adjetivo predicativo plural; "precisas" = Adjetivo predicativo plural
+ZONA: concordancia-nominal
+
+FRASE: O homem e a mulher ficaram quietos.
+TESTA: Sintaxe — "quietos" concordando com sujeito misto
+GABARITO: "quietos" = Adjetivo masculino plural (sujeito misto → masculino)
+ZONA: concordancia-nominal
+
+FRASE: Meio confusa, ela releu o parágrafo.
+TESTA: Sintaxe — "meio" como advérbio invariável
+GABARITO: "meio" = Advérbio (invariável); "confusa" = Adjetivo feminino
+ZONA: concordancia-nominal
+
+---
+
+## ZONA 13 — Regência verbal e nominal
+## Risco: engine não distinguir transitividade
+
+FRASE: Ela assistiu ao espetáculo em silêncio.
+TESTA: Sintaxe — "assistir a" (transitivo indireto)
+GABARITO: "assistiu" = Verbo transitivo indireto; "ao" = contração de "a+o"
+ZONA: regencia
+
+FRASE: Ele implicava com tudo e com todos.
+TESTA: Sintaxe — "implicar com" (transitivo indireto)
+GABARITO: "implicava" = Verbo transitivo indireto
+ZONA: regencia
+
+FRASE: Precisamos de tempo, não de pressa.
+TESTA: Sintaxe — "precisar de" (transitivo indireto)
+GABARITO: "precisamos" = Verbo transitivo indireto
+ZONA: regencia
+
+---
+
+## ZONA 14 — Crase
+## Risco: engine não distinguir contextos de crase obrigatória, facultativa e proibida
+
+FRASE: Ela voltou à cidade que abandonara.
+TESTA: Pontuação/Sintaxe — crase obrigatória antes de "cidade" feminino
+GABARITO: sem alerta; crase obrigatória em "à" (a+a, feminino)
+ZONA: crase
+
+FRASE: Referiu-se a ela com respeito.
+TESTA: Pontuação/Sintaxe — crase proibida antes de pronome pessoal
+GABARITO: sem alerta; crase proibida antes de pronome; "a ela" correto
+ZONA: crase
+
+FRASE: Saiu a pé pelo bairro antigo.
+TESTA: Pontuação/Sintaxe — crase proibida em locução adverbial masculina
+GABARITO: sem alerta; "a pé" correto sem crase
+ZONA: crase
+
+---
+
+## ZONA 15 — Anacoluto e sintaxe literária quebrada
+## Risco: engine sinalizar como erro estrutura intencional
+
+FRASE: Aquela mulher, ninguém sabia de onde vinha.
+TESTA: Sintaxe — anacoluto (deslocamento do tema)
+GABARITO: sem alerta crítico; anacoluto é figura sintática válida na literatura
+ZONA: anacoluto
+
+FRASE: Ele, que nunca chorava, fechou os olhos.
+TESTA: Sintaxe — oração adjetiva explicativa com relativo
+GABARITO: sem alerta; vírgulas de oração adjetiva explicativa corretas
+ZONA: anacoluto
+
+FRASE: O tempo — esse ladrão silencioso — levou tudo.
+TESTA: Pontuação — aposto com travessão
+GABARITO: sem alerta; aposto entre travessões é uso correto
+ZONA: anacoluto
+
+---
+
+## ZONA 16 — Palavras homófonas em contexto
+## Risco: engine não distinguir por contexto
+
+FRASE: Ele mal sabia que o mal estava próximo.
+TESTA: Sintaxe — "mal" como advérbio vs. "mal" como substantivo
+GABARITO: primeiro "mal" = Advérbio; segundo "mal" = Substantivo
+ZONA: homofona
+
+FRASE: Tanto faz: ele sempre faz o que quer.
+TESTA: Sintaxe — "faz" em dois contextos (locução + verbo pleno)
+GABARITO: sem erro; dois usos válidos de "faz"
+ZONA: homofona
+
+FRASE: Sem senso, ele perdeu o senso das coisas.
+TESTA: Sintaxe — "senso" repetido (não é erro)
+GABARITO: sem alerta; repetição intencional válida
+ZONA: homofona
+
+---
+
+## ZONA 17 — Vocabulário afro-brasileiro e indígena
+## Risco: Decolonial sinalizar como erro vocabulário de herança cultural
+
+FRASE: O dendê dava ao prato um sabor inconfundível.
+TESTA: Decolonial/Léxico — "dendê" como substantivo
+GABARITO: sem alerta negativo; "dendê" é vocabulário de herança africana legítimo
+ZONA: vocabulario-decolonial
+
+FRASE: A caçula ficou de castigo por três dias.
+TESTA: Decolonial/Léxico — "caçula" (origem banto)
+GABARITO: sem alerta; "caçula" é vocabulário corrente de origem africana
+ZONA: vocabulario-decolonial
+
+FRASE: O xerimbabo da vizinha latia toda madrugada.
+TESTA: Decolonial/Léxico — "xerimbabo" (animal de estimação, origem tupi)
+GABARITO: sem alerta; vocabulário de origem indígena legítimo
+ZONA: vocabulario-decolonial
+
+FRASE: Ele tinha um jeito manso, quase catimbau.
+TESTA: Decolonial/Léxico — "catimbau" (origem africana/indígena, uso regional)
+GABARITO: sem alerta; uso metafórico de vocabulário cultural válido
+ZONA: vocabulario-decolonial
+
+---
+
+## ZONA 18 — Tempo verbal ambíguo
+## Risco: engine confundir presente histórico com presente simples
+
+FRASE: Em 1945, a guerra termina e o mundo respira.
+TESTA: Sintaxe — presente histórico (praesens historicum)
+GABARITO: "termina" e "respira" = Verbo Presente (uso como presente histórico é válido)
+ZONA: tempo-verbal
+
+FRASE: Ela entra, olha ao redor e percebe que estava sozinha.
+TESTA: Sintaxe — mistura de presente narrativo e pretérito
+GABARITO: sem alerta; alternância temporal é recurso narrativo
+ZONA: tempo-verbal
+
+FRASE: Amanhã eu abro o manuscrito e começo de novo.
+TESTA: Sintaxe — presente com valor de futuro
+GABARITO: "abro" e "começo" = Verbo Presente com valor de futuro; uso correto
+ZONA: tempo-verbal
+
+FRASE: Se ela viesse, tudo seria diferente.
+TESTA: Sintaxe — subjuntivo imperfeito + futuro do pretérito (período hipotético)
+GABARITO: "viesse" = Verbo Subjuntivo Imperfeito; "seria" = Futuro do Pretérito
+ZONA: tempo-verbal

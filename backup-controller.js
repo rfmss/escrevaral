@@ -53,6 +53,8 @@ function registerOfflineApp() {
 
   function showUpdateBanner() {
     if (!updateBanner) return;
+    // Não mostrar na primeira visita — usuário ainda não tem nada salvo
+    if (!window.state?.manuscripts?.length) return;
     updateBanner.hidden = false;
     if (window.innerWidth <= 768) {
       const wa = document.querySelector(".writing-area");

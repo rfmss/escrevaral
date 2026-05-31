@@ -8,6 +8,13 @@ Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + 
 **QA local:** `python3 -m http.server 8799` + Playwright headless
 **Repositório:** github.com/rfmss/escrevaral
 
+**Stack de automação (URLs — consultar memória `reference-infra-n8n-hf.md`):**
+- n8n: `rafamass-n8n.hf.space` (HF Space, mantido acordado pelo cron-job.org)
+- Hugging Face: `huggingface.co/rafamass`
+- Banco: Neon — projeto `falling-frog-41677820`
+- Wake-up: `console.cron-job.org/dashboard` (conectado via GitHub)
+- Analíticas: `escrevaral.goatcounter.com` (ver `ANALITICAS_GOATCOUNTER.md`)
+
 ---
 
 ## Leitura obrigatória ao abrir
@@ -33,7 +40,7 @@ Meta acima de tudo: economizar tokens para funcionar bem em cotas gratuitas e mo
 
 Regra: tarefa clara e baixo risco segue direto. Se o risco nao for obvio, chamar `banca-coordenadora`. Preferir 0 ou 1 agente; 2 so com dois riscos fortes; 3+ apenas em mudanca estrutural. Cada agente le apenas arquivos ligados ao risco e responde em ate 5 linhas.
 
-Mapa rapido: preservacao -> `guardiao-preservacao`; UX/copy/mobile -> `ux-escritora`; JS/CSS/cache -> `arquiteto-vanilla`; QA -> `auditor-qa`; engines -> `curador-engines`; marca -> `marca-campanha`; direitos/autoria -> `publicacao-direitos`; decisao estrutural -> `codex-par`.
+Mapa rapido: preservacao -> `guardiao-preservacao`; UX/copy/mobile -> `ux-escritora`; JS/CSS/cache -> `arquiteto-vanilla`; QA -> `auditor-qa`; engines -> `curador-engines`; marca -> `marca-campanha`; direitos/autoria -> `publicacao-direitos`; decisao estrutural -> `codex-par`; pastas/nomenclatura/higiene -> `arquivista`; click depth / acao fora de contexto / recurso distante / fluxo com etapas demais -> `analista-fluxo`.
 
 Formato: Tarefa / Risco / Agente necessario / Menor passo / Evidencia.
 
