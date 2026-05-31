@@ -2,7 +2,7 @@ name: Guarda de Regressão — Corpus Arnaldo
 
 on:
   schedule:
-    - cron: '0 8 * * 1'   # toda segunda-feira às 8h UTC
+    - cron: '0 8 * * *'   # todo dia às 8h UTC (5h horário de Brasília)
   workflow_dispatch:        # permite rodar manualmente
 
 permissions:
@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: Clonar repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
           python-version: '3.12'
 
