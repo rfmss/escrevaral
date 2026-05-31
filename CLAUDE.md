@@ -13,22 +13,22 @@ Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + 
 - Hugging Face: `huggingface.co/rafamass`
 - Banco: Neon — projeto `falling-frog-41677820`
 - Wake-up: `console.cron-job.org/dashboard` (conectado via GitHub)
-- Analíticas: `escrevaral.goatcounter.com` (ver `ANALITICAS_GOATCOUNTER.md`)
+- Analíticas: `escrevaral.goatcounter.com` (ver `docs/_decisoes/ANALITICAS_GOATCOUNTER.md`)
 
 ---
 
 ## Leitura obrigatória ao abrir
 
 1. `META_ENGINES_100.md` — estado de maturidade das engines; identificar qual avançar hoje.
-2. `MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal do criador.
-3. `DOMINIO_DNS_EMAIL.md` — domínio, Cloudflare, HTTPS, DNS e e-mail.
-4. `CAMPANHA.md` — posicionamento, taglines, voz do produto e roteiros de lançamento.
+2. `docs/_campanhas/MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal do criador.
+3. `docs/_decisoes/DOMINIO_DNS_EMAIL.md` — domínio, Cloudflare, HTTPS, DNS e e-mail.
+4. `docs/_campanhas/CAMPANHA.md` — posicionamento, taglines, voz do produto e roteiros de lançamento.
 
 Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
 
 Relatórios ativos de auditoria:
 
-- `AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
+- `docs/_decisoes/AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
 - `reports/auditoria/vereda-dark-audit-20260524.md` para o estado atual do tema escuro Vereda, contraste, responsividade mobile e decisão de manter `scriptorium` como identificador técnico legado.
 - `reports/auditoria/hints-nativos-tooltip-clone-20260526.md` para a decisão de produto sobre não depender de dicas nativas do navegador (`title`) e migrar hints visuais para um clone próprio Alvorada/Vereda.
 
@@ -108,7 +108,7 @@ Critério de aceite: em 320px, 390px e 430px, a página inteira deve manter `doc
 
 O Escrevaral usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.
 
-Ler `MAPA_ICONES_METAFORAS.md` sempre que a tarefa tocar em ícone, botão, metáfora, logo, textura, favicon ou estado visual.
+Ler `docs/_decisoes/MAPA_ICONES_METAFORAS.md` sempre que a tarefa tocar em ícone, botão, metáfora, logo, textura, favicon ou estado visual.
 
 Regra: a metáfora deve orientar sem chamar mais atenção que o texto.
 

@@ -55,14 +55,8 @@ snapshots/
 reports/**/*.png
 reports/**/*.jpg
 
-# ── Imagens soltas na raiz (fontes de marca, rascunhos) ──────────
-LogoOK.png
-LogoOK.svg
-LogoOKdark.png
-LogoOKdark.svg
-LogoEscrevaral.png
-"ChatGPT Image*.png"
-ChatGPT\ Image*.png
+# ── Marca histórica e ativos de design (movidos para assets/marca-historico) ──
+assets/marca-historico/
 
-# ── Páginas não-publicadas / lançamento local ─────────────────────
-lancamento-escrevaral.html
+# ── Legado não publicado ──────────────────────────────────────────
+docs/_legado/
