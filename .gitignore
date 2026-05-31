@@ -39,6 +39,27 @@ build/
 .claude/
 .codex/
 
+# ── Credenciais e chaves ─────────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*secret*
+*credentials*
+*token*.json
+*token*.txt
+auth.json
+playwright-state.json
+
+# ── Python ───────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+.python-version
+
 # ── Acervos locais de livros (pesados, não vão ao repo) ──────────
 Livros/
 LivrosENG/
