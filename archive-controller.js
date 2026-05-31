@@ -20,7 +20,7 @@ function renderManuscriptNavigation() {
       const isCC = c.id === state.activeId ? " is-current" : "";
       return `<button class="tree-row companion-row${isCC}" data-manuscript-id="${c.id}">
         <span class="material-symbols-outlined">${ct.icon}</span>${escapeHtml(c.title)}</button>`;
-    }).join("") + `<button class="tree-row companion-add-row" data-action="add-companion-note">
+    }).join("") + `<button class="tree-row companion-add-row" data-action="add-companion-note" title="Anotação, pesquisa ou referência associada a este manuscrito">
       <span class="material-symbols-outlined">add</span>Nota vinculada</button>` : "";
 
     return `

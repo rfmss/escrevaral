@@ -1827,6 +1827,11 @@ document.addEventListener("pointermove", (event) => {
   }
 });
 
+const guideScrim = document.querySelector("[data-guide-scrim]");
+if (guideScrim) {
+  guideScrim.addEventListener("click", () => { if (state.template.open) toggleTemplatePanel(); });
+}
+
 templateResizer.addEventListener("pointerdown", (event) => {
   event.preventDefault();
   templateResizer.setPointerCapture(event.pointerId);

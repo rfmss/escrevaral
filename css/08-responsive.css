@@ -147,18 +147,66 @@
     grid-row: auto;
   }
 
+  /* Guia como bottom sheet no mobile — flutua sobre o editor */
   .template-reference {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 120;
     width: 100%;
-    max-height: min(46svh, 420px);
+    max-height: 60svh;
+    overflow-y: auto;
+    border-radius: 16px 16px 0 0;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.14);
+    background: var(--card);
+    transform: translateY(0);
+    transition: transform 0.28s ease;
+  }
+
+  /* Guia fechado: sai pela base */
+  .editor-split.is-template-collapsed .template-reference {
+    transform: translateY(110%);
+    pointer-events: none;
+  }
+
+  /* Scrim que aparece atrás do guia */
+  .guide-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 118;
+    background: rgba(0,0,0,0.28);
+    display: none;
+  }
+  .editor-split:not(.is-template-collapsed) .guide-scrim {
+    display: block;
+  }
+
+  /* Puxador visual no topo do bottom sheet */
+  .template-reference-header::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line);
+    margin: 8px auto 4px;
+  }
+
+  /* Editor ocupa tela inteira — guia não empilha mais */
+  .editor-split,
+  .editor-split:not(.is-template-collapsed) {
+    display: block;
+  }
+
+  .editor-paper {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow-y: visible;
   }
 
   .split-resizer {
     display: none;
-  }
-
-  .editor-paper {
-    min-width: 0;
-    overflow-y: visible;
   }
 
   .format-bar,
