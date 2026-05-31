@@ -93,9 +93,7 @@ Voz: primeira pessoa, exceto LinkedIn press kit (terceira).
 
 ### Bluesky @rafa.pro.br (300 caracteres — primeira pessoa)
 ```
-Roteirista premiado em 2006. Passei pela publicidade, fui para Genebra em 2008, estudei com Bechara em 2010. Em 2023 voltei para a sala de aula — e criei o Escrevaral.
-
-Oficina literária gratuita para escritores brasileiros. escrevaral.com
+Em 2006 um roteiro meu foi premiado em festival — e me levou à publicidade. Convivi com Bechara na ABL em 2010 em Lexicografia. Em 2020 escrevi 366 textos, um por dia. Criei o Escrevaral.com com tudo que não tinha — oficina de escrita gratuita para escritores brasileiros.
 ```
 
 ### X / Twitter @rafamass (160 caracteres — primeira pessoa)
