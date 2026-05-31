@@ -80,6 +80,8 @@
   function onFocusIn(e) {
     const el = e.target.closest("[data-vrda-tooltip],[title]");
     if (!el) return;
+    // Só mostrar tooltip quando o foco vem do teclado — não de toque ou script
+    if (!el.matches(":focus-visible")) return;
     if (el.hasAttribute("title")) migrateTitle(el);
     if (el.dataset.vrdaTooltip) show(el);
   }
