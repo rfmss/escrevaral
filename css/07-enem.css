@@ -124,6 +124,15 @@
   overflow: hidden;
   transition: opacity 0.2s;
 }
+.enem-placeholder-hint {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+  opacity: 0.5;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
 .enem-placeholder-title {
   font-weight: 700;
   margin-bottom: 0;
@@ -187,9 +196,10 @@
 }
 .enem-placeholder-note {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 10px;
-  color: #999;
-  max-width: 300px;
+  font-size: 11px;
+  color: #777;
+  max-width: 360px;
+  line-height: 1.5;
 }
 .enem-print-btn {
   display: flex;

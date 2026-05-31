@@ -323,6 +323,7 @@ function buildENEMEditor(text, template) {
         <div class="enem-line-gutter" aria-hidden="true">${lineNumbers}</div>
         <div class="enem-writing-wrap">
           <div class="enem-placeholder${hasContent ? " enem-placeholder-hidden" : ""}" aria-hidden="true" data-enem-placeholder>
+            <div class="enem-placeholder-hint">Clique aqui e comece a escrever sua redação.</div>
             <div class="enem-placeholder-title">${escapeHtml(placeholderTitle)}</div>
             <div class="enem-placeholder-body">${escapeHtml(placeholder)}</div>
           </div>
