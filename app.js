@@ -870,8 +870,12 @@ async function createManuscriptFromTemplate(templateId) {
   });
 
   state.template.selectedId = templateId;
-  state.template.open = false;  // Guia fecha — botão visível com nome, escritor abre quando quiser
   addManuscript(manuscript, "Guia aplicado");
+  // Vestibular: guia abre junto após criação — folha paginada do ENEM sem orientação desorientar
+  if (template.oficio === "estudo-vestibular") {
+    state.template.open = true;
+    applyTemplateLayout();
+  }
 }
 
 function createProjectNoteText(type) {
