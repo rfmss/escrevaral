@@ -601,16 +601,20 @@ function renderCreateTemplateList(categoryId) {
     const templates = cat.oficios.flatMap(oficio =>
       (window.VeredaTemplates ? VeredaTemplates.listTemplates({ oficio }) : [])
     );
-    rows = templates.map(tpl => `
-      <button class="create-tpl-row" data-create-from-template="${tpl.id}" type="button">
+    rows = templates.map(tpl => {
+      const isRecommended = categoryId === "vestibular" && tpl.id === "redacao-enem";
+      return `
+      <button class="create-tpl-row${isRecommended ? " create-tpl-row--recommended" : ""}" data-create-from-template="${tpl.id}" type="button">
         <span class="material-symbols-outlined">${tpl.icon}</span>
         <div>
           <strong>${escapeHtml(tpl.label)}</strong>
           <small>${escapeHtml(tpl.description || "")}</small>
+          ${isRecommended ? `<span class="tpl-recommended-badge">início recomendado</span>` : ""}
         </div>
         <span class="material-symbols-outlined create-tpl-arrow">chevron_right</span>
       </button>
-    `).join("");
+    `;
+    }).join("");
   }
 
   const freeLink = categoryId !== "projeto" ? `

@@ -1222,6 +1222,25 @@ html {
   flex-shrink: 0;
 }
 
+/* Badge "início recomendado" — aparece no guia ENEM completa (F7) */
+.tpl-recommended-badge {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  border-radius: 3px;
+  padding: 1px 5px;
+  line-height: 1.6;
+}
+.create-tpl-row--recommended {
+  border-left: 3px solid var(--primary);
+  padding-left: 13px;
+}
+
 .create-tpl-group-label {
   font-size: 10px;
   font-weight: 800;
