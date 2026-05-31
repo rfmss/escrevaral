@@ -45,6 +45,10 @@
   .fmt-group-editorial > *:not(.fmt-editorial-toggle) {
     display: none;
   }
+  /* Copiar sempre visível — saída rápida sem abrir accordion (F3-CD) */
+  .fmt-group-editorial > [data-action="copy-manuscript-text"] {
+    display: flex;
+  }
   /* Botão ⋯ para revelar o grupo */
   .fmt-editorial-toggle {
     display: flex;
