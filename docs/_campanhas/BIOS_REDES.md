@@ -6,26 +6,26 @@ Atualizado: 2026-05-31
 ## Contas do Escrevaral
 Falam do produto. Mencionam Rafa Mass como criador.
 
-### Instagram @escrevaral (150 caracteres)
+### Instagram @escrevaral (125/150 caracteres)
 ```
 Oficina literária gratuita para escritores brasileiros.
 Sem IA, sem nuvem, sem custo. Criado por Rafa Mass.
 oi@escrevaral.com
 ```
 
-### Threads @escrevaral (150 caracteres — sincroniza com Instagram)
+### Threads @escrevaral (125/150 — sincroniza com Instagram)
 ```
 Oficina literária gratuita para escritores brasileiros.
 Sem IA, sem nuvem, sem custo. Criado por Rafa Mass.
 oi@escrevaral.com
 ```
 
-### X / Twitter @escrevaral (160 caracteres)
+### X / Twitter @escrevaral (142/160 caracteres)
 ```
 Oficina literária gratuita para escritores brasileiros. Sem IA, sem nuvem, sem custo. Feita por @rafamass · escrevaral.com · oi@escrevaral.com
 ```
 
-### Bluesky @escrevaral.com (300 caracteres)
+### Bluesky @escrevaral.com (250/256 caracteres)
 ```
 Oficina literária gratuita para escritoras e escritores brasileiros.
 
@@ -46,7 +46,7 @@ Use, teste e conte o que achou: oi@escrevaral.com
 escrevaral.com
 ```
 
-### LinkedIn /company/escrevaral (2000 caracteres — campo "Sobre")
+### LinkedIn /company/escrevaral (campo "Sobre" — até 2000 caracteres)
 ```
 O Escrevaral é uma oficina literária digital gratuita para escritoras e escritores brasileiros.
 
@@ -65,22 +65,22 @@ Tudo gratuito. Para sempre.
 Criado por Rafa Mass · escrevaral.com · oi@escrevaral.com
 ```
 
-### TikTok @escrevaral (80 caracteres)
+### TikTok @escrevaral (71/80 caracteres)
 ```
 Oficina literária gratuita pra escritores brasileiros 🇧🇷 escrevaral.com
 ```
 
-### Facebook Página /escrevaral (255 caracteres — campo "Sobre")
+### Facebook Página /escrevaral (177/255 caracteres — campo "Sobre")
 ```
 Oficina literária gratuita para escritoras e escritores brasileiros. Sem IA, sem nuvem, sem custo. Editor, análise de voz, prova de autoria. Criado por Rafa Mass. escrevaral.com
 ```
 
-### Medium @escrevaral (160 caracteres — bio)
+### Medium @escrevaral (112/160 caracteres — bio)
 ```
 Oficina literária gratuita para escritores brasileiros. Criado por Rafa Mass. escrevaral.com · oi@escrevaral.com
 ```
 
-### Substack escrevaral.substack.com (bio curta)
+### Substack escrevaral.substack.com (105/200 caracteres — bio curta)
 ```
 Oficina literária gratuita para escritoras e escritores brasileiros. Criado por Rafa Mass. escrevaral.com
 ```
@@ -91,17 +91,17 @@ Oficina literária gratuita para escritoras e escritores brasileiros. Criado por
 Falam do processo de criar. Apontam para o Escrevaral.
 Voz: primeira pessoa, exceto LinkedIn press kit (terceira).
 
-### Bluesky @rafa.pro.br (256 caracteres — primeira pessoa)
+### Bluesky @rafa.pro.br (245/256 caracteres — primeira pessoa)
 ```
 Em 2006 um roteiro meu foi premiado em festival — e me levou à publicidade. Convivi com Bechara na ABL em 2010. Em 2020 escrevi 366 textos, um por dia. Criei o Escrevaral.com com tudo que não tinha — oficina gratuita para escritores brasileiros.
 ```
 
-### X / Twitter @rafamass (160 caracteres — primeira pessoa)
+### X / Twitter @rafamass (122/160 caracteres — primeira pessoa)
 ```
 Escritor. Roteirista premiado. Criei o Escrevaral — oficina literária gratuita para escritores brasileiros. escrevaral.com
 ```
 
-### Mastodon @rfmss@hachyderm.io (500 caracteres — primeira pessoa)
+### Mastodon @rfmss@hachyderm.io (418/500 caracteres — primeira pessoa)
 ```
 Escritor de formação. Em 2006 um roteiro meu foi premiado em festival — e entrei na publicidade como passagem. Passei por Genebra em 2008, estudei com Evanildo Bechara na ABL em 2010.
 
@@ -110,7 +110,7 @@ Em 2018 decidi parar. Em 2020 lancei o Fio do Verso, em 2021 comecei oficinas, e
 Oficina literária gratuita para escritores brasileiros. escrevaral.com · oi@escrevaral.com
 ```
 
-### Instagram / Threads pessoal (150 caracteres — primeira pessoa)
+### Instagram / Threads pessoal (121/150 caracteres — primeira pessoa)
 ```
 Escritor. Roteirista premiado. Criei o Escrevaral — oficina literária gratuita pra escritores brasileiros. escrevaral.com
 ```
