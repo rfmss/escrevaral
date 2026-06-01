@@ -1,9 +1,45 @@
 # Escrevaral
 
-Primeira versão integrada do Escrevaral, baseada nos protótipos exportados do Google Stitch.
+Oficina literária gratuita para escritoras e escritores brasileiros.
 
-Abra `index.html` no navegador para testar a experiência inicial do editor.
+→ **[escrevaral.com](https://escrevaral.com)**
 
-Decisões importantes de produto e arquitetura ficam registradas em `PRODUCT_LOG.md`.
+---
 
-Para testar PWA/service worker, sirva a pasta por `localhost` ou publique em HTTPS. Service workers não rodam ao abrir o HTML direto via `file://`.
+## O que é
+
+Editor de texto completo que roda inteiramente no navegador, sem servidor, sem conta, sem custo.
+
+- **Editor** com modos de escrita, guias de ofício e folha paginada (ENEM/vestibular)
+- **Espelho de Voz** — análise de ritmo, vocabulário e estilo da escrita
+- **RimaLab** — métrica e rima para verso e poesia
+- **Vocabulário Decolonizador** — revisão crítica de termos
+- **Prova de Autoria** — registro de autoria com hash e timestamp local
+- **Cópia de segurança automática** — tudo salvo no dispositivo, exportável a qualquer momento
+- **Funciona sem internet** — PWA com service worker
+
+## Stack
+
+```
+HTML · CSS · JS vanilla
+sem framework · sem dependência externa · sem envio de dados
+```
+
+## Rodar localmente
+
+```bash
+python3 -m http.server 8799
+# abre http://localhost:8799
+```
+
+Service workers exigem `localhost` ou HTTPS — não abre via `file://`.
+
+## Contribuir
+
+Issues abertas. Toda sugestão é bem-vinda.
+
+Se você escreve, ensina ou estuda: use, teste e conta o que faltou → **oi@escrevaral.com**
+
+---
+
+Criado por [Rafa Mass](https://rafa.pro.br)
