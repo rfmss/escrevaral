@@ -334,7 +334,8 @@ function applyFocusSettings() {
 function applyTemplateLayout() {
   if (!editorSplit) return;
   editorSplit.dataset.templateSide = state.template.side;
-  editorSplit.style.setProperty("--template-panel-width", `${state.template.width}px`);
+  const safeWidth = Math.min(520, Math.max(260, state.template.width || 300));
+  editorSplit.style.setProperty("--template-panel-width", `${safeWidth}px`);
   editorSplit.classList.toggle("is-template-collapsed", !state.template.open);
 
   templatePanelToggles.forEach((toggle) => {

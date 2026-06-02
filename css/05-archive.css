@@ -548,7 +548,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(250, 249, 247, 0.9);
+  background: var(--card);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -557,7 +557,7 @@
 }
 
 .academy-path.is-book {
-  background: rgba(244, 244, 241, 0.95);
+  background: var(--surface-low);
 }
 
 .academy-path.is-rights {
@@ -580,7 +580,7 @@
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: #eef2ea;
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface-low));
   color: var(--primary);
 }
 
