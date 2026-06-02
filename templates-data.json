@@ -4754,6 +4754,107 @@
       }
     },
     {
+      "id": "publicar-kdp",
+      "oficio": "mercado-editorial",
+      "label": "Publicar no Amazon KDP",
+      "icon": "rocket_launch",
+      "title": "Publicar no Amazon KDP",
+      "kind": "Projeto KDP",
+      "chapter": "Pronto para publicar",
+      "editorMode": "kdp",
+      "description": "Tudo que você precisa para publicar seu livro no Kindle Direct Publishing — do título à precificação, com checklist de envio.",
+      "guidance": {
+        "meta": [
+          "KDP",
+          "Amazon",
+          "Autopublicação",
+          "ePub"
+        ],
+        "sections": [
+          [
+            "O livro",
+            "Título definitivo, subtítulo (opcional mas recomendado), nome do autor como vai aparecer no KDP e nome da série se for uma."
+          ],
+          [
+            "A sinopse",
+            "O texto da contracapa — 400 a 800 caracteres. É a sua venda. Começa com o gancho, apresenta o conflito, termina com a promessa sem spoiler."
+          ],
+          [
+            "Palavras-chave",
+            "7 palavras-chave para indexação na Amazon. Pense no que sua leitora digita quando procura um livro como o seu."
+          ],
+          [
+            "Categorias",
+            "Escolha 2 categorias BISAC. Para romance: Fiction > Romance > Contemporary. Para fantasia: Fiction > Fantasy > Romantic."
+          ],
+          [
+            "Precificação",
+            "R$9,99 para iniciantes no KU (Kindle Unlimited). R$14,99 para quem tem catálogo. Acima de R$9,99 e abaixo de R$199,99 dá 70% de royalties."
+          ],
+          [
+            "Checklist final",
+            "Revisão concluída, capa com as dimensões corretas (2560×1600px), ISBN (opcional para ebooks), conta KDP ativa com dados bancários."
+          ]
+        ],
+        "reminders": [
+          "A sinopse no KDP é o que vende o livro — invista tanto tempo nela quanto num capítulo.",
+          "Palavras-chave de nicho convertem mais que termos genéricos: 'romance fantasy com magia' > 'romance'.",
+          "Kindle Unlimited exige exclusividade por 90 dias mas dá visibilidade enorme para quem está começando.",
+          "A capa é responsável por 80% da decisão de compra. Não publique com capa amadora."
+        ],
+        "blueprint": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\n\n═══ IDENTIDADE DO LIVRO ═══\n\nTítulo: \nSubtítulo: \nNome do autor(a): \nSérie (se houver): \nVolume: \n\n═══ SINOPSE (400–800 caracteres) ═══\n\n[Gancho: situação que cria tensão ou curiosidade imediata]\n\n[Conflito: o que está em jogo para a protagonista]\n\n[Promessa: o que o leitor vai sentir — sem spoiler do final]\n\n═══ PALAVRAS-CHAVE (7 no máximo) ═══\n\n1. \n2. \n3. \n4. \n5. \n6. \n7. \n\n═══ CATEGORIAS ═══\n\nPrincipal: \nSecundária: \n\n═══ PRECIFICAÇÃO ═══\n\nPreço em R$: \nKindle Unlimited (exclusividade 90 dias): [ ] Sim  [ ] Não\nMotivo: \n\n═══ CHECKLIST FINAL ═══\n\n[ ] Revisão completa (sem erros gramaticais visíveis)\n[ ] Capa criada (2560×1600px, JPEG ou TIFF)\n[ ] Conta KDP com dados bancários cadastrados\n[ ] ISBN (opcional — KDP oferece gratuito)\n[ ] Manuscrito exportado em ePub ou DOCX\n[ ] Prévia aprovada no KDP Previewer\n[ ] Página do livro revisada antes de publicar\n\n═══ SOBRE A AUTORA (para o final do livro) ═══\n\n[Texto de 100–200 palavras em primeira pessoa. Onde encontrar você nas redes. Próximos lançamentos.]\n\n═══ LINKS ÚTEIS ═══\n\nKDP: kdp.amazon.com\nKDP Previewer: kdp.amazon.com/en_US/help/topic/G202131170\nBISAC categories: bisg.org/page/bisac-subject-codes-list",
+        "sketch": "# [TÍTULO DO LIVRO]\n## [Subtítulo se houver]\n\n*por [Nome da Autora]*\n\n---\n\n### Sinopse\n\n[Seu gancho aqui — a primeira frase que faz a leitora querer saber mais.]\n\n[O conflito central em 2-3 frases.]\n\n[A promessa emocional — sem spoiler.]\n\n---\n\n[Aqui começa o conteúdo do livro]\n\n---\n\n### Sobre a autora\n\n[Sua bio curta aqui.]\n\n*Siga no Instagram: @*  \n*Próximo lançamento: *"
+      },
+      "steps": [
+        {
+          "eyebrow": "Publicação independente",
+          "title": "Seu livro pode estar na Amazon esta semana.",
+          "body": "O Kindle Direct Publishing é gratuito e paga até 70% de royalties. Este guia te leva do manuscrito pronto ao botão de publicar — passo a passo, sem surpresas técnicas.",
+          "primary": "Começar o projeto KDP",
+          "secondary": "Como funciona o KDP"
+        },
+        {
+          "eyebrow": "A estrutura do projeto",
+          "title": "Seis partes. Uma publicação.",
+          "body": "Identidade do livro, sinopse, palavras-chave, categorias, precificação e checklist final. Preencha cada parte e o projeto estará pronto para gerar o arquivo e publicar.",
+          "items": [
+            [
+              "Identidade",
+              "Título, subtítulo, autora, série — como aparece na Amazon.",
+              "done"
+            ],
+            [
+              "Sinopse",
+              "400–800 caracteres que vendem o livro. Gancho, conflito, promessa.",
+              "done"
+            ],
+            [
+              "Palavras-chave",
+              "7 termos que sua leitora digita para encontrar livros como o seu.",
+              "done"
+            ],
+            [
+              "Categorias",
+              "2 categorias BISAC — onde seu livro vai aparecer nos resultados.",
+              "done"
+            ],
+            [
+              "Precificação",
+              "R$9,99 para estrear no KU. 70% de royalties acima de R$9,99.",
+              "done"
+            ],
+            [
+              "Checklist",
+              "Capa, ISBN, conta bancária, prévia aprovada. Tudo conferido.",
+              "done"
+            ]
+          ],
+          "primary": "Criar projeto KDP"
+        }
+      ],
+      "text": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\n\n━━━ IDENTIDADE DO LIVRO ━━━\n\nTítulo:\nSubtítulo (opcional):\nNome da autora/autor (como aparece na Amazon):\nSérie (se houver):\nVolume:\n\n\n━━━ SINOPSE (400–800 caracteres) ━━━\n\n[Gancho — a primeira frase que cria curiosidade ou tensão:]\n\n\n[Conflito central — o que está em jogo para a protagonista:]\n\n\n[Promessa emocional — o que a leitora vai sentir (sem spoiler do final):]\n\n\n━━━ PALAVRAS-CHAVE ━━━\n\nPense no que sua leitora digita quando procura um livro como o seu.\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n\n\n━━━ CATEGORIAS ━━━\n\nPrincipal:\nSecundária:\n\nExemplos comuns:\n• Romance contemporâneo → Fiction > Romance > Contemporary\n• Fantasia romântica → Fiction > Fantasy > Romantic\n• Suspense psicológico → Fiction > Thrillers > Psychological\n\n\n━━━ PRECIFICAÇÃO ━━━\n\nPreço em R$:\nKindle Unlimited (exclusividade por 90 dias): [ ] Sim  [ ] Não\n\nReferência: acima de R$9,99 e abaixo de R$199,99 = 70% de royalties.\nPara estrear: R$9,99–R$12,99 no KU gera mais downloads e reviews iniciais.\n\n\n━━━ CHECKLIST FINAL ━━━\n\n[ ] Revisão completa — sem erros gramaticais visíveis\n[ ] Capa criada — 2560×1600 pixels, JPEG ou TIFF\n[ ] Conta KDP ativa — com dados bancários cadastrados\n[ ] ISBN — opcional (o KDP oferece um gratuito)\n[ ] Manuscrito exportado — ePub ou DOCX limpo\n[ ] Prévia aprovada no KDP Previewer antes de publicar\n[ ] Página do livro revisada — título, sinopse, categorias confirmados\n\n\n━━━ SOBRE A AUTORA ━━━\n\n[Texto de 100–200 palavras em primeira pessoa.\nOnde encontrar você: Instagram, Wattpad, site.]\n\nPróximo lançamento:\n\n\n━━━ LINKS DE APOIO ━━━\n\nKDP: kdp.amazon.com\nPreviewer: kdp.amazon.com/pt_BR/help/topic/G202131170\nCategorias BISAC: bisg.org/page/bisac-subject-codes-list\nPreços por gênero: kdp.amazon.com/pt_BR/help/topic/G201541130"
+    },
+    {
       "id": "anatomia-fisica-livro",
       "oficio": "objeto-livro",
       "label": "Partes físicas do livro",

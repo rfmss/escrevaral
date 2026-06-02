@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v396";
-const ASSET_VERSION = "20260602-ana-meta";
+const CACHE_NAME = "vereda-offline-v397";
+const ASSET_VERSION = "20260602-kdp-template";
 
 const CORE_ASSETS = [
   "./",
@@ -68,6 +68,7 @@ const CORE_ASSETS = [
   "./rimalab-data.json",
   "./analise-data.json",
   "./decolonial-data.json",
+  "./templates-data.json",
   "./vereda-biblioteca-escrita.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
   `./fonts/material-symbols-outlined.woff2`,
