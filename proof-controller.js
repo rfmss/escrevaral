@@ -74,7 +74,7 @@ function buildDeclaration() {
   return {
     author:      a.name,
     artisticName: a.artisticName || "",
-    statement:   `Este texto foi criado por ${a.name}${a.artisticName ? ` (${a.artisticName})` : ""} e registrado pelo Escrevaral em ${datePT}. A autoria é reivindicada pela própria escritora e sustentada pelo padrão de digitação registrado neste arquivo.`,
+    statement:   `Este texto foi criado por ${a.name}${a.artisticName ? ` (${a.artisticName})` : ""} e registrado pelo Escrevaral em ${datePT}. A autoria pertence a quem assina este arquivo e é sustentada pelo padrão de digitação aqui registrado.`,
     signedAt:    a.signedAt,
   };
 }

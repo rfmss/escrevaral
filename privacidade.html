@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade — Escrevaral</title>
+  <meta name="description" content="Como o Escrevaral trata seus dados — com respeito, transparência e o mínimo necessário.">
+  <meta name="robots" content="index, follow">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --ink: #1a1209;
+      --soft-ink: #3d2e1a;
+      --muted: #8a7660;
+      --primary: #2e5e3e;
+      --line: #e4ddd3;
+      --card: #fefcf8;
+      --paper: #faf6ef;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      line-height: 1.65;
+    }
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      margin-bottom: 40px;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 8px;
+      line-height: 1.2;
+    }
+    .updated {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 40px;
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 36px 0 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+    p { margin: 0 0 14px; font-size: 15px; color: var(--soft-ink); }
+    ul { margin: 0 0 14px; padding-left: 20px; }
+    li { font-size: 15px; color: var(--soft-ink); margin-bottom: 6px; }
+    a { color: var(--primary); }
+    .highlight {
+      background: #f0f7f3;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--soft-ink);
+    }
+    .contact-block {
+      margin-top: 48px;
+      padding: 20px 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .contact-block p { margin: 0; font-size: 14px; }
+    footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="/" class="back-link">← Voltar ao Escrevaral</a>
+
+    <p class="eyebrow">Escrevaral · Privacidade</p>
+    <h1>Política de Privacidade</h1>
+    <p class="updated">Última atualização: junho de 2026 · versão 1.0</p>
+
+    <div class="highlight">
+      <strong>O resumo honesto:</strong> seus manuscritos nunca saem do seu navegador. Coletamos só o mínimo para saber se o produto está funcionando — sem identificar quem você é.
+    </div>
+
+    <h2>1. Quem somos</h2>
+    <p>O Escrevaral é um projeto independente mantido por Rafael Mass (oi@escrevaral.com). Não há empresa registrada, investidor ou equipe — é uma pessoa construindo uma ferramenta para quem escreve.</p>
+
+    <h2>2. O que seus dados fazem</h2>
+    <p>O Escrevaral é offline-first. Seus manuscritos, prova de autoria, versões e configurações são salvos exclusivamente no <strong>localStorage do seu navegador</strong> — no seu dispositivo, sob seu controle. Nenhum desses dados é enviado a qualquer servidor.</p>
+    <ul>
+      <li>Nenhum manuscrito é transmitido ou armazenado fora do seu dispositivo.</li>
+      <li>Nenhuma IA lê o que você escreve.</li>
+      <li>Nenhum dado de conteúdo é processado por terceiros.</li>
+    </ul>
+
+    <h2>3. Analytics — GoatCounter</h2>
+    <p>Usamos o <strong>GoatCounter</strong> (goatcounter.com) para saber quantas pessoas acessam o site. O GoatCounter é uma ferramenta de análise focada em privacidade:</p>
+    <ul>
+      <li>Não usa cookies de rastreamento.</li>
+      <li>Não identifica visitantes individualmente.</li>
+      <li>Coleta: página visitada, tipo de dispositivo/navegador e país de origem (a partir do IP, que não é armazenado).</li>
+      <li>Nenhum dado é compartilhado com redes de publicidade.</li>
+    </ul>
+    <p>Os dados agregados do GoatCounter são públicos em <a href="https://escrevaral.goatcounter.com" target="_blank" rel="noopener">escrevaral.goatcounter.com</a>. Você pode conferir o que coletamos a qualquer momento.</p>
+
+    <h2>4. Prova de Autoria — dados locais</h2>
+    <p>A Prova de Autoria registra o ritmo de digitação (intervalos entre teclas) e armazena esses dados localmente. Quando você exporta um arquivo <code>.prova.esc</code>, ele fica no seu dispositivo e você decide com quem compartilha. O Escrevaral não tem acesso a esses arquivos.</p>
+    <p>O carimbo blockchain (OpenTimestamps) envia apenas o <strong>hash criptográfico</strong> do seu arquivo — não o conteúdo, não o texto — a um serviço externo público. Esse hash não pode ser revertido para revelar o texto original.</p>
+
+    <h2>5. Seus direitos (LGPD — Lei 13.709/2018)</h2>
+    <p>Como os dados ficam no seu dispositivo, você já tem controle total sobre eles. Mas se tiver alguma dúvida ou solicitação relacionada aos dados de analytics, entre em contato:</p>
+    <ul>
+      <li><strong>Acesso:</strong> os dados do GoatCounter são públicos (ver item 3).</li>
+      <li><strong>Exclusão:</strong> os dados de analytics são agregados e anônimos — não é possível excluir uma visita específica porque não há identificação individual.</li>
+      <li><strong>Portabilidade:</strong> seus manuscritos e provas de autoria ficam no seu navegador — você pode exportá-los a qualquer momento via Arquivo → Guardar cópia do acervo.</li>
+    </ul>
+
+    <h2>6. Cookies</h2>
+    <p>O Escrevaral não usa cookies. O GoatCounter também não. O armazenamento local (localStorage e sessionStorage) é usado exclusivamente para salvar seus dados de escrita — e só funciona no seu dispositivo.</p>
+
+    <h2>7. Menores de idade</h2>
+    <p>O Escrevaral não coleta dados de menores de 18 anos intencionalmente. Se você tiver menos de 18 anos, recomendamos que use o produto com conhecimento de um responsável.</p>
+
+    <h2>8. Mudanças nesta política</h2>
+    <p>Se esta política mudar de forma relevante, avisaremos na interface do produto. A versão mais atual estará sempre em escrevaral.com/privacidade.</p>
+
+    <div class="contact-block">
+      <p><strong>Dúvidas sobre privacidade?</strong><br>
+      Entre em contato: <a href="mailto:oi@escrevaral.com">oi@escrevaral.com</a><br>
+      Responsável: Rafael Mass · Escrevaral</p>
+    </div>
+
+    <footer>
+      <span>© 2026 Escrevaral</span>
+      <a href="/">Voltar ao editor</a>
+    </footer>
+  </div>
+</body>
+</html>

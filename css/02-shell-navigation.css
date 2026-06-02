@@ -2881,3 +2881,14 @@ mark {
 }
 .proof-author-change-btn:hover { color: var(--primary); background: var(--surface-low); }
 .proof-author-change-btn .material-symbols-outlined { font-size: 16px; }
+
+.terms-consent-note {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin: 6px 0 0;
+}
+.terms-inline-link {
+  color: var(--primary);
+  text-underline-offset: 2px;
+}
