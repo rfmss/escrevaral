@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v389";
-const ASSET_VERSION = "20260602-toolbar-fixes";
+const CACHE_NAME = "vereda-offline-v390";
+const ASSET_VERSION = "20260602-mesa-editor";
 
 const CORE_ASSETS = [
   "./",
