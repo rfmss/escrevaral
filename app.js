@@ -646,15 +646,30 @@ function closeCreateNote() {
 function openAddCompanionNote(bibliType) {
   createNoteParentId = state.activeId;
   createNoteCategory = "projeto";
+
+  // Botão rápido da Bíblia: cria a nota diretamente sem passar pelo modal
+  if (bibliType) {
+    const type = documentTypes.find(t => t.id === bibliType);
+    if (type && createNoteParentId) {
+      const manuscript = VeredaArchive.createManuscript({
+        id: `manuscrito-${Date.now()}`,
+        title: "",
+        type: "manuscrito",
+        folder: undefined,
+        kind: type.kind,
+        chapter: type.chapter,
+        description: createProjectNoteDescription(type),
+        text: createProjectNoteText(type),
+        parentId: createNoteParentId,
+      });
+      addManuscript(manuscript, `Ficha de ${type.label} criada`);
+      setTimeout(() => titleInput?.focus(), 400);
+      return;
+    }
+  }
+
   renderCreateNoteStep(2);
   createNoteOverlay.hidden = false;
-  // Pré-selecionar o tipo de ficha se veio de um botão rápido da Bíblia
-  if (bibliType) {
-    setTimeout(() => {
-      const btn = createNoteOverlay.querySelector(`[data-create-note-type="${bibliType}"]`);
-      if (btn) { btn.click(); }
-    }, 80);
-  }
 }
 
 // ── TERMOS DE USO ────────────────────────────────────

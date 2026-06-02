@@ -20,40 +20,8 @@ const _IS_FIRST_VISIT = !localStorage.getItem(STORAGE_KEY) && !localStorage.getI
 const BACKUP_WARNING_DAYS = 7;
 const VIEW_ROUTES = new Set(["editor", "biblioteca", "autoria", "arquivo", "academia", "cronograma"]);
 
-const starterManuscripts = [
-  {
-    id: "som-da-terra-seca",
-    title: "O Som da Terra Seca",
-    type: "manuscrito",
-    folder: "Ficção",
-    kind: "Romance em andamento",
-    status: "Em escrita",
-    chapter: "Capítulo 12",
-    progress: 62,
-    description: "A saga de uma família sertaneja enfrentando a maior seca do século, entrelaçada com memória, fé e resistência.",
-    updatedAt: new Date().toISOString(),
-    text: `O sol não nascia, ele estourava no horizonte, pintando a poeira de um laranja violento antes de assumir seu branco punitivo. Maria sentou-se na varanda, a cadeira de palha gemendo sob o peso miúdo. Olhou para o infinito rachado de barro.
-
-— Hoje não chove — murmurou, mais por hábito do que por esperança.
-
-O velho Tião pigarreou lá dentro, o som oco batendo nas paredes de taipa. Ele tossia terra desde a seca de oitenta e dois. O rádio de pilha chiava uma moda de viola distante, engolida pela estática e pelo silêncio opressivo que se seguia.
-
-Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. A água da moringa já amargava, gosto de barro e espera. Era o quinto mês sem uma gota. O gado, o pouco que restava, pastava miragens na imensidão amarela.`,
-  },
-  {
-    id: "coronel-de-pedra",
-    title: "Coronel de Pedra",
-    type: "manuscrito",
-    folder: "Ficção",
-    kind: "Rascunho",
-    status: "Pausado",
-    chapter: "Ato 1",
-    progress: 14,
-    description: "Uma cidade pequena acorda sob a presença de um coronel que atravessa a praça como se fosse dono da manhã.",
-    updatedAt: new Date(Date.now() - 1000 * 60 * 60 * 26).toISOString(),
-    text: `A cidade acordava antes dos sinos. Primeiro vinha o rangido das portas, depois o cheiro do café passando devagar, e por fim a voz do coronel atravessando a praça como se fosse dono da manhã.`,
-  },
-];
+// Estado de fallback vazio — estado corrompido inicia limpo, não com conteúdo de exemplo
+const starterManuscripts = [];
 
 // Guard: falha explicitamente se seletor obrigatório não existir no HTML
 function requireEl(selector) {
