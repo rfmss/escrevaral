@@ -1516,8 +1516,9 @@ html {
   color: var(--soft-ink);
   border-color: transparent;
 }
-/* Estado ativo (guia aberto): fundo sutil, não cor primária cheia */
-.editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"] {
+/* Estado ativo — guia, leitura e mesa */
+.editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
+.editor-mode-bar .secondary-button[aria-pressed="true"] {
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
   border-color: color-mix(in srgb, var(--primary) 20%, transparent);
@@ -1544,11 +1545,20 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: text;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--motion-quick);
+  padding-bottom: 1px;
+}
+
+.title-input:hover {
+  border-bottom-color: color-mix(in srgb, var(--primary) 30%, transparent);
 }
 
 .title-input:focus {
   white-space: normal;
   overflow: visible;
+  border-bottom-color: var(--primary);
 }
 
 .title-rule {
@@ -1970,6 +1980,9 @@ mark {
 .project-card small {
   color: var(--muted);
   font-size: 12px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .metric-block strong {

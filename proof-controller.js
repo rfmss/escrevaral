@@ -193,7 +193,8 @@ function renderProofView() {
   // Atualiza chip da topbar
   const chip = document.querySelector("[data-proof-chip]");
   const chipValue = document.querySelector("[data-proof-chip-value]");
-  if (chip && summary.totalEvents > 0 && summary.integrity > 0) {
+  const wordCount = (getActiveManuscript()?.text || "").trim().split(/\s+/).filter(Boolean).length;
+  if (chip && summary.totalEvents > 0 && summary.integrity > 0 && wordCount >= 50) {
     chip.hidden = false;
     if (chipValue) chipValue.textContent = `${summary.integrity}%`;
     chip.dataset.level = summary.integrity >= 80 ? "high" : summary.integrity >= 50 ? "medium" : "low";

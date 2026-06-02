@@ -359,7 +359,8 @@ function renderRecentDocuments(manuscripts) {
     .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
     .slice(0, 4);
 
-  if (!recentItems.length) {
+  // Só mostra "Continue de onde parou" com 2+ documentos — com 1 é ruído
+  if (!recentItems.length || manuscripts.length < 2) {
     recentDocuments.hidden = true;
     recentDocuments.innerHTML = "";
     return;
