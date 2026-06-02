@@ -11,6 +11,7 @@
 /* ── SEGURANÇA E BACKUP — details recolhível ── */
 .archive-security-details {
   width: 100%;
+  margin-bottom: 16px;
 }
 .archive-security-details[open] .archive-security-chevron {
   transform: rotate(180deg);
@@ -239,11 +240,26 @@
 }
 
 .archive-controls {
-  display: grid;
-  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr) 180px;
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  margin: -12px 0 22px;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.archive-controls .archive-search {
+  flex: 1 1 240px;
+  min-width: 200px;
+}
+.archive-controls .archive-sort {
+  flex: 0 0 auto;
+}
+.archive-controls .archive-filter-bar {
+  flex: 1 1 100%;
+  order: 10;
+}
+.archive-controls .archive-status-bar {
+  flex: 1 1 100%;
+  order: 11;
 }
 
 .archive-search,

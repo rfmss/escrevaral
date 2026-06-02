@@ -1573,20 +1573,17 @@
   padding: 8px 10px;
 }
 
+/* Painel direito só aparece quando uma nota está selecionada no acervo */
 .archive-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: 1fr;
   gap: 20px;
   align-items: start;
 }
-
-/* Painel direito só aparece quando uma nota está explicitamente selecionada
-   (archive-note-identity visível). Por padrão: layout de coluna única. */
 .archive-detail-panel { display: none; }
-.archive-layout { grid-template-columns: 1fr; }
 
 .archive-layout:has([data-archive-note-identity]:not([hidden])) {
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: minmax(0, 1fr) 320px;
 }
 .archive-layout:has([data-archive-note-identity]:not([hidden])) .archive-detail-panel {
   display: block;
