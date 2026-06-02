@@ -15,13 +15,36 @@ function renderManuscriptNavigation() {
     const isActive = manuscript.id === state.activeId;
     const companions = state.manuscripts.filter((m) => m.parentId === manuscript.id);
 
-    const companionHtml = isActive ? companions.map((c) => {
-      const ct = getArchiveType(c);
-      const isCC = c.id === state.activeId ? " is-current" : "";
-      return `<button class="tree-row companion-row${isCC}" data-manuscript-id="${c.id}">
-        <span class="material-symbols-outlined">${ct.icon}</span>${escapeHtml(c.title)}</button>`;
-    }).join("") + `<button class="tree-row companion-add-row" data-action="add-companion-note" title="Anotação, pesquisa ou referência associada a este manuscrito">
-      <span class="material-symbols-outlined">add</span>Nota vinculada</button>` : "";
+    // Tipos de ficha da Bíblia (ícone + tipo + label curta para botões rápidos)
+    const BIBLIA_QUICK = [
+      { id: "personagem", icon: "person_edit",  label: "Personagem" },
+      { id: "mundo",      icon: "public",        label: "Mundo" },
+      { id: "lugar",      icon: "location_on",   label: "Lugar" },
+      { id: "cronologia", icon: "timeline",      label: "Cronologia" },
+      { id: "objeto",     icon: "category",      label: "Objeto" },
+    ];
+
+    const companionHtml = isActive ? (() => {
+      const companionItems = companions.map((c) => {
+        const ct = getArchiveType(c);
+        const isCC = c.id === state.activeId ? " is-current" : "";
+        return `<button class="tree-row companion-row${isCC}" data-manuscript-id="${c.id}">
+          <span class="material-symbols-outlined">${ct.icon}</span>${escapeHtml(c.title || "Sem título")}</button>`;
+      }).join("");
+
+      const quickBtns = BIBLIA_QUICK.map(b =>
+        `<button class="biblia-quick-btn" data-action="add-companion-note" data-biblia-type="${b.id}" title="Nova ficha de ${b.label}">
+          <span class="material-symbols-outlined">${b.icon}</span>${b.label}</button>`
+      ).join("");
+
+      return `${companionItems}
+        <div class="biblia-section">
+          <span class="biblia-section-label">Fichas da Bíblia</span>
+          <div class="biblia-quick-row">${quickBtns}</div>
+          <button class="tree-row companion-add-row" data-action="add-companion-note" title="Outra ficha de projeto">
+            <span class="material-symbols-outlined">more_horiz</span>Outras fichas</button>
+        </div>`;
+    })() : "";
 
     return `
       <div class="nav-manuscript-wrap">

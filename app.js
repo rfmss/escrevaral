@@ -643,11 +643,18 @@ function closeCreateNote() {
   createNoteParentId = null;
 }
 
-function openAddCompanionNote() {
+function openAddCompanionNote(bibliType) {
   createNoteParentId = state.activeId;
   createNoteCategory = "projeto";
   renderCreateNoteStep(2);
   createNoteOverlay.hidden = false;
+  // Pré-selecionar o tipo de ficha se veio de um botão rápido da Bíblia
+  if (bibliType) {
+    setTimeout(() => {
+      const btn = createNoteOverlay.querySelector(`[data-create-note-type="${bibliType}"]`);
+      if (btn) { btn.click(); }
+    }, 80);
+  }
 }
 
 // ── TERMOS DE USO ────────────────────────────────────
@@ -918,8 +925,233 @@ async function createManuscriptFromTemplate(templateId) {
 }
 
 function createProjectNoteText(type) {
-  // Nota nasce vazia — placeholder é visual (CSS), não conteúdo persistido
-  return "";
+  const fichas = {
+    personagem: `NOME
+(nome completo · apelido · como os outros o chamam)
+
+
+APARÊNCIA
+(o detalhe que fica — não a lista inteira)
+
+
+DESEJO
+(o que quer conscientemente · o objetivo declarado)
+
+
+NECESSIDADE
+(o que precisa mas ainda não sabe · o que a história vai dar)
+
+
+CONTRADIÇÃO
+(o que a torna humana, não previsível · o defeito que é também uma força)
+
+
+VOZ
+(palavras que usa muito · palavras que evita · como interrompe · como mente)
+
+
+ARCO
+onde começa:
+onde termina:
+o que muda:
+o que não muda:
+
+
+RELAÇÕES
+— com [personagem]:
+— com [personagem]:
+
+
+DETALHES PARA NÃO ESQUECER
+(cor dos olhos, cheiro, maneirismo, objeto que carrega)`,
+
+    mundo: `REGRAS FUNDAMENTAIS
+(o que é diferente deste mundo em relação ao nosso)
+
+
+MAGIA / TECNOLOGIA / SISTEMA
+como funciona:
+quais os limites:
+qual o custo ou consequência:
+
+
+HISTÓRIA
+(o que aconteceu antes da história começar · o trauma coletivo)
+
+
+TENSÃO ESTRUTURAL
+(o conflito que existe antes da protagonista aparecer)
+
+
+LUGARES IMPORTANTES
+—
+—
+
+
+INSTITUIÇÕES E FACÇÕES
+— [nome]: função, poder, quem representa
+— [nome]: função, poder, quem representa
+
+
+TERMOS E VOCABULÁRIO PRÓPRIO
+— [termo]:`,
+
+    lugar: `NOME
+
+
+LOCALIZAÇÃO
+(onde fica no mundo · como se chega)
+
+
+ATMOSFERA
+(o que se sente ao entrar · temperatura emocional do espaço)
+
+
+DETALHES SENSORIAIS
+visão:
+som:
+cheiro:
+toque:
+
+
+HISTÓRIA DO LUGAR
+(o que aconteceu aqui antes)
+
+
+QUEM ESTÁ AQUI
+(moradores, frequentadores, fantasmas)
+
+
+SIGNIFICADO NA HISTÓRIA
+(por que este lugar importa para a protagonista)`,
+
+    cronologia: `ANTES DA HISTÓRIA COMEÇAR
+— [período]:
+— [período]:
+— [evento que mudou tudo]:
+
+
+A HISTÓRIA
+— cena/cap 1:
+— [primeiro ponto de virada]:
+— [meio]:
+— [segundo ponto de virada]:
+— [clímax]:
+— [resolução]:
+
+
+PARALELOS E FLASHBACKS
+— [memória de X]: aparece em:
+— [evento passado]: revelado quando:
+
+
+DATAS E DURAÇÕES
+início da história:
+duração total:
+datas importantes:`,
+
+    objeto: `NOME
+
+
+DESCRIÇÃO FÍSICA
+(o detalhe que fica na memória do leitor)
+
+
+HISTÓRIA DO OBJETO
+(de onde veio · quem teve antes)
+
+
+SIGNIFICADO SIMBÓLICO
+(o que representa além do que é)
+
+
+QUEM TEM / QUEM QUER / QUEM TEME
+—
+
+
+COMO APARECE NA HISTÓRIA
+— primeira vez:
+— ponto de virada:
+— cena final:`,
+
+    tema: `INTENÇÃO
+(o que este texto quer dizer — em uma frase)
+
+
+TENSÃO TEMÁTICA
+(as duas forças opostas que o texto explora)
+
+
+IMAGEM CENTRAL
+(a cena, o objeto ou o momento que cristaliza o tema)
+
+
+PERGUNTA QUE O TEXTO FAZ
+(não precisa responder — precisa fazer a pergunta certa)
+
+
+CONTRA-ARGUMENTO
+(o que o texto reconhece como verdade no lado oposto)`,
+
+    glossário: `TERMOS DO PROJETO
+
+— [termo]:
+  definição:
+  contexto de uso:
+  primeira aparição:
+
+— [termo]:
+  definição:
+  contexto de uso:
+  primeira aparição:`,
+
+    instituição: `NOME
+
+
+FUNÇÃO
+(o que faz · para quem existe)
+
+
+PODER
+(de onde vem · como se mantém · o que teme perder)
+
+
+QUEM REPRESENTA
+(interesses de qual grupo · inimigos declarados · aliados secretos)
+
+
+ESTRUTURA INTERNA
+(hierarquia · regras · ritos de entrada e saída)
+
+
+PAPEL NA HISTÓRIA
+(como afeta a protagonista · o que quer dela)`,
+
+    projeto: `SINOPSE
+(2-3 frases que explicam o livro para um editor)
+
+
+PÚBLICO
+(quem lê · que outros livros essa pessoa também lê)
+
+
+PROMESSA DE LEITURA
+(o que o leitor vai sentir · o que vai levar)
+
+
+ESTÁGIO ATUAL
+(rascunho / revisão / finalização)
+
+
+PRAZO
+(data de entrega real ou desejada)
+
+
+NOTAS DE DESENVOLVIMENTO
+`,
+  };
+
+  return fichas[type.id] || "";
 }
 
 function createProjectNoteDescription(type) {
@@ -1597,7 +1829,7 @@ const ACTION_HANDLERS = {
   "create-blank-manuscript": () => createBlankManuscript(),
   "create-from-reference-template": () => createFromReferenceTemplate(),
   "create-step-back":        () => createNoteParentId ? closeCreateNote() : renderCreateNoteStep(1),
-  "add-companion-note":      () => openAddCompanionNote(),
+  "add-companion-note":      (_, t) => openAddCompanionNote(t?.dataset?.bibliaType),
   "accept-terms-blank":      () => acceptTerms("blank"),
   "accept-terms-guide":      () => acceptTerms("guide"),
   "welcome-write":           () => handleWelcomeWrite(),
