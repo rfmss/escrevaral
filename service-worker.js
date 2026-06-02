@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v403";
-const ASSET_VERSION = "20260602-enviar-editor";
+const CACHE_NAME = "vereda-offline-v404";
+const ASSET_VERSION = "20260602-assinatura";
 
 const CORE_ASSETS = [
   "./",

@@ -308,6 +308,7 @@ function loadState() {
       proofs: {},
       versions: {},
       proofValidations: {},
+      proofAuthor: { name: "", artisticName: "", signedAt: "" },
     };
   }
 
@@ -332,6 +333,7 @@ function loadState() {
         proofs: parsed.proofs || {},
         versions: parsed.versions || {},
         proofValidations: parsed.proofValidations || {},
+        proofAuthor: parsed.proofAuthor || { name: "", artisticName: "", signedAt: "" },
       };
     }
 
@@ -365,6 +367,7 @@ function loadState() {
       proofs: parsed.proofs || {},
       versions: parsed.versions || {},
       proofValidations: parsed.proofValidations || {},
+        proofAuthor: parsed.proofAuthor || { name: "", artisticName: "", signedAt: "" },
     };
   } catch {
     return {

@@ -1,6 +1,84 @@
 // proof-controller.js — prova de autoria, versões e metas de escrita
 // Depende de: state-store.js, proof-engine.js, version-engine.js
 
+// ── ASSINATURA DA AUTORA ──────────────────────────────
+function renderProofAuthorSection() {
+  const form  = document.querySelector("[data-proof-author-form]");
+  const badge = document.querySelector("[data-proof-author-badge]");
+  if (!form || !badge) return;
+
+  const author = state.proofAuthor;
+  const isSigned = !!(author?.name);
+
+  form.hidden  = isSigned;
+  badge.hidden = !isSigned;
+
+  if (isSigned) {
+    const display = document.querySelector("[data-proof-author-display]");
+    const dateEl  = document.querySelector("[data-proof-author-date]");
+    if (display) {
+      display.textContent = author.artisticName
+        ? `${author.name} · ${author.artisticName}`
+        : author.name;
+    }
+    if (dateEl && author.signedAt) {
+      dateEl.textContent = new Date(author.signedAt)
+        .toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+    }
+  }
+}
+
+function signProofAuthor() {
+  const nameInput     = document.querySelector("[data-proof-author-name]");
+  const artisticInput = document.querySelector("[data-proof-author-artistic]");
+  const name     = nameInput?.value.trim() || "";
+  const artistic = artisticInput?.value.trim() || "";
+
+  if (!name) {
+    nameInput?.focus();
+    nameInput?.classList.add("proof-input-error");
+    setTimeout(() => nameInput?.classList.remove("proof-input-error"), 1200);
+    return;
+  }
+
+  state.proofAuthor = {
+    name,
+    artisticName: artistic,
+    signedAt: new Date().toISOString(),
+  };
+  persistState("Assinatura registrada");
+
+  // Animação de "tatuar"
+  const form = document.querySelector("[data-proof-author-form]");
+  if (form) {
+    form.classList.add("proof-author-tattooing");
+    setTimeout(() => {
+      form.classList.remove("proof-author-tattooing");
+      renderProofAuthorSection();
+    }, 600);
+  }
+}
+
+function resetProofAuthor() {
+  state.proofAuthor = { name: "", artisticName: "", signedAt: "" };
+  persistState("Assinatura removida");
+  renderProofAuthorSection();
+  setTimeout(() => document.querySelector("[data-proof-author-name]")?.focus(), 100);
+}
+
+function buildDeclaration() {
+  const a = state.proofAuthor;
+  if (!a?.name) return null;
+  const datePT = new Date(a.signedAt || new Date())
+    .toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+  return {
+    author:      a.name,
+    artisticName: a.artisticName || "",
+    statement:   `Este texto foi criado por ${a.name}${a.artisticName ? ` (${a.artisticName})` : ""} e registrado pelo Escrevaral em ${datePT}. A autoria é reivindicada pela própria escritora e sustentada pelo padrão de digitação registrado neste arquivo.`,
+    signedAt:    a.signedAt,
+  };
+}
+
 function getActiveProofRecord() {
   const manuscript = getActiveManuscript();
 
@@ -317,6 +395,8 @@ function renderProofView() {
 
   // Histórico de sessões anteriores
   renderProofSessionHistory();
+  // Assinatura da autora
+  renderProofAuthorSection();
 }
 
 function renderProofSessionHistory() {
@@ -475,6 +555,9 @@ async function exportProof() {
   }
 
   const proofDocument = await VeredaProof.createProofDocument(getActiveProofRecord(), manuscript);
+  // Injetar assinatura da autora se existir
+  const decl = buildDeclaration();
+  if (decl) proofDocument.declaration = decl;
   const proofJson = JSON.stringify(proofDocument, null, 2);
   downloadFile(proofJson, `${slugify(manuscript.title)}-${slugify(proofDocument.session.name)}.prova.esc`, "application/json");
 

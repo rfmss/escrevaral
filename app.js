@@ -1625,6 +1625,8 @@ const ACTION_HANDLERS = {
   },
   "export-proof":            () => exportProof(),
   "send-proof-to-editor":    () => sendProofToEditor(),
+  "sign-proof-author":       () => signProofAuthor(),
+  "reset-proof-author":      () => resetProofAuthor(),
   "stamp-blockchain":        () => stampWithOpenTimestamps(),
   "validate-proof-file":     () => document.querySelector("[data-proof-validate-input]")?.click(),
   "toggle-proof-sessions":   () => toggleProofSessionHistory(),
