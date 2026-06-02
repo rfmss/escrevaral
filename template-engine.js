@@ -49,7 +49,7 @@
     if (!template) return null;
     return {
       id:          options.id    || `manuscrito-${Date.now()}`,
-      title:       options.title || `Novo ${template.label}`,
+      title:       options.title || "",
       text:        template.text,
       kind:        template.kind,
       status:      "Em escrita",

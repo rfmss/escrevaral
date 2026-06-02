@@ -430,7 +430,7 @@
         && !/^.+(ar|er|ir)or$/.test(normalized)) // não é radical verbal
       return "Substantivo";
 
-    return "Substantivo provável";
+    return "Substantivo";
   }
 
   // ── Gatilhos que desencadeiam subjuntivo — VERB-SUBJ-USO-01/02/03/04 (Bechara MGP + Cunha&Cintra) ──

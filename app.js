@@ -85,6 +85,8 @@ function setView(viewName, options = {}) {
   nav.classList.remove("is-open");
   closeBandeja();
   if (welcomeOverlay && !welcomeOverlay.hidden) closeWelcome();
+  // Suprimir hint da Academia ao navegar para Arquivo — não interromper o momento de satisfação
+  if (viewName === "arquivo") { hideAcademiaHint(); clearTimeout(hintIdleTimer); }
 
   document.querySelectorAll("[data-view-panel]").forEach((panel) => {
     panel.classList.toggle("is-active", panel.dataset.viewPanel === viewName);
@@ -899,13 +901,15 @@ async function createManuscriptFromTemplate(templateId) {
   const folder = CATEGORY_FOLDER[template.oficio] || CATEGORY_FOLDER[createNoteCategory] || "Ficção";
   const manuscript = VeredaArchive.createManuscript({
     ...templateManuscript,
-    title: `${template.label} ${nextDraftNumber()}`,
+    title: "",
     type: "manuscrito",
     folder,
   });
 
   state.template.selectedId = templateId;
   addManuscript(manuscript, "Guia aplicado");
+  // Foca no título para que ela nomeie o projeto imediatamente — ato de posse
+  setTimeout(() => titleInput?.focus(), 400);
   // Vestibular: guia abre junto após criação — folha paginada do ENEM sem orientação desorientar
   if (template.oficio === "estudo-vestibular") {
     state.template.open = true;
