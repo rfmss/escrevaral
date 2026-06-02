@@ -1503,15 +1503,16 @@ html {
 
 /* Guia/Ler/Classes: toolbar quieta — presença de interruptor, não CTA */
 .editor-mode-bar .secondary-button {
-  padding: 6px 10px;
+  padding: 5px 10px;
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
   border-color: transparent;
   background: transparent;
+  border-radius: 6px;
 }
 .editor-mode-bar .secondary-button:hover {
-  background: var(--surface-low);
+  background: var(--card);
   color: var(--soft-ink);
   border-color: transparent;
 }

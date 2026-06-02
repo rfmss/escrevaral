@@ -2,8 +2,8 @@
 nome: Arnaldo Figueiredo
 tipo: testador especialista
 papel: corpus linguístico, auditoria de qualidade das engines, oráculo humano
-status: ativo — corpus em construção
-sessão: fase 1 do guarda de regressão
+status: auditado — 2026-06-02
+sessão: v381 → v382
 ---
 
 # Arnaldo Figueiredo — o Catedrático

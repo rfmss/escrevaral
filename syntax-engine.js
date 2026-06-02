@@ -61,7 +61,7 @@
     "outrem","outro","outra","outros","outras","cada","nenhum","nenhuma",
     "algum","alguma","alguns","algumas",
     "muitos","muitas","poucos","poucas","tantos","tantas",
-    "certo","certa","certos","certas","tal","tais",
+    "certo","certa","tal","tais",
     "mesmo","mesma","mesmos","mesmas",
     "próprio","própria","próprios","próprias",
   ]);
@@ -111,6 +111,8 @@
     "curto","curta","curtos","curtas","duro","dura","duros","duras",
     "doce","doces","calmo","calma","calmos","calmas",
     "bravo","brava","bravos","bravas","fino","fina","finos","finas",
+    "nobre","nobres","ágil","ágeis","fértil","férteis","útil","úteis",
+    "certos","certas","leal","leais","fiel","fiéis","frugal","frugais",
     "bonito","bonita","bonitos","bonitas","atrasado","atrasada",
     "animado","animada","animados","animadas","fechado","fechada",
     "pensativo","pensativa","pensativos","pensativas",
@@ -161,9 +163,57 @@
     "milésimo","milésima","milésimos","milésimas",
   ]);
 
+  // ── Desambiguação contextual — segunda passagem sobre o array completo ──────
+  // Aplicada após o fallback individual, quando vizinhos já têm tags.
+  // Três regras ordenadas por impacto:
+  // R1 — sufixos nominais inequívocos → Substantivo
+  // R2 — token vazio após Determinante/Preposição → Substantivo
+  // R3 — único Verb após Determinante → nominalização (o falar, o poder, o ser)
+  // Sufixos nominais inequívocos — Cunha&Cintra cap.5
+  // "-oes": plurais de -ção/-são (soluções, ações, nações)
+  // "-ao" e "-i" excluídos: ambíguos com verbos (vão, saí)
+  const _SUFIXOS_NOM = /(?:cao|sao|oes|dade|tude|eza|ez|ismo|ncia|mento|agem)$/;
+
+  // Transições de alta confiança extraídas do Mac-Morpho (1.17M tokens, NLTK)
+  // Só transições com P >= 0.70 entram como regra determinística
+  // P(curr | prev): Determiner→Noun 0.76, Numeral→Noun 0.87
+  const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
+
+  function resolverAmbiguidade(tks) {
+    for (let i = 0; i < tks.length; i++) {
+      const t = tks[i];
+      if (!t || /^[.,;:!?—]$/.test(t.text)) continue;
+      const na        = _stripDiac(t.normal);
+      const prevTags  = i > 0 ? (tks[i - 1]?.tags || []) : [];
+      const prevIsDet = prevTags.includes("Determiner");
+      const prevIsCtx = prevIsDet || prevTags.includes("Preposition");
+      const prevHighNoun = prevTags.some(pt => _BIGRAM_NOUN_PREV.has(pt));
+
+      // R1 — sufixos nominais inequívocos: tag vazio → Substantivo
+      if (t.tags.length === 0 && na.length > 4 && _SUFIXOS_NOM.test(na))
+        t.tags.push("Noun");
+
+      // R2 — após Determinante ou Preposição, ainda sem tag → Substantivo
+      if (t.tags.length === 0 && prevIsCtx)
+        t.tags.push("Noun");
+
+      // R3 — apenas [Verb] após Determinante → nominalização (o falar, o poder)
+      if (t.tags.length === 1 && t.tags[0] === "Verb" && prevIsDet)
+        t.tags[0] = "Noun";
+
+      // R4 (Mac-Morpho) — após Determiner ou Numeral, qualquer tag Verb → rebaixar para Noun
+      // P(Noun|Determiner)=0.76, P(Noun|Numeral)=0.87
+      if (prevHighNoun && t.tags.includes("Verb") && !t.tags.includes("Noun")) {
+        t.tags = t.tags.filter(tt => tt !== "Verb");
+        t.tags.push("Noun");
+      }
+    }
+    return tks;
+  }
+
   function analisarMorfologiaFallback(texto) {
     const tokens = texto.match(/[\p{L}'-]+|[.,;:!?—]/gu) || [];
-    return tokens.map((word, i) => {
+    const resultado = tokens.map((word, i) => {
       const norm = word.toLowerCase();
       const tags = [];
       if (ARTIGOS_DEF.has(norm)) {
@@ -254,6 +304,7 @@
       }
       return { text: word, tags, normal: norm };
     });
+    return resolverAmbiguidade(resultado);
   }
 
   function analisarMorfologia(texto) {

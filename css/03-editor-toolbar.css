@@ -454,11 +454,7 @@
 .proof-chip[data-level="medium"] { border-color: rgba(200, 149, 90, 0.45); }
 .proof-chip[data-level="low"]    { border-color: rgba(160, 82, 45, 0.45); color: var(--sienna); }
 
-.proof-chip-label {
-  font-weight: 600;
-  opacity: 0.7;
-  letter-spacing: 0.03em;
-}
+.proof-chip-label { display: none; }
 
 
 /* ── POPOVER DE PALAVRA ── */
@@ -499,27 +495,50 @@
 }
 .word-popover-body {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  flex-direction: column;
+  gap: 6px;
   padding-top: 8px;
   border-top: 1px solid var(--line);
   font-size: 11px;
   color: var(--muted);
 }
-.word-popover-lexical {
+.word-popover-definition {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 4px;
+}
+.word-popover-definition[hidden] { display: none; }
+.word-popover-field {
+  font-size: 11px;
+  color: var(--soft-ink);
+  margin: 0;
+  line-height: 1.4;
+}
+.word-popover-note {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.4;
+}
+.word-popover-lexical-link {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--primary);
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
-.word-popover-lexical .material-symbols-outlined { font-size: 14px; }
+.word-popover-lexical-link:hover { color: var(--primary); }
+.word-popover-lexical-link .material-symbols-outlined { font-size: 12px; }
 .word-popover-close {
   position: absolute;
   top: 6px;

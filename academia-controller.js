@@ -346,7 +346,21 @@ async function renderRimaLab() {
       rimalabIsometryCopy && (rimalabIsometryCopy.textContent = analysis.proseNote || "Cole versos em linhas separadas para a análise.");
     }
     if (rimalabMetrics) rimalabMetrics.innerHTML = `<p class="rimalab-empty">${escapeHtml(analysis.proseNote || "Escreva versos em linhas separadas.")}</p>`;
-    if (rimalabRhymes) rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas aparecem aqui quando há versos.</p>`;
+
+    const ri = analysis.rimasInternas || [];
+    if (rimalabRhymes) {
+      if (ri.length > 0) {
+        rimalabRhymes.innerHTML = `
+          <p class="rimalab-prose-rhyme-title">Padrão sonoro interno</p>
+          ${ri.map(g =>
+            `<div class="rimalab-prose-rhyme-group">${g.palavras.map(w =>
+              `<span class="rimalab-prose-rhyme-word">${escapeHtml(w)}</span>`
+            ).join("")}</div>`
+          ).join("")}`;
+      } else {
+        rimalabRhymes.innerHTML = `<p class="rimalab-empty">As rimas aparecem aqui quando há versos.</p>`;
+      }
+    }
     if (rimalabScheme) rimalabScheme.innerHTML = "";
     return;
   }

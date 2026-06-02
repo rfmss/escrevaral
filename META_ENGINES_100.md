@@ -97,6 +97,7 @@ Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacrít
 2. ✅ **Sintaxe 98% → 99%**: ordinais como subclasse de numeral (primeiro/terceiro/sétimo/oitavo/décimo…) — v351
 3. ✅ **Sintaxe 99% → 100%**: INTERJEICOES 24 formas inequívocas + label "Interjeição" — v352
 4. **Revisão honesta v355**: cobertura real ~78% (fallback) / ~82% (com JSON). "100%" era meta errada — classes em português são contextuais. Próximo salto: arquitetura de candidatos morfológicos + desambiguação por contexto, não só listas maiores.
+5. ✅ **Sintaxe 82% → ~91%** (v378–v380): `resolverAmbiguidade()` adicionada ao fallback — 3 regras de contexto (sufixos nominais, Det/Prep→Noun, nominalização) + R4 derivada de Mac-Morpho (1.17M tokens, P(Noun|Determiner)=0.76, P(Noun|Numeral)=0.87); `verbos_pres_reg` expandido de 113→203 formas (exige, deve, afirma, favorece, inclui, produz, acho, vejo…). Medição: corpus 248 tokens, fallback puro 68.5%→82.7%; engine completo estimado 82%→91%.
 
 ---
 

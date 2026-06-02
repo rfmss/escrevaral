@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-05-31",
+  "gerado_em": "2026-06-02",
   "total_frases": 81,
   "frases": [
     {
@@ -54,7 +54,9 @@
             },
             {
               "text": "silêncio",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "silêncio"
             },
             {
@@ -78,7 +80,9 @@
             },
             {
               "text": "culpa",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "culpa"
             },
             {
@@ -113,7 +117,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -160,7 +164,9 @@
             },
             {
               "text": "jeito",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "jeito"
             },
             {
@@ -193,14 +199,15 @@
             },
             {
               "text": "coisas",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "coisas"
             },
             {
               "text": "certas",
               "tags": [
-                "Pronoun",
-                "Noun"
+                "Adjective"
               ],
               "normal": "certas"
             },
@@ -216,7 +223,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -248,7 +255,9 @@
             },
             {
               "text": "homem",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "homem"
             },
             {
@@ -299,7 +308,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -356,7 +365,9 @@
             },
             {
               "text": "modo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "modo"
             },
             {
@@ -393,7 +404,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -426,7 +437,7 @@
             {
               "text": "mulher",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "mulher"
             },
@@ -453,7 +464,9 @@
             },
             {
               "text": "peso",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "peso"
             },
             {
@@ -482,7 +495,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -521,7 +534,9 @@
             },
             {
               "text": "noite",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "noite"
             },
             {
@@ -574,7 +589,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -606,7 +621,9 @@
             },
             {
               "text": "texto",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "texto"
             },
             {
@@ -670,7 +687,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -710,7 +727,9 @@
             },
             {
               "text": "nobre",
-              "tags": [],
+              "tags": [
+                "Adjective"
+              ],
               "normal": "nobre"
             },
             {
@@ -722,7 +741,9 @@
             },
             {
               "text": "forma",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "forma"
             },
             {
@@ -759,7 +780,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -813,7 +834,9 @@
             },
             {
               "text": "trás",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "trás"
             },
             {
@@ -834,7 +857,9 @@
             },
             {
               "text": "trem",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "trem"
             },
             {
@@ -856,7 +881,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -896,7 +921,9 @@
             },
             {
               "text": "cuida",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "cuida"
             },
             {
@@ -935,7 +962,9 @@
             },
             {
               "text": "avô",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "avô"
             },
             {
@@ -950,7 +979,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1039,7 +1068,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1091,7 +1120,9 @@
             },
             {
               "text": "metade",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "metade"
             },
             {
@@ -1106,7 +1137,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1175,7 +1206,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1253,7 +1284,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1316,7 +1347,9 @@
             },
             {
               "text": "fôlego",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "fôlego"
             },
             {
@@ -1331,7 +1364,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1402,7 +1435,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1444,7 +1477,9 @@
             },
             {
               "text": "cartas",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "cartas"
             },
             {
@@ -1473,7 +1508,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1563,7 +1598,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1648,7 +1683,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1736,7 +1771,9 @@
             },
             {
               "text": "romance",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "romance"
             },
             {
@@ -1751,7 +1788,13 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": [
+            {
+              "codigo": "PONT-44",
+              "severidade": "média",
+              "trecho": "Foi a terceira"
+            }
+          ]
         },
         "voz": {
           "vozPassiva": null,
@@ -1783,7 +1826,9 @@
             },
             {
               "text": "quinto",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "quinto"
             },
             {
@@ -1826,7 +1871,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1896,7 +1941,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -1961,7 +2006,9 @@
             },
             {
               "text": "novidade",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "novidade"
             },
             {
@@ -1996,7 +2043,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2072,7 +2119,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2116,7 +2163,9 @@
             },
             {
               "text": "tempo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "tempo"
             },
             {
@@ -2164,7 +2213,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2254,7 +2303,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2319,7 +2368,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2363,7 +2412,9 @@
             },
             {
               "text": "fim",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "fim"
             },
             {
@@ -2375,7 +2426,9 @@
             },
             {
               "text": "dia",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "dia"
             },
             {
@@ -2397,7 +2450,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2494,7 +2547,9 @@
             },
             {
               "text": "porta",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "porta"
             },
             {
@@ -2509,7 +2564,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2617,7 +2672,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2649,7 +2704,9 @@
             },
             {
               "text": "vida",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "vida"
             },
             {
@@ -2703,7 +2760,9 @@
             },
             {
               "text": "vezes",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "vezes"
             },
             {
@@ -2730,7 +2789,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2804,7 +2863,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -2915,7 +2974,9 @@
             },
             {
               "text": "resposta",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "resposta"
             },
             {
@@ -2930,7 +2991,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3030,7 +3091,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3062,7 +3123,9 @@
             },
             {
               "text": "romance",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "romance"
             },
             {
@@ -3106,7 +3169,9 @@
             },
             {
               "text": "reclusão",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "reclusão"
             },
             {
@@ -3121,7 +3186,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3188,7 +3253,9 @@
             },
             {
               "text": "inverno",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "inverno"
             },
             {
@@ -3210,7 +3277,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3240,7 +3307,9 @@
             },
             {
               "text": "ilusões",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "ilusões"
             },
             {
@@ -3265,7 +3334,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3297,7 +3366,9 @@
             },
             {
               "text": "carta",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "carta"
             },
             {
@@ -3321,7 +3392,9 @@
             },
             {
               "text": "manhã",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "manhã"
             },
             {
@@ -3341,7 +3414,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3373,7 +3446,9 @@
             },
             {
               "text": "livros",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "livros"
             },
             {
@@ -3397,7 +3472,9 @@
             },
             {
               "text": "voz",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "voz"
             },
             {
@@ -3432,7 +3509,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3464,7 +3541,9 @@
             },
             {
               "text": "menino",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "menino"
             },
             {
@@ -3503,7 +3582,9 @@
             },
             {
               "text": "procissão",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "procissão"
             },
             {
@@ -3525,7 +3606,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3605,7 +3686,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3637,7 +3718,9 @@
             },
             {
               "text": "fuleiro",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "fuleiro"
             },
             {
@@ -3649,7 +3732,9 @@
             },
             {
               "text": "vizinho",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "vizinho"
             },
             {
@@ -3685,7 +3770,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3717,7 +3802,9 @@
             },
             {
               "text": "menina",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "menina"
             },
             {
@@ -3746,7 +3833,9 @@
             },
             {
               "text": "tanta",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "tanta"
             },
             {
@@ -3766,7 +3855,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3813,7 +3902,9 @@
             },
             {
               "text": "jeito",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "jeito"
             },
             {
@@ -3861,7 +3952,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3894,7 +3985,7 @@
             {
               "text": "veia",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "veia"
             },
@@ -3948,7 +4039,9 @@
             },
             {
               "text": "benzinho",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "benzinho"
             },
             {
@@ -3963,7 +4056,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -3995,7 +4088,9 @@
             },
             {
               "text": "chuva",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "chuva"
             },
             {
@@ -4053,7 +4148,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4090,7 +4185,9 @@
             },
             {
               "text": "medo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "medo"
             },
             {
@@ -4122,7 +4219,7 @@
             {
               "text": "rio",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "rio"
             },
@@ -4140,7 +4237,9 @@
             },
             {
               "text": "vazio",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "vazio"
             },
             {
@@ -4155,7 +4254,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4180,7 +4279,9 @@
           "morfologia": [
             {
               "text": "Saudade",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "saudade"
             },
             {
@@ -4232,7 +4333,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4274,7 +4375,9 @@
             },
             {
               "text": "janela",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "janela"
             },
             {
@@ -4294,7 +4397,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4327,7 +4430,7 @@
             {
               "text": "amor",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "amor"
             },
@@ -4350,7 +4453,9 @@
             },
             {
               "text": "dor",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "dor"
             },
             {
@@ -4385,7 +4490,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4475,7 +4580,9 @@
             },
             {
               "text": "mãos",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "mãos"
             },
             {
@@ -4490,7 +4597,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4585,7 +4692,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4681,7 +4788,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4767,7 +4874,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4799,7 +4906,9 @@
             },
             {
               "text": "escritora",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "escritora"
             },
             {
@@ -4819,7 +4928,7 @@
             {
               "text": "editor",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "editor"
             },
@@ -4839,7 +4948,9 @@
             },
             {
               "text": "horas",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "horas"
             },
             {
@@ -4854,7 +4965,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4893,7 +5004,9 @@
             },
             {
               "text": "cartas",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "cartas"
             },
             {
@@ -4932,7 +5045,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -4978,7 +5091,9 @@
             },
             {
               "text": "leitores",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "leitores"
             },
             {
@@ -4997,7 +5112,9 @@
             },
             {
               "text": "final",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "final"
             },
             {
@@ -5012,7 +5129,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5109,7 +5226,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5141,7 +5258,9 @@
             },
             {
               "text": "palavras",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "palavras"
             },
             {
@@ -5188,7 +5307,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5220,7 +5339,9 @@
             },
             {
               "text": "homem",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "homem"
             },
             {
@@ -5270,7 +5391,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5332,7 +5453,9 @@
             },
             {
               "text": "parágrafo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "parágrafo"
             },
             {
@@ -5347,7 +5470,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5394,7 +5517,9 @@
             },
             {
               "text": "espetáculo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "espetáculo"
             },
             {
@@ -5406,7 +5531,9 @@
             },
             {
               "text": "silêncio",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "silêncio"
             },
             {
@@ -5421,7 +5548,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5508,7 +5635,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5545,7 +5672,9 @@
             },
             {
               "text": "tempo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "tempo"
             },
             {
@@ -5570,7 +5699,9 @@
             },
             {
               "text": "pressa",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "pressa"
             },
             {
@@ -5585,7 +5716,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5632,7 +5763,9 @@
             },
             {
               "text": "cidade",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "cidade"
             },
             {
@@ -5659,7 +5792,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5711,7 +5844,9 @@
             },
             {
               "text": "respeito",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "respeito"
             },
             {
@@ -5726,7 +5861,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5763,7 +5898,9 @@
             },
             {
               "text": "pé",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "pé"
             },
             {
@@ -5775,7 +5912,9 @@
             },
             {
               "text": "bairro",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "bairro"
             },
             {
@@ -5795,7 +5934,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5883,7 +6022,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -5962,7 +6101,9 @@
             },
             {
               "text": "olhos",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "olhos"
             },
             {
@@ -5977,7 +6118,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6009,7 +6150,9 @@
             },
             {
               "text": "tempo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "tempo"
             },
             {
@@ -6068,7 +6211,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6162,7 +6305,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6259,7 +6402,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6291,7 +6434,9 @@
             },
             {
               "text": "senso",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "senso"
             },
             {
@@ -6323,7 +6468,9 @@
             },
             {
               "text": "senso",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "senso"
             },
             {
@@ -6335,7 +6482,9 @@
             },
             {
               "text": "coisas",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "coisas"
             },
             {
@@ -6350,7 +6499,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6382,7 +6531,9 @@
             },
             {
               "text": "dendê",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "dendê"
             },
             {
@@ -6401,7 +6552,9 @@
             },
             {
               "text": "prato",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "prato"
             },
             {
@@ -6414,7 +6567,7 @@
             {
               "text": "sabor",
               "tags": [
-                "Verb"
+                "Noun"
               ],
               "normal": "sabor"
             },
@@ -6437,7 +6590,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6469,7 +6622,9 @@
             },
             {
               "text": "caçula",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "caçula"
             },
             {
@@ -6488,7 +6643,9 @@
             },
             {
               "text": "castigo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "castigo"
             },
             {
@@ -6523,7 +6680,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6555,7 +6712,9 @@
             },
             {
               "text": "xerimbabo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "xerimbabo"
             },
             {
@@ -6567,7 +6726,9 @@
             },
             {
               "text": "vizinha",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "vizinha"
             },
             {
@@ -6602,7 +6763,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6649,7 +6810,9 @@
             },
             {
               "text": "jeito",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "jeito"
             },
             {
@@ -6686,7 +6849,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6730,7 +6893,9 @@
             },
             {
               "text": "guerra",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "guerra"
             },
             {
@@ -6754,7 +6919,9 @@
             },
             {
               "text": "mundo",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "mundo"
             },
             {
@@ -6776,7 +6943,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6883,7 +7050,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -6935,7 +7102,9 @@
             },
             {
               "text": "manuscrito",
-              "tags": [],
+              "tags": [
+                "Noun"
+              ],
               "normal": "manuscrito"
             },
             {
@@ -6976,7 +7145,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,
@@ -7060,7 +7229,7 @@
           }
         },
         "pontuacao": {
-          "erro": "(r || []).map is not a function"
+          "alertas": []
         },
         "voz": {
           "vozPassiva": null,

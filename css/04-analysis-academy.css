@@ -254,6 +254,29 @@
   font-size: 12px;
   line-height: 1.5;
 }
+.rimalab-prose-rhyme-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
+}
+.rimalab-prose-rhyme-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.rimalab-prose-rhyme-word {
+  display: inline-block;
+  padding: 3px 9px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
 .rimalab-finder {
   margin: 12px 0 8px;
   padding: 10px 12px;

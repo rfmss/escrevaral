@@ -72,6 +72,15 @@
   align-items: center;
   margin: 0 0 24px;
 }
+.editor-view-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 2px;
+}
 
 .editor-delete-btn {
   opacity: 0.22;

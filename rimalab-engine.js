@@ -397,29 +397,86 @@
     return false;
   }
 
+  // Palavras estruturais a ignorar na rima interna (artigos, preposições, conjunções curtas)
+  const _STOP_RIMA = new Set([
+    "o","a","os","as","um","uma","uns","umas",
+    "e","ou","mas","nem","que","se","pois","logo","porém",
+    "de","do","da","dos","das","em","no","na","nos","nas",
+    "para","por","pelo","pela","pelos","pelas",
+    "com","sem","sob","sobre","ao","à","aos","às",
+    "eu","tu","ele","ela","nós","vós","eles","elas","você","vocês",
+    "me","te","lhe","lhes","se","nos","vos",
+    "não","sim","já","mais","bem","mal","só",
+    "que","quem","qual","quais","como","quando","onde",
+    "este","esta","esse","essa","aquele","aquela","isto","isso","aquilo",
+  ]);
+
+  // ── Rima interna — detecta padrões sonoros dentro da prosa ou verso único ───────
+  function analisarRimaInterna(text) {
+    const palavras = (text.match(/[\p{L}À-ɏ'-]+/gu) || [])
+      .filter(w => w.length > 2 && !_STOP_RIMA.has(normalizeWord(w)));
+
+    const grupos = {};
+    for (const w of palavras) {
+      const som = getRhymeSound(w);
+      if (!som || som.length < 1) continue;
+      let encontrado = false;
+      for (const chave of Object.keys(grupos)) {
+        if (soundsMatch(som, chave)) {
+          grupos[chave].push(w); encontrado = true; break;
+        }
+        if (soundsMatchToante(som, chave)) {
+          grupos[chave].push(w); encontrado = true; break;
+        }
+        // Ditongo vs. vogal nuclear: "ai"≡"i", "ou"≡"u" — vogal final do ditongo
+        const curta = som.length === 1 && /[aeiou]/.test(som);
+        const chaveCurta = chave.length === 1 && /[aeiou]/.test(chave);
+        if (curta && chave.endsWith(som)) { grupos[chave].push(w); encontrado = true; break; }
+        if (chaveCurta && som.endsWith(chave)) { grupos[chave].push(w); encontrado = true; break; }
+      }
+      if (!encontrado) grupos[som] = [w];
+    }
+
+    return Object.entries(grupos)
+      .filter(([, ws]) => {
+        const unicos = [...new Set(ws.map(normalizeWord))];
+        return unicos.length >= 2;
+      })
+      .map(([som, ws]) => ({ som, palavras: [...new Set(ws)] }))
+      .sort((a, b) => b.palavras.length - a.palavras.length);
+  }
+
   // ── Análise completa ──────────────────────────────────────────────────────────
   function analyze(text) {
     const isProse = detectarProsa(text);
     const verses = text.split("\n").map(l => l.trim()).filter(Boolean);
 
     if (isProse || verses.length < 2) {
+      const rimasInternas = analisarRimaInterna(text);
+      const temRima = rimasInternas.length > 0;
       return {
         note: ACADEMIC_NOTE,
         isProse: true,
+        rimasInternas,
         verses: [],
         scans: [],
         metrics: [],
         uniqueMetrics: [],
         isIsometric: false,
         rhymes: [],
+        rhymePairs: [],
         rhymeScheme: "",
         stanzas: [],
         totalVerses: 0,
         dominantMetric: null,
         dominantName: "",
         proseNote: verses.length < 2
-          ? "Escreva ao menos dois versos em linhas separadas para ver a análise."
-          : "O texto parece ser prosa. Cole versos separados por linha para ver métricas e rimas.",
+          ? (temRima
+              ? `Padrão sonoro detectado: ${rimasInternas.map(g => g.palavras.join(" · ")).join(" | ")}`
+              : "Escreva ao menos dois versos em linhas separadas para ver a análise.")
+          : (temRima
+              ? `Padrão sonoro no texto: ${rimasInternas.map(g => g.palavras.join(" · ")).join(" | ")}`
+              : "O texto parece ser prosa. Cole versos separados por linha para ver métricas e rimas."),
       };
     }
 

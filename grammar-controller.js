@@ -627,12 +627,24 @@ function deactivateGrammarColor() {
 const wordPopover = document.getElementById("word-popover");
 let _popoverWord = "";
 
-async function openWordPopover(word, classLabel, countText, x, y) {
+async function openWordPopover(word, classLabel, countText, x, y, analysis) {
   if (!wordPopover) return;
   _popoverWord = word;
   wordPopover.querySelector("[data-popover-word]").textContent = word;
   wordPopover.querySelector("[data-popover-class]").textContent = classLabel || "";
   wordPopover.querySelector("[data-popover-count]").textContent = countText || "";
+
+  // Definição inline — campo semântico + pista literária
+  const defPanel = wordPopover.querySelector("[data-popover-definition]");
+  if (defPanel && analysis) {
+    const fieldEl = defPanel.querySelector("[data-popover-field]");
+    const noteEl  = defPanel.querySelector("[data-popover-note]");
+    if (fieldEl) fieldEl.textContent = analysis.field || "";
+    if (noteEl)  noteEl.textContent  = analysis.note  || "";
+    defPanel.hidden = !(analysis.field || analysis.note);
+  } else if (defPanel) {
+    defPanel.hidden = true;
+  }
 
   // Sinônimos integrados no popover
   const synSection = wordPopover.querySelector("[data-popover-syns]");
@@ -684,7 +696,7 @@ async function handleEditorWordClick(e, textSource) {
   const countText = count === 1 ? "1 vez no texto" : count > 1 ? `${count} vezes no texto` : "";
 
   state.lexical.selectedWord = clean;
-  openWordPopover(clean, classLabel, countText, e.clientX, e.clientY);
+  openWordPopover(clean, classLabel, countText, e.clientX, e.clientY, analysis);
 }
 
 writingArea.addEventListener("click", (e) => handleEditorWordClick(e));
