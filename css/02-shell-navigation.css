@@ -2525,3 +2525,107 @@ mark {
   color: var(--muted);
 }
 .audio-seen .topbar-audio-label { display: none; }
+
+/* ── TERMOS DE USO ─────────────────────────────────── */
+.terms-panel {
+  max-width: 560px;
+  gap: 0;
+}
+.terms-header { margin-bottom: 20px; }
+.terms-header h2 {
+  font-size: clamp(20px, 2.5vw, 26px);
+  line-height: 1.2;
+  margin: 6px 0 0;
+  color: var(--ink);
+}
+.terms-body { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.terms-lead {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--soft-ink);
+  border-left: 3px solid var(--primary);
+  padding-left: 12px;
+}
+.terms-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.terms-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.terms-list li .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.terms-list li strong { display: block; color: var(--ink); margin-bottom: 2px; }
+.terms-list li div { color: var(--soft-ink); }
+.terms-invite {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+.terms-choose-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.terms-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.terms-choice-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--motion-quick), background var(--motion-quick);
+  font-family: inherit;
+}
+.terms-choice-btn:hover, .terms-choice-btn:focus-visible {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, var(--card));
+}
+.terms-choice-btn .material-symbols-outlined {
+  font-size: 22px;
+  color: var(--primary);
+}
+.terms-choice-btn strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.terms-choice-btn small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.terms-contact-link {
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  display: block;
+  text-align: center;
+}
+.terms-contact-link:hover { color: var(--primary); }

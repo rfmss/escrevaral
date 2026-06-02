@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v397";
-const ASSET_VERSION = "20260602-kdp-template";
+const CACHE_NAME = "vereda-offline-v398";
+const ASSET_VERSION = "20260602-termos";
 
 const CORE_ASSETS = [
   "./",

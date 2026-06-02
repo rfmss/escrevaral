@@ -648,9 +648,34 @@ function openAddCompanionNote() {
   createNoteOverlay.hidden = false;
 }
 
+// ── TERMOS DE USO ────────────────────────────────────
+const termsOverlay = document.getElementById("terms-overlay");
+const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
+
+function checkTerms() {
+  if (_IS_FIRST_VISIT && !_TERMS_ACCEPTED && termsOverlay) {
+    setTimeout(() => {
+      termsOverlay.hidden = false;
+      termsOverlay.querySelector("button")?.focus();
+    }, 200);
+  }
+}
+
+function acceptTerms(goTo) {
+  localStorage.setItem(TERMS_KEY, new Date().toISOString());
+  if (termsOverlay) termsOverlay.hidden = true;
+  if (goTo === "blank") {
+    closeWelcome();
+    openCreateNote();
+  } else if (goTo === "guide") {
+    closeWelcome();
+    setView("academia", { updateRoute: true });
+  }
+}
+
 // ── ONBOARDING DE PRIMEIRA ENTRADA ───────────────────
 function checkFirstVisit() {
-  if (_IS_FIRST_VISIT && welcomeOverlay) {
+  if (_TERMS_ACCEPTED && _IS_FIRST_VISIT && welcomeOverlay) {
     setTimeout(() => {
       welcomeOverlay.hidden = false;
       welcomeOverlay.querySelector("button")?.focus();
@@ -1569,6 +1594,8 @@ const ACTION_HANDLERS = {
   "create-from-reference-template": () => createFromReferenceTemplate(),
   "create-step-back":        () => createNoteParentId ? closeCreateNote() : renderCreateNoteStep(1),
   "add-companion-note":      () => openAddCompanionNote(),
+  "accept-terms-blank":      () => acceptTerms("blank"),
+  "accept-terms-guide":      () => acceptTerms("guide"),
   "welcome-write":           () => handleWelcomeWrite(),
   "welcome-rimalab":         () => handleWelcomeRimalab(),
   "welcome-voice":           () => handleWelcomeVoice(),
@@ -2557,6 +2584,7 @@ function _bootstrap() {
   setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" });
   registerOfflineApp();
   initializeFilesystemBackup();
+  checkTerms();
   checkFirstVisit();
 
   // Retroativo: se há notas sem folha-em-branco, conceder silenciosamente na primeira nota raiz
