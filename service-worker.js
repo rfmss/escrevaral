@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v399";
-const ASSET_VERSION = "20260602-ana-atrito";
+const CACHE_NAME = "vereda-offline-v400";
+const ASSET_VERSION = "20260602-epub";
 
 const CORE_ASSETS = [
   "./",

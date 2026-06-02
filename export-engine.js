@@ -105,6 +105,189 @@
     ].filter(Boolean).join("\n");
   }
 
+  // ── EXPORTAÇÃO EPUB 3 (KDP-ready, sem biblioteca externa) ────────────────
+  // Estrutura: mimetype (first, stored) · META-INF/container.xml
+  //            OEBPS/content.opf · nav.xhtml · styles/escrevaral.css
+  //            OEBPS/content/chapter-NNN.xhtml
+  // ─────────────────────────────────────────────────────────────────────────
+
+  function epubStripHtml(str) {
+    return (str || "")
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/p>/gi, "\n")
+      .replace(/<\/div>/gi, "\n")
+      .replace(/<\/h[1-6]>/gi, "\n")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&nbsp;/g, " ")
+      .replace(/\r\n/g, "\n")
+      .replace(/\r/g, "\n");
+  }
+
+  function epubSplitChapters(rawText) {
+    const text = epubStripHtml(rawText);
+    const lines = text.split("\n");
+    const chapters = [];
+    let current = { title: "", paras: [] };
+
+    for (const raw of lines) {
+      const line = raw.trim();
+      if (!line) continue;
+
+      // Detecta cabeçalho de capítulo: ## Título ou # Título
+      const headMatch = line.match(/^#{1,2}\s+(.+)/);
+      // Ou linha curta em MAIÚSCULAS que não é uma pontuação isolada
+      const capsHead = line.length <= 60 && /^[A-ZÁÉÍÓÚÀÂÃÊÔÕÜÇÑ\s\d\.\-—:]+$/.test(line) && line.length > 2;
+
+      if (headMatch || capsHead) {
+        if (current.paras.length > 0 || current.title) {
+          chapters.push(current);
+        }
+        current = { title: headMatch ? headMatch[1] : line, paras: [] };
+      } else {
+        current.paras.push(line);
+      }
+    }
+    if (current.paras.length > 0 || chapters.length === 0) chapters.push(current);
+    return chapters.length ? chapters : [{ title: "", paras: lines.filter(Boolean) }];
+  }
+
+  function epubChapterXhtml(chIdx, chTitle, paras, bookTitle) {
+    const heading = chTitle
+      ? `<h2 class="chapter-title">${xmlEscape(chTitle)}</h2>\n`
+      : (chIdx === 0 ? `<h1 class="book-title">${xmlEscape(bookTitle)}</h1>\n` : "");
+
+    const body = paras.map((p, i) => {
+      const cls = (i === 0 || !paras[i - 1]) ? "first" : "";
+      // Linha de quebra de cena
+      if (/^[✦\*\-]{1,5}$/.test(p.trim())) {
+        return '<p class="scene-break">✦</p>';
+      }
+      return `<p${cls ? ' class="' + cls + '"' : ""}>${xmlEscape(p)}</p>`;
+    }).join("\n");
+
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<!DOCTYPE html>',
+      '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR">',
+      '<head>',
+      '  <meta charset="UTF-8"/>',
+      `  <title>${xmlEscape(chTitle || bookTitle)}</title>`,
+      '  <link rel="stylesheet" type="text/css" href="../styles/escrevaral.css"/>',
+      '</head>',
+      '<body>',
+      heading + body,
+      '</body>',
+      '</html>',
+    ].join("\n");
+  }
+
+  function epubCss() {
+    return `/* Escrevaral — ePub KDP-ready */
+body { font-family: Georgia, "Times New Roman", serif; font-size: 1em; line-height: 1.65; margin: 0; padding: 0; color: #1a1a1a; }
+h1.book-title { font-size: 1.8em; text-align: center; margin: 2em 0 0.4em; font-weight: bold; }
+h2.chapter-title { font-size: 1.3em; text-align: center; margin: 2.5em 0 1.2em; page-break-before: always; font-weight: bold; }
+p { margin: 0; padding: 0; text-indent: 1.5em; text-align: justify; }
+p.first, p:first-of-type { text-indent: 0; }
+p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spacing: 0.3em; }
+`;
+  }
+
+  function epubContainerXml() {
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">',
+      '  <rootfiles>',
+      '    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>',
+      '  </rootfiles>',
+      '</container>',
+    ].join("\n");
+  }
+
+  function epubContentOpf(title, author, uid, now, chapters) {
+    const manifestChapters = chapters.map((_, i) => {
+      const f = `chapter-${String(i + 1).padStart(3, "0")}`;
+      return `    <item id="${f}" href="content/${f}.xhtml" media-type="application/xhtml+xml"/>`;
+    }).join("\n");
+    const spineChapters = chapters.map((_, i) => {
+      const f = `chapter-${String(i + 1).padStart(3, "0")}`;
+      return `    <itemref idref="${f}"/>`;
+    }).join("\n");
+
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid">',
+      '  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">',
+      `    <dc:identifier id="uid">${xmlEscape(uid)}</dc:identifier>`,
+      `    <dc:title>${xmlEscape(title)}</dc:title>`,
+      `    <dc:language>pt-BR</dc:language>`,
+      author ? `    <dc:creator>${xmlEscape(author)}</dc:creator>` : "",
+      `    <meta property="dcterms:modified">${now}</meta>`,
+      '  </metadata>',
+      '  <manifest>',
+      '    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>',
+      '    <item id="css" href="styles/escrevaral.css" media-type="text/css"/>',
+      manifestChapters,
+      '  </manifest>',
+      '  <spine>',
+      '    <itemref idref="nav" linear="no"/>',
+      spineChapters,
+      '  </spine>',
+      '</package>',
+    ].filter(Boolean).join("\n");
+  }
+
+  function epubNavXhtml(title, chapters) {
+    const items = chapters.map((ch, i) => {
+      const f = `content/chapter-${String(i + 1).padStart(3, "0")}.xhtml`;
+      const label = ch.title || (i === 0 ? title : `Capítulo ${i + 1}`);
+      return `      <li><a href="${f}">${xmlEscape(label)}</a></li>`;
+    }).join("\n");
+
+    return [
+      '<?xml version="1.0" encoding="UTF-8"?>',
+      '<!DOCTYPE html>',
+      '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="pt-BR">',
+      '<head><meta charset="UTF-8"/><title>Índice</title></head>',
+      '<body>',
+      '  <nav epub:type="toc" id="toc">',
+      '    <h1>Índice</h1>',
+      '    <ol>',
+      items,
+      '    </ol>',
+      '  </nav>',
+      '</body>',
+      '</html>',
+    ].join("\n");
+  }
+
+  function createEpubExport(manuscript) {
+    const title  = manuscript.title || "Sem título";
+    const uid    = `escrevaral-${Date.now()}`;
+    const now    = new Date().toISOString().replace(/\.\d+Z$/, "Z");
+    const chapters = epubSplitChapters(manuscript.text);
+
+    const files = [
+      { name: "mimetype",               data: "application/epub+zip" },
+      { name: "META-INF/container.xml", data: epubContainerXml() },
+      { name: "OEBPS/content.opf",      data: epubContentOpf(title, "", uid, now, chapters) },
+      { name: "OEBPS/nav.xhtml",        data: epubNavXhtml(title, chapters) },
+      { name: "OEBPS/styles/escrevaral.css", data: epubCss() },
+    ];
+
+    chapters.forEach((ch, i) => {
+      files.push({
+        name: `OEBPS/content/chapter-${String(i + 1).padStart(3, "0")}.xhtml`,
+        data: epubChapterXhtml(i, ch.title, ch.paras, title),
+      });
+    });
+
+    return buildZip(files);
+  }
+
   // ── EXPORTAÇÃO DOCX (OOXML sem biblioteca externa) ────
   function createDocxExport(manuscript) {
     const title = xmlEscape(manuscript.title || "Sem título");
@@ -328,6 +511,16 @@
         content: zipBytes,
         filename: slug + ".docx",
         mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        binary: true,
+      };
+    }
+
+    if (format === "epub") {
+      var epubBytes = createEpubExport(manuscript);
+      return {
+        content: epubBytes,
+        filename: slug + ".epub",
+        mimeType: "application/epub+zip",
         binary: true,
       };
     }
