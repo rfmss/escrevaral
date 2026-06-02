@@ -1498,6 +1498,16 @@ function downloadFile(content, filename, mimeType) {
 // ── DISPATCH MAP: data-action → handler ──────────────────────────────────
 // Adicionar nova action = uma linha neste objeto.
 const ACTION_HANDLERS = {
+  "toggle-fullscreen":       () => {
+    const icon = document.querySelector("[data-fullscreen-icon]");
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+      if (icon) icon.textContent = "fullscreen_exit";
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+      if (icon) icon.textContent = "fullscreen";
+    }
+  },
   "toggle-focus":            () => shell.classList.contains("is-focus") ? exitFocusMode() : enterFocusMode(),
   "exit-focus":              () => exitFocusMode(),
   "toggle-ruler":            () => toggleRuler(),
@@ -1880,6 +1890,10 @@ window.addEventListener("online", updateConnectionStatus);
 window.addEventListener("offline", updateConnectionStatus);
 window.addEventListener("hashchange", () => setView(getViewFromRoute()));
 window.addEventListener("resize", updateDockIndicator);
+document.addEventListener("fullscreenchange", () => {
+  const icon = document.querySelector("[data-fullscreen-icon]");
+  if (icon) icon.textContent = document.fullscreenElement ? "fullscreen_exit" : "fullscreen";
+});
 contentStage.addEventListener("scroll", () => requestAnimationFrame(updateAcademyParallax));
 
 window.addEventListener("beforeinstallprompt", (event) => {
