@@ -316,6 +316,10 @@
     grid-template-columns: 1fr;
   }
 
+  .rights-cards {
+    grid-template-columns: 1fr;
+  }
+
   /* Garantir que textareas e editores não vazam */
   .rimalab-editor,
   .voice-mirror-copy,
