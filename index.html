@@ -62,35 +62,35 @@
         // localStorage pode estar indisponivel em modos restritos do navegador.
       }
     </script>
-    <link rel="manifest" href="manifest.webmanifest?v=20260602-biblia">
-    <link rel="icon" href="favicon.svg?v=20260602-biblia" type="image/svg+xml">
-    <link rel="icon" href="favicon_io/favicon.ico?v=20260602-biblia" type="image/x-icon">
-    <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260602-biblia" type="image/png" sizes="48x48">
-    <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260602-biblia" type="image/png" sizes="32x32">
-    <link rel="icon" href="favicon_io/tab-favicon-16x16.png?v=20260602-biblia" type="image/png" sizes="16x16">
-    <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png?v=20260602-biblia">
+    <link rel="manifest" href="manifest.webmanifest?v=20260602-onboarding">
+    <link rel="icon" href="favicon.svg?v=20260602-onboarding" type="image/svg+xml">
+    <link rel="icon" href="favicon_io/favicon.ico?v=20260602-onboarding" type="image/x-icon">
+    <link rel="icon" href="favicon_io/tab-favicon-48x48.png?v=20260602-onboarding" type="image/png" sizes="48x48">
+    <link rel="icon" href="favicon_io/tab-favicon-32x32.png?v=20260602-onboarding" type="image/png" sizes="32x32">
+    <link rel="icon" href="favicon_io/tab-favicon-16x16.png?v=20260602-onboarding" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png?v=20260602-onboarding">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/00-tokens.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/01-base.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/02-shell-navigation.css?v=20260602-biblia">
-    <link rel="stylesheet" href="styles.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-editor-layout.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/04-cronograma.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-editor-modes.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-writing-area.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-guide-reference.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-inspector-precision.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/03-editor-toolbar.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/05-archive.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/07-enem.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/09-print.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/04-analysis-academy.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/06-academy-tools.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/08-responsive.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/10-mobile-nav.css?v=20260602-biblia">
-    <link rel="stylesheet" href="css/11-badges.css?v=20260602-biblia">
+    <link rel="stylesheet" href="css/00-tokens.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/01-base.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/02-shell-navigation.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="styles.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-editor-layout.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/04-cronograma.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-editor-modes.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-writing-area.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-guide-reference.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-inspector-precision.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/03-editor-toolbar.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/05-archive.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/07-enem.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/09-print.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/04-analysis-academy.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/06-academy-tools.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/08-responsive.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/10-mobile-nav.css?v=20260602-onboarding">
+    <link rel="stylesheet" href="css/11-badges.css?v=20260602-onboarding">
     <link rel="stylesheet" href="css/wood-icons.css">
   </head>
   <body>
@@ -1299,121 +1299,54 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
       <div class="focus-counter" data-focus-count>0 palavras</div>
       <div class="focus-ruler" aria-hidden="true"></div>
 
-      <!-- TERMOS — aparece antes do welcome em primeira visita -->
-      <div class="create-note-overlay terms-overlay" id="terms-overlay" data-terms-overlay hidden>
-        <section class="create-note-panel terms-panel" role="dialog" aria-modal="true" aria-labelledby="terms-title">
-          <div class="terms-header">
-            <p class="eyebrow">Antes de começar</p>
-            <h2 id="terms-title">O Escrevaral é seu. Mas leia isso primeiro.</h2>
+      <!-- ONBOARDING UNIFICADO — termos + entrada numa única tela -->
+      <div class="create-note-overlay ob-overlay" id="terms-overlay" data-terms-overlay hidden>
+        <section class="ob-panel" role="dialog" aria-modal="true" aria-labelledby="ob-title">
+          <p class="ob-logo">Escrevaral</p>
+          <h1 class="ob-headline" id="ob-title">Seu editor.<br>Offline. Só seu.</h1>
+
+          <div class="ob-cta-group">
+            <button class="ob-btn ob-btn--primary" data-action="accept-terms-blank">Começar a escrever</button>
+            <button class="ob-btn ob-btn--continue" data-action="accept-terms-continue" data-ob-continue hidden>Continuar de onde parei</button>
+            <button class="ob-btn" data-action="accept-terms-guide">Escolher um modelo</button>
           </div>
-          <div class="terms-body">
-            <p class="terms-lead">Projeto gratuito, independente e em construção. Feito por uma pessoa — Rafael Mass, oi@escrevaral.com — para quem escreve e não encontra ferramentas feitas para isso. Sem empresa por trás, sem investidor.</p>
-            <ul class="terms-list">
-              <li>
-                <span class="material-symbols-outlined">devices</span>
+
+          <div class="ob-disclosure">
+            <button class="ob-disclosure-toggle" data-action="toggle-ob-disclosure" aria-expanded="false">
+              <span class="material-symbols-outlined ob-chevron">expand_more</span>
+              Como este editor funciona
+            </button>
+            <div class="ob-disclosure-body" id="ob-disc-body" hidden>
+              <div class="ob-ditem">
+                <span class="material-symbols-outlined">save</span>
                 <div>
-                  <strong>Seus textos ficam só aqui.</strong>
-                  Tudo é salvo no seu navegador. Nenhum manuscrito vai para servidor, nenhuma IA lê o que você escreve.
+                  <strong>Tudo fica no seu navegador</strong>
+                  <span>Nenhum texto vai para servidor. Nenhuma IA lê o que você escreve.</span>
                 </div>
-              </li>
-              <li>
+              </div>
+              <div class="ob-ditem ob-ditem--warn">
                 <span class="material-symbols-outlined">warning</span>
                 <div>
-                  <strong>Limpar o cache apaga tudo.</strong>
-                  Use a cópia de segurança com frequência. Sem backup externo, o trabalho pode ser perdido. Isso é responsabilidade de quem usa — e avisamos de verdade.
+                  <strong>Limpar o cache apaga tudo</strong>
+                  <span>Use a cópia de segurança com frequência. O trabalho fica no seu dispositivo.</span>
                 </div>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">bar_chart</span>
-                <div>
-                  <strong>Usamos analytics de privacidade.</strong>
-                  O GoatCounter registra visitas à página — sem cookies, sem dados pessoais identificáveis, sem rastreamento entre sites. Só sabemos quantas pessoas acessam, não quem são. <a href="/privacidade" target="_blank" class="terms-inline-link">Política de Privacidade</a>.
-                </div>
-              </li>
-              <li>
+              </div>
+              <div class="ob-ditem">
                 <span class="material-symbols-outlined">fingerprint</span>
                 <div>
-                  <strong>A Prova de Autoria não é garantia jurídica.</strong>
-                  Registra o padrão de digitação — não substitui registro em cartório, advogado ou contrato. É uma ferramenta de processo, não de litígio.
+                  <strong>Prova de autoria é ferramenta de processo</strong>
+                  <span>Registra padrão de digitação. Não substitui cartório nem advogado.</span>
                 </div>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">auto_awesome</span>
+              </div>
+              <div class="ob-ditem">
+                <span class="material-symbols-outlined">bar_chart</span>
                 <div>
-                  <strong>O guia de publicação KDP é informativo.</strong>
-                  Não é assessoria editorial ou jurídica. As regras da Amazon mudam — confira sempre nas fontes oficiais antes de publicar.
+                  <strong>Analytics sem rastreamento</strong>
+                  <span>Só contamos visitas, sem cookies nem dados pessoais. <a href="/privacidade" target="_blank" class="ob-link">Política de privacidade.</a></span>
                 </div>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">construction</span>
-                <div>
-                  <strong>É um projeto pioneiro.</strong>
-                  Pode ter bugs. Pode melhorar. Quem está aqui está embarcando em algo que está sendo construído — e essa presença já é uma contribuição.
-                </div>
-              </li>
-            </ul>
-            <p class="terms-invite">Juntos vamos fazer o melhor editor literário do Brasil. Obrigado por estar aqui.</p>
-          </div>
-          <div class="terms-actions">
-            <p class="terms-choose-label">Entendi tudo acima. Agora escolha como começa:</p>
-            <div class="terms-choices">
-              <button class="terms-choice-btn" data-action="accept-terms-blank">
-                <span class="material-symbols-outlined">edit_note</span>
-                <strong>Folha em branco.</strong>
-                <small>Só eu e a página.</small>
-              </button>
-              <button class="terms-choice-btn" data-action="accept-terms-guide">
-                <span class="material-symbols-outlined">auto_stories</span>
-                <strong>Com um guia.</strong>
-                <small>Romance, fantasia, ENEM...</small>
-              </button>
-            </div>
-            <p class="terms-consent-note">Ao escolher, você concorda com os Termos de Uso e a <a href="/privacidade" target="_blank" class="terms-inline-link">Política de Privacidade</a>.</p>
-            <a href="mailto:oi@escrevaral.com?subject=Dúvida%20sobre%20os%20termos" class="terms-contact-link">Tenho uma dúvida</a>
-          </div>
-        </section>
-      </div>
-
-      <!-- ONBOARDING — primeira entrada -->
-      <div class="create-note-overlay" id="welcome-overlay" data-welcome-overlay hidden>
-        <section class="create-note-panel welcome-panel" role="region" aria-labelledby="welcome-title">
-          <div class="welcome-header">
-            <p class="eyebrow">Oficina literária · Escrevaral</p>
-            <h2 id="welcome-title">Sua mesa.</h2>
-            <p>Sem IA, sem nuvem — seu texto fica aqui, com você.</p>
-          </div>
-
-          <div class="welcome-options">
-            <button class="welcome-card welcome-card-primary" data-action="welcome-blank">
-              <span class="material-symbols-outlined">edit</span>
-              <strong>Abrir folha em branco</strong>
-              <small>Apenas você e a página. Sem guia, sem configuração.</small>
-            </button>
-            <button class="welcome-card welcome-card-secondary" data-action="welcome-write">
-              <span class="material-symbols-outlined">auto_stories</span>
-              <strong>Escolher um guia</strong>
-              <small>Romance, fantasia, suspense, conto, ENEM — escolha o seu gênero.</small>
-            </button>
-            <div class="welcome-tools">
-              <p class="eyebrow">Ferramentas quando precisar</p>
-              <div class="welcome-tools-row">
-                <button class="welcome-card welcome-card-tool" data-action="welcome-rimalab">
-                  <span class="material-symbols-outlined">graphic_eq</span>
-                  <strong>RimaLab</strong>
-                  <small>Métrica e rima</small>
-                </button>
-                <button class="welcome-card welcome-card-tool" data-action="welcome-voice">
-                  <span class="material-symbols-outlined">psychology</span>
-                  <strong>Espelho de Voz</strong>
-                  <small>Leitura crítica</small>
-                </button>
-                <button class="welcome-card welcome-card-tool" data-action="welcome-autoria">
-                  <span class="material-symbols-outlined">verified</span>
-                  <strong>Prova de autoria</strong>
-                  <small>Sinais da sua autoria</small>
-                </button>
               </div>
             </div>
+            <p class="ob-terms-note">Ao usar o Escrevaral você aceita os <a href="/privacidade" target="_blank" class="ob-link">Termos de uso</a>. Projeto independente de Rafael Mass, em construção.</p>
           </div>
         </section>
       </div>
@@ -1474,50 +1407,50 @@ Não havia vento para balançar as poucas folhas da aroeira teimosa no quintal. 
     </div>
 
     <!-- Engines — carregam antes de tudo -->
-    <script src="document-engine.js?v=20260602-biblia" defer></script>
-    <script src="pagination-engine.js?v=20260602-biblia" defer></script>
-    <script src="lexical-engine.js?v=20260602-biblia" defer></script>
-    <script src="proof-engine.js?v=20260602-biblia" defer></script>
-    <script src="vrda-engine.js?v=20260602-biblia" defer></script>
-    <script src="backup-engine.js?v=20260602-biblia" defer></script>
-    <script src="filesystem-backup-engine.js?v=20260602-biblia" defer></script>
-    <script src="archive-engine.js?v=20260602-biblia" defer></script>
-    <script src="badges-engine.js?v=20260602-biblia" defer></script>
-    <script src="version-engine.js?v=20260602-biblia" defer></script>
-    <script src="export-engine.js?v=20260602-biblia" defer></script>
-    <script src="template-engine.js?v=20260602-biblia" defer></script>
-    <script src="precision-engine.js?v=20260602-biblia" defer></script>
-    <script src="criterios-data.js?v=20260602-biblia" defer></script>
-    <script src="syntax-engine.js?v=20260602-biblia" defer></script>
-    <script src="punctuation-engine.js?v=20260602-biblia" defer></script>
-    <script src="analise-engine.js?v=20260602-biblia" defer></script>
-    <script src="voice-engine.js?v=20260602-biblia" defer></script>
-    <script src="rimalab-engine.js?v=20260602-biblia" defer></script>
-    <script src="decolonial-engine.js?v=20260602-biblia" defer></script>
-    <script src="rights-engine.js?v=20260602-biblia" defer></script>
-    <script src="typewriter-engine.js?v=20260602-biblia" defer></script>
-    <script src="synonym-data.js?v=20260602-biblia" defer></script>
+    <script src="document-engine.js?v=20260602-onboarding" defer></script>
+    <script src="pagination-engine.js?v=20260602-onboarding" defer></script>
+    <script src="lexical-engine.js?v=20260602-onboarding" defer></script>
+    <script src="proof-engine.js?v=20260602-onboarding" defer></script>
+    <script src="vrda-engine.js?v=20260602-onboarding" defer></script>
+    <script src="backup-engine.js?v=20260602-onboarding" defer></script>
+    <script src="filesystem-backup-engine.js?v=20260602-onboarding" defer></script>
+    <script src="archive-engine.js?v=20260602-onboarding" defer></script>
+    <script src="badges-engine.js?v=20260602-onboarding" defer></script>
+    <script src="version-engine.js?v=20260602-onboarding" defer></script>
+    <script src="export-engine.js?v=20260602-onboarding" defer></script>
+    <script src="template-engine.js?v=20260602-onboarding" defer></script>
+    <script src="precision-engine.js?v=20260602-onboarding" defer></script>
+    <script src="criterios-data.js?v=20260602-onboarding" defer></script>
+    <script src="syntax-engine.js?v=20260602-onboarding" defer></script>
+    <script src="punctuation-engine.js?v=20260602-onboarding" defer></script>
+    <script src="analise-engine.js?v=20260602-onboarding" defer></script>
+    <script src="voice-engine.js?v=20260602-onboarding" defer></script>
+    <script src="rimalab-engine.js?v=20260602-onboarding" defer></script>
+    <script src="decolonial-engine.js?v=20260602-onboarding" defer></script>
+    <script src="rights-engine.js?v=20260602-onboarding" defer></script>
+    <script src="typewriter-engine.js?v=20260602-onboarding" defer></script>
+    <script src="synonym-data.js?v=20260602-onboarding" defer></script>
     <!-- State store — define globals e DOM refs antes dos controllers -->
-    <script src="state-store.js?v=20260602-biblia" defer></script>
+    <script src="state-store.js?v=20260602-onboarding" defer></script>
     <!-- Controllers — ordem importa -->
-    <script src="cronograma-controller.js?v=20260602-biblia" defer></script>
-    <script src="editor-modes.js?v=20260602-biblia" defer></script>
-    <script src="editor-controller.js?v=20260602-biblia" defer></script>
-    <script src="proof-controller.js?v=20260602-biblia" defer></script>
-    <script src="ui-dialog.js?v=20260602-biblia" defer></script>
-    <script src="academia-controller.js?v=20260602-biblia" defer></script>
-    <script src="backup-controller.js?v=20260602-biblia" defer></script>
-    <script src="archive-controller.js?v=20260602-biblia" defer></script>
-    <script src="grammar-controller.js?v=20260602-biblia" defer></script>
-    <script src="reader-controller.js?v=20260602-biblia" defer></script>
-    <script src="pomodoro-controller.js?v=20260602-biblia" defer></script>
-    <script src="syntax-controller.js?v=20260602-biblia" defer></script>
+    <script src="cronograma-controller.js?v=20260602-onboarding" defer></script>
+    <script src="editor-modes.js?v=20260602-onboarding" defer></script>
+    <script src="editor-controller.js?v=20260602-onboarding" defer></script>
+    <script src="proof-controller.js?v=20260602-onboarding" defer></script>
+    <script src="ui-dialog.js?v=20260602-onboarding" defer></script>
+    <script src="academia-controller.js?v=20260602-onboarding" defer></script>
+    <script src="backup-controller.js?v=20260602-onboarding" defer></script>
+    <script src="archive-controller.js?v=20260602-onboarding" defer></script>
+    <script src="grammar-controller.js?v=20260602-onboarding" defer></script>
+    <script src="reader-controller.js?v=20260602-onboarding" defer></script>
+    <script src="pomodoro-controller.js?v=20260602-onboarding" defer></script>
+    <script src="syntax-controller.js?v=20260602-onboarding" defer></script>
     <!-- Dicas visuais — substitui title nativo pelo clone Alvorada/Vereda -->
-    <script src="tooltip-controller.js?v=20260602-biblia" defer></script>
+    <script src="tooltip-controller.js?v=20260602-onboarding" defer></script>
     <!-- Impressão isolada via iframe — sem acoplamento com o modo do editor -->
-    <script src="print-engine.js?v=20260602-biblia" defer></script>
+    <script src="print-engine.js?v=20260602-onboarding" defer></script>
     <!-- App — orquestração central, carrega por último -->
-    <script src="app.js?v=20260602-biblia" defer></script>
+    <script src="app.js?v=20260602-onboarding" defer></script>
 
     <!-- Toast de dica contextual da Academia (P11) -->
     <div id="academia-hint-toast" role="status" aria-live="polite" style="

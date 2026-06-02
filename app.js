@@ -662,7 +662,12 @@ const termsOverlay = document.getElementById("terms-overlay");
 const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
 
 function checkTerms() {
-  if (_IS_FIRST_VISIT && !_TERMS_ACCEPTED && termsOverlay) {
+  if (!_TERMS_ACCEPTED && termsOverlay) {
+    // Mostrar botão "Continuar" só se há manuscritos salvos
+    const hasWork = state.manuscripts && state.manuscripts.length > 0;
+    const continueBtn = termsOverlay.querySelector("[data-ob-continue]");
+    if (continueBtn) continueBtn.hidden = !hasWork;
+
     setTimeout(() => {
       termsOverlay.hidden = false;
       termsOverlay.querySelector("button")?.focus();
@@ -672,30 +677,30 @@ function checkTerms() {
 
 function acceptTerms(goTo) {
   localStorage.setItem(TERMS_KEY, new Date().toISOString());
+  localStorage.setItem(FIRST_VISIT_KEY, "1");
   if (termsOverlay) termsOverlay.hidden = true;
   if (goTo === "blank") {
-    closeWelcome();
     openCreateNote();
   } else if (goTo === "guide") {
-    closeWelcome();
     setView("academia", { updateRoute: true });
+  } else if (goTo === "continue") {
+    // Vai direto para o editor com o manuscrito mais recente
+    if (state.manuscripts.length > 0) {
+      const ms = [...state.manuscripts].sort((a, b) =>
+        new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0))[0];
+      setActiveManuscript(ms.id);
+    }
+    setView("editor", { updateRoute: true });
   }
 }
 
-// ── ONBOARDING DE PRIMEIRA ENTRADA ───────────────────
+// ── ONBOARDING DE PRIMEIRA ENTRADA (legado — mantido por compat.) ─────────
 function checkFirstVisit() {
-  if (_TERMS_ACCEPTED && _IS_FIRST_VISIT && welcomeOverlay) {
-    setTimeout(() => {
-      welcomeOverlay.hidden = false;
-      welcomeOverlay.querySelector("button")?.focus();
-    }, 350);
-  }
+  // Unificado em checkTerms — welcomeOverlay não é mais exibido separadamente
 }
 
 function closeWelcome() {
-  if (welcomeOverlay) {
-    welcomeOverlay.hidden = true;
-  }
+  if (welcomeOverlay) welcomeOverlay.hidden = true;
   localStorage.setItem(FIRST_VISIT_KEY, "1");
 }
 
@@ -1832,6 +1837,17 @@ const ACTION_HANDLERS = {
   "add-companion-note":      (_, t) => openAddCompanionNote(t?.dataset?.bibliaType),
   "accept-terms-blank":      () => acceptTerms("blank"),
   "accept-terms-guide":      () => acceptTerms("guide"),
+  "accept-terms-continue":   () => acceptTerms("continue"),
+  "toggle-ob-disclosure":    () => {
+    const body    = document.getElementById("ob-disc-body");
+    const toggle  = document.querySelector("[data-action='toggle-ob-disclosure']");
+    const chevron = document.querySelector(".ob-chevron");
+    if (!body) return;
+    const open = !body.hidden;
+    body.hidden = open;
+    toggle?.setAttribute("aria-expanded", String(!open));
+    if (chevron) chevron.style.transform = open ? "" : "rotate(180deg)";
+  },
   "welcome-write":           () => handleWelcomeWrite(),
   "welcome-rimalab":         () => handleWelcomeRimalab(),
   "welcome-voice":           () => handleWelcomeVoice(),
