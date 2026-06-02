@@ -652,6 +652,5 @@
 }
 
 /* Separador entre grupos: mais fino e mais claro */
-.fmt-sep {
-  opacity: 0.4;
-}
+.fmt-sep { opacity: 0.6; }
+.fmt-sep-editorial { opacity: 0.8; }

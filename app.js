@@ -2388,6 +2388,11 @@ function toggleAudioPanel() {
   if (!panel) return;
   panel.hidden = !panel.hidden;
   document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", String(!panel.hidden));
+  // T13: esconde label "Sons" após primeiro uso
+  if (!localStorage.getItem("vrda-audio-seen")) {
+    localStorage.setItem("vrda-audio-seen", "1");
+    document.querySelector(".topbar-audio-btn")?.classList.add("audio-seen");
+  }
 }
 
 function _toggleTypewriterSound() {
@@ -2520,6 +2525,10 @@ function _verifyControllers() {
 }
 
 function _bootstrap() {
+  // T13: restaurar estado "audio já visto"
+  if (localStorage.getItem("vrda-audio-seen")) {
+    document.querySelector(".topbar-audio-btn")?.classList.add("audio-seen");
+  }
   _verifyControllers();
   hideDecorativeMaterialIcons();
   materialIconObserver.observe(document.body, { childList: true, subtree: true });

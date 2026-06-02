@@ -9,7 +9,7 @@ let readerRuler      = false;
 let _readerTriggerEl = null;
 
 const readerSpeedValues = [1, 2, 3, 5];
-const readerSpeedLabels = ["Ritmo 1", "Ritmo 2", "Ritmo 3", "Ritmo 5"];
+const readerSpeedLabels = ["Ritmo 1 — lento", "Ritmo 2 — médio", "Ritmo 3 — rápido", "Ritmo 5 — acelerado"];
 
 function openReaderMode() {
   const manuscript = getActiveManuscript();

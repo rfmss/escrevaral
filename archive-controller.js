@@ -149,16 +149,30 @@ function showMasterResetModal() {
         <span class="material-symbols-outlined">shield_locked</span>
         <span>Exporte um backup <strong>.esc</strong> antes de continuar — ele preserva todo o seu acervo e pode ser reimportado depois.</span>
       </div>
+      <div class="master-reset-confirm-field">
+        <label for="master-reset-input">Digite <strong>apagar</strong> para confirmar:</label>
+        <input id="master-reset-input" class="master-reset-input" type="text" autocomplete="off" placeholder="apagar" aria-label="Digite apagar para confirmar">
+      </div>
       <div class="master-reset-actions">
         <button class="secondary-button" data-action="export-backup">
           <span class="material-symbols-outlined">file_save</span>
           Exportar cópia de segurança
         </button>
         <button class="secondary-button" data-action="cancel-master-reset">Cancelar</button>
-        <button class="danger-button" data-action="confirm-master-reset">Apagar tudo mesmo assim</button>
+        <button class="danger-button" data-action="confirm-master-reset" id="master-reset-confirm-btn" disabled>Apagar tudo mesmo assim</button>
       </div>
     </div>
   `;
+  // Habilita botão só quando usuário digita "apagar"
+  setTimeout(() => {
+    const input = modal.querySelector("#master-reset-input");
+    const btn   = modal.querySelector("#master-reset-confirm-btn");
+    if (input && btn) {
+      input.addEventListener("input", () => {
+        btn.disabled = input.value.trim().toLowerCase() !== "apagar";
+      });
+    }
+  }, 0);
   document.body.appendChild(modal);
 }
 

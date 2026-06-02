@@ -1476,6 +1476,35 @@ html {
   margin-top: 1px;
 }
 
+.master-reset-confirm-field {
+  margin: 16px 0 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.master-reset-confirm-field label {
+  font-size: 13px;
+  color: var(--soft-ink);
+}
+.master-reset-input {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.master-reset-input:focus {
+  outline: 2px solid var(--sienna);
+  outline-offset: 1px;
+}
+.danger-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
 .master-reset-actions {
   display: flex;
   gap: 8px;
@@ -2483,3 +2512,16 @@ mark {
   opacity: 1;
   transform: translateY(-1px);
 }
+
+/* T13 — Sons: label visível só no primeiro acesso */
+.topbar-audio-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.topbar-audio-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.audio-seen .topbar-audio-label { display: none; }
