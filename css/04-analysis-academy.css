@@ -1013,8 +1013,8 @@
   margin: 2px 0 0;
   color: var(--ink);
   font-family: "Noto Serif", Georgia, serif;
-  font-size: 21px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1.25;
 }
 
 .rights-card p {
@@ -1575,13 +1575,16 @@
   align-items: start;
 }
 
-/* Quando o painel de detalhes está vazio (nenhuma nota selecionada),
-   colapsa a coluna direita */
-.archive-layout:has(.archive-panel-empty:not([hidden])) {
-  grid-template-columns: 1fr;
+/* Painel direito só aparece quando uma nota está explicitamente selecionada
+   (archive-note-identity visível). Por padrão: layout de coluna única. */
+.archive-detail-panel { display: none; }
+.archive-layout { grid-template-columns: 1fr; }
+
+.archive-layout:has([data-archive-note-identity]:not([hidden])) {
+  grid-template-columns: minmax(0, 1fr) 340px;
 }
-.archive-layout:has(.archive-panel-empty:not([hidden])) .archive-detail-panel {
-  display: none;
+.archive-layout:has([data-archive-note-identity]:not([hidden])) .archive-detail-panel {
+  display: block;
 }
 
 .archive-layout .project-grid {

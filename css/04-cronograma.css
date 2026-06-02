@@ -80,6 +80,9 @@
   opacity: 1;
   transform: translateY(0);
 }
+.crono-shortcut-toggle[aria-expanded="true"]::after {
+  display: none;
+}
 
 .crono-date-shortcut {
   position: absolute;
