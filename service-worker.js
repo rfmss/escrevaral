@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v402";
-const ASSET_VERSION = "20260602-prova-punch";
+const CACHE_NAME = "vereda-offline-v403";
+const ASSET_VERSION = "20260602-enviar-editor";
 
 const CORE_ASSETS = [
   "./",

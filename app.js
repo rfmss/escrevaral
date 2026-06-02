@@ -1624,6 +1624,7 @@ const ACTION_HANDLERS = {
     if (btn) btn.setAttribute("aria-pressed", String(!isPages));
   },
   "export-proof":            () => exportProof(),
+  "send-proof-to-editor":    () => sendProofToEditor(),
   "stamp-blockchain":        () => stampWithOpenTimestamps(),
   "validate-proof-file":     () => document.querySelector("[data-proof-validate-input]")?.click(),
   "toggle-proof-sessions":   () => toggleProofSessionHistory(),

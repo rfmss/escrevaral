@@ -488,6 +488,47 @@ async function exportProof() {
   renderProofView();
 }
 
+async function sendProofToEditor() {
+  const manuscript = getActiveManuscript();
+  if (!isManuscriptDocument(manuscript)) {
+    saveStatus.textContent = "Selecione um manuscrito primeiro";
+    return;
+  }
+
+  // 1. Baixa o arquivo primeiro
+  await exportProof();
+
+  // 2. Pequena pausa para o download iniciar antes de abrir o email
+  await new Promise(r => setTimeout(r, 600));
+
+  // 3. Monta o email com instruções prontas para o editor
+  const title = manuscript.title || "meu manuscrito";
+  const filename = `${slugify(title)}.prova.esc`;
+
+  const subject = encodeURIComponent(`Prova de autoria — ${title}`);
+  const body = encodeURIComponent(
+`Olá,
+
+Segue em anexo meu arquivo de prova de autoria referente ao manuscrito "${title}".
+
+O arquivo foi gerado pelo Escrevaral e registra o ritmo da minha digitação ao longo das sessões de escrita — não o conteúdo do texto, só o tempo entre cada tecla. É uma prova positiva de autoria humana: nenhuma IA tem o mesmo padrão de cadência de uma pessoa escrevendo.
+
+Como verificar (leva menos de 1 minuto, sem criar conta):
+
+1. Acesse escrevaral.com
+2. Clique em "Prova de autoria" no menu
+3. Role até a seção "Um editor duvidou?" e clique em "Verificar arquivo .esc"
+4. Faça o upload do arquivo ${filename} que enviei em anexo
+
+Você verá: a correspondência com o manuscrito, o número de sessões registradas, o padrão de ritmo e se o texto foi alterado após o registro.
+
+Qualquer dúvida, estou à disposição.`
+  );
+
+  window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
+  saveStatus.textContent = "Email preparado — lembre de anexar o arquivo .esc";
+}
+
 async function stampWithOpenTimestamps() {
   const manuscript = getActiveManuscript();
   if (!isManuscriptDocument(manuscript)) return;
