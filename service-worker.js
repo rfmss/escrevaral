@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v388";
-const ASSET_VERSION = "20260602-guia-fullscreen";
+const CACHE_NAME = "vereda-offline-v389";
+const ASSET_VERSION = "20260602-toolbar-fixes";
 
 const CORE_ASSETS = [
   "./",

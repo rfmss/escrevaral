@@ -453,3 +453,9 @@
     padding: 20px 16px;
   }
 }
+
+/* ── DESKTOP (≥820px) — toolbar editorial sempre visível, sem accordion ── */
+@media (min-width: 820px) {
+  .fmt-editorial-toggle { display: none !important; }
+  .fmt-group-editorial > * { display: flex !important; }
+}

@@ -87,8 +87,6 @@
   transition: opacity 0.15s, color 0.15s;
   color: var(--muted);
   margin-left: auto;
-  padding-left: 12px;
-  border-left: 1px solid var(--line);
 }
 
 .editor-delete-btn:hover {
