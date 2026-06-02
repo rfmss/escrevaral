@@ -1312,6 +1312,330 @@
       }
     },
     {
+      "id": "romantasy",
+      "oficio": "ficcao",
+      "label": "Romantasy",
+      "icon": "auto_awesome",
+      "title": "Romantasy",
+      "kind": "Romantasy",
+      "chapter": "Magia e coração",
+      "description": "Guia para fantasia com arco romântico central — mundos com magia, tensão entre protagonistas e HEA.",
+      "guidance": {
+        "meta": [
+          "Fantasia",
+          "Romance",
+          "HEA",
+          "Mundo com magia"
+        ],
+        "sections": [
+          [
+            "O mundo e a magia",
+            "Qual é o sistema de magia e como ele interfere no relacionamento?"
+          ],
+          [
+            "Protagonistas",
+            "O que cada um quer — e o que a magia ou o mundo impede que tenham?"
+          ],
+          [
+            "Tensão romantasy",
+            "No romantasy, o obstáculo emocional e o obstáculo do mundo se entrelaçam. Um não resolve sem o outro."
+          ],
+          [
+            "O ponto de virada",
+            "Quando o relacionamento e o arco do mundo colidem — o momento mais alto do livro."
+          ],
+          [
+            "Resolução dupla",
+            "O final precisa resolver o romance E o conflito do mundo. Um sem o outro frustra o leitor."
+          ]
+        ],
+        "reminders": [
+          "O sistema de magia deve afetar o relacionamento diretamente — não ser cenário de fundo.",
+          "A tensão 'enemies to lovers' funciona bem no romantasy porque o conflito do mundo justifica a resistência inicial.",
+          "O HEA precisa ser ganho tanto no arco emocional quanto no arco de mundo — um sem o outro não satisfaz."
+        ],
+        "blueprint": "ROMANTASY\n\nUm mundo com magia — e dois personagens que não deveriam se envolver.\n\nO obstáculo tem duas camadas: o mundo (política, profecia, guerra, magia) e o interior de cada um (medo, lealdade, trauma). O relacionamento avança quando o mundo pressiona — e recua quando o mundo exige. A resolução é uma conquista dupla: eles vencem o conflito do mundo E constroem o relacionamento. A magia não é decoração: ela muda o que é possível entre eles.\n\nConectivos: apesar da profecia (obstáculo externo) · contra todas as regras (transgressão que define o relacionamento) · quando a batalha terminar (a promessa que ancora a tensão)",
+        "sketch": "[PROTAGONISTA A] descobriu que [HABILIDADE OU CONDIÇÃO NO MUNDO MÁGICO] — o que mudou tudo.\n\n[PROTAGONISTA B] era exatamente a pessoa que [RAZÃO PARA NÃO PODEREM ESTAR JUNTOS].\n\nO problema não era [OBSTÁCULO APARENTE DO MUNDO]. Era [O QUE CADA UM CARREGAVA POR DENTRO].\n\n[CENA DE TENSÃO — magia e desejo no mesmo momento.]\n\n[A ESCOLHA — quando o arco do mundo exige que um dos dois abra mão de algo.]\n\n[A CONQUISTA DUPLA — o que mudou no mundo e o que mudou entre eles.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Fantasia romântica",
+          "title": "No romantasy, o mundo e o coração quebram juntos.",
+          "body": "O leitor quer dois finais ao mesmo tempo: que eles fiquem juntos e que o mundo seja salvo. Você não pode entregar só um. A magia precisa fazer parte do que os aproxima — e do que os separa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do romantasy",
+          "title": "Dois obstáculos. Uma resolução.",
+          "body": "O sistema de magia deve afetar o relacionamento diretamente. A tensão 'enemies to lovers' funciona bem aqui porque o conflito do mundo justifica a resistência. O final precisa ser ganho nas duas frentes.",
+          "items": [
+            [
+              "Magia integrada",
+              "O sistema de magia interfere no relacionamento — não é só cenário.",
+              "done"
+            ],
+            [
+              "Obstáculo duplo",
+              "Externo (mundo, política, profecia) e interno (medo, lealdade, trauma).",
+              "done"
+            ],
+            [
+              "Resolução dupla",
+              "O romance e o conflito do mundo se resolvem juntos — não separados.",
+              "done"
+            ]
+          ],
+          "primary": "Criar romantasy"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "new-adult",
+      "oficio": "ficcao",
+      "label": "New Adult",
+      "icon": "school",
+      "title": "New Adult",
+      "kind": "New Adult",
+      "chapter": "Identidade e primeiros passos",
+      "description": "Guia para ficção com protagonistas de 18 a 25 anos — identidade, primeiro amor adulto, independência e as escolhas que definem quem você vai ser.",
+      "guidance": {
+        "meta": [
+          "Contemporary",
+          "18-25",
+          "Identidade",
+          "Primeiro amor adulto"
+        ],
+        "sections": [
+          [
+            "Protagonista em transição",
+            "Ela ou ele está saindo de um mundo conhecido para um novo. Que mundo é esse e o que deixou para trás?"
+          ],
+          [
+            "O primeiro amor adulto",
+            "Diferente do amor adolescente — tem corpo, tem consequência, tem escolha. O que está em jogo além do coração?"
+          ],
+          [
+            "A construção de identidade",
+            "Quem o protagonista pensa que é no início — e quem descobre que é no final?"
+          ],
+          [
+            "O conflito central",
+            "Família, expectativa, pressão externa. O que o mundo adulto está pedindo que vai contra o que ela quer de verdade?"
+          ],
+          [
+            "A escolha definitiva",
+            "O New Adult termina com uma escolha que define o adulto que o protagonista vai ser."
+          ]
+        ],
+        "reminders": [
+          "O New Adult não é só YA com mais conteúdo adulto — é sobre a transição e a identidade, não só a idade.",
+          "O relacionamento pode ser mais intenso e físico que no YA, mas o núcleo emocional é o mesmo: quem sou eu com essa pessoa?",
+          "A pressão familiar e social é mais presente no NA — pais, expectativas de carreira, dinheiro entram no conflito."
+        ],
+        "blueprint": "NEW ADULT\n\nUm protagonista no limiar: deixou um mundo para trás e ainda não encontrou o novo.\n\nA história acontece na janela entre 18 e 25 anos — universidade, primeiro emprego, primeiro apartamento. A identidade está sendo construída em tempo real. O amor (ou o relacionamento) acelera esse processo: com essa pessoa, quem me torno? O conflito externo (família, expectativa, pressão) reflete o conflito interno (quem sou versus quem deveria ser). O final não é 'felizes para sempre' obrigatório — é 'sei quem sou e o que quero'.\n\nConectivos: pela primeira vez por conta própria (autonomia nova) · diferente de tudo que conhecia (a quebra do mundo anterior) · antes de saber o que era (o amor que chegou antes da identidade)",
+        "sketch": "[PROTAGONISTA] chegou em [LUGAR NOVO — universidade, cidade, trabalho] sem saber que [O QUE ESTAVA PRESTES A DESCOBRIR SOBRE SI MESMA].\n\n[PERSONAGEM SECUNDÁRIO IMPORTANTE — família, amigo, interesse amoroso] carregava [EXPECTATIVA OU PRESSÃO].\n\nO problema não era [CONFLITO APARENTE]. Era [QUEM ELA ACHAVA QUE TINHA QUE SER].\n\n[CENA QUE MOSTRA A TRANSIÇÃO — um momento em que age como adulta pela primeira vez.]\n\n[A ESCOLHA — entre o que esperam dela e o que ela quer de verdade.]\n\n[O ADULTO QUE ELA ESCOLHE SER.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção para jovens adultos",
+          "title": "New Adult é sobre quem você escolhe ser.",
+          "body": "Não é YA com mais cenas adultas. É a história de alguém que saiu do mundo que conhecia e ainda não sabe quem é no novo. O relacionamento acelera essa descoberta — com essa pessoa, quem me torno?",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do New Adult",
+          "title": "Identidade em construção. Amor como espelho.",
+          "body": "A pressão familiar e social é mais presente aqui do que no YA. O conflito externo reflete o interno. O final define o adulto que o protagonista vai ser — não precisa ser HEA, mas precisa ser uma escolha.",
+          "items": [
+            [
+              "Transição real",
+              "O protagonista está entre dois mundos — o que deixou e o que ainda não é.",
+              "done"
+            ],
+            [
+              "Amor como formação",
+              "O relacionamento revela quem o protagonista está se tornando.",
+              "done"
+            ],
+            [
+              "Escolha definitória",
+              "O clímax é uma escolha que define o adulto — não só o romance.",
+              "done"
+            ]
+          ],
+          "primary": "Criar New Adult"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "suspense-psicologico",
+      "oficio": "ficcao",
+      "label": "Suspense psicológico",
+      "icon": "psychology",
+      "title": "Suspense psicológico",
+      "kind": "Suspense psicológico",
+      "chapter": "Mente e dúvida",
+      "description": "Guia para suspense com narradora não confiável, tensão interna e revelações que reescrevem o que o leitor pensava saber.",
+      "guidance": {
+        "meta": [
+          "Suspense",
+          "Narradora não confiável",
+          "Revelação",
+          "Tensão psicológica"
+        ],
+        "sections": [
+          [
+            "A narradora",
+            "O que ela sabe — e o que ela esconde de si mesma? A não confiabilidade precisa ter raiz emocional real."
+          ],
+          [
+            "O segredo central",
+            "Qual é a verdade que o livro inteiro está construindo para revelar?"
+          ],
+          [
+            "As camadas de suspeita",
+            "Quem mais pode ser culpado? O suspense psicológico planta dúvida em múltiplas direções."
+          ],
+          [
+            "A revelação",
+            "Quando e como o leitor descobre — e como isso recontextualiza tudo que leu antes?"
+          ],
+          [
+            "O aftermath",
+            "O que sobra depois da verdade? O suspense psicológico não termina na revelação."
+          ]
+        ],
+        "reminders": [
+          "A narradora não confiável funciona quando o leitor a entende mesmo sem confiar nela — a empatia precisa existir.",
+          "Cada pista falsa precisa ser tecnicamente honesta: nada que impeça o leitor de ter descoberto sozinho.",
+          "O ritmo do suspense psicológico é interno: a tensão vem dos pensamentos, não das ações."
+        ],
+        "blueprint": "SUSPENSE PSICOLÓGICO\n\nAlgo aconteceu. A narradora não tem certeza do que foi — ou não quer ter.\n\nA estrutura gira em torno da revelação: tudo que vem antes a constrói, tudo que vem depois a recontextualiza. A narradora não confiável não é um truque: é uma personagem com razões reais para distorcer o que percebe. O leitor sabe que algo está errado antes de saber o quê — e continua lendo para descobrir. O ritmo é interno: pensamento, interpretação, dúvida. A ação acelera a revelação, mas não substitui a tensão psicológica.\n\nConectivos: mas eu sabia (a certeza que vai ser desmentida) · da mesma forma que antes (o padrão que está prestes a quebrar) · algo estava errado (a intuição que o leitor compartilha com a narradora)",
+        "sketch": "[NARRADORA] sabia que [CERTEZA INICIAL — que vai ser questionada].\n\nMas [EVENTO OU PESSOA] plantou a primeira dúvida.\n\nEla tentou [AÇÃO PARA CONTROLAR OU ENTENDER] — e isso só piorou.\n\n[CENA QUE REVELA A PRIMEIRA CAMADA — algo que recontextualiza o que veio antes.]\n\n[O MOMENTO EM QUE ELA (E O LEITOR) COMEÇA A DUVIDAR DE TUDO.]\n\n[A VERDADE — e o que sobra depois que ela chega.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Suspense e tensão psicológica",
+          "title": "A tensão vem de dentro, não de fora.",
+          "body": "No suspense psicológico, a narradora não confiável não é truque — é personagem. O leitor sente que algo está errado antes de saber o quê. A revelação reescreve o livro inteiro. O ritmo é feito de pensamentos, não de perseguições.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do suspense psicológico",
+          "title": "Dúvida → revelação → recontextualização.",
+          "body": "Cada pista falsa precisa ser tecnicamente honesta. A empatia com a narradora precisa existir mesmo quando o leitor não confia nela. O aftermath — o que sobra depois da verdade — é parte da história.",
+          "items": [
+            [
+              "Narradora com raiz",
+              "A não confiabilidade tem razão emocional real — não é arbitrária.",
+              "done"
+            ],
+            [
+              "Pistas honestas",
+              "O leitor poderia ter descoberto sozinho — a revelação deve ser possível.",
+              "done"
+            ],
+            [
+              "Aftermath real",
+              "A história não termina na revelação — o que sobra é parte do livro.",
+              "done"
+            ]
+          ],
+          "primary": "Criar suspense psicológico"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "sci-fi-romantico",
+      "oficio": "ficcao",
+      "label": "Ficção científica romântica",
+      "icon": "rocket_launch",
+      "title": "Ficção científica romântica",
+      "kind": "Ficção científica romântica",
+      "chapter": "Futuro e coração",
+      "description": "Guia para ficção científica com arco romântico central — tecnologia, distância (literal ou temporal) e a persistência do sentimento.",
+      "guidance": {
+        "meta": [
+          "Ficção científica",
+          "Romance",
+          "Tecnologia",
+          "Futuro"
+        ],
+        "sections": [
+          [
+            "O mundo e a tecnologia",
+            "Como a tecnologia ou o cenário científico afeta diretamente o relacionamento?"
+          ],
+          [
+            "Protagonistas",
+            "O que cada um quer — e o que a realidade do mundo futurista impede?"
+          ],
+          [
+            "O obstáculo sci-fi",
+            "A distância, o tempo, a tecnologia ou a política do futuro são o obstáculo central — não apenas o pano de fundo."
+          ],
+          [
+            "A tensão",
+            "O relacionamento avança quando a tecnologia permite — e recua quando ela separa."
+          ],
+          [
+            "A resolução",
+            "Como o amor persiste apesar do que o mundo científico impõe?"
+          ]
+        ],
+        "reminders": [
+          "A ficção científica romântica funciona quando o elemento sci-fi cria o obstáculo, não só o cenário.",
+          "Distância (espaço, tempo, realidade alternativa) é um dos obstáculos mais poderosos no gênero.",
+          "A tecnologia pode criar empatia ou criar separação — os melhores exemplos usam os dois."
+        ],
+        "blueprint": "FICÇÃO CIENTÍFICA ROMÂNTICA\n\nDois personagens que se encontram onde o mundo científico os separaria.\n\nA tecnologia ou o cenário futurista são o obstáculo, não a decoração. A distância (temporal, espacial, virtual) justifica a dificuldade de estar juntos. O relacionamento avança quando a tecnologia permite, recua quando ela separa. A resolução é uma conquista dupla: eles encontram um jeito de estar juntos apesar do mundo que os separa.\n\nConectivos: mesmo separados por (a distância que o mundo impõe) · quando a tecnologia falhou (o momento em que o humano prevalece) · do outro lado de (o que os divide e o que os conecta ao mesmo tempo)",
+        "sketch": "[PROTAGONISTA A] estava em [LUGAR OU TEMPO] quando [COMO O ENCONTRO ACONTECE].\n\n[PROTAGONISTA B] vinha de [CONTEXTO SCI-FI — planeta, época, realidade alternativa].\n\nO problema não era [O OBSTÁCULO TECNOLÓGICO APARENTE]. Era [O QUE CADA UM CARREGAVA POR DENTRO].\n\n[CENA EM QUE A TECNOLOGIA OS CONECTA — e o que ela não consegue conectar.]\n\n[O MOMENTO EM QUE A TECNOLOGIA OS SEPARA DE NOVO.]\n\n[A ESCOLHA — o que cada um abre mão para estar com o outro apesar do mundo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção científica e romance",
+          "title": "O futuro cria o obstáculo. O coração persiste.",
+          "body": "A ficção científica romântica funciona quando o elemento sci-fi é o obstáculo, não só o cenário. Distância temporal, espacial ou virtual justifica a dificuldade de estar juntos — e torna o amor mais improvável e mais poderoso.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da fic-rom",
+          "title": "Tecnologia que separa. Sentimento que persiste.",
+          "body": "A tecnologia pode criar empatia ou criar separação — os melhores exemplos usam os dois. A resolução é dupla: encontrar um jeito de estar juntos apesar do mundo que os separa.",
+          "items": [
+            [
+              "Sci-fi como obstáculo",
+              "A tecnologia ou o cenário futurista cria a separação — não só a ambientação.",
+              "done"
+            ],
+            [
+              "Distância como tensão",
+              "Espaço, tempo ou realidade alternativa justifica a dificuldade.",
+              "done"
+            ],
+            [
+              "Resolução humana",
+              "O que o sentimento conquista onde a tecnologia falhou.",
+              "done"
+            ]
+          ],
+          "primary": "Criar ficção científica romântica"
+        }
+      ],
+      "text": ""
+    },
+    {
       "id": "roteiro-filme",
       "oficio": "roteiro",
       "label": "Roteiro de filme",
