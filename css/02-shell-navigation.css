@@ -2680,3 +2680,77 @@ mark {
   color: var(--muted);
   margin-top: 8px;
 }
+
+/* ── PROVA DE AUTORIA — rewrite completo ──────────── */
+.proof-context-note {
+  font-size: 14px;
+  color: var(--soft-ink);
+  line-height: 1.6;
+  margin: -8px 0 20px;
+}
+.proof-distinction {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: color-mix(in srgb, var(--primary) 7%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border-left: 4px solid var(--primary);
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+.proof-distinction .material-symbols-outlined {
+  font-size: 24px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.proof-distinction p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--soft-ink);
+  margin: 0;
+}
+.proof-distinction strong { color: var(--ink); }
+.proof-when-hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 6px !important;
+  padding: 8px 12px;
+  background: var(--surface-low);
+  border-radius: 6px;
+}
+.proof-when-hint strong { color: var(--soft-ink); }
+.proof-blockchain-tech {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px !important;
+}
+.proof-what-editor-sees {
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 10px 0;
+}
+.proof-editor-view-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.proof-editor-view-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--soft-ink);
+}
+.proof-editor-view-list li .material-symbols-outlined {
+  font-size: 16px;
+  color: color-mix(in srgb, var(--primary) 70%, var(--sage));
+  flex-shrink: 0;
+}
