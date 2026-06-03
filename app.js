@@ -2238,6 +2238,8 @@ if (specializedEditor) {
       writingArea.innerText = serializeScreenplay();
     } else if (mode === "teatro") {
       writingArea.innerText = serializeTeatro();
+    } else if (!mode && window.FICHA_KINDS?.has(getActiveManuscript()?.kind)) {
+      writingArea.innerText = serializeFicha();
     } else if (!mode && getActiveManuscript()?.type === "personagem") {
       writingArea.innerText = serializePersonagem();
     } else if (mode === "enem") {
@@ -2753,6 +2755,120 @@ const PERSONAGEM_FIELDS = [
     {key:"relations",  label:"Relações principais",   ph:"Com protagonista, antagonista, aliados", area:true},
   ]},
 ];
+
+// ── FICHAS — schemas por tipo ──────────────────────────────────────────────
+// Cada campo: { key, label, ph (placeholder), area (boolean = textarea) }
+const FICHA_SCHEMAS = {
+  "Personagem": [
+    { key:"nome",        label:"Nome",              ph:"Nome completo · apelido · como os outros chamam" },
+    { key:"aparencia",   label:"Aparência",          ph:"O detalhe que fica na memória do leitor" },
+    { key:"desejo",      label:"Desejo",             ph:"O que quer conscientemente · o objetivo declarado" },
+    { key:"necessidade", label:"Necessidade",        ph:"O que precisa mas ainda não sabe", area:true },
+    { key:"contradicao", label:"Contradição",        ph:"O que a torna humana · o defeito que é também uma força" },
+    { key:"voz",         label:"Voz",                ph:"Palavras que usa · que evita · como interrompe · como mente" },
+    { key:"arco",        label:"Arco",               ph:"Onde começa → onde termina → o que muda", area:true },
+    { key:"relacoes",    label:"Relações",            ph:"— com [personagem]:\n— com [personagem]:", area:true },
+    { key:"detalhes",    label:"Detalhes",            ph:"Cor dos olhos, cheiro, maneirismo, objeto que carrega" },
+  ],
+  "Mundo": [
+    { key:"regras",      label:"Regras fundamentais", ph:"O que é diferente deste mundo em relação ao nosso", area:true },
+    { key:"sistema",     label:"Magia / Sistema",     ph:"Como funciona · quais os limites · qual o custo", area:true },
+    { key:"historia",    label:"História",            ph:"O trauma coletivo · o que aconteceu antes da história", area:true },
+    { key:"tensao",      label:"Tensão estrutural",   ph:"O conflito que existe antes da protagonista aparecer" },
+    { key:"lugares",     label:"Lugares importantes", ph:"—\n—", area:true },
+    { key:"vocabulario", label:"Vocabulário próprio", ph:"— [termo]:", area:true },
+  ],
+  "Lugar": [
+    { key:"nome",        label:"Nome",               ph:"Nome do lugar" },
+    { key:"localizacao", label:"Localização",        ph:"Onde fica no mundo · como se chega" },
+    { key:"atmosfera",   label:"Atmosfera",          ph:"O que se sente ao entrar · temperatura emocional", area:true },
+    { key:"sensoriais",  label:"Detalhes sensoriais",ph:"visão:\nsom:\ncheiro:\ntoque:", area:true },
+    { key:"historia",    label:"História do lugar",  ph:"O que aconteceu aqui antes", area:true },
+    { key:"significado", label:"Significado",        ph:"Por que este lugar importa para a protagonista" },
+  ],
+  "Cronologia": [
+    { key:"antes",       label:"Antes da história",  ph:"— [período]:\n— [evento que mudou tudo]:", area:true },
+    { key:"historia",    label:"A história",         ph:"— cena 1:\n— ponto de virada:\n— clímax:\n— resolução:", area:true },
+    { key:"paralelos",   label:"Paralelos e flashbacks", ph:"— [memória de X]: aparece em:", area:true },
+    { key:"datas",       label:"Datas importantes",  ph:"início · duração total ·" },
+  ],
+  "Objeto": [
+    { key:"nome",        label:"Nome",               ph:"Nome do objeto" },
+    { key:"descricao",   label:"Descrição física",   ph:"O detalhe que fica na memória do leitor" },
+    { key:"historia",    label:"História do objeto",  ph:"De onde veio · quem teve antes", area:true },
+    { key:"simbolico",   label:"Significado simbólico", ph:"O que representa além do que é" },
+    { key:"posse",       label:"Quem tem / quer / teme", ph:"—" },
+    { key:"aparicoes",   label:"Como aparece",        ph:"— primeira vez:\n— ponto de virada:\n— cena final:", area:true },
+  ],
+  "Tema": [
+    { key:"intencao",    label:"Intenção",            ph:"O que este texto quer dizer — em uma frase" },
+    { key:"tensao",      label:"Tensão temática",     ph:"As duas forças opostas que o texto explora" },
+    { key:"imagem",      label:"Imagem central",      ph:"A cena, o objeto ou o momento que cristaliza o tema" },
+    { key:"pergunta",    label:"Pergunta do texto",   ph:"Não precisa responder — precisa fazer a pergunta certa" },
+    { key:"contra",      label:"Contra-argumento",    ph:"O que o texto reconhece como verdade no lado oposto", area:true },
+  ],
+  "Glossário": [
+    { key:"termos",      label:"Termos do projeto",   ph:"— [termo]: definição · contexto · primeira aparição\n\n— [termo]: definição · contexto · primeira aparição", area:true },
+  ],
+  "Instituição": [
+    { key:"nome",        label:"Nome",               ph:"Nome da instituição" },
+    { key:"funcao",      label:"Função",             ph:"O que faz · para quem existe" },
+    { key:"poder",       label:"Poder",              ph:"De onde vem · como se mantém · o que teme perder", area:true },
+    { key:"estrutura",   label:"Estrutura interna",  ph:"Hierarquia · regras · ritos", area:true },
+    { key:"papel",       label:"Papel na história",  ph:"Como afeta a protagonista · o que quer dela" },
+  ],
+  "Projeto": [
+    { key:"sinopse",     label:"Sinopse",            ph:"2-3 frases que explicam o livro para um editor", area:true },
+    { key:"publico",     label:"Público",            ph:"Quem lê · que outros livros essa pessoa também lê" },
+    { key:"promessa",    label:"Promessa de leitura", ph:"O que o leitor vai sentir · o que vai levar" },
+    { key:"estagio",     label:"Estágio atual",      ph:"Rascunho · revisão · finalização" },
+    { key:"prazo",       label:"Prazo",              ph:"Data de entrega real ou desejada" },
+    { key:"notas",       label:"Notas de desenvolvimento", ph:"", area:true },
+  ],
+};
+
+const FICHA_KINDS = new Set(Object.keys(FICHA_SCHEMAS));
+
+function parseFichaData(text, kind) {
+  if (!text) return {};
+  try {
+    const parsed = JSON.parse(text);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) return parsed;
+  } catch {}
+  // Migrar de formato texto plano (CAPS = rótulo, linhas abaixo = valor)
+  const schema = FICHA_SCHEMAS[kind] || [];
+  const data = {};
+  const lines = text.split(/\n/);
+  let currentKey = null;
+  let buf = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    const isHeading = line && line === line.toUpperCase() && /[A-ZÁÉÍÓÚ]/.test(line) && line.length <= 60;
+    if (isHeading) {
+      if (currentKey && buf.length) {
+        data[currentKey] = buf.filter(l => !(l.startsWith("(") && l.endsWith(")"))).join("\n").trim();
+      }
+      const match = schema.find(f => f.label.toUpperCase().replace(/[^A-ZÁÉÍÓÚ\s]/g,"") === line.replace(/[^A-ZÁÉÍÓÚ\s]/g,"") || line.includes(f.key.toUpperCase()));
+      currentKey = match?.key || null;
+      buf = [];
+    } else if (currentKey) {
+      buf.push(line);
+    }
+  }
+  if (currentKey && buf.length) {
+    data[currentKey] = buf.filter(l => !(l.startsWith("(") && l.endsWith(")"))).join("\n").trim();
+  }
+  return data;
+}
+
+function serializeFicha() {
+  const data = {};
+  if (!specializedEditor) return "{}";
+  specializedEditor.querySelectorAll("[data-ficha-key]").forEach(el => {
+    data[el.dataset.fichaKey] = "value" in el ? el.value : el.innerText;
+  });
+  return JSON.stringify(data);
+}
 
 function parsePersonagemData(text) {
   try {

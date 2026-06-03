@@ -654,3 +654,53 @@
 /* Separador entre grupos: mais fino e mais claro */
 .fmt-sep { opacity: 0.6; }
 .fmt-sep-editorial { opacity: 0.8; }
+
+/* ── FICHA — formulário estruturado ────────────────── */
+.ficha-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 28px 32px 48px;
+  max-width: 640px;
+  margin: 0 auto;
+  width: 100%;
+}
+.ficha-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ficha-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  color: var(--primary);
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+  user-select: none;
+}
+.ficha-input {
+  border: none;
+  border-bottom: 1.5px solid var(--line);
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 6px 0;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--motion-quick);
+}
+.ficha-input:focus { border-bottom-color: var(--primary); }
+.ficha-input::placeholder { color: var(--muted); font-style: italic; }
+.ficha-textarea {
+  resize: vertical;
+  min-height: 62px;
+  max-height: 260px;
+}

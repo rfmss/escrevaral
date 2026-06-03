@@ -54,7 +54,16 @@ function renderSpecializedEditor(manuscript) {
   const template = VeredaTemplates.getTemplate(state.template.selectedId);
   const mode = template?.editorMode;
 
-  // Personagem: independente do editorMode, activar por tipo
+  // Fichas: qualquer kind com schema definido usa o editor de ficha
+  if (!mode && manuscript?.kind && window.FICHA_KINDS?.has(manuscript.kind)) {
+    writingArea.hidden = true;
+    specializedEditor.hidden = false;
+    specializedEditor.innerHTML = buildFichaEditor(manuscript.kind, manuscript.text || "");
+    const kindLabels = { "Personagem":"Nome do personagem", "Lugar":"Nome do lugar", "Objeto":"Nome do objeto" };
+    titleInput.placeholder = kindLabels[manuscript.kind] || `Título · ${manuscript.kind}`;
+    return;
+  }
+  // Personagem legado (type="personagem" de versões anteriores)
   if (!mode && manuscript?.type === "personagem") {
     writingArea.hidden = true;
     specializedEditor.hidden = false;
@@ -690,6 +699,20 @@ document.addEventListener("keydown", (e) => {
 const academiaHintToast = document.getElementById("academia-hint-toast");
 const HINT_IDLE_MS = 90_000; // 90s de pausa dispara o toast
 const HINT_AUTO_HIDE_MS = 12_000; // some sozinho após 12s
+
+function buildFichaEditor(kind, text) {
+  const schema = window.FICHA_SCHEMAS?.[kind] || [];
+  const data   = parseFichaData(text, kind);
+  return `<div class="ficha-editor" data-ficha-kind="${escapeHtml(kind)}">` +
+    schema.map(f => {
+      const val = escapeHtml(data[f.key] || "");
+      const input = f.area
+        ? `<textarea class="ficha-input ficha-textarea" data-ficha-key="${f.key}" placeholder="${escapeHtml(f.ph)}" rows="3">${val}</textarea>`
+        : `<input  class="ficha-input" type="text"  data-ficha-key="${f.key}" placeholder="${escapeHtml(f.ph)}" value="${val}">`;
+      return `<div class="ficha-field"><label class="ficha-label">${escapeHtml(f.label)}</label>${input}</div>`;
+    }).join("") +
+  `</div>`;
+}
 
 function buildPersonagemEditor(text) {
   const data = parsePersonagemData(text);
