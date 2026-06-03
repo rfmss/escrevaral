@@ -2523,12 +2523,19 @@ mark {
   display: flex;
   align-items: center;
   gap: 4px;
+  width: auto;
+  padding: 0 8px;
   margin-right: 12px;
+}
+.topbar-audio-btn[aria-pressed="true"] {
+  background: var(--surface-mid);
+  box-shadow: none;
 }
 .topbar-audio-label {
   font-size: 11px;
   font-weight: 600;
   color: var(--muted);
+  letter-spacing: 0.01em;
 }
 
 /* ── TERMOS DE USO ─────────────────────────────────── */
