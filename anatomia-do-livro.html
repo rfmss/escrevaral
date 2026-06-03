@@ -3,7 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anatomia do Livro</title>
+<title>A Anatomia do Livro · Escreva Ral</title>
+<meta name="description" content="Anatomia interativa de um livro em CSS 3D: gire o objeto para ver capa, lombada, contracapa e orelhas — ou abra-o e folheie cada parte do miolo, da falsa folha de rosto ao colofão.">
+<!-- AJUSTE a URL para o caminho real desta página -->
+<link rel="canonical" href="https://escrevaral.com/anatomia-do-livro">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://escrevaral.com/anatomia-do-livro">
+<meta property="og:title" content="A Anatomia do Livro">
+<meta property="og:description" content="Um livro em CSS 3D que gira e se abre: explore cada parte, da capa ao colofão.">
+<!-- CRIE e hospede uma imagem 1200×630 neste caminho -->
+<meta property="og:image" content="https://escrevaral.com/og-anatomia-do-livro.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A Anatomia do Livro">
+<meta name="twitter:description" content="Um livro em CSS 3D que gira e se abre: explore cada parte, da capa ao colofão.">
+<meta name="twitter:image" content="https://escrevaral.com/og-anatomia-do-livro.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%231a2c93'/%3E%3Crect x='9' y='6' width='15' height='20' rx='1.5' fill='%23f1e7d4'/%3E%3Crect x='9' y='6' width='4' height='20' fill='%23ecd9a6'/%3E%3Cline x1='16' y1='10' x2='21' y2='10' stroke='%231a2c93' stroke-width='1.4'/%3E%3Cline x1='16' y1='13' x2='21' y2='13' stroke='%231a2c93' stroke-width='1.4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -383,7 +397,23 @@ body::after{
 .caption.swap{animation:capIn .5s ease;}
 @keyframes capIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:none;}}
 
-.hint{margin-top:14px;font-style:italic;font-size:12px;color:var(--ink-faint);}
+.hint{margin-top:14px;font-style:italic;font-size:12px;color:#776b54;transition:opacity .8s ease;}
+.hint.faded{opacity:0;pointer-events:none;}
+
+/* "Toque" no touch, "Clique" em dispositivos de ponteiro fino */
+.t-click{display:none;}
+@media (hover:hover) and (pointer:fine){
+  .t-touch{display:none;}
+  .t-click{display:inline;}
+}
+
+/* pular para o conteúdo (navegação por teclado) */
+.skip-link{
+  position:absolute;left:14px;top:-44px;z-index:50;
+  background:var(--blue-deep);color:#fff;padding:9px 14px;border-radius:0 0 6px 6px;
+  font-size:13px;text-decoration:none;transition:top .2s ease;
+}
+.skip-link:focus{top:0;}
 
 /* lista de um lado, livro do outro — sempre. A lista rola por dentro,
    nunca empurra o livro pra fora da vista. */
@@ -412,14 +442,25 @@ body::after{
   .masthead .sub{font-size:12px;}
   .hint{display:none;}
 }
+
+/* respeita quem pediu menos movimento: corta giros/viradas, mantém o estado */
+@media (prefers-reduced-motion:reduce){
+  .book,.cover-front,.orelha,.jacket,.cinta,.floor-shadow,.index button,.hint{
+    transition-duration:.01ms !important;
+  }
+  .leaf{display:none !important;}
+  .caption.swap{animation:none !important;}
+  *{scroll-behavior:auto !important;}
+}
 </style>
 </head>
 <body>
 
+<a class="skip-link" href="#stage">Pular para o conteúdo</a>
 <header class="masthead">
   <p class="kicker">Em CSS · do papel à página</p>
   <h1>A Anatomia do <em>Livro</em></h1>
-  <p class="sub">Toque numa parte. O livro gira para mostrar a face — ou se abre e folheia até a página.</p>
+  <p class="sub"><span class="t-touch">Toque</span><span class="t-click">Clique</span> numa parte. O livro gira para mostrar a face — ou se abre e folheia até a página.</p>
 </header>
 
 <div class="layout">
@@ -427,13 +468,13 @@ body::after{
   <nav class="index" id="index" aria-label="Partes do livro"></nav>
 
   <section class="stagewrap">
-    <div class="stage" id="stage" data-view="capa">
+    <div class="stage" id="stage" data-view="capa" tabindex="-1" aria-label="Modelo do livro em 3D">
       <div class="floor-shadow"></div>
-      <div class="book" id="book">
+      <div class="book" id="book" aria-hidden="true">
 
         <!-- faces fixas da caixa -->
         <div class="face f-back">
-          <div class="label-back">Quarta capa</div>
+          <div class="label-back">Contracapa</div>
           <p class="syn">Numa vila tomada pela maré, uma cartógrafa desenha mapas de lugares que insiste em esquecer. Uma fábula sobre memória, território e perdão.</p>
           <p class="quote">&ldquo;Uma prosa de rara delicadeza.&rdquo;<br>— Suplemento Literário</p>
           <div class="isbn">
@@ -478,7 +519,7 @@ body::after{
             <div class="glyph">~</div>
             <div class="top">
               <div class="ed">Editora Margem</div>
-              <h2 class="ttl">A Cartografia<br>do <em>Esquecimento</em></h2>
+              <div class="ttl">A Cartografia<br>do <em>Esquecimento</em></div>
               <div class="sub">romance</div>
             </div>
             <div class="auth">Helena Vasconcelos</div>
@@ -500,12 +541,12 @@ body::after{
       </div>
     </div>
 
-    <figure class="caption" id="caption">
+    <figure class="caption" id="caption" aria-live="polite" aria-atomic="true">
       <div class="eyebrow">O exterior</div>
       <h3>Capa</h3>
       <p>O rosto do livro.</p>
     </figure>
-    <p class="hint">Dica: comece pela capa e siga a lista — ela percorre o livro inteiro, de fora para dentro.</p>
+    <p class="hint" id="hint">Dica: comece pela capa e siga a lista — ela percorre o livro inteiro, de fora para dentro.</p>
   </section>
 
 </div>
@@ -592,7 +633,7 @@ const PAGES = {
 
 /* ---------- definição das partes ---------- */
 const SECTIONS = [
- { n:'1', title:'O exterior', items:[
+ { n:'1', title:'O exterior · capa e acabamento', items:[
    ['capa','Capa','Primeira capa','O rosto do livro. Traz o título, o subtítulo, o nome do autor e a logomarca da editora — a primeira impressão de quem o segura.'],
    ['lombada','Lombada','Exterior','A lateral visível na estante. Contém título, autor e editora; sua espessura depende do número de páginas.'],
    ['contracapa','Contracapa','Quarta capa','A parte de trás. Costuma trazer sinopse, um trecho instigante, aspas da crítica e o código de barras com o ISBN.'],
@@ -620,7 +661,7 @@ const SECTIONS = [
    ['agradecimentos','Agradecimentos','Pós-textual','O espaço para agradecer a quem ajudou a criar e publicar o livro.'],
    ['bibliografia','Bibliografia','Pós-textual','As referências consultadas — obrigatórias em obras técnicas, acadêmicas ou de pesquisa.'],
    ['glossario','Glossário · apêndice','Pós-textual','Listas de termos específicos (comuns na fantasia) ou documentos extras que complementam a leitura.'],
-   ['sobre-autor','Sobre o autor','Pós-textual','Uma biografia mais completa, com redes sociais e site.'],
+   ['sobre-autor','Sobre a autora','Pós-textual','Uma biografia mais completa, com redes sociais e site.'],
    ['colofao','Colofão','Pós-textual','A última página impressa: a nota técnica da gráfica — tipografia, papel e onde o livro foi feito.'],
  ]},
 ];
@@ -635,13 +676,19 @@ SECTIONS.forEach(s=>s.items.forEach(it=>{
 
 /* ---------- construir índice ---------- */
 const index = document.getElementById('index');
+const hint = document.getElementById('hint');
+let userClicks = 0;
 SECTIONS.forEach(s=>{
   const g=document.createElement('div');g.className='grp';
-  g.innerHTML=`<div class="grp-h"><span class="num">${s.n}</span>${s.title.split(' · ')[0]}</div>`;
+  g.innerHTML=`<div class="grp-h" role="heading" aria-level="2"><span class="num" aria-hidden="true">${s.n}</span>${s.title.split(' · ')[0]}</div>`;
   s.items.forEach(it=>{
     const b=document.createElement('button');
     b.textContent=it[1];b.dataset.id=it[0];b.setAttribute('aria-pressed','false');
-    b.addEventListener('click',()=>select(it[0]));
+    b.addEventListener('click',()=>{
+      userClicks++;
+      if(userClicks>=3 && hint) hint.classList.add('faded');
+      select(it[0]);
+    });
     g.appendChild(b);
   });
   index.appendChild(g);
