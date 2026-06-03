@@ -1,0 +1,377 @@
+{
+  "data": "2026-06-03",
+  "violacao": false,
+  "larguras": [
+    320,
+    390,
+    430
+  ],
+  "resultados": [
+    {
+      "cenario": "acervo",
+      "descricao": "Tela inicial — lista de manuscritos",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {
+            ".manuscript-list": {
+              "scrollW": 0,
+              "clientW": 0,
+              "overflow": false
+            }
+          }
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {
+            ".manuscript-list": {
+              "scrollW": 0,
+              "clientW": 0,
+              "overflow": false
+            }
+          }
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {
+            ".manuscript-list": {
+              "scrollW": 0,
+              "clientW": 0,
+              "overflow": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "cenario": "editor-vazio",
+      "descricao": "Editor com manuscrito novo aberto",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 282,
+              "clientW": 282,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 246,
+              "clientW": 246,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 284,
+              "clientW": 284,
+              "overflow": false
+            }
+          }
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 347,
+              "clientW": 347,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 311,
+              "clientW": 311,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 349,
+              "clientW": 349,
+              "overflow": false
+            }
+          }
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 384,
+              "clientW": 384,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 348,
+              "clientW": 348,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 386,
+              "clientW": 386,
+              "overflow": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "cenario": "editor-com-texto",
+      "descricao": "Editor com texto longo (sem quebra forçada)",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 282,
+              "clientW": 282,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 246,
+              "clientW": 246,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 284,
+              "clientW": 284,
+              "overflow": false
+            }
+          }
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 347,
+              "clientW": 347,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 311,
+              "clientW": 311,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 349,
+              "clientW": 349,
+              "overflow": false
+            }
+          }
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-paper": {
+              "scrollW": 384,
+              "clientW": 384,
+              "overflow": false
+            },
+            ".writing-area": {
+              "scrollW": 348,
+              "clientW": 348,
+              "overflow": false
+            },
+            ".editor-split": {
+              "scrollW": 386,
+              "clientW": 386,
+              "overflow": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "cenario": "guia-de-escrita",
+      "descricao": "Guia de escrita aberto ao lado do editor",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-split": {
+              "scrollW": 284,
+              "clientW": 284,
+              "overflow": false
+            }
+          }
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-split": {
+              "scrollW": 349,
+              "clientW": 349,
+              "overflow": false
+            }
+          }
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {
+            ".editor-split": {
+              "scrollW": 386,
+              "clientW": 386,
+              "overflow": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "cenario": "academia",
+      "descricao": "Aba Academia (Espelho de Voz, RimaLab)",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {}
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {}
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {}
+        }
+      }
+    },
+    {
+      "cenario": "prova-autoria",
+      "descricao": "Aba Prova de Autoria",
+      "medicoes": {
+        "320": {
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {}
+        },
+        "390": {
+          "documento": {
+            "scrollW": 390,
+            "clientW": 390,
+            "bodyScrollW": 390,
+            "scrollingElScrollW": 390,
+            "scrollingElClientW": 390,
+            "overflow": false
+          },
+          "extras": {}
+        },
+        "430": {
+          "documento": {
+            "scrollW": 430,
+            "clientW": 430,
+            "bodyScrollW": 430,
+            "scrollingElScrollW": 430,
+            "scrollingElClientW": 430,
+            "overflow": false
+          },
+          "extras": {}
+        }
+      }
+    }
+  ]
+}
