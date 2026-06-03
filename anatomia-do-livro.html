@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anatomia do Livro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f1e7d4;
+  --paper-2:#e7dabf;
+  --page:#f6efe0;
+  --page-edge:#d8c9a8;
+  --ink:#2a2620;
+  --ink-soft:#766b57;
+  --ink-faint:#a89a7e;
+  --blue:#2742d8;          /* Azul Luminoso */
+  --blue-deep:#1a2c93;
+  --blue-soft:#5e72e0;
+  --foil:#ecd9a6;
+  --vermillion:#c2442a;    /* cinta */
+  --cloth:#23379e;
+  --cloth-2:#1b2a7d;
+  --line:rgba(42,38,32,.14);
+  --serif:'Spectral', Georgia, 'Times New Roman', serif;
+  --display:'Fraunces', Georgia, serif;
+  --bw:300px; --bh:440px; --bd:46px;   /* dimensões do livro */
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;}
+body{
+  font-family:var(--serif);
+  color:var(--ink);
+  background:
+    radial-gradient(120% 90% at 50% 8%, #f3ecda 0%, #e7dabe 48%, #d4c3a1 100%);
+  min-height:100%;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* grão sutil de papel */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.045;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* vinheta */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(130% 100% at 50% 40%, transparent 55%, rgba(60,48,28,.28) 100%);
+}
+
+.masthead{
+  position:relative;z-index:2;
+  text-align:center;
+  padding:34px 20px 10px;
+}
+.masthead .kicker{
+  font-family:var(--serif);
+  font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--blue);font-weight:600;margin:0 0 8px;
+}
+.masthead h1{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(30px,5.2vw,54px);
+  line-height:.98;margin:0;
+  font-optical-sizing:auto;
+  letter-spacing:-.01em;
+}
+.masthead h1 em{font-style:italic;color:var(--blue-deep);}
+.masthead .sub{
+  font-style:italic;color:var(--ink-soft);
+  font-size:clamp(13px,1.6vw,16px);margin:10px 0 0;
+}
+
+.layout{
+  position:relative;z-index:2;
+  max-width:1140px;margin:0 auto;padding:14px 22px 60px;
+  display:grid;grid-template-columns:264px 1fr;gap:34px;align-items:start;
+}
+
+/* ÍNDICE ---------------------------------------------------------- */
+.index{
+  position:sticky;top:18px;
+  font-size:14px;
+  border-right:1px solid var(--line);
+  padding-right:22px;
+}
+.index .grp{margin-bottom:22px;}
+.index .grp-h{
+  display:flex;align-items:baseline;gap:9px;
+  font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--blue);font-weight:600;margin:0 0 9px;
+}
+.index .grp-h .num{
+  font-family:var(--display);font-style:italic;font-size:15px;
+  color:var(--ink-faint);letter-spacing:0;text-transform:none;
+}
+.index button{
+  display:block;width:100%;text-align:left;
+  background:none;border:0;cursor:pointer;
+  font-family:var(--serif);font-size:14.5px;color:var(--ink-soft);
+  padding:4.5px 0 4.5px 14px;margin:0;
+  border-left:2px solid transparent;
+  transition:color .25s, border-color .25s, transform .25s, padding-left .25s;
+  line-height:1.2;
+}
+.index button:hover{color:var(--ink);transform:translateX(3px);}
+.index button[aria-pressed="true"]{
+  color:var(--blue-deep);font-weight:600;
+  border-left-color:var(--blue);
+  padding-left:18px;
+}
+
+/* PALCO ------------------------------------------------------------ */
+.stagewrap{display:flex;flex-direction:column;align-items:center;}
+.stage{
+  position:relative;
+  width:100%;max-width:560px;
+  height:560px;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1700px;
+  perspective-origin:50% 42%;
+}
+.floor-shadow{
+  position:absolute;left:50%;top:78%;
+  width:340px;height:60px;transform:translate(-50%,0) rotateX(72deg);
+  background:radial-gradient(50% 50% at 50% 50%, rgba(40,30,15,.42), transparent 72%);
+  filter:blur(7px);transition:transform 1.1s, width 1.1s, opacity 1.1s;
+}
+.stage[data-view="lombada"] .floor-shadow{width:150px;}
+.stage.is-open .floor-shadow{width:430px;top:84%;opacity:.8;}
+
+.book{
+  position:relative;
+  width:var(--bw);height:var(--bh);
+  transform-style:preserve-3d;
+  transition:transform 1.15s cubic-bezier(.62,.03,.12,1);
+  transform:rotateY(-22deg) rotateX(7deg);
+  will-change:transform;
+}
+.stage[data-view="capa"]      .book{transform:rotateY(-21deg) rotateX(7deg);}
+.stage[data-view="lombada"]   .book{transform:rotateY(64deg)  rotateX(6deg);}
+.stage[data-view="contracapa"].book{transform:rotateY(-204deg) rotateX(7deg);}
+.stage[data-view="orelha1"]   .book{transform:rotateY(-50deg) rotateX(6deg) translateX(-12px);}
+.stage[data-view="orelha2"]   .book{transform:rotateY(-228deg) rotateX(6deg) translateX(12px);}
+.stage.is-open .book{transform:rotateY(0deg) rotateX(-14deg) translateY(-10px) scale(1.02);}
+
+/* suavização de bordas das superfícies 3D — evita serrilhado */
+.face,.cover-face,.orelha,.jacket,.cinta,.right-page,.leaf .face2{
+  -webkit-backface-visibility:hidden;
+  backface-visibility:hidden;
+}
+.face,.cover-front,.cover-face,.orelha,.jacket,.cinta,.page,.leaf,.leaf .face2{
+  outline:1px solid transparent;
+  -webkit-font-smoothing:antialiased;
+}
+.face{position:absolute;top:50%;left:50%;}
+.f-back{
+  width:var(--bw);height:var(--bh);
+  transform:translate(-50%,-50%) translateZ(calc(var(--bd)/-2)) rotateY(180deg);
+  background:linear-gradient(115deg,var(--blue) 0%,var(--blue-deep) 90%);
+  border-radius:2px 5px 5px 2px;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.28);
+  padding:30px 26px;color:var(--paper);
+}
+.f-spine{
+  width:var(--bd);height:var(--bh);
+  transform:translate(-50%,-50%) rotateY(-90deg) translateZ(calc(var(--bw)/2));
+  background:linear-gradient(90deg,var(--blue-deep),var(--blue) 45%,var(--blue-deep));
+  display:flex;align-items:center;justify-content:center;
+  border-radius:3px;
+}
+.f-fore{
+  width:var(--bd);height:var(--bh);
+  transform:translate(-50%,-50%) rotateY(90deg) translateZ(calc(var(--bw)/2));
+  background:
+    repeating-linear-gradient(90deg,#d9c9a7,#f1e7d2 1.7px,#d9c9a7 3.4px);
+  border-radius:1px;
+}
+.f-top,.f-bot{
+  width:var(--bw);height:var(--bd);
+  background:repeating-linear-gradient(90deg,#d6c6a4,#f2e9d4 1.7px,#d6c6a4 3.4px);
+}
+.f-top{transform:translate(-50%,-50%) rotateX(90deg) translateZ(calc(var(--bh)/2));}
+.f-bot{transform:translate(-50%,-50%) rotateX(-90deg) translateZ(calc(var(--bh)/2));}
+
+/* lombada texto */
+.spine-text{
+  transform:rotate(90deg);white-space:nowrap;
+  color:var(--paper);text-align:center;
+}
+.spine-text .t{font-family:var(--display);font-size:16px;font-weight:500;letter-spacing:.02em;}
+.spine-text .a{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.82;margin-top:5px;}
+.spine-text .e{font-size:9px;letter-spacing:.3em;text-transform:uppercase;opacity:.7;margin-top:14px;}
+
+/* contracapa conteúdo */
+.f-back .syn{font-size:11px;line-height:1.62;font-style:italic;color:#e7ddc6;max-width:200px;margin:6px auto 0;text-align:center;}
+.f-back .quote{font-size:9.5px;line-height:1.5;color:#c9d0f4;text-align:center;margin-top:18px;}
+.f-back .isbn{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:#f1e7d4;color:#1b1b1b;padding:7px 10px;border-radius:2px;}
+.f-back .bars{height:30px;width:120px;background:repeating-linear-gradient(90deg,#1b1b1b 0 1.5px,transparent 1.5px 3px,#1b1b1b 3px 4px,transparent 4px 7px);}
+.f-back .isbnnum{font-size:8px;letter-spacing:.18em;text-align:center;margin-top:3px;color:#222;}
+.f-back .label-back{font-family:var(--display);font-size:13px;font-style:italic;text-align:center;color:#dfe4ff;margin-bottom:4px;}
+
+/* CAPA frontal (com dobradiça) ----------------------------------- */
+.cover-front{
+  position:absolute;top:0;left:0;width:var(--bw);height:var(--bh);
+  transform-origin:left center;transform-style:preserve-3d;
+  transform:translateZ(calc(var(--bd)/2)) rotateY(0deg);
+  transition:transform 1.05s cubic-bezier(.62,.03,.12,1);
+}
+.stage.is-open .cover-front{transform:translateZ(calc(var(--bd)/2)) rotateY(-171deg);}
+.cover-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:2px 6px 6px 2px;overflow:hidden;
+}
+/* arte da capa */
+.cover-outer{
+  background:linear-gradient(150deg,var(--blue) 0%,var(--blue-deep) 92%);
+  color:var(--paper);
+  box-shadow:inset 0 0 70px rgba(0,0,0,.30), inset 2px 0 0 rgba(255,255,255,.12);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:38px 30px 28px;
+}
+.cover-outer .deco{
+  position:absolute;inset:18px;border:1px solid rgba(236,217,166,.4);border-radius:2px;pointer-events:none;
+}
+.cover-outer .top{position:relative;}
+.cover-outer .ed{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--foil);opacity:.9;}
+.cover-outer .ttl{
+  font-family:var(--display);font-weight:500;font-size:33px;line-height:1.02;margin:48px 0 0;
+  font-optical-sizing:auto;letter-spacing:-.01em;
+}
+.cover-outer .ttl em{font-style:italic;display:block;color:var(--foil);}
+.cover-outer .sub{font-style:italic;font-size:13px;color:#cdd5ff;margin-top:14px;letter-spacing:.04em;}
+.cover-outer .auth{position:relative;font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--foil);}
+.cover-outer .glyph{
+  position:absolute;right:26px;top:42%;font-family:var(--display);font-style:italic;
+  font-size:120px;color:rgba(236,217,166,.10);line-height:0;pointer-events:none;
+}
+/* verso da capa = página esquerda */
+.cover-inner{
+  transform:rotateY(180deg);
+  background:var(--page);
+  box-shadow:inset 14px 0 26px -16px rgba(60,40,15,.45);
+}
+
+/* ORELHAS --------------------------------------------------------- */
+.orelha{
+  position:absolute;top:0;height:var(--bh);width:84px;
+  background:linear-gradient(120deg,#e9ddc2,#d9c9a6);
+  transition:transform 1s cubic-bezier(.62,.03,.12,1);
+  backface-visibility:hidden;
+  font-size:9px;line-height:1.5;color:var(--ink-soft);padding:22px 12px;
+  border-radius:0 2px 2px 0;
+}
+.orelha .oh{font-family:var(--display);font-style:italic;font-size:12px;color:var(--ink);margin-bottom:7px;display:block;}
+.orelha-f{
+  right:0;transform-origin:right center;
+  transform:translateZ(calc(var(--bd)/2 + 0.5px)) rotateY(178deg) translateX(0);
+}
+.stage[data-view="orelha1"] .orelha-f{transform:translateZ(calc(var(--bd)/2 + 0.5px)) rotateY(58deg);}
+.orelha-b{
+  right:0;transform-origin:right center;
+  transform:translateZ(calc(var(--bd)/-2 - 0.5px)) rotateY(178deg);
+}
+.stage[data-view="orelha2"] .orelha-b{transform:translateZ(calc(var(--bd)/-2 - 0.5px)) rotateY(58deg);}
+.orelha-b .photo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#b9a888,#6d6149);margin-bottom:8px;}
+
+/* SOBRECAPA (jacket) e CINTA ------------------------------------- */
+.jacket{
+  position:absolute;top:-6px;left:-6px;width:calc(var(--bw) + 12px);height:calc(var(--bh) + 12px);
+  transform:translateZ(calc(var(--bd)/2 + 3px));
+  background:linear-gradient(135deg,#3a55ea,#22338f);
+  border-radius:3px;opacity:0;visibility:hidden;
+  box-shadow:0 8px 26px rgba(20,25,70,.5), inset 0 0 50px rgba(255,255,255,.10);
+  transition:transform 1s cubic-bezier(.62,.03,.12,1), opacity .7s, visibility 1s;
+  color:#eef1ff;padding:40px 30px;overflow:hidden;
+}
+.jacket .jl{font-family:var(--display);font-style:italic;font-size:14px;color:#dfe4ff;}
+.jacket .jt{font-family:var(--display);font-size:26px;margin-top:46px;line-height:1.05;}
+.jacket .jb{position:absolute;bottom:30px;left:30px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#c4ccff;}
+.jacket::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.16) 50%,transparent 60%);}
+.stage.show-jacket .jacket{opacity:1;visibility:visible;transform:translateZ(calc(var(--bd)/2 + 16px)) translateY(-4px);}
+
+.cinta{
+  position:absolute;left:-7px;bottom:74px;width:calc(var(--bw) + 14px);height:80px;
+  transform:translateZ(calc(var(--bd)/2 + 4px)) translateY(120px);
+  background:linear-gradient(180deg,#d24e34,var(--vermillion));
+  opacity:0;visibility:hidden;
+  box-shadow:0 4px 16px rgba(120,30,10,.4), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .9s cubic-bezier(.62,.03,.12,1), opacity .6s, visibility .9s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:#fff6ee;text-align:center;
+}
+.cinta .ct{font-family:var(--display);font-style:italic;font-size:16px;}
+.cinta .cs{font-size:9px;letter-spacing:.34em;text-transform:uppercase;margin-top:5px;opacity:.92;}
+.stage.show-cinta .cinta{opacity:1;visibility:visible;transform:translateZ(calc(var(--bd)/2 + 4px)) translateY(0);}
+
+/* PÁGINAS (miolo) ------------------------------------------------- */
+.page{
+  position:absolute;top:0;left:0;width:var(--bw);height:var(--bh);
+  background:var(--page);
+  border-radius:2px 4px 4px 2px;
+  padding:34px 30px 30px;
+  display:flex;flex-direction:column;
+  font-size:13.5px;line-height:1.6;color:var(--ink);
+  overflow:hidden;
+  box-shadow:inset 16px 0 30px -20px rgba(60,40,15,.5);
+}
+.right-page{transform:translateZ(calc(var(--bd)/2 - 4px));}
+.right-page::after,.leaf .page::after,.cover-inner::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(70,48,18,.16),transparent 12%);
+}
+.leaf{
+  position:absolute;top:0;left:0;width:var(--bw);height:var(--bh);
+  transform-style:preserve-3d;transform-origin:left center;
+  transform:translateZ(calc(var(--bd)/2 - 2px)) rotateY(0deg);
+  visibility:hidden;z-index:5;
+}
+.leaf .face2{position:absolute;inset:0;backface-visibility:hidden;}
+.leaf .lf-back{transform:rotateY(180deg);}
+.leaf .sheen{
+  position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.55),transparent 55%);
+}
+.leaf.flip-fwd{animation:flipFwd .92s cubic-bezier(.42,.05,.18,1) forwards;}
+.leaf.flip-bwd{transform-origin:right center;animation:flipBwd .92s cubic-bezier(.42,.05,.18,1) forwards;}
+@keyframes flipFwd{
+  0%{transform:translateZ(calc(var(--bd)/2 - 2px)) rotateY(0deg);}
+  50%{box-shadow:0 24px 40px rgba(40,25,10,.4);}
+  100%{transform:translateZ(calc(var(--bd)/2 - 2px)) rotateY(-180deg);}
+}
+@keyframes flipBwd{
+  0%{transform:translateZ(calc(var(--bd)/2 - 2px)) rotateY(0deg);}
+  50%{box-shadow:0 24px 40px rgba(40,25,10,.4);}
+  100%{transform:translateZ(calc(var(--bd)/2 - 2px)) rotateY(180deg);}
+}
+.leaf.flip-fwd .sheen{animation:sheenPulse .92s ease;}
+.leaf.flip-bwd .sheen{animation:sheenPulse .92s ease;}
+@keyframes sheenPulse{0%{opacity:0;}45%{opacity:.5;}100%{opacity:0;}}
+
+/* tipografia interna das páginas */
+.page .folio{position:absolute;left:0;right:0;bottom:16px;text-align:center;font-size:10px;color:var(--ink-faint);letter-spacing:.1em;}
+.page .runhead{text-align:center;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:auto;}
+.pp{margin:auto 0;}
+.pp-center{text-align:center;}
+.pp-title{font-family:var(--display);font-weight:500;font-size:24px;line-height:1.08;margin:0;}
+.pp-title em{font-style:italic;}
+.pp-sub{font-style:italic;color:var(--ink-soft);font-size:13px;margin-top:8px;}
+.pp-author{letter-spacing:.24em;text-transform:uppercase;font-size:11px;margin-top:26px;color:var(--ink);}
+.pp-ed{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint);}
+.pp-small{font-size:10px;line-height:1.65;color:var(--ink-soft);}
+.pp-rule{width:30px;height:1px;background:var(--ink-faint);margin:14px auto;}
+.pp h4{font-family:var(--display);font-weight:500;font-size:15px;margin:0 0 8px;}
+.pp p{margin:0 0 9px;}
+.dropcap::first-letter{font-family:var(--display);font-size:46px;line-height:.8;float:left;padding:6px 8px 0 0;color:var(--blue-deep);}
+.toc{list-style:none;padding:0;margin:0;font-size:12.5px;}
+.toc li{display:flex;align-items:baseline;gap:6px;margin:0 0 7px;}
+.toc .dots{flex:1;border-bottom:1px dotted var(--ink-faint);transform:translateY(-3px);}
+.toc .pg{color:var(--ink-soft);}
+.toc .part{font-style:italic;color:var(--blue-deep);margin-top:12px;}
+.cip{border:1px solid var(--ink-faint);padding:9px 11px;font-size:9px;line-height:1.55;color:var(--ink-soft);margin-top:14px;}
+.epi{font-style:italic;font-size:15px;line-height:1.7;max-width:210px;}
+.epi-attr{font-style:normal;font-size:11px;letter-spacing:.08em;color:var(--ink-soft);margin-top:14px;}
+.gloss dt{font-style:italic;font-weight:600;color:var(--blue-deep);}
+.gloss dd{margin:0 0 11px;font-size:12px;color:var(--ink-soft);}
+.part-divider{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;}
+.part-divider .pn{font-family:var(--display);font-style:italic;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);}
+.part-divider .pt{font-family:var(--display);font-size:30px;margin-top:12px;}
+
+/* LEGENDA --------------------------------------------------------- */
+.caption{
+  margin:18px 0 0;max-width:560px;width:100%;
+  border-top:1px solid var(--line);padding-top:18px;
+}
+.caption .eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);font-weight:600;}
+.caption h3{font-family:var(--display);font-weight:500;font-size:24px;margin:6px 0 8px;letter-spacing:-.01em;}
+.caption h3 .pair{color:var(--ink-faint);font-style:italic;font-size:18px;}
+.caption p{margin:0;font-size:14.5px;line-height:1.66;color:var(--ink-soft);max-width:54ch;}
+.caption.swap{animation:capIn .5s ease;}
+@keyframes capIn{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:none;}}
+
+.hint{margin-top:14px;font-style:italic;font-size:12px;color:var(--ink-faint);}
+
+/* lista de um lado, livro do outro — sempre. A lista rola por dentro,
+   nunca empurra o livro pra fora da vista. */
+@media (max-width:900px){
+  .layout{grid-template-columns:174px 1fr;gap:16px;padding:10px 14px 46px;}
+  .index{top:10px;max-height:78vh;overflow-y:auto;padding-right:12px;font-size:13px;
+    -webkit-overflow-scrolling:touch;}
+  .index .grp{margin-bottom:16px;}
+  .index button{font-size:13px;}
+  .stage{height:62vh;min-height:380px;}
+  .book{--bw:215px;--bh:316px;--bd:34px;}
+  .masthead{padding:22px 16px 4px;}
+  .caption{padding-top:14px;}
+  .caption h3{font-size:20px;}
+  .caption p{font-size:13.5px;}
+}
+@media (max-width:560px){
+  .layout{grid-template-columns:128px 1fr;gap:9px;padding:8px 9px 36px;}
+  .index{padding-right:8px;font-size:12px;max-height:74vh;}
+  .index .grp-h{font-size:8.5px;letter-spacing:.14em;gap:5px;}
+  .index .grp-h .num{font-size:12px;}
+  .index button{font-size:12px;padding:4px 0 4px 8px;line-height:1.18;}
+  .index button[aria-pressed="true"]{padding-left:11px;}
+  .stage{height:56vh;min-height:330px;}
+  .book{--bw:166px;--bh:244px;--bd:26px;}
+  .masthead .sub{font-size:12px;}
+  .hint{display:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">Em CSS · do papel à página</p>
+  <h1>A Anatomia do <em>Livro</em></h1>
+  <p class="sub">Toque numa parte. O livro gira para mostrar a face — ou se abre e folheia até a página.</p>
+</header>
+
+<div class="layout">
+
+  <nav class="index" id="index" aria-label="Partes do livro"></nav>
+
+  <section class="stagewrap">
+    <div class="stage" id="stage" data-view="capa">
+      <div class="floor-shadow"></div>
+      <div class="book" id="book">
+
+        <!-- faces fixas da caixa -->
+        <div class="face f-back">
+          <div class="label-back">Quarta capa</div>
+          <p class="syn">Numa vila tomada pela maré, uma cartógrafa desenha mapas de lugares que insiste em esquecer. Uma fábula sobre memória, território e perdão.</p>
+          <p class="quote">&ldquo;Uma prosa de rara delicadeza.&rdquo;<br>— Suplemento Literário</p>
+          <div class="isbn">
+            <div class="bars"></div>
+            <div class="isbnnum">9 786500 000009</div>
+          </div>
+        </div>
+        <div class="face f-spine">
+          <div class="spine-text">
+            <div class="t">A Cartografia do Esquecimento</div>
+            <div class="a">Helena Vasconcelos</div>
+            <div class="e">Margem</div>
+          </div>
+        </div>
+        <div class="face f-fore"></div>
+        <div class="face f-top"></div>
+        <div class="face f-bot"></div>
+
+        <!-- orelhas -->
+        <div class="orelha orelha-f">
+          <span class="oh">Orelha</span>
+          Em sua maré mais baixa, a vila revela os destroços de tudo o que tentou afundar. Helena Vasconcelos constrói um romance de fôlego sobre o que escolhemos lembrar.
+        </div>
+        <div class="orelha orelha-b">
+          <div class="photo"></div>
+          <span class="oh">A autora</span>
+          Helena Vasconcelos nasceu no litoral capixaba. Publicou contos e dois romances. Vive entre o mar e os mapas.
+        </div>
+
+        <!-- página esquerda (verso da capa) + página direita + folha que vira -->
+        <div class="page right-page" id="rightpage"></div>
+        <div class="leaf" id="leaf">
+          <div class="page face2 lf-front" id="leafFront"></div>
+          <div class="page face2 lf-back" id="leafBack"></div>
+          <div class="sheen"></div>
+        </div>
+
+        <!-- capa frontal com dobradiça -->
+        <div class="cover-front" id="coverFront">
+          <div class="cover-face cover-outer">
+            <div class="deco"></div>
+            <div class="glyph">~</div>
+            <div class="top">
+              <div class="ed">Editora Margem</div>
+              <h2 class="ttl">A Cartografia<br>do <em>Esquecimento</em></h2>
+              <div class="sub">romance</div>
+            </div>
+            <div class="auth">Helena Vasconcelos</div>
+          </div>
+          <div class="cover-face cover-inner page" id="leftpage"></div>
+        </div>
+
+        <!-- sobrecapa e cinta -->
+        <div class="jacket">
+          <div class="jl">sobrecapa</div>
+          <div class="jt">A Cartografia<br>do Esquecimento</div>
+          <div class="jb">Helena Vasconcelos</div>
+        </div>
+        <div class="cinta">
+          <div class="ct">Prêmio Jabuti 2025</div>
+          <div class="cs">finalista · romance</div>
+        </div>
+
+      </div>
+    </div>
+
+    <figure class="caption" id="caption">
+      <div class="eyebrow">O exterior</div>
+      <h3>Capa</h3>
+      <p>O rosto do livro.</p>
+    </figure>
+    <p class="hint">Dica: comece pela capa e siga a lista — ela percorre o livro inteiro, de fora para dentro.</p>
+  </section>
+
+</div>
+
+<script>
+/* ---------- conteúdo tipografado do miolo ---------- */
+const endpaper = `<div class="pp pp-center"><div class="pp-ed">Editora Margem</div><div class="pp-rule"></div></div>`;
+
+const PAGES = {
+ 'falsa-folha': `<div class="pp pp-center"><h1 class="pp-title">A Cartografia<br>do Esquecimento</h1></div>`,
+ 'folha-rosto': `<div class="pp pp-center">
+    <div class="pp-ed">Helena Vasconcelos</div>
+    <h1 class="pp-title" style="margin-top:30px">A Cartografia<br>do <em>Esquecimento</em></h1>
+    <div class="pp-sub">romance</div>
+    <div class="pp-rule"></div>
+    <div class="pp-ed">Editora Margem · São Paulo · 2025</div>
+  </div>`,
+ 'creditos': `<div class="pp pp-small">
+    <p>© 2025 Helena Vasconcelos<br>Todos os direitos reservados.</p>
+    <p>Revisão · Clara Bastos<br>Projeto gráfico · Estúdio Vereda<br>Capa · R. M. sobre fotografia de domínio público</p>
+    <p>1ª edição, 2025<br>ISBN 978-65-00000-00-9</p>
+    <div class="cip">Dados Internacionais de Catalogação na Publicação (CIP)<br>
+    V331c &nbsp; Vasconcelos, Helena<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;A cartografia do esquecimento / Helena Vasconcelos. — São Paulo : Margem, 2025.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;CDD 869.3</div>
+  </div>`,
+ 'dedicatoria': `<div class="pp pp-center" style="margin-top:34%"><p class="epi" style="margin:0 auto">Para Joana,<br>que conhecia todos<br>os caminhos de volta.</p></div>`,
+ 'epigrafe': `<div class="pp pp-center"><p class="epi" style="margin:0 auto">Esquecer também é uma<br>forma de cartografar:<br>marca-se com a ausência.</p><p class="epi-attr">— Aurélia Pina, <em>Cadernos do Litoral</em></p></div>`,
+ 'sumario': `<div class="pp" style="margin-top:8px"><div class="runhead">Sumário</div>
+    <ul class="toc">
+      <li class="part">Parte I — A maré baixa</li>
+      <li><span>1. O farol</span><span class="dots"></span><span class="pg">11</span></li>
+      <li><span>2. Cartas de marear</span><span class="dots"></span><span class="pg">29</span></li>
+      <li class="part">Parte II — O território</li>
+      <li><span>3. A vila submersa</span><span class="dots"></span><span class="pg">63</span></li>
+      <li><span>4. Nomes que a água levou</span><span class="dots"></span><span class="pg">88</span></li>
+      <li class="part">&nbsp;</li>
+      <li><span>Epílogo</span><span class="dots"></span><span class="pg">211</span></li>
+      <li><span>Colofão</span><span class="dots"></span><span class="pg">224</span></li>
+    </ul></div>`,
+ 'prefacio': `<div class="pp"><div class="runhead">Prefácio</div>
+    <h4>Os mapas do invisível</h4>
+    <p>Há livros que se leem com os olhos e há livros que se leem com a memória. Este é dos segundos.</p>
+    <p>Conheci Helena quando ambos procurávamos, em arquivos esquecidos, o nome de uma vila que nenhum mapa registrava.</p>
+    <p style="font-style:italic;text-align:right">— Antônio Sarmento</p></div>`,
+ 'prologo': `<div class="pp"><div class="runhead">Prólogo</div>
+    <p class="dropcap">A maré recuou três metros além do normal naquela manhã, e a vila amanheceu mostrando o que havia décadas escondia sob a água parada.</p>
+    <p>Joana desceu até a linha úmida com o caderno debaixo do braço, como quem vai reconhecer um corpo.</p></div>`,
+ 'capitulos': `<div class="part-divider">
+    <div class="pn">Parte I</div>
+    <div class="pt">A Maré Baixa</div>
+    <div class="pp-rule" style="margin-top:22px"></div>
+    <p class="pp-small" style="margin-top:18px;text-align:center">1 · O farol</p>
+  </div>`,
+ 'epilogo': `<div class="pp"><div class="runhead">Epílogo</div>
+    <p class="dropcap">Anos depois, quando perguntavam pela vila, ela apenas desdobrava o mapa sobre a mesa e apontava o ponto onde o mar havia, enfim, devolvido tudo.</p>
+    <p>Não havia mais nada a esquecer. Era a primeira vez que se sentia em casa.</p></div>`,
+ 'posfacio': `<div class="pp"><div class="runhead">Posfácio</div>
+    <h4>Notas sobre a água</h4>
+    <p>Escrevi este livro durante três invernos, ouvindo o mesmo trecho de mar. Cada capítulo nasceu de um mapa real que não correspondia a lugar nenhum.</p>
+    <p style="font-style:italic;text-align:right">— H. V., outono de 2025</p></div>`,
+ 'agradecimentos': `<div class="pp"><div class="runhead">Agradecimentos</div>
+    <p>A Clara, primeira leitora de tudo. À equipe da Margem, pela paciência editorial. Aos pescadores de Regência, que me emprestaram nomes e silêncios.</p>
+    <p>E a você, que chegou até esta página.</p></div>`,
+ 'bibliografia': `<div class="pp pp-small"><div class="runhead">Referências</div>
+    <p>ANDRADE, M. <em>Geografias afetivas</em>. São Paulo: Margem, 2019.</p>
+    <p>PINA, A. <em>Cadernos do Litoral</em>. Vitória: Maré, 1974.</p>
+    <p>SARMENTO, A. &ldquo;Vilas submersas do Espírito Santo&rdquo;. <em>Revista de História</em>, n. 42, 2003.</p></div>`,
+ 'glossario': `<div class="pp"><div class="runhead">Glossário</div>
+    <dl class="gloss">
+      <dt>marejar</dt><dd>encher-se de água, dito do olho e da terra.</dd>
+      <dt>lote corredor</dt><dd>terreno estreito e longo, comum no litoral.</dd>
+      <dt>derrota</dt><dd>na náutica, o rumo planejado de uma viagem.</dd>
+    </dl></div>`,
+ 'sobre-autor': `<div class="pp"><div class="runhead">Sobre a autora</div>
+    <div style="width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#b9a888,#6d6149);margin:0 auto 14px"></div>
+    <p style="text-align:center">Helena Vasconcelos nasceu no litoral capixaba em 1981. É formada em Letras e trabalhou como revisora antes de publicar seu primeiro livro de contos.</p>
+    <p class="pp-small" style="text-align:center">helenavasconcelos.com.br · @helena.mar</p></div>`,
+ 'colofao': `<div class="pp pp-center"><div class="pp-rule"></div>
+    <p class="pp-small" style="max-width:200px;margin:0 auto">Este livro foi composto nas tipografias <em>Fraunces</em> e <em>Spectral</em>, e impresso em papel pólen soft 80g, no inverno de 2025, para a Editora Margem.</p>
+    <div class="pp-rule"></div>
+    <div class="pp-ed">colofão</div></div>`
+};
+
+/* ---------- definição das partes ---------- */
+const SECTIONS = [
+ { n:'1', title:'O exterior', items:[
+   ['capa','Capa','Primeira capa','O rosto do livro. Traz o título, o subtítulo, o nome do autor e a logomarca da editora — a primeira impressão de quem o segura.'],
+   ['lombada','Lombada','Exterior','A lateral visível na estante. Contém título, autor e editora; sua espessura depende do número de páginas.'],
+   ['contracapa','Contracapa','Quarta capa','A parte de trás. Costuma trazer sinopse, um trecho instigante, aspas da crítica e o código de barras com o ISBN.'],
+   ['orelha1','Orelha (frente)','Exterior','Dobra da capa para dentro. A primeira orelha costuma trazer um resumo expandido da obra.'],
+   ['orelha2','Orelha (verso)','Exterior','A segunda orelha traz uma minibiografia do autor, geralmente com foto.'],
+   ['sobrecapa','Sobrecapa','Jacket','Capa de papel solta que envolve o livro — comum em edições de capa dura, protege e decora a capa por baixo.'],
+   ['cinta','Cinta','Exterior','Faixa de papel que envolve o livro para destacar um prêmio, uma adaptação ou uma frase de impacto.'],
+ ]},
+ { n:'2', title:'Pré-textuais · front matter', items:[
+   ['falsa-folha','Falsa folha de rosto','Pré-textual','A primeira página impressa: apenas o título centralizado, sem mais nada.'],
+   ['folha-rosto','Folha de rosto','Pré-textual','A certidão de nascimento interna. Título, subtítulo, autor, tradutor, edição, editora e ano.'],
+   ['creditos','Créditos · ficha','Pré-textual','No verso da folha de rosto: copyright, equipe técnica, ISBN e a ficha catalográfica (CIP), essencial para bibliotecas.'],
+   ['dedicatoria','Dedicatória','Pré-textual','Uma frase curta dedicando o livro a alguém. Fica sempre em página ímpar.'],
+   ['epigrafe','Epígrafe','Pré-textual','Uma citação que dita o tom da obra que se inicia.'],
+   ['sumario','Sumário','Pré-textual','A lista de partes e capítulos com suas páginas.'],
+   ['prefacio','Prefácio','Pré-textual','Texto introdutório, em geral escrito por um convidado — não pelo próprio autor.'],
+ ]},
+ { n:'3', title:'Textuais · o miolo', items:[
+   ['prologo','Prólogo','Textual','Contextualiza a história antes do primeiro capítulo (na ficção) ou explica o propósito da obra (na não ficção).'],
+   ['capitulos','Partes e capítulos','Textual','A divisão principal do texto. Capítulos podem se agrupar em grandes Partes; cada capítulo começa em página nova.'],
+   ['epilogo','Epílogo','Textual','Capítulo final: mostra as consequências, um salto no tempo ou o fechamento das pontas soltas após o clímax.'],
+ ]},
+ { n:'4', title:'Pós-textuais · back matter', items:[
+   ['posfacio','Posfácio','Pós-textual','Texto de encerramento, do autor ou de um convidado, com reflexões sobre a obra ou seu processo de criação.'],
+   ['agradecimentos','Agradecimentos','Pós-textual','O espaço para agradecer a quem ajudou a criar e publicar o livro.'],
+   ['bibliografia','Bibliografia','Pós-textual','As referências consultadas — obrigatórias em obras técnicas, acadêmicas ou de pesquisa.'],
+   ['glossario','Glossário · apêndice','Pós-textual','Listas de termos específicos (comuns na fantasia) ou documentos extras que complementam a leitura.'],
+   ['sobre-autor','Sobre o autor','Pós-textual','Uma biografia mais completa, com redes sociais e site.'],
+   ['colofao','Colofão','Pós-textual','A última página impressa: a nota técnica da gráfica — tipografia, papel e onde o livro foi feito.'],
+ ]},
+];
+
+/* ordem sequencial do miolo, para a virada de página */
+const ORDER = Object.keys(PAGES);
+const META = {};
+SECTIONS.forEach(s=>s.items.forEach(it=>{
+  META[it[0]] = {name:it[1], section:s.title, sectionN:s.n, desc:it[3],
+                 interior: ORDER.includes(it[0])};
+}));
+
+/* ---------- construir índice ---------- */
+const index = document.getElementById('index');
+SECTIONS.forEach(s=>{
+  const g=document.createElement('div');g.className='grp';
+  g.innerHTML=`<div class="grp-h"><span class="num">${s.n}</span>${s.title.split(' · ')[0]}</div>`;
+  s.items.forEach(it=>{
+    const b=document.createElement('button');
+    b.textContent=it[1];b.dataset.id=it[0];b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',()=>select(it[0]));
+    g.appendChild(b);
+  });
+  index.appendChild(g);
+});
+
+/* ---------- elementos ---------- */
+const stage=document.getElementById('stage');
+const caption=document.getElementById('caption');
+const rightpage=document.getElementById('rightpage');
+const leftpage=document.getElementById('leftpage');
+const leaf=document.getElementById('leaf');
+const leafFront=document.getElementById('leafFront');
+const leafBack=document.getElementById('leafBack');
+
+let isOpen=false;
+let curIndex=null;     // índice atual no ORDER quando aberto
+let animating=false;
+
+const EXT_VIEWS={capa:'capa',lombada:'lombada',contracapa:'contracapa',
+                 orelha1:'orelha1',orelha2:'orelha2',sobrecapa:'capa',cinta:'capa'};
+
+function setActive(id){
+  document.querySelectorAll('.index button').forEach(b=>{
+    b.setAttribute('aria-pressed', b.dataset.id===id ? 'true':'false');
+  });
+}
+function setCaption(id){
+  const m=META[id];
+  caption.innerHTML=`<div class="eyebrow">${m.section}</div>
+     <h3>${m.name}</h3><p>${m.desc}</p>`;
+  caption.classList.remove('swap');void caption.offsetWidth;caption.classList.add('swap');
+}
+
+function renderSpread(i){
+  rightpage.innerHTML = PAGES[ORDER[i]];
+  leftpage.innerHTML  = i>0 ? PAGES[ORDER[i-1]] : endpaper;
+}
+
+function closeForExterior(id){
+  isOpen=false;curIndex=null;
+  stage.classList.remove('is-open');
+  stage.dataset.view=EXT_VIEWS[id];
+  stage.classList.toggle('show-jacket', id==='sobrecapa');
+  stage.classList.toggle('show-cinta',  id==='cinta');
+}
+
+function openTo(target){
+  stage.classList.remove('show-jacket','show-cinta');
+  stage.dataset.view='capa';
+  if(!isOpen){
+    isOpen=true;
+    renderSpread(target);
+    curIndex=target;
+    // pequena espera para a capa abrir, depois revela
+    requestAnimationFrame(()=>stage.classList.add('is-open'));
+    return;
+  }
+  if(target===curIndex) return;
+  flipTo(target);
+}
+
+function flipTo(target){
+  if(animating){ // se ainda animando, salta direto
+    renderSpread(target);curIndex=target;return;
+  }
+  const forward = target>curIndex;
+  animating=true;
+  if(forward){
+    leafFront.innerHTML = PAGES[ORDER[curIndex]];          // página direita atual
+    leafBack.innerHTML  = target-1>=0 ? PAGES[ORDER[target-1]] : endpaper;
+    renderSpread(target);                                   // sob a folha: destino
+    leaf.className='leaf';void leaf.offsetWidth;
+    leaf.style.visibility='visible';
+    leaf.classList.add('flip-fwd');
+  }else{
+    leafFront.innerHTML = curIndex-1>=0 ? PAGES[ORDER[curIndex-1]] : endpaper; // página esquerda atual
+    leafBack.innerHTML  = PAGES[ORDER[target]];
+    renderSpread(target);
+    leaf.className='leaf';void leaf.offsetWidth;
+    leaf.style.visibility='visible';
+    leaf.classList.add('flip-bwd');
+  }
+  curIndex=target;
+}
+leaf.addEventListener('animationend',()=>{
+  leaf.style.visibility='hidden';
+  leaf.className='leaf';
+  animating=false;
+});
+
+function select(id){
+  setActive(id);
+  setCaption(id);
+  const m=META[id];
+  if(m.interior){
+    openTo(ORDER.indexOf(id));
+  }else{
+    closeForExterior(id);
+  }
+}
+
+/* estado inicial */
+select('capa');
+</script>
+</body>
+</html>
