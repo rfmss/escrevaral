@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v432";
-const ASSET_VERSION = "20260603-editorial-css";
+const CACHE_NAME = "vereda-offline-v434";
+const ASSET_VERSION = "20260603-audio-panel";
 
 const CORE_ASSETS = [
   "./",

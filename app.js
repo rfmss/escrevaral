@@ -2698,13 +2698,35 @@ function initAudioPlayer() {
 function toggleAudioPanel() {
   const panel = document.getElementById("audio-player-panel");
   if (!panel) return;
-  panel.hidden = !panel.hidden;
-  document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", String(!panel.hidden));
-  // T13: esconde label "Sons" após primeiro uso
-  if (!localStorage.getItem("vrda-audio-seen")) {
-    localStorage.setItem("vrda-audio-seen", "1");
-    document.querySelector(".topbar-audio-btn")?.classList.add("audio-seen");
+  const isOpen = !panel.hidden;
+  if (isOpen) {
+    panel.hidden = true;
+    document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", "false");
+    return;
   }
+  // Posiciona sob o botão que disparou
+  const btn = document.querySelector('.topbar-audio-btn');
+  if (btn) {
+    const rect = btn.getBoundingClientRect();
+    const panelW = 240;
+    let left = rect.left;
+    if (left + panelW > window.innerWidth - 8) left = window.innerWidth - panelW - 8;
+    if (left < 8) left = 8;
+    panel.style.left = left + "px";
+    panel.style.top  = (rect.bottom + 4) + "px";
+  }
+  panel.hidden = false;
+  document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", "true");
+
+  // Fecha ao clicar fora
+  function _outsideClick(e) {
+    if (!panel.contains(e.target) && !e.target.closest('.topbar-audio-btn')) {
+      panel.hidden = true;
+      document.querySelector('.topbar [data-action="toggle-audio-player"]')?.setAttribute("aria-pressed", "false");
+      document.removeEventListener("mousedown", _outsideClick, true);
+    }
+  }
+  setTimeout(() => document.addEventListener("mousedown", _outsideClick, true), 50);
 }
 
 function _toggleTypewriterSound() {
@@ -2965,10 +2987,6 @@ function renderSidebarQuote() {
 }
 
 function _bootstrap() {
-  // T13: restaurar estado "audio já visto"
-  if (localStorage.getItem("vrda-audio-seen")) {
-    document.querySelector(".topbar-audio-btn")?.classList.add("audio-seen");
-  }
   _verifyControllers();
   hideDecorativeMaterialIcons();
   materialIconObserver.observe(document.body, { childList: true, subtree: true });

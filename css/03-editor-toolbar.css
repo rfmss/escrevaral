@@ -34,15 +34,16 @@
 .audio-panel[hidden] { display: none; }
 .audio-panel {
   position: fixed;
-  top: 52px;
+  top: 54px;
   left: 60px;
-  width: 224px;
+  width: 240px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-  z-index: 90;
+  z-index: 200;
   padding: 12px;
+  overflow: hidden;
 }
 
 .audio-panel-header {

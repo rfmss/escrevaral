@@ -168,7 +168,7 @@ document.addEventListener("selectionchange", () => {
     const texto = sel?.toString().trim() || "";
     const palavras = texto.split(/\s+/).filter(Boolean).length;
 
-    if (palavras >= 3 && writingArea?.contains(sel?.anchorNode)) {
+    if (palavras >= 3 && writingArea?.contains(sel?.anchorNode) && !(texto.startsWith("(") && texto.endsWith(")"))) {
       if (!syntaxTokensEl || !syntaxSummaryEl || !syntaxPanel) return;
       if (window.syntaxEngine?._hasLoadError?.()) {
         syntaxTokensEl.innerHTML = `<span class="syntax-empty">Dados sintáticos não carregados. Recarregue a página.</span>`;
