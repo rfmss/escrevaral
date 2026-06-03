@@ -3239,9 +3239,9 @@ mark {
 }
 .ob-cm-legenda::after { content: ""; animation: obCmTexto 9s infinite; }
 
-.ob-cm-escreva  { animation: obCmFade 9s infinite 0s; }
-.ob-cm-prove    { animation: obCmFade 9s infinite 3s; }
-.ob-cm-publique { animation: obCmFade 9s infinite 6s; }
+.ob-cm-escreva  { animation: obCmFade 5s infinite 0s; }
+.ob-cm-prove    { animation: obCmFade 5s infinite 1.66s; }
+.ob-cm-publique { animation: obCmFade 5s infinite 3.33s; }
 
 @keyframes obCmFade {
   0%, 5%      { opacity: 0; transform: translateY(6px) scale(0.9); }
