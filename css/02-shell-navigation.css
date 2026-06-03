@@ -2976,7 +2976,7 @@ mark {
 .biblia-quick-btn .material-symbols-outlined { font-size: 13px; }
 
 /* ── ONBOARDING UNIFICADO ──────────────────────────── */
-.ob-overlay { align-items: center; justify-content: center; }
+.ob-overlay { align-items: flex-start; justify-content: center; overflow-y: auto; padding: 24px 0; }
 .ob-panel {
   width: min(480px, calc(100vw - 32px));
   padding: 40px 32px 32px;
@@ -2986,6 +2986,7 @@ mark {
   display: flex;
   flex-direction: column;
   gap: 0;
+  margin: auto;
 }
 .ob-logo {
   font-size: 12px;
