@@ -142,6 +142,7 @@ Critérios de aceite visual:
 | Estado global | `state-store.js` |  
 | Estilos | `styles.css` → `@import css/*.css` |
 | Service worker | `service-worker.js` |
+| Anatomia do livro | `anatomia-do-livro.html` — visualizador interativo do livro físico (capa, miolo, pré-texto, texto, pós-texto). Embeddado na Academia, seção Objeto Livro. Arquivo standalone com CSS/JS próprios. Não altera `index.html`. |
 
 **Engines de linguagem** (carregam antes do app.js, nesta ordem):
 ```
