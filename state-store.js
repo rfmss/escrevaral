@@ -339,7 +339,7 @@ function loadState() {
     };
   } catch {
     return {
-      activeId: starterManuscripts[0].id,
+      activeId: starterManuscripts[0]?.id ?? null,
       manuscripts: starterManuscripts,
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
