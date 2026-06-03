@@ -2950,6 +2950,20 @@ function _verifyControllers() {
   }
 }
 
+function renderSidebarQuote() {
+  const el = document.querySelector("[data-sidebar-quote]");
+  const textEl   = document.querySelector("[data-sq-text]");
+  const authorEl = document.querySelector("[data-sq-author]");
+  if (!el || !textEl || !authorEl) return;
+  const quotes = window.EscrevaralQuotes;
+  if (!quotes?.length) return;
+  // Frase diferente da exibida no editor (offset +1)
+  const idx = (Math.floor(Date.now() / 86400000) + 1) % quotes.length;
+  const q = quotes[idx];
+  textEl.textContent   = `"${q.q}"`;
+  authorEl.textContent = `— ${q.a}`;
+}
+
 function _bootstrap() {
   // T13: restaurar estado "audio já visto"
   if (localStorage.getItem("vrda-audio-seen")) {
@@ -2984,6 +2998,7 @@ function _bootstrap() {
   registerOfflineApp();
   initializeFilesystemBackup();
   checkTerms();
+  setTimeout(renderSidebarQuote, 500);
   checkFirstVisit();
 
   // Retroativo: se há notas sem folha-em-branco, conceder silenciosamente na primeira nota raiz
