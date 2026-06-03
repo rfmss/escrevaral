@@ -31,6 +31,7 @@
   border-radius: 20px;
   line-height: 1.6;
   flex-shrink: 0;
+  pointer-events: none; user-select: none;
 }
 .voice-health-score small {
   font-size: 9px;
@@ -276,6 +277,7 @@
   border-radius: 12px;
   font-size: 12px;
   font-weight: 600;
+  pointer-events: none;
 }
 .rimalab-finder {
   margin: 12px 0 8px;
@@ -398,6 +400,7 @@
   font-weight: 900;
   letter-spacing: 0.06em;
   
+  pointer-events: none; user-select: none;
 }
 
 .rimalab-rhyme-badge.is-rica,
@@ -634,6 +637,7 @@
   padding: 3px 8px;
   font-size: 11px;
   font-weight: 900;
+  pointer-events: none; user-select: none;
 }
 
 .decolonial-alert.is-contextual {
@@ -767,6 +771,7 @@
   padding: 3px 8px;
   font-size: 11px;
   font-weight: 900;
+  pointer-events: none; user-select: none;
 }
 
 .decolonial-alternatives {
@@ -1082,6 +1087,7 @@
   padding: 1px 5px;
   margin-left: 4px;
   vertical-align: middle;
+  pointer-events: none; user-select: none;
 }
 
 .rights-sources {

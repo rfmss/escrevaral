@@ -1235,6 +1235,7 @@ html {
   border-radius: 3px;
   padding: 1px 5px;
   line-height: 1.6;
+  pointer-events: none; user-select: none;
 }
 .create-tpl-row--recommended {
   border-left: 3px solid var(--primary);
@@ -1840,6 +1841,7 @@ html {
   background: color-mix(in srgb, var(--primary) 10%, var(--surface));
   color: var(--primary);
   white-space: nowrap;
+  pointer-events: none; user-select: none;
 }
 .inspector-voice-label {
   font-size: 11.5px;

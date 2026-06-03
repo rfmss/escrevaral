@@ -888,6 +888,7 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  pointer-events: none; user-select: none;
 }
 
 .voice-metrics {
