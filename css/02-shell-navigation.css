@@ -3108,3 +3108,67 @@ mark {
   color: var(--muted);
   line-height: 1.5;
 }
+
+/* ── CARD ANIMADO SIDEBAR — Escreva · Prove · Publique ── */
+.sidebar-card-metas {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background: var(--surface-low);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: none;
+  user-select: none;
+}
+.scm-icon-wrap {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+.scm-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--primary);
+  opacity: 0;
+}
+.scm-legenda {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.scm-legenda::after { content: ""; animation: scmTexto 9s infinite; }
+
+/* Blueprint canônico — 9s loop, 3s por pilar */
+.scm-escreva  { animation: scmFade 9s infinite 0s; }
+.scm-prove    { animation: scmFade 9s infinite 3s; }
+.scm-publique { animation: scmFade 9s infinite 6s; }
+
+@keyframes scmFade {
+  0%, 5%      { opacity: 0; transform: translateY(6px) scale(0.9); }
+  10%, 25%    { opacity: 1; transform: translateY(0) scale(1); }
+  30%, 33.33% { opacity: 0; transform: translateY(-6px) scale(0.9); }
+  100%        { opacity: 0; }
+}
+@keyframes scmTexto {
+  0%, 30%     { content: "Escreva"; }
+  33.33%, 63% { content: "Prove"; }
+  66.66%, 96% { content: "Publique"; }
+  100%        { content: "Escreva"; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scm-escreva, .scm-prove, .scm-publique { animation: none; }
+  .scm-escreva { opacity: 1; }
+  .scm-legenda::after { content: "Escreva · Prove · Publique"; animation: none; }
+}
