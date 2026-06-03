@@ -697,7 +697,13 @@ function acceptTerms(goTo) {
   if (goTo === "blank") {
     openCreateNote();
   } else if (goTo === "guide") {
-    setView("academia", { updateRoute: true });
+    // Abre o modal de seleção de gênero/modelo, não a Academia de ferramentas
+    openCreateNote();
+    // Pré-seleciona a categoria Ficção (Romance, Fantasia, Suspense) como sugestão
+    requestAnimationFrame(() => {
+      const ficaoBtn = document.querySelector('[data-create-category="ficcao"]');
+      if (ficaoBtn) ficaoBtn.click();
+    });
   } else if (goTo === "continue") {
     // Vai direto para o editor com o manuscrito mais recente
     if (state.manuscripts.length > 0) {
