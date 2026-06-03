@@ -1850,6 +1850,15 @@ const ACTION_HANDLERS = {
   "create-from-reference-template": () => createFromReferenceTemplate(),
   "create-step-back":        () => createNoteParentId ? closeCreateNote() : renderCreateNoteStep(1),
   "add-companion-note":      (_, t) => openAddCompanionNote(t?.dataset?.bibliaType),
+  "toggle-fichas":           (_, t) => {
+    const msId = t?.dataset?.fichasMs;
+    if (!msId) return;
+    if (!state.ui) state.ui = {};
+    if (!state.ui.fichasCollapsed) state.ui.fichasCollapsed = {};
+    state.ui.fichasCollapsed[msId] = !state.ui.fichasCollapsed[msId];
+    persistState("Fichas recolhidas");
+    renderManuscriptNavigation();
+  },
   "accept-terms-blank":      () => acceptTerms("blank"),
   "accept-terms-guide":      () => acceptTerms("guide"),
   "accept-terms-continue":   () => acceptTerms("continue"),

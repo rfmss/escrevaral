@@ -15,14 +15,16 @@ function renderManuscriptNavigation() {
     const isActive = manuscript.id === state.activeId;
     const companions = state.manuscripts.filter((m) => m.parentId === manuscript.id);
 
-    // Tipos de ficha da Bíblia (ícone + tipo + label curta para botões rápidos)
-    const BIBLIA_QUICK = [
+    // Tipos de fichas (ícone + tipo + label curta para botões rápidos)
+    const FICHAS_QUICK = [
       { id: "personagem", icon: "person_edit",  label: "Personagem" },
       { id: "mundo",      icon: "public",        label: "Mundo" },
       { id: "lugar",      icon: "location_on",   label: "Lugar" },
       { id: "cronologia", icon: "timeline",      label: "Cronologia" },
       { id: "objeto",     icon: "category",      label: "Objeto" },
     ];
+
+    const fichасCollapsed = state.ui?.fichasCollapsed?.[manuscript.id] ?? false;
 
     const companionHtml = isActive ? (() => {
       const companionItems = companions.map((c) => {
@@ -32,17 +34,23 @@ function renderManuscriptNavigation() {
           <span class="material-symbols-outlined">${ct.icon}</span>${escapeHtml(c.title || "Sem título")}</button>`;
       }).join("");
 
-      const quickBtns = BIBLIA_QUICK.map(b =>
-        `<button class="biblia-quick-btn" data-action="add-companion-note" data-biblia-type="${b.id}" title="Nova ficha de ${b.label}">
+      const quickBtns = FICHAS_QUICK.map(b =>
+        `<button class="biblia-quick-btn" data-action="add-companion-note" data-biblia-type="${b.id}" title="Nova ficha: ${b.label}">
           <span class="material-symbols-outlined">${b.icon}</span>${b.label}</button>`
       ).join("");
 
+      const collapsedClass = fichасCollapsed ? " fichas-collapsed" : "";
       return `${companionItems}
-        <div class="biblia-section">
-          <span class="biblia-section-label">Fichas da Bíblia</span>
-          <div class="biblia-quick-row">${quickBtns}</div>
-          <button class="tree-row companion-add-row" data-action="add-companion-note" title="Outra ficha de projeto">
-            <span class="material-symbols-outlined">more_horiz</span>Outras fichas</button>
+        <div class="fichas-section${collapsedClass}" data-fichas-section="${manuscript.id}">
+          <button class="fichas-section-toggle" data-action="toggle-fichas" data-fichas-ms="${manuscript.id}" title="${fichасCollapsed ? "Expandir fichas" : "Recolher fichas"}">
+            <span class="fichas-section-label">Fichas</span>
+            <span class="material-symbols-outlined fichas-chevron">expand_more</span>
+          </button>
+          <div class="fichas-body">
+            <div class="biblia-quick-row">${quickBtns}</div>
+            <button class="tree-row companion-add-row" data-action="add-companion-note" title="Outra ficha">
+              <span class="material-symbols-outlined">more_horiz</span>Outras fichas</button>
+          </div>
         </div>`;
     })() : "";
 

@@ -2894,6 +2894,44 @@ mark {
 }
 
 /* ── BÍBLIA DO PROJETO — fichas no sidebar ─────────── */
+/* ── FICHAS — grupo colapsável no sidebar ─────────── */
+.fichas-section {
+  border-top: 1px solid var(--line);
+  margin-top: 2px;
+}
+.fichas-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 10px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+.fichas-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.fichas-chevron {
+  font-size: 14px;
+  color: var(--muted);
+  transition: transform var(--motion-quick);
+}
+.fichas-collapsed .fichas-chevron { transform: rotate(-90deg); }
+.fichas-body {
+  padding: 0 10px 4px;
+  overflow: hidden;
+  transition: max-height var(--motion-calm);
+}
+.fichas-collapsed .fichas-body {
+  display: none;
+}
+/* Legado biblia-section → fichas-section */
 .biblia-section {
   padding: 6px 10px 4px;
   border-top: 1px solid var(--line);
