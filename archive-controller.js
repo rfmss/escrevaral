@@ -547,7 +547,7 @@ function getArchiveType(manuscript) {
 }
 
 function getChecklistProgress(manuscript) {
-  if (!manuscript.templateId) {
+  if (!manuscript?.id || !manuscript.templateId) {
     return null;
   }
 
