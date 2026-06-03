@@ -268,3 +268,29 @@
 .app-shell.is-page-mode .title-block {
   display: none;
 }
+
+/* ── FRASE DE AUTOR — abaixo do editor vazio ──── */
+.editor-quote {
+  margin: 48px 0 32px;
+  padding: 0 4px;
+  text-align: center;
+}
+.editor-quote[hidden] { display: none; }
+.editor-quote-text {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0 0 10px;
+  quotes: none;
+}
+.editor-quote-author {
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.editor-quote-ref { display: none; }

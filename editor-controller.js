@@ -606,12 +606,34 @@ function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.t
   if (literary) {
     writingArea.dataset.placeholder = literary;
     writingArea.dataset.placeholderIsExample = "true";
-    return;
+  } else {
+    const kind = getActiveManuscript()?.kind;
+    const byKind = placeholderByKind(kind);
+    writingArea.dataset.placeholder = byKind || "Comece aqui. A primeira frase abre o caminho.";
+    writingArea.dataset.placeholderIsExample = byKind ? "true" : "";
   }
-  const kind = getActiveManuscript()?.kind;
-  const byKind = placeholderByKind(kind);
-  writingArea.dataset.placeholder = byKind || "Comece aqui. A primeira frase abre o caminho.";
-  writingArea.dataset.placeholderIsExample = byKind ? "true" : "";
+  updateEditorQuote();
+}
+
+function updateEditorQuote() {
+  const quoteEl    = document.querySelector("[data-editor-quote]");
+  const textEl     = document.querySelector("[data-editor-quote-text]");
+  const authorEl   = document.querySelector("[data-editor-quote-author]");
+  if (!quoteEl || !textEl || !authorEl) return;
+
+  const isEmpty = !writingArea.innerText?.trim();
+  const isSpecialized = specializedEditor && !specializedEditor.hidden;
+  quoteEl.hidden = !isEmpty || isSpecialized;
+
+  if (!isEmpty || isSpecialized) return;
+
+  // Escolhe frase pelo índice do dia para variar mas ser estável no dia
+  const quotes = window.EscrevaralQuotes;
+  if (!quotes?.length) return;
+  const idx = Math.floor(Date.now() / 86400000) % quotes.length;
+  const q   = quotes[idx];
+  textEl.textContent   = `"${q.q}"`;
+  authorEl.textContent = `— ${q.a}`;
 }
 
 function insertPlainTextAtSelection(text) {
