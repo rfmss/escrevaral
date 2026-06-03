@@ -236,3 +236,28 @@
     overflow: visible;
   }
 }
+
+/* ── FIM DE FOLHA — barreira visual e bloqueio ──── */
+[data-enem-sheet][data-enem-full="true"] .enem-body::after {
+  content: "fim da folha";
+  display: block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sienna);
+  opacity: 0.5;
+  padding: 6px 0 2px;
+  border-top: 1.5px dashed var(--sienna);
+  margin-top: 4px;
+}
+
+/* Animação de bloqueio ao tentar ultrapassar */
+.enem-at-limit .enem-body {
+  animation: enemLimitPulse 0.35s ease 2;
+}
+@keyframes enemLimitPulse {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 0 2px color-mix(in srgb, var(--sienna) 40%, transparent) inset; }
+}

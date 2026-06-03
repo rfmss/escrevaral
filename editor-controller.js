@@ -106,7 +106,25 @@ function renderSpecializedEditor(manuscript) {
     writingArea.hidden = true;
     specializedEditor.hidden = false;
     specializedEditor.innerHTML = buildENEMEditor(manuscript.text, template);
-    requestAnimationFrame(() => updateENEMCounter());
+    requestAnimationFrame(() => {
+      updateENEMCounter();
+      // Bloqueia Enter quando no limite de 30 linhas
+      const enemArea = specializedEditor.querySelector("[data-enem-area]");
+      if (enemArea) {
+        enemArea.addEventListener("keydown", (e) => {
+          if (e.key !== "Enter") return;
+          const sheet = specializedEditor.querySelector("[data-enem-sheet]");
+          if (sheet?.dataset.enemFull === "true") {
+            e.preventDefault();
+            // Feedback visual: pulsa a borda inferior
+            sheet.classList.remove("enem-at-limit");
+            void sheet.offsetWidth; // força reflow para reiniciar animação
+            sheet.classList.add("enem-at-limit");
+            setTimeout(() => sheet.classList.remove("enem-at-limit"), 700);
+          }
+        });
+      }
+    });
   } else {
     writingArea.hidden = false;
     specializedEditor.hidden = true;

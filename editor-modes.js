@@ -379,4 +379,8 @@ function updateENEMCounter() {
   if (placeholder) {
     placeholder.classList.toggle("enem-placeholder-hidden", !isEmpty);
   }
+
+  // Indica fim de folha no sheet
+  const sheet = document.querySelector("[data-enem-sheet]");
+  if (sheet) sheet.dataset.enemFull = (count >= ENEM_TOTAL_LINES) ? "true" : "";
 }
