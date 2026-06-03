@@ -2976,10 +2976,15 @@ mark {
 .biblia-quick-btn .material-symbols-outlined { font-size: 13px; }
 
 /* ── ONBOARDING UNIFICADO ──────────────────────────── */
-.ob-overlay { align-items: flex-start; justify-content: center; overflow-y: auto; padding: 24px 0; }
+.ob-overlay {
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 24px 16px;
+}
 .ob-panel {
   width: min(480px, calc(100vw - 32px));
-  padding: 40px 32px 32px;
+  padding: 36px 32px 32px;
   background: var(--card);
   border-radius: 16px;
   box-shadow: 0 24px 64px rgba(0,0,0,0.14);
@@ -2988,13 +2993,27 @@ mark {
   gap: 0;
   margin: auto;
 }
+@media (max-width: 540px) {
+  .ob-panel { padding: 28px 20px 24px; border-radius: 12px; }
+}
+.ob-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.ob-brand-mark {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
 .ob-logo {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0 0 28px;
+  margin: 0;
 }
 .ob-headline {
   font-family: "Noto Serif", Georgia, serif;

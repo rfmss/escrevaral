@@ -695,7 +695,8 @@ function acceptTerms(goTo) {
   localStorage.setItem(FIRST_VISIT_KEY, "1");
   if (termsOverlay) termsOverlay.hidden = true;
   if (goTo === "blank") {
-    // Folha em branco direto — sem modal
+    // Folha em branco direto — sem modal, sem template anterior
+    state.template.selectedId = null;
     createBlankManuscript();
     setView("editor", { updateRoute: true });
   } else if (goTo === "guide") {
