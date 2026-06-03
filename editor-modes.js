@@ -364,11 +364,15 @@ function updateENEMCounter() {
   const text = area.innerText.trim();
   const isEmpty = text.length === 0;
 
-  // Conta linhas reais com base na altura da área vs altura de uma linha
+  // Conta parágrafos reais (linhas do editor) — mais confiável que scrollHeight
   const lineHeight = parseFloat(getComputedStyle(area).lineHeight) || 32;
-  const lines = Math.round(area.scrollHeight / lineHeight);
+  // scrollHeight inclui padding-top/bottom — descontamos o padding
+  const paddingTop = parseFloat(getComputedStyle(area).paddingTop) || 0;
+  const paddingBot = parseFloat(getComputedStyle(area).paddingBottom) || 0;
+  const contentHeight = area.scrollHeight - paddingTop - paddingBot;
+  const lines = isEmpty ? 0 : Math.round(contentHeight / lineHeight);
   const count = Math.max(0, Math.min(ENEM_TOTAL_LINES, lines));
-  counter.textContent = isEmpty ? 0 : count;
+  counter.textContent = count;
 
   if (minHint) {
     minHint.classList.toggle("enem-min-ok",  count >= ENEM_MIN_LINES);

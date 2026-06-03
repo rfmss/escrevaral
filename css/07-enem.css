@@ -124,18 +124,10 @@
   overflow: hidden;
   transition: opacity 0.2s;
 }
-.enem-placeholder-hint {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: #1a1a2e;
-  opacity: 0.5;
-  margin-bottom: 16px;
-  letter-spacing: 0.01em;
-}
+.enem-placeholder-hint { display: none; }
 .enem-placeholder-title {
   font-weight: 700;
-  margin-bottom: 0;
+  margin: 0;
 }
 .enem-placeholder-hidden { opacity: 0; }
 .enem-writing-area {
@@ -238,7 +230,8 @@
 }
 
 /* ── FIM DE FOLHA — barreira visual e bloqueio ──── */
-[data-enem-sheet][data-enem-full="true"] .enem-body::after {
+/* "Fim da folha" aparece ABAIXO da área de escrita — não dentro do flex body */
+[data-enem-sheet][data-enem-full="true"] .enem-writing-area::after {
   content: "fim da folha";
   display: block;
   text-align: center;
@@ -247,9 +240,9 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sienna);
-  opacity: 0.5;
-  padding: 6px 0 2px;
-  border-top: 1.5px dashed var(--sienna);
+  opacity: 0.6;
+  padding: 8px 0 4px;
+  border-top: 1.5px dashed color-mix(in srgb, var(--sienna) 50%, transparent);
   margin-top: 4px;
 }
 
