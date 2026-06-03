@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v431";
-const ASSET_VERSION = "20260603-anatomia-style";
+const CACHE_NAME = "vereda-offline-v432";
+const ASSET_VERSION = "20260603-editorial-css";
 
 const CORE_ASSETS = [
   "./",
@@ -69,6 +69,7 @@ const CORE_ASSETS = [
   "./analise-data.json",
   "./decolonial-data.json",
   "./templates-data.json",
+  "./vereda-editorial.css",
   "./quotes-data.js",
   "./vereda-biblioteca-escrita.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
