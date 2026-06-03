@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v412";
-const ASSET_VERSION = "20260602-arquivo-layout";
+const CACHE_NAME = "vereda-offline-v413";
+const ASSET_VERSION = "20260602-anatomia-embed";
 
 const CORE_ASSETS = [
   "./",
