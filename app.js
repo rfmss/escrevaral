@@ -695,15 +695,12 @@ function acceptTerms(goTo) {
   localStorage.setItem(FIRST_VISIT_KEY, "1");
   if (termsOverlay) termsOverlay.hidden = true;
   if (goTo === "blank") {
-    openCreateNote();
+    // Folha em branco direto — sem modal
+    createBlankManuscript();
+    setView("editor", { updateRoute: true });
   } else if (goTo === "guide") {
-    // Abre o modal de seleção de gênero/modelo, não a Academia de ferramentas
+    // Abre o bento de categorias (passo 1) sem pré-selecionar nenhuma
     openCreateNote();
-    // Pré-seleciona a categoria Ficção (Romance, Fantasia, Suspense) como sugestão
-    requestAnimationFrame(() => {
-      const ficaoBtn = document.querySelector('[data-create-category="ficcao"]');
-      if (ficaoBtn) ficaoBtn.click();
-    });
   } else if (goTo === "continue") {
     // Vai direto para o editor com o manuscrito mais recente
     if (state.manuscripts.length > 0) {
