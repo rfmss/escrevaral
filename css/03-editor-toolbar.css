@@ -202,71 +202,89 @@
 
 
 /* ── FORMAT BAR ── */
-/* ── WRAPPER — contém a barra e os gradientes de borda ── */
+/* ── WRAPPER — mesmo visual de menu que .editor-mode-bar ── */
 .format-bar-wrap {
   position: relative;
   margin-bottom: 20px;
   border-radius: 6px;
-  transition: background 0.18s;
+  border: 1px solid transparent;
+  transition: background 0.18s, border-color 0.18s;
 }
 
-/* Fundo cinza aparece ao hover — sinal de "área interativa" */
+/* Hover: contorno + fundo idênticos ao padrão dos botões de modo */
 .format-bar-wrap:hover,
 .format-bar-wrap.is-scroll-active {
   background: var(--surface-low);
+  border-color: var(--line);
 }
 
-/* Gradiente esquerdo — aparece quando há conteúdo à esquerda */
+/* Gradientes de borda — indicam conteúdo escondido */
 .format-bar-wrap::before,
 .format-bar-wrap::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 40px;
+  width: 48px;
   pointer-events: none;
   z-index: 2;
-  transition: opacity 0.2s;
+  transition: opacity 0.25s;
   opacity: 0;
 }
 .format-bar-wrap::before {
   left: 0;
-  background: linear-gradient(to right, var(--paper) 30%, transparent);
+  background: linear-gradient(to right, var(--surface-low) 20%, transparent);
   border-radius: 6px 0 0 6px;
 }
 .format-bar-wrap::after {
   right: 0;
-  background: linear-gradient(to left, var(--paper) 30%, transparent);
+  background: linear-gradient(to left, var(--surface-low) 20%, transparent);
   border-radius: 0 6px 6px 0;
 }
-.format-bar-wrap.has-left::before  { opacity: 1; }
-.format-bar-wrap.has-right::after  { opacity: 1; }
+/* Gradientes só visíveis quando o wrap está ativo (hover) */
+.format-bar-wrap:hover.has-left::before,
+.format-bar-wrap.is-scroll-active.has-left::before  { opacity: 1; }
+.format-bar-wrap:hover.has-right::after,
+.format-bar-wrap.is-scroll-active.has-right::after  { opacity: 1; }
 
-/* Hint inicial: pulsa o fade direito 2× para mostrar que tem mais */
+/* Seta hint — desliza lateralmente para chamar atenção */
+@keyframes fmt-hint-slide {
+  0%   { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
+  50%  { transform: translateY(-50%) translateX(5px); opacity: 1;   }
+  100% { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
+}
 @keyframes fmt-scroll-hint {
   0%, 100% { opacity: 1; }
-  50%       { opacity: 0.25; }
+  50%       { opacity: 0.2; }
 }
 .format-bar-wrap.show-hint::after {
   opacity: 1;
-  animation: fmt-scroll-hint 0.7s ease 0.4s 2;
+  animation: fmt-scroll-hint 0.6s ease 0.3s 3;
 }
 
-/* Seta indicadora de scroll — pequena, discreta */
+/* Seta de scroll — visível no hover, anima no hint inicial */
 .fmt-scroll-arrow {
   position: absolute;
-  right: 6px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 16px;
+  color: var(--primary);
   pointer-events: none;
   z-index: 3;
   opacity: 0;
   transition: opacity 0.2s;
 }
-.format-bar-wrap.has-right .fmt-scroll-arrow { opacity: 0.6; }
-.format-bar-wrap.is-scroll-active .fmt-scroll-arrow { opacity: 0; }
+/* Aparece sempre que há conteúdo à direita E o usuário está na área */
+.format-bar-wrap:hover.has-right .fmt-scroll-arrow,
+.format-bar-wrap.is-scroll-active.has-right .fmt-scroll-arrow {
+  opacity: 0.75;
+}
+/* Anima durante o hint */
+.format-bar-wrap.show-hint .fmt-scroll-arrow {
+  opacity: 1;
+  animation: fmt-hint-slide 0.7s ease 0.3s 3;
+}
 
 /* A barra em si — sem margem (o wrap cuida disso) */
 .format-bar {

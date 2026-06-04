@@ -459,5 +459,5 @@
 /* ── DESKTOP (≥820px) — toolbar editorial sempre visível, sem accordion ── */
 @media (min-width: 820px) {
   .fmt-editorial-toggle { display: none !important; }
-  .fmt-group-editorial > * { display: flex !important; }
+  .fmt-group-editorial > *:not(.fmt-editorial-toggle) { display: flex !important; }
 }
