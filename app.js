@@ -3220,16 +3220,20 @@ if (document.readyState === "loading") {
     formatBarWrap.classList.toggle("has-right", sl < max - 2);
   }
 
-  // Scroll vertical → horizontal (enquanto mouse está sobre a barra)
-  formatBar.addEventListener("wheel", (e) => {
-    const isHorizontalIntent = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-    if (isHorizontalIntent) return; // deixa scroll nativo funcionar
+  // Wheel no WRAPPER inteiro — captura touchpad em qualquer ponto da área
+  // Converte scroll vertical em horizontal; deixa horizontal nativo passar
+  function _onWheel(e) {
     const hasOverflow = formatBar.scrollWidth > formatBar.clientWidth + 2;
     if (!hasOverflow) return;
+    const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    if (isHorizontal) return; // deixa swipe horizontal nativo agir
     e.preventDefault();
-    formatBar.scrollLeft += e.deltaY || e.deltaX;
-  }, { passive: false });
+    e.stopPropagation();
+    formatBar.scrollLeft += e.deltaY;
+  }
 
+  // Registra no wrapper (captura touchpad mesmo sobre ícones filhos)
+  formatBarWrap.addEventListener("wheel", _onWheel, { passive: false });
   formatBar.addEventListener("scroll", updateEdges, { passive: true });
 
   formatBarWrap.addEventListener("mouseenter", () => {
@@ -3237,7 +3241,7 @@ if (document.readyState === "loading") {
     if (!hintShown && formatBar.scrollWidth > formatBar.clientWidth + 2) {
       hintShown = true;
       formatBarWrap.classList.add("show-hint");
-      setTimeout(() => formatBarWrap.classList.remove("show-hint"), 2200);
+      setTimeout(() => formatBarWrap.classList.remove("show-hint"), 2800);
     }
   });
 
@@ -3245,8 +3249,19 @@ if (document.readyState === "loading") {
     formatBarWrap.classList.remove("is-scroll-active");
   });
 
-  // Inicializa estado após primeiro render
-  requestAnimationFrame(updateEdges);
+  // Inicializa estado + dispara hint automático após 1.5s se há overflow
+  requestAnimationFrame(() => {
+    updateEdges();
+    if (formatBar.scrollWidth > formatBar.clientWidth + 2) {
+      setTimeout(() => {
+        if (!hintShown) {
+          hintShown = true;
+          formatBarWrap.classList.add("show-hint");
+          setTimeout(() => formatBarWrap.classList.remove("show-hint"), 2800);
+        }
+      }, 1500);
+    }
+  });
 })();
 
 (function () {

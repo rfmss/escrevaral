@@ -241,7 +241,10 @@
   background: linear-gradient(to left, var(--surface-low) 20%, transparent);
   border-radius: 0 6px 6px 0;
 }
-/* Gradientes só visíveis quando o wrap está ativo (hover) */
+/* Gradientes sempre visíveis (tênues) quando há conteúdo escondido */
+.format-bar-wrap.has-left::before  { opacity: 0.6; }
+.format-bar-wrap.has-right::after  { opacity: 0.6; }
+/* Mais visíveis no hover */
 .format-bar-wrap:hover.has-left::before,
 .format-bar-wrap.is-scroll-active.has-left::before  { opacity: 1; }
 .format-bar-wrap:hover.has-right::after,
@@ -249,23 +252,23 @@
 
 /* Seta hint — desliza lateralmente para chamar atenção */
 @keyframes fmt-hint-slide {
-  0%   { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
-  50%  { transform: translateY(-50%) translateX(5px); opacity: 1;   }
-  100% { transform: translateY(-50%) translateX(0);   opacity: 0.7; }
+  0%   { transform: translateY(-50%) translateX(0);   opacity: 0.5; }
+  50%  { transform: translateY(-50%) translateX(6px); opacity: 1;   }
+  100% { transform: translateY(-50%) translateX(0);   opacity: 0.5; }
 }
 @keyframes fmt-scroll-hint {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0.1; }
 }
 .format-bar-wrap.show-hint::after {
   opacity: 1;
-  animation: fmt-scroll-hint 0.6s ease 0.3s 3;
+  animation: fmt-scroll-hint 0.5s ease 0.2s 4;
 }
 
-/* Seta de scroll — visível no hover, anima no hint inicial */
+/* Seta — sempre visível quando há overflow, anima no hint */
 .fmt-scroll-arrow {
   position: absolute;
-  right: 8px;
+  right: 6px;
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
@@ -273,17 +276,17 @@
   pointer-events: none;
   z-index: 3;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.25s;
 }
-/* Aparece sempre que há conteúdo à direita E o usuário está na área */
+/* Sempre visível (tênue) quando há conteúdo à direita */
+.format-bar-wrap.has-right .fmt-scroll-arrow { opacity: 0.4; }
+/* Mais visível no hover */
 .format-bar-wrap:hover.has-right .fmt-scroll-arrow,
-.format-bar-wrap.is-scroll-active.has-right .fmt-scroll-arrow {
-  opacity: 0.75;
-}
-/* Anima durante o hint */
+.format-bar-wrap.is-scroll-active.has-right .fmt-scroll-arrow { opacity: 0.9; }
+/* Anima no hint — mais chamativo */
 .format-bar-wrap.show-hint .fmt-scroll-arrow {
   opacity: 1;
-  animation: fmt-hint-slide 0.7s ease 0.3s 3;
+  animation: fmt-hint-slide 0.6s ease 0.2s 4;
 }
 
 /* A barra em si — sem margem (o wrap cuida disso) */
