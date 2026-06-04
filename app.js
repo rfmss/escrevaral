@@ -1821,6 +1821,7 @@ const ACTION_HANDLERS = {
     }, 200);
   },
   "toggle-audio-player":     () => toggleAudioPanel(),
+  "toggle-share-panel":      () => toggleSharePanel(),
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
   "scroll-rights":           () => rightsLab?.scrollIntoView({ behavior: "smooth", block: "start" }),
@@ -2697,6 +2698,55 @@ function initAudioPlayer() {
 
   if (volEl) volEl.addEventListener("input", () => { audioEl.volume = parseFloat(volEl.value); });
 }
+
+// ── PAINEL DE COMPARTILHAR ────────────────────────────────────────────────────
+const _SHARE_TEXTS = {
+  x: "Estou escrevendo no @escrevaral — oficina literária brasileira, gratuita e offline. Escreva, prove sua autoria e publique. escrevaral.com",
+  bluesky: "Estou escrevendo no Escrevaral — oficina literária para mentes brasileiras. Gratuito, offline, sem IA. ✍️\n\nescrevaral.com",
+  mastodon: "Estou escrevendo no Escrevaral — oficina literária brasileira, gratuita e offline. Escreva, prove sua autoria, publique. Sem IA, sem nuvem.\n\nhttps://escrevaral.com",
+};
+
+function toggleSharePanel() {
+  const panel = document.getElementById("share-panel");
+  if (!panel) return;
+  const isOpen = !panel.hidden;
+  if (isOpen) { panel.hidden = true; return; }
+
+  panel.hidden = false;
+
+  function _outside(e) {
+    if (!panel.contains(e.target) && !e.target.closest(".topbar-share-btn")) {
+      panel.hidden = true;
+      document.removeEventListener("mousedown", _outside, true);
+    }
+  }
+  setTimeout(() => document.addEventListener("mousedown", _outside, true), 50);
+}
+
+document.getElementById("share-panel")?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-share]");
+  if (!btn) return;
+  const platform = btn.dataset.share;
+  const small = btn.querySelector("small");
+
+  if (platform === "x") {
+    const url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(_SHARE_TEXTS.x);
+    window.open(url, "_blank", "noopener,width=580,height=400");
+  } else if (platform === "bluesky") {
+    const url = "https://bsky.app/intent/compose?text=" + encodeURIComponent(_SHARE_TEXTS.bluesky);
+    window.open(url, "_blank", "noopener,width=600,height=500");
+  } else if (platform === "mastodon") {
+    navigator.clipboard.writeText(_SHARE_TEXTS.mastodon).then(() => {
+      if (small) { small.textContent = "Copiado! Cole na sua instância"; btn.classList.add("share-copied"); }
+      setTimeout(() => { if (small) { small.textContent = "Copiar texto para colar"; btn.classList.remove("share-copied"); }}, 3000);
+    });
+  } else if (platform === "copy") {
+    navigator.clipboard.writeText("https://escrevaral.com").then(() => {
+      if (small) { small.textContent = "Link copiado!"; btn.classList.add("share-copied"); }
+      setTimeout(() => { if (small) { small.textContent = "escrevaral.com"; btn.classList.remove("share-copied"); }}, 3000);
+    });
+  }
+});
 
 function toggleAudioPanel() {
   const panel = document.getElementById("audio-player-panel");

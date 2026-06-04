@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v439";
-const ASSET_VERSION = "20260604-toolbar-scroll";
+const CACHE_NAME = "vereda-offline-v440";
+const ASSET_VERSION = "20260604-share-btn";
 
 const CORE_ASSETS = [
   "./",
