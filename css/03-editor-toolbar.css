@@ -202,16 +202,83 @@
 
 
 /* ── FORMAT BAR ── */
+/* ── WRAPPER — contém a barra e os gradientes de borda ── */
+.format-bar-wrap {
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  transition: background 0.18s;
+}
+
+/* Fundo cinza aparece ao hover — sinal de "área interativa" */
+.format-bar-wrap:hover,
+.format-bar-wrap.is-scroll-active {
+  background: var(--surface-low);
+}
+
+/* Gradiente esquerdo — aparece quando há conteúdo à esquerda */
+.format-bar-wrap::before,
+.format-bar-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+.format-bar-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--paper) 30%, transparent);
+  border-radius: 6px 0 0 6px;
+}
+.format-bar-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--paper) 30%, transparent);
+  border-radius: 0 6px 6px 0;
+}
+.format-bar-wrap.has-left::before  { opacity: 1; }
+.format-bar-wrap.has-right::after  { opacity: 1; }
+
+/* Hint inicial: pulsa o fade direito 2× para mostrar que tem mais */
+@keyframes fmt-scroll-hint {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+.format-bar-wrap.show-hint::after {
+  opacity: 1;
+  animation: fmt-scroll-hint 0.7s ease 0.4s 2;
+}
+
+/* Seta indicadora de scroll — pequena, discreta */
+.fmt-scroll-arrow {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--muted);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.format-bar-wrap.has-right .fmt-scroll-arrow { opacity: 0.6; }
+.format-bar-wrap.is-scroll-active .fmt-scroll-arrow { opacity: 0; }
+
+/* A barra em si — sem margem (o wrap cuida disso) */
 .format-bar {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 0 12px;
-  margin-bottom: 20px;
+  padding: 6px 4px 12px;
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
 }
+.format-bar::-webkit-scrollbar { display: none; }
 
 /* Grupo de escrita básica — peso visual total */
 .fmt-group {

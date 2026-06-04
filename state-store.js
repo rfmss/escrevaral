@@ -37,6 +37,7 @@ const titleInput   = requireEl(".title-input");
 const writingArea  = requireEl(".writing-area");
 const pagedEditor   = document.querySelector("[data-paged-editor]");
 const formatBar     = document.querySelector("[data-format-bar]");
+const formatBarWrap = document.querySelector("[data-format-bar-wrap]");
 const fmtBlockSel   = document.querySelector("[data-fmt-block]");
 const pagePresetSel  = document.querySelector("[data-page-preset]");
 const pageCountEl    = document.querySelector("[data-page-count]");

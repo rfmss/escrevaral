@@ -3068,6 +3068,59 @@ if (document.readyState === "loading") {
   _bootstrap();
 }
 
+// ── FORMAT-BAR SCROLL UX ─────────────────────────────────────────────────────
+// Hover → fundo cinza aparece sinalizando área interativa.
+// Scroll vertical (ou Shift+scroll) → convertido em scroll horizontal na barra.
+// Gradientes nas bordas indicam conteúdo oculto à esquerda/direita.
+// Hint: pulsa o fade direito 2× na primeira vez que o usuário entra na área.
+(function initFormatBarScroll() {
+  if (!formatBar || !formatBarWrap) return;
+
+  // Seta indicadora de scroll horizontal
+  const arrow = document.createElement("span");
+  arrow.className = "fmt-scroll-arrow material-symbols-outlined";
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "chevron_right";
+  formatBarWrap.appendChild(arrow);
+
+  let hintShown = false;
+
+  function updateEdges() {
+    const sl = formatBar.scrollLeft;
+    const max = formatBar.scrollWidth - formatBar.clientWidth;
+    formatBarWrap.classList.toggle("has-left",  sl > 2);
+    formatBarWrap.classList.toggle("has-right", sl < max - 2);
+  }
+
+  // Scroll vertical → horizontal (enquanto mouse está sobre a barra)
+  formatBar.addEventListener("wheel", (e) => {
+    const isHorizontalIntent = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    if (isHorizontalIntent) return; // deixa scroll nativo funcionar
+    const hasOverflow = formatBar.scrollWidth > formatBar.clientWidth + 2;
+    if (!hasOverflow) return;
+    e.preventDefault();
+    formatBar.scrollLeft += e.deltaY || e.deltaX;
+  }, { passive: false });
+
+  formatBar.addEventListener("scroll", updateEdges, { passive: true });
+
+  formatBarWrap.addEventListener("mouseenter", () => {
+    formatBarWrap.classList.add("is-scroll-active");
+    if (!hintShown && formatBar.scrollWidth > formatBar.clientWidth + 2) {
+      hintShown = true;
+      formatBarWrap.classList.add("show-hint");
+      setTimeout(() => formatBarWrap.classList.remove("show-hint"), 2200);
+    }
+  });
+
+  formatBarWrap.addEventListener("mouseleave", () => {
+    formatBarWrap.classList.remove("is-scroll-active");
+  });
+
+  // Inicializa estado após primeiro render
+  requestAnimationFrame(updateEdges);
+})();
+
 (function () {
   const link = document.querySelector("[data-contact-email]");
   const note = document.querySelector("[data-offline-note]");
