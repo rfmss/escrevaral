@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v437";
-const ASSET_VERSION = "20260604-toolbar-hints";
+const CACHE_NAME = "vereda-offline-v438";
+const ASSET_VERSION = "20260604-seo-og";
 
 const CORE_ASSETS = [
   "./",
