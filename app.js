@@ -2985,6 +2985,7 @@ const FICHA_SCHEMAS = {
 };
 
 const FICHA_KINDS = new Set(Object.keys(FICHA_SCHEMAS));
+window.FICHA_KINDS = FICHA_KINDS; // expõe para editor-controller.js e outros módulos
 
 function parseFichaData(text, kind) {
   if (!text) return {};

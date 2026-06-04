@@ -12,8 +12,9 @@ function renderManuscriptNavigation() {
   function manuscriptRowHtml(manuscript) {
     const isCurrent = manuscript.id === state.activeId ? " is-current" : "";
     const type = getArchiveType(manuscript);
-    const isActive = manuscript.id === state.activeId;
     const companions = state.manuscripts.filter((m) => m.parentId === manuscript.id);
+    // Mantém companions visíveis quando o próprio companion está ativo
+    const isActive = manuscript.id === state.activeId || companions.some(c => c.id === state.activeId);
 
     // Tipos de fichas (ícone + tipo + label curta para botões rápidos)
     const FICHAS_QUICK = [
