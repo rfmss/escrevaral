@@ -1,0 +1,106 @@
+name: Gera rascunho no Diário
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  rascunho:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Clonar escrevaral
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 20
+
+      - name: Clonar diário
+        uses: actions/checkout@v4.2.2
+        with:
+          repository: rfmss/escrevaral-diario
+          token: ${{ secrets.DIARY_TOKEN }}
+          path: diario
+
+      - name: Coletar commits do push
+        id: commits
+        run: |
+          # Commits desde o push anterior (até 15)
+          LOGS=$(git log --oneline -15 --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} 2>/dev/null || git log --oneline -5 --pretty=format:"- %s")
+
+          # Extrai versão do commit mais recente (ex: v442)
+          VERSION=$(git log -1 --pretty=format:"%s" | grep -oP 'v\d+' | head -1 || echo "vXXX")
+
+          # Data de hoje
+          DATE=$(date +%Y-%m-%d)
+          SLUG=$(echo "$VERSION" | tr '[:upper:]' '[:lower:]')-$(date +%d%m)
+
+          echo "version=$VERSION"   >> $GITHUB_OUTPUT
+          echo "date=$DATE"         >> $GITHUB_OUTPUT
+          echo "slug=$SLUG"         >> $GITHUB_OUTPUT
+
+          # Salva logs em arquivo temporário (preserva quebras de linha)
+          echo "$LOGS" > /tmp/commits.txt
+          cat /tmp/commits.txt
+
+      - name: Verificar se rascunho já existe
+        id: existe
+        run: |
+          ARQUIVO="diario/_posts/${{ steps.commits.outputs.date }}-${{ steps.commits.outputs.slug }}.md"
+          if [ -f "$ARQUIVO" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Gerar rascunho Jekyll
+        if: steps.existe.outputs.exists == 'false'
+        run: |
+          VERSION="${{ steps.commits.outputs.version }}"
+          DATE="${{ steps.commits.outputs.date }}"
+          SLUG="${{ steps.commits.outputs.slug }}"
+          ARQUIVO="diario/_posts/${DATE}-${SLUG}.md"
+          COMMITS=$(cat /tmp/commits.txt)
+
+          cat > "$ARQUIVO" << FRONTMATTER
+          ---
+          layout: post
+          title: "[RASCUNHO] ${VERSION} — preencher título"
+          version: "${VERSION}"
+          date: ${DATE}
+          tags: [bastidores]
+          excerpt: "Preencher: uma frase sobre o que mudou nesta versão."
+          draft: true
+          ---
+
+          <!-- RASCUNHO GERADO AUTOMATICAMENTE — editar antes de publicar -->
+
+          ## O que mudou em ${VERSION}
+
+          <!-- Descreva em linguagem humana o que estas mudanças significam para quem escreve: -->
+
+          ${COMMITS}
+
+          ## Por que isso importa para você
+
+          <!-- Explique o benefício prático para a escritora. Evitar linguagem técnica. -->
+
+          ## O que vem a seguir
+
+          <!-- Opcional: próximos passos ou o que está sendo considerado. -->
+          FRONTMATTER
+
+          echo "Rascunho criado: $ARQUIVO"
+
+      - name: Commit e push do rascunho
+        if: steps.existe.outputs.exists == 'false'
+        run: |
+          cd diario
+          git config user.name  "escrevaral-bot"
+          git config user.email "oi@escrevaral.com"
+          git add _posts/
+          git commit -m "rascunho: ${{ steps.commits.outputs.version }} — gerado automaticamente"
+          git push
