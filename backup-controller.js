@@ -12,10 +12,18 @@ function _checkCacheHealth() {
   if (!("caches" in window)) return;
   caches.keys().then(names => {
     const appCache = names.find(n => n.startsWith("vereda-offline-"));
-    if (!appCache) return;
+    if (!appCache) {
+      _setOfflineStatus("cloud_sync", "Preparando modo sem internet…", "Instalando arquivos para funcionar sem conexão. Pronto em instantes.");
+      return;
+    }
     return caches.open(appCache).then(c => c.keys()).then(keys => {
       if (!offlineStatus) return;
-      offlineStatus.dataset.vrdaTooltip = `Cache com ${keys.length} arquivos · oficina disponível sem rede`;
+      const count = keys.length;
+      if (count === 0) {
+        _setOfflineStatus("cloud_sync", "Preparando modo sem internet…", "Instalando arquivos para funcionar sem conexão. Pronto em instantes.");
+      } else {
+        offlineStatus.dataset.vrdaTooltip = `${count} arquivo${count !== 1 ? "s" : ""} em cache · oficina disponível sem rede`;
+      }
     });
   }).catch(() => {});
 }
@@ -74,6 +82,7 @@ function registerOfflineApp() {
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     showUpdateBanner();
     _setOfflineStatus("cloud_done", "Pronto sem internet", "Nova versão ativa — o Escrevaral está atualizado e funciona sem rede.");
+    _checkCacheHealth();
   });
 
   navigator.serviceWorker

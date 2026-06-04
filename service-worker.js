@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v444";
-const ASSET_VERSION = "20260604-ficha-fix";
+const CACHE_NAME = "vereda-offline-v445";
+const ASSET_VERSION = "20260604-pwa-cache-health";
 
 const CORE_ASSETS = [
   "./",
@@ -151,7 +151,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
           return response;
         })
-        .catch(() => cachedResponse);
+        .catch(() => cachedResponse || new Response("", { status: 503, statusText: "Offline" }));
     })
   );
 });
