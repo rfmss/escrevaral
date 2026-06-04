@@ -333,6 +333,66 @@
   border-color: rgba(140, 110, 80, 0.35);
 }
 
+/* ── Vereda: contraste prova de autoria — elementos com fundo escuro no pergaminho ── */
+
+/* Inputs dentro do certificado → fundo claro compatível com pergaminho */
+[data-theme="scriptorium"] .certificate-paper .proof-author-input {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(58, 44, 34, 0.35);
+  color: #1c1714;
+}
+[data-theme="scriptorium"] .certificate-paper .proof-author-input::placeholder {
+  color: rgba(58, 44, 34, 0.55);
+}
+
+/* Blocos com background var(--surface-low/card) dentro do certificado */
+[data-theme="scriptorium"] .certificate-paper .proof-what-editor-sees,
+[data-theme="scriptorium"] .certificate-paper .proof-share-hint,
+[data-theme="scriptorium"] .certificate-paper .proof-share-quote,
+[data-theme="scriptorium"] .certificate-paper .proof-validation-result {
+  background: rgba(19, 15, 13, 0.08);
+  border-color: rgba(140, 110, 80, 0.3);
+}
+
+/* Texto dentro desses blocos escuros → herdado do papel (já está dark pelo parent) */
+[data-theme="scriptorium"] .certificate-paper .proof-what-editor-sees *,
+[data-theme="scriptorium"] .certificate-paper .proof-share-hint *,
+[data-theme="scriptorium"] .certificate-paper .proof-share-quote {
+  color: #1c1714;
+}
+[data-theme="scriptorium"] .certificate-paper .proof-share-hint summary {
+  color: var(--primary-deep, #8c5a20);
+}
+[data-theme="scriptorium"] .certificate-paper .proof-editor-view-list li .material-symbols-outlined {
+  color: #8c5a20;
+}
+
+/* Proof distinction (caixa de destaque) no modo escuro */
+[data-theme="scriptorium"] .certificate-paper .proof-distinction {
+  background: rgba(140, 90, 32, 0.12);
+  border-color: rgba(140, 90, 32, 0.3);
+}
+[data-theme="scriptorium"] .certificate-paper .proof-distinction p,
+[data-theme="scriptorium"] .certificate-paper .proof-distinction strong {
+  color: #1c1714;
+}
+
+/* ── Vereda: modo escuro — botões do editor-mode-bar no shell (fora do papel) ── */
+[data-theme="scriptorium"] .editor-mode-bar .secondary-button {
+  color: var(--muted);
+}
+[data-theme="scriptorium"] .editor-mode-bar .secondary-button:hover {
+  background: var(--surface-high);
+  color: var(--soft-ink);
+  border-color: transparent;
+}
+[data-theme="scriptorium"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
+[data-theme="scriptorium"] .editor-mode-bar .secondary-button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--primary) 22%, var(--surface-mid));
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
 [data-theme="scriptorium"] .crono-month-btn {
   color: var(--muted);
   opacity: 1;
