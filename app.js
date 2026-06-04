@@ -2281,6 +2281,84 @@ if (specializedEditor) {
   });
 }
 writingArea.addEventListener("keydown", recordWritingProof);
+
+// ── DETECÇÃO DE PASTE — transparência na prova de autoria ────────────────────
+// Marca texto copiado internamente para distinguir de paste externo.
+writingArea.addEventListener("copy", () => {
+  const sel = window.getSelection()?.toString() || "";
+  if (sel.length > 2) {
+    sessionStorage.setItem("vrda-internal-copy", sel.slice(0, 200) + sel.length);
+  }
+});
+
+writingArea.addEventListener("paste", (e) => {
+  const pasted = (e.clipboardData || window.clipboardData)?.getData("text") || "";
+  if (!pasted.length) return;
+
+  const internalMark = sessionStorage.getItem("vrda-internal-copy");
+  const isInternal = internalMark && (
+    pasted.startsWith(internalMark.slice(0, 50)) ||
+    internalMark === pasted.slice(0, 200) + pasted.length
+  );
+
+  // Registra no proof data do manuscrito ativo
+  const ms = getActiveManuscript();
+  if (ms && state.proofs?.[ms.id]) {
+    const pastes = state.proofs[ms.id].pastes || [];
+    pastes.push({ at: new Date().toISOString(), chars: pasted.length, source: isInternal ? "internal" : "external" });
+    state.proofs[ms.id].pastes = pastes;
+    persistState();
+  }
+
+  if (!isInternal) _showPasteNotice(pasted.length);
+});
+
+const _PASTE_SNOOZE_KEY = "vrda-paste-notice-snooze";
+const _PASTE_SNOOZE_MS  = 7 * 24 * 60 * 60 * 1000;
+
+function _showPasteNotice(chars) {
+  const snoozed = parseInt(localStorage.getItem(_PASTE_SNOOZE_KEY) || "0", 10);
+  if (Date.now() - snoozed < _PASTE_SNOOZE_MS) return;
+
+  let toast = document.getElementById("paste-notice-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "paste-notice-toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.innerHTML = `
+      <span class="material-symbols-outlined" style="font-size:18px;color:var(--primary);flex-shrink:0">content_paste</span>
+      <div style="flex:1;min-width:0">
+        <strong style="display:block;font-size:13px;color:var(--ink);margin-bottom:2px">Texto colado registrado</strong>
+        <span style="font-size:12px;color:var(--muted)">Será descontado proporcionalmente na prova de autoria.</span>
+      </div>
+      <button id="paste-notice-snooze" style="font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;white-space:nowrap;padding:0 0 0 8px">Não mostrar<br>por 7 dias</button>
+      <button id="paste-notice-close" style="background:none;border:none;cursor:pointer;color:var(--muted);flex-shrink:0" aria-label="Fechar">
+        <span class="material-symbols-outlined" style="font-size:16px">close</span>
+      </button>`;
+    Object.assign(toast.style, {
+      position:"fixed", bottom:"48px", left:"50%",
+      transform:"translateX(-50%)", zIndex:"300",
+      display:"flex", alignItems:"center", gap:"10px",
+      background:"var(--card)", border:"1px solid var(--line)",
+      borderRadius:"10px", boxShadow:"0 8px 32px rgba(26,26,26,0.13)",
+      padding:"12px 14px", maxWidth:"420px", width:"90vw",
+      fontFamily:"inherit",
+    });
+    document.body.appendChild(toast);
+
+    document.getElementById("paste-notice-snooze").addEventListener("click", () => {
+      localStorage.setItem(_PASTE_SNOOZE_KEY, String(Date.now()));
+      toast.remove();
+    });
+    document.getElementById("paste-notice-close").addEventListener("click", () => toast.remove());
+  }
+
+  // Auto-dismiss após 8s
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.remove(), 8000);
+}
+
 function resetHintTimer() {
   hideAcademiaHint();
   clearTimeout(hintIdleTimer);

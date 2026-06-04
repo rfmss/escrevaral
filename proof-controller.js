@@ -261,9 +261,39 @@ function renderProofView() {
 
   const summary = VeredaProof.summarize(session);
   const recentEvents = session.events.slice(-4).reverse();
+  const ms = getActiveManuscript();
+
+  // Desconto proporcional por paste externo
+  // adjustedIntegrity = integrity × (1 − pastedChars / totalChars)
+  function calcAdjustedIntegrity(baseIntegrity) {
+    if (!ms) return baseIntegrity;
+    const pastes = state.proofs?.[ms.id]?.pastes || [];
+    const externalPastedChars = pastes
+      .filter(p => p.source === "external")
+      .reduce((sum, p) => sum + (p.chars || 0), 0);
+    const totalChars = (ms.text || "").length;
+    if (!totalChars || !externalPastedChars) return baseIntegrity;
+    const pasteRatio = Math.min(externalPastedChars / totalChars, 1);
+    return Math.max(0, Math.round(baseIntegrity * (1 - pasteRatio)));
+  }
+
+  const adjustedIntegrity = calcAdjustedIntegrity(summary.integrity);
+  const hasPasteDiscount = adjustedIntegrity < summary.integrity;
 
   proofSessionName.textContent = session.name;
-  proofIntegrity.textContent = summary.integrity > 0 ? `${summary.integrity}%` : "Aguardando sua escrita";
+  proofIntegrity.textContent = adjustedIntegrity > 0
+    ? `${adjustedIntegrity}%${hasPasteDiscount ? " ✱" : ""}`
+    : "Aguardando sua escrita";
+
+  // Nota de desconto por paste
+  const discountNote = document.querySelector("[data-proof-paste-note]");
+  if (discountNote) {
+    discountNote.hidden = !hasPasteDiscount;
+    if (hasPasteDiscount) {
+      const diff = summary.integrity - adjustedIntegrity;
+      discountNote.textContent = `✱ ${diff}% descontado por texto colado`;
+    }
+  }
 
   const grid = document.querySelector(".certificate-grid");
   if (grid) grid.classList.toggle("is-empty", summary.totalEvents === 0);
@@ -271,11 +301,11 @@ function renderProofView() {
   // Atualiza chip da topbar
   const chip = document.querySelector("[data-proof-chip]");
   const chipValue = document.querySelector("[data-proof-chip-value]");
-  const wordCount = (getActiveManuscript()?.text || "").trim().split(/\s+/).filter(Boolean).length;
-  if (chip && summary.totalEvents > 0 && summary.integrity > 0 && wordCount >= 50) {
+  const wordCount = (ms?.text || "").trim().split(/\s+/).filter(Boolean).length;
+  if (chip && summary.totalEvents > 0 && adjustedIntegrity > 0 && wordCount >= 50) {
     chip.hidden = false;
-    if (chipValue) chipValue.textContent = `${summary.integrity}%`;
-    chip.dataset.level = summary.integrity >= 80 ? "high" : summary.integrity >= 50 ? "medium" : "low";
+    if (chipValue) chipValue.textContent = `${adjustedIntegrity}%`;
+    chip.dataset.level = adjustedIntegrity >= 80 ? "high" : adjustedIntegrity >= 50 ? "medium" : "low";
   } else if (chip) {
     chip.hidden = true;
   }
