@@ -594,7 +594,10 @@ function renderCreateTemplateList(categoryId) {
         ${types.map(type => `
           <button class="create-tpl-row" data-create-doc-type="${type.id}" type="button">
             <span class="material-symbols-outlined">${type.icon}</span>
-            <div><strong>${escapeHtml(type.label)}</strong></div>
+            <div>
+              <strong>${escapeHtml(type.label)}</strong>
+              ${type.description ? `<small>${escapeHtml(type.description)}</small>` : ""}
+            </div>
             <span class="material-symbols-outlined create-tpl-arrow">chevron_right</span>
           </button>
         `).join("")}

@@ -37,9 +37,11 @@
 
   /* Format-bar estreita: grupo editorial colapsa, só botão ⋯ visível */
   .fmt-sep-editorial { display: none; }
+  .fmt-label { display: none; }
   .fmt-group-editorial {
     position: relative;
     opacity: 1;
+    flex-shrink: 0;
   }
   /* Esconde os filhos do grupo editorial por padrão no mobile */
   .fmt-group-editorial > *:not(.fmt-editorial-toggle) {

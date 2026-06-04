@@ -207,9 +207,10 @@
   align-items: center;
   gap: 4px;
   padding: 6px 0 12px;
-  /* Separação por espaço, não por linha */
   margin-bottom: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 /* Grupo de escrita básica — peso visual total */
@@ -219,14 +220,13 @@
   gap: 2px;
 }
 
-/* Grupo editorial — muted, discreto */
+/* Grupo editorial — mesma linha, sem fade */
 .fmt-group-editorial {
-  opacity: 0.55;
-  transition: opacity var(--motion-quick);
-}
-.fmt-group-editorial:hover,
-.fmt-group-editorial:focus-within {
   opacity: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
 }
 /* Dark themes: opacidade maior para manter legibilidade mínima */
 [data-theme="cerrado-dark"] .fmt-group-editorial,
@@ -277,7 +277,12 @@
   padding: 0 6px;
 }
 
-/* Mostrar label quando o grupo editorial estiver aberto */
+/* Labels sempre visíveis no desktop — não dependem do .is-open */
+.fmt-label {
+  display: block;
+}
+
+/* Compatibilidade: quando grupo editorial ainda usa .is-open no mobile */
 .fmt-group-editorial.is-open .fmt-label {
   display: block;
 }
