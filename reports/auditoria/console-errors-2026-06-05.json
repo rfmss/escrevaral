@@ -1,0 +1,243 @@
+{
+  "data": "2026-06-05",
+  "tem_erro": true,
+  "resultados": [
+    {
+      "cenario": "acervo",
+      "descricao": "Tela inicial — lista de manuscritos",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "editor-novo",
+      "descricao": "Criar e abrir manuscrito novo",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "editor-escrita",
+      "descricao": "Digitar texto no editor",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "updateGoalDisplay is not defined",
+          "url": "",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "guia-de-escrita",
+      "descricao": "Abrir guia de escrita",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "academia",
+      "descricao": "Aba Academia",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "prova-autoria",
+      "descricao": "Aba Prova de Autoria",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "copia-seguranca",
+      "descricao": "Acionar cópia de segurança",
+      "erros": [
+        {
+          "tipo": "console.error",
+          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
+          "url": "http://localhost:8799/",
+          "linha": 1774
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Identifier 'ms' has already been declared",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "recordWritingProof is not defined",
+          "url": "",
+          "linha": 0
+        },
+        {
+          "tipo": "console.error",
+          "mensagem": "Failed to load resource: net::ERR_FAILED",
+          "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    }
+  ]
+}
