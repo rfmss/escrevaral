@@ -142,11 +142,11 @@
 
         <nav class="module-tabs" aria-label="Módulos do Escrevaral">
           <button class="tab is-active" data-view-target="editor" data-vrda-tooltip="Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui.">Manuscrito</button>
-          <button class="tab" data-view-target="biblioteca" data-vrda-tooltip="Salve referências, trechos e leituras que alimentam sua escrita.">Biblioteca</button>
+          <button class="tab" data-view-target="biblioteca" data-vrda-tooltip="Veja o significado, sinônimos e uso de qualquer palavra do seu manuscrito — sem sair do texto.">Palavras</button>
           <button class="tab" data-view-target="autoria" data-vrda-tooltip="Registro do seu ritmo de digitação — único como uma assinatura. Exporta prova de autoria humana.">Prova de autoria</button>
-          <button class="tab" data-view-target="arquivo" data-vrda-tooltip="Todos os seus manuscritos: organize, etiquete, exporte e guarde cópias de segurança.">Arquivo</button>
-          <button class="tab" data-view-target="academia" data-vrda-tooltip="Ferramentas de análise: sintaxe, voz, rima, estilo e léxico — sem sair do texto.">Academia</button>
-          <button class="tab" data-view-target="cronograma" data-vrda-tooltip="Planeje e acompanhe seu calendário de escrita com metas e sessões.">Cronograma</button>
+          <button class="tab" data-view-target="arquivo" data-vrda-tooltip="Todos os seus manuscritos: organize, etiquete, exporte e guarde cópias de segurança.">Acervo</button>
+          <button class="tab" data-view-target="academia" data-vrda-tooltip="Ferramentas de análise: sintaxe, voz, rima, estilo e léxico — sem sair do texto.">Bancada</button>
+          <button class="tab" data-view-target="cronograma" data-vrda-tooltip="Planeje e acompanhe seu calendário de escrita com metas e sessões.">Plano</button>
         </nav>
 
         <div class="topbar-actions">
@@ -359,11 +359,11 @@
           <section class="view" data-view-panel="biblioteca">
             <article class="paper split-paper">
               <div>
-                <h1 data-lexical-title>Biblioteca</h1>
+                <h1 data-lexical-title>Palavras</h1>
                 <p class="lexical-hint muted" data-lexical-hint>Selecione uma palavra no manuscrito para ler seu significado, sinônimos e uso — sem sair daqui.</p>
-                <label class="lexical-search-row" aria-label="Buscar palavra na biblioteca">
+                <label class="lexical-search-row" aria-label="Buscar palavra">
                   <span class="material-symbols-outlined">search</span>
-                  <input type="search" data-lexical-search placeholder="Buscar palavra…" autocomplete="off" aria-label="Buscar palavra na biblioteca">
+                  <input type="search" data-lexical-search placeholder="Buscar palavra…" autocomplete="off" aria-label="Buscar palavra">
                 </label>
                 <div class="reading-sample" data-lexical-context></div>
               </div>
@@ -555,7 +555,7 @@
               <!-- ── ZONA RETOMAR ── -->
               <div class="archive-heading">
                 <div>
-                  <p class="eyebrow">Arquivo</p>
+                  <p class="eyebrow">Acervo</p>
                   <h2 class="archive-heading-title">Seus textos</h2>
                 </div>
                 <div class="archive-actions">
@@ -1184,7 +1184,7 @@
             <div class="cronograma-wrap">
               <div class="cronograma-header">
                 <div>
-                  <p class="eyebrow">Cronograma</p>
+                  <p class="eyebrow">Plano</p>
                   <h2 class="cronograma-title" data-crono-title>Seu ritmo em 2026</h2>
                 </div>
                 <div class="cronograma-month-picker">
@@ -1202,7 +1202,7 @@
                 </div>
               </div>
               <div class="cronograma-heatmap" data-crono-heatmap></div>
-              <p class="crono-hint" data-crono-hint hidden>O Cronograma registra quando você escreve e permite planejar sessões futuras. Clique em qualquer dia para adicionar uma meta.</p>
+              <p class="crono-hint" data-crono-hint hidden>O Plano registra quando você escreve e permite planejar sessões futuras. Clique em qualquer dia para adicionar uma meta.</p>
               <div class="cronograma-timeline" data-crono-timeline></div>
             </div>
           </section>
@@ -1483,7 +1483,7 @@
     ">
       <span class="material-symbols-outlined" style="color: var(--primary, #150a03); font-size: 22px; flex-shrink: 0;">school</span>
       <span>
-        Pausa ativa. A <button data-action="hint-goto-academia" style="background:none;border:none;padding:0;color:var(--primary,#150a03);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;">Academia</button> tem guias para o seu gênero e ferramentas de análise.
+        Pausa ativa. A <button data-action="hint-goto-academia" style="background:none;border:none;padding:0;color:var(--primary,#150a03);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;">Bancada</button> tem guias para o seu gênero e ferramentas de análise.
       </span>
       <button data-action="hint-dismiss" aria-label="Fechar dica" style="
         background: none;
@@ -1708,7 +1708,7 @@
     </button>
     <button class="dock-item" data-view-target="academia">
       <span class="material-symbols-outlined" aria-hidden="true">school</span>
-      <span class="dock-label">Academia</span>
+      <span class="dock-label">Bancada</span>
     </button>
     <button class="dock-item" data-view-target="autoria">
       <span class="material-symbols-outlined" aria-hidden="true">fingerprint</span>
@@ -1716,7 +1716,7 @@
     </button>
     <button class="dock-item" data-view-target="biblioteca">
       <span class="material-symbols-outlined" aria-hidden="true">auto_stories</span>
-      <span class="dock-label">Biblioteca</span>
+      <span class="dock-label">Palavras</span>
     </button>
     <!-- Item extra — apenas no rail do tablet -->
     <button class="dock-item dock-rail-only" data-view-target="cronograma">
