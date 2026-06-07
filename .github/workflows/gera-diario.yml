@@ -73,7 +73,7 @@ jobs:
           date: ${DATE}
           tags: [bastidores]
           excerpt: "Preencher: uma frase sobre o que mudou nesta versão."
-          draft: true
+          published: false
           ---
 
           <!-- RASCUNHO GERADO AUTOMATICAMENTE — editar antes de publicar -->
