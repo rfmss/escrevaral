@@ -261,7 +261,6 @@ function renderProofView() {
 
   const summary = VeredaProof.summarize(session);
   const recentEvents = session.events.slice(-4).reverse();
-  const ms = getActiveManuscript();
 
   // Desconto proporcional por paste externo
   // adjustedIntegrity = integrity × (1 − pastedChars / totalChars)
