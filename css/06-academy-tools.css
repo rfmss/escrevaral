@@ -150,6 +150,11 @@
   transition: color var(--motion-quick), border-color var(--motion-quick), background var(--motion-quick);
   user-select: none;
 }
+/* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
+   tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
+html:not([data-theme="scriptorium"]) .academy-tool-tab {
+  color: #6f6459;
+}
 .academy-tool-tab:hover { color: var(--primary); background: var(--surface-mid); }
 .academy-tool-tab .material-symbols-outlined { font-size: 18px; }
 

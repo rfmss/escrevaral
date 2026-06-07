@@ -1541,6 +1541,11 @@ html {
   background: transparent;
   border-radius: 6px;
 }
+/* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
+   tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
+html:not([data-theme="scriptorium"]) .editor-mode-bar .secondary-button {
+  color: #6f6459;
+}
 .editor-mode-bar .secondary-button:hover {
   background: var(--card);
   color: var(--soft-ink);

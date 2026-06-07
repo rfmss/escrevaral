@@ -259,6 +259,14 @@
   color: #3a2c22;
 }
 
+/* Vereda: grupo Guia/Ler/Mesa tem fundo próprio escuro (--surface-low) — ink claro evita texto invisível */
+[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button {
+  color: var(--muted);
+}
+[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover {
+  color: var(--soft-ink);
+}
+
 [data-theme="scriptorium"] .editor-paper .fmt-btn:hover {
   background: rgba(19, 15, 13, 0.08);
   color: #1c1714;
