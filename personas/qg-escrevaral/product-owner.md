@@ -11,28 +11,71 @@ Não é um usuário. É a voz que sintetiza o que os usuários viveram e decide 
 
 Conhece cada persona da sala de espera. Leu cada auditoria. Sabe o que está em META_ENGINES_100.md e o que ainda não está. Nunca toca no código — mas toda decisão de código passa por ele antes.
 
-## O que ele sabe hoje (2026-05-30)
+## O que ele sabe hoje (2026-06-04 — v444)
 
-### Auditorias concluídas
-- **Beatriz (v356)**: 10 achados. Alta: guia vazio, nav mobile inconsistente, Biblioteca sumida. Médios: toolbar sem label, Prova de autoria sem contexto, Espelho de Voz com hierarquia invertida.
+### Auditorias concluídas (sala de espera completa)
 
-### Estado das engines
-- Sintaxe: 82% (medido em corpus real). Teto real ~85% sem refatoração arquitetural.
-- Demais engines: 95–98% conforme META_ENGINES_100.md.
-- Próxima fronteira técnica: candidatos morfológicos + desambiguação contextual.
+| Persona | Resultado | Versão | Relatório |
+|---|---|---|---|
+| Beatriz | 10 achados — todos resolvidos | v357–358 | auditoria-beatriz-20260530.md |
+| Lucas | 6/6 ✅ | v377 | reteste-lucas-fernanda-20260602.md |
+| Fernanda | 6/7 ✅ (F-MS timing, não bug) | v372–376 | reteste-lucas-fernanda-20260602.md |
+| Cláudio | 16/16 ✅ | v383 | auditoria-claudio-20260602.md |
+| Arnaldo | 20/24 ✅ | v382 | auditoria-arnaldo-catedratico-20260602.md |
 
-### Decisões de produto em aberto
-1. **Guia no editor**: o painel vazio que redireciona para Academia é o maior risco de abandono na primeira sessão. Decisão pendente: mostrar lista de guias diretamente no painel, sem sair do editor.
-2. **Nav mobile**: "Registrar" precisa virar "Prova de autoria" ou algum nome único usado em ambas as plataformas.
-3. **Biblioteca default state**: mostrar estado vazio com instrução, não verbete de demonstração.
-4. **Ícones da toolbar**: avaliar se rótulos visíveis no desktop prejudicam a estética ou se tooltips respondem ao caso mobile.
-5. **Prova de autoria — onboarding**: uma frase de contexto antes dos números para o primeiro acesso.
+**Sala de espera: todas as personas auditadas e fechadas.**
 
-### Personas na fila (sala de espera)
-- Beatriz: ✅ auditada
-- A criar: Cláudio (escritor experiente, vem do Scrivener), Fernanda (estudante ENEM), Lucas (celular como único dispositivo)
+### Funcionalidades entregues desde v356
+
+- Biblioteca no dock (1 toque) — v377
+- Resolução de ambiguidade sintática (resolverAmbiguidade R1–R4) — v378–380
+- Word popover com definição inline — v381
+- RimaLab com rima interna em prosa poética — v383–384
+- SEO, OG banner 1200×630, título canônico — v438
+- Format-bar com scroll UX e gradientes — v439
+- Botão Compartilhar (X, Bluesky, Mastodon, copiar link) — v440
+- Paste detection com desconto proporcional na Prova de Autoria — v441
+- Toolbar UX (contorno, animação, botão "...") — v442–443
+- Editor de ficha ativa corretamente + nota companion no sidebar — v444
+
+### Estado das engines (2026-06-04)
+
+| Engine | Maturidade | Lacuna principal |
+|---|---|---|
+| Sintaxe | **~91%** | Candidatos morfológicos + desambiguação contextual além das 4 regras atuais |
+| Prova de autoria | **98%** | Paste detection integrado; desconto proporcional funcionando |
+| Validação da prova | **98%** | Estável |
+| Pontuação | **98%** | PONT-18 falso positivo com nomes próprios (aceitável) |
+| Análise geral | **98%** | Estável |
+| Espelho de Voz | **98%** | Estável |
+| Léxico / Biblioteca | **98%** | Estável |
+| Precision | **98%** | Estável |
+| Templates / Guias | **98%** | Estável |
+| Editor / documento | **98%** | Ficha ativa corrigida em v444 |
+| Exportação / impressão | **98%** | Estável |
+| Paginação / modo página | **95%** | Cabeçalho/rodapé por manuscrito (alto custo, impacto real baixo) |
+| Offline / PWA | **95%** | Indicador de cache quente; fallback de rede mais preciso |
+| `.esc` / envelope nativo | **95%** | Estável |
+| Backup externo | **95%** | Estável |
+
+### Decisão de produto em aberto
+
+| Código | Questão | Status |
+|---|---|---|
+| L4 | Chip "Autoria NN%" — orienta ou confunde? Fernanda não ativou | Pendente — baixo impacto, pode ir pós-v1 |
+
+### O que o PO pensa agora
+
+A sala de espera está vazia. Regressões: zero. O produto está em pé.
+
+A maior lacuna técnica é **Sintaxe (~91%)** — mas a próxima fronteira exige refatoração arquitetural (candidatos morfológicos), custo alto sem persona pressionando por ela hoje.
+
+As engines em 95% (Paginação, Offline/PWA) têm lacunas de baixo impacto real no uso diário.
+
+**Pergunta em aberto para o curador-engines:** dado que a sala de espera está fechada e as regressões estão em zero, qual engine tem a menor distância entre esforço e salto real de maturidade — e tem evidência de persona que justifique subir agora?
 
 ### Princípio que norteia todas as decisões
+
 > A interface deve parecer uma mesa preparada, não um painel de demonstração.
 > Uma escritora brasileira deve entender a tela sem saber inglês técnico.
 
