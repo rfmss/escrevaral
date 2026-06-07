@@ -56,7 +56,61 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Gerar e publicar registro automático
+      - name: Gerar texto do post com IA (Hugging Face)
+        id: ia
+        if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          VERSION="${{ steps.commits.outputs.version }}"
+          COMMITS=$(sed -E 's/^- (feat|fix|docs|chore|refactor|style|test|perf|build|ci)(\([^)]*\))?: */- /' /tmp/commits.txt)
+
+          if [ -z "$HF_TOKEN" ]; then
+            echo "Sem HF_TOKEN configurado — seguindo com modelo mecânico." >&2
+            echo "ok=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          cat > /tmp/mensagem-usuario.txt << EOF
+          Versão: ${VERSION}
+
+          Commits desta versão:
+          ${COMMITS}
+
+          Escreva o registro do diário para esta versão, seguindo exatamente o formato pedido.
+          EOF
+
+          PAYLOAD=$(jq -n \
+            --rawfile sistema .github/diario-agente-prompt.md \
+            --rawfile usuario /tmp/mensagem-usuario.txt \
+            '{
+              model: "meta-llama/Llama-3.1-8B-Instruct",
+              messages: [
+                {role: "system", content: $sistema},
+                {role: "user", content: $usuario}
+              ],
+              max_tokens: 900,
+              temperature: 0.6
+            }')
+
+          RESPOSTA=$(curl -s --max-time 90 https://router.huggingface.co/v1/chat/completions \
+            -H "Authorization: Bearer $HF_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD")
+
+          TEXTO=$(echo "$RESPOSTA" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
+
+          if [ -n "$TEXTO" ] && echo "$TEXTO" | grep -q "^TITULO:" && echo "$TEXTO" | grep -q "^RESUMO:"; then
+            echo "$TEXTO" > /tmp/texto-ia.txt
+            echo "ok=true" >> $GITHUB_OUTPUT
+            echo "IA respondeu no formato esperado."
+          else
+            echo "IA não respondeu no formato esperado — seguindo com modelo mecânico." >&2
+            echo "$RESPOSTA" | head -c 500 >&2
+            echo "ok=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Montar e publicar registro
         if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
         run: |
           VERSION="${{ steps.commits.outputs.version }}"
@@ -67,13 +121,24 @@ jobs:
           # Remove prefixo de tipo de commit (feat:, fix:, docs: etc) para leitura humana
           COMMITS=$(sed -E 's/^- (feat|fix|docs|chore|refactor|style|test|perf|build|ci)(\([^)]*\))?: */- /' /tmp/commits.txt)
 
-          # Resumo = primeira linha sem marcador, com aspas escapadas e inicial maiúscula
-          RESUMO=$(echo "$COMMITS" | head -1 | sed -E 's/^- //; s/"/\\"/g; s/^(.)/\U\1/')
+          if [ "${{ steps.ia.outputs.ok }}" = "true" ]; then
+            TEXTO=$(cat /tmp/texto-ia.txt)
+            TITULO=$(echo "$TEXTO" | sed -n 's/^TITULO: *//p' | head -1 | sed 's/"/\\"/g')
+            RESUMO=$(echo "$TEXTO" | sed -n 's/^RESUMO: *//p' | head -1 | sed 's/"/\\"/g')
+            CORPO=$(echo "$TEXTO" | awk '/^---$/{found=1; next} found')
+          else
+            RESUMO_BASE=$(echo "$COMMITS" | head -1 | sed -E 's/^- //; s/"/\\"/g; s/^(.)/\U\1/')
+            TITULO="${VERSION} — ${RESUMO_BASE}"
+            RESUMO="${RESUMO_BASE}"
+            CORPO="## O que mudou na ${VERSION}
+
+          ${COMMITS}"
+          fi
 
           cat > "$ARQUIVO" << POST
           ---
           layout: post
-          title: "${VERSION} — ${RESUMO}"
+          title: "${TITULO}"
           version: "${VERSION}"
           date: ${DATE}
           tags: [bastidores]
@@ -81,9 +146,7 @@ jobs:
           published: true
           ---
 
-          ## O que mudou na ${VERSION}
-
-          ${COMMITS}
+          ${CORPO}
 
           ---
 
