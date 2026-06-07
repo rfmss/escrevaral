@@ -56,51 +56,48 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Gerar rascunho Jekyll
+      - name: Gerar e publicar registro automático
         if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
         run: |
           VERSION="${{ steps.commits.outputs.version }}"
           DATE="${{ steps.commits.outputs.date }}"
           SLUG="${{ steps.commits.outputs.slug }}"
           ARQUIVO="diario/_posts/${DATE}-${SLUG}.md"
-          COMMITS=$(cat /tmp/commits.txt)
 
-          cat > "$ARQUIVO" << FRONTMATTER
+          # Remove prefixo de tipo de commit (feat:, fix:, docs: etc) para leitura humana
+          COMMITS=$(sed -E 's/^- (feat|fix|docs|chore|refactor|style|test|perf|build|ci)(\([^)]*\))?: */- /' /tmp/commits.txt)
+
+          # Resumo = primeira linha sem marcador, com aspas escapadas e inicial maiúscula
+          RESUMO=$(echo "$COMMITS" | head -1 | sed -E 's/^- //; s/"/\\"/g; s/^(.)/\U\1/')
+
+          cat > "$ARQUIVO" << POST
           ---
           layout: post
-          title: "[RASCUNHO] ${VERSION} — preencher título"
+          title: "${VERSION} — ${RESUMO}"
           version: "${VERSION}"
           date: ${DATE}
           tags: [bastidores]
-          excerpt: "Preencher: uma frase sobre o que mudou nesta versão."
-          published: false
+          excerpt: "${RESUMO}"
+          published: true
           ---
 
-          <!-- RASCUNHO GERADO AUTOMATICAMENTE — editar antes de publicar -->
-
-          ## O que mudou em ${VERSION}
-
-          <!-- Descreva em linguagem humana o que estas mudanças significam para quem escreve: -->
+          ## O que mudou na ${VERSION}
 
           ${COMMITS}
 
-          ## Por que isso importa para você
+          ---
 
-          <!-- Explique o benefício prático para a escritora. Evitar linguagem técnica. -->
+          *Registro gerado automaticamente a partir do histórico de versões do Escrevaral — um subproduto direto do trabalho, sem curadoria manual.*
+          POST
 
-          ## O que vem a seguir
+          echo "Registro publicado: $ARQUIVO"
 
-          <!-- Opcional: próximos passos ou o que está sendo considerado. -->
-          FRONTMATTER
-
-          echo "Rascunho criado: $ARQUIVO"
-
-      - name: Commit e push do rascunho
+      - name: Commit e push do registro
         if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
         run: |
           cd diario
           git config user.name  "escrevaral-bot"
           git config user.email "oi@escrevaral.com"
           git add _posts/
-          git commit -m "rascunho: ${{ steps.commits.outputs.version }} — gerado automaticamente"
+          git commit -m "post: ${{ steps.commits.outputs.version }} — publicado automaticamente"
           git push
