@@ -98,7 +98,8 @@ jobs:
             -H "Content-Type: application/json" \
             -d "$PAYLOAD")
 
-          TEXTO=$(echo "$RESPOSTA" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
+          # Remove blocos de código (```...```) que o modelo às vezes usa para envolver a resposta inteira
+          TEXTO=$(echo "$RESPOSTA" | jq -r '.choices[0].message.content // empty' 2>/dev/null | sed -E '/^```/d')
 
           if [ -n "$TEXTO" ] && echo "$TEXTO" | grep -q "^TITULO:" && echo "$TEXTO" | grep -q "^RESUMO:"; then
             echo "$TEXTO" > /tmp/texto-ia.txt
