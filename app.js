@@ -1992,6 +1992,7 @@ const ACTION_HANDLERS = {
 
 document.addEventListener("click", (event) => {
   const manuscriptDeleteTarget = event.target.closest("[data-manuscript-delete]");
+  const folderToggleTarget = event.target.closest("[data-folder-toggle]");
   const manuscriptTarget  = event.target.closest("[data-manuscript-id]");
   const viewTarget        = event.target.closest("[data-view-target]");
   const actionTarget      = event.target.closest("[data-action]");
@@ -2009,6 +2010,7 @@ document.addEventListener("click", (event) => {
   }
 
   if (manuscriptDeleteTarget) { event.preventDefault(); event.stopPropagation(); deleteManuscript(manuscriptDeleteTarget.dataset.manuscriptDelete); return; }
+  if (folderToggleTarget) { event.preventDefault(); toggleFolder(folderToggleTarget.dataset.folderToggle); return; }
   if (manuscriptTarget)  { event.preventDefault(); setActiveManuscript(manuscriptTarget.dataset.manuscriptId); return; }
   if (archivePinTarget)  { event.preventDefault(); event.stopPropagation(); togglePinnedManuscript(archivePinTarget.dataset.archivePin); return; }
   if (archiveQuickTarget) {

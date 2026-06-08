@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v448";
-const ASSET_VERSION = "20260606-contraste-temas";
+const CACHE_NAME = "vereda-offline-v449";
+const ASSET_VERSION = "20260608-pasta-colapsa-cascata";
 
 const CORE_ASSETS = [
   "./",
