@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v450";
-const ASSET_VERSION = "20260609-hierarquia-sidebar";
+const CACHE_NAME = "vereda-offline-v451";
+const ASSET_VERSION = "20260610-fix-bluesky-svg";
 
 const CORE_ASSETS = [
   "./",

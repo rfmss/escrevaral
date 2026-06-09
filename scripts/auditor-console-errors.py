@@ -115,6 +115,7 @@ IGNORAR = [
     "The AudioContext was not allowed to start",  # browser policy, não produto
     "Unrecognized feature",
     "goatcounter",                                # analítica desabilitada em localhost
+    "gc.zgo.at",                                  # URL real do GoatCounter (não aparece como "goatcounter")
 ]
 
 
