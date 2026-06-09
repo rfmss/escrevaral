@@ -2,8 +2,7 @@ name: Auditoria Noturna — Escrevaral
 
 on:
   schedule:
-    - cron: '0 2 10 6 *'   # esta noite: 23h BRT (2h UTC 10/06)
-    - cron: '0 2 1 * *'    # todo mês, dia 1 — auditoria mensal
+    - cron: '30 8 * * *'   # todo dia às 5h30 BRT (8h30 UTC) — relatório pronto antes das 9h
   workflow_dispatch:        # disparo manual a qualquer hora
 
 permissions:
