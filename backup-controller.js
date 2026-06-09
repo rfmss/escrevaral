@@ -195,6 +195,33 @@ function renderBackupWarning() {
   }
 }
 
+function _checkReloadBackupNudge() {
+  const RELOAD_KEY = "vrda-reload-count";
+  const count = parseInt(sessionStorage.getItem(RELOAD_KEY) || "0", 10) + 1;
+  sessionStorage.setItem(RELOAD_KEY, String(count));
+
+  // Primeiro carregamento (count=1) passa silencioso; a partir do primeiro reload (count=2) verifica
+  if (count < 2) return;
+
+  // Só mostra se há conteúdo real para proteger
+  const hasContent = Array.isArray(state.manuscripts) &&
+    state.manuscripts.some(m => (m.text || "").trim().length > 0);
+  if (!hasContent) return;
+
+  // Só mostra se backup está ausente ou velho
+  if (!getBackupWarningState().visible) return;
+
+  const banner = document.getElementById("backup-nudge-banner");
+  if (!banner || !banner.hidden) return;
+  banner.hidden = false;
+
+  const exportBtn = document.getElementById("backup-nudge-export");
+  const dismissBtn = document.getElementById("backup-nudge-dismiss");
+
+  if (exportBtn) exportBtn.addEventListener("click", () => { exportBackup(); banner.hidden = true; }, { once: true });
+  if (dismissBtn) dismissBtn.addEventListener("click", () => { banner.hidden = true; }, { once: true });
+}
+
 function humanizeBackupError(error) {
   if (error.name === "NotAllowedError") {
     return "O arquivo de cópia precisa de confirmação — clique em Salvar agora para continuar.";

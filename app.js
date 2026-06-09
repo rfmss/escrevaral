@@ -3132,6 +3132,7 @@ function _bootstrap() {
   renderProofView();
   renderVersionList();
   renderBackupWarning();
+  _checkReloadBackupNudge();
   renderTemplateStudio();
   loadRimaLabText();
   renderRimaLab();
