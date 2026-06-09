@@ -56,16 +56,18 @@ function renderManuscriptNavigation() {
     })() : "";
 
     return `
-      <div class="nav-manuscript-wrap">
-        <button class="tree-row manuscript-row${isCurrent}" data-manuscript-id="${manuscript.id}">
-          <span class="material-symbols-outlined">${type.icon}</span>
-          <span class="nav-ms-title">${escapeHtml(manuscript.title || "Sem título")}</span>
-        </button>
-        <button class="nav-ms-delete" data-manuscript-delete="${manuscript.id}" title="Apagar nota" aria-label="Apagar nota">
-          <span class="material-symbols-outlined">delete</span>
-        </button>
+      <div class="nav-manuscript-group">
+        <div class="nav-manuscript-wrap">
+          <button class="tree-row manuscript-row${isCurrent}" data-manuscript-id="${manuscript.id}">
+            <span class="material-symbols-outlined">${type.icon}</span>
+            <span class="nav-ms-title">${escapeHtml(manuscript.title || "Sem título")}</span>
+          </button>
+          <button class="nav-ms-delete" data-manuscript-delete="${manuscript.id}" title="Apagar nota" aria-label="Apagar nota">
+            <span class="material-symbols-outlined">delete</span>
+          </button>
+        </div>
+        ${companionHtml}
       </div>
-      ${companionHtml}
     `;
   }
 

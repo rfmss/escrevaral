@@ -1280,7 +1280,9 @@ html {
 }
 
 .folder-children {
-  padding-left: 6px;
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left: 1px solid var(--line);
 }
 
 .nav-manuscript-wrap {
@@ -2913,8 +2915,8 @@ mark {
 /* ── BÍBLIA DO PROJETO — fichas no sidebar ─────────── */
 /* ── FICHAS — grupo colapsável no sidebar ─────────── */
 .fichas-section {
-  border-top: 1px solid var(--line);
-  margin-top: 2px;
+  margin-top: 0;
+  padding-left: 6px;
 }
 .fichas-section-toggle {
   display: flex;
@@ -2928,10 +2930,9 @@ mark {
   font: inherit;
 }
 .fichas-section-label {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
   color: var(--muted);
 }
 .fichas-chevron {
@@ -2973,14 +2974,14 @@ mark {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--card);
-  color: var(--soft-ink);
+  background: transparent;
+  color: var(--muted);
   font: inherit;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
   white-space: nowrap;
@@ -2991,6 +2992,19 @@ mark {
   background: color-mix(in srgb, var(--primary) 6%, var(--card));
 }
 .biblia-quick-btn .material-symbols-outlined { font-size: 13px; }
+
+.companion-add-row {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 3px 8px;
+  opacity: 0.7;
+  border-radius: 6px;
+}
+.companion-add-row:hover {
+  opacity: 1;
+  color: var(--soft-ink);
+  background: var(--surface-mid, transparent);
+}
 
 /* ── ONBOARDING UNIFICADO ──────────────────────────── */
 .ob-overlay {
