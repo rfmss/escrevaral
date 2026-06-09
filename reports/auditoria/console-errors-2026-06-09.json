@@ -8,12 +8,6 @@
       "erros": [
         {
           "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
-        {
-          "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
           "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
           "linha": 0
@@ -27,12 +21,6 @@
       "cenario": "editor-novo",
       "descricao": "Criar e abrir manuscrito novo",
       "erros": [
-        {
-          "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
         {
           "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
@@ -50,12 +38,6 @@
       "erros": [
         {
           "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
-        {
-          "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
           "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
           "linha": 0
@@ -69,12 +51,6 @@
       "cenario": "guia-de-escrita",
       "descricao": "Abrir guia de escrita",
       "erros": [
-        {
-          "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
         {
           "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
@@ -92,12 +68,6 @@
       "erros": [
         {
           "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
-        {
-          "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
           "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
           "linha": 0
@@ -113,12 +83,6 @@
       "erros": [
         {
           "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
-        {
-          "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
           "url": "https://escrevaral.goatcounter.com/counter/%2F.json",
           "linha": 0
@@ -132,12 +96,6 @@
       "cenario": "copia-seguranca",
       "descricao": "Acionar cópia de segurança",
       "erros": [
-        {
-          "tipo": "console.error",
-          "mensagem": "Error: <path> attribute d: Expected number, \"… 7.8 4.447 4.268-4.yet 1.16-6.49…\".",
-          "url": "http://localhost:8799/",
-          "linha": 1773
-        },
         {
           "tipo": "console.error",
           "mensagem": "Failed to load resource: net::ERR_FAILED",
