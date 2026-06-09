@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   rascunho:
@@ -155,6 +155,19 @@ jobs:
           POST
 
           echo "Registro publicado: $ARQUIVO"
+
+      - name: Criar release no GitHub
+        if: steps.commits.outputs.version != ''
+        run: |
+          VERSION="${{ steps.commits.outputs.version }}"
+          gh release view "$VERSION" --repo rfmss/escrevaral 2>/dev/null || \
+            gh release create "$VERSION" \
+              --repo rfmss/escrevaral \
+              --title "$VERSION" \
+              --generate-notes \
+              --latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit e push do registro
         if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
