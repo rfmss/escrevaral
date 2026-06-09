@@ -2,7 +2,7 @@ name: Guarda de Regressão — Corpus Arnaldo
 
 on:
   schedule:
-    - cron: '0 8 * * *'   # todo dia às 8h UTC (5h horário de Brasília)
+    - cron: '0 8,20 * * *'  # 2x por dia: 5h e 17h horário de Brasília
   workflow_dispatch:        # permite rodar manualmente
 
 permissions:
@@ -56,32 +56,43 @@ jobs:
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
+      - name: Smoke test site live
+        id: live
+        run: |
+          python3 scripts/smoke-live.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        working-directory: ${{ github.workspace }}
+        continue-on-error: true
+
       - name: Commitar relatório
         run: |
           git config user.name  "Arnaldo Figueiredo [bot]"
           git config user.email "guarda-regressao@escrevaral"
           DATA=$(date +%Y-%m-%d)
-          git add reports/agente/ reports/auditoria/overflow-mobile-${DATA}.md reports/auditoria/overflow-mobile-${DATA}.json reports/auditoria/console-errors-${DATA}.md reports/auditoria/console-errors-${DATA}.json || true
+          git add reports/agente/ reports/auditoria/overflow-mobile-${DATA}.md reports/auditoria/overflow-mobile-${DATA}.json reports/auditoria/console-errors-${DATA}.md reports/auditoria/console-errors-${DATA}.json reports/auditoria/smoke-live-${DATA}.md || true
           git diff --staged --quiet || git commit -m "relatório: guarda de regressão + auditores $DATA"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Abrir issue se houver regressão ou violação
-        if: steps.corpus.outputs.status == '1' || steps.overflow.outputs.status == '1' || steps.console_errors.outputs.status == '1'
+        if: steps.corpus.outputs.status == '1' || steps.overflow.outputs.status == '1' || steps.console_errors.outputs.status == '1' || steps.live.outputs.status == '1'
         run: |
           DATA=$(date +%Y-%m-%d)
           RELATORIO_CORPUS=$(cat reports/agente/${DATA}.md 2>/dev/null || echo "Relatório não encontrado.")
           RELATORIO_OVERFLOW=$(cat reports/auditoria/overflow-mobile-${DATA}.md 2>/dev/null || echo "")
           RELATORIO_CONSOLE=$(cat reports/auditoria/console-errors-${DATA}.md 2>/dev/null || echo "")
-          # Garante que os labels existem antes de usá-los
+          RELATORIO_LIVE=$(cat reports/auditoria/smoke-live-${DATA}.md 2>/dev/null || echo "")
           gh label create "regressao" --color "e11d48" --description "Regressão detectada pelo guarda" 2>/dev/null || true
           gh label create "auditoria" --color "f59e0b" --description "Violação detectada pelos auditores" 2>/dev/null || true
+          gh label create "site-live" --color "7c3aed" --description "Falha detectada no site em produção" 2>/dev/null || true
           LABELS="regressao"
           if [ "${{ steps.overflow.outputs.status }}" = "1" ] || [ "${{ steps.console_errors.outputs.status }}" = "1" ]; then
             LABELS="regressao,auditoria"
           fi
-          CORPO="$(printf 'Guarda de regressão detectou problema em %s.\n\n## Corpus (engines)\n\n%s\n\n## Overflow mobile\n\n%s\n\n## Console errors\n\n%s' "$DATA" "$RELATORIO_CORPUS" "$RELATORIO_OVERFLOW" "$RELATORIO_CONSOLE")"
+          if [ "${{ steps.live.outputs.status }}" = "1" ]; then
+            LABELS="${LABELS},site-live"
+          fi
+          CORPO="$(printf 'Guarda detectou problema em %s.\n\n## Site live\n\n%s\n\n## Corpus (engines)\n\n%s\n\n## Overflow mobile\n\n%s\n\n## Console errors\n\n%s' "$DATA" "$RELATORIO_LIVE" "$RELATORIO_CORPUS" "$RELATORIO_OVERFLOW" "$RELATORIO_CONSOLE")"
           gh issue create \
             --title "Regressão/violação detectada — $DATA" \
             --body "$CORPO" \
@@ -93,6 +104,10 @@ jobs:
         run: |
           DATA=$(date +%Y-%m-%d)
           echo "### Resumo — $DATA" >> $GITHUB_STEP_SUMMARY
+          if [ -f "reports/auditoria/smoke-live-${DATA}.md" ]; then
+            echo "#### Site live" >> $GITHUB_STEP_SUMMARY
+            cat reports/auditoria/smoke-live-${DATA}.md >> $GITHUB_STEP_SUMMARY
+          fi
           if [ -f "reports/agente/${DATA}.md" ]; then
             echo "#### Corpus (engines)" >> $GITHUB_STEP_SUMMARY
             cat reports/agente/${DATA}.md >> $GITHUB_STEP_SUMMARY
