@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v452";
-const ASSET_VERSION = "20260609-training-deriva";
+const CACHE_NAME = "vereda-offline-v453";
+const ASSET_VERSION = "20260609-perseguicao";
 
 const CORE_ASSETS = [
   "./",
@@ -64,6 +64,7 @@ const CORE_ASSETS = [
   `./tooltip-controller.js?v=${ASSET_VERSION}`,
   `./combo-detector.js?v=${ASSET_VERSION}`,
   `./deriva-mode.js?v=${ASSET_VERSION}`,
+  `./perseguicao-mode.js?v=${ASSET_VERSION}`,
   `./training-controller.js?v=${ASSET_VERSION}`,
   `./print-engine.js?v=${ASSET_VERSION}`,
   "./syntax-data.json",

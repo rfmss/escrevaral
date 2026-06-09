@@ -177,3 +177,29 @@
   color: var(--muted);
   text-align: right;
 }
+
+/* ── PERSEGUIÇÃO: fio estático + pulso ─────────────────── */
+
+.fio-p {
+  height: 100%;
+  width: 100%;
+  background: var(--primary);
+  border-radius: 99px;
+}
+
+.fio-p.pulsando {
+  animation: fio-pulso 0.35s ease-out;
+}
+
+@keyframes fio-pulso {
+  0%   { background: var(--primary); }
+  35%  { background: color-mix(in srgb, var(--primary) 50%, white); }
+  100% { background: var(--primary); }
+}
+
+.perseguicao-arena {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0 8px;
+}
