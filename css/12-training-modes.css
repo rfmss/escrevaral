@@ -1,0 +1,179 @@
+/* ── MODOS DE TREINO: DERIVA + PERSEGUIÇÃO ────────────── */
+
+.training-cards {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0 8px;
+  flex-wrap: wrap;
+}
+
+.training-card {
+  flex: 1 1 200px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--card);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--motion-quick), background var(--motion-quick);
+}
+
+.training-card:hover {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 4%, var(--card));
+}
+
+.training-card-icon {
+  font-size: 24px;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.training-card h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.training-card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.training-card[data-em-breve] {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ── ARENA DA DERIVA ─────────────────────────────────── */
+
+.deriva-arena {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0 8px;
+}
+
+.deriva-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.deriva-titulo {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.deriva-contador {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fio de tempo */
+.fio-container {
+  height: 3px;
+  background: var(--line);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.fio-bar {
+  height: 100%;
+  width: 100%;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 99px;
+  transition: background 0.3s ease;
+}
+
+.fio-bar[data-estado="vivo"] {
+  background: var(--primary);
+}
+
+.fio-bar[data-estado="quebrado"] {
+  background: var(--muted);
+}
+
+/* Textarea da Deriva */
+.deriva-textarea {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--surface-low, var(--surface));
+  caret-color: var(--primary);
+  box-sizing: border-box;
+  transition: border-color var(--motion-quick);
+}
+
+.deriva-textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.deriva-textarea::placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Ações */
+.deriva-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.deriva-btn-salvar {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: var(--surface);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--motion-quick);
+}
+
+.deriva-btn-salvar:hover { opacity: 0.85; }
+
+.deriva-btn-descartar {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color var(--motion-quick), border-color var(--motion-quick);
+}
+
+.deriva-btn-descartar:hover {
+  color: var(--ink);
+  border-color: var(--ink-soft);
+}
+
+.deriva-resumo {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: right;
+}

@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v451";
-const ASSET_VERSION = "20260610-fix-bluesky-svg";
+const CACHE_NAME = "vereda-offline-v452";
+const ASSET_VERSION = "20260609-training-deriva";
 
 const CORE_ASSETS = [
   "./",
@@ -23,6 +23,7 @@ const CORE_ASSETS = [
   `./css/08-responsive.css?v=${ASSET_VERSION}`,
   `./css/10-mobile-nav.css?v=${ASSET_VERSION}`,
   `./css/11-badges.css?v=${ASSET_VERSION}`,
+  `./css/12-training-modes.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,
@@ -61,6 +62,9 @@ const CORE_ASSETS = [
   `./pomodoro-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
   `./tooltip-controller.js?v=${ASSET_VERSION}`,
+  `./combo-detector.js?v=${ASSET_VERSION}`,
+  `./deriva-mode.js?v=${ASSET_VERSION}`,
+  `./training-controller.js?v=${ASSET_VERSION}`,
   `./print-engine.js?v=${ASSET_VERSION}`,
   "./syntax-data.json",
   "./norma-data.json",
