@@ -134,10 +134,12 @@ async def rodar_cenario(browser, cenario: dict) -> dict:
     # Captura console
     def on_console(msg):
         texto = msg.text
-        if deve_ignorar(texto):
+        loc_url = msg.location.get("url", "")
+        # Filtra pelo texto da mensagem OU pela URL de origem (ex: GoatCounter)
+        if deve_ignorar(texto) or deve_ignorar(loc_url):
             return
         if msg.type == "error":
-            erros.append({"tipo": "console.error", "mensagem": texto, "url": msg.location.get("url", ""), "linha": msg.location.get("lineNumber", 0)})
+            erros.append({"tipo": "console.error", "mensagem": texto, "url": loc_url, "linha": msg.location.get("lineNumber", 0)})
         elif msg.type == "warning":
             avisos.append({"tipo": "console.warn", "mensagem": texto})
 
