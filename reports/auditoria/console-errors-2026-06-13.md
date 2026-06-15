@@ -1,4 +1,4 @@
-# Auditoria Erros de Console — 2026-06-09
+# Auditoria Erros de Console — 2026-06-13
 
 **Estado geral:** ERROS DETECTADOS  
 **Erros JS:** 7 | **Erros de rede:** 0 | **Avisos:** 0
