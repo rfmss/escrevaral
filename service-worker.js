@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v455";
-const ASSET_VERSION = "20260615-nav-inline-def";
+const CACHE_NAME = "vereda-offline-v456";
+const ASSET_VERSION = "20260615-nav-labels";
 
 const CORE_ASSETS = [
   "./",
