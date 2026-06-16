@@ -473,6 +473,21 @@
   color: #c5bfff;
 }
 
+/* Scriptorium: a editor-paper tem fundo claro (#d4c5a9) mas --surface-low
+   é escuro — hover/scroll-active da toolbar ficava texto-escuro-em-fundo-escuro.
+   Usa leve escurecimento do papel para manter botões legíveis. */
+[data-theme="scriptorium"] .editor-paper .format-bar-wrap:hover,
+[data-theme="scriptorium"] .editor-paper .format-bar-wrap.is-scroll-active {
+  background: rgba(58, 44, 34, 0.07);
+  border-color: rgba(58, 44, 34, 0.18);
+}
+[data-theme="scriptorium"] .editor-paper .format-bar-wrap::before {
+  background: linear-gradient(to right, #d4c5a9 20%, transparent);
+}
+[data-theme="scriptorium"] .editor-paper .format-bar-wrap::after {
+  background: linear-gradient(to left, #d4c5a9 20%, transparent);
+}
+
 /* Writing area em modo colorido */
 .writing-area.is-grammar-colored {
   cursor: default;

@@ -511,7 +511,7 @@ function createPrecisionMarkup(analysis, manuscript, template) {
 function createReferenceMarkup(template) {
   const guidance = template.guidance || { meta: [], sections: [], reminders: [] };
   const formatBlock = guidance.format ? createFormatRulesMarkup(guidance.format) : "";
-  const model = template.model ? createModelMarkup(template.model) : "";
+  const model = template.model ? createModelMarkup(template.model, template.oficio) : "";
 
   // Blueprint: DNA + construção + conectivos da forma
   const blueprintBlock = guidance.blueprint ? `
@@ -576,10 +576,15 @@ function createFormatRulesMarkup(format) {
   `;
 }
 
-function createModelMarkup(model) {
+function createModelMarkup(model, oficio) {
+  const scaffoldLabel = /roteiro|script|screenplay/i.test(oficio || "")
+    ? "Estrutura — substitua cada bloco pela sua cena"
+    : /poema|poesia|soneto|slam|haiku|cordel|verso/i.test(oficio || "")
+    ? "Estrutura — substitua cada linha pelo seu verso"
+    : "Estrutura — substitua cada trecho pelo seu texto";
   const placeholderHtml = model.placeholder
     ? `<div class="reference-scaffold">
-        <p class="reference-scaffold-caption">Estrutura — substitua cada linha pelo seu verso</p>
+        <p class="reference-scaffold-caption">${scaffoldLabel}</p>
         <pre>${escapeHtml(model.placeholder)}</pre>
        </div>`
     : "";
