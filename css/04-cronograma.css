@@ -136,7 +136,7 @@
 
 .crono-shortcut-weekdays span:first-child {
   background: var(--primary-deep);
-  color: #fffdf8;
+  color: var(--paper);
 }
 
 .crono-shortcut-grid {
@@ -357,10 +357,9 @@
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.08em;
-  
-  background: #FEF3DC;
-  color: #875A00;
-  border: 1px solid #F0DFA0;
+  background: color-mix(in srgb, var(--ochre) 14%, transparent);
+  color: color-mix(in srgb, var(--ochre) 75%, var(--ink));
+  border: 1px solid color-mix(in srgb, var(--ochre) 28%, transparent);
   border-radius: 4px;
   padding: 2px 7px;
 }
@@ -425,9 +424,9 @@
 }
 
 .crono-item-manual.is-note {
-  --ci-bg: #FEF3DC;
-  --ci-text: #875A00;
-  --ci-border: #F0DFA0;
+  --ci-bg: color-mix(in srgb, var(--ochre) 12%, transparent);
+  --ci-text: color-mix(in srgb, var(--ochre) 75%, var(--ink));
+  --ci-border: color-mix(in srgb, var(--ochre) 25%, transparent);
 }
 
 .crono-item-manual.is-done {
@@ -490,7 +489,7 @@
 }
 
 .crono-add-btn:hover { border-color: var(--primary); color: var(--primary); }
-.crono-add-note:hover { border-color: #875A00; color: #875A00; }
+.crono-add-note:hover { border-color: color-mix(in srgb, var(--ochre) 70%, var(--ink)); color: color-mix(in srgb, var(--ochre) 70%, var(--ink)); }
 .crono-add-btn .material-symbols-outlined { font-size: 13px; }
 
 /* Empty state */
