@@ -16,10 +16,10 @@
 
   const semanticFields = {
     corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia"],
-    casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama"],
+    casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama", "corredor", "varanda", "quintal", "porão", "escada", "gaveta", "armário", "sala", "fogão", "pia", "espelho", "prateleira", "soleira", "alpendre"],
     natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu", "floresta", "cerrado", "sertão", "caatinga", "raiz", "pedra", "galho", "seca", "brejo", "savana"],
     memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época", "foto", "carta", "diário", "cheiro", "cicatriz", "marca", "história", "reviver", "apagar"],
-    conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue"],
+    conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue", "traição", "ódio", "raiva", "punição", "silêncio", "mentira", "ferida", "desespero"],
     pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender", "reflexão", "dúvida", "certeza", "consciência", "razão", "intuição", "dilema", "escolha", "questão", "saber"],
     cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina", "asfalto", "metrô", "buzina", "sirene", "multidão", "anonimato", "povo", "movimento", "barulho", "laje"],
     sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra"],
