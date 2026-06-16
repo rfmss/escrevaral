@@ -510,8 +510,20 @@ function queueSave() {
   saveTimer = window.setTimeout(() => persistState(), 450);
 }
 
-function openCreateNote() {
+let createNoteContext = "manuscript";
+
+function updateCreateNoteHeading() {
+  const eyebrow = document.querySelector("[data-create-note-eyebrow]");
+  const title = document.querySelector("[data-create-note-title]");
+  const isGuide = createNoteContext === "guide";
+  if (eyebrow) eyebrow.textContent = isGuide ? "Guia de escrita" : "Novo manuscrito";
+  if (title) title.textContent = isGuide ? "Escolher um guia" : "Começar";
+}
+
+function openCreateNote(options = {}) {
+  createNoteContext = options.context || "manuscript";
   createNoteCategory = null;
+  updateCreateNoteHeading();
   renderCreateNoteStep(1);
   createNoteOverlay.hidden = false;
 }
@@ -644,6 +656,8 @@ function renderCreateTemplateList(categoryId) {
 function closeCreateNote() {
   createNoteOverlay.hidden = true;
   createNoteParentId = null;
+  createNoteContext = "manuscript";
+  updateCreateNoteHeading();
 }
 
 function openAddCompanionNote(bibliType) {
@@ -704,7 +718,7 @@ function acceptTerms(goTo) {
     setView("editor", { updateRoute: true });
   } else if (goTo === "guide") {
     // Abre o bento de categorias (passo 1) sem pré-selecionar nenhuma
-    openCreateNote();
+    openCreateNote({ context: "guide" });
   } else if (goTo === "continue") {
     // Vai direto para o editor com o manuscrito mais recente
     if (state.manuscripts.length > 0) {

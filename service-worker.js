@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v499";
-const ASSET_VERSION = "20260617-pontuacao-lexico";
+const CACHE_NAME = "vereda-offline-v500";
+const ASSET_VERSION = "20260617-guia-onboarding";
 
 const CORE_ASSETS = [
   "./",
