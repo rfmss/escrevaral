@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v518";
-const ASSET_VERSION = "20260617-editor-modes-dark";
+const CACHE_NAME = "vereda-offline-v519";
+const ASSET_VERSION = "20260617-emotion-lexicons";
 
 const CORE_ASSETS = [
   "./",
