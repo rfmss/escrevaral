@@ -172,7 +172,7 @@ Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacrít
 | Pontuacao | **99%** | 40 regras + PONT-54 (aspas retas → tipográficas, severidade baixa); `acao` em cada regra; `resumo` por severidade |
 | Analise geral | **99%** | Badge "Saúde textual"; v481: +30 clichês literários de romance (olhos cor de mel, coração acelerou, arrepios percorreram…) — 115+ clichês total; 35+ pleonasmos; 16 condições |
 | Espelho de Voz | **99%** | 10 gestos (v482: irônico — Machado/Lima Barreto/J.Ubaldo; lexicon de ironia que existia mas nunca resultava em gesto); perfil persiste; flag `confianca`; copiar análise |
-| RimaLab | **98%** | Buscador de rimas por palavra (findRhymes — exata/toante); copy análise; enciclopédia 15 entradas; lexico 149 palavras |
+| RimaLab | **98%** | Buscador de rimas por palavra (findRhymes — exata/toante); copy análise; enciclopédia 15 entradas; v479: +20 oxítonas do cordel/MPB (mutirão, sertão, café, baião, paixão…) — ~169 palavras |
 | Decolonial / vocabulario | **98%** | 200 entradas; gênero, classe, estética, povos, relações, conhecimento expandidos |
 | Direitos / publicacao | **98%** | Calculadora de domínio público (ano de morte → resultado imediato); 12 cards; 7 fontes |
 | Tema Alvorada / Vereda | **95%** | v301: syntax-token luminoso no Vereda; tooltip-controller.js — 74 title→data-vrda-tooltip; clone visual |
