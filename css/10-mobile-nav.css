@@ -245,7 +245,11 @@
 }
 
 /* Botão "+ Novo texto": hidden por default, ativo abaixo de 820px */
-.editor-mobile-new { display: flex; align-items: center; }
+.editor-mobile-new { display: none; align-items: center; }
+
+@media (max-width: 819px) {
+  .editor-mobile-new { display: flex; }
+}
 
 /* ══════════════════════════════════════════════════════════════════
    PRINT
