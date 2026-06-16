@@ -94,7 +94,7 @@
     "lembrar":   ["recordar", "evocar", "rememorar", "trazer à mente", "relembrar", "reminiscir"],
 
     // Nascentes: "Esquecer e Olvidar: perder da memória; Olvidar é literário"
-    "esquecer":  ["olvidar", "apagar da memória", "obliterar", "descurar", "deixar cair no esquecimento"],
+    "esquecer":  ["olvidar", "apagar da memória", "obliterar", "descurar", "deixar cair no esquecimento", "perder de vista"],
 
     // Nascentes: "Adorar é amar sobre todas as coisas; Idolatrar é ter como ídolo,
     // amar como ídolo; Venerar é render culto de profundo respeito"
@@ -334,7 +334,7 @@
     "também":    ["igualmente", "outrossim", "ademais", "de igual modo", "da mesma forma", "bem como"],
 
     // Nascentes: "Ainda, Inda — A segunda é poética e popular"
-    "ainda":     ["inda", "mesmo assim", "até agora", "por ora", "de toda forma"],
+    "ainda":     ["inda", "mesmo assim", "até agora", "por ora", "de toda forma", "até o momento"],
 
     // est
     "já":        ["agora", "logo", "imediatamente", "de imediato", "neste instante", "desde já"],
@@ -350,10 +350,10 @@
     "logo":      ["imediatamente", "depois", "brevemente", "em seguida", "prontamente", "já"],
 
     // Nascentes: "Continuamente, Sempre — Sempre, em tempo e ocasião oportuna"
-    "sempre":    ["continuamente", "constantemente", "eternamente", "invariavelmente", "incessantemente"],
+    "sempre":    ["continuamente", "constantemente", "eternamente", "invariavelmente", "incessantemente", "sem cessar"],
 
     // Nascentes: "Jamais, Nunca — Jamais reforça o nunca com ideia de tempo passado"
-    "nunca":     ["jamais", "em tempo algum", "de forma alguma", "nunca mais", "em nenhum caso"],
+    "nunca":     ["jamais", "em tempo algum", "de forma alguma", "nunca mais", "em nenhum caso", "de jeito nenhum"],
 
     // est
     "assim":     ["desse modo", "dessa maneira", "por isso", "portanto", "logo", "conseguintemente"],
@@ -385,7 +385,7 @@
     "lutar":       ["combater", "resistir", "brigar", "contender", "pugnar", "batalhar"],
 
     // est
-    "acordar":     ["despertar", "erguer-se", "levantar", "animar-se", "sair do sono"],
+    "acordar":     ["despertar", "erguer-se", "levantar", "animar-se", "sair do sono", "abrir os olhos"],
 
     // Nascentes: "Sonhar é experimentar sonhos; Fantasiar é criar imagens voluntárias"
     "sonhar":      ["fantasiar", "imaginar", "alucinar", "devanear", "cismar", "divagar"],

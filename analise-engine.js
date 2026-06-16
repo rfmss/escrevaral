@@ -186,6 +186,8 @@
     /não\s+era\s+(in|im|ir|des|dis|a)\w+/gi,
     /não\s+foi\s+(in|im|ir|des|dis|a)\w+/gi,
     /nunca\s+é\s+(in|im|ir|des|dis|a)\w+/gi,
+    /não\s+seria\s+(in|im|ir|des|dis|a)\w+/gi,
+    /não\s+parece\s+(in|im|ir|des|dis|a)\w+/gi,
   ];
 
   const CONECTIVOS_LOGICOS = [
