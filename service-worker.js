@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v476";
-const ASSET_VERSION = "20260616-criterios-ptbr";
+const CACHE_NAME = "vereda-offline-v477";
+const ASSET_VERSION = "20260616-preset-ptbr";
 
 const CORE_ASSETS = [
   "./",
