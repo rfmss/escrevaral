@@ -682,7 +682,7 @@ html {
   border: 0;
   border-radius: 7px;
   background: transparent;
-  color: #6f6963;
+  color: var(--muted);
   cursor: pointer;
   padding: 9px 10px;
   text-align: left;
@@ -1099,21 +1099,17 @@ html {
 
 /* ── Nova nota: cor por ofício ── */
 .create-note-panel[data-craft="ficcao"]     { --craft: var(--primary); --craft-bg: color-mix(in srgb, var(--primary) 9%, transparent); }
-.create-note-panel[data-craft="roteiro"]    { --craft: #185FA5; --craft-bg: #EBF3FB; }
-.create-note-panel[data-craft="poesia"]     { --craft: #533AB7; --craft-bg: #EEEDFE; }
-.create-note-panel[data-craft="nao-ficcao"] { --craft: #875A00; --craft-bg: #FEF3DC; }
+.create-note-panel[data-craft="roteiro"]    { --craft: #185FA5; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
+.create-note-panel[data-craft="poesia"]     { --craft: #533AB7; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
+.create-note-panel[data-craft="nao-ficcao"] { --craft: #875A00; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
 .create-note-panel[data-craft="projeto"]    { --craft: var(--soft-ink); --craft-bg: var(--surface-low); }
-.create-note-panel[data-craft="vestibular"] { --craft: #C04B2E; --craft-bg: #FBE9E4; }
-.create-note-panel[data-craft="comercial"]  { --craft: #1B6B6B; --craft-bg: #E3F2F2; }
+.create-note-panel[data-craft="vestibular"] { --craft: #C04B2E; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
+.create-note-panel[data-craft="comercial"]  { --craft: #1B6B6B; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
 
 /* No tema Amazônia, Poesia usa magenta para não conflitar com o primary roxo */
 [data-theme="amazonia"] .create-note-panel[data-craft="poesia"],
 [data-theme="amazonia-dark"] .create-note-panel[data-craft="poesia"] {
   --craft: #9B2D6A;
-  --craft-bg: #F9E8F2;
-}
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="poesia"] {
-  --craft-bg: rgba(155, 45, 106, 0.15);
 }
 
 
@@ -1934,6 +1930,14 @@ mark {
   background: #c7eadc;
   color: #002018;
   padding: 0 4px;
+}
+[data-theme="scriptorium"] mark,
+[data-theme="cerrado-dark"] mark,
+[data-theme="mata-dark"] mark,
+[data-theme="amazonia-dark"] mark {
+  background: color-mix(in srgb, var(--primary) 22%, transparent);
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--primary) 35%, transparent);
 }
 
 .lexical-card,

@@ -68,7 +68,6 @@
     "campo","campos",
     "tema","temas",
     "assunto","assuntos",
-    "questão","questões",
     "motivo","motivos",
     "razão","razões",
     "causa","causas",
@@ -76,6 +75,14 @@
     "impacto","impactos",
     "resultado","resultados",
     "consequência","consequências",
+    "fenômeno","fenômenos",
+    "dimensão","dimensões",
+    "perspectiva","perspectivas",
+    "cenário","cenários",
+    "mecanismo","mecanismos",
+    "instância","instâncias",
+    "formato","formatos",
+    "parâmetro","parâmetros",
   ]);
 
   const CLIQUES_PT = [
