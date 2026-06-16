@@ -311,7 +311,7 @@ function renderProofView() {
 
   proofStatus.textContent = summary.status || "Escreva no editor para iniciar o registro";
   proofOrganic.textContent = summary.organicEvents;
-  document.querySelector("[data-proof-rejected]") && (document.querySelector("[data-proof-rejected]").textContent = `${summary.rejectedEvents} ignorados`);
+  document.querySelector("[data-proof-rejected]") && (document.querySelector("[data-proof-rejected]").textContent = `${summary.rejectedEvents} descartadas`);
 
   // Ritmo médio — sem travessão vazio
   const cadenceEl = document.querySelector("[data-proof-cadence]");

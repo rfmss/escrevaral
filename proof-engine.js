@@ -221,16 +221,22 @@
 
   function createSessionName(startedAt) {
     const date = new Date(startedAt);
+    if (Number.isNaN(date.getTime())) return "Sessão sem data";
 
-    if (Number.isNaN(date.getTime())) {
-      return "Sessão sem data";
+    const time = date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    const now = new Date();
+    const isToday = date.toDateString() === now.toDateString();
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const isYesterday = date.toDateString() === yesterday.toDateString();
+
+    if (isToday) return `Sessão de hoje — ${time}`;
+    if (isYesterday) return `Sessão de ontem — ${time}`;
+    if (date.getFullYear() === now.getFullYear()) {
+      const d = date.toLocaleDateString("pt-BR", { day: "numeric", month: "numeric" });
+      return `Sessão de ${d} — ${time}`;
     }
-
-    return `Sessão ${date.toLocaleDateString("pt-BR")} ${date.toLocaleTimeString("pt-BR", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    })}`;
+    return `Sessão de ${date.toLocaleDateString("pt-BR")} — ${time}`;
   }
 
   function classifyKey(keyboardEvent) {
