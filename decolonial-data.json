@@ -2344,6 +2344,125 @@
       "reason": "Quando aplicado de forma generalizada a populações negras, indígenas ou migrantes, o termo ecoa a lógica escravocrata que reduzia seres humanos a instrumentos de produção e mantinha corpos racializados fora da categoria de sujeitos.",
       "context": "Pode ser mantido em análise econômica crítica ou em fala de personagem que representa essa mentalidade.",
       "contextual": true
+    },
+    {
+      "avoid": "cigano",
+      "alternatives": [
+        "pessoa cigana",
+        "povo cigano",
+        "Roma",
+        "Romani"
+      ],
+      "category": "povos",
+      "reason": "Usado como sinônimo de desonesto ou ladrão, perpetuando estigmas históricos contra o povo Romani, que sofreu perseguição sistemática até o século XX.",
+      "context": "Ao se referir à cultura ou ao povo, use povo cigano ou Roma. Como metáfora de desonestidade, evite completamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "sangue puro",
+      "alternatives": [
+        "descendência",
+        "origem familiar",
+        "ancestralidade"
+      ],
+      "category": "povos",
+      "reason": "A ideia de pureza racial nega a mistura constitutiva de todos os povos e sustenta hierarquias racistas que fundamentaram limpezas étnicas.",
+      "context": "Em contextos históricos com personagens racistas, pode aparecer marcado criticamente como crença do personagem.",
+      "contextual": true
+    },
+    {
+      "avoid": "miscigenar",
+      "alternatives": [
+        "misturar origens",
+        "mesclar ancestralidades"
+      ],
+      "category": "povos",
+      "reason": "O conceito pressupõe raças puras que se misturam, perpetuando a ideia de hierarquia racial na qual o branco é a norma e o restante é desvio.",
+      "context": "Em análises históricas críticas, pode aparecer entre aspas com marcação explícita de que é um conceito contestado.",
+      "contextual": true
+    },
+    {
+      "avoid": "populações vulneráveis",
+      "alternatives": [
+        "pessoas em situação de vulnerabilidade",
+        "comunidades afetadas",
+        "grupos marginalizados estruturalmente"
+      ],
+      "category": "relacoes",
+      "reason": "Vulnerabilidade não é atributo das pessoas, mas resultado de condições estruturais impostas. A formulação desloca responsabilidade social para a vítima.",
+      "context": "Em documentos técnicos e políticas públicas o termo é convencionado; em prosa literária ou jornalística, prefira formular a condição externa.",
+      "contextual": true
+    },
+    {
+      "avoid": "trabalhador braçal",
+      "alternatives": [
+        "trabalhador manual",
+        "operário",
+        "trabalhador da construção",
+        "profissional de [função]"
+      ],
+      "category": "classe",
+      "reason": "Reduz o trabalhador ao esforço físico, apagando o saber técnico, a habilidade e a dignidade do trabalho não-letrado.",
+      "context": "Prefira nomear a função específica. O adjetivo braçal pode aparecer em análises sobre divisão social do trabalho.",
+      "contextual": false
+    },
+    {
+      "avoid": "caipira como insulto",
+      "alternatives": [
+        "pessoa do interior",
+        "habitante rural",
+        "sertanejo"
+      ],
+      "category": "territorio",
+      "reason": "Caipira usado como xingamento estigmatiza culturas rurais e sertanejas como atrasadas, hierarquizando territórios a partir da lógica urbanocêntrica.",
+      "context": "Como identidade autodeclarada e cultural, a palavra tem dignidade e pode ser usada com orgulho por quem se reconhece nela.",
+      "contextual": true
+    },
+    {
+      "avoid": "puxado para o negro",
+      "alternatives": [
+        "pele mais escura",
+        "tom de pele [descrição direta]"
+      ],
+      "category": "estetica",
+      "reason": "A expressão implica que traços negros são desvio de uma norma branca, reforçando hierarquia racial disfarçada de descrição neutra.",
+      "context": "Para descrever aparência física, descreva o atributo diretamente sem usar raça como desvio de uma norma implícita.",
+      "contextual": false
+    },
+    {
+      "avoid": "trabalhadora do lar",
+      "alternatives": [
+        "trabalhadora doméstica",
+        "empregada doméstica"
+      ],
+      "category": "genero",
+      "reason": "O eufemismo obscurece a relação trabalhista formal e pode ser usado para justificar negação de direitos trabalhistas reconhecidos pela legislação brasileira.",
+      "context": "Trabalhadora doméstica é o termo correto e legalmente reconhecido no Brasil desde a EC 72/2013.",
+      "contextual": false
+    },
+    {
+      "avoid": "sem cultura",
+      "alternatives": [
+        "sem acesso a bens culturais",
+        "de outra tradição cultural",
+        "com referências culturais distintas"
+      ],
+      "category": "conhecimento",
+      "reason": "Todo povo tem cultura. A expressão aplica a régua da cultura dominante para apagar outras tradições, conhecimentos e formas de organização social.",
+      "context": "Personagens podem usar a expressão como marcador da visão de mundo preconceituosa de quem fala, e não como narrador onisciente.",
+      "contextual": true
+    },
+    {
+      "avoid": "problema social",
+      "alternatives": [
+        "consequência de desigualdade estrutural",
+        "resultado de políticas excludentes",
+        "situação de [descrição concreta]"
+      ],
+      "category": "classe",
+      "reason": "Deslocar pessoas empobrecidas para a categoria de problema social retira-lhes a condição de sujeito e naturaliza exclusão como fenômeno não-político.",
+      "context": "Em análise sociológica crítica, o termo aparece com aspas quando se analisa o discurso que o usa. Na ficção, pode marcar visão de personagem.",
+      "contextual": true
     }
   ]
 }
