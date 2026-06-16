@@ -580,3 +580,56 @@
   border-color: rgba(201, 125, 50, 0.38);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.48);
 }
+
+/* ── Contraste: cores fixas de tema claro não adaptam em temas escuros ── */
+
+/* proof-chip "high" usa #2a5a3a fixo — invisível em fundos escuros */
+[data-theme="scriptorium"] .proof-chip[data-level="high"],
+[data-theme="cerrado-dark"] .proof-chip[data-level="high"],
+[data-theme="mata-dark"] .proof-chip[data-level="high"],
+[data-theme="amazonia-dark"] .proof-chip[data-level="high"] {
+  color: color-mix(in srgb, var(--sage) 75%, var(--ink));
+  border-color: color-mix(in srgb, var(--sage) 28%, transparent);
+}
+[data-theme="scriptorium"] .proof-chip[data-level="high"] .proof-chip-dot,
+[data-theme="cerrado-dark"] .proof-chip[data-level="high"] .proof-chip-dot,
+[data-theme="mata-dark"] .proof-chip[data-level="high"] .proof-chip-dot,
+[data-theme="amazonia-dark"] .proof-chip[data-level="high"] .proof-chip-dot {
+  background: color-mix(in srgb, var(--sage) 65%, var(--surface));
+}
+
+/* proof-chip "low" e health-score — sienna escuro no Vereda falha contraste */
+[data-theme="scriptorium"] .proof-chip[data-level="low"] {
+  color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
+  border-color: color-mix(in srgb, var(--sienna) 35%, transparent);
+}
+[data-theme="scriptorium"] .proof-chip[data-level="low"] .proof-chip-dot {
+  background: color-mix(in srgb, var(--sienna) 60%, var(--surface));
+}
+[data-theme="scriptorium"] .voice-health-score.health-low {
+  background: color-mix(in srgb, var(--sienna) 18%, var(--surface));
+  color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
+}
+
+/* template-check icons com hex fixos de tema claro (#eaf3de, #e6f1fb, #faeeda) */
+[data-theme="scriptorium"] .template-check-item[data-status="done"] .template-check-icon,
+[data-theme="cerrado-dark"] .template-check-item[data-status="done"] .template-check-icon,
+[data-theme="mata-dark"] .template-check-item[data-status="done"] .template-check-icon,
+[data-theme="amazonia-dark"] .template-check-item[data-status="done"] .template-check-icon {
+  background: color-mix(in srgb, var(--sage) 22%, var(--surface-mid));
+  color: color-mix(in srgb, var(--sage) 75%, var(--ink));
+}
+[data-theme="scriptorium"] .template-check-item[data-status="info"] .template-check-icon,
+[data-theme="cerrado-dark"] .template-check-item[data-status="info"] .template-check-icon,
+[data-theme="mata-dark"] .template-check-item[data-status="info"] .template-check-icon,
+[data-theme="amazonia-dark"] .template-check-item[data-status="info"] .template-check-icon {
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface-mid));
+  color: color-mix(in srgb, var(--primary) 65%, var(--ink));
+}
+[data-theme="scriptorium"] .template-check-item[data-status="warn"] .template-check-icon,
+[data-theme="cerrado-dark"] .template-check-item[data-status="warn"] .template-check-icon,
+[data-theme="mata-dark"] .template-check-item[data-status="warn"] .template-check-icon,
+[data-theme="amazonia-dark"] .template-check-item[data-status="warn"] .template-check-icon {
+  background: color-mix(in srgb, var(--ochre) 22%, var(--surface-mid));
+  color: color-mix(in srgb, var(--ochre) 75%, var(--ink));
+}
