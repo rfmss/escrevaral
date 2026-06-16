@@ -2,93 +2,214 @@
   "encyclopedia": [
     {
       "title": "Regra de ouro da métrica",
-      "tags": ["escansão", "última tônica", "oficina"],
+      "tags": [
+        "escansão",
+        "última tônica",
+        "oficina"
+      ],
       "body": "Na contagem poética tradicional, o verso é contado até a última sílaba tônica da última palavra. Sons depois dela não entram na medida clássica.",
       "sample": "O amor é fogo que arde sem se ver"
     },
     {
       "title": "Soneto",
-      "tags": ["14 versos", "decassílabo", "ABBA ABBA CDC DCD"],
+      "tags": [
+        "14 versos",
+        "decassílabo",
+        "ABBA ABBA CDC DCD"
+      ],
       "body": "Forma fixa com dois quartetos e dois tercetos, em decassílabos. A tradição clássica exige rima e medida; a tradição moderna pode flexibilizar ambas sem abandonar a estrutura.",
       "sample": "Sete anos de pastor Jacó servia\nLabão, pai de Raquel, serrana bela"
     },
     {
       "title": "Decassílabo",
-      "tags": ["10 sílabas", "heroico", "sáfico", "soneto"],
+      "tags": [
+        "10 sílabas",
+        "heroico",
+        "sáfico",
+        "soneto"
+      ],
       "body": "Verso de dez sílabas. No decassílabo heroico, a tônica cai na 6.ª e 10.ª sílabas. No sáfico, na 4.ª, 8.ª e 10.ª. A variação é intencional: define o pulso da estrofe.",
       "sample": "Mu-dan-ça d'água-sua-ve e-ma-ra-vi-lha"
     },
     {
       "title": "Redondilha maior",
-      "tags": ["7 sílabas", "heptassílabo", "música"],
+      "tags": [
+        "7 sílabas",
+        "heptassílabo",
+        "música"
+      ],
       "body": "Uma das medidas mais naturais da língua portuguesa. Aparece em cantiga, cordel, letra de música e poema narrativo. A tônica costuma cair na 7.ª sílaba.",
       "sample": "Minha rua não cabe no mapa\nmas me chama pelo nome"
     },
     {
       "title": "Redondilha menor",
-      "tags": ["5 sílabas", "cantável", "popular"],
+      "tags": [
+        "5 sílabas",
+        "cantável",
+        "popular"
+      ],
       "body": "Verso breve, forte em canção e poesia oral. A concisão obriga imagem nítida e ritmo rápido. Muito usada na poesia popular nordestina.",
       "sample": "Minha terra tem\num rio parado"
     },
     {
       "title": "Sextilha",
-      "tags": ["6 versos", "redondilha maior", "oralidade"],
+      "tags": [
+        "6 versos",
+        "redondilha maior",
+        "oralidade"
+      ],
       "body": "Muito usada na poesia popular e no repente nordestino. Costuma trabalhar sete sílabas poéticas com rimas alternadas (ABABAB) ou emparelhadas.",
       "sample": "No terreiro a voz levanta\nquando a noite pede chão"
     },
     {
       "title": "Décima e Espinela",
-      "tags": ["10 versos", "redondilha maior", "ABBAACCDDC"],
+      "tags": [
+        "10 versos",
+        "redondilha maior",
+        "ABBAACCDDC"
+      ],
       "body": "A décima espinela, de origem espanhola, tem dez versos em redondilha maior com o esquema ABBAACCDDC. Muito presente no repente e na cantoria nordestina.",
       "sample": "Sou filho da terra seca\nonde o sol cobre o chão\ne a caatinga faz moldura\ndessa vida sem ventura"
     },
     {
       "title": "Sinalefa e Elisão",
-      "tags": ["escansão", "vogais", "junção"],
+      "tags": [
+        "escansão",
+        "vogais",
+        "junção"
+      ],
       "body": "Sinalefa: quando a última vogal de uma palavra se une à primeira vogal da próxima, formando uma só sílaba poética. É a regra, não a exceção. O oposto — hiato poético — é a separação intencional entre vogais contíguas.",
       "sample": "O a-mor é fo-go que ar-de sem se ver\n(O a- = 1 sílaba pela sinalefa)"
     },
     {
       "title": "Rima rica e rima pobre",
-      "tags": ["classificação", "gramática", "qualidade"],
+      "tags": [
+        "classificação",
+        "gramática",
+        "qualidade"
+      ],
       "body": "Rima rica: palavras de classes gramaticais distintas rimam (substantivo + verbo, ex.: 'canção / cantar'). Rima pobre: mesma classe gramatical (substantivo + substantivo). A rima preciosa envolve terminação rara ou palavra proparoxítona.",
       "sample": "Tenho tanto amor pra dar\naté parece absurdo\nmas ninguém quis escutar\ne fiquei no meu recanto"
     },
     {
       "title": "Tonicidade do verso",
-      "tags": ["oxítona", "paroxítona", "proparoxítona", "contagem"],
+      "tags": [
+        "oxítona",
+        "paroxítona",
+        "proparoxítona",
+        "contagem"
+      ],
       "body": "Oxítona (tônica na última): o verso tem seu valor métrico. Paroxítona (tônica na penúltima): acrescenta uma sílaba extra ao total contado. Proparoxítona (tônica na antepenúltima): acrescenta duas sílabas extras ao total.",
       "sample": "cantar → oxítona (conta como está)\ncanta → paroxítona (+1 na contagem)\ncântico → proparoxítona (+2)"
     },
     {
       "title": "Assonância (rima toante)",
-      "tags": ["vogais", "som", "toante"],
+      "tags": [
+        "vogais",
+        "som",
+        "toante"
+      ],
       "body": "Rima toante ou assonância: só as vogais tônicas coincidem, as consoantes diferem. Muito usada na poesia moderna e nas cantigas medievais. Exemplo: 'bela' e 'terra' rimam toantemente pelo 'e' tônico.",
       "sample": "A lua bela e clara\npassa sobre a terra"
     },
     {
       "title": "Verso livre",
-      "tags": ["sem métrica fixa", "modernismo", "ritmo interior"],
+      "tags": [
+        "sem métrica fixa",
+        "modernismo",
+        "ritmo interior"
+      ],
       "body": "Verso sem medida ou rima obrigatória. O ritmo nasce da sintaxe, das pausas, das repetições e do agrupamento semântico. O verso livre não é ausência de forma: é forma escolhida a cada linha.",
       "sample": "Não sou nada.\nNunca serei nada.\nNão posso querer ser nada.\nÀ parte isso, tenho em mim todos os sonhos do mundo."
     },
     {
       "title": "Cordel",
-      "tags": ["sextilha", "nordeste", "oralidade", "literatura popular"],
+      "tags": [
+        "sextilha",
+        "nordeste",
+        "oralidade",
+        "literatura popular"
+      ],
       "body": "A literatura de cordel brasileira usa principalmente sextilhas e décimas. A sextilha de cordel tem rimas nas posições 2, 4 e 6 (ou 2 e 5) e redondilha maior. O ritmo deve soar bem em voz alta.",
       "sample": "Eu sou filho do Nordeste\ncriado no sertão\nnasci numa caatinga\nfui embora pra cidade\ne trouxe no peito uma saudade\ndo meu torrão"
     },
     {
       "title": "Haiku em português",
-      "tags": ["3 versos", "5-7-5", "natureza", "momento"],
+      "tags": [
+        "3 versos",
+        "5-7-5",
+        "natureza",
+        "momento"
+      ],
       "body": "No haiku japonês, conta-se moras (unidade fonética); em português, usamos sílabas poéticas. A fórmula 5-7-5 é referência, não dogma. O haiku captura um instante com imagem concreta e sem explicação.",
       "sample": "Chuva de verão —\na poça que não esperava\nreflecte o céu limpo"
     },
     {
       "title": "Cesura",
-      "tags": ["pausa interna", "decassílabo", "respiração"],
+      "tags": [
+        "pausa interna",
+        "decassílabo",
+        "respiração"
+      ],
       "body": "Cesura é a pausa interna de um verso longo, geralmente após a 4.ª, 6.ª ou 7.ª sílaba. No decassílabo heroico, a cesura costuma cair após a 6.ª sílaba, criando dois hemistíquios de 6+4 ou 4+6.",
       "sample": "Mudam-se os tempos, | mudam-se as vontades"
+    },
+    {
+      "title": "Trova",
+      "tags": [
+        "4 versos",
+        "redondilha maior",
+        "ABAB",
+        "poesia popular"
+      ],
+      "body": "Estrofe de quatro versos em redondilha maior (7 silabas), com rima alternada (ABAB). E a celula da poesia popular brasileira, do cordel ao repente. A trova perfeita exige isometria, rima soante e sentido completo na estrofe.",
+      "sample": "O sertao tem cor de areia / quando o sol toca o chao. / A caatinga, quando aneia, / tem beleza de oracao."
+    },
+    {
+      "title": "Cavalgamento (Enjambement)",
+      "tags": [
+        "enjambement",
+        "encadeamento",
+        "linha",
+        "sentido"
+      ],
+      "body": "Ocorre quando o sentido de um verso transborda para o seguinte, forcando o leitor a nao pausar na quebra de linha. O cavalgamento cria tensao, acelera o ritmo e pode contradizer a expectativa criada ao final do primeiro verso. E ferramenta de controle de expectativa.",
+      "sample": "Ela saiu sem dizer / nada. O silencio fechou / a porta com cuidado e sem / pressa alguma, devagar."
+    },
+    {
+      "title": "Aliteracao",
+      "tags": [
+        "som",
+        "consoante",
+        "repeticao",
+        "musicalidade"
+      ],
+      "body": "Repeticao de sons consonantais no inicio ou interior de palavras proximas. Cria musicalidade, enfase e textura sonora. Diferente da rima (que ocorre no final do verso), a aliteracao opera dentro do verso. Em excesso, vira trava-lingua; em dose certa, e assinatura sonora.",
+      "sample": "Vozes veladas, veludosas vozes (Cruz e Sousa, repeticao do V cria suavidade). Pedro pedreiro penseiro esperando o trem (Chico Buarque, repeticao reforco a espera mecanica)."
+    },
+    {
+      "title": "Esquemas de rima",
+      "tags": [
+        "ABAB",
+        "AABB",
+        "ABBA",
+        "alternada",
+        "emparelhada",
+        "interpolada"
+      ],
+      "body": "Rima alternada (ABAB): versos pares rimam entre si, impares entre si. Rima emparelhada (AABB): versos seguidos rimam juntos, cria fechamento rapido, muito usada no cordel. Rima interpolada (ABBA): rima abre e fecha depois, criando expectativa longa, tipica dos quartetos do soneto classico.",
+      "sample": "ABBA de Camoes: Amor e fogo que arde sem se ver / e ferida que doi e nao se sente / e um contentamento descontente / e dor que desatina sem doer."
+    },
+    {
+      "title": "Glosa",
+      "tags": [
+        "forma fixa",
+        "mote",
+        "estrofe",
+        "iberica"
+      ],
+      "body": "Forma de origem iberica na qual um poema curto (mote, de 2 a 4 versos) e desenvolvido em estrofes que terminam cada uma com um verso do mote. Se o mote tem 4 versos, a glosa tera 4 estrofes de 10 versos cada. Exercicio de virtuosismo poetico muito cultivado na literatura luso-brasileira.",
+      "sample": "Mote: Quem tem amor tem cuidado, / quem tem cuidado nao dorme. A primeira estrofe da glosa termina em quem tem amor tem cuidado, a segunda em quem tem cuidado nao dorme."
     }
   ],
   "grammarWords": {
