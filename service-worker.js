@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v497";
-const ASSET_VERSION = "20260617-grammar-dark-all";
+const CACHE_NAME = "vereda-offline-v498";
+const ASSET_VERSION = "20260617-analise-cliques-pleonasmos";
 
 const CORE_ASSETS = [
   "./",

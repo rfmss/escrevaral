@@ -131,6 +131,14 @@
     "amor à primeira vista","almas gêmeas","destinados a se encontrar",
     "não conseguia tirar os olhos dela","não conseguia tirar os olhos dele",
     "não conseguia parar de pensar nela","não conseguia parar de pensar nele",
+    // clichês de ficção e prosa literária
+    "noite estrelada","noite de lua cheia","vento uivava","vento gelado",
+    "correu para seus braços","jogou-se em seus braços","sentiu-se flutuar",
+    "perdeu-se em seus olhos","mergulhou em seus olhos","afogou-se em seus olhos",
+    "ela era linda demais","ele era lindo demais",
+    // clichês de redação acadêmica / escolar
+    "o presente trabalho","ao longo deste artigo","ao longo desta pesquisa",
+    "no decorrer desta análise","destarte","não obstante isso",
   ];
 
   const PLEONASMOS = [
@@ -152,13 +160,17 @@
     ["conviver juntos","conviver"],["premissa prévia","premissa"],
     ["prever antecipadamente","prever"],["retornar de volta","retornar"],
     ["comparecer pessoalmente","comparecer"],["biografia de vida","biografia"],
-    ["elo de ligação","elo"],["a razão é porque","a razão é que"],
+    ["a razão é porque","a razão é que"],
     ["onde quer que seja","onde quer que"],["metade da metade","um quarto"],
     ["dois irmãos gêmeos","gêmeos"],["primeira estreia","estreia"],
     ["previsão futura","previsão"],["fato verídico","fato"],
     ["possível hipótese","hipótese"],["avançar para frente","avançar"],
     ["recuar para trás","recuar"],["importar para dentro","importar"],
     ["exportar para fora","exportar"],["breve síntese","síntese"],
+    ["consenso geral","consenso"],["opinião pessoal","opinião"],
+    ["suicídio voluntário","suicídio"],["regressar de volta","regressar"],
+    ["perspectiva futura","perspectiva"],["somente apenas","somente"],
+    ["bom êxito","êxito"],["sorriso nos lábios","sorriso"],
   ];
 
   const NEGACOES_DUPLAS = [
