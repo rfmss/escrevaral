@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v533";
-const ASSET_VERSION = "20260617-toolbar-verso-fix";
+const CACHE_NAME = "vereda-offline-v534";
+const ASSET_VERSION = "20260617-lexico-173";
 
 const CORE_ASSETS = [
   "./",

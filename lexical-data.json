@@ -971,6 +971,72 @@
       "className": "Substantivo masculino",
       "field": "Espaço — pertencimento, o que o exílio nega, onde o corpo sabe que está em casa",
       "note": "Distinto de 'casa' (o imóvel) — lar é onde se pertence. Em textos de diáspora e migração, lar é o que se perde ou se busca. Em Conceição Evaristo, o quilombo torna-se lar. Em Adélia Prado, lar é o sagrado cotidiano do feijão e da reza. Use quando o texto não fala do teto, mas do vínculo — quando a personagem reconhece (ou não encontra) onde pode ser ela mesma."
+    },
+    "lua": {
+      "label": "lua",
+      "className": "Substantivo feminino",
+      "field": "Natureza — ciclo, feminino, luz emprestada",
+      "note": "A lua ilumina sem queimar — e por isso é a luz dos que ficam acordados sozinhos. Em Adélia Prado e em Manoel de Barros, a lua é sagrada sem ser solenidade. Use com precisão de fase: lua cheia é diferente de lua minguante. O clichê de lua romântica se quebra quando a lua tem contexto específico e uma personagem que precisa dela por razão própria."
+    },
+    "nuvem": {
+      "label": "nuvem",
+      "className": "Substantivo feminino",
+      "field": "Natureza — passagem, instabilidade, o que o vento decide",
+      "note": "Nuvem é o elemento mais democrático do céu — carrega chuva para o sertão e sombra para a cidade. Em Drummond, pode ser metáfora do acaso. Em ficção especulativa brasileira, nuvem começa a migrar para o domínio digital. Evite como ornamento de paisagem; use quando o texto quer marcar impermanência ou iminência."
+    },
+    "areia": {
+      "label": "areia",
+      "className": "Substantivo feminino",
+      "field": "Natureza — provisório, tempo que escorre, fronteira entre mar e terra",
+      "note": "Em João Cabral de Melo Neto, a areia é seca, áspera, resistência. Na tradição do candomblé, areia é elemento de Iemanjá e da fronteira entre mundos. Como metáfora de tempo: o que se segura de areia escorre. Use quando o texto quer marcar o que não se pode guardar, o que muda com qualquer vento."
+    },
+    "sal": {
+      "label": "sal",
+      "className": "Substantivo masculino",
+      "field": "Sentido — preservação, sabor, lágrima, o mar dentro de nós",
+      "note": "Sal preserva e corrói ao mesmo tempo. Na tradição do Nordeste, é valor — o sal da comida, o sal que falta. Em Clarice Lispector, o salino tem textura existencial. Lágrima é salgada — a biologia dá ao texto uma metáfora pronta que funciona porque é real. Use quando o texto quer marcar o que a vida tem de indispensável e de doloroso ao mesmo tempo."
+    },
+    "segredo": {
+      "label": "segredo",
+      "className": "Substantivo masculino",
+      "field": "Narrativa — o que a personagem sabe e o leitor não (ainda), motor de tensão",
+      "note": "Todo romance tem segredo — o que varia é quem sabe. O segredo que o leitor conhece e o personagem não é ironia trágica. O segredo que ninguém conhece é o motor do suspense. Em textos de família brasileira (Lygia Fagundes Telles, por exemplo), o segredo costuma ter endereço: uma gaveta, uma carta não enviada, uma conversa evitada por décadas."
+    },
+    "traicao": {
+      "label": "traição",
+      "className": "Substantivo feminino",
+      "field": "Conflito — quebra de pacto, ferida que muda a história",
+      "note": "Traição exige um pacto anterior — explícito ou implícito. Sem confiança estabelecida, não há traição, apenas decepção. Em Machado de Assis, a traição opera no silêncio social. Em Ana Paula Maia, é física e brutal. Use quando a personagem age contra o que o leitor (e outras personagens) esperavam que ela protegesse. A traição bem escrita redefine tudo que veio antes."
+    },
+    "partida": {
+      "label": "partida",
+      "className": "Substantivo feminino",
+      "field": "Movimento — saída, ruptura, o que deixa rastro",
+      "note": "A partida na literatura brasileira é frequentemente migração: do sertão para o sul, do interior para a capital, do país para o exílio. Em Guimarães Rosa, partir é atravessar o sertão e nunca mais ser o mesmo. Diferente de 'saída' (ato físico) — partida implica peso, escolha, o que fica para trás. A cena da partida é sempre uma cena de perda."
+    },
+    "perda": {
+      "label": "perda",
+      "className": "Substantivo feminino",
+      "field": "Afeto — o que não se recupera, o que define quem se é depois",
+      "note": "Perda é o que move a maioria das narrativas. Em Clarice Lispector, é a perda de si mesma ao tomar consciência. Em Carolina de Jesus, é concreta — o filho, o feijão, o dia de trabalho. Distinto de 'luto' (resposta à morte) — perda pode ser de um objeto, de uma chance, de uma versão de si. Use quando a ausência tem peso de objeto físico."
+    },
+    "encontro": {
+      "label": "encontro",
+      "className": "Substantivo masculino",
+      "field": "Narrativa — colisão de trajetórias, ponto em que a história muda",
+      "note": "O encontro é o evento mais estudado da narrativa. Personagens que se encontram nunca voltam ao que eram antes — ou pelo menos não deveriam. Em Clarice Lispector (A Hora da Estrela), o encontro entre Macabéa e Olímpico é tragédia e epifania ao mesmo tempo. Use com intenção: o encontro casual que muda tudo só funciona quando o leitor entende por que aquele momento era inevitável."
+    },
+    "despedida": {
+      "label": "despedida",
+      "className": "Substantivo feminino",
+      "field": "Afeto — encerramento, o que não cabe na palavra tchau",
+      "note": "A despedida na ficção brasileira é muitas vezes adiada, incompleta, não dita. Em Graciliano Ramos (Vidas Secas), a família parte sem palavra de despedida — o silêncio é o texto. A despedida que não acontece é às vezes mais poderosa que a que acontece. Use quando o texto quer mostrar o que personagens não conseguem dizer em palavras."
+    },
+    "pertencimento": {
+      "label": "pertencimento",
+      "className": "Substantivo masculino",
+      "field": "Identidade — lugar no mundo, raiz, o oposto do exílio",
+      "note": "Pertencimento é o que a personagem busca ou perdeu. Em textos de diáspora africana e literatura indígena contemporânea, é o eixo de toda narrativa. Em Conceição Evaristo, pertencer ao quilombo é pertencer à própria história. Em textos de classe média, pertencimento é mais sutil — a personagem que sorri mas não se sente do mesmo lado. Use quando o texto quer mostrar a diferença entre estar num lugar e ser desse lugar."
     }
   },
   "functionWords": {
