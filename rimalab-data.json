@@ -210,6 +210,63 @@
       ],
       "body": "Forma de origem iberica na qual um poema curto (mote, de 2 a 4 versos) e desenvolvido em estrofes que terminam cada uma com um verso do mote. Se o mote tem 4 versos, a glosa tera 4 estrofes de 10 versos cada. Exercicio de virtuosismo poetico muito cultivado na literatura luso-brasileira.",
       "sample": "Mote: Quem tem amor tem cuidado, / quem tem cuidado nao dorme. A primeira estrofe da glosa termina em quem tem amor tem cuidado, a segunda em quem tem cuidado nao dorme."
+    },
+    {
+      "title": "Oitava rima",
+      "tags": [
+        "ABABABCC",
+        "estrofe",
+        "épica",
+        "Camões",
+        "clássico"
+      ],
+      "body": "Estrofe de oito versos com esquema ABABABCC: os seis primeiros alternam duas rimas, os dois últimos formam um dístico emparelhado. É a forma da epopeia clássica ibérica — Camões usou em Os Lusíadas. Os dois versos finais (redondilha fechada) criam um eco que resume ou vira a chave da estrofe.",
+      "sample": "Armas e os Barões assinalados (A)\nQue da Ocidental praia Lusitana (B)\nPor mares nunca de antes navegados (A)\nPassaram além da Taprobana (B)\nEm perigos e guerras esforçados (A)\nMais do que prometia a força humana (B)\nE entre gente remota edificaram (C)\nNovo Reino que tanto sublimaram. (C)"
+    },
+    {
+      "title": "Poema em prosa",
+      "tags": [
+        "prosa poética",
+        "moderno",
+        "ritmo interno",
+        "imagem"
+      ],
+      "body": "Texto com unidade poética — imagem, ritmo, tensão — sem a quebra visual do verso. Não é um parágrafo literário nem poesia em verso disfarçado: o poema em prosa tem começo e fim como unidade autônoma, e o ritmo vem da frase, não da contagem de sílabas. Clarice Lispector e Carlos Drummond de Andrade escreveram poemas em prosa. A respiração é guiada pela pontuação e pela sintaxe.",
+      "sample": "A maçã mordida. Essa mancha escura no espaço — não é ausência, é presença de outra coisa. O que sobra quando se tira o que havia. (Forma livre, sem contagem de sílabas)"
+    },
+    {
+      "title": "Balada",
+      "tags": [
+        "refrão",
+        "narrativa",
+        "forma fixa",
+        "música"
+      ],
+      "body": "Poema narrativo de origem medieval com refrão obrigatório — o último verso (ou mais) de cada estrofe se repete. A balada conta uma história (frequentemente trágica ou dramática) e a repetição do refrão amplifica o peso emocional a cada retorno. Na tradição portuguesa e brasileira, a balada é associada à poesia de Bocage e de trovadores medievais.",
+      "sample": "O cavaleiro foi à guerra (A)\nDeixou a amada à janela (B)\nE nunca mais voltou da terra — [refrão] (A)\nE nunca mais voltou da terra. [refrão] (A)\n\n(O refrão retorna ao fim de cada estrofe)"
+    },
+    {
+      "title": "Acróstico",
+      "tags": [
+        "letra inicial",
+        "nome",
+        "exercício",
+        "forma lúdica"
+      ],
+      "body": "Poema em que as letras iniciais de cada verso, lidas de cima para baixo, formam uma palavra ou nome. Pode ser uma homenagem, um enigma ou um exercício criativo de restrição. A restrição obriga escolhas lexicais incomuns — e às vezes essas escolhas produzem imagens que o poeta não teria encontrado sem a regra.",
+      "sample": "Rosa que abre no inverno\nOlha o sol sem se queimar\nSente o vento, o ar externo\nAinda assim sabe esperar\n\n(Lendo as iniciais: R-O-S-A)"
+    },
+    {
+      "title": "Refrão e anáfora",
+      "tags": [
+        "repetição",
+        "refrão",
+        "anáfora",
+        "ritmo",
+        "ênfase"
+      ],
+      "body": "Refrão: verso ou sequência que retorna identicamente ao longo do poema (como na balada e na glosa). Anáfora: repetição de palavra ou expressão no início de versos consecutivos — recurso poderoso para acumulação de emoção ou argumento. Diferente do refrão, a anáfora não precisa ser idêntica: pode variar ligeiramente. Muito usada em poesia afro-brasileira e slam.",
+      "sample": "Eu tenho um sonho — Martin Luther King (anáfora)\n\nMinha mãe ensinou a sorrir.\nMinha mãe ensinou a resistir.\nMinha mãe ensinou que a dor passa.\nMinha mãe passou.\n(anáfora com variação no último verso)"
     }
   ],
   "grammarWords": {

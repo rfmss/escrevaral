@@ -46,13 +46,13 @@
   const SUBSTANTIVOS_VAGOS = new Set([
     "coisa","coisas","algo","nada",
     "aspecto","aspectos",
-    "questão","questões",
+    "questao","questoes",
     "fator","fatores",
-    "situação","situações",
+    "situacao","situacoes",
     "problema","problemas",
     "elemento","elementos",
     "ponto","pontos",
-    "área","áreas",
+    "area","areas",
     "contexto","contextos",
     "processo","processos",
     "realidade","realidades",
@@ -61,28 +61,31 @@
     "forma","formas","maneira","maneiras","modo","modos",
     "parte","partes",
     "conjunto","conjuntos",
-    "nível","níveis",
-    "âmbito","âmbitos",
+    "nivel","niveis",
+    "ambito","ambitos",
     "setor","setores",
     "esfera","esferas",
     "campo","campos",
     "tema","temas",
     "assunto","assuntos",
     "motivo","motivos",
-    "razão","razões",
+    "razao","razoes",
     "causa","causas",
     "efeito","efeitos",
     "impacto","impactos",
     "resultado","resultados",
-    "consequência","consequências",
-    "fenômeno","fenômenos",
-    "dimensão","dimensões",
+    "consequencia","consequencias",
+    "fenomeno","fenomenos",
+    "dimensao","dimensoes",
     "perspectiva","perspectivas",
-    "cenário","cenários",
+    "cenario","cenarios",
     "mecanismo","mecanismos",
-    "instância","instâncias",
+    "instancia","instancias",
     "formato","formatos",
-    "parâmetro","parâmetros",
+    "parametro","parametros",
+    "objetivo","objetivos",
+    "desafio","desafios",
+    "abordagem","abordagens",
   ]);
 
   const CLIQUES_PT = [
@@ -501,8 +504,9 @@
   function analisarLexico(texto, totalPalavras) {
     const palavras = tokenizarPalavras(texto);
     const normas = palavras.map(normalizar);
+    const lower = palavras.map(w => w.toLowerCase());
 
-    const estado = normas.filter(w => VERBOS_ESTADO.has(w));
+    const estado = lower.filter(w => VERBOS_ESTADO.has(w));
     const vagos = normas.filter(w => SUBSTANTIVOS_VAGOS.has(w));
     const totalVerbs = normas.filter(w =>
       /^.+(ar|er|ir|ou|ei|ava|ia|ará|erá|sse|endo|ando|indo|ado|ada|ido|ida)$/.test(w)
