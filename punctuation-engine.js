@@ -1,7 +1,7 @@
 // punctuation-engine.js — análise de pontuação funcional em português brasileiro
 // Fontes: Bechara MGP §§ 597-640 · Cunha & Cintra pp. 648-682
 //         Moreno "Guia prático" · Squarisi "1001 Dicas"
-// 38 regras: 25 por padrão textual + 7 via syntax-engine (analyzeDeep) + 2 novas
+// 39 regras: 25 por padrão textual + 7 via syntax-engine (analyzeDeep) + 3 novas
 // Fix: PONT-23 detect() bug · PONT-46 duplicado resolvido · PONT-48 renomeada
 // Adição: `acao` em todas as regras · `resumo` de severidade no analyze()
 
@@ -441,6 +441,19 @@
       severity: "baixa",
       detect(text) {
         return all(/\S—\S/g, text);
+      },
+    },
+
+    {
+      id: "PONT-54", categoria: "aspas retas no lugar de aspas tipográficas",
+      fonte: "Moreno 'Guia prático' p. 141; norma editorial brasileira",
+      criterio: "Em texto literário e editorial, prefere-se aspas curvas ("texto") às aspas retas (\"texto\").",
+      exemplo: "“Ela sorriu.”",
+      contraexemplo: "\"Ela sorriu.\"",
+      acao: "Substitua as aspas retas (\") por aspas curvas tipográficas (“ ”).",
+      severity: "baixa",
+      detect(text) {
+        return all(/"[^"\n]{2,}"/g, text);
       },
     },
 
