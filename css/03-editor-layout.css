@@ -315,7 +315,7 @@
 
 .reference-pills span {
   border-radius: 999px;
-  background: #e6f1ec;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
   padding: 6px 9px;
   font-size: 11px;
