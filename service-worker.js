@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v504";
-const ASSET_VERSION = "20260617-bancada-semantica";
+const CACHE_NAME = "vereda-offline-v505";
+const ASSET_VERSION = "20260617-bancada-intencao";
 
 const CORE_ASSETS = [
   "./",
