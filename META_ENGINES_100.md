@@ -170,8 +170,8 @@ Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacrít
 | Lexico / Biblioteca | **98%** | 127 entradas; v479: 8 entradas FC/especulativo (distopia, novum, androide, colônia, silício…); adjetivos/advérbios/conjunções expandidos |
 | Sintaxe | **95%** | v380: resolverAmbiguidade() — 4 regras Mac-Morpho. v469: _ADJ_EXT via adjetivos_comuns — 34 formas sem sufixo canônico. v471: CONTRACOES_PREP_DEM 45 formas (deste/neste/àquele…) + comigo/contigo/consigo em PRONOMES_OBL. Teto: candidatos morfológicos + desambiguação por janela |
 | Pontuacao | **99%** | 40 regras + PONT-54 (aspas retas → tipográficas, severidade baixa); `acao` em cada regra; `resumo` por severidade |
-| Analise geral | **98%** | Badge "Saúde textual X/100" no cabeçalho; `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições |
-| Espelho de Voz | **98%** | Perfil de gesto persiste no inspector; copy do resultado; flag `confianca`; copiar análise |
+| Analise geral | **99%** | Badge "Saúde textual"; v481: +30 clichês literários de romance (olhos cor de mel, coração acelerou, arrepios percorreram…) — 115+ clichês total; 35+ pleonasmos; 16 condições |
+| Espelho de Voz | **99%** | 10 gestos (v482: irônico — Machado/Lima Barreto/J.Ubaldo; lexicon de ironia que existia mas nunca resultava em gesto); perfil persiste; flag `confianca`; copiar análise |
 | RimaLab | **98%** | Buscador de rimas por palavra (findRhymes — exata/toante); copy análise; enciclopédia 15 entradas; lexico 149 palavras |
 | Decolonial / vocabulario | **98%** | 200 entradas; gênero, classe, estética, povos, relações, conhecimento expandidos |
 | Direitos / publicacao | **98%** | Calculadora de domínio público (ano de morte → resultado imediato); 12 cards; 7 fontes |
