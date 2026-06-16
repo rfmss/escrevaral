@@ -831,7 +831,7 @@ function addManuscript(manuscript, status) {
   closeCreateNote();
   persistState(status);
   setView("editor");
-  requestAnimationFrame(() => focusEditor());
+  requestAnimationFrame(() => focusEditorOnNavigate());
   checkProgress();
 }
 

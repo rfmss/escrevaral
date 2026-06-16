@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v479";
-const ASSET_VERSION = "20260616-lexicon-rima";
+const CACHE_NAME = "vereda-offline-v480";
+const ASSET_VERSION = "20260616-onboarding-mobile";
 
 const CORE_ASSETS = [
   "./",
