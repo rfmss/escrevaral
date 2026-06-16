@@ -240,7 +240,12 @@
   .mobile-dock    { display: none !important; }
   /* bandeja usa [hidden] + pointer-events:none; forçar none em desktop também */
   .mobile-bandeja { display: none !important; }
+  /* Botão "+ Novo texto" no editor: sidebar cobre essa função no desktop */
+  .editor-mobile-new { display: none !important; }
 }
+
+/* Botão "+ Novo texto": hidden por default, ativo abaixo de 820px */
+.editor-mobile-new { display: flex; align-items: center; }
 
 /* ══════════════════════════════════════════════════════════════════
    PRINT
