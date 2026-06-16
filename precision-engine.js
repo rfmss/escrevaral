@@ -59,6 +59,22 @@
       return analyzeRomance(normalizedText, words);
     }
 
+    if (template.id === "romantasy" || template.id === "sci-fi-romantico" || template.id === "new-adult") {
+      return analyzeRomantasy(normalizedText, words);
+    }
+
+    if (template.id === "suspense-psicologico") {
+      return analyzeSuspensePsicologico(normalizedText, words);
+    }
+
+    if (template.id === "soneto") {
+      return analyzeSoneto(normalizedText, words);
+    }
+
+    if (template.id === "slam") {
+      return analyzeSlam(normalizedText, words);
+    }
+
     if (template.id === "livro-reportagem") {
       return analyzeMemoir(normalizedText, words);
     }
@@ -432,6 +448,103 @@
       createCheck("Datas ou prazos", dateHits >= 1, Math.min(100, dateHits * 30), "Datas concretas transformam intenção em comprometimento."),
       createCheck("Ações concretas", actionHits >= 1, Math.min(100, actionHits * 28), "Verbos de ação (enviar, negociar, publicar) indicam próximos passos reais."),
       createCheck("Abertura descritiva", firstSentence.length >= 15, firstSentence.length >= 15 ? 85 : Math.min(60, firstSentence.length * 4), "A primeira linha deve situar o contexto do planejamento."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeRomantasy(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const romanceHits = countMatches(text, /\b(coração|olhares|tensão|sentiu|queria|desejo|pele|mão|beijo|perto|longe|sorriso|raiva|ciúme|proteção|cuidado|ternura|força|frágil|vulnerável)\b/gi);
+    const fantasyHits = countMatches(text, /\b(magia|feitiço|encantamento|poder|luz|sombra|reino|dragão|elfo|fada|portal|destino|profecia|sangue|laço|vínculo|ancestral|maldição|dom|herança)\b/gi);
+    const tensionHits = countMatches(text, /\b(mas|porém|não podia|precisava|resistiu|cedeu|afastou|aproximou|evitou|buscou|negava|queria|odiava|amava|temia|precisava)\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    const checks = [
+      createCheck("Romance presente", romanceHits >= 3, Math.min(100, romanceHits * 14), "Romantasy vive da tensão entre dois protagonistas — atração, conflito, aproximação e recuo precisam coexistir no texto."),
+      createCheck("Elemento fantástico", fantasyHits >= 2, Math.min(100, fantasyHits * 22), "O mundo com magia precisa tocar a história diretamente — não como cenário neutro, mas como força que complica o arco romântico."),
+      createCheck("Tensão interna", tensionHits >= 3, Math.min(100, tensionHits * 18), "A personagem quer o que não pode ter — pelo mundo, pelo passado, pela missão ou pelo próprio coração."),
+      createCheck("Voz e diálogo", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "Romantasy precisa de personagens com voz própria — o que dizem revela mais do que o que pensam."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 88 : Math.min(55, lengths.length * 15), "Alterne frases longas para mundo e emoção com frases curtas para ação e tensão."),
+      createCheck("Abertura no mundo", firstSentence.length >= 15 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase deve situar o leitor — no corpo da personagem, no cheiro do mundo ou no peso de algo que está por acontecer."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSuspensePsicologico(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const internalHits = countMatches(text, /\b(pensou|lembrou|imaginou|duvidou|sabia|não sabia|sentia|desconfiava|percebia|suspeitava|acordou|sonhou|se perguntou|talvez|seria|estaria|e se|como se|parecia)\b/gi);
+    const unreliableHits = countMatches(text, /\b(mas não tinha certeza|ou era|talvez fosse|estava errada|não tinha certeza|enganava|mentia|lembrava errado|não conseguia explicar|não fazia sentido|impossível|deve ter sido|achou que)\b/gi);
+    const tensionHits = countMatches(text, /\b(silêncio|ninguém|sozinha|sozinho|escuro|trancada|presa|seguia|olhava|observava|descobriu|revelou|escondeu|mentiu|sabia demais|sabia de menos)\b/gi);
+    const revelationHits = countMatches(text, /\b(na verdade|só então|então percebeu|foi só quando|finalmente|de repente|tudo mudou|nunca tinha pensado|agora entendia|foi aí que)\b/gi);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasShortBursts = lengths.filter(l => l <= 8).length >= 2;
+
+    const checks = [
+      createCheck("Mente em foco", internalHits >= 4, Math.min(100, internalHits * 12), "Suspense psicológico acontece dentro da cabeça — o texto precisa habitar o pensamento da narradora, não apenas descrever eventos."),
+      createCheck("Narradora não confiável", unreliableHits >= 1, Math.min(100, unreliableHits * 45), "A narradora não precisa mentir para o leitor — basta que ela mente para si mesma, que lembre errado, que interprete torto."),
+      createCheck("Tensão de ameaça", tensionHits >= 3, Math.min(100, tensionHits * 18), "O perigo pode ser externo ou interno — a sensação de não estar segura, de não poder confiar, é o motor do suspense."),
+      createCheck("Preparação para virada", revelationHits >= 1, Math.min(100, revelationHits * 42), "Suspense psicológico vive de revelações que reescrevem o que o leitor achava que sabia."),
+      createCheck("Ritmo cortado", hasShortBursts, hasShortBursts ? 88 : 42, "Frases curtas no momento de tensão criam o pulso do suspense — a resposta física antes da explicação."),
+      createCheck("Abertura perturbadora", firstSentence.length >= 15, scoreOpening(firstSentence), "Boa abertura de suspense cria imediatamente uma pergunta sem resposta ou um detalhe fora do lugar."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSoneto(text, words) {
+    const lines = text.split(/\n/).map(s => s.trim()).filter(Boolean);
+    const lineCount = lines.length;
+    const hasStructure = lineCount >= 12 && lineCount <= 16;
+    const hasFourteen = lineCount === 14;
+    const rhymeEndHits = lines.map(l => l.split(/\s+/).pop() || "");
+    const lastWords = rhymeEndHits.map(w => w.replace(/[^a-záéíóúãõâêôüç]/gi, "").toLowerCase());
+    const uniqueEndings = new Set(lastWords).size;
+    const rhymeVariety = uniqueEndings <= 6 && uniqueEndings >= 2;
+    const volta = lineCount >= 9 ? lines[8] : "";
+    const voltaHits = /\b(mas|porém|contudo|entretanto|no entanto|assim|logo|então|e assim|todavia|decerto|por isso|portanto)\b/i.test(volta);
+    const hasPunctuation = countMatches(text, /[,;:—.!?]/g) >= 4;
+
+    const checks = [
+      createCheck("Catorze versos", hasFourteen, hasFourteen ? 100 : Math.max(10, Math.min(80, 100 - Math.abs(14 - lineCount) * 15)), "O soneto petrarquiano tem exatamente 14 versos — dois quartetos e dois tercetos. Mais ou menos quebra a forma."),
+      createCheck("Estrutura de estrofes", hasStructure, hasStructure ? 90 : Math.min(50, lineCount * 5), "A divisão visual em quarteto-quarteto-terceto-terceto é parte da forma — não decore apenas, distribua as ideias nela."),
+      createCheck("Virada no 9º verso", voltaHits, voltaHits ? 95 : 35, "A volta: o 9º verso muda o ângulo — introduz uma contradição, uma conclusão, uma surpresa. É o coração do soneto."),
+      createCheck("Rima presente", rhymeVariety, rhymeVariety ? 85 : 45, "O soneto vive de rima — o esquema mais comum é ABBA ABBA CDC DCD ou variante. Consistência é mais importante que perfeição."),
+      createCheck("Pontuação expressiva", hasPunctuation, hasPunctuation ? 85 : Math.min(55, hasPunctuation ? 85 : 30), "Pontuação em soneto é estrutural — a vírgula sustém, o ponto finaliza, os dois-pontos anunciam. Cada sinal pesa."),
+      createCheck("Compressão verbal", words >= 60 && words <= 120, getRangeScore(words, 60, 130), "Um soneto entre 70 e 100 palavras tem densidade: cada termo precisa trabalhar — ornamento sem função ocupa o espaço da imagem."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSlam(text, words) {
+    const sentences = splitSentences(text);
+    const lines = text.split(/\n/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+    const urgencyHits = countMatches(text, /\b(agora|hoje|preciso|precisa|não pode|não dá|chega|basta|olha|escuta|veja|sente|existe|resiste|persiste|levanta|grita|fala|diz|nega|rompe|rompa|viva|luta|lute|chore|ria)\b/gi);
+    const questionHits = countMatches(text, /[?]/g);
+    const repetitionPattern = (() => {
+      const firstWords = lines.slice(0, -1).map(l => l.split(/\s+/)[0]?.toLowerCase()).filter(Boolean);
+      const freq = firstWords.reduce((m, w) => { m[w] = (m[w] || 0) + 1; return m; }, {});
+      return Object.values(freq).some(v => v >= 2);
+    })();
+    const shortLines = lines.filter(l => l.split(/\s+/).filter(Boolean).length <= 8).length;
+    const hasRhythm = shortLines >= Math.max(2, lines.length * 0.3);
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const hasVariety = lengths.some(l => l <= 6) && lengths.some(l => l >= 12);
+
+    const checks = [
+      createCheck("Urgência e presença", urgencyHits >= 4, Math.min(100, urgencyHits * 14), "Slam acontece no presente — o poema fala de dentro, com corpo, sem distância. Verbos de ação e interpelação criam presença."),
+      createCheck("Pergunta ao público", questionHits >= 1, Math.min(100, questionHits * 35), "A pergunta retórica é a ferramenta central do slam — confronta, convida, incomoda. Sem ela, o poema fecha em si mesmo."),
+      createCheck("Repetição rítmica", repetitionPattern, repetitionPattern ? 90 : 40, "Anáfora — repetir a mesma palavra no início de versos seguidos — é o ritmo do slam. Cria ondas, hipnose, ênfase."),
+      createCheck("Versos curtos com gesto", hasRhythm, hasRhythm ? 85 : Math.min(55, shortLines * 14), "Slam é falado em voz alta. Verso curto cria pausa natural, espaço para respirar e para o público absorver."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 85 : 45, "Alterne versos curtos (impacto) com longos (desenvolvimento) — o fluxo entre eles é o que cria o ritmo performático."),
+      createCheck("Abertura que chama", firstSentence.length >= 5 && firstSentence.length <= 120, scoreOpening(firstSentence), "Slam começa sem introdução — a primeira linha já está no assunto. Sem preâmbulo: direto ao coração do que precisa ser dito."),
     ];
 
     return summarize(checks, words, 0);
