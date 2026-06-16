@@ -6,18 +6,18 @@
   );
 
   const emotionLexicons = {
-    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim", "esquecimento", "desvanecer", "apagar", "distância", "abandono", "luto", "resto", "vestígio"],
-    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto", "perseguição", "armadilha", "traição", "disparo", "confronto", "urgência", "crise"],
-    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança", "amanhecer", "celebração", "leveza", "plenitude", "festa", "graça", "sorte"],
-    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente", "justamente", "realmente", "singular", "curioso", "peculiar", "conveniente", "herói"],
-    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio", "horizonte", "repouso", "contemplar", "observar", "meditar", "divagar", "profundo"],
-    ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher", "proteção", "ternura", "lar", "família", "pertencer", "bençao", "amparo"],
+    melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim", "esquecimento", "desvanecer", "apagar", "distância", "abandono", "luto", "resto", "vestígio", "espelho", "cinzas", "cansaço", "derrota", "lágrima", "sombrio"],
+    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto", "perseguição", "armadilha", "traição", "disparo", "confronto", "urgência", "crise", "navalha", "pânico", "veneno", "emboscada", "cilada"],
+    luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança", "amanhecer", "celebração", "leveza", "plenitude", "festa", "graça", "sorte", "vitória", "nascer", "despertar", "glória"],
+    ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente", "justamente", "realmente", "singular", "curioso", "peculiar", "conveniente", "herói", "exatamente", "perfeitamente", "lógico", "inocente"],
+    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio", "horizonte", "repouso", "contemplar", "observar", "meditar", "divagar", "profundo", "névoa", "crepúsculo", "bruma", "quietude"],
+    ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher", "proteção", "ternura", "lar", "família", "pertencer", "bençao", "amparo", "beijo", "sorriso", "gesto", "mimo", "meigo", "afetuoso"],
   };
 
   const semanticFields = {
-    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça"],
+    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia"],
     casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama"],
-    natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu"],
+    natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu", "floresta", "cerrado", "sertão", "caatinga", "raiz", "pedra", "galho", "seca", "brejo", "savana"],
     memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época"],
     conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue"],
     pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender"],
