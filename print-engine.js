@@ -42,8 +42,8 @@
     const body      = cleanHtml(ms.html || "");
     const stamp     = formatDateTimePtBr(new Date());
     const shortHash = hash ? hash.slice(0, 16) : null;
-    const footerLine = `${stamp} · Escrevaral${shortHash ? ` · Hash do texto: <code>${shortHash}</code>` : ""}`;
-    const fullHash   = hash ? `<span class="ms-hash-full">SHA-256: <code>${hash}</code></span>` : "";
+    const footerLine = `${stamp} · Escrevaral${shortHash ? ` · Assinatura do texto: <code>${shortHash}</code>` : ""}`;
+    const fullHash   = hash ? `<span class="ms-hash-full">Código de integridade (SHA-256): <code>${hash}</code></span>` : "";
 
     return `<!doctype html>
 <html lang="pt-BR">
