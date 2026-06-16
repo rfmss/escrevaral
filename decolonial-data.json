@@ -2463,6 +2463,129 @@
       "reason": "Deslocar pessoas empobrecidas para a categoria de problema social retira-lhes a condição de sujeito e naturaliza exclusão como fenômeno não-político.",
       "context": "Em análise sociológica crítica, o termo aparece com aspas quando se analisa o discurso que o usa. Na ficção, pode marcar visão de personagem.",
       "contextual": true
+    },
+    {
+      "avoid": "boiola",
+      "alternatives": [],
+      "category": "genero",
+      "reason": "Insulto homofóbico direcionado a homens gays. Termo de violência verbal.",
+      "context": "Não há contexto que justifique o uso como insulto. Pode aparecer em narrativa histórica ou de personagem com intenção crítica explícita.",
+      "contextual": true
+    },
+    {
+      "avoid": "viadagem",
+      "alternatives": [],
+      "category": "genero",
+      "reason": "Termo homofóbico que usa a sexualidade como insulto generalizado, além da pessoa.",
+      "context": "Evite como julgamento ou descrição. Pode ser usado em voz de personagem com distância crítica do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "mulher de respeito",
+      "alternatives": [
+        "mulher",
+        "pessoa"
+      ],
+      "category": "genero",
+      "reason": "Implica que existem mulheres que não merecem respeito. Cria hierarquia moral baseada em comportamento sexual ou conformidade.",
+      "context": "Comum em narrativas de personagens conservadores — mantenha se for caracterização; evite como voz do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "mãe de família como marcador moral",
+      "alternatives": [
+        "mãe",
+        "pessoa com filhos"
+      ],
+      "category": "genero",
+      "reason": "Usar 'mãe de família' como certificado de respeitabilidade restringe quem 'merece' proteção ou crédito moral.",
+      "context": "Contexto crítico ou de personagem pode manter o uso com distanciamento visível do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "sapatona como insulto",
+      "alternatives": [],
+      "category": "genero",
+      "reason": "Usado como insulto lesbofóbico quando empregado pela narrativa sem ironia ou distância crítica.",
+      "context": "O termo pode ser resignificado pela própria comunidade lésbica — avalie quem fala e o contexto narrativo antes de trocar.",
+      "contextual": true
+    },
+    {
+      "avoid": "politicamente correto como insulto",
+      "alternatives": [
+        "linguagem inclusiva",
+        "cuidado com a linguagem"
+      ],
+      "category": "linguagem",
+      "reason": "Usar 'politicamente correto' como insulto trivializa o esforço de grupos historicamente ofendidos e enquadra o cuidado como excesso.",
+      "context": "Personagens podem usar a expressão como caracterização. Evite como voz do narrador sem distância crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "discurso do vitimismo",
+      "alternatives": [
+        "relato de discriminação",
+        "experiência de violência"
+      ],
+      "category": "linguagem",
+      "reason": "Reduz relatos de discriminação real a performance de vítima. Silencia quem descreve experiências de racismo, transfobia, etc.",
+      "context": "Pode aparecer em voz de personagem como revelação de perspectiva. Evite como avaliação do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "acordo de cavalheiros",
+      "alternatives": [
+        "acordo informal",
+        "combinado oral",
+        "acordo de palavra"
+      ],
+      "category": "linguagem",
+      "reason": "Pressupõe que acordos sérios ocorrem entre homens, excluindo mulheres e pessoas não-binárias.",
+      "context": "Expressão cristalizada — pode ser mantida em contextos históricos ou citar o idioma da época sem endossar.",
+      "contextual": true
+    },
+    {
+      "avoid": "linguagem dos excluídos",
+      "alternatives": [
+        "linguagem das comunidades periféricas",
+        "variedades não-padrão do português"
+      ],
+      "category": "linguagem",
+      "reason": "Reduz variedades linguísticas ricas a sinal de exclusão. Reforça o estigma de que falar diferente do padrão é falar errado.",
+      "context": "Quando o tema é desigualdade, especifique a variedade: não rotule como 'excluída'.",
+      "contextual": false
+    },
+    {
+      "avoid": "o negro bem apresentado",
+      "alternatives": [
+        "a pessoa bem apresentada"
+      ],
+      "category": "estetica",
+      "reason": "O elogio 'bem apresentado' quando aplicado especificamente a uma pessoa negra implica que a boa apresentação é excepcional nesse grupo.",
+      "context": "Elogio genuíno com subtexto racista embutido — reescreva sem o marcador racial.",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo duro",
+      "alternatives": [
+        "cabelo crespo",
+        "cabelo afro"
+      ],
+      "category": "estetica",
+      "reason": "Descreve texturas de cabelo afro como indesejáveis. Reforça padrão de beleza que privilegia o liso.",
+      "context": "Mesmo em narrativa de época, prefira a descrição neutra ou reconheça o contexto histórico explicitamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "beleza clássica como código racial",
+      "alternatives": [
+        "beleza reconhecida",
+        "traços marcantes"
+      ],
+      "category": "estetica",
+      "reason": "'Beleza clássica' é frequentemente código para traços europeus como padrão universal — nariz fino, pele clara, cabelo liso.",
+      "context": "Quando a escolha é deliberada para revelar um sistema de valores, manter com consciência. Evite como neutro.",
+      "contextual": true
     }
   ]
 }
