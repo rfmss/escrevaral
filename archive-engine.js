@@ -245,9 +245,9 @@
       ],
     },
     "cena-roteiro": {
-      description: "Unidade com slug line, ação e personagens.",
+      description: "Unidade com cabeçalho de cena, ação e personagens.",
       fields: [
-        { key: "slug", label: "Slug line", hint: "INT./EXT. LUGAR - DIA/NOITE", type: "string" },
+        { key: "slug", label: "Cabeçalho de cena", hint: "INT./EXT. LUGAR - DIA/NOITE", type: "string" },
         { key: "número", label: "Número", hint: "Posição na escaleta", type: "number" },
         { key: "ação", label: "Linha de ação", hint: "Resumo do que acontece", type: "string" },
         { key: "personagens", label: "Personagens", hint: "IDs dos presentes", type: "array" },

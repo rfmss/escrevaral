@@ -1198,7 +1198,7 @@ function createProjectNoteDescription(type) {
     tema: "Intenção autoral, tensão temática e imagem central do projeto.",
     glossário: "Termos, nomes, conceitos e vocabulário próprio do projeto.",
     escaleta: "Sequência de cenas com função dramática.",
-    "cena-roteiro": "Cena de roteiro com slug line, ação e personagens.",
+    "cena-roteiro": "Cena de roteiro com cabeçalho de cena, ação e personagens.",
     ato: "Divisão estrutural do roteiro, com função dramática e virada.",
     "personagem-roteiro": "Versão audiovisual de personagem, com função, voz e apresentação.",
     pauta: "Proposta jornalística com gancho, angulação, prazo e fontes.",
