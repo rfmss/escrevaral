@@ -363,6 +363,62 @@
 
     // est
     "portanto":  ["logo", "por isso", "assim", "consequentemente", "por conseguinte", "destarte"],
+
+    // ─── VERBOS LITERÁRIOS ADICIONAIS ──────────────────────────────────────────
+
+    // est
+    "escrever":    ["redigir", "grafar", "compor", "lavrar", "inscrever", "traçar"],
+
+    // Nascentes: "Criar é tirar do nada; Inventar é fazer o que não existia por combinação"
+    "criar":       ["inventar", "conceber", "engendrar", "imaginar", "gerar", "fabricar"],
+
+    // est
+    "partir":      ["ir-se", "sair", "ausentar-se", "deixar", "retirar-se", "desaparecer"],
+
+    // est
+    "esperar":     ["aguardar", "antecipar", "almejar", "nutrir esperança", "aspirar", "anelar"],
+
+    // Nascentes: "Padecer é sofrer doenças; Pena é dor moral; Sofrer é mais geral"
+    "sofrer":      ["padecer", "suportar", "aguentar", "tolerar", "penar", "sentir"],
+
+    // est
+    "lutar":       ["combater", "resistir", "brigar", "contender", "pugnar", "batalhar"],
+
+    // est
+    "acordar":     ["despertar", "erguer-se", "levantar", "animar-se", "sair do sono"],
+
+    // Nascentes: "Sonhar é experimentar sonhos; Fantasiar é criar imagens voluntárias"
+    "sonhar":      ["fantasiar", "imaginar", "alucinar", "devanear", "cismar", "divagar"],
+
+    // est
+    "transformar": ["mudar", "converter", "alterar", "metamorfosear", "transfigurar", "reformar"],
+
+    // est
+    "revelar":     ["descobrir", "expor", "mostrar", "desvendar", "declarar", "confessar"],
+
+    // est
+    "esconder":    ["ocultar", "encobrir", "dissimular", "velar", "abafar", "camuflar"],
+
+    // est
+    "resistir":    ["aguentar", "suportar", "enfrentar", "opor-se", "persistir", "insistir"],
+
+    // ─── SUBSTANTIVOS ADICIONAIS ───────────────────────────────────────────────
+
+    // Nascentes: "Corpo é a totalidade do ser físico; Carne é a parte mole"
+    "corpo":       ["carne", "físico", "organismo", "ser", "tronco", "invólucro"],
+
+    // est
+    "cidade":      ["metrópole", "capital", "burgo", "município", "urbes", "centro urbano"],
+
+    // est
+    "floresta":    ["mata", "selva", "bosque", "mato", "arvoredo", "capoeira"],
+
+    // est
+    "memória":     ["lembrança", "recordação", "reminiscência", "evocação", "retentiva", "saudade"],
+
+    // Nascentes: "Fogo é o fenômeno em geral; Chama é a língua de fogo; Brasa é o carvão aceso"
+    "fogo":        ["chama", "brasa", "labareda", "incêndio", "faísca", "lume"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
