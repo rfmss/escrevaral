@@ -99,7 +99,7 @@
     const lastSentence = getLastSentence(text);
     const sentences = splitSentences(text);
     const paragraphs = text.split(/\n+/).map((item) => item.trim()).filter(Boolean);
-    const sensoryHits = countMatches(text, /\b(cheiro|som|ruído|luz|sombra|gosto|frio|calor|mão|olho|porta|mesa|xícara|café|janela|roupa|casaco|sangue|água|terra|pele)\b/gi);
+    const sensoryHits = countMatches(text, /\b(cheiro|som|ruído|luz|sombra|gosto|frio|calor|mão|olho|porta|mesa|xícara|café|janela|roupa|casaco|sangue|água|terra|pele|voz|chão|madeira|pedra|fumaça|vento|chuva|barulho|silêncio|couro|vela|areia|sal|pão|ferro|barro|neblina|poeira|carne|cinza)\b/gi);
     const turnHits = countMatches(text, /\b(mas|porém|então|quando|até que|só que|de repente|na verdade|descobriu|percebeu)\b/gi);
     const explanationHits = countMatches(text, /\b(porque|pois|significava|sentia|pensava|lembrava|explicou|entendeu que)\b/gi);
     const repeatedRatio = getTopWordRatio(text);
@@ -121,7 +121,7 @@
   function analyzeCronica(text, words) {
     const firstSentence = getFirstSentence(text);
     const lastSentence = getLastSentence(text);
-    const everydayHits = countMatches(text, /\b(rua|casa|janela|mesa|ônibus|metro|fila|padaria|café|cozinha|praça|vizinho|chuva|calçada|telefone|mercado|porta)\b/gi);
+    const everydayHits = countMatches(text, /\b(rua|casa|janela|mesa|ônibus|metro|fila|padaria|café|cozinha|praça|vizinho|chuva|calçada|telefone|mercado|porta|feira|quintal|portão|corredor|bairro|esquina|loja|banco|escola|bicicleta|sacada|varanda|boteco|bar|ônibus|moto|sinal|calor)\b/gi);
     const reflectionHits = countMatches(text, /\b(talvez|parece|penso|percebo|lembro|como se|no fundo|afinal|ninguém|todo mundo|a gente)\b/gi);
     const toneHits = countMatches(text, /\b(riso|sorriso|silêncio|saudade|ironia|estranho|bonito|triste|leve|pequeno|delicado)\b/gi);
     const paragraphs = text.split(/\n+/).map((item) => item.trim()).filter(Boolean);
@@ -142,7 +142,7 @@
   function analyzeContoCurto(text, words) {
     const firstSentence = getFirstSentence(text);
     const sentences = splitSentences(text);
-    const actionHits = countMatches(text, /\b(pegou|olhou|disse|entrou|saiu|correu|parou|abriu|fechou|sentou|levantou|tocou|esperou|voltou|caminhou)\b/gi);
+    const actionHits = countMatches(text, /\b(pegou|olhou|disse|entrou|saiu|correu|parou|abriu|fechou|sentou|levantou|tocou|esperou|voltou|caminhou|falou|respondeu|gritou|sussurrou|chorou|riu|sorriu|abraçou|empurrou|puxou|jogou|largou|chegou|partiu|segurou|atirou|derrubou|ergueu|apontou)\b/gi);
     const conflictHits = countMatches(text, /\b(mas|porém|medo|segredo|dívida|culpa|perda|ameaça|mentira|escolha|impossível|nunca|último|contra)\b/gi);
     const characterHits = countMatches(text, /\b(ela|ele|eu|mãe|pai|filho|filha|irmão|irmã|mulher|homem|menino|menina|velho|velha)\b/gi);
     const turnHits = countMatches(text, /\b(então|quando|até que|de repente|percebeu|descobriu|naquela hora|só então)\b/gi);
@@ -232,7 +232,7 @@
   function analyzePoesia(text, words) {
     const lines = text.split(/\n/).map(s => s.trim()).filter(Boolean);
     const stanzas = text.split(/\n{2,}/).map(s => s.trim()).filter(Boolean);
-    const imageryHits = countMatches(text, /\b(luz|sombra|água|terra|vento|fogo|olho|mão|boca|corpo|noite|pedra|rio|mar|folha|raiz|chuva|voz|silêncio|osso|sangue|pele)\b/gi);
+    const imageryHits = countMatches(text, /\b(luz|sombra|água|terra|vento|fogo|olho|mão|boca|corpo|noite|pedra|rio|mar|folha|raiz|chuva|voz|silêncio|osso|sangue|pele|chama|brasa|cinza|névoa|bruma|gelo|ardor|tremor|abismo|pétala|espinho|grão|âmago|íris|âncora|faísca|véu|âmbar|musgo|lama|galho|poeira|areia|semente|sussurro)\b/gi);
     const repetitionHits = countMatches(text, /\b(\w{4,})\b(?=.*\b\1\b)/gi);
     const questionHits = countMatches(text, /\?/g);
     const enjambmentHits = lines.filter(l => l.length > 0 && !/[.!?:;,—]$/.test(l)).length;
