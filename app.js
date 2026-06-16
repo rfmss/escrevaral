@@ -1974,7 +1974,10 @@ const ACTION_HANDLERS = {
   },
   "toggle-editorial-group": (_, t) => {
     const group = t.closest("[data-editorial-group]");
-    if (group) t.setAttribute("aria-expanded", String(group.classList.toggle("is-open")));
+    if (!group) return;
+    const open = group.classList.toggle("is-open");
+    formatBar?.classList.toggle("is-editorial-open", open);
+    t.setAttribute("aria-expanded", String(open));
   },
   "crono-add-task":  (e, t) => cronoHandleAction("add-task",  e, t),
   "crono-add-note":  (e, t) => cronoHandleAction("add-note",  e, t),

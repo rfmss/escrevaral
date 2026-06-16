@@ -35,39 +35,6 @@
   /* Ferramentas do onboarding em coluna no phone */
   .welcome-tools-row { grid-template-columns: 1fr; }
 
-  /* Format-bar estreita: grupo editorial colapsa, só botão ⋯ visível */
-  .fmt-sep-editorial { display: none; }
-  .fmt-label { display: none; }
-  .fmt-group-editorial {
-    position: relative;
-    opacity: 1;
-    flex-shrink: 0;
-  }
-  /* Esconde os filhos do grupo editorial por padrão no mobile */
-  .fmt-group-editorial > *:not(.fmt-editorial-toggle) {
-    display: none;
-  }
-  /* Copiar sempre visível — saída rápida sem abrir accordion (F3-CD) */
-  .fmt-group-editorial > [data-action="copy-manuscript-text"] {
-    display: flex;
-  }
-  /* Botão ⋯ para revelar o grupo */
-  .fmt-editorial-toggle {
-    display: flex;
-  }
-  /* Quando o grupo está expandido */
-  .fmt-group-editorial.is-open > *:not(.fmt-editorial-toggle) {
-    display: flex;
-  }
-  .fmt-group-editorial.is-open {
-    flex-wrap: wrap;
-    gap: 4px;
-    background: var(--surface-low);
-    border-radius: 6px;
-    padding: 4px;
-    width: 100%;
-  }
-
   /* P2: margem mínima nas views em celular */
   .archive-security-details,
   .academy-view > *,
@@ -226,10 +193,6 @@
     max-width: 100%;
   }
 
-  .format-bar {
-    overflow-x: hidden;
-  }
-
   .fmt-group,
   .fmt-group-writing {
     flex-wrap: wrap;
@@ -274,10 +237,55 @@
     gap: 4px;
   }
 
-  /* format-bar em mobile: itens não quebram a linha por padrão mas
-     o grupo editorial já colapsa via 08-responsive ≤480px */
+  /* format-bar em mobile: escrita essencial fica na frente e o restante abre no ⋯ */
   .format-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 4px 8px;
+  }
+
+  .fmt-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .fmt-select {
+    min-height: 36px;
+  }
+
+  /* Format-bar estreita: escrita essencial fica visível, alinhamento/saída abrem no ⋯ */
+  .fmt-sep-editorial { display: none; }
+  .fmt-label { display: none; }
+  .format-bar:not(.is-editorial-open) .fmt-mobile-secondary {
+    display: none;
+  }
+  .format-bar.is-editorial-open .fmt-mobile-secondary {
+    display: flex;
+  }
+  .fmt-group-editorial {
+    position: relative;
+    opacity: 1;
+    flex-shrink: 0;
+  }
+  .fmt-group-editorial > *:not(.fmt-editorial-toggle) {
+    display: none;
+  }
+  .fmt-group-editorial > [data-action="copy-manuscript-text"] {
+    display: flex;
+  }
+  .fmt-editorial-toggle {
+    display: flex;
+  }
+  .fmt-group-editorial.is-open > *:not(.fmt-editorial-toggle) {
+    display: flex;
+  }
+  .fmt-group-editorial.is-open {
+    flex-wrap: wrap;
+    gap: 4px;
+    background: var(--surface-low);
+    border-radius: 6px;
+    padding: 4px;
+    width: 100%;
   }
 
   /* Inspector/análise: oculta em portrait pequeno (distrai na escrita) */
@@ -457,7 +465,7 @@
 }
 
 /* ── DESKTOP (≥820px) — toolbar editorial sempre visível, sem accordion ── */
-@media (min-width: 820px) {
+@media (min-width: 821px) {
   .fmt-editorial-toggle { display: none !important; }
   .fmt-group-editorial > *:not(.fmt-editorial-toggle) { display: flex !important; }
 }
