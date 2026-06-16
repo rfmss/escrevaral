@@ -707,6 +707,54 @@
       "className": "Substantivo masculino",
       "field": "Metalinguagem — narrativa que se dobra sobre si, memória escrita",
       "note": "Quando um livro aparece na ficção, o texto está falando sobre si mesmo ou sobre o ato de narrar. Use com consciência."
+    },
+    "distopia": {
+      "label": "distopia",
+      "className": "Substantivo feminino",
+      "field": "Ficção especulativa — sociedade degradada, controle, resistência",
+      "note": "Toda distopia é diagnóstico do presente. O futuro distópico amplia o que já existe — nunca é fantasia pura."
+    },
+    "novum": {
+      "label": "novum",
+      "className": "Substantivo (conceito crítico)",
+      "field": "Ficção científica — elemento que muda as regras do mundo",
+      "note": "O novum é o que diferencia o mundo da história do nosso. Sem novum claro, não há ficção científica — há apenas aventura com cenário futurista."
+    },
+    "mutacao": {
+      "label": "mutação",
+      "className": "Substantivo feminino",
+      "field": "Corpo, transformação, ficção especulativa",
+      "note": "Mutação une o biológico e o político. No corpo que muda há sempre uma pergunta sobre identidade e pertencimento."
+    },
+    "androide": {
+      "label": "androide",
+      "className": "Substantivo",
+      "field": "Ficção científica — fronteira entre humano e máquina",
+      "note": "O androide é sempre espelho. A pergunta não é 'ele é humano?' — é 'o que nos torna humanos?'"
+    },
+    "colonia": {
+      "label": "colônia",
+      "className": "Substantivo feminino",
+      "field": "Ficção especulativa — poder, extração, dependência",
+      "note": "Colônia carrega história real. Em FC brasileira, o termo conecta futuros especulativos à memória colonial — uma camada semântica que o leitor brasileiro sente."
+    },
+    "distancia": {
+      "label": "distância",
+      "className": "Substantivo feminino",
+      "field": "Espaço — separação, exílio, perspectiva narrativa",
+      "note": "Distância mede mais do que espaço. Entre personagens, é relação; no espaço sideral, é solidão e escala."
+    },
+    "fronteira": {
+      "label": "fronteira",
+      "className": "Substantivo feminino",
+      "field": "Limite — território, identidade, passagem",
+      "note": "Fronteira é o lugar onde dois mundos se tocam. Personagens em fronteiras carregam dupla pertença — e dupla exclusão."
+    },
+    "silicio": {
+      "label": "silício",
+      "className": "Substantivo masculino",
+      "field": "Ficção científica — tecnologia, matéria, não-orgânico",
+      "note": "Silício é o oposto poético do barro. Onde o barro cria o ser da terra, o silício cria o ser da máquina."
     }
   },
   "functionWords": {
