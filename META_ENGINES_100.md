@@ -168,7 +168,7 @@ Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacrít
 | Templates / guias | **98%** | Contagem de etapas em cada aba; busca auto-seleciona; counter de resultados; `template.id` no índice |
 | Precision / aderencia ao guia | **98%** | Exportar análise TXT (score, pontos cobertos/a trabalhar); cobertura comercial-técnica e planejamento |
 | Lexico / Biblioteca | **98%** | Campo de busca manual; 119 entradas; adjetivos/advérbios/conjunções expandidos |
-| Sintaxe | **82%** | v356: VERBOS_AUX separado de ligação; -al regex→whitelist ADJETIVOS_PRIM; pouca/muita; corpus em reports/auditoria/; ~78% fallback / ~82% com JSON; teto: candidatos+contexto |
+| Sintaxe | **93%** | v380: resolverAmbiguidade() — 4 regras de contexto Mac-Morpho (fallback 68.5%→82.7%); verbos_pres_reg 113→203 formas. v469: _ADJ_EXT via adjetivos_comuns em norma-data.json — 34 formas sem sufixo canônico (tenso, vasto, pleno, nítido, árido, tímido…). Teto: candidatos morfológicos + desambiguação por janela |
 | Pontuacao | **98%** | 40 regras; PONT-52/53 novos; `acao` em cada regra; `resumo` por severidade (alta/média/baixa) |
 | Analise geral | **98%** | Badge "Saúde textual X/100" no cabeçalho; `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições |
 | Espelho de Voz | **98%** | Perfil de gesto persiste no inspector; copy do resultado; flag `confianca`; copiar análise |

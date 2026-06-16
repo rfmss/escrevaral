@@ -13,6 +13,7 @@
   let _SIGLAS      = new Set();
   let _SUBST_IA    = new Set();
   let _VERBOS_PRES = new Set();
+  let _ADJ_EXT     = new Set();
 
   // Remove acentos para lookup de prenomes — "Vitória" → "vitoria"
   function _stripDiac(s) {
@@ -38,6 +39,7 @@
         _SIGLAS     = new Set(_norma.siglas_pt_br || []);
         _SUBST_IA   = new Set(_norma.substantivos_ia || []);
         _VERBOS_PRES = new Set(_norma.verbos_pres_reg || []);
+        _ADJ_EXT    = new Set(_norma.adjetivos_comuns || []);
       }
       return true;
     } catch (e) {
@@ -234,7 +236,7 @@
       else if (NUM_CARDINAIS.has(norm)) { tags.push("Noun"); tags.push("Numeral"); }
       else if (NUM_ORDINAIS.has(norm)) { tags.push("Adjective"); tags.push("Numeral"); }
       else if (INTERJEICOES.has(norm)) { tags.push("Interjection"); }
-      else if (ADJETIVOS_PRIM.has(norm)) { tags.push("Adjective"); }
+      else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
       else if (ADV_AFIRM.has(norm))   { tags.push("Adverb"); }
       else if (ADV_TEMPO.has(norm))   { tags.push("Adverb"); }
