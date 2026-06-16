@@ -1,4 +1,4 @@
-# Sugestões autônomas — noite de 2026-06-16
+# Sugestões autônomas — 2026-06-16 (noite) + 2026-06-17 (continuação)
 
 Trabalho realizado durante a noite com autorização do usuário.  
 4 commits locais prontos para push (v464–v467).  
@@ -28,13 +28,29 @@ Este documento reúne o que foi feito e o que ficou em aberto.
 
 ---
 
-## Sugestões pendentes — implementação imediata (baixo risco)
+## Entregues na continuação (v468–v480, 2026-06-17)
 
-### S1 — Dark mode: `.soneto-a/b/c/d` ficam jarring em scriptorium
-As quatro classes de rima do modo Soneto usam fundos claros fixos (`#EEEDFE`, `#E1F5EE`, etc.). O contraste dentro de cada chip é bom, mas visualmente aparecem como manchas claras em ambiente escuro.
-- **Arquivo:** `css/03-editor-modes.css:74-77`
-- **Solução:** Overrides com `color-mix()` em `css/00-tokens.css`, padrão igual ao que foi feito para `proof-chip`.
-- **Risco:** Baixo. Puramente estético, não afeta dados.
+| v | O que foi feito |
+|---|---|
+| v468 | 14 hints de acervo reescritos de "ID de documento" para linguagem de escritora; dark mode soneto-a/b/c/d |
+| v469 | Sintaxe 91%→93%: `_ADJ_EXT` via `adjetivos_comuns` em norma-data.json (34 formas sem sufixo) |
+| v470 | "Atmosfera" → "Sons ambiente" no cabeçalho do painel de áudio |
+| v471 | Sintaxe 93%→95%: `CONTRACOES_PREP_DEM` (45 formas) + `comigo/contigo/consigo` em `PRONOMES_OBL` |
+| v472 | Academia com ambas sidebars abertas: CSS `:not(.is-left-collapsed):not(.is-right-collapsed)` ocupa 100% |
+| v473 | PONT-54: aspas retas detectadas como sugestão tipográfica — Pontuação 98%→99% |
+| v474 | "Nova nota"/"Novo texto" → "Novo manuscrito" em sidebar, editor mobile e Acervo |
+| v475 | "Apagar esta nota" → "Apagar este manuscrito" em todos os pontos; `data-vrda-tooltip` |
+| v476 | criterios-data.js: "Todo word" → "Toda palavra", "POV" → "ponto de vista", "clutter" → "peso morto" |
+| v477 | "Preset" → "Formato de página" no seletor do editor (aria-label + data-vrda-tooltip) |
+| v478 | print-engine.js: "Hash do texto" → "Assinatura do texto", "SHA-256" → "Código de integridade" |
+| v479 | lexical-data.json: 8 entradas FC/especulativo; rimalab-data.json: 20 oxítonas do cordel/MPB |
+| v480 | Onboarding: "Escolher um guia" → "Começar com ponto de partida"; addManuscript usa focusEditorOnNavigate() |
+
+---
+
+## Sugestões ainda pendentes — implementação imediata (baixo risco)
+
+### S1 — ✅ Dark mode: `.soneto-a/b/c/d` — ENTREGUE v468
 
 ### S2 — Dark mode: `.academy-book-cover` não adapta em scriptorium
 O visualizador de livro físico (Academia › Objeto Livro) usa gradientes e cores fixas de capa (`#f1d19b`, `#9f6b43`). Em tema escuro, o livro continua com aparência de tema claro — mas a inconsistência estética pode confundir.
@@ -48,7 +64,7 @@ O arquivo `anatomia-do-livro.html` é um standalone sem herdar o `lang="pt-BR"` 
 - **Solução:** Adicionar `lang="pt-BR"` ao `<html>` tag.
 - **Risco:** Nenhum.
 
-### S4 — `archive-engine.js`: hints de campos `type: "ref"` são técnicos demais
+### S4 — ✅ `archive-engine.js`: hints reescritos — ENTREGUE v468
 Os hints como `"ID de documento tipo lugar"` não ensinam o usuário a preencher o campo. Uma escritora não sabe o que é "ID de documento".
 - **Arquivo:** `archive-engine.js` — campos com `type: "ref"` (linhas 160, 182, 198, 207, 303, 319, 329)
 - **Solução:** Substituir por descrição funcional: `"nome ou referência ao lugar criado no projeto"`, `"nome do mundo ao qual pertence"`, etc.
@@ -69,7 +85,7 @@ Os hints como `"ID de documento tipo lugar"` não ensinam o usuário a preencher
 **Proposta:** Agrupar negrito/itálico/sublinhado sob botão "Formato" com expansão. Manter atalho de novo texto e leitura visíveis.  
 **Risco:** Médio-alto. Muda fluxo de formatação em mobile. Precisa de teste real com usuária.
 
-### M2 — Backlog T10: Academia ilegível com sidebars abertas
+### M2 — ✅ Backlog T10: Academia com sidebars — ENTREGUE v472
 **Origem:** Backlog navegador T10  
 **Achado:** Com sidebar esquerda (Acervo) e sidebar direita abertas simultaneamente, a aba Academia perde espaço útil em notebooks menores.  
 **Proposta:** Fechar sidebar direita automaticamente ao abrir Academia, ou limitar largura máxima da sidebar direita quando Academia está ativa.  
@@ -97,7 +113,7 @@ Os hints como `"ID de documento tipo lugar"` não ensinam o usuário a preencher
 **Próximo passo viável:** Arquitetura de candidatos morfológicos + desambiguação por janela de contexto (3-5 tokens). Custo: 2-3 sessões de desenvolvimento.  
 **Não viável:** Resolver com mais listas — já foi tentado e esbarra no teto do método.
 
-### G2 — Sintaxe engine: cobertura de pronomes compostos e contrações
+### G2 — ✅ Sintaxe: contrações PREP+DEM — ENTREGUE v471
 **Exemplos não cobertos:** `deste/neste/nesse/naquele` (PREP + DET fundidos), `comigo/contigo/consigo` (PREP + PRON), `nisso/naquilo`.  
 **Custo:** Médio. Pode ser feito por conjuntos estáticos sem arquitetura nova.
 
