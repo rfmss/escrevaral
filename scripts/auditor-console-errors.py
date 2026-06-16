@@ -167,8 +167,8 @@ async def rodar_cenario(browser, cenario: dict) -> dict:
     page.on("response", on_response)
 
     try:
-        await page.goto(BASE_URL, timeout=TIMEOUT)
-        await page.wait_for_function("document.readyState === 'complete'", timeout=TIMEOUT)
+        await page.goto(BASE_URL, wait_until="domcontentloaded", timeout=TIMEOUT)
+        await page.wait_for_function("document.readyState === 'interactive' || document.readyState === 'complete'", timeout=TIMEOUT)
         try:
             await page.wait_for_function(
                 "window.syntaxEngine && typeof window.syntaxEngine._isReady === 'function'",

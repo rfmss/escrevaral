@@ -130,11 +130,11 @@ async def medir_overflow(page, seletores_extras: list[str]) -> dict:
 async def rodar_cenario(page, cenario: dict, largura: int) -> dict:
     """Abre o produto, ajusta viewport, executa ação e mede."""
     await page.set_viewport_size({"width": largura, "height": 812})
-    await page.goto(BASE_URL, timeout=TIMEOUT)
+    await page.goto(BASE_URL, wait_until="domcontentloaded", timeout=TIMEOUT)
 
     # Aguarda app carregar
     await page.wait_for_function(
-        "document.readyState === 'complete'",
+        "document.readyState === 'interactive' || document.readyState === 'complete'",
         timeout=TIMEOUT
     )
     try:
@@ -193,6 +193,9 @@ def gerar_relatorio_md(resultados: list[dict], hoje: str) -> str:
         for larg in LARGURAS:
             chave = str(larg)
             if chave in r["medicoes"]:
+                if "erro" in r["medicoes"][chave]:
+                    cols.append("ERRO")
+                    continue
                 doc = r["medicoes"][chave]["documento"]
                 overflow = doc.get("overflow", False)
                 sw = doc.get("scrollingElScrollW", doc.get("scrollW", "?"))
@@ -248,6 +251,7 @@ async def main():
 
     resultados = []
     tem_violacao = False
+    tem_erro = False
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True)
@@ -268,6 +272,7 @@ async def main():
                         tem_violacao = True
                 except Exception as e:
                     medicoes[str(largura)] = {"erro": str(e)}
+                    tem_erro = True
                     print(f" {largura}=ERR", end="", flush=True)
 
             print()
@@ -297,6 +302,9 @@ async def main():
 
     if tem_violacao:
         print("\nVIOLACAO DETECTADA — overflow horizontal em mobile.")
+        sys.exit(1)
+    elif tem_erro:
+        print("\nERRO DE AUDITORIA — uma ou mais medições falharam.")
         sys.exit(1)
     else:
         print("\nNenhuma violação. Pilar de responsividade ok.")
