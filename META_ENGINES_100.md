@@ -167,7 +167,7 @@ Os bugs de PRONOMES_POSS (meu/teu/seu → Verbo) e ADV_LUGAR/ADV_TEMPO (diacrít
 | Arquivo / acervo | **98%** | Total de palavras no acervo na barra de status; filtro por situação com contagem |
 | Templates / guias | **98%** | Contagem de etapas em cada aba; busca auto-seleciona; counter de resultados; `template.id` no índice |
 | Precision / aderencia ao guia | **98%** | Exportar análise TXT (score, pontos cobertos/a trabalhar); cobertura comercial-técnica e planejamento |
-| Lexico / Biblioteca | **98%** | Campo de busca manual; 119 entradas; adjetivos/advérbios/conjunções expandidos |
+| Lexico / Biblioteca | **98%** | 127 entradas; v479: 8 entradas FC/especulativo (distopia, novum, androide, colônia, silício…); adjetivos/advérbios/conjunções expandidos |
 | Sintaxe | **95%** | v380: resolverAmbiguidade() — 4 regras Mac-Morpho. v469: _ADJ_EXT via adjetivos_comuns — 34 formas sem sufixo canônico. v471: CONTRACOES_PREP_DEM 45 formas (deste/neste/àquele…) + comigo/contigo/consigo em PRONOMES_OBL. Teto: candidatos morfológicos + desambiguação por janela |
 | Pontuacao | **99%** | 40 regras + PONT-54 (aspas retas → tipográficas, severidade baixa); `acao` em cada regra; `resumo` por severidade |
 | Analise geral | **98%** | Badge "Saúde textual X/100" no cabeçalho; `acao` em cada alerta; 85+ clichês; 35+ pleonasmos; 16 condições |
