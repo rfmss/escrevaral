@@ -146,6 +146,10 @@
     // clichês de redação acadêmica / escolar
     "o presente trabalho","ao longo deste artigo","ao longo desta pesquisa",
     "no decorrer desta análise","destarte","não obstante isso",
+    "no que tange a","no que tange ao","no que tange à",
+    "de forma significativa","torna-se mister","hodiernamente",
+    "doravante","supracitado","no contexto atual",
+    "inegavelmente","precipuamente","imprescindível mencionar",
   ];
 
   const PLEONASMOS = [
