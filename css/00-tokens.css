@@ -598,15 +598,24 @@
   background: color-mix(in srgb, var(--sage) 65%, var(--surface));
 }
 
-/* proof-chip "low" e health-score — sienna escuro no Vereda falha contraste */
-[data-theme="scriptorium"] .proof-chip[data-level="low"] {
+/* proof-chip "low" e health-score — sienna escuro falha contraste em todos os temas escuros */
+[data-theme="scriptorium"] .proof-chip[data-level="low"],
+[data-theme="cerrado-dark"] .proof-chip[data-level="low"],
+[data-theme="mata-dark"] .proof-chip[data-level="low"],
+[data-theme="amazonia-dark"] .proof-chip[data-level="low"] {
   color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
   border-color: color-mix(in srgb, var(--sienna) 35%, transparent);
 }
-[data-theme="scriptorium"] .proof-chip[data-level="low"] .proof-chip-dot {
+[data-theme="scriptorium"] .proof-chip[data-level="low"] .proof-chip-dot,
+[data-theme="cerrado-dark"] .proof-chip[data-level="low"] .proof-chip-dot,
+[data-theme="mata-dark"] .proof-chip[data-level="low"] .proof-chip-dot,
+[data-theme="amazonia-dark"] .proof-chip[data-level="low"] .proof-chip-dot {
   background: color-mix(in srgb, var(--sienna) 60%, var(--surface));
 }
-[data-theme="scriptorium"] .voice-health-score.health-low {
+[data-theme="scriptorium"] .voice-health-score.health-low,
+[data-theme="cerrado-dark"] .voice-health-score.health-low,
+[data-theme="mata-dark"] .voice-health-score.health-low,
+[data-theme="amazonia-dark"] .voice-health-score.health-low {
   background: color-mix(in srgb, var(--sienna) 18%, var(--surface));
   color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
 }
