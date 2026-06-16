@@ -56,7 +56,8 @@
     "eu","tu","ele","ela","nós","vós","vocês","eles","elas","você"
   ]);
   const PRONOMES_OBL = new Set([
-    "me","te","lhe","lhes","mim","ti","si","conosco","convosco","vos"
+    "me","te","lhe","lhes","mim","ti","si","conosco","convosco","vos",
+    "comigo","contigo","consigo",
   ]);
   const PRONOMES_INDF = new Set([
     "alguém","ninguém","tudo","nada","algo","qualquer","todo","toda","todos","todas",
@@ -70,6 +71,16 @@
   const PRONOMES_DEM = new Set([
     "este","esta","estes","estas","esse","essa","esses","essas",
     "aquele","aquela","aqueles","aquelas","isto","isso","aquilo"
+  ]);
+
+  // Contrações PREP+DEM (Cunha&Cintra cap.9) — classificadas como Preposition
+  // para manter compatibilidade com a regra bigram Preposition→Noun
+  const CONTRACOES_PREP_DEM = new Set([
+    "deste","desta","destes","destas","desse","dessa","desses","dessas",
+    "daquele","daquela","daqueles","daquelas","disto","disso","daquilo",
+    "neste","nesta","nestes","nestas","nesse","nessa","nesses","nessas",
+    "naquele","naquela","naqueles","naquelas","nisto","nisso","naquilo",
+    "àquele","àquela","àqueles","àquelas","àquilo",
   ]);
 
   // Pronomes possessivos — Cunha&Cintra cap.11 — antes das regras de sufixo
@@ -224,6 +235,8 @@
         // "A" maiúsculo no início → artigo definido feminino, não preposição
         tags.push("Determiner");
       } else if (PREPS_OI.has(norm)) {
+        tags.push("Preposition");
+      } else if (CONTRACOES_PREP_DEM.has(norm)) {
         tags.push("Preposition");
       }
       if (_data && identificarConjuncao(word, { posInicio: i === 0 })) tags.push("Conjunction");
@@ -878,6 +891,7 @@
     PRONOMES_INDF,
     PRONOMES_DEM,
     PRONOMES_POSS,
+    CONTRACOES_PREP_DEM,
     NUM_CARDINAIS,
     NUM_ORDINAIS,
     INTERJEICOES,
