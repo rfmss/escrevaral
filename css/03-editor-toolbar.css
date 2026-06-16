@@ -616,23 +616,6 @@
   margin: 0;
   line-height: 1.4;
 }
-.word-popover-lexical-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  margin-top: 2px;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--muted);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.word-popover-lexical-link:hover { color: var(--primary); }
-.word-popover-lexical-link .material-symbols-outlined { font-size: 12px; }
 .word-popover-close {
   position: absolute;
   top: 6px;

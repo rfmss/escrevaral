@@ -118,26 +118,26 @@
       ],
     },
     submissão: {
-      description: "Envio editorial - editora, prazo, status e resposta.",
+      description: "Envio editorial - editora, prazo, situação e resposta.",
       fields: [
         { key: "editora", label: "Editora / revista", hint: "Para onde vai", type: "string" },
         { key: "chamada", label: "Chamada pública", hint: "Nome do edital ou chamada", type: "string" },
         { key: "prazo", label: "Prazo", hint: "Data limite de envio", type: "string" },
         { key: "formato", label: "Formato exigido", hint: "Extensão, arquivo, normas da editora", type: "string" },
-        { key: "status", label: "Status", hint: "A enviar, enviado, aguardando, aceito, recusado", type: "string" },
+        { key: "status", label: "Situação", hint: "A enviar, enviado, aguardando, aceito, recusado", type: "string" },
         { key: "resposta", label: "Resposta", hint: "O que a editora disse", type: "string" },
         { key: "versão", label: "Versão enviada", hint: "ID do manuscrito ou snapshot enviado", type: "ref" },
         { key: "link", label: "Link", hint: "Edital, formulário, página da chamada", type: "string" },
       ],
     },
     revisão: {
-      description: "Nota de processo - problema recorrente, decisão e status.",
+      description: "Nota de processo - problema recorrente, decisão e situação.",
       fields: [
         { key: "tipo", label: "Tipo de revisão", hint: "Ortográfica, gramatical, estilística, estrutural, de conteúdo", type: "string" },
         { key: "problema", label: "Problema recorrente", hint: "O padrão que aparece - não a ocorrência isolada", type: "string" },
         { key: "trecho", label: "Trecho afetado", hint: "Exemplo ou localização no manuscrito", type: "string" },
         { key: "decisão", label: "Decisão", hint: "O que foi resolvido e por quê", type: "string" },
-        { key: "status", label: "Status", hint: "Identificado, em revisão, resolvido, adiado", type: "string" },
+        { key: "status", label: "Situação", hint: "Identificado, em revisão, resolvido, adiado", type: "string" },
       ],
     },
     personagem: {
@@ -283,7 +283,7 @@
         { key: "veículo", label: "Veículo alvo", hint: "Para quem é pensada esta pauta", type: "string" },
         { key: "prazo", label: "Prazo", hint: "Data de entrega ou publicação", type: "string" },
         { key: "fontes-necessárias", label: "Fontes necessárias", hint: "Quem precisa ser ouvido", type: "string" },
-        { key: "status", label: "Status", hint: "Ideia, aprovada, em apuração, entregue", type: "string" },
+        { key: "status", label: "Situação", hint: "Ideia, aprovada, em apuração, entregue", type: "string" },
       ],
     },
     fonte: {
@@ -294,7 +294,7 @@
         { key: "contato", label: "Contato", hint: "E-mail, telefone, canal preferido", type: "string" },
         { key: "credibilidade", label: "Credibilidade", hint: "Por que esta fonte", type: "string" },
         { key: "o-que-sabe", label: "O que sabe", hint: "Qual informação pode fornecer", type: "string" },
-        { key: "status", label: "Status", hint: "A contatar, contatada, entrevistada, off", type: "string" },
+        { key: "status", label: "Situação", hint: "A contatar, contatada, entrevistada, off", type: "string" },
       ],
     },
     entrevista: {
@@ -309,13 +309,13 @@
       ],
     },
     fato: {
-      description: "Dado verificável - enunciado, fonte primária e status.",
+      description: "Dado verificável - enunciado, fonte primária e situação.",
       fields: [
         { key: "enunciado", label: "Enunciado", hint: "O fato em uma frase objetiva", type: "string" },
         { key: "quando", label: "Quando", hint: "Data ou período", type: "string" },
         { key: "onde", label: "Onde", hint: "Local, se aplicável", type: "string" },
         { key: "fonte-primária", label: "Fonte primária", hint: "Documento ou pessoa que confirma", type: "string" },
-        { key: "status", label: "Status", hint: "Não verificado, confirmado, contestado, falso", type: "string" },
+        { key: "status", label: "Situação", hint: "Não verificado, confirmado, contestado, falso", type: "string" },
         { key: "pauta", label: "Pauta relacionada", hint: "ID da pauta onde este fato é usado", type: "ref" },
       ],
     },

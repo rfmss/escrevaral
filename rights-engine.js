@@ -80,7 +80,7 @@
       title: "Prova é conjunto, não talismã.",
       body:
         "A Prova de Autoria do Escrevaral registra processo localmente. Ela ajuda a contar a história da escrita, mas não substitui registro oficial, cartório, contrato ou orientação jurídica.",
-      do: ["Exporte o .proof.json.", "Faça backup .esc.", "Consulte o EDA/FBN para registro formal."],
+      do: ["Exporte o .proof.json.", "Faça cópia de segurança .esc.", "Consulte o EDA/FBN para registro formal."],
       watch: "Serviços, tabela e atendimento do EDA podem mudar. Confira a fonte oficial no dia.",
       source: "EDA/FBN e serviço gov.br",
     },

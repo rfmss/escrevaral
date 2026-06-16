@@ -736,11 +736,6 @@ document.addEventListener("click", (e) => {
   const btn = e.target.closest("[data-action]");
   if (!btn) return;
   if (btn.dataset.action === "popover-close") { closeWordPopover(); return; }
-  if (btn.dataset.action === "popover-open-lexical") {
-    closeWordPopover();
-    setView("biblioteca", { updateRoute: true });
-    return;
-  }
   if (btn.dataset.action === "switch-view-autoria") {
     setView("autoria", { updateRoute: true });
     return;

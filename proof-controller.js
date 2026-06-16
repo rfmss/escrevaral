@@ -506,7 +506,7 @@ function renderVersionList() {
   const manuscript = getActiveManuscript();
 
   if (!isManuscriptDocument(manuscript)) {
-    versionList.innerHTML = '<p class="muted">Versões ficam disponíveis apenas para manuscritos. Notas de suporte acompanham o acervo e o backup.</p>';
+    versionList.innerHTML = '<p class="muted">Versões ficam disponíveis apenas para manuscritos. Notas de suporte acompanham o acervo e a cópia de segurança.</p>';
     return;
   }
 
