@@ -419,6 +419,51 @@
     // Nascentes: "Fogo é o fenômeno em geral; Chama é a língua de fogo; Brasa é o carvão aceso"
     "fogo":        ["chama", "brasa", "labareda", "incêndio", "faísca", "lume"],
 
+    // ─── VERBOS NARRATIVOS COMPLEMENTARES ────────────────────────────────────
+
+    // est
+    "perder":      ["extraviar", "desperdiçar", "privar-se de", "sumir com", "desaparecer com", "desfazer-se de"],
+
+    // Nascentes: "Achar é encontrar por acaso; Descobrir é encontrar o que estava oculto"
+    "encontrar":   ["achar", "deparar-se com", "topar com", "descobrir", "localizar", "deparar"],
+
+    // est
+    "fugir":       ["escapar", "evadir-se", "evitar", "refugiar-se", "desertar", "debandear"],
+
+    // est
+    "procurar":    ["buscar", "pesquisar", "investigar", "rastrear", "perscrutar", "explorar"],
+
+    // Nascentes: "Contar é narrar enumerando; Narrar é expor fatos em sequência; Relatar é fazer relato"
+    "contar":      ["narrar", "relatar", "descrever", "reportar", "historiar", "enunciar"],
+
+    // ─── ADJETIVOS COMPLEMENTARES ─────────────────────────────────────────────
+
+    // est
+    "perdido":     ["desgarrado", "desorientado", "extraviado", "errante", "sem rumo", "naufragado"],
+
+    // Nascentes: "Fundo é o mais material; Profundo indica grande extensão ou intensidade"
+    "profundo":    ["fundo", "abismal", "insondável", "intenso", "cavernoso", "denso"],
+
+    // est
+    "secreto":     ["oculto", "clandestino", "sigiloso", "velado", "encoberto", "misterioso"],
+
+    // ─── SUBSTANTIVOS COMPLEMENTARES ─────────────────────────────────────────
+
+    // Nascentes: "Dor, Pena, Sofrimento — Dor é o sofrimento físico ou moral intenso; Pena é dor moral"
+    "dor":         ["sofrimento", "pena", "padecimento", "angústia", "tormento", "suplício"],
+
+    // est
+    "esperança":   ["expectativa", "anseio", "alento", "perspectiva", "fé", "aspiração"],
+
+    // Nascentes: conexa com "só" — solidão implica ausência sentida de companhia
+    "solidão":     ["isolamento", "abandono", "reclusão", "desamparo", "desolação", "separação"],
+
+    // Nascentes: "Destino, Fado, Sina — Fado é o destino fatal; Sina é destino marcado no nascimento"
+    "destino":     ["fado", "sorte", "sina", "providência", "rumo", "porvir"],
+
+    // est
+    "povo":        ["gente", "população", "multidão", "comunidade", "nação", "coletividade"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas

@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v527";
-const ASSET_VERSION = "20260616-adjetivos-216";
+const CACHE_NAME = "vereda-offline-v528";
+const ASSET_VERSION = "20260616-sinonimos-113";
 
 const CORE_ASSETS = [
   "./",

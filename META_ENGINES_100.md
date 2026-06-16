@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v523→v528)
+
+**Baseline:** v528 — Tema 98%; Analise 99%; Sinonimos 113 entradas; adjetivos_comuns 216.
+
+**O que foi entregue neste ciclo (v523→v528) — correções críticas de diacríticos e expansão de dados:**
+
+- `css/03-editor-toolbar.css` (v523): dark mode — grammar btn active + proof-chip high em 4 temas escuros
+- `css/06-academy-tools.css` (v523): dark mode — `.academy-tool-tab` cor corrigida para 4 temas escuros
+- `lexical-data.json` (v524): 150→162 (peito, sorriso, raiva, vergonha, abraço, ausência, quintal, canto, onda, lago, grito, lar)
+- `voice-engine.js` (v524): sobrenatural 15→22; corpo 19→23; memoria 20→23; pensamento 19→23; tensao 27→30; contemplacao 26→30
+- `decolonial-data.json` (v525): 215→227 (gênero +5, linguagem +4, estética +3)
+- `analise-engine.js` (v524+v526): PALAVRAS_FRACAS_ABERTURA bug diacrítico corrigido + 8 novas; CLIQUES_PT 202→209; PLEONASMOS 65→72; VERBOS_ESTADO bug corrigido (toLowerCase em vez de normalizar para não confundir "é" com "e"); SUBSTANTIVOS_VAGOS bug diacrítico corrigido (questão→questao etc) + 3 novas
+- `norma-data.json` (v527): adjetivos_comuns 184→216 (+32 adjetivos irregulares: belo/bela, grave, feliz/felizes, cruel/crueis, fiel/fieis, capaz/capazes, etc.)
+- `synonym-data.js` (v528): 100→113 entradas (perder, encontrar, fugir, procurar, contar; perdido, profundo, secreto; dor, esperança, solidão, destino, povo)
+
+**Revisão de maturidade — Tema Alvorada/Vereda 97% → 98%:** auditados e corrigidos `03-editor-toolbar.css` e `06-academy-tools.css`; auditados sem problema `03-writing-area.css`, `03-guide-reference.css`, `12-training-modes.css`. Todos os arquivos CSS com dark mode cobertura completa.
+
+**Estado atualizado dos engines (v528):**
+
+| Área / engine | Maturidade | Notas de estado (v528) |
+|---|---:|---|
+| Analise geral | **99%** | CLIQUES_PT 209; PLEONASMOS 72; 4 bugs diacrítico corrigidos; CONECTIVOS_LOGICOS +12 |
+| Espelho de Voz | **99%** | sobrenatural 22; corpo 23; memoria 23; pensamento 23; tensao 30; contemplacao 30 |
+| RimaLab | **98%** | enciclopédia 25 entradas; grammarWords 204; findRhymes exata/toante |
+| Lexico / Biblioteca | **98%** | 162 entradas; emoções brasileiras + léxico afetivo expandido |
+| Decolonial / vocabulário | **98%** | 227 entradas; gênero, linguagem, estética ampliados |
+| Sintaxe | **95%** | adjetivos_comuns 216; norma-data: topónimos 75; siglas 82; prenomes 535 |
+| Tema Alvorada / Vereda | **98%** | todos CSS auditados; grammar btn + proof-chip + academy-tab corrigidos nos 4 temas escuros |
+
+**Próximas fronteiras:**
+
+1. **RimaLab 98% → 99%**: expandir `findRhymes()` para incluir toante na busca por palavra — custo médio
+2. **Sintaxe 95% → 97%**: candidatos morfológicos + desambiguação por janela de contexto — custo alto
+3. **Analise geral 99% → 100%**: verificar bordas em textos muito curtos e poesia
+4. **Tema 98% → 99%**: verificar componentes específicos (mode-switcher, cronograma, paginação) em modo escuro
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v507→v522)
 
 **Baseline:** v522 — Tema 97% (revisado); 19 engines em 97–99%; sintaxe em 95%.
