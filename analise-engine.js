@@ -182,6 +182,10 @@
     ["suicídio voluntário","suicídio"],["regressar de volta","regressar"],
     ["perspectiva futura","perspectiva"],["somente apenas","somente"],
     ["bom êxito","êxito"],["sorriso nos lábios","sorriso"],
+    ["período de tempo","período"],["habitat natural","habitat"],
+    ["urgência imediata","urgência"],["totalmente grátis","grátis"],
+    ["prioridade prioritária","prioridade"],["abortar o feto","abortar"],
+    ["vereador municipal","vereador"],["continuar persistindo","persistir"],
   ];
 
   const NEGACOES_DUPLAS = [
