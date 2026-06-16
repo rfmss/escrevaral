@@ -122,6 +122,15 @@
     "seus lábios macios","lábios carnudos","lábios perfeitos",
     "cabelos esvoaçantes","cabelos ao vento","cabelos negros como a noite",
     "olhos que brilhavam","olhos que faiscavam","olhos que relampejavam",
+    // clichês de suspense e drama
+    "sangue gelou nas veias","o sangue gelou","segurou a respiração","prendeu a respiração",
+    "o tempo estava se esgotando","não sabia que era a última vez","como se fosse a última vez",
+    "de repente um barulho","os olhos se encheram de lágrimas","olhos enchidos de lágrimas",
+    "segurou as lágrimas","conteve as lágrimas",
+    // clichês de romance universal
+    "amor à primeira vista","almas gêmeas","destinados a se encontrar",
+    "não conseguia tirar os olhos dela","não conseguia tirar os olhos dele",
+    "não conseguia parar de pensar nela","não conseguia parar de pensar nele",
   ];
 
   const PLEONASMOS = [
@@ -146,6 +155,10 @@
     ["elo de ligação","elo"],["a razão é porque","a razão é que"],
     ["onde quer que seja","onde quer que"],["metade da metade","um quarto"],
     ["dois irmãos gêmeos","gêmeos"],["primeira estreia","estreia"],
+    ["previsão futura","previsão"],["fato verídico","fato"],
+    ["possível hipótese","hipótese"],["avançar para frente","avançar"],
+    ["recuar para trás","recuar"],["importar para dentro","importar"],
+    ["exportar para fora","exportar"],["breve síntese","síntese"],
   ];
 
   const NEGACOES_DUPLAS = [
