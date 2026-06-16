@@ -247,15 +247,21 @@
 
   const STOPWORDS = new Set([
     "a","ao","aos","aquela","aquelas","aquele","aqueles","aquilo","as","ate","atem",
-    "com","como","da","das","de","dela","delas","dele","deles","depois","do","dos",
+    "com","como","cada","cujo","cuja","cujos","cujas",
+    "da","das","de","dela","delas","dele","deles","depois","desde","do","dos",
+    "desse","dessa","desses","dessas","deste","desta","destes","destas","disso","disto",
     "e","ela","elas","ele","eles","em","entre","era","eram","essa","essas","esse",
     "esses","esta","estas","este","estes","eu","foi","foram","ha","isso","isto",
-    "ja","lhe","lhes","lo","la","mas","me","mesmo","meu","minha","minhas","meus",
-    "muito","na","nas","nao","nas","nem","no","nos","nossa","nossas","nosso","nossos",
-    "num","numa","o","os","ou","para","pela","pelas","pelo","pelos","por","porque",
-    "quando","que","se","sem","seu","sua","suas","seus","so","sobre","também","te",
+    "ja","lhe","lhes","lo","la","las","los","mas","me","mesmo","meu","minha","minhas","meus",
+    "mais","menos","muito","mal","bem",
+    "na","nas","nao","nas","nem","no","nos","nossa","nossas","nosso","nossos","nunca",
+    "nesse","nessa","nesses","nessas","neste","nesta","nestes","nestas","nisso","nisto",
+    "num","numa","o","os","ou","para","pela","pelas","pelo","pelos","por","porque","pois",
+    "qual","quais","quem","quando","que","se","sem","seu","sua","suas","seus",
+    "sempre","so","sobre","tambem","te","tanto","tanta","tantos","tantas",
     "tinha","tinham","toda","todas","todo","todos","tu","tua","tuas","teu","teus",
-    "um","uma","uns","umas","voce","vocês","vos","ser","ter","haver","estar","fazer",
+    "um","uma","uns","umas","voce","voces","vos","ser","ter","haver","estar","fazer",
+    "sendo","tendo","havendo","estando","fazendo","indo",
   ]);
 
   // ── MÉTRICAS: ECONOMIA ────────────────────────────────────────────────────
