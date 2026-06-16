@@ -1,62 +1,111 @@
 {
   "data": "2026-06-16",
-  "tem_erro": false,
+  "tem_erro": true,
   "resultados": [
     {
       "cenario": "acervo",
       "descricao": "Tela inicial — lista de manuscritos",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "editor-novo",
       "descricao": "Criar e abrir manuscrito novo",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "editor-escrita",
       "descricao": "Digitar texto no editor",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "guia-de-escrita",
       "descricao": "Abrir guia de escrita",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "academia",
       "descricao": "Aba Academia",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "prova-autoria",
       "descricao": "Aba Prova de Autoria",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     },
     {
       "cenario": "copia-seguranca",
       "descricao": "Acionar cópia de segurança",
-      "erros": [],
+      "erros": [
+        {
+          "tipo": "uncaught-exception",
+          "mensagem": "Invalid or unexpected token",
+          "url": "",
+          "linha": 0
+        }
+      ],
       "avisos": [],
       "erros_rede": [],
-      "tem_problema": false
+      "tem_problema": true
     }
   ]
 }
