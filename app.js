@@ -1693,6 +1693,17 @@ function selectReferenceTemplate(templateId) {
   persistState("Guia selecionado");
 }
 
+function openAcademyEnemGuide() {
+  state.template.selectedId = "redacao-enem";
+  state.template.open = true;
+  renderTemplateReference();
+  renderSpecializedEditor(getActiveManuscript());
+  applyTemplateLayout();
+  setView("editor", { updateRoute: true });
+  requestAnimationFrame(focusEditor);
+  persistState("Guia ENEM aberto");
+}
+
 function toggleTemplateSide() {
   state.template.side = state.template.side === "left" ? "right" : "left";
   state.template.open = true;
@@ -1900,6 +1911,7 @@ const ACTION_HANDLERS = {
   "welcome-autoria":         () => handleWelcomeAutoria(),
   "welcome-blank":           () => handleWelcomeBlank(),
   "switch-view-editor":      () => setView("editor", { updateRoute: true }),
+  "academy-open-enem-guide": () => openAcademyEnemGuide(),
   "open-active-manuscript":  () => { setView("editor", { updateRoute: true }); focusEditor(); },
   "hint-goto-academia":      () => { hideAcademiaHint(); hintDismissed = true; setView("academia", { updateRoute: true }); },
   "hint-dismiss":            () => { hideAcademiaHint(); hintDismissed = true; },

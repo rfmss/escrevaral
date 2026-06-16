@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v501";
-const ASSET_VERSION = "20260617-plano-acionavel";
+const CACHE_NAME = "vereda-offline-v502";
+const ASSET_VERSION = "20260617-atalho-enem";
 
 const CORE_ASSETS = [
   "./",
