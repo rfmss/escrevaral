@@ -80,7 +80,7 @@
         "descricao": "Indica hipótese ou condição necessária para que se realize o fato principal"
       },
       "finais": {
-        "palavras": ["para que", "a fim de que"],
+        "palavras": ["para que", "a fim de que", "com o intuito de que", "com o objetivo de que", "com a finalidade de que", "com vistas a que"],
         "valor_especial": {
           "que": "final após verbo de vontade/mandato (Manda que venha = para que venha)",
           "porque": "final arcaico/literário (= para que)"
@@ -103,7 +103,7 @@
         "descricao": "Indica circunstância de tempo em relação à ação principal"
       },
       "consecutivas": {
-        "palavras": ["de forma que", "de maneira que", "de modo que", "de sorte que"],
+        "palavras": ["de forma que", "de maneira que", "de modo que", "de sorte que", "de jeito que", "a tal ponto que", "tanto que", "ao ponto de"],
         "valor_especial": {
           "que": "consecutivo quando correlato de tal/tanto/tão/tamanho na oração anterior (Era tão frio que tremia). Sem correlato, que é integrante ou relativo"
         },
@@ -408,6 +408,6 @@
 
   "preposicoes": {
     "simples": ["a","ante","após","até","com","contra","de","desde","em","entre","para","per","perante","por","sem","sob","sobre","trás"],
-    "locuções": ["abaixo de","acerca de","acima de","além de","ao lado de","a partir de","a respeito de","de acordo com","em cima de","em frente a","em vez de","por causa de","por meio de","a fim de","apesar de","antes de","depois de","junto a","ao redor de","a despeito de"]
+    "locuções": ["abaixo de","acerca de","acima de","além de","ao lado de","a partir de","a respeito de","de acordo com","em cima de","em frente a","em vez de","por causa de","por meio de","a fim de","apesar de","antes de","depois de","junto a","ao redor de","a despeito de","através de","atrás de","diante de","dentro de","fora de","perto de","longe de","em torno de","à frente de","em face de","em virtude de","graças a","à custa de","por intermédio de","no lugar de","à beira de"]
   }
 }
