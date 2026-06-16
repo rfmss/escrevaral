@@ -615,7 +615,8 @@ writingArea.addEventListener("click", (e) => {
   const count = analysis.count || 0;
   const countText = count > 0 ? `${count} vez${count > 1 ? "es" : ""} no texto` : "";
   state.lexical.selectedWord = VeredaLexical.normalizeWord(word);
-  openWordPopover(word, analysis.className, countText, e.clientX, e.clientY);
+  openWordPopover(word, analysis.className, countText, e.clientX, e.clientY, analysis);
+  e.stopPropagation(); // impede handler de fechamento do document de fechar o popover recém-aberto
 });
 
 // Desliga ao trocar de nota
