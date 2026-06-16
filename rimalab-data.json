@@ -407,6 +407,15 @@
     "encanto": "substantivo",
     "espanto": "substantivo",
     "instante": "substantivo",
-    "amante": "substantivo"
+    "amante": "substantivo",
+    "agora": "advérbio",
+    "antes": "advérbio",
+    "depois": "advérbio",
+    "cedo": "advérbio",
+    "tarde": "advérbio",
+    "bem": "advérbio",
+    "mal": "advérbio",
+    "logo": "advérbio",
+    "quase": "advérbio"
   }
 }
