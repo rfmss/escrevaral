@@ -118,6 +118,7 @@
       contemplativo: "Voz de demora sensível",
       narrativo: "Voz de cena em avanço",
       sobrenatural: "Voz de fronteira e encantamento",
+      "irônico": "Voz de distância e comentário velado",
     };
 
     const fieldPart = fieldDesc ? ` com foco em ${fieldDesc}` : "";
@@ -154,6 +155,9 @@
     // Oral: texto com diálogo marcado (threshold > 3 para não classificar uma citação como oral)
     if (punctuation.dialogue >= 4) return "oral";
 
+    // Irônico: marcadores de ironia com alta frequência e densidade média — distância entre o dito e o sentido
+    if (topEmotion === "ironia" && lexicalDensity > 0.44) return "irônico";
+
     // Contemplativo: emoção de contemplação ou campo da natureza
     if (topEmotion === "contemplacao" || topField === "natureza") return "contemplativo";
 
@@ -185,6 +189,7 @@
       contemplativo: ["Lygia Fagundes Telles (Ciranda de Pedra)", "Adélia Prado (Bagagem)", "Manoel de Barros (Poesia Completa)"],
       narrativo: ["Machado de Assis (Dom Casmurro)", "Autran Dourado (Opera dos Mortos)", "Conceição Evaristo (Ponciá Vicêncio)"],
       sobrenatural: ["Mia Couto (Um Rio Chamado Tempo)", "Paulina Chiziane (O Alegre Canto da Perdiz)", "João Guimarães Rosa (A Terceira Margem do Rio)"],
+      "irônico": ["Machado de Assis (Memórias Póstumas de Brás Cubas)", "Lima Barreto (Triste Fim de Policarpo Quaresma)", "João Ubaldo Ribeiro (Viva o Povo Brasileiro)"],
     };
     return map[gesture] || map.narrativo;
   }
@@ -248,6 +253,7 @@
       contemplativo: "Introduza uma perturbação concreta no meio da atmosfera.",
       narrativo: "Marque o ponto exato em que algo muda de estado na cena.",
       sobrenatural: "Descreva o elemento inexplicável pelos sentidos físicos de quem o vive — sem explicar o que é.",
+      "irônico": "Reescreva uma passagem séria como se o narrador soubesse mais do que admite — sem quebrar a cena.",
     };
     const repetitionExercise = repetitions.length
       ? `Faça uma versão substituindo metade das ocorrências de "${repetitions[0].word}" por imagem, ação ou silêncio.`
