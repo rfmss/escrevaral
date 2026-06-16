@@ -151,6 +151,10 @@ global.EscrevaralQuotes = [
   { q:"Maturidade é saber quando não publicar.", a:"T. S. Eliot", r:"ELIOT, T. S. On Poetry and Poets. Londres: Faber, 1957." },
   { q:"A brevidade é a alma do engenho.", a:"William Shakespeare", r:"SHAKESPEARE, William. Hamlet, II, ii. Londres: 1603." },
   { q:"Toda escrita é uma forma de memória do futuro.", a:"Álvaro Mutis", r:"MUTIS, Álvaro. De lecturas y algo del mundo. Barcelona: Seix Barral, 1999." },
+  { q:"A vida só vale a pena quando nos tornamos, por um momento, os outros.", a:"Graciliano Ramos", r:"RAMOS, Graciliano. Infância. Rio de Janeiro: José Olympio, 1945." },
+  { q:"Escrever sem estilo é como caminhar sem corpo.", a:"Lima Barreto", r:"BARRETO, Lima. Diário do Hospício. São Paulo: Cosac Naify, 2010." },
+  { q:"As histórias são a nossa maneira de não morrer.", a:"Mia Couto", r:"COUTO, Mia. Cronicando. Maputo: Ndjira, 1988." },
+  { q:"A crónica é o único género que pode ser escrito sem a ilusão de ter algo importante a dizer.", a:"Rubem Braga", r:"BRAGA, Rubem. A Traição das Elegantes. Rio de Janeiro: Record, 1967. [citação atribuída]" },
 ];
 
 // Embaralha a cada carregamento para variar a frase exibida
