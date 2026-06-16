@@ -2279,6 +2279,71 @@
       ],
       "category": "estetica",
       "reason": "Em narrativas, 'traços finos' como atributo positivo implicitamente hierarquiza fisionomias europeias sobre africanas e indígenas."
+    },
+    {
+      "avoid": "macumba",
+      "alternatives": [
+        "candomblé",
+        "umbanda",
+        "quimbanda",
+        "religião de matriz africana",
+        "o nome específico da religião"
+      ],
+      "category": "conhecimento",
+      "reason": "Termo de origem Banto que passou a ser usado como guarda-chuva pejorativo para qualquer religião de matriz africana, apagando distinções entre candomblé, umbanda, quimbanda e outras tradições com cosmologias próprias.",
+      "context": "Depende do contexto: pode ser mantido em diálogo de personagem histórico, época específica ou análise crítica sobre o próprio preconceito.",
+      "contextual": true
+    },
+    {
+      "avoid": "silvícola",
+      "alternatives": [
+        "pessoa indígena",
+        "povo indígena",
+        "o nome do povo específico"
+      ],
+      "category": "povos",
+      "reason": "Termo criado pelo Código Civil de 1916 e perpetuado no Estatuto do Índio (Lei 6.001/1973), já substituído em legislação posterior por 'povos indígenas'. Carrega sentido colonial de tutela e incapacidade civil.",
+      "context": "Pode aparecer em citação de legislação histórica ou fala de personagem de época.",
+      "contextual": true
+    },
+    {
+      "avoid": "sangue de índio",
+      "alternatives": [
+        "tem ascendência indígena",
+        "tem família indígena",
+        "descende de"
+      ],
+      "category": "linguagem",
+      "reason": "Metáfora de pureza de sangue herdada do sistema colonial, que naturaliza a ideia de que identidades indígenas ou negras se 'diluem' ou 'contaminam' por mistura biológica, como se fossem substâncias e não histórias e culturas.",
+      "context": "Uso sensível: em fala de personagem ou narrador colonial, pode ser mantido como recurso crítico.",
+      "contextual": true
+    },
+    {
+      "avoid": "feiticeiro",
+      "alternatives": [
+        "pai de santo",
+        "mãe de santo",
+        "rezadeiro",
+        "rezadeira",
+        "sacerdote",
+        "o título correto dentro da tradição"
+      ],
+      "category": "conhecimento",
+      "reason": "Quando aplicado a líderes religiosos de tradições de matriz africana ou indígena, o termo criminaliza práticas espirituais legítimas e as associa a magia maléfica, reforçando perseguição histórica.",
+      "context": "Depende do contexto: em ficção de gênero fantástico ou personagem que usa o termo criticamente, pode ser mantido com intenção explícita.",
+      "contextual": true
+    },
+    {
+      "avoid": "mão de obra barata",
+      "alternatives": [
+        "trabalhadores",
+        "profissionais",
+        "pessoas"
+      ],
+      "category": "relacoes",
+      "reason": "Quando aplicado de forma generalizada a populações negras, indígenas ou migrantes, o termo ecoa a lógica escravocrata que reduzia seres humanos a instrumentos de produção e mantinha corpos racializados fora da categoria de sujeitos.",
+      "context": "Pode ser mantido em análise econômica crítica ou em fala de personagem que representa essa mentalidade.",
+      "contextual": true
     }
   ]
 }
