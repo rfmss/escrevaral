@@ -104,6 +104,24 @@
     "depreende-se que","infere-se que","ao que tudo indica","tudo leva a crer",
     "não é por acaso que","é mister","é imperioso","é imprescindível frisar",
     "como sabemos","como é sabido","todos sabemos","não podemos negar que",
+    // clichês literários — romance brasileiro
+    "olhos cor de mel","olhos verdes como","coração acelerou","coração disparou",
+    "sentiu um frio na barriga","sentiu um nó na garganta","engoliu em seco",
+    "mal conseguia respirar","soltou uma lágrima","uma lágrima escorreu",
+    "silêncio foi ensurdecedor","no fundo do seu coração","no fundo de seu coração",
+    "não era como os outros","era diferente de todos","nunca havia sentido",
+    "nunca tinha sentido aquilo","algo que nunca sentira","algo que jamais sentira",
+    "o tempo parou","o tempo parecia ter parado","sem perceber o tempo passar",
+    "não havia palavras para descrever","não havia como descrever",
+    "sentiu o coração apertar","o coração apertou","o coração se apertou",
+    "fez o coração acelerar","fez seu coração bater","seu coração bateu mais forte",
+    "uma onda de","oleada de calor","onda de calor percorreu",
+    "arrepios percorreram","um arrepio percorreu","teve arrepios",
+    "ela sorriu de canto de boca","sorriu de canto","sorrio levemente",
+    "sua voz era suave como mel","voz suave como mel",
+    "seus lábios macios","lábios carnudos","lábios perfeitos",
+    "cabelos esvoaçantes","cabelos ao vento","cabelos negros como a noite",
+    "olhos que brilhavam","olhos que faiscavam","olhos que relampejavam",
   ];
 
   const PLEONASMOS = [
