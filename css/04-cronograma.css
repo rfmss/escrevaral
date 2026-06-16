@@ -511,3 +511,35 @@
 }
 .crono-hint[hidden] { display: none; }
 
+.crono-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -8px 0 28px;
+}
+.crono-empty-actions[hidden] { display: none; }
+
+.crono-empty-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--soft-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 12px;
+}
+.crono-empty-action:hover,
+.crono-empty-action:focus-visible {
+  border-color: color-mix(in srgb, var(--primary) 48%, var(--line));
+  color: var(--primary);
+  outline: none;
+}
+.crono-empty-action .material-symbols-outlined {
+  font-size: 17px;
+}

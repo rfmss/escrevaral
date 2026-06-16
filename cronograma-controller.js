@@ -183,6 +183,7 @@ function renderCronograma() {
   const titleEl     = document.querySelector("[data-crono-title]");
   const monthLabel  = document.querySelector("[data-crono-month]");
   const hint        = document.querySelector("[data-crono-hint]");
+  const emptyActions = document.querySelector("[data-crono-empty-actions]");
   if (!timeline) return;
 
   const TODAY       = new Date();
@@ -205,11 +206,18 @@ function renderCronograma() {
   });
 
   // Hint: aparece quando o mês atual não tem nenhuma sessão
+  const monthPrefix = `${cronoYear}-${String(cronoMonth+1).padStart(2,"0")}`;
+  const monthHasAuto   = Object.keys(autoByDay).some(k => k.startsWith(monthPrefix));
+  const monthHasManual = Object.keys(plannerData).some(k => k.startsWith(monthPrefix));
+  const monthHasActivity = monthHasAuto || monthHasManual;
   if (hint) {
-    const monthPrefix = `${cronoYear}-${String(cronoMonth+1).padStart(2,"0")}`;
-    const monthHasAuto   = Object.keys(autoByDay).some(k => k.startsWith(monthPrefix));
-    const monthHasManual = Object.keys(plannerData).some(k => k.startsWith(monthPrefix));
-    hint.hidden = monthHasAuto || monthHasManual;
+    hint.hidden = monthHasActivity;
+  }
+  if (emptyActions) {
+    const day = TODAY.getFullYear() === cronoYear && TODAY.getMonth() === cronoMonth ? TODAY.getDate() : 1;
+    const dayKey = `${monthPrefix}-${String(day).padStart(2,"0")}`;
+    emptyActions.hidden = monthHasActivity;
+    emptyActions.querySelectorAll("[data-day]").forEach(btn => { btn.dataset.day = dayKey; });
   }
 
   // Heatmap
