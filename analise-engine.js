@@ -194,15 +194,18 @@
     "portanto","logo","assim","consequentemente","por conseguinte","dessa forma",
     "desse modo","sendo assim","então","por isso","por essa razão","por tanto",
     "todavia","contudo","porém","entretanto","no entanto","apesar disso",
-    "ainda assim","mesmo assim","de toda forma","de todo modo",
+    "ainda assim","mesmo assim","de toda forma","de todo modo","de qualquer forma",
+    "não obstante","seja como for",
     "além disso","ademais","também","igualmente","da mesma forma","outrossim",
     "por outro lado","em contrapartida","ao contrário","diferentemente",
     "primeiro","segundo","terceiro","por fim","finalmente","por último",
-    "inicialmente","em seguida","depois","posteriormente","anteriormente",
+    "inicialmente","em seguida","depois","posteriormente","anteriormente","a partir daí",
     "por exemplo","como por exemplo","como","tal como","assim como",
     "de fato","com efeito","realmente","na verdade","efetivamente",
     "em resumo","em síntese","em suma","concluindo","para concluir",
     "ou seja","isto é","quer dizer","em outras palavras",
+    "nesse sentido","nesse contexto","diante disso","em vista disso",
+    "com isso","uma vez que","visto que","posto que",
   ];
 
   const PALAVRAS_FRACAS_ABERTURA = new Set([
