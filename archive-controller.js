@@ -181,7 +181,7 @@ function showMasterResetModal() {
       <p>Todos os seus textos, notas e configurações serão apagados permanentemente. Esta ação não pode ser desfeita.</p>
       <div class="master-reset-tip">
         <span class="material-symbols-outlined">shield_locked</span>
-        <span>Exporte um backup <strong>.esc</strong> antes de continuar — ele preserva todo o seu acervo e pode ser reimportado depois.</span>
+        <span>Exporte uma cópia de segurança <strong>.esc</strong> antes de continuar — ela preserva todo o seu acervo e pode ser reimportada depois.</span>
       </div>
       <div class="master-reset-confirm-field">
         <label for="master-reset-input">Digite <strong>apagar</strong> para confirmar:</label>

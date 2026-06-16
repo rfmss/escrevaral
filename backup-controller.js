@@ -22,7 +22,7 @@ function _checkCacheHealth() {
       if (count === 0) {
         _setOfflineStatus("cloud_sync", "Preparando modo sem internet…", "Instalando arquivos para funcionar sem conexão. Pronto em instantes.");
       } else {
-        offlineStatus.dataset.vrdaTooltip = `${count} arquivo${count !== 1 ? "s" : ""} em cache · oficina disponível sem rede`;
+        offlineStatus.dataset.vrdaTooltip = `${count} arquivo${count !== 1 ? "s" : ""} disponíveis localmente · oficina funciona sem internet`;
       }
     });
   }).catch(() => {});
@@ -128,7 +128,7 @@ async function checkForSWUpdate() {
   }
   try {
     const reg = await navigator.serviceWorker.getRegistration();
-    if (!reg) { saveStatus.textContent = "Nenhuma versão em cache ainda"; return; }
+    if (!reg) { saveStatus.textContent = "Nenhuma versão armazenada ainda"; return; }
     saveStatus.textContent = "Verificando nova versão…";
     await reg.update();
     if (reg.waiting) {
@@ -164,7 +164,7 @@ function getBackupWarningState() {
   if (!exportedAt || Number.isNaN(exportedAt.getTime())) {
     return {
       visible: true,
-      copy: "Limpar cache, trocar de aparelho ou remover dados do site pode apagar seus textos locais. Exporte um cópia .esc para guardar uma cópia fora do navegador.",
+      copy: "Limpar dados do navegador, trocar de aparelho ou remover dados do site pode apagar seus textos locais. Exporte uma cópia .esc para guardar seus textos fora do navegador.",
     };
   }
 

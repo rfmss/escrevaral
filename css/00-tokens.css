@@ -633,3 +633,23 @@
   background: color-mix(in srgb, var(--ochre) 22%, var(--surface-mid));
   color: color-mix(in srgb, var(--ochre) 75%, var(--ink));
 }
+
+/* mark (highlight de busca em Palavras) — fundo claro fixo fica jarring em temas escuros */
+[data-theme="scriptorium"] mark,
+[data-theme="cerrado-dark"] mark,
+[data-theme="mata-dark"] mark,
+[data-theme="amazonia-dark"] mark {
+  background: color-mix(in srgb, var(--sage) 30%, var(--surface-mid));
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--sage) 28%, transparent);
+}
+
+/* crono-holiday — fundo amarelo claro fixo fica jarring em temas escuros */
+[data-theme="scriptorium"] .crono-holiday,
+[data-theme="cerrado-dark"] .crono-holiday,
+[data-theme="mata-dark"] .crono-holiday,
+[data-theme="amazonia-dark"] .crono-holiday {
+  background: color-mix(in srgb, var(--ochre) 18%, var(--surface-mid));
+  color: color-mix(in srgb, var(--ochre) 80%, var(--ink));
+  border-color: color-mix(in srgb, var(--ochre) 30%, transparent);
+}

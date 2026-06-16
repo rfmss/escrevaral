@@ -68,7 +68,6 @@ const GRAMMAR_CLASSES_MAP = {
   "Verbo (mais-que-perfeito)": "gw-verbo",
   "Adjetivo":                  "gw-adjetivo",
   "Substantivo próprio":       "gw-proprio",
-  "Substantivo provável":      "gw-substantivo",
   "Substantivo":               "gw-substantivo",
 };
 
