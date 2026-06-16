@@ -76,6 +76,23 @@
 .soneto-c { background: #FAECE7; color: #712B13; }
 .soneto-d { background: #FAEEDA; color: #633806; }
 
+[data-theme="scriptorium"] .soneto-a,
+[data-theme="cerrado-dark"] .soneto-a,
+[data-theme="mata-dark"] .soneto-a,
+[data-theme="amazonia-dark"] .soneto-a  { background: color-mix(in srgb, #8b7fff 18%, transparent); color: #c5bfff; }
+[data-theme="scriptorium"] .soneto-b,
+[data-theme="cerrado-dark"] .soneto-b,
+[data-theme="mata-dark"] .soneto-b,
+[data-theme="amazonia-dark"] .soneto-b  { background: color-mix(in srgb, #3dbf8a 18%, transparent); color: #7de8c0; }
+[data-theme="scriptorium"] .soneto-c,
+[data-theme="cerrado-dark"] .soneto-c,
+[data-theme="mata-dark"] .soneto-c,
+[data-theme="amazonia-dark"] .soneto-c  { background: color-mix(in srgb, #e07060 18%, transparent); color: #ffb0a0; }
+[data-theme="scriptorium"] .soneto-d,
+[data-theme="cerrado-dark"] .soneto-d,
+[data-theme="mata-dark"] .soneto-d,
+[data-theme="amazonia-dark"] .soneto-d  { background: color-mix(in srgb, #d4a84b 18%, transparent); color: #f0cd88; }
+
 .soneto-verso {
   flex: 1;
   border: none;
@@ -108,7 +125,7 @@
 }
 
 .soneto-syl.syl-ok   { color: var(--primary); font-weight: 700; }
-.soneto-syl.syl-over { color: #993C1D; font-weight: 700; }
+.soneto-syl.syl-over { color: var(--sienna); font-weight: 700; }
 
 /* ── Editor Roteiro / Screenplay (Parte 5) ── */
 .screenplay-editor {
@@ -390,6 +407,19 @@
     );
   display: flex; flex-direction: column;
 }
+[data-theme="scriptorium"] .reader-overlay,
+[data-theme="cerrado-dark"] .reader-overlay,
+[data-theme="mata-dark"] .reader-overlay,
+[data-theme="amazonia-dark"] .reader-overlay {
+  background: var(--surface-low);
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 31px,
+    color-mix(in srgb, var(--line) 30%, transparent) 31px,
+    color-mix(in srgb, var(--line) 30%, transparent) 32px
+  );
+}
 .reader-overlay[hidden] { display: none; }
 
 /* Header: quase invisível — orienta, não performa */
@@ -558,7 +588,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(8px);
   background: var(--ink);
-  color: #fff;
+  color: var(--paper);
   font-size: 13px;
   padding: 9px 18px;
   border-radius: 8px;
