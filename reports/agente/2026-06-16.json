@@ -84,25 +84,104 @@
       "frase": "Gostei deste parágrafo mais do que daquele.",
       "zona": "demonstrativo-contraido",
       "gabarito": "\"deste\" = Preposição+Demonstrativo; \"daquele\" = Preposição+Demonstrativo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "deste",
+          "antes": [
+            "Verb"
+          ],
+          "depois": [
+            "Preposition",
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "parágrafo",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "daquele",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Neste ponto a narrativa perde o fôlego.",
       "zona": "demonstrativo-contraido",
       "gabarito": "\"neste\" = Preposição+Demonstrativo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "Neste",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "ponto",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Falou disso como se fosse óbvio.",
       "zona": "demonstrativo-contraido",
       "gabarito": "\"disso\" = Preposição+Demonstrativo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "disso",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Naquele tempo as cartas ainda chegavam.",
       "zona": "demonstrativo-contraido",
       "gabarito": "\"naquele\" = Preposição+Demonstrativo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "Naquele",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "tempo",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O primeiro capítulo é sempre o mais difícil.",
@@ -165,7 +244,17 @@
       "frase": "Ah, o tempo que se perdeu naquele corredor.",
       "zona": "interjeccao",
       "gabarito": "\"ah\" = Interjeição",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "naquele",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Puxa, nunca pensei que chegaria até aqui.",
@@ -237,7 +326,26 @@
       "frase": "Vendem-se ilusões neste mercado.",
       "zona": "voz-passiva",
       "gabarito": "detectado como voz passiva",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "neste",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "mercado",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "A carta foi entregue na manhã seguinte.",
@@ -309,7 +417,17 @@
       "frase": "Lua nua na janela muda.",
       "zona": "rimalab",
       "gabarito": "detectar rima em \"lua\", \"nua\"; assonância em \"u\"",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "muda",
+          "antes": [],
+          "depois": [
+            "Adjective"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O amor demora, a dor não mora longe.",

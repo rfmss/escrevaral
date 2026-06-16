@@ -803,6 +803,54 @@
       "className": "Substantivo feminino",
       "field": "Espaço urbano — periferia, comunidade, limite e abertura",
       "note": "A laje é o teto que virou lugar. Na periferia urbana, ela é o espaço da comunidade — do baile, da conversa, da vista. Uma das metáforas mais potentes da arquitetura informal brasileira."
+    },
+    "mae": {
+      "label": "mãe",
+      "className": "Substantivo feminino",
+      "field": "Família — origem, amor incondicional, culpa, presença ausente",
+      "note": "A mãe na ficção brasileira é terra, útero e ferida ao mesmo tempo. Está em Clarice, em Conceição Evaristo, em Lima Barreto. Nunca é neutra — mesmo quando ausente, define tudo ao redor."
+    },
+    "flor": {
+      "label": "flor",
+      "className": "Substantivo feminino",
+      "field": "Natureza — beleza efêmera, ciclo, símbolo universal",
+      "note": "Flor resiste ao sentimentalismo quando nomeada com precisão: jacarandá, ipê, bromélia, mandacaru em flor. O genérico perde força; o específico ganha. Em Drummond, a flor nasce do asfalto. Isso não é ornamento."
+    },
+    "ceu": {
+      "label": "céu",
+      "className": "Substantivo masculino",
+      "field": "Natureza — vastidão, transcendência, fronteira com o desconhecido",
+      "note": "O céu como teto e como limite. Em Drummond é onde nada pode; em Adélia Prado é onde Deus mora. A personagem que olha para o céu está sempre perguntando algo que não pode ser dito de outra forma."
+    },
+    "porta": {
+      "label": "porta",
+      "className": "Substantivo feminino",
+      "field": "Espaço — limiar, decisão, passagem do privado ao público",
+      "note": "A porta é a figura da escolha. Aberta, fechada, trancada — cada estado muda a história. Em Virginia Woolf, todo quarto precisa de uma porta. Em Kafka, as portas nunca abrem para onde o personagem precisa."
+    },
+    "estrela": {
+      "label": "estrela",
+      "className": "Substantivo feminino",
+      "field": "Natureza — símbolo de orientação, distância, tempo irrecuperável",
+      "note": "A luz de uma estrela morta chega até nós como se ela ainda existisse. Isso é físico e metáfora ao mesmo tempo. Estrela em poesia é quase clichê — a não ser que seja a única, a última, a de antes da tragédia."
+    },
+    "carcere": {
+      "label": "cárcere",
+      "className": "Substantivo masculino",
+      "field": "Espaço — confinamento, poder, memória do trauma",
+      "note": "O cárcere não precisa ter grades para existir na ficção. Casa, relacionamento, corpo, diagnóstico. Lima Barreto o viveu; Graciliano o narrou. O espaço de confinamento define o que é liberdade por contraste."
+    },
+    "tempestade": {
+      "label": "tempestade",
+      "className": "Substantivo feminino",
+      "field": "Natureza — ruptura, conflito, renovação violenta",
+      "note": "Tempestade é o momento em que o mundo interrompe o personagem. No sertão, é chuva que salva ou destrói. Na cidade, é caos que iguala. Na mente, é o que antecede a clareza — ou o que a impede para sempre."
+    },
+    "arma": {
+      "label": "arma",
+      "className": "Substantivo feminino",
+      "field": "Conflito — poder, violência, ameaça latente",
+      "note": "A arma que aparece no primeiro ato precisa disparar. Mas também pode nunca disparar e ser isso — o peso permanente da possibilidade. No Brasil, arma e cotidiano são difíceis de separar, e essa dificuldade é material literário."
     }
   },
   "functionWords": {

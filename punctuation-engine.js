@@ -445,26 +445,26 @@
     },
 
     {
-      id: “PONT-54”, categoria: “aspas retas no lugar de aspas tipográficas”,
-      fonte: “Moreno 'Guia prático' p. 141; norma editorial brasileira”,
-      criterio: “Em texto literário e editorial, prefere-se aspas curvas (“texto”) às aspas retas (\”texto\”).”,
-      exemplo: “”Ela sorriu.””,
-      contraexemplo: “\”Ela sorriu.\””,
-      acao: “Substitua as aspas retas (\”) por aspas curvas tipográficas (“ “).”,
-      severity: “baixa”,
+      id: "PONT-54", categoria: "aspas retas no lugar de aspas tipográficas",
+      fonte: "Moreno 'Guia prático' p. 141; norma editorial brasileira",
+      criterio: "Em texto literário e editorial, prefere-se aspas curvas (“texto”) às aspas retas (\"texto\").",
+      exemplo: "“Ela sorriu.”",
+      contraexemplo: "\"Ela sorriu.\"",
+      acao: "Substitua as aspas retas (\") por aspas curvas tipográficas (“ ”).",
+      severity: "baixa",
       detect(text) {
-        return all(/”[^”\n]{2,}”/g, text);
+        return all(/"[^"\n]{2,}"/g, text);
       },
     },
 
     {
-      id: “PONT-55”, categoria: “espaço antes de vírgula ou ponto e vírgula”,
-      fonte: “Bechara § 599; norma editorial brasileira”,
-      criterio: “Em português brasileiro, não se usa espaço antes de vírgula ou ponto e vírgula. O espaço pertence ao elemento seguinte.”,
-      exemplo: “Ela sorriu, saiu.”,
-      contraexemplo: “Ela sorriu , saiu.”,
-      acao: “Remova o espaço antes da vírgula ou do ponto e vírgula.”,
-      severity: “baixa”,
+      id: "PONT-55", categoria: "espaço antes de vírgula ou ponto e vírgula",
+      fonte: "Bechara § 599; norma editorial brasileira",
+      criterio: "Em português brasileiro, não se usa espaço antes de vírgula ou ponto e vírgula. O espaço pertence ao elemento seguinte.",
+      exemplo: "Ela sorriu, saiu.",
+      contraexemplo: "Ela sorriu , saiu.",
+      acao: "Remova o espaço antes da vírgula ou do ponto e vírgula.",
+      severity: "baixa",
       detect(text) {
         return all(/ [,;]/g, text);
       },
