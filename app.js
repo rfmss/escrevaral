@@ -1579,6 +1579,8 @@ function selectCraft(craftId) {
     query: "",
   };
   renderTemplateStudio();
+  const studioEl = document.querySelector(".template-studio");
+  if (studioEl) studioEl.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function setTemplateSearch(query) {
