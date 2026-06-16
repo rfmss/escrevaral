@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v485";
-const ASSET_VERSION = "20260617-voz-lexicons";
+const CACHE_NAME = "vereda-offline-v486";
+const ASSET_VERSION = "20260617-pont55-siglas57";
 
 const CORE_ASSETS = [
   "./",
