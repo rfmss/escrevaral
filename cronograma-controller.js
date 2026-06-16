@@ -59,13 +59,13 @@ function savePlannerData(data) {
 }
 
 const FOLDER_CRONO_COLOR = {
-  "Ficção":      { bg: "color-mix(in srgb, var(--primary) 10%, transparent)", text: "var(--primary)", border: "color-mix(in srgb, var(--primary) 20%, transparent)" },
-  "Roteiro":     { bg: "#EBF3FB", text: "#185FA5", border: "#C4DCF0" },
-  "Poesia":      { bg: "#EEEDFE", text: "#533AB7", border: "#CBC9F8" },
-  "Não-ficção":  { bg: "#FEF3DC", text: "#875A00", border: "#F0DFA0" },
-  "Vestibular":  { bg: "#FBE9E4", text: "#C04B2E", border: "#F0C4B8" },
-  "Comercial":   { bg: "#E3F2F2", text: "#1B6B6B", border: "#B0D8D8" },
-  "Notas":       { bg: "var(--surface-low)", text: "var(--muted)", border: "var(--line)" },
+  "Ficção":      { bg: "color-mix(in srgb, var(--primary) 10%, transparent)",  text: "var(--primary)",                                  border: "color-mix(in srgb, var(--primary) 20%, transparent)"  },
+  "Roteiro":     { bg: "color-mix(in srgb, var(--sage) 16%, transparent)",     text: "color-mix(in srgb, var(--sage) 80%, var(--ink))",  border: "color-mix(in srgb, var(--sage) 24%, transparent)"    },
+  "Poesia":      { bg: "color-mix(in srgb, var(--cedar) 14%, transparent)",    text: "color-mix(in srgb, var(--cedar) 70%, var(--ink))", border: "color-mix(in srgb, var(--cedar) 22%, transparent)"   },
+  "Não-ficção":  { bg: "color-mix(in srgb, var(--ochre) 14%, transparent)",    text: "color-mix(in srgb, var(--ochre) 75%, var(--ink))", border: "color-mix(in srgb, var(--ochre) 22%, transparent)"   },
+  "Vestibular":  { bg: "color-mix(in srgb, var(--sienna) 13%, transparent)",   text: "color-mix(in srgb, var(--sienna) 65%, var(--ink))",border: "color-mix(in srgb, var(--sienna) 20%, transparent)"  },
+  "Comercial":   { bg: "color-mix(in srgb, var(--muted) 14%, transparent)",    text: "var(--muted)",                                    border: "color-mix(in srgb, var(--muted) 22%, transparent)"    },
+  "Notas":       { bg: "var(--surface-low)",                                   text: "var(--muted)",                                    border: "var(--line)"                                          },
 };
 
 let cronoYear  = new Date().getFullYear();
