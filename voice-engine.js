@@ -7,22 +7,22 @@
 
   const emotionLexicons = {
     melancolia: ["saudade", "silêncio", "perda", "ausência", "noite", "vazio", "memória", "choro", "triste", "longe", "sombra", "tarde", "cinza", "ruína", "fim", "esquecimento", "desvanecer", "apagar", "distância", "abandono", "luto", "resto", "vestígio", "espelho", "cinzas", "cansaço", "derrota", "lágrima", "sombrio"],
-    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto", "perseguição", "armadilha", "traição", "disparo", "confronto", "urgência", "crise", "navalha", "pânico", "veneno", "emboscada", "cilada"],
+    tensao: ["medo", "sangue", "grito", "pressa", "risco", "ameaça", "culpa", "segredo", "fuga", "corte", "queda", "tensão", "perigo", "escuro", "susto", "perseguição", "armadilha", "traição", "disparo", "confronto", "urgência", "crise", "navalha", "pânico", "veneno", "emboscada", "cilada", "alarme", "nervoso", "sufoco"],
     luminosidade: ["luz", "sol", "claro", "riso", "alegria", "manhã", "brilho", "flor", "aberto", "leve", "calma", "clareza", "fresco", "verde", "esperança", "amanhecer", "celebração", "leveza", "plenitude", "festa", "graça", "sorte", "vitória", "nascer", "despertar", "glória", "aurora", "radiante", "harmonia", "dançar"],
     ironia: ["claro", "óbvio", "ridículo", "quase", "fingir", "ninguém", "todos", "perfeito", "sério", "sorriso", "naturalmente", "certamente", "evidentemente", "justamente", "realmente", "singular", "curioso", "peculiar", "conveniente", "herói", "exatamente", "perfeitamente", "lógico", "inocente", "coincidentemente", "surpreendentemente", "casualmente", "espantosamente", "felizmente", "incrível"],
-    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio", "horizonte", "repouso", "contemplar", "observar", "meditar", "divagar", "profundo", "névoa", "crepúsculo", "bruma", "quietude"],
+    contemplacao: ["olhar", "tempo", "vento", "água", "terra", "janela", "casa", "corpo", "mundo", "devagar", "espera", "pausa", "quieto", "lento", "silêncio", "horizonte", "repouso", "contemplar", "observar", "meditar", "divagar", "profundo", "névoa", "crepúsculo", "bruma", "quietude", "sereno", "tranquilo", "distância", "pensar"],
     ternura: ["gentil", "amor", "carinho", "afeto", "cuidado", "abraço", "beijar", "suave", "doce", "mãe", "filho", "criança", "delicado", "calor", "acolher", "proteção", "ternura", "lar", "família", "pertencer", "bençao", "amparo", "beijo", "sorriso", "gesto", "mimo", "meigo", "afetuoso"],
   };
 
   const semanticFields = {
-    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia"],
+    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia", "dedo", "joelho", "costas", "língua"],
     casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama", "corredor", "varanda", "quintal", "porão", "escada", "gaveta", "armário", "sala", "fogão", "pia", "espelho", "prateleira", "soleira", "alpendre"],
     natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu", "floresta", "cerrado", "sertão", "caatinga", "raiz", "pedra", "galho", "seca", "brejo", "savana"],
-    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época", "foto", "carta", "diário", "cheiro", "cicatriz", "marca", "história", "reviver", "apagar"],
+    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época", "foto", "carta", "diário", "cheiro", "cicatriz", "marca", "história", "reviver", "apagar", "herança", "origem", "trauma"],
     conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue", "traição", "ódio", "raiva", "punição", "silêncio", "mentira", "ferida", "desespero"],
-    pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender", "reflexão", "dúvida", "certeza", "consciência", "razão", "intuição", "dilema", "escolha", "questão", "saber"],
+    pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender", "reflexão", "dúvida", "certeza", "consciência", "razão", "intuição", "dilema", "escolha", "questão", "saber", "argumento", "crença", "princípio", "paradoxo"],
     cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina", "asfalto", "metrô", "buzina", "sirene", "multidão", "anonimato", "povo", "movimento", "barulho", "laje"],
-    sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra"],
+    sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra", "orixá", "terreiro", "encantaria", "milagre", "benzedura", "encantamento", "aparição"],
   };
 
   const fieldLabels = {

@@ -899,6 +899,78 @@
       "className": "Substantivo masculino / Adjetivo",
       "field": "Transformação — o que sobrou depois do fogo, a cor da rendição e da memória",
       "note": "A cinza está depois da tempestade, depois do fogo, depois do fim. Em rituais de candomblé e umbanda, cinza é oferenda e passagem. Na ficção científica brasileira, pode ser o mundo depois do colapso. Evite usar como sinônimo de 'triste' ou 'sem cor' — cinza carrega história de combustão."
+    },
+    "peito": {
+      "label": "peito",
+      "className": "Substantivo masculino",
+      "field": "Corpo — onde o sentimento se instala, sede do amor e da dor",
+      "note": "Palavra-morada: no cordel, no sertanejo e em Patativa do Assaré, o peito carrega o peso das despedidas. Em Clarice Lispector, é onde o sentimento inabitável se instala antes de subir para a garganta. Evite 'sentiu um aperto no peito' — prefira o comportamento concreto que o aperto provoca: a fala que não sai, a respiração que encurta."
+    },
+    "sorriso": {
+      "label": "sorriso",
+      "className": "Substantivo masculino",
+      "field": "Afeto — alegria visível, arma discreta, máscara que protege",
+      "note": "Em Machado de Assis, o sorriso é frequentemente irônico — o leitor aprende a desconfiar dele. Em Conceição Evaristo, pode ser resistência e disfarce ao mesmo tempo. Em narrativa realista, o sorriso que aparece na hora errada revela mais do que a fala direta. Evite 'rosto iluminado pelo sorriso': é clichê visual. Prefira o que o sorriso faz na cena."
+    },
+    "raiva": {
+      "label": "raiva",
+      "className": "Substantivo feminino",
+      "field": "Afeto — emoção combustível, força que move ou que destrói",
+      "note": "Em Ana Paula Maia e em Conceição Evaristo, a raiva é instinto de sobrevivência, não fraqueza. Em Dalton Trevisan, é a tensão acumulada antes da violência. Mais honesta que 'irritação' em situações extremas — mas cuide da proporção: raiva barata perde força. A raiva que o texto nega mas o leitor sente é a mais poderosa."
+    },
+    "vergonha": {
+      "label": "vergonha",
+      "className": "Substantivo feminino",
+      "field": "Afeto — peso social, identidade ameaçada, segredo que precisa de testemunha",
+      "note": "Diferente de culpa — vergonha exige uma testemunha, real ou imaginada. Em Carolina de Jesus, é vergonha social e racial. Em Clarice Lispector (A Maçã no Escuro), é existencial. Na literatura de periferia contemporânea, a vergonha pode ser o fio que separa quem ficou de quem saiu. Use quando a personagem sente que está sendo vista de fora — e não gosta do que essa visão revela."
+    },
+    "abraco": {
+      "label": "abraço",
+      "className": "Substantivo masculino",
+      "field": "Corpo — proteção, despedida, o que o texto quer dizer sem palavras",
+      "note": "O abraço em narrativa brasileira muitas vezes carrega o que a fala evita. Em Guimarães Rosa, pode encerrar um conflito sem resolução verbal. Em Raduan Nassar (Lavoura Arcaica), é ambíguo — proteção e posse ao mesmo tempo. O abraço recusado ou impossível pode ser mais forte que o dado. Evite como gesto automático de consolo — escreva o abraço que tem história específica."
+    },
+    "ausencia": {
+      "label": "ausência",
+      "className": "Substantivo feminino",
+      "field": "Afeto — o que sobra quando alguém vai, espaço que continua a doer",
+      "note": "Companheira de 'luto' e 'saudade', mas distinta: ausência pode ser de uma pessoa viva. Em Carlos Drummond de Andrade, é a ausência do pai e da terra natal que organiza poemas inteiros. Em Adélia Prado, a ausência de Deus ainda assim tem presença. Use quando o espaço deixado pela pessoa é mais personagem do que a própria pessoa."
+    },
+    "quintal": {
+      "label": "quintal",
+      "className": "Substantivo masculino",
+      "field": "Espaço — território doméstico, memória da infância, onde o pequeno vira grande",
+      "note": "Em Manoel de Barros, o quintal é onde a poesia começa — no humilde, no enlameado, no esquecido. Em João Cabral de Melo Neto, é o avesso seco do sertão. Use quando o texto quer o íntimo e não-monumental: o quintal é onde a criança aprende o mundo antes de saber que é o mundo. Evite como simples 'jardim pequeno' — quintal carrega história de uso e infância."
+    },
+    "canto": {
+      "label": "canto",
+      "className": "Substantivo masculino",
+      "field": "Espaço / Som — recanto e melodia, duplo sentido que o texto pode explorar",
+      "note": "Palavra de duplo sentido nativo: canto (recanto, lugar retirado) e canto (melodia, ritual vocal). Na tradição dos terreiros e do candomblé, canto é ritual de convocação. Em Manoel de Barros, o canto da casa é onde o extraordinário se esconde. Ao usar 'canto', verifique se o texto pode ativar as duas acepções — se sim, é uma escolha deliberada que vale a pena sustentar."
+    },
+    "onda": {
+      "label": "onda",
+      "className": "Substantivo feminino",
+      "field": "Natureza — ritmo, força que chega e passa, o que modela sem pedir licença",
+      "note": "Em Clarice Lispector (Água Viva), as ondas têm vida própria — não são fundo, são personagem. Em Vinicius de Moraes, onda é leveza e ritmo da Bossa Nova. Em ficção pós-apocalíptica brasileira, pode ser metáfora para o colapso que vem em ciclos. Evite como decoração de cenas de praia; use quando o texto quer marcar ritmo, repetição ou transformação gradual."
+    },
+    "lago": {
+      "label": "lago",
+      "className": "Substantivo masculino",
+      "field": "Natureza — espelho quieto, profundidade escondida, fronteira entre mundos",
+      "note": "Diferente do rio (movimento) e do mar (imensidão), o lago sugere contenção e reflexo. Em Guimarães Rosa, a lagoa no sertão é milagre e memória. Em contextos de realismo mágico, lago pode ser o ponto onde a lógica comum vacila — o personagem vê algo na água que não deveria existir. Use quando o texto quer pausa, espelho e o que está submerso."
+    },
+    "grito": {
+      "label": "grito",
+      "className": "Substantivo masculino",
+      "field": "Voz — ruptura, limite, o que não cabe mais em silêncio",
+      "note": "Em Carolina de Jesus, o grito é o que o diário registra quando a voz real não pode ser ouvida. Em Ana Paula Maia, é a linguagem última do corpo antes da violência. Distinto de 'gritar' (a ação): o grito — o substantivo — pode persistir depois que a boca fecha, ecoar numa cena inteira. Use quando o texto chegou a um ponto sem retorno verbal."
+    },
+    "lar": {
+      "label": "lar",
+      "className": "Substantivo masculino",
+      "field": "Espaço — pertencimento, o que o exílio nega, onde o corpo sabe que está em casa",
+      "note": "Distinto de 'casa' (o imóvel) — lar é onde se pertence. Em textos de diáspora e migração, lar é o que se perde ou se busca. Em Conceição Evaristo, o quilombo torna-se lar. Em Adélia Prado, lar é o sagrado cotidiano do feijão e da reza. Use quando o texto não fala do teto, mas do vínculo — quando a personagem reconhece (ou não encontra) onde pode ser ela mesma."
     }
   },
   "functionWords": {

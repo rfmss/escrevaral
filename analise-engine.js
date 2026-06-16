@@ -150,6 +150,9 @@
     "de forma significativa","torna-se mister","hodiernamente",
     "doravante","supracitado","no contexto atual",
     "inegavelmente","precipuamente","imprescindível mencionar",
+    // mais clichês acadêmicos e de ensaio escolar
+    "desde tempos imemoriais","em pleno século xxi","desde os primórdios",
+    "tecido social","na esteira de","à guisa de","em sede de",
   ];
 
   const PLEONASMOS = [
@@ -186,6 +189,10 @@
     ["urgência imediata","urgência"],["totalmente grátis","grátis"],
     ["prioridade prioritária","prioridade"],["abortar o feto","abortar"],
     ["vereador municipal","vereador"],["continuar persistindo","persistir"],
+    ["acordo mútuo","acordo"],["protagonista principal","protagonista"],
+    ["gritar em voz alta","gritar"],["multidão de pessoas","multidão"],
+    ["ruído barulhento","ruído"],["recordar de memória","recordar"],
+    ["planejar antecipadamente","planejar"],
   ];
 
   const NEGACOES_DUPLAS = [
@@ -219,9 +226,10 @@
   const PALAVRAS_FRACAS_ABERTURA = new Set([
     "o","a","os","as","um","uma","uns","umas",
     "que","de","do","da","dos","das","no","na","nos","nas",
-    "e","mas","ou","porém","todavia","contudo","entretanto",
-    "também","ainda","já","só","apenas","muito","bem","mal",
-    "há","houve","teve","foi","era","estava","tinha",
+    "e","mas","ou","porem","todavia","contudo","entretanto",
+    "tambem","ainda","ja","so","apenas","muito","bem","mal",
+    "ha","houve","teve","foi","era","estava","tinha",
+    "assim","portanto","logo","nisto","nesse","nessa","neste","nesta",
   ]);
 
   // ── TOKENIZADORES ─────────────────────────────────────────────────────────
