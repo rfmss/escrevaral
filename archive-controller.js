@@ -62,7 +62,7 @@ function renderManuscriptNavigation() {
             <span class="material-symbols-outlined">${type.icon}</span>
             <span class="nav-ms-title">${escapeHtml(manuscript.title || "Sem título")}</span>
           </button>
-          <button class="nav-ms-delete" data-manuscript-delete="${manuscript.id}" title="Apagar nota" aria-label="Apagar nota">
+          <button class="nav-ms-delete" data-manuscript-delete="${manuscript.id}" data-vrda-tooltip="Apagar manuscrito" aria-label="Apagar manuscrito">
             <span class="material-symbols-outlined">delete</span>
           </button>
         </div>
