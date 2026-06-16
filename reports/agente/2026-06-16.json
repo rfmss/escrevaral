@@ -1,0 +1,507 @@
+{
+  "data": "2026-06-16",
+  "total": 81,
+  "resultados": [
+    {
+      "frase": "A tarde era bela e o silêncio, livre de culpa, envolvia tudo.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"bela\" = Adjetivo; \"livre\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "Ela tinha um jeito triste de dizer as coisas certas.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"triste\" = Adjetivo; \"certas\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "O homem grande não precisava falar alto.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"grande\" = Adjetivo; \"alto\" = Adjetivo (não Advérbio neste contexto)",
+      "diffs": []
+    },
+    {
+      "frase": "Havia qualquer coisa estranha no modo como ela sorria.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"estranha\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "A mulher forte carregou o peso sem reclamar.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"forte\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "Era uma noite simples, quente, quase feliz.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"simples\" = Adjetivo; \"quente\" = Adjetivo; \"feliz\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "O texto breve dizia mais do que o longo.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"breve\" = Adjetivo; \"longo\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "Havia algo nobre na forma como ele errava.",
+      "zona": "adjetivo-sem-sufixo",
+      "gabarito": "\"nobre\" = Adjetivo",
+      "diffs": []
+    },
+    {
+      "frase": "O meu ficou para trás quando o trem partiu.",
+      "zona": "pronome-possessivo",
+      "gabarito": "\"meu\" = Pronome possessivo (substantivado)",
+      "diffs": []
+    },
+    {
+      "frase": "Cada um cuida do seu, dizia o avô.",
+      "zona": "pronome-possessivo",
+      "gabarito": "\"seu\" = Pronome possessivo (substantivado)",
+      "diffs": []
+    },
+    {
+      "frase": "Teu silêncio diz mais do que tua palavra.",
+      "zona": "pronome-possessivo",
+      "gabarito": "\"teu\" = Pronome possessivo; \"tua\" = Pronome possessivo",
+      "diffs": []
+    },
+    {
+      "frase": "Nossa conversa ficou pela metade.",
+      "zona": "pronome-possessivo",
+      "gabarito": "\"nossa\" = Pronome possessivo",
+      "diffs": []
+    },
+    {
+      "frase": "Vossa presença era o suficiente.",
+      "zona": "pronome-possessivo",
+      "gabarito": "\"vossa\" = Pronome possessivo",
+      "diffs": []
+    },
+    {
+      "frase": "Gostei deste parágrafo mais do que daquele.",
+      "zona": "demonstrativo-contraido",
+      "gabarito": "\"deste\" = Preposição+Demonstrativo; \"daquele\" = Preposição+Demonstrativo",
+      "diffs": []
+    },
+    {
+      "frase": "Neste ponto a narrativa perde o fôlego.",
+      "zona": "demonstrativo-contraido",
+      "gabarito": "\"neste\" = Preposição+Demonstrativo",
+      "diffs": []
+    },
+    {
+      "frase": "Falou disso como se fosse óbvio.",
+      "zona": "demonstrativo-contraido",
+      "gabarito": "\"disso\" = Preposição+Demonstrativo",
+      "diffs": []
+    },
+    {
+      "frase": "Naquele tempo as cartas ainda chegavam.",
+      "zona": "demonstrativo-contraido",
+      "gabarito": "\"naquele\" = Preposição+Demonstrativo",
+      "diffs": []
+    },
+    {
+      "frase": "O primeiro capítulo é sempre o mais difícil.",
+      "zona": "ordinal",
+      "gabarito": "\"primeiro\" = Numeral ordinal",
+      "diffs": []
+    },
+    {
+      "frase": "Ela terminou em segundo lugar sem reclamar.",
+      "zona": "ordinal",
+      "gabarito": "\"segundo\" = Numeral ordinal (não Conjunção nem Preposição)",
+      "diffs": []
+    },
+    {
+      "frase": "Foi a terceira vez que ele tentou começar o romance.",
+      "zona": "ordinal",
+      "gabarito": "\"terceira\" = Numeral ordinal",
+      "diffs": [
+        {
+          "tipo": "pontuacao-novo-alerta",
+          "codigos": [
+            null
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "pontuacao-alerta-sumido",
+          "codigos": [
+            "PONT-44"
+          ],
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "O quinto andar estava sempre silencioso.",
+      "zona": "ordinal",
+      "gabarito": "\"quinto\" = Numeral ordinal",
+      "diffs": []
+    },
+    {
+      "frase": "Chegou na décima fila, resignado.",
+      "zona": "ordinal",
+      "gabarito": "\"décima\" = Numeral ordinal",
+      "diffs": []
+    },
+    {
+      "frase": "Ora, isso não é nenhuma novidade, suspirou ela.",
+      "zona": "interjeccao",
+      "gabarito": "\"ora\" = Interjeição (não Advérbio)",
+      "diffs": []
+    },
+    {
+      "frase": "Ei, você ainda está aí?",
+      "zona": "interjeccao",
+      "gabarito": "\"ei\" = Interjeição",
+      "diffs": []
+    },
+    {
+      "frase": "Ah, o tempo que se perdeu naquele corredor.",
+      "zona": "interjeccao",
+      "gabarito": "\"ah\" = Interjeição",
+      "diffs": []
+    },
+    {
+      "frase": "Puxa, nunca pensei que chegaria até aqui.",
+      "zona": "interjeccao",
+      "gabarito": "\"puxa\" = Interjeição",
+      "diffs": []
+    },
+    {
+      "frase": "Nossa, que silêncio pesado.",
+      "zona": "interjeccao",
+      "gabarito": "\"nossa\" = Interjeição (contexto exclamativo, não possessivo)",
+      "diffs": []
+    },
+    {
+      "frase": "Ufa, por fim o dia acabou.",
+      "zona": "interjeccao",
+      "gabarito": "\"ufa\" = Interjeição",
+      "diffs": []
+    },
+    {
+      "frase": "Ele entrou — devagar, muito devagar — e fechou a porta.",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; travessão com espaço em aposto é uso válido",
+      "diffs": []
+    },
+    {
+      "frase": "Ela sabia. Sabia e calava. E calando, vivia.",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; fragmentação sintática é recurso estilístico",
+      "diffs": []
+    },
+    {
+      "frase": "A vida era assim: longa; incerta; às vezes, bela.",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; ponto-e-vírgula separando itens com vírgula interna é correto",
+      "diffs": []
+    },
+    {
+      "frase": "Onde estará ela agora...",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; reticências substituindo ponto de interrogação é uso literário válido",
+      "diffs": []
+    },
+    {
+      "frase": "Não sabia o que dizer — e isso, talvez, fosse a resposta.",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; estrutura válida com aposto parentético",
+      "diffs": []
+    },
+    {
+      "frase": "Esperou. Esperou muito. Esperou até não poder mais.",
+      "zona": "pontuacao-literaria",
+      "gabarito": "sem alerta; recurso estilístico de anáfora",
+      "diffs": []
+    },
+    {
+      "frase": "O romance foi escrito em três meses de reclusão.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva",
+      "diffs": []
+    },
+    {
+      "frase": "Escreve-se muito por aqui quando o inverno chega.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva (ou voz indeterminada — ambos aceitáveis)",
+      "diffs": []
+    },
+    {
+      "frase": "Vendem-se ilusões neste mercado.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva",
+      "diffs": []
+    },
+    {
+      "frase": "A carta foi entregue na manhã seguinte.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva",
+      "diffs": []
+    },
+    {
+      "frase": "Os livros eram lidos em voz alta toda noite.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva",
+      "diffs": []
+    },
+    {
+      "frase": "O menino ficou acolá, olhando a procissão passar.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta negativo; \"acolá\" é forma padrão e literária",
+      "diffs": []
+    },
+    {
+      "frase": "Aquela saia estava encardida de tanto uso.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta; \"encardido/a\" é vocabulário popular legítimo",
+      "diffs": []
+    },
+    {
+      "frase": "O fuleiro do vizinho apareceu sem avisar.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta; vocabulário regional brasileiro válido",
+      "diffs": []
+    },
+    {
+      "frase": "A menina ficou acanhada diante de tanta gente.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta; vocabulário brasileiro corrente",
+      "diffs": []
+    },
+    {
+      "frase": "Ele tinha um jeito xucro de falar que encantava.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta; regionalismo legítimo (especialmente Nordeste/interior)",
+      "diffs": []
+    },
+    {
+      "frase": "A veia da minha avó sempre me chamava de benzinho.",
+      "zona": "vocabulario-regional",
+      "gabarito": "sem alerta; uso afetivo regional válido",
+      "diffs": []
+    },
+    {
+      "frase": "A chuva cai e vai e trai quem fica.",
+      "zona": "rimalab",
+      "gabarito": "detectar rima em \"cai\", \"vai\", \"trai\"",
+      "diffs": []
+    },
+    {
+      "frase": "Noite de medo e frio, o rio some no vazio.",
+      "zona": "rimalab",
+      "gabarito": "detectar rima em \"frio\", \"rio\", \"vazio\"",
+      "diffs": []
+    },
+    {
+      "frase": "Saudade salga, alaga, afaga e machuca.",
+      "zona": "rimalab",
+      "gabarito": "detectar padrão sonoro; aliteração em s; assonância em a",
+      "diffs": []
+    },
+    {
+      "frase": "Lua nua na janela muda.",
+      "zona": "rimalab",
+      "gabarito": "detectar rima em \"lua\", \"nua\"; assonância em \"u\"",
+      "diffs": []
+    },
+    {
+      "frase": "O amor demora, a dor não mora longe.",
+      "zona": "rimalab",
+      "gabarito": "detectar assonância em \"or\": amor, demora, dor, mora",
+      "diffs": []
+    },
+    {
+      "frase": "Ela foi lá e voltou cá sem nada nas mãos.",
+      "zona": "diacritico",
+      "gabarito": "\"lá\" = Advérbio de lugar; \"cá\" = Advérbio de lugar",
+      "diffs": []
+    },
+    {
+      "frase": "Então ele disse que não voltaria nunca mais.",
+      "zona": "diacritico",
+      "gabarito": "\"então\" = Advérbio (não \"entao\")",
+      "diffs": []
+    },
+    {
+      "frase": "Vá até lá e veja com seus próprios olhos.",
+      "zona": "diacritico",
+      "gabarito": "\"lá\" = Advérbio de lugar",
+      "diffs": []
+    },
+    {
+      "frase": "Já não havia mais nada a esperar.",
+      "zona": "diacritico",
+      "gabarito": "\"já\" = Advérbio de tempo",
+      "diffs": []
+    },
+    {
+      "frase": "A escritora e o editor discutiram por horas.",
+      "zona": "concordancia-verbal",
+      "gabarito": "verbo no plural; sujeito composto \"escritora e editor\"",
+      "diffs": []
+    },
+    {
+      "frase": "Chegaram as cartas que esperávamos há meses.",
+      "zona": "concordancia-verbal",
+      "gabarito": "concordância correta; sujeito \"cartas\" posposto ao verbo",
+      "diffs": []
+    },
+    {
+      "frase": "A maioria dos leitores gostou do final.",
+      "zona": "concordancia-verbal",
+      "gabarito": "verbo no singular é aceito com sujeito coletivo \"maioria\"",
+      "diffs": []
+    },
+    {
+      "frase": "Nem ela nem ele soube o que dizer.",
+      "zona": "concordancia-verbal",
+      "gabarito": "concordância com o sujeito mais próximo é forma válida",
+      "diffs": []
+    },
+    {
+      "frase": "As palavras eram poucas, mas precisas.",
+      "zona": "concordancia-nominal",
+      "gabarito": "\"poucas\" = Adjetivo predicativo plural; \"precisas\" = Adjetivo predicativo plural",
+      "diffs": []
+    },
+    {
+      "frase": "O homem e a mulher ficaram quietos.",
+      "zona": "concordancia-nominal",
+      "gabarito": "\"quietos\" = Adjetivo masculino plural (sujeito misto → masculino)",
+      "diffs": []
+    },
+    {
+      "frase": "Meio confusa, ela releu o parágrafo.",
+      "zona": "concordancia-nominal",
+      "gabarito": "\"meio\" = Advérbio (invariável); \"confusa\" = Adjetivo feminino",
+      "diffs": []
+    },
+    {
+      "frase": "Ela assistiu ao espetáculo em silêncio.",
+      "zona": "regencia",
+      "gabarito": "\"assistiu\" = Verbo transitivo indireto; \"ao\" = contração de \"a+o\"",
+      "diffs": []
+    },
+    {
+      "frase": "Ele implicava com tudo e com todos.",
+      "zona": "regencia",
+      "gabarito": "\"implicava\" = Verbo transitivo indireto",
+      "diffs": []
+    },
+    {
+      "frase": "Precisamos de tempo, não de pressa.",
+      "zona": "regencia",
+      "gabarito": "\"precisamos\" = Verbo transitivo indireto",
+      "diffs": []
+    },
+    {
+      "frase": "Ela voltou à cidade que abandonara.",
+      "zona": "crase",
+      "gabarito": "sem alerta; crase obrigatória em \"à\" (a+a, feminino)",
+      "diffs": []
+    },
+    {
+      "frase": "Referiu-se a ela com respeito.",
+      "zona": "crase",
+      "gabarito": "sem alerta; crase proibida antes de pronome; \"a ela\" correto",
+      "diffs": []
+    },
+    {
+      "frase": "Saiu a pé pelo bairro antigo.",
+      "zona": "crase",
+      "gabarito": "sem alerta; \"a pé\" correto sem crase",
+      "diffs": []
+    },
+    {
+      "frase": "Aquela mulher, ninguém sabia de onde vinha.",
+      "zona": "anacoluto",
+      "gabarito": "sem alerta crítico; anacoluto é figura sintática válida na literatura",
+      "diffs": []
+    },
+    {
+      "frase": "Ele, que nunca chorava, fechou os olhos.",
+      "zona": "anacoluto",
+      "gabarito": "sem alerta; vírgulas de oração adjetiva explicativa corretas",
+      "diffs": []
+    },
+    {
+      "frase": "O tempo — esse ladrão silencioso — levou tudo.",
+      "zona": "anacoluto",
+      "gabarito": "sem alerta; aposto entre travessões é uso correto",
+      "diffs": []
+    },
+    {
+      "frase": "Ele mal sabia que o mal estava próximo.",
+      "zona": "homofona",
+      "gabarito": "primeiro \"mal\" = Advérbio; segundo \"mal\" = Substantivo",
+      "diffs": []
+    },
+    {
+      "frase": "Tanto faz: ele sempre faz o que quer.",
+      "zona": "homofona",
+      "gabarito": "sem erro; dois usos válidos de \"faz\"",
+      "diffs": []
+    },
+    {
+      "frase": "Sem senso, ele perdeu o senso das coisas.",
+      "zona": "homofona",
+      "gabarito": "sem alerta; repetição intencional válida",
+      "diffs": []
+    },
+    {
+      "frase": "O dendê dava ao prato um sabor inconfundível.",
+      "zona": "vocabulario-decolonial",
+      "gabarito": "sem alerta negativo; \"dendê\" é vocabulário de herança africana legítimo",
+      "diffs": []
+    },
+    {
+      "frase": "A caçula ficou de castigo por três dias.",
+      "zona": "vocabulario-decolonial",
+      "gabarito": "sem alerta; \"caçula\" é vocabulário corrente de origem africana",
+      "diffs": []
+    },
+    {
+      "frase": "O xerimbabo da vizinha latia toda madrugada.",
+      "zona": "vocabulario-decolonial",
+      "gabarito": "sem alerta; vocabulário de origem indígena legítimo",
+      "diffs": []
+    },
+    {
+      "frase": "Ele tinha um jeito manso, quase catimbau.",
+      "zona": "vocabulario-decolonial",
+      "gabarito": "sem alerta; uso metafórico de vocabulário cultural válido",
+      "diffs": []
+    },
+    {
+      "frase": "Em 1945, a guerra termina e o mundo respira.",
+      "zona": "tempo-verbal",
+      "gabarito": "\"termina\" e \"respira\" = Verbo Presente (uso como presente histórico é válido)",
+      "diffs": []
+    },
+    {
+      "frase": "Ela entra, olha ao redor e percebe que estava sozinha.",
+      "zona": "tempo-verbal",
+      "gabarito": "sem alerta; alternância temporal é recurso narrativo",
+      "diffs": []
+    },
+    {
+      "frase": "Amanhã eu abro o manuscrito e começo de novo.",
+      "zona": "tempo-verbal",
+      "gabarito": "\"abro\" e \"começo\" = Verbo Presente com valor de futuro; uso correto",
+      "diffs": []
+    },
+    {
+      "frase": "Se ela viesse, tudo seria diferente.",
+      "zona": "tempo-verbal",
+      "gabarito": "\"viesse\" = Verbo Subjuntivo Imperfeito; \"seria\" = Futuro do Pretérito",
+      "diffs": []
+    }
+  ]
+}

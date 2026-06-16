@@ -81,6 +81,11 @@ def auditar(browser, vp):
             achar("critico", f"Overflow: scrollWidth={sw} > clientWidth={cw}",
                   "Responsividade", rota_nome, str(ev))
 
+    def botoes_navegacao_visiveis():
+        seletor = ".mobile-dock .dock-item" if vp["width"] < 820 else ".module-tabs button"
+        botoes = page.query_selector_all(seletor)
+        return [botao for botao in botoes if botao.is_visible()]
+
     checar_overflow("inicio")
 
     # Pilar: acessibilidade — botões sem label
@@ -95,10 +100,8 @@ def auditar(browser, vp):
         achar("aviso", f"{sem_label} botão(ões) sem texto nem aria-label",
               "Acessibilidade", URL)
 
-    # Navegar por cada aba principal
-    abas = page.query_selector_all(".module-tabs button, [role='tablist'] button")
-    if not abas:
-        abas = page.query_selector_all("nav button")
+    # Navegar por cada destino principal, respeitando a navegacao visivel do viewport.
+    abas = botoes_navegacao_visiveis()
 
     for aba in abas:
         nome_aba = (aba.inner_text() or "").strip()
