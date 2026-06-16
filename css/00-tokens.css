@@ -653,3 +653,21 @@
   color: color-mix(in srgb, var(--ochre) 80%, var(--ink));
   border-color: color-mix(in srgb, var(--ochre) 30%, transparent);
 }
+
+/* soneto-a/b/c/d — fundos claros fixos ficam jarring em scriptorium */
+[data-theme="scriptorium"] .soneto-a {
+  background: color-mix(in srgb, var(--sage) 18%, var(--surface-mid));
+  color: color-mix(in srgb, var(--sage) 85%, var(--ink));
+}
+[data-theme="scriptorium"] .soneto-b {
+  background: color-mix(in srgb, var(--primary) 14%, var(--surface-mid));
+  color: color-mix(in srgb, var(--ochre) 80%, var(--ink));
+}
+[data-theme="scriptorium"] .soneto-c {
+  background: color-mix(in srgb, var(--sienna) 20%, var(--surface-mid));
+  color: color-mix(in srgb, var(--sienna) 70%, var(--ink));
+}
+[data-theme="scriptorium"] .soneto-d {
+  background: color-mix(in srgb, var(--ochre) 18%, var(--surface-mid));
+  color: color-mix(in srgb, var(--ochre) 75%, var(--ink));
+}
