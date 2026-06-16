@@ -1558,18 +1558,6 @@
       "contextual": true
     },
     {
-      "avoid": "primitivo",
-      "alternatives": [
-        "originário",
-        "ancestral",
-        "de outra tradição cultural"
-      ],
-      "category": "territorio",
-      "reason": "Classifica culturas numa escala evolutiva com a Europa como topo — estrutura do racismo científico.",
-      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
-      "contextual": true
-    },
-    {
       "avoid": "bárbaro",
       "alternatives": [
         "não europeu",
@@ -1846,18 +1834,6 @@
       "contextual": true
     },
     {
-      "avoid": "superstição",
-      "category": "conhecimento",
-      "alternatives": [
-        "crença tradicional",
-        "prática cultural",
-        "saber oral"
-      ],
-      "reason": "Opõe racionalidade ocidental a práticas de outros povos, hierarquizando formas de conhecimento.",
-      "context": "Em contexto de análise do próprio conceito, pode ser usado com marcação crítica.",
-      "contextual": true
-    },
-    {
       "avoid": "mito fundador",
       "category": "conhecimento",
       "alternatives": [
@@ -1940,19 +1916,6 @@
       "contextual": false
     },
     {
-      "avoid": "exótico",
-      "category": "estetica",
-      "alternatives": [
-        "particular",
-        "singular",
-        "de outra cultura",
-        "desconhecido para o narrador"
-      ],
-      "reason": "'Exótico' constrói o outro como objeto de curiosidade para um observador europeu-padrão. Naturaliza quem é o centro.",
-      "context": "Em perspectiva que explicita o estranhamento do observador, pode ser intencional.",
-      "contextual": true
-    },
-    {
       "avoid": "cor local",
       "category": "estetica",
       "alternatives": [
@@ -1962,18 +1925,6 @@
       ],
       "reason": "Reduz culturas a detalhes decorativos que 'colorem' uma narrativa europeia, sem profundidade histórica.",
       "context": "Em análise literária histórica do Romantismo, o termo é técnico e pode ser citado com explicação.",
-      "contextual": true
-    },
-    {
-      "avoid": "arte primitiva",
-      "category": "estetica",
-      "alternatives": [
-        "arte ancestral",
-        "arte de povos indígenas",
-        "arte tradicional do povo"
-      ],
-      "reason": "Hierarquiza expressões artísticas: 'primitiva' pressupõe estágio inferior em direção à arte 'civilizada' ocidental.",
-      "context": "Em análise crítica do próprio conceito, o termo pode ser citado com marcação.",
       "contextual": true
     },
     {
@@ -2001,14 +1952,14 @@
       "contextual": true
     },
     {
-      "avoid": "ralé",
-      "category": "classe",
+      "avoid": "vazio demográfico",
+      "category": "territorio",
       "alternatives": [
-        "população em situação de exclusão",
-        "pessoas em situação de vulnerabilidade"
+        "território com baixa densidade",
+        "região com ocupação dispersa"
       ],
-      "reason": "Desqualifica e desumaniza pessoas em situação de pobreza.",
-      "context": "Em análise sociológica crítica que usa o termo para desnaturalizá-lo, pode aparecer com aspas.",
+      "reason": "A expressão 'vazio demográfico' foi e ainda é usada para justificar grilagem de terras e projetos de colonização, negando a presença de povos indígenas, quilombolas e comunidades tradicionais.",
+      "context": "Em contextos estatísticos precisos, pode ser aceitável com aspas e contextualização histórica. Nunca use como neutro.",
       "contextual": true
     },
     {
@@ -2070,15 +2021,6 @@
       "reason": "Animaliza e pune sexualmente mulheres com vida afetiva ativa; reforça duplo padrão sexual."
     },
     {
-      "avoid": "transexualismo",
-      "alternatives": [
-        "transgeneridade",
-        "identidade trans"
-      ],
-      "category": "genero",
-      "reason": "O sufixo '-ismo' foi usado para patologizar identidade trans. 'Transgeneridade' é o termo contemporâneo."
-    },
-    {
       "avoid": "cross-dresser como insulto",
       "alternatives": [
         "pessoa que usa roupas do gênero oposto",
@@ -2086,16 +2028,6 @@
       ],
       "category": "genero",
       "reason": "Travestimento é prática cultural e de identidade; usar o termo como ofensa reforça estigma."
-    },
-    {
-      "avoid": "superstição",
-      "alternatives": [
-        "prática cultural",
-        "crença tradicional",
-        "saber ancestral"
-      ],
-      "category": "conhecimento",
-      "reason": "Usado para desqualificar religiões e práticas de povos originários e afro-brasileiros frente ao saber europeu."
     },
     {
       "avoid": "curandeirismo",
@@ -2144,15 +2076,6 @@
       ],
       "category": "povos",
       "reason": "Quando usados para hipersexualizar corpos negros, reforçam estereótipos coloniais de sexualização racial."
-    },
-    {
-      "avoid": "crioulo",
-      "alternatives": [
-        "pessoa negra",
-        "não use"
-      ],
-      "category": "povos",
-      "reason": "No Brasil colonial, designava escravizados nascidos no país. Hoje é termo ofensivo e racista."
     },
     {
       "avoid": "africano como genérico",
@@ -2214,14 +2137,16 @@
       "reason": "O termo mendicância historicamente criminalizou a pobreza. 'Pessoa em situação de rua' nomeia condição sem estigmatizar."
     },
     {
-      "avoid": "vagabundo",
+      "avoid": "região selvagem",
       "alternatives": [
-        "desempregado",
-        "sem trabalho",
-        "em busca de emprego"
+        "região de mata densa",
+        "território indígena",
+        "floresta com ocupação tradicional"
       ],
-      "category": "classe",
-      "reason": "Quando aplicado a pessoas pobres, criminaliza pobreza e associa desemprego a vício ou preguiça."
+      "category": "territorio",
+      "reason": "O adjetivo 'selvagem' aplicado a territórios nega a presença humana e legitima narrativas de conquista e exploração.",
+      "context": "Diferente de 'fauna silvestre' — que é técnico. Quando aplicado a espaços habitados, o termo é colonial.",
+      "contextual": true
     },
     {
       "avoid": "pivete",
@@ -2441,18 +2366,6 @@
       "contextual": false
     },
     {
-      "avoid": "sem cultura",
-      "alternatives": [
-        "sem acesso a bens culturais",
-        "de outra tradição cultural",
-        "com referências culturais distintas"
-      ],
-      "category": "conhecimento",
-      "reason": "Todo povo tem cultura. A expressão aplica a régua da cultura dominante para apagar outras tradições, conhecimentos e formas de organização social.",
-      "context": "Personagens podem usar a expressão como marcador da visão de mundo preconceituosa de quem fala, e não como narrador onisciente.",
-      "contextual": true
-    },
-    {
       "avoid": "problema social",
       "alternatives": [
         "consequência de desigualdade estrutural",
@@ -2585,6 +2498,122 @@
       "category": "estetica",
       "reason": "'Beleza clássica' é frequentemente código para traços europeus como padrão universal — nariz fino, pele clara, cabelo liso.",
       "context": "Quando a escolha é deliberada para revelar um sistema de valores, manter com consciência. Evite como neutro.",
+      "contextual": true
+    },
+    {
+      "avoid": "ciência moderna como única ciência válida",
+      "alternatives": [
+        "conhecimento científico ocidental",
+        "ciência acadêmica institucionalizada"
+      ],
+      "category": "conhecimento",
+      "reason": "Hierarquiza um tipo de produção de conhecimento sobre outros, negando validade a etnociência, medicina tradicional e saberes indígenas.",
+      "context": "Em texto científico, use 'ciência ocidental moderna' para especificar, não para universalizar.",
+      "contextual": true
+    },
+    {
+      "avoid": "sabedoria popular como mito",
+      "alternatives": [
+        "conhecimento popular",
+        "saber tradicional",
+        "sabedoria oral"
+      ],
+      "category": "conhecimento",
+      "reason": "Reduzir saberes populares a 'mito' ou 'crença' desqualifica epistemologias não-ocidentais com base num critério etnocêntrico de verdade.",
+      "context": "Contextos de educação científica podem usar 'conhecimento informal' sem desqualificação implícita.",
+      "contextual": true
+    },
+    {
+      "avoid": "magia negra como sinônimo de mal",
+      "alternatives": [
+        "trabalho espiritual",
+        "ritual",
+        "prática de matriz africana"
+      ],
+      "category": "conhecimento",
+      "reason": "Associar religiões de matriz africana a 'magia negra' e ao mal é uma forma de racismo religioso com raízes na colonização.",
+      "context": "Em ficção, pode ser voz de personagem preconceituoso — marque como perspectiva, não como fato do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "feições exóticas",
+      "alternatives": [
+        "traços marcantes",
+        "fisionomia específica",
+        "descreva concretamente"
+      ],
+      "category": "estetica",
+      "reason": "O exotismo estetiza a diferença como espetáculo para um suposto observador ocidental. Naturaliza que o padrão de beleza é europeu e o restante é 'curioso'.",
+      "context": "Em narrador não-confiável ou de época, pode aparecer com aspas para marcar o preconceito do ponto de vista.",
+      "contextual": true
+    },
+    {
+      "avoid": "arte ingênua como pejorativo",
+      "alternatives": [
+        "arte popular",
+        "arte de tradição oral",
+        "arte de comunidade"
+      ],
+      "category": "estetica",
+      "reason": "Quando 'ingênuo' é usado para diminuir arte fora do circuito acadêmico ou europeu, o termo hierarquiza esteticamente sem critério justo.",
+      "context": "Em história da arte, 'naïf' é termo técnico neutro. O problema é o uso pejorativo para desqualificar.",
+      "contextual": true
+    },
+    {
+      "avoid": "comportamento de homem",
+      "alternatives": [
+        "coragem",
+        "firmeza",
+        "determinação",
+        "autonomia"
+      ],
+      "category": "genero",
+      "reason": "Associar coragem, autonomia ou racionalidade ao gênero masculino reforça a divisão binária e desqualifica essas qualidades em outros gêneros.",
+      "context": "Em citação de personagem de época ou em voz que deve revelar preconceito, pode ser mantido com intenção explícita.",
+      "contextual": true
+    },
+    {
+      "avoid": "empreendedor de si mesmo como ideal universal",
+      "alternatives": [
+        "trabalhador autônomo",
+        "pessoa que trabalha por conta própria"
+      ],
+      "category": "classe",
+      "reason": "Quando aplicado a quem trabalha por necessidade, não por escolha, o 'empreendedorismo' obscurece a precarização do trabalho e culpabiliza o trabalhador pelas condições estruturais.",
+      "context": "Em análise econômica crítica, o termo pode aparecer com aspas para desnaturalizá-lo.",
+      "contextual": true
+    },
+    {
+      "avoid": "pobre envergonhado",
+      "alternatives": [
+        "pessoa em situação de dificuldade financeira",
+        "trabalhador de baixa renda"
+      ],
+      "category": "classe",
+      "reason": "Naturaliza a vergonha como resposta à pobreza, responsabilizando o indivíduo pela condição estrutural em que se encontra.",
+      "context": "Em narrativa literária, pode ser perspectiva de personagem — não narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "quem quer, consegue",
+      "alternatives": [
+        "com acesso e oportunidade, é possível",
+        "quando há condições adequadas"
+      ],
+      "category": "classe",
+      "reason": "A ideia meritocrática ignora desigualdades estruturais de classe, raça e gênero. Em texto literário, pode revelar o caráter de um personagem privilegiado.",
+      "context": "Pode ser voz de personagem que precisa ser desafiado pelo enredo.",
+      "contextual": true
+    },
+    {
+      "avoid": "terras devolutas como sinônimo de terras livres",
+      "alternatives": [
+        "terras públicas",
+        "território com disputa fundiária"
+      ],
+      "category": "territorio",
+      "reason": "O conceito jurídico de 'terra devoluta' foi historicamente usado para negar direitos territoriais de povos indígenas e comunidades tradicionais ao declarar suas terras como 'sem dono'.",
+      "context": "Em texto jurídico técnico, o termo tem uso específico — contextualize sempre com o histórico de uso e grilagem.",
       "contextual": true
     }
   ]
