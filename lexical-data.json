@@ -98,9 +98,9 @@
     },
     "noite": {
       "label": "noite",
-      "className": "Substantivo",
-      "field": "Tempo e espaço — atmosfera, limiar, invisibilidade",
-      "note": "A noite convoca o inconsciente da cena. Use-a quando o personagem precisa de espaço para não ser visto."
+      "className": "Substantivo feminino",
+      "field": "Tempo — segredo, risco, descanso ou vigília",
+      "note": "A noite literária não é apenas ausência de luz: é o tempo dos segredos, dos amores e dos medos que o dia esconde."
     },
     "dia": {
       "label": "dia",
@@ -471,8 +471,8 @@
     "fronteira": {
       "label": "fronteira",
       "className": "Substantivo feminino",
-      "field": "Espaço — limite, passagem, pertencimento dividido",
-      "note": "Quem vive na fronteira pertence a dois lugares ao mesmo tempo — e a nenhum. Espaço de identidade híbrida."
+      "field": "Limite — território, identidade, passagem",
+      "note": "Fronteira é o lugar onde dois mundos se tocam. Personagens em fronteiras carregam dupla pertença — e dupla exclusão."
     },
     "exilio": {
       "label": "exílio",
@@ -654,12 +654,6 @@
       "field": "Espaço — modernidade, anonimato, contraste interior-litoral",
       "note": "Na literatura brasileira, a cidade é frequentemente o destino da migração — promessa e decepção coexistindo."
     },
-    "noite": {
-      "label": "noite",
-      "className": "Substantivo feminino",
-      "field": "Tempo — segredo, risco, descanso ou vigília",
-      "note": "A noite literária não é apenas ausência de luz: é o tempo dos segredos, dos amores e dos medos que o dia esconde."
-    },
     "olhar": {
       "label": "olhar",
       "className": "Substantivo masculino ou verbo",
@@ -743,12 +737,6 @@
       "className": "Substantivo feminino",
       "field": "Espaço — separação, exílio, perspectiva narrativa",
       "note": "Distância mede mais do que espaço. Entre personagens, é relação; no espaço sideral, é solidão e escala."
-    },
-    "fronteira": {
-      "label": "fronteira",
-      "className": "Substantivo feminino",
-      "field": "Limite — território, identidade, passagem",
-      "note": "Fronteira é o lugar onde dois mundos se tocam. Personagens em fronteiras carregam dupla pertença — e dupla exclusão."
     },
     "silicio": {
       "label": "silício",
@@ -851,6 +839,66 @@
       "className": "Substantivo feminino",
       "field": "Conflito — poder, violência, ameaça latente",
       "note": "A arma que aparece no primeiro ato precisa disparar. Mas também pode nunca disparar e ser isso — o peso permanente da possibilidade. No Brasil, arma e cotidiano são difíceis de separar, e essa dificuldade é material literário."
+    },
+    "luto": {
+      "label": "luto",
+      "className": "Substantivo masculino",
+      "field": "Afeto — perda, ausência, tempo suspenso",
+      "note": "Na literatura brasileira, luto atravessa o pessoal e o político: luto pelo morto, pelo país, pela língua. Em João Guimarães Rosa, o luto não tem prazo; em Conceição Evaristo, é também resistência. Use quando a personagem carrega ausência com peso de presença."
+    },
+    "abismo": {
+      "label": "abismo",
+      "className": "Substantivo masculino",
+      "field": "Espaço — limite, vertigem, o que não tem fundo",
+      "note": "Palavra-precipício. Em Clarice Lispector, o abismo é interior e iminente. Em textos de fronteira geográfica ou social, é o que separa mundos. Evite usar como sinônimo vago de 'problema grave' — o abismo exige queda real ou iminente."
+    },
+    "ruina": {
+      "label": "ruína",
+      "className": "Substantivo feminino",
+      "field": "Espaço — tempo, memória, o que ficou depois da quebra",
+      "note": "A ruína não é apenas destruição: é o que sobrevive da destruição. Na literatura decolonial e pós-ditatorial brasileira, ruína é prova material de violência histórica. Diferente de 'destruição' (processo) — ruína é o rastro que acusa."
+    },
+    "fantasma": {
+      "label": "fantasma",
+      "className": "Substantivo masculino",
+      "field": "Memória — o que não foi sepultado direito, presença da ausência",
+      "note": "Em narrativas de trauma, o fantasma não assombra por malícia: assombra porque não pôde ser luto. Use para personagens que carregam mortos que nunca foram nomeados, histórias que não foram contadas, verdades reprimidas. Distinto de 'espectro' (mais abstrato) — o fantasma tem rosto."
+    },
+    "vazio": {
+      "label": "vazio",
+      "className": "Substantivo masculino / Adjetivo",
+      "field": "Afeto — ausência, espera, o que não foi preenchido",
+      "note": "Em Clarice Lispector, o vazio precede a revelação. Em Drummond, é o que sobra depois do amor. Use quando a personagem não está sofrendo ativamente — está suspensa, esperando algo que talvez não venha. Cuidado com o clichê 'sentia um vazio': substitua pelo comportamento concreto do vazio."
+    },
+    "ferro": {
+      "label": "ferro",
+      "className": "Substantivo masculino",
+      "field": "Conflito — resistência, trabalho, escravidão, dureza necessária",
+      "note": "Palavra de dupla face na literatura afro-brasileira: o ferro da corrente e o ferro da forja. Em Carolina de Jesus, ferro é grilhão e também força. Em Conceição Evaristo, é o corpo que não cede. Evite como simples material; prefira quando o texto quer marcar dureza histórica ou determinação corporal."
+    },
+    "cabelo": {
+      "label": "cabelo",
+      "className": "Substantivo masculino",
+      "field": "Identidade — corpo, pertencimento racial, liberdade ou submissão",
+      "note": "Na literatura negra brasileira contemporânea, cabelo não é ornamento — é marcador de identidade, campo de batalha e símbolo de liberdade. Cabelo crespo alisar é uma violência cultural; usá-lo como metáfora exige responsabilidade. Em outros contextos, pode marcar envelhecimento, doença, abandono."
+    },
+    "cheiro": {
+      "label": "cheiro",
+      "className": "Substantivo masculino",
+      "field": "Sentido — memória sensorial, pertencimento, presença física",
+      "note": "O mais mnemônico dos sentidos. Em Proust (pela via brasileira de Guimarães Rosa), o cheiro não descreve — ressuscita. Use para ancorar cenas no corpo do narrador, para trazer de volta o morto pelo olfato, para marcar a diferença entre lugares de classe. Cheiro de mofo é pobreza; cheiro de alfazema é outro mundo."
+    },
+    "ilha": {
+      "label": "ilha",
+      "className": "Substantivo feminino",
+      "field": "Espaço — isolamento, suficiência, ausência de continente",
+      "note": "A ilha brasileira não é a ilha europeia do Robinson Crusoe. É Marajó, é Florianópolis, é o morrador de rua na esquina. Em Jorge Amado, a ilha é abundância; em Drummond, é solidão. Use quando a personagem está cercada de mundos que não a alcançam — ou quando alcançam demais."
+    },
+    "cinza": {
+      "label": "cinza",
+      "className": "Substantivo masculino / Adjetivo",
+      "field": "Transformação — o que sobrou depois do fogo, a cor da rendição e da memória",
+      "note": "A cinza está depois da tempestade, depois do fogo, depois do fim. Em rituais de candomblé e umbanda, cinza é oferenda e passagem. Na ficção científica brasileira, pode ser o mundo depois do colapso. Evite usar como sinônimo de 'triste' ou 'sem cor' — cinza carrega história de combustão."
     }
   },
   "functionWords": {
