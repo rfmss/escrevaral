@@ -755,6 +755,54 @@
       "className": "Substantivo masculino",
       "field": "Ficção científica — tecnologia, matéria, não-orgânico",
       "note": "Silício é o oposto poético do barro. Onde o barro cria o ser da terra, o silício cria o ser da máquina."
+    },
+    "beijo": {
+      "label": "beijo",
+      "className": "Substantivo masculino",
+      "field": "Corpo — contato, desejo, dissolução da distância",
+      "note": "O beijo não é começo — é o instante onde o gesto não precisa mais de palavra. Em narrativa, um beijo adiado é uma história inteira."
+    },
+    "espera": {
+      "label": "espera",
+      "className": "Substantivo feminino",
+      "field": "Tempo — antecipação, suspensão, relação",
+      "note": "A espera não é vazia: é o tempo cheio de possibilidade e de medo. Cada espera é uma relação — com quem virá, com o que pode não vir."
+    },
+    "solidao": {
+      "label": "solidão",
+      "className": "Substantivo feminino",
+      "field": "Emoção — isolamento, interioridade, autoconsciência",
+      "note": "Solidão não é ausência de outros — é ausência de eco. A personagem que ouve a própria voz sem resposta está na solidão mais profunda."
+    },
+    "chao": {
+      "label": "chão",
+      "className": "Substantivo masculino",
+      "field": "Espaço — origem, materialidade, pertencimento",
+      "note": "O chão sustenta e revela. Quem está no chão está na origem, na queda ou no trabalho. Em literatura brasileira, chão é sempre terra — e terra é sempre memória."
+    },
+    "crepusculo": {
+      "label": "crepúsculo",
+      "className": "Substantivo masculino",
+      "field": "Tempo — transição, ambiguidade, limiar",
+      "note": "O crepúsculo é o tempo entre o cão e o lobo: nem dia nem noite. Em narrativa, é o momento dos personagens que não pertencem a nenhum dos dois mundos."
+    },
+    "tambor": {
+      "label": "tambor",
+      "className": "Substantivo masculino",
+      "field": "Cultura — ritmo, convocação, memória afro-brasileira",
+      "note": "O tambor não acompanha: conduz. Em tradições afro-brasileiras, ele chama os orixás. Na ficção, é o som que organiza o tempo sagrado."
+    },
+    "senzala": {
+      "label": "senzala",
+      "className": "Substantivo feminino",
+      "field": "História — escravidão, resistência, memória apagada",
+      "note": "A senzala não é passado — é fundamento. A arquitetura brasileira foi construída sobre o que aconteceu dentro dessas paredes. Em ficção, ela é o espaço que a narrativa colonial prefere não habitar."
+    },
+    "laje": {
+      "label": "laje",
+      "className": "Substantivo feminino",
+      "field": "Espaço urbano — periferia, comunidade, limite e abertura",
+      "note": "A laje é o teto que virou lugar. Na periferia urbana, ela é o espaço da comunidade — do baile, da conversa, da vista. Uma das metáforas mais potentes da arquitetura informal brasileira."
     }
   },
   "functionWords": {

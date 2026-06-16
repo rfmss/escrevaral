@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v483";
-const ASSET_VERSION = "20260617-decolonial-205";
+const CACHE_NAME = "vereda-offline-v484";
+const ASSET_VERSION = "20260617-lexico-132";
 
 const CORE_ASSETS = [
   "./",
