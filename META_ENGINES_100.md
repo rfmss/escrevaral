@@ -68,6 +68,43 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v507→v522)
+
+**Baseline:** v522 — Tema 97% (revisado); 19 engines em 97–99%; sintaxe em 95%.
+
+**O que foi entregue neste ciclo (v507→v522) — dados e dark mode:**
+
+- `analise-engine.js`: STOPWORDS bug corrigido (tambem/voces sem acento); +30 novas entradas; SUBSTANTIVOS_VAGOS +8; NEGACOES_DUPLAS 5→7; CONECTIVOS_LOGICOS +12; CLIQUES_PT 192→202; PLEONASMOS 57→65
+- `decolonial-data.json`: 205→215 (cigano/povo Romani, sangue puro, trabalhador braçal, caipira como insulto, miscigenar)
+- `rimalab-data.json`: enciclopédia 15→20 (trova, cavalgamento, aliteração, esquemas de rima, glosa); grammarWords 195→204
+- `lexical-data.json`: 140→150 (luto, abismo, ruína, fantasma, vazio, ferro, cabelo, cheiro, ilha, cinza)
+- `voice-engine.js`: `casa` 10→24; `conflito` 15→23; `ironia` 23→29; `luminosidade` 26→30
+- `norma-data.json`: topónimos 56→75; siglas 57→82; prenomes F 222→230; M 299→305
+- CSS dark mode: `.soneto-a/b/c/d` para temas escuros; `.reader-overlay`/`.reader-hint-toast`; `mark` adaptativo; `--craft-bg` hex→`color-mix`; `nav-row` hex→`var(--muted)`
+
+**Revisão de maturidade — Tema Alvorada/Vereda 95% → 97%:** cobre agora soneto, reader overlay, toast de hint, mark e craft colors nos 4 temas escuros. Lacunas remanescentes: `03-writing-area.css`, `03-guide-reference.css`, `06-academy-tools.css`, `12-training-modes.css` ainda não auditados.
+
+**Estado atualizado dos engines (v522):**
+
+| Área / engine | Maturidade | Notas de estado (v522) |
+|---|---:|---|
+| Analise geral | **99%** | CLIQUES_PT 202; PLEONASMOS 65; STOPWORDS corrigido; CONECTIVOS_LOGICOS +12; NEGACOES_DUPLAS 7 |
+| Espelho de Voz | **99%** | `casa` 24 termos; `conflito` 23; ironia 29; luminosidade 30; 10 gestos com flag confiança |
+| RimaLab | **98%** | enciclopédia 20 entradas; grammarWords 204; findRhymes exata/toante |
+| Lexico / Biblioteca | **98%** | 150 entradas; FC/especulativo coberto; adjetivos, advérbios, conjunções |
+| Decolonial / vocabulário | **98%** | 215 entradas; raça, gênero, classe, território, linguagem, conhecimento |
+| Sintaxe | **95%** | norma-data: topónimos 75; siglas 82; prenomes 535; resolverAmbiguidade() 4 regras Mac-Morpho |
+| Tema Alvorada / Vereda | **97%** | dark mode: 7 arquivos CSS cobertos; 4 temas escuros; tooltip clone; soneto/reader/craft |
+
+**Próximas fronteiras:**
+
+1. **Tema 97% → 98%**: auditar `03-writing-area.css`, `03-guide-reference.css`, `06-academy-tools.css`, `12-training-modes.css` — custo baixo esperado
+2. **Sintaxe 95% → 97%**: candidatos morfológicos + desambiguação por janela de contexto — custo alto
+3. **RimaLab 98% → 99%**: expandir `findRhymes()` para incluir toante na busca por palavra
+4. **Analise geral 99% → 100%**: verificar bordas em textos muito curtos e poesia
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-05-30 (sessão 7 — auditoria gramatical completa)
 
 **Baseline:** v348 — Sintaxe 97% (revisado após auditoria); 19 engines em 97–99%; 0 engines em 85%.

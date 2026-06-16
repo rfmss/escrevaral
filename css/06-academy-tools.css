@@ -177,8 +177,8 @@
   user-select: none;
 }
 /* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
-   tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
-html:not([data-theme="scriptorium"]) .academy-tool-tab {
+   tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Temas escuros já têm contraste correto com --muted. */
+html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-theme="mata-dark"]):not([data-theme="amazonia-dark"]) .academy-tool-tab {
   color: #6f6459;
 }
 .academy-tool-tab:hover { color: var(--primary); background: var(--surface-mid); }

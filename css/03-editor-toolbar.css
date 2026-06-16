@@ -465,6 +465,14 @@
   color: #6c3483;
 }
 
+/* Temas escuros: roxo ativo legível sobre fundo escuro */
+[data-theme="scriptorium"] [data-grammar-btn][aria-pressed="true"],
+[data-theme="cerrado-dark"] [data-grammar-btn][aria-pressed="true"],
+[data-theme="mata-dark"] [data-grammar-btn][aria-pressed="true"],
+[data-theme="amazonia-dark"] [data-grammar-btn][aria-pressed="true"] {
+  color: #c5bfff;
+}
+
 /* Writing area em modo colorido */
 .writing-area.is-grammar-colored {
   cursor: default;
@@ -547,6 +555,14 @@
 .proof-chip[data-level="high"]   { border-color: rgba(58, 125, 82, 0.35); color: #2a5a3a; }
 .proof-chip[data-level="medium"] { border-color: rgba(200, 149, 90, 0.45); }
 .proof-chip[data-level="low"]    { border-color: rgba(160, 82, 45, 0.45); color: var(--sienna); }
+
+/* Temas escuros: verde escuro (#2a5a3a) fica invisível; usar verde claro */
+[data-theme="scriptorium"] .proof-chip[data-level="high"],
+[data-theme="cerrado-dark"] .proof-chip[data-level="high"],
+[data-theme="mata-dark"] .proof-chip[data-level="high"],
+[data-theme="amazonia-dark"] .proof-chip[data-level="high"] {
+  color: #5fc990;
+}
 
 .proof-chip-label { display: none; }
 
