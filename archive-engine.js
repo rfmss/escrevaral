@@ -126,7 +126,7 @@
         { key: "formato", label: "Formato exigido", hint: "Extensão, arquivo, normas da editora", type: "string" },
         { key: "status", label: "Situação", hint: "A enviar, enviado, aguardando, aceito, recusado", type: "string" },
         { key: "resposta", label: "Resposta", hint: "O que a editora disse", type: "string" },
-        { key: "versão", label: "Versão enviada", hint: "ID do manuscrito ou snapshot enviado", type: "ref" },
+        { key: "versão", label: "Versão enviada", hint: "ID do manuscrito ou versão salva enviada", type: "ref" },
         { key: "link", label: "Link", hint: "Edital, formulário, página da chamada", type: "string" },
       ],
     },

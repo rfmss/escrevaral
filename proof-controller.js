@@ -123,7 +123,7 @@ function maybeCreateAutoVersion(manuscript) {
 
   if (!VeredaVersions.shouldCreateAutoSnapshot(state.versions, manuscript)) return;
 
-  const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Auto-save relevante");
+  const result = VeredaVersions.addSnapshot(state.versions, manuscript, "Salvamento automático relevante");
   state.versions = result.versions;
   renderVersionList();
 }

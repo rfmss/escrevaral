@@ -2,7 +2,7 @@
   const MAX_VERSIONS_PER_MANUSCRIPT = 20;
   const MIN_TEXT_DELTA = 80;
 
-  function createSnapshot(manuscript, reason = "Snapshot manual") {
+  function createSnapshot(manuscript, reason = "Versão manual") {
     return {
       id: `version-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
       manuscriptId: manuscript.id,
