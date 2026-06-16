@@ -1766,6 +1766,12 @@ html:not([data-theme="scriptorium"]) .editor-mode-bar .secondary-button {
   pointer-events: none;
 }
 
+.app-shell:not(.is-left-collapsed):not(.is-right-collapsed) .academy-view {
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 12px;
+}
+
 .inspector-section {
   margin-bottom: 32px;
 }
