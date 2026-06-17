@@ -369,6 +369,22 @@
     // clichês de literatura infantojuvenil
     "a aventura começou quando","o mundo adulto não entendia","juntos eram mais fortes",
     "a amizade vence tudo","o segredo que mudou tudo","coragem de ser diferente",
+    // clichês de narrativa de não-ficção e jornalismo literário
+    "fontes ouvidas pela reportagem","o caso que chocou o país","segundo apurou a reportagem",
+    "o crime que virou símbolo","a história que o Brasil precisa conhecer","por dentro dos bastidores",
+    "quem estava lá para contar","o dia que mudou tudo","a verdade que foi escondida",
+    // clichês de crônica política e engajada
+    "o povo nas ruas","a voz do povo","o país está em chamas",
+    "ninguém escapou ileso","a luta continua","o silêncio foi cumplice",
+    "a história vai julgar","não podemos deixar esquecer","é preciso lembrar",
+    // clichês de literatura de testemunho e relato pessoal
+    "eu estava lá","vi com meus próprios olhos","nunca esquecerei aquele dia",
+    "o cheiro ainda está na memória","carrego essa história comigo",
+    "ninguém acreditou em mim no começo","precisei contar antes de morrer",
+    // clichês de literatura de terror e suspense
+    "a casa tinha vida própria","algo não estava certo","as sombras se moviam",
+    "o barulho vinha de baixo","não olhei para trás","o espelho mostrou o que não devia",
+    "os olhos seguiam todos os movimentos","o silêncio era ensurdecedor",
   ];
 
   const PLEONASMOS = [
