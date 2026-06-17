@@ -36,12 +36,19 @@ build/
 *.log
 
 # ── Ferramentas de IA / CLI local ────────────────────────────────
-.claude/
+.claude/*
+!.claude/settings.json
+!.claude/skills/
+!.claude/skills/**
 .codex/
 .agents/sentinel/*.log
 .agents/sentinel/*.pid
 .agents/sentinel/state.json
 .agents/sentinel/*.tmp
+.agents/awake-ides/*.log
+.agents/awake-ides/*.pid
+.agents/awake-ides/state.json
+.agents/awake-ides/*.tmp
 
 # ── Credenciais e chaves ─────────────────────────────────────────
 *.pem

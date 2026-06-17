@@ -155,6 +155,12 @@ decolonial-engine.js, precision-engine.js, proof-engine.js
 
 ---
 
+## [norma-data.json]
+
+Antes de adicionar qualquer entrada em `adjetivos_comuns`, verificar se a forma `_stripDiac()` colide com forma verbal. Formas em `-ia`, `-ava` e `-era` sao risco alto. Formas mais seguras: `-oso/a`, `-avel/-ivel`, `-ente`, `-udo/a`, `-ivo/a`.
+
+---
+
 ## Convenções obrigatórias
 
 **Versionamento de assets:** toda alteração em JS ou CSS exige bump da string `?v=` no `index.html` e do `ASSET_VERSION` no `service-worker.js`. Formato: `YYYYMMDD-slug`.
