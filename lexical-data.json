@@ -1368,6 +1368,78 @@
       "field": "Cognição — estado de incerteza que pode paralisar ou provocar movimento",
       "note": "Em Machado de Assis, a dúvida é arma: Dom Casmurro duvida de Capitu e o leitor duvida de Dom Casmurro. Em Clarice Lispector, a dúvida não é fraqueza — é o espaço onde o pensamento ainda está vivo. Use dúvida quando o texto quiser mostrar que o personagem pensa, não apenas age — ou quando quiser construir ambiguidade para o leitor."
     },
+    "irmao": {
+      "label": "irmão",
+      "className": "Substantivo",
+      "field": "Relação — rivalidade e cumplicidade, espelho de sangue",
+      "note": "O irmão viveu o mesmo passado com percepção diferente. Quando dois irmãos narram o mesmo evento, o texto ganha versões — e o leitor entende que toda memória é parcial."
+    },
+    "amigo": {
+      "label": "amigo",
+      "className": "Substantivo",
+      "field": "Relação — testemunha da vida, o outro que o personagem escolheu",
+      "note": "O amigo é o único que conhece a versão não familiar do personagem. Sua presença diz ao leitor quem o protagonista escolheu ser quando pôde escolher."
+    },
+    "inimigo": {
+      "label": "inimigo",
+      "className": "Substantivo",
+      "field": "Relação — antagonismo, o que define o personagem por oposição",
+      "note": "O inimigo define pelo que resiste. O que o protagonista recusa dizer, fazer ou ser em presença do inimigo revela o que ele mais valoriza."
+    },
+    "vizinho": {
+      "label": "vizinho",
+      "className": "Substantivo",
+      "field": "Relação — proximidade sem escolha, o estranho familiar",
+      "note": "A proximidade involuntária cria uma tensão diferente da familiar. O vizinho vê sem pertencer — e essa posição pode ser mais ameaçadora que a do estranho distante."
+    },
+    "feira": {
+      "label": "feira",
+      "className": "Substantivo feminino",
+      "field": "Espaço — troca, oralidade, onde o privado se torna coletivo",
+      "note": "A feira é o lugar onde o personagem não está sozinho com seus problemas. O barulho, a negociação e o contato físico dizem algo sobre quem ele é quando está entre estranhos."
+    },
+    "varanda": {
+      "label": "varanda",
+      "className": "Substantivo feminino",
+      "field": "Espaço — limiar entre interior e mundo, lugar de observação",
+      "note": "Quem está na varanda está vendo sem estar dentro. É o espaço da espera, do que ainda não começou — e do que não se tem coragem de ir buscar."
+    },
+    "revelacao": {
+      "label": "revelação",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — o momento em que o personagem e/ou leitor descobre o que muda tudo",
+      "note": "A revelação reorganiza o que veio antes. O leitor relê o texto com outros olhos — e o personagem não pode mais fingir que não sabe."
+    },
+    "escolha": {
+      "label": "escolha",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — onde a vontade se torna ação, ponto de não-retorno",
+      "note": "A escolha é o momento em que a vontade se torna ação irreversível. O texto antes da escolha é possibilidade; o texto depois é consequência."
+    },
+    "testemunha": {
+      "label": "testemunha",
+      "className": "Substantivo",
+      "field": "Narrativa — quem vê sem intervir, ponto de vista que julga sem dizer",
+      "note": "A testemunha cria julgamento silencioso. Quando o narrador é testemunha, o leitor precisa decidir o que fazer com o que viu — e isso o torna cúmplice."
+    },
+    "imaginar": {
+      "label": "imaginar",
+      "className": "Verbo",
+      "field": "Cognição — o que não existe mas orienta a ação, ficção dentro da ficção",
+      "note": "O que o personagem imagina revela o que deseja ou teme. O sonho acordado diz ao texto o que o personagem não consegue dizer em voz alta."
+    },
+    "perceber": {
+      "label": "perceber",
+      "className": "Verbo",
+      "field": "Cognição — o instante em que a personagem compreende algo que muda seu caminho",
+      "note": "O instante em que o personagem percebe é o instante em que o texto muda de direção. Antes era o personagem de um modo; depois, de outro. O que separa os dois momentos é o verbo."
+    },
+    "ruido": {
+      "label": "ruído",
+      "className": "Substantivo masculino",
+      "field": "Sentido — presença sonora que revela tensão ou vida",
+      "note": "O ruído interrompe. Num texto de tensão, revela presença onde havia silêncio. Num texto de afeto, pode ser só vida — e essa ambiguidade é o que torna o detalhe sensorial tão valioso."
+    },
     "conquista": {
       "label": "conquista",
       "className": "Substantivo feminino",
