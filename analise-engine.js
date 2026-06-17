@@ -354,6 +354,21 @@
     "a cidade é cruel","o trânsito mata a alma",
     "ninguém se olha mais","o celular virou parede",
     "a violência chegou perto","o condomínio afastou a rua",
+    // clichês de romance histórico
+    "as páginas da história","os ventos da mudança sopravam","a época era de incerteza",
+    "o peso da tradição","as correntes do passado prendiam","o destino de uma nação",
+    "o herói do seu tempo","a mulher à frente do seu tempo","os grandes homens fazem a história",
+    // clichês de literatura de autoajuda e memória
+    "aprendi com a dor","me tornei quem sou","essa experiência me transformou",
+    "hoje sou grato por tudo","a vida me ensinou","minha maior lição foi",
+    "encontrei meu propósito","redescobri minha força","a cura foi um processo longo",
+    // clichês de ficção científica e distopia
+    "o futuro era cinzento","a máquina não sentia","os humanos perderam a essência",
+    "o sistema controlava tudo","a resistência era pequena","a liberdade era um conceito antigo",
+    "o governo sabia tudo","os dados não mentiam","a consciência artificial",
+    // clichês de literatura infantojuvenil
+    "a aventura começou quando","o mundo adulto não entendia","juntos eram mais fortes",
+    "a amizade vence tudo","o segredo que mudou tudo","coragem de ser diferente",
   ];
 
   const PLEONASMOS = [
