@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v593 (`vereda-offline-v592`, `ASSET_VERSION=20260617-subst188`)
+**Versão atual:** v597 (`vereda-offline-v596`, `ASSET_VERSION=20260617-irr267`)
 
 ---
 
@@ -25,6 +25,10 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v591 | corpo 38→45; casa 35→40; cidade 34→41 |
 | v592 | adjetivos_comuns 519→620 (+108 -ivo/a e -ente) |
 | v593 | substantivos_ia 167→188 (+27) |
+| v594 | decolonial 260→265 (-5 dup, +10) |
+| v595 | verbos_pres_reg 402→440 (+38, -para/param) |
+| v596 | CLIQUES_PT 315→343; PLEONASMOS 131→141 |
+| v597 | formas_verbais_irr 230→267 (+37) |
 
 ---
 
@@ -49,10 +53,10 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `decolonial-data.json` — fetichização racial tem gaps ainda (260 entradas)
-2. `synonym-data.js` — 226 entradas, mais verbos de estado e movimento possíveis
-3. `norma-data.json` — verbos_pres_reg 402 pode crescer com mais verbos literários
-4. Sintaxe 99%→100% — requer desambiguação contextual em syntax-engine.js (custo alto, avaliar)
+1. `rimalab-data.json` — enciclopédia de rima tem 25 entradas; espaço para crescer
+2. `synonym-data.js` — 226 entradas, mais adjetivos literários possíveis
+3. `lexical-data.json` — 241 entradas; categorias Cognição e Dicção ainda têm margem
+4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---
 
