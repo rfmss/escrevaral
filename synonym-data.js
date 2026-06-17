@@ -647,6 +647,71 @@
     // est
     "fiel":        ["leal", "devotado", "comprometido", "honesto", "constante", "dedicado"],
 
+    // ─── VERBOS DE PERCEPÇÃO E SENTIDO ───────────────────────────────────────
+
+    // est
+    "ver":         ["observar", "enxergar", "contemplar", "avistar", "distinguir", "presenciar"],
+
+    // est
+    "ouvir":       ["escutar", "perceber", "captar", "auscultar", "distinguir", "notar"],
+
+    // est
+    "sentir":      ["perceber", "experimentar", "pressentir", "intuir", "notar", "captar"],
+
+    // est
+    "tocar":       ["apalpar", "tatear", "roçar", "tanger", "afagar", "tangenciar"],
+
+    // ─── VERBOS DE MOVIMENTO ESPECÍFICO ──────────────────────────────────────
+
+    // est
+    "correr":      ["acelerar", "disparar", "precipitar-se", "arremeter", "galgar", "desfilar"],
+
+    // est
+    "parar":       ["cessar", "deter", "interromper", "suspender", "imobilizar", "estancar"],
+
+    // est
+    "subir":       ["escalar", "ascender", "galgar", "trepar", "alçar-se", "elevar-se"],
+
+    // est
+    "descer":      ["declinar", "baixar", "abaixar-se", "cair", "deslizar", "arribar"],
+
+    // est
+    "entrar":      ["adentrar", "penetrar", "ingressar", "introduzir-se", "transpor", "aceder"],
+
+    // est
+    "sair":        ["partir", "retirar-se", "ausentar-se", "evadir", "evadir-se", "desertar"],
+
+    // ─── VERBOS DE COMUNICAÇÃO E EXPRESSÃO ───────────────────────────────────
+
+    // est
+    "perguntar":   ["questionar", "indagar", "inquirir", "interrogar", "consultar", "interpelar"],
+
+    // est
+    "responder":   ["replicar", "retrucar", "ripostar", "contra-argumentar", "contestar", "retornar"],
+
+    // est
+    "contar":      ["narrar", "relatar", "reportar", "descrever", "expor", "referir"],
+
+    // est
+    "chamar":      ["invocar", "convocar", "nomear", "apelidar", "intitular", "designar"],
+
+    // ─── ADJETIVOS DE ESTADOS FÍSICOS E EMOCIONAIS ───────────────────────────
+
+    // est
+    "cansado":     ["exausto", "fatigado", "esgotado", "abatido", "estafado", "desfalecido"],
+
+    // est
+    "forte":       ["robusto", "vigoroso", "potente", "resistente", "sólido", "tenaz"],
+
+    // est
+    "fraco":       ["débil", "frágil", "delicado", "enfraquecido", "vulnerável", "impotente"],
+
+    // est
+    "estranho":    ["bizarro", "incomum", "inusitado", "singular", "peculiar", "excêntrico"],
+
+    // est
+    "bonito":      ["belo", "formoso", "gracioso", "atraente", "esplêndido", "encantador"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
