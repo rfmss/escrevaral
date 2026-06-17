@@ -995,6 +995,26 @@
     "sombrio":     ["escuro", "lúgubre", "melancólico", "tenebroso", "obscuro", "carregado"],
     "luminoso":    ["claro", "brilhante", "radiante", "iluminado", "fulgente", "resplandecente"],
 
+    // verbos de escrita e narração
+    "escrever":    ["redigir", "compor", "traçar", "registrar", "narrar", "relatar", "anotar", "grafar"],
+    "ler":         ["decifrar", "percorrer", "devorar", "folhear", "interpretar", "apreciar", "examinar"],
+    "contar":      ["narrar", "relatar", "descrever", "expor", "repassar", "comunicar", "transmitir"],
+    // adjetivos de intensidade emocional
+    "intenso":     ["forte", "profundo", "ardente", "veemente", "apaixonado", "vívido", "agudo", "denso"],
+    "fragil":      ["delicado", "fraco", "vulnerável", "tênue", "quebradiço", "efêmero", "sutil", "leve"],
+    "sereno":      ["calmo", "tranquilo", "plácido", "quieto", "equilibrado", "pacífico", "suave", "manso"],
+    // substantivos do espaço literário
+    "limiar":      ["fronteira", "borda", "margem", "início", "passagem", "porta", "umbral", "soleira"],
+    "silhueta":    ["contorno", "sombra", "forma", "figura", "perfil", "vulto", "traço", "esboço"],
+    "ecos":        ["ressonância", "rumor", "reverberação", "vestígio", "rastro", "traço", "lembrança"],
+    // processos narrativos
+    "hesitar":     ["duvidar", "vacilar", "titubear", "recuar", "ponderar", "demorar", "tergiversar"],
+    "revelar":     ["mostrar", "expor", "descobrir", "desvelar", "divulgar", "confessar", "abrir", "desnudar"],
+    "esconder":    ["ocultar", "disfarçar", "encobrir", "suprimir", "abafar", "silenciar", "velar", "calar"],
+    "partir":      ["sair", "ir", "deixar", "escapar", "abandonar", "zarpar", "distanciar", "seguir"],
+    "chegar":      ["alcançar", "atingir", "aportar", "desembarcar", "comparecer", "surgir", "aparecer"],
+    "permanecer":  ["ficar", "continuar", "persistir", "durar", "resistir", "manter", "subsistir", "perdurar"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
