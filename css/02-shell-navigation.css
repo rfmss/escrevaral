@@ -1112,6 +1112,47 @@ html {
   --craft: #9B2D6A;
 }
 
+/* Temas escuros: cores de ofício mais claras para contraste sobre fundos escuros */
+[data-theme="scriptorium"] .create-note-panel[data-craft="roteiro"],
+[data-theme="cerrado-dark"] .create-note-panel[data-craft="roteiro"],
+[data-theme="mata-dark"] .create-note-panel[data-craft="roteiro"],
+[data-theme="amazonia-dark"] .create-note-panel[data-craft="roteiro"]    { --craft: #5b9fe0; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="poesia"],
+[data-theme="cerrado-dark"] .create-note-panel[data-craft="poesia"],
+[data-theme="mata-dark"] .create-note-panel[data-craft="poesia"]          { --craft: #a080e8; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="nao-ficcao"],
+[data-theme="cerrado-dark"] .create-note-panel[data-craft="nao-ficcao"],
+[data-theme="mata-dark"] .create-note-panel[data-craft="nao-ficcao"],
+[data-theme="amazonia-dark"] .create-note-panel[data-craft="nao-ficcao"] { --craft: #d4a040; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="vestibular"],
+[data-theme="cerrado-dark"] .create-note-panel[data-craft="vestibular"],
+[data-theme="mata-dark"] .create-note-panel[data-craft="vestibular"],
+[data-theme="amazonia-dark"] .create-note-panel[data-craft="vestibular"] { --craft: #e07060; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="comercial"],
+[data-theme="cerrado-dark"] .create-note-panel[data-craft="comercial"],
+[data-theme="mata-dark"] .create-note-panel[data-craft="comercial"],
+[data-theme="amazonia-dark"] .create-note-panel[data-craft="comercial"]  { --craft: #40a8a8; }
+
+[data-theme="scriptorium"] .create-cat-card[data-craft="roteiro"]    .material-symbols-outlined,
+[data-theme="cerrado-dark"] .create-cat-card[data-craft="roteiro"]   .material-symbols-outlined,
+[data-theme="mata-dark"] .create-cat-card[data-craft="roteiro"]      .material-symbols-outlined,
+[data-theme="amazonia-dark"] .create-cat-card[data-craft="roteiro"]  .material-symbols-outlined { color: #5b9fe0; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="poesia"]     .material-symbols-outlined,
+[data-theme="cerrado-dark"] .create-cat-card[data-craft="poesia"]    .material-symbols-outlined,
+[data-theme="mata-dark"] .create-cat-card[data-craft="poesia"]       .material-symbols-outlined { color: #a080e8; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined,
+[data-theme="cerrado-dark"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined,
+[data-theme="mata-dark"] .create-cat-card[data-craft="nao-ficcao"]   .material-symbols-outlined,
+[data-theme="amazonia-dark"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined { color: #d4a040; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined,
+[data-theme="cerrado-dark"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined,
+[data-theme="mata-dark"] .create-cat-card[data-craft="vestibular"]   .material-symbols-outlined,
+[data-theme="amazonia-dark"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined { color: #e07060; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="comercial"]  .material-symbols-outlined,
+[data-theme="cerrado-dark"] .create-cat-card[data-craft="comercial"] .material-symbols-outlined,
+[data-theme="mata-dark"] .create-cat-card[data-craft="comercial"]    .material-symbols-outlined,
+[data-theme="amazonia-dark"] .create-cat-card[data-craft="comercial"] .material-symbols-outlined { color: #40a8a8; }
+
 
 /* ── Step 1: grade de categorias ── */
 .create-cat-grid {
