@@ -427,6 +427,16 @@
     ["completamente perfeito","perfeito"],["velho veterano","veterano"],
     ["morrer de morte","morrer"],["certeza e convicção","certeza"],
     ["alegria e felicidade","alegria"],["grave e sério","grave"],
+    // pares adjetivos/substantivos redundantes
+    ["inovação nova","inovação"],["resultado final","resultado"],
+    ["experiência vivida","experiência"],["ganho obtido","ganho"],
+    ["opinião pessoal","opinião"],["decisão tomada","decisão"],
+    ["herança legada","herança"],["sobrevivente que sobreviveu","sobrevivente"],
+    // verbos com complemento óbvio
+    ["subir para cima","subir"],["descer para baixo","descer"],
+    ["entrar para dentro","entrar"],["sair para fora","sair"],
+    ["avançar para frente","avançar"],["recuar para trás","recuar"],
+    ["juntar em conjunto","juntar"],["unir em união","unir"],
   ];
 
   const NEGACOES_DUPLAS = [
