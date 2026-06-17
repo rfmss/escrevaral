@@ -15,14 +15,14 @@
   };
 
   const semanticFields = {
-    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia", "dedo", "joelho", "costas", "língua"],
-    casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama", "corredor", "varanda", "quintal", "porão", "escada", "gaveta", "armário", "sala", "fogão", "pia", "espelho", "prateleira", "soleira", "alpendre"],
+    corpo: ["corpo", "mão", "olho", "rosto", "boca", "pele", "sangue", "peito", "braço", "perna", "cabeça", "carne", "ferida", "nervos", "ventre", "pescoço", "ombro", "punho", "veia", "dedo", "joelho", "costas", "língua", "nuca", "tornozelo", "calcanhar", "quadril", "sobrancelha", "têmpora"],
+    casa: ["casa", "porta", "janela", "mesa", "quarto", "cozinha", "parede", "chão", "telhado", "cama", "corredor", "varanda", "quintal", "porão", "escada", "gaveta", "armário", "sala", "fogão", "pia", "espelho", "prateleira", "soleira", "alpendre", "sofá", "cobertor", "lençol", "batente"],
     natureza: ["terra", "água", "rio", "mar", "vento", "sol", "chuva", "árvore", "folha", "barro", "céu", "floresta", "cerrado", "sertão", "caatinga", "raiz", "pedra", "galho", "seca", "brejo", "savana", "lua", "estrela", "nuvem", "campo", "serra", "vale", "mata", "mangue", "chapada", "pampa", "várzea", "roça", "brisa", "relâmpago"],
-    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época", "foto", "carta", "diário", "cheiro", "cicatriz", "marca", "história", "reviver", "apagar", "herança", "origem", "trauma"],
+    memoria: ["memória", "lembrança", "infância", "ontem", "passado", "antigo", "voltar", "recordar", "saudade", "crescer", "época", "foto", "carta", "diário", "cheiro", "cicatriz", "marca", "história", "reviver", "apagar", "herança", "origem", "trauma", "esquecimento", "nostalgia", "recordação", "antes", "rever", "evocação"],
     conflito: ["medo", "culpa", "segredo", "briga", "guerra", "dívida", "ameaça", "perigo", "morte", "fuga", "violência", "crime", "faca", "golpe", "sangue", "traição", "ódio", "raiva", "punição", "silêncio", "mentira", "ferida", "desespero", "ruptura", "rancor", "explosão", "colapso", "crise"],
-    pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender", "reflexão", "dúvida", "certeza", "consciência", "razão", "intuição", "dilema", "escolha", "questão", "saber", "argumento", "crença", "princípio", "paradoxo"],
-    cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina", "asfalto", "metrô", "buzina", "sirene", "multidão", "anonimato", "povo", "movimento", "barulho", "laje"],
-    sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra", "orixá", "terreiro", "encantaria", "milagre", "benzedura", "encantamento", "aparição"],
+    pensamento: ["penso", "ideia", "verdade", "talvez", "sentido", "mundo", "tempo", "pergunta", "entender", "reflexão", "dúvida", "certeza", "consciência", "razão", "intuição", "dilema", "escolha", "questão", "saber", "argumento", "crença", "princípio", "paradoxo", "mente", "percepção", "imaginar", "concluir", "suposição", "teoria"],
+    cidade: ["rua", "praça", "ônibus", "prédio", "cidade", "calçada", "mercado", "trânsito", "bairro", "favela", "morro", "periferia", "beco", "esquina", "asfalto", "metrô", "buzina", "sirene", "multidão", "anonimato", "povo", "movimento", "barulho", "laje", "calçamento", "poste", "semáforo", "vitrine"],
+    sobrenatural: ["fantasma", "magia", "espírito", "sonho", "encantado", "místico", "visão", "ritual", "oculto", "assombração", "destino", "presságio", "feitiço", "entidade", "sombra", "orixá", "terreiro", "encantaria", "milagre", "benzedura", "encantamento", "aparição", "transe", "premonição", "umbanda", "pajelança", "espectro", "invocação"],
   };
 
   const fieldLabels = {
