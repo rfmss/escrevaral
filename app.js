@@ -39,7 +39,7 @@ const ANALYTICS_VIEW_TITLES = {
   biblioteca: "Biblioteca",
   autoria: "Prova de autoria",
   arquivo: "Arquivo",
-  academia: "Academia",
+  academia: "Ateliê",
   cronograma: "Cronograma",
 };
 
@@ -1852,6 +1852,9 @@ const ACTION_HANDLERS = {
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
   "scroll-rights":           () => rightsLab?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "scroll-atelier-guides":   () => templateStudio?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "scroll-atelier-tools":    () => document.querySelector(".academy-tools")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "scroll-atelier-publishing": () => document.querySelector(".academy-publishing-track")?.scrollIntoView({ behavior: "smooth", block: "start" }),
   "go-autoria":              () => setView("autoria", { updateRoute: true }),
   "toggle-typewriter-sound": () => _toggleTypewriterSound(),
   

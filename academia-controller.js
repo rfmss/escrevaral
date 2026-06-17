@@ -16,6 +16,22 @@ function useActiveManuscriptForVoice() {
   setView("academia");
 }
 
+function buildAnaliseContext(manuscript = getActiveManuscript()) {
+  const template = manuscript?.templateId && window.VeredaTemplates
+    ? VeredaTemplates.getTemplate(manuscript.templateId)
+    : null;
+
+  return {
+    type: manuscript?.type,
+    kind: manuscript?.kind,
+    oficio: template?.oficio,
+    editorMode: template?.editorMode,
+    formato: [template?.oficio, template?.editorMode, manuscript?.kind, manuscript?.type]
+      .filter(Boolean)
+      .join(" "),
+  };
+}
+
 function updateVoiceCount() {
   const words = countWords(voiceInput.value);
   voiceCount.textContent = `${words} ${words === 1 ? "palavra" : "palavras"}`;
@@ -31,7 +47,7 @@ async function renderVoiceMirror() {
   }
 
   const analysis = VeredaVoice.analyze(text);
-  let criterios = window.VeredaAnalise ? VeredaAnalise.analisar(text) : null;
+  let criterios = window.VeredaAnalise ? VeredaAnalise.analisar(text, buildAnaliseContext()) : null;
 
   // Pontuação profunda quando o motor sintático estiver pronto (concordância verbal)
   if (criterios && window.VeredaPunctuation && window.syntaxEngine?._isReady()) {
@@ -209,7 +225,7 @@ function exportAnaliseGeral() {
   if (!ms || !window.VeredaAnalise) { saveStatus.textContent = "Nenhum manuscrito ativo."; return; }
   const text = ms.text || (ms.html || "").replace(/<[^>]+>/g, " ");
   if (!text.trim()) { saveStatus.textContent = "Manuscrito vazio — nada para exportar."; return; }
-  const criterios = VeredaAnalise.analisar(text);
+  const criterios = VeredaAnalise.analisar(text, buildAnaliseContext(ms));
   const alertas = VeredaAnalise.interpretarResultado(criterios);
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
   const sep = "═".repeat(52);

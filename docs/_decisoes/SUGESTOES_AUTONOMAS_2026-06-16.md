@@ -50,6 +50,22 @@ Este documento reúne o que foi feito e o que ficou em aberto.
 
 ## Sugestões ainda pendentes — implementação imediata (baixo risco)
 
+### S0 — ✅ Análise geral 99%→100%: poesia ignora listas agressivas
+**Origem:** recomendação de rodada encerrada em produção (`v536`)
+
+**Achado:** `analise-engine.js` aplicava as listas `CLIQUES_PT` e `PLEONASMOS` igualmente a prosa e poesia. Em poema, verso livre, slam e soneto, isso gerava falso positivo demais porque:
+- repetição de imagem pode ser recurso
+- formulações condensadas podem soar clichê fora do contexto
+- pleonasmo pode aparecer como figura de linguagem, refrão ou ênfase sonora
+
+**Implementação adotada:** reutilizar o sinal de formato já presente no manuscrito/template e enviar contexto para `VeredaAnalise.analisar(...)`. Quando o formato ativo indica poesia (`poema`, `poesia`, `soneto`, `slam`, `haiku`, `cordel`, `verso`), a engine:
+- pula `PLEONASMOS` em `economia.redundancia`
+- pula `CLIQUES_PT` em `voz.cliches`
+
+**Arquivos:** `analise-engine.js`, `academia-controller.js`
+
+**Risco:** Baixo. O comportamento muda apenas para textos explicitamente reconhecidos como poesia.
+
 ### S1 — ✅ Dark mode: `.soneto-a/b/c/d` — ENTREGUE v468
 
 ### S2 — Dark mode: `.academy-book-cover` não adapta em scriptorium

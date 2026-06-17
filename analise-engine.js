@@ -290,9 +290,10 @@
 
   // ── MÉTRICAS: ECONOMIA ────────────────────────────────────────────────────
 
-  function analisarEconomia(texto, frases, totalPalavras) {
+  function analisarEconomia(texto, frases, totalPalavras, contexto = {}) {
     const palavras = tokenizarPalavras(texto);
     const lower = texto.toLowerCase();
+    const skipPleonasmos = Boolean(contexto.skipPleonasmos);
 
     // 1. Adverbios -mente
     const adverbios = palavras.filter(p => normalizar(p).endsWith("mente"));
@@ -303,7 +304,9 @@
     const propPassiva = frases.length > 0 ? passiva.length / frases.length : 0;
 
     // 3. Redundância / pleonasmos
-    const redEncontradas = PLEONASMOS.filter(([p]) => lower.includes(p.toLowerCase())).map(([p]) => p);
+    const redEncontradas = skipPleonasmos
+      ? []
+      : PLEONASMOS.filter(([p]) => lower.includes(p.toLowerCase())).map(([p]) => p);
 
     // 4. Negação dupla/indireta
     const negacoes = [];
@@ -415,9 +418,9 @@
 
   // ── MÉTRICAS: VOZ ─────────────────────────────────────────────────────────
 
-  function analisarVoz(texto) {
+  function analisarVoz(texto, contexto = {}) {
     const lower = texto.toLowerCase();
-    const encontrados = CLIQUES_PT.filter(c => lower.includes(c));
+    const encontrados = (contexto.skipCliches ? [] : CLIQUES_PT.filter(c => lower.includes(c)));
     return {
       cliches: { ocorrencias: encontrados.length, lista: encontrados.slice(0, 10) },
     };
@@ -528,10 +531,23 @@
 
   // ── ANÁLISE PRINCIPAL ─────────────────────────────────────────────────────
 
-  function analisar(texto) {
+  function inferirContextoAnalise(options = {}) {
+    const formato = `${options.formato || options.editorMode || options.oficio || options.kind || options.type || ""}`.toLowerCase();
+    const poesia = options.poesia === true || /poema|poesia|soneto|slam|haiku|cordel|verso/.test(formato);
+
+    return {
+      formato,
+      poesia,
+      skipPleonasmos: poesia,
+      skipCliches: poesia,
+    };
+  }
+
+  function analisar(texto, options = {}) {
     if (!texto || !texto.trim()) return null;
     if (contarPalavras(texto) < 30) return null;
 
+    const contexto = inferirContextoAnalise(options);
     const frases = tokenizarFrases(texto.trim());
     const totalPalavras = contarPalavras(texto);
     const totalFrases = frases.length;
@@ -553,10 +569,10 @@
         fleschBR: flesch,
         fleschLabel: flesch >= 80 ? "Fácil" : flesch >= 60 ? "Moderado" : flesch >= 40 ? "Denso" : flesch >= 20 ? "Muito denso" : "Extremamente denso",
       },
-      economia:  analisarEconomia(texto, frases, totalPalavras),
+      economia:  analisarEconomia(texto, frases, totalPalavras, contexto),
       clareza:   analisarClareza(frases, totalPalavras),
       ritmo:     analisarRitmo(texto, frases),
-      voz:       analisarVoz(texto),
+      voz:       analisarVoz(texto, contexto),
       estrutura: analisarEstrutura(texto, frases, totalPalavras),
       pov:       analisarPov(frases),
       lexico:    analisarLexico(texto, totalPalavras),

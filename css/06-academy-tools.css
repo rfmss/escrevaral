@@ -66,6 +66,35 @@
   max-width: 560px;
   line-height: 1.6;
 }
+.academy-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.academy-banner-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--primary);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
+}
+.academy-banner-action:hover {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+}
+.academy-banner-action .material-symbols-outlined {
+  font-size: 18px;
+}
 .academy-resume-link {
   display: inline-flex;
   align-items: center;
@@ -144,6 +173,25 @@
 }
 .academy-leitura > .eyebrow {
   margin-bottom: 14px;
+}
+
+.academy-section-intro {
+  margin: 38px 0 14px;
+  max-width: 760px;
+}
+.academy-section-intro h3 {
+  margin: 4px 0 8px;
+  color: var(--ink);
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.2;
+  font-weight: 700;
+}
+.academy-section-intro p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 /* ── ACADEMIA — FERRAMENTAS EM TABS (CSS puro) ── */
