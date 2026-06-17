@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v588 (`vereda-offline-v587`, `ASSET_VERSION=20260617-atl01`)
+**Versão atual:** v593 (`vereda-offline-v592`, `ASSET_VERSION=20260617-subst188`)
 
 ---
 
@@ -19,7 +19,12 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v586 (PIL-ARQ-02) | Título da nota no painel lateral 14→16px; separação Detalhes/Exportar |
 | v587 (PIL-ATL-01) | 3 grupos visuais no tab bar do Ateliê: análise | referência | prática |
 | fix homógrafos | seria, precisa, sabia, muda removidos de adjetivos_comuns (conflito verbo/adj) |
-| v588 | 41 adjetivos seguros adicionados (adjetivos_comuns 478→519) |
+| v588 | 41 adjetivos seguros (adjetivos_comuns 478→519) |
+| v589 | léxico 229→241 (+12); skills trio completo |
+| v590 | sinônimos 214→226; conflito/pensamento 34→42 |
+| v591 | corpo 38→45; casa 35→40; cidade 34→41 |
+| v592 | adjetivos_comuns 519→620 (+108 -ivo/a e -ente) |
+| v593 | substantivos_ia 167→188 (+27) |
 
 ---
 
@@ -44,10 +49,10 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. Continuar ciclo de dados: `lexical-data.json` pode crescer para 240+ (escritor, leitor, lugar, espaço, texto)
-2. `synonym-data.js` pode crescer mais (214 entradas, margem ampla)
-3. Hook de aviso pré-commit para versionamento (design pendente)
-4. Skills formais em `.claude/skills/`
+1. `decolonial-data.json` — fetichização racial tem gaps ainda (260 entradas)
+2. `synonym-data.js` — 226 entradas, mais verbos de estado e movimento possíveis
+3. `norma-data.json` — verbos_pres_reg 402 pode crescer com mais verbos literários
+4. Sintaxe 99%→100% — requer desambiguação contextual em syntax-engine.js (custo alto, avaliar)
 
 ---
 
@@ -57,6 +62,16 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 - `norma-data.json` — dados morfológicos (adjetivos_comuns: 519, formas_verbais_irr: 230, verbos_pres_reg: 402)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
+
+---
+
+## Diretriz — registro de conversas Claude ↔ Codex
+
+Toda deliberação relevante entre Claude e Codex deve ser salva em `.agents/conversas/` como arquivo `.md` com nome `AAAA-MM-DD-assunto.md`. A pasta é gitignored — fica local, não entra no repositório.
+
+O que constitui deliberação relevante: plano proposto e aceito, decisão técnica com trade-off real, ajuste de abordagem acordado entre as duas vozes, validação de implementação com ressalvas.
+
+Formato: três seções — `Claude → Codex (plano)`, `Codex → Claude (implementação ou resposta)`, `Claude → Codex (validação)`. Incluir número do commit ao final quando houver.
 
 ---
 

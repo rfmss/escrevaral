@@ -68,6 +68,40 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v589→v593)
+
+**Baseline:** v593 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v589→v593):**
+
+- `.claude/skills/`: trio completo — `preparar-release`, `auditar-homografos`, `qa-overflow`
+- `lexical-data.json` (v589): 229→241 (+12: irmão, amigo, inimigo, vizinho, feira, varanda, revelação, escolha, testemunha, imaginar, perceber, ruído)
+- `synonym-data.js` (v590): 214→226 (+12: sorrir, suspirar, tremer, buscar, cuidar, preso, vivo, envelhecer, mostrar, ocultar, mentir, confessar)
+- `voice-engine.js` (v590): conflito 34→42, pensamento 34→42 (+8 cada)
+- `voice-engine.js` (v591): corpo 38→45, casa 35→40, cidade 34→41 (+7/+5/+7)
+- `norma-data.json` (v592): adjetivos_comuns 519→620 (+108 formas -ivo/a e -ente seguras)
+- `norma-data.json` (v593): substantivos_ia 167→188 (+27: apostaisa, aristocracia, consciência, distopia, experiência, transparência…)
+
+**Estado atualizado dos engines (v593):**
+
+| Área / engine | Maturidade | Notas de estado (v593) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 315; PLEONASMOS 131; SUBSTANTIVOS_VAGOS +7 |
+| Espelho de Voz | **100%** | corpo 45, casa 40, natureza 45, cidade 41, conflito 42, pensamento 42 |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos |
+| Lexico / Biblioteca | **100%** | 241 entradas; sinônimos 226 |
+| Decolonial / vocabulário | **100%** | 260 entradas; 9 categorias |
+| Sintaxe | **99%** | adjetivos_comuns 620; verbos_pres_reg 402; formas_verbais_irr 230; substantivos_ia 188 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: decolonial-data.json pode crescer mais (fetichização racial ainda tem gaps)
+3. **Sinônimos**: 226 entradas — margem para mais verbos de estado e movimento
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v580→v584)
 
 **Baseline:** v584 — Sintaxe 99%; todos os outros engines em 100%.
