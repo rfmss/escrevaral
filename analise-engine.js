@@ -539,6 +539,30 @@
     ["soluçar em soluços","soluçar"],["chorar em lágrimas","chorar"],
     ["rir às gargalhadas","rir"],["sussurrar em voz baixa","sussurrar"],
     ["berrar em voz alta","berrar"],["gritar em alto e bom som","gritar"],
+    // linguagem corporativa redundante
+    ["trabalho em equipe colaborativo","trabalho em equipe"],
+    ["estratégia planejada com antecedência","estratégia planejada"],
+    ["meta a ser alcançada","meta"],["objetivo a ser atingido","objetivo"],
+    ["resultado esperado e almejado","resultado esperado"],
+    ["processo contínuo e permanente","processo contínuo"],
+    ["reunião de alinhamento conjunto","reunião de alinhamento"],
+    ["feedback de retorno","feedback"],["follow-up de acompanhamento","acompanhamento"],
+    // linguagem acadêmica redundante
+    ["hipótese a ser testada e verificada","hipótese a ser testada"],
+    ["metodologia e método de pesquisa","metodologia"],
+    ["resultados e conclusões obtidas","conclusões"],
+    ["referencial teórico bibliográfico","referencial teórico"],
+    ["estudo de caso individual","estudo de caso"],
+    // linguagem jurídica e burocrática
+    ["lavrar o auto e ato","lavrar o auto"],
+    ["processo e procedimento legal","processo legal"],
+    ["notificar e comunicar formalmente","notificar"],
+    ["decisão judicial proferida pelo juiz","decisão judicial"],
+    // linguagem de saúde e psicologia
+    ["crise aguda e intensa","crise aguda"],
+    ["trauma psicológico emocional","trauma psicológico"],
+    ["comportamento padrão habitual","comportamento habitual"],
+    ["sintoma indicativo de sinal","sintoma"],
   ];
 
   const NEGACOES_DUPLAS = [
