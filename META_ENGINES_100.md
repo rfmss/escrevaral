@@ -68,35 +68,41 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v549)
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v553)
 
-**Baseline:** v549 — Sintaxe 97%; todos os outros engines em 99–100%.
+**Baseline:** v553 — Sintaxe 97%; Tema 100%; todos os outros engines em 100%.
 
-**O que foi entregue neste ciclo (v547→v549) — expansão massiva de norma-data.json:**
+**O que foi entregue neste ciclo (v547→v553):**
 
-- `norma-data.json` (v547): `verbos_pres_reg` 203→240 (+37 formas: passa/passam/passo, chama, leva, torna, traz/trazem, bebe, resolve, recebe, segue/sigo, escolhe, exige, aceita, perde, corre, cresce, sofre, etc.)
-- `norma-data.json` (v548): `adjetivos_comuns` 216→271 (+55 adjetivos: triste, alegre, nervoso, ansioso, cansado, satisfeito, frustrado, envergonhado, assustado, gordo, magro, errado, justo, injusto, preso, seco, úmido, mole, rude, gentil, honesto, falso, leal, traidor, humilde, arrogante, solidário, egoísta, etc.)
-- `norma-data.json` (v549): `formas_verbais_irr` 135→201 (+66 formas fundamentais: estava, tinha, vou, era, disse, seja, estou, vamos, fazemos, podemos, queremos, sabemos, temos, vieram, etc.)
+- `norma-data.json` (v547): `verbos_pres_reg` 203→240 (+37 formas: passa, chama, leva, torna, traz, bebe, resolve, recebe, segue, etc.)
+- `norma-data.json` (v548): `adjetivos_comuns` 216→271 (+55 adjetivos de estado, traço, qualidade e social)
+- `norma-data.json` (v549): `formas_verbais_irr` 135→201 (+66 formas de ser/estar/ter/ir/vir/fazer/poder/querer/saber/dizer/trazer/pôr/dar)
+- `synonym-data.js` (v550): 130→145 (+15: temer, ler, construir, destruir, mudar, aprender, ensinar, dormir, feliz, livre, ódio, alegria, tristeza, mundo, céu)
+- `css/03-inspector-precision.css` (v551): dark mode para syntax-tokens (sujeito/verbo/objeto/adjunto/predicativo/vocativo/aposto) nos 4 temas escuros
+- `css/02-shell-navigation.css` (v552): dark mode para cores de ofício (roteiro/poesia/não-ficção/vestibular/comercial) na Nova Nota — --craft mais claro
+- `css/03-editor-toolbar.css` (v553): dark mode para gramática colorida (11 classes gw-*: verbo, substantivo, adjetivo, pronome, artigo, preposição, conjunção, advérbio, numeral, interjeição, próprio)
 
-**Revisão de maturidade — Sintaxe 95% → 97%:** três expansões consecutivas de norma-data cobrem lacunas morfológicas principais: verbos regulares no presente, adjetivos de estado/traço/qualidade, formas irregulares de ser/estar/ter/ir/vir/fazer/poder/querer/saber/dizer/trazer/pôr/dar.
+**Revisão de maturidade:**
+- **Sintaxe 95% → 97%**: expansão morfológica massiva de norma-data (verbos_pres_reg/adjetivos_comuns/formas_verbais_irr)
+- **Tema 99% → 100%**: grammar coloring, syntax-tokens e craft icons finalmente cobertos nos 4 temas escuros
 
-**Estado atualizado dos engines (v549):**
+**Estado atualizado dos engines (v553):**
 
-| Área / engine | Maturidade | Notas de estado (v549) |
+| Área / engine | Maturidade | Notas de estado (v553) |
 |---|---:|---|
-| Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia; bordas fechadas |
+| Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia |
 | Espelho de Voz | **100%** | inferVoiceCtx(): spots silenciados em poesia/roteiro |
-| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos |
-| Lexico / Biblioteca | **100%** | 200 entradas; ritmo, desejo, resistir, povo, multidão, Pantanal |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos de seção |
+| Lexico / Biblioteca | **100%** | 200 entradas; sinônimos 145 entradas |
 | Decolonial / vocabulário | **100%** | 239 entradas; tribo, bicha, palavra de negro, evolução das raças |
 | Sintaxe | **97%** | verbos_pres_reg 240; adjetivos_comuns 271; formas_verbais_irr 201 |
-| Tema Alvorada / Vereda | **99%** | auditados: cronograma, paginação, mode-switcher, Ateliê — todos OK via tokens |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons, reader-overlay, soneto, mark — todos cobertos |
 
 **Próximas fronteiras:**
 
-1. **Sintaxe 97% → 99%**: desambiguação por janela de contexto (palavra entre artigo+verbo) — custo alto, requer mudança em syntax-engine.js
-2. **Tema 99% → 100%**: verificar components específicos em dark mode (mode-switcher, cronograma headers)
-3. **Manutenção**: nenhum engine abaixo de 97% — sessões futuras podem focar em produto/UX
+1. **Sintaxe 97% → 99%**: desambiguação por janela de contexto — requer mudança em syntax-engine.js (custo alto)
+2. **Dados**: analise-data.json (stopwords 117) e analise-engine.js (CLIQUES_PT/PLEONASMOS) podem crescer
+3. **Produto/UX**: sessões futuras podem focar em fluxos de produto com todos engines em 97–100%
 
 ---
 
