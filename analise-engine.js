@@ -385,6 +385,24 @@
     "a casa tinha vida própria","algo não estava certo","as sombras se moviam",
     "o barulho vinha de baixo","não olhei para trás","o espelho mostrou o que não devia",
     "os olhos seguiam todos os movimentos","o silêncio era ensurdecedor",
+    // clichês de literatura espiritualista e de autoconhecimento brasileiro
+    "o universo conspirou","a energia estava diferente","abriu um portal para mim",
+    "eu me curei","a espiritualidade me guiou","o universo me mandou um sinal",
+    "foi a vontade de Deus","tudo tem um propósito maior","entrei em contato comigo mesmo",
+    "me libertei dos laços do passado","minha cura interior","encontrei minha verdade",
+    // clichês de literatura de mercado e negócios
+    "a startup que mudou o setor","construí do zero","fracassei para aprender",
+    "o empreendedor resiliente","saí da zona de conforto","reinventei o modelo",
+    "pense fora da caixa","o mindset do sucesso","trabalhe enquanto eles dormem",
+    // clichês de romance contemporâneo e new adult
+    "ele não era para ela","ela resistiu mas cedeu","um amor proibido",
+    "a química entre eles era impossível de ignorar","seus olhos se encontraram",
+    "ela nunca tinha sentido isso antes","ele era diferente de todos os outros",
+    "a distância entre eles cresceu","ela sabia que estava apaixonada",
+    // clichês de reconto de conto de fadas
+    "era uma princesa diferente das outras","quebrou a maldição com um beijo",
+    "o vilão tinha uma razão para ser assim","o herói era o menos esperado",
+    "no final, o amor verdadeiro venceu tudo","e eles viveram para contar",
   ];
 
   const PLEONASMOS = [
