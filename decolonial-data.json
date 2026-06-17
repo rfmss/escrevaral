@@ -4436,6 +4436,150 @@
       "reason": "criminaliza o território em vez de nomear as causas da violência",
       "context": "sociologia, urbanismo, segurança pública",
       "contextual": true
+    },
+    {
+      "avoid": "mulher guerreira",
+      "alternatives": [
+        "mulher com agência",
+        "personagem feminina complexa",
+        "protagonista feminina com força própria"
+      ],
+      "category": "genero",
+      "reason": "estereótipo de empoderamento que reduz complexidade feminina a uma única faceta heroica",
+      "context": "literatura, mídia, ficção",
+      "contextual": true
+    },
+    {
+      "avoid": "instinto materno",
+      "alternatives": [
+        "cuidado aprendido",
+        "vínculo afetivo com filhos",
+        "maternidade como construção social"
+      ],
+      "category": "genero",
+      "reason": "naturaliza a maternidade como obrigação biológica universal das mulheres",
+      "context": "biologia, psicologia, sociologia",
+      "contextual": false
+    },
+    {
+      "avoid": "feminicídio como crime passional",
+      "alternatives": [
+        "feminicídio",
+        "assassinato de mulher por questão de gênero",
+        "violência letal contra mulher"
+      ],
+      "category": "genero",
+      "reason": "minimiza o crime e o enquadra como ato emocional, excluindo a dimensão política do machismo",
+      "context": "jornalismo, direito, sociologia",
+      "contextual": false
+    },
+    {
+      "avoid": "gênero como ideologia",
+      "alternatives": [
+        "gênero como construção social",
+        "estudos de gênero",
+        "diversidade de gênero"
+      ],
+      "category": "genero",
+      "reason": "expressão pejorativa usada para deslegitimar pesquisas e políticas de gênero",
+      "context": "educação, política, cultura",
+      "contextual": false
+    },
+    {
+      "avoid": "mulher como musa",
+      "alternatives": [
+        "mulher como criadora",
+        "artista mulher",
+        "produtora de arte"
+      ],
+      "category": "genero",
+      "reason": "reduz a mulher a objeto de inspiração, apagando sua posição como criadora",
+      "context": "arte, literatura, cultura",
+      "contextual": true
+    },
+    {
+      "avoid": "vítima de abuso sexual como culpada",
+      "alternatives": [
+        "sobrevivente de violência sexual",
+        "pessoa que sofreu abuso",
+        "vítima de crime sexual"
+      ],
+      "category": "genero",
+      "reason": "reforça a cultura do estupro ao imputar responsabilidade à vítima",
+      "context": "jornalismo, direito, saúde",
+      "contextual": false
+    },
+    {
+      "avoid": "sapatão como insulto",
+      "alternatives": [
+        "lésbica",
+        "mulher homoafetiva",
+        "mulher que se relaciona com mulheres"
+      ],
+      "category": "genero",
+      "reason": "usado historicamente como xingamento; ressignificado por algumas lésbicas mas ainda ofensivo em muitos contextos",
+      "context": "linguagem, LGBTfobia",
+      "contextual": true
+    },
+    {
+      "avoid": "deficiente mental",
+      "alternatives": [
+        "pessoa com deficiência intelectual",
+        "pessoa com transtorno cognitivo",
+        "pessoa com DI"
+      ],
+      "category": "deficiencia",
+      "reason": "terminologia desatualizada e estigmatizante; substituto correto é deficiência intelectual",
+      "context": "saúde, educação, direito",
+      "contextual": false
+    },
+    {
+      "avoid": "pessoa especial",
+      "alternatives": [
+        "pessoa com deficiência",
+        "pessoa com necessidades específicas",
+        "PCD"
+      ],
+      "category": "deficiencia",
+      "reason": "eufemismo que infantiliza e apaga o reconhecimento político da deficiência como categoria social",
+      "context": "linguagem, direito, saúde",
+      "contextual": false
+    },
+    {
+      "avoid": "louco de pedágio",
+      "alternatives": [
+        "pessoa com transtorno mental",
+        "pessoa em crise psiquiátrica",
+        "pessoa com saúde mental comprometida"
+      ],
+      "category": "deficiencia",
+      "reason": "expressão pejorativa que criminaliza e estigmatiza pessoas com transtornos mentais",
+      "context": "linguagem, saúde mental, cultura",
+      "contextual": false
+    },
+    {
+      "avoid": "autista genial",
+      "alternatives": [
+        "pessoa autista",
+        "autista com talentos específicos",
+        "pessoa no espectro autista"
+      ],
+      "category": "deficiencia",
+      "reason": "estereótipo que reduz autismo a genialidade, ignorando a diversidade do espectro",
+      "context": "saúde, mídia, literatura",
+      "contextual": true
+    },
+    {
+      "avoid": "esquizofrênico perigoso",
+      "alternatives": [
+        "pessoa com esquizofrenia",
+        "pessoa com transtorno psicótico",
+        "pessoa com diagnóstico de esquizofrenia"
+      ],
+      "category": "deficiencia",
+      "reason": "associação indevida entre esquizofrenia e periculosidade reforça estigma sem base clínica",
+      "context": "saúde, mídia, jornalismo",
+      "contextual": false
     }
   ]
 }
