@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v580→v584)
+
+**Baseline:** v584 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v580→v584):**
+
+- `norma-data.json` (v580): adjetivos_comuns 398→482 (+84: ansioso/a, cauteloso/a, corajoso/a, culpado/a, enorme, esquecido/a, ilustre, impossível, inseguro/a, inteiro/a, irônico/a, justo/a, leve, livre, melancólico/a, nervoso/a, paciente, péssimo/a, preciso/a, raro/a, rico/a, sábio/a, sereno/a, sombrio/a, terrível, típico/a, único/a, amargo/a)
+- `lexical-data.json` (v581): 219→229 (+10: pranto, alegria, destino, imagem, limite, prisão, raça, fé, dúvida, conquista — com notas literárias)
+- `decolonial-data.json` (v582): 254→260 (+6: beleza exótica, mulata, cabelo ruim, pele cor de chocolate, índio, selvagem)
+- `voice-engine.js` (v583): natureza 35→45, memoria 29→36 (+17: cachoeira, lagoa, onça, arara, ipê, neblina, orvalho, maré, onda, areia; antepassado, genealogia, vestígio, retrato, álbum, relíquia, bilhete)
+- `synonym-data.js` (v584): 204→214 (+10: julgar, criticar, elogiar, comparar, escolher, recusar; criar, mudar, destruir, salvar)
+
+**Revisão de maturidade:**
+- **Sintaxe 99%**: adjetivos_comuns 482 (+84) — cobertura de quase todos os adjetivos literários comuns
+- **Lexico/Biblioteca 100%**: 229 entradas e sinônimos 214 — vocabulário literário muito abrangente
+- **Decolonial 100%**: 260 entradas com fetichização racial, etarismo e gordofobia cobertos
+- **Espelho de Voz 100%**: natureza e memoria com maior riqueza de termos brasileiros
+
+**Estado atualizado dos engines (v584):**
+
+| Área / engine | Maturidade | Notas de estado (v584) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 315; PLEONASMOS 131; SUBSTANTIVOS_VAGOS +7 |
+| Espelho de Voz | **100%** | emotion lexicons 38 cada; stopwords 215; natureza 45; memoria 36 |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos |
+| Lexico / Biblioteca | **100%** | 229 entradas literárias; sinônimos 214 entradas |
+| Decolonial / vocabulário | **100%** | 260 entradas; 9 categorias: fetichização, etarismo, gordofobia cobertos |
+| Sintaxe | **99%** | verbos_pres_reg 402; adjetivos_comuns 482; formas_verbais_irr 230; substantivos_ia 167 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js
+2. **Dados**: lexical-data.json pode chegar a 240+ (lugar, espaço, escritor, leitor, texto)
+3. **Voz**: campos semânticos "conflito" e "pensamento" podem ganhar mais termos
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v570→v579)
 
 **Baseline:** v579 — Sintaxe 99%; todos os outros engines em 100%.
