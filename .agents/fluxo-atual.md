@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v665 (`vereda-offline-v665`, `ASSET_VERSION=20260617-vrb1031`)
+**Versão atual:** v676 (`vereda-offline-v676`, `ASSET_VERSION=20260617-sin432`)
 
 ---
 
@@ -96,6 +96,17 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v663 | PLEONASMOS 232→260 (+28: tempo, localização, jornalísticos, escrita criativa) |
 | v664 | formas_verbais_irr 783→886 (+103: CONSTRUIR/INCLUIR/CAIR/SAIR/COBRIR/REPOR/COMPOR…) |
 | v665 | verbos_pres_reg 945→1031 (+86: aguarda, contempla, fascina, lamenta, vibra…) |
+| v666 | decolonial 332→342 (+10: homem de bem, menor carente, mercado negro, portador…) |
+| v667 | léxico 322→332 (+10: decepção, alívio, ternura, tédio, ambição, ressentimento…) |
+| v668 | formas_verbais_irr 886→961 (+75: SERVIR/CONSEGUIR/MANTER/CONTER/OBTER/DETER/PREVER…) |
+| v669 | sinônimos 400→416 (+16: rastro, eco, ruína, perceber, imaginar, decidir, abandonar…) |
+| v670 | adjetivos_comuns 1213→1237 (+24: ansioso, nostálgico, admissível, franzino, abusivo…) |
+| v671 | verbos_pres_reg 1031→1101 (+70: angustia, confunde, atravessa, captura, foge, sobe…) |
+| v672 | voice-engine conflito 50→60, pensamento 50→60 (+20 termos literários) |
+| v673 | formas_verbais_irr 961→1074 (+113: ESCREVER/VIVER/ERGUER/CRER/ADERIR/PREFERIR/REFERIR…) |
+| v674 | CLIQUES_PT 612→645 (+33: não-ficção, crônica política, testemunho, terror/suspense) |
+| v675 | léxico 334→345 (+11: clarão, rito, precipício, pertença, testemunho, urgência…) |
+| v676 | sinônimos 416→432 (+16: breve, longo, gritar, sussurrar, honesto, instante, amanhecer…) |
 
 ---
 
@@ -130,7 +141,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1213, formas_verbais_irr: 886, verbos_pres_reg: 1031)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1237, formas_verbais_irr: 1074, verbos_pres_reg: 1101)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
