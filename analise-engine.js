@@ -424,6 +424,22 @@
     "cada cidade era um novo começo","viajou para se encontrar",
     "o destino reservava surpresas","a jornada o transformou",
     "entre uma cidade e outra perdeu a conta","voltou diferente de quando partiu",
+    // clichês de literatura infantojuvenil e young adult
+    "era diferente dos outros da sua idade","nunca se encaixou em lugar nenhum",
+    "descobriu um poder que não sabia ter","o mundo era maior do que parecia",
+    "o amor mudou tudo","ficou mais forte depois do sofrimento",
+    "aprendeu quem eram seus verdadeiros amigos","a família era onde o coração estava",
+    "escolheu o caminho certo no final","cresceu mais do que esperava",
+    // clichês de ficção histórica
+    "era uma época de grandes transformações","o mundo estava prestes a mudar para sempre",
+    "homens de honra não fugiam de seus deveres","a guerra revelou quem eram de verdade",
+    "o passado nunca morreu completamente","a história se repetia",
+    "eram tempos sombrios e incertos","quem sobrevivesse contaria a história",
+    // clichês de narrativa policial e noir
+    "a cidade escondia seus pecados","as ruas contavam histórias",
+    "a verdade sempre vem à tona","todo criminoso comete um erro",
+    "seguiu o dinheiro e encontrou a resposta","era mais simples do que parecia no começo",
+    "os inocentes pagavam pelos crimes dos culpados","confiou em quem não devia",
   ];
 
   const PLEONASMOS = [
@@ -620,6 +636,20 @@
     ["céu azul e claro","céu claro"],["noite escura e sombria","noite sombria"],
     ["sol brilhante e quente","sol brilhante"],["chuva fria e gelada","chuva gelada"],
     ["vento suave e leve","vento suave"],["mar azul e profundo","mar profundo"],
+    // redundâncias de narrativa e composição literária
+    ["história e narrativa contada","narrativa"],["personagem e figura fictícia","personagem"],
+    ["enredo e trama da história","trama"],["capítulo e seção do livro","capítulo"],
+    ["prologo e introdução inicial","prólogo"],["epílogo e conclusão final","epílogo"],
+    ["flashback e cena do passado","flashback"],["narrador e voz que conta","narrador"],
+    // redundâncias de tempo e sequência
+    ["início e começo","início"],["final e desfecho","desfecho"],
+    ["meio e parte central","parte central"],["antes e anteriormente","antes"],
+    ["depois e posteriormente","depois"],["durante e ao longo de","durante"],
+    ["primeiro e inicialmente","primeiro"],["último e definitivo","último"],
+    // redundâncias de processo e resultado
+    ["processo e procedimento de trabalho","processo"],["método e metodologia adotada","metodologia"],
+    ["resultado e consequência obtida","resultado"],["impacto e efeito produzido","impacto"],
+    ["mudança e transformação realizada","transformação"],["evolução e progresso alcançado","evolução"],
   ];
 
   const NEGACOES_DUPLAS = [
