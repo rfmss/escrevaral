@@ -286,6 +286,12 @@
     "tinha","tinham","toda","todas","todo","todos","tu","tua","tuas","teu","teus",
     "um","uma","uns","umas","voce","voces","vos","ser","ter","haver","estar","fazer",
     "sendo","tendo","havendo","estando","fazendo","indo",
+    "tudo","nada","algo","alguem","ninguem","si","mim","ti",
+    "vai","vao","vem","vou","iam","ia","vamos","veio","vim",
+    "estou","esta","estao","estava","estavam","estive","estiveram",
+    "fica","ficam","fico","ficava","ficaram","ficou",
+    "proprio","propria","proprios","proprias",
+    "assim","logo","entao","portanto","porem","todavia","contudo",
   ]);
 
   // ── MÉTRICAS: ECONOMIA ────────────────────────────────────────────────────
