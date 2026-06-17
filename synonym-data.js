@@ -712,6 +712,40 @@
     // est
     "bonito":      ["belo", "formoso", "gracioso", "atraente", "esplêndido", "encantador"],
 
+    // ─── VERBOS DE AVALIAÇÃO E JULGAMENTO ────────────────────────────────────
+
+    // est
+    "julgar":      ["avaliar", "apreciar", "ponderar", "arbitrar", "sentenciar", "condenar"],
+
+    // est
+    "criticar":    ["censurar", "reprovar", "questionar", "contestar", "refutar", "objetar"],
+
+    // est
+    "elogiar":     ["louvar", "enaltecer", "exaltar", "aplaudir", "encomiar", "valorizar"],
+
+    // est
+    "comparar":    ["confrontar", "cotejar", "contrastar", "equiparar", "ponderar", "medir"],
+
+    // est
+    "escolher":    ["selecionar", "optar", "preferir", "eleger", "designar", "adotar"],
+
+    // est
+    "recusar":     ["rejeitar", "negar", "declinar", "repudiar", "excluir", "vetar"],
+
+    // ─── VERBOS DE CRIAÇÃO E TRANSFORMAÇÃO ───────────────────────────────────
+
+    // est
+    "criar":       ["gerar", "produzir", "fabricar", "compor", "inventar", "elaborar"],
+
+    // est
+    "mudar":       ["transformar", "alterar", "modificar", "converter", "metamorfosear", "reformar"],
+
+    // est
+    "destruir":    ["demolir", "arrasar", "aniquilar", "arruinar", "devastar", "exterminar"],
+
+    // est
+    "salvar":      ["resgatar", "preservar", "libertar", "proteger", "recuperar", "livrar"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
