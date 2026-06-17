@@ -1037,6 +1037,28 @@
     "perdido":     ["desorientado", "extraviado", "confuso", "sem rumo", "errante", "vagante", "adrift"],
     "forte":       ["poderoso", "robusto", "vigoroso", "resistente", "firme", "sólido", "incansável"],
 
+    // adjetivos de tempo e duração
+    "breve":       ["rápido", "curto", "fugaz", "passageiro", "transitório", "efêmero", "momentâneo"],
+    "longo":       ["extenso", "demorado", "prolongado", "duradouro", "amplo", "vasto", "distante"],
+    "antigo":      ["velho", "arcaico", "ancestral", "remoto", "histórico", "longínquo", "precedente"],
+    "recente":     ["novo", "atual", "moderno", "contemporâneo", "fresco", "último", "próximo"],
+    // verbos de comunicação e narração
+    "gritar":      ["bradar", "berrar", "vociferar", "clamar", "exclamar", "esbravear", "rugir"],
+    "sussurrar":   ["murmurar", "cochichar", "segredar", "balbuciar", "soprar", "mussitar"],
+    "calar":       ["silenciar", "emudecer", "calar-se", "sufocar", "reprimir", "abafar", "segurar"],
+    "mentir":      ["enganar", "iludir", "fabulosear", "fingir", "dissimular", "inventar", "falsear"],
+    // adjetivos de caráter moral
+    "honesto":     ["íntegro", "leal", "verdadeiro", "transparente", "reto", "justo", "sincero"],
+    "covarde":     ["medroso", "tímido", "fraco", "pusilânime", "receoso", "hesitante", "apavorado"],
+    // verbos de movimento e espaço
+    "escalar":     ["subir", "trepar", "galgar", "alçar", "ascender", "superar", "vencer"],
+    "afundar":     ["submergir", "mergulhar", "naufragar", "soçobrar", "ceder", "sucumbir", "imergir"],
+    // substantivos de tempo
+    "instante":    ["momento", "segundo", "átimo", "fração", "flash", "brevidade", "instantâneo"],
+    "eternidade":  ["infinito", "perpetuidade", "permanência", "imortalidade", "sempre", "perene"],
+    "amanhecer":   ["aurora", "alvorecer", "madrugada", "alvorada", "raiar", "romper do dia"],
+    "anoitecer":   ["crepúsculo", "entardecer", "poente", "pôr do sol", "penumbra", "ocaso"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
