@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v652 (`vereda-offline-v652`, `ASSET_VERSION=20260617-irr703`)
+**Versão atual:** v658 (`vereda-offline-v658`, `ASSET_VERSION=20260617-dec332`)
 
 ---
 
@@ -83,6 +83,12 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v650 | adjetivos_comuns 1056→1134 (+78: ambicioso, delicioso, maravilhoso, saudoso…) |
 | v651 | léxico 317→322 (+5: textura, claridade, gesto, sussurro, riso) |
 | v652 | formas_verbais_irr 653→703 (+50: ESTAR/HAVER/REQUERER/MEDIR) |
+| v653 | CLIQUES_PT 549→579 (+30: regionalista, resistência, policial, crônica urbana) |
+| v654 | sinônimos 373→385 (+12: saudade, ciúme, pertencimento, renascer, sombrio…) |
+| v655 | formas_verbais_irr 703→783 (+80: CONDUZIR/REDUZIR/SEDUZIR/INTERVIR/PROVIR) |
+| v656 | adjetivos_comuns 1134→1175 (+41: -ante/-ente: arrebatante, fascinante, pulsante…) |
+| v657 | verbos_pres_reg 872→945 (+73: abala, agita, ancora, fala, freia, liberta…) |
+| v658 | decolonial 322→332 (+10: civilizar, povo sem história, louco perigoso, ignorância…) |
 
 ---
 
@@ -117,7 +123,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1134, formas_verbais_irr: 703, verbos_pres_reg: 872)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1175, formas_verbais_irr: 783, verbos_pres_reg: 945)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
