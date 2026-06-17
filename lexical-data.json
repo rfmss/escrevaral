@@ -1853,6 +1853,54 @@
       "className": "lex-identidade",
       "field": "narrativa",
       "note": "antagonista, malfeitor, oponente moral"
+    },
+    "fardo": {
+      "label": "fardo",
+      "className": "lex-abstracto",
+      "field": "existência",
+      "note": "peso, encargo, responsabilidade que sufoca"
+    },
+    "ciclo": {
+      "label": "ciclo",
+      "className": "lex-abstracto",
+      "field": "tempo",
+      "note": "repetição, etapa, fase que se encerra e recomeça"
+    },
+    "pacto": {
+      "label": "pacto",
+      "className": "lex-abstracto",
+      "field": "relações",
+      "note": "acordo, aliança, compromisso — verbal ou silencioso"
+    },
+    "rastro": {
+      "label": "rastro",
+      "className": "lex-espaco",
+      "field": "movimento",
+      "note": "vestígio, marca deixada pelo que passou"
+    },
+    "tecido": {
+      "label": "tecido",
+      "className": "lex-objetos",
+      "field": "metáfora",
+      "note": "estrutura entrelaçada — de pano, de narrativa, de relações"
+    },
+    "trama": {
+      "label": "trama",
+      "className": "lex-abstracto",
+      "field": "narrativa",
+      "note": "enredo, conspiração, entrelaçamento de fios"
+    },
+    "vigilia": {
+      "label": "vigília",
+      "className": "lex-abstracto",
+      "field": "tempo",
+      "note": "estado de alerta, noite sem sono, guarda junto ao moribundo"
+    },
+    "cinzas": {
+      "label": "cinzas",
+      "className": "lex-natureza",
+      "field": "transformação",
+      "note": "restos do fogo, destruição e possibilidade de renascimento"
     }
   },
   "functionWords": {
