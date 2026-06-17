@@ -68,6 +68,41 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v557→v560)
+
+**Baseline:** v560 — Sintaxe 98%; Tema 100%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v557→v560):**
+
+- `analise-engine.js` (v557): PLEONASMOS 72→101 (+29 redundâncias brasileiras: pequenos detalhes, totalmente completo, pensar mentalmente, fato real, a nível de, novidade nova, hábito costumeiro, etc.)
+- `analise-engine.js` (v558): SUBSTANTIVOS_VAGOS +7 (sistema, estrutura, característica, instrumento, pressuposto, vertente, viés)
+- `voice-engine.js` (v559): campos semânticos corpo/casa/memória/pensamento/cidade/sobrenatural +4-6 termos cada
+- `voice-engine.js` (v560): lexicons de emoção melancolia/tensão/luminosidade/contemplação/ternura +2-4 termos cada (melancolia 33, tensão 32, luminosidade 32, contemplação 32, ternura 32)
+
+**Revisão de maturidade:**
+- **Analise geral**: PLEONASMOS 101 reduz falsos negativos em redundâncias sutis; SUBSTANTIVOS_VAGOS mais abrangente
+- **Espelho de Voz**: campos semânticos e lexicons emocionais mais densos → gestos detectados com mais precisão em textos curtos
+
+**Estado atualizado dos engines (v560):**
+
+| Área / engine | Maturidade | Notas de estado (v560) |
+|---|---:|---|
+| Analise geral | **100%** | PLEONASMOS 101; SUBSTANTIVOS_VAGOS +7; STOPWORDS expandido; inferirContextoAnalise() |
+| Espelho de Voz | **100%** | campos semânticos expandidos; lexicons emoção 32-33 termos; stopwords +40 |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos de seção |
+| Lexico / Biblioteca | **100%** | 200 entradas; sinônimos 145 entradas |
+| Decolonial / vocabulário | **100%** | 239 entradas |
+| Sintaxe | **98%** | verbos_pres_reg 240; adjetivos_comuns 271; formas_verbais_irr 201; _SUFIXOS_NOM +4 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons, reader-overlay, soneto, mark — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 98% → 99%**: desambiguação contextual — requer mudança em syntax-engine.js (custo alto, análise por janela)
+2. **Analise/Voz**: CLIQUES_PT (209 entradas) pode crescer com clichês literários específicos — baixo custo
+3. **Sinônimos**: synonym-data.js (145 entradas) pode receber verbos e substantivos literários comuns — baixo custo
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v556)
 
 **Baseline:** v556 — Sintaxe 98%; Tema 100%; todos os outros engines em 100%.

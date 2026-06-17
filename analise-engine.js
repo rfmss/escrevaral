@@ -163,6 +163,32 @@
     // mais clichês acadêmicos e de ensaio escolar
     "desde tempos imemoriais","em pleno século xxi","desde os primórdios",
     "tecido social","na esteira de","à guisa de","em sede de",
+    // clichês de narrativa e drama sentimental
+    "não era mais o mesmo","nunca mais foi o mesmo","tudo havia mudado",
+    "nada mais seria como antes","o mundo jamais seria o mesmo",
+    "sentiu o peso do mundo","o peso dos anos","o peso do passado",
+    "foi como se o chão sumisse","o chão sumiu sob seus pés",
+    "o coração partido","coração em pedaços","coração aos cacos",
+    "uma voz dentro dela","uma voz dentro dele","uma voz interior",
+    "fez de tudo para não chorar","lutou para não chorar","segurou as lágrimas",
+    "olhos marejaram","olhos marejados","olhos rasos d'água",
+    "respirou fundo","tomou um fôlego","coletou os pensamentos",
+    // clichês de thriller e suspense
+    "estava sendo observado","tinha a sensação de ser seguido",
+    "algo estava errado","alguma coisa estava errada","presentiu o perigo",
+    "na calada da noite","sob o manto da noite","coberto pela escuridão",
+    "ninguém ouviria seu grito","ninguém poderia ouvi-la","gritou mas ninguém ouviu",
+    "era tarde demais","já era tarde demais","quando percebeu já era tarde",
+    // clichês de fantasia e ficção especulativa
+    "o escolhido","a escolhida","ela era a prometida","ele era o prometido",
+    "estava destinada a","estava destinado a","seu destino era",
+    "o bem contra o mal","a luta entre o bem e o mal","forças do mal",
+    "magia antiga","poder ancestral","segredo antigo","saber ancestral",
+    // clichês de redação e texto argumentativo
+    "é necessário que a sociedade","faz-se urgente que","é dever do estado",
+    "para que isso seja possível","para que tal seja possível",
+    "é fundamental que","é primordial que","é essencial que se",
+    "olhando pelo retrovisor da história","ao longo dos séculos",
   ];
 
   const PLEONASMOS = [

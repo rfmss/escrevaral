@@ -515,6 +515,72 @@
     // est
     "céu":         ["firmamento", "abóbada", "éter", "azul", "empíreo", "infinito"],
 
+    // ─── VERBOS FÍSICOS E COTIDIANOS ─────────────────────────────────────────
+
+    // Nascentes: "Cair, Despencar, Tombar — Tombar é cair de lado; Despencar é cair de cima"
+    "cair":        ["tombar", "despencar", "desabar", "ruir", "pender", "vergar"],
+
+    // est
+    "erguer":      ["levantar", "alçar", "içar", "elevar", "soerguer", "enrijecer"],
+
+    // Nascentes: "Dar é entregar voluntariamente; Oferecer é apresentar para que se aceite"
+    "dar":         ["oferecer", "entregar", "conceder", "outorgar", "ceder", "presentear"],
+
+    // est
+    "tomar":       ["pegar", "apanhar", "agarrar", "apropriar-se", "colher", "receber"],
+
+    // est
+    "pedir":       ["solicitar", "requisitar", "rogar", "implorar", "suplicar", "reclamar"],
+
+    // Nascentes: "Nascer é vir ao mundo; Surgir é aparecer de repente"
+    "nascer":      ["surgir", "brotar", "emergir", "vir ao mundo", "originar-se", "germinar"],
+
+    // Nascentes: "Falecer é morrer, mas com maior delicadeza; Perecer é morrer de modo violento"
+    "morrer":      ["falecer", "perecer", "sucumbir", "extinguir-se", "expirar", "finar-se"],
+
+    // Nascentes: "Existir é o mais geral; Viver é existir com vida; Subsistir é persistir na existência"
+    "viver":       ["existir", "subsistir", "habitar", "residir", "permanecer", "durar"],
+
+    // est
+    "tocar":       ["tangenciar", "roçar", "acariciar", "tatear", "contatar", "afagar"],
+
+    // est
+    "abrir":       ["escancarar", "entreabrir", "destapar", "descerrar", "romper", "rasgar"],
+
+    // ─── SUBSTANTIVOS LITERÁRIOS ESSENCIAIS ──────────────────────────────────
+
+    // est
+    "tempo":       ["instante", "momento", "época", "era", "período", "duração"],
+
+    // Nascentes: "Luz, Claridade — Claridade é qualidade do que é claro; Luz é o agente que ilumina"
+    "luz":         ["claridade", "brilho", "luminosidade", "fulgor", "radiance", "clarão"],
+
+    // est
+    "sombra":      ["escuridão", "penumbra", "trevas", "negrume", "obscuridade", "breu"],
+
+    // est
+    "silêncio":    ["quietude", "mutismo", "calmaria", "inércia", "sossegow", "paz"],
+
+    // Nascentes: "Medo, Pavor, Terror — Terror é o medo mais intenso e paralisante"
+    "medo":        ["pavor", "terror", "temor", "pânico", "susto", "apreensão"],
+
+    // est
+    "sangue":      ["gore", "hemoglobina", "veias", "vida", "linhagem", "corrente"],
+
+    // Nascentes: "Vento, Brisa, Rajada — Brisa é suave; Rajada é violenta e passageira"
+    "vento":       ["brisa", "rajada", "ventania", "sopro", "aragem", "furacão"],
+
+    // ─── ADJETIVOS LITERÁRIOS ESSENCIAIS ─────────────────────────────────────
+
+    // est
+    "velho":       ["antigo", "ancião", "envelhecido", "decrépito", "caduco", "remoto"],
+
+    // est
+    "escuro":      ["tenebroso", "lúgubre", "sombrio", "negro", "opaco", "disforme"],
+
+    // est
+    "sozinho":     ["solitário", "isolado", "só", "desamparado", "abandonado", "único"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
