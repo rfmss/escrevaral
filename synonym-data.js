@@ -1015,6 +1015,28 @@
     "chegar":      ["alcançar", "atingir", "aportar", "desembarcar", "comparecer", "surgir", "aparecer"],
     "permanecer":  ["ficar", "continuar", "persistir", "durar", "resistir", "manter", "subsistir", "perdurar"],
 
+    // substantivos de experiência e memória
+    "rastro":      ["marca", "vestígio", "traço", "indício", "pista", "sinal", "trilha", "impressão"],
+    "eco":         ["ressonância", "reverberação", "reflexo", "rumor", "sombra", "lembrança", "repetição"],
+    "ruína":       ["destroço", "resto", "fragmento", "escombro", "vestígio", "decadência", "carcaça"],
+    "origem":      ["nascedouro", "berço", "raiz", "começo", "início", "fonte", "princípio", "causa"],
+    // verbos de percepção
+    "perceber":    ["notar", "sentir", "captar", "detectar", "intuir", "reconhecer", "distinguir", "observar"],
+    "imaginar":    ["fantasiar", "sonhar", "supor", "conceber", "inventar", "criar", "presumir", "projetar"],
+    "lembrar":     ["recordar", "rememorar", "evocar", "relembrar", "recuperar", "trazer à mente", "reviver"],
+    // adjetivos de luz e sombra
+    "escuro":      ["sombrio", "tenebroso", "negro", "obscuro", "lúgubre", "opaco", "denso", "nublado"],
+    "suave":       ["leve", "macio", "delicado", "tênue", "gentil", "brando", "manso", "discreto"],
+    "vivo":        ["animado", "ativo", "vibrante", "exuberante", "pulsante", "intenso", "ardente", "aceso"],
+    // verbos de conflito e decisão
+    "decidir":     ["resolver", "optar", "escolher", "determinar", "concluir", "assentar", "firmar", "definir"],
+    "abandonar":   ["largar", "deixar", "desistir", "ceder", "renunciar", "desamparar", "soltar", "partir"],
+    "lutar":       ["combater", "brigar", "disputar", "resistir", "enfrentar", "batalhar", "guerrear", "contender"],
+    "vencer":      ["superar", "derrotar", "triunfar", "conquistar", "ganhar", "ultrapassar", "dominar"],
+    // estados de personagem
+    "perdido":     ["desorientado", "extraviado", "confuso", "sem rumo", "errante", "vagante", "adrift"],
+    "forte":       ["poderoso", "robusto", "vigoroso", "resistente", "firme", "sólido", "incansável"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
