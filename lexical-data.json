@@ -1109,6 +1109,96 @@
       "className": "Substantivo masculino",
       "field": "Sentido — gustativo, memória involuntária",
       "note": "A memória gustativa ativa o corpo inteiro. Um sabor específico vale mais do que uma cena de flashback explicado."
+    },
+    "ritmo": {
+      "label": "ritmo",
+      "className": "Substantivo masculino",
+      "field": "Linguagem — tempo, cadência, música interna",
+      "note": "O ritmo da prosa aparece mesmo quando não há verso. Frases curtas criam urgência; frases longas criam contemplação. Drummond e João Cabral constroem significado pela cadência."
+    },
+    "pausa": {
+      "label": "pausa",
+      "className": "Substantivo feminino",
+      "field": "Linguagem — silêncio ativo, respiração, suspense",
+      "note": "O silêncio entre as palavras também é texto. Uma pausa no diálogo carrega mais do que a fala que a precede."
+    },
+    "eco": {
+      "label": "eco",
+      "className": "Substantivo masculino",
+      "field": "Linguagem — repetição, ressonância, memória sonora",
+      "note": "O eco de uma palavra no mesmo texto cria parentesco entre cenas. João Guimarães Rosa usa isso deliberadamente para tecer o universo do sertão."
+    },
+    "povo": {
+      "label": "povo",
+      "className": "Substantivo masculino",
+      "field": "Coletivo — voz, pertencimento, sujeito político",
+      "note": "Quando o narrador fala pelo povo, corre o risco de falar por ele. A literatura que dá voz ao povo precisa primeiro dar voz a pessoas concretas — como faz Carolina Maria de Jesus."
+    },
+    "geracao": {
+      "label": "geração",
+      "className": "Substantivo feminino",
+      "field": "Tempo — transmissão, herança, ruptura",
+      "note": "Conecta passado e futuro através de quem vive o presente. Uma palavra que carrega o peso da herança e o peso da expectativa ao mesmo tempo."
+    },
+    "desejo": {
+      "label": "desejo",
+      "className": "Substantivo masculino",
+      "field": "Emoção — querer, falta, movimento em direção ao outro",
+      "note": "O desejo move personagens. Em Clarice Lispector, é frequentemente desejo de ser outra coisa — não de ter, mas de transformar-se."
+    },
+    "angustia": {
+      "label": "angústia",
+      "className": "Substantivo feminino",
+      "field": "Emoção — aperto sem causa clara, ansiedade existencial",
+      "note": "Diferente do medo (que tem objeto), a angústia não sabe para onde olhar. Presente em Graciliano Ramos como estado permanente dos personagens sob opressão."
+    },
+    "gratidao": {
+      "label": "gratidão",
+      "className": "Substantivo feminino",
+      "field": "Emoção — reconhecimento, dívida afetiva",
+      "note": "Emoção subutilizada na ficção. Quando aparece genuína, cria vínculo entre personagens mais forte do que amor romântico."
+    },
+    "resistir": {
+      "label": "resistir",
+      "className": "Verbo intransitivo",
+      "field": "Ação — não ceder, persistir, contrapor-se",
+      "note": "Na literatura brasileira contemporânea, resistir tem dimensão política e corporal. Evaristo, Conceição, Djanira — o verbo anda junto com o sujeito que persiste."
+    },
+    "construir": {
+      "label": "construir",
+      "className": "Verbo transitivo",
+      "field": "Ação — criar estrutura, dar forma ao futuro",
+      "note": "Palavra de esperança concreta. Carrega peso físico — construir com mãos, com sacrifício — diferente de 'imaginar' ou 'sonhar'."
+    },
+    "inveja": {
+      "label": "inveja",
+      "className": "Substantivo feminino",
+      "field": "Emoção — desejo do que é do outro, ressentimento",
+      "note": "Emoção que raramente se admite na ficção. Em Machado de Assis, opera por baixo das motivações declaradas dos personagens."
+    },
+    "liberdade": {
+      "label": "liberdade",
+      "className": "Substantivo feminino",
+      "field": "Conceito — ausência de coerção, possibilidade aberta",
+      "note": "Palavra que precisa de concretude para funcionar na ficção. Liberdade para fazer o quê? Para quem? O abstrato vira potente quando ganha cena específica."
+    },
+    "multidao": {
+      "label": "multidão",
+      "className": "Substantivo feminino",
+      "field": "Coletivo — anonimato, força, presença de massa",
+      "note": "A multidão apaga o indivíduo ou revela o que só aparece no coletivo. Lima Barreto usou a rua e a multidão como espaço de crítica social."
+    },
+    "pantanal": {
+      "label": "Pantanal",
+      "className": "Substantivo próprio",
+      "field": "Espaço — bioma, fronteira, diversidade, ciclo das águas",
+      "note": "Bioma de ciclos extremos: seca e cheia. Na ficção, o Pantanal sugere transformação cíclica e coexistência entre opostos — como em Manoel de Barros."
+    },
+    "ombro": {
+      "label": "ombro",
+      "className": "Substantivo masculino",
+      "field": "Corpo — suporte, carga, gesto de amparo",
+      "note": "Parte do corpo que carrega e que ampara. Um personagem que coloca a mão no ombro do outro cria gesto de solidariedade sem precisar de palavras."
     }
   },
   "functionWords": {
