@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v691 (`vereda-offline-v691`, `ASSET_VERSION=20260617-voice691`)
+**Versão atual:** v705 (`vereda-offline-v705`, `ASSET_VERSION=20260617-dec383`)
 
 ---
 
@@ -122,6 +122,20 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v689 | sinônimos 448→466 (+18: ansioso, orgulhoso, julgar, rebelião, revolução, ampliar…) |
 | v690 | verbos_pres_reg 1259→1331 (+72: compõe, esculpe, fotografa, apura, investiga, explica…) |
 | v691 | voice-engine corpo 53→65, sobrenatural 48→60 (+12+12: garganta, entranhas, espasmo, curupira, encosto…) |
+| v692 | formas_verbais_irr 1268→1343 (+75: subjuntivo, PÔR, GERIR, VESTIR, DIVERTIR, ELEGER…) |
+| v693 | sinônimos 466→486 (+20: gemer, contemplar, jornada, caos, vitória, prisão, fraqueza…) |
+| v694 | adjetivos_comuns 1332→1368 (+36: glorioso, misterioso, silencioso, tenebroso, admirável…) |
+| v695 | CLIQUES_PT 681→715, PLEONASMOS 282→305 (+34+23: terror, formação, FC, viagem, emoções) |
+| v696 | verbos_pres_reg 1331→1413 (+82: cozinha, examina, transmite, floresce, programa, legisla…) |
+| v697 | léxico 360→376 (+16: clímax, epifania, analepse, prolepse, catarse, ironia, hipérbole…) |
+| v698 | decolonial 353→368 (+15: filtro bolha, nativos digitais, meritocracia digital, exótico…) |
+| v699 | adjetivos_comuns 1368→1428 (+60: curioso, furioso, deslumbrante, fascinante, encantante…) |
+| v700 | formas_verbais_irr 1343→1445 (+102: subjuntivos de MORRER, SENTIR, FAZER, QUERER, SER…) |
+| v701 | sinônimos 486→508 (+22: descrever, questionar, persuadir, celebrar, conectar, recuperar…) |
+| v702 | léxico 376→391 (+15: aliteração, sinestesia, metonímia, paradoxo, antítese, oxímoro…) |
+| v703 | verbos_pres_reg 1413→1514 (+101: medita, postula, angustia, improvisa, lidera, pesquisa…) |
+| v704 | sinônimos 508→532 (+24: comprometer, falhar, culpar, avançar, prender, escapar, negar…) |
+| v705 | decolonial 368→383 (+15: relação abusiva, família desestruturada, terra de ninguém, favelização…) |
 
 ---
 
@@ -156,8 +170,11 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1332, formas_verbais_irr: 1268, verbos_pres_reg: 1331)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1428, formas_verbais_irr: 1445, verbos_pres_reg: 1514)
 - `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
+- `synonym-data.js` — 532 entradas
+- `lexical-data.json` — 391 entradas
+- `decolonial-data.json` — 383 entradas; 9 categorias
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
