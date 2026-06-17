@@ -121,15 +121,15 @@ Fonte:
 
 Status:
 
-- pronto para execução
+- **encerrada** (v585, 2026-06-17)
+
+Resultado:
+
+- 3 strips (Fixados, Em andamento, Recentes) substituídas por 1 bloco "Retomar agora" com máx. 3 itens; prioridade: ativo > fixado > recente; auditoria visual confirmou renderização correta
 
 Dono temporário:
 
 - frontend de superfície + arquitetura de informação
-
-Critério de parada:
-
-- quando o topo do `Arquivo` parar de duplicar o grid e a rodada seguinte já passar a ser refinamento, não correção
 
 ### PIL-ATL-01 — Taxonomia interna do Ateliê
 
@@ -164,20 +164,19 @@ Objetivo:
 
 - reduzir custo cognitivo entre nome da aba e nome da área
 
-Problema atual:
-
-- a nave principal fala `Arquivo`
-- a tela fala `Acervo`
-
 Status:
 
-- depende de decisão de produto
+- **encerrada** (2026-06-17, verificado por auditoria visual)
+
+Resultado:
+
+- nav e tela já dizem "Acervo"; `data-view-target="arquivo"` é identificador técnico interno, não visível; divergência não existia na interface
 
 Dono temporário:
 
 - direção de produto
 
-### PIL-ARQ-02 — Painel lateral do Arquivo como inspector real
+### PIL-ARQ-02 — Painel lateral do Acervo como inspector real
 
 Objetivo:
 
@@ -190,7 +189,7 @@ Possível melhoria:
 
 Status:
 
-- aguardar depois de `PIL-ARQ-01`
+- **pronto para execução**
 
 Dono temporário:
 

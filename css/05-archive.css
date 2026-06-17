@@ -976,3 +976,7 @@
 .archive-details-section .archive-export-actions {
   padding-bottom: 8px;
 }
+
+.archive-details-section + .archive-details-section {
+  margin-top: 20px;
+}
