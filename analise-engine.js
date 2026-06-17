@@ -237,6 +237,33 @@
     "lembro como se fosse hoje","como se tivesse acontecido ontem",
     "nunca esquecerei aquele dia","aquele dia ficou gravado na memória",
     "foi naquele momento que tudo mudou","foi aí que minha vida mudou",
+    // clichês de linguagem motivacional e autoajuda
+    "sair da zona de conforto","se desafiar a cada dia","no final do dia",
+    "ao final do dia","a jornada é o destino","não desista dos seus sonhos",
+    "acredite no seu potencial","transforme seu sonho em realidade",
+    "cada dia é uma nova oportunidade","sucesso não vem por acaso",
+    "ir além dos limites","o limite é a sua mente","quem planta colhe",
+    "foco, força e fé","sonho grande","sonhos não têm prazo de validade",
+    "se não você quem","batalhar todos os dias","conquistar o mundo",
+    "de dentro para fora","trabalhe em silêncio e deixe o sucesso fazer barulho",
+    // clichês de crônica e texto jornalístico brasileiro
+    "cidadão de bem","trabalhador honesto","povo brasileiro",
+    "país de contrastes","o brasileiro é resiliente","na terra do carnaval",
+    "somos um povo caloroso","a realidade brasileira",
+    "em um país de tantas desigualdades","não é simples assim",
+    "é mais complexo do que parece","como todos sabemos",
+    "não é novidade para ninguém","o cotidiano do brasileiro",
+    // clichês de linguagem corporal estereotipada
+    "cerrou o maxilar","apertou os punhos","bateu a porta com força",
+    "não olhou para trás","desapareceu na multidão",
+    "engoliu a dor em silêncio","carregava o peso sozinho",
+    "era forte por fora mas por dentro","nunca mostrava fraqueza",
+    // clichês de paisagem e natureza descritiva
+    "o sol se punha no horizonte","o horizonte se pintou de vermelho",
+    "as estrelas cintilavam no céu","a lua cheia iluminava",
+    "o vento sussurrava entre as folhas","as folhas tremiam ao vento",
+    "o rio corria manso","o silêncio da floresta",
+    "a natureza parecia cúmplice","o pôr do sol pintou o céu",
   ];
 
   const PLEONASMOS = [
