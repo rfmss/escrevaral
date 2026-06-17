@@ -196,3 +196,16 @@ decolonial-engine.js, precision-engine.js, proof-engine.js
 - Não fazer push sem pedido explícito
 - Não quebrar o estado do localStorage (estrutura em `state-store.js`)
 - Não alterar `templates-data.json` sem pedido — tem 63 templates calibrados
+
+---
+
+## Compact Instructions
+
+Ao compactar, preservar obrigatoriamente:
+
+1. **Pasta oficial:** `/home/rafamass/escrevaral/` — ignorar `/home/rafamass/Veredav3/`
+2. **Versionamento:** toda edição JS/CSS exige bump de `?v=YYYYMMDD-slug` em `index.html` (71 ocorrências) + `ASSET_VERSION` + `CACHE_NAME` em `service-worker.js`
+3. **Pilares inegociáveis:** português brasileiro integral; sem rolagem horizontal; metáforas silenciosas; localStorage intacto
+4. **Vocabulário:** Manuscrito não Texto; Acervo não repositório; Guia de escrita não template
+5. **Autorização corrente:** push em `main` autorizado; ciclo autônomo ativo até limite de tokens
+6. **Próximo foco:** estado das pílulas em `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md`
