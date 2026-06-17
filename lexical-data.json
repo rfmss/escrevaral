@@ -1199,6 +1199,66 @@
       "className": "Substantivo masculino",
       "field": "Corpo — suporte, carga, gesto de amparo",
       "note": "Parte do corpo que carrega e que ampara. Um personagem que coloca a mão no ombro do outro cria gesto de solidariedade sem precisar de palavras."
+    },
+    "abandono": {
+      "label": "abandono",
+      "className": "Substantivo masculino",
+      "field": "Afeto — ruptura de vínculo, solidão que não foi escolhida",
+      "note": "Diferente de solidão (que pode ser buscada) — abandono é deixado para trás. Em Clarice Lispector, o abandono percorre A Hora da Estrela inteira. Em narrativas de migração nordestina, é o que fica no olhar de quem não pôde partir. Use quando o texto trata da ausência como ato de outra pessoa, não como escolha própria."
+    },
+    "filho": {
+      "label": "filho",
+      "className": "Substantivo",
+      "field": "Relação — continuidade, responsabilidade, a criança que herda o que o adulto carrega",
+      "note": "Em Guimarães Rosa (Campo Geral), a infância de Miguilim é a do filho que vê o que os adultos já não conseguem ver. Em Carolina de Jesus, é razão de viver enquanto tudo falta. Em ficção contemporânea, o filho pode ser o personagem que desnuda o mundo adulto sem saber que o faz. Não use para completar cenas — use quando a relação pais-filhos for o núcleo do conflito."
+    },
+    "pai": {
+      "label": "pai",
+      "className": "Substantivo masculino",
+      "field": "Relação — autoridade, herança emocional, o que o texto carrega sem nomear",
+      "note": "Em Carlos Drummond de Andrade (No Meio do Caminho), o pai não aparece mas organiza o poema. Em Raduan Nassar (Lavoura Arcaica), é símbolo de lei e ruptura ao mesmo tempo. Quando o pai está ausente, o texto pode ser sobre essa ausência sem nomeá-la. Evite o pai como função dramática genérica — escreva o que ele especificamente deixou ou recusou passar adiante."
+    },
+    "guerra": {
+      "label": "guerra",
+      "className": "Substantivo feminino",
+      "field": "Conflito — destruição coletiva, o que nenhum lado vence, cicatriz que dura gerações",
+      "note": "Na literatura brasileira, guerra raramente é front de batalha — é chacina, é coronelismo, é violência estrutural. Em Euclides da Cunha (Os Sertões), a guerra de Canudos é o texto que divide o Brasil em dois. Evite guerra como pano de fundo genérico; use quando o conflito coletivo muda o que o personagem pode ou não pode ser."
+    },
+    "jornada": {
+      "label": "jornada",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — deslocamento com transformação, o caminho que muda quem o percorre",
+      "note": "Toda jornada literária eficaz inclui o ponto sem retorno — o momento em que o personagem já não pode voltar ao que era. Em Grande Sertão: Veredas, a jornada é geográfica e interior ao mesmo tempo. Cuidado com a palavra em si: 'jornada' pode soar genérica. Prefira mostrar o que o caminho custou ao personagem."
+    },
+    "derrota": {
+      "label": "derrota",
+      "className": "Substantivo feminino",
+      "field": "Conflito — fracasso que ensina, o que o personagem aprende quando não vence",
+      "note": "Personagem derrotado que entende a derrota é diferente de personagem derrotado que só sofre. Em João Guimarães Rosa, a derrota de Riobaldo é também descoberta. Em romances de formação brasileiros, a derrota abre espaço para a maturidade. Evite a derrota como punição moral — escreva o que ela revela, não o que ela castiga."
+    },
+    "poder": {
+      "label": "poder",
+      "className": "Substantivo masculino",
+      "field": "Conflito — capacidade de agir, de impor, de resistir; o que organiza as relações sociais",
+      "note": "Em Machado de Assis, o poder é sempre oblíquo: quem tem, dissimula; quem não tem, finye ter. Em literatura de periferia contemporânea, poder é o que o personagem busca para não ser mais objeto do outro. Use quando o texto quer mapear quem pode fazer o quê — e por quê."
+    },
+    "heranca": {
+      "label": "herança",
+      "className": "Substantivo feminino",
+      "field": "Tempo — o que passa de geração a geração, incluindo traumas e silêncios",
+      "note": "Herança não é só bens materiais: pode ser trauma, modo de amar, língua, silêncio. Em Conceição Evaristo (Becos da Memória), a herança da escravidão é presente vivo. Em ficção de família, o conflito muitas vezes é sobre o que se herda sem pedir. Use quando o passado de uma geração mais velha estrutura o presente do protagonista."
+    },
+    "decisao": {
+      "label": "decisão",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — ponto de virada, o momento em que o personagem se torna agente",
+      "note": "A decisão é o momento em que o personagem deixa de ser passivo. Em Graciliano Ramos (Vidas Secas), Fabiano decide partir — e essa decisão muda o sentido de tudo que veio antes. Uma decisão dramática funciona melhor quando o texto mostrou o custo de cada opção antes de o personagem escolher. Evite decisões repentinas sem preparação — o leitor precisa entender o que estava em jogo."
+    },
+    "boca": {
+      "label": "boca",
+      "className": "Substantivo feminino",
+      "field": "Corpo — fala, silêncio, desejo, o que entra e o que sai do corpo",
+      "note": "Boca que fala e boca que cala são personagens diferentes. Em Cora Coralina, a boca da velha que conta histórias é o arquivo vivo da cidade de Goiás. Em ficção erótica ou de desejo, a boca pode carregar toda a tensão sem precisar nomear o que a personagem quer. Use quando o texto gira em torno do que pode ou não ser dito, ou do que o corpo revela pela abertura da voz."
     }
   },
   "functionWords": {
