@@ -3394,6 +3394,118 @@
       "reason": "Criminaliza o território como inteiro, ignorando que é a falta de Estado que cria risco — não as pessoas que habitam o local.",
       "context": "Texto sobre segurança pública, ficção urbana",
       "contextual": false
+    },
+    {
+      "avoid": "algoritmo neutro",
+      "alternatives": [
+        "sistema algorítmico com vieses implícitos",
+        "tecnologia que reproduz padrões históricos"
+      ],
+      "category": "linguagem",
+      "reason": "Algoritmos refletem os dados com que foram treinados — dados históricos carregam desigualdades. Tratar algoritmos como neutros invisibiliza os danos que produzem.",
+      "context": "Texto sobre tecnologia, IA, plataformas digitais",
+      "contextual": false
+    },
+    {
+      "avoid": "fake news",
+      "alternatives": [
+        "desinformação",
+        "notícia falsa",
+        "conteúdo enganoso"
+      ],
+      "category": "linguagem",
+      "reason": "Além de ser estrangeirismo evitável, 'fake news' foi usado politicamente para desacreditar jornalismo legítimo — o termo carrega esse histórico no Brasil.",
+      "context": "Texto jornalístico, político, educativo",
+      "contextual": true
+    },
+    {
+      "avoid": "vocabulário técnico como autoridade",
+      "alternatives": [
+        "linguagem acessível com precisão técnica quando necessária"
+      ],
+      "category": "linguagem",
+      "reason": "Usar jargão técnico sem necessidade pode servir para excluir, não para esclarecer — especialmente quando o assunto tem impacto direto sobre quem não domina o vocabulário.",
+      "context": "Texto de divulgação, jornalismo, texto argumentativo",
+      "contextual": true
+    },
+    {
+      "avoid": "senso comum como inferior",
+      "alternatives": [
+        "conhecimento popular",
+        "saber acumulado",
+        "experiência prática"
+      ],
+      "category": "conhecimento",
+      "reason": "Opor 'senso comum' a 'conhecimento científico' como hierarquia desqualifica saberes que têm valor real, especialmente os de populações historicamente excluídas da academia.",
+      "context": "Texto educativo, ensaio, jornalismo",
+      "contextual": true
+    },
+    {
+      "avoid": "descoberta científica como verdade absoluta",
+      "alternatives": [
+        "resultado de pesquisa",
+        "evidência atual",
+        "achado que pode ser revisado"
+      ],
+      "category": "conhecimento",
+      "reason": "A ciência é processo, não dogma. Apresentar resultados científicos como verdade final fecha o debate e mimetiza o mesmo problema que critica no fundamentalismo.",
+      "context": "Texto de divulgação científica, jornalismo",
+      "contextual": true
+    },
+    {
+      "avoid": "lugar de fala como censura",
+      "alternatives": [
+        "ponto de vista situado",
+        "perspectiva baseada em experiência vivida"
+      ],
+      "category": "relacoes",
+      "reason": "'Lugar de fala' descreve como o posicionamento social afeta o que se vê e diz — não é mecanismo de censura, mas de reconhecimento de diferença epistêmica.",
+      "context": "Texto de opinião, debate público, ficção",
+      "contextual": true
+    },
+    {
+      "avoid": "vitimismo",
+      "alternatives": [
+        "relato de experiência de discriminação",
+        "denúncia de violência estrutural"
+      ],
+      "category": "relacoes",
+      "reason": "Chamar de 'vitimismo' o relato de desigualdades reais é uma maneira de desacreditar quem sofre discriminação sem examinar a discriminação em si.",
+      "context": "Texto político, narrativa, debate",
+      "contextual": false
+    },
+    {
+      "avoid": "trabalhadores informais como irregulares",
+      "alternatives": [
+        "trabalhadores sem vínculo formal",
+        "trabalhadores autônomos ou precarizados"
+      ],
+      "category": "classe",
+      "reason": "Chamar trabalho informal de 'irregular' criminaliza uma forma de sobrevivência de milhões de brasileiros que o mercado formal não absorve.",
+      "context": "Texto sobre economia, trabalho, política social",
+      "contextual": false
+    },
+    {
+      "avoid": "aculturação como progresso",
+      "alternatives": [
+        "mudança cultural induzida",
+        "imposição de padrões culturais dominantes"
+      ],
+      "category": "povos",
+      "reason": "Aculturação força povos a abandonar sua cultura de origem — chamá-la de 'progresso' naturaliza a violência cultural do processo.",
+      "context": "Texto histórico, antropológico, narrativa sobre povos indígenas",
+      "contextual": false
+    },
+    {
+      "avoid": "cultura pop como rasa",
+      "alternatives": [
+        "cultura de massa",
+        "produção cultural amplamente consumida"
+      ],
+      "category": "estetica",
+      "reason": "Hierarquizar arte popular como 'rasa' reproduz elitismo cultural que associa valor estético a acesso — quem produz e consome cultura pop tem experiência válida.",
+      "context": "Crítica cultural, texto de opinião, narrativa",
+      "contextual": true
     }
   ]
 }
