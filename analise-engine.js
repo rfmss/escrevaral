@@ -86,6 +86,13 @@
     "objetivo","objetivos",
     "desafio","desafios",
     "abordagem","abordagens",
+    "sistema","sistemas",
+    "estrutura","estruturas",
+    "caracteristica","caracteristicas",
+    "instrumento","instrumentos",
+    "pressuposto","pressupostos",
+    "vertente","vertentes",
+    "viés","vis",
   ]);
 
   const CLIQUES_PT = [
