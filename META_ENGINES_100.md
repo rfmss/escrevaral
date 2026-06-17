@@ -68,38 +68,53 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v598→v604)
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v628→v636)
 
-**Baseline:** v604 — Sintaxe 99%; todos os outros engines em 100%.
+**Baseline:** v636 — Sintaxe 99%; todos os outros engines em 100%.
 
-**O que foi entregue neste ciclo (v606→v613):**
+**O que foi entregue neste ciclo (v629→v636):**
 
-- `decolonial-data.json` (v606): 273→281 (+8 classe e território: minoria econômica ativa, meritocracia, Brasil profundo, fronteira como vazio…)
-- `analise-engine.js` (v607): PLEONASMOS 163→183 (+20 redundâncias literárias: falar verbalmente, único e exclusivo, começo e início, velho veterano…)
-- `lexical-data.json` (v608): 253→265 (+12: avó, justiça, ler, escrever, nascimento, praia, irmã, neve, estrada, cantar, bairro, pesadelo)
-- `synonym-data.js` (v609): 240→254 (+14: branco, negro, começar, ceder, confiar, desistir, tentar, conseguir, intenso, calado, libertar, vencer, guardar, roubar)
-- `norma-data.json` (v610): adjetivos_comuns 758→821 (+63 seguros: -oso/a, -ável/-ível, -ente, -ivo/a)
-- `norma-data.json` (v611): verbos_pres_reg 571→616 (+45 formas literárias: afasta, apresenta, celebra, desenvolve, inicia, nomeia…)
-- `analise-engine.js` (v612): CLIQUES_PT 379→433 (+54: motivacional, crônica brasileira, linguagem corporal, paisagem)
-- `voice-engine.js` (v613): campos semânticos +48 (corpo 45→53, casa 40→48, natureza 45→53, conflito 42→50, pensamento 42→50, cidade 41→49)
+- `norma-data.json` (v629): adjetivos_comuns 930→969 (+39: criminoso, famoso, grandioso, religioso, sigiloso, impressionante, turbulente…)
+- `analise-engine.js` (v630): CLIQUES_PT 474→519 (+45: thriller, diálogo, fantasia, ficção científica, personagem sábio, cenário urbano)
+- `synonym-data.js` (v631): 318→340 (+22: sentimentos — curiosidade, tédio, inveja, solidão, serenidade; ações — fugir, lutar, revelar, criar)
+- `lexical-data.json` (v632): 295→309 (+12: herói, vilão, labirinto, mentira, presença, voo, muro, trilha, sinal, espanto, mudança, prazer)
+- `decolonial-data.json` (v633): 305→315 (+10: índio preguiçoso, povos primitivos, homossexualismo, escolha sexual, classe baixa, língua pura…)
+- `analise-engine.js` (v634): PLEONASMOS 198→214 (+16: subir para cima, resultado final, opinião pessoal, experiência vivida, ganho obtido…)
+- `norma-data.json` (v635): verbos_pres_reg 697→743 (+46: analisa, critica, flui, mergulha, tensiona, visa, questiona, sintetiza…)
+- `norma-data.json` (v636): formas_verbais_irr 454→509 (+55: QUERER, PODER, SABER, TRAZER, DIZER, CABER — pres/imp/pret/subj)
 
-**Estado atualizado dos engines (v622):**
+**Estado atualizado dos engines (v636):**
 
-| Área / engine | Maturidade | Notas de estado (v622) |
+| Área / engine | Maturidade | Notas de estado (v636) |
 |---|---:|---|
-| Analise geral | **100%** | CLIQUES_PT 433; PLEONASMOS 198 |
+| Analise geral | **100%** | CLIQUES_PT 519; PLEONASMOS 214 |
 | Espelho de Voz | **100%** | corpo 53, casa 48, natureza 53, cidade 49, conflito 50, pensamento 50 |
 | RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
-| Lexico / Biblioteca | **100%** | 289 entradas; sinônimos 282 |
-| Decolonial / vocabulário | **100%** | 295 entradas; 9 categorias equilibradas |
-| Sintaxe | **99%** | adjetivos_comuns 930; verbos_pres_reg 697; formas_verbais_irr 343; substantivos_ia 225 |
+| Lexico / Biblioteca | **100%** | 309 entradas; sinônimos 340 |
+| Decolonial / vocabulário | **100%** | 315 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 969; verbos_pres_reg 743; formas_verbais_irr 509; substantivos_ia 225 |
 | Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
 
 **Próximas fronteiras:**
 
 1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
-2. **Dados**: todos os grandes arrays cresceram — margem ainda existe em CLIQUES_PT, léxico e sinônimos
-3. **Decolonial**: pode crescer além de 300 em áreas emergentes (IA, desinformação, preconceito algorítmico)
+2. **Dados**: sinônimos podem crescer mais (340 → 360+); lexical pode chegar a 320+
+3. **Decolonial**: pode crescer além de 320 em áreas emergentes (IA, desinformação, preconceito algorítmico)
+
+---
+
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v604→v628)
+
+**Baseline:** v628 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v606→v628):**
+
+- `decolonial-data.json` (v606, v616, v624): 260→305 (+45 entradas em todas as 9 categorias)
+- `analise-engine.js` (v607, v612, v619, v625): PLEONASMOS 163→198 (+35); CLIQUES_PT 379→474 (+95)
+- `lexical-data.json` (v608, v617, v622, v626): 253→295 (+42)
+- `synonym-data.js` (v609, v618, v623, v627): 240→318 (+78)
+- `norma-data.json` (v610, v611, v614, v615, v620, v621, v628): adjetivos_comuns 758→930 (+172); verbos_pres_reg 571→697 (+126); formas_verbais_irr 267→454 (+187); substantivos_ia 188→225 (+37)
+- `voice-engine.js` (v613): campos semânticos +48 (corpo/casa/natureza/conflito/pensamento/cidade)
 
 ---
 

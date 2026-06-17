@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v622 (`vereda-offline-v622`, `ASSET_VERSION=20260617-lex289`)
+**Versão atual:** v636 (`vereda-offline-v636`, `ASSET_VERSION=20260617-irr509`)
 
 ---
 
@@ -53,6 +53,20 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v620 | adjetivos_comuns 821→930 (+109: ardoroso, audacioso, saudoso, habitável…) |
 | v621 | verbos_pres_reg 616→697 (+81: analisa, captura, critica, defende, motiva…) |
 | v622 | léxico 277→289 (+12: crime, cachorro, emprego, eleição, voto, médico…) |
+| v623 | sinônimos 254→282 (+28: aberto, cheio, longo, caro, fácil, comer, respirar…) |
+| v624 | decolonial 281→295 (+14: algoritmo neutro, fake news, vitimismo, aculturação…) |
+| v625 | CLIQUES_PT 433→474 (+41: autoconhecimento YA, ficção urbana, empoderamento) |
+| v626 | léxico 289→295 (+6: fotografia, barco, noite, janela, carta, espera) |
+| v627 | sinônimos 282→298 (+16: angústia, esperança, orgulho, lealdade, sabedoria…) |
+| v628 | adjetivos_comuns 821→930 (+109); verbos_pres_reg 616→697 (+81); formas_irr 343→454 (+111) |
+| v629 | adjetivos_comuns 930→969 (+39: criminoso, grandioso, religioso, impressionante…) |
+| v630 | CLIQUES_PT 474→519 (+45: thriller, diálogo, personagem sábio, fantasia, FC) |
+| v631 | sinônimos 318→340 (+22: sentimentos e ações literárias) |
+| v632 | léxico 295→309 (+12: herói, vilão, labirinto, mentira, voo, trilha, espanto…) |
+| v633 | decolonial 305→315 (+10: índio preguiçoso, povos primitivos, classe baixa…) |
+| v634 | PLEONASMOS 198→214 (+16: subir para cima, resultado final, opinião pessoal…) |
+| v635 | verbos_pres_reg 697→743 (+46: analisa, critica, flui, tensiona, visa…) |
+| v636 | formas_verbais_irr 454→509 (+55: QUERER/PODER/SABER/TRAZER/DIZER/CABER) |
 
 ---
 
@@ -87,7 +101,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 519, formas_verbais_irr: 230, verbos_pres_reg: 402)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 969, formas_verbais_irr: 509, verbos_pres_reg: 743)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
