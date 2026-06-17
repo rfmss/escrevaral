@@ -68,6 +68,43 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v681→v689)
+
+**Baseline:** v689 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v681→v689):**
+
+- `norma-data.json` (v681): formas_verbais_irr 1074→1173 (+99: PARTIR/MORRER/FERIR/SURGIR/FUNDIR/EXISTIR…)
+- `decolonial-data.json` (v682): 342→353 (+11: comunidade carente, terceiro mundo, mulher fatal, nordestino…)
+- `synonym-data.js` (v683): 432→448 (+16: amizade, traição, aliança, absoluto, mudar, crescer, justo…)
+- `lexical-data.json` (v684): 345→360 (+15: armadilha, sacrifício, julgamento, perdão, máscara, lealdade…)
+- `norma-data.json` (v685): verbos_pres_reg 1176→1259 (+83: agoniza, anseia, cobiça, humilha, oprime, resgata…)
+- `analise-engine.js` (v686): CLIQUES_PT 645→681 (+36: espiritualismo, mercado/startup, romance, reconto)
+- `norma-data.json` (v687): adjetivos_comuns 1281→1332 (+51: abatido, astuto, cético, covarde, pérfido…)
+- `norma-data.json` (v688): formas_verbais_irr 1173→1268 (+95: PEDIR/MEDIR/AGREDIR/ACONTECER/PARECER…)
+- `synonym-data.js` (v689): 448→466 (+18: ansioso, orgulhoso, julgar, rebelião, revolução, ampliar…)
+
+**Estado atualizado dos engines (v689):**
+
+| Área / engine | Maturidade | Notas de estado (v689) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 681; PLEONASMOS 282 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 53, sobrenatural 48 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 360 entradas; sinônimos 466 |
+| Decolonial / vocabulário | **100%** | 353 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1332; verbos_pres_reg 1259; formas_verbais_irr 1268; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: verbos_pres_reg pode crescer para 1300+; decolonial para 365+ (discriminação digital)
+3. **Léxico**: pode crescer para 380+ com palavras de tensão dramática e estrutura de arco
+4. **Voice-engine**: corpo (53) e sobrenatural (48) têm espaço para crescer
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v666→v680)
 
 **Baseline:** v680 — Sintaxe 99%; todos os outros engines em 100%.

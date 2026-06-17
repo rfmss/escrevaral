@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v684 (`vereda-offline-v684`, `ASSET_VERSION=20260617-lex360`)
+**Versão atual:** v689 (`vereda-offline-v689`, `ASSET_VERSION=20260617-sin466`)
 
 ---
 
@@ -115,6 +115,11 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v682 | decolonial 342→353 (+11: comunidade carente, terceiro mundo, mulher fatal, nordestino…) |
 | v683 | sinônimos 432→448 (+16: amizade, traição, aliança, absoluto, mudar, crescer, justo…) |
 | v684 | léxico 345→360 (+15: armadilha, sacrifício, julgamento, perdão, máscara, lealdade…) |
+| v685 | verbos_pres_reg 1176→1259 (+83: agoniza, anseia, cobiça, humilha, oprime, resgata…) |
+| v686 | CLIQUES_PT 645→681 (+36: espiritualismo, mercado/startup, romance, reconto de conto de fadas) |
+| v687 | adjetivos_comuns 1281→1332 (+51: abatido, astuto, cético, covarde, pérfido, traiçoeiro…) |
+| v688 | formas_verbais_irr 1173→1268 (+95: PEDIR/MEDIR/AGREDIR/ACONTECER/PARECER/PERTENCER…) |
+| v689 | sinônimos 448→466 (+18: ansioso, orgulhoso, julgar, rebelião, revolução, ampliar…) |
 
 ---
 
@@ -149,7 +154,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1281, formas_verbais_irr: 1173, verbos_pres_reg: 1176)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1332, formas_verbais_irr: 1268, verbos_pres_reg: 1259)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
