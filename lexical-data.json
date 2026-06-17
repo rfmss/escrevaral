@@ -2255,6 +2255,96 @@
       "className": "narrativa",
       "field": "narrativa",
       "note": "quebra de expectativa; virada que altera o curso da história"
+    },
+    "aliteracao": {
+      "label": "aliteração",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "repetição de sons consonantais para criar efeito sonoro"
+    },
+    "assonancia": {
+      "label": "assonância",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "repetição de sons vocálicos em palavras próximas"
+    },
+    "anafora": {
+      "label": "anáfora",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "repetição de palavra ou grupo de palavras no início de versos ou orações"
+    },
+    "zeugma": {
+      "label": "zeugma",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "omissão de termo já expresso que se subentende no contexto"
+    },
+    "sinestesia": {
+      "label": "sinestesia",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "mistura de sensações de diferentes sentidos numa mesma expressão"
+    },
+    "metonimia": {
+      "label": "metonímia",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "substituição de palavra por outra com a qual tem relação de contiguidade"
+    },
+    "sinedoque": {
+      "label": "sinédoque",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "substituição do todo pela parte ou da parte pelo todo"
+    },
+    "paradoxo": {
+      "label": "paradoxo",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "afirmação aparentemente contraditória que contém verdade profunda"
+    },
+    "antitese": {
+      "label": "antítese",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "aproximação de ideias ou palavras opostas"
+    },
+    "oximoro": {
+      "label": "oxímoro",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "combinação de termos contraditórios numa expressão única"
+    },
+    "personificacao": {
+      "label": "personificação",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "atribuição de características humanas a seres inanimados ou abstratos"
+    },
+    "apostrofe": {
+      "label": "apóstrofe",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "interpelação direta a ser ausente, morto ou abstrato"
+    },
+    "perifrase": {
+      "label": "perífrase",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "designação de algo por expressão descritiva em lugar do nome direto"
+    },
+    "pleonasmo": {
+      "label": "pleonasmo",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "repetição de ideia já expressa; pode ser vicioso ou expressivo"
+    },
+    "gradacao": {
+      "label": "gradação",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "sequência de palavras em ordem crescente ou decrescente de intensidade"
     }
   },
   "functionWords": {
