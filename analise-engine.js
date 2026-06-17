@@ -440,6 +440,26 @@
     "a verdade sempre vem à tona","todo criminoso comete um erro",
     "seguiu o dinheiro e encontrou a resposta","era mais simples do que parecia no começo",
     "os inocentes pagavam pelos crimes dos culpados","confiou em quem não devia",
+    // clichês de literatura de horror psicológico
+    "o inimigo estava dentro dela o tempo todo","a loucura era a única saída",
+    "não conseguia distinguir o real do imaginário","perdera o contato com a realidade",
+    "o passado a perseguia em cada canto","os gritos nunca paravam",
+    "a mente era um labirinto sem saída","os pesadelos eram mais reais que a vida",
+    // clichês de literatura de autoconhecimento
+    "precisava se encontrar","estava perdida em si mesma",
+    "o amor próprio era a chave de tudo","parou de se comparar com os outros",
+    "aceitou suas imperfeições","aprendeu a dizer não",
+    "priorizou a própria saúde mental","fez as pazes com o passado",
+    // clichês de romantismo literário
+    "o amor era maior que tudo","o coração não mente",
+    "quando os olhares se cruzam tudo muda","foi amor à primeira vista",
+    "sentia que eram almas gêmeas","eram feitos um para o outro",
+    "o destino os havia unido","o universo conspirava a favor deles",
+    // clichês de literatura épica e de fantasia
+    "o herói era o escolhido","sua hora havia chegado",
+    "com grande poder vem grande responsabilidade","apenas ele poderia salvar o mundo",
+    "a profecia estava se cumprindo","foram testados além dos limites",
+    "o bem sempre vence o mal","a luz sempre supera as trevas",
   ];
 
   const PLEONASMOS = [
@@ -650,6 +670,20 @@
     ["processo e procedimento de trabalho","processo"],["método e metodologia adotada","metodologia"],
     ["resultado e consequência obtida","resultado"],["impacto e efeito produzido","impacto"],
     ["mudança e transformação realizada","transformação"],["evolução e progresso alcançado","evolução"],
+    // redundâncias de causa e efeito
+    ["motivo e causa do problema","causa"],["razão e motivo principal","motivo"],
+    ["consequência e efeito resultante","consequência"],["origem e raiz do problema","origem"],
+    ["fator determinante e decisivo","fator determinante"],["contexto e situação atual","situação atual"],
+    // redundâncias de descrição física e espacial
+    ["alto e elevado","alto"],["baixo e pequeno","baixo"],
+    ["largo e amplo","amplo"],["comprido e extenso","extenso"],
+    ["redondo e circular","redondo"],["quadrado e retangular","quadrado"],
+    ["enorme e gigantesco","gigantesco"],["diminuto e microscópico","minúsculo"],
+    // redundâncias de qualidade e valor
+    ["bom e positivo","bom"],["ruim e negativo","ruim"],
+    ["certo e correto","correto"],["errado e incorreto","errado"],
+    ["justo e equânime","justo"],["injusto e parcial","injusto"],
+    ["forte e robusto","forte"],["fraco e débil","fraco"],
   ];
 
   const NEGACOES_DUPLAS = [
