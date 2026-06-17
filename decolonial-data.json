@@ -2918,44 +2918,6 @@
       "contextual": true
     },
     {
-      "avoid": "beleza exótica",
-      "alternatives": [
-        "beleza singular",
-        "beleza marcante",
-        "traços distintos"
-      ],
-      "category": "estetica",
-      "reason": "'Exótica' fetichiza e distancia — transforma a aparência de pessoas não-brancas em objeto de curiosidade do olhar branco. O 'exótico' pressupõe um observador central e um 'outro' fora da norma.",
-      "context": "Ao citar perspectiva de personagem que exotifica, o uso pode ser intencional. No narrador, prefira descrições que não reduzam a pessoa ao olhar externo.",
-      "contextual": true
-    },
-    {
-      "avoid": "mulata",
-      "alternatives": [
-        "mulher negra",
-        "mulher parda",
-        "mulher mestiça",
-        "pelo nome da personagem"
-      ],
-      "category": "genero",
-      "reason": "'Mulata' deriva de 'mula' (animal estéril) e foi historicamente usada para hipersexualizar mulheres negras e pardas. O carnaval e a cultura popular brasileira romantizaram um termo que nasce da desumanização.",
-      "context": "Em análise crítica da tradição cultural ou voz de personagem histórico, o uso pode ser necessário com consciência explícita de sua carga.",
-      "contextual": false
-    },
-    {
-      "avoid": "cabelo ruim",
-      "alternatives": [
-        "cabelo crespo",
-        "cabelo afro",
-        "cabelo cacheado",
-        "cabelo enrolado"
-      ],
-      "category": "estetica",
-      "reason": "'Cabelo ruim' estabelece padrão branco eurocêntrico como norma, tratando texturas afro-brasileiras como defeito. É uma das expressões mais cotidianas do racismo estético no Brasil.",
-      "context": "Como fala de personagem que reproduz racismo internalizado, pode ser mantido se o texto não valida a perspectiva.",
-      "contextual": true
-    },
-    {
       "avoid": "pele cor de chocolate",
       "alternatives": [
         "pele negra",
@@ -2969,28 +2931,120 @@
       "contextual": true
     },
     {
-      "avoid": "índio",
+      "avoid": "boa gente para um negro",
       "alternatives": [
-        "indígena",
-        "povos indígenas",
-        "povo (nome do povo: Yanomami, Guarani, etc.)"
+        "pessoa justa",
+        "pessoa respeitosa"
       ],
-      "category": "povos",
-      "reason": "Índio é erro histórico de Colombo (confundia América com Índias) e homogeniza mais de 300 povos com línguas, culturas e territórios distintos. A Constituição de 1988 usa 'índio' mas o movimento usa 'indígena'.",
-      "context": "Em contextos históricos, legais ou quando citando documentos oficiais, o uso pode ser necessário com nota sobre o problema do termo.",
-      "contextual": false
+      "category": "relacoes",
+      "reason": "A exceção racial reforça o estereótipo que está negando: presume que ser negro dificulta ser 'boa gente'.",
+      "context": "Em contexto histórico ou de citação, pode aparecer como registro de época com marcação crítica.",
+      "contextual": true
     },
     {
-      "avoid": "selvagem",
+      "avoid": "representante da sua raça",
       "alternatives": [
-        "povo indígena",
-        "pessoa da floresta",
-        "caçador",
-        "habitante do território"
+        "referência",
+        "figura importante",
+        "profissional reconhecido"
       ],
-      "category": "povos",
-      "reason": "'Selvagem' opõe a pessoa a uma civilização branca e europeia como padrão, hierarquizando modos de vida e justificando histórica e discursivamente a colonização.",
-      "context": "Em análise de textos históricos ou como fala de personagem colonial que o texto critica, o uso pode ser intencional.",
+      "category": "relacoes",
+      "reason": "Reduz a pessoa à raça como se toda conquista fosse coletiva e toda falha também. Cria pressão impossível.",
+      "context": "Diferente de 'referência para a comunidade', que pode ser afirmativo se usado pela própria comunidade.",
+      "contextual": true
+    },
+    {
+      "avoid": "não tem nada a ver com raça",
+      "alternatives": [
+        "considere o contexto estrutural",
+        "analise os dados desagregados por raça"
+      ],
+      "category": "relacoes",
+      "reason": "Nega sistematicamente o racismo estrutural sem analisar os dados. Frequentemente usado para encerrar discussão.",
+      "context": "Em textos de opinião ou personagens, pode ser voz com posição — marcar como perspectiva, não verdade.",
+      "contextual": true
+    },
+    {
+      "avoid": "mérito individual",
+      "alternatives": [
+        "trajetória",
+        "esforço em contexto",
+        "percurso com obstáculos desiguais"
+      ],
+      "category": "conhecimento",
+      "reason": "Quando usado sem reconhecer estruturas desiguais, apaga o quanto o ponto de partida determina o destino.",
+      "context": "Mérito pode aparecer em vozes de personagens ou argumentos contrapostos — marcar como perspectiva a questionar.",
+      "contextual": true
+    },
+    {
+      "avoid": "saber popular como crença",
+      "alternatives": [
+        "conhecimento tradicional",
+        "saber ancestral",
+        "prática cultural"
+      ],
+      "category": "conhecimento",
+      "reason": "Reduzir conhecimento não-ocidental a 'crença' hierarquiza epistemologias e nega validade ao que não tem origem europeia.",
+      "context": "Diferente de 'crença religiosa', que pode ser neutro quando o próprio grupo usa o termo.",
+      "contextual": true
+    },
+    {
+      "avoid": "intuição natural",
+      "alternatives": [
+        "experiência acumulada",
+        "conhecimento prático",
+        "percepção treinada"
+      ],
+      "category": "conhecimento",
+      "reason": "Quando atribuído a grupos racializados, transforma conhecimento construído em instinto — apaga o aprendizado e o esforço.",
+      "context": "Em contextos de habilidades artísticas ou esportivas, verificar se não substitui reconhecimento por naturalização.",
+      "contextual": true
+    },
+    {
+      "avoid": "branqueamento como modernização",
+      "alternatives": [
+        "modernização",
+        "industrialização",
+        "urbanização"
+      ],
+      "category": "estetica",
+      "reason": "A política de branqueamento foi projeto racial explícito do Estado brasileiro pós-abolição. Usar como sinônimo de progresso reproduz o apagamento.",
+      "context": "Em textos históricos ou críticos, pode aparecer como objeto de análise — com aspas e contextualização.",
+      "contextual": true
+    },
+    {
+      "avoid": "miscigenação como solução",
+      "alternatives": [
+        "diversidade",
+        "pluralidade étnica",
+        "convivência interracial"
+      ],
+      "category": "estetica",
+      "reason": "A narrativa da miscigenação como solução ao racismo esconde a violência sexual colonial e o ideal de branqueamento que a motivou.",
+      "context": "Em análise histórica ou crítica literária, pode aparecer como objeto de estudo com tratamento crítico.",
+      "contextual": true
+    },
+    {
+      "avoid": "portador de necessidades especiais",
+      "alternatives": [
+        "pessoa com deficiência",
+        "pessoa com transtorno do espectro autista"
+      ],
+      "category": "deficiencia",
+      "reason": "O termo 'portador' sugere que a deficiência é algo que se carrega e se pode largar. A convenção da ONU e o movimento de pessoas com deficiência preferem 'pessoa com deficiência'.",
+      "context": "Alguns grupos preferem identidade-first ('autista', 'surdo') — respeitar a preferência quando o sujeito é identificável.",
+      "contextual": true
+    },
+    {
+      "avoid": "coitadinho",
+      "alternatives": [
+        "a situação é difícil",
+        "enfrenta obstáculos sérios",
+        "merece mais apoio estrutural"
+      ],
+      "category": "deficiencia",
+      "reason": "Infantiliza e vitimiza ao mesmo tempo. Retira agência da pessoa com deficiência e substitui empatia por pena.",
+      "context": "Pode aparecer como voz de personagem com posição a ser contestada na narrativa.",
       "contextual": true
     }
   ]
