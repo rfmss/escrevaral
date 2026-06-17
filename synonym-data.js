@@ -977,6 +977,24 @@
     "labirinto":   ["emaranhado", "confusão", "intrincamento", "amarrado", "desvio", "armadilha"],
     "espelho":     ["reflexo", "imagem", "cópia", "sombra", "eco", "duplo"],
 
+    // sentimentos relacionais
+    "ciume":       ["possessividade", "inveja afetiva", "insegurança", "desconfiança", "suspeita", "receio"],
+    "saudade":     ["nostalgia", "longing", "ausência sentida", "recordação afetiva", "melancolia doce", "anseio"],
+    "abandono":    ["desamparo", "solidão forçada", "isolamento", "rejeição", "orfandade", "descaso"],
+    "pertencimento":["identidade", "laço", "vínculo", "enraizamento", "comunidade", "integração"],
+
+    // processos e transformações
+    "renascer":    ["ressurgir", "reviver", "reerguer", "brotar de novo", "recomeçar", "reconstituir"],
+    "envelhecer":  ["amadurecer", "deteriorar", "marcar", "avançar em anos", "desgastar", "maturar"],
+    "cicatrizar":  ["curar", "sarar", "fechar ferida", "superar", "recompor", "restabelecer"],
+    "transformar": ["metamorfosear", "converter", "moldar", "reformar", "alterar profundamente", "transmutar"],
+
+    // adjetivos narrativos
+    "profundo":    ["denso", "fundo", "intenso", "marcante", "penetrante", "abissal"],
+    "superficial": ["raso", "vago", "ligeiro", "frívolo", "sem consistência", "epidérmico"],
+    "sombrio":     ["escuro", "lúgubre", "melancólico", "tenebroso", "obscuro", "carregado"],
+    "luminoso":    ["claro", "brilhante", "radiante", "iluminado", "fulgente", "resplandecente"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
