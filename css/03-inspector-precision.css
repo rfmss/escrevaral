@@ -158,6 +158,69 @@
 .syntax-token[data-funcao="aposto"]      { border-color: #5a7a3a; }
 .syntax-token[data-funcao="aposto"]      .syntax-token-label { color: #5a7a3a; }
 
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="sujeito"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="sujeito"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="sujeito"]     { border-color: #5ecf96; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label { color: #5ecf96; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="verbo"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="verbo"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="verbo"]       { border-color: #5b9fe0; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label { color: #5b9fe0; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="objeto"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="objeto"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="objeto"]      { border-color: #e09840; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label { color: #e09840; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="adjunto"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="adjunto"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="adjunto"]     { border-color: #c070d8; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label { color: #c070d8; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="predicativo"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="predicativo"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="predicativo"] { border-color: #e86a5a; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label { color: #e86a5a; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="vocativo"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="vocativo"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="vocativo"]    { border-color: #e0a050; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label { color: #e0a050; }
+
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"],
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="aposto"],
+[data-theme="mata-dark"] .syntax-token[data-funcao="aposto"],
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="aposto"]      { border-color: #8ecf60; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
+[data-theme="cerrado-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
+[data-theme="mata-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
+[data-theme="amazonia-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label { color: #8ecf60; }
+
 .syntax-token-tooltip {
   position: fixed;
   z-index: 1200;
