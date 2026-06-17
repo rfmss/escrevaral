@@ -288,6 +288,35 @@
     "aprendeu a amar a si mesmo","aprendeu a amar a si mesma",
     "pela primeira vez na vida se sentiu inteira","se sentiu completo pela primeira vez",
     "percebeu que merecia ser feliz","todos merecem ser felizes",
+    // thriller e suspense
+    "suores frios escorreram pela testa","sentiu um arrepio percorrer a espinha",
+    "o tempo pareceu congelar","cada segundo contava",
+    "correu como se a vida dependesse disso","apertou os dentes e continuou",
+    // clichês de diálogo
+    "não é o que parece","tudo que você precisa saber é que",
+    "há coisas que é melhor não saber","confie em mim",
+    "não posso explicar agora","não temos tempo para isso",
+    "você não ia acreditar se eu contasse","é uma longa história",
+    // personagem sábio secundário
+    "os olhos do velho brilharam","o ancião sorriu com sabedoria",
+    "as rugas do rosto contavam histórias","havia tristeza nos olhos dele",
+    "uma luz estranha brilhava em seus olhos","o silêncio foi sua resposta",
+    // cenário urbano
+    "a cidade que nunca dorme","as luzes da cidade",
+    "o asfalto molhado","sirenes ao longe","o cheiro de chuva na cidade",
+    // ficção científica
+    "a humanidade nunca mais seria a mesma","uma nova era havia começado",
+    "a tecnologia havia avançado além da imaginação",
+    "os humanos haviam ido longe demais","jogaram com forças que não podiam controlar",
+    // fantasia
+    "o destino havia sido traçado","a profecia se cumpriria",
+    "havia sido escolhido","tinha um dom especial",
+    "o mal despertou","a luz venceu as trevas","o equilíbrio foi restaurado",
+    // reflexões literárias gastas
+    "o inevitável havia chegado","o destino bateu à porta",
+    "o passado não morre","a memória é uma arma de dois gumes",
+    "ninguém escapa de si mesmo","o homem é o lobo do homem",
+    "a natureza humana não muda","a história se repete",
   ];
 
   const PLEONASMOS = [
