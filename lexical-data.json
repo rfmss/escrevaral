@@ -1661,6 +1661,78 @@
       "className": "Substantivo feminino",
       "field": "Tempo — ritmo, urgência, o ponto em que a ação acontece",
       "note": "A hora marca o ritmo da narrativa: 'a esta hora' cria tensão; 'naquela hora' cria distância. O tempo é personagem quando o relógio aparece."
+    },
+    "crime": {
+      "label": "crime",
+      "className": "Substantivo masculino",
+      "field": "Conflito — transgressão, punição, o que organiza o enredo policial",
+      "note": "O crime literário não é só o ato — é o que revela sobre o personagem e o mundo em que vive. Quem pode cometer crime sem consequência diz algo sobre o sistema."
+    },
+    "preso": {
+      "label": "preso",
+      "className": "Substantivo / Adjetivo",
+      "field": "Conflito — confinamento, poder, memória do trauma",
+      "note": "Preso é mais que encarcerado: é quem está aprisionado por dívida emocional, segredo, relacionamento tóxico. Use para além do sentido literal."
+    },
+    "namorado": {
+      "label": "namorado / namorada",
+      "className": "Substantivo",
+      "field": "Relação — afeto em construção, expectativa, identidade afetiva",
+      "note": "O namorado/namorada em ficção raramente é só parceiro: é espelho, antagonista afetivo ou personagem com agenda própria. Evite personagens-função."
+    },
+    "cachorro": {
+      "label": "cachorro",
+      "className": "Substantivo masculino",
+      "field": "Afeto — lealdade, presença sem julgamento, o que o personagem cuida",
+      "note": "O cachorro em literatura é frequentemente o único que sabe a verdade sobre o personagem. Sua ausência ou morte é carga emocional pesada — use com intenção."
+    },
+    "gato": {
+      "label": "gato",
+      "className": "Substantivo masculino",
+      "field": "Afeto — autonomia, mistério, presença evasiva",
+      "note": "O gato literário tende ao contrário do cachorro: independência, indiferença aparente, presença que não pede reciprocidade. Útil para personagens que preferem isso."
+    },
+    "emprego": {
+      "label": "emprego",
+      "className": "Substantivo masculino",
+      "field": "Cotidiano — sobrevivência, identidade profissional, o que o personagem troca por estabilidade",
+      "note": "O emprego estrutura o tempo e a dignidade do personagem. Perdê-lo ou consegui-lo é ponto de virada em narrativas de classe. Em ficção, raramente aparece como neutro."
+    },
+    "divida": {
+      "label": "dívida",
+      "className": "Substantivo feminino",
+      "field": "Conflito — obrigação, poder, o que prende o personagem ao passado",
+      "note": "Dívida financeira e dívida emocional têm o mesmo peso narrativo. Quem está em dívida está em posição subordinada — isso move o enredo."
+    },
+    "professor": {
+      "label": "professor",
+      "className": "Substantivo",
+      "field": "Relação — autoridade formadora, transmissão, o adulto fora da família",
+      "note": "O professor é frequentemente o primeiro adulto que o personagem jovem encontra como indivíduo — não como familiar. Esse encontro pode ser formador ou traumático."
+    },
+    "medico": {
+      "label": "médico",
+      "className": "Substantivo",
+      "field": "Corpo — autoridade sobre a vida, diagnóstico, o saber que intimida",
+      "note": "O médico em ficção é o guardião do corpo do personagem. Seus diagnósticos mudam o enredo; sua ausência ou incompetência revela falha estrutural do sistema."
+    },
+    "eleicao": {
+      "label": "eleição",
+      "className": "Substantivo feminino",
+      "field": "Poder — decisão coletiva, disputa, momento de exposição política",
+      "note": "A eleição em ficção é quase sempre conflito entre visões de mundo, não só de candidatos. Personagens que não votam também estão fazendo uma escolha narrativa."
+    },
+    "voto": {
+      "label": "voto",
+      "className": "Substantivo masculino",
+      "field": "Poder — agência coletiva, identidade política, o que cada personagem faz com sua vez",
+      "note": "O voto é um dos poucos momentos em que personagens de diferentes classes têm formalmente o mesmo peso. Narrativas que exploram isso revelam tensão real."
+    },
+    "direito": {
+      "label": "direito",
+      "className": "Substantivo masculino",
+      "field": "Abstração — reivindicação, justiça, o que deveria existir mas nem sempre existe",
+      "note": "Em ficção brasileira, 'direito' quase sempre aparece pelo que falta — direito negado, direito desconhecido, direito que alguns têm e outros não."
     }
   },
   "functionWords": {
