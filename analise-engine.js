@@ -505,6 +505,24 @@
     ["único e singular","único"],["amplo e vasto","amplo"],
     ["fino e delicado","fino"],["rude e grosseiro","rude"],
     ["sombrio e escuro","sombrio"],["leve e suave","leve"],
+    // redundâncias de quantidade e tempo
+    ["dois pares de irmãos gêmeos","par de gêmeos"],["cem por cento absoluto","cem por cento"],
+    ["toda a totalidade","toda"],["metade pela metade","metade"],
+    ["dois duos","dupla"],["três trios","trio"],
+    ["novamente outra vez","novamente"],["futuramente no futuro","futuramente"],
+    ["atualmente nos dias de hoje","atualmente"],["antigamente no passado","antigamente"],
+    // redundâncias de localização e movimento
+    ["entrar e adentrar","entrar"],["sair e abandonar o local","sair"],
+    ["ir adiante em frente","ir adiante"],["ficar parado sem se mover","ficar parado"],
+    ["girar em torno de si mesmo","girar"],["voltar de volta","voltar"],
+    // redundâncias jornalísticas e de notícia
+    ["ocorrência de fato ocorrido","ocorrência"],["vítima que foi vítima","vítima"],
+    ["morto que morreu","morto"],["ferido que ficou ferido","ferido"],
+    ["detido que foi detido","detido"],["local do acontecimento do fato","local do fato"],
+    // pleonasmos de escrita criativa
+    ["soluçar em soluços","soluçar"],["chorar em lágrimas","chorar"],
+    ["rir às gargalhadas","rir"],["sussurrar em voz baixa","sussurrar"],
+    ["berrar em voz alta","berrar"],["gritar em alto e bom som","gritar"],
   ];
 
   const NEGACOES_DUPLAS = [
