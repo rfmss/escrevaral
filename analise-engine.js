@@ -196,6 +196,23 @@
     ["gritar em voz alta","gritar"],["multidão de pessoas","multidão"],
     ["ruído barulhento","ruído"],["recordar de memória","recordar"],
     ["planejar antecipadamente","planejar"],
+    // novas entradas — redundâncias frequentes em textos brasileiros
+    ["pequenos detalhes","detalhes"],["totalmente completo","completo"],
+    ["continuar ainda","continuar"],["subir acima","subir"],
+    ["descer abaixo","descer"],["juntar junto","juntar"],
+    ["unir juntos","unir"],["criar do zero","criar"],
+    ["herança deixada","herança"],["legado deixado","legado"],
+    ["tumor maligno cancerígeno","tumor maligno"],
+    ["enxergar com os olhos","enxergar"],["ouvir com os ouvidos","ouvir"],
+    ["pensar mentalmente","pensar"],["lembrar-se de memória","lembrar-se"],
+    ["fato real","fato"],["realidade factual","realidade"],
+    ["a nível de","em termos de"],["em nível de","em termos de"],
+    ["processo seletivo de seleção","processo seletivo"],
+    ["plano de planejamento","plano"],["atividade em atividade","atividade"],
+    ["futuro porvir","futuro"],["mero pretexto","pretexto"],
+    ["hábito costumeiro","hábito"],["viúva do marido falecido","viúva"],
+    ["falso pretexto","pretexto"],["questionar com perguntas","questionar"],
+    ["novidade nova","novidade"],
   ];
 
   const NEGACOES_DUPLAS = [
