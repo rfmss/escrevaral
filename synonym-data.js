@@ -1104,6 +1104,27 @@
     "ampliar":     ["expandir", "alargar", "estender", "aumentar", "crescer", "desenvolver", "aprofundar"],
     "reduzir":     ["diminuir", "encurtar", "estreitar", "minimizar", "comprimir", "limitar", "contrair"],
 
+    "gemer":       ["lamentar", "choramingar", "gemer de dor", "suspirar fundo", "arquejar", "ganir", "carpir"],
+    "escutar":     ["ouvir", "prestar atenção", "auscultar", "perceber", "captar", "atentar", "acolher"],
+    "contemplar":  ["observar", "admirar", "mirar", "olhar fixo", "meditar", "ponderar", "apreciar"],
+    "perseguir":   ["caçar", "seguir", "rastrear", "cercar", "rondar", "assediar", "encalçar"],
+    "descobrir":   ["revelar", "desvendar", "encontrar", "iluminar", "expor", "desmascarar", "achar"],
+    "explorar":    ["investigar", "sondar", "vasculhar", "perscrutar", "mapear", "desbavar", "percorrer"],
+    "alcançar":    ["atingir", "chegar", "obter", "conquistar", "lograr", "conseguir", "alcançar a meta"],
+    "fracasso":    ["derrota", "malogro", "insucesso", "falha", "fiasco", "ruína", "colapso"],
+    "vitória":     ["triunfo", "conquista", "êxito", "glória", "sucesso", "feito", "proeza"],
+    "jornada":     ["caminho", "travessia", "percurso", "viagem", "trecho", "etapa", "trajeto"],
+    "acaso":       ["sorte", "acidente", "casualidade", "contingência", "fortuna", "ventura", "imprevisto"],
+    "ruído":       ["barulho", "som", "estrondo", "eco", "fragor", "rumor", "estardalhaço"],
+    "movimento":   ["gesto", "ação", "deslocamento", "impulso", "dinâmica", "atividade", "mobilização"],
+    "pausa":       ["silêncio", "intervalo", "interrupção", "suspensão", "cesura", "descanso", "hiato"],
+    "equilibrio":  ["equilíbrio", "balança", "harmonia", "estabilidade", "equanimidade", "compensação", "proporção"],
+    "caos":        ["desordem", "confusão", "tumulto", "anarquia", "turbulência", "bagunça", "entropia"],
+    "ordem":       ["organização", "disciplina", "estrutura", "regra", "norma", "harmonia", "arranjo"],
+    "prisao":      ["cárcere", "cativeiro", "confinamento", "clausura", "grilhão", "jaula", "catacumbas"],
+    "fraqueza":    ["fragilidade", "impotência", "debilidade", "vulnerabilidade", "falha", "lacuna", "deficiência"],
+    "forca":       ["força", "vigor", "potência", "energia", "poder", "robustez", "determinação"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
