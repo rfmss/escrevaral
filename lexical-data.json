@@ -2069,6 +2069,96 @@
       "className": "Substantivo",
       "field": "Motivação — razão de agir, missão, sentido",
       "note": "O propósito é a resposta para 'por quê'. Personagens sem propósito derivam; com ele, avançam mesmo contra a resistência."
+    },
+    "armadilha": {
+      "label": "armadilha",
+      "className": "Substantivo",
+      "field": "Narrativo — cilada, falsa escolha, destino preparado",
+      "note": "A armadilha é um momento no qual o personagem acredita ter liberdade, mas já não tem. Revela quem preparou e por quê."
+    },
+    "sacrificio": {
+      "label": "sacrifício",
+      "className": "Substantivo",
+      "field": "Narrativo — perda deliberada, custo da vitória",
+      "note": "Todo sacrifício exige que algo valioso seja destruído. O que o personagem está disposto a perder define seus valores."
+    },
+    "julgamento": {
+      "label": "julgamento",
+      "className": "Substantivo",
+      "field": "Narrativo — avaliação moral, veredicto, peso do olhar alheio",
+      "note": "Ser julgado expõe o personagem ao olhar da sociedade. O julgamento revela tanto quem julga quanto quem é julgado."
+    },
+    "perdao": {
+      "label": "perdão",
+      "className": "Substantivo",
+      "field": "Emocional — liberação do rancor, recomeço, custo alto",
+      "note": "O perdão não apaga o passado — muda a relação com ele. Personagens que perdoam abandonam uma narrativa de dor."
+    },
+    "vinganca": {
+      "label": "vingança",
+      "className": "Substantivo",
+      "field": "Narrativo — ciclo de retribuição, motivação poderosa",
+      "note": "A vingança é motor narrativo que consome o personagem. Realizá-la raramente traz o alívio esperado."
+    },
+    "consequencia": {
+      "label": "consequência",
+      "className": "Substantivo",
+      "field": "Narrativo — causalidade, responsabilidade, peso das escolhas",
+      "note": "Consequências sem punição criam personagens fora da lógica moral. Cada ação tem custo — mostrar isso é dar coerência ao mundo."
+    },
+    "mascara": {
+      "label": "máscara",
+      "className": "Substantivo",
+      "field": "Identidade — persona pública, disfarce, proteção",
+      "note": "A máscara é o que o personagem mostra para o mundo. O conflito começa quando a máscara e o rosto real divergem demais."
+    },
+    "identidade": {
+      "label": "identidade",
+      "className": "Substantivo",
+      "field": "Identidade — quem o personagem acredita ser vs. quem é",
+      "note": "Crise de identidade é conflito interno em estado puro. O personagem que não sabe quem é não sabe o que quer."
+    },
+    "lealdade": {
+      "label": "lealdade",
+      "className": "Substantivo",
+      "field": "Relacional — fidelidade, comprometimento, custo de pertencer",
+      "note": "Lealdade testada revela quem o personagem realmente é. Quando custa algo, é genuína; quando é cômoda, é apenas interesse."
+    },
+    "ilusao": {
+      "label": "ilusão",
+      "className": "Substantivo",
+      "field": "Cognitivo — falsa crença, conforto perigoso, ruptura inevitável",
+      "note": "A ilusão protege o personagem de uma realidade que ele não quer ver. Destruí-la é um momento de ruptura narrativa."
+    },
+    "teia": {
+      "label": "teia",
+      "className": "Substantivo",
+      "field": "Narrativo — rede de relações, aprisionamento gradual",
+      "note": "A teia sugere complexidade: cada fio conecta personagens e eventos. Quem tece, quem fica preso, quem escapa?"
+    },
+    "enigma": {
+      "label": "enigma",
+      "className": "Substantivo",
+      "field": "Narrativo — mistério estrutural, questão sem resposta fácil",
+      "note": "O enigma mantém o leitor lendo. Diferente de simples mistério: o enigma tem uma lógica que pode ser decifrada, mas não facilmente."
+    },
+    "presagio": {
+      "label": "presságio",
+      "className": "Substantivo",
+      "field": "Narrativo — sinal do que vem, antecipação dramática",
+      "note": "Presságios criam expectativa e tensão. O leitor percebe antes do personagem — e espera o momento em que ele vai entender."
+    },
+    "honra": {
+      "label": "honra",
+      "className": "Substantivo",
+      "field": "Emocional — reputação, princípio que não se negocia",
+      "note": "A honra é o que o personagem não pode ceder sem se perder. Quando é forçado a escolher entre honra e sobrevivência, a narrativa tensiona ao máximo."
+    },
+    "realidade": {
+      "label": "realidade",
+      "className": "Substantivo",
+      "field": "Cognitivo — o que é verdadeiro para o personagem",
+      "note": "A realidade do personagem é sua versão dos fatos. Quando duas realidades colidem, nenhuma pode ficar intacta."
     }
   },
   "functionWords": {
