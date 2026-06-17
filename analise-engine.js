@@ -353,6 +353,16 @@
     ["acabar de vez","acabar"],["terminar de uma vez","terminar"],
     ["aparecer de repente","aparecer"],["desaparecer de repente","desaparecer"],
     ["entrar para dentro de","entrar em"],["sair de dentro de","sair de"],
+    // redundâncias corporais e de ação
+    ["ver com os olhos","ver"],["sorrir com os lábios","sorrir"],
+    ["pensar com a mente","pensar"],["trabalhar laboriosamente","trabalhar"],
+    ["viver a vida","viver"],["chorar com lágrimas","chorar"],
+    ["caminhar com as pernas","caminhar"],["cair para baixo","cair"],
+    // pares de sinônimos redundantes (figuras de acumulação)
+    ["assassinar e matar","assassinar"],["erros e equívocos","erros"],
+    ["dor e sofrimento","dor"],["regras e normas","regras"],
+    ["medo e receio","medo"],["triste e abatido","abatido"],
+    ["coragem e bravura","coragem"],
     // redundâncias em prosa literária e redação escolar
     ["falar verbalmente","falar"],["escrever por escrito","escrever"],
     ["ver com os próprios olhos","ver"],["retroceder para trás","retroceder"],
