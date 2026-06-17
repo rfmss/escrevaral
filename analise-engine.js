@@ -456,6 +456,22 @@
     ["entrar para dentro","entrar"],["sair para fora","sair"],
     ["avançar para frente","avançar"],["recuar para trás","recuar"],
     ["juntar em conjunto","juntar"],["unir em união","unir"],
+    // redundâncias burocráticas e corporativas
+    ["vias de fato","fato"],["na atual conjuntura","agora"],
+    ["em termos percentuais","em percentual"],
+    ["para efeitos práticos","na prática"],
+    ["no contexto atual","atualmente"],
+    ["dentro do contexto","no contexto"],
+    ["em virtude de que","porque"],["haja vista que","visto que"],
+    // redundâncias escolares e acadêmicas
+    ["conforme descrito acima","conforme descrito"],
+    ["o autor acima citado","o autor"],
+    ["o texto em questão","o texto"],
+    ["mediante o pagamento de","mediante pagamento de"],
+    // pares de adjetivos redundantes
+    ["único e singular","único"],["amplo e vasto","amplo"],
+    ["fino e delicado","fino"],["rude e grosseiro","rude"],
+    ["sombrio e escuro","sombrio"],["leve e suave","leve"],
   ];
 
   const NEGACOES_DUPLAS = [
