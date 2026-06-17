@@ -3,6 +3,9 @@ name: Gera rascunho no Diário
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '17 11 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -11,6 +14,10 @@ jobs:
   rascunho:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      DIARY_REPOSITORY: rfmss/escrevaral-diario
+      DIARY_TOKEN: ${{ secrets.DIARY_TOKEN }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
 
     steps:
       - name: Clonar escrevaral
@@ -19,20 +26,32 @@ jobs:
           fetch-depth: 20
 
       - name: Clonar diário
+        if: env.DIARY_TOKEN != ''
         uses: actions/checkout@v4.2.2
         with:
-          repository: rfmss/escrevaral-diario
+          repository: ${{ env.DIARY_REPOSITORY }}
           token: ${{ secrets.DIARY_TOKEN }}
           path: diario
+
+      - name: Preparar saída local do diário
+        if: env.DIARY_TOKEN == ''
+        run: |
+          mkdir -p diario/_posts
+          echo "Sem DIARY_TOKEN: workflow segue em modo local e entrega artifact."
 
       - name: Coletar commits do push
         id: commits
         run: |
-          # Commits desde o push anterior (até 15)
-          LOGS=$(git log --oneline -15 --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} 2>/dev/null || git log --oneline -5 --pretty=format:"- %s")
+          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            LOGS=$(git log --oneline -15 --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} 2>/dev/null || true)
+          fi
 
-          # Extrai versão do commit mais recente (ex: v442)
-          VERSION=$(git log -1 --pretty=format:"%s" | grep -oP 'v\d+' | head -1)
+          if [ -z "${LOGS:-}" ]; then
+            LOGS=$(git log --oneline -15 --pretty=format:"- %s")
+          fi
+
+          # Extrai a versão mais recente encontrada nos últimos commits (ex: v442)
+          VERSION=$(git log -20 --pretty=format:"%s" | grep -oE 'v[0-9]+' | head -1 || true)
 
           # Data de hoje
           DATE=$(date +%Y-%m-%d)
@@ -59,8 +78,6 @@ jobs:
       - name: Gerar texto do post com IA (Hugging Face)
         id: ia
         if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           VERSION="${{ steps.commits.outputs.version }}"
           COMMITS=$(sed -E 's/^- (feat|fix|docs|chore|refactor|style|test|perf|build|ci)(\([^)]*\))?: */- /' /tmp/commits.txt)
@@ -170,7 +187,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit e push do registro
-        if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != ''
+        if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != '' && env.DIARY_TOKEN != ''
         run: |
           cd diario
           git config user.name  "escrevaral-bot"
@@ -178,3 +195,10 @@ jobs:
           git add _posts/
           git commit -m "post: ${{ steps.commits.outputs.version }} — publicado automaticamente"
           git push
+
+      - name: Publicar rascunho como artifact
+        if: steps.existe.outputs.exists == 'false' && steps.commits.outputs.version != '' && env.DIARY_TOKEN == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: diario-${{ steps.commits.outputs.slug }}
+          path: diario/_posts/${{ steps.commits.outputs.date }}-${{ steps.commits.outputs.slug }}.md

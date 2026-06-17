@@ -344,7 +344,7 @@ function applyTemplateLayout() {
     const isHeaderToggle = toggle.closest(".template-reference-header");
     const label = state.template.open ? "Ocultar guia" : "Mostrar guia";
     const hasText = countWords(getActiveManuscript()?.text || writingArea?.innerText || "") > 0;
-    const hint = hasText ? label : "Abra o guia para ver a estrutura da forma. A conversa com o guia aparece após as primeiras linhas.";
+    const hint = hasText ? label : "Abra o guia para ver a estrutura do texto e os critérios da forma escolhida.";
     toggle.setAttribute("aria-expanded", String(state.template.open));
     toggle.setAttribute("aria-label", label);
     toggle.title = hint;
@@ -392,7 +392,7 @@ function setActiveManuscript(id) {
   renderMetadataForm();
   renderProofView();
   renderVersionList();
-  persistState("Manuscrito aberto");
+  persistState("Texto aberto");
   setView("editor");
 }
 
@@ -419,9 +419,9 @@ function getPageRenderOpts() {
 
 function exportPrecisionAnalysis() {
   const ms = getActiveManuscript();
-  if (!ms || !window.VeredaPrecision) { saveStatus.textContent = "Nenhum manuscrito ativo."; return; }
+  if (!ms || !window.VeredaPrecision) { saveStatus.textContent = "Nenhum texto aberto."; return; }
   const text = ms.text || (ms.html || "").replace(/<[^>]+>/g, " ");
-  if (!text.trim()) { saveStatus.textContent = "Manuscrito vazio."; return; }
+  if (!text.trim()) { saveStatus.textContent = "Texto vazio."; return; }
   const template = window.VeredaTemplates?.getTemplate(state.template?.selectedId) || {};
   const a = VeredaPrecision.analyze(template, text);
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
@@ -429,7 +429,7 @@ function exportPrecisionAnalysis() {
   const lines = [
     "ADERÊNCIA AO GUIA — Escrevaral",
     sep,
-    `Manuscrito: ${ms.title || "sem título"}  ·  ${a.words} palavras  ·  ${date}`,
+    `Texto: ${ms.title || "sem título"}  ·  ${a.words} palavras  ·  ${date}`,
     template.label ? `Guia: ${template.label}` : "Guia: análise genérica",
     `Aderência: ${a.score}% — ${a.status}`,
     "",
@@ -516,7 +516,7 @@ function updateCreateNoteHeading() {
   const eyebrow = document.querySelector("[data-create-note-eyebrow]");
   const title = document.querySelector("[data-create-note-title]");
   const isGuide = createNoteContext === "guide";
-  if (eyebrow) eyebrow.textContent = isGuide ? "Guia de escrita" : "Novo manuscrito";
+  if (eyebrow) eyebrow.textContent = isGuide ? "Guia de escrita" : "Novo texto";
   if (title) title.textContent = isGuide ? "Escolher um guia" : "Começar";
 }
 
@@ -565,7 +565,7 @@ function renderCreateCategoryGrid() {
       <button class="create-cat-card create-cat-card--blank" data-action="create-quick-note" type="button">
         <span class="material-symbols-outlined">edit_note</span>
         <strong>Folha em branco</strong>
-        <small>Comece sem guia, sem formato, só escrevendo.</small>
+        <small>Abra um texto em branco para escrever ou colar um rascunho.</small>
       </button>
       ${cards}
     </div>
@@ -914,12 +914,12 @@ function createNoteFromDocType(typeId) {
 function createBlankManuscript() {
   const manuscript = VeredaArchive.createManuscript({
     id: `manuscrito-${Date.now()}`,
-    title: `Manuscrito ${nextDraftNumber()}`,
+    title: `Texto ${nextDraftNumber()}`,
     text: "",
     type: "manuscrito",
     folder: "Ficção",
   });
-  addManuscript(manuscript, "Rascunho livre criado");
+  addManuscript(manuscript, "Texto em branco criado");
 }
 
 async function createManuscriptFromTemplate(templateId) {
@@ -2328,7 +2328,9 @@ writingArea.addEventListener("copy", () => {
 });
 
 writingArea.addEventListener("paste", (e) => {
-  const pasted = (e.clipboardData || window.clipboardData)?.getData("text") || "";
+  const clipboard = e.clipboardData || window.clipboardData;
+  const pasted = clipboard?.getData("text") || "";
+  const pastedHtml = clipboard?.getData("text/html") || "";
   if (!pasted.length) return;
 
   const internalMark = sessionStorage.getItem("vrda-internal-copy");
@@ -2346,13 +2348,17 @@ writingArea.addEventListener("paste", (e) => {
     persistState();
   }
 
-  if (!isInternal) _showPasteNotice(pasted.length);
+  if (!isInternal) {
+    _showPasteNotice({
+      richText: Boolean(pastedHtml && /<[^>]+>/.test(pastedHtml)),
+    });
+  }
 });
 
 const _PASTE_SNOOZE_KEY = "vrda-paste-notice-snooze";
 const _PASTE_SNOOZE_MS  = 7 * 24 * 60 * 60 * 1000;
 
-function _showPasteNotice(chars) {
+function _showPasteNotice({ richText = false } = {}) {
   const snoozed = parseInt(localStorage.getItem(_PASTE_SNOOZE_KEY) || "0", 10);
   if (Date.now() - snoozed < _PASTE_SNOOZE_MS) return;
 
@@ -2365,8 +2371,8 @@ function _showPasteNotice(chars) {
     toast.innerHTML = `
       <span class="material-symbols-outlined" style="font-size:18px;color:var(--primary);flex-shrink:0">content_paste</span>
       <div style="flex:1;min-width:0">
-        <strong style="display:block;font-size:13px;color:var(--ink);margin-bottom:2px">Texto colado registrado</strong>
-        <span style="font-size:12px;color:var(--muted)">Será descontado proporcionalmente na prova de autoria.</span>
+        <strong id="paste-notice-title" style="display:block;font-size:13px;color:var(--ink);margin-bottom:2px"></strong>
+        <span id="paste-notice-body" style="font-size:12px;color:var(--muted)"></span>
       </div>
       <button id="paste-notice-snooze" style="font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;white-space:nowrap;padding:0 0 0 8px">Não mostrar<br>por 7 dias</button>
       <button id="paste-notice-close" style="background:none;border:none;cursor:pointer;color:var(--muted);flex-shrink:0" aria-label="Fechar">
@@ -2388,6 +2394,15 @@ function _showPasteNotice(chars) {
       toast.remove();
     });
     document.getElementById("paste-notice-close").addEventListener("click", () => toast.remove());
+  }
+
+  const title = toast.querySelector("#paste-notice-title");
+  const body = toast.querySelector("#paste-notice-body");
+  if (title && body) {
+    title.textContent = richText ? "Texto colado como texto limpo" : "Texto colado registrado";
+    body.textContent = richText
+      ? "A formatação de Word ou Docs foi removida. O trecho também entra como colagem externa na prova de autoria."
+      : "O trecho entra como colagem externa na prova de autoria.";
   }
 
   // Auto-dismiss após 8s

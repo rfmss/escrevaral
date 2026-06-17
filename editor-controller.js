@@ -6,7 +6,7 @@ function renderActiveManuscript() {
   if (!manuscript) {
     titleInput.value = "";
     writingArea.innerHTML = "";
-    writingArea.dataset.placeholder = "Comece aqui. A primeira frase abre o caminho.";
+    writingArea.dataset.placeholder = "Digite ou cole seu texto aqui.";
     writingArea.dataset.placeholderIsExample = "";
     specializedEditor.hidden = true;
     writingArea.hidden = false;
@@ -79,7 +79,7 @@ function renderSpecializedEditor(manuscript) {
     slam:       "Título do poema",
     enem:       "Título da redação",
   };
-  titleInput.placeholder = TITLE_PLACEHOLDERS[mode] || "Sem título";
+  titleInput.placeholder = TITLE_PLACEHOLDERS[mode] || "Título do texto";
 
   if (mode === "soneto") {
     writingArea.hidden = true;
@@ -171,7 +171,7 @@ function updateCurrentManuscript() {
   const manuscript = getActiveManuscript();
   const nextManuscript = {
     ...manuscript,
-    title: titleInput.value.trim() || "Manuscrito sem título",
+    title: titleInput.value.trim() || "Texto sem título",
     text: writingArea.innerText.trim(),
     html:  writingArea.innerHTML,
     updatedAt: new Date().toISOString(),
@@ -632,7 +632,7 @@ function updateWritingPlaceholder(template = VeredaTemplates.getTemplate(state.t
   } else {
     const kind = getActiveManuscript()?.kind;
     const byKind = placeholderByKind(kind);
-    writingArea.dataset.placeholder = byKind || "Comece aqui. A primeira frase abre o caminho.";
+    writingArea.dataset.placeholder = byKind || "Digite ou cole seu texto aqui.";
     writingArea.dataset.placeholderIsExample = byKind ? "true" : "";
   }
   updateEditorQuote();

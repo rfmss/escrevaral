@@ -272,9 +272,9 @@ function setEditorViewMode(mode) {
     const isPages = mode === "pages";
     const label = toggleBtn.querySelector("[data-page-view-label]");
     toggleBtn.setAttribute("aria-pressed", String(isPages));
-    toggleBtn.setAttribute("aria-label", isPages ? "Voltar ao fluxo" : "Ver texto em página");
-    toggleBtn.title = isPages ? "Voltar ao fluxo" : "Ver texto em página";
-    if (label) label.textContent = isPages ? "Fluxo" : "Página";
+    toggleBtn.setAttribute("aria-label", isPages ? "Voltar ao texto corrido" : "Ativar modo página");
+    toggleBtn.title = isPages ? "Voltar ao texto corrido" : "Ativar modo página";
+    if (label) label.textContent = isPages ? "Texto corrido" : "Modo página";
   }
 }
 

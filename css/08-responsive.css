@@ -256,6 +256,11 @@
   /* Format-bar estreita: escrita essencial fica visível, alinhamento/saída abrem no ⋯ */
   .fmt-sep-editorial { display: none; }
   .fmt-label { display: none; }
+  .fmt-btn-labeled {
+    width: auto;
+    min-width: 50px;
+    padding: 0 6px;
+  }
   .format-bar:not(.is-editorial-open) .fmt-mobile-secondary {
     display: none;
   }
@@ -272,6 +277,14 @@
   }
   .fmt-group-editorial > [data-action="copy-manuscript-text"] {
     display: flex;
+  }
+  .fmt-group-editorial > [data-action="export-rtf"] {
+    display: flex;
+  }
+  .fmt-group-editorial > [data-action="copy-manuscript-text"] .fmt-label,
+  .fmt-group-editorial > [data-action="export-rtf"] .fmt-label,
+  .fmt-editorial-toggle .fmt-label {
+    display: block;
   }
   .fmt-editorial-toggle {
     display: flex;

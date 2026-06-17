@@ -4,12 +4,11 @@ Allow: /
 # Páginas de conteúdo editorial
 Allow: /vereda-titulo-do-livro.html
 Allow: /vereda-primeiras-linhas.html
-Allow: /vereda-estrutura-romance.html
-Allow: /vereda-dialogos.html
-Allow: /vereda-personagens.html
 Allow: /vereda-revisao-manuscrito.html
 Allow: /vereda-bloqueio-criativo.html
 Allow: /vereda-biblioteca-escrita.html
+Allow: /anatomia-do-livro.html
+Allow: /privacidade.html
 
 # Sitemap
 Sitemap: https://escrevaral.com/sitemap.xml

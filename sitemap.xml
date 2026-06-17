@@ -2,56 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://escrevaral.com/</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://escrevaral.com/vereda-titulo-do-livro.html</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://escrevaral.com/vereda-primeiras-linhas.html</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://escrevaral.com/vereda-estrutura-romance.html</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://escrevaral.com/vereda-dialogos.html</loc>
-    <lastmod>2026-05-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://escrevaral.com/vereda-personagens.html</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://escrevaral.com/vereda-revisao-manuscrito.html</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://escrevaral.com/vereda-bloqueio-criativo.html</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://escrevaral.com/vereda-biblioteca-escrita.html</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://escrevaral.com/anatomia-do-livro.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://escrevaral.com/privacidade.html</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

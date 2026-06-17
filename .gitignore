@@ -38,6 +38,10 @@ build/
 # ── Ferramentas de IA / CLI local ────────────────────────────────
 .claude/
 .codex/
+.agents/sentinel/*.log
+.agents/sentinel/*.pid
+.agents/sentinel/state.json
+.agents/sentinel/*.tmp
 
 # ── Credenciais e chaves ─────────────────────────────────────────
 *.pem

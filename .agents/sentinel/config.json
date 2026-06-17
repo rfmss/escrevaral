@@ -1,0 +1,56 @@
+{
+  "resume_prompt": "continue o trabalho",
+  "scan_interval_seconds": 20,
+  "default_wait_minutes": 70,
+  "resume_grace_minutes": 3,
+  "orange_threshold": {
+    "min_pixels": 240,
+    "min_ratio": 0.0035
+  },
+  "warning_terms": [
+    "limit",
+    "limite",
+    "exceeded",
+    "atingido",
+    "esper",
+    "wait",
+    "try again",
+    "tente novamente",
+    "credit",
+    "credito",
+    "crédito",
+    "upgrade",
+    "buy",
+    "comprar",
+    "resets",
+    "reset",
+    "volta",
+    "available"
+  ],
+  "regions": [
+    {
+      "id": "claude_left_input_warning",
+      "label": "Claude no painel esquerdo",
+      "x": 58,
+      "y": 575,
+      "w": 530,
+      "h": 70,
+      "resume_click": {
+        "x": 310,
+        "y": 676
+      }
+    },
+    {
+      "id": "codex_devin_right_input_warning",
+      "label": "Codex/Devin no painel direito",
+      "x": 618,
+      "y": 548,
+      "w": 686,
+      "h": 64,
+      "resume_click": {
+        "x": 962,
+        "y": 654
+      }
+    }
+  ]
+}
