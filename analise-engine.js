@@ -246,6 +246,15 @@
     ["hábito costumeiro","hábito"],["viúva do marido falecido","viúva"],
     ["falso pretexto","pretexto"],["questionar com perguntas","questionar"],
     ["novidade nova","novidade"],
+    ["acrescentar mais","acrescentar"],["antecipar antes","antecipar"],
+    ["até hoje ainda","até hoje"],["completamente vazio","vazio"],
+    ["engordar de peso","engordar"],["eliminar de vez","eliminar"],
+    ["hipótese possível","hipótese"],["livre e solto","livre"],
+    ["muito excessivo","excessivo"],["passado antigo","passado"],
+    ["primeiro início","início"],["recordação de memória","recordação"],
+    ["rever outra vez","rever"],["retorno de volta","retorno"],
+    ["separar individualmente","separar"],["unânime de todos","unânime"],
+    ["juntos ao mesmo tempo","juntos"],["reimprimir de novo","reimprimir"],
   ];
 
   const NEGACOES_DUPLAS = [
