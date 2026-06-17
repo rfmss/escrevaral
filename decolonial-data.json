@@ -2733,6 +2733,103 @@
       "reason": "A miscigenação foi tratada como problema racial no Brasil do século XIX (branqueamento). Enquadrar mistura como desvio reproduz essa lógica eugênica.",
       "context": "Em análise histórica da eugenia brasileira, o conceito precisa ser nomeado — com distância crítica do narrador.",
       "contextual": true
+    },
+    {
+      "avoid": "mulher pública",
+      "alternatives": [
+        "mulher que exerce cargo público",
+        "personalidade pública"
+      ],
+      "category": "genero",
+      "reason": "Assimetria histórica: 'homem público' significa estadista; 'mulher pública' tornou-se sinônimo de prostituta. O mesmo adjetivo tem sentidos opostos conforme o gênero do sujeito.",
+      "context": "Em análise linguística da assimetria de gênero ou em citação histórica, o uso explicado é pertinente.",
+      "contextual": false
+    },
+    {
+      "avoid": "solteirona",
+      "alternatives": [
+        "mulher solteira",
+        "mulher que vive sozinha",
+        "mulher sem cônjuge"
+      ],
+      "category": "genero",
+      "reason": "Substantivo feminino com carga pejorativa ausente no equivalente masculino. 'Solteirão' tem conotação positiva (conquistador); 'solteirona' implica fracasso social feminino.",
+      "context": "Em voz de personagem que reproduz preconceito de época, o uso consciente pode servir ao texto.",
+      "contextual": true
+    },
+    {
+      "avoid": "novo rico",
+      "alternatives": [
+        "pessoa que ascendeu economicamente",
+        "família de riqueza recente",
+        "classe média alta"
+      ],
+      "category": "classe",
+      "reason": "Termo carregado de desdém classista: pressupõe que mobilidade social ascendente é ilegítima, enquanto riqueza herdada seria 'de verdade'. Reforça hierarquia de nascimento.",
+      "context": "Em análise sociológica do classismo ou em voz de personagem que reproduz preconceito de classe, pode ser usado com consciência.",
+      "contextual": true
+    },
+    {
+      "avoid": "plebe",
+      "alternatives": [
+        "população comum",
+        "povo",
+        "maioria da população"
+      ],
+      "category": "classe",
+      "reason": "Termo romano que rebaixou trabalhadores e artesãos à condição de não-cidadãos. Em português, carrega desdém elitista pela maioria da população.",
+      "context": "Em texto histórico sobre Roma Antiga ou análise do elitismo, o uso com distância crítica é aceitável.",
+      "contextual": true
+    },
+    {
+      "avoid": "falar errado",
+      "alternatives": [
+        "variante regional",
+        "forma não-padrão",
+        "dialeto",
+        "registro popular"
+      ],
+      "category": "linguagem",
+      "reason": "A língua não tem 'certo' e 'errado' absolutos — tem variedades sociais, regionais e históricas. Classificar falas nordestinas, periféricas ou indígenas como 'erradas' é preconceito linguístico documentado por Marcos Bagno.",
+      "context": "Em análise do preconceito linguístico (ex.: citação de Bagno), nomear o conceito com aspas e distância crítica é necessário.",
+      "contextual": false
+    },
+    {
+      "avoid": "serviço de branco",
+      "alternatives": [
+        "trabalho bem feito",
+        "serviço de qualidade",
+        "execução cuidadosa"
+      ],
+      "category": "relacoes",
+      "reason": "Expressão que hierarquiza raça e qualidade do trabalho, sugerindo que pessoas brancas executam melhor. Espelho de 'trabalho de preto', igualmente racista na direção oposta.",
+      "context": "Depende do contexto: em análise do racismo estrutural ou em voz de personagem que reproduz preconceito, o uso consciente é possível.",
+      "contextual": true
+    },
+    {
+      "avoid": "interior profundo",
+      "alternatives": [
+        "interior",
+        "zona rural",
+        "regiões do interior",
+        "cidades do interior"
+      ],
+      "category": "territorio",
+      "reason": "O adjetivo 'profundo' sugere isolamento, atraso ou exotismo. Invisibiliza a complexidade cultural e econômica das regiões não-metropolitanas.",
+      "context": "Como metáfora geográfica literária (ex.: profundo sertão), o uso pode ser justificado com consciência de sua carga.",
+      "contextual": true
+    },
+    {
+      "avoid": "analfabeto",
+      "alternatives": [
+        "pessoa não-alfabetizada",
+        "adulto em processo de alfabetização",
+        "pessoa com letramento limitado"
+      ],
+      "category": "conhecimento",
+      "reason": "O termo reduz a pessoa à ausência de uma habilidade específica, ignorando saberes orais, práticos e culturais. Paulo Freire documentou o preconceito embutido no conceito de 'analfabetismo'.",
+      "context": "Em análise educacional ou citação histórica, pode ser necessário nomeá-lo — com clareza do que o termo apaga.",
+      "contextual": false
     }
   ]
 }
