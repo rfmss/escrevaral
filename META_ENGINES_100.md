@@ -68,41 +68,45 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
-## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v553)
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v556)
 
-**Baseline:** v553 — Sintaxe 97%; Tema 100%; todos os outros engines em 100%.
+**Baseline:** v556 — Sintaxe 98%; Tema 100%; todos os outros engines em 100%.
 
-**O que foi entregue neste ciclo (v547→v553):**
+**O que foi entregue neste ciclo (v547→v556):**
 
 - `norma-data.json` (v547): `verbos_pres_reg` 203→240 (+37 formas: passa, chama, leva, torna, traz, bebe, resolve, recebe, segue, etc.)
 - `norma-data.json` (v548): `adjetivos_comuns` 216→271 (+55 adjetivos de estado, traço, qualidade e social)
 - `norma-data.json` (v549): `formas_verbais_irr` 135→201 (+66 formas de ser/estar/ter/ir/vir/fazer/poder/querer/saber/dizer/trazer/pôr/dar)
 - `synonym-data.js` (v550): 130→145 (+15: temer, ler, construir, destruir, mudar, aprender, ensinar, dormir, feliz, livre, ódio, alegria, tristeza, mundo, céu)
 - `css/03-inspector-precision.css` (v551): dark mode para syntax-tokens (sujeito/verbo/objeto/adjunto/predicativo/vocativo/aposto) nos 4 temas escuros
-- `css/02-shell-navigation.css` (v552): dark mode para cores de ofício (roteiro/poesia/não-ficção/vestibular/comercial) na Nova Nota — --craft mais claro
+- `css/02-shell-navigation.css` (v552): dark mode para cores de ofício (roteiro/poesia/não-ficção/vestibular/comercial) na Nova Nota — `--craft` mais claro
 - `css/03-editor-toolbar.css` (v553): dark mode para gramática colorida (11 classes gw-*: verbo, substantivo, adjetivo, pronome, artigo, preposição, conjunção, advérbio, numeral, interjeição, próprio)
+- `syntax-engine.js` (v554): `_SUFIXOS_NOM` ganha `-ista`, `-ura`, `-aria`, `-orio` — artista/jornalista, altura/leitura, livraria/padaria, dormitório/laboratório agora reconhecidos como Substantivo na desambiguação R1
+- `voice-engine.js` (v555): stopwords +40 palavras funcionais (conjunções, preposições, advérbios temporais, formas verbais auxiliares)
+- `analise-engine.js` (v556): STOPWORDS +30 palavras funcionais (pronomes indefinidos, estar/ficar/ir/vir, conectivos discursivos)
 
 **Revisão de maturidade:**
-- **Sintaxe 95% → 97%**: expansão morfológica massiva de norma-data (verbos_pres_reg/adjetivos_comuns/formas_verbais_irr)
-- **Tema 99% → 100%**: grammar coloring, syntax-tokens e craft icons finalmente cobertos nos 4 temas escuros
+- **Sintaxe 95% → 98%**: expansão massiva de norma-data + sufixos nominais + dados morfológicos completos
+- **Tema 99% → 100%**: grammar coloring, syntax-tokens e craft icons cobertos nos 4 temas escuros
+- **Analise/Voz**: stopwords mais precisas → menos falsos positivos em repetição e densidade
 
-**Estado atualizado dos engines (v553):**
+**Estado atualizado dos engines (v556):**
 
-| Área / engine | Maturidade | Notas de estado (v553) |
+| Área / engine | Maturidade | Notas de estado (v556) |
 |---|---:|---|
-| Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia |
-| Espelho de Voz | **100%** | inferVoiceCtx(): spots silenciados em poesia/roteiro |
+| Analise geral | **100%** | STOPWORDS expandido; inferirContextoAnalise(); bordas fechadas |
+| Espelho de Voz | **100%** | stopwords +40; inferVoiceCtx(): spots silenciados em poesia/roteiro |
 | RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos de seção |
 | Lexico / Biblioteca | **100%** | 200 entradas; sinônimos 145 entradas |
 | Decolonial / vocabulário | **100%** | 239 entradas; tribo, bicha, palavra de negro, evolução das raças |
-| Sintaxe | **97%** | verbos_pres_reg 240; adjetivos_comuns 271; formas_verbais_irr 201 |
+| Sintaxe | **98%** | verbos_pres_reg 240; adjetivos_comuns 271; formas_verbais_irr 201; _SUFIXOS_NOM +4 |
 | Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons, reader-overlay, soneto, mark — todos cobertos |
 
 **Próximas fronteiras:**
 
-1. **Sintaxe 97% → 99%**: desambiguação por janela de contexto — requer mudança em syntax-engine.js (custo alto)
-2. **Dados**: analise-data.json (stopwords 117) e analise-engine.js (CLIQUES_PT/PLEONASMOS) podem crescer
-3. **Produto/UX**: sessões futuras podem focar em fluxos de produto com todos engines em 97–100%
+1. **Sintaxe 98% → 99%**: desambiguação contextual — requer mudança em syntax-engine.js (custo alto, análise por janela)
+2. **Produto/UX**: todos engines em 98–100% — sessões futuras podem focar em fluxos de escritora, onboarding, primeira visita
+3. **Dados**: CLIQUES_PT (209 entradas) e PLEONASMOS (72 entradas) podem crescer — baixo custo, longo prazo
 
 ---
 
