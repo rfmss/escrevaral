@@ -1059,6 +1059,27 @@
     "amanhecer":   ["aurora", "alvorecer", "madrugada", "alvorada", "raiar", "romper do dia"],
     "anoitecer":   ["crepúsculo", "entardecer", "poente", "pôr do sol", "penumbra", "ocaso"],
 
+    // substantivos de relação social
+    "amizade":     ["companheirismo", "fraternidade", "camaradagem", "vínculo", "afinidade", "cumplicidade"],
+    "rivalidade":  ["disputa", "concorrência", "competição", "conflito", "animosidade", "antagonismo"],
+    "traição":     ["perfídia", "deslealdade", "apostasia", "infidelidade", "quebra de confiança", "virada"],
+    "aliança":     ["parceria", "pacto", "acordo", "coalizão", "coalização", "união", "solidariedade"],
+    // adjetivos de nível e grau
+    "absoluto":    ["total", "completo", "integral", "pleno", "irrestrito", "incondicional", "categórico"],
+    "relativo":    ["parcial", "condicionado", "dependente", "comparativo", "proporcional", "contextual"],
+    "excessivo":   ["demasiado", "desmedido", "exagerado", "extremo", "desproporcional", "imoderado"],
+    "escasso":     ["raro", "parco", "insuficiente", "limitado", "restrito", "deficiente", "exíguo"],
+    // verbos de transformação
+    "mudar":       ["transformar", "alterar", "modificar", "converter", "revirar", "reformular", "renovar"],
+    "crescer":     ["expandir", "desenvolver", "prosperar", "avançar", "progredir", "amadurecer", "evoluir"],
+    "cair":        ["despencar", "desabar", "tombar", "ruir", "colapsar", "declinar", "afundar"],
+    "construir":   ["edificar", "erguer", "criar", "montar", "estabelecer", "fundar", "arquitetar"],
+    // adjetivos de julgamento moral
+    "justo":       ["equânime", "imparcial", "correto", "reto", "proporcional", "equilibrado", "equitativo"],
+    "injusto":     ["parcial", "desigual", "arbitrário", "desmedido", "tendencioso", "opressivo"],
+    "culpado":     ["responsável", "autor", "causador", "réu", "culpável", "incriminado", "punível"],
+    "inocente":    ["absolvido", "irrepreensível", "indefeso", "puro", "não culpado", "desculpado"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
