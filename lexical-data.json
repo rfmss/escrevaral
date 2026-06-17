@@ -1589,6 +1589,78 @@
       "className": "Substantivo masculino",
       "field": "Cognição — medo inconsciente, projeção, o que o dia não resolve",
       "note": "O pesadelo revela o que o personagem não consegue enfrentar acordado. Em narrativa, é uma forma econômica de mostrar trauma sem explicar."
+    },
+    "violencia": {
+      "label": "violência",
+      "className": "Substantivo feminino",
+      "field": "Conflito — força, ruptura, cicatriz que o texto carrega",
+      "note": "Violência literária exige consequência: um personagem que sofre violência e não muda é um personagem que ainda não foi escrito. Nomeie o que acontece sem eufemismo."
+    },
+    "trabalho": {
+      "label": "trabalho",
+      "className": "Substantivo masculino",
+      "field": "Cotidiano — identidade, sobrevivência, tempo vendido",
+      "note": "O trabalho define personagens por contraste: o que fazem para sobreviver frequentemente não é o que são. A ausência de trabalho também é tema."
+    },
+    "dinheiro": {
+      "label": "dinheiro",
+      "className": "Substantivo masculino",
+      "field": "Classe — poder, desejo, o que move ou trava a ação",
+      "note": "O dinheiro raramente aparece como tema direto na literatura de alto prestígio, mas organiza quase tudo. Sua ausência ou presença é motor silencioso de conflito."
+    },
+    "escola": {
+      "label": "escola",
+      "className": "Substantivo feminino",
+      "field": "Memória — infância, formação, o primeiro espaço coletivo",
+      "note": "A escola é o lugar onde o personagem encontra o mundo fora da família. Em narrativa brasileira, escola pública e particular têm pesos simbólicos distintos."
+    },
+    "saude": {
+      "label": "saúde",
+      "className": "Substantivo feminino",
+      "field": "Corpo — vulnerabilidade, cuidado, o que se perde sem aviso",
+      "note": "Saúde é presença invisível até se tornar ausência. Doença e cura estruturam narrativas de transformação, mas saúde mental é tão literária quanto física."
+    },
+    "casamento": {
+      "label": "casamento",
+      "className": "Substantivo masculino",
+      "field": "Relação — contrato afetivo, expectativa social, o pacto que define",
+      "note": "O casamento literário não precisa ser feliz — ele precisa significar. O que o personagem espera, negocia ou foge em um casamento revela sua visão de mundo."
+    },
+    "divorcio": {
+      "label": "divórcio",
+      "className": "Substantivo masculino",
+      "field": "Ruptura — fim formal, recomeço forçado, o que se redistribui",
+      "note": "O divórcio é uma ruptura com assinatura. Diferente da separação, ele carrega peso institucional e social — o mundo antes e depois tem nomes diferentes."
+    },
+    "governo": {
+      "label": "governo",
+      "className": "Substantivo masculino",
+      "field": "Poder — Estado, lei, o que organiza ou oprime",
+      "note": "O governo em narrativa raramente aparece: quase sempre é o que falta, o que falhou, o que deveria ter chegado. Sua presença ou ausência define o peso do personagem no mundo."
+    },
+    "lei": {
+      "label": "lei",
+      "className": "Substantivo feminino",
+      "field": "Abstração — norma, limite, promessa de ordem",
+      "note": "A lei literária existe para ser transgredida, duvidada ou protegida. O personagem que respeita a lei e o que a ignora têm motivações distintas — ambas valem a pena investigar."
+    },
+    "beleza": {
+      "label": "beleza",
+      "className": "Substantivo feminino",
+      "field": "Estética — desejo, padrão, o que o olhar classifica",
+      "note": "Beleza é poder social disfarçado de qualidade natural. Em narrativa brasileira, é sempre marcada por raça, classe e gênero — beleza sem contexto não existe."
+    },
+    "jovem": {
+      "label": "jovem",
+      "className": "Substantivo / Adjetivo",
+      "field": "Tempo — potencial, risco, identidade ainda em formação",
+      "note": "O jovem literário está sempre entre dois mundos: o da família que deixa e o do mundo adulto que ainda não reconhece. Esse intervalo é onde os conflitos nascem."
+    },
+    "hora": {
+      "label": "hora",
+      "className": "Substantivo feminino",
+      "field": "Tempo — ritmo, urgência, o ponto em que a ação acontece",
+      "note": "A hora marca o ritmo da narrativa: 'a esta hora' cria tensão; 'naquela hora' cria distância. O tempo é personagem quando o relógio aparece."
     }
   },
   "functionWords": {
