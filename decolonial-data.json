@@ -3235,6 +3235,165 @@
       "reason": "Conquista pressupõe que havia inimigo a vencer. Oculta o extermínio de populações indígenas e as violências da expansão territorial brasileira.",
       "context": "Em textos históricos críticos, pode aparecer como objeto de análise com contextualização do que a 'conquista' significou.",
       "contextual": true
+    },
+    {
+      "avoid": "mulher emotiva",
+      "alternatives": [
+        "pessoa que expressa emoções",
+        "alguém com reação intensa"
+      ],
+      "category": "genero",
+      "reason": "Usa emoção como desqualificação, aplicada predominantemente a mulheres para invalidar percepções e posições.",
+      "context": "Texto que descreve reações de personagens ou pessoas reais",
+      "contextual": false
+    },
+    {
+      "avoid": "sensível demais para a liderança",
+      "alternatives": [
+        "com estilo de liderança diferente",
+        "com abordagem mais colaborativa"
+      ],
+      "category": "genero",
+      "reason": "Código que associa liderança à insensibilidade e usa 'sensibilidade' para afastar mulheres e homens não-hegemônicos de posições de poder.",
+      "context": "Texto sobre trabalho, hierarquia, liderança",
+      "contextual": false
+    },
+    {
+      "avoid": "questão de mulher",
+      "alternatives": [
+        "questão de gênero",
+        "pauta das mulheres"
+      ],
+      "category": "genero",
+      "reason": "Enquadra direitos e pautas das mulheres como assunto menor ou exclusivo, não como questão de justiça social.",
+      "context": "Texto político ou de opinião",
+      "contextual": false
+    },
+    {
+      "avoid": "autista como insulto",
+      "alternatives": [
+        "fora do contexto",
+        "sem empatia",
+        "desatento"
+      ],
+      "category": "deficiencia",
+      "reason": "Usar autismo como metáfora negativa estigmatiza pessoas autistas e reduz identidade neurodivergente a falha social.",
+      "context": "Texto coloquial ou narrativa com personagens",
+      "contextual": true
+    },
+    {
+      "avoid": "louco como diagnóstico informal",
+      "alternatives": [
+        "com comportamento imprevisível",
+        "em crise",
+        "tomou uma decisão drástica"
+      ],
+      "category": "deficiencia",
+      "reason": "Uso casual de 'louco' patologiza comportamentos e reforça estigma em saúde mental.",
+      "context": "Narrativa, crônica, texto de opinião",
+      "contextual": true
+    },
+    {
+      "avoid": "cabelo crespo domado",
+      "alternatives": [
+        "cabelo crespo cuidado",
+        "cabelo crespo penteado"
+      ],
+      "category": "estetica",
+      "reason": "'Domar' implica que o cabelo crespo é selvagem por natureza, reforçando ideal estético de cabelo liso como norma.",
+      "context": "Descrição de personagem, texto de beleza, ficção",
+      "contextual": false
+    },
+    {
+      "avoid": "negra de feições europeias",
+      "alternatives": [
+        "mulher negra",
+        "descrevendo traços específicos sem hierarquizá-los"
+      ],
+      "category": "estetica",
+      "reason": "Elogiar traços europeus em pessoas negras reproduz hierarquia estética colonial que valoriza proximidade ao branco.",
+      "context": "Descrição física em ficção ou jornalismo",
+      "contextual": false
+    },
+    {
+      "avoid": "apresentável",
+      "alternatives": [
+        "bem arrumado",
+        "trajado formalmente",
+        "com boa apresentação"
+      ],
+      "category": "estetica",
+      "reason": "Em certos contextos, 'apresentável' é código para cabelo alisado ou apresentação que se aproxima de padrões brancos.",
+      "context": "Texto de trabalho, escola, contexto formal com conotação racial",
+      "contextual": true
+    },
+    {
+      "avoid": "falar bem como elogio racial",
+      "alternatives": [
+        "fala com clareza",
+        "se expressa bem"
+      ],
+      "category": "linguagem",
+      "reason": "Elogiar uma pessoa negra por 'falar bem' revela surpresa racial, implicando que o esperado seria o contrário.",
+      "context": "Texto ou diálogo que elogia a fala de uma pessoa",
+      "contextual": true
+    },
+    {
+      "avoid": "português errado",
+      "alternatives": [
+        "variante linguística",
+        "dialeto regional",
+        "registro informal"
+      ],
+      "category": "linguagem",
+      "reason": "Muitas variedades do português são estigmatizadas como 'errado', apagando sua legitimidade linguística e marcando classe e raça.",
+      "context": "Narrativa com diálogo, crônica, texto pedagógico",
+      "contextual": true
+    },
+    {
+      "avoid": "pobre com celular",
+      "alternatives": [
+        "pessoa com acesso à tecnologia",
+        "trabalhador com smartphone"
+      ],
+      "category": "classe",
+      "reason": "Estranhamento de que pessoas pobres usem tecnologia acessível revela julgamento paternalista sobre o que pobres merecem ou podem consumir.",
+      "context": "Texto jornalístico, crônica, narrativa de personagem",
+      "contextual": false
+    },
+    {
+      "avoid": "não valorizam a educação",
+      "alternatives": [
+        "têm menos acesso à educação",
+        "enfrentam barreiras para escolarização"
+      ],
+      "category": "classe",
+      "reason": "Culpabiliza famílias pobres por desigualdade estrutural, ignorando condições materiais que impedem acesso pleno à escola.",
+      "context": "Texto sobre educação, desigualdade, escolarização",
+      "contextual": false
+    },
+    {
+      "avoid": "comunidade como eufemismo pejorativo",
+      "alternatives": [
+        "favela",
+        "periferia",
+        "bairro popular"
+      ],
+      "category": "territorio",
+      "reason": "Quando 'comunidade' é usado como eufemismo constrangido por 'favela', apaga o nome real e cria distância linguística que desumaniza o espaço.",
+      "context": "Texto jornalístico, narrativa de espaço urbano",
+      "contextual": true
+    },
+    {
+      "avoid": "zona de risco",
+      "alternatives": [
+        "área com alta vulnerabilidade social",
+        "território com presença de violência"
+      ],
+      "category": "territorio",
+      "reason": "Criminaliza o território como inteiro, ignorando que é a falta de Estado que cria risco — não as pessoas que habitam o local.",
+      "context": "Texto sobre segurança pública, ficção urbana",
+      "contextual": false
     }
   ]
 }
