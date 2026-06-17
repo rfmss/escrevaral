@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v604 (`vereda-offline-v603`, `ASSET_VERSION=20260617-clic379`)
+**Versão atual:** v612 (`vereda-offline-v612`, `ASSET_VERSION=20260617-clic433`)
 
 ---
 
@@ -36,6 +36,13 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v602 | verbos_pres_reg 440→571 (+131) |
 | v603 | decolonial 265→273 (+8) |
 | v604 | CLIQUES_PT 343→379 (+36) |
+| v606 | decolonial 273→281 (+8 classe e território) |
+| v607 | PLEONASMOS 163→183 (+20 redundâncias literárias) |
+| v608 | léxico 253→265 (+12: avó, justiça, ler, escrever, praia, irmã, neve…) |
+| v609 | sinônimos 240→254 (+14: branco, negro, ceder, confiar, vencer…) |
+| v610 | adjetivos_comuns 758→821 (+63 seguros: -oso/a, -ável/-ível, -ente, -ivo/a) |
+| v611 | verbos_pres_reg 571→616 (+45 formas literárias) |
+| v612 | CLIQUES_PT 379→433 (+54: motivacional, crônica, linguagem corporal, paisagem) |
 
 ---
 
