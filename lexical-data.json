@@ -1517,6 +1517,78 @@
       "className": "Verbo",
       "field": "Cognição — o medo como relação, não como reação; o que o personagem não consegue nomear",
       "note": "Temer é mais específico que ter medo. Implica um objeto — e quando o texto não diz o que o personagem teme, o leitor busca. Esse silêncio é suspenso."
+    },
+    "avo": {
+      "label": "avó / avô",
+      "className": "Substantivo",
+      "field": "Relação — herança afetiva, memória oral, continuidade",
+      "note": "A avó e o avô carregam o tempo que o personagem ainda não viveu. Em narrativa brasileira, são guardiões de história oral e de receitas, rezas e segredos familiares."
+    },
+    "justica": {
+      "label": "justiça",
+      "className": "Substantivo feminino",
+      "field": "Abstração — desejo de reparação, tensão social, lei e moral",
+      "note": "Justiça literária não é a do tribunal: é a que o personagem exige e raramente encontra. Sua ausência move mais histórias do que sua presença."
+    },
+    "ler": {
+      "label": "ler",
+      "className": "Verbo",
+      "field": "Cognição — descoberta, interpretação, formação",
+      "note": "Quem lê na ficção revela quem é. O que um personagem lê — e o que recusa ler — é caracterização."
+    },
+    "escrever": {
+      "label": "escrever",
+      "className": "Verbo",
+      "field": "Metalinguagem — criação, registro, poder sobre o real",
+      "note": "Escrever na ficção é quase sempre um ato político ou íntimo. Quem escreve tenta controlar a narrativa — da carta ao diário ao manifesto."
+    },
+    "nascimento": {
+      "label": "nascimento",
+      "className": "Substantivo masculino",
+      "field": "Tempo — origem, começo, o que não se escolhe",
+      "note": "O nascimento define o ponto de partida do personagem: família, lugar, tempo histórico. Em narrativa, é a origem que o presente tenta processar."
+    },
+    "praia": {
+      "label": "praia",
+      "className": "Substantivo feminino",
+      "field": "Espaço — fronteira, lazer, encontro entre terra e água",
+      "note": "A praia brasileira carrega contradição: lugar de férias para uns, território de trabalho para outros. Fronteira entre o seguro e o desconhecido."
+    },
+    "irma": {
+      "label": "irmã",
+      "className": "Substantivo feminino",
+      "field": "Relação — espelho de sangue, rivalidade e cumplicidade",
+      "note": "A irmã é o outro feminino mais próximo: pode ser aliada, rival ou espelho. Nas narrativas de mulheres, a relação entre irmãs carrega o que a relação com a mãe não pode."
+    },
+    "neve": {
+      "label": "neve",
+      "className": "Substantivo feminino",
+      "field": "Natureza — silêncio, apagamento, ausência de cor",
+      "note": "No contexto brasileiro, neve é metáfora de exílio ou de algo radicalmente fora do lugar. Seu aparecimento marca um personagem que saiu do próprio mundo."
+    },
+    "estrada": {
+      "label": "estrada",
+      "className": "Substantivo feminino",
+      "field": "Espaço — jornada, liberdade, o que está entre dois pontos",
+      "note": "A estrada pressupõe movimento e incerteza. Diferente da rua (cotidiano) e do caminho (interno), a estrada é a escolha de ir sem saber quando voltar."
+    },
+    "cantar": {
+      "label": "cantar",
+      "className": "Verbo",
+      "field": "Expressão — comunidade, resistência, alegria coletiva",
+      "note": "Cantar na ficção brasileira é frequentemente um ato político: quilombola, operário, torcedor, devoto. A canção que o personagem canta revela o que ele pertence."
+    },
+    "bairro": {
+      "label": "bairro",
+      "className": "Substantivo masculino",
+      "field": "Espaço — pertencimento cotidiano, território afetivo, memória urbana",
+      "note": "O bairro é a escala mais íntima da cidade: onde o personagem é reconhecido e vigiado ao mesmo tempo. Em narrativa periférica, é o mundo inteiro."
+    },
+    "pesadelo": {
+      "label": "pesadelo",
+      "className": "Substantivo masculino",
+      "field": "Cognição — medo inconsciente, projeção, o que o dia não resolve",
+      "note": "O pesadelo revela o que o personagem não consegue enfrentar acordado. Em narrativa, é uma forma econômica de mostrar trauma sem explicar."
     }
   },
   "functionWords": {
