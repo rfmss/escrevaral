@@ -314,6 +314,18 @@
     ["amanhecer do dia","amanhecer"],["breve resumo","resumo"],
     ["certamente com certeza","certamente"],["calar a boca","calar"],
     ["repetir mais uma vez","repetir"],["improvisar de repente","improvisar"],
+    // mais pleonasmos comuns em prosa e redação
+    ["elo de ligação entre","elo entre"],["livre e espontânea vontade","livre vontade"],
+    ["estranho e incomum","incomum"],["simples e singelo","singelo"],
+    ["trágico e fatal","fatal"],["absurdo e ilógico","absurdo"],
+    ["inesperado e surpreendente","surpreendente"],["velho e antigo","antigo"],
+    ["jovem e novo","jovem"],["vivo e em vida","vivo"],
+    ["verdadeiro fato","fato"],["falsa mentira","mentira"],
+    ["subir para o alto","subir"],["descer para o fundo","descer"],
+    ["criar do nada","criar"],["destruir completamente","destruir"],
+    ["acabar de vez","acabar"],["terminar de uma vez","terminar"],
+    ["aparecer de repente","aparecer"],["desaparecer de repente","desaparecer"],
+    ["entrar para dentro de","entrar em"],["sair de dentro de","sair de"],
   ];
 
   const NEGACOES_DUPLAS = [
