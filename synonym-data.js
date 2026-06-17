@@ -958,6 +958,25 @@
     "romper":      ["quebrar", "partir", "fragmentar", "violar", "transgredir", "irromper"],
     "atravessar":  ["cruzar", "transpor", "percorrer", "ultrapassar", "vencer", "traspor"],
 
+    // adjetivos de caráter e temperamento
+    "corajoso":    ["valente", "audacioso", "intrépido", "destemido", "ousado", "arrojado"],
+    "covarde":     ["medroso", "tímido", "fraco", "pusilânime", "apavorado", "receoso"],
+    "leal":        ["fiel", "dedicado", "comprometido", "honrado", "confiável", "constante"],
+    "traiçoeiro":  ["desleal", "falso", "pérfido", "infiel", "enganador", "traidor"],
+    "gentil":      ["amável", "cortês", "educado", "delicado", "bondoso", "atencioso"],
+    "cruel":       ["brutal", "implacável", "impiedoso", "sádico", "severo", "feroz"],
+    "teimoso":     ["obstinado", "persistente", "cabeça-dura", "pertinaz", "irredutível", "inflexível"],
+    "humilde":     ["modesto", "singelo", "despretensioso", "simples", "discreto", "contido"],
+    "arrogante":   ["presunçoso", "soberbo", "altivo", "vaidoso", "orgulhoso", "pretensioso"],
+    "paciente":    ["sereno", "tolerante", "calmo", "tranquilo", "impassível", "resignado"],
+
+    // substantivos de espaço e ambiente
+    "abrigo":      ["refúgio", "acolhida", "proteção", "guarida", "covil", "repouso"],
+    "prisao":      ["cárcere", "cadeia", "jaula", "encarceramento", "confinamento", "grilhão"],
+    "fronteira":   ["limite", "divisa", "margem", "borda", "perímetro", "demarcação"],
+    "labirinto":   ["emaranhado", "confusão", "intrincamento", "amarrado", "desvio", "armadilha"],
+    "espelho":     ["reflexo", "imagem", "cópia", "sombra", "eco", "duplo"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
