@@ -1259,6 +1259,60 @@
       "className": "Substantivo feminino",
       "field": "Corpo — fala, silêncio, desejo, o que entra e o que sai do corpo",
       "note": "Boca que fala e boca que cala são personagens diferentes. Em Cora Coralina, a boca da velha que conta histórias é o arquivo vivo da cidade de Goiás. Em ficção erótica ou de desejo, a boca pode carregar toda a tensão sem precisar nomear o que a personagem quer. Use quando o texto gira em torno do que pode ou não ser dito, ou do que o corpo revela pela abertura da voz."
+    },
+    "nome": {
+      "label": "nome",
+      "className": "Substantivo masculino",
+      "field": "Identidade — o que nomeia, o que define, o que pode ser roubado ou apagado",
+      "note": "Dar nome é dar existência — e retirar nome é apagar. Em Conceição Evaristo (Ponciá Vicêncio), o nome da avó é herança de dor. Em Guimarães Rosa, Riobaldo faz do nome alheio (Diadorim) um segredo que sustenta o livro inteiro. Use quando o nome de um personagem carrega o peso de uma história familiar, de uma ruptura ou de uma conquista de identidade."
+    },
+    "homem": {
+      "label": "homem",
+      "className": "Substantivo masculino",
+      "field": "Identidade — masculinidade, papel social, o que a cultura exige do gênero",
+      "note": "Em Grande Sertão: Veredas, ser homem é uma questão aberta que o texto nunca resolve completamente. Em Lima Barreto, o homem que não se encaixa no papel esperado é figura central. Cuidado com 'homem' como genérico para 'ser humano' — quando o texto usa assim, silencia as mulheres. Prefira 'pessoa' ou 'gente' no genérico; reserve 'homem' para quando o gênero for o ponto."
+    },
+    "mulher": {
+      "label": "mulher",
+      "className": "Substantivo feminino",
+      "field": "Identidade — feminilidade, agência, resistência ao papel atribuído",
+      "note": "Em Clarice Lispector (A Paixão Segundo G.H.), a mulher destrói a própria identidade para se encontrar. Em Carolina de Jesus, a mulher que escreve é ato político. Em Conceição Evaristo, a mulher negra é sujeito de história, não objeto. Use 'mulher' quando o texto quer explorar o que ser mulher custa ou o que essa posição permite ver."
+    },
+    "crianca": {
+      "label": "criança",
+      "className": "Substantivo",
+      "field": "Tempo — infância, olhar não-corrompido, o que o adulto esquece",
+      "note": "A criança vê o que o adulto normalizou. Em Campo Geral (Guimarães Rosa), Miguilim percebe o mundo de um modo que os adultos ao redor já perderam. Em textos de Carolina de Jesus, as crianças são testemunhas da fome sem o filtro da resignação adulta. Use a criança quando precisar de um ponto de vista que não aceita o que 'é assim' como resposta suficiente."
+    },
+    "mao": {
+      "label": "mão",
+      "className": "Substantivo feminino",
+      "field": "Corpo — trabalho, cuidado, gesto, o que o corpo faz pelo outro",
+      "note": "Mão que trabalha é diferente de mão que acaricia, que bate, que estende ou que fecha. Em Graciliano Ramos, as mãos de Fabiano são instrumento de sobrevivência e limite de dignidade. Em Adélia Prado, a mão carrega afeto doméstico sem diminuir sua força. Detalhar o que a mão faz é uma das formas mais precisas de mostrar o que um personagem sente."
+    },
+    "cor": {
+      "label": "cor",
+      "className": "Substantivo feminino",
+      "field": "Raça e percepção — identidade, pertencimento, o que o olhar classifica",
+      "note": "No Brasil, 'cor' carrega peso racial que vai além de pigmento. Em Lima Barreto e em Conceição Evaristo, a cor da pele determina o que o personagem pode acessar. Em poesia concreta e tropicalismo, cor é elemento visual e político ao mesmo tempo. Use com consciência: quando o texto menciona a cor de um personagem, está entrando em território de raça, visibilidade e poder."
+    },
+    "coragem": {
+      "label": "coragem",
+      "className": "Substantivo feminino",
+      "field": "Ação — força diante do medo, o que permite agir quando seria mais fácil não agir",
+      "note": "Coragem literária não é ausência de medo — é agir apesar dele. Em Euclides da Cunha, os sertanejos de Canudos são corajosos não por heroísmo, mas por sobrevivência e fé. Em ficção contemporânea, a coragem pode ser dizer a verdade para quem não quer ouvir. Evite a coragem como atributo fixo — mostre o momento em que o personagem escolhe enfrentar, mesmo com medo."
+    },
+    "fuga": {
+      "label": "fuga",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — movimento de escape, o que o personagem recusa enfrentar ou o que ele busca preservar",
+      "note": "Fuga pode ser covardia ou sobrevivência — o contexto decide. Em Vidas Secas, a fuga de Fabiano é o único acesso possível a algo melhor. Em Clarice Lispector, a fuga é interior: G.H. foge de si mesma. Em thrillers e romances de tensão, a fuga é motor narrativo. O que o personagem foge diz tanto quanto o que ele persegue."
+    },
+    "retorno": {
+      "label": "retorno",
+      "className": "Substantivo masculino",
+      "field": "Narrativa — volta que transforma, o ponto de chegada que já não é o mesmo",
+      "note": "Voltar para casa depois de uma jornada é topos literário antigo — mas o retorno literário que funciona mostra que o personagem mudou, não o lugar. Em ficção de imigração brasileira, o retorno à terra natal é frequentemente impossível ou decepcionante. Em Guimarães Rosa, não se volta da travessia. Use quando o encontro entre o que o personagem era e o que ele virou puder ser dramatizado."
     }
   },
   "functionWords": {

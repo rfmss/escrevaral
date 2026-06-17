@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v574";
-const ASSET_VERSION = "20260617-pleo";
+const CACHE_NAME = "vereda-offline-v575";
+const ASSET_VERSION = "20260617-lexi";
 
 const CORE_ASSETS = [
   "./",
