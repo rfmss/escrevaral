@@ -68,6 +68,51 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v648→v665)
+
+**Baseline:** v665 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v648→v665):**
+
+- `norma-data.json` (v648): verbos_pres_reg 819→872 (+53: absorve, colhe, comove, dissolve, expõe, mantém…)
+- `synonym-data.js` (v649): 358→373 (+15: corajoso, leal, cruel, humilde, prisão, fronteira, labirinto, espelho…)
+- `norma-data.json` (v650): adjetivos_comuns 1056→1134 (+78: ambicioso, delicioso, maravilhoso, saudoso, primoroso…)
+- `lexical-data.json` (v651): 317→322 (+5: textura, claridade, gesto, sussurro, riso)
+- `norma-data.json` (v652): formas_verbais_irr 653→703 (+50: ESTAR/HAVER/REQUERER/MEDIR)
+- `analise-engine.js` (v653): CLIQUES_PT 549→579 (+30: regionalista, resistência, policial, crônica urbana)
+- `synonym-data.js` (v654): 373→385 (+12: saudade, ciúme, pertencimento, renascer, sombrio, luminoso…)
+- `norma-data.json` (v655): formas_verbais_irr 703→783 (+80: CONDUZIR/REDUZIR/SEDUZIR/INTERVIR/PROVIR/CONVIR)
+- `norma-data.json` (v656): adjetivos_comuns 1134→1175 (+41: arrebatante, fascinante, pulsante, deslumbrante…)
+- `norma-data.json` (v657): verbos_pres_reg 872→945 (+73: abala, agita, ancora, fala, freia, liberta…)
+- `decolonial-data.json` (v658): 322→332 (+10: civilizar, povo sem história, louco perigoso, ignorância popular…)
+- `voice-engine.js` (v659): casa 48→60, cidade 49→61 (+23: chave, fechadura, baú, relógio; viela, feira, portaria…)
+- `synonym-data.js` (v660): 385→400 (+15: escrever, hesitar, limiar, intenso, sereno, permanecer…)
+- `norma-data.json` (v661): adjetivos_comuns 1175→1213 (+38: fervoroso, resiliente, sustentável, angustiante…)
+- `analise-engine.js` (v662): CLIQUES_PT 579→612 (+33: romance histórico, autoajuda, FC/distopia, infantojuvenil)
+- `analise-engine.js` (v663): PLEONASMOS 232→260 (+28: tempo, localização, jornalísticos, escrita criativa)
+- `norma-data.json` (v664): formas_verbais_irr 783→886 (+103: CONSTRUIR/INCLUIR/CAIR/SAIR/COBRIR/REPOR/COMPOR…)
+- `norma-data.json` (v665): verbos_pres_reg 945→1031 (+86: aguarda, contempla, fascina, lamenta, vibra…)
+
+**Estado atualizado dos engines (v665):**
+
+| Área / engine | Maturidade | Notas de estado (v665) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 612; PLEONASMOS 260 |
+| Espelho de Voz | **100%** | casa 60, cidade 61; corpo 53, natureza 53, conflito 50, pensamento 50, memoria 51, sobrenatural 48 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 322 entradas; sinônimos 400 |
+| Decolonial / vocabulário | **100%** | 332 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1213; verbos_pres_reg 1031; formas_verbais_irr 886; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: formas_verbais_irr pode crescer para 950+ (MENTIR/SERVIR/SEGUIR); decolonial para 345+
+3. **Lexico**: lexical-data.json pode crescer para 335+ com palavras de estados emocionais complexos
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v636→v647)
 
 **Baseline:** v647 — Sintaxe 99%; todos os outros engines em 100%.
