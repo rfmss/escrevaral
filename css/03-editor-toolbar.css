@@ -514,6 +514,62 @@
 .gw-interjeicao   { color: #d84315; }   /* laranja queimado   — emoção */
 .gw-proprio       { color: #1565c0; font-weight: 700; letter-spacing: 0.01em; } /* azul + bold */
 
+/* Temas escuros: cores mais claras para gramática colorida sobre fundo escuro */
+[data-theme="scriptorium"] .gw-verbo,
+[data-theme="cerrado-dark"] .gw-verbo,
+[data-theme="mata-dark"] .gw-verbo,
+[data-theme="amazonia-dark"] .gw-verbo       { color: #ef9a9a; }
+
+[data-theme="scriptorium"] .gw-substantivo,
+[data-theme="cerrado-dark"] .gw-substantivo,
+[data-theme="mata-dark"] .gw-substantivo,
+[data-theme="amazonia-dark"] .gw-substantivo { color: #64b5f6; }
+
+[data-theme="scriptorium"] .gw-adjetivo,
+[data-theme="cerrado-dark"] .gw-adjetivo,
+[data-theme="mata-dark"] .gw-adjetivo,
+[data-theme="amazonia-dark"] .gw-adjetivo    { color: #ce93d8; }
+
+[data-theme="scriptorium"] .gw-pronome,
+[data-theme="cerrado-dark"] .gw-pronome,
+[data-theme="mata-dark"] .gw-pronome,
+[data-theme="amazonia-dark"] .gw-pronome     { color: #81c784; }
+
+[data-theme="scriptorium"] .gw-artigo,
+[data-theme="cerrado-dark"] .gw-artigo,
+[data-theme="mata-dark"] .gw-artigo,
+[data-theme="amazonia-dark"] .gw-artigo      { color: #b0bec5; }
+
+[data-theme="scriptorium"] .gw-preposicao,
+[data-theme="cerrado-dark"] .gw-preposicao,
+[data-theme="mata-dark"] .gw-preposicao,
+[data-theme="amazonia-dark"] .gw-preposicao  { color: #ffb74d; }
+
+[data-theme="scriptorium"] .gw-conjuncao,
+[data-theme="cerrado-dark"] .gw-conjuncao,
+[data-theme="mata-dark"] .gw-conjuncao,
+[data-theme="amazonia-dark"] .gw-conjuncao   { color: #f48fb1; }
+
+[data-theme="scriptorium"] .gw-adverbio,
+[data-theme="cerrado-dark"] .gw-adverbio,
+[data-theme="mata-dark"] .gw-adverbio,
+[data-theme="amazonia-dark"] .gw-adverbio    { color: #4db6ac; }
+
+[data-theme="scriptorium"] .gw-numeral,
+[data-theme="cerrado-dark"] .gw-numeral,
+[data-theme="mata-dark"] .gw-numeral,
+[data-theme="amazonia-dark"] .gw-numeral     { color: #ffca28; }
+
+[data-theme="scriptorium"] .gw-interjeicao,
+[data-theme="cerrado-dark"] .gw-interjeicao,
+[data-theme="mata-dark"] .gw-interjeicao,
+[data-theme="amazonia-dark"] .gw-interjeicao { color: #ff8a65; }
+
+[data-theme="scriptorium"] .gw-proprio,
+[data-theme="cerrado-dark"] .gw-proprio,
+[data-theme="mata-dark"] .gw-proprio,
+[data-theme="amazonia-dark"] .gw-proprio     { color: #64b5f6; }
+
 /* Tooltip que segue o mouse */
 .grammar-tooltip {
   position: fixed;
