@@ -68,6 +68,50 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v570→v579)
+
+**Baseline:** v579 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v570→v579):**
+
+- `voice-engine.js` (v570): campos semânticos +36 palavras (corpo/casa/conflito/pensamento/cidade/sobrenatural)
+- `norma-data.json` (v571): formas_verbais_irr 201→230 (+29: subj. imp. -ssem/-ssemos de fazer/poder/querer/saber/trazer/haver/dizer/vir/dar/pôr)
+- `synonym-data.js` (v572): 165→185 (+20: saber, pensar, acreditar, duvidar, lembrar, esquecer, perceber; amar, odiar, trair, perdoar, abandonar, proteger; corajoso, covarde, cruel, gentil, orgulhoso, humilde, fiel)
+- `analise-engine.js` (v573): CLIQUES_PT 262→315 (+53: diálogo, autoconhecimento/transformação, ação/clímax)
+- `analise-engine.js` (v574): PLEONASMOS 119→131 (+12: meia metade, herança hereditária, sequela posterior, viés tendencioso, presente atualmente, emigrar/imigrar, adiantamento prévio, promessa futura, lamentar tristemente, silêncio mudo, relembrar de novo)
+- `lexical-data.json` (v575): 210→219 (+9: nome, homem, mulher, criança, mão, cor, coragem, fuga, retorno — com notas literárias)
+- `decolonial-data.json` (v576): 247→254 (+7: gagá, mongoloide, doente mental, bipolar/metáfora, esquizofrênico/metáfora, velhinho condescendente, gordo como xingamento)
+- `voice-engine.js` (v577): lexicons de emoção +5 por tom (25 termos: melancolia, tensão, luminosidade, contemplação, ternura)
+- `synonym-data.js` (v578): 185→204 (+19: ver, ouvir, sentir, tocar; correr, parar, subir, descer, entrar, sair; perguntar, responder, contar, chamar; cansado, forte, fraco, estranho, bonito)
+- `norma-data.json` (v579): verbos_pres_reg 338→402 (+64: 32 verbos literários com sg+pl — acolhe/em, atravessa/am, caminha/am, encontra/am, enfrenta/am, parte/partem, persegue/em, recusa/am, sai/saem, tenta/am, une/unem, vale/valem)
+
+**Revisão de maturidade:**
+- **Sintaxe 99%**: verbos_pres_reg 402 (+64), formas_verbais_irr 230 (+29) — cobertura morfológica mais completa; contextual disambiguation permanece como barreira para 100%
+- **Analise geral 100%**: CLIQUES_PT 315 e PLEONASMOS 131 — melhor cobertura em clichês de diálogo, autoconhecimento e ação
+- **Lexico/Biblioteca 100%**: 219 entradas e sinônimos 204 — vocabulário literário mais completo
+- **Decolonial 100%**: 254 entradas — cobertura ampliada em capacitismo (mongoloide, doente mental, bipolar/metáfora) e etarismo (gagá, velhinho)
+- **Espelho de Voz 100%**: emotion lexicons 38 por tom; campos semânticos mais densos
+
+**Estado atualizado dos engines (v579):**
+
+| Área / engine | Maturidade | Notas de estado (v579) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 315; PLEONASMOS 131; SUBSTANTIVOS_VAGOS +7; inferirContextoAnalise() |
+| Espelho de Voz | **100%** | lexicons emoção 38 termos cada; stopwords 215; campos semânticos expandidos |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos; enciclopédia 25 entradas |
+| Lexico / Biblioteca | **100%** | 219 entradas; sinônimos 204 entradas |
+| Decolonial / vocabulário | **100%** | 254 entradas; 9 categorias cobrindo capacitismo, etarismo, gordofobia |
+| Sintaxe | **99%** | verbos_pres_reg 402; adjetivos_comuns 398; formas_verbais_irr 230; substantivos_ia 167 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (análise por janela de tokens, custo muito alto)
+2. **Dados seguros de baixo custo**: adjetivos_comuns pode crescer mais (+50 formas); lexical-data.json pode chegar a 230+
+3. **Decolonial**: etarismo tem mais gaps (gagá coberto, faltam: "bom de cama", "beleza exótica" e outros termos de fetichização racial)
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v566→v570)
 
 **Baseline:** v570 — Sintaxe 99%; todos os outros engines em 100%.
