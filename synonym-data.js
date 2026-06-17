@@ -936,6 +936,28 @@
     "criar":       ["originar", "conceber", "gerar", "produzir", "edificar", "forjar"],
     "conhecer":    ["saber", "reconhecer", "identificar", "aprender", "familiarizar", "inteirar-se"],
 
+    // mais adjetivos e substantivos literários
+    "antigo":      ["velho", "arcaico", "pretérito", "remoto", "ancestral", "vetusto"],
+    "moderno":     ["atual", "contemporâneo", "recente", "novo", "presente", "hodierno"],
+    "sutil":       ["tênue", "discreto", "leve", "imperceptível", "delicado", "refinado"],
+    "intenso":     ["forte", "profundo", "veemente", "ardente", "violento", "concentrado"],
+    "fragil":      ["delicado", "quebradiço", "vulnerável", "fraco", "tênue", "efêmero"],
+    "eterno":      ["infinito", "perpétuo", "imortal", "inabalável", "perene", "imutável"],
+    "vago":        ["impreciso", "indefinido", "nebuloso", "ambíguo", "incerto", "difuso"],
+    "claro":       ["límpido", "translúcido", "transparente", "nítido", "luminoso", "evidente"],
+    "complexo":    ["intrincado", "elaborado", "sofisticado", "profundo", "múltiplo", "difícil"],
+    "simples":     ["singelo", "despretensioso", "direto", "básico", "elementar", "puro"],
+
+    // verbos de escrita e pensamento
+    "narrar":      ["contar", "relatar", "descrever", "retratar", "registrar", "rememorar"],
+    "imaginar":    ["fantasiar", "sonhar", "conceber", "visualizar", "especular", "almejar"],
+    "refletir":    ["meditar", "ponderar", "pensar", "considerar", "contemplar", "ruminar"],
+    "expressar":   ["manifestar", "revelar", "demonstrar", "exteriorisar", "comunicar", "traduzir"],
+    "observar":    ["notar", "perceber", "ver", "contemplar", "registrar", "apreender"],
+    "construir":   ["erguer", "edificar", "erigir", "montar", "elaborar", "forjar"],
+    "romper":      ["quebrar", "partir", "fragmentar", "violar", "transgredir", "irromper"],
+    "atravessar":  ["cruzar", "transpor", "percorrer", "ultrapassar", "vencer", "traspor"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
