@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v647 (`vereda-offline-v647`, `ASSET_VERSION=20260617-dec322`)
+**Versão atual:** v652 (`vereda-offline-v652`, `ASSET_VERSION=20260617-irr703`)
 
 ---
 
@@ -78,6 +78,11 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v645 | PLEONASMOS 214→232 (+18: burocrática, acadêmica, pares adjetivos) |
 | v646 | formas_verbais_irr 574→653 (+79: SURGIR/EXIGIR/AGIR/DIRIGIR/CONHECER/APARECER) |
 | v647 | decolonial 315→322 (+7: cabelo rebelde, surdo-mudo, zona de risco, lado feminino…) |
+| v648 | verbos_pres_reg 819→872 (+53: absorve, colhe, comove, dissolve, expõe, mantém…) |
+| v649 | sinônimos 358→373 (+15: corajoso, leal, cruel, humilde, prisão, fronteira…) |
+| v650 | adjetivos_comuns 1056→1134 (+78: ambicioso, delicioso, maravilhoso, saudoso…) |
+| v651 | léxico 317→322 (+5: textura, claridade, gesto, sussurro, riso) |
+| v652 | formas_verbais_irr 653→703 (+50: ESTAR/HAVER/REQUERER/MEDIR) |
 
 ---
 
@@ -112,7 +117,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1056, formas_verbais_irr: 653, verbos_pres_reg: 819)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1134, formas_verbais_irr: 703, verbos_pres_reg: 872)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
