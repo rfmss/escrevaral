@@ -189,6 +189,25 @@
     "para que isso seja possível","para que tal seja possível",
     "é fundamental que","é primordial que","é essencial que se",
     "olhando pelo retrovisor da história","ao longo dos séculos",
+    // clichês de diálogo e voz narrativa
+    "— você não entende","— você nunca vai entender",
+    "— eu precisava te dizer","— precisava te contar isso",
+    "— foi só um sonho","— tudo não passou de um sonho",
+    "— precisamos conversar","— temos que conversar",
+    "— o que você está fazendo aqui","— o que você quer de mim",
+    "disse com um sorriso","disse ela com um sorriso","disse ele sorrindo",
+    "respondeu sem olhar","respondeu sem olhá-la","respondeu virando o rosto",
+    // clichês de autoconhecimento e transformação
+    "encontrar a si mesmo","encontrar a si mesma","se encontrar de verdade",
+    "a melhor versão de si","a melhor versão dele","a melhor versão dela",
+    "aprender a se amar","aprender a se aceitar","se aceitar de verdade",
+    "dar a volta por cima","levantar a cabeça","erguer a cabeça",
+    "recomeçar do zero","começar do zero","começar tudo de novo",
+    // clichês de ação e clímax
+    "tudo aconteceu muito rápido","aconteceu muito depressa",
+    "não havia tempo a perder","não tinha tempo a perder",
+    "era agora ou nunca","era a última chance","seria a última oportunidade",
+    "foi mais forte que ela","foi mais forte que ele","foi mais forte do que ela",
   ];
 
   const PLEONASMOS = [
