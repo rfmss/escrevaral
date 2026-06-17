@@ -185,7 +185,7 @@
   // Sufixos nominais inequívocos — Cunha&Cintra cap.5
   // "-oes": plurais de -ção/-são (soluções, ações, nações)
   // "-ao" e "-i" excluídos: ambíguos com verbos (vão, saí)
-  const _SUFIXOS_NOM = /(?:cao|sao|oes|dade|tude|eza|ez|ismo|ncia|mento|agem)$/;
+  const _SUFIXOS_NOM = /(?:cao|sao|oes|dade|tude|eza|ez|ismo|ncia|mento|agem|ista|ura|aria|orio)$/;
 
   // Transições de alta confiança extraídas do Mac-Morpho (1.17M tokens, NLTK)
   // Só transições com P >= 0.70 entram como regra determinística
