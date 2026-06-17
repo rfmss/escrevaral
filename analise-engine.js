@@ -220,6 +220,23 @@
     "era apenas o começo","seria apenas o início","ainda havia muito pela frente",
     "não era de surpreender","não foi surpresa para ninguém",
     "uma longa jornada","uma longa e difícil jornada","uma jornada sem volta",
+    // clichês de thriller psicológico e narrativa de mistério
+    "havia algo errado naquele sorriso","algo nele não batia","algo nela não batia",
+    "seus olhos diziam o contrário","os olhos não mentem","os olhos nunca mentem",
+    "ela sabia mais do que aparentava","ele sabia mais do que parecia",
+    "não havia saída","não havia como escapar","não havia para onde correr",
+    "o passado sempre volta","ninguém escapa do passado","o passado cobra seu preço",
+    "ela tinha um segredo","ele guardava um segredo","carregava um segredo",
+    // clichês de autoficção e narrativa de superação
+    "aprendi que","o que aprendi foi","essa experiência me ensinou que",
+    "hoje sou uma pessoa diferente","hoje sou outra pessoa","mudei completamente",
+    "foi a pior fase da minha vida","foi o período mais difícil",
+    "não reconhecia mais a pessoa que eu era","não me reconhecia mais no espelho",
+    "saí mais forte","saí mais forte dessa experiência","saí fortalecido",
+    // clichês de narrativa memorialista
+    "lembro como se fosse hoje","como se tivesse acontecido ontem",
+    "nunca esquecerei aquele dia","aquele dia ficou gravado na memória",
+    "foi naquele momento que tudo mudou","foi aí que minha vida mudou",
   ];
 
   const PLEONASMOS = [
