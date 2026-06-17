@@ -1080,6 +1080,30 @@
     "culpado":     ["responsável", "autor", "causador", "réu", "culpável", "incriminado", "punível"],
     "inocente":    ["absolvido", "irrepreensível", "indefeso", "puro", "não culpado", "desculpado"],
 
+    // adjetivos de estado emocional
+    "ansioso":     ["inquieto", "preocupado", "agitado", "apreensivo", "angustiado", "nervoso", "tenso"],
+    "confiante":   ["seguro", "firme", "decidido", "otimista", "determinado", "tranquilo", "resoluto"],
+    "orgulhoso":   ["altivo", "arrogante", "vaidoso", "soberbo", "ufano", "majestoso", "imponente"],
+    "arrependido": ["pesaroso", "contrito", "envergonhado", "penitente", "remoroso", "culpado", "aflito"],
+    // verbos de julgamento e análise
+    "julgar":      ["avaliar", "sentenciar", "condenar", "absolver", "ponderar", "criticar", "examinar"],
+    "analisar":    ["examinar", "investigar", "estudar", "avaliar", "dissecar", "interpretar", "decompor"],
+    "criticar":    ["censurar", "avaliar", "questionar", "rebater", "confrontar", "questionar", "apontar"],
+    // substantivos de ação coletiva
+    "rebelião":    ["revolta", "insurgência", "sedição", "levante", "motim", "sublevação", "insurreição"],
+    "acordo":      ["pacto", "tratado", "convenção", "contrato", "entendimento", "consenso", "ajuste"],
+    "revolução":   ["transformação radical", "virada", "ruptura", "subversão", "mudança estrutural"],
+    // adjetivos de posição no espaço
+    "central":     ["principal", "fundamental", "nuclear", "essencial", "basilar", "pivô", "axial"],
+    "marginal":    ["periférico", "lateral", "secundário", "excluído", "à margem", "externo", "acessório"],
+    "distante":    ["afastado", "remoto", "longínquo", "isolado", "separado", "apartado", "longe"],
+    "próximo":     ["perto", "vizinho", "adjacente", "imediato", "contíguo", "chegado", "junto"],
+    // verbos de mudança de estado
+    "endurecer":   ["fortalecer", "solidificar", "firmar", "consolidar", "cimentar", "tornar firme"],
+    "suavizar":    ["amolecer", "atenuar", "amenizar", "aliviar", "diminuir", "abrandar", "moderar"],
+    "ampliar":     ["expandir", "alargar", "estender", "aumentar", "crescer", "desenvolver", "aprofundar"],
+    "reduzir":     ["diminuir", "encurtar", "estreitar", "minimizar", "comprimir", "limitar", "contrair"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
