@@ -46,7 +46,7 @@ async function renderVoiceMirror() {
     return;
   }
 
-  const analysis = VeredaVoice.analyze(text);
+  const analysis = VeredaVoice.analyze(text, buildAnaliseContext());
   let criterios = window.VeredaAnalise ? VeredaAnalise.analisar(text, buildAnaliseContext()) : null;
 
   // Pontuação profunda quando o motor sintático estiver pronto (concordância verbal)
@@ -157,7 +157,7 @@ function useActiveManuscriptForRimaLab() {
 function exportVoiceMirrorText() {
   const text = voiceInput?.value.trim();
   if (!text || !window.VeredaVoice) { saveStatus.textContent = "Espelho vazio — analise um texto primeiro."; return; }
-  const a = VeredaVoice.analyze(text);
+  const a = VeredaVoice.analyze(text, buildAnaliseContext());
   const ms = getActiveManuscript();
   const title = ms?.title || "texto";
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
@@ -257,7 +257,7 @@ function exportAnaliseGeral() {
 function copyVoiceResult() {
   const text = voiceInput?.value.trim();
   if (!text || !window.VeredaVoice) { saveStatus.textContent = "Espelho vazio — analise um texto primeiro."; return; }
-  const a = VeredaVoice.analyze(text);
+  const a = VeredaVoice.analyze(text, buildAnaliseContext());
   const ms = getActiveManuscript();
   const title = ms?.title || "texto";
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });

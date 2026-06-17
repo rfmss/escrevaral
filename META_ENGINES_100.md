@@ -85,7 +85,7 @@ Pergunta padrao da sessao:
 | Área / engine | Maturidade | Notas de estado (v539) |
 |---|---:|---|
 | Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia; bordas poesia e texto curto fechadas |
-| Espelho de Voz | **99%** | natureza 35; conflito 28; campos temáticos completos |
+| Espelho de Voz | **100%** | inferVoiceCtx(): spots de frase curta/variação silenciados em poesia/roteiro |
 | RimaLab | **99%** | finder agrupa Rima exata / Rima toante com rótulos; chip toante estilizado |
 | Lexico / Biblioteca | **98%** | 173 entradas; autores brasileiros referenciados |
 | Decolonial / vocabulário | **98%** | 229 entradas; 9 categorias 25-26 cada |

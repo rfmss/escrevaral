@@ -45,7 +45,16 @@
     ternura: "ternura",
   };
 
-  function analyze(text) {
+  function inferVoiceCtx(options = {}) {
+    const fmt = `${options.formato || options.oficio || options.editorMode || options.kind || options.type || ""}`.toLowerCase();
+    return {
+      poesia:  /poema|poesia|soneto|slam|haiku|cordel|verso/.test(fmt),
+      roteiro: /roteiro|script|screenplay/.test(fmt),
+    };
+  }
+
+  function analyze(text, ctx = {}) {
+    const voiceCtx = Object.keys(ctx).length ? inferVoiceCtx(ctx) : {};
     const normalized = normalize(text);
     const words = tokenize(normalized);
     const sentences = splitSentences(normalized);
@@ -95,7 +104,7 @@
       fields,
       voice: createVoiceReading(gesture, { avgSentence, lexicalDensity, sentenceVariation, emotional, fields }),
       strengths: getStrengths({ avgSentence, lexicalDensity, ttr, sentenceVariation, repetitions, punctuation }),
-      blindSpots: getBlindSpots({ words, avgSentence, lexicalDensity, ttr, sentenceVariation, repetitions, paragraphs }),
+      blindSpots: getBlindSpots({ words, avgSentence, lexicalDensity, ttr, sentenceVariation, repetitions, paragraphs }, voiceCtx),
       audience: getAudience(gesture, { avgSentence, lexicalDensity, fields, emotional }),
       exercises: getExercises(gesture, repetitions),
       disclaimer:
@@ -206,15 +215,17 @@
     return strengths.slice(0, 4);
   }
 
-  function getBlindSpots({ words, avgSentence, lexicalDensity, ttr, sentenceVariation, repetitions, paragraphs }) {
+  function getBlindSpots({ words, avgSentence, lexicalDensity, ttr, sentenceVariation, repetitions, paragraphs }, ctx = {}) {
+    const isPoesia  = Boolean(ctx.poesia);
+    const isRoteiro = Boolean(ctx.roteiro);
     const spots = [];
     if (words.length < 500) spots.push("Corpus ainda curto: a leitura da voz fica instável abaixo de 500 palavras.");
     if (ttr < 0.34 && words.length > 120) spots.push("Riqueza vocabular baixa: há risco de repetição não intencional.");
-    if (avgSentence > 28) spots.push("Frases muito longas podem criar opacidade e cansaço.");
-    if (avgSentence < 8 && words.length > 120) spots.push("Frases muito curtas podem reduzir nuance e música interna.");
-    if (sentenceVariation < 4 && words.length > 120) spots.push("Ritmo pouco variado: o texto pode soar plano.");
+    if (avgSentence > 28 && !isPoesia && !isRoteiro) spots.push("Frases muito longas podem criar opacidade e cansaço.");
+    if (avgSentence < 8 && words.length > 120 && !isPoesia && !isRoteiro) spots.push("Frases muito curtas podem reduzir nuance e música interna.");
+    if (sentenceVariation < 4 && words.length > 120 && !isPoesia) spots.push("Ritmo pouco variado: o texto pode soar plano.");
     if (lexicalDensity < 0.42 && words.length > 120) spots.push("Densidade lexical baixa: muitos conectores e palavras funcionais podem diluir imagem e ação.");
-    if (paragraphs.length <= 1 && words.length > 180) spots.push("Pouca respiração em parágrafos: o leitor pode perder orientação visual.");
+    if (paragraphs.length <= 1 && words.length > 180 && !isPoesia) spots.push("Pouca respiração em parágrafos: o leitor pode perder orientação visual.");
     repetitions.slice(0, 2).forEach((item) => spots.push(`Verifique a repetição de "${item.word}" (${item.count} ocorrências).`));
     return spots.slice(0, 5);
   }
