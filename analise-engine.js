@@ -403,6 +403,27 @@
     "era uma princesa diferente das outras","quebrou a maldição com um beijo",
     "o vilão tinha uma razão para ser assim","o herói era o menos esperado",
     "no final, o amor verdadeiro venceu tudo","e eles viveram para contar",
+    // clichês de literatura de terror e suspense psicológico
+    "a casa tinha história própria","as paredes guardavam segredos",
+    "algo estava errado mas ela não sabia o quê","a escuridão parecia viva",
+    "a sombra seguia seus passos","o espelho mostrou algo diferente",
+    "o pesadelo era real demais","não era superstição, era real",
+    "ela não deveria ter aberto aquela porta","o silêncio era ensurdecedor",
+    // clichês de narrativa de formação (bildungsroman)
+    "era jovem demais para entender","a vida ainda ia lhe ensinar",
+    "crescer dói mas transforma","não era mais a mesma pessoa",
+    "o mundo era maior do que pensava","aprendeu da pior maneira possível",
+    "um erro que mudou tudo","a inocência não voltaria mais",
+    // clichês de ficção científica e pós-apocalíptico
+    "a humanidade havia ido longe demais","a tecnologia os traiu",
+    "o último bastião da civilização","sobreviver era o único objetivo",
+    "ninguém sabia o que havia causado","o mundo que conheciam tinha acabado",
+    "a inteligência artificial tomou conta","os robôs haviam assumido o controle",
+    // clichês de literatura de viagem e aventura
+    "a estrada era sua única certeza","o horizonte chamava",
+    "cada cidade era um novo começo","viajou para se encontrar",
+    "o destino reservava surpresas","a jornada o transformou",
+    "entre uma cidade e outra perdeu a conta","voltou diferente de quando partiu",
   ];
 
   const PLEONASMOS = [
@@ -581,6 +602,24 @@
     ["trauma psicológico emocional","trauma psicológico"],
     ["comportamento padrão habitual","comportamento habitual"],
     ["sintoma indicativo de sinal","sintoma"],
+    // redundâncias em descrição de personagem e narração literária
+    ["rosto e face","rosto"],["mãos e dedos das mãos","mãos"],
+    ["olhar nos olhos","olhar"],["sorriso nos lábios","sorriso"],
+    ["lágrimas nos olhos","lágrimas"],["voz e som da voz","voz"],
+    ["silêncio absoluto e total","silêncio absoluto"],
+    ["pensamento e reflexão interna","pensamento"],
+    ["passado remoto e distante","passado"],
+    ["futuro incerto e desconhecido","futuro incerto"],
+    // redundâncias de sentimento e emoção
+    ["sentiu na pele e no corpo","sentiu"],["amor e paixão ardente","amor"],
+    ["ódio e raiva cega","ódio"],["alegria e contentamento","alegria"],
+    ["tristeza e melancolia profunda","tristeza"],
+    ["angústia e tormento interior","angústia"],
+    ["euforia e exaltação","euforia"],
+    // redundâncias de paisagem e cenário
+    ["céu azul e claro","céu claro"],["noite escura e sombria","noite sombria"],
+    ["sol brilhante e quente","sol brilhante"],["chuva fria e gelada","chuva gelada"],
+    ["vento suave e leve","vento suave"],["mar azul e profundo","mar profundo"],
   ];
 
   const NEGACOES_DUPLAS = [
