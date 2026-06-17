@@ -3625,6 +3625,88 @@
       "reason": "pureza linguística é mito que reforça hierarquias sociais e apaga variações legítimas",
       "context": "ensaio, crítica literária",
       "contextual": false
+    },
+    {
+      "avoid": "amizade colorida",
+      "alternatives": [
+        "amizade com benefícios",
+        "relação casual",
+        "relacionamento sem compromisso"
+      ],
+      "category": "relacoes",
+      "reason": "o termo 'colorida' associa diversidade racial à sexualidade de forma pejorativa e redutora",
+      "context": "narrativa, coloquial",
+      "contextual": true
+    },
+    {
+      "avoid": "namoro experimental",
+      "alternatives": [
+        "namoro",
+        "relacionamento em desenvolvimento",
+        "parceria afetiva"
+      ],
+      "category": "relacoes",
+      "reason": "infantiliza relacionamentos não-heteronormativos ao tratá-los como experiência transitória",
+      "context": "narrativa, texto jornalístico",
+      "contextual": false
+    },
+    {
+      "avoid": "pseudociência indígena",
+      "alternatives": [
+        "conhecimento tradicional não validado pela ciência ocidental",
+        "saber empírico ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "aplica padrão único de validação científica ocidental a sistemas de saber culturalmente distintos",
+      "context": "acadêmico, ensaio",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo rebelde",
+      "alternatives": [
+        "cabelo encaracolado",
+        "cabelo crespo",
+        "cabelo cacheado"
+      ],
+      "category": "estetica",
+      "reason": "caracteriza como desobediência uma textura capilar natural de pessoas negras e descendentes",
+      "context": "narrativa, mídia",
+      "contextual": false
+    },
+    {
+      "avoid": "beleza diferente",
+      "alternatives": [
+        "beleza singular",
+        "traços marcantes",
+        "presença estética própria"
+      ],
+      "category": "estetica",
+      "reason": "usa diferença como eufemismo para desvio de padrão eurocêntrico de beleza",
+      "context": "narrativa, perfil",
+      "contextual": true
+    },
+    {
+      "avoid": "lado feminino",
+      "alternatives": [
+        "empatia",
+        "sensibilidade",
+        "expressividade emocional"
+      ],
+      "category": "genero",
+      "reason": "associa qualidades como empatia ao feminino, reforçando divisão binária de gênero",
+      "context": "narrativa, ensaio",
+      "contextual": false
+    },
+    {
+      "avoid": "conquistador nato",
+      "alternatives": [
+        "pessoa com muitas conquistas amorosas",
+        "alguém socialmente ativo nas relações"
+      ],
+      "category": "genero",
+      "reason": "romantiza comportamento sexual predatório masculino como traço de caráter positivo",
+      "context": "narrativa, crônica",
+      "contextual": false
     }
   ]
 }
