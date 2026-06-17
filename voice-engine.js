@@ -1,6 +1,6 @@
 (function voiceEngine(global) {
   const stopwords = new Set(
-    "a o as os um uma uns umas de do da dos das em no na nos nas por para com sem sob sobre entre e ou mas que se como quando onde quem qual quais cujo cuja seus suas seu sua meu minha meus minhas ao aos à às é são foi eram ser ter tem tinha há havia não sim mais menos muito muita muitos muitas pouco pouca poucos poucas todo toda todos todas este esta esse essa aquele aquela isso isto aquilo eu tu ele ela nós nos vos eles elas me te lhe lhes".split(
+    "a o as os um uma uns umas de do da dos das em no na nos nas por para com sem sob sobre entre e ou mas que se como quando onde quem qual quais cujo cuja seus suas seu sua meu minha meus minhas ao aos a as e sao foi eram ser ter tem tinha ha havia nao sim mais menos muito muita muitos muitas pouco pouca poucos poucas todo toda todos todas este esta esse essa aquele aquela isso isto aquilo eu tu ele ela nos vos eles elas me te lhe lhes pois porem todavia contudo entretanto embora enquanto logo assim portanto porque tambem sempre nunca jamais apenas somente ainda ja agora depois antes aqui ali la ca durante atraves mediante ante perante apos ate desde contra alias alias outrossim ademais mesmo proprio propria la ca aqui ali ha faz fez fazem fazer estava estou esta estao estive esteve estiveram vou vai vao vir vim vamos veio foram foste fora fui".split(
       /\s+/
     )
   );
