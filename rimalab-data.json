@@ -267,6 +267,118 @@
       ],
       "body": "Refrão: verso ou sequência que retorna identicamente ao longo do poema (como na balada e na glosa). Anáfora: repetição de palavra ou expressão no início de versos consecutivos — recurso poderoso para acumulação de emoção ou argumento. Diferente do refrão, a anáfora não precisa ser idêntica: pode variar ligeiramente. Muito usada em poesia afro-brasileira e slam.",
       "sample": "Eu tenho um sonho — Martin Luther King (anáfora)\n\nMinha mãe ensinou a sorrir.\nMinha mãe ensinou a resistir.\nMinha mãe ensinou que a dor passa.\nMinha mãe passou.\n(anáfora com variação no último verso)"
+    },
+    {
+      "title": "Alexandrino",
+      "tags": [
+        "12 sílabas",
+        "Parnasianismo",
+        "épica",
+        "cesura central"
+      ],
+      "body": "Verso de 12 sílabas, predominante na épica francesa e no Parnasianismo brasileiro. A cesura (pausa) cai naturalmente após a 6ª sílaba, criando dois hemistíquios de 6. Olavo Bilac o usou com precisão máxima.",
+      "sample": "Ora (di-zes-me, vi-a-jei-ro), o-que é be-le-za?"
+    },
+    {
+      "title": "Verso branco",
+      "tags": [
+        "métrica fixa",
+        "sem rima",
+        "epopeia",
+        "clássico"
+      ],
+      "body": "Verso com métrica regular mas sem esquema de rima. Diferente do verso livre, que abandona ambos. O decassílabo branco foi usado por Milton e influenciou poetas brasileiros que queriam solenidade sem o artifício da rima.",
+      "sample": "Armas e os barões assinalados (Os Lusíadas — sem rima obrigatória em muitos trechos)"
+    },
+    {
+      "title": "Villanela",
+      "tags": [
+        "19 versos",
+        "2 rimas",
+        "refrão alternado",
+        "forma fixa"
+      ],
+      "body": "Forma fixa de origem francesa com 19 versos: 5 tercetos e 1 quadra. Apenas 2 rimas. O 1º e 3º versos do primeiro terceto alternam como últimos versos dos tercetos seguintes e formam o dístico final. 'Do Not Go Gentle' de Dylan Thomas é o exemplo mais famoso.",
+      "sample": "Estrutura: ABA ABA ABA ABA ABA ABAA — dois refrões que se encontram no final"
+    },
+    {
+      "title": "Soneto elizabetano",
+      "tags": [
+        "14 versos",
+        "ABAB CDCD EFEF GG",
+        "Shakespeare",
+        "dístico final"
+      ],
+      "body": "Variante inglesa do soneto com esquema ABAB CDCD EFEF GG. Três quadras com rimas alternadas e um dístico final que fecha ou revira o argumento. Mais flexível que o italiano: cada quadra pode desenvolver um aspecto diferente do tema.",
+      "sample": "Shall I compare thee to a summer's day? — o dístico final resolve tudo em dois versos"
+    },
+    {
+      "title": "Rima interna",
+      "tags": [
+        "rima",
+        "dentro do verso",
+        "medial",
+        "Leo Ferré"
+      ],
+      "body": "Rima entre palavras dentro do mesmo verso, não apenas no final. Pode ser medial (meio e fim) ou de qualquer posição. Cria musicalidade intensa e pode ser usada em verso livre para manter o ouvido atento sem a previsibilidade do esquema externo.",
+      "sample": "\"No meio do caminho tinha uma pedra\" — a assonância em /e/ é uma rima interna suave"
+    },
+    {
+      "title": "Hiato e diérese",
+      "tags": [
+        "escansão",
+        "vogais",
+        "separação",
+        "licença poética"
+      ],
+      "body": "O hiato é a pronúncia de duas vogais em sílabas separadas quando normalmente se fundiriam (o contrário da sinalefa). A diérese é o nome técnico desse procedimento dentro de uma palavra. Poetas clássicos usavam para ajustar a contagem de sílabas.",
+      "sample": "\"saudade\" pronunciada sa-u-da-de (4 sílabas) em vez de sau-da-de (3) — diérese"
+    },
+    {
+      "title": "Apócope e síncope",
+      "tags": [
+        "licença poética",
+        "supressão",
+        "vogal",
+        "sílaba"
+      ],
+      "body": "Apócope é a supressão de som no final da palavra (amor → amô). Síncope é a supressão de som no interior (espírito → esprito). Ambas são licenças poéticas para ajustar a métrica sem alterar o significado.",
+      "sample": "\"Quem viu, não sabe\" — em versos orais, síncope é frequente sem marcar"
+    },
+    {
+      "title": "Ode e elegia",
+      "tags": [
+        "ode",
+        "elegia",
+        "lírica",
+        "tom elevado",
+        "lamentação"
+      ],
+      "body": "Ode: poema lírico de tom elevado, geralmente em louvor — de um herói, uma ideia, um objeto (Ode a uma Urna Grega, Ode ao Tomate de Neruda). Elegia: poema de lamentação, pela morte ou pela perda — tom intimista, meditativo. No Brasil, Manuel Bandeira escreveu elegias sem nomear o gênero.",
+      "sample": "Ode ao pão: 'Pão, tu cresces, / tu és branco / como uma lua de farinha...' (Neruda, trad.)"
+    },
+    {
+      "title": "Epigrama",
+      "tags": [
+        "poema curto",
+        "agudo",
+        "crítica",
+        "virada",
+        "greco-latino"
+      ],
+      "body": "Poema muito curto — 2 a 8 versos — com ponta aguda no final. Origem greco-latina; no Brasil, Gregório de Matos é o mestre do epigrama satírico. A última linha deve surpreender ou inverter o que veio antes.",
+      "sample": "\"À falta de pão, bolo.\" — a economia é parte da forma: epigrama que precisa de explicação falhou"
+    },
+    {
+      "title": "Lira",
+      "tags": [
+        "estrofe mista",
+        "Frei Luís de Sousa",
+        "lírica ibérica",
+        "heptassílabo e pentassílabo"
+      ],
+      "body": "Estrofe mista com versos de medidas diferentes — geralmente heptassílabos e pentassílabos, com esquema de rima variável. Forma ibérica que mistura o ritmo cantável da redondilha com a leveza do verso curto. Camões e os poetas árcades brasileiros usaram bastante.",
+      "sample": "Estrofe ABBAB com versos de 7-5-7-7-5 sílabas — o pentassílabo 'respira' no meio"
     }
   ],
   "grammarWords": {
