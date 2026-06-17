@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v636 (`vereda-offline-v636`, `ASSET_VERSION=20260617-irr509`)
+**Versão atual:** v642 (`vereda-offline-v642`, `ASSET_VERSION=20260617-lex317`)
 
 ---
 
@@ -67,6 +67,12 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v634 | PLEONASMOS 198→214 (+16: subir para cima, resultado final, opinião pessoal…) |
 | v635 | verbos_pres_reg 697→743 (+46: analisa, critica, flui, tensiona, visa…) |
 | v636 | formas_verbais_irr 454→509 (+55: QUERER/PODER/SABER/TRAZER/DIZER/CABER) |
+| v637 | voice-engine memoria 36→51, sobrenatural 33→48 (+30 termos) |
+| v638 | adjetivos_comuns 969→1056 (+87: -ivo/a, -udo/a) |
+| v639 | formas_verbais_irr 509→574 (+65: VIR/VER/LER/PEDIR/OUVIR/RIR) |
+| v640 | sinônimos 340→358 (+18: antigo, sutil, eterno, narrar, romper, atravessar…) |
+| v641 | verbos_pres_reg 743→819 (+76: arrasta, brota, domina, evoca, floresce, rompe…) |
+| v642 | léxico 309→317 (+8: fardo, ciclo, pacto, rastro, trama, vigília, cinzas) |
 
 ---
 
@@ -101,7 +107,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 969, formas_verbais_irr: 509, verbos_pres_reg: 743)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1056, formas_verbais_irr: 574, verbos_pres_reg: 819)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
