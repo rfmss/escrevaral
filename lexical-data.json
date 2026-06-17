@@ -2345,6 +2345,96 @@
       "className": "estilo",
       "field": "estilo",
       "note": "sequência de palavras em ordem crescente ou decrescente de intensidade"
+    },
+    "ponto de virada": {
+      "label": "ponto de virada",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "momento em que a história muda de direção de forma decisiva"
+    },
+    "gancho": {
+      "label": "gancho",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "elemento que prende o leitor e o motiva a continuar lendo"
+    },
+    "prologo": {
+      "label": "prólogo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "introdução que antecede o início formal da narrativa"
+    },
+    "epilogo": {
+      "label": "epílogo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "parte final que apresenta o destino dos personagens após o clímax"
+    },
+    "dialogo": {
+      "label": "diálogo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "troca de falas entre personagens; elemento de caracterização e ritmo"
+    },
+    "monologo": {
+      "label": "monólogo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "fala de um único personagem; pode ser interior ou teatral"
+    },
+    "fluxo de consciencia": {
+      "label": "fluxo de consciência",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "técnica que reproduz o pensamento contínuo e desordenado do personagem"
+    },
+    "narrador onisciente": {
+      "label": "narrador onisciente",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "voz narrativa que conhece pensamentos e motivações de todos os personagens"
+    },
+    "narrador testemunha": {
+      "label": "narrador testemunha",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "narrador em primeira pessoa que observa sem ser o protagonista"
+    },
+    "ponto de vista": {
+      "label": "ponto de vista",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "perspectiva a partir da qual os eventos são narrados"
+    },
+    "tempo narrativo": {
+      "label": "tempo narrativo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "relação entre o tempo da história e o tempo do discurso"
+    },
+    "espaco narrativo": {
+      "label": "espaço narrativo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ambiente físico e social onde a história se desenvolve"
+    },
+    "subtexto": {
+      "label": "subtexto",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "sentido implícito por baixo do que é literalmente dito"
+    },
+    "voz autoral": {
+      "label": "voz autoral",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "estilo próprio do escritor que o distingue de outros"
+    },
+    "tom": {
+      "label": "tom",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "atitude emocional do narrador ou do texto em relação ao tema"
     }
   },
   "functionWords": {
