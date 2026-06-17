@@ -68,6 +68,43 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v561→v565)
+
+**Baseline:** v565 — Sintaxe 98%→99%; Tema 100%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v561→v565):**
+
+- `synonym-data.js` (v561): 145→165 entradas (+20: verbos físicos cair/erguer/dar/tomar/pedir/nascer/morrer/viver/tocar/abrir; substantivos tempo/luz/sombra/silêncio/medo/sangue/vento; adjetivos velho/escuro/sozinho)
+- `analise-engine.js` (v562): CLIQUES_PT 209→262 (+53: drama sentimental, thriller/suspense, fantasia/FC, texto argumentativo)
+- `lexical-data.json` (v563): 200→210 entradas (abandono, filho, pai, guerra, jornada, derrota, poder, herança, decisão, boca — com notas literárias referenciando Clarice, Graciliano, Drummond, Conceição Evaristo, Machado de Assis)
+- `norma-data.json` (v564): adjetivos_comuns 271→398 (+127 formas: absurdo/a, claro/a, delicado/a, diferente, elegante, estranho/a, firme, generoso/a, humano/a, imenso/a, intenso/a, louco/a, luminoso/a, misterioso/a, nobre, profundo/a, sagrado/a, sério/a, sincero/a, tranquilo/a, urgente, útil/úteis)
+- `norma-data.json` (v565): verbos_pres_reg 240→338 (+98: 49 verbos regulares com formas singular+plural — abandona/am, abrange/em, colabora/am, compreende/em, domina/am, explica/am, funciona/am, identifica/am, organiza/am, supera/am, transforma/am, vence/em)
+
+**Revisão de maturidade:**
+- **Sintaxe 98% → 99%**: 127 novos adjetivos e 98 formas verbais regulares expandem cobertura morfológica — palavras como "claro", "profundo", "elegante", "misterioso" agora reconhecidas como Adjetivo; "abandona", "transforma", "vence" reconhecidas como Verbo
+- **Lexico/Biblioteca 100%**: 210 entradas com craft notes literárias completas
+- **Analise geral 100%**: CLIQUES_PT 262 cobre drama, thriller, fantasia e redação acadêmica
+
+**Estado atualizado dos engines (v565):**
+
+| Área / engine | Maturidade | Notas de estado (v565) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 262; PLEONASMOS 101; SUBSTANTIVOS_VAGOS +7; inferirContextoAnalise() |
+| Espelho de Voz | **100%** | campos semânticos expandidos; lexicons emoção 32-33 termos; stopwords ~100 |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos; enciclopédia 25 entradas |
+| Lexico / Biblioteca | **100%** | 210 entradas; sinônimos 165 entradas |
+| Decolonial / vocabulário | **100%** | 239 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | verbos_pres_reg 338; adjetivos_comuns 398; formas_verbais_irr 201; _SUFIXOS_NOM +4 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual avançada — custo muito alto (análise por janela de tokens, requer mudanças estruturais no engine)
+2. **Dados**: formas_verbais_irr pode ganhar mais formas do imperfeito do subjuntivo (fosse/estivesse/tivesse já presentes; faltam fizesse/dissesse/viesse)
+3. **Voz**: campos semânticos podem ganhar 3-5 termos por campo nas próximas sessões
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v557→v560)
 
 **Baseline:** v560 — Sintaxe 98%; Tema 100%; todos os outros engines em 100%.
