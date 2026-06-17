@@ -137,26 +137,18 @@ Objetivo:
 
 - separar melhor `ferramentas que leem o texto` de `leituras` e `treino`
 
-Problema atual:
-
-- tabs internas ainda misturam leitura de manuscrito, referência e oficina em uma mesma família visual
-
-Arquivos prováveis:
-
-- `index.html`
-- `css/06-academy-tools.css`
-
 Status:
 
-- pronto para auditoria de desenho, não implementar no escuro
+- **encerrada** (v587, 2026-06-17)
+
+Resultado:
+
+- 3 grupos claramente separados por `border-left` no tab bar: análise (Espelho de Voz, RimaLab, Vocabulário) | referência (Leituras) | prática (Treino)
+- CSS-only, sem refactor estrutural; alinha com parágrafo descritivo já existente na seção
 
 Dono temporário:
 
 - arquitetura de informação + UX writing
-
-Critério de parada:
-
-- quando houver proposta de taxonomia clara sem ainda abrir refactor estrutural
 
 ### PIL-NAV-01 — Unificar `Arquivo` e `Acervo`
 

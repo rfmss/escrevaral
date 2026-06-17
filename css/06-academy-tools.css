@@ -232,8 +232,9 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
 .academy-tool-tab:hover { color: var(--primary); background: var(--surface-mid); }
 .academy-tool-tab .material-symbols-outlined { font-size: 18px; }
 
-/* Separador visual antes de Leituras — divide ferramentas analíticas de acervo/treino */
-.academy-tools-tabs label[for="at-biblioteca"] {
+/* Separadores visuais — 3 grupos: análise | referência | treino */
+.academy-tools-tabs label[for="at-biblioteca"],
+.academy-tools-tabs label[for="at-treino"] {
   margin-left: 6px;
   padding-left: 14px;
   border-left: 1px solid var(--line);
