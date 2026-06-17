@@ -2435,6 +2435,90 @@
       "className": "estilo",
       "field": "estilo",
       "note": "atitude emocional do narrador ou do texto em relação ao tema"
+    },
+    "personagem": {
+      "label": "personagem",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ser fictício que habita a história; pode ser protagonista, antagonista, secundário ou terciário"
+    },
+    "protagonista": {
+      "label": "protagonista",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "personagem principal em torno de quem a história se organiza"
+    },
+    "antagonista": {
+      "label": "antagonista",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "força ou personagem que se opõe ao protagonista e gera conflito"
+    },
+    "arco de personagem": {
+      "label": "arco de personagem",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "transformação interna que o personagem percorre ao longo da narrativa"
+    },
+    "motivacao": {
+      "label": "motivação",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "razão que impulsiona o personagem a agir; o que ele mais quer ou precisa"
+    },
+    "conflito interno": {
+      "label": "conflito interno",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "tensão psicológica dentro do personagem; dilemas, contradições, medos"
+    },
+    "cena": {
+      "label": "cena",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "unidade narrativa com início, meio e fim; acontece em tempo e espaço definidos"
+    },
+    "ambientacao": {
+      "label": "ambientação",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "construção do ambiente físico, social e temporal onde a história ocorre"
+    },
+    "verossimilhanca": {
+      "label": "verossimilhança",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "aparência de verdade; a lógica interna que torna a ficção crível"
+    },
+    "coerencia narrativa": {
+      "label": "coerência narrativa",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "consistência dos elementos da história entre si; o mundo ficcional sem contradições"
+    },
+    "simbolo": {
+      "label": "símbolo",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "objeto, ação ou elemento que representa algo além de si mesmo"
+    },
+    "tema": {
+      "label": "tema",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ideia central ou questão humana que a obra explora"
+    },
+    "motivo": {
+      "label": "motivo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "elemento recorrente que reforça o tema e cria coesão na obra"
+    },
+    "contraponto": {
+      "label": "contraponto",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "elemento que se opõe ou contrasta para criar tensão ou sentido"
     }
   },
   "functionWords": {
