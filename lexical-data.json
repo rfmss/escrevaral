@@ -1445,6 +1445,78 @@
       "className": "Substantivo feminino",
       "field": "Narrativa — o que foi alcançado com esforço; pode ser vitória pessoal ou colonização violenta",
       "note": "A palavra 'conquista' carrega dois significados que o texto brasileiro não pode ignorar: realização pessoal e colonização. Em narrativas indígenas e afro-brasileiras, 'conquista' é frequentemente sinônimo de destruição. Em narrativas de personagem, a conquista só tem peso se o texto mostrou o custo — o que foi sacrificado para chegar lá."
+    },
+    "narrar": {
+      "label": "narrar",
+      "className": "Verbo",
+      "field": "Narrativa — ato de contar como tema, metaficção, voz que se revela",
+      "note": "Quando um personagem narra, o texto se dobra sobre si mesmo. Quem narra escolhe o que mostrar — e essa escolha é o verdadeiro assunto da cena."
+    },
+    "silenciar": {
+      "label": "silenciar",
+      "className": "Verbo",
+      "field": "Dicção — calar como ação ativa, o que se escolhe não dizer",
+      "note": "Silenciar é diferente de calar-se por acidente. É escolha. Quando o narrador silencia sobre algo, o leitor precisa ouvir o que não foi dito."
+    },
+    "murmurar": {
+      "label": "murmurar",
+      "className": "Verbo",
+      "field": "Dicção — voz de intimidade, conspiração ou hesitação",
+      "note": "O volume da voz não é detalhe técnico — é informação emocional. Quem murmura não quer ser ouvido por todos. O texto que usa murmurar já sabe quem está na cena."
+    },
+    "hesitar": {
+      "label": "hesitar",
+      "className": "Verbo",
+      "field": "Cognição — o instante antes da decisão, a indecisão que revela caráter",
+      "note": "A hesitação é onde o personagem se mostra mais honesto. O que ele pondera ao hesitar — e o que o faz finalmente agir — diz mais que qualquer declaração direta."
+    },
+    "amar": {
+      "label": "amar",
+      "className": "Verbo",
+      "field": "Afeto — o amor que age, não o amor declarado",
+      "note": "Amor que aparece como verbo age no texto. 'Amava sem saber como parar' é diferente de 'sentia amor por ela'. O verbo mostra o amor em movimento."
+    },
+    "odiar": {
+      "label": "odiar",
+      "className": "Verbo",
+      "field": "Conflito — intensidade que define o personagem por negação",
+      "note": "O que o personagem odeia revela tanto quanto o que ama. O ódio que o narrador nomeia claramente pede atenção — algo nesse objeto foi negado ao personagem."
+    },
+    "perdoar": {
+      "label": "perdoar",
+      "className": "Verbo",
+      "field": "Afeto — ato que redistribui poder, movimento de encerramento",
+      "note": "Perdoar não apaga o que aconteceu — redistribui quem tem o peso. O personagem que perdoa se liberta de algo; o que não consegue perdoar carrega o peso na cena até o fim."
+    },
+    "destruir": {
+      "label": "destruir",
+      "className": "Verbo",
+      "field": "Conflito — o que o antagonista, o tempo ou o próprio personagem faz ao mundo",
+      "note": "Destruição literária raramente é só física. O que foi destruído — e o que não pôde ser reconstruído — orienta o restante do texto."
+    },
+    "libertar": {
+      "label": "libertar",
+      "className": "Verbo",
+      "field": "Narrativa — movimento de saída, físico ou emocional",
+      "note": "Libertar implica que havia prisão. O texto que usa este verbo revelou antes — ou vai revelar — o que prendia. A libertação sem a prisão é só movimento."
+    },
+    "aurora": {
+      "label": "aurora",
+      "className": "Substantivo feminino",
+      "field": "Tempo — começo como metáfora, o que a cena de abertura carrega",
+      "note": "Aurora é mais que horário — é promessa. Quando um texto começa na aurora, o narrador escolheu a possibilidade. Mas aurora também precede o dia que pode decepcionar."
+    },
+    "outono": {
+      "label": "outono",
+      "className": "Substantivo masculino",
+      "field": "Tempo — passagem, maturidade, melancolia como estado de mundo",
+      "note": "O outono literário brasileiro é diferente do europeu — sem a queda das folhas óbvia. Funciona mais como estado emocional: o tempo em que as coisas começam a acabar, suavemente."
+    },
+    "temer": {
+      "label": "temer",
+      "className": "Verbo",
+      "field": "Cognição — o medo como relação, não como reação; o que o personagem não consegue nomear",
+      "note": "Temer é mais específico que ter medo. Implica um objeto — e quando o texto não diz o que o personagem teme, o leitor busca. Esse silêncio é suspenso."
     }
   },
   "functionWords": {
