@@ -2159,6 +2159,102 @@
       "className": "Substantivo",
       "field": "Cognitivo — o que é verdadeiro para o personagem",
       "note": "A realidade do personagem é sua versão dos fatos. Quando duas realidades colidem, nenhuma pode ficar intacta."
+    },
+    "climax": {
+      "label": "clímax",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ponto de maior tensão ou conflito da história"
+    },
+    "desfecho": {
+      "label": "desfecho",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "resolução final dos conflitos; encerramento da trama"
+    },
+    "epifania": {
+      "label": "epifania",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "momento de revelação ou tomada de consciência súbita"
+    },
+    "analepse": {
+      "label": "analepse",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "narração de evento anterior ao momento atual; flashback"
+    },
+    "prolepse": {
+      "label": "prolepse",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "antecipação narrativa de evento futuro; flash-forward"
+    },
+    "elipse": {
+      "label": "elipse",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "omissão de período de tempo ou eventos na narrativa"
+    },
+    "catarse": {
+      "label": "catarse",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "purificação emocional que o leitor experimenta com a obra"
+    },
+    "enfase": {
+      "label": "ênfase",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "recurso que destaca palavra ou ideia por repetição ou posição"
+    },
+    "ironia": {
+      "label": "ironia",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "figura que diz o contrário do que se quer significar"
+    },
+    "hiperbole": {
+      "label": "hipérbole",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "exagero expressivo para intensificar ideia ou sentimento"
+    },
+    "eufemismo": {
+      "label": "eufemismo",
+      "className": "estilo",
+      "field": "estilo",
+      "note": "suavização de ideia desagradável por expressão mais amena"
+    },
+    "suspense": {
+      "label": "suspense",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "tensão que mantém o leitor na dúvida sobre o desfecho"
+    },
+    "coda": {
+      "label": "coda",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "trecho final que comenta ou encerra a história após o desfecho"
+    },
+    "fio": {
+      "label": "fio",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "linha condutora da trama; elemento que une cenas ou personagens"
+    },
+    "no": {
+      "label": "nó",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ponto central de complicação ou conflito da narrativa"
+    },
+    "ruptura": {
+      "label": "ruptura",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "quebra de expectativa; virada que altera o curso da história"
     }
   },
   "functionWords": {
