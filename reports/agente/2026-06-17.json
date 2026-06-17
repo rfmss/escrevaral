@@ -64,7 +64,20 @@
       "frase": "O meu ficou para trás quando o trem partiu.",
       "zona": "pronome-possessivo",
       "gabarito": "\"meu\" = Pronome possessivo (substantivado)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "para",
+          "antes": [
+            "Preposition"
+          ],
+          "depois": [
+            "Preposition",
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Cada um cuida do seu, dizia o avô.",
@@ -294,30 +307,7 @@
       "frase": "Ela sabia. Sabia e calava. E calando, vivia.",
       "zona": "pontuacao-literaria",
       "gabarito": "sem alerta; fragmentação sintática é recurso estilístico",
-      "diffs": [
-        {
-          "tipo": "morfologia",
-          "token": "sabia",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Adjective"
-          ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "token": "Sabia",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Adjective"
-          ],
-          "classe": "neutro"
-        }
-      ]
+      "diffs": []
     },
     {
       "frase": "A vida era assim: longa; incerta; às vezes, bela.",
@@ -335,19 +325,7 @@
       "frase": "Não sabia o que dizer — e isso, talvez, fosse a resposta.",
       "zona": "pontuacao-literaria",
       "gabarito": "sem alerta; estrutura válida com aposto parentético",
-      "diffs": [
-        {
-          "tipo": "morfologia",
-          "token": "sabia",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Adjective"
-          ],
-          "classe": "neutro"
-        }
-      ]
+      "diffs": []
     },
     {
       "frase": "Esperou. Esperou muito. Esperou até não poder mais.",
@@ -359,7 +337,17 @@
       "frase": "O romance foi escrito em três meses de reclusão.",
       "zona": "voz-passiva",
       "gabarito": "detectado como voz passiva",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "escrito",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Escreve-se muito por aqui quando o inverno chega.",
@@ -444,7 +432,26 @@
       "frase": "A chuva cai e vai e trai quem fica.",
       "zona": "rimalab",
       "gabarito": "detectar rima em \"cai\", \"vai\", \"trai\"",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "cai",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "trai",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Noite de medo e frio, o rio some no vazio.",
@@ -456,7 +463,26 @@
       "frase": "Saudade salga, alaga, afaga e machuca.",
       "zona": "rimalab",
       "gabarito": "detectar padrão sonoro; aliteração em s; assonância em a",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "afaga",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "token": "machuca",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Lua nua na janela muda.",
@@ -468,7 +494,7 @@
           "token": "muda",
           "antes": [],
           "depois": [
-            "Adjective"
+            "Verb"
           ],
           "classe": "neutro"
         }
@@ -613,6 +639,15 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "token": "Saiu",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
           "token": "antigo",
           "antes": [],
           "depois": [
@@ -629,12 +664,10 @@
       "diffs": [
         {
           "tipo": "morfologia",
-          "token": "sabia",
-          "antes": [
-            "Verb"
-          ],
+          "token": "vinha",
+          "antes": [],
           "depois": [
-            "Adjective"
+            "Verb"
           ],
           "classe": "neutro"
         }
@@ -656,19 +689,7 @@
       "frase": "Ele mal sabia que o mal estava próximo.",
       "zona": "homofona",
       "gabarito": "primeiro \"mal\" = Advérbio; segundo \"mal\" = Substantivo",
-      "diffs": [
-        {
-          "tipo": "morfologia",
-          "token": "sabia",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Adjective"
-          ],
-          "classe": "neutro"
-        }
-      ]
+      "diffs": []
     },
     {
       "frase": "Tanto faz: ele sempre faz o que quer.",
@@ -720,37 +741,55 @@
       "frase": "Em 1945, a guerra termina e o mundo respira.",
       "zona": "tempo-verbal",
       "gabarito": "\"termina\" e \"respira\" = Verbo Presente (uso como presente histórico é válido)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "termina",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "evolucao"
+        }
+      ]
     },
     {
       "frase": "Ela entra, olha ao redor e percebe que estava sozinha.",
       "zona": "tempo-verbal",
       "gabarito": "sem alerta; alternância temporal é recurso narrativo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "percebe",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Amanhã eu abro o manuscrito e começo de novo.",
       "zona": "tempo-verbal",
       "gabarito": "\"abro\" e \"começo\" = Verbo Presente com valor de futuro; uso correto",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "token": "abro",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "evolucao"
+        }
+      ]
     },
     {
       "frase": "Se ela viesse, tudo seria diferente.",
       "zona": "tempo-verbal",
       "gabarito": "\"viesse\" = Verbo Subjuntivo Imperfeito; \"seria\" = Futuro do Pretérito",
-      "diffs": [
-        {
-          "tipo": "morfologia",
-          "token": "seria",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Adjective"
-          ],
-          "classe": "regressao"
-        }
-      ]
+      "diffs": []
     }
   ]
 }
