@@ -208,6 +208,18 @@
     "não havia tempo a perder","não tinha tempo a perder",
     "era agora ou nunca","era a última chance","seria a última oportunidade",
     "foi mais forte que ela","foi mais forte que ele","foi mais forte do que ela",
+    // clichês de filosofia popular e resignação
+    "a vida é feita de escolhas","tudo acontece por uma razão","o destino quis assim",
+    "tudo tem um motivo","as coisas acontecem quando devem acontecer",
+    "o tempo cura tudo","o tempo é o melhor remédio","o tempo dirá",
+    "no final vai dar tudo certo","vai ficar tudo bem","tudo vai passar",
+    "mais fácil falar do que fazer","é o que é","faz parte da vida",
+    // clichês de narrativa descritiva
+    "o silêncio que se seguiu","seguiu-se um silêncio","o silêncio pesou",
+    "respirou aliviado","soltou um suspiro de alívio","aliviado suspirou",
+    "era apenas o começo","seria apenas o início","ainda havia muito pela frente",
+    "não era de surpreender","não foi surpresa para ninguém",
+    "uma longa jornada","uma longa e difícil jornada","uma jornada sem volta",
   ];
 
   const PLEONASMOS = [
@@ -280,6 +292,11 @@
     ["imigrar para dentro","imigrar"],["adiantamento prévio","adiantamento"],
     ["promessa futura","promessa"],["lamentar tristemente","lamentar"],
     ["silêncio mudo","silêncio"],["relembrar de novo","relembrar"],
+    ["nunca jamais","nunca"],["rosto facial","rosto"],
+    ["memória do passado","memória"],["madrugada da noite","madrugada"],
+    ["amanhecer do dia","amanhecer"],["breve resumo","resumo"],
+    ["certamente com certeza","certamente"],["calar a boca","calar"],
+    ["repetir mais uma vez","repetir"],["improvisar de repente","improvisar"],
   ];
 
   const NEGACOES_DUPLAS = [
