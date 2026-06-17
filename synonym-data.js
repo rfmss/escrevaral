@@ -788,6 +788,50 @@
     // est
     "confessar":   ["admitir", "reconhecer", "revelar", "assumir", "declarar", "desabafar"],
 
+    // ─── ADJETIVOS DE TEMPO, DIMENSÃO E QUALIDADE ────────────────────────────
+
+    // est
+    "antigo":      ["arcaico", "secular", "ancestral", "longínquo", "imemorial", "primitivo"],
+
+    // est
+    "jovem":       ["novo", "moço", "juvenil", "adolescente", "imaturo", "incipiente"],
+
+    // est
+    "idoso":       ["ancião", "grisalho", "envelhecido", "maduro", "experiente", "venerável"],
+
+    // est
+    "lento":       ["vagaroso", "moroso", "pausado", "cadenciado", "gradual", "arrastado"],
+
+    // est
+    "rapido":      ["veloz", "ágil", "ligeiro", "acelerado", "súbito", "instantâneo"],
+
+    // est
+    "simples":     ["singelo", "puro", "despojado", "elementar", "direto", "austero"],
+
+    // est
+    "complexo":    ["intrincado", "elaborado", "labiríntico", "denso", "emaranhado", "multifacetado"],
+
+    // est
+    "verdadeiro":  ["autêntico", "genuíno", "legítimo", "real", "fiel", "concreto"],
+
+    // est
+    "falso":       ["fingido", "ilusório", "enganoso", "dissimulado", "aparente", "fictício"],
+
+    // est
+    "justo":       ["equânime", "imparcial", "honesto", "correto", "razoável", "equilibrado"],
+
+    // est
+    "injusto":     ["parcial", "arbitrário", "desigual", "cruel", "iníquo", "perverso"],
+
+    // est
+    "seguro":      ["protegido", "resguardado", "abrigado", "garantido", "estável", "firme"],
+
+    // est
+    "perigoso":    ["arriscado", "ameaçador", "temerário", "mortal", "instável", "fatal"],
+
+    // est
+    "infeliz":     ["triste", "desgraçado", "azarado", "infortunado", "desafortunado", "aflito"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
