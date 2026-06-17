@@ -3141,6 +3141,100 @@
       "reason": "Hierarquiza variedades do português brasileiro. Toda variedade tem gramática e lógica próprias — mau português é julgamento de classe e raça, não de linguística.",
       "context": "Em representação de fala de personagens, preferir reproduzir fielmente sem qualificar como 'erro'.",
       "contextual": false
+    },
+    {
+      "avoid": "minoria economicamente ativa",
+      "alternatives": [
+        "elite econômica",
+        "grupo de alta renda",
+        "classe dominante"
+      ],
+      "category": "classe",
+      "reason": "Eufemismo que inverte a percepção: quem tem mais poder econômico é apresentado como minoria vulnerável. Linguagem que serve à concentração de renda.",
+      "context": "Em análise econômica ou política, preferir termos precisos sobre distribuição de renda.",
+      "contextual": false
+    },
+    {
+      "avoid": "meritocracia como argumento absoluto",
+      "alternatives": [
+        "trajetória em condições desiguais",
+        "esforço dentro de estruturas injustas"
+      ],
+      "category": "classe",
+      "reason": "Ignora que o ponto de partida é determinante. Usar mérito como argumento para negar desigualdade estrutural é apagamento.",
+      "context": "Mérito é real — o problema é usá-lo para negar que as condições de partida são profundamente desiguais.",
+      "contextual": true
+    },
+    {
+      "avoid": "gente humilde",
+      "alternatives": [
+        "trabalhadores",
+        "comunidade de baixa renda",
+        "moradores da periferia"
+      ],
+      "category": "classe",
+      "reason": "Humildade como atributo fixo de classe cria uma naturalização da pobreza. Também pode carregar paternalismo — o pobre 'que conhece o seu lugar'.",
+      "context": "Diferente de alguém que se descreve como humilde — aí é identidade, não rótulo externo.",
+      "contextual": true
+    },
+    {
+      "avoid": "coitada a periferia",
+      "alternatives": [
+        "a periferia resiste",
+        "comunidade periférica enfrenta",
+        "moradores reivindicam"
+      ],
+      "category": "classe",
+      "reason": "Vitimização sem agência nega a resistência, criatividade e organização política de comunidades periféricas.",
+      "context": "Contexto importa: reportagem que relata sofrimento sem agência é diferente de narrativa que invisibiliza a luta.",
+      "contextual": true
+    },
+    {
+      "avoid": "Brasil profundo",
+      "alternatives": [
+        "interior do Brasil",
+        "cidades do interior",
+        "regiões menos urbanizadas"
+      ],
+      "category": "territorio",
+      "reason": "Associa 'profundidade' com afastamento da modernidade — como se o 'verdadeiro' Brasil fosse pré-moderno. Romantiza a exclusão como autenticidade.",
+      "context": "Pode aparecer em narrativa literária como perspectiva de personagem — marcar como posição, não como verdade.",
+      "contextual": true
+    },
+    {
+      "avoid": "fronteira como vazio",
+      "alternatives": [
+        "faixa de fronteira",
+        "território de fronteira",
+        "região de fronteira"
+      ],
+      "category": "territorio",
+      "reason": "Fronteiras brasileiras são territórios densamente habitados por povos indígenas, comunidades ribeirinhas e populações migrantes. Tratar como vazio apaga essas presenças.",
+      "context": "Em análise geopolítica pode aparecer como dado demográfico — sempre com contextualização.",
+      "contextual": true
+    },
+    {
+      "avoid": "lugar esquecido pelo poder público",
+      "alternatives": [
+        "comunidade com déficit de serviços públicos",
+        "região com abandono histórico do Estado"
+      ],
+      "category": "territorio",
+      "reason": "Esquecimento naturaliza o que é abandono intencional. Regiões periféricas e rurais não foram esquecidas — foram sistematicamente desinvestidas.",
+      "context": "Em narrativa jornalística ou literária, a diferença entre esquecimento e abandono é política.",
+      "contextual": true
+    },
+    {
+      "avoid": "conquistar o sertão",
+      "alternatives": [
+        "ocupar o sertão",
+        "avançar sobre o sertão",
+        "colonizar o sertão"
+      ],
+      "category": "territorio",
+      "reason": "Conquista pressupõe que havia inimigo a vencer. Oculta o extermínio de populações indígenas e as violências da expansão territorial brasileira.",
+      "context": "Em textos históricos críticos, pode aparecer como objeto de análise com contextualização do que a 'conquista' significou.",
+      "contextual": true
     }
   ]
 }
