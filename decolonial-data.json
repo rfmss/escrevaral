@@ -3707,6 +3707,121 @@
       "reason": "romantiza comportamento sexual predatório masculino como traço de caráter positivo",
       "context": "narrativa, crônica",
       "contextual": false
+    },
+    {
+      "avoid": "civilizar os indígenas",
+      "alternatives": [
+        "respeitar a autonomia dos povos indígenas",
+        "reconhecer direitos territoriais",
+        "preservar culturas originárias"
+      ],
+      "category": "povos",
+      "reason": "o discurso de 'civilizar' legitima etnocídio e imposição cultural colonial",
+      "context": "histórico, literário",
+      "contextual": false
+    },
+    {
+      "avoid": "povo sem história",
+      "alternatives": [
+        "povo com tradição oral",
+        "povo com outra forma de memória",
+        "povo com história não escrita"
+      ],
+      "category": "povos",
+      "reason": "nega a historicidade de povos com tradições orais, priorizando o modelo ocidental de escrita",
+      "context": "acadêmico, literário",
+      "contextual": false
+    },
+    {
+      "avoid": "negro africano",
+      "alternatives": [
+        "pessoa negra",
+        "africano",
+        "pessoa de origem africana"
+      ],
+      "category": "povos",
+      "reason": "redunda e isola identidade racial de forma que não se aplica a outras etnicidades europeias",
+      "context": "texto formal, literário",
+      "contextual": true
+    },
+    {
+      "avoid": "área de conflito",
+      "alternatives": [
+        "território em disputa",
+        "região com violência estrutural",
+        "zona de tensão social"
+      ],
+      "category": "territorio",
+      "reason": "apaga a origem histórica e política dos conflitos territoriais ao descrevê-los como neutros",
+      "context": "jornalismo, ensaio",
+      "contextual": true
+    },
+    {
+      "avoid": "interior sem lei",
+      "alternatives": [
+        "região com pouca presença do Estado",
+        "área com lacuna de infraestrutura pública"
+      ],
+      "category": "territorio",
+      "reason": "associa ausência estatal à ausência moral, culpabilizando populações por abandono histórico",
+      "context": "narrativa, reportagem",
+      "contextual": false
+    },
+    {
+      "avoid": "anão",
+      "alternatives": [
+        "pessoa com nanismo",
+        "pessoa de baixa estatura"
+      ],
+      "category": "deficiencia",
+      "reason": "o termo pode ter conotação pejorativa; a terminologia médica preferida é nanismo",
+      "context": "literário, geral",
+      "contextual": true
+    },
+    {
+      "avoid": "louco perigoso",
+      "alternatives": [
+        "pessoa em crise psiquiátrica",
+        "pessoa com transtorno mental agudo"
+      ],
+      "category": "deficiencia",
+      "reason": "associa doença mental a periculosidade, estigma que aumenta violência e abandono",
+      "context": "narrativa, jornalismo",
+      "contextual": false
+    },
+    {
+      "avoid": "feições orientais",
+      "alternatives": [
+        "traços asiáticos",
+        "feições de ascendência asiática",
+        "fisionomia própria"
+      ],
+      "category": "estetica",
+      "reason": "homogeneiza populações de continente imenso e diverso; Oriental é termo colonial",
+      "context": "narrativa, descrição",
+      "contextual": false
+    },
+    {
+      "avoid": "analfabeto funcional",
+      "alternatives": [
+        "pessoa com letramento limitado",
+        "pessoa em processo de alfabetização"
+      ],
+      "category": "conhecimento",
+      "reason": "o termo estigmatiza sem nomear as causas estruturais que levam ao baixo letramento",
+      "context": "educação, ensaio",
+      "contextual": true
+    },
+    {
+      "avoid": "ignorância popular",
+      "alternatives": [
+        "desconhecimento sobre determinado tema",
+        "falta de acesso à informação"
+      ],
+      "category": "conhecimento",
+      "reason": "criminaliza o não-saber como falha moral do povo, não como resultado de exclusão histórica",
+      "context": "ensaio, jornalismo",
+      "contextual": false
     }
   ]
 }
