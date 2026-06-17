@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v689 (`vereda-offline-v689`, `ASSET_VERSION=20260617-sin466`)
+**Versão atual:** v691 (`vereda-offline-v691`, `ASSET_VERSION=20260617-voice691`)
 
 ---
 
@@ -120,6 +120,8 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v687 | adjetivos_comuns 1281→1332 (+51: abatido, astuto, cético, covarde, pérfido, traiçoeiro…) |
 | v688 | formas_verbais_irr 1173→1268 (+95: PEDIR/MEDIR/AGREDIR/ACONTECER/PARECER/PERTENCER…) |
 | v689 | sinônimos 448→466 (+18: ansioso, orgulhoso, julgar, rebelião, revolução, ampliar…) |
+| v690 | verbos_pres_reg 1259→1331 (+72: compõe, esculpe, fotografa, apura, investiga, explica…) |
+| v691 | voice-engine corpo 53→65, sobrenatural 48→60 (+12+12: garganta, entranhas, espasmo, curupira, encosto…) |
 
 ---
 
@@ -154,7 +156,8 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1332, formas_verbais_irr: 1268, verbos_pres_reg: 1259)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1332, formas_verbais_irr: 1268, verbos_pres_reg: 1331)
+- `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
