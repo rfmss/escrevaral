@@ -1313,6 +1313,66 @@
       "className": "Substantivo masculino",
       "field": "Narrativa — volta que transforma, o ponto de chegada que já não é o mesmo",
       "note": "Voltar para casa depois de uma jornada é topos literário antigo — mas o retorno literário que funciona mostra que o personagem mudou, não o lugar. Em ficção de imigração brasileira, o retorno à terra natal é frequentemente impossível ou decepcionante. Em Guimarães Rosa, não se volta da travessia. Use quando o encontro entre o que o personagem era e o que ele virou puder ser dramatizado."
+    },
+    "pranto": {
+      "label": "pranto",
+      "className": "Substantivo masculino",
+      "field": "Emoção — choro como expressão de dor que não cabe em palavras",
+      "note": "Pranto é mais intenso que choro — é a expressão física de uma dor que transborda. Em Carolina de Jesus, o pranto não é cena sentimental: é registro de sobrevivência. Em Adélia Prado, o pranto pode ser sagrado e doméstico ao mesmo tempo. Prefira 'choro' para momentos contidos; 'pranto' para os momentos em que o corpo não consegue mais segurar."
+    },
+    "alegria": {
+      "label": "alegria",
+      "className": "Substantivo feminino",
+      "field": "Emoção — estado de plenitude, contente que se expande para o espaço",
+      "note": "A alegria literária que dura é diferente da que aparece e some. Em Conceição Evaristo, a alegria das personagens negras frequentemente contém resistência — é alegria conquistada, não dada. Em Ariano Suassuna, é festiva e coletiva. Cuidado com a alegria como resolução fácil de conflito; quando ela aparece após dificuldade, precisa custar algo ao personagem."
+    },
+    "destino": {
+      "label": "destino",
+      "className": "Substantivo masculino",
+      "field": "Narrativa — força que orienta, o que parece além da escolha, o que o personagem descobre que não controla",
+      "note": "Destino na ficção pode ser fatalismo ou provocação. Em Graciliano Ramos, Fabiano não tem destino — tem estrutura social. Em Clarice Lispector, o destino é uma pergunta sem resposta. Cuidado com destino como substituto de causalidade: se o personagem 'estava destinado', o escritor pode estar evitando explicar por quê as coisas aconteceram."
+    },
+    "imagem": {
+      "label": "imagem",
+      "className": "Substantivo feminino",
+      "field": "Linguagem — o que o texto faz ver, a palavra que cria o sensorial",
+      "note": "Imagem literária não é decoração — é o modo pelo qual a prosa comunica o que o conceito não alcança. Em Manoel de Barros, a imagem é o próprio pensamento. Em Clarice Lispector, a imagem-metáfora revela o invisível. Quando você escreve 'ela sentia tristeza', o texto está dizendo; quando escreve 'o quarto tinha cheiro de roupa molhada', ele está mostrando."
+    },
+    "limite": {
+      "label": "limite",
+      "className": "Substantivo masculino",
+      "field": "Conflito — fronteira que define o que é possível ou permitido, o que o personagem não pode ou não quer ultrapassar",
+      "note": "Em Grande Sertão: Veredas, o limite entre o humano e o demoníaco é a questão que o livro inteiro orbita. Em Machado de Assis, os limites sociais são mais cruéis que os físicos. O personagem que encontra seu limite e recua revela caráter de modo diferente do que testa o limite e avança."
+    },
+    "prisao": {
+      "label": "prisão",
+      "className": "Substantivo feminino",
+      "field": "Conflito — confinamento, o que restringe o movimento ou a liberdade — física ou simbólica",
+      "note": "Prisão literária não precisa ser física: pode ser um casamento, uma classe social, um trauma não resolvido. Em Lima Barreto, a prisão do hospício é física e ideológica ao mesmo tempo. Em Clarice Lispector, G.H. é prisioneira de sua própria identidade. Use quando quiser mapear o que aprisiona o personagem — e o que o liberar custaria."
+    },
+    "raca": {
+      "label": "raça",
+      "className": "Substantivo feminino",
+      "field": "Identidade — categoria social e política que organiza privilégio, exclusão e resistência no Brasil",
+      "note": "No Brasil, raça é construção social com consequências materiais: define acesso à saúde, segurança, representação. Em Conceição Evaristo e Ana Maria Gonçalves, a raça não é pano de fundo — é estrutura do conflito. Em Lima Barreto, é a ferida que o narrador não pode nomear diretamente. Escrever sobre raça exige escolha: o texto reproduz o racismo ou o expõe?"
+    },
+    "fe": {
+      "label": "fé",
+      "className": "Substantivo feminino",
+      "field": "Espiritualidade — crença que sustenta a ação mesmo sem garantia de resultado",
+      "note": "Em Euclides da Cunha, a fé dos sertanejos de Canudos é retratada como fanatismo — e o texto revela mais sobre o narrador do que sobre os fiéis. Em Jorge Amado, a fé popular do candomblé é elemento identitário, não exotismo. A fé que funciona na ficção não precisa de aprovação do narrador — mas o narrador precisa ter clareza de onde está quando a julga."
+    },
+    "duvida": {
+      "label": "dúvida",
+      "className": "Substantivo feminino",
+      "field": "Cognição — estado de incerteza que pode paralisar ou provocar movimento",
+      "note": "Em Machado de Assis, a dúvida é arma: Dom Casmurro duvida de Capitu e o leitor duvida de Dom Casmurro. Em Clarice Lispector, a dúvida não é fraqueza — é o espaço onde o pensamento ainda está vivo. Use dúvida quando o texto quiser mostrar que o personagem pensa, não apenas age — ou quando quiser construir ambiguidade para o leitor."
+    },
+    "conquista": {
+      "label": "conquista",
+      "className": "Substantivo feminino",
+      "field": "Narrativa — o que foi alcançado com esforço; pode ser vitória pessoal ou colonização violenta",
+      "note": "A palavra 'conquista' carrega dois significados que o texto brasileiro não pode ignorar: realização pessoal e colonização. Em narrativas indígenas e afro-brasileiras, 'conquista' é frequentemente sinônimo de destruição. Em narrativas de personagem, a conquista só tem peso se o texto mostrou o custo — o que foi sacrificado para chegar lá."
     }
   },
   "functionWords": {
