@@ -1901,6 +1901,36 @@
       "className": "lex-natureza",
       "field": "transformação",
       "note": "restos do fogo, destruição e possibilidade de renascimento"
+    },
+    "textura": {
+      "label": "textura",
+      "className": "lex-sensacao",
+      "field": "percepção",
+      "note": "superfície tátil, qualidade do toque — do pano, da pele, da terra"
+    },
+    "claridade": {
+      "label": "claridade",
+      "className": "lex-natureza",
+      "field": "percepção",
+      "note": "luz intensa, revelação, momento de entendimento"
+    },
+    "gesto": {
+      "label": "gesto",
+      "className": "lex-comunicacao",
+      "field": "corpo",
+      "note": "movimento expressivo do corpo, ato simbólico ou habitual"
+    },
+    "susurro": {
+      "label": "sussurro",
+      "className": "lex-comunicacao",
+      "field": "percepção",
+      "note": "voz baixa — intimidade, segredo, presença discreta"
+    },
+    "riso": {
+      "label": "riso",
+      "className": "lex-abstracto",
+      "field": "emoção",
+      "note": "expressão da alegria ou do deboche — liberador ou perverso"
     }
   },
   "functionWords": {
