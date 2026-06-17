@@ -336,6 +336,24 @@
     "e viveram felizes para sempre","fim de uma era",
     "o círculo se fechou","a história chegava ao fim",
     "nada mais seria como antes",
+    // clichês de literatura brasileira regionalista
+    "a seca castigava a terra","o sertão chamava","o povo sofria em silêncio",
+    "a pobreza era o destino","a terra era o único bem","o latifúndio oprimia",
+    // clichês de narrativa de resistência
+    "não se entregou","levantou a cabeça","foi mais forte que tudo",
+    "a dor virou força","saiu com a cabeça erguida","nunca desistiu",
+    // clichês de narrativa policial/noir
+    "o suspeito tinha coartada","todas as pistas levavam a",
+    "o crime perfeito não existe","o detetive farejou a verdade",
+    "as peças do quebra-cabeça","o culpado sempre comete um erro",
+    // clichês de prosa poética
+    "o silêncio tinha som","a dor tinha nome",
+    "o tempo parou naquele instante","os anos se foram sem deixar rastro",
+    "a saudade tinha cheiro","o amor tinha sabor",
+    // clichês de crônica urbana brasileira
+    "a cidade é cruel","o trânsito mata a alma",
+    "ninguém se olha mais","o celular virou parede",
+    "a violência chegou perto","o condomínio afastou a rua",
   ];
 
   const PLEONASMOS = [
