@@ -746,6 +746,48 @@
     // est
     "salvar":      ["resgatar", "preservar", "libertar", "proteger", "recuperar", "livrar"],
 
+    // ─── VERBOS DE EXPRESSÃO EMOCIONAL ───────────────────────────────────────
+
+    // est
+    "sorrir":      ["esboçar", "reluzir", "acolher", "abrir-se", "desabrochar", "iluminar-se"],
+
+    // est
+    "suspirar":    ["exalar", "respirar", "gemer", "fungar", "soprar", "assoar"],
+
+    // est
+    "tremer":      ["estremecer", "tiritar", "vibrar", "sacudir", "palpitar", "trepidiar"],
+
+    // est
+    "buscar":      ["procurar", "pesquisar", "rastrear", "farejar", "perscrutar", "investigar"],
+
+    // est
+    "cuidar":      ["zelar", "preservar", "velar", "nutrir", "guardar", "dedicar-se"],
+
+    // ─── ADJETIVOS DE ESTADO E CONDIÇÃO ──────────────────────────────────────
+
+    // est
+    "preso":       ["detido", "aprisionado", "cativo", "encarcerado", "acorrentado", "confinado"],
+
+    // est
+    "vivo":        ["animado", "vigoroso", "pulsante", "ardente", "vívido", "ativo"],
+
+    // est
+    "envelhecer":  ["caducar", "declinar", "murchar", "defasar", "desgastar-se", "amadurecer"],
+
+    // ─── VERBOS DE REVELAÇÃO E OCULTAMENTO ───────────────────────────────────
+
+    // est
+    "mostrar":     ["exibir", "expor", "apresentar", "demonstrar", "evidenciar", "externalizar"],
+
+    // est
+    "ocultar":     ["encobrir", "camuflar", "dissimular", "velar", "mascarar", "suprimir"],
+
+    // est
+    "mentir":      ["enganar", "iludir", "falsear", "fingir", "simular", "inventar"],
+
+    // est
+    "confessar":   ["admitir", "reconhecer", "revelar", "assumir", "declarar", "desabafar"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
