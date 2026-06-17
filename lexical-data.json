@@ -1733,6 +1733,42 @@
       "className": "Substantivo masculino",
       "field": "Abstração — reivindicação, justiça, o que deveria existir mas nem sempre existe",
       "note": "Em ficção brasileira, 'direito' quase sempre aparece pelo que falta — direito negado, direito desconhecido, direito que alguns têm e outros não."
+    },
+    "poema": {
+      "label": "poema",
+      "className": "Substantivo masculino",
+      "field": "Metalinguagem — forma, ritmo, o texto que dobra sobre si",
+      "note": "O poema em ficção é quase sempre sinal de personagem que sente mais do que consegue falar diretamente. Seu aparecimento muda o registro da narrativa."
+    },
+    "musica": {
+      "label": "música",
+      "className": "Substantivo feminino",
+      "field": "Expressão — ritmo, memória afetiva, identidade coletiva",
+      "note": "A música em ficção brasileira é marcador de classe, raça e geração. Que música o personagem ouve — e que música ele não ouve — é caracterização."
+    },
+    "danca": {
+      "label": "dança",
+      "className": "Substantivo feminino",
+      "field": "Corpo — expressão coletiva, alegria, resistência cultural",
+      "note": "Dança em narrativa brasileira raramente é neutra: samba, forró, axé, funk carregam identidade e pertencimento. A recusa em dançar também diz algo."
+    },
+    "chave": {
+      "label": "chave",
+      "className": "Substantivo feminino",
+      "field": "Símbolo — acesso, segredo, o que abre ou fecha mundos",
+      "note": "A chave literária é sempre metáfora em potencial: quem a possui, quem a perdeu, quem nunca a teve. Em narrativa, abre portas que não são só físicas."
+    },
+    "mapa": {
+      "label": "mapa",
+      "className": "Substantivo masculino",
+      "field": "Espaço — orientação, território, o mundo visto de cima",
+      "note": "O mapa representa poder sobre o espaço. Quem faz mapas decide o que existe. Em narrativa brasileira, mapas frequentemente apagam territórios indígenas e quilombolas."
+    },
+    "barco": {
+      "label": "barco",
+      "className": "Substantivo masculino",
+      "field": "Movimento — travessia, risco, o que separa e une margens",
+      "note": "O barco em literatura brasileira é travessia de margens literais e metafóricas — Amazônia, sertão, diáspora. Embarcar é deixar algo para trás."
     }
   },
   "functionWords": {
