@@ -1769,6 +1769,90 @@
       "className": "Substantivo masculino",
       "field": "Movimento — travessia, risco, o que separa e une margens",
       "note": "O barco em literatura brasileira é travessia de margens literais e metafóricas — Amazônia, sertão, diáspora. Embarcar é deixar algo para trás."
+    },
+    "sorte": {
+      "label": "sorte",
+      "className": "lex-abstracto",
+      "field": "existência",
+      "note": "destino, fortuna, acaso"
+    },
+    "mesa": {
+      "label": "mesa",
+      "className": "lex-espaco",
+      "field": "mobiliário",
+      "note": "superfície de trabalho, encontro, refeição"
+    },
+    "mentira": {
+      "label": "mentira",
+      "className": "lex-abstracto",
+      "field": "linguagem",
+      "note": "falsidade, engano, ilusão deliberada"
+    },
+    "heroi": {
+      "label": "herói",
+      "className": "lex-identidade",
+      "field": "narrativa",
+      "note": "protagonista corajoso, modelo moral, guerreiro"
+    },
+    "mudanca": {
+      "label": "mudança",
+      "className": "lex-abstracto",
+      "field": "existência",
+      "note": "transformação, transição, alteração"
+    },
+    "labirinto": {
+      "label": "labirinto",
+      "className": "lex-espaco",
+      "field": "metáfora",
+      "note": "estrutura confusa, dilema, caminho sem saída clara"
+    },
+    "prazer": {
+      "label": "prazer",
+      "className": "lex-abstracto",
+      "field": "sensação",
+      "note": "satisfação, gozo, fruição"
+    },
+    "presenca": {
+      "label": "presença",
+      "className": "lex-abstracto",
+      "field": "existência",
+      "note": "estado de estar, carisma, impacto físico"
+    },
+    "voo": {
+      "label": "voo",
+      "className": "lex-movimento",
+      "field": "ação",
+      "note": "ato de voar, liberdade, aspiração"
+    },
+    "muro": {
+      "label": "muro",
+      "className": "lex-espaco",
+      "field": "arquitetura",
+      "note": "barreira, separação, proteção"
+    },
+    "trilha": {
+      "label": "trilha",
+      "className": "lex-espaco",
+      "field": "geografia",
+      "note": "caminho estreito, rastro, percurso"
+    },
+    "sinal": {
+      "label": "sinal",
+      "className": "lex-comunicacao",
+      "field": "percepção",
+      "note": "indício, aviso, indicação, presságio"
+    },
+    "espanto": {
+      "label": "espanto",
+      "className": "lex-abstracto",
+      "field": "emoção",
+      "note": "assombro, surpresa, estupefação"
+    },
+    "vilao": {
+      "label": "vilão",
+      "className": "lex-identidade",
+      "field": "narrativa",
+      "note": "antagonista, malfeitor, oponente moral"
     }
   },
   "functionWords": {
