@@ -2677,6 +2677,62 @@
       "reason": "Usado como insulto homofóbico. Mesmo quando reapropriado por parte da comunidade LGBTQIA+, o uso por narrador externo mantém carga ofensiva.",
       "context": "Em voz de personagem que integra a comunidade, pode ser reapropriação legítima. Revisar narrador e intenção.",
       "contextual": true
+    },
+    {
+      "avoid": "bicha",
+      "alternatives": [
+        "gay",
+        "homem gay",
+        "pessoa gay"
+      ],
+      "category": "genero",
+      "reason": "Usado historicamente como insulto homofóbico. Como qualquer termo reapropriado, seu uso por voz externa carrega a carga original.",
+      "context": "Em contexto de reapropriação por personagem da própria comunidade LGBTQIA+, o uso pode ser legítimo. Revisar narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "palavra de negro",
+      "alternatives": [
+        "palavra de honra",
+        "promessa"
+      ],
+      "category": "linguagem",
+      "reason": "Expressão racista usada para invalidar o testemunho ou a promessa de pessoas negras. Implica que a palavra tem valor diferente conforme a raça.",
+      "context": "Em diálogo de personagem racista de época, uso pode ser intencional para caracterização — não neutro.",
+      "contextual": true
+    },
+    {
+      "avoid": "índio preguiçoso",
+      "alternatives": [
+        "povos originários com outra relação com o tempo e o trabalho"
+      ],
+      "category": "povos",
+      "reason": "Estereótipo colonial que aplicava critérios europeus de produtividade a povos com cosmologias e formas de vida distintas.",
+      "context": "Em discurso histórico de colonizadores ou personagens coloniais, pode aparecer para caracterizar o ponto de vista — não é declaração do narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "evolução das raças",
+      "alternatives": [
+        "diversidade humana",
+        "variação genética",
+        "história dos povos"
+      ],
+      "category": "conhecimento",
+      "reason": "Conceito do darwinismo social do século XIX, que hierarquizava povos em uma escala evolutiva. Base pseudocientífica do racismo institucionalizado.",
+      "context": "Em referência histórica a teorias racistas do século XIX, o uso explícito com crítica é possível.",
+      "contextual": false
+    },
+    {
+      "avoid": "mestiço como anomalia",
+      "alternatives": [
+        "pessoa de ascendência múltipla",
+        "descendente de culturas diversas"
+      ],
+      "category": "estetica",
+      "reason": "A miscigenação foi tratada como problema racial no Brasil do século XIX (branqueamento). Enquadrar mistura como desvio reproduz essa lógica eugênica.",
+      "context": "Em análise histórica da eugenia brasileira, o conceito precisa ser nomeado — com distância crítica do narrador.",
+      "contextual": true
     }
   ]
 }

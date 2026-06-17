@@ -87,7 +87,7 @@ Pergunta padrao da sessao:
 | Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia; bordas poesia e texto curto fechadas |
 | Espelho de Voz | **100%** | inferVoiceCtx(): spots de frase curta/variação silenciados em poesia/roteiro |
 | RimaLab | **100%** | grammarWords 286; -al/-el/-il/-iz/-um cobertos; finder exata/toante com rótulos |
-| Lexico / Biblioteca | **99%** | 185 entradas; ciúme, culpa, orgulho, respirar, chorar, periferia, campo... |
+| Lexico / Biblioteca | **100%** | 200 entradas; ritmo, desejo, resistir, povo, multidão, Pantanal... |
 | Decolonial / vocabulário | **99%** | 234 entradas; 'descobrir o Brasil', 'terras virgens', 'bandido', 'novo mundo' |
 | Sintaxe | **95%** | substantivos_ia 132; norma-data expandido |
 | Tema Alvorada / Vereda | **98%** | dark mode auditado; grammar btn + proof-chip corrigidos |
