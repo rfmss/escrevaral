@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v597 (`vereda-offline-v596`, `ASSET_VERSION=20260617-irr267`)
+**Versão atual:** v604 (`vereda-offline-v603`, `ASSET_VERSION=20260617-clic379`)
 
 ---
 
@@ -29,6 +29,13 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v595 | verbos_pres_reg 402→440 (+38, -para/param) |
 | v596 | CLIQUES_PT 315→343; PLEONASMOS 131→141 |
 | v597 | formas_verbais_irr 230→267 (+37) |
+| v598 | RimaLab enciclopédia 25→35 (+10) |
+| v599 | léxico 241→253 (+12 verbos/temporais) |
+| v600 | sinônimos 226→240 (+14 adjetivos) |
+| v601 | adjetivos_comuns 620→758 (+138) |
+| v602 | verbos_pres_reg 440→571 (+131) |
+| v603 | decolonial 265→273 (+8) |
+| v604 | CLIQUES_PT 343→379 (+36) |
 
 ---
 
@@ -53,9 +60,9 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `rimalab-data.json` — enciclopédia de rima tem 25 entradas; espaço para crescer
-2. `synonym-data.js` — 226 entradas, mais adjetivos literários possíveis
-3. `lexical-data.json` — 241 entradas; categorias Cognição e Dicção ainda têm margem
+1. `analise-engine.js` — PLEONASMOS 141 tem margem para crescer
+2. `decolonial-data.json` — categorias `classe` e `território` em 28, espaço para equilibrar
+3. `norma-data.json` — adjetivos_comuns 758; verbos_pres_reg 571 — ainda há formas comuns ausentes
 4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---

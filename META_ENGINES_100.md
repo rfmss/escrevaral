@@ -68,6 +68,40 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v598→v604)
+
+**Baseline:** v604 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v598→v604):**
+
+- `rimalab-data.json` (v598): enciclopédia 25→35 (+10: Alexandrino, Verso branco, Villanela, Soneto elizabetano, Rima interna, Hiato/Diérese, Apócope/Síncope, Ode/Elegia, Epigrama, Lira)
+- `lexical-data.json` (v599): 241→253 (+12: narrar, silenciar, murmurar, hesitar, amar, odiar, perdoar, destruir, libertar, aurora, outono, temer)
+- `synonym-data.js` (v600): 226→240 (+14 adjetivos: antigo, jovem, idoso, lento, rápido, simples, complexo, verdadeiro, falso, justo, injusto, seguro, perigoso, infeliz)
+- `norma-data.json` (v601): adjetivos_comuns 620→758 (+138 formas -ável/-ível e -udo/a)
+- `norma-data.json` (v602): verbos_pres_reg 440→571 (+131 verbos literários sg+pl)
+- `decolonial-data.json` (v603): 265→273 (+8: gentio, nativo, povo sem escrita, sotaque carregado, português correto…)
+- `analise-engine.js` (v604): CLIQUES_PT 343→379 (+36 thriller psicológico, autoficção, memorialista)
+
+**Estado atualizado dos engines (v604):**
+
+| Área / engine | Maturidade | Notas de estado (v604) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 379; PLEONASMOS 141 |
+| Espelho de Voz | **100%** | corpo 45, casa 40, natureza 45, cidade 41, conflito 42, pensamento 42 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 253 entradas; sinônimos 240 |
+| Decolonial / vocabulário | **100%** | 273 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 758; verbos_pres_reg 571; formas_verbais_irr 267; substantivos_ia 188 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: PLEONASMOS 141 pode crescer mais; decolonial `classe` e `territorio` têm margem
+3. **RimaLab**: grammarWords 286 pode ser revisado para incluir novas partículas
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v589→v593)
 
 **Baseline:** v593 — Sintaxe 99%; todos os outros engines em 100%.
