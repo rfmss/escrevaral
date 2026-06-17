@@ -3046,6 +3046,101 @@
       "reason": "Infantiliza e vitimiza ao mesmo tempo. Retira agência da pessoa com deficiência e substitui empatia por pena.",
       "context": "Pode aparecer como voz de personagem com posição a ser contestada na narrativa.",
       "contextual": true
+    },
+    {
+      "avoid": "gentio",
+      "alternatives": [
+        "povo indígena",
+        "comunidade indígena",
+        "nação indígena"
+      ],
+      "category": "povos",
+      "reason": "Termo colonial português para povos não-cristãos. Ainda aparece em textos históricos e jurídicos. Carrega a ideia de que a ausência do cristianismo definia um estado de inferioridade.",
+      "context": "Em textos históricos como citação de época, marcar como terminologia colonial.",
+      "contextual": true
+    },
+    {
+      "avoid": "nativo como genérico",
+      "alternatives": [
+        "indígena",
+        "povo originário",
+        "nome do povo específico"
+      ],
+      "category": "povos",
+      "reason": "Nativo apaga a diversidade: são centenas de povos com culturas distintas. A generalização serve ao colonizador, não ao povo.",
+      "context": "Nativo pode ser neutro em contextos de fauna/flora. O problema é o uso para pessoas.",
+      "contextual": true
+    },
+    {
+      "avoid": "povo sem escrita",
+      "alternatives": [
+        "povo de tradição oral",
+        "povo com sistema de registro próprio"
+      ],
+      "category": "povos",
+      "reason": "Equipara civilização a escrita alfabética europeia. Povos de tradição oral têm sistemas complexos de transmissão de conhecimento — o critério é colonial.",
+      "context": "Em análise histórica ou linguística, pode aparecer como objeto de crítica — com contextualização.",
+      "contextual": false
+    },
+    {
+      "avoid": "remanescente como questionamento",
+      "alternatives": [
+        "comunidade quilombola",
+        "povo quilombola",
+        "territórios quilombolas"
+      ],
+      "category": "povos",
+      "reason": "Usar 'remanescente' para questionar a legitimidade de territórios quilombolas é estratégia jurídico-política de apagamento. A Constituição usa o termo sem essa conotação pejorativa.",
+      "context": "O termo em si (remanescente quilombola) é constitucional — o problema é o uso retórico para questionar direitos.",
+      "contextual": true
+    },
+    {
+      "avoid": "sotaque carregado",
+      "alternatives": [
+        "sotaque regional",
+        "variedade dialetal",
+        "fala característica de"
+      ],
+      "category": "linguagem",
+      "reason": "Carregado é julgamento de valor sobre variações legítimas do português. Sotaques nordestinos, caipiras e periféricos são estigmatizados com esse adjetivo enquanto sotaques de elite raramente recebem o mesmo rótulo.",
+      "context": "Em ficção, um personagem pode usar o termo como marca de preconceito — isso é diferente de o narrador usar como descrição neutra.",
+      "contextual": true
+    },
+    {
+      "avoid": "português correto",
+      "alternatives": [
+        "norma culta",
+        "variedade padrão",
+        "registro formal"
+      ],
+      "category": "linguagem",
+      "reason": "Pressupõe que todas as variedades fora da norma culta são 'erradas'. Estigmatiza falantes de comunidades periféricas, rurais e de línguas minorizadas. Linguística reconhece todas as variedades como legítimas.",
+      "context": "Diferente de 'norma culta' ou 'registro formal', que descrevem sem hierarquizar.",
+      "contextual": false
+    },
+    {
+      "avoid": "linguagem de periferia",
+      "alternatives": [
+        "gíria urbana",
+        "variedade popular",
+        "fala periférica"
+      ],
+      "category": "linguagem",
+      "reason": "Usado frequentemente como marcador de inferioridade. A linguagem de comunidades periféricas é complexa, criativa e carregada de inventividade — não é falta de vocabulário.",
+      "context": "A variedade em si pode ser descrita; o problema é o adjetivo implícito de deficit.",
+      "contextual": true
+    },
+    {
+      "avoid": "mau português",
+      "alternatives": [
+        "variedade não-padrão",
+        "registro informal",
+        "fala característica da região"
+      ],
+      "category": "linguagem",
+      "reason": "Hierarquiza variedades do português brasileiro. Toda variedade tem gramática e lógica próprias — mau português é julgamento de classe e raça, não de linguística.",
+      "context": "Em representação de fala de personagens, preferir reproduzir fielmente sem qualificar como 'erro'.",
+      "contextual": false
     }
   ]
 }
