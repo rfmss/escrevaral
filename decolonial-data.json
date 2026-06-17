@@ -2916,6 +2916,82 @@
       "reason": "Como xingamento ou descrição pejorativa, reforça gordofobia — preconceito estrutural que afeta acesso à saúde, emprego e dignidade no Brasil.",
       "context": "Como descrição neutra ou quando a pessoa se autoidentifica assim, o uso é adequado. Contexto narrativo define o peso do termo.",
       "contextual": true
+    },
+    {
+      "avoid": "beleza exótica",
+      "alternatives": [
+        "beleza singular",
+        "beleza marcante",
+        "traços distintos"
+      ],
+      "category": "estetica",
+      "reason": "'Exótica' fetichiza e distancia — transforma a aparência de pessoas não-brancas em objeto de curiosidade do olhar branco. O 'exótico' pressupõe um observador central e um 'outro' fora da norma.",
+      "context": "Ao citar perspectiva de personagem que exotifica, o uso pode ser intencional. No narrador, prefira descrições que não reduzam a pessoa ao olhar externo.",
+      "contextual": true
+    },
+    {
+      "avoid": "mulata",
+      "alternatives": [
+        "mulher negra",
+        "mulher parda",
+        "mulher mestiça",
+        "pelo nome da personagem"
+      ],
+      "category": "genero",
+      "reason": "'Mulata' deriva de 'mula' (animal estéril) e foi historicamente usada para hipersexualizar mulheres negras e pardas. O carnaval e a cultura popular brasileira romantizaram um termo que nasce da desumanização.",
+      "context": "Em análise crítica da tradição cultural ou voz de personagem histórico, o uso pode ser necessário com consciência explícita de sua carga.",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo ruim",
+      "alternatives": [
+        "cabelo crespo",
+        "cabelo afro",
+        "cabelo cacheado",
+        "cabelo enrolado"
+      ],
+      "category": "estetica",
+      "reason": "'Cabelo ruim' estabelece padrão branco eurocêntrico como norma, tratando texturas afro-brasileiras como defeito. É uma das expressões mais cotidianas do racismo estético no Brasil.",
+      "context": "Como fala de personagem que reproduz racismo internalizado, pode ser mantido se o texto não valida a perspectiva.",
+      "contextual": true
+    },
+    {
+      "avoid": "pele cor de chocolate",
+      "alternatives": [
+        "pele negra",
+        "pele marrom",
+        "pele escura",
+        "pele mel"
+      ],
+      "category": "estetica",
+      "reason": "Comparar pele a alimentos (chocolate, canela, café com leite) desumaniza ao transforma a pessoa em objeto de consumo. É fetichização disfarçada de elogio.",
+      "context": "Em voz de personagem apaixonado usando a metáfora afetivamente, pode ser mantido com atenção — mas o narrador deve evitar.",
+      "contextual": true
+    },
+    {
+      "avoid": "índio",
+      "alternatives": [
+        "indígena",
+        "povos indígenas",
+        "povo (nome do povo: Yanomami, Guarani, etc.)"
+      ],
+      "category": "povos",
+      "reason": "Índio é erro histórico de Colombo (confundia América com Índias) e homogeniza mais de 300 povos com línguas, culturas e territórios distintos. A Constituição de 1988 usa 'índio' mas o movimento usa 'indígena'.",
+      "context": "Em contextos históricos, legais ou quando citando documentos oficiais, o uso pode ser necessário com nota sobre o problema do termo.",
+      "contextual": false
+    },
+    {
+      "avoid": "selvagem",
+      "alternatives": [
+        "povo indígena",
+        "pessoa da floresta",
+        "caçador",
+        "habitante do território"
+      ],
+      "category": "povos",
+      "reason": "'Selvagem' opõe a pessoa a uma civilização branca e europeia como padrão, hierarquizando modos de vida e justificando histórica e discursivamente a colonização.",
+      "context": "Em análise de textos históricos ou como fala de personagem colonial que o texto critica, o uso pode ser intencional.",
+      "contextual": true
     }
   ]
 }
