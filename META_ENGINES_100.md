@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v636→v647)
+
+**Baseline:** v647 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v637→v647):**
+
+- `voice-engine.js` (v637): memoria 36→51, sobrenatural 33→48 (+30: caboclo, exu, adivinho, travessia, brinquedo, velório…)
+- `norma-data.json` (v638): adjetivos_comuns 969→1056 (+87: -ivo/a criativo/destrutivo/expressivo; -udo/a felpudo/peludo/troncudo)
+- `norma-data.json` (v639): formas_verbais_irr 509→574 (+65: VIR/VER/LER/PEDIR/OUVIR/RIR)
+- `synonym-data.js` (v640): 340→358 (+18: antigo, sutil, eterno, narrar, refletir, atravessar, romper…)
+- `norma-data.json` (v641): verbos_pres_reg 743→819 (+76: arrasta, brota, domina, evoca, floresce, irradia, molda, sacude…)
+- `lexical-data.json` (v642): 309→317 (+8: fardo, ciclo, pacto, rastro, trama, vigília, cinzas)
+- `norma-data.json` (v643): substantivos_ia 225→235 (+10: anemia, ecologia, farmácia, psicologia, terapia, utopia…)
+- `analise-engine.js` (v644): CLIQUES_PT 519→549 (+30: diálogo emocional, crise, encerramento narrativo)
+- `analise-engine.js` (v645): PLEONASMOS 214→232 (+18: burocrática, acadêmica, pares adjetivos)
+- `norma-data.json` (v646): formas_verbais_irr 574→653 (+79: SURGIR/EXIGIR/AGIR/DIRIGIR/CONHECER/APARECER)
+- `decolonial-data.json` (v647): 315→322 (+7: cabelo rebelde, surdo-mudo, zona de risco, lado feminino…)
+
+**Estado atualizado dos engines (v647):**
+
+| Área / engine | Maturidade | Notas de estado (v647) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 549; PLEONASMOS 232 |
+| Espelho de Voz | **100%** | memoria 51, sobrenatural 48; corpo 53, natureza 53, conflito 50 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 317 entradas; sinônimos 358 |
+| Decolonial / vocabulário | **100%** | 322 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1056; verbos_pres_reg 819; formas_verbais_irr 653; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: verbos_pres_reg pode crescer para 850+; sinônimos para 370+; lexical para 325+
+3. **Decolonial**: pode crescer além de 330 em áreas emergentes (IA, desinformação, preconceito algorítmico)
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v628→v636)
 
 **Baseline:** v636 — Sintaxe 99%; todos os outros engines em 100%.
@@ -82,24 +120,6 @@ Pergunta padrao da sessao:
 - `analise-engine.js` (v634): PLEONASMOS 198→214 (+16: subir para cima, resultado final, opinião pessoal, experiência vivida, ganho obtido…)
 - `norma-data.json` (v635): verbos_pres_reg 697→743 (+46: analisa, critica, flui, mergulha, tensiona, visa, questiona, sintetiza…)
 - `norma-data.json` (v636): formas_verbais_irr 454→509 (+55: QUERER, PODER, SABER, TRAZER, DIZER, CABER — pres/imp/pret/subj)
-
-**Estado atualizado dos engines (v636):**
-
-| Área / engine | Maturidade | Notas de estado (v636) |
-|---|---:|---|
-| Analise geral | **100%** | CLIQUES_PT 519; PLEONASMOS 214 |
-| Espelho de Voz | **100%** | corpo 53, casa 48, natureza 53, cidade 49, conflito 50, pensamento 50 |
-| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
-| Lexico / Biblioteca | **100%** | 309 entradas; sinônimos 340 |
-| Decolonial / vocabulário | **100%** | 315 entradas; 9 categorias equilibradas |
-| Sintaxe | **99%** | adjetivos_comuns 969; verbos_pres_reg 743; formas_verbais_irr 509; substantivos_ia 225 |
-| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
-
-**Próximas fronteiras:**
-
-1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
-2. **Dados**: sinônimos podem crescer mais (340 → 360+); lexical pode chegar a 320+
-3. **Decolonial**: pode crescer além de 320 em áreas emergentes (IA, desinformação, preconceito algorítmico)
 
 ---
 

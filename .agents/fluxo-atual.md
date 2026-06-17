@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v642 (`vereda-offline-v642`, `ASSET_VERSION=20260617-lex317`)
+**Versão atual:** v647 (`vereda-offline-v647`, `ASSET_VERSION=20260617-dec322`)
 
 ---
 
@@ -73,6 +73,11 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v640 | sinônimos 340→358 (+18: antigo, sutil, eterno, narrar, romper, atravessar…) |
 | v641 | verbos_pres_reg 743→819 (+76: arrasta, brota, domina, evoca, floresce, rompe…) |
 | v642 | léxico 309→317 (+8: fardo, ciclo, pacto, rastro, trama, vigília, cinzas) |
+| v643 | substantivos_ia 225→235 (+10: anemia, ecologia, farmácia, terapia, utopia…) |
+| v644 | CLIQUES_PT 519→549 (+30: diálogo emocional, crise, encerramento narrativo) |
+| v645 | PLEONASMOS 214→232 (+18: burocrática, acadêmica, pares adjetivos) |
+| v646 | formas_verbais_irr 574→653 (+79: SURGIR/EXIGIR/AGIR/DIRIGIR/CONHECER/APARECER) |
+| v647 | decolonial 315→322 (+7: cabelo rebelde, surdo-mudo, zona de risco, lado feminino…) |
 
 ---
 
@@ -107,7 +112,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1056, formas_verbais_irr: 574, verbos_pres_reg: 819)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1056, formas_verbais_irr: 653, verbos_pres_reg: 819)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
