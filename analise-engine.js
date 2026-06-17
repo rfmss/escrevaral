@@ -317,6 +317,25 @@
     "o passado não morre","a memória é uma arma de dois gumes",
     "ninguém escapa de si mesmo","o homem é o lobo do homem",
     "a natureza humana não muda","a história se repete",
+    // clichês de diálogo emocional
+    "não é você, sou eu","precisamos conversar","temos que falar",
+    "você nunca me entende","eu sei como você se sente",
+    "isso não é o fim","deixa eu explicar","me dê uma chance",
+    // clichês de crise emocional
+    "sentiu o chão ceder sob seus pés","o mundo desabou",
+    "lágrimas escorreram pelo rosto","soluços abalaram o corpo",
+    "o coração se partiu em mil pedaços","deu um nó na garganta",
+    // clichês de realização
+    "finalmente fazia sentido","as peças se encaixaram",
+    "uma luz no fim do túnel","encontrou a paz que procurava",
+    // clichês de introdução narrativa
+    "era uma vez","há muito tempo atrás","desde que o mundo é mundo",
+    "em um reino muito distante","os anos passaram",
+    "o tempo foi passando","o destino quis que",
+    // clichês de encerramento narrativo
+    "e viveram felizes para sempre","fim de uma era",
+    "o círculo se fechou","a história chegava ao fim",
+    "nada mais seria como antes",
   ];
 
   const PLEONASMOS = [
