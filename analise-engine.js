@@ -274,6 +274,12 @@
     ["rever outra vez","rever"],["retorno de volta","retorno"],
     ["separar individualmente","separar"],["unânime de todos","unânime"],
     ["juntos ao mesmo tempo","juntos"],["reimprimir de novo","reimprimir"],
+    ["meia metade","metade"],["herança hereditária","herança"],
+    ["sequela posterior","sequela"],["viés tendencioso","viés"],
+    ["presente atualmente","atualmente"],["emigrar para fora","emigrar"],
+    ["imigrar para dentro","imigrar"],["adiantamento prévio","adiantamento"],
+    ["promessa futura","promessa"],["lamentar tristemente","lamentar"],
+    ["silêncio mudo","silêncio"],["relembrar de novo","relembrar"],
   ];
 
   const NEGACOES_DUPLAS = [
