@@ -873,6 +873,22 @@
     "beber":       ["tomar", "ingerir", "sorver", "engolir", "hidratar-se", "tragar"],
     "respirar":    ["inspirar", "expirar", "ar", "fôlego", "recuperar o fôlego", "tomar fôlego"],
     "fabricar":    ["produzir", "manufaturar", "confeccionar", "elaborar", "construir", "fazer"],
+    "matar":       ["eliminar", "assassinar", "ceifar", "liquidar", "exterminar", "abater"],
+    "curar":       ["sanar", "sarar", "tratar", "remediar", "restituir", "recuperar"],
+    "doer":        ["machucar", "pungir", "queimar", "martirizar", "atormentar", "mortificar"],
+    "imaginar":    ["conceber", "fantasiar", "supor", "vislumbrar", "figurar", "cogitar"],
+    "vermelho":    ["escarlate", "carmesim", "rubro", "encarnado", "purpúreo", "róseo"],
+    "azul":        ["anil", "safira", "celeste", "cerúleo", "ciano", "turquesa"],
+    "verde":       ["esmeralda", "jade", "oliva", "viçoso", "verdejante", "matizado"],
+    "amarelo":     ["dourado", "âmbar", "ocre", "palha", "cor de ouro", "cor de mel"],
+    "preto":       ["negro", "escuro", "carvão", "azeviche", "breu", "retinto"],
+    "aceitar":     ["concordar", "admitir", "acolher", "consentir", "aprovar", "anuir"],
+    "rejeitar":    ["recusar", "repelir", "descartar", "repudiar", "negar", "desconsiderar"],
+    "calar":       ["silenciar", "emudecer", "abafar", "suprimir", "conter", "engolir"],
+    "ajudar":      ["auxiliar", "socorrer", "amparar", "colaborar", "cooperar", "apoiar"],
+    "prejudicar":  ["danificar", "comprometer", "lesar", "arruinar", "atrasar", "sabotar"],
+    "roxo":        ["violeta", "púrpura", "lilás", "lavanda", "amatista", "malva"],
+    "cinza":       ["acinzentado", "cinzento", "pardo", "fosco", "nebuloso", "apagado"],
 
   };
 
