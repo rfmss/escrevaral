@@ -1037,6 +1037,78 @@
       "className": "Substantivo masculino",
       "field": "Identidade — lugar no mundo, raiz, o oposto do exílio",
       "note": "Pertencimento é o que a personagem busca ou perdeu. Em textos de diáspora africana e literatura indígena contemporânea, é o eixo de toda narrativa. Em Conceição Evaristo, pertencer ao quilombo é pertencer à própria história. Em textos de classe média, pertencimento é mais sutil — a personagem que sorri mas não se sente do mesmo lado. Use quando o texto quer mostrar a diferença entre estar num lugar e ser desse lugar."
+    },
+    "ciume": {
+      "label": "ciúme",
+      "className": "Substantivo masculino",
+      "field": "Emoção — posse, ameaça, perda iminente",
+      "note": "Tensão entre o que se tem e o que pode escapar. Em Eça e em Clarice, o ciúme revela mais sobre quem sente do que sobre quem provoca."
+    },
+    "culpa": {
+      "label": "culpa",
+      "className": "Substantivo feminino",
+      "field": "Emoção — peso moral, decisão irreversível",
+      "note": "Carrega o passado para dentro do presente. Uma cena com culpa nunca acontece no tempo em que parece acontecer."
+    },
+    "orgulho": {
+      "label": "orgulho",
+      "className": "Substantivo masculino",
+      "field": "Emoção — dignidade ou arrogância",
+      "note": "Ambivalente: pode ser resistência ou cegueira. A diferença está em quem paga o preço."
+    },
+    "respirar": {
+      "label": "respirar",
+      "className": "Verbo intransitivo",
+      "field": "Corpo — tensão, alívio, presença física",
+      "note": "A respiração marca o ritmo do medo e do alívio. Quando o personagem lembra de respirar, o leitor também lembra."
+    },
+    "chorar": {
+      "label": "chorar",
+      "className": "Verbo intransitivo",
+      "field": "Corpo — emoção externalizada, ruptura",
+      "note": "Palavra que o texto literário às vezes evita para não esvaziar. Quando aparece, costuma marcar um ponto de virada que não volta."
+    },
+    "rir": {
+      "label": "rir",
+      "className": "Verbo intransitivo",
+      "field": "Corpo — alegria, nervosismo, ironia, máscara",
+      "note": "Em Machado de Assis, o riso raramente é inocente. Quem ri de quem, e por quê, define a cena."
+    },
+    "campo": {
+      "label": "campo",
+      "className": "Substantivo masculino",
+      "field": "Espaço — rural, interior, oposição à cidade",
+      "note": "O campo brasileiro carrega ao mesmo tempo abundância e abandono. Em Guimarães Rosa, é o lugar onde a linguagem se refaz junto com o espaço."
+    },
+    "periferia": {
+      "label": "periferia",
+      "className": "Substantivo feminino",
+      "field": "Espaço — margem, resistência, voz própria",
+      "note": "Não é ausência de centro — é presença de outra lógica. A literatura periférica brasileira (Sacolinha, Ferréz) recusa o olhar de fora."
+    },
+    "promessa": {
+      "label": "promessa",
+      "className": "Substantivo feminino",
+      "field": "Tempo — tensão entre presente e futuro",
+      "note": "Abre uma dívida com o futuro. Uma promessa não cumprida no meio de uma narrativa funciona como gancho silencioso até o final."
+    },
+    "regresso": {
+      "label": "regresso",
+      "className": "Substantivo masculino",
+      "field": "Movimento — retorno, transformação, impossibilidade",
+      "note": "Quem volta não volta ao mesmo lugar — porque o lugar também mudou. O regresso é tema recorrente na literatura de migração brasileira."
+    },
+    "barulho": {
+      "label": "barulho",
+      "className": "Substantivo masculino",
+      "field": "Sentido — sonoro, presença do mundo externo",
+      "note": "O barulho aproxima o leitor do cenário sem descrever. Às vezes o silêncio só existe porque o barulho o antecedeu."
+    },
+    "sabor": {
+      "label": "sabor",
+      "className": "Substantivo masculino",
+      "field": "Sentido — gustativo, memória involuntária",
+      "note": "A memória gustativa ativa o corpo inteiro. Um sabor específico vale mais do que uma cena de flashback explicado."
     }
   },
   "functionWords": {
