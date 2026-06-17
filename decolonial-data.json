@@ -2830,6 +2830,92 @@
       "reason": "O termo reduz a pessoa à ausência de uma habilidade específica, ignorando saberes orais, práticos e culturais. Paulo Freire documentou o preconceito embutido no conceito de 'analfabetismo'.",
       "context": "Em análise educacional ou citação histórica, pode ser necessário nomeá-lo — com clareza do que o termo apaga.",
       "contextual": false
+    },
+    {
+      "avoid": "gagá",
+      "alternatives": [
+        "pessoa com demência",
+        "pessoa idosa com comprometimento cognitivo",
+        "senhor/senhora com demência"
+      ],
+      "category": "deficiencia",
+      "reason": "Termo pejorativo para pessoas com demência ou cognição reduzida pela idade. Mistura etarismo com capacitismo.",
+      "context": "Como fala de personagem que reproduz o preconceito, o uso pode ser mantido se o texto não valida o julgamento.",
+      "contextual": true
+    },
+    {
+      "avoid": "mongoloide",
+      "alternatives": [
+        "pessoa com Síndrome de Down",
+        "pessoa com trissomia do 21"
+      ],
+      "category": "deficiencia",
+      "reason": "Termo obsoleto e ofensivo derivado de 'Mongólia' — associa incorretamente a condição a uma etnia. A Organização Mundial da Saúde recomendou seu abandono em 1965.",
+      "context": "Uso não recomendado em nenhum contexto ficcional atual. Em citação histórica, notar que é termo ultrapassado.",
+      "contextual": false
+    },
+    {
+      "avoid": "doente mental",
+      "alternatives": [
+        "pessoa com transtorno mental",
+        "pessoa em sofrimento psíquico",
+        "pessoa com diagnóstico psiquiátrico"
+      ],
+      "category": "deficiencia",
+      "reason": "Medicaliza e estigmatiza ao mesmo tempo. Sugere que a pessoa se reduz ao diagnóstico, apagando sua identidade.",
+      "context": "Em contexto clínico, histórico ou de análise crítica, pode ser necessário — com consciência de sua carga estigmatizante.",
+      "contextual": false
+    },
+    {
+      "avoid": "bipolar",
+      "alternatives": [
+        "contraditório",
+        "instável",
+        "imprevisível",
+        "inconstante"
+      ],
+      "category": "deficiencia",
+      "reason": "Quando usado como insulto ou metáfora ('ele é tão bipolar'), usa uma condição psiquiátrica como xingamento, estigmatizando pessoas que vivem com o transtorno.",
+      "context": "Ao descrever personagem com diagnóstico real de transtorno bipolar, o uso é adequado. Evitar quando o sentido for metafórico.",
+      "contextual": true
+    },
+    {
+      "avoid": "esquizofrênico",
+      "alternatives": [
+        "contraditório",
+        "incoerente",
+        "desorganizado",
+        "fragmentado"
+      ],
+      "category": "deficiencia",
+      "reason": "Usado metaforicamente ('argumento esquizofrênico', 'política esquizofrênica') estigmatiza quem vive com esquizofrenia, tratando a condição como sinônimo de incoerência.",
+      "context": "Ao retratar personagem com diagnóstico, o uso clínico é adequado. Evitar a metáfora que usa a condição como insulto.",
+      "contextual": true
+    },
+    {
+      "avoid": "velhinho",
+      "alternatives": [
+        "senhor",
+        "senhora",
+        "pessoa idosa",
+        "adulto mais velho"
+      ],
+      "category": "relacoes",
+      "reason": "O diminutivo 'velhinho' é frequentemente condescendente — infantiliza e diminui a pessoa idosa. Etarismo que se disfarça de afeto.",
+      "context": "Em voz de personagem que demonstra carinho genuíno, pode ser usado com consciência. No narrador, prefira alternativas.",
+      "contextual": true
+    },
+    {
+      "avoid": "gordo",
+      "alternatives": [
+        "pessoa gorda",
+        "pessoa acima do peso",
+        "pessoa com obesidade"
+      ],
+      "category": "estetica",
+      "reason": "Como xingamento ou descrição pejorativa, reforça gordofobia — preconceito estrutural que afeta acesso à saúde, emprego e dignidade no Brasil.",
+      "context": "Como descrição neutra ou quando a pessoa se autoidentifica assim, o uso é adequado. Contexto narrativo define o peso do termo.",
+      "contextual": true
     }
   ]
 }
