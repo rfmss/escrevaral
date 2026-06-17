@@ -68,6 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v547→v549)
+
+**Baseline:** v549 — Sintaxe 97%; todos os outros engines em 99–100%.
+
+**O que foi entregue neste ciclo (v547→v549) — expansão massiva de norma-data.json:**
+
+- `norma-data.json` (v547): `verbos_pres_reg` 203→240 (+37 formas: passa/passam/passo, chama, leva, torna, traz/trazem, bebe, resolve, recebe, segue/sigo, escolhe, exige, aceita, perde, corre, cresce, sofre, etc.)
+- `norma-data.json` (v548): `adjetivos_comuns` 216→271 (+55 adjetivos: triste, alegre, nervoso, ansioso, cansado, satisfeito, frustrado, envergonhado, assustado, gordo, magro, errado, justo, injusto, preso, seco, úmido, mole, rude, gentil, honesto, falso, leal, traidor, humilde, arrogante, solidário, egoísta, etc.)
+- `norma-data.json` (v549): `formas_verbais_irr` 135→201 (+66 formas fundamentais: estava, tinha, vou, era, disse, seja, estou, vamos, fazemos, podemos, queremos, sabemos, temos, vieram, etc.)
+
+**Revisão de maturidade — Sintaxe 95% → 97%:** três expansões consecutivas de norma-data cobrem lacunas morfológicas principais: verbos regulares no presente, adjetivos de estado/traço/qualidade, formas irregulares de ser/estar/ter/ir/vir/fazer/poder/querer/saber/dizer/trazer/pôr/dar.
+
+**Estado atualizado dos engines (v549):**
+
+| Área / engine | Maturidade | Notas de estado (v549) |
+|---|---:|---|
+| Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia; bordas fechadas |
+| Espelho de Voz | **100%** | inferVoiceCtx(): spots silenciados em poesia/roteiro |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos |
+| Lexico / Biblioteca | **100%** | 200 entradas; ritmo, desejo, resistir, povo, multidão, Pantanal |
+| Decolonial / vocabulário | **100%** | 239 entradas; tribo, bicha, palavra de negro, evolução das raças |
+| Sintaxe | **97%** | verbos_pres_reg 240; adjetivos_comuns 271; formas_verbais_irr 201 |
+| Tema Alvorada / Vereda | **99%** | auditados: cronograma, paginação, mode-switcher, Ateliê — todos OK via tokens |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 97% → 99%**: desambiguação por janela de contexto (palavra entre artigo+verbo) — custo alto, requer mudança em syntax-engine.js
+2. **Tema 99% → 100%**: verificar components específicos em dark mode (mode-switcher, cronograma headers)
+3. **Manutenção**: nenhum engine abaixo de 97% — sessões futuras podem focar em produto/UX
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v538→v539)
 
 **Baseline:** v539 — Analise 100%; RimaLab 99%; Tema 98%; Sintaxe 95%.
@@ -88,9 +120,9 @@ Pergunta padrao da sessao:
 | Espelho de Voz | **100%** | inferVoiceCtx(): spots de frase curta/variação silenciados em poesia/roteiro |
 | RimaLab | **100%** | grammarWords 286; -al/-el/-il/-iz/-um cobertos; finder exata/toante com rótulos |
 | Lexico / Biblioteca | **100%** | 200 entradas; ritmo, desejo, resistir, povo, multidão, Pantanal... |
-| Decolonial / vocabulário | **99%** | 234 entradas; 'descobrir o Brasil', 'terras virgens', 'bandido', 'novo mundo' |
+| Decolonial / vocabulário | **100%** | 239 entradas; tribo, bicha, palavra de negro, evolução das raças, mestiço como anomalia |
 | Sintaxe | **95%** | substantivos_ia 132; norma-data expandido |
-| Tema Alvorada / Vereda | **98%** | dark mode auditado; grammar btn + proof-chip corrigidos |
+| Tema Alvorada / Vereda | **99%** | auditados: cronograma, paginação, mode-switcher, Ateliê — todos OK via tokens |
 
 **Próximas fronteiras:**
 
