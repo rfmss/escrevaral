@@ -1931,6 +1931,66 @@
       "className": "lex-abstracto",
       "field": "emoção",
       "note": "expressão da alegria ou do deboche — liberador ou perverso"
+    },
+    "decepcao": {
+      "label": "decepção",
+      "className": "Substantivo",
+      "field": "Emocional — expectativa frustrada, virada narrativa",
+      "note": "Toda decepção revela uma expectativa. Quando o leitor entende a expectativa, a decepção faz sentido."
+    },
+    "alivio": {
+      "label": "alívio",
+      "className": "Substantivo",
+      "field": "Emocional — tensão liberada, sobrevivência",
+      "note": "O alívio é o reverso do medo. Aparece quando o perigo passa, mas também quando o personagem para de fingir."
+    },
+    "entorpecimento": {
+      "label": "entorpecimento",
+      "className": "Substantivo",
+      "field": "Emocional — ausência de sentimento, proteção",
+      "note": "A ausência de emoção é em si uma resposta. Personagens entorpecidos já sentiram muito antes."
+    },
+    "ternura": {
+      "label": "ternura",
+      "className": "Substantivo",
+      "field": "Emocional — cuidado, vulnerabilidade mútua",
+      "note": "Ternura exige abertura. Um personagem que a sente revela que baixou a guarda."
+    },
+    "tedio": {
+      "label": "tédio",
+      "className": "Substantivo",
+      "field": "Emocional — vazio, ausência de sentido",
+      "note": "O tédio pode ser o início de qualquer mudança. Personagens entediados estão prontos para a história começar."
+    },
+    "deslumbramento": {
+      "label": "deslumbramento",
+      "className": "Substantivo",
+      "field": "Perceptivo — excesso de beleza, desorientação",
+      "note": "Deslumbramento paralisa antes de encantar. É a primeira reação a algo maior do que o esperado."
+    },
+    "curiosidade": {
+      "label": "curiosidade",
+      "className": "Substantivo",
+      "field": "Cognitivo — impulso de descoberta, motor de clímax",
+      "note": "A curiosidade move personagens em direção ao que não deveriam tocar."
+    },
+    "hesitacao": {
+      "label": "hesitação",
+      "className": "Substantivo",
+      "field": "Ação — conflito entre duas forças, escolha suspensa",
+      "note": "Onde há hesitação, há duas forças em conflito. É o momento em que a escolha ainda não foi feita."
+    },
+    "ambicao": {
+      "label": "ambição",
+      "className": "Substantivo",
+      "field": "Motivação — desejo de mais, força e risco",
+      "note": "A ambição define personagens mais do que seus atos. Não é vilã nem heroína: é o impulso de ultrapassar o limite."
+    },
+    "ressentimento": {
+      "label": "ressentimento",
+      "className": "Substantivo",
+      "field": "Emocional — mágoa acumulada, narrativa oculta",
+      "note": "Ressentimento é mágoa que não foi resolvida. Personagens ressentidos têm uma história que ainda não contaram."
     }
   },
   "functionWords": {
