@@ -83,23 +83,23 @@ Pergunta padrao da sessao:
 - `analise-engine.js` (v612): CLIQUES_PT 379→433 (+54: motivacional, crônica brasileira, linguagem corporal, paisagem)
 - `voice-engine.js` (v613): campos semânticos +48 (corpo 45→53, casa 40→48, natureza 45→53, conflito 42→50, pensamento 42→50, cidade 41→49)
 
-**Estado atualizado dos engines (v613):**
+**Estado atualizado dos engines (v622):**
 
-| Área / engine | Maturidade | Notas de estado (v613) |
+| Área / engine | Maturidade | Notas de estado (v622) |
 |---|---:|---|
-| Analise geral | **100%** | CLIQUES_PT 433; PLEONASMOS 183 |
+| Analise geral | **100%** | CLIQUES_PT 433; PLEONASMOS 198 |
 | Espelho de Voz | **100%** | corpo 53, casa 48, natureza 53, cidade 49, conflito 50, pensamento 50 |
 | RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
-| Lexico / Biblioteca | **100%** | 265 entradas; sinônimos 254 |
-| Decolonial / vocabulário | **100%** | 281 entradas; 9 categorias equilibradas |
-| Sintaxe | **99%** | adjetivos_comuns 821; verbos_pres_reg 616; formas_verbais_irr 267; substantivos_ia 188 |
+| Lexico / Biblioteca | **100%** | 289 entradas; sinônimos 282 |
+| Decolonial / vocabulário | **100%** | 295 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 930; verbos_pres_reg 697; formas_verbais_irr 343; substantivos_ia 225 |
 | Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
 
 **Próximas fronteiras:**
 
 1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
-2. **Dados**: formas_verbais_irr 267 e substantivos_ia 188 têm margem para crescer
-3. **Decolonial**: categorias corpo/saúde e gênero podem ser expandidas
+2. **Dados**: todos os grandes arrays cresceram — margem ainda existe em CLIQUES_PT, léxico e sinônimos
+3. **Decolonial**: pode crescer além de 300 em áreas emergentes (IA, desinformação, preconceito algorítmico)
 
 ---
 

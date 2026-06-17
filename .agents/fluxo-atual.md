@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v612 (`vereda-offline-v612`, `ASSET_VERSION=20260617-clic433`)
+**Versão atual:** v622 (`vereda-offline-v622`, `ASSET_VERSION=20260617-lex289`)
 
 ---
 
@@ -43,6 +43,16 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v610 | adjetivos_comuns 758→821 (+63 seguros: -oso/a, -ável/-ível, -ente, -ivo/a) |
 | v611 | verbos_pres_reg 571→616 (+45 formas literárias) |
 | v612 | CLIQUES_PT 379→433 (+54: motivacional, crônica, linguagem corporal, paisagem) |
+| v613 | voice-engine campos semânticos +48 (corpo→53, casa→48, natureza→53…) |
+| v614 | formas_verbais_irr 267→343 (+76: sentir, dormir, mentir, subir, agir, surgir, exigir) |
+| v615 | substantivos_ia 188→225 (+37: alergia, demência, histeria, neurociência…) |
+| v616 | decolonial 281→295 (+14: mulher emotiva, retardado, cabelo crespo domado…) |
+| v617 | léxico 265→277 (+12: violência, trabalho, dinheiro, escola, saúde, governo…) |
+| v618 | sinônimos 254→282 (+28: aberto, cheio, longo, caro, fácil, comer, respirar…) |
+| v619 | PLEONASMOS 183→198 (+15: ver com os olhos, viver a vida, medo e receio…) |
+| v620 | adjetivos_comuns 821→930 (+109: ardoroso, audacioso, saudoso, habitável…) |
+| v621 | verbos_pres_reg 616→697 (+81: analisa, captura, critica, defende, motiva…) |
+| v622 | léxico 277→289 (+12: crime, cachorro, emprego, eleição, voto, médico…) |
 
 ---
 
