@@ -326,6 +326,17 @@
     ["acabar de vez","acabar"],["terminar de uma vez","terminar"],
     ["aparecer de repente","aparecer"],["desaparecer de repente","desaparecer"],
     ["entrar para dentro de","entrar em"],["sair de dentro de","sair de"],
+    // redundâncias em prosa literária e redação escolar
+    ["falar verbalmente","falar"],["escrever por escrito","escrever"],
+    ["ver com os próprios olhos","ver"],["retroceder para trás","retroceder"],
+    ["único e exclusivo","único"],["proibido e vetado","proibido"],
+    ["novamente de novo","novamente"],["começo e início","início"],
+    ["fim e término","fim"],["medo e temor","medo"],
+    ["grande e enorme","enorme"],["pequeno e minúsculo","minúsculo"],
+    ["escuro e sem luz","escuro"],["claro e luminoso","claro"],
+    ["completamente perfeito","perfeito"],["velho veterano","veterano"],
+    ["morrer de morte","morrer"],["certeza e convicção","certeza"],
+    ["alegria e felicidade","alegria"],["grave e sério","grave"],
   ];
 
   const NEGACOES_DUPLAS = [
