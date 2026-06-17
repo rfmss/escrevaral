@@ -361,9 +361,7 @@
   white-space: nowrap;
 }
 
-.pinned-documents,
-.ongoing-documents,
-.recent-documents {
+.resume-documents {
   margin: 0 0 22px;
 }
 
@@ -375,17 +373,6 @@
   margin-bottom: 12px;
 }
 
-.archive-strip-heading h2 {
-  margin: 2px 0 0;
-  color: var(--ink);
-  font-size: 18px;
-}
-
-.archive-strip-heading span {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 800;
-}
 
 .archive-strip-list {
   display: grid;
@@ -393,9 +380,7 @@
   gap: 12px;
 }
 
-.recent-document,
-.ongoing-document,
-.pinned-document {
+.resume-document {
   display: grid;
   grid-template-columns: 34px minmax(0, 1fr) 24px;
   align-items: center;
@@ -410,28 +395,14 @@
   transition: border-color var(--motion-quick), box-shadow var(--motion-quick), transform var(--motion-quick);
 }
 
-.pinned-document {
-  background: linear-gradient(135deg, var(--highlight-start), var(--highlight-end));
-}
-
-.ongoing-document {
-  background: linear-gradient(135deg, var(--highlight-start), var(--highlight-alt-end));
-}
-
-.recent-document:hover,
-.recent-document.is-selected,
-.ongoing-document:hover,
-.ongoing-document.is-selected,
-.pinned-document:hover,
-.pinned-document.is-selected {
+.resume-document:hover,
+.resume-document.is-selected {
   border-color: var(--primary);
   box-shadow: 0 8px 24px rgba(46, 77, 67, 0.08);
   transform: translateY(-1px);
 }
 
-.recent-document > .material-symbols-outlined,
-.ongoing-document > .material-symbols-outlined,
-.pinned-document > .material-symbols-outlined {
+.resume-document > .material-symbols-outlined {
   grid-row: span 2;
   width: 34px;
   height: 34px;
@@ -442,36 +413,26 @@
   color: var(--primary);
 }
 
-.recent-document strong,
-.recent-document small,
-.ongoing-document strong,
-.ongoing-document small,
-.pinned-document strong,
-.pinned-document small {
+.resume-document strong,
+.resume-document small {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.recent-document strong,
-.ongoing-document strong,
-.pinned-document strong {
+.resume-document strong {
   color: var(--ink);
   font-size: 13px;
 }
 
-.recent-document small,
-.ongoing-document small,
-.pinned-document small {
+.resume-document small {
   color: var(--muted);
   font-size: 11px;
   margin-top: 3px;
 }
 
-.recent-document i,
-.ongoing-document i,
-.pinned-document i {
+.resume-document i {
   grid-column: 3;
   grid-row: 1 / span 2;
   color: var(--muted);
@@ -479,12 +440,8 @@
   opacity: 0.55;
 }
 
-.recent-document.is-pinned i,
-.ongoing-document.is-pinned i,
-.pinned-document.is-pinned i,
-.recent-document i:hover,
-.ongoing-document i:hover,
-.pinned-document i:hover {
+.resume-document.is-pinned i,
+.resume-document i:hover {
   color: var(--primary);
   opacity: 1;
 }

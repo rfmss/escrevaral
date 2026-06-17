@@ -254,9 +254,7 @@ function renderProjectGrid() {
   });
   const sortedManuscripts = sortArchiveManuscripts(filteredManuscripts);
 
-  renderPinnedDocuments(filteredManuscripts);
-  renderOngoingDocuments(filteredManuscripts);
-  renderRecentDocuments(filteredManuscripts);
+  renderResumeDocuments(filteredManuscripts);
 
   if (!sortedManuscripts.length) {
     const message = searchQuery ? "Nenhuma nota encontrada" : "Nada aqui ainda";
@@ -348,79 +346,50 @@ function renderProjectGrid() {
     .join("");
 }
 
-function renderPinnedDocuments(manuscripts) {
-  const pinnedItems = sortArchiveManuscripts(manuscripts.filter((manuscript) => manuscript.pinned)).slice(0, 6);
-
-  if (!pinnedItems.length) {
-    pinnedDocuments.hidden = true;
-    pinnedDocuments.innerHTML = "";
+function renderResumeDocuments(manuscripts) {
+  if (manuscripts.length < 2) {
+    resumeDocuments.hidden = true;
+    resumeDocuments.innerHTML = "";
     return;
   }
 
-  pinnedDocuments.hidden = false;
-  pinnedDocuments.innerHTML = `
-    <div class="archive-strip-heading">
-      <div>
-        <p class="eyebrow">Fixados</p>
-        <h2>Na mesa agora</h2>
-      </div>
-      <span>${pinnedItems.length} ${pinnedItems.length === 1 ? "nota" : "notas"}</span>
-    </div>
-    <div class="archive-strip-list">
-      ${pinnedItems.map((manuscript) => createCompactDocumentMarkup(manuscript, "pinned-document")).join("")}
-    </div>
-  `;
-}
+  const seen = new Set();
+  const items = [];
 
-function renderOngoingDocuments(manuscripts) {
-  const ongoingItems = sortArchiveManuscripts(
-    manuscripts.filter((manuscript) => ["Em escrita", "Revisão"].includes(manuscript.status))
-  ).slice(0, 6);
+  const active = manuscripts.find(m => m.id === state.activeId);
+  if (active) { seen.add(active.id); items.push(active); }
 
-  // Ocultar se todos os docs em andamento já aparecem na seção de recentes
-  const recentIds = new Set([...manuscripts]
-    .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
-    .slice(0, 4).map(m => m.id));
-  const uniqueOngoing = ongoingItems.filter(m => !recentIds.has(m.id));
+  const pinned = sortArchiveManuscripts(manuscripts.filter(m => m.pinned && !seen.has(m.id)));
+  for (const m of pinned) {
+    if (items.length >= 3) break;
+    seen.add(m.id);
+    items.push(m);
+  }
 
-  if (!uniqueOngoing.length) {
-    ongoingDocuments.hidden = true;
-    ongoingDocuments.innerHTML = "";
+  if (items.length < 3) {
+    const recent = [...manuscripts]
+      .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
+      .filter(m => !seen.has(m.id));
+    for (const m of recent) {
+      if (items.length >= 3) break;
+      seen.add(m.id);
+      items.push(m);
+    }
+  }
+
+  if (!items.length) {
+    resumeDocuments.hidden = true;
+    resumeDocuments.innerHTML = "";
     return;
   }
 
-  ongoingDocuments.hidden = false;
-  ongoingDocuments.innerHTML = `
+  resumeDocuments.hidden = false;
+  resumeDocuments.innerHTML = `
     <div class="archive-strip-heading">
-      <p class="eyebrow">Em andamento</p>
+      <p class="eyebrow">Retomar agora</p>
     </div>
     <div class="archive-strip-list">
-      ${uniqueOngoing
-        .map((manuscript) => createCompactDocumentMarkup(manuscript, "ongoing-document", `${manuscript.status} · ${manuscript.progress}%`))
-        .join("")}
-    </div>
-  `;
-}
-
-function renderRecentDocuments(manuscripts) {
-  const recentItems = [...manuscripts]
-    .sort((a, b) => getUpdatedTime(b.updatedAt) - getUpdatedTime(a.updatedAt))
-    .slice(0, 4);
-
-  // Só mostra "Continue de onde parou" com 2+ documentos — com 1 é ruído
-  if (!recentItems.length || manuscripts.length < 2) {
-    recentDocuments.hidden = true;
-    recentDocuments.innerHTML = "";
-    return;
-  }
-
-  recentDocuments.hidden = false;
-  recentDocuments.innerHTML = `
-    <div class="archive-strip-heading">
-      <p class="eyebrow">Continue de onde parou</p>
-    </div>
-    <div class="archive-strip-list">
-      ${recentItems.map((manuscript) => createCompactDocumentMarkup(manuscript, "recent-document")).join("")}
+      ${items.map(m => createCompactDocumentMarkup(m, "resume-document")).join("")}
     </div>
   `;
 }
