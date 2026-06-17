@@ -1991,6 +1991,84 @@
       "className": "Substantivo",
       "field": "Emocional — mágoa acumulada, narrativa oculta",
       "note": "Ressentimento é mágoa que não foi resolvida. Personagens ressentidos têm uma história que ainda não contaram."
+    },
+    "laco": {
+      "label": "laço",
+      "className": "Substantivo",
+      "field": "Relacional — vínculo, aprisionamento, parentesco",
+      "note": "Laços unem e prendem. A mesma relação que protege pode aprisionar."
+    },
+    "peso": {
+      "label": "peso",
+      "className": "Substantivo",
+      "field": "Emocional — responsabilidade, fardo, gravidade",
+      "note": "O peso é metáfora de tudo que não pode ser largado. Revela o que os personagens carregam sem poder largar."
+    },
+    "clarao": {
+      "label": "clarão",
+      "className": "Substantivo",
+      "field": "Perceptivo — revelação súbita, iluminação abrupta",
+      "note": "O clarão interrompe. Antes era escuro; depois do clarão, algo foi visto que não pode ser desnvisto."
+    },
+    "rito": {
+      "label": "rito",
+      "className": "Substantivo",
+      "field": "Cultural — repetição sagrada, pertencimento, passagem",
+      "note": "Ritos marcam transições: de criança para adulto, de vivo para morto, de estranho para membro."
+    },
+    "precipicio": {
+      "label": "precipício",
+      "className": "Substantivo",
+      "field": "Espacial — limite extremo, ponto sem retorno",
+      "note": "O precipício é o limite final. Chegar à beira dele é a maior crise; cair é a transformação definitiva."
+    },
+    "esquecimento": {
+      "label": "esquecimento",
+      "className": "Substantivo",
+      "field": "Temporal — perda involuntária, apagamento",
+      "note": "Esquecer pode ser fuga, proteção ou dano. Personagens que esquecem têm algo que precisam proteger ou não suportam carregar."
+    },
+    "pertenca": {
+      "label": "pertença",
+      "className": "Substantivo",
+      "field": "Relacional — inclusão, identidade coletiva, raiz",
+      "note": "Pertencer é ter lugar. A falta de pertença é um dos conflitos mais silenciosos e mais presentes na ficção brasileira."
+    },
+    "renascimento": {
+      "label": "renascimento",
+      "className": "Substantivo",
+      "field": "Narrativo — transformação radical, segunda chance",
+      "note": "O renascimento exige que algo morra antes. É o ponto de virada de qualquer arco de personagem."
+    },
+    "desvio": {
+      "label": "desvio",
+      "className": "Substantivo",
+      "field": "Narrativo — mudança de rota, transgressão, descoberta",
+      "note": "Todo desvio tem um custo e uma recompensa. É onde a história sai do esperado."
+    },
+    "testemunho": {
+      "label": "testemunho",
+      "className": "Substantivo",
+      "field": "Narrativo — prova, memória, responsabilidade",
+      "note": "Testemunhar é ter obrigação de contar. A personagem que viu carrega o peso do que sabe."
+    },
+    "urgencia": {
+      "label": "urgência",
+      "className": "Substantivo",
+      "field": "Temporal — pressão, prazo, crise iminente",
+      "note": "Urgência comprime o tempo narrativo. O que era gerenciável torna-se crise quando o prazo chega."
+    },
+    "acaso": {
+      "label": "acaso",
+      "className": "Substantivo",
+      "field": "Narrativo — imprevisibilidade, sorte, ausência de controle",
+      "note": "O acaso quebra a causalidade. Quando aparece, lembra que o personagem não controla tudo."
+    },
+    "proposto": {
+      "label": "propósito",
+      "className": "Substantivo",
+      "field": "Motivação — razão de agir, missão, sentido",
+      "note": "O propósito é a resposta para 'por quê'. Personagens sem propósito derivam; com ele, avançam mesmo contra a resistência."
     }
   },
   "functionWords": {
