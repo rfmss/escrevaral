@@ -3506,6 +3506,125 @@
       "reason": "Hierarquizar arte popular como 'rasa' reproduz elitismo cultural que associa valor estético a acesso — quem produz e consome cultura pop tem experiência válida.",
       "context": "Crítica cultural, texto de opinião, narrativa",
       "contextual": true
+    },
+    {
+      "avoid": "povos primitivos",
+      "alternatives": [
+        "povos originários",
+        "sociedades de tradição oral",
+        "comunidades ancestrais"
+      ],
+      "category": "povos",
+      "reason": "coloca povos em escala evolutiva com o ocidente no topo",
+      "context": "histórico, acadêmico",
+      "contextual": false
+    },
+    {
+      "avoid": "escolha sexual",
+      "alternatives": [
+        "orientação sexual",
+        "identidade sexual"
+      ],
+      "category": "relacoes",
+      "reason": "orientação sexual não é uma escolha voluntária; o termo pode implicar culpa ou responsabilidade",
+      "context": "narrativa, ensaio",
+      "contextual": false
+    },
+    {
+      "avoid": "conhecimento científico vs. crenças",
+      "alternatives": [
+        "diferentes formas de conhecimento",
+        "saberes científicos e tradicionais",
+        "ciência e cosmovisão"
+      ],
+      "category": "conhecimento",
+      "reason": "opõe ciência ocidental a 'crenças', desqualificando outros sistemas de saber",
+      "context": "acadêmico, ensaio",
+      "contextual": true
+    },
+    {
+      "avoid": "superstição popular",
+      "alternatives": [
+        "conhecimento tradicional",
+        "sabedoria popular",
+        "prática cultural"
+      ],
+      "category": "conhecimento",
+      "reason": "desqualifica saberes locais como irracionais frente ao pensamento científico dominante",
+      "context": "ensaio, crônica",
+      "contextual": false
+    },
+    {
+      "avoid": "mulher histérica",
+      "alternatives": [
+        "mulher emotiva",
+        "pessoa em crise emocional",
+        "alguém que expressa angústia"
+      ],
+      "category": "genero",
+      "reason": "histeria foi historicamente usada para patologizar emoções femininas e silenciar mulheres",
+      "context": "narrativa, crônica",
+      "contextual": false
+    },
+    {
+      "avoid": "comportamento masculino",
+      "alternatives": [
+        "comportamento assertivo",
+        "postura firme",
+        "atitude direta"
+      ],
+      "category": "genero",
+      "reason": "associa traços positivos como firmeza e assertividade ao masculino, excluindo mulheres e pessoas não-binárias",
+      "context": "narrativa, ensaio",
+      "contextual": false
+    },
+    {
+      "avoid": "classe baixa",
+      "alternatives": [
+        "classe trabalhadora",
+        "pessoas de baixa renda",
+        "comunidades periféricas"
+      ],
+      "category": "classe",
+      "reason": "hierarquiza classes como alto e baixo, reproduzindo visão vertical da sociedade",
+      "context": "narrativa, texto jornalístico",
+      "contextual": true
+    },
+    {
+      "avoid": "pobreza como vergonha",
+      "alternatives": [
+        "pobreza como condição estrutural",
+        "desigualdade histórica",
+        "resultado de política econômica"
+      ],
+      "category": "classe",
+      "reason": "naturaliza a pobreza como falha individual em vez de produto de estruturas históricas",
+      "context": "ensaio, narrativa social",
+      "contextual": false
+    },
+    {
+      "avoid": "dialeto errado",
+      "alternatives": [
+        "variante regional",
+        "fala local",
+        "uso não-padrão"
+      ],
+      "category": "linguagem",
+      "reason": "não existe dialeto errado; toda variante linguística é legítima em seu contexto social",
+      "context": "texto escolar, literário",
+      "contextual": false
+    },
+    {
+      "avoid": "lingua pura",
+      "alternatives": [
+        "língua padrão",
+        "norma culta",
+        "variante de prestígio"
+      ],
+      "category": "linguagem",
+      "reason": "pureza linguística é mito que reforça hierarquias sociais e apaga variações legítimas",
+      "context": "ensaio, crítica literária",
+      "contextual": false
     }
   ]
 }
