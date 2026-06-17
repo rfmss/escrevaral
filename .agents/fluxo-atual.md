@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v658 (`vereda-offline-v658`, `ASSET_VERSION=20260617-dec332`)
+**Versão atual:** v665 (`vereda-offline-v665`, `ASSET_VERSION=20260617-vrb1031`)
 
 ---
 
@@ -89,6 +89,13 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v656 | adjetivos_comuns 1134→1175 (+41: -ante/-ente: arrebatante, fascinante, pulsante…) |
 | v657 | verbos_pres_reg 872→945 (+73: abala, agita, ancora, fala, freia, liberta…) |
 | v658 | decolonial 322→332 (+10: civilizar, povo sem história, louco perigoso, ignorância…) |
+| v659 | voice-engine casa 48→60, cidade 49→61 (+23 termos literários) |
+| v660 | sinônimos 385→400 (+15: escrever, hesitar, limiar, intenso, sereno, permanecer…) |
+| v661 | adjetivos_comuns 1175→1213 (+38: fervoroso, resiliente, sustentável, angustiante…) |
+| v662 | CLIQUES_PT 579→612 (+33: romance histórico, autoajuda, FC/distopia, infantojuvenil) |
+| v663 | PLEONASMOS 232→260 (+28: tempo, localização, jornalísticos, escrita criativa) |
+| v664 | formas_verbais_irr 783→886 (+103: CONSTRUIR/INCLUIR/CAIR/SAIR/COBRIR/REPOR/COMPOR…) |
+| v665 | verbos_pres_reg 945→1031 (+86: aguarda, contempla, fascina, lamenta, vibra…) |
 
 ---
 
@@ -113,9 +120,9 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `analise-engine.js` — PLEONASMOS 141 tem margem para crescer
-2. `decolonial-data.json` — categorias `classe` e `território` em 28, espaço para equilibrar
-3. `norma-data.json` — adjetivos_comuns 758; verbos_pres_reg 571 — ainda há formas comuns ausentes
+1. `decolonial-data.json` — 332 entradas; espaço para 345+ em preconceito algorítmico e novas mídias
+2. `lexical-data.json` — 322 entradas; espaço para 335+ com estados emocionais complexos
+3. `norma-data.json` — formas_verbais_irr pode crescer para 950+ (MENTIR/SERVIR/SEGUIR ainda ausentes)
 4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---
@@ -123,7 +130,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1175, formas_verbais_irr: 783, verbos_pres_reg: 945)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1213, formas_verbais_irr: 886, verbos_pres_reg: 1031)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
@@ -136,6 +143,18 @@ Toda deliberação relevante entre Claude e Codex deve ser salva em `.agents/con
 O que constitui deliberação relevante: plano proposto e aceito, decisão técnica com trade-off real, ajuste de abordagem acordado entre as duas vozes, validação de implementação com ressalvas.
 
 Formato: três seções — `Claude → Codex (plano)`, `Codex → Claude (implementação ou resposta)`, `Claude → Codex (validação)`. Incluir número do commit ao final quando houver.
+
+---
+
+## Diretriz — auditorias Codex para Claude
+
+Este chat do Codex funciona como sala de auditoria/controle para servir ao Claude local. Auditorias, ressalvas, calibrações e diagnósticos operacionais que o Claude precise perceber devem ser salvos em `.agents/auditorias/` como `.md` local.
+
+Divisão de papéis: Codex aqui atua como sentinela/auditor externo; Claude/Devin local atua como executor principal. O sentinela visual controla os inputs locais da IDE quando há limite/pausa; este chat controla a qualidade, registra achados e entrega instruções para o Claude perceber pelos arquivos.
+
+Regra: Claude deve consultar `.agents/auditorias/` quando for continuar trabalho que dependa de automação, sentinela, limites, handoff, qualidade ou decisões tomadas neste chat. A pasta é gitignored — fica local, não entra no GitHub.
+
+Formato sugerido: `Contexto`, `Achados`, `Decisão`, `Próximos passos para Claude`.
 
 ---
 
