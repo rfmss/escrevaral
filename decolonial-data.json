@@ -2615,6 +2615,68 @@
       "reason": "O conceito jurídico de 'terra devoluta' foi historicamente usado para negar direitos territoriais de povos indígenas e comunidades tradicionais ao declarar suas terras como 'sem dono'.",
       "context": "Em texto jurídico técnico, o termo tem uso específico — contextualize sempre com o histórico de uso e grilagem.",
       "contextual": true
+    },
+    {
+      "avoid": "descobrir o Brasil",
+      "alternatives": [
+        "chegada dos portugueses ao Brasil",
+        "invasão colonial",
+        "encontro de 1500"
+      ],
+      "category": "territorio",
+      "reason": "O Brasil não estava perdido para ser descoberto — havia povos, línguas e territórios organizados há milênios. A palavra 'descoberta' apaga esse fato.",
+      "context": "Em textos históricos ou narração de época, o uso pode ser intencional e crítico. Nesse caso, marcar a perspectiva.",
+      "contextual": true
+    },
+    {
+      "avoid": "terras virgens",
+      "alternatives": [
+        "território indígena",
+        "floresta habitada",
+        "terras dos povos originários"
+      ],
+      "category": "territorio",
+      "reason": "A expressão projeta ausência humana onde havia populações densas. 'Virgem' reforça a ideia colonial de terra vazia pronta para ser tomada.",
+      "context": "Em falas de personagens colonizadores de época, uso pode ser deliberado para caracterizar o ponto de vista — não neutro.",
+      "contextual": true
+    },
+    {
+      "avoid": "imbecil",
+      "alternatives": [
+        "ignorante",
+        "despreparado",
+        "descuidado",
+        "irresponsável"
+      ],
+      "category": "deficiencia",
+      "reason": "Termo médico histórico para deficiência intelectual, ressignificado como xingamento. Usa deficiência como insulto implícito.",
+      "context": "Como xingamento em diálogo de personagem, pode ser mantido se o texto critica esse uso. Evitar em narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "bandido",
+      "alternatives": [
+        "criminoso",
+        "suspeito",
+        "acusado",
+        "réu"
+      ],
+      "category": "classe",
+      "reason": "Aplicado de forma seletiva a jovens negros e periféricos no Brasil, funciona como marcador racial e de classe antes da condenação judicial.",
+      "context": "O problema não é a palavra em si, mas o padrão de a quem ela é aplicada. Atenção ao contexto e ao narrador.",
+      "contextual": true
+    },
+    {
+      "avoid": "viado",
+      "alternatives": [
+        "gay",
+        "homossexual",
+        "homem gay"
+      ],
+      "category": "genero",
+      "reason": "Usado como insulto homofóbico. Mesmo quando reapropriado por parte da comunidade LGBTQIA+, o uso por narrador externo mantém carga ofensiva.",
+      "context": "Em voz de personagem que integra a comunidade, pode ser reapropriação legítima. Revisar narrador e intenção.",
+      "contextual": true
     }
   ]
 }
