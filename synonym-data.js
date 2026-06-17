@@ -831,6 +831,20 @@
 
     // est
     "infeliz":     ["triste", "desgraçado", "azarado", "infortunado", "desafortunado", "aflito"],
+    "branco":      ["alvo", "lívido", "pálido", "cândido", "imaculado", "lácteo"],
+    "negro":       ["escuro", "retinto", "azeviche", "sombrio", "ébano", "tenebroso"],
+    "comecar":     ["iniciar", "principiar", "inaugurar", "abrir", "estrear", "lançar"],
+    "ceder":       ["recuar", "capitular", "render-se", "dobrar-se", "abdicar", "resignar-se"],
+    "confiar":     ["fiar-se", "acreditar", "apostar", "delegar", "entregar-se", "depositar fé"],
+    "desistir":    ["abandonar", "largar", "renunciar", "recuar", "prescindir", "abdicar"],
+    "tentar":      ["experimentar", "arriscar", "ousar", "aventurar-se", "ensaiar", "provar"],
+    "conseguir":   ["obter", "alcançar", "lograr", "conquistar", "realizar", "granjear"],
+    "intenso":     ["ardente", "veemente", "fervoroso", "aceso", "exaltado", "vívido"],
+    "calado":      ["silencioso", "quieto", "mudo", "reservado", "reticente", "taciturno"],
+    "libertar":    ["soltar", "desamarrar", "emancipar", "alforriar", "desencadear", "eximir"],
+    "vencer":      ["triunfar", "derrotar", "superar", "bater", "subjugar", "sobrepujar"],
+    "guardar":     ["conservar", "preservar", "zelar", "manter", "resguardar", "proteger"],
+    "roubar":      ["surrupiar", "furtar", "subtrair", "extorquir", "pilhar", "desviar"],
 
   };
 
