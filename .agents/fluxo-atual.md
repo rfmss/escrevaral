@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v676 (`vereda-offline-v676`, `ASSET_VERSION=20260617-sin432`)
+**Versão atual:** v684 (`vereda-offline-v684`, `ASSET_VERSION=20260617-lex360`)
 
 ---
 
@@ -107,6 +107,14 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v674 | CLIQUES_PT 612→645 (+33: não-ficção, crônica política, testemunho, terror/suspense) |
 | v675 | léxico 334→345 (+11: clarão, rito, precipício, pertença, testemunho, urgência…) |
 | v676 | sinônimos 416→432 (+16: breve, longo, gritar, sussurrar, honesto, instante, amanhecer…) |
+| v677 | PLEONASMOS 260→282 (+22: corporativo, acadêmico, jurídico, saúde) |
+| v678 | verbos_pres_reg 1101→1176 (+75: admira, capta, argumenta, confidencia, abraça, golpeia…) |
+| v679 | adjetivos_comuns 1237→1281 (+44: efêmero, abissal, aromático, exilado, maldito, venerado…) |
+| v680 | voice-engine natureza 53→65, memoria 51→56 (+17 termos literários) |
+| v681 | formas_verbais_irr 1074→1173 (+99: PARTIR/MORRER/FERIR/SURGIR/FUNDIR/EXISTIR/RESISTIR…) |
+| v682 | decolonial 342→353 (+11: comunidade carente, terceiro mundo, mulher fatal, nordestino…) |
+| v683 | sinônimos 432→448 (+16: amizade, traição, aliança, absoluto, mudar, crescer, justo…) |
+| v684 | léxico 345→360 (+15: armadilha, sacrifício, julgamento, perdão, máscara, lealdade…) |
 
 ---
 
@@ -141,7 +149,7 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1237, formas_verbais_irr: 1074, verbos_pres_reg: 1101)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1281, formas_verbais_irr: 1173, verbos_pres_reg: 1176)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
