@@ -264,6 +264,30 @@
     "o vento sussurrava entre as folhas","as folhas tremiam ao vento",
     "o rio corria manso","o silêncio da floresta",
     "a natureza parecia cúmplice","o pôr do sol pintou o céu",
+    // clichês de romance young adult (YA)
+    "não era como as outras garotas","não era como os outros garotos",
+    "havia algo diferente nele","havia algo diferente nela",
+    "nunca havia conhecido alguém assim","nunca se sentira tão vivo",
+    "ele a fez sentir especial","ela o fez se sentir especial",
+    "não conseguia parar de sorrir","o coração deu um salto",
+    "o coração disparou no peito","sentiu borboletas no estômago",
+    "não era o tipo dele","não era o tipo dela",
+    "foram os dias mais felizes da sua vida",
+    "sabia que seria diferente dessa vez","desta vez seria diferente",
+    // clichês de ficção contemporânea urbana
+    "olhava para o teto sem conseguir dormir","virou para o outro lado da cama",
+    "acordou sem saber onde estava","olhou para o espelho e não se reconheceu",
+    "o apartamento estava em silêncio","o silêncio era ensurdecedor",
+    "pegou o celular e viu que não tinha mensagens","verificou o celular mais uma vez",
+    "tentou lembrar como era feliz","tentou lembrar quando tudo havia mudado",
+    "havia lido aquela mensagem mil vezes","não conseguia apagar aquela imagem da cabeça",
+    // clichês de narrativa de empoderamento e autodescoberta
+    "encontrou a si mesmo","encontrou a si mesma",
+    "a experiência a transformou","a experiência o transformou",
+    "saiu uma pessoa diferente","não era mais o mesmo após aquilo",
+    "aprendeu a amar a si mesmo","aprendeu a amar a si mesma",
+    "pela primeira vez na vida se sentiu inteira","se sentiu completo pela primeira vez",
+    "percebeu que merecia ser feliz","todos merecem ser felizes",
   ];
 
   const PLEONASMOS = [
