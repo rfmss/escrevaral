@@ -3944,6 +3944,137 @@
       "reason": "Reproduz a teoria lombrosiana de que o crime é biológico, usada para criminalizar pobres e negros.",
       "context": "Evitar em narrador; pode aparecer em voz de personagem para revelar preconceito.",
       "contextual": true
+    },
+    {
+      "avoid": "comunidade carente",
+      "alternatives": [
+        "comunidade em vulnerabilidade social",
+        "comunidade periférica",
+        "comunidade sem acesso a serviços"
+      ],
+      "category": "classe",
+      "reason": "'Carente' define pelo que falta, não pelo que existe. Reduz comunidades a sua privação.",
+      "context": "Sempre evitar; substituir por 'comunidade periférica' ou 'comunidade em vulnerabilidade'.",
+      "contextual": false
+    },
+    {
+      "avoid": "bolha ideológica",
+      "alternatives": [
+        "câmara de eco",
+        "ambiente de confirmação de crenças",
+        "grupo homogêneo de opiniões"
+      ],
+      "category": "conhecimento",
+      "reason": "O termo pode deslegitimar qualquer comunidade que compartilha valores, não apenas câmaras de eco problemáticas.",
+      "context": "Usar 'câmara de eco' quando o problema é específico de fechamento informacional.",
+      "contextual": true
+    },
+    {
+      "avoid": "revisionismo histórico",
+      "alternatives": [
+        "negacionismo histórico",
+        "distorção histórica",
+        "relativização de fatos históricos comprovados"
+      ],
+      "category": "conhecimento",
+      "reason": "Revisão histórica é processo legítimo da historiografia; o termo incorreto pode confundir crítica saudável com negacionismo.",
+      "context": "Usar 'negacionismo' quando se trata de negar eventos documentados; 'revisão' para debates historiográficos legítimos.",
+      "contextual": true
+    },
+    {
+      "avoid": "politicamente correto",
+      "alternatives": [
+        "linguagem inclusiva",
+        "respeito à dignidade",
+        "cuidado na comunicação"
+      ],
+      "category": "linguagem",
+      "reason": "O termo frequentemente é usado para ridicularizar esforços de inclusão e respeito, esvaziando o debate.",
+      "context": "O uso pode ser neutro em contextos acadêmicos; evitar quando serve para desqualificar a inclusão.",
+      "contextual": true
+    },
+    {
+      "avoid": "padrão de beleza",
+      "alternatives": [
+        "ideal de beleza imposto",
+        "norma estética dominante",
+        "modelo corporal hegemônico"
+      ],
+      "category": "estetica",
+      "reason": "'Padrão' sugere algo natural e normativo; o adjetivo 'imposto' ou 'hegemônico' torna explícita a construção social.",
+      "context": "Avalie: nem todo uso de 'padrão de beleza' é problemático; o problema é quando o termo oculta sua origem histórica.",
+      "contextual": true
+    },
+    {
+      "avoid": "zona sul",
+      "alternatives": [
+        "bairros de alta renda",
+        "região com mais infraestrutura",
+        "área com mais serviços públicos"
+      ],
+      "category": "territorio",
+      "reason": "Em muitas cidades brasileiras, 'zona sul' é eufemismo codificado para 'área de classe alta e branca'.",
+      "context": "Depende da cidade e contexto; verificar se o uso carrega codificação de classe ou raça.",
+      "contextual": true
+    },
+    {
+      "avoid": "criança de rua",
+      "alternatives": [
+        "criança em situação de rua",
+        "criança sem moradia",
+        "criança em vulnerabilidade extrema"
+      ],
+      "category": "classe",
+      "reason": "A criança não é 'da rua'; está em situação de rua por falta de proteção. A formulação 'em situação de' preserva a humanidade.",
+      "context": "Preferir sempre 'em situação de rua' para crianças e adultos.",
+      "contextual": false
+    },
+    {
+      "avoid": "nordestino ignorante",
+      "alternatives": [
+        "habitante do nordeste",
+        "pessoa nordestina"
+      ],
+      "category": "territorio",
+      "reason": "Estereótipo regional que associa pobreza estrutural do Nordeste a suposta inferioridade intelectual dos seus moradores.",
+      "context": "Evitar sempre; pode aparecer em voz de personagem para revelar preconceito regional.",
+      "contextual": true
+    },
+    {
+      "avoid": "lavagem cerebral",
+      "alternatives": [
+        "manipulação ideológica",
+        "condicionamento cultural",
+        "desinformação sistemática"
+      ],
+      "category": "conhecimento",
+      "reason": "O termo militariza o processo de formação de crenças e pode ser usado para invalidar qualquer educação formal.",
+      "context": "Aceitável em contexto de propaganda autoritária explícita; cuidado com uso vago.",
+      "contextual": true
+    },
+    {
+      "avoid": "raça negra",
+      "alternatives": [
+        "pessoas negras",
+        "população negra",
+        "comunidade negra"
+      ],
+      "category": "povos",
+      "reason": "'Raça' não é categoria biológica válida; o uso pode naturalizar hierarquias raciais. 'Pessoas negras' é mais preciso.",
+      "context": "No Brasil, 'raça' pode ser usado em contexto político de combate ao racismo; verifique a intenção.",
+      "contextual": true
+    },
+    {
+      "avoid": "mulher fatal",
+      "alternatives": [
+        "mulher sedutora",
+        "personagem feminina manipuladora",
+        "antagonista feminina"
+      ],
+      "category": "genero",
+      "reason": "O arquétipo carrega misoginia: naturaliza a ideia de que mulheres são perigosas por serem atraentes.",
+      "context": "Pode aparecer como referência explícita ao arquétipo literário/cinematográfico em análise crítica.",
+      "contextual": true
     }
   ]
 }
