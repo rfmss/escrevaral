@@ -68,6 +68,49 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v666→v680)
+
+**Baseline:** v680 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v666→v680):**
+
+- `decolonial-data.json` (v666): 332→342 (+10: homem de bem, menor carente, mercado negro, portador…)
+- `lexical-data.json` (v667): 322→332 (+10: decepção, alívio, ternura, tédio, ambição, ressentimento…)
+- `norma-data.json` (v668): formas_verbais_irr 886→961 (+75: SERVIR/CONSEGUIR/MANTER/CONTER/OBTER/DETER/PREVER…)
+- `synonym-data.js` (v669): 400→416 (+16: rastro, eco, ruína, perceber, imaginar, decidir, abandonar…)
+- `norma-data.json` (v670): adjetivos_comuns 1213→1237 (+24: ansioso, nostálgico, admissível, franzino, abusivo…)
+- `norma-data.json` (v671): verbos_pres_reg 1031→1101 (+70: angustia, confunde, atravessa, captura, foge, sobe…)
+- `voice-engine.js` (v672): conflito 50→60, pensamento 50→60 (+20 termos literários)
+- `norma-data.json` (v673): formas_verbais_irr 961→1074 (+113: ESCREVER/VIVER/ERGUER/CRER/ADERIR/PREFERIR/REFERIR…)
+- `analise-engine.js` (v674): CLIQUES_PT 612→645 (+33: não-ficção, crônica política, testemunho, terror/suspense)
+- `lexical-data.json` (v675): 334→345 (+11: clarão, rito, precipício, pertença, testemunho, urgência…)
+- `synonym-data.js` (v676): 416→432 (+16: breve, longo, gritar, sussurrar, honesto, instante, amanhecer…)
+- `analise-engine.js` (v677): PLEONASMOS 260→282 (+22: corporativo, acadêmico, jurídico, saúde)
+- `norma-data.json` (v678): verbos_pres_reg 1101→1176 (+75: admira, capta, argumenta, confidencia, abraça…)
+- `norma-data.json` (v679): adjetivos_comuns 1237→1281 (+44: efêmero, abissal, aromático, exilado, maldito, venerado…)
+- `voice-engine.js` (v680): natureza 53→65, memoria 51→56 (+17 termos literários)
+
+**Estado atualizado dos engines (v680):**
+
+| Área / engine | Maturidade | Notas de estado (v680) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 645; PLEONASMOS 282 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 53, sobrenatural 48 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 345 entradas; sinônimos 432 |
+| Decolonial / vocabulário | **100%** | 342 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1281; verbos_pres_reg 1176; formas_verbais_irr 1074; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: formas_verbais_irr pode crescer para 1100+ (DORMIR/SUBIR/PARTIR/MENTIR ainda com formas ausentes)
+3. **Decolonial**: pode crescer para 355+ em discriminação digital e IA
+4. **Léxico**: pode crescer para 360+ com termos de transformação narrativa
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v648→v665)
 
 **Baseline:** v665 — Sintaxe 99%; todos os outros engines em 100%.
