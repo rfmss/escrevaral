@@ -4075,6 +4075,186 @@
       "reason": "O arquétipo carrega misoginia: naturaliza a ideia de que mulheres são perigosas por serem atraentes.",
       "context": "Pode aparecer como referência explícita ao arquétipo literário/cinematográfico em análise crítica.",
       "contextual": true
+    },
+    {
+      "avoid": "filtro bolha",
+      "alternatives": [
+        "câmara de eco algorítmica",
+        "circulação restrita de informação",
+        "curadoria ideológica automática"
+      ],
+      "category": "linguagem",
+      "reason": "simplifica um fenômeno complexo de personalização e viés de confirmação, atribuindo a culpa ao usuário",
+      "context": "tecnologia, mídia digital, polarização",
+      "contextual": true
+    },
+    {
+      "avoid": "nativos digitais",
+      "alternatives": [
+        "pessoas que cresceram com internet",
+        "geração conectada",
+        "jovens com acesso digital"
+      ],
+      "category": "linguagem",
+      "reason": "falsa universalidade: supõe acesso universal à tecnologia, ignorando desigualdade digital",
+      "context": "educação, tecnologia",
+      "contextual": false
+    },
+    {
+      "avoid": "brecha digital",
+      "alternatives": [
+        "desigualdade de acesso à tecnologia",
+        "exclusão digital estrutural",
+        "barreira tecnológica"
+      ],
+      "category": "classe",
+      "reason": "eufemiza desigualdade estrutural como se fosse lacuna técnica temporária",
+      "context": "tecnologia, políticas públicas",
+      "contextual": false
+    },
+    {
+      "avoid": "tecnologia como neutro",
+      "alternatives": [
+        "tecnologia como escolha política",
+        "design com viés social",
+        "artefato sociotécnico"
+      ],
+      "category": "conhecimento",
+      "reason": "tecnologia nunca é neutra: carrega valores, prioridades e perspectivas de quem a cria",
+      "context": "ciência e tecnologia, epistemologia",
+      "contextual": false
+    },
+    {
+      "avoid": "analfabetismo digital",
+      "alternatives": [
+        "falta de acesso a letramento digital",
+        "barreira de acesso tecnológico",
+        "exclusão do mundo digital"
+      ],
+      "category": "linguagem",
+      "reason": "patologiza a ausência de habilidade técnica, desconsiderando a desigualdade estrutural de acesso",
+      "context": "educação, tecnologia",
+      "contextual": false
+    },
+    {
+      "avoid": "desinformação viral",
+      "alternatives": [
+        "informação falsa amplificada",
+        "mentira circulante",
+        "notícia falsa disseminada"
+      ],
+      "category": "linguagem",
+      "reason": "metáfora biológica que naturaliza o fenômeno e retira a responsabilidade das plataformas e produtores",
+      "context": "mídia, jornalismo",
+      "contextual": true
+    },
+    {
+      "avoid": "lavagem cultural",
+      "alternatives": [
+        "imposição cultural",
+        "apagamento de culturas locais",
+        "homogeneização cultural"
+      ],
+      "category": "povos",
+      "reason": "termo inconsistente: pode ser usado tanto para processos coloniais quanto para diversificação cultural",
+      "context": "cultura, identidade",
+      "contextual": true
+    },
+    {
+      "avoid": "imigrantes digitais",
+      "alternatives": [
+        "pessoas que aprenderam tecnologia na vida adulta",
+        "geração pré-internet",
+        "usuários em adaptação digital"
+      ],
+      "category": "linguagem",
+      "reason": "reforça divisão etária e ignora que acesso e habilidade dependem de classe e contexto, não de geração",
+      "context": "educação, tecnologia",
+      "contextual": false
+    },
+    {
+      "avoid": "conteúdo viralizado",
+      "alternatives": [
+        "conteúdo amplamente compartilhado",
+        "publicação de grande alcance",
+        "material disseminado em larga escala"
+      ],
+      "category": "linguagem",
+      "reason": "metáfora de doença que desumaniza o processo social de compartilhamento e engajamento",
+      "context": "comunicação, mídia",
+      "contextual": true
+    },
+    {
+      "avoid": "inclusão digital como solução",
+      "alternatives": [
+        "acesso como direito",
+        "equidade tecnológica",
+        "democratização do acesso a tecnologia"
+      ],
+      "category": "classe",
+      "reason": "trata acesso a dispositivos como solução para desigualdades estruturais complexas",
+      "context": "políticas públicas, educação",
+      "contextual": true
+    },
+    {
+      "avoid": "meritocracia digital",
+      "alternatives": [
+        "vantagem estrutural no ambiente digital",
+        "desigualdade de oportunidades online",
+        "acesso diferenciado à rede"
+      ],
+      "category": "classe",
+      "reason": "naturaliza que sucesso online depende de esforço individual, ocultando barreiras de classe, raça e acesso",
+      "context": "tecnologia, trabalho",
+      "contextual": false
+    },
+    {
+      "avoid": "cultura woke",
+      "alternatives": [
+        "consciência social",
+        "ativismo identitário",
+        "politização da cultura"
+      ],
+      "category": "linguagem",
+      "reason": "termo importado do inglês usado principalmente de forma pejorativa para deslegitimar discussões sobre direitos",
+      "context": "política, cultura",
+      "contextual": true
+    },
+    {
+      "avoid": "descolonização como metáfora",
+      "alternatives": [
+        "repensar estruturas",
+        "diversificar perspectivas",
+        "ampliar representação"
+      ],
+      "category": "conhecimento",
+      "reason": "usar descolonização como metáfora esvaziada banaliza o projeto político real de povos colonizados",
+      "context": "academia, educação, cultura",
+      "contextual": true
+    },
+    {
+      "avoid": "raça como biologia",
+      "alternatives": [
+        "raça como construção social e histórica",
+        "classificação racial contextual",
+        "identidade racial como processo"
+      ],
+      "category": "estetica",
+      "reason": "reifica categorias raciais como se fossem naturais, ignorando sua construção histórica e política",
+      "context": "ciência, saúde, direito",
+      "contextual": false
+    },
+    {
+      "avoid": "quilombo como passado",
+      "alternatives": [
+        "quilombo como resistência viva",
+        "comunidade quilombola contemporânea",
+        "território de afirmação negra"
+      ],
+      "category": "territorio",
+      "reason": "quilombos são comunidades vivas e em disputa por direitos, não relíquias históricas",
+      "context": "história, direito, território",
+      "contextual": false
     }
   ]
 }
