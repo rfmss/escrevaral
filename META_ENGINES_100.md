@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v566→v570)
+
+**Baseline:** v570 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v566→v570):**
+
+- `voice-engine.js` (v566): stopwords 166→215 (+49: futuro será/serão/serei, subjuntivo fosse/estivesse/ficasse/quisesse/tivesse, condicional deveria/poderia/queria/estaria/teria, imperfeito parecia/continuava/mantinha/revelava/mostrava)
+- `norma-data.json` (v567): substantivos_ia 132→167 (+35 formas sem acento: academia, caloria, caligrafia, custodia, dislexia, elegancia, gastronomia, geriatria, gloria, heresia, hipocondria, idolatria, influencia, mania, neurologia, policia, residencia, violencia, etc.)
+- `analise-engine.js` (v568): PLEONASMOS 101→119 (+18: acrescentar mais, antecipar antes, completamente vazio, eliminar de vez, hipótese possível, livre e solto, muito excessivo, passado antigo, primeiro início, recordação de memória, rever outra vez, retorno de volta, separar individualmente, unânime de todos)
+- `decolonial-data.json` (v569): 239→247 (+8: mulher pública/genero, solteirona/genero, novo rico/classe, plebe/classe, falar errado/linguagem, serviço de branco/relacoes, interior profundo/territorio, analfabeto/conhecimento)
+- `voice-engine.js` (v570): campos semânticos +36 palavras (corpo 29→38, casa 28→35, conflito 28→34, pensamento 29→34, cidade 28→34, sobrenatural 28→33)
+
+**Revisão de maturidade:**
+- **Sintaxe 99%**: substantivos_ia +35 reduz misclassification de -ia nouns; estado estável
+- **Analise geral 100%**: PLEONASMOS 119 cobre mais redundâncias sutis do português brasileiro
+- **Decolonial 100%**: 247 entradas com cobertura ampliada em gênero, classe e linguagem
+- **Espelho de Voz 100%**: stopwords +49 e campos semânticos +36 → detecção mais precisa em qualquer comprimento de texto
+
+**Estado atualizado dos engines (v570):**
+
+| Área / engine | Maturidade | Notas de estado (v570) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 262; PLEONASMOS 119; SUBSTANTIVOS_VAGOS +7; inferirContextoAnalise() |
+| Espelho de Voz | **100%** | campos semânticos expandidos; stopwords 215; lexicons emoção 32-33 termos |
+| RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos; enciclopédia 25 entradas |
+| Lexico / Biblioteca | **100%** | 210 entradas; sinônimos 165 entradas |
+| Decolonial / vocabulário | **100%** | 247 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | verbos_pres_reg 338; adjetivos_comuns 398; formas_verbais_irr 201; substantivos_ia 167 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual avançada — custo muito alto (análise por janela)
+2. **Dados**: formas_verbais_irr pode ganhar formas do imperfeito do subjuntivo (fizesse/dissesse/viesse)
+3. **Lexico**: synonym-data.js (165 entradas) pode crescer com mais verbos epistêmicos e adjetivos de caráter
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v561→v565)
 
 **Baseline:** v565 — Sintaxe 98%→99%; Tema 100%; todos os outros engines em 100%.
