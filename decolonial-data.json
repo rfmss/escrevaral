@@ -4255,6 +4255,187 @@
       "reason": "quilombos são comunidades vivas e em disputa por direitos, não relíquias históricas",
       "context": "história, direito, território",
       "contextual": false
+    },
+    {
+      "avoid": "relação de poder horizontal",
+      "alternatives": [
+        "relação equilibrada de poder",
+        "vínculo sem hierarquia rígida",
+        "troca entre iguais"
+      ],
+      "category": "relacoes",
+      "reason": "oximoro que tende a camuflar estruturas de poder ainda presentes",
+      "context": "sociologia, trabalho, relações interpessoais",
+      "contextual": true
+    },
+    {
+      "avoid": "paternalism",
+      "alternatives": [
+        "paternalismo",
+        "tutela não consentida",
+        "assistência hierárquica"
+      ],
+      "category": "relacoes",
+      "reason": "usar em português o conceito sem anglicismo",
+      "context": "política, assistência social",
+      "contextual": false
+    },
+    {
+      "avoid": "relação tóxica",
+      "alternatives": [
+        "relação abusiva",
+        "vínculo prejudicial",
+        "dinâmica de controle",
+        "relacionamento com violência"
+      ],
+      "category": "relacoes",
+      "reason": "metáfora química que medicaliza problema social e pode trivializar a violência",
+      "context": "psicologia, relações afetivas",
+      "contextual": true
+    },
+    {
+      "avoid": "relação de dependência emocional",
+      "alternatives": [
+        "apego ansioso",
+        "vínculo de controle emocional",
+        "co-dependência afetiva"
+      ],
+      "category": "relacoes",
+      "reason": "patologiza sem considerar o contexto social e afetivo da relação",
+      "context": "psicologia, relações afetivas",
+      "contextual": true
+    },
+    {
+      "avoid": "família desestruturada",
+      "alternatives": [
+        "família em situação de vulnerabilidade",
+        "arranjo familiar diverso",
+        "família com conflitos"
+      ],
+      "category": "relacoes",
+      "reason": "criminaliza configurações familiares distintas do modelo nuclear branco e burguês",
+      "context": "educação, sociologia, políticas públicas",
+      "contextual": false
+    },
+    {
+      "avoid": "ausência de figura paterna",
+      "alternatives": [
+        "criação monoparental",
+        "família com mãe solo",
+        "arranjo familiar diverso"
+      ],
+      "category": "relacoes",
+      "reason": "pressupõe que pai e mãe são papéis fixos e que ausência de pai é necessariamente danosa",
+      "context": "psicologia, educação, sociologia",
+      "contextual": false
+    },
+    {
+      "avoid": "contato entre culturas",
+      "alternatives": [
+        "encontro intercultural",
+        "interação entre povos",
+        "troca cultural contextualizada"
+      ],
+      "category": "relacoes",
+      "reason": "eufemiza encontros que frequentemente envolveram violência e colonização",
+      "context": "história, antropologia, sociologia",
+      "contextual": true
+    },
+    {
+      "avoid": "miscigenação como harmonia",
+      "alternatives": [
+        "mistura racial forçada",
+        "mestiçagem em contexto colonial",
+        "diversidade racial histórica"
+      ],
+      "category": "relacoes",
+      "reason": "ignora a violência sexual que acompanhou a miscigenação colonial no Brasil",
+      "context": "história, sociologia, relações raciais",
+      "contextual": false
+    },
+    {
+      "avoid": "amizade entre raças",
+      "alternatives": [
+        "relação interpessoal entre pessoas de diferentes origens raciais",
+        "convivência racial",
+        "afeto entre pessoas de raças distintas"
+      ],
+      "category": "relacoes",
+      "reason": "pode ser usado para minimizar o racismo estrutural com exemplos individuais",
+      "context": "relações raciais, sociologia",
+      "contextual": true
+    },
+    {
+      "avoid": "terras devolutas",
+      "alternatives": [
+        "terras não regularizadas",
+        "terras em disputa fundiária",
+        "território sob conflito de propriedade"
+      ],
+      "category": "territorio",
+      "reason": "nomenclatura colonial que facilita a grilagem de terras indígenas e quilombolas",
+      "context": "direito, território, políticas públicas",
+      "contextual": false
+    },
+    {
+      "avoid": "desenvolvimento sustentável em território indígena",
+      "alternatives": [
+        "gestão territorial indígena",
+        "autonomia territorial dos povos originários",
+        "uso sustentável conforme cosmovisão indígena"
+      ],
+      "category": "territorio",
+      "reason": "impõe lógica de mercado sobre territórios que seguem outras formas de relação com a natureza",
+      "context": "meio ambiente, povos indígenas, política pública",
+      "contextual": true
+    },
+    {
+      "avoid": "favelização",
+      "alternatives": [
+        "crescimento de periferias",
+        "expansão urbana precária",
+        "formação de territórios populares"
+      ],
+      "category": "territorio",
+      "reason": "patologiza a formação de comunidades populares, ocultando as causas estruturais",
+      "context": "urbanismo, sociologia, política pública",
+      "contextual": true
+    },
+    {
+      "avoid": "zona sul é mais civilizada",
+      "alternatives": [
+        "zona sul tem maior investimento público histórico",
+        "concentração de renda no sul da cidade",
+        "desigualdade geográfica urbana"
+      ],
+      "category": "territorio",
+      "reason": "reforça hierarquia territorial baseada em raça e classe",
+      "context": "urbanismo, sociologia",
+      "contextual": false
+    },
+    {
+      "avoid": "interior como atraso",
+      "alternatives": [
+        "interior com dinâmica própria",
+        "comunidades rurais com saberes específicos",
+        "diversidade regional como riqueza"
+      ],
+      "category": "territorio",
+      "reason": "opõe cosmopolitismo urbano à vida rural como escala de valor civilizatório",
+      "context": "cultura, sociologia, urbanismo",
+      "contextual": false
+    },
+    {
+      "avoid": "região de risco",
+      "alternatives": [
+        "área de vulnerabilidade social",
+        "território com violência estrutural",
+        "região com déficit de políticas públicas"
+      ],
+      "category": "territorio",
+      "reason": "criminaliza o território em vez de nomear as causas da violência",
+      "context": "sociologia, urbanismo, segurança pública",
+      "contextual": true
     }
   ]
 }
