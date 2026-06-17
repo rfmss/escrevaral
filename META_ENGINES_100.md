@@ -68,6 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v538→v539)
+
+**Baseline:** v539 — Analise 100%; RimaLab 99%; Tema 98%; Sintaxe 95%.
+
+**O que foi entregue neste ciclo (v538→v539):**
+
+- `analise-engine.js` (v538): `inferirContextoAnalise()` — skipPleonasmos e skipCliches quando formato=poesia; Analise 99% → **100%**
+- `academia-controller.js` (v538): `buildAnaliseContext()` passa templateId/kind/type ao motor de análise
+- `index.html` (v538): Bancada → Ateliê em toda camada visível; três cabeçalhos de tarefa (Leitura do texto / Direção / Circulação)
+- `academia-controller.js` (v539): finder de rimas separa Rima exata / Rima toante com rótulos de seção
+- `css/04-analysis-academy.css` (v539): chip toante ganha cor própria (sienna) em vez de só opacidade reduzida; RimaLab 98% → **99%**
+
+**Estado atualizado dos engines (v539):**
+
+| Área / engine | Maturidade | Notas de estado (v539) |
+|---|---:|---|
+| Analise geral | **100%** | inferirContextoAnalise(): skipPleonasmos/skipCliches em poesia; bordas poesia e texto curto fechadas |
+| Espelho de Voz | **99%** | natureza 35; conflito 28; campos temáticos completos |
+| RimaLab | **99%** | finder agrupa Rima exata / Rima toante com rótulos; chip toante estilizado |
+| Lexico / Biblioteca | **98%** | 173 entradas; autores brasileiros referenciados |
+| Decolonial / vocabulário | **98%** | 229 entradas; 9 categorias 25-26 cada |
+| Sintaxe | **95%** | substantivos_ia 132; norma-data expandido |
+| Tema Alvorada / Vereda | **98%** | dark mode auditado; grammar btn + proof-chip corrigidos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 95% → 97%**: candidatos morfológicos + desambiguação por janela de contexto — custo alto
+2. **Tema 98% → 99%**: mode-switcher, cronograma, paginação em modo escuro
+3. **Espelho de Voz 99% → 100%**: bordas em textos mistos (prosa+verso) e textos muito curtos
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v523→v528)
 
 **Baseline:** v528 — Tema 98%; Analise 99%; Sinonimos 113 entradas; adjetivos_comuns 216.

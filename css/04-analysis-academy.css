@@ -307,7 +307,9 @@
   margin-bottom: 8px;
 }
 .rimalab-finder-row input:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
-.rimalab-finder-results { display: flex; flex-wrap: wrap; gap: 5px; min-height: 24px; }
+.rimalab-finder-results { display: flex; flex-direction: column; gap: 8px; min-height: 24px; }
+.rimalab-finder-group { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.rimalab-finder-group-label { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); width: 100%; margin-bottom: 2px; }
 .rimalab-finder-chip {
   font-size: 12px;
   padding: 3px 9px;
@@ -318,7 +320,7 @@
   cursor: default;
 }
 .rimalab-finder-chip.is-exata  { border-color: var(--primary); color: var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--surface)); }
-.rimalab-finder-chip.is-toante { opacity: 0.72; }
+.rimalab-finder-chip.is-toante { border-color: var(--sienna, #8b4513); color: var(--sienna, #8b4513); background: color-mix(in srgb, var(--sienna, #8b4513) 6%, var(--surface)); }
 .rimalab-finder-empty { font-size: 12px; color: var(--muted); font-style: italic; }
 
 .rimalab-panel h3 {

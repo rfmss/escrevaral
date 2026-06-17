@@ -782,9 +782,15 @@ if (rimalabFinder) {
         rimalabFinderResults.innerHTML = `<span class="rimalab-finder-empty">Nenhuma rima encontrada no vocabulário.</span>`;
         return;
       }
-      rimalabFinderResults.innerHTML = results.map(r =>
-        `<span class="rimalab-finder-chip is-${escapeHtml(r.type)}" title="${escapeHtml(r.type === "exata" ? "Rima exata" : "Rima toante (assonância)")}">${escapeHtml(r.word)}</span>`
-      ).join("");
+      const exatas  = results.filter(r => r.type === "exata");
+      const toantes = results.filter(r => r.type === "toante");
+      const chips = (list) => list.map(r =>
+        `<span class="rimalab-finder-chip is-${escapeHtml(r.type)}">${escapeHtml(r.word)}</span>`
+      ).join(" ");
+      const groups = [];
+      if (exatas.length)  groups.push(`<div class="rimalab-finder-group"><span class="rimalab-finder-group-label">Rima exata</span>${chips(exatas)}</div>`);
+      if (toantes.length) groups.push(`<div class="rimalab-finder-group"><span class="rimalab-finder-group-label">Rima toante</span>${chips(toantes)}</div>`);
+      rimalabFinderResults.innerHTML = groups.join("");
     });
   });
 }
