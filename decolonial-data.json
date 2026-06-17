@@ -3822,6 +3822,128 @@
       "reason": "criminaliza o não-saber como falha moral do povo, não como resultado de exclusão histórica",
       "context": "ensaio, jornalismo",
       "contextual": false
+    },
+    {
+      "avoid": "homem de bem",
+      "alternatives": [
+        "pessoa íntegra",
+        "cidadão responsável",
+        "pessoa de princípios"
+      ],
+      "category": "genero",
+      "reason": "Reforça estereótipo de que a virtude moral tem gênero e classe, excluindo mulheres e pessoas pobres.",
+      "context": "Evitar em textos contemporâneos; pode aparecer em voz de personagem datada.",
+      "contextual": true
+    },
+    {
+      "avoid": "menor carente",
+      "alternatives": [
+        "criança em vulnerabilidade social",
+        "adolescente em situação de risco",
+        "jovem sem acesso a direitos"
+      ],
+      "category": "classe",
+      "reason": "'Menor' criminaliza a infância pobre e 'carente' reduz a pessoa à sua falta.",
+      "context": "Evitar sempre em narrador contemporâneo; pode aparecer em voz de personagem ou época histórica.",
+      "contextual": true
+    },
+    {
+      "avoid": "doença mental",
+      "alternatives": [
+        "transtorno mental",
+        "condição de saúde mental",
+        "sofrimento psíquico"
+      ],
+      "category": "deficiencia",
+      "reason": "'Doença' reforça estigma e pode sugerir contágio; o campo prefere 'transtorno' ou 'condição'.",
+      "context": "Depende do registro: médico pode usar 'doença' em contexto técnico específico.",
+      "contextual": true
+    },
+    {
+      "avoid": "linguagem neutra",
+      "alternatives": [
+        "linguagem inclusiva de gênero",
+        "escrita não-binária",
+        "linguagem sem marcação de gênero"
+      ],
+      "category": "linguagem",
+      "reason": "O termo 'neutro' pode invisibilizar que a linguagem inclusiva é uma escolha política legítima.",
+      "context": "Avalie qual termo o contexto pede: 'inclusiva' é mais preciso na maioria dos casos.",
+      "contextual": true
+    },
+    {
+      "avoid": "trabalho de negro",
+      "alternatives": [
+        "trabalho pesado",
+        "trabalho manual intenso",
+        "tarefa exaustiva"
+      ],
+      "category": "estetica",
+      "reason": "Associa negritude a trabalho degradante, reproduzindo a lógica escravocrata.",
+      "context": "Evitar sempre; pode ser reproduzido em voz de personagem para mostrar racismo.",
+      "contextual": true
+    },
+    {
+      "avoid": "bugado",
+      "alternatives": [
+        "com falha técnica",
+        "com defeito",
+        "que travou",
+        "fora do ar"
+      ],
+      "category": "linguagem",
+      "reason": "Anglicismo ('bugged') que pode substituir desnecessariamente termos em português.",
+      "context": "Aceitável em diálogos jovens e textos informais; evitar em prosa formal.",
+      "contextual": true
+    },
+    {
+      "avoid": "empoderamento",
+      "alternatives": [
+        "conquista de poder",
+        "autonomia",
+        "reconquista de direitos",
+        "fortalecimento coletivo"
+      ],
+      "category": "linguagem",
+      "reason": "Anglicismo ('empowerment') que pode esvaziar o conceito político original de luta coletiva.",
+      "context": "Aceitável quando o contexto é o do movimento social que o cunhou; pode soar vazio em marketing.",
+      "contextual": true
+    },
+    {
+      "avoid": "senzala digital",
+      "alternatives": [
+        "plataforma com condições precárias",
+        "trabalho sem direitos em plataforma",
+        "servidão algorítmica"
+      ],
+      "category": "classe",
+      "reason": "Metáfora que pode banalizar a escravidão ao aplicá-la a situações de trabalho precarizado.",
+      "context": "Avaliar cuidadosamente; pode ser usado como denúncia explícita com consciência histórica.",
+      "contextual": true
+    },
+    {
+      "avoid": "esquema de pirâmide",
+      "alternatives": [
+        "fraude em cadeia",
+        "esquema Ponzi",
+        "golpe em rede"
+      ],
+      "category": "conhecimento",
+      "reason": "Anglicismo ('pyramid scheme') com alternativa mais precisa em português.",
+      "context": "Aceitável em linguagem informal; em texto formal, preferir 'fraude em cadeia'.",
+      "contextual": true
+    },
+    {
+      "avoid": "bandido nato",
+      "alternatives": [
+        "pessoa em conflito com a lei",
+        "acusado",
+        "suspeito"
+      ],
+      "category": "classe",
+      "reason": "Reproduz a teoria lombrosiana de que o crime é biológico, usada para criminalizar pobres e negros.",
+      "context": "Evitar em narrador; pode aparecer em voz de personagem para revelar preconceito.",
+      "contextual": true
     }
   ]
 }
