@@ -581,6 +581,72 @@
     // est
     "sozinho":     ["solitário", "isolado", "só", "desamparado", "abandonado", "único"],
 
+    // ─── VERBOS EPISTÊMICOS E COGNITIVOS ─────────────────────────────────────
+
+    // est
+    "saber":       ["conhecer", "compreender", "dominar", "entender", "reconhecer", "perceber"],
+
+    // est
+    "pensar":      ["refletir", "ponderar", "cogitar", "meditar", "raciocinar", "imaginar"],
+
+    // est
+    "acreditar":   ["crer", "confiar", "supor", "presumir", "admitir", "convencer-se"],
+
+    // est
+    "duvidar":     ["questionar", "desconfiar", "suspeitar", "hesitar", "vaciar", "ponderar"],
+
+    // est
+    "lembrar":     ["recordar", "rememorar", "evocar", "reviver", "resgatar", "trazer à mente"],
+
+    // est
+    "esquecer":    ["olvidar", "apagar", "suprimir", "negligenciar", "perder", "deixar escapar"],
+
+    // est
+    "perceber":    ["notar", "captar", "sentir", "intuir", "aperceber-se", "discernir"],
+
+    // ─── VERBOS SOCIAIS E RELACIONAIS ────────────────────────────────────────
+
+    // est
+    "amar":        ["adorar", "querer", "venerar", "idolatrar", "estimar", "prezar"],
+
+    // est
+    "odiar":       ["detestar", "abominar", "desprezar", "aborrecer", "repudiar", "execrar"],
+
+    // est
+    "trair":       ["enganar", "ludibriar", "iludir", "tramar", "conspirar", "abandonar"],
+
+    // est
+    "perdoar":     ["absolver", "relevar", "desculpar", "remir", "compadecer-se", "reconciliar"],
+
+    // est
+    "abandonar":   ["largar", "deixar", "desertar", "renunciar", "desprender-se", "soltar"],
+
+    // est
+    "proteger":    ["amparar", "defender", "guardar", "resguardar", "abrigar", "velar"],
+
+    // ─── ADJETIVOS DE CARÁTER ────────────────────────────────────────────────
+
+    // est
+    "corajoso":    ["bravo", "valente", "audaz", "intrépido", "destemido", "resoluto"],
+
+    // est
+    "covarde":     ["medroso", "tímido", "pusilânime", "apavorado", "receoso", "vacilante"],
+
+    // est
+    "cruel":       ["impiedoso", "brutal", "feroz", "selvagem", "desumano", "implacável"],
+
+    // est
+    "gentil":      ["delicado", "cortês", "afável", "amável", "atencioso", "bondoso"],
+
+    // est
+    "orgulhoso":   ["altivo", "soberbo", "arrogante", "vaidoso", "presunçoso", "altaneiro"],
+
+    // est
+    "humilde":     ["modesto", "singelo", "despretensioso", "simples", "recatado", "manso"],
+
+    // est
+    "fiel":        ["leal", "devotado", "comprometido", "honesto", "constante", "dedicado"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
