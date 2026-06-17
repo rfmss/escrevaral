@@ -81,7 +81,7 @@ Pergunta padrao da sessao:
 - `synonym-data.js` (v584): 204→214 (+10: julgar, criticar, elogiar, comparar, escolher, recusar; criar, mudar, destruir, salvar)
 
 **Revisão de maturidade:**
-- **Sintaxe 99%**: adjetivos_comuns 482 (+84) — cobertura de quase todos os adjetivos literários comuns
+- **Sintaxe 99%**: adjetivos_comuns 478 (corrigido: -4 homógrafos verbo/adjetivo — seria, precisa, sabia, muda)
 - **Lexico/Biblioteca 100%**: 229 entradas e sinônimos 214 — vocabulário literário muito abrangente
 - **Decolonial 100%**: 260 entradas com fetichização racial, etarismo e gordofobia cobertos
 - **Espelho de Voz 100%**: natureza e memoria com maior riqueza de termos brasileiros
@@ -95,7 +95,7 @@ Pergunta padrao da sessao:
 | RimaLab | **100%** | grammarWords 286; finder exata/toante com rótulos |
 | Lexico / Biblioteca | **100%** | 229 entradas literárias; sinônimos 214 entradas |
 | Decolonial / vocabulário | **100%** | 260 entradas; 9 categorias: fetichização, etarismo, gordofobia cobertos |
-| Sintaxe | **99%** | verbos_pres_reg 402; adjetivos_comuns 482; formas_verbais_irr 230; substantivos_ia 167 |
+| Sintaxe | **99%** | verbos_pres_reg 402; adjetivos_comuns 478; formas_verbais_irr 230; substantivos_ia 167 |
 | Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
 
 **Próximas fronteiras:**
