@@ -910,6 +910,32 @@
     "doenca":      ["enfermidade", "moléstia", "afecção", "mal", "achaque", "padecimento"],
     "odio":        ["aversão", "repulsa", "animosidade", "rancor", "execração", "aborrecimento profundo"],
 
+    // sentimentos e estados internos
+    "curiosidade":  ["interesse", "indagação", "inquisição", "investigação", "desejo de saber", "ânsia"],
+    "tédio":        ["enfado", "fastio", "monotonia", "indiferença", "apatia", "marasmo"],
+    "inveja":       ["ciúme", "cobiça", "ressentimento", "emulação", "rivalidade", "despeito"],
+    "nostalgia":    ["saudade", "melancolia", "evocação", "lembrança", "acalanto", "añoranza"],
+    "solidao":      ["isolamento", "reclusão", "abandono", "desolação", "retraimento", "desamparo"],
+    "admiracao":    ["estima", "respeito", "reverência", "consideração", "apreço", "louvor"],
+    "gratidao":     ["agradecimento", "reconhecimento", "apreço", "obrigação", "grato acolhimento"],
+    "compaixao":    ["piedade", "misericórdia", "empatia", "dó", "solidariedade", "condolência"],
+    "confusao":     ["desorientação", "perplexidade", "embaraço", "turbação", "caos mental", "barafunda"],
+    "entusiasmo":   ["ardor", "fervor", "ânimo", "empolgação", "paixão", "exaltação"],
+    "desconfianca": ["suspeita", "ceticismo", "dúvida", "cautela", "descrença", "reserva"],
+    "serenidade":   ["calma", "tranquilidade", "sossego", "paz interior", "equanimidade", "placidez"],
+
+    // ações e movimentos
+    "fugir":       ["escapar", "evadir", "desertar", "abandonar", "esquivar", "debandou"],
+    "lutar":       ["combater", "disputar", "batalhar", "resistir", "contender", "rivalizar"],
+    "esperar":     ["aguardar", "antecipar", "aguçar expectativa", "suspirar por", "tolerar a demora"],
+    "esconder":    ["ocultar", "encobrir", "disfarçar", "camuflar", "mascarar", "velar"],
+    "revelar":     ["descobrir", "desvendar", "expor", "desmascarar", "divulgar", "desvelar"],
+    "mudar":       ["transformar", "alterar", "modificar", "adaptar", "renovar", "reformar"],
+    "crescer":     ["desenvolver", "expandir", "amadurecer", "evoluir", "progredir", "florescer"],
+    "destruir":    ["aniquilar", "demolir", "arruinar", "devastar", "dizimar", "exterminar"],
+    "criar":       ["originar", "conceber", "gerar", "produzir", "edificar", "forjar"],
+    "conhecer":    ["saber", "reconhecer", "identificar", "aprender", "familiarizar", "inteirar-se"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
