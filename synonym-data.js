@@ -464,6 +464,57 @@
     // est
     "povo":        ["gente", "população", "multidão", "comunidade", "nação", "coletividade"],
 
+    // ─── VERBOS COMPLEMENTARES ────────────────────────────────────────────────
+
+    // est
+    "temer":       ["recear", "trepidiar", "horrorizar-se", "apavorar-se", "tremer", "pressentir"],
+
+    // est
+    "ler":         ["percorrer", "folhear", "decifrar", "compulsar", "consultar", "devorar"],
+
+    // est
+    "construir":   ["edificar", "erguer", "levantar", "elaborar", "fundar", "erigir"],
+
+    // est
+    "destruir":    ["demolir", "arruinar", "devastar", "desfazer", "arrasar", "aniquilar"],
+
+    // est
+    "mudar":       ["alterar", "transformar", "modificar", "metamorfosear", "converter", "renovar"],
+
+    // est
+    "aprender":    ["apreender", "assimilar", "absorver", "captar", "estudar", "instruir-se"],
+
+    // est
+    "ensinar":     ["instruir", "educar", "lecionar", "doutrinar", "orientar", "iluminar"],
+
+    // est
+    "dormir":      ["repousar", "descansar", "adormecer", "cochilar", "jazer", "hibernar"],
+
+    // ─── ADJETIVOS COMPLEMENTARES ─────────────────────────────────────────────
+
+    // est
+    "feliz":       ["alegre", "contente", "radiante", "satisfeito", "jubiloso", "afortunado"],
+
+    // est
+    "livre":       ["solto", "liberto", "independente", "desimpedido", "autônomo", "desatado"],
+
+    // ─── SUBSTANTIVOS COMPLEMENTARES ─────────────────────────────────────────
+
+    // est
+    "ódio":        ["aversão", "rancor", "hostilidade", "repulsa", "ira", "animosidade"],
+
+    // est
+    "alegria":     ["contentamento", "júbilo", "felicidade", "prazer", "satisfação", "euforia"],
+
+    // est
+    "tristeza":    ["melancolia", "pesar", "mágoa", "angústia", "abatimento", "lamento"],
+
+    // est
+    "mundo":       ["terra", "universo", "cosmos", "orbe", "globo", "humanidade"],
+
+    // est
+    "céu":         ["firmamento", "abóbada", "éter", "azul", "empíreo", "infinito"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
