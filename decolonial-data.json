@@ -4858,6 +4858,139 @@
       "reason": "África tem centenas de tradições musicais distintas; generalizar apaga origem e ancestralidade específicas",
       "context": "Nomear a origem específica valoriza a diversidade: jêjê, nagô, banto, fon.",
       "contextual": false
+    },
+    {
+      "avoid": "louco varrido",
+      "alternatives": [
+        "pessoa em sofrimento psíquico",
+        "pessoa com transtorno mental",
+        "pessoa em crise"
+      ],
+      "category": "deficiencia",
+      "reason": "xingamento que criminaliza sofrimento mental e reforça estigma contra saúde mental",
+      "context": "Expressões populares como essa podem aparecer em personagens, mas a voz narrativa deve ter distanciamento.",
+      "contextual": true
+    },
+    {
+      "avoid": "cegueira moral",
+      "alternatives": [
+        "indiferença ética",
+        "falta de empatia",
+        "insensibilidade moral"
+      ],
+      "category": "deficiencia",
+      "reason": "usa deficiência visual como metáfora negativa, associando cegueira a falha moral",
+      "context": "Metáforas de deficiência para estados negativos (cegueira moral, surdo a razões) reforçam capacitismo.",
+      "contextual": false
+    },
+    {
+      "avoid": "surdo a razões",
+      "alternatives": [
+        "inflexível",
+        "resistente a argumentos",
+        "fechado ao diálogo"
+      ],
+      "category": "deficiencia",
+      "reason": "usa surdez como metáfora negativa de teimosia ou irracionalidade",
+      "context": "Ver também: mudo diante de, cego para a verdade — todas usam deficiência como falha moral.",
+      "contextual": false
+    },
+    {
+      "avoid": "manco de raciocínio",
+      "alternatives": [
+        "raciocínio inconsistente",
+        "argumento com lacunas",
+        "lógica falha"
+      ],
+      "category": "deficiencia",
+      "reason": "usa mobilidade reduzida (manco) como metáfora para inadequação intelectual",
+      "context": "Diga o que está errado diretamente, sem metáfora de deficiência.",
+      "contextual": false
+    },
+    {
+      "avoid": "retardado como insulto",
+      "alternatives": [
+        "absurdo",
+        "ilógico",
+        "sem sentido",
+        "incoerente"
+      ],
+      "category": "deficiencia",
+      "reason": "'retardado' era diagnóstico médico; virou insulto, desumanizando pessoas com deficiência intelectual",
+      "context": "Nunca use como insulto; em contexto histórico pode aparecer como discurso médico da época.",
+      "contextual": true
+    },
+    {
+      "avoid": "amor de mãe não tem limite",
+      "alternatives": [
+        "amor materno profundo",
+        "vínculo forte entre mãe e filho",
+        "dedicação materna"
+      ],
+      "category": "relacoes",
+      "reason": "idealiza o amor materno de forma que culpabiliza mães que têm limites e naturaliza sacrifício feminino obrigatório",
+      "context": "Maternidade pode ser tema literário rico; a idealização excessiva apaga conflitos reais.",
+      "contextual": true
+    },
+    {
+      "avoid": "brigar é sinal de amor",
+      "alternatives": [
+        "tensão no relacionamento",
+        "conflito afetivo",
+        "desentendimento emocional"
+      ],
+      "category": "relacoes",
+      "reason": "normaliza o conflito como expressão de amor, podendo romantizar dinâmicas de abuso",
+      "context": "Conflito pode existir em relações saudáveis, mas brigar compulsivamente não é sinal de amor.",
+      "contextual": false
+    },
+    {
+      "avoid": "ele bate porque te ama",
+      "alternatives": [
+        "violência doméstica",
+        "relacionamento abusivo",
+        "agressão física"
+      ],
+      "category": "relacoes",
+      "reason": "justificativa clássica de violência conjugal; normaliza abuso como expressão de afeto",
+      "context": "Em narrativas que tratam de violência doméstica, o texto pode reproduzir a fala do abusador, mas nunca sem distanciamento.",
+      "contextual": true
+    },
+    {
+      "avoid": "ciúme é amor",
+      "alternatives": [
+        "ciúme possessivo",
+        "controle emocional",
+        "insegurança afetiva"
+      ],
+      "category": "relacoes",
+      "reason": "romantic jealousy narrativa que confunde possessividade com afeto e pode justificar controle abusivo",
+      "context": "Ciúme como tema literário é legítimo; romantizá-lo como prova de amor é uma construção cultural problemática.",
+      "contextual": true
+    },
+    {
+      "avoid": "homem que chora é fraco",
+      "alternatives": [
+        "homem que demonstra emoções",
+        "homem que expressa vulnerabilidade",
+        "homem que chora"
+      ],
+      "category": "relacoes",
+      "reason": "reforça masculinidade tóxica e impede que homens busquem apoio emocional ou psicológico",
+      "context": "Personagens masculinos que choram podem ser poderosos e complexos; a voz narrativa não deve patologizar.",
+      "contextual": false
+    },
+    {
+      "avoid": "a amizade entre mulheres não dura",
+      "alternatives": [
+        "relação entre mulheres complexa",
+        "amizade feminina",
+        "sororidade em construção"
+      ],
+      "category": "relacoes",
+      "reason": "estereótipo misógino que nega a profundidade e durabilidade de vínculos entre mulheres",
+      "context": "Romances de amizade entre mulheres são um subgênero rico; o estereótipo apaga essa tradição.",
+      "contextual": false
     }
   ]
 }
