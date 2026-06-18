@@ -4991,6 +4991,295 @@
       "reason": "estereótipo misógino que nega a profundidade e durabilidade de vínculos entre mulheres",
       "context": "Romances de amizade entre mulheres são um subgênero rico; o estereótipo apaga essa tradição.",
       "contextual": false
+    },
+    {
+      "avoid": "favela como sinônimo de violência",
+      "alternatives": [
+        "comunidade",
+        "território periférico",
+        "bairro popular"
+      ],
+      "category": "territorio",
+      "reason": "associar favela apenas à violência apaga a vida comunitária e cultural desses espaços",
+      "context": "narrativas urbanas",
+      "contextual": false
+    },
+    {
+      "avoid": "interior como lugar atrasado",
+      "alternatives": [
+        "interior",
+        "região interiorana",
+        "cidade do interior"
+      ],
+      "category": "territorio",
+      "reason": "o interior brasileiro tem diversidade cultural e dinâmica própria; 'atrasado' é juízo colonial",
+      "context": "representação regional",
+      "contextual": false
+    },
+    {
+      "avoid": "zona rural como sinônimo de ignorância",
+      "alternatives": [
+        "área rural",
+        "campo",
+        "roça",
+        "zona agrícola"
+      ],
+      "category": "territorio",
+      "reason": "associar zona rural à ignorância reproduz preconceito urbano-centrado",
+      "context": "narrativas de lugar",
+      "contextual": false
+    },
+    {
+      "avoid": "sertão como inferno verde",
+      "alternatives": [
+        "sertão",
+        "região semiárida",
+        "Nordeste",
+        "caatinga"
+      ],
+      "category": "territorio",
+      "reason": "o sertão tem biodiversidade, cultura e resistência; desumanizá-lo apaga a riqueza regional",
+      "context": "literatura regionalista",
+      "contextual": false
+    },
+    {
+      "avoid": "litoral como único Brasil civilizado",
+      "alternatives": [
+        "Brasil costeiro",
+        "cidades litorâneas",
+        "região atlântica"
+      ],
+      "category": "territorio",
+      "reason": "privilegiar o litoral como padrão civilizatório apaga o Brasil do interior e do planalto",
+      "context": "geopolítica cultural",
+      "contextual": false
+    },
+    {
+      "avoid": "progresso chegou ao interior",
+      "alternatives": [
+        "infraestrutura chegou",
+        "serviço público foi ampliado",
+        "acesso melhorou"
+      ],
+      "category": "territorio",
+      "reason": "o 'progresso' como medida única apaga modos de vida locais e impõe modelo urbano-industrial",
+      "context": "jornalismo regional",
+      "contextual": false
+    },
+    {
+      "avoid": "país vazio",
+      "alternatives": [
+        "país de enorme território",
+        "país de baixa densidade demográfica",
+        "terras com povos originários"
+      ],
+      "category": "territorio",
+      "reason": "o Brasil nunca foi vazio: foi habitado por centenas de povos originários antes e depois da colonização",
+      "context": "narrativas históricas",
+      "contextual": false
+    },
+    {
+      "avoid": "quilombo como coisa do passado",
+      "alternatives": [
+        "comunidade quilombola",
+        "território quilombola",
+        "quilombo atual"
+      ],
+      "category": "territorio",
+      "reason": "quilombos são comunidades vivas com direitos territoriais reconhecidos, não apenas história",
+      "context": "narrativas históricas e contemporâneas",
+      "contextual": false
+    },
+    {
+      "avoid": "Amazônia como vazio populacional",
+      "alternatives": [
+        "Amazônia habitada",
+        "floresta com povos",
+        "região com diversidade cultural"
+      ],
+      "category": "territorio",
+      "reason": "a Amazônia tem populações indígenas, ribeirinhas e quilombolas com séculos de presença",
+      "context": "narrativas ambientais",
+      "contextual": false
+    },
+    {
+      "avoid": "pobre coitado",
+      "alternatives": [
+        "pessoa em situação de vulnerabilidade",
+        "pessoa com pouca renda",
+        "trabalhador de baixa renda"
+      ],
+      "category": "classe",
+      "reason": "'coitado' é infantilizante e retira agência de quem enfrenta desigualdade estrutural",
+      "context": "narrativas sociais",
+      "contextual": false
+    },
+    {
+      "avoid": "classe C",
+      "alternatives": [
+        "trabalhadores de renda média-baixa",
+        "famílias de renda intermediária"
+      ],
+      "category": "classe",
+      "reason": "classificar pessoas por letras ressoa com hierarquia e apaga a complexidade social",
+      "context": "jornalismo econômico",
+      "contextual": true
+    },
+    {
+      "avoid": "gente simples como elogio à ignorância",
+      "alternatives": [
+        "gente hospitaleira",
+        "pessoas de natureza generosa",
+        "comunidade acolhedora"
+      ],
+      "category": "classe",
+      "reason": "simplificar 'gente simples' pode esconder julgamento sobre quem não tem escolaridade formal",
+      "context": "representações comunitárias",
+      "contextual": true
+    },
+    {
+      "avoid": "trabalho pesado não exige inteligência",
+      "alternatives": [
+        "trabalho físico intenso",
+        "trabalho que exige habilidade e resistência",
+        "trabalho manual especializado"
+      ],
+      "category": "classe",
+      "reason": "todo trabalho exige saber, habilidade e inteligência; a dicotomia manual/intelectual é classista",
+      "context": "narrativas de trabalho",
+      "contextual": false
+    },
+    {
+      "avoid": "pobres como caso de polícia",
+      "alternatives": [
+        "criminalização da pobreza",
+        "associação equivocada entre pobreza e crime",
+        "perspectiva estigmatizante"
+      ],
+      "category": "classe",
+      "reason": "associar pobreza à criminalidade reproduz preconceito estrutural e racismo",
+      "context": "narrativas jornalísticas",
+      "contextual": false
+    },
+    {
+      "avoid": "ascensão social como questão de mérito individual",
+      "alternatives": [
+        "mobilidade social com suporte",
+        "acesso a oportunidades",
+        "condições para crescer"
+      ],
+      "category": "classe",
+      "reason": "o mérito individual ignora barreiras estruturais de raça, classe, gênero e origem",
+      "context": "narrativas de sucesso",
+      "contextual": false
+    },
+    {
+      "avoid": "favelado como identidade",
+      "alternatives": [
+        "morador da comunidade",
+        "pessoa da periferia",
+        "habitante da favela"
+      ],
+      "category": "classe",
+      "reason": "usar 'favelado' como rótulo identitário homogeneíza e estigmatiza populações complexas",
+      "context": "representações urbanas",
+      "contextual": true
+    },
+    {
+      "avoid": "elite intelectual como superior",
+      "alternatives": [
+        "pessoas com acesso à educação formal",
+        "grupo com capital cultural acumulado",
+        "classe letrada"
+      ],
+      "category": "classe",
+      "reason": "o acesso à educação é desigual; tratá-la como marcador de superioridade naturaliza a desigualdade",
+      "context": "contextos culturais",
+      "contextual": false
+    },
+    {
+      "avoid": "domestica",
+      "alternatives": [
+        "trabalhadora doméstica",
+        "empregada doméstica",
+        "profissional do lar"
+      ],
+      "category": "classe",
+      "reason": "a forma abreviada pode soar depreciativa; o trabalho doméstico é profissão com direitos",
+      "context": "contextos de trabalho",
+      "contextual": true
+    },
+    {
+      "avoid": "medicina tradicional como superstição",
+      "alternatives": [
+        "medicina popular",
+        "práticas de cura tradicionais",
+        "saberes ancestrais de saúde"
+      ],
+      "category": "conhecimento",
+      "reason": "descreditar práticas médicas indígenas e populares como superstição apaga séculos de saber sistematizado",
+      "context": "narrativas de saúde",
+      "contextual": false
+    },
+    {
+      "avoid": "oralidade como ausência de cultura",
+      "alternatives": [
+        "tradição oral",
+        "cultura de transmissão oral",
+        "saber oral ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "a oralidade é uma forma sofisticada de transmissão cultural; equiparar escrita a cultura é colonialismo epistêmico",
+      "context": "educação e literatura",
+      "contextual": false
+    },
+    {
+      "avoid": "analfabeto como ignorante",
+      "alternatives": [
+        "pessoa sem alfabetização formal",
+        "pessoa com letramento não-escolar",
+        "adulto em processo de alfabetização"
+      ],
+      "category": "conhecimento",
+      "reason": "o analfabetismo é resultado de exclusão histórica, não indicador de inteligência ou capacidade",
+      "context": "educação e inclusão",
+      "contextual": false
+    },
+    {
+      "avoid": "saber científico como único válido",
+      "alternatives": [
+        "saber científico como um entre vários",
+        "ciência em diálogo com outros saberes",
+        "pluralidade epistemológica"
+      ],
+      "category": "conhecimento",
+      "reason": "reduzir o conhecimento válido à ciência ocidental apaga saberes indígenas, africanos e populares",
+      "context": "epistemologia e educação",
+      "contextual": false
+    },
+    {
+      "avoid": "descoberta quando não há novidade",
+      "alternatives": [
+        "sistematização de saber existente",
+        "documentação de prática já conhecida",
+        "registro de técnica ancestral"
+      ],
+      "category": "conhecimento",
+      "reason": "'descobrir' o que já era sabido por outros povos reproduz a lógica colonial de apagamento",
+      "context": "ciência e história",
+      "contextual": true
+    },
+    {
+      "avoid": "terceiro mundo intelectual",
+      "alternatives": [
+        "países do Sul Global",
+        "economias em desenvolvimento",
+        "nações periféricas no sistema global"
+      ],
+      "category": "conhecimento",
+      "reason": "'terceiro mundo intelectual' associa posição geopolítica à inferioridade cognitiva",
+      "context": "geopolítica do conhecimento",
+      "contextual": false
     }
   ]
 }
