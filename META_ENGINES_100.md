@@ -68,6 +68,54 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v699→v720)
+
+**Baseline:** v720 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v699→v720):**
+
+- `norma-data.json` (v699): adjetivos_comuns 1368→1428 (+60: curioso, furioso, deslumbrante…)
+- `norma-data.json` (v700): formas_verbais_irr 1343→1445 (+102: subjuntivos MORRER/SENTIR/FAZER…)
+- `synonym-data.js` (v701): 486→508 (+22: descrever, questionar, persuadir, celebrar…)
+- `lexical-data.json` (v702): 376→391 (+15: aliteração, sinestesia, metonímia, paradoxo…)
+- `norma-data.json` (v703): verbos_pres_reg 1413→1514 (+101: medita, postula, angustia, improvisa…)
+- `synonym-data.js` (v704): 508→532 (+24: comprometer, falhar, culpar, avançar, prender…)
+- `decolonial-data.json` (v705): 368→383 (+15: relação abusiva, família desestruturada…)
+- `norma-data.json` (v706): adjetivos_comuns 1428→1488 (+60: altivo, arrogante, enigmático, leal…)
+- `analise-engine.js` (v707): CLIQUES_PT 715→741, PLEONASMOS 305→327 (+26+22: infantojuvenil, noir)
+- `norma-data.json` (v708): formas_verbais_irr 1445→1556 (+111: PROIBIR, RUIR, FLUIR, POSSUIR…)
+- `lexical-data.json` (v709): 391→406 (+15: ponto de virada, gancho, subtexto, ritmo, tom…)
+- `synonym-data.js` (v710): 532→553 (+21: evocar, tensionar, aliviar, direcionar, confundir…)
+- `norma-data.json` (v711): verbos_pres_reg 1514→1605 (+91: esboça, gesticula, brilha, pulsa…)
+- `decolonial-data.json` (v712): 383→395 (+12: histérica, instinto materno, surdo-mudo…)
+- `norma-data.json` (v713): adjetivos_comuns 1488→1558 (+70: lânguido, iracundo, magnânimo…)
+- `norma-data.json` (v714): formas_verbais_irr 1556→1675 (+119: futuro subj FAZER/QUERER/TER…)
+- `synonym-data.js` (v715): 553→575 (+22: mágoa, afeto, identidade, paixão, empatia…)
+- `lexical-data.json` (v716): 406→420 (+14: personagem, protagonista, motivação, arco…)
+- `norma-data.json` (v717): adjetivos_comuns 1558→1623 (+65: cristalino, onírico, crepuscular…)
+- `analise-engine.js` (v718): CLIQUES_PT 741→773, PLEONASMOS 327→349 (+32+22: horror, épico)
+- `norma-data.json` (v719): verbos_pres_reg 1605→1701 (+96: galopa, desliza, evoca, simboliza…)
+- `norma-data.json` (v720): formas_verbais_irr 1675→1732 (+57: imperativos, particípios, DEPOR…)
+
+**Estado atualizado dos engines (v720):**
+
+| Área / engine | Maturidade | Notas de estado (v720) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 773; PLEONASMOS 349 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 420 entradas; sinônimos 575 |
+| Decolonial / vocabulário | **100%** | 395 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1623; verbos_pres_reg 1701; formas_verbais_irr 1732; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: adjetivos_comuns pode crescer para 1700+; decolonial para 410+ (estetica, conhecimento)
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v690→v698)
 
 **Baseline:** v698 — Sintaxe 99%; todos os outros engines em 100%.
