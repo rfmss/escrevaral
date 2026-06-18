@@ -436,7 +436,6 @@
     "antigo":      ["velho", "arcaico", "ancestral", "remoto", "histórico", "longínquo", "precedente"],
     "jovem":       ["novo", "moço", "juvenil", "adolescente", "imaturo", "incipiente"],
     "idoso":       ["ancião", "grisalho", "envelhecido", "maduro", "experiente", "venerável"],
-    "rapido":      ["veloz", "ágil", "ligeiro", "acelerado", "súbito", "instantâneo"],
     "simples":     ["singelo", "despretensioso", "direto", "básico", "elementar", "puro"],
     "complexo":    ["intrincado", "elaborado", "sofisticado", "profundo", "múltiplo", "difícil"],
     "verdadeiro":  ["autêntico", "genuíno", "legítimo", "real", "fiel", "concreto"],
@@ -448,7 +447,6 @@
     "infeliz":     ["triste", "desgraçado", "azarado", "infortunado", "desafortunado", "aflito"],
     "branco":      ["alvo", "lívido", "pálido", "cândido", "imaculado", "lácteo"],
     "negro":       ["escuro", "retinto", "azeviche", "sombrio", "ébano", "tenebroso"],
-    "comecar":     ["iniciar", "principiar", "inaugurar", "abrir", "estrear", "lançar"],
     "ceder":       ["recuar", "capitular", "render-se", "dobrar-se", "abdicar", "resignar-se"],
     "confiar":     ["fiar-se", "acreditar", "apostar", "delegar", "entregar-se", "depositar fé"],
     "desistir":    ["abandonar", "largar", "renunciar", "recuar", "prescindir", "abdicar"],
@@ -506,7 +504,6 @@
     "cinza":       ["acinzentado", "cinzento", "pardo", "fosco", "nebuloso", "apagado"],
     "angustia":    ["tormento", "aflição", "inquietação", "agonia", "sofrimento", "amargura"],
     "ansiedade":   ["nervosismo", "inquietude", "apreensão", "agitação", "tensão", "preocupação"],
-    "esperanca":   ["expectativa", "anseio", "otimismo", "fé", "confiança", "perspectiva"],
     "desespero":   ["desalento", "desânimo", "aflição", "agonia", "desolação", "desamparo"],
     "orgulho":     ["brio", "altivez", "vaidade", "soberba", "autoestima", "dignidade"],
     "vergonha":    ["pudor", "rubor", "constrangimento", "humilhação", "vexame", "desonra"],
@@ -514,7 +511,6 @@
     "coragem":     ["bravura", "audácia", "valentia", "ousadia", "determinação", "heroísmo"],
     "sabedoria":   ["prudência", "discernimento", "perspicácia", "senso", "maturidade", "ponderação"],
     "lealdade":    ["fidelidade", "dedicação", "comprometimento", "honradez", "integridade", "confiabilidade"],
-    "traicao":     ["perfídia", "felonia", "infidelidade", "deslealdade", "engano", "apostasia"],
     "perdao":      ["indulgência", "clemência", "absolvição", "misericórdia", "magnanimidade", "remissão"],
     "vinganca":    ["retaliação", "represália", "desforra", "desagravo", "punição", "acerto de contas"],
     "liberdade":   ["autonomia", "independência", "emancipação", "alforria", "soberania", "libertação"],
@@ -523,14 +519,12 @@
     "raiva":       ["ira", "fúria", "indignação", "revolta", "irritação", "cólera"],
     "saude":       ["bem-estar", "vitalidade", "disposição", "vigor", "sanidade", "integridade física"],
     "doenca":      ["enfermidade", "moléstia", "afecção", "mal", "achaque", "padecimento"],
-    "odio":        ["aversão", "repulsa", "animosidade", "rancor", "execração", "aborrecimento profundo"],
 
     // sentimentos e estados internos
     "curiosidade":  ["interesse", "indagação", "inquisição", "investigação", "desejo de saber", "ânsia"],
     "tédio":        ["enfado", "fastio", "monotonia", "indiferença", "apatia", "marasmo"],
     "inveja":       ["ciúme", "cobiça", "ressentimento", "emulação", "rivalidade", "despeito"],
     "nostalgia":    ["saudade", "melancolia", "evocação", "lembrança", "acalanto", "añoranza"],
-    "solidao":      ["isolamento", "reclusão", "abandono", "desolação", "retraimento", "desamparo"],
     "admiracao":    ["estima", "respeito", "reverência", "consideração", "apreço", "louvor"],
     "gratidao":     ["agradecimento", "reconhecimento", "apreço", "obrigação", "grato acolhimento"],
     "compaixao":   ["compaixão", "empatia", "piedade", "solidariedade", "misericórdia", "humanidade", "cuidado"],
@@ -790,7 +784,6 @@
     "oficio":      ["ofício", "artesanato da escrita", "técnica", "habilidade", "mestria", "perícia", "trato com as palavras"],
     "rascunho":    ["rascunho", "esboço", "versão zero", "primeiro gesto", "borrão", "ensaio", "tentativa inicial"],
     "ritmo":       ["ritmo", "cadência", "andamento", "compasso", "fluxo", "pulsação", "respiração do texto"],
-    "silencio":    ["silêncio", "pausa", "vazio fértil", "ausência", "recolhimento", "lacuna", "branco"],
     "escuta":      ["escuta", "atenção ao texto", "sensibilidade", "receptividade", "abertura", "percepção", "leitura atenta"],
 
     // sensações físicas e corporais
@@ -828,6 +821,169 @@
     // estados da escrita e leitura
     "leitura":     ["leitura", "decifração", "interpretação", "encontro com o texto", "mergulho nas páginas", "diálogo com o livro", "absorção"],
     "escrita":     ["escrita", "composição", "criação literária", "prosa", "texto", "obra", "palavras no papel"],
+
+    // formas do texto
+    "narrativa":   ["narrativa", "história", "relato", "enredo", "trama", "fábula", "sequência de acontecimentos"],
+    "enredo":      ["enredo", "trama", "intriga", "sequência", "história", "fio narrativo", "cadeia de eventos"],
+    "cena":        ["cena", "quadro", "sequência", "momento", "episódio", "passagem", "instantâneo narrativo"],
+    "diálogo":     ["diálogo", "conversa", "troca de falas", "interlocução", "réplica", "colóquio", "fala entre personagens"],
+    "monólogo":    ["monólogo", "fala solitária", "discurso interior", "voz única", "solilóquio", "pensamento em voz alta"],
+    "descrição":   ["descrição", "retrato", "pintura verbal", "evocação", "caracterização", "representação", "quadro"],
+    "personagem":  ["personagem", "figura", "ser de papel", "voz na história", "sujeito da ficção", "ser imaginado", "criatura"],
+    "protagonista":["protagonista", "herói", "figura central", "voz principal", "sujeito do percurso", "quem conduz", "motor da ação"],
+    "antagonista": ["antagonista", "adversário", "força contrária", "obstáculo encarnado", "opositor", "sombra do herói", "polo oposto"],
+    "conflito":    ["conflito", "tensão", "embate", "choque", "atrito", "confronto", "luta", "oposição de forças"],
+    "tensão":      ["tensão", "suspense", "pressão dramática", "iminência", "antecipação", "corda esticada", "expectativa"],
+    "clímax":      ["clímax", "auge", "ponto máximo", "ápice", "cúpula dramática", "momento decisivo", "pico da tensão"],
+    "desfecho":    ["desfecho", "desenlace", "conclusão", "final", "resolução", "encerramento", "solução"],
+    "perspectiva": ["perspectiva", "ponto de vista", "ângulo", "focalização", "olhar narrativo", "voz que conta", "prisma"],
+    "arco":        ["arco", "trajetória", "percurso", "jornada do personagem", "curva dramática", "evolução", "transformação"],
+    "estrutura":   ["estrutura", "arquitetura do texto", "organização", "forma", "disposição", "esqueleto narrativo", "construção"],
+    "sumário":     ["sumário", "resumo narrativo", "síntese", "condensação", "salto temporal", "passagem rápida", "panorama"],
+    "flashback":   ["flashback", "analepse", "volta ao passado", "memória irruptiva", "retrocesso temporal", "recordação encenada"],
+    "elipse":      ["elipse", "salto", "omissão calculada", "lacuna narrativa", "tempo saltado", "corte", "silêncio estrutural"],
+    "prólogo":     ["prólogo", "abertura", "preâmbulo", "introdução", "porta de entrada", "antessala", "voz inaugural"],
+    "epílogo":     ["epílogo", "fechamento", "coda", "última palavra", "posfácio narrativo", "remate", "eco final"],
+    "capítulo":    ["capítulo", "parte", "seção", "unidade", "segmento", "trecho", "divisão"],
+    "plot":        ["plot", "enredo", "trama", "fio condutor", "sequência de causas", "lógica dos eventos", "nexo narrativo"],
+    "focalização": ["focalização", "ponto de vista", "perspectiva", "quem vê", "filtro narrativo", "olhar escolhido"],
+
+    // estilo e voz
+    "tom":         ["tom", "registro", "atitude narrativa", "temperatura emocional", "voz do texto", "inclinação", "coloração"],
+    "estilo":      ["estilo", "dicção", "modo de escrever", "voz própria", "marca autoral", "assinatura do texto", "maneira"],
+    "ironia":      ["ironia", "subversão do dito", "duplo sentido", "contraste entre fala e intenção", "sarcasmo velado", "inversão"],
+    "metáfora":    ["metáfora", "imagem", "figura de linguagem", "comparação implícita", "transposição de sentido", "símbolo vivo"],
+    "símbolo":     ["símbolo", "signo", "emblema", "imagem carregada", "representação condensada", "sinal", "ícone"],
+    "alegoria":    ["alegoria", "narrativa simbólica", "fábula moral", "história com sentido oculto", "parábola", "metáfora estendida"],
+    "paradoxo":    ["paradoxo", "contradição aparente", "tensão de opostos", "verdade impossível", "antinomia", "oxímoro"],
+    "ambiguidade": ["ambiguidade", "dupla leitura", "incerteza deliberada", "sentido flutuante", "indecisão de significado"],
+    "intertexto":  ["intertexto", "diálogo com outras obras", "referência literária", "citação velada", "eco de textos", "palimpsesto"],
+    "paródia":     ["paródia", "releitura crítica", "imitação cômica", "subversão do original", "espelho deformante", "pastiche irônico"],
+    "pastiche":    ["pastiche", "imitação estilística", "variação sobre tema", "homenagem formal", "colagem de estilos"],
+    "polissemia":  ["polissemia", "multiplicidade de sentidos", "palavra de muitas faces", "riqueza semântica", "ambivalência do signo"],
+
+    // formas literárias
+    "conto":       ["conto", "narrativa breve", "história curta", "prosa de fôlego curto", "fatia de vida", "instantâneo ficcional"],
+    "romance":     ["romance", "narrativa longa", "ficção de fôlego", "prosa extensa", "mundo em palavras", "universo ficcional"],
+    "crônica":     ["crônica", "registro do cotidiano", "prosa jornalística", "texto de momento", "flagrante literário", "instante escrito"],
+    "ensaio":      ["ensaio", "reflexão em prosa", "texto de ideias", "exercício de pensamento", "tentativa intelectual", "prosa especulativa"],
+    "verso":       ["verso", "linha poética", "unidade do poema", "fala em ritmo", "voz cadenciada", "palavra medida"],
+    "rima":        ["rima", "correspondência sonora", "eco entre palavras", "retorno do som", "musicalidade do verso", "consonância"],
+    "métrica":     ["métrica", "medida do verso", "ritmo regular", "contagem de sílabas", "cadência formal", "padrão sonoro"],
+    "prosa":       ["prosa", "discurso corrido", "escrita sem verso", "fala natural", "texto fluido", "voz sem rima"],
+
+    // psicologia do personagem
+    "culpa":       ["culpa", "remorso", "peso da consciência", "responsabilidade moral", "arrependimento", "fardo", "autocondena"],
+    "vaidade":     ["vaidade", "narcisismo", "amor próprio excessivo", "exibicionismo", "presunção", "soberba", "convencimento"],
+    "ambição":     ["ambição", "desejo de ascensão", "sede de poder", "aspiração intensa", "cupidez", "ânsia de conquista", "ganância nobre"],
+    "covardia":    ["covardia", "medo que paralisa", "recuo diante do perigo", "pusilanimidade", "timidez extrema", "omissão deliberada"],
+    "obstinação":  ["obstinação", "teimosia", "persistência cega", "determinação rígida", "inflexibilidade", "cabeça dura", "perseverança intensa"],
+    "resignação":  ["resignação", "aceitação passiva", "conformismo", "rendição silenciosa", "capitulação", "desistência digna", "paciência forçada"],
+    "determinação":["determinação", "resolução", "firmeza", "propósito", "vontade", "decisão inabalável", "persistência consciente"],
+    "vulnerabilidade":["vulnerabilidade", "fragilidade exposta", "abertura ao risco", "sensibilidade à dor", "pele fina", "ser atingível"],
+    "resiliência": ["resiliência", "capacidade de recuperação", "elasticidade interior", "resistência viva", "força de recomeçar", "dureza mole"],
+    "fragilidade": ["fragilidade", "delicadeza", "leveza quebrável", "sensibilidade extrema", "vulnerabilidade", "ternura em risco"],
+    "generosidade":["generosidade", "doação", "altruísmo", "benevolência", "desprendimento", "abertura ao outro", "munificência"],
+    "autoridade":  ["autoridade", "poder legítimo", "comando", "ascendência", "prestígio", "liderança", "influência reconhecida"],
+    "hierarquia":  ["hierarquia", "ordem de poder", "estrutura de mando", "escalonamento social", "cadeia de comando", "escala de autoridade"],
+    "justiça":     ["justiça", "equidade", "imparcialidade", "direito", "retidão", "equilíbrio moral", "dar a cada um o que merece"],
+    "violência":   ["violência", "agressão", "brutalidade", "força bruta", "crueldade", "barbárie", "coerção física"],
+    "exílio":      ["exílio", "banimento", "desterro", "expulsão", "afastamento forçado", "vida fora do lugar", "expatriação"],
+    "máscara":     ["máscara", "persona", "face pública", "aparência construída", "papel social", "disfarce", "performance de si"],
+    "autenticidade":["autenticidade", "ser genuíno", "verdade de si", "inteireza", "coerência interior", "honestidade com si mesmo"],
+
+    // mundo físico
+    "natureza":    ["natureza", "mundo natural", "universo vivo", "paisagem", "meio ambiente", "terra", "cosmos orgânico"],
+    "montanha":    ["montanha", "monte", "cume", "pico", "elevação", "cordilheira", "alto"],
+    "vale":        ["vale", "baixada", "planície entre montes", "depressão", "anfiteatro natural", "fundo da paisagem"],
+    "planície":    ["planície", "campina", "chão aberto", "extensão plana", "horizonte largo", "campo", "pradaria"],
+    "deserto":     ["deserto", "ermo", "solidão árida", "lugar sem água", "vastidão seca", "espaço vazio", "terra hostil"],
+    "oceano":      ["oceano", "mar profundo", "água sem fim", "imensidão azul", "abismo líquido", "mar largo", "profundeza"],
+    "calor":       ["calor", "quentura", "ardor", "abafamento", "temperatura alta", "febre da terra", "sol que queima"],
+    "brisa":       ["brisa", "viração", "vento suave", "sopro leve", "aragem", "ventinho", "frescor em movimento"],
+    "névoa":       ["névoa", "neblina", "bruma", "véu de vapor", "cerração", "vapor suspenso", "nuvem baixa"],
+    "temporal":    ["temporal", "tempestade", "tormenta", "chuva forte", "aguaceiro", "vendaval com chuva", "borrasca"],
+    "seca":        ["seca", "estiagem", "ausência de chuva", "ressecamento", "aridez", "tempo sem água", "definhamento da terra"],
+    "enchente":    ["enchente", "inundação", "cheia", "transbordamento", "dilúvio", "água que invade", "rio fora do leito"],
+    "vendaval":    ["vendaval", "ventania", "rajada", "vento forte", "furacão menor", "sopro violento", "tormenta de vento"],
+
+    // estados físicos e sensoriais
+    "prazer":      ["prazer", "fruição", "deleite", "gozo", "satisfação dos sentidos", "alegria do corpo", "contentamento"],
+    "cansaço":     ["cansaço", "fadiga", "exaustão", "esgotamento", "lassidão", "peso nos ossos", "torpor do esforço"],
+    "vertigem":    ["vertigem", "tontura", "desequilíbrio", "rodopia", "cambaleio", "mundo que gira", "perda do eixo"],
+    "torpor":      ["torpor", "entorpecimento", "letargia", "dormência", "moleza profunda", "inércia do corpo", "sono acordado"],
+    "êxtase":      ["êxtase", "arrebatamento", "rapto de alegria", "estado de graça", "transe de prazer", "transporte", "felicidade extrema"],
+    "agonia":      ["agonia", "sofrimento intenso", "luta final", "dor extrema", "tormento", "angústia física", "último esforço"],
+    "alívio":      ["alívio", "desafogo", "descanso da tensão", "respiração funda", "fim do peso", "soltura", "leveza repentina"],
+
+    // tempo e memória
+    "passado":     ["passado", "o que foi", "tempo ido", "ontem", "história pessoal", "memória acumulada", "o que não volta"],
+    "presente":    ["presente", "o agora", "este instante", "momento atual", "aqui e agora", "tempo vivo", "o que acontece"],
+    "futuro":      ["futuro", "o que virá", "amanhã", "possibilidade", "horizonte temporal", "o que ainda não foi", "promessa de tempo"],
+    "família":     ["família", "núcleo afetivo", "laço de sangue", "parentesco", "origem", "raízes humanas", "lar de pertença"],
+
+    // relações e sociedade
+    "vínculo":     ["vínculo", "laço", "ligação", "conexão", "elo", "pertencimento mútuo", "relação que une"],
+    "solidariedade":["solidariedade", "apoio mútuo", "companheirismo", "fraternidade", "assistência ao outro", "cuidado coletivo"],
+    "cumplicidade":["cumplicidade", "conivência", "parceria secreta", "acordo tácito", "aliança velada", "entendimento mútuo"],
+    "separação":   ["separação", "afastamento", "ruptura", "distância", "partida", "despedida", "fim do vínculo"],
+    "reencontro":  ["reencontro", "retorno ao outro", "volta ao laço", "nova proximidade", "recomeço da relação"],
+
+    // estados da alma
+    "melancolia":  ["melancolia", "tristeza suave", "saudade sem objeto", "luto brando", "peso levemente doce", "nostalgia"],
+    "euforia":     ["euforia", "alegria intensa", "excitação", "entusiasmo explosivo", "arrebatamento festivo", "júbilo"],
+    "inquietação": ["inquietação", "agitação interior", "desassossego", "nervosismo sutil", "incapacidade de ficar quieto"],
+    "rancor":      ["rancor", "ressentimento", "mágoa guardada", "ódio frio", "amargura", "desgosto persistente"],
+
+    // mundo interior
+    "consciência": ["consciência", "lucidez", "percepção de si", "voz interior", "olho que observa", "estado de vigília"],
+    "imaginação":  ["imaginação", "fantasia", "capacidade de fingir", "visão interior", "criação mental", "o olho que inventa"],
+    "instinto":    ["instinto", "impulso primário", "reação visceral", "voz do corpo", "sabedoria animal", "saber sem pensar"],
+    "intuição":    ["intuição", "pressentimento", "saber sem razão", "percepção direta", "antecipação sentida", "saber interior"],
+
+    // percepção e sentidos
+    "odor":        ["odor", "cheiro", "aroma", "fragrância", "perfume", "emanação", "fedor"],
+    "textura":     ["textura", "tato", "superfície ao toque", "grão", "aspereza ou maciez", "consistência"],
+    "sabor":       ["sabor", "gosto", "paladar", "degustação", "sensação gustativa", "flavor"],
+    "gesto":       ["gesto", "movimento do corpo", "sinal", "aceno", "movimento expressivo", "ação corporal", "trejeito"],
+
+    // elementos narrativos adicionais
+    "início":      ["início", "começo", "abertura", "surgimento", "nascimento", "ponto zero", "primeiro passo"],
+    "fim":         ["fim", "término", "encerramento", "conclusão", "morte de algo", "ponto final", "desenlace"],
+    "transformação":["transformação", "mudança", "metamorfose", "evolução", "virada", "travessia", "outro lado"],
+    "escolha":     ["escolha", "decisão", "dilema resolvido", "bifurcação percorrida", "opção", "seleção", "arbítrio"],
+    "consequência":["consequência", "efeito", "resultado", "desdobramento", "repercussão", "o que se segue"],
+    "surpresa":    ["surpresa", "espanto", "assombro", "inesperado", "imprevisível", "choque", "virada"],
+    "dúvida":      ["dúvida", "incerteza", "hesitação", "suspensão do juízo", "perguntar a si mesmo", "vacilação"],
+    "certeza":     ["certeza", "convicção", "segurança", "firmeza de crença", "saber sem duvidar", "determinação"],
+    "segredo":     ["segredo", "mistério", "o que se esconde", "silêncio guardado", "confidência", "ocultação"],
+    "mentira":     ["mentira", "engano", "falsidade", "ilusão criada", "desvio da verdade", "fingimento"],
+
+    // ação e movimento narrativo
+    "busca":       ["busca", "procura", "jornada em direção a", "demanda", "quest", "missão", "perseguição de algo"],
+    "fuga":        ["fuga", "escape", "saída urgente", "retirada", "evasão", "deserção", "partir para sobreviver"],
+    "confronto":   ["confronto", "enfrentamento", "duelo", "colisão", "embate direto", "encarar o adversário"],
+    "descoberta":  ["descoberta", "achado", "revelação", "o que estava oculto", "novidade", "insight", "encontrar o que não se buscava"],
+    "perda":       ["perda", "privação", "falta", "vazio que fica", "o que não volta", "desaparecimento"],
+    "conquista":   ["conquista", "vitória", "ganho", "alcançar o objetivo", "realização", "obtenção", "êxito"],
+    "viagem":      ["viagem", "jornada", "percurso", "deslocamento", "travessia", "expedição", "ir de um lugar a outro"],
+
+    // estados do corpo
+    "respiração":  ["respiração", "fôlego", "o ar que entra e sai", "ritmo do corpo", "pausa vital", "sopro de vida"],
+    "choro":       ["choro", "lágrimas", "pranto", "lamento", "choro silencioso", "solução emocional", "o corpo que chora"],
+    "riso":        ["riso", "gargalhada", "risada", "sorriso", "alegria expressa", "leveza que ri", "hilaridade"],
+    "tremor":      ["tremor", "estremecimento", "vibração do corpo", "calafrio", "agitação muscular", "o medo que aparece no gesto"],
+    "abraço":      ["abraço", "aconchego", "acolhimento do corpo", "abraçar", "envolver nos braços", "calor humano físico"],
+
+    // dimensões do tempo literário
+    "duração":     ["duração", "extensão temporal", "quanto tempo dura", "permanência", "persistência no tempo"],
+    "aceleração":  ["aceleração", "velocidade crescente", "urgência crescente", "ritmo que aperta", "compressão temporal"],
+    "lentidão":    ["lentidão", "demora deliberada", "tempo esticado", "morosidade", "ritmo que afunda", "tempo dilatado"],
+    "anseia":      ["anseia", "ansia", "tormento do desejo", "querer com intensidade", "necessidade urgente", "ânsia"],
+    "crise":       ["crise", "ponto crítico", "momento de ruptura", "tudo está em jogo", "virada forçada", "catástrofe iminente"],
+    "redenção":    ["redenção", "salvação", "resgate moral", "reparação", "voltar ao caminho", "absolvição", "recomeço limpo"],
+    "testemunho":  ["testemunho", "relato em primeira mão", "depoimento", "presença que narra", "voz que viu", "memória relatada"],
+    "silêncio eloquente":["silêncio que fala", "o que não se diz mas se entende", "ausência significativa", "pausa carregada", "calar como ato"],
 
   };
 
