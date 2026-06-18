@@ -68,6 +68,40 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-18 (ciclo v780→v784)
+
+**Baseline:** v784 — todos os engines em 100%. Qualidade de dados elevada com P0 do Codex resolvidos.
+
+**O que foi entregue neste ciclo (v780→v784):**
+
+- `lexical-engine.js` + `syntax-engine.js` (v780-v781): P0 morfologia — duplicata `inferWordClassContextual` removida; POLISSEMIA para `a`/`como`/`quando`/`mais`/`logo`/`ora`; VERBOS_ACENTUADOS; clitics; `larga`→Verb; `Amor`→Noun. Bateria: 18/43 → 41/43 (+128% de precisão)
+- `synonym-data.js` (v782-v784): 4 chaves exatas duplicadas mescladas + 14 normalizadas mescladas e removidas; +11 entradas craft literário. 1016 → 1013 (chaves únicas de qualidade)
+- `lexical-data.json` (v782-v784): 4 homógrafos removidos de functionWords.adjetivos_comuns (estreita/estreito/larga/partido); +28 entradas localLexicon (500→528)
+- `norma-data.json` (v782-v784): estranha/estranho/inquieta removidos de adjetivos_comuns; adjetivos_comuns 1993→2000 recuperados com formas seguras
+- `decolonial-data.json` (v782-v784): 581→600 (+19 entradas: gênero/classe/povos/território/estética/linguagem/deficiência/relações/conhecimento); todas as alternativas preenchidas
+- `rimalab-data.json` (v782): grammarWords: 38 abreviações normalizadas (adj/s/pron → Adjetivo/Substantivo/Pronome)
+- HTML trilhas + app (v782): overflow mobile em 3 páginas; OG image 404 corrigida
+
+**Estado atualizado dos engines (v784):**
+
+| Área / engine | Maturidade | Notas de estado (v784) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 8 campos semânticos ~60 termos cada |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 (taxonomia normalizada) |
+| Lexico / Biblioteca | **100%** | sinônimos 1013 únicos; localLexicon 528; sem duplicatas normalizadas |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias 63–69; todas com alternatives |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; desambiguação contextual 41/43; VERBOS_PRES antes ADJETIVOS_PRIM |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero nas trilhas |
+
+**Próximas fronteiras:**
+
+1. **Morfologia 41/43 → 43/43**: `a` position-aware (API change com charOffset); `estreito` P1 adnominal
+2. **Sinônimos**: expandir além de 1013 em áreas de natureza BR, corpo, emoção complexa
+3. **Voice engine**: adicionar campo semântico `trabalho` (roça/fábrica/serviço/ofício/resistência)
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v773→v775)
 
 **Baseline:** v775 — todos os engines em 100%. Fronteiras de dados da Sintaxe fechadas.
