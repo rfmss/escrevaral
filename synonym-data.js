@@ -888,7 +888,7 @@
     "hierarquia":  ["hierarquia", "ordem de poder", "estrutura de mando", "escalonamento social", "cadeia de comando", "escala de autoridade"],
     "justiça":     ["justiça", "equidade", "imparcialidade", "direito", "retidão", "equilíbrio moral", "dar a cada um o que merece"],
     "violência":   ["violência", "agressão", "brutalidade", "força bruta", "crueldade", "barbárie", "coerção física"],
-    "exílio":      ["exílio", "banimento", "desterro", "expulsão", "afastamento forçado", "vida fora do lugar", "expatriação"],
+    "exílio":      [ "banimento", "desterro", "expulsão", "afastamento forçado", "vida fora do lugar", "expatriação"],
     "máscara":     ["máscara", "persona", "face pública", "aparência construída", "papel social", "disfarce", "performance de si"],
     "autenticidade":["autenticidade", "ser genuíno", "verdade de si", "inteireza", "coerência interior", "honestidade com si mesmo"],
 
@@ -930,7 +930,7 @@
     "reencontro":  ["reencontro", "retorno ao outro", "volta ao laço", "nova proximidade", "recomeço da relação"],
 
     // estados da alma
-    "melancolia":  ["melancolia", "tristeza suave", "saudade sem objeto", "luto brando", "peso levemente doce", "nostalgia"],
+    "melancolia":  [ "tristeza suave", "saudade sem objeto", "luto brando", "peso levemente doce", "nostalgia"],
     "euforia":     ["euforia", "alegria intensa", "excitação", "entusiasmo explosivo", "arrebatamento festivo", "júbilo"],
     "inquietação": ["inquietação", "agitação interior", "desassossego", "nervosismo sutil", "incapacidade de ficar quieto"],
     "rancor":      ["rancor", "ressentimento", "mágoa guardada", "ódio frio", "amargura", "desgosto persistente"],
