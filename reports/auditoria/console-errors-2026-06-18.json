@@ -1,0 +1,62 @@
+{
+  "data": "2026-06-18",
+  "tem_erro": false,
+  "resultados": [
+    {
+      "cenario": "acervo",
+      "descricao": "Tela inicial — lista de manuscritos",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "editor-novo",
+      "descricao": "Criar e abrir manuscrito novo",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "editor-escrita",
+      "descricao": "Digitar texto no editor",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "guia-de-escrita",
+      "descricao": "Abrir guia de escrita",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "academia",
+      "descricao": "Aba Academia",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "prova-autoria",
+      "descricao": "Aba Prova de Autoria",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "copia-seguranca",
+      "descricao": "Acionar cópia de segurança",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    }
+  ]
+}
