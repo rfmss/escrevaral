@@ -1271,6 +1271,34 @@
     "eternidade":  ["eternidade", "imensidão do tempo", "infinito temporal", "perene", "imortal", "sem fim", "para sempre"],
     "instante":    ["instante", "momento", "relance", "fração de segundo", "lampejo", "átimo", "piscar de olhos"],
 
+    // espaço e ambiente
+    "limiar":      ["limiar", "soleira", "umbral", "fronteira invisível", "linha de passagem", "porta de entrada", "margem"],
+    "abismo":      ["abismo", "precipício", "vazio sem fundo", "profundeza", "buraco", "fenda", "goela"],
+    "refúgio":     ["refúgio", "abrigo", "esconderijo", "canto seguro", "guarida", "porto seguro", "retiro"],
+    "labirinto":   ["labirinto", "emaranhado", "teia", "rede confusa", "dédalo", "encruzilhada sem saída", "tortuosidade"],
+    "horizonte":   ["horizonte", "linha do céu", "confim", "longe", "infinito visual", "onde o olho alcança", "perspectiva"],
+    "altar":       ["altar", "pedra sagrada", "lugar de oferenda", "centro ritual", "mesa de reza", "espaço de devoção", "símbolo central"],
+
+    // conflito e tensão
+    "embate":      ["embate", "confronto", "choque", "colisão", "queda de braço", "disputa acirrada", "atrito"],
+    "ruptura":     ["ruptura", "fratura", "quebra", "rompimento", "cisão", "separação abrupta", "rachadura"],
+    "dilema":      ["dilema", "impasse", "escolha impossível", "bifurcação", "encruzilhada moral", "tensão irresolvível", "nó"],
+    "resistencia": ["resistência", "teimosia", "recusa", "oposição firme", "persistência", "não ceder", "enfrentamento"],
+    "rendição":    ["rendição", "capitulação", "derrota aceita", "abrir mão", "entrega", "cessação da luta", "abandono"],
+
+    // transformação e mudança
+    "metamorfose": ["metamorfose", "transformação profunda", "mudança de forma", "conversão", "transmutação", "virada", "renascimento"],
+    "revelação":   ["revelação", "descoberta", "desvelamento", "epifania", "iluminação súbita", "o que estava oculto", "lampejo de verdade"],
+    "retorno":     ["retorno", "volta", "regresso", "reencontro com o passado", "circularidade", "recomeço", "caminho de volta"],
+    "abandono":    ["abandono", "deixar para trás", "deserção", "esquecimento deliberado", "partida sem volta", "solidão imposta", "desamparar"],
+    "recomeço":    ["recomeço", "novo começo", "segunda chance", "renascer das cinzas", "reinvenção", "ponto zero", "primeira vez de novo"],
+
+    // estados da escrita e leitura
+    "leitura":     ["leitura", "decifração", "interpretação", "encontro com o texto", "mergulho nas páginas", "diálogo com o livro", "absorção"],
+    "escrita":     ["escrita", "composição", "criação literária", "prosa", "texto", "obra", "palavras no papel"],
+    "narrar":      ["narrar", "contar", "relatar", "dar voz a", "dar forma à história", "tecer a narrativa", "dizer"],
+    "imaginar":    ["imaginar", "conceber", "inventar", "visualizar", "fabular", "criar no pensamento", "sonhar acordado"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
