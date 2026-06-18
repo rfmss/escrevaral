@@ -2379,7 +2379,12 @@
     },
     {
       "avoid": "boiola",
-      "alternatives": [],
+      "alternatives": [
+        "homem gay",
+        "homem homossexual",
+        "gay",
+        "pessoa gay"
+      ],
       "category": "genero",
       "reason": "Insulto homofóbico direcionado a homens gays. Termo de violência verbal.",
       "context": "Não há contexto que justifique o uso como insulto. Pode aparecer em narrativa histórica ou de personagem com intenção crítica explícita.",
@@ -2387,7 +2392,12 @@
     },
     {
       "avoid": "viadagem",
-      "alternatives": [],
+      "alternatives": [
+        "comportamento homofóbico",
+        "violência verbal",
+        "insulto homofóbico",
+        "não use como julgamento"
+      ],
       "category": "genero",
       "reason": "Termo homofóbico que usa a sexualidade como insulto generalizado, além da pessoa.",
       "context": "Evite como julgamento ou descrição. Pode ser usado em voz de personagem com distância crítica do narrador.",
@@ -2417,7 +2427,12 @@
     },
     {
       "avoid": "sapatona como insulto",
-      "alternatives": [],
+      "alternatives": [
+        "lésbica",
+        "mulher homossexual",
+        "pessoa lésbica",
+        "gay"
+      ],
       "category": "genero",
       "reason": "Usado como insulto lesbofóbico quando empregado pela narrativa sem ironia ou distância crítica.",
       "context": "O termo pode ser resignificado pela própria comunidade lésbica — avalie quem fala e o contexto narrativo antes de trocar.",

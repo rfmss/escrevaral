@@ -882,6 +882,9 @@ h2.titulo-grande em { font-style: italic; font-weight: 400; color: var(--cinza-c
   .linha-origem { display: none; }
   .velocidade-painel { grid-template-columns: repeat(3,1fr); }
 }
+.trilha-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3rem; }
+@media (max-width: 600px) { .trilha-footer-grid { grid-template-columns: 1fr; } }
+html { overflow-x: hidden; }
 </style>
 </head>
 <body>
@@ -1690,12 +1693,7 @@ function mostrarFeedback(id) {
 ">
   <div style="max-width: 900px; margin: 0 auto;">
 
-    <div style="
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      margin-bottom: 3rem;
-    ">
+    <div class="trilha-footer-grid">
       <!-- CTA principal: abrir o editor -->
       <div style="
         background: var(--lima-apagado);

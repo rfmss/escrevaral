@@ -909,6 +909,9 @@
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
+.trilha-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
+@media (max-width: 600px) { .trilha-footer-grid { grid-template-columns: 1fr; } }
+html { overflow-x: hidden; }
 </style>
 </head>
 <body>
@@ -1757,12 +1760,7 @@ function calcularPlacar() {
 ">
   <div style="max-width: 820px; margin: 0 auto;">
 
-    <div style="
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      margin-bottom: 3rem;
-    ">
+    <div class="trilha-footer-grid">
       <!-- CTA principal: abrir o editor -->
       <div style="
         background: var(--vermelho);
