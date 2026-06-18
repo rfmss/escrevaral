@@ -1153,6 +1153,27 @@
     "nostalgia":      ["saudade do passado", "melancolia do que foi", "anseio pelo tempo ido", "sentimento do que não volta"],
     "cicatriz":       ["marca do ferido", "sinal deixado", "vestígio da dor", "lembrança no corpo", "rastro do tempo"],
 
+    // v756 — lacunas emocionais e de cenário
+    "calma":          ["serenidade", "tranquilidade", "paz interior", "equanimidade", "sossego", "quietude"],
+    "tranquilidade":  ["calma", "paz", "sossego", "repouso do espírito", "quietude", "ausência de agitação"],
+    "obstáculo":      ["barreira", "impedimento", "entrave", "tropeço", "embaraço", "o que se interpõe"],
+    "mistério":       ["enigma", "incógnita", "arcano", "segredo não revelado", "véu sobre o real"],
+    "maravilha":      ["prodígio", "assombro", "coisa extraordinária", "milagre do comum", "espanto que encanta"],
+    "júbilo":         ["alegria intensa", "exultação", "êxtase feliz", "contentamento transbordante", "alvoroço do bem"],
+    "perdão":         ["absolvição", "remissão", "indulgência", "graça", "esquecimento da ofensa"],
+    "remorso":        ["arrependimento", "culpa que pesa", "peso da consciência", "tormento interior", "o que não sai da mente"],
+    "promessa":       ["palavra dada", "compromisso", "juramento", "pacto", "palavra firmada"],
+    "esquecimento":   ["apagamento", "perda da memória", "quando o tempo apaga", "amnésia", "o que ficou para trás"],
+    "riqueza":        ["abundância", "prosperidade", "opulência", "fartura", "haveres", "posse em excesso"],
+    "miséria":        ["penúria", "pobreza extrema", "indigência", "carência", "precariedade", "falta de tudo"],
+    "lar":            ["morada", "refúgio", "casa que acolhe", "ninho", "centro do mundo pessoal", "onde se pertence"],
+    "criança":        ["infante", "menino/menina", "ser em formação", "pequeno ser", "quem ainda não cresceu"],
+    "ancião":         ["velho", "idoso", "de muitos anos", "o que já viveu muito", "experiência encarnada"],
+    "apatia":         ["indiferença", "torpor", "desinteresse", "letargia", "ausência de sentimento", "embotamento"],
+    "heroísmo":       ["bravura", "coragem extrema", "ato heróico", "façanha", "entrega total pela causa"],
+    "litoral":        ["costa", "orla marítima", "beira-mar", "praia", "costa atlântica", "encontro da terra com o mar"],
+    "fado":           ["sina", "destino traçado", "sorte", "rumo irrevogável", "o que estava escrito"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
