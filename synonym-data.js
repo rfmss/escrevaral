@@ -1174,6 +1174,23 @@
     "litoral":        ["costa", "orla marítima", "beira-mar", "praia", "costa atlântica", "encontro da terra com o mar"],
     "fado":           ["sina", "destino traçado", "sorte", "rumo irrevogável", "o que estava escrito"],
 
+    // v761 — Nascentes C→D: cochichar, ilusão, engano, dignidade, comportamento, cínico
+    "cochichar":      ["segredar", "murmurar ao pé do ouvido", "falar em voz baixíssima", "dizer sem que ninguém ouça"],
+    "segredar":       ["cochichar", "dizer em segredo", "revelar em voz baixa", "confidenciar baixinho"],
+    "ilusão":         ["engano", "aparência enganosa", "fantasma da mente", "o que não é real", "miragem"],
+    "engano":         ["ilusão", "equívoco", "erro involuntário", "descuido", "percepção falsa"],
+    "comportamento":  ["conduta", "procedimento", "modo de agir", "atitude", "forma de se portar"],
+    "dignidade":      ["decoro", "compostura", "honra pessoal", "recato", "altivez"],
+    "decoro":         ["decência", "compostura", "dignidade", "conveniência moral", "boa apresentação"],
+    "meditação":      ["cogitação", "ponderação", "reflexão profunda", "contemplação interior", "pensar devagar"],
+    "cogitação":      ["meditação", "ponderação", "pensar com cuidado", "reflexão atenta", "elucubração"],
+    "cínico":         ["desavergonhado", "impudente", "descarado", "sem pudor", "que se vangloria do mal"],
+    "calúnia":        ["difamação", "acusação falsa", "mentira contra alguém", "manchar a honra alheia"],
+    "admirar":        ["apreciar", "contemplar com assombro", "olhar com espanto", "encantar-se com", "maravilhar-se"],
+    "desprezar":      ["menosprezar", "ignorar com desdém", "não dar valor", "tratar como inferior"],
+    "humilhar":       ["rebaixar", "envergonhar", "diminuir", "esmagar o orgulho de", "fazer sentir menos"],
+    "consolar":       ["confortar", "amenizar a dor", "trazer calma", "amparo ao sofrimento", "aliviar a tristeza"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
