@@ -2765,6 +2765,240 @@
       "className": "narrativa",
       "field": "narrativa",
       "note": "ponto central de complicação ou conflito da narrativa (nó dramático)"
+    },
+    "catalisador": {
+      "label": "catalisador",
+      "className": "Substantivo",
+      "field": "Narrativa — impulso que move a trama",
+      "note": "O que força o personagem a agir. Pode ser um objeto, uma notícia, um olhar. Sem catalisador, a trama espera."
+    },
+    "no_dramatico": {
+      "label": "nó dramático",
+      "className": "Substantivo",
+      "field": "Narrativa — tensão acumulada",
+      "note": "O ponto em que duas forças (desejo e obstáculo) apertam tanto que algo precisa ceder. O nó dramático exige resolução."
+    },
+    "desfecho_aberto": {
+      "label": "desfecho aberto",
+      "className": "Substantivo",
+      "field": "Narrativa — conclusão suspensa",
+      "note": "Encerrar sem resolver. O leitor fica com a pergunta. Difícil de executar sem parecer descuido: a abertura precisa ser intencional."
+    },
+    "tensao_moral": {
+      "label": "tensão moral",
+      "className": "Substantivo",
+      "field": "Narrativa — conflito ético do personagem",
+      "note": "Quando o personagem sabe o que é certo mas quer o errado — ou vice-versa. É a fonte mais profunda de identificação do leitor."
+    },
+    "momento_silencio": {
+      "label": "momento de silêncio",
+      "className": "Substantivo",
+      "field": "Narrativa — pausa que pesa",
+      "note": "O que não é dito carrega tanto quanto o dito. Um silêncio entre personagens pode ser o ponto mais denso da cena."
+    },
+    "pressao_externa": {
+      "label": "pressão externa",
+      "className": "Substantivo",
+      "field": "Narrativa — força que empurra o personagem",
+      "note": "O mundo que aperta o personagem de fora: prazo, lei, expectativa social. Contrasta com o conflito interno para criar complexidade."
+    },
+    "conflito_interno": {
+      "label": "conflito interno",
+      "className": "Substantivo",
+      "field": "Narrativa — guerra dentro do personagem",
+      "note": "O personagem contra si mesmo. Mais difícil de mostrar na cena do que o conflito externo, mais poderoso de sentir."
+    },
+    "virada_de_valori": {
+      "label": "virada de valor",
+      "className": "Substantivo",
+      "field": "Narrativa — inversão do sinal dramático",
+      "note": "Uma cena bem escrita muda o estado emocional: de esperança para desespero, de amor para ódio, de segurança para perigo."
+    },
+    "cena_ancoragem": {
+      "label": "cena âncora",
+      "className": "Substantivo",
+      "field": "Narrativa — cena que define o personagem",
+      "note": "Às vezes uma única cena revela quem o personagem é de verdade. Ela ancora todas as outras leituras que o leitor fará dele."
+    },
+    "favela": {
+      "label": "favela",
+      "className": "Substantivo",
+      "field": "Espaço brasileiro — comunidade periférica",
+      "note": "Não é só cenário: é perspectiva. Narrar a partir da favela muda o que se vê, o que se cala e o que se nomeia."
+    },
+    "oralidade": {
+      "label": "oralidade",
+      "className": "Substantivo",
+      "field": "Voz narrativa — literatura que vem da boca",
+      "note": "Escrever como se fala exige domínio maior que escrever como se lê. A oralidade não é falta de técnica: é outra técnica."
+    },
+    "versificacao": {
+      "label": "versificação",
+      "className": "Substantivo",
+      "field": "Poesia — arte de distribuir versos",
+      "note": "A decisão de onde o verso quebra é decisão de significado, não de espaço. Cada quebra pesa no que vem depois."
+    },
+    "ritmo_prosa": {
+      "label": "ritmo na prosa",
+      "className": "Substantivo",
+      "field": "Estilo — cadência da frase",
+      "note": "Prosa sem ritmo cansa antes do fim da página. Frase curta tense. Frase mais longa, com pausa interna, relaxa e retoma."
+    },
+    "voz_negra": {
+      "label": "voz negra",
+      "className": "Substantivo",
+      "field": "Perspectiva literária — narrar a partir de experiência negra",
+      "note": "Não é tema: é posição de onde se fala. Escrever com voz negra exige situar a experiência, não folclorizar."
+    },
+    "literatura_marginal": {
+      "label": "literatura marginal",
+      "className": "Substantivo",
+      "field": "Movimento literário brasileiro — periferia que escreve",
+      "note": "Textos produzidos por escritores da periferia urbana brasileira. Ferrez, Marcelino Freire, Allan da Rosa: a margem que virou centro."
+    },
+    "melancolia_produtiva": {
+      "label": "melancolia produtiva",
+      "className": "Substantivo",
+      "field": "Estado interior — tristeza criativa",
+      "note": "A melancolia que não paralisa mas que faz o escritor querer nomear o que dói. É diferente da depressão: tem movimento."
+    },
+    "euphoria_criativa": {
+      "label": "euforia criativa",
+      "className": "Substantivo",
+      "field": "Estado interior — fluxo de escrita",
+      "note": "O estado em que as palavras chegam antes de serem chamadas. Raro, não confiável, mas reconhecível quando acontece."
+    },
+    "distancia_afetiva": {
+      "label": "distância afetiva",
+      "className": "Substantivo",
+      "field": "Técnica narrativa — frieza calculada do narrador",
+      "note": "Narrar com distância pode ser mais brutal do que narrar com emoção. A frieza cria horror. Ver Kafka."
+    },
+    "empatia_narrativa": {
+      "label": "empatia narrativa",
+      "className": "Substantivo",
+      "field": "Técnica — habitar outro ponto de vista",
+      "note": "A ficção como máquina de empatia: entrar em uma cabeça que não é a sua e sentir o que ela sente. O maior poder da prosa."
+    },
+    "voz_ativa": {
+      "label": "voz ativa",
+      "className": "Substantivo",
+      "field": "Gramática funcional — agente que age",
+      "note": "Sujeito que faz: 'ela abriu a porta'. Mais dinâmica, mais direta. A voz passiva tem lugar, mas usada por default enfraquece o texto."
+    },
+    "paralelismo": {
+      "label": "paralelismo",
+      "className": "Substantivo",
+      "field": "Estilo — estrutura repetida para efeito",
+      "note": "Repetir a mesma estrutura sintática para criar ritmo e intensidade. 'Ela veio, ela viu, ela foi.' O paralelismo pede precisão."
+    },
+    "acumulacao": {
+      "label": "acumulação",
+      "className": "Substantivo",
+      "field": "Estilo — lista que cresce em peso",
+      "note": "Adicionar item sobre item até a lista virar uma avalanche. A acumulação funciona quando cada item muda a temperatura do conjunto."
+    },
+    "ponto_de_vista_onisciente": {
+      "label": "ponto de vista onisciente",
+      "className": "Substantivo",
+      "field": "Narrativa — narrador que sabe tudo",
+      "note": "O narrador que entra em qualquer cabeça, sabe qualquer passado. Poder imenso com risco imenso: pode matar a tensão."
+    },
+    "focalização": {
+      "label": "focalização",
+      "className": "Substantivo",
+      "field": "Narrativa — lente que o texto usa",
+      "note": "De onde o texto vê: quem percebe, o que percebe e o que não pode perceber. A focalização define o que o leitor sabe."
+    },
+    "capoeira": {
+      "label": "capoeira",
+      "className": "Substantivo",
+      "field": "Cultura afrobrasileira — arte-luta-dança",
+      "note": "A capoeira esconde o golpe na dança. Na narrativa, é metáfora da resistência que se disfarça de leveza para sobreviver."
+    },
+    "samba": {
+      "label": "samba",
+      "className": "Substantivo",
+      "field": "Cultura brasileira — música e memória coletiva",
+      "note": "Não é só gênero musical: é forma de elaborar dor, celebrar existência, transmitir memória. Narrativa oral em forma de canção."
+    },
+    "carnaval": {
+      "label": "carnaval",
+      "className": "Substantivo",
+      "field": "Cultura brasileira — inversão e excesso",
+      "note": "O tempo da inversão: o pobre vira rei, o triste vira alegre, o invisível se mostra. Na literatura, espaço de transformação e disfarce."
+    },
+    "cordel": {
+      "label": "cordel",
+      "className": "Substantivo",
+      "field": "Literatura popular brasileira — verso, memória, oralidade",
+      "note": "Mais que forma poética: sistema de distribuição de histórias. O cordel chegou onde o livro não chegou."
+    },
+    "repente": {
+      "label": "repente",
+      "className": "Substantivo",
+      "field": "Poesia oral brasileira — improviso e embate",
+      "note": "Verso inventado na hora, em resposta ao verso do outro. O repente exige vocabulário, ritmo e raciocínio simultâneos."
+    },
+    "resolucao": {
+      "label": "resolução",
+      "className": "Substantivo",
+      "field": "Narrativa — solução do conflito central",
+      "note": "O momento em que o nó se desfaz. Pode ser vitória, perda, transformação ou ambiguidade. A resolução não precisa ser justa."
+    },
+    "inciting_incident": {
+      "label": "incidente deflagrador",
+      "className": "Substantivo",
+      "field": "Narrativa — evento que dispara a trama",
+      "note": "O que tira o personagem do seu estado inicial. Sem ele, não há história. Com ele, tudo que vem antes ganha novo sentido."
+    },
+    "arco_emocional": {
+      "label": "arco emocional",
+      "className": "Substantivo",
+      "field": "Narrativa — jornada interior do personagem",
+      "note": "O estado emocional do personagem no início e no final. O arco não precisa ser positivo: aprendizado, perda, endurecimento — todos são arcos."
+    },
+    "batida_de_cena": {
+      "label": "batida de cena",
+      "className": "Substantivo",
+      "field": "Narrativa — unidade dramática mínima",
+      "note": "Cada troca de valor dentro de uma cena é uma batida. Uma cena pode ter várias batidas: o tom sobe, cai, inverte."
+    },
+    "atmosfera": {
+      "label": "atmosfera",
+      "className": "Substantivo",
+      "field": "Narrativa — presença do mundo na página",
+      "note": "O que o texto 'cheira', 'soa', 'pesa'. A atmosfera não é descrita: é construída pelo ritmo, escolha lexical e detalhe sensorial."
+    },
+    "cenario": {
+      "label": "cenário",
+      "className": "Substantivo",
+      "field": "Narrativa — espaço que molda o personagem",
+      "note": "O cenário não é pano de fundo: age sobre o personagem, revela quem ele é, limita ou libera o que ele pode fazer."
+    },
+    "imagem_central": {
+      "label": "imagem central",
+      "className": "Substantivo",
+      "field": "Poesia/Prosa — imagem que organiza o texto",
+      "note": "Alguns textos crescem ao redor de uma única imagem: a janela, a mão, o rio. Quando essa imagem existe, o texto tem unidade."
+    },
+    "saturacao_verbal": {
+      "label": "saturação verbal",
+      "className": "Substantivo",
+      "field": "Estilo — excesso de ação na frase",
+      "note": "Verbos demais numa frase criam disputa de atenção. Às vezes um único verbo forte vale mais que quatro fracos."
+    },
+    "espaco_branco": {
+      "label": "espaço branco",
+      "className": "Substantivo",
+      "field": "Poesia/Layout — silêncio visual na página",
+      "note": "O que não está na página também é decisão. O espaço branco em poesia é pausa, respiração, duração do silêncio."
+    },
+    "leitor_implicito": {
+      "label": "leitor implícito",
+      "className": "Substantivo",
+      "field": "Narrativa — a quem o texto fala",
+      "note": "Todo texto pressupõe um leitor. Saber para quem você escreve muda o que você diz e o que deixa implícito."
     }
   },
   "functionWords": {
