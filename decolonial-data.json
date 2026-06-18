@@ -6346,6 +6346,138 @@
       "reason": "A frase parte de uma premissa de que haveria pessoas 'normais' e 'anormais', reforçando a dicotomia que pretende combater",
       "context": "Pessoas com deficiência são normais também",
       "contextual": false
+    },
+    {
+      "avoid": "mulher na cozinha",
+      "alternatives": [
+        "divisão justa das tarefas domésticas",
+        "trabalho doméstico compartilhado",
+        "cozinhar como habilidade de todas as pessoas"
+      ],
+      "category": "genero",
+      "reason": "Associa mulheres ao espaço doméstico e às tarefas do lar como algo natural ou desejável, reforçando divisão sexual do trabalho",
+      "context": "Lugar de mulher é na cozinha",
+      "contextual": false
+    },
+    {
+      "avoid": "comportamento não feminino",
+      "alternatives": [
+        "comportamento diferente do esperado",
+        "estilo pessoal",
+        "forma própria de se expressar"
+      ],
+      "category": "genero",
+      "reason": "Define feminilidade como conjunto fixo de comportamentos e pune quem não os segue, especialmente mulheres negras e lésbicas",
+      "context": "Isso não é comportamento feminino",
+      "contextual": false
+    },
+    {
+      "avoid": "pai de família como identidade moral",
+      "alternatives": [
+        "pessoa com filhos",
+        "responsável pela família",
+        "pai comprometido"
+      ],
+      "category": "genero",
+      "reason": "Usa paternidade como atestado de caráter moral, especialmente em contextos jurídicos e políticos, para validar homens em detrimento de outros grupos",
+      "context": "É pai de família, não faria isso",
+      "contextual": false
+    },
+    {
+      "avoid": "feminismo como radicalismo",
+      "alternatives": [
+        "feminismo como movimento por igualdade",
+        "luta pelos direitos das mulheres",
+        "agenda de igualdade de gênero"
+      ],
+      "category": "genero",
+      "reason": "Deslegitima luta histórica por direitos usando adjetivo que a associa a extremismo",
+      "context": "Ela é daquelas feministas radicais",
+      "contextual": false
+    },
+    {
+      "avoid": "é coisa de macho",
+      "alternatives": [
+        "é uma atitude de coragem",
+        "exige força emocional",
+        "requer determinação"
+      ],
+      "category": "genero",
+      "reason": "Associa coragem e determinação ao gênero masculino, invisibilizando essas qualidades em mulheres e pessoas não-binárias",
+      "context": "Enfrentar isso é coisa de macho",
+      "contextual": false
+    },
+    {
+      "avoid": "mulher poderosa como exceção",
+      "alternatives": [
+        "liderança feminina",
+        "mulher em posição de poder",
+        "mulher no comando"
+      ],
+      "category": "genero",
+      "reason": "Trata autoridade feminina como anomalia digna de nota, em vez de reconhecê-la como direito",
+      "context": "Para ser mulher é muito poderosa",
+      "contextual": false
+    },
+    {
+      "avoid": "território sem lei",
+      "alternatives": [
+        "região com cobertura precária do Estado",
+        "área com ausência de políticas públicas",
+        "território periférico"
+      ],
+      "category": "territorio",
+      "reason": "Criminaliza populações inteiras de regiões marginalizadas, ignorando a responsabilidade do Estado pela precariedade",
+      "context": "Ali é território sem lei",
+      "contextual": false
+    },
+    {
+      "avoid": "cidade grande como oportunidade única",
+      "alternatives": [
+        "grande centro urbano como opção",
+        "metrópole com suas possibilidades",
+        "cidade com maior mercado de trabalho"
+      ],
+      "category": "territorio",
+      "reason": "Subordina cidades menores e o campo à lógica da metrópole, desconsiderando as oportunidades e valores de outros territórios",
+      "context": "Se quiser crescer precisa ir para a cidade grande",
+      "contextual": false
+    },
+    {
+      "avoid": "bairro perigoso",
+      "alternatives": [
+        "bairro periférico",
+        "área com ausência de serviços públicos",
+        "região carente de investimento"
+      ],
+      "category": "territorio",
+      "reason": "Associa territórios periféricos à violência, estigmatizando seus moradores e justificando políticas policiais em vez de sociais",
+      "context": "Não vá lá, é bairro perigoso",
+      "contextual": false
+    },
+    {
+      "avoid": "Nordeste como retrato da seca",
+      "alternatives": [
+        "Nordeste em sua diversidade",
+        "região Nordeste",
+        "estados do Nordeste"
+      ],
+      "category": "territorio",
+      "reason": "Reduz o Nordeste a um único bioma e a uma imagem de sofrimento, apagando sua diversidade cultural, ecológica e econômica",
+      "context": "O Nordeste, onde só tem seca e miséria",
+      "contextual": false
+    },
+    {
+      "avoid": "Sul como padrão de desenvolvimento",
+      "alternatives": [
+        "Sul com seu modelo de desenvolvimento específico",
+        "regiões Sul e Sudeste",
+        "sul do Brasil"
+      ],
+      "category": "territorio",
+      "reason": "Toma o modelo econômico do Sul como universal e desejável para todo o país, apagando diversidades regionais",
+      "context": "O Sul é o exemplo de desenvolvimento para o Brasil",
+      "contextual": false
     }
   ]
 }
