@@ -560,6 +560,22 @@
     "o pôr do sol tingiu o céu","as estrelas brilhavam","a brisa suave",
     "o mar revolto","ondas quebravam na praia","o horizonte se abria",
     "a floresta densa","folhas sussurvavam ao vento","pássaros cantavam",
+    // v754 — clichês literários: introspecção, diálogos forçados, cenas climáticas, romance
+    "senti um frio na espinha","o coração acelerou","o tempo congelou",
+    "não conseguia respirar","tudo ficou nebuloso","meu mundo desabou",
+    "era impossível não amar","você não entende","precisamos conversar",
+    "eu te amo mas não posso","você mudou muito","não é você, sou eu",
+    "sabia desde o princípio","foi amor à primeira vista","nossos olhos se encontraram",
+    "ela era diferente de todas","ele tinha algo especial","meu coração disparou",
+    "as palavras não saíam","fiquei paralisado","o silêncio era ensurdecedor",
+    "a tensão era palpável","o ar estava carregado","algo estava errado",
+    "pressentiu o perigo","sentiu que não estava sozinha","um arrepio percorreu",
+    "tinha tudo planejado","mas desta vez era diferente","pela primeira vez na vida",
+    "nunca imaginei que","não conseguia acreditar","como se fosse um sonho",
+    "o destino os aproximou","a vida deu uma virada","tudo mudou em um instante",
+    "no momento em que menos esperava","o impossível aconteceu",
+    "e foi assim que tudo começou","e nunca mais foi o mesmo",
+    "o fim era apenas o começo","mas isso é uma outra história",
   ];
 
   const PLEONASMOS = [
@@ -864,6 +880,21 @@
     ["tragédia fatal","tragédia"],["catástrofe catastrófica","catástrofe"],
     ["vitória vencedora","vitória"],["derrota perdedora","derrota"],
     ["enorme gigante","enorme"],["pequenino minúsculo","minúsculo"],
+    // v754 — novos pleonasmos: natureza, tempo, comunicação, negócios
+    ["floresta virgem intocada","floresta virgem"],["geleira de gelo","geleira"],
+    ["panorama geral amplo","panorama"],["perspectiva futura","perspectiva"],
+    ["passado antigo","passado"],["futuro adiante","futuro"],
+    ["memória do passado","memória"],["recordação passada","recordação"],
+    ["previsão futura","previsão"],["antecipação prévia","antecipação"],
+    ["promessa de cumprir","promessa"],["contrato firmado","contrato"],
+    ["acordo consensual","acordo"],["decisão deliberada","decisão"],
+    ["proposta de propor","proposta"],["convite de convidar","convite"],
+    ["resposta de responder","resposta"],["pergunta de perguntar","pergunta"],
+    ["narrativa narrada","narrativa"],["descrição descritiva","descrição"],
+    ["ficção fictícia","ficção"],["fato factual","fato"],
+    ["realidade real","realidade"],["verdade verdadeira","verdade"],
+    ["mentira falsa","mentira"],["ilusão ilusória","ilusão"],
+    ["erro errado","erro"],["acerto correto","acerto"],
   ];
 
   const NEGACOES_DUPLAS = [
