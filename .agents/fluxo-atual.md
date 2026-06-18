@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-18  
-**Versão atual:** v750 (`vereda-offline-v750`, `ASSET_VERSION=20260618-dados750`)
+**Versão atual:** v769 (`vereda-offline-v769`, `ASSET_VERSION=20260618-dados769`)
 
 ---
 
@@ -174,6 +174,10 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v746 | CLIQUES_PT 902→958 (+56); PLEONASMOS 444→472 (+28) |
 | v747 | adjetivos_comuns 1935→1954 (+19); verbos_pres_reg 1921→1964 (+43) |
 | v748-v750 | sinônimos 741→770 (+29: ES→lacunas literárias, angústia, aurora, infância, vigília); decolonial 495→513 (+18 Bagno) |
+| v751 | sinônimos 770→800 (+30: alma, desejo, felicidade, luta, florescer, velhice, ciclo, língua, música) |
+| v752-v753 | decolonial 513→543 (+30: conhecimento 55→63, estetica 55→62, relacoes/povos/deficiencia 56→61) |
+| v754 | CLIQUES_PT 958→1000 (+42 marcos); PLEONASMOS 472→500 (+28) |
+| v755-v769 | sinônimos 800→951 (+151: exílio, traição, devaneio, cura, honra, eloquência…); decolonial 543→564 (+21); adjetivos 1978→2000; verbos 1989→2000 |
 
 ---
 
