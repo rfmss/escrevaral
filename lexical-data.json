@@ -2244,12 +2244,6 @@
       "field": "narrativa",
       "note": "linha condutora da trama; elemento que une cenas ou personagens"
     },
-    "no": {
-      "label": "nó",
-      "className": "narrativa",
-      "field": "narrativa",
-      "note": "ponto central de complicação ou conflito da narrativa"
-    },
     "ruptura": {
       "label": "ruptura",
       "className": "narrativa",
@@ -2765,6 +2759,12 @@
       "className": "word-tecnica",
       "field": "Narrativa",
       "note": "mundo ideal impossível; seu oposto distopia é frequentemente mais fértil narrativamente"
+    },
+    "no_narrativo": {
+      "label": "nó narrativo",
+      "className": "narrativa",
+      "field": "narrativa",
+      "note": "ponto central de complicação ou conflito da narrativa (nó dramático)"
     }
   },
   "functionWords": {

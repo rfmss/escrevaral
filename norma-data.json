@@ -606,7 +606,6 @@
     "confuso",
     "concluso",
     "recluso",
-    "excluso",
     "excluso"
   ],
   "formas_verbais_irr": [
@@ -1879,7 +1878,6 @@
     "vêm",
     "vês",
     "subes",
-    "sobemos",
     "segues",
     "seguimos",
     "durmas",
@@ -2023,7 +2021,6 @@
     "fizermos",
     "fizerdes",
     "fizerem",
-    "fize",
     "fizesse",
     "fizéssemos",
     "quiséssemos",
@@ -3965,9 +3962,6 @@
     "resulta",
     "retoma",
     "retrata",
-    "retratos",
-    "retratro",
-    "retrátam",
     "retém",
     "retêm",
     "revela",
@@ -4304,7 +4298,6 @@
     "divulga",
     "divulgam",
     "divulgamos",
-    "broadcast",
     "pesquisa",
     "pesquisam",
     "pesquisamos",
@@ -4454,7 +4447,6 @@
     "transbordam",
     "transbordamos",
     "erode",
-    "eródem",
     "erodimos",
     "apodrece",
     "apodrecem",
@@ -4692,7 +4684,9 @@
     "encena",
     "encenam",
     "encenamos",
-    "cantamos"
+    "cantamos",
+    "subimos",
+    "erodem"
   ],
   "adjetivos_comuns": [
     "abatido",
@@ -6487,7 +6481,6 @@
     "sagaz",
     "arguto",
     "arguta",
-    "astusiosa",
     "benevolente",
     "caridoso",
     "caridosa",

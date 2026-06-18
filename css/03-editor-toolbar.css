@@ -320,7 +320,7 @@
 [data-theme="cerrado-dark"] .fmt-group-editorial,
 [data-theme="mata-dark"] .fmt-group-editorial,
 [data-theme="amazonia-dark"] .fmt-group-editorial {
-  opacity: 0.75;
+  opacity: 1;
 }
 
 /* Separador entre grupos — mais largo e acinzentado */

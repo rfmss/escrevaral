@@ -10,7 +10,7 @@
   --sidebar-bg: rgba(244, 237, 226, 0.82);
   --overlay-bg: rgba(26, 26, 26, 0.24);
   --ink: #1a1a1a;
-  --muted: #7a7068;
+  --muted: #6f6459;
   --soft-ink: #40382e;
   --on-primary: #fdf8f2;
   --on-primary-soft: rgba(253, 248, 242, 0.18);
@@ -303,7 +303,7 @@
 }
 
 [data-theme="scriptorium"] .tree-row.is-current {
-  color: var(--primary);
+  color: #d99650;
 }
 
 [data-theme="scriptorium"] .editor-paper .editor-view-btn,
@@ -329,6 +329,10 @@
 
 [data-theme="scriptorium"] .editor-paper .fmt-group-editorial {
   opacity: 0.82;
+}
+
+[data-theme="scriptorium"] .editor-paper .page-settings-label {
+  color: #3a2c22;
 }
 
 [data-theme="scriptorium"] .editor-paper .fmt-group-editorial:not(.is-open) .fmt-editorial-toggle {
@@ -416,14 +420,45 @@
   opacity: 1;
 }
 
-[data-theme="scriptorium"] #delete-undo-toast {
+[data-theme="scriptorium"] #delete-undo-toast,
+[data-theme="cerrado-dark"] #delete-undo-toast,
+[data-theme="mata-dark"] #delete-undo-toast,
+[data-theme="amazonia-dark"] #delete-undo-toast {
   background: var(--surface-high) !important;
   border: 1px solid var(--line);
   color: var(--ink) !important;
 }
 
-[data-theme="scriptorium"] #delete-undo-btn {
-  color: var(--ochre) !important;
+[data-theme="scriptorium"] #delete-undo-btn,
+[data-theme="cerrado-dark"] #delete-undo-btn,
+[data-theme="mata-dark"] #delete-undo-btn,
+[data-theme="amazonia-dark"] #delete-undo-btn {
+  color: var(--ink) !important;
+}
+
+[data-theme="cerrado-dark"] .tree-row.is-current,
+[data-theme="mata-dark"] .tree-row.is-current,
+[data-theme="amazonia-dark"] .tree-row.is-current {
+  color: var(--ink);
+}
+
+[data-theme="cerrado-dark"] .crono-month-btn,
+[data-theme="mata-dark"] .crono-month-btn,
+[data-theme="amazonia-dark"] .crono-month-btn {
+  color: var(--muted);
+  opacity: 1;
+}
+
+[data-theme="cerrado-dark"] .crono-month-btn:hover,
+[data-theme="mata-dark"] .crono-month-btn:hover,
+[data-theme="amazonia-dark"] .crono-month-btn:hover {
+  color: var(--soft-ink);
+}
+
+[data-theme="cerrado-dark"] .crono-month-btn.is-current,
+[data-theme="mata-dark"] .crono-month-btn.is-current,
+[data-theme="amazonia-dark"] .crono-month-btn.is-current {
+  color: var(--primary);
 }
 
 [data-theme="cerrado-dark"] {

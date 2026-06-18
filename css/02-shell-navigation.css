@@ -1636,7 +1636,7 @@ html {
 }
 /* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
    tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
-html:not([data-theme="scriptorium"]) .editor-mode-bar .secondary-button {
+html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-theme="mata-dark"]):not([data-theme="amazonia-dark"]) .editor-mode-bar .secondary-button {
   color: #6f6459;
 }
 .editor-mode-bar .secondary-button:hover {
@@ -1650,6 +1650,37 @@ html:not([data-theme="scriptorium"]) .editor-mode-bar .secondary-button {
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
   border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+[data-theme="cerrado-dark"] .module-tabs .tab,
+[data-theme="mata-dark"] .module-tabs .tab,
+[data-theme="amazonia-dark"] .module-tabs .tab,
+[data-theme="cerrado-dark"] .editor-mode-bar .secondary-button,
+[data-theme="mata-dark"] .editor-mode-bar .secondary-button,
+[data-theme="amazonia-dark"] .editor-mode-bar .secondary-button,
+[data-theme="cerrado-dark"] .biblia-quick-btn,
+[data-theme="mata-dark"] .biblia-quick-btn,
+[data-theme="amazonia-dark"] .biblia-quick-btn {
+  color: var(--muted);
+  opacity: 1;
+}
+
+[data-theme="cerrado-dark"] .module-tabs .tab:hover,
+[data-theme="cerrado-dark"] .module-tabs .tab.is-active,
+[data-theme="mata-dark"] .module-tabs .tab:hover,
+[data-theme="mata-dark"] .module-tabs .tab.is-active,
+[data-theme="amazonia-dark"] .module-tabs .tab:hover,
+[data-theme="amazonia-dark"] .module-tabs .tab.is-active {
+  color: var(--primary);
+}
+
+[data-theme="cerrado-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
+[data-theme="cerrado-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"],
+[data-theme="mata-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
+[data-theme="mata-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"],
+[data-theme="amazonia-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
+[data-theme="amazonia-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"] {
+  color: var(--ink);
 }
 
 .title-input,
