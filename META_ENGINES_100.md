@@ -68,6 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v773→v775)
+
+**Baseline:** v775 — todos os engines em 100%. Fronteiras de dados da Sintaxe fechadas.
+
+**O que foi entregue neste ciclo (v773→v775):**
+
+- `norma-data.json` (v773): substantivos_ia 235→300 (+65: especialidades médicas, disciplinas acadêmicas, formas em -ia)
+- `norma-data.json` (v773): formas_verbais_irr 1795→1845 (+50: SENTIR/FERIR/MENTIR/DORMIR/COBRIR/FUGIR/SUBIR/SERVIR/SEGUIR + compostos CONSTRUIR/PRODUZIR/INTERVIR/OPOR/COMPOR…)
+- `norma-data.json` (v774): formas_verbais_irr 1845→2000 (+155: pretérito perfeito irregular ESTAR/TER/VIR/SER/QUERER/PODER/SABER/TRAZER/FAZER/DIZER/VER/PÔR/DAR/LER/CRER/HAVER; presente ABRIR/DISTINGUIR/ERGUER/SURGIR/EXIGIR/AGIR/DIRIGIR/FINGIR/ELEGER/CONHECER/APARECER/PARECER/NASCER/CRESCER/ESQUECER/OFERECER/RECONHECER/MERECER/PERTENCER/CONVENCER; subjuntivo presente SER/ESTAR/TER/VIR/FAZER/QUERER/PODER/SABER/HAVER/IR/DAR/PÔR/DIZER/TRAZER/VER/CABER; particípios irregulares aberto/coberto/feito/dito/posto/visto/pago/aceito/preso/salvo/oculto/entregue/expulso; pretérito de verbos em -ecer/-cer)
+- `rimalab-data.json` (v775): enciclopédia 35→50 (+15: Quintilha, Quadra, Terzina, Onomatopeia, Calambur, Oxímoro, Hipérbato, Anáfora, Sinestesia, Antítese, Prosopopeia, Gradação, Septilha, Epifonema, Cauda e Estrambote)
+
+**Estado atualizado dos engines (v775):**
+
+| Área / engine | Maturidade | Notas de estado (v775) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 50 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | sinônimos 1000 (marco histórico) |
+| Decolonial / vocabulário | **100%** | 564 entradas; 9 categorias 61–65 |
+| Sintaxe | **100%** | adjetivos_comuns 2000; verbos_pres_reg 2000; formas_verbais_irr 2000; substantivos_ia 300 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA em 5 temas |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe estrutural** (meta ambiciosa): desambiguação contextual em syntax-engine.js — requer análise por janela de tokens (custo alto, decisão de produto)
+2. **lexical-data.json**: pode crescer além de 461 entradas com termos de tensão dramática, estrutura de arco e léxico afrobrasileiro
+3. **Decolonial**: pode crescer além de 564 com IA/preconceito algorítmico e novas dinâmicas digitais
+4. **grammarWords RimaLab**: 286 entradas — gap em rimas esdrúxulas e ditongos nasais
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v742→v750)
 
 ## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v751→v772)
