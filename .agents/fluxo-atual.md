@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-18  
-**Versão atual:** v779 (`vereda-offline-v779`, `ASSET_VERSION=20260618-dados779`)
+**Versão atual:** v780 (`vereda-offline-v780`, `ASSET_VERSION=20260618-p0fix780`)
 
 ---
 
@@ -186,6 +186,7 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v777 | decolonial 564→581 (+17: IA/viés algorítmico, dado objetivo, ideologia de gênero, deficiente superador) |
 | v778 | grammarWords 286→348 (+62: esdrúxulas, -eza/-ura/-ão/-ade/-or) |
 | v779 | sinônimos 1000→1016 (+16: leitor, governo, lei, ofício, arte, adolescência, trajetória, partida) |
+| v780 | P0 morfologia: inferWordClassContextual duplicada removida; VERBOS_ACENTUADOS (dá/vê/pôr); POLISSEMIA.a; cliticos hifenizados; _VERBOS_IRR antes de _ADJ_EXT; intima/larga/sabias/seguro removidos de adjetivos_comuns — bateria 13/13 |
 
 ---
 
