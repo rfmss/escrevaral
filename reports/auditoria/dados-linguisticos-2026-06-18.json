@@ -1,0 +1,105 @@
+{
+  "date": "2026-06-18",
+  "summary": {
+    "P0": 4,
+    "P1": 6,
+    "P2": 3
+  },
+  "issues": [
+    {
+      "severity": "P0",
+      "area": "lexical-data.json/functionWords.adjetivos_comuns",
+      "title": "Adjetivos comuns tambem sao formas verbais exatas",
+      "evidence": "`estreita`, `estreito`, `larga`, `partido`",
+      "recommendation": "No lexical-engine, functionWords.adjetivos_comuns e checado antes de verbos; exigir contexto ou remover da lista cega."
+    },
+    {
+      "severity": "P0",
+      "area": "norma-data.json/adjetivos_comuns",
+      "title": "Adjetivos da norma colidem com presente verbal regular",
+      "evidence": "`estranha`, `estranho`, `inquieta`",
+      "recommendation": "Classificar por contexto sintatico: sujeito + forma presente => verbo; nome/artigo + termo => adjetivo."
+    },
+    {
+      "severity": "P0",
+      "area": "synonym-data.js",
+      "title": "Chaves duplicadas em objeto JS sobrescrevem sinonimos",
+      "evidence": "`descoberta` linhas 966, 1382; `escolha` linhas 954, 1381; `lealdade` linhas 513, 1379; `partida` linhas 1103, 1383",
+      "recommendation": "Mesclar as listas duplicadas; no objeto JS a ultima chave vence."
+    },
+    {
+      "severity": "P0",
+      "area": "syntax-engine.js/ADJETIVOS_PRIM",
+      "title": "Adjetivo primitivo hardcoded tambem e forma verbal exata",
+      "evidence": "`larga`",
+      "recommendation": "Checar verbos presentes antes de ADJETIVOS_PRIM ou resolver por janela contextual."
+    },
+    {
+      "severity": "P1",
+      "area": "decolonial-data.json",
+      "title": "Entradas sensiveis sem alternativas",
+      "evidence": "207: `boiola`; 208: `viadagem`; 211: `sapatona como insulto`",
+      "recommendation": "Preencher com alternativa contextual ou `nao use` para nao deixar UI vazia."
+    },
+    {
+      "severity": "P1",
+      "area": "decolonial-data.json",
+      "title": "avoid tem duplicidades ou equivalentes normalizados",
+      "evidence": "doméstica / domestica; lingua pura / língua pura; mongolóide / mongoloide; portador de necessidades especiais / portador de necessidades especiais",
+      "recommendation": "Mesclar duplicatas normalizadas; a busca nao precisa alertar duas vezes a mesma expressao."
+    },
+    {
+      "severity": "P1",
+      "area": "lexical-data.json/localLexicon",
+      "title": "chaves normalizadas tem duplicidades ou equivalentes normalizados",
+      "evidence": "focalizacao / focalização",
+      "recommendation": "Mesclar variantes que apontem para a mesma palavra normalizada, ou documentar excecoes."
+    },
+    {
+      "severity": "P1",
+      "area": "morfologia/listas",
+      "title": "Colisoes verbo-adjetivo aparecem apos tirar acento",
+      "evidence": "syntax ADJETIVOS_PRIM: `pública` -> `publica`; syntax ADJETIVOS_PRIM: `público` -> `publico`; syntax ADJETIVOS_PRIM: `séria` -> `seria`; syntax ADJETIVOS_PRIM: `sérias` -> `serias`",
+      "recommendation": "Testar pares como serio/seria, publico/publica e largo/larga com e sem acento."
+    },
+    {
+      "severity": "P1",
+      "area": "norma-data.json/adjetivos_comuns",
+      "title": "Adjetivos da norma colidem com formas verbais/participios irregulares",
+      "evidence": "`contido`, `oculto`, `preso`",
+      "recommendation": "Manter se forem adjetivos legitimos, mas cobrir com teste contextual de particípio/adjetivo."
+    },
+    {
+      "severity": "P1",
+      "area": "synonym-data.js",
+      "title": "Entradas de sinonimos colidem apos normalizacao",
+      "evidence": "`angustia`:505, `angústia`:1089; `ciume`:563, `ciúme`:1215; `compaixao`:530, `compaixão`:1254; `crianca`:647, `criança`:1164; `forca`:776, `força`:1261; `gratidao`:529, `gratidão`:1216; `ilusao`:678, `ilusão`:1174; `indiferenca`:682, `indiferença`:1257; `oficio`:784, `ofício`:1370; `paixao`:681, `paixão`:1267; `perdao`:514, `perdão`:1157; `prisao`:557, `prisão`:1148",
+      "recommendation": "Confirmar se sao variantes intencionais; se forem, mesclar ou documentar."
+    },
+    {
+      "severity": "P2",
+      "area": "rimalab-data.json/grammarWords",
+      "title": "Classes gramaticais usam abreviaturas fora da taxonomia principal",
+      "evidence": "`adj`: 18, `s`: 18, `pron`: 2",
+      "recommendation": "Normalizar `adj`, `s`, `pron` para nomes completos antes de ampliar grammarWords."
+    },
+    {
+      "severity": "P2",
+      "area": "synonym-data.js",
+      "title": "Entrada `aberto` repete sinonimo",
+      "evidence": "linha 461: escancarado / escancarado",
+      "recommendation": "Remover repeticoes internas para aumentar diversidade real."
+    },
+    {
+      "severity": "P2",
+      "area": "synonym-data.js",
+      "title": "Entrada `criticar` repete sinonimo",
+      "evidence": "linha 418: questionar / questionar",
+      "recommendation": "Remover repeticoes internas para aumentar diversidade real."
+    }
+  ],
+  "reports": {
+    "markdown": "/home/rafamass/escrevaral/reports/auditoria/dados-linguisticos-2026-06-18.md",
+    "json": "/home/rafamass/escrevaral/reports/auditoria/dados-linguisticos-2026-06-18.json"
+  }
+}

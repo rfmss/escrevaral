@@ -70,7 +70,11 @@ async def capture(page, frase: str) -> dict:
         try { if (window.VeredaRimaLab) { const r = window.VeredaRimaLab.analyze(frase); rima = { disponivel: true, rimas: (r.rhymes||[]).slice(0,10), assonancia: (r.assonance||[]).slice(0,10), aliteracao: (r.alliteration||[]).slice(0,10) }; } } catch(_) {}
         return {
             morfologia: morfo.map(t => ({ text: t.text||'', tags: t.tags||[], normal: t.normal||'' })),
-            pontuacao:  pont.map(a => ({ codigo: a.codigo, mensagem: a.mensagem, trecho: a.trecho })),
+            pontuacao:  pont.map(a => ({
+                codigo: a.ruleId || a.codigo || null,
+                mensagem: a.message || a.mensagem || a.acao || '',
+                trecho: a.fragment || a.trecho || '',
+            })),
             voz, rima,
         };
     }""", frase)
@@ -79,15 +83,35 @@ async def capture(page, frase: str) -> dict:
 def compare_outputs(current: dict, golden: dict) -> dict:
     diffs = []
 
-    # Morfologia: comparar tags por token
-    cur_morfo = {t["text"]: t["tags"] for t in current.get("morfologia", [])}
-    gld_morfo = {t["text"]: t["tags"] for t in golden.get("output", {}).get("sintaxe", {}).get("morfologia", [])}
+    # Morfologia: comparar por posição, não por texto. O dict por token
+    # colapsava palavras repetidas ("que", "a", "se") e mascarava regressões.
+    cur_morfo = current.get("morfologia", [])
+    gld_morfo = golden.get("output", {}).get("sintaxe", {}).get("morfologia", [])
 
-    for token, cur_tags in cur_morfo.items():
-        gld_tags = gld_morfo.get(token, [])
+    if len(cur_morfo) != len(gld_morfo):
+        diffs.append({
+            "tipo": "morfologia-tokenizacao",
+            "antes": len(gld_morfo),
+            "depois": len(cur_morfo),
+        })
+
+    for idx, (cur_term, gld_term) in enumerate(zip(cur_morfo, gld_morfo)):
+        token = cur_term.get("text", "")
+        gld_token = gld_term.get("text", "")
+        cur_tags = cur_term.get("tags", [])
+        gld_tags = gld_term.get("tags", [])
+        if token != gld_token:
+            diffs.append({
+                "tipo": "morfologia-token",
+                "indice": idx,
+                "antes": gld_token,
+                "depois": token,
+            })
+            continue
         if set(cur_tags) != set(gld_tags):
             diffs.append({
                 "tipo":   "morfologia",
+                "indice": idx,
                 "token":  token,
                 "antes":  gld_tags,
                 "depois": cur_tags,
@@ -149,6 +173,9 @@ def classify_diff(diff: dict, gabarito: str) -> str:
                 if tag in antes and tag not in depois:
                     return "regressao"
         return "neutro"
+
+    if tipo in {"morfologia-tokenizacao", "morfologia-token"}:
+        return "regressao"
 
     if tipo == "rima-contagem":
         return "evolucao" if diff["depois"] > diff["antes"] else "regressao"

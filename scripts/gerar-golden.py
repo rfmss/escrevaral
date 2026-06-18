@@ -65,7 +65,10 @@ async def capture_sintaxe(page, frase: str) -> dict:
                     tags:  t.tags  || (t.tag ? [t.tag] : []),
                     normal: t.normal || '',
                 })),
-                periodo: { tipo: periodo?.tipo || null, ordens: periodo?.ordens || [] },
+                periodo: {
+                    tipo: periodo?.resumo?.tipo || periodo?.tipo || null,
+                    ordens: periodo?.ordens || [],
+                },
             };
         } catch(e) { return { erro: e.message }; }
     }""", frase)

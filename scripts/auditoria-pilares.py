@@ -19,6 +19,15 @@ PALAVRAS_PROIBIDAS = [
     "dashboard", "login", "logout",
 ]
 
+IGNORAR_ERROS = [
+    "favicon.ico",
+    "robots.txt",
+    "sitemap.xml",
+    "goatcounter",
+    "gc.zgo.at",
+    "The AudioContext was not allowed to start",
+]
+
 VIEWPORTS = [
     {"width": 390,  "height": 844, "nome": "mobile 390×844"},
     {"width": 1366, "height": 900, "nome": "desktop 1366×900"},
@@ -42,11 +51,41 @@ def achar(nivel, msg, pilar, rota="", evidencia=""):
     print(f"  [{nivel.upper()}] [{pilar}] {msg}")
 
 
+def deve_ignorar_erro(texto):
+    return any(item.lower() in (texto or "").lower() for item in IGNORAR_ERROS)
+
+
 def auditar(browser, vp):
     ctx = browser.new_context(viewport={"width": vp["width"], "height": vp["height"]})
     page = ctx.new_page()
     erros_js = []
-    page.on("pageerror", lambda e: erros_js.append(str(e)))
+    erros_rede = []
+
+    def registrar_console(msg):
+        texto = msg.text
+        url = msg.location.get("url", "")
+        if msg.type == "error" and not (deve_ignorar_erro(texto) or deve_ignorar_erro(url)):
+            erros_js.append(f"console.error: {texto}")
+
+    def registrar_pageerror(exc):
+        texto = str(exc)
+        if not deve_ignorar_erro(texto):
+            erros_js.append(texto)
+
+    def registrar_requestfailed(req):
+        url = req.url
+        if not deve_ignorar_erro(url):
+            erros_rede.append(f"request-failed: {url}")
+
+    def registrar_response(resp):
+        url = resp.url
+        if resp.status >= 400 and not deve_ignorar_erro(url):
+            erros_rede.append(f"http-{resp.status}: {url}")
+
+    page.on("console", registrar_console)
+    page.on("pageerror", registrar_pageerror)
+    page.on("requestfailed", registrar_requestfailed)
+    page.on("response", registrar_response)
 
     # Injeta localStorage para pular termos/onboarding
     page.add_init_script("""
@@ -86,7 +125,20 @@ def auditar(browser, vp):
         botoes = page.query_selector_all(seletor)
         return [botao for botao in botoes if botao.is_visible()]
 
+    def reportar_erros_codigo(rota_nome):
+        criticos = [e for e in erros_js
+                    if any(t in e for t in ["TypeError", "ReferenceError", "SyntaxError", "console.error"])]
+        if criticos:
+            achar("critico", f"Erro JS em '{rota_nome}': {criticos[0][:120]}",
+                  "Código", rota_nome)
+        if erros_rede:
+            achar("critico", f"Erro de rede em '{rota_nome}': {erros_rede[0][:120]}",
+                  "Código", rota_nome)
+        erros_js.clear()
+        erros_rede.clear()
+
     checar_overflow("inicio")
+    reportar_erros_codigo("inicio")
 
     # Pilar: acessibilidade — botões sem label
     sem_label = page.evaluate("""() =>
@@ -111,13 +163,7 @@ def auditar(browser, vp):
             aba.click()
             page.wait_for_timeout(700)
             checar_overflow(nome_aba)
-
-            criticos = [e for e in erros_js
-                        if any(t in e for t in ["TypeError", "ReferenceError", "SyntaxError"])]
-            if criticos:
-                achar("critico", f"Erro JS em '{nome_aba}': {criticos[0][:120]}",
-                      "Código", nome_aba)
-            erros_js.clear()
+            reportar_erros_codigo(nome_aba)
         except Exception as exc:
             achar("aviso", f"Falha ao navegar para '{nome_aba}': {exc}",
                   "Navegação", nome_aba)
