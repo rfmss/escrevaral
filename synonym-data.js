@@ -1057,6 +1057,20 @@
     "prece":          ["oração humilde", "súplica", "invocação", "pedido confiante", "rogativa", "voto"],
     "mundo":          ["universo", "orbe", "globo", "cosmos", "totalidade do existente", "Terra e além"],
 
+    // v745 — Nascentes R→S: recear, selvagem, soledade, singulto, sigilo, relâmpago...
+    "recear":         ["temer sem fundamento", "apavorar-se com sombra", "ter receio", "desconfiar", "pressentir o pior"],
+    "reviver":        ["renascer", "ressurgir", "revivescer", "brotar de novo", "voltar à vida", "reacender"],
+    "selvagem":       ["bravo", "inculto", "agreste", "não domesticado", "selvático", "primitivo"],
+    "soledade":       ["solidão profunda", "lugar ermo", "deserto humano", "quietude solitária", "solitude poética"],
+    "soberano":       ["supremo", "sumo", "acima de todos", "governante absoluto", "onipotente", "senhor de tudo"],
+    "senilidade":     ["velhice", "senectude", "debilidade da idade", "deterioração pela velhice", "declínio etário"],
+    "singulto":       ["soluço", "espasmo do pranto", "choro entrecortado", "respiração cortada pelo choro", "convulsão de lágrimas"],
+    "sigilo":         ["segredo absoluto", "silêncio total", "discrição", "confidencialidade", "guardar a sete chaves"],
+    "relâmpago":      ["clarão", "faísca celeste", "fulguração", "raio de luz súbito", "faísca do céu", "iluminação instantânea"],
+    "simpleza":       ["singeleza", "simplicidade", "ingenuidade", "boa-fé", "sem complicação", "modéstia"],
+    "rubro":          ["vermelho intenso", "carmesim", "encarnado vivo", "cor de brasa", "escarlate", "purpúreo"],
+    "reserva":        ["discrição", "cautela no falar", "reticência", "guardar em silêncio", "não revelar tudo"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
