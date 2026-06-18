@@ -1291,6 +1291,20 @@
     "simpatia":       ["afeição", "inclinação para alguém", "gostar sem razão específica", "atração suave"],
     "estratégia":     ["plano", "tática", "modo de alcançar o objetivo", "cálculo do caminho"],
 
+    // v769 — Nascentes D: distração, ventura, honra, eloquência, proteção
+    "distração":      ["diversão", "passatempo", "desvio do foco", "ocupação agradável", "entretenimento leve"],
+    "diversão":       ["entretenimento", "prazer", "passatempo", "o que dá alegria", "ocupação alegre"],
+    "lema":           ["divisa", "máxima", "princípio norteador", "frase que guia", "palavra de ordem"],
+    "ventura":        ["boa sorte", "dita", "felicidade que veio", "fortuna inesperada", "acaso favorável"],
+    "duplicidade":    ["dobrez", "falsidade", "dois rostos", "hipocrisia", "falar de dois lados"],
+    "lamento":        ["queixa", "choro com palavras", "gemido de dor", "pranto expressado", "queixume"],
+    "honra":          ["dignidade", "reputação", "bom nome", "o que não se mancha", "integridade pública"],
+    "desonra":        ["vergonha", "mancha na reputação", "perda do bom nome", "humilhação pública"],
+    "eloquência":     ["poder de convencer com palavras", "oratória", "arte de falar bem", "dicção persuasiva"],
+    "persuasão":      ["convencimento", "poder de persuadir", "argumentação eficaz", "levar à concordância"],
+    "proteção":       ["amparo", "abrigo", "defesa", "o que cobre do perigo", "cuidado contra o mal"],
+    "carência":       ["falta", "ausência do necessário", "privação", "estado de quem não tem o suficiente"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
