@@ -1086,6 +1086,24 @@
     "voluntário":     ["espontâneo", "livre", "por vontade própria", "intencional", "não forçado", "deliberado"],
     "esquivar":       ["evitar", "desviar-se", "fugir habilmente", "evadir", "escafeder-se", "não encarar"],
 
+    // v750 — lacunas semânticas: tempo, emoção, natureza, consciência
+    "angústia":       ["tormento", "aflição", "sufoco interior", "mal-estar existencial", "aperto no peito", "aperto d'alma"],
+    "desesperança":   ["desalento", "desânimo", "abatimento sem saída", "perda de esperança", "pessimismo", "descrença"],
+    "lembrança":      ["recordação", "memória viva", "reminiscência", "evocação", "vestígio do passado", "o que ficou na mente"],
+    "sorriso":        ["expressão de alegria", "riso suave", "cantos da boca", "luz no rosto", "gesto de alegria", "satisfação no rosto"],
+    "pranto":         ["choro intenso", "lágrimas", "lamento", "choro que não para", "expressão de dor em lágrimas"],
+    "lágrima":        ["gota de tristeza", "pranto", "o olho que chora", "água do sofrimento", "choro visível"],
+    "tempestade":     ["tormenta", "vendaval", "borrasca", "chuva forte", "temporal", "furacão emocional"],
+    "vigília":        ["estado de alerta", "estar acordado", "noite sem sono", "insônia", "guardar o sono", "atenção contínua"],
+    "delírio":        ["alucinação", "febre da mente", "fuga da realidade", "estado alterado", "mente em colapso", "visão que não existe"],
+    "brilho":         ["fulgor", "luminosidade", "clarão", "esplendor", "resplendor", "luz emanada"],
+    "compreender":    ["entender", "captar", "assimilar", "perceber o sentido", "abarcar com a mente", "alcançar"],
+    "aurora":         ["amanhecer", "alvorecer", "primeiro clarão", "raiar do dia", "madrugada nascendo", "hora do leite"],
+    "crepúsculo":     ["entardecer", "pôr do sol", "boca da noite", "tardinha", "fim do dia luminoso", "hora do escurecer"],
+    "infância":       ["meninez", "meninice", "primeiros anos", "fase da inocência", "aurora da vida", "tempo de ser criança"],
+    "partida":        ["despedida", "saída", "separação voluntária", "momento de partir", "deixar para trás", "ir-se"],
+    "encontro":       ["reencontro", "cruzamento de caminhos", "acaso", "confluência", "vir ao mesmo espaço", "coincidir"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
