@@ -1943,7 +1943,7 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   place-items: center;
   border: 2px solid var(--sage);
   border-radius: 50%;
-  color: var(--sage);
+  color: var(--ink);
   font-size: 20px;
 }
 

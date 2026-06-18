@@ -335,6 +335,10 @@
   color: #3a2c22;
 }
 
+[data-theme="scriptorium"] .fmt-scroll-arrow {
+  color: var(--forest-ink);
+}
+
 [data-theme="scriptorium"] .editor-paper .fmt-group-editorial:not(.is-open) .fmt-editorial-toggle {
   opacity: 1;
 }
