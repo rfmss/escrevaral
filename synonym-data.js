@@ -1268,6 +1268,29 @@
     "livro":          ["obra escrita", "volume", "texto encadernado", "objeto da leitura", "mundo em papel"],
     "percurso":       ["jornada", "caminhada completa", "trajetória", "trilha percorrida", "o que se andou"],
 
+    // v768 — espaço, tempo, sociedade, corpo e linguagem
+    "brutalidade":    ["violência extrema", "crueza", "ferocidade", "brutalismo", "força sem piedade"],
+    "humanidade":     ["o ser humano coletivo", "o gênero humano", "todos os seres humanos", "a espécie"],
+    "civilização":    ["cultura organizada", "sociedade desenvolvida", "conjunto de conquistas humanas"],
+    "cultura":        ["conjunto de práticas", "expressão de um povo", "modo de vida coletivo", "herança viva"],
+    "história":       ["o passado narrado", "memória coletiva", "o que aconteceu", "o fio dos eventos"],
+    "herança":        ["legado", "o que se recebe do passado", "transmissão entre gerações", "o que fica"],
+    "legado":         ["herança", "o que se deixa para o futuro", "obra que permanece", "rastro de vida"],
+    "texto":          ["escrita", "palavra posta no papel", "discurso registrado", "obra textual", "o que se lê"],
+    "discurso":       ["fala", "texto falado", "o que se diz", "cadeia de palavras com sentido", "argumento"],
+    "pesadelo":       ["sonho ruim", "visão de terror noturno", "angústia no sono", "horror inconsciente"],
+    "desolação":      ["desamparo", "abandono extremo", "solidão da perda", "vazio que dói", "estrago total"],
+    "nação":          ["povo com identidade", "país", "comunidade histórica", "terra e povo juntos"],
+    "aldeia":         ["pequeno vilarejo", "comunidade pequena", "lugar de poucos", "vila", "comunidade"],
+    "janela":         ["abertura para o mundo", "olho da casa", "luz que entra", "ver sem sair"],
+    "porta":          ["entrada e saída", "limite que se abre", "passagem", "fronteira da casa"],
+    "ponte":          ["ligação entre margens", "conexão", "passagem sobre o obstáculo", "o que une"],
+    "muro":           ["parede divisória", "barreira", "limite construído", "o que separa"],
+    "manhã":          ["amanhecer", "começo do dia", "aurora do cotidiano", "hora da luz nova"],
+    "tarde":          ["fim da luz", "quando o sol desce", "hora crepuscular", "momento entre o dia e a noite"],
+    "simpatia":       ["afeição", "inclinação para alguém", "gostar sem razão específica", "atração suave"],
+    "estratégia":     ["plano", "tática", "modo de alcançar o objetivo", "cálculo do caminho"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
