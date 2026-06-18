@@ -1041,6 +1041,22 @@
     "enganar":        ["iludir", "ludibriar", "enredar", "dissimular", "fabulosear", "induzir ao erro"],
     "vastidão":       ["imensidão", "amplitude", "extensão", "largura", "espaço aberto", "horizonte largo"],
 
+    // v744 — Nascentes M→P: mudança, ócio, orvalho, negrume, palidez, multidão, mundo...
+    "mudança":        ["mutação", "transformação", "alteração", "variação", "virada", "conversão"],
+    "mutismo":        ["mudez", "silêncio obstinado", "recusa de falar", "calar voluntário", "recolhimento mudo"],
+    "multidão":       ["turba", "turbamulta", "aglomeração", "massa", "povo em movimento", "tropel"],
+    "negrume":        ["negrura", "negror", "escuridão total", "breu absoluto", "sombra densa", "trevas vivas"],
+    "ócio":           ["repouso merecido", "inação", "descanso contemplativo", "pausa", "quietude", "dolce far niente"],
+    "orvalho":        ["rocio", "sereno", "gotas da madrugada", "umidade da noite", "vapor noturno", "lágrima da terra"],
+    "palidez":        ["palor", "lividez", "cor desbotada", "brancura doentia", "esmaecimento", "sem cor"],
+    "opulência":      ["riqueza", "abundância ostentosa", "fartura", "luxo", "fausto", "prosperidade excessiva"],
+    "paciência":      ["resignação", "tolerância", "perseverança", "serenidade", "suportar sem queixa", "espera calma"],
+    "nauta":          ["marinheiro", "navegador", "homem do mar", "navegante", "marujo", "mestre das águas"],
+    "narração":       ["ato de narrar", "relato", "história contada", "discurso narrativo", "versão oral"],
+    "obra":           ["produção", "criação", "escrito", "texto", "resultado do trabalho", "feito humano"],
+    "prece":          ["oração humilde", "súplica", "invocação", "pedido confiante", "rogativa", "voto"],
+    "mundo":          ["universo", "orbe", "globo", "cosmos", "totalidade do existente", "Terra e além"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
