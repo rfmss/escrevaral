@@ -1308,7 +1308,6 @@
     // v770 — corpo, tempo, bioma e filosofia
     "carne":          ["tecido vivo", "o que é físico no ser", "corpo mortal", "matéria que respira"],
     "pele":           ["superfície do corpo", "o que cobre", "membrana viva", "a fronteira do eu"],
-    "sangue":         ["fluido vital", "o que corre nas veias", "vida em movimento", "origem e pertencimento"],
     "época":          ["era", "período histórico", "tempo marcado", "momento em que se vive"],
     "era":            ["época", "longo período", "era histórica", "tempo de longa duração"],
     "geração":        ["grupo contemporâneo", "quem viveu o mesmo tempo", "filhos do mesmo momento"],
