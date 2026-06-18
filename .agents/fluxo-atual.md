@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v705 (`vereda-offline-v705`, `ASSET_VERSION=20260617-dec383`)
+**Versão atual:** v726 (`vereda-offline-v726`, `ASSET_VERSION=20260617-cli827`)
 
 ---
 
@@ -136,6 +136,25 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v703 | verbos_pres_reg 1413→1514 (+101: medita, postula, angustia, improvisa, lidera, pesquisa…) |
 | v704 | sinônimos 508→532 (+24: comprometer, falhar, culpar, avançar, prender, escapar, negar…) |
 | v705 | decolonial 368→383 (+15: relação abusiva, família desestruturada, terra de ninguém, favelização…) |
+| v706 | adjetivos_comuns 1428→1488 (+60: altivo, arrogante, enigmático, leal, obstinado, tortuoso…) |
+| v707 | CLIQUES_PT 715→741, PLEONASMOS 305→327 (+26+22: infantojuvenil, conto de fadas, noir, espiritual) |
+| v708 | formas_verbais_irr 1445→1556 (+111: PROIBIR, RUIR, FLUIR, POSSUIR, DISTRIBUIR, CONSTITUIR…) |
+| v709 | léxico 391→406 (+15: ponto de virada, gancho, prólogo, subtexto, fluxo de consciência…) |
+| v710 | sinônimos 532→553 (+21: evocar, tensionar, aliviar, direcionar, confundir, revelar…) |
+| v711 | verbos_pres_reg 1514→1605 (+91: esboça, gesticula, brilha, pulsa, faísca, retrata…) |
+| v712 | decolonial 383→395 (+12: histérica, instinto materno, surdo-mudo, deficiente mental…) |
+| v713 | adjetivos_comuns 1488→1558 (+70: lânguido, iracundo, magnânimo, taciturno, voraz, mordaz…) |
+| v714 | formas_verbais_irr 1556→1675 (+119: futuro subj FAZER/QUERER/TER/VIR/SER/IR/DAR/ESTAR…) |
+| v715 | sinônimos 553→575 (+22: mágoa, afeto, identidade, paixão, empatia, leveza, clareza…) |
+| v716 | léxico 406→420 (+14: personagem, protagonista, motivação, arco de personagem, símbolo…) |
+| v717 | adjetivos_comuns 1558→1623 (+65: cristalino, onírico, crepuscular, translúcido, visceral…) |
+| v718 | CLIQUES_PT 741→773, PLEONASMOS 327→349 (+32+22: horror, gótico, épico, autoajuda espiritual) |
+| v719 | verbos_pres_reg 1605→1701 (+96: galopa, desliza, fareja, espreita, evoca, simboliza…) |
+| v720 | formas_verbais_irr 1675→1732 (+57: imperativos, particípios, gerúndios, DEPOR/DISPOR/IMPOR…) |
+| v721 | sinônimos 575→598 (+23: criança, adolescente, herói, vilão, mentor, comunidade, tradição, mitos…) |
+| v724 | CLIQUES_PT 773→805, PLEONASMOS 349→365 (+32+16: regionalista, periférico, resistência, memorialista) |
+| v725 | verbos_pres_reg 1701→1823 (+122: hipotetiza, julga, notifica, polui, metaboliza, imuniza…) |
+| v726 | léxico 420→447, sinônimos 598→620, CLIQUES_PT 805→827, PLEONASMOS 365→392 (+27+22+22+27) |
 
 ---
 
@@ -160,9 +179,9 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `decolonial-data.json` — 332 entradas; espaço para 345+ em preconceito algorítmico e novas mídias
-2. `lexical-data.json` — 322 entradas; espaço para 335+ com estados emocionais complexos
-3. `norma-data.json` — formas_verbais_irr pode crescer para 950+ (MENTIR/SERVIR/SEGUIR ainda ausentes)
+1. `norma-data.json` — adjetivos_comuns pode crescer para 1750+ (193 candidatos seguros identificados)
+2. `decolonial-data.json` — 407 entradas; povos é a categoria mais baixa (38), espaço para 420+
+3. `synonym-data.js` — 620 entradas; espaço para 640+ com mais vocabulário emocional e literário
 4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---
@@ -170,11 +189,11 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1428, formas_verbais_irr: 1445, verbos_pres_reg: 1514)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1688, formas_verbais_irr: 1732, verbos_pres_reg: 1823)
 - `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
-- `synonym-data.js` — 532 entradas
-- `lexical-data.json` — 391 entradas
-- `decolonial-data.json` — 383 entradas; 9 categorias
+- `synonym-data.js` — 620 entradas
+- `lexical-data.json` — 447 entradas
+- `decolonial-data.json` — 407 entradas; 9 categorias
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 

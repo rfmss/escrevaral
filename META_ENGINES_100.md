@@ -68,6 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v721→v726)
+
+**Baseline:** v726 — Sintaxe 99%; todos os outros engines em 100%.
+
+**O que foi entregue neste ciclo (v721→v726):**
+
+- `synonym-data.js` (v721): 575→598 (+23: criança, adolescente, herói, vilão, mentor, comunidade, tradição, mitos…)
+- `analise-engine.js` (v724): CLIQUES_PT 773→805, PLEONASMOS 349→365 (+32+16: regionalista, periférico, resistência, memorialista)
+- `norma-data.json` (v725): verbos_pres_reg 1701→1823 (+122: acadêmicos, jurídicos, ambientais — hipotetiza, julga, polui, metaboliza…)
+- `lexical-data.json` (v726): 420→447 (+27: revisão, edição, copidesque, diegese, metalinguagem, verso livre, soneto, haiku…)
+- `synonym-data.js` (v726): 598→620 (+22: inspiração, bloqueio, ofício, ritmo, silêncio, calafrio, penumbra…)
+- `analise-engine.js` (v726): CLIQUES_PT 805→827, PLEONASMOS 365→392 (+22+27: juvenil, FC/fantasia, suspense, viagem; educação, tecnologia)
+
+**Estado atualizado dos engines (v726):**
+
+| Área / engine | Maturidade | Notas de estado (v726) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 827; PLEONASMOS 392 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | 447 entradas; sinônimos 620 |
+| Decolonial / vocabulário | **100%** | 407 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1688; verbos_pres_reg 1823; formas_verbais_irr 1732; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: adjetivos_comuns pode crescer para 1750+; decolonial para 420+ (povos categoria mais baixa)
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v699→v720)
 
 **Baseline:** v720 — Sintaxe 99%; todos os outros engines em 100%.
