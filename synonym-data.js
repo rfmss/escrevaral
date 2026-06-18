@@ -1241,6 +1241,36 @@
     "fraqueza":    ["fragilidade", "impotência", "debilidade", "vulnerabilidade", "falha", "lacuna", "deficiência"],
     "forca":       ["força", "vigor", "potência", "energia", "poder", "robustez", "determinação"],
 
+    // processo criativo e escrita
+    "inspiracao":  ["inspiração", "lampejo", "insight", "iluminação", "centelha criativa", "impulso", "fagulha"],
+    "criatividade":["criatividade", "inventividade", "imaginação criadora", "originalidade", "engenho", "talento", "aptidão"],
+    "bloqueio":    ["bloqueio", "trava", "paralisia criativa", "estagnação", "silêncio interno", "impasse", "nó"],
+    "esboço":      ["esboço", "rascunho", "primeira versão", "minuta", "borrão", "apontamento", "traço inicial"],
+    "disciplina":  ["disciplina", "constância", "persistência", "rotina criativa", "firmeza", "regularidade", "comprometimento"],
+    "oficio":      ["ofício", "artesanato da escrita", "técnica", "habilidade", "mestria", "perícia", "trato com as palavras"],
+    "rascunho":    ["rascunho", "esboço", "versão zero", "primeiro gesto", "borrão", "ensaio", "tentativa inicial"],
+    "ritmo":       ["ritmo", "cadência", "andamento", "compasso", "fluxo", "pulsação", "respiração do texto"],
+    "silencio":    ["silêncio", "pausa", "vazio fértil", "ausência", "recolhimento", "lacuna", "branco"],
+    "escuta":      ["escuta", "atenção ao texto", "sensibilidade", "receptividade", "abertura", "percepção", "leitura atenta"],
+
+    // sensações físicas e corporais
+    "calafrio":    ["calafrio", "arrepio", "tremor", "frio na espinha", "estremecimento", "gelidez repentina", "frêmito"],
+    "sufoco":      ["sufoco", "opressão", "aperto", "angústia física", "nó na garganta", "peso no peito", "falta de ar"],
+    "tontura":     ["tontura", "vertigem", "desequilíbrio", "giro", "náusea leve", "perda de chão", "estonteamento"],
+
+    // natureza e paisagem
+    "penumbra":    ["penumbra", "meia-luz", "crepúsculo", "sombra difusa", "claro-escuro", "breu parcial", "meia-sombra"],
+    "neblina":     ["neblina", "névoa", "bruma", "cerração", "véu úmido", "garoa espessa", "vapores da manhã"],
+    "breu":        ["breu", "escuridão total", "treva", "noite fechada", "negro absoluto", "ausência de luz", "sombra densa"],
+    "claridade":   ["claridade", "luminosidade", "luz difusa", "brilho suave", "resplendor", "lusco-fusco claro", "albor"],
+    "chuva":       ["chuva", "chuvarada", "aguaceiro", "garoa", "chuvisco", "temporal", "dilúvio"],
+
+    // tempo e duração
+    "espera":      ["espera", "aguardo", "interregno", "pausa tensa", "suspenso", "demora", "latência"],
+    "urgencia":    ["urgência", "pressa", "iminência", "precipitação", "correria", "sem tempo", "apressar-se"],
+    "eternidade":  ["eternidade", "imensidão do tempo", "infinito temporal", "perene", "imortal", "sem fim", "para sempre"],
+    "instante":    ["instante", "momento", "relance", "fração de segundo", "lampejo", "átimo", "piscar de olhos"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas

@@ -2519,6 +2519,168 @@
       "className": "narrativa",
       "field": "narrativa",
       "note": "elemento que se opõe ou contrasta para criar tensão ou sentido"
+    },
+    "revisao": {
+      "label": "revisão",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "releitura crítica do texto para aperfeiçoamento"
+    },
+    "edicao": {
+      "label": "edição",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "processo de seleção, corte e reorganização de conteúdo"
+    },
+    "reescrita": {
+      "label": "reescrita",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "elaboração de nova versão mais apurada do texto"
+    },
+    "corte": {
+      "label": "corte",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "supressão de trechos que prejudicam o fluxo ou a clareza"
+    },
+    "expansao": {
+      "label": "expansão",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "desenvolvimento e aprofundamento de trechos sintéticos"
+    },
+    "rascunho": {
+      "label": "rascunho",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "versão inicial e inacabada do texto, livre de censura"
+    },
+    "minuta": {
+      "label": "minuta",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "versão formal preliminar, especialmente em textos não-ficcionais"
+    },
+    "versao": {
+      "label": "versão",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "estado do texto em determinado momento da escrita"
+    },
+    "copidesque": {
+      "label": "copidesque",
+      "className": "word-tecnica",
+      "field": "Edição",
+      "note": "revisão profunda de estilo, fluidez e coerência; 'copy desk'"
+    },
+    "preparacao": {
+      "label": "preparação",
+      "className": "word-tecnica",
+      "field": "Edição",
+      "note": "adequação do texto para o público e veículo antes da revisão final"
+    },
+    "prova": {
+      "label": "prova",
+      "className": "word-tecnica",
+      "field": "Edição",
+      "note": "versão pré-publicação para revisão de erros tipográficos"
+    },
+    "marcador": {
+      "label": "marcador",
+      "className": "word-estrutura",
+      "field": "Edição",
+      "note": "elemento que sinaliza passagem de tempo, lugar ou mudança de perspectiva"
+    },
+    "voz_narrativa": {
+      "label": "voz narrativa",
+      "className": "word-voz",
+      "field": "Estilo",
+      "note": "presença e personalidade do narrador no texto"
+    },
+    "registro": {
+      "label": "registro",
+      "className": "word-voz",
+      "field": "Estilo",
+      "note": "nível de formalidade ou especialização da linguagem"
+    },
+    "diegese": {
+      "label": "diegese",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "mundo interno da narrativa; o universo dos personagens"
+    },
+    "metalinguagem": {
+      "label": "metalinguagem",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "texto que fala sobre si mesmo ou sobre sua própria linguagem"
+    },
+    "enquadramento": {
+      "label": "enquadramento",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "moldura narrativa; história que contém outra história"
+    },
+    "perspectiva": {
+      "label": "perspectiva",
+      "className": "word-estrutura",
+      "field": "Narrativa",
+      "note": "posição do narrador em relação aos fatos e personagens"
+    },
+    "imersao": {
+      "label": "imersão",
+      "className": "word-estrutura",
+      "field": "Narrativa",
+      "note": "grau de envolvimento do leitor no mundo da história"
+    },
+    "focalizacao": {
+      "label": "focalização",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "escolha de quem 'vê' os acontecimentos na narrativa (Genette)"
+    },
+    "verso_livre": {
+      "label": "verso livre",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "verso sem métrica ou rima fixas; modernidade poética"
+    },
+    "soneto": {
+      "label": "soneto",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "forma fixa de 14 versos distribuídos em dois quartetos e dois tercetos"
+    },
+    "haiku": {
+      "label": "haiku",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "poema japonês de 17 sílabas (5-7-5); natureza e instante"
+    },
+    "enjambement": {
+      "label": "enjambement",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "continuação sintática além do fim do verso; tensão entre linha e sentido"
+    },
+    "cesura": {
+      "label": "cesura",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "pausa interna ao verso que cria ritmo e respiração"
+    },
+    "metrica": {
+      "label": "métrica",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "medida dos versos; contagem silábica como estrutura musical"
+    },
+    "rima": {
+      "label": "rima",
+      "className": "word-tecnica",
+      "field": "Poesia",
+      "note": "correspondência sonora entre finais de versos"
     }
   },
   "functionWords": {

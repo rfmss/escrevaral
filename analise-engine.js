@@ -480,6 +480,25 @@
     "a memória é seletiva","aquela cena nunca mais me deixou",
     "minha infância foi marcada por","aprendi cedo que o mundo não era justo",
     "meu avô dizia que","quando olho para trás só consigo ver",
+    // clichês de narrativa juvenil e de formação
+    "era um dia como outro qualquer","tudo ia bem até que",
+    "nunca imaginei que um dia","foi então que tudo mudou",
+    "aprendi que a vida não é justa","descobri quem eu realmente era",
+    "a escola me ensinou mais do que qualquer livro","tinha todo o futuro pela frente",
+    // clichês de ficção científica e fantasia
+    "em um futuro não muito distante","num mundo em que a tecnologia dominou tudo",
+    "ninguém poderia imaginar o que estava por vir","ele era o escolhido",
+    "o portal se abriu diante de nós","não havia retorno possível",
+    "o destino havia sido traçado","forças além da compreensão humana",
+    // clichês de suspense e thriller
+    "tudo o que faço agora pode ser usado contra mim","o assassino ainda está solto",
+    "nada é o que parece","confie em ninguém",
+    "o relógio estava contando","cada segundo contava",
+    "a verdade estava diante de seus olhos","era mais fundo do que imaginava",
+    // clichês de narrativa de viagem e aventura
+    "uma viagem que mudaria minha vida para sempre","eu me perdi para me encontrar",
+    "o caminho era mais importante que o destino","cada lugar guardava um segredo",
+    "o mundo é grande demais para ficar parado","saí sem saber quando voltaria",
   ];
 
   const PLEONASMOS = [
@@ -719,6 +738,23 @@
     ["diagnóstico e identificação do quadro","diagnóstico"],
     ["sintoma e manifestação clínica","sintoma"],
     ["prevenção e profilaxia","prevenção"],["medicamento e remédio","medicamento"],
+    // redundâncias de educação e pedagogia
+    ["ensino e aprendizagem","ensino"],["escola e instituição de ensino","escola"],
+    ["aluno e estudante","estudante"],["professor e educador","professor"],
+    ["conteúdo e matéria","conteúdo"],["avaliação e prova","avaliação"],
+    ["metodologia e método pedagógico","método"],["currículo e grade curricular","currículo"],
+    // redundâncias de tecnologia e comunicação
+    ["tecnologia e inovação tecnológica","tecnologia"],["sistema e plataforma digital","sistema"],
+    ["dados e informações","dados"],["software e programa de computador","software"],
+    ["conexão e acesso à internet","conexão"],["dispositivo e aparelho eletrônico","dispositivo"],
+    // redundâncias de espaço e lugar
+    ["local e lugar","local"],["espaço e área","espaço"],["região e zona","região"],
+    ["território e espaço territorial","território"],["ambiente e contexto ambiental","ambiente"],
+    ["paisagem e cenário visual","paisagem"],["horizonte e linha do horizonte","horizonte"],
+    // redundâncias temporais e de sequência
+    ["primeiro de tudo","primeiro"],["antes de mais nada","antes de tudo"],
+    ["no final das contas","no final"],["ao longo do tempo","com o tempo"],
+    ["desde sempre","sempre"],["até o fim do fim","até o fim"],
   ];
 
   const NEGACOES_DUPLAS = [
