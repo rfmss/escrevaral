@@ -5986,6 +5986,186 @@
       "reason": "usa variedade fonética regional como marcador de inferioridade social e intelectual",
       "context": "referências ao sotaque de pessoas de cidades do interior",
       "contextual": true
+    },
+    {
+      "avoid": "história oficial",
+      "alternatives": [
+        "história narrada pelos vencedores",
+        "versão dominante dos fatos",
+        "registro parcial da memória coletiva"
+      ],
+      "category": "conhecimento",
+      "reason": "Reduz a história a uma única perspectiva, apagando narrativas subalternas e memórias coletivas de grupos marginalizados",
+      "context": "A história oficial diz que...",
+      "contextual": false
+    },
+    {
+      "avoid": "saber de livro",
+      "alternatives": [
+        "conhecimento formal",
+        "estudo sistematizado",
+        "aprendizado acadêmico"
+      ],
+      "category": "conhecimento",
+      "reason": "Opõe conhecimento escrito a outras formas de saber, criando hierarquia entre aprendizados e desvalorizando experiência e oralidade",
+      "context": "Isso é só saber de livro, na prática é diferente",
+      "contextual": false
+    },
+    {
+      "avoid": "mito popular",
+      "alternatives": [
+        "narrativa coletiva",
+        "memória oral",
+        "saber ancestral transmitido"
+      ],
+      "category": "conhecimento",
+      "reason": "Desqualifica conhecimentos transmitidos oralmente como se fossem fantasias, ignorando sua função social e cognitiva",
+      "context": "É só um mito popular",
+      "contextual": false
+    },
+    {
+      "avoid": "cultura de massa como inferior",
+      "alternatives": [
+        "produção cultural ampla",
+        "arte de grande circulação",
+        "expressão cultural popular"
+      ],
+      "category": "conhecimento",
+      "reason": "Hierarquiza produções culturais segundo origem social, tratando como menor o que não segue padrões eruditos eurocentrados",
+      "context": "Isso é coisa de cultura de massa",
+      "contextual": false
+    },
+    {
+      "avoid": "pesquisa acadêmica como única válida",
+      "alternatives": [
+        "investigação rigorosa",
+        "produção de conhecimento",
+        "pesquisa comprometida com a realidade"
+      ],
+      "category": "conhecimento",
+      "reason": "Exclui modos comunitários, indígenas e quilombolas de produção de saber e investigação",
+      "context": "Pesquisa mesmo é a acadêmica",
+      "contextual": false
+    },
+    {
+      "avoid": "evolução do pensamento humano",
+      "alternatives": [
+        "transformação histórica das ideias",
+        "mudança no pensamento ao longo do tempo",
+        "desenvolvimento intelectual coletivo"
+      ],
+      "category": "conhecimento",
+      "reason": "Pressupõe linha evolutiva única do pensamento humano, apagando contribuições de civilizações não europeias",
+      "context": "Na evolução do pensamento humano...",
+      "contextual": false
+    },
+    {
+      "avoid": "senso comum como erro",
+      "alternatives": [
+        "saber cotidiano",
+        "conhecimento vivido",
+        "experiência prática acumulada"
+      ],
+      "category": "conhecimento",
+      "reason": "Opõe sistematicamente ciência ao senso comum, desvalorizando saberes práticos construídos coletivamente por comunidades",
+      "context": "Isso é senso comum, não ciência",
+      "contextual": false
+    },
+    {
+      "avoid": "iluminismo como origem da razão",
+      "alternatives": [
+        "pensamento europeu moderno",
+        "tradição iluminista ocidental",
+        "uma das correntes da razão moderna"
+      ],
+      "category": "conhecimento",
+      "reason": "Situa a razão como descoberta europeia do século XVIII, apagando tradições filosóficas africanas, asiáticas e indígenas",
+      "context": "O iluminismo inaugurou a razão",
+      "contextual": false
+    },
+    {
+      "avoid": "sotaque caipira como errado",
+      "alternatives": [
+        "variedade regional do português",
+        "fala do interior",
+        "forma regional de se expressar"
+      ],
+      "category": "estetica",
+      "reason": "Usa rótulo pejorativo para variedades do português brasileiro que carregam história e identidade de grupos sociais específicos",
+      "context": "Fala errado, tem sotaque caipira",
+      "contextual": false
+    },
+    {
+      "avoid": "literatura de massa",
+      "alternatives": [
+        "literatura de grande circulação",
+        "ficção popular",
+        "narrativa de amplo alcance"
+      ],
+      "category": "estetica",
+      "reason": "Hierarquiza produções literárias por critérios de mercado e origem social, como se popularidade indicasse menor valor estético",
+      "context": "É literatura de massa",
+      "contextual": false
+    },
+    {
+      "avoid": "arte de rua como vandalismo",
+      "alternatives": [
+        "arte urbana",
+        "expressão cultural da periferia",
+        "graffiti como linguagem visual"
+      ],
+      "category": "estetica",
+      "reason": "Criminaliza formas de expressão artística de grupos marginalizados sem distinguir intervenção artística de depredação",
+      "context": "Pichação e graffiti são vandalismo",
+      "contextual": true
+    },
+    {
+      "avoid": "corpo sarado como ideal",
+      "alternatives": [
+        "corpo em forma",
+        "corpo ativo e saudável",
+        "bem-estar corporal"
+      ],
+      "category": "estetica",
+      "reason": "Restringe ideal de corpo a padrão musculoso e eurocentrado, excluindo diversidade de corpos saudáveis e belos",
+      "context": "Todo mundo quer ter um corpo sarado",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo liso como profissional",
+      "alternatives": [
+        "aparência cuidada",
+        "apresentação pessoal",
+        "imagem profissional diversa"
+      ],
+      "category": "estetica",
+      "reason": "Associa lisura do cabelo a profissionalismo, exigindo implicitamente que pessoas negras alterem cabelos naturais",
+      "context": "Cabelo liso fica mais profissional",
+      "contextual": false
+    },
+    {
+      "avoid": "funk como barulho",
+      "alternatives": [
+        "funk como gênero musical",
+        "música da periferia",
+        "expressão cultural popular"
+      ],
+      "category": "estetica",
+      "reason": "Desqualifica gênero musical de origem periférica e negra usando linguagem que nega seu valor artístico e cultural",
+      "context": "Funk é só barulho",
+      "contextual": false
+    },
+    {
+      "avoid": "cinema nacional como inferior",
+      "alternatives": [
+        "cinema brasileiro",
+        "produção audiovisual nacional",
+        "cinema feito no Brasil"
+      ],
+      "category": "estetica",
+      "reason": "Subordina o cinema brasileiro a padrões hollywoodianos, desvalorizando narrativas, estéticas e perspectivas locais",
+      "context": "Cinema nacional não presta",
+      "contextual": false
     }
   ]
 }
