@@ -1226,6 +1226,28 @@
     "preservar":      ["conservar", "guardar", "manter intacto", "proteger do tempo", "zelar por"],
     "derrubar":       ["fazer cair", "abater", "lançar ao chão", "destituir", "vencer"],
 
+    // v765 — Nascentes D→S: esmero, cura, repouso, sábio, cume, suspeita, deslize
+    "esmero":         ["cuidado extremo", "desvelo", "zelo", "busca da perfeição", "capricho no fazer"],
+    "cuidado":        ["atenção", "diligência", "desvelo", "esmero", "solicitude", "trato"],
+    "sábio":          ["douto", "erudito", "sapiente", "que sabe com penetração", "homem do saber"],
+    "erudição":       ["saber vasto", "conhecimento acumulado", "ilustração", "vasto estudo", "cultura letrada"],
+    "cume":           ["pico", "topo", "vértice", "ponta mais alta", "o lugar mais elevado"],
+    "cura":           ["saração", "recuperação", "tratamento que funcionou", "remissão", "volta à saúde"],
+    "repouso":        ["descanso", "quietude", "pausa", "sossego do corpo", "cessar o esforço"],
+    "quietude":       ["quietação", "repouso", "sossego", "estado sem agitação", "silêncio interior"],
+    "suspeita":       ["desconfiança", "receio", "conjetura de dano", "mau pressentimento", "dúvida que acusa"],
+    "desvendar":      ["revelar", "tirar o véu", "descobrir o que estava oculto", "expor à luz"],
+    "manifestar":     ["mostrar", "expor", "tornar evidente", "dar a ver", "exteriorizar"],
+    "deslize":        ["desvio leve", "descaída", "pequena falha de conduta", "erro pequeno", "passo em falso"],
+    "prole":          ["filhos", "descendentes", "geração seguinte", "descendência", "o que fica de nós"],
+    "posteridade":    ["as gerações futuras", "quem virá depois", "o que o tempo guarda", "herança viva"],
+    "diligência":     ["atividade cuidadosa", "agilidade com atenção", "presteza", "trabalho atento"],
+    "pródigo":        ["esbanjador", "gastador", "que não poupa", "generoso ao extremo", "dissipador"],
+    "desvio":         ["descaminho", "afastamento do rumo", "mudança de direção", "sair do trilho"],
+    "cultivo":        ["cultura", "lavoura", "trato da terra", "trabalho de cultivar", "cuidar do que cresce"],
+    "lavoura":        ["cultivo", "trabalho do campo", "roça", "lida com a terra", "produção agrícola"],
+    "erudito":        ["culto", "douto", "muito instruído", "que sabe muito pelo estudo", "pessoa das letras"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
