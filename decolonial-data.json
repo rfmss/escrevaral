@@ -4580,6 +4580,150 @@
       "reason": "associação indevida entre esquizofrenia e periculosidade reforça estigma sem base clínica",
       "context": "saúde, mídia, jornalismo",
       "contextual": false
+    },
+    {
+      "avoid": "folclore como curiosidade",
+      "alternatives": [
+        "cultura popular viva",
+        "saber coletivo tradicional",
+        "expressão cultural comunitária"
+      ],
+      "category": "estetica",
+      "reason": "trata manifestações culturais populares como exotismo ou entretenimento, não como sabedoria",
+      "context": "cultura, educação, arte",
+      "contextual": true
+    },
+    {
+      "avoid": "música típica",
+      "alternatives": [
+        "música regional brasileira",
+        "manifestação musical local",
+        "gênero musical específico"
+      ],
+      "category": "estetica",
+      "reason": "othering que exotiza músicas fora do cânone branco europeu como típicas",
+      "context": "música, cultura, turismo",
+      "contextual": true
+    },
+    {
+      "avoid": "literatura de cordel como curiosidade regional",
+      "alternatives": [
+        "literatura de cordel como expressão literária brasileira",
+        "poesia popular nordestina",
+        "tradição oral impressa"
+      ],
+      "category": "estetica",
+      "reason": "diminui o cordel a objeto de curiosidade regional, apagando sua sofisticação literária",
+      "context": "literatura, cultura, educação",
+      "contextual": true
+    },
+    {
+      "avoid": "artesanato como artigo de turismo",
+      "alternatives": [
+        "produção artesanal como patrimônio cultural",
+        "arte manual de tradição comunitária",
+        "saber-fazer ancestral"
+      ],
+      "category": "estetica",
+      "reason": "reduz o artesanato a mercadoria, apagando sua função cultural e identitária",
+      "context": "turismo, comércio, cultura",
+      "contextual": true
+    },
+    {
+      "avoid": "samba como coisa de negro",
+      "alternatives": [
+        "samba como criação afro-brasileira",
+        "samba como patrimônio cultural do Rio",
+        "expressão musical afro-diaspórica"
+      ],
+      "category": "estetica",
+      "reason": "associação racial pejorativa que historicamente serviu para criminalizar o samba",
+      "context": "música, cultura, história",
+      "contextual": true
+    },
+    {
+      "avoid": "cultura periférica",
+      "alternatives": [
+        "cultura das periferias",
+        "expressão cultural popular urbana",
+        "produção cultural de território popularizado"
+      ],
+      "category": "estetica",
+      "reason": "adjetivação que marca a cultura como menor por origem geográfica e de classe",
+      "context": "cultura, urbanismo, educação",
+      "contextual": true
+    },
+    {
+      "avoid": "saber popular como superstição",
+      "alternatives": [
+        "conhecimento popular tradicional",
+        "saber empírico acumulado",
+        "epistemologia do cotidiano"
+      ],
+      "category": "conhecimento",
+      "reason": "descarta conhecimentos fora do método científico ocidental como mera crença sem valor",
+      "context": "saúde, educação, sociologia",
+      "contextual": false
+    },
+    {
+      "avoid": "medicina alternativa",
+      "alternatives": [
+        "medicina tradicional",
+        "medicina indígena",
+        "práticas terapêuticas complementares"
+      ],
+      "category": "conhecimento",
+      "reason": "define como alternativo tudo que não é medicina ocidental, mesmo que seja milenar",
+      "context": "saúde, educação, políticas públicas",
+      "contextual": true
+    },
+    {
+      "avoid": "conhecimento científico como único válido",
+      "alternatives": [
+        "ciência como um dos sistemas de conhecimento",
+        "pluralidade epistemológica",
+        "diversidade de formas de saber"
+      ],
+      "category": "conhecimento",
+      "reason": "hierarquia epistêmica que anula saberes indígenas, populares e afro-diaspóricos",
+      "context": "epistemologia, educação, ciência",
+      "contextual": false
+    },
+    {
+      "avoid": "descoberta científica europeia",
+      "alternatives": [
+        "sistematização europeia de conhecimento local",
+        "apropriação de saber indígena",
+        "registro ocidental de técnica pré-existente"
+      ],
+      "category": "conhecimento",
+      "reason": "muitos descobrimentos europeus se baseiam em conhecimentos de povos locais não creditados",
+      "context": "ciência, história, epistemologia",
+      "contextual": true
+    },
+    {
+      "avoid": "progresso como evolução linear",
+      "alternatives": [
+        "transformação social não-linear",
+        "desenvolvimento com diferentes trajetórias",
+        "mudança histórica plural"
+      ],
+      "category": "conhecimento",
+      "reason": "narrativa colonial que coloca o modelo europeu como destino universal da humanidade",
+      "context": "história, filosofia, política",
+      "contextual": false
+    },
+    {
+      "avoid": "objetivo e imparcial",
+      "alternatives": [
+        "contextualizado",
+        "com perspectiva explicitada",
+        "situado epistemicamente"
+      ],
+      "category": "conhecimento",
+      "reason": "objetividade e imparcialidade são sempre situadas — a alegação de neutralidade oculta perspectivas dominantes",
+      "context": "jornalismo, acadêmia, ciência",
+      "contextual": true
     }
   ]
 }
