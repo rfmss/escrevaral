@@ -1055,7 +1055,6 @@
     "narração":       ["ato de narrar", "relato", "história contada", "discurso narrativo", "versão oral"],
     "obra":           ["produção", "criação", "escrito", "texto", "resultado do trabalho", "feito humano"],
     "prece":          ["oração humilde", "súplica", "invocação", "pedido confiante", "rogativa", "voto"],
-    "mundo":          ["universo", "orbe", "globo", "cosmos", "totalidade do existente", "Terra e além"],
 
     // v745 — Nascentes R→S: recear, selvagem, soledade, singulto, sigilo, relâmpago...
     "recear":         ["temer sem fundamento", "apavorar-se com sombra", "ter receio", "desconfiar", "pressentir o pior"],
@@ -1147,11 +1146,6 @@
     "demolir":        ["derrubar", "destruir", "arrasar", "arruinar", "desabar", "reduzir a pó"],
     "dançar":         ["bailar", "mover ao ritmo", "girar", "requebrar", "rodopiar", "movimentar-se pela música"],
     "prisão":         ["cárcere", "encarceramento", "clausura", "confinamento", "gaiola", "reclusão"],
-    "exílio":         ["desterro", "degredo", "afastamento forçado", "banimento", "vida longe da pátria"],
-    "traição":        ["deslealdade", "perfídia", "entrega ao inimigo", "quebra da confiança", "golpe pelas costas"],
-    "contemplar":     ["observar com atenção", "meditar sobre", "admirar em silêncio", "encarar fundo", "mirar com calma"],
-    "nostalgia":      ["saudade do passado", "melancolia do que foi", "anseio pelo tempo ido", "sentimento do que não volta"],
-    "cicatriz":       ["marca do ferido", "sinal deixado", "vestígio da dor", "lembrança no corpo", "rastro do tempo"],
 
     // v756 — lacunas emocionais e de cenário
     "calma":          ["serenidade", "tranquilidade", "paz interior", "equanimidade", "sossego", "quietude"],
@@ -1212,6 +1206,25 @@
     "planejar":       ["traçar plano", "organizar com antecedência", "preparar estratégia", "projetar"],
     "enfrentar":      ["confrontar", "encarar de frente", "não fugir de", "resistir ao embate"],
     "recordar":       ["lembrar", "evocar", "trazer à memória", "reviver o passado", "não esquecer"],
+
+    // v763 — recursos literários, emoções, escrita e tempo
+    "hipérbole":      ["exagero expressivo", "amplificação", "exagero para dar força", "aumentar além da medida"],
+    "sarcasmo":       ["ironia cortante", "zombaria ácida", "crítica com veneno", "humor que machuca"],
+    "revisão":        ["releitura", "olhar de novo", "checar o texto", "refinamento", "segunda leitura crítica"],
+    "releitura":      ["nova leitura", "reler com outros olhos", "revisitar o texto", "leitura repetida"],
+    "ciúme":          ["possessividade", "medo de perder", "inveja do outro no afeto", "vontade de exclusividade"],
+    "gratidão":       ["agradecimento", "reconhecimento", "sentir-se em dívida boa", "grato pelo bem recebido"],
+    "arrependimento": ["remorso", "pesar pelo que fez", "querer desfazer o passado", "sentir culpa pelo erro"],
+    "sede":           ["vontade de beber", "ressecar a garganta", "necessidade de água", "ânsia de saciar"],
+    "sono":           ["vontade de dormir", "torpor do cansaço", "pálpebras pesadas", "chamado do descanso"],
+    "agora":          ["neste momento", "o presente imediato", "no instante atual", "já", "no aqui e agora"],
+    "sublime":        ["elevado ao máximo", "acima do belo", "que eleva a alma", "grandioso além da beleza"],
+    "grotesco":       ["distorcido", "feio de modo expressivo", "que mescla horror e humor", "caricato extremo"],
+    "gostar":         ["apreciar", "sentir afeição", "ter simpatia por", "curtir", "ter prazer em"],
+    "desejar":        ["querer", "ansiar", "anseio por", "ter vontade de", "almejar", "cobiçar"],
+    "explicar":       ["esclarecer", "tornar claro", "desenvolver o raciocínio", "expor com detalhes", "iluminar"],
+    "preservar":      ["conservar", "guardar", "manter intacto", "proteger do tempo", "zelar por"],
+    "derrubar":       ["fazer cair", "abater", "lançar ao chão", "destituir", "vencer"],
 
   };
 
