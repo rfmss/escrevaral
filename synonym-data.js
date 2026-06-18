@@ -1305,6 +1305,28 @@
     "proteção":       ["amparo", "abrigo", "defesa", "o que cobre do perigo", "cuidado contra o mal"],
     "carência":       ["falta", "ausência do necessário", "privação", "estado de quem não tem o suficiente"],
 
+    // v770 — corpo, tempo, bioma e filosofia
+    "carne":          ["tecido vivo", "o que é físico no ser", "corpo mortal", "matéria que respira"],
+    "pele":           ["superfície do corpo", "o que cobre", "membrana viva", "a fronteira do eu"],
+    "sangue":         ["fluido vital", "o que corre nas veias", "vida em movimento", "origem e pertencimento"],
+    "época":          ["era", "período histórico", "tempo marcado", "momento em que se vive"],
+    "era":            ["época", "longo período", "era histórica", "tempo de longa duração"],
+    "geração":        ["grupo contemporâneo", "quem viveu o mesmo tempo", "filhos do mesmo momento"],
+    "sentido":        ["significado", "propósito", "direção de uma ação", "o que justifica", "razão de ser"],
+    "propósito":      ["intenção", "objetivo maior", "o que guia as escolhas", "norte da vida"],
+    "sacrifício":     ["renúncia", "entrega total", "abrir mão do próprio por outro", "dom de si"],
+    "renúncia":       ["abdicação", "abandono voluntário", "desapego", "deixar para trás por escolha"],
+    "aprendizado":    ["crescimento pelo erro", "processo de aprender", "aquisição de saber", "amadurecimento"],
+    "reconciliação":  ["volta à paz", "reparação do vínculo", "superar o conflito", "fazer as pazes"],
+    "estrangeiro":    ["de outro país", "quem vem de fora", "o que não é daqui", "forasteiro"],
+    "exilado":        ["quem foi expulso", "vivendo longe da pátria", "em desterro", "banido"],
+    "anseio":         ["desejo intenso", "ânsia", "cobiça do bem", "vontade profunda", "o que o coração quer"],
+    "conselho":       ["orientação", "palavra de quem sabe", "guia de ação", "sugestão experiente"],
+    "inferno":        ["lugar do tormento", "o oposto do paraíso", "caos sem saída", "lugar de punição"],
+    "paraíso":        ["lugar de graça", "bem-aventurança", "o oposto do inferno", "lugar da plenitude"],
+    "cerrado":        ["savana brasileira", "bioma do Brasil central", "chapada e campo abertos"],
+    "pampa":          ["campanha gaúcha", "planície sul-rio-grandense", "campo aberto do Sul"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
