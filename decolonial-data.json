@@ -6819,6 +6819,236 @@
       "reason": "enquadra o conhecimento feminino como excesso ou desvio, associando saber à perda de feminilidade ou ameaça social",
       "context": "em textos sobre personagens femininas, liderança e relações de gênero",
       "contextual": false
+    },
+    {
+      "avoid": "fragilidade feminina",
+      "alternatives": [
+        "vulnerabilidade humana",
+        "sensibilidade",
+        "cuidado emocional"
+      ],
+      "category": "genero",
+      "reason": "Naturaliza como feminino o que é característica humana universal, reforçando hierarquia de gênero.",
+      "context": "Prefira nomear o estado emocional específico da personagem em vez de generalizá-lo como traço de gênero.",
+      "contextual": false
+    },
+    {
+      "avoid": "serviço doméstico como dom natural",
+      "alternatives": [
+        "trabalho doméstico",
+        "cuidado da casa",
+        "labor reprodutivo"
+      ],
+      "category": "genero",
+      "reason": "Naturaliza o trabalho doméstico não remunerado como atributo feminino inato, apagando sua dimensão econômica.",
+      "context": "Na narrativa, nomear o trabalho doméstico como trabalho — não como vocação — devolve agência à personagem.",
+      "contextual": false
+    },
+    {
+      "avoid": "meritocracia",
+      "alternatives": [
+        "esforço individual",
+        "acesso desigual a oportunidades",
+        "privilégio estrutural"
+      ],
+      "category": "classe",
+      "reason": "Apaga estruturas sociais que determinam oportunidades, naturalizando desigualdade como resultado de mérito pessoal.",
+      "context": "Quando o personagem usa o termo, pode revelar sua visão de mundo — o narrador não precisa endossar.",
+      "contextual": true
+    },
+    {
+      "avoid": "classe trabalhadora como massa",
+      "alternatives": [
+        "trabalhadores",
+        "pessoas trabalhadoras",
+        "comunidade operária"
+      ],
+      "category": "classe",
+      "reason": "Reifica indivíduos como bloco homogêneo, apagando diferenças internas de raça, gênero, geração e território.",
+      "context": "Especifique: trabalhadores da indústria têxtil, entregadores de aplicativo, catadores de recicláveis.",
+      "contextual": false
+    },
+    {
+      "avoid": "lenda indígena",
+      "alternatives": [
+        "narrativa oral",
+        "mitologia indígena",
+        "cosmologia do povo [nome]",
+        "saber ancestral"
+      ],
+      "category": "povos",
+      "reason": "'Lenda' impõe enquadramento europeu que implica ficção, apagando a validade epistemológica dos saberes indígenas.",
+      "context": "Use o nome do povo e o próprio conceito que essa comunidade usa para nomear sua narrativa.",
+      "contextual": false
+    },
+    {
+      "avoid": "povo primitivo",
+      "alternatives": [
+        "povo ancestral",
+        "sociedade de base oral",
+        "comunidade tradicional"
+      ],
+      "category": "povos",
+      "reason": "Posiciona grupos indígenas e africanos em estágio evolutivo inferior na escala colonial do progresso.",
+      "context": "Nenhum contexto justifica o uso evolutivo do termo. Em diálogo histórico de personagem, marcar com distância crítica.",
+      "contextual": false
+    },
+    {
+      "avoid": "área verde inexplorada",
+      "alternatives": [
+        "floresta nativa",
+        "bioma preservado",
+        "território ancestral"
+      ],
+      "category": "territorio",
+      "reason": "'Inexplorada' pressupõe que exploração econômica é o critério de valor da terra, invisibilizando formas não capitalistas de uso.",
+      "context": "Floresta preservada é resultado de gestão milenar, não ausência de presença humana.",
+      "contextual": false
+    },
+    {
+      "avoid": "cabelo selvagem",
+      "alternatives": [
+        "cabelo crespo",
+        "cabelo natural",
+        "cabelo volumoso"
+      ],
+      "category": "estetica",
+      "reason": "Associa textura capilar afro-brasileira a animalidade e falta de controle, reforçando padrão eurocêntrico.",
+      "context": "Descreva a textura de forma neutra ou afirmativa: crespo, encaracolado, volumoso.",
+      "contextual": false
+    },
+    {
+      "avoid": "traços orientais",
+      "alternatives": [
+        "traços de origem asiática",
+        "traços leste-asiáticos",
+        "fenótipo de origem [país]"
+      ],
+      "category": "estetica",
+      "reason": "Homogeneiza dezenas de grupos étnicos distintos em categoria colonial, apagando especificidade cultural.",
+      "context": "Especifique a origem — coreano, nipo-brasileiro, sino-brasileiro — quando relevante para a personagem.",
+      "contextual": false
+    },
+    {
+      "avoid": "errado linguisticamente",
+      "alternatives": [
+        "variante regional",
+        "norma popular",
+        "registro informal",
+        "dialeto"
+      ],
+      "category": "linguagem",
+      "reason": "Naturaliza o preconceito linguístico: toda variedade é estruturada e legítima no seu contexto de uso.",
+      "context": "A personagem fala a língua de sua comunidade. O narrador literário não precisa corrigir — pode escutar.",
+      "contextual": false
+    },
+    {
+      "avoid": "linguagem de pobre",
+      "alternatives": [
+        "português popular",
+        "variedade não-padrão",
+        "fala coloquial"
+      ],
+      "category": "linguagem",
+      "reason": "Une forma linguística a classe social como estigma, apagando que a variação linguística é social, não de inteligência.",
+      "context": "Nomear sem julgamento a variedade que o personagem usa é mais preciso e menos excludente.",
+      "contextual": false
+    },
+    {
+      "avoid": "normal",
+      "alternatives": [
+        "sem deficiência",
+        "pessoa que não tem deficiência",
+        "neurotípico"
+      ],
+      "category": "deficiencia",
+      "reason": "Implica que pessoas com deficiência são anormais, naturalizando a norma capacitista como referência.",
+      "context": "Em contexto médico, use 'sem deficiência'. No texto literário, evite fazer da ausência de deficiência o parâmetro.",
+      "contextual": false
+    },
+    {
+      "avoid": "amizade interracial como exceção",
+      "alternatives": [
+        "amizade",
+        "relação de afeto",
+        "convivência"
+      ],
+      "category": "relacoes",
+      "reason": "Tratar relações interraciais como notáveis reforça a ideia de que raças não se misturam naturalmente.",
+      "context": "Se a relação interracial é relevante para o tema, aborde com intencionalidade — sem romantizar como heroísmo.",
+      "contextual": true
+    },
+    {
+      "avoid": "sabedoria popular como ingenuidade",
+      "alternatives": [
+        "saber popular",
+        "conhecimento tradicional",
+        "epistemologia local"
+      ],
+      "category": "conhecimento",
+      "reason": "Enquadra o conhecimento produzido fora da academia como menos válido, perpetuando colonialidade do saber.",
+      "context": "O personagem que sabe sobre plantas, tempo, cura ou territórios é portador de conhecimento — não de folclore.",
+      "contextual": false
+    },
+    {
+      "avoid": "vítima de pobreza",
+      "alternatives": [
+        "pessoa empobrecida",
+        "pessoa em situação de pobreza",
+        "sujeito de direitos negados"
+      ],
+      "category": "classe",
+      "reason": "Vitimização retira agência política e histórica das pessoas pobres, apagando que a pobreza é produzida socialmente.",
+      "context": "A narrativa ganha quando o personagem pobre age, resiste e escolhe — não apenas sofre.",
+      "contextual": false
+    },
+    {
+      "avoid": "zona de conflito como caos natural",
+      "alternatives": [
+        "território em disputa",
+        "região marcada por violência estrutural",
+        "área de conflito armado"
+      ],
+      "category": "territorio",
+      "reason": "Naturaliza conflitos geopolíticos como traço intrínseco de certos territórios, apagando causas históricas e agentes.",
+      "context": "Nomeie os atores do conflito, as causas econômicas e políticas — o caos tem origem e beneficiários.",
+      "contextual": false
+    },
+    {
+      "avoid": "escritora feminista como militante antes de artista",
+      "alternatives": [
+        "escritora",
+        "autora",
+        "pessoa que escreve"
+      ],
+      "category": "genero",
+      "reason": "Enquadrar mulheres escritoras por sua posição política antes da obra subalterniza o trabalho literário.",
+      "context": "Primeiro a obra, depois o contexto — assim como se faz com escritores homens.",
+      "contextual": false
+    },
+    {
+      "avoid": "saber ancestral como misticismo",
+      "alternatives": [
+        "conhecimento ancestral",
+        "epistemologia indígena",
+        "sabedoria tradicional"
+      ],
+      "category": "conhecimento",
+      "reason": "Reduzir saberes indígenas e africanos a misticismo invalida sistemas complexos de conhecimento, botânica, astronomia e medicina.",
+      "context": "Nomear o conhecimento pelo que ele é — medicina de plantas, orientação por estrelas, manejo de solo — é mais preciso.",
+      "contextual": false
+    },
+    {
+      "avoid": "violência como algo natural em certas culturas",
+      "alternatives": [
+        "violência estrutural",
+        "violência historicamente produzida",
+        "legado colonial de violência"
+      ],
+      "category": "relacoes",
+      "reason": "Naturaliza a violência em comunidades periféricas, indígenas ou afro-brasileiras como traço cultural, apagando causas históricas.",
+      "context": "Analise as condições materiais que produzem a violência — não o suposto caráter da cultura.",
+      "contextual": false
     }
   ]
 }
