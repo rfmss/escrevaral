@@ -1255,8 +1255,6 @@
     "crueldade":      ["brutalidade", "maldade em ato", "falta de compaixão", "desumanidade", "dureza extrema"],
     "maldade":        ["crueldade", "malícia", "perversidade", "má-vontade deliberada", "disposição para o mal"],
     "indiferença":    ["apatia", "desinteresse", "frieza", "não se importar", "ausência de sentimento"],
-    "dúvida":         ["incerteza", "hesitação", "suspense interior", "não saber ao certo", "questionamento"],
-    "certeza":        ["convicção", "segurança interior", "saber sem dúvida", "firmeza", "absoluta confiança"],
     "perigo":         ["ameaça", "risco", "situação perigosa", "iminência do mal", "o que pode machucar"],
     "luto":           ["perda", "sofrimento pela morte", "tempo de chorar", "período de dor", "dor da ausência"],
     "celebração":     ["festa", "comemoração", "júbilo coletivo", "marcar uma conquista", "alegria partilhada"],
