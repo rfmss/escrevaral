@@ -249,6 +249,9 @@
       else if (NUM_CARDINAIS.has(norm)) { tags.push("Noun"); tags.push("Numeral"); }
       else if (NUM_ORDINAIS.has(norm)) { tags.push("Adjective"); tags.push("Numeral"); }
       else if (INTERJEICOES.has(norm)) { tags.push("Interjection"); }
+      // P0.4: verificar verbos irregulares e presentes ANTES de adjetivos — evita sequestro
+      else if (VERBOS_AUX.has(norm)) { tags.push("Verb"); }
+      else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) { tags.push("Verb"); }
       else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
       else if (ADV_AFIRM.has(norm))   { tags.push("Adverb"); }
@@ -257,7 +260,6 @@
       else if (ADV_MODO.has(norm))    { tags.push("Adverb"); }
       else if (ADV_INTENS.has(norm))  { tags.push("Adverb"); }
       else if (ADV_DUVIDA.has(norm))  { tags.push("Adverb"); }
-      else if (VERBOS_AUX.has(norm))  { tags.push("Verb"); }
       else {
         // Nome próprio: inicial maiúscula após token que não encerra sentença
         const prevToken = i > 0 ? tokens[i - 1] : null;
@@ -300,9 +302,19 @@
           if (/(?:udo|uda|udos|udas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ento|enta)$/.test(_na) && _na.length > 6) tags.push("Adjective");
           if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
-          if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+          // P0.6: clitico hifenizado → base verbal + clitico
+          const _cliSet = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
+          const _clParts = norm.split("-");
+          if (_clParts.length >= 2 && _clParts.slice(1).every(p => _cliSet.has(p))) {
+            tags.push("Verb"); // base + clítico = verbo
+          } else if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
           else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
-          else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) {
+          // P0.5: flexões acentuadas — usar _na (sem acento) para reconhecer -arão/-erão/-irão etc
+          else if (/(?:arao|erao|irao|avamos|iamos|ariamos|eriamos|iriamos|assemos|essemos|issemos|aramos|eramos|iramos|ado|ada|ados|adas|ido|ida|idos|idas)$/.test(_na) && _na.length > 4) {
+            // Particípios: verificar se não é substantivo
+            if (/(?:ado|ada|idos|idas)$/.test(_na) && _SUBST_IA.size > 0) tags.push("Verb");
+            else tags.push("Verb");
+          } else if (/(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|ará|erá|irá|aria|eria|iria|asse|esse|isse)$/.test(norm) && norm.length > 3) {
             // Substantivos femininos terminados em -ia não são verbos (notícia, história, família…)
             const nacc = _stripDiac(norm);
             if (/ia$/.test(norm) && _SUBST_IA.size > 0 && _SUBST_IA.has(nacc)) tags.push("Noun");

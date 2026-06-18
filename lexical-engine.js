@@ -215,14 +215,18 @@
       return "Conjunção";
     },
     "como": (prev, next) => {
-      // Início de período + sem correlativo → causal (DESAM-COMO-01)
-      if (!prev) return "Conjunção";
-      // Em interrogação → advérbio (DESAM-COMO-03)
-      return "Advérbio";
+      // Início de período sem verbo anterior → pode ser causal ou interrogativo (DESAM-COMO-01)
+      // "Como fez isso?" → Advérbio interrogativo; "Como é bonito!" → Advérbio exclamativo
+      // A lógica mais segura: se não há prev, é advérbio interrogativo/exclamativo
+      if (!prev) return "Advérbio";
+      // No interior: "como" comparativo = Conjunção; "saber como" → Advérbio
+      if (VERBOS_COGNICAO.has(normalizeWord(prev)) || normalizeWord(prev) === "saber") return "Advérbio";
+      return "Conjunção";
     },
     "quando": (prev, next) => {
-      // Advérbio interrogativo se em pergunta, senão temporal (DESAM-QUANDO-01/02)
-      if (!prev) return "Conjunção"; // início = temporal ou interrogativo
+      // Início de período → advérbio interrogativo (DESAM-QUANDO-01)
+      if (!prev) return "Advérbio";
+      // No interior → conjunção temporal (DESAM-QUANDO-02)
       return "Conjunção";
     },
     "se": (prev, next) => {
@@ -254,54 +258,93 @@
       return "Conjunção";
     },
     "senao": () => "Conjunção", // adversativa/condicional negativa (DESAM-SENAO-01)
+    // P0.2 — artigo/preposição/pronome: `a` antes de noun → artigo; antes de nome → preposição
+    "a": (prev, next) => {
+      if (!next) return "Pronome pessoal"; // posição final: clítico
+      const _n = normalizeWord(next);
+      // Antes de substantivo comum (qualquer palavra que não seja preposição/conjunção/artigo)
+      if (_n && !/^(de|em|a|o|os|as|para|por|com|sem|sobre|ante|entre|após|até|desde|perante|segundo|conforme|mediante|exceto|salvo|ou|e|mas|pois|que|se|quando|como|porque|porém|contudo|todavia|portanto|logo|senão|embora|ora|quer)$/.test(_n)) {
+        // Antes de nome próprio → preposição (ex: "Entreguei a Maria")
+        if (next && /^\p{Lu}/u.test(next)) return "Preposição";
+        // Antes de infinitivo → preposição (a + inf = aspecto)
+        if (/^.+(ar|er|ir)$/.test(_n)) return "Preposição";
+        return "Artigo"; // caso geral: antes de substantivo/adjetivo
+      }
+      return "Artigo"; // default seguro
+    },
     // "mais" como advérbio de intensidade vs indefinido
-    "mais": () => "Advérbio",
+    "mais": (prev, next) => {
+      // Antes de substantivo/adjetivo não modificado → pronome indefinido/determinante (P1.3)
+      if (next) {
+        const _n = normalizeWord(next);
+        // Se next não é advérbio nem verbo, provavelmente modifica substantivo
+        if (_n && !/^(do|dos|da|das|de|em|a|o|os|as|que|para|por|com)$/.test(_n)
+            && !/^.+(mente|ar|er|ir)$/.test(_n)) {
+          return "Pronome indefinido";
+        }
+      }
+      return "Advérbio";
+    },
     "menos": () => "Advérbio",
   };
 
-  // ── Classificação contextual ──────────────────────────────────────────────────
-  function inferWordClassContextual(word, text) {
-    const normalized = normalizeWord(word);
-    const original   = word;
+  // P0.3 — formas acentuadas com acento distintivo (não stripped) → classe correta
+  // "dá"≠"da"; "vê"≠"ve"; "pôr"≠"por"; "pôde"≠"pode"; "há"≠"ha"
+  const VERBOS_ACENTUADOS = new Map([
+    ["dá","Verbo flexionado"],   // DAR 3sg pres
+    ["dão","Verbo flexionado"],  // DAR 3pl pres
+    ["dê","Verbo (subjuntivo)"], // DAR subj pres
+    ["vê","Verbo flexionado"],   // VER 3sg pres
+    ["vêem","Verbo flexionado"], // VER 3pl pres (PE)
+    ["vêm","Verbo flexionado"],  // VIR 3pl pres
+    ["pôr","Verbo no infinitivo"],
+    ["pôs","Verbo flexionado"],  // PÔR pret 3sg
+    ["pôde","Verbo flexionado"], // PODER pret 3sg
+    ["há","Verbo flexionado"],   // HAVER 3sg pres
+    ["hão","Verbo flexionado"],  // HAVER 3pl pres
+    ["fê-lo","Verbo flexionado"],
+    ["pé","Substantivo"],        // não confundir com "pe"
+    ["só","Advérbio"],           // advérbio de exclusão, não adjetivo de solidão
+    ["sê","Verbo (imperativo)"], // SER imperativo
+    ["lê","Verbo flexionado"],   // LER 3sg pres
+    ["lêem","Verbo flexionado"], // LER 3pl (PE)
+    ["crê","Verbo flexionado"],  // CRER 3sg pres
+    ["vós","Pronome pessoal"],
+    ["nós","Pronome pessoal"],
+  ]);
 
-    // 1. Verificar locuções multi-palavra no texto
-    if (text && LOCUCOES[normalized]) {
-      const textNorm = normalizeWord(text).toLowerCase();
-      const wordPos  = textNorm.indexOf(normalized);
-      if (wordPos !== -1) {
-        for (const { loc, classe } of LOCUCOES[normalized]) {
-          const locNorm = loc.split(" ").map(normalizeWord).join(" ");
-          if (textNorm.slice(wordPos).startsWith(locNorm)) {
-            return classe;
-          }
-        }
-      }
-    }
-
-    // 2. Polissemia com contexto local (janela ±2 palavras)
-    if (POLISSEMIA[normalized] && text) {
-      const tokens = tokenizeWords(text);
-      const idx    = tokens.findIndex(t => normalizeWord(t) === normalized);
-      if (idx !== -1) {
-        const prev = idx > 0   ? tokens[idx-1] : null;
-        const next = idx < tokens.length-1 ? tokens[idx+1] : null;
-        const result = POLISSEMIA[normalized](prev, next);
-        if (result) return result;
-      }
-    }
-
-    // 3. Fallback para inferência simples
-    return inferWordClass(normalized, original);
-  }
+  // ── Classificação contextual (definição única — P0.1) ─────────────────────
 
   function analyze(word, text) {
     if (!word?.trim()) return null;
     const selectedWord = word.trim();
+    // P0.3: acento distintivo vence normalização — checar antes de strip
+    if (VERBOS_ACENTUADOS.has(selectedWord)) {
+      const fixedClass = VERBOS_ACENTUADOS.get(selectedWord);
+      const normalized = normalizeWord(selectedWord);
+      const lexiconEntry = localLexicon[normalized];
+      return {
+        word: normalized,
+        displayWord: lexiconEntry?.label || selectedWord,
+        className: lexiconEntry?.className || fixedClass,
+        functionName: inferFunctionName(fixedClass),
+        field: lexiconEntry?.field || inferSemanticField(normalized, fixedClass),
+        note: lexiconEntry?.note || createLocalNote(fixedClass, normalized),
+        count: countWordOccurrences(text, normalized),
+      };
+    }
     const normalized = normalizeWord(selectedWord);
+    // P0.6: clitico hifenizado — extrair base verbal + cliticos (me/te/se/o/a/lo/la/lhe/nos/vos/lhes)
+    const _CLITICOS = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las","mo","to","lho","no","vo"]);
+    const _parts = selectedWord.split("-");
+    const _isCliticizado = _parts.length >= 2 && _parts.slice(1).every(p => _CLITICOS.has(p.toLowerCase()) || /^(ei|as|a|emos|eis|ao|aria|arias|ariam|ariamos)$/.test(p.toLowerCase()));
+    const _baseVerb = _isCliticizado ? _parts[0] : null;
     const lexiconEntry = localLexicon[normalized];
     // Usar classificação contextual quando há texto disponível
     const className = lexiconEntry?.className
-      || (text ? inferWordClassContextual(selectedWord, text) : inferWordClass(normalized, selectedWord));
+      || (_isCliticizado ? (VERBOS_ACENTUADOS.has(_baseVerb) ? VERBOS_ACENTUADOS.get(_baseVerb)
+          : /^.+(ar|er|ir|or)$/.test(normalizeWord(_baseVerb)) ? "Verbo no infinitivo" : "Verbo flexionado")
+         : (text ? inferWordClassContextual(selectedWord, text) : inferWordClass(normalized, selectedWord)));
 
     return {
       word: normalized,
@@ -482,6 +525,16 @@
   function inferWordClassContextual(word, text, prevNorm, nextNorm) {
     const normalized = normalizeWord(word);
     const original   = word;
+
+    // Calcular vizinhos a partir do texto quando não fornecidos (P0.1 — duplicata removida)
+    if (text && (prevNorm === undefined || nextNorm === undefined)) {
+      const _tks = tokenizeWords(text);
+      const _idx = _tks.findIndex(t => normalizeWord(t) === normalized);
+      if (_idx !== -1) {
+        if (prevNorm === undefined) prevNorm = _idx > 0 ? normalizeWord(_tks[_idx - 1]) : null;
+        if (nextNorm === undefined) nextNorm = _idx < _tks.length - 1 ? normalizeWord(_tks[_idx + 1]) : null;
+      }
+    }
 
     // 1. Locuções multi-palavra no texto (prioridade máxima — ORDEM-01 passo 1)
     if (text && LOCUCOES[normalized]) {
