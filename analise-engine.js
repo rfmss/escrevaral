@@ -537,6 +537,29 @@
     // clichês de suspense
     "havia algo errado","algo estava fora do lugar","um pressentimento ruim",
     "não era coincidência","o pior estava por vir","era apenas o começo",
+    // clichês de narração literária desgastada
+    "suas mãos tremiam","a garganta fechou","lágrimas escorreram pelo rosto",
+    "o tempo parecia parar","um silêncio sepulcral","o mundo girou",
+    "perdeu a noção do tempo","a realidade veio à tona","acordou como se fosse um sonho",
+    "era uma noite escura e tempestuosa","o vento uivava","a lua cheia iluminava",
+    "seus pensamentos corriam a mil","não conseguia pensar direito","a cabeça rodava",
+    // clichês de retrato de personagem
+    "olhos cor de mel","cabelos cor de ébano","pele de porcelana",
+    "voz aveludada","sorriso enigmático","riso cristalino","olhar penetrante",
+    "era diferente das outras","nunca tinha sentido isso antes","algo nele a atraía",
+    // clichês de redação escolar e acadêmica
+    "vivemos em uma sociedade","ao longo da história","desde os primórdios",
+    "é importante ressaltar","vale destacar que","cabe salientar que",
+    "neste contexto","diante do exposto","tendo em vista o exposto",
+    "conforme mencionado anteriormente","como foi dito acima","retomando o que foi dito",
+    "em suma","sendo assim","por tudo isso","portanto conclui-se",
+    // clichês de narrativa de conflito e guerra
+    "o sangue corria","corpos espalhados pelo chão","o cheiro de pólvora",
+    "a batalha estava perdida","lutou até o fim","morreu como um herói",
+    // clichês de natureza e paisagem
+    "o pôr do sol tingiu o céu","as estrelas brilhavam","a brisa suave",
+    "o mar revolto","ondas quebravam na praia","o horizonte se abria",
+    "a floresta densa","folhas sussurvavam ao vento","pássaros cantavam",
   ];
 
   const PLEONASMOS = [
@@ -826,6 +849,21 @@
     ["sorrir um sorriso","sorrir"],["chorar o pranto","chorar"],
     ["gritar um grito","gritar"],["suspirar um suspiro","suspirar"],
     ["cair numa queda","cair"],["correr numa corrida","correr"],
+    // v745 — pleonasmos adicionais
+    ["elo de ligação","elo"],["laço de união","laço"],
+    ["planejar antecipadamente","planejar"],["prever antecipadamente","prever"],
+    ["repetir de novo","repetir"],["reiterar novamente","reiterar"],
+    ["juntar junto","juntar"],["unir em conjunto","unir"],
+    ["calar em silêncio","calar"],["gritar em voz alta","gritar"],
+    ["murmurar em voz baixa","murmurar"],["sussurrar baixinho","sussurrar"],
+    ["começar de início","começar"],["iniciar desde o começo","iniciar"],
+    ["terminar no final","terminar"],["encerrar ao final","encerrar"],
+    ["comparecer pessoalmente","comparecer"],["assistir pessoalmente","assistir"],
+    ["hemorragia de sangue","hemorragia"],["dor que dói","dor"],
+    ["surpresa inesperada","surpresa"],["acidente imprevisto","acidente"],
+    ["tragédia fatal","tragédia"],["catástrofe catastrófica","catástrofe"],
+    ["vitória vencedora","vitória"],["derrota perdedora","derrota"],
+    ["enorme gigante","enorme"],["pequenino minúsculo","minúsculo"],
   ];
 
   const NEGACOES_DUPLAS = [
