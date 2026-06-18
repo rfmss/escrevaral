@@ -1326,6 +1326,40 @@
     "cerrado":        ["savana brasileira", "bioma do Brasil central", "chapada e campo abertos"],
     "pampa":          ["campanha gaúcha", "planície sul-rio-grandense", "campo aberto do Sul"],
 
+    // v772 — sentidos, espaço, corpo e narrativa: chegando a 1000
+    "aroma":          ["perfume", "cheiro agradável", "fragrância", "odor que encanta", "o que cheira bem"],
+    "perfume":        ["aroma", "fragrância", "essência olfativa", "cheiro que fica", "memória pelo nariz"],
+    "cheiro":         ["odor", "aroma", "fragrância", "o que o nariz capta", "marca olfativa"],
+    "toque":          ["contato suave", "o ato de tocar", "pressão leve", "sensação pelo tato"],
+    "temperatura":    ["grau de calor", "estado térmico", "o que o corpo sente de quente ou frio"],
+    "transparência":  ["clareza", "visibilidade total", "sem opacidade", "o que não esconde nada"],
+    "opacidade":      ["falta de clareza", "o que não se vê através", "escuridão leve", "velamento"],
+    "canto":          ["ângulo", "recantos", "lugar escondido", "voz em melodia", "seção oculta"],
+    "borda":          ["margem", "limite lateral", "orla", "extremo do objeto", "onde termina"],
+    "centro":         ["meio", "ponto central", "onde tudo converge", "núcleo", "o coração do espaço"],
+    "relato":         ["narração", "conta", "descrição de fatos", "história contada", "testemunho"],
+    "trama":          ["enredo", "tecido da narrativa", "o que se urde", "maquinação", "história entrelaçada"],
+    "parede":         ["muro interno", "divisória", "o que separa cômodos", "superfície vertical"],
+    "teto":           ["cobertura", "o que está acima", "teto que protege", "limite superior"],
+    "chão":           ["solo", "superfície que pisamos", "onde se pisa", "fundamento literal"],
+    "deslizar":       ["escorregar", "mover-se suavemente", "fluir sem atrito", "passar de leve"],
+    "arrastar":       ["puxar pelo chão", "mover com esforço", "levar arrastando", "mover sem erguer"],
+    "pousar":         ["aterrissar", "colocar suavemente", "pôr no lugar", "aterrar devagar"],
+    "cobiça":         ["ganância", "desejo excessivo", "avidez pelo que não é seu", "apetite desmedido"],
+    "coletivo":       ["grupo", "conjunto de pessoas", "o que é de todos", "comunidade", "o plural do eu"],
+    "osso":           ["estrutura óssea", "sustentação do corpo", "o que fica depois", "o duro do ser"],
+    "nervo":          ["fio sensível", "o que conduz a dor", "tensão do corpo", "vulnerabilidade física"],
+    "músculo":        ["tecido contrátil", "força do corpo", "o que move", "fibra de movimento"],
+
+    // v772 — marco 1000: virtude, ganância, moral, ética, atitude, areia, lama
+    "virtude":        ["qualidade moral", "excelência interior", "bondade em ação", "atributo do bem"],
+    "vício":          ["hábito danoso", "tendência ao mal", "fraqueza de caráter", "o que nos domina"],
+    "ganância":       ["cobiça excessiva", "avidez", "desejo de ter mais", "apetite sem limite"],
+    "moral":          ["conjunto de valores", "ética vivida", "o que guia o comportamento", "o certo e o errado"],
+    "ética":          ["ciência do comportamento", "moral refletida", "princípio de ação", "o que deve ser"],
+    "atitude":        ["postura", "forma de agir", "jeito de se colocar", "modo de enfrentar"],
+    "areia":          ["grão do litoral", "o que escorre", "tempo que passa", "praia que se desfaz"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
