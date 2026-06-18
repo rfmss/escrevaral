@@ -1360,6 +1360,28 @@
     "atitude":        ["postura", "forma de agir", "jeito de se colocar", "modo de enfrentar"],
     "areia":          ["grão do litoral", "o que escorre", "tempo que passa", "praia que se desfaz"],
 
+    // v779 — novos campos: leitura/escrita, política, ofícios, corpo, tempo, vida
+    "leitor":         ["leitora", "apreciador", "devorador de livros", "fruidor", "intérprete"],
+    "escritura":      ["escrita", "texto escrito", "grafismo", "registro", "inscrição"],
+    "governo":        ["poder", "estado", "administração pública", "gestão pública", "regime"],
+    "lei":            ["norma", "regra", "decreto", "preceito", "código", "legislação"],
+    "direito":        ["prerrogativa", "legitimidade", "mérito", "reivindicação", "título"],
+    "trabalho":       ["labor", "atividade", "ocupação", "serviço", "empenho", "faina"],
+    "ofício":         ["arte", "habilidade", "mestria", "prática", "especialidade", "profissão"],
+    "arte":           ["criação", "expressão", "obra", "manifestação", "elaboração", "artifício"],
+    "artesanato":     ["trabalho manual", "manufatura", "obra de mão", "artesania", "feitura"],
+    "cabelo":         ["cabeleira", "fios", "mecha", "madeixa", "trança", "penteado"],
+    "século":         ["cem anos", "centúria", "época centenária", "longa era", "período secular"],
+    "milênio":        ["mil anos", "era milenar", "tempo profundo", "longo período", "era civilizatória"],
+    "trovão":         ["trovoada", "ribombo", "estrondo celeste", "bramido do céu", "troar"],
+    "visão":          ["percepção", "perspectiva", "olhar", "contemplação", "panorama"],
+    "adolescência":   ["juventude inicial", "puberdade", "idade da mudança", "mocidade", "despertar"],
+    "lealdade":       ["fidelidade", "devotamento", "constância", "comprometimento", "integridade"],
+    "trajetória":     ["caminho", "percurso", "trilha", "jornada", "curso", "itinerário"],
+    "escolha":        ["decisão", "opção", "alternativa", "deliberação", "eleição", "preferência"],
+    "descoberta":     ["achado", "revelação", "encontro inesperado", "epifania", "elucidação"],
+    "partida":        ["saída", "despedida", "abandono", "separação", "distância", "adeus"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
