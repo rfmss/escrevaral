@@ -68,6 +68,40 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v736→v741)
+
+**Baseline:** v741 — Sintaxe 99%; todos os outros engines em 100%. 0 falhas de contraste em 5 temas.
+
+**O que foi entregue neste ciclo (v736→v741):**
+
+- `analise-data.json` (v736): stopwords — duplicata `nas` removida (117→116)
+- `lexical-data.json` (v736): chave `no` renomeada para `no_narrativo` (colisão com preposição)
+- `synonym-data.js` (v737): 536→662 (+126: formas do texto, estilo/voz, formas literárias, psicologia do personagem, mundo físico, estados sensoriais, tempo/memória, ação narrativa, estados do corpo, relações, estados da alma, mundo interior, narrativa, odor/textura/sabor/gesto, crise/redenção, aceleração/lentidão)
+- `norma-data.json` (v738): adjetivos_comuns 1900→1935 (+35 sufixos -oso/-ável/-ível/-ente/-ivo), verbos_pres_reg 1883→1921 (+38 verbos literários: comunicação, movimento, cognição, emoção)
+- `decolonial-data.json` (v739): 429→462 (+33: território favela/violência, interior/atraso, quilombo/passado, Amazônia/vazio; classe pobre coitado, mérito individual, favelado; conhecimento oralidade/ausência, analfabeto/ignorante)
+- `analise-engine.js` (v740): CLIQUES_PT 867→902 (+35: ritmo narrativo, romance popular, autoajuda, redação temporal, suspense), PLEONASMOS 418→444 (+26: cognição, narrativa temporal, afirmação/negação, ação física)
+- `css/00-tokens.css + css/02-shell-navigation.css` (v741): 0 falhas de contraste WCAG AA em 5 temas; score Flesch alvorada (2.22:1→passa); fmt-scroll-arrow scriptorium (1.91:1→passa)
+
+**Estado atualizado dos engines (v741):**
+
+| Área / engine | Maturidade | Notas de estado (v741) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 902; PLEONASMOS 444 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | localLexicon 461 entradas; sinônimos 662 |
+| Decolonial / vocabulário | **100%** | 462 entradas; 9 categorias equilibradas |
+| Sintaxe | **99%** | adjetivos_comuns 1935; verbos_pres_reg 1921; formas_verbais_irr 1795; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA em 5 temas; score Flesch e fmt-scroll-arrow corrigidos |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: sinônimos 662 → 700+ (expandir estados emocionais e verbos); decolonial 462 → 500+ (linguagem/comunicação)
+3. **Refinamento visual**: auditar espaçamento, alinhamento e legibilidade nos temas escuros
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v721→v726)
 
 **Baseline:** v726 — Sintaxe 99%; todos os outros engines em 100%.

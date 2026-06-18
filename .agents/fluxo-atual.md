@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v734 (`vereda-offline-v734`, `ASSET_VERSION=20260617-adj1901`)
+**Versão atual:** v741 (`vereda-offline-v741`, `ASSET_VERSION=20260617-contraste741`)
 
 ---
 
@@ -163,6 +163,12 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v732 | verbos_pres_reg 1823→1886 (+63: movimento, cognitivos, relacionais, artísticos) |
 | v733 | decolonial 418→429 (+11: capacitismo metafórico, ciúme é amor, masculinidade tóxica) |
 | v734 | adjetivos_comuns 1829→1901 (+72: estados, cores, -ável/-ível, visuais) |
+| v736 | analise-data.json: dup `nas` removida; lexical-data.json: `no`→`no_narrativo` |
+| v737 | sinônimos 536→662 (+126: formas do texto, estilo/voz, psicologia, mundo físico, tempo/memória, ação narrativa, estados do corpo, relações, crise/redenção) |
+| v738 | adjetivos_comuns 1900→1935 (+35 seguros); verbos_pres_reg 1883→1921 (+38 literários) |
+| v739 | decolonial 429→462 (+33: território, classe, conhecimento — favela/violência, interior/atraso, quilombo, Amazônia, mérito, favelado) |
+| v740 | CLIQUES_PT 867→902 (+35: ritmo, romance popular, autoajuda, suspense); PLEONASMOS 418→444 (+26: cognição, temporal, negação, ação física) |
+| v741 | CSS: 0 falhas contraste WCAG AA em 5 temas; Flesch score alvorada (sage→ink); fmt-scroll-arrow scriptorium (primary→forest-ink) |
 
 ---
 
@@ -187,21 +193,22 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `decolonial-data.json` — 429 entradas; território (45) e classe (45) são as mais baixas; espaço para 445+
-2. `synonym-data.js` — 640 entradas; espaço para 660+ com vocabulário de espaço social e político
-3. `norma-data.json` — adjetivos_comuns 1901; espaço para 1950+ com gentílicos e étnicos literários
-4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
+1. `synonym-data.js` — 662 entradas; espaço para 700+ com estados emocionais e vocabulário político
+2. `decolonial-data.json` — 462 entradas; linguagem/comunicação tem espaço para 470+
+3. `norma-data.json` — adjetivos_comuns 1935; verbos_pres_reg 1921; espaço para 1960+/1950+
+4. Refinamento visual — espaçamento, alinhamento e legibilidade em temas escuros
+5. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---
 
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1901, formas_verbais_irr: 1797, verbos_pres_reg: 1886)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1935, formas_verbais_irr: 1795, verbos_pres_reg: 1921)
 - `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
-- `synonym-data.js` — 640 entradas
-- `lexical-data.json` — 461 entradas
-- `decolonial-data.json` — 429 entradas; 9 categorias (43–50)
+- `synonym-data.js` — 662 entradas
+- `lexical-data.json` — localLexicon 461 entradas
+- `decolonial-data.json` — 462 entradas; 9 categorias
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 
