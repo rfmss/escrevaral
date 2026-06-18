@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-17  
-**Versão atual:** v726 (`vereda-offline-v726`, `ASSET_VERSION=20260617-cli827`)
+**Versão atual:** v734 (`vereda-offline-v734`, `ASSET_VERSION=20260617-adj1901`)
 
 ---
 
@@ -155,6 +155,14 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v724 | CLIQUES_PT 773→805, PLEONASMOS 349→365 (+32+16: regionalista, periférico, resistência, memorialista) |
 | v725 | verbos_pres_reg 1701→1823 (+122: hipotetiza, julga, notifica, polui, metaboliza, imuniza…) |
 | v726 | léxico 420→447, sinônimos 598→620, CLIQUES_PT 805→827, PLEONASMOS 365→392 (+27+22+22+27) |
+| v727 | adjetivos_comuns 1688→1757, decolonial 407→418 (+69 adj; +11 povos 38→49) |
+| v728 | formas_verbais_irr 1732→1797 (+65: VALER/PERDER subj, CRER, PROVER, -ear/-iar, POLIR/ABOLIR) |
+| v729 | sinônimos 620→640 (+20: limiar, abismo, embate, dilema, metamorfose, revelação…) |
+| v730 | adjetivos_comuns 1757→1829, léxico 447→461 (+72 adj literários; +14: bloqueio, sombra, ferida…) |
+| v731 | CLIQUES_PT 827→867, PLEONASMOS 392→418 (+40+26: drama familiar, comédia rom, épico, social) |
+| v732 | verbos_pres_reg 1823→1886 (+63: movimento, cognitivos, relacionais, artísticos) |
+| v733 | decolonial 418→429 (+11: capacitismo metafórico, ciúme é amor, masculinidade tóxica) |
+| v734 | adjetivos_comuns 1829→1901 (+72: estados, cores, -ável/-ível, visuais) |
 
 ---
 
@@ -179,9 +187,9 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Próximos passos possíveis
 
-1. `norma-data.json` — adjetivos_comuns pode crescer para 1750+ (193 candidatos seguros identificados)
-2. `decolonial-data.json` — 407 entradas; povos é a categoria mais baixa (38), espaço para 420+
-3. `synonym-data.js` — 620 entradas; espaço para 640+ com mais vocabulário emocional e literário
+1. `decolonial-data.json` — 429 entradas; território (45) e classe (45) são as mais baixas; espaço para 445+
+2. `synonym-data.js` — 640 entradas; espaço para 660+ com vocabulário de espaço social e político
+3. `norma-data.json` — adjetivos_comuns 1901; espaço para 1950+ com gentílicos e étnicos literários
 4. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
 
 ---
@@ -189,11 +197,11 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 ## Arquivos-chave do estado
 
 - `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1688, formas_verbais_irr: 1732, verbos_pres_reg: 1823)
+- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1901, formas_verbais_irr: 1797, verbos_pres_reg: 1886)
 - `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
-- `synonym-data.js` — 620 entradas
-- `lexical-data.json` — 447 entradas
-- `decolonial-data.json` — 407 entradas; 9 categorias
+- `synonym-data.js` — 640 entradas
+- `lexical-data.json` — 461 entradas
+- `decolonial-data.json` — 429 entradas; 9 categorias (43–50)
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
 - `service-worker.js` — versão atual do cache
 

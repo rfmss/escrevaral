@@ -81,22 +81,22 @@ Pergunta padrao da sessao:
 - `synonym-data.js` (v726): 598→620 (+22: inspiração, bloqueio, ofício, ritmo, silêncio, calafrio, penumbra…)
 - `analise-engine.js` (v726): CLIQUES_PT 805→827, PLEONASMOS 365→392 (+22+27: juvenil, FC/fantasia, suspense, viagem; educação, tecnologia)
 
-**Estado atualizado dos engines (v726):**
+**Estado atualizado dos engines (v734):**
 
-| Área / engine | Maturidade | Notas de estado (v726) |
+| Área / engine | Maturidade | Notas de estado (v734) |
 |---|---:|---|
-| Analise geral | **100%** | CLIQUES_PT 827; PLEONASMOS 392 |
+| Analise geral | **100%** | CLIQUES_PT 867; PLEONASMOS 418 |
 | Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
 | RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
-| Lexico / Biblioteca | **100%** | 447 entradas; sinônimos 620 |
-| Decolonial / vocabulário | **100%** | 407 entradas; 9 categorias equilibradas |
-| Sintaxe | **99%** | adjetivos_comuns 1688; verbos_pres_reg 1823; formas_verbais_irr 1732; substantivos_ia 235 |
+| Lexico / Biblioteca | **100%** | 461 entradas; sinônimos 640 |
+| Decolonial / vocabulário | **100%** | 429 entradas; 9 categorias equilibradas (43–50) |
+| Sintaxe | **99%** | adjetivos_comuns 1901; verbos_pres_reg 1886; formas_verbais_irr 1797; substantivos_ia 235 |
 | Tema Alvorada / Vereda | **100%** | gw-*, syntax-tokens, craft icons — todos cobertos |
 
 **Próximas fronteiras:**
 
 1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
-2. **Dados**: adjetivos_comuns pode crescer para 1750+; decolonial para 420+ (povos categoria mais baixa)
+2. **Dados**: decolonial para 445+ (território e classe são as mais baixas em 45); sinônimos para 660+
 
 ---
 
