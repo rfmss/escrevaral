@@ -1191,6 +1191,28 @@
     "humilhar":       ["rebaixar", "envergonhar", "diminuir", "esmagar o orgulho de", "fazer sentir menos"],
     "consolar":       ["confortar", "amenizar a dor", "trazer calma", "amparo ao sofrimento", "aliviar a tristeza"],
 
+    // v762 — verbos da comunicação, relação e cosmos
+    "declarar":       ["afirmar", "enunciar", "proclamar", "anunciar", "dizer com firmeza"],
+    "concordar":      ["assentir", "estar de acordo", "aceitar", "anuir", "reconhecer que é assim"],
+    "discordar":      ["divergir", "não concordar", "ter posição contrária", "contestar", "opor-se"],
+    "assustar":       ["aterrorizar", "apavorar", "amedrontar", "dar susto", "fazer tremer"],
+    "decepcionar":    ["frustrar", "desapontar", "não corresponder à expectativa", "desiluldir"],
+    "maravilhar":     ["deslumbrar", "encantar", "deixar sem fôlego", "causar assombro", "fazer admirar"],
+    "sol":            ["astro do dia", "o que ilumina o mundo", "fonte de calor e luz", "estrela maior"],
+    "lua":            ["satélite natural", "lua cheia", "astro da noite", "farol da noite", "lua que guia"],
+    "estrela":        ["astro distante", "ponto de luz no céu", "farol do infinito", "corpo celeste"],
+    "durar":          ["persistir", "perdurar", "estender-se no tempo", "resistir ao tempo", "não acabar"],
+    "separar":        ["afastar", "distanciar", "colocar entre", "romper a união", "dividir"],
+    "unir":           ["juntar", "ligar", "aproximar", "vincular", "trazer junto"],
+    "atrair":         ["fascinar", "magnetizar", "puxar para si", "exercer atração", "encantar quem vê"],
+    "conquistar":     ["vencer", "ganhar", "alcançar após esforço", "obter pela luta", "tomar para si"],
+    "abraçar":        ["envolver nos braços", "estreitar ao corpo", "acolher com o corpo", "dar um abraço"],
+    "beijar":         ["dar um beijo", "tocar com os lábios", "sinal de afeto", "o gesto do amor"],
+    "fantasiar":      ["imaginar livremente", "sonhar acordado", "criar mundos internos", "fabular"],
+    "planejar":       ["traçar plano", "organizar com antecedência", "preparar estratégia", "projetar"],
+    "enfrentar":      ["confrontar", "encarar de frente", "não fugir de", "resistir ao embate"],
+    "recordar":       ["lembrar", "evocar", "trazer à memória", "reviver o passado", "não esquecer"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
