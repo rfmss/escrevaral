@@ -6598,6 +6598,212 @@
       "reason": "Expressão que revela como o padrão linguístico foi construído a partir da perspectiva branca, excluindo outras variedades como legítimas",
       "context": "Fala a língua de branco",
       "contextual": false
+    },
+    {
+      "avoid": "a IA não tem preconceito",
+      "alternatives": [
+        "algoritmos reproduzem padrões do dado histórico",
+        "viés algorítmico reflete o viés de quem treinou",
+        "sistema automatizado pode amplificar discriminação"
+      ],
+      "category": "conhecimento",
+      "reason": "apresenta tecnologia como neutra ignorando que dados históricos carregam desigualdades estruturais",
+      "context": "em textos sobre inteligência artificial, automação e tomada de decisão",
+      "contextual": false
+    },
+    {
+      "avoid": "dado objetivo",
+      "alternatives": [
+        "dado situado",
+        "dado coletado em contexto histórico",
+        "informação com origem e perspectiva"
+      ],
+      "category": "conhecimento",
+      "reason": "todo dado é produzido por alguém, em algum contexto, e reflete escolhas — a objetividade é uma posição, não ausência dela",
+      "context": "em textos sobre pesquisa, análise, ciência e tecnologia",
+      "contextual": false
+    },
+    {
+      "avoid": "neutralidade científica",
+      "alternatives": [
+        "rigor com reflexividade",
+        "método situado",
+        "ciência com responsabilidade social"
+      ],
+      "category": "conhecimento",
+      "reason": "a ciência é feita por pessoas com perspectivas — a neutralidade absoluta é um mito que esconde quem decide o que pesquisar",
+      "context": "em textos sobre produção científica e metodologia",
+      "contextual": false
+    },
+    {
+      "avoid": "cancelamento woke",
+      "alternatives": [
+        "responsabilização pública",
+        "resposta coletiva a conduta prejudicial",
+        "pressão social por correção de comportamento"
+      ],
+      "category": "relacoes",
+      "reason": "associa responsabilização de figuras públicas por condutas discriminatórias a histeria ou censura ideológica",
+      "context": "em textos sobre cultura digital, redes sociais e movimentos sociais",
+      "contextual": false
+    },
+    {
+      "avoid": "mimimi de minoria",
+      "alternatives": [
+        "demanda legítima de direitos",
+        "relato de experiência de discriminação",
+        "manifestação de grupo historicamente excluído"
+      ],
+      "category": "relacoes",
+      "reason": "minimiza e ridiculariza reivindicações de grupos que enfrentam discriminação sistemática",
+      "context": "em textos sobre movimentos sociais, ativismo e redes sociais",
+      "contextual": false
+    },
+    {
+      "avoid": "afro-descendente",
+      "alternatives": [
+        "negro",
+        "preta",
+        "pessoa negra",
+        "afrobrasileiro"
+      ],
+      "category": "povos",
+      "reason": "afro-descendente é eufemismo que pode distanciar a identidade em vez de afirmá-la; muitos ativistas preferem 'negro' ou 'preto'",
+      "context": "ao descrever identidade e pertencimento de pessoas negras no Brasil",
+      "contextual": true
+    },
+    {
+      "avoid": "miscigenação como harmonia racial",
+      "alternatives": [
+        "mistura racial em contexto de desigualdade",
+        "colonização e violência como base demográfica",
+        "diversidade com história de opressão"
+      ],
+      "category": "povos",
+      "reason": "o mito da democracia racial apaga a hierarquia racial que estrutura a sociedade brasileira",
+      "context": "em textos sobre formação da identidade brasileira e relações raciais",
+      "contextual": false
+    },
+    {
+      "avoid": "conteúdo inclusivo como marketing",
+      "alternatives": [
+        "representação autêntica",
+        "inclusão estrutural",
+        "diversidade que não é só imagem"
+      ],
+      "category": "estetica",
+      "reason": "tratar representação diversa como estratégia de marca esvazia seu significado e transforma identidade em produto",
+      "context": "em textos sobre publicidade, comunicação e representação midiática",
+      "contextual": false
+    },
+    {
+      "avoid": "sotaque neutro",
+      "alternatives": [
+        "sotaque padrão",
+        "pronúncia associada ao eixo Rio-São Paulo",
+        "norma entonacional de prestígio"
+      ],
+      "category": "estetica",
+      "reason": "não existe sotaque neutro — o que se chama de neutro é o sotaque de um centro de poder específico",
+      "context": "em textos sobre comunicação, mídia e variedades do português",
+      "contextual": false
+    },
+    {
+      "avoid": "área de risco",
+      "alternatives": [
+        "comunidade periférica",
+        "território com ausência de serviços públicos",
+        "região com vulnerabilidade social"
+      ],
+      "category": "territorio",
+      "reason": "associa território à criminalidade em vez de desigualdade, reforçando estigma sobre moradores",
+      "context": "em textos sobre segurança pública, urbanismo e desigualdade",
+      "contextual": false
+    },
+    {
+      "avoid": "linguagem neutra como modismo",
+      "alternatives": [
+        "linguagem inclusiva de gênero",
+        "tentativa de incluir pessoas não-binárias na língua",
+        "adaptação da língua a novas identidades"
+      ],
+      "category": "linguagem",
+      "reason": "enquadrar inclusão de gênero na língua como moda ignora que é uma demanda de pessoas que se sentem excluídas pela gramática binária",
+      "context": "em textos sobre língua, identidade e diversidade",
+      "contextual": false
+    },
+    {
+      "avoid": "empreendedorismo como saída da pobreza",
+      "alternatives": [
+        "empreendedorismo como estratégia de sobrevivência",
+        "trabalho autônomo em contexto de exclusão do mercado formal",
+        "informalização do trabalho"
+      ],
+      "category": "classe",
+      "reason": "responsabiliza individualmente quem é empurrado ao empreendedorismo por falta de opções, apagando estruturas econômicas",
+      "context": "em textos sobre trabalho, economia e desigualdade social",
+      "contextual": false
+    },
+    {
+      "avoid": "deficiente superador",
+      "alternatives": [
+        "pessoa com deficiência que vive sua vida",
+        "atleta paralímpico",
+        "profissional com deficiência"
+      ],
+      "category": "deficiencia",
+      "reason": "o trope da superação coloca pessoas com deficiência como responsáveis por provar valor e inspira quem não tem deficiência, não as apoia",
+      "context": "em textos sobre pessoas com deficiência, esporte e trabalho",
+      "contextual": false
+    },
+    {
+      "avoid": "futuro tecnológico inevitável",
+      "alternatives": [
+        "trajetória tecnológica que pode ser questionada",
+        "escolhas políticas sobre automação",
+        "modelo tecnológico contestável"
+      ],
+      "category": "conhecimento",
+      "reason": "a inevitabilidade tecnológica apaga as escolhas humanas, políticas e econômicas por trás de cada tecnologia adotada",
+      "context": "em textos sobre futuro, tecnologia e trabalho",
+      "contextual": false
+    },
+    {
+      "avoid": "arte periférica como projeto social",
+      "alternatives": [
+        "arte periférica como arte",
+        "expressão cultural da periferia",
+        "produção artística de comunidades periféricas"
+      ],
+      "category": "estetica",
+      "reason": "enquadrar arte periférica como 'projeto social' a separa do campo da arte legítima e a reduz a instrumento de assistência",
+      "context": "em textos sobre arte, cultura e periferias urbanas",
+      "contextual": false
+    },
+    {
+      "avoid": "índio genérico",
+      "alternatives": [
+        "povo indígena específico",
+        "Yanomami",
+        "Guarani",
+        "comunidade indígena com nome próprio"
+      ],
+      "category": "povos",
+      "reason": "homogeneiza centenas de povos com línguas, cosmologias e histórias distintas em uma única categoria genérica",
+      "context": "em textos sobre povos originários, meio ambiente e direitos",
+      "contextual": false
+    },
+    {
+      "avoid": "mulher que sabe demais",
+      "alternatives": [
+        "mulher com voz",
+        "mulher que se manifesta",
+        "mulher que exerce autoridade"
+      ],
+      "category": "genero",
+      "reason": "enquadra o conhecimento feminino como excesso ou desvio, associando saber à perda de feminilidade ou ameaça social",
+      "context": "em textos sobre personagens femininas, liderança e relações de gênero",
+      "contextual": false
     }
   ]
 }
