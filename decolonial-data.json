@@ -4724,6 +4724,140 @@
       "reason": "objetividade e imparcialidade são sempre situadas — a alegação de neutralidade oculta perspectivas dominantes",
       "context": "jornalismo, acadêmia, ciência",
       "contextual": true
+    },
+    {
+      "avoid": "aborígene brasileiro",
+      "alternatives": [
+        "povo indígena",
+        "povo originário",
+        "nação indígena"
+      ],
+      "category": "povos",
+      "reason": "aborígene é termo australiano; aplicado ao Brasil, apaga a diversidade de mais de 200 povos",
+      "context": "Usar o nome específico da nação sempre que possível.",
+      "contextual": false
+    },
+    {
+      "avoid": "negro retinto",
+      "alternatives": [
+        "pessoa negra de pele escura",
+        "pele escura"
+      ],
+      "category": "povos",
+      "reason": "adjetivo intensificador usado para reforçar hierarquia de cor dentro da negritude",
+      "context": "Pele escura não é qualificativo negativo; a ênfase depreciatória deve ser evitada.",
+      "contextual": false
+    },
+    {
+      "avoid": "africano genérico",
+      "alternatives": [
+        "nigeriano",
+        "etíope",
+        "congolês",
+        "angolano",
+        "moçambicano"
+      ],
+      "category": "povos",
+      "reason": "África tem 54 países e milhares de etnias; tratar como bloco homogêneo apaga diversidade",
+      "context": "Usar o país ou povo específico quando a narrativa o identifica.",
+      "contextual": false
+    },
+    {
+      "avoid": "povo cigano nômade",
+      "alternatives": [
+        "povo Romani",
+        "povo Calon",
+        "comunidade cigana"
+      ],
+      "category": "povos",
+      "reason": "associação automática a nomadismo reforça estereótipo; muitas comunidades são sedentárias",
+      "context": "Romani é o termo preferido internacionalmente; Calon é o grupo predominante no Brasil.",
+      "contextual": true
+    },
+    {
+      "avoid": "quilombola atrasado",
+      "alternatives": [
+        "comunidade quilombola",
+        "povo quilombola",
+        "remanescente quilombola"
+      ],
+      "category": "povos",
+      "reason": "qualificativo 'atrasado' nega a riqueza cultural e a resistência histórica das comunidades",
+      "context": "Quilombos são patrimônios culturais; a palavra por si só não precisa de adjetivo depreciativo.",
+      "contextual": false
+    },
+    {
+      "avoid": "mestiço como degeneração",
+      "alternatives": [
+        "pessoa de ascendência mista",
+        "descendente de múltiplas origens"
+      ],
+      "category": "povos",
+      "reason": "discurso eugenista do século XIX apresentava mestiçagem como 'enfraquecimento racial'",
+      "context": "Narrativas históricas podem abordar o discurso sem reproduzi-lo sem distanciamento crítico.",
+      "contextual": true
+    },
+    {
+      "avoid": "sangue impuro",
+      "alternatives": [
+        "origem mista",
+        "ancestralidade diversa",
+        "ascendência plural"
+      ],
+      "category": "povos",
+      "reason": "pureza de sangue é conceito colonial que hierarquiza origens e legitimou limpeza étnica",
+      "context": "Em contexto histórico ou de fantasia, o termo pode aparecer como visão de personagem preconceituoso.",
+      "contextual": true
+    },
+    {
+      "avoid": "etnia menor",
+      "alternatives": [
+        "povo minoritário",
+        "comunidade em situação de minoria",
+        "grupo étnico específico"
+      ],
+      "category": "povos",
+      "reason": "'menor' implica inferioridade ou irrelevância; minorias numéricas têm dignidade e direitos iguais",
+      "context": "Preferir 'povo em situação de minoria' para marcar estrutura social, não essência do grupo.",
+      "contextual": false
+    },
+    {
+      "avoid": "selvagem como elogio",
+      "alternatives": [
+        "autêntico",
+        "genuíno",
+        "em contato com a natureza",
+        "de cultura não ocidental"
+      ],
+      "category": "povos",
+      "reason": "mesmo quando elogioso, 'selvagem' exotifica e nega agência cultural aos povos não ocidentais",
+      "context": "O 'bom selvagem' é romantização colonial tanto quanto o 'selvagem perigoso'.",
+      "contextual": false
+    },
+    {
+      "avoid": "tribo urbana",
+      "alternatives": [
+        "grupo cultural",
+        "movimento cultural",
+        "comunidade de estilo"
+      ],
+      "category": "povos",
+      "reason": "transfere vocabulário colonial ('tribo') para grupos urbanos, banalizando o termo e reforçando exotismo",
+      "context": "Grupos como punks, goths ou funkeiros têm identidade cultural própria sem precisar de metáfora tribal.",
+      "contextual": false
+    },
+    {
+      "avoid": "ritmo africano",
+      "alternatives": [
+        "música afro-brasileira",
+        "ritmo de matriz africana",
+        "percussão iorubá",
+        "batida do candomblé"
+      ],
+      "category": "povos",
+      "reason": "África tem centenas de tradições musicais distintas; generalizar apaga origem e ancestralidade específicas",
+      "context": "Nomear a origem específica valoriza a diversidade: jêjê, nagô, banto, fon.",
+      "contextual": false
     }
   ]
 }
