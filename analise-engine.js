@@ -499,6 +499,27 @@
     "uma viagem que mudaria minha vida para sempre","eu me perdi para me encontrar",
     "o caminho era mais importante que o destino","cada lugar guardava um segredo",
     "o mundo é grande demais para ficar parado","saí sem saber quando voltaria",
+    // clichês de drama familiar e relacional
+    "nossa família nunca foi perfeita","sempre tivemos nossas diferenças",
+    "debaixo da mesma luz crescemos diferentes","o sangue chama mas nem sempre une",
+    "pai e filho que nunca se entenderam","a mãe que deu tudo e não recebeu nada",
+    "precisei ir embora para entender minha origem","só na perda percebemos o valor",
+    // clichês de comédia romântica
+    "no momento menos esperado o amor aparece","ele não era o tipo de pessoa que eu imaginava",
+    "apostamos que nos odiaríamos para sempre","o destino conspirava para nos juntar",
+    "uma virada na última página do destino","não era o momento certo mas o certo nunca chega",
+    // clichês de narrativa policial e noir
+    "a cidade nunca dorme e nem eu","todos têm algo a esconder",
+    "o crime não compensa mas compensa se não for pego","um deslize e tudo desmorona",
+    "a evidência mais óbvia era a mais difícil de ver","quem parecia inocente era o culpado",
+    // clichês de narrativa épica e de heróis
+    "a profecia dizia que um dia viria o escolhido","nasceu para salvar o mundo",
+    "a batalha final entre o bem e o mal","o sacrifício do herói redime todos",
+    "o poder corrompe mas o poder absoluto corrompe absolutamente","a escuridão antes do amanhecer",
+    // clichês de narrativa realista e social
+    "a pobreza não é destino mas parece","nasce pobre morre pobre no Brasil",
+    "o sistema foi feito para esmagar quem está embaixo","meritocracia é mentira",
+    "trabalhou a vida toda e não tem nada","o sonho americano tem endereço de rico",
   ];
 
   const PLEONASMOS = [
@@ -755,6 +776,22 @@
     ["primeiro de tudo","primeiro"],["antes de mais nada","antes de tudo"],
     ["no final das contas","no final"],["ao longo do tempo","com o tempo"],
     ["desde sempre","sempre"],["até o fim do fim","até o fim"],
+    // redundâncias de narrativa e texto literário
+    ["personagem principal protagonista","protagonista"],["clímax culminante","clímax"],
+    ["desfecho final","desfecho"],["epílogo conclusivo","epílogo"],
+    ["narrador que narra","narrador"],["diálogo falado","diálogo"],
+    ["conflito em confronto","conflito"],["trama enredada","trama"],
+    ["metáfora figurativa","metáfora"],["símbolo que simboliza","símbolo"],
+    // redundâncias de discurso e argumentação
+    ["argumento argumentativo","argumento"],["tese que defendo","tese"],
+    ["conclusão final do raciocínio","conclusão"],["premissa de base","premissa"],
+    ["ponto de vista pessoal","ponto de vista"],["opinião que tenho","opinião"],
+    ["análise analítica","análise"],["síntese resumida","síntese"],
+    // redundâncias de emoção e sentimento
+    ["sentimento que sinto","sentimento"],["emoção emocionante","emoção"],
+    ["amor que amo","amor"],["medo que temo","medo"],
+    ["tristeza triste","tristeza"],["alegria alegre","alegria"],
+    ["saudade de algo saudoso","saudade"],["raiva que me enraivece","raiva"],
   ];
 
   const NEGACOES_DUPLAS = [
