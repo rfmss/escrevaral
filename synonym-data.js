@@ -1025,6 +1025,22 @@
     "subtexto":      ["subentendido", "camada oculta", "entrelinhas", "dito não-dito", "insinuação"],
     "verossimilhança":["credibilidade", "coerência", "realismo", "autenticidade", "plausibilidade"],
 
+    // v743 — Nascentes EN→ER: ternura, funeral, morte, mente, errância
+    "ternura":        ["enternecimento", "afeto", "meiguice", "delicadeza", "doçura", "carinho gentil"],
+    "enternecimento": ["ternura", "comoção suave", "abalo afetivo", "emoção desperta", "sensibilidade"],
+    "funeral":        ["enterro", "enterramento", "exéquias", "saimento", "cortejo fúnebre", "velório"],
+    "enterrar":       ["inumar", "sepultar", "dar sepultura", "pôr na terra", "esconder na terra"],
+    "sepultar":       ["enterrar", "inumar", "dar sepultura", "depositar no jazigo", "guardar na cova"],
+    "imenso":         ["enorme", "vastíssimo", "incomensurável", "descomunal", "sem medida", "desmesurado"],
+    "inteligência":   ["entendimento", "mente", "intelecto", "perspicácia", "agudeza", "acuidade"],
+    "entendimento":   ["compreensão", "inteligência", "percepção", "raciocínio", "clareza mental", "discernimento"],
+    "exprimir":       ["enunciar", "manifestar", "exteriorizar", "transmitir", "verbalizar", "dizer com força"],
+    "errabundo":      ["errante", "vagante", "andarilho", "itinerante", "sem rumo", "nômade"],
+    "talento":        ["dom", "aptidão", "engenho", "gênio", "habilidade inata", "capacidade especial"],
+    "gênio":          ["talento", "dom natural", "inspiração singular", "aptidão criadora", "engenho", "visionário"],
+    "enganar":        ["iludir", "ludibriar", "enredar", "dissimular", "fabulosear", "induzir ao erro"],
+    "vastidão":       ["imensidão", "amplitude", "extensão", "largura", "espaço aberto", "horizonte largo"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
