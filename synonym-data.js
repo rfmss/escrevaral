@@ -1071,6 +1071,21 @@
     "rubro":          ["vermelho intenso", "carmesim", "encarnado vivo", "cor de brasa", "escarlate", "purpúreo"],
     "reserva":        ["discrição", "cautela no falar", "reticência", "guardar em silêncio", "não revelar tudo"],
 
+    // v748 — Nascentes ES: vagar, treva, horrível, onda, fome, furto, estrofe...
+    "vagar":          ["errar sem destino", "perambular", "deambular", "andar à toa", "circular sem rumo", "derivar"],
+    "treva":          ["escuridão absoluta", "breu total", "noite sem luz", "obscuridade densa", "negro absoluto"],
+    "horrível":       ["horroroso", "horrendo", "pavoroso", "medonho", "terrível", "aterrador"],
+    "pavoroso":       ["medonho", "horrível", "terrível", "que infunde pavor", "aterrador", "horrendo"],
+    "onda":           ["vaga", "mareta", "escarcéu", "ondulação", "vagas do mar", "movimento das águas"],
+    "fome":           ["esfaimado", "famélico", "faminto", "necessidade insaciável", "apetite voraz", "carência"],
+    "obscuridade":    ["penumbra densa", "falta de clareza", "opacidade", "sombra mental", "escuridão das ideias"],
+    "furto":          ["roubo", "rapina", "ladroeira", "subtração", "pilhagem", "latrocínio"],
+    "roubo":          ["furto", "rapina", "pilhagem", "latrocínio", "subtração violenta", "assalto"],
+    "estrofe":        ["estância", "grupo de versos", "unidade poética", "quadra", "segmento do poema", "sextilha"],
+    "essencial":      ["inerente", "intrínseco", "da própria natureza", "fundamental", "inseparável do ser"],
+    "voluntário":     ["espontâneo", "livre", "por vontade própria", "intencional", "não forçado", "deliberado"],
+    "esquivar":       ["evitar", "desviar-se", "fugir habilmente", "evadir", "escafeder-se", "não encarar"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
