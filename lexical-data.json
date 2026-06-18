@@ -2999,6 +2999,174 @@
       "className": "Substantivo",
       "field": "Narrativa — a quem o texto fala",
       "note": "Todo texto pressupõe um leitor. Saber para quem você escreve muda o que você diz e o que deixa implícito."
+    },
+    "distancia_narrativa": {
+      "label": "distância narrativa",
+      "className": "Substantivo",
+      "field": "Narrativa — proximidade com o personagem",
+      "note": "Distância zero: acesso total à mente. Distância máxima: observador externo. A escolha determina o que o leitor sente."
+    },
+    "tempo_narrativo": {
+      "label": "tempo narrativo",
+      "className": "Substantivo",
+      "field": "Narrativa — duração e ritmo",
+      "note": "Tempo da história (o que acontece) vs. tempo do discurso (como é contado). Compressão e expansão controlam tensão."
+    },
+    "detalhe_concreto": {
+      "label": "detalhe concreto",
+      "className": "Substantivo",
+      "field": "Escrita — especificidade sensorial",
+      "note": "Um detalhe concreto vale por três abstrações. 'Cheirava a queijo velho' é uma cena; 'cheirava mal' é uma nota."
+    },
+    "ponto_de_virada": {
+      "label": "ponto de virada",
+      "className": "Substantivo",
+      "field": "Narrativa — estrutura de mudança",
+      "note": "O momento em que a situação muda de estado irreversivelmente. Depois do ponto de virada, voltar ao início é impossível."
+    },
+    "lacuna_narrativa": {
+      "label": "lacuna narrativa",
+      "className": "Substantivo",
+      "field": "Narrativa — silêncio estrutural",
+      "note": "O que o texto deliberadamente não diz. O leitor preenche lacunas com sua experiência — isso cria envolvimento."
+    },
+    "cena_de_fundo": {
+      "label": "cena de fundo",
+      "className": "Substantivo",
+      "field": "Narrativa — contexto implícito",
+      "note": "História que existe por trás da cena atual. Não precisa ser narrada; sua presença implícita sustenta o que é mostrado."
+    },
+    "linha_de_desejo": {
+      "label": "linha de desejo",
+      "className": "Substantivo",
+      "field": "Narrativa — motivação",
+      "note": "O que o personagem quer em cada cena — diferente do que precisa (tema). A tensão entre desejo e necessidade cria conflito."
+    },
+    "ritmo_semantico": {
+      "label": "ritmo semântico",
+      "className": "Substantivo",
+      "field": "Poesia — padrão de sentido",
+      "note": "O ritmo criado pelo conteúdo das palavras, não apenas pelo som. Termos pesados desaceleram; termos leves aceleram."
+    },
+    "imagem_sensorial": {
+      "label": "imagem sensorial",
+      "className": "Substantivo",
+      "field": "Poesia/Prosa — percepção concreta",
+      "note": "Imagem que aciona um dos cinco sentidos. Não toda imagem é visual; olfativa e tátil são as mais subestimadas."
+    },
+    "postura_lirica": {
+      "label": "postura lírica",
+      "className": "Substantivo",
+      "field": "Poesia — tom do eu poético",
+      "note": "A atitude do sujeito lírico diante do tema: contemplativa, irônica, elegíaca, exaltada. Define o registro do poema."
+    },
+    "verso_branco": {
+      "label": "verso branco",
+      "className": "Substantivo",
+      "field": "Poesia — forma sem rima",
+      "note": "Verso com metro regular mas sem rima. Diferente do verso livre, que também dispensa o metro. Camões usava decassílabos brancos."
+    },
+    "economia_de_meios": {
+      "label": "economia de meios",
+      "className": "Substantivo",
+      "field": "Estilo — precisão expressiva",
+      "note": "A arte de dizer o máximo com o mínimo. Cada palavra que pode ser removida sem perda deve ser removida."
+    },
+    "registro_coloquial": {
+      "label": "registro coloquial",
+      "className": "Substantivo",
+      "field": "Estilo — língua cotidiana",
+      "note": "A fala espontânea, informal, com contrações e gírias. No diálogo literário, o coloquial autentica sem caricaturar."
+    },
+    "estilo_indireto_livre": {
+      "label": "estilo indireto livre",
+      "className": "Substantivo",
+      "field": "Narrativa — fusão de vozes",
+      "note": "Fusão da voz do narrador com a do personagem, sem marcadores de discurso direto. Machado de Assis e Clarice o dominam."
+    },
+    "literatura_de_cordel": {
+      "label": "literatura de cordel",
+      "className": "Substantivo",
+      "field": "Literatura brasileira — tradição oral nordestina",
+      "note": "Poesia popular impressa em folhetos, com métrica rigorosa e rima consonante. Tradição viva no Nordeste, não apenas folclore."
+    },
+    "regionalismo_literario": {
+      "label": "regionalismo literário",
+      "className": "Substantivo",
+      "field": "Literatura brasileira — corrente estética",
+      "note": "Corrente que coloca o lugar como sujeito, não como cenário. Guimarães Rosa transcende o rótulo ao fazer do sertão cosmos."
+    },
+    "modernismo_brasileiro": {
+      "label": "modernismo brasileiro",
+      "className": "Substantivo",
+      "field": "Literatura brasileira — ruptura de 1922",
+      "note": "1922 como ruptura: língua cotidiana, tema nacional, vanguarda europeia adaptada. Oswald, Mário, Manuel — cada um abre caminho diferente."
+    },
+    "rascunho_zero": {
+      "label": "rascunho zero",
+      "className": "Substantivo",
+      "field": "Processo criativo — escrita sem censura",
+      "note": "A escrita livre antes do primeiro rascunho. Não é para ser lido; é para desbloquear. Anne Lamott chama de 'shitty first draft'."
+    },
+    "escrita_por_acumulacao": {
+      "label": "escrita por acumulação",
+      "className": "Substantivo",
+      "field": "Processo criativo — estratégia de produção",
+      "note": "Adicionar cenas, imagens e capítulos sem preocupação com ordem. A estrutura emerge da massa acumulada."
+    },
+    "revisao_estrutural": {
+      "label": "revisão estrutural",
+      "className": "Substantivo",
+      "field": "Processo criativo — edição de grande escala",
+      "note": "Revisão que move cenas, muda perspectiva, reordena a cronologia. Diferente de revisão de linha, que trabalha frase a frase."
+    },
+    "traco_caracterizador": {
+      "label": "traço caracterizador",
+      "className": "Substantivo",
+      "field": "Personagem — marca individual",
+      "note": "Detalhe físico, hábito ou fala que torna o personagem reconhecível. Deve surgir do interior para o exterior."
+    },
+    "contradição_de_personagem": {
+      "label": "contradição de personagem",
+      "className": "Substantivo",
+      "field": "Personagem — complexidade interna",
+      "note": "Personagens reais se contradizem. A contradição não é falha narrativa — é onde a psicologia mora."
+    },
+    "arco_de_personagem": {
+      "label": "arco de personagem",
+      "className": "Substantivo",
+      "field": "Narrativa — transformação",
+      "note": "A mudança interna do personagem do início ao fim. Nem todo personagem precisa mudar — o arco plano também é escolha."
+    },
+    "leitor_resistente": {
+      "label": "leitor resistente",
+      "className": "Substantivo",
+      "field": "Teoria literária — leitura crítica",
+      "note": "Leitor que questiona o texto em vez de aceitar sua ideologia passivamente. Necessário especialmente em textos canônicos."
+    },
+    "horizonte_de_expectativa": {
+      "label": "horizonte de expectativa",
+      "className": "Substantivo",
+      "field": "Teoria literária — recepção",
+      "note": "O que o leitor espera antes de ler, baseado em gênero, título e contexto. Romper o horizonte é condição de novidade estética."
+    },
+    "pacto_narrativo": {
+      "label": "pacto narrativo",
+      "className": "Substantivo",
+      "field": "Narrativa — contrato implícito",
+      "note": "O acordo tácito entre texto e leitor sobre as regras do jogo: o que é real, quem narra, quando confiar. Quebrar o pacto exige consciência."
+    },
+    "subversao_generica": {
+      "label": "subversão genérica",
+      "className": "Substantivo",
+      "field": "Teoria literária — gênero literário",
+      "note": "Usar as convenções de um gênero para criticá-las de dentro. A paródia é uma forma; o pastiche, outra."
+    },
+    "intertextualidade": {
+      "label": "intertextualidade",
+      "className": "Substantivo",
+      "field": "Teoria literária — diálogo entre textos",
+      "note": "Todo texto é tecido de outros textos. A citação explícita é intertextualidade visível; o eco implícito é a mais criativa."
     }
   },
   "functionWords": {

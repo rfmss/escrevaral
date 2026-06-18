@@ -1364,6 +1364,18 @@
     "adolescência":   ["juventude inicial", "puberdade", "idade da mudança", "mocidade", "despertar"],
     "trajetória":     ["caminho", "percurso", "trilha", "jornada", "curso", "itinerário"],
 
+    // craft literário e emoção narrativa
+    "forma":         ["estrutura", "molde", "configuração", "arquitetura", "formato", "gênero", "composição"],
+    "tema":          ["assunto", "motivo central", "fio condutor", "questão", "núcleo temático", "preocupação", "o que o texto pergunta"],
+    "imagem":        ["figura", "metáfora visual", "representação", "ícone", "símbolo", "cena mental", "quadro"],
+    "transição":     ["passagem", "corte", "elipse", "ligação", "conexão entre cenas", "salto temporal", "ponte narrativa"],
+    "humor":         ["ironia", "leveza", "wit", "graça", "comicidade", "sarcasmo", "deboche literário"],
+    "tormento":      ["sofrimento interior", "angústia", "tormenta", "dor psíquica", "martírio", "dilaceração", "peso que não passa"],
+    "suspenso":      ["tensão", "expectativa", "incerteza mantida", "suspense", "fio que pode se romper", "dúvida prolongada"],
+    "catalisador":   ["gatilho", "elemento que deflagra", "impulso inicial", "o que põe tudo em movimento", "fator desencadeador"],
+    "subversao":     ["inversão", "ruptura", "reviravolta", "contestação", "o avesso da expectativa"],
+    "anacronismo":   ["deslocamento temporal", "anacronia", "presença do passado no presente", "fora do tempo"],
+    "paratexto":     ["título", "epígrafe", "prefácio", "dedicatória", "o que cerca o texto", "entorno da obra"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
