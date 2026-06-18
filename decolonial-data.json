@@ -5780,6 +5780,212 @@
       "reason": "Naturaliza divisão sexual do trabalho doméstico como traço feminino, apagando o caráter social dessa atribuição.",
       "context": "narrativa familiar, personagem feminino, diálogo doméstico",
       "contextual": false
+    },
+    {
+      "avoid": "brasileiro não sabe português",
+      "alternatives": [
+        "o português brasileiro tem regras próprias",
+        "as variedades do português são igualmente válidas"
+      ],
+      "category": "linguagem",
+      "reason": "reproduz o mito colonial de que o português europeu é superior e o brasileiro é desvio",
+      "context": "críticas à fala ou escrita brasileira",
+      "contextual": false
+    },
+    {
+      "avoid": "língua está se perdendo",
+      "alternatives": [
+        "a língua está mudando",
+        "línguas evoluem naturalmente"
+      ],
+      "category": "linguagem",
+      "reason": "enquadra mudança linguística como decadência, ignorando que toda língua muda ao longo do tempo",
+      "context": "comentários sobre neologismos ou variações",
+      "contextual": true
+    },
+    {
+      "avoid": "falar como analfabeto",
+      "alternatives": [
+        "usar outra variedade do português",
+        "falar diferente do padrão escolar"
+      ],
+      "category": "linguagem",
+      "reason": "associa fala popular a falha intelectual, reforçando exclusão por variedade linguística",
+      "context": "depreciação da fala de pessoas sem escolaridade formal",
+      "contextual": false
+    },
+    {
+      "avoid": "língua certa",
+      "alternatives": [
+        "norma padrão",
+        "variedade de prestígio",
+        "registro formal"
+      ],
+      "category": "linguagem",
+      "reason": "não há língua certa ou errada; o conceito serve para hierarquizar falantes por classe e origem",
+      "context": "julgamento de fala ou escrita",
+      "contextual": false
+    },
+    {
+      "avoid": "purismo linguístico",
+      "alternatives": [
+        "defesa da norma padrão",
+        "conservadorismo gramatical"
+      ],
+      "category": "linguagem",
+      "reason": "esconde preconceito de classe e origem regional sob aparência de cuidado com a língua",
+      "context": "debates sobre uso correto da língua",
+      "contextual": true
+    },
+    {
+      "avoid": "sem instrução fala errado",
+      "alternatives": [
+        "sem acesso à norma escolar",
+        "usa outra variedade linguística"
+      ],
+      "category": "classe",
+      "reason": "conflate falta de escolarização com incapacidade de comunicar, naturalizando exclusão",
+      "context": "julgamento de pessoas pela fala",
+      "contextual": false
+    },
+    {
+      "avoid": "origem humilde",
+      "alternatives": [
+        "de família trabalhadora",
+        "de contexto de baixa renda"
+      ],
+      "category": "classe",
+      "reason": "humilde como eufemismo condescendente que implica inferioridade natural",
+      "context": "descrição do background de pessoas pobres",
+      "contextual": true
+    },
+    {
+      "avoid": "povo sem ambição",
+      "alternatives": [
+        "povo com outros valores",
+        "comunidade com outras prioridades"
+      ],
+      "category": "classe",
+      "reason": "responsabiliza o povo pela pobreza estrutural, apagando desigualdade histórica",
+      "context": "comentários sobre pobreza ou inação política",
+      "contextual": false
+    },
+    {
+      "avoid": "faxineira como ameaça de rebaixamento",
+      "alternatives": [
+        "trabalhadora de limpeza",
+        "profissional de serviços domésticos"
+      ],
+      "category": "classe",
+      "reason": "usa profissão honesta como insulto ou ameaça de queda social",
+      "context": "referências pejorativas a trabalho doméstico",
+      "contextual": true
+    },
+    {
+      "avoid": "gente do campo como ignorante",
+      "alternatives": [
+        "trabalhador rural",
+        "pessoa do campo",
+        "campesino"
+      ],
+      "category": "classe",
+      "reason": "apaga o conhecimento e a cultura das populações rurais sob estereótipo de ignorância",
+      "context": "comparações entre campo e cidade",
+      "contextual": false
+    },
+    {
+      "avoid": "chorona",
+      "alternatives": [
+        "sensível",
+        "que expressa sentimentos",
+        "emotiva"
+      ],
+      "category": "genero",
+      "reason": "usa emoção como fraqueza e como atributo negativo especialmente aplicado a mulheres",
+      "context": "críticas a mulheres que expressam sentimentos",
+      "contextual": false
+    },
+    {
+      "avoid": "muito emotiva para liderar",
+      "alternatives": [
+        "lidera com empatia",
+        "considera a dimensão humana"
+      ],
+      "category": "genero",
+      "reason": "usa emoção como argumento contra liderança feminina, naturalizando sexismo institucional",
+      "context": "avaliações de competência de mulheres em posições de liderança",
+      "contextual": false
+    },
+    {
+      "avoid": "mulher de verdade",
+      "alternatives": [
+        "mulher",
+        "pessoa"
+      ],
+      "category": "genero",
+      "reason": "define autenticidade feminina por conformidade a papéis tradicionais, excluindo quem não os segue",
+      "context": "definições normativas do que é ser mulher",
+      "contextual": false
+    },
+    {
+      "avoid": "deu pra louca",
+      "alternatives": [
+        "está muito alterada",
+        "perdeu o controle",
+        "está perturbada"
+      ],
+      "category": "genero",
+      "reason": "usa loucura como invalidação específica de mulheres fora dos padrões esperados de comportamento",
+      "context": "comportamentos de mulheres que desafiam expectativas",
+      "contextual": false
+    },
+    {
+      "avoid": "Norte e Nordeste como problema",
+      "alternatives": [
+        "Norte e Nordeste do Brasil",
+        "regiões Norte e Nordeste"
+      ],
+      "category": "territorio",
+      "reason": "enquadra regiões inteiras como obstáculo ao desenvolvimento, apagando sua riqueza e diversidade",
+      "context": "debates sobre desenvolvimento regional ou migração interna",
+      "contextual": true
+    },
+    {
+      "avoid": "do mato",
+      "alternatives": [
+        "do campo",
+        "da roça",
+        "do interior",
+        "da floresta"
+      ],
+      "category": "territorio",
+      "reason": "usado como depreciativo para pessoas e culturas rurais ou interioranas",
+      "context": "referências a pessoas de origem rural ou interiorana",
+      "contextual": true
+    },
+    {
+      "avoid": "cultura de periferia",
+      "alternatives": [
+        "cultura periférica",
+        "produção cultural das periferias",
+        "arte das beiras"
+      ],
+      "category": "territorio",
+      "reason": "trata produção cultural das periferias como menor ou exótica, não como produção legítima",
+      "context": "classificação de arte e cultura por origem geográfica urbana",
+      "contextual": true
+    },
+    {
+      "avoid": "acento do interior",
+      "alternatives": [
+        "variedade regional",
+        "sotaque de outra região",
+        "modo de falar regional"
+      ],
+      "category": "territorio",
+      "reason": "usa variedade fonética regional como marcador de inferioridade social e intelectual",
+      "context": "referências ao sotaque de pessoas de cidades do interior",
+      "contextual": true
     }
   ]
 }
