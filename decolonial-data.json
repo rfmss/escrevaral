@@ -5280,6 +5280,506 @@
       "reason": "'terceiro mundo intelectual' associa posição geopolítica à inferioridade cognitiva",
       "context": "geopolítica do conhecimento",
       "contextual": false
+    },
+    {
+      "avoid": "homem de verdade",
+      "alternatives": [
+        "pessoa íntegra",
+        "homem com caráter",
+        "pessoa com valores"
+      ],
+      "category": "genero",
+      "reason": "Associa masculinidade a comportamentos rígidos e heteronormativos, excluindo outros modos de ser homem.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "macho alfa",
+      "alternatives": [
+        "pessoa confiante",
+        "liderança assertiva",
+        "homem seguro de si"
+      ],
+      "category": "genero",
+      "reason": "Naturaliza hierarquia de dominação masculina e comportamento de controle como atributo positivo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "homem não chora",
+      "alternatives": [
+        "emoção não tem gênero",
+        "homens também sentem",
+        "expressão emocional legítima"
+      ],
+      "category": "genero",
+      "reason": "Reforça supressão emocional masculina, associada à crise de saúde mental entre homens.",
+      "context": "narrativa, personagem masculino, diálogo",
+      "contextual": false
+    },
+    {
+      "avoid": "boa mãe",
+      "alternatives": [
+        "mãe amorosa",
+        "mãe presente",
+        "pessoa que cuida"
+      ],
+      "category": "genero",
+      "reason": "Usado como julgamento moral que pune mulheres fora do ideal de abnegação total.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "filha de família",
+      "alternatives": [
+        "jovem de família conservadora",
+        "mulher com criação formal"
+      ],
+      "category": "genero",
+      "reason": "Codifica pureza sexual como valor moral feminino, reforçando duplo padrão.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "esposa perfeita",
+      "alternatives": [
+        "companheira dedicada",
+        "parceira",
+        "pessoa que cuida do relacionamento"
+      ],
+      "category": "genero",
+      "reason": "Projeta modelo de feminilidade devotada que apaga a subjetividade da mulher.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "mulher independente como desvio",
+      "alternatives": [
+        "mulher autônoma",
+        "pessoa com autonomia",
+        "mulher com vida própria"
+      ],
+      "category": "genero",
+      "reason": "Trata autonomia feminina como exotismo ou desvio do padrão esperado de dependência.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "sexo oposto",
+      "alternatives": [
+        "outro gênero",
+        "pessoas de gênero diferente"
+      ],
+      "category": "genero",
+      "reason": "Pressupõe binarismo estrito e oposição fundamental entre gêneros.",
+      "context": "identidade, diversidade de gênero",
+      "contextual": false
+    },
+    {
+      "avoid": "bagunça tropical",
+      "alternatives": [
+        "pluralidade cultural brasileira",
+        "diversidade estética",
+        "criatividade popular"
+      ],
+      "category": "estetica",
+      "reason": "Naturaliza caos como traço cultural brasileiro, reforçando estereótipo de país desorganizado com base racial.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "arte popular como decoração",
+      "alternatives": [
+        "arte popular",
+        "artesanato com valor estético e cultural"
+      ],
+      "category": "estetica",
+      "reason": "Reduz produção artística de comunidades populares a objeto ornamental, destituindo-a de significado autoral.",
+      "context": "artesanato, arte popular, cultura material",
+      "contextual": false
+    },
+    {
+      "avoid": "literatura menor",
+      "alternatives": [
+        "literatura regional",
+        "literatura de gênero popular",
+        "produção literária específica"
+      ],
+      "category": "estetica",
+      "reason": "Hierarquiza literaturas com critério eurocêntrico de 'alta' e 'baixa' cultura, invisibilizando tradições diversas.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "roupa exótica",
+      "alternatives": [
+        "roupa tradicional",
+        "vestimenta cultural",
+        "indumentária de origem"
+      ],
+      "category": "estetica",
+      "reason": "Exoticiza roupas de culturas não europeias, transformando identidade em fantasia de consumo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "música popular como inferior",
+      "alternatives": [
+        "música popular",
+        "produção musical acessível",
+        "música de massa"
+      ],
+      "category": "estetica",
+      "reason": "Hierarquia estética que desqualifica produção popular como menos válida que 'alta' cultura.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "caricatura do nordestino",
+      "alternatives": [
+        "representação do nordestino",
+        "personagem nordestino com complexidade"
+      ],
+      "category": "estetica",
+      "reason": "Reduz identidade nordestina a traços exagerados — chapéu de couro, sotaque, miséria — apagando sua diversidade.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "teatro de rua como menor",
+      "alternatives": [
+        "teatro popular",
+        "teatro comunitário",
+        "teatro ambulante"
+      ],
+      "category": "estetica",
+      "reason": "Desvaloriza forma artística popular com raízes históricas ao usar o espaço como marcador de inferioridade.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "dança do ventre como vulgar",
+      "alternatives": [
+        "dança de origem oriental",
+        "expressão corporal cultural"
+      ],
+      "category": "estetica",
+      "reason": "Julgamento estético que hierarquiza expressão corporal com base em moralidade ocidental.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "falar difícil",
+      "alternatives": [
+        "linguagem formal",
+        "registro culto",
+        "uso erudito da língua"
+      ],
+      "category": "linguagem",
+      "reason": "Associa vocabulário formal à inteligência, inferioriza quem usa registro popular e vice-versa.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "jargão de favela",
+      "alternatives": [
+        "linguagem da periferia",
+        "léxico popular urbano",
+        "gíria"
+      ],
+      "category": "linguagem",
+      "reason": "Desqualifica variedades linguísticas periféricas como incorretas ou ameaçadoras.",
+      "context": "sociolinguística, personagens periféricos",
+      "contextual": false
+    },
+    {
+      "avoid": "fala de nordestino",
+      "alternatives": [
+        "sotaque nordestino",
+        "variedade nordestina do português",
+        "fala nordestina"
+      ],
+      "category": "linguagem",
+      "reason": "Usado frequentemente para ridicularizar sotaque e associá-lo a inferioridade cultural.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "meme como infantilidade",
+      "alternatives": [
+        "humor digital",
+        "expressão cultural em rede",
+        "linguagem memética"
+      ],
+      "category": "linguagem",
+      "reason": "Hierarquiza formas de expressão e ignora que o meme é gênero textual legítimo com função crítica.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "errar a gramática",
+      "alternatives": [
+        "usar variante não padrão",
+        "falar diferente do padrão normativo"
+      ],
+      "category": "linguagem",
+      "reason": "Trata variedades linguísticas como erros, reforçando preconceito linguístico com base de classe e raça.",
+      "context": "gramática, personagens, diálogo",
+      "contextual": false
+    },
+    {
+      "avoid": "neurótico",
+      "alternatives": [
+        "pessoa ansiosa",
+        "pessoa com transtorno de ansiedade",
+        "pessoa em sofrimento"
+      ],
+      "category": "deficiencia",
+      "reason": "Usada como insulto ou hipérbole desconectada do diagnóstico clínico real de neurose.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "meio autista",
+      "alternatives": [
+        "pessoa no espectro autista",
+        "pessoa com traços autistas",
+        "pessoa neurodivergente"
+      ],
+      "category": "deficiencia",
+      "reason": "Uso informal que trivializa o autismo e reforça estereótipo de frieza social como traço negativo.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "fingir depressão",
+      "alternatives": [
+        "depressão clínica",
+        "transtorno depressivo diagnosticado",
+        "sofrimento psíquico real"
+      ],
+      "category": "deficiencia",
+      "reason": "Questiona a autenticidade do sofrimento mental, reforçando estigma e impedindo busca por ajuda.",
+      "context": "narrativa, diálogo, personagens em crise de saúde mental",
+      "contextual": false
+    },
+    {
+      "avoid": "burro como insulto intelectual",
+      "alternatives": [
+        "pessoa com dificuldade de aprendizado",
+        "pessoa com ritmo diferente de aprendizagem"
+      ],
+      "category": "deficiencia",
+      "reason": "Equipara inteligência ao desempenho acadêmico normativo, ignorando neurodiversidade.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "cabeça fraca",
+      "alternatives": [
+        "pessoa vulnerável emocionalmente",
+        "pessoa em sofrimento psíquico",
+        "pessoa sensível"
+      ],
+      "category": "deficiencia",
+      "reason": "Patologiza sensibilidade e fragilidade emocional como defeito moral ou intelectual.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "de cadeira",
+      "alternatives": [
+        "usuário de cadeira de rodas",
+        "pessoa cadeirante",
+        "pessoa com mobilidade reduzida"
+      ],
+      "category": "deficiencia",
+      "reason": "Define a pessoa pelo equipamento de mobilidade, não pela identidade.",
+      "context": "descrição de personagem, narrativa em terceira pessoa",
+      "contextual": false
+    },
+    {
+      "avoid": "dislexo",
+      "alternatives": [
+        "pessoa com dislexia",
+        "leitor com processamento diferente",
+        "pessoa neurodivergente"
+      ],
+      "category": "deficiencia",
+      "reason": "Uso pejorativo ou diminutivo que ridiculariza uma condição neurológica legítima.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "criança problemática",
+      "alternatives": [
+        "criança com comportamento desafiador",
+        "criança neurodivergente",
+        "criança em sofrimento"
+      ],
+      "category": "deficiencia",
+      "reason": "Patologiza comportamento infantil sem considerar causas ambientais, emocionais ou neurológicas.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "japonês como genérico para oriental",
+      "alternatives": [
+        "pessoa asiática",
+        "pessoa de origem asiática",
+        "pessoa de origem japonesa"
+      ],
+      "category": "povos",
+      "reason": "Usa uma etnia específica como genérico para toda a Ásia, apagando a enorme diversidade do continente.",
+      "context": "descrição de personagens, narrador em terceira pessoa",
+      "contextual": false
+    },
+    {
+      "avoid": "asiático inteligente",
+      "alternatives": [
+        "pessoa asiática",
+        "estudante dedicado",
+        "profissional competente"
+      ],
+      "category": "povos",
+      "reason": "Estereótipo positivo que também desumaniza ao reduzir a pessoa a um traço racial.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "árabe como terrorista",
+      "alternatives": [
+        "árabe",
+        "pessoa de origem árabe",
+        "muçulmano",
+        "pessoa do Oriente Médio"
+      ],
+      "category": "povos",
+      "reason": "Associação racial/religiosa com violência, resultado de islamofobia e estereótipo pós-11 de setembro.",
+      "context": "narrativa policial, thriller, contexto geopolítico",
+      "contextual": false
+    },
+    {
+      "avoid": "judeu como avarento",
+      "alternatives": [
+        "pessoa judaica",
+        "judeu",
+        "comunidade judaica"
+      ],
+      "category": "povos",
+      "reason": "Estereótipo antissemita com séculos de história de perseguição; prejudica personagens e narrativas.",
+      "context": "narrativa, personagem, descrição cultural",
+      "contextual": false
+    },
+    {
+      "avoid": "cigano como ladrão",
+      "alternatives": [
+        "pessoa de etnia cigana",
+        "romani",
+        "cigano",
+        "pessoa da cultura cigana"
+      ],
+      "category": "povos",
+      "reason": "Generalização criminalizante que alimenta preconceito histórico contra o povo romani no Brasil.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "latino como genérico",
+      "alternatives": [
+        "brasileiro",
+        "colombiano",
+        "mexicano",
+        "pessoa da América Latina"
+      ],
+      "category": "povos",
+      "reason": "Apaga diferenças entre países e povos da América Latina, tratando o continente como bloco homogêneo.",
+      "context": "narrativa em contexto global, personagem imigrante",
+      "contextual": false
+    },
+    {
+      "avoid": "negro americano como modelo",
+      "alternatives": [
+        "pessoa negra brasileira",
+        "negro brasileiro",
+        "afro-brasileiro"
+      ],
+      "category": "povos",
+      "reason": "Importar experiência negra norte-americana como padrão apaga a especificidade da história negra brasileira.",
+      "context": "narrativa, personagem, contexto racial brasileiro",
+      "contextual": false
+    },
+    {
+      "avoid": "saber o seu lugar",
+      "alternatives": [
+        "respeitar posições",
+        "conhecer o contexto",
+        "entender a hierarquia"
+      ],
+      "category": "relacoes",
+      "reason": "Expressão usada historicamente para silenciar pessoas de classes ou raças subalternas.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "dívida de gratidão",
+      "alternatives": [
+        "gratidão",
+        "reconhecimento",
+        "afeto"
+      ],
+      "category": "relacoes",
+      "reason": "Converte ato de cuidado em mecanismo de controle e obrigação, especialmente em relações assimétricas.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "ela gosta assim",
+      "alternatives": [
+        "consentimento expresso",
+        "acordo entre as partes",
+        "escolha de ambos"
+      ],
+      "category": "relacoes",
+      "reason": "Justifica abuso ao presumir consentimento não expresso, frequente em narrativas que romantizam violência.",
+      "context": "narrativa romântica, cena de conflito, relação de poder",
+      "contextual": false
+    },
+    {
+      "avoid": "puxar na raça",
+      "alternatives": [
+        "esforço pessoal",
+        "determinação",
+        "persistência"
+      ],
+      "category": "relacoes",
+      "reason": "Meritocracia com base racial — ignora estruturas de desigualdade e responsabiliza o indivíduo pela opressão sistêmica.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "amigo de fachada",
+      "alternatives": [
+        "pessoa com intenções ocultas",
+        "relação instrumental",
+        "aliança de conveniência"
+      ],
+      "category": "relacoes",
+      "reason": "Quando aplicado seletivamente a grupos raciais ou étnicos, reforça desconfiança generalizada.",
+      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
+      "contextual": true
+    },
+    {
+      "avoid": "cuidar da casa como natural para mulher",
+      "alternatives": [
+        "trabalho doméstico",
+        "organização do lar",
+        "cuidado da casa"
+      ],
+      "category": "relacoes",
+      "reason": "Naturaliza divisão sexual do trabalho doméstico como traço feminino, apagando o caráter social dessa atribuição.",
+      "context": "narrativa familiar, personagem feminino, diálogo doméstico",
+      "contextual": false
     }
   ]
 }
