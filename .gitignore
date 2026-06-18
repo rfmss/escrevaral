@@ -45,10 +45,16 @@ build/
 .agents/sentinel/*.pid
 .agents/sentinel/state.json
 .agents/sentinel/*.tmp
+.agents/sentinel-auto/*.log
+.agents/sentinel-auto/*.pid
+.agents/sentinel-auto/state.json
+.agents/sentinel-auto/*.tmp
 .agents/awake-ides/*.log
 .agents/awake-ides/*.pid
 .agents/awake-ides/state.json
 .agents/awake-ides/*.tmp
+.agents/conversas/*.md
+.agents/auditorias/*.md
 
 # ── Credenciais e chaves ─────────────────────────────────────────
 *.pem

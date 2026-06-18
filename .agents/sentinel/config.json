@@ -1,12 +1,30 @@
 {
   "resume_prompt": "continue o trabalho",
   "scan_interval_seconds": 20,
-  "default_wait_minutes": 70,
+  "default_wait_minutes": 120,
+  "no_ocr_retry_minutes": 120,
+  "no_ocr_long_wait_minutes": 120,
+  "max_no_ocr_resume_attempts": 1,
+  "uncertain_retry_minutes": 10,
   "resume_grace_minutes": 3,
+  "probe_on_uncertain_limit": false,
+  "probe_wait_seconds": 18,
+  "hard_visual_kinds": [
+    "gray_card"
+  ],
   "orange_threshold": {
     "min_pixels": 240,
     "min_ratio": 0.0035
   },
+  "warm_threshold": {
+    "min_pixels": 1200,
+    "min_ratio": 0.08
+  },
+  "gray_card_threshold": {
+    "min_pixels": 5000,
+    "min_ratio": 0.35
+  },
+  "gray_card_min_bright_pixels": 80,
   "warning_terms": [
     "limit",
     "limite",
@@ -25,16 +43,21 @@
     "resets",
     "reset",
     "volta",
-    "available"
+    "available",
+    "usage"
   ],
   "regions": [
     {
       "id": "claude_left_input_warning",
       "label": "Claude no painel esquerdo",
       "x": 58,
-      "y": 575,
-      "w": 530,
-      "h": 70,
+      "y": 620,
+      "w": 600,
+      "h": 34,
+      "visual_hints": [
+        "warm_banner",
+        "orange_banner"
+      ],
       "resume_click": {
         "x": 310,
         "y": 676
@@ -43,10 +66,13 @@
     {
       "id": "codex_devin_right_input_warning",
       "label": "Codex/Devin no painel direito",
-      "x": 618,
-      "y": 548,
-      "w": 686,
-      "h": 64,
+      "x": 690,
+      "y": 526,
+      "w": 630,
+      "h": 76,
+      "visual_hints": [
+        "gray_card"
+      ],
       "resume_click": {
         "x": 962,
         "y": 654
