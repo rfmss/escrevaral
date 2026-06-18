@@ -6,7 +6,21 @@
       "frase": "A tarde era bela e o silêncio, livre de culpa, envolvia tudo.",
       "zona": "adjetivo-sem-sufixo",
       "gabarito": "\"bela\" = Adjetivo; \"livre\" = Adjetivo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ela tinha um jeito triste de dizer as coisas certas.",
@@ -18,7 +32,21 @@
       "frase": "O homem grande não precisava falar alto.",
       "zona": "adjetivo-sem-sufixo",
       "gabarito": "\"grande\" = Adjetivo; \"alto\" = Adjetivo (não Advérbio neste contexto)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Havia qualquer coisa estranha no modo como ela sorria.",
@@ -27,12 +55,13 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 3,
           "token": "estranha",
           "antes": [],
           "depois": [
-            "Adjective"
+            "Verb"
           ],
-          "classe": "evolucao"
+          "classe": "neutro"
         }
       ]
     },
@@ -40,7 +69,21 @@
       "frase": "A mulher forte carregou o peso sem reclamar.",
       "zona": "adjetivo-sem-sufixo",
       "gabarito": "\"forte\" = Adjetivo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Era uma noite simples, quente, quase feliz.",
@@ -52,7 +95,21 @@
       "frase": "O texto breve dizia mais do que o longo.",
       "zona": "adjetivo-sem-sufixo",
       "gabarito": "\"breve\" = Adjetivo; \"longo\" = Adjetivo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Havia algo nobre na forma como ele errava.",
@@ -67,6 +124,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
           "token": "para",
           "antes": [
             "Preposition"
@@ -110,6 +181,17 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "Gostei",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 1,
           "token": "deste",
           "antes": [
             "Verb"
@@ -122,6 +204,7 @@
         },
         {
           "tipo": "morfologia",
+          "indice": 2,
           "token": "parágrafo",
           "antes": [],
           "depois": [
@@ -131,6 +214,7 @@
         },
         {
           "tipo": "morfologia",
+          "indice": 6,
           "token": "daquele",
           "antes": [],
           "depois": [
@@ -147,15 +231,18 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
           "token": "Neste",
           "antes": [],
           "depois": [
-            "Preposition"
+            "Preposition",
+            "Noun"
           ],
           "classe": "neutro"
         },
         {
           "tipo": "morfologia",
+          "indice": 1,
           "token": "ponto",
           "antes": [],
           "depois": [
@@ -172,6 +259,17 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "Falou",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 1,
           "token": "disso",
           "antes": [],
           "depois": [
@@ -188,15 +286,18 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
           "token": "Naquele",
           "antes": [],
           "depois": [
-            "Preposition"
+            "Preposition",
+            "Noun"
           ],
           "classe": "neutro"
         },
         {
           "tipo": "morfologia",
+          "indice": 1,
           "token": "tempo",
           "antes": [],
           "depois": [
@@ -210,7 +311,21 @@
       "frase": "O primeiro capítulo é sempre o mais difícil.",
       "zona": "ordinal",
       "gabarito": "\"primeiro\" = Numeral ordinal",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ela terminou em segundo lugar sem reclamar.",
@@ -222,40 +337,71 @@
       "frase": "Foi a terceira vez que ele tentou começar o romance.",
       "zona": "ordinal",
       "gabarito": "\"terceira\" = Numeral ordinal",
+      "diffs": []
+    },
+    {
+      "frase": "O quinto andar estava sempre silencioso.",
+      "zona": "ordinal",
+      "gabarito": "\"quinto\" = Numeral ordinal",
       "diffs": [
         {
-          "tipo": "pontuacao-novo-alerta",
-          "codigos": [
-            null
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
           ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "pontuacao-alerta-sumido",
-          "codigos": [
-            "PONT-44"
+          "depois": [
+            "Determiner",
+            "Noun"
           ],
           "classe": "neutro"
         }
       ]
     },
     {
-      "frase": "O quinto andar estava sempre silencioso.",
-      "zona": "ordinal",
-      "gabarito": "\"quinto\" = Numeral ordinal",
-      "diffs": []
-    },
-    {
       "frase": "Chegou na décima fila, resignado.",
       "zona": "ordinal",
       "gabarito": "\"décima\" = Numeral ordinal",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Chegou",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 5,
+          "token": "resignado",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ora, isso não é nenhuma novidade, suspirou ela.",
       "zona": "interjeccao",
       "gabarito": "\"ora\" = Interjeição (não Advérbio)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Ora",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ei, você ainda está aí?",
@@ -270,6 +416,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 7,
           "token": "naquele",
           "antes": [],
           "depois": [
@@ -289,7 +436,18 @@
       "frase": "Nossa, que silêncio pesado.",
       "zona": "interjeccao",
       "gabarito": "\"nossa\" = Interjeição (contexto exclamativo, não possessivo)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 4,
+          "token": "pesado",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ufa, por fim o dia acabou.",
@@ -313,7 +471,21 @@
       "frase": "A vida era assim: longa; incerta; às vezes, bela.",
       "zona": "pontuacao-literaria",
       "gabarito": "sem alerta; ponto-e-vírgula separando itens com vírgula interna é correto",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Onde estará ela agora...",
@@ -331,7 +503,18 @@
       "frase": "Esperou. Esperou muito. Esperou até não poder mais.",
       "zona": "pontuacao-literaria",
       "gabarito": "sem alerta; recurso estilístico de anáfora",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Esperou",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O romance foi escrito em três meses de reclusão.",
@@ -340,6 +523,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
           "token": "escrito",
           "antes": [],
           "depois": [
@@ -353,25 +550,11 @@
       "frase": "Escreve-se muito por aqui quando o inverno chega.",
       "zona": "voz-passiva",
       "gabarito": "detectado como voz passiva (ou voz indeterminada — ambos aceitáveis)",
-      "diffs": []
-    },
-    {
-      "frase": "Vendem-se ilusões neste mercado.",
-      "zona": "voz-passiva",
-      "gabarito": "detectado como voz passiva",
       "diffs": [
         {
           "tipo": "morfologia",
-          "token": "neste",
-          "antes": [],
-          "depois": [
-            "Preposition"
-          ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "token": "mercado",
+          "indice": 0,
+          "token": "Escreve-se",
           "antes": [],
           "depois": [
             "Noun"
@@ -381,40 +564,188 @@
       ]
     },
     {
+      "frase": "Vendem-se ilusões neste mercado.",
+      "zona": "voz-passiva",
+      "gabarito": "detectado como voz passiva",
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Vendem-se",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 2,
+          "token": "neste",
+          "antes": [],
+          "depois": [
+            "Preposition"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
+          "token": "mercado",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
       "frase": "A carta foi entregue na manhã seguinte.",
       "zona": "voz-passiva",
       "gabarito": "detectado como voz passiva",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
+          "token": "entregue",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Os livros eram lidos em voz alta toda noite.",
       "zona": "voz-passiva",
       "gabarito": "detectado como voz passiva",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Os",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
+          "token": "lidos",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O menino ficou acolá, olhando a procissão passar.",
       "zona": "vocabulario-regional",
       "gabarito": "sem alerta negativo; \"acolá\" é forma padrão e literária",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Aquela saia estava encardida de tanto uso.",
       "zona": "vocabulario-regional",
       "gabarito": "sem alerta; \"encardido/a\" é vocabulário popular legítimo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 3,
+          "token": "encardida",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O fuleiro do vizinho apareceu sem avisar.",
       "zona": "vocabulario-regional",
       "gabarito": "sem alerta; vocabulário regional brasileiro válido",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "A menina ficou acanhada diante de tanta gente.",
       "zona": "vocabulario-regional",
       "gabarito": "sem alerta; vocabulário brasileiro corrente",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 3,
+          "token": "acanhada",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ele tinha um jeito xucro de falar que encantava.",
@@ -426,7 +757,21 @@
       "frase": "A veia da minha avó sempre me chamava de benzinho.",
       "zona": "vocabulario-regional",
       "gabarito": "sem alerta; uso afetivo regional válido",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "A chuva cai e vai e trai quem fica.",
@@ -435,6 +780,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 2,
           "token": "cai",
           "antes": [],
           "depois": [
@@ -444,6 +803,7 @@
         },
         {
           "tipo": "morfologia",
+          "indice": 6,
           "token": "trai",
           "antes": [],
           "depois": [
@@ -457,7 +817,18 @@
       "frase": "Noite de medo e frio, o rio some no vazio.",
       "zona": "rimalab",
       "gabarito": "detectar rima em \"frio\", \"rio\", \"vazio\"",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Noite",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Saudade salga, alaga, afaga e machuca.",
@@ -466,6 +837,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 5,
           "token": "afaga",
           "antes": [],
           "depois": [
@@ -475,6 +847,7 @@
         },
         {
           "tipo": "morfologia",
+          "indice": 7,
           "token": "machuca",
           "antes": [],
           "depois": [
@@ -491,6 +864,17 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "Lua",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 4,
           "token": "muda",
           "antes": [],
           "depois": [
@@ -507,6 +891,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 2,
           "token": "demora",
           "antes": [],
           "depois": [
@@ -532,7 +930,18 @@
       "frase": "Vá até lá e veja com seus próprios olhos.",
       "zona": "diacritico",
       "gabarito": "\"lá\" = Advérbio de lugar",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Vá",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Já não havia mais nada a esperar.",
@@ -544,19 +953,58 @@
       "frase": "A escritora e o editor discutiram por horas.",
       "zona": "concordancia-verbal",
       "gabarito": "verbo no plural; sujeito composto \"escritora e editor\"",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Chegaram as cartas que esperávamos há meses.",
       "zona": "concordancia-verbal",
       "gabarito": "concordância correta; sujeito \"cartas\" posposto ao verbo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 4,
+          "token": "esperávamos",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "A maioria dos leitores gostou do final.",
       "zona": "concordancia-verbal",
       "gabarito": "verbo no singular é aceito com sujeito coletivo \"maioria\"",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Nem ela nem ele soube o que dizer.",
@@ -571,6 +1019,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "As",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 6,
           "token": "precisas",
           "antes": [],
           "depois": [
@@ -584,7 +1046,21 @@
       "frase": "O homem e a mulher ficaram quietos.",
       "zona": "concordancia-nominal",
       "gabarito": "\"quietos\" = Adjetivo masculino plural (sujeito misto → masculino)",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Meio confusa, ela releu o parágrafo.",
@@ -593,6 +1069,17 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "Meio",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 1,
           "token": "confusa",
           "antes": [],
           "depois": [
@@ -618,7 +1105,18 @@
       "frase": "Precisamos de tempo, não de pressa.",
       "zona": "regencia",
       "gabarito": "\"precisamos\" = Verbo transitivo indireto",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Precisamos",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ela voltou à cidade que abandonara.",
@@ -630,7 +1128,18 @@
       "frase": "Referiu-se a ela com respeito.",
       "zona": "crase",
       "gabarito": "sem alerta; crase proibida antes de pronome; \"a ela\" correto",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Referiu-se",
+          "antes": [],
+          "depois": [
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Saiu a pé pelo bairro antigo.",
@@ -639,6 +1148,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
           "token": "Saiu",
           "antes": [],
           "depois": [
@@ -648,6 +1158,7 @@
         },
         {
           "tipo": "morfologia",
+          "indice": 5,
           "token": "antigo",
           "antes": [],
           "depois": [
@@ -664,6 +1175,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 7,
           "token": "vinha",
           "antes": [],
           "depois": [
@@ -683,7 +1195,21 @@
       "frase": "O tempo — esse ladrão silencioso — levou tudo.",
       "zona": "anacoluto",
       "gabarito": "sem alerta; aposto entre travessões é uso correto",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ele mal sabia que o mal estava próximo.",
@@ -701,25 +1227,91 @@
       "frase": "Sem senso, ele perdeu o senso das coisas.",
       "zona": "homofona",
       "gabarito": "sem alerta; repetição intencional válida",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Sem",
+          "antes": [
+            "Preposition"
+          ],
+          "depois": [
+            "Preposition",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O dendê dava ao prato um sabor inconfundível.",
       "zona": "vocabulario-decolonial",
       "gabarito": "sem alerta negativo; \"dendê\" é vocabulário de herança africana legítimo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "A caçula ficou de castigo por três dias.",
       "zona": "vocabulario-decolonial",
       "gabarito": "sem alerta; \"caçula\" é vocabulário corrente de origem africana",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "A",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "O xerimbabo da vizinha latia toda madrugada.",
       "zona": "vocabulario-decolonial",
       "gabarito": "sem alerta; vocabulário de origem indígena legítimo",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "O",
+          "antes": [
+            "Determiner"
+          ],
+          "depois": [
+            "Determiner",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 6,
+          "token": "madrugada",
+          "antes": [],
+          "depois": [
+            "Verb"
+          ],
+          "classe": "neutro"
+        }
+      ]
     },
     {
       "frase": "Ele tinha um jeito manso, quase catimbau.",
@@ -728,6 +1320,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 4,
           "token": "manso",
           "antes": [],
           "depois": [
@@ -744,6 +1337,20 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 0,
+          "token": "Em",
+          "antes": [
+            "Preposition"
+          ],
+          "depois": [
+            "Preposition",
+            "Noun"
+          ],
+          "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 4,
           "token": "termina",
           "antes": [],
           "depois": [
@@ -760,6 +1367,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 7,
           "token": "percebe",
           "antes": [],
           "depois": [
@@ -776,6 +1384,7 @@
       "diffs": [
         {
           "tipo": "morfologia",
+          "indice": 2,
           "token": "abro",
           "antes": [],
           "depois": [
@@ -789,7 +1398,21 @@
       "frase": "Se ela viesse, tudo seria diferente.",
       "zona": "tempo-verbal",
       "gabarito": "\"viesse\" = Verbo Subjuntivo Imperfeito; \"seria\" = Futuro do Pretérito",
-      "diffs": []
+      "diffs": [
+        {
+          "tipo": "morfologia",
+          "indice": 0,
+          "token": "Se",
+          "antes": [
+            "Conjunction"
+          ],
+          "depois": [
+            "Conjunction",
+            "Noun"
+          ],
+          "classe": "neutro"
+        }
+      ]
     }
   ]
 }
