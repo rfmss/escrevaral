@@ -6166,6 +6166,186 @@
       "reason": "Subordina o cinema brasileiro a padrões hollywoodianos, desvalorizando narrativas, estéticas e perspectivas locais",
       "context": "Cinema nacional não presta",
       "contextual": false
+    },
+    {
+      "avoid": "filho de peixe peixinho é",
+      "alternatives": [
+        "o ambiente forma as pessoas",
+        "contexto social influencia trajetórias",
+        "a história de vida importa"
+      ],
+      "category": "relacoes",
+      "reason": "Naturaliza desigualdades como herança inevitável, retirando agência de quem nasce em contextos de privação",
+      "context": "Não tem saída, filho de peixe peixinho é",
+      "contextual": false
+    },
+    {
+      "avoid": "os dois lados têm razão",
+      "alternatives": [
+        "analisar os fatos",
+        "examinar as responsabilidades",
+        "verificar os argumentos de cada lado"
+      ],
+      "category": "relacoes",
+      "reason": "Equivalência falsa que nivela perspectivas de oprimidos e opressores como se tivessem igual peso moral",
+      "context": "Tem dois lados em toda história",
+      "contextual": false
+    },
+    {
+      "avoid": "naturalizar a violência doméstica",
+      "alternatives": [
+        "reconhecer a violência doméstica",
+        "nomear a violência",
+        "denunciar o padrão de controle"
+      ],
+      "category": "relacoes",
+      "reason": "Frases que suavizam ou explicam a violência doméstica como parte inevitável de relacionamentos intensos",
+      "context": "É assim mesmo nos relacionamentos apaixonados",
+      "contextual": true
+    },
+    {
+      "avoid": "gente da sua laia",
+      "alternatives": [
+        "pessoas com trajetória similar",
+        "seu grupo social",
+        "sua comunidade"
+      ],
+      "category": "relacoes",
+      "reason": "Expressão hierarquizante que classifica pessoas segundo origem social de modo pejorativo",
+      "context": "Fica com gente da sua laia",
+      "contextual": false
+    },
+    {
+      "avoid": "meritocracia como solução",
+      "alternatives": [
+        "esforço pessoal em condições equânimes",
+        "acesso a oportunidades",
+        "reconhecimento justo"
+      ],
+      "category": "relacoes",
+      "reason": "Ignora estruturas de desigualdade e atribui sucesso ou fracasso unicamente ao esforço individual",
+      "context": "Quem quer pode, é só meritocracia",
+      "contextual": false
+    },
+    {
+      "avoid": "nordestino como preguiçoso",
+      "alternatives": [
+        "trabalhador nordestino",
+        "pessoa do Nordeste",
+        "migrante nordestino"
+      ],
+      "category": "povos",
+      "reason": "Estereótipo colonial que mistura preconceito regional com racismo, já que grande parte da população nordestina é afrodescendente",
+      "context": "É nordestino, já sabe como é",
+      "contextual": false
+    },
+    {
+      "avoid": "baiano como preguiçoso",
+      "alternatives": [
+        "pessoa da Bahia",
+        "baiano",
+        "trabalhador baiano"
+      ],
+      "category": "povos",
+      "reason": "Estereótipo regional com raiz no racismo, associando população majoritariamente negra à ideia de preguiça",
+      "context": "Preguiça de baiano",
+      "contextual": false
+    },
+    {
+      "avoid": "índio falando português como surpresa",
+      "alternatives": [
+        "indígena que domina o português",
+        "pessoa indígena bilíngue",
+        "liderança indígena falando"
+      ],
+      "category": "povos",
+      "reason": "Revela expectativa de que indígenas não dominem o português, tratando-os como estranhos à língua nacional",
+      "context": "Esse índio fala muito bem o português",
+      "contextual": false
+    },
+    {
+      "avoid": "negro bem-sucedido como exceção",
+      "alternatives": [
+        "pessoa negra que alcançou reconhecimento",
+        "profissional negro de destaque",
+        "liderança negra"
+      ],
+      "category": "povos",
+      "reason": "Trata conquistas de pessoas negras como anomalias, reforçando expectativa de fracasso em vez de reconhecer a desigualdade estrutural",
+      "context": "Esse negro conseguiu, coisa rara",
+      "contextual": false
+    },
+    {
+      "avoid": "quilombola como passado",
+      "alternatives": [
+        "comunidade quilombola atual",
+        "comunidade quilombola contemporânea",
+        "território quilombola"
+      ],
+      "category": "povos",
+      "reason": "Situa quilombolas no passado histórico, negando sua existência e direitos no presente",
+      "context": "Quilombola é coisa do passado",
+      "contextual": false
+    },
+    {
+      "avoid": "sair da depressão por força de vontade",
+      "alternatives": [
+        "tratar a depressão",
+        "buscar ajuda para a depressão",
+        "cuidar da saúde mental"
+      ],
+      "category": "deficiencia",
+      "reason": "Trata transtorno mental como escolha ou fraqueza moral, impedindo que pessoas busquem tratamento adequado",
+      "context": "Basta querer sair da depressão",
+      "contextual": false
+    },
+    {
+      "avoid": "ansiedade moderna",
+      "alternatives": [
+        "transtorno de ansiedade",
+        "ansiedade clínica",
+        "condição de saúde mental"
+      ],
+      "category": "deficiencia",
+      "reason": "Reduz diagnóstico médico a modismo contemporâneo, invalidando o sofrimento de pessoas com ansiedade",
+      "context": "Hoje em dia todo mundo tem ansiedade, virou moda",
+      "contextual": false
+    },
+    {
+      "avoid": "criança hiperativa demais",
+      "alternatives": [
+        "criança com TDAH",
+        "criança com transtorno de atenção",
+        "criança em avaliação neurológica"
+      ],
+      "category": "deficiencia",
+      "reason": "Usa linguagem coloquial pejorativa em vez de reconhecer condição neurológica que demanda suporte específico",
+      "context": "Esse menino é hiperativo demais",
+      "contextual": true
+    },
+    {
+      "avoid": "se esforçar mais para superar a limitação",
+      "alternatives": [
+        "adaptar o ambiente às necessidades da pessoa",
+        "oferecer suporte adequado",
+        "garantir acessibilidade"
+      ],
+      "category": "deficiencia",
+      "reason": "Transfere para a pessoa com deficiência a responsabilidade por barreiras que são do ambiente ou da sociedade",
+      "context": "É só se esforçar um pouco mais",
+      "contextual": false
+    },
+    {
+      "avoid": "são pessoas normais também",
+      "alternatives": [
+        "são pessoas como todas as outras",
+        "têm os mesmos direitos",
+        "merecem o mesmo respeito"
+      ],
+      "category": "deficiencia",
+      "reason": "A frase parte de uma premissa de que haveria pessoas 'normais' e 'anormais', reforçando a dicotomia que pretende combater",
+      "context": "Pessoas com deficiência são normais também",
+      "contextual": false
     }
   ]
 }
