@@ -460,6 +460,26 @@
     "com grande poder vem grande responsabilidade","apenas ele poderia salvar o mundo",
     "a profecia estava se cumprindo","foram testados além dos limites",
     "o bem sempre vence o mal","a luz sempre supera as trevas",
+    // clichês de literatura regionalista brasileira
+    "o sertão é duro mas é belo","a seca matava tudo menos a esperança",
+    "o nordestino era resistente","a terra rachada guardava segredos",
+    "o povo do interior era simples mas sábio","o coronel mandava e o povo obedecia",
+    "a migração era a única saída","as Minas sofridas formavam o caráter",
+    // clichês de literatura urbana e periférica
+    "a favela tinha código próprio","quem foi criado lá dentro entendia",
+    "a violência era o único caminho","o sistema nunca deu chance",
+    "sobreviver era resistir","o asfalto dividia dois mundos",
+    "nenhum jovem da quebrada sonhava com pouco","a periferia produz arte que o centro consome",
+    // clichês de literatura de resistência e militância
+    "resistir é existir","a luta continua",
+    "cada geração paga o preço","não vai ser diferente desta vez",
+    "o silêncio é cumplicidade","quem cala consente",
+    "o passado não passou","precisamos falar sobre isso",
+    // clichês de narrativa memorialista e autobiográfica
+    "me lembro como se fosse hoje","o tempo apaga mas não cura",
+    "a memória é seletiva","aquela cena nunca mais me deixou",
+    "minha infância foi marcada por","aprendi cedo que o mundo não era justo",
+    "meu avô dizia que","quando olho para trás só consigo ver",
   ];
 
   const PLEONASMOS = [
@@ -684,6 +704,21 @@
     ["certo e correto","correto"],["errado e incorreto","errado"],
     ["justo e equânime","justo"],["injusto e parcial","injusto"],
     ["forte e robusto","forte"],["fraco e débil","fraco"],
+    // redundâncias de discurso político e social
+    ["mudança e transformação social","transformação"],
+    ["povo e população brasileira","população"],
+    ["democracia e participação popular","democracia"],
+    ["direitos e garantias fundamentais","direitos fundamentais"],
+    ["política e gestão pública","política pública"],
+    ["crise e instabilidade econômica","crise econômica"],
+    ["projetos e iniciativas de governo","projetos de governo"],
+    ["investigação e apuração dos fatos","apuração"],
+    // redundâncias de saúde e medicina
+    ["saúde e bem-estar","saúde"],["doença e enfermidade","doença"],
+    ["tratamento e terapia médica","tratamento"],["cura e recuperação","recuperação"],
+    ["diagnóstico e identificação do quadro","diagnóstico"],
+    ["sintoma e manifestação clínica","sintoma"],
+    ["prevenção e profilaxia","prevenção"],["medicamento e remédio","medicamento"],
   ];
 
   const NEGACOES_DUPLAS = [
