@@ -68,6 +68,69 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v742→v750)
+
+## Abertura da próxima sessão — estado em 2026-06-18 (ciclo autônomo v751→v772)
+
+**Baseline:** v772 — todos os engines em 100%. 4 marcos históricos atingidos nesta sessão.
+
+**O que foi entregue neste ciclo (v751→v772):**
+
+- `synonym-data.js` (v751→v772): 701→1000 (+299, marcos: 800/v751, 900/v765, 1000/v772). Cobertura: alma, desejo, triunfo, devaneio, epifania, exílio, traição, heroísmo, calma, mystério, perdão, remorso, lar, fado, esmero, cura, dignidade, meditação, luta, virtude, moral, ética, cerrado, pampa, catarse, reconciliação, sacrifício...
+- `analise-engine.js` (v754): CLIQUES_PT 958→1000 (+42: introdução/encerramento literário, romances clichê, tempo congelou), PLEONASMOS 472→500 (+28: naturaleza, tempo, comunicação, negócios)
+- `norma-data.json` (v757/v760): adjetivos_comuns 1954→2000 (+46), verbos_pres_reg 1964→2000 (+36)
+- `decolonial-data.json` (v752→v759): 513→564 (+51: conhecimento 55→63, estetica 55→62, relacoes/povos/deficiencia 56→61, genero/territorio 58→64/63, classe/linguagem 59/60→64/65)
+
+**Estado atualizado dos engines (v772):**
+
+| Área / engine | Maturidade | Notas de estado (v772) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | sinônimos 1000 (marco histórico) |
+| Decolonial / vocabulário | **100%** | 564 entradas; 9 categorias 61–65 |
+| Sintaxe | **99%** | adjetivos_comuns 2000; verbos_pres_reg 2000; formas_verbais_irr 1795; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA em 5 temas |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: formas_verbais_irr 1795 → 2000+; substantivos_ia 235 → 300+
+3. **RimaLab**: expandir enciclopédia (35 → 50 entradas) — rimas esdrúxulas, formas fixas brasileiras
+
+---
+
+
+**Baseline:** v750 — Sintaxe 99%; todos os outros engines em 100%. Foco: cobertura de linguagem.
+
+**O que foi entregue neste ciclo (v742→v750):**
+
+- `synonym-data.js` (v742–v748, v750): 701→770 (+69: decolonial/resistência, natureza BR, tempo/luz, emoção complexa, morte/luto, M→P do Nascentes, R→S, ES, lacunas literárias: angústia, aurora, crepúsculo, infância, vigília, delírio...)
+- `analise-engine.js` (v746): CLIQUES_PT 902→958 (+56: narração literária desgastada, retrato de personagem, redação escolar, conflito, natureza/paisagem), PLEONASMOS 444→472 (+28: elo/laço, prever/planejar, começar/terminar, surpresa/acidente, vitória/derrota...)
+- `norma-data.json` (v747): adjetivos_comuns 1935→1954 (+19: rígido/a, sublime, vil, errabundo, umbroso, rutilante, silvestre, sutil, hirto, rubra...), verbos_pres_reg 1921→1964 (+43: fremer, gemer, exercer, lamber, esmagar, gelar, rondar, venerar, verter, queimar, acuar...)
+- `decolonial-data.json` (v742, v749): 462→513 (+51: genero 8, estetica 8, linguagem 5+5, deficiencia 8, povos 7, relacoes 6 + Bagno: brasileiro não sabe português, língua está se perdendo, origem humilde, chorona, histérica, interior como atraso...)
+
+**Estado atualizado dos engines (v750):**
+
+| Área / engine | Maturidade | Notas de estado (v750) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 958; PLEONASMOS 472 |
+| Espelho de Voz | **100%** | natureza 65, memoria 56, conflito 60, pensamento 60, casa 60, cidade 61, corpo 65, sobrenatural 60 |
+| RimaLab | **100%** | enciclopédia 35 entradas; grammarWords 286 |
+| Lexico / Biblioteca | **100%** | sinônimos 770 |
+| Decolonial / vocabulário | **100%** | 513 entradas; 9 categorias 55–60 |
+| Sintaxe | **99%** | adjetivos_comuns 1954; verbos_pres_reg 1964; formas_verbais_irr 1795; substantivos_ia 235 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA em 5 temas |
+
+**Próximas fronteiras:**
+
+1. **Sintaxe 99% → 100%**: desambiguação contextual — requer mudança estrutural em syntax-engine.js (custo alto)
+2. **Dados**: sinônimos 770 → 800+ (vida cotidiana, relações, natureza interiora); decolonial 513 → 540+ (conhecimento/estetica)
+3. **RimaLab**: expandir enciclopédia (35 → 50 entradas) — rimas esdrúxulas, formas fixas brasileiras
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-17 (ciclo autônomo v736→v741)
 
 **Baseline:** v741 — Sintaxe 99%; todos os outros engines em 100%. 0 falhas de contraste em 5 temas.
