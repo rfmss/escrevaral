@@ -379,6 +379,171 @@
       ],
       "body": "Estrofe mista com versos de medidas diferentes — geralmente heptassílabos e pentassílabos, com esquema de rima variável. Forma ibérica que mistura o ritmo cantável da redondilha com a leveza do verso curto. Camões e os poetas árcades brasileiros usaram bastante.",
       "sample": "Estrofe ABBAB com versos de 7-5-7-7-5 sílabas — o pentassílabo 'respira' no meio"
+    },
+    {
+      "title": "Quintilha",
+      "tags": [
+        "estrofe",
+        "cordel",
+        "cinco versos",
+        "folk"
+      ],
+      "body": "Estrofe de cinco versos, muito usada na poesia popular brasileira e no cordel. O esquema mais comum é ABCBA ou AABBA. Exige habilidade na rima central para não perder a musicalidade.",
+      "sample": "Nasci no sertão sem nome / debaixo de um pé de umbuzeiro / aprendi a ter o siso / e a beleza do riso / antes de ser cantador"
+    },
+    {
+      "title": "Quadra",
+      "tags": [
+        "estrofe",
+        "quatro versos",
+        "popular",
+        "trova"
+      ],
+      "body": "Estrofe de quatro versos, forma mais comum da poesia popular brasileira. Esquema ABAB (quadra cruzada) ou ABBA (quadra em anel). Base da trova e do cordel.",
+      "sample": "A rosa tem espinhos / o amor tem desilusão / quem planta no coração / colhe também seus caminhos"
+    },
+    {
+      "title": "Terzina",
+      "tags": [
+        "estrofe",
+        "três versos",
+        "terça rima",
+        "Dante"
+      ],
+      "body": "Terceto encadeado com esquema ABA BCB CDC... popularizado por Dante na Divina Comédia. Cada estrofe herda a rima do meio da anterior, criando um fluxo contínuo impossível de pausar abruptamente.",
+      "sample": "Nel mezzo del cammin di nostra vita / mi ritrovai per una selva oscura / ché la diritta via era smarrita"
+    },
+    {
+      "title": "Onomatopeia",
+      "tags": [
+        "figura",
+        "som",
+        "ritmo",
+        "imitação"
+      ],
+      "body": "Palavra cujo som imita o que representa. Na poesia, vai além da palavra isolada: o próprio verso pode imitar um som ambiente por escolha cuidadosa das consoantes e vogais.",
+      "sample": "O tico-tico no fubá / o fubá no saquitel / perereca no paiol"
+    },
+    {
+      "title": "Calambur",
+      "tags": [
+        "jogo verbal",
+        "ambiguidade",
+        "humor",
+        "trocadilho"
+      ],
+      "body": "Divisão diferente de uma mesma sequência de sílabas que produz dois sentidos distintos. Ferramenta de humor e subversão poética. Diferente do trocadilho por depender da divisão silábica, não da semelhança de palavras inteiras.",
+      "sample": "Se o doce não adoça / o doce adoça-se de doce"
+    },
+    {
+      "title": "Oxímoro",
+      "tags": [
+        "figura",
+        "contradição",
+        "paradoxo",
+        "tensão"
+      ],
+      "body": "Aproximação de dois termos de sentido contrário formando uma expressão coerente. Diferente do paradoxo: o oxímoro é uma formulação compacta (silêncio ensurdecedor), o paradoxo é um raciocínio mais longo.",
+      "sample": "Amor é fogo que arde sem se ver / é ferida que dói e não se sente"
+    },
+    {
+      "title": "Hipérbato",
+      "tags": [
+        "figura",
+        "inversão",
+        "sintaxe",
+        "ênfase"
+      ],
+      "body": "Alteração da ordem natural das palavras na frase para criar ênfase ou efeito sonoro. Na poesia clássica era quase obrigatório; no verso livre, a inversão proposital ainda marca o registro literário.",
+      "sample": "Dos penedos escuros / a voz dos trovadores / ecoa pelos muros"
+    },
+    {
+      "title": "Anáfora",
+      "tags": [
+        "figura",
+        "repetição",
+        "ritmo",
+        "início de verso"
+      ],
+      "body": "Repetição da mesma palavra ou grupo de palavras no início de versos ou frases consecutivas. Cria um efeito incantório e de acumulação emocional. Diferente do refrão, que se repete em posição fixa ao longo do poema.",
+      "sample": "Tudo é mistério sob o sol / Tudo é silêncio dentro do mar / Tudo é espera nas mãos do vento"
+    },
+    {
+      "title": "Sinestesia",
+      "tags": [
+        "figura",
+        "sentidos",
+        "metáfora",
+        "cor"
+      ],
+      "body": "Mistura de sensações de sentidos diferentes numa mesma imagem: ver um som, ouvir uma cor, sentir um cheiro como textura. Recurso típico do simbolismo e muito vivo na poesia contemporânea.",
+      "sample": "Um silêncio amarelo / pesava sobre a tarde / como fumaça de mel"
+    },
+    {
+      "title": "Antítese",
+      "tags": [
+        "figura",
+        "oposição",
+        "contraste",
+        "dualidade"
+      ],
+      "body": "Aproximação de ideias, palavras ou imagens opostas sem fundi-las numa contradição — ao contrário do oxímoro. Cria contraste que ilumina ambos os lados da tensão.",
+      "sample": "Uns com fome, outros com fartura / uns no palácio, outros na cisterna"
+    },
+    {
+      "title": "Prosopopeia",
+      "tags": [
+        "figura",
+        "personificação",
+        "animismo",
+        "voz"
+      ],
+      "body": "Atribuição de características humanas a seres inanimados, abstrações ou natureza. Na poesia brasileira aparece muito na tradição oral e no cordel — o vento fala, a pedra chora, o rio lamenta.",
+      "sample": "O rio me contou que a terra seca / pede chuva como quem pede paz"
+    },
+    {
+      "title": "Gradação",
+      "tags": [
+        "figura",
+        "clímax",
+        "intensidade",
+        "acumulação"
+      ],
+      "body": "Série de termos ou imagens em ordem crescente (clímax) ou decrescente (anticlímax) de intensidade. A gradação cria movimento interno no verso, conduzindo o leitor para um ponto de chegada.",
+      "sample": "Primeiro veio o vento / depois veio a ventania / depois veio o vendaval / e então o mundo sumiu"
+    },
+    {
+      "title": "Septilha",
+      "tags": [
+        "estrofe",
+        "sete versos",
+        "ibérica",
+        "trovadorismo"
+      ],
+      "body": "Estrofe de sete versos, de tradição ibérica medieval. Menos comum no Brasil que a quintilha ou a oitava, mas aparece em poetas cultos que dialogam com a forma trovadoresca.",
+      "sample": "Sete palavras para um amor / sete pedras no caminho / sete vezes me chamaste / sete vezes me calarei / sete rios até teu nome / sete nomes sem sentido / sete sombras e um alento"
+    },
+    {
+      "title": "Epifonema",
+      "tags": [
+        "figura",
+        "exclamação",
+        "conclusão",
+        "retórica"
+      ],
+      "body": "Exclamação ou sentença de valor geral que encerra um poema ou trecho, funcionando como síntese emocional ou moral. Muito presente na tradição clássica e na poesia de ocasião.",
+      "sample": "E assim se vai a vida — / chão de pó, rastro de lua!"
+    },
+    {
+      "title": "Cauda e Estrambote",
+      "tags": [
+        "estrofe",
+        "complemento",
+        "soneto",
+        "epílogo"
+      ],
+      "body": "Verso ou versos acrescentados ao final de uma forma fixa (geralmente o soneto) que comentam, subvertem ou contradizem a conclusão esperada. O estrambote no soneto italiano era a marca do rompimento cômico com o decoro.",
+      "sample": "...e o amor que jurei / ficou pendurado na janela. / Mas a janela estava fechada."
     }
   ],
   "grammarWords": {
