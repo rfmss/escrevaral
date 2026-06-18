@@ -1104,6 +1104,38 @@
     "partida":        ["despedida", "saída", "separação voluntária", "momento de partir", "deixar para trás", "ir-se"],
     "encontro":       ["reencontro", "cruzamento de caminhos", "acaso", "confluência", "vir ao mesmo espaço", "coincidir"],
 
+    // v751 — alma, desejo, luta, ciclo, natureza, artes, identidade
+    "alma":           ["espírito", "ser interior", "essência viva", "sopro vital", "o que anima", "vida interior"],
+    "espírito":       ["alma", "força interior", "ânimo", "essência imaterial", "presença invisível", "sopro"],
+    "mente":          ["pensamento", "intelecto", "razão", "consciência", "cabeça", "faculdade de pensar"],
+    "desejo":         ["anseio", "vontade intensa", "aspiração", "cobiça", "ânsia", "sede de algo"],
+    "felicidade":     ["bem-estar", "contentamento", "alegria plena", "satisfação interior", "plenitude", "júbilo"],
+    "sofrimento":     ["padecimento", "tormento", "pena", "dor prolongada", "martírio", "agonia"],
+    "luta":           ["combate", "embate", "batalha", "esforço tenso", "resistência ativa", "enfrentamento"],
+    "começo":         ["início", "princípio", "ponto de partida", "origem", "aurora de algo", "nascimento"],
+    "momento":        ["instante", "ponto no tempo", "fração do agora", "lapso", "segundo vivido", "o agora"],
+    "rio":            ["curso d'água", "corrente", "fluxo", "veio d'água", "arroio", "riacho"],
+    "nuvem":          ["névoa suspensa", "vapor d'água", "nuvem branca", "nublado", "cumulus", "nebulosa"],
+    "pedra":          ["rocha", "calhau", "seixo", "granito", "matéria dura", "rochedo"],
+    "florescer":      ["brotar", "abrir em flor", "germinar", "desabrochar", "vir à luz", "emergir com vida"],
+    "murchar":        ["definhar", "secar", "perder o viço", "mínguar", "enfraquecer", "esmaecer"],
+    "voo":            ["travessia aérea", "elevação", "arremesso no ar", "alçar voo", "planagem", "levada"],
+    "queda":          ["tombo", "declínio", "ruína", "desabamento", "colapso", "baixar de altura"],
+    "ascensão":       ["elevação", "subida", "alçamento", "galgar", "promoção", "crescimento vertical"],
+    "trilha":         ["vereda", "atalho", "caminho estreito", "sendeiro", "picada", "rota de passagem"],
+    "velhice":        ["velheza", "ancianidade", "tardio da vida", "última estação", "anos avançados", "senescência"],
+    "juventude":      ["mocidade", "adolescência", "anos verdes", "primavera da vida", "vigor jovem", "florescência"],
+    "maturidade":     ["amadurecimento", "plenitude vital", "meia idade", "estágio pleno", "fase adulta consciente"],
+    "ciclo":          ["volta completa", "ritmo recorrente", "giro", "sequência que se repete", "roda do tempo"],
+    "limite":         ["fronteira", "borda", "extremo", "até onde vai", "marco final", "divisória"],
+    "margem":         ["beira", "borda de rio", "orla", "limite lateral", "à margem", "periferia"],
+    "harmonia":       ["equilíbrio", "concórdia", "consonância", "ordem natural", "paz interna", "correspondência"],
+    "companhia":      ["presença", "acompanhamento", "convivência", "comunhão", "junto de alguém", "não estar só"],
+    "música":         ["melodia", "harmonia sonora", "ritmo", "composição", "arte dos sons", "canto organizado"],
+    "cantar":         ["entoar", "entoar um canto", "vocalizar", "salmodiar", "entoar melodia", "dar voz"],
+    "pátria":         ["terra natal", "país de origem", "solo materno", "chão ancestral", "pertencimento territorial"],
+    "língua":         ["idioma", "fala", "linguagem materna", "vernáculo", "expressão oral", "código da comunidade"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas

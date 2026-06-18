@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
-**Atualizado em:** 2026-06-17  
-**Versão atual:** v741 (`vereda-offline-v741`, `ASSET_VERSION=20260617-contraste741`)
+**Atualizado em:** 2026-06-18  
+**Versão atual:** v750 (`vereda-offline-v750`, `ASSET_VERSION=20260618-dados750`)
 
 ---
 
@@ -169,6 +169,11 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v739 | decolonial 429→462 (+33: território, classe, conhecimento — favela/violência, interior/atraso, quilombo, Amazônia, mérito, favelado) |
 | v740 | CLIQUES_PT 867→902 (+35: ritmo, romance popular, autoajuda, suspense); PLEONASMOS 418→444 (+26: cognição, temporal, negação, ação física) |
 | v741 | CSS: 0 falhas contraste WCAG AA em 5 temas; Flesch score alvorada (sage→ink); fmt-scroll-arrow scriptorium (primary→forest-ink) |
+| v742 | sinônimos 662→701 (+39 EN→S); decolonial 462→495 (+33: genero, estetica, deficiencia, povos, relacoes, linguagem) |
+| v743-v745 | sinônimos 701→741 (+40: ternura, funeral, mudança, ócio, orvalho, palidez, soledade, rubro) |
+| v746 | CLIQUES_PT 902→958 (+56); PLEONASMOS 444→472 (+28) |
+| v747 | adjetivos_comuns 1935→1954 (+19); verbos_pres_reg 1921→1964 (+43) |
+| v748-v750 | sinônimos 741→770 (+29: ES→lacunas literárias, angústia, aurora, infância, vigília); decolonial 495→513 (+18 Bagno) |
 
 ---
 
