@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-18  
-**Versão atual:** v769 (`vereda-offline-v769`, `ASSET_VERSION=20260618-dados769`)
+**Versão atual:** v775 (`vereda-offline-v775`, `ASSET_VERSION=20260618-dados775`)
 
 ---
 
@@ -178,6 +178,10 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v752-v753 | decolonial 513→543 (+30: conhecimento 55→63, estetica 55→62, relacoes/povos/deficiencia 56→61) |
 | v754 | CLIQUES_PT 958→1000 (+42 marcos); PLEONASMOS 472→500 (+28) |
 | v755-v769 | sinônimos 800→951 (+151: exílio, traição, devaneio, cura, honra, eloquência…); decolonial 543→564 (+21); adjetivos 1978→2000; verbos 1989→2000 |
+| v770-v772 | sinônimos 951→1000 (+49: virtude, vício, moral, ética, areia, pampa, cerrado, sacrifício…) |
+| v773 | substantivos_ia 235→300 (+65); formas_verbais_irr 1795→1845 (+50: SENTIR/FERIR/COBRIR/FUGIR…) |
+| v774 | formas_verbais_irr 1845→2000 (+155: pretérito, subjuntivo pres, particípios irregulares) |
+| v775 | RimaLab enciclopédia 35→50 (+15: Quintilha, Oxímoro, Sinestesia, Gradação, Terzina, Anáfora…) |
 
 ---
 
