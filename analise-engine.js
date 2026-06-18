@@ -520,6 +520,23 @@
     "a pobreza não é destino mas parece","nasce pobre morre pobre no Brasil",
     "o sistema foi feito para esmagar quem está embaixo","meritocracia é mentira",
     "trabalhou a vida toda e não tem nada","o sonho americano tem endereço de rico",
+    // clichês narrativos de ritmo
+    "foi então que","de repente tudo mudou","e assim foi que","e foi assim que",
+    "num piscar de olhos","em fração de segundos","em menos de um segundo",
+    "sem pensar duas vezes","antes que fosse tarde demais","não havia tempo a perder",
+    // clichês de romance popular brasileiro
+    "seus olhos como estrelas","seu sorriso iluminava tudo","o coração disparou",
+    "um frio na barriga","ficou sem chão","não conseguia tirar você da cabeça",
+    // clichês de autoajuda na ficção
+    "acredite em si mesmo","você é capaz","nunca desista dos seus sonhos",
+    "os limites estão na mente","mude sua mentalidade","seja a mudança que quer ver",
+    // clichês de redação temporal
+    "ao decorrer dos anos","desde os primórdios da humanidade",
+    "desde os tempos mais remotos","na sociedade atual",
+    "no mundo globalizado","na era digital","em pleno século xxi",
+    // clichês de suspense
+    "havia algo errado","algo estava fora do lugar","um pressentimento ruim",
+    "não era coincidência","o pior estava por vir","era apenas o começo",
   ];
 
   const PLEONASMOS = [
@@ -792,6 +809,23 @@
     ["amor que amo","amor"],["medo que temo","medo"],
     ["tristeza triste","tristeza"],["alegria alegre","alegria"],
     ["saudade de algo saudoso","saudade"],["raiva que me enraivece","raiva"],
+    // redundâncias de cognição e discurso
+    ["pensar um pensamento","pensar"],["sonhar um sonho","sonhar"],
+    ["imaginar uma imagem","imaginar"],["decidir uma decisão","decidir"],
+    ["escolher uma escolha","escolher"],["crer numa crença","crer"],
+    ["duvidar de uma dúvida","duvidar"],["perguntar uma pergunta","perguntar"],
+    // redundâncias de narrativa temporal
+    ["futuro que ainda virá","futuro"],["passado que já foi","passado"],
+    ["presente que é agora","presente"],["memória do passado","memória"],
+    ["história que aconteceu","história"],["evento que se deu","evento"],
+    // redundâncias de afirmação e negação
+    ["verdade verídica","verdade"],["mentira falsa","mentira"],
+    ["fato real e verdadeiro","fato"],["certeza que é certa","certeza"],
+    ["opinião pessoal do autor","opinião"],["ponto de vista pessoal","ponto de vista"],
+    // redundâncias de ação física
+    ["sorrir um sorriso","sorrir"],["chorar o pranto","chorar"],
+    ["gritar um grito","gritar"],["suspirar um suspiro","suspirar"],
+    ["cair numa queda","cair"],["correr numa corrida","correr"],
   ];
 
   const NEGACOES_DUPLAS = [
