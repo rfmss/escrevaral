@@ -6478,6 +6478,126 @@
       "reason": "Toma o modelo econômico do Sul como universal e desejável para todo o país, apagando diversidades regionais",
       "context": "O Sul é o exemplo de desenvolvimento para o Brasil",
       "contextual": false
+    },
+    {
+      "avoid": "gente de bem como classe",
+      "alternatives": [
+        "pessoas respeitosas",
+        "quem segue regras de convivência",
+        "cidadãos comprometidos"
+      ],
+      "category": "classe",
+      "reason": "Usa 'gente de bem' como código para classe média branca, excluindo populações periféricas e negras do status de cidadania plena",
+      "context": "A gente de bem não quer isso",
+      "contextual": false
+    },
+    {
+      "avoid": "padrão classe média",
+      "alternatives": [
+        "estilo de vida urbano médio",
+        "consumo da classe média",
+        "modo de vida da classe média"
+      ],
+      "category": "classe",
+      "reason": "Naturaliza o consumo e o modo de vida da classe média como padrão universal, desvalorizando outras formas de viver",
+      "context": "Tem um padrão classe média",
+      "contextual": false
+    },
+    {
+      "avoid": "educação como saída da pobreza",
+      "alternatives": [
+        "educação como direito",
+        "acesso à educação",
+        "formação educacional"
+      ],
+      "category": "classe",
+      "reason": "Individualiza a responsabilidade pela pobreza, como se o problema fosse falta de educação e não estrutura econômica injusta",
+      "context": "Estuda pra sair da pobreza",
+      "contextual": false
+    },
+    {
+      "avoid": "pobre como problema",
+      "alternatives": [
+        "pessoa em situação de vulnerabilidade",
+        "trabalhador de baixa renda",
+        "população de baixa renda"
+      ],
+      "category": "classe",
+      "reason": "Trata a condição de pobreza como patologia individual ou social, em vez de resultado de estruturas econômicas",
+      "context": "O problema são os pobres",
+      "contextual": false
+    },
+    {
+      "avoid": "serviço braçal como inferior",
+      "alternatives": [
+        "trabalho manual",
+        "trabalho físico",
+        "trabalho de campo"
+      ],
+      "category": "classe",
+      "reason": "Hierarquiza tipos de trabalho pela exigência intelectual, desvalorizando o trabalho manual historicamente realizado por populações negras e indígenas",
+      "context": "Isso é serviço braçal",
+      "contextual": false
+    },
+    {
+      "avoid": "sotaque carregado como defeito",
+      "alternatives": [
+        "variedade regional marcada",
+        "fala com identidade regional",
+        "sotaque regional pronunciado"
+      ],
+      "category": "linguagem",
+      "reason": "Trata marcas identitárias de fala regional como erro ou desvio, quando são expressões legítimas de diferentes variedades do português",
+      "context": "Tem sotaque muito carregado",
+      "contextual": false
+    },
+    {
+      "avoid": "língua pura",
+      "alternatives": [
+        "variedade formal do português",
+        "português padrão",
+        "norma culta"
+      ],
+      "category": "linguagem",
+      "reason": "Naturaliza a ideia de que uma língua pode ser pura ou contaminada, negando que todas as línguas são produto de contato e mistura",
+      "context": "Deve-se falar a língua pura",
+      "contextual": false
+    },
+    {
+      "avoid": "linguagem popular como erro",
+      "alternatives": [
+        "variedade popular do português",
+        "fala coloquial",
+        "norma não-padrão"
+      ],
+      "category": "linguagem",
+      "reason": "Classifica variedades faladas por populações negras e periféricas como erros, quando são sistemas linguísticos complexos e legítimos",
+      "context": "Esse pessoal fala errado",
+      "contextual": false
+    },
+    {
+      "avoid": "palavrão como ignorância",
+      "alternatives": [
+        "linguagem mais informal",
+        "registro muito coloquial",
+        "vocabulário popular"
+      ],
+      "category": "linguagem",
+      "reason": "Associa uso de palavras consideradas chulas à falta de inteligência ou educação, ignorando seu valor expressivo e classe social de quem as usa",
+      "context": "Usa palavrão porque não sabe falar",
+      "contextual": false
+    },
+    {
+      "avoid": "língua de branco",
+      "alternatives": [
+        "variedade urbana do português",
+        "português padrão escolar",
+        "norma culta"
+      ],
+      "category": "linguagem",
+      "reason": "Expressão que revela como o padrão linguístico foi construído a partir da perspectiva branca, excluindo outras variedades como legítimas",
+      "context": "Fala a língua de branco",
+      "contextual": false
     }
   ]
 }
