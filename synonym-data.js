@@ -1136,6 +1136,23 @@
     "pátria":         ["terra natal", "país de origem", "solo materno", "chão ancestral", "pertencimento territorial"],
     "língua":         ["idioma", "fala", "linguagem materna", "vernáculo", "expressão oral", "código da comunidade"],
 
+    // v755 — Nascentes + lacunas literárias: triunfo, devaneio, epifania, exílio, traição
+    "triunfo":        ["vitória gloriosa", "pompa do vencer", "consagração", "glorificação", "celebração da vitória"],
+    "verdor":         ["viço", "frescor vegetal", "vida verde", "cor da esperança", "vigor vivo"],
+    "devaneio":       ["sonho acordado", "fantasia", "divagação", "pensamento errante", "labirinto mental", "imaginação solta"],
+    "confidência":    ["confissão", "segredo partilhado", "revelação íntima", "segredo de coração", "o que se diz baixinho"],
+    "epifania":       ["revelação súbita", "iluminação interior", "momento de clareza", "insight repentino", "descoberta interior"],
+    "intuir":         ["pressentir", "captar sem análise", "perceber por instinto", "ter palpite", "antever sem razão"],
+    "pressentir":     ["intuir", "ter presságio", "antecipar com o corpo", "sentir com antecedência", "palpitar"],
+    "demolir":        ["derrubar", "destruir", "arrasar", "arruinar", "desabar", "reduzir a pó"],
+    "dançar":         ["bailar", "mover ao ritmo", "girar", "requebrar", "rodopiar", "movimentar-se pela música"],
+    "prisão":         ["cárcere", "encarceramento", "clausura", "confinamento", "gaiola", "reclusão"],
+    "exílio":         ["desterro", "degredo", "afastamento forçado", "banimento", "vida longe da pátria"],
+    "traição":        ["deslealdade", "perfídia", "entrega ao inimigo", "quebra da confiança", "golpe pelas costas"],
+    "contemplar":     ["observar com atenção", "meditar sobre", "admirar em silêncio", "encarar fundo", "mirar com calma"],
+    "nostalgia":      ["saudade do passado", "melancolia do que foi", "anseio pelo tempo ido", "sentimento do que não volta"],
+    "cicatriz":       ["marca do ferido", "sinal deixado", "vestígio da dor", "lembrança no corpo", "rastro do tempo"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
