@@ -1248,6 +1248,28 @@
     "lavoura":        ["cultivo", "trabalho do campo", "roça", "lida com a terra", "produção agrícola"],
     "erudito":        ["culto", "douto", "muito instruído", "que sabe muito pelo estudo", "pessoa das letras"],
 
+    // v766 — lacunas morais, elementares e culturais
+    "bondade":        ["generosidade", "gentileza", "benevolência", "virtude do bem", "ato de cuidar do outro"],
+    "gentileza":      ["delicadeza", "cortesia", "atenção ao próximo", "bondade em ato", "afabilidade"],
+    "compaixão":      ["piedade", "empatia com o sofrimento", "comoção pelo outro", "solidariedade afetiva"],
+    "crueldade":      ["brutalidade", "maldade em ato", "falta de compaixão", "desumanidade", "dureza extrema"],
+    "maldade":        ["crueldade", "malícia", "perversidade", "má-vontade deliberada", "disposição para o mal"],
+    "indiferença":    ["apatia", "desinteresse", "frieza", "não se importar", "ausência de sentimento"],
+    "dúvida":         ["incerteza", "hesitação", "suspense interior", "não saber ao certo", "questionamento"],
+    "certeza":        ["convicção", "segurança interior", "saber sem dúvida", "firmeza", "absoluta confiança"],
+    "perigo":         ["ameaça", "risco", "situação perigosa", "iminência do mal", "o que pode machucar"],
+    "luto":           ["perda", "sofrimento pela morte", "tempo de chorar", "período de dor", "dor da ausência"],
+    "celebração":     ["festa", "comemoração", "júbilo coletivo", "marcar uma conquista", "alegria partilhada"],
+    "força":          ["potência", "vigor", "poder físico", "energia do corpo", "capacidade de resistir"],
+    "resistência":    ["teimosia vital", "persistência", "não ceder", "força de manter-se", "aguentar o embate"],
+    "criação":        ["obra", "resultado do fazer", "produto da imaginação", "ato de criar", "o que nasce do criador"],
+    "raiz":           ["origem", "ponto de partida", "onde tudo começa", "fundamento", "base ancestral"],
+    "solo":           ["chão", "terra firme", "superfície da terra", "base que sustenta"],
+    "água":           ["líquido essencial", "o que flui", "elemento da vida", "chuva que cai", "rio que corre"],
+    "paixão":         ["amor intenso", "ardor", "entusiasmo extremo", "entrega total", "fogo interior"],
+    "livro":          ["obra escrita", "volume", "texto encadernado", "objeto da leitura", "mundo em papel"],
+    "percurso":       ["jornada", "caminhada completa", "trajetória", "trilha percorrida", "o que se andou"],
+
   };
 
   // Normalização: remove acentos e converte para minúsculas
