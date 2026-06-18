@@ -2681,6 +2681,90 @@
       "className": "word-tecnica",
       "field": "Poesia",
       "note": "correspondência sonora entre finais de versos"
+    },
+    "bloqueio_criativo": {
+      "label": "bloqueio criativo",
+      "className": "word-estrutura",
+      "field": "Processo",
+      "note": "paralisia do escritor diante da página em branco; vários gatilhos possíveis"
+    },
+    "fluxo": {
+      "label": "fluxo",
+      "className": "word-estrutura",
+      "field": "Processo",
+      "note": "estado de imersão total na escrita; tempo passa sem perceber"
+    },
+    "voz_autoral": {
+      "label": "voz autoral",
+      "className": "word-voz",
+      "field": "Estilo",
+      "note": "presença distintiva do escritor que atravessa toda a obra"
+    },
+    "estilo": {
+      "label": "estilo",
+      "className": "word-voz",
+      "field": "Estilo",
+      "note": "conjunto de escolhas linguísticas e formais que identificam um escritor"
+    },
+    "sintaxe_literaria": {
+      "label": "sintaxe literária",
+      "className": "word-tecnica",
+      "field": "Estilo",
+      "note": "uso intencional da estrutura frasal para criar efeitos rítmicos e semânticos"
+    },
+    "elipse_narrativa": {
+      "label": "elipse narrativa",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "salto no tempo não narrado; o que não é contado também define o ritmo"
+    },
+    "lacuna": {
+      "label": "lacuna",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "espaço de silêncio que o leitor preenche com interpretação; recurso do implícito"
+    },
+    "pregnancia": {
+      "label": "pregnância",
+      "className": "word-tecnica",
+      "field": "Estilo",
+      "note": "capacidade de uma imagem ou cena de carregar múltiplos sentidos ao mesmo tempo"
+    },
+    "economia": {
+      "label": "economia",
+      "className": "word-estrutura",
+      "field": "Estilo",
+      "note": "princípio de usar o mínimo de palavras para o máximo de efeito"
+    },
+    "densidade": {
+      "label": "densidade",
+      "className": "word-estrutura",
+      "field": "Estilo",
+      "note": "grau de significado comprimido por linha; textos densos exigem mais do leitor"
+    },
+    "fantasia_interna": {
+      "label": "fantasia interna",
+      "className": "word-tecnica",
+      "field": "Personagem",
+      "note": "crença do personagem sobre o que precisa para ser feliz; frequentemente equivocada"
+    },
+    "necessidade": {
+      "label": "necessidade",
+      "className": "word-estrutura",
+      "field": "Personagem",
+      "note": "o que o personagem realmente precisa vs o que deseja; tensão central do arco"
+    },
+    "realismo_magico": {
+      "label": "realismo mágico",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "inserção do maravilhoso no cotidiano sem espanto da voz narrativa; García Márquez, Toni Morrison"
+    },
+    "utopia": {
+      "label": "utopia",
+      "className": "word-tecnica",
+      "field": "Narrativa",
+      "note": "mundo ideal impossível; seu oposto distopia é frequentemente mais fértil narrativamente"
     }
   },
   "functionWords": {
