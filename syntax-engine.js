@@ -252,6 +252,7 @@
       // P0.4: verificar verbos irregulares e presentes ANTES de adjetivos — evita sequestro
       else if (VERBOS_AUX.has(norm)) { tags.push("Verb"); }
       else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) { tags.push("Verb"); }
+      else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm)) && i > 0 && !PREPS_OI.has(tokens[i-1].toLowerCase()) && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase())) { tags.push("Verb"); }
       else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
       else if (ADV_AFIRM.has(norm))   { tags.push("Adverb"); }
@@ -288,10 +289,9 @@
           } else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(normNacc)) {
             tags.push("Verb");
           } else {
-            // Sufixos inequívocos em posição 0 — não se confundem com nomes próprios
             if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
-            else if (norm.length > 4 && /(?:aram|eram|iram|ava|avam|ará|erá|irá|asse|esse|isse)$/.test(norm)) tags.push("Verb");
-            // Omitidos em posição 0: -ia/-iria/-aria (Vitória/Maria), -ar/-er/-ir (Rosa/Amar)
+            else if (norm.length > 4 && /(?:aram|eram|iram|ava|avam|ará|erá|irá|asse|esse|isse|ou|eu|iu|ei)$/.test(norm)) tags.push("Verb");
+            else tags.push("Noun");
           }
         } else {
           if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
