@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-18  
-**Versão atual:** v775 (`vereda-offline-v775`, `ASSET_VERSION=20260618-dados775`)
+**Versão atual:** v779 (`vereda-offline-v779`, `ASSET_VERSION=20260618-dados779`)
 
 ---
 
@@ -182,6 +182,10 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v773 | substantivos_ia 235→300 (+65); formas_verbais_irr 1795→1845 (+50: SENTIR/FERIR/COBRIR/FUGIR…) |
 | v774 | formas_verbais_irr 1845→2000 (+155: pretérito, subjuntivo pres, particípios irregulares) |
 | v775 | RimaLab enciclopédia 35→50 (+15: Quintilha, Oxímoro, Sinestesia, Gradação, Terzina, Anáfora…) |
+| v776 | léxico 461→500 (+39: tensão dramática, espaços afrobrasileiros, voz negra, cordel, capoeira, arco emocional) |
+| v777 | decolonial 564→581 (+17: IA/viés algorítmico, dado objetivo, ideologia de gênero, deficiente superador) |
+| v778 | grammarWords 286→348 (+62: esdrúxulas, -eza/-ura/-ão/-ade/-or) |
+| v779 | sinônimos 1000→1016 (+16: leitor, governo, lei, ofício, arte, adolescência, trajetória, partida) |
 
 ---
 
