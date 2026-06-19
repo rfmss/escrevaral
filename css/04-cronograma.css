@@ -293,6 +293,11 @@
 .crono-month-dot.has-data { background: color-mix(in srgb, var(--primary) 40%, transparent); }
 .crono-month-dot.is-today { background: var(--primary); }
 
+@media (max-width: 600px) {
+  .cronograma-heatmap { padding: 12px 8px; gap: 1px; }
+  .crono-month-btn { padding: 4px 4px; }
+}
+
 /* Timeline */
 .cronograma-timeline {
   position: relative;

@@ -231,9 +231,12 @@
       const tags = [];
       if (ARTIGOS_DEF.has(norm)) {
         tags.push("Determiner");
-      } else if (i === 0 && norm === "a") {
-        // "A" maiúsculo no início → artigo definido feminino, não preposição
-        tags.push("Determiner");
+      } else if (norm === "a") {
+        // "a" ambíguo: artigo feminino ou preposição
+        // Heurística: se próximo token inicia com maiúscula mid-sentence → preposição; senão → artigo
+        const _nextTok = i + 1 < tokens.length ? tokens[i + 1] : null;
+        const _nextIsProper = _nextTok !== null && /^\p{Lu}/u.test(_nextTok) && i > 0;
+        tags.push(_nextIsProper ? "Preposition" : "Determiner");
       } else if (PREPS_OI.has(norm)) {
         tags.push("Preposition");
       } else if (CONTRACOES_PREP_DEM.has(norm)) {
@@ -252,7 +255,7 @@
       // P0.4: verificar verbos irregulares e presentes ANTES de adjetivos — evita sequestro
       else if (VERBOS_AUX.has(norm)) { tags.push("Verb"); }
       else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) { tags.push("Verb"); }
-      else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm)) && i > 0 && !PREPS_OI.has(tokens[i-1].toLowerCase()) && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase())) { tags.push("Verb"); }
+      else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm)) && i > 0 && !PREPS_OI.has(tokens[i-1].toLowerCase()) && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase()) && !(i >= 2 && (ARTIGOS_DEF.has(tokens[i-2].toLowerCase()) || tokens[i-2].toLowerCase() === "a"))) { tags.push("Verb"); }
       else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
       else if (ADV_AFIRM.has(norm))   { tags.push("Adverb"); }
@@ -681,7 +684,7 @@
       }
 
       // ── Preposição / artigo / contração — rastreia prepVistaAntes
-      const isPrep = PREPS_OI.has(norm) || tags.includes("Preposition");
+      const isPrep = tags.includes("Preposition") || (PREPS_OI.has(norm) && norm !== "a");
       if (isPrep || (tags.includes("Determiner") && !tags.includes("Pronoun"))) {
         resultado.push({ ...t, funcao: isPrep && !["o","a","os","as","um","uma","uns","umas"].includes(norm) ? "Preposição" : "Artigo / contração", tagsLegíveis: mapearTag(tags) });
         if (isPrep) prepVistaAntes = true;
