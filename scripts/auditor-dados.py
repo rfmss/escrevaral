@@ -301,12 +301,17 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
 
     exact_pres = set_intersection(adjetivos_norma, verbos_pres, normalize=lambda x: str(x).lower())
     if exact_pres:
+        # Verificar se a guarda adnominal (2-token lookback) esta presente no VERBOS_PRES do syntax-engine.js (v794+)
+        with open("syntax-engine.js", encoding="utf-8") as _sf2:
+            _sc2 = _sf2.read()
+        _has_adnominal_guard = 'tokens[i-2].toLowerCase() === "a"' in _sc2 and "_VERBOS_PRES.has(_stripDiac(norm))" in _sc2
+        _pres_severity = "P1" if _has_adnominal_guard else "P0"
         add_issue(
-            "P0",
+            _pres_severity,
             "norma-data.json/adjetivos_comuns",
-            "Adjetivos da norma colidem com presente verbal regular",
+            "Adjetivos da norma colidem com presente verbal regular" + (" (mitigado por guarda adnominal 2-token no VERBOS_PRES)" if _has_adnominal_guard else ""),
             ", ".join(f"`{item}`" for item in exact_pres[:30]),
-            "Classificar por contexto sintatico: sujeito + forma presente => verbo; nome/artigo + termo => adjetivo.",
+            "Guarda adnominal presente: Art+N+Adj bloqueado antes de VERBOS_PRES; colisao coberta." if _has_adnominal_guard else "Classificar por contexto sintatico: sujeito + forma presente => verbo; nome/artigo + termo => adjetivo.",
         )
 
     exact_irr = set_intersection(adjetivos_norma, verbos_irr, normalize=lambda x: str(x).lower())
