@@ -1376,6 +1376,31 @@
     "subversao":     ["inversão", "ruptura", "reviravolta", "contestação", "o avesso da expectativa"],
     "anacronismo":   ["deslocamento temporal", "anacronia", "presença do passado no presente", "fora do tempo"],
     "paratexto":     ["título", "epígrafe", "prefácio", "dedicatória", "o que cerca o texto", "entorno da obra"],
+
+    // emoção e estados interiores
+    "satisfação":    ["contentamento", "realização", "plenitude", "saciedade", "agrado", "cumprimento"],
+    "decepção":      ["desilusão", "frustração", "desapontamento", "desengano", "amargura suave", "quebra de expectativa"],
+    "frustração":    ["decepção", "impossibilidade", "barreira interior", "impotência", "corte no desejo"],
+    "desilusão":     ["desencanto", "desapontamento", "decepção", "perda de ilusão", "ver sem véu"],
+    "despedida":     ["adeus", "partida", "separação", "último encontro", "ruptura afetiva", "o que se deixa"],
+    "perturbação":   ["inquietação", "intranquilidade", "agitação interior", "turbulência", "desequilíbrio"],
+    "hesitação":     ["dúvida", "vacilação", "indecisão", "pausa antes do gesto", "entre dois caminhos"],
+    "peso":          ["fardo", "carga", "gravidade", "ônus", "o que não se larga", "responsabilidade que pesa"],
+    "acolhimento":   ["recepção", "amparo", "receptividade", "abertura ao outro", "abraço em sentido amplo"],
+    "rejeição":      ["recusa", "exclusão", "repulsa", "negação do outro", "expulsão", "o que dói ao ser recusado"],
+
+    // paisagens e biomas brasileiros
+    "vereda":        ["veredão", "galeria de buritis", "baixada úmida", "caminho d'água no cerrado"],
+    "savana":        ["campo aberto", "planície arbustiva", "área de campo e cerrado"],
+    "barranco":      ["ribanceira", "barranqueira", "falésia fluvial", "margem alta", "beira do abismo"],
+    "lagoa":         ["lago raso", "charco", "espelho d'água", "aguado", "olho d'água"],
+    "riacho":        ["córrego", "ribeiro", "regato", "ribeirão pequeno", "fio d'água"],
+    "brejo":         ["várzea úmida", "pântano raso", "terras alagadiças", "charco", "zona brejosa"],
+    "manguezal":     ["mangue", "mata de mangue", "vegetação de maré", "ecossistema costeiro"],
+
+    // sensorialidade e gesto
+    "sussurro":      ["murmúrio", "cochicho", "voz de vento", "fala baixa", "som quase silêncio"],
+    "espaço":        ["lugar", "ambiente", "cenário", "território", "campo", "vazio habitável", "abertura"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
