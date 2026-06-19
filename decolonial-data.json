@@ -6991,6 +6991,138 @@
       "reason": "Naturaliza a violência em comunidades periféricas, indígenas ou afro-brasileiras como traço cultural, apagando causas históricas.",
       "context": "Analise as condições materiais que produzem a violência — não o suposto caráter da cultura.",
       "contextual": false
+    },
+    {
+      "avoid": "doido",
+      "alternatives": [
+        "pessoa com transtorno mental",
+        "em crise",
+        "em sofrimento psíquico"
+      ],
+      "category": "deficiencia",
+      "reason": "Variante coloquial de 'louco' — mantém o mesmo efeito estigmatizante, especialmente quando usado para desqualificar.",
+      "context": "Em voz de personagem ou narrador não confiável pode aparecer com marcação crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "incapacitado",
+      "alternatives": [
+        "pessoa com deficiência",
+        "pessoa impedida temporariamente",
+        "em readaptação"
+      ],
+      "category": "deficiencia",
+      "reason": "Reduz a deficiência a incapacidade total, ignorando competências e possibilidades da pessoa.",
+      "context": "Depende do contexto: para situação temporária, 'em recuperação' é mais preciso.",
+      "contextual": true
+    },
+    {
+      "avoid": "coitado",
+      "alternatives": [
+        "merece atenção",
+        "precisa de apoio",
+        "enfrenta barreira"
+      ],
+      "category": "deficiencia",
+      "reason": "Paternalismo que infantiliza e nega agência — transforma a pessoa com deficiência em objeto de pena.",
+      "context": "Em narrativa, ao descrever personagem com deficiência, privilegiar o que ela faz, não o que lhe falta.",
+      "contextual": true
+    },
+    {
+      "avoid": "gente de bem",
+      "alternatives": [
+        "cidadão",
+        "habitante",
+        "morador",
+        "pessoa"
+      ],
+      "category": "classe",
+      "reason": "'Gente de bem' pressupõe que há gente 'do mal' — divide a população por classe, raça ou comportamento moral julgado por quem usa o termo.",
+      "context": "Em narrador ou discurso de personagem, o uso implica posição de classe. Marcar isso se relevante para a narrativa.",
+      "contextual": true
+    },
+    {
+      "avoid": "povo ignorante",
+      "alternatives": [
+        "população sem acesso à educação formal",
+        "comunidade com baixa escolarização"
+      ],
+      "category": "classe",
+      "reason": "Confunde falta de acesso à escolarização formal com ausência de conhecimento — apaga saberes populares e estruturas de exclusão.",
+      "context": "Depende de quem fala: narrador onisciente neutro não deve usar; personagem pode usar com distância crítica.",
+      "contextual": true
+    },
+    {
+      "avoid": "favor social",
+      "alternatives": [
+        "política pública",
+        "direito social",
+        "acesso garantido por lei"
+      ],
+      "category": "classe",
+      "reason": "Transforma direitos conquistados em ato de benevolência — apaga a luta e o estatuto legal das políticas sociais.",
+      "context": "Uso sensível: pode aparecer em discurso de personagem como marcador ideológico.",
+      "contextual": true
+    },
+    {
+      "avoid": "traços finos",
+      "alternatives": [
+        "traços angulares",
+        "feições delicadas",
+        "traços definidos"
+      ],
+      "category": "estetica",
+      "reason": "'Traços finos' como elogio implica que traços largos — associados a negros e indígenas — são menos bonitos.",
+      "context": "Ao descrever personagens, nomear os traços sem juízo implícito de fineza como valor.",
+      "contextual": true
+    },
+    {
+      "avoid": "pele morena como café",
+      "alternatives": [
+        "pele escura",
+        "pele negra",
+        "pele com tom..."
+      ],
+      "category": "estetica",
+      "reason": "Comparação alimentar — mesmo com intenção lírica — coisifica o corpo negro e reproduz um olhar fetichizante.",
+      "context": "Em poesia, o problema é estrutural: a tradição de comparar corpos negros a alimentos tem raízes escravagistas.",
+      "contextual": true
+    },
+    {
+      "avoid": "saber o lugar",
+      "alternatives": [
+        "respeitar combinados",
+        "reconhecer o contexto",
+        "ter discernimento"
+      ],
+      "category": "relacoes",
+      "reason": "'Saber o lugar' implica que há lugares fixos definidos por hierarquia social, racial ou de gênero.",
+      "context": "Uso sensível: pode aparecer em diálogo de personagem como marcador de controle social.",
+      "contextual": true
+    },
+    {
+      "avoid": "dar uma de vítima",
+      "alternatives": [
+        "narrar sofrimento",
+        "relatar violência sofrida",
+        "expressar dor"
+      ],
+      "category": "relacoes",
+      "reason": "Desacredita o relato de quem sofreu violência ou injustiça, invertendo responsabilidade e silenciando a vítima real.",
+      "context": "Em narrativa, cuidar para que o narrador não reforce esse enquadramento sem marcar a perspectiva.",
+      "contextual": true
+    },
+    {
+      "avoid": "jogo de vítima",
+      "alternatives": [
+        "relato de sofrimento",
+        "narrativa de dano",
+        "descrição de injustiça"
+      ],
+      "category": "relacoes",
+      "reason": "Mesma estrutura de 'dar uma de vítima' — criminaliza o ato de narrar violência sofrida.",
+      "context": "Pode aparecer em diálogo de personagem que tenta silenciar outra; o narrador não deve endossar sem distância crítica.",
+      "contextual": true
     }
   ]
 }
