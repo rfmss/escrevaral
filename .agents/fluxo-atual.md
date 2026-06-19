@@ -1,7 +1,7 @@
 # Handoff vivo — Escrevaral
 
 **Atualizado em:** 2026-06-18  
-**Versão atual:** v780 (`vereda-offline-v780`, `ASSET_VERSION=20260618-p0fix780`)
+**Versão atual:** v791 (`vereda-offline-v791`, `ASSET_VERSION=20260618-v791`)
 
 ---
 
@@ -187,6 +187,17 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v778 | grammarWords 286→348 (+62: esdrúxulas, -eza/-ura/-ão/-ade/-or) |
 | v779 | sinônimos 1000→1016 (+16: leitor, governo, lei, ofício, arte, adolescência, trajetória, partida) |
 | v780 | P0 morfologia: inferWordClassContextual duplicada removida; VERBOS_ACENTUADOS (dá/vê/pôr); POLISSEMIA.a; cliticos hifenizados; _VERBOS_IRR antes de _ADJ_EXT; intima/larga/sabias/seguro removidos de adjetivos_comuns — bateria 13/13 |
+| v781 | P0 morfo (Codex audit): larga→Verb com guarda VERBOS_PRES antes ADJETIVOS_PRIM; Amor→Noun fallback pos-0; bateria 18/43→41/43 |
+| v782 | synonym-data.js: 4 dup exatas mescladas; lexical: 4 homógrafos removidos de adjetivos_comuns; norma: 3 homógrafos removidos; decolonial: 3 alternativas vazias preenchidas; OG 404 corrigida; overflow mobile trilhas |
+| v783 | synonym-data.js: 14 dup normalizadas mescladas (1016→1002); decolonial 581→600 (+19); norma adjetivos_comuns 1993→2000 |
+| v784 | synonym-data.js +11 craft (1002→1013); lexical localLexicon 500→528 (+28 craft/narrativa) |
+| v785 | rimalab grammarWords 348→407 (+59 esdrúxulas); fix 38 titlecase→minúsculo; META_ENGINES_100 atualizado |
+| v786 | decolonial engine: normalize texto+termo; dados: -5 dup norm + normal amplo; lexicon: 3 chaves mortas renomeadas; auditor P0→P1 |
+| v787 | dock mobile: botão Mais com toggle-bandeja (Plano acessível em phone) |
+| v788 | sinônimos 1013→1032 (+19: emoção/biomas/sensorial); voice: 9º campo trabalho (+60 termos); natureza +20 biomas |
+| v789 | decolonial 595→606 (+11: doido/incapacitado/coitado; gente de bem; traços finos; saber o lugar) |
+| v790 | norma: adjetivos 2000→2040; verbos 2000→2045 (+40+45 formas seguras) |
+| v791 | PLEONASMOS 500→527 (+27: cor+adjetivo, visão futurista, protestar contra, narrar narrativa) |
 
 ---
 
@@ -203,32 +214,34 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Riscos ativos
 
-- **Homógrafos em adjetivos_comuns**: padrão diacritic-stripping pode criar conflitos verbo/adjetivo quando adjetivos com acento têm forma verbal homógrafa sem acento. Checar antes de adicionar novas formas em -ia.
-- **Sintaxe 99%**: o 1% restante requer desambiguação contextual (janela de tokens) — não tentar resolver com mais dados.
+- **Homógrafos em adjetivos_comuns**: padrão diacritic-stripping pode criar conflitos verbo/adjetivo quando adjetivos com acento têm forma verbal homógrafa sem acento. Checar antes de adicionar novas formas em -ia/-ava/-era. (P1 do auditor — formas como séria/pública são P1, não P0, porque o acento as distingue no ADJETIVOS_PRIM em runtime.)
+- **Morfologia 41/43 → 43/43**: dois casos pendentes: (a) `a` position-aware — requer API change com charOffset; (b) `estreito` adnominal — requer 2-token lookback. Custo: médio.
 - **templates-data.json**: não tocar — 63 templates calibrados.
 
 ---
 
 ## Próximos passos possíveis
 
-1. `synonym-data.js` — 662 entradas; espaço para 700+ com estados emocionais e vocabulário político
-2. `decolonial-data.json` — 462 entradas; linguagem/comunicação tem espaço para 470+
-3. `norma-data.json` — adjetivos_comuns 1935; verbos_pres_reg 1921; espaço para 1960+/1950+
-4. Refinamento visual — espaçamento, alinhamento e legibilidade em temas escuros
-5. Sintaxe 99%→100% — requer desambiguação contextual (custo alto, não prioritário)
+1. `norma-data.json` — adjetivos 2040, verbos 2045; espaço para 2100+ com formas literárias e acadêmicas
+2. `synonym-data.js` — 1032 entradas; política, corpo como metáfora e vocabulário regional
+3. `decolonial-data.json` — 606 entradas; deficiencia 62 (pode crescer 70+)
+4. Morfologia 41/43→43/43 — `a` position-aware + `estreito` adnominal
+5. Refinamento visual — estados de hover, focus-visible, acessibilidade em temas escuros
 
 ---
 
 ## Arquivos-chave do estado
 
-- `META_ENGINES_100.md` — maturidade de cada engine
-- `norma-data.json` — dados morfológicos (adjetivos_comuns: 1935, formas_verbais_irr: 1795, verbos_pres_reg: 1921)
-- `voice-engine.js` — campos semânticos (corpo: 65, sobrenatural: 60, natureza: 65, casa: 60, cidade: 61, conflito: 60, pensamento: 60, memoria: 56)
-- `synonym-data.js` — 662 entradas
-- `lexical-data.json` — localLexicon 461 entradas
-- `decolonial-data.json` — 462 entradas; 9 categorias
+- `META_ENGINES_100.md` — maturidade de cada engine (atualizado v784)
+- `norma-data.json` — adjetivos_comuns: **2040**, verbos_pres_reg: **2045**, formas_verbais_irr: **2000**
+- `voice-engine.js` — **9 campos** (corpo/casa/natureza/memoria/conflito/pensamento/cidade/sobrenatural/trabalho); natureza ~80 termos
+- `synonym-data.js` — **1032** entradas únicas normalizadas
+- `lexical-data.json` — localLexicon **527** entradas (3 chaves mortas renomeadas)
+- `decolonial-data.json` — **606** entradas; 9 categorias; engine normaliza texto+termo
+- `rimalab-data.json` — grammarWords **407**; enciclopédia **50**
+- `analise-engine.js` — CLIQUES_PT **1000**; PLEONASMOS **527**
 - `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
-- `service-worker.js` — versão atual do cache
+- `service-worker.js` — versão atual do cache (v791)
 
 ---
 

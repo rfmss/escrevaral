@@ -1401,6 +1401,33 @@
     // sensorialidade e gesto
     "sussurro":      ["murmúrio", "cochicho", "voz de vento", "fala baixa", "som quase silêncio"],
     "espaço":        ["lugar", "ambiente", "cenário", "território", "campo", "vazio habitável", "abertura"],
+
+    // vocabulário político e social
+    "democracia":    ["governo do povo", "participação coletiva", "soberania popular", "representação", "direito de voto"],
+    "greve":         ["paralisação", "parede", "suspensão do trabalho", "protesto organizado", "ação coletiva trabalhista"],
+    "sindicato":     ["entidade de trabalhadores", "associação de classe", "organização laboral", "representação coletiva"],
+    "manifesto":     ["declaração de princípios", "proclamação", "carta aberta", "posicionamento público", "programa"],
+    "mobilização":   ["articulação coletiva", "organização de base", "convocação", "levante", "ação coordenada"],
+    "militância":    ["engajamento político", "ativismo", "atuação de base", "luta organizada", "comprometimento com causa"],
+    "igualdade":     ["equidade", "paridade", "mesmos direitos", "isonomia", "horizontalidade"],
+    "cidadania":     ["condição de cidadão", "pertencimento político", "direitos e deveres", "participação civil"],
+    "política":      ["gestão pública", "relação de poder", "arte do possível", "escolha coletiva", "disputa de projeto"],
+    "reforma":       ["transformação", "mudança estrutural", "renovação", "readequação", "revisão"],
+    "reivindicar":   ["exigir", "reclamar o direito", "demandar", "pleitear", "lutar por"],
+    "território":    ["terra", "espaço vivido", "chão de origem", "lugar de pertença", "área de identidade"],
+    "autonomia":     ["independência", "autodeterminação", "soberania", "capacidade de decidir", "liberdade de escolha"],
+    "ancestralidade": ["raízes", "herança dos antepassados", "tradição de origem", "memória genealógica", "vínculo com os que vieram antes"],
+    "diáspora":      ["dispersão de um povo", "exílio coletivo", "espalhamento forçado", "migração de identidade", "comunidade no exílio"],
+
+    // afeto e cuidado
+    "carinho":       ["afeto", "ternura", "cuidado suave", "afetuosidade", "gesto de amor", "mimo"],
+
+    // identidades regionais brasileiras
+    "nordestino":    ["pessoa do Nordeste", "sertanejo", "filho do sertão", "nordestina"],
+    "caipira":       ["pessoa do interior", "sertanejo paulista", "matuto", "roceiro", "habitante da roça"],
+    "gaúcho":        ["pessoa do Rio Grande do Sul", "peão de estância", "gaucho"],
+    "caboclo":       ["mestiço de indígena com branco", "ribeirinho", "morador da floresta", "habitante da beira do rio"],
+    "ribeirinho":    ["morador de beira de rio", "pescador artesanal", "habitante de várzea", "pessoa da margem"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
