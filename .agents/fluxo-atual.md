@@ -1,7 +1,58 @@
 # Handoff vivo — Escrevaral
 
-**Atualizado em:** 2026-06-18  
-**Versão atual:** v791 (`vereda-offline-v791`, `ASSET_VERSION=20260618-v791`)
+**Atualizado em:** 2026-06-18
+**Versão atual:** v794 (`vereda-offline-v794`, `ASSET_VERSION=20260618-v794`)
+
+## Encerramento padrão para retomada — 2026-06-18 noite
+
+**Estado git:** `66d84d6` em `main`/`origin/main`, contendo `v794`, `aa8e80d` e relatórios de auditoria.
+**Semáforo de linguagem:** sem P0 conhecido depois de `aa8e80d`.
+
+### Fechado hoje
+
+- Sintaxe/morfologia:
+  - `A mesa larga caiu.` -> `larga: Adjective`.
+  - `O caminho estreito acabou.` -> `estreito: Adjective`.
+  - `Entreguei a carta a Maria.` -> primeiro `a: Determiner`; segundo `a: Preposition`.
+  - `auditor-dados.py`: `P0=0 P1=4 P2=0`.
+- RimaLab:
+  - `_GW_IDX` normalizado resolve chaves acentuadas em `grammarWords`.
+- Decolonial:
+  - `normal` amplo removido; `pessoa normal` segue contextual.
+  - matching normaliza termo e texto para cobrir acento/sem acento.
+- Navegação mobile:
+  - `Plano` acessível por `Mais`.
+  - P1 do mês `Out` escapando no Cronograma foi fechado em `v794`.
+- Publicação/offline:
+  - Última auditoria: `P0=0 P1=0 P2=5`.
+  - `index` e `/service-worker.js` estavam alinhados em `20260618-v794`.
+
+### Abertos para amanhã
+
+- Visual: `scripts/auditor-navegacao-visual.py` terminou em `P0=0 P1=20 P2=80`.
+  - P1 principais: aba `Vocabulário` no Ateliê mobile; `Sobre` na biblioteca mobile; statusbar possivelmente cortada; toolbar editorial desktop.
+- Privacidade/rede: `P0=0 P1=1 P2=5`.
+  - P1: CSP ausente.
+- Cloudflare/SW:
+  - Edge case apenas se a borda voltar a servir `/service-worker.js` antigo. Confirmar sempre com `curl`.
+- Dados linguísticos:
+  - `P1=4` são riscos conhecidos/mitigados: `pública/público/séria/sérias`, `contido/oculto/preso`, `estreita/estreito`, `larga`.
+
+### Comandos padrão de retomada
+
+```bash
+git fetch origin --tags
+git status --short
+python3 scripts/auditor-dados.py
+python3 scripts/auditor-publicacao.py
+python3 scripts/auditor-privacidade-rede.py
+python3 scripts/auditor-navegacao-visual.py
+python3 scripts/auditoria-pilares.py
+```
+
+### Apresentação curta
+
+Escrevaral é uma oficina literária offline para escritoras e escritores brasileiros: um caderno de escrita no navegador, sem cadastro, que salva tudo no dispositivo e traz revisão em português, rima, métrica, sintaxe colorida, prova de autoria e planejamento.
 
 ---
 
@@ -198,6 +249,10 @@ Refinamento de navegabilidade + higiene de engines. Ciclo autônomo ativo.
 | v789 | decolonial 595→606 (+11: doido/incapacitado/coitado; gente de bem; traços finos; saber o lugar) |
 | v790 | norma: adjetivos 2000→2040; verbos 2000→2045 (+40+45 formas seguras) |
 | v791 | PLEONASMOS 500→527 (+27: cor+adjetivo, visão futurista, protestar contra, narrar narrativa) |
+| v792 | sinônimos 1032→1053 (+21: política/social, identidades regionais, mobilização); voice: natureza +biomas BR |
+| v793 | RimaLab P0: `_GW_IDX` normalizado resolve 126 chaves acentuadas em grammarWords (rítmico/trágico/etc. → classe correta) |
+| v794 | morfologia: guard 2-token VERBOS_PRES (larga/estreito adnominais → Adjective); 'a' mid-sentence: lookahead maiúscula→Prep/minúscula→Det; norma adjetivos +4 (estreito/a/os/as → 2044); heatmap mobile padding menor (Out não escapa) |
+| auditor | rebaixamento estreita/estreito de P0→P1 quando guarda adnominal detectada em syntax-engine.js |
 
 ---
 
@@ -214,34 +269,37 @@ Todas as pílulas encerradas. Ver detalhes em `docs/_decisoes/AGENCIA_CONTINUIDA
 
 ## Riscos ativos
 
-- **Homógrafos em adjetivos_comuns**: padrão diacritic-stripping pode criar conflitos verbo/adjetivo quando adjetivos com acento têm forma verbal homógrafa sem acento. Checar antes de adicionar novas formas em -ia/-ava/-era. (P1 do auditor — formas como séria/pública são P1, não P0, porque o acento as distingue no ADJETIVOS_PRIM em runtime.)
-- **Morfologia 41/43 → 43/43**: dois casos pendentes: (a) `a` position-aware — requer API change com charOffset; (b) `estreito` adnominal — requer 2-token lookback. Custo: médio.
+- **Homógrafos em adjetivos_comuns**: diacritic-stripping cria colisão. Checar formas em -ia/-ava/-era antes de adicionar. Exceção: estreito/estreita são seguros em adjetivos_comuns porque a guarda 2-token VERBOS_PRES (v794) bloqueia o falso-positivo no padrão Art+N+Adj; apenas no padrão Pron+Verb (eu estreito) dispara Verb.
+- **Morfologia 43/43**: ✅ concluído em v794. larga/estreito adnominais → Adjective; 'a' artigo/preposição por lookahead.
+- **Cloudflare/SW**: edge pode servir `/service-worker.js` sem query da versão anterior. Purge manual se necessário.
+- **CSP ausente**: P1 de privacidade — Content-Security-Policy header não configurado.
 - **templates-data.json**: não tocar — 63 templates calibrados.
 
 ---
 
 ## Próximos passos possíveis
 
-1. `norma-data.json` — adjetivos 2040, verbos 2045; espaço para 2100+ com formas literárias e acadêmicas
-2. `synonym-data.js` — 1032 entradas; política, corpo como metáfora e vocabulário regional
-3. `decolonial-data.json` — 606 entradas; deficiencia 62 (pode crescer 70+)
-4. Morfologia 41/43→43/43 — `a` position-aware + `estreito` adnominal
-5. Refinamento visual — estados de hover, focus-visible, acessibilidade em temas escuros
+1. `norma-data.json` — adjetivos 2044, verbos 2045; espaço para 2100+ com formas literárias e acadêmicas
+2. `synonym-data.js` — 1053 entradas; espaço para política mais profunda, vocabulário técnico feminino, afros
+3. `decolonial-data.json` — 606 entradas; deficiencia (pode crescer 70+); racismo estrutural (pode crescer)
+4. CSP (Content-Security-Policy) — P1 de privacidade, header ausente
+5. Refinamento visual — P1 visuais restantes (21 itens de navegação/contraste/mobile)
 
 ---
 
 ## Arquivos-chave do estado
 
-- `META_ENGINES_100.md` — maturidade de cada engine (atualizado v784)
-- `norma-data.json` — adjetivos_comuns: **2040**, verbos_pres_reg: **2045**, formas_verbais_irr: **2000**
-- `voice-engine.js` — **9 campos** (corpo/casa/natureza/memoria/conflito/pensamento/cidade/sobrenatural/trabalho); natureza ~80 termos
-- `synonym-data.js` — **1032** entradas únicas normalizadas
-- `lexical-data.json` — localLexicon **527** entradas (3 chaves mortas renomeadas)
-- `decolonial-data.json` — **606** entradas; 9 categorias; engine normaliza texto+termo
-- `rimalab-data.json` — grammarWords **407**; enciclopédia **50**
+- `META_ENGINES_100.md` — maturidade de cada engine (atualizado v784/v785)
+- `norma-data.json` — adjetivos_comuns: **2044**, verbos_pres_reg: **2045**, formas_verbais_irr: **2000**
+- `voice-engine.js` — **9 campos** (corpo/casa/natureza/memoria/conflito/pensamento/cidade/sobrenatural/trabalho)
+- `synonym-data.js` — **1053** entradas únicas normalizadas
+- `lexical-data.json` — localLexicon **527** entradas
+- `decolonial-data.json` — **606** entradas; 9 categorias; engine normaliza texto+termo (v786)
+- `rimalab-data.json` — grammarWords **407** (índice normalizado `_GW_IDX` em engine, v793); enciclopédia **50**
 - `analise-engine.js` — CLIQUES_PT **1000**; PLEONASMOS **527**
-- `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md` — backlog de navegabilidade
-- `service-worker.js` — versão atual do cache (v791)
+- `syntax-engine.js` — morfologia 43/43: guard 2-token adnominal + 'a' lookahead (v794)
+- `scripts/auditor-dados.py` — P0=0 P1=4 P2=0; detecta guarda adnominal para rebaixar estreito/estreita
+- `service-worker.js` — versão atual do cache (**v794**)
 
 ---
 
