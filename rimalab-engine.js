@@ -4,8 +4,18 @@
   // ── Dados ────────────────────────────────────────────────────────────────────
   let ENCYCLOPEDIA = [];
   let GRAMMAR_WORDS = {};
+  let _GW_IDX = {};
   let _dataLoaded = false;
   let _loadError  = false;
+
+  function _buildGWIdx(gw) {
+    const idx = Object.create(null);
+    for (const k in gw) {
+      const n = String(k).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+      idx[n] = gw[k];
+    }
+    return idx;
+  }
 
   async function ensureLoaded() {
     if (_dataLoaded || _loadError) return;
@@ -13,6 +23,7 @@
       const d = await fetch('rimalab-data.json').then(r => r.json());
       ENCYCLOPEDIA  = d.encyclopedia  || [];
       GRAMMAR_WORDS = d.grammarWords  || {};
+      _GW_IDX       = _buildGWIdx(GRAMMAR_WORDS);
       _dataLoaded   = true;
     } catch (_) {
       _loadError = true;
@@ -40,8 +51,11 @@
     sempre:"advérbio", nunca:"advérbio",
   };
 
+  const _GW_FALLBACK_IDX = _buildGWIdx(GRAMMAR_WORDS_FALLBACK);
+
   function getEncyclopedia()  { return _dataLoaded ? ENCYCLOPEDIA  : ENCYCLOPEDIA_FALLBACK; }
   function getGrammarWords()  { return _dataLoaded ? GRAMMAR_WORDS : GRAMMAR_WORDS_FALLBACK; }
+  function _gwLookup(normWord) { return _dataLoaded ? _GW_IDX[normWord] : _GW_FALLBACK_IDX[normWord]; }
 
   // ── Utilitários ───────────────────────────────────────────────────────────────
   const VOWELS    = "aeiouáàâãéèêíìîóòôõúùû";
@@ -308,8 +322,8 @@
   // ── Classificação de rima ─────────────────────────────────────────────────────
   function getGrammaticalClass(word) {
     const w = normalizeWord(word);
-    const gw = getGrammarWords();
-    if (gw[w]) return gw[w];
+    const cls = _gwLookup(w);
+    if (cls) return cls;
     if (/mente$/.test(w)) return "advérbio";
     if (/(ar|er|ir)$/.test(w) && w.length > 3) return "verbo";
     if (/(ção|são|dade|eza|mento|agem)$/.test(w)) return "substantivo";
