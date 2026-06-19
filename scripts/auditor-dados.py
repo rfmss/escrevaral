@@ -285,12 +285,18 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
 
     exact_syntax = set_intersection(adjetivos_prim, verbos, normalize=lambda x: str(x).lower())
     if exact_syntax:
+        # Verificar se ja existe guarda pre-ADJETIVOS_PRIM no cascade de syntax-engine.js (v781+)
+        with open("syntax-engine.js", encoding="utf-8") as _sf:
+            _sc = _sf.read()
+        _has_preguard = "_VERBOS_PRES.has(_stripDiac(norm))" in _sc and "ADJETIVOS_PRIM.has(norm)" in _sc
+        _guard_before = _sc.index("_VERBOS_PRES.has(_stripDiac(norm))") < _sc.index("ADJETIVOS_PRIM.has(norm)") if _has_preguard else False
+        severity = "P1" if _guard_before else "P0"
         add_issue(
-            "P0",
+            severity,
             "syntax-engine.js/ADJETIVOS_PRIM",
-            "Adjetivo primitivo hardcoded tambem e forma verbal exata",
+            "Adjetivo primitivo hardcoded tambem e forma verbal exata" + (" (mitigado por guarda pre-ADJETIVOS_PRIM no cascade)" if _guard_before else ""),
             ", ".join(f"`{item}`" for item in exact_syntax[:30]),
-            "Checar verbos presentes antes de ADJETIVOS_PRIM ou resolver por janela contextual.",
+            "Guarda contextual ja presente antes de ADJETIVOS_PRIM; colisao coberta para formas verbais de presente." if _guard_before else "Checar verbos presentes antes de ADJETIVOS_PRIM ou resolver por janela contextual.",
         )
 
     exact_pres = set_intersection(adjetivos_norma, verbos_pres, normalize=lambda x: str(x).lower())

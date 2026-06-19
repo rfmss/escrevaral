@@ -516,12 +516,6 @@
       "field": "Herança — origem profunda, memória coletiva",
       "note": "O ancestral é o que vem antes e continua agindo. Em literatura afro-brasileira e indígena, os ancestrais são presença ativa."
     },
-    "orixá": {
-      "label": "orixá",
-      "className": "Substantivo masculino",
-      "field": "Espiritualidade — divindades iorubás, natureza, arquétipos",
-      "note": "Entidade do candomblé. Cada orixá tem domínio sobre forças naturais e humanas — Oxum (amor, água doce), Ogum (guerra, trabalho), Iemanjá (mar)."
-    },
     "encantado": {
       "label": "encantado",
       "className": "Adjetivo",
@@ -2630,9 +2624,9 @@
     },
     "focalizacao": {
       "label": "focalização",
-      "className": "word-tecnica",
-      "field": "Narrativa",
-      "note": "escolha de quem 'vê' os acontecimentos na narrativa (Genette)"
+      "className": "Substantivo",
+      "field": "Narrativa — lente que o texto usa",
+      "note": "De onde o texto vê: quem percebe, o que percebe e o que não pode perceber. A focalização define o que o leitor sabe."
     },
     "verso_livre": {
       "label": "verso livre",
@@ -2904,12 +2898,6 @@
       "field": "Narrativa — narrador que sabe tudo",
       "note": "O narrador que entra em qualquer cabeça, sabe qualquer passado. Poder imenso com risco imenso: pode matar a tensão."
     },
-    "focalização": {
-      "label": "focalização",
-      "className": "Substantivo",
-      "field": "Narrativa — lente que o texto usa",
-      "note": "De onde o texto vê: quem percebe, o que percebe e o que não pode perceber. A focalização define o que o leitor sabe."
-    },
     "capoeira": {
       "label": "capoeira",
       "className": "Substantivo",
@@ -3126,12 +3114,6 @@
       "field": "Personagem — marca individual",
       "note": "Detalhe físico, hábito ou fala que torna o personagem reconhecível. Deve surgir do interior para o exterior."
     },
-    "contradição_de_personagem": {
-      "label": "contradição de personagem",
-      "className": "Substantivo",
-      "field": "Personagem — complexidade interna",
-      "note": "Personagens reais se contradizem. A contradição não é falha narrativa — é onde a psicologia mora."
-    },
     "arco_de_personagem": {
       "label": "arco de personagem",
       "className": "Substantivo",
@@ -3167,6 +3149,18 @@
       "className": "Substantivo",
       "field": "Teoria literária — diálogo entre textos",
       "note": "Todo texto é tecido de outros textos. A citação explícita é intertextualidade visível; o eco implícito é a mais criativa."
+    },
+    "orixa": {
+      "label": "orixá",
+      "className": "Substantivo masculino",
+      "field": "Espiritualidade — divindades iorubás, natureza, arquétipos",
+      "note": "Entidade do candomblé. Cada orixá tem domínio sobre forças naturais e humanas — Oxum (amor, água doce), Ogum (guerra, trabalho), Iemanjá (mar)."
+    },
+    "contradicao_de_personagem": {
+      "label": "contradição de personagem",
+      "className": "Substantivo",
+      "field": "Personagem — complexidade interna",
+      "note": "Personagens reais se contradizem. A contradição não é falha narrativa — é onde a psicologia mora."
     }
   },
   "functionWords": {

@@ -958,16 +958,6 @@
       "contextual": true
     },
     {
-      "avoid": "portador de necessidades especiais",
-      "alternatives": [
-        "pessoa com deficiência"
-      ],
-      "category": "deficiencia",
-      "reason": "Duplo eufemismo — apaga a realidade e a pessoa ao mesmo tempo.",
-      "context": "Depende do contexto: revise narrador, época, citação e intenção crítica antes de trocar automaticamente.",
-      "contextual": true
-    },
-    {
       "avoid": "deficiente",
       "alternatives": [
         "pessoa com deficiência",
@@ -2859,17 +2849,6 @@
       "contextual": true
     },
     {
-      "avoid": "mongoloide",
-      "alternatives": [
-        "pessoa com Síndrome de Down",
-        "pessoa com trissomia do 21"
-      ],
-      "category": "deficiencia",
-      "reason": "Termo obsoleto e ofensivo derivado de 'Mongólia' — associa incorretamente a condição a uma etnia. A Organização Mundial da Saúde recomendou seu abandono em 1965.",
-      "context": "Uso não recomendado em nenhum contexto ficcional atual. Em citação histórica, notar que é termo ultrapassado.",
-      "contextual": false
-    },
-    {
       "avoid": "doente mental",
       "alternatives": [
         "pessoa com transtorno mental",
@@ -3627,18 +3606,6 @@
       "category": "linguagem",
       "reason": "não existe dialeto errado; toda variante linguística é legítima em seu contexto social",
       "context": "texto escolar, literário",
-      "contextual": false
-    },
-    {
-      "avoid": "lingua pura",
-      "alternatives": [
-        "língua padrão",
-        "norma culta",
-        "variante de prestígio"
-      ],
-      "category": "linguagem",
-      "reason": "pureza linguística é mito que reforça hierarquias sociais e apaga variações legítimas",
-      "context": "ensaio, crítica literária",
       "contextual": false
     },
     {
@@ -5211,18 +5178,6 @@
       "reason": "o acesso à educação é desigual; tratá-la como marcador de superioridade naturaliza a desigualdade",
       "context": "contextos culturais",
       "contextual": false
-    },
-    {
-      "avoid": "domestica",
-      "alternatives": [
-        "trabalhadora doméstica",
-        "empregada doméstica",
-        "profissional do lar"
-      ],
-      "category": "classe",
-      "reason": "a forma abreviada pode soar depreciativa; o trabalho doméstico é profissão com direitos",
-      "context": "contextos de trabalho",
-      "contextual": true
     },
     {
       "avoid": "medicina tradicional como superstição",
@@ -6952,18 +6907,6 @@
       "category": "linguagem",
       "reason": "Une forma linguística a classe social como estigma, apagando que a variação linguística é social, não de inteligência.",
       "context": "Nomear sem julgamento a variedade que o personagem usa é mais preciso e menos excludente.",
-      "contextual": false
-    },
-    {
-      "avoid": "normal",
-      "alternatives": [
-        "sem deficiência",
-        "pessoa que não tem deficiência",
-        "neurotípico"
-      ],
-      "category": "deficiencia",
-      "reason": "Implica que pessoas com deficiência são anormais, naturalizando a norma capacitista como referência.",
-      "context": "Em contexto médico, use 'sem deficiência'. No texto literário, evite fazer da ausência de deficiência o parâmetro.",
       "contextual": false
     },
     {

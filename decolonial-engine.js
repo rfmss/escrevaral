@@ -25,13 +25,15 @@
   }
 
   function createTermPattern(term) {
-    return new RegExp("(^|[^\\p{L}\\p{N}_])(" + escapeRegExp(term) + ")(?=$|[^\\p{L}\\p{N}_])", "giu");
+    const normTerm = normalize(term);
+    return new RegExp("(^|[^\\p{L}\\p{N}_])(" + escapeRegExp(normTerm) + ")(?=$|[^\\p{L}\\p{N}_])", "gu");
   }
 
   function countTerm(text, term) {
     const pattern = createTermPattern(term);
+    const normText = normalize(text);
     let count = 0;
-    while (pattern.exec(text)) count++;
+    while (pattern.exec(normText)) count++;
     return count;
   }
 
