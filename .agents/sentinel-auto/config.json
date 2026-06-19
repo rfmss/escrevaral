@@ -1,0 +1,10 @@
+{
+  "scan_interval_seconds": 8,
+  "idle_grace_seconds": 20,
+  "stop_sentinel_on_exit": true,
+  "sentinel_args": [],
+  "process_patterns": [
+    "^devin-desktop\\b",
+    "^devin\\s+/usr/share/devin-desktop/resources/app/extensions/windsurf/devin/bin/devin\\b"
+  ]
+}

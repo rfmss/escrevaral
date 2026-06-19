@@ -1,10 +1,10 @@
 # Auditoria Visual e Navegacional - 2026-06-18
 
-**URL base:** https://escrevaral.com  |  **Semaforo:** VERMELHO  |  **P0:** 6 **P1:** 20 **P2:** 78
+**URL base:** https://escrevaral.com  |  **Semaforo:** AMARELO  |  **P0:** 0 **P1:** 20 **P2:** 80
 
-Execucao: 2026-06-18T13:53:19
+Execucao: 2026-06-18T23:36:37
 Viewports: mobile 390x844, tablet 768x1024, desktop 1366x900
-Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18` (41 arquivos)
+Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18` (42 arquivos)
 
 ## Prompt remodelado
 
@@ -16,50 +16,24 @@ Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-
 - Sitemap: todas as URLs listadas em `sitemap.xml` foram abertas em mobile, tablet e desktop.
 - Paginas satelite: controles de navegação, abas e indices visiveis foram acionados quando presentes.
 
-## P0
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile vereda-titulo-do-livro.html: 435 > 390
-  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-titulo-do-livro.html.png`
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile vereda-primeiras-linhas.html: 480 > 390
-  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-primeiras-linhas.html.png`
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile vereda-biblioteca-escrita.html: 394 > 390
-  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-biblioteca-escrita.html.png`
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile /vereda-biblioteca-escrita.html-Livros: 394 > 390
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile /vereda-biblioteca-escrita.html-Crit-rios: 395 > 390
-
-- **[Visual] overflow horizontal no documento**
-  - Evidencia: mobile /vereda-biblioteca-escrita.html-Sobre: 392 > 390
-
 ## P1
-
-- **[Navegacao] Destinos do app sem controle visivel/clicavel neste viewport**
-  - Evidencia: mobile: ['cronograma']
 
 - **[Visual] elementos visiveis escapam lateralmente**
   - Evidencia: mobile app-academia: label.academy-tool-tab `language Vocabulário` 271..410
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png`
 
 - **[Visual] elementos visiveis escapam lateralmente**
-  - Evidencia: mobile vereda-biblioteca-escrita.html: div.topbar-tabs `Livros Critérios Sobre` 206..394; button.tab-btn `Sobre` 339..394
+  - Evidencia: mobile vereda-biblioteca-escrita.html: button.tab-btn `Sobre` 350..406
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-biblioteca-escrita.html.png`
 
 - **[Visual] elementos visiveis escapam lateralmente**
-  - Evidencia: mobile /vereda-biblioteca-escrita.html-Livros: div.topbar-tabs `Livros Critérios Sobre` 206..394; button.tab-btn `Sobre` 339..394
+  - Evidencia: mobile /vereda-biblioteca-escrita.html-Livros: button.tab-btn `Sobre` 350..406
 
 - **[Visual] elementos visiveis escapam lateralmente**
-  - Evidencia: mobile /vereda-biblioteca-escrita.html-Crit-rios: div.topbar-tabs `Livros Critérios Sobre` 206..395; button.tab-btn `Sobre` 339..395
+  - Evidencia: mobile /vereda-biblioteca-escrita.html-Crit-rios: button.tab-btn `Sobre` 350..406
 
 - **[Visual] elementos visiveis escapam lateralmente**
-  - Evidencia: desktop app-inicio: div.fmt-group.fmt-group-editorial `Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article M` 717..1476; button.fmt-btn.fmt-btn-labeled `Baixar para Word` 1364..1415
+  - Evidencia: desktop app-inicio: div.fmt-group.fmt-group-editorial `Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article M` 784..1542
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/desktop-app-inicio.png`
 
 - **[Visual] elementos visiveis escapam lateralmente**
@@ -89,6 +63,10 @@ Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-
 - **[Visual] texto possivelmente cortado por container**
   - Evidencia: mobile app-academia: span `17 palavras · 1 parágrafos · 100 car.`
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png`
+
+- **[Visual] texto possivelmente cortado por container**
+  - Evidencia: mobile app-cronograma: span `17 palavras · 1 parágrafos · 100 car.`
+  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png`
 
 - **[Visual] texto possivelmente cortado por container**
   - Evidencia: tablet app-inicio: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`
@@ -121,28 +99,32 @@ Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-
 ## P2
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-inicio: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
+  - Evidencia: mobile app-inicio: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-inicio.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-editor: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
+  - Evidencia: mobile app-editor: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-editor.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-biblioteca: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
+  - Evidencia: mobile app-biblioteca: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-biblioteca.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-autoria: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
+  - Evidencia: mobile app-autoria: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-autoria.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-arquivo: `Fixar nota` 12x12; `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22
+  - Evidencia: mobile app-arquivo: `Fixar nota` 12x12; `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-arquivo.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
-  - Evidencia: mobile app-academia: `arrow_back Continuar com o texto atual` 197x18; `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22
+  - Evidencia: mobile app-academia: `arrow_back Continuar com o texto atual` 197x18; `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png`
+
+- **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
+  - Evidencia: mobile app-cronograma: `Jan` 27x32; `Fev` 27x32; `Mar` 28x32; `Abr` 26x32; `Mai` 27x32; `Jun` 27x32
+  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png`
 
 - **[Usabilidade] muitos alvos clicaveis abaixo de 32px**
   - Evidencia: tablet app-inicio: `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14; `Definir meta de palavras` 21x15
@@ -339,6 +321,10 @@ Screenshots: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-
 - **[Visual] camada fixa grande cobrindo viewport**
   - Evidencia: mobile app-academia: div `` 390x844
   - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png`
+
+- **[Visual] camada fixa grande cobrindo viewport**
+  - Evidencia: mobile app-cronograma: div `` 390x844
+  - Screenshot: `/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png`
 
 - **[Visual] camada fixa grande cobrindo viewport**
   - Evidencia: tablet app-inicio: div `` 768x1024

@@ -1,0 +1,20 @@
+{
+  "scan_interval_seconds": 30,
+  "manage_display_power": true,
+  "screen_blank_seconds": 600,
+  "inhibit_who": "Escrevaral IDE Watch",
+  "inhibit_why": "Manter IDEs e agentes trabalhando com a tela apagada",
+  "process_patterns": [
+    "\\bdevin-desktop\\b",
+    "\\bdevin\\b",
+    "\\bclaude\\b",
+    "\\bcodex\\b",
+    "\\bwindsurf\\b",
+    "\\bcode\\b",
+    "\\bcode-insiders\\b",
+    "\\bcodium\\b",
+    "\\bcursor\\b",
+    "\\bantigravity\\b",
+    "\\bgoogle.*antigravity\\b"
+  ]
+}

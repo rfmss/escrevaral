@@ -1,0 +1,15 @@
+[Unit]
+Description=Escrevaral Agent Sentinel while Devin is open
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/rafamass/escrevaral
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/rafamass/escrevaral/scripts/sentinel-while-devin.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

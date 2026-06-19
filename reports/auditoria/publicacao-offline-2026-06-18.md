@@ -1,28 +1,22 @@
 # Auditoria Publicacao/Offline - 2026-06-18
 
-**URL:** https://escrevaral.com  |  **Semaforo:** AMARELO  |  **P0:** 0 **P1:** 1 **P2:** 5
+**URL:** https://escrevaral.com  |  **Semaforo:** VERDE  |  **P0:** 0 **P1:** 0 **P2:** 5
 
 Sitemap: 8 URLs.
-Recursos testados: 116.
-
-## P1
-
-- **[Recurso interno] referencia interna quebrada**
-  - Evidencia: https://escrevaral.com/anatomia-do-livro.html: <meta content='https://escrevaral.com/og-anatomia-do-livro.png'> -> 404 HTTP Error 404: Not Found
-  - Recomendacao: Corrigir caminho ou remover referencia.
+Recursos testados: 115.
 
 ## P2
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#7d12143d180e1e0f180b1c0f1c11531e1210420e081f17181e09403214584f3e584f4d380e1e0f180b1c0f1c115b1c100d461f121904403214584f4c584f4d380e1e0f180b12584f4d0d120f0c0818584f4d'>
+  - Evidencia: https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#e7888ea78294849582918695868bc984888ad89492858d828493daa88ec2d5a4c2d5d7a294849582918695868bc1868a97dc8588839edaa88ec2d5d6c2d5d7a2948495829188c2d5d7978895969282c2d5d7'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#37585e775244544552415645565b1954585a'>
+  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#d3bcba93b6a0b0a1b6a5b2a1b2bffdb0bcbe'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#a5cacce5c0d6c6d7c0d3c4d7c4c98bc6cac8'>
+  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#2e41476e4b5d4d5c4b584f5c4f42004d4143'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Offline] index depende de Google Fonts em primeira carga**

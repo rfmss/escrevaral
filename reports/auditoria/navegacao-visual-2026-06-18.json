@@ -2,60 +2,11 @@
   "date": "2026-06-18",
   "base_url": "https://escrevaral.com",
   "summary": {
-    "P0": 6,
+    "P0": 0,
     "P1": 20,
-    "P2": 78
+    "P2": 80
   },
   "issues": [
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile vereda-titulo-do-livro.html: 435 > 390",
-      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-titulo-do-livro.html.png"
-    },
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile vereda-primeiras-linhas.html: 480 > 390",
-      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-primeiras-linhas.html.png"
-    },
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile vereda-biblioteca-escrita.html: 394 > 390",
-      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-biblioteca-escrita.html.png"
-    },
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile /vereda-biblioteca-escrita.html-Livros: 394 > 390",
-      "screenshot": ""
-    },
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile /vereda-biblioteca-escrita.html-Crit-rios: 395 > 390",
-      "screenshot": ""
-    },
-    {
-      "severity": "P0",
-      "area": "Visual",
-      "message": "overflow horizontal no documento",
-      "evidence": "mobile /vereda-biblioteca-escrita.html-Sobre: 392 > 390",
-      "screenshot": ""
-    },
-    {
-      "severity": "P1",
-      "area": "Navegacao",
-      "message": "Destinos do app sem controle visivel/clicavel neste viewport",
-      "evidence": "mobile: ['cronograma']",
-      "screenshot": ""
-    },
     {
       "severity": "P1",
       "area": "Visual",
@@ -67,28 +18,28 @@
       "severity": "P1",
       "area": "Visual",
       "message": "elementos visiveis escapam lateralmente",
-      "evidence": "mobile vereda-biblioteca-escrita.html: div.topbar-tabs `Livros Critérios Sobre` 206..394; button.tab-btn `Sobre` 339..394",
+      "evidence": "mobile vereda-biblioteca-escrita.html: button.tab-btn `Sobre` 350..406",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-vereda-biblioteca-escrita.html.png"
     },
     {
       "severity": "P1",
       "area": "Visual",
       "message": "elementos visiveis escapam lateralmente",
-      "evidence": "mobile /vereda-biblioteca-escrita.html-Livros: div.topbar-tabs `Livros Critérios Sobre` 206..394; button.tab-btn `Sobre` 339..394",
+      "evidence": "mobile /vereda-biblioteca-escrita.html-Livros: button.tab-btn `Sobre` 350..406",
       "screenshot": ""
     },
     {
       "severity": "P1",
       "area": "Visual",
       "message": "elementos visiveis escapam lateralmente",
-      "evidence": "mobile /vereda-biblioteca-escrita.html-Crit-rios: div.topbar-tabs `Livros Critérios Sobre` 206..395; button.tab-btn `Sobre` 339..395",
+      "evidence": "mobile /vereda-biblioteca-escrita.html-Crit-rios: button.tab-btn `Sobre` 350..406",
       "screenshot": ""
     },
     {
       "severity": "P1",
       "area": "Visual",
       "message": "elementos visiveis escapam lateralmente",
-      "evidence": "desktop app-inicio: div.fmt-group.fmt-group-editorial `Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article M` 717..1476; button.fmt-btn.fmt-btn-labeled `Baixar para Word` 1364..1415",
+      "evidence": "desktop app-inicio: div.fmt-group.fmt-group-editorial `Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article M` 784..1542",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/desktop-app-inicio.png"
     },
     {
@@ -144,6 +95,13 @@
       "severity": "P1",
       "area": "Visual",
       "message": "texto possivelmente cortado por container",
+      "evidence": "mobile app-cronograma: span `17 palavras · 1 parágrafos · 100 car.`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
       "evidence": "tablet app-inicio: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/tablet-app-inicio.png"
     },
@@ -193,43 +151,50 @@
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-inicio: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "evidence": "mobile app-inicio: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-inicio.png"
     },
     {
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-editor: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "evidence": "mobile app-editor: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-editor.png"
     },
     {
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-biblioteca: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "evidence": "mobile app-biblioteca: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-biblioteca.png"
     },
     {
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-autoria: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "evidence": "mobile app-autoria: `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-autoria.png"
     },
     {
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-arquivo: `Fixar nota` 12x12; `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22",
+      "evidence": "mobile app-arquivo: `Fixar nota` 12x12; `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-arquivo.png"
     },
     {
       "severity": "P2",
       "area": "Usabilidade",
       "message": "muitos alvos clicaveis abaixo de 32px",
-      "evidence": "mobile app-academia: `arrow_back Continuar com o texto atual` 197x18; `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22",
+      "evidence": "mobile app-academia: `arrow_back Continuar com o texto atual` 197x18; `Alterar meta` 71x14; `Definir meta de palavras` 20x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "mobile app-cronograma: `Jan` 27x32; `Fev` 27x32; `Mar` 28x32; `Abr` 26x32; `Mai` 27x32; `Jun` 27x32",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png"
     },
     {
       "severity": "P2",
@@ -641,6 +606,13 @@
       "severity": "P2",
       "area": "Visual",
       "message": "camada fixa grande cobrindo viewport",
+      "evidence": "mobile app-cronograma: div `` 390x844",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
       "evidence": "tablet app-inicio: div `` 768x1024",
       "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/tablet-app-inicio.png"
     },
@@ -745,7 +717,7 @@
           "url": "https://escrevaral.com/#editor",
           "appView": "editor",
           "headings": [],
-          "bodyTextChars": 700,
+          "bodyTextChars": 716,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -781,11 +753,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -871,6 +843,10 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-inicio",
@@ -882,7 +858,7 @@
           "url": "https://escrevaral.com/#editor",
           "appView": "editor",
           "headings": [],
-          "bodyTextChars": 700,
+          "bodyTextChars": 716,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -918,11 +894,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -1008,6 +984,10 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-editor",
@@ -1021,7 +1001,7 @@
           "headings": [
             "Auditoria visual"
           ],
-          "bodyTextChars": 517,
+          "bodyTextChars": 533,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -1057,11 +1037,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -1147,6 +1127,10 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-biblioteca",
@@ -1160,7 +1144,7 @@
           "headings": [
             "Sua escrita tem uma impressão digital."
           ],
-          "bodyTextChars": 3430,
+          "bodyTextChars": 3446,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -1196,11 +1180,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -1286,6 +1270,10 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-autoria",
@@ -1299,7 +1287,7 @@
           "headings": [
             "Seus textos"
           ],
-          "bodyTextChars": 1976,
+          "bodyTextChars": 1992,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -1345,11 +1333,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -1445,6 +1433,10 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-arquivo",
@@ -1459,7 +1451,7 @@
             "Ateliê",
             "Um espelho do jeito que você escreve"
           ],
-          "bodyTextChars": 5853,
+          "bodyTextChars": 5869,
           "scroll": {
             "width": 390,
             "clientWidth": 390,
@@ -1516,11 +1508,11 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 234,
+              "left": 233,
               "right": 254,
               "top": 820,
               "bottom": 835,
-              "width": 21,
+              "width": 20,
               "height": 15
             },
             {
@@ -1606,11 +1598,308 @@
             {
               "text": "auto_stories Palavras",
               "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
             }
           ],
           "label": "app-academia",
           "viewport": "mobile",
           "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-academia.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "https://escrevaral.com/#cronograma",
+          "appView": "cronograma",
+          "headings": [
+            "Seu ritmo em 2026"
+          ],
+          "bodyTextChars": 1285,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 844,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 28,
+              "right": 148,
+              "top": 822,
+              "bottom": 833,
+              "width": 120,
+              "height": 11
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Jan",
+              "left": 45,
+              "right": 72,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Fev",
+              "left": 73,
+              "right": 99,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Mar",
+              "left": 100,
+              "right": 128,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Abr",
+              "left": 129,
+              "right": 154,
+              "top": 377,
+              "bottom": 409,
+              "width": 26,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Mai",
+              "left": 155,
+              "right": 182,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn.is-current",
+              "text": "Jun",
+              "left": 183,
+              "right": 210,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Jul",
+              "left": 211,
+              "right": 234,
+              "top": 377,
+              "bottom": 409,
+              "width": 24,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Ago",
+              "left": 235,
+              "right": 263,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Set",
+              "left": 264,
+              "right": 289,
+              "top": 377,
+              "bottom": 409,
+              "width": 26,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Out",
+              "left": 290,
+              "right": 317,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Dez",
+              "left": 348,
+              "right": 375,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 76,
+              "right": 148,
+              "top": 713,
+              "bottom": 739,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 156,
+              "right": 220,
+              "top": 713,
+              "bottom": 739,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 76,
+              "right": 148,
+              "top": 825,
+              "bottom": 851,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 156,
+              "right": 220,
+              "top": 825,
+              "bottom": 851,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 168,
+              "right": 239,
+              "top": 821,
+              "bottom": 835,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 233,
+              "right": 254,
+              "top": 820,
+              "bottom": 835,
+              "width": 20,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 262,
+              "right": 276,
+              "top": 821,
+              "bottom": 835,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 154,
+              "right": 193,
+              "top": 708,
+              "bottom": 727,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 345,
+              "right": 361,
+              "top": 726,
+              "bottom": 748,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 129,
+              "right": 186,
+              "top": 750,
+              "bottom": 768,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 345,
+              "right": 361,
+              "top": 735,
+              "bottom": 757,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 390,
+              "top": 0,
+              "bottom": 844,
+              "width": 390,
+              "height": 844
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
+            }
+          ],
+          "label": "app-cronograma",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-18/mobile-app-cronograma.png"
         },
         {
           "title": "O Título do Livro — Como Escolher e Criar o Título Certo | Escrevaral",
@@ -1621,11 +1910,11 @@
           ],
           "bodyTextChars": 11785,
           "scroll": {
-            "width": 435,
+            "width": 390,
             "clientWidth": 390,
-            "height": 23989,
+            "height": 24067,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [],
           "clippedText": [],
@@ -1676,11 +1965,11 @@
           ],
           "bodyTextChars": 15135,
           "scroll": {
-            "width": 480,
+            "width": 390,
             "clientWidth": 390,
-            "height": 23761,
+            "height": 23959,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [],
           "clippedText": [],
@@ -1833,28 +2122,18 @@
           ],
           "bodyTextChars": 5014,
           "scroll": {
-            "width": 394,
+            "width": 390,
             "clientWidth": 390,
             "height": 3746,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [
             {
-              "tag": "div.topbar-tabs",
-              "text": "Livros Critérios Sobre",
-              "left": 206,
-              "right": 394,
-              "top": -0.0,
-              "bottom": 54,
-              "width": 189,
-              "height": 54
-            },
-            {
               "tag": "button.tab-btn",
               "text": "Sobre",
-              "left": 339,
-              "right": 394,
+              "left": 350,
+              "right": 406,
               "top": -0.0,
               "bottom": 54,
               "width": 56,
@@ -1892,28 +2171,18 @@
           ],
           "bodyTextChars": 5014,
           "scroll": {
-            "width": 394,
+            "width": 390,
             "clientWidth": 390,
             "height": 3746,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [
             {
-              "tag": "div.topbar-tabs",
-              "text": "Livros Critérios Sobre",
-              "left": 206,
-              "right": 394,
-              "top": -0.0,
-              "bottom": 54,
-              "width": 189,
-              "height": 54
-            },
-            {
               "tag": "button.tab-btn",
               "text": "Sobre",
-              "left": 339,
-              "right": 394,
+              "left": 350,
+              "right": 406,
               "top": -0.0,
               "bottom": 54,
               "width": 56,
@@ -1950,28 +2219,18 @@
           ],
           "bodyTextChars": 1097,
           "scroll": {
-            "width": 395,
+            "width": 390,
             "clientWidth": 390,
             "height": 1383,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [
             {
-              "tag": "div.topbar-tabs",
-              "text": "Livros Critérios Sobre",
-              "left": 206,
-              "right": 395,
-              "top": -0.0,
-              "bottom": 54,
-              "width": 189,
-              "height": 54
-            },
-            {
               "tag": "button.tab-btn",
               "text": "Sobre",
-              "left": 339,
-              "right": 395,
+              "left": 350,
+              "right": 406,
               "top": -0.0,
               "bottom": 54,
               "width": 56,
@@ -2008,11 +2267,11 @@
           ],
           "bodyTextChars": 1398,
           "scroll": {
-            "width": 392,
+            "width": 390,
             "clientWidth": 390,
             "height": 1415,
             "clientHeight": 844,
-            "horizontalOverflow": true
+            "horizontalOverflow": false
           },
           "protruding": [],
           "clippedText": [],
@@ -2146,16 +2405,7 @@
       "console_warnings": [],
       "page_errors": [],
       "network_errors": [],
-      "navigation_findings": [
-        {
-          "severity": "P1",
-          "viewport": "mobile",
-          "message": "Destinos do app sem controle visivel/clicavel neste viewport",
-          "details": [
-            "cronograma"
-          ]
-        }
-      ],
+      "navigation_findings": [],
       "static_interactions": [
         {
           "url": "https://escrevaral.com/vereda-titulo-do-livro.html",
@@ -2223,10 +2473,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -2285,8 +2535,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -2295,8 +2545,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -2305,8 +2555,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -2414,10 +2664,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -2476,8 +2726,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -2486,8 +2736,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -2496,8 +2746,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -2607,10 +2857,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -2669,8 +2919,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -2679,8 +2929,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -2689,8 +2939,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -2800,10 +3050,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -2862,8 +3112,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -2872,8 +3122,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -2882,8 +3132,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -2994,10 +3244,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -3066,8 +3316,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -3076,8 +3326,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -3086,8 +3336,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -3198,10 +3448,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -3270,8 +3520,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -3280,8 +3530,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -3290,8 +3540,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -3401,10 +3651,10 @@
               "tag": "span",
               "text": "17 palavras · 1 parágrafos · 100 car.",
               "left": 204,
-              "right": 360,
+              "right": 359,
               "top": 1002,
               "bottom": 1014,
-              "width": 156,
+              "width": 155,
               "height": 12
             },
             {
@@ -3533,8 +3783,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 392,
-              "right": 463,
+              "left": 391,
+              "right": 462,
               "top": 1001,
               "bottom": 1015,
               "width": 71,
@@ -3543,8 +3793,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 472,
-              "right": 493,
+              "left": 470,
+              "right": 491,
               "top": 1000,
               "bottom": 1015,
               "width": 21,
@@ -3553,8 +3803,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 513,
-              "right": 527,
+              "left": 511,
+              "right": 525,
               "top": 1001,
               "bottom": 1015,
               "width": 14,
@@ -9231,7 +9481,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1808,
+          "bodyTextChars": 2146,
           "scroll": {
             "width": 768,
             "clientWidth": 768,
@@ -9603,7 +9853,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 2426,
+          "bodyTextChars": 1902,
           "scroll": {
             "width": 768,
             "clientWidth": 768,
@@ -9975,7 +10225,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1687,
+          "bodyTextChars": 2169,
           "scroll": {
             "width": 768,
             "clientWidth": 768,
@@ -10347,7 +10597,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1730,
+          "bodyTextChars": 1660,
           "scroll": {
             "width": 768,
             "clientWidth": 768,
@@ -10719,7 +10969,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1835,
+          "bodyTextChars": 2295,
           "scroll": {
             "width": 768,
             "clientWidth": 768,
@@ -11197,9 +11447,7 @@
           "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
           "url": "https://escrevaral.com/#editor",
           "appView": "editor",
-          "headings": [
-            "Olhar do texto"
-          ],
+          "headings": [],
           "bodyTextChars": 1501,
           "scroll": {
             "width": 1366,
@@ -11212,21 +11460,11 @@
             {
               "tag": "div.fmt-group.fmt-group-editorial",
               "text": "Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article M",
-              "left": 717,
-              "right": 1476,
+              "left": 784,
+              "right": 1542,
               "top": 218,
               "bottom": 246,
               "width": 759,
-              "height": 28
-            },
-            {
-              "tag": "button.fmt-btn.fmt-btn-labeled",
-              "text": "Baixar para Word",
-              "left": 1364,
-              "right": 1415,
-              "top": 218,
-              "bottom": 246,
-              "width": 51,
               "height": 28
             }
           ],
@@ -11314,56 +11552,6 @@
               "height": 21
             },
             {
-              "tag": "button",
-              "text": "frase (3)",
-              "left": 1076,
-              "right": 1153,
-              "top": 264,
-              "bottom": 286,
-              "width": 77,
-              "height": 22
-            },
-            {
-              "tag": "button",
-              "text": "primeira (1)",
-              "left": 1161,
-              "right": 1258,
-              "top": 264,
-              "bottom": 286,
-              "width": 97,
-              "height": 22
-            },
-            {
-              "tag": "button",
-              "text": "auditoria (1)",
-              "left": 1076,
-              "right": 1179,
-              "top": 294,
-              "bottom": 316,
-              "width": 103,
-              "height": 22
-            },
-            {
-              "tag": "button",
-              "text": "segunda (1)",
-              "left": 1187,
-              "right": 1289,
-              "top": 294,
-              "bottom": 316,
-              "width": 102,
-              "height": 22
-            },
-            {
-              "tag": "button",
-              "text": "palavra (1)",
-              "left": 1076,
-              "right": 1167,
-              "top": 324,
-              "bottom": 346,
-              "width": 91,
-              "height": 22
-            },
-            {
               "tag": "a.statusbar-social.statusbar-social--x",
               "text": "Escrevaral no X",
               "left": 100,
@@ -11376,8 +11564,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -11406,8 +11594,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -11416,8 +11604,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -11426,8 +11614,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -11637,8 +11825,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -11667,8 +11855,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -11677,8 +11865,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -11687,8 +11875,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -11889,8 +12077,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -11919,8 +12107,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -11929,8 +12117,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -11939,8 +12127,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -12141,8 +12329,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -12171,8 +12359,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -12181,8 +12369,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -12191,8 +12379,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -12404,8 +12592,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -12434,8 +12622,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -12444,8 +12632,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -12454,8 +12642,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -12667,8 +12855,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -12697,8 +12885,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -12707,8 +12895,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -12717,8 +12905,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -12969,8 +13157,8 @@
             {
               "tag": "a.statusbar-social.statusbar-social--mastodon",
               "text": "Escrevaral no Bolha.us",
-              "left": 194,
-              "right": 216,
+              "left": 193,
+              "right": 215,
               "top": 873,
               "bottom": 895,
               "width": 22,
@@ -12999,8 +13187,8 @@
             {
               "tag": "button.goal-label",
               "text": "Alterar meta",
-              "left": 739,
-              "right": 810,
+              "left": 738,
+              "right": 809,
               "top": 877,
               "bottom": 891,
               "width": 71,
@@ -13009,8 +13197,8 @@
             {
               "tag": "button.statusbar-goal-btn",
               "text": "Definir meta de palavras",
-              "left": 882,
-              "right": 905,
+              "left": 881,
+              "right": 904,
               "top": 876,
               "bottom": 891,
               "width": 23,
@@ -13019,8 +13207,8 @@
             {
               "tag": "button.statusbar-timer-btn",
               "text": "Iniciar temporizador",
-              "left": 977,
-              "right": 991,
+              "left": 975,
+              "right": 989,
               "top": 877,
               "bottom": 891,
               "width": 14,
@@ -16636,9 +16824,11 @@
             "2 PRÉ-TEXTUAIS",
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS",
+            "A Cartografia do Esquecimento",
+            "A Cartografia do Esquecimento",
             "A Cartografia do Esquecimento"
           ],
-          "bodyTextChars": 1901,
+          "bodyTextChars": 2083,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -16954,7 +17144,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 2585,
+          "bodyTextChars": 1814,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -17270,7 +17460,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1510,
+          "bodyTextChars": 1618,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -17586,7 +17776,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1836,
+          "bodyTextChars": 1621,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -17902,7 +18092,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1808,
+          "bodyTextChars": 2146,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -18218,7 +18408,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 2426,
+          "bodyTextChars": 1902,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -18534,7 +18724,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1687,
+          "bodyTextChars": 2169,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -18850,7 +19040,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1730,
+          "bodyTextChars": 1660,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
@@ -19166,7 +19356,7 @@
             "3 TEXTUAIS",
             "4 PÓS-TEXTUAIS"
           ],
-          "bodyTextChars": 1835,
+          "bodyTextChars": 2295,
           "scroll": {
             "width": 1366,
             "clientWidth": 1366,
