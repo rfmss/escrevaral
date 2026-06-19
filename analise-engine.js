@@ -895,6 +895,19 @@
     ["realidade real","realidade"],["verdade verdadeira","verdade"],
     ["mentira falsa","mentira"],["ilusão ilusória","ilusão"],
     ["erro errado","erro"],["acerto correto","acerto"],
+    ["visão futurista","visão futura"],["obra de arte artística","obra de arte"],
+    ["cor amarela","amarelo"],["cor vermelha","vermelho"],["cor azul","azul"],
+    ["vício ruim","vício"],["virtude boa","virtude"],
+    ["protestar contra","protestar"],["opinar sua opinião","opinar"],
+    ["desde já antecipadamente","desde já"],["afirmar com certeza","afirmar"],
+    ["prever o futuro","prever"],["lembrar da memória","lembrar"],
+    ["esquecer do passado","esquecer"],["cortar fora","cortar"],
+    ["sorrir para fora","sorrir"],["chorar para dentro","chorar"],
+    ["absolutamente certeza","certeza"],["realmente verdadeiro","verdadeiro"],
+    ["acabou definitivamente","acabou"],["completamente vazio","vazio"],
+    ["absolutamente nulo","nulo"],["totalmente oposto","oposto"],
+    ["colaboração conjunta","colaboração"],["consenso unânime","unanimidade"],
+    ["questionar com perguntas","questionar"],["narrar uma narrativa","narrar"],
   ];
 
   const NEGACOES_DUPLAS = [
