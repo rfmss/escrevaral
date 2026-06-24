@@ -1,7 +1,7 @@
 {
-  "name": "Escrevaral · Pegar",
-  "short_name": "Pegar",
-  "description": "Receba sua mesa do escritor de outro dispositivo.",
+  "name": "Escrevaral · Mesa Portátil",
+  "short_name": "Mesa Portátil",
+  "description": "Leve sua mesa do escritor para qualquer dispositivo. Sem conta, sem cabo, sem servidor.",
   "lang": "pt-BR",
   "start_url": "/pegar/",
   "scope": "/pegar/",

@@ -55,6 +55,18 @@ Não dizer que somos melhores. Dizer que resolvemos diferente.
 
 ---
 
+## Ciclo completo de transferência — todos os caminhos
+
+| De → Para | Via QR (sem fio, sem cabo) | Via arquivo .esc (qualquer canal) |
+|---|---|---|
+| PC → Celular | PC exibe QR · celular abre /pegar · câmera lê | PC exporta .esc · celular abre /pegar · "Abrir arquivo .esc" |
+| Celular → PC | /pegar "Enviar para outro PC" · webcam do PC lê | /pegar "Baixar cópia .esc" · PC importa pelo app |
+| Celular → Celular | /pegar dos dois lados | "Baixar .esc" · qualquer canal · "Abrir .esc" |
+
+O arquivo `.esc` viaja por qualquer canal que o usuário já usa: cabo USB, AirDrop, WhatsApp "Mensagens salvas", e-mail para si mesmo. Câmera não é obrigatória — é a opção mais rápida.
+
+---
+
 ## Taglines aprovadas para este pilar
 
 - **"Sua mesa vai com você."**
@@ -68,12 +80,12 @@ Não dizer que somos melhores. Dizer que resolvemos diferente.
 
 ## Narrativa de primeiro contato (toast no app)
 
-Aparece depois de alguns minutos de uso, uma única vez:
+Aparece depois de 3 minutos de uso, uma única vez:
 
 > *Ei — sua mesa inteira pode ir pro celular agora, sem internet. Só câmera e tela.*
 > → **Levar a mesa**
 
-Depois de dispensada: o ícone 📡 fica na barra inferior, acessível quando o usuário quiser.
+Depois de dispensada: o ícone 📡 fica na barra inferior. Clicando: abre o modal "Trazer do celular" (webcam do PC lê QR do celular).
 
 ---
 
@@ -83,6 +95,7 @@ Depois de dispensada: o ícone 📡 fica na barra inferior, acessível quando o 
 - ~~"Backup via QR"~~ — backup é o que você faz quando tem medo de perder. Isso é levar.
 - ~~"Sincronização offline"~~ — sincronização pressupõe servidor. Aqui não há.
 - ~~"Alternativa ao Google Drive"~~ — comparação posiciona o Escrevaral como segundo. Apresentar como escolha, não como substituto.
+- ~~"QR streaming"~~ — jargão técnico. Usar "transferência por luz" ou simplesmente "levar a mesa".
 
 ---
 
@@ -90,11 +103,26 @@ Depois de dispensada: o ícone 📡 fica na barra inferior, acessível quando o 
 
 | Lugar | Formato |
 |---|---|
-| `escrevaral.com/pegar` | Manifesto completo na tela inicial |
+| `escrevaral.com/pegar` | Manifesto completo na tela inicial; botões para todos os fluxos |
 | App principal (3 min de uso) | Toast — uma vez, uma linha, link |
-| Statusbar do app | Ícone 📡 persistente depois do primeiro contato |
+| Statusbar do app (📡) | Abre "Trazer do celular" (webcam) depois do primeiro contato |
 | Campanha social | Frase curta + vídeo de 15s mostrando os blocos colorindo |
 | README do repositório | Seção "Como funciona / Levar a mesa" |
+
+---
+
+## Arquitetura técnica do pilar (para referência interna)
+
+**Protocolo QR:** `v1|id|idx|total|crc32|data` — chunks LZString+base64, CRC-32 por chunk.
+
+**Parâmetros por direção:**
+- PC → celular (câmera traseira lê tela grande): chunkSize 200, 450ms, EC Q
+- Modo vídeo (chamada de vídeo): chunkSize 90, 1000ms, EC H, preto/branco puro
+- Celular → PC (webcam lê tela pequena): chunkSize 90, 800ms, EC H, QR preenche tela
+
+**Formato .esc:** envelope JSON com `format:"esc"`, `schemaVersion:1`, `checksum` FNV1a de payload com chaves ordenadas. Armazena em `vereda.manuscripts.v1`. Compatível entre todas as direções.
+
+**PWA:** `/pegar/` tem SW próprio (escopo `/pegar/`), cacheando jsQR, LZString, qrcode.min.js. Instalável independente do app principal.
 
 ---
 
