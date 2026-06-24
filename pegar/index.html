@@ -6,6 +6,7 @@
   <title>Pegar · Escrevaral</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2d2a26">
+  <meta name="description" content="Receba sua mesa do escritor de outro dispositivo. Sem conta, sem cabo, sem servidor.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Pegar">
@@ -14,21 +15,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #f5f2ea;
-      --ink:          #2d2a26;
-      --ink-2:        rgba(45,42,38,.6);
-      --ink-3:        rgba(45,42,38,.35);
-      --accent:       #1f4fff;
-      --card:         #fffdf9;
-      --border:       rgba(45,42,38,.1);
-      --font:         -apple-system, 'Segoe UI', system-ui, sans-serif;
-      --font-mono:    'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
-      --safe-top:     env(safe-area-inset-top, 0px);
-      --safe-bottom:  env(safe-area-inset-bottom, 0px);
+      --bg:          #f5f2ea;
+      --ink:         #2d2a26;
+      --ink-2:       rgba(45,42,38,.6);
+      --ink-3:       rgba(45,42,38,.35);
+      --accent:      #1f4fff;
+      --card:        #fffdf9;
+      --border:      rgba(45,42,38,.1);
+      --font:        -apple-system, 'Segoe UI', system-ui, sans-serif;
+      --font-mono:   'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+      --safe-top:    env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     html, body {
-      height: 100%;
       background: var(--bg);
       color: var(--ink);
       font-family: var(--font);
@@ -51,7 +51,7 @@
       padding: 14px 20px 0;
       flex-shrink: 0;
     }
-    .page-logo { width: 24px; height: 24px; opacity: .65; border-radius: 4px; }
+    .page-logo     { width: 24px; height: 24px; opacity: .65; border-radius: 4px; }
     .page-wordmark { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ink-2); }
 
     /* ── Banner de instalação ── */
@@ -67,9 +67,9 @@
       font-size: 13px;
     }
     #installBanner.is-visible { display: flex; }
-    .install-text { flex: 1; line-height: 1.4; }
-    .install-text strong { display: block; font-size: 14px; }
-    .install-text span { font-size: 12px; opacity: .7; }
+    .install-text              { flex: 1; line-height: 1.4; }
+    .install-text strong       { display: block; font-size: 14px; }
+    .install-text span         { font-size: 12px; opacity: .7; }
     .btn-instalar {
       appearance: none;
       border: 1px solid rgba(245,242,234,.3);
@@ -87,47 +87,32 @@
     .btn-instalar:hover { background: rgba(245,242,234,.22); }
     .btn-fechar-banner {
       appearance: none; border: none; background: transparent;
-      color: rgba(245,242,234,.45); font-size: 20px; cursor: pointer;
-      padding: 0; line-height: 1; flex-shrink: 0;
+      color: rgba(245,242,234,.45); font-size: 20px;
+      cursor: pointer; padding: 0; line-height: 1; flex-shrink: 0;
     }
 
     /* ── Telas ── */
-    .tela {
-      display: none;
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 20px;
-      gap: 0;
-    }
+    .tela { display: none; flex-direction: column; align-items: center; padding: 20px 20px 32px; gap: 14px; }
     .tela.ativa { display: flex; }
 
-    /* ── Tela: aguardando ── */
+    /* ── Cartão de ação ── */
     .cartao {
       width: 100%;
       max-width: 360px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 28px 24px;
+      padding: 26px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       text-align: center;
     }
-    .cartao-icone { font-size: 44px; line-height: 1; }
-    .cartao-titulo { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+    .cartao-icone     { font-size: 40px; line-height: 1; }
+    .cartao-titulo    { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
     .cartao-descricao { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
-    .ios-dica {
-      display: none;
-      font-size: 12px;
-      color: var(--ink-3);
-      line-height: 1.55;
-      padding: 4px 0;
-    }
-    .ios-dica.visivel { display: block; }
+
     .btn-principal {
       appearance: none;
       border: none;
@@ -140,13 +125,56 @@
       border-radius: 8px;
       cursor: pointer;
       width: 100%;
-      margin-top: 4px;
+      margin-top: 6px;
+      transition: background .15s;
     }
-    .btn-principal:hover { background: #1a1714; }
+    .btn-principal:hover  { background: #1a1714; }
     .btn-principal:active { transform: scale(.98); }
 
+    .ios-dica {
+      display: none;
+      font-size: 12px;
+      color: var(--ink-3);
+      line-height: 1.55;
+    }
+    .ios-dica.visivel { display: block; }
+
+    /* ── Manifesto ── */
+    .manifesto {
+      width: 100%;
+      max-width: 360px;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 14px;
+      padding: 24px 24px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .manifesto-titulo {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.25;
+    }
+    .manifesto-corpo {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(245,242,234,.78);
+    }
+    .manifesto-corpo strong { color: var(--bg); font-weight: 600; }
+    .manifesto-detalhe {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: rgba(245,242,234,.42);
+      line-height: 1.6;
+      border-top: 1px solid rgba(245,242,234,.1);
+      padding-top: 14px;
+    }
+
     /* ── Tela: lendo ── */
-    .lendo-wrap { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
+    .lendo-wrap  { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
     .camera-card {
       position: relative;
       width: 100%;
@@ -155,24 +183,20 @@
       border-radius: 14px;
       overflow: hidden;
     }
-    #scanVideo { width: 100%; height: 100%; object-fit: cover; display: block; }
+    #scanVideo   { width: 100%; height: 100%; object-fit: cover; display: block; }
     .camera-mira {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
       pointer-events: none;
     }
     .mira-quadro {
-      width: 58%;
-      aspect-ratio: 1;
+      width: 58%; aspect-ratio: 1;
       border: 2px solid rgba(255,255,255,.55);
       border-radius: 10px;
       box-shadow: 0 0 0 9999px rgba(0,0,0,.25);
     }
     .barra-progresso { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-    .barra-fill { height: 100%; background: var(--accent); width: 0%; transition: width .2s; border-radius: 2px; }
+    .barra-fill      { height: 100%; background: var(--accent); width: 0%; transition: width .2s; border-radius: 2px; }
     .lendo-status {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -191,6 +215,17 @@
     .bloco.recebido { background: rgba(31,79,255,.55); }
 
     /* ── Tela: feito ── */
+    .feito-nota {
+      width: 100%;
+      max-width: 360px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: var(--ink-3);
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 8px;
+    }
     .btn-abrir {
       appearance: none;
       border: none;
@@ -207,9 +242,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 4px;
+      margin-top: 6px;
     }
     .btn-abrir:hover { background: #1a1714; }
+
+    /* ── Rodapé ── */
+    .page-footer {
+      margin-top: auto;
+      padding: 16px 20px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: .03em;
+    }
   </style>
 </head>
 <body>
@@ -228,20 +273,42 @@
     <button class="btn-fechar-banner" id="btnFecharBanner" aria-label="Fechar">×</button>
   </div>
 
-  <!-- Tela 1: aguardando -->
+  <!-- ── Tela 1: aguardando ─────────────────────────────────────────── -->
   <section class="tela ativa" id="telaAguardando">
+
     <div class="cartao">
       <div class="cartao-icone">📡</div>
-      <h1 class="cartao-titulo">Pegar a mesa</h1>
-      <p class="cartao-descricao">Aponte a câmera para os QR codes que aparecem no outro dispositivo. Os blocos vão colorindo à medida que chegam.</p>
+      <h1 class="cartao-titulo">Levar a mesa</h1>
+      <p class="cartao-descricao">
+        Aponte a câmera para os QR codes que aparecem no outro dispositivo.
+        Os blocos colorem à medida que chegam. Quando completar, sua mesa inteira está aqui.
+      </p>
       <button class="btn-principal" id="btnReceber">Receber a mesa</button>
       <p class="ios-dica" id="iosDica">
-        Para instalar: toque em <strong>Compartilhar ↑</strong><br>e depois <strong>Adicionar à Tela de Início</strong>
+        Para instalar: toque em <strong>Compartilhar ↑</strong><br>
+        e depois <strong>Adicionar à Tela de Início</strong>
       </p>
     </div>
+
+    <div class="manifesto" role="complementary" aria-label="Como funciona">
+      <p class="manifesto-titulo">A nuvem é de outra pessoa.</p>
+      <p class="manifesto-corpo">
+        Seus textos viajam <strong>por luz</strong> — da tela do computador para a câmera do celular.
+        Nenhum servidor no meio. Nenhuma conta. Nenhuma empresa com acesso ao que você escreveu.
+      </p>
+      <p class="manifesto-corpo">
+        O celular não é um terminal. É <strong>o seu acervo portátil</strong>.
+        Fica no seu bolso, funciona sem rede, e é só seu.
+      </p>
+      <p class="manifesto-detalhe">
+        Você usou internet uma única vez — para abrir esta página.<br>
+        A transferência em si nunca toca a rede.
+      </p>
+    </div>
+
   </section>
 
-  <!-- Tela 2: lendo -->
+  <!-- ── Tela 2: lendo ──────────────────────────────────────────────── -->
   <section class="tela" id="telaLendo">
     <div class="lendo-wrap">
       <div class="camera-card">
@@ -254,15 +321,25 @@
     </div>
   </section>
 
-  <!-- Tela 3: feito -->
+  <!-- ── Tela 3: feito ──────────────────────────────────────────────── -->
   <section class="tela" id="telaFeito">
     <div class="cartao">
       <div class="cartao-icone">✅</div>
       <h2 class="cartao-titulo">Mesa recebida</h2>
-      <p class="cartao-descricao" id="feito-desc">Tudo chegou. Abra o Escrevaral para continuar de onde parou.</p>
+      <p class="cartao-descricao">
+        Tudo chegou. Abra o Escrevaral para continuar de onde parou.
+      </p>
       <a class="btn-abrir" href="/">Abrir o Escrevaral</a>
     </div>
+    <p class="feito-nota">
+      Sua escrita chegou sem passar por nenhum servidor.<br>
+      Zero bytes pela internet. Só luz e câmera.
+    </p>
   </section>
+
+  <footer class="page-footer">
+    Escrevaral — sem conta, sem assinatura, sem nuvem
+  </footer>
 
   <script src="jsqr.min.js"></script>
   <script src="lz-string.min.js"></script>
@@ -277,10 +354,10 @@
   const isIos        = /iP(hone|od|ad)/.test(navigator.userAgent);
   const isStandalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
 
-  const banner        = document.getElementById('installBanner');
-  const btnInstalar   = document.getElementById('btnInstalar');
+  const banner          = document.getElementById('installBanner');
+  const btnInstalar     = document.getElementById('btnInstalar');
   const btnFecharBanner = document.getElementById('btnFecharBanner');
-  const iosDica       = document.getElementById('iosDica');
+  const iosDica         = document.getElementById('iosDica');
 
   if (isIos && !isStandalone) iosDica.classList.add('visivel');
 
@@ -311,7 +388,6 @@
     document.getElementById(id).classList.add('ativa');
   }
 
-  // CRC-32 idêntico ao emissor
   const CRC_TABLE = (() => {
     const t = [];
     for (let i = 0; i < 256; i++) {
@@ -406,12 +482,10 @@
   }
 
   function importar(payload) {
-    // Formato Escrevaral: { app: "escrevaral", v: 1, keys: { "vereda.manuscripts.v1": "...", ... } }
     if (payload && payload.app === 'escrevaral' && payload.keys) {
       Object.entries(payload.keys).forEach(([k, v]) => localStorage.setItem(k, v));
       return;
     }
-    // Fallback para payloads legados
     localStorage.setItem('escrevaral_incoming_v1', JSON.stringify(payload));
   }
 

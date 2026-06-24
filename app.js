@@ -2704,6 +2704,44 @@ function hideSaveHint() {
 writingArea.addEventListener("input", showSaveHint, { once: true });
 if (saveHintDismiss) saveHintDismiss.addEventListener("click", hideSaveHint);
 
+// ── LEVAR A MESA ─────────────────────────────────────
+const LEVAR_MESA_KEY    = "vrda-levar-mesa-seen";
+const levarMesaToast    = document.getElementById("levar-mesa-toast");
+const levarMesaDismiss  = document.getElementById("levar-mesa-dismiss");
+const levarMesaAnchor   = document.getElementById("levar-mesa-anchor");
+
+function revelarAnchorLevarMesa() {
+  if (levarMesaAnchor) levarMesaAnchor.style.display = "flex";
+}
+
+function esconderLevarMesaToast() {
+  if (!levarMesaToast) return;
+  levarMesaToast.style.opacity = "0";
+  levarMesaToast.style.transform = "translateX(-50%) translateY(8px)";
+  levarMesaToast.style.pointerEvents = "none";
+  revelarAnchorLevarMesa();
+}
+
+function mostrarLevarMesaToast() {
+  if (!levarMesaToast || localStorage.getItem(LEVAR_MESA_KEY)) {
+    revelarAnchorLevarMesa();
+    return;
+  }
+  localStorage.setItem(LEVAR_MESA_KEY, "1");
+  levarMesaToast.style.opacity = "1";
+  levarMesaToast.style.transform = "translateX(-50%) translateY(0)";
+  levarMesaToast.style.pointerEvents = "auto";
+  setTimeout(esconderLevarMesaToast, 12000);
+}
+
+if (levarMesaDismiss) levarMesaDismiss.addEventListener("click", esconderLevarMesaToast);
+
+if (localStorage.getItem(LEVAR_MESA_KEY)) {
+  revelarAnchorLevarMesa();
+} else {
+  setTimeout(mostrarLevarMesaToast, 3 * 60 * 1000);
+}
+
 // ── META DE PALAVRAS ─────────────────────────────────
 
 function shootConfetti() {
