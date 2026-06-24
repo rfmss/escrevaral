@@ -363,6 +363,8 @@
       </p>
       <button class="btn-principal" id="btnReceber">Receber do computador</button>
       <button class="btn-secundario" id="btnEnviarIdle" style="display:none">Enviar para outro PC</button>
+      <button class="btn-secundario" id="btnAbrirEsc">Abrir arquivo .esc</button>
+      <button class="btn-secundario" id="btnBaixarEscIdle" style="display:none">Baixar cópia .esc</button>
       <p class="ios-dica" id="iosDica">
         Para instalar: toque em <strong>Compartilhar ↑</strong><br>
         e depois <strong>Adicionar à Tela de Início</strong>
@@ -409,7 +411,8 @@
         Tudo chegou. Abra o Escrevaral para continuar de onde parou.
       </p>
       <a class="btn-abrir" href="/">Abrir o Escrevaral</a>
-      <button class="btn-secundario" id="btnEnviarFeito">Agora enviar para outro PC</button>
+      <button class="btn-secundario" id="btnEnviarFeito">Enviar para outro PC</button>
+      <button class="btn-secundario" id="btnBaixarEscFeito">Baixar cópia .esc</button>
     </div>
     <p class="feito-nota">
       Sua escrita chegou sem passar por nenhum servidor.<br>
@@ -437,6 +440,8 @@
   <footer class="page-footer">
     Escrevaral — sem conta, sem assinatura, sem nuvem
   </footer>
+
+  <input type="file" id="escInput" accept=".esc" style="display:none">
 
   <script src="jsqr.min.js"></script>
   <script src="lz-string.min.js"></script>
@@ -499,6 +504,102 @@
     return ((c ^ -1) >>> 0).toString(16).padStart(8, '0');
   }
 
+  // ── Formato .esc ──────────────────────────────────────────────────────────
+  const ESC_FORMAT         = 'esc';
+  const ESC_SCHEMA_VERSION = 1;
+  const ESC_STATE_KEY      = 'vereda.manuscripts.v1';
+
+  function escStableSort(v) {
+    if (Array.isArray(v)) return v.map(escStableSort);
+    if (v && typeof v === 'object') {
+      return Object.keys(v).sort().reduce((o, k) => { o[k] = escStableSort(v[k]); return o; }, {});
+    }
+    return v;
+  }
+
+  function escFnv1a(str) {
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+    return (h >>> 0).toString(16).padStart(8, '0');
+  }
+
+  function escChecksum(payload) {
+    return escFnv1a(JSON.stringify(escStableSort(payload)));
+  }
+
+  function exportarEsc() {
+    const raw = localStorage.getItem(ESC_STATE_KEY);
+    if (!raw) return;
+    let payload;
+    try { payload = JSON.parse(raw); } catch (_) { return; }
+
+    const stamp    = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '');
+    const envelope = {
+      format: ESC_FORMAT,
+      schemaVersion: ESC_SCHEMA_VERSION,
+      createdWith: 'escrevaral/pegar',
+      exportedAt: new Date().toISOString(),
+      checksum: escChecksum(payload),
+      payload,
+    };
+    const blob = new Blob([JSON.stringify(envelope, null, 2)], { type: 'application/vnd.vereda+json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `escrevaral-acervo-${stamp}.esc`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+  }
+
+  function importarEsc(text) {
+    let envelope;
+    try { envelope = JSON.parse(text); } catch (_) { throw new Error('Arquivo ilegível ou corrompido.'); }
+
+    if (envelope.format !== ESC_FORMAT && envelope.format !== 'vrda') {
+      throw new Error('Este arquivo não é um .esc válido.');
+    }
+    if (envelope.schemaVersion !== ESC_SCHEMA_VERSION) {
+      throw new Error(`Versão de formato incompatível (${envelope.schemaVersion}).`);
+    }
+    if (!envelope.payload || !Array.isArray(envelope.payload.manuscripts)) {
+      throw new Error('Arquivo .esc sem manuscritos.');
+    }
+    if (escChecksum(envelope.payload) !== envelope.checksum) {
+      throw new Error('Assinatura do arquivo inválida — arquivo pode estar corrompido.');
+    }
+
+    localStorage.setItem(ESC_STATE_KEY, JSON.stringify(envelope.payload));
+    return envelope;
+  }
+
+  const escInput = document.getElementById('escInput');
+
+  document.getElementById('btnAbrirEsc').addEventListener('click', () => escInput.click());
+
+  escInput.addEventListener('change', () => {
+    const file = escInput.files[0];
+    if (!file) return;
+    escInput.value = '';
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const envelope = importarEsc(e.target.result);
+        const msCount  = envelope.payload.manuscripts?.filter(m => (m.type || 'manuscrito') === 'manuscrito').length || 0;
+        document.querySelector('#telaFeito .cartao-descricao').textContent =
+          `${msCount} ${msCount === 1 ? 'manuscrito' : 'manuscritos'} importados. Abra o Escrevaral para continuar.`;
+        document.getElementById('btnEnviarFeito').style.display = '';
+        document.getElementById('btnBaixarEscFeito').style.display = '';
+        mostrarTela('telaFeito');
+      } catch (err) {
+        alert(err.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById('btnBaixarEscIdle').addEventListener('click', exportarEsc);
+  document.getElementById('btnBaixarEscFeito').addEventListener('click', exportarEsc);
+
   // ── Verificar se há dados para enviar ─────────────────────────────────────
   const KEYS_ESCREVARAL = [
     'vereda.manuscripts.v1',
@@ -522,6 +623,7 @@
   function mostrarBotoesEnviar() {
     if (temDados()) {
       document.getElementById('btnEnviarIdle').style.display = '';
+      document.getElementById('btnBaixarEscIdle').style.display = '';
     }
   }
 
@@ -588,6 +690,7 @@
       const payload = JSON.parse(json);
       importar(payload);
       document.getElementById('btnEnviarFeito').style.display = '';
+      document.getElementById('btnBaixarEscFeito').style.display = '';
       mostrarTela('telaFeito');
     } catch (_) {
       statusEl.textContent = 'erro ao ler os dados — tente novamente';
