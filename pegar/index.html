@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pegar · Escrevaral</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2d2a26">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pegar">
+  <link rel="apple-touch-icon" href="/icons/escrevaral-192.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #f5f2ea;
+      --ink:          #2d2a26;
+      --ink-2:        rgba(45,42,38,.6);
+      --ink-3:        rgba(45,42,38,.35);
+      --accent:       #1f4fff;
+      --card:         #fffdf9;
+      --border:       rgba(45,42,38,.1);
+      --font:         -apple-system, 'Segoe UI', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+      --safe-top:     env(safe-area-inset-top, 0px);
+      --safe-bottom:  env(safe-area-inset-bottom, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    /* ── Cabeçalho ── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px 0;
+      flex-shrink: 0;
+    }
+    .page-logo { width: 24px; height: 24px; opacity: .65; border-radius: 4px; }
+    .page-wordmark { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ink-2); }
+
+    /* ── Banner de instalação ── */
+    #installBanner {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 20px 0;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    #installBanner.is-visible { display: flex; }
+    .install-text { flex: 1; line-height: 1.4; }
+    .install-text strong { display: block; font-size: 14px; }
+    .install-text span { font-size: 12px; opacity: .7; }
+    .btn-instalar {
+      appearance: none;
+      border: 1px solid rgba(245,242,234,.3);
+      border-radius: 6px;
+      background: rgba(245,242,234,.12);
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .btn-instalar:hover { background: rgba(245,242,234,.22); }
+    .btn-fechar-banner {
+      appearance: none; border: none; background: transparent;
+      color: rgba(245,242,234,.45); font-size: 20px; cursor: pointer;
+      padding: 0; line-height: 1; flex-shrink: 0;
+    }
+
+    /* ── Telas ── */
+    .tela {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      gap: 0;
+    }
+    .tela.ativa { display: flex; }
+
+    /* ── Tela: aguardando ── */
+    .cartao {
+      width: 100%;
+      max-width: 360px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .cartao-icone { font-size: 44px; line-height: 1; }
+    .cartao-titulo { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+    .cartao-descricao { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
+    .ios-dica {
+      display: none;
+      font-size: 12px;
+      color: var(--ink-3);
+      line-height: 1.55;
+      padding: 4px 0;
+    }
+    .ios-dica.visivel { display: block; }
+    .btn-principal {
+      appearance: none;
+      border: none;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 4px;
+    }
+    .btn-principal:hover { background: #1a1714; }
+    .btn-principal:active { transform: scale(.98); }
+
+    /* ── Tela: lendo ── */
+    .lendo-wrap { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
+    .camera-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      background: #111;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    #scanVideo { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .camera-mira {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .mira-quadro {
+      width: 58%;
+      aspect-ratio: 1;
+      border: 2px solid rgba(255,255,255,.55);
+      border-radius: 10px;
+      box-shadow: 0 0 0 9999px rgba(0,0,0,.25);
+    }
+    .barra-progresso { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .barra-fill { height: 100%; background: var(--accent); width: 0%; transition: width .2s; border-radius: 2px; }
+    .lendo-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .05em;
+      color: var(--ink-2);
+      text-align: center;
+      min-height: 16px;
+    }
+    .blocos-grid { display: grid; gap: 3px; }
+    .bloco {
+      background: rgba(45,42,38,.08);
+      border-radius: 3px;
+      padding-bottom: 100%;
+      transition: background .25s ease;
+    }
+    .bloco.recebido { background: rgba(31,79,255,.55); }
+
+    /* ── Tela: feito ── */
+    .btn-abrir {
+      appearance: none;
+      border: none;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .btn-abrir:hover { background: #1a1714; }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <img class="page-logo" src="/icons/escrevaral-192.png" alt="">
+    <span class="page-wordmark">Escrevaral · Pegar</span>
+  </header>
+
+  <div id="installBanner">
+    <div class="install-text">
+      <strong>Instalar o Pegar</strong>
+      <span>Abre sem internet da próxima vez</span>
+    </div>
+    <button class="btn-instalar" id="btnInstalar">Instalar</button>
+    <button class="btn-fechar-banner" id="btnFecharBanner" aria-label="Fechar">×</button>
+  </div>
+
+  <!-- Tela 1: aguardando -->
+  <section class="tela ativa" id="telaAguardando">
+    <div class="cartao">
+      <div class="cartao-icone">📡</div>
+      <h1 class="cartao-titulo">Pegar a mesa</h1>
+      <p class="cartao-descricao">Aponte a câmera para os QR codes que aparecem no outro dispositivo. Os blocos vão colorindo à medida que chegam.</p>
+      <button class="btn-principal" id="btnReceber">Receber a mesa</button>
+      <p class="ios-dica" id="iosDica">
+        Para instalar: toque em <strong>Compartilhar ↑</strong><br>e depois <strong>Adicionar à Tela de Início</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Tela 2: lendo -->
+  <section class="tela" id="telaLendo">
+    <div class="lendo-wrap">
+      <div class="camera-card">
+        <video id="scanVideo" autoplay playsinline muted></video>
+        <div class="camera-mira"><div class="mira-quadro"></div></div>
+      </div>
+      <div class="barra-progresso"><div class="barra-fill" id="barraFill"></div></div>
+      <p class="lendo-status" id="statusLendo">aguardando QR…</p>
+      <div class="blocos-grid" id="blocosGrid"></div>
+    </div>
+  </section>
+
+  <!-- Tela 3: feito -->
+  <section class="tela" id="telaFeito">
+    <div class="cartao">
+      <div class="cartao-icone">✅</div>
+      <h2 class="cartao-titulo">Mesa recebida</h2>
+      <p class="cartao-descricao" id="feito-desc">Tudo chegou. Abra o Escrevaral para continuar de onde parou.</p>
+      <a class="btn-abrir" href="/">Abrir o Escrevaral</a>
+    </div>
+  </section>
+
+  <script src="jsqr.min.js"></script>
+  <script src="lz-string.min.js"></script>
+  <script>
+  'use strict';
+
+  // ── PWA ──────────────────────────────────────────────────────────────────────
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+
+  const isIos        = /iP(hone|od|ad)/.test(navigator.userAgent);
+  const isStandalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+
+  const banner        = document.getElementById('installBanner');
+  const btnInstalar   = document.getElementById('btnInstalar');
+  const btnFecharBanner = document.getElementById('btnFecharBanner');
+  const iosDica       = document.getElementById('iosDica');
+
+  if (isIos && !isStandalone) iosDica.classList.add('visivel');
+
+  let deferredInstall = null;
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredInstall = e;
+    if (!isStandalone) banner.classList.add('is-visible');
+  });
+
+  btnInstalar.addEventListener('click', async () => {
+    if (!deferredInstall) return;
+    deferredInstall.prompt();
+    const { outcome } = await deferredInstall.userChoice;
+    if (outcome === 'accepted') banner.classList.remove('is-visible');
+    deferredInstall = null;
+  });
+
+  btnFecharBanner.addEventListener('click', () => banner.classList.remove('is-visible'));
+  window.addEventListener('appinstalled', () => banner.classList.remove('is-visible'));
+
+  // ── Scanner ───────────────────────────────────────────────────────────────────
+  const QR_VERSION = 'v1';
+
+  function mostrarTela(id) {
+    document.querySelectorAll('.tela').forEach(t => t.classList.remove('ativa'));
+    document.getElementById(id).classList.add('ativa');
+  }
+
+  // CRC-32 idêntico ao emissor
+  const CRC_TABLE = (() => {
+    const t = [];
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let j = 0; j < 8; j++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+      t.push(c >>> 0);
+    }
+    return t;
+  })();
+
+  function crc32(str) {
+    let c = 0 ^ -1;
+    for (let i = 0; i < str.length; i++) c = (c >>> 8) ^ CRC_TABLE[(c ^ str.charCodeAt(i)) & 0xff];
+    return ((c ^ -1) >>> 0).toString(16).padStart(8, '0');
+  }
+
+  function parseFrame(raw) {
+    const p = raw.split('|');
+    if (p.length < 6) return null;
+    const [version, id, idxRaw, totalRaw, checksum, data] = p;
+    if (version !== QR_VERSION) return null;
+    const index = parseInt(idxRaw, 10);
+    const total = parseInt(totalRaw, 10);
+    if (!isFinite(index) || !isFinite(total) || !id || !data) return null;
+    if (crc32(data) !== checksum) return null;
+    return { id, index, total, data };
+  }
+
+  const statusEl  = document.getElementById('statusLendo');
+  const barraFill = document.getElementById('barraFill');
+  const gridEl    = document.getElementById('blocosGrid');
+  const video     = document.getElementById('scanVideo');
+
+  let session    = null;
+  let blocos     = [];
+  let scanStream = null;
+  let ativo      = false;
+  let detector   = null;
+  let canvas     = null;
+  let ctx        = null;
+  let ocupado    = false;
+
+  function montarGrade(total) {
+    gridEl.innerHTML = '';
+    blocos = [];
+    const cols = Math.ceil(Math.sqrt(total));
+    gridEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('div');
+      b.className = 'bloco';
+      gridEl.appendChild(b);
+      blocos.push(b);
+    }
+  }
+
+  function processarFrame(frame) {
+    if (!frame) return;
+    if (!session || session.id !== frame.id) {
+      session = { id: frame.id, total: frame.total, received: new Map() };
+      montarGrade(frame.total);
+    }
+    if (session.total !== frame.total) return;
+    if (session.received.has(frame.index)) return;
+
+    session.received.set(frame.index, frame.data);
+    if (blocos[frame.index - 1]) blocos[frame.index - 1].classList.add('recebido');
+
+    const count = session.received.size;
+    const pct   = Math.round((count / session.total) * 100);
+    barraFill.style.width = `${pct}%`;
+    statusEl.textContent  = `recebendo… ${count} / ${session.total}`;
+
+    if (count === session.total) finalizar();
+  }
+
+  function finalizar() {
+    ativo = false;
+    if (scanStream) scanStream.getTracks().forEach(t => t.stop());
+
+    const partes = [];
+    for (let i = 1; i <= session.total; i++) partes.push(session.received.get(i) || '');
+    const base64 = partes.join('');
+
+    try {
+      const json    = LZString.decompressFromBase64(base64);
+      const payload = JSON.parse(json);
+      importar(payload);
+      mostrarTela('telaFeito');
+    } catch (_) {
+      statusEl.textContent = 'erro ao ler os dados — tente novamente';
+    }
+  }
+
+  function importar(payload) {
+    // Formato Escrevaral: { app: "escrevaral", v: 1, keys: { "vereda.manuscripts.v1": "...", ... } }
+    if (payload && payload.app === 'escrevaral' && payload.keys) {
+      Object.entries(payload.keys).forEach(([k, v]) => localStorage.setItem(k, v));
+      return;
+    }
+    // Fallback para payloads legados
+    localStorage.setItem('escrevaral_incoming_v1', JSON.stringify(payload));
+  }
+
+  async function loopScan() {
+    if (!ativo || ocupado) return;
+    if (!video || video.readyState < 2) { requestAnimationFrame(loopScan); return; }
+
+    ocupado = true;
+    try {
+      if (detector) {
+        const codes = await detector.detect(video);
+        if (codes && codes.length) processarFrame(parseFrame(codes[0].rawValue || ''));
+      } else if (ctx && canvas && window.jsQR) {
+        canvas.width  = video.videoWidth  || 640;
+        canvas.height = video.videoHeight || 480;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const r   = window.jsQR(img.data, canvas.width, canvas.height, { inversionAttempts: 'dontInvert' });
+        if (r && r.data) processarFrame(parseFrame(r.data));
+      }
+    } catch (_) {}
+
+    ocupado = false;
+    requestAnimationFrame(loopScan);
+  }
+
+  document.getElementById('btnReceber').addEventListener('click', async () => {
+    try {
+      scanStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 1280 } },
+        audio: false,
+      });
+      video.srcObject = scanStream;
+      await video.play();
+
+      if ('BarcodeDetector' in window) {
+        detector = new BarcodeDetector({ formats: ['qr_code'] });
+      } else if (window.jsQR) {
+        canvas = document.createElement('canvas');
+        ctx    = canvas.getContext('2d', { willReadFrequently: true });
+      } else {
+        statusEl.textContent = 'leitor de QR não disponível neste navegador';
+        mostrarTela('telaLendo');
+        return;
+      }
+
+      ativo = true;
+      mostrarTela('telaLendo');
+      loopScan();
+    } catch (_) {
+      statusEl.textContent = 'câmera bloqueada — verifique as permissões';
+      mostrarTela('telaLendo');
+    }
+  });
+  </script>
+</body>
+</html>
