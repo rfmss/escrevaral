@@ -2742,6 +2742,206 @@ if (localStorage.getItem(LEVAR_MESA_KEY)) {
   setTimeout(mostrarLevarMesaToast, 3 * 60 * 1000);
 }
 
+// ── TRAZER DO CELULAR ─────────────────────────────────
+const trazerModal      = document.getElementById("trazer-modal");
+const trazerFechar     = document.getElementById("trazer-fechar");
+const trazerVideo      = document.getElementById("trazer-video");
+const trazerBarra      = document.getElementById("trazer-barra");
+const trazerStatus     = document.getElementById("trazer-status");
+const trazerGrade      = document.getElementById("trazer-grade");
+const trazerSucesso    = document.getElementById("trazer-sucesso");
+const trazerRecarregar = document.getElementById("trazer-recarregar");
+
+const TRAZER_QR_VERSION = "v1";
+let trazerStream    = null;
+let trazerAtivo     = false;
+let trazerDetector  = null;
+let trazerCanvas    = null;
+let trazerCtx       = null;
+let trazerOcupado   = false;
+let trazerSession   = null;
+let trazerBlocos    = [];
+
+const TRAZER_CRC_TABLE = (() => {
+  const t = [];
+  for (let i = 0; i < 256; i++) {
+    let c = i;
+    for (let j = 0; j < 8; j++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+    t.push(c >>> 0);
+  }
+  return t;
+})();
+
+function trazerCrc32(str) {
+  let c = 0 ^ -1;
+  for (let i = 0; i < str.length; i++) c = (c >>> 8) ^ TRAZER_CRC_TABLE[(c ^ str.charCodeAt(i)) & 0xff];
+  return ((c ^ -1) >>> 0).toString(16).padStart(8, "0");
+}
+
+function trazerParseFrame(raw) {
+  const p = raw.split("|");
+  if (p.length < 6) return null;
+  const [version, id, idxRaw, totalRaw, checksum, data] = p;
+  if (version !== TRAZER_QR_VERSION) return null;
+  const index = parseInt(idxRaw, 10);
+  const total = parseInt(totalRaw, 10);
+  if (!isFinite(index) || !isFinite(total) || !id || !data) return null;
+  if (trazerCrc32(data) !== checksum) return null;
+  return { id, index, total, data };
+}
+
+function trazerMontarGrade(total) {
+  trazerGrade.innerHTML = "";
+  trazerBlocos = [];
+  const cols = Math.ceil(Math.sqrt(total));
+  trazerGrade.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  for (let i = 0; i < total; i++) {
+    const b = document.createElement("div");
+    b.style.cssText = "background:rgba(45,42,38,.08);border-radius:3px;padding-bottom:100%;transition:background .25s;";
+    trazerGrade.appendChild(b);
+    trazerBlocos.push(b);
+  }
+}
+
+function trazerImportar(payload) {
+  if (payload && payload.app === "escrevaral" && payload.keys) {
+    Object.entries(payload.keys).forEach(([k, v]) => localStorage.setItem(k, v));
+    return;
+  }
+  localStorage.setItem("escrevaral_incoming_v1", JSON.stringify(payload));
+}
+
+function trazerFinalizar() {
+  trazerAtivo = false;
+  if (trazerStream) trazerStream.getTracks().forEach(t => t.stop());
+  trazerVideo.srcObject = null;
+
+  const partes = [];
+  for (let i = 1; i <= trazerSession.total; i++) partes.push(trazerSession.received.get(i) || "");
+  const base64 = partes.join("");
+
+  try {
+    const LZ = window.LZString;
+    if (!LZ) throw new Error("LZString indisponível");
+    const json    = LZ.decompressFromBase64(base64);
+    const payload = JSON.parse(json);
+    trazerImportar(payload);
+    trazerVideo.parentElement.style.display = "none";
+    trazerSucesso.style.display = "block";
+    trazerStatus.textContent = "mesa recebida com sucesso";
+  } catch (_) {
+    trazerStatus.textContent = "erro ao ler os dados — tente novamente";
+  }
+}
+
+function trazerProcessarFrame(frame) {
+  if (!frame) return;
+  if (!trazerSession || trazerSession.id !== frame.id) {
+    trazerSession = { id: frame.id, total: frame.total, received: new Map() };
+    trazerMontarGrade(frame.total);
+  }
+  if (trazerSession.total !== frame.total) return;
+  if (trazerSession.received.has(frame.index)) return;
+
+  trazerSession.received.set(frame.index, frame.data);
+  if (trazerBlocos[frame.index - 1]) trazerBlocos[frame.index - 1].style.background = "rgba(31,79,255,.55)";
+
+  const count = trazerSession.received.size;
+  const pct   = Math.round((count / trazerSession.total) * 100);
+  trazerBarra.style.width = `${pct}%`;
+  trazerStatus.textContent = `recebendo… ${count} / ${trazerSession.total}`;
+
+  if (count === trazerSession.total) trazerFinalizar();
+}
+
+async function trazerLoopScan() {
+  if (!trazerAtivo || trazerOcupado) return;
+  if (!trazerVideo || trazerVideo.readyState < 2) { requestAnimationFrame(trazerLoopScan); return; }
+
+  trazerOcupado = true;
+  try {
+    if (trazerDetector) {
+      const codes = await trazerDetector.detect(trazerVideo);
+      if (codes && codes.length) trazerProcessarFrame(trazerParseFrame(codes[0].rawValue || ""));
+    } else if (trazerCtx && trazerCanvas && window.jsQR) {
+      trazerCanvas.width  = trazerVideo.videoWidth  || 640;
+      trazerCanvas.height = trazerVideo.videoHeight || 480;
+      trazerCtx.drawImage(trazerVideo, 0, 0, trazerCanvas.width, trazerCanvas.height);
+      const img = trazerCtx.getImageData(0, 0, trazerCanvas.width, trazerCanvas.height);
+      const r   = window.jsQR(img.data, trazerCanvas.width, trazerCanvas.height, { inversionAttempts: "dontInvert" });
+      if (r && r.data) trazerProcessarFrame(trazerParseFrame(r.data));
+    }
+  } catch (_) {}
+
+  trazerOcupado = false;
+  requestAnimationFrame(trazerLoopScan);
+}
+
+async function abrirTrazerModal() {
+  if (!trazerModal) return;
+  trazerModal.style.display = "flex";
+  trazerSucesso.style.display = "none";
+  trazerVideo.parentElement.style.display = "";
+  trazerGrade.innerHTML = "";
+  trazerBarra.style.width = "0%";
+  trazerStatus.textContent = "abrindo câmera…";
+  trazerSession = null;
+  trazerBlocos  = [];
+  trazerAtivo   = false;
+
+  // carrega jsQR dinamicamente se necessário
+  if (!window.jsQR && !("BarcodeDetector" in window)) {
+    await new Promise((res, rej) => {
+      const s = document.createElement("script");
+      s.src = "/pegar/jsqr.min.js";
+      s.onload = res;
+      s.onerror = () => rej(new Error("jsQR indisponível"));
+      document.head.appendChild(s);
+    }).catch(() => {});
+  }
+
+  try {
+    trazerStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 1280 } },
+      audio: false,
+    });
+    trazerVideo.srcObject = trazerStream;
+    await trazerVideo.play();
+
+    if ("BarcodeDetector" in window) {
+      trazerDetector = new BarcodeDetector({ formats: ["qr_code"] });
+    } else if (window.jsQR) {
+      trazerCanvas = document.createElement("canvas");
+      trazerCtx    = trazerCanvas.getContext("2d", { willReadFrequently: true });
+    } else {
+      trazerStatus.textContent = "leitor de QR não disponível neste navegador";
+      return;
+    }
+
+    trazerAtivo = true;
+    trazerStatus.textContent = "aponte o celular para a webcam…";
+    trazerLoopScan();
+    revelarAnchorLevarMesa();
+  } catch (_) {
+    trazerStatus.textContent = "câmera bloqueada — verifique as permissões do navegador";
+  }
+}
+
+function fecharTrazerModal() {
+  trazerAtivo = false;
+  if (trazerStream) { trazerStream.getTracks().forEach(t => t.stop()); trazerStream = null; }
+  trazerVideo.srcObject = null;
+  if (trazerModal) trazerModal.style.display = "none";
+}
+
+if (levarMesaAnchor) levarMesaAnchor.addEventListener("click", abrirTrazerModal);
+if (trazerFechar)    trazerFechar.addEventListener("click", fecharTrazerModal);
+if (trazerRecarregar) trazerRecarregar.addEventListener("click", () => location.reload());
+
+trazerModal && trazerModal.addEventListener("click", e => {
+  if (e.target === trazerModal) fecharTrazerModal();
+});
+
 // ── META DE PALAVRAS ─────────────────────────────────
 
 function shootConfetti() {

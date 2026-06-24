@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Pegar · Escrevaral</title>
+  <title>Mesa Portátil · Escrevaral</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2d2a26">
-  <meta name="description" content="Receba sua mesa do escritor de outro dispositivo. Sem conta, sem cabo, sem servidor.">
+  <meta name="description" content="Leve sua mesa do escritor para qualquer dispositivo. Sem conta, sem cabo, sem servidor.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Pegar">
+  <meta name="apple-mobile-web-app-title" content="Mesa Portátil">
   <link rel="apple-touch-icon" href="/icons/escrevaral-192.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,6 +131,23 @@
     .btn-principal:hover  { background: #1a1714; }
     .btn-principal:active { transform: scale(.98); }
 
+    .btn-secundario {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 11px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background .15s;
+    }
+    .btn-secundario:hover { background: rgba(45,42,38,.05); }
+    .btn-secundario:active { transform: scale(.98); }
+
     .ios-dica {
       display: none;
       font-size: 12px;
@@ -173,7 +190,7 @@
       padding-top: 14px;
     }
 
-    /* ── Tela: lendo ── */
+    /* ── Tela: lendo (recebe QR do PC) ── */
     .lendo-wrap  { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
     .camera-card {
       position: relative;
@@ -213,6 +230,67 @@
       transition: background .25s ease;
     }
     .bloco.recebido { background: rgba(31,79,255,.55); }
+
+    /* ── Tela: enviando (emite QR para o PC) ── */
+    .enviando-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .qr-enorme {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .qr-enorme canvas,
+    .qr-enorme img { display: block; max-width: 100%; border-radius: 4px; }
+    .enviando-barra { width: 100%; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .enviando-fill  { height: 100%; background: var(--accent); width: 0%; transition: width .3s; border-radius: 2px; }
+    .enviando-status {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: .05em;
+      color: var(--ink-2);
+      text-align: center;
+    }
+    .enviando-grade { display: grid; gap: 3px; width: 100%; }
+    .enviando-bloco {
+      background: rgba(45,42,38,.08);
+      border-radius: 3px;
+      padding-bottom: 100%;
+      transition: background .3s ease;
+    }
+    .enviando-bloco.exibido { background: rgba(31,79,255,.55); }
+    .enviando-controles {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+    .btn-pausar {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1;
+    }
+    .btn-pausar:hover { background: rgba(45,42,38,.05); }
+    .enviando-dica {
+      font-size: 12px;
+      color: var(--ink-3);
+      text-align: center;
+      line-height: 1.55;
+    }
 
     /* ── Tela: feito ── */
     .feito-nota {
@@ -261,12 +339,12 @@
 
   <header class="page-header">
     <img class="page-logo" src="/icons/escrevaral-192.png" alt="">
-    <span class="page-wordmark">Escrevaral · Pegar</span>
+    <span class="page-wordmark">Escrevaral · Mesa Portátil</span>
   </header>
 
   <div id="installBanner">
     <div class="install-text">
-      <strong>Instalar o Pegar</strong>
+      <strong>Instalar o Mesa Portátil</strong>
       <span>Abre sem internet da próxima vez</span>
     </div>
     <button class="btn-instalar" id="btnInstalar">Instalar</button>
@@ -283,7 +361,8 @@
         Aponte a câmera para os QR codes que aparecem no outro dispositivo.
         Os blocos colorem à medida que chegam. Quando completar, sua mesa inteira está aqui.
       </p>
-      <button class="btn-principal" id="btnReceber">Receber a mesa</button>
+      <button class="btn-principal" id="btnReceber">Receber do computador</button>
+      <button class="btn-secundario" id="btnEnviarIdle" style="display:none">Enviar para outro PC</button>
       <p class="ios-dica" id="iosDica">
         Para instalar: toque em <strong>Compartilhar ↑</strong><br>
         e depois <strong>Adicionar à Tela de Início</strong>
@@ -308,7 +387,7 @@
 
   </section>
 
-  <!-- ── Tela 2: lendo ──────────────────────────────────────────────── -->
+  <!-- ── Tela 2: lendo (recebe QR do PC) ──────────────────────────── -->
   <section class="tela" id="telaLendo">
     <div class="lendo-wrap">
       <div class="camera-card">
@@ -330,11 +409,29 @@
         Tudo chegou. Abra o Escrevaral para continuar de onde parou.
       </p>
       <a class="btn-abrir" href="/">Abrir o Escrevaral</a>
+      <button class="btn-secundario" id="btnEnviarFeito">Agora enviar para outro PC</button>
     </div>
     <p class="feito-nota">
       Sua escrita chegou sem passar por nenhum servidor.<br>
       Zero bytes pela internet. Só luz e câmera.
     </p>
+  </section>
+
+  <!-- ── Tela 4: enviando (emite QR para o PC) ─────────────────────── -->
+  <section class="tela" id="telaEnviando">
+    <div class="enviando-wrap">
+      <div class="qr-enorme" id="qrContainer"></div>
+      <div class="enviando-barra"><div class="enviando-fill" id="enviarFill"></div></div>
+      <p class="enviando-status" id="statusEnviando">preparando…</p>
+      <div class="enviando-grade" id="enviarGrade"></div>
+      <div class="enviando-controles">
+        <button class="btn-pausar" id="btnPausar">Pausar</button>
+      </div>
+      <p class="enviando-dica">
+        Aponte a câmera do PC ou outro celular para o QR.<br>
+        Mantenha o celular a 20–30 cm da webcam.
+      </p>
+    </div>
   </section>
 
   <footer class="page-footer">
@@ -343,6 +440,7 @@
 
   <script src="jsqr.min.js"></script>
   <script src="lz-string.min.js"></script>
+  <script src="qrcode.min.js"></script>
   <script>
   'use strict';
 
@@ -362,13 +460,11 @@
   if (isIos && !isStandalone) iosDica.classList.add('visivel');
 
   let deferredInstall = null;
-
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     deferredInstall = e;
     if (!isStandalone) banner.classList.add('is-visible');
   });
-
   btnInstalar.addEventListener('click', async () => {
     if (!deferredInstall) return;
     deferredInstall.prompt();
@@ -376,11 +472,10 @@
     if (outcome === 'accepted') banner.classList.remove('is-visible');
     deferredInstall = null;
   });
-
   btnFecharBanner.addEventListener('click', () => banner.classList.remove('is-visible'));
   window.addEventListener('appinstalled', () => banner.classList.remove('is-visible'));
 
-  // ── Scanner ───────────────────────────────────────────────────────────────────
+  // ── Utilitários compartilhados ─────────────────────────────────────────────
   const QR_VERSION = 'v1';
 
   function mostrarTela(id) {
@@ -404,18 +499,35 @@
     return ((c ^ -1) >>> 0).toString(16).padStart(8, '0');
   }
 
-  function parseFrame(raw) {
-    const p = raw.split('|');
-    if (p.length < 6) return null;
-    const [version, id, idxRaw, totalRaw, checksum, data] = p;
-    if (version !== QR_VERSION) return null;
-    const index = parseInt(idxRaw, 10);
-    const total = parseInt(totalRaw, 10);
-    if (!isFinite(index) || !isFinite(total) || !id || !data) return null;
-    if (crc32(data) !== checksum) return null;
-    return { id, index, total, data };
+  // ── Verificar se há dados para enviar ─────────────────────────────────────
+  const KEYS_ESCREVARAL = [
+    'vereda.manuscripts.v1',
+    'vereda.checklists.v1',
+    'vereda.backup-meta.v1',
+  ];
+
+  function temDados() {
+    return KEYS_ESCREVARAL.some(k => localStorage.getItem(k));
   }
 
+  function coletarPayload() {
+    const keys = {};
+    KEYS_ESCREVARAL.forEach(k => {
+      const v = localStorage.getItem(k);
+      if (v) keys[k] = v;
+    });
+    return { app: 'escrevaral', v: 1, keys };
+  }
+
+  function mostrarBotoesEnviar() {
+    if (temDados()) {
+      document.getElementById('btnEnviarIdle').style.display = '';
+    }
+  }
+
+  mostrarBotoesEnviar();
+
+  // ── Modo receptor: celular lê QR do PC ────────────────────────────────────
   const statusEl  = document.getElementById('statusLendo');
   const barraFill = document.getElementById('barraFill');
   const gridEl    = document.getElementById('blocosGrid');
@@ -430,6 +542,18 @@
   let ctx        = null;
   let ocupado    = false;
 
+  function parseFrame(raw) {
+    const p = raw.split('|');
+    if (p.length < 6) return null;
+    const [version, id, idxRaw, totalRaw, checksum, data] = p;
+    if (version !== QR_VERSION) return null;
+    const index = parseInt(idxRaw, 10);
+    const total = parseInt(totalRaw, 10);
+    if (!isFinite(index) || !isFinite(total) || !id || !data) return null;
+    if (crc32(data) !== checksum) return null;
+    return { id, index, total, data };
+  }
+
   function montarGrade(total) {
     gridEl.innerHTML = '';
     blocos = [];
@@ -440,6 +564,33 @@
       b.className = 'bloco';
       gridEl.appendChild(b);
       blocos.push(b);
+    }
+  }
+
+  function importar(payload) {
+    if (payload && payload.app === 'escrevaral' && payload.keys) {
+      Object.entries(payload.keys).forEach(([k, v]) => localStorage.setItem(k, v));
+      return;
+    }
+    localStorage.setItem('escrevaral_incoming_v1', JSON.stringify(payload));
+  }
+
+  function finalizarRecepcao() {
+    ativo = false;
+    if (scanStream) scanStream.getTracks().forEach(t => t.stop());
+
+    const partes = [];
+    for (let i = 1; i <= session.total; i++) partes.push(session.received.get(i) || '');
+    const base64 = partes.join('');
+
+    try {
+      const json    = LZString.decompressFromBase64(base64);
+      const payload = JSON.parse(json);
+      importar(payload);
+      document.getElementById('btnEnviarFeito').style.display = '';
+      mostrarTela('telaFeito');
+    } catch (_) {
+      statusEl.textContent = 'erro ao ler os dados — tente novamente';
     }
   }
 
@@ -460,33 +611,7 @@
     barraFill.style.width = `${pct}%`;
     statusEl.textContent  = `recebendo… ${count} / ${session.total}`;
 
-    if (count === session.total) finalizar();
-  }
-
-  function finalizar() {
-    ativo = false;
-    if (scanStream) scanStream.getTracks().forEach(t => t.stop());
-
-    const partes = [];
-    for (let i = 1; i <= session.total; i++) partes.push(session.received.get(i) || '');
-    const base64 = partes.join('');
-
-    try {
-      const json    = LZString.decompressFromBase64(base64);
-      const payload = JSON.parse(json);
-      importar(payload);
-      mostrarTela('telaFeito');
-    } catch (_) {
-      statusEl.textContent = 'erro ao ler os dados — tente novamente';
-    }
-  }
-
-  function importar(payload) {
-    if (payload && payload.app === 'escrevaral' && payload.keys) {
-      Object.entries(payload.keys).forEach(([k, v]) => localStorage.setItem(k, v));
-      return;
-    }
-    localStorage.setItem('escrevaral_incoming_v1', JSON.stringify(payload));
+    if (count === session.total) finalizarRecepcao();
   }
 
   async function loopScan() {
@@ -538,6 +663,117 @@
     } catch (_) {
       statusEl.textContent = 'câmera bloqueada — verifique as permissões';
       mostrarTela('telaLendo');
+    }
+  });
+
+  // ── Modo emissor: celular exibe QR para o PC ───────────────────────────────
+  const EMIT_CHUNK  = 90;
+  const EMIT_MS     = 800;
+  const EMIT_EC     = () => window.QRCode?.CorrectLevel?.H;
+
+  const qrContainer   = document.getElementById('qrContainer');
+  const enviarFill    = document.getElementById('enviarFill');
+  const statusEnviando = document.getElementById('statusEnviando');
+  const enviarGrade   = document.getElementById('enviarGrade');
+  const btnPausar     = document.getElementById('btnPausar');
+
+  let emitQr      = null;
+  let emitChunks  = [];
+  let emitCells   = [];
+  let emitShown   = new Set();
+  let emitIdx     = 0;
+  let emitId      = '';
+  let emitTimer   = null;
+  let emitPaused  = false;
+
+  function emitMontarGrade(total) {
+    enviarGrade.innerHTML = '';
+    emitCells = [];
+    const cols = Math.ceil(Math.sqrt(total));
+    enviarGrade.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('div');
+      b.className = 'enviando-bloco';
+      enviarGrade.appendChild(b);
+      emitCells.push(b);
+    }
+  }
+
+  function emitFrame() {
+    const chunk = emitChunks[emitIdx];
+    const frame = `${QR_VERSION}|${emitId}|${emitIdx + 1}|${emitChunks.length}|${crc32(chunk)}|${chunk}`;
+    emitQr.clear();
+    emitQr.makeCode(frame);
+
+    if (!emitShown.has(emitIdx)) {
+      emitShown.add(emitIdx);
+      if (emitCells[emitIdx]) emitCells[emitIdx].classList.add('exibido');
+      const pct = Math.round((emitShown.size / emitChunks.length) * 100);
+      enviarFill.style.width = `${pct}%`;
+
+      if (emitShown.size === emitChunks.length) {
+        statusEnviando.textContent = `ciclo completo — aguardando confirmação do PC`;
+      }
+    }
+
+    if (statusEnviando.textContent.startsWith('exibindo')) {
+      statusEnviando.textContent = `exibindo frame ${emitIdx + 1} / ${emitChunks.length}`;
+    }
+
+    emitIdx = (emitIdx + 1) % emitChunks.length;
+  }
+
+  function iniciarEmissao() {
+    const payload = coletarPayload();
+    const base64  = LZString.compressToBase64(JSON.stringify(payload));
+    emitChunks    = base64.match(new RegExp(`.{1,${EMIT_CHUNK}}`, 'g')) || [];
+    emitId        = Date.now().toString().slice(-6);
+    emitShown     = new Set();
+    emitIdx       = 0;
+    emitPaused    = false;
+
+    const qrSize = Math.min(window.innerWidth - 64, 360);
+    qrContainer.innerHTML = '';
+    emitQr = new window.QRCode(qrContainer, {
+      width:        qrSize,
+      height:       qrSize,
+      colorDark:    '#000000',
+      colorLight:   '#ffffff',
+      correctLevel: EMIT_EC(),
+    });
+
+    emitMontarGrade(emitChunks.length);
+    statusEnviando.textContent = `exibindo frame 1 / ${emitChunks.length}`;
+    enviarFill.style.width = '0%';
+
+    emitTimer = setInterval(emitFrame, EMIT_MS);
+    emitFrame();
+
+    mostrarTela('telaEnviando');
+  }
+
+  function abrirEmissao() {
+    if (!temDados()) return;
+    if (!window.QRCode) {
+      statusEnviando.textContent = 'biblioteca QR não carregada';
+      mostrarTela('telaEnviando');
+      return;
+    }
+    if (emitTimer) { clearInterval(emitTimer); emitTimer = null; }
+    iniciarEmissao();
+  }
+
+  document.getElementById('btnEnviarIdle').addEventListener('click', abrirEmissao);
+  document.getElementById('btnEnviarFeito').addEventListener('click', abrirEmissao);
+
+  btnPausar.addEventListener('click', () => {
+    emitPaused = !emitPaused;
+    if (emitPaused) {
+      clearInterval(emitTimer); emitTimer = null;
+      btnPausar.textContent = 'Retomar';
+    } else {
+      emitTimer = setInterval(emitFrame, EMIT_MS);
+      btnPausar.textContent = 'Pausar';
     }
   });
   </script>

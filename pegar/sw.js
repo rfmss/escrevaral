@@ -1,10 +1,11 @@
-const CACHE = 'escrevaral-pegar-v1';
+const CACHE = 'escrevaral-pegar-v2';
 const ASSETS = [
   '/pegar/',
   '/pegar/index.html',
   '/pegar/manifest.json',
   '/pegar/jsqr.min.js',
   '/pegar/lz-string.min.js',
+  '/pegar/qrcode.min.js',
   '/icons/escrevaral-192.png',
   '/icons/escrevaral-512.png',
 ];
