@@ -12,6 +12,23 @@
   <meta name="apple-mobile-web-app-title" content="Mesa Portátil">
   <link rel="apple-touch-icon" href="/icons/escrevaral-192.png">
   <style>
+    @font-face {
+      font-family: 'Material Symbols Outlined';
+      font-style: normal;
+      font-weight: 100 700;
+      font-display: block;
+      src: url('/fonts/material-symbols-outlined.woff2') format('woff2');
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal; font-style: normal;
+      font-size: inherit; line-height: 1;
+      letter-spacing: normal; text-transform: none;
+      display: inline-block; white-space: nowrap;
+      direction: ltr; -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -54,42 +71,14 @@
     .page-logo     { width: 24px; height: 24px; opacity: .65; border-radius: 4px; }
     .page-wordmark { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ink-2); }
 
-    /* ── Banner de instalação ── */
-    #installBanner {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      margin: 12px 20px 0;
-      padding: 10px 14px;
-      background: var(--ink);
-      color: var(--bg);
-      border-radius: 8px;
-      font-size: 13px;
-    }
-    #installBanner.is-visible { display: flex; }
-    .install-text              { flex: 1; line-height: 1.4; }
-    .install-text strong       { display: block; font-size: 14px; }
-    .install-text span         { font-size: 12px; opacity: .7; }
-    .btn-instalar {
-      appearance: none;
-      border: 1px solid rgba(245,242,234,.3);
-      border-radius: 6px;
-      background: rgba(245,242,234,.12);
-      color: var(--bg);
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 7px 14px;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .btn-instalar:hover { background: rgba(245,242,234,.22); }
-    .btn-fechar-banner {
+    /* ── Botão de atalho ── */
+    .btn-atalho {
       appearance: none; border: none; background: transparent;
-      color: rgba(245,242,234,.45); font-size: 20px;
-      cursor: pointer; padding: 0; line-height: 1; flex-shrink: 0;
+      color: var(--ink-3); font-family: inherit; font-size: 12px;
+      cursor: pointer; padding: 4px 0; text-decoration: underline;
+      text-underline-offset: 3px; text-decoration-color: var(--border);
     }
+    .btn-atalho:hover { color: var(--ink-2); }
 
     /* ── Telas ── */
     .tela { display: none; flex-direction: column; align-items: center; padding: 20px 20px 32px; gap: 14px; }
@@ -342,20 +331,11 @@
     <span class="page-wordmark">Escrevaral · Mesa Portátil</span>
   </header>
 
-  <div id="installBanner">
-    <div class="install-text">
-      <strong>Instalar o Mesa Portátil</strong>
-      <span>Abre sem internet da próxima vez</span>
-    </div>
-    <button class="btn-instalar" id="btnInstalar">Instalar</button>
-    <button class="btn-fechar-banner" id="btnFecharBanner" aria-label="Fechar">×</button>
-  </div>
-
   <!-- ── Tela 1: aguardando ─────────────────────────────────────────── -->
   <section class="tela ativa" id="telaAguardando">
 
     <div class="cartao">
-      <div class="cartao-icone">📡</div>
+      <div class="cartao-icone"><span class="material-symbols-outlined" aria-hidden="true">backpack</span></div>
       <h1 class="cartao-titulo">Levar a mesa</h1>
       <p class="cartao-descricao">
         Aponte a câmera para os QR codes que aparecem no outro dispositivo.
@@ -365,6 +345,7 @@
       <button class="btn-secundario" id="btnEnviarIdle" style="display:none">Enviar para outro PC</button>
       <button class="btn-secundario" id="btnAbrirEsc">Abrir arquivo .esc</button>
       <button class="btn-secundario" id="btnBaixarEscIdle" style="display:none">Baixar cópia .esc</button>
+      <button class="btn-atalho" id="btnGuardar" style="display:none">Guardar como atalho</button>
       <p class="ios-dica" id="iosDica">
         Para instalar: toque em <strong>Compartilhar ↑</strong><br>
         e depois <strong>Adicionar à Tela de Início</strong>
@@ -457,28 +438,31 @@
   const isIos        = /iP(hone|od|ad)/.test(navigator.userAgent);
   const isStandalone = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
 
-  const banner          = document.getElementById('installBanner');
-  const btnInstalar     = document.getElementById('btnInstalar');
-  const btnFecharBanner = document.getElementById('btnFecharBanner');
-  const iosDica         = document.getElementById('iosDica');
+  const btnGuardar = document.getElementById('btnGuardar');
+  const iosDica    = document.getElementById('iosDica');
 
-  if (isIos && !isStandalone) iosDica.classList.add('visivel');
+  if (!isStandalone) btnGuardar.style.display = '';
 
   let deferredInstall = null;
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
     deferredInstall = e;
-    if (!isStandalone) banner.classList.add('is-visible');
   });
-  btnInstalar.addEventListener('click', async () => {
-    if (!deferredInstall) return;
-    deferredInstall.prompt();
-    const { outcome } = await deferredInstall.userChoice;
-    if (outcome === 'accepted') banner.classList.remove('is-visible');
-    deferredInstall = null;
+  btnGuardar.addEventListener('click', async () => {
+    if (deferredInstall) {
+      deferredInstall.prompt();
+      const { outcome } = await deferredInstall.userChoice;
+      if (outcome === 'accepted') btnGuardar.style.display = 'none';
+      deferredInstall = null;
+    } else if (isIos) {
+      iosDica.classList.toggle('visivel');
+    } else {
+      const orig = btnGuardar.textContent;
+      btnGuardar.textContent = 'Use o menu ⋮ do navegador → Instalar';
+      setTimeout(() => { btnGuardar.textContent = orig; }, 4000);
+    }
   });
-  btnFecharBanner.addEventListener('click', () => banner.classList.remove('is-visible'));
-  window.addEventListener('appinstalled', () => banner.classList.remove('is-visible'));
+  window.addEventListener('appinstalled', () => btnGuardar.style.display = 'none');
 
   // ── Utilitários compartilhados ─────────────────────────────────────────────
   const QR_VERSION = 'v1';
