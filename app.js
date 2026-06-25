@@ -2889,16 +2889,16 @@ async function abrirTrazerModal() {
   trazerBlocos  = [];
   trazerAtivo   = false;
 
-  // carrega jsQR dinamicamente se necessário
-  if (!window.jsQR && !("BarcodeDetector" in window)) {
-    await new Promise((res, rej) => {
+  // carrega libs dinamicamente se necessário
+  function loadScript(src) {
+    return new Promise(res => {
       const s = document.createElement("script");
-      s.src = "/pegar/jsqr.min.js";
-      s.onload = res;
-      s.onerror = () => rej(new Error("jsQR indisponível"));
+      s.src = src; s.onload = res; s.onerror = res;
       document.head.appendChild(s);
-    }).catch(() => {});
+    });
   }
+  if (!window.LZString) await loadScript("/pegar/lz-string.min.js");
+  if (!window.jsQR && !("BarcodeDetector" in window)) await loadScript("/pegar/jsqr.min.js");
 
   try {
     trazerStream = await navigator.mediaDevices.getUserMedia({

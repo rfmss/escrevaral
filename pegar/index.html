@@ -601,22 +601,20 @@
   document.getElementById('btnBaixarEscFeito').addEventListener('click', exportarEsc);
 
   // ── Verificar se há dados para enviar ─────────────────────────────────────
-  const KEYS_ESCREVARAL = [
-    'vereda.manuscripts.v1',
-    'vereda.checklists.v1',
-    'vereda.backup-meta.v1',
-  ];
+  const KEY_PRINCIPAL = 'vereda.manuscripts.v1';
 
   function temDados() {
-    return KEYS_ESCREVARAL.some(k => localStorage.getItem(k));
+    return !!localStorage.getItem(KEY_PRINCIPAL);
   }
 
   function coletarPayload() {
     const keys = {};
-    KEYS_ESCREVARAL.forEach(k => {
-      const v = localStorage.getItem(k);
-      if (v) keys[k] = v;
-    });
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && (k.startsWith('vereda') || k.startsWith('vrda-'))) {
+        keys[k] = localStorage.getItem(k);
+      }
+    }
     return { app: 'escrevaral', v: 1, keys };
   }
 

@@ -1,4 +1,4 @@
-const CACHE = 'escrevaral-pegar-v3';
+const CACHE = 'escrevaral-pegar-v4';
 const ASSETS = [
   '/pegar/',
   '/pegar/index.html',
@@ -19,7 +19,9 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(keys => Promise.all(
+        keys.filter(k => k.startsWith('escrevaral-pegar-') && k !== CACHE).map(k => caches.delete(k))
+      ))
       .then(() => self.clients.claim())
   );
 });
