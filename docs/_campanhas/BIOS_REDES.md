@@ -91,28 +91,24 @@ Oficina literária gratuita para escritoras e escritores brasileiros. Criado por
 Falam do processo de criar. Apontam para o Escrevaral.
 Voz: primeira pessoa, exceto LinkedIn press kit (terceira).
 
-### Bluesky @rafa.pro.br (245/256 caracteres — primeira pessoa)
+### Bluesky @rafa.pro.br (256/256 caracteres — terceira pessoa)
 ```
-Em 2006 um roteiro meu foi premiado em festival — e me levou à publicidade. Convivi com Bechara na ABL em 2010. Em 2020 escrevi 366 textos, um por dia. Criei o Escrevaral.com com tudo que não tinha — oficina gratuita para escritores brasileiros.
-```
-
-### X / Twitter @rafamass (122/160 caracteres — primeira pessoa)
-```
-Escritor. Roteirista premiado. Criei o Escrevaral — oficina literária gratuita para escritores brasileiros. escrevaral.com
+o cara que escreveu 366 textos diários em 2020. Venceu o REC em 2006, melhor roteiro. Trabalhou com Bechara na ABL em 2010. Criou o Escrevaral.com — oficina gratuita pra gente brasileira. Transferência mecânica. Sem nuvem. Um acesso, tudo offline.
 ```
 
-### Mastodon @rfmss@hachyderm.io (418/500 caracteres — primeira pessoa)
+### X / Twitter @rafamass (256/280 caracteres — terceira pessoa)
 ```
-Escritor de formação. Em 2006 um roteiro meu foi premiado em festival — e entrei na publicidade como passagem. Passei por Genebra em 2008, estudei com Evanildo Bechara na ABL em 2010.
-
-Em 2018 decidi parar. Em 2020 lancei o Fio do Verso, em 2021 comecei oficinas, em 2023 voltei para a sala de aula. O Escrevaral nasceu disso.
-
-Oficina literária gratuita para escritores brasileiros. escrevaral.com · oi@escrevaral.com
+o cara que escreveu 366 textos diários em 2020. Venceu o REC em 2006, melhor roteiro. Trabalhou com Bechara na ABL em 2010. Criou o Escrevaral.com — oficina gratuita pra gente brasileira. Transferência mecânica. Sem nuvem. Um acesso, tudo offline.
 ```
 
-### Instagram / Threads pessoal (121/150 caracteres — primeira pessoa)
+### Mastodon / Bolha.us @escrevaral@bolha.us (256/500 caracteres — terceira pessoa)
 ```
-Escritor. Roteirista premiado. Criei o Escrevaral — oficina literária gratuita pra escritores brasileiros. escrevaral.com
+o cara que escreveu 366 textos diários em 2020. Venceu o REC em 2006, melhor roteiro. Trabalhou com Bechara na ABL em 2010. Criou o Escrevaral.com — oficina gratuita pra gente brasileira. Transferência mecânica. Sem nuvem. Um acesso, tudo offline.
+```
+
+### Instagram / Threads pessoal (134/150 caracteres — terceira pessoa)
+```
+Venceu o REC 2006. Trabalhou com Bechara na ABL. Escreveu 366 textos em 2020. Criou o Escrevaral.com — oficina pra gente brasileira.
 ```
 
 ### LinkedIn pessoal /in/rafamass (campo "Sobre" — terceira pessoa, press kit)
