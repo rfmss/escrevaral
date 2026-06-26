@@ -12,7 +12,21 @@
       "descricao": "Tela inicial — lista de manuscritos",
       "medicoes": {
         "320": {
-          "erro": "Page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:8799/\", waiting until \"domcontentloaded\"\n"
+          "documento": {
+            "scrollW": 320,
+            "clientW": 320,
+            "bodyScrollW": 320,
+            "scrollingElScrollW": 320,
+            "scrollingElClientW": 320,
+            "overflow": false
+          },
+          "extras": {
+            ".manuscript-list": {
+              "scrollW": 0,
+              "clientW": 0,
+              "overflow": false
+            }
+          }
         },
         "390": {
           "documento": {

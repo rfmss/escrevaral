@@ -7,7 +7,7 @@ Medida: `scrollingElement.scrollWidth > scrollingElement.clientWidth`
 
 | Cenário | 320px | 390px | 430px | Estado |
 |---|---|---|---|---|
-| Tela inicial — lista de manuscritos | ERRO | ok (390×390) | ok (430×430) | ok |
+| Tela inicial — lista de manuscritos | ok (320×320) | ok (390×390) | ok (430×430) | ok |
 | Editor com manuscrito novo aberto | ok (320×320) | ok (390×390) | ok (430×430) | ok |
 | Editor com texto longo (sem quebra forçada) | ok (320×320) | ok (390×390) | ok (430×430) | ok |
 | Guia de escrita aberto ao lado do editor | ok (320×320) | ok (390×390) | ok (430×430) | ok |
