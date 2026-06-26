@@ -1257,7 +1257,9 @@ function createFromReferenceTemplate() {
 function captureSelectedWord(allowCollapsedSelection = false) {
   const selection = window.getSelection();
 
-  if (!selection || selection.rangeCount === 0 || !writingArea.contains(selection.anchorNode)) {
+  const inEditor = writingArea.contains(selection.anchorNode)
+    || !!selection.anchorNode?.parentElement?.closest(".page-body");
+  if (!selection || selection.rangeCount === 0 || !inEditor) {
     return;
   }
 
@@ -1275,9 +1277,14 @@ function captureSelectedWord(allowCollapsedSelection = false) {
 
   state.lexical.selectedWord = cleanWord;
 
-  // Guardar range da seleção para substituição precisa via sinônimos
   if (selection.rangeCount > 0) {
-    state.lexical.selectedRange = selection.getRangeAt(0).cloneRange();
+    const range = selection.getRangeAt(0).cloneRange();
+    state.lexical.selectedRange = range;
+    // Contexto local do parágrafo para desambiguação precisa (não usa primeira ocorrência do manuscrito)
+    const node = range.startContainer;
+    const para = node.nodeType === 3 ? node.parentNode : node;
+    const paraEl = para?.closest?.("p,div,h1,h2,h3,li") || para;
+    state.lexical.selectedContext = paraEl?.textContent?.trim() || null;
   }
 
   renderLexicalView();
@@ -1325,7 +1332,8 @@ async function renderLexicalView() {
   }
 
   await VeredaLexical.ensureLoaded();
-  const analysis = VeredaLexical.analyze(state.lexical.selectedWord, manuscript.text);
+  const contextText = state.lexical.selectedContext || manuscript.text;
+  const analysis = VeredaLexical.analyze(state.lexical.selectedWord, contextText);
 
   if (!analysis) {
     lexicalTitle.textContent = manuscript.title;
@@ -1359,19 +1367,28 @@ async function renderLexicalView() {
     }
   } catch(e) { /* sinônimos opcionais — não bloquear */ }
 
+  const altHtml = analysis.alternatives?.length
+    ? `<div class="lexical-alternatives">
+        <dt>Outras leituras</dt>
+        <dd class="lexical-alt-list">${analysis.alternatives.map(a =>
+          `<span class="lexical-alt">${escapeHtml(a)}</span>`
+        ).join("")}</dd>
+      </div>`
+    : "";
+
   lexicalCard.innerHTML = `
     <span class="material-symbols-outlined">dictionary</span>
     <h2>${escapeHtml(analysis.displayWord)}</h2>
     <p class="tag">${escapeHtml(analysis.className)}</p>
     <p>${escapeHtml(analysis.note)}</p>
     <dl>
-      <div><dt>Função provável</dt><dd>${escapeHtml(analysis.functionName)}</dd></div>
+      <div><dt>Função</dt><dd>${escapeHtml(analysis.functionName)}</dd></div>
       <div><dt>Campo</dt><dd>${escapeHtml(analysis.field)}</dd></div>
       <div><dt>Ocorrências</dt><dd>${countLabel}</dd></div>
       ${sinonimosHtml}
+      ${altHtml}
       <div><dt>Análise</dt><dd>Regras locais — sem IA, sem envio de dados</dd></div>
     </dl>
-    <p class="lexical-disclaimer">Classificação aproximada. Palavras polissêmicas variam por contexto — use como pista de revisão.</p>
   `;
 
   // Substituir palavra ao clicar num sinônimo — busca a palavra no texto do editor

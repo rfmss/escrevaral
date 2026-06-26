@@ -286,6 +286,112 @@
       return "Advérbio";
     },
     "menos": () => "Advérbio",
+
+    // ── Polissemia de palavras com múltiplas classes frequentes ──
+    "bem": (prev, next) => {
+      // Início de frase (sem prev) → Interjeição ou Advérbio de afirmação
+      if (!prev) return "Interjeição";
+      // Após artigo ou preposição → Substantivo ("o bem", "do bem", "pelo bem")
+      const ARTIGOS_PREP = new Set(["o","a","um","uma","do","da","no","na","ao","á","pelo","pela","todo","toda","pelo","por"]);
+      if (ARTIGOS_PREP.has(prev)) return "Substantivo";
+      // "bem como" e "bem que" → Conjunção (já capturado por LOCUCOES, mas como fallback)
+      if (next === "como" || next === "que") return "Conjunção";
+      return "Advérbio";
+    },
+
+    "mal": (prev, next) => {
+      // Após artigo, preposição ou determinante → Substantivo ("o mal", "do mal", "todo mal")
+      const ARTIGOS_PREP = new Set(["o","a","um","uma","do","da","no","na","ao","á","pelo","pela","todo","toda"]);
+      if (prev && ARTIGOS_PREP.has(prev)) return "Substantivo";
+      return "Advérbio";
+    },
+
+    "dado": (prev, next) => {
+      // Após verbos auxiliares → Verbo (particípio) ("havia dado", "tinha dado", "foi dado")
+      const AUX = new Set(["havia","tinha","teria","ter","tenho","tens","tem","temos","tinham","foram","foi","era","sendo","tendo","haviamos","tinhamos"]);
+      if (prev && AUX.has(prev)) return "Verbo (particípio)";
+      // Sem auxiliar → Substantivo ("o dado de jogar", "dados disponíveis")
+      return "Substantivo";
+    },
+
+    "certa": (prev, next) => {
+      // Antes de "vez" ou "vezes" → Pronome indefinido ("certa vez")
+      if (next && (next === "vez" || next === "vezes")) return "Pronome indefinido";
+      // Após artigo definido ou demonstrativo → Adjetivo ("a certa altura")
+      const DET = new Set(["a","essa","esta","aquela","nessa","nesta","uma"]);
+      if (prev && DET.has(prev)) return "Adjetivo";
+      return "Adjetivo";
+    },
+
+    "certo": (prev, next) => {
+      // Antes de "vez"/"vezes" → Pronome indefinido ("certo dia", "certo lugar")
+      if (next && (next === "vez" || next === "vezes")) return "Pronome indefinido";
+      // Após artigo ou demonstrativo → Adjetivo
+      const DET = new Set(["o","esse","este","aquele","nesse","neste","um"]);
+      if (prev && DET.has(prev)) return "Adjetivo";
+      return "Adjetivo";
+    },
+
+    "quer": (prev, next) => {
+      // "quer...quer" correlativa (início ou após conjunção) → Conjunção
+      if (!prev) return "Conjunção";
+      const CONJ_COORD = new Set(["ou","e","mas","nem","quer","seja"]);
+      if (CONJ_COORD.has(prev)) return "Conjunção";
+      // Após pronome ou substantivo → Verbo ("ele quer", "o menino quer")
+      return "Verbo flexionado";
+    },
+
+    "pronto": (prev, next) => {
+      // Início de frase ou após pausa → Interjeição ("Pronto! Acabei.")
+      if (!prev) return "Interjeição";
+      // Após "estar"/"ficar"/"estar" → Adjetivo predicativo
+      const ESTAR = new Set(["esta","fica","ficou","estava","ficara","fico"]);
+      if (prev && ESTAR.has(prev)) return "Adjetivo";
+      return "Adjetivo";
+    },
+
+    "alto": (prev, next) => {
+      // Após artigo → Substantivo ("o alto da montanha")
+      const ART = new Set(["o","um","do","no","ao","pelo"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      // Como modificador de verbo (sem artigo, após vírgula) → Advérbio ("fala alto")
+      return "Adjetivo";
+    },
+
+    "baixo": (prev, next) => {
+      // Após artigo → Substantivo ("o baixo do violão")
+      const ART = new Set(["o","um","do","no","ao","pelo"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      return "Adjetivo";
+    },
+  };
+
+  // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
+  const ALTERNATIVAS = {
+    "bem":    ["Advérbio — 'fez bem demais'", "Substantivo — 'o bem e o mal'", "Interjeição — 'Bem! Pode ir.'"],
+    "mal":    ["Advérbio — 'fez mal feito'", "Substantivo — 'o mal que o cercava'"],
+    "canto":  ["Substantivo — 'canto da sala'", "Verbo — 'eu canto no coral'"],
+    "porto":  ["Substantivo — 'porto de abrigo'", "Verbo — 'eu porto a mochila'"],
+    "como":   ["Conjunção — 'como se a mão fosse'", "Verbo — 'eu como pão'", "Advérbio — 'como é tarde!'"],
+    "quer":   ["Verbo — 'ele quer sair'", "Conjunção — 'quer chova, quer faça sol'"],
+    "visto":  ["Verbo — 'havia sido visto'", "Substantivo — 'o visto no passaporte'"],
+    "dado":   ["Verbo (particípio) — 'havia dado tudo'", "Substantivo — 'o dado de jogar'"],
+    "pronto": ["Adjetivo — 'o jantar está pronto'", "Interjeição — 'Pronto! Acabou.'"],
+    "mesmo":  ["Advérbio — 'mesmo assim, foi'", "Adjetivo — 'o mesmo lugar'", "Pronome — 'ele mesmo'"],
+    "alto":   ["Adjetivo — 'voz alta'", "Substantivo — 'o alto da serra'", "Advérbio — 'falar alto'"],
+    "baixo":  ["Adjetivo — 'tom baixo'", "Substantivo — 'o baixo do violão'", "Advérbio — 'falar baixo'"],
+    "ainda":  ["Advérbio de tempo — 'ainda estava lá'", "Advérbio de adição — 'ainda por cima'"],
+    "livre":  ["Adjetivo — 'tempo livre'", "Verbo — 'que ele livre os reféns'"],
+    "certa":  ["Adjetivo — 'a certa altura'", "Pronome indefinido — 'certa vez'"],
+    "certo":  ["Adjetivo — 'no momento certo'", "Advérbio — 'certo, entendi'", "Pronome — 'certo dia'"],
+    "vez":    ["Substantivo — 'uma vez por semana'", "Conjunção — 'uma vez que saiu'"],
+    "ante":   ["Preposição — 'ante o juiz'", "Prefixo — 'antepassado'"],
+    "posto":  ["Substantivo — 'posto de gasolina'", "Conjunção concessiva — 'posto que'", "Verbo — 'posto à mesa'"],
+    "ora":    ["Advérbio — 'ora sim, ora não'", "Conjunção — 'ora, chega!'", "Interjeição — 'Ora! Que absurdo.'"],
+    "logo":   ["Advérbio — 'logo mais cedo'", "Conjunção — 'logo, está certo'"],
+    "caso":   ["Substantivo — 'o caso da cidade'", "Conjunção — 'caso precise'"],
+    "tanto":  ["Adjetivo — 'tanto trabalho'", "Advérbio — 'não come tanto'", "Pronome — 'tantos vieram'"],
+    "menos":  ["Advérbio — 'fez menos'", "Preposição — 'todos menos ele'"],
   };
 
   // P0.3 — formas acentuadas com acento distintivo (não stripped) → classe correta
@@ -346,6 +452,12 @@
           : /^.+(ar|er|ir|or)$/.test(normalizeWord(_baseVerb)) ? "Verbo no infinitivo" : "Verbo flexionado")
          : (text ? inferWordClassContextual(selectedWord, text) : inferWordClass(normalized, selectedWord)));
 
+    const alternatives = (ALTERNATIVAS[normalized] || []).filter(alt => {
+      const altClass = alt.split(" — ")[0];
+      // Exclui alternativas idênticas ou que sejam prefixo da classe atual (ex: "Verbo" vs "Verbo (particípio)")
+      return altClass !== className && !className.startsWith(altClass) && !altClass.startsWith(className);
+    });
+
     return {
       word: normalized,
       displayWord: lexiconEntry?.label || selectedWord,
@@ -354,6 +466,7 @@
       field: lexiconEntry?.field || inferSemanticField(normalized, className),
       note: lexiconEntry?.note || createLocalNote(className, normalized),
       count: countWordOccurrences(text, normalized),
+      alternatives,
     };
   }
 
@@ -408,7 +521,7 @@
     if (PARTICIPIOS_IRR.has(normalized)) return "Verbo (particípio)";
 
     // 12. Particípios regulares — VERB-PART-01
-    if (/(ado|ada|ados|adas|ido|ida|idos|idas)$/.test(normalized) && normalized.length > 4
+    if (/(ado|ada|ados|adas|ido|ida|idos|idas)$/.test(normalized) && normalized.length >= 4
         && !/^(cada|fiada|morada|parada|jornada|armada|fachada|estrada)$/.test(normalized))
       return "Verbo (particípio)";
 
