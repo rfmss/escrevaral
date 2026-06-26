@@ -336,3 +336,56 @@ Posicionamento de apresentacao consolidado:
 - Para escritoras/escritores: "caderno de escrita no navegador, offline, sem cadastro, que salva no dispositivo e traz revisao em portugues: vicios, pleonasmos, rima, metrica e voz narrativa."
 - Para publico tecnico: "PWA offline-first em JS vanilla, HTML unico, sem framework nem IA de terceiros; engines locais de lexico, sintaxe, autoria, rima e planejamento."
 - Melhor entrada de demo: Academia -> Bancada e Editor com gramatica colorida.
+
+### 23:44 - Pos-commit aa8e80d
+
+Estado:
+
+- `HEAD` e `origin/main`: `aa8e80d` - `auditor: rebaixa colisão norma/verbos_pres para P1 quando guarda adnominal existe`.
+- Arquivo alterado: `scripts/auditor-dados.py`.
+
+Validacoes executadas:
+
+- `python3 scripts/auditor-dados.py`: `P0=0 P1=4 P2=0`.
+- `python3 scripts/auditor-publicacao.py`: `P0=0 P1=0 P2=5`.
+- `python3 scripts/auditor-privacidade-rede.py`: `P0=0 P1=1 P2=5`.
+
+Correcoes aceitas:
+
+- O falso P0 de `estreita/estreito` virou P1 mitigado por guarda adnominal 2-token.
+- Os 4 P1 restantes sao colisoes conhecidas/cobertas por guarda ou formas irregulares legitimas:
+  - `pública/público/séria/sérias` apos retirar acento.
+  - `contido/oculto/preso` como particípio/adjetivo.
+  - `estreita/estreito` mitigados por guarda adnominal.
+  - `larga` mitigado por guarda antes de `ADJETIVOS_PRIM`.
+
+Unicos abertos relevantes:
+
+- Edge case Cloudflare/SW se a borda voltar a servir `/service-worker.js` antigo.
+- P1 visuais listados em `navegacao-visual-2026-06-18.md`.
+- P1 privacidade: CSP ausente.
+
+### Fechamento para 2026-06-19
+
+Documentacao padrao deixada em:
+
+- `.agents/fluxo-atual.md`
+- `reports/auditoria/handoff-amanha-2026-06-19.md`
+
+Retomada recomendada:
+
+```bash
+git fetch origin --tags
+git status --short
+python3 scripts/auditor-dados.py
+python3 scripts/auditor-publicacao.py
+python3 scripts/auditor-privacidade-rede.py
+python3 scripts/auditor-navegacao-visual.py
+python3 scripts/auditoria-pilares.py
+```
+
+Prioridade de amanha:
+
+1. P1 visuais restantes.
+2. CSP/headers se for possivel via Cloudflare.
+3. Verificacao eventual de `/service-worker.js` sem query.

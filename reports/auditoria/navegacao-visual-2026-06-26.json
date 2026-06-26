@@ -1,0 +1,4352 @@
+{
+  "date": "2026-06-26",
+  "base_url": "http://127.0.0.1:8801",
+  "summary": {
+    "P0": 2,
+    "P1": 18,
+    "P2": 30
+  },
+  "issues": [
+    {
+      "severity": "P0",
+      "area": "Console",
+      "message": "console.error durante navegacao",
+      "evidence": "Failed to load resource: the server responded with a status of 503 (Offline)",
+      "screenshot": ""
+    },
+    {
+      "severity": "P0",
+      "area": "Console",
+      "message": "excecao JS nao tratada",
+      "evidence": "Falha geral no viewport desktop: Page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8801/\nCall log:\n  - navigating to \"http://127.0.0.1:8801/\", waiting until \"domcontentloaded\"\n",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Navegacao",
+      "message": "Destinos do app sem controle visivel/clicavel neste viewport",
+      "evidence": "mobile: ['autoria', 'arquivo', 'academia']",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Rede",
+      "message": "erro de rede/HTTP durante navegacao",
+      "evidence": "http-503 http://127.0.0.1:8801/criterios-data.js",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Rede",
+      "message": "erro de rede/HTTP durante navegacao",
+      "evidence": "requestfailed http://127.0.0.1:8801/criterios-data.js",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Rede",
+      "message": "erro de rede/HTTP durante navegacao",
+      "evidence": "requestfailed http://127.0.0.1:8801/",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "elementos visiveis escapam lateralmente",
+      "evidence": "mobile vereda-biblioteca-escrita.html: button.tab-btn `Sobre` 350..406",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-biblioteca-escrita.html.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "elementos visiveis escapam lateralmente",
+      "evidence": "mobile /vereda-biblioteca-escrita.html-Livros: button.tab-btn `Sobre` 350..406",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "elementos visiveis escapam lateralmente",
+      "evidence": "mobile /vereda-biblioteca-escrita.html-Crit-rios: button.tab-btn `Sobre` 350..406",
+      "screenshot": ""
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "mobile app-inicio: span `17 palavras · 1 parágrafos · 100 car.`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-inicio.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "mobile app-editor: span `17 palavras · 1 parágrafos · 100 car.`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-editor.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "mobile app-biblioteca: span `17 palavras · 1 parágrafos · 100 car.`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-biblioteca.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "mobile app-cronograma: span `17 palavras · 1 parágrafos · 100 car.`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-cronograma.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-inicio: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-inicio.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-editor: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-editor.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-biblioteca: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-biblioteca.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-autoria: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-autoria.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-arquivo: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-arquivo.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-academia: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-academia.png"
+    },
+    {
+      "severity": "P1",
+      "area": "Visual",
+      "message": "texto possivelmente cortado por container",
+      "evidence": "tablet app-cronograma: span `17 palavras · 1 parágrafos · 100 car.`; span.statusbar-copyright `© 2026 Escrevaral`",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "mobile app-inicio: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-inicio.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "mobile app-editor: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-editor.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "mobile app-biblioteca: `Alterar meta` 71x14; `Definir meta de palavras` 21x15; `Iniciar temporizador` 14x14; `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-biblioteca.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "mobile app-cronograma: `Jan` 27x32; `Fev` 27x32; `Mar` 28x32; `Abr` 26x32; `Mai` 27x32; `Jun` 27x32",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-inicio: `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14; `Definir meta de palavras` 21x15",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-inicio.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-editor: `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14; `Definir meta de palavras` 21x15",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-editor.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-biblioteca: `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14; `Definir meta de palavras` 21x15",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-biblioteca.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-autoria: `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14; `Definir meta de palavras` 21x15",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-autoria.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-arquivo: `Fixar nota` 12x12; `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-arquivo.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-academia: `arrow_back Continuar com o texto atual` 197x18; `Escrevaral no X` 19x22; `Escrevaral no Bolha.us` 19x22; `Escrevaral no Bluesky` 19x22; `Escrever para oi@escrevaral.com` 19x22; `Alterar meta` 71x14",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-academia.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet app-cronograma: `Jul` 28x32; `add Tarefa` 72x26; `add Nota` 64x26; `add Tarefa` 72x26; `add Nota` 64x26; `+ planejar` 75x26",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet vereda-titulo-do-livro.html: `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18; `Levar a mesa` 85x19; `Fechar` 16x22; `Fechar` 16x22",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-titulo-do-livro.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet vereda-primeiras-linhas.html: `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18; `Levar a mesa` 85x19; `Fechar` 16x22; `Fechar` 16x22",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-primeiras-linhas.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet vereda-revisao-manuscrito.html: `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18; `Levar a mesa` 85x19; `Fechar` 16x22; `Fechar` 16x22",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-revisao-manuscrito.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Usabilidade",
+      "message": "muitos alvos clicaveis abaixo de 32px",
+      "evidence": "tablet vereda-bloqueio-criativo.html: `Ateliê` 39x19; `Fechar dica` 16x22; `Desfazer` 57x18; `Levar a mesa` 85x19; `Fechar` 16x22; `Fechar` 16x22",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-bloqueio-criativo.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "mobile app-inicio: div `` 390x844",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-inicio.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "mobile app-editor: div `` 390x844",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-editor.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "mobile app-biblioteca: div `` 390x844",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-biblioteca.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "mobile app-cronograma: div `` 390x844",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-inicio: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-inicio.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-editor: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-editor.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-biblioteca: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-biblioteca.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-autoria: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-autoria.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-arquivo: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-arquivo.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-academia: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-academia.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet app-cronograma: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-cronograma.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet vereda-titulo-do-livro.html: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-titulo-do-livro.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet vereda-primeiras-linhas.html: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-primeiras-linhas.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet vereda-revisao-manuscrito.html: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-revisao-manuscrito.html.png"
+    },
+    {
+      "severity": "P2",
+      "area": "Visual",
+      "message": "camada fixa grande cobrindo viewport",
+      "evidence": "tablet vereda-bloqueio-criativo.html: div `` 768x1024",
+      "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-bloqueio-criativo.html.png"
+    }
+  ],
+  "records": [
+    {
+      "viewport": "mobile",
+      "states": [
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 787,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 844,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 28,
+              "right": 148,
+              "top": 822,
+              "bottom": 833,
+              "width": 120,
+              "height": 11
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 168,
+              "right": 239,
+              "top": 821,
+              "bottom": 835,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 234,
+              "right": 255,
+              "top": 820,
+              "bottom": 835,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 263,
+              "right": 277,
+              "top": 821,
+              "bottom": 835,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 154,
+              "right": 193,
+              "top": 708,
+              "bottom": 727,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 345,
+              "right": 361,
+              "top": 726,
+              "bottom": 748,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 129,
+              "right": 186,
+              "top": 750,
+              "bottom": 768,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 113,
+              "right": 198,
+              "top": 767,
+              "bottom": 787,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 210,
+              "right": 226,
+              "top": 766,
+              "bottom": 788,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 345,
+              "right": 361,
+              "top": 735,
+              "bottom": 757,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 390,
+              "top": 0,
+              "bottom": 844,
+              "width": 390,
+              "height": 844
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
+            }
+          ],
+          "label": "app-inicio",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-inicio.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 787,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 844,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 28,
+              "right": 148,
+              "top": 822,
+              "bottom": 833,
+              "width": 120,
+              "height": 11
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 168,
+              "right": 239,
+              "top": 821,
+              "bottom": 835,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 234,
+              "right": 255,
+              "top": 820,
+              "bottom": 835,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 263,
+              "right": 277,
+              "top": 821,
+              "bottom": 835,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 154,
+              "right": 193,
+              "top": 708,
+              "bottom": 727,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 345,
+              "right": 361,
+              "top": 726,
+              "bottom": 748,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 129,
+              "right": 186,
+              "top": 750,
+              "bottom": 768,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 113,
+              "right": 198,
+              "top": 767,
+              "bottom": 787,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 210,
+              "right": 226,
+              "top": 766,
+              "bottom": 788,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 345,
+              "right": 361,
+              "top": 735,
+              "bottom": 757,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 390,
+              "top": 0,
+              "bottom": 844,
+              "width": 390,
+              "height": 844
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
+            }
+          ],
+          "label": "app-editor",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-editor.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#biblioteca",
+          "appView": "biblioteca",
+          "headings": [
+            "Auditoria visual"
+          ],
+          "bodyTextChars": 604,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 844,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 28,
+              "right": 148,
+              "top": 822,
+              "bottom": 833,
+              "width": 120,
+              "height": 11
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 168,
+              "right": 239,
+              "top": 821,
+              "bottom": 835,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 234,
+              "right": 255,
+              "top": 820,
+              "bottom": 835,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 263,
+              "right": 277,
+              "top": 821,
+              "bottom": 835,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 154,
+              "right": 193,
+              "top": 708,
+              "bottom": 727,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 345,
+              "right": 361,
+              "top": 726,
+              "bottom": 748,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 129,
+              "right": 186,
+              "top": 750,
+              "bottom": 768,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 113,
+              "right": 198,
+              "top": 767,
+              "bottom": 787,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 210,
+              "right": 226,
+              "top": 766,
+              "bottom": 788,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 345,
+              "right": 361,
+              "top": 735,
+              "bottom": 757,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 390,
+              "top": 0,
+              "bottom": 844,
+              "width": 390,
+              "height": 844
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
+            }
+          ],
+          "label": "app-biblioteca",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-biblioteca.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#cronograma",
+          "appView": "cronograma",
+          "headings": [
+            "Seu ritmo em 2026"
+          ],
+          "bodyTextChars": 1048,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 844,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 28,
+              "right": 148,
+              "top": 822,
+              "bottom": 833,
+              "width": 120,
+              "height": 11
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Jan",
+              "left": 45,
+              "right": 72,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Fev",
+              "left": 73,
+              "right": 99,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Mar",
+              "left": 100,
+              "right": 128,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Abr",
+              "left": 129,
+              "right": 154,
+              "top": 377,
+              "bottom": 409,
+              "width": 26,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Mai",
+              "left": 155,
+              "right": 182,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn.is-current",
+              "text": "Jun",
+              "left": 183,
+              "right": 210,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Jul",
+              "left": 211,
+              "right": 234,
+              "top": 377,
+              "bottom": 409,
+              "width": 24,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Ago",
+              "left": 235,
+              "right": 263,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Set",
+              "left": 264,
+              "right": 289,
+              "top": 377,
+              "bottom": 409,
+              "width": 26,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Out",
+              "left": 290,
+              "right": 317,
+              "top": 377,
+              "bottom": 409,
+              "width": 27,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Dez",
+              "left": 348,
+              "right": 375,
+              "top": 377,
+              "bottom": 409,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 76,
+              "right": 148,
+              "top": 713,
+              "bottom": 739,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 156,
+              "right": 220,
+              "top": 713,
+              "bottom": 739,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 76,
+              "right": 148,
+              "top": 825,
+              "bottom": 851,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 156,
+              "right": 220,
+              "top": 825,
+              "bottom": 851,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 168,
+              "right": 239,
+              "top": 821,
+              "bottom": 835,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 234,
+              "right": 255,
+              "top": 820,
+              "bottom": 835,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 263,
+              "right": 277,
+              "top": 821,
+              "bottom": 835,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 154,
+              "right": 193,
+              "top": 708,
+              "bottom": 727,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 345,
+              "right": 361,
+              "top": 726,
+              "bottom": 748,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 129,
+              "right": 186,
+              "top": 750,
+              "bottom": 768,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 113,
+              "right": 198,
+              "top": 767,
+              "bottom": 787,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 210,
+              "right": 226,
+              "top": 766,
+              "bottom": 788,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 345,
+              "right": 361,
+              "top": 735,
+              "bottom": 757,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 390,
+              "top": 0,
+              "bottom": 844,
+              "width": 390,
+              "height": 844
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "more_horiz Mais",
+              "target": "toggle-bandeja"
+            }
+          ],
+          "label": "app-cronograma",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-app-cronograma.png"
+        },
+        {
+          "title": "O Título do Livro — Como Escolher e Criar o Título Certo | Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-titulo-do-livro.html",
+          "appView": null,
+          "headings": [
+            "O Título do Livro"
+          ],
+          "bodyTextChars": 11785,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 24067,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.ed-brand",
+              "text": "ESCREVARAL",
+              "left": 16,
+              "right": 144,
+              "top": 15,
+              "bottom": 38,
+              "width": 128,
+              "height": 23
+            },
+            {
+              "tag": "a",
+              "text": "Bancada",
+              "left": 175,
+              "right": 219,
+              "top": 16,
+              "bottom": 37,
+              "width": 44,
+              "height": 22
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "ESCREVARAL",
+              "target": "./index.html"
+            },
+            {
+              "text": "Bancada",
+              "target": "./index.html#academia"
+            }
+          ],
+          "label": "vereda-titulo-do-livro.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-titulo-do-livro.html.png"
+        },
+        {
+          "title": "Como Começar a Escrever — As Primeiras Linhas do Livro | Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-primeiras-linhas.html",
+          "appView": null,
+          "headings": [
+            "Como Começar um livro."
+          ],
+          "bodyTextChars": 15135,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 23959,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.ed-brand",
+              "text": "ESCREVARAL",
+              "left": 16,
+              "right": 144,
+              "top": 15,
+              "bottom": 38,
+              "width": 128,
+              "height": 23
+            },
+            {
+              "tag": "a",
+              "text": "Bancada",
+              "left": 176,
+              "right": 225,
+              "top": 16,
+              "bottom": 37,
+              "width": 49,
+              "height": 22
+            },
+            {
+              "tag": "button.hero-scroll",
+              "text": "DESCER A LADEIRA",
+              "left": 24,
+              "right": 366,
+              "top": 779,
+              "bottom": 792,
+              "width": 342,
+              "height": 13
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "ESCREVARAL",
+              "target": "./index.html"
+            },
+            {
+              "text": "Bancada",
+              "target": "./index.html#academia"
+            }
+          ],
+          "label": "vereda-primeiras-linhas.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-primeiras-linhas.html.png"
+        },
+        {
+          "title": "Como Revisar um Manuscrito sem Perder o Fio | Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-revisao-manuscrito.html",
+          "appView": null,
+          "headings": [
+            "Como revisar um manuscrito sem perder o fio",
+            "Por que é tão difícil reler o que você escreveu"
+          ],
+          "bodyTextChars": 4596,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 6378,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a",
+              "text": "Bancada",
+              "left": 159,
+              "right": 210,
+              "top": 16,
+              "bottom": 37,
+              "width": 51,
+              "height": 22
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "/ ESCREVARAL",
+              "target": "./index.html"
+            },
+            {
+              "text": "Bancada",
+              "target": "./index.html#academia"
+            }
+          ],
+          "label": "vereda-revisao-manuscrito.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-revisao-manuscrito.html.png"
+        },
+        {
+          "title": "Como Vencer o Bloqueio Criativo na Escrita | Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-bloqueio-criativo.html",
+          "appView": null,
+          "headings": [
+            "Como vencer o bloqueio criativo na escrita",
+            "Bloqueio não é uma coisa só"
+          ],
+          "bodyTextChars": 4600,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 6122,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a",
+              "text": "Bancada",
+              "left": 159,
+              "right": 210,
+              "top": 16,
+              "bottom": 37,
+              "width": 51,
+              "height": 22
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "/ ESCREVARAL",
+              "target": "./index.html"
+            },
+            {
+              "text": "Bancada",
+              "target": "./index.html#academia"
+            }
+          ],
+          "label": "vereda-bloqueio-criativo.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-bloqueio-criativo.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 5014,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 3746,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [
+            {
+              "tag": "button.tab-btn",
+              "text": "Sobre",
+              "left": 350,
+              "right": 406,
+              "top": -0.0,
+              "bottom": 54,
+              "width": 56,
+              "height": 54
+            }
+          ],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "vereda-biblioteca-escrita.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-vereda-biblioteca-escrita.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 5014,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 3746,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [
+            {
+              "tag": "button.tab-btn",
+              "text": "Sobre",
+              "left": 350,
+              "right": 406,
+              "top": -0.0,
+              "bottom": 54,
+              "width": 56,
+              "height": 54
+            }
+          ],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Livros",
+          "viewport": "mobile"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "42 critérios em 8 dimensões"
+          ],
+          "bodyTextChars": 1097,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 1383,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [
+            {
+              "tag": "button.tab-btn",
+              "text": "Sobre",
+              "left": 350,
+              "right": 406,
+              "top": -0.0,
+              "bottom": 54,
+              "width": 56,
+              "height": 54
+            }
+          ],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Crit-rios",
+          "viewport": "mobile"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "Como usar este conhecimento"
+          ],
+          "bodyTextChars": 1398,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 1415,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Sobre",
+          "viewport": "mobile"
+        },
+        {
+          "title": "Anatomia do Livro — Escrevaral",
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "appView": null,
+          "headings": [
+            "A Anatomia do Livro",
+            "1 O EXTERIOR"
+          ],
+          "bodyTextChars": 1332,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 1082,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.anatomia-header-brand",
+              "text": "/ ESCREVARAL",
+              "left": 22,
+              "right": 129,
+              "top": 12,
+              "bottom": 35,
+              "width": 107,
+              "height": 23
+            },
+            {
+              "tag": "a.anatomia-header-back",
+              "text": "← voltar ao editor",
+              "left": 271,
+              "right": 368,
+              "top": 16,
+              "bottom": 32,
+              "width": 97,
+              "height": 16
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [],
+          "label": "anatomia-do-livro.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-anatomia-do-livro.html.png"
+        },
+        {
+          "title": "Política de Privacidade — Escrevaral",
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "appView": null,
+          "headings": [
+            "Política de Privacidade",
+            "1. Quem somos",
+            "2. O que seus dados fazem"
+          ],
+          "bodyTextChars": 2930,
+          "scroll": {
+            "width": 390,
+            "clientWidth": 390,
+            "height": 3195,
+            "clientHeight": 844,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.priv-brand",
+              "text": "Voltar ao Escrevaral",
+              "left": 16,
+              "right": 22,
+              "top": 16,
+              "bottom": 38,
+              "width": 6,
+              "height": 22
+            },
+            {
+              "tag": "a.priv-back",
+              "text": "Voltar ao editor",
+              "left": 253,
+              "right": 374,
+              "top": 16,
+              "bottom": 37,
+              "width": 121,
+              "height": 21
+            },
+            {
+              "tag": "a",
+              "text": "oi@escrevaral.com",
+              "left": 137,
+              "right": 269,
+              "top": 477,
+              "bottom": 497,
+              "width": 132,
+              "height": 20
+            }
+          ],
+          "bigFixed": [],
+          "visibleNav": [],
+          "label": "privacidade.html",
+          "viewport": "mobile",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/mobile-privacidade.html.png"
+        }
+      ],
+      "console_errors": [],
+      "console_warnings": [],
+      "page_errors": [],
+      "network_errors": [],
+      "navigation_findings": [
+        {
+          "severity": "P1",
+          "viewport": "mobile",
+          "message": "Destinos do app sem controle visivel/clicavel neste viewport",
+          "details": [
+            "autoria",
+            "arquivo",
+            "academia"
+          ]
+        }
+      ],
+      "static_interactions": [
+        {
+          "url": "http://127.0.0.1:8801/vereda-titulo-do-livro.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-primeiras-linhas.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-revisao-manuscrito.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-bloqueio-criativo.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "viewport": "mobile",
+          "controls_tested": 3,
+          "controls_visible": 3
+        },
+        {
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        },
+        {
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "viewport": "mobile",
+          "controls_tested": 0,
+          "controls_visible": 0
+        }
+      ]
+    },
+    {
+      "viewport": "tablet",
+      "states": [
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 828,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-inicio",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-inicio.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 828,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-editor",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-editor.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#biblioteca",
+          "appView": "biblioteca",
+          "headings": [
+            "Auditoria visual"
+          ],
+          "bodyTextChars": 645,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-biblioteca",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-biblioteca.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#autoria",
+          "appView": "autoria",
+          "headings": [
+            "Sua escrita tem uma impressão digital."
+          ],
+          "bodyTextChars": 3558,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-autoria",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-autoria.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#arquivo",
+          "appView": "arquivo",
+          "headings": [
+            "Seus textos",
+            "Auditoria visual"
+          ],
+          "bodyTextChars": 2104,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "span.project-pin.material-symbols-outlined",
+              "text": "Fixar nota",
+              "left": 360,
+              "right": 372,
+              "top": 404,
+              "bottom": 416,
+              "width": 12,
+              "height": 12
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-arquivo",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-arquivo.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#academia",
+          "appView": "academia",
+          "headings": [
+            "Ateliê",
+            "Um espelho do jeito que você escreve"
+          ],
+          "bodyTextChars": 5981,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.academy-resume-link",
+              "text": "arrow_back Continuar com o texto atual",
+              "left": 103,
+              "right": 300,
+              "top": 308,
+              "bottom": 326,
+              "width": 197,
+              "height": 18
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-academia",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-academia.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/#cronograma",
+          "appView": "cronograma",
+          "headings": [
+            "Seu ritmo em 2026"
+          ],
+          "bodyTextChars": 1089,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [
+            {
+              "tag": "span",
+              "text": "17 palavras · 1 parágrafos · 100 car.",
+              "left": 204,
+              "right": 359,
+              "top": 1002,
+              "bottom": 1014,
+              "width": 156,
+              "height": 12
+            },
+            {
+              "tag": "span.statusbar-copyright",
+              "text": "© 2026 Escrevaral",
+              "left": 651,
+              "right": 740,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 89,
+              "height": 14
+            }
+          ],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button.crono-month-btn",
+              "text": "Jul",
+              "left": 422,
+              "right": 449,
+              "top": 354,
+              "bottom": 386,
+              "width": 28,
+              "height": 32
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 175,
+              "right": 246,
+              "top": 633,
+              "bottom": 659,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 254,
+              "right": 319,
+              "top": 633,
+              "bottom": 659,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 175,
+              "right": 246,
+              "top": 745,
+              "bottom": 771,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn.crono-add-note",
+              "text": "add Nota",
+              "left": 254,
+              "right": 319,
+              "top": 745,
+              "bottom": 771,
+              "width": 64,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-inline.crono-add-btn",
+              "text": "+ planejar",
+              "left": 175,
+              "right": 250,
+              "top": 873,
+              "bottom": 899,
+              "width": 75,
+              "height": 26
+            },
+            {
+              "tag": "button.crono-add-btn",
+              "text": "add Tarefa",
+              "left": 175,
+              "right": 246,
+              "top": 923,
+              "bottom": 949,
+              "width": 72,
+              "height": 26
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--x",
+              "text": "Escrevaral no X",
+              "left": 48,
+              "right": 67,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mastodon",
+              "text": "Escrevaral no Bolha.us",
+              "left": 87,
+              "right": 106,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--bluesky",
+              "text": "Escrevaral no Bluesky",
+              "left": 126,
+              "right": 145,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "a.statusbar-social.statusbar-social--mail",
+              "text": "Escrever para oi@escrevaral.com",
+              "left": 165,
+              "right": 184,
+              "top": 997,
+              "bottom": 1019,
+              "width": 19,
+              "height": 22
+            },
+            {
+              "tag": "button.goal-label",
+              "text": "Alterar meta",
+              "left": 391,
+              "right": 462,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 71,
+              "height": 14
+            },
+            {
+              "tag": "button.statusbar-goal-btn",
+              "text": "Definir meta de palavras",
+              "left": 471,
+              "right": 492,
+              "top": 1000,
+              "bottom": 1015,
+              "width": 21,
+              "height": 15
+            },
+            {
+              "tag": "button.statusbar-timer-btn",
+              "text": "Iniciar temporizador",
+              "left": 512,
+              "right": 526,
+              "top": 1001,
+              "bottom": 1015,
+              "width": 14,
+              "height": 14
+            },
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "app-cronograma",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-app-cronograma.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/vereda-titulo-do-livro.html#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 986,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1090,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "vereda-titulo-do-livro.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-titulo-do-livro.html.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/vereda-primeiras-linhas.html#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 986,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1090,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "vereda-primeiras-linhas.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-primeiras-linhas.html.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/vereda-revisao-manuscrito.html#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 986,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1090,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "vereda-revisao-manuscrito.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-revisao-manuscrito.html.png"
+        },
+        {
+          "title": "Escrevaral — A Oficina Literária Brasileira. Escreva. Prove. Publique.",
+          "url": "http://127.0.0.1:8801/vereda-bloqueio-criativo.html#editor",
+          "appView": "editor",
+          "headings": [],
+          "bodyTextChars": 986,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1090,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [
+            {
+              "tag": "button",
+              "text": "Ateliê",
+              "left": 566,
+              "right": 605,
+              "top": 920,
+              "bottom": 939,
+              "width": 39,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar dica",
+              "left": 711,
+              "right": 727,
+              "top": 938,
+              "bottom": 960,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Desfazer",
+              "left": 406,
+              "right": 463,
+              "top": 962,
+              "bottom": 980,
+              "width": 57,
+              "height": 18
+            },
+            {
+              "tag": "a",
+              "text": "Levar a mesa",
+              "left": 207,
+              "right": 292,
+              "top": 947,
+              "bottom": 967,
+              "width": 85,
+              "height": 19
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 304,
+              "right": 320,
+              "top": 946,
+              "bottom": 968,
+              "width": 16,
+              "height": 22
+            },
+            {
+              "tag": "button",
+              "text": "Fechar",
+              "left": 541,
+              "right": 557,
+              "top": 947,
+              "bottom": 969,
+              "width": 16,
+              "height": 22
+            }
+          ],
+          "bigFixed": [
+            {
+              "tag": "div",
+              "text": "",
+              "left": 0,
+              "right": 768,
+              "top": 0,
+              "bottom": 1024,
+              "width": 768,
+              "height": 1024
+            }
+          ],
+          "visibleNav": [
+            {
+              "text": "edit_note Escrever",
+              "target": "editor"
+            },
+            {
+              "text": "inventory_2 Acervo",
+              "target": "arquivo"
+            },
+            {
+              "text": "school Ateliê",
+              "target": "academia"
+            },
+            {
+              "text": "fingerprint Autoria",
+              "target": "autoria"
+            },
+            {
+              "text": "auto_stories Palavras",
+              "target": "biblioteca"
+            },
+            {
+              "text": "route Plano",
+              "target": "cronograma"
+            }
+          ],
+          "label": "vereda-bloqueio-criativo.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-bloqueio-criativo.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "vereda-biblioteca-escrita.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-vereda-biblioteca-escrita.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Livros",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "42 critérios em 8 dimensões"
+          ],
+          "bodyTextChars": 424,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Crit-rios",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "appView": null,
+          "headings": [
+            "Como usar este conhecimento"
+          ],
+          "bodyTextChars": 1130,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/vereda-biblioteca-escrita.html-Sobre",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "anatomia-do-livro.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-anatomia-do-livro.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/anatomia-do-livro.html-Livros",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "appView": null,
+          "headings": [
+            "42 critérios em 8 dimensões"
+          ],
+          "bodyTextChars": 424,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/anatomia-do-livro.html-Crit-rios",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "appView": null,
+          "headings": [
+            "Como usar este conhecimento"
+          ],
+          "bodyTextChars": 1130,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/anatomia-do-livro.html-Sobre",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "privacidade.html",
+          "viewport": "tablet",
+          "screenshot": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26/tablet-privacidade.html.png"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "appView": null,
+          "headings": [
+            "As bíblias da escrita — mundo e Brasil"
+          ],
+          "bodyTextChars": 678,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/privacidade.html-Livros",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "appView": null,
+          "headings": [
+            "42 critérios em 8 dimensões"
+          ],
+          "bodyTextChars": 424,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/privacidade.html-Crit-rios",
+          "viewport": "tablet"
+        },
+        {
+          "title": "Biblioteca da Escrita — Escrevaral",
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "appView": null,
+          "headings": [
+            "Como usar este conhecimento"
+          ],
+          "bodyTextChars": 1130,
+          "scroll": {
+            "width": 768,
+            "clientWidth": 768,
+            "height": 1024,
+            "clientHeight": 1024,
+            "horizontalOverflow": false
+          },
+          "protruding": [],
+          "clippedText": [],
+          "unnamedButtons": [],
+          "smallTargets": [],
+          "bigFixed": [],
+          "visibleNav": [
+            {
+              "text": "Livros",
+              "target": ""
+            },
+            {
+              "text": "Critérios",
+              "target": ""
+            },
+            {
+              "text": "Sobre",
+              "target": ""
+            }
+          ],
+          "label": "/privacidade.html-Sobre",
+          "viewport": "tablet"
+        }
+      ],
+      "console_errors": [
+        {
+          "message": "Failed to load resource: the server responded with a status of 503 (Offline)",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "line": 0
+        },
+        {
+          "message": "Failed to load resource: the server responded with a status of 503 (Offline)",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "line": 0
+        },
+        {
+          "message": "Failed to load resource: the server responded with a status of 503 (Offline)",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "line": 0
+        }
+      ],
+      "console_warnings": [],
+      "page_errors": [],
+      "network_errors": [
+        {
+          "type": "http-503",
+          "url": "http://127.0.0.1:8801/criterios-data.js"
+        },
+        {
+          "type": "requestfailed",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "type": "http-503",
+          "url": "http://127.0.0.1:8801/criterios-data.js"
+        },
+        {
+          "type": "requestfailed",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "failure": "net::ERR_ABORTED"
+        },
+        {
+          "type": "http-503",
+          "url": "http://127.0.0.1:8801/criterios-data.js"
+        },
+        {
+          "type": "requestfailed",
+          "url": "http://127.0.0.1:8801/criterios-data.js",
+          "failure": "net::ERR_ABORTED"
+        }
+      ],
+      "navigation_findings": [],
+      "static_interactions": [
+        {
+          "url": "http://127.0.0.1:8801/vereda-titulo-do-livro.html",
+          "viewport": "tablet",
+          "controls_tested": 0,
+          "controls_visible": 6
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-primeiras-linhas.html",
+          "viewport": "tablet",
+          "controls_tested": 0,
+          "controls_visible": 6
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-revisao-manuscrito.html",
+          "viewport": "tablet",
+          "controls_tested": 0,
+          "controls_visible": 6
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-bloqueio-criativo.html",
+          "viewport": "tablet",
+          "controls_tested": 0,
+          "controls_visible": 6
+        },
+        {
+          "url": "http://127.0.0.1:8801/vereda-biblioteca-escrita.html",
+          "viewport": "tablet",
+          "controls_tested": 3,
+          "controls_visible": 3
+        },
+        {
+          "url": "http://127.0.0.1:8801/anatomia-do-livro.html",
+          "viewport": "tablet",
+          "controls_tested": 3,
+          "controls_visible": 3
+        },
+        {
+          "url": "http://127.0.0.1:8801/privacidade.html",
+          "viewport": "tablet",
+          "controls_tested": 3,
+          "controls_visible": 3
+        }
+      ]
+    },
+    {
+      "viewport": "desktop",
+      "states": [],
+      "console_errors": [],
+      "console_warnings": [],
+      "page_errors": [
+        "Falha geral no viewport desktop: Page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8801/\nCall log:\n  - navigating to \"http://127.0.0.1:8801/\", waiting until \"domcontentloaded\"\n"
+      ],
+      "network_errors": [
+        {
+          "type": "requestfailed",
+          "url": "http://127.0.0.1:8801/",
+          "failure": "net::ERR_CONNECTION_REFUSED"
+        }
+      ],
+      "navigation_findings": [],
+      "static_interactions": []
+    }
+  ],
+  "reports": {
+    "markdown": "/home/rafamass/escrevaral/reports/auditoria/navegacao-visual-2026-06-26.md",
+    "json": "/home/rafamass/escrevaral/reports/auditoria/navegacao-visual-2026-06-26.json",
+    "screenshots": "/home/rafamass/escrevaral/reports/auditoria/screenshots/navegacao-visual-2026-06-26"
+  }
+}

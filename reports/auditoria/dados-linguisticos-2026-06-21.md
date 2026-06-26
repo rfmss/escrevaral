@@ -1,4 +1,4 @@
-# Auditoria de Dados Linguisticos - 2026-06-18
+# Auditoria de Dados Linguisticos - 2026-06-21
 
 **Semaforo:** AMARELO  |  **P0:** 0  **P1:** 4  **P2:** 0
 
@@ -33,3 +33,4 @@ Comando:
 ```bash
 python3 scripts/auditor-dados.py
 ```
+

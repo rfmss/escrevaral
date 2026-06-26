@@ -1,0 +1,42 @@
+{
+  "date": "2026-06-25",
+  "summary": {
+    "P0": 0,
+    "P1": 4,
+    "P2": 0
+  },
+  "issues": [
+    {
+      "severity": "P1",
+      "area": "morfologia/listas",
+      "title": "Colisoes verbo-adjetivo aparecem apos tirar acento",
+      "evidence": "syntax ADJETIVOS_PRIM: `pública` -> `publica`; syntax ADJETIVOS_PRIM: `público` -> `publico`; syntax ADJETIVOS_PRIM: `séria` -> `seria`; syntax ADJETIVOS_PRIM: `sérias` -> `serias`",
+      "recommendation": "Testar pares como serio/seria, publico/publica e largo/larga com e sem acento."
+    },
+    {
+      "severity": "P1",
+      "area": "norma-data.json/adjetivos_comuns",
+      "title": "Adjetivos da norma colidem com formas verbais/participios irregulares",
+      "evidence": "`contido`, `oculto`, `preso`",
+      "recommendation": "Manter se forem adjetivos legitimos, mas cobrir com teste contextual de particípio/adjetivo."
+    },
+    {
+      "severity": "P1",
+      "area": "norma-data.json/adjetivos_comuns",
+      "title": "Adjetivos da norma colidem com presente verbal regular (mitigado por guarda adnominal 2-token no VERBOS_PRES)",
+      "evidence": "`estreita`, `estreito`",
+      "recommendation": "Guarda adnominal presente: Art+N+Adj bloqueado antes de VERBOS_PRES; colisao coberta."
+    },
+    {
+      "severity": "P1",
+      "area": "syntax-engine.js/ADJETIVOS_PRIM",
+      "title": "Adjetivo primitivo hardcoded tambem e forma verbal exata (mitigado por guarda pre-ADJETIVOS_PRIM no cascade)",
+      "evidence": "`larga`",
+      "recommendation": "Guarda contextual ja presente antes de ADJETIVOS_PRIM; colisao coberta para formas verbais de presente."
+    }
+  ],
+  "reports": {
+    "markdown": "/home/rafamass/escrevaral/reports/auditoria/dados-linguisticos-2026-06-25.md",
+    "json": "/home/rafamass/escrevaral/reports/auditoria/dados-linguisticos-2026-06-25.json"
+  }
+}

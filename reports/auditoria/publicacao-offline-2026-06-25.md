@@ -1,22 +1,22 @@
-# Auditoria Publicacao/Offline - 2026-06-18
+# Auditoria Publicacao/Offline - 2026-06-25
 
 **URL:** https://escrevaral.com  |  **Semaforo:** VERDE  |  **P0:** 0 **P1:** 0 **P2:** 5
 
-Sitemap: 8 URLs.
-Recursos testados: 115.
+Sitemap: 8 URLs.  
+Recursos testados: 116.
 
 ## P2
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#9df2f4ddf8eefeeff8ebfceffcf1b3fef2f0a2eee8fff7f8fee9a0d2f4b8afdeb8afadd8eefeeff8ebfceffcf1bbfcf0eda6fff2f9e4a0d2f4b8afacb8afadd8eefeeff8ebf2b8afadedf2efece8f8b8afad'>
+  - Evidencia: https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#1b74725b7e6878697e6d7a697a773578747624686e79717e786f2654723e29583e292b5e6878697e6d7a697a773d7a766b2079747f622654723e292a3e292b5e6878697e6d743e292b6b74696a6e7e3e292b'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#f99690b99c8a9a8b9c8f988b9895d79a9694'>
+  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#711e18311402120314071003101d5f121e1c'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Links] email protegido pela Cloudflare no HTML bruto**
-  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#aec1c7eecbddcddccbd8cfdccfc280cdc1c3'>
+  - Evidencia: https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#412e28012432223324372033202d6f222e2c'>
   - Recomendacao: Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel.
 
 - **[Offline] index depende de Google Fonts em primeira carga**
@@ -32,3 +32,4 @@ Recursos testados: 115.
 ```bash
 python3 scripts/auditor-publicacao.py
 ```
+

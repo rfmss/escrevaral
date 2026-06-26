@@ -1,5 +1,5 @@
 {
-  "date": "2026-06-18",
+  "date": "2026-06-20",
   "base_url": "https://escrevaral.com",
   "summary": {
     "sitemap_count": 8,
@@ -15,21 +15,21 @@
       "severity": "P2",
       "area": "Links",
       "title": "email protegido pela Cloudflare no HTML bruto",
-      "evidence": "https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#9df2f4ddf8eefeeff8ebfceffcf1b3fef2f0a2eee8fff7f8fee9a0d2f4b8afdeb8afadd8eefeeff8ebfceffcf1bbfcf0eda6fff2f9e4a0d2f4b8afacb8afadd8eefeeff8ebf2b8afadedf2efece8f8b8afad'>",
+      "evidence": "https://escrevaral.com/: <a href='/cdn-cgi/l/email-protection#8fe0e6cfeafcecfdeaf9eefdeee3a1ece0e2b0fcfaede5eaecfbb2c0e6aabdccaabdbfcafcecfdeaf9eefdeee3a9eee2ffb4ede0ebf6b2c0e6aabdbeaabdbfcafcecfdeaf9e0aabdbfffe0fdfefaeaaabdbf'>",
       "recommendation": "Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel."
     },
     {
       "severity": "P2",
       "area": "Links",
       "title": "email protegido pela Cloudflare no HTML bruto",
-      "evidence": "https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#f99690b99c8a9a8b9c8f988b9895d79a9694'>",
+      "evidence": "https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#d2bdbb92b7a1b1a0b7a4b3a0b3befcb1bdbf'>",
       "recommendation": "Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel."
     },
     {
       "severity": "P2",
       "area": "Links",
       "title": "email protegido pela Cloudflare no HTML bruto",
-      "evidence": "https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#aec1c7eecbddcddccbd8cfdccfc280cdc1c3'>",
+      "evidence": "https://escrevaral.com/privacidade.html: <a href='/cdn-cgi/l/email-protection#315e58715442524354475043505d1f525e5c'>",
       "recommendation": "Nao e 404 do produto com JS ativo, mas e dependencia de reescrita da Cloudflare para email clicavel."
     },
     {
@@ -855,7 +855,7 @@
     }
   },
   "reports": {
-    "markdown": "/home/rafamass/escrevaral/reports/auditoria/publicacao-offline-2026-06-18.md",
-    "json": "/home/rafamass/escrevaral/reports/auditoria/publicacao-offline-2026-06-18.json"
+    "markdown": "/home/rafamass/escrevaral/reports/auditoria/publicacao-offline-2026-06-20.md",
+    "json": "/home/rafamass/escrevaral/reports/auditoria/publicacao-offline-2026-06-20.json"
   }
 }

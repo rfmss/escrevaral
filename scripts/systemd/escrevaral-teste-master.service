@@ -1,0 +1,12 @@
+[Unit]
+Description=Escrevaral — Teste Master diário
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/rafamass/escrevaral
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 /home/rafamass/escrevaral/scripts/teste-master.py --sem-local --notificar
+StandardOutput=append:/home/rafamass/escrevaral/reports/teste-master/systemd.log
+StandardError=append:/home/rafamass/escrevaral/reports/teste-master/systemd.log

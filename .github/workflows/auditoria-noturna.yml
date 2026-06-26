@@ -148,6 +148,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Teste Master — veredito unificado + Telegram
+        run: python3 scripts/teste-master.py --usar-existentes --notificar
+        working-directory: ${{ github.workspace }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        continue-on-error: true
+
       - name: Resumo da execução
         run: |
           DATA=$(date +%Y-%m-%d)

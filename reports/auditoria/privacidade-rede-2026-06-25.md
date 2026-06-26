@@ -1,4 +1,4 @@
-# Auditoria Privacidade/Rede - 2026-06-18
+# Auditoria Privacidade/Rede - 2026-06-25
 
 **URL:** https://escrevaral.com  |  **Semaforo:** AMARELO  |  **P0:** 0 **P1:** 1 **P2:** 5
 
@@ -36,7 +36,7 @@ Canario usado: `CANARY_ESCREVARAL_PRIV_20260618_NAO_ENVIAR`
   - Recomendacao: Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages.
 
 - **[Rede] requisicoes externas nao-GET observadas**
-  - Evidencia: POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=pbb27; POST https://escrevaral.goatcounter.com/count?p=%2F%23biblioteca&t=Escrevaral%20%E2%80%94%20Biblioteca&s=1366&b=153&rnd=n9uxt; POST https://escrevaral.goatcounter.com/count?p=%2F%23autoria&t=Escrevaral%20%E2%80%94%20Prova%20de%20autoria&s=1366&b=153&rnd=zzjzg; POST https://escrevaral.goatcounter.com/count?p=%2F%23arquivo&t=Escrevaral%20%E2%80%94%20Arquivo&s=1366&b=153&rnd=kwmpw; POST https://escrevaral.goatcounter.com/count?p=%2F%23academia&t=Escrevaral%20%E2%80%94%20Ateli%C3%AA&s=1366&b=153&rnd=rlta0; POST https://escrevaral.goatcounter.com/count?p=%2F%23cronograma&t=Escrevaral%20%E2%80%94%20Cronograma&s=1366&b=153&rnd=l9yb8; POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=rpkc5
+  - Evidencia: POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=sufon; POST https://escrevaral.goatcounter.com/count?p=%2F%23biblioteca&t=Escrevaral%20%E2%80%94%20Biblioteca&s=1366&b=153&rnd=pnc5d; POST https://escrevaral.goatcounter.com/count?p=%2F%23autoria&t=Escrevaral%20%E2%80%94%20Prova%20de%20autoria&s=1366&b=153&rnd=wblxg; POST https://escrevaral.goatcounter.com/count?p=%2F%23arquivo&t=Escrevaral%20%E2%80%94%20Arquivo&s=1366&b=153&rnd=xxj2l; POST https://escrevaral.goatcounter.com/count?p=%2F%23academia&t=Escrevaral%20%E2%80%94%20Ateli%C3%AA&s=1366&b=153&rnd=402ql; POST https://escrevaral.goatcounter.com/count?p=%2F%23cronograma&t=Escrevaral%20%E2%80%94%20Cronograma&s=1366&b=153&rnd=xghao; POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=pqcgu
   - Recomendacao: Verificar se analytics nao recebe conteudo do texto.
 
 ## Dominios externos observados
@@ -52,3 +52,4 @@ Canario usado: `CANARY_ESCREVARAL_PRIV_20260618_NAO_ENVIAR`
 ```bash
 python3 scripts/auditor-privacidade-rede.py
 ```
+
