@@ -44,6 +44,8 @@ Mapa rapido: preservacao -> `guardiao-preservacao`; UX/copy/mobile -> `ux-escrit
 
 Formato: Tarefa / Risco / Agente necessario / Menor passo / Evidencia.
 
+**Auditoria pós-implementação (obrigatória em mudanças visuais ou estruturais):** após implementar e verificar com `/verify`, invocar `codex-par` automaticamente via Agent tool — passar o diff (`git diff HEAD`), a spec acordada e os arquivos tocados. Ler o retorno e implementar os achados no mesmo turno, sem relay manual. O PO não precisa copiar nada entre agentes.
+
 ---
 
 ## Pilar inegociável: português brasileiro integral

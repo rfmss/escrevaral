@@ -92,8 +92,31 @@
   border-color: var(--primary);
   background: color-mix(in srgb, var(--primary) 10%, var(--card));
 }
+.academy-banner-action.is-active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.academy-banner-action.is-active:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  opacity: 0.88;
+}
 .academy-banner-action .material-symbols-outlined {
   font-size: 18px;
+}
+
+/* ── Sub-views do Ateliê ── */
+.academy-view[data-atelier-active] [data-atelier-section] { display: none; }
+.academy-view[data-atelier-active="revisar"]  [data-atelier-section="revisar"]  { display: revert; }
+.academy-view[data-atelier-active="guias"]    [data-atelier-section="guias"]    { display: revert; }
+.academy-view[data-atelier-active="publicar"] [data-atelier-section="publicar"] { display: revert; }
+
+.academy-anatomy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
 }
 .academy-resume-link {
   display: inline-flex;

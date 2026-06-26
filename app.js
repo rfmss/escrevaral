@@ -693,16 +693,34 @@ function openAddCompanionNote(bibliType) {
 const termsOverlay = document.getElementById("terms-overlay");
 const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
 
+function switchAtelier(tab) {
+  const view = document.querySelector(".academy-view");
+  if (!view) return;
+  view.dataset.atelierActive = tab;
+  document.querySelectorAll('[data-action^="switch-atelier-"]').forEach(btn => {
+    const isActive = btn.dataset.action === `switch-atelier-${tab}`;
+    btn.classList.toggle("is-active", isActive);
+    btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
 function checkTerms() {
   if (!_TERMS_ACCEPTED && termsOverlay) {
-    // Mostrar botão "Continuar" só se há manuscritos salvos
     const hasWork = state.manuscripts && state.manuscripts.length > 0;
-    const continueBtn = termsOverlay.querySelector("[data-ob-continue]");
-    if (continueBtn) continueBtn.hidden = !hasWork;
+    const stateNew  = termsOverlay.querySelector('[data-ob-state="new"]');
+    const stateCont = termsOverlay.querySelector('[data-ob-state="continue"]');
+    if (stateNew)  stateNew.hidden  = hasWork;
+    if (stateCont) stateCont.hidden = !hasWork;
 
+    const dock = document.getElementById("mobile-dock");
+    const bandeja = document.getElementById("mobile-bandeja");
+    if (dock)    dock.inert    = true;
+    if (bandeja) bandeja.inert = true;
     setTimeout(() => {
       termsOverlay.hidden = false;
-      termsOverlay.querySelector("button")?.focus();
+      const firstBtn = termsOverlay.querySelector('[data-ob-state]:not([hidden]) button') ||
+                       termsOverlay.querySelector('button');
+      firstBtn?.focus();
     }, 200);
   }
 }
@@ -711,6 +729,10 @@ function acceptTerms(goTo) {
   localStorage.setItem(TERMS_KEY, new Date().toISOString());
   localStorage.setItem(FIRST_VISIT_KEY, "1");
   if (termsOverlay) termsOverlay.hidden = true;
+  const dock = document.getElementById("mobile-dock");
+  const bandeja = document.getElementById("mobile-bandeja");
+  if (dock)    dock.inert    = false;
+  if (bandeja) bandeja.inert = false;
   if (goTo === "blank") {
     // Folha em branco direto — sem modal, sem template anterior
     state.template.selectedId = null;
@@ -1852,9 +1874,9 @@ const ACTION_HANDLERS = {
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
   "scroll-rights":           () => rightsLab?.scrollIntoView({ behavior: "smooth", block: "start" }),
-  "scroll-atelier-guides":   () => templateStudio?.scrollIntoView({ behavior: "smooth", block: "start" }),
-  "scroll-atelier-tools":    () => document.querySelector(".academy-tools")?.scrollIntoView({ behavior: "smooth", block: "start" }),
-  "scroll-atelier-publishing": () => document.querySelector(".academy-publishing-track")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "switch-atelier-revisar":   () => switchAtelier("revisar"),
+  "switch-atelier-guias":     () => switchAtelier("guias"),
+  "switch-atelier-publicar":  () => switchAtelier("publicar"),
   "go-autoria":              () => setView("autoria", { updateRoute: true }),
   "toggle-typewriter-sound": () => _toggleTypewriterSound(),
   
