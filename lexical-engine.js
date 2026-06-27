@@ -808,6 +808,17 @@
     // O clítico "la" só ocorre após hífen (levá-la, fazê-la) — esses são tratados por P0.6
     // Standalone: "Ele foi lá", "que lá sei eu" → sempre Advérbio
     POLISSEMIA["la"] = () => "Advérbio";
+
+    // "ai" (normalização de "aí") — advérbio de lugar/tempo; não está em functionWords.adverbios
+    POLISSEMIA["ai"] = () => "Advérbio";
+
+    // "alem" (normalização de "além") — está em conjuncoes E adverbios; conjuncoes dispara primeiro
+    // Como standalone, "além" é Advérbio de lugar ("foi além") ou Preposição ("além de/disso")
+    POLISSEMIA["alem"] = (prev, next) => {
+      // "além de" → Preposição
+      if (next && ["de","do","da","dos","das","disso","disto"].includes(next)) return "Preposição";
+      return "Advérbio";
+    };
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
