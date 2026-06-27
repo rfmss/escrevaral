@@ -571,14 +571,15 @@
     },
 
     "ora": (prev, next) => {
-      // "ora...ora" → Conjunção correlativa alternativa
-      if (next && normalizeWord(next) === "ora") return "Conjunção";
-      if (prev && normalizeWord(prev) === "ora") return "Conjunção";
-      // Início + próxima palavra é partícula negativa ou advérbio modal → Interjeição
+      // "ora...ora" → Advérbio correlativo alternativo ("ora chora, ora ri")
+      if (next && normalizeWord(next) === "ora") return "Advérbio";
+      if (prev && normalizeWord(prev) === "ora") return "Advérbio";
+      // Próxima palavra é pronome, artigo ou demonstrativo → Interjeição ("Ora, isso não existe!")
+      const PART_INTERJ = new Set(["isso","este","esse","aquilo","voce","eles","elas","nos","que","bom"]);
+      if (next && PART_INTERJ.has(normalizeWord(next))) return "Interjeição";
+      // Início + próxima é modal negativo → Interjeição ("Ora, não!")
       const PART_NEG_MODAL = new Set(["nao","nem","ja","bem","la","ve","olha","eis","basta","veja","xii"]);
       if (!prev && next && PART_NEG_MODAL.has(normalizeWord(next))) return "Interjeição";
-      // Início e próxima palavra é verbo → Conjunção (correlativa implícita)
-      if (!prev) return "Conjunção";
       return "Advérbio";
     },
 
@@ -1228,7 +1229,9 @@
     "novamente","recentemente","atualmente","frequentemente","raramente",
     "facilmente","dificilmente","rapidamente","lentamente","fortemente",
     "claramente","profundamente","completamente","simplesmente",
-    "simplesmente","especialmente","principalmente","geralmente"
+    "simplesmente","especialmente","principalmente","geralmente",
+    "inclusive","exclusive","exceto","salvo","tampouco","outrossim",
+    "demais","ademais","portanto","afinal","alias","enfim","entao"
   ]);
 
   // Comparativos irregulares — ADJ-COMP-01 (Bechara MGP §graus do adjetivo)
