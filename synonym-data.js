@@ -1554,6 +1554,23 @@
     "copidesque":    ["revisão editorial", "revisão de texto", "edição de linha", "refinamento do manuscrito"],
     "galera":        ["prova de impressão", "prova tipográfica", "PDF de revisão", "folha para correção"],
     "orelha":        ["aba da sobrecapa", "texto de apresentação", "convite à leitura", "texto da aba"],
+
+    // Gêneros literários — v831
+    "novela":        ["narrativa média", "ficção de fôlego médio", "entre o conto e o romance"],
+    "poesia":        ["verso", "linguagem poética", "lírica", "escrita do impossível", "palavra que soa"],
+    "poema":         ["texto poético", "composição lírica", "verso ou prosa poética", "unidade de poesia"],
+    "lirismo":       ["musicalidade", "subjetividade poética", "qualidade lírica", "emoção condensada"],
+    "fabula":        ["alegoria moral", "narrativa com lição", "conto de animais", "parábola"],
+    "tragedia":      ["queda inevitável", "ruína por falha", "drama do destino", "catarse pela dor"],
+    "comedia":       ["drama leve", "situação engraçada", "mal-entendido que se resolve", "riso que aponta"],
+    "drama":         ["conflito emocional", "tensão dramática", "peça teatral", "situação intensa"],
+    "epico":         ["narrativa heroica", "jornada de proporções maiores", "saga coletiva", "grandioso"],
+
+    // Semântica — v831
+    "denotacao":     ["sentido literal", "significado direto", "o que o dicionário diz", "face objetiva da palavra"],
+    "conotacao":     ["sentido figurado", "significado cultural", "o que a palavra carrega", "camada afetiva"],
+    "narracao":      ["contar em sequência", "relato temporal", "narrar eventos", "voz que conduz"],
+    "descricao":     ["pintura em palavras", "apresentação de detalhes", "mostrar sem agir", "parar o tempo"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
