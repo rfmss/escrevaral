@@ -1807,6 +1807,14 @@
     "diegese":       ["mundo da história", "universo narrativo", "espaço da ficção", "onde a história existe", "campo do que é narrado"],
     "cronotopo":     ["relação espaço-tempo na narrativa", "como o tempo e o espaço se cruzam", "unidade de lugar e momento na ficção", "a ancoragem temporal-espacial", "o quando e onde da cena"],
 
+    // SINONIMOS ofício e tempo — v905
+    "sucesso":       ["conquista", "realização", "êxito", "resultado alcançado", "o que foi conseguido"],
+    "gloria":        ["reconhecimento", "fama merecida", "o auge", "momento de plenitude", "louvor público"],
+    "impulso":       ["força repentina", "urgência interna", "ímpeto", "algo que empurra de dentro", "movimento espontâneo"],
+    "ano":           ["ciclo completo", "volta ao mesmo ponto", "doze meses", "marco temporal", "medida de tempo longo"],
+    "frase":         ["período", "sentença", "unidade de sentido", "linha de texto", "grupo de palavras com sentido completo"],
+    "paragrafo":     ["bloco de texto", "unidade de pensamento", "trecho", "fragmento organizado", "seção de prosa"],
+
     // SINONIMOS complementares — v899
     "decisao":       ["escolha", "opção tomada", "resolução", "ato de decidir", "o que não pode ser desfeito"],
     "ganhar":        ["obter", "conquistar", "adquirir", "receber", "alcançar"],
