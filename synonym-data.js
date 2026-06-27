@@ -1555,6 +1555,18 @@
     "galera":        ["prova de impressão", "prova tipográfica", "PDF de revisão", "folha para correção"],
     "orelha":        ["aba da sobrecapa", "texto de apresentação", "convite à leitura", "texto da aba"],
 
+    // Técnicas narrativas — v834
+    "flashforward":  ["salto ao futuro", "prolepse", "antevisão", "antecipação narrativa"],
+    "prolepse":      ["antevisão", "flashforward", "salto ao futuro", "prenúncio"],
+    "analepse":      ["retorno ao passado", "flashback", "memória narrativa", "recuo temporal"],
+    "incipit":       ["abertura", "começo do texto", "primeiras palavras", "entrada na obra"],
+    "ode":           ["poema de louvor", "lírica elevada", "canto dedicado", "hino poético"],
+    "elegia":        ["lamento poético", "canto de perda", "poema de luto", "pranto lírico"],
+    "balada":        ["poema narrativo", "forma cantada", "narrativa com refrão", "forma oral"],
+    "assonancia":    ["rima de vogais", "eco vocálico", "repetição de som aberto", "musicalidade vocálica"],
+    "onomatopeia":   ["palavra sonora", "imitação de som", "palavra que soa como a coisa", "eco fonético"],
+    "paronomasia":   ["jogo sonoro", "aproximação fonética", "trocadilho refinado", "eco de sentido"],
+
     // Gêneros literários — v831
     "novela":        ["narrativa média", "ficção de fôlego médio", "entre o conto e o romance"],
     "poesia":        ["verso", "linguagem poética", "lírica", "escrita do impossível", "palavra que soa"],
