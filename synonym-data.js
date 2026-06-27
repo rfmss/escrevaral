@@ -1760,7 +1760,8 @@
     "campo":        ["área rural aberta", "planície", "terra cultivada ou vasta", "onde o horizonte é inteiro", "longe da cidade sem ser floresta"],
     "corredor":     ["passagem entre cômodos", "espaço de passagem", "onde ninguém fica por muito tempo", "lugar de trânsito", "o que une sem ser destino"],
 
-    // Físico e movimento — v888
+    // Físico e movimento — v888 + v895
+    "deitar":       ["estender o corpo", "ir para a cama", "pousar o corpo na horizontal", "reclinar", "ir ao leito"],
     "sentar":       ["assentar-se", "tomar assento", "acomodar-se", "pousar o corpo", "parar de estar de pé"],
     "virar":        ["voltear", "rodar", "girar", "mudar de direção", "virar-se para"],
     "franzir":      ["contrair", "enrugar", "fechar", "apertar os olhos", "encarquilhar"],
