@@ -613,6 +613,51 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
       .replace(/^-|-$/g, "") || "manuscrito";
   }
 
-  global.VeredaExport = { exportManuscript: exportManuscript };
+  // ── VAULT OBSIDIAN — múltiplos manuscritos em ZIP ──────────────────────────
+  function exportObsidianVault(manuscripts) {
+    if (!manuscripts || !manuscripts.length) throw new Error("Nenhum manuscrito no acervo.");
+    var date = new Date().toISOString().slice(0, 10);
+
+    var files = [];
+
+    // README.md — índice do vault
+    var indexLines = [
+      "---",
+      'fonte: "Escrevaral"',
+      "exportado: " + date,
+      "---",
+      "",
+      "# Acervo · Escrevaral",
+      "",
+      "Vault exportado em " + date + " pelo Escrevaral.",
+      "",
+      "## Manuscritos",
+      "",
+    ];
+    manuscripts.forEach(function(ms) {
+      if (!ms.title && !ms.text) return;
+      var sl = slugify(ms.title);
+      indexLines.push("- [[" + sl + "]] — " + (ms.kind || "Manuscrito"));
+    });
+    indexLines.push("", "---", "", "_Arquivos abertos em qualquer editor Markdown. Não requerem plugin._");
+    files.push({ name: "README.md", data: indexLines.join("\n") });
+
+    // Um .md por manuscrito
+    manuscripts.forEach(function(ms) {
+      if (!ms.title && !ms.text) return;
+      var content = createObsidianExport(ms);
+      files.push({ name: "manuscritos/" + slugify(ms.title) + ".md", data: content });
+    });
+
+    var zipBytes = buildZip(files);
+    return {
+      content: zipBytes,
+      filename: "escrevaral-vault-" + date + ".zip",
+      mimeType: "application/zip",
+      binary: true,
+    };
+  }
+
+  global.VeredaExport = { exportManuscript: exportManuscript, exportObsidianVault: exportObsidianVault };
 
 })(window);

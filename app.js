@@ -471,6 +471,18 @@ function exportAcervoCompleto() {
   saveStatus.textContent = `Acervo exportado — ${docs.length} manuscritos, ${totalWords.toLocaleString("pt-BR")} palavras`;
 }
 
+function exportObsidianVault() {
+  const docs = state.manuscripts.filter(m => (m.text || "").trim());
+  if (!docs.length) { saveStatus.textContent = "Nenhum manuscrito com texto para exportar."; return; }
+  try {
+    const result = VeredaExport.exportObsidianVault(docs);
+    downloadFile(result.content, result.filename, result.mimeType, result.binary);
+    saveStatus.textContent = `Vault exportado — ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}`;
+  } catch (e) {
+    saveStatus.textContent = e.message;
+  }
+}
+
 function scheduleUndoPush() {
   clearTimeout(_undoTimer);
   _undoTimer = setTimeout(() => {
@@ -2108,6 +2120,7 @@ const ACTION_HANDLERS = {
   "check-sw-update":         () => checkForSWUpdate(),
   "export-precision":        () => exportPrecisionAnalysis(),
   "export-acervo":           () => exportAcervoCompleto(),
+  "export-obsidian-vault":   () => exportObsidianVault(),
   "copy-manuscript-text":    () => {
     const ms = getActiveManuscript();
     const text = ms?.text || writingArea?.innerText || "";
