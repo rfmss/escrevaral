@@ -2307,6 +2307,23 @@
     "genero":       "A categoria que organiza as expectativas do leitor. O gênero não é prisão — é contrato. Quando uma escritora rompe o contrato, ela precisa que o leitor perceba e concorde com a ruptura. Gênero bem dominado é a condição para a subversão funcionar.",
     "autobiografia": "A narrativa que usa a própria vida como material. A autobiografia não é confissão: é reconstrução. Quem escreve sobre si mesma está escolhendo o que mostrar, quando mostrar, com que tom. O eu da autobiografia é personagem construída, mesmo que se chame pelo nome real.",
     "catalogo":     "O conjunto de títulos que define o que uma editora é. O catálogo fala de valores, de aposta em leitores, de risco estético. Antes de submeter, conhecer o catálogo é saber se há espaço para o que foi escrito — não para copiar, mas para pertencer.",
+
+    // Verbos de fala — v890
+    "tagarelar":    "Falar muito, rápido e sem destino claro. A personagem que tagarela está preenchendo um silêncio que a incomoda — ou tentando não ouvir algo. Na ficção, o excesso de fala revela tanto quanto o silêncio: o que ela não para de dizer é aquilo que não consegue admitir.",
+    "praguejar":    "Soltar palavras de raiva — xingamentos, maldições, imprecações. Praguejar em cena é gesto de quem perdeu o filtro: a personagem não está mais controlando o que sai. O palavrão certo no momento certo tem peso de cena; o palavrão de hábito é ruído.",
+    "cochichar":    "Falar tão baixo que só o destinatário ouve. O cochico na ficção cria cumplicidade ou segredo: duas pessoas no cochico estão se separando do mundo. O que não pode ser dito em voz alta tem outro peso — o cochico sinaliza que algo está em jogo.",
+
+    // Cor, pele e corporalidade — v890 (com carga cultural)
+    "moreno":       "Em contexto brasileiro, descreve quem tem pele mais escura ou cabelo escuro — e carrega ambiguidade deliberada. 'Moreno' pode ser elogio ou evasiva; pode descrever fenótipo sem nomear raça. Na ficção, a escolha entre 'moreno' e 'negro' é decisão narrativa: uma nomeia, a outra esquiva.",
+    "pardo":        "Categoria do IBGE que designa miscigenação — e que no texto literário raramente aparece. 'Pardo' é burocrático; na cena, a escritora raramente o usa. Quando usa, é para marcar a fricção entre a categoria oficial e a experiência real de quem se enquadra nela.",
+    "loiro":        "Cabelo claro, pele clara — e no Brasil, frequentemente portador de privilégio não nomeado. Na ficção brasileira, a loirice pode ser traço neutro ou marcador social, dependendo de como a narrativa o trata. O que o texto faz com a loirice revela a perspectiva de quem narra.",
+    "negro":        "Marcador racial e identitário — não apenas de cor de pele. 'Negro' na ficção brasileira é escolha política: afirma uma identidade onde outros textos diriam 'moreno' ou evitariam nomear. A decisão de nomear ou não a raça de uma personagem diz algo sobre o texto antes de dizer algo sobre a personagem.",
+    "branco":       "Cor de pele que, em contexto brasileiro, raramente é nomeada — porque a norma implícita a torna invisível. Quando a escritora nomeia a branquitude de uma personagem, ela torna visível o que o texto costuma deixar sem dizer. É gesto de desestabilização da norma.",
+
+    // Estados pós-trauma — v890
+    "cicatriz":     "O que fica depois da ferida fechar. A cicatriz literária é memória corporal: ela não dói mais, mas mudou o que havia antes. Na ficção, personagens com cicatrizes carregam história visível — e a história que o texto conta sobre aquela cicatriz decide o quanto ela pesa.",
+    "luto":         "O processo de perder algo ou alguém que importava. O luto na ficção não é linear: tem raiva, negação, saudade, alívio culpado. O que a personagem faz com o luto — como o carrega, o esconde, o exibe — diz mais sobre ela do que sobre quem perdeu.",
+    "perda":        "A ausência que foi precedida por uma presença. Na ficção, a perda só tem peso se o leitor soube do que existia antes de desaparecer. Por isso, construir o que vai ser perdido é tão importante quanto narrar a perda — sem o primeiro, o segundo é seco.",
   };
 
   function inferDefinicao(word, className) {

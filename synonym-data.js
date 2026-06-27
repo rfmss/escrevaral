@@ -1771,6 +1771,16 @@
     "gordo":        ["corpulento", "encorpado", "robusto", "volumoso", "de muito peso", "farto"],
     "loiro":        ["louro", "dourado", "cor de mel", "claro no cabelo", "cabelo do sol"],
     "moreno":       ["pardo", "bronzeado", "escuro de pele", "de cabelo escuro", "trigueiro"],
+
+    // Verbos de fala + corporalidade + função — v890
+    "tagarelar":    ["falar sem parar", "falar muito", "dizer sem pensar", "encher o silêncio de palavras", "palrar", "conversar sem destino"],
+    "praguejar":    ["xingar", "amaldiçoar", "soltar palavrões", "falar com raiva em palavras", "imprecações", "maldizer"],
+    "pardo":        ["de tom intermediário de pele", "nem branco nem negro", "moreno", "cor de canela", "mestiço"],
+    "enquanto":     ["ao mesmo tempo que", "no intervalo em que", "durante o período que", "no mesmo momento em que", "simultaneamente a"],
+    "desde":        ["a partir de", "do momento em que", "de quando", "começando em", "tendo como ponto de partida"],
+    "ate":          ["até o ponto de", "até o momento em que", "ao limite de", "não além de", "chegando em"],
+    "antes":        ["anteriormente", "em tempo anterior", "primeiro que", "no passado de", "precedendo"],
+    "depois":       ["em seguida", "posteriormente", "mais tarde", "após isso", "na sequência", "no tempo que vem"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
