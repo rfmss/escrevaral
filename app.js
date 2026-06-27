@@ -451,12 +451,22 @@ function exportPrecisionAnalysis() {
   saveStatus.textContent = `Análise de aderência exportada (${a.score}%)`;
 }
 
+function _getExportScope() {
+  const sel = document.getElementById("export-scope-sel");
+  const scope = sel ? sel.value : "all";
+  const ms = getActiveManuscript();
+  return { scope, activeId: ms ? ms.id : null };
+}
+
 function exportAcervoCompleto() {
-  const docs = state.manuscripts.filter(m => (m.type || "manuscrito") === "manuscrito" && (m.text || "").trim());
-  if (!docs.length) { saveStatus.textContent = "Nenhum manuscrito com texto para exportar."; return; }
+  const opts = _getExportScope();
+  const pkg  = VeredaExport.buildOutputPackage(state.manuscripts, opts);
+  if (pkg.warnings.length) { saveStatus.textContent = pkg.warnings[0]; return; }
+  const docs = pkg.items;
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
-  const sep = "═".repeat(60);
-  const lines = [`ACERVO COMPLETO — Escrevaral`, `Gerado em ${date} · ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}`, sep, ""];
+  const sep  = "═".repeat(60);
+  const titulo = opts.scope === "all" ? "ACERVO COMPLETO" : opts.scope === "current" ? "TEXTO SELECIONADO" : "TEXTO E NOTAS LIGADAS";
+  const lines = [`${titulo} — Escrevaral`, `Gerado em ${date} · ${docs.length} item${docs.length !== 1 ? "s" : ""}`, sep, ""];
   docs.forEach((ms, i) => {
     const wc = countWords(ms.text || "");
     lines.push(`${i + 1}. ${ms.title || "sem título"}  ·  ${wc.toLocaleString("pt-BR")} palavras  ·  ${ms.status || "Em escrita"}`);
@@ -464,20 +474,23 @@ function exportAcervoCompleto() {
     lines.push(ms.text.trim());
     lines.push("", sep, "");
   });
-  const totalWords = docs.reduce((s, m) => s + countWords(m.text || ""), 0);
-  lines.push(`Total: ${totalWords.toLocaleString("pt-BR")} palavras em ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}.`);
+  const totalWords = pkg.stats.words;
+  lines.push(`Total: ${totalWords.toLocaleString("pt-BR")} palavras em ${docs.length} item${docs.length !== 1 ? "s" : ""}.`);
   const dateSlug = new Date().toISOString().slice(0, 10);
-  downloadFile(lines.join("\n"), `escrevaral-acervo-${dateSlug}.txt`, "text/plain;charset=utf-8");
-  saveStatus.textContent = `Acervo exportado — ${docs.length} manuscritos, ${totalWords.toLocaleString("pt-BR")} palavras`;
+  downloadFile(lines.join("\n"), `escrevaral-${opts.scope === "all" ? "acervo" : "export"}-${dateSlug}.txt`, "text/plain;charset=utf-8");
+  saveStatus.textContent = `Exportado — ${docs.length} item${docs.length !== 1 ? "s" : ""}, ${totalWords.toLocaleString("pt-BR")} palavras`;
 }
 
 function exportObsidianVault() {
-  const docs = state.manuscripts.filter(m => (m.text || "").trim());
+  const opts = _getExportScope();
+  const docs = state.manuscripts;
   if (!docs.length) { saveStatus.textContent = "Nenhum manuscrito com texto para exportar."; return; }
   try {
-    const result = VeredaExport.exportObsidianVault(docs);
+    const result = VeredaExport.exportObsidianVault(docs, opts);
     downloadFile(result.content, result.filename, result.mimeType, result.binary);
-    saveStatus.textContent = `Vault exportado — ${docs.length} manuscrito${docs.length !== 1 ? "s" : ""}`;
+    const pkg = VeredaExport.buildOutputPackage(docs, opts);
+    const total = pkg.stats.manuscripts + pkg.stats.notes;
+    saveStatus.textContent = `Exportado para Obsidian — ${total} item${total !== 1 ? "s" : ""}`;
   } catch (e) {
     saveStatus.textContent = e.message;
   }

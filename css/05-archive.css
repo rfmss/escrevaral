@@ -1,3 +1,32 @@
+/* ── SELETOR DE ESCOPO DE EXPORTAÇÃO ── */
+.export-scope-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 6px;
+  flex-wrap: wrap;
+}
+.export-scope-label {
+  font-size: 12px;
+  color: var(--soft-ink);
+  white-space: nowrap;
+}
+.export-scope-sel {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  flex: 1;
+  min-width: 0;
+}
+.export-scope-sel:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
 /* ── ZONAS DO ARQUIVO ── */
 .archive-protect-zone {
   margin-top: 48px;
