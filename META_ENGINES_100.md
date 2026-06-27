@@ -68,6 +68,56 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v813→v835)
+
+**Baseline:** v835 — todos os engines em 100%. Ciclo focado na qualidade de dados do Léxico / Biblioteca.
+
+**O que foi entregue neste ciclo (v813→v835):**
+
+- `lexical-engine.js` (v814): carregamento paralelo de `norma-data.json`; `_VERBOS_PRES_SET` (2045 formas) em rule 19; posição-0 em `inferFuncaoSintatica`
+- `lexical-engine.js` (v815): `effectiveClass` em `inferFuncaoSintatica` — 127 localLexicon com className semântico (lex-abstracto/narrativa/etc.) agora recebem classe gramatical correta
+- `synonym-data.js` (v816): +40 sinônimos literários/editoriais (termos de craft, emoção, natureza brasileira)
+- `app.js` (v817): bug crítico — `window.getSynonyms` era sobrescrito por `syntax-controller.js`; 1000+ sinônimos do SINONIMOS nunca chegavam ao float. Fix: usar `window.SINONIMOS` diretamente
+- `grammar-controller.js` (v818): mesmo fix no popover de gramática
+- `lexical-engine.js` (v819): DEFINICOES +24 entradas (termos literários alinhados com sinônimos)
+- `synonym-data.js` (v820): +40 sinônimos (conflito/emoção/natureza/qualidade textual)
+- `lexical-engine.js` (v821): POLISSEMIA["la"] → Advérbio (clítico pós-hífen já tratado por P0.6)
+- `lexical-engine.js` (v822): POLISSEMIA["ai"] (aí/ai, durante, além); POLISSEMIA["durante"] → Preposição
+- `lexical-engine.js` (v823): DEFINICOES +27 (emoção, conflito, natureza BR, qualidades textuais); fix crash `countWordOccurrences(undefined)`
+- `lexical-engine.js` (v824): POLISSEMIA["ja"/"assim"/"conforme"/"segundo"] — 4 palavras sempre em Conjunção quando deveriam ser Advérbio/Preposição
+- `lexical-engine.js` (v825): DEFINICOES +37 (figuras, narrativa, gêneros, ponto de vista, emoções); synonym-data +17
+- `lexical-engine.js` (v826): `_INTERJEICOES` Set (rule 23) e `_NUMERAIS_CARD` Set (rule 24); POLISSEMIA["ai"] context-aware
+- `lexical-engine.js` (v827): `_ORDINAIS` Set (rule 25) — terceiro/quarto/quinto/sétimo/penúltimo → Adjetivo
+- `lexical-engine.js` (v828): DEFINICOES +29 (crítica literária, editoração, personagem, registro, gêneros)
+- `synonym-data.js` (v829): +16 sinônimos (teoria, editoração, personagem, gêneros)
+- `lexical-engine.js` (v830): `_COMP_IRR` — comparativos irregulares melhor/pior/maior/menor/superior/inferior → Adjetivo; POLISSEMIA["acaso"]
+- `lexical-engine.js` (v831): DEFINICOES +19 (conto, novela, romance, poesia, denotação, narração, ensaio e +12)
+- `synonym-data.js` (v832): +13 sinônimos (gêneros e semântica)
+- `lexical-engine.js` (v833): `_ADJ_EXT` (+50 adjetivos sem sufixo canônico) e `_ADV_EXT` (embaixo/atrás/adiante e +)
+- `lexical-engine.js` (v834): DEFINICOES +20 (in media res, flashback, prolepse, analepse, ode, elegia, assonância, onomatopeia)
+- `synonym-data.js` (v835): +10 sinônimos (técnicas e formas poéticas)
+
+**Estado atualizado dos engines (v835):**
+
+| Área / engine | Maturidade | Notas de estado (v835) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 9 gestos; 9 campos semânticos; echoes por gesto |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS 1133; localLexicon 528; DEFINICOES 327; POLISSEMIA 35+ entradas; interjeições/numerais/ordinais/comparativos/adj-ext reconhecidos |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; VERBOS_PRES; effectiveClass em inferFuncaoSintatica |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+
+**Fronteiras abertas (por ordem de impacto):**
+
+1. **"tarde" como Advérbio** — localLexicon sempre ganha sobre contexto; "Chegou tarde" → "Substantivo". Requer refatoração em `analyze()` para checar POLISSEMIA antes de localLexicon quando há texto disponível
+2. **"logo" conclusivo** — "Penso, logo existo" → "Advérbio" (deveria ser "Conjunção"). Pontuação é stripped antes do vizinho ser calculado; não há forma de detectar vírgula anterior sem parser
+3. **DEFINICOES 327 → 400**: ainda faltam muitos verbos expressivos (murmurar, contemplar, sussurrar), adjetivos de estilo (lacônico, prolixo, eloquente), mais figuras e termos de editoração
+4. **_ADJ_EXT expansão**: adjetivos compostos (bem-humorado, mal-humorado) e gentílicos (carioca, paulista, baiano) → Adjetivo
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-26 (ciclo v800→v805)
 
 **Baseline:** v805 — todos os engines em 100%. Lexical/Biblioteca elevado à camada literária.
@@ -92,11 +142,25 @@ Pergunta padrao da sessao:
 | Sintaxe / Morfologia | **100%** | dados 2000×4; desambiguação contextual 33/34 (97%); VERBOS_PRES antes ADJETIVOS_PRIM |
 | Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
 
+- `voice-engine.js` (v806): gesto `resistência` adicionado — "Voz de chão e luta"; topField==="trabalho" → resistência; echoes: Carolina Maria de Jesus, Conceição Evaristo, Eliane Brum. Campo existia com 64 termos mas caía no default "narrativo".
+
+**Estado atualizado dos engines (v806):**
+
+| Área / engine | Maturidade | Notas de estado (v806) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 9 gestos (inclui resistência); 9 campos semânticos; echoes por gesto |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Lexico / Biblioteca | **100%** | sinônimos 1013; localLexicon 528; POLISSEMIA 27 entradas; _SINS_CLASSE 17 palavras; análise de frase |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias 63–69 |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; desambiguação 33/34 (97%); VERBOS_PRES antes ADJETIVOS_PRIM |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+
 **Próximas fronteiras:**
 
-1. **Voice engine**: adicionar campo semântico `trabalho` (roça/fábrica/serviço/ofício/resistência) — última fronteira declarada em v784
-2. **Morfologia 33/34 → 34/34**: "livre" como Verbo subjuntivo após pronome oblíquo "a" — requer distinguir artigo de pronome (custo alto)
-3. **Sinônimos gerais**: expandir `synonym-data.js` além de 1013 em natureza BR, corpo, emoção complexa
+1. **Morfologia 33/34 → 34/34**: "livre" como Verbo subjuntivo após pronome oblíquo "a" — custo alto (distinguir artigo de pronome sem parser)
+2. **Sinônimos gerais**: expandir `synonym-data.js` além de 1013 em natureza BR, corpo, emoção complexa
+3. **Espelho de Voz — calibragem**: testar se textos mistos (trabalho + conflito, trabalho + oral) acertam gesto esperado; ajustar ordem de precedência se necessário
 
 ---
 
