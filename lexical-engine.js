@@ -2095,11 +2095,10 @@
 
     // Estados emocionais adicionais — v838
     "esperanca":    "A expectativa de que algo melhor vai acontecer — mesmo sem garantia. Na ficção brasileira, a esperança é frequentemente irônica: o personagem que espera é o que o narrador protege ou abandona.",
-    "resignacao":   "A aceitação de algo inevitável — sem concordar, mas sem mais lutar. Na narrativa, a resignação pode ser ponto final ou armadilha: o personagem que se resigna pode não ter chegado ao fim.",
+    "resignacao":   "A aceitação de algo inevitável — sem concordar, mas sem mais lutar. Na narrativa, a resignação pode ser ponto final ou armadilha. Distinção importante: resignação ainda carrega o desejo; desesperança o esqueceu.",
     "serenidade":   "Estado de calma estável, interior. A serenidade é rara na ficção de conflito — mas quando aparece, é ponto de virada. A personagem serena no caos é a mais assustadora ou a mais sábia.",
     "euforia":      "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir.",
     "desesperanca": "A ausência de esperança — não a tristeza, mas o lugar além dela. É estado permanente, não passageiro. A desesperança em Beckett é poética; nas letras de cordel, é combatida com humor.",
-    "resignacao2":  "Resignação e desesperança são distintas: a primeira aceita, a segunda desistiu de aceitar. A personagem resignada ainda carrega o desejo; a desesperançada o esqueceu.",
 
     // Emoções complexas — v839
     "ciume":        "Medo de perder algo ou alguém para outro — mistura de amor, insegurança e raiva. Na ficção, o ciúme é motor narrativo clássico; o risco é virar clichê. A personagem que sente ciúme está admitindo que precisa do outro.",
@@ -2169,7 +2168,6 @@
     "sufocar":      "Perder o ar — de emoção, de claustrofobia, de excesso de silêncio. Na narrativa, 'sufocar' é metáfora que o leitor sente no peito. Personagens que sufocam estão num ambiente que as diminui: relação, lugar, silêncio forçado.",
     "ofegar":       "Respirar em curtos solaços — depois de correr, de chorar, de assustarse. Em prosa, o personagem que ofega torna o leitor consciente do próprio ritmo respiratório. É técnica de imersão: escrever ofego gera ofego.",
     "solucar":      "Choro que se parte — o soluço interrompe a voz, corta a fala, revela que a emoção é maior do que a contenção. Na ficção, solucar é detalhe físico que ancora a cena emocional sem precisar nomear o sentimento.",
-    "estremecer2":  "Ver 'estremecer'.",
 
     // Substantivos de ausência e tempo — v854
     "lacuna":       "O vazio que faz sentido. Na teoria literária, a lacuna é o que o texto não diz e o leitor preenche — com experiência, medo, desejo. Toda história tem lacunas deliberadas; o escritor escolhe o que ocultar tanto quanto o que mostrar.",
@@ -2227,7 +2225,6 @@
     "resolucao":    "O momento em que a tensão encontra resposta — não necessariamente solução. A resolução pode ser desfecho, virada ou dissolução. O que não pode é ser arbitrária: o leitor precisa sentir que aquilo estava contido na história desde o começo, mesmo que não soubesse onde.",
     "subversao":    "O gesto de desfazer o que se esperava — na forma, no tema ou no personagem. A subversão literária não é destruição: é revelar que o convencional tinha uma fissura por onde algo mais verdadeiro poderia entrar. Subverter exige conhecer a fundo o que se subverte.",
     "ambiguidade":  "A capacidade de um texto de sustentar mais de uma leitura ao mesmo tempo — sem que uma cancele a outra. A ambiguidade não é imprecisão: é precisão dupla. Nos grandes textos, ela é intencional: o que a personagem quer e o que a personagem faz não é a mesma coisa.",
-    "orizacao":     "Ver 'oralização'.",
     "oralizacao":   "Trazer a fala viva para a escrita — ritmo, hesitação, corte, expressão regional, gíria com data. A oralização não é transcrição: é recriação. A prosa oralizada parece falar porque alguém fez escolhas precisas sobre o que manter e o que deixar de fora da conversa real.",
     "diccao":       "O jeito singular que um escritor tem de usar a língua — ritmo próprio, vocabulário preferido, estrutura de frase, temperatura das palavras. A dicção não se imita sem virar pastiche. Ela nasce de leitura ampla, escuta atenta e coragem de escolher.",
     "fronteira":    "Em narrativa: o limite entre o que a personagem conhece e o que ainda não sabe de si mesma. Cruzar uma fronteira — geográfica, social, moral, psicológica — é o motor de muitas histórias. A fronteira não precisa ser dramática para ser significativa.",

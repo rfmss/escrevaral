@@ -1688,8 +1688,8 @@
 
     // Lacunas literárias — v878
     "narradora":    ["voz que conta", "consciência narrativa", "quem organiza o olhar", "ponto de vista encarnado", "a que dá forma à história"],
-    "epígrafe":     ["epígrafe", "citação de abertura", "voz emprestada antes do início", "convite ao tema", "âncora de sentido"],
-    "dedicatoria":  ["dedicatória", "página de afeto", "nome que antecipa tudo", "reconhecimento antes da história", "inscrição de presença"],
+    "epígrafe":     ["citação de abertura", "voz emprestada antes do início", "convite ao tema", "âncora de sentido", "o que prepara a leitura"],
+    "dedicatoria":  ["página de afeto", "nome que antecipa tudo", "reconhecimento antes da história", "inscrição de presença", "para quem o livro existe"],
     "alienacao":    ["desconexão", "afastamento do real", "indiferença ao entorno", "distância de si", "vida à margem de si mesma", "deriva interior"],
     "crescimento":  ["amadurecimento", "arco de personagem", "mudança que fica", "evolução interior", "passagem que não se desfaz", "transformação que custa"],
     "brecha":       ["abertura", "fissura", "fresta", "caminho inesperado", "possibilidade escondida", "onde a luz entra"],
