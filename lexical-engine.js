@@ -274,7 +274,24 @@
         if (_COMP.has(prev2)) return "Conjunção";
       }
 
-      // 5. Após desinência verbal de passado → Conjunção causal/integrante (DESAM-QUE-06)
+      // 5. Após forma verbal de 3sg presente / imperativo → Conjunção causal (DESAM-QUE-07)
+      //    "Anda, que está tarde" / "Corre, que é longe"
+      const _PRES3 = new Set([
+        // 1ª conjugação — 3sg presente e imperativo informal
+        "anda","fala","chora","canta","calla","espera","olha","para","chega","entra",
+        "volta","passa","pega","pula","leva","traz","gosta","importa","basta","resta",
+        "sobra","falta","fica","toca","pensa","sente","vira","sobe","desce","sai",
+        "liga","lembra","nota","escuta","ouve","chama","dura","muda","junta","separa",
+        "conta","custa","mostra","encontra","guarda","deixa","manda","acaba",
+        // 2ª/3ª conjugação — 3sg presente e imperativo informal/formal
+        "corre","parte","segue","escreve","lute","venha","chegue","pare","saiba",
+        "ouça","diga","veja","tenha","leia","faça","traga","venha","siga","parta",
+        // Formas breves comuns
+        "vai","vem","tem","e","ha","da","pe","ve","le","ri","oe",
+      ]);
+      if (_PRES3.has(prev)) return "Conjunção";
+
+      // 6. Após desinência verbal de passado → Conjunção causal/integrante (DESAM-QUE-06)
       //    Pret. perfeito: -ou, -eu, -iu; Imperfeito: -ava, -ia; PP3pl: -aram/-eram/-iram
       if (prev.length > 3 && /(ou|eu|iu|aram|eram|iram|ava|ia)$/.test(prev)) return "Conjunção";
 
@@ -302,6 +319,30 @@
       if (!prev) return "Advérbio";
       // No interior → conjunção temporal (DESAM-QUANDO-02)
       return "Conjunção";
+    },
+
+    // Pronomes relativos possessivos — sempre Pronome relativo (Bechara MGP §pronomes relativos)
+    "cujo":  () => "Pronome relativo",
+    "cuja":  () => "Pronome relativo",
+    "cujos": () => "Pronome relativo",
+    "cujas": () => "Pronome relativo",
+
+    // "onde" — advérbio relativo de lugar (Bechara §354; Cunha&Cintra §pronome relativo)
+    //   !prev → interrogativo ("Onde você vai?")
+    //   prev → pronome relativo de lugar ("a cidade onde nasceu")
+    "onde": (prev) => {
+      if (!prev) return "Advérbio";
+      return "Pronome relativo";
+    },
+
+    // "qual/quais" — pronome relativo (após artigo o/a/os/as) ou interrogativo
+    "qual": (prev) => {
+      if (prev && ["o","a","os","as"].includes(prev)) return "Pronome relativo";
+      return "Pronome interrogativo";
+    },
+    "quais": (prev) => {
+      if (prev && ["o","a","os","as"].includes(prev)) return "Pronome relativo";
+      return "Pronome interrogativo";
     },
     "se": (prev, next) => {
       // 1. Após verbo de dúvida/investigação → Conjunção integrante (DESAM-SE-02)
@@ -618,6 +659,13 @@
     "morto":  ["Verbo (particípio) — 'havia morrido'", "Substantivo — 'um morto não fala'", "Adjetivo — 'estava morto'"],
     "que":    ["Pronome relativo — 'o livro que li'", "Conjunção — 'disse que viria'", "Pronome — 'Que saudade!'"],
     "se":     ["Conjunção condicional — 'se chover, fico'", "Conjunção integrante — 'perguntou se vinha'", "Pronome reflexivo — 'ela se machucou'"],
+    "cujo":   ["Pronome relativo possessivo — 'o autor cujo livro li'"],
+    "cuja":   ["Pronome relativo possessivo — 'a autora cuja obra marcou'"],
+    "cujos":  ["Pronome relativo possessivo — 'os poetas cujos versos ecoam'"],
+    "cujas":  ["Pronome relativo possessivo — 'as palavras cujas raízes vêm do latim'"],
+    "onde":   ["Pronome relativo — 'a cidade onde nasceu'", "Advérbio interrogativo — 'onde você vai?'"],
+    "qual":   ["Pronome relativo — 'o livro o qual ele leu'", "Pronome interrogativo — 'qual livro você quer?'"],
+    "quais":  ["Pronome relativo — 'os livros os quais ela escolheu'", "Pronome interrogativo — 'quais você prefere?'"],
     "muito":  ["Advérbio — 'era muito belo'", "Pronome indefinido — 'havia muito trabalho'"],
     "muita":  ["Pronome indefinido — 'muita gente veio'"],
     "muitos": ["Pronome indefinido — 'muitos chegaram cedo'"],
