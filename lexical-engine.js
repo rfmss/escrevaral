@@ -1128,6 +1128,9 @@
     // 24. Numerais cardinais — NUM-CARD-01
     if (_NUMERAIS_CARD.has(normalized)) return "Numeral";
 
+    // 25. Numerais ordinais — NUM-ORD-01 (funcionam como adjetivo em contexto nominal)
+    if (_ORDINAIS.has(normalized)) return "Adjetivo";
+
     return "Substantivo";
   }
 
@@ -1145,6 +1148,21 @@
     "cem","cento","duzentos","duzentas","trezentos","trezentas","quatrocentos","quatrocentas",
     "quinhentos","quinhentas","seiscentos","seiscentas","setecentos","setecentas",
     "oitocentos","oitocentas","novecentos","novecentas","mil","milhao","bilhao"
+  ]);
+
+  // Ordinais funcionam como Adjetivo quando acompanham substantivo (Bechara MGP §numerais)
+  // Excluídos: primeiro/segunda/segundo/ultimo — já em adjetivos_comuns ou POLISSEMIA
+  const _ORDINAIS = new Set([
+    "terceiro","terceira","terceiros","terceiras",
+    "quarta","quartas",                    // "quarto" = substantivo (cômodo) — excluído
+    "quinto","quinta","quintos","quintas",
+    "sexto","sexta","sextos","sextas",
+    "setimo","setima","setimos","setimas",
+    "oitavo","oitava","oitavos","oitavas",
+    "nono","nona","nonos","nonas",
+    "decimo","decima","decimos","decimas",
+    "vigesimo","trigesimo","centesimo","milesimo",
+    "penultimo","penultima","antepenultimo","antepenultima"
   ]);
 
   // ── Gatilhos que desencadeiam subjuntivo — VERB-SUBJ-USO-01/02/03/04 (Bechara MGP + Cunha&Cintra) ──
