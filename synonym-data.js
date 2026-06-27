@@ -1790,6 +1790,18 @@
     "vislumbrar":   ["entrever", "ver de longe e de relance", "perceber vagamente", "ver por frações", "flagrar antes de sumir"],
     "farejar":      ["cheirar para descobrir", "rastrear pelo olfato", "sentir o rastro", "buscar pelo cheiro", "farejamento"],
     "prever":       ["antecipar", "intuir o que vem", "calcular o futuro", "sentir o que vai acontecer", "adiantar-se ao fato"],
+
+    // Identidade e literatura brasileira — v892
+    "silenciamento": ["calar forçado", "voz apagada", "o que não pôde ser dito", "supressão da fala", "quando a voz não chega"],
+    "apagamento":    ["invisibilidade forçada", "ser tirado da história", "não existir para o registro", "ausência produzida", "omissão que apaga"],
+    "diaspora":      ["dispersão de povo", "vida longe da origem", "comunidade espalhada", "o povo que não voltou", "ser de dois lugares"],
+    "migracao":      ["deslocamento entre lugares", "partir e chegar", "mudar de terra", "quem saiu e não voltou igual", "trânsito entre mundos"],
+    "enraizamento":  ["pertencer a um lugar", "ter terra debaixo dos pés", "vínculo com o território", "raízes que sustentam", "presença que fica"],
+    "deslocamento":  ["estar fora do lugar", "não pertencer completamente", "entre dois mundos", "sair sem chegar", "corpo em trânsito"],
+    "corporalidade": ["o corpo como lugar de experiência", "o que o corpo carrega", "existência encarnada", "o corpo antes da ideia", "onde a história mora"],
+    "representacao": ["estar presente nas histórias", "aparecer no texto", "ser narrada", "existir na ficção", "quem está e quem não está nas páginas"],
+    "visibilidade":  ["ser vista", "aparecer", "existir para quem olha", "não ser apagada", "presença que pode ser reconhecida"],
+    "invisibilidade": ["não ser vista", "existir sem aparecer", "ser ignorada pelo olhar dominante", "presença que o sistema nega", "apagamento cotidiano"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
