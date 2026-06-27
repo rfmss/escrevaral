@@ -1079,10 +1079,33 @@
       return altClass !== className && !className.startsWith(altClass) && !altClass.startsWith(className);
     });
 
+    // ── DECISAO DE CONFIANÇA ─────────────────────────────────────────────────
+    // Implementa "cravar / provável / ambíguo / indeterminado" (Bechara + UD)
+    // Não altera className — é metadado de confiança para a interface e corpus.
+    let decisao;
+    if (className.includes("/") || className.includes(" ou ")) {
+      // Ambiguidade já reconhecida na className (ex: "Substantivo ou Adjetivo")
+      decisao = "ambiguo";
+    } else if (POLISSEMIA[normalized]) {
+      // Palavra polissêmica conhecida: se havia contexto, foi resolvida (provável);
+      // sem contexto, qualquer leitura é possível (ambíguo)
+      decisao = text ? "provavel" : "ambiguo";
+    } else if (lexiconEntry) {
+      // Entrada explícita no lexicon local — fonte mais confiável disponível
+      decisao = "classificado";
+    } else if (!text && className === "Substantivo") {
+      // Palavra desconhecida sem contexto que caiu no fallback padrão
+      decisao = "indeterminado";
+    } else {
+      // Inferência morfológica por regra (sufixo, lista, contexto)
+      decisao = "provavel";
+    }
+
     return {
       word: normalized,
       displayWord: lexiconEntry?.label || selectedWord,
       className,
+      decisao, // "classificado" | "provavel" | "ambiguo" | "indeterminado"
       functionName: inferFunctionName(className),
       field: lexiconEntry?.field || inferSemanticField(normalized, className),
       note: lexiconEntry?.note || createLocalNote(className, normalized),
