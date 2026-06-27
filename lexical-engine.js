@@ -1266,7 +1266,17 @@
     "terno","terna","ternos","ternas","puro","pura","puros","puras",
     "casto","casta","castos","castas","severo","severa","severos","severas",
     "sereno","serena","serenos","serenas","grato","grata","gratos","gratas",
-    "pio","pia","pios","pias","lento","lenta","lentos","lentas"
+    "pio","pia","pios","pias","lento","lenta","lentos","lentas",
+    // Adjetivos de personagem — ADJ-CARAC-01
+    "covarde","covardes","valente","valentes","generoso","generosa","generosos","generosas",
+    "mesquinho","mesquinha","mesquinhos","mesquinhas","teimoso","teimosa","teimosos","teimosas",
+    "ansioso","ansiosa","ansiosos","ansiosas","orgulhoso","orgulhosa","orgulhosos","orgulhosas",
+    "saudoso","saudosa","saudosos","saudosas","ciumento","ciumenta","ciumentos","ciumentas",
+    "medroso","medrosa","medrosos","medrosas","ambicioso","ambiciosa","ambiciosos","ambiciosas",
+    "arrogante","arrogantes","humildes","paciente","pacientes","impaciente","impacientes",
+    "elegante","elegantes","grosseiro","grosseira","grosseiros","grosseiras",
+    "corajoso","corajosa","corajosos","corajosas","cauteloso","cautelosa",
+    "temeroso","temerosa","audacioso","audaciosa","audaciosos","audaciosas"
   ]);
 
   // Advérbios de posição/lugar não presentes em functionWords.adverbios — ADV-EXT-01
