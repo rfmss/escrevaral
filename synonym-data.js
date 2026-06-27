@@ -1729,6 +1729,14 @@
     "confianca":    ["fé no outro", "crença sem provas", "apostar em quem se conhece", "se entregar sem garantias", "certeza construída pelo tempo"],
     "respeito":     ["consideração", "reconhecimento do valor do outro", "distância que honra", "limite que preserva", "o que se dá antes de receber"],
     "dependencia":  ["precisar do outro para existir", "laço que sustenta ou aprisiona", "necessidade que não se controla", "não conseguir sem", "estar ligado por dentro"],
+
+    // Estrutura narrativa — v885
+    "passagem":     ["transição entre cenas", "intervalo narrativo", "o que o texto usa para saltar no tempo", "ponte entre momentos", "elipse curta"],
+    "onisciencia":  ["o narrador que tudo sabe", "visão total da história", "narrador fora do tempo", "voz que habita todos os personagens", "saber mais que qualquer personagem"],
+    "compressao":   ["resumir o tempo em poucas linhas", "narrativa acelerada", "o contrário de cena aberta", "elipse com peso", "saltar anos em um parágrafo"],
+    "coadjuvante":  ["personagem secundária", "quem apoia sem ser o centro", "papel de suporte", "voz lateral da narrativa", "presença que define a protagonista"],
+    "figurante":    ["personagem de fundo", "presença sem nome", "corpo que povoa a cena", "quem existe para tornar o mundo real", "voz sem arco"],
+    "corte":        ["mudança abrupta de cena", "transição sem aviso", "fim de cena antes do esperado", "quando o texto salta sem explicar", "elipse visual"],
   };
 
   // Normalização: remove acentos e converte para minúsculas

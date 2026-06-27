@@ -2292,6 +2292,14 @@
     "abandono":     "Ser deixada por quem deveria ficar. O abandono literário deixa rastro: ele aparece na forma como a personagem entra em relações futuras, no que ela espera do outro, no que ela faz antes de ser deixada novamente. A personagem abandonada está sempre em estado de antecipação.",
     "amizade":      "A relação entre iguais que escolhem continuar. A amizade na ficção é subestimada: ela é o vínculo que sustenta a personagem quando tudo o mais falha. Diferente do amor, ela raramente tem drama próprio — seu valor aparece quando falta.",
     "ausencia":     "A presença do que não está. Na ficção, a ausência pode ser mais ativa do que a presença: o personagem morto que move a trama, o amor que foi embora e é mencionado em tudo, a memória que transforma o que existe. A ausência não é vazio — é pressão.",
+
+    // Estrutura narrativa — v885
+    "onisciencia":  "O narrador que sabe mais do que qualquer personagem. A onisciência permite ao texto entrar em múltiplas consciências, saltar no tempo e no espaço, e comentar o que vê. Mas esse poder tem custo: quanto mais o narrador sabe, mais difícil é criar suspense sem parecer que está retendo informação.",
+    "compressao":   "Narrar muito tempo em pouco espaço. A compressão é a operação de resumir: 'passaram-se dez anos' é compressão máxima. Usada bem, ela dá à narrativa velocidade e senso de consequência. Usada mal, ela torna os saltos abruptos e deixa o leitor sem chão.",
+    "coadjuvante":  "O personagem que importa sem ser o centro. O coadjuvante na ficção revela o protagonista por contraste: é quem define o que a personagem principal é por diferença. Um coadjuvante bem construído tem vida própria, mesmo que o texto não a acompanhe.",
+    "figurante":    "O personagem que povoa sem ter arco. Figurantes são o mundo ao redor da protagonista — eles tornam a ficção habitável. O que distingue um figurante bem escrito de um mal escrito é que o primeiro tem um detalhe concreto que o faz real por um momento.",
+    "passagem":     "O que o texto usa para saltar no tempo ou no espaço sem explicar o salto. A passagem pode ser breve — uma linha em branco — ou pode ser uma pequena cena de transição. O que ela não pode fazer é chamar mais atenção do que o que vem antes e depois.",
+    "perspectiva":  "O ângulo a partir do qual a história é contada. A perspectiva não é apenas técnica: ela governa o que pode ser sabido, o que é distorcido, o que fica fora de campo. Mudar de perspectiva muda a história — o mesmo evento tem peso diferente dependendo de quem o vê.",
   };
 
   function inferDefinicao(word, className) {
