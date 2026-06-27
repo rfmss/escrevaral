@@ -1661,6 +1661,34 @@
     "lacunico":      ["que diz pouco e significa muito", "conciso ao extremo", "econômico com as palavras"],
     "prolixo":       ["que fala além da conta", "difuso", "alongado sem necessidade", "verboso"],
     "eloquente":     ["que convence pela força da linguagem", "expressivo com precisão", "que move o leitor"],
+
+    // Adjetivos de personagem — v849
+    "covarde":       ["medroso", "pusilânime", "sem coragem", "que recua diante do perigo", "frouxo"],
+    "valente":       ["corajoso", "audacioso", "destemido", "bravo", "que enfrenta o perigo"],
+    "generoso":      ["dadivoso", "magnânimo", "pródigo", "que doa sem contar", "de espírito largo"],
+    "mesquinho":     ["sovina", "miserável de alma", "pão-duro de sentimentos", "avarento", "pequeno"],
+    "teimoso":       ["obstinado", "cabeça-dura", "persistente para o mal ou bem", "tenaz no erro"],
+    "ansioso":       ["agitado pela espera", "inquieto", "angustiado com o incerto", "nervoso"],
+    "orgulhoso":     ["altivo", "soberbo quando excessivo", "que não se curva fácil", "de postura alta"],
+    "corajoso":      ["valente", "audacioso", "que age apesar do medo", "destemido", "bravo"],
+    "arrogante":     ["soberbo", "presunçoso", "que se crê superior", "desdenhoso", "altaneiro"],
+    "elegante":      ["refinado", "de boa forma", "sem esforço aparente", "discreto e certeiro"],
+    "saudoso":       ["com saudade", "que carrega o ausente", "guardador do passado", "nostálgico"],
+    "ambicioso":     ["que quer mais", "que não se satisfaz", "determinado ou ganancioso segundo o contexto"],
+    "cauteloso":     ["prudente", "que pesa antes de agir", "avesso ao risco", "cuidadoso ao extremo"],
+    "medroso":       ["covarde", "que recua pelo medo", "tímido diante do perigo", "assustado"],
+    "audacioso":     ["ousado", "que age sem calcular o risco", "arrojado", "que vai além"],
+    "grosseiro":     ["rude", "sem refinamento", "bruto no trato", "descortês", "que machuca sem intenção"],
+    "paciente":      ["que espera sem quebrar", "sereno diante da demora", "tolerante", "perseverante"],
+    // Outros adjetivos — v849
+    "amplo":         ["vasto", "largo", "espaçoso", "abrangente", "sem limite à vista"],
+    "digno":         ["merecedor", "que tem dignidade", "de boa postura", "honroso", "decente"],
+    "puro":          ["sem mistura", "intocado", "casto", "límpido", "sem segunda intenção"],
+    "severo":        ["rigoroso", "austero", "duro no julgamento", "exigente", "sem concessão"],
+    "sereno":        ["calmo", "tranquilo", "que não se perturba", "equilibrado", "de paz interior"],
+    "profundo":      ["fundo", "intenso", "que vai ao essencial", "que não fica na superfície", "denso"],
+    "denso":         ["espesso", "carregado de sentido", "concentrado", "de muitas camadas"],
+    "longo":         ["extenso", "demorado", "que não termina logo", "de grande alcance"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
