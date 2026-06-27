@@ -1708,6 +1708,13 @@
     "furia":        ["raiva extrema", "ira", "violência contida", "tempestade por dentro", "quando o limite acabou", "cólera"],
     "desencanto":   ["decepção que ficou", "desilusão", "perda da crença", "o dia em que a esperança fechou", "quando o possível encolheu"],
     "amargura":     ["mágoa antiga", "ressentimento que não passou", "tristeza que azedou", "o que ficou de uma dor não resolvida", "rancor silencioso"],
+
+    // Ambiente e sensorialidade — v882
+    "barulho":      ["ruído", "som sem forma", "algazarra", "estrondo", "perturbação sonora", "barulheira"],
+    "poeira":       ["pó", "partículas suspensas", "resíduo do vento", "cinza do chão", "névoa de terra"],
+    "fumaca":       ["neblina de queimado", "névoa densa", "fumo", "cortina de cinza", "bruma escura"],
+    "umidade":      ["vapor d'água", "cheiro de chuva parada", "mofo no ar", "suor do ambiente", "ar pesado de água"],
+    "amanhecida":   ["primeiras horas", "hora da madrugada que ainda escurece", "antes do sol", "limiar do dia", "quando a noite ainda resiste"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
