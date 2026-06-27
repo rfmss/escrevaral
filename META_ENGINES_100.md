@@ -68,6 +68,53 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v854→v865)
+
+**Baseline:** v865 — todos os engines em 100%. Ciclo focado em POLISSEMIA contextual, DEFINICOES, SINONIMOS e atalhos de editor.
+
+**O que foi entregue neste ciclo (v854→v865):**
+
+- `lexical-engine.js` (v854): +11 DEFINICOES (verbos expressivos: estremecer/palpitar/sufocar/ofegar/solucar; estados de ausência: lacuna/falta/duracao/inimizade/cansaco)
+- `synonym-data.js` (v854): +11 SINONIMOS correspondentes a verbos expressivos e substantivos de ausência
+- `lexical-engine.js` (v855): POLISSEMIA["tarde"] — article detection (substantivo após artigo; advérbio em outros contextos); `analyze()` refatorado: `_polisOverride` garante que POLISSEMIA vence lexiconEntry quando texto disponível; fix "devagar" → não Verbo no infinitivo (exception na regra 20)
+- `lexical-engine.js` (v856): `_ADJ_EXT` expandido com particípios irregulares usados como adjetivos: satisfeito/confuso/incluso/excluso/difuso/corrupto/aceso/preso/solto/morto/posto/feito/visto/perdido/escondido; adjetivos em -eto (concreto/abstrato/discreto/completo/quieto) e -undo (iracundo/fecundo/moribundo); cores
+- `lexical-engine.js` (v857): POLISSEMIA["posto"] — COPULAS_P set para Adjetivo predicativo; fix "foi" como auxiliar → Verbo (particípio)
+- `lexical-engine.js` (v858): POLISSEMIA["visto"] — COPULAS_V set; `_polisOverride` expandido para cobrir lexiconEntry com className começando em "Verbo (particípio)"
+- `export-engine.js`+`app.js`+`index.html` (v859): Exportar para Obsidian — `.md` com YAML frontmatter (title/criado/tipo/situacao/autor/palavras/tags/fonte) + wikilinks `[[tag]]`; botão + help explicativo
+- `export-engine.js`+`app.js`+`index.html` (v860): Acervo para Obsidian — ZIP com `README.md` (índice) + `manuscritos/[slug].md` por item
+- `export-engine.js` (v861): `buildOutputPackage(manuscripts, opts)` — camada lógica de seleção de escopo (all/current/current-with-linked/selected); exposta em `VeredaExport`; `exportObsidianVault` usa o pacote
+- `app.js` (v862): Ctrl+S (guardar — evita "Salvar como..." do browser) + Ctrl+P (imprimir manuscrito ativo — evita "Imprimir página" do browser)
+- `lexical-engine.js` (v863): POLISSEMIA["claro"] — _COPULAS_CLARO set: "ficou/ficava claro" → Adjetivo (predicativo), "falou claro" → Advérbio; POLISSEMIA["fundo"] — após preposição/artigo → Substantivo; POLISSEMIA["funda"] → Adjetivo; corrige lexiconEntry que classificava "fundo" como "Verbo flexionado"
+- `lexical-engine.js` (v864): +2 DEFINICOES (prólogo/monólogo); bateria narrativa 34/34
+- `synonym-data.js` (v865): +18 SINONIMOS adjetivos de personagem literário: altivo/soberbo/rancoroso/tenso/melancólico/nostálgico/traidor/ingênuo/astuto/sensato/obstinado/impulsivo/prudente/furioso/resignado/amargo/apaixonado/ciumento
+
+**Fronteiras fechadas neste ciclo:**
+- "tarde" como Advérbio (POLISSEMIA + _polisOverride em analyze)
+- "posto/visto/claro/fundo" — POLISSEMIA resolvendo conflitos com lexiconEntry
+- Ctrl+S e Ctrl+P — atalhos de editor sem fricção com browser
+
+**Estado atualizado dos engines (v865):**
+
+| Área / engine | Maturidade | Notas de estado (v865) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 9 gestos; 9 campos semânticos; echoes por gesto |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS 1221; DEFINICOES 430; POLISSEMIA 59 entradas; bateria 34/34 narrativa; adjetivos de personagem 18/18 |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; VERBOS_PRES; effectiveClass em inferFuncaoSintatica |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **85%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian (single+vault); buildOutputPackage (scope layer); falta UI unificada de escopo |
+
+**Fronteiras abertas (v865):**
+
+1. **UI de escopo de saída**: `buildOutputPackage` existe mas a UI ainda não expõe "Exportar só este texto / com notas ligadas / escolher itens" — próxima pílula de exportação
+2. **"logo" conclusivo** — "Penso, logo existo" → "Advérbio" (deveria ser "Conjunção"). Pontuação stripped antes do cálculo de vizinhos; sem parser externo é insolúvel
+3. **Adjetivos compostos** (bem-humorado, mal-humorado) — hífen impede normalizeWord de capturar o padrão
+4. **"quando" como Conjunção** vs Advérbio interrogativo — só resolvido com detecção de ponto de interrogação
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v836→v853)
 
 **Baseline:** v853 — todos os engines em 100%. Ciclo focado em classificação de classes gramaticais e expansão do corpus Léxico.
