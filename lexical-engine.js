@@ -3,13 +3,20 @@
   let functionWords = { artigos:[], contracoes:[], conjuncoes:[], preposicoes:[], pronomes:[], adverbios:[] };
   let _loaded = false;
   let _loadError = false;
+  let _VERBOS_PRES_SET = null;  // Set de formas do presente (3ª p.) — carregado de norma-data.json
+  let _FORMAS_IRR_SET  = null;  // Set de formas verbais irregulares
 
   async function ensureLoaded() {
     if (_loaded || _loadError) return;
     try {
-      const data = await fetch('lexical-data.json').then(r => r.json());
-      localLexicon  = data.localLexicon  || {};
-      functionWords = data.functionWords || functionWords;
+      const [lex, norma] = await Promise.all([
+        fetch('lexical-data.json').then(r => r.json()),
+        fetch('norma-data.json').then(r => r.json()).catch(() => ({})),
+      ]);
+      localLexicon  = lex.localLexicon  || {};
+      functionWords = lex.functionWords || functionWords;
+      if (norma.verbos_pres_reg)  _VERBOS_PRES_SET = new Set(norma.verbos_pres_reg);
+      if (norma.formas_verbais_irr) _FORMAS_IRR_SET = new Set(norma.formas_verbais_irr);
       _loaded = true;
     } catch (_) {
       _loadError = true;
@@ -1019,8 +1026,11 @@
     if (/(arei|aras|ara|aremos|areis|arao|erei|eras|era|eremos|ereis|erao|irei|iras|ira|iremos|ireis|irao)$/.test(normalized))
       return "Verbo flexionado";
 
-    // 19. Subjuntivo presente — resolvido via contexto em inferWordClassContextual
-    // (desinências -e/-a são ambíguas sem vizinhos — omite-se aqui)
+    // 19. Presente do indicativo (3ª pessoa) — norma-data.json verbos_pres_reg
+    // Cobre formas como "escreve/fala/canta" que as desinências -e/-a não distinguem sem contexto
+    if (_VERBOS_PRES_SET && _VERBOS_PRES_SET.has(normalized)) return "Verbo flexionado";
+    // 19b. Formas irregulares (foi/fez/veio…) não capturadas por sufixos acima
+    if (_FORMAS_IRR_SET && _FORMAS_IRR_SET.has(normalized)) return "Verbo flexionado";
 
     // 20. Infinitivo — VERB-INF-PESS-01
     // -ar/-er/-ir: sufixos canônicos do infinitivo (Bechara MGP §conjugação)
@@ -1425,20 +1435,27 @@
     const idx      = tokens.findIndex(t => normalizeWord(t) === norm);
     if (idx === -1) return "";
 
+    // Normalizar className: entradas do lexicon local podem ter classe semântica (lex-*/narrativa/…)
+    // em vez de classe gramatical; nesse caso, usar morfologia para inferir a classe real
+    const _GRAM_PFX = ["Substantivo","Verbo","Adjetivo","Advérbio","Conjunção","Preposição","Pronome","Artigo","Interjeição","Numeral"];
+    const effectiveClass = _GRAM_PFX.some(p => className.startsWith(p))
+      ? className
+      : inferWordClass(norm, word);
+
     // Classes com função fixa
-    if (className.startsWith("Verbo") && !className.includes("particípio") && !className.includes("gerúndio"))
+    if (effectiveClass.startsWith("Verbo") && !effectiveClass.includes("particípio") && !effectiveClass.includes("gerúndio"))
       return "Predicado";
-    if (className === "Verbo (gerúndio)") return "Adjunto adverbial de modo";
-    if (className.startsWith("Conjunção")) return "Conectivo";
-    if (className.startsWith("Advérbio"))  return "Adjunto adverbial";
-    if (["Preposição","Preposição/Artigo"].includes(className)) return "Elemento prepositivo";
-    if (className === "Artigo") return "Determinante";
-    if (className.includes("Interjeição")) return "Vocativo / Expressão";
-    if (className.includes("Pronome relativo")) return "Conector de oração relativa";
-    if (className.includes("Pronome interrogativo")) return "Introdutor de pergunta";
+    if (effectiveClass === "Verbo (gerúndio)") return "Adjunto adverbial de modo";
+    if (effectiveClass.startsWith("Conjunção")) return "Conectivo";
+    if (effectiveClass.startsWith("Advérbio"))  return "Adjunto adverbial";
+    if (["Preposição","Preposição/Artigo"].includes(effectiveClass)) return "Elemento prepositivo";
+    if (effectiveClass === "Artigo") return "Determinante";
+    if (effectiveClass.includes("Interjeição")) return "Vocativo / Expressão";
+    if (effectiveClass.includes("Pronome relativo")) return "Conector de oração relativa";
+    if (effectiveClass.includes("Pronome interrogativo")) return "Introdutor de pergunta";
 
     // Adjetivo / particípio — predicativo vs adnominal
-    if (className.startsWith("Adjetivo") || className === "Verbo (particípio)") {
+    if (effectiveClass.startsWith("Adjetivo") || effectiveClass === "Verbo (particípio)") {
       const prevNorm = idx > 0 ? normalizeWord(tokens[idx-1]) : null;
       const _COP = new Set(["estava","estou","esta","era","e","sou","sao","foi","fica","ficou","parecia","parece"]);
       if (prevNorm && _COP.has(prevNorm)) return "Predicativo do sujeito";
@@ -1479,8 +1496,9 @@
       // 1. Irregular finitas de alta frequência (cobre "foi","era","leu","deu"…)
       if (_VBF.has(n)) { verbIdx = i; break; }
       if (i === 0) {
-        // Posição inicial: só sufixos seguros — evita "Maria" → imperfeito "-ia"
+        // Posição inicial: sufixos seguros + lista de presentes (sem colisão com prenomes — verificado)
         if (_PERF_SFX.test(n)) { verbIdx = 0; break; }
+        if (_VERBOS_PRES_SET && _VERBOS_PRES_SET.has(n)) { verbIdx = 0; break; }
         continue;
       }
       // Posições > 0: morfologia contextual com original capitalizado
@@ -1501,8 +1519,8 @@
     const inPrepPhrase = (prevNorm && PURE_PREPS.has(prevNorm))
                       || (prevNorm && _ARTS_PT.has(prevNorm) && prevPrev && PURE_PREPS.has(prevPrev));
 
-    if (className.startsWith("Substantivo") || className.includes("Pronome pessoal") ||
-        className.includes("Pronome demonstrativo") || className.includes("Pronome indefinido")) {
+    if (effectiveClass.startsWith("Substantivo") || effectiveClass.includes("Pronome pessoal") ||
+        effectiveClass.includes("Pronome demonstrativo") || effectiveClass.includes("Pronome indefinido")) {
       if (idx < verbIdx) return inPrepPhrase ? "Adjunto adnominal" : "Sujeito";
       if (idx > verbIdx) {
         // Prep phrase é determinante: nunca é sujeito posposto
