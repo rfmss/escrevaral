@@ -1752,6 +1752,17 @@
     "nobre":         ["elevado de caráter", "generoso", "que age com dignidade", "de alma larga", "austero no bom sentido"],
     "compassivo":    ["que sente pelo outro", "compreensivo", "cheio de compaixão", "que não julga a dor alheia", "solidário"],
     "indiferente":   ["alheio", "que não se move", "frio diante do que acontece", "desinteressado", "neutro ao extremo"],
+
+    // Substantivos de estado interno e cenário — v869
+    "vacilacao":     ["hesitação", "oscilação", "incerteza antes da decisão", "titubeo", "não saber para onde ir"],
+    "conformismo":   ["resignação passiva", "aceitação sem luta", "que não questiona mais", "acomodação", "paz que cansa"],
+    "persistencia":  ["teimosia com propósito", "determinação que não cede", "resistência ao tempo", "insistência fértil"],
+    "entardecer":    ["fim da tarde", "crepúsculo que começa", "hora da luz dourada", "declínio do dia", "entre o dia e a noite"],
+    "nevoa":         ["neblina", "bruma", "vapor que encobre", "cerração", "nuvem baixa que apaga os contornos"],
+    "clarao":        ["lampejo de luz", "claridade súbita", "feixe de luz no escuro", "resplendor", "fulgor passageiro"],
+    "lampejo":       ["clarão breve", "instante de luz", "raio de consciência", "faísca de ideia", "momento que ilumina"],
+    "paralisia":     ["imobilidade forçada", "paralisação", "incapacidade de agir", "travamento", "ficou pregado no lugar"],
+    "silencio criativo": ["seco criativo", "vácuo de ideias", "pausa forçada na criação", "impossibilidade de escrever"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
