@@ -1740,6 +1740,32 @@
     "descricao":    "Modalidade de texto que apresenta um objeto, lugar, pessoa ou estado. Na ficção, a descrição não é pausa — é revelação: o que se descreve diz o que importa ao narrador.",
     "dissertacao":  "Texto que desenvolve uma argumentação em torno de uma tese. Estrutura clássica: tese, argumentos, conclusão. Na escrita literária, a dissertação aparece disfarçada — no ensaio, na crônica de opinião.",
     "ensaio":       "Texto que pensa em voz alta, sem conclusão definitiva. Montaigne inventou; no Brasil, Sérgio Buarque de Holanda, Darcy Ribeiro, Silviano Santiago o praticam. O ensaio é o único gênero que se permite errar.",
+
+    // Técnicas narrativas e craft — v833
+    "inmedias":     "In media res: técnica de começar a narrativa no meio da ação, sem prólogo. O leitor é lançado dentro do mundo já em movimento. Uma das entradas mais eficazes para ficção.",
+    "flashback":    "Retorno ao passado dentro da narrativa. Pode ser cena completa ou fragmento de memória. Risco: interromper o ritmo; benefício: criar profundidade temporal e emocional.",
+    "flashforward": "Salto ao futuro dentro da narrativa — personagem ou narrador antecipa o que virá. Cria expectativa, ironia ou senso de inevitabilidade. Menos comum que o flashback, mais arriscado.",
+    "prolepse":     "Antevisão de eventos futuros dentro da narrativa — o equivalente literário do flashforward. Gera suspense ou ironia trágica: 'Naquela noite foi a última vez que a viu.'",
+    "analepse":     "Retorno narrativo ao passado — o equivalente literário do flashback. Pode ser completa (cena em tempo real) ou sumária (resumo do que aconteceu antes).",
+    "cronotopo":    "Conceito de Bakhtin: a interconexão entre tempo e espaço na narrativa. O tempo de uma narrativa não existe sem o espaço — e vice-versa. A estrada, o salão, a fronteira são cronotopos.",
+    "incipit":      "As primeiras palavras de uma obra — o começo que define o tom, o ritmo e o pacto com o leitor. 'Chama-me Ishmael.' (Melville). Um bom incipit é um contrato: aqui começa o mundo.",
+    "desfecho":     "A resolução ou a conclusão da narrativa — o que acontece depois do clímax. Pode ser fechado (tudo resolvido) ou aberto (ambíguo). Desfechos abertos exigem que o texto os justifique.",
+    "nos":          "Em dramatologia, o nó da ação: o ponto de máximo entrelaçamento do conflito, antes da resolução. Também chamado de 'complicação'. O escritor precisa saber onde o nó está antes de desatá-lo.",
+    "conflito":     "A tensão central que move a narrativa — entre personagem e personagem, personagem e mundo, personagem e si mesmo. Sem conflito, não há história. A escolha do tipo de conflito define o gênero.",
+    "enredo":       "A sequência organizada de eventos de uma narrativa. Diferente de 'história' (tudo que aconteceu): o enredo é o que o texto escolhe mostrar, na ordem em que escolhe mostrar.",
+
+    // Técnicas poéticas — v833
+    "ode":          "Poema lírico de extensão variável, de tom elevado, dedicado a uma pessoa, ideia ou objeto. No Brasil, a ode ganhou tons irônicos em Drummond: a ode ao bonde, à pedra, à vida.",
+    "elegia":       "Poema de lamento — pela morte, pela perda, pelo fim de algo. Tom de saudade e tristeza contida. A elegia pede rigor: exagero vira lamento; contenção vira beleza.",
+    "balada":       "Forma poética narrativa, com refrão — vinda da tradição oral. No Brasil, confunde-se com a canção. A balada conta uma história enquanto soa.",
+    "ode2":         "Ode, elegia e balada são formas canônicas da tradição lírica ocidental, mas no Brasil foram retrabalhadas com ironia, coloquialidade e sotaque local.",
+    "haiku":        "Forma poética japonesa de 17 sílabas — 5-7-5. Busca o instante, a imagem, o silêncio ao redor. No Brasil, o haiku ganhou espaço na Semana de Arte Moderna e nas práticas de escrita contemporânea.",
+
+    // Figuras de som — v833
+    "assonancia":   "Repetição de sons vocálicos semelhantes em palavras próximas. 'Amor sabe o amor.' A assonância cria música sem rima — é o tecido sonoro da prosa poética.",
+    "consonancia":  "Repetição de sons consonantais em palavras próximas — diferente da aliteração (início) e da assonância (vogais). Cria coesão sonora discreta.",
+    "paronomasia":  "Aproximação de palavras sonoramente parecidas mas de sentido diferente. 'Viver e escrever são quase o mesmo sofrimento.' Jogo fonético que carrega significado.",
+    "onomatopeia":  "Palavra que imita o som de algo. 'Tic-tac', 'toc-toc', 'zum'. Na literatura brasileira, a onomatopeia é recurso oral poderoso — especialmente no cordel e na poesia concreta.",
   };
 
   function inferDefinicao(word, className) {
