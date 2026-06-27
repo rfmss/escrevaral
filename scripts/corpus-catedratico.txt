@@ -505,3 +505,58 @@ FRASE: Se ela viesse, tudo seria diferente.
 TESTA: Sintaxe — subjuntivo imperfeito + futuro do pretérito (período hipotético)
 GABARITO: "viesse" = Verbo Subjuntivo Imperfeito; "seria" = Futuro do Pretérito
 ZONA: tempo-verbal
+
+---
+
+## ZONA 19 — Desambiguação contextual (POLISSEMIA)
+## Risco: engine cravar certeza onde a língua permite mais de uma leitura
+
+FRASE: A tarde caiu sobre o vale como neblina.
+TESTA: Léxico — "tarde" como Substantivo (precedida de artigo)
+GABARITO: "tarde" = Substantivo; decisao: provável (POLISSEMIA resolvida por contexto)
+ZONA: polissemia
+
+FRASE: Ela chegou tarde e encontrou a casa fechada.
+TESTA: Léxico — "tarde" como Advérbio (após verbo de movimento)
+GABARITO: "tarde" = Advérbio; decisao: provável (POLISSEMIA resolvida por contexto)
+ZONA: polissemia
+
+FRASE: Ficou claro que ele não voltaria.
+TESTA: Léxico — "claro" como Adjetivo predicativo (após cópula "ficou")
+GABARITO: "claro" = Adjetivo; decisao: provável
+ZONA: polissemia
+
+FRASE: Ele falou claro e sem rodeios.
+TESTA: Léxico — "claro" como Advérbio (após verbo de ação)
+GABARITO: "claro" = Advérbio; decisao: provável
+ZONA: polissemia
+
+FRASE: No fundo, ela sabia que teria de ceder.
+TESTA: Léxico — "fundo" como Substantivo (após preposição "no")
+GABARITO: "fundo" = Substantivo; decisao: provável
+ZONA: polissemia
+
+FRASE: A voz funda dela ecoava pelo corredor.
+TESTA: Léxico — "funda" como Adjetivo (modificando substantivo)
+GABARITO: "funda" = Adjetivo; decisao: provável
+ZONA: polissemia
+
+FRASE: O livro estava posto sobre a mesa desde ontem.
+TESTA: Léxico — "posto" como Verbo (particípio) após auxiliar "estava"
+GABARITO: "posto" = Verbo (particípio); decisao: provável
+ZONA: polissemia
+
+FRASE: Ele ficou posto diante da porta sem saber o que fazer.
+TESTA: Léxico — "posto" como Adjetivo predicativo após cópula "ficou"
+GABARITO: "posto" = Adjetivo; decisao: provável
+ZONA: polissemia
+
+FRASE: A seca castigou o sertão por três anos seguidos.
+TESTA: Léxico — "seca" como Substantivo (precedida de artigo)
+GABARITO: "seca" = Substantivo feminino ou adjetivo; decisao: ambíguo (className com "ou")
+ZONA: polissemia
+
+FRASE: A escritora sabia onde estava. Era indeterminado para o motor.
+TESTA: Léxico — palavra desconhecida sem contexto → indeterminado
+GABARITO: decisao: indeterminado para palavras fora do lexicon sem contexto suficiente
+ZONA: polissemia
