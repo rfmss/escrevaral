@@ -1103,6 +1103,10 @@
     // 21. Adjetivos por sufixos — Cunha&Cintra cap.5
     if (/(oso|osa|vel|veis|ivo|iva|ico|ica|ino|ina)$/.test(normalized)
         && normalized.length > 4) return "Adjetivo";
+    // 21b. Adjetivos comuns sem sufixo canônico — set estendido
+    if (_ADJ_EXT.has(normalized)) return "Adjetivo";
+    // 21c. Advérbios de lugar/posição — set estendido (não capturados por functionWords)
+    if (_ADV_EXT.has(normalized)) return "Advérbio";
 
     // 22. Sufixos nominalizadores seguros — Bechara MGP §derivação sufixal
     // -ção/-são/-ssão: substantivos deverbais e deadjetivais
@@ -1159,6 +1163,51 @@
     "cem","cento","duzentos","duzentas","trezentos","trezentas","quatrocentos","quatrocentas",
     "quinhentos","quinhentas","seiscentos","seiscentas","setecentos","setecentas",
     "oitocentos","oitocentas","novecentos","novecentas","mil","milhao","bilhao"
+  ]);
+
+  // Adjetivos comuns sem sufixo canônico — ADJ-EXT-01
+  // Verificado: nenhuma forma colide com verbos_pres_reg ou formas de -ia/-ava/-era
+  const _ADJ_EXT = new Set([
+    // Adjetivos terminados em -az/-iz: não cobertos por rule 21
+    "capaz","capazes","incapaz","incapazes","eficaz","eficazes","sagaz","sagaze","perspicaz",
+    "feliz","felizes","infeliz","infelizes","audaz","audazes","voraz","vorazes","tenaz","tenaces",
+    // Adjetivos terminados em -il: não cobertos por rule 21
+    "fragil","frageis","util","uteis","habil","habeis","sutil","sutis","civil","civis",
+    "facil","faceis","dificil","dificeis","agil","ageis","fertil","ferteis",
+    // Adjetivos terminados em -orme
+    "enorme","enormes","uniforme","uniformes","conforme","conformes","disforme","disformes",
+    // Adjetivos comuns de qualidade
+    "fraco","fraca","fracos","fracas","forte","fortes",
+    "livre","livres","pobre","pobres","nobre","nobres",
+    "simples","duplo","dupla","duplos","duplas",
+    "breve","breves","leve","leves","grave","graves",
+    "suave","suaves","firme","firmes","triste","tristes","alegre","alegres",
+    "jovem","jovens","velho","velha","velhos","velhas",
+    "cheio","cheia","cheios","cheias","vazio","vazia","vazios","vazias",
+    "certo","certa","certos","certas","errado","errada","errados","erradas",
+    "justo","justa","justos","justas","injusto","injusta",
+    "lindo","linda","lindos","lindas","feio","feia","feios","feias",
+    "rico","rica","ricos","ricas","humilde","humildes",
+    "quieto","quieta","quietos","quietas","raro","rara","raros","raras",
+    "largo","larga","largos","largas","estreito","estreita",
+    "antigo","antiga","antigos","antigas","moderno","moderna",
+    "curto","curta","curtos","curtas",
+    "fundo","funda","fundos","fundas","raso","rasa","rasos","rasa",
+    "claro","clara","claros","claras","escuro","escura","escuros","escuras",
+    "pesado","pesada","leve","leves","duro","dura","duros","duras","mole","moles",
+    "limpo","limpa","limpos","limpas","sujo","suja","sujos","sujas"
+  ]);
+
+  // Advérbios de posição/lugar não presentes em functionWords.adverbios — ADV-EXT-01
+  const _ADV_EXT = new Set([
+    "embaixo","encima","atras","adiante","alem","aquem",
+    "jah","eis","cedo","tarde","depressa","devagar","juntos","sozinho","sozinha",
+    "repentinamente","subitamente","imediatamente","anteriormente","posteriormente",
+    "brevemente","finalmente","certamente","provavelmente","possivelmente",
+    "novamente","recentemente","atualmente","frequentemente","raramente",
+    "facilmente","dificilmente","rapidamente","lentamente","fortemente",
+    "claramente","profundamente","completamente","simplesmente",
+    "simplesmente","especialmente","principalmente","geralmente"
   ]);
 
   // Comparativos irregulares — ADJ-COMP-01 (Bechara MGP §graus do adjetivo)
