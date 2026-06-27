@@ -1123,6 +1123,21 @@
     // 11. Particípios irregulares — VERB-PART-02 (prioridade sobre sufixos)
     if (PARTICIPIOS_IRR.has(normalized)) return "Verbo (particípio)";
 
+    // 11b. Adjetivos em -ido/-ida que NÃO são particípios — ADJ-IDO-01
+    // Estes terminam em -ido mas são adjetivos de qualidade, não formas verbais
+    const _ADJ_IDO = new Set([
+      "arido","arida","aridos","aridas","umido","umida","umidos","umidas",
+      "solido","solida","solidos","solidas","liquido","liquida","liquidos","liquidas",
+      "rigido","rigida","rigidos","rigidas","palido","palida","palidos","palidas",
+      "valido","valida","validos","validas","invalido","invalida","invalidos","invalidas",
+      "lucido","lucida","lucidos","lucidas","frigido","frigida","livido","livida",
+      "timido","timida","timidos","timidas","nitido","nitida","nitidos","nitidas",
+      "gelido","gelida","gelidos","gelidas","candido","candida","candidos","candidas",
+      "placido","placida","hispido","hispida","rancido","rancida","rancidos","rancidas",
+      "fluido","fluida","fluidos","fluidas","perfido","perfida","insipido","insipida"
+    ]);
+    if (_ADJ_IDO.has(normalized)) return "Adjetivo";
+
     // 12. Particípios regulares — VERB-PART-01
     if (/(ado|ada|ados|adas|ido|ida|idos|idas)$/.test(normalized) && normalized.length >= 4
         && !/^(cada|fiada|morada|parada|jornada|armada|fachada|estrada)$/.test(normalized))
