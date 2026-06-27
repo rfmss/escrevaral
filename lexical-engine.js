@@ -538,8 +538,11 @@
 
     "visto": (prev, next) => {
       // Após auxiliar de voz passiva / perfeito composto → Verbo (particípio)
-      const AUX = new Set(["havia","tinha","teria","tenho","tem","temos","tinham","foram","foi","era","sendo","tendo","haviamos","tinhamos","fosse","sera","sido","ser","ter"]);
+      const AUX = new Set(["havia","tinha","teria","tenho","tem","temos","tinham","foram","foi","sendo","tendo","haviamos","tinhamos","fosse","sera","sido","ser","ter"]);
       if (prev && AUX.has(prev)) return "Verbo (particípio)";
+      // Após cópula predicativa → Adjetivo ("estava visto", "ficou visto")
+      const COPULAS_V = new Set(["estava","ficou","fica","esta","e","era","eram","pareceu","parecia","continua"]);
+      if (prev && COPULAS_V.has(prev)) return "Adjetivo";
       // Após artigo/contração/determinante → Substantivo (documento de viagem)
       const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","nos","nas","ao","meu","seu","nosso","teu","este","esse","aquele","neste","nesse","naquele"]);
       if (prev && ART.has(prev)) return "Substantivo";
@@ -550,8 +553,11 @@
       // "posto que" → Conjunção causal/concessiva
       if (next && normalizeWord(next) === "que") return "Conjunção";
       // Após auxiliar de voz passiva → Verbo (particípio)
-      const AUX = new Set(["foi","sera","era","fora","fosse","sendo","sido","foram","ser","ter","tendo"]);
+      const AUX = new Set(["foi","sera","fora","fosse","sendo","sido","foram","ser","ter","tendo"]);
       if (prev && AUX.has(prev)) return "Verbo (particípio)";
+      // Após cópula predicativa → Adjetivo ("ficou posto", "estava posto", "é posto")
+      const COPULAS_P = new Set(["ficou","fica","ficava","estava","esta","e","era","eram","pareceu","parecia"]);
+      if (prev && COPULAS_P.has(prev)) return "Adjetivo";
       // Após artigo/contração/determinante → Substantivo (local físico ou cargo)
       const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","nos","nas","num","numa","ao","aos","meu","seu","nosso","teu","este","esse","aquele","neste","nesse","naquele","nesta","nessa","naquela","cada","qualquer"]);
       if (prev && ART.has(prev)) return "Substantivo";
@@ -1050,8 +1056,8 @@
     const _baseVerb = _isCliticizado ? _parts[0] : null;
     const lexiconEntry = localLexicon[normalized];
     // Usar classificação contextual quando há texto disponível
-    // POLISSEMIA vence lexiconEntry quando há texto — permite que "tarde" seja Advérbio em "Chegou tarde."
-    const _polisOverride = text && POLISSEMIA[normalized];
+    // POLISSEMIA ou particípio em lexiconEntry vence lexiconEntry bruto quando há texto disponível
+    const _polisOverride = text && (POLISSEMIA[normalized] || lexiconEntry?.className?.startsWith("Verbo (particípio)"));
     const className = (!_polisOverride && lexiconEntry?.className)
       || (_isCliticizado ? (VERBOS_ACENTUADOS.has(_baseVerb) ? VERBOS_ACENTUADOS.get(_baseVerb)
           : /^.+(ar|er|ir|or)$/.test(normalizeWord(_baseVerb)) ? "Verbo no infinitivo" : "Verbo flexionado")
@@ -1352,7 +1358,36 @@
     "arrogante","arrogantes","humildes","paciente","pacientes","impaciente","impacientes",
     "elegante","elegantes","grosseiro","grosseira","grosseiros","grosseiras",
     "corajoso","corajosa","corajosos","corajosas","cauteloso","cautelosa",
-    "temeroso","temerosa","audacioso","audaciosa","audaciosos","audaciosas"
+    "temeroso","temerosa","audacioso","audaciosa","audaciosos","audaciosas",
+    // Particípios irregulares usados como adjetivos — ADJ-PART-IRR-01
+    "satisfeito","satisfeita","satisfeitos","satisfeitas",
+    "confuso","confusa","confusos","confusas",
+    "incluso","inclusa","inclusos","inclusas","excluso","exclusa",
+    "difuso","difusa","difusos","difusas","infuso","infusa",
+    "corrupto","corrupta","corruptos","corruptas",
+    "aceso","acesa","acesos","acesas",
+    "preso","presa","presos","presas",
+    "solto","solta","soltos","soltas",
+    "morto","morta","mortos","mortas",
+    "posto","posta","postos","postas",
+    "feito","feita","feitos","feitas",
+    "visto","vista","vistos","vistas",
+    "vindo","vinda","vindos","vindas",
+    "perdido","perdida","perdidos","perdidas",
+    "escondido","escondida","escondidos","escondidas",
+    // Adjetivos em -eto/-eta (não cobertos por rule 21)
+    "quieto","quieta","quietos","quietas","inquieto","inquieta",
+    "concreto","concreta","concretos","concretas","abstrato","abstrata",
+    "discreto","discreta","discretos","discretas","indiscreto","indiscreta",
+    "completo","completa","completos","completas","incompleto","incompleta",
+    "secreto","secreta","secretos","secretas",
+    // Adjetivos em -undo/-unda
+    "iracundo","iracunda","fecundo","fecunda","rubicundo","rubicunda",
+    "moribundo","moribunda","errabundo","errabunda",
+    // Adjetivos de cor e aparência física
+    "rubio","rubia","loiro","loira","loiros","loiras",
+    "moreno","morena","morenos","morenas","bronzeado","bronzeada",
+    "palido","palida","palidos","palidas","roseo","rosea"
   ]);
 
   // Advérbios de posição/lugar não presentes em functionWords.adverbios — ADV-EXT-01
