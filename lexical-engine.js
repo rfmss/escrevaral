@@ -1023,7 +1023,11 @@
     // (desinências -e/-a são ambíguas sem vizinhos — omite-se aqui)
 
     // 20. Infinitivo — VERB-INF-PESS-01
-    if (/^.+(ar|er|ir|or)$/.test(normalized) && normalized.length > 3) return "Verbo no infinitivo";
+    // -ar/-er/-ir: sufixos canônicos do infinitivo (Bechara MGP §conjugação)
+    if (/^.+(ar|er|ir)$/.test(normalized) && normalized.length > 3) return "Verbo no infinitivo";
+    // -por: compostos de "pôr" — compor/dispor/expor/impor/opor/propor/repor/transpor
+    // Substantivos agentivos em -or (escritor/autor/diretor/ator…) são Substantivo — ver regra 22
+    if (/por$/.test(normalized) && normalized.length > 4) return "Verbo no infinitivo";
 
     // 21. Adjetivos por sufixos — Cunha&Cintra cap.5
     if (/(oso|osa|vel|veis|ivo|iva|ico|ica|ino|ina)$/.test(normalized)
@@ -1303,6 +1307,90 @@
     "cerne":        "Substantivo: 'parte central', 'núcleo', 'essência'. 'O cerne da questão' = 'o ponto central'. Mais preciso que 'centro' em sentido figurado.",
     "vertente":     "Substantivo: 1. lado de uma montanha (geografia). 2. corrente, tendência de um movimento ('vertente romântica'). 3. aspecto, ângulo ('vertente emocional').",
     "arco":         "Substantivo: 1. forma curva. 2. Na narrativa, 'arco do personagem' = a transformação que ele sofre ao longo da história. Conceito central de estrutura narrativa.",
+    // FIGURAS DE LINGUAGEM
+    "metafora":     "Figura de comparação implícita: atribui a um elemento as qualidades de outro sem usar 'como'. 'Sua voz era seda' ≠ 'Sua voz era como seda' (símile). Bechara: a metáfora é a figura central de toda criação literária.",
+    "hiperbole":    "Figura de exagero: amplifica ou diminui além do real para dar intensidade. 'Já te disse mil vezes.' Usada com medida, gera força; usada com excesso, perde credibilidade.",
+    "metonimia":    "Substituição de uma palavra por outra com relação de contiguidade: o autor pela obra ('Leio Machado'), o todo pela parte, a causa pelo efeito. Diferente da metáfora, que é por semelhança.",
+    "simile":       "Comparação explícita usando 'como', 'tal como', 'assim como'. 'Sua voz era como seda.' Mais didática que a metáfora; a distância entre os termos cria a potência da imagem.",
+    "ironia":       "Dizer o contrário do que se quer comunicar, esperando que o leitor perceba a divergência. Exige conivência; sem ela, vira confusão ou ofensa. Difere do sarcasmo por ser mais sutil.",
+    "sarcasmo":     "Ironia mais agressiva, com intenção de ferir ou desmoralizar. O tom é mais explícito que na ironia; o alvo é claramente apontado. Em ficção, revela o personagem mais do que a situação.",
+    "paradoxo":     "Afirmação aparentemente contraditória que contém uma verdade profunda. 'O silêncio gritou.' 'Quanto mais aprendo, menos sei.' Força o leitor a reconciliar dois polos opostos.",
+    "antitese":     "Aproximação de ideias contrárias em estrutura paralela. 'Amei e odiei; construí e destruí.' Cria contraste e tensão sem a aparente contradição do paradoxo.",
+    "oximoro":      "Fusão de dois termos contraditórios em uma só expressão: 'alegria triste', 'claridade negra', 'silêncio ensurdecedor'. Vai além da antítese — os termos coexistem, não se opõem.",
+    "sinestesia":   "Mistura de sentidos: descrever uma sensação com linguagem de outro sentido. 'Grito azul', 'cheiro doce do medo', 'silêncio quente'. Usada com intenção, cria imagens densas e originais.",
+    "aliteracao":   "Repetição de sons consonantais para criar efeito sonoro ou rítmico. 'Pedro pedreiro penseiro.' Em poesia, é recurso de musicalidade; em prosa, pode criar atmosfera ou oralidade.",
+    "onomatopeia":  "Palavra que imita o som da coisa que designa: 'sussurro', 'murmúrio', 'fragor', 'tic-tac'. Na prosa, podem criar presença sensorial; em excesso, parecem artificiosas.",
+    "prosopopeia":  "Atribuição de qualidades humanas a seres inanimados, abstratos ou não humanos. 'O mar reclamou.' 'O tempo engoliu tudo.' Também chamada personificação. Bechara: a mais comum das figuras de pensamento.",
+    "hiperbato":    "Inversão da ordem direta dos termos da oração para ênfase ou efeito sonoro. 'Da vida no mais escuro fundo' em vez de 'No fundo mais escuro da vida'. Recurso poético clássico.",
+    "gradacao":     "Sequência de termos em intensidade crescente ou decrescente. 'Um suspiro, uma lágrima, um soluço, um grito.' Cria ritmo acumulativo e direciona a emoção do leitor.",
+    "eufemismo":    "Substituição de palavra ou ideia desagradável por outra mais suave. 'Passou dessa para melhor.' 'Terceira idade.' Cuidado: o excesso de eufemismo apaga a realidade — escolha com consciência.",
+    // NARRATIVA
+    "narrador":     "Instância que conta a história; não confundir com o autor. Homodiegético: narrador dentro da história (1ª pessoa). Heterodiegético: narrador fora da história (3ª pessoa). A voz do narrador define o tom de tudo.",
+    "personagem":   "Ser de ficção que habita o mundo da história. Protagonista: conduz a ação. Antagonista: opõe-se. Personagem plana: uma dimensão. Personagem redonda (E. M. Forster): múltipla, surpreende.",
+    "protagonista": "Personagem principal que conduz a ação da narrativa. Não é necessariamente herói — pode ser antero, neutro, antipatético. Sua trajetória define o arco da obra.",
+    "antagonista":  "Força ou personagem que se opõe ao protagonista. Não precisa ser malvado: pode ser uma ideia, o ambiente, o próprio protagonista (conflito interno). Quanto mais complex, mais viva a narrativa.",
+    "enredo":       "Sequência de eventos da narrativa, com relação de causa e efeito. Diferente da história (o que aconteceu) e do discurso (como se conta). Um bom enredo convence que os eventos não poderiam ser de outra forma.",
+    "trama":        "Estrutura profunda de relações e tensões que sustenta a narrativa. A 'trama' é mais ampla que o 'enredo': inclui motivações, segredos, subplots. Um enredo pobre pode ter trama rica.",
+    "cena":         "Unidade dramática da narrativa: momento mostrado em tempo real, com ação, diálogo e presença física. Oposto de 'sumário' (resumo do tempo passado). A cena é onde o leitor vive, não lê.",
+    "climax":       "Ponto de maior tensão ou intensidade da narrativa; o momento em que o conflito central atinge seu ápice. Após o clímax, começa a resolução. Em narrativas não lineares, pode estar deslocado.",
+    "desfecho":     "Resolução final da narrativa após o clímax; o estado das coisas ao final. Não precisa ser 'feliz' nem 'explicativo' — um bom desfecho é inevitável e ainda assim surpreendente.",
+    "conflito":     "Tensão entre forças opostas que move a narrativa: homem vs. homem, homem vs. natureza, homem vs. sociedade, homem vs. si mesmo. Sem conflito, não há história — apenas registro.",
+    "ponto":        "Em 'ponto de vista': posição do narrador ou da câmera narrativa; de onde e como a história é percebida. Define o que o leitor sabe, quando sabe e em que medida confia.",
+    "voz":          "Em narrativa: a personalidade que emerge da escrita — o ritmo, a seleção de palavras, o que se diz e o que se omite. A voz é o que faz dois textos sobre o mesmo assunto parecerem mundos diferentes.",
+    "ritmo":        "Padrão de velocidade, variação e ênfase ao longo do texto. Controlado por extensão das frases, pontuação, escolha de palavras, alternância de cenas e sumários. O ritmo é a respiração da prosa.",
+    "cadencia":     "Em prosa: o movimento musical das frases — como os sons e pausas se sucedem. Em poesia: o padrão de sílabas e acentos. Uma cadência bem trabalhada é sentida antes de ser analisada.",
+    "dialogo":      "Reprodução da fala entre personagens. Em ficção, o diálogo precisa fazer mais de uma coisa ao mesmo tempo: revelar personagem, avançar conflito, fornecer informação — nunca só conversa.",
+    "rascunho":     "Versão inicial de um texto, não destinada a leitores. O rascunho é o espaço de liberdade — onde se pode errar e descobrir. A diferença entre escritores e não-escritores está na disposição de reescrever.",
+    "revisao":      "Processo de releitura crítica e reescrita do texto. Diferente de correção (erros formais): a revisão questiona estrutura, ritmo, necessidade de cada palavra. Boa revisão é nova escritura.",
+    "estilo":       "Conjunto de escolhas que tornam um texto reconhecível como de determinado autor: sintaxe, vocabulário, ritmo, imagens recorrentes. O estilo não se aprende — se descobre pela prática intensa.",
+    // CULTURA BRASILEIRA
+    "sertao":       "Região do interior árido do Nordeste e de partes do Centro-Oeste brasileiro; mas também símbolo literário de isolamento, resistência e identidade. Em Guimarães Rosa, o sertão é o mundo e a alma humana.",
+    "quilombo":     "Originalmente: comunidade de pessoas escravizadas que fugiam e se organizavam em resistência. Hoje: também símbolo de resistência cultural afro-brasileira. Quilombo dos Palmares = maior da história.",
+    "cerrado":      "Savana tropical do Brasil Central; bioma de grande biodiversidade e rico repertório cultural indígena e sertanejo. Na ficção, espaço de resistência silenciosa e beleza não-óbvia.",
+    "caatinga":     "Bioma semiárido do Nordeste, com vegetação adaptada à seca. 'Caatinga' vem do tupi: 'mata branca'. Espaço literário de escassez, determinação e delicadeza no adverso.",
+    "favela":       "Assentamento urbano de baixa renda, especialmente no Rio de Janeiro e São Paulo. Espaço de grande produção cultural; evite tratar como sinônimo de violência ou pobreza apenas — é comunidade.",
+    "cordel":       "Literatura de cordel: gênero popular brasileiro em versos rimados e metrificados, originário do Nordeste. Temas: heróis, batalhas, fé, humor, política. Formato impresso em folhetos pendurados em cordas.",
+    "saudosismo":   "Tendência a idealizar o passado com afeto e melancolia. No Brasil, por vezes associado ao pessimismo cultural ('o Brasil foi melhor'); na literatura, pode ser recurso criativo ou vício de perspectiva.",
+    "mangue":       "Ecossistema costeiro de transição entre mar e terra; berçário de biodiversidade. No Manguebeat (Recife, anos 90): símbolo de resistência cultural e miscigenação sonora.",
+    "pampa":        "Planície gaúcha do Sul do Brasil; paisagem de campo aberto, gado, gauchismo. Na ficção, espaço de honra, liberdade e solidão. 'Pampa' vem do quéchua: 'planície'.",
+    "varzea":       "Terra periodicamente alagada às margens de rios na Amazônia. Símbolo de fertilidade e de tempo lento; espaço de literatura ribeirinha e indígena amazônica.",
+    // EMOÇÃO / CORPO / SENSAÇÃO
+    "melancolia":   "Estado de tristeza difusa, profunda e prolongada, sem causa imediata identificável. Mais rica que 'tristeza': implica reflexão, memória, uma qualidade contemplativa. Humour negro dos antigos.",
+    "nostalgia":    "Sentimento de afeto doloroso pelo passado — por um tempo, lugar ou pessoa que não existe mais. Do grego nóstos (retorno) + álgos (dor). Em narrativa, é sempre seletiva: o que lembramos diz mais que o passado real.",
+    "euforia":      "Estado de exaltação e bem-estar intenso; pode ser real, artificial ou maníaco. Em personagens, desconfie da euforia — ela raramente sustenta. Como recurso narrativo, a euforia prepara a queda.",
+    "angustia":     "Ansiedade profunda sem objeto definido; sensação de ameaça iminente sem nome. Diferente do medo (tem objeto) e da tristeza (olha ao passado) — a angústia é presente e difusa.",
+    "vertigem":     "Sensação de instabilidade, de que o chão gira ou falta. Literal e metafórica. Em prosa, pode descrever tanto o estado físico quanto o impacto de uma revelação, uma decisão impossível.",
+    "arrepio":      "Contração involuntária da pele, com pelos eriçados; resposta ao frio, ao medo ou à beleza intensa. Palavra corporal e precisa; mais viva que 'calafrio' em cenas de susto ou emoção estética.",
+    "calafrio":     "Tremor do corpo por frio ou por medo intenso. Diferente de 'arrepio' por ser mais profundo — envolve o corpo inteiro. Em ficção, indica limiar entre o mundo comum e o ameaçador.",
+    "tremor":       "Agitação involuntária do corpo; sinal de medo, frio, emoção intensa ou doença. Em cenas de tensão, o tremor localiza fisicamente a emoção abstrata — prefira a especificidade: mão, voz, queixo.",
+    "pulsacao":     "Batida rítmica do coração ou do sangue nas veias. Em prosa, metáfora de vida, urgência, desejo. 'A pulsação da cidade' = o ritmo vital do lugar. Mais orgânico que 'ritmo' em contextos corporais.",
+    // ESTILO / REGISTRO
+    "laconico":     "Adjetivo: que diz muito em poucas palavras; conciso ao extremo. Da cidade de Lacedemônia (Esparta), onde a brevidade era virtude militar. Modelo estilístico: cada palavra carrega peso.",
+    "prolixo":      "Adjetivo: que usa muitas palavras onde poucas bastariam; difuso, excessivo. Vício a evitar na prosa narrativa; às vezes intencional como voz de personagem.",
+    "eloquente":    "Adjetivo: que se expressa com eficácia, clareza e força persuasiva. Pode ser um orador, um gesto, um silêncio — a eloquência não é necessariamente verborrágica.",
+    "contundente":  "Adjetivo: que atinge com força; que causa impacto. 'Argumento contundente', 'cena contundente'. Mais específico que 'forte' por implicar que o golpe encontrou o alvo.",
+    "plausivel":    "Adjetivo: que pode ser verdade dentro do contexto dado; crível, convincente. Diferente de 'verossímil' (parece real) — o plausível refere-se à lógica interna; o verossímil, à aparência.",
+    "ambiguo":      "Adjetivo: que admite mais de uma interpretação; de sentido duplo ou incerto. A ambiguidade bem controlada é riqueza literária; mal controlada, é falta de precisão.",
+    "explicito":    "Adjetivo: expresso claramente, sem deixar margem de dúvida. Em narrativa, o excesso de explicação mata a ambiguidade criativa. 'Show, don't tell' = preferir o implícito ao explícito.",
+    "implicito":    "Adjetivo: que está subentendido, não dito diretamente. A literatura trabalha muito com o implícito — o que o personagem não diz revela mais do que o que diz.",
+    "didatico":     "Adjetivo: que ensina, explica, conduz o leitor pela mão. Necessário em não-ficção; perigoso em ficção — excesso de didatismo retira o leitor da experiência e o coloca na condição de aluno.",
+    // PROCESSOS DE ESCRITA
+    "intertextualidade": "Relação entre um texto e outros textos, explícita ou implícita. Citação, paráfrase, paródia, alusão. Todo texto fala com outros textos — a questão é se o escritor controla isso ou não.",
+    "pastiche":     "Imitação do estilo de outro autor ou época, geralmente sem intenção crítica (diferente da paródia, que subverte). Pode ser exercício legítimo ou mera cópia sem propósito.",
+    "parafraseio":  "Reescrita de um texto com palavras diferentes, mantendo o sentido. Útil para testar a compreensão; na revisão, serve para encontrar a forma mais clara de dizer o mesmo.",
+    "subplote":     "Trama secundária que corre paralela à principal. Um bom subplote ilumina o protagonista de outro ângulo ou contradiz a tese principal — ele existe em relação, não por adorno.",
+    "foreshadowing": "Antecipação sutil de eventos futuros; semeadura de pistas. Em português: 'prenúncio', 'sinalização'. O leitor não percebe na primeira leitura, mas reconhece na segunda como inevitável.",
+    "suspense":     "Estado de incerteza e expectativa que mantém o leitor em tensão. Criado pela pergunta 'o que vai acontecer?' — diferente do mistério ('o que aconteceu?'). Hitchcock: suspense = bomba sob a mesa.",
+    "flashback":    "Retorno ao passado dentro da narrativa; analepse. Em português: 'retrospectiva'. Funciona melhor quando motivado por algo no presente — não como enciclopédia de fundo do personagem.",
+    "corte":        "Mudança abrupta de cena, ponto de vista ou tempo na narrativa, sem transição explicada. O corte cinematográfico adaptado à prosa cria velocidade e exige leitor ativo. Use para acelerar ou surpreender.",
+    // LÍNGUA BRASILEIRA
+    "lusofonia":    "Comunidade de países e povos que têm o português como língua oficial ou de referência. Não homogeneidade: o português falado no Brasil, em Portugal, em Moçambique, no Timor-Leste são realidades distintas.",
+    "oralidade":    "Característica de um texto que reproduz ou evoca a língua falada. Na ficção brasileira, é recurso de identidade e voz: de Guimarães Rosa a Carolina Maria de Jesus, a oralidade é estilo, não erro.",
+    "coloquial":    "Adjetivo: pertencente ao registro informal da língua, da conversa cotidiana. Em ficção, o coloquial pode ser marca de voz, de personagem, de lugar — não é equivalente a 'errado'.",
+    "neologismo":   "Palavra ou expressão nova na língua, por criação ou empréstimo. A língua viva produz neologismos constantemente. Na prosa literária, um bom neologismo ilumina; um ruim soa afetado.",
+    "arcaismo":     "Palavra, expressão ou construção que saiu de uso corrente. Pode ser recurso intencional (ficção histórica, ironia, humor) ou vício (estilo embolorado). O critério é a intenção e o efeito.",
+    "registro":     "Variedade de língua adaptada à situação de comunicação: formal/informal, técnico/cotidiano, oral/escrito. Misturar registros com intenção é recurso poderoso; misturar sem intenção é ruído.",
+    "diaspora":     "Dispersão de um povo para fora de seu território de origem. Literatura de diáspora: textos que lidam com o deslocamento, a identidade fragmentada, a saudade e a criação de pertencimento em outro lugar.",
   };
 
   function inferDefinicao(word, className) {
@@ -1358,23 +1446,76 @@
     }
 
     // Substantivo / pronome — posição relativa ao verbo
-    const _VSFX = /^.{2,}(ou|eu|iu|ava|ia|ar|er|ir|ando|endo|indo|aram|eram|iram)$/;
-    const _EXCL = new Set(["amor","calor","temor","ardor","vapor","valor","senhor","pastor","exterior","interior","superior","inferior","anterior","posterior","melhor","pior","maior","menor","singular","regular","popular","peculiar","particular","familiar","similar","circular","linear","solar","lunar","mar","bar","car"]);
+    // Formas finitas irregulares de alta frequência não capturadas por morfologia sufixal
+    const _VBF = new Set([
+      "e","sou","somos","sao","era","eras","eram","eramos","foi","foram","sera","serao","seria","serias","seriam","fosse","fossem",
+      "esta","estou","estamos","estao","estava","estavas","estavam","estavamos","esteve","estiveram","estaria","estivesse","estivessem",
+      "tem","tenho","temos","tinha","tinhas","tinham","tinhamos","teve","tiveram","teria","tivesse","tivessem",
+      "ha","hei","houve","haveria","houvesse","houvessem","havera","haverao",
+      "vou","vai","vamos","vao","ia","ias","iam","iamos","ira","irao","iria","irias","iriam",
+      "faz","faco","fazemos","fazem","fazia","faziam","fez","fizeram","faria","fizesse","fizessem",
+      "pode","posso","podemos","podem","podia","podiam","pude","puderam","poderia","pudesse","pudessem",
+      "quer","quero","queremos","querem","queria","queriam","quis","quiseram","quisesse","quisessem",
+      "sabe","sei","sabemos","sabem","sabia","sabiam","soube","souberam","saberia","soubesse","soubessem",
+      "vem","venho","vimos","veem","vinha","vinhas","vinham","veio","vieram","viria","viesse","viessem",
+      "da","dou","damos","dao","dava","davamos","deu","deram","daria","desse","dessem",
+      "diz","digo","dizemos","dizem","dizia","diziam","disse","disseram","diria","dissesse","dissessem",
+      "ve","vejo","vemos","veem","via","viam","viu","viram","veria","visse","vissem",
+      "le","leio","lemos","leem","lia","liam","leu","leram","leria","lesse","lessem",
+      "ri","rio","rimos","riem","ria","riam","riu","riram","riria","risse","rissem",
+      "ouve","ouco","ouvimos","ouvem","ouvia","ouviam","ouviu","ouviram","ouviria","ouvisse","ouvissem",
+      "traz","trago","trazemos","trazem","trazia","traziam","trouxe","trouxeram","traria","trouxesse","trouxessem",
+      "fica","fico","ficamos","ficam","ficava","ficavam","ficou","ficaram","ficaria","ficasse","ficassem",
+      "cai","caio","caimos","caem","caia","caiam","caiu","cairam","cairia","caisse","caissem",
+    ]);
+
+    // Sufixos de pretérito perfeito seguros para posição 0 (não colidem com nomes próprios como Maria/-ia)
+    const _PERF_SFX = /^.{3,}(ou|eu|iu|aram|eram|iram|ando|endo|indo|asse|esse|isse)$/;
+
     let verbIdx = -1;
     for (let i = 0; i < tokens.length; i++) {
+      if (i === idx) continue;
       const n = normalizeWord(tokens[i]);
-      if (i !== idx && _VSFX.test(n) && n.length > 3 && !_EXCL.has(n)) { verbIdx = i; break; }
+      // 1. Irregular finitas de alta frequência (cobre "foi","era","leu","deu"…)
+      if (_VBF.has(n)) { verbIdx = i; break; }
+      if (i === 0) {
+        // Posição inicial: só sufixos seguros — evita "Maria" → imperfeito "-ia"
+        if (_PERF_SFX.test(n)) { verbIdx = 0; break; }
+        continue;
+      }
+      // Posições > 0: morfologia contextual com original capitalizado
+      // (rule 9 protege nomes próprios não-iniciais como "Maria" no meio da frase)
+      const prevN = normalizeWord(tokens[i-1]);
+      const nextN = i < tokens.length-1 ? normalizeWord(tokens[i+1]) : null;
+      const tc = inferWordClassContextual(tokens[i], sentence, prevN, nextN);
+      if (tc && tc.startsWith("Verbo") && tc !== "Verbo no infinitivo") { verbIdx = i; break; }
     }
     if (verbIdx === -1) return "";
 
-    const PREPS = new Set(["de","em","para","por","com","sem","sobre","a","ao","da","do","na","no","pelo","pela","nos","nas","aos","ate","apos","perante","ante"]);
+    // Preposições puras (sem "a"/"o" artigos, sem contrações duplas já cobertas abaixo)
+    const PURE_PREPS = new Set(["de","em","para","por","com","sem","sobre","ao","da","do","na","no","pelo","pela","nos","nas","aos","ate","apos","perante","ante","entre","desde","durante","mediante","conforme"]);
     const prevNorm = idx > 0 ? normalizeWord(tokens[idx-1]) : null;
-    const inPrepPhrase = prevNorm && PREPS.has(prevNorm);
+    const prevPrev = idx > 1 ? normalizeWord(tokens[idx-2]) : null;
+    // inPrepPhrase: prev é preposição, OU prev é artigo e prev2 é preposição ("para a cidade")
+    const _ARTS_PT = new Set(["a","o","os","as","um","uma"]);
+    const inPrepPhrase = (prevNorm && PURE_PREPS.has(prevNorm))
+                      || (prevNorm && _ARTS_PT.has(prevNorm) && prevPrev && PURE_PREPS.has(prevPrev));
 
     if (className.startsWith("Substantivo") || className.includes("Pronome pessoal") ||
         className.includes("Pronome demonstrativo") || className.includes("Pronome indefinido")) {
       if (idx < verbIdx) return inPrepPhrase ? "Adjunto adnominal" : "Sujeito";
-      return inPrepPhrase ? "Objeto indireto / adjunto adverbial" : "Objeto direto";
+      if (idx > verbIdx) {
+        // Prep phrase é determinante: nunca é sujeito posposto
+        if (inPrepPhrase) return "Objeto indireto / adjunto adverbial";
+        // Sujeito posposto: verbo é precoce — nenhum token nominal antes dele
+        const _GRAM_SYN = new Set(["a","o","os","as","um","uma","de","em","para","por","com","sem",
+          "nao","ja","so","ate","apos","aqui","ali","la","entao","assim","talvez","logo","ainda",
+          "sempre","nunca","ontem","hoje","amanha","tambem","nem","pois","mais","menos","mui","bem",
+          "mal","ai","ca","cedo","tarde","agora","depois","antes","tambem","ate","nao","se","ja"]);
+        const contentBeforeVerb = tokens.slice(0, verbIdx).filter(t => !_GRAM_SYN.has(normalizeWord(t))).length;
+        if (contentBeforeVerb === 0) return "Sujeito posposto";
+        return "Objeto direto";
+      }
     }
     return "";
   }
