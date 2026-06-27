@@ -2270,6 +2270,16 @@
     "tarde":        "A hora em que a luz começa a mudar de ângulo e o dia perde urgência. A tarde na ficção é tempo de desaceleração, de encontros casuais, de memória. O que acontece de tarde pode ser esquecido; o que acontece de noite, não. Essa diferença é tonal e molda o que a cena pode carregar.",
     "barulho":      "Som sem forma — o oposto do silêncio organizado. O barulho na ficção é falta de controle: quando o ambiente faz barulho, a personagem precisa de mais esforço para existir nele. O barulho pode ser proteção (cobre a conversa) ou agressão (impede o pensamento).",
     "cheiro":       "O sentido que mais acessa memória involuntária. O cheiro entra na cena antes da personagem decidir prestar atenção: ela sente antes de pensar. Na ficção, um cheiro específico vale mais do que qualquer adjetivo genérico — e um cheiro que traz passado é um dispositivo de cena quase sempre gratuito.",
+
+    // Corpo, gesto e presença — v883
+    "olhar":        "O que o rosto faz antes de falar. O olhar na ficção é o gesto mais carregado: ele pode conter julgamento, desejo, reconhecimento, medo. O que a personagem olha e o que ela desvia o olhar revela hierarquia, afeto e perigo antes de qualquer palavra.",
+    "suspiro":      "Expiração com sentido. O suspiro não é apenas ar: é comentário sem voz. Na ficção, um suspiro pode ser alívio, desistência, desejo ou resignação — dependendo do que veio antes. Ele é a reação que o corpo dá quando a palavra ficou pequena demais.",
+    "lagrima":      "Água que o corpo produz quando a emoção ultrapassa o que pode ser contido. A lágrima na ficção tem tamanho: ela pode ser discreta (um fio) ou incontrolável. A personagem que chora sem saber por quê está mais próxima da verdade da cena do que a que chora por razão clara.",
+    "toque":        "Contato intencional entre corpos. O toque é o gesto mais íntimo porque não tem como ser vago: alguém tocou onde tocou, com a força que teve, no momento que escolheu. Na ficção, o toque quebra a distância e faz a cena mudar de temperatura.",
+    "abraco":       "O toque que envolve. O abraço na ficção é gesto de contenção: conter o outro, conter a si mesma, conter o momento. Um abraço prolongado é diferente de um abraço rápido — o tempo que dura diz o que a personagem não consegue dizer em palavras.",
+    "pausa":        "O que acontece entre as palavras. A pausa na escrita é tão importante quanto a pausa na fala: ela carrega o que não foi dito, o que veio a seguir, o que custou continuar. Na ficção, a personagem que faz pausa está calculando ou sentindo — e o leitor lê os dois ao mesmo tempo.",
+    "hesitacao":    "O momento entre querer e fazer. A hesitação em cena é ouro narrativo: ela revela o que está em jogo antes da decisão. Quem hesita está dividido — e essa divisão tem duas forças que o leitor consegue sentir. A personagem que nunca hesita é menos real.",
+    "palavra":      "A unidade básica da presença humana no texto. Mas na ficção, a palavra que a personagem escolhe diz mais do que seu sentido: ela revela classe, educação, emoção, intenção velada. A personagem que usa palavras difíceis num momento de dor está se escondendo atrás delas.",
   };
 
   function inferDefinicao(word, className) {

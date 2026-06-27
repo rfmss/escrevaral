@@ -1715,6 +1715,15 @@
     "fumaca":       ["neblina de queimado", "névoa densa", "fumo", "cortina de cinza", "bruma escura"],
     "umidade":      ["vapor d'água", "cheiro de chuva parada", "mofo no ar", "suor do ambiente", "ar pesado de água"],
     "amanhecida":   ["primeiras horas", "hora da madrugada que ainda escurece", "antes do sol", "limiar do dia", "quando a noite ainda resiste"],
+
+    // Corpo e gesto — v883
+    "batimento":    ["pulsação", "ritmo do coração", "taquicardia", "batida", "coração acelerado", "martelada no peito"],
+    "pulso":        ["batimento", "pulsação", "ritmo vital", "veia que pulsa", "o que a mão sente na têmpora"],
+    "soluco":       ["choro engasgado", "choro que não sai inteiro", "choro em espasmos", "respiração quebrada pelo choro"],
+    "gemido":       ["lamento", "som de dor", "voz que sofre antes de falar", "suspiro de dor", "choro mudo"],
+    "postura":      ["jeito de estar no espaço", "disposição do corpo", "como o corpo fala quando cala", "porto que o corpo assume", "posição do corpo no ambiente"],
+    "beijo":        ["contato de bocas", "gesto de afeto físico", "pressão dos lábios", "o que a boca diz quando não há palavras", "sinal de presença"],
+    "gagueira":     ["hesitação na fala", "fala em espasmos", "palavra que trava", "voz que tropeça antes de sair", "interrupção involuntária"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
