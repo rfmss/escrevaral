@@ -253,10 +253,6 @@
       if (!prev) return "Conjunção"; // conclusivo no início
       return "Advérbio"; // temporal no interior
     },
-    "ora": (prev) => {
-      // "ora...ora" alternativo (DESAM-ORA-01)
-      return "Conjunção";
-    },
     "senao": () => "Conjunção", // adversativa/condicional negativa (DESAM-SENAO-01)
     // P0.2 — artigo/preposição/pronome: `a` antes de noun → artigo; antes de nome → preposição
     "a": (prev, next) => {
@@ -274,14 +270,15 @@
     },
     // "mais" como advérbio de intensidade vs indefinido
     "mais": (prev, next) => {
-      // Antes de substantivo/adjetivo não modificado → pronome indefinido/determinante (P1.3)
       if (next) {
         const _n = normalizeWord(next);
-        // Se next não é advérbio nem verbo, provavelmente modifica substantivo
+        // "mais nada/ninguém" → Advérbio de negação aspectual
+        if (PRON_INDEF_SUBST.has(_n) || ["nada","ninguem","nenhum","nenhuma","nada"].includes(_n))
+          return "Advérbio";
+        // Antes de substantivo/adjetivo concreto → Pronome indefinido
         if (_n && !/^(do|dos|da|das|de|em|a|o|os|as|que|para|por|com)$/.test(_n)
-            && !/^.+(mente|ar|er|ir)$/.test(_n)) {
+            && !/^.+(mente|ar|er|ir)$/.test(_n))
           return "Pronome indefinido";
-        }
       }
       return "Advérbio";
     },
@@ -359,10 +356,106 @@
     },
 
     "baixo": (prev, next) => {
-      // Após artigo → Substantivo ("o baixo do violão")
       const ART = new Set(["o","um","do","no","ao","pelo"]);
       if (prev && ART.has(prev)) return "Substantivo";
       return "Adjetivo";
+    },
+
+    // ── Polissemia estendida — camada literária ────────────────────────────
+    "mesmo": (prev, next) => {
+      // "ele mesmo" / "ela mesma" / "eles mesmos" → após pronome → Pronome reflexivo-enfático
+      if (prev && PRON_PESSOAIS_RETOS.has(prev)) return "Pronome";
+      // "o mesmo lugar" / "a mesma coisa" → após artigo/determinante → Adjetivo
+      const DET = new Set(["o","a","os","as","um","uma","do","da","no","na","ao"]);
+      if (prev && DET.has(prev)) return "Adjetivo";
+      // "mesmo assim" / "mesmo que" / início → Advérbio concessivo
+      return "Advérbio";
+    },
+
+    "so": (prev, next) => {
+      // "estava só" / "ficou só" / "vive só" → após cópula → Adjetivo predicativo
+      const COPULAS = new Set(["estava","estou","fiquei","ficou","ficara","era","senti","sente","vive","anda","parecia","permanecia","ficasse"]);
+      if (prev && COPULAS.has(prev)) return "Adjetivo";
+      // "só ele" / "só uma vez" → antes de pronome pessoal/artigo → Advérbio exclusivo
+      if (next) {
+        const _n = normalizeWord(next);
+        if (PRON_PESSOAIS_RETOS.has(_n) || ["o","a","um","uma","os","as","nos","nao","apenas"].includes(_n))
+          return "Advérbio";
+      }
+      // Início sem cópula → Advérbio
+      if (!prev) return "Advérbio";
+      return "Adjetivo";
+    },
+
+    "ainda": (prev, next) => {
+      // "ainda que" → Conjunção concessiva
+      if (next && normalizeWord(next) === "que") return "Conjunção";
+      // "ainda assim" / "ainda não" / default → Advérbio temporal/aditivo
+      return "Advérbio";
+    },
+
+    "caso": (prev, next) => {
+      // Após artigo/determinante/contração → Substantivo
+      const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","nos","nas","num","numa","ao","aos","este","esse","aquele","neste","nesse","naquele","nesta","nessa","naquela","tal","cada","meu","seu","nosso","teu","qualquer"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      // Default → Conjunção condicional
+      return "Conjunção";
+    },
+
+    "visto": (prev, next) => {
+      // Após auxiliar de voz passiva / perfeito composto → Verbo (particípio)
+      const AUX = new Set(["havia","tinha","teria","tenho","tem","temos","tinham","foram","foi","era","sendo","tendo","haviamos","tinhamos","fosse","sera","sido","ser","ter"]);
+      if (prev && AUX.has(prev)) return "Verbo (particípio)";
+      // Após artigo/contração/determinante → Substantivo (documento de viagem)
+      const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","nos","nas","ao","meu","seu","nosso","teu","este","esse","aquele","neste","nesse","naquele"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      return "Verbo (particípio)";
+    },
+
+    "posto": (prev, next) => {
+      // "posto que" → Conjunção causal/concessiva
+      if (next && normalizeWord(next) === "que") return "Conjunção";
+      // Após auxiliar de voz passiva → Verbo (particípio)
+      const AUX = new Set(["foi","sera","era","fora","fosse","sendo","sido","foram","ser","ter","tendo"]);
+      if (prev && AUX.has(prev)) return "Verbo (particípio)";
+      // Após artigo/contração/determinante → Substantivo (local físico ou cargo)
+      const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","nos","nas","num","numa","ao","aos","meu","seu","nosso","teu","este","esse","aquele","neste","nesse","naquele","nesta","nessa","naquela","cada","qualquer"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      return "Verbo (particípio)";
+    },
+
+    "tanto": (prev, next) => {
+      // Antes de substantivo/adjetivo concreto → Pronome indefinido (quantificador)
+      if (next) {
+        const _n = normalizeWord(next);
+        if (_n && !["de","do","da","dos","das","que","e","mas","ou","nem","pois","a","o"].includes(_n)
+            && !/(ar|er|ir|ando|endo|indo|ou|eu|iu|ava|ia|mente)$/.test(_n))
+          return "Pronome indefinido";
+      }
+      // Após verbo ou em posição de modificador → Advérbio de intensidade
+      return "Advérbio";
+    },
+
+    "ora": (prev, next) => {
+      // "ora...ora" → Conjunção correlativa alternativa
+      if (next && normalizeWord(next) === "ora") return "Conjunção";
+      if (prev && normalizeWord(prev) === "ora") return "Conjunção";
+      // Início + próxima palavra é partícula negativa ou advérbio modal → Interjeição
+      const PART_NEG_MODAL = new Set(["nao","nem","ja","bem","la","ve","olha","eis","basta","veja","xii"]);
+      if (!prev && next && PART_NEG_MODAL.has(normalizeWord(next))) return "Interjeição";
+      // Início e próxima palavra é verbo → Conjunção (correlativa implícita)
+      if (!prev) return "Conjunção";
+      return "Advérbio";
+    },
+
+    "morto": (prev, next) => {
+      // Após artigo → Substantivo nominalizado ("um morto", "o morto")
+      const ART = new Set(["um","uma","o","a","os","as","do","da","dos","das","no","na","nos","nas","ao","aos"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      // Após cópula → Adjetivo predicativo ("estava morto", "caiu morto")
+      const COPULAS = new Set(["estava","estou","ficou","ficara","era","parecia","caiu","caira","cai"]);
+      if (prev && COPULAS.has(prev)) return "Adjetivo";
+      return "Verbo (particípio)";
     },
   };
 
@@ -374,24 +467,26 @@
     "porto":  ["Substantivo — 'porto de abrigo'", "Verbo — 'eu porto a mochila'"],
     "como":   ["Conjunção — 'como se a mão fosse'", "Verbo — 'eu como pão'", "Advérbio — 'como é tarde!'"],
     "quer":   ["Verbo — 'ele quer sair'", "Conjunção — 'quer chova, quer faça sol'"],
-    "visto":  ["Verbo — 'havia sido visto'", "Substantivo — 'o visto no passaporte'"],
+    "visto":  ["Verbo (particípio) — 'havia sido visto'", "Substantivo — 'o visto expirou'"],
     "dado":   ["Verbo (particípio) — 'havia dado tudo'", "Substantivo — 'o dado de jogar'"],
     "pronto": ["Adjetivo — 'o jantar está pronto'", "Interjeição — 'Pronto! Acabou.'"],
-    "mesmo":  ["Advérbio — 'mesmo assim, foi'", "Adjetivo — 'o mesmo lugar'", "Pronome — 'ele mesmo'"],
     "alto":   ["Adjetivo — 'voz alta'", "Substantivo — 'o alto da serra'", "Advérbio — 'falar alto'"],
     "baixo":  ["Adjetivo — 'tom baixo'", "Substantivo — 'o baixo do violão'", "Advérbio — 'falar baixo'"],
-    "ainda":  ["Advérbio de tempo — 'ainda estava lá'", "Advérbio de adição — 'ainda por cima'"],
+    "ainda":  ["Advérbio — 'ainda não chegou'", "Conjunção — 'ainda que soubesse'"],
     "livre":  ["Adjetivo — 'tempo livre'", "Verbo — 'que ele livre os reféns'"],
     "certa":  ["Adjetivo — 'a certa altura'", "Pronome indefinido — 'certa vez'"],
     "certo":  ["Adjetivo — 'no momento certo'", "Advérbio — 'certo, entendi'", "Pronome — 'certo dia'"],
     "vez":    ["Substantivo — 'uma vez por semana'", "Conjunção — 'uma vez que saiu'"],
     "ante":   ["Preposição — 'ante o juiz'", "Prefixo — 'antepassado'"],
-    "posto":  ["Substantivo — 'posto de gasolina'", "Conjunção concessiva — 'posto que'", "Verbo — 'posto à mesa'"],
-    "ora":    ["Advérbio — 'ora sim, ora não'", "Conjunção — 'ora, chega!'", "Interjeição — 'Ora! Que absurdo.'"],
+    "posto":  ["Verbo (particípio) — 'foi posto de lado'", "Substantivo — 'o posto de gasolina'", "Conjunção — 'posto que'"],
+    "ora":    ["Conjunção — 'ora chora, ora ri'", "Interjeição — 'Ora, não exagere!'", "Advérbio — 'ora chegou'"],
     "logo":   ["Advérbio — 'logo mais cedo'", "Conjunção — 'logo, está certo'"],
-    "caso":   ["Substantivo — 'o caso da cidade'", "Conjunção — 'caso precise'"],
-    "tanto":  ["Adjetivo — 'tanto trabalho'", "Advérbio — 'não come tanto'", "Pronome — 'tantos vieram'"],
+    "caso":   ["Substantivo — 'o caso era grave'", "Conjunção — 'caso chova'"],
+    "tanto":  ["Pronome indefinido — 'tanto silêncio'", "Advérbio — 'não chore tanto'"],
     "menos":  ["Advérbio — 'fez menos'", "Preposição — 'todos menos ele'"],
+    "mesmo":  ["Advérbio — 'mesmo assim, foi'", "Adjetivo — 'o mesmo lugar'", "Pronome — 'ele mesmo'"],
+    "so":     ["Advérbio — 'só ele sabia'", "Adjetivo — 'estava só, em silêncio'"],
+    "morto":  ["Verbo (particípio) — 'havia morrido'", "Substantivo — 'um morto não fala'", "Adjetivo — 'estava morto'"],
   };
 
   // P0.3 — formas acentuadas com acento distintivo (não stripped) → classe correta
@@ -410,7 +505,6 @@
     ["hão","Verbo flexionado"],  // HAVER 3pl pres
     ["fê-lo","Verbo flexionado"],
     ["pé","Substantivo"],        // não confundir com "pe"
-    ["só","Advérbio"],           // advérbio de exclusão, não adjetivo de solidão
     ["sê","Verbo (imperativo)"], // SER imperativo
     ["lê","Verbo flexionado"],   // LER 3sg pres
     ["lêem","Verbo flexionado"], // LER 3pl (PE)
