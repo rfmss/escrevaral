@@ -1693,6 +1693,10 @@
     "alienacao":    ["desconexão", "afastamento do real", "indiferença ao entorno", "distância de si", "vida à margem de si mesma", "deriva interior"],
     "crescimento":  ["amadurecimento", "arco de personagem", "mudança que fica", "evolução interior", "passagem que não se desfaz", "transformação que custa"],
     "brecha":       ["abertura", "fissura", "fresta", "caminho inesperado", "possibilidade escondida", "onde a luz entra"],
+
+    // Técnica de escrita — v879
+    "oralizacao":   ["fala na escrita", "registro falado", "voz recriada", "ritmo de boca", "escrita que escuta"],
+    "diccao":       ["voz própria", "tom singular", "jeito de escrever", "marca na frase", "presença na língua"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
