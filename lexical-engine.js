@@ -819,6 +819,10 @@
       if (next && ["de","do","da","dos","das","disso","disto"].includes(next)) return "Preposição";
       return "Advérbio";
     };
+
+    // "durante" — preposição temporal; está erroneamente em functionWords.conjuncoes
+    // "Durante o dia", "durante a noite" → sempre Preposição (Bechara MGP §preposições)
+    POLISSEMIA["durante"] = () => "Preposição";
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
@@ -1446,6 +1450,40 @@
     "prefacio":     "Texto de abertura de um livro, escrito pelo autor ou por outra pessoa. Apresenta a obra, contextualiza, convida à leitura. Diferente de 'introdução' (que já é parte do texto) e de 'posfácio' (que comenta após a leitura).",
     "epilogo":      "Texto que vem após o fim da narrativa principal; desfecho complementar ou comentário posterior aos acontecimentos. Permite ao autor situar o que aconteceu depois, ou ao narrador se despedir do leitor.",
     "capitulo":     "Divisão de uma obra em unidade narrativa com relativa autonomia. O capítulo tem começo, meio e fim próprios — mas serve ao todo. A escolha de onde cortar e recomeçar é uma das decisões mais importantes da estrutura.",
+
+    // Emoções — v823
+    "vergonha":     "Sentimento de exposição do que se julga inferior ou errado em si mesmo. Na narrativa, é força interna de grande potência: esconde, mente, paralisa e, às vezes, liberta.",
+    "culpa":        "Consciência dolorosa de ter causado um dano — real ou imaginado. Diferente de vergonha (o que os outros veem), a culpa é o que a personagem sabe de si. Motor narrativo silencioso.",
+    "rancor":       "Mágoa que o tempo não dissolve — ao contrário, azeda. Personagens com rancor carregam o passado como peso vivo. Diferente de raiva: o rancor é calmo, paciente e perigoso.",
+    "desespero":    "Estado em que todas as saídas parecem fechadas. No texto literário, o desespero não é fraqueza — é o ponto em que a personagem vai mais fundo em si mesma. É limiar.",
+    "comocao":      "Abalo emocional que perturba a compostura. Na escrita, comoção é o efeito que o texto quer produzir no leitor — e que a cena deve justificar, não anunciar.",
+    "cumplicidade": "Vínculo que une duas pessoas em algo que não se diz em voz alta. Na ficção, a cumplicidade se constrói em gestos pequenos, olhares, silencios — não em declarações.",
+    "inveja":       "Desejo do que o outro tem, acompanhado de dor por não tê-lo. Na narrativa, a inveja é rara como tema declarado — mas frequente como motor disfarçado de ação.",
+
+    // Verbos de conflito/movimento interior — v823
+    "hesitar":      "Paralisar diante de uma escolha — não por fraqueza, mas por peso real das alternativas. Personagens que hesitam têm profundidade; a hesitação é o espaço onde o caráter se revela.",
+    "perseguir":    "Mover-se em direção a algo ou alguém com obstinação. Na narrativa, o perseguidor pode ser um antagonista, mas também um objetivo, um fantasma, uma ideia — e a perseguição é estrutura.",
+    "trair":        "Romper um pacto implícito ou explícito de confiança. A traição é um dos maiores catalisadores narrativos: ela muda o estado moral de todos os personagens envolvidos.",
+    "redimir":      "Reparar, recuperar o valor perdido — de si mesmo ou de outro. A redenção é arco narrativo clássico; no texto contemporâneo, pode ser irônica, incompleta ou negada.",
+    "sucumbir":     "Ceder ao peso de uma força maior — física, emocional ou moral. A personagem que sucumbe não é necessariamente fraca: às vezes, sucumbir é a única resposta honesta.",
+    "rebelar":      "Recusar-se a obedecer ao que é esperado — pela família, pela sociedade, pela narrativa. A rebeldia de uma personagem define onde ela coloca sua liberdade.",
+    "ceder":        "Dar espaço ao outro, desistir de uma posição — por cansaço, generosidade ou cálculo. Ceder não é sinônimo de fraqueza; pode ser o gesto mais difícil da cena.",
+    "confrontar":   "Colocar-se diante de outra força para medir diferença ou conflito. O confronto é momento de alta tensão dramática; revela quem cada personagem é sob pressão.",
+
+    // Natureza brasileira — v823
+    "rio":          "Curso de água que atravessa territórios e histórias. Na literatura brasileira, o rio é personagem: o São Francisco, o Amazonas, o Paraíba — cada um carrega seu próprio tempo e seus mortos.",
+    "floresta":     "Ecossistema denso, de alta biodiversidade e linguagem própria. Na narrativa brasileira, a floresta não é cenário: é força ativa, com leis que personagens urbanos não entendem.",
+    "montanha":     "Elevação de terreno que impõe limite e perspectiva. Na ficção, a montanha é obstáculo, refúgio e horizonte — o que se vê do alto muda o que a personagem quer.",
+    "mar":          "Extensão de água salgada que separa e conecta. Na literatura, o mar é fronteira, memória e infinito. Em Clarice, em Guimarães Rosa, em Jorge Amado — o mar é língua própria.",
+    "brejo":        "Área úmida entre terra firme e água corrente. Paisagem de transição e lama — no texto literário brasileiro, o brejo é lugar de abandono, fertilidade e ambiguidade.",
+    "rocha":        "Formação geológica dura, permanente, anterior a tudo. Na ficção, a rocha é contraste com a fragilidade humana — e às vezes, refúgio que nenhuma tempestade apaga.",
+    "neblina":      "Névoa densa que apaga contornos e distâncias. Na narrativa, a neblina é recurso atmosférico e moral: esconde intenções, cria suspense, deixa o leitor na dúvida do que é real.",
+
+    // Qualidades textuais — v823
+    "lacunar":      "Diz-se de um texto com lacunas intencionais — o que não está dito faz parte do sentido. Narrador não-confiável, elipse emocional, silêncio calculado: tudo pode ser estratégia lacunar.",
+    "denso":        "Texto que concentra muita informação, sensação ou significado em pouco espaço. Densidade é virtude quando equilibrada com clareza; excesso de densidade cansa e afasta o leitor.",
+    "fluido":       "Texto que se move sem atrito — as frases se encadeiam, o leitor avança sem perceber. Fluidez não é simplicidade: é domínio do ritmo, da transição e da respiração da prosa.",
+    "digressao":    "Desvio intencional do tema ou da ação principal para explorar um pensamento lateral. A digressão, bem usada, aprofunda personagem e mundo; mal usada, é procrastinação narrativa.",
   };
 
   function inferDefinicao(word, className) {
@@ -1665,6 +1703,7 @@
   }
 
   function countWordOccurrences(text, word) {
+    if (!text) return 0;
     return tokenizeWords(text).filter(t => normalizeWord(t) === word).length;
   }
 
