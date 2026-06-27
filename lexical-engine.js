@@ -1083,6 +1083,11 @@
         && !/^(cada|fiada|morada|parada|jornada|armada|fachada|estrada)$/.test(normalized))
       return "Verbo (particípio)";
 
+    // 12b. Pretérito perfeito irregular com morfologia "-isse" — VERB-PERF-IRR-01
+    // "disse" (dizer) termina em "isse" mas é pret. perfeito, não subjuntivo
+    const _PERF_IRR_ISSE = new Set(["disse","disseste","dissemos","dissestes","disseram"]);
+    if (_PERF_IRR_ISSE.has(normalized)) return "Verbo flexionado";
+
     // 13. Subjuntivo imperfeito — VERB-SUBJ-IMPERF-01 (mais específico — antes de infinitivo)
     if (/(asse|asses|assem|esse|esses|essem|isse|isses|issem|assemos|essemos|issemos)$/.test(normalized)
         && normalized.length > 4) return "Verbo (subjuntivo)";
@@ -1217,7 +1222,21 @@
     "fundo","funda","fundos","fundas","raso","rasa","rasos","rasa",
     "claro","clara","claros","claras","escuro","escura","escuros","escuras",
     "pesado","pesada","leve","leves","duro","dura","duros","duras","mole","moles",
-    "limpo","limpa","limpos","limpas","sujo","suja","sujos","sujas"
+    "limpo","limpa","limpos","limpas","sujo","suja","sujos","sujas",
+    // Adjetivos em -al (ADJ-AL-01) — Cunha&Cintra §qualificativos
+    // Excluídos: jornal/canal/hospital/capital/animal (substantivos com localLexicon cobrindo)
+    "atual","atuais","final","finais","total","totais","fatal","fatais",
+    "banal","banais","leal","leais","genial","geniais","natural","naturais",
+    "cultural","culturais","nacional","nacionais","social","sociais",
+    "moral","morais","formal","formais","normal","normais","oral","orais",
+    "central","centrais","lateral","laterais","ancestral","ancestrais",
+    "brutal","brutais","frontal","frontais","mental","mentais","vital","vitais",
+    "plural","plurais","feudal","feudais","racial","raciais",
+    "emocional","emocionais","racional","racionais","sensorial","sensoriais",
+    "editorial","editoriais","universal","universais","original","originais",
+    "habitual","habituais","virtual","virtuais","temporal","temporais",
+    "global","globais","surreal","surrealistas","nocturnal","nocturnais",
+    "real","reais","liberal","liberais","dual","duais","trivial","triviais"
   ]);
 
   // Advérbios de posição/lugar não presentes em functionWords.adverbios — ADV-EXT-01
