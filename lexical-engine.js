@@ -829,6 +829,13 @@
     // "Durante o dia", "durante a noite" → sempre Preposição (Bechara MGP §preposições)
     POLISSEMIA["durante"] = () => "Preposição";
 
+    // "acaso" — substantivo ("um acaso do destino") vs advérbio ("por acaso?")
+    // Quando precedido por "por" → Advérbio; caso contrário → Substantivo
+    POLISSEMIA["acaso"] = (prev) => {
+      if (prev === "por") return "Advérbio";
+      return "Substantivo";
+    };
+
     // "ja" (normalização de "já") — em conjuncoes E adverbios; conjuncoes dispara primeiro
     // "Já escrevi", "Já não sei" → Advérbio temporal; "já que" → Conjunção causal
     POLISSEMIA["ja"] = (prev, next) => {
@@ -1117,6 +1124,10 @@
     // -ncia/-nça: estado, qualidade (Bechara §sufixos -ância/-ência)
     if (/(ncia|nca)$/.test(normalized) && normalized.length > 4)
       return "Substantivo";
+    // Comparativos irregulares em -or — ADJ-COMP-01 (antes de rule 22 que pega sufixo -or)
+    // Bechara MGP §graus do adjetivo: melhor/pior/maior/menor/superior/inferior/interior/exterior
+    if (_COMP_IRR.has(normalized)) return "Adjetivo";
+
     // -or/-ura como substantivos de agente/resultado (quando não verbo já tratado acima)
     if (/or$/.test(normalized) && normalized.length > 3
         && !/^.+(ar|er|ir)or$/.test(normalized)) // não é radical verbal
@@ -1148,6 +1159,17 @@
     "cem","cento","duzentos","duzentas","trezentos","trezentas","quatrocentos","quatrocentas",
     "quinhentos","quinhentas","seiscentos","seiscentas","setecentos","setecentas",
     "oitocentos","oitocentas","novecentos","novecentas","mil","milhao","bilhao"
+  ]);
+
+  // Comparativos irregulares — ADJ-COMP-01 (Bechara MGP §graus do adjetivo)
+  const _COMP_IRR = new Set([
+    "melhor","melhores","pior","piores",
+    "maior","maiores","menor","menores",
+    "superior","superiores","inferior","inferiores",
+    "interior","interiores","exterior","exteriores",
+    "anterior","anteriores","posterior","posteriores",
+    "ulterior","ulteriores","supremo","suprema","infimo","infima",
+    "otimo","otima","otimos","otimas","pessimo","pessima","pessimos","pessimas"
   ]);
 
   // Ordinais funcionam como Adjetivo quando acompanham substantivo (Bechara MGP §numerais)
