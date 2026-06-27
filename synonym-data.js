@@ -1697,6 +1697,11 @@
     // Técnica de escrita — v879
     "oralizacao":   ["fala na escrita", "registro falado", "voz recriada", "ritmo de boca", "escrita que escuta"],
     "diccao":       ["voz própria", "tom singular", "jeito de escrever", "marca na frase", "presença na língua"],
+
+    // Verbos narrativos — v880
+    "insinuar":     ["sugerir sem dizer", "deixar no ar", "dar a entender", "insinuar com cuidado", "plantar a dúvida"],
+    "reconhecer":   ["admitir", "aceitar o erro", "ver-se no outro", "dar razão a", "confessar o que se sabia"],
+    "admitir":      ["reconhecer", "confessar", "aceitar o que custou", "dar-se conta", "render-se à evidência", "dizer o que não queria"],
   };
 
   // Normalização: remove acentos e converte para minúsculas

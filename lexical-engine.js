@@ -2235,6 +2235,17 @@
     "fragilidade":  "O que se parte com facilidade — mas não é o mesmo que fraqueza. A fragilidade pode ser beleza: o que é frágil exige cuidado, atenção, presença. Na ficção, personagens frágeis revelam o que está em jogo — a ameaça de quebrá-los é suficiente para criar tensão.",
     "coragem":      "Agir apesar do medo — não na ausência dele. A coragem literária tem textura específica: quem age com coragem sabe o que pode perder. Por isso, o gesto corajoso precisa do medo para ter peso. Personagens corajosos sem medo não são corajosos: são invulneráveis, o que é menos interessante.",
     "determinacao": "Vontade que não cede diante do obstáculo. A determinação é arco ou falha: pode levar ao sucesso ou à cegueira de quem não sabe quando parar. Na ficção, a determinação que não questiona seus próprios fins é obsessão — e obsessão é narrativa.",
+
+    // Verbos narrativos fundamentais — v880
+    "revelar":      "Mostrar o que estava escondido — no personagem, na trama ou no leitor. A revelação revela mais de quem a recebe do que do que é revelado: o significado de uma verdade depende do momento em que chega. Revelar cedo demais mata a tensão; revelar tarde demais pode não ser crível.",
+    "esconder":     "Guardar para depois — ou para nunca. O que uma personagem esconde define seu interior tanto quanto o que ela diz. O segredo move a narrativa; o leitor que sabe o que a personagem esconde está em posição de superioridade dramática, e essa assimetria é poder narrativo.",
+    "sugerir":      "Colocar um sentido sem explicitá-lo. Sugerir é a operação mais econômica da ficção: uma imagem, um gesto, um detalhe carregado. O que é sugerido permanece aberto — o leitor completa, e a completude é sua. O que é dito fecha; o que é sugerido continua.",
+    "insinuar":     "Plantar uma ideia sem assiná-la. A insinuação é calculada: quem insinua sabe que está fazendo isso. Na ficção, insinuação é traição velada, sedução oblíqua, desconforto que não tem forma. O leitor sente antes de entender, o que é mais eficaz.",
+    "enfrentar":    "Ir de encontro ao que amedronta, ao que dói ou ao que foi evitado. O confronto só tem peso quando a personagem tem a opção de fugir e escolhe ficar. Sem essa escolha, não há coragem — há obrigação. A diferença entre enfrentar e ser forçado é a diferença entre ativo e passivo narrativo.",
+    "duvidar":      "Suspender a certeza — sobre si mesma, sobre o outro, sobre o que viu. A dúvida em ficção é motor: ela gera perguntas que o leitor também faz. Uma personagem que nunca duvida é menos interessante do que uma que duvida da coisa certa na hora errada.",
+    "reconhecer":   "Ver-se no outro, ou ver a verdade que se tinha resistido. O reconhecimento aristotélico (anagnorisis) é um dos motores mais antigos da narrativa: o momento em que o que era desconhecido se torna evidente muda tudo que vem antes e depois.",
+    "admitir":      "Dizer o que custou admitir. A admissão é um ato de rendição seletiva: a personagem cede em um ponto para manter alguma coisa intacta. O que ela admite e o que ela ainda guarda depois de admitir revela a diferença entre honestidade e confissão completa.",
+    "recuar":       "Dar um passo atrás quando o caminho ficou grande demais. O recuo pode ser estratégia ou covardia — e a ficção frequentemente explora a zona cinza entre os dois. Uma personagem que recua sem culpa é diferente de uma que recua e sabe o que está perdendo.",
   };
 
   function inferDefinicao(word, className) {
