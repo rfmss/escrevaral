@@ -1818,6 +1818,32 @@
     "coerente":     "Que se mantém consistente consigo mesmo — interno ao texto, às personagens, ao estilo. A incoerência narrativa é o maior risco da ficção longa: o personagem que age diferente sem motivo.",
     "universal":    "Que ressoa além de um contexto particular — que toca o que é humano em qualquer cultura ou época. O paradoxo: os textos mais universais são frequentemente os mais específicos em lugar, tempo e voz.",
     "singular":     "Que não se parece com nenhum outro — único na voz, na forma ou na visão. A singularidade é o que separa um livro de uma boa execução de fórmula.",
+
+    // Pontuação para escritores — v838
+    "reticencias":  "Os três pontos (...) que indicam suspensão, hesitação ou omissão. Na ficção, as reticências criam o que não é dito — e o que não é dito frequentemente é mais pesado do que o que é. Usar com economia.",
+    "travessao":    "O traço longo (—) que introduz fala de personagem, aposto explicativo ou ruptura de pensamento. Na prosa brasileira, o travessão é marca de estilo — Guimarães Rosa o transformou em respiração.",
+    "virgula":      "A pausa breve que organiza o fluxo da frase — separa elementos, cria ritmo, muda sentido. 'Vamos comer, João' vs. 'Vamos comer João.' A vírgula salva vidas (e personagens).",
+    "ponto":        "O fim de uma frase — e do que ela contém. Na prosa, o ponto não é apenas gramática: é decisão de ritmo. Frases curtas, muitos pontos, respiração rápida. Frases longas, leitura que acumula.",
+    "interrogacao": "Sinal que transforma afirmação em pergunta — e que, na ficção, pode ser a pergunta que o personagem não consegue formular em voz alta. A pergunta retórica também merece ponto de interrogação.",
+    "exclamacao":   "Sinal de ênfase, espanto ou grito. Na prosa, o ponto de exclamação deve ser raro — o próprio texto deve carregar a intensidade, não o sinal. Quando aparece muito, perde força.",
+    "parentese":    "Elemento entre parênteses — uma voz lateral, um detalhe, uma digressão que o autor inclui mas que o texto principal não acomodaria. Na ficção, parentéticos criam intimidade com o leitor.",
+    "aspas":        "Marcam citação, ironia ou uso especial de uma palavra. As aspas de ironia ('ela foi muito 'útil'') revelam o ponto de vista do narrador sem precisar dizê-lo.",
+    "semicolon":    "O ponto e vírgula — mais do que uma vírgula, menos do que um ponto. Conecta ideias relacionadas com pausa maior. Na prosa, revela cuidado com o ritmo — quem usa ponto e vírgula bem, pensa em frases.",
+
+    // Oficina de escrita — v838
+    "rascunho":     "A primeira versão de um texto — sem compromisso com a forma definitiva. O rascunho é permissão: você pode escrever mal, desistir do parágrafo, contradizer-se. O rascunho existe para ser superado.",
+    "feedback":     "Em oficinas literárias: o retorno de leitores sobre um texto. Diferente de crítica: o feedback bem dado ajuda o escritor a ver o que o texto faz (ou não faz) no leitor. Não é aprovação — é informação.",
+    "leitura":      "O ato de receber o texto. Na oficina literária, leitura em voz alta revela o que a leitura silenciosa esconde: ritmo, respiração, onde o texto tropeça. O escritor que não leu o próprio texto em voz alta não terminou.",
+    "releitura":    "Ler de novo — com distância, outro ângulo ou outra questão. A releitura é a principal ferramenta de revisão: o que o escritor não vê na primeira vez, a releitura entrega.",
+    "revisao":      "O trabalho de melhorar o texto depois do rascunho — cortar, reorganizar, clarear, aprofundar. A revisão é onde a maior parte da escrita acontece. Hemingway: 'O primeiro rascunho de qualquer coisa é uma merda.'",
+
+    // Estados emocionais adicionais — v838
+    "esperanca":    "A expectativa de que algo melhor vai acontecer — mesmo sem garantia. Na ficção brasileira, a esperança é frequentemente irônica: o personagem que espera é o que o narrador protege ou abandona.",
+    "resignacao":   "A aceitação de algo inevitável — sem concordar, mas sem mais lutar. Na narrativa, a resignação pode ser ponto final ou armadilha: o personagem que se resigna pode não ter chegado ao fim.",
+    "serenidade":   "Estado de calma estável, interior. A serenidade é rara na ficção de conflito — mas quando aparece, é ponto de virada. A personagem serena no caos é a mais assustadora ou a mais sábia.",
+    "euforia":      "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir.",
+    "desesperanca": "A ausência de esperança — não a tristeza, mas o lugar além dela. É estado permanente, não passageiro. A desesperança em Beckett é poética; nas letras de cordel, é combatida com humor.",
+    "resignacao2":  "Resignação e desesperança são distintas: a primeira aceita, a segunda desistiu de aceitar. A personagem resignada ainda carrega o desejo; a desesperançada o esqueceu.",
   };
 
   function inferDefinicao(word, className) {
