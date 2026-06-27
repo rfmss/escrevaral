@@ -809,8 +809,13 @@
     // Standalone: "Ele foi lá", "que lá sei eu" → sempre Advérbio
     POLISSEMIA["la"] = () => "Advérbio";
 
-    // "ai" (normalização de "aí") — advérbio de lugar/tempo; não está em functionWords.adverbios
-    POLISSEMIA["ai"] = () => "Advérbio";
+    // "ai" — advérbio de lugar "aí" vs. interjeição de dor "ai"
+    // "aí" (lugar/tempo): "Fica aí", "E aí?" → Advérbio
+    // "ai" (dor/susto): "Ai, que dor!" — next="que" é o marcador mais confiável
+    POLISSEMIA["ai"] = (prev, next) => {
+      if (next === "que") return "Interjeição";
+      return "Advérbio";
+    };
 
     // "alem" (normalização de "além") — está em conjuncoes E adverbios; conjuncoes dispara primeiro
     // Como standalone, "além" é Advérbio de lugar ("foi além") ou Preposição ("além de/disso")
@@ -1117,8 +1122,30 @@
         && !/^.+(ar|er|ir)or$/.test(normalized)) // não é radical verbal
       return "Substantivo";
 
+    // 23. Interjeições canônicas — INTERJ-01
+    if (_INTERJEICOES.has(normalized)) return "Interjeição";
+
+    // 24. Numerais cardinais — NUM-CARD-01
+    if (_NUMERAIS_CARD.has(normalized)) return "Numeral";
+
     return "Substantivo";
   }
+
+  const _INTERJEICOES = new Set([
+    "ah","oh","ai","ui","oi","ei","eh","hm","hmm","ah","aha","haha","ops","opa","ufa","ufa",
+    "xi","xi","xii","caramba","puxa","poxa","nossa","droga","eca","eca","ixi","ixi",
+    "arre","oxe","eita","vixe","bah","tchau","oba","olha","veja","ora",
+    "uau","wow","hei","vamos","psiu","shh","zzz","bravo","bis"
+  ]);
+
+  const _NUMERAIS_CARD = new Set([
+    "zero","dois","duas","tres","quatro","cinco","seis","sete","oito","nove",
+    "dez","onze","doze","treze","quatorze","catorze","quinze","dezesseis","dezessete","dezoito","dezenove",
+    "vinte","trinta","quarenta","cinquenta","sessenta","setenta","oitenta","noventa",
+    "cem","cento","duzentos","duzentas","trezentos","trezentas","quatrocentos","quatrocentas",
+    "quinhentos","quinhentas","seiscentos","seiscentas","setecentos","setecentas",
+    "oitocentos","oitocentas","novecentos","novecentas","mil","milhao","bilhao"
+  ]);
 
   // ── Gatilhos que desencadeiam subjuntivo — VERB-SUBJ-USO-01/02/03/04 (Bechara MGP + Cunha&Cintra) ──
   // "talvez" → subj. independente (Cunha&Cintra §subj. independente c)
