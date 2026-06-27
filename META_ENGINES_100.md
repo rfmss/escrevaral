@@ -68,6 +68,46 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v876→v885)
+
+**Baseline:** v885 — todos os engines em 100%, exceto Exportação 90%. SINONIMOS 1269, DEFINICOES 535+, POLISSEMIA 111 formas.
+
+**O que foi entregue neste ciclo (v876→v885):**
+
+- `lexical-engine.js` (v876): POLISSEMIA colisões diacríticas — pública/séria/preso desambiguados por contexto
+- `lexical-engine.js` (v877): POLISSEMIA cópia/túnica — 2 novas colisões diacríticas cobertas
+- `synonym-data.js` (v878): +6 SINONIMOS lacunas literárias (narradora/epígrafe/dedicatória/alienação/crescimento/brecha)
+- `lexical-engine.js`+`synonym-data.js` (v879): +15 DEFINICOES + 2 SINONIMOS (epígrafe/dedicatória/tensão/resolução/vulnerabilidade/coragem/dicção/etc.)
+- `lexical-engine.js`+`synonym-data.js` (v880): +9 DEFINICOES + 3 SINONIMOS (verbos narrativos: revelar/esconder/sugerir/admitir/etc.)
+- `lexical-engine.js`+`synonym-data.js` (v881): +9 DEFINICOES + 4 SINONIMOS (estados emocionais: raiva/fúria/amargura/desencanto/etc.)
+- `lexical-engine.js`+`synonym-data.js` (v882): +11 DEFINICOES + 5 SINONIMOS (ambiente/sensorial: escuridão/luz/sombra/noite/madrugada/cheiro)
+- `lexical-engine.js`+`synonym-data.js` (v883): +8 DEFINICOES + 7 SINONIMOS (corpo/gesto: olhar/suspiro/lágrima/toque/abraço/pausa)
+- `lexical-engine.js`+`synonym-data.js` (v884): +10 DEFINICOES + 3 SINONIMOS (relações: traição/lealdade/amor/ódio/medo/liberdade/abandono)
+- `lexical-engine.js`+`synonym-data.js` (v885): +6 DEFINICOES + 6 SINONIMOS (estrutura: onisciência/compressão/coadjuvante/figurante/passagem/perspectiva)
+
+**Estado atualizado dos engines (v885):**
+
+| Área / engine | Maturidade | Notas de estado (v885) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS 1269 (P0=0); DEFINICOES 535+; POLISSEMIA 111 formas; campo `decisao` |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; VERBOS_PRES 2045; POLISSEMIA diacríticas |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **90%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; buildOutputPackage; UI de escopo |
+
+**Fronteiras abertas (v885):**
+
+1. **Exportação para 95%**: RTF/ePub multi-manuscrito não usam escopo ainda
+2. **"logo" conclusivo** — "Penso, logo existo" → sem parser externo é insolúvel
+3. **Adjetivos compostos** (bem-humorado) — hífen impede normalizeWord
+4. **"quando" como Conjunção** vs Advérbio interrogativo — requer detecção de `?`
+5. **DEFINICOES de termos técnicos compostos** (ponto de vista, foco narrativo) — lookup só funciona com palavra isolada
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v866→v875)
 
 **Baseline:** v875 — todos os engines em 100%, exceto Exportação 90%. P0 de dados eliminado.
