@@ -159,7 +159,8 @@
     if (topField === "sobrenatural") return "sobrenatural";
 
     // Resistência: campo do trabalho e labor — suor, ofício, luta social
-    if (topField === "trabalho") return "resistência";
+    // dialogue >= 4 → oral prevalece (Carolina Maria de Jesus: diário com fala direta frequente)
+    if (topField === "trabalho" && punctuation.dialogue < 4) return "resistência";
 
     // Seco: frases curtas independente de repetições (Trevisan e Freire usam anáfora como recurso)
     if (avgSentence < 12 && topField !== "pensamento") return "seco";
