@@ -2010,6 +2010,28 @@
     "grotesco":     "O que mistura o ridículo com o terrível, o humano com o bestial, o belo com o repugnante. Na literatura brasileira, o grotesco é recurso crítico — Graciliano Ramos, João Guimarães Rosa, Rubem Fonseca.",
     "ironia":       "Dizer o oposto do que se pensa — ou mostrar a distância entre o que parece e o que é. A ironia de Machado de Assis é estrutural: não é a frase que ironiza, é o narrador inteiro.",
     "humor":        "O riso que emerge de incongruência, surpresa ou reconhecimento. Na ficção, o humor não é decoração: é modo de conhecimento. Quem ri de uma personagem também a entende — às vezes melhor do que quem chora.",
+
+    // Adjetivos de paisagem/atmosfera — v852
+    "arido":        "Seco ao extremo, sem umidade ou vegetação. No texto literário, o árido não é só paisagem — é estado de espírito, de vida, de silêncio. O sertão de Guimarães Rosa é árido; a mente de certos personagens também.",
+    "umido":        "Que contém umidade — névoa, orvalho, suor de medo, cheiro de terra molhada. Adjetivo de atmosfera: o úmido cria sensação antes de criar imagem. Florestas, caves, mangues, porões — o úmido tem presença física.",
+    "rigido":       "Sem dobrar, sem ceder. No sentido concreto: o metal, o gelo, o corpo morto. No sentido abstrato: a disciplina, o caráter, a lei. O personagem rígido não é necessariamente mau — é inflexível, e isso pode ser virtude ou tragédia.",
+    "timido":       "Que recua por insegurança ou medo do julgamento alheio. A timidez em personagens pode ser falsa humildade, profundidade não revelada ou simplesmente timidez — o texto deve mostrar qual. Diferente de introvertido.",
+    "nitido":       "Com contornos claros, sem ambiguidade visual ou semântica. A cena nítida é a que o leitor vê. O personagem nítido é o que o leitor entende. A prosa nítida sabe o que quer dizer — e diz.",
+    "solido":       "Com consistência e estabilidade. No texto: o argumento sólido não treme; a personagem sólida não vira caricatura; a prosa sólida carrega o peso do que conta. Sólido é o oposto de frágil, de vago, de oco.",
+
+    // Adjetivos de personagem — v852
+    "arrogante":    "Que se crê acima dos outros — e o demonstra. Na ficção, a arrogância é arco clássico: o personagem arrogante precisa aprender a se ver. Mas nem todo arrogante cede: alguns caem sem mudar, e essa tragédia também é literatura.",
+    "covarde":      "Que evita o confronto por medo — não pela prudência, mas pelo pavor. Na ficção, a covardia é mais interessante do que a maldade: o covarde sabe o que deveria fazer, e não faz. Essa consciência é a sua punição.",
+    "valente":      "Que age apesar do medo. A valentia não é ausência de medo — é ação mesmo com ele. O personagem valente não é invulnerável: é o que avança quando todo o resto recua. Diferente de audacioso, que ignora o risco.",
+    "mesquinho":    "Pequeno de espírito — não de posses, mas de visão. O mesquinho vê o mundo em termos de perda e ganho pessoal imediato. Na ficção, é antagonista ideal: não tem grandeza nem tragédia, apenas estreiteza.",
+    "brilhante":    "Que ilumina — no sentido intelectual, artístico ou moral. O brilhante é raro: não é apenas competente, mas inventivo, reluzente, que surpreende. Na ficção, brilhante sem falha é caricatura; com uma rachadura, é personagem.",
+
+    // Adjetivos abstratos — v852
+    "atual":        "Que pertence ao tempo presente. Em análise literária: o 'atual' de um texto é o que ainda fala ao leitor de hoje, além da época em que foi escrito. A grande ficção é sempre atual — porque toca algo que não muda.",
+    "final":        "Que marca o encerramento, o último momento. O 'final' de uma narrativa é o que o leitor carrega — a última impressão, o que sobra. Um final fraco arruína o que veio antes; um final certo revela o que veio antes.",
+    "fatal":        "Que leva à morte ou ao desastre inevitável. Na tragédia, o 'fatal' é o erro que a personagem não poderia evitar — ou que poderia, mas não evitou. O adjetivo fatal impõe peso à cena antes de qualquer ação.",
+    "imoral":       "Que contraria os valores morais do contexto em que aparece. Na ficção, o imoral não é sempre o vilão: pode ser o herói cujos valores chocam os da sociedade em que vive. Imoralidade depende de ponto de vista — e a literatura sabe disso.",
+    "irreal":       "Que não corresponde à realidade — mas pode ser mais verdadeiro do que ela. O irreal na ficção literária não é escapismo: é acesso a camadas que o real não permite. Kafka, Borges, o realismo mágico: o irreal como método de verdade.",
   };
 
   function inferDefinicao(word, className) {
