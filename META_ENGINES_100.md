@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v904→v909)
+
+**Baseline:** v909 — todos engines 100%, exceto Exportação 90%.
+
+**O que foi entregue neste ciclo (v904→v909):**
+
+- v904: +12 DEF corpo/mente/alma/coração/confiança/laço/missão/chamado/vontade/fracasso/humilhação/instinto
+- v905: +10 DEF + 6 SIN língua/escrever/ler/criar/livro/texto/sucesso/manhã/frase/parágrafo
+- v906: +12 DEF depressão/ansiedade/torpor/apatia/tédio/caráter/personalidade/dignidade/honra/arrogância/símbolo/imagem
+- v907: +12 DEF subtexto + raça/classe/opressão/colonialismo/racismo + cidade/rua/casa/janela + infância/velhice
+- v908: +12 DEF porta/espelho + adolescência/sexualidade/feminismo/patriarcado + narrativa/realismo/fantasia/prosa + sugestão/ambiguidade
+- v909: +10 DEF geração/privilégio/diversidade/representatividade + afeto/cuidado/crueldade/bondade + ambição/oceano
+
+**Estado atualizado dos engines (v909):**
+
+| Área / engine | Maturidade | Notas de estado (v909) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350 (P0=0, 0 auto-refs); DEFINICOES ~850+ (v909); POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bancada 17/17; golden 91/0; VERBOS_PRES 2045 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **90%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; buildOutputPackage; UI de escopo |
+
+**Auditor:** P0=0, P1=4 (todos mitigados), P2=0
+
+**Fronteiras abertas (v909):**
+
+1. **Exportação 90%→95%**: RTF/ePub não usam escopo — `buildOutputPackage` existe, falta integração
+2. **DEFINICOES restantes**: ousadia/timidez/floresta/deserto/envelhecimento/geração ainda sem
+3. **Função sintática (Codex)**: sujeito/predicado/objeto — `handoff-codex-gramatica-2026-06-27.md`
+4. **Fallback "gw-substantivo"**: grammar-controller.js — planejar saída `indeterminado` estruturada
+5. **100 commits locais não enviados** — fazer push quando usuário pedir
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v891→v901)
 
 **Baseline:** v901 — todos os engines em 100%, exceto Exportação 90%.
