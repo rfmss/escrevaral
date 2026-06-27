@@ -690,6 +690,16 @@
     POLISSEMIA["juntos"] = () => "Advérbio";
     POLISSEMIA["juntas"] = () => "Advérbio";
 
+    // "tarde" — Advérbio vs Substantivo (Bechara §classes §adv de tempo)
+    // "A tarde" / "Boa tarde" / "Na tarde" → Substantivo; "Chegou tarde" / "mais tarde" → Advérbio
+    const _ARTS_TARDE = new Set(["o","a","os","as","um","uma","uns","umas","do","da","dos","das","no","na","pelo","pela"]);
+    POLISSEMIA["tarde"] = (prev) => {
+      if (!prev) return "Substantivo";
+      if (_ARTS_TARDE.has(prev)) return "Substantivo";
+      if (prev === "boa" || prev === "bom") return "Substantivo";
+      return "Advérbio";
+    };
+
     // ── Grupo C — Conjunções temporais com forma de advérbio ──
 
     // "quando" — temporal (Conjunção) vs interrogativo (Advérbio) (Bechara §conjunção temporal)
@@ -1040,7 +1050,9 @@
     const _baseVerb = _isCliticizado ? _parts[0] : null;
     const lexiconEntry = localLexicon[normalized];
     // Usar classificação contextual quando há texto disponível
-    const className = lexiconEntry?.className
+    // POLISSEMIA vence lexiconEntry quando há texto — permite que "tarde" seja Advérbio em "Chegou tarde."
+    const _polisOverride = text && POLISSEMIA[normalized];
+    const className = (!_polisOverride && lexiconEntry?.className)
       || (_isCliticizado ? (VERBOS_ACENTUADOS.has(_baseVerb) ? VERBOS_ACENTUADOS.get(_baseVerb)
           : /^.+(ar|er|ir|or)$/.test(normalizeWord(_baseVerb)) ? "Verbo no infinitivo" : "Verbo flexionado")
          : (text ? inferWordClassContextual(selectedWord, text) : inferWordClass(normalized, selectedWord)));
@@ -1182,7 +1194,7 @@
 
     // 20. Infinitivo — VERB-INF-PESS-01
     // -ar/-er/-ir: sufixos canônicos do infinitivo (Bechara MGP §conjugação)
-    if (/^.+(ar|er|ir)$/.test(normalized) && normalized.length > 3) return "Verbo no infinitivo";
+    if (/^.+(ar|er|ir)$/.test(normalized) && normalized.length > 3 && normalized !== "devagar") return "Verbo no infinitivo";
     // -por: compostos de "pôr" — compor/dispor/expor/impor/opor/propor/repor/transpor
     // Substantivos agentivos em -or (escritor/autor/diretor/ator…) são Substantivo — ver regra 22
     if (/por$/.test(normalized) && normalized.length > 4) return "Verbo no infinitivo";
