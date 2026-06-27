@@ -803,6 +803,11 @@
     // Plurais de pouco
     POLISSEMIA["poucos"] = () => "Pronome indefinido";
     POLISSEMIA["poucas"] = () => "Pronome indefinido";
+
+    // "la" (normalização de "lá") — advérbio de lugar quando standalone
+    // O clítico "la" só ocorre após hífen (levá-la, fazê-la) — esses são tratados por P0.6
+    // Standalone: "Ele foi lá", "que lá sei eu" → sempre Advérbio
+    POLISSEMIA["la"] = () => "Advérbio";
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
