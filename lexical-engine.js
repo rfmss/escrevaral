@@ -1864,6 +1864,26 @@
     "silencio2":    "O silêncio no processo de escrita — o momento antes das palavras, a pausa entre as frases, a releitura sem caneta. O silêncio não é ausência de trabalho. É o trabalho que não aparece no manuscrito.",
     "procrastinar": "Adiar o texto por fazer outras coisas — algumas úteis, a maioria não. A procrastinação é frequentemente medo disfarçado de preguiça. O escritor que procrastina geralmente sabe exatamente o que precisa escrever — e exatamente por que não quer.",
     "rasura":       "A marca da revisão — riscado, apagado, substituído. A rasura é evidência de trabalho vivo. Nos manuscritos de Machado, as rasuras mostram o escritor pensando — não errando. Guardar as rasuras é guardar o processo.",
+
+    // Experiência humana — v840
+    "trauma":       "Ferida psíquica profunda que reorganiza a percepção de si e do mundo. Na ficção brasileira, o trauma histórico (escravidão, ditadura, genocídio) se mistura ao trauma individual — raramente é apenas pessoal.",
+    "memoria":      "A capacidade de reter e acessar o passado — sempre seletiva, sempre reescrita no presente. Proust soube disso: a memória não é arquivo, é invenção. A memória de uma personagem é política.",
+    "identidade":   "Quem se é — construído por cultura, história, corpo, língua e relações. Na narrativa brasileira, a identidade é sempre múltipla e contraditória: nordestino e urbano, negro e brasileiro, mulher e escritora.",
+    "alteridade":   "O reconhecimento do outro como diferente — e legítimo. Na ficção, a alteridade é o que impede que todos os personagens pensem como o narrador. Sem alteridade, a ficção é monólogo disfarçado.",
+    "pertencimento":"Sensação de fazer parte — de um lugar, grupo, língua ou história. Na literatura brasileira, pertencimento e exclusão andam juntos: quem narra decide quem existe.",
+    "exilio":       "O afastamento forçado ou voluntário do lugar de origem — geográfico, cultural ou linguístico. Na tradição literária brasileira, o exílio aparece no corpo dos que foram escravizados, nos retirantes, nos imigrantes.",
+
+    // Oralidade e escrita — v840
+    "oralidade":    "A cultura e a linguagem do que é falado — não transcrito. No Brasil, a oralidade carrega saberes que a escrita não fixou. Na ficção, respeitar a oralidade é não transformar a fala do personagem em texto limpo sem razão.",
+    "letramento":   "A capacidade de usar a escrita como prática social — não apenas ler tecnicamente, mas participar da cultura escrita. O letramento é político: quem escreve define o que existe.",
+    "dicao":        "O conjunto de escolhas de linguagem que definem o estilo: vocabulário, sintaxe, ritmo, registro. A dicção de um escritor é o que o identifica antes mesmo do conteúdo. Machado tem dicção. Clarice tem dicção.",
+
+    // Conceitos de estética — v840
+    "beleza":       "No texto literário: não ornamento, mas adequação — a beleza de uma frase está em fazer exatamente o que precisa ser feito, sem sobra. A beleza literária frequentemente vem do que foi tirado, não do que foi acrescentado.",
+    "sublime":      "Categoria estética que designa o que excede a capacidade humana de conter — o incomensurável, o avassalador. Na ficção brasileira, o sublime aparece na paisagem do cerrado, no sertão, no Amazonas — e no desamparo humano.",
+    "grotesco":     "O que mistura o ridículo com o terrível, o humano com o bestial, o belo com o repugnante. Na literatura brasileira, o grotesco é recurso crítico — Graciliano Ramos, João Guimarães Rosa, Rubem Fonseca.",
+    "ironia":       "Dizer o oposto do que se pensa — ou mostrar a distância entre o que parece e o que é. A ironia de Machado de Assis é estrutural: não é a frase que ironiza, é o narrador inteiro.",
+    "humor":        "O riso que emerge de incongruência, surpresa ou reconhecimento. Na ficção, o humor não é decoração: é modo de conhecimento. Quem ri de uma personagem também a entende — às vezes melhor do que quem chora.",
   };
 
   function inferDefinicao(word, className) {
