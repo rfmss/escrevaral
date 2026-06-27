@@ -779,10 +779,10 @@
     "inspiracao":    ["inspiração", "lampejo", "insight", "iluminação", "centelha criativa", "impulso", "fagulha", "impulso criativo", "centelha", "sopro inicial", "abertura do texto"],
     "criatividade":["criatividade", "inventividade", "imaginação criadora", "originalidade", "engenho", "talento", "aptidão"],
     "bloqueio":    ["bloqueio", "trava", "paralisia criativa", "estagnação", "silêncio interno", "impasse", "nó", "travamento", "silêncio forçado", "medo disfarçado de preguiça"],
-    "esboço":    ["esboço", "rascunho", "primeira versão", "minuta", "borrão", "apontamento", "traço inicial"],
+    "esboço":    ["rascunho", "primeira versão", "minuta", "borrão", "apontamento", "traço inicial"],
     "disciplina":    ["disciplina", "constância", "persistência", "rotina criativa", "firmeza", "regularidade", "comprometimento", "prática regular", "compromisso com o texto", "rotina de escrita"],
     "oficio":    ["ofício", "artesanato da escrita", "técnica", "habilidade", "mestria", "perícia", "trato com as palavras", "arte", "prática", "especialidade", "profissão"],
-    "rascunho":    ["rascunho", "esboço", "versão zero", "primeiro gesto", "borrão", "ensaio", "tentativa inicial", "primeira versão", "texto bruto", "letra viva", "versão provisória"],
+    "rascunho":    ["esboço", "versão zero", "primeiro gesto", "borrão", "ensaio", "tentativa inicial", "primeira versão", "texto bruto", "letra viva", "versão provisória"],
     "ritmo":    ["ritmo", "cadência", "andamento", "compasso", "fluxo", "pulsação", "respiração do texto", "cadência do texto", "pulsação das palavras", "andamento da frase", "compasso narrativo", "fluxo sonoro"],
     "escuta":    ["escuta", "atenção ao texto", "sensibilidade", "receptividade", "abertura", "percepção", "leitura atenta"],
 
@@ -836,7 +836,7 @@
     "tensão":    ["tensão", "suspense", "pressão dramática", "iminência", "antecipação", "corda esticada", "expectativa"],
     "clímax":    ["clímax", "auge", "ponto máximo", "ápice", "cúpula dramática", "momento decisivo", "pico da tensão", "ponto alto da tensão", "auge da história", "ápice narrativo", "virada máxima"],
     "desfecho":    ["desfecho", "desenlace", "conclusão", "final", "resolução", "encerramento", "solução"],
-    "perspectiva":    ["perspectiva", "ponto de vista", "ângulo", "focalização", "olhar narrativo", "voz que conta", "prisma"],
+    "perspectiva":    ["ponto de vista", "ângulo", "focalização", "olhar narrativo", "voz que conta", "prisma"],
     "arco":    ["arco", "trajetória", "percurso", "jornada do personagem", "curva dramática", "evolução", "transformação"],
     "estrutura":    ["estrutura", "arquitetura do texto", "organização", "forma", "disposição", "esqueleto narrativo", "construção"],
     "sumário":    ["sumário", "resumo narrativo", "síntese", "condensação", "salto temporal", "passagem rápida", "panorama", "compressão de tempo", "elipse controlada", "o que ficou de fora"],
@@ -846,7 +846,7 @@
     "epílogo":    ["epílogo", "fechamento", "coda", "última palavra", "posfácio narrativo", "remate", "eco final", "texto de encerramento", "palavras finais", "conclusão da voz autoral", "capítulo de desfecho", "último olhar do autor", "depois da história", "o que ficou depois", "desfecho do desfecho", "pós-texto narrativo"],
     "capítulo":    ["capítulo", "parte", "seção", "unidade", "segmento", "trecho", "divisão", "divisão do livro", "unidade narrativa", "parte da obra", "bloco de narração", "segmento do texto longo", "divisão da narrativa", "unidade de tempo ou perspectiva", "corte intencional"],
     "plot":    ["plot", "enredo", "trama", "fio condutor", "sequência de causas", "lógica dos eventos", "nexo narrativo"],
-    "focalização":    ["focalização", "ponto de vista", "perspectiva", "quem vê", "filtro narrativo", "olhar escolhido", "ângulo de visão", "perspectiva narrativa", "filtro de percepção"],
+    "focalização":    ["ponto de vista", "perspectiva", "quem vê", "filtro narrativo", "olhar escolhido", "ângulo de visão", "perspectiva narrativa", "filtro de percepção"],
 
     // estilo e voz
     "tom":    ["tom", "registro", "atitude narrativa", "temperatura emocional", "voz do texto", "inclinação", "coloração", "voz dominante", "registro emocional", "atmosfera do texto", "coloração da escrita", "timbre da narração"],
@@ -1790,6 +1790,21 @@
     "vislumbrar":   ["entrever", "ver de longe e de relance", "perceber vagamente", "ver por frações", "flagrar antes de sumir"],
     "farejar":      ["cheirar para descobrir", "rastrear pelo olfato", "sentir o rastro", "buscar pelo cheiro", "farejamento"],
     "prever":       ["antecipar", "intuir o que vem", "calcular o futuro", "sentir o que vai acontecer", "adiantar-se ao fato"],
+
+    // Estrutura de livro e prática editorial — v893
+    "sinopse":       ["resumo da obra", "texto de apresentação interna", "o que conta o livro em poucas linhas", "descrição para o mercado", "resumo para o editor"],
+    "contracapa":    ["texto do verso", "apresentação no verso", "o que a capa diz por dentro", "texto de sedução do leitor", "quarta capa"],
+    "edicao":        ["revisão do texto para publicação", "processo editorial", "preparação do texto", "trabalho de refinamento editorial", "da escrita ao livro"],
+    "capa":          ["primeira face do livro", "o que o leitor vê primeiro", "identidade visual do livro", "convite ao leitor", "rosto do livro"],
+    "indice":        ["lista de conteúdos", "mapa do livro", "sumário das partes", "guia para o texto", "tabela de conteúdos"],
+    "posfacio":      ["texto que vem depois", "reflexão após o texto", "palavras finais da autora", "o que fica após a última página", "texto de fechamento"],
+
+    // Narratologia clássica — v893
+    "peripecia":     ["reviravolta", "virada da história", "mudança de sorte", "transformação súbita", "o momento que muda tudo"],
+    "anagnorise":    ["reconhecimento", "descoberta que muda tudo", "momento de revelação", "quando a verdade emerge", "o instante em que o personagem sabe"],
+    "polifonia":     ["muitas vozes no texto", "narrativa de vozes distintas", "multiplicidade de perspectivas", "coro de narradores", "texto que não tem uma só voz"],
+    "diegese":       ["mundo da história", "universo narrativo", "espaço da ficção", "onde a história existe", "campo do que é narrado"],
+    "cronotopo":     ["relação espaço-tempo na narrativa", "como o tempo e o espaço se cruzam", "unidade de lugar e momento na ficção", "a ancoragem temporal-espacial", "o quando e onde da cena"],
 
     // Identidade e literatura brasileira — v892
     "silenciamento": ["calar forçado", "voz apagada", "o que não pôde ser dito", "supressão da fala", "quando a voz não chega"],
