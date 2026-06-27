@@ -951,6 +951,11 @@
     }
   })();
 
+  // Nota: "jovem/pobre/velho" têm substantivação por artigo mas a janela prev/next de 2 tokens
+  // não é suficiente para distinguir "o pobre chegou" (Subs.) de "uma pobre alma" (Adj.).
+  // A className "Substantivo / Adjetivo" com decisao:"ambiguo" é a representação honesta.
+  // Ver HIERARQUIA_GRAMATICAL.md — ambiguo é preferível a classificado falso.
+
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
   const ALTERNATIVAS = {
     "bem":    ["Advérbio — 'fez bem demais'", "Substantivo — 'o bem e o mal'", "Interjeição — 'Bem! Pode ir.'"],
