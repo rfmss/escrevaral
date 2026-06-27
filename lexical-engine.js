@@ -986,6 +986,17 @@
     POLISSEMIA["presa"] = POLISSEMIA["preso"];
     POLISSEMIA["presos"] = POLISSEMIA["preso"];
     POLISSEMIA["presas"] = POLISSEMIA["preso"];
+
+    // "cópia/copia" — com acento → Subs. (cópia do arquivo); sem acento → Verbo (ela copia)
+    POLISSEMIA["copia"] = function(prev) {
+      if (!prev || _SUJPRON.has(prev)) return "Verbo flexionado";
+      return "Substantivo";
+    };
+    POLISSEMIA["copias"] = POLISSEMIA["copia"];
+
+    // "túnica/tunica" — sempre Substantivo; cai em Adjetivo por sufixo -ica
+    POLISSEMIA["tunica"] = () => "Substantivo";
+    POLISSEMIA["tunicas"] = () => "Substantivo";
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
