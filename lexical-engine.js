@@ -665,6 +665,31 @@
       return "Substantivo";
     };
 
+    // "melhor/pior" — Adjetivo quando precedido por artigo; Advérbio nos demais usos
+    // "o melhor texto" → Adjetivo; "escreve melhor" / "ficou pior" → Advérbio
+    const _ARTS_COMP = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na"]);
+    POLISSEMIA["melhor"] = (prev) => prev && _ARTS_COMP.has(prev) ? "Adjetivo" : "Advérbio";
+    POLISSEMIA["pior"]   = (prev) => prev && _ARTS_COMP.has(prev) ? "Adjetivo" : "Advérbio";
+    POLISSEMIA["melhores"] = (prev) => prev && _ARTS_COMP.has(prev) ? "Adjetivo" : "Advérbio";
+    POLISSEMIA["piores"]   = (prev) => prev && _ARTS_COMP.has(prev) ? "Adjetivo" : "Advérbio";
+
+    // "antes/depois" — Preposição quando seguido de "de/do/da"; Advérbio caso contrário
+    // functionWords.conjuncoes inclui erroneamente "antes/depois" — POLISSEMIA override
+    POLISSEMIA["antes"] = (prev, next) => {
+      if (next && ["de","do","da","dos","das","disso","disto","daquilo"].includes(next)) return "Preposição";
+      return "Advérbio";
+    };
+    POLISSEMIA["depois"] = (prev, next) => {
+      if (next && ["de","do","da","dos","das","disso","disto","daquilo"].includes(next)) return "Preposição";
+      return "Advérbio";
+    };
+
+    // "junto" — advérbio ("vamos juntos") vs preposição de locução ("junto a/com")
+    // functionWords.preposicoes pode incluí-lo; default → Advérbio
+    POLISSEMIA["junto"] = () => "Advérbio";
+    POLISSEMIA["juntos"] = () => "Advérbio";
+    POLISSEMIA["juntas"] = () => "Advérbio";
+
     // ── Grupo C — Conjunções temporais com forma de advérbio ──
 
     // "quando" — temporal (Conjunção) vs interrogativo (Advérbio) (Bechara §conjunção temporal)
@@ -758,6 +783,16 @@
   (function() {
     // Sufixos de adjetivo que tornam "muito/pouco" advérbio de intensidade
     const _ADJ_SFX = /(oso|osa|avel|ivel|ente|ante|ivo|iva|ico|ica|ino|ina|ado|ido|al|el|il|oz|iz)$/;
+    // Adjetivos irregulares (sem sufixo canônico) que "muito" intensifica
+    const _ADJ_IRR = new Set([
+      "bom","boa","bons","boas","grande","grandes","pequeno","pequena",
+      "ruim","ruins","mau","ma","maus","mas","belo","bela","feio","feia",
+      "forte","fraco","fraca","novo","nova","velho","velha",
+      "rico","rica","pobre","livre","triste","alegre","simples",
+      "grave","breve","leve","suave","firme","justo","justa",
+      "digno","digna","puro","pura","amplo","ampla","denso","densa",
+      "profundo","profunda","longo","longa","cheio","cheia"
+    ]);
     // Advérbios conhecidos que "muito/pouco" pode intensificar
     const _ADV_C   = new Set(["antes","depois","cedo","tarde","longe","perto","bem","mal","mais","menos",
       "ja","ainda","logo","nunca","sempre","aqui","ali","la","agora","assim","alem","acima","abaixo"]);
@@ -778,6 +813,8 @@
       if (_ADV_C.has(next)) return "Advérbio";
       // Antes de adjetivo por sufixo → Advérbio de intensidade ("muito pesado")
       if (_ADJ_SFX.test(next)) return "Advérbio";
+      // Antes de adjetivo irregular — "muito bom", "pouco simples"
+      if (_ADJ_IRR.has(normalizeWord(next))) return "Advérbio";
       // Antes de desinência verbal → Advérbio ("cansa muito", "pouco importa")
       if (next.length > 3 && /(ar|er|ir|ou|eu|iu|ava|ia)$/.test(next)) return "Advérbio";
       // Caso geral: antes de substantivo → Pronome indefinido adjetivo ("muito trabalho")
@@ -1267,6 +1304,18 @@
     "casto","casta","castos","castas","severo","severa","severos","severas",
     "sereno","serena","serenos","serenas","grato","grata","gratos","gratas",
     "pio","pia","pios","pias","lento","lenta","lentos","lentas",
+    // Adjetivos em -nte sem sufixo produtivo (agentes em -nte cobertos por localLexicon) — ADJ-NTE-01
+    "brilhante","brilhantes","marcante","marcantes","relevante","relevantes",
+    "urgente","urgentes","inocente","inocentes","suficiente","suficientes",
+    "eloquente","eloquentes","contundente","contundentes","recorrente","recorrentes",
+    "evidente","evidentes","permanente","permanentes","temporario","temporaria",
+    "abundante","abundantes","constante","constantes","distante","distantes",
+    "dominante","dominantes","semelhante","semelhantes","diferente","diferentes",
+    "eficiente","eficientes","inteligente","inteligentes","inconsciente","inconscientes",
+    "consciente","conscientes","conveniente","convenientes","independente","independentes",
+    "interessante","interessantes","importante","importantes","imperante","imperantes",
+    "predominante","predominantes","significante","significantes","tolerante","tolerantes",
+    "exorbitante","exorbitantes","extravagante","extravagantes","elegante","elegantes",
     // Adjetivos de personagem — ADJ-CARAC-01
     "covarde","covardes","valente","valentes","generoso","generosa","generosos","generosas",
     "mesquinho","mesquinha","mesquinhos","mesquinhas","teimoso","teimosa","teimosos","teimosas",
