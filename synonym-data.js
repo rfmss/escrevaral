@@ -1471,6 +1471,42 @@
     "tom":           ["voz dominante", "registro emocional", "atmosfera do texto", "coloração da escrita", "timbre da narração"],
     "registro":      ["nível de linguagem", "variante estilística", "camada de formalidade", "modalidade de escrita", "grau de elaboração verbal"],
     "rasura":        ["marca de revisão", "correção no manuscrito", "risco sobre a palavra", "sinal de reescrita", "apagamento visível"],
+
+    // verbos de conflito e tensão
+    "hesitar":       ["titubear", "vacilar", "duvidar", "tremer antes de agir", "ficar na dúvida"],
+    "perseguir":     ["caçar", "rastrear", "não largar", "ir atrás", "assombrar"],
+    "trair":         ["atraiçoar", "enganar", "vender", "falsear a confiança", "ferir pelas costas"],
+    "redimir":       ["salvar", "resgatar", "lavar a culpa", "recuperar a honra", "dar nova chance"],
+    "sucumbir":      ["ceder", "render-se", "cair", "ser vencido", "dobrar-se ao peso"],
+    "rebelar":       ["revoltar-se", "insurgir", "resistir", "desobedecer", "quebrar o jugo"],
+    "ceder":         ["recuar", "abrir mão", "entregar", "dobrar-se", "capitular"],
+    "confrontar":    ["enfrentar", "encarar", "ir de frente", "não desviar", "bater de frente"],
+
+    // emoções complexas — lacunas frequentes
+    "vergonha":      ["vexame", "rubor", "constrangimento", "humilhação", "acanhamento"],
+    "culpa":         ["remorso", "arrependimento", "peso na consciência", "fardo moral", "autocondena"],
+    "rancor":        ["ressentimento", "mágoa antiga", "ódio guardado", "raiva que ficou", "ferida que não fechou"],
+    "desespero":     ["desamparo", "agonia", "desalento extremo", "afogamento interior", "fim de saída"],
+    "comocao":       ["comoção", "enternecimento", "emoção que paralisa", "arrepio da alma", "impacto que fica"],
+    "cumplicidade":  ["conivência com afeto", "parceria secreta", "laço que não se explica", "entendimento mútuo"],
+    "inveja":        ["ciúme do sucesso alheio", "desejo de ter o que o outro tem", "mal-estar pelo bem do outro"],
+    "nostalgia":     ["saudade do passado", "afeto pelo que passou", "dor doce de lembrar", "memória com aroma"],
+
+    // natureza BR — paisagem e lugar
+    "rio":           ["curso d'água", "corrente", "afluente", "arroio", "veredas"],
+    "floresta":      ["mata", "selva", "brenha", "mato fechado", "bosque denso"],
+    "montanha":      ["serra", "morro", "pico", "cume", "elevação"],
+    "mar":           ["oceano", "onda", "largo", "água salgada", "imensidão azul"],
+    "brejo":         ["pântano", "charco", "alagado", "terra encharcada", "várzea úmida"],
+    "rocha":         ["pedra", "penedo", "laje", "paredão", "granito"],
+    "neblina":       ["névoa", "cerração", "bruma", "nevoeiro", "garoa fina"],
+
+    // qualidades de voz e texto
+    "lacunar":       ["deixar brechas", "não dizer tudo", "guardar o silêncio", "reticências intencionais", "criar vazio produtivo"],
+    "denso":         ["concentrado", "carregado de sentido", "cheio de camadas", "sem espaço para o vazio", "compacto"],
+    "fluido":        ["que flui sem esforço", "leve de ler", "sem empecilhos", "que corre", "sem atrito"],
+    "digressao":     ["desvio intencional", "parêntese narrativo", "saída do fio principal", "escorregada de propósito"],
+    "elipse":        ["omissão significativa", "salto no tempo", "o que foi deixado de fora", "lacuna de cena"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
