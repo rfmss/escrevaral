@@ -1428,6 +1428,49 @@
     "gaúcho":        ["pessoa do Rio Grande do Sul", "peão de estância", "gaucho"],
     "caboclo":       ["mestiço de indígena com branco", "ribeirinho", "morador da floresta", "habitante da beira do rio"],
     "ribeirinho":    ["morador de beira de rio", "pescador artesanal", "habitante de várzea", "pessoa da margem"],
+
+    // ofício da escrita — processo e prática
+    "rascunhar":     ["esboçar", "traçar o primeiro jato", "lançar ideias no papel", "abrir o borrador", "fazer rascunho"],
+    "revisar":       ["reler com cuidado", "apurar o texto", "corrigir", "lapidar", "aparar arestas", "repassar o manuscrito"],
+    "narrar":        ["contar", "relatar", "descrever em sequência", "dar voz aos fatos", "encenar em palavras"],
+    "publicar":      ["lançar", "dar ao público", "editar para circulação", "colocar no mundo", "fazer circular a obra"],
+
+    // elementos da narrativa
+    "enredo":        ["trama", "fio da história", "tecido narrativo", "sequência de acontecimentos", "esqueleto da ficção"],
+    "clichê":        ["lugar-comum", "fórmula gasta", "expressão usada demais", "banalidade repetida", "automatismo verbal"],
+    "clímax":        ["ponto alto da tensão", "auge da história", "momento decisivo", "ápice narrativo", "virada máxima"],
+    "suspense":      ["tensão narrativa", "expectativa crescente", "ansiedade do leitor", "mistério que se acumula", "fio de incerteza"],
+    "catarse":       ["purificação emocional", "alívio catártico", "comoção libertadora", "descarga de emoção", "liberação pelo texto"],
+    "diálogo":       ["fala dos personagens", "troca de vozes", "conversa encenada", "interlocução na cena", "voz em confronto"],
+
+    // formas literárias
+    "estrofe":       ["grupo de versos", "bloco do poema", "unidade métrica", "conjunto rítmico", "quadra ou sextilha"],
+    "verso":         ["linha de poema", "unidade do poema", "sequência rítmica", "linha com cadência", "linha poética"],
+    "rima":          ["correspondência de sons", "eco sonoro", "repetição de terminação", "música entre palavras", "consonância final"],
+    "ritmo":         ["cadência do texto", "pulsação das palavras", "andamento da frase", "compasso narrativo", "fluxo sonoro"],
+    "soneto":        ["poema de catorze versos", "forma fixa italiana", "poema em quartetos e tercetos", "estrutura clássica em versos"],
+    "crônica":       ["texto breve de observação", "prosa de tema cotidiano", "relato do efêmero", "registro literário do dia a dia"],
+    "cordel":        ["literatura de folheto", "poesia popular nordestina", "texto rimado em sextilhas", "poema de feira"],
+    "haiku":         ["poema de três versos", "forma japonesa de 5-7-5 sílabas", "micropoema de imagem", "instante em versos"],
+
+    // figuras de linguagem
+    "metáfora":      ["imagem sem 'como'", "comparação implícita", "transferência de sentido", "identificação poética", "imagem direta"],
+    "ironia":        ["dizer o contrário", "duplo sentido velado", "tom invertido", "crítica disfarçada", "elogio que condena"],
+    "hipérbole":     ["exagero expressivo", "amplificação poética", "força além da medida", "intensidade pelo excesso"],
+    "aliteração":    ["repetição de consoantes", "eco consonantal", "musicalidade pela repetição", "jogo de sons iniciais"],
+    "sinestesia":    ["mistura de sentidos", "fusão de percepções", "cor que tem som", "sensação cruzada entre sentidos"],
+
+    // processo editorial
+    "manuscrito":    ["texto original do autor", "obra inédita", "material a editar", "rascunho final", "versão autoral"],
+    "versão":        ["variante do texto", "etapa de revisão", "estado do manuscrito", "rascunho numerado", "instância da obra"],
+    "prefácio":      ["texto de abertura", "apresentação da obra", "palavras iniciais", "introdução assinada", "porta de entrada do livro"],
+    "epílogo":       ["texto de encerramento", "palavras finais", "conclusão da voz autoral", "capítulo de desfecho", "último olhar do autor"],
+    "capítulo":      ["divisão do livro", "unidade narrativa", "parte da obra", "bloco de narração", "segmento do texto longo"],
+
+    // qualidades do texto
+    "tom":           ["voz dominante", "registro emocional", "atmosfera do texto", "coloração da escrita", "timbre da narração"],
+    "registro":      ["nível de linguagem", "variante estilística", "camada de formalidade", "modalidade de escrita", "grau de elaboração verbal"],
+    "rasura":        ["marca de revisão", "correção no manuscrito", "risco sobre a palavra", "sinal de reescrita", "apagamento visível"],
   };
 
   // Normalização: remove acentos e converte para minúsculas

@@ -1410,8 +1410,11 @@ function getSinonimosPorClasse(word, className) {
     const key = Object.keys(entry).find(k => className === k || className.startsWith(k));
     if (key !== undefined) return entry[key] || [];
   }
-  // Fallback: sinônimos gerais filtrados por família de classe
-  const geral = getSynonyms(word);
+  // Fallback: sinônimos gerais — prioriza window.SINONIMOS (synonym-data.js, 1000+ entradas)
+  // sobre letter-bucket (syntax-controller.js que sobrescreve window.getSynonyms)
+  const _ns = w => w.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const geral = (window.SINONIMOS && (window.SINONIMOS[word] || window.SINONIMOS[_ns(word)]))
+                || getSynonyms(word);
   if (!geral.length || !window.VeredaLexical) return geral;
   const familiaOrigem = className.split(" ")[0];
   return geral.filter(s => {
