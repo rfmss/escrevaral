@@ -1507,6 +1507,31 @@
     "fluido":        ["que flui sem esforço", "leve de ler", "sem empecilhos", "que corre", "sem atrito"],
     "digressao":     ["desvio intencional", "parêntese narrativo", "saída do fio principal", "escorregada de propósito"],
     "elipse":        ["omissão significativa", "salto no tempo", "o que foi deixado de fora", "lacuna de cena"],
+
+    // Figuras de linguagem — v825
+    "anacoluto":     ["frase quebrada", "ruptura sintática", "pensamento interrompido", "construção abandonada", "anacoluto"],
+    "zeugma":        ["omissão elegante", "retomada implícita", "elipse de verbo", "supressão sintática"],
+    "gradacao":      ["escalada", "intensificação progressiva", "clímax gradual", "crescendo", "sequência de impacto"],
+    "antitese":      ["contraste", "oposição", "polaridade", "tensão de contrários", "paradoxo visual"],
+    "apostrofe":     ["invocação", "chamamento", "apelo direto", "vocativo dramático", "grito ao ausente"],
+    "perifrase":     ["descrição indireta", "circunlóquio", "rodeio expressivo", "nome expandido"],
+    "anafora":       ["repetição de início", "eco de abertura", "refrão de verso", "insistência sonora"],
+
+    // Termos narrativos — v825
+    "focalizacao":   ["ponto de vista", "ângulo de visão", "perspectiva narrativa", "filtro de percepção"],
+    "onisciente":    ["narrador que tudo sabe", "visão de fora e de dentro", "Deus narrativo", "perspectiva total"],
+    "sumario":       ["resumo narrativo", "compressão de tempo", "elipse controlada", "o que ficou de fora"],
+    "anticlimax":    ["decepção calculada", "resolução menor que o esperado", "ironia de desfecho", "queda de expectativa"],
+
+    // Gêneros — v825
+    "saga":          ["épico", "ciclo narrativo", "narrativa de gerações", "história longa", "jornada de famílias"],
+    "ficcao":        ["literatura de invenção", "narrativa criada", "pacto de fingimento", "realidade construída"],
+    "terror":        ["horror", "medo intenso", "pavor literário", "suspense de ameaça", "narrativa de susto"],
+
+    // Emoções — v825
+    "indignacao":    ["revolta", "ira moral", "rebeldia ética", "protesto interior", "raiva justa"],
+    "extase":        ["arrebatamento", "êxtase", "exaltação extrema", "alegria que transborda", "encantamento total"],
+    "alivio":        ["descanso", "soltura", "fim da tensão", "respiração possível", "leveza após o peso"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
