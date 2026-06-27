@@ -1020,7 +1020,7 @@
     "quilombo":    ["comunidade negra", "resistência", "refúgio", "território de fuga", "aldeia livre"],
     "reprovar":    ["censurar", "condenar", "reprochar", "desaprovar", "rechaçar"],
     "ressentimento":    ["mágoa velha", "amargura", "rancor oculto", "agravo", "ranço"],
-    "sertão":    ["interior seco", "caatinga", "brejo", "interior profundo", "terra árida"],
+    "sertão":    ["interior seco", "caatinga", "interior profundo", "terra árida", "onde o sol bate diferente", "o Brasil que não é litoral", "espaço da resistência"],
     "silenciar":    ["abafar", "amordaçar", "suprimir", "emmudecer", "calar"],
     "subtexto":    ["subentendido", "camada oculta", "entrelinhas", "dito não-dito", "insinuação"],
     "verossimilhança":["credibilidade", "coerência", "realismo", "autenticidade", "plausibilidade"],
@@ -1747,6 +1747,18 @@
     "genero":       ["categoria literária", "tipo de texto", "convenção de forma", "onde o leitor espera o que espera", "contrato implícito com o leitor"],
     "autobiografia": ["história da própria vida", "memória assinada", "narrar a si mesma", "o eu como personagem", "vida como narrativa"],
     "catalogo":     ["lista de títulos publicados", "acervo editorial", "o que a editora tem", "pauta de livros", "o que define o perfil da casa"],
+
+    // Espaços físicos narrativos — v887
+    "rua":          ["logradouro", "calçada e asfalto", "espaço público", "onde a vida passa sem parar", "fora de casa", "o que a janela dá"],
+    "quarto":       ["aposento", "cômodo íntimo", "espaço de dormir e pensar", "o lugar mais pessoal da casa", "onde a personagem está sozinha"],
+    "cama":         ["leito", "espaço de repouso", "onde o corpo fica", "lugar de doença, sono e desejo", "o que sustenta quando não há mais força"],
+    "mesa":         ["superfície de trabalho e encontro", "onde se come junto", "espaço de decisão", "o centro da cozinha e da sala", "superfície que organiza"],
+    "esquina":      ["canto da rua", "onde dois caminhos se cruzam", "ponto de espera urbana", "limite de visão", "onde se encontra quem não se esperava"],
+    "paisagem":     ["vista do entorno", "o que o olho alcança lá fora", "natureza em enquadramento", "cena exterior", "o mundo visto de longe"],
+    "lago":         ["água parada", "espelho d'água", "onde a água não corre", "superfície que reflete", "o silêncio da água"],
+    "mato":         ["vegetação densa", "mata baixa", "onde a trilha some", "fora da cidade no Brasil", "natureza sem nome preciso", "cerrado e caatinga"],
+    "campo":        ["área rural aberta", "planície", "terra cultivada ou vasta", "onde o horizonte é inteiro", "longe da cidade sem ser floresta"],
+    "corredor":     ["passagem entre cômodos", "espaço de passagem", "onde ninguém fica por muito tempo", "lugar de trânsito", "o que une sem ser destino"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
