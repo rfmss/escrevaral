@@ -2087,6 +2087,35 @@ mark {
   line-height: 1.5;
 }
 
+.lexical-frase-texto {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--soft-ink);
+  line-height: 1.55;
+  margin: 0 0 12px;
+  border-left: 3px solid var(--primary);
+  padding-left: 10px;
+}
+.lexical-frase-verbos dd,
+.lexical-frase-conj dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+.lexical-frase-alerta {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--sienna, #8a4a2a);
+}
+.lexical-phrase-loading {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .lexical-alternatives {
   display: flex;
   flex-direction: column;

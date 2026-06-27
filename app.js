@@ -1268,19 +1268,29 @@ function captureSelectedWord(allowCollapsedSelection = false) {
   }
 
   const selectedText = selection.toString().trim();
-  const word = selectedText || findWordNearSelection(selection);
-  const cleanWord = cleanSelectedWord(word);
 
-  if (!cleanWord) {
+  // Frase: seleção com espaços e pelo menos 2 palavras
+  const palavras = selectedText.split(/\s+/).filter(p => /[\p{L}]/u.test(p));
+  if (palavras.length >= 2) {
+    state.lexical.selectedPhrase = selectedText;
+    state.lexical.selectedWord   = null;
+    state.lexical.selectedRange  = null;
+    state.lexical.selectedContext = null;
+    renderLexicalView();
     return;
   }
 
-  state.lexical.selectedWord = cleanWord;
+  // Palavra única
+  const word = selectedText || findWordNearSelection(selection);
+  const cleanWord = cleanSelectedWord(word);
+  if (!cleanWord) return;
+
+  state.lexical.selectedWord  = cleanWord;
+  state.lexical.selectedPhrase = null;
 
   if (selection.rangeCount > 0) {
     const range = selection.getRangeAt(0).cloneRange();
     state.lexical.selectedRange = range;
-    // Contexto local do parágrafo para desambiguação precisa (não usa primeira ocorrência do manuscrito)
     const node = range.startContainer;
     const para = node.nodeType === 3 ? node.parentNode : node;
     const paraEl = para?.closest?.("p,div,h1,h2,h3,li") || para;
@@ -1315,11 +1325,121 @@ function cleanSelectedWord(value) {
     .trim();
 }
 
+// ── Sinônimos curados por classe para palavras polissêmicas ─────────────────
+const _SINS_CLASSE = {
+  "bem": {
+    "Advérbio":    ["corretamente", "adequadamente", "devidamente", "perfeitamente", "acertadamente"],
+    "Substantivo": ["virtude", "bondade", "benefício", "vantagem", "proveito"],
+    "Interjeição": [],
+  },
+  "mal": {
+    "Advérbio":    ["erradamente", "deficientemente", "inadequadamente", "incorretamente", "precariamente"],
+    "Substantivo": ["maldade", "iniquidade", "dano", "prejuízo", "vileza", "agravo"],
+  },
+  "como": {
+    "Verbo flexionado": ["ingiro", "devoro", "alimento-me"],
+    "Conjunção":        ["tal qual", "assim como", "da mesma forma que", "à semelhança de"],
+    "Advérbio":         ["de que modo", "de que maneira", "por qual meio"],
+  },
+  "canto": {
+    "Substantivo masculino": ["cançao", "cântico", "cantiga", "melodia"],
+    "Verbo flexionado":      ["entoar", "salmodiar", "trinar"],
+  },
+  "porto": {
+    "Substantivo": ["ancoradouro", "cais", "atracadouro", "abrigo", "enseada"],
+    "Verbo flexionado": [],
+  },
+  "livre": {
+    "Adjetivo":     ["desimpedido", "solto", "independente", "autônomo", "desembaraçado"],
+    "Verbo (subjuntivo)": ["liberte", "desvincule", "solte"],
+  },
+  "certa": {
+    "Adjetivo":          ["determinada", "específica", "particular", "dada"],
+    "Pronome indefinido": ["alguma", "uma", "qualquer"],
+  },
+  "dado": {
+    "Verbo (particípio)": ["entregue", "concedido", "ofertado", "proporcionado"],
+    "Substantivo":        ["cubo", "peça", "marcador"],
+  },
+};
+
+function getSinonimosPorClasse(word, className) {
+  const entry = _SINS_CLASSE[word];
+  if (entry) {
+    const key = Object.keys(entry).find(k => className.startsWith(k) || k.startsWith(className.split(" ")[0]));
+    if (key !== undefined) return entry[key] || [];
+  }
+  // Fallback: sinônimos gerais filtrados por família de classe
+  const geral = getSynonyms(word);
+  if (!geral.length || !window.VeredaLexical) return geral;
+  const familiaOrigem = className.split(" ")[0];
+  return geral.filter(s => {
+    const cls = VeredaLexical.analyze(s, "")?.className || "";
+    return cls.startsWith(familiaOrigem) || familiaOrigem.startsWith(cls.split(" ")[0]);
+  });
+}
+
+async function renderFraseCard(frase, titulo) {
+  lexicalTitle.textContent = titulo || "Frase";
+  lexicalContext.innerHTML = "";
+  lexicalCard.innerHTML = `<p class="lexical-phrase-loading">Analisando frase…</p>`;
+
+  if (!window.syntaxEngine) {
+    lexicalCard.innerHTML = `<p class="lexical-disclaimer">Análise de frases não disponível.</p>`;
+    return;
+  }
+  if (!syntaxEngine._isReady()) {
+    await syntaxEngine.init().catch(() => null);
+  }
+  if (!syntaxEngine._isReady()) {
+    lexicalCard.innerHTML = `<p class="lexical-disclaimer">Análise de frases não carregada.</p>`;
+    return;
+  }
+
+  let res;
+  try { res = syntaxEngine.analisarPeriodo(frase); } catch(e) { res = null; }
+  if (!res) {
+    lexicalCard.innerHTML = `<p class="lexical-disclaimer">Não foi possível analisar esta frase.</p>`;
+    return;
+  }
+
+  const { resumo } = res;
+  const verbosHtml = resumo.verbos?.length
+    ? resumo.verbos.map(v => {
+        const info = [v.tempo, v.pessoa].filter(Boolean).join(", ");
+        return `<span class="lexical-alt">${escapeHtml(v.forma)}${info ? ` <em>(${escapeHtml(info)})</em>` : ""}</span>`;
+      }).join("")
+    : "<em>nenhum verbo identificado</em>";
+
+  const conjHtml = resumo.conjuncoes?.length
+    ? resumo.conjuncoes.map(c =>
+        `<span class="lexical-alt">${escapeHtml(c.palavra)}${c.relacao ? ` <em>(${escapeHtml(c.relacao)})</em>` : ""}</span>`
+      ).join("")
+    : "";
+
+  const alertasHtml = resumo.alertas?.length
+    ? `<div class="lexical-frase-alerta">${resumo.alertas.map(a => `<span>⚠ ${escapeHtml(String(a))}</span>`).join("")}</div>`
+    : "";
+
+  lexicalCard.innerHTML = `
+    <span class="material-symbols-outlined">edit_note</span>
+    <p class="lexical-frase-texto">"${escapeHtml(frase.slice(0, 120))}${frase.length > 120 ? "…" : ""}"</p>
+    <p class="tag">${escapeHtml(resumo.tipo)}</p>
+    <dl>
+      <div><dt>Orações</dt><dd>${resumo.nOracoes}</dd></div>
+      <div class="lexical-frase-verbos"><dt>Verbos</dt><dd class="lexical-alt-list">${verbosHtml}</dd></div>
+      ${conjHtml ? `<div class="lexical-frase-conj"><dt>Conjunções</dt><dd class="lexical-alt-list">${conjHtml}</dd></div>` : ""}
+      ${resumo.vozePassiva ? `<div><dt>Voz</dt><dd>Passiva</dd></div>` : ""}
+    </dl>
+    ${alertasHtml}
+  `;
+}
+
 async function renderLexicalView() {
   const manuscript = getActiveManuscript();
   if (!manuscript) return;
 
-  if (!state.lexical.selectedWord) {
+  if (!state.lexical.selectedWord && !state.lexical.selectedPhrase) {
     if (lexicalTitle) lexicalTitle.textContent = manuscript.title;
     if (lexicalContext) lexicalContext.innerHTML = "";
     if (lexicalCard) lexicalCard.innerHTML = "";
@@ -1328,6 +1448,12 @@ async function renderLexicalView() {
 
   if (VeredaLexical.hasLoadError()) {
     lexicalCard.innerHTML = `<p class="lexical-disclaimer">Vocabulário não carregado. Verifique a conexão e recarregue a página.</p>`;
+    return;
+  }
+
+  // Frase selecionada → análise sintática do período
+  if (state.lexical.selectedPhrase) {
+    await renderFraseCard(state.lexical.selectedPhrase, manuscript.title);
     return;
   }
 
@@ -1351,11 +1477,11 @@ async function renderLexicalView() {
     ? `${analysis.count} vezes neste texto`
     : "nenhuma vez encontrada";
 
-  // Buscar sinônimos — lazy load da letra correspondente
+  // Sinônimos filtrados pela classe detectada
   let sinonimosHtml = "";
   try {
     await loadSynonyms(analysis.word);
-    const sins = getSynonyms(analysis.word);
+    const sins = getSinonimosPorClasse(analysis.word, analysis.className);
     if (sins.length) {
       sinonimosHtml = `
         <div class="lexical-synonyms">

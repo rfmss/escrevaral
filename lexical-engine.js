@@ -215,12 +215,12 @@
       return "Conjunção";
     },
     "como": (prev, next) => {
-      // Início de período sem verbo anterior → pode ser causal ou interrogativo (DESAM-COMO-01)
-      // "Como fez isso?" → Advérbio interrogativo; "Como é bonito!" → Advérbio exclamativo
-      // A lógica mais segura: se não há prev, é advérbio interrogativo/exclamativo
       if (!prev) return "Advérbio";
-      // No interior: "como" comparativo = Conjunção; "saber como" → Advérbio
-      if (VERBOS_COGNICAO.has(normalizeWord(prev)) || normalizeWord(prev) === "saber") return "Advérbio";
+      const _p = normalizeWord(prev);
+      // Após pronome pessoal reto → Verbo (1ª pessoa "eu como", "eles comem")
+      if (PRON_PESSOAIS_RETOS.has(_p)) return "Verbo flexionado";
+      // Após verbo de cognição ou "saber" → Advérbio integrante
+      if (VERBOS_COGNICAO.has(_p) || _p === "saber") return "Advérbio";
       return "Conjunção";
     },
     "quando": (prev, next) => {

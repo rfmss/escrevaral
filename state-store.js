@@ -383,7 +383,10 @@ function getDefaultFocusSettings() {
 
 function getDefaultLexicalState() {
   return {
-    selectedWord: null,
+    selectedWord:    null,
+    selectedPhrase:  null,
+    selectedRange:   null,
+    selectedContext: null,
   };
 }
 
