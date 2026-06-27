@@ -68,6 +68,38 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-26 (ciclo v800→v805)
+
+**Baseline:** v805 — todos os engines em 100%. Lexical/Biblioteca elevado à camada literária.
+
+**O que foi entregue neste ciclo (v800→v805):**
+
+- `app.js` + `lexical-engine.js` (v801): etapa 1 — removido "Função provável" e disclaimer; etapa 2 — classificações corrigidas; etapa 3 — chip "Outras leituras" para palavras polissêmicas
+- `app.js` (v802): sinônimos filtrados por classe detectada (`getSinonimosPorClasse`); análise de frase (≥2 palavras → `renderFraseCard` via `syntaxEngine.analisarPeriodo`); POLISSEMIA "como" → Verbo flexionado após pronome pessoal reto; guard modo Páginas expandido para `.page-body`
+- `app.js` + `state-store.js` (v803 — codex): `getSinonimosPorClasse` match unidirecional (`className.startsWith(k)` remove falso match "Verbo flexionado"→"Verbo (particípio)"); `selectedPhrase/Range/Context` excluídos do `persistState` (evita estado fantasma pós-reload)
+- `lexical-engine.js` (v804 — auditoria 34 casos literários): POLISSEMIA adicionada para 9 palavras — mesmo (adv/adj/pron), só/so (adv/adj), ainda (adv/conj), caso (subst/conj), visto (particípio/subst), posto (particípio/subst/conj), tanto (pron/adv), ora (conj/interj/adv), morto (particípio/subst/adj); ART sets expandidos com contrações (dos/das/num/numa/nesse/naquele); "só" removido de VERBOS_ACENTUADOS (agora contextual); entrada "ora" antiga removida (sem lógica de next); ALTERNATIVAS consolidadas sem duplicatas. Resultado: 33/34 corretos (97%)
+- `app.js` (v805): `_SINS_CLASSE` expandido com 9 entradas novas — sinônimos curados por classe para mesmo/só/ainda/caso/visto/posto/tanto/ora/morto. 14/14 corretos
+
+**Estado atualizado dos engines (v805):**
+
+| Área / engine | Maturidade | Notas de estado (v805) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 8 campos semânticos ~60 termos cada |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Lexico / Biblioteca | **100%** | sinônimos 1013 únicos; localLexicon 528; POLISSEMIA 27 entradas; _SINS_CLASSE 17 palavras curadas; análise de frase; "Outras leituras" chips |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias 63–69; todas com alternatives |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; desambiguação contextual 33/34 (97%); VERBOS_PRES antes ADJETIVOS_PRIM |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+
+**Próximas fronteiras:**
+
+1. **Voice engine**: adicionar campo semântico `trabalho` (roça/fábrica/serviço/ofício/resistência) — última fronteira declarada em v784
+2. **Morfologia 33/34 → 34/34**: "livre" como Verbo subjuntivo após pronome oblíquo "a" — requer distinguir artigo de pronome (custo alto)
+3. **Sinônimos gerais**: expandir `synonym-data.js` além de 1013 em natureza BR, corpo, emoção complexa
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-18 (ciclo v780→v784)
 
 **Baseline:** v784 — todos os engines em 100%. Qualidade de dados elevada com P0 do Codex resolvidos.
