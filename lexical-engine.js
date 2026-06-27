@@ -1605,6 +1605,45 @@
     "decepcao":     "Sentimento que segue uma expectativa não cumprida. Diferente da frustração (bloqueio de meta), a decepção é sobre a pessoa ou coisa que falhou. Muda relações de forma permanente.",
     "alivio":       "Liberação de uma tensão que durava. Na ficção, o alívio pode ser clímax silencioso — uma cena sem drama, mas carregada pelo que veio antes.",
     "susto":        "Reação imediata e involuntária a algo inesperado. Diferente do medo (que se prolonga), o susto é instante — mas deixa rastro emocional na cena e no leitor.",
+
+    // Crítica literária e teoria — v827
+    "canonico":     "Que pertence ao cânone — o conjunto de obras consideradas essenciais ou modelares numa tradição. No Brasil, o cânone é debatido: quem escolheu, quem ficou fora, por quê.",
+    "paratexto":    "Tudo que envolve o texto sem ser o texto: título, epígrafe, dedicatória, prefácio, orelha, capa. Genette cunhou o termo. O paratexto enquadra a leitura antes de ela começar.",
+    "intertexto":   "Referência implícita ou explícita a outros textos dentro de um texto. Pode ser citação, alusão, paródia ou pastiche. Todo texto conversa com textos anteriores — a questão é como.",
+    "dialogismo":   "Conceito de Bakhtin: todo texto é habitado por outras vozes. A linguagem é sempre dialógica — uma resposta ao que já foi dito, uma antecipação do que será respondido.",
+    "recepcao":     "O modo como o público, a crítica ou a história lê e reage a uma obra. A teoria da recepção (Iser, Jauss) colocou o leitor no centro do sentido — a obra se completa na leitura.",
+    "autor":        "Instância real ou implícita de quem escreve. Em teoria literária, o 'autor implícito' (Booth) é distinto da pessoa real: é a voz construída pelo texto. 'A morte do autor' (Barthes) propõe que o texto existe sem precisar de explicação do autor.",
+    "leitor":       "Destinatário da escrita — real, implícito ou modelo. Umberto Eco distinguiu o 'leitor-modelo': aquele para quem o texto foi construído. Escrever é construir também quem vai ler.",
+
+    // Editoração e produção do livro — v827
+    "orelha":       "Texto impresso na aba da sobrecapa, ao lado da capa e da quarta capa. Apresenta o livro e o autor em linguagem que convida à leitura — não é sinopse, é convite.",
+    "quarta":       "Face oposta à capa. Contém geralmente sinopse, depoimentos críticos, código de barras e ISBN. A quarta capa é o segundo contato do leitor com o livro após a capa.",
+    "frontispicio": "Página de rosto ilustrada ou decorada, no início do livro. Pode mostrar o título, o nome do autor e um elemento visual. Hoje raramente usado; foi essencial nos séculos XVIII e XIX.",
+    "colofao":      "Nota ao final do livro com dados técnicos: tipografia, papel, impressão, encadernação, data. Herança dos incunábulos; hoje raro, mas volta em edições de arte.",
+    "errata":       "Lista de erros tipográficos encontrados após a impressão, com as correções. Folha solta ou página extra, colocada no exemplar. Testemunha o processo — nenhum texto sai perfeito.",
+    "diagramacao":  "Organização visual do texto na página: margens, entrelinhamento, colunas, disposição de títulos e imagens. A diagramação é leitura silenciosa — boa diagramação não se nota.",
+    "copidesque":   "Revisão editorial que vai além dos erros: reorganiza, reescreve trechos, corta redundâncias, padroniza o texto. Em inglês, 'copyediting'. O copidesque é quem cuida do escritor.",
+    "galera":       "Prova tipográfica para revisão — colunas longas de texto antes da diagramação. Na era digital, o termo migrou para 'prova' ou 'PDF de revisão'. Ver erros na galera é a última defesa.",
+
+    // Termos de personagem — v827
+    "antagonista":  "Força que se opõe ao protagonista. Não é necessariamente o vilão — pode ser um sistema, a natureza, o próprio protagonista. O antagonismo é a pressão que revela o caráter.",
+    "foil":         "Personagem que contrasta com outra para destacar suas qualidades. Sancho Pança e Dom Quixote; Watson e Holmes. Em português: 'contraponto' ou 'personagem-espelho'.",
+    "antiheroi":    "Protagonista que carece das qualidades heroicas tradicionais. Pode ser covarde, egoísta, imoral — mas captura algo verdadeiro sobre o humano. Macabéa, de Clarice, é anti-heroína.",
+    "narrador":     "Instância que conta a história — não confundir com o autor. O narrador tem perspectiva, voz, posição no mundo narrado e grau de confiabilidade. Escolher o narrador é escolher o que pode ser visto.",
+
+    // Registros de linguagem — v827
+    "coloquial":    "Registro informal e espontâneo da língua — o da conversa, da intimidade, da proximidade social. Na ficção, o coloquial diz o nível de confiança entre personagens e o universo social do texto.",
+    "erudito":      "Registro formal e letrado da língua. Na ficção, o erudito pode marcar distinção de classe, ironia narrativa ou distância emocional — quando o texto 'fala difícil', isso é sempre escolha.",
+    "registro":     "Variedade da língua usada de acordo com o contexto: formal/informal, oral/escrito, técnico/poético. Misturar registros intencionalmente é recurso literário; misturar sem perceber é ruído.",
+    "voz":          "Na narrativa: o estilo e a personalidade que marcam como o texto fala. A voz é o que faz um parágrafo soar como Guimarães Rosa e não como qualquer outro. É o que não se imita — só se desenvolve.",
+    "tom":          "A atitude do texto diante do que narra: irônico, melancólico, urgente, distante, íntimo. O tom é o que o leitor sente antes de analisar. Mudar o tom muda o texto todo.",
+
+    // Gêneros e subgêneros — v827
+    "autoficção":   "Escrita em que o autor usa a si mesmo como personagem, mas sem compromisso estrito com os fatos reais. Diferente da autobiografia: na autoficção, a ficção é declarada. Sebald, Angot, Scliar.",
+    "autoficcao":   "Escrita em que o autor usa a si mesmo como personagem, mas sem compromisso estrito com os fatos reais. Diferente da autobiografia: na autoficção, a ficção é declarada.",
+    "noir":         "Gênero que mistura crime, atmosfera sombria e personagens moralmente ambíguos. Vem do cinema dos anos 1940. Na prosa, o noir tem frases curtas, ritmo tenso e um mundo sem saída clara.",
+    "distopia":     "Narrativa que imagina uma sociedade futura opressiva e desumanizadora. Orwell, Huxley, Atwood. Na ficção brasileira, distopia se mistura ao real tão frequentemente que a linha fica borrada.",
+    "utopia":       "Narrativa que imagina uma sociedade ideal — e as contradições internas que a tornam impossível. Thomas More cunhou o termo (do grego 'não lugar'). A utopia é mais trágica do que parece.",
   };
 
   function inferDefinicao(word, className) {
