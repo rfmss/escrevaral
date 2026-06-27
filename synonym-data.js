@@ -1634,6 +1634,33 @@
     "grotesco":      ["mistura do ridículo com o terrível", "deformação crítica", "riso que assusta"],
     "ironia":        ["dizer o oposto", "distância entre aparência e realidade", "camada oculta", "voz dupla"],
     "humor":         ["riso que conhece", "incongruência revelada", "riso de reconhecimento", "leveza precisa"],
+
+    // Ações de escrita — v846
+    "dialogar":      ["pôr em diálogo", "dar voz a dois", "escrever fala", "construir troca", "conversar em cena"],
+    "esbocar":       ["traçar o primeiro contorno", "escrever por alto", "lançar o esqueleto", "rascunhar a ideia"],
+    "editar":        ["cortar e apurar", "lapidar o texto", "selecionar e organizar", "afinar a prosa"],
+    "corrigir":      ["retificar", "ajustar", "reparar o erro", "revisar com precisão"],
+    "aprimorar":     ["refinar", "polir", "elevar a qualidade", "alcançar a forma certa"],
+    "reescrever":    ["recomeçar com o que se aprendeu", "refazer com mais clareza", "segunda versão intencional"],
+
+    // Emoções adicionais — v846
+    "cobica":        ["desejo pelo que é do outro", "apetite insaciável", "ambição que não pede licença"],
+    "desesperanca":  ["além da tristeza", "perda do desejo", "o lugar onde a esperança apagou"],
+    "resignacao":    ["aceitar sem concordar", "parar de lutar sem vencer", "o que ficou quando a raiva foi"],
+
+    // Estrutura narrativa — v846
+    "prologo":       ["antes da história", "abertura que situa", "voz que prepara o leitor", "préambulo"],
+    "epilogo":       ["depois da história", "o que ficou depois", "desfecho do desfecho", "pós-texto narrativo"],
+    "capitulo":      ["divisão da narrativa", "unidade de tempo ou perspectiva", "corte intencional"],
+    "abertura":      ["primeiro contato com o leitor", "incipit", "o que prende ou perde", "porta de entrada"],
+    "fechamento":    ["desfecho", "resolução", "última impressão", "como o texto encerra"],
+    "resolucao":     ["desfecho do conflito", "resposta da narrativa", "solução ou ausência dela"],
+    "complicacao":   ["nó da trama", "o que dificulta", "tensão crescente", "ponto de virada antes do clímax"],
+
+    // Estilo — v846
+    "lacunico":      ["que diz pouco e significa muito", "conciso ao extremo", "econômico com as palavras"],
+    "prolixo":       ["que fala além da conta", "difuso", "alongado sem necessidade", "verboso"],
+    "eloquente":     ["que convence pela força da linguagem", "expressivo com precisão", "que move o leitor"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
