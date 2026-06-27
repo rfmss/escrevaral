@@ -1662,6 +1662,23 @@
     "prolixo":       ["que fala além da conta", "difuso", "alongado sem necessidade", "verboso"],
     "eloquente":     ["que convence pela força da linguagem", "expressivo com precisão", "que move o leitor"],
 
+    // Verbos de sensação física e emoção expressiva — v853
+    "estremecer":    ["tremer levemente", "vibrar de susto ou frio", "sacudir por dentro", "titilar"],
+    "palpitar":      ["bater forte (coração)", "pulsar", "vibrar de antecipação", "latejo"],
+    "sufocar":       ["não conseguir respirar", "estrangular por emoção", "apertar por dentro", "asfixiar"],
+    "ofegar":        ["respirar com dificuldade", "arquejar", "halegar", "respirar aos solaços"],
+    "suspiro":       ["expiração carregada de emoção", "respiro entre dores", "alívio que soa", "fôlego contido"],
+    "solucar":       ["choro cortado pelo soluço", "choro que treme na voz", "solução de choro"],
+    "cheirar":       ["perceber pelo olfato", "farejar", "sentir o aroma", "inalar o odor"],
+    "provar":        ["perceber pelo paladar", "saborear", "degustar", "sentir o gosto"],
+
+    // Ausência e lacuna — v853
+    "lacuna":        ["espaço em branco", "o que falta no texto", "vão que o leitor preenche", "buraco de sentido"],
+    "falta":         ["ausência que dói", "o que não está mas pesa", "carência", "necessidade não cumprida"],
+    "duracao":       ["o tempo enquanto acontece", "o presente que se arrasta ou voa", "durar é diferente de contar"],
+    "inimizade":     ["relação de oposição", "ódio organizado", "conflito de longa data", "antipatia com história"],
+    "cansaco":       ["exaustão acumulada", "peso do que já foi", "corpo que não aguenta mais", "fadiga que é também alma"],
+
     // Adjetivos de personagem — v849
     "covarde":       ["medroso", "pusilânime", "sem coragem", "que recua diante do perigo", "frouxo"],
     "valente":       ["corajoso", "audacioso", "destemido", "bravo", "que enfrenta o perigo"],
@@ -1689,6 +1706,26 @@
     "profundo":      ["fundo", "intenso", "que vai ao essencial", "que não fica na superfície", "denso"],
     "denso":         ["espesso", "carregado de sentido", "concentrado", "de muitas camadas"],
     "longo":         ["extenso", "demorado", "que não termina logo", "de grande alcance"],
+
+    // Adjetivos de personagem — v865 (18 lacunas fechadas)
+    "altivo":        ["orgulhoso", "altaneiro", "de postura elevada", "que não baixa a cabeça", "sobranceiro"],
+    "soberbo":       ["arrogante", "presunçoso", "altivo ao extremo", "que se julga superior", "imperioso"],
+    "rancoroso":     ["ressentido", "que guarda mágoa", "que não esquece o que foi feito", "azedo de memória", "vingativo"],
+    "tenso":         ["crispado", "contraído", "à beira de romper", "carregado de nervos", "retesado"],
+    "melancolico":   ["entristecido sem causa clara", "que carrega peso antigo", "de melancolia", "saudoso e triste", "pensativo e distante"],
+    "nostalgico":    ["saudoso", "preso ao passado", "que lembra com dor e amor", "voltado para o que já foi"],
+    "traidor":       ["desleal", "que vira as costas", "que trai a confiança", "falso", "que muda de lado"],
+    "ingenuo":       ["ingênuo", "sem malícia", "que acredita fácil", "crédulo", "de olhar aberto ao mundo"],
+    "astuto":        ["esperto", "maquinador", "sagaz", "que vê o que os outros não veem", "hábil no subterfúgio"],
+    "sensato":       ["prudente", "equilibrado", "que pensa antes de agir", "comedido", "de bom senso"],
+    "obstinado":     ["teimoso", "que não cede", "determinado ao limite", "implacável", "que não desiste nem quando deveria"],
+    "impulsivo":     ["que age antes de pensar", "explosivo", "de reação imediata", "movido pelo instante", "arrebatado"],
+    "prudente":      ["cauteloso", "que pesa as consequências", "sensato", "de passo calculado", "que não se arrisca sem motivo"],
+    "furioso":       ["enraivecido", "tomado pela raiva", "fora de si", "que não consegue se conter", "irado"],
+    "resignado":     ["que aceitou o que não pode mudar", "conformado", "de dor quieta", "que não luta mais", "pacificado pela perda"],
+    "amargo":        ["ressentido", "de sabor de frustração", "que foi ferido e ficou", "com mágoa incorporada", "de alegria rara"],
+    "apaixonado":    ["tomado pelo amor", "ardente", "que sente demais", "movido pela paixão", "de sentimento intenso"],
+    "ciumento":      ["possessivo", "que teme perder", "vigilante por amor ou insegurança", "de olhar desconfiado", "que sofre com o outro"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
