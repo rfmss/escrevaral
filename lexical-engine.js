@@ -823,6 +823,35 @@
     // "durante" — preposição temporal; está erroneamente em functionWords.conjuncoes
     // "Durante o dia", "durante a noite" → sempre Preposição (Bechara MGP §preposições)
     POLISSEMIA["durante"] = () => "Preposição";
+
+    // "ja" (normalização de "já") — em conjuncoes E adverbios; conjuncoes dispara primeiro
+    // "Já escrevi", "Já não sei" → Advérbio temporal; "já que" → Conjunção causal
+    POLISSEMIA["ja"] = (prev, next) => {
+      if (next === "que") return "Conjunção";
+      return "Advérbio";
+    };
+
+    // "assim" — em conjuncoes E adverbios; conjuncoes dispara primeiro
+    // "Faz assim", "fique assim" → Advérbio de modo; "assim que/como" → Conjunção
+    POLISSEMIA["assim"] = (prev, next) => {
+      if (next && ["que","como"].includes(next)) return "Conjunção";
+      return "Advérbio";
+    };
+
+    // "conforme" — está em conjuncoes; é preposição ou advérbio na maioria dos contextos
+    // "Conforme pedido" / "Conforme o acordo" → Preposição; "conforme que" → Conjunção
+    POLISSEMIA["conforme"] = (prev, next) => {
+      if (next === "que") return "Conjunção";
+      return "Preposição";
+    };
+
+    // "segundo" — está em conjuncoes; é preposição discursiva ou numeral ordinal
+    // "Segundo ela/o autor/os dados" → Preposição; "o segundo capítulo" → Adjetivo (ordinal)
+    POLISSEMIA["segundo"] = (prev, next) => {
+      // Após artigo definido → ordinal ("o segundo filho")
+      if (prev && ["o","a","os","as","um","uma"].includes(prev)) return "Adjetivo";
+      return "Preposição";
+    };
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
