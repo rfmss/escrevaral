@@ -186,33 +186,107 @@
     "noto","nota","notamos","notam","notou","notar"
   ]);
 
-  // Verbos de pergunta que desencadeiam "se" integrante
+  // Verbos que desencadeiam "se" integrante — Bechara MGP §conj. integrante
+  // (dúvida, verificação, descoberta, percepção indireta)
   const VERBOS_PERGUNTA = new Set([
-    "sei","sabe","sabemos","sabem","saber",
+    // saber — todas as formas
+    "sei","sabe","sabemos","sabem","saber","sabia","sabias","sabiamos","sabiam",
+    "soube","soubeste","soubemos","souberam","soubera","souberas","souberams",
+    "sabera","saberas","saberao","soubesse","soubesses","soubessem",
+    // perguntar
     "pergunto","pergunta","perguntamos","perguntam","perguntou","perguntar",
+    "perguntava","perguntei","perguntaste","perguntaram","perguntara",
+    // ignorar
     "ignoro","ignora","ignoramos","ignoram","ignorou","ignorar",
+    "ignorava","ignorei","ignoraram","ignorava",
+    // descobrir
     "descubro","descobre","descobrimos","descobrem","descobriu","descobrir",
-    "investigo","investiga","investigamos","investigam","investigou","investigar"
+    "descobria","descobrimos","descobriram","descobrira",
+    // investigar
+    "investigo","investiga","investigamos","investigam","investigou","investigar",
+    "investigava","investigaram","investigara",
+    // verificar
+    "verifico","verifica","verificamos","verificam","verificou","verificar",
+    "verificava","verificaram","verificara","verifiquei",
+    // notar / perceber
+    "noto","nota","notamos","notam","notou","notar","notava","notaram","notara","notei",
+    "percebo","percebe","percebemos","percebem","percebeu","perceber",
+    "percebia","perceberam","percebera","percebi",
+    // ver (vejo se funciona)
+    "vejo","ve","vemos","veem","viu","ver","via","vias","viamos","viam","vira",
+    // duvidar
+    "duvido","duvida","duvidamos","duvidam","duvidou","duvidar",
+    "duvidava","duvidarão","duvidara","duvidei","duvidaram","duvidasse",
+    // imaginar
+    "imagino","imagina","imaginamos","imaginam","imaginou","imaginar",
+    "imaginava","imaginaram","imaginara","imaginei","imaginasse",
+    // lembrar (lembro se ele veio)
+    "lembro","lembra","lembramos","lembram","lembrou","lembrar",
+    "lembrava","lembraram","lembrara","lembrei","lembrasse",
+    // conferir / checar
+    "confiro","confere","conferimos","conferem","conferiu","conferir",
+    "conferia","conferiram","conferira",
+    // entender (não entendo se...)
+    "entendo","entende","entendemos","entendem","entendeu","entender",
+    "entendia","entenderam","entendera","entendi",
+    // decidir (decido se...)
+    "decido","decide","decidimos","decidem","decidiu","decidir",
+    "decidia","decidiram","decidira","decidi",
+    // questionar
+    "questiono","questiona","questionamos","questionam","questionou","questionar",
+    "questionava","questionaram","questionara",
+    // averiguar
+    "averiguo","averigua","averiguamos","averiguam","averiguou","averiguar",
+    "averiguava","averiguaram",
   ]);
 
   // ── Desambiguação contextual — algoritmo em cascata (Bechara MGP + Cunha&Cintra) ──
   const POLISSEMIA = {
-    "que": (prev, next) => {
-      // 1. Após substantivo/pronome → relativo (DESAM-QUE-02)
-      if (prev && !PRON_OBLIQUOS_ATONOS.has(normalizeWord(prev))) {
-        const pNorm = normalizeWord(prev);
-        if (VERBOS_COGNICAO.has(pNorm)) return "Conjunção"; // integrante
-        // Se veio de uma palavra que pode ser antecedente nominal (não é verbo ou conj)
-        if (!/^(e|ou|mas|porem|contudo|todavia|entretanto|porque|quando|se|como|embora|se|que)$/.test(pNorm)) {
-          // é provavelmente relativo
-          return "Pronome relativo";
-        }
+    "que": (prev, next, prev2) => {
+      // Exclamativo/interrogativo — sem antecedente (DESAM-QUE-03)
+      // "Que saudade!" / "Que horas são?" / "Que belo espetáculo!"
+      if (!prev) return "Pronome";
+
+      // 1. Após verbo de cognição/dicção/vontade → Conjunção integrante (DESAM-QUE-01)
+      if (VERBOS_COGNICAO.has(prev)) return "Conjunção";
+
+      // 2. "do que" / "da que" / "dos que" / "das que" → Conjunção comparativa (DESAM-QUE-04)
+      if (["do","da","dos","das"].includes(prev)) return "Conjunção";
+
+      // 3. Após palavra gramatical (conjunção, advérbio, preposição) → Conjunção
+      //    causal ("corre, que é tarde"), temporal, final, consecutiva, concessiva
+      const _GRAM = new Set([
+        "e","ou","mas","porem","contudo","todavia","entretanto","portanto","logo","pois",
+        "quando","embora","porque","como","se","onde","enquanto","alem","desde","ate",
+        "mais","menos","tao","tanto","nao","ja","para","por","sem","ante","entre",
+        "assim","bem","sempre","nunca","talvez","caso","posto","senao",
+        "ainda","nem","mesmo","so","ora","antes","depois","agora","ali","aqui","la"
+      ]);
+      if (_GRAM.has(prev)) return "Conjunção";
+
+      // 4. Detecção de antecedente comparativo dois tokens antes (DESAM-QUE-05)
+      //    "mais rápido que", "tão belo que", "menos grave que"
+      if (prev2) {
+        const _COMP = new Set([
+          "mais","menos","maior","menor","melhor","pior","tao","tanto","tanta",
+          "igual","diferente","superior","inferior","semelhante","tamanho","tamanha"
+        ]);
+        if (_COMP.has(prev2)) return "Conjunção";
       }
-      // 2. Após verbo de cognição → integrante (DESAM-QUE-01)
-      if (prev && VERBOS_COGNICAO.has(normalizeWord(prev))) return "Conjunção";
-      // 3. Início de período → interrogativo ou exclamativo (DESAM-QUE-03)
-      if (!prev) return "Pronome interrogativo";
-      return "Conjunção";
+
+      // 5. Após desinência verbal de passado → Conjunção causal/integrante (DESAM-QUE-06)
+      //    Pret. perfeito: -ou, -eu, -iu; Imperfeito: -ava, -ia; PP3pl: -aram/-eram/-iram
+      if (prev.length > 3 && /(ou|eu|iu|aram|eram|iram|ava|ia)$/.test(prev)) return "Conjunção";
+
+      // 6. Após pronome oblíquo átono → Pronome relativo ("o que me deu")
+      if (PRON_OBLIQUOS_ATONOS.has(prev)) return "Pronome relativo";
+
+      // 7. Após pronome pessoal reto → Pronome relativo ("ela que o fez")
+      if (PRON_PESSOAIS_RETOS.has(prev)) return "Pronome relativo";
+
+      // 8. Caso geral: antecedente nominal (substantivo, adj, pronome demonstrativo)
+      //    → Pronome relativo (Bechara MGP §pronomes relativos)
+      return "Pronome relativo";
     },
     "como": (prev, next) => {
       if (!prev) return "Advérbio";
@@ -230,12 +304,13 @@
       return "Conjunção";
     },
     "se": (prev, next) => {
-      // 1. Após verbo de pergunta → integrante (DESAM-SE-02)
-      if (prev && VERBOS_PERGUNTA.has(normalizeWord(prev))) return "Conjunção";
-      // 2. Início → condicional (DESAM-SE-01)
+      // 1. Após verbo de dúvida/investigação → Conjunção integrante (DESAM-SE-02)
+      if (prev && VERBOS_PERGUNTA.has(prev)) return "Conjunção";
+      // 2. Início de cláusula → Conjunção condicional (DESAM-SE-01)
       if (!prev) return "Conjunção";
-      // 3. No interior → reflexivo/recíproco (DESAM-SE-03)
-      return "Pronome pessoal";
+      // 3. No interior — pronome reflexivo/recíproco (DESAM-SE-03)
+      //    Bechara MGP §pronomes oblíquos: "se" reflexivo é pronome pessoal oblíquo 3ª pessoa
+      return "Pronome reflexivo";
     },
     "pois": (prev) => {
       // Início → explicativo; posposto → conclusivo (DESAM-POIS-01/02)
@@ -459,6 +534,60 @@
     },
   };
 
+  // ── Pronomes indefinidos quantificadores — Advérbio vs Pronome (Bechara §253) ──
+  // "muito belo" → Advérbio de intensidade; "muito trabalho" → Pronome indefinido adjetivo
+  // "andou muito" → Advérbio; "muitos chegaram" → Pronome indefinido substantivo
+  (function() {
+    // Sufixos de adjetivo que tornam "muito/pouco" advérbio de intensidade
+    const _ADJ_SFX = /(oso|osa|avel|ivel|ente|ante|ivo|iva|ico|ica|ino|ina|ado|ido|al|el|il|oz|iz)$/;
+    // Advérbios conhecidos que "muito/pouco" pode intensificar
+    const _ADV_C   = new Set(["antes","depois","cedo","tarde","longe","perto","bem","mal","mais","menos",
+      "ja","ainda","logo","nunca","sempre","aqui","ali","la","agora","assim","alem","acima","abaixo"]);
+    // Palavras gramaticais que seguem advérbio de quantidade
+    const _GRAM_N  = new Set(["e","ou","mas","que","se","quando","como","porque","pois","nem","para","por"]);
+
+    function _intens(prev, next) {
+      // Posição de sujeito (sem prev + next é verbo) → Pronome indefinido ("Pouco restava")
+      if (!prev && next && next.length > 3 && /(ou|eu|iu|avam|iam|ava|ia|a|e|am)$/.test(next))
+        return "Pronome indefinido";
+      // Sem próxima palavra → Advérbio ("andou muito")
+      if (!next) return "Advérbio";
+      // Antes de -mente (outro advérbio) → Advérbio ("muito rapidamente")
+      if (/mente$/.test(next)) return "Advérbio";
+      // Antes de palavra gramatical → Advérbio ("dormiu pouco e acordou")
+      if (_GRAM_N.has(next)) return "Advérbio";
+      // Antes de advérbio conhecido → Advérbio ("muito antes", "pouco depois")
+      if (_ADV_C.has(next)) return "Advérbio";
+      // Antes de adjetivo por sufixo → Advérbio de intensidade ("muito pesado")
+      if (_ADJ_SFX.test(next)) return "Advérbio";
+      // Antes de desinência verbal → Advérbio ("cansa muito", "pouco importa")
+      if (next.length > 3 && /(ar|er|ir|ou|eu|iu|ava|ia)$/.test(next)) return "Advérbio";
+      // Caso geral: antes de substantivo → Pronome indefinido adjetivo ("muito trabalho")
+      return "Pronome indefinido";
+    }
+
+    // "muito" (sing. masc.) — pode ser advérbio antes de adj/adv/verbo
+    POLISSEMIA["muito"]  = _intens;
+    // "muita" (sing. fem.) — quase sempre antes de substantivo fem. em norma padrão
+    POLISSEMIA["muita"]  = () => "Pronome indefinido";
+    // Plurais — uso substantivado ou adjetivo antes de noun (Pronome indefinido)
+    POLISSEMIA["muitos"] = (prev, next) => {
+      // "muitos chegaram" → Pronome indefinido (sujeito antes de verbo)
+      if (next && next.length > 3 && /(ou|eu|iu|avam|iam|ava|ia|am|em)$/.test(next))
+        return "Pronome indefinido";
+      return "Pronome indefinido";
+    };
+    POLISSEMIA["muitas"] = () => "Pronome indefinido";
+
+    // "pouco" (sing. masc.) — mesma lógica de "muito"
+    POLISSEMIA["pouco"]  = _intens;
+    // "pouca" (sing. fem.) — antes de substantivo fem.
+    POLISSEMIA["pouca"]  = () => "Pronome indefinido";
+    // Plurais de pouco
+    POLISSEMIA["poucos"] = () => "Pronome indefinido";
+    POLISSEMIA["poucas"] = () => "Pronome indefinido";
+  })();
+
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
   const ALTERNATIVAS = {
     "bem":    ["Advérbio — 'fez bem demais'", "Substantivo — 'o bem e o mal'", "Interjeição — 'Bem! Pode ir.'"],
@@ -487,6 +616,16 @@
     "mesmo":  ["Advérbio — 'mesmo assim, foi'", "Adjetivo — 'o mesmo lugar'", "Pronome — 'ele mesmo'"],
     "so":     ["Advérbio — 'só ele sabia'", "Adjetivo — 'estava só, em silêncio'"],
     "morto":  ["Verbo (particípio) — 'havia morrido'", "Substantivo — 'um morto não fala'", "Adjetivo — 'estava morto'"],
+    "que":    ["Pronome relativo — 'o livro que li'", "Conjunção — 'disse que viria'", "Pronome — 'Que saudade!'"],
+    "se":     ["Conjunção condicional — 'se chover, fico'", "Conjunção integrante — 'perguntou se vinha'", "Pronome reflexivo — 'ela se machucou'"],
+    "muito":  ["Advérbio — 'era muito belo'", "Pronome indefinido — 'havia muito trabalho'"],
+    "muita":  ["Pronome indefinido — 'muita gente veio'"],
+    "muitos": ["Pronome indefinido — 'muitos chegaram cedo'"],
+    "muitas": ["Pronome indefinido — 'muitas foram embora'"],
+    "pouco":  ["Advérbio — 'andou pouco hoje'", "Pronome indefinido — 'pouco restava'"],
+    "pouca":  ["Pronome indefinido — 'pouca água sobrou'"],
+    "poucos": ["Pronome indefinido — 'poucos permaneceram'"],
+    "poucas": ["Pronome indefinido — 'poucas conseguiram'"],
   };
 
   // P0.3 — formas acentuadas com acento distintivo (não stripped) → classe correta
@@ -734,12 +873,14 @@
     const original   = word;
 
     // Calcular vizinhos a partir do texto quando não fornecidos (P0.1 — duplicata removida)
+    let prev2Norm = null;
     if (text && (prevNorm === undefined || nextNorm === undefined)) {
       const _tks = tokenizeWords(text);
       const _idx = _tks.findIndex(t => normalizeWord(t) === normalized);
       if (_idx !== -1) {
         if (prevNorm === undefined) prevNorm = _idx > 0 ? normalizeWord(_tks[_idx - 1]) : null;
         if (nextNorm === undefined) nextNorm = _idx < _tks.length - 1 ? normalizeWord(_tks[_idx + 1]) : null;
+        prev2Norm = _idx > 1 ? normalizeWord(_tks[_idx - 2]) : null;
       }
     }
 
@@ -757,7 +898,7 @@
 
     // 2. Desambiguação contextual (ORDEM-02) — palavras polissêmicas
     if (POLISSEMIA[normalized]) {
-      const result = POLISSEMIA[normalized](prevNorm, nextNorm);
+      const result = POLISSEMIA[normalized](prevNorm, nextNorm, prev2Norm);
       if (result) return result;
     }
 
