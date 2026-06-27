@@ -2300,6 +2300,16 @@
     "figurante":    "O personagem que povoa sem ter arco. Figurantes são o mundo ao redor da protagonista — eles tornam a ficção habitável. O que distingue um figurante bem escrito de um mal escrito é que o primeiro tem um detalhe concreto que o faz real por um momento.",
     "passagem":     "O que o texto usa para saltar no tempo ou no espaço sem explicar o salto. A passagem pode ser breve — uma linha em branco — ou pode ser uma pequena cena de transição. O que ela não pode fazer é chamar mais atenção do que o que vem antes e depois.",
     "perspectiva":  "O ângulo a partir do qual a história é contada. A perspectiva não é apenas técnica: ela governa o que pode ser sabido, o que é distorcido, o que fica fora de campo. Mudar de perspectiva muda a história — o mesmo evento tem peso diferente dependendo de quem o vê.",
+
+    // Ofício editorial — v886
+    "devolucao":    "A resposta negativa da editora. A devolução não é o fim — é uma resposta com informação dentro, mesmo quando não tem comentários. O que a escritora faz com a devolução define quanto ela avança: arquivar, revisar, ou enviar para outro lugar sem alterar.",
+    "publicacao":   "O momento em que o texto deixa de ser da escritora e passa a ser do leitor. Publicar não é o fim do processo — é o começo de outro, mais público e menos controlável. O que o livro significa depois de publicado não é exatamente o que significava antes.",
+    "editor":       "Quem lê o manuscrito como interlocutor antes do leitor. O editor não corrige: ele faz perguntas que a escritora ainda não fez sobre o próprio texto. Um bom editor torna o livro mais ele mesmo — não mais parecido com o que o editor teria escrito.",
+    "submissao":    "O gesto de enviar o manuscrito para avaliação de uma editora ou agente. A submissão requer uma habilidade diferente da escrita: síntese, paciência, distância do próprio texto. A carta de submissão é o manuscrito que apresenta o manuscrito.",
+    "ficcao":       "Narrativa que inventa — mas não por isso mente. A ficção usa o que não aconteceu para dizer o que é verdadeiro de maneiras que o factual não alcança. O pacto da ficção com o leitor é: aceite que isso não aconteceu para que você possa sentir que é real.",
+    "genero":       "A categoria que organiza as expectativas do leitor. O gênero não é prisão — é contrato. Quando uma escritora rompe o contrato, ela precisa que o leitor perceba e concorde com a ruptura. Gênero bem dominado é a condição para a subversão funcionar.",
+    "autobiografia": "A narrativa que usa a própria vida como material. A autobiografia não é confissão: é reconstrução. Quem escreve sobre si mesma está escolhendo o que mostrar, quando mostrar, com que tom. O eu da autobiografia é personagem construída, mesmo que se chame pelo nome real.",
+    "catalogo":     "O conjunto de títulos que define o que uma editora é. O catálogo fala de valores, de aposta em leitores, de risco estético. Antes de submeter, conhecer o catálogo é saber se há espaço para o que foi escrito — não para copiar, mas para pertencer.",
   };
 
   function inferDefinicao(word, className) {

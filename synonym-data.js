@@ -1737,6 +1737,16 @@
     "coadjuvante":  ["personagem secundária", "quem apoia sem ser o centro", "papel de suporte", "voz lateral da narrativa", "presença que define a protagonista"],
     "figurante":    ["personagem de fundo", "presença sem nome", "corpo que povoa a cena", "quem existe para tornar o mundo real", "voz sem arco"],
     "corte":        ["mudança abrupta de cena", "transição sem aviso", "fim de cena antes do esperado", "quando o texto salta sem explicar", "elipse visual"],
+
+    // Ofício editorial — v886
+    "reescrita":    ["nova versão", "texto refeito", "escrita em cima da escrita", "voltar ao que foi escrito", "começar de novo com o que já existe"],
+    "devolucao":    ["recusa editorial", "não aceito", "resposta negativa da editora", "resultado da submissão", "o texto que voltou"],
+    "publicacao":   ["lançamento", "o momento em que o texto vai para o mundo", "saída do manuscrito", "estar no catálogo", "o livro chegar ao leitor"],
+    "editor":       ["pessoa que cuida do texto antes de publicar", "interlocutor editorial", "leitor profissional", "quem torna o texto publicável", "parceira do livro"],
+    "submissao":    ["envio para editora", "proposta de publicação", "manuscrito em análise", "o texto em espera de resposta", "candidatura editorial"],
+    "genero":       ["categoria literária", "tipo de texto", "convenção de forma", "onde o leitor espera o que espera", "contrato implícito com o leitor"],
+    "autobiografia": ["história da própria vida", "memória assinada", "narrar a si mesma", "o eu como personagem", "vida como narrativa"],
+    "catalogo":     ["lista de títulos publicados", "acervo editorial", "o que a editora tem", "pauta de livros", "o que define o perfil da casa"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
