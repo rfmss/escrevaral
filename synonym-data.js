@@ -1604,6 +1604,36 @@
     "conotacao":     ["sentido figurado", "significado cultural", "o que a palavra carrega", "camada afetiva"],
     "narracao":      ["contar em sequência", "relato temporal", "narrar eventos", "voz que conduz"],
     "descricao":     ["pintura em palavras", "apresentação de detalhes", "mostrar sem agir", "parar o tempo"],
+
+    // Processo criativo — v845
+    "revisao":       ["releitura crítica", "reescrita", "apuro do texto", "polimento", "leitura de correção"],
+    "rascunho":      ["primeira versão", "esboço", "texto bruto", "letra viva", "versão provisória"],
+    "releitura":     ["segunda leitura", "nova passagem", "revisão com distância", "retorno ao texto"],
+    "rasura":        ["marca de revisão", "risco de reescrita", "traço do processo", "vestígio da dúvida"],
+    "bloqueio":      ["paralisia criativa", "travamento", "silêncio forçado", "medo disfarçado de preguiça"],
+    "fluxo":         ["estado de imersão", "concentração total", "escrita sem fricção", "presença plena"],
+    "inspiracao":    ["impulso criativo", "centelha", "lampejo", "sopro inicial", "abertura do texto"],
+    "disciplina":    ["prática regular", "compromisso com o texto", "rotina de escrita", "constância"],
+    "rotina":        ["hábito de escrita", "ritual criativo", "sequência de preparo", "prática diária"],
+
+    // Pontuação — v845
+    "reticencias":   ["suspensão", "hesitação marcada", "silêncio pontuado", "o que não se diz", "três pontos"],
+    "travessao":     ["traço de diálogo", "marcador de voz", "ruptura tipográfica", "pausa da dicção"],
+    "virgula":       ["pausa breve", "separação de ideias", "respiração da frase", "vírgula de sentido"],
+
+    // Experiência humana — v845
+    "trauma":        ["ferida profunda", "marca que reorganiza", "dor que não passa", "ruptura interior"],
+    "solidao":       ["estar-se só", "desamparo íntimo", "presença do vazio", "solidão de multidão"],
+    "beleza":        ["adequação perfeita", "harmonia sem sobra", "o que impressiona sem gritar", "exatidão"],
+    "identidade":    ["quem se é", "construção de si", "pertencimento e diferença", "marca pessoal"],
+    "alteridade":    ["o outro como legítimo", "reconhecimento da diferença", "olhar que inclui"],
+    "oralidade":     ["saberes da fala", "cultura oral", "dicção que não é escrita", "voz antes da letra"],
+
+    // Estética — v845
+    "sublime":       ["o que excede a medida", "avassalador", "grandioso além da contenção", "incomensurável"],
+    "grotesco":      ["mistura do ridículo com o terrível", "deformação crítica", "riso que assusta"],
+    "ironia":        ["dizer o oposto", "distância entre aparência e realidade", "camada oculta", "voz dupla"],
+    "humor":         ["riso que conhece", "incongruência revelada", "riso de reconhecimento", "leveza precisa"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
