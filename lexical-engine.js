@@ -1250,7 +1250,23 @@
     "editorial","editoriais","universal","universais","original","originais",
     "habitual","habituais","virtual","virtuais","temporal","temporais",
     "global","globais","surreal","surrealistas","nocturnal","nocturnais",
-    "real","reais","liberal","liberais","dual","duais","trivial","triviais"
+    "real","reais","liberal","liberais","dual","duais","trivial","triviais",
+    // Adjetivos com prefixo negativo im-/il-/ir-/in- + base em -al — ADJ-NEG-01
+    "imoral","imorais","informal","informais","ilegal","ilegais","irreal","irreais",
+    "irracional","irracionais","irresponsavel","irresponsaveis",
+    "imaterial","imateriais","imediato","imediata","imediatos","imediatas",
+    // Adjetivos qualificativos frequentes não capturados por sufixos — ADJ-BASE-02
+    "amplo","ampla","amplos","amplas","digno","digna","dignos","dignas",
+    "reto","reta","retos","retas","pleno","plena","plenos","plenas",
+    "pronto","pronta","prontos","prontas","bruto","bruta","brutos","brutas",
+    "torto","torta","tortos","tortas","vago","vaga","vagos","vagas",
+    "cru","crua","crus","cruas","nu","nua","nus","nuas",
+    "apto","apta","aptos","aptas","inato","inata","inatos","inatas",
+    "agudo","aguda","agudos","agudas","obtuso","obtusa","obtusas",
+    "terno","terna","ternos","ternas","puro","pura","puros","puras",
+    "casto","casta","castos","castas","severo","severa","severos","severas",
+    "sereno","serena","serenos","serenas","grato","grata","gratos","gratas",
+    "pio","pia","pios","pias","lento","lenta","lentos","lentas"
   ]);
 
   // Advérbios de posição/lugar não presentes em functionWords.adverbios — ADV-EXT-01
