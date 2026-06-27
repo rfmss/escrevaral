@@ -1366,7 +1366,7 @@ const _SINS_CLASSE = {
 function getSinonimosPorClasse(word, className) {
   const entry = _SINS_CLASSE[word];
   if (entry) {
-    const key = Object.keys(entry).find(k => className.startsWith(k) || k.startsWith(className.split(" ")[0]));
+    const key = Object.keys(entry).find(k => className === k || className.startsWith(k));
     if (key !== undefined) return entry[key] || [];
   }
   // Fallback: sinônimos gerais filtrados por família de classe

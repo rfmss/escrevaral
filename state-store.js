@@ -437,7 +437,8 @@ function persistState(status = "Salvo localmente") {
   } catch (_) {}
 
   state.meta.lastSavedAt = now.toISOString();
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  const { lexical: { selectedPhrase: _sp, selectedRange: _sr, selectedContext: _sc, ...lexicalRest }, ...stateRest } = state;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
   saveStatus.textContent = `SALVO ${hhmm}`;
   saveStatus.title = status;
