@@ -1807,6 +1807,12 @@
     "diegese":       ["mundo da história", "universo narrativo", "espaço da ficção", "onde a história existe", "campo do que é narrado"],
     "cronotopo":     ["relação espaço-tempo na narrativa", "como o tempo e o espaço se cruzam", "unidade de lugar e momento na ficção", "a ancoragem temporal-espacial", "o quando e onde da cena"],
 
+    // SINONIMOS complementares — v899
+    "decisao":       ["escolha", "opção tomada", "resolução", "ato de decidir", "o que não pode ser desfeito"],
+    "ganhar":        ["obter", "conquistar", "adquirir", "receber", "alcançar"],
+    "afastar":       ["distanciar", "recuar", "separar", "colocar distância", "tirar do alcance"],
+    "aproximar":     ["achegar", "chegar perto", "estreitar", "diminuir a distância", "encostar"],
+
     // Identidade e literatura brasileira — v892
     "silenciamento": ["calar forçado", "voz apagada", "o que não pôde ser dito", "supressão da fala", "quando a voz não chega"],
     "apagamento":    ["invisibilidade forçada", "ser tirado da história", "não existir para o registro", "ausência produzida", "omissão que apaga"],
