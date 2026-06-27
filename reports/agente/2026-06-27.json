@@ -1,6 +1,6 @@
 {
   "data": "2026-06-27",
-  "total": 81,
+  "total": 91,
   "resultados": [
     {
       "frase": "A tarde era bela e o silêncio, livre de culpa, envolvia tudo.",
@@ -754,7 +754,8 @@
           "token": "encardida",
           "antes": [],
           "depois": [
-            "Verb"
+            "Verb",
+            "Adjective"
           ],
           "classe": "neutro"
         }
@@ -804,7 +805,8 @@
           "token": "acanhada",
           "antes": [],
           "depois": [
-            "Verb"
+            "Verb",
+            "Adjective"
           ],
           "classe": "neutro"
         }
@@ -1455,7 +1457,8 @@
           "token": "madrugada",
           "antes": [],
           "depois": [
-            "Verb"
+            "Verb",
+            "Adjective"
           ],
           "classe": "neutro"
         }
@@ -1570,6 +1573,116 @@
             "Conjunction",
             "Noun"
           ],
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "A tarde caiu sobre o vale como neblina.",
+      "zona": "polissemia",
+      "gabarito": "\"tarde\" = Substantivo; decisao: provável (POLISSEMIA resolvida por contexto)",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "Ela chegou tarde e encontrou a casa fechada.",
+      "zona": "polissemia",
+      "gabarito": "\"tarde\" = Advérbio; decisao: provável (POLISSEMIA resolvida por contexto)",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "Ficou claro que ele não voltaria.",
+      "zona": "polissemia",
+      "gabarito": "\"claro\" = Adjetivo; decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "Ele falou claro e sem rodeios.",
+      "zona": "polissemia",
+      "gabarito": "\"claro\" = Advérbio; decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "No fundo, ela sabia que teria de ceder.",
+      "zona": "polissemia",
+      "gabarito": "\"fundo\" = Substantivo; decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "A voz funda dela ecoava pelo corredor.",
+      "zona": "polissemia",
+      "gabarito": "\"funda\" = Adjetivo; decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "O livro estava posto sobre a mesa desde ontem.",
+      "zona": "polissemia",
+      "gabarito": "\"posto\" = Verbo (particípio); decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "Ele ficou posto diante da porta sem saber o que fazer.",
+      "zona": "polissemia",
+      "gabarito": "\"posto\" = Adjetivo; decisao: provável",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "A seca castigou o sertão por três anos seguidos.",
+      "zona": "polissemia",
+      "gabarito": "\"seca\" = Substantivo feminino ou adjetivo; decisao: ambíguo (className com \"ou\")",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
+          "classe": "neutro"
+        }
+      ]
+    },
+    {
+      "frase": "A escritora sabia onde estava. Era indeterminado para o motor.",
+      "zona": "polissemia",
+      "gabarito": "decisao: indeterminado para palavras fora do lexicon sem contexto suficiente",
+      "diffs": [
+        {
+          "tipo": "frase-nova",
           "classe": "neutro"
         }
       ]

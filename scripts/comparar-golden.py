@@ -16,7 +16,9 @@ Saída:
 """
 
 import asyncio
+import argparse
 import json
+import shutil
 import sys
 from pathlib import Path
 from datetime import date
@@ -28,6 +30,12 @@ CORPUS     = Path(__file__).parent / "corpus-catedratico.txt"
 GOLDEN     = Path(__file__).parent / "golden" / "corpus-output.json"
 REPORTS    = Path(__file__).parent.parent / "reports" / "agente"
 TIMEOUT    = 15_000
+SYSTEM_BROWSER_CANDIDATES = (
+    "chromium",
+    "chromium-browser",
+    "google-chrome",
+    "google-chrome-stable",
+)
 
 
 def parse_corpus(path: Path) -> list[dict]:
@@ -57,6 +65,14 @@ async def wait_engines(page):
         "window.syntaxEngine && window.syntaxEngine._isReady() && window.VeredaPunctuation",
         timeout=TIMEOUT
     )
+
+
+def find_system_browser() -> str | None:
+    for candidate in SYSTEM_BROWSER_CANDIDATES:
+        path = shutil.which(candidate)
+        if path:
+            return path
+    return None
 
 
 async def capture(page, frase: str) -> dict:
@@ -235,7 +251,7 @@ def gerar_relatorio(resultados: list, hoje: str) -> str:
     return "\n".join(linhas)
 
 
-async def run():
+async def run(base_url: str = BASE_URL, browser_executable: str | None = None):
     if not GOLDEN.exists():
         print("ERRO: golden files não encontrados. Rode gerar-golden.py primeiro.")
         sys.exit(1)
@@ -247,11 +263,14 @@ async def run():
     print(f"Corpus: {len(entries)} frases | Golden: {len(golden)} entradas")
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True)
+        launch_options = {"headless": True}
+        if browser_executable:
+            launch_options["executable_path"] = browser_executable
+        browser = await pw.chromium.launch(**launch_options)
         page    = await browser.new_page()
 
-        print(f"Abrindo {BASE_URL} ...")
-        await page.goto(BASE_URL, wait_until="networkidle", timeout=30_000)
+        print(f"Abrindo {base_url} ...")
+        await page.goto(base_url, wait_until="networkidle", timeout=30_000)
         await wait_engines(page)
         print("Engines prontas.\n")
 
@@ -315,4 +334,8 @@ async def run():
 
 
 if __name__ == "__main__":
-    asyncio.run(run())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--base-url", default=BASE_URL)
+    parser.add_argument("--browser-executable", default=None)
+    args = parser.parse_args()
+    asyncio.run(run(args.base_url, args.browser_executable or find_system_browser()))

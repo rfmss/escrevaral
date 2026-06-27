@@ -191,16 +191,52 @@
   // Só transições com P >= 0.70 entram como regra determinística
   // P(curr | prev): Determiner→Noun 0.76, Numeral→Noun 0.87
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
+  const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
+  const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
+  const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
+  const _COPULAS_ADJ_CTX = new Set([
+    "ficar", "fica", "ficou", "ficava", "ficavam", "ficara", "ficaram", "ficará", "ficaria", "ficasse", "fique",
+    "estar", "esta", "está", "estao", "estão", "estava", "estavam", "esteve", "estivera", "estaria", "estivesse",
+    "parecer", "parece", "pareceu", "parecia", "continuar", "continua", "continuava",
+    "permanecer", "permanece", "permanecia", "tornar", "tornou", "tornava",
+  ]);
+  const _PARTICIPIOS_IRR_CTX = new Set([
+    "aberto", "aberta", "abertos", "abertas",
+    "coberto", "coberta", "cobertos", "cobertas",
+    "dito", "dita", "ditos", "ditas",
+    "escrito", "escrita", "escritos", "escritas",
+    "feito", "feita", "feitos", "feitas",
+    "pago", "paga", "pagos", "pagas",
+    "posto", "posta", "postos", "postas",
+    "visto", "vista", "vistos", "vistas",
+    "preso", "presa", "presos", "presas",
+    "expulso", "expulsa", "expulsos", "expulsas",
+    "aceito", "aceita", "aceitos", "aceitas",
+    "oculto", "oculta", "ocultos", "ocultas",
+  ]);
+
+  function _isParticipleLike(normNoAccent) {
+    return _PARTICIPIOS_IRR_CTX.has(normNoAccent) ||
+      /(?:ado|ada|ados|adas|ido|ida|idos|idas)$/.test(normNoAccent);
+  }
+
+  function _addUniqueTag(tags, tag) {
+    if (!tags.includes(tag)) tags.push(tag);
+  }
 
   function resolverAmbiguidade(tks) {
     for (let i = 0; i < tks.length; i++) {
       const t = tks[i];
       if (!t || /^[.,;:!?—]$/.test(t.text)) continue;
       const na        = _stripDiac(t.normal);
+      const prevNorm  = i > 0 ? _stripDiac(tks[i - 1]?.normal || "") : "";
+      const nextNorm  = i + 1 < tks.length ? _stripDiac(tks[i + 1]?.normal || "") : "";
       const prevTags  = i > 0 ? (tks[i - 1]?.tags || []) : [];
+      const nextTags  = i + 1 < tks.length ? (tks[i + 1]?.tags || []) : [];
       const prevIsDet = prevTags.includes("Determiner");
       const prevIsCtx = prevIsDet || prevTags.includes("Preposition");
       const prevHighNoun = prevTags.some(pt => _BIGRAM_NOUN_PREV.has(pt));
+      const prevLooksNominal = prevTags.includes("Noun") || prevTags.includes("Pronoun") || prevTags.includes("Adjective");
 
       // R1 — sufixos nominais inequívocos: tag vazio → Substantivo
       if (t.tags.length === 0 && na.length > 4 && _SUFIXOS_NOM.test(na))
@@ -219,6 +255,34 @@
       if (prevHighNoun && t.tags.includes("Verb") && !t.tags.includes("Noun")) {
         t.tags = t.tags.filter(tt => tt !== "Verb");
         t.tags.push("Noun");
+      }
+
+      // R5 — locuções temporais: "por enquanto" e "enquanto isso" não devem
+      // cair como conjunção isolada.
+      if (na === "por" && nextNorm === "enquanto") {
+        t.tags = t.tags.filter(tt => tt !== "Noun");
+      }
+      if (na === "enquanto" && (prevNorm === "por" || nextNorm === "isso")) {
+        t.tags = t.tags.filter(tt => tt !== "Conjunction" && tt !== "Noun");
+        _addUniqueTag(t.tags, "Adverb");
+      }
+
+      // R6 — diacríticos distintivos sem acento: preservar a leitura verbal,
+      // mas registrar a leitura adjetiva quando o contexto nominal pede alerta
+      // ortográfico ("opinião pública", "conversa séria").
+      if (_DIACRITICO_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && nextTags.includes("Verb")) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+      if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && _ADV_INTENS_ADJ_CTX.has(nextNorm)) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+
+      // R7 — particípio adjetivado: depois de nome ou de cópula predicativa,
+      // a forma precisa carregar também leitura adjetiva.
+      if (t.tags.includes("Verb") && _isParticipleLike(na)) {
+        if ((prevLooksNominal && !prevTags.includes("Preposition")) || _COPULAS_ADJ_CTX.has(prevNorm)) {
+          _addUniqueTag(t.tags, "Adjective");
+        }
       }
     }
     return tks;
@@ -788,6 +852,15 @@
   function detectarLocucoes(texto) {
     const norm = texto.toLowerCase();
     const encontradas = [];
+    const locucoesAdverbiais = [
+      { locucao: "por enquanto", relacao: "tempo", descricao: "locução adverbial temporal: por ora, até este momento", classe: "adverbial" },
+      { locucao: "enquanto isso", relacao: "tempo", descricao: "conector temporal de simultaneidade", classe: "adverbial" },
+    ];
+
+    for (const item of locucoesAdverbiais) {
+      if (norm.includes(item.locucao)) encontradas.push(item);
+    }
+
     const todos = [
       ...Object.values(_data.conjuncoes.subordinativas),
       ...Object.values(_data.conjuncoes.coordenativas),

@@ -1,0 +1,254 @@
+{
+  "versao": "2026-06-27",
+  "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
+  "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
+  "convencoes": {
+    "alerta_ortografico": "Quando verdadeiro, a classificacao esperada depende do contexto, mas a forma escrita tambem deve gerar orientacao de acento/ortografia.",
+    "classe_tecnica": "Etiqueta de bancada inspirada em UD; nao e a etiqueta final exibida ao usuario.",
+    "classe_escolar": "Nome que o Escrevaral deve explicar em portugues escolar."
+  },
+  "casos": [
+    {
+      "id": "diacritico-publica-verbo-01",
+      "frase": "A revista publica textos novos toda semana.",
+      "alvos": [
+        {
+          "texto": "publica",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sem acento, forma verbal de publicar; nao confundir com adjetivo publica."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-publica-adjetivo-01",
+      "frase": "A opiniao publica mudou depois do debate.",
+      "alvos": [
+        {
+          "texto": "publica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de opiniao",
+          "certeza": "provavel",
+          "alerta_ortografico": true,
+          "forma_normativa": "pública",
+          "comentario": "Sem acento, a forma esperada normativa seria publica com acento; este caso mistura POS e alerta ortografico."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-seria-verbo-01",
+      "frase": "Ela seria mais cuidadosa se soubesse do risco.",
+      "alvos": [
+        {
+          "texto": "seria",
+          "classe_escolar": "verbo auxiliar",
+          "classe_tecnica": "AUX",
+          "funcao": "copula/auxiliar em futuro do preterito",
+          "certeza": "alta",
+          "comentario": "Nao confundir com seria adjetivo feminino sem acento."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-seria-adjetivo-01",
+      "frase": "A conversa seria demais para virar brincadeira.",
+      "alvos": [
+        {
+          "texto": "seria",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo/qualificador provavel",
+          "certeza": "provavel",
+          "alerta_ortografico": true,
+          "forma_normativa": "séria",
+          "comentario": "Sem acento, a forma esperada normativa seria seria com acento; testar como alerta ortografico + contexto."
+        }
+      ]
+    },
+    {
+      "id": "preso-participio-passiva-01",
+      "frase": "O suspeito foi preso ontem.",
+      "alvos": [
+        {
+          "texto": "preso",
+          "classe_escolar": "verbo no participio",
+          "classe_tecnica": "VERB",
+          "funcao": "voz passiva com auxiliar ser",
+          "certeza": "alta",
+          "comentario": "Auxiliar foi + participio indica leitura verbal/passiva."
+        }
+      ]
+    },
+    {
+      "id": "preso-adjetivo-predicativo-01",
+      "frase": "Ele ficou preso no elevador.",
+      "alvos": [
+        {
+          "texto": "preso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "provavel",
+          "comentario": "Com ficar, a leitura adjetival/predicativa e mais util para orientacao escolar."
+        }
+      ]
+    },
+    {
+      "id": "presos-substantivacao-01",
+      "frase": "Os presos chegaram cedo ao patio.",
+      "alvos": [
+        {
+          "texto": "presos",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo definido plural substantiva a forma."
+        }
+      ]
+    },
+    {
+      "id": "enquanto-conjuncao-01",
+      "frase": "Ela escrevia enquanto a casa dormia.",
+      "alvos": [
+        {
+          "texto": "enquanto",
+          "classe_escolar": "conjuncao",
+          "classe_tecnica": "SCONJ",
+          "funcao": "introduz oracao subordinada temporal",
+          "certeza": "alta",
+          "comentario": "Enquanto + oracao verbal; leitura conjuntiva."
+        }
+      ]
+    },
+    {
+      "id": "enquanto-locucao-adverbial-01",
+      "frase": "Por enquanto, ela preferiu esperar.",
+      "alvos": [
+        {
+          "texto": "por enquanto",
+          "classe_escolar": "locucao adverbial",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "Nao classificar enquanto isolado como conjuncao neste contexto."
+        }
+      ]
+    },
+    {
+      "id": "enquanto-isso-conector-01",
+      "frase": "Enquanto isso, o menino escondia a carta.",
+      "alvos": [
+        {
+          "texto": "enquanto isso",
+          "classe_escolar": "locucao adverbial/conector discursivo",
+          "classe_tecnica": "ADV",
+          "funcao": "marcador temporal de simultaneidade",
+          "certeza": "alta",
+          "comentario": "Locucao inteira vale mais que a classificacao da palavra isolada."
+        }
+      ]
+    },
+    {
+      "id": "larga-adjetivo-01",
+      "frase": "A estrada larga cortava o vale.",
+      "alvos": [
+        {
+          "texto": "larga",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de estrada",
+          "certeza": "alta",
+          "comentario": "Artigo + substantivo + larga favorece adjetivo."
+        }
+      ]
+    },
+    {
+      "id": "larga-verbo-01",
+      "frase": "Ela larga tudo quando se cansa.",
+      "alvos": [
+        {
+          "texto": "larga",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito pronominal + larga + objeto favorece verbo."
+        }
+      ]
+    },
+    {
+      "id": "estreita-adjetivo-01",
+      "frase": "A rua estreita guardava sombra.",
+      "alvos": [
+        {
+          "texto": "estreita",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de rua",
+          "certeza": "alta",
+          "comentario": "Contexto nominal favorece adjetivo."
+        }
+      ]
+    },
+    {
+      "id": "estreita-verbo-01",
+      "frase": "Ele estreita os olhos antes de responder.",
+      "alvos": [
+        {
+          "texto": "estreita",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito + estreita + objeto direto favorece verbo."
+        }
+      ]
+    },
+    {
+      "id": "participio-adjetivado-contido-01",
+      "frase": "Ele respondeu com um sorriso contido.",
+      "alvos": [
+        {
+          "texto": "contido",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de sorriso",
+          "certeza": "alta",
+          "comentario": "Participio adjetivado; nao remover de adjetivos por colidir com verbo."
+        }
+      ]
+    },
+    {
+      "id": "participio-adjetivado-oculto-01",
+      "frase": "O socio oculto apareceu no fim.",
+      "alvos": [
+        {
+          "texto": "oculto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de socio",
+          "certeza": "alta",
+          "comentario": "Participio adjetivado; dupla natureza deve ser representada por evidencias."
+        }
+      ]
+    },
+    {
+      "id": "fala-sussurrar-definicao-01",
+      "frase": "Ela sussurrou o nome dele para que ninguem ouvisse.",
+      "alvos": [
+        {
+          "texto": "sussurrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "O verbete sussurrar ja existe em DEFINICOES; nao tratar como lacuna."
+        }
+      ]
+    }
+  ]
+}

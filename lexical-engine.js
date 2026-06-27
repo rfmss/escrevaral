@@ -2324,6 +2324,18 @@
     "cicatriz":     "O que fica depois da ferida fechar. A cicatriz literária é memória corporal: ela não dói mais, mas mudou o que havia antes. Na ficção, personagens com cicatrizes carregam história visível — e a história que o texto conta sobre aquela cicatriz decide o quanto ela pesa.",
     "luto":         "O processo de perder algo ou alguém que importava. O luto na ficção não é linear: tem raiva, negação, saudade, alívio culpado. O que a personagem faz com o luto — como o carrega, o esconde, o exibe — diz mais sobre ela do que sobre quem perdeu.",
     "perda":        "A ausência que foi precedida por uma presença. Na ficção, a perda só tem peso se o leitor soube do que existia antes de desaparecer. Por isso, construir o que vai ser perdido é tão importante quanto narrar a perda — sem o primeiro, o segundo é seco.",
+
+    // Percepção sensorial e interior — v891
+    "perceber":     "Registrar algo que não estava sendo buscado. Perceber é diferente de observar: é mais involuntário, mais imediato. Na ficção, o que a personagem percebe sem querer revela o que seu corpo e sua consciência estão monitorando mesmo quando ela não sabe.",
+    "vislumbrar":   "Ver de relance, por um instante, sem certeza do que se viu. O vislumbre na ficção é ferramenta de suspense e de desejo: o que foi vislumbrado pode ser real ou projeção. Ele instala uma dúvida que o texto pode ou não resolver.",
+    "intuir":       "Saber antes de entender por quê. A intuição na ficção é acesso privilegiado ao interior da personagem: ela sabe algo que o texto ainda não revelou, e o leitor percebe a distância entre o que ela sente e o que sabe. Intuição bem usada cria tensão silenciosa.",
+    "lembrar":      "Trazer o passado ao presente — mas não sem alterá-lo. A memória literária não é arquivo: ela reconstrói. O que a personagem lembra e o que ela mudou sem perceber revela quem ela é no presente. A memória seletiva é personagem tanto quanto quem lembra.",
+    "esquecer":     "Perder acesso — mas não necessariamente o peso. O esquecimento na ficção é ativo: não é ausência de memória, é memória que trabalha por baixo. A personagem que esqueceu pode não saber que carrega; o leitor pode ver o que ela não vê.",
+    "sonhar":       "Criar imagens e narrativa enquanto dorme — mas na ficção, sonhar é também desejo e projeção. O sonho literário revela o que a personagem não consegue dizer acordada. Usado com cuidado, é janela; usado em excesso, é muleta para dizer o que a cena deveria mostrar.",
+    "imaginar":     "Criar internamente o que não existe no mundo imediato. A imaginação na ficção tem dois usos: a personagem que imagina é interior — o texto a acompanha para dentro. Quando a escritora imagina, ela está construindo o universo que o leitor vai habitar.",
+    "temer":        "Antecipar a perda de algo que importa. O medo da perda, ao contrário do medo do desconhecido, é motor narrativo específico: a personagem que teme sabe o que está em jogo. Isso cria cumplicidade com o leitor, que também sabe — e torce ou receia junto.",
+    "escutar":      "Ouvir com atenção e intenção. A diferença entre ouvir e escutar é o esforço: escutar é ativo. Na ficção, a personagem que escuta está presente de um modo que a que só ouve não está. Escutar pode ser ato de cuidado, de suspeita ou de esforço para entender.",
+    "farejar":      "Buscar pelo olfato — mas também rastrear, intuir, seguir um rastro não visível. Farejar em sentido figurado é a personagem que capta algo que não foi dito, que segue um fio que não é explícito. Esse uso metafórico é mais rico do que o literal na maioria das cenas.",
   };
 
   function inferDefinicao(word, className) {

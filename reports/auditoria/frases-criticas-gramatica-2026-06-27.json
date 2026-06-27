@@ -1,0 +1,1688 @@
+{
+  "data": "2026-06-27",
+  "base_url": "http://localhost:8799",
+  "browser_executable": "/usr/bin/chromium",
+  "resultados": [
+    {
+      "id": "diacritico-publica-verbo-01",
+      "frase": "A revista publica textos novos toda semana.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "publica",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "publica",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "publica"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "publica",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Sem acento, forma verbal de publicar; nao confundir com adjetivo publica."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "revista",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "revista"
+          },
+          {
+            "text": "publica",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "publica"
+          },
+          {
+            "text": "textos",
+            "tags": [],
+            "normal": "textos"
+          },
+          {
+            "text": "novos",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "novos"
+          },
+          {
+            "text": "toda",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "toda"
+          },
+          {
+            "text": "semana",
+            "tags": [],
+            "normal": "semana"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "diacritico-publica-adjetivo-01",
+      "frase": "A opiniao publica mudou depois do debate.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "publica",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "publica",
+                "tags": [
+                  "Verb",
+                  "Adjective"
+                ],
+                "normal": "publica"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "publica",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "adjunto adnominal de opiniao",
+            "certeza": "provavel",
+            "alerta_ortografico": true,
+            "forma_normativa": "pública",
+            "comentario": "Sem acento, a forma esperada normativa seria publica com acento; este caso mistura POS e alerta ortografico."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "opiniao",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "opiniao"
+          },
+          {
+            "text": "publica",
+            "tags": [
+              "Verb",
+              "Adjective"
+            ],
+            "normal": "publica"
+          },
+          {
+            "text": "mudou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "mudou"
+          },
+          {
+            "text": "depois",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "depois"
+          },
+          {
+            "text": "do",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "do"
+          },
+          {
+            "text": "debate",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "debate"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "diacritico-seria-verbo-01",
+      "frase": "Ela seria mais cuidadosa se soubesse do risco.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "seria",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "seria",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "seria"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "seria",
+            "classe_escolar": "verbo auxiliar",
+            "classe_tecnica": "AUX",
+            "funcao": "copula/auxiliar em futuro do preterito",
+            "certeza": "alta",
+            "comentario": "Nao confundir com seria adjetivo feminino sem acento."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "seria",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "seria"
+          },
+          {
+            "text": "mais",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "mais"
+          },
+          {
+            "text": "cuidadosa",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "cuidadosa"
+          },
+          {
+            "text": "se",
+            "tags": [
+              "Conjunction"
+            ],
+            "normal": "se"
+          },
+          {
+            "text": "soubesse",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "soubesse"
+          },
+          {
+            "text": "do",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "do"
+          },
+          {
+            "text": "risco",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "risco"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "diacritico-seria-adjetivo-01",
+      "frase": "A conversa seria demais para virar brincadeira.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "seria",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "seria",
+                "tags": [
+                  "Verb",
+                  "Adjective"
+                ],
+                "normal": "seria"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "seria",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "predicativo/qualificador provavel",
+            "certeza": "provavel",
+            "alerta_ortografico": true,
+            "forma_normativa": "séria",
+            "comentario": "Sem acento, a forma esperada normativa seria seria com acento; testar como alerta ortografico + contexto."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "conversa",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "conversa"
+          },
+          {
+            "text": "seria",
+            "tags": [
+              "Verb",
+              "Adjective"
+            ],
+            "normal": "seria"
+          },
+          {
+            "text": "demais",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "demais"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "virar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "virar"
+          },
+          {
+            "text": "brincadeira",
+            "tags": [],
+            "normal": "brincadeira"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "preso-participio-passiva-01",
+      "frase": "O suspeito foi preso ontem.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "preso",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "preso",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "preso"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "preso",
+            "classe_escolar": "verbo no participio",
+            "classe_tecnica": "VERB",
+            "funcao": "voz passiva com auxiliar ser",
+            "certeza": "alta",
+            "comentario": "Auxiliar foi + participio indica leitura verbal/passiva."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "suspeito",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "suspeito"
+          },
+          {
+            "text": "foi",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "foi"
+          },
+          {
+            "text": "preso",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "preso"
+          },
+          {
+            "text": "ontem",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "ontem"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "preso-adjetivo-predicativo-01",
+      "frase": "Ele ficou preso no elevador.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "preso",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "preso",
+                "tags": [
+                  "Verb",
+                  "Adjective"
+                ],
+                "normal": "preso"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "preso",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "predicativo do sujeito",
+            "certeza": "provavel",
+            "comentario": "Com ficar, a leitura adjetival/predicativa e mais util para orientacao escolar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ele",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ele"
+          },
+          {
+            "text": "ficou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ficou"
+          },
+          {
+            "text": "preso",
+            "tags": [
+              "Verb",
+              "Adjective"
+            ],
+            "normal": "preso"
+          },
+          {
+            "text": "no",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "no"
+          },
+          {
+            "text": "elevador",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "elevador"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "presos-substantivacao-01",
+      "frase": "Os presos chegaram cedo ao patio.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "presos",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "presos",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "presos"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "presos",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo definido plural substantiva a forma."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Os",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "os"
+          },
+          {
+            "text": "presos",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "presos"
+          },
+          {
+            "text": "chegaram",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "chegaram"
+          },
+          {
+            "text": "cedo",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "cedo"
+          },
+          {
+            "text": "ao",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "ao"
+          },
+          {
+            "text": "patio",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "patio"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "enquanto-conjuncao-01",
+      "frase": "Ela escrevia enquanto a casa dormia.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "enquanto",
+          "status": "ok",
+          "esperado": [
+            "Conjunction"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "enquanto",
+                "tags": [
+                  "Conjunction"
+                ],
+                "normal": "enquanto"
+              }
+            ],
+            "tags": [
+              "Conjunction"
+            ]
+          },
+          "alvo": {
+            "texto": "enquanto",
+            "classe_escolar": "conjuncao",
+            "classe_tecnica": "SCONJ",
+            "funcao": "introduz oracao subordinada temporal",
+            "certeza": "alta",
+            "comentario": "Enquanto + oracao verbal; leitura conjuntiva."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "escrevia",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "escrevia"
+          },
+          {
+            "text": "enquanto",
+            "tags": [
+              "Conjunction"
+            ],
+            "normal": "enquanto"
+          },
+          {
+            "text": "a",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "casa",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "casa"
+          },
+          {
+            "text": "dormia",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "dormia"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "enquanto-locucao-adverbial-01",
+      "frase": "Por enquanto, ela preferiu esperar.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "por enquanto",
+          "status": "ok",
+          "esperado": [
+            "Adverb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "Por",
+                "tags": [
+                  "Preposition"
+                ],
+                "normal": "por"
+              },
+              {
+                "text": "enquanto",
+                "tags": [
+                  "Adverb"
+                ],
+                "normal": "enquanto"
+              }
+            ],
+            "tags": [
+              "Adverb",
+              "Preposition"
+            ]
+          },
+          "alvo": {
+            "texto": "por enquanto",
+            "classe_escolar": "locucao adverbial",
+            "classe_tecnica": "ADV",
+            "funcao": "adjunto adverbial de tempo",
+            "certeza": "alta",
+            "comentario": "Nao classificar enquanto isolado como conjuncao neste contexto."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Por",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "por"
+          },
+          {
+            "text": "enquanto",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "enquanto"
+          },
+          {
+            "text": ",",
+            "tags": [],
+            "normal": ","
+          },
+          {
+            "text": "ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "preferiu",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "preferiu"
+          },
+          {
+            "text": "esperar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "esperar"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": [
+            {
+              "locucao": "por enquanto",
+              "relacao": "tempo",
+              "descricao": "locução adverbial temporal: por ora, até este momento",
+              "classe": "adverbial"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "enquanto-isso-conector-01",
+      "frase": "Enquanto isso, o menino escondia a carta.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "enquanto isso",
+          "status": "ok",
+          "esperado": [
+            "Adverb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "Enquanto",
+                "tags": [
+                  "Adverb"
+                ],
+                "normal": "enquanto"
+              },
+              {
+                "text": "isso",
+                "tags": [
+                  "Pronoun"
+                ],
+                "normal": "isso"
+              }
+            ],
+            "tags": [
+              "Adverb",
+              "Pronoun"
+            ]
+          },
+          "alvo": {
+            "texto": "enquanto isso",
+            "classe_escolar": "locucao adverbial/conector discursivo",
+            "classe_tecnica": "ADV",
+            "funcao": "marcador temporal de simultaneidade",
+            "certeza": "alta",
+            "comentario": "Locucao inteira vale mais que a classificacao da palavra isolada."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Enquanto",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "enquanto"
+          },
+          {
+            "text": "isso",
+            "tags": [
+              "Pronoun"
+            ],
+            "normal": "isso"
+          },
+          {
+            "text": ",",
+            "tags": [],
+            "normal": ","
+          },
+          {
+            "text": "o",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "menino",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "menino"
+          },
+          {
+            "text": "escondia",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "escondia"
+          },
+          {
+            "text": "a",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "carta",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "carta"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": [
+            {
+              "locucao": "enquanto isso",
+              "relacao": "tempo",
+              "descricao": "conector temporal de simultaneidade",
+              "classe": "adverbial"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "larga-adjetivo-01",
+      "frase": "A estrada larga cortava o vale.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "larga",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "larga",
+                "tags": [
+                  "Adjective"
+                ],
+                "normal": "larga"
+              }
+            ],
+            "tags": [
+              "Adjective"
+            ]
+          },
+          "alvo": {
+            "texto": "larga",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "adjunto adnominal de estrada",
+            "certeza": "alta",
+            "comentario": "Artigo + substantivo + larga favorece adjetivo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "estrada",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "estrada"
+          },
+          {
+            "text": "larga",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "larga"
+          },
+          {
+            "text": "cortava",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "cortava"
+          },
+          {
+            "text": "o",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "vale",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "vale"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "larga-verbo-01",
+      "frase": "Ela larga tudo quando se cansa.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "larga",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "larga",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "larga"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "larga",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Sujeito pronominal + larga + objeto favorece verbo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "larga",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "larga"
+          },
+          {
+            "text": "tudo",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "tudo"
+          },
+          {
+            "text": "quando",
+            "tags": [
+              "Conjunction",
+              "Verb",
+              "Gerund"
+            ],
+            "normal": "quando"
+          },
+          {
+            "text": "se",
+            "tags": [
+              "Conjunction"
+            ],
+            "normal": "se"
+          },
+          {
+            "text": "cansa",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "cansa"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "estreita-adjetivo-01",
+      "frase": "A rua estreita guardava sombra.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "estreita",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "estreita",
+                "tags": [
+                  "Adjective"
+                ],
+                "normal": "estreita"
+              }
+            ],
+            "tags": [
+              "Adjective"
+            ]
+          },
+          "alvo": {
+            "texto": "estreita",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "adjunto adnominal de rua",
+            "certeza": "alta",
+            "comentario": "Contexto nominal favorece adjetivo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "rua",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "rua"
+          },
+          {
+            "text": "estreita",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "estreita"
+          },
+          {
+            "text": "guardava",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "guardava"
+          },
+          {
+            "text": "sombra",
+            "tags": [],
+            "normal": "sombra"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "estreita-verbo-01",
+      "frase": "Ele estreita os olhos antes de responder.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "estreita",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "estreita",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "estreita"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "estreita",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Sujeito + estreita + objeto direto favorece verbo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ele",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ele"
+          },
+          {
+            "text": "estreita",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "estreita"
+          },
+          {
+            "text": "os",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "os"
+          },
+          {
+            "text": "olhos",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "olhos"
+          },
+          {
+            "text": "antes",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "antes"
+          },
+          {
+            "text": "de",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "de"
+          },
+          {
+            "text": "responder",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "responder"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "participio-adjetivado-contido-01",
+      "frase": "Ele respondeu com um sorriso contido.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "contido",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "contido",
+                "tags": [
+                  "Verb",
+                  "Adjective"
+                ],
+                "normal": "contido"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "contido",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "adjunto adnominal de sorriso",
+            "certeza": "alta",
+            "comentario": "Participio adjetivado; nao remover de adjetivos por colidir com verbo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ele",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ele"
+          },
+          {
+            "text": "respondeu",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "respondeu"
+          },
+          {
+            "text": "com",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "com"
+          },
+          {
+            "text": "um",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "um"
+          },
+          {
+            "text": "sorriso",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "sorriso"
+          },
+          {
+            "text": "contido",
+            "tags": [
+              "Verb",
+              "Adjective"
+            ],
+            "normal": "contido"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "participio-adjetivado-oculto-01",
+      "frase": "O socio oculto apareceu no fim.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "oculto",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "oculto",
+                "tags": [
+                  "Verb",
+                  "Adjective"
+                ],
+                "normal": "oculto"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "oculto",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "adjunto adnominal de socio",
+            "certeza": "alta",
+            "comentario": "Participio adjetivado; dupla natureza deve ser representada por evidencias."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "socio",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "socio"
+          },
+          {
+            "text": "oculto",
+            "tags": [
+              "Verb",
+              "Adjective"
+            ],
+            "normal": "oculto"
+          },
+          {
+            "text": "apareceu",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "apareceu"
+          },
+          {
+            "text": "no",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "no"
+          },
+          {
+            "text": "fim",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "fim"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "fala-sussurrar-definicao-01",
+      "frase": "Ela sussurrou o nome dele para que ninguem ouvisse.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "sussurrou",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "sussurrou",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "sussurrou"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "sussurrou",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "O verbete sussurrar ja existe em DEFINICOES; nao tratar como lacuna."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "sussurrou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "sussurrou"
+          },
+          {
+            "text": "o",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "nome",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "nome"
+          },
+          {
+            "text": "dele",
+            "tags": [],
+            "normal": "dele"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "que",
+            "tags": [
+              "Conjunction"
+            ],
+            "normal": "que"
+          },
+          {
+            "text": "ninguem",
+            "tags": [],
+            "normal": "ninguem"
+          },
+          {
+            "text": "ouvisse",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ouvisse"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": [
+            {
+              "locucao": "para que",
+              "relacao": "finalidade",
+              "descricao": "Indica a finalidade ou objetivo da ação principal"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

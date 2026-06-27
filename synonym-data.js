@@ -1781,6 +1781,15 @@
     "ate":          ["até o ponto de", "até o momento em que", "ao limite de", "não além de", "chegando em"],
     "antes":        ["anteriormente", "em tempo anterior", "primeiro que", "no passado de", "precedendo"],
     "depois":       ["em seguida", "posteriormente", "mais tarde", "após isso", "na sequência", "no tempo que vem"],
+
+    // Percepção sensorial — v891
+    "notar":        ["perceber", "observar", "registrar", "dar-se conta", "captar", "detectar"],
+    "saborear":     ["degustar", "provar devagar", "sentir o gosto", "apreciar o sabor", "comer com atenção"],
+    "apalpar":      ["tatear", "tocar para sentir", "explorar com os dedos", "toque de reconhecimento", "verificar pelo toque"],
+    "enxergar":     ["ver com esforço", "ver além do óbvio", "perceber com os olhos", "distinguir no escuro", "captar com a visão"],
+    "vislumbrar":   ["entrever", "ver de longe e de relance", "perceber vagamente", "ver por frações", "flagrar antes de sumir"],
+    "farejar":      ["cheirar para descobrir", "rastrear pelo olfato", "sentir o rastro", "buscar pelo cheiro", "farejamento"],
+    "prever":       ["antecipar", "intuir o que vem", "calcular o futuro", "sentir o que vai acontecer", "adiantar-se ao fato"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
