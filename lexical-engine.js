@@ -95,7 +95,7 @@
                   { loc:"de acordo com",  classe:"Preposição" }],
     // CONJUNTIVAS COMPARATIVAS
     "tal":       [{ loc:"tal qual",       classe:"Conjunção"  }, { loc:"tal como",    classe:"Conjunção"  }],
-    "tanto":     [{ loc:"tanto quanto",   classe:"Conjunção"  }],
+    "tanto":     [{ loc:"tanto quanto",   classe:"Advérbio"   }],
     "mais":      [{ loc:"mais do que",    classe:"Conjunção"  }],
     "menos":     [{ loc:"menos do que",   classe:"Conjunção"  }],
     "que":       [{ loc:"que nem",        classe:"Conjunção"  }],
@@ -656,6 +656,92 @@
       if (prev === "uma" && next === "que") return "Conjunção";
       return "Substantivo";
     };
+
+    // ── Grupo C — Conjunções temporais com forma de advérbio ──
+
+    // "quando" — temporal (Conjunção) vs interrogativo (Advérbio) (Bechara §conjunção temporal)
+    POLISSEMIA["quando"] = (prev, next) => {
+      // next é infinitivo ou verbo → "Quando chegar, avise" → Conjunção temporal
+      if (next && /^.{2,}(ar|er|ir|or|arem|erem|irem|asse|esse|isse)$/.test(next))
+        return "Conjunção";
+      // Após substantivo/pronome → pronome relativo temporal ("o dia quando aconteceu")
+      if (prev && !["e","ou","mas","que","se","porque","pois"].includes(prev) &&
+          !/^(e|de|em|a|ao|da|do|na|no)$/.test(prev) && prev.length > 2)
+        return "Conjunção";
+      // Início de frase ou após punt/conj → interrogativo ("Quando você vem?")
+      return "Advérbio";
+    };
+
+    // "mal" — Advérbio vs Substantivo vs Conjunção temporal ("mal chegou, saiu")
+    POLISSEMIA["mal"] = (prev, next) => {
+      // Início de frase + next é verbo passado → "Mal chegou, saiu" → Conjunção
+      if (!prev && next && /(ou|eu|iu|ava|ia|aram|eram|iram)$/.test(next)) return "Conjunção";
+      // Após artigo → Substantivo ("o mal", "um grande mal")
+      const _ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na"]);
+      if (prev && _ART.has(prev)) return "Substantivo";
+      return "Advérbio"; // "escreveu mal", "dormiu mal"
+    };
+
+    // ── Grupo D — Polissemia léxica específica ──
+
+    // "pois" — Conjunção causal/explicativa vs Advérbio de afirmação ("pois sim")
+    POLISSEMIA["pois"] = (prev, next) => {
+      if (next && ["sim","nao","bem","e","nao"].includes(next)) return "Advérbio";
+      if (!next) return "Advérbio"; // "Pois." isolado
+      return "Conjunção";
+    };
+
+    // "segundo" — Conjunção conformativa vs Adjetivo numeral ordinal
+    POLISSEMIA["segundo"] = (prev, next) => {
+      const _ARTS = new Set(["o","a","os","as","um","uma","do","da","no","na","ao","em"]);
+      if (prev && _ARTS.has(prev)) return "Adjetivo"; // "o segundo capítulo", "em segundo lugar"
+      return "Conjunção"; // "Segundo ela disse", "segundo Bechara"
+    };
+    POLISSEMIA["segunda"] = (prev) => {
+      const _ARTS = new Set(["a","as","da","na","uma"]);
+      if (prev && _ARTS.has(prev)) return "Adjetivo";
+      return "Conjunção";
+    };
+
+    // "nossa/nosso" — Pronome possessivo vs Interjeição
+    POLISSEMIA["nossa"] = (prev, next) => {
+      // Antes de substantivo (next é conteúdo, não punct nem "que" exclamativo) → possessivo
+      const _INTERJ_NEXT = new Set(["que","!","como","quanto","de","tao","mas"]);
+      if (!next || _INTERJ_NEXT.has(next) || !prev) {
+        // Verificar se não é possessivo pré-nominal com "nossa" + subst
+        // Heurística: se prev é nulo ou pontuação e next é "que" → Interjeição
+        if (!next || _INTERJ_NEXT.has(next)) return "Interjeição";
+      }
+      return "Pronome possessivo";
+    };
+    POLISSEMIA["nosso"] = (prev, next) => "Pronome possessivo"; // "nosso lar" — sempre possessivo (masc.)
+
+    // ── Grupo A — Adjetivos que funcionam como advérbios de modo ──
+    // Bechara §advérbio: adjetivo após verbo de ação = advérbio de modo
+    (function() {
+      const _verbPast = /^.{2,}(ou|eu|iu|ava|ia|ando|endo|indo|aram|eram|iram)$/;
+      function _adjAdv(prev, next) {
+        if (prev && _verbPast.test(prev)) return "Advérbio"; // "voou alto", "custou caro"
+        return "Adjetivo";
+      }
+      for (const w of ["alto","baixo","rapido","lento","duro","forte","barato","errado"]) {
+        POLISSEMIA[w] = _adjAdv;
+      }
+      // "caro" — também "Adjetivo" predicativo ("livro caro")
+      POLISSEMIA["caro"] = _adjAdv;
+      POLISSEMIA["cara"] = _adjAdv;
+      // "claro" — Advérbio de afirmação no início ("Claro que sim") + após verbo
+      POLISSEMIA["claro"] = (prev, next) => {
+        if (!prev && next === "que") return "Advérbio"; // "Claro que sim"
+        if (!prev && !next) return "Advérbio"; // "Claro!" isolado
+        if (prev && _verbPast.test(prev)) return "Advérbio";
+        return "Adjetivo";
+      };
+      POLISSEMIA["clara"] = POLISSEMIA["claro"];
+      // "fácil/difícil" — Advérbio após verbo ("não é fácil" já é predicativo; "fez fácil" = Adv)
+      POLISSEMIA["facil"] = _adjAdv;
+      POLISSEMIA["dificil"] = _adjAdv;
+    })();
   })();
 
   // ── Pronomes indefinidos quantificadores — Advérbio vs Pronome (Bechara §253) ──
@@ -755,6 +841,14 @@
     "presente": ["Adjetivo — 'estava presente na cerimônia'", "Substantivo — 'no presente, tudo muda'"],
     "seguinte": ["Adjetivo — 'no dia seguinte'"],
     "proximo":  ["Adjetivo — 'o próximo capítulo'"],
+    "quando": ["Conjunção temporal — 'quando chegar, avise'", "Advérbio interrogativo — 'quando você vem?'"],
+    "mal":    ["Advérbio — 'escreveu mal'", "Substantivo — 'o mal do século'", "Conjunção — 'mal chegou, saiu'"],
+    "pois":   ["Conjunção causal — 'ficou, pois estava cansada'", "Advérbio — 'Pois sim, claro.'"],
+    "segundo":["Conjunção conformativa — 'segundo Bechara'", "Adjetivo numeral — 'o segundo capítulo'"],
+    "nossa":  ["Pronome possessivo — 'nossa casa'", "Interjeição — 'Nossa! Que susto!'"],
+    "claro":  ["Adjetivo — 'dia claro'", "Advérbio — 'Claro que sim'"],
+    "alto":   ["Adjetivo — 'voz alta'", "Substantivo — 'o alto da serra'", "Advérbio — 'voou alto'"],
+    "caro":   ["Adjetivo — 'livro caro'", "Advérbio — 'custou caro'"],
     "muito":  ["Advérbio — 'era muito belo'", "Pronome indefinido — 'havia muito trabalho'"],
     "muita":  ["Pronome indefinido — 'muita gente veio'"],
     "muitos": ["Pronome indefinido — 'muitos chegaram cedo'"],
@@ -806,6 +900,8 @@
         functionName: inferFunctionName(fixedClass),
         field: lexiconEntry?.field || inferSemanticField(normalized, fixedClass),
         note: lexiconEntry?.note || createLocalNote(fixedClass, normalized),
+        definicao: lexiconEntry?.definicao || inferDefinicao(normalized, fixedClass),
+        funcaoSintatica: inferFuncaoSintatica(selectedWord, fixedClass, text),
         count: countWordOccurrences(text, normalized),
       };
     }
@@ -835,6 +931,8 @@
       functionName: inferFunctionName(className),
       field: lexiconEntry?.field || inferSemanticField(normalized, className),
       note: lexiconEntry?.note || createLocalNote(className, normalized),
+      definicao: lexiconEntry?.definicao || inferDefinicao(normalized, className),
+      funcaoSintatica: inferFuncaoSintatica(selectedWord, className, text),
       count: countWordOccurrences(text, normalized),
       alternatives,
     };
@@ -1068,8 +1166,22 @@
       }
     }
 
-    // 4. Morfologia base
-    return inferWordClass(normalized, original);
+    // 4. Morfologia base + particípio após cópula → Adjetivo predicativo (Bechara §adjetivo verbal)
+    const _rawClass = inferWordClass(normalized, original);
+    if (_rawClass.startsWith("Verbo (particípio)") && prevNorm) {
+      // Cópulas que introduzem predicativo: estar/ficar/ser/parecer — NOT ter/haver (auxiliares)
+      const _COPULAS_LINK = new Set([
+        "estava","estou","esta","estamos","estao","estavam","estivera","esteve",
+        "ficou","fica","ficava","ficara","ficavam","fique","ficam",
+        "era","eram","e","sou","somos","sao","foi","fosse",
+        "parecia","parece","pareceu","pareciam","parecessem",
+        "mostrava","mostrou","revela","revelou",
+        "permanecia","permanece","permaneceu","continuava","continua",
+        "encontrava","encontra","achava","acha"
+      ]);
+      if (_COPULAS_LINK.has(prevNorm)) return "Adjetivo";
+    }
+    return _rawClass;
   }
 
   // ── Campos semânticos para inferSemanticField e createLocalNote ──────────
@@ -1086,6 +1198,186 @@
   const SUBST_NATUREZA = new Set(["terra","agua","vento","chuva","neve","fogo","pedra","areia","lama","barro","arvore","folha","raiz","flor","fruto","semente","mar","onda","correnteza","brisa","tempestade","trovao","relampago"]);
   const SUBST_EMOCAO   = new Set(["amor","medo","raiva","alegria","tristeza","saudade","solidao","esperança","desespero","angustia","ansiedade","calma","paz","tensao","vergonha","orgulho","culpa","alívio","ternura","nostalgia"]);
   const SUBST_ABSTR    = new Set(["vida","morte","tempo","silencio","verdade","mentira","justiça","liberdade","poder","memoria","destino","acaso","sorte","escolha","limite","possibilidade","impossibilidade","vazio","ausencia","presença"]);
+
+  // ── DEFINICOES — dicionário de escritor (Bechara + Cunha&Cintra + uso literário BR) ───────
+  const DEFINICOES = {
+    // ARCAÍSMOS — uso literário, jurídico ou formal arcaizante
+    "outrossim":    "Conjunção aditiva formal equivalente a 'além disso', 'igualmente'. Arcaísmo frequente em textos jurídicos e na prosa do século XIX; soa antiquado na ficção contemporânea.",
+    "mormente":     "Advérbio de especificação: 'principalmente', 'sobretudo'. Uso erudito; intercambiável com 'especialmente' ou 'sobretudo' em registro contemporâneo.",
+    "quica":        "Advérbio de dúvida equivalente a 'talvez'. Literário e formal; mais raro que 'talvez' no português brasileiro atual.",
+    "quica":        "Advérbio de dúvida equivalente a 'talvez'. Literário e formal; mais raro que 'talvez' no português brasileiro atual.",
+    "hodierno":     "Adjetivo formal que significa 'atual', 'do tempo presente', 'contemporâneo'. Registro erudito; raro e arcaizante na prosa narrativa moderna.",
+    "doravante":    "Advérbio temporal formal: 'daqui em diante', 'a partir de agora'. Frequente em textos jurídicos e normativos; funcional em diálogos formais.",
+    "destarte":     "Advérbio de modo arcaico: 'deste modo', 'assim sendo'. Quase exclusivo da prosa literária do século XIX e de paródia formal.",
+    "dessarte":     "Advérbio equivalente a 'dessa forma', 'desse jeito'. Variante de 'destarte'; igualmente arcaico fora do registro formal literário.",
+    "conquanto":    "Conjunção concessiva equivalente a 'embora', 'ainda que'. Arcaísmo literário; substituível por 'embora' sem perda de sentido.",
+    "porquanto":    "Conjunção causal formal: 'porque', 'uma vez que'. Uso jurídico e literário; raro na prosa contemporânea comum.",
+    "porventura":   "Advérbio de dúvida: 'talvez', 'por acaso'. Literário; comum em interrogativas retóricas ('Porventura você acredita nisso?').",
+    "outrem":       "Pronome indefinido: 'outra pessoa', 'os outros'. Uso literário e formal; mais específico que 'alguém'. Ex.: 'não prejudicar outrem'.",
+    "deveras":      "Advérbio de afirmação e intensidade: 'verdadeiramente', 'de fato', 'muito'. Registro literário; mais expressivo que 'muito' quando a ênfase importa.",
+    "sobremaneira": "Advérbio de intensidade: 'em demasia', 'excessivamente', 'muito'. Uso literário e formal; evitar em prosa coloquial.",
+    "malgrado":     "Preposição ou conjunção concessiva: 'apesar de', 'não obstante'. Uso literário formal; intercambiável com 'apesar de'.",
+    "alhures":      "Advérbio de lugar: 'em outro lugar', 'em outra parte'. Arcaísmo literário; raro em prosa contemporânea.",
+    "algures":      "Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Literário; mais raro que 'em algum lugar' no uso corrente.",
+    "antanho":      "Advérbio de tempo: 'outrora', 'em tempos passados', 'antigamente'. Literário e arcaizante; frequente em poesia.",
+    "outrora":      "Advérbio de tempo: 'em outro tempo', 'antigamente', 'antes'. Literário; mais comum que 'antanho' e ainda funcional na ficção histórica.",
+    "dantes":       "Advérbio de tempo: 'antes', 'anteriormente'. Arcaísmo; usado com efeito historicizante ou irônico.",
+    "ademais":      "Advérbio aditivo: 'além disso', 'também', 'ainda mais'. Registro formal; mais vivo que 'outrossim' no uso culto contemporâneo.",
+    "mister":       "Substantivo formal: 'necessidade', 'precisão'. 'É mister que...' = 'É necessário que...'. Uso jurídico e formal literário.",
+    "avante":       "Advérbio de lugar e direção: 'para a frente', 'adiante'. Literário; comum em narrativa histórica e poesia de cunho épico.",
+    "donde":        "1. Advérbio relativo: 'de onde' (ex: 'a terra donde veio'). 2. Conjunção conclusiva: 'daí que', 'portanto'. Uso formal e literário.",
+    "nomeadamente": "Advérbio especificativo: 'especialmente', 'a saber', 'em particular'. Uso formal e jurídico; pode soar lusitano no Brasil.",
+    "sobretudo":    "Advérbio de especificação: 'principalmente', 'acima de tudo'. Formal mas ainda corrente; não é arcaísmo, é registro elevado.",
+    "maxime":       "Advérbio latino-formal: 'especialmente', 'principalmente'. Latinismo jurídico e erudito; raro na prosa narrativa contemporânea.",
+    "consoante":    "Preposição/Conjunção conformativa: 'conforme', 'segundo', 'de acordo com'. Uso jurídico e formal; arcaizante em prosa literária.",
+    "merce":        "Substantivo: 'graça', 'favor', 'misericórdia'. Arcaísmo literário; 'à mercê de' = 'ao poder de' — esta locução ainda se usa.",
+    "oxala":        "Partícula optativa ou conjunção: exprime desejo intenso ('tomara que', 'espero que'). De origem árabe; bem integrada ao português brasileiro.",
+    "tampouco":     "Advérbio negativo: 'também não', 'nem'. Formal; preciso e elegante; menos corrente que 'também não' na fala espontânea.",
+    "afim":         "Adjetivo: 'semelhante', 'aparentado', 'relacionado'. Não confundir com 'a fim de' (locução prepositiva final).",
+    "jaez":         "Substantivo: 'tipo', 'qualidade', 'espécie'. 'Da mesma jaez' = 'do mesmo tipo'. Uso coloquial ou arcaico; produtivo na ficção de época.",
+    "algures":      "Advérbio de lugar: 'em algum lugar indefinido'. Literário; mais preciso que 'em algum lugar' quando a indeterminação é o efeito.",
+    "ato":          "Substantivo polissêmico. 1. Ação realizada. 2. Parte de uma peça teatral. 3. 'No ato' = imediatamente. 4. 'Ato contínuo' = logo em seguida (locução formal).",
+    "suso":         "Advérbio arcaico: 'acima', 'anteriormente' (em texto). Uso exclusivamente jurídico ou paródico; substituível por 'acima'.",
+    "infra":        "Advérbio formal (do latim): 'abaixo', 'a seguir' (em texto). Uso jurídico, acadêmico e técnico.",
+    "outrora":      "Advérbio temporal literário: 'em outro tempo', 'antes', 'antigamente'. Útil em ficção histórica e narrativas de memória.",
+    // CONTEMPORÂNEO — neologismos e registro de uso
+    "impactar":     "Verbo de neologismo corporativo: 'causar impacto em', 'afetar fortemente'. Em prosa literária, prefira 'afetar', 'transformar', 'abalar' — mais precisos.",
+    "alavancar":    "Verbo do vocabulário de negócios: 'impulsionar', 'potencializar'. Em prosa literária, use verbos mais específicos ao contexto da ação.",
+    "deletar":      "Verbo de origem inglesa (delete): 'apagar', 'excluir'. Registro informal/digital; em prosa, prefira 'apagar', 'excluir' ou 'apagar do mapa'.",
+    "empoderar":    "Verbo derivado do inglês 'empower': 'dar poder a', 'fortalecer', 'fazer sentir capaz'. Neologismo de uso político e social corrente.",
+    "ressignificar": "Verbo: 'dar novo significado a', 'reinterpretar'. Neologismo acadêmico e psicológico; pouco recomendável em prosa literária formal.",
+    "protagonizar": "Verbo com uso em disputa: 'ser o protagonista de' é o significado original. Uso consagrado 'protagonizar um escândalo' é criticado por gramáticos clássicos mas largamente aceito.",
+    "visibilizar":  "Verbo neológico ativista: 'tornar visível', 'dar visibilidade a'. Registro político e social contemporâneo; pode soar artificial em prosa literária.",
+    "curadoria":    "Substantivo: 'seleção e organização de conteúdo com critério'. Originalmente restrito a museus; hoje usado amplamente em cultura digital.",
+    "vivencia":     "Substantivo: 'experiência pessoal intensa e acumulada'. Palavra viva e rica; diferente de 'experiência' (mais neutro) por implicar transformação interior.",
+    // LITERÁRIOS — palavras com uso específico na escrita criativa
+    "silencio":     "Ausência de som; estado de quem não fala. Na ficção, o silêncio é tão expressivo quanto a palavra — pode ser personagem, escolha ou ausência. Use-o com intenção.",
+    "saudade":      "Sentimento de ausência com afeto: sentir falta de alguém ou algo amado. Palavra de difícil tradução; marca a afetividade brasileira e a narrativa de memória.",
+    "solidao":      "Estado de estar só; mas também sensação de desconexão mesmo entre pessoas. Diferente de 'isolamento' (físico) e de 'abandono' (relacional).",
+    "crepusculo":   "Momento entre o dia e a noite; o período de luz difusa antes do escurecer completo. Na ficção, é metáfora de transição, fim e ambiguidade.",
+    "alvorecer":    "Substantivo e verbo: o momento do amanhecer; o surgimento da luz. Literário; mais expressivo que 'amanhecer' por carregar a ideia de um começo que emerge.",
+    "penumbra":     "Meia-sombra; zona de luz difusa entre o claro e o escuro. Na ficção, é o espaço do não-dito, do pressentimento, do que está prestes a acontecer.",
+    "lusco-fusco":  "Hora do crepúsculo quando a luz está ambígua entre o dia e a noite. Expressão popular brasileira; mais sensorial que 'crepúsculo'.",
+    "aprazivel":    "Adjetivo: 'agradável', 'que apraz', 'ameno'. Literário e formal; mais sofisticado que 'agradável' quando o contexto é refinado.",
+    "melindroso":   "Adjetivo: 'sensível ao ponto de se ofender facilmente'; mas também 'delicado', 'que exige cuidado'. Útil para personagens ou situações frágeis.",
+    "vociferar":    "Verbo: 'gritar', 'bradar', 'falar em voz muito alta com ira'. Mais específico que 'gritar' por implicar agitação e perda de controle.",
+    "soçobrar":     "Verbo: 'afundar', 'naufragar', 'fracassar'. Literário; 'o navio soçobrou' / 'o plano soçobrou'. Raro na prosa comum.",
+    "fulgor":       "Substantivo: 'brilho intenso', 'claridade ofuscante'. Literário; mais carregado que 'brilho' por implicar beleza perturbadora.",
+    "latejo":       "Substantivo: 'pulsação', 'batida rítmica' (veias, coração). Onomatopéico e sensorial; útil em cenas de tensão física.",
+    "fremito":      "Substantivo: 'frêmito', 'tremor', 'vibração'. Literário; descreve o estado do corpo quando a emoção não encontra palavras.",
+    "furtivo":      "Adjetivo: 'que age às escondidas', 'sorrateiro', 'dissimulado'. Preciso em cenas de segredo, vigilância ou transgressão.",
+    "ensejar":      "Verbo: 'proporcionar oportunidade', 'dar ensejo a', 'possibilitar'. Formal; mais elegante que 'permitir' em registro literário elevado.",
+    "obnubilar":    "Verbo: 'obscurecer', 'turvar', 'confundir a mente'. Literário e médico; 'a dor obnubilava seu raciocínio'.",
+    "alvissaras":   "Substantivo plural: 'recompensa dada a quem traz boa notícia'. Arcaísmo; 'Alvíssaras!' como interjeição de alegria ainda aparece na literatura.",
+    "inopinado":    "Adjetivo: 'inesperado', 'repentino', 'que veio sem aviso'. Literário; mais contundente que 'inesperado' por implicar total falta de sinal.",
+    "arguto":       "Adjetivo: 'perspicaz', 'aguçado', 'de raciocínio rápido e preciso'. Literário; elogio à inteligência que percebe detalhes imperceptíveis.",
+    "labirinto":    "Substantivo: estrutura ou situação sem saída clara. Na ficção, metáfora da mente, da burocracia, do amor, da memória — use com consciência do eco borgiano.",
+    "testemunho":   "Substantivo: 'declaração de quem viu'; mas também 'o que resta de uma experiência' (o corpo como testemunho, a cicatriz como testemunho). Palavra de peso em narrativa.",
+    "lacuna":       "Substantivo: 'falta', 'espaço vazio', 'o que não foi dito'. Na ficção, as lacunas são tão poderosas quanto o que está escrito — o que o leitor preenche.",
+    "palimpsesto":  "Manuscrito antigo apagado para receber novo texto, mas onde os rastros do anterior ainda transparecem. Metáfora da memória, da reescrita, da identidade.",
+    "epifania":     "Revelação súbita e intensa; momento em que algo se torna claro de modo inesperado. Conceito de James Joyce adaptado à narrativa: o instante que condensa o todo.",
+    "incipiente":   "Adjetivo: 'que está começando', 'em estágio inicial', 'rudimentar'. Formal; indica início sem garantia de desenvolvimento.",
+    "efemero":      "Adjetivo: 'que dura pouco', 'passageiro', 'transitório'. Palavra literária rica; implica beleza na brevidade.",
+    "perene":       "Adjetivo: 'que dura sempre', 'permanente', 'que não se esgota'. Oposto de 'efêmero'; útil em reflexões sobre memória, natureza e amor.",
+    "vernacular":   "Adjetivo ou substantivo: 'próprio da língua materna', 'nativo de uma região'. 'Português vernacular' = português original, sem termos estrangeiros.",
+    "altissonante": "Adjetivo: 'de som elevado'; no sentido figurado, 'pomposo', 'grandiloquente', 'que soa mais do que significa'. Útil para criticar linguagem afetada.",
+    "circunloquio": "Substantivo: 'uso de muitas palavras para dizer o que poderia ser dito com poucas'. Vício do discurso que a revisão deve combater.",
+    "eufemismo":    "Figura de linguagem: substituição de palavra ou ideia desagradável por outra mais suave. Ex.: 'passou dessa para melhor' em vez de 'morreu'. Cuidado: o excesso apaga a realidade.",
+    "perifirase":   "Figura de linguagem: expressão de muitas palavras para substituir uma simples. 'O astro-rei' em vez de 'sol'. Pode ser elegante ou afetada.",
+    "anacoluto":    "Figura de sintaxe: ruptura da estrutura gramatical da frase, geralmente para expressar emoção ou pensamento fragmentado. Recurso de voz e oralidade.",
+    "elipse":       "1. Figura de sintaxe: omissão de elemento que se subentende ('Eu fui ao mercado; [eu] comprei pão.'). 2. Recurso narrativo: salto no tempo ou na ação — o que não é mostrado.",
+    "zeugma":       "Figura de sintaxe: omissão de uma palavra já expressa antes. 'Uns votaram sim; outros, [votaram] não.' Cria ritmo e concisão.",
+    "assindeto":    "Figura de construção: omissão de conjunções para dar velocidade ('Vim, vi, venci'). Ritmo acelerado; cria urgência e energia.",
+    "polissindeto": "Figura de construção: uso excessivo de conjunções ('e... e... e...'). Cria ritmo acumulativo, peso emocional ou oralidade.",
+    "anafora":      "Figura de repetição: repetição de uma palavra no início de versos ou orações consecutivas. Cria ênfase e ritmo litânico.",
+    "epiifora":     "Figura de repetição: repetição de palavra ao final de orações sucessivas. Efeito de insistência, eco, obsessão.",
+    "catafora":     "Referência que aponta para algo que ainda virá no texto ('Ele disse isso: a verdade dói.'). Cria expectativa e suspense.",
+    "analepse":     "Recurso narrativo: retorno ao passado dentro da narrativa (flashback). Não confundir com 'prolepse' (antecipação do futuro).",
+    "prolepse":     "Recurso narrativo: antecipação de evento futuro dentro da narrativa (flash-forward). Cria ironia, pressentimento ou suspense.",
+    "diegese":      "O mundo da história narrada; tudo que existe dentro da ficção. Oposto de 'extradiegético' (narrador fora do mundo da história).",
+    "verossimilhanca": "Grau em que a ficção parece credível ao leitor dentro de suas próprias regras. Não é verdade, é credibilidade interna ao mundo criado.",
+    "cronotopo":    "Conceito de Bakhtin: a relação entre tempo e espaço numa obra. Cada gênero literário tem seu cronotopo próprio (o da estrada, o da sala de estar, etc.).",
+    // REGISTRO — palavras comuns com uso específico na escrita
+    "cunho":        "Substantivo: 'marca', 'caráter', 'natureza'. 'De cunho político' = 'de caráter político'. Uso formal; produtivo em ensaios e análises.",
+    "enseada":      "Substantivo geográfico: pequena reentrância da costa marítima protegida do vento. Mais específico que 'baía'; útil em ficção que usa o mar.",
+    "cerne":        "Substantivo: 'parte central', 'núcleo', 'essência'. 'O cerne da questão' = 'o ponto central'. Mais preciso que 'centro' em sentido figurado.",
+    "vertente":     "Substantivo: 1. lado de uma montanha (geografia). 2. corrente, tendência de um movimento ('vertente romântica'). 3. aspecto, ângulo ('vertente emocional').",
+    "arco":         "Substantivo: 1. forma curva. 2. Na narrativa, 'arco do personagem' = a transformação que ele sofre ao longo da história. Conceito central de estrutura narrativa.",
+  };
+
+  function inferDefinicao(word, className) {
+    const n = normalizeWord(word) || word;
+    if (DEFINICOES[n]) return DEFINICOES[n];
+    // Fallback por classe
+    if (className.includes("Verbo (gerúndio)"))    return "Verbo no gerúndio — exprime ação em curso ou modo.";
+    if (className.includes("Verbo (subjuntivo)"))  return "Verbo no modo subjuntivo — exprime dúvida, hipótese, desejo ou subordinação.";
+    if (className.includes("Verbo (particípio)"))  return "Verbo no particípio — funciona como adjetivo verbal ou em tempos compostos.";
+    if (className.includes("Verbo"))               return "Verbo — núcleo do predicado; exprime ação, estado ou fenômeno.";
+    if (className === "Adjetivo")                  return "Adjetivo — atribui qualidade, estado ou característica ao substantivo.";
+    if (className === "Advérbio")                  return "Advérbio — modifica verbo, adjetivo ou outro advérbio; indica circunstância.";
+    if (className === "Conjunção")                 return "Conjunção — conecta orações ou termos, estabelecendo relação de sentido.";
+    if (className === "Preposição" || className === "Preposição/Artigo") return "Preposição — liga termos da oração, subordinando o segundo ao primeiro.";
+    if (className === "Artigo")                    return "Artigo — determina o substantivo (definido: 'o/a'; indefinido: 'um/uma').";
+    if (className.includes("Pronome relativo"))    return "Pronome relativo — retoma o antecedente e introduz oração adjetiva.";
+    if (className.includes("Pronome interrogativo")) return "Pronome interrogativo — introduz pergunta direta ou indireta.";
+    if (className.includes("Pronome pessoal"))     return "Pronome pessoal — substitui o nome de uma pessoa do discurso.";
+    if (className.includes("Pronome"))             return "Pronome — substitui ou acompanha o substantivo.";
+    if (className.includes("Interjeição"))         return "Interjeição — expressão de sentimento ou reação espontânea; não integra sintaticamente a frase.";
+    if (className.includes("Substantivo próprio")) return "Substantivo próprio — nome de pessoa, lugar ou entidade específica; sempre com maiúscula.";
+    if (className.includes("Substantivo"))         return "Substantivo — nomeia seres, objetos, sentimentos, ações e conceitos.";
+    if (className.includes("Numeral"))             return "Numeral — indica quantidade, ordem ou proporção.";
+    return "";
+  }
+
+  // ── Função sintática heurística — orientação ao escritor (não substituição de parser completo)
+  function inferFuncaoSintatica(word, className, sentence) {
+    if (!sentence || !className) return "";
+    const tokens   = tokenizeWords(sentence);
+    const norm     = normalizeWord(word);
+    const idx      = tokens.findIndex(t => normalizeWord(t) === norm);
+    if (idx === -1) return "";
+
+    // Classes com função fixa
+    if (className.startsWith("Verbo") && !className.includes("particípio") && !className.includes("gerúndio"))
+      return "Predicado";
+    if (className === "Verbo (gerúndio)") return "Adjunto adverbial de modo";
+    if (className.startsWith("Conjunção")) return "Conectivo";
+    if (className.startsWith("Advérbio"))  return "Adjunto adverbial";
+    if (["Preposição","Preposição/Artigo"].includes(className)) return "Elemento prepositivo";
+    if (className === "Artigo") return "Determinante";
+    if (className.includes("Interjeição")) return "Vocativo / Expressão";
+    if (className.includes("Pronome relativo")) return "Conector de oração relativa";
+    if (className.includes("Pronome interrogativo")) return "Introdutor de pergunta";
+
+    // Adjetivo / particípio — predicativo vs adnominal
+    if (className.startsWith("Adjetivo") || className === "Verbo (particípio)") {
+      const prevNorm = idx > 0 ? normalizeWord(tokens[idx-1]) : null;
+      const _COP = new Set(["estava","estou","esta","era","e","sou","sao","foi","fica","ficou","parecia","parece"]);
+      if (prevNorm && _COP.has(prevNorm)) return "Predicativo do sujeito";
+      return "Adjunto adnominal";
+    }
+
+    // Substantivo / pronome — posição relativa ao verbo
+    const _VSFX = /^.{2,}(ou|eu|iu|ava|ia|ar|er|ir|ando|endo|indo|aram|eram|iram)$/;
+    const _EXCL = new Set(["amor","calor","temor","ardor","vapor","valor","senhor","pastor","exterior","interior","superior","inferior","anterior","posterior","melhor","pior","maior","menor","singular","regular","popular","peculiar","particular","familiar","similar","circular","linear","solar","lunar","mar","bar","car"]);
+    let verbIdx = -1;
+    for (let i = 0; i < tokens.length; i++) {
+      const n = normalizeWord(tokens[i]);
+      if (i !== idx && _VSFX.test(n) && n.length > 3 && !_EXCL.has(n)) { verbIdx = i; break; }
+    }
+    if (verbIdx === -1) return "";
+
+    const PREPS = new Set(["de","em","para","por","com","sem","sobre","a","ao","da","do","na","no","pelo","pela","nos","nas","aos","ate","apos","perante","ante"]);
+    const prevNorm = idx > 0 ? normalizeWord(tokens[idx-1]) : null;
+    const inPrepPhrase = prevNorm && PREPS.has(prevNorm);
+
+    if (className.startsWith("Substantivo") || className.includes("Pronome pessoal") ||
+        className.includes("Pronome demonstrativo") || className.includes("Pronome indefinido")) {
+      if (idx < verbIdx) return inPrepPhrase ? "Adjunto adnominal" : "Sujeito";
+      return inPrepPhrase ? "Objeto indireto / adjunto adverbial" : "Objeto direto";
+    }
+    return "";
+  }
 
   function inferFunctionName(className) {
     if (className.includes("Verbo (gerúndio)"))    return "Ação contínua";

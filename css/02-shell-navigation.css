@@ -2116,6 +2116,57 @@ mark {
   color: var(--muted);
 }
 
+/* ── Card lexical expandido — definição + função sintática ── */
+.lexical-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.lexical-tags-row .tag { margin: 0; }
+.lexical-funcao-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--soft-ink);
+  background: color-mix(in srgb, var(--sienna, #8a4a2a) 10%, var(--surface-low));
+  border: 1px solid color-mix(in srgb, var(--sienna, #8a4a2a) 20%, var(--line));
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+.lexical-definicao {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  background: var(--highlight-neutral-end, color-mix(in srgb, var(--primary) 4%, var(--surface)));
+  border-left: 3px solid var(--primary);
+  border-radius: 0 5px 5px 0;
+}
+.lexical-note {
+  font-size: 13px;
+  color: var(--soft-ink);
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+.lexical-frase-termos dt {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--muted);
+}
+.lexical-frase-termos dd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+}
+
 .lexical-alternatives {
   display: flex;
   flex-direction: column;

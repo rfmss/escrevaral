@@ -1462,14 +1462,34 @@ async function renderFraseCard(frase, titulo) {
     ? `<div class="lexical-frase-alerta">${resumo.alertas.map(a => `<span>⚠ ${escapeHtml(String(a))}</span>`).join("")}</div>`
     : "";
 
+  // Dica ao escritor por tipo de período
+  const _DICAS_PERIODO = {
+    "Período simples":               "Frases simples têm impacto: são diretas, firmes, sem ambiguidade. Reserve-as para revelações, clímax e afirmações centrais.",
+    "Período composto por coordenação": "A coordenação cria ritmo binário ou enumerativo. Eficaz em paralelos e sequências; em excesso, nivela tudo ao mesmo peso.",
+    "Período composto por subordinação": "Períodos longos acumulam informação — o leitor pode se perder. Teste quebrar em dois; o período subordinado deve pesar menos que a principal.",
+    "Período composto misto":        "Período com coordenação e subordinação: versátil, mas exige atenção ao encadeamento. Verifique se o leitor consegue identificar o núcleo da frase.",
+  };
+  const dicaFrase = _DICAS_PERIODO[resumo.tipo] || "";
+
+  // Termos sintáticos heurísticos da frase
+  const _tokens = frase.match(/[\p{L}-]+/gu) || [];
+  const _termos = _tokens.slice(0, 12).map(tk => {
+    const an = window.VeredaLexical?.analyze(tk, frase);
+    if (!an) return null;
+    const fn = an.funcaoSintatica || an.functionName || "";
+    return fn ? `<span class="lexical-alt">${escapeHtml(tk)} <em>(${escapeHtml(fn)})</em></span>` : null;
+  }).filter(Boolean);
+
   lexicalCard.innerHTML = `
     <span class="material-symbols-outlined">edit_note</span>
     <p class="lexical-frase-texto">"${escapeHtml(frase.slice(0, 120))}${frase.length > 120 ? "…" : ""}"</p>
     <p class="tag">${escapeHtml(resumo.tipo)}</p>
+    ${dicaFrase ? `<p class="lexical-note">${escapeHtml(dicaFrase)}</p>` : ""}
     <dl>
       <div><dt>Orações</dt><dd>${resumo.nOracoes}</dd></div>
       <div class="lexical-frase-verbos"><dt>Verbos</dt><dd class="lexical-alt-list">${verbosHtml}</dd></div>
       ${conjHtml ? `<div class="lexical-frase-conj"><dt>Conjunções</dt><dd class="lexical-alt-list">${conjHtml}</dd></div>` : ""}
+      ${_termos.length ? `<div class="lexical-frase-termos"><dt>Termos</dt><dd class="lexical-alt-list">${_termos.join("")}</dd></div>` : ""}
       ${resumo.vozePassiva ? `<div><dt>Voz</dt><dd>Passiva</dd></div>` : ""}
     </dl>
     ${alertasHtml}
@@ -1543,18 +1563,27 @@ async function renderLexicalView() {
       </div>`
     : "";
 
+  const funcaoHtml = analysis.funcaoSintatica
+    ? `<span class="lexical-funcao-tag">${escapeHtml(analysis.funcaoSintatica)}</span>`
+    : "";
+  const defHtml = analysis.definicao
+    ? `<p class="lexical-definicao">${escapeHtml(analysis.definicao)}</p>`
+    : "";
+
   lexicalCard.innerHTML = `
     <span class="material-symbols-outlined">dictionary</span>
     <h2>${escapeHtml(analysis.displayWord)}</h2>
-    <p class="tag">${escapeHtml(analysis.className)}</p>
-    <p>${escapeHtml(analysis.note)}</p>
+    <div class="lexical-tags-row">
+      <p class="tag">${escapeHtml(analysis.className)}</p>
+      ${funcaoHtml}
+    </div>
+    ${defHtml}
+    <p class="lexical-note">${escapeHtml(analysis.note)}</p>
     <dl>
-      <div><dt>Função</dt><dd>${escapeHtml(analysis.functionName)}</dd></div>
       <div><dt>Campo</dt><dd>${escapeHtml(analysis.field)}</dd></div>
       <div><dt>Ocorrências</dt><dd>${countLabel}</dd></div>
       ${sinonimosHtml}
       ${altHtml}
-      <div><dt>Análise</dt><dd>Regras locais — sem IA, sem envio de dados</dd></div>
     </dl>
   `;
 
