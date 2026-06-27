@@ -1417,7 +1417,7 @@
     "território":    ["terra", "espaço vivido", "chão de origem", "lugar de pertença", "área de identidade"],
     "autonomia":    ["independência", "autodeterminação", "soberania", "capacidade de decidir", "liberdade de escolha"],
     "ancestralidade":    ["raízes", "herança dos antepassados", "tradição de origem", "memória genealógica", "vínculo com os que vieram antes"],
-    "diáspora":    ["dispersão de um povo", "exílio coletivo", "espalhamento forçado", "migração de identidade", "comunidade no exílio"],
+    "diaspora":    ["dispersão de um povo", "exílio coletivo", "vida longe da origem", "comunidade espalhada", "o povo que não voltou", "ser de dois lugares", "espalhamento forçado", "migração de identidade"],
 
     // afeto e cuidado
     "carinho":    ["afeto", "ternura", "cuidado suave", "afetuosidade", "gesto de amor", "mimo"],
@@ -1810,7 +1810,6 @@
     // Identidade e literatura brasileira — v892
     "silenciamento": ["calar forçado", "voz apagada", "o que não pôde ser dito", "supressão da fala", "quando a voz não chega"],
     "apagamento":    ["invisibilidade forçada", "ser tirado da história", "não existir para o registro", "ausência produzida", "omissão que apaga"],
-    "diaspora":      ["dispersão de povo", "vida longe da origem", "comunidade espalhada", "o povo que não voltou", "ser de dois lugares"],
     "migracao":      ["deslocamento entre lugares", "partir e chegar", "mudar de terra", "quem saiu e não voltou igual", "trânsito entre mundos"],
     "enraizamento":  ["pertencer a um lugar", "ter terra debaixo dos pés", "vínculo com o território", "raízes que sustentam", "presença que fica"],
     "deslocamento":  ["estar fora do lugar", "não pertencer completamente", "entre dois mundos", "sair sem chegar", "corpo em trânsito"],
