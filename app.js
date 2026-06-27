@@ -2438,6 +2438,21 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && welcomeOverlay && !welcomeOverlay.hidden) {
     closeWelcome();
   }
+
+  // Ctrl+S — guardar agora (evita "Salvar como..." do navegador)
+  if ((event.ctrlKey || event.metaKey) && event.key === "s" && !event.shiftKey) {
+    event.preventDefault();
+    persistState();
+  }
+
+  // Ctrl+P — imprimir manuscrito ativo (evita "Imprimir página" do navegador)
+  if ((event.ctrlKey || event.metaKey) && event.key === "p" && !event.shiftKey) {
+    const ms = getActiveManuscript();
+    if (ms && (ms.text || "").trim() && window.VeredaPrint?.printManuscript) {
+      event.preventDefault();
+      window.VeredaPrint.printManuscript(ms, { view: "page" });
+    }
+  }
 });
 
 createNoteOverlay.addEventListener("click", (event) => {
