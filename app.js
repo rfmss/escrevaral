@@ -2237,6 +2237,7 @@ const ACTION_HANDLERS = {
       const ms = docs[0];
       const html = opts.scope === "current" && writingArea ? writingArea.innerHTML : (ms.html || "");
       VeredaDocument.downloadRtf(html, ms.pagePreset || "draft", ms.title || "Manuscrito", ms.author || "");
+      saveStatus.textContent = `RTF exportado — ${ms.title || "Manuscrito"}`;
     } else {
       const combinedHtml = docs.map(ms => `<h1>${escapeHtml(ms.title || "Sem título")}</h1>${ms.html || ""}`).join("<p></p>");
       VeredaDocument.downloadRtf(combinedHtml, "draft", `Acervo Escrevaral — ${docs.length} textos`, "");
