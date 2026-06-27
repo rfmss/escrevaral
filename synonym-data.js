@@ -1532,6 +1532,28 @@
     "indignacao":    ["revolta", "ira moral", "rebeldia ética", "protesto interior", "raiva justa"],
     "extase":        ["arrebatamento", "êxtase", "exaltação extrema", "alegria que transborda", "encantamento total"],
     "alivio":        ["descanso", "soltura", "fim da tensão", "respiração possível", "leveza após o peso"],
+
+    // Crítica e teoria literária — v828
+    "dialogismo":    ["polifonia", "pluralidade de vozes", "diálogo entre textos", "resposta ao já-dito", "bakhtin"],
+    "recepcao":      ["recepção do leitor", "interpretação cultural", "resposta crítica", "leitura historicamente situada"],
+    "canonico":      ["clássico", "modelar", "referência obrigatória", "canônico", "da tradição"],
+    "autoficcao":    ["ficção autobiográfica", "eu ficcionalizado", "escrita de si", "autoficção"],
+    "autoficcaolit": ["ficção autobiográfica", "eu ficcionalizado", "escrita de si", "autoficção"],
+    "noir":          ["policial sombrio", "neocrime", "atmosfera pesada", "crime literário", "mundo sem saída"],
+    "distopia":      ["anti-utopia", "futuro opressivo", "pesadelo social", "totalitarismo ficcional", "sociedade do controle"],
+    "utopia":        ["sociedade ideal", "lugar nenhum", "projeto de futuro", "contra-presente", "sonho coletivo"],
+
+    // Personagem e narrativa — v828
+    "antiheroi":     ["protagonista imperfeito", "herói falho", "anti-herói", "protagonista sem brilho", "personagem comum"],
+    "foil":          ["contraponto", "personagem-espelho", "contraste intencional", "sombra do protagonista"],
+    "coloquial":     ["informal", "próximo", "da conversa", "espontâneo", "linguagem do cotidiano"],
+
+    // Editoração — v828
+    "errata":        ["lista de erros", "correções pós-impressão", "folha de correções", "erratas"],
+    "diagramacao":   ["composição visual", "distribuição na página", "layout do miolo", "organização tipográfica"],
+    "copidesque":    ["revisão editorial", "revisão de texto", "edição de linha", "refinamento do manuscrito"],
+    "galera":        ["prova de impressão", "prova tipográfica", "PDF de revisão", "folha para correção"],
+    "orelha":        ["aba da sobrecapa", "texto de apresentação", "convite à leitura", "texto da aba"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
