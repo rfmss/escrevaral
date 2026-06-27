@@ -63,6 +63,7 @@
     "face":      [{ loc:"face a",         classe:"Preposição" }],
     "mediante":  [{ loc:"mediante",       classe:"Preposição" }],
     // CONJUNTIVAS CAUSAIS
+    "haja":      [{ loc:"haja vista",     classe:"Conjunção"  }],
     "uma":       [{ loc:"uma vez que",    classe:"Conjunção"  }],
     "ja":        [{ loc:"ja que",         classe:"Conjunção"  }],
     "visto":     [{ loc:"visto que",      classe:"Conjunção"  }, { loc:"visto como", classe:"Conjunção" }],
@@ -252,13 +253,23 @@
 
       // 2. "do que" / "da que" / "dos que" / "das que" → Conjunção comparativa (DESAM-QUE-04)
       if (["do","da","dos","das"].includes(prev)) return "Conjunção";
+      if (prev === "tal") return "Conjunção"; // consecutiva "A dor era tal que não podia falar"
+
+      // 2b. "por que" — interrogativo ou relativo (Cunha&Cintra §pronomes interrogativos)
+      //   !prev2 ou verbo anterior → interrogativo ("Por que?"; "não sei por que")
+      //   substantivo antes de "por" → relativo ("a razão por que veio")
+      if (prev === "por") {
+        if (!prev2 || VERBOS_COGNICAO.has(prev2) || VERBOS_PERGUNTA.has(prev2))
+          return "Pronome interrogativo";
+        return "Pronome relativo";
+      }
 
       // 3. Após palavra gramatical (conjunção, advérbio, preposição) → Conjunção
       //    causal ("corre, que é tarde"), temporal, final, consecutiva, concessiva
       const _GRAM = new Set([
         "e","ou","mas","porem","contudo","todavia","entretanto","portanto","logo","pois",
         "quando","embora","porque","como","se","onde","enquanto","alem","desde","ate",
-        "mais","menos","tao","tanto","nao","ja","para","por","sem","ante","entre",
+        "mais","menos","tao","tanto","nao","ja","para","sem","ante","entre",
         "assim","bem","sempre","nunca","talvez","caso","posto","senao",
         "ainda","nem","mesmo","so","ora","antes","depois","agora","ali","aqui","la"
       ]);
@@ -631,6 +642,20 @@
     POLISSEMIA["proxima"]  = _classifProximo;
     POLISSEMIA["proximos"] = _classifProximo;
     POLISSEMIA["proximas"] = _classifProximo;
+
+    // "tal" — pronome indefinido atributivo/correlativo (DESAM-TAL-01)
+    // "tal qual"/"tal como" já capturados por LOCUCOES; "tal que" capturado por POLISSEMIA["que"]
+    POLISSEMIA["tais"] = () => "Pronome indefinido";
+    POLISSEMIA["tal"]  = (prev, next) => {
+      // "tal qual" / "tal como" → tratados por LOCUCOES (retornam Conjunção antes de chegar aqui)
+      return "Pronome indefinido"; // "tal pai", "Tal pai tal filho", "nunca vi tal arrogância"
+    };
+
+    // "vez" — substantivo, exceto em "uma vez que" → Conjunção
+    POLISSEMIA["vez"] = (prev, next) => {
+      if (prev === "uma" && next === "que") return "Conjunção";
+      return "Substantivo";
+    };
   })();
 
   // ── Pronomes indefinidos quantificadores — Advérbio vs Pronome (Bechara §253) ──
