@@ -864,6 +864,27 @@
       if (prev && ["o","a","os","as","um","uma"].includes(prev)) return "Adjetivo";
       return "Preposição";
     };
+
+    // Gentílicos brasileiros — Adjetivo quando modifica substantivo; Substantivo após artigo
+    // "escritora carioca" (prev="escritora") → Adjetivo
+    // "O carioca chegou" (prev="o") → Substantivo
+    const _ARTS_DEF = new Set(["o","a","os","as","um","uma","uns","umas"]);
+    const _gentilicoPol = (prev) => prev && _ARTS_DEF.has(prev) ? "Substantivo" : "Adjetivo";
+    const _GENTILICOS = [
+      "carioca","cariocas","paulista","paulistas","paulistano","paulistana","paulistanos","paulistanas",
+      "mineiro","mineira","mineiros","mineiras","gaucho","gaucha","gauchos","gauchas",
+      "baiano","baiana","baianos","baianas","nordestino","nordestina","nordestinos","nordestinas",
+      "pernambucano","pernambucana","fluminense","fluminenses","capixaba","capixabas",
+      "paranaense","paranaenses","catarinense","catarinenses","goiano","goiana","goianos","goianas",
+      "maranhense","maranhenses","cearense","cearenses","potiguar","potiguares",
+      "alagoano","alagoana","sergipano","sergipana","paraibano","paraibana",
+      "amazonense","amazonenses","paraense","paraenses",
+      "brasiliense","brasilienses","sulista","sulistas","nortista","nortistas",
+      "nordestino","nordestina","sulino","sulina"
+    ];
+    for (const g of _GENTILICOS) {
+      POLISSEMIA[g] = _gentilicoPol;
+    }
   })();
 
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
