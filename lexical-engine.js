@@ -1401,6 +1401,35 @@
     "arcaismo":     "Palavra, expressão ou construção que saiu de uso corrente. Pode ser recurso intencional (ficção histórica, ironia, humor) ou vício (estilo embolorado). O critério é a intenção e o efeito.",
     "registro":     "Variedade de língua adaptada à situação de comunicação: formal/informal, técnico/cotidiano, oral/escrito. Misturar registros com intenção é recurso poderoso; misturar sem intenção é ruído.",
     "diaspora":     "Dispersão de um povo para fora de seu território de origem. Literatura de diáspora: textos que lidam com o deslocamento, a identidade fragmentada, a saudade e a criação de pertencimento em outro lugar.",
+    // PROCESSO DE ESCRITA — verbos do ofício
+    "rascunhar":    "Verbo: fazer o primeiro jato de um texto, sem comprometimento com a forma definitiva. O rascunho é território livre — o julgamento vem depois, na revisão. Escrever mal de propósito para ter com o que trabalhar.",
+    "revisar":      "Verbo: reler o texto com distância crítica para corrigir, apurar e lapidar. A revisão é diferente da correção: não se trata só de erros, mas de ritmo, clareza, intenção e coerência de voz.",
+    "narrar":       "Verbo: contar uma história, relatar eventos em sequência com ponto de vista. Narrar implica escolha: o que incluir, o que omitir, a que velocidade revelar — cada escolha é estilo.",
+    "publicar":     "Verbo: dar o texto ao público, finalizar o ciclo da escrita. Publicar é um ato irreversível — depois que saiu, o texto pertence ao leitor. Daí a importância de não publicar antes de estar pronto.",
+    // NARRATIVA — conceitos estruturais
+    "cliche":       "Expressão ou recurso narrativo tão repetido que perdeu força expressiva. 'Coração partido', 'silêncio ensurdecedor', 'olhos como estrelas'. O clichê não é errado — é fraco; o escritor o usa sem pensar. A saída: torcer a imagem, achá-la de novo.",
+    "climax":       "Ponto de maior tensão dramática de uma narrativa; o momento em que o conflito central se resolve ou se agudiza ao máximo. Após o clímax, a história pode caminhar para o desfecho. Não confundir com o fim: o clímax é a crise, não a solução.",
+    "catarse":      "Liberação emocional intensa que a obra provoca no leitor ou espectador. Conceito de Aristóteles: a tragédia purifica as paixões pela piedade e pelo terror. Na prosa: o leitor chora, ri, sente alívio — a obra tocou algo real.",
+    "dialogo":      "Fala dos personagens — um dos recursos mais difíceis da ficção. Um bom diálogo não é transcrição de conversa real: é seleção e condensação. Cada fala revela caráter, oculta intenção ou tensiona a cena.",
+    // POESIA — formas e elementos
+    "estrofe":      "Grupo de versos organizado como unidade; o 'parágrafo' do poema. A divisão em estrofes cria ritmo visual e pausas de sentido. Quadra (4), quintilha (5), sextilha (6), oitava (8), terzina (3).",
+    "verso":        "Linha do poema; unidade mínima de composição poética. O verso pode ser metrificado (número fixo de sílabas) ou livre (sem métrica regular). O retorno a cada linha é uma escolha do poeta, não acidente tipográfico.",
+    "rima":         "Correspondência de sons entre o final de dois ou mais versos. Rima consoante: identidade de vogal e consoantes finais. Toante: só a vogal tônica. A rima cria expectativa, satisfação e memória auditiva.",
+    "soneto":       "Forma fixa de 14 versos: dois quartetos (ABBA ABBA) e dois tercetos (CDC DCD ou variação). Originário da Itália, consolidado por Petrarca. No Brasil: Camões, Cruz e Sousa, Drummond, Adélia Prado usaram e subverteram a forma.",
+    "cronica":      "Gênero híbrido entre jornalismo e literatura: texto breve, de tema cotidiano, com liberdade de forma e voz pessoal. No Brasil, a crônica tem tradição forte (Rubem Braga, Paulo Mendes Campos, Clarice Lispector) — não é 'notícia literária', é observação que dura.",
+    "haiku":        "Forma japonesa de poema brevíssimo: 17 sílabas em três versos (5-7-5). Origem na escola de Matsuo Bashō. Capta um instante sensorial com precisão. Em português, a contagem silábica é adaptada. O haiku não explica — apenas mostra.",
+    // FIGURAS DE LINGUAGEM
+    "metafora":     "Figura de linguagem que transfere o sentido de uma palavra para outra por semelhança implícita, sem 'como': 'a vida é uma batalha', 'o tempo passou rápido'. A boa metáfora ilumina o que a explicação direta não alcança.",
+    "ironia":       "Figura de linguagem que diz o oposto do que quer significar, criando duplo sentido. Requer cumplicidade do leitor para ser decodificada. Ironia mal sinalizada pode ser tomada ao pé da letra — o contexto é tudo.",
+    "hiperbole":    "Exagero expressivo deliberado para intensificar um efeito: 'chorei um rio', 'esperei uma eternidade'. Não é mentira: é amplificação poética. A hipérbole bem colocada cria humor, emoção ou ênfase.",
+    "aliteracao":   "Repetição de consoantes próximas para criar efeito sonoro: 'o rato roeu a roupa'. Na prosa poética, a aliteração cria musicalidade e reforça o sentido — o som imita o conteúdo.",
+    "sinestesia":   "Figura que mistura percepções de sentidos diferentes: 'voz doce', 'silêncio frio', 'luz gritante'. Cria imagens sensoriais complexas e inesperadas. Frequente em poesia modernista e surrealista brasileira.",
+    // EDITORIAL
+    "manuscrito":   "O texto original do autor antes da edição e publicação. Pode ser literalmente escrito à mão ou em versão digital. O manuscrito é a obra bruta — o que vira livro é resultado de um diálogo entre autor e editor.",
+    "versao":       "Instância de um texto em determinado momento do processo de escrita. 'Segunda versão', 'versão final'. Manter versões é prática saudável: permitem recuar e recuperar escolhas descartadas.",
+    "prefacio":     "Texto de abertura de um livro, escrito pelo autor ou por outra pessoa. Apresenta a obra, contextualiza, convida à leitura. Diferente de 'introdução' (que já é parte do texto) e de 'posfácio' (que comenta após a leitura).",
+    "epilogo":      "Texto que vem após o fim da narrativa principal; desfecho complementar ou comentário posterior aos acontecimentos. Permite ao autor situar o que aconteceu depois, ou ao narrador se despedir do leitor.",
+    "capitulo":     "Divisão de uma obra em unidade narrativa com relativa autonomia. O capítulo tem começo, meio e fim próprios — mas serve ao todo. A escolha de onde cortar e recomeçar é uma das decisões mais importantes da estrutura.",
   };
 
   function inferDefinicao(word, className) {
