@@ -68,6 +68,42 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v866→v875)
+
+**Baseline:** v875 — todos os engines em 100%, exceto Exportação 90%. P0 de dados eliminado.
+
+**O que foi entregue neste ciclo (v866→v875):**
+
+- `synonym-data.js` (v866): +10 SINONIMOS processo narrativo (continuar/pausar/fragmentar/condensar/cortar/fragmentado/linear/circular/elíptico/planejamento)
+- `lexical-engine.js` (v867): campo `decisao` em `analyze()` — classificado/provavel/ambiguo/indeterminado (retrocompatível; metadata pura)
+- `synonym-data.js` (v868): +11 SINONIMOS estados morais (relutar/titubear/capitular/insistir/persistir/arrependida/desonesto/vil/nobre/compassivo/indiferente)
+- `synonym-data.js` (v869): +9 SINONIMOS estado interno e cenário (vacilação/conformismo/persistência/entardecer/névoa/clarão/lampejo/paralisia/silêncio criativo)
+- `lexical-engine.js` (v870): revert POLISSEMIA jovem/pobre/velho — janela 2-token insuficiente; `decisao:"ambiguo"` honesto
+- `lexical-engine.js` (v871): +16 DEFINICOES literárias adjetivos de personagem (altivo/soberbo/rancoroso/melancólico/nostálgico/traidor/ingênuo/astuto/sensato/obstinado/impulsivo/furioso/resignado/amargo/apaixonado/ciumento)
+- `lexical-engine.js` (v872): +18 DEFINICOES literárias morais+processo+atmosfera (desonesto/vil/nobre/compassivo/indiferente/arrependida/fragmentar/condensar/relutar/titubear/capitular/vacilação/conformismo/entardecer/névoa/clarão/lampejo/paralisia)
+- `app.js`+`index.html`+`css/05-archive.css` (v873): UI de escopo de exportação — seletor "O que exportar" com 3 opções; `_getExportScope()` liga seletor a `buildOutputPackage()`
+- `synonym-data.js` (v874+v875): **P0 eliminado** — 59 chaves duplicadas + 18 colisões normalizadas mescladas; auditor P0=0 P1=4 P2=0
+
+**Estado atualizado dos engines (v875):**
+
+| Área / engine | Maturidade | Notas de estado (v875) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS 1219 (P0=0); DEFINICOES 464+; POLISSEMIA 59; campo `decisao` em analyze() |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; VERBOS_PRES 2045; corpus 92 frases/19 zonas |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **90%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; buildOutputPackage; UI de escopo implementada |
+
+**Fronteiras abertas (v875):**
+
+1. **Exportação para 95%**: RTF multi-manuscrito não usa escopo ainda; ePub não usa escopo; feedback visual "escopo ativo" no seletor
+2. **"logo" conclusivo** — "Penso, logo existo" → Advérbio (deveria ser Conjunção); pontuação stripped antes do cálculo de vizinhos; sem parser externo é insolúvel
+3. **Adjetivos compostos** (bem-humorado, mal-humorado) — hífen impede normalizeWord
+4. **"quando" como Conjunção** vs Advérbio interrogativo — requer detecção de ponto de interrogação
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v854→v865)
 
 **Baseline:** v865 — todos os engines em 100%. Ciclo focado em POLISSEMIA contextual, DEFINICOES, SINONIMOS e atalhos de editor.
