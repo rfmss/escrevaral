@@ -1065,6 +1065,14 @@
     if (functionWords.adverbios.includes(normalized))   return "Advérbio";
     if ((functionWords.adjetivos_comuns || []).includes(normalized)) return "Adjetivo";
 
+    // 7b. Preposições compostas e locucionais — PREP-EXT-01 (Bechara MGP §preposições)
+    // "através/acerca" quase sempre com "de": "através do texto", "acerca disso"
+    const _PREP_EXT = new Set([
+      "atraves","acerca","diante","dentre","perante","mediante","conforme",
+      "excetuando","incluindo"
+    ]);
+    if (_PREP_EXT.has(normalized)) return "Preposição";
+
     // 8. Advérbios terminados em -mente — ADV-02 (Cunha&Cintra cap.14)
     if (/mente$/.test(normalized) && normalized.length > 6) return "Advérbio";
 
@@ -1223,6 +1231,12 @@
     "claro","clara","claros","claras","escuro","escura","escuros","escuras",
     "pesado","pesada","leve","leves","duro","dura","duros","duras","mole","moles",
     "limpo","limpa","limpos","limpas","sujo","suja","sujos","sujas",
+    // Adjetivos qualificativos frequentes em -o/-a — sem sufixo canônico
+    "espesso","espessa","espessos","espessas","grosso","grossa","grossos","grossas",
+    "denso","densa","densos","densas","profundo","profunda","profundos","profundas",
+    "fecundo","fecunda","fecundos","fecundas","rotundo","rotunda","rotundos","rotundas",
+    "longo","longa","longos","longas","redondo","redonda","redondos","redondas",
+    "imundo","imunda","imundos","imundas",
     // Adjetivos em -al (ADJ-AL-01) — Cunha&Cintra §qualificativos
     // Excluídos: jornal/canal/hospital/capital/animal (substantivos com localLexicon cobrindo)
     "atual","atuais","final","finais","total","totais","fatal","fatais",
