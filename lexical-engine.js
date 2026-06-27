@@ -779,14 +779,24 @@
       // "caro" — também "Adjetivo" predicativo ("livro caro")
       POLISSEMIA["caro"] = _adjAdv;
       POLISSEMIA["cara"] = _adjAdv;
-      // "claro" — Advérbio de afirmação no início ("Claro que sim") + após verbo
+      // "claro" — Advérbio de afirmação no início ("Claro que sim") + após verbo de ação
+      // Mas cópulas (ficar/estar/ser/parecer) introduzem predicativo → Adjetivo
+      const _COPULAS_CLARO = new Set(["ficou","ficava","ficara","ficavam","fica","fique","ficasse","estava","esteve","estou","estamos","estavam","esta","e","era","eram","foi","fora","fosse","parecia","parece","pareceu","continua","continuava","permanecia"]);
       POLISSEMIA["claro"] = (prev, next) => {
         if (!prev && next === "que") return "Advérbio"; // "Claro que sim"
         if (!prev && !next) return "Advérbio"; // "Claro!" isolado
-        if (prev && _verbPast.test(prev)) return "Advérbio";
+        if (prev && _COPULAS_CLARO.has(prev)) return "Adjetivo"; // "ficou claro", "estava claro"
+        if (prev && _verbPast.test(prev)) return "Advérbio"; // "falou claro", "viu claro"
         return "Adjetivo";
       };
       POLISSEMIA["clara"] = POLISSEMIA["claro"];
+      // "fundo/funda" — lexiconEntry classifica como Verbo (de "fundar"); mas é quase sempre Subst./Adj.
+      POLISSEMIA["fundo"] = (prev) => {
+        const _PREPS_FUNDO = new Set(["no","ao","do","pelo","pelo","um","uma","o","a","os","as","seu","sua","desse","deste","nesse","neste","seu","sua","outro","outra","todo","qualquer"]);
+        if (!prev || _PREPS_FUNDO.has(prev)) return "Substantivo";
+        return "Adjetivo"; // "voz funda" → Adjetivo
+      };
+      POLISSEMIA["funda"] = () => "Adjetivo";
       // "fácil/difícil" — Advérbio após verbo ("não é fácil" já é predicativo; "fez fácil" = Adv)
       POLISSEMIA["facil"] = _adjAdv;
       POLISSEMIA["dificil"] = _adjAdv;
