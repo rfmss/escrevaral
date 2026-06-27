@@ -1797,6 +1797,8 @@
     "manuscrito":   "O texto original do autor antes da edição e publicação. Pode ser literalmente escrito à mão ou em versão digital. O manuscrito é a obra bruta — o que vira livro é resultado de um diálogo entre autor e editor.",
     "versao":       "Instância de um texto em determinado momento do processo de escrita. 'Segunda versão', 'versão final'. Manter versões é prática saudável: permitem recuar e recuperar escolhas descartadas.",
     "prefacio":     "Texto de abertura de um livro, escrito pelo autor ou por outra pessoa. Apresenta a obra, contextualiza, convida à leitura. Diferente de 'introdução' (que já é parte do texto) e de 'posfácio' (que comenta após a leitura).",
+    "prologo":      "Texto antes do início da narrativa principal, que situa o leitor antes da ação começar. Pode estar fora do tempo da história (narrador futuro) ou estabelecer contexto, tom e contrato de leitura. Diferente de prefácio: o prólogo já faz parte da ficção.",
+    "monologo":     "Fala de uma personagem consigo mesma ou para o leitor, sem interlocutor aparente. No teatro, é convenção que o público ouve o que outros personagens não ouvem. Na ficção, funciona como mergulho na consciência — mais profundo que o diálogo.",
     "epilogo":      "Texto que vem após o fim da narrativa principal; desfecho complementar ou comentário posterior aos acontecimentos. Permite ao autor situar o que aconteceu depois, ou ao narrador se despedir do leitor.",
     "capitulo":     "Divisão de uma obra em unidade narrativa com relativa autonomia. O capítulo tem começo, meio e fim próprios — mas serve ao todo. A escolha de onde cortar e recomeçar é uma das decisões mais importantes da estrutura.",
 
