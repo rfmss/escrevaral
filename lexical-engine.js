@@ -1766,6 +1766,37 @@
     "consonancia":  "Repetição de sons consonantais em palavras próximas — diferente da aliteração (início) e da assonância (vogais). Cria coesão sonora discreta.",
     "paronomasia":  "Aproximação de palavras sonoramente parecidas mas de sentido diferente. 'Viver e escrever são quase o mesmo sofrimento.' Jogo fonético que carrega significado.",
     "onomatopeia":  "Palavra que imita o som de algo. 'Tic-tac', 'toc-toc', 'zum'. Na literatura brasileira, a onomatopeia é recurso oral poderoso — especialmente no cordel e na poesia concreta.",
+
+    // Verbos expressivos — v835
+    "sussurrar":    "Falar em voz muito baixa, quase sem som. Na cena, o sussurro cria intimidade ou segredo — coloca o leitor perto demais para se sentir confortável. O oposto do grito.",
+    "murmurar":     "Produzir som suave, quase inaudível — seja a voz, o vento, a água. Na prosa, murmurar indica algo que não se quer dizer completamente. A voz que murmurou carrega o que não pôde ser dito.",
+    "gritar":       "Elevar a voz ao máximo — de raiva, medo, alegria ou desespero. O grito é raro numa boa narrativa; exatamente por isso, quando aparece, precisa ser merecido.",
+    "contemplar":   "Olhar de modo demorado, atento e silencioso. Na narrativa, a contemplação é pausa que acumula — o personagem que contempla vai mudar de posição interna ao final do olhar.",
+    "susspirar":    "Exalar ar lentamente, expressando emoção — alívio, tristeza, desejo, resignação. O suspiro é gesto de transição emocional: o que vem depois já é diferente do que veio antes.",
+    "aguardar":     "Esperar com atenção ao que está por vir — com uma qualidade de vigilância que 'esperar' não tem. Quem aguarda já sabe que algo vai acontecer. A diferença entre esperar e aguardar é o quanto a personagem sabe.",
+    "ansiar":       "Desejar com força e impaciência — a mistura de querer e temer ao mesmo tempo. Ansiar carrega urgência física. É diferente de querer: tem o corpo junto.",
+    "contemplar2":  "Contemplar é diferente de olhar: é processar enquanto se vê. Uma personagem que contempla não está passiva — está trabalhando por dentro.",
+    "observar":     "Acompanhar com atenção e distância — com a intenção de entender o que se vê. O narrador que observa não participa; o personagem que observa está aprendendo algo sobre o mundo.",
+    "sentir":       "Ter acesso a algo pela experiência direta — emoção, sensação física, intuição. Na ficção, 'sentir' vira fraqueza quando não é corporificado: 'ela sentiu medo' não é cena; 'o estômago virou' é.",
+
+    // Adjetivos de estilo literário — v835
+    "laconico":     "De poucas palavras — mas densas. Um personagem lacônico revela muito no que não diz. Um texto lacônico obriga o leitor a trabalhar. 'Uma boa frase é aquela que não pode ser mais curta.'",
+    "prolixo":      "Que se estende além do necessário — palavras demais para o que precisa ser dito. A prolixidade esconde insegurança ou preguiça de editar. O oposto do lacônico.",
+    "eloquente":    "Que se exprime com facilidade, clareza e poder persuasivo. Na ficção, um personagem eloquente tem autoridade no discurso — mas eloquência demais pode soar artificial.",
+    "incisivo":     "Que vai direto ao ponto, com precisão cortante. Um estilo incisivo não desperdiça palavra — cada frase avança. O incisivo é parente do lacônico, mas com borda afiada.",
+    "ambiguo":      "Que pode ser entendido de mais de um modo. A ambiguidade pode ser fraqueza (imprecisão) ou virtude (riqueza semântica). Na literatura, o melhor da ambiguidade é quando o leitor não sabe qual leitura é 'correta'.",
+    "enigmatico":   "Que resiste a uma interpretação única — obscuro de modo que convida à decifração. Diferente do ambíguo: o enigmático promete uma resposta escondida. Kafka é enigmático; Machado é ambíguo.",
+    "vigoroso":     "Que tem força, energia, presença. Um estilo vigoroso soa como alguém que sabe o que quer dizer — e diz sem pedir permissão. Vigor não é barulho: é precisão com energia.",
+    "contundente":  "Que impacta com força direta — dói onde bate. Uma frase contundente não deixa espaço para desviar. No jornalismo literário, a contundência é a virtude central.",
+    "sutil":        "Que age de modo delicado, quase imperceptível, mas eficaz. O sutil não anuncia — vai ficando. A ironia de Machado é sutil: leva parágrafos para doer.",
+    "denso2":       "Diz-se de um texto que concentra muita informação, sensação ou significado em pouco espaço. Densidade é virtude quando equilibrada com clareza.",
+
+    // Termos de análise literária — v835
+    "verossimil":   "Que parece verdadeiro dentro do universo que o texto cria. A verossimilhança não é a verdade histórica — é o pacto interno da ficção. Um dragão pode ser verossímil se o mundo do texto o justifica.",
+    "plausivel":    "Que pode ser aceito como possível dentro de uma lógica razoável. Diferente de verossímil (que depende do mundo interno do texto): o plausível é medido pelo mundo do leitor.",
+    "coerente":     "Que se mantém consistente consigo mesmo — interno ao texto, às personagens, ao estilo. A incoerência narrativa é o maior risco da ficção longa: o personagem que age diferente sem motivo.",
+    "universal":    "Que ressoa além de um contexto particular — que toca o que é humano em qualquer cultura ou época. O paradoxo: os textos mais universais são frequentemente os mais específicos em lugar, tempo e voz.",
+    "singular":     "Que não se parece com nenhum outro — único na voz, na forma ou na visão. A singularidade é o que separa um livro de uma boa execução de fórmula.",
   };
 
   function inferDefinicao(word, className) {
