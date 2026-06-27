@@ -68,6 +68,44 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v910→v916)
+
+**Baseline:** v916 — todos engines 100%, incluindo Exportação.
+
+**O que foi entregue neste ciclo (v910→v916):**
+
+- v910: +12 DEF ousadia/timidez/envelhecimento/deserto/oficina/editora/leitora/crítica/resenha/personificação/alegoria/interpretação
+- v911: +11 DEF herói/heroína/vilão/mentor + prazer/dor/revolta + sequência/parte + escuta/paralelismo
+- v912: +11 DEF mimese/esboço/antologia/coletânea/remorso/nome/raiz/prêmio/concurso/praça/lago
+- v913: +12 DEF linguagem/idioma/dialeto/generosidade + praia/ponte/hospital/escola/igreja/mercado + anacronia/panorama
+- v914: **Exportação 90%→95%** — RTF e ePub respeitam seletor de escopo (multi-manuscrito)
+- v915: +12 DEF motivação/objetivo/obstáculo/mito/parábola + nordeste/quilombo/favela/sertanejo + carioca/paulistano + presente
+- v916: +12 DEF escritora/autora/poeta/cronista + imaginação/consciência + mãe/pai/paixão + violência/justiça/brasileiro + fix saveStatus RTF → **Exportação 100%**
+
+**Estado atualizado dos engines (v916):**
+
+| Área / engine | Maturidade | Notas de estado (v916) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350; DEFINICOES ~1020+ (v916); POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bancada 17/17; golden 91/0; VERBOS_PRES 2045 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **100%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; escopo em todos os formatos; saveStatus em todos |
+
+**Auditor:** P0=0, P1=4 (todos mitigados), P2=0
+
+**Fronteiras abertas (v916):**
+
+1. **DEFINICOES**: ~30+ termos identificados ainda sem definição literária (imaginação, paixão, violência etc. estão cobertos — restam compostos e termos muito específicos)
+2. **Função sintática (Codex)**: sujeito/predicado/objeto — `handoff-codex-gramatica-2026-06-27.md`
+3. **Fallback "gw-substantivo"**: grammar-controller.js — planejar saída `indeterminado` estruturada
+4. **108 commits locais não enviados** — fazer push quando usuário pedir
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v904→v909)
 
 **Baseline:** v909 — todos engines 100%, exceto Exportação 90%.
