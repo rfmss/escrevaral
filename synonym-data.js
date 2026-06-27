@@ -1738,6 +1738,20 @@
     "circular":      ["que volta ao começo", "que fecha onde abriu", "de estrutura em anel", "que retorna"],
     "eliptico":      ["com elipses", "que salta no tempo", "que omite sem esconder", "de lacunas calculadas"],
     "planejamento":  ["estruturação", "mapa narrativo", "roteiro", "plano da obra", "esboço organizado"],
+
+    // Verbos de posição moral e movimento interior — v868
+    "relutar":       ["hesitar", "fazer com resistência", "estar relutante", "agir contra a vontade", "opor-se internamente"],
+    "titubear":      ["vacilar", "hesitar", "oscilar", "não saber se avança ou recua", "tremer na decisão"],
+    "capitular":     ["ceder", "render-se", "abrir mão da resistência", "desistir diante do obstáculo", "sucumbir"],
+    "insistir":      ["persistir", "não desistir", "continuar mesmo com obstáculo", "teimar com propósito", "pressionar"],
+    "persistir":     ["insistir", "continuar apesar de tudo", "não abandonar", "segurar o curso", "resistir ao cansaço"],
+    // Adjetivos de estado moral/espiritual
+    "arrependida":   ["que lamenta o que fez", "cheia de remorso", "que quer desfazer o passado", "constrangida pela culpa"],
+    "desonesto":     ["desleal", "que age de má-fé", "falso", "que engana", "corrupto no trato"],
+    "vil":           ["mesquinho", "sem escrúpulos", "baixo de caráter", "que age com crueldade fria", "desprezível"],
+    "nobre":         ["elevado de caráter", "generoso", "que age com dignidade", "de alma larga", "austero no bom sentido"],
+    "compassivo":    ["que sente pelo outro", "compreensivo", "cheio de compaixão", "que não julga a dor alheia", "solidário"],
+    "indiferente":   ["alheio", "que não se move", "frio diante do que acontece", "desinteressado", "neutro ao extremo"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
