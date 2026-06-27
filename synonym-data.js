@@ -1702,6 +1702,12 @@
     "insinuar":     ["sugerir sem dizer", "deixar no ar", "dar a entender", "insinuar com cuidado", "plantar a dúvida"],
     "reconhecer":   ["admitir", "aceitar o erro", "ver-se no outro", "dar razão a", "confessar o que se sabia"],
     "admitir":      ["reconhecer", "confessar", "aceitar o que custou", "dar-se conta", "render-se à evidência", "dizer o que não queria"],
+
+    // Estados emocionais — v881
+    "agitacao":     ["inquietude", "nervosismo", "turbulência interior", "agitação sem forma", "estado de não conseguir parar"],
+    "furia":        ["raiva extrema", "ira", "violência contida", "tempestade por dentro", "quando o limite acabou", "cólera"],
+    "desencanto":   ["decepção que ficou", "desilusão", "perda da crença", "o dia em que a esperança fechou", "quando o possível encolheu"],
+    "amargura":     ["mágoa antiga", "ressentimento que não passou", "tristeza que azedou", "o que ficou de uma dor não resolvida", "rancor silencioso"],
   };
 
   // Normalização: remove acentos e converte para minúsculas

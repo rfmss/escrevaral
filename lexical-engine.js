@@ -2246,6 +2246,17 @@
     "reconhecer":   "Ver-se no outro, ou ver a verdade que se tinha resistido. O reconhecimento aristotélico (anagnorisis) é um dos motores mais antigos da narrativa: o momento em que o que era desconhecido se torna evidente muda tudo que vem antes e depois.",
     "admitir":      "Dizer o que custou admitir. A admissão é um ato de rendição seletiva: a personagem cede em um ponto para manter alguma coisa intacta. O que ela admite e o que ela ainda guarda depois de admitir revela a diferença entre honestidade e confissão completa.",
     "recuar":       "Dar um passo atrás quando o caminho ficou grande demais. O recuo pode ser estratégia ou covardia — e a ficção frequentemente explora a zona cinza entre os dois. Uma personagem que recua sem culpa é diferente de uma que recua e sabe o que está perdendo.",
+
+    // Estados emocionais — v881
+    "tranquilidade": "Ausência de perturbação — mas não de tensão. A personagem tranquila não é necessariamente segura: ela aprendeu a não se perturbar com o que antes a perturbava. Essa diferença importa. A tranquilidade conquistada tem peso; a tranquilidade que nunca foi testada é indiferença com outro nome.",
+    "inquietacao":  "Estado de quem não consegue ficar parado — por dentro ou por fora. A inquietação não tem objeto fixo: ela vaga. Na ficção, a personagem inquieta percebe coisas que a calma não deixaria ver. Ela é motriz — mas também autodistrativa.",
+    "agitacao":     "Inquietação com velocidade. A agitação ocupa o espaço, interrompe, muda de assunto, não termina o que começa. Em cena, ela pode ser sinal de perigo iminente ou de uma personagem que tenta não pensar. A agitação física e a agitação interior podem apontar em direções opostas.",
+    "raiva":        "Resposta ao que foi feito de errado — real ou percebido. A raiva na ficção tem endereço: ela aponta para algo. Personagem com raiva sem causa é fundo de palco; com causa justa e raiva contida, é conflito. A raiva que não encontra saída procura uma. O que ela acha é trama.",
+    "furia":        "Raiva que ultrapassou o controle. A fúria é o que acontece quando a raiva não teve espaço de expressão por tempo demais — ou quando o gatilho foi enorme demais. Em ficção, a fúria revela limite: o que finalmente foi demais para a personagem.",
+    "indiferenca":  "A ausência que machuca mais do que o ódio. A indiferença é o estado de quem deixou de importar-se — ou que nunca se importou. Na ficção, ela pode ser defesa ou caráter. Uma personagem indiferente é assustadora porque não responde ao que deveria responder; isso cria tensão sem esforço.",
+    "solidariedade": "O gesto de estar do lado de quem sofre — sem exigir nada em troca. A solidariedade literária não é perfeita: quem oferece também carrega algo. O que a personagem traz quando está do lado de outra diz tanto sobre ela quanto sobre quem recebe.",
+    "desencanto":   "A perda do encantamento — não como evento, mas como estado que fica. O desencanto não é tristeza: é resignação com passado. A personagem desencantada já esperou, e o que esperou não veio. Ela sabe que não vai mais esperar da mesma forma.",
+    "amargura":     "Mágoa que virou caráter. A amargura é o que a dor produz quando não é elaborada: azeda. Uma personagem amarga pode ter razão em tudo que diz e ainda assim ser insuportável — porque a amargura não distingue o que merece raiva do que não merece.",
   };
 
   function inferDefinicao(word, className) {
