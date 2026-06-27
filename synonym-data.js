@@ -1724,6 +1724,11 @@
     "postura":      ["jeito de estar no espaço", "disposição do corpo", "como o corpo fala quando cala", "porto que o corpo assume", "posição do corpo no ambiente"],
     "beijo":        ["contato de bocas", "gesto de afeto físico", "pressão dos lábios", "o que a boca diz quando não há palavras", "sinal de presença"],
     "gagueira":     ["hesitação na fala", "fala em espasmos", "palavra que trava", "voz que tropeça antes de sair", "interrupção involuntária"],
+
+    // Relações interpessoais — v884
+    "confianca":    ["fé no outro", "crença sem provas", "apostar em quem se conhece", "se entregar sem garantias", "certeza construída pelo tempo"],
+    "respeito":     ["consideração", "reconhecimento do valor do outro", "distância que honra", "limite que preserva", "o que se dá antes de receber"],
+    "dependencia":  ["precisar do outro para existir", "laço que sustenta ou aprisiona", "necessidade que não se controla", "não conseguir sem", "estar ligado por dentro"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
