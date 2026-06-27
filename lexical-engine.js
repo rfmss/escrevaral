@@ -2032,6 +2032,21 @@
     "fatal":        "Que leva à morte ou ao desastre inevitável. Na tragédia, o 'fatal' é o erro que a personagem não poderia evitar — ou que poderia, mas não evitou. O adjetivo fatal impõe peso à cena antes de qualquer ação.",
     "imoral":       "Que contraria os valores morais do contexto em que aparece. Na ficção, o imoral não é sempre o vilão: pode ser o herói cujos valores chocam os da sociedade em que vive. Imoralidade depende de ponto de vista — e a literatura sabe disso.",
     "irreal":       "Que não corresponde à realidade — mas pode ser mais verdadeiro do que ela. O irreal na ficção literária não é escapismo: é acesso a camadas que o real não permite. Kafka, Borges, o realismo mágico: o irreal como método de verdade.",
+
+    // Verbos de sensação física e emoção expressiva — v854
+    "estremecer":   "Vibrar subitamente — de frio, de susto, de pressentimento. Em prosa, 'estremecer' é mais preciso do que 'tremer': o estremecimento é involuntário, pontual, quase incontrolável. Revela o que a personagem não quer revelar.",
+    "palpitar":     "Bater com força e urgência — o coração, a esperança, o medo antecipado. 'O coração palpitou' é clichê; 'o coração palpitou antes mesmo de ela abrir a porta' é cena. O verbo carrega o tempo do sentimento.",
+    "sufocar":      "Perder o ar — de emoção, de claustrofobia, de excesso de silêncio. Na narrativa, 'sufocar' é metáfora que o leitor sente no peito. Personagens que sufocam estão num ambiente que as diminui: relação, lugar, silêncio forçado.",
+    "ofegar":       "Respirar em curtos solaços — depois de correr, de chorar, de assustarse. Em prosa, o personagem que ofega torna o leitor consciente do próprio ritmo respiratório. É técnica de imersão: escrever ofego gera ofego.",
+    "solucar":      "Choro que se parte — o soluço interrompe a voz, corta a fala, revela que a emoção é maior do que a contenção. Na ficção, solucar é detalhe físico que ancora a cena emocional sem precisar nomear o sentimento.",
+    "estremecer2":  "Ver 'estremecer'.",
+
+    // Substantivos de ausência e tempo — v854
+    "lacuna":       "O vazio que faz sentido. Na teoria literária, a lacuna é o que o texto não diz e o leitor preenche — com experiência, medo, desejo. Toda história tem lacunas deliberadas; o escritor escolhe o que ocultar tanto quanto o que mostrar.",
+    "falta":        "O que não está — mas age sobre tudo que está. Em narrativa, a 'falta' é motor: o pai ausente, a palavra não dita, o amor que partiu. O que falta a uma personagem define quem ela é e o que vai fazer para preencher ou negar esse vazio.",
+    "duracao":      "O tempo como experiência, não como calendário. A duração é o quanto algo parece demorar: cinco minutos de espera angustiante podem durar páginas; cinco anos de paz cabem em um parágrafo. A arte de narrar é a arte de controlar a duração.",
+    "inimizade":    "Oposição organizada no tempo. A inimizade não é impulso momentâneo — tem história, razão, forma própria. Na ficção, o par de inimigos é tão importante quanto o par de amantes: define o que ambos são, e o que seriam sem o outro.",
+    "cansaco":      "Exaustão que vai além do corpo. O cansaço literário é acúmulo — de traições, de luta, de esperança frustrada. Uma personagem cansada não dorme e fica bem: ela muda, desiste ou finalmente rompe. O cansaço é ponto de virada.",
   };
 
   function inferDefinicao(word, className) {
