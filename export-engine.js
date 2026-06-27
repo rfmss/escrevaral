@@ -50,6 +50,47 @@
     return frontmatter.join("\n") + "\n\n" + body.join("\n");
   }
 
+  // ── EXPORTAÇÃO OBSIDIAN (Markdown amigável a vault) ──
+  function createObsidianExport(manuscript) {
+    const date = manuscript.createdAt
+      ? new Date(manuscript.createdAt).toISOString().slice(0, 10)
+      : new Date().toISOString().slice(0, 10);
+    const updatedAt = manuscript.updatedAt
+      ? new Date(manuscript.updatedAt).toISOString().slice(0, 10)
+      : null;
+    const wordCount = (manuscript.text || "").split(/\s+/).filter(Boolean).length;
+
+    const fm = ["---"];
+    fm.push(`title: "${(manuscript.title || "Manuscrito").replace(/"/g, '\\"')}"`);
+    fm.push(`criado: ${date}`);
+    if (updatedAt && updatedAt !== date) fm.push(`atualizado: ${updatedAt}`);
+    if (manuscript.kind)   fm.push(`tipo: "${manuscript.kind}"`);
+    if (manuscript.status) fm.push(`situacao: "${manuscript.status}"`);
+    if (manuscript.author) fm.push(`autor: "${manuscript.author.replace(/"/g, '\\"')}"`);
+    fm.push(`palavras: ${wordCount}`);
+    if (Array.isArray(manuscript.tags) && manuscript.tags.length) {
+      fm.push(`tags: [${manuscript.tags.map(function(t) { return t.trim(); }).join(", ")}]`);
+    }
+    fm.push('fonte: "Escrevaral"');
+    fm.push("---");
+
+    const body = [];
+    body.push(`# ${manuscript.title || "Manuscrito"}`, "");
+    if (manuscript.description && manuscript.description.trim()) {
+      body.push(`> ${manuscript.description.trim()}`, "");
+    }
+    body.push(normalizeMarkdownBody(manuscript.text), "");
+
+    const links = [];
+    if (Array.isArray(manuscript.tags) && manuscript.tags.length) {
+      links.push("## Temas relacionados", "");
+      manuscript.tags.forEach(function(t) { links.push("- [[" + t.trim() + "]]"); });
+      links.push("");
+    }
+
+    return fm.join("\n") + "\n\n" + body.join("\n") + (links.length ? links.join("\n") : "");
+  }
+
   // ── EXPORTAÇÃO HTML ──────────────────────────────────
   function createHtmlExport(manuscript) {
     const title = xmlEscape(manuscript.title || "Sem título");
@@ -522,6 +563,15 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
         filename: slug + ".epub",
         mimeType: "application/epub+zip",
         binary: true,
+      };
+    }
+
+    if (format === "obsidian") {
+      return {
+        content: createObsidianExport(manuscript),
+        filename: "escrevaral/" + slug + ".md",
+        mimeType: "text/markdown;charset=utf-8",
+        binary: false,
       };
     }
 

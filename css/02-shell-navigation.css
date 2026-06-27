@@ -793,10 +793,66 @@ html {
 
 .archive-export-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 12px;
   padding-top: 12px;
   border-top: 1px solid var(--line);
+}
+
+.obsidian-help {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.obsidian-help > summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--muted);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.obsidian-help > summary::before {
+  content: "▸";
+  font-size: 0.75rem;
+  transition: transform 0.15s;
+}
+
+.obsidian-help[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.obsidian-help-body {
+  padding: 10px 0 4px 12px;
+  line-height: 1.65;
+}
+
+.obsidian-help-body ol {
+  margin: 6px 0 6px 16px;
+  padding: 0;
+}
+
+.obsidian-help-body li {
+  margin-bottom: 4px;
+}
+
+.obsidian-help-body code {
+  font-family: monospace;
+  font-size: 0.85em;
+  background: var(--surface-2, rgba(0,0,0,0.06));
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.obsidian-help-note {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 .sidebar > .primary-button {
