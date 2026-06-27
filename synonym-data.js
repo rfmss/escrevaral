@@ -1685,6 +1685,14 @@
     "lampejo":    ["clarão breve", "instante de luz", "raio de consciência", "faísca de ideia", "momento que ilumina"],
     "paralisia":    ["imobilidade forçada", "paralisação", "incapacidade de agir", "travamento", "ficou pregado no lugar"],
     "silencio criativo":    ["seco criativo", "vácuo de ideias", "pausa forçada na criação", "impossibilidade de escrever"],
+
+    // Lacunas literárias — v878
+    "narradora":    ["voz que conta", "consciência narrativa", "quem organiza o olhar", "ponto de vista encarnado", "a que dá forma à história"],
+    "epígrafe":     ["epígrafe", "citação de abertura", "voz emprestada antes do início", "convite ao tema", "âncora de sentido"],
+    "dedicatoria":  ["dedicatória", "página de afeto", "nome que antecipa tudo", "reconhecimento antes da história", "inscrição de presença"],
+    "alienacao":    ["desconexão", "afastamento do real", "indiferença ao entorno", "distância de si", "vida à margem de si mesma", "deriva interior"],
+    "crescimento":  ["amadurecimento", "arco de personagem", "mudança que fica", "evolução interior", "passagem que não se desfaz", "transformação que custa"],
+    "brecha":       ["abertura", "fissura", "fresta", "caminho inesperado", "possibilidade escondida", "onde a luz entra"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
