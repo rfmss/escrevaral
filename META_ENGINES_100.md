@@ -68,6 +68,51 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v891→v901)
+
+**Baseline:** v901 — todos os engines em 100%, exceto Exportação 90%.
+
+**O que foi entregue neste ciclo (v891→v901):**
+
+- `syntax-engine.js` (v891, Codex): bancada crítica 10/17 → **17/17 ok** — publica/seria desambiguação diacrítica; preso/contido/oculto adjetival; por enquanto / enquanto isso como locuções
+- `lexical-engine.js`+`synonym-data.js` (v891): +10 DEFINICOES + 7 SINONIMOS percepção sensorial
+- `synonym-data.js` (v892): +12 SINONIMOS identidade/literatura brasileira (silenciamento/apagamento/migração/enraizamento/deslocamento/corporalidade/representação/visibilidade/invisibilidade/diáspora)
+- `lexical-engine.js` (v892): +14 DEFINICOES identidade/literatura brasileira
+- `synonym-data.js`+`lexical-engine.js` (v893): +10 SINONIMOS + 10 DEFINICOES estrutura de livro (sinopse/contracapa/edição/capa/índice/posfácio) + narratologia (peripécia/anagnórise/polifonia/focalização) + fix 4 auto-referências
+- `synonym-data.js` (v894): **fix 193 auto-referências** — varredura completa, script de correção em massa
+- `lexical-engine.js`+`synonym-data.js` (v895): +17 DEFINICOES + 1 SINONIMOS (tempo/vida/morte/tristeza/alegria/sonho/destino/verdade/mentira/poder/guerra/história + verbos: caminhar/tocar/partir/chegar/esperar)
+- `lexical-engine.js` (v896): +11 DEFINICOES marcos narrativos (passado/futuro/segredo/promessa/decisão/escolha/encontro/despedida/ruptura/fraqueza/paz)
+- `synonym-data.js` (v897): fix duplicata diáspora/diaspora — P1 volta a 4 (baseline)
+- `lexical-engine.js`+`synonym-data.js` (v898): +12 DEFINICOES verbos narrativos (abrir/fechar/perguntar/responder/encontrar/perder/sorrir/chorar/herança/retorno/começo/fim)
+- `lexical-engine.js`+`synonym-data.js` (v899): +11 DEFINICOES + 4 SINONIMOS (momento/instante/espaço/origem/centro/margem/parar/correr/entrar/sair/tremer; decisão/ganhar/afastar/aproximar)
+- `lexical-engine.js` (v900): +15 DEFINICOES verbos de desejo/conflito/arco (amar/odiar/querer/desejar/buscar/fugir/lutar/insistir/desistir/perdoar/magoar/enganar/transformação/crise/redenção)
+- `lexical-engine.js` (v901): +10 DEFINICOES jornada/emoções morais/atmosfera (viagem/jornada/amor/ciúme/culpa/vergonha/arrependimento/silêncio/luz/terra)
+
+**Estado atualizado dos engines (v901):**
+
+| Área / engine | Maturidade | Notas de estado (v901) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1340 (P0=0, 193 auto-refs corrigidas); DEFINICOES ~700+ (estimativa); POLISSEMIA 110+ formas |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bancada 17/17; golden 91/0 regressões; VERBOS_PRES 2045 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **90%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; buildOutputPackage; UI de escopo |
+
+**Auditor de dados (v901):** P0=0, P1=4 (todos mitigados), P2=0
+
+**Fronteiras abertas (v901) — por prioridade:**
+
+1. **Exportação para 95%**: RTF/ePub não usam escopo ainda; `buildOutputPackage` existe, falta integração
+2. **DEFINICOES restantes de alta freq**: chamar/ouvir/abraçar/gritar/vencer/cair/subir/missão/jornada do herói
+3. **Função sintática (Codex)**: auditar sujeito/predicado/objeto — gap documentado em handoff-codex-gramatica-2026-06-27.md
+4. **Fallback "gw-substantivo"** em grammar-controller.js — fazer saída indeterminado estruturada
+5. **"logo" conclusivo**, **adjetivos compostos**, **"quando" conjunção** — frontes conhecidas, sem solução sem parser externo
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v876→v885)
 
 **Baseline:** v885 — todos os engines em 100%, exceto Exportação 90%. SINONIMOS 1269, DEFINICOES 535+, POLISSEMIA 111 formas.
