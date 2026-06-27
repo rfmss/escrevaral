@@ -1726,6 +1726,18 @@
     "amargo":        ["ressentido", "de sabor de frustração", "que foi ferido e ficou", "com mágoa incorporada", "de alegria rara"],
     "apaixonado":    ["tomado pelo amor", "ardente", "que sente demais", "movido pela paixão", "de sentimento intenso"],
     "ciumento":      ["possessivo", "que teme perder", "vigilante por amor ou insegurança", "de olhar desconfiado", "que sofre com o outro"],
+
+    // Processo narrativo e ofício — v866
+    "continuar":     ["prosseguir", "seguir em frente", "dar continuidade", "retomar", "não parar"],
+    "pausar":        ["interromper por um momento", "suspender", "fazer pausa", "brecar o ritmo", "dar respiro"],
+    "fragmentar":    ["partir em pedaços", "quebrar a linearidade", "dispersar", "dividir", "desmembrar"],
+    "condensar":     ["comprimir", "reduzir ao essencial", "sintetizar", "enxugar", "adensar sem perder"],
+    "cortar":        ["eliminar", "suprimir", "tirar o que sobra", "aparar", "dar o talho certo"],
+    "fragmentado":   ["em pedaços", "partido", "não-linear", "quebrado", "de partes soltas que pedem o leitor"],
+    "linear":        ["em linha reta", "cronológico", "que segue a ordem natural dos eventos", "sem saltos"],
+    "circular":      ["que volta ao começo", "que fecha onde abriu", "de estrutura em anel", "que retorna"],
+    "eliptico":      ["com elipses", "que salta no tempo", "que omite sem esconder", "de lacunas calculadas"],
+    "planejamento":  ["estruturação", "mapa narrativo", "roteiro", "plano da obra", "esboço organizado"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
