@@ -130,6 +130,7 @@
       narrativo: "Voz de cena em avanço",
       sobrenatural: "Voz de fronteira e encantamento",
       "irônico": "Voz de distância e comentário velado",
+      resistência: "Voz de chão e luta",
     };
 
     const fieldPart = fieldDesc ? ` com foco em ${fieldDesc}` : "";
@@ -156,6 +157,9 @@
 
     // Sobrenatural: campo de magia/entidades tem precedência sobre corte seco
     if (topField === "sobrenatural") return "sobrenatural";
+
+    // Resistência: campo do trabalho e labor — suor, ofício, luta social
+    if (topField === "trabalho") return "resistência";
 
     // Seco: frases curtas independente de repetições (Trevisan e Freire usam anáfora como recurso)
     if (avgSentence < 12 && topField !== "pensamento") return "seco";
@@ -201,6 +205,7 @@
       narrativo: ["Machado de Assis (Dom Casmurro)", "Autran Dourado (Opera dos Mortos)", "Conceição Evaristo (Ponciá Vicêncio)"],
       sobrenatural: ["Mia Couto (Um Rio Chamado Tempo)", "Paulina Chiziane (O Alegre Canto da Perdiz)", "João Guimarães Rosa (A Terceira Margem do Rio)"],
       "irônico": ["Machado de Assis (Memórias Póstumas de Brás Cubas)", "Lima Barreto (Triste Fim de Policarpo Quaresma)", "João Ubaldo Ribeiro (Viva o Povo Brasileiro)"],
+      resistência: ["Carolina Maria de Jesus (Quarto de Despejo)", "Conceição Evaristo (Insubmissas Lágrimas de Mulheres)", "Eliane Brum (A Menina Quebrada)"],
     };
     return map[gesture] || map.narrativo;
   }
