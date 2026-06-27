@@ -1513,6 +1513,53 @@
     "denso":        "Texto que concentra muita informação, sensação ou significado em pouco espaço. Densidade é virtude quando equilibrada com clareza; excesso de densidade cansa e afasta o leitor.",
     "fluido":       "Texto que se move sem atrito — as frases se encadeiam, o leitor avança sem perceber. Fluidez não é simplicidade: é domínio do ritmo, da transição e da respiração da prosa.",
     "digressao":    "Desvio intencional do tema ou da ação principal para explorar um pensamento lateral. A digressão, bem usada, aprofunda personagem e mundo; mal usada, é procrastinação narrativa.",
+
+    // Figuras de linguagem adicionais — v824
+    "anafora":      "Repetição de uma palavra ou expressão no início de versos ou orações consecutivas. Cria ritmo e ênfase. 'Quero a paz. Quero o silêncio. Quero o sono.' A anáfora não é tique — é escolha.",
+    "catafora":     "Referência que aponta para algo que ainda vai ser dito. 'Vou te contar: ela desapareceu.' O 'isso' antes do 'isso' — suspense de sintaxe.",
+    "eufonismo":    "Substituição de uma palavra por outra de sentido suavizado. 'Faleceu' por 'morreu'; 'passou para a outra' por 'morreu'. Na ficção, eufemismos revelam quem evita o que.",
+    "eufemismo":    "Substituição de uma palavra por outra de sentido suavizado. 'Faleceu' por 'morreu'; 'passou para a outra' por 'morreu'. Na ficção, eufemismos revelam quem evita o que.",
+    "gradacao":     "Encadeamento de ideias em ordem crescente ou decrescente de intensidade. 'Chorou, gritou, implorou.' A gradação é escada narrativa — sobe ou desce, nunca fica no mesmo degrau.",
+    "antitese":     "Aproximação de ideias contrárias numa mesma frase. 'Amor é fogo que arde sem se ver' (Camões). A antítese não contradiz — ilumina tensão.",
+    "paradoxo":     "Afirmação que parece contraditória mas contém verdade profunda. 'A morte é o começo.' Diferente da antítese: o paradoxo mantém os opostos convivendo, sem resolver.",
+    "apostrofe":    "Vocativo dirigido a alguém ou algo ausente, abstrato ou imaginário. 'Ó morte, onde está tua vitória?' Na prosa literária, a apóstrofe marca voz em extremo emocional.",
+    "perífrase":    "Substituição de um nome por uma expressão descritiva. 'A cidade maravilhosa' por 'Rio de Janeiro'. Na ficção, a perífrrase é escolha de perspectiva — quem nomeia assim, vê assim.",
+    "anacolutoo":   "Ruptura da construção gramatical esperada, deixando um termo em suspenso. 'Eu, aquele assunto... prefiro não falar.' Revela perturbação, pudor, memória incompleta.",
+    "anacoluto":    "Ruptura da construção gramatical esperada, deixando um termo em suspenso. 'Eu, aquele assunto... prefiro não falar.' Revela perturbação, pudor, memória incompleta.",
+    "zeugma":       "Omissão de um termo que apareceu antes e está subentendido. 'Ela amou a música; eu, a poesia.' Cria ritmo econômico — o que não é dito une as partes.",
+
+    // Termos de narrativa e ponto de vista — v824
+    "focalizacao":  "Perspectiva pela qual a história é narrada — quem vê, o quê e quanto. Genette distingue: focalização zero (narrador onisciente), interna (personagem vê) e externa (câmera fria). A focalização determina o que o leitor sabe.",
+    "perspectiva":  "Em narrativa: posição de visão do narrador ou personagem. Em poesia: ângulo de tratamento do tema. A perspectiva não é neutra — toda escolha revela quem conta.",
+    "onisciente":   "Narrador que sabe tudo: pensamentos, emoções, passado e futuro de todos os personagens. Também chamado 'narrador Deus'. Pode criar distância ou, quando bem usado, cumplicidade universal.",
+    "autodiegetico":"Narrador que é ao mesmo tempo personagem principal. Conta sua própria história em primeira pessoa. Memória, parcialidade e voz íntima são as marcas desse modo.",
+    "homodiegetico":"Narrador que é personagem da história que narra, sem ser o protagonista. Vê de perto, mas de lado — Nuno, o amigo que observa; o vizinho que testemunha.",
+    "heterodiegetico":"Narrador que está fora da história — não é personagem. Pode ser onisciente ou limitado à perspectiva de um personagem.",
+
+    // Gêneros literários — v824
+    "terror":       "Gênero que visa provocar medo intenso — não apenas inquietação, mas ameaça à integridade. Na ficção brasileira, mescla-se ao realismo mágico, ao folclore e ao horror social.",
+    "suspense":     "Tensão mantida pela incerteza sobre o que vai acontecer. O leitor sabe menos do que quer, ou sabe algo que o personagem não sabe — e isso é o gatilho da virada de página.",
+    "saga":         "Narrativa longa que acompanha personagens ou famílias por longos períodos ou gerações. Exige domínio de tempo, genealogia e coerência de mundo. Desafio técnico e emocional maior.",
+    "ficção":       "Narrativa construída por invenção — mesmo quando inspirada em fatos reais. Não é sinônimo de mentira: é pacto entre autor e leitor para explorar verdades que o real não alcança sozinho.",
+
+    // Recursos de estilo — v824
+    "mostrar":      "No ensino de escrita criativa: presentar a cena de modo que o leitor viva, não apenas entenda. 'Ela tremia' vs. 'ela estava com medo.' A escolha de mostrar exige imagem concreta.",
+    "contar":       "No ensino de escrita criativa: narrar os fatos em resumo, sem cena. Útil para compressão, transição e ritmo — não é defeito, mas escolha. Alterar entre mostrar e contar é técnica.",
+    "ritmo":        "No texto em prosa: a cadência das frases — curtas e longas, pausa e velocidade. No verso: o padrão de sílabas e acentos. O ritmo é o pulso do texto; o leitor o sente antes de perceber.",
+    "cena":         "Unidade narrativa com tempo real e presença dos personagens. A cena acontece 'agora' — diálogo, ação, sensação. É o oposto do sumário, que comprime o tempo.",
+    "sumario":      "Narração condensada de um período de tempo sem entrar em cena. 'Durante anos, ela tentou esquecer.' O sumário é elipse controlada — não fuga, mas escolha de o que não mostrar.",
+    "climax":       "O ponto de maior tensão ou virada decisiva de uma narrativa. Não é o final — é o momento em que a pergunta central do texto encontra seu pico de intensidade.",
+    "anticlimax":   "Resolução de tensão de modo surpreendentemente menor do que o esperado. Pode ser decepção narrativa ou, quando intencional, ironia — o real raramente tem finais cinematográficos.",
+
+    // Emoções adicionais — v824
+    "extase":       "Estado de exaltação extrema — alegria que ultrapassa o comum. Na ficção, o êxtase é raro e perigoso: narrativa que leva o leitor até lá precisa ter ganhado o direito de fazer isso.",
+    "indignicao":   "Revolta moral diante do que se considera injusto. A indignação é força política e emocional — e no texto literário, pode ser o motor de um personagem ou a voz implícita do narrador.",
+    "indignacao":   "Revolta moral diante do que se considera injusto. A indignação é força política e emocional — e no texto literário, pode ser o motor de um personagem ou a voz implícita do narrador.",
+    "ternura":      "Afeto suave, cuidadoso — quase físico em sua delicadeza. Na prosa, a ternura é difícil: exige precision sem sentimentalismo, presença sem exposição.",
+    "decepção":     "Sentimento que segue uma expectativa não cumprida. Diferente da frustração (bloqueio de meta), a decepção é sobre a pessoa ou coisa que falhou. Muda relações de forma permanente.",
+    "decepcao":     "Sentimento que segue uma expectativa não cumprida. Diferente da frustração (bloqueio de meta), a decepção é sobre a pessoa ou coisa que falhou. Muda relações de forma permanente.",
+    "alivio":       "Liberação de uma tensão que durava. Na ficção, o alívio pode ser clímax silencioso — uma cena sem drama, mas carregada pelo que veio antes.",
+    "susto":        "Reação imediata e involuntária a algo inesperado. Diferente do medo (que se prolonga), o susto é instante — mas deixa rastro emocional na cena e no leitor.",
   };
 
   function inferDefinicao(word, className) {
