@@ -531,6 +531,42 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
     return text.split(/\n+/).map(function(p) { return p.trim(); }).filter(Boolean);
   }
 
+  // ── PACOTE DE SAÍDA — camada lógica de seleção de escopo ────────────────────
+  // Separa "o que vai sair" de "para onde vai". Todo export deve começar aqui.
+  function buildOutputPackage(manuscripts, opts) {
+    opts = opts || {};
+    var scope     = opts.scope     || "all";
+    var activeId  = opts.activeId  || null;
+    var selected  = opts.selectedIds || [];
+
+    var items;
+    if (scope === "current") {
+      items = manuscripts.filter(function(m) { return m.id === activeId && (m.text || "").trim(); });
+    } else if (scope === "current-with-linked") {
+      var base   = manuscripts.filter(function(m) { return m.id === activeId && (m.text || "").trim(); });
+      var linked = manuscripts.filter(function(m) { return m.parentId === activeId && (m.text || "").trim(); });
+      items = base.concat(linked);
+    } else if (scope === "selected") {
+      items = manuscripts.filter(function(m) { return selected.indexOf(m.id) !== -1 && (m.text || "").trim(); });
+    } else {
+      items = manuscripts.filter(function(m) { return (m.text || "").trim(); });
+    }
+
+    var totalWords = items.reduce(function(s, m) {
+      return s + (m.text || "").split(/\s+/).filter(Boolean).length;
+    }, 0);
+
+    return {
+      items: items,
+      stats: {
+        manuscripts: items.filter(function(m) { return !m.parentId; }).length,
+        notes:       items.filter(function(m) { return  !!m.parentId; }).length,
+        words: totalWords,
+      },
+      warnings: items.length === 0 ? ["Nenhum item com texto selecionado."] : [],
+    };
+  }
+
   // ── DISPATCHER PRINCIPAL ──────────────────────────────
   function exportManuscript(manuscript, format) {
     if (!manuscript) throw new Error("Nenhum manuscrito ativo para exportar.");
@@ -614,28 +650,31 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
   }
 
   // ── VAULT OBSIDIAN — múltiplos manuscritos em ZIP ──────────────────────────
-  function exportObsidianVault(manuscripts) {
-    if (!manuscripts || !manuscripts.length) throw new Error("Nenhum manuscrito no acervo.");
+  function exportObsidianVault(manuscripts, opts) {
+    var pkg = buildOutputPackage(manuscripts, opts || { scope: "all" });
+    if (pkg.warnings.length) throw new Error(pkg.warnings[0]);
     var date = new Date().toISOString().slice(0, 10);
 
     var files = [];
+    var items = pkg.items;
 
     // README.md — índice do vault
     var indexLines = [
       "---",
       'fonte: "Escrevaral"',
       "exportado: " + date,
+      "manuscritos: " + pkg.stats.manuscripts,
+      "palavras: " + pkg.stats.words,
       "---",
       "",
       "# Acervo · Escrevaral",
       "",
-      "Vault exportado em " + date + " pelo Escrevaral.",
+      "Vault exportado em " + date + " pelo Escrevaral. " + pkg.stats.manuscripts + " manuscrito" + (pkg.stats.manuscripts !== 1 ? "s" : "") + ", " + pkg.stats.words.toLocaleString("pt-BR") + " palavras.",
       "",
       "## Manuscritos",
       "",
     ];
-    manuscripts.forEach(function(ms) {
-      if (!ms.title && !ms.text) return;
+    items.forEach(function(ms) {
       var sl = slugify(ms.title);
       indexLines.push("- [[" + sl + "]] — " + (ms.kind || "Manuscrito"));
     });
@@ -643,8 +682,7 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
     files.push({ name: "README.md", data: indexLines.join("\n") });
 
     // Um .md por manuscrito
-    manuscripts.forEach(function(ms) {
-      if (!ms.title && !ms.text) return;
+    items.forEach(function(ms) {
       var content = createObsidianExport(ms);
       files.push({ name: "manuscritos/" + slugify(ms.title) + ".md", data: content });
     });
@@ -658,6 +696,10 @@ p.scene-break { text-align: center; margin: 1.2em 0; text-indent: 0; letter-spac
     };
   }
 
-  global.VeredaExport = { exportManuscript: exportManuscript, exportObsidianVault: exportObsidianVault };
+  global.VeredaExport = {
+    exportManuscript: exportManuscript,
+    exportObsidianVault: exportObsidianVault,
+    buildOutputPackage: buildOutputPackage,
+  };
 
 })(window);
