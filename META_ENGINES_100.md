@@ -68,6 +68,45 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v836→v853)
+
+**Baseline:** v853 — todos os engines em 100%. Ciclo focado em classificação de classes gramaticais e expansão do corpus Léxico.
+
+**O que foi entregue neste ciclo (v836→v853):**
+
+- `lexical-engine.js` (v838): POLISSEMIA para 50+ gentílicos brasileiros (carioca/paulista/baiano/mineiro/gaúcho/nordestino/fluminense/etc.) — Adjetivo quando modifica substantivo; Substantivo após artigo isolado
+- `lexical-engine.js` (v839–v841): DEFINICOES 352 → 417 entradas: pontuação, oficina de escrita, emoções complexas, experiência humana, oralidade, estética, adjetivos de paisagem e personagem
+- `synonym-data.js` (v846–v850): SINONIMOS 1148 → 1190: processo criativo, pontuação, estética, adjetivos de personagem e qualificativos
+- `lexical-engine.js` (v842): POLISSEMIA["ora"] reescrita — correlativo → Advérbio; antes de pronome → Interjeição; "inclusive" e outros em _ADV_EXT
+- `lexical-engine.js` (v844): adjetivos em -al: atual/final/total/fatal/banal/leal/genial/natural/cultural/nacional/social/moral/formal/normal/oral/central/lateral/ancestral/brutal/frontal/mental/vital/plural/emocional/racional/sensorial/editorial/universal/original/habitual/virtual/temporal/global/real (+ variantes); fix "disse" → Verbo flexionado via _PERF_IRR_ISSE
+- `lexical-engine.js` (v845): _PREP_EXT — através/acerca/diante/dentre/perante/mediante; _ADJ_EXT expandido com espesso/grosso/denso/profundo/fecundo/rotundo/longo/redondo/imundo
+- `lexical-engine.js` (v848): prefixos negativos im-/il-/ir-/in- (imoral/informal/ilegal/irreal/irracional); adjetivos base amplo/digno/reto/pleno/puro/severo/sereno/casto/etc.
+- `lexical-engine.js` (v849): adjetivos de personagem (ADJ-CARAC-01): covarde/valente/generoso/mesquinho/teimoso/ansioso/orgulhoso/saudoso/arrogante/elegante/ambicioso/corajoso/etc.
+- `lexical-engine.js` (v851): POLISSEMIA melhor/pior (Advérbio vs Adjetivo por contexto); antes/depois (Preposição vs Advérbio); junto → Advérbio; _ADJ_EXT adjetivos -nte (brilhante/marcante/relevante/urgente/inocente/suficiente/eloquente/evidente/permanente/etc.); _ADJ_IRR em _intens para "muito bom" → Advérbio
+- `lexical-engine.js` (v852): _ADJ_IDO — árido/úmido/sólido/líquido/rígido/pálido/válido/lúcido/tímido/nítido/gélido/cândido/fluido → Adjetivo (antes caíam na regra do particípio -ido)
+
+**Estado atualizado dos engines (v853):**
+
+| Área / engine | Maturidade | Notas de estado (v853) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500 |
+| Espelho de Voz | **100%** | 9 gestos; 9 campos semânticos; echoes por gesto |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS 1190; localLexicon 528; DEFINICOES 417; POLISSEMIA 55+ entradas; 38/38 bateria passando |
+| Decolonial / vocabulário | **100%** | 600 entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | dados 2000×4; VERBOS_PRES; effectiveClass em inferFuncaoSintatica |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+
+**Fronteiras abertas (v853):**
+
+1. **"tarde" como Advérbio** — localLexicon sempre ganha sobre contexto; "Chegou tarde" → "Substantivo". Requer refatoração em `analyze()` para checar POLISSEMIA antes de localLexicon quando há texto disponível
+2. **"logo" conclusivo** — "Penso, logo existo" → "Advérbio". Pontuação é stripped antes do vizinho ser calculado; sem parser externo é impossível detectar vírgula anterior
+3. **Adjetivos compostos** (bem-humorado, mal-humorado, bem-intencionado) — hífen impede que normalizeWord capture o padrão; só resolvido com tratamento especial de hífens em inferWordClass
+4. **"quando" como Conjunção** vs Advérbio interrogativo — já em functionWords.adverbios; para classificar como Conjunção temporal requer detecção de ponto de interrogação
+5. **"antes/depois" como Preposição em locução** — POLISSEMIA cobre "antes/depois de" mas não "antes que/depois que" (conjunção temporal); não é prioridade
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v813→v835)
 
 **Baseline:** v835 — todos os engines em 100%. Ciclo focado na qualidade de dados do Léxico / Biblioteca.
