@@ -649,9 +649,11 @@ async function openWordPopover(word, classLabel, countText, x, y, analysis) {
   // Sinônimos integrados no popover
   const synSection = wordPopover.querySelector("[data-popover-syns]");
   const synList    = wordPopover.querySelector("[data-popover-syns-list]");
-  if (synSection && synList && window.loadSynonyms && window.getSynonyms) {
-    await loadSynonyms(word);
-    const sins = getSynonyms(word);
+  if (synSection && synList) {
+    // Prioriza window.SINONIMOS (synonym-data.js, 1000+ entradas literárias)
+    const _ns = w => w.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    const sins = (window.SINONIMOS && (window.SINONIMOS[word] || window.SINONIMOS[_ns(word)]))
+                 || (window.loadSynonyms && await loadSynonyms(word), window.getSynonyms?.(word) || []);
     if (sins.length) {
       synList.innerHTML = sins.map(s =>
         `<button class="popover-syn-btn" data-replace-word="${escapeHtml(s)}" data-original-word="${escapeHtml(word)}">${escapeHtml(s)}</button>`
