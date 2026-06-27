@@ -1361,6 +1361,47 @@ const _SINS_CLASSE = {
     "Verbo (particípio)": ["entregue", "concedido", "ofertado", "proporcionado"],
     "Substantivo":        ["cubo", "peça", "marcador"],
   },
+
+  "mesmo": {
+    "Advérbio": ["ainda assim", "contudo", "não obstante", "apesar disso", "todavia"],
+    "Adjetivo": ["idêntico", "igual", "equivalente", "semelhante", "análogo"],
+    "Pronome":  ["próprio", "em pessoa", "ele próprio", "pessoalmente"],
+  },
+  "so": {
+    "Advérbio": ["apenas", "somente", "unicamente", "exclusivamente", "tão somente"],
+    "Adjetivo": ["solitário", "sozinho", "isolado", "desamparado", "abandonado"],
+  },
+  "ainda": {
+    "Advérbio": ["até agora", "até este momento", "por ora", "até então", "até o presente"],
+    "Conjunção": ["embora", "conquanto", "mesmo que", "apesar de que", "posto que"],
+  },
+  "caso": {
+    "Substantivo": ["situação", "ocorrência", "episódio", "acontecimento", "circunstância"],
+    "Conjunção":   ["se", "desde que", "em caso de", "na hipótese de", "supondo que"],
+  },
+  "visto": {
+    "Verbo (particípio)": ["observado", "avistado", "percebido", "notado", "contemplado"],
+    "Substantivo":        ["autorização", "permissão", "aval", "aprovação", "chancela"],
+  },
+  "posto": {
+    "Verbo (particípio)": ["colocado", "disposto", "depositado", "alocado", "instalado"],
+    "Substantivo":        ["local", "estação", "cargo", "posição", "ponto"],
+    "Conjunção":          ["embora", "ainda que", "apesar de que", "conquanto"],
+  },
+  "tanto": {
+    "Pronome indefinido": ["tamanho", "tal quantidade", "semelhante volume", "tão grande porção"],
+    "Advérbio":           ["assim", "tanto assim", "de tal modo", "em tal medida", "a esse ponto"],
+  },
+  "ora": {
+    "Conjunção":   ["quer", "seja", "ou então", "alternadamente"],
+    "Interjeição": ["ora bolas", "ora essa", "ora veja", "puxa"],
+    "Advérbio":    ["agora", "neste momento", "por ora", "de momento"],
+  },
+  "morto": {
+    "Verbo (particípio)": ["falecido", "extinto", "perecido", "expirado"],
+    "Substantivo":        ["cadáver", "defunto", "finado", "corpo", "falecido"],
+    "Adjetivo":           ["sem vida", "exânime", "inerte", "inanimado", "paralisado"],
+  },
 };
 
 function getSinonimosPorClasse(word, className) {
