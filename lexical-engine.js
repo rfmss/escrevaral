@@ -1844,6 +1844,26 @@
     "euforia":      "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir.",
     "desesperanca": "A ausência de esperança — não a tristeza, mas o lugar além dela. É estado permanente, não passageiro. A desesperança em Beckett é poética; nas letras de cordel, é combatida com humor.",
     "resignacao2":  "Resignação e desesperança são distintas: a primeira aceita, a segunda desistiu de aceitar. A personagem resignada ainda carrega o desejo; a desesperançada o esqueceu.",
+
+    // Emoções complexas — v839
+    "ciume":        "Medo de perder algo ou alguém para outro — mistura de amor, insegurança e raiva. Na ficção, o ciúme é motor narrativo clássico; o risco é virar clichê. A personagem que sente ciúme está admitindo que precisa do outro.",
+    "cobica":       "Desejo intenso pelo que pertence a outro — não só inveja, mas impulso de ter. A cobiça move personagens históricos, vilões e heróis comuns que encontram uma oportunidade. É irmã próxima da ambição.",
+    "orgulho":      "Satisfação com si mesmo ou com o próprio grupo — pode ser virtude (amor-próprio saudável) ou falha (soberba). Na ficção, o orgulho que precede a queda é arco clássico. Mas o orgulho que sustenta o personagem é outro animal.",
+    "vaidade":      "Preocupação excessiva com a própria imagem. Diferente do orgulho: a vaidade precisa da aprovação do outro; o orgulho não. A personagem vaidosa é vulnerável ao olhar externo.",
+    "compaixao":    "Sentir junto com o sofrimento do outro — ir ao encontro da dor sem precisar resolvê-la. A compaixão na ficção não é fraqueza: é o que faz um personagem parar, quando todos correm. Diferente de pena.",
+    "empatia":      "Capacidade de entender a perspectiva do outro, mesmo sem compartilhar a experiência. Na narrativa em primeira pessoa, a empatia do narrador define o quanto o leitor entende os outros personagens.",
+    "solidao":      "Estado de estar só — não como fato, mas como sentimento. A solidão de um personagem em multidão é mais densa do que a solidão física. Na literatura brasileira, a solidão é tema central: Lima Barreto, Clarice, Carolina Maria de Jesus.",
+    "saudade":      "A palavra portuguesa sem equivalente perfeito em nenhuma outra língua: presença dolorosa do ausente. Na literatura brasileira, saudade não é apenas nostalgia — é um modo de relação com o tempo, com o lugar, com a morte.",
+
+    // Processo criativo — v839
+    "bloqueio":     "O momento em que o escritor não consegue avançar no texto. Pode ser medo de errar, falta de direção, excesso de autocrítica. Não é a ausência de palavras — é a recusa de escrever as palavras que estão lá.",
+    "fluxo":        "Estado de absorção completa na escrita — quando o tempo some e o texto sai sem esforço consciente. Csikszentmihalyi descreveu o 'flow'. Na oficina, aprender a criar as condições do fluxo é mais útil do que esperar por inspiração.",
+    "inspiracao":   "O impulso que inicia ou transforma o texto — uma imagem, uma frase, um encontro. A inspiração existe, mas não é confiável. Escrever por disciplina, não por inspiração: a inspiração aparece quando você já está escrevendo.",
+    "disciplina":   "A prática regular de escrever, independente do estado emocional ou da inspiração. Rotina de escrita não é mecânica — é respeito pelo texto. A disciplina protege o escritor de si mesmo.",
+    "rotina":       "A sequência de hábitos que prepara o escritor para escrever — horário, lugar, ritual. A rotina de escrita não garante bons textos, mas garante que o texto existe. Sem rotina, o texto espera por condições perfeitas que nunca chegam.",
+    "silencio2":    "O silêncio no processo de escrita — o momento antes das palavras, a pausa entre as frases, a releitura sem caneta. O silêncio não é ausência de trabalho. É o trabalho que não aparece no manuscrito.",
+    "procrastinar": "Adiar o texto por fazer outras coisas — algumas úteis, a maioria não. A procrastinação é frequentemente medo disfarçado de preguiça. O escritor que procrastina geralmente sabe exatamente o que precisa escrever — e exatamente por que não quer.",
+    "rasura":       "A marca da revisão — riscado, apagado, substituído. A rasura é evidência de trabalho vivo. Nos manuscritos de Machado, as rasuras mostram o escritor pensando — não errando. Guardar as rasuras é guardar o processo.",
   };
 
   function inferDefinicao(word, className) {
