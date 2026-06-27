@@ -1555,6 +1555,27 @@
     "galera":        ["prova de impressão", "prova tipográfica", "PDF de revisão", "folha para correção"],
     "orelha":        ["aba da sobrecapa", "texto de apresentação", "convite à leitura", "texto da aba"],
 
+    // Verbos expressivos — v836
+    "aguardar":      ["esperar com atenção", "ficar na expectativa", "aguardar", "estar à espera"],
+    "ansiar":        ["desejar com urgência", "ansiar", "anseiar", "querer com impaciência", "ter sede de"],
+    "gritar":        ["berrar", "vociferar", "clamar", "exclamar", "bradar", "chiar"],
+    "sentir":        ["perceber", "experimentar", "vivenciar", "tocar por dentro", "acusar", "ser afetado por"],
+
+    // Adjetivos de estilo — v836
+    "laconico":      ["conciso", "breve", "de poucas palavras", "sintético", "telegráfico", "parco em palavras"],
+    "prolixo":       ["extenso demais", "verboso", "redundante", "que se repete", "enfadonho", "pleonástico"],
+    "eloquente":     ["expressivo", "persuasivo", "bem falante", "de discurso poderoso", "articulado", "comunicativo"],
+    "ambiguo":       ["de duplo sentido", "que pode ser lido de mais de um modo", "equívoco", "polissêmico", "aberto"],
+    "enigmatico":    ["misterioso", "de difícil decifração", "obscuro", "cifrado", "que guarda segredo"],
+    "vigoroso":      ["forte", "cheio de energia", "com presença", "robusto", "intenso", "que não treme"],
+    "contundente":   ["direto", "que bate forte", "sem rodeios", "de impacto imediato", "contundente"],
+    "verossimil":    ["crível dentro do texto", "que parece real", "que o universo justifica", "internamente coerente"],
+    "coerente":      ["consistente", "que não se contradiz", "íntegro", "harmônico", "sem incoerência"],
+    "universal":     ["que ressoa em qualquer leitor", "atemporal", "que fala do humano", "que transcende o particular"],
+    "singular":      ["único", "original", "sem igual", "inconfundível", "que não se imita", "de voz própria"],
+    "incisivo":      ["afiado", "direto", "cortante", "preciso", "que não desperdiça"],
+    "plausivel":     ["verossímil", "aceitável", "possível", "razoável", "que faz sentido"],
+
     // Técnicas narrativas — v834
     "flashforward":  ["salto ao futuro", "prolepse", "antevisão", "antecipação narrativa"],
     "prolepse":      ["antevisão", "flashforward", "salto ao futuro", "prenúncio"],
