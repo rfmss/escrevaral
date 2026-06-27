@@ -956,6 +956,38 @@
   // A className "Substantivo / Adjetivo" com decisao:"ambiguo" é a representação honesta.
   // Ver HIERARQUIA_GRAMATICAL.md — ambiguo é preferível a classificado falso.
 
+  // ── Colisões diacríticas — acento distingue classe, normalizeWord remove ─────
+  // "pública/publica": com acento → Adj; sem acento (3ª sg presente) → Verbo
+  // "séria/seria": com acento → Adj; sem acento (imperfeito/cond.) → Verbo
+  // Heurística: pronome como prev → Verbo; ausência ou substantivo/artigo → Adjetivo
+  (function() {
+    const _SUJPRON = new Set(["eu","tu","ele","ela","nos","eles","elas","voce","voces","isso","aquilo","a gente","me","te","se","lhe"]);
+    const _COPULAS_ADJ = new Set(["ficou","ficava","ficara","ficavam","fica","fique","ficasse","estava","esteve","estou","estamos","estavam","esta","e","era","eram","foi","fora","fosse","parecia","parece","pareceu","continua","continuava","permanecia","tornava","tornou","se tornou"]);
+    const _ARTS_ADJ = new Set(["o","a","os","as","um","uma","uns","umas","do","da","dos","das","ao","aos"]);
+
+    POLISSEMIA["publica"] = function(prev) {
+      if (!prev || _SUJPRON.has(prev)) return "Verbo flexionado";
+      return "Adjetivo";
+    };
+    POLISSEMIA["publicas"] = POLISSEMIA["publica"];
+
+    POLISSEMIA["seria"] = function(prev) {
+      if (!prev || _SUJPRON.has(prev)) return "Verbo (imperfeito)";
+      return "Adjetivo";
+    };
+    POLISSEMIA["serias"] = POLISSEMIA["seria"];
+
+    // "preso/presa" — após cópula → Adjetivo predicativo; após artigo → Substantivo; else → ambíguo
+    POLISSEMIA["preso"] = function(prev) {
+      if (prev && _COPULAS_ADJ.has(prev)) return "Adjetivo";
+      if (prev && _ARTS_ADJ.has(prev)) return "Substantivo";
+      return "Adjetivo"; // default: modificador
+    };
+    POLISSEMIA["presa"] = POLISSEMIA["preso"];
+    POLISSEMIA["presos"] = POLISSEMIA["preso"];
+    POLISSEMIA["presas"] = POLISSEMIA["preso"];
+  })();
+
   // ── Leituras alternativas para palavras polissêmicas — exibidas no card ──────
   const ALTERNATIVAS = {
     "bem":    ["Advérbio — 'fez bem demais'", "Substantivo — 'o bem e o mal'", "Interjeição — 'Bem! Pode ir.'"],
