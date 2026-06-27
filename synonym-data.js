@@ -1759,6 +1759,18 @@
     "mato":         ["vegetação densa", "mata baixa", "onde a trilha some", "fora da cidade no Brasil", "natureza sem nome preciso", "cerrado e caatinga"],
     "campo":        ["área rural aberta", "planície", "terra cultivada ou vasta", "onde o horizonte é inteiro", "longe da cidade sem ser floresta"],
     "corredor":     ["passagem entre cômodos", "espaço de passagem", "onde ninguém fica por muito tempo", "lugar de trânsito", "o que une sem ser destino"],
+
+    // Físico e movimento — v888
+    "sentar":       ["assentar-se", "tomar assento", "acomodar-se", "pousar o corpo", "parar de estar de pé"],
+    "virar":        ["voltear", "rodar", "girar", "mudar de direção", "virar-se para"],
+    "franzir":      ["contrair", "enrugar", "fechar", "apertar os olhos", "encarquilhar"],
+    "apertar":      ["comprimir", "estreitar", "espremer", "contrair", "pressionar com a mão"],
+    "dobrar":       ["curvar", "vergar", "inclinar", "fazer dobra", "flexionar"],
+    "inclinar":     ["pender", "vergar", "curvar para o lado", "deitar ligeiramente", "tombar devagar"],
+    "magro":        ["delgado", "esguio", "esbelto", "descarnado", "fino", "de pouco peso"],
+    "gordo":        ["corpulento", "encorpado", "robusto", "volumoso", "de muito peso", "farto"],
+    "loiro":        ["louro", "dourado", "cor de mel", "claro no cabelo", "cabelo do sol"],
+    "moreno":       ["pardo", "bronzeado", "escuro de pele", "de cabelo escuro", "trigueiro"],
   };
 
   // Normalização: remove acentos e converte para minúsculas
