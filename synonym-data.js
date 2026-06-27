@@ -925,7 +925,7 @@
     // relações e sociedade
     "vínculo":    ["vínculo", "laço", "ligação", "conexão", "elo", "pertencimento mútuo", "relação que une"],
     "solidariedade":["solidariedade", "apoio mútuo", "companheirismo", "fraternidade", "assistência ao outro", "cuidado coletivo"],
-    "cumplicidade":["cumplicidade", "conivência", "parceria secreta", "acordo tácito", "aliança velada", "entendimento mútuo"],
+    "cumplicidade":["cumplicidade", "conivência", "parceria secreta", "acordo tácito", "aliança velada", "entendimento mútuo", "conivência com afeto", "laço que não se explica"],
     "separação":    ["separação", "afastamento", "ruptura", "distância", "partida", "despedida", "fim do vínculo"],
     "reencontro":    ["reencontro", "retorno ao outro", "volta ao laço", "nova proximidade", "recomeço da relação"],
 
@@ -1463,7 +1463,7 @@
 
     // emoções complexas — lacunas frequentes
     "comocao":    ["comoção", "enternecimento", "emoção que paralisa", "arrepio da alma", "impacto que fica"],
-    "cumplicidade":    ["conivência com afeto", "parceria secreta", "laço que não se explica", "entendimento mútuo"],
+
 
     // natureza BR — paisagem e lugar
     "rocha":    ["pedra", "penedo", "laje", "paredão", "granito"],
