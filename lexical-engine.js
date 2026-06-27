@@ -1666,6 +1666,31 @@
     "noir":         "Gênero que mistura crime, atmosfera sombria e personagens moralmente ambíguos. Vem do cinema dos anos 1940. Na prosa, o noir tem frases curtas, ritmo tenso e um mundo sem saída clara.",
     "distopia":     "Narrativa que imagina uma sociedade futura opressiva e desumanizadora. Orwell, Huxley, Atwood. Na ficção brasileira, distopia se mistura ao real tão frequentemente que a linha fica borrada.",
     "utopia":       "Narrativa que imagina uma sociedade ideal — e as contradições internas que a tornam impossível. Thomas More cunhou o termo (do grego 'não lugar'). A utopia é mais trágica do que parece.",
+
+    // Gêneros literários fundamentais — v830
+    "conto":        "Narrativa breve, de tensão unitária. Tem começo, meio e fim — mas cada palavra carrega peso duplo. O conto não tolera gordura. Tchekhov: se há um rifle na parede no primeiro ato, ele deve disparar.",
+    "novela":       "Narrativa de extensão intermediária entre o conto e o romance. Foco em situação ou personagem central, com curva dramática desenvolvida, mas sem a amplitude de subtramas do romance. Gênero vivo no Brasil.",
+    "romance":      "Narrativa longa em prosa, com múltiplos personagens e tramas. Permite tempo, contradição, amadurecimento. O romance pode conter um mundo: é o único gênero que precisa de todo o espaço que ocupa.",
+    "poesia":       "Linguagem que explora o ritmo, a imagem e a compressão do sentido. Não é sinônimo de verso: poesia pode existir em prosa. O que define a poesia é a atenção ao impossível — dizer o que a prosa não alcança.",
+    "poema":        "Unidade de poesia: um texto poético específico, com extensão e forma próprias. Um poema pode ter um verso ou centenas; pode rimar ou não; pode narrar ou apenas soar. O poema é o que acontece quando a língua se dobra sobre si mesma.",
+    "lirismo":      "A qualidade poética da escrita que evoca emoção, subjetividade, musicalidade. Na prosa, o lirismo é risco: pode encantar ou afundar. Clarice, Rosa, Hilda Hilst — lirismo que não adorna, que constitui.",
+    "fabula":       "Narrativa breve com personagens animais ou alegóricos e moral explícita. Esopo, La Fontaine, Monteiro Lobato. Na escrita contemporânea, a fábula é revisitada com ironia — a moral não é mais simples.",
+    "tragedia":     "Gênero dramático que conduz o protagonista à ruína por uma falha (hártia/hamártia). Aristóteles: catarse pelo terror e pela piedade. Na ficção contemporânea, a tragédia se mistura ao cotidiano — não há mais coturno.",
+    "comedia":      "Gênero dramático de tom leve, com situações engraçadas, mal-entendidos e desfecho feliz ou neutro. Mas a melhor comédia toca no amargo: rir do que não conseguimos resolver. Machado de Assis sabia disso.",
+    "drama":        "1. Gênero teatral que mistura elementos trágicos e cômicos. 2. Na ficção em geral: conflito emocional intenso. 'Tem muito drama' descreve excesso — mas sem drama, não há narrativa.",
+    "epico":        "Referente ao épico: narrativa de grandes proporções, ações heroicas, alcance coletivo. Homero, Camões, mas também romances que viram saga de um povo. No Brasil, o épico tem raízes indígenas, africanas e ibéricas.",
+
+    // Termos semânticos para escritores — v830
+    "denotacao":    "O sentido literal e direto de uma palavra — o que o dicionário lista primeiro. 'Rosa' = planta com flor. Na ficção, a denotação é o ponto de partida; a conotação é onde a escrita vive.",
+    "conotacao":    "Os sentidos secundários, afetivos, culturais ou históricos que uma palavra carrega além do literal. 'Rosa' = amor, fragilidade, feminino em alguns contextos. A conotação varia com o leitor e a época.",
+    "polissemia":   "Propriedade de uma palavra ter múltiplos sentidos relacionados. 'Manga' = fruta ou parte da roupa. Diferente de homonímia (palavras sem relação). O bom escritor usa a polissemia — e sabe quando ela atrapalha.",
+    "campo":        "Campo semântico: conjunto de palavras de sentido relacionado. O campo do 'mar' inclui onda, maré, abismo, sal, horizonte. Trabalhar dentro de um campo cria coesão; sair dele cria contraste.",
+
+    // Tipos textuais — v830
+    "narracao":     "Modalidade de texto que conta eventos em sequência temporal. O texto narrativo tem narrador, personagens, enredo, tempo e espaço. A narração é a forma mais antiga de texto — é anterior à escrita.",
+    "descricao":    "Modalidade de texto que apresenta um objeto, lugar, pessoa ou estado. Na ficção, a descrição não é pausa — é revelação: o que se descreve diz o que importa ao narrador.",
+    "dissertacao":  "Texto que desenvolve uma argumentação em torno de uma tese. Estrutura clássica: tese, argumentos, conclusão. Na escrita literária, a dissertação aparece disfarçada — no ensaio, na crônica de opinião.",
+    "ensaio":       "Texto que pensa em voz alta, sem conclusão definitiva. Montaigne inventou; no Brasil, Sérgio Buarque de Holanda, Darcy Ribeiro, Silviano Santiago o praticam. O ensaio é o único gênero que se permite errar.",
   };
 
   function inferDefinicao(word, className) {
