@@ -2229,8 +2229,19 @@ const ACTION_HANDLERS = {
   "reader-toggle-ruler":     () => { readerRuler = !readerRuler; updateReaderRuler(); },
   "export-manuscript":       (_, t) => exportCurrentManuscript(t.dataset.exportFormat),
   "export-rtf": () => {
-    const ms = getActiveManuscript();
-    VeredaDocument.downloadRtf(writingArea.innerHTML || ms?.html || "", ms?.pagePreset || "draft", ms?.title || "Manuscrito", ms?.author || "");
+    const opts = _getExportScope();
+    const pkg  = VeredaExport.buildOutputPackage(state.manuscripts, opts);
+    if (pkg.warnings.length) { saveStatus.textContent = pkg.warnings[0]; return; }
+    const docs = pkg.items;
+    if (docs.length === 1) {
+      const ms = docs[0];
+      const html = opts.scope === "current" && writingArea ? writingArea.innerHTML : (ms.html || "");
+      VeredaDocument.downloadRtf(html, ms.pagePreset || "draft", ms.title || "Manuscrito", ms.author || "");
+    } else {
+      const combinedHtml = docs.map(ms => `<h1>${escapeHtml(ms.title || "Sem título")}</h1>${ms.html || ""}`).join("<p></p>");
+      VeredaDocument.downloadRtf(combinedHtml, "draft", `Acervo Escrevaral — ${docs.length} textos`, "");
+      saveStatus.textContent = `RTF exportado — ${docs.length} texto${docs.length !== 1 ? "s" : ""}`;
+    }
   },
   "print-pages": () => {
     const ms = getActiveManuscript();

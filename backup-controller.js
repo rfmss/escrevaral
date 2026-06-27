@@ -394,6 +394,23 @@ function exportBackup() {
 
 function exportCurrentManuscript(format) {
   try {
+    if (format === "epub") {
+      const opts = _getExportScope();
+      const pkg  = VeredaExport.buildOutputPackage(state.manuscripts, opts);
+      if (pkg.warnings.length) { saveStatus.textContent = pkg.warnings[0]; return; }
+      const docs = pkg.items;
+      if (docs.length > 1) {
+        const combined = {
+          title: `Acervo Escrevaral — ${docs.length} textos`,
+          author: "",
+          text: docs.map(ms => `# ${ms.title || "Sem título"}\n\n${ms.text || ""}`).join("\n\n"),
+        };
+        const exportFile = VeredaExport.exportManuscript(combined, "epub");
+        downloadFile(exportFile.content, exportFile.filename, exportFile.mimeType);
+        saveStatus.textContent = `ePub exportado — ${docs.length} texto${docs.length !== 1 ? "s" : ""}`;
+        return;
+      }
+    }
     const exportFile = VeredaExport.exportManuscript(getActiveManuscript(), format);
     downloadFile(exportFile.content, exportFile.filename, exportFile.mimeType);
     saveStatus.textContent = `Manuscrito exportado em .${format}`;
