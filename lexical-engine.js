@@ -575,6 +575,64 @@
     },
   };
 
+  // ── Pronomes/advérbios relativos e interrogativos — extensão pós-POLISSEMIA literal ──
+  (function() {
+    // "quem" — pronome relativo ou interrogativo (Bechara §pronomes relativos + interrogativos)
+    POLISSEMIA["quem"] = (prev) => {
+      if (!prev) return "Pronome interrogativo";
+      if (VERBOS_COGNICAO.has(prev) || VERBOS_PERGUNTA.has(prev)) return "Pronome interrogativo";
+      // Após preposição ou artigo → "a quem me refiro", "de quem falei"
+      const PREP_ART = new Set(["a","de","em","para","por","com","sobre","ante","entre","sem",
+        "apos","perante","o","os","ao","da","na","no","pelo","pela","em"]);
+      if (PREP_ART.has(prev)) return "Pronome relativo";
+      return "Pronome interrogativo";
+    };
+
+    // "quanto/quanta/quantos/quantas" — relativo, interrogativo ou conjunção comparativa
+    const _COMP_QUANTO = new Set(["tanto","tanta","tantos","tantas","mais","menos","tao",
+      "maior","menor","melhor","pior"]);
+    function _classifQuanto(prev) {
+      if (prev && _COMP_QUANTO.has(prev)) return "Conjunção"; // "tanto quanto"
+      if (!prev) return "Pronome interrogativo"; // "Quanto custa?"
+      return "Pronome relativo"; // "tudo quanto ela escreveu"
+    }
+    POLISSEMIA["quanto"]  = _classifQuanto;
+    POLISSEMIA["quanta"]  = _classifQuanto;
+    POLISSEMIA["quantos"] = _classifQuanto;
+    POLISSEMIA["quantas"] = _classifQuanto;
+
+    // "nos" — pronome oblíquo vs contração "em + os" (Bechara §contrações)
+    POLISSEMIA["nos"] = (prev, next) => {
+      // "nos" antes de substantivo/adjetivo (sem morfologia verbal) → contração "em + os"
+      if (next && next.length > 2) {
+        const _verbSfx = /(ou|eu|iu|avam|iam|ava|ia|ar|er|ir|ando|endo|indo|aram|eram|iram)$/.test(next);
+        if (!_verbSfx && !PRON_PESSOAIS_RETOS.has(next)) return "Preposição/Artigo";
+      }
+      return "Pronome pessoal";
+    };
+
+    // "presente" — adjetivo predicativo vs substantivo temporal (Bechara §adjetivo)
+    POLISSEMIA["presente"] = (prev) => {
+      const ART = new Set(["o","a","os","as","um","uma","do","da","dos","das","no","na","ao","num","numa"]);
+      if (prev && ART.has(prev)) return "Substantivo";
+      return "Adjetivo"; // "estava presente", "ficou presente", "dia presente"
+    };
+
+    // "seguinte/seguintes" — quase sempre adjetivo em norma padrão
+    POLISSEMIA["seguinte"]  = () => "Adjetivo";
+    POLISSEMIA["seguintes"] = () => "Adjetivo";
+
+    // "próximo/próxima" — adjetivo ordinal; como substantivo apenas com artigo isolado
+    function _classifProximo(prev, next) {
+      // "o próximo a falar" / "o dia próximo" / "na próxima vez" → Adjetivo
+      return "Adjetivo";
+    }
+    POLISSEMIA["proximo"]  = _classifProximo;
+    POLISSEMIA["proxima"]  = _classifProximo;
+    POLISSEMIA["proximos"] = _classifProximo;
+    POLISSEMIA["proximas"] = _classifProximo;
+  })();
+
   // ── Pronomes indefinidos quantificadores — Advérbio vs Pronome (Bechara §253) ──
   // "muito belo" → Advérbio de intensidade; "muito trabalho" → Pronome indefinido adjetivo
   // "andou muito" → Advérbio; "muitos chegaram" → Pronome indefinido substantivo
@@ -666,6 +724,12 @@
     "onde":   ["Pronome relativo — 'a cidade onde nasceu'", "Advérbio interrogativo — 'onde você vai?'"],
     "qual":   ["Pronome relativo — 'o livro o qual ele leu'", "Pronome interrogativo — 'qual livro você quer?'"],
     "quais":  ["Pronome relativo — 'os livros os quais ela escolheu'", "Pronome interrogativo — 'quais você prefere?'"],
+    "quem":   ["Pronome interrogativo — 'quem disse isso?'", "Pronome relativo — 'a pessoa a quem me refiro'"],
+    "quanto": ["Pronome interrogativo — 'quanto custa?'", "Pronome relativo — 'tudo quanto ela sabia'", "Conjunção — 'tanto quanto possível'"],
+    "nos":    ["Pronome pessoal — 'ela nos deu o livro'", "Preposição/Artigo — 'nos arredores da cidade'"],
+    "presente": ["Adjetivo — 'estava presente na cerimônia'", "Substantivo — 'no presente, tudo muda'"],
+    "seguinte": ["Adjetivo — 'no dia seguinte'"],
+    "proximo":  ["Adjetivo — 'o próximo capítulo'"],
     "muito":  ["Advérbio — 'era muito belo'", "Pronome indefinido — 'havia muito trabalho'"],
     "muita":  ["Pronome indefinido — 'muita gente veio'"],
     "muitos": ["Pronome indefinido — 'muitos chegaram cedo'"],
