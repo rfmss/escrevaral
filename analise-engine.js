@@ -1059,6 +1059,21 @@
     [/\bde maneira a\b/gi,
      "«de maneira a»",
      "Construção pesada. Prefira «para», «a fim de», «de modo a»."],
+    [/\b(?:vou|vai|vamos|vão|irá|irei|iremos|irão)\s+estar\s+\w+(?:ando|endo|indo)\b/gi,
+     "gerundismo",
+     "Construção «vou estar fazendo» é traço do discurso corporativo. Em prosa literária, prefira o futuro simples («farei») ou o presente («faço»)."],
+    [/\bem torno a\b/gi,
+     "«em torno a»",
+     "A regência correta é «em torno de». Escreva «em torno de», não «em torno a»."],
+    [/\bse acaso\b/gi,
+     "«se acaso»",
+     "«Se» e «acaso» têm o mesmo sentido condicional. Escreva só «se» ou só «acaso», não os dois juntos."],
+    [/\bpelo motivo de que\b/gi,
+     "«pelo motivo de que»",
+     "Construção pesada. Prefira «porque», «pois», «uma vez que»."],
+    [/\bfuturo vindouro\b/gi,
+     "«futuro vindouro»",
+     "«Vindouro» já significa «que está por vir». Escreva só «futuro» ou só «vindouro»."],
   ];
 
   function analisarConfusoes(texto) {
