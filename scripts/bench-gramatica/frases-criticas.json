@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v981",
+  "versao": "2026-06-28-v982",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3929,6 +3929,188 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "inesperado após foi (cópula) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-percebe-01",
+      "frase": "O leitor percebe a ironia no final.",
+      "alvos": [
+        {
+          "texto": "percebe",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "percebe em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-observa-01",
+      "frase": "O narrador observa tudo em silêncio.",
+      "alvos": [
+        {
+          "texto": "observa",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "observa em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-imagina-01",
+      "frase": "A autora imagina mundos impossíveis.",
+      "alvos": [
+        {
+          "texto": "imagina",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "imagina em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-det-um-01",
+      "frase": "Um escritor precisa de paciência.",
+      "alvos": [
+        {
+          "texto": "um",
+          "classe_escolar": "artigo",
+          "classe_tecnica": "DET",
+          "funcao": "artigo indefinido / determinante",
+          "certeza": "alta",
+          "comentario": "um em DETS → Determiner (artigo indefinido; engine usa categoria guarda-chuva Determiner)."
+        }
+      ]
+    },
+    {
+      "id": "r-det-uma-01",
+      "frase": "Uma escritora leu o manuscrito.",
+      "alvos": [
+        {
+          "texto": "uma",
+          "classe_escolar": "artigo",
+          "classe_tecnica": "DET",
+          "funcao": "artigo indefinido / determinante",
+          "certeza": "alta",
+          "comentario": "uma em DETS → Determiner."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-curta-01",
+      "frase": "A frase curta tem mais impacto.",
+      "alvos": [
+        {
+          "texto": "curta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "curta em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-denso-01",
+      "frase": "O parágrafo denso dificulta a leitura.",
+      "alvos": [
+        {
+          "texto": "denso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "denso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-reescreve-01",
+      "frase": "Ela reescreve o capítulo várias vezes.",
+      "alvos": [
+        {
+          "texto": "reescreve",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "reescreve em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-revisou-01",
+      "frase": "O autor revisou o texto três vezes.",
+      "alvos": [
+        {
+          "texto": "revisou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "revisou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-simbolismo-01",
+      "frase": "O simbolismo permeia toda a obra.",
+      "alvos": [
+        {
+          "texto": "simbolismo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "simbolismo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-realismo-01",
+      "frase": "O realismo dominou o século XIX.",
+      "alvos": [
+        {
+          "texto": "realismo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "realismo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-num-tres-01",
+      "frase": "Ela escreveu três contos em um mês.",
+      "alvos": [
+        {
+          "texto": "três",
+          "classe_escolar": "numeral",
+          "classe_tecnica": "NUM",
+          "funcao": "numeral cardinal",
+          "certeza": "alta",
+          "comentario": "três em NUMERAIS → Numeral."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-longo-v2-01",
+      "frase": "O texto longo exige mais revisões.",
+      "alvos": [
+        {
+          "texto": "longo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "longo em adjetivos_comuns → Adjective."
         }
       ]
     }
