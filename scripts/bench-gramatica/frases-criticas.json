@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-27-v937",
+  "versao": "2026-06-28-v948",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -471,6 +471,272 @@
           "funcao": "nucleo do predicado",
           "certeza": "alta",
           "comentario": "O verbete sussurrar ja existe em DEFINICOES; nao tratar como lacuna."
+        }
+      ]
+    },
+    {
+      "id": "r10-passo-verbo-01",
+      "frase": "Eu passo pelo parque todo dia.",
+      "alvos": [
+        {
+          "texto": "passo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r10-passo-substantivo-01",
+      "frase": "O passo do dançarino era preciso.",
+      "alvos": [
+        {
+          "texto": "passo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes → leitura nominal (R2/R4)."
+        }
+      ]
+    },
+    {
+      "id": "r10-peso-verbo-01",
+      "frase": "Eu peso os ingredientes antes de cozinhar.",
+      "alvos": [
+        {
+          "texto": "peso",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r10-peso-substantivo-01",
+      "frase": "O peso da mochila era grande.",
+      "alvos": [
+        {
+          "texto": "peso",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes → leitura nominal (R2/R4)."
+        }
+      ]
+    },
+    {
+      "id": "r10-leio-verbo-01",
+      "frase": "Eu leio um livro por semana.",
+      "alvos": [
+        {
+          "texto": "leio",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r10-vejo-verbo-01",
+      "frase": "Eu vejo o problema com clareza.",
+      "alvos": [
+        {
+          "texto": "vejo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r10-pego-verbo-01",
+      "frase": "Eu pego o ônibus às sete.",
+      "alvos": [
+        {
+          "texto": "pego",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r9-rapido-adverbio-01",
+      "frase": "Ela correu rápido para chegar a tempo.",
+      "alvos": [
+        {
+          "texto": "rápido",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Forma adjetiva usada adverbialmente apos verbo nao-copula correu (R9)."
+        }
+      ]
+    },
+    {
+      "id": "r9-alto-adverbio-01",
+      "frase": "Ela falou alto para ser ouvida.",
+      "alvos": [
+        {
+          "texto": "alto",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Forma adjetiva usada adverbialmente apos verbo nao-copula falou (R9)."
+        }
+      ]
+    },
+    {
+      "id": "r9-claro-adjetivo-copula-01",
+      "frase": "O resultado foi claro e direto.",
+      "alvos": [
+        {
+          "texto": "claro",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "Apos copula foi (ser) → predicativo, nao adverbio (R7/COPULAS)."
+        }
+      ]
+    },
+    {
+      "id": "r9-claro-adverbio-01",
+      "frase": "Ele escreveu claro para todos entenderem.",
+      "alvos": [
+        {
+          "texto": "claro",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Apos verbo nao-copula escreveu → adverbio plano (R9)."
+        }
+      ]
+    },
+    {
+      "id": "r9-duro-adjetivo-copula-01",
+      "frase": "O jogo foi duro do começo ao fim.",
+      "alvos": [
+        {
+          "texto": "duro",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "Apos copula foi (ser) → predicativo (R7/COPULAS)."
+        }
+      ]
+    },
+    {
+      "id": "r9-duro-adverbio-01",
+      "frase": "Ela trabalha duro para alcançar seus objetivos.",
+      "alvos": [
+        {
+          "texto": "duro",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Apos verbo nao-copula trabalha → adverbio plano (R9)."
+        }
+      ]
+    },
+    {
+      "id": "r7b-certa-adjetivo-copula-01",
+      "frase": "A resposta foi certa desde o início.",
+      "alvos": [
+        {
+          "texto": "certa",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "Pronome indefinido certa apos copula foi → leitura adjetiva (R7b)."
+        }
+      ]
+    },
+    {
+      "id": "r11-certo-adverbio-01",
+      "frase": "Ele chegou certo no horário.",
+      "alvos": [
+        {
+          "texto": "certo",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Pronome indefinido certo apos verbo nao-copula chegou → adverbio (R11)."
+        }
+      ]
+    },
+    {
+      "id": "r10-canto-verbo-01",
+      "frase": "Eu canto para me expressar.",
+      "alvos": [
+        {
+          "texto": "canto",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r2-canto-substantivo-01",
+      "frase": "O canto do pássaro me acalmou.",
+      "alvos": [
+        {
+          "texto": "canto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes → leitura nominal (R2)."
+        }
+      ]
+    },
+    {
+      "id": "r10-toco-verbo-01",
+      "frase": "Eu toco violão nas horas livres.",
+      "alvos": [
+        {
+          "texto": "toco",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal eu antes → leitura verbal (R10)."
+        }
+      ]
+    },
+    {
+      "id": "r11-certa-adverbio-01",
+      "frase": "Ela acertou certa no alvo.",
+      "alvos": [
+        {
+          "texto": "certa",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "provavel",
+          "comentario": "Pronome indefinido certa apos verbo nao-copula acertou → adverbio (R11)."
         }
       ]
     }

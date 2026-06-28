@@ -193,13 +193,21 @@
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
   const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
   const _PRON_PESSOAL = new Set(["eu","tu","ele","ela","nos","nós","vos","vós","eles","elas","voce","vocês","voces","a gente"]);
-  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto"]);
+  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto","duro","dura","fundo","funda","forte","firme"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
   const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
   const _COPULAS_ADJ_CTX = new Set([
-    "ficar", "fica", "ficou", "ficava", "ficavam", "ficara", "ficaram", "ficará", "ficaria", "ficasse", "fique",
-    "estar", "esta", "está", "estao", "estão", "estava", "estavam", "esteve", "estivera", "estaria", "estivesse",
+    // ser
+    "ser", "e", "é", "sao", "são", "era", "eras", "eram", "foi", "fomos", "foram",
+    "fora", "foras", "fosse", "fossem", "for", "forem", "seja", "sejam", "serei",
+    "sera", "será", "serao", "serão", "seria", "seriam", "sendo", "sido",
+    // estar
+    "estar", "esta", "está", "estao", "estão", "estava", "estavam", "esteve",
+    "estivera", "estaria", "estivesse", "fique",
+    // ficar
+    "ficar", "fica", "ficou", "ficava", "ficavam", "ficara", "ficaram", "ficará", "ficaria", "ficasse",
+    // outros
     "parecer", "parece", "pareceu", "parecia", "continuar", "continua", "continuava",
     "permanecer", "permanece", "permanecia", "tornar", "tornou", "tornava",
   ]);
@@ -298,6 +306,22 @@
       // R9 — adjetivos usados como advérbios planos após verbo não-cópula:
       // "falou alto", "correu rápido" — adjective form but adverbial function.
       if (_ADJ_FLAT_ADV.has(na) && t.tags.length === 1 && t.tags[0] === "Adjective"
+          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
+        _addUniqueTag(t.tags, "Adverb");
+      }
+
+      // R7b — pronome indefinido em _ADJ_FLAT_ADV como predicativo após cópula:
+      // "certa" em "A resposta foi certa" deve ser Adjective, não só Pronome
+      if (_COPULAS_ADJ_CTX.has(prevNorm) && _ADJ_FLAT_ADV.has(na)
+          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
+          && !t.tags.includes("Adjective")) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+
+      // R11 — "certo/certa" como advérbio plano após verbo não-cópula:
+      // pronome indefinido que funciona adverbialmente ("chegou certo", "acertou certa")
+      if ((na === "certo" || na === "certa")
+          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
           && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
         _addUniqueTag(t.tags, "Adverb");
       }
