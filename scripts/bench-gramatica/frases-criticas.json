@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-27-v936",
+  "versao": "2026-06-27-v937",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -373,6 +373,90 @@
           "funcao": "nucleo do sujeito",
           "certeza": "alta",
           "comentario": "Artigo O antes de jogo: leitura nominal inequivoca."
+        }
+      ]
+    },
+    {
+      "id": "acordo-substantivo-01",
+      "frase": "O acordo foi assinado ontem.",
+      "alvos": [
+        {
+          "texto": "acordo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes de acordo: leitura nominal (contrato, convênio)."
+        }
+      ]
+    },
+    {
+      "id": "acordo-verbo-01",
+      "frase": "Eu acordo cedo todo dia.",
+      "alvos": [
+        {
+          "texto": "acordo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome Eu + acordo: 1a pessoa singular de acordar."
+        }
+      ]
+    },
+    {
+      "id": "sonho-substantivo-01",
+      "frase": "O sonho dela era escrever.",
+      "alvos": [
+        {
+          "texto": "sonho",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O + sonho: leitura nominal inequivoca."
+        }
+      ]
+    },
+    {
+      "id": "sonho-verbo-01",
+      "frase": "Eu sonho com uma vida diferente.",
+      "alvos": [
+        {
+          "texto": "sonho",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome Eu + sonho: 1a pessoa singular de sonhar."
+        }
+      ]
+    },
+    {
+      "id": "gosto-substantivo-01",
+      "frase": "O gosto amargo ficou na boca.",
+      "alvos": [
+        {
+          "texto": "gosto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O + gosto + adjetivo: leitura nominal (sabor)."
+        }
+      ]
+    },
+    {
+      "id": "gosto-verbo-01",
+      "frase": "Eu gosto de ler antes de dormir.",
+      "alvos": [
+        {
+          "texto": "gosto",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome Eu + gosto de: 1a pessoa singular de gostar."
         }
       ]
     },
