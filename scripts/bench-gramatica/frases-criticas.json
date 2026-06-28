@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1037",
+  "versao": "2026-06-28-v1038",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -10836,6 +10836,486 @@
       "alvo": "cadência",
       "esperado": [
         "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-simultaneidade-01",
+      "frase": "A simultaneidade de planos temporais no romance exigia uma leitura que reconstruísse a cronologia.",
+      "alvo": "simultaneidade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-contemporaneidade-01",
+      "frase": "A contemporaneidade dos eventos narrados criava uma urgência que o pretérito perfeito não permitia.",
+      "alvo": "contemporaneidade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-anterioridade-01",
+      "frase": "A anterioridade dos fatos relatados só era revelada gradualmente, criando um efeito de revelação.",
+      "alvo": "anterioridade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-posteridade-01",
+      "frase": "A posteridade julgaria a obra de forma mais generosa do que os contemporâneos da autora o fizeram.",
+      "alvo": "posteridade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-vernacular-01",
+      "frase": "A prosa vernacular da autora recusava tanto o purismo acadêmico quanto a afetação da língua culta.",
+      "alvo": "vernacular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dialetal-01",
+      "frase": "A marcação dialetal nos diálogos situava o romance numa tradição de valorização das falas regionais.",
+      "alvo": "dialetal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-culto-01",
+      "frase": "O registro culto da narradora contrastava com o vocabulário popular das personagens secundárias.",
+      "alvo": "culto",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-popular-01",
+      "frase": "A linguagem popular do romance revelava uma escuta atenta da oralidade das ruas e das praças.",
+      "alvo": "popular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-compõe-01",
+      "frase": "A autora compõe cada parágrafo como se fosse um poema: nenhuma palavra pode ser substituída.",
+      "alvo": "compõe",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-tece-01",
+      "frase": "O romancista tece os fios narrativos com uma paciência que só se revela na última página.",
+      "alvo": "tece",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-esculpe-01",
+      "frase": "A poeta esculpe cada verso com uma precisão que transforma a língua em matéria resistente e densa.",
+      "alvo": "esculpe",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-forja-01",
+      "frase": "O escritor forja uma voz que parece natural mas é o resultado de anos de escolhas conscientes.",
+      "alvo": "forja",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-lapida-01",
+      "frase": "A revisora lapida o texto até que cada frase atinja a clareza máxima sem perder a densidade.",
+      "alvo": "lapida",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-destila-01",
+      "frase": "A narradora destila décadas de memória até restar apenas o que não pode ser dito de outra forma.",
+      "alvo": "destila",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-lírico-01",
+      "frase": "O impulso lírico da prosa transformava momentos cotidianos em epifanias de beleza desconcertante.",
+      "alvo": "lírico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-épico-01",
+      "frase": "A dimensão épica do romance abrangia não apenas personagens individuais mas uma geração inteira.",
+      "alvo": "épico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dramático-01",
+      "frase": "A intensidade dramática da cena central dispensava qualquer comentário autoral sobre o que ocorria.",
+      "alvo": "dramático",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-trágico-01",
+      "frase": "O desfecho trágico era inevitável desde a primeira página, mas a autora adiava a revelação.",
+      "alvo": "trágico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-cômico-01",
+      "frase": "O tom cômico do romance servia de veículo para uma crítica social mais aguda do que aparentava.",
+      "alvo": "cômico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-satírico-01",
+      "frase": "A veia satírica do escritor poupava apenas os que já haviam sofrido o suficiente na trama.",
+      "alvo": "satírica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-paródico-01",
+      "frase": "A releitura paródica do gênero policial transformava as convenções em alvo de humor refinado.",
+      "alvo": "paródica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-pastiche-01",
+      "frase": "O romance pastiche celebrava seus modelos ao mesmo tempo que os desmontava com afeto crítico.",
+      "alvo": "pastiche",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-período-01",
+      "frase": "O período longo da prosa barroca exigia do leitor uma atenção que a prosa moderna recusa oferecer.",
+      "alvo": "período",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-estrofe-01",
+      "frase": "A estrofe final do poema concentrava o sentido de tudo o que havia sido dito e não dito antes.",
+      "alvo": "estrofe",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-refrão-01",
+      "frase": "O refrão que retornava a cada capítulo criava uma estrutura musical no interior da prosa.",
+      "alvo": "refrão",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-cesura-01",
+      "frase": "A cesura no meio do verso criava uma pausa que o leitor sentia fisicamente antes de continuar.",
+      "alvo": "cesura",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-encavalgamento-01",
+      "frase": "O encavalgamento frequente recusava o fim natural do verso e empurrava o sentido para o seguinte.",
+      "alvo": "encavalgamento",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-hegemônico-01",
+      "frase": "O discurso hegemônico da crítica literária silenciou durante décadas as vozes que hoje reconhecemos.",
+      "alvo": "hegemônico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-subalterno-01",
+      "frase": "A voz subalterna da protagonista conquistava a narração e invertia as hierarquias do gênero.",
+      "alvo": "subalterna",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dissidente-01",
+      "frase": "A posição dissidente da escritora a colocou à margem dos prêmios mas no centro da história.",
+      "alvo": "dissidente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-transgressor-01",
+      "frase": "A escrita transgressora da autora usava o corpo como campo de batalha político e estético.",
+      "alvo": "transgressora",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-interlocutor-01",
+      "frase": "O interlocutor implícito do texto era sempre o leitor culto, mas não necessariamente acadêmico.",
+      "alvo": "interlocutor",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-leitor-modelo-01",
+      "frase": "O leitor-modelo do romance conhecia a tradição literária que o texto citava sem jamais nomear.",
+      "alvo": "leitor",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-horizonte-01",
+      "frase": "O horizonte de expectativas do leitor da época era radicalmente diferente do leitor contemporâneo.",
+      "alvo": "horizonte",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-pacto-01",
+      "frase": "O pacto autobiográfico estabelecido no prefácio orientava toda a leitura que se seguia ao contrato.",
+      "alvo": "pacto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-anuncia-01",
+      "frase": "O primeiro parágrafo anuncia o tema central do romance com uma clareza que só se confirma no fim.",
+      "alvo": "anuncia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-retoma-01",
+      "frase": "O último capítulo retoma a imagem inicial e a transforma pelo que a narrativa revelou entre elas.",
+      "alvo": "retoma",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-inaugura-01",
+      "frase": "O romance inaugura uma linhagem que percorre toda a ficção brasileira das décadas seguintes.",
+      "alvo": "inaugura",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-encerra-01",
+      "frase": "O poema encerra o volume com uma abertura — não uma conclusão, mas uma nova pergunta urgente.",
+      "alvo": "encerra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-refrata-01",
+      "frase": "A linguagem refrata a realidade em vez de refleti-la, criando um mundo paralelo e complementar.",
+      "alvo": "refrata",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-comprime-01",
+      "frase": "A elipse comprime décadas em uma única frase, deixando ao leitor a tarefa de imaginar os anos.",
+      "alvo": "comprime",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-fixa-01",
+      "frase": "A imagem final fixa na memória do leitor o sentimento que percorreu todo o romance discretamente.",
+      "alvo": "fixa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-libera-01",
+      "frase": "A forma do conto libera a autora das obrigações do romance e permite uma concentração total.",
+      "alvo": "libera",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-mise-en-scene-01",
+      "frase": "A mise en scène da cena final era tão visual que o leitor sentia estar diante de uma imagem.",
+      "alvo": "mise",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-incisivo-01",
+      "frase": "A crítica incisiva da ensaísta não poupava nem os autores que ela mais admirava e celebrava.",
+      "alvo": "incisivo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-perspicaz-01",
+      "frase": "O olhar perspicaz da narradora identificava contradições que os próprios personagens não conseguiam ver.",
+      "alvo": "perspicaz",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dissonante-01",
+      "frase": "A voz dissonante da narradora recusava o consenso fácil que o gênero costumava oferecer ao leitor.",
+      "alvo": "dissonante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-deslocamento-01",
+      "frase": "O deslocamento espacial da protagonista era também um deslocamento identitário e linguístico profundo.",
+      "alvo": "deslocamento",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-reenquadra-01",
+      "frase": "O último parágrafo reenquadra tudo o que foi dito e obriga o leitor a reler o livro inteiro.",
+      "alvo": "reenquadra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-escava-01",
+      "frase": "A prosa escava camadas de sentido que a leitura superficial não alcançaria nunca na primeira vez.",
+      "alvo": "escava",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-denunciativo-01",
+      "frase": "O tom denunciativo do romance não impedia a autora de construir personagens de grande riqueza.",
+      "alvo": "denunciativo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-contemplativo-01",
+      "frase": "O ritmo contemplativo do texto pedia uma leitura lenta, quase meditativa, sem pressa de chegar.",
+      "alvo": "contemplativo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-impasse-01",
+      "frase": "O impasse final do romance resistia à resolução e deixava o leitor com a pergunta sem resposta.",
+      "alvo": "impasse",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-vertiginoso-01",
+      "frase": "O ritmo vertiginoso dos últimos capítulos acelerava a narrativa até o ponto de ruptura final.",
+      "alvo": "vertiginoso",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-lacunar-01",
+      "frase": "O texto lacunar exigia que o leitor preenchesse os silêncios com sua própria experiência de vida.",
+      "alvo": "lacunar",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-vacúolo-01",
+      "frase": "Os vacúolos de sentido no texto não eram falhas — eram espaços deliberados para a respiração.",
+      "alvo": "vacúolos",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-subversão-01",
+      "frase": "A subversão das normas do gênero era tão sistemática que se tornava ela mesma uma nova norma.",
+      "alvo": "subversão",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-borgiano-01",
+      "frase": "A estrutura borgiana do romance propunha labirintos de sentido que se multiplicavam a cada leitura.",
+      "alvo": "borgiana",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-rosiano-01",
+      "frase": "A dicção rosiana não era apenas regional — era a criação de uma língua dentro da língua portuguesa.",
+      "alvo": "rosiana",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-machadiano-01",
+      "frase": "O humor machadiano dissimulava por trás da ironia uma reflexão filosófica sobre o destino humano.",
+      "alvo": "machadiano",
+      "esperado": [
+        "Adjective"
       ]
     }
   ]
