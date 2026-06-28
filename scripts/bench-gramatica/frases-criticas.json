@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v998",
+  "versao": "2026-06-28-v999",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6295,6 +6295,160 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "dialógica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-simbolistas-01",
+      "frase": "A obra tem influências simbolistas.",
+      "alvos": [
+        {
+          "texto": "simbolistas",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "simbolistas em adjetivos_comuns (v998) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-parnasiano-01",
+      "frase": "O texto é parnasiano.",
+      "alvos": [
+        {
+          "texto": "parnasiano",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "parnasiano em adjetivos_comuns (v998) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-surrealista-01",
+      "frase": "A corrente é surrealista.",
+      "alvos": [
+        {
+          "texto": "surrealista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "surrealista em adjetivos_comuns (v998) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-caminhou-01",
+      "frase": "Ela caminhou até a janela.",
+      "alvos": [
+        {
+          "texto": "caminhou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "caminhou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-correu-01",
+      "frase": "Ele correu pelo corredor escuro.",
+      "alvos": [
+        {
+          "texto": "correu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "correu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-partiu-01",
+      "frase": "A protagonista partiu ao amanhecer.",
+      "alvos": [
+        {
+          "texto": "partiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "partiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-denso-01",
+      "frase": "O texto é denso e visceral.",
+      "alvos": [
+        {
+          "texto": "denso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "denso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-fluida-01",
+      "frase": "A prosa é fluida e transparente.",
+      "alvos": [
+        {
+          "texto": "fluida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "fluida em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-acelerado-01",
+      "frase": "O ritmo narrativo é acelerado.",
+      "alvos": [
+        {
+          "texto": "acelerado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "acelerado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-voz-01",
+      "frase": "A voz narrativa é onisciente.",
+      "alvos": [
+        {
+          "texto": "voz",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "voz em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-ponto-01",
+      "frase": "O ponto de vista orienta a leitura.",
+      "alvos": [
+        {
+          "texto": "ponto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "ponto em DEFINICOES → Noun."
         }
       ]
     }
