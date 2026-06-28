@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1002",
+  "versao": "2026-06-28-v1003",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6897,6 +6897,146 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "perturbador em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-dem-este-01",
+      "frase": "Este livro mudou minha vida.",
+      "alvos": [
+        {
+          "texto": "este",
+          "classe_escolar": "pronome demonstrativo",
+          "classe_tecnica": "PRON",
+          "funcao": "determinante demonstrativo",
+          "certeza": "alta",
+          "comentario": "este em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-dem-aquele-01",
+      "frase": "Aquele personagem era memorável.",
+      "alvos": [
+        {
+          "texto": "aquele",
+          "classe_escolar": "pronome demonstrativo",
+          "classe_tecnica": "PRON",
+          "funcao": "determinante demonstrativo",
+          "certeza": "alta",
+          "comentario": "aquele em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-dem-essa-01",
+      "frase": "Essa cena ficou na memória.",
+      "alvos": [
+        {
+          "texto": "essa",
+          "classe_escolar": "pronome demonstrativo",
+          "classe_tecnica": "PRON",
+          "funcao": "determinante demonstrativo",
+          "certeza": "alta",
+          "comentario": "essa em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-mas-01",
+      "frase": "O texto é claro, mas redundante.",
+      "alvos": [
+        {
+          "texto": "mas",
+          "classe_escolar": "conjunção adversativa",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "mas em CONJUNCOES → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-porem-01",
+      "frase": "A obra é breve, porém densa.",
+      "alvos": [
+        {
+          "texto": "porém",
+          "classe_escolar": "conjunção adversativa",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "porém em CONJUNCOES → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-todavia-01",
+      "frase": "O estilo é econômico, todavia eficaz.",
+      "alvos": [
+        {
+          "texto": "todavia",
+          "classe_escolar": "conjunção adversativa",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "todavia em CONJUNCOES → Conjunction (+ Verb por falso-positivo, Conjunction presente)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-gritou-01",
+      "frase": "Ele gritou e saiu da sala.",
+      "alvos": [
+        {
+          "texto": "gritou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "gritou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-sussurrou-01",
+      "frase": "Ela sussurrou no ouvido do narrador.",
+      "alvos": [
+        {
+          "texto": "sussurrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "sussurrou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-murmurou-01",
+      "frase": "O protagonista murmurou a resposta.",
+      "alvos": [
+        {
+          "texto": "murmurou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "murmurou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inicial-01",
+      "frase": "O parágrafo inicial define o tom.",
+      "alvos": [
+        {
+          "texto": "inicial",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "inicial em adjetivos_comuns → Adjective."
         }
       ]
     }
