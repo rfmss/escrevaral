@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v968",
+  "versao": "2026-06-28-v969",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1983,6 +1983,188 @@
           "funcao": "adjunto adverbial de negação/tempo",
           "certeza": "alta",
           "comentario": "nunca em ADVS_NEGACAO/TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-portanto-01",
+      "frase": "Ela escreve bem, portanto publica muito.",
+      "alvos": [
+        {
+          "texto": "portanto",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa conclusiva",
+          "certeza": "alta",
+          "comentario": "portanto em CONJS_COORD → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-porem-01",
+      "frase": "Ela escrevia devagar, porém com precisão.",
+      "alvos": [
+        {
+          "texto": "porém",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "porém em CONJS_COORD → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-tanto-01",
+      "frase": "Ela escreve tanto quanto ele.",
+      "alvos": [
+        {
+          "texto": "tanto",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "advérbio comparativo",
+          "certeza": "alta",
+          "comentario": "tanto como advérbio intensivo/comparativo → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-tampouco-01",
+      "frase": "O texto não é curto, tampouco é longo.",
+      "alvos": [
+        {
+          "texto": "tampouco",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "advérbio de negação coordenativo",
+          "certeza": "alta",
+          "comentario": "tampouco em ADVS_NEGACAO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-que-02",
+      "frase": "A escritora que publicou é talentosa.",
+      "alvos": [
+        {
+          "texto": "que",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "pronome relativo / conjunção subordinativa",
+          "certeza": "alta",
+          "comentario": "que como conjunção subordinativa → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-quem-01",
+      "frase": "Ele perguntou quem escreveu o texto.",
+      "alvos": [
+        {
+          "texto": "quem",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome interrogativo",
+          "certeza": "alta",
+          "comentario": "quem adicionado a PRONOMES_INDF em v969."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-bom-01",
+      "frase": "Bom, o texto ainda precisa de revisão.",
+      "alvos": [
+        {
+          "texto": "bom",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "marcador de discurso / adjetivo em posição inicial",
+          "certeza": "alta",
+          "comentario": "bom em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-raramente-01",
+      "frase": "Ela raramente abandona um manuscrito.",
+      "alvos": [
+        {
+          "texto": "raramente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de frequência",
+          "certeza": "alta",
+          "comentario": "raramente sufixo -mente → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-frequentemente-01",
+      "frase": "Ele frequentemente revisa seus contos.",
+      "alvos": [
+        {
+          "texto": "frequentemente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de frequência",
+          "certeza": "alta",
+          "comentario": "frequentemente sufixo -mente → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-solidao-01",
+      "frase": "A solidão foi sempre sua companheira.",
+      "alvos": [
+        {
+          "texto": "solidão",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "solidão em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-consciencia-01",
+      "frase": "A consciência do narrador é fragmentada.",
+      "alvos": [
+        {
+          "texto": "consciência",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "consciência em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-num-tres-01",
+      "frase": "Os três livros chegaram juntos.",
+      "alvos": [
+        {
+          "texto": "três",
+          "classe_escolar": "numeral",
+          "classe_tecnica": "NUM",
+          "funcao": "numeral cardinal determinante",
+          "certeza": "alta",
+          "comentario": "três em NUMERAIS → Numeral."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-primeiras-01",
+      "frase": "As primeiras páginas são as mais difíceis.",
+      "alvos": [
+        {
+          "texto": "primeiras",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "numeral ordinal como adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "primeiras em NUM_ORDINAIS → Adjective (+ Numeral)."
         }
       ]
     }

@@ -67,6 +67,8 @@
     "certo","certa","tal","tais",
     "mesmo","mesma","mesmos","mesmas",
     "próprio","própria","próprios","próprias",
+    // pronomes relativos/interrogativos — Bechara §§ 220-224
+    "quem","cujo","cuja","cujos","cujas",
   ]);
   const PRONOMES_DEM = new Set([
     "este","esta","estes","estas","esse","essa","esses","essas",
