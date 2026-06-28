@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1000",
+  "versao": "2026-06-28-v1001",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6561,6 +6561,174 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "cubista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-revisando-01",
+      "frase": "O escritor está revisando o texto.",
+      "alvos": [
+        {
+          "texto": "revisando",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "gerúndio em locução verbal",
+          "certeza": "alta",
+          "comentario": "revisando → Verb + Gerund (sufixo -ndo)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escrevendo-01",
+      "frase": "Ela estava escrevendo o desfecho.",
+      "alvos": [
+        {
+          "texto": "escrevendo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "gerúndio em locução verbal",
+          "certeza": "alta",
+          "comentario": "escrevendo → Verb (sufixo -ndo)."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-depois-01",
+      "frase": "Logo depois, o personagem saiu.",
+      "alvos": [
+        {
+          "texto": "depois",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "depois em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-antes-01",
+      "frase": "Antes disso, a narradora hesitou.",
+      "alvos": [
+        {
+          "texto": "antes",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "antes em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-revisou-01",
+      "frase": "A autora revisou o manuscrito.",
+      "alvos": [
+        {
+          "texto": "revisou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "revisou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-corrigiu-01",
+      "frase": "Ele corrigiu cada parágrafo.",
+      "alvos": [
+        {
+          "texto": "corrigiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "corrigiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-publicou-01",
+      "frase": "Ela publicou seu primeiro romance.",
+      "alvos": [
+        {
+          "texto": "publicou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "publicou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-aclamado-01",
+      "frase": "O livro é aclamado pela crítica.",
+      "alvos": [
+        {
+          "texto": "aclamado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "aclamado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-celebrada-01",
+      "frase": "A obra é celebrada internacionalmente.",
+      "alvos": [
+        {
+          "texto": "celebrada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "celebrada em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-revisao-01",
+      "frase": "A revisão é etapa indispensável.",
+      "alvos": [
+        {
+          "texto": "revisão",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "revisão em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-releitura-01",
+      "frase": "A releitura traz novos sentidos.",
+      "alvos": [
+        {
+          "texto": "releitura",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "releitura → sufixo -ura → Noun (R1)."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-reescrita-01",
+      "frase": "A reescrita aprimora o texto.",
+      "alvos": [
+        {
+          "texto": "reescrita",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "reescrita em DEFINICOES → Noun."
         }
       ]
     }
