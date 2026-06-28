@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1015",
+  "versao": "2026-06-28-v1016",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8268,6 +8268,118 @@
       "alvo": "tênue",
       "esperado": [
         "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-problematiza-01",
+      "frase": "O ensaio problematiza a noção de autoria no contexto da literatura digital contemporânea.",
+      "alvo": "problematiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-contextualiza-01",
+      "frase": "A introdução contextualiza a obra dentro do panorama da ficção científica brasileira.",
+      "alvo": "contextualiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-evidencia-01",
+      "frase": "O uso repetido da metáfora evidencia a obsessão do narrador com o tempo perdido.",
+      "alvo": "evidencia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-delimita-01",
+      "frase": "O prólogo delimita o escopo temporal da narrativa com precisão e elegância.",
+      "alvo": "delimita",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-dilata-01",
+      "frase": "O monólogo interior dilata o tempo até que cada segundo pareça uma eternidade.",
+      "alvo": "dilata",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-reverbera-01",
+      "frase": "O silêncio reverbera nas últimas páginas do romance como um eco inevitável.",
+      "alvo": "reverbera",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-amplifica-01",
+      "frase": "A elipse amplifica a tensão ao omitir justamente o que o leitor mais quer saber.",
+      "alvo": "amplifica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-atenua-01",
+      "frase": "A ironia atenua a crueldade da cena e impede que o leitor se afaste completamente.",
+      "alvo": "atenua",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-titubeia-01",
+      "frase": "O narrador titubeia antes de revelar a verdade sobre o desaparecimento.",
+      "alvo": "titubeia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-divaga-01",
+      "frase": "A narradora divaga pelos corredores da memória sem encontrar a cena que procura.",
+      "alvo": "divaga",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-declama-01",
+      "frase": "A personagem declama os versos com uma voz que enchia o teatro até o último acento.",
+      "alvo": "declama",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-balbucia-01",
+      "frase": "O personagem balbucia as últimas palavras antes de perder a consciência por completo.",
+      "alvo": "balbucia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-arrepia-01",
+      "frase": "O clímax arrepia o leitor com a simplicidade brutal de uma única frase final.",
+      "alvo": "arrepia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-pressupoe-01",
+      "frase": "A narrativa pressupõe um leitor que conhece as referências culturais do período.",
+      "alvo": "pressupõe",
+      "esperado": [
+        "Verb"
       ]
     }
   ]
