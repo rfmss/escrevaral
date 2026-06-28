@@ -379,6 +379,16 @@
         _addUniqueTag(t.tags, "Adverb");
       }
 
+      // R11b — "certo/certa" pós-nominal → Adjective adnominal:
+      // "o tom certo", "a resposta certa" — certo/certa após Noun é adjetivo, não pronome indefinido
+      if ((na === "certo" || na === "certa")
+          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
+          && !t.tags.includes("Adjective")
+          && (prevTags.includes("Noun") || prevTags.includes("Adjective"))
+          && !prevTags.includes("Verb")) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+
       // R_SALVO — "salvo/exceto/menos" como preposição excludente após pontuação:
       // "Todos foram, salvo ela" — vírgula antecede salvo, próximo é pronome/nome → Preposition
       if ((na === "salvo" || na === "exceto" || na === "menos" || na === "senao" || na === "senão")

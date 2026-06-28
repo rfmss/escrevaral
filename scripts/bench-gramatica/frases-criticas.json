@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v974",
+  "versao": "2026-06-28-v975",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2879,6 +2879,34 @@
           "funcao": "marcador apresentativo",
           "certeza": "alta",
           "comentario": "eis em INTERJEICOES → Interjection."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-certo-posnominal-01",
+      "frase": "Ela encontrou o tom certo.",
+      "alvos": [
+        {
+          "texto": "certo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "R11b: certo após Noun → Adjective (v975); diferente de 'certo dia' pré-nominal → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-certa-posnominal-01",
+      "frase": "A resposta certa ainda não chegou.",
+      "alvos": [
+        {
+          "texto": "certa",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "R11b: certa após Noun → Adjective (v975)."
         }
       ]
     }
