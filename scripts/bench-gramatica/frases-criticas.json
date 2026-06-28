@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v995",
+  "versao": "2026-06-28-v996",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5903,6 +5903,160 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "kafkiano em adjetivos_comuns (v988) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-subverte-01",
+      "frase": "A narrativa subverte as convenções.",
+      "alvos": [
+        {
+          "texto": "subverte",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "subverte em verbos_pres_reg (v995) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-elide-01",
+      "frase": "A elipse elide o tempo morto.",
+      "alvos": [
+        {
+          "texto": "elide",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "elide em verbos_pres_reg (v995) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-transcende-01",
+      "frase": "A arte transcende o tempo.",
+      "alvos": [
+        {
+          "texto": "transcende",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "transcende em verbos_pres_reg (v995) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-picaresca-01",
+      "frase": "A obra é picaresca e irreverente.",
+      "alvos": [
+        {
+          "texto": "picaresca",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "picaresca em adjetivos_comuns (v995) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-grotescos-01",
+      "frase": "O personagem tem traços grotescos.",
+      "alvos": [
+        {
+          "texto": "grotescos",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "grotescos em adjetivos_comuns (v995) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-sorriu-01",
+      "frase": "Ela sorriu ao terminar o capítulo.",
+      "alvos": [
+        {
+          "texto": "sorriu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "sorriu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-chorou-01",
+      "frase": "O personagem chorou no final.",
+      "alvos": [
+        {
+          "texto": "chorou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "chorou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-tremeu-01",
+      "frase": "O escritor tremeu ao ler a crítica.",
+      "alvos": [
+        {
+          "texto": "tremeu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "tremeu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-cronica-01",
+      "frase": "A crônica é um gênero híbrido.",
+      "alvos": [
+        {
+          "texto": "crônica",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "crônica em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-ensaio-01",
+      "frase": "O ensaio argumenta com clareza.",
+      "alvos": [
+        {
+          "texto": "ensaio",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "ensaio em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-memoria-01",
+      "frase": "A memória é matéria literária.",
+      "alvos": [
+        {
+          "texto": "memória",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "memória em DEFINICOES → Noun."
         }
       ]
     }
