@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1007",
+  "versao": "2026-06-28-v1008",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7681,6 +7681,48 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "silêncio em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-culta-01",
+      "frase": "A linguagem é culta.",
+      "alvos": [
+        {
+          "texto": "culta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "culta em adjetivos_comuns (v1007) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-erudito-01",
+      "frase": "O texto é erudito.",
+      "alvos": [
+        {
+          "texto": "erudito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "erudito em adjetivos_comuns (v1007) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-mesma-01",
+      "frase": "Ele nunca repetiu a mesma palavra.",
+      "alvos": [
+        {
+          "texto": "mesma",
+          "classe_escolar": "pronome indefinido",
+          "classe_tecnica": "PRON",
+          "funcao": "adjunto adnominal pronominal",
+          "certeza": "alta",
+          "comentario": "mesma em PRONOMES_INDF/DEM → Pronoun (+ Noun por bigrama Det→Noun)."
         }
       ]
     }
