@@ -1008,6 +1008,45 @@
 
   // ── MÉTRICAS: ECONOMIA ────────────────────────────────────────────────────
 
+
+  // ── A-01: CONFUSÕES GRAMATICAIS (inspirado em LanguageTool PT-BR) ─────────
+  const CONFUSOES_GRAMATICAIS = [
+    [/\bao invés de\b/gi,
+     "«ao invés de»",
+     "«Ao invés de» indica contrariedade (ao invés de rir, chorou). Para substituição, use «em vez de»."],
+    [/\ba n[ií]vel de\b/gi,
+     "«a nível de»",
+     "Locução burocrática. Prefira «em termos de», «no campo de» ou reestruture a frase."],
+    [/\bem função de\b/gi,
+     "«em função de»",
+     "Construção burocrática. Prefira «porque», «por causa de», «devido a», «em razão de»."],
+    [/\bface [aà]\b/gi,
+     "«face a»",
+     "Anglicismo burocrático. Prefira «diante de», «perante», «em relação a»."],
+    [/\bem se tratando de\b/gi,
+     "«em se tratando de»",
+     "Construção vaga. Prefira «quanto a», «no caso de», «em relação a», «tratando-se de»."],
+    [/\btendo em vista\b/gi,
+     "«tendo em vista»",
+     "Construção burocrática. Prefira «considerando», «visto que», «dado que», «uma vez que»."],
+    [/\bhaviam\s+(?:muitas?|poucas?|algumas?|vários?|várias?|certas?|certos?|tantas?|tantos?|inúmeras?|diversos?|diversas?|bastante)\b/gi,
+     "«haviam» existencial",
+     "«Haver» no sentido de «existir» é impessoal: use «havia», não «haviam». Ex.: «havia muitas pessoas»."],
+    [/\ba partir daí[,\s]/gi,
+     "«a partir daí»",
+     "Locução desgastada na prosa literária. Prefira «então», «depois disso», «a partir desse momento»."],
+  ];
+
+  function analisarConfusoes(texto) {
+    const encontradas = [];
+    CONFUSOES_GRAMATICAIS.forEach(([padrao, rotulo, sugestao]) => {
+      const hits = [...texto.matchAll(padrao)];
+      if (hits.length > 0)
+        encontradas.push({ rotulo, sugestao, ocorrencias: hits.length, exemplos: hits.slice(0, 2).map(m => m[0]) });
+    });
+    return { ocorrencias: encontradas.length, lista: encontradas };
+  }
+
   function analisarEconomia(texto, frases, totalPalavras, contexto = {}) {
     const palavras = tokenizarPalavras(texto);
     const lower = texto.toLowerCase();
@@ -1294,6 +1333,7 @@
       estrutura: analisarEstrutura(texto, frases, totalPalavras),
       pov:       analisarPov(frases),
       lexico:    analisarLexico(texto, totalPalavras),
+      confusoes: analisarConfusoes(texto),
       norma:     {
         pontuacao: global.VeredaPunctuation ? global.VeredaPunctuation.analyze(texto) : null,
       },
@@ -1326,6 +1366,14 @@
       alertas.push({ dim: "economia", id: "negacao-dupla", nivel: "moderado",
         msg: `${economia.negacaoDupla.ocorrencias} negação(ões) dupla(s)/indireta(s). Preferir a forma afirmativa direta.`,
         acao: `Prefira a forma afirmativa direta: "não é impossível" → "é possível".` });
+
+    if (resultado.confusoes?.ocorrencias > 0)
+      resultado.confusoes.lista.forEach(c => {
+        alertas.push({ dim: "confusoes", id: `confusao-${c.rotulo.replace(/[^a-z]/gi,"-").toLowerCase()}`,
+          nivel: "moderado",
+          msg: `${c.ocorrencias}× ${c.rotulo} — ${c.sugestao}`,
+          acao: `Exemplo encontrado: "${c.exemplos[0]}".` });
+      });
 
     if (clareza.comprimentoMedio > 30)
       alertas.push({ dim: "clareza", id: "comprimento-frase", nivel: clareza.comprimentoMedio > 40 ? "alto" : "moderado",
