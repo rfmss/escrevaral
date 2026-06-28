@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v948",
+  "versao": "2026-06-28-v957",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -737,6 +737,62 @@
           "funcao": "adjunto adverbial de modo",
           "certeza": "provavel",
           "comentario": "Pronome indefinido certa apos verbo nao-copula acertou → adverbio (R11)."
+        }
+      ]
+    },
+    {
+      "id": "r1b-versos-noun-01",
+      "frase": "O poeta criou versos belos.",
+      "alvos": [
+        {
+          "texto": "versos",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "objeto direto",
+          "certeza": "alta",
+          "comentario": "Plural literário sem entrada no léxico; R1b: após verbo transitivo criou → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r1b-poemas-noun-01",
+      "frase": "Ela leu poemas difíceis.",
+      "alvos": [
+        {
+          "texto": "poemas",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "objeto direto",
+          "certeza": "alta",
+          "comentario": "R1b: após verbo transitivo leu, palavra sem tag → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r1b-personagens-noun-01",
+      "frase": "A escritora criou personagens vivos.",
+      "alvos": [
+        {
+          "texto": "personagens",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "objeto direto",
+          "certeza": "alta",
+          "comentario": "R1b: personagens sem tag no léxico; após criou (verbo transitivo) → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r1b-leitores-noun-01",
+      "frase": "Os leitores amam histórias longas.",
+      "alvos": [
+        {
+          "texto": "leitores",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "sujeito",
+          "certeza": "alta",
+          "comentario": "R1b + R2: após artigo Os → contexto nominal, Noun."
         }
       ]
     }
