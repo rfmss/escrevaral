@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1006",
+  "versao": "2026-06-28-v1007",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7513,6 +7513,174 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "conciso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-sarcastica-01",
+      "frase": "A voz é sarcástica.",
+      "alvos": [
+        {
+          "texto": "sarcástica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "sarcástica em adjetivos_comuns (v1006) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-cinico-01",
+      "frase": "O narrador é cínico.",
+      "alvos": [
+        {
+          "texto": "cínico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "cínico em adjetivos_comuns (v1006) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-sintetico-01",
+      "frase": "O texto é sintético.",
+      "alvos": [
+        {
+          "texto": "sintético",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "sintético em adjetivos_comuns (v1006) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-coerente-01",
+      "frase": "O argumento é coerente.",
+      "alvos": [
+        {
+          "texto": "coerente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "coerente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-coeso-01",
+      "frase": "O raciocínio é coeso.",
+      "alvos": [
+        {
+          "texto": "coeso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "coeso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-articulado-01",
+      "frase": "O texto é articulado.",
+      "alvos": [
+        {
+          "texto": "articulado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "articulado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-terminou-01",
+      "frase": "O romance terminou em aberto.",
+      "alvos": [
+        {
+          "texto": "terminou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "terminou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-concluiu-01",
+      "frase": "A história concluiu de forma ambígua.",
+      "alvos": [
+        {
+          "texto": "concluiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "concluiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-encerrou-01",
+      "frase": "O conto encerrou sem resolução.",
+      "alvos": [
+        {
+          "texto": "encerrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "encerrou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-coloquial-01",
+      "frase": "A prosa é coloquial.",
+      "alvos": [
+        {
+          "texto": "coloquial",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "coloquial em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-formal-01",
+      "frase": "O texto é formal.",
+      "alvos": [
+        {
+          "texto": "formal",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "formal em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-silencio-01",
+      "frase": "O silêncio tem peso narrativo.",
+      "alvos": [
+        {
+          "texto": "silêncio",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "silêncio em DEFINICOES → Noun."
         }
       ]
     }
