@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1019",
+  "versao": "2026-06-28-v1022",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8916,6 +8916,86 @@
       "alvo": "cronotopo",
       "esperado": [
         "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-sintetiza-02",
+      "frase": "O ensaio sintetiza as principais correntes da crítica literária brasileira do século XX.",
+      "alvo": "sintetiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-corrobora-02",
+      "frase": "A análise do paratexto corrobora a hipótese de que a autora revisou o romance após 1980.",
+      "alvo": "corrobora",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-ambivalente-02",
+      "frase": "O sentimento ambivalente perante a morte estruturava toda a lírica do poeta modernista.",
+      "alvo": "ambivalente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-contraditório-02",
+      "frase": "O discurso contraditório do narrador alertava o leitor atento para sua não-confiabilidade.",
+      "alvo": "contraditório",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-plausível-02",
+      "frase": "A hipótese mais plausível sobre o sumiço era também a mais difícil de aceitar.",
+      "alvo": "plausível",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-subtexto-02",
+      "frase": "O subtexto político do romance ficava claro apenas em uma segunda leitura cuidadosa.",
+      "alvo": "subtexto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adv-deliberadamente-02",
+      "frase": "A autora deliberadamente escolheu não nomear o país onde a ação se passa.",
+      "alvo": "deliberadamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-paulatinamente-02",
+      "frase": "O leitor paulatinamente percebe que a narradora está reconstruindo o passado de memória.",
+      "alvo": "paulatinamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adj-colossal-02",
+      "frase": "O desafio colossal de recriar a língua oral sem perder a legibilidade definia o projeto da autora.",
+      "alvo": "colossal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-ínfimo-02",
+      "frase": "O detalhe ínfimo que o narrador escolhe descrever revela mais do que qualquer discurso.",
+      "alvo": "ínfimo",
+      "esperado": [
+        "Adjective"
       ]
     }
   ]
