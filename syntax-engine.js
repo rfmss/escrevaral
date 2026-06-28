@@ -213,6 +213,13 @@
     // outros
     "parecer", "parece", "pareceu", "parecia", "continuar", "continua", "continuava",
     "permanecer", "permanece", "permanecia", "tornar", "tornou", "tornava",
+    // sentir(-se), achar(-se), mostrar(-se), revelar(-se) como semi-cópulas
+    "sentiu", "sente", "sentia", "sentira", "sentiria", "sentir",
+    "achou", "acha", "achava", "achara", "achar",
+    "mostrou", "mostra", "mostrava", "mostrara","mostrar",
+    "revelou", "revela", "revelava", "revelara","revelar",
+    "julgou", "julga", "julgava", "julgar",
+    "considerou", "considera", "considerava","considerar",
   ]);
   const _PARTICIPIOS_IRR_CTX = new Set([
     "aberto", "aberta", "abertos", "abertas",

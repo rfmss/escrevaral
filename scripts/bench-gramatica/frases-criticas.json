@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v969",
+  "versao": "2026-06-28-v970",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2165,6 +2165,174 @@
           "funcao": "numeral ordinal como adjunto adnominal",
           "certeza": "alta",
           "comentario": "primeiras em NUM_ORDINAIS → Adjective (+ Numeral)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-escrito-passiva-01",
+      "frase": "O livro foi escrito em três anos.",
+      "alvos": [
+        {
+          "texto": "escrito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva",
+          "certeza": "alta",
+          "comentario": "escrito (participio passado) após foi → Adjective por R7."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-contada-passiva-01",
+      "frase": "A história foi contada no passado.",
+      "alvos": [
+        {
+          "texto": "contada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva",
+          "certeza": "alta",
+          "comentario": "contada após foi → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-perdido-passiva-01",
+      "frase": "O manuscrito foi perdido após a guerra.",
+      "alvos": [
+        {
+          "texto": "perdido",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva",
+          "certeza": "alta",
+          "comentario": "perdido após foi → Adjective por R7."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-afirmou-01",
+      "frase": "A narradora afirmou que estava cansada.",
+      "alvos": [
+        {
+          "texto": "afirmou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de comunicação",
+          "certeza": "alta",
+          "comentario": "afirmou em VERBOS_IRR (afirmar) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-respondeu-01",
+      "frase": "O personagem respondeu com silêncio.",
+      "alvos": [
+        {
+          "texto": "respondeu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de comunicação",
+          "certeza": "alta",
+          "comentario": "respondeu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-confessou-01",
+      "frase": "Ela confessou não gostar de epílogos.",
+      "alvos": [
+        {
+          "texto": "confessou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de comunicação",
+          "certeza": "alta",
+          "comentario": "confessou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-abandonado-01",
+      "frase": "Ele se sentiu abandonado pelo editor.",
+      "alvos": [
+        {
+          "texto": "abandonado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (semi-cópula sentir)",
+          "certeza": "alta",
+          "comentario": "sentiu adicionado a _COPULAS_ADJ_CTX em v970 → abandonado → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-carregado-01",
+      "frase": "O texto está carregado de metáforas.",
+      "alvos": [
+        {
+          "texto": "carregado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "carregado após está (copula) → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-sobre-01",
+      "frase": "A crítica falou sobre o estilo do livro.",
+      "alvos": [
+        {
+          "texto": "sobre",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de assunto/tema",
+          "certeza": "alta",
+          "comentario": "sobre em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-para-01",
+      "frase": "Ela escreveu um bilhete para o leitor.",
+      "alvos": [
+        {
+          "texto": "para",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de destinatário",
+          "certeza": "alta",
+          "comentario": "para em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-reescreveu-01",
+      "frase": "O autor reescreveu o final três vezes.",
+      "alvos": [
+        {
+          "texto": "reescreveu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "reescreveu detectado por sufixo -eu → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-releu-01",
+      "frase": "Ela releu o capítulo antes de publicar.",
+      "alvos": [
+        {
+          "texto": "releu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "releu em VERBOS_IRR (ler) → Verb."
         }
       ]
     }
