@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v989",
+  "versao": "2026-06-28-v990",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5049,6 +5049,188 @@
           "funcao": "adjunto adverbial de modalidade epistêmica",
           "certeza": "alta",
           "comentario": "provavelmente em ADV_MODO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-era-rel-01",
+      "frase": "O personagem que era rico perdeu tudo.",
+      "alvos": [
+        {
+          "texto": "era",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de ligação em oração relativa",
+          "certeza": "alta",
+          "comentario": "era em VERBOS_AUX/COPULA → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-venceu-rel-01",
+      "frase": "A escritora cujo livro venceu o prêmio.",
+      "alvos": [
+        {
+          "texto": "venceu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal em oração relativa",
+          "certeza": "alta",
+          "comentario": "venceu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-escrito-pass-01",
+      "frase": "O romance foi escrito em três meses.",
+      "alvos": [
+        {
+          "texto": "escrito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva analítica",
+          "certeza": "alta",
+          "comentario": "escrito (particípio) após foi → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-contada-pass-01",
+      "frase": "A história foi contada em primeira pessoa.",
+      "alvos": [
+        {
+          "texto": "contada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva analítica",
+          "certeza": "alta",
+          "comentario": "contada (particípio) após foi → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-absoluto-01",
+      "frase": "O silêncio era absoluto.",
+      "alvos": [
+        {
+          "texto": "absoluto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "absoluto em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-insuportavel-01",
+      "frase": "A tensão ficou insuportável.",
+      "alvos": [
+        {
+          "texto": "insuportável",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "insuportável em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-opressivo-01",
+      "frase": "O clima era opressivo.",
+      "alvos": [
+        {
+          "texto": "opressivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "opressivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-narracao-01",
+      "frase": "O ponto de vista define a narração.",
+      "alvos": [
+        {
+          "texto": "narração",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do objeto direto",
+          "certeza": "alta",
+          "comentario": "narração em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-arco-01",
+      "frase": "O arco do personagem é essencial.",
+      "alvos": [
+        {
+          "texto": "arco",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "arco em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-gancho-01",
+      "frase": "O gancho prende o leitor.",
+      "alvos": [
+        {
+          "texto": "gancho",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "gancho em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escrever-inf-01",
+      "frase": "Escrever é um ato de coragem.",
+      "alvos": [
+        {
+          "texto": "escrever",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo no infinitivo (sujeito oracional)",
+          "certeza": "alta",
+          "comentario": "escrever em VERBOS_INF → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-ler-inf-01",
+      "frase": "Ler transforma o leitor.",
+      "alvos": [
+        {
+          "texto": "ler",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo no infinitivo (sujeito oracional)",
+          "certeza": "alta",
+          "comentario": "ler em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-revelador-01",
+      "frase": "O texto é revelador.",
+      "alvos": [
+        {
+          "texto": "revelador",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "revelador em adjetivos_comuns → Adjective."
         }
       ]
     }
