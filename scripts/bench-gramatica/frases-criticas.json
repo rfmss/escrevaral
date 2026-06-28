@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v973",
+  "versao": "2026-06-28-v974",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2837,6 +2837,48 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "vazio adicionado a adjetivos_comuns em v973 → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-interj-ora-01",
+      "frase": "Ora, ela sabia da resposta o tempo todo.",
+      "alvos": [
+        {
+          "texto": "ora",
+          "classe_escolar": "interjeição",
+          "classe_tecnica": "INTERJ",
+          "funcao": "marcador de discurso inicial",
+          "certeza": "alta",
+          "comentario": "ora adicionado a INTERJEICOES em v974 — marcador de discurso inequívoco."
+        }
+      ]
+    },
+    {
+      "id": "r-interj-pronto-01",
+      "frase": "Pronto, o manuscrito está salvo.",
+      "alvos": [
+        {
+          "texto": "pronto",
+          "classe_escolar": "interjeição",
+          "classe_tecnica": "INTERJ",
+          "funcao": "marcador conclusivo de discurso",
+          "certeza": "alta",
+          "comentario": "pronto em INTERJEICOES → Interjection."
+        }
+      ]
+    },
+    {
+      "id": "r-interj-eis-01",
+      "frase": "Eis o texto que ela tanto esperava.",
+      "alvos": [
+        {
+          "texto": "eis",
+          "classe_escolar": "interjeição",
+          "classe_tecnica": "INTERJ",
+          "funcao": "marcador apresentativo",
+          "certeza": "alta",
+          "comentario": "eis em INTERJEICOES → Interjection."
         }
       ]
     }

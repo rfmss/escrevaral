@@ -162,6 +162,8 @@
     "oba","ufa","xi","vixe","epa","ué","opa","poxa","bah","hem","hein",
     "caramba","eita","eta","arre","ena","uai","credo","ave",
     "alô","tchau","psiu","oxalá",
+    // marcadores de discurso sem ambiguidade lexical — Cunha&Cintra cap.16
+    "ora","pronto","eis",
   ]);
 
   // Ordinais canônicos sem ambiguidade de substantivo (Cunha&Cintra cap.12)
