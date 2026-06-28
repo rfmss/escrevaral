@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1025",
+  "versao": "2026-06-28-v1031",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -9716,6 +9716,142 @@
       "alvo": "polifônico",
       "esperado": [
         "Adjective"
+      ]
+    },
+    {
+      "id": "r-conf-por-fim-01",
+      "frase": "Por fim, pode-se concluir que a obra marcou definitivamente a literatura brasileira do século.",
+      "alvo": "Por",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conf-em-primeiro-01",
+      "frase": "Em primeiro lugar, é preciso considerar o contexto histórico em que a obra foi produzida.",
+      "alvo": "primeiro",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-conf-diante-01",
+      "frase": "Diante disso, fica evidente que a narrativa dialoga com a tradição do romance realista nacional.",
+      "alvo": "Diante",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conf-de-alguma-01",
+      "frase": "De alguma forma, o narrador consegue transmitir a angústia da personagem sem nomeá-la.",
+      "alvo": "alguma",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-adv-absolutamente-01",
+      "frase": "A prosa absolutamente despida de ornamentos revelava uma escolha consciente de estilo austero.",
+      "alvo": "absolutamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-inteiramente-01",
+      "frase": "O romance era inteiramente narrado em primeira pessoa, sem qualquer distância do protagonista.",
+      "alvo": "inteiramente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-amplamente-01",
+      "frase": "O livro foi amplamente reconhecido pela crítica internacional como uma obra indispensável.",
+      "alvo": "amplamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-parcialmente-01",
+      "frase": "A crítica apenas parcialmente compreendeu o alcance político da narrativa no momento da publicação.",
+      "alvo": "parcialmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-verb-identifica-01",
+      "frase": "A crítica identifica na obra três fases distintas que correspondem às décadas de produção da autora.",
+      "alvo": "identifica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-distingue-01",
+      "frase": "O narrador distingue com precisão cirúrgica as vozes que compõem o coro polifônico do romance.",
+      "alvo": "distingue",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-revela-01",
+      "frase": "A análise do manuscrito revela uma versão anterior muito mais longa e estruturalmente diferente.",
+      "alvo": "revela",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-demonstra-01",
+      "frase": "A trajetória da autora demonstra como a experiência vivida alimenta a imaginação literária.",
+      "alvo": "demonstra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-impacto-01",
+      "frase": "O impacto da obra se fez sentir muito além do círculo literário para o qual foi inicialmente escrita.",
+      "alvo": "impacto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-repercussão-01",
+      "frase": "A repercussão do romance ultrapassou as fronteiras do mercado editorial e chegou às universidades.",
+      "alvo": "repercussão",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-legado-01",
+      "frase": "O legado da escritora vai muito além das obras publicadas e inclui sua influência sobre os estudantes.",
+      "alvo": "legado",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-ruptura-01",
+      "frase": "A ruptura com o realismo psicológico foi a aposta mais ousada de toda a obra publicada pela autora.",
+      "alvo": "ruptura",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-transgressão-01",
+      "frase": "A transgressão formal do romance não era gratuita; ela nascia da necessidade de dizer o indizível.",
+      "alvo": "transgressão",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
