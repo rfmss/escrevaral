@@ -467,14 +467,18 @@
           if (/(?:ante|ente)$/.test(_na) && _na.length > 6) tags.push("Adjective");
           if (/(?:udo|uda|udos|udas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ento|enta)$/.test(_na) && _na.length > 6) tags.push("Adjective");
-          if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
+          // "-ivo/-iva" são adjetivos (cognitivo/afetivo) mas "arquivo" é substantivo comum
+          const _SUBST_EXC_IVO = new Set(["arquivo","arquivos"]);
+          if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5 && !_SUBST_EXC_IVO.has(_na)) tags.push("Adjective");
           // P0.6: clitico hifenizado → base verbal + clitico
           const _cliSet = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
           const _clParts = norm.split("-");
           if (_clParts.length >= 2 && _clParts.slice(1).every(p => _cliSet.has(p))) {
             tags.push("Verb"); // base + clítico = verbo
           } else if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
-          else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
+          // infinitivos terminam em -ar/-er/-ir; "-or" não é desinência verbal → excluído para evitar
+          // que "computador", "monitor", "editor" sejam classificados como Verb
+          else if (/(?:ar|er|ir)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
           // P0.5: flexões acentuadas — usar _na (sem acento) para reconhecer -arão/-erão/-irão etc
           else if (/(?:arao|erao|irao|avamos|iamos|ariamos|eriamos|iriamos|assemos|essemos|issemos|aramos|eramos|iramos|ado|ada|ados|adas|ido|ida|idos|idas)$/.test(_na) && _na.length > 4) {
             // Particípios: verificar se não é substantivo
