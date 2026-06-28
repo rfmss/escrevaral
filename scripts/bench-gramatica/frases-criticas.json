@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1016",
+  "versao": "2026-06-28-v1017",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8380,6 +8380,230 @@
       "alvo": "pressupõe",
       "esperado": [
         "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-implacável-01",
+      "frase": "A lógica implacável da narrativa não deixava espaço para o acaso ou para a misericórdia.",
+      "alvo": "implacável",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inexorável-01",
+      "frase": "O destino inexorável das personagens estava inscrito desde a primeira linha do romance.",
+      "alvo": "inexorável",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-magistral-02",
+      "frase": "A técnica magistral da autora tornava cada cena um exercício de precisão e contenção.",
+      "alvo": "magistral",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-lancinante-01",
+      "frase": "A dor lancinante do luto atravessava cada parágrafo sem nunca se tornar piegas.",
+      "alvo": "lancinante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dilacerante-01",
+      "frase": "O fim dilacerante do conto deixava o leitor sem palavras por vários minutos.",
+      "alvo": "dilacerante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-incontornável-01",
+      "frase": "A contradição incontornável no caráter do personagem tornava-o humano e crível.",
+      "alvo": "incontornável",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-insolúvel-01",
+      "frase": "O enigma insolúvel no centro da trama mantinha o leitor em suspense constante.",
+      "alvo": "insolúvel",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-desconcertante-01",
+      "frase": "O final desconcertante do romance recusava qualquer resolução fácil ou confortável.",
+      "alvo": "desconcertante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-circunscreve-01",
+      "frase": "O ensaio circunscreve o problema ao contexto da modernidade literária brasileira.",
+      "alvo": "circunscreve",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-tangencia-01",
+      "frase": "O texto tangencia o tema sem nunca nomeá-lo diretamente, o que intensifica o efeito.",
+      "alvo": "tangencia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-suspende-01",
+      "frase": "A narradora suspende o tempo narrativo para descrever o rosto da personagem.",
+      "alvo": "suspende",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-interrompe-01",
+      "frase": "O monólogo interior interrompe a ação e mergulha o leitor na consciência do herói.",
+      "alvo": "interrompe",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-demarca-01",
+      "frase": "O uso do itálico demarca as vozes internas das falas pronunciadas em voz alta.",
+      "alvo": "demarca",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-abrevia-01",
+      "frase": "A elipse abrevia a cena e deixa a imaginação do leitor completar o que aconteceu.",
+      "alvo": "abrevia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-flerta-01",
+      "frase": "A narrativa flerta com o fantástico sem jamais abandonar o realismo do cotidiano.",
+      "alvo": "flerta",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-pulsa-01",
+      "frase": "Uma melancolia surda pulsa sob cada linha do romance sem nunca explodir.",
+      "alvo": "pulsa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-ameniza-01",
+      "frase": "O humor ameniza a tragédia e impede que o texto afunde no sentimentalismo fácil.",
+      "alvo": "ameniza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-verossimilhança-01",
+      "frase": "A verossimilhança da cena dependia de detalhes físicos precisos e inesperados.",
+      "alvo": "verossimilhança",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-diegese-01",
+      "frase": "A diegese do romance inclui eventos narrados que nunca chegam a ser mostrados.",
+      "alvo": "diegese",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-focalização-01",
+      "frase": "A focalização interna aproxima o leitor da experiência subjetiva da protagonista.",
+      "alvo": "focalização",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-anacronismo-01",
+      "frase": "O anacronismo intencional criava um efeito de estranhamento produtivo na leitura.",
+      "alvo": "anacronismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-conj-embora-01",
+      "frase": "O narrador mantinha o tom sereno embora os eventos descritos fossem perturbadores.",
+      "alvo": "embora",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-ainda que-01",
+      "frase": "A autora escolheu o silêncio, ainda que tivesse palavras suficientes para responder.",
+      "alvo": "ainda",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-outrora-01",
+      "frase": "O lugar que outrora fora sua casa agora parecia pertencer a outra pessoa completamente.",
+      "alvo": "outrora",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-doravante-01",
+      "frase": "Doravante, a narradora não se permitiria mais confundir silêncio com consentimento.",
+      "alvo": "Doravante",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-det-nenhum-01",
+      "frase": "Nenhum personagem do romance saía ileso do confronto com seus próprios medos.",
+      "alvo": "Nenhum",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-det-qualquer-01",
+      "frase": "Qualquer leitura superficial perderia os múltiplos sentidos escondidos na trama.",
+      "alvo": "Qualquer",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-det-certo-01",
+      "frase": "Certo personagem sem nome aparecia em três contos diferentes do mesmo livro.",
+      "alvo": "Certo",
+      "esperado": [
+        "Determiner"
       ]
     }
   ]
