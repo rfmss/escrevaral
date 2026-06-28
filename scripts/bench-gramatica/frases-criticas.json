@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v987",
+  "versao": "2026-06-28-v988",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4713,6 +4713,160 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "inconclusivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-narra-01",
+      "frase": "A autora narra a história em primeira pessoa.",
+      "alvos": [
+        {
+          "texto": "narra",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "narra em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-reflete-01",
+      "frase": "O personagem reflete sobre o passado.",
+      "alvos": [
+        {
+          "texto": "reflete",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "reflete em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-explora-01",
+      "frase": "O romance explora temas universais.",
+      "alvos": [
+        {
+          "texto": "explora",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "explora em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-questiona-01",
+      "frase": "O autor questiona a realidade.",
+      "alvos": [
+        {
+          "texto": "questiona",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "questiona em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-elaborada-01",
+      "frase": "A trama é elaborada.",
+      "alvos": [
+        {
+          "texto": "elaborada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "elaborada em _ADJ_IDO → Verb + Adjective (particípio adjetivado)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-intrincado-01",
+      "frase": "O enredo é intrincado.",
+      "alvos": [
+        {
+          "texto": "intrincado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "intrincado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-entremeada-01",
+      "frase": "A narrativa é entremeada de metáforas.",
+      "alvos": [
+        {
+          "texto": "entremeada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "entremeada em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-leitura-01",
+      "frase": "A leitura do livro demorou um mês.",
+      "alvos": [
+        {
+          "texto": "leitura",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "leitura em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-interpretacao-01",
+      "frase": "A interpretação do texto é pessoal.",
+      "alvos": [
+        {
+          "texto": "interpretação",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "interpretação em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-recepcao-01",
+      "frase": "A recepção da obra foi positiva.",
+      "alvos": [
+        {
+          "texto": "recepção",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "recepção em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-labirintica-01",
+      "frase": "O texto tem uma estrutura labiríntica.",
+      "alvos": [
+        {
+          "texto": "labiríntica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "labiríntica em adjetivos_comuns (v988) → Adjective."
         }
       ]
     }
