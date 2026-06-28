@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v994",
+  "versao": "2026-06-28-v995",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5777,6 +5777,132 @@
           "funcao": "adjunto adverbial de modo",
           "certeza": "alta",
           "comentario": "bem em ADV_MODO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-evoca-01",
+      "frase": "O texto evoca memórias da infância.",
+      "alvos": [
+        {
+          "texto": "evoca",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "evoca em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-esmerada-01",
+      "frase": "A prosa é esmerada e cuidadosa.",
+      "alvos": [
+        {
+          "texto": "esmerada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "esmerada em _ADJ_IDO → Verb + Adjective (particípio adjetivado)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-refinado-01",
+      "frase": "O texto é refinado e elegante.",
+      "alvos": [
+        {
+          "texto": "refinado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "refinado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-lapidado-01",
+      "frase": "O estilo é lapidado e preciso.",
+      "alvos": [
+        {
+          "texto": "lapidado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "lapidado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-pensou-01",
+      "frase": "O personagem pensou em desistir.",
+      "alvos": [
+        {
+          "texto": "pensou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "pensou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-hesitou-01",
+      "frase": "Ela hesitou antes de responder.",
+      "alvos": [
+        {
+          "texto": "hesitou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "hesitou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-diagramacao-01",
+      "frase": "A diagramação do livro é impecável.",
+      "alvos": [
+        {
+          "texto": "diagramação",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "diagramação em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-tipografia-01",
+      "frase": "A tipografia escolhida é elegante.",
+      "alvos": [
+        {
+          "texto": "tipografia",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "tipografia em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-kafkiano-01",
+      "frase": "O cenário é kafkiano e labiríntico.",
+      "alvos": [
+        {
+          "texto": "kafkiano",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "kafkiano em adjetivos_comuns (v988) → Adjective."
         }
       ]
     }
