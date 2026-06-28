@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v985",
+  "versao": "2026-06-28-v986",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4489,6 +4489,118 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "fragmentada em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-comico-01",
+      "frase": "O texto tem um tom cômico.",
+      "alvos": [
+        {
+          "texto": "cômico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "cômico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ironica-01",
+      "frase": "A voz é irónica.",
+      "alvos": [
+        {
+          "texto": "irónica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "irónica em adjetivos_comuns (strip-diac de irônico/irónico) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-etico-01",
+      "frase": "O protagonista vive um dilema ético.",
+      "alvos": [
+        {
+          "texto": "ético",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "ético em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-simbolica-01",
+      "frase": "A linguagem é simbólica.",
+      "alvos": [
+        {
+          "texto": "simbólica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "simbólica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-didatico-01",
+      "frase": "O texto é didático.",
+      "alvos": [
+        {
+          "texto": "didático",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "didático em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-retorico-01",
+      "frase": "O discurso é retórico.",
+      "alvos": [
+        {
+          "texto": "retórico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "retórico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escrevendo-01",
+      "frase": "Ela está escrevendo o terceiro capítulo.",
+      "alvos": [
+        {
+          "texto": "escrevendo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal (gerúndio em perífrase progressiva)",
+          "certeza": "alta",
+          "comentario": "escrevendo em VERBOS_GERUND → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-dormindo-01",
+      "frase": "Ele estava dormindo quando a ideia veio.",
+      "alvos": [
+        {
+          "texto": "dormindo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal (gerúndio em perífrase progressiva)",
+          "certeza": "alta",
+          "comentario": "dormindo em VERBOS_GERUND → Verb."
         }
       ]
     }
