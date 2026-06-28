@@ -1859,7 +1859,7 @@ function changeTemplateStep(direction) {
 }
 
 function getDimLabel(dimId) {
-  const map = { economia:"Economia", clareza:"Clareza", ritmo:"Ritmo", voz:"Voz", estrutura:"Estrutura", pov:"POV", lexico:"Léxico", norma:"Norma", confusoes:"Confusões" };
+  const map = { economia:"Economia", clareza:"Clareza", ritmo:"Ritmo", voz:"Voz", estrutura:"Estrutura", pov:"POV", lexico:"Léxico", norma:"Norma", confusoes:"Confusões", pleonasmos:"Pleonasmos" };
   return map[dimId] || dimId;
 }
 

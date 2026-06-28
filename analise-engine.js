@@ -1071,6 +1071,20 @@
     return { ocorrencias: encontradas.length, lista: encontradas };
   }
 
+  function analisarPleonasmos(texto) {
+    const lower = texto.toLowerCase();
+    const seen = new Set();
+    const encontrados = PLEONASMOS
+      .filter(([p]) => { const k = p.toLowerCase(); return lower.includes(k) && !seen.has(k) && seen.add(k); })
+      .map(([p, corr]) => ({
+        rotulo: `«${p}»`,
+        sugestao: corr ? `Prefira «${corr}».` : "Construção redundante — remova o termo que repete o sentido.",
+        ocorrencias: 1,
+        exemplos: [p]
+      }));
+    return { ocorrencias: encontrados.length, lista: encontrados };
+  }
+
   function analisarEconomia(texto, frases, totalPalavras, contexto = {}) {
     const palavras = tokenizarPalavras(texto);
     const lower = texto.toLowerCase();
@@ -1358,6 +1372,7 @@
       pov:       analisarPov(frases),
       lexico:    analisarLexico(texto, totalPalavras),
       confusoes: analisarConfusoes(texto),
+      pleonasmos: analisarPleonasmos(texto),
       norma:     {
         pontuacao: global.VeredaPunctuation ? global.VeredaPunctuation.analyze(texto) : null,
       },
@@ -1391,6 +1406,13 @@
         msg: `${economia.negacaoDupla.ocorrencias} negação(ões) dupla(s)/indireta(s). Preferir a forma afirmativa direta.`,
         acao: `Prefira a forma afirmativa direta: "não é impossível" → "é possível".` });
 
+    if (resultado.pleonasmos?.ocorrencias > 0)
+      resultado.pleonasmos.lista.forEach(p => {
+        alertas.push({ dim: "pleonasmos", id: `pleonasmo-${p.rotulo.replace(/[^a-z]/gi,"-").toLowerCase()}`,
+          nivel: "moderado",
+          msg: `${p.ocorrencias}× ${p.rotulo} — ${p.sugestao}`,
+          acao: `Exemplo encontrado: "${p.exemplos[0]}".` });
+      });
     if (resultado.confusoes?.ocorrencias > 0)
       resultado.confusoes.lista.forEach(c => {
         alertas.push({ dim: "confusoes", id: `confusao-${c.rotulo.replace(/[^a-z]/gi,"-").toLowerCase()}`,
