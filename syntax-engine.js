@@ -675,6 +675,8 @@
     "a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas",
     "para","por","pelo","pela","pelos","pelas",
     "com","sem","sobre","sob","entre","contra","ante","após","desde","até","perante","durante",
+    "através","atraves","apesar","mediante","conforme","segundo","perante","exceto","salvo","senão","senao",
+    "acerca","acerca de","além de","aquém de",
   ]);
 
   // ── Artigos definidos/indefinidos inequívocos — Bechara §§ 128-130 ─────────

@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v967",
+  "versao": "2026-06-28-v968",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1829,6 +1829,160 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "célebre em adjetivos_comuns (norma-data v967) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-durante-01",
+      "frase": "Ela escreveu durante a noite inteira.",
+      "alvos": [
+        {
+          "texto": "durante",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "introduz adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "durante em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-atraves-01",
+      "frase": "O narrador fala através de sua personagem.",
+      "alvos": [
+        {
+          "texto": "através",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "locução prepositiva",
+          "certeza": "alta",
+          "comentario": "através adicionado a PREPS_OI em v968."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-apesar-01",
+      "frase": "Escreveu apesar das dificuldades do dia.",
+      "alvos": [
+        {
+          "texto": "apesar",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "locução prepositiva concessiva",
+          "certeza": "alta",
+          "comentario": "apesar adicionado a PREPS_OI em v968."
+        }
+      ]
+    },
+    {
+      "id": "r-det-uma-01",
+      "frase": "Uma escritora publicou seu primeiro romance.",
+      "alvos": [
+        {
+          "texto": "uma",
+          "classe_escolar": "artigo",
+          "classe_tecnica": "DET",
+          "funcao": "artigo indefinido",
+          "certeza": "alta",
+          "comentario": "uma em ARTIGOS_DEF → Determiner."
+        }
+      ]
+    },
+    {
+      "id": "r-det-os-01",
+      "frase": "Os manuscritos ficaram na gaveta por anos.",
+      "alvos": [
+        {
+          "texto": "os",
+          "classe_escolar": "artigo",
+          "classe_tecnica": "DET",
+          "funcao": "artigo definido",
+          "certeza": "alta",
+          "comentario": "os em ARTIGOS_DEF → Determiner."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-jovem-01",
+      "frase": "A narradora é jovem e talentosa.",
+      "alvos": [
+        {
+          "texto": "jovem",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "jovem em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-incompleto-01",
+      "frase": "O romance ficou incompleto depois de sua morte.",
+      "alvos": [
+        {
+          "texto": "incompleto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "incompleto em adjetivos_comuns (-eto) → Adjective v968."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-culpada-01",
+      "frase": "A personagem se sentiu culpada após o evento.",
+      "alvos": [
+        {
+          "texto": "culpada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "culpada em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-sendo-01",
+      "frase": "A escritora continua sendo lembrada.",
+      "alvos": [
+        {
+          "texto": "sendo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "gerúndio auxiliar",
+          "certeza": "alta",
+          "comentario": "sendo em VERBOS_IRR (ser gerundio) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-devia-01",
+      "frase": "Ela devia ter publicado antes.",
+      "alvos": [
+        {
+          "texto": "devia",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo modal imperfeito",
+          "certeza": "alta",
+          "comentario": "devia em VERBOS_IRR (dever) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-nunca-01",
+      "frase": "Ele nunca esqueceu o que leu.",
+      "alvos": [
+        {
+          "texto": "nunca",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de negação/tempo",
+          "certeza": "alta",
+          "comentario": "nunca em ADVS_NEGACAO/TEMPO → Adverb."
         }
       ]
     }
