@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v976",
+  "versao": "2026-06-28-v977",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3089,6 +3089,174 @@
           "funcao": "verbo principal de movimento (metafórico)",
           "certeza": "alta",
           "comentario": "recua em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-nao-01",
+      "frase": "Ela não publicou o texto por medo.",
+      "alvos": [
+        {
+          "texto": "não",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de negação",
+          "certeza": "alta",
+          "comentario": "não em ADVS_NEGACAO → Adverb + Negative."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-quase-01",
+      "frase": "O narrador quase revela o segredo.",
+      "alvos": [
+        {
+          "texto": "quase",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de aproximação",
+          "certeza": "alta",
+          "comentario": "quase em ADV_INTENS → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-so-01",
+      "frase": "O texto só aparece no epílogo.",
+      "alvos": [
+        {
+          "texto": "só",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de exclusão",
+          "certeza": "alta",
+          "comentario": "só (com acento) → Adverb via POLISSEMIA."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-e-01",
+      "frase": "Ela escreve poesia e prosa.",
+      "alvos": [
+        {
+          "texto": "e",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa aditiva",
+          "certeza": "alta",
+          "comentario": "e em CONJS_COORD → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-mas-01",
+      "frase": "O narrador mente mas acredita na mentira.",
+      "alvos": [
+        {
+          "texto": "mas",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "mas em CONJS_COORD → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-ou-01",
+      "frase": "Ela escreve ou publica, nunca os dois.",
+      "alvos": [
+        {
+          "texto": "ou",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa alternativa",
+          "certeza": "alta",
+          "comentario": "ou em CONJS_COORD → Conjunction."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-sinopse-01",
+      "frase": "A sinopse resume o enredo principal.",
+      "alvos": [
+        {
+          "texto": "sinopse",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "sinopse em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-prefacio-01",
+      "frase": "O prefácio apresenta o autor ao leitor.",
+      "alvos": [
+        {
+          "texto": "prefácio",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "prefácio em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-epigrafe-01",
+      "frase": "A epígrafe abre o livro com uma citação.",
+      "alvos": [
+        {
+          "texto": "epígrafe",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "epígrafe em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-rancoroso-01",
+      "frase": "O personagem é rancoroso e vingativo.",
+      "alvos": [
+        {
+          "texto": "rancoroso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "rancoroso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-astuta-01",
+      "frase": "A narradora é astuta e perspicaz.",
+      "alvos": [
+        {
+          "texto": "astuta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "astuta adicionada em norma-data.json v977 → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-descreve-01",
+      "frase": "O autor descreve a cena com precisão.",
+      "alvos": [
+        {
+          "texto": "descreve",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "descreve em VERBOS_PRES → Verb."
         }
       ]
     }
