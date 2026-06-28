@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v983",
+  "versao": "2026-06-28-v984",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4181,6 +4181,188 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "metafórica em adjetivos_comuns (v983) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-lirico-01",
+      "frase": "O texto é lírico e denso.",
+      "alvos": [
+        {
+          "texto": "lírico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "lírico em adjetivos_comuns (v984, strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-epica-01",
+      "frase": "A prosa é épica e grandiosa.",
+      "alvos": [
+        {
+          "texto": "épica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "épica em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-tragico-01",
+      "frase": "O personagem é trágico.",
+      "alvos": [
+        {
+          "texto": "trágico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "trágico em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-classica-01",
+      "frase": "A obra é clássica.",
+      "alvos": [
+        {
+          "texto": "clássica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "clássica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-critico-01",
+      "frase": "O romance é crítico e político.",
+      "alvos": [
+        {
+          "texto": "crítico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "crítico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-tipico-01",
+      "frase": "O texto é típico do romantismo.",
+      "alvos": [
+        {
+          "texto": "típico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "típico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-cetico-01",
+      "frase": "O narrador é cético.",
+      "alvos": [
+        {
+          "texto": "cético",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "cético em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-poetica-01",
+      "frase": "A linguagem é poética.",
+      "alvos": [
+        {
+          "texto": "poética",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "poética em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inevitavel-01",
+      "frase": "O desfecho é trágico e inevitável.",
+      "alvos": [
+        {
+          "texto": "inevitável",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inevitável em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-arido-01",
+      "frase": "O cenário é árido.",
+      "alvos": [
+        {
+          "texto": "árido",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "árido em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-lucida-01",
+      "frase": "A narradora é lúcida.",
+      "alvos": [
+        {
+          "texto": "lúcida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "lúcida em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-agil-01",
+      "frase": "O texto é ágil.",
+      "alvos": [
+        {
+          "texto": "ágil",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "ágil em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-brusco-01",
+      "frase": "O desfecho é brúsco.",
+      "alvos": [
+        {
+          "texto": "brúsco",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "brúsco em adjetivos_comuns (v984) → Adjective."
         }
       ]
     }
