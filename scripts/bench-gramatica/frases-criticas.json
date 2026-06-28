@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v992",
+  "versao": "2026-06-28-v993",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5553,6 +5553,62 @@
           "funcao": "verbo principal",
           "certeza": "alta",
           "comentario": "marcou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-conciso-01",
+      "frase": "O texto é conciso e objetivo.",
+      "alvos": [
+        {
+          "texto": "conciso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "conciso em adjetivos_comuns (v992) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-laconica-01",
+      "frase": "A narradora é lacônica.",
+      "alvos": [
+        {
+          "texto": "lacônica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "lacônica em adjetivos_comuns (v992, strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-prolixo-01",
+      "frase": "O romance é prolixo em detalhes.",
+      "alvos": [
+        {
+          "texto": "prolixo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "prolixo em adjetivos_comuns (v992) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-catartico-01",
+      "frase": "O conflito é catártico.",
+      "alvos": [
+        {
+          "texto": "catártico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "catártico em adjetivos_comuns (v991, strip-diac) → Adjective."
         }
       ]
     }
