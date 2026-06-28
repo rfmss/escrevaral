@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v997",
+  "versao": "2026-06-28-v998",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6155,6 +6155,146 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "pseudonímia em DEFINICOES/substantivos_ia → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-autoficcional-01",
+      "frase": "O texto é autoficcional.",
+      "alvos": [
+        {
+          "texto": "autoficcional",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "autoficcional em adjetivos_comuns (v997) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-realistico-01",
+      "frase": "O estilo é realístico.",
+      "alvos": [
+        {
+          "texto": "realístico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "realístico em adjetivos_comuns (v997) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-humanistico-01",
+      "frase": "A obra tem caráter humanístico.",
+      "alvos": [
+        {
+          "texto": "humanístico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "humanístico em adjetivos_comuns (v997) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-refletiu-01",
+      "frase": "O personagem refletiu sobre a morte.",
+      "alvos": [
+        {
+          "texto": "refletiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "refletiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-imaginou-01",
+      "frase": "Ela imaginou um final diferente.",
+      "alvos": [
+        {
+          "texto": "imaginou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "imaginou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-recordou-01",
+      "frase": "Ele recordou a infância com saudade.",
+      "alvos": [
+        {
+          "texto": "recordou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "recordou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-intertextualidade-01",
+      "frase": "A intertextualidade é rica no texto.",
+      "alvos": [
+        {
+          "texto": "intertextualidade",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "intertextualidade em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-dialogismo-01",
+      "frase": "A dialogismo é princípio bakhtiniano.",
+      "alvos": [
+        {
+          "texto": "dialogismo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "dialogismo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-epistolar-01",
+      "frase": "O texto é epistolar.",
+      "alvos": [
+        {
+          "texto": "epistolar",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "epistolar em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-dialogica-01",
+      "frase": "A forma dramática é dialógica.",
+      "alvos": [
+        {
+          "texto": "dialógica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "dialógica em adjetivos_comuns → Adjective."
         }
       ]
     }
