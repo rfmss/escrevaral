@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1004",
+  "versao": "2026-06-28-v1005",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7219,6 +7219,160 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "suspensão sufixo -ão → Noun (R1)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-evoluiu-01",
+      "frase": "O enredo evoluiu de forma inesperada.",
+      "alvos": [
+        {
+          "texto": "evoluiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "evoluiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-amadureceu-01",
+      "frase": "O autor amadureceu o projeto em dez anos.",
+      "alvos": [
+        {
+          "texto": "amadureceu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "amadureceu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-introspectivo-01",
+      "frase": "O personagem é introspectivo.",
+      "alvos": [
+        {
+          "texto": "introspectivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "introspectivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-psicologica-01",
+      "frase": "A narrativa é psicológica.",
+      "alvos": [
+        {
+          "texto": "psicológica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "psicológica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-reflexivo-01",
+      "frase": "O texto é reflexivo.",
+      "alvos": [
+        {
+          "texto": "reflexivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "reflexivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-sempre-01",
+      "frase": "O personagem sempre hesitava.",
+      "alvos": [
+        {
+          "texto": "sempre",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de frequência",
+          "certeza": "alta",
+          "comentario": "sempre em ADV_FREQ → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-raramente-01",
+      "frase": "O autor raramente usava adjetivos.",
+      "alvos": [
+        {
+          "texto": "raramente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de frequência",
+          "certeza": "alta",
+          "comentario": "raramente em ADV_FREQ → Adverb (+ Adjective por falso-positivo, Adverb presente)."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-nunca-01",
+      "frase": "Ele nunca mencionou o nome.",
+      "alvos": [
+        {
+          "texto": "nunca",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de negação/frequência",
+          "certeza": "alta",
+          "comentario": "nunca em ADV_NEG/FREQ → Adverb + Negative."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-ironia-01",
+      "frase": "A ironia é recurso frequente.",
+      "alvos": [
+        {
+          "texto": "ironia",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "ironia em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-humor-01",
+      "frase": "O humor alivia a tensão.",
+      "alvos": [
+        {
+          "texto": "humor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "humor em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-lenta-01",
+      "frase": "O texto tem cadência lenta.",
+      "alvos": [
+        {
+          "texto": "lenta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "lenta em adjetivos_comuns → Adjective."
         }
       ]
     }
