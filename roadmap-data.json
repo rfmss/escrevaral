@@ -9,12 +9,12 @@
   "metricas": {
     "definicoes": 1660,
     "sinonimos": 1350,
-    "bench_casos": 71,
-    "bench_ok": 71,
+    "bench_casos": 100,
+    "bench_ok": 100,
     "golden_total": 91,
     "golden_regressoes": 0,
     "commits_locais": 26,
-    "regras_gramatica": 14
+    "regras_gramatica": 16
   },
   "pilares": [
     {
@@ -99,7 +99,7 @@
       "cor": "#f59e0b",
       "icone": "⚙",
       "descricao": "Regras de desambiguação, bench, função sintática, fallback indeterminado",
-      "progresso": 75
+      "progresso": 90
     },
     {
       "id": "dados",
@@ -265,9 +265,10 @@
       "fase": "novembro",
       "titulo": "Bench 100+ frases, P0=0",
       "descricao": "Corpus gramatical maduro. Zero divergências. Zero erros críticos.",
-      "status": "pendente",
+      "status": "concluido",
       "prioridade": "alta",
-      "estimativa": "L"
+      "estimativa": "L",
+      "nota": "Atingido em v961 (2026-06-28) — 5 meses antes do prazo. 100/100 ok, 16 regras."
     },
     {
       "id": "N-02",
