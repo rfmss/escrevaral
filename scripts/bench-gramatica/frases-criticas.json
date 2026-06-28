@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v993",
+  "versao": "2026-06-28-v994",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5609,6 +5609,174 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "catártico em adjetivos_comuns (v991, strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-defende-01",
+      "frase": "O autor defende uma tese provocadora.",
+      "alvos": [
+        {
+          "texto": "defende",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "defende em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-analisa-01",
+      "frase": "A crítica analisa o texto com rigor.",
+      "alvos": [
+        {
+          "texto": "analisa",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "analisa em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-interpreta-01",
+      "frase": "O leitor interpreta o símbolo.",
+      "alvos": [
+        {
+          "texto": "interpreta",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "interpreta em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-omite-01",
+      "frase": "O narrador omite detalhes essenciais.",
+      "alvos": [
+        {
+          "texto": "omite",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "omite em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-introdutorio-01",
+      "frase": "O prólogo é breve e introdutório.",
+      "alvos": [
+        {
+          "texto": "introdutório",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "introdutório em adjetivos_comuns (v994) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-conclusivo-01",
+      "frase": "O epílogo é conclusivo.",
+      "alvos": [
+        {
+          "texto": "conclusivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "conclusivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-autorreferencial-01",
+      "frase": "O texto é autorreferencial.",
+      "alvos": [
+        {
+          "texto": "autorreferencial",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "autorreferencial em adjetivos_comuns (v994) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-cenario-01",
+      "frase": "O cenário é descrito em detalhes.",
+      "alvos": [
+        {
+          "texto": "cenário",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "cenário em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-atmosfera-01",
+      "frase": "A atmosfera do romance é sombria.",
+      "alvos": [
+        {
+          "texto": "atmosfera",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "atmosfera em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-ouviu-01",
+      "frase": "Ela ouviu passos no corredor escuro.",
+      "alvos": [
+        {
+          "texto": "ouviu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "ouviu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-viu-01",
+      "frase": "O personagem viu a cidade pela janela.",
+      "alvos": [
+        {
+          "texto": "viu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "viu em VERBOS_IRR (ver) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-bem-01",
+      "frase": "O texto é muito bem escrito.",
+      "alvos": [
+        {
+          "texto": "bem",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "bem em ADV_MODO → Adverb."
         }
       ]
     }
