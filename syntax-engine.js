@@ -39,7 +39,7 @@
         _SIGLAS     = new Set(_norma.siglas_pt_br || []);
         _SUBST_IA   = new Set(_norma.substantivos_ia || []);
         _VERBOS_PRES = new Set(_norma.verbos_pres_reg || []);
-        _ADJ_EXT    = new Set(_norma.adjetivos_comuns || []);
+        _ADJ_EXT    = new Set((_norma.adjetivos_comuns || []).map(_stripDiac));
       }
       return true;
     } catch (e) {

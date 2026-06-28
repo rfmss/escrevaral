@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v982",
+  "versao": "2026-06-28-v983",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4111,6 +4111,76 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "longo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-verossimil-01",
+      "frase": "O texto é verossímil e denso.",
+      "alvos": [
+        {
+          "texto": "verossímil",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "verossímil em adjetivos_comuns (v983, fix strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-contraditoria-01",
+      "frase": "A personagem é complexa e contraditória.",
+      "alvos": [
+        {
+          "texto": "contraditória",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (coordenado)",
+          "certeza": "alta",
+          "comentario": "contraditória em adjetivos_comuns (v983) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ambigua-01",
+      "frase": "A personagem é ambígua.",
+      "alvos": [
+        {
+          "texto": "ambígua",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "ambígua em adjetivos_comuns (v983) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ironico-01",
+      "frase": "O narrador é irônico.",
+      "alvos": [
+        {
+          "texto": "irônico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "irônico em adjetivos_comuns (v983) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-metaforica-01",
+      "frase": "A narrativa é metafórica.",
+      "alvos": [
+        {
+          "texto": "metafórica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "metafórica em adjetivos_comuns (v983) → Adjective."
         }
       ]
     }
