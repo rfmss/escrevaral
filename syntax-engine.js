@@ -745,7 +745,7 @@
 
   // ── Advérbios por tipo — Cunha&Cintra cap.14 + syntax-data ────────────────
   const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente"]);
-  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá"]);
+  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá","além","aquém","acima","abaixo","adiante","atrás","defronte","acolá"]);
   const ADV_MODO    = new Set(["assim","bem","mal","melhor","pior","devagar","depressa","rapidamente","lentamente","facilmente","dificilmente","calmamente"]);
   const ADV_NEGACAO = new Set(["não","nem","jamais","nunca","tampouco"]);
   const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive"]);

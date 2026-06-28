@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v963",
+  "versao": "2026-06-28-v965",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1465,6 +1465,202 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "R7a: incluso em _PARTICIPIOS_IRR_CTX; após está → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-que-01",
+      "frase": "O livro que ela escreveu ficou famoso.",
+      "alvos": [
+        {
+          "texto": "que",
+          "classe_escolar": "pronome relativo",
+          "classe_tecnica": "CONJ",
+          "funcao": "pronome relativo / conjunção",
+          "certeza": "alta",
+          "comentario": "que como conector subordinativo — entrada lexical direta."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-lentamente-01",
+      "frase": "Ela escreve lentamente quando está cansada.",
+      "alvos": [
+        {
+          "texto": "lentamente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Sufixo -mente → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-rapidamente-01",
+      "frase": "Ele leu rapidamente o manuscrito inteiro.",
+      "alvos": [
+        {
+          "texto": "rapidamente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Sufixo -mente → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-grave-01",
+      "frase": "Ela tem uma voz grave e serena.",
+      "alvos": [
+        {
+          "texto": "grave",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "grave em _ADJ_FLAT_ADV → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-denso-01",
+      "frase": "O texto ficou denso demais para o leitor.",
+      "alvos": [
+        {
+          "texto": "denso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "denso em _ADJ_EXT; após ficou → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-publicar-01",
+      "frase": "Ela vai publicar o livro em março.",
+      "alvos": [
+        {
+          "texto": "publicar",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal (infinitivo)",
+          "certeza": "alta",
+          "comentario": "infinitivo -ar → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escrever-01",
+      "frase": "Ele pode escrever melhor do que pensa.",
+      "alvos": [
+        {
+          "texto": "escrever",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal (infinitivo)",
+          "certeza": "alta",
+          "comentario": "infinitivo -er → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-causa-01",
+      "frase": "Ela escreveu por causa da solidão.",
+      "alvos": [
+        {
+          "texto": "causa",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo de locução prepositiva",
+          "certeza": "alta",
+          "comentario": "causa em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-primeira-01",
+      "frase": "Ela é a primeira a chegar.",
+      "alvos": [
+        {
+          "texto": "primeira",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "numeral ordinal / adjetivo",
+          "certeza": "alta",
+          "comentario": "primeiro/primeira em NUM_ORDINAIS → Adjective + Numeral."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-parece-01",
+      "frase": "O personagem parece perdido no enredo.",
+      "alvos": [
+        {
+          "texto": "parece",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de ligação",
+          "certeza": "alta",
+          "comentario": "parece em VERBOS_LIGACAO → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-continua-01",
+      "frase": "Ela continua escrevendo apesar de tudo.",
+      "alvos": [
+        {
+          "texto": "continua",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "continua na forma presente → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-alem-01",
+      "frase": "Ela escreve além do que se espera.",
+      "alvos": [
+        {
+          "texto": "além",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de lugar/modo",
+          "certeza": "alta",
+          "comentario": "além adicionado a ADV_LUGAR em v965."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-carioca-01",
+      "frase": "A escritora carioca publicou um romance.",
+      "alvos": [
+        {
+          "texto": "carioca",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal (gentílico)",
+          "certeza": "alta",
+          "comentario": "carioca adicionado a adjetivos_comuns em norma-data.json v965."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-sertaneja-01",
+      "frase": "A música sertaneja é muito famosa.",
+      "alvos": [
+        {
+          "texto": "sertaneja",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal (gentílico)",
+          "certeza": "alta",
+          "comentario": "sertaneja adicionada em norma-data.json v965."
         }
       ]
     }
