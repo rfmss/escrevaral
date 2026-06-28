@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1022",
+  "versao": "2026-06-28-v1024",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8996,6 +8996,294 @@
       "alvo": "ínfimo",
       "esperado": [
         "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-áspero-01",
+      "frase": "A prosa áspera da autora não suavizava nem os momentos de maior delicadeza.",
+      "alvo": "áspera",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-suave-01",
+      "frase": "A transição suave entre os capítulos criava uma sensação de fluxo contínuo de consciência.",
+      "alvo": "suave",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-fluido-01",
+      "frase": "O estilo fluido da narradora contrastava com a rigidez dos diálogos formais da trama.",
+      "alvo": "fluido",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-seco-01",
+      "frase": "O tom seco do narrador recusava qualquer ornamento emocional na descrição da tragédia.",
+      "alvo": "seco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-límpido-01",
+      "frase": "A prosa límpida da autora alcançava a profundidade sem jamais recorrer à obscuridade.",
+      "alvo": "límpida",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-opaco-01",
+      "frase": "O discurso opaco do personagem escondia uma clareza interior que o leitor aos poucos descobria.",
+      "alvo": "opaco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-cru-01",
+      "frase": "O realismo cru das cenas do mercado popular não deixava espaço para romantização.",
+      "alvo": "cru",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-cadenciado-01",
+      "frase": "O ritmo cadenciado da prosa criava uma sensação de inevitabilidade na progressão da trama.",
+      "alvo": "cadenciado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-abrupto-01",
+      "frase": "O fim abrupto do capítulo deixava o leitor suspenso entre dois tempos narrativos opostos.",
+      "alvo": "abrupto",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-prolongado-01",
+      "frase": "O silêncio prolongado entre os personagens funcionava como um diálogo sem palavras.",
+      "alvo": "prolongado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-sombrio-01",
+      "frase": "O cenário sombrio do conto prefigurava o estado interior da protagonista em crise.",
+      "alvo": "sombrio",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-luminoso-01",
+      "frase": "A prosa luminosa da autora transformava até os momentos de sofrimento em beleza literária.",
+      "alvo": "luminosa",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-crepuscular-01",
+      "frase": "O tom crepuscular do romance sugeria um mundo à beira do fim de uma era histórica.",
+      "alvo": "crepuscular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-convida-01",
+      "frase": "O texto convida o leitor a questionar sua própria posição diante da narrativa.",
+      "alvo": "convida",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-desafia-01",
+      "frase": "A obra desafia os limites do gênero policial ao misturar lirismo e investigação.",
+      "alvo": "desafia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-recusa-01",
+      "frase": "A narradora recusa a linearidade e opta pelo fragmento como forma de dizer o indizível.",
+      "alvo": "recusa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-interroga-01",
+      "frase": "O conto interroga a noção de memória confiável ao apresentar três versões do mesmo evento.",
+      "alvo": "interroga",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-encena-01",
+      "frase": "O romance encena a tensão entre oralidade e escrita como tema e como forma ao mesmo tempo.",
+      "alvo": "encena",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-incorpora-01",
+      "frase": "A obra incorpora elementos do cordel sem cair no regionalismo folclórico e decorativo.",
+      "alvo": "incorpora",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-instaura-01",
+      "frase": "A voz da narradora instaura uma distância irônica que protege o texto do sentimentalismo.",
+      "alvo": "instaura",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-mobiliza-01",
+      "frase": "O autor mobiliza referências da tradição oral para construir uma linguagem literária única.",
+      "alvo": "mobiliza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-manuscrito-01",
+      "frase": "O manuscrito original da autora revelava camadas de revisão que o livro publicado apagou.",
+      "alvo": "manuscrito",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-colofão-01",
+      "frase": "O colofão do livro registrava a data exata em que a autora terminou de escrever o romance.",
+      "alvo": "colofão",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-dedicatória-01",
+      "frase": "A dedicatória revelava uma dimensão autobiográfica que a obra em si mantinha velada.",
+      "alvo": "dedicatória",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adv-incessantemente-01",
+      "frase": "A personagem buscava incessantemente uma saída que o texto sistematicamente recusava.",
+      "alvo": "incessantemente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-obliquamente-01",
+      "frase": "A crítica social aparecia obliquamente nas margens da história de amor principal.",
+      "alvo": "obliquamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-sistematicamente-01",
+      "frase": "O narrador sistematicamente omitia datas e lugares para universalizar a experiência.",
+      "alvo": "sistematicamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conj-contanto-01",
+      "frase": "A autora aceitaria qualquer forma de publicação, contanto que o texto não fosse alterado.",
+      "alvo": "contanto",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-posto-que-01",
+      "frase": "O projeto literário era ousado, posto que recusava qualquer concessão ao mercado de massa.",
+      "alvo": "posto",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-prep-aquém-01",
+      "frase": "O conto ficava aquém das expectativas criadas pelo romance anterior da mesma autora.",
+      "alvo": "aquém",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-prep-além-01",
+      "frase": "A obra ia além do gênero e criava uma linguagem que só ela poderia ter inventado.",
+      "alvo": "além",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-det-toda-01",
+      "frase": "Toda a trajetória da personagem culminava nessa única frase do penúltimo capítulo.",
+      "alvo": "Toda",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-det-inúmeros-01",
+      "frase": "Inúmeras vozes compunham o coro narrativo que estruturava o romance polifônico.",
+      "alvo": "Inúmeras",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-polifonia-01",
+      "frase": "A polifonia do romance bakhtiniano permite que nenhuma voz seja definitivamente silenciada.",
+      "alvo": "polifonia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-enredo-02",
+      "frase": "O enredo principal servia de moldura para histórias menores que o enriqueciam e complicavam.",
+      "alvo": "enredo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-epígrafe-01",
+      "frase": "A epígrafe escolhida pela autora antecipava o tema central sem revelá-lo completamente.",
+      "alvo": "epígrafe",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
