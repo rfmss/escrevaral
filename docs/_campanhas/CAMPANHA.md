@@ -6,6 +6,56 @@ Iniciado em: 2026-05-24
 
 ---
 
+## Log de sessão — 2026-06-28 (posicionamento e pilares de copy)
+
+### Analogia canônica de posicionamento
+
+> **O Grammarly está para a língua inglesa assim como o Escrevaral está para a língua portuguesa brasileira.**
+
+Formulação do próprio criador. Não é adaptação de ferramenta inglesa — é a ferramenta nativa de linguagem para quem escreve em português.
+
+---
+
+### Três pilares de copy — validados com Codex
+
+Todos verificáveis pelo usuário. Não são promessas — são fatos auditáveis.
+
+**1. Privacidade por princípio**
+> *"Seu manuscrito nunca sai da sua máquina."*
+
+Grammarly lê tudo que você digita. Copilot também. Para uma escritora com obra inédita, isso não é preferência — é questão de direitos autorais. O Escrevaral é offline por escolha de produto, não por limitação técnica. Esse pilar precisa aparecer em destaque no site e nas redes.
+
+**2. Transparência por design — "gramática artesanal verificável"**
+> *"Não é caixa preta. É artesanato verificável."*
+
+O Escrevaral pode explicar por que sinalizou algo. Uma escritora que entende o raciocínio aprende, não delega. Framing técnico correto: **sistema especialista de linguagem** (não "modelo" — evitar comparação com LLM onde o Escrevaral perde em escala).
+
+**3. Sem agenda corporativa**
+> *"Criador que responde à comunidade, não a investidor."*
+
+LanguageTool tem empresa. Grammarly tem VC. O Escrevaral tem um criador que responde diretamente às escritoras que usam.
+
+---
+
+### Framing técnico acordado
+
+| Usar | Não usar |
+|---|---|
+| sistema especialista de linguagem | modelo curado |
+| gramática artesanal verificável | equivalente a ML |
+| artesanato verificável | caixa preta aberta |
+
+"Modelo curado" convida comparação com LLM e o Escrevaral perde essa comparação em cobertura e escala. O argumento correto é o oposto: não é modelo estatístico, é escolha deliberada de transparência.
+
+---
+
+### LanguageTool como fonte futura (decisão de produto)
+
+Repositório open-source (LGPL 2.1). Regras PT-BR aproveitáveis: ortografia, concordância, pleonasmos.
+Armadilha documentada: cobertura desigual PT-BR vs. PT-PT — importar sem auditar caso a caso gera falso positivo em escrita literária brasileira. Trabalho editorial contínuo, não migração pontual.
+
+---
+
 ## Log de sessão — 2026-05-24
 
 ### O que foi decidido
