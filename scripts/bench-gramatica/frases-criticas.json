@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1024",
+  "versao": "2026-06-28-v1025",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -9284,6 +9284,438 @@
       "alvo": "epígrafe",
       "esperado": [
         "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-informal-01",
+      "frase": "O registro informal do conto marcava a presença de uma voz popular e irreverente.",
+      "alvo": "informal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-solene-01",
+      "frase": "O tom solene do prólogo preparava o leitor para a gravidade do que estava por vir.",
+      "alvo": "solene",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-irônico-01",
+      "frase": "O comentário irônico do narrador desarmava qualquer interpretação sentimental da cena.",
+      "alvo": "irônico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-cáustico-01",
+      "frase": "A crítica cáustica embutida nos diálogos tornava o romance desconfortável para os alvos.",
+      "alvo": "cáustica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-mordaz-01",
+      "frase": "O humor mordaz da escritora não poupava nem os personagens com quem o leitor simpatizava.",
+      "alvo": "mordaz",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-circular-01",
+      "frase": "A estrutura circular do romance devolvia o leitor ao início com um olhar completamente novo.",
+      "alvo": "circular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-linear-01",
+      "frase": "A narrativa linear do conto contrastava com a complexidade psicológica das personagens.",
+      "alvo": "linear",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-não-linear-01",
+      "frase": "A cronologia não linear do romance obrigava o leitor a reconstruir os eventos por conta própria.",
+      "alvo": "linear",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-episódico-01",
+      "frase": "A estrutura episódica do livro permitia que cada capítulo funcionasse como um conto autônomo.",
+      "alvo": "episódica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-labiríntico-01",
+      "frase": "O enredo labiríntico confundia propositalmente o leitor até a última revelação do fim.",
+      "alvo": "labiríntico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-articula-01",
+      "frase": "A narradora articula passado e presente como camadas sobrepostas de uma mesma experiência.",
+      "alvo": "articula",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-integra-01",
+      "frase": "O romance integra elementos do mito indígena à narrativa urbana contemporânea com naturalidade.",
+      "alvo": "integra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-acumula-01",
+      "frase": "O texto acumula detalhes sensoriais até que a cena adquira uma intensidade quase insuportável.",
+      "alvo": "acumula",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-desestabiliza-01",
+      "frase": "A revelação do epílogo desestabiliza toda a leitura feita até aquele ponto do romance.",
+      "alvo": "desestabiliza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-entrecruza-01",
+      "frase": "O narrador entrecruza as vozes de forma que nenhuma delas possa ser separada das outras.",
+      "alvo": "entrecruza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-embaralha-01",
+      "frase": "O texto embaralha os tempos verbais para criar a sensação de memória e esquecimento.",
+      "alvo": "embaralha",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-condensa-01",
+      "frase": "O poema condensa em quatorze versos uma experiência que o romance levaria duzentas páginas.",
+      "alvo": "condensa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-espelha-01",
+      "frase": "A estrutura do conto espelha o estado psicológico da protagonista ao longo de sua crise.",
+      "alvo": "espelha",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-orelha-01",
+      "frase": "A orelha do livro trazia um breve texto crítico que contextualizava a obra para o leitor.",
+      "alvo": "orelha",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-contracapa-01",
+      "frase": "A contracapa resumia o enredo sem revelar o desfecho que diferenciava o livro dos demais.",
+      "alvo": "contracapa",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-prefácio-01",
+      "frase": "O prefácio escrito pela própria autora discutia as escolhas formais que guiaram o projeto.",
+      "alvo": "prefácio",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-posfácio-01",
+      "frase": "O posfácio da tradutora explicava as decisões que tomou diante das ambiguidades do original.",
+      "alvo": "posfácio",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-nota-da-tradutora-01",
+      "frase": "A nota da tradutora transformava a invisibilidade do trabalho de tradução em reflexão crítica.",
+      "alvo": "nota",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adv-inevitavelmente-01",
+      "frase": "A narradora inevitavelmente retornava ao momento da perda, que estruturava toda a narrativa.",
+      "alvo": "inevitavelmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-propositalmente-01",
+      "frase": "O autor propositalmente deixou lacunas que o leitor precisaria preencher com sua imaginação.",
+      "alvo": "propositalmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-paradoxalmente-01",
+      "frase": "O silêncio, paradoxalmente, era o elemento mais barulhento de toda a narrativa do romance.",
+      "alvo": "paradoxalmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-implicitamente-01",
+      "frase": "A crítica ao regime aparecia implicitamente nas metáforas que percorriam toda a obra.",
+      "alvo": "implicitamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conj-na-medida-em-que-01",
+      "frase": "A tensão crescia na medida em que os personagens se aproximavam da verdade proibida.",
+      "alvo": "medida",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-conj-desde-que-01",
+      "frase": "A narradora aceitaria qualquer final, desde que fosse honesto com os personagens que criou.",
+      "alvo": "desde",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-pron-o-que-01",
+      "frase": "O que mais surpreendia na obra era justamente o que o crítico considerava sua maior fraqueza.",
+      "alvo": "que",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-noun-bildungsroman-01",
+      "frase": "O bildungsroman contemporâneo da autora acompanhava uma jovem do interior paulista.",
+      "alvo": "bildungsroman",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-conto-01",
+      "frase": "O conto era tão compacto que cada vírgula carregava o peso de um parágrafo inteiro.",
+      "alvo": "conto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-novela-01",
+      "frase": "A novela se estende além do conto mas não alcança a amplitude necessária para o romance.",
+      "alvo": "novela",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-tardio-01",
+      "frase": "O reconhecimento tardio da autora chegou décadas depois de sua obra mais importante.",
+      "alvo": "tardio",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-precoce-01",
+      "frase": "O talento precoce da escritora se revelou já no primeiro conto publicado aos dezoito anos.",
+      "alvo": "precoce",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inaugural-01",
+      "frase": "O romance inaugural de uma escritora costuma revelar mais do que todos os seguintes juntos.",
+      "alvo": "inaugural",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-seminal-01",
+      "frase": "A obra seminal do autor influenciou toda uma geração de escritores brasileiros dos anos 1970.",
+      "alvo": "seminal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-derradeiro-01",
+      "frase": "O poema derradeiro do volume reunia todos os temas trabalhados ao longo do livro inteiro.",
+      "alvo": "derradeiro",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-canônico-01",
+      "frase": "O texto canônico da literatura brasileira volta a ser relido por cada nova geração de leitores.",
+      "alvo": "canônico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-marginal-01",
+      "frase": "A literatura marginal ganhou espaço nos anos 1970 ao romper com o sistema editorial tradicional.",
+      "alvo": "marginal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-periférico-01",
+      "frase": "A voz periférica do narrador denunciava o que o centro literário preferia não enxergar.",
+      "alvo": "periférica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-diaspórico-01",
+      "frase": "A experiência diaspórica da protagonista estruturava sua relação com a língua portuguesa.",
+      "alvo": "diaspórica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-híbrido-01",
+      "frase": "O romance híbrido misturava ficção científica e romance histórico sem perder coerência interna.",
+      "alvo": "híbrido",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-ressignifica-01",
+      "frase": "A autora ressignifica o clichê ao repeti-lo até que perca o sentido original e ganhe outro.",
+      "alvo": "ressignifica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-reinventa-01",
+      "frase": "O poeta reinventa a forma do soneto mantendo as restrições externas mas liberando o conteúdo.",
+      "alvo": "reinventa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-desloca-01",
+      "frase": "A tradutora desloca a voz do original para um espaço entre as duas línguas e culturas.",
+      "alvo": "desloca",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-interpela-01",
+      "frase": "O texto interpela o leitor diretamente ao usar o pronome «você» de forma insistente.",
+      "alvo": "interpela",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-voz-narrativa-01",
+      "frase": "A voz narrativa do romance oscilava entre a onisciência e a limitação perspectival do sujeito.",
+      "alvo": "voz",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-fluxo-de-consciência-01",
+      "frase": "O fluxo de consciência da personagem transformava o capítulo central em um monólogo interior.",
+      "alvo": "fluxo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-elipse-01",
+      "frase": "A elipse temporal entre os capítulos deixava ao leitor a tarefa de imaginar os anos omitidos.",
+      "alvo": "elipse",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-prolepse-01",
+      "frase": "A prolepse discreta no início do romance preparava o leitor atento para o desfecho trágico.",
+      "alvo": "prolepse",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-metalinguístico-01",
+      "frase": "O conto metalinguístico comentava sua própria construção sem deixar de contar uma história.",
+      "alvo": "metalinguístico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-autorreferente-01",
+      "frase": "A prosa autorreferente da autora transformava o ato de escrever em tema e em forma ao mesmo tempo.",
+      "alvo": "autorreferente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-polifônico-01",
+      "frase": "O romance polifônico de Dostoiévski influenciou gerações de escritores brasileiros do século XX.",
+      "alvo": "polifônico",
+      "esperado": [
+        "Adjective"
       ]
     }
   ]
