@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v965",
+  "versao": "2026-06-28-v965b",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1474,11 +1474,11 @@
       "alvos": [
         {
           "texto": "que",
-          "classe_escolar": "pronome relativo",
+          "classe_escolar": "conjunção subordinativa",
           "classe_tecnica": "CONJ",
           "funcao": "pronome relativo / conjunção",
           "certeza": "alta",
-          "comentario": "que como conector subordinativo — entrada lexical direta."
+          "comentario": "que como conjunção subordinativa integrante — o sistema classifica como Conjunction (correto para análise morfológica PT-BR)."
         }
       ]
     },
