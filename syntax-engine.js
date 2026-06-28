@@ -186,6 +186,7 @@
   // "-oes": plurais de -ção/-são (soluções, ações, nações)
   // "-ao" e "-i" excluídos: ambíguos com verbos (vão, saí)
   const _SUFIXOS_NOM = /(?:cao|sao|oes|dade|tude|eza|ez|ismo|ncia|mento|agem|ista|ura|aria|orio)$/;
+  const _SUFIXOS_NOM_PLURAL = /(?:emas|omas|imas|uras|ores|ares|anes|etes|otes|umas|ersas|ivas|amas)$/;
 
   // Transições de alta confiança extraídas do Mac-Morpho (1.17M tokens, NLTK)
   // Só transições com P >= 0.70 entram como regra determinística
@@ -251,6 +252,12 @@
 
       // R1 — sufixos nominais inequívocos: tag vazio → Substantivo
       if (t.tags.length === 0 && na.length > 4 && _SUFIXOS_NOM.test(na))
+        t.tags.push("Noun");
+
+      // R1b — após verbo transitivo não-cópula, palavra ainda sem tag → objeto nominal provável:
+      // "criou versos", "leram poemas", "visitou personagens" — palavra desconhecida pós-verbo é noun
+      if (t.tags.length === 0 && na.length > 2
+          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm))
         t.tags.push("Noun");
 
       // R2 — após Determinante ou Preposição, ainda sem tag → Substantivo
