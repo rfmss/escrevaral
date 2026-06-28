@@ -23,10 +23,12 @@ const GRAMMAR_CLASS_LABELS = {
   "gw-numeral":          "Numeral",
   "gw-interjeicao":      "Interjeição",
   "gw-proprio":          "Substantivo próprio",
+  "gw-indeterminado":    "Classe não identificada",
 };
 
 const GRAMMAR_CLASS_HINTS = {
   "gw-substantivo":      "Substantivo: nomeia seres, lugares, coisas, ideias e sentimentos.",
+  "gw-indeterminado":    "Palavra não identificada pela análise — pode ser nome próprio, estrangeirismo, neologismo ou forma rara.",
   "gw-proprio":          "Substantivo próprio: batiza um ser único — pessoa, lugar, obra, marca.",
   "gw-verbo":            "Verbo: indica ação, estado, acontecimento ou fenômeno.",
   "gw-adjetivo":         "Adjetivo: qualifica e caracteriza o substantivo.",
@@ -109,7 +111,7 @@ function classifyToken(word, prevWord, nextWord) {
     ? VeredaLexical.inferWordClassContextual(word, null, prevNorm, nextNorm)
     : VeredaLexical.inferWordClass(norm, word);
 
-  return GRAMMAR_CLASSES_MAP[raw] || "gw-substantivo";
+  return GRAMMAR_CLASSES_MAP[raw] || "gw-indeterminado";
 }
 
 function grammarHintForClass(cls) {

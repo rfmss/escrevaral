@@ -513,6 +513,7 @@
 .gw-numeral       { color: #f9a825; }   /* âmbar brilhante    — quantidade */
 .gw-interjeicao   { color: #d84315; }   /* laranja queimado   — emoção */
 .gw-proprio       { color: #1565c0; font-weight: 700; letter-spacing: 0.01em; } /* azul + bold */
+.gw-indeterminado { color: #9e9e9e; }   /* cinza neutro — classe não identificada */
 
 /* Temas escuros: cores mais claras para gramática colorida sobre fundo escuro */
 [data-theme="scriptorium"] .gw-verbo,

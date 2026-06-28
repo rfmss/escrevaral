@@ -779,6 +779,11 @@
 [data-theme="mata-dark"] .gw-substantivo,
 [data-theme="amazonia-dark"] .gw-substantivo   { color: #64b5f6; }
 
+[data-theme="scriptorium"] .gw-indeterminado,
+[data-theme="cerrado-dark"] .gw-indeterminado,
+[data-theme="mata-dark"] .gw-indeterminado,
+[data-theme="amazonia-dark"] .gw-indeterminado { color: #616161; }
+
 [data-theme="scriptorium"] .gw-adjetivo,
 [data-theme="cerrado-dark"] .gw-adjetivo,
 [data-theme="mata-dark"] .gw-adjetivo,
