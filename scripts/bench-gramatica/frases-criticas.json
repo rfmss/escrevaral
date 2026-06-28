@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1034",
+  "versao": "2026-06-28-v1035",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -10116,6 +10116,406 @@
       "alvo": "glosa",
       "esperado": [
         "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-autêntico-01",
+      "frase": "A voz autêntica da narradora dispensava qualquer mediação retórica entre texto e leitor.",
+      "alvo": "autêntica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-genuíno-01",
+      "frase": "O sofrimento genuíno retratado na obra impedia uma leitura puramente estética e distanciada.",
+      "alvo": "genuíno",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-singular-01",
+      "frase": "A trajetória singular da autora a colocou à margem dos movimentos literários de sua época.",
+      "alvo": "singular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inacabado-01",
+      "frase": "O conto inacabado revelava um caminho que a autora havia descartado antes de encontrar a forma final.",
+      "alvo": "inacabado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-panorâmico-01",
+      "frase": "O romance panorâmico abrangia três gerações de uma família do nordeste brasileiro ao longo do tempo.",
+      "alvo": "panorâmico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-microscópico-01",
+      "frase": "O olhar microscópico da narradora transformava cada gesto em um campo de batalha de sentidos.",
+      "alvo": "microscópico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-abrangente-01",
+      "frase": "A análise abrangente da crítica cobria desde a forma linguística até o contexto sociopolítico da obra.",
+      "alvo": "abrangente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-restrito-01",
+      "frase": "O público restrito da primeira edição contrastava com a enorme repercussão das reedições posteriores.",
+      "alvo": "restrito",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-decodifica-01",
+      "frase": "O leitor experiente decodifica as referências culturais que estruturam a camada simbólica do texto.",
+      "alvo": "decodifica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-decifra-01",
+      "frase": "A narradora decifra lentamente os sinais que o texto havia deixado ao longo de todos os capítulos.",
+      "alvo": "decifra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-recontextualiza-01",
+      "frase": "O texto recontextualiza a tradição oral para um ambiente urbano sem perder a força do original.",
+      "alvo": "recontextualiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-atualiza-01",
+      "frase": "A tradução atualiza o vocabulário arcaico sem trair o espírito da obra original do século XVIII.",
+      "alvo": "atualiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-amplia-01",
+      "frase": "A reedição amplia o escopo do texto ao incluir variantes que haviam sido suprimidas na primeira edição.",
+      "alvo": "amplia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-celebra-01",
+      "frase": "O romance celebra a oralidade popular sem ceder ao folclorismo pitoresco que contamina o gênero.",
+      "alvo": "celebra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-exegese-01",
+      "frase": "A exegese minuciosa do texto revelou estruturas de poder que a leitura superficial havia ignorado.",
+      "alvo": "exegese",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-hermenêutica-01",
+      "frase": "A hermenêutica do texto literário exige que o crítico suspenda seus próprios pressupostos culturais.",
+      "alvo": "hermenêutica",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-semiótica-01",
+      "frase": "A análise semiótica da capa do livro revelava um sistema de signos que antecipava o conteúdo.",
+      "alvo": "semiótica",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-estilística-01",
+      "frase": "A estilística do texto identificou padrões de repetição que construíam o ritmo único da prosa.",
+      "alvo": "estilística",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-retórica-01",
+      "frase": "A retórica da narração seduzia o leitor precisamente porque fingia não ser retórica alguma.",
+      "alvo": "retórica",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-sintagma-01",
+      "frase": "O sintagma nominal que abre cada capítulo cria uma expectativa que o texto sistematicamente defrauda.",
+      "alvo": "sintagma",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-isotopia-01",
+      "frase": "A isotopia semântica da água percorre o romance e unifica os fragmentos aparentemente dispersos.",
+      "alvo": "isotopia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-antítese-01",
+      "frase": "A antítese central do romance opõe memória e esquecimento como forças igualmente constitutivas.",
+      "alvo": "antítese",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-oxímoro-01",
+      "frase": "O oxímoro «silêncio estridente» na abertura do conto condensava toda a tensão da narrativa.",
+      "alvo": "oxímoro",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-hipérbole-01",
+      "frase": "A hipérbole deliberada da narradora criava um distanciamento irônico em relação ao próprio discurso.",
+      "alvo": "hipérbole",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-litotes-01",
+      "frase": "A litotes «não era sem mérito» concentrava uma ironia que percorria todo o prefácio do editor.",
+      "alvo": "litotes",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-sinédoque-01",
+      "frase": "A sinédoque da «mão que escreve» representava a presença da autora no tecido do próprio texto.",
+      "alvo": "sinédoque",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-metonímia-01",
+      "frase": "A metonímia do «chapéu» pelo personagem criava uma distância sardônica que marcava o estilo.",
+      "alvo": "metonímia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-jubiloso-01",
+      "frase": "O final jubiloso contrastava com o tom sombrio dos capítulos anteriores de forma quase violenta.",
+      "alvo": "jubiloso",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-angustiante-01",
+      "frase": "A espera angustiante do desfecho criava uma tensão que a escrita da autora habilmente prolongava.",
+      "alvo": "angustiante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-cumplicidade-01",
+      "frase": "A cumplicidade construída entre narrador e leitor tornava a traição final ainda mais devastadora.",
+      "alvo": "cumplicidade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-empatia-01",
+      "frase": "A empatia pelo personagem era deliberadamente fabricada para tornar o desfecho moralmente perturbador.",
+      "alvo": "empatia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-estranhamento-01",
+      "frase": "O estranhamento provocado pela prosa impedia o leitor de se identificar passivamente com o narrador.",
+      "alvo": "estranhamento",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-suspense-01",
+      "frase": "O suspense construído ao longo dos capítulos era mais psicológico do que narrativo no sentido estrito.",
+      "alvo": "suspense",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-enreda-01",
+      "frase": "A autora enreda deliberadamente o leitor em contradições que o texto se recusa a resolver.",
+      "alvo": "enreda",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-surpreende-01",
+      "frase": "O romance sempre surpreende porque cumpre suas promessas de uma forma que não esperávamos.",
+      "alvo": "surpreende",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-frustra-01",
+      "frase": "O texto frustra sistematicamente as expectativas convencionais do gênero para criar novas possibilidades.",
+      "alvo": "frustra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-seduz-01",
+      "frase": "A narradora seduz o leitor com uma prosa de superfície límpida que esconde abismos de sentido.",
+      "alvo": "seduz",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-provoca-01",
+      "frase": "A obra provoca um desconforto produtivo que leva o leitor a rever suas certezas sobre o mundo.",
+      "alvo": "provoca",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-encanta-01",
+      "frase": "O texto encanta sem iludir — sua beleza é inseparável de sua capacidade de revelar a realidade.",
+      "alvo": "encanta",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-perturba-01",
+      "frase": "A última frase do romance perturba porque transforma o sentido de tudo o que havia sido lido antes.",
+      "alvo": "perturba",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-silencia-01",
+      "frase": "O narrador silencia estrategicamente nos momentos em que o leitor mais precisaria de explicação.",
+      "alvo": "silencia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-precursor-01",
+      "frase": "O conto precursor antecipou temas que só se tornariam centrais na literatura brasileira décadas depois.",
+      "alvo": "precursor",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-epigonal-01",
+      "frase": "A obra epigonal repetia os gestos do mestre sem encontrar uma voz própria e distintiva na prosa.",
+      "alvo": "epigonal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-vanguardista-01",
+      "frase": "O grupo vanguardista propunha uma ruptura radical com as formas estabelecidas da tradição literária.",
+      "alvo": "vanguardista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-avant-garde-01",
+      "frase": "A avant-garde brasileira dos anos 1950 dialogou intensamente com as tendências europeias da época.",
+      "alvo": "avant-garde",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-recepção-01",
+      "frase": "A recepção crítica da obra variou enormemente entre o momento da publicação e as décadas seguintes.",
+      "alvo": "recepção",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-canoniza-01",
+      "frase": "A academia canoniza com atraso o que a geração seguinte já havia reconhecido como fundamental.",
+      "alvo": "canoniza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-marginaliza-01",
+      "frase": "O cânone literário marginaliza sistematicamente vozes que não correspondem ao seu centro de poder.",
+      "alvo": "marginaliza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adv-estilisticamente-01",
+      "frase": "As duas obras são estilisticamente opostas, mas compartilham a mesma visão de mundo da autora.",
+      "alvo": "estilisticamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-tematicamente-01",
+      "frase": "Tematicamente coesos, os contos formam um todo orgânico que ultrapassa a soma das partes individuais.",
+      "alvo": "Tematicamente",
+      "esperado": [
+        "Adverb"
       ]
     }
   ]
