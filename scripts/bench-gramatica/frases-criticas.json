@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1031",
+  "versao": "2026-06-28-v1034",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -9850,6 +9850,270 @@
       "id": "r-noun-transgressão-01",
       "frase": "A transgressão formal do romance não era gratuita; ela nascia da necessidade de dizer o indizível.",
       "alvo": "transgressão",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-prep-entre-01",
+      "frase": "Entre o silêncio e a palavra, a narradora escolhe um terceiro caminho inesperado e subversivo.",
+      "alvo": "Entre",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-prep-além-de-01",
+      "frase": "Além de poeta, a autora foi ensaísta, tradutora e uma das editoras mais influentes de sua geração.",
+      "alvo": "Além",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-noun-narrador-hetero-01",
+      "frase": "O narrador heterodiegético observa os eventos de fora sem nunca participar diretamente da ação.",
+      "alvo": "narrador",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-homodiegético-01",
+      "frase": "A voz homodiegética confunde propositalmente as fronteiras entre memória e invenção narrativa.",
+      "alvo": "voz",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-mise-en-abyme-01",
+      "frase": "A mise en abyme do terceiro capítulo reflete a estrutura do romance dentro do próprio romance.",
+      "alvo": "mise",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-distanciado-01",
+      "frase": "O olhar distanciado do narrador cria uma ironia fria que percorre toda a extensão do texto.",
+      "alvo": "distanciado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-engajado-01",
+      "frase": "A prosa engajada da autora nunca abre mão da beleza literária em nome da urgência política.",
+      "alvo": "engajada",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-fragmentado-01",
+      "frase": "O texto fragmentado reproduz formalmente a experiência de uma consciência em colapso interior.",
+      "alvo": "fragmentado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-experimental-01",
+      "frase": "O romance experimental recusa as convenções do gênero e inventa suas próprias regras estruturais.",
+      "alvo": "experimental",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-minimalista-01",
+      "frase": "A prosa minimalista da autora extrai o máximo de sentido de um vocabulário propositalmente restrito.",
+      "alvo": "minimalista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-maximalista-01",
+      "frase": "O romance maximalista acumula detalhes, vozes e referências até criar uma experiência de saturação.",
+      "alvo": "maximalista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-intertextual-01",
+      "frase": "A construção intertextual do poema exige que o leitor reconheça as citações implícitas e explícitas.",
+      "alvo": "intertextual",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-transtextual-01",
+      "frase": "A relação transtextual entre os dois romances vai além da citação e atinge o nível da reescrita.",
+      "alvo": "transtextual",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-transgride-01",
+      "frase": "A autora transgride as fronteiras do gênero sem jamais perder o fio condutor da narrativa.",
+      "alvo": "transgride",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-dissolve-01",
+      "frase": "A narradora dissolve a distinção entre real e imaginário até torná-la irrelevante para a leitura.",
+      "alvo": "dissolve",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-apaga-01",
+      "frase": "A autora apaga deliberadamente os rastros de sua própria voz para deixar emergir outras vozes.",
+      "alvo": "apaga",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-conj-ainda-que-01",
+      "frase": "Ainda que o enredo seja simples, a linguagem transforma cada cena em um evento literário.",
+      "alvo": "que",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-tampouco-01",
+      "frase": "A obra não é fácil de ler, tampouco é difícil — ela é simplesmente intensa e exigente.",
+      "alvo": "tampouco",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-noun-hipertexto-01",
+      "frase": "O hipertexto narrativo do romance permite múltiplas entradas e saídas no universo ficcional.",
+      "alvo": "hipertexto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-intertexto-01",
+      "frase": "O intertexto com Machado de Assis aparece tanto na ironia quanto na escolha da forma narrativa.",
+      "alvo": "intertexto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-peritexto-01",
+      "frase": "O peritexto da edição original incluía ilustrações da própria autora que foram suprimidas na reedição.",
+      "alvo": "peritexto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adv-progressivamente-01",
+      "frase": "O leitor vai progressivamente percebendo que o narrador nunca foi confiável desde o início.",
+      "alvo": "progressivamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-diametralmente-01",
+      "frase": "As duas narrativas seguem caminhos diametralmente opostos que só se encontram no epílogo.",
+      "alvo": "diametralmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adj-fundacional-01",
+      "frase": "O texto fundacional do movimento definia uma estética que marcaria toda a geração seguinte.",
+      "alvo": "fundacional",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-canônico-02",
+      "frase": "A leitura canônica da obra ignorou durante décadas as dimensões de gênero presentes no texto.",
+      "alvo": "canônica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-revisionist-01",
+      "frase": "A crítica revisionista dos anos 1990 propôs uma leitura radicalmente diferente da obra da autora.",
+      "alvo": "revisionista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-paradigmático-01",
+      "frase": "O romance paradigmático do modernismo brasileiro ainda é referência obrigatória nos cursos de letras.",
+      "alvo": "paradigmático",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-reedição-01",
+      "frase": "A reedição corrigida trouxe à luz variantes do texto que mudavam a interpretação de passagens centrais.",
+      "alvo": "reedição",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-editio-princeps-01",
+      "frase": "A editio princeps do romance, publicada em 1942, diferia significativamente das edições posteriores.",
+      "alvo": "editio",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-tiragem-01",
+      "frase": "A primeira tiragem de quinhentos exemplares esgotou-se em menos de uma semana de lançamento.",
+      "alvo": "tiragem",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-resenha-01",
+      "frase": "A resenha publicada no suplemento literário transformou o livro em fenômeno editorial de vendas.",
+      "alvo": "resenha",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-paráfrase-01",
+      "frase": "A paráfrase do crítico simplificava perigosamente um texto que resistia a qualquer resumo justo.",
+      "alvo": "paráfrase",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-glosa-01",
+      "frase": "A glosa medieval era uma forma de comentário que se desenvolvia verso a verso, linha a linha.",
+      "alvo": "glosa",
       "esperado": [
         "Noun"
       ]
