@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1038",
+  "versao": "2026-06-28-v1041",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -11316,6 +11316,302 @@
       "alvo": "machadiano",
       "esperado": [
         "Adjective"
+      ]
+    },
+    {
+      "id": "r-conf-a-saber-01",
+      "frase": "As obras do período, a saber: romances, contos e crônicas, formavam um conjunto coeso e articulado.",
+      "alvo": "saber",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-conf-qual-seja-01",
+      "frase": "O recurso central, qual seja a ironia dramática, estruturava toda a arquitetura do romance analisado.",
+      "alvo": "qual",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-conf-modestia-01",
+      "frase": "Modéstia à parte, a interpretação que ofereço supera as leituras anteriores do conto publicado em 1956.",
+      "alvo": "Modéstia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-efusivo-01",
+      "frase": "O estilo efusivo do crítico contrastava com a contenção que a obra comentada pedia e merecia.",
+      "alvo": "efusivo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-sóbrio-02",
+      "frase": "A escrita sóbria do autor eliminava qualquer ornamento que não servisse à precisão do argumento.",
+      "alvo": "sóbria",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-assertivo-01",
+      "frase": "A voz assertiva da narradora não deixava espaço para a dúvida que o leitor precisava ter.",
+      "alvo": "assertiva",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-reticente-01",
+      "frase": "A narradora reticente omitia os fatos mais importantes exatamente onde a trama exigia clareza.",
+      "alvo": "reticente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-evasivo-01",
+      "frase": "O personagem evasivo respondia a cada pergunta com outra pergunta, recusando qualquer fixação.",
+      "alvo": "evasivo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-desconstrói-01",
+      "frase": "A autora desconstrói os clichês do gênero com uma precisão que transforma o familiar em estranho.",
+      "alvo": "desconstrói",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-reivindica-01",
+      "frase": "O texto reivindica uma tradição esquecida e a insere no centro do debate literário contemporâneo.",
+      "alvo": "reivindica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-confronta-01",
+      "frase": "A narradora confronta o leitor com perguntas que o texto recusa responder de forma direta.",
+      "alvo": "confronta",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-contorna-01",
+      "frase": "A autora contorna a censura ao usar a alegoria como forma de dizer o que a linguagem direta proibia.",
+      "alvo": "contorna",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-mapeia-01",
+      "frase": "O romance mapeia o interior psicológico da protagonista com a precisão de um atlas emocional.",
+      "alvo": "mapeia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-rastreia-01",
+      "frase": "A crítica rastreia as influências da autora sem reduzir a obra a um mero produto das leituras.",
+      "alvo": "rastreia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-registra-01",
+      "frase": "O diário da escritora registra cada dúvida e cada escolha que resultou no romance publicado.",
+      "alvo": "registra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-testemunha-01",
+      "frase": "O texto testemunha uma época sem didatismo — os acontecimentos falam por si mesmos na prosa.",
+      "alvo": "testemunha",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-mecenato-01",
+      "frase": "O mecenato estatal dos anos 1950 permitiu que escritores sem público encontrassem condições de criação.",
+      "alvo": "mecenato",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-tertúlia-01",
+      "frase": "A tertúlia literária reunia semanalmente escritores, críticos e leitores em torno dos novos manuscritos.",
+      "alvo": "tertúlia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-manifesto-01",
+      "frase": "O manifesto do grupo definia uma estética que seria transgredida pelos próprios signatários em seguida.",
+      "alvo": "manifesto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-antologia-01",
+      "frase": "A antologia organizada pela autora revelava um cânone alternativo que a crítica havia ignorado.",
+      "alvo": "antologia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-coletânea-01",
+      "frase": "A coletânea reunia textos de décadas diferentes que se iluminavam mutuamente pela proximidade.",
+      "alvo": "coletânea",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-panorama-01",
+      "frase": "O panorama da literatura brasileira traçado no ensaio era inevitavelmente parcial e datado.",
+      "alvo": "panorama",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-rigoroso-01",
+      "frase": "A análise rigorosa da crítica não deixava nenhum aspecto formal da obra sem tratamento adequado.",
+      "alvo": "rigorosa",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-superficial-01",
+      "frase": "A leitura superficial do romance perdia exatamente os detalhes que faziam a obra ser o que era.",
+      "alvo": "superficial",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-aprofundado-01",
+      "frase": "O estudo aprofundado da recepção da obra revelou que o público havia entendido mais do que a crítica.",
+      "alvo": "aprofundado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-criterioso-01",
+      "frase": "A seleção criteriosa dos textos da antologia revelava uma visão coerente da tradição literária.",
+      "alvo": "criteriosa",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-argumento-01",
+      "frase": "O argumento central do ensaio dependia de uma premissa que o autor nunca chegava a demonstrar.",
+      "alvo": "argumento",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-premissa-01",
+      "frase": "A premissa da análise era discutível, mas o rigor do desenvolvimento compensava a fragilidade inicial.",
+      "alvo": "premissa",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-hipótese-01",
+      "frase": "A hipótese de leitura proposta pela crítica transformou completamente a recepção do romance.",
+      "alvo": "hipótese",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-tese-01",
+      "frase": "A tese do ensaio era provocadora o suficiente para reiniciar um debate que parecia encerrado.",
+      "alvo": "tese",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-refutação-01",
+      "frase": "A refutação da leitura canônica exigia provas textuais que o crítico havia sistematicamente ignorado.",
+      "alvo": "refutação",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-det-certos-01",
+      "frase": "Certos recursos estilísticos só se revelam ao leitor que relê a obra com atenção à microestrutura.",
+      "alvo": "Certos",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-pron-si-01",
+      "frase": "A obra se dobrava sobre si mesma para encontrar, no centro, não um sentido mas uma pergunta.",
+      "alvo": "si",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-noun-memorias-01",
+      "frase": "As memórias da escritora revelavam uma versão do processo criativo que os romances haviam encoberto.",
+      "alvo": "memórias",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-autobiografia-01",
+      "frase": "A autobiografia confessa menos do que promete — o eu narrado nunca coincide com o eu vivido.",
+      "alvo": "autobiografia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-autoficção-01",
+      "frase": "A autoficção dissolve as fronteiras do gênero ao tornar indistintos o autor, o narrador e o personagem.",
+      "alvo": "autoficção",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-epistolário-01",
+      "frase": "O epistolário da autora revelava uma escritora completamente diferente da persona pública construída.",
+      "alvo": "epistolário",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
