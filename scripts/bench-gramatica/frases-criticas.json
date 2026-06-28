@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v975",
+  "versao": "2026-06-28-v976",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2907,6 +2907,188 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "R11b: certa após Noun → Adjective (v975)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-percebido-perf-01",
+      "frase": "O narrador havia percebido o erro.",
+      "alvos": [
+        {
+          "texto": "percebido",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "particípio em perífrase perfectiva (havia+particípio)",
+          "certeza": "alta",
+          "comentario": "percebido em perífrase 'havia percebido' → Verb (não Adjective — havia não é cópula de voz passiva)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escrito-perf-01",
+      "frase": "Ela tinha escrito três versões do conto.",
+      "alvos": [
+        {
+          "texto": "escrito",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "particípio em perífrase perfectiva (tinha+particípio)",
+          "certeza": "alta",
+          "comentario": "escrito em 'tinha escrito' → Verb (perífrase de aspecto perfectivo, diferente de 'foi escrito' que é voz passiva → Adjective)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-hesitante-01",
+      "frase": "A escritora ficou hesitante diante da escolha.",
+      "alvos": [
+        {
+          "texto": "hesitante",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "hesitante sufixo -nte → Adjective; após ficou (copula)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-redundante-01",
+      "frase": "O texto se tornou redundante com o tempo.",
+      "alvos": [
+        {
+          "texto": "redundante",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "redundante sufixo -nte → Adjective; após tornou (copula)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-impactante-01",
+      "frase": "A cena ficou impactante ao final.",
+      "alvos": [
+        {
+          "texto": "impactante",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "impactante sufixo -nte → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-amanhecer-01",
+      "frase": "O amanhecer marcou o início da história.",
+      "alvos": [
+        {
+          "texto": "amanhecer",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito (infinitivo substantivado)",
+          "certeza": "alta",
+          "comentario": "amanhecer em DEFINICOES/lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-entardecer-01",
+      "frase": "O entardecer descrito no livro é poético.",
+      "alvos": [
+        {
+          "texto": "entardecer",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito (infinitivo substantivado)",
+          "certeza": "alta",
+          "comentario": "entardecer em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-esta-01",
+      "frase": "Esta é a última página do manuscrito.",
+      "alvos": [
+        {
+          "texto": "Esta",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo sujeito",
+          "certeza": "alta",
+          "comentario": "Esta em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-esses-01",
+      "frase": "Esses personagens aparecem no terceiro capítulo.",
+      "alvos": [
+        {
+          "texto": "Esses",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo determinante",
+          "certeza": "alta",
+          "comentario": "Esses em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-compreendeu-01",
+      "frase": "Ela compreendeu o significado da metáfora.",
+      "alvos": [
+        {
+          "texto": "compreendeu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de cognição",
+          "certeza": "alta",
+          "comentario": "compreendeu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-percebe-01",
+      "frase": "O leitor percebe a ironia no diálogo.",
+      "alvos": [
+        {
+          "texto": "percebe",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de percepção",
+          "certeza": "alta",
+          "comentario": "percebe em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-avanca-01",
+      "frase": "A narrativa avança lentamente.",
+      "alvos": [
+        {
+          "texto": "avança",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de movimento",
+          "certeza": "alta",
+          "comentario": "avança em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-recua-01",
+      "frase": "O texto recua ao passado com frequência.",
+      "alvos": [
+        {
+          "texto": "recua",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de movimento (metafórico)",
+          "certeza": "alta",
+          "comentario": "recua em VERBOS_PRES → Verb."
         }
       ]
     }
