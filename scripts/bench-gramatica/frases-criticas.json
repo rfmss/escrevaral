@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1003",
+  "versao": "2026-06-28-v1004",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7037,6 +7037,188 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "inicial em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-magistral-01",
+      "frase": "O texto é magistral.",
+      "alvos": [
+        {
+          "texto": "magistral",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "magistral em adjetivos_comuns (v1003) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-mediocre-01",
+      "frase": "A cena é medíocre.",
+      "alvos": [
+        {
+          "texto": "medíocre",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "medíocre em adjetivos_comuns (v1003) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-final-01",
+      "frase": "O capítulo final é o mais denso.",
+      "alvos": [
+        {
+          "texto": "final",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "final em adjetivos_comuns (v1003) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-paradigmatica-01",
+      "frase": "A obra é paradigmática.",
+      "alvos": [
+        {
+          "texto": "paradigmática",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "paradigmática em adjetivos_comuns (v1003) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-banal-01",
+      "frase": "O tema é banal.",
+      "alvos": [
+        {
+          "texto": "banal",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "banal em adjetivos_comuns (v1003) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-voltou-01",
+      "frase": "O narrador voltou ao passado.",
+      "alvos": [
+        {
+          "texto": "voltou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "voltou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-fugiu-01",
+      "frase": "Ela fugiu para outra cidade.",
+      "alvos": [
+        {
+          "texto": "fugiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "fugiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-escapou-01",
+      "frase": "O herói escapou no último momento.",
+      "alvos": [
+        {
+          "texto": "escapou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "escapou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-arrebatadora-01",
+      "frase": "A leitura é arrebatadora.",
+      "alvos": [
+        {
+          "texto": "arrebatadora",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "arrebatadora em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-devastador-01",
+      "frase": "O final é devastador.",
+      "alvos": [
+        {
+          "texto": "devastador",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "devastador em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-edificante-01",
+      "frase": "A obra é edificante.",
+      "alvos": [
+        {
+          "texto": "edificante",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "edificante em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-verossimilhanca-01",
+      "frase": "A verossimilhança sustenta o pacto ficcional.",
+      "alvos": [
+        {
+          "texto": "verossimilhança",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "verossimilhança em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-suspensao-01",
+      "frase": "A suspensão da descrença envolve o leitor.",
+      "alvos": [
+        {
+          "texto": "suspensão",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "suspensão sufixo -ão → Noun (R1)."
         }
       ]
     }
