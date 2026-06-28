@@ -68,6 +68,45 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-28 (ciclo autônomo v1008→v1032)
+
+**Baseline:** v1032 — todos engines 100%.
+
+**O que foi entregue neste ciclo (v1008→v1032):**
+
+- v1009-v1023: A-01 batches 1-9: 56 regras CONFUSOES_GRAMATICAIS (burocratismos, gerundismo, redação escolar, reforços vazios, referências circulares, clichês)
+- v1024-v1025: bench 710→800 — marco 800 atingido (+90 casos: adj textura/ritmo/luz, verbos craft, teoria literária, termos de carreira)
+- v1026: norma-data.json adj +69 (2709→2778): adj literários ausentes (marginal/periférico/cáustico/mordaz/episódico/labiríntico/polifônico/metalinguístico/crepuscular/etc)
+- v1027-v1028: A-01 batches 10-11: +16 regras (se faz necessário/é mister/de modo geral/em linhas gerais/de certa forma/de certo modo/por assim dizer/em outras palavras + à título de/em tempo hábil/no decorrer de/ao longo dos anos/desde sempre/no final das contas/de qualquer forma/de qualquer maneira)
+- v1029: A-01 batch 12: +8 (primeiramente/em primeiro lugar/por fim/por último/diante disso/levando em conta/levando em consideração/posto isso)
+- v1030-v1031: A-01 batch 13: +5 (no que se refere a/com relação a/pode ser que/de certa maneira/de alguma forma); bench 800→817
+- v1032: A-01 batch 14: +8 (fica claro que/pode-se dizer que/é possível dizer que/é necessário ressaltar/não podemos esquecer/devemos ressaltar que/para concluir/em suma)
+
+**Estado atualizado dos engines (v1032):**
+
+| Área / engine | Maturidade | Notas de estado (v1032) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500; CONFUSOES 93 regras A-01 |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350; DEFINICOES ~1020+; POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bancada 17/17; golden 91/0; VERBOS_PRES 2097; adj 2778 |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **100%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; escopo em todos; saveStatus |
+
+**Auditor:** P0=0, P1=4 (todos mitigados), P2=0
+
+**Fronteiras abertas (v1032):**
+
+1. **A-01 continuação**: restam expressões de comparação mal usada, conjunções frouxas, "onde" não-locacional — A-01 pode atingir 100+ regras
+2. **Bench rumo a 900**: em 817; próximas categorias — preposições, pronomes em contexto, adjetivos de posição
+3. **DEFINICOES**: compostos e termos muito específicos ainda sem cobertura
+4. **Função sintática (Codex)**: sujeito/predicado/objeto — `handoff-codex-gramatica-2026-06-27.md`
+5. **105 commits locais não enviados** — fazer push quando usuário pedir
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-27 (ciclo autônomo v910→v916)
 
 **Baseline:** v916 — todos engines 100%, incluindo Exportação.
