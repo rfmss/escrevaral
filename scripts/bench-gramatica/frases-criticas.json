@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v990",
+  "versao": "2026-06-28-v991",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5231,6 +5231,146 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "revelador em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-pode-01",
+      "frase": "Ela pode publicar o livro em maio.",
+      "alvos": [
+        {
+          "texto": "pode",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo auxiliar modal",
+          "certeza": "alta",
+          "comentario": "pode em VERBOS_AUX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-deve-01",
+      "frase": "O editor deve revisar o texto.",
+      "alvos": [
+        {
+          "texto": "deve",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo auxiliar modal de obrigação",
+          "certeza": "alta",
+          "comentario": "deve em VERBOS_AUX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-quer-01",
+      "frase": "Ela quer escrever uma trilogia.",
+      "alvos": [
+        {
+          "texto": "quer",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo auxiliar modal de desejo",
+          "certeza": "alta",
+          "comentario": "quer em VERBOS_AUX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-sabe-01",
+      "frase": "O leitor sabe que o narrador mente.",
+      "alvos": [
+        {
+          "texto": "sabe",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de cognição",
+          "certeza": "alta",
+          "comentario": "sabe em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-acredita-01",
+      "frase": "Ela acredita que a ficção salva.",
+      "alvos": [
+        {
+          "texto": "acredita",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de cognição",
+          "certeza": "alta",
+          "comentario": "acredita em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-melancolico-01",
+      "frase": "O texto tem um tom melancólico.",
+      "alvos": [
+        {
+          "texto": "melancólico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "melancólico em adjetivos_comuns (v991) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-nostalgica-01",
+      "frase": "A narrativa é nostálgica.",
+      "alvos": [
+        {
+          "texto": "nostálgica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "nostálgica em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-dificil-01",
+      "frase": "Ela sabe que escrever é difícil.",
+      "alvos": [
+        {
+          "texto": "difícil",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito em oração subordinada",
+          "certeza": "alta",
+          "comentario": "difícil em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-murmurou-01",
+      "frase": "O personagem murmurou algo inaudível.",
+      "alvos": [
+        {
+          "texto": "murmurou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de comunicação",
+          "certeza": "alta",
+          "comentario": "murmurou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-sussurrou-01",
+      "frase": "Ela sussurrou o segredo.",
+      "alvos": [
+        {
+          "texto": "sussurrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal de comunicação",
+          "certeza": "alta",
+          "comentario": "sussurrou em VERBOS_IRR → Verb."
         }
       ]
     }
