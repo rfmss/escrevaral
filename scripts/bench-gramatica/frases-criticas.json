@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v991",
+  "versao": "2026-06-28-v992",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -5371,6 +5371,188 @@
           "funcao": "verbo principal de comunicação",
           "certeza": "alta",
           "comentario": "sussurrou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-fugiu-01",
+      "frase": "O personagem fugiu sem olhar para trás.",
+      "alvos": [
+        {
+          "texto": "fugiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "fugiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-correu-01",
+      "frase": "Ela correu até o fim do corredor.",
+      "alvos": [
+        {
+          "texto": "correu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "correu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-caiu-01",
+      "frase": "O herói caiu em desgraça.",
+      "alvos": [
+        {
+          "texto": "caiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "caiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-ergueu-01",
+      "frase": "A narradora ergueu a voz.",
+      "alvos": [
+        {
+          "texto": "ergueu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "ergueu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-intertextualidade-01",
+      "frase": "A intertextualidade enriquece a obra.",
+      "alvos": [
+        {
+          "texto": "intertextualidade",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "intertextualidade em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-metalinguagem-01",
+      "frase": "A metalinguagem aparece nos parênteses.",
+      "alvos": [
+        {
+          "texto": "metalinguagem",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "metalinguagem em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-subtexto-01",
+      "frase": "O subtexto revela o conflito interior.",
+      "alvos": [
+        {
+          "texto": "subtexto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "subtexto em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-multifacetado-01",
+      "frase": "O personagem é complexo e multifacetado.",
+      "alvos": [
+        {
+          "texto": "multifacetado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (coordenado)",
+          "certeza": "alta",
+          "comentario": "multifacetado em _ADJ_IDO → Verb + Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-acessivel-01",
+      "frase": "A linguagem é densa mas acessível.",
+      "alvos": [
+        {
+          "texto": "acessível",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "acessível em adjetivos_comuns (strip-diac) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-publicar-neg-01",
+      "frase": "Não publicar foi a decisão certa.",
+      "alvos": [
+        {
+          "texto": "publicar",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo no infinitivo (sujeito oracional)",
+          "certeza": "alta",
+          "comentario": "publicar em VERBOS_INF → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-transformou-01",
+      "frase": "O evento transformou o personagem.",
+      "alvos": [
+        {
+          "texto": "transformou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "transformou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-moldou-01",
+      "frase": "O trauma moldou sua visão de mundo.",
+      "alvos": [
+        {
+          "texto": "moldou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "moldou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-marcou-01",
+      "frase": "A experiência marcou a escritora.",
+      "alvos": [
+        {
+          "texto": "marcou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "marcou em VERBOS_IRR → Verb."
         }
       ]
     }
