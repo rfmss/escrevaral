@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v979",
+  "versao": "2026-06-28-v980",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3593,6 +3593,174 @@
           "funcao": "numeral cardinal",
           "certeza": "alta",
           "comentario": "duas em NUMERAIS → Numeral."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-leitor-01",
+      "frase": "O leitor imagina o cenário.",
+      "alvos": [
+        {
+          "texto": "leitor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "leitor em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-escritor-01",
+      "frase": "O escritor revisou o manuscrito.",
+      "alvos": [
+        {
+          "texto": "escritor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "escritor em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-manhas-01",
+      "frase": "Ela escreve todas as manhãs.",
+      "alvos": [
+        {
+          "texto": "manhãs",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo de adjunto adverbial",
+          "certeza": "alta",
+          "comentario": "manhãs em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-ontem-01",
+      "frase": "O conto foi publicado ontem.",
+      "alvos": [
+        {
+          "texto": "ontem",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "ontem em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-hoje-01",
+      "frase": "Ela publicou o livro hoje.",
+      "alvos": [
+        {
+          "texto": "hoje",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "hoje em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-longo-01",
+      "frase": "O texto é mais longo do que o esperado.",
+      "alvos": [
+        {
+          "texto": "longo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (grau comparativo)",
+          "certeza": "alta",
+          "comentario": "longo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-rapido-01",
+      "frase": "Ela escreve mais rápido do que ele.",
+      "alvos": [
+        {
+          "texto": "rápido",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adverbial de modo (adjetivo adverbializado)",
+          "certeza": "alta",
+          "comentario": "rápido em adjetivos_comuns → Adjective (em contexto comparativo)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-lancou-01",
+      "frase": "Ela lançou o livro em março.",
+      "alvos": [
+        {
+          "texto": "lançou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "lançou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-assinou-01",
+      "frase": "O autor assinou o contrato editorial.",
+      "alvos": [
+        {
+          "texto": "assinou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "assinou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-entregou-01",
+      "frase": "Ela entregou o manuscrito no prazo.",
+      "alvos": [
+        {
+          "texto": "entregou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "entregou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-fracasso-01",
+      "frase": "Ela não tem medo do fracasso.",
+      "alvos": [
+        {
+          "texto": "fracasso",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo de adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "fracasso em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-vez-01",
+      "frase": "Ela publica de vez em quando.",
+      "alvos": [
+        {
+          "texto": "vez",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo de locução adverbial",
+          "certeza": "alta",
+          "comentario": "vez em lexicon → Noun."
         }
       ]
     }
