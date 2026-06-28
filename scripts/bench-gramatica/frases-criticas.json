@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-27",
+  "versao": "2026-06-27-v935",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -233,6 +233,90 @@
           "funcao": "adjunto adnominal de socio",
           "certeza": "alta",
           "comentario": "Participio adjetivado; dupla natureza deve ser representada por evidencias."
+        }
+      ]
+    },
+    {
+      "id": "canto-substantivo-01",
+      "frase": "O canto do pássaro preencheu o quintal.",
+      "alvos": [
+        {
+          "texto": "canto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes de canto sinaliza leitura nominal."
+        }
+      ]
+    },
+    {
+      "id": "canto-verbo-01",
+      "frase": "Eu canto quando estou feliz.",
+      "alvos": [
+        {
+          "texto": "canto",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito Eu + canto; primeira pessoa singular de cantar."
+        }
+      ]
+    },
+    {
+      "id": "cedo-adverbio-01",
+      "frase": "Ela acordou cedo para escrever.",
+      "alvos": [
+        {
+          "texto": "cedo",
+          "classe_escolar": "adverbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "Cedo apos verbo de movimento/acao indica adverbio de tempo."
+        }
+      ]
+    },
+    {
+      "id": "cedo-verbo-01",
+      "frase": "Cedo meu lugar para quem precisar.",
+      "alvos": [
+        {
+          "texto": "Cedo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Inicio de frase + objeto direto favorece leitura verbal de ceder."
+        }
+      ]
+    },
+    {
+      "id": "vale-substantivo-01",
+      "frase": "O vale verde escondia uma aldeia.",
+      "alvos": [
+        {
+          "texto": "vale",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O + vale + adjetivo; leitura nominal de vale geografico."
+        }
+      ]
+    },
+    {
+      "id": "vale-verbo-expressao-01",
+      "frase": "Vale a pena tentar mais uma vez.",
+      "alvos": [
+        {
+          "texto": "vale",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado em expressao idiomatica",
+          "certeza": "alta",
+          "comentario": "Vale a pena e expressao idiomatica com vale como verbo valer."
         }
       ]
     },

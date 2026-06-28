@@ -191,6 +191,7 @@
   // Só transições com P >= 0.70 entram como regra determinística
   // P(curr | prev): Determiner→Noun 0.76, Numeral→Noun 0.87
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
+  const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
   const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
@@ -283,6 +284,13 @@
         if ((prevLooksNominal && !prevTags.includes("Preposition")) || _COPULAS_ADJ_CTX.has(prevNorm)) {
           _addUniqueTag(t.tags, "Adjective");
         }
+      }
+
+      // R8 — "cedo" como verbo (ceder) quando seguido de possessivo:
+      // "Cedo meu lugar" ≠ "Chegou cedo"; possessivo após cedo indica objeto direto.
+      if (na === "cedo" && t.tags.includes("Adverb") && _POSSESSIVOS.has(nextNorm)) {
+        t.tags = t.tags.filter(tt => tt !== "Adverb");
+        _addUniqueTag(t.tags, "Verb");
       }
     }
     return tks;
