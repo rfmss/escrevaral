@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1035",
+  "versao": "2026-06-28-v1037",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -10516,6 +10516,326 @@
       "alvo": "Tematicamente",
       "esperado": [
         "Adverb"
+      ]
+    },
+    {
+      "id": "r-conf-ser-humano-01",
+      "frase": "O ser humano sempre buscou na arte uma forma de transcender os limites da própria existência.",
+      "alvo": "humano",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-conf-todos-sabemos-01",
+      "frase": "Todos sabemos que a leitura transforma a percepção que temos do mundo e das outras pessoas.",
+      "alvo": "sabemos",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-contemporâneo-01",
+      "frase": "O escritor contemporâneo enfrenta a tensão entre a velocidade digital e a lentidão da ficção longa.",
+      "alvo": "contemporâneo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-atemporal-01",
+      "frase": "A beleza atemporal da prosa tornava impossível datar o texto pelo vocabulário ou pelo estilo.",
+      "alvo": "atemporal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-datado-01",
+      "frase": "O romance hoje parece datado porque apostou demais nas referências culturais de uma única década.",
+      "alvo": "datado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-atual-01",
+      "frase": "A obra permanece atual porque as questões que levanta continuam sem resposta definitiva possível.",
+      "alvo": "atual",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-poliédrico-01",
+      "frase": "A narrativa poliédrica oferecia ângulos incompatíveis entre si sem nunca resolver a contradição.",
+      "alvo": "poliédrico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-ambíguo-02",
+      "frase": "O desfecho ambíguo gerou leituras radicalmente diferentes que ainda hoje dividem a crítica especializada.",
+      "alvo": "ambíguo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-hermético-01",
+      "frase": "A prosa hermética da autora exigia um leitor disposto a aceitar o não entendimento como experiência.",
+      "alvo": "hermética",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-opaco-02",
+      "frase": "O texto opaco resistia à interpretação fácil e pedia uma leitura lenta, atenta e repetida.",
+      "alvo": "opaco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-topos-01",
+      "frase": "O topos da biblioteca como espaço do saber e do poder perpassa toda a tradição do romance europeu.",
+      "alvo": "topos",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-locus-01",
+      "frase": "O locus amoenus da natureza idílica servia de contraste irônico ao caos psicológico da protagonista.",
+      "alvo": "locus",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-heterotopia-01",
+      "frase": "A prisão funcionava como heterotopia — espaço de exclusão que revelava as normas do espaço social.",
+      "alvo": "heterotopia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-utopia-01",
+      "frase": "A utopia comunitária descrita no romance nunca se concretizava e permanecia como horizonte desejado.",
+      "alvo": "utopia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-distopia-01",
+      "frase": "A distopia tecnológica do romance antecipou debates que só se tornariam urgentes décadas depois.",
+      "alvo": "distopia",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-verb-pondera-01",
+      "frase": "A narradora pondera cada palavra com uma atenção que transforma o texto em objeto de contemplação.",
+      "alvo": "pondera",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-oscila-01",
+      "frase": "O narrador oscila entre a onisciência e a limitação perspectival sem jamais fixar uma posição.",
+      "alvo": "oscila",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-hesita-01",
+      "frase": "A prosa hesita deliberadamente antes de nomear, criando uma suspensão que é ela mesma poética.",
+      "alvo": "hesita",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-recorre-01",
+      "frase": "A autora recorre ao mito não para explicar o presente, mas para mostrar sua irredutibilidade.",
+      "alvo": "recorre",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-inverte-01",
+      "frase": "O conto inverte as expectativas do gênero ao dar ao perseguido o poder narrativo sobre o perseguidor.",
+      "alvo": "inverte",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-preserva-01",
+      "frase": "A tradução preserva o ritmo do original mesmo quando o significado exige uma escolha diferente.",
+      "alvo": "preserva",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-adj-prolífico-02",
+      "frase": "O escritor prolífico publicou mais de trinta livros sem jamais repetir a mesma fórmula narrativa.",
+      "alvo": "prolífico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-recluso-01",
+      "frase": "A vida reclusa da autora alimentou uma mitologia que a obra acabou por contradizer com sua vivacidade.",
+      "alvo": "reclusa",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-combativo-01",
+      "frase": "O ensaísta combativo usava a crítica literária como trincheira política sem sacrificar o rigor analítico.",
+      "alvo": "combativo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-contido-02",
+      "frase": "O estilo contido do escritor escondia uma intensidade emocional que explodia nas últimas páginas.",
+      "alvo": "contido",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-noun-tropicalismo-01",
+      "frase": "O tropicalismo reconfigurou a relação entre cultura erudita e popular no Brasil dos anos 1960.",
+      "alvo": "tropicalismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-concretismo-01",
+      "frase": "O concretismo propôs uma poesia que era também objeto visual, desafiando a hegemonia do verso.",
+      "alvo": "concretismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-neorrealismo-01",
+      "frase": "O neorrealismo português influenciou escritores brasileiros que buscavam retratar a realidade social.",
+      "alvo": "neorrealismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-surrealismo-01",
+      "frase": "O surrealismo deixou marcas na prosa de ficção científica brasileira muito além do que se reconhece.",
+      "alvo": "surrealismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-expressionismo-01",
+      "frase": "O expressionismo da narradora distorcia a realidade para revelar o estado interior da protagonista.",
+      "alvo": "expressionismo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-aforístico-01",
+      "frase": "O estilo aforístico do ensaísta comprimia teses complexas em frases de memorável síntese intelectual.",
+      "alvo": "aforístico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-paratático-01",
+      "frase": "A construção paratática do texto recusava a subordinação e tratava cada frase como unidade autônoma.",
+      "alvo": "paratático",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-hipotático-01",
+      "frase": "O período hipotático da prosa construía uma hierarquia de ideias que orientava a leitura com rigor.",
+      "alvo": "hipotático",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-polissêmico-01",
+      "frase": "O título polissêmico do romance abria múltiplas entradas interpretativas desde a primeira leitura.",
+      "alvo": "polissêmico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-enuncia-01",
+      "frase": "O texto enuncia uma verdade impossível e depois passa o resto das páginas tentando sustentá-la.",
+      "alvo": "enuncia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-elabora-01",
+      "frase": "A ensaísta elabora sua tese ao longo de doze capítulos sem jamais perder o fio condutor central.",
+      "alvo": "elabora",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-recupera-01",
+      "frase": "A autora recupera tradições esquecidas sem tratar o passado como modelo a ser simplesmente imitado.",
+      "alvo": "recupera",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-dicção-01",
+      "frase": "A dicção inconfundível da autora tornava cada frase reconhecível antes mesmo de identificar o livro.",
+      "alvo": "dicção",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-tonalidade-01",
+      "frase": "A tonalidade elegíaca do romance crescia à medida que o desfecho se tornava inevitável e próximo.",
+      "alvo": "tonalidade",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-cadência-01",
+      "frase": "A cadência da prosa era tão precisa que alterar uma única vírgula desfazia o equilíbrio do parágrafo.",
+      "alvo": "cadência",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
