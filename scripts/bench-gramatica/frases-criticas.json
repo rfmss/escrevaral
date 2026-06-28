@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v980",
+  "versao": "2026-06-28-v981",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3761,6 +3761,174 @@
           "funcao": "núcleo de locução adverbial",
           "certeza": "alta",
           "comentario": "vez em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-soube-01",
+      "frase": "A escritora soube da notícia pelo editor.",
+      "alvos": [
+        {
+          "texto": "soube",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "soube em VERBOS_IRR (saber) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-trouxe-01",
+      "frase": "Ela trouxe o manuscrito para a reunião.",
+      "alvos": [
+        {
+          "texto": "trouxe",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "trouxe em VERBOS_IRR (trazer) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-pos-01",
+      "frase": "O personagem pôs a carta na gaveta.",
+      "alvos": [
+        {
+          "texto": "pôs",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "pôs em VERBOS_IRR (pôr) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-fez-01",
+      "frase": "Ele fez uma pausa antes de responder.",
+      "alvos": [
+        {
+          "texto": "fez",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "fez em VERBOS_IRR (fazer) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-disse-01",
+      "frase": "Ela disse que precisava de mais tempo.",
+      "alvos": [
+        {
+          "texto": "disse",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "disse em VERBOS_IRR (dizer) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-perfeito-01",
+      "frase": "O texto ficou absolutamente perfeito.",
+      "alvos": [
+        {
+          "texto": "perfeito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "perfeito em adjetivos_comuns (v981) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-absurda-01",
+      "frase": "A cena é completamente absurda.",
+      "alvos": [
+        {
+          "texto": "absurda",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "absurda em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-monologo-01",
+      "frase": "O monólogo interior define o personagem.",
+      "alvos": [
+        {
+          "texto": "monólogo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "monólogo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-flashback-01",
+      "frase": "O flashback revela a origem do conflito.",
+      "alvos": [
+        {
+          "texto": "flashback",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "flashback em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-ali-01",
+      "frase": "Ela escreveu ali por horas.",
+      "alvos": [
+        {
+          "texto": "ali",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de lugar",
+          "certeza": "alta",
+          "comentario": "ali em ADV_LUGAR → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-longe-01",
+      "frase": "O herói vem de longe.",
+      "alvos": [
+        {
+          "texto": "longe",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de lugar",
+          "certeza": "alta",
+          "comentario": "longe em ADV_LUGAR → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inesperado-total-01",
+      "frase": "O final foi totalmente inesperado.",
+      "alvos": [
+        {
+          "texto": "inesperado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inesperado após foi (cópula) → Adjective."
         }
       ]
     }
