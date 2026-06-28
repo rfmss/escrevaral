@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v961",
+  "versao": "2026-06-28-v963",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1409,6 +1409,62 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "R7a: obtida em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-salvo-prep-01",
+      "frase": "Todos foram, salvo ela.",
+      "alvos": [
+        {
+          "texto": "salvo",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição excludente",
+          "certeza": "alta",
+          "comentario": "R_SALVO: salvo após vírgula, seguido de pronome ela → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r7-salvo-adj-01",
+      "frase": "O arquivo foi salvo no computador.",
+      "alvos": [
+        {
+          "texto": "salvo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio)",
+          "certeza": "alta",
+          "comentario": "R7: salvo em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-entregue-adj-01",
+      "frase": "O trabalho foi entregue com atraso.",
+      "alvos": [
+        {
+          "texto": "entregue",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio)",
+          "certeza": "alta",
+          "comentario": "R7: entregue em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-incluso-adj-01",
+      "frase": "O imposto está incluso no valor.",
+      "alvos": [
+        {
+          "texto": "incluso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: incluso em _PARTICIPIOS_IRR_CTX; após está → Adjective."
         }
       ]
     }

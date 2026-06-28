@@ -233,6 +233,10 @@
     "retido", "retida", "retidos", "retidas",
     "conduzido", "conduzida", "conduzidos", "conduzidas",
     "previsto", "prevista", "previstos", "previstas",
+    "salvo", "salva", "salvos", "salvas",
+    "entregue", "entregues",
+    "incluso", "inclusa", "inclusos", "inclusas",
+    "excluso", "exclusa",
   ]);
 
   function _isParticipleLike(normNoAccent) {
@@ -362,6 +366,15 @@
           && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
           && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
         _addUniqueTag(t.tags, "Adverb");
+      }
+
+      // R_SALVO — "salvo/exceto/menos" como preposição excludente após pontuação:
+      // "Todos foram, salvo ela" — vírgula antecede salvo, próximo é pronome/nome → Preposition
+      if ((na === "salvo" || na === "exceto" || na === "menos" || na === "senao" || na === "senão")
+          && t.tags.includes("Verb") && !t.tags.includes("Adjective")
+          && (prevNorm === "," || prevNorm === ";" || prevNorm === "")
+          && (nextTags.includes("Pronoun") || nextTags.includes("Noun") || nextTags.includes("Determiner"))) {
+        _addUniqueTag(t.tags, "Preposition");
       }
 
       // R10 — palavra sem tags após pronome pessoal sujeito → leitura verbal:
