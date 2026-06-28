@@ -1,20 +1,20 @@
 {
   "meta": {
     "projeto": "Escrevaral",
-    "versao": "v942",
+    "versao": "v958",
     "atualizado": "2026-06-28",
     "posicionamento": "O Grammarly está para o inglês assim como o Escrevaral está para o português brasileiro",
     "definicao_tecnica": "Sistema especialista de linguagem — gramática artesanal verificável, não caixa preta"
   },
   "metricas": {
-    "definicoes": 1330,
+    "definicoes": 1660,
     "sinonimos": 1350,
-    "bench_casos": 33,
-    "bench_ok": 33,
+    "bench_casos": 71,
+    "bench_ok": 71,
     "golden_total": 91,
     "golden_regressoes": 0,
-    "commits_locais": 9,
-    "regras_gramatica": 10
+    "commits_locais": 26,
+    "regras_gramatica": 14
   },
   "pilares": [
     {
@@ -40,10 +40,10 @@
     {
       "id": "fundacao",
       "nome": "Fundação",
-      "periodo": "v1 → v942",
+      "periodo": "v1 → v958",
       "mes": "2026-01 / 2026-06",
       "status": "concluida",
-      "descricao": "Todas as engines em 100%. ~1330 DEFINICOES. Bench 33/33. Golden 91/0. PWA offline. Mesa portátil.",
+      "descricao": "Todas as engines em 100%. 1660 DEFINICOES. Bench 71/71. Golden 91/0. PWA offline. Mesa portátil.",
       "cor": "#22c55e"
     },
     {
@@ -99,7 +99,7 @@
       "cor": "#f59e0b",
       "icone": "⚙",
       "descricao": "Regras de desambiguação, bench, função sintática, fallback indeterminado",
-      "progresso": 60
+      "progresso": 75
     },
     {
       "id": "dados",
@@ -107,7 +107,7 @@
       "cor": "#3b82f6",
       "icone": "📚",
       "descricao": "DEFINICOES, SINONIMOS, corpus literário em PT-BR",
-      "progresso": 80
+      "progresso": 90
     },
     {
       "id": "produto",
@@ -141,9 +141,10 @@
       "fase": "julho",
       "titulo": "Função sintática no syntax-engine.js",
       "descricao": "Identificar sujeito, predicado e objeto nas frases analisadas",
-      "status": "pendente",
+      "status": "concluido",
       "prioridade": "alta",
-      "estimativa": "M"
+      "estimativa": "M",
+      "nota": "analisarFuncoes() já retorna Sujeito/Núcleo do predicado/Objeto direto — confirmado v958"
     },
     {
       "id": "J-02",
@@ -151,9 +152,10 @@
       "fase": "julho",
       "titulo": "Fix gw-substantivo fallback",
       "descricao": "grammar-controller.js: quando a engine não sabe, mostrar 'indeterminado' não 'substantivo'",
-      "status": "pendente",
+      "status": "concluido",
       "prioridade": "alta",
-      "estimativa": "S"
+      "estimativa": "S",
+      "nota": "Implementado em v947 — gw-indeterminado com label e hint próprios"
     },
     {
       "id": "J-03",
@@ -161,9 +163,10 @@
       "fase": "julho",
       "titulo": "Bench gramatical: 33 → 50+ casos",
       "descricao": "Ampliar corpus com novos homógrafos e casos de função sintática",
-      "status": "pendente",
+      "status": "concluido",
       "prioridade": "media",
-      "estimativa": "M"
+      "estimativa": "M",
+      "nota": "Bench 33→71 casos em v948→v958; 71/71 ok; 14 regras ativas"
     },
     {
       "id": "J-04",
