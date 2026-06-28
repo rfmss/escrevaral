@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v957",
+  "versao": "2026-06-28-v958",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -793,6 +793,216 @@
           "funcao": "sujeito",
           "certeza": "alta",
           "comentario": "R1b + R2: após artigo Os → contexto nominal, Noun."
+        }
+      ]
+    },
+    {
+      "id": "r4-poder-noun-01",
+      "frase": "O poder do amor transforma vidas.",
+      "alvos": [
+        {
+          "texto": "poder",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R4/R3: artigo O antes → leitura nominal de verbo nominalizado."
+        }
+      ]
+    },
+    {
+      "id": "r4-valor-noun-01",
+      "frase": "Ele não sabe o valor do silêncio.",
+      "alvos": [
+        {
+          "texto": "valor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "objeto direto",
+          "certeza": "alta",
+          "comentario": "R4: artigo o antes do substantivo valor."
+        }
+      ]
+    },
+    {
+      "id": "r7-escrito-adj-01",
+      "frase": "O manuscrito foi escrito com cuidado.",
+      "alvos": [
+        {
+          "texto": "escrito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio)",
+          "certeza": "alta",
+          "comentario": "R7: escrito é particípio irregular em _PARTICIPIOS_IRR_CTX; após foi (ser) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7-feito-adj-01",
+      "frase": "O livro foi feito para durar.",
+      "alvos": [
+        {
+          "texto": "feito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio)",
+          "certeza": "alta",
+          "comentario": "R7: feito em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-aberta-adj-01",
+      "frase": "A janela estava aberta desde manhã.",
+      "alvos": [
+        {
+          "texto": "aberta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: aberta sem tag lexical em _PARTICIPIOS_IRR_CTX; após estava → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-limpo-adj-01",
+      "frase": "O texto ficou limpo depois da revisão.",
+      "alvos": [
+        {
+          "texto": "limpo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: limpo sem tag lexical em _ADJ_FLAT_ADV; após ficou → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-livre-adj-01",
+      "frase": "O caminho ficou livre após a tempestade.",
+      "alvos": [
+        {
+          "texto": "livre",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: livre sem tag em _ADJ_FLAT_ADV; após ficou → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7b-clara-adj-01",
+      "frase": "A resposta foi clara e direta.",
+      "alvos": [
+        {
+          "texto": "clara",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "clara possui tag Adjective; após foi → Adjective (predicativo)."
+        }
+      ]
+    },
+    {
+      "id": "r9-baixo-adv-01",
+      "frase": "Ele fala baixo para ninguém ouvir.",
+      "alvos": [
+        {
+          "texto": "baixo",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "R9: baixo em _ADJ_FLAT_ADV; após verbo não-cópula fala → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r9-longe-adv-01",
+      "frase": "O menino correu longe demais.",
+      "alvos": [
+        {
+          "texto": "longe",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de lugar/intensidade",
+          "certeza": "alta",
+          "comentario": "R9: longe em _ADJ_FLAT_ADV; após correu (não-cópula) → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r8-cedo-verbo-01",
+      "frase": "Cedo meu lugar para quem precisa mais.",
+      "alvos": [
+        {
+          "texto": "cedo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "R8: cedo seguido de possessivo meu → leitura verbal (ceder)."
+        }
+      ]
+    },
+    {
+      "id": "r8-cedo-adverbio-01",
+      "frase": "Ela chegou cedo para garantir lugar.",
+      "alvos": [
+        {
+          "texto": "cedo",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "R8: cedo sem possessivo após → leitura adverbial mantida."
+        }
+      ]
+    },
+    {
+      "id": "r10-escrevemos-01",
+      "frase": "Nós escrevemos juntos toda semana.",
+      "alvos": [
+        {
+          "texto": "escrevemos",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "R10: pronome nós antes → leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "r10-publicaram-01",
+      "frase": "Eles publicaram o livro no final do ano.",
+      "alvos": [
+        {
+          "texto": "publicaram",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "R10: pronome eles antes → leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "r2-toque-noun-01",
+      "frase": "O toque suave da mão dela me acalmou.",
+      "alvos": [
+        {
+          "texto": "toque",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2: artigo O antes → leitura nominal de toque."
         }
       ]
     }

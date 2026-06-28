@@ -194,7 +194,7 @@
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
   const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
   const _PRON_PESSOAL = new Set(["eu","tu","ele","ela","nos","nós","vos","vós","eles","elas","voce","vocês","voces","a gente"]);
-  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto","duro","dura","fundo","funda","forte","firme"]);
+  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto","duro","dura","fundo","funda","forte","firme","limpo","limpa","fundo","funda","livre","leve","grave","suave"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
   const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
@@ -292,6 +292,14 @@
         _addUniqueTag(t.tags, "Adjective");
       }
       if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && _ADV_INTENS_ADJ_CTX.has(nextNorm)) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+
+      // R7a — palavra sem tag após cópula → Adjective predicativo:
+      // cobre particípios irregulares sem entrada lexical (aberta, coberta)
+      // e adjetivos planos sem entrada (limpo, livre, leve)
+      if (t.tags.length === 0 && _COPULAS_ADJ_CTX.has(prevNorm)
+          && (_PARTICIPIOS_IRR_CTX.has(na) || _ADJ_FLAT_ADV.has(na))) {
         _addUniqueTag(t.tags, "Adjective");
       }
 
