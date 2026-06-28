@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1001",
+  "versao": "2026-06-28-v1002",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6729,6 +6729,174 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "reescrita em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-num-primeiro-01",
+      "frase": "O primeiro capítulo é o mais denso.",
+      "alvos": [
+        {
+          "texto": "primeiro",
+          "classe_escolar": "numeral ordinal",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal anteposto",
+          "certeza": "alta",
+          "comentario": "primeiro → Adjective + Numeral (NUM_ORDINAIS)."
+        }
+      ]
+    },
+    {
+      "id": "r-num-terceiro-01",
+      "frase": "O terceiro personagem é o narrador.",
+      "alvos": [
+        {
+          "texto": "terceiro",
+          "classe_escolar": "numeral ordinal",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal anteposto",
+          "certeza": "alta",
+          "comentario": "terceiro → Adjective + Numeral (NUM_ORDINAIS)."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-recebeu-01",
+      "frase": "O público recebeu bem a obra.",
+      "alvos": [
+        {
+          "texto": "recebeu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "recebeu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-elogiou-01",
+      "frase": "A crítica elogiou o desfecho.",
+      "alvos": [
+        {
+          "texto": "elogiou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "elogiou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-abandonou-01",
+      "frase": "O leitor abandonou o livro.",
+      "alvos": [
+        {
+          "texto": "abandonou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "abandonou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-acessivel-01",
+      "frase": "O texto é acessível e direto.",
+      "alvos": [
+        {
+          "texto": "acessível",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "acessível em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inclusiva-01",
+      "frase": "A linguagem é inclusiva.",
+      "alvos": [
+        {
+          "texto": "inclusiva",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inclusiva em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-transparente-01",
+      "frase": "O estilo é transparente.",
+      "alvos": [
+        {
+          "texto": "transparente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "transparente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-climax-01",
+      "frase": "O clímax acontece no terceiro ato.",
+      "alvos": [
+        {
+          "texto": "clímax",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "clímax em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-catarse-01",
+      "frase": "A catarse purifica o leitor.",
+      "alvos": [
+        {
+          "texto": "catarse",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "catarse em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-comovente-01",
+      "frase": "A cena é comovente.",
+      "alvos": [
+        {
+          "texto": "comovente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "comovente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-perturbador-01",
+      "frase": "O final é perturbador.",
+      "alvos": [
+        {
+          "texto": "perturbador",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "perturbador em adjetivos_comuns → Adjective."
         }
       ]
     }
