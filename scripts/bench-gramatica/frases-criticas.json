@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1008",
+  "versao": "2026-06-28-v1012",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7724,6 +7724,230 @@
           "certeza": "alta",
           "comentario": "mesma em PRONOMES_INDF/DEM → Pronoun (+ Noun por bigrama Det→Noun)."
         }
+      ]
+    },
+    {
+      "id": "r-adj-sarcastico-01",
+      "frase": "O tom sarcástico do narrador distanciava o leitor da tragédia.",
+      "alvo": "sarcástico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-sarcastico-02",
+      "frase": "A resposta sarcástica dela encerrou a discussão de forma cortante.",
+      "alvo": "sarcástica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-analitico-01",
+      "frase": "A leitura analítica revela camadas de sentido que a leitura rápida ignora.",
+      "alvo": "analítica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-objetivo-01",
+      "frase": "O narrador objetivo registra os fatos sem revelar sua própria opinião.",
+      "alvo": "objetivo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-subjetivo-01",
+      "frase": "O relato subjetivo transbordava de memórias afetivas e impressões pessoais.",
+      "alvo": "subjetivo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-expressionista-01",
+      "frase": "A pintura expressionista influenciou a geração de escritores dos anos 1920.",
+      "alvo": "expressionista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-naturalista-01",
+      "frase": "O texto naturalista mergulhava nas condições materiais e biológicas das personagens.",
+      "alvo": "naturalista",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-picaresco-01",
+      "frase": "O romance picaresco seguia as aventuras de um protagonista de origem humilde.",
+      "alvo": "picaresco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-grotesco-01",
+      "frase": "O realismo grotesco misturava o sublime e o abjeto na mesma cena.",
+      "alvo": "grotesco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-medíocre-01",
+      "frase": "O crítico classificou o romance como medíocre, sem originalidade nem força.",
+      "alvo": "medíocre",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-trivial-01",
+      "frase": "Os detalhes triviais da rotina compunham o retrato íntimo da personagem.",
+      "alvo": "trivial",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-emerge-01",
+      "frase": "Uma nova voz emerge do silêncio quando a personagem deixa de obedecer.",
+      "alvo": "emerge",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-converge-01",
+      "frase": "Todas as histórias convergem no último capítulo para o mesmo ponto de origem.",
+      "alvo": "convergem",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-diverge-01",
+      "frase": "Os dois narradores divergem sobre o que aconteceu na noite do crime.",
+      "alvo": "divergem",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-precede-01",
+      "frase": "O prólogo precede a narrativa principal e antecipa o tom do romance.",
+      "alvo": "precede",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-sucede-01",
+      "frase": "O silêncio sucede ao discurso como uma forma de presença mais intensa.",
+      "alvo": "sucede",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-narrativa-01",
+      "frase": "A narrativa escolhida pela autora priorizava o detalhe sobre a velocidade.",
+      "alvo": "narrativa",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-metáfora-01",
+      "frase": "A metáfora central do livro retomava a imagem da água e do espelho.",
+      "alvo": "metáfora",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-personagem-01",
+      "frase": "O personagem principal carregava um segredo que só revelaria na cena final.",
+      "alvo": "personagem",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-enunciador-01",
+      "frase": "O enunciador do poema fala de uma posição marginal e não nomeada.",
+      "alvo": "enunciador",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-pron-quem-02",
+      "frase": "A oficina é para quem queira aprofundar a técnica narrativa sem perder a voz.",
+      "alvo": "quem",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-pron-cujo-01",
+      "frase": "O autor cujo estilo a influenciou ainda era desconhecido no Brasil.",
+      "alvo": "cujo",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-adv-profundamente-01",
+      "frase": "A obra profundamente humana tocou gerações de leitores em países diferentes.",
+      "alvo": "profundamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conj-conquanto-01",
+      "frase": "A narradora mantinha o tom sereno conquanto sua angústia fosse evidente.",
+      "alvo": "conquanto",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-porquanto-01",
+      "frase": "O texto merece releitura porquanto revela sentidos novos a cada passagem.",
+      "alvo": "porquanto",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-prep-mediante-01",
+      "frase": "A personagem conquistou espaço mediante muito esforço e resistência cotidiana.",
+      "alvo": "mediante",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-prep-conforme-01",
+      "frase": "O texto avança conforme a tensão entre os personagens se intensifica.",
+      "alvo": "conforme",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-num-centenas-01",
+      "frase": "Centenas de manuscritos esperavam na pilha antes de serem lidos pelo editor.",
+      "alvo": "Centenas",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
