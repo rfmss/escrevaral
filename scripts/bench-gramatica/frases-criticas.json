@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1005",
+  "versao": "2026-06-28-v1006",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7373,6 +7373,146 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "lenta em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-sobre-01",
+      "frase": "O livro fala sobre a perda.",
+      "alvos": [
+        {
+          "texto": "sobre",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição regente",
+          "certeza": "alta",
+          "comentario": "sobre em PREPS → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-de-01",
+      "frase": "A obra trata de identidade.",
+      "alvos": [
+        {
+          "texto": "de",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição regente",
+          "certeza": "alta",
+          "comentario": "de em PREPS → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-para-01",
+      "frase": "Escreveu para a posteridade.",
+      "alvos": [
+        {
+          "texto": "para",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de finalidade",
+          "certeza": "alta",
+          "comentario": "para em PREPS → Preposition (+ Verb por homografia, Preposition presente)."
+        }
+      ]
+    },
+    {
+      "id": "r-det-o-01",
+      "frase": "O romance é contemporâneo.",
+      "alvos": [
+        {
+          "texto": "o",
+          "classe_escolar": "artigo definido",
+          "classe_tecnica": "DET",
+          "funcao": "determinante",
+          "certeza": "alta",
+          "comentario": "o em ARTIGOS → Determiner (+ Noun por homografia, Determiner presente)."
+        }
+      ]
+    },
+    {
+      "id": "r-det-a-01",
+      "frase": "A narradora desaparece no fim.",
+      "alvos": [
+        {
+          "texto": "a",
+          "classe_escolar": "artigo definido",
+          "classe_tecnica": "DET",
+          "funcao": "determinante",
+          "certeza": "alta",
+          "comentario": "a em ARTIGOS → Determiner (+ Noun por homografia, Determiner presente)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ironico-01",
+      "frase": "O texto é irônico e cortante.",
+      "alvos": [
+        {
+          "texto": "irônico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "irônico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-releu-01",
+      "frase": "O crítico releu o texto.",
+      "alvos": [
+        {
+          "texto": "releu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "releu em VERBOS_IRR (reler) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-relia-01",
+      "frase": "Ela relia os rascunhos diariamente.",
+      "alvos": [
+        {
+          "texto": "relia",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "relia em VERBOS_IRR (reler) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-extenso-01",
+      "frase": "O romance é extenso.",
+      "alvos": [
+        {
+          "texto": "extenso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "extenso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-conciso-01",
+      "frase": "O conto é conciso.",
+      "alvos": [
+        {
+          "texto": "conciso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "conciso em adjetivos_comuns → Adjective."
         }
       ]
     }
