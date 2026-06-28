@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1013",
+  "versao": "2026-06-28-v1015",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8132,6 +8132,142 @@
       "alvo": "Ambos",
       "esperado": [
         "Determiner"
+      ]
+    },
+    {
+      "id": "r-adj-defensivo-01",
+      "frase": "A postura defensiva do narrador revelava o quanto ele temia a crítica alheia.",
+      "alvo": "defensiva",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-introvertido-01",
+      "frase": "O personagem introvertido preferia observar a participar das conversas do grupo.",
+      "alvo": "introvertido",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-extrovertido-01",
+      "frase": "A narradora extrovertida conquistava a confiança dos outros personagens facilmente.",
+      "alvo": "extrovertida",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-resiliente-01",
+      "frase": "A protagonista resiliente não se deixava abater pelas perdas acumuladas.",
+      "alvo": "resiliente",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-hipocritas-01",
+      "frase": "Os personagens hipócritas sorriam enquanto tramavam na sombra.",
+      "alvo": "hipócritas",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-bucólico-01",
+      "frase": "A paisagem bucólica do interior contrastava com a agitação da cidade deixada para trás.",
+      "alvo": "bucólica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-prosaico-01",
+      "frase": "O detalhe prosaico da cena cotidiana escondia uma tensão profunda.",
+      "alvo": "prosaico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-impar-01",
+      "frase": "A voz ímpar da autora a distinguia de qualquer outra escritora de sua geração.",
+      "alvo": "ímpar",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-sobrio-01",
+      "frase": "O estilo sóbrio do conto revelava uma contenção raramente vista na literatura contemporânea.",
+      "alvo": "sóbrio",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-peculiar-01",
+      "frase": "O narrador peculiar via o mundo por um ângulo que o leitor demorava a compreender.",
+      "alvo": "peculiar",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-exuberante-01",
+      "frase": "A escrita exuberante da autora preenchia cada página com imagens densas.",
+      "alvo": "exuberante",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-tragicômico-01",
+      "frase": "O tom tragicômico do romance desarmava o leitor e o fazia rir e chorar ao mesmo tempo.",
+      "alvo": "tragicômico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-arrasador-01",
+      "frase": "O clímax arrasador do romance esgotava emocionalmente os leitores mais atentos.",
+      "alvo": "arrasador",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-submisso-01",
+      "frase": "O personagem submisso nunca questionava as ordens que recebia, mesmo as mais absurdas.",
+      "alvo": "submisso",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-singular-02",
+      "frase": "A perspectiva singular do narrador invertia as expectativas do leitor.",
+      "alvo": "singular",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-fugaz-01",
+      "frase": "O momento fugaz da reconciliação durou apenas uma página, mas ficou na memória.",
+      "alvo": "fugaz",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-tenuo-01",
+      "frase": "O fio tênue que ligava os personagens se tornou mais visível no último capítulo.",
+      "alvo": "tênue",
+      "esperado": [
+        "Adjective"
       ]
     }
   ]
