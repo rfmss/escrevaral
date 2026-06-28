@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v984",
+  "versao": "2026-06-28-v985",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4363,6 +4363,132 @@
           "funcao": "predicativo do sujeito",
           "certeza": "alta",
           "comentario": "brúsco em adjetivos_comuns (v984) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-psicologico-01",
+      "frase": "O romance é psicológico.",
+      "alvos": [
+        {
+          "texto": "psicológico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "psicológico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-historico-01",
+      "frase": "O texto é histórico.",
+      "alvos": [
+        {
+          "texto": "histórico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "histórico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-mitica-01",
+      "frase": "A obra é mítica.",
+      "alvos": [
+        {
+          "texto": "mítica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "mítica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-heroico-01",
+      "frase": "O personagem é heróico.",
+      "alvos": [
+        {
+          "texto": "heróico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "heróico em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-unica-01",
+      "frase": "A voz narrativa é única.",
+      "alvos": [
+        {
+          "texto": "única",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "única em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-dramatico-01",
+      "frase": "O conflito é dramático.",
+      "alvos": [
+        {
+          "texto": "dramático",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "dramático em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-onisciente-01",
+      "frase": "O narrador é onisciente.",
+      "alvos": [
+        {
+          "texto": "onisciente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "onisciente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ambivalente-01",
+      "frase": "O texto é ambivalente.",
+      "alvos": [
+        {
+          "texto": "ambivalente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "ambivalente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-fragmentada-01",
+      "frase": "A narrativa é fragmentada.",
+      "alvos": [
+        {
+          "texto": "fragmentada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "fragmentada em adjetivos_comuns → Adjective."
         }
       ]
     }
