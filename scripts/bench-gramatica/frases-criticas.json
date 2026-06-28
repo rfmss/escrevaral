@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1012",
+  "versao": "2026-06-28-v1013",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -7948,6 +7948,190 @@
       "alvo": "Centenas",
       "esperado": [
         "Noun"
+      ]
+    },
+    {
+      "id": "r-adj-melancólico-01",
+      "frase": "O personagem melancólico caminhava pelas ruas sem destino definido.",
+      "alvo": "melancólico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-nostálgico-01",
+      "frase": "O olhar nostálgico da escritora transformava memórias comuns em imagens literárias.",
+      "alvo": "nostálgico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-ambíguo-01",
+      "frase": "O final ambíguo do conto permitia múltiplas leituras simultâneas.",
+      "alvo": "ambíguo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-enigmático-01",
+      "frase": "A personagem enigmática nunca revelava completamente suas intenções ao narrador.",
+      "alvo": "enigmática",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-efêmero-01",
+      "frase": "A beleza efêmera da cena contrastava com a permanência do texto escrito.",
+      "alvo": "efêmera",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-visceral-01",
+      "frase": "A prosa visceral da autora não deixava espaço para a indiferença do leitor.",
+      "alvo": "visceral",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-fragmentário-01",
+      "frase": "A narrativa fragmentária espelhava a consciência perturbada da protagonista.",
+      "alvo": "fragmentária",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-lacônico-01",
+      "frase": "O estilo lacônico do autor dispensava qualquer ornamento desnecessário.",
+      "alvo": "lacônico",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-prolífico-01",
+      "frase": "A escritora prolífica publicou mais de quarenta títulos ao longo da carreira.",
+      "alvo": "prolífica",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inédito-01",
+      "frase": "O manuscrito inédito foi encontrado entre os pertences da escritora após sua morte.",
+      "alvo": "inédito",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-póstumo-01",
+      "frase": "O romance póstumo revelou uma fase mais experimental da obra da autora.",
+      "alvo": "póstumo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-permeia-01",
+      "frase": "A ironia permeia todo o texto sem jamais se tornar explícita para o leitor.",
+      "alvo": "permeia",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-ressoa-01",
+      "frase": "O tema central ressoa ao longo de todos os capítulos como um motivo musical.",
+      "alvo": "ressoa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-tensiona-01",
+      "frase": "O narrador tensiona os dois tempos narrativos sem nunca deixar o fio solto.",
+      "alvo": "tensiona",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-desdobra-01",
+      "frase": "A trama se desdobra em três linhas temporais paralelas que convergem no final.",
+      "alvo": "desdobra",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-configura-01",
+      "frase": "O silêncio configura uma forma de resistência na narrativa da protagonista.",
+      "alvo": "configura",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-epílogo-01",
+      "frase": "O epílogo revelava o destino de cada personagem dez anos depois dos eventos.",
+      "alvo": "epílogo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-prólogo-01",
+      "frase": "O prólogo apresentava o mundo antes da catástrofe que motivava toda a trama.",
+      "alvo": "prólogo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-intriga-01",
+      "frase": "A intriga principal do romance girava em torno de um segredo de família.",
+      "alvo": "intriga",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-prep-perante-01",
+      "frase": "Perante a plateia silenciosa, a escritora leu o conto que havia escrito.",
+      "alvo": "Perante",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-prep-salvo-01",
+      "frase": "Todos os personagens fracassaram, salvo a protagonista que encontrou seu caminho.",
+      "alvo": "salvo",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-det-cada-01",
+      "frase": "Cada parágrafo revelava uma nova camada da consciência da personagem principal.",
+      "alvo": "Cada",
+      "esperado": [
+        "Determiner"
+      ]
+    },
+    {
+      "id": "r-det-ambos-01",
+      "frase": "Ambos os narradores descreviam o mesmo evento de perspectivas opostas e complementares.",
+      "alvo": "Ambos",
+      "esperado": [
+        "Determiner"
       ]
     }
   ]
