@@ -225,6 +225,14 @@
     "expulso", "expulsa", "expulsos", "expulsas",
     "aceito", "aceita", "aceitos", "aceitas",
     "oculto", "oculta", "ocultos", "ocultas",
+    "tido", "tida", "tidos", "tidas",
+    "eleito", "eleita", "eleitos", "eleitas",
+    "contido", "contida", "contidos", "contidas",
+    "mantido", "mantida", "mantidos", "mantidas",
+    "obtido", "obtida", "obtidos", "obtidas",
+    "retido", "retida", "retidos", "retidas",
+    "conduzido", "conduzida", "conduzidos", "conduzidas",
+    "previsto", "prevista", "previstos", "previstas",
   ]);
 
   function _isParticipleLike(normNoAccent) {

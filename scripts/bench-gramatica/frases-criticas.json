@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v960",
+  "versao": "2026-06-28-v961",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1171,6 +1171,244 @@
           "funcao": "preposição de assunto",
           "certeza": "alta",
           "comentario": "Preposição temática — entrada lexical direta."
+        }
+      ]
+    },
+    {
+      "id": "r2-amor-noun-01",
+      "frase": "O amor é um sentimento complexo.",
+      "alvos": [
+        {
+          "texto": "amor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — amor como Noun."
+        }
+      ]
+    },
+    {
+      "id": "r2-dor-noun-01",
+      "frase": "A dor da perda é profunda.",
+      "alvos": [
+        {
+          "texto": "dor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — dor como Noun."
+        }
+      ]
+    },
+    {
+      "id": "r2-medo-noun-01",
+      "frase": "O medo a paralisa nos momentos difíceis.",
+      "alvos": [
+        {
+          "texto": "medo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — medo como Noun."
+        }
+      ]
+    },
+    {
+      "id": "r2-culpa-noun-01",
+      "frase": "A culpa sempre volta a assombrar.",
+      "alvos": [
+        {
+          "texto": "culpa",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2: artigo A → nominal."
+        }
+      ]
+    },
+    {
+      "id": "r7-dado-adj-01",
+      "frase": "O projeto foi dado como encerrado.",
+      "alvos": [
+        {
+          "texto": "dado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7: dado termina em -ado (_isParticipleLike); após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7-visto-adj-01",
+      "frase": "O plano ficou visto por todos.",
+      "alvos": [
+        {
+          "texto": "visto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7: visto em _PARTICIPIOS_IRR_CTX; após ficou → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7-dito-adj-01",
+      "frase": "O texto foi dito com cuidado.",
+      "alvos": [
+        {
+          "texto": "dito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7: dito em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-tida-adj-01",
+      "frase": "A obra foi tida como importante.",
+      "alvos": [
+        {
+          "texto": "tida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: tida em _PARTICIPIOS_IRR_CTX (adicionado v961); após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7-coberto-adj-01",
+      "frase": "O papel foi coberto de marcas.",
+      "alvos": [
+        {
+          "texto": "coberto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7: coberto em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7-tomada-adj-01",
+      "frase": "A decisão foi tomada em conjunto.",
+      "alvos": [
+        {
+          "texto": "tomada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7: tomada termina em -ada (_isParticipleLike); após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-det-um-01",
+      "frase": "Um manuscrito é sempre uma aposta.",
+      "alvos": [
+        {
+          "texto": "um",
+          "classe_escolar": "artigo",
+          "classe_tecnica": "DET",
+          "funcao": "artigo indefinido",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — artigo indefinido."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-natural-01",
+      "frase": "Ela tem um talento natural para a escrita.",
+      "alvos": [
+        {
+          "texto": "natural",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — adjetivo pós-nominal."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-foram-01",
+      "frase": "Eles foram ao lançamento do livro.",
+      "alvos": [
+        {
+          "texto": "foram",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — forma irregular de ir."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-era-01",
+      "frase": "Ela era muito jovem quando começou.",
+      "alvos": [
+        {
+          "texto": "era",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Entrada lexical direta — era como forma de ser (imperfeito)."
+        }
+      ]
+    },
+    {
+      "id": "r7a-contida-adj-01",
+      "frase": "Ela ficou contida mesmo com muita raiva.",
+      "alvos": [
+        {
+          "texto": "contida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: contida em _PARTICIPIOS_IRR_CTX; após ficou → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-mantido-adj-01",
+      "frase": "O projeto está mantido pela equipe.",
+      "alvos": [
+        {
+          "texto": "mantido",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: mantido em _PARTICIPIOS_IRR_CTX; após está → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r7a-obtida-adj-01",
+      "frase": "A palavra foi obtida com esforço.",
+      "alvos": [
+        {
+          "texto": "obtida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "R7a: obtida em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
         }
       ]
     }
