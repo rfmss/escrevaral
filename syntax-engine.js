@@ -192,6 +192,8 @@
   // P(curr | prev): Determiner→Noun 0.76, Numeral→Noun 0.87
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
   const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
+  const _PRON_PESSOAL = new Set(["eu","tu","ele","ela","nos","nós","vos","vós","eles","elas","voce","vocês","voces","a gente"]);
+  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
   const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
@@ -290,6 +292,20 @@
       // "Cedo meu lugar" ≠ "Chegou cedo"; possessivo após cedo indica objeto direto.
       if (na === "cedo" && t.tags.includes("Adverb") && _POSSESSIVOS.has(nextNorm)) {
         t.tags = t.tags.filter(tt => tt !== "Adverb");
+        _addUniqueTag(t.tags, "Verb");
+      }
+
+      // R9 — adjetivos usados como advérbios planos após verbo não-cópula:
+      // "falou alto", "correu rápido" — adjective form but adverbial function.
+      if (_ADJ_FLAT_ADV.has(na) && t.tags.length === 1 && t.tags[0] === "Adjective"
+          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
+        _addUniqueTag(t.tags, "Adverb");
+      }
+
+      // R10 — palavra sem tags após pronome pessoal sujeito → leitura verbal:
+      // "Eu jogo", "Ela canta" — pronome pessoal como sujeito indica que o próximo
+      // conteúdo sem classe atribuída é provavelmente verbo.
+      if (t.tags.length === 0 && _PRON_PESSOAL.has(prevNorm)) {
         _addUniqueTag(t.tags, "Verb");
       }
     }

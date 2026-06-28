@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-27-v935",
+  "versao": "2026-06-27-v936",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -317,6 +317,62 @@
           "funcao": "nucleo do predicado em expressao idiomatica",
           "certeza": "alta",
           "comentario": "Vale a pena e expressao idiomatica com vale como verbo valer."
+        }
+      ]
+    },
+    {
+      "id": "alto-adverbio-pos-verbo-01",
+      "frase": "Ela falou alto para ser ouvida.",
+      "alvos": [
+        {
+          "texto": "alto",
+          "classe_escolar": "adverbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "Alto apos verbo nao-copula: uso adverbial plano (falar alto, correr rapido)."
+        }
+      ]
+    },
+    {
+      "id": "alto-adjetivo-predicativo-01",
+      "frase": "A janela estava alta demais para alcançar.",
+      "alvos": [
+        {
+          "texto": "alta",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "Alta apos copula estar mantém leitura adjetiva predicativa."
+        }
+      ]
+    },
+    {
+      "id": "jogo-verbo-pos-pronome-01",
+      "frase": "Eu jogo toda semana com amigos.",
+      "alvos": [
+        {
+          "texto": "jogo",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome pessoal Eu como sujeito: jogo e 1a pessoa singular de jogar."
+        }
+      ]
+    },
+    {
+      "id": "jogo-substantivo-01",
+      "frase": "O jogo terminou no último minuto.",
+      "alvos": [
+        {
+          "texto": "jogo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "Artigo O antes de jogo: leitura nominal inequivoca."
         }
       ]
     },
