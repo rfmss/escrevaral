@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v988",
+  "versao": "2026-06-28-v989",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4867,6 +4867,188 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "labiríntica em adjetivos_comuns (v988) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-durante-01",
+      "frase": "O texto foi escrito durante a pandemia.",
+      "alvos": [
+        {
+          "texto": "durante",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição temporal",
+          "certeza": "alta",
+          "comentario": "durante em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-antes-01",
+      "frase": "O livro foi publicado antes da guerra.",
+      "alvos": [
+        {
+          "texto": "antes",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "antes em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-depois-01",
+      "frase": "Ela escreveu depois de muito pensar.",
+      "alvos": [
+        {
+          "texto": "depois",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "depois em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-nunca-01",
+      "frase": "O texto nunca perde o fôlego.",
+      "alvos": [
+        {
+          "texto": "nunca",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de negação/frequência",
+          "certeza": "alta",
+          "comentario": "nunca em ADV_NEGACAO → Adverb + Negative."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-jamais-01",
+      "frase": "Ela jamais abandona um manuscrito.",
+      "alvos": [
+        {
+          "texto": "jamais",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de negação/frequência",
+          "certeza": "alta",
+          "comentario": "jamais em ADV_NEGACAO → Adverb + Negative."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-este-01",
+      "frase": "Este capítulo é o mais forte do livro.",
+      "alvos": [
+        {
+          "texto": "este",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo",
+          "certeza": "alta",
+          "comentario": "este em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-esse-01",
+      "frase": "Esse personagem é o protagonista.",
+      "alvos": [
+        {
+          "texto": "esse",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo",
+          "certeza": "alta",
+          "comentario": "esse em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-aquele-01",
+      "frase": "Aquele romance marcou uma geração.",
+      "alvos": [
+        {
+          "texto": "aquele",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo",
+          "certeza": "alta",
+          "comentario": "aquele em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-construiu-01",
+      "frase": "O autor construiu um mundo coerente.",
+      "alvos": [
+        {
+          "texto": "construiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "construiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-abandonou-01",
+      "frase": "Ela abandonou o projeto por um ano.",
+      "alvos": [
+        {
+          "texto": "abandonou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "abandonou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-destruiu-01",
+      "frase": "O personagem destruiu sua própria história.",
+      "alvos": [
+        {
+          "texto": "destruiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "destruiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-talvez-01",
+      "frase": "Talvez o texto melhore na revisão.",
+      "alvos": [
+        {
+          "texto": "talvez",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de dúvida/modalidade",
+          "certeza": "alta",
+          "comentario": "talvez em ADV_DUVIDA → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-provavelmente-01",
+      "frase": "Provavelmente ela publicará em breve.",
+      "alvos": [
+        {
+          "texto": "provavelmente",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modalidade epistêmica",
+          "certeza": "alta",
+          "comentario": "provavelmente em ADV_MODO → Adverb."
         }
       ]
     }
