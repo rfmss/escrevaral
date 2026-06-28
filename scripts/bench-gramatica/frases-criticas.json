@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v971",
+  "versao": "2026-06-28-v972",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2543,6 +2543,188 @@
           "funcao": "nucleo do sujeito",
           "certeza": "alta",
           "comentario": "esboço em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-dialogo-01",
+      "frase": "O diálogo entre as personagens é tenso.",
+      "alvos": [
+        {
+          "texto": "diálogo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "diálogo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-enredo-01",
+      "frase": "O enredo se complica no segundo ato.",
+      "alvos": [
+        {
+          "texto": "enredo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "enredo em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-voz-01",
+      "frase": "A voz narrativa define o tom do texto.",
+      "alvos": [
+        {
+          "texto": "voz",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "voz em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-triste-01",
+      "frase": "O personagem ficou triste ao final.",
+      "alvos": [
+        {
+          "texto": "triste",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "triste em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-aliviada-01",
+      "frase": "Ela se sentiu aliviada com o feedback.",
+      "alvos": [
+        {
+          "texto": "aliviada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (semi-cópula sentiu)",
+          "certeza": "alta",
+          "comentario": "sentiu em _COPULAS_ADJ_CTX → aliviada → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-satisfeito-01",
+      "frase": "O escritor pareceu satisfeito com o resultado.",
+      "alvos": [
+        {
+          "texto": "satisfeito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "satisfeito em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-compos-01",
+      "frase": "Ela compôs o poema durante a madrugada.",
+      "alvos": [
+        {
+          "texto": "compôs",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "compôs em VERBOS_IRR (compor) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-narrou-01",
+      "frase": "O autor narrou os fatos em ordem cronológica.",
+      "alvos": [
+        {
+          "texto": "narrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "narrou em VERBOS_IRR (narrar) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-criou-01",
+      "frase": "Ela criou um universo rico para o leitor.",
+      "alvos": [
+        {
+          "texto": "criou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "criou em VERBOS_IRR (criar) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-bem-01",
+      "frase": "Ela escreve bem quando está descansada.",
+      "alvos": [
+        {
+          "texto": "bem",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "bem em ADV_MODO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-devagar-01",
+      "frase": "Ele leu o texto devagar para entendê-lo.",
+      "alvos": [
+        {
+          "texto": "devagar",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de modo",
+          "certeza": "alta",
+          "comentario": "devagar em ADV_MODO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-voce-01",
+      "frase": "Você pode revisar o meu texto?",
+      "alvos": [
+        {
+          "texto": "você",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome de tratamento sujeito",
+          "certeza": "alta",
+          "comentario": "você em PRONOMES_SUBJ → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-senhor-01",
+      "frase": "O senhor entende o que quis dizer?",
+      "alvos": [
+        {
+          "texto": "senhor",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "pronome de tratamento formal (forma nominal)",
+          "certeza": "alta",
+          "comentario": "senhor em lexicon → Noun (trata-se de forma nominal de tratamento)."
         }
       ]
     }
