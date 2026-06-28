@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1017",
+  "versao": "2026-06-28-v1019",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -8604,6 +8604,318 @@
       "alvo": "Certo",
       "esperado": [
         "Determiner"
+      ]
+    },
+    {
+      "id": "r-pron-onde-01",
+      "frase": "A cidade onde a autora nasceu aparece em quase todos os seus romances.",
+      "alvo": "onde",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-pron-onde-02",
+      "frase": "O lugar onde a cena acontece nunca é nomeado diretamente pelo narrador.",
+      "alvo": "onde",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-pron-quanto-01",
+      "frase": "Quanto mais o narrador revela, mais o leitor sente que algo está sendo omitido.",
+      "alvo": "Quanto",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-pron-qual-01",
+      "frase": "O leitor precisa decidir qual das duas versões acreditar até o fim do romance.",
+      "alvo": "qual",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-pron-quais-01",
+      "frase": "As razões pelas quais o personagem fugiu nunca ficam totalmente claras.",
+      "alvo": "quais",
+      "esperado": [
+        "Pronoun"
+      ]
+    },
+    {
+      "id": "r-adj-efêmero-02",
+      "frase": "Os instantes efêmeros de alegria contrastavam com a dor permanente da perda.",
+      "alvo": "efêmeros",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-eterno-01",
+      "frase": "A busca pelo amor eterno atravessa toda a obra da escritora paulistana.",
+      "alvo": "eterno",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-fugidio-01",
+      "frase": "A paz fugídia que o personagem encontrava durava sempre menos do que ele esperava.",
+      "alvo": "fugídia",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-passageiro-01",
+      "frase": "O alívio passageiro da cena cômica tornava a tragédia seguinte ainda mais intensa.",
+      "alvo": "passageiro",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-duradouro-01",
+      "frase": "O impacto duradouro da obra se mede pela quantidade de leitores que voltam a ela.",
+      "alvo": "duradouro",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-vasto-01",
+      "frase": "O vasto silêncio da cena final pesava sobre o leitor como uma presença física.",
+      "alvo": "vasto",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-ínfimo-01",
+      "frase": "O detalhe ínfimo que o narrador nota revela seu olhar preciso e obsessivo.",
+      "alvo": "ínfimo",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-irrisório-01",
+      "frase": "O valor irrisório do objeto escondia uma importância simbólica enorme para a protagonista.",
+      "alvo": "irrisório",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-colossal-01",
+      "frase": "A ambição colossal da narrativa se realizava frase a frase, sem jamais parecer pretensiosa.",
+      "alvo": "colossal",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-plausível-01",
+      "frase": "A hipótese mais plausível para o sumiço era a que o narrador mais resistia em aceitar.",
+      "alvo": "plausível",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-provável-01",
+      "frase": "O desfecho mais provável era justamente o que a autora se recusava a escrever.",
+      "alvo": "provável",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inequívoco-01",
+      "frase": "O sinal inequívoco de que a narrativa estava se acelerando era o encurtamento das frases.",
+      "alvo": "inequívoco",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-inegável-01",
+      "frase": "A influência inegável de Guimarães Rosa na obra se revelava no ritmo das frases longas.",
+      "alvo": "inegável",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-irrepreensível-01",
+      "frase": "A conduta irrepreensível da heroína tornava sua queda ainda mais perturbadora para o leitor.",
+      "alvo": "irrepreensível",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-contraditório-01",
+      "frase": "O personagem contraditório atraía e repelia o leitor ao mesmo tempo e com igual força.",
+      "alvo": "contraditório",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-adj-dissimulado-01",
+      "frase": "O vilão dissimulado enganava todos com uma gentileza perfeita e sem fissuras.",
+      "alvo": "dissimulado",
+      "esperado": [
+        "Adjective"
+      ]
+    },
+    {
+      "id": "r-verb-sintetiza-01",
+      "frase": "O parágrafo final sintetiza toda a tensão acumulada em uma única imagem precisa.",
+      "alvo": "sintetiza",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-exemplifica-01",
+      "frase": "A cena exemplifica o método da autora de revelar caráter pela ação, não pela descrição.",
+      "alvo": "exemplifica",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-contradiz-01",
+      "frase": "O epílogo contradiz a leitura otimista que alguns faziam do clímax do romance.",
+      "alvo": "contradiz",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-consolida-01",
+      "frase": "O terceiro ato consolida a transformação que o protagonista havia iniciado no primeiro.",
+      "alvo": "consolida",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-antecipa-01",
+      "frase": "O prólogo antecipa o fim sem revelá-lo, criando uma tensão que percorre todo o texto.",
+      "alvo": "antecipa",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-verb-corrobora-01",
+      "frase": "A cena final corrobora a interpretação de que o narrador sabia mais do que admitia.",
+      "alvo": "corrobora",
+      "esperado": [
+        "Verb"
+      ]
+    },
+    {
+      "id": "r-noun-cronotopo-01",
+      "frase": "O cronotopo do romance é a cidade portuária no início do século vinte.",
+      "alvo": "cronotopo",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-paratexto-01",
+      "frase": "O paratexto do livro incluía uma nota de autora que recontextualizava toda a leitura.",
+      "alvo": "paratexto",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-noun-leitora-01",
+      "frase": "A leitora implícita do romance é uma mulher que reconhece o silêncio como resistência.",
+      "alvo": "leitora",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-adv-deliberadamente-01",
+      "frase": "O narrador deliberadamente omitia os nomes dos lugares para universalizar a história.",
+      "alvo": "deliberadamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-paulatinamente-01",
+      "frase": "A tensão se acumulava paulatinamente até que uma única frase explodisse tudo.",
+      "alvo": "paulatinamente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-gradualmente-01",
+      "frase": "O leitor gradualmente percebia que o narrador havia mentido desde a primeira página.",
+      "alvo": "gradualmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-adv-sutilmente-01",
+      "frase": "A ironia se instalava sutilmente nas brechas entre o que era dito e o que era mostrado.",
+      "alvo": "sutilmente",
+      "esperado": [
+        "Adverb"
+      ]
+    },
+    {
+      "id": "r-conj-visto que-01",
+      "frase": "A autora escolheu o fragmento, visto que a linearidade traía a experiência que queria contar.",
+      "alvo": "visto",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-dado que-01",
+      "frase": "Dado que o narrador é não confiável, toda informação precisa ser lida com cautela.",
+      "alvo": "Dado",
+      "esperado": [
+        "Conjunction"
+      ]
+    },
+    {
+      "id": "r-conj-uma vez que-01",
+      "frase": "Uma vez que o pacto ficcional estava estabelecido, o leitor aceitava os eventos impossíveis.",
+      "alvo": "vez",
+      "esperado": [
+        "Noun"
+      ]
+    },
+    {
+      "id": "r-prep-ante-01",
+      "frase": "Ante o fracasso do plano, a protagonista precisou reinventar completamente sua estratégia.",
+      "alvo": "Ante",
+      "esperado": [
+        "Preposition"
+      ]
+    },
+    {
+      "id": "r-noun-cronotopo-02",
+      "frase": "O cronotopo da aldeia remota funcionava como espelho do estado interior da personagem.",
+      "alvo": "cronotopo",
+      "esperado": [
+        "Noun"
       ]
     }
   ]
