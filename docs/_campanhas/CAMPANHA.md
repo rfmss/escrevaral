@@ -6,6 +6,21 @@ Iniciado em: 2026-05-24
 
 ---
 
+## Manifesto do Escrevaral — 2026-06-28
+
+1. A língua portuguesa brasileira não é versão traduzida de nenhuma outra língua — e a ferramenta de quem escreve nela também não pode ser.
+2. Escrever é um ato privado. Seu manuscrito não é dado. Ele nunca sai da sua máquina.
+3. Uma ferramenta que não explica o que faz não é ferramenta — é oráculo. Aqui, cada sugestão tem razão, e você pode discordar dela.
+4. A escritora brasileira escreve de dentro de uma língua viva, múltipla, marcada por África, por indígenas, por migração, por invenção — e a ferramenta dela precisa saber disso.
+5. Não existe "erro" na ficção. Existe escolha consciente e equívoco. Aprender a diferença é aprender a escrever.
+6. A mesa de trabalho não precisa falar mais alto que o texto. Tudo aqui é silencioso até você querer saber.
+7. Autonomia não é escrever sem ajuda — é entender o que a ajuda está fazendo.
+8. O cânone foi construído por alguns e excluiu muitos. A ferramenta de quem escreve hoje precisa conhecer o que foi deixado de fora.
+9. Não temos investidor. Não temos agenda. Temos a mesma pergunta de sempre: o que esta escritora precisa para escrever melhor?
+10. Um lugar de fazer nada, com tudo que precisa.
+
+---
+
 ## Log de sessão — 2026-06-28 (posicionamento e pilares de copy)
 
 ### Analogia canônica de posicionamento
