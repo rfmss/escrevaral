@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v978",
+  "versao": "2026-06-28-v979",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3425,6 +3425,174 @@
           "funcao": "adjunto adnominal pós-nominal",
           "certeza": "alta",
           "comentario": "fluida em _ADJ_IDO → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-climax-01",
+      "frase": "O clímax chega no penúltimo capítulo.",
+      "alvos": [
+        {
+          "texto": "clímax",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "clímax em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-catarse-01",
+      "frase": "A catarse ocorre no final da peça.",
+      "alvos": [
+        {
+          "texto": "catarse",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "catarse em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-epifania-01",
+      "frase": "A epifania do personagem muda tudo.",
+      "alvos": [
+        {
+          "texto": "epifania",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "epifania em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-analepse-01",
+      "frase": "A analepse revela o passado do herói.",
+      "alvos": [
+        {
+          "texto": "analepse",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "analepse em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-em-01",
+      "frase": "Ela escreveu em nome da comunidade.",
+      "alvos": [
+        {
+          "texto": "em",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de locução prepositiva",
+          "certeza": "alta",
+          "comentario": "em em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-por-01",
+      "frase": "O livro fala por si mesmo.",
+      "alvos": [
+        {
+          "texto": "por",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de meio/modo",
+          "certeza": "alta",
+          "comentario": "por em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-de-01",
+      "frase": "O narrador age de acordo com o enredo.",
+      "alvos": [
+        {
+          "texto": "de",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de locução prepositiva",
+          "certeza": "alta",
+          "comentario": "de em PREPS_OI → Preposition."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-permaneceu-01",
+      "frase": "O personagem permaneceu calado.",
+      "alvos": [
+        {
+          "texto": "permaneceu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de ligação",
+          "certeza": "alta",
+          "comentario": "permaneceu em _COPULAS_ADJ_CTX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-continua-prep-01",
+      "frase": "O mistério continua sem solução.",
+      "alvos": [
+        {
+          "texto": "continua",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "continua em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-eloquente-01",
+      "frase": "O silêncio é eloquente.",
+      "alvos": [
+        {
+          "texto": "eloquente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "eloquente em adjetivos_comuns v977 → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inesperado-01",
+      "frase": "O desfecho foi inesperado.",
+      "alvos": [
+        {
+          "texto": "inesperado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inesperado após foi (copula) → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-num-duas-01",
+      "frase": "Ela leu o segundo capítulo duas vezes.",
+      "alvos": [
+        {
+          "texto": "duas",
+          "classe_escolar": "numeral",
+          "classe_tecnica": "NUM",
+          "funcao": "numeral cardinal",
+          "certeza": "alta",
+          "comentario": "duas em NUMERAIS → Numeral."
         }
       ]
     }
