@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v958",
+  "versao": "2026-06-28-v960",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1003,6 +1003,174 @@
           "funcao": "nucleo do sujeito",
           "certeza": "alta",
           "comentario": "R2: artigo O antes → leitura nominal de toque."
+        }
+      ]
+    },
+    {
+      "id": "r4-fundo-noun-01",
+      "frase": "O fundo do mar guarda histórias antigas.",
+      "alvos": [
+        {
+          "texto": "fundo",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R4/R2: artigo O + sintagma genitivo = leitura nominal de fundo."
+        }
+      ]
+    },
+    {
+      "id": "r7-vista-noun-01",
+      "frase": "A vista da janela é linda.",
+      "alvos": [
+        {
+          "texto": "vista",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2/R4: artigo A antes → leitura nominal de vista."
+        }
+      ]
+    },
+    {
+      "id": "r7-vista-adj-01",
+      "frase": "Ela foi vista chegando tarde.",
+      "alvos": [
+        {
+          "texto": "vista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio passivo)",
+          "certeza": "alta",
+          "comentario": "R7: vista é particípio irregular; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r2-canto-noun-01",
+      "frase": "O canto do pássaro acordou todos.",
+      "alvos": [
+        {
+          "texto": "canto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2: artigo O antes de canto → leitura nominal."
+        }
+      ]
+    },
+    {
+      "id": "r2-marca-noun-01",
+      "frase": "A marca da editora ficou conhecida.",
+      "alvos": [
+        {
+          "texto": "marca",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2: artigo A antes → nominal."
+        }
+      ]
+    },
+    {
+      "id": "r10-marca-verb-01",
+      "frase": "Ela marca o dia da entrega no calendário.",
+      "alvos": [
+        {
+          "texto": "marca",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "R10: pronome Ela antes, sem artigo → leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "r7-posto-noun-01",
+      "frase": "O posto de escritora é solitário.",
+      "alvos": [
+        {
+          "texto": "posto",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "R2: artigo O antes → leitura nominal de posto."
+        }
+      ]
+    },
+    {
+      "id": "r7-posto-adj-01",
+      "frase": "O texto foi posto em evidência.",
+      "alvos": [
+        {
+          "texto": "posto",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (particípio passivo)",
+          "certeza": "alta",
+          "comentario": "R7: posto é particípio irregular em _PARTICIPIOS_IRR_CTX; após foi → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-mas-01",
+      "frase": "Ela escreve mas não publica.",
+      "alvos": [
+        {
+          "texto": "mas",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa adversativa",
+          "certeza": "alta",
+          "comentario": "Conjunção adversativa básica — entrada lexical direta."
+        }
+      ]
+    },
+    {
+      "id": "r-conj-e-01",
+      "frase": "Ele leu e gostou do manuscrito.",
+      "alvos": [
+        {
+          "texto": "e",
+          "classe_escolar": "conjunção",
+          "classe_tecnica": "CONJ",
+          "funcao": "conjunção coordenativa aditiva",
+          "certeza": "alta",
+          "comentario": "Conjunção aditiva básica — entrada lexical direta."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-sobre-01",
+      "frase": "O livro está sobre a mesa.",
+      "alvos": [
+        {
+          "texto": "sobre",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de lugar",
+          "certeza": "alta",
+          "comentario": "Preposição locativa — entrada lexical direta."
+        }
+      ]
+    },
+    {
+      "id": "r-prep-sobre-02",
+      "frase": "Ela falou sobre o processo de escrita.",
+      "alvos": [
+        {
+          "texto": "sobre",
+          "classe_escolar": "preposição",
+          "classe_tecnica": "PREP",
+          "funcao": "preposição de assunto",
+          "certeza": "alta",
+          "comentario": "Preposição temática — entrada lexical direta."
         }
       ]
     }

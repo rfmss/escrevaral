@@ -325,11 +325,26 @@
         _addUniqueTag(t.tags, "Adverb");
       }
 
+      // R9b — adj plano com leitura verbal (sem Adjective) após verbo não-cópula sem objeto direto → Adverb:
+      // "respirou fundo", "cantou forte" — distingue de "eu fundo coisas" onde fundo toma objeto nominal
+      if (_ADJ_FLAT_ADV.has(na) && t.tags.includes("Verb") && !t.tags.includes("Adjective")
+          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)
+          && !nextTags.includes("Noun") && !nextTags.includes("Pronoun") && !nextTags.includes("Determiner")) {
+        _addUniqueTag(t.tags, "Adverb");
+      }
+
       // R7b — pronome indefinido em _ADJ_FLAT_ADV como predicativo após cópula:
       // "certa" em "A resposta foi certa" deve ser Adjective, não só Pronome
       if (_COPULAS_ADJ_CTX.has(prevNorm) && _ADJ_FLAT_ADV.has(na)
           && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
           && !t.tags.includes("Adjective")) {
+        _addUniqueTag(t.tags, "Adjective");
+      }
+
+      // R7c — adj plano com leitura verbal após intensificador → Adjective predicativo:
+      // "é muito fundo", "ficou muito forte", "está muito limpo" (verb=fundir, mas contexto = adj)
+      if (_ADJ_FLAT_ADV.has(na) && t.tags.includes("Verb") && !t.tags.includes("Adjective")
+          && _ADV_INTENS_ADJ_CTX.has(prevNorm)) {
         _addUniqueTag(t.tags, "Adjective");
       }
 
