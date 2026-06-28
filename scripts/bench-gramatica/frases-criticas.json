@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v977",
+  "versao": "2026-06-28-v978",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -3257,6 +3257,174 @@
           "funcao": "verbo principal",
           "certeza": "alta",
           "comentario": "descreve em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-aparece-01",
+      "frase": "O narrador nunca aparece em cena.",
+      "alvos": [
+        {
+          "texto": "aparece",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "aparece em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-possui-01",
+      "frase": "O texto possui uma estrutura circular.",
+      "alvos": [
+        {
+          "texto": "possui",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "possui em VERBOS_PRES → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-contem-01",
+      "frase": "O livro contém três atos distintos.",
+      "alvos": [
+        {
+          "texto": "contém",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "contém em VERBOS_IRR (conter) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-meu-01",
+      "frase": "O manuscrito é meu.",
+      "alvos": [
+        {
+          "texto": "meu",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome possessivo predicativo",
+          "certeza": "alta",
+          "comentario": "meu em PRONOMES_POSS → Pronoun + Possessive."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-sua-01",
+      "frase": "A voz narrativa é sua.",
+      "alvos": [
+        {
+          "texto": "sua",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome possessivo predicativo",
+          "certeza": "alta",
+          "comentario": "sua em PRONOMES_POSS → Pronoun + Possessive."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-revisao-01",
+      "frase": "A revisão melhorou o texto final.",
+      "alvos": [
+        {
+          "texto": "revisão",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "revisão em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-edicao-01",
+      "frase": "A edição do livro demorou dois anos.",
+      "alvos": [
+        {
+          "texto": "edição",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "edição em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-ainda-concess-01",
+      "frase": "Ela publicou ainda que duvidasse.",
+      "alvos": [
+        {
+          "texto": "ainda",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "advérbio em locução concessiva 'ainda que'",
+          "certeza": "alta",
+          "comentario": "ainda → Adverb em qualquer contexto."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-considerou-01",
+      "frase": "O crítico considerou o livro brilhante.",
+      "alvos": [
+        {
+          "texto": "considerou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de atribuição (semi-cópula)",
+          "certeza": "alta",
+          "comentario": "considerou em _COPULAS_ADJ_CTX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-julgou-01",
+      "frase": "O leitor julgou o final precipitado.",
+      "alvos": [
+        {
+          "texto": "julgou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de atribuição (semi-cópula)",
+          "certeza": "alta",
+          "comentario": "julgou em _COPULAS_ADJ_CTX → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-simples-01",
+      "frase": "O estilo simples agrada ao leitor.",
+      "alvos": [
+        {
+          "texto": "simples",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "simples em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-fluida-01",
+      "frase": "A prosa fluida conquista o público.",
+      "alvos": [
+        {
+          "texto": "fluida",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "fluida em _ADJ_IDO → Adjective + Verb."
         }
       ]
     }
