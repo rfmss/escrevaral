@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v999",
+  "versao": "2026-06-28-v1000",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6449,6 +6449,118 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "ponto em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-modernista-01",
+      "frase": "O texto é modernista.",
+      "alvos": [
+        {
+          "texto": "modernista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "modernista em adjetivos_comuns (v1000); R1 não dispara pois tags não vazias."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-expressionistas-01",
+      "frase": "A obra tem traços expressionistas.",
+      "alvos": [
+        {
+          "texto": "expressionistas",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "expressionistas em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-existencialista-01",
+      "frase": "A tendência é existencialista.",
+      "alvos": [
+        {
+          "texto": "existencialista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "existencialista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-estruturalista-01",
+      "frase": "O enfoque é estruturalista.",
+      "alvos": [
+        {
+          "texto": "estruturalista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "estruturalista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-materialista-01",
+      "frase": "O projeto tem viés materialista.",
+      "alvos": [
+        {
+          "texto": "materialista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "materialista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-regionalista-01",
+      "frase": "O texto é regionalista.",
+      "alvos": [
+        {
+          "texto": "regionalista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "regionalista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-concretista-01",
+      "frase": "A corrente concretista influenciou a poesia.",
+      "alvos": [
+        {
+          "texto": "concretista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "concretista em adjetivos_comuns (v1000)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-cubista-01",
+      "frase": "O movimento cubista rompeu com a tradição.",
+      "alvos": [
+        {
+          "texto": "cubista",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal pós-nominal",
+          "certeza": "alta",
+          "comentario": "cubista em adjetivos_comuns (v1000)."
         }
       ]
     }
