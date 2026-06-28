@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v965b",
+  "versao": "2026-06-28-v967",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -1661,6 +1661,174 @@
           "funcao": "adjunto adnominal (gentílico)",
           "certeza": "alta",
           "comentario": "sertaneja adicionada em norma-data.json v965."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-relevante-01",
+      "frase": "O texto permanece relevante para a leitora.",
+      "alvos": [
+        {
+          "texto": "relevante",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "relevante em adjetivos -ente → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-essencial-01",
+      "frase": "A obra se tornou essencial para o cânone.",
+      "alvos": [
+        {
+          "texto": "essencial",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "essencial em adjetivos -ial (norma-data v967) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-ansioso-01",
+      "frase": "O personagem ficou ansioso durante a crise.",
+      "alvos": [
+        {
+          "texto": "ansioso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "ansioso em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-isso-01",
+      "frase": "Isso é o que define a boa escrita.",
+      "alvos": [
+        {
+          "texto": "isso",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo sujeito",
+          "certeza": "alta",
+          "comentario": "isso em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-aquilo-01",
+      "frase": "Aquilo que ela escreveu mudou minha vida.",
+      "alvos": [
+        {
+          "texto": "aquilo",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome demonstrativo sujeito",
+          "certeza": "alta",
+          "comentario": "aquilo em PRONOMES_DEM → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-disse-01",
+      "frase": "O narrador disse que estava nervoso.",
+      "alvos": [
+        {
+          "texto": "disse",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "disse em VERBOS_IRR (dizer) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-quis-01",
+      "frase": "Ela quis escrever um conto diferente.",
+      "alvos": [
+        {
+          "texto": "quis",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo auxiliar modal",
+          "certeza": "alta",
+          "comentario": "quis em VERBOS_IRR (querer) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-veio-01",
+      "frase": "O personagem veio de longe para contar sua história.",
+      "alvos": [
+        {
+          "texto": "veio",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "veio em VERBOS_IRR (vir) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-beleza-01",
+      "frase": "A beleza do texto reside na sua clareza.",
+      "alvos": [
+        {
+          "texto": "beleza",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "beleza em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-tensao-01",
+      "frase": "A tensão entre os personagens é palpável.",
+      "alvos": [
+        {
+          "texto": "tensão",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "tensão em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-lirica-01",
+      "frase": "Sua prosa é densa, lírica e precisa.",
+      "alvos": [
+        {
+          "texto": "lírica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "lírica em adjetivos -ica (norma-data v967) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-celebre-01",
+      "frase": "O romance ficou célebre entre os leitores.",
+      "alvos": [
+        {
+          "texto": "célebre",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "célebre em adjetivos_comuns (norma-data v967) → Adjective."
         }
       ]
     }
