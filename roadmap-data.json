@@ -1,12 +1,12 @@
 {
   "meta": {
     "projeto": "Escrevaral",
-    "versao": "v993",
+    "versao": "v999",
     "atualizado": "2026-06-28",
     "posicionamento": "O Grammarly está para o inglês assim como o Escrevaral está para o português brasileiro",
     "definicao_tecnica": "Sistema especialista de linguagem — gramática artesanal verificável, não caixa preta",
-    "bench_casos": 400,
-    "bench_ok": 400
+    "bench_casos": 460,
+    "bench_ok": 460
   },
   "metricas": {
     "definicoes": 2245,
