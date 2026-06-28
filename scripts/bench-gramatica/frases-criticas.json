@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v986",
+  "versao": "2026-06-28-v987",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -4601,6 +4601,118 @@
           "funcao": "verbo principal (gerúndio em perífrase progressiva)",
           "certeza": "alta",
           "comentario": "dormindo em VERBOS_GERUND → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-fluente-01",
+      "frase": "O texto é fluente.",
+      "alvos": [
+        {
+          "texto": "fluente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "fluente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-coerente-01",
+      "frase": "O diálogo é coerente.",
+      "alvos": [
+        {
+          "texto": "coerente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "coerente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-convincente-01",
+      "frase": "A narrativa é convincente.",
+      "alvos": [
+        {
+          "texto": "convincente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "convincente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-rebuscado-01",
+      "frase": "O texto é rebuscado.",
+      "alvos": [
+        {
+          "texto": "rebuscado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "rebuscado em _ADJ_IDO → Adjective + Verb (particípio adjetivado)."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-introspectivo-01",
+      "frase": "O romance é introspectivo.",
+      "alvos": [
+        {
+          "texto": "introspectivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "introspectivo em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-pertinente-02",
+      "frase": "A análise é pertinente.",
+      "alvos": [
+        {
+          "texto": "pertinente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "pertinente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inconsistente-01",
+      "frase": "O argumento é inconsistente.",
+      "alvos": [
+        {
+          "texto": "inconsistente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inconsistente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inconclusivo-01",
+      "frase": "O texto é inconclusivo.",
+      "alvos": [
+        {
+          "texto": "inconclusivo",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "inconclusivo em adjetivos_comuns → Adjective."
         }
       ]
     }
