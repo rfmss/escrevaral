@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v996",
+  "versao": "2026-06-28-v997",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -6057,6 +6057,104 @@
           "funcao": "núcleo do sujeito",
           "certeza": "alta",
           "comentario": "memória em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-redigiu-01",
+      "frase": "Ela redigiu o conto em uma noite.",
+      "alvos": [
+        {
+          "texto": "redigiu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "redigiu em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-narrou-01",
+      "frase": "O autor narrou os fatos com distância.",
+      "alvos": [
+        {
+          "texto": "narrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "narrou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-criou-01",
+      "frase": "Ela criou um universo coerente.",
+      "alvos": [
+        {
+          "texto": "criou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "criou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-registrou-01",
+      "frase": "O texto registrou o momento histórico.",
+      "alvos": [
+        {
+          "texto": "registrou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "registrou em VERBOS_IRR → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-autobiografica-01",
+      "frase": "A narrativa é autobiográfica.",
+      "alvos": [
+        {
+          "texto": "autobiográfica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "autobiográfica em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-coautoria-01",
+      "frase": "A coautoria enriquece o projeto.",
+      "alvos": [
+        {
+          "texto": "coautoria",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "coautoria em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-pseudonimia-01",
+      "frase": "A pseudonímia esconde a identidade.",
+      "alvos": [
+        {
+          "texto": "pseudonímia",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "núcleo do sujeito",
+          "certeza": "alta",
+          "comentario": "pseudonímia em DEFINICOES/substantivos_ia → Noun."
         }
       ]
     }
