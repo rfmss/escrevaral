@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v972",
+  "versao": "2026-06-28-v973",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2725,6 +2725,118 @@
           "funcao": "pronome de tratamento formal (forma nominal)",
           "certeza": "alta",
           "comentario": "senhor em lexicon → Noun (trata-se de forma nominal de tratamento)."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-gaveta-01",
+      "frase": "A escritora guardou o manuscrito na gaveta.",
+      "alvos": [
+        {
+          "texto": "gaveta",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do objeto indireto",
+          "certeza": "alta",
+          "comentario": "gaveta em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-cheio-01",
+      "frase": "O caderno dela estava cheio de ideias.",
+      "alvos": [
+        {
+          "texto": "cheio",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "cheio adicionado a adjetivos_comuns em v973 → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-recusa-01",
+      "frase": "Ela publicou apesar da recusa inicial.",
+      "alvos": [
+        {
+          "texto": "recusa",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo de locução prepositiva",
+          "certeza": "alta",
+          "comentario": "recusa em lexicon → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-inconfundivel-01",
+      "frase": "O texto revelou um estilo inconfundível.",
+      "alvos": [
+        {
+          "texto": "inconfundível",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "inconfundível em adjetivos_comuns (-ível) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-mais-01",
+      "frase": "O narrador sabia mais do que revelava.",
+      "alvos": [
+        {
+          "texto": "mais",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "advérbio comparativo",
+          "certeza": "alta",
+          "comentario": "mais em ADV_INTENS → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-dedicado-01",
+      "frase": "O livro foi dedicado à sua mãe.",
+      "alvos": [
+        {
+          "texto": "dedicado",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva",
+          "certeza": "alta",
+          "comentario": "dedicado após foi (copula) → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-voltou-01",
+      "frase": "A personagem voltou à cena do crime.",
+      "alvos": [
+        {
+          "texto": "voltou",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo principal",
+          "certeza": "alta",
+          "comentario": "voltou em VERBOS_IRR (voltar) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-vazio-01",
+      "frase": "O vaso estava vazio depois da chuva.",
+      "alvos": [
+        {
+          "texto": "vazio",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "vazio adicionado a adjetivos_comuns em v973 → Adjective."
         }
       ]
     }
