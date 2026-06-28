@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v970",
+  "versao": "2026-06-28-v971",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2333,6 +2333,216 @@
           "funcao": "verbo principal",
           "certeza": "alta",
           "comentario": "releu em VERBOS_IRR (ler) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-havia-01",
+      "frase": "Ela havia terminado o conto antes do prazo.",
+      "alvos": [
+        {
+          "texto": "havia",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "auxiliar de aspecto (perfeito composto)",
+          "certeza": "alta",
+          "comentario": "havia em VERBOS_IRR (haver) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-tinha-01",
+      "frase": "O autor tinha publicado três romances.",
+      "alvos": [
+        {
+          "texto": "tinha",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "auxiliar de aspecto (perfeito composto)",
+          "certeza": "alta",
+          "comentario": "tinha em VERBOS_IRR (ter) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-confuso-01",
+      "frase": "O texto ficou confuso no final.",
+      "alvos": [
+        {
+          "texto": "confuso",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito",
+          "certeza": "alta",
+          "comentario": "confuso em adjetivos_comuns após ficou (copula) → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-corajosa-01",
+      "frase": "A personagem se mostrou corajosa.",
+      "alvos": [
+        {
+          "texto": "corajosa",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (semi-cópula mostrar)",
+          "certeza": "alta",
+          "comentario": "mostrou em _COPULAS_ADJ_CTX v970 → corajosa → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-surpreendente-01",
+      "frase": "O resultado se revelou surpreendente.",
+      "alvos": [
+        {
+          "texto": "surpreendente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo do sujeito (semi-cópula revelar)",
+          "certeza": "alta",
+          "comentario": "revelou em _COPULAS_ADJ_CTX v970 → surpreendente → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-aprofundada-01",
+      "frase": "A análise literária foi aprofundada.",
+      "alvos": [
+        {
+          "texto": "aprofundada",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "predicativo em voz passiva analítica",
+          "certeza": "alta",
+          "comentario": "aprofundada após foi → Adjective + Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adj-onisciente-01",
+      "frase": "O narrador onisciente vê tudo.",
+      "alvos": [
+        {
+          "texto": "onisciente",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal",
+          "certeza": "alta",
+          "comentario": "onisciente em adjetivos_comuns → Adjective."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-viu-01",
+      "frase": "O leitor viu que o texto era poético.",
+      "alvos": [
+        {
+          "texto": "viu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de percepção",
+          "certeza": "alta",
+          "comentario": "viu em VERBOS_IRR (ver) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-verb-ouviu-01",
+      "frase": "Ela ouviu o editor falar da crise.",
+      "alvos": [
+        {
+          "texto": "ouviu",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "verbo de percepção",
+          "certeza": "alta",
+          "comentario": "ouviu em VERBOS_IRR (ouvir) → Verb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-ainda-01",
+      "frase": "Ela ainda não publicou o romance.",
+      "alvos": [
+        {
+          "texto": "ainda",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "ainda em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-adv-ja-01",
+      "frase": "O texto já está pronto para envio.",
+      "alvos": [
+        {
+          "texto": "já",
+          "classe_escolar": "advérbio",
+          "classe_tecnica": "ADV",
+          "funcao": "adjunto adverbial de tempo",
+          "certeza": "alta",
+          "comentario": "já em ADV_TEMPO → Adverb."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-me-01",
+      "frase": "Ela me disse que estava cansada.",
+      "alvos": [
+        {
+          "texto": "me",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome oblíquo átono (1ª pessoa)",
+          "certeza": "alta",
+          "comentario": "me em PRONOMES_OBL → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-pron-lhe-01",
+      "frase": "Ela lhe enviou o manuscrito.",
+      "alvos": [
+        {
+          "texto": "lhe",
+          "classe_escolar": "pronome",
+          "classe_tecnica": "PRON",
+          "funcao": "pronome oblíquo dativo (3ª pessoa)",
+          "certeza": "alta",
+          "comentario": "lhe em PRONOMES_OBL → Pronoun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-rascunho-01",
+      "frase": "O rascunho revela muito do autor.",
+      "alvos": [
+        {
+          "texto": "rascunho",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "rascunho em DEFINICOES → Noun."
+        }
+      ]
+    },
+    {
+      "id": "r-noun-esboco-01",
+      "frase": "O esboço é a fase mais criativa.",
+      "alvos": [
+        {
+          "texto": "esboço",
+          "classe_escolar": "substantivo",
+          "classe_tecnica": "NOUN",
+          "funcao": "nucleo do sujeito",
+          "certeza": "alta",
+          "comentario": "esboço em DEFINICOES → Noun."
         }
       ]
     }
