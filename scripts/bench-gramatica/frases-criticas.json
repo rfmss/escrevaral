@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1063",
+  "versao": "2026-06-29-v1064",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -15645,6 +15645,270 @@
       "frase": "Ela foi realizada como escritora quando o terceiro livro venceu o prêmio.",
       "alvo": "foi realizada",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-verb-questionar-01",
+      "frase": "A escritora questiona o próprio narrador sem deixar de ser ele.",
+      "alvo": "questiona",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-confrontar-01",
+      "frase": "O texto confronta o leitor com o que ele preferia não saber.",
+      "alvo": "confronta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-resistir-01",
+      "frase": "A prosa resiste à interpretação fácil sem se tornar hermética.",
+      "alvo": "resiste",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-evocar-02",
+      "frase": "O poema evoca sem nomear — e é o não-nomeado que permanece.",
+      "alvo": "evoca",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-sugerir-01",
+      "frase": "A metáfora sugere onde a definição imporia e destruiria.",
+      "alvo": "sugere",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-elíptico-01",
+      "frase": "O estilo elíptico de Hemingway revela pelo que omite.",
+      "alvo": "elíptico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-reticente-01",
+      "frase": "A narradora reticente diz menos do que sabe e mais do que parece.",
+      "alvo": "reticente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-omisso-01",
+      "frase": "O narrador omisso é aquele cuja ausência diz mais do que a presença poderia.",
+      "alvo": "omisso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-lacônico-01",
+      "frase": "O estilo lacônico comprime décadas em três palavras e exige releitura.",
+      "alvo": "lacônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-provas-01",
+      "frase": "As provas tipográficas chegaram com erros que o autor havia introduzido na última versão.",
+      "alvo": "provas",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-galés-01",
+      "frase": "As galés do romance estavam cheias de intervenções do editor que o autor recusou.",
+      "alvo": "galés",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-contracapa-01",
+      "frase": "A contracapa promete o que o livro só entrega se o leitor chegar até o fim.",
+      "alvo": "contracapa",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-lombada-01",
+      "frase": "A lombada desgastada é o único rastro de quantas mãos o livro passou.",
+      "alvo": "lombada",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-frontispício-01",
+      "frase": "O frontispício do incunábulo gravava a data de impressão como um orgulho técnico.",
+      "alvo": "frontispício",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-idiossincrático-01",
+      "frase": "O estilo idiossincrático do autor é inimitável porque nasce de um tropeço único.",
+      "alvo": "idiossincrático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-peculiar-01",
+      "frase": "A dicção peculiar da autora não é afetação — é o único registro em que ela pensa.",
+      "alvo": "peculiar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-singular-01",
+      "frase": "A voz singular de Rosa não pertence a nenhuma escola porque criou a própria.",
+      "alvo": "singular",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-inconfundível-01",
+      "frase": "O ritmo inconfundível de Drummond reconhece-se antes de ler o nome.",
+      "alvo": "inconfundível",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-notar-01",
+      "frase": "O leitor atento nota o erro intencional que a edição não corrigiu por respeito.",
+      "alvo": "nota",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-perceber-01",
+      "frase": "Perceber a ironia exige uma segunda leitura que o ritmo da primeira impossibilita.",
+      "alvo": "perceber",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-captar-01",
+      "frase": "O ouvido interno capta o ritmo da prosa antes que a mente o nomeie.",
+      "alvo": "capta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-identificar-01",
+      "frase": "Identificar a voz narrativa é o primeiro passo para entender o contrato de leitura.",
+      "alvo": "identificar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-posteridade-01",
+      "frase": "A posteridade leu Melville de um modo que os contemporâneos recusaram.",
+      "alvo": "posteridade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-recepção-01",
+      "frase": "A recepção crítica da obra muda com cada geração que a lê de dentro do seu tempo.",
+      "alvo": "recepção",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-fortuna-crítica-01",
+      "frase": "A fortuna crítica de um autor é um espelho da ideologia das épocas que o releram.",
+      "alvo": "fortuna",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-intrincado-01",
+      "frase": "O enredo intrincado recompensa o leitor que aceita não entender de imediato.",
+      "alvo": "intrincado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-labiríntico-01",
+      "frase": "A estrutura labiríntica do romance propõe que cada leitor encontre saídas diferentes.",
+      "alvo": "labiríntico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-vertiginoso-01",
+      "frase": "A mise en abyme vertiginosa coloca o leitor dentro do espelho que está descrevendo.",
+      "alvo": "vertiginoso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-voz-alta-01",
+      "frase": "Ler em voz alta revela o que a leitura silenciosa anestesia.",
+      "alvo": "voz",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-respiração-01",
+      "frase": "A respiração do texto é a que o leitor adota sem perceber.",
+      "alvo": "respiração",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pulsação-01",
+      "frase": "A pulsação do verso conta o tempo do poema antes do relógio.",
+      "alvo": "pulsação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-grave-lit-01",
+      "frase": "O registro grave da elegia não permite o alívio do riso.",
+      "alvo": "grave",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-leviano-01",
+      "frase": "O tom leviano mascara a gravidade do tema que o texto não quer nomear diretamente.",
+      "alvo": "leviano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sereno-01",
+      "frase": "A prosa serena de Lispector é a calma que antecede o abismo.",
+      "alvo": "sereno",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-agitado-01",
+      "frase": "O período agitado da vanguarda produziu mais manifestos que obras.",
+      "alvo": "agitado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-polir-01",
+      "frase": "O autor poliu o parágrafo até a linguagem perder a fricção.",
+      "alvo": "poliu",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-calibrar-01",
+      "frase": "A escritora calibra o tom a cada capítulo para manter a mesma temperatura emocional.",
+      "alvo": "calibra",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-cinzelar-01",
+      "frase": "O poeta cinzelou cada estrofe até ela resistir a qualquer corte.",
+      "alvo": "cinzelou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desbastar-01",
+      "frase": "A revisão desbastou o excesso e deixou o essencial aparecer.",
+      "alvo": "desbastou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-close-reading-01",
+      "frase": "A leitura cerrada concentra-se em cada palavra como se fosse a última.",
+      "alvo": "leitura",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-leitura-distante-01",
+      "frase": "A leitura distante usa dados para ver padrões que o olho individual não alcança.",
+      "alvo": "leitura",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-coletânea-01",
+      "frase": "A coletânea reúne textos que se comentam mutuamente sem saber que se conheciam.",
+      "alvo": "coletânea",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-antologia-01",
+      "frase": "A antologia é sempre um argumento sobre o que merece ser preservado.",
+      "alvo": "antologia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-florilégio-01",
+      "frase": "O florilégio medieval reunia flores — fragmentos belos arrancados de seus contextos.",
+      "alvo": "florilégio",
+      "esperado": "substantivo"
     }
   ]
 }
