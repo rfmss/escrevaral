@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1048",
+  "versao": "2026-06-29-v1049",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -12645,6 +12645,324 @@
       "frase": "O personagem concluiu a carta antes do amanhecer.",
       "alvo": "concluiu",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-top-01",
+      "frase": "O silêncio, ela jamais conseguiu explicar.",
+      "alvo": "silêncio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-top-02",
+      "frase": "Aquela noite, o narrador nunca esqueceu.",
+      "alvo": "noite",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-top-03",
+      "frase": "A metáfora da água, Rosa usou com maestria.",
+      "alvo": "metáfora",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-inf-suj-01",
+      "frase": "Escrever é resistir ao esquecimento.",
+      "alvo": "escrever",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-inf-suj-02",
+      "frase": "Ler é aprender a ver o que estava escondido.",
+      "alvo": "ler",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-inf-suj-03",
+      "frase": "Publicar sem revisar é trair o leitor.",
+      "alvo": "publicar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-verossímil-01",
+      "frase": "A motivação verossímil ancora o leitor mesmo em cenários fantásticos.",
+      "alvo": "verossímil",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-inverossímil-01",
+      "frase": "O desfecho inverossímil quebra o contrato ficcional estabelecido.",
+      "alvo": "inverossímil",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-convincente-01",
+      "frase": "O personagem convincente não precisa ser simpático.",
+      "alvo": "convincente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-coerente-01",
+      "frase": "A voz narrativa coerente mantém o mesmo grau de acesso emocional.",
+      "alvo": "coerente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-inconsistente-01",
+      "frase": "O arco inconsistente do personagem destrói a credibilidade do final.",
+      "alvo": "inconsistente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-rascunho-01",
+      "frase": "O rascunho revela o pensamento antes de ele se decidir.",
+      "alvo": "rascunho",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-esboço-01",
+      "frase": "O esboço do romance ocupava três cadernos e um guardanapo.",
+      "alvo": "esboço",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-versão-01",
+      "frase": "A terceira versão foi a que encontrou o tom certo.",
+      "alvo": "versão",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-revisão-01",
+      "frase": "A revisão revelou que o primeiro parágrafo era o último.",
+      "alvo": "revisão",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-manuscrito-01",
+      "frase": "O manuscrito sobreviveu ao incêndio por estar numa bolsa esquecida.",
+      "alvo": "manuscrito",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-caderno-01",
+      "frase": "O caderno de notas é o lugar onde o romance ainda não sabe que vai existir.",
+      "alvo": "caderno",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-narrar-01",
+      "frase": "Narrar é selecionar — e toda seleção é uma omissão.",
+      "alvo": "narrar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ficcionalizar-01",
+      "frase": "A autora ficcionaliza a própria infância sem pedir desculpas.",
+      "alvo": "ficcionaliza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-silenciar-01",
+      "frase": "O texto silencia exatamente onde o leitor espera falar.",
+      "alvo": "silencia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ironizar-01",
+      "frase": "O narrador ironiza o próprio discurso sem nunca dizer que está ironizando.",
+      "alvo": "ironiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-metaforizar-01",
+      "frase": "Rosa metaforiza o sertão até torná-lo um estado interior.",
+      "alvo": "metaforiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-linear-01",
+      "frase": "A narrativa linear trai a complexidade do evento narrado.",
+      "alvo": "linear",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-circular-01",
+      "frase": "A estrutura circular faz o final ecoar o início com diferença.",
+      "alvo": "circular",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-espiral-01",
+      "frase": "O tempo espiral do romance retorna ao mesmo ponto em níveis distintos.",
+      "alvo": "espiral",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-regressivo-01",
+      "frase": "O movimento regressivo da memória distorce os fatos com precisão.",
+      "alvo": "regressivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-cenário-01",
+      "frase": "O cenário não é decoração — é personagem que não fala.",
+      "alvo": "cenário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-atmosfera-01",
+      "frase": "A atmosfera de tensão se instala antes de qualquer evento.",
+      "alvo": "atmosfera",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ambientação-01",
+      "frase": "A ambientação histórica precisa de um detalhe falso para parecer real.",
+      "alvo": "ambientação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-lugar-01",
+      "frase": "O lugar da narrativa sempre revela o lugar do narrador.",
+      "alvo": "lugar",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-clariceano-01",
+      "frase": "O fluxo clariceano dissolve o enredo para revelar a consciência.",
+      "alvo": "clariceano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-machadiano-01",
+      "frase": "O ironia machadiana nunca se explica — se reconhece.",
+      "alvo": "machadiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rosiano-01",
+      "frase": "O léxico rosiano reinventa o português pelo avesso.",
+      "alvo": "rosiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-drummoniano-01",
+      "frase": "O eu drummoniano oscila entre a pedra e o abraço.",
+      "alvo": "drummoniano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cabraleano-01",
+      "frase": "A precisão cabraleana exclui o ornamento como princípio ético.",
+      "alvo": "cabraleano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-canônico-01",
+      "frase": "A leitura canônica muitas vezes apaga o que o texto diz obliquamente.",
+      "alvo": "canônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-hegemônico-01",
+      "frase": "O cânone hegemônico excluiu durante séculos as vozes periféricas.",
+      "alvo": "hegemônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-contracanônico-01",
+      "frase": "A leitura contracanônica recupera o que o arquivo oficial apagou.",
+      "alvo": "contracanônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-dialogismo-01",
+      "frase": "O dialogismo bakhtiniano transforma toda frase em resposta a outra frase.",
+      "alvo": "dialogismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-carnavalização-01",
+      "frase": "A carnavalização inverte hierarquias pela via do riso.",
+      "alvo": "carnavalização",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-heteroglossia-01",
+      "frase": "A heteroglossia do romance incorpora falas sociais em tensão.",
+      "alvo": "heteroglossia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-polifonia-01",
+      "frase": "A polifonia dostoievskiana recusa a voz autoral dominante.",
+      "alvo": "polifonia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-dissonância-01",
+      "frase": "A dissonância entre narrador e evento cria o espaço da ironia.",
+      "alvo": "dissonância",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-táctil-01",
+      "frase": "A escrita táctil de Clarice alcança o que os olhos não conseguem nomear.",
+      "alvo": "táctil",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sinestésico-01",
+      "frase": "A imagem sinestésica confunde sentidos para criar uma percepção nova.",
+      "alvo": "sinestésico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-visceral-01",
+      "frase": "A reação visceral do leitor é o efeito que o texto estava construindo.",
+      "alvo": "visceral",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-palpável-01",
+      "frase": "A angústia palpável da narradora se transfere para o ambiente descrito.",
+      "alvo": "palpável",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-transmutar-01",
+      "frase": "A dor transmuta-se em prosa quando não há mais espaço para o grito.",
+      "alvo": "transmuta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-deslocar-01",
+      "frase": "O ponto de vista desloca o leitor sem avisar.",
+      "alvo": "desloca",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-condensar-01",
+      "frase": "O conto condensa décadas em dez páginas sem perder densidade.",
+      "alvo": "condensa",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-expandir-01",
+      "frase": "O romance expande um instante até torná-lo infinito.",
+      "alvo": "expande",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-comprometido-01",
+      "frase": "A escrita comprometida não renuncia à beleza para ser política.",
+      "alvo": "comprometido",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-engajado-01",
+      "frase": "A literatura engajada fracassa quando sacrifica a forma pela mensagem.",
+      "alvo": "engajado",
+      "esperado": "adjetivo"
     }
   ]
 }
