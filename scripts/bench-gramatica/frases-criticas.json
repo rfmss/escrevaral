@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1045",
+  "versao": "2026-06-29-v1046",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -12363,6 +12363,234 @@
       "frase": "A maioria dos personagens carregava um segredo.",
       "alvo": "maioria",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-adj-labiríntico-01",
+      "frase": "A sintaxe labiríntica de Guimarães Rosa é mapa de um mundo interior.",
+      "alvo": "labiríntico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ramificado-01",
+      "frase": "O enredo ramificado exige do leitor uma atenção cartográfica.",
+      "alvo": "ramificado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-truncado-01",
+      "frase": "A frase truncada imita o pensamento que não consegue se completar.",
+      "alvo": "truncado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-entrelaçado-01",
+      "frase": "As tramas entrelaçadas convergem apenas no último parágrafo.",
+      "alvo": "entrelaçadas",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fragmentário-01",
+      "frase": "O romance fragmentário recusa a ilusão de totalidade.",
+      "alvo": "fragmentário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-intercalado-01",
+      "frase": "Os capítulos intercalados alternam presente e passado sem aviso.",
+      "alvo": "intercalados",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-cinzelar-01",
+      "frase": "A poeta cinzela cada verso até que a superfície brilhe sem esforço.",
+      "alvo": "cinzela",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-lapidar-01",
+      "frase": "Lapidar um conto exige saber o que retirar, não o que adicionar.",
+      "alvo": "lapidar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-elaborar-01",
+      "frase": "Ela elaborou o personagem a partir de um gesto visto no metrô.",
+      "alvo": "elaborou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-gestar-01",
+      "frase": "O romance foi gestado em dez anos de anotações e silêncios.",
+      "alvo": "gestado",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-amadurecer-01",
+      "frase": "A ideia amadureceu durante uma viagem sem destino certo.",
+      "alvo": "amadureceu",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-apurar-01",
+      "frase": "Apurar o estilo é aprender a confiar no que já está na frase.",
+      "alvo": "apurar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-recepção-01",
+      "frase": "A recepção crítica da obra mudou radicalmente após a morte da autora.",
+      "alvo": "recepção",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-legibilidade-01",
+      "frase": "A legibilidade do texto é uma escolha política, não apenas estética.",
+      "alvo": "legibilidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-textualidade-01",
+      "frase": "A textualidade do diário privado resiste à narrativização.",
+      "alvo": "textualidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ficcionalidade-01",
+      "frase": "A ficcionalidade da autoficção é sempre negociada com o leitor.",
+      "alvo": "ficcionalidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-literariedade-01",
+      "frase": "A literariedade não reside no texto mas na relação com o leitor.",
+      "alvo": "literariedade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-volátil-01",
+      "frase": "O humor volátil da protagonista mantém o leitor em estado de alerta.",
+      "alvo": "volátil",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-impulsivo-01",
+      "frase": "As decisões impulsivas do personagem contradizem sua aparência calculada.",
+      "alvo": "impulsivas",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-resiliente-01",
+      "frase": "A narradora resiliente não se define pela dor mas pelo que faz com ela.",
+      "alvo": "resiliente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-obstinado-01",
+      "frase": "O personagem obstinado carrega uma promessa feita a si mesmo há décadas.",
+      "alvo": "obstinado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-reticente-01",
+      "frase": "A testemunha reticente guarda o segredo até a última cena.",
+      "alvo": "reticente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-farejar-01",
+      "frase": "A detetive farejou a mentira antes de a personagem terminar a frase.",
+      "alvo": "farejou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-intuir-01",
+      "frase": "Ela intuiu o que estava por vir sem conseguir nomear o presságio.",
+      "alvo": "intuiu",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-auscultar-01",
+      "frase": "A narradora ausculta o silêncio da casa como se fosse um corpo.",
+      "alvo": "ausculta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-dicção-01",
+      "frase": "A dicção do romance mistura o erudito e o popular sem hierarquia.",
+      "alvo": "dicção",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-entonação-01",
+      "frase": "A entonação irônica só aparece quando o leitor já acreditou no narrador.",
+      "alvo": "entonação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cadência-01",
+      "frase": "A cadência do parágrafo final é a resolução que a trama recusou.",
+      "alvo": "cadência",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-fraseo-01",
+      "frase": "O fraseado curto demarca uma virada na consciência da narradora.",
+      "alvo": "fraseado",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-memorialístico-01",
+      "frase": "O tom memorialístico confunde deliberadamente lembrança e invenção.",
+      "alvo": "memorialístico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-confessional-01",
+      "frase": "A escrita confessional expõe o sujeito sem garantir a verdade.",
+      "alvo": "confessional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-testemunhal-01",
+      "frase": "A literatura testemunhal exige um pacto ético com o leitor.",
+      "alvo": "testemunhal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-documental-01",
+      "frase": "A ficção documental embaralha arquivo e imaginação.",
+      "alvo": "documental",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-biográfico-01",
+      "frase": "O impulso biográfico tensiona o romance com o peso dos fatos reais.",
+      "alvo": "biográfico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-epistolar-01",
+      "frase": "A forma epistolar entrega ao leitor as cartas que nunca foram respondidas.",
+      "alvo": "epistolar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-dramático-01",
+      "frase": "A ironia dramática nasce da diferença entre o que o leitor e o personagem sabem.",
+      "alvo": "dramático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-trágico-01",
+      "frase": "O destino trágico não precisa de morte — basta a perda irreversível.",
+      "alvo": "trágico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cômico-01",
+      "frase": "O registro cômico dissolve a tensão exatamente quando ela mais importa.",
+      "alvo": "cômico",
+      "esperado": "adjetivo"
     }
   ]
 }
