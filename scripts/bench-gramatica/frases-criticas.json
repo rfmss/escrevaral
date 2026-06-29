@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1049",
+  "versao": "2026-06-29-v1050",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -12962,6 +12962,234 @@
       "id": "r-adj-engajado-01",
       "frase": "A literatura engajada fracassa quando sacrifica a forma pela mensagem.",
       "alvo": "engajado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-deliberado-01",
+      "frase": "A ambiguidade deliberada recusa a interpretação única.",
+      "alvo": "deliberado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-calculado-01",
+      "frase": "O efeito calculado da cena final depende do primeiro parágrafo.",
+      "alvo": "calculado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-intencional-01",
+      "frase": "O erro gramatical intencional cria uma voz singular e irrepetível.",
+      "alvo": "intencional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-enunciador-01",
+      "frase": "O enunciador e o autor real raramente coincidem.",
+      "alvo": "enunciador",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-enunciatário-01",
+      "frase": "O enunciatário construído pelo texto difere do leitor real.",
+      "alvo": "enunciatário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-interlocutor-01",
+      "frase": "O interlocutor implícito molda o tom mesmo sem aparecer na cena.",
+      "alvo": "interlocutor",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-instantâneo-01",
+      "frase": "O conto capta o instantâneo enquanto o romance habita a duração.",
+      "alvo": "instantâneo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-duradouro-01",
+      "frase": "O trauma duradouro estrutura o tempo da personagem sem que ela saiba.",
+      "alvo": "duradouro",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-passageiro-01",
+      "frase": "O afeto passageiro concentra toda a saudade de uma vida.",
+      "alvo": "passageiro",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-decifrar-01",
+      "frase": "O leitor decifra o símbolo sem saber que estava sendo guiado.",
+      "alvo": "decifra",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-interpretar-01",
+      "frase": "Interpretar é sempre traduzir para uma língua que não existia antes.",
+      "alvo": "interpretar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ressignificar-02",
+      "frase": "A releitura ressignifica o que parecia definitivo no texto.",
+      "alvo": "ressignifica",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-epígrafe-01",
+      "frase": "A epígrafe é a primeira decisão de leitura que o autor toma.",
+      "alvo": "epígrafe",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-dedicatória-01",
+      "frase": "A dedicatória sem nome próprio abre uma intimidade com o leitor.",
+      "alvo": "dedicatória",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-nota-de-rodapé-01",
+      "frase": "A nota de rodapé pode ser onde o texto respira fora do argumento.",
+      "alvo": "nota",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-desconcertante-01",
+      "frase": "O final desconcertante recusa o conforto sem ser arbitrário.",
+      "alvo": "desconcertante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-perturbador-01",
+      "frase": "A imagem perturbadora permanece depois que o livro é fechado.",
+      "alvo": "perturbador",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-revelador-01",
+      "frase": "O detalhe revelador muda o sentido de tudo o que veio antes.",
+      "alvo": "revelador",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-desconcertante-02",
+      "frase": "A pergunta desconcertante da narradora dissolve a certeza do leitor.",
+      "alvo": "desconcertante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-imersão-01",
+      "frase": "A imersão na ficção suspende temporariamente a leitura crítica.",
+      "alvo": "imersão",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-identificação-01",
+      "frase": "A identificação com a personagem não é virtude — é ponto de partida.",
+      "alvo": "identificação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-estranheza-01",
+      "frase": "A estranheza produzida pela focalização incomum é o efeito desejado.",
+      "alvo": "estranheza",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-hibridizar-01",
+      "frase": "O texto hibridiza gêneros sem pedir licença ao cânone.",
+      "alvo": "hibridiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-transcender-01",
+      "frase": "A boa ficção transcende o gênero que a classifica.",
+      "alvo": "transcende",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-polissêmico-01",
+      "frase": "O título polissêmico estabelece o contrato de ambiguidade com o leitor.",
+      "alvo": "polissêmico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-lacunar-01",
+      "frase": "A escrita lacunar obriga o leitor a habitar o espaço entre as frases.",
+      "alvo": "lacunar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-denso-lit-01",
+      "frase": "O parágrafo denso acumula significados que pedem reler.",
+      "alvo": "denso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rarefeito-01",
+      "frase": "A prosa rarefeita confia no branco para dizer o que a palavra não pode.",
+      "alvo": "rarefeito",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-fólio-01",
+      "frase": "O fólio dobrado ao meio define o formato do livro ocidental.",
+      "alvo": "fólio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cólofon-01",
+      "frase": "O cólofon medieval localizava o copista no tempo e no espaço.",
+      "alvo": "cólofon",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-sombrio-01",
+      "frase": "O registro sombrio não precisa de violência explícita para incomodar.",
+      "alvo": "sombrio",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-melancólico-01",
+      "frase": "O tom melancólico da crônica transforma o cotidiano em elegias.",
+      "alvo": "melancólico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-nostálgico-01",
+      "frase": "A nostalgia nostálgica — redundante — vira armadilha sem o distanciamento crítico.",
+      "alvo": "nostálgico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-irreverente-01",
+      "frase": "A dicção irreverente desestabiliza sem desrespeitar.",
+      "alvo": "irreverente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-solene-01",
+      "frase": "O tom solene demais esvazia o gesto que deveria ser singelo.",
+      "alvo": "solene",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-coloquial-01",
+      "frase": "O registro coloquial aproxima sem banalizar quando bem calibrado.",
+      "alvo": "coloquial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-elegíaco-01",
+      "frase": "O modo elegíaco transforma a perda em forma.",
+      "alvo": "elegíaco",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-laudatório-01",
+      "frase": "O prefácio laudatório raramente prepara o leitor para o texto real.",
+      "alvo": "laudatório",
       "esperado": "adjetivo"
     }
   ]
