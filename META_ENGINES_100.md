@@ -68,6 +68,41 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-29 tarde (ciclo v1043→v1048)
+
+**Baseline:** v1048 — todos engines 100%.
+
+**O que foi entregue neste ciclo (v1043→v1048):**
+
+- v1044: bench 1100→1152 (+52 casos: adj registro/ritmo, nouns editoriais, verbos composição, adj espaço)
+- v1045: A-01 batch 19: +7 regras (quando falamos de / é notório que / é consenso que / todos os estudiosos / a grande maioria / de suma importância)
+- v1046: bench 1152→**1200** — marco 1200 atingido (+38 casos: adj estrutura narrativa, verbos craft, nouns crítica, adj personagem/espaço/tema)
+- v1047: **fix painel sintático** — `emSubordinada` flag em `analisarFuncoes()`: sujeito de oração subordinada agora isolado como "Sujeito da oração subordinada"; precisão auditada 7/8→8/8 (100%); golden 91/0
+- v1048: A-01 batch 20: +7 regras (por tudo isso / conclui-se que / fica evidente que / é de extrema importância / na verdade / em termos gerais / de forma geral)
+
+**Estado atualizado dos engines (v1048):**
+
+| Área / engine | Maturidade | Notas de estado (v1048) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500; CONFUSOES **129 regras** A-01; 0 FP corpus literário |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350; DEFINICOES ~1020+; POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bench **1209**/1209; golden 91/0; VERBOS_PRES 2097; adj 2778 |
+| Função sintática | **85%** | analisarFuncoes() auditada 8/8; subordinada isolada; pro-drop correto; arestas restantes: relativas complexas, topicalização |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **100%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; escopo em todos; saveStatus |
+
+**Fronteiras abertas (v1048):**
+
+1. **Função sintática — arestas**: topicalização ("O romance, ela nunca terminou"), infinitivo como sujeito, relativa com pro-drop
+2. **A-01 batch 21+**: mais vícios de encerramento e intensificadores
+3. **Bench rumo a 1300**: 91 casos até o próximo marco
+4. **Commits locais:** 124 — fazer push quando usuário pedir
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-29 (ciclo autônomo v1032→v1043)
 
 **Baseline:** v1043 — todos engines 100%.
