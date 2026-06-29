@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1057",
+  "versao": "2026-06-29-v1058",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -14445,6 +14445,282 @@
       "frase": "Todos os capítulos do livro terminam com uma pergunta sem resposta.",
       "alvo": "todos os capítulos",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-verb-persistir-01",
+      "frase": "A dúvida persiste mesmo depois que o romance encontra seu desfecho.",
+      "alvo": "persiste",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-permanecer-01",
+      "frase": "O silêncio permanece onde a fala deveria ter chegado.",
+      "alvo": "permanece",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-subsistir-01",
+      "frase": "O texto subsiste na memória do leitor mesmo depois do esquecimento do enredo.",
+      "alvo": "subsiste",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-perdurar-01",
+      "frase": "A ambiguidade perdura porque o texto a alimenta deliberadamente.",
+      "alvo": "perdura",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-central-01",
+      "frase": "O conflito central não é declarado — está na estrutura de quem fala quando.",
+      "alvo": "central",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-marginal-lit-01",
+      "frase": "O personagem marginal carrega o peso moral que o protagonista evita.",
+      "alvo": "marginal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-secundário-01",
+      "frase": "O personagem secundário revela o que o principal não pode admitir.",
+      "alvo": "secundário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-episódico-01",
+      "frase": "A aparição episódica da personagem concentra o tema que o romance dilui.",
+      "alvo": "episódico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-cronotopo-01",
+      "frase": "O cronotopo bakhtiniano une tempo e espaço como inseparáveis na ficção.",
+      "alvo": "cronotopo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-topos-01",
+      "frase": "O topos da viagem estrutura o aprendizado do Bildungsroman.",
+      "alvo": "topos",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-locus-01",
+      "frase": "O locus amoenus é o lugar idealizado que a ironia moderna destrói.",
+      "alvo": "locus",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-utopia-01",
+      "frase": "A utopia literária imagina o que o presente proíbe de esperar.",
+      "alvo": "utopia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-distopia-01",
+      "frase": "A distopia amplifica o presente até torná-lo insuportável de reconhecer.",
+      "alvo": "distopia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-focalizado-01",
+      "frase": "O evento focalizado determina o que o leitor pode saber sobre o mundo do texto.",
+      "alvo": "focalizado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-defocalizado-01",
+      "frase": "O detalhe defocalizado é o que o narrador não quer que o leitor perceba.",
+      "alvo": "defocalizado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-panorâmico-01",
+      "frase": "O olhar panorâmico do narrador cede à câmera íntima no segundo capítulo.",
+      "alvo": "panorâmico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-microscópico-01",
+      "frase": "A atenção microscópica ao detalhe é o estilo que denuncia o ponto de vista.",
+      "alvo": "microscópico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-ressemantizar-01",
+      "frase": "A releitura ressemantiza o título que parecia transparente.",
+      "alvo": "ressemantiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-polissemizar-01",
+      "frase": "O contexto literário polissemiza palavras que o uso comum fixou.",
+      "alvo": "polissemiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desnaturalizar-01",
+      "frase": "A metáfora desnaturaliza o que a linguagem cotidiana tornou invisível.",
+      "alvo": "desnaturaliza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-estranhar-01",
+      "frase": "O procedimento formalista estranha o familiar e torna legível o automatismo.",
+      "alvo": "estranha",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-autobiográfico-01",
+      "frase": "O pacto autobiográfico exige que autor, narrador e personagem compartilhem o nome.",
+      "alvo": "autobiográfico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-biográfico-01",
+      "frase": "O impulso biográfico não lê — julga, e na maioria das vezes condena.",
+      "alvo": "biográfico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-pseudônimo-01",
+      "frase": "O pseudônimo literário cria uma máscara que às vezes diz mais que o nome real.",
+      "alvo": "pseudônimo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-paginação-01",
+      "frase": "A paginação irregular do romance mimetiza a fragmentação da consciência.",
+      "alvo": "paginação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-tipografia-01",
+      "frase": "A tipografia do manifesto era tão agressiva quanto o conteúdo.",
+      "alvo": "tipografia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-diagrama-01",
+      "frase": "O diagrama inserido no meio do romance interrompe a ficção com o método.",
+      "alvo": "diagrama",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-contido-01",
+      "frase": "O luto contido da narradora é mais pesado que qualquer lamento explícito.",
+      "alvo": "contido",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exacerbado-01",
+      "frase": "O sofrimento exacerbado da personagem corre o risco de afastar o leitor.",
+      "alvo": "exacerbado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-contundente-01",
+      "frase": "A crítica contundente do narrador não poupa nem a si mesmo.",
+      "alvo": "contundente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-lancinante-01",
+      "frase": "A dor lancinante da perda é descrita com a frieza de quem a sobreviveu.",
+      "alvo": "lancinante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-canonizar-01",
+      "frase": "A academia canoniza o que a geração seguinte precisará descanonizar.",
+      "alvo": "canoniza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-marginalizar-01",
+      "frase": "O mercado marginaliza o que o cânone futuro vai reivindicar.",
+      "alvo": "marginaliza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-recuperar-01",
+      "frase": "A crítica recupera textos esquecidos sem perguntar por que foram esquecidos.",
+      "alvo": "recupera",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-reabilitar-01",
+      "frase": "Reabilitar um autor exige reler sem o peso do que foi dito sobre ele.",
+      "alvo": "reabilitar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-griô-01",
+      "frase": "O griô transmite pela voz o que o arquivo colonial preferiu ignorar.",
+      "alvo": "griô",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-oralidade-01",
+      "frase": "A oralidade não é o estágio anterior à escrita — é outra forma de conhecer.",
+      "alvo": "oralidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ancestralidade-01",
+      "frase": "A ancestralidade literária não é nostalgia — é um método de leitura do presente.",
+      "alvo": "ancestralidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-queer-lit-01",
+      "frase": "A leitura queer do texto clássico revela o que a edição escolar censurou.",
+      "alvo": "queer",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-feminista-lit-01",
+      "frase": "A crítica feminista não lê apenas mulheres — lê o que a escrita masculina apagou.",
+      "alvo": "feminista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-problematizar-01",
+      "frase": "O texto problematiza o que parecia resolvido antes da primeira leitura.",
+      "alvo": "problematiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-complexificar-01",
+      "frase": "A segunda leitura complexifica o que a primeira havia simplificado.",
+      "alvo": "complexifica",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-tensionar-01",
+      "frase": "O narrador tensiona a relação entre o que sabe e o que revela.",
+      "alvo": "tensiona",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-negociar-01",
+      "frase": "O texto negocia com o leitor o sentido que nenhum dos dois controla sozinho.",
+      "alvo": "negocia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-interromper-01",
+      "frase": "O narrador interrompe a cena antes da revelação para forçar a imaginação.",
+      "alvo": "interrompe",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-suspender-01",
+      "frase": "A elipse suspende o tempo e faz o leitor preencher o que falta.",
+      "alvo": "suspende",
+      "esperado": "verbo"
     }
   ]
 }
