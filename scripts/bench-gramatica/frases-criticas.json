@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1052",
+  "versao": "2026-06-29-v1053",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -13503,6 +13503,294 @@
       "frase": "O cânone conservador não é neutro — é uma escolha política disfarçada de gosto.",
       "alvo": "conservador",
       "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onisciente-01",
+      "frase": "O narrador onisciente sabe mais do que qualquer personagem poderia saber.",
+      "alvo": "onisciente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onipresente-01",
+      "frase": "A câmera onipresente do narrador behaviorista registra sem interpretar.",
+      "alvo": "onipresente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-parcial-01",
+      "frase": "O narrador parcial distorce os fatos para proteger a própria imagem.",
+      "alvo": "parcial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-oblíquo-01",
+      "frase": "O olhar oblíquo da narradora diz mais pelo que evita do que pelo que nomeia.",
+      "alvo": "oblíquo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-diegese-01",
+      "frase": "A diegese abrange tudo o que existe no mundo ficcional da narrativa.",
+      "alvo": "diegese",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-extradiegético-01",
+      "frase": "O narrador extradiegético narra de fora do mundo que descreve.",
+      "alvo": "extradiegético",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-metalepse-01",
+      "frase": "A metalepse viola a fronteira entre o nível narrativo e o diegético.",
+      "alvo": "metalepse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-prolepse-01",
+      "frase": "A prolepse antecipa eventos futuros e cria expectativa antes do fato.",
+      "alvo": "prolepse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-analepse-01",
+      "frase": "A analepse retorna ao passado para iluminar o presente da narrativa.",
+      "alvo": "analepse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-sincopado-01",
+      "frase": "O ritmo sincopado da prosa de Rosa imita a fala do sertanejo culto.",
+      "alvo": "sincopado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cadenciado-01",
+      "frase": "A frase cadenciada de Guimarães cria uma respiração própria no texto.",
+      "alvo": "cadenciado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-entrecortado-01",
+      "frase": "O monólogo entrecortado reproduz o pensamento antes de ele se organizar.",
+      "alvo": "entrecortado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-elipsar-01",
+      "frase": "O conto elipsa décadas e deixa o leitor calcular o tempo.",
+      "alvo": "elipsa",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-subverter-01",
+      "frase": "A autora subverte o final esperado sem trair a lógica interna do texto.",
+      "alvo": "subverte",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-refratar-01",
+      "frase": "O narrador refrata a realidade pela sua própria angústia.",
+      "alvo": "refrata",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-elidir-01",
+      "frase": "A escritora elide o trauma e o leitor encontra o buraco no texto.",
+      "alvo": "elide",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-leitmotiv-01",
+      "frase": "O leitmotiv da água retorna a cada crise emocional da protagonista.",
+      "alvo": "leitmotiv",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-anáfora-01",
+      "frase": "A anáfora acumula força rítmica por repetição intencional no início dos versos.",
+      "alvo": "anáfora",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-catáfora-01",
+      "frase": "A catáfora aponta para frente e cria suspense antes da revelação.",
+      "alvo": "catáfora",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-sinédoque-01",
+      "frase": "A sinédoque faz a parte representar o todo com mais força que o todo teria.",
+      "alvo": "sinédoque",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-metonímia-01",
+      "frase": "A metonímia substitui o objeto pela marca que o singulariza.",
+      "alvo": "metonímia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-assertivo-01",
+      "frase": "O tom assertivo do narrador oculta a fragilidade da tese que defende.",
+      "alvo": "assertivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-interrogativo-01",
+      "frase": "O modo interrogativo da crônica recusa a resposta fácil.",
+      "alvo": "interrogativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exclamativo-01",
+      "frase": "O discurso exclamativo da personagem revela o que ela não consegue nomear.",
+      "alvo": "exclamativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-resenha-01",
+      "frase": "A resenha que não cita o texto está falando de si mesma.",
+      "alvo": "resenha",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-orelha-01",
+      "frase": "A orelha do livro precisa seduzir sem entregar o que o texto guarda.",
+      "alvo": "orelha",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-sinopse-01",
+      "frase": "A sinopse que conta o final elimina a razão de ler o livro.",
+      "alvo": "sinopse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-tiragem-01",
+      "frase": "A tiragem não mede a qualidade — mede a visibilidade da distribuição.",
+      "alvo": "tiragem",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-precursor-01",
+      "frase": "O texto precursor cria um problema que só as gerações seguintes nomearão.",
+      "alvo": "precursor",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-epigonal-01",
+      "frase": "A obra epigonal copia os gestos sem entender o gesto original.",
+      "alvo": "epigonal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-contemporâneo-01",
+      "frase": "O gesto contemporâneo não é o mais novo — é o que responde ao presente.",
+      "alvo": "contemporâneo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-interpelar-01",
+      "frase": "O texto interpela o leitor antes que ele saiba que estava sendo chamado.",
+      "alvo": "interpela",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-cooptar-01",
+      "frase": "A narrativa coopta o leitor e o torna cúmplice do narrador.",
+      "alvo": "coopta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desconcertar-01",
+      "frase": "O final desconcerta porque era, afinal, o único possível.",
+      "alvo": "desconcerta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-silêncio-01",
+      "frase": "O silêncio do escritor que não publica também é uma forma de obra.",
+      "alvo": "silêncio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-bloqueio-01",
+      "frase": "O bloqueio criativo é frequentemente a resistência do texto ao que ainda não é verdadeiro.",
+      "alvo": "bloqueio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-voz-01",
+      "frase": "Encontrar a própria voz é aprender a confiar na estranheza que já estava lá.",
+      "alvo": "voz",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-autoficional-01",
+      "frase": "O pacto autoficional suspende a distinção entre autor e personagem.",
+      "alvo": "autoficional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-testemunhal-01",
+      "frase": "A escrita testemunhal carrega o peso ético de dizer o que aconteceu.",
+      "alvo": "testemunhal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-documental-01",
+      "frase": "A ficção documental borra a fronteira entre o arquivo e a imaginação.",
+      "alvo": "documental",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onisciente-neg-01",
+      "frase": "Ela era onisciente sobre o passado da família, mas ignorava o presente.",
+      "alvo": "onisciente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-voz-neg-01",
+      "frase": "A voz dela chegava até o fundo do corredor com facilidade.",
+      "alvo": "voz",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-parcial-neg-01",
+      "frase": "O pagamento parcial foi recusado pelo editor.",
+      "alvo": "parcial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-ritmo-01",
+      "frase": "O ritmo é a memória do corpo que o texto ativa sem que o leitor perceba.",
+      "alvo": "ritmo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-paratático-01",
+      "frase": "A construção paratática justapõe ideias sem anunciar a relação entre elas.",
+      "alvo": "paratático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-hipotático-01",
+      "frase": "A subordinação hipotática hierarquiza o argumento antes de ele ser desenvolvido.",
+      "alvo": "hipotático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-evocar-01",
+      "frase": "A metáfora evoca sem nomear — esse é o seu poder sobre a definição.",
+      "alvo": "evoca",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-escansão-01",
+      "frase": "A escansão revela que o verso que parecia livre tinha uma régua interna.",
+      "alvo": "escansão",
+      "esperado": "substantivo"
     }
   ]
 }
