@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1053",
+  "versao": "2026-06-29-v1054",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -13791,6 +13791,66 @@
       "frase": "A escansão revela que o verso que parecia livre tinha uma régua interna.",
       "alvo": "escansão",
       "esperado": "substantivo"
+    },
+    {
+      "id": "conf-impacto-01",
+      "frase": "A campanha gerou um impacto significativo na percepção dos leitores.",
+      "alvo": "impacto significativo",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-impacto-02",
+      "frase": "A obra teve impacto profundo sobre as gerações seguintes.",
+      "alvo": "impacto profundo",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-resultados-01",
+      "frase": "A oficina produziu resultados significativos em seis meses.",
+      "alvo": "resultados significativos",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-deforma-01",
+      "frase": "O texto foi revisado de forma eficaz pela equipe editorial.",
+      "alvo": "de forma eficaz",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-noatual-01",
+      "frase": "No atual contexto literário, a autoficção domina as premiações.",
+      "alvo": "no atual contexto",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-aolongo-01",
+      "frase": "Ao longo do tempo, o cânone foi sendo revisto pelas margens.",
+      "alvo": "ao longo do tempo",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-degrande-01",
+      "frase": "A revisão crítica foi de grande importância para o campo.",
+      "alvo": "de grande importância",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-epossivel-01",
+      "frase": "É possível afirmar que o narrador mente desde a primeira página.",
+      "alvo": "é possível afirmar que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-impacto-neg-01",
+      "frase": "O impacto da pedra no vidro quebrou a janela inteira.",
+      "alvo": "impacto",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-aolongo-neg-01",
+      "frase": "Ao longo do corredor havia retratos de escritores do século XIX.",
+      "alvo": "ao longo do corredor",
+      "esperado": "nenhum"
     }
   ]
 }

@@ -1430,6 +1430,28 @@
     [/\bé (?:importante|fundamental|crucial|vital|imprescindível) (?:ressaltar|destacar|notar|lembrar|mencionar) que\b/gi,
      "«é importante ressaltar que»",
      "Delegação impessoal combinada com superlativo. Ressalte diretamente sem pedir autorização retórica."],
+    // batch 22 — retórica de impacto vago + intensificadores de alcance
+    [/\bimpacto (?:significativo|expressivo|considerável|positivo|negativo|relevante|profundo)\b/gi,
+     "«impacto significativo»",
+     "Intensificador de resultado sem dado. Demonstre o impacto pelo efeito concreto, não pelo adjetivo que o qualifica."],
+    [/\bresultados (?:significativos|expressivos|consideráveis|positivos|notáveis|relevantes)\b/gi,
+     "«resultados significativos»",
+     "Generalização de resultado. Nomeie os resultados em vez de qualificá-los com adjetivo intensificador."],
+    [/\bde (?:forma|modo|maneira) (?:eficaz|eficiente|efetiva)\b/gi,
+     "«de forma eficaz»",
+     "Qualificador de método sem especificação. Descreva o que torna a ação eficaz."],
+    [/\bno (?:atual|presente) (?:contexto|cenário|panorama|momento)\b/gi,
+     "«no atual contexto»",
+     "Situação temporal vaga. Se o contexto importa, especifique o que mudou nele."],
+    [/\bao longo (?:do tempo|dos anos|da história|das décadas)\b/gi,
+     "«ao longo do tempo»",
+     "Marcador temporal indefinido. Especifique o período ou o processo — «ao longo do século XX» ou «durante três gerações»."],
+    [/\bde (?:grande|enorme|imenso|vasto) (?:importância|relevância|valor|impacto|significado)\b/gi,
+     "«de grande importância»",
+     "Superlativo de relevância sem sustentação. Demonstre a importância pelo efeito ou pela consequência concreta."],
+    [/\bé (?:possível|plausível|razoável|lícito) (?:afirmar|dizer|concluir|inferir|notar|observar) que\b/gi,
+     "«é possível afirmar que»",
+     "Hedging desnecessário que enfraquece a afirmação. Afirme diretamente ou indique a evidência que limita a certeza."],
   ];
 
   function analisarConfusoes(texto) {
