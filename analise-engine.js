@@ -1408,6 +1408,28 @@
     [/\bde (?:forma|modo|maneira) (?:geral|ampla|abrangente)\b/gi,
      "«de forma geral»",
      "Qualificador vago. Especifique o escopo da afirmação ou remova o qualificador."],
+    // batch 21 — argumentação circular + intensificadores pleonásticos + transições mecânicas
+    [/\babsolutamente (?:necessário|fundamental|essencial|indispensável)\b/gi,
+     "«absolutamente necessário»",
+     "Superlativo redundante: «necessário» já implica ausência de alternativa. Remova o intensificador ou especifique por quê é necessário."],
+    [/\btotalmente (?:desnecessário|dispensável|inútil|irrelevante)\b/gi,
+     "«totalmente desnecessário»",
+     "Pleonasmo de negação absoluta. «Desnecessário» já prescinde de grau. Remova o intensificador."],
+    [/\bcompletamente (?:diferente|distinto|oposto|contrário)\b/gi,
+     "«completamente diferente»",
+     "Reforço vazio de contraste. «Diferente» basta; se a diferença é total, demonstre-a com os dados."],
+    [/\bquando (?:se trata|se fala|se pensa|se discute) (?:de|em|sobre|acerca)\b/gi,
+     "«quando se trata de»",
+     "Introdução temática oblíqua. Inicie pelo tema diretamente ou use «no caso de», «ao tratar de»."],
+    [/\bconforme (?:mencionado|dito|exposto|afirmado|visto) (?:anteriormente|acima|antes)\b/gi,
+     "«conforme mencionado anteriormente»",
+     "Referência circular ao próprio texto. Se precisar retomar, nomeie o argumento, não a localização."],
+    [/\bcomo (?:dito|mencionado|exposto|afirmado|visto) (?:anteriormente|acima|antes)\b/gi,
+     "«como dito anteriormente»",
+     "Ponteiro interno que substitui a ideia pelo seu endereço. Retome a ideia, não o parágrafo."],
+    [/\bé (?:importante|fundamental|crucial|vital|imprescindível) (?:ressaltar|destacar|notar|lembrar|mencionar) que\b/gi,
+     "«é importante ressaltar que»",
+     "Delegação impessoal combinada com superlativo. Ressalte diretamente sem pedir autorização retórica."],
   ];
 
   function analisarConfusoes(texto) {

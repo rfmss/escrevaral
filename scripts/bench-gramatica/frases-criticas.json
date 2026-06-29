@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1050",
+  "versao": "2026-06-29-v1051",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -13191,6 +13191,60 @@
       "frase": "O prefácio laudatório raramente prepara o leitor para o texto real.",
       "alvo": "laudatório",
       "esperado": "adjetivo"
+    },
+    {
+      "id": "conf-absnec-01",
+      "frase": "É absolutamente necessário revisar o texto antes de publicar.",
+      "alvo": "absolutamente necessário",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-totdesnec-01",
+      "frase": "O adjetivo aqui é totalmente desnecessário e deve ser suprimido.",
+      "alvo": "totalmente desnecessário",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-compdif-01",
+      "frase": "O segundo romance é completamente diferente do primeiro.",
+      "alvo": "completamente diferente",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-quandose-01",
+      "frase": "Quando se trata de narrativa, o tempo é sempre uma escolha.",
+      "alvo": "quando se trata de",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-confmenc-01",
+      "frase": "Conforme mencionado anteriormente, o narrador é não-confiável.",
+      "alvo": "conforme mencionado anteriormente",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-comodito-01",
+      "frase": "Como dito antes, a autora rompe com a linearidade no terceiro capítulo.",
+      "alvo": "como dito antes",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-eimpresc-01",
+      "frase": "É importante ressaltar que a voz narrativa muda no segundo ato.",
+      "alvo": "é importante ressaltar que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-absnec-neg-01",
+      "frase": "Ela disse que era necessário partir antes do amanhecer.",
+      "alvo": "necessário",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-diferente-neg-01",
+      "frase": "Os dois romances são muito diferentes entre si.",
+      "alvo": "diferentes",
+      "esperado": "nenhum"
     }
   ]
 }
