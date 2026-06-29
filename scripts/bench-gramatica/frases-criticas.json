@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1043",
+  "versao": "2026-06-29-v1044",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -11991,6 +11991,318 @@
       "frase": "A memória traumática retorna em fragmentos que resistem à narrativa linear.",
       "alvo": "traumático",
       "esperado": "adjetivo"
+    },
+    {
+      "id": "r-pron-cujo-01",
+      "frase": "O escritor cujo romance ganhou o prêmio estava na plateia.",
+      "alvo": "cujo",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-cujo-02",
+      "frase": "A personagem cujas memórias estruturam o enredo nunca aparece diretamente.",
+      "alvo": "cujas",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-cujo-03",
+      "frase": "Um país cujos mitos fundadores foram apagados pela colonização.",
+      "alvo": "cujos",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-qual-01",
+      "frase": "A editora para a qual enviou o manuscrito nunca respondeu.",
+      "alvo": "qual",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-qual-02",
+      "frase": "O silêncio no qual a personagem vivia era ensurdecedor.",
+      "alvo": "qual",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-quem-01",
+      "frase": "A mulher com quem ela cresceu reapareceu no terceiro capítulo.",
+      "alvo": "quem",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-quem-02",
+      "frase": "O leitor para quem o livro foi escrito talvez nunca exista.",
+      "alvo": "quem",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-verb-inf-01",
+      "frase": "Escrever é tentar capturar o que foge antes de ser nomeado.",
+      "alvo": "escrever",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-inf-02",
+      "frase": "Ler a prosa de Rosa é aprender a desconfiar da clareza.",
+      "alvo": "ler",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-inf-03",
+      "frase": "Publicar sem revisar é trair o leitor e a si mesmo.",
+      "alvo": "publicar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-inf-04",
+      "frase": "Conseguiu terminar o romance sem ceder ao enredo fácil.",
+      "alvo": "terminar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-inf-05",
+      "frase": "Precisava reescrever a cena do encontro para que funcionasse.",
+      "alvo": "reescrever",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-lacônico-01",
+      "frase": "O estilo lacônico de Hemingway influenciou gerações de contistas.",
+      "alvo": "lacônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-prolixo-01",
+      "frase": "A narração prolixa sufoca o ritmo antes do clímax.",
+      "alvo": "prolixa",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-hermético-01",
+      "frase": "O poema hermético recusa a leitura fácil como gesto político.",
+      "alvo": "hermético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-alusivo-01",
+      "frase": "O texto alusivo exige do leitor uma biblioteca interior.",
+      "alvo": "alusivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-digres-01",
+      "frase": "A escrita digressiva de Sterne redefiniu o que se entende por romance.",
+      "alvo": "digressiva",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-aforístico-01",
+      "frase": "O tom aforístico concentra décadas em uma única frase.",
+      "alvo": "aforístico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-parabólico-01",
+      "frase": "A narrativa parabólica esconde a moral no próprio movimento da história.",
+      "alvo": "parabólico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-anedótico-01",
+      "frase": "O tom anedótico aproxima a narradora do leitor sem perder profundidade.",
+      "alvo": "anedótico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-sinopse-01",
+      "frase": "A sinopse precisa convencer o editor sem entregar o final.",
+      "alvo": "sinopse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-orelha-01",
+      "frase": "A orelha do livro é o primeiro argumento de venda.",
+      "alvo": "orelha",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-livreiro-01",
+      "frase": "O livreiro conhece seus clientes melhor que qualquer algoritmo.",
+      "alvo": "livreiro",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-reedição-01",
+      "frase": "A reedição revisada corrigiu erros que passaram despercebidos por décadas.",
+      "alvo": "reedição",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-prefácio-01",
+      "frase": "O prefácio da nova edição reposicionou o livro no cânone.",
+      "alvo": "prefácio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-posfácio-01",
+      "frase": "O posfácio revelou que o final foi reescrito três vezes.",
+      "alvo": "posfácio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-epílogo-01",
+      "frase": "O epílogo desfaz o que o penúltimo capítulo havia construído.",
+      "alvo": "epílogo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-prólogo-01",
+      "frase": "O prólogo promete uma história que o romance não entrega — deliberadamente.",
+      "alvo": "prólogo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-glossário-01",
+      "frase": "O glossário no final revela que o autor inventou metade dos termos.",
+      "alvo": "glossário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-índice-01",
+      "frase": "O índice remissivo transformou o romance em enciclopédia.",
+      "alvo": "índice",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-canonizar-01",
+      "frase": "A academia canonizou a obra décadas depois de sua publicação.",
+      "alvo": "canonizou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-problematizar-01",
+      "frase": "O ensaio problematiza a noção de autoria sem resolvê-la.",
+      "alvo": "problematiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-cartografar-01",
+      "frase": "A pesquisadora cartografou a produção de escritoras negras no século XX.",
+      "alvo": "cartografou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-recuperar-01",
+      "frase": "A nova crítica recuperou autoras esquecidas pelo cânone masculino.",
+      "alvo": "recuperou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-revisitar-01",
+      "frase": "Revisitar Clarice é encontrar um texto diferente a cada década.",
+      "alvo": "revisitar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-cadenciado-01",
+      "frase": "A prosa cadenciada de Lispector imita a respiração do pensamento.",
+      "alvo": "cadenciada",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sincopado-01",
+      "frase": "O ritmo sincopado dos diálogos acelera a tensão sem avisar.",
+      "alvo": "sincopado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-pausado-01",
+      "frase": "A narração pausada obriga o leitor a habitar cada detalhe.",
+      "alvo": "pausado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-vertiginoso-01",
+      "frase": "O acúmulo vertiginoso de imagens produz desorientação calculada.",
+      "alvo": "vertiginoso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-moroso-01",
+      "frase": "O andamento moroso do primeiro capítulo é uma armadilha deliberada.",
+      "alvo": "moroso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-claustrofóbico-01",
+      "frase": "O espaço claustrofóbico da narrativa sufoca personagens e leitores.",
+      "alvo": "claustrofóbico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-árido-01",
+      "frase": "A paisagem árida reflete o estado interior da protagonista.",
+      "alvo": "árido",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-opressivo-01",
+      "frase": "O silêncio opressivo da casa comunica o que os personagens recusam dizer.",
+      "alvo": "opressivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onírico-01",
+      "frase": "A sequência onírica rompe o contrato com o realismo sem aviso.",
+      "alvo": "onírico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-liminar-01",
+      "frase": "O espaço liminar entre o quarto e o corredor concentra toda a tensão.",
+      "alvo": "liminar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-ressentimento-01",
+      "frase": "O ressentimento da narradora contamina cada descrição que ela faz.",
+      "alvo": "ressentimento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-contemplação-01",
+      "frase": "A contemplação substitui a ação nos momentos de maior intensidade.",
+      "alvo": "contemplação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-estranhamento-01",
+      "frase": "O estranhamento produzido pela focalização incomum é o efeito desejado.",
+      "alvo": "estranhamento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ambivalência-01",
+      "frase": "A ambivalência do personagem em relação à mãe sustenta o romance inteiro.",
+      "alvo": "ambivalência",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cumplicidade-01",
+      "frase": "A cumplicidade entre narrador e leitor se constrói aos poucos.",
+      "alvo": "cumplicidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-desamparo-01",
+      "frase": "O desamparo da protagonista não pede solução — só testemunho.",
+      "alvo": "desamparo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pertencimento-01",
+      "frase": "A busca por pertencimento atravessa toda a obra da autora.",
+      "alvo": "pertencimento",
+      "esperado": "substantivo"
     }
   ]
 }
