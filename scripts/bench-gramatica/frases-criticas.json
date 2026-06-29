@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1054",
+  "versao": "2026-06-29-v1055",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -13851,6 +13851,288 @@
       "frase": "Ao longo do corredor havia retratos de escritores do século XIX.",
       "alvo": "ao longo do corredor",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-pron-cujo-01",
+      "frase": "O escritor cujo silêncio durou trinta anos publicou um único livro.",
+      "alvo": "cujo",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-cujo-02",
+      "frase": "A personagem cuja voz nunca é ouvida é a que mais fala pelo que cala.",
+      "alvo": "cuja",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-quanto-01",
+      "frase": "Tudo quanto foi escrito antes volta ressignificado pela última frase.",
+      "alvo": "quanto",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-quanto-02",
+      "frase": "Quantos escrevem para entender o que sentiram sem saber que sentiam.",
+      "alvo": "quantos",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-prep-ante-01",
+      "frase": "Ante o silêncio da plateia, a narradora recuou para dentro de si.",
+      "alvo": "ante",
+      "esperado": "preposição"
+    },
+    {
+      "id": "r-prep-perante-01",
+      "frase": "Perante o manuscrito inacabado, o editor hesitou pela primeira vez.",
+      "alvo": "perante",
+      "esperado": "preposição"
+    },
+    {
+      "id": "r-prep-mediante-01",
+      "frase": "Mediante a leitura atenta, o leitor percebe o que o narrador esconde.",
+      "alvo": "mediante",
+      "esperado": "preposição"
+    },
+    {
+      "id": "r-prep-conforme-01",
+      "frase": "Conforme o romance avança, o leitor perde a certeza sobre quem narra.",
+      "alvo": "conforme",
+      "esperado": "preposição"
+    },
+    {
+      "id": "r-prep-segundo-01",
+      "frase": "Segundo a narradora, o incêndio começou antes do amanhecer.",
+      "alvo": "segundo",
+      "esperado": "preposição"
+    },
+    {
+      "id": "r-adv-obliquamente-01",
+      "frase": "O texto diz obliquamente o que o autor não ousou nomear.",
+      "alvo": "obliquamente",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-adv-paulatinamente-01",
+      "frase": "A voz da personagem vai paulatinamente cedendo ao silêncio.",
+      "alvo": "paulatinamente",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-adv-inexoravelmente-01",
+      "frase": "O enredo avança inexoravelmente para o ponto que o leitor teme.",
+      "alvo": "inexoravelmente",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-adv-doravante-01",
+      "frase": "Doravante, o narrador abandonará a pretensão de objetividade.",
+      "alvo": "doravante",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-adv-outrora-01",
+      "frase": "Outrora, aquela praça era o centro da vida da personagem.",
+      "alvo": "outrora",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-adv-alhures-01",
+      "frase": "O que alhures seria detalhe, aqui se torna o único fato que importa.",
+      "alvo": "alhures",
+      "esperado": "advérbio"
+    },
+    {
+      "id": "r-conj-conquanto-01",
+      "frase": "Conquanto o romance seja breve, cada parágrafo carrega décadas.",
+      "alvo": "conquanto",
+      "esperado": "conjunção"
+    },
+    {
+      "id": "r-conj-outrossim-01",
+      "frase": "Outrossim, a narradora recusa toda forma de conclusão tranquilizadora.",
+      "alvo": "outrossim",
+      "esperado": "conjunção"
+    },
+    {
+      "id": "r-conj-porquanto-01",
+      "frase": "Porquanto a memória falha, o texto falha com ela intencionalmente.",
+      "alvo": "porquanto",
+      "esperado": "conjunção"
+    },
+    {
+      "id": "r-conj-malgrado-01",
+      "frase": "Malgrado a resistência do editor, o final permaneceu em aberto.",
+      "alvo": "malgrado",
+      "esperado": "conjunção"
+    },
+    {
+      "id": "r-verb-assentir-01",
+      "frase": "O personagem assentiu sem acreditar no que dizia.",
+      "alvo": "assentiu",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ponderar-01",
+      "frase": "O narrador pondera cada detalhe antes de escolher o que revelar.",
+      "alvo": "pondera",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-hesitar-01",
+      "frase": "A autora hesitou entre dois finais antes de escolher o que decepciona.",
+      "alvo": "hesitou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-recusar-01",
+      "frase": "O texto recusa qualquer leitura que o resolva por completo.",
+      "alvo": "recusa",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ceder-01",
+      "frase": "A narradora cede ao leitor apenas o que ele já esperava perder.",
+      "alvo": "cede",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-assimétrico-01",
+      "frase": "A estrutura assimétrica do romance frustra a expectativa de proporção.",
+      "alvo": "assimétrico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-simétrico-01",
+      "frase": "A simetria entre o primeiro e o último capítulo cria um espelho que distorce.",
+      "alvo": "simétrico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rizomático-01",
+      "frase": "O romance rizomático não tem centro nem início — apenas entradas.",
+      "alvo": "rizomático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fragmentário-01",
+      "frase": "A narrativa fragmentária exige que o leitor monte o que o texto desmontou.",
+      "alvo": "fragmentário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-elipse-01",
+      "frase": "A elipse narrativa salta décadas e deixa o leitor calcular a perda.",
+      "alvo": "elipse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pausa-01",
+      "frase": "A pausa descritiva interrompe o enredo para fazer o tempo existir.",
+      "alvo": "pausa",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-sumário-01",
+      "frase": "O sumário narrativo comprime anos em uma única frase transitiva.",
+      "alvo": "sumário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cena-01",
+      "frase": "A cena dilata o tempo e faz o leitor viver o momento junto com a personagem.",
+      "alvo": "cena",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-involuntário-01",
+      "frase": "A memória involuntária proustiana dispensa a vontade de recordar.",
+      "alvo": "involuntário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-voluntário-01",
+      "frase": "A memória voluntária só recupera o arquivo — nunca a textura do vivido.",
+      "alvo": "voluntário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-encoberto-01",
+      "frase": "O trauma encoberto emerge pela sintaxe antes de ser nomeado.",
+      "alvo": "encoberto",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-latente-01",
+      "frase": "O conflito latente explode apenas no penúltimo capítulo.",
+      "alvo": "latente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-rabiscar-01",
+      "frase": "A escritora rabiscou a margem do manuscrito até os rabiscos virarem texto.",
+      "alvo": "rabiscou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-rasgar-01",
+      "frase": "Ela rasgou a terceira versão e começou pelo final.",
+      "alvo": "rasgou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-copiar-01",
+      "frase": "O autor copiava os parágrafos à mão para sentir o peso de cada palavra.",
+      "alvo": "copiava",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-datilografar-01",
+      "frase": "Ela datilografou o romance inteiro três vezes antes de enviá-lo.",
+      "alvo": "datilografou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-paratexto-01",
+      "frase": "O paratexto — prefácio, orelha, dedicatória — já é leitura.",
+      "alvo": "paratexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-intertexto-01",
+      "frase": "O intertexto não é citação — é a memória involuntária da tradição.",
+      "alvo": "intertexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hipotexto-01",
+      "frase": "O hipotexto é o texto anterior que a obra absorve e transforma.",
+      "alvo": "hipotexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hipertexto-01",
+      "frase": "O hipertexto literário deriva do hipotexto por transformação ou imitação.",
+      "alvo": "hipertexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-dialetal-01",
+      "frase": "A variante dialetal no diálogo situa o personagem antes da descrição.",
+      "alvo": "dialetal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-vernacular-01",
+      "frase": "O vocabulário vernacular ancora o texto na oralidade que o precede.",
+      "alvo": "vernacular",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-idioletal-01",
+      "frase": "O idioleto da personagem é a sua assinatura antes do nome próprio.",
+      "alvo": "idioletal",
+      "esperado": "adjetivo"
     }
   ]
 }
