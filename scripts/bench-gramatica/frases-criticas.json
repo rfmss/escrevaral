@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1058",
+  "versao": "2026-06-29-v1059",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -14721,6 +14721,276 @@
       "frase": "A elipse suspende o tempo e faz o leitor preencher o que falta.",
       "alvo": "suspende",
       "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-rememorar-01",
+      "frase": "A narradora rememora sem saber que está reescrevendo.",
+      "alvo": "rememora",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-reconstituir-01",
+      "frase": "O narrador reconstitui o passado com os fragmentos que restaram.",
+      "alvo": "reconstitui",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-testemunhar-01",
+      "frase": "Testemunhar não é apenas ver — é aceitar a responsabilidade do que foi visto.",
+      "alvo": "testemunhar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-denunciar-01",
+      "frase": "O texto denuncia sem panfleto — pela forma que escolhe, não pela tese que declara.",
+      "alvo": "denuncia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-dilacerante-01",
+      "frase": "A despedida dilacerante termina com uma frase banal — e é isso que dói.",
+      "alvo": "dilacerante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-arrebatador-01",
+      "frase": "O final arrebatador não precisa de barulho — a quietude é sua forma.",
+      "alvo": "arrebatador",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-perturbante-01",
+      "frase": "A imagem perturbante ressurge à noite porque o texto a plantou de dia.",
+      "alvo": "perturbante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sufocante-01",
+      "frase": "O espaço sufocante da narrativa não deixa personagem nem leitor respirar.",
+      "alvo": "sufocante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-frase-01",
+      "frase": "A frase curta acelera o tempo da cena e o leitor corre junto.",
+      "alvo": "frase",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-parágrafo-01",
+      "frase": "O parágrafo longo de Clarice é uma câmara de pressão que o ponto alivia.",
+      "alvo": "parágrafo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-período-01",
+      "frase": "O período hipotático de Machado carrega a ironia na subordinação.",
+      "alvo": "período",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-capítulo-01",
+      "frase": "O capítulo mais curto do romance diz mais do que o mais longo.",
+      "alvo": "capítulo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-fragmento-01",
+      "frase": "O fragmento não é o capítulo que não cresceu — é uma forma que escolheu parar.",
+      "alvo": "fragmento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-hermenêutico-01",
+      "frase": "O círculo hermenêutico obriga a reler o início depois de terminar.",
+      "alvo": "hermenêutico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exegético-01",
+      "frase": "O comentário exegético esgota o texto para não precisar viver com ele.",
+      "alvo": "exegético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-semiótico-01",
+      "frase": "A análise semiótica lê o texto como sistema de signos em relação.",
+      "alvo": "semiótico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-isotopia-01",
+      "frase": "A isotopia semântica mantém a coerência do campo figurativo ao longo do texto.",
+      "alvo": "isotopia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-actante-01",
+      "frase": "O actante greimasiano não é personagem — é uma função narrativa que qualquer elemento pode exercer.",
+      "alvo": "actante",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-programa-01",
+      "frase": "O programa narrativo descreve a sequência de estados e transformações do actante.",
+      "alvo": "programa",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-folhear-01",
+      "frase": "Ela folheou o livro antes de lê-lo, procurando o tom pelo aspecto das páginas.",
+      "alvo": "folheou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-grifar-01",
+      "frase": "O leitor que grifa demais talvez esteja fugindo da leitura.",
+      "alvo": "grifa",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-reler-01",
+      "frase": "Reler é descobrir que não éramos o leitor que achávamos ser.",
+      "alvo": "reler",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-abandonar-01",
+      "frase": "Abandonar um livro também é um ato de leitura.",
+      "alvo": "abandonar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-inacabado-01",
+      "frase": "O romance inacabado pode ser a obra mais honesta de um autor.",
+      "alvo": "inacabado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-apócrifo-01",
+      "frase": "O texto apócrifo atribuído ao autor clássico diz mais sobre quem o forjou.",
+      "alvo": "apócrifo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-interpolado-01",
+      "frase": "O trecho interpolado por um editor anônimo mudou o sentido da obra inteira.",
+      "alvo": "interpolado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-autoria-01",
+      "frase": "A autoria não é uma origem — é uma função que o texto distribui.",
+      "alvo": "autoria",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-escritura-01",
+      "frase": "A escritura barthesiana liberta o texto do intento original do autor.",
+      "alvo": "escritura",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-jouissance-01",
+      "frase": "O texto de fruição — jouissance — perturba o leitor sem dar descanso.",
+      "alvo": "jouissance",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-coletivo-01",
+      "frase": "A escrita coletiva exige que cada voz abra mão de ser a única.",
+      "alvo": "coletivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-colaborativo-01",
+      "frase": "O texto colaborativo carrega a tensão entre o que cada autor cedeu.",
+      "alvo": "colaborativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-partilhar-01",
+      "frase": "Partilhar o texto com a turma é expor o pensamento antes de ele ter forma.",
+      "alvo": "partilhar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-devolver-01",
+      "frase": "O facilitador devolve o texto com perguntas, não com respostas.",
+      "alvo": "devolve",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-intertextual-01",
+      "frase": "A relação intertextual não precisa ser consciente para ser operativa.",
+      "alvo": "intertextual",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-metatextual-01",
+      "frase": "O comentário metatextual interrompe a ficção para falar sobre ela.",
+      "alvo": "metatextual",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-arquitextual-01",
+      "frase": "A relação arquitextual classifica o texto antes de qualquer leitura.",
+      "alvo": "arquitextual",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-epopeia-01",
+      "frase": "A epopeia modernista de Drummond faz do pedregulho o centro do universo.",
+      "alvo": "epopeia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-elegia-01",
+      "frase": "A elegia transforma a perda em forma sem que a forma consuma o luto.",
+      "alvo": "elegia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ode-01",
+      "frase": "A ode nerudiana não celebra o objeto — celebra o olhar que o encontra.",
+      "alvo": "ode",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-sátira-01",
+      "frase": "A sátira machadiana não quer reformar — quer que o leitor se reconheça.",
+      "alvo": "sátira",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-paródia-01",
+      "frase": "A paródia imita para desviar — é o respeito que não pode ser reverência.",
+      "alvo": "paródia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pastiche-01",
+      "frase": "O pastiche imita sem distância crítica e por isso não consegue ser irônico.",
+      "alvo": "pastiche",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pastorela-01",
+      "frase": "A pastorela medieval idealizava o campo para escapar da cidade — e da realidade.",
+      "alvo": "pastorela",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-reportagem-01",
+      "frase": "A grande reportagem literária lê o real com a atenção que a ficção reservava à invenção.",
+      "alvo": "reportagem",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ensaio-01",
+      "frase": "O ensaio é o único gênero que pensa enquanto se escreve e não esconde o processo.",
+      "alvo": "ensaio",
+      "esperado": "substantivo"
     }
   ]
 }
