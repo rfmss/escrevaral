@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1065",
+  "versao": "2026-06-29-v1066",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -16190,6 +16190,282 @@
       "id": "r-noun-terceto-01",
       "frase": "O terceto dantesco encadeia as rimas de modo que cada estrofe puxa a seguinte.",
       "alvo": "terceto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-worldbuild-01",
+      "frase": "O romance constrói um mundo que o leitor habita antes de entender suas leis.",
+      "alvo": "constrói",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-imaginar-01",
+      "frase": "Imaginar não é escapar da realidade — é construir outra para entender esta.",
+      "alvo": "imaginar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-fabular-01",
+      "frase": "O escritor fabula porque o real já aconteceu e só a fabulação o torna legível.",
+      "alvo": "fabula",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-mitificar-01",
+      "frase": "O regionalismo mitifica o espaço até torná-lo universal pelo excesso de particular.",
+      "alvo": "mitifica",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desmitificar-01",
+      "frase": "A ironia machadiana desmitifica o herói antes que o leitor termine de admirá-lo.",
+      "alvo": "desmitifica",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-preciso-01",
+      "frase": "A escolha precisa da palavra não é perfeccionismo — é respeito pelo leitor.",
+      "alvo": "preciso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exato-01",
+      "frase": "O detalhe exato ancora o texto no real mesmo quando a trama é impossível.",
+      "alvo": "exato",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rigoroso-01",
+      "frase": "O trabalho rigoroso com a língua não é obstáculo à espontaneidade — é a sua condição.",
+      "alvo": "rigoroso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-criterioso-01",
+      "frase": "A revisão criteriosa elimina o que o entusiasmo do primeiro rascunho não pôde ver.",
+      "alvo": "criterioso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-encadernação-01",
+      "frase": "A encadernação artesanal transforma o livro num objeto que resiste ao tempo.",
+      "alvo": "encadernação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-guardas-01",
+      "frase": "As guardas do livro antigo guardavam dedicatórias de leitores que morreram há cem anos.",
+      "alvo": "guardas",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-orelhas-01",
+      "frase": "As orelhas dobradas nas páginas são o mapa de uma leitura que foi interrompida.",
+      "alvo": "orelhas",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-marginália-01",
+      "frase": "A marginália do leitor anônimo dialoga com o texto num segundo nível de autoria.",
+      "alvo": "marginália",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-frenético-01",
+      "frase": "O ritmo frenético do thriller não permite que o leitor pause para duvidar do que leu.",
+      "alvo": "frenético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-moroso-01",
+      "frase": "O andamento moroso do romance proustiano é o tempo da memória, não da ação.",
+      "alvo": "moroso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-acelerado-01",
+      "frase": "A narração acelerada dos eventos finais comprime o tempo como sob pressão.",
+      "alvo": "acelerado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-vagaroso-01",
+      "frase": "A prosa vagarosa de Saramago obriga o leitor a habitar o momento com a personagem.",
+      "alvo": "vagaroso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-mergulhar-01",
+      "frase": "O leitor mergulha no texto e só percebe que esqueceu o tempo ao fechar o livro.",
+      "alvo": "mergulha",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-perder-se-01",
+      "frase": "Perder-se na ficção é um ato de confiança que o texto precisa merecer.",
+      "alvo": "perder",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-habitar-01",
+      "frase": "A boa ficção faz o leitor habitar um corpo e uma vida que não são os seus.",
+      "alvo": "habitar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-biopolitica-01",
+      "frase": "A biopolítica foucaultiana lê no corpo a inscrição do poder que a lei não precisa mais declarar.",
+      "alvo": "biopolítica",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-dispositivo-01",
+      "frase": "O dispositivo agambeniano captura a vida dentro de uma rede de técnicas e discursos.",
+      "alvo": "dispositivo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-genealogia-02",
+      "frase": "A genealogia foucaultiana não busca a origem — busca a proveniência e a emergência.",
+      "alvo": "genealogia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-arquivo-01",
+      "frase": "O arquivo não é neutro — é uma decisão política sobre o que merece existir no futuro.",
+      "alvo": "arquivo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-episteme-01",
+      "frase": "A episteme de cada época define o que pode ser pensado e o que permanece impensável.",
+      "alvo": "episteme",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-hegemônico-02",
+      "frase": "O discurso hegemônico apresenta como natural o que é resultado de um processo histórico.",
+      "alvo": "hegemônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-contra-hegemônico-01",
+      "frase": "A escrita contra-hegemônica desvela o que o discurso dominante naturaliza.",
+      "alvo": "contra-hegemônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ideológico-01",
+      "frase": "O texto ideológico não é o que declara sua posição — é o que a esconde com mais eficácia.",
+      "alvo": "ideológico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-performativo-01",
+      "frase": "O enunciado performativo não descreve um estado — cria um.",
+      "alvo": "performativo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ato-de-fala-01",
+      "frase": "O ato de fala austiniano distingue o que diz o que acontece do que faz algo acontecer.",
+      "alvo": "ato",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-regionalist-01",
+      "frase": "A escrita regionalista não é menor — é o universal que se recusa a fingir que não tem endereço.",
+      "alvo": "regionalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-urbano-lit-01",
+      "frase": "A ficção urbana cartografa a cidade pela perspectiva de quem vive nos seus interstícios.",
+      "alvo": "urbano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rural-lit-01",
+      "frase": "O espaço rural rosiano não é pitoresco — é um estado de linguagem.",
+      "alvo": "rural",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fronteiriço-01",
+      "frase": "A escrita fronteiriça habita o espaço entre línguas, culturas e identidades.",
+      "alvo": "fronteiriço",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-assumir-01",
+      "frase": "Assumir a ficção como modo de conhecer é o gesto inaugural de todo escritor.",
+      "alvo": "assumir",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-reconhecer-01",
+      "frase": "O texto reconhece seus limites quando para de fingir que sabe o que o leitor sente.",
+      "alvo": "reconhece",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-comprometer-01",
+      "frase": "O escritor se compromete com a língua como um ato antes de qualquer ideia.",
+      "alvo": "compromete",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-responder-01",
+      "frase": "Todo texto responde a outros textos mesmo quando recusa reconhecê-los.",
+      "alvo": "responde",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-insubmisso-01",
+      "frase": "A voz insubmissa não é barulhenta — é a que recusa a moldura que lhe oferecem.",
+      "alvo": "insubmisso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-rebelde-01",
+      "frase": "O texto rebelde não se opõe por oposição — se opõe porque propõe outro mundo.",
+      "alvo": "rebelde",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-incômodo-01",
+      "frase": "O clássico incômodo é aquele que ainda não podemos domesticar por completo.",
+      "alvo": "incômodo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-contrato-01",
+      "frase": "O contrato de leitura é estabelecido nas primeiras linhas, antes que o leitor perceba.",
+      "alvo": "contrato",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-pacto-01",
+      "frase": "O pacto autobiográfico exige que nome real e narrador coincidam — e isso basta para criar o efeito de verdade.",
+      "alvo": "pacto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cumplicidade-01",
+      "frase": "A cumplicidade entre narrador e leitor é o que permite que a ironia funcione sem ser explicada.",
+      "alvo": "cumplicidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-sedução-01",
+      "frase": "A sedução do texto está em revelar o suficiente para manter o leitor em movimento.",
+      "alvo": "sedução",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-encantamento-01",
+      "frase": "O encantamento literário ocorre quando o texto nos convence de que aquele mundo sempre existiu.",
+      "alvo": "encantamento",
       "esperado": "substantivo"
     }
   ]
