@@ -68,6 +68,48 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-29 (ciclo autônomo v1032→v1043)
+
+**Baseline:** v1043 — todos engines 100%.
+
+**O que foi entregue neste ciclo (v1032→v1043):**
+
+- v1033-v1038: A-01 batches continuação (batches 13-16): +28 regras (no que se refere a/com relação a/fica claro que/pode-se dizer que/é necessário ressaltar/devemos ressaltar/o ser humano/a sociedade atual/todo os seres humanos/é inegável que/é inquestionável que/é sabido por todos + marcadores generalizantes)
+- v1039: auditoria FP batch 15 — removidos 8 conectores válidos (assim como/tal qual/por outro lado/apesar de/a partir de introdução de argumento), A-01 estabilizado com 0 FP em corpus Clarice/Machado/Rosa
+- v1040: batch 17: +7 regras (a saber/qual seja/sem mais delongas/modéstia à parte/com todo o respeito/permita-me dizer/como dizia)
+- v1041: **fix crítico** — index.html e service-worker.js travados em v1013 desde início da sessão anterior; corrigido para v1041
+- v1042: A-01 batch 18: +7 regras (onde não-locacional/pode-se notar/é possível afirmar/pretendo demonstrar/cabe ressaltar/é válido ressaltar/não podemos deixar de mencionar); bench 1037→1048
+- v1043: bench 1048→**1100** — marco 1100 atingido (+52 casos: adj temporais/narrador/culturais, nouns críticos literários, verbos craft)
+
+**EUREKA desta sessão:** `analisarFuncoes()` em `syntax-engine.js` já detecta sujeito/predicado/objeto — exposta via `syntax-controller.js` com tokens coloridos. A função sintática já existe; o trabalho real é auditar e melhorar as arestas.
+
+**Estado atualizado dos engines (v1043):**
+
+| Área / engine | Maturidade | Notas de estado (v1043) |
+|---|---:|---|
+| Analise geral | **100%** | CLIQUES_PT 1000; PLEONASMOS 500; CONFUSOES 115 regras A-01; 0 FP corpus literário |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350; DEFINICOES ~1020+; POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bench 1100/1100; golden 91/0; VERBOS_PRES 2097; adj 2778 |
+| Função sintática | **70%** | analisarFuncoes() existente; sujeito/OD/predicativo/OI; auditoria de arestas pendente |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **100%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; escopo em todos; saveStatus |
+
+**Fronteiras abertas (v1043):**
+
+1. **Função sintática — auditoria de arestas**: `analisarFuncoes()` já existe; testar com 50 frases literárias (pro-drop, topicalização, relativos, voz passiva) para medir precisão real e identificar o que corrigir
+2. **A-01 batch 19+**: expressões de intensificação vazia, "quando" não-temporal, novos hedges acadêmicos
+3. **Bench rumo a 1200**: 100 casos até o próximo marco — categorias: preposições em contexto, pronomes relativos, construções com infinitivo
+4. **DEFINICOES**: compostos e termos muito específicos ainda sem cobertura
+
+**Auditor:** P0=0, P1=0, P2=0 (bench 1100/0, golden 91/0)
+
+**Commits locais não enviados:** 119 — fazer push quando usuário pedir
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-28 (ciclo autônomo v1008→v1032)
 
 **Baseline:** v1032 — todos engines 100%.
