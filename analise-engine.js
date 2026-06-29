@@ -1452,6 +1452,28 @@
     [/\bé (?:possível|plausível|razoável|lícito) (?:afirmar|dizer|concluir|inferir|notar|observar) que\b/gi,
      "«é possível afirmar que»",
      "Hedging desnecessário que enfraquece a afirmação. Afirme diretamente ou indique a evidência que limita a certeza."],
+    // batch 23 — apelo à autoridade + universalizações indevidas
+    [/\bsegundo (?:os|vários|alguns|muitos|diversos) (?:especialistas|estudiosos|pesquisadores|autores|críticos)\b/gi,
+     "«segundo os especialistas»",
+     "Autoridade coletiva anônima. Cite o estudioso específico ou reformule sem delegação de responsabilidade."],
+    [/\bcomo (?:afirma|diz|defende|argumenta|explica|escreve) (?:a literatura|a teoria|a crítica|a academia|a ciência)\b/gi,
+     "«como afirma a literatura»",
+     "A literatura/teoria/academia não fala — pessoas específicas falam. Nomeie a fonte ou assuma a afirmação."],
+    [/\btodo(?:s)?(?:\s+os|\s+as)?\s+(?:escritores|leitores|autores|críticos|humanos|pessoas)\b/gi,
+     "«todos os escritores»",
+     "Generalização absoluta. Afirmações sobre «todos» raramente resistem a um único contraexemplo."],
+    [/\bninguém (?:pode|consegue|é capaz de|há de) (?:negar|contestar|questionar|duvidar)\b/gi,
+     "«ninguém pode negar»",
+     "Argumento de unanimidade forçada. Se a afirmação precisa proibir a dúvida, a dúvida é legítima."],
+    [/\bé (?:sabido|reconhecido|aceito|consagrado) (?:por todos|universalmente|amplamente) que\b/gi,
+     "«é sabido por todos que»",
+     "Consenso fictício. O que «todos sabem» frequentemente é o que ninguém verificou."],
+    [/\bhoje (?:em dia|em pleno século|no século XXI)\b/gi,
+     "«hoje em dia»",
+     "Marcador temporal vago que não ancora o argumento no tempo real. Especifique o período ou o fenômeno que o caracteriza."],
+    [/\bdesde (?:sempre|tempos imemoriais|os primórdios da humanidade)\b/gi,
+     "«desde sempre»",
+     "Eternização sem evidência histórica. Especifique o ponto de origem ou substitua pela afirmação verificável."],
   ];
 
   function analisarConfusoes(texto) {

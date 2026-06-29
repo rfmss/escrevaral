@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1056",
+  "versao": "2026-06-29-v1057",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -14391,6 +14391,60 @@
       "frase": "O final aporético recusa a resolução que o leitor precisava para sair intacto.",
       "alvo": "aporético",
       "esperado": "adjetivo"
+    },
+    {
+      "id": "conf-especialistas-01",
+      "frase": "Segundo os especialistas, a autoficção domina o mercado editorial atual.",
+      "alvo": "segundo os especialistas",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-especialistas-02",
+      "frase": "Vários estudiosos concordam que o romance está em crise.",
+      "alvo": "vários estudiosos",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-todosesc-01",
+      "frase": "Todos os escritores sabem que a primeira versão nunca é a boa.",
+      "alvo": "todos os escritores",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-ninguem-01",
+      "frase": "Ninguém pode negar que Clarice transformou a prosa brasileira.",
+      "alvo": "ninguém pode negar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-sabidotodos-01",
+      "frase": "É sabido por todos que o narrador não confiável é um recurso moderno.",
+      "alvo": "é sabido por todos que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-hojeemdia-01",
+      "frase": "Hoje em dia, os leitores preferem narrativas mais curtas e diretas.",
+      "alvo": "hoje em dia",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-desdesempre-01",
+      "frase": "Desde sempre, a literatura buscou dar forma à experiência humana.",
+      "alvo": "desde sempre",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-especialistas-neg-01",
+      "frase": "Segundo Bakhtin, o romance é o gênero do devir.",
+      "alvo": "segundo Bakhtin",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-todos-neg-01",
+      "frase": "Todos os capítulos do livro terminam com uma pergunta sem resposta.",
+      "alvo": "todos os capítulos",
+      "esperado": "nenhum"
     }
   ]
 }
