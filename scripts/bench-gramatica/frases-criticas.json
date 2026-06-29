@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1046",
+  "versao": "2026-06-29-v1048",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -12591,6 +12591,60 @@
       "frase": "O registro cômico dissolve a tensão exatamente quando ela mais importa.",
       "alvo": "cômico",
       "esperado": "adjetivo"
+    },
+    {
+      "id": "conf-portudo-01",
+      "frase": "Por tudo isso, concluímos que a literatura é resistência.",
+      "alvo": "por tudo isso",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-conclui-01",
+      "frase": "Conclui-se que a narrativa fragmentada domina o século XXI.",
+      "alvo": "conclui-se que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-ficaevid-01",
+      "frase": "Fica evidente que o autor não domina o registro literário.",
+      "alvo": "fica evidente que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-extremaimp-01",
+      "frase": "É de extrema importância preservar a memória oral das comunidades.",
+      "alvo": "é de extrema importância",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-naverdade-01",
+      "frase": "Na verdade, o narrador sabe mais do que aparenta.",
+      "alvo": "na verdade",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-emtermos-01",
+      "frase": "Em termos gerais, pode-se dizer que o romance é otimista.",
+      "alvo": "em termos gerais",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-deforma-01",
+      "frase": "De forma geral, os personagens carecem de profundidade.",
+      "alvo": "de forma geral",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-naverdade-neg-01",
+      "frase": "Ela disse a verdade, mesmo sem querer.",
+      "alvo": "verdade",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-conclui-neg-01",
+      "frase": "O personagem concluiu a carta antes do amanhecer.",
+      "alvo": "concluiu",
+      "esperado": "nenhum"
     }
   ]
 }

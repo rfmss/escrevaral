@@ -1386,6 +1386,28 @@
     [/\bde suma importância\b/gi,
      "«de suma importância»",
      "Superlativo vago. Demonstre a importância pela consequência concreta, não pelo adjetivo."],
+    // batch 20 — vícios de encerramento + tautologias + reforços desnecessários
+    [/\bpor tudo (?:isso|o que foi dito|o exposto)\b/gi,
+     "«por tudo isso»",
+     "Síntese vaga que repete sem acrescentar. Se há conclusão, tire-a diretamente dos argumentos."],
+    [/\bconclui-se (?:que|portanto|assim)\b/gi,
+     "«conclui-se que»",
+     "Anúncio de conclusão no lugar da própria conclusão. Conclua sem avisar que está concluindo."],
+    [/\bfica evidente (?:que|portanto)\b/gi,
+     "«fica evidente que»",
+     "Afirmação de evidência em vez da evidência. Se é evidente, mostre por quê."],
+    [/\bé de extrema importância\b/gi,
+     "«é de extrema importância»",
+     "Superlativo de intensidade sem sustentação. Demonstre a importância pelo efeito concreto."],
+    [/\bna verdade\b/gi,
+     "«na verdade»",
+     "Marcador que sinaliza correção implícita mas frequentemente introduz apenas ênfase. Avalie se é necessário."],
+    [/\bem termos (?:gerais|práticos|objetivos)\b/gi,
+     "«em termos gerais»",
+     "Abertura de generalização que raramente é honrada pelo que segue. Afirme o que realmente é geral."],
+    [/\bde (?:forma|modo|maneira) (?:geral|ampla|abrangente)\b/gi,
+     "«de forma geral»",
+     "Qualificador vago. Especifique o escopo da afirmação ou remova o qualificador."],
   ];
 
   function analisarConfusoes(texto) {
