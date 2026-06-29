@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1042",
+  "versao": "2026-06-29-v1043",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -11679,6 +11679,318 @@
       "frase": "Voltou à cidade onde nascera para morrer em paz.",
       "alvo": "onde",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-adj-efêmero-01",
+      "frase": "A beleza efêmera da cena se dissolve antes do fim do capítulo.",
+      "alvo": "efêmero",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-efêmero-02",
+      "frase": "Gestos efêmeros compõem o retrato de uma civilização perdida.",
+      "alvo": "efêmeros",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fugaz-01",
+      "frase": "O prazer fugaz de uma frase perfeita justifica anos de tentativa.",
+      "alvo": "fugaz",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-atemporal-01",
+      "frase": "A pergunta é atemporal: quem fala quando o narrador cala?",
+      "alvo": "atemporal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cronológico-01",
+      "frase": "A ordem cronológica foi deliberadamente quebrada pela autora.",
+      "alvo": "cronológico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-anacrónico-01",
+      "frase": "O anacrónico tom épico contrasta com o cenário doméstico.",
+      "alvo": "anacrónico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ínfimo-01",
+      "frase": "O detalhe ínfimo carregava o peso de toda a narrativa.",
+      "alvo": "ínfimo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exíguo-01",
+      "frase": "Num espaço exíguo de tempo, tudo se transformou.",
+      "alvo": "exíguo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-efusivo-01",
+      "frase": "A recepção efusiva contrastava com a frieza do ambiente.",
+      "alvo": "efusivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-contido-lit-01",
+      "frase": "O choro contido da protagonista dilacerava mais que os gritos.",
+      "alvo": "contido",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onisciente-01",
+      "frase": "O narrador onisciente conhece os segredos que as personagens escondem.",
+      "alvo": "onisciente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-onisciente-02",
+      "frase": "A perspectiva onisciente cede lugar ao monólogo interior.",
+      "alvo": "onisciente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-homodiegético-01",
+      "frase": "O narrador homodiegético participa dos eventos que narra.",
+      "alvo": "homodiegético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-heterodiegético-01",
+      "frase": "A narração heterodiegética mantém distância dos acontecimentos.",
+      "alvo": "heterodiegético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-autodiegético-01",
+      "frase": "Em memórias ficcionais, o narrador autodiegético é protagonista e contador.",
+      "alvo": "autodiegético",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-afrodiaspórico-01",
+      "frase": "A literatura afrodiaspórica reorganiza os centros do cânone ocidental.",
+      "alvo": "afrodiaspórico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-indígena-01",
+      "frase": "As cosmologias indígenas entram na prosa como forma de resistência.",
+      "alvo": "indígenas",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-quilombola-01",
+      "frase": "A identidade quilombola se afirma pela memória coletiva da terra.",
+      "alvo": "quilombola",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-periurbano-01",
+      "frase": "A vida periurbana da protagonista está entre dois mundos sem pertencer a nenhum.",
+      "alvo": "periurbano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-tautológico-01",
+      "frase": "O argumento tautológico se dobra sobre si mesmo sem avançar.",
+      "alvo": "tautológico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-assertivo-01",
+      "frase": "A voz assertiva da narradora não deixa espaço para a dúvida do leitor.",
+      "alvo": "assertivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-elíptico-01",
+      "frase": "A construção elíptica suprime o verbo e acelera o ritmo.",
+      "alvo": "elíptico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-anacolútico-01",
+      "frase": "O período anacolútico mimetiza o pensamento interrompido do personagem.",
+      "alvo": "anacolútico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-recapitular-01",
+      "frase": "A narradora recapitula os eventos da noite anterior com precisão clínica.",
+      "alvo": "recapitula",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-subverter-01",
+      "frase": "O romance subverte as expectativas de gênero sem aviso prévio.",
+      "alvo": "subverte",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-delinear-01",
+      "frase": "O autor delineia os contornos do personagem por meio do que ele não diz.",
+      "alvo": "delineia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-sedimentar-01",
+      "frase": "As imagens se sedimentam ao longo da narrativa até formarem um padrão.",
+      "alvo": "sedimentam",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-ressignificar-01",
+      "frase": "A protagonista ressignifica a dor transformando-a em escrita.",
+      "alvo": "ressignifica",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-tensionar-01",
+      "frase": "O flashback tensiona a cronologia e força o leitor a reler o início.",
+      "alvo": "tensiona",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-verossimilhança-01",
+      "frase": "A verossimilhança não exige realidade, apenas coerência interna.",
+      "alvo": "verossimilhança",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-diegese-01",
+      "frase": "A diegese e a mimese organizam dois modos distintos de contar.",
+      "alvo": "diegese",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cronotopo-01",
+      "frase": "O cronotopo bakhtiniano une espaço e tempo em categoria única.",
+      "alvo": "cronotopo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-intertexto-01",
+      "frase": "O intertexto com Machado de Assis não é citação, é contaminação.",
+      "alvo": "intertexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-palimpsesto-01",
+      "frase": "O romance funciona como palimpsesto: cada leitura revela uma camada anterior.",
+      "alvo": "palimpsesto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-anacronismo-01",
+      "frase": "O anacronismo deliberado cria estranhamento produtivo no leitor.",
+      "alvo": "anacronismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-prolepse-01",
+      "frase": "A prolepse do primeiro capítulo contamina toda a leitura subsequente.",
+      "alvo": "prolepse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-analepse-01",
+      "frase": "A analepse revela o que o leitor precisava saber desde o início.",
+      "alvo": "analepse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ekphrasis-01",
+      "frase": "A écfrase da pintura interrompe a ação e redefine o espaço ficcional.",
+      "alvo": "écfrase",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hipotexto-01",
+      "frase": "O hipotexto homérico subjaz a cada decisão de estrutura.",
+      "alvo": "hipotexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hipertexto-lit-01",
+      "frase": "O romance é um hipertexto que reescreve sua fonte sem a apagar.",
+      "alvo": "hipertexto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-distópico-01",
+      "frase": "O cenário distópico serve de espelho para o presente.",
+      "alvo": "distópico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-utópico-01",
+      "frase": "A narrativa utópica projeta o que a realidade recusa.",
+      "alvo": "utópico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-especulativo-01",
+      "frase": "A ficção especulativa brasileira ganhou força editorial na última década.",
+      "alvo": "especulativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-retrofuturista-01",
+      "frase": "A estética retrofuturista mistura nostalgia com projeção tecnológica.",
+      "alvo": "retrofuturista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-pós-colonial-01",
+      "frase": "A perspectiva pós-colonial relê o arquivo imperial como documento da violência.",
+      "alvo": "pós-colonial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-decolonial-lit-01",
+      "frase": "A escrita decolonial recusa a neutralidade do ponto de vista dominante.",
+      "alvo": "decolonial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-introvertido-01",
+      "frase": "A protagonista introvertida guarda tudo num diário que ninguém lê.",
+      "alvo": "introvertida",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-extrovertido-01",
+      "frase": "O personagem extrovertido mascara a solidão com excesso de palavras.",
+      "alvo": "extrovertido",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ambíguo-01",
+      "frase": "O final ambíguo recusa a resolução e devolve a pergunta ao leitor.",
+      "alvo": "ambíguo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-antagônico-01",
+      "frase": "As forças antagônicas do enredo nunca chegam a uma síntese.",
+      "alvo": "antagônicas",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-catártico-01",
+      "frase": "O desfecho catártico libera a tensão acumulada desde o primeiro ato.",
+      "alvo": "catártico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-traumático-01",
+      "frase": "A memória traumática retorna em fragmentos que resistem à narrativa linear.",
+      "alvo": "traumático",
+      "esperado": "adjetivo"
     }
   ]
 }
