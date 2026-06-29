@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1059",
+  "versao": "2026-06-29-v1060",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -14991,6 +14991,60 @@
       "frase": "O ensaio é o único gênero que pensa enquanto se escreve e não esconde o processo.",
       "alvo": "ensaio",
       "esperado": "substantivo"
+    },
+    {
+      "id": "conf-reflexao-01",
+      "frase": "O livro permite uma reflexão mais profunda sobre a condição humana.",
+      "alvo": "permite uma reflexão mais profunda",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-busca-01",
+      "frase": "Este ensaio busca demonstrar que o narrador é não-confiável.",
+      "alvo": "busca demonstrar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-inegavel-01",
+      "frase": "É inegável que Clarice revolucionou a prosa brasileira.",
+      "alvo": "é inegável que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-nempreciso-01",
+      "frase": "Nem é preciso dizer que o narrador mente desde o início.",
+      "alvo": "nem é preciso dizer que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-valesalient-01",
+      "frase": "Vale salientar que a voz narrativa muda no terceiro capítulo.",
+      "alvo": "vale salientar que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-porsuavez-01",
+      "frase": "O segundo romance, por sua vez, abandona a linearidade do primeiro.",
+      "alvo": "por sua vez",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-destaforma-01",
+      "frase": "Desta forma, o autor constrói uma crítica velada à sociedade burguesa.",
+      "alvo": "desta forma",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-reflexao-neg-01",
+      "frase": "Ela parou a reflexão no meio, incapaz de continuar.",
+      "alvo": "reflexão",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-porsuavez-neg-01",
+      "frase": "Cada personagem fala por sua vez sem interromper o outro.",
+      "alvo": "por sua vez",
+      "esperado": "nenhum"
     }
   ]
 }

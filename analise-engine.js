@@ -1474,6 +1474,28 @@
     [/\bdesde (?:sempre|tempos imemoriais|os primórdios da humanidade)\b/gi,
      "«desde sempre»",
      "Eternização sem evidência histórica. Especifique o ponto de origem ou substitua pela afirmação verificável."],
+    // batch 24 — pseudo-profundidade + verbos vazios de ação
+    [/\bpermite (?:uma|a) (?:reflexão|análise|compreensão|visão|percepção) (?:mais )?(?:profunda|ampla|aprofundada|crítica)\b/gi,
+     "«permite uma reflexão profunda»",
+     "Promessa de profundidade sem entrega. Desenvolva a reflexão em vez de anunciá-la."],
+    [/\b(?:busca|visa|objetiva|pretende|procura) (?:demonstrar|mostrar|evidenciar|comprovar|analisar)\b/gi,
+     "«busca demonstrar»",
+     "Declaração de intenção no lugar da intenção cumprida. Execute a análise em vez de prometer executá-la."],
+    [/\bé (?:inegável|inquestionável|irrefutável|indiscutível) que\b/gi,
+     "«é inegável que»",
+     "Interdição da dúvida antes da afirmação. Se é inegável, a força deve vir do argumento, não da proibição de questionar."],
+    [/\bnem (?:é|seria) preciso (?:dizer|mencionar|lembrar|ressaltar) que\b/gi,
+     "«nem é preciso dizer que»",
+     "Dizer o que supostamente não precisa ser dito. Se não precisa, não diga."],
+    [/\b(?:vale|cabe|importa|é válido) (?:salientar|destacar|notar|mencionar|observar) que\b/gi,
+     "«vale salientar que»",
+     "Pedido de permissão para afirmar. Afirme diretamente — o verbo de ação é suficiente."],
+    [/\bpor (?:sua|outro lado|sua vez|outro caminho)\b/gi,
+     "«por sua vez»",
+     "Conector de progressão vago. Especifique a relação — contraste, adição, consequência — em vez de usar um ponteiro neutro."],
+    [/\b(?:desta|dessa|nessa|nesta) forma\b/gi,
+     "«desta forma»",
+     "Conector conclusivo sem força lógica. Substitua por «portanto», «logo» ou «por isso» se há consequência; remova se não há."],
   ];
 
   function analisarConfusoes(texto) {
