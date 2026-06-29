@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1051",
+  "versao": "2026-06-29-v1052",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -13245,6 +13245,264 @@
       "frase": "Os dois romances são muito diferentes entre si.",
       "alvo": "diferentes",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-adj-tridimensional-01",
+      "frase": "O personagem tridimensional contradiz a si mesmo sem perder coerência.",
+      "alvo": "tridimensional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-plano-lit-01",
+      "frase": "O personagem plano serve à sátira quando seu limite é intencional.",
+      "alvo": "plano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-redondo-lit-01",
+      "frase": "O personagem redondo surpreende sem deixar de ser reconhecível.",
+      "alvo": "redondo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-arquetípico-01",
+      "frase": "O herói arquetípico ganha força quando enfrenta uma versão contemporânea do mito.",
+      "alvo": "arquetípico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-estereotipado-01",
+      "frase": "O vilão estereotipado esvazia o conflito antes que ele comece.",
+      "alvo": "estereotipado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-catarse-01",
+      "frase": "A catarse não é alívio — é reconhecimento do que antes era inominável.",
+      "alvo": "catarse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-peripécia-01",
+      "frase": "A peripécia aristotélica inverte a fortuna no momento de maior expectativa.",
+      "alvo": "peripécia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-anagnórise-01",
+      "frase": "A anagnórise — o reconhecimento — transforma a ignorância em saber.",
+      "alvo": "anagnórise",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hamartia-01",
+      "frase": "A hamartia do personagem não é um defeito moral, mas um erro de julgamento.",
+      "alvo": "hamartia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hybris-01",
+      "frase": "A hybris do narrador onisciente se revela quando ele erra uma previsão.",
+      "alvo": "hybris",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-precipitar-01",
+      "frase": "O evento precipita o clímax antes que o leitor esteja pronto.",
+      "alvo": "precipita",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-retardar-01",
+      "frase": "A digressão retarda o desfecho e acumula pressão narrativa.",
+      "alvo": "retarda",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-antecipar-01",
+      "frase": "O presságio antecipa o desfecho sem entregá-lo.",
+      "alvo": "antecipa",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-postergar-01",
+      "frase": "O narrador posterga a revelação até o leitor precisar dela.",
+      "alvo": "posterga",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-kafkiano-01",
+      "frase": "O kafkiano não descreve absurdo — descreve a lógica do absurdo.",
+      "alvo": "kafkiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-borgiano-01",
+      "frase": "O labirinto borgiano mapeia o impossível com precisão cartográfica.",
+      "alvo": "borgiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-proustiano-01",
+      "frase": "O tempo proustiano dilata o instante até revelar sua infinidade interior.",
+      "alvo": "proustiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-beckettiano-01",
+      "frase": "O silêncio beckettiano é mais pesado que qualquer frase poderia ser.",
+      "alvo": "beckettiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-woolfiano-01",
+      "frase": "O fluxo woolfiano dissolve o evento no estado de consciência.",
+      "alvo": "woolfiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-Bildungsroman-01",
+      "frase": "O Bildungsroman brasileiro encontrou na figura do menino do interior seu protagonista clássico.",
+      "alvo": "Bildungsroman",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-roman-à-clef-01",
+      "frase": "O roman à clef exige que o leitor conheça o original para apreciar o disfarce.",
+      "alvo": "roman",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-novela-01",
+      "frase": "A novela ocupa o espaço entre o conto e o romance sem pertencer a nenhum.",
+      "alvo": "novela",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-crônica-01",
+      "frase": "A crônica brasileira transformou o jornal em escola literária.",
+      "alvo": "crônica",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-aforismo-01",
+      "frase": "O aforismo comprime uma filosofia em uma única frase irrefutável.",
+      "alvo": "aforismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-multifacetado-01",
+      "frase": "O conflito multifacetado recusa a resolução binária.",
+      "alvo": "multifacetado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-nuançado-01",
+      "frase": "A análise nuançada resiste às generalizações que a tese exigiria.",
+      "alvo": "nuançado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sofisticado-01",
+      "frase": "O jogo sofisticado entre narrador e leitor exige releitura.",
+      "alvo": "sofisticado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sutil-01",
+      "frase": "A ironia sutil não se anuncia — se reconhece.",
+      "alvo": "sutil",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-modular-01",
+      "frase": "O autor modula a velocidade narrativa conforme a urgência emocional da cena.",
+      "alvo": "modula",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-contrastar-01",
+      "frase": "A autora contrasta o registro culto e o popular para criar tensão social.",
+      "alvo": "contrasta",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-alternar-01",
+      "frase": "O romance alterna capítulos curtos e longos para simular a memória.",
+      "alvo": "alterna",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-entrelaçar-01",
+      "frase": "As duas histórias se entrelaçam no capítulo final sem se fundir.",
+      "alvo": "entrelaçam",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-fundacional-01",
+      "frase": "O texto fundacional de um movimento raramente é o mais representativo.",
+      "alvo": "fundacional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-inaugural-02",
+      "frase": "A obra inaugural define o problema que a tradição passará décadas respondendo.",
+      "alvo": "inaugural",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-tardio-lit-01",
+      "frase": "A obra tardia concentra a destilação de uma vida inteira de escolhas formais.",
+      "alvo": "tardio",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-póstumo-01",
+      "frase": "O romance póstumo impõe ao editor a responsabilidade de uma escolha que não é sua.",
+      "alvo": "póstumo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-oficina-01",
+      "frase": "A oficina literária é o lugar onde o texto ainda pode ser outro.",
+      "alvo": "oficina",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ateliê-01",
+      "frase": "O ateliê do escritor existe tanto no espaço físico quanto no hábito de atenção.",
+      "alvo": "ateliê",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-mentora-01",
+      "frase": "A mentora literária lê o texto como ele poderia ser, não como é.",
+      "alvo": "mentora",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-interlocutora-01",
+      "frase": "A interlocutora ideal faz a pergunta que o texto ainda não soube responder.",
+      "alvo": "interlocutora",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-experimental-01",
+      "frase": "A prosa experimental arrisca o fracasso como condição da descoberta.",
+      "alvo": "experimental",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-transgressivo-01",
+      "frase": "A poesia transgressiva redefine o que conta como linguagem literária.",
+      "alvo": "transgressivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-conservador-01",
+      "frase": "O cânone conservador não é neutro — é uma escolha política disfarçada de gosto.",
+      "alvo": "conservador",
+      "esperado": "adjetivo"
     }
   ]
 }
