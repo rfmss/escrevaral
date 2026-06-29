@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1044",
+  "versao": "2026-06-29-v1045",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -12303,6 +12303,66 @@
       "frase": "A busca por pertencimento atravessa toda a obra da autora.",
       "alvo": "pertencimento",
       "esperado": "substantivo"
+    },
+    {
+      "id": "conf-quando-01",
+      "frase": "Quando falamos de literatura, estamos falando de liberdade.",
+      "alvo": "quando falamos de",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-quando-02",
+      "frase": "Quando pensamos em identidade, as fronteiras se tornam porosas.",
+      "alvo": "quando pensamos em",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-notorio-01",
+      "frase": "É notório que a crítica demorou a reconhecer autoras negras.",
+      "alvo": "é notório que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-consenso-01",
+      "frase": "É consenso que Machado é o maior romancista brasileiro.",
+      "alvo": "é consenso que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-estudiosos-01",
+      "frase": "Todos os estudiosos concordam que o modernismo foi divisor de águas.",
+      "alvo": "todos os estudiosos",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-maioria-01",
+      "frase": "A grande maioria dos leitores abandona o livro no terceiro capítulo.",
+      "alvo": "a grande maioria",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-suma-01",
+      "frase": "A escolha do ponto de vista é de suma importância para o efeito narrativo.",
+      "alvo": "de suma importância",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-quando-neg-01",
+      "frase": "Quando o sol se pôs, ela ainda não havia chegado.",
+      "alvo": "quando",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-quando-neg-02",
+      "frase": "Quando chorou foi porque finalmente entendeu.",
+      "alvo": "quando",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-maioria-neg-01",
+      "frase": "A maioria dos personagens carregava um segredo.",
+      "alvo": "maioria",
+      "esperado": "nenhum"
     }
   ]
 }

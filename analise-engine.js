@@ -1364,6 +1364,28 @@
     [/\bnão (?:podemos|devemos) deixar de (?:mencionar|citar|notar|destacar|ressaltar)\b/gi,
      "«não podemos deixar de mencionar»",
      "Obrigação retórica que anuncia o que já vai ser dito. Mencione diretamente."],
+    // batch 19 — "quando" não-temporal + nominalização pesada + generalizações de processo
+    [/\bquando (?:falamos|pensamos|tratamos|falamos) (?:de|em|sobre)\b/gi,
+     "«quando falamos de»",
+     "«Quando» usado como introdutor temático, não como marcador temporal. Prefira «ao tratar de», «sobre» ou inicie diretamente pelo tema."],
+    [/\bno que (?:diz respeito|tange|concerne) (?:a|à|ao|aos|às)\b/gi,
+     "«no que diz respeito a»",
+     "Perífrase de introdução temática. Substitua por «sobre», «quanto a» ou restructure com o tema como sujeito."],
+    [/\bé notório que\b/gi,
+     "«é notório que»",
+     "Argumento de evidência difusa. Se é notório, cite a fonte ou afirme com a evidência que torna a afirmação sólida."],
+    [/\bé consenso que\b/gi,
+     "«é consenso que»",
+     "Pressupõe acordo onde pode haver disputa. Especifique quem concorda e em que contexto."],
+    [/\btodo(?:s)? (?:os|as) estudiosos?\b/gi,
+     "«todos os estudiosos»",
+     "Generalização que oculta o dissenso. Cite os estudiosos específicos ou indique a corrente de pensamento."],
+    [/\ba grande maioria\b/gi,
+     "«a grande maioria»",
+     "Pleonasmo: maioria já implica quantidade expressiva. Use «a maioria» ou especifique a proporção."],
+    [/\bde suma importância\b/gi,
+     "«de suma importância»",
+     "Superlativo vago. Demonstre a importância pela consequência concreta, não pelo adjetivo."],
   ];
 
   function analisarConfusoes(texto) {
