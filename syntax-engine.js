@@ -810,6 +810,7 @@
     let ultimoSujeito = null;
     let ultimoVerboText = null;
     let prepVistaAntes = false; // rastreia se havia preposição antes do SN atual
+    let emSubordinada = false;  // true após conjunção subordinativa, até o verbo da subordinada
 
     // Pré-detectar vocativo: primeiro token real seguido de vírgula
     // que não seja conjunção, advérbio ou preposição conhecida
@@ -868,6 +869,8 @@
       const conj = identificarConjuncao(txt, { posInicio: i === 0 || estado === "inicio", conjTempCond });
       if (conj || tags.includes("Conjunction")) {
         resultado.push({ ...t, funcao: "Conjunção", conjuncao: conj, tagsLegíveis: mapearTag(tags) });
+        if (conj?.classe === "subordinativa") emSubordinada = true;
+        else if (conj?.classe === "coordenativa") { emSubordinada = false; verboVisto = false; }
         estado = "inicio";
         prepVistaAntes = false;
         continue;
@@ -890,7 +893,9 @@
 
       // ── Verbo — fix: usar VERBOS_LIGACAO local em vez de _data.verbos_ligacao
       if (tags.includes("Verb") && !tags.includes("Negative")) {
-        verboVisto = true;
+        const eraSubord = emSubordinada;
+        if (emSubordinada) emSubordinada = false;
+        if (!eraSubord) verboVisto = true; // só verbo da oração principal atualiza verboVisto
         const ctx = { conjTempCond, posPrep: prepVistaAntes };
         const tempo = identificarTempoVerbal(txt, tags, ctx);
         const verbBase = norm.replace(/(ar|er|ir|ou|eu|iu|ei|ava|ia|ará|erá|irá|aria|eria|iria)$/, "");
@@ -911,7 +916,7 @@
         ultimoVerboIsLigacao = isLig;
         ultimoVerboText = txt;
         resultado.push({ ...t, funcao: isLig ? "Verbo de ligação" : "Núcleo do predicado", tempo, tagsLegíveis: mapearTag(tags) });
-        estado = "apos_verbo";
+        estado = eraSubord ? "inicio" : "apos_verbo"; // após verbo de subordinada, volta a buscar sujeito principal
         prepVistaAntes = false;
         continue;
       }
@@ -926,8 +931,9 @@
       // ── Nomes, pronomes, adjetivos
       if (tags.includes("Noun") || tags.includes("Pronoun") || tags.includes("Person") || tags.includes("Adjective")) {
         if (!verboVisto) {
-          resultado.push({ ...t, funcao: "Sujeito (provável)", tagsLegíveis: mapearTag(tags) });
-          ultimoSujeito = txt;
+          const funcaoSuj = emSubordinada ? "Sujeito da oração subordinada" : "Sujeito (provável)";
+          resultado.push({ ...t, funcao: funcaoSuj, tagsLegíveis: mapearTag(tags) });
+          if (!emSubordinada) ultimoSujeito = txt;
           estado = "apos_sujeito";
         } else if (estado === "voz_passiva") {
           resultado.push({ ...t, funcao: "Sujeito paciente (voz passiva)", tagsLegíveis: mapearTag(tags) });
