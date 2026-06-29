@@ -1496,6 +1496,28 @@
     [/\b(?:desta|dessa|nessa|nesta) forma\b/gi,
      "«desta forma»",
      "Conector conclusivo sem força lógica. Substitua por «portanto», «logo» ou «por isso» se há consequência; remova se não há."],
+    // batch 25 — nominalização excessiva + voz passiva de fuga + efeito cascata
+    [/\b(?:a|uma|esta|essa|a presente) análise (?:demonstra|evidencia|comprova|mostra|revela)\b/gi,
+     "«a análise demonstra»",
+     "Nominalização que substitui o verbo pela sua sombra. Diga o que você demonstra, não que a análise demonstra."],
+    [/\b(?:o|um|este|esse) (?:estudo|trabalho|texto|ensaio|artigo) (?:busca|visa|objetiva|pretende|procura|demonstra|evidencia)\b/gi,
+     "«o estudo busca»",
+     "O texto não busca — você busca. Substitua o sujeito abstrato pelo agente real ou reformule no imperativo."],
+    [/\b(?:foi|foram|é|são|será|serão|seria|seriam) (?:\w+ )?(?:realizado|realizada|realizados|realizadas|efetuado|efetuada|efetuados|efetuadas|executado|executada|executados|executadas)\b/gi,
+     "«foi realizado»",
+     "Voz passiva que esconde quem agiu. Nomeie o agente ou use o ativo: «ela realizou», não «foi realizado»."],
+    [/\b(?:leva|levam|levou|levaram|leva-nos|leva a|nos leva) a (?:concluir|pensar|crer|acreditar|afirmar|inferir)\b/gi,
+     "«leva a concluir»",
+     "Efeito cascata que delega a conclusão ao texto. Conclua diretamente em vez de descrever a conclusão chegando."],
+    [/\b(?:tendo em conta|levando em conta|levando em consideração|tomando em conta) (?:o exposto|o acima|o que foi dito|o anteriormente)\b/gi,
+     "«tendo em conta o exposto»",
+     "Resumo circular do próprio texto. Se há uma síntese necessária, faça-a; se não há, corte."],
+    [/\b(?:em face|em virtude|em razão|por força|em decorrência) (?:do exposto|do acima|do afirmado|do que foi dito)\b/gi,
+     "«em face do exposto»",
+     "Referência ao próprio discurso no lugar de argumento. Formule a consequência diretamente."],
+    [/\b(?:a partir dos dados|com base nos dados|de acordo com os dados) (?:apresentados|expostos|levantados|coletados)\b/gi,
+     "«a partir dos dados apresentados»",
+     "Os dados não se apresentam — você os apresentou. Afirme o que os dados mostram, não a sua relação com eles."],
   ];
 
   function analisarConfusoes(texto) {

@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1061",
+  "versao": "2026-06-29-v1063",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -15591,6 +15591,60 @@
       "frase": "O suplemento derridiano completa e ao mesmo tempo desloca o que supre.",
       "alvo": "suplemento",
       "esperado": "substantivo"
+    },
+    {
+      "id": "conf-analise-01",
+      "frase": "A análise demonstra que o narrador mente desde o primeiro parágrafo.",
+      "alvo": "a análise demonstra",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-estudo-01",
+      "frase": "Este estudo busca demonstrar a importância da voz narrativa no romance.",
+      "alvo": "este estudo busca",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-foireali-01",
+      "frase": "A análise foi realizada com base nos manuscritos originais.",
+      "alvo": "foi realizada",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-levaconc-01",
+      "frase": "A estrutura do texto leva a concluir que o narrador é não-confiável.",
+      "alvo": "leva a concluir",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-tendoem-01",
+      "frase": "Tendo em conta o exposto, pode-se afirmar que o romance é uma crítica velada.",
+      "alvo": "tendo em conta o exposto",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-emface-01",
+      "frase": "Em face do exposto, a hipótese inicial se confirma.",
+      "alvo": "em face do exposto",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-apartirda-01",
+      "frase": "A partir dos dados apresentados, é possível concluir que a obra é autobiográfica.",
+      "alvo": "a partir dos dados apresentados",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-analise-neg-01",
+      "frase": "A análise do texto revelou três camadas de ironia que a primeira leitura esconde.",
+      "alvo": "análise",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-foireali-neg-01",
+      "frase": "Ela foi realizada como escritora quando o terceiro livro venceu o prêmio.",
+      "alvo": "foi realizada",
+      "esperado": "nenhum"
     }
   ]
 }
