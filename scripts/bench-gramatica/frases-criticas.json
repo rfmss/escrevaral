@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-28-v1041",
+  "versao": "2026-06-29-v1042",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -11613,6 +11613,72 @@
       "esperado": [
         "Noun"
       ]
+    },
+    {
+      "id": "conf-onde-naoloc-01",
+      "frase": "Vivemos numa situação onde tudo parece possível.",
+      "alvo": "onde",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-onde-naoloc-02",
+      "frase": "É um contexto onde as palavras perdem o sentido.",
+      "alvo": "onde",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-onde-naoloc-03",
+      "frase": "Chegou ao momento onde tudo precisava ser decidido.",
+      "alvo": "onde",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-hedge-01",
+      "frase": "Pode-se notar que a narrativa perde fôlego no segundo ato.",
+      "alvo": "pode-se notar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-hedge-02",
+      "frase": "É possível afirmar que a autora domina o registro coloquial.",
+      "alvo": "é possível afirmar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-anuncio-01",
+      "frase": "Pretendo demonstrar como o silêncio estrutura a cena.",
+      "alvo": "pretendo demonstrar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-delegacao-01",
+      "frase": "Cabe ressaltar que o personagem nunca chega a chorar.",
+      "alvo": "cabe ressaltar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-delegacao-02",
+      "frase": "É válido destacar que a voz narrativa oscila deliberadamente.",
+      "alvo": "é válido destacar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-delegacao-03",
+      "frase": "Não podemos deixar de mencionar a influência de Clarice.",
+      "alvo": "não podemos deixar de mencionar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-onde-loc-01",
+      "frase": "O canto dos pássaros onde ela cresceu nunca a deixou.",
+      "alvo": "onde",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-onde-loc-02",
+      "frase": "Voltou à cidade onde nascera para morrer em paz.",
+      "alvo": "onde",
+      "esperado": "nenhum"
     }
   ]
 }

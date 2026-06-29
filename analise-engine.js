@@ -1342,6 +1342,28 @@
     [/\bde qualquer maneira\b/gi,
      "«de qualquer maneira»",
      "Conector frouxo. Prefira uma conjunção precisa: «ainda assim», «mesmo assim», «contudo»."],
+    // batch 18 — "onde" não-locacional + hedges acadêmicos
+    [/\b(?:situação|contexto|momento|aspecto|ponto|caso|sentido) onde\b/gi,
+     "«onde» não-locacional",
+     "«Onde» é pronome de lugar. Para retomar situação, contexto, momento ou aspecto, use «em que» ou «no qual / na qual»."],
+    [/\b(?:pode-se|podemos) (?:notar|observar|perceber|constatar) que\b/gi,
+     "«pode-se notar que»",
+     "Hedge acadêmico. Se é notável, afirme diretamente; se depende de interpretação, indique o critério."],
+    [/\bé possível (?:afirmar|constatar|inferir|concluir|notar) que\b/gi,
+     "«é possível afirmar que»",
+     "Atenuador fraco. Afirme diretamente — se a afirmação é incerta, apresente a dúvida como argumento."],
+    [/\bpretendo (?:demonstrar|mostrar|abordar|analisar|tratar|discutir)\b/gi,
+     "«pretendo demonstrar»",
+     "Anúncio de intenção em vez de execução. Demonstre, não anuncie que demonstrará."],
+    [/\bcabe (?:ressaltar|destacar|mencionar|lembrar|observar)\b/gi,
+     "«cabe ressaltar»",
+     "Delegação impessoal do destaque. Ressalte diretamente, sem pedir permissão retórica."],
+    [/\bé válido (?:ressaltar|destacar|mencionar|dizer|lembrar)\b/gi,
+     "«é válido ressaltar»",
+     "Variante da delegação retórica. Se é válido dizer, diga — sem anunciar que é válido."],
+    [/\bnão (?:podemos|devemos) deixar de (?:mencionar|citar|notar|destacar|ressaltar)\b/gi,
+     "«não podemos deixar de mencionar»",
+     "Obrigação retórica que anuncia o que já vai ser dito. Mencione diretamente."],
   ];
 
   function analisarConfusoes(texto) {
