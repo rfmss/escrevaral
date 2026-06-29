@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1064",
+  "versao": "2026-06-29-v1065",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -15908,6 +15908,288 @@
       "id": "r-noun-florilégio-01",
       "frase": "O florilégio medieval reunia flores — fragmentos belos arrancados de seus contextos.",
       "alvo": "florilégio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-breviário-01",
+      "frase": "O breviário do escritor é o caderno onde ele registra o que ainda não sabe que vai usar.",
+      "alvo": "breviário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-miscelânea-01",
+      "frase": "A miscelânea do período colonial misturava gêneros porque os gêneros ainda não tinham nomes.",
+      "alvo": "miscelânea",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-summa-01",
+      "frase": "A summa medieval pretendia conter todo o saber — e nisso revelava o limite do saber possível.",
+      "alvo": "summa",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-enciclopédico-01",
+      "frase": "O romance enciclopédico de Melville acumula o mundo para descobrir que não cabe nele.",
+      "alvo": "enciclopédico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-totalizante-01",
+      "frase": "O gesto totalizante da vanguarda fracassou — e esse fracasso é o seu legado.",
+      "alvo": "totalizante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-minimalista-01",
+      "frase": "A prosa minimalista de Carver confia no que não diz para carregar o peso da cena.",
+      "alvo": "minimalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-maximalista-01",
+      "frase": "A ficção maximalista acumula até o excesso virar método.",
+      "alvo": "maximalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-conciso-01",
+      "frase": "O estilo conciso elimina o que a cena já diz pela ação.",
+      "alvo": "conciso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-prolixo-01",
+      "frase": "O narrador prolixo adia a revelação pelo prazer de adiar, não pelo efeito.",
+      "alvo": "prolixo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sucinto-01",
+      "frase": "A resposta sucinta da personagem diz mais sobre ela do que dez páginas de descrição.",
+      "alvo": "sucinto",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exaustivo-01",
+      "frase": "A catalogação exaustiva dos objetos da casa revela a obsessão da narradora.",
+      "alvo": "exaustivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fragmentado-01",
+      "frase": "O discurso fragmentado da personagem em colapso imita a dissolução da consciência.",
+      "alvo": "fragmentado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-errático-01",
+      "frase": "O pensamento errático do narrador desorientado reflete a impossibilidade de ordenar o trauma.",
+      "alvo": "errático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-coeso-01",
+      "frase": "O texto coeso não é aquele que não contradiz — é o que contradiz com propósito.",
+      "alvo": "coeso",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-coerente-lit-02",
+      "frase": "A narrativa coerente com o próprio estilo surpreende sem trair o leitor.",
+      "alvo": "coerente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-diluir-01",
+      "frase": "O excesso de adjetivos dilui a cena que os substantivos haviam erguido.",
+      "alvo": "dilui",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-saturar-01",
+      "frase": "A metáfora usada demais satura e perde o poder de apontar.",
+      "alvo": "satura",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-esvaziar-01",
+      "frase": "A repetição esvazia a palavra até ela precisar ser reinventada.",
+      "alvo": "esvazia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-recuperar-02",
+      "frase": "O poema recupera o choque do lugar-comum devolvendo-lhe o corpo.",
+      "alvo": "recupera",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-atualizar-01",
+      "frase": "A releitura atualiza o clássico sem traí-lo — esse é o difícil equilíbrio.",
+      "alvo": "atualiza",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-reinventar-01",
+      "frase": "Rosa reinventou o português como quem aprende a língua pela primeira vez sendo fluente.",
+      "alvo": "reinventou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-distorcer-01",
+      "frase": "A memória distorce para preservar — e a ficção explora essa distorção como método.",
+      "alvo": "distorce",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-anacronismo-01",
+      "frase": "O anacronismo intencional faz o passado falar a língua do presente como provocação.",
+      "alvo": "anacronismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-retrofuturismo-01",
+      "frase": "O retrofuturismo imagina o futuro com os olhos de um passado que já não existe.",
+      "alvo": "retrofuturismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ucronismo-01",
+      "frase": "O ucronismo pergunta o que teria acontecido se e com isso revela o que aconteceu de fato.",
+      "alvo": "ucronismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-contrafactual-01",
+      "frase": "O raciocínio contrafactual na ficção expõe as contingências que a história apresenta como inevitáveis.",
+      "alvo": "contrafactual",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-especulativo-01",
+      "frase": "A ficção especulativa interroga o presente deslocando-o para um futuro possível.",
+      "alvo": "especulativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-utópico-01",
+      "frase": "O impulso utópico não descreve o futuro — critica o presente pelo que ele poderia ser.",
+      "alvo": "utópico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-distópico-01",
+      "frase": "O horizonte distópico amplifica o real até torná-lo insuportável de reconhecer.",
+      "alvo": "distópico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-alegórico-01",
+      "frase": "A narrativa alegórica fala de uma coisa para dizer outra e exige dois níveis de leitura.",
+      "alvo": "alegórico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-alegoria-01",
+      "frase": "A alegoria não é metáfora estendida — é um sistema de correspondências que o texto sustenta.",
+      "alvo": "alegoria",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-fábula-01",
+      "frase": "A fábula usa o animal para dizer o que o humano recusaria ouvir sobre si mesmo.",
+      "alvo": "fábula",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-apólogo-01",
+      "frase": "O apólogo machadiano usa a narrativa breve para fixar uma ironia que o romance precisaria de páginas para sustentar.",
+      "alvo": "apólogo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-parábola-01",
+      "frase": "A parábola não moralizante é a que confia no leitor para extrair a lição sem indicação.",
+      "alvo": "parábola",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-mito-01",
+      "frase": "O mito não explica a origem — revela como uma cultura entende a si mesma.",
+      "alvo": "mito",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-arquétipo-01",
+      "frase": "O arquétipo junguiano sobrevive nas narrativas porque toca estruturas anteriores à língua.",
+      "alvo": "arquétipo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-cosmogonia-01",
+      "frase": "A cosmogonia ficcional de Tolkien é tão detalhada que exige suspensão da descrença antes da leitura.",
+      "alvo": "cosmogonia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-bestiário-01",
+      "frase": "O bestiário medieval classificava animais reais e imaginários pelo que significavam, não pelo que eram.",
+      "alvo": "bestiário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-hagiografia-01",
+      "frase": "A hagiografia literária do autor famoso frequentemente apaga o escritor para preservar o mito.",
+      "alvo": "hagiografia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-mítico-01",
+      "frase": "A dimensão mítica do personagem não nasce da grandeza — nasce da necessidade coletiva.",
+      "alvo": "mítico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-lendário-01",
+      "frase": "O estatuto lendário de um escritor apaga a obra atrás da biografia.",
+      "alvo": "lendário",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-emblemático-01",
+      "frase": "O romance emblemático de uma geração é frequentemente o que ela menos conseguiu superar.",
+      "alvo": "emblemático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-paradigmático-01",
+      "frase": "O texto paradigmático define o problema que os seguidores passam décadas tentando resolver.",
+      "alvo": "paradigmático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exemplar-01",
+      "frase": "A novela exemplar de Cervantes usa o entretenimento para esconder a crítica.",
+      "alvo": "exemplar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-epigrama-01",
+      "frase": "O epigrama de Marcial comprime a crueldade em dois versos que ainda doem.",
+      "alvo": "epigrama",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-dístico-01",
+      "frase": "O dístico elegíaco alternava hexâmetro e pentâmetro como respiração e retenção.",
+      "alvo": "dístico",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-terceto-01",
+      "frase": "O terceto dantesco encadeia as rimas de modo que cada estrofe puxa a seguinte.",
+      "alvo": "terceto",
       "esperado": "substantivo"
     }
   ]
