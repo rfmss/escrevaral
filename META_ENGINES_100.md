@@ -68,6 +68,51 @@ Pergunta padrao da sessao:
 
 100% nao significa complexidade maxima. Significa: promessa certa, comportamento consistente, UX limpa, dados preservados e limites honestos.
 
+## Abertura da próxima sessão — estado em 2026-06-29 noite (ciclo v1049→v1061)
+
+**Baseline:** v1061 — todos engines 100%, função sintática 85%.
+
+**O que foi entregue neste ciclo (v1049→v1061):**
+
+- v1049: bench 1209→1262 (+53 casos: topicalização, infinitivo-sujeito, adj intenção autoral, verbos narração, nouns teoria, adj derivados de autores brasileiros)
+- v1050: bench 1262→**1300** — marco 1300 atingido (+38 casos: adj tom/registro, paratexto, experiência leitura)
+- v1051: A-01 batch 21: +7 regras (absolutamente necessário/totalmente desnecessário/completamente diferente/quando se trata de/conforme mencionado anteriormente/como dito antes/é importante ressaltar que)
+- v1052: bench 1309→1352 (+43 casos: dramaturgia, adj personagem, adj autores mundiais, gêneros, adj composição)
+- v1053: bench 1352→**1400** — marco 1400 atingido (+48 casos: narração avançada, figuras de linguagem, adj perspectiva, nouns editorial)
+- v1054: A-01 batch 22: +7 regras (impacto significativo/resultados significativos/de forma eficaz/no atual contexto/ao longo do tempo/de grande importância/é possível afirmar que)
+- v1055: bench 1410→1457 (+47 casos: pronomes relativos literários, preposições, advérbios, conjunções, verbos processo criativo, nouns intertextualidade)
+- v1056: bench 1457→**1500** — marco 1500 atingido (+43 casos: tipologia de leitor, figuras de linguagem, verbos percepção, adj sonoridade, decolonial)
+- v1057: A-01 batch 23: +7 regras (segundo os especialistas/como afirma a literatura/todos os escritores/ninguém pode negar/é sabido por todos que/hoje em dia/desde sempre) — **A-01 atingiu 150 regras**
+- v1058: bench 1509→1555 (+46 casos: adj irônico, nouns espacialidade, adj focalização, verbos transformação semântica, adj emoção)
+- v1059: bench 1555→**1600** — marco 1600 atingido (+45 casos: gêneros literários, adj intensidade, nouns forma textual, adj crítica, verbos leitura)
+- v1060: A-01 batch 24: +7 regras (permite uma reflexão profunda/busca demonstrar/é inegável que/nem é preciso dizer/vale salientar que/por sua vez/desta forma)
+- v1061: bench 1609→**1700** — marco 1700 atingido (+91 casos: movimentos literários, teoria crítica, psicanálise literária, filosofia e texto)
+
+**Estado atualizado dos engines (v1061):**
+
+| Área / engine | Maturidade | Notas de estado (v1061) |
+|---|---:|---|
+| Analise geral | **100%** | CONFUSOES **157 regras** A-01; 0 FP corpus literário; batches 18-24 entregues |
+| Espelho de Voz | **100%** | 10 gestos; 9 campos semânticos |
+| RimaLab | **100%** | enciclopédia 50; grammarWords 348 |
+| Léxico / Biblioteca | **100%** | SINONIMOS ~1350; DEFINICOES ~1020+; POLISSEMIA 110+ |
+| Decolonial / vocabulário | **100%** | 600+ entradas; 9 categorias |
+| Sintaxe / Morfologia | **100%** | bench **1700**/1700; golden 91/0; VERBOS_PRES 2097; adj 2778 |
+| Função sintática | **85%** | analisarFuncoes() auditada 8/8; fix emSubordinada v1047; arestas: topicalização avançada, relativa cortadora |
+| Tema Alvorada / Vereda | **100%** | 0 falhas WCAG AA; overflow mobile zero |
+| Exportação | **100%** | TXT/MD/HTML/DOCX/ePub/RTF/Obsidian; escopo em todos; saveStatus |
+
+**Fronteiras abertas (v1061):**
+
+1. **Função sintática — arestas restantes**: topicalização ("O romance, ela nunca terminou"), relativa cortadora ("o livro que ela leu ontem"), infinitivo composto como sujeito
+2. **A-01 batch 25+**: próximos vícios — efeito dominó/cascata, nominalização excessiva, voz passiva de fuga
+3. **Bench rumo a 1800**: 100 casos até o próximo marco
+4. **Commits locais:** 138 — fazer push quando usuário pedir
+
+**Pergunta desta sessão:** A-01 chegou a 157 regras (+49 no dia), bench a 1700 (+663 no dia). Função sintática em 85% é o único engine abaixo de 100%.
+
+---
+
 ## Abertura da próxima sessão — estado em 2026-06-29 tarde (ciclo v1043→v1048)
 
 **Baseline:** v1048 — todos engines 100%.
