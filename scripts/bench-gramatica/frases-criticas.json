@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1055",
+  "versao": "2026-06-29-v1056",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -14132,6 +14132,264 @@
       "id": "r-adj-idioletal-01",
       "frase": "O idioleto da personagem é a sua assinatura antes do nome próprio.",
       "alvo": "idioletal",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-empírico-lit-01",
+      "frase": "O leitor empírico traz para o texto uma história que o texto não controlou.",
+      "alvo": "empírico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-implícito-01",
+      "frase": "O leitor implícito é construído pelo próprio texto como destinatário ideal.",
+      "alvo": "implícito",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ingênuo-01",
+      "frase": "O leitor ingênuo lê a ironia como afirmação e o texto ganha outro sentido.",
+      "alvo": "ingênuo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-resistente-01",
+      "frase": "A leitura resistente recusa a cumplicidade que o texto propõe.",
+      "alvo": "resistente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-neologismo-01",
+      "frase": "O neologismo rosiano não é erro — é a língua descobrindo o que ainda não sabia dizer.",
+      "alvo": "neologismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-arcaísmo-01",
+      "frase": "O arcaísmo no texto contemporâneo cria um estranhamento temporal deliberado.",
+      "alvo": "arcaísmo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-eufemismo-01",
+      "frase": "O eufemismo do narrador revela o que ele não consegue nomear diretamente.",
+      "alvo": "eufemismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-disfemismo-01",
+      "frase": "O disfemismo agride o leitor exatamente onde o texto quer incomodar.",
+      "alvo": "disfemismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-oxímoro-01",
+      "frase": "O oxímoro condensa a contradição que o raciocínio linear não consegue resolver.",
+      "alvo": "oxímoro",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-paradoxo-01",
+      "frase": "O paradoxo não é falha lógica — é a forma da verdade que não cabe na sintaxe comum.",
+      "alvo": "paradoxo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-verb-intuir-01",
+      "frase": "O leitor intui antes de compreender — esse é o efeito que o texto estava construindo.",
+      "alvo": "intui",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-pressentir-01",
+      "frase": "A narradora pressente o desfecho mas recusa saber que o sabe.",
+      "alvo": "pressente",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-entrever-01",
+      "frase": "O leitor entrevê a estrutura do livro antes de terminar a primeira página.",
+      "alvo": "entrevê",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-vislumbrar-01",
+      "frase": "No final, a personagem vislumbra o que esteve diante dela durante todo o romance.",
+      "alvo": "vislumbra",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-comprometida-01",
+      "frase": "A escrita comprometida não subordina a forma à mensagem.",
+      "alvo": "comprometida",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-emancipatória-01",
+      "frase": "A leitura emancipatória recusa o texto como objeto de reverência.",
+      "alvo": "emancipatória",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-subversiva-01",
+      "frase": "A literatura subversiva age nos interstícios do que o cânone permite.",
+      "alvo": "subversiva",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-conservadora-01",
+      "frase": "A estética conservadora confunde tradição com imobilidade.",
+      "alvo": "conservadora",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-prompt-port-01",
+      "frase": "O ponto de partida da oficina libera o escritor de inventar o início.",
+      "alvo": "ponto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-disparador-01",
+      "frase": "O disparador narrativo oferece uma primeira frase que a oficina pode ir além.",
+      "alvo": "disparador",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-devolução-01",
+      "frase": "A devolução do texto pela turma exige uma escuta que a crítica solitária não oferece.",
+      "alvo": "devolução",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-reescrita-01",
+      "frase": "A reescrita começa onde a primeira versão para de mentir.",
+      "alvo": "reescrita",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-aliterativo-01",
+      "frase": "O efeito aliterativo da frase cria uma memória sonora antes da memória semântica.",
+      "alvo": "aliterativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-assonante-01",
+      "frase": "A recorrência assonante cria um eco que o leitor sente antes de identificar.",
+      "alvo": "assonante",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-eufônico-01",
+      "frase": "A combinação eufônica de vogais cria um fluxo que facilita a leitura em voz alta.",
+      "alvo": "eufônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cacofônico-01",
+      "frase": "A sequência cacofônica é intencional — o texto quer que a leitura tropece.",
+      "alvo": "cacofônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-editar-01",
+      "frase": "Editar é escolher o que o texto pode perder sem deixar de ser o que é.",
+      "alvo": "editar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-aparar-01",
+      "frase": "O editor aparou as arestas sem perceber que eram as mais vivas do livro.",
+      "alvo": "aparou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-lapidar-01",
+      "frase": "A escritora lapidou cada frase até o texto parecer inevitável.",
+      "alvo": "lapidou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-podar-01",
+      "frase": "Podar o excesso é mais difícil do que escrever o que será podado.",
+      "alvo": "podar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-subalternidade-01",
+      "frase": "A subalternidade não é silêncio — é uma fala que o arquivo não registrou.",
+      "alvo": "subalternidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-epistemicídio-01",
+      "frase": "O epistemicídio apaga não só os textos mas a possibilidade de pensar com eles.",
+      "alvo": "epistemicídio",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-afrocentrismo-01",
+      "frase": "O afrocentrismo literário propõe outro eixo para a leitura do cânone.",
+      "alvo": "afrocentrismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-diaspórico-01",
+      "frase": "A escrita diaspórica carrega a memória do lugar que não se pode visitar.",
+      "alvo": "diaspórico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-periférico-lit-01",
+      "frase": "A voz periférica não está na margem — está no centro do que o cânone evitou.",
+      "alvo": "periférico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-insurgente-01",
+      "frase": "A estética insurgente recusa a assimilação como preço da visibilidade.",
+      "alvo": "insurgente",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-descolonial-01",
+      "frase": "A perspectiva descolonial lê o texto pelo que ele escolheu não dizer.",
+      "alvo": "descolonial",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-interseccional-01",
+      "frase": "A análise interseccional recusa a abstração de uma única categoria de opressão.",
+      "alvo": "interseccional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-polifônico-01",
+      "frase": "O romance polifônico não reserva para si a última palavra sobre o mundo que representa.",
+      "alvo": "polifônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-monológico-01",
+      "frase": "O romance monológico impõe ao leitor a única interpretação que o autor autoriza.",
+      "alvo": "monológico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-ambíguo-01",
+      "frase": "O título ambíguo é um contrato que o leitor assina sem saber todos os termos.",
+      "alvo": "ambíguo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-equívoco-01",
+      "frase": "O uso equívoco do pronome é intencional — o leitor não deve saber quem fala.",
+      "alvo": "equívoco",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-aporético-01",
+      "frase": "O final aporético recusa a resolução que o leitor precisava para sair intacto.",
+      "alvo": "aporético",
       "esperado": "adjetivo"
     }
   ]
