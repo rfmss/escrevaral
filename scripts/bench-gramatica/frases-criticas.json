@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1060",
+  "versao": "2026-06-29-v1061",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -15045,6 +15045,552 @@
       "frase": "Cada personagem fala por sua vez sem interromper o outro.",
       "alvo": "por sua vez",
       "esperado": "nenhum"
+    },
+    {
+      "id": "r-adj-irônico-01",
+      "frase": "O comentário irônico do narrador exige que o leitor desconfie do que está lendo.",
+      "alvo": "irônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sardônico-01",
+      "frase": "O riso sardônico de Machado não perdoa nem quem ri com ele.",
+      "alvo": "sardônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cínico-01",
+      "frase": "O narrador cínico destrói a ilusão antes que o leitor a construa.",
+      "alvo": "cínico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-sarcástico-01",
+      "frase": "O elogio sarcástico é a crítica que o texto não quer fazer diretamente.",
+      "alvo": "sarcástico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-oscilar-01",
+      "frase": "A personagem oscila entre o desejo de confessar e o medo da confissão.",
+      "alvo": "oscila",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-afundar-01",
+      "frase": "O narrador afunda na memória como quem escolhe o fundo do rio.",
+      "alvo": "afunda",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desvanecer-01",
+      "frase": "A certeza desvanece no momento em que a personagem mais precisa dela.",
+      "alvo": "desvanece",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-enrijecer-01",
+      "frase": "O personagem enrijece a voz para não deixar o leitor perceber a fratura.",
+      "alvo": "enrijece",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-narratário-01",
+      "frase": "O narratário é o destinatário construído pelo texto, distinto do leitor real.",
+      "alvo": "narratário",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-narrador-01",
+      "frase": "O narrador homodiegético viveu o que narra — o heterodiegético observou de fora.",
+      "alvo": "narrador",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-focalização-01",
+      "frase": "A focalização determina o que o leitor sabe, não quem fala.",
+      "alvo": "focalização",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-velocidade-01",
+      "frase": "A velocidade narrativa mede a relação entre o tempo da história e o tempo do discurso.",
+      "alvo": "velocidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-frequência-01",
+      "frase": "A frequência narrativa conta quantas vezes o texto narra o que aconteceu uma vez.",
+      "alvo": "frequência",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-inédito-01",
+      "frase": "O texto inédito publicado postumamente muda o que sabíamos sobre o autor.",
+      "alvo": "inédito",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-revisto-01",
+      "frase": "A edição revista pelo autor corrigiu o que a primeira revelava demais.",
+      "alvo": "revisto",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-definitivo-01",
+      "frase": "A edição definitiva raramente é — o texto continua mudando na leitura.",
+      "alvo": "definitivo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-canônico-lit-02",
+      "frase": "O texto canônico não é o mais importante — é o mais disponível ao ensino.",
+      "alvo": "canônico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-arquivar-01",
+      "frase": "Arquivar o texto é uma decisão política sobre o que merece ser lembrado.",
+      "alvo": "arquivar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-apagar-01",
+      "frase": "O cânone apagou o que não cabia na sua versão do mundo.",
+      "alvo": "apagou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-restaurar-01",
+      "frase": "A crítica feminista restaurou autorias que o arquivo havia atribuído a homens.",
+      "alvo": "restaurou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-exumar-01",
+      "frase": "A pesquisa exumou o manuscrito de um porão e devolveu a obra ao mundo.",
+      "alvo": "exumou",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-lírico-01",
+      "frase": "O eu lírico não é o poeta — é a posição que o poema constrói para ser dito.",
+      "alvo": "lírico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-épico-01",
+      "frase": "O distanciamento épico transforma o evento em exemplar e o particular em coletivo.",
+      "alvo": "épico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-dramático-01",
+      "frase": "A tensão dramática não precisa de conflito externo — pode ser toda interior.",
+      "alvo": "dramático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-trágico-01",
+      "frase": "O destino trágico não é cruel — é inevitável, e nisso está a sua lógica.",
+      "alvo": "trágico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cômico-01",
+      "frase": "O registro cômico pode dizer o que o trágico proíbe de nomear.",
+      "alvo": "cômico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-haiku-01",
+      "frase": "O haiku não descreve — instala uma percepção antes que a mente a processe.",
+      "alvo": "haiku",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-gregório-01",
+      "frase": "A gregeria de Gómez de la Serna é a metáfora que descobriu o humor.",
+      "alvo": "gregério",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-miniatura-01",
+      "frase": "A miniatura literária concentra o mundo em poucas linhas sem o miniaturizar.",
+      "alvo": "miniatura",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-microconto-01",
+      "frase": "O microconto vive do que não diz — a elipse é a sua respiração.",
+      "alvo": "microconto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-flash-fiction-01",
+      "frase": "A flash fiction existe na tensão entre o que aconteceu e o que o leitor imagina ter acontecido.",
+      "alvo": "flash",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-performativo-01",
+      "frase": "A leitura performativa transforma o texto em evento e o leitor em testemunha.",
+      "alvo": "performativo",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-declamatório-01",
+      "frase": "O tom declamatório do narrador mascara a fragilidade da tese que anuncia.",
+      "alvo": "declamatório",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-conversacional-01",
+      "frase": "O registro conversacional da crônica encurta a distância entre autor e leitor.",
+      "alvo": "conversacional",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-romper-01",
+      "frase": "O romance rompe com a expectativa de gênero antes do segundo capítulo.",
+      "alvo": "rompe",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-desafiar-01",
+      "frase": "O texto desafia o leitor sem humilhá-lo — esse é o equilíbrio difícil.",
+      "alvo": "desafia",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-transgredir-01",
+      "frase": "A vanguarda transgride o cânone sem saber que está criando um novo.",
+      "alvo": "transgride",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-inovar-01",
+      "frase": "Inovar sem raízes é decoração; inovar a partir da tradição é transformação.",
+      "alvo": "inovar",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adj-premiado-01",
+      "frase": "O livro premiado nem sempre é o mais inventivo do ano.",
+      "alvo": "premiado",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-best-seller-01",
+      "frase": "O best-seller revela o que o público deseja ler, não o que merece ser escrito.",
+      "alvo": "best-seller",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-cult-01",
+      "frase": "O livro cult é o que todo mundo cita e pouca gente termina.",
+      "alvo": "cult",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-genealogia-01",
+      "frase": "A genealogia literária de um autor revela as dívidas que ele nunca declarou.",
+      "alvo": "genealogia",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-influência-01",
+      "frase": "A influência age no texto sem que o autor saiba — e isso é o que a torna produtiva.",
+      "alvo": "influência",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-tradição-01",
+      "frase": "A tradição não é o passado — é o passado que o presente escolheu lembrar.",
+      "alvo": "tradição",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-ruptura-01",
+      "frase": "A ruptura com a tradição é sempre parcial — o que nega ainda carrega o que combate.",
+      "alvo": "ruptura",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-continuidade-01",
+      "frase": "A continuidade com a tradição é uma escolha tão arriscada quanto a ruptura.",
+      "alvo": "continuidade",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-inovação-01",
+      "frase": "A inovação formal que não nasce de uma necessidade expressiva é decoração.",
+      "alvo": "inovação",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-convenção-01",
+      "frase": "A convenção existe para ser usada com consciência, não para ser ignorada por inércia.",
+      "alvo": "convenção",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-experimento-01",
+      "frase": "O experimento literário que funciona deixa de ser experimento — vira forma.",
+      "alvo": "experimento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-manifesto-01",
+      "frase": "O manifesto literário é o texto que tenta legislar sobre o que a arte ainda não sabe ser.",
+      "alvo": "manifesto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-programa-estetico-01",
+      "frase": "O programa estético do movimento recusa o que a geração anterior celebrava.",
+      "alvo": "programa",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-vanguardista-01",
+      "frase": "O gesto vanguardista envelhece mais rápido que a tradição que combateu.",
+      "alvo": "vanguardista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-modernista-01",
+      "frase": "O projeto modernista de 22 escolheu a ruptura como método e o Brasil como matéria.",
+      "alvo": "modernista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-pós-moderno-01",
+      "frase": "O romance pós-moderno suspeita da narrativa enquanto a usa.",
+      "alvo": "pós-moderno",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-realista-01",
+      "frase": "A ficção realista mente mais sofisticadamente que a fantástica.",
+      "alvo": "realista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-naturalista-01",
+      "frase": "A escrita naturalista confundiu determinismo com fatalismo e o pobre com o destino.",
+      "alvo": "naturalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-simbolista-01",
+      "frase": "A imagem simbolista sugere em vez de nomear — o véu é o método.",
+      "alvo": "simbolista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-parnasiano-01",
+      "frase": "O ideal parnasiano da forma perfeita às vezes esvazia o poema de necessidade.",
+      "alvo": "parnasiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-concretista-01",
+      "frase": "A poesia concretista faz da página um campo visual além da linha.",
+      "alvo": "concretista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-tropicalista-01",
+      "frase": "O gesto tropicalista devorou o estrangeiro para cuspir algo irreconhecivelmente brasileiro.",
+      "alvo": "tropicalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-boom-01",
+      "frase": "O boom latino-americano chegou à Europa antes de ser lido no próprio continente.",
+      "alvo": "boom",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-realismo-mágico-01",
+      "frase": "O realismo mágico não é fantasia — é o real de quem nunca precisou do Iluminismo para existir.",
+      "alvo": "realismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-surrealist-01",
+      "frase": "A imagem surrealista libera o inconsciente da obrigação de fazer sentido.",
+      "alvo": "surrealista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-dadaísta-01",
+      "frase": "O gesto dadaísta destruiu a arte para lembrar que a arte ainda era possível.",
+      "alvo": "dadaísta",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-bildung-01",
+      "frase": "O processo de Bildung exige que o protagonista perca algo para ganhar a si mesmo.",
+      "alvo": "Bildung",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-zeitgeist-01",
+      "frase": "O romance que captura o Zeitgeist envelhece com ele — e às vezes isso é a intenção.",
+      "alvo": "Zeitgeist",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-weltanschauung-01",
+      "frase": "A Weltanschauung do narrador contamina a forma antes de qualquer conteúdo explícito.",
+      "alvo": "Weltanschauung",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-kafkiano-02",
+      "frase": "A burocracia kafkiana não é fantasia — é a lógica real do absurdo administrado.",
+      "alvo": "kafkiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-absurdo-01",
+      "frase": "O absurdo camusiano não é a falta de sentido — é a busca de sentido onde ele foi proibido.",
+      "alvo": "absurdo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-existencialista-01",
+      "frase": "O romance existencialista devolve ao sujeito a responsabilidade que ele queria delegar.",
+      "alvo": "existencialista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fenomenológico-01",
+      "frase": "A descrição fenomenológica resiste à interpretação para respeitar o dado da experiência.",
+      "alvo": "fenomenológico",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-dasein-01",
+      "frase": "O Dasein heideggeriano é o ser que sempre já está no mundo antes de qualquer reflexão.",
+      "alvo": "Dasein",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-lacaniano-01",
+      "frase": "O sujeito lacaniano é dividido — e a narrativa em primeira pessoa expõe essa divisão.",
+      "alvo": "lacaniano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-freudiano-01",
+      "frase": "O lapso freudiano da narradora diz o que ela recusava saber que sabia.",
+      "alvo": "freudiano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-inconsciente-01",
+      "frase": "O inconsciente textual fala onde o narrador acredita estar no controle.",
+      "alvo": "inconsciente",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-recalque-01",
+      "frase": "O recalque narrativo emerge nas repetições que o narrador não percebe como tais.",
+      "alvo": "recalque",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-estruturalista-01",
+      "frase": "A análise estruturalista suspende o autor para ouvir o sistema que o texto encarna.",
+      "alvo": "estruturalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-desconstrucionista-01",
+      "frase": "A leitura desconstrucionista encontra a aporía que o texto não consegue resolver.",
+      "alvo": "desconstrucionista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-pós-estruturalista-01",
+      "frase": "O pós-estruturalismo desconfiou das estruturas que o estruturalismo celebrava.",
+      "alvo": "pós-estruturalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-differance-01",
+      "frase": "A différance derridiana adia infinitamente o sentido que o leitor persegue.",
+      "alvo": "différance",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-logocentrismo-01",
+      "frase": "O logocentrismo privilegia a fala sobre a escrita — e Derrida inverte essa hierarquia.",
+      "alvo": "logocentrismo",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-rizomático-02",
+      "frase": "O pensamento rizomático de Deleuze recusa o centro e a hierarquia das raízes.",
+      "alvo": "rizomático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-devir-01",
+      "frase": "O devir-escritor não é tornar-se escritor — é escrever sem saber que se é.",
+      "alvo": "devir",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-agenciamento-01",
+      "frase": "O agenciamento textual distribui forças sem sujeito e sem objeto fixos.",
+      "alvo": "agenciamento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-simulacro-01",
+      "frase": "O simulacro baudrillardiano substitui o real antes que ele possa ser perdido.",
+      "alvo": "simulacro",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-hiper-real-01",
+      "frase": "A ficção hiper-real confunde o referente com a representação até tornarem-se indistinguíveis.",
+      "alvo": "hiper-real",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-palimpsesto-01",
+      "frase": "O palimpsesto textual guarda as camadas de escrita que a última versão tentou apagar.",
+      "alvo": "palimpsesto",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-espectro-01",
+      "frase": "O espectro do texto anterior assombra o atual mesmo quando o autor nega a influência.",
+      "alvo": "espectro",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-adj-fantasmático-01",
+      "frase": "A presença fantasmática do autor morto ancora o texto na biografia que ele negava.",
+      "alvo": "fantasmático",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-noun-rastro-01",
+      "frase": "O rastro do que foi cortado permanece como ausência que o texto sente mas não nomeia.",
+      "alvo": "rastro",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-suplemento-01",
+      "frase": "O suplemento derridiano completa e ao mesmo tempo desloca o que supre.",
+      "alvo": "suplemento",
+      "esperado": "substantivo"
     }
   ]
 }
