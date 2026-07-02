@@ -18,11 +18,20 @@ Saída:
 
 import asyncio
 import json
+import shutil
 import sys
 from datetime import date
 from pathlib import Path
 
 from playwright.async_api import async_playwright
+
+
+def _navegador_sistema():
+    for nome in ("chromium", "chromium-browser", "google-chrome", "google-chrome-stable"):
+        caminho = shutil.which(nome)
+        if caminho:
+            return caminho
+    return None
 
 BASE_URL = "http://localhost:8799"
 REPORTS  = Path(__file__).parent.parent / "reports" / "auditoria"
@@ -254,7 +263,11 @@ async def main():
     tem_erro = False
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True)
+        executavel = _navegador_sistema()
+        opcoes = {"headless": True}
+        if executavel:
+            opcoes["executable_path"] = executavel
+        browser = await pw.chromium.launch(**opcoes)
         context = await browser.new_context()
         page = await context.new_page()
 

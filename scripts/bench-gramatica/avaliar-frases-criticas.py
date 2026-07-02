@@ -71,6 +71,20 @@ SCHOOL_TO_ENGINE = {
 }
 
 
+SIMPLE_SCHOOL_TO_ENGINE = {
+    "adjetivo": ["Adjective"],
+    "adverbio": ["Adverb"],
+    "artigo": ["Determiner"],
+    "conjuncao": ["Conjunction"],
+    "interjeicao": ["Interjection"],
+    "numeral": ["Numeral"],
+    "preposicao": ["Preposition"],
+    "pronome": ["Pronoun"],
+    "substantivo": ["Noun"],
+    "verbo": ["Verb"],
+}
+
+
 def strip_diacritics(value: str) -> str:
     return "".join(
         ch
@@ -113,6 +127,19 @@ def find_windows(tokens: list[dict[str, Any]], target_text: str) -> list[list[in
     for start in range(0, len(token_norms) - width + 1):
         if token_norms[start : start + width] == parts:
             windows.append(list(range(start, start + width)))
+    if windows:
+        return windows
+
+    # fallback: alvo com hifen pode virar um unico token ("avant-garde",
+    # "transmuta-se"); comparar subpartes do token com as do alvo
+    for index, token in enumerate(tokens):
+        sub = target_parts(str(token.get("text", "")))
+        if not sub:
+            continue
+        for start in range(0, len(sub) - width + 1):
+            if sub[start : start + width] == parts:
+                windows.append([index])
+                break
     return windows
 
 
@@ -162,6 +189,67 @@ def evaluate_target(tokens: list[dict[str, Any]], target: dict[str, Any]) -> dic
     }
 
 
+def evaluate_simple(
+    tokens: list[dict[str, Any]],
+    confusoes: list[dict[str, Any]],
+    case: dict[str, Any],
+) -> dict[str, Any]:
+    alvo = str(case.get("alvo", ""))
+    esperado = case.get("esperado")
+
+    if esperado in ("confusao", "nenhum"):
+        alvo_norm = strip_diacritics(alvo)
+        hits = [
+            item
+            for item in confusoes
+            for trecho in [item.get("rotulo", ""), *item.get("exemplos", [])]
+            if alvo_norm and (
+                alvo_norm in strip_diacritics(str(trecho))
+                or strip_diacritics(str(trecho)) in alvo_norm
+            )
+        ]
+        detected = bool(hits)
+        status = "ok" if detected == (esperado == "confusao") else "divergente"
+        return {
+            "texto": alvo,
+            "status": status,
+            "esperado": [esperado],
+            "observado": {"tokens": [], "tags": sorted({h.get("rotulo", "") for h in hits})},
+            "alvo": case,
+        }
+
+    if isinstance(esperado, list):
+        expected = sorted(esperado)
+    else:
+        expected = SIMPLE_SCHOOL_TO_ENGINE.get(strip_diacritics(str(esperado)), [])
+
+    windows = find_windows(tokens, alvo)
+    if not windows:
+        return {
+            "texto": alvo,
+            "status": "sem-token",
+            "esperado": expected,
+            "observado": None,
+            "alvo": case,
+        }
+
+    observed = observed_for_window(tokens, windows[0])
+    if not expected:
+        status = "sem-expectativa"
+    elif set(expected) & set(observed["tags"]):
+        status = "ok"
+    else:
+        status = "divergente"
+
+    return {
+        "texto": alvo,
+        "status": status,
+        "esperado": expected,
+        "observado": observed,
+        "alvo": case,
+    }
+
+
 async def wait_engines(page: Any) -> None:
     await page.wait_for_function(
         "window.syntaxEngine && window.syntaxEngine._isReady && window.syntaxEngine._isReady()",
@@ -185,7 +273,18 @@ async def capture_case(page: Any, phrase: str) -> dict[str, Any]:
             try {
                 periodo = window.syntaxEngine.analisarPeriodo(frase) || null;
             } catch (_) {}
+            let confusoes = [];
+            try {
+                const c = window.VeredaAnalise && window.VeredaAnalise.analisarConfusoes
+                    ? window.VeredaAnalise.analisarConfusoes(frase)
+                    : null;
+                confusoes = (c && c.lista || []).map(item => ({
+                    rotulo: item.rotulo || '',
+                    exemplos: item.exemplos || [],
+                }));
+            } catch (_) {}
             return {
+                confusoes,
                 morfologia: morfo.map(t => ({
                     text: t.text || t.token || '',
                     tags: t.tags || (t.tag ? [t.tag] : []),
@@ -229,7 +328,10 @@ async def run_browser(
             phrase = str(case.get("frase", ""))
             captured = await capture_case(page, phrase)
             tokens = captured.get("morfologia", [])
-            targets = [evaluate_target(tokens, target) for target in case.get("alvos", [])]
+            if "alvos" in case:
+                targets = [evaluate_target(tokens, target) for target in case.get("alvos", [])]
+            else:
+                targets = [evaluate_simple(tokens, captured.get("confusoes", []), case)]
             results.append(
                 {
                     "id": case.get("id", ""),

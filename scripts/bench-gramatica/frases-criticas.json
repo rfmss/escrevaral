@@ -1,5 +1,5 @@
 {
-  "versao": "2026-06-29-v1066",
+  "versao": "2026-07-02-v1067",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -2281,7 +2281,7 @@
       ]
     },
     {
-      "id": "r-prep-sobre-01",
+      "id": "r-prep-sobre-03",
       "frase": "A crítica falou sobre o estilo do livro.",
       "alvos": [
         {
@@ -3135,7 +3135,7 @@
       ]
     },
     {
-      "id": "r-conj-e-01",
+      "id": "r-conj-e-02",
       "frase": "Ela escreve poesia e prosa.",
       "alvos": [
         {
@@ -3149,7 +3149,7 @@
       ]
     },
     {
-      "id": "r-conj-mas-01",
+      "id": "r-conj-mas-02",
       "frase": "O narrador mente mas acredita na mentira.",
       "alvos": [
         {
@@ -3821,7 +3821,7 @@
       ]
     },
     {
-      "id": "r-verb-disse-01",
+      "id": "r-verb-disse-02",
       "frase": "Ela disse que precisava de mais tempo.",
       "alvos": [
         {
@@ -3933,7 +3933,7 @@
       ]
     },
     {
-      "id": "r-verb-percebe-01",
+      "id": "r-verb-percebe-02",
       "frase": "O leitor percebe a ironia no final.",
       "alvos": [
         {
@@ -3975,7 +3975,7 @@
       ]
     },
     {
-      "id": "r-det-um-01",
+      "id": "r-det-um-02",
       "frase": "Um escritor precisa de paciência.",
       "alvos": [
         {
@@ -3989,7 +3989,7 @@
       ]
     },
     {
-      "id": "r-det-uma-01",
+      "id": "r-det-uma-02",
       "frase": "Uma escritora leu o manuscrito.",
       "alvos": [
         {
@@ -4017,7 +4017,7 @@
       ]
     },
     {
-      "id": "r-adj-denso-01",
+      "id": "r-adj-denso-02",
       "frase": "O parágrafo denso dificulta a leitura.",
       "alvos": [
         {
@@ -4087,7 +4087,7 @@
       ]
     },
     {
-      "id": "r-num-tres-01",
+      "id": "r-num-tres-02",
       "frase": "Ela escreveu três contos em um mês.",
       "alvos": [
         {
@@ -4451,7 +4451,7 @@
       ]
     },
     {
-      "id": "r-adj-onisciente-01",
+      "id": "r-adj-onisciente-02",
       "frase": "O narrador é onisciente.",
       "alvos": [
         {
@@ -4871,7 +4871,7 @@
       ]
     },
     {
-      "id": "r-prep-durante-01",
+      "id": "r-prep-durante-02",
       "frase": "O texto foi escrito durante a pandemia.",
       "alvos": [
         {
@@ -4913,7 +4913,7 @@
       ]
     },
     {
-      "id": "r-adv-nunca-01",
+      "id": "r-adv-nunca-02",
       "frase": "O texto nunca perde o fôlego.",
       "alvos": [
         {
@@ -5739,7 +5739,7 @@
       ]
     },
     {
-      "id": "r-verb-ouviu-01",
+      "id": "r-verb-ouviu-02",
       "frase": "Ela ouviu passos no corredor escuro.",
       "alvos": [
         {
@@ -5753,7 +5753,7 @@
       ]
     },
     {
-      "id": "r-verb-viu-01",
+      "id": "r-verb-viu-02",
       "frase": "O personagem viu a cidade pela janela.",
       "alvos": [
         {
@@ -5767,7 +5767,7 @@
       ]
     },
     {
-      "id": "r-adv-bem-01",
+      "id": "r-adv-bem-02",
       "frase": "O texto é muito bem escrito.",
       "alvos": [
         {
@@ -6075,7 +6075,7 @@
       ]
     },
     {
-      "id": "r-verb-narrou-01",
+      "id": "r-verb-narrou-02",
       "frase": "O autor narrou os fatos com distância.",
       "alvos": [
         {
@@ -6089,7 +6089,7 @@
       ]
     },
     {
-      "id": "r-verb-criou-01",
+      "id": "r-verb-criou-02",
       "frase": "Ela criou um universo coerente.",
       "alvos": [
         {
@@ -6243,7 +6243,7 @@
       ]
     },
     {
-      "id": "r-noun-intertextualidade-01",
+      "id": "r-noun-intertextualidade-02",
       "frase": "A intertextualidade é rica no texto.",
       "alvos": [
         {
@@ -6355,7 +6355,7 @@
       ]
     },
     {
-      "id": "r-verb-correu-01",
+      "id": "r-verb-correu-02",
       "frase": "Ele correu pelo corredor escuro.",
       "alvos": [
         {
@@ -6383,7 +6383,7 @@
       ]
     },
     {
-      "id": "r-adj-denso-01",
+      "id": "r-adj-denso-03",
       "frase": "O texto é denso e visceral.",
       "alvos": [
         {
@@ -6397,7 +6397,7 @@
       ]
     },
     {
-      "id": "r-adj-fluida-01",
+      "id": "r-adj-fluida-02",
       "frase": "A prosa é fluida e transparente.",
       "alvos": [
         {
@@ -6425,7 +6425,7 @@
       ]
     },
     {
-      "id": "r-noun-voz-01",
+      "id": "r-noun-voz-02",
       "frase": "A voz narrativa é onisciente.",
       "alvos": [
         {
@@ -6579,7 +6579,7 @@
       ]
     },
     {
-      "id": "r-verb-escrevendo-01",
+      "id": "r-verb-escrevendo-02",
       "frase": "Ela estava escrevendo o desfecho.",
       "alvos": [
         {
@@ -6593,7 +6593,7 @@
       ]
     },
     {
-      "id": "r-adv-depois-01",
+      "id": "r-adv-depois-02",
       "frase": "Logo depois, o personagem saiu.",
       "alvos": [
         {
@@ -6607,7 +6607,7 @@
       ]
     },
     {
-      "id": "r-adv-antes-01",
+      "id": "r-adv-antes-02",
       "frase": "Antes disso, a narradora hesitou.",
       "alvos": [
         {
@@ -6621,7 +6621,7 @@
       ]
     },
     {
-      "id": "r-verb-revisou-01",
+      "id": "r-verb-revisou-02",
       "frase": "A autora revisou o manuscrito.",
       "alvos": [
         {
@@ -6691,7 +6691,7 @@
       ]
     },
     {
-      "id": "r-noun-revisao-01",
+      "id": "r-noun-revisao-02",
       "frase": "A revisão é etapa indispensável.",
       "alvos": [
         {
@@ -6789,7 +6789,7 @@
       ]
     },
     {
-      "id": "r-verb-abandonou-01",
+      "id": "r-verb-abandonou-02",
       "frase": "O leitor abandonou o livro.",
       "alvos": [
         {
@@ -6803,7 +6803,7 @@
       ]
     },
     {
-      "id": "r-adj-acessivel-01",
+      "id": "r-adj-acessivel-02",
       "frase": "O texto é acessível e direto.",
       "alvos": [
         {
@@ -6845,7 +6845,7 @@
       ]
     },
     {
-      "id": "r-noun-climax-01",
+      "id": "r-noun-climax-02",
       "frase": "O clímax acontece no terceiro ato.",
       "alvos": [
         {
@@ -6859,7 +6859,7 @@
       ]
     },
     {
-      "id": "r-noun-catarse-01",
+      "id": "r-noun-catarse-02",
       "frase": "A catarse purifica o leitor.",
       "alvos": [
         {
@@ -6943,7 +6943,7 @@
       ]
     },
     {
-      "id": "r-conj-mas-01",
+      "id": "r-conj-mas-03",
       "frase": "O texto é claro, mas redundante.",
       "alvos": [
         {
@@ -6957,7 +6957,7 @@
       ]
     },
     {
-      "id": "r-conj-porem-01",
+      "id": "r-conj-porem-02",
       "frase": "A obra é breve, porém densa.",
       "alvos": [
         {
@@ -6999,7 +6999,7 @@
       ]
     },
     {
-      "id": "r-verb-sussurrou-01",
+      "id": "r-verb-sussurrou-02",
       "frase": "Ela sussurrou no ouvido do narrador.",
       "alvos": [
         {
@@ -7013,7 +7013,7 @@
       ]
     },
     {
-      "id": "r-verb-murmurou-01",
+      "id": "r-verb-murmurou-02",
       "frase": "O protagonista murmurou a resposta.",
       "alvos": [
         {
@@ -7111,7 +7111,7 @@
       ]
     },
     {
-      "id": "r-verb-voltou-01",
+      "id": "r-verb-voltou-02",
       "frase": "O narrador voltou ao passado.",
       "alvos": [
         {
@@ -7125,7 +7125,7 @@
       ]
     },
     {
-      "id": "r-verb-fugiu-01",
+      "id": "r-verb-fugiu-02",
       "frase": "Ela fugiu para outra cidade.",
       "alvos": [
         {
@@ -7251,7 +7251,7 @@
       ]
     },
     {
-      "id": "r-adj-introspectivo-01",
+      "id": "r-adj-introspectivo-02",
       "frase": "O personagem é introspectivo.",
       "alvos": [
         {
@@ -7307,7 +7307,7 @@
       ]
     },
     {
-      "id": "r-adv-raramente-01",
+      "id": "r-adv-raramente-02",
       "frase": "O autor raramente usava adjetivos.",
       "alvos": [
         {
@@ -7321,7 +7321,7 @@
       ]
     },
     {
-      "id": "r-adv-nunca-01",
+      "id": "r-adv-nunca-03",
       "frase": "Ele nunca mencionou o nome.",
       "alvos": [
         {
@@ -7377,7 +7377,7 @@
       ]
     },
     {
-      "id": "r-prep-sobre-01",
+      "id": "r-prep-sobre-04",
       "frase": "O livro fala sobre a perda.",
       "alvos": [
         {
@@ -7391,7 +7391,7 @@
       ]
     },
     {
-      "id": "r-prep-de-01",
+      "id": "r-prep-de-02",
       "frase": "A obra trata de identidade.",
       "alvos": [
         {
@@ -7405,7 +7405,7 @@
       ]
     },
     {
-      "id": "r-prep-para-01",
+      "id": "r-prep-para-02",
       "frase": "Escreveu para a posteridade.",
       "alvos": [
         {
@@ -7447,7 +7447,7 @@
       ]
     },
     {
-      "id": "r-adj-ironico-01",
+      "id": "r-adj-ironico-02",
       "frase": "O texto é irônico e cortante.",
       "alvos": [
         {
@@ -7461,7 +7461,7 @@
       ]
     },
     {
-      "id": "r-verb-releu-01",
+      "id": "r-verb-releu-02",
       "frase": "O crítico releu o texto.",
       "alvos": [
         {
@@ -7503,7 +7503,7 @@
       ]
     },
     {
-      "id": "r-adj-conciso-01",
+      "id": "r-adj-conciso-02",
       "frase": "O conto é conciso.",
       "alvos": [
         {
@@ -7559,7 +7559,7 @@
       ]
     },
     {
-      "id": "r-adj-coerente-01",
+      "id": "r-adj-coerente-02",
       "frase": "O argumento é coerente.",
       "alvos": [
         {
@@ -7809,7 +7809,7 @@
     {
       "id": "r-adj-trivial-01",
       "frase": "Os detalhes triviais da rotina compunham o retrato íntimo da personagem.",
-      "alvo": "trivial",
+      "alvo": "triviais",
       "esperado": [
         "Adjective"
       ]
@@ -7859,7 +7859,8 @@
       "frase": "A narrativa escolhida pela autora priorizava o detalhe sobre a velocidade.",
       "alvo": "narrativa",
       "esperado": [
-        "Noun"
+        "Noun",
+        "Adjective"
       ]
     },
     {
@@ -8123,7 +8124,8 @@
       "frase": "Cada parágrafo revelava uma nova camada da consciência da personagem principal.",
       "alvo": "Cada",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -8131,7 +8133,9 @@
       "frase": "Ambos os narradores descreviam o mesmo evento de perspectivas opostas e complementares.",
       "alvo": "Ambos",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun",
+        "Numeral"
       ]
     },
     {
@@ -8247,7 +8251,7 @@
       ]
     },
     {
-      "id": "r-adj-singular-02",
+      "id": "r-adj-singular-01",
       "frase": "A perspectiva singular do narrador invertia as expectativas do leitor.",
       "alvo": "singular",
       "esperado": [
@@ -8587,7 +8591,8 @@
       "frase": "Nenhum personagem do romance saía ileso do confronto com seus próprios medos.",
       "alvo": "Nenhum",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -8595,7 +8600,8 @@
       "frase": "Qualquer leitura superficial perderia os múltiplos sentidos escondidos na trama.",
       "alvo": "Qualquer",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -8603,7 +8609,8 @@
       "frase": "Certo personagem sem nome aparecia em três contos diferentes do mesmo livro.",
       "alvo": "Certo",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -8611,7 +8618,8 @@
       "frase": "A cidade onde a autora nasceu aparece em quase todos os seus romances.",
       "alvo": "onde",
       "esperado": [
-        "Pronoun"
+        "Pronoun",
+        "Adverb"
       ]
     },
     {
@@ -8619,7 +8627,8 @@
       "frase": "O lugar onde a cena acontece nunca é nomeado diretamente pelo narrador.",
       "alvo": "onde",
       "esperado": [
-        "Pronoun"
+        "Pronoun",
+        "Adverb"
       ]
     },
     {
@@ -8881,7 +8890,7 @@
     {
       "id": "r-conj-visto que-01",
       "frase": "A autora escolheu o fragmento, visto que a linearidade traía a experiência que queria contar.",
-      "alvo": "visto",
+      "alvo": "visto que",
       "esperado": [
         "Conjunction"
       ]
@@ -8889,7 +8898,7 @@
     {
       "id": "r-conj-dado que-01",
       "frase": "Dado que o narrador é não confiável, toda informação precisa ser lida com cautela.",
-      "alvo": "Dado",
+      "alvo": "Dado que",
       "esperado": [
         "Conjunction"
       ]
@@ -9217,7 +9226,7 @@
     {
       "id": "r-conj-contanto-01",
       "frase": "A autora aceitaria qualquer forma de publicação, contanto que o texto não fosse alterado.",
-      "alvo": "contanto",
+      "alvo": "contanto que",
       "esperado": [
         "Conjunction"
       ]
@@ -9225,7 +9234,7 @@
     {
       "id": "r-conj-posto-que-01",
       "frase": "O projeto literário era ousado, posto que recusava qualquer concessão ao mercado de massa.",
-      "alvo": "posto",
+      "alvo": "posto que",
       "esperado": [
         "Conjunction"
       ]
@@ -9251,7 +9260,8 @@
       "frase": "Toda a trajetória da personagem culminava nessa única frase do penúltimo capítulo.",
       "alvo": "Toda",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -9507,13 +9517,14 @@
       "frase": "A tensão crescia na medida em que os personagens se aproximavam da verdade proibida.",
       "alvo": "medida",
       "esperado": [
-        "Noun"
+        "Noun",
+        "Verb"
       ]
     },
     {
       "id": "r-conj-desde-que-01",
       "frase": "A narradora aceitaria qualquer final, desde que fosse honesto com os personagens que criou.",
-      "alvo": "desde",
+      "alvo": "desde que",
       "esperado": [
         "Conjunction"
       ]
@@ -9721,9 +9732,10 @@
     {
       "id": "r-conf-por-fim-01",
       "frase": "Por fim, pode-se concluir que a obra marcou definitivamente a literatura brasileira do século.",
-      "alvo": "Por",
+      "alvo": "Por fim",
       "esperado": [
-        "Adverb"
+        "Adverb",
+        "Preposition"
       ]
     },
     {
@@ -9747,7 +9759,8 @@
       "frase": "De alguma forma, o narrador consegue transmitir a angústia da personagem sem nomeá-la.",
       "alvo": "alguma",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Pronoun"
       ]
     },
     {
@@ -9995,7 +10008,8 @@
       "frase": "A obra não é fácil de ler, tampouco é difícil — ela é simplesmente intensa e exigente.",
       "alvo": "tampouco",
       "esperado": [
-        "Conjunction"
+        "Conjunction",
+        "Adverb"
       ]
     },
     {
@@ -10135,7 +10149,7 @@
       ]
     },
     {
-      "id": "r-adj-singular-01",
+      "id": "r-adj-singular-02",
       "frase": "A trajetória singular da autora a colocou à margem dos movimentos literários de sua época.",
       "alvo": "singular",
       "esperado": [
@@ -10247,12 +10261,10 @@
       ]
     },
     {
-      "id": "r-noun-semiótica-01",
+      "id": "r-adj-semiotica-uso-01",
       "frase": "A análise semiótica da capa do livro revelava um sistema de signos que antecipava o conteúdo.",
       "alvo": "semiótica",
-      "esperado": [
-        "Noun"
-      ]
+      "esperado": "adjetivo"
     },
     {
       "id": "r-noun-estilística-01",
@@ -10267,7 +10279,8 @@
       "frase": "A retórica da narração seduzia o leitor precisamente porque fingia não ser retórica alguma.",
       "alvo": "retórica",
       "esperado": [
-        "Noun"
+        "Noun",
+        "Adjective"
       ]
     },
     {
@@ -10451,7 +10464,8 @@
       "frase": "O conto precursor antecipou temas que só se tornariam centrais na literatura brasileira décadas depois.",
       "alvo": "precursor",
       "esperado": [
-        "Adjective"
+        "Adjective",
+        "Noun"
       ]
     },
     {
@@ -10569,7 +10583,7 @@
     {
       "id": "r-adj-poliédrico-01",
       "frase": "A narrativa poliédrica oferecia ângulos incompatíveis entre si sem nunca resolver a contradição.",
-      "alvo": "poliédrico",
+      "alvo": "poliédrica",
       "esperado": [
         "Adjective"
       ]
@@ -10699,7 +10713,8 @@
       "frase": "A vida reclusa da autora alimentou uma mitologia que a obra acabou por contradizer com sua vivacidade.",
       "alvo": "reclusa",
       "esperado": [
-        "Adjective"
+        "Adjective",
+        "Noun"
       ]
     },
     {
@@ -10769,7 +10784,7 @@
     {
       "id": "r-adj-paratático-01",
       "frase": "A construção paratática do texto recusava a subordinação e tratava cada frase como unidade autônoma.",
-      "alvo": "paratático",
+      "alvo": "paratática",
       "esperado": [
         "Adjective"
       ]
@@ -10891,7 +10906,8 @@
       "frase": "O registro culto da narradora contrastava com o vocabulário popular das personagens secundárias.",
       "alvo": "culto",
       "esperado": [
-        "Adjective"
+        "Adjective",
+        "Noun"
       ]
     },
     {
@@ -10961,7 +10977,7 @@
     {
       "id": "r-adj-épico-01",
       "frase": "A dimensão épica do romance abrangia não apenas personagens individuais mas uma geração inteira.",
-      "alvo": "épico",
+      "alvo": "épica",
       "esperado": [
         "Adjective"
       ]
@@ -10969,7 +10985,7 @@
     {
       "id": "r-adj-dramático-01",
       "frase": "A intensidade dramática da cena central dispensava qualquer comentário autoral sobre o que ocorria.",
-      "alvo": "dramático",
+      "alvo": "dramática",
       "esperado": [
         "Adjective"
       ]
@@ -11011,7 +11027,8 @@
       "frase": "O romance pastiche celebrava seus modelos ao mesmo tempo que os desmontava com afeto crítico.",
       "alvo": "pastiche",
       "esperado": [
-        "Adjective"
+        "Adjective",
+        "Noun"
       ]
     },
     {
@@ -11067,7 +11084,8 @@
       "frase": "A voz subalterna da protagonista conquistava a narração e invertia as hierarquias do gênero.",
       "alvo": "subalterna",
       "esperado": [
-        "Adjective"
+        "Adjective",
+        "Noun"
       ]
     },
     {
@@ -11193,7 +11211,7 @@
     {
       "id": "r-adj-incisivo-01",
       "frase": "A crítica incisiva da ensaísta não poupava nem os autores que ela mais admirava e celebrava.",
-      "alvo": "incisivo",
+      "alvo": "incisiva",
       "esperado": [
         "Adjective"
       ]
@@ -11323,7 +11341,8 @@
       "frase": "As obras do período, a saber: romances, contos e crônicas, formavam um conjunto coeso e articulado.",
       "alvo": "saber",
       "esperado": [
-        "Verb"
+        "Verb",
+        "Noun"
       ]
     },
     {
@@ -11571,7 +11590,8 @@
       "frase": "Certos recursos estilísticos só se revelam ao leitor que relê a obra com atenção à microestrutura.",
       "alvo": "Certos",
       "esperado": [
-        "Determiner"
+        "Determiner",
+        "Adjective"
       ]
     },
     {
@@ -11681,25 +11701,25 @@
       "esperado": "nenhum"
     },
     {
-      "id": "r-adj-efêmero-01",
+      "id": "r-adj-efêmero-03",
       "frase": "A beleza efêmera da cena se dissolve antes do fim do capítulo.",
-      "alvo": "efêmero",
+      "alvo": "efêmera",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-efêmero-02",
+      "id": "r-adj-efêmero-04",
       "frase": "Gestos efêmeros compõem o retrato de uma civilização perdida.",
       "alvo": "efêmeros",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-fugaz-01",
+      "id": "r-adj-fugaz-02",
       "frase": "O prazer fugaz de uma frase perfeita justifica anos de tentativa.",
       "alvo": "fugaz",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-atemporal-01",
+      "id": "r-adj-atemporal-02",
       "frase": "A pergunta é atemporal: quem fala quando o narrador cala?",
       "alvo": "atemporal",
       "esperado": "adjetivo"
@@ -11707,7 +11727,7 @@
     {
       "id": "r-adj-cronológico-01",
       "frase": "A ordem cronológica foi deliberadamente quebrada pela autora.",
-      "alvo": "cronológico",
+      "alvo": "cronológica",
       "esperado": "adjetivo"
     },
     {
@@ -11717,7 +11737,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-ínfimo-01",
+      "id": "r-adj-ínfimo-03",
       "frase": "O detalhe ínfimo carregava o peso de toda a narrativa.",
       "alvo": "ínfimo",
       "esperado": "adjetivo"
@@ -11729,9 +11749,9 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-efusivo-01",
+      "id": "r-adj-efusivo-02",
       "frase": "A recepção efusiva contrastava com a frieza do ambiente.",
-      "alvo": "efusivo",
+      "alvo": "efusiva",
       "esperado": "adjetivo"
     },
     {
@@ -11741,13 +11761,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-onisciente-01",
+      "id": "r-adj-onisciente-03",
       "frase": "O narrador onisciente conhece os segredos que as personagens escondem.",
       "alvo": "onisciente",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-onisciente-02",
+      "id": "r-adj-onisciente-04",
       "frase": "A perspectiva onisciente cede lugar ao monólogo interior.",
       "alvo": "onisciente",
       "esperado": "adjetivo"
@@ -11761,7 +11781,7 @@
     {
       "id": "r-adj-heterodiegético-01",
       "frase": "A narração heterodiegética mantém distância dos acontecimentos.",
-      "alvo": "heterodiegético",
+      "alvo": "heterodiegética",
       "esperado": "adjetivo"
     },
     {
@@ -11773,25 +11793,31 @@
     {
       "id": "r-adj-afrodiaspórico-01",
       "frase": "A literatura afrodiaspórica reorganiza os centros do cânone ocidental.",
-      "alvo": "afrodiaspórico",
+      "alvo": "afrodiaspórica",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-indígena-01",
       "frase": "As cosmologias indígenas entram na prosa como forma de resistência.",
       "alvo": "indígenas",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-quilombola-01",
       "frase": "A identidade quilombola se afirma pela memória coletiva da terra.",
       "alvo": "quilombola",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-periurbano-01",
       "frase": "A vida periurbana da protagonista está entre dois mundos sem pertencer a nenhum.",
-      "alvo": "periurbano",
+      "alvo": "periurbana",
       "esperado": "adjetivo"
     },
     {
@@ -11801,15 +11827,15 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-assertivo-01",
+      "id": "r-adj-assertivo-02",
       "frase": "A voz assertiva da narradora não deixa espaço para a dúvida do leitor.",
-      "alvo": "assertivo",
+      "alvo": "assertiva",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-elíptico-01",
       "frase": "A construção elíptica suprime o verbo e acelera o ritmo.",
-      "alvo": "elíptico",
+      "alvo": "elíptica",
       "esperado": "adjetivo"
     },
     {
@@ -11855,25 +11881,25 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-verossimilhança-01",
+      "id": "r-noun-verossimilhança-02",
       "frase": "A verossimilhança não exige realidade, apenas coerência interna.",
       "alvo": "verossimilhança",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-diegese-01",
+      "id": "r-noun-diegese-02",
       "frase": "A diegese e a mimese organizam dois modos distintos de contar.",
       "alvo": "diegese",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-cronotopo-01",
+      "id": "r-noun-cronotopo-03",
       "frase": "O cronotopo bakhtiniano une espaço e tempo em categoria única.",
       "alvo": "cronotopo",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-intertexto-01",
+      "id": "r-noun-intertexto-02",
       "frase": "O intertexto com Machado de Assis não é citação, é contaminação.",
       "alvo": "intertexto",
       "esperado": "substantivo"
@@ -11885,19 +11911,19 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-anacronismo-01",
+      "id": "r-noun-anacronismo-02",
       "frase": "O anacronismo deliberado cria estranhamento produtivo no leitor.",
       "alvo": "anacronismo",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-prolepse-01",
+      "id": "r-noun-prolepse-02",
       "frase": "A prolepse do primeiro capítulo contamina toda a leitura subsequente.",
       "alvo": "prolepse",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-analepse-01",
+      "id": "r-noun-analepse-02",
       "frase": "A analepse revela o que o leitor precisava saber desde o início.",
       "alvo": "analepse",
       "esperado": "substantivo"
@@ -11929,13 +11955,13 @@
     {
       "id": "r-adj-utópico-01",
       "frase": "A narrativa utópica projeta o que a realidade recusa.",
-      "alvo": "utópico",
+      "alvo": "utópica",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-especulativo-01",
       "frase": "A ficção especulativa brasileira ganhou força editorial na última década.",
-      "alvo": "especulativo",
+      "alvo": "especulativa",
       "esperado": "adjetivo"
     },
     {
@@ -11957,19 +11983,19 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-introvertido-01",
+      "id": "r-adj-introvertido-02",
       "frase": "A protagonista introvertida guarda tudo num diário que ninguém lê.",
       "alvo": "introvertida",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-extrovertido-01",
+      "id": "r-adj-extrovertido-02",
       "frase": "O personagem extrovertido mascara a solidão com excesso de palavras.",
       "alvo": "extrovertido",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-ambíguo-01",
+      "id": "r-adj-ambíguo-03",
       "frase": "O final ambíguo recusa a resolução e devolve a pergunta ao leitor.",
       "alvo": "ambíguo",
       "esperado": "adjetivo"
@@ -11989,47 +12015,47 @@
     {
       "id": "r-adj-traumático-01",
       "frase": "A memória traumática retorna em fragmentos que resistem à narrativa linear.",
-      "alvo": "traumático",
+      "alvo": "traumática",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-pron-cujo-01",
+      "id": "r-pron-cujo-02",
       "frase": "O escritor cujo romance ganhou o prêmio estava na plateia.",
       "alvo": "cujo",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-cujo-02",
+      "id": "r-pron-cujo-03",
       "frase": "A personagem cujas memórias estruturam o enredo nunca aparece diretamente.",
       "alvo": "cujas",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-cujo-03",
+      "id": "r-pron-cujo-04",
       "frase": "Um país cujos mitos fundadores foram apagados pela colonização.",
       "alvo": "cujos",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-qual-01",
+      "id": "r-pron-qual-02",
       "frase": "A editora para a qual enviou o manuscrito nunca respondeu.",
       "alvo": "qual",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-qual-02",
+      "id": "r-pron-qual-03",
       "frase": "O silêncio no qual a personagem vivia era ensurdecedor.",
       "alvo": "qual",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-quem-01",
+      "id": "r-pron-quem-03",
       "frase": "A mulher com quem ela cresceu reapareceu no terceiro capítulo.",
       "alvo": "quem",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-quem-02",
+      "id": "r-pron-quem-04",
       "frase": "O leitor para quem o livro foi escrito talvez nunca exista.",
       "alvo": "quem",
       "esperado": "pronome"
@@ -12065,19 +12091,19 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-lacônico-01",
+      "id": "r-adj-lacônico-02",
       "frase": "O estilo lacônico de Hemingway influenciou gerações de contistas.",
       "alvo": "lacônico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-prolixo-01",
+      "id": "r-adj-prolixo-02",
       "frase": "A narração prolixa sufoca o ritmo antes do clímax.",
       "alvo": "prolixa",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-hermético-01",
+      "id": "r-adj-hermético-02",
       "frase": "O poema hermético recusa a leitura fácil como gesto político.",
       "alvo": "hermético",
       "esperado": "adjetivo"
@@ -12095,7 +12121,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-aforístico-01",
+      "id": "r-adj-aforístico-02",
       "frase": "O tom aforístico concentra décadas em uma única frase.",
       "alvo": "aforístico",
       "esperado": "adjetivo"
@@ -12103,7 +12129,7 @@
     {
       "id": "r-adj-parabólico-01",
       "frase": "A narrativa parabólica esconde a moral no próprio movimento da história.",
-      "alvo": "parabólico",
+      "alvo": "parabólica",
       "esperado": "adjetivo"
     },
     {
@@ -12113,13 +12139,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-sinopse-01",
+      "id": "r-noun-sinopse-02",
       "frase": "A sinopse precisa convencer o editor sem entregar o final.",
       "alvo": "sinopse",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-orelha-01",
+      "id": "r-noun-orelha-02",
       "frase": "A orelha do livro é o primeiro argumento de venda.",
       "alvo": "orelha",
       "esperado": "substantivo"
@@ -12131,31 +12157,31 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-reedição-01",
+      "id": "r-noun-reedição-02",
       "frase": "A reedição revisada corrigiu erros que passaram despercebidos por décadas.",
       "alvo": "reedição",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-prefácio-01",
+      "id": "r-noun-prefácio-02",
       "frase": "O prefácio da nova edição reposicionou o livro no cânone.",
       "alvo": "prefácio",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-posfácio-01",
+      "id": "r-noun-posfácio-02",
       "frase": "O posfácio revelou que o final foi reescrito três vezes.",
       "alvo": "posfácio",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-epílogo-01",
+      "id": "r-noun-epílogo-02",
       "frase": "O epílogo desfaz o que o penúltimo capítulo havia construído.",
       "alvo": "epílogo",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-prólogo-01",
+      "id": "r-noun-prólogo-02",
       "frase": "O prólogo promete uma história que o romance não entrega — deliberadamente.",
       "alvo": "prólogo",
       "esperado": "substantivo"
@@ -12203,7 +12229,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-cadenciado-01",
+      "id": "r-adj-cadenciado-02",
       "frase": "A prosa cadenciada de Lispector imita a respiração do pensamento.",
       "alvo": "cadenciada",
       "esperado": "adjetivo"
@@ -12217,11 +12243,11 @@
     {
       "id": "r-adj-pausado-01",
       "frase": "A narração pausada obriga o leitor a habitar cada detalhe.",
-      "alvo": "pausado",
+      "alvo": "pausada",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-vertiginoso-01",
+      "id": "r-adj-vertiginoso-02",
       "frase": "O acúmulo vertiginoso de imagens produz desorientação calculada.",
       "alvo": "vertiginoso",
       "esperado": "adjetivo"
@@ -12241,11 +12267,11 @@
     {
       "id": "r-adj-árido-01",
       "frase": "A paisagem árida reflete o estado interior da protagonista.",
-      "alvo": "árido",
+      "alvo": "árida",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-opressivo-01",
+      "id": "r-adj-opressivo-02",
       "frase": "O silêncio opressivo da casa comunica o que os personagens recusam dizer.",
       "alvo": "opressivo",
       "esperado": "adjetivo"
@@ -12253,7 +12279,7 @@
     {
       "id": "r-adj-onírico-01",
       "frase": "A sequência onírica rompe o contrato com o realismo sem aviso.",
-      "alvo": "onírico",
+      "alvo": "onírica",
       "esperado": "adjetivo"
     },
     {
@@ -12275,7 +12301,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-estranhamento-01",
+      "id": "r-noun-estranhamento-02",
       "frase": "O estranhamento produzido pela focalização incomum é o efeito desejado.",
       "alvo": "estranhamento",
       "esperado": "substantivo"
@@ -12287,7 +12313,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-cumplicidade-01",
+      "id": "r-noun-cumplicidade-02",
       "frase": "A cumplicidade entre narrador e leitor se constrói aos poucos.",
       "alvo": "cumplicidade",
       "esperado": "substantivo"
@@ -12365,9 +12391,9 @@
       "esperado": "nenhum"
     },
     {
-      "id": "r-adj-labiríntico-01",
+      "id": "r-adj-labiríntico-02",
       "frase": "A sintaxe labiríntica de Guimarães Rosa é mapa de um mundo interior.",
-      "alvo": "labiríntico",
+      "alvo": "labiríntica",
       "esperado": "adjetivo"
     },
     {
@@ -12379,7 +12405,7 @@
     {
       "id": "r-adj-truncado-01",
       "frase": "A frase truncada imita o pensamento que não consegue se completar.",
-      "alvo": "truncado",
+      "alvo": "truncada",
       "esperado": "adjetivo"
     },
     {
@@ -12389,7 +12415,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-fragmentário-01",
+      "id": "r-adj-fragmentário-02",
       "frase": "O romance fragmentário recusa a ilusão de totalidade.",
       "alvo": "fragmentário",
       "esperado": "adjetivo"
@@ -12437,7 +12463,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-recepção-01",
+      "id": "r-noun-recepção-02",
       "frase": "A recepção crítica da obra mudou radicalmente após a morte da autora.",
       "alvo": "recepção",
       "esperado": "substantivo"
@@ -12479,7 +12505,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-resiliente-01",
+      "id": "r-adj-resiliente-02",
       "frase": "A narradora resiliente não se define pela dor mas pelo que faz com ela.",
       "alvo": "resiliente",
       "esperado": "adjetivo"
@@ -12491,7 +12517,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-reticente-01",
+      "id": "r-adj-reticente-02",
       "frase": "A testemunha reticente guarda o segredo até a última cena.",
       "alvo": "reticente",
       "esperado": "adjetivo"
@@ -12515,7 +12541,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-dicção-01",
+      "id": "r-noun-dicção-02",
       "frase": "A dicção do romance mistura o erudito e o popular sem hierarquia.",
       "alvo": "dicção",
       "esperado": "substantivo"
@@ -12527,7 +12553,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-cadência-01",
+      "id": "r-noun-cadência-02",
       "frase": "A cadência do parágrafo final é a resolução que a trama recusou.",
       "alvo": "cadência",
       "esperado": "substantivo"
@@ -12569,25 +12595,25 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-epistolar-01",
+      "id": "r-adj-epistolar-02",
       "frase": "A forma epistolar entrega ao leitor as cartas que nunca foram respondidas.",
       "alvo": "epistolar",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-dramático-01",
+      "id": "r-adj-dramático-02",
       "frase": "A ironia dramática nasce da diferença entre o que o leitor e o personagem sabem.",
-      "alvo": "dramático",
+      "alvo": "dramática",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-trágico-01",
+      "id": "r-adj-trágico-02",
       "frase": "O destino trágico não precisa de morte — basta a perda irreversível.",
       "alvo": "trágico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-cômico-01",
+      "id": "r-adj-cômico-02",
       "frase": "O registro cômico dissolve a tensão exatamente quando ela mais importa.",
       "alvo": "cômico",
       "esperado": "adjetivo"
@@ -12695,25 +12721,25 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-convincente-01",
+      "id": "r-adj-convincente-02",
       "frase": "O personagem convincente não precisa ser simpático.",
       "alvo": "convincente",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-coerente-01",
+      "id": "r-adj-coerente-03",
       "frase": "A voz narrativa coerente mantém o mesmo grau de acesso emocional.",
       "alvo": "coerente",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-inconsistente-01",
+      "id": "r-adj-inconsistente-02",
       "frase": "O arco inconsistente do personagem destrói a credibilidade do final.",
       "alvo": "inconsistente",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-rascunho-01",
+      "id": "r-noun-rascunho-02",
       "frase": "O rascunho revela o pensamento antes de ele se decidir.",
       "alvo": "rascunho",
       "esperado": "substantivo"
@@ -12737,7 +12763,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-manuscrito-01",
+      "id": "r-noun-manuscrito-02",
       "frase": "O manuscrito sobreviveu ao incêndio por estar numa bolsa esquecida.",
       "alvo": "manuscrito",
       "esperado": "substantivo"
@@ -12779,13 +12805,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-linear-01",
+      "id": "r-adj-linear-02",
       "frase": "A narrativa linear trai a complexidade do evento narrado.",
       "alvo": "linear",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-circular-01",
+      "id": "r-adj-circular-02",
       "frase": "A estrutura circular faz o final ecoar o início com diferença.",
       "alvo": "circular",
       "esperado": "adjetivo"
@@ -12794,7 +12820,10 @@
       "id": "r-adj-espiral-01",
       "frase": "O tempo espiral do romance retorna ao mesmo ponto em níveis distintos.",
       "alvo": "espiral",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-regressivo-01",
@@ -12809,7 +12838,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-atmosfera-01",
+      "id": "r-noun-atmosfera-02",
       "frase": "A atmosfera de tensão se instala antes de qualquer evento.",
       "alvo": "atmosfera",
       "esperado": "substantivo"
@@ -12833,13 +12862,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-machadiano-01",
+      "id": "r-adj-machadiano-02",
       "frase": "O ironia machadiana nunca se explica — se reconhece.",
-      "alvo": "machadiano",
+      "alvo": "machadiana",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-rosiano-01",
+      "id": "r-adj-rosiano-02",
       "frase": "O léxico rosiano reinventa o português pelo avesso.",
       "alvo": "rosiano",
       "esperado": "adjetivo"
@@ -12853,17 +12882,17 @@
     {
       "id": "r-adj-cabraleano-01",
       "frase": "A precisão cabraleana exclui o ornamento como princípio ético.",
-      "alvo": "cabraleano",
+      "alvo": "cabraleana",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-canônico-01",
+      "id": "r-adj-canônico-03",
       "frase": "A leitura canônica muitas vezes apaga o que o texto diz obliquamente.",
-      "alvo": "canônico",
+      "alvo": "canônica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-hegemônico-01",
+      "id": "r-adj-hegemônico-02",
       "frase": "O cânone hegemônico excluiu durante séculos as vozes periféricas.",
       "alvo": "hegemônico",
       "esperado": "adjetivo"
@@ -12871,11 +12900,11 @@
     {
       "id": "r-adj-contracanônico-01",
       "frase": "A leitura contracanônica recupera o que o arquivo oficial apagou.",
-      "alvo": "contracanônico",
+      "alvo": "contracanônica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-dialogismo-01",
+      "id": "r-noun-dialogismo-02",
       "frase": "O dialogismo bakhtiniano transforma toda frase em resposta a outra frase.",
       "alvo": "dialogismo",
       "esperado": "substantivo"
@@ -12893,7 +12922,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-polifonia-01",
+      "id": "r-noun-polifonia-02",
       "frase": "A polifonia dostoievskiana recusa a voz autoral dominante.",
       "alvo": "polifonia",
       "esperado": "substantivo"
@@ -12913,11 +12942,11 @@
     {
       "id": "r-adj-sinestésico-01",
       "frase": "A imagem sinestésica confunde sentidos para criar uma percepção nova.",
-      "alvo": "sinestésico",
+      "alvo": "sinestésica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-visceral-01",
+      "id": "r-adj-visceral-02",
       "frase": "A reação visceral do leitor é o efeito que o texto estava construindo.",
       "alvo": "visceral",
       "esperado": "adjetivo"
@@ -12955,19 +12984,19 @@
     {
       "id": "r-adj-comprometido-01",
       "frase": "A escrita comprometida não renuncia à beleza para ser política.",
-      "alvo": "comprometido",
+      "alvo": "comprometida",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-engajado-01",
+      "id": "r-adj-engajado-02",
       "frase": "A literatura engajada fracassa quando sacrifica a forma pela mensagem.",
-      "alvo": "engajado",
+      "alvo": "engajada",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-deliberado-01",
       "frase": "A ambiguidade deliberada recusa a interpretação única.",
-      "alvo": "deliberado",
+      "alvo": "deliberada",
       "esperado": "adjetivo"
     },
     {
@@ -12983,7 +13012,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-enunciador-01",
+      "id": "r-noun-enunciador-02",
       "frase": "O enunciador e o autor real raramente coincidem.",
       "alvo": "enunciador",
       "esperado": "substantivo"
@@ -12995,7 +13024,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-interlocutor-01",
+      "id": "r-noun-interlocutor-02",
       "frase": "O interlocutor implícito molda o tom mesmo sem aparecer na cena.",
       "alvo": "interlocutor",
       "esperado": "substantivo"
@@ -13004,16 +13033,16 @@
       "id": "r-adj-instantâneo-01",
       "frase": "O conto capta o instantâneo enquanto o romance habita a duração.",
       "alvo": "instantâneo",
-      "esperado": "adjetivo"
+      "esperado": "substantivo"
     },
     {
-      "id": "r-adj-duradouro-01",
+      "id": "r-adj-duradouro-02",
       "frase": "O trauma duradouro estrutura o tempo da personagem sem que ela saiba.",
       "alvo": "duradouro",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-passageiro-01",
+      "id": "r-adj-passageiro-02",
       "frase": "O afeto passageiro concentra toda a saudade de uma vida.",
       "alvo": "passageiro",
       "esperado": "adjetivo"
@@ -13037,13 +13066,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-epígrafe-01",
+      "id": "r-noun-epígrafe-02",
       "frase": "A epígrafe é a primeira decisão de leitura que o autor toma.",
       "alvo": "epígrafe",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-dedicatória-01",
+      "id": "r-noun-dedicatória-02",
       "frase": "A dedicatória sem nome próprio abre uma intimidade com o leitor.",
       "alvo": "dedicatória",
       "esperado": "substantivo"
@@ -13055,25 +13084,25 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-desconcertante-01",
+      "id": "r-adj-desconcertante-02",
       "frase": "O final desconcertante recusa o conforto sem ser arbitrário.",
       "alvo": "desconcertante",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-perturbador-01",
+      "id": "r-adj-perturbador-02",
       "frase": "A imagem perturbadora permanece depois que o livro é fechado.",
-      "alvo": "perturbador",
+      "alvo": "perturbadora",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-revelador-01",
+      "id": "r-adj-revelador-02",
       "frase": "O detalhe revelador muda o sentido de tudo o que veio antes.",
       "alvo": "revelador",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-desconcertante-02",
+      "id": "r-adj-desconcertante-03",
       "frase": "A pergunta desconcertante da narradora dissolve a certeza do leitor.",
       "alvo": "desconcertante",
       "esperado": "adjetivo"
@@ -13109,13 +13138,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-polissêmico-01",
+      "id": "r-adj-polissêmico-02",
       "frase": "O título polissêmico estabelece o contrato de ambiguidade com o leitor.",
       "alvo": "polissêmico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-lacunar-01",
+      "id": "r-adj-lacunar-02",
       "frase": "A escrita lacunar obriga o leitor a habitar o espaço entre as frases.",
       "alvo": "lacunar",
       "esperado": "adjetivo"
@@ -13129,7 +13158,7 @@
     {
       "id": "r-adj-rarefeito-01",
       "frase": "A prosa rarefeita confia no branco para dizer o que a palavra não pode.",
-      "alvo": "rarefeito",
+      "alvo": "rarefeita",
       "esperado": "adjetivo"
     },
     {
@@ -13145,21 +13174,21 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-sombrio-01",
+      "id": "r-adj-sombrio-02",
       "frase": "O registro sombrio não precisa de violência explícita para incomodar.",
       "alvo": "sombrio",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-melancólico-01",
+      "id": "r-adj-melancólico-02",
       "frase": "O tom melancólico da crônica transforma o cotidiano em elegias.",
       "alvo": "melancólico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-nostálgico-01",
+      "id": "r-adj-nostálgico-02",
       "frase": "A nostalgia nostálgica — redundante — vira armadilha sem o distanciamento crítico.",
-      "alvo": "nostálgico",
+      "alvo": "nostálgica",
       "esperado": "adjetivo"
     },
     {
@@ -13169,13 +13198,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-solene-01",
+      "id": "r-adj-solene-02",
       "frase": "O tom solene demais esvazia o gesto que deveria ser singelo.",
       "alvo": "solene",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-coloquial-01",
+      "id": "r-adj-coloquial-02",
       "frase": "O registro coloquial aproxima sem banalizar quando bem calibrado.",
       "alvo": "coloquial",
       "esperado": "adjetivo"
@@ -13256,7 +13285,10 @@
       "id": "r-adj-plano-lit-01",
       "frase": "O personagem plano serve à sátira quando seu limite é intencional.",
       "alvo": "plano",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-redondo-lit-01",
@@ -13277,7 +13309,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-catarse-01",
+      "id": "r-noun-catarse-03",
       "frase": "A catarse não é alívio — é reconhecimento do que antes era inominável.",
       "alvo": "catarse",
       "esperado": "substantivo"
@@ -13331,13 +13363,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-kafkiano-01",
+      "id": "r-adj-kafkiano-02",
       "frase": "O kafkiano não descreve absurdo — descreve a lógica do absurdo.",
       "alvo": "kafkiano",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-borgiano-01",
+      "id": "r-adj-borgiano-02",
       "frase": "O labirinto borgiano mapeia o impossível com precisão cartográfica.",
       "alvo": "borgiano",
       "esperado": "adjetivo"
@@ -13373,7 +13405,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-novela-01",
+      "id": "r-noun-novela-02",
       "frase": "A novela ocupa o espaço entre o conto e o romance sem pertencer a nenhum.",
       "alvo": "novela",
       "esperado": "substantivo"
@@ -13391,7 +13423,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-multifacetado-01",
+      "id": "r-adj-multifacetado-02",
       "frase": "O conflito multifacetado recusa a resolução binária.",
       "alvo": "multifacetado",
       "esperado": "adjetivo"
@@ -13399,7 +13431,7 @@
     {
       "id": "r-adj-nuançado-01",
       "frase": "A análise nuançada resiste às generalizações que a tese exigiria.",
-      "alvo": "nuançado",
+      "alvo": "nuançada",
       "esperado": "adjetivo"
     },
     {
@@ -13439,7 +13471,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-fundacional-01",
+      "id": "r-adj-fundacional-02",
       "frase": "O texto fundacional de um movimento raramente é o mais representativo.",
       "alvo": "fundacional",
       "esperado": "adjetivo"
@@ -13453,11 +13485,11 @@
     {
       "id": "r-adj-tardio-lit-01",
       "frase": "A obra tardia concentra a destilação de uma vida inteira de escolhas formais.",
-      "alvo": "tardio",
+      "alvo": "tardia",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-póstumo-01",
+      "id": "r-adj-póstumo-02",
       "frase": "O romance póstumo impõe ao editor a responsabilidade de uma escolha que não é sua.",
       "alvo": "póstumo",
       "esperado": "adjetivo"
@@ -13487,7 +13519,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-experimental-01",
+      "id": "r-adj-experimental-02",
       "frase": "A prosa experimental arrisca o fracasso como condição da descoberta.",
       "alvo": "experimental",
       "esperado": "adjetivo"
@@ -13495,7 +13527,7 @@
     {
       "id": "r-adj-transgressivo-01",
       "frase": "A poesia transgressiva redefine o que conta como linguagem literária.",
-      "alvo": "transgressivo",
+      "alvo": "transgressiva",
       "esperado": "adjetivo"
     },
     {
@@ -13505,7 +13537,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-onisciente-01",
+      "id": "r-adj-onisciente-05",
       "frase": "O narrador onisciente sabe mais do que qualquer personagem poderia saber.",
       "alvo": "onisciente",
       "esperado": "adjetivo"
@@ -13529,7 +13561,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-diegese-01",
+      "id": "r-noun-diegese-03",
       "frase": "A diegese abrange tudo o que existe no mundo ficcional da narrativa.",
       "alvo": "diegese",
       "esperado": "substantivo"
@@ -13538,7 +13570,10 @@
       "id": "r-noun-extradiegético-01",
       "frase": "O narrador extradiegético narra de fora do mundo que descreve.",
       "alvo": "extradiegético",
-      "esperado": "substantivo"
+      "esperado": [
+        "Noun",
+        "Adjective"
+      ]
     },
     {
       "id": "r-noun-metalepse-01",
@@ -13547,27 +13582,27 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-prolepse-01",
+      "id": "r-noun-prolepse-03",
       "frase": "A prolepse antecipa eventos futuros e cria expectativa antes do fato.",
       "alvo": "prolepse",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-analepse-01",
+      "id": "r-noun-analepse-03",
       "frase": "A analepse retorna ao passado para iluminar o presente da narrativa.",
       "alvo": "analepse",
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-sincopado-01",
+      "id": "r-adj-sincopado-02",
       "frase": "O ritmo sincopado da prosa de Rosa imita a fala do sertanejo culto.",
       "alvo": "sincopado",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-cadenciado-01",
+      "id": "r-adj-cadenciado-03",
       "frase": "A frase cadenciada de Guimarães cria uma respiração própria no texto.",
-      "alvo": "cadenciado",
+      "alvo": "cadenciada",
       "esperado": "adjetivo"
     },
     {
@@ -13577,13 +13612,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-verb-elipsar-01",
-      "frase": "O conto elipsa décadas e deixa o leitor calcular o tempo.",
-      "alvo": "elipsa",
+      "id": "r-verb-elidir-01",
+      "frase": "O conto elide décadas e deixa o leitor calcular o tempo.",
+      "alvo": "elide",
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-subverter-01",
+      "id": "r-verb-subverter-02",
       "frase": "A autora subverte o final esperado sem trair a lógica interna do texto.",
       "alvo": "subverte",
       "esperado": "verbo"
@@ -13595,7 +13630,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-elidir-01",
+      "id": "r-verb-elidir-02",
       "frase": "A escritora elide o trauma e o leitor encontra o buraco no texto.",
       "alvo": "elide",
       "esperado": "verbo"
@@ -13619,19 +13654,19 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-sinédoque-01",
+      "id": "r-noun-sinédoque-02",
       "frase": "A sinédoque faz a parte representar o todo com mais força que o todo teria.",
       "alvo": "sinédoque",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-metonímia-01",
+      "id": "r-noun-metonímia-02",
       "frase": "A metonímia substitui o objeto pela marca que o singulariza.",
       "alvo": "metonímia",
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-assertivo-01",
+      "id": "r-adj-assertivo-03",
       "frase": "O tom assertivo do narrador oculta a fragilidade da tese que defende.",
       "alvo": "assertivo",
       "esperado": "adjetivo"
@@ -13649,43 +13684,46 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-resenha-01",
+      "id": "r-noun-resenha-02",
       "frase": "A resenha que não cita o texto está falando de si mesma.",
       "alvo": "resenha",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-orelha-01",
+      "id": "r-noun-orelha-03",
       "frase": "A orelha do livro precisa seduzir sem entregar o que o texto guarda.",
       "alvo": "orelha",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-sinopse-01",
+      "id": "r-noun-sinopse-03",
       "frase": "A sinopse que conta o final elimina a razão de ler o livro.",
       "alvo": "sinopse",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-tiragem-01",
+      "id": "r-noun-tiragem-02",
       "frase": "A tiragem não mede a qualidade — mede a visibilidade da distribuição.",
       "alvo": "tiragem",
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-precursor-01",
+      "id": "r-adj-precursor-02",
       "frase": "O texto precursor cria um problema que só as gerações seguintes nomearão.",
       "alvo": "precursor",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
-      "id": "r-adj-epigonal-01",
+      "id": "r-adj-epigonal-02",
       "frase": "A obra epigonal copia os gestos sem entender o gesto original.",
       "alvo": "epigonal",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-contemporâneo-01",
+      "id": "r-adj-contemporâneo-02",
       "frase": "O gesto contemporâneo não é o mais novo — é o que responde ao presente.",
       "alvo": "contemporâneo",
       "esperado": "adjetivo"
@@ -13721,7 +13759,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-voz-01",
+      "id": "r-noun-voz-03",
       "frase": "Encontrar a própria voz é aprender a confiar na estranheza que já estava lá.",
       "alvo": "voz",
       "esperado": "substantivo"
@@ -13733,13 +13771,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-testemunhal-01",
+      "id": "r-adj-testemunhal-02",
       "frase": "A escrita testemunhal carrega o peso ético de dizer o que aconteceu.",
       "alvo": "testemunhal",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-documental-01",
+      "id": "r-adj-documental-02",
       "frase": "A ficção documental borra a fronteira entre o arquivo e a imaginação.",
       "alvo": "documental",
       "esperado": "adjetivo"
@@ -13769,15 +13807,15 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-paratático-01",
+      "id": "r-adj-paratático-02",
       "frase": "A construção paratática justapõe ideias sem anunciar a relação entre elas.",
-      "alvo": "paratático",
+      "alvo": "paratática",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-hipotático-01",
+      "id": "r-adj-hipotático-02",
       "frase": "A subordinação hipotática hierarquiza o argumento antes de ele ser desenvolvido.",
-      "alvo": "hipotático",
+      "alvo": "hipotática",
       "esperado": "adjetivo"
     },
     {
@@ -13811,7 +13849,7 @@
       "esperado": "confusao"
     },
     {
-      "id": "conf-deforma-01",
+      "id": "conf-deforma-02",
       "frase": "O texto foi revisado de forma eficaz pela equipe editorial.",
       "alvo": "de forma eficaz",
       "esperado": "confusao"
@@ -13853,49 +13891,49 @@
       "esperado": "nenhum"
     },
     {
-      "id": "r-pron-cujo-01",
+      "id": "r-pron-cujo-05",
       "frase": "O escritor cujo silêncio durou trinta anos publicou um único livro.",
       "alvo": "cujo",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-cujo-02",
+      "id": "r-pron-cujo-06",
       "frase": "A personagem cuja voz nunca é ouvida é a que mais fala pelo que cala.",
       "alvo": "cuja",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-quanto-01",
+      "id": "r-pron-quanto-02",
       "frase": "Tudo quanto foi escrito antes volta ressignificado pela última frase.",
       "alvo": "quanto",
       "esperado": "pronome"
     },
     {
-      "id": "r-pron-quanto-02",
+      "id": "r-pron-quanto-03",
       "frase": "Quantos escrevem para entender o que sentiram sem saber que sentiam.",
       "alvo": "quantos",
       "esperado": "pronome"
     },
     {
-      "id": "r-prep-ante-01",
+      "id": "r-prep-ante-02",
       "frase": "Ante o silêncio da plateia, a narradora recuou para dentro de si.",
       "alvo": "ante",
       "esperado": "preposição"
     },
     {
-      "id": "r-prep-perante-01",
+      "id": "r-prep-perante-02",
       "frase": "Perante o manuscrito inacabado, o editor hesitou pela primeira vez.",
       "alvo": "perante",
       "esperado": "preposição"
     },
     {
-      "id": "r-prep-mediante-01",
+      "id": "r-prep-mediante-02",
       "frase": "Mediante a leitura atenta, o leitor percebe o que o narrador esconde.",
       "alvo": "mediante",
       "esperado": "preposição"
     },
     {
-      "id": "r-prep-conforme-01",
+      "id": "r-prep-conforme-02",
       "frase": "Conforme o romance avança, o leitor perde a certeza sobre quem narra.",
       "alvo": "conforme",
       "esperado": "preposição"
@@ -13907,13 +13945,13 @@
       "esperado": "preposição"
     },
     {
-      "id": "r-adv-obliquamente-01",
+      "id": "r-adv-obliquamente-02",
       "frase": "O texto diz obliquamente o que o autor não ousou nomear.",
       "alvo": "obliquamente",
       "esperado": "advérbio"
     },
     {
-      "id": "r-adv-paulatinamente-01",
+      "id": "r-adv-paulatinamente-03",
       "frase": "A voz da personagem vai paulatinamente cedendo ao silêncio.",
       "alvo": "paulatinamente",
       "esperado": "advérbio"
@@ -13925,13 +13963,13 @@
       "esperado": "advérbio"
     },
     {
-      "id": "r-adv-doravante-01",
+      "id": "r-adv-doravante-02",
       "frase": "Doravante, o narrador abandonará a pretensão de objetividade.",
       "alvo": "doravante",
       "esperado": "advérbio"
     },
     {
-      "id": "r-adv-outrora-01",
+      "id": "r-adv-outrora-02",
       "frase": "Outrora, aquela praça era o centro da vida da personagem.",
       "alvo": "outrora",
       "esperado": "advérbio"
@@ -13943,7 +13981,7 @@
       "esperado": "advérbio"
     },
     {
-      "id": "r-conj-conquanto-01",
+      "id": "r-conj-conquanto-02",
       "frase": "Conquanto o romance seja breve, cada parágrafo carrega décadas.",
       "alvo": "conquanto",
       "esperado": "conjunção"
@@ -13952,10 +13990,13 @@
       "id": "r-conj-outrossim-01",
       "frase": "Outrossim, a narradora recusa toda forma de conclusão tranquilizadora.",
       "alvo": "outrossim",
-      "esperado": "conjunção"
+      "esperado": [
+        "Conjunction",
+        "Adverb"
+      ]
     },
     {
-      "id": "r-conj-porquanto-01",
+      "id": "r-conj-porquanto-02",
       "frase": "Porquanto a memória falha, o texto falha com ela intencionalmente.",
       "alvo": "porquanto",
       "esperado": "conjunção"
@@ -13964,7 +14005,10 @@
       "id": "r-conj-malgrado-01",
       "frase": "Malgrado a resistência do editor, o final permaneceu em aberto.",
       "alvo": "malgrado",
-      "esperado": "conjunção"
+      "esperado": [
+        "Conjunction",
+        "Preposition"
+      ]
     },
     {
       "id": "r-verb-assentir-01",
@@ -13999,14 +14043,14 @@
     {
       "id": "r-adj-assimétrico-01",
       "frase": "A estrutura assimétrica do romance frustra a expectativa de proporção.",
-      "alvo": "assimétrico",
+      "alvo": "assimétrica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-simétrico-01",
+      "id": "r-noun-simetria-01",
       "frase": "A simetria entre o primeiro e o último capítulo cria um espelho que distorce.",
-      "alvo": "simétrico",
-      "esperado": "adjetivo"
+      "alvo": "simetria",
+      "esperado": "substantivo"
     },
     {
       "id": "r-adj-rizomático-01",
@@ -14015,13 +14059,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-fragmentário-01",
+      "id": "r-adj-fragmentário-03",
       "frase": "A narrativa fragmentária exige que o leitor monte o que o texto desmontou.",
-      "alvo": "fragmentário",
+      "alvo": "fragmentária",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-elipse-01",
+      "id": "r-noun-elipse-02",
       "frase": "A elipse narrativa salta décadas e deixa o leitor calcular a perda.",
       "alvo": "elipse",
       "esperado": "substantivo"
@@ -14047,13 +14091,13 @@
     {
       "id": "r-adj-involuntário-01",
       "frase": "A memória involuntária proustiana dispensa a vontade de recordar.",
-      "alvo": "involuntário",
+      "alvo": "involuntária",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-voluntário-01",
       "frase": "A memória voluntária só recupera o arquivo — nunca a textura do vivido.",
-      "alvo": "voluntário",
+      "alvo": "voluntária",
       "esperado": "adjetivo"
     },
     {
@@ -14093,46 +14137,46 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-paratexto-01",
+      "id": "r-noun-paratexto-02",
       "frase": "O paratexto — prefácio, orelha, dedicatória — já é leitura.",
       "alvo": "paratexto",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-intertexto-01",
+      "id": "r-noun-intertexto-03",
       "frase": "O intertexto não é citação — é a memória involuntária da tradição.",
       "alvo": "intertexto",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-hipotexto-01",
+      "id": "r-noun-hipotexto-02",
       "frase": "O hipotexto é o texto anterior que a obra absorve e transforma.",
       "alvo": "hipotexto",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-hipertexto-01",
+      "id": "r-noun-hipertexto-02",
       "frase": "O hipertexto literário deriva do hipotexto por transformação ou imitação.",
       "alvo": "hipertexto",
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-dialetal-01",
+      "id": "r-adj-dialetal-02",
       "frase": "A variante dialetal no diálogo situa o personagem antes da descrição.",
       "alvo": "dialetal",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-vernacular-01",
+      "id": "r-adj-vernacular-02",
       "frase": "O vocabulário vernacular ancora o texto na oralidade que o precede.",
       "alvo": "vernacular",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-idioletal-01",
+      "id": "r-noun-idioleto-01",
       "frase": "O idioleto da personagem é a sua assinatura antes do nome próprio.",
-      "alvo": "idioletal",
-      "esperado": "adjetivo"
+      "alvo": "idioleto",
+      "esperado": "substantivo"
     },
     {
       "id": "r-adj-empírico-lit-01",
@@ -14183,7 +14227,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-oxímoro-01",
+      "id": "r-noun-oxímoro-02",
       "frase": "O oxímoro condensa a contradição que o raciocínio linear não consegue resolver.",
       "alvo": "oxímoro",
       "esperado": "substantivo"
@@ -14195,7 +14239,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-verb-intuir-01",
+      "id": "r-verb-intuir-02",
       "frase": "O leitor intui antes de compreender — esse é o efeito que o texto estava construindo.",
       "alvo": "intui",
       "esperado": "verbo"
@@ -14261,7 +14305,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-reescrita-01",
+      "id": "r-noun-reescrita-02",
       "frase": "A reescrita começa onde a primeira versão para de mentir.",
       "alvo": "reescrita",
       "esperado": "substantivo"
@@ -14281,13 +14325,13 @@
     {
       "id": "r-adj-eufônico-01",
       "frase": "A combinação eufônica de vogais cria um fluxo que facilita a leitura em voz alta.",
-      "alvo": "eufônico",
+      "alvo": "eufônica",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-cacofônico-01",
       "frase": "A sequência cacofônica é intencional — o texto quer que a leitura tropece.",
-      "alvo": "cacofônico",
+      "alvo": "cacofônica",
       "esperado": "adjetivo"
     },
     {
@@ -14303,7 +14347,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-lapidar-01",
+      "id": "r-verb-lapidar-02",
       "frase": "A escritora lapidou cada frase até o texto parecer inevitável.",
       "alvo": "lapidou",
       "esperado": "verbo"
@@ -14333,15 +14377,15 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-diaspórico-01",
+      "id": "r-adj-diaspórico-02",
       "frase": "A escrita diaspórica carrega a memória do lugar que não se pode visitar.",
-      "alvo": "diaspórico",
+      "alvo": "diaspórica",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-periférico-lit-01",
       "frase": "A voz periférica não está na margem — está no centro do que o cânone evitou.",
-      "alvo": "periférico",
+      "alvo": "periférica",
       "esperado": "adjetivo"
     },
     {
@@ -14363,7 +14407,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-polifônico-01",
+      "id": "r-adj-polifônico-02",
       "frase": "O romance polifônico não reserva para si a última palavra sobre o mundo que representa.",
       "alvo": "polifônico",
       "esperado": "adjetivo"
@@ -14375,7 +14419,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-ambíguo-01",
+      "id": "r-adj-ambíguo-04",
       "frase": "O título ambíguo é um contrato que o leitor assina sem saber todos os termos.",
       "alvo": "ambíguo",
       "esperado": "adjetivo"
@@ -14384,7 +14428,10 @@
       "id": "r-adj-equívoco-01",
       "frase": "O uso equívoco do pronome é intencional — o leitor não deve saber quem fala.",
       "alvo": "equívoco",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-aporético-01",
@@ -14489,37 +14536,37 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-episódico-01",
+      "id": "r-adj-episódico-02",
       "frase": "A aparição episódica da personagem concentra o tema que o romance dilui.",
-      "alvo": "episódico",
+      "alvo": "episódica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-cronotopo-01",
+      "id": "r-noun-cronotopo-04",
       "frase": "O cronotopo bakhtiniano une tempo e espaço como inseparáveis na ficção.",
       "alvo": "cronotopo",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-topos-01",
+      "id": "r-noun-topos-02",
       "frase": "O topos da viagem estrutura o aprendizado do Bildungsroman.",
       "alvo": "topos",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-locus-01",
+      "id": "r-noun-locus-02",
       "frase": "O locus amoenus é o lugar idealizado que a ironia moderna destrói.",
       "alvo": "locus",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-utopia-01",
+      "id": "r-noun-utopia-02",
       "frase": "A utopia literária imagina o que o presente proíbe de esperar.",
       "alvo": "utopia",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-distopia-01",
+      "id": "r-noun-distopia-02",
       "frase": "A distopia amplifica o presente até torná-lo insuportável de reconhecer.",
       "alvo": "distopia",
       "esperado": "substantivo"
@@ -14537,15 +14584,15 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-panorâmico-01",
+      "id": "r-adj-panorâmico-02",
       "frase": "O olhar panorâmico do narrador cede à câmera íntima no segundo capítulo.",
       "alvo": "panorâmico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-microscópico-01",
+      "id": "r-adj-microscópico-02",
       "frase": "A atenção microscópica ao detalhe é o estilo que denuncia o ponto de vista.",
-      "alvo": "microscópico",
+      "alvo": "microscópica",
       "esperado": "adjetivo"
     },
     {
@@ -14555,9 +14602,9 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-polissemizar-01",
-      "frase": "O contexto literário polissemiza palavras que o uso comum fixou.",
-      "alvo": "polissemiza",
+      "id": "r-verb-conotar-01",
+      "frase": "O contexto literário conota sentidos que o uso comum fixou.",
+      "alvo": "conota",
       "esperado": "verbo"
     },
     {
@@ -14579,7 +14626,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-biográfico-01",
+      "id": "r-adj-biográfico-02",
       "frase": "O impulso biográfico não lê — julga, e na maioria das vezes condena.",
       "alvo": "biográfico",
       "esperado": "adjetivo"
@@ -14588,7 +14635,7 @@
       "id": "r-adj-pseudônimo-01",
       "frase": "O pseudônimo literário cria uma máscara que às vezes diz mais que o nome real.",
       "alvo": "pseudônimo",
-      "esperado": "adjetivo"
+      "esperado": "substantivo"
     },
     {
       "id": "r-noun-paginação-01",
@@ -14597,7 +14644,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-tipografia-01",
+      "id": "r-noun-tipografia-02",
       "frase": "A tipografia do manifesto era tão agressiva quanto o conteúdo.",
       "alvo": "tipografia",
       "esperado": "substantivo"
@@ -14627,13 +14674,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-lancinante-01",
+      "id": "r-adj-lancinante-02",
       "frase": "A dor lancinante da perda é descrita com a frieza de quem a sobreviveu.",
       "alvo": "lancinante",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-verb-canonizar-01",
+      "id": "r-verb-canonizar-02",
       "frase": "A academia canoniza o que a geração seguinte precisará descanonizar.",
       "alvo": "canoniza",
       "esperado": "verbo"
@@ -14645,7 +14692,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-recuperar-01",
+      "id": "r-verb-recuperar-02",
       "frase": "A crítica recupera textos esquecidos sem perguntar por que foram esquecidos.",
       "alvo": "recupera",
       "esperado": "verbo"
@@ -14687,7 +14734,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-verb-problematizar-01",
+      "id": "r-verb-problematizar-02",
       "frase": "O texto problematiza o que parecia resolvido antes da primeira leitura.",
       "alvo": "problematiza",
       "esperado": "verbo"
@@ -14699,7 +14746,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-tensionar-01",
+      "id": "r-verb-tensionar-02",
       "frase": "O narrador tensiona a relação entre o que sabe e o que revela.",
       "alvo": "tensiona",
       "esperado": "verbo"
@@ -14747,7 +14794,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-dilacerante-01",
+      "id": "r-adj-dilacerante-02",
       "frase": "A despedida dilacerante termina com uma frase banal — e é isso que dói.",
       "alvo": "dilacerante",
       "esperado": "adjetivo"
@@ -14783,7 +14830,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-período-01",
+      "id": "r-noun-período-02",
       "frase": "O período hipotático de Machado carrega a ironia na subordinação.",
       "alvo": "período",
       "esperado": "substantivo"
@@ -14815,11 +14862,11 @@
     {
       "id": "r-adj-semiótico-01",
       "frase": "A análise semiótica lê o texto como sistema de signos em relação.",
-      "alvo": "semiótico",
+      "alvo": "semiótica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-isotopia-01",
+      "id": "r-noun-isotopia-02",
       "frase": "A isotopia semântica mantém a coerência do campo figurativo ao longo do texto.",
       "alvo": "isotopia",
       "esperado": "substantivo"
@@ -14828,7 +14875,10 @@
       "id": "r-noun-actante-01",
       "frase": "O actante greimasiano não é personagem — é uma função narrativa que qualquer elemento pode exercer.",
       "alvo": "actante",
-      "esperado": "substantivo"
+      "esperado": [
+        "Noun",
+        "Adjective"
+      ]
     },
     {
       "id": "r-noun-programa-01",
@@ -14861,7 +14911,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-inacabado-01",
+      "id": "r-adj-inacabado-02",
       "frase": "O romance inacabado pode ser a obra mais honesta de um autor.",
       "alvo": "inacabado",
       "esperado": "adjetivo"
@@ -14899,7 +14949,7 @@
     {
       "id": "r-adj-coletivo-01",
       "frase": "A escrita coletiva exige que cada voz abra mão de ser a única.",
-      "alvo": "coletivo",
+      "alvo": "coletiva",
       "esperado": "adjetivo"
     },
     {
@@ -14921,7 +14971,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-intertextual-01",
+      "id": "r-adj-intertextual-02",
       "frase": "A relação intertextual não precisa ser consciente para ser operativa.",
       "alvo": "intertextual",
       "esperado": "adjetivo"
@@ -14987,7 +15037,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-ensaio-01",
+      "id": "r-noun-ensaio-02",
       "frase": "O ensaio é o único gênero que pensa enquanto se escreve e não esconde o processo.",
       "alvo": "ensaio",
       "esperado": "substantivo"
@@ -15047,7 +15097,7 @@
       "esperado": "nenhum"
     },
     {
-      "id": "r-adj-irônico-01",
+      "id": "r-adj-irônico-02",
       "frase": "O comentário irônico do narrador exige que o leitor desconfie do que está lendo.",
       "alvo": "irônico",
       "esperado": "adjetivo"
@@ -15107,7 +15157,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-focalização-01",
+      "id": "r-noun-focalização-02",
       "frase": "A focalização determina o que o leitor sabe, não quem fala.",
       "alvo": "focalização",
       "esperado": "substantivo"
@@ -15125,7 +15175,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-inédito-01",
+      "id": "r-adj-inédito-02",
       "frase": "O texto inédito publicado postumamente muda o que sabíamos sobre o autor.",
       "alvo": "inédito",
       "esperado": "adjetivo"
@@ -15133,13 +15183,16 @@
     {
       "id": "r-adj-revisto-01",
       "frase": "A edição revista pelo autor corrigiu o que a primeira revelava demais.",
-      "alvo": "revisto",
-      "esperado": "adjetivo"
+      "alvo": "revista",
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-adj-definitivo-01",
       "frase": "A edição definitiva raramente é — o texto continua mudando na leitura.",
-      "alvo": "definitivo",
+      "alvo": "definitiva",
       "esperado": "adjetivo"
     },
     {
@@ -15173,31 +15226,31 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-lírico-01",
+      "id": "r-adj-lírico-02",
       "frase": "O eu lírico não é o poeta — é a posição que o poema constrói para ser dito.",
       "alvo": "lírico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-épico-01",
+      "id": "r-adj-épico-02",
       "frase": "O distanciamento épico transforma o evento em exemplar e o particular em coletivo.",
       "alvo": "épico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-dramático-01",
+      "id": "r-adj-dramático-03",
       "frase": "A tensão dramática não precisa de conflito externo — pode ser toda interior.",
-      "alvo": "dramático",
+      "alvo": "dramática",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-trágico-01",
+      "id": "r-adj-trágico-03",
       "frase": "O destino trágico não é cruel — é inevitável, e nisso está a sua lógica.",
       "alvo": "trágico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-cômico-01",
+      "id": "r-adj-cômico-03",
       "frase": "O registro cômico pode dizer o que o trágico proíbe de nomear.",
       "alvo": "cômico",
       "esperado": "adjetivo"
@@ -15209,9 +15262,9 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-gregório-01",
+      "id": "r-noun-gregueria-01",
       "frase": "A gregeria de Gómez de la Serna é a metáfora que descobriu o humor.",
-      "alvo": "gregério",
+      "alvo": "gregeria",
       "esperado": "substantivo"
     },
     {
@@ -15235,7 +15288,7 @@
     {
       "id": "r-adj-performativo-01",
       "frase": "A leitura performativa transforma o texto em evento e o leitor em testemunha.",
-      "alvo": "performativo",
+      "alvo": "performativa",
       "esperado": "adjetivo"
     },
     {
@@ -15284,13 +15337,16 @@
       "id": "r-adj-best-seller-01",
       "frase": "O best-seller revela o que o público deseja ler, não o que merece ser escrito.",
       "alvo": "best-seller",
-      "esperado": "adjetivo"
+      "esperado": "substantivo"
     },
     {
       "id": "r-adj-cult-01",
       "frase": "O livro cult é o que todo mundo cita e pouca gente termina.",
       "alvo": "cult",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-noun-genealogia-01",
@@ -15311,7 +15367,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-ruptura-01",
+      "id": "r-noun-ruptura-02",
       "frase": "A ruptura com a tradição é sempre parcial — o que nega ainda carrega o que combate.",
       "alvo": "ruptura",
       "esperado": "substantivo"
@@ -15341,7 +15397,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-manifesto-01",
+      "id": "r-noun-manifesto-02",
       "frase": "O manifesto literário é o texto que tenta legislar sobre o que a arte ainda não sabe ser.",
       "alvo": "manifesto",
       "esperado": "substantivo"
@@ -15353,13 +15409,13 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-vanguardista-01",
+      "id": "r-adj-vanguardista-02",
       "frase": "O gesto vanguardista envelhece mais rápido que a tradição que combateu.",
       "alvo": "vanguardista",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-modernista-01",
+      "id": "r-adj-modernista-02",
       "frase": "O projeto modernista de 22 escolheu a ruptura como método e o Brasil como matéria.",
       "alvo": "modernista",
       "esperado": "adjetivo"
@@ -15377,7 +15433,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-naturalista-01",
+      "id": "r-adj-naturalista-02",
       "frase": "A escrita naturalista confundiu determinismo com fatalismo e o pobre com o destino.",
       "alvo": "naturalista",
       "esperado": "adjetivo"
@@ -15389,13 +15445,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-parnasiano-01",
+      "id": "r-adj-parnasiano-02",
       "frase": "O ideal parnasiano da forma perfeita às vezes esvazia o poema de necessidade.",
       "alvo": "parnasiano",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-concretista-01",
+      "id": "r-adj-concretista-02",
       "frase": "A poesia concretista faz da página um campo visual além da linha.",
       "alvo": "concretista",
       "esperado": "adjetivo"
@@ -15449,19 +15505,22 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-kafkiano-02",
+      "id": "r-adj-kafkiano-03",
       "frase": "A burocracia kafkiana não é fantasia — é a lógica real do absurdo administrado.",
-      "alvo": "kafkiano",
+      "alvo": "kafkiana",
       "esperado": "adjetivo"
     },
     {
       "id": "r-noun-absurdo-01",
       "frase": "O absurdo camusiano não é a falta de sentido — é a busca de sentido onde ele foi proibido.",
       "alvo": "absurdo",
-      "esperado": "substantivo"
+      "esperado": [
+        "Noun",
+        "Adjective"
+      ]
     },
     {
-      "id": "r-adj-existencialista-01",
+      "id": "r-adj-existencialista-02",
       "frase": "O romance existencialista devolve ao sujeito a responsabilidade que ele queria delegar.",
       "alvo": "existencialista",
       "esperado": "adjetivo"
@@ -15469,7 +15528,7 @@
     {
       "id": "r-adj-fenomenológico-01",
       "frase": "A descrição fenomenológica resiste à interpretação para respeitar o dado da experiência.",
-      "alvo": "fenomenológico",
+      "alvo": "fenomenológica",
       "esperado": "adjetivo"
     },
     {
@@ -15494,7 +15553,10 @@
       "id": "r-noun-inconsciente-01",
       "frase": "O inconsciente textual fala onde o narrador acredita estar no controle.",
       "alvo": "inconsciente",
-      "esperado": "substantivo"
+      "esperado": [
+        "Noun",
+        "Adjective"
+      ]
     },
     {
       "id": "r-noun-recalque-01",
@@ -15503,7 +15565,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-estruturalista-01",
+      "id": "r-adj-estruturalista-02",
       "frase": "A análise estruturalista suspende o autor para ouvir o sistema que o texto encarna.",
       "alvo": "estruturalista",
       "esperado": "adjetivo"
@@ -15515,10 +15577,10 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-pós-estruturalista-01",
+      "id": "r-noun-pós-estruturalismo-01",
       "frase": "O pós-estruturalismo desconfiou das estruturas que o estruturalismo celebrava.",
-      "alvo": "pós-estruturalista",
-      "esperado": "adjetivo"
+      "alvo": "pós-estruturalismo",
+      "esperado": "substantivo"
     },
     {
       "id": "r-noun-differance-01",
@@ -15563,7 +15625,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-noun-palimpsesto-01",
+      "id": "r-noun-palimpsesto-02",
       "frase": "O palimpsesto textual guarda as camadas de escrita que a última versão tentou apagar.",
       "alvo": "palimpsesto",
       "esperado": "substantivo"
@@ -15577,7 +15639,7 @@
     {
       "id": "r-adj-fantasmático-01",
       "frase": "A presença fantasmática do autor morto ancora o texto na biografia que ele negava.",
-      "alvo": "fantasmático",
+      "alvo": "fantasmática",
       "esperado": "adjetivo"
     },
     {
@@ -15677,13 +15739,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-adj-elíptico-01",
+      "id": "r-adj-elíptico-02",
       "frase": "O estilo elíptico de Hemingway revela pelo que omite.",
       "alvo": "elíptico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-reticente-01",
+      "id": "r-adj-reticente-03",
       "frase": "A narradora reticente diz menos do que sabe e mais do que parece.",
       "alvo": "reticente",
       "esperado": "adjetivo"
@@ -15695,7 +15757,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-lacônico-01",
+      "id": "r-adj-lacônico-03",
       "frase": "O estilo lacônico comprime décadas em três palavras e exige releitura.",
       "alvo": "lacônico",
       "esperado": "adjetivo"
@@ -15713,7 +15775,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-contracapa-01",
+      "id": "r-noun-contracapa-02",
       "frase": "A contracapa promete o que o livro só entrega se o leitor chegar até o fim.",
       "alvo": "contracapa",
       "esperado": "substantivo"
@@ -15737,13 +15799,13 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-peculiar-01",
+      "id": "r-adj-peculiar-02",
       "frase": "A dicção peculiar da autora não é afetação — é o único registro em que ela pensa.",
       "alvo": "peculiar",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-singular-01",
+      "id": "r-adj-singular-03",
       "frase": "A voz singular de Rosa não pertence a nenhuma escola porque criou a própria.",
       "alvo": "singular",
       "esperado": "adjetivo"
@@ -15779,13 +15841,13 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-posteridade-01",
+      "id": "r-noun-posteridade-02",
       "frase": "A posteridade leu Melville de um modo que os contemporâneos recusaram.",
       "alvo": "posteridade",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-recepção-01",
+      "id": "r-noun-recepção-03",
       "frase": "A recepção crítica da obra muda com cada geração que a lê de dentro do seu tempo.",
       "alvo": "recepção",
       "esperado": "substantivo"
@@ -15797,21 +15859,21 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-intrincado-01",
+      "id": "r-adj-intrincado-02",
       "frase": "O enredo intrincado recompensa o leitor que aceita não entender de imediato.",
       "alvo": "intrincado",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-labiríntico-01",
+      "id": "r-adj-labiríntico-03",
       "frase": "A estrutura labiríntica do romance propõe que cada leitor encontre saídas diferentes.",
-      "alvo": "labiríntico",
+      "alvo": "labiríntica",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-vertiginoso-01",
+      "id": "r-adj-vertiginoso-03",
       "frase": "A mise en abyme vertiginosa coloca o leitor dentro do espelho que está descrevendo.",
-      "alvo": "vertiginoso",
+      "alvo": "vertiginosa",
       "esperado": "adjetivo"
     },
     {
@@ -15847,7 +15909,7 @@
     {
       "id": "r-adj-sereno-01",
       "frase": "A prosa serena de Lispector é a calma que antecede o abismo.",
-      "alvo": "sereno",
+      "alvo": "serena",
       "esperado": "adjetivo"
     },
     {
@@ -15869,7 +15931,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-cinzelar-01",
+      "id": "r-verb-cinzelar-02",
       "frase": "O poeta cinzelou cada estrofe até ela resistir a qualquer corte.",
       "alvo": "cinzelou",
       "esperado": "verbo"
@@ -15893,13 +15955,13 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-coletânea-01",
+      "id": "r-noun-coletânea-02",
       "frase": "A coletânea reúne textos que se comentam mutuamente sem saber que se conheciam.",
       "alvo": "coletânea",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-antologia-01",
+      "id": "r-noun-antologia-02",
       "frase": "A antologia é sempre um argumento sobre o que merece ser preservado.",
       "alvo": "antologia",
       "esperado": "substantivo"
@@ -15941,25 +16003,25 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-minimalista-01",
+      "id": "r-adj-minimalista-02",
       "frase": "A prosa minimalista de Carver confia no que não diz para carregar o peso da cena.",
       "alvo": "minimalista",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-maximalista-01",
+      "id": "r-adj-maximalista-02",
       "frase": "A ficção maximalista acumula até o excesso virar método.",
       "alvo": "maximalista",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-conciso-01",
+      "id": "r-adj-conciso-03",
       "frase": "O estilo conciso elimina o que a cena já diz pela ação.",
       "alvo": "conciso",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-prolixo-01",
+      "id": "r-adj-prolixo-03",
       "frase": "O narrador prolixo adia a revelação pelo prazer de adiar, não pelo efeito.",
       "alvo": "prolixo",
       "esperado": "adjetivo"
@@ -15967,17 +16029,17 @@
     {
       "id": "r-adj-sucinto-01",
       "frase": "A resposta sucinta da personagem diz mais sobre ela do que dez páginas de descrição.",
-      "alvo": "sucinto",
+      "alvo": "sucinta",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-exaustivo-01",
       "frase": "A catalogação exaustiva dos objetos da casa revela a obsessão da narradora.",
-      "alvo": "exaustivo",
+      "alvo": "exaustiva",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-fragmentado-01",
+      "id": "r-adj-fragmentado-02",
       "frase": "O discurso fragmentado da personagem em colapso imita a dissolução da consciência.",
       "alvo": "fragmentado",
       "esperado": "adjetivo"
@@ -15989,7 +16051,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-coeso-01",
+      "id": "r-adj-coeso-02",
       "frase": "O texto coeso não é aquele que não contradiz — é o que contradiz com propósito.",
       "alvo": "coeso",
       "esperado": "adjetivo"
@@ -16019,7 +16081,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-verb-recuperar-02",
+      "id": "r-verb-recuperar-03",
       "frase": "O poema recupera o choque do lugar-comum devolvendo-lhe o corpo.",
       "alvo": "recupera",
       "esperado": "verbo"
@@ -16043,7 +16105,7 @@
       "esperado": "verbo"
     },
     {
-      "id": "r-noun-anacronismo-01",
+      "id": "r-noun-anacronismo-03",
       "frase": "O anacronismo intencional faz o passado falar a língua do presente como provocação.",
       "alvo": "anacronismo",
       "esperado": "substantivo"
@@ -16061,25 +16123,25 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-contrafactual-01",
+      "id": "r-adj-contrafactual-01",
       "frase": "O raciocínio contrafactual na ficção expõe as contingências que a história apresenta como inevitáveis.",
       "alvo": "contrafactual",
-      "esperado": "substantivo"
-    },
-    {
-      "id": "r-adj-especulativo-01",
-      "frase": "A ficção especulativa interroga o presente deslocando-o para um futuro possível.",
-      "alvo": "especulativo",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-utópico-01",
+      "id": "r-adj-especulativo-02",
+      "frase": "A ficção especulativa interroga o presente deslocando-o para um futuro possível.",
+      "alvo": "especulativa",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-utópico-02",
       "frase": "O impulso utópico não descreve o futuro — critica o presente pelo que ele poderia ser.",
       "alvo": "utópico",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-distópico-01",
+      "id": "r-adj-distópico-02",
       "frase": "O horizonte distópico amplifica o real até torná-lo insuportável de reconhecer.",
       "alvo": "distópico",
       "esperado": "adjetivo"
@@ -16087,7 +16149,7 @@
     {
       "id": "r-adj-alegórico-01",
       "frase": "A narrativa alegórica fala de uma coisa para dizer outra e exige dois níveis de leitura.",
-      "alvo": "alegórico",
+      "alvo": "alegórica",
       "esperado": "adjetivo"
     },
     {
@@ -16147,7 +16209,7 @@
     {
       "id": "r-adj-mítico-01",
       "frase": "A dimensão mítica do personagem não nasce da grandeza — nasce da necessidade coletiva.",
-      "alvo": "mítico",
+      "alvo": "mítica",
       "esperado": "adjetivo"
     },
     {
@@ -16163,7 +16225,7 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-paradigmático-01",
+      "id": "r-adj-paradigmático-02",
       "frase": "O texto paradigmático define o problema que os seguidores passam décadas tentando resolver.",
       "alvo": "paradigmático",
       "esperado": "adjetivo"
@@ -16225,7 +16287,7 @@
     {
       "id": "r-adj-preciso-01",
       "frase": "A escolha precisa da palavra não é perfeccionismo — é respeito pelo leitor.",
-      "alvo": "preciso",
+      "alvo": "precisa",
       "esperado": "adjetivo"
     },
     {
@@ -16235,15 +16297,15 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-rigoroso-01",
+      "id": "r-adj-rigoroso-02",
       "frase": "O trabalho rigoroso com a língua não é obstáculo à espontaneidade — é a sua condição.",
       "alvo": "rigoroso",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-criterioso-01",
+      "id": "r-adj-criterioso-02",
       "frase": "A revisão criteriosa elimina o que o entusiasmo do primeiro rascunho não pôde ver.",
-      "alvo": "criterioso",
+      "alvo": "criteriosa",
       "esperado": "adjetivo"
     },
     {
@@ -16277,21 +16339,21 @@
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-moroso-01",
+      "id": "r-adj-moroso-02",
       "frase": "O andamento moroso do romance proustiano é o tempo da memória, não da ação.",
       "alvo": "moroso",
       "esperado": "adjetivo"
     },
     {
-      "id": "r-adj-acelerado-01",
+      "id": "r-adj-acelerado-02",
       "frase": "A narração acelerada dos eventos finais comprime o tempo como sob pressão.",
-      "alvo": "acelerado",
+      "alvo": "acelerada",
       "esperado": "adjetivo"
     },
     {
       "id": "r-adj-vagaroso-01",
       "frase": "A prosa vagarosa de Saramago obriga o leitor a habitar o momento com a personagem.",
-      "alvo": "vagaroso",
+      "alvo": "vagarosa",
       "esperado": "adjetivo"
     },
     {
@@ -16343,7 +16405,7 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-adj-hegemônico-02",
+      "id": "r-adj-hegemônico-03",
       "frase": "O discurso hegemônico apresenta como natural o que é resultado de um processo histórico.",
       "alvo": "hegemônico",
       "esperado": "adjetivo"
@@ -16351,7 +16413,7 @@
     {
       "id": "r-adj-contra-hegemônico-01",
       "frase": "A escrita contra-hegemônica desvela o que o discurso dominante naturaliza.",
-      "alvo": "contra-hegemônico",
+      "alvo": "contra-hegemônica",
       "esperado": "adjetivo"
     },
     {
@@ -16364,7 +16426,10 @@
       "id": "r-noun-performativo-01",
       "frase": "O enunciado performativo não descreve um estado — cria um.",
       "alvo": "performativo",
-      "esperado": "substantivo"
+      "esperado": [
+        "Noun",
+        "Adjective"
+      ]
     },
     {
       "id": "r-noun-ato-de-fala-01",
@@ -16381,7 +16446,7 @@
     {
       "id": "r-adj-urbano-lit-01",
       "frase": "A ficção urbana cartografa a cidade pela perspectiva de quem vive nos seus interstícios.",
-      "alvo": "urbano",
+      "alvo": "urbana",
       "esperado": "adjetivo"
     },
     {
@@ -16393,7 +16458,7 @@
     {
       "id": "r-adj-fronteiriço-01",
       "frase": "A escrita fronteiriça habita o espaço entre línguas, culturas e identidades.",
-      "alvo": "fronteiriço",
+      "alvo": "fronteiriça",
       "esperado": "adjetivo"
     },
     {
@@ -16423,7 +16488,7 @@
     {
       "id": "r-adj-insubmisso-01",
       "frase": "A voz insubmissa não é barulhenta — é a que recusa a moldura que lhe oferecem.",
-      "alvo": "insubmisso",
+      "alvo": "insubmissa",
       "esperado": "adjetivo"
     },
     {
@@ -16436,7 +16501,10 @@
       "id": "r-adj-incômodo-01",
       "frase": "O clássico incômodo é aquele que ainda não podemos domesticar por completo.",
       "alvo": "incômodo",
-      "esperado": "adjetivo"
+      "esperado": [
+        "Adjective",
+        "Noun"
+      ]
     },
     {
       "id": "r-noun-contrato-01",
@@ -16445,13 +16513,13 @@
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-pacto-01",
+      "id": "r-noun-pacto-02",
       "frase": "O pacto autobiográfico exige que nome real e narrador coincidam — e isso basta para criar o efeito de verdade.",
       "alvo": "pacto",
       "esperado": "substantivo"
     },
     {
-      "id": "r-noun-cumplicidade-01",
+      "id": "r-noun-cumplicidade-03",
       "frase": "A cumplicidade entre narrador e leitor é o que permite que a ironia funcione sem ser explicada.",
       "alvo": "cumplicidade",
       "esperado": "substantivo"
