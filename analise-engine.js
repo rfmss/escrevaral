@@ -1349,7 +1349,7 @@
     [/\b(?:pode-se|podemos) (?:notar|observar|perceber|constatar) que\b/gi,
      "«pode-se notar que»",
      "Hedge acadêmico. Se é notável, afirme diretamente; se depende de interpretação, indique o critério."],
-    [/\bé possível (?:afirmar|constatar|inferir|concluir|notar) que\b/gi,
+    [/(?:^|\s)é possível (?:afirmar|constatar|inferir|concluir|notar) que\b/gi,
      "«é possível afirmar que»",
      "Atenuador fraco. Afirme diretamente — se a afirmação é incerta, apresente a dúvida como argumento."],
     [/\bpretendo (?:demonstrar|mostrar|abordar|analisar|tratar|discutir)\b/gi,
@@ -1358,7 +1358,7 @@
     [/\bcabe (?:ressaltar|destacar|mencionar|lembrar|observar)\b/gi,
      "«cabe ressaltar»",
      "Delegação impessoal do destaque. Ressalte diretamente, sem pedir permissão retórica."],
-    [/\bé válido (?:ressaltar|destacar|mencionar|dizer|lembrar)\b/gi,
+    [/(?:^|\s)é válido (?:ressaltar|destacar|mencionar|dizer|lembrar)\b/gi,
      "«é válido ressaltar»",
      "Variante da delegação retórica. Se é válido dizer, diga — sem anunciar que é válido."],
     [/\bnão (?:podemos|devemos) deixar de (?:mencionar|citar|notar|destacar|ressaltar)\b/gi,
@@ -1371,13 +1371,13 @@
     [/\bno que (?:diz respeito|tange|concerne) (?:a|à|ao|aos|às)\b/gi,
      "«no que diz respeito a»",
      "Perífrase de introdução temática. Substitua por «sobre», «quanto a» ou restructure com o tema como sujeito."],
-    [/\bé notório que\b/gi,
+    [/(?:^|\s)é notório que\b/gi,
      "«é notório que»",
      "Argumento de evidência difusa. Se é notório, cite a fonte ou afirme com a evidência que torna a afirmação sólida."],
-    [/\bé consenso que\b/gi,
+    [/(?:^|\s)é consenso que\b/gi,
      "«é consenso que»",
      "Pressupõe acordo onde pode haver disputa. Especifique quem concorda e em que contexto."],
-    [/\btodo(?:s)? (?:os|as) estudiosos?\b/gi,
+    [/\b(?:todo(?:s)? (?:os|as) estudiosos?|(?:vários|várias|muitos|muitas|diversos|diversas) (?:estudios|especialist|autor|crític|pesquisador)\w* (?:concordam|afirmam|apontam|defendem|reconhecem|consideram|garantem))\b/gi,
      "«todos os estudiosos»",
      "Generalização que oculta o dissenso. Cite os estudiosos específicos ou indique a corrente de pensamento."],
     [/\ba grande maioria\b/gi,
@@ -1396,7 +1396,7 @@
     [/\bfica evidente (?:que|portanto)\b/gi,
      "«fica evidente que»",
      "Afirmação de evidência em vez da evidência. Se é evidente, mostre por quê."],
-    [/\bé de extrema importância\b/gi,
+    [/(?:^|\s)é de extrema importância\b/gi,
      "«é de extrema importância»",
      "Superlativo de intensidade sem sustentação. Demonstre a importância pelo efeito concreto."],
     [/\bna verdade\b/gi,
@@ -1427,7 +1427,7 @@
     [/\bcomo (?:dito|mencionado|exposto|afirmado|visto) (?:anteriormente|acima|antes)\b/gi,
      "«como dito anteriormente»",
      "Ponteiro interno que substitui a ideia pelo seu endereço. Retome a ideia, não o parágrafo."],
-    [/\bé (?:importante|fundamental|crucial|vital|imprescindível) (?:ressaltar|destacar|notar|lembrar|mencionar) que\b/gi,
+    [/(?:^|\s)é (?:importante|fundamental|crucial|vital|imprescindível) (?:ressaltar|destacar|notar|lembrar|mencionar) que\b/gi,
      "«é importante ressaltar que»",
      "Delegação impessoal combinada com superlativo. Ressalte diretamente sem pedir autorização retórica."],
     // batch 22 — retórica de impacto vago + intensificadores de alcance
@@ -1449,7 +1449,7 @@
     [/\bde (?:grande|enorme|imenso|vasto) (?:importância|relevância|valor|impacto|significado)\b/gi,
      "«de grande importância»",
      "Superlativo de relevância sem sustentação. Demonstre a importância pelo efeito ou pela consequência concreta."],
-    [/\bé (?:possível|plausível|razoável|lícito) (?:afirmar|dizer|concluir|inferir|notar|observar) que\b/gi,
+    [/(?:^|\s)é (?:possível|plausível|razoável|lícito) (?:afirmar|dizer|concluir|inferir|notar|observar) que\b/gi,
      "«é possível afirmar que»",
      "Hedging desnecessário que enfraquece a afirmação. Afirme diretamente ou indique a evidência que limita a certeza."],
     // batch 23 — apelo à autoridade + universalizações indevidas
@@ -1465,7 +1465,7 @@
     [/\bninguém (?:pode|consegue|é capaz de|há de) (?:negar|contestar|questionar|duvidar)\b/gi,
      "«ninguém pode negar»",
      "Argumento de unanimidade forçada. Se a afirmação precisa proibir a dúvida, a dúvida é legítima."],
-    [/\bé (?:sabido|reconhecido|aceito|consagrado) (?:por todos|universalmente|amplamente) que\b/gi,
+    [/(?:^|\s)é (?:sabido|reconhecido|aceito|consagrado) (?:por todos|universalmente|amplamente) que\b/gi,
      "«é sabido por todos que»",
      "Consenso fictício. O que «todos sabem» frequentemente é o que ninguém verificou."],
     [/\bhoje (?:em dia|em pleno século|no século XXI)\b/gi,
@@ -1481,7 +1481,7 @@
     [/\b(?:busca|visa|objetiva|pretende|procura) (?:demonstrar|mostrar|evidenciar|comprovar|analisar)\b/gi,
      "«busca demonstrar»",
      "Declaração de intenção no lugar da intenção cumprida. Execute a análise em vez de prometer executá-la."],
-    [/\bé (?:inegável|inquestionável|irrefutável|indiscutível) que\b/gi,
+    [/(?:^|\s)é (?:inegável|inquestionável|irrefutável|indiscutível) que\b/gi,
      "«é inegável que»",
      "Interdição da dúvida antes da afirmação. Se é inegável, a força deve vir do argumento, não da proibição de questionar."],
     [/\bnem (?:é|seria) preciso (?:dizer|mencionar|lembrar|ressaltar) que\b/gi,
@@ -1490,7 +1490,7 @@
     [/\b(?:vale|cabe|importa|é válido) (?:salientar|destacar|notar|mencionar|observar) que\b/gi,
      "«vale salientar que»",
      "Pedido de permissão para afirmar. Afirme diretamente — o verbo de ação é suficiente."],
-    [/\bpor (?:sua|outro lado|sua vez|outro caminho)\b/gi,
+    [/(?:^|[,;:—]\s*)por (?:sua vez|outro lado|outro caminho)\b\s*,/gim,
      "«por sua vez»",
      "Conector de progressão vago. Especifique a relação — contraste, adição, consequência — em vez de usar um ponteiro neutro."],
     [/\b(?:desta|dessa|nessa|nesta) forma\b/gi,
@@ -1503,7 +1503,7 @@
     [/\b(?:o|um|este|esse) (?:estudo|trabalho|texto|ensaio|artigo) (?:busca|visa|objetiva|pretende|procura|demonstra|evidencia)\b/gi,
      "«o estudo busca»",
      "O texto não busca — você busca. Substitua o sujeito abstrato pelo agente real ou reformule no imperativo."],
-    [/\b(?:foi|foram|é|são|será|serão|seria|seriam) (?:\w+ )?(?:realizado|realizada|realizados|realizadas|efetuado|efetuada|efetuados|efetuadas|executado|executada|executados|executadas)\b/gi,
+    [/(?:\b(?:foi|foram|são|será|serão|seria|seriam)|(?:^|\s)é)(?: \w+)? (?:realizad|efetuad|executad)[oa]s?\b(?! como)/gim,
      "«foi realizado»",
      "Voz passiva que esconde quem agiu. Nomeie o agente ou use o ativo: «ela realizou», não «foi realizado»."],
     [/\b(?:leva|levam|levou|levaram|leva-nos|leva a|nos leva) a (?:concluir|pensar|crer|acreditar|afirmar|inferir)\b/gi,
@@ -1518,6 +1518,28 @@
     [/\b(?:a partir dos dados|com base nos dados|de acordo com os dados) (?:apresentados|expostos|levantados|coletados)\b/gi,
      "«a partir dos dados apresentados»",
      "Os dados não se apresentam — você os apresentou. Afirme o que os dados mostram, não a sua relação com eles."],
+    // batch 26 — voz passiva de fuga adicional + falsa modéstia + tautologia velada
+    [/\b(?:foi|foram) (?:observad|verificad|constatad|identificad|notad|percebid)[oa]s? que\b/gi,
+     "«foi observado que»",
+     "Passiva que esconde o observador. Quem observou? Assuma a percepção: «notei que», «a narradora percebe que»."],
+    [/\b(?:foi|foram) feit[oa]s? (?:uma |um |a |o )?(?:análise|tentativa|escolha|leitura|revisão|comparação|pesquisa|estudo|levantamento)\b/gi,
+     "«foi feita uma análise»",
+     "Passiva com verbo vazio «fazer». Nomeie o agente e o verbo forte: «analisei», «comparamos», «revisei»."],
+    [/\b(?:optou|decidiu|buscou|procurou|preferiu|tentou)-se\b/gi,
+     "«optou-se por»",
+     "Passiva sintética que apaga quem decide. Restitua o sujeito: «optei», «a personagem decidiu»."],
+    [/\b(?:na|em) minha humilde opinião\b/gi,
+     "«na minha humilde opinião»",
+     "Falsa modéstia — a humildade anunciada chama atenção para si. Afirme a opinião sem preâmbulo."],
+    [/\bnão sou (?:nenhum |nenhuma )?(?:especialista|expert|entendido|entendida|autoridade|crítico|crítica)(?: no assunto| na área| no tema)?, mas\b/gi,
+     "«não sou especialista, mas»",
+     "Falsa modéstia que pede licença para opinar. Corte a desqualificação e sustente o argumento."],
+    [/\bcomo o próprio nome (?:já )?(?:diz|indica|sugere|revela)\b/gi,
+     "«como o próprio nome diz»",
+     "Tautologia velada: se o nome já diz, a explicação sobra. Corte e siga para o que o nome não diz."],
+    [/\b(?:a razão|o motivo) (?:disso |disto )?(?:é|era|foi) porque\b/gi,
+     "«a razão é porque»",
+     "Tautologia: «razão» e «porque» dizem o mesmo. Use «a razão é que» ou apenas «porque»."],
   ];
 
   function analisarConfusoes(texto) {
@@ -1554,7 +1576,7 @@
     const densidadeAdv = totalPalavras > 0 ? adverbios.length / totalPalavras : 0;
 
     // 2. Voz passiva aproximada
-    const passiva = [...texto.matchAll(/\b(foi|foram|é|são|era|eram|será|serão|seria|seriam|fosse|fossem|tenha sido|tenham sido|tem sido|têm sido|está sendo|estava sendo|estão sendo)\s+\w+(?:ado|ada|ados|adas|ido|ida|idos|idas)\b/gi)];
+    const passiva = [...texto.matchAll(/(?:^|\s)(foi|foram|é|são|era|eram|será|serão|seria|seriam|fosse|fossem|tenha sido|tenham sido|tem sido|têm sido|está sendo|estava sendo|estão sendo)\s+\w+(?:ado|ada|ados|adas|ido|ida|idos|idas)\b/gim)];
     const propPassiva = frases.length > 0 ? passiva.length / frases.length : 0;
 
     // 3. Redundância / pleonasmos
@@ -1952,6 +1974,7 @@
 
   global.VeredaAnalise = {
     analisar,
+    analisarConfusoes,
     interpretarResultado,
     tokenizarFrases,
     tokenizarPalavras,
