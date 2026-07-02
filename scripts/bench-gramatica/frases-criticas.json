@@ -1,5 +1,5 @@
 {
-  "versao": "2026-07-02-v1067",
+  "versao": "2026-07-02-v1071",
   "objetivo": "Corpus pequeno para testar decisoes gramaticais ambiguas antes de ampliar regras do Escrevaral.",
   "regra_geral": "Cada caso precisa preservar forma original, contexto e decisao esperada; normalizacao sem acento serve para busca, nao para decisao gramatical final.",
   "convencoes": {
@@ -16534,6 +16534,330 @@
       "id": "r-noun-encantamento-01",
       "frase": "O encantamento literário ocorre quando o texto nos convence de que aquele mundo sempre existiu.",
       "alvo": "encantamento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "conf-foi-observado-01",
+      "frase": "Foi observado que os leitores preferem capítulos curtos nas leituras noturnas.",
+      "alvo": "Foi observado",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-foi-feita-analise-01",
+      "frase": "Foi feita uma análise dos três primeiros romances da autora mineira.",
+      "alvo": "feita uma análise",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-optou-se-01",
+      "frase": "Optou-se por narrar toda a história em primeira pessoa.",
+      "alvo": "Optou-se por",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-humilde-opiniao-01",
+      "frase": "Na minha humilde opinião, o conto é superior ao romance nesse aspecto.",
+      "alvo": "humilde opinião",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-nao-sou-especialista-01",
+      "frase": "Não sou especialista, mas acho que o final não funciona.",
+      "alvo": "especialista, mas",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-proprio-nome-diz-01",
+      "frase": "Como o próprio nome diz, o microconto precisa caber em poucas linhas.",
+      "alvo": "próprio nome diz",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-razao-e-porque-01",
+      "frase": "A razão é porque o narrador mente desde a primeira página.",
+      "alvo": "razão é porque",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-foi-realizada-como-guard-01",
+      "frase": "Ela foi realizada como escritora depois do terceiro livro publicado.",
+      "alvo": "foi realizada",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-por-sua-vez-guard-01",
+      "frase": "Lutou por sua vez de falar na roda de leitura da oficina.",
+      "alvo": "por sua vez",
+      "esperado": "nenhum"
+    },
+    {
+      "id": "conf-e-possivel-afirmar-02",
+      "frase": "É possível afirmar que o romance brasileiro mudou depois de 1950.",
+      "alvo": "possível afirmar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-valido-ressaltar-02",
+      "frase": "É válido ressaltar que a autora reescreveu o final três vezes.",
+      "alvo": "válido ressaltar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-notorio-02",
+      "frase": "É notório que o mercado editorial mudou na última década.",
+      "alvo": "notório que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-consenso-02",
+      "frase": "É consenso que a crônica é um gênero de raiz brasileira.",
+      "alvo": "consenso que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-extrema-importancia-02",
+      "frase": "É de extrema importância revisar o manuscrito antes de publicar.",
+      "alvo": "extrema importância",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-importante-ressaltar-02",
+      "frase": "É importante ressaltar que o narrador do segundo capítulo é outro.",
+      "alvo": "importante ressaltar",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-sabido-por-todos-02",
+      "frase": "É sabido por todos que ela escrevia sempre de madrugada.",
+      "alvo": "sabido por todos",
+      "esperado": "confusao"
+    },
+    {
+      "id": "conf-e-inegavel-02",
+      "frase": "É inegável que o livro envelheceu bem apesar das modas.",
+      "alvo": "inegável que",
+      "esperado": "confusao"
+    },
+    {
+      "id": "r-adj-minimalista-03",
+      "frase": "A prosa minimalista corta tudo o que não sangra na página.",
+      "alvo": "minimalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-maximalista-03",
+      "frase": "O romance maximalista acumula vozes, notas e digressões sem pedir desculpa.",
+      "alvo": "maximalista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-revisionista-01",
+      "frase": "A leitura revisionista devolve às autoras o lugar que a crítica negou.",
+      "alvo": "revisionista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-retrofuturista-02",
+      "frase": "O cenário retrofuturista mistura máquinas a vapor e sonhos de outro século.",
+      "alvo": "retrofuturista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-feminista-01",
+      "frase": "A crítica feminista releu o cânone com outras perguntas.",
+      "alvo": "feminista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-desconstrucionista-02",
+      "frase": "O gesto desconstrucionista desmonta a oposição entre fala e escrita.",
+      "alvo": "desconstrucionista",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-laudatório-02",
+      "frase": "O prefácio laudatório prometia mais do que o livro entregava.",
+      "alvo": "laudatório",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-declamatório-02",
+      "frase": "O tom declamatório afastava o poema da conversa que ele queria ser.",
+      "alvo": "declamatório",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-irrisório-02",
+      "frase": "O adiantamento irrisório não pagava nem o café dos meses de escrita.",
+      "alvo": "irrisório",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fugidia-01",
+      "frase": "A memória fugidia escapava a cada tentativa de registro.",
+      "alvo": "fugidia",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-popular-02",
+      "frase": "O folheto popular circulava de mão em mão nas feiras do sertão.",
+      "alvo": "popular",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-vernacular-03",
+      "frase": "A prosa vernacular recusava o verniz das traduções apressadas.",
+      "alvo": "vernacular",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-liminar-02",
+      "frase": "O espaço liminar entre vigília e sono rege os contos do volume.",
+      "alvo": "liminar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-exemplar-02",
+      "frase": "A novela exemplar ensinava sem nunca apontar o dedo.",
+      "alvo": "exemplar",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-queer-01",
+      "frase": "A leitura queer ilumina o que o texto diz sem dizer.",
+      "alvo": "queer",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-drummoniano-02",
+      "frase": "O verso drummoniano carrega a pedra no meio de todos os caminhos.",
+      "alvo": "drummoniano",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-inúmeras-02",
+      "frase": "As inúmeras versões do conto dormiam numa gaveta sem fundo.",
+      "alvo": "inúmeras",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-fragmentária-04",
+      "frase": "A estrutura fragmentária espelha a memória interrompida da narradora.",
+      "alvo": "fragmentária",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-involuntária-02",
+      "frase": "A memória involuntária irrompe no meio da cena mais banal.",
+      "alvo": "involuntária",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-adj-emancipatória-02",
+      "frase": "A escrita emancipatória devolve a palavra a quem foi calado.",
+      "alvo": "emancipatória",
+      "esperado": "adjetivo"
+    },
+    {
+      "id": "r-verb-pressupõe-02",
+      "frase": "A leitura pressupõe um pacto silencioso entre autora e leitor.",
+      "alvo": "pressupõe",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-constrói-02",
+      "frase": "A narradora constrói o mundo tijolo a tijolo, sem pressa.",
+      "alvo": "constrói",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-noun-bildungsroman-02",
+      "frase": "O bildungsroman acompanha a formação da protagonista até a partida.",
+      "alvo": "bildungsroman",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-flâneuse-01",
+      "frase": "A flâneuse atravessa a cidade colhendo cenas para o caderno.",
+      "alvo": "flâneuse",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-pron-o-que-02",
+      "frase": "Ela entendeu o que o silêncio do pai dizia.",
+      "alvo": "que",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-tudo-que-01",
+      "frase": "Tudo que ela escreveu naquele inverno virou cinza.",
+      "alvo": "que",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-qual-04",
+      "frase": "Não sabia qual dos finais escolher para o conto.",
+      "alvo": "qual",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-qual-05",
+      "frase": "A cidade da qual ela fala não existe nos mapas.",
+      "alvo": "qual",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-pron-quantos-02",
+      "frase": "Quantos rascunhos foram precisos até a frase parecer simples?",
+      "alvo": "Quantos",
+      "esperado": "pronome"
+    },
+    {
+      "id": "r-adv-diante-02",
+      "frase": "Diante do manuscrito recusado, ela hesitou pela primeira vez.",
+      "alvo": "Diante",
+      "esperado": "adverbio"
+    },
+    {
+      "id": "r-prep-malgrado-02",
+      "frase": "Malgrado o cansaço, terminou o capítulo antes do amanhecer.",
+      "alvo": "Malgrado",
+      "esperado": "preposicao"
+    },
+    {
+      "id": "r-verb-reescrever-01",
+      "frase": "Reescrever é a única forma honesta de terminar um livro.",
+      "alvo": "Reescrever",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-verb-publicar-se-01",
+      "frase": "Publicar-se exige uma coragem que ninguém ensina nas oficinas.",
+      "alvo": "Publicar-se",
+      "esperado": "verbo"
+    },
+    {
+      "id": "r-adv-estranhamente-01",
+      "frase": "Estranhamente, o silêncio dizia mais que o diálogo inteiro.",
+      "alvo": "Estranhamente",
+      "esperado": "adverbio"
+    },
+    {
+      "id": "r-adv-curiosamente-01",
+      "frase": "Curiosamente, ninguém notou a troca de narrador no terceiro capítulo.",
+      "alvo": "Curiosamente",
+      "esperado": "adverbio"
+    },
+    {
+      "id": "r-noun-pertencimento-02",
+      "frase": "O pertencimento nunca foi um tema confortável para ela.",
+      "alvo": "pertencimento",
+      "esperado": "substantivo"
+    },
+    {
+      "id": "r-noun-estranhamento-03",
+      "frase": "O estranhamento é o primeiro efeito da boa literatura.",
+      "alvo": "estranhamento",
       "esperado": "substantivo"
     }
   ]
