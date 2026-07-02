@@ -452,6 +452,12 @@ function createTagMarkup(tags = []) {
 }
 
 function renderArchiveFilters() {
+  // Acervo pequeno dispensa filtros: só busca e lista até a coleção crescer
+  if (state.manuscripts.length < 3) {
+    state.archive.filter = "all";
+    archiveFilterBar.innerHTML = "";
+    return;
+  }
   const counts = getArchiveTypeCounts();
   const filters = [
     ["all", "Todos", "inventory_2"],
@@ -482,6 +488,11 @@ const ARCHIVE_STATUSES = ["Em escrita", "Revisão", "Pausado", "Concluído"];
 
 function renderArchiveStatusBar() {
   if (!archiveStatusBar) return;
+  if (state.manuscripts.length < 3) {
+    state.archive.statusFilter = "all";
+    archiveStatusBar.innerHTML = "";
+    return;
+  }
   const counts = ARCHIVE_STATUSES.reduce((acc, s) => {
     acc[s] = state.manuscripts.filter((m) => m.status === s).length;
     return acc;
