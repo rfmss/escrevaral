@@ -199,6 +199,7 @@
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
   const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
   const _PRON_PESSOAL = new Set(["eu","tu","ele","ela","nos","nós","vos","vós","eles","elas","voce","vocês","voces","a gente"]);
+  const _SUBST_INF_LIKE = new Set(["lugar","jantar","prazer","lazer","mulher","colher","mar","lar","luar","altar","pilar","acucar","talher","elixir","mister","carater"]);
   const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto","duro","dura","fundo","funda","forte","firme","limpo","limpa","fundo","funda","livre","leve","grave","suave"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
@@ -414,6 +415,12 @@
       // R13 — "que" relativo após demonstrativo neutro: "o que", "tudo que", "aquilo que"
       if (na === "que" && (prevNorm === "o" || prevNorm === "tudo" || prevNorm === "aquilo" || prevNorm === "isso" || prevNorm === "isto")) {
         _addUniqueTag(t.tags, "Pronoun");
+      }
+
+      // R14 — substantivos comuns com cara de infinitivo em posição 0 → leitura nominal:
+      // "Lugar de mulher…", "Jantar com ela…" (não são verbos; infinitivos reais mantêm Verb)
+      if (i === 0 && t.tags.includes("Verb") && t.tags.includes("Noun") && _SUBST_INF_LIKE.has(na)) {
+        t.tags = t.tags.filter(tt => tt !== "Verb");
       }
     }
     return tks;
