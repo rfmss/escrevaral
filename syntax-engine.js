@@ -69,6 +69,7 @@
     "próprio","própria","próprios","próprias",
     // pronomes relativos/interrogativos — Bechara §§ 220-224
     "quem","cujo","cuja","cujos","cujas",
+    "qual","quais","quanto","quanta","quantos","quantas",
   ]);
   const PRONOMES_DEM = new Set([
     "este","esta","estes","estas","esse","essa","esses","essas",
@@ -404,6 +405,16 @@
       if (t.tags.length === 0 && _PRON_PESSOAL.has(prevNorm)) {
         _addUniqueTag(t.tags, "Verb");
       }
+
+      // R12 — palavra de conteúdo ainda sem tag → substantivo (classe aberta padrão)
+      if (t.tags.length === 0 && /\p{L}/u.test(t.text)) {
+        t.tags.push("Noun");
+      }
+
+      // R13 — "que" relativo após demonstrativo neutro: "o que", "tudo que", "aquilo que"
+      if (na === "que" && (prevNorm === "o" || prevNorm === "tudo" || prevNorm === "aquilo" || prevNorm === "isso" || prevNorm === "isto")) {
+        _addUniqueTag(t.tags, "Pronoun");
+      }
     }
     return tks;
   }
@@ -476,8 +487,17 @@
           } else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(normNacc)) {
             tags.push("Verb");
           } else {
-            if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+            const _cliSet0 = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
+            const _clParts0 = norm.split("-");
+            if (_clParts0.length >= 2 && _clParts0.slice(1).every(p => _cliSet0.has(p))) {
+              tags.push("Verb");
+              if (/(?:ar|er|ir)$/.test(_clParts0[0])) tags.push("Noun");
+            }
+            else if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
             else if (norm.length > 4 && /(?:aram|eram|iram|ava|avam|ará|erá|irá|asse|esse|isse|ou|eu|iu|ei)$/.test(norm)) tags.push("Verb");
+            else if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
+            // Infinitivo-sujeito: "Publicar é expor-se" — verbo, mas mantém Noun pela substantivação
+            else if (/(?:ar|er|ir)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) { tags.push("Verb"); tags.push("Noun"); }
             else tags.push("Noun");
           }
         } else {
@@ -487,9 +507,10 @@
           if (/(?:avel|ivel)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ante|ente)$/.test(_na) && _na.length > 6) tags.push("Adjective");
           if (/(?:udo|uda|udos|udas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
-          if (/(?:ento|enta)$/.test(_na) && _na.length > 6) tags.push("Adjective");
+          // "-mento" é sufixo nominal (deslocamento, pertencimento) — não marcar adjetivo
+          if (/(?:ento|enta)$/.test(_na) && _na.length > 6 && !/ment[oa]$/.test(_na)) tags.push("Adjective");
           // "-ivo/-iva" são adjetivos (cognitivo/afetivo) mas "arquivo" é substantivo comum
-          const _SUBST_EXC_IVO = new Set(["arquivo","arquivos"]);
+          const _SUBST_EXC_IVO = new Set(["arquivo","arquivos","dispositivo","dispositivos"]);
           if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5 && !_SUBST_EXC_IVO.has(_na)) tags.push("Adjective");
           // P0.6: clitico hifenizado → base verbal + clitico
           const _cliSet = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
@@ -696,7 +717,7 @@
     "a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas",
     "para","por","pelo","pela","pelos","pelas",
     "com","sem","sobre","sob","entre","contra","ante","após","desde","até","perante","durante",
-    "através","atraves","apesar","mediante","conforme","segundo","perante","exceto","salvo","senão","senao",
+    "através","atraves","apesar","mediante","conforme","segundo","perante","exceto","salvo","senão","senao","malgrado",
     "acerca","acerca de","além de","aquém de",
   ]);
 
@@ -767,11 +788,11 @@
   }
 
   // ── Advérbios por tipo — Cunha&Cintra cap.14 + syntax-data ────────────────
-  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente"]);
-  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá","além","aquém","acima","abaixo","adiante","atrás","defronte","acolá"]);
+  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente","doravante"]);
+  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá","além","aquém","acima","abaixo","adiante","atrás","defronte","acolá","diante"]);
   const ADV_MODO    = new Set(["assim","bem","mal","melhor","pior","devagar","depressa","rapidamente","lentamente","facilmente","dificilmente","calmamente"]);
   const ADV_NEGACAO = new Set(["não","nem","jamais","nunca","tampouco"]);
-  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive"]);
+  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive","outrossim"]);
   const ADV_INTENS  = new Set(["muito","muita","pouco","pouca","bastante","mais","menos","tão","tanto","quão","quase","demais","apenas","somente","só"]);
   const ADV_DUVIDA  = new Set(["talvez","provavelmente","possivelmente","porventura","quiçá","eventualmente"]);
 
