@@ -487,6 +487,18 @@
 [data-theme="scriptorium"] .editor-paper .format-bar-wrap::after {
   background: linear-gradient(to left, #d4c5a9 20%, transparent);
 }
+/* No modo página o pergaminho da barra some — o esmaecimento funde para o fundo escuro */
+[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap:hover,
+[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap.is-scroll-active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--line);
+}
+[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap::before {
+  background: linear-gradient(to right, var(--paper) 20%, transparent);
+}
+[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap::after {
+  background: linear-gradient(to left, var(--paper) 20%, transparent);
+}
 
 /* Writing area em modo colorido */
 .writing-area.is-grammar-colored {

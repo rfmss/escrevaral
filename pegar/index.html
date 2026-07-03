@@ -32,11 +32,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:          #f5f2ea;
+      --bg:          #fdf8f2;
       --ink:         #2d2a26;
       --ink-2:       rgba(45,42,38,.6);
       --ink-3:       rgba(45,42,38,.35);
-      --accent:      #1f4fff;
+      --accent:      #2a4840;
       --card:        #fffdf9;
       --border:      rgba(45,42,38,.1);
       --font:        -apple-system, 'Segoe UI', system-ui, sans-serif;
@@ -74,11 +74,11 @@
     /* ── Botão de atalho ── */
     .btn-atalho {
       appearance: none; border: none; background: transparent;
-      color: var(--ink-3); font-family: inherit; font-size: 12px;
+      color: var(--ink-2); font-family: inherit; font-size: 12px;
       cursor: pointer; padding: 4px 0; text-decoration: underline;
-      text-underline-offset: 3px; text-decoration-color: var(--border);
+      text-underline-offset: 3px; text-decoration-color: rgba(45,42,38,.35);
     }
-    .btn-atalho:hover { color: var(--ink-2); }
+    .btn-atalho:hover { color: var(--ink); text-decoration-color: var(--accent); }
 
     /* ── Telas ── */
     .tela { display: none; flex-direction: column; align-items: center; padding: 20px 20px 32px; gap: 14px; }
@@ -218,7 +218,7 @@
       padding-bottom: 100%;
       transition: background .25s ease;
     }
-    .bloco.recebido { background: rgba(31,79,255,.55); }
+    .bloco.recebido { background: rgba(42,72,64,.55); }
 
     /* ── Tela: enviando (emite QR para o PC) ── */
     .enviando-wrap {
@@ -255,7 +255,7 @@
       padding-bottom: 100%;
       transition: background .3s ease;
     }
-    .enviando-bloco.exibido { background: rgba(31,79,255,.55); }
+    .enviando-bloco.exibido { background: rgba(42,72,64,.55); }
     .enviando-controles {
       display: flex;
       gap: 10px;
