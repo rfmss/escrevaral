@@ -1,5 +1,11 @@
 # Bios e apresentações — Escrevaral + Rafa Mass
-Atualizado: 2026-05-31
+Atualizado: 2026-07-03 — bios ganham menção ao app Android (escrevaral.com/app)
+
+## Ajuste pós-lançamento do app (aplicar quando o APK for anunciado)
+
+- Instagram/Threads: acrescentar linha `App Android no site.` (fica 146/150)
+- X: trocar `escrevaral.com` por `App Android → escrevaral.com` (fica 158/160)
+- TikTok: `Oficina literária grátis pra escritores 🇧🇷 App no site → escrevaral.com` (77/80)
 
 ---
 

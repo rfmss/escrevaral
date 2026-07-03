@@ -6,6 +6,134 @@ Iniciado em: 2026-05-24
 
 ---
 
+## Campanha de lançamento do aplicativo Android — 2026-07-03
+
+**Conceito:** *"A oficina coube no bolso."*
+**Página de destino:** https://escrevaral.com/app/ — botão de baixar + instalação em 3 passos + aviso honesto sobre fora da loja.
+**Fato técnico:** APK TWA de 1,2 MB, Android 5+, assinado com chave própria (guardada fora do repo em ~/escrevaral-app/). O app se atualiza sozinho a cada push no site — não há re-publicação.
+
+### Linha honesta sobre o aviso do Android (usar sempre que perguntarem)
+
+> O Android avisa que o app vem de fora da loja. É verdade — vem da nossa casa, escrevaral.com, direto para a sua.
+
+### Sequência de lançamento
+
+| Dia | Movimento |
+|---|---|
+| D-3 | Teaser: foto de mesa de escrita + "semana que vem ela cabe no bolso" |
+| D0 | Post de lançamento em todas as redes (copy abaixo) |
+| D+2 | Ângulo prova de autoria ("seu celular agora testemunha sua escrita") |
+| D+4 | Ângulo privacidade ("modo avião é o melhor amigo deste app") |
+| D+7 | Tour em vídeo (Reel/TikTok) escrevendo de verdade no celular |
+
+### Copy D0 por rede (dentro dos limites)
+
+**X / Twitter (240/280):**
+```
+O Escrevaral agora é app de celular.
+
+Direto do site, sem loja, sem cadastro. A oficina literária brasileira inteira no bolso: editor, análise gramatical, prova de autoria. Funciona sem internet. Gratuito, para sempre.
+
+→ escrevaral.com/app
+```
+
+**Bluesky (287/300):**
+```
+O Escrevaral agora é app de celular.
+
+Direto do site, sem loja, sem cadastro. A oficina literária brasileira inteira no bolso: editor, análise gramatical de verdade, prova de autoria. Funciona sem internet — modo avião é o melhor amigo dele.
+
+Gratuito, para sempre.
+
+→ escrevaral.com/app
+```
+
+**Threads (~430/500):**
+```
+A oficina coube no bolso.
+
+O Escrevaral agora é app de celular Android — baixa direto do site, sem loja, sem cadastro, sem conta.
+
+O que vai junto: editor completo, análise gramatical feita à mão para o português brasileiro, oficina de rima, guias de escrita e prova de autoria do seu processo.
+
+O que não vai: nuvem, IA escrevendo por você, anúncio, custo.
+
+Escreva no ônibus. Escreva na fila. O texto fica no seu aparelho — e em mais lugar nenhum.
+
+→ escrevaral.com/app
+```
+
+**Instagram (legenda ~900/2.200):**
+```
+A oficina coube no bolso. 📓
+
+O Escrevaral agora é app de celular. E do jeito Escrevaral de ser: baixa direto do site, sem loja, sem cadastro, sem conta, sem custo.
+
+Quem escreve sabe que as melhores frases chegam fora de hora — no ônibus, na fila do mercado, no intervalo do trabalho. Agora a mesa inteira vai junto:
+
+✍️ Editor que não interrompe
+📖 Análise gramatical feita à mão para o português brasileiro — calibrada na tradição de Bechara e Cunha & Cintra
+🎵 Oficina de rima para quem faz poesia
+🖋️ Prova de autoria: seu ritmo de escrita registrado como assinatura
+📚 Guias de escrita para cada forma
+
+E o que NÃO vai junto: nuvem, IA terminando sua frase, empresa lendo seu manuscrito.
+
+Funciona sem internet. Modo avião é o melhor amigo deste app.
+
+O Android vai avisar que o app vem de fora da loja. É verdade: vem da nossa casa direto para a sua.
+
+→ Link na bio: escrevaral.com/app
+
+#escritoresbrasileiros #escrita #literaturabrasileira #poesia #oficinaliteraria
+```
+
+**TikTok (legenda ~140):**
+```
+A oficina literária brasileira agora cabe no bolso 🇧🇷 App grátis, sem loja, sem cadastro, funciona sem internet → escrevaral.com/app
+```
+
+**LinkedIn (~800/3.000):**
+```
+O Escrevaral — oficina literária gratuita para escritores brasileiros — agora é aplicativo Android.
+
+A distribuição segue o princípio do produto: direto do site, sem loja, sem cadastro. O manuscrito nunca sai do aparelho da escritora — não por política de privacidade, mas por arquitetura: não existe servidor.
+
+O que o app carrega: editor completo, análise gramatical construída regra a regra para o português brasileiro (calibrada contra a tradição de Bechara e Cunha & Cintra, com corpus de teste público), oficina de rima, guias de escrita e prova de autoria baseada no ritmo humano de digitação — um registro do processo criativo na era da suspeita de IA.
+
+Sem IA de terceiros. Sem nuvem. Sem custo. Para sempre.
+
+Criado por Rafa Mass · escrevaral.com/app
+```
+
+**WhatsApp/Telegram (grupos de escrita):**
+```
+Gente, o Escrevaral virou app de celular! 📱
+
+É aquela oficina literária gratuita — editor, análise gramatical de português brasileiro, prova de autoria. Baixa direto do site, sem loja e sem cadastro, e funciona sem internet.
+
+escrevaral.com/app
+```
+
+### Ajustes de bio (uma linha)
+
+- Instagram/Threads (146/150): acrescentar `App Android no site.`
+- X (158/160): trocar `escrevaral.com` por `App Android → escrevaral.com`
+- TikTok (77/80): `Oficina literária grátis pra escritores 🇧🇷 App no site → escrevaral.com`
+
+### Diferenciais auditáveis (base de todo copy — não inventar poder)
+
+1. Nascido na gramática canônica brasileira (Bechara, Cunha & Cintra, Nascentes) — 1900 casos de teste públicos no repositório
+2. Prova de autoria por ritmo de digitação — único no mercado, em qualquer língua
+3. Privacidade estrutural: não existe servidor para vazar
+4. Poesia como cidadã de primeira classe (RimaLab) — nenhum concorrente analisa poesia
+5. Olhar decolonial — sem equivalente comercial
+6. Interface 100% em português de gente
+
+**O que não prometer:** reescrita de texto, cobertura ortográfica maior que LanguageTool, colaboração em nuvem, app iOS.
+
+---
+
 ## Manifesto do Escrevaral — 2026-06-28
 
 1. A língua portuguesa brasileira não é versão traduzida de nenhuma outra língua — e a ferramenta de quem escreve nela também não pode ser.
