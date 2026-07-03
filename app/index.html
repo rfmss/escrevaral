@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escrevaral no celular — aplicativo para Android</title>
+  <meta name="description" content="Baixe o Escrevaral para Android direto do site: sem loja, sem cadastro, sem custo. A oficina literária brasileira inteira no bolso, funcionando sem internet.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Escrevaral no celular — aplicativo para Android">
+  <meta property="og:description" content="A oficina coube no bolso. Baixe direto do site, sem loja e sem cadastro. Funciona sem internet.">
+  <meta property="og:url" content="https://escrevaral.com/app/">
+  <meta property="og:image" content="https://escrevaral.com/icons/og-banner.png">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --ink:        #1a1209;
+      --soft-ink:   #3d2e1a;
+      --muted:      #8a7660;
+      --primary:    #2e5e3e;
+      --line:       #e4ddd3;
+      --card:       #fefcf8;
+      --paper:      #faf6ef;
+      --surface-low:#f3ede4;
+      --topbar-bg:  rgba(253,250,244,0.96);
+    }
+
+    body {
+      font-family: "Noto Serif", Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--topbar-bg);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+      padding: 0 28px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: "Cinzel", serif;
+      font-size: 18px;
+      color: var(--ink);
+    }
+    .app-header a.volta {
+      font-size: 14px;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .app-header a.volta:hover { text-decoration: underline; }
+
+    main {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 0 0 8px;
+    }
+    .lede {
+      font-size: 17px;
+      color: var(--soft-ink);
+      margin: 0 0 36px;
+    }
+
+    .baixar-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .baixar-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 14px 34px;
+      border-radius: 10px;
+      transition: filter .15s;
+    }
+    .baixar-btn:hover { filter: brightness(1.08); }
+    .baixar-meta {
+      margin: 14px 0 0;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: 19px;
+      margin: 40px 0 12px;
+    }
+    ol.passos {
+      padding-left: 22px;
+      margin: 0;
+    }
+    ol.passos li { margin-bottom: 12px; }
+
+    .aviso {
+      background: var(--surface-low);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+      margin: 28px 0;
+      font-size: 15.5px;
+    }
+    .aviso strong { color: var(--soft-ink); }
+
+    .quieto {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 44px;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+    .quieto a { color: var(--primary); }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink:        #ece4d6;
+        --soft-ink:   #cfc4b0;
+        --muted:      #97917f;
+        --primary:    #7fb08f;
+        --line:       #3a352c;
+        --card:       #26221b;
+        --paper:      #1d1a14;
+        --surface-low:#2b2620;
+        --topbar-bg:  rgba(29,26,20,0.96);
+      }
+      .baixar-btn { color: #10130f; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="app-brand" href="../">Escrevaral</a>
+    <a class="volta" href="../">← Voltar à oficina</a>
+  </header>
+
+  <main>
+    <h1>A oficina coube no bolso.</h1>
+    <p class="lede">O Escrevaral para Android: baixa direto daqui, sem loja, sem cadastro, sem custo. Depois de instalado, funciona inteiro sem internet — modo avião é o melhor amigo dele.</p>
+
+    <div class="baixar-card">
+      <a class="baixar-btn" href="./escrevaral.apk" download>Baixar o Escrevaral para Android</a>
+      <p class="baixar-meta">Versão 1.0.0 · 1,2&nbsp;MB · Android 5 ou mais novo</p>
+    </div>
+
+    <h2>Como instalar</h2>
+    <ol class="passos">
+      <li>Toque no botão acima. O arquivo <strong>escrevaral.apk</strong> chega na pasta de arquivos baixados.</li>
+      <li>Abra o arquivo. O Android vai perguntar se você permite instalar aplicativos vindos do navegador — permita só desta vez, se preferir.</li>
+      <li>Pronto. O Escrevaral aparece junto dos seus outros aplicativos, com a folha aberta para escrever.</li>
+    </ol>
+
+    <div class="aviso">
+      <strong>O Android avisa que o aplicativo vem de fora da loja. É verdade — e é de propósito.</strong><br>
+      Ele vem da nossa casa, escrevaral.com, direto para a sua. Sem loja no caminho significa sem burocracia, sem conta obrigatória e sem intermediário entre você e a oficina. O aviso é o Android sendo cuidadoso, como deve ser: confira se o endereço da página é <strong>escrevaral.com</strong> e siga em frente.
+    </div>
+
+    <h2>O que vai junto</h2>
+    <p>Tudo. Editor completo, análise gramatical feita à mão para o português brasileiro, oficina de rima, guias de escrita, prova de autoria e o seu acervo — que fica só no aparelho, e em mais lugar nenhum. O aplicativo se atualiza sozinho quando o site melhora; você não precisa baixar de novo.</p>
+
+    <h2>Prefere sem instalar?</h2>
+    <p>O Escrevaral também funciona direto no navegador do celular, em <a href="https://escrevaral.com">escrevaral.com</a> — e dá para guardar como atalho na tela inicial, com o mesmo resultado.</p>
+
+    <p class="quieto">
+      Dúvida ou problema na instalação? Escreva para <a href="mailto:oi@escrevaral.com">oi@escrevaral.com</a>.<br>
+      O Escrevaral é gratuito, brasileiro e não envia nenhum dado seu para lugar nenhum — <a href="../privacidade.html">política de privacidade</a>.
+    </p>
+  </main>
+</body>
+</html>
