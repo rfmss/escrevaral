@@ -1568,6 +1568,1493 @@
       }
     },
     {
+      "id": "canto-substantivo-01",
+      "frase": "O canto do pássaro preencheu o quintal.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "canto",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "canto",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "canto"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "canto",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O antes de canto sinaliza leitura nominal."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "canto",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "canto"
+          },
+          {
+            "text": "do",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "do"
+          },
+          {
+            "text": "pássaro",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "pássaro"
+          },
+          {
+            "text": "preencheu",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "preencheu"
+          },
+          {
+            "text": "o",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "quintal",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "quintal"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "canto-verbo-01",
+      "frase": "Eu canto quando estou feliz.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "canto",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "canto",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "canto"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "canto",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Sujeito Eu + canto; primeira pessoa singular de cantar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Eu",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "eu"
+          },
+          {
+            "text": "canto",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "canto"
+          },
+          {
+            "text": "quando",
+            "tags": [
+              "Conjunction",
+              "Verb",
+              "Gerund"
+            ],
+            "normal": "quando"
+          },
+          {
+            "text": "estou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "estou"
+          },
+          {
+            "text": "feliz",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "feliz"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "cedo-adverbio-01",
+      "frase": "Ela acordou cedo para escrever.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "cedo",
+          "status": "ok",
+          "esperado": [
+            "Adverb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "cedo",
+                "tags": [
+                  "Adverb"
+                ],
+                "normal": "cedo"
+              }
+            ],
+            "tags": [
+              "Adverb"
+            ]
+          },
+          "alvo": {
+            "texto": "cedo",
+            "classe_escolar": "adverbio",
+            "classe_tecnica": "ADV",
+            "funcao": "adjunto adverbial de tempo",
+            "certeza": "alta",
+            "comentario": "Cedo apos verbo de movimento/acao indica adverbio de tempo."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "acordou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "acordou"
+          },
+          {
+            "text": "cedo",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "cedo"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "escrever",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "escrever"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "cedo-verbo-01",
+      "frase": "Cedo meu lugar para quem precisar.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "Cedo",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "Cedo",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "cedo"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "Cedo",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Inicio de frase + objeto direto favorece leitura verbal de ceder."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Cedo",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "cedo"
+          },
+          {
+            "text": "meu",
+            "tags": [
+              "Pronoun",
+              "Possessive"
+            ],
+            "normal": "meu"
+          },
+          {
+            "text": "lugar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "lugar"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "quem",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "quem"
+          },
+          {
+            "text": "precisar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "precisar"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto por subordinação",
+          "conjuncoes": [],
+          "locucoes": [
+            {
+              "locucao": "para que",
+              "relacao": "finalidade",
+              "descricao": "Indica a finalidade ou objetivo da ação principal"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "vale-substantivo-01",
+      "frase": "O vale verde escondia uma aldeia.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "vale",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "vale",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "vale"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "vale",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O + vale + adjetivo; leitura nominal de vale geografico."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "vale",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "vale"
+          },
+          {
+            "text": "verde",
+            "tags": [],
+            "normal": "verde"
+          },
+          {
+            "text": "escondia",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "escondia"
+          },
+          {
+            "text": "uma",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "uma"
+          },
+          {
+            "text": "aldeia",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "aldeia"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "vale-verbo-expressao-01",
+      "frase": "Vale a pena tentar mais uma vez.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "vale",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "Vale",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "vale"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "vale",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado em expressao idiomatica",
+            "certeza": "alta",
+            "comentario": "Vale a pena e expressao idiomatica com vale como verbo valer."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Vale",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "vale"
+          },
+          {
+            "text": "a",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "pena",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "pena"
+          },
+          {
+            "text": "tentar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "tentar"
+          },
+          {
+            "text": "mais",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "mais"
+          },
+          {
+            "text": "uma",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "uma"
+          },
+          {
+            "text": "vez",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "vez"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "alto-adverbio-pos-verbo-01",
+      "frase": "Ela falou alto para ser ouvida.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "alto",
+          "status": "ok",
+          "esperado": [
+            "Adverb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "alto",
+                "tags": [
+                  "Adjective",
+                  "Adverb"
+                ],
+                "normal": "alto"
+              }
+            ],
+            "tags": [
+              "Adjective",
+              "Adverb"
+            ]
+          },
+          "alvo": {
+            "texto": "alto",
+            "classe_escolar": "adverbio",
+            "classe_tecnica": "ADV",
+            "funcao": "adjunto adverbial de modo",
+            "certeza": "alta",
+            "comentario": "Alto apos verbo nao-copula: uso adverbial plano (falar alto, correr rapido)."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Ela",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "ela"
+          },
+          {
+            "text": "falou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "falou"
+          },
+          {
+            "text": "alto",
+            "tags": [
+              "Adjective",
+              "Adverb"
+            ],
+            "normal": "alto"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "ser",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ser"
+          },
+          {
+            "text": "ouvida",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ouvida"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "alto-adjetivo-predicativo-01",
+      "frase": "A janela estava alta demais para alcançar.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "alta",
+          "status": "ok",
+          "esperado": [
+            "Adjective"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "alta",
+                "tags": [
+                  "Adjective"
+                ],
+                "normal": "alta"
+              }
+            ],
+            "tags": [
+              "Adjective"
+            ]
+          },
+          "alvo": {
+            "texto": "alta",
+            "classe_escolar": "adjetivo",
+            "classe_tecnica": "ADJ",
+            "funcao": "predicativo do sujeito",
+            "certeza": "alta",
+            "comentario": "Alta apos copula estar mantém leitura adjetiva predicativa."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "A",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "a"
+          },
+          {
+            "text": "janela",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "janela"
+          },
+          {
+            "text": "estava",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "estava"
+          },
+          {
+            "text": "alta",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "alta"
+          },
+          {
+            "text": "demais",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "demais"
+          },
+          {
+            "text": "para",
+            "tags": [
+              "Preposition",
+              "Verb"
+            ],
+            "normal": "para"
+          },
+          {
+            "text": "alcançar",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "alcançar"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "jogo-verbo-pos-pronome-01",
+      "frase": "Eu jogo toda semana com amigos.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "jogo",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "jogo",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "jogo"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "jogo",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Pronome pessoal Eu como sujeito: jogo e 1a pessoa singular de jogar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Eu",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "eu"
+          },
+          {
+            "text": "jogo",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "jogo"
+          },
+          {
+            "text": "toda",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "toda"
+          },
+          {
+            "text": "semana",
+            "tags": [],
+            "normal": "semana"
+          },
+          {
+            "text": "com",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "com"
+          },
+          {
+            "text": "amigos",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "amigos"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "jogo-substantivo-01",
+      "frase": "O jogo terminou no último minuto.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "jogo",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "jogo",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "jogo"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "jogo",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O antes de jogo: leitura nominal inequivoca."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "jogo",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "jogo"
+          },
+          {
+            "text": "terminou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "terminou"
+          },
+          {
+            "text": "no",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "no"
+          },
+          {
+            "text": "último",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "último"
+          },
+          {
+            "text": "minuto",
+            "tags": [],
+            "normal": "minuto"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "acordo-substantivo-01",
+      "frase": "O acordo foi assinado ontem.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "acordo",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "acordo",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "acordo"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "acordo",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O antes de acordo: leitura nominal (contrato, convênio)."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "acordo",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "acordo"
+          },
+          {
+            "text": "foi",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "foi"
+          },
+          {
+            "text": "assinado",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "assinado"
+          },
+          {
+            "text": "ontem",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "ontem"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "acordo-verbo-01",
+      "frase": "Eu acordo cedo todo dia.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "acordo",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "acordo",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "acordo"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "acordo",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Pronome Eu + acordo: 1a pessoa singular de acordar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Eu",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "eu"
+          },
+          {
+            "text": "acordo",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "acordo"
+          },
+          {
+            "text": "cedo",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "cedo"
+          },
+          {
+            "text": "todo",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "todo"
+          },
+          {
+            "text": "dia",
+            "tags": [],
+            "normal": "dia"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "sonho-substantivo-01",
+      "frase": "O sonho dela era escrever.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "sonho",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "sonho",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "sonho"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "sonho",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O + sonho: leitura nominal inequivoca."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "sonho",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "sonho"
+          },
+          {
+            "text": "dela",
+            "tags": [],
+            "normal": "dela"
+          },
+          {
+            "text": "era",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "era"
+          },
+          {
+            "text": "escrever",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "escrever"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "sonho-verbo-01",
+      "frase": "Eu sonho com uma vida diferente.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "sonho",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "sonho",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "sonho"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "sonho",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Pronome Eu + sonho: 1a pessoa singular de sonhar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Eu",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "eu"
+          },
+          {
+            "text": "sonho",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "sonho"
+          },
+          {
+            "text": "com",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "com"
+          },
+          {
+            "text": "uma",
+            "tags": [
+              "Determiner"
+            ],
+            "normal": "uma"
+          },
+          {
+            "text": "vida",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "vida"
+          },
+          {
+            "text": "diferente",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "diferente"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "gosto-substantivo-01",
+      "frase": "O gosto amargo ficou na boca.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "gosto",
+          "status": "ok",
+          "esperado": [
+            "Noun"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "gosto",
+                "tags": [
+                  "Noun"
+                ],
+                "normal": "gosto"
+              }
+            ],
+            "tags": [
+              "Noun"
+            ]
+          },
+          "alvo": {
+            "texto": "gosto",
+            "classe_escolar": "substantivo",
+            "classe_tecnica": "NOUN",
+            "funcao": "nucleo do sujeito",
+            "certeza": "alta",
+            "comentario": "Artigo O + gosto + adjetivo: leitura nominal (sabor)."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "O",
+            "tags": [
+              "Determiner",
+              "Noun"
+            ],
+            "normal": "o"
+          },
+          {
+            "text": "gosto",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "gosto"
+          },
+          {
+            "text": "amargo",
+            "tags": [
+              "Adjective"
+            ],
+            "normal": "amargo"
+          },
+          {
+            "text": "ficou",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ficou"
+          },
+          {
+            "text": "na",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "na"
+          },
+          {
+            "text": "boca",
+            "tags": [
+              "Noun"
+            ],
+            "normal": "boca"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período simples",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
+      "id": "gosto-verbo-01",
+      "frase": "Eu gosto de ler antes de dormir.",
+      "status": "ok",
+      "alvos": [
+        {
+          "texto": "gosto",
+          "status": "ok",
+          "esperado": [
+            "Verb"
+          ],
+          "observado": {
+            "tokens": [
+              {
+                "text": "gosto",
+                "tags": [
+                  "Verb"
+                ],
+                "normal": "gosto"
+              }
+            ],
+            "tags": [
+              "Verb"
+            ]
+          },
+          "alvo": {
+            "texto": "gosto",
+            "classe_escolar": "verbo",
+            "classe_tecnica": "VERB",
+            "funcao": "nucleo do predicado",
+            "certeza": "alta",
+            "comentario": "Pronome Eu + gosto de: 1a pessoa singular de gostar."
+          }
+        }
+      ],
+      "captura": {
+        "morfologia": [
+          {
+            "text": "Eu",
+            "tags": [
+              "Pronoun",
+              "Noun"
+            ],
+            "normal": "eu"
+          },
+          {
+            "text": "gosto",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "gosto"
+          },
+          {
+            "text": "de",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "de"
+          },
+          {
+            "text": "ler",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "ler"
+          },
+          {
+            "text": "antes",
+            "tags": [
+              "Adverb"
+            ],
+            "normal": "antes"
+          },
+          {
+            "text": "de",
+            "tags": [
+              "Preposition"
+            ],
+            "normal": "de"
+          },
+          {
+            "text": "dormir",
+            "tags": [
+              "Verb"
+            ],
+            "normal": "dormir"
+          },
+          {
+            "text": ".",
+            "tags": [],
+            "normal": "."
+          }
+        ],
+        "periodo": {
+          "tipo": "Período composto (assindético)",
+          "conjuncoes": [],
+          "locucoes": []
+        }
+      }
+    },
+    {
       "id": "fala-sussurrar-definicao-01",
       "frase": "Ela sussurrou o nome dele para que ninguem ouvisse.",
       "status": "ok",

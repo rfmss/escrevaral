@@ -1,0 +1,823 @@
+{
+  "date": "2026-06-30",
+  "base_url": "https://escrevaral.com",
+  "issues": [
+    {
+      "severity": "P1",
+      "area": "Headers",
+      "title": "CSP ausente",
+      "evidence": "https://escrevaral.com/ nao envia `content-security-policy`",
+      "recommendation": "Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages."
+    },
+    {
+      "severity": "P2",
+      "area": "Headers",
+      "title": "HSTS ausente",
+      "evidence": "https://escrevaral.com/ nao envia `strict-transport-security`",
+      "recommendation": "Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages."
+    },
+    {
+      "severity": "P2",
+      "area": "Headers",
+      "title": "Permissions-Policy ausente",
+      "evidence": "https://escrevaral.com/ nao envia `permissions-policy`",
+      "recommendation": "Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages."
+    },
+    {
+      "severity": "P2",
+      "area": "Headers",
+      "title": "Referrer-Policy ausente",
+      "evidence": "https://escrevaral.com/ nao envia `referrer-policy`",
+      "recommendation": "Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages."
+    },
+    {
+      "severity": "P2",
+      "area": "Headers",
+      "title": "X-Content-Type-Options ausente",
+      "evidence": "https://escrevaral.com/ nao envia `x-content-type-options`",
+      "recommendation": "Se Cloudflare permitir, adicionar header de seguranca sem quebrar GitHub Pages."
+    },
+    {
+      "severity": "P2",
+      "area": "Rede",
+      "title": "requisicoes externas nao-GET observadas",
+      "evidence": "POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=9rfif; POST https://escrevaral.goatcounter.com/count?p=%2F%23biblioteca&t=Escrevaral%20%E2%80%94%20Biblioteca&s=1366&b=153&rnd=l9cn6; POST https://escrevaral.goatcounter.com/count?p=%2F%23autoria&t=Escrevaral%20%E2%80%94%20Prova%20de%20autoria&s=1366&b=153&rnd=bic1n; POST https://escrevaral.goatcounter.com/count?p=%2F%23arquivo&t=Escrevaral%20%E2%80%94%20Arquivo&s=1366&b=153&rnd=3oz1n; POST https://escrevaral.goatcounter.com/count?p=%2F%23academia&t=Escrevaral%20%E2%80%94%20Ateli%C3%AA&s=1366&b=153&rnd=rcgal; POST https://escrevaral.goatcounter.com/count?p=%2F%23cronograma&t=Escrevaral%20%E2%80%94%20Cronograma&s=1366&b=153&rnd=zchjc; POST https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=n0m4b",
+      "recommendation": "Verificar se analytics nao recebe conteudo do texto."
+    }
+  ],
+  "result": {
+    "canary": "CANARY_ESCREVARAL_PRIV_20260618_NAO_ENVIAR",
+    "canary_leaked": false,
+    "canary_in_local_storage": true,
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/",
+        "domain": "escrevaral.com",
+        "resource_type": "document",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&display=swap",
+        "domain": "fonts.googleapis.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/00-tokens.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/01-base.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/02-shell-navigation.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/styles.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-editor-layout.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/04-cronograma.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-editor-modes.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-writing-area.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-guide-reference.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-inspector-precision.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/03-editor-toolbar.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/05-archive.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/07-enem.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/09-print.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/04-analysis-academy.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/06-academy-tools.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/08-responsive.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/10-mobile-nav.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/11-badges.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/12-training-modes.css?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/css/wood-icons.css",
+        "domain": "escrevaral.com",
+        "resource_type": "stylesheet",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/document-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/pagination-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/lexical-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/proof-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/vrda-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/backup-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/filesystem-backup-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/archive-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/badges-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/version-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/export-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/template-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/precision-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/criterios-data.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/syntax-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/punctuation-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/analise-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/voice-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/rimalab-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/decolonial-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/rights-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/typewriter-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/synonym-data.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/state-store.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/cronograma-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/editor-modes.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/editor-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/proof-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/ui-dialog.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/academia-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/backup-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/archive-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/grammar-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/reader-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/pomodoro-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/syntax-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/combo-detector.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/deriva-mode.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/perseguicao-mode.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/training-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/tooltip-controller.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/print-engine.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/quotes-data.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/app.js?v=20260627-v934",
+        "domain": "escrevaral.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496",
+        "domain": "static.cloudflareinsights.com",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/icons/escrevaral-nav-dark.svg",
+        "domain": "escrevaral.com",
+        "resource_type": "image",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+        "domain": "fonts.gstatic.com",
+        "resource_type": "font",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+        "domain": "fonts.gstatic.com",
+        "resource_type": "font",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/fonts/material-symbols-outlined.woff2",
+        "domain": "escrevaral.com",
+        "resource_type": "font",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://fonts.gstatic.com/s/notoserif/v33/ga6daw1J5X9T9RW6j9bNVls-hfgvz8JcMofYTYf6D30.woff2",
+        "domain": "fonts.gstatic.com",
+        "resource_type": "font",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://gc.zgo.at/count.js",
+        "domain": "gc.zgo.at",
+        "resource_type": "script",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/lexical-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/norma-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/templates-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/rimalab-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/decolonial-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/syntax-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/norma-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/rimalab-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "GET",
+        "url": "https://escrevaral.com/decolonial-data.json",
+        "domain": "escrevaral.com",
+        "resource_type": "fetch",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=9rfif",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.com/cdn-cgi/rum?",
+        "domain": "escrevaral.com",
+        "resource_type": "xhr",
+        "has_post_data": true,
+        "post_data_preview": "{\"memory\":{\"totalJSHeapSize\":19300000,\"usedJSHeapSize\":11900000,\"jsHeapSizeLimit\":2330000000},\"resources\":[],\"referrer\":\"\",\"eventType\":1,\"firstPaint\":1832,\"firstContentfulPaint\":1832,\"startTime\":1782824969563.7,\"versions..."
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23biblioteca&t=Escrevaral%20%E2%80%94%20Biblioteca&s=1366&b=153&rnd=l9cn6",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23autoria&t=Escrevaral%20%E2%80%94%20Prova%20de%20autoria&s=1366&b=153&rnd=bic1n",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23arquivo&t=Escrevaral%20%E2%80%94%20Arquivo&s=1366&b=153&rnd=3oz1n",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23academia&t=Escrevaral%20%E2%80%94%20Ateli%C3%AA&s=1366&b=153&rnd=rcgal",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23cronograma&t=Escrevaral%20%E2%80%94%20Cronograma&s=1366&b=153&rnd=zchjc",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      },
+      {
+        "method": "POST",
+        "url": "https://escrevaral.goatcounter.com/count?p=%2F%23editor&t=Escrevaral%20%E2%80%94%20Manuscrito&s=1366&b=153&rnd=n0m4b",
+        "domain": "escrevaral.goatcounter.com",
+        "resource_type": "ping",
+        "has_post_data": false,
+        "post_data_preview": ""
+      }
+    ],
+    "leaks": [],
+    "failures": [],
+    "local_storage_keys": [
+      "escrevaral-termos-v1",
+      "vereda.manuscripts.v1",
+      "vrda-first-visit",
+      "vrda-save-hint-seen"
+    ],
+    "cookies": [],
+    "external_domains": [
+      "escrevaral.goatcounter.com",
+      "fonts.googleapis.com",
+      "fonts.gstatic.com",
+      "gc.zgo.at",
+      "static.cloudflareinsights.com"
+    ],
+    "external_counts": {
+      "escrevaral.goatcounter.com": 7,
+      "fonts.googleapis.com": 1,
+      "fonts.gstatic.com": 3,
+      "gc.zgo.at": 1,
+      "static.cloudflareinsights.com": 1
+    },
+    "summary": {
+      "P0": 0,
+      "P1": 1,
+      "P2": 5
+    }
+  },
+  "reports": {
+    "markdown": "/home/rafamass/escrevaral/reports/auditoria/privacidade-rede-2026-06-30.md",
+    "json": "/home/rafamass/escrevaral/reports/auditoria/privacidade-rede-2026-06-30.json"
+  }
+}

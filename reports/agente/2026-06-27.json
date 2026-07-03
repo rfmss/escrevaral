@@ -45,6 +45,19 @@
             "Noun"
           ],
           "classe": "neutro"
+        },
+        {
+          "tipo": "morfologia",
+          "indice": 6,
+          "token": "alto",
+          "antes": [
+            "Adjective"
+          ],
+          "depois": [
+            "Adjective",
+            "Adverb"
+          ],
+          "classe": "evolucao"
         }
       ]
     },
