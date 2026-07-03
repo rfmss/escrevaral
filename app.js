@@ -532,8 +532,19 @@ function updateCurrentMetadata() {
 function queueSave() {
   saveStatus.textContent = "Salvando...";
   window.clearTimeout(saveTimer);
-  saveTimer = window.setTimeout(() => persistState(), 450);
+  saveTimer = window.setTimeout(() => { saveTimer = null; persistState(); }, 450);
 }
+
+// Garante que o salvamento pendente (debounce de 450ms) não se perca
+// se a escritora fechar ou trocar de aba logo depois de digitar.
+function flushPendingSave() {
+  if (!saveTimer) return;
+  window.clearTimeout(saveTimer);
+  saveTimer = null;
+  persistState();
+}
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushPendingSave(); });
+window.addEventListener("pagehide", flushPendingSave);
 
 let createNoteContext = "manuscript";
 

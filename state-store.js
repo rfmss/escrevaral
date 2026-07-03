@@ -438,7 +438,17 @@ function persistState(status = "Salvo localmente") {
 
   state.meta.lastSavedAt = now.toISOString();
   const { lexical: { selectedPhrase: _sp, selectedRange: _sr, selectedContext: _sc, ...lexicalRest }, ...stateRest } = state;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
+  } catch (err) {
+    saveStatus.textContent = err?.name === "QuotaExceededError"
+      ? "Não foi possível salvar — espaço do navegador cheio. Faça uma cópia de segurança."
+      : "Não foi possível salvar agora. Seu texto continua na tela — tente uma cópia de segurança.";
+    saveStatus.title = "Erro ao salvar localmente";
+    return;
+  }
+
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
   saveStatus.textContent = `SALVO ${hhmm}`;
   saveStatus.title = status;

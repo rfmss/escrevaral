@@ -17,6 +17,22 @@
       if (el.tagName === "SCRIPT" || el.tagName === "STYLE") { el.remove(); return; }
       el.replaceWith(doc.createTextNode(el.textContent));
     });
+    // Um manuscrito digitado direto (sem passar por texto legado) pode ter
+    // a primeira linha solta (texto puro) e as seguintes em <div> — o
+    // contenteditable do navegador faz isso ao apertar Enter num editor
+    // vazio. O CSS de impressão só reconhece <p> para recuo e justificação,
+    // então normaliza aqui antes de montar a página.
+    Array.from(doc.body.childNodes).forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        const p = doc.createElement("p");
+        p.textContent = node.textContent;
+        node.replaceWith(p);
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "DIV" && !node.classList.contains("page-break")) {
+        const p = doc.createElement("p");
+        p.innerHTML = node.innerHTML;
+        node.replaceWith(p);
+      }
+    });
     return doc.body.innerHTML;
   }
 
