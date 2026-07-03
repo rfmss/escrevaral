@@ -1771,7 +1771,7 @@ function renderTemplateStudio() {
     templateTabs.innerHTML = `<p class="template-empty">Nenhum guia encontrado para "${escapeHtml(templateState.query)}".</p>`;
   }
 
-  templateStepLabel.textContent = `tela ${activeStep.index + 1} de ${activeStep.total}`;
+  templateStepLabel.textContent = `passo ${activeStep.index + 1} de ${activeStep.total}`;
   templateScreen.innerHTML = createTemplateStepMarkup(activeTemplate, activeStep);
 }
 

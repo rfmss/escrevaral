@@ -355,7 +355,6 @@
     grid-template-columns: 1fr;
   }
   .template-copy { min-height: 0; }
-  .template-phone { width: 100%; max-width: 380px; margin: 0 auto; }
 
   /* Academia: ferramentas de duas colunas colapsam */
   .rimalab-tool,
