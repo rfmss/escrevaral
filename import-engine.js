@@ -102,14 +102,15 @@ const VeredaImport = (() => {
       const nivel = /^(?:Heading|Ttulo|Titulo)([1-3])$/i.exec(estilo)?.[1];
       let html = "";
       for (const r of p.getElementsByTagNameNS(W, "r")) {
+        // Marcador \u0000br\u0000 evita que a quebra seja engolida pelo escape logo abaixo
         let trecho = "";
         for (const filho of r.children) {
           if (filho.localName === "t") trecho += filho.textContent;
-          else if (filho.localName === "br" || filho.localName === "cr") trecho += "<br>";
+          else if (filho.localName === "br" || filho.localName === "cr") trecho += "\u0000br\u0000";
           else if (filho.localName === "tab") trecho += " ";
         }
         if (!trecho) continue;
-        trecho = trecho.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/<br>/g, "<br>");
+        trecho = trecho.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\u0000br\u0000/g, "<br>");
         const rPr = r.getElementsByTagNameNS(W, "rPr")[0];
         const ligado = (tag) => {
           const el = rPr?.getElementsByTagNameNS(W, tag)[0];
