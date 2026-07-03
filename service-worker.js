@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v1080";
-const ASSET_VERSION = "20260703-v1080";
+const CACHE_NAME = "vereda-offline-v1081";
+const ASSET_VERSION = "20260703-v1081";
 
 const CORE_ASSETS = [
   "./",
@@ -36,6 +36,7 @@ const CORE_ASSETS = [
   `./badges-engine.js?v=${ASSET_VERSION}`,
   `./version-engine.js?v=${ASSET_VERSION}`,
   `./export-engine.js?v=${ASSET_VERSION}`,
+  `./import-engine.js?v=${ASSET_VERSION}`,
   `./template-engine.js?v=${ASSET_VERSION}`,
   `./precision-engine.js?v=${ASSET_VERSION}`,
   `./voice-engine.js?v=${ASSET_VERSION}`,

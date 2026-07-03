@@ -980,6 +980,51 @@ function createBlankManuscript() {
   addManuscript(manuscript, "Texto em branco criado");
 }
 
+async function importManuscriptFiles(fileList) {
+  const arquivos = Array.from(fileList || []).filter((f) => VeredaImport.aceita(f));
+  if (!arquivos.length) {
+    saveStatus.textContent = "Nenhum arquivo compatível — traga .docx, .txt ou .md";
+    return;
+  }
+  saveStatus.textContent = arquivos.length === 1 ? "Trazendo texto…" : `Trazendo ${arquivos.length} textos…`;
+  let ultimo = null;
+  const falhas = [];
+  for (const [i, arquivo] of arquivos.entries()) {
+    try {
+      const { title, html } = await VeredaImport.importFile(arquivo);
+      const htmlLimpo = VeredaDocument.sanitizeHtml(html);
+      const manuscript = VeredaArchive.createManuscript({
+        id: `manuscrito-${Date.now()}-${i}`,
+        title,
+        text: VeredaDocument.htmlToText(htmlLimpo),
+        type: "manuscrito",
+        folder: "Ficção",
+      });
+      manuscript.html = htmlLimpo;
+      state.manuscripts.unshift(manuscript);
+      ultimo = manuscript;
+    } catch (err) {
+      falhas.push(arquivo.name);
+    }
+  }
+  if (ultimo) {
+    state.activeId = ultimo.id;
+    state.layout.leftCollapsed = true;
+    state.layout.rightCollapsed = true;
+    applyPanelLayout();
+    renderActiveManuscript();
+    renderManuscriptNavigation();
+    renderProjectGrid();
+    renderMetadataForm();
+    const trazidos = arquivos.length - falhas.length;
+    persistState(trazidos === 1 ? `"${ultimo.title}" trazido para o acervo` : `${trazidos} textos trazidos para o acervo`);
+    setView("editor");
+  }
+  if (falhas.length) {
+    saveStatus.textContent = `Não consegui ler: ${falhas.join(", ")}`;
+  }
+}
+
 async function createManuscriptFromTemplate(templateId) {
   if (!templateId) { createBlankManuscript(); return; }
 
@@ -2002,6 +2047,7 @@ const ACTION_HANDLERS = {
   "new-proof-session":       () => startNewProofSession(),
   "export-backup":           () => exportBackup(),
   "import-backup":           () => requestBackupImport(),
+  "import-manuscript-files": () => document.querySelector("[data-import-manuscript-input]")?.click(),
   "choose-filesystem-backup":  () => chooseFilesystemBackup(),
   "save-filesystem-backup":    () => saveFilesystemBackup(true),
   "stop-filesystem-backup":    () => stopFilesystemBackup(),
@@ -2344,6 +2390,14 @@ window.addEventListener("appinstalled", () => {
 
 titleInput.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("input", updateCurrentManuscript);
+
+const importManuscriptInput = document.querySelector("[data-import-manuscript-input]");
+if (importManuscriptInput) {
+  importManuscriptInput.addEventListener("change", () => {
+    void importManuscriptFiles(importManuscriptInput.files);
+    importManuscriptInput.value = "";
+  });
+}
 
 if (specializedEditor) {
   specializedEditor.addEventListener("input", (e) => {
