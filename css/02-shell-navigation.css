@@ -2039,6 +2039,28 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   color: var(--soft-ink);
   line-height: 1.4;
 }
+.inspector-vicios-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--soft-ink);
+}
+.inspector-vicios-list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.inspector-vicios-list:empty { display: none; }
+.inspector-vicios-more {
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+}
 .inspector-voice-hint {
   font-size: 10px;
   color: var(--muted);

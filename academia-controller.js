@@ -2,6 +2,9 @@
 // Depende de: state-store.js, voice-engine.js, rimalab-engine.js, decolonial-engine.js, rights-engine.js
 
 function useActiveManuscriptForVoice() {
+  const tab = document.getElementById("at-voice");
+  if (tab) tab.checked = true;
+
   if (!isManuscriptDocument()) {
     voiceInput.value = "";
     updateVoiceCount();
