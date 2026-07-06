@@ -56,6 +56,11 @@ Pergunta padrao da sessao:
 
 > Qual engine vamos aproximar de 100% hoje, e por qual evidencia?
 
+Nota operacional de 2026-07-06:
+
+- Sintaxe / morfologia segue como frente mais sensivel da linguagem computacional PT-BR.
+- Evidencia atual: bancada gramatical completa em 1915/1915 apos fechar `fabula` como verbo em contexto narrativo e reforcar verbos literarios de leitura/oficio no `norma-data.json`.
+
 ## Regua de maturidade
 
 - 0%: ideia solta, sem implementacao.
