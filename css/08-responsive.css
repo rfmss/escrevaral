@@ -71,8 +71,10 @@
   .rights-copy h2 { font-size: clamp(22px, 7vw, 28px); }
 
   /* Garantir que textos de status não cortam */
-  .statusbar { font-size: 9px; gap: 8px; }
-  .statusbar > * { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
+  .statusbar { font-size: 9px; gap: 6px; }
+  .statusbar > * { max-width: none; }
+  .statusbar [data-stat="count"] { flex: 1 1 auto; }
+  .statusbar [data-save-status] { flex: 0 0 auto; }
   .statusbar-copyright { display: none; }
 
   /* Arquivo: headings não extravasam */
@@ -101,6 +103,26 @@
   .view-editor {
     padding-left: clamp(12px, 4vw, 18px);
     padding-right: clamp(12px, 4vw, 18px);
+  }
+
+  .statusbar {
+    gap: 10px;
+  }
+
+  .statusbar-brand,
+  .statusbar-social,
+  .statusbar-visitors,
+  .statusbar-copyright {
+    display: none !important;
+  }
+
+  .statusbar [data-stat="count"] {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .statusbar [data-save-status] {
+    flex: 0 0 auto;
   }
 
   .editor-split,

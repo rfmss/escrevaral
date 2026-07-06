@@ -98,6 +98,50 @@ body {
 .tab-btn:hover { color: var(--ink); }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 
+@media (max-width: 520px) {
+  .topbar {
+    padding: 0 0.85rem;
+    gap: 10px;
+  }
+
+  .topbar-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    gap: 6px;
+  }
+
+  .topbar-brand span {
+    display: none;
+  }
+
+  .topbar-tabs {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+
+  .tab-btn {
+    padding: 0 8px;
+    font-size: 10.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    padding: 0 0.65rem;
+  }
+
+  .topbar-brand {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+  }
+
+  .tab-btn {
+    padding: 0 6px;
+  }
+}
+
 /* PAGES */
 .page { display: none; max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
 .page.visible { display: block; }
