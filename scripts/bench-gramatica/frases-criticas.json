@@ -237,6 +237,222 @@
       ]
     },
     {
+      "id": "homografo-completa-adjetivo-01",
+      "frase": "A edição completa do diário preserva cada corte da autora.",
+      "alvos": [
+        {
+          "texto": "completa",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de edição",
+          "certeza": "alta",
+          "comentario": "Artigo + nome + completa + complemento nominal favorece leitura adjetiva."
+        }
+      ]
+    },
+    {
+      "id": "homografo-completa-verbo-01",
+      "frase": "A nota completa o argumento do prefácio.",
+      "alvos": [
+        {
+          "texto": "completa",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito nominal + completa + objeto direto favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "homografo-critica-adjetivo-01",
+      "frase": "A leitura critica do romance incomoda pelo rigor.",
+      "alvos": [
+        {
+          "texto": "critica",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de leitura",
+          "certeza": "alta",
+          "comentario": "Sem acento, o contexto nominal pede leitura adjetiva e alerta ortografico implicito."
+        }
+      ]
+    },
+    {
+      "id": "homografo-critica-verbo-01",
+      "frase": "A resenhista critica o narrador pela distancia moral.",
+      "alvos": [
+        {
+          "texto": "critica",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito nominal + critica + objeto direto favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "homografo-estreito-adjetivo-01",
+      "frase": "O corredor estreito obriga a leitura em silencio.",
+      "alvos": [
+        {
+          "texto": "estreito",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de corredor",
+          "certeza": "alta",
+          "comentario": "Posicao pos-nominal com verbo posterior favorece leitura adjetiva."
+        }
+      ]
+    },
+    {
+      "id": "homografo-estreito-verbo-01",
+      "frase": "Eu estreito o foco quando reviso a cena final.",
+      "alvos": [
+        {
+          "texto": "estreito",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome sujeito em primeira pessoa + objeto direto favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-integra-adjetivo-01",
+      "frase": "A edicao integra do diario preserva rasuras e cortes.",
+      "alvos": [
+        {
+          "texto": "integra",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de edicao",
+          "certeza": "alta",
+          "alerta_ortografico": true,
+          "forma_normativa": "íntegra",
+          "comentario": "Sem acento, o contexto nominal exige leitura adjetiva."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-integra-verbo-01",
+      "frase": "O romance integra mito e memoria na mesma respiracao.",
+      "alvos": [
+        {
+          "texto": "integra",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Sujeito nominal + integra + objeto direto favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "homografo-precisa-verbo-01",
+      "frase": "O manuscrito precisa de silencio para amadurecer.",
+      "alvos": [
+        {
+          "texto": "precisa",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Precisar de + nome favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "participio-contido-passiva-01",
+      "frase": "O incendio foi contido antes de alcancar o arquivo.",
+      "alvos": [
+        {
+          "texto": "contido",
+          "classe_escolar": "verbo no participio",
+          "classe_tecnica": "VERB",
+          "funcao": "voz passiva com auxiliar ser",
+          "certeza": "alta",
+          "comentario": "Auxiliar foi + participio indica leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "participio-oculto-passiva-01",
+      "frase": "O nome foi oculto na edicao anotada.",
+      "alvos": [
+        {
+          "texto": "oculto",
+          "classe_escolar": "verbo no participio",
+          "classe_tecnica": "VERB",
+          "funcao": "voz passiva com auxiliar ser",
+          "certeza": "alta",
+          "comentario": "Auxiliar foi + participio indica leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-publico-adjetivo-01",
+      "frase": "O debate publico mudou a leitura do livro.",
+      "alvos": [
+        {
+          "texto": "publico",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de debate",
+          "certeza": "alta",
+          "alerta_ortografico": true,
+          "forma_normativa": "público",
+          "comentario": "Sem acento, o contexto nominal exige leitura adjetiva."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-publico-verbo-01",
+      "frase": "Eu publico o conto quando o ritmo finalmente fecha.",
+      "alvos": [
+        {
+          "texto": "publico",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome sujeito em primeira pessoa favorece leitura verbal."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-serias-adjetivo-01",
+      "frase": "As perguntas serias pedem um narrador a altura.",
+      "alvos": [
+        {
+          "texto": "serias",
+          "classe_escolar": "adjetivo",
+          "classe_tecnica": "ADJ",
+          "funcao": "adjunto adnominal de perguntas",
+          "certeza": "alta",
+          "alerta_ortografico": true,
+          "forma_normativa": "sérias",
+          "comentario": "Sem acento, o contexto nominal exige leitura adjetiva."
+        }
+      ]
+    },
+    {
+      "id": "diacritico-serias-verbo-01",
+      "frase": "Tu serias mais convincente com menos ornamento.",
+      "alvos": [
+        {
+          "texto": "serias",
+          "classe_escolar": "verbo",
+          "classe_tecnica": "VERB",
+          "funcao": "nucleo do predicado",
+          "certeza": "alta",
+          "comentario": "Pronome sujeito em segunda pessoa favorece leitura verbal."
+        }
+      ]
+    },
+    {
       "id": "canto-substantivo-01",
       "frase": "O canto do pássaro preencheu o quintal.",
       "alvos": [

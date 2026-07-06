@@ -58,11 +58,24 @@ RE_CONSOLE  = re.compile(r"\*\*Erros JS:\*\*\s*(\d+)\s*\|\s*\*\*Erros de rede:\*
 RE_OVF_FAIL = re.compile(r"\|\s*fail\b", re.IGNORECASE)
 
 
+def _auditor_requires_playwright(script: str) -> bool:
+    path = ROOT / script
+    try:
+        source = path.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return "playwright.async_api" in source
+
+
 def run_auditor(script: str, timeout: int) -> tuple[int, str]:
     """Roda um auditor e retorna (exit_code, stderr_resumido)."""
+    command = [sys.executable, script]
+    if _auditor_requires_playwright(script):
+        command = ["uv", "run", "--with", "playwright", "python3", script]
+
     try:
         result = subprocess.run(
-            [sys.executable, script],
+            command,
             cwd=ROOT,
             capture_output=True,
             text=True,

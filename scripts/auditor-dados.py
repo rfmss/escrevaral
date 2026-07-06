@@ -259,6 +259,54 @@ def parse_syntax_set(name: str) -> list[str]:
     return [decode_js_string(raw) for raw in JS_STRING_RE.findall(match.group(1))]
 
 
+def benchmark_tag_coverage() -> dict[str, set[str]]:
+    corpus = load_json("scripts/bench-gramatica/frases-criticas.json") or {}
+    coverage: dict[str, set[str]] = defaultdict(set)
+    casos = corpus.get("casos") or []
+
+    def add_tags(texto: Any, values: set[str]) -> None:
+        key = clean_key(texto)
+        if key:
+            coverage[key].update(values)
+
+    for case in casos:
+        if not isinstance(case, dict):
+            continue
+
+        for target in case.get("alvos") or []:
+            if not isinstance(target, dict):
+                continue
+            tags: set[str] = set()
+            classe_tecnica = str(target.get("classe_tecnica", "")).upper().strip()
+            classe_escolar = clean_key(target.get("classe_escolar", ""))
+            if classe_tecnica == "ADJ" or "adjetivo" in classe_escolar:
+                tags.add("Adjective")
+            if classe_tecnica == "VERB" or "verbo" in classe_escolar:
+                tags.add("Verb")
+            if tags:
+                add_tags(target.get("texto", ""), tags)
+
+        alvo = case.get("alvo")
+        esperado = case.get("esperado")
+        tags: set[str] = set()
+        if isinstance(esperado, str):
+            esperado_norm = clean_key(esperado)
+            if esperado_norm == "adjetivo" or esperado == "Adjective":
+                tags.add("Adjective")
+            if esperado_norm == "verbo" or esperado == "Verb":
+                tags.add("Verb")
+        elif isinstance(esperado, list):
+            for item in esperado:
+                if str(item) == "Adjective":
+                    tags.add("Adjective")
+                elif str(item) == "Verb":
+                    tags.add("Verb")
+        if alvo and tags:
+            add_tags(alvo, tags)
+
+    return coverage
+
+
 def set_intersection(left: list[str], right: list[str], normalize=lambda x: str(x).lower()) -> list[str]:
     left_norm = {normalize(item): item for item in left}
     right_norm = {normalize(item): item for item in right}
@@ -272,6 +320,11 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
     adjetivos_norma = list(norma.get("adjetivos_comuns") or [])
     adjetivos_lexical = list((lexical.get("functionWords") or {}).get("adjetivos_comuns") or [])
     adjetivos_prim = parse_syntax_set("ADJETIVOS_PRIM")
+    coverage = benchmark_tag_coverage()
+
+    def has_pair_coverage(word: str) -> bool:
+        tags = coverage.get(clean_key(word), set())
+        return "Adjective" in tags and "Verb" in tags
 
     exact_lexical = set_intersection(adjetivos_lexical, verbos, normalize=lambda x: str(x).lower())
     if exact_lexical:
@@ -284,7 +337,8 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
         )
 
     exact_syntax = set_intersection(adjetivos_prim, verbos, normalize=lambda x: str(x).lower())
-    if exact_syntax:
+    exact_syntax_uncovered = [item for item in exact_syntax if not has_pair_coverage(item)]
+    if exact_syntax_uncovered:
         # Verificar se ja existe guarda pre-ADJETIVOS_PRIM no cascade de syntax-engine.js (v781+)
         with open("syntax-engine.js", encoding="utf-8") as _sf:
             _sc = _sf.read()
@@ -295,12 +349,13 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
             severity,
             "syntax-engine.js/ADJETIVOS_PRIM",
             "Adjetivo primitivo hardcoded tambem e forma verbal exata" + (" (mitigado por guarda pre-ADJETIVOS_PRIM no cascade)" if _guard_before else ""),
-            ", ".join(f"`{item}`" for item in exact_syntax[:30]),
-            "Guarda contextual ja presente antes de ADJETIVOS_PRIM; colisao coberta para formas verbais de presente." if _guard_before else "Checar verbos presentes antes de ADJETIVOS_PRIM ou resolver por janela contextual.",
+            ", ".join(f"`{item}`" for item in exact_syntax_uncovered[:30]),
+            "Guarda contextual ja presente antes de ADJETIVOS_PRIM; falta cobertura explicita no corpus para os casos restantes." if _guard_before else "Checar verbos presentes antes de ADJETIVOS_PRIM ou resolver por janela contextual.",
         )
 
     exact_pres = set_intersection(adjetivos_norma, verbos_pres, normalize=lambda x: str(x).lower())
-    if exact_pres:
+    exact_pres_uncovered = [item for item in exact_pres if not has_pair_coverage(item)]
+    if exact_pres_uncovered:
         # Verificar se a guarda adnominal (2-token lookback) esta presente no VERBOS_PRES do syntax-engine.js (v794+)
         with open("syntax-engine.js", encoding="utf-8") as _sf2:
             _sc2 = _sf2.read()
@@ -310,18 +365,19 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
             _pres_severity,
             "norma-data.json/adjetivos_comuns",
             "Adjetivos da norma colidem com presente verbal regular" + (" (mitigado por guarda adnominal 2-token no VERBOS_PRES)" if _has_adnominal_guard else ""),
-            ", ".join(f"`{item}`" for item in exact_pres[:30]),
-            "Guarda adnominal presente: Art+N+Adj bloqueado antes de VERBOS_PRES; colisao coberta." if _has_adnominal_guard else "Classificar por contexto sintatico: sujeito + forma presente => verbo; nome/artigo + termo => adjetivo.",
+            ", ".join(f"`{item}`" for item in exact_pres_uncovered[:30]),
+            "Cobrir cada forma restante com par verbo/adjetivo no corpus e validar a janela sintatica correspondente." if _has_adnominal_guard else "Classificar por contexto sintatico: sujeito + forma presente => verbo; nome/artigo + termo => adjetivo.",
         )
 
     exact_irr = set_intersection(adjetivos_norma, verbos_irr, normalize=lambda x: str(x).lower())
-    if exact_irr:
+    exact_irr_uncovered = [item for item in exact_irr if not has_pair_coverage(item)]
+    if exact_irr_uncovered:
         add_issue(
             "P1",
             "norma-data.json/adjetivos_comuns",
             "Adjetivos da norma colidem com formas verbais/participios irregulares",
-            ", ".join(f"`{item}`" for item in exact_irr[:30]),
-            "Manter se forem adjetivos legitimos, mas cobrir com teste contextual de particípio/adjetivo.",
+            ", ".join(f"`{item}`" for item in exact_irr_uncovered[:30]),
+            "Manter se forem adjetivos legitimos, mas cobrir com teste contextual de particípio/adjetivo nos pares ainda descobertos.",
         )
 
     normalized_sources = [
@@ -335,7 +391,7 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
     for source, words in normalized_sources:
         for word in words:
             key = clean_key(word)
-            if key in verb_norm and str(word).lower() not in exact_hits:
+            if key in verb_norm and str(word).lower() not in exact_hits and not has_pair_coverage(word):
                 normalized_hits.append(f"{source}: `{word}` -> `{key}`")
     if normalized_hits:
         add_issue(
@@ -343,7 +399,7 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
             "morfologia/listas",
             "Colisoes verbo-adjetivo aparecem apos tirar acento",
             "; ".join(sorted(set(normalized_hits))[:36]),
-            "Testar pares como serio/seria, publico/publica e largo/larga com e sem acento.",
+            "Adicionar pares explicitos de verbo/adjetivo ao corpus para cada forma ainda descoberta.",
         )
 
 
