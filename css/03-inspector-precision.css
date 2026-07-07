@@ -59,10 +59,10 @@
   overflow-x: hidden;
   /* var(--paper) garante contraste correto em dark themes */
   background: var(--paper);
-  border: 1px solid var(--border-aged);
+  border: 1px solid color-mix(in srgb, var(--border-aged) 62%, transparent);
   border-radius: 6px;
   /* Sombra reduzida: presença de papel, não elevação de card */
-  box-shadow: 0 2px 8px rgba(80, 55, 20, 0.07);
+  box-shadow: 0 1px 5px rgba(80, 55, 20, 0.05);
   padding: clamp(28px, 5vw, 64px);
 }
 
@@ -70,16 +70,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 24px;
+  margin: 0 0 16px;
 }
 .editor-view-controls {
   display: flex;
   align-items: center;
   gap: 2px;
-  background: var(--surface-low);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 2px;
+  background: color-mix(in srgb, var(--surface-low) 54%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius: 6px;
+  padding: 1px;
 }
 
 .editor-delete-btn {

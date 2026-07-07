@@ -372,7 +372,7 @@ function applyTemplateLayout() {
     }
     // Atualiza texto visível no botão da barra do editor
     const textNode = [...toggle.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-    if (textNode) textNode.textContent = state.template.open ? " Ocultar guia" : " Mostrar guia";
+    if (textNode) textNode.textContent = " Guia";
   });
 }
 
