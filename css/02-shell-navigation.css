@@ -1682,13 +1682,19 @@ html {
 
 /* Guia/Ler/Classes: toolbar quieta — presença de interruptor, não CTA */
 .editor-mode-bar .secondary-button {
-  padding: 5px 10px;
-  font-size: 12px;
+  min-height: 28px;
+  padding: 4px 8px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--muted);
   border-color: transparent;
   background: transparent;
-  border-radius: 6px;
+  border-radius: 5px;
+  gap: 6px;
+}
+
+.editor-mode-bar .secondary-button .material-symbols-outlined {
+  font-size: 15px;
 }
 /* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
    tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
@@ -1696,16 +1702,37 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   color: #6f6459;
 }
 .editor-mode-bar .secondary-button:hover {
-  background: var(--card);
+  background: color-mix(in srgb, var(--surface-low) 70%, transparent);
   color: var(--soft-ink);
   border-color: transparent;
 }
 /* Estado ativo — guia, leitura e mesa */
 .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
 .editor-mode-bar .secondary-button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
   color: var(--primary);
-  border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+  border-color: transparent;
+}
+
+.editor-quick-actions {
+  gap: 0;
+  padding: 2px;
+  border-color: color-mix(in srgb, var(--line) 78%, transparent);
+  background: color-mix(in srgb, var(--surface-low) 58%, transparent);
+}
+
+.editor-quick-actions > .secondary-button + .secondary-button {
+  position: relative;
+}
+
+.editor-quick-actions > .secondary-button + .secondary-button::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: color-mix(in srgb, var(--line) 76%, transparent);
 }
 
 [data-theme="cerrado-dark"] .module-tabs .tab,
@@ -1782,6 +1809,47 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   height: 1px;
   margin: 28px 0 42px;
   background: var(--line);
+}
+
+.writing-coach {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: 0;
+  border-left: 2px solid color-mix(in srgb, var(--primary) 18%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-low) 46%, var(--paper));
+}
+
+.writing-coach-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.writing-coach .eyebrow {
+  margin: 0 0 6px;
+}
+
+.writing-coach strong {
+  display: block;
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.writing-coach-copy p:last-child {
+  margin: 6px 0 0;
+  color: var(--soft-ink);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.writing-coach .secondary-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .writing-area,

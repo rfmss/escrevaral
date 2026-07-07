@@ -45,6 +45,7 @@ const ANALYTICS_VIEW_TITLES = {
 
 let _pendingAnalyticsView = null;
 let _lastAnalyticsPath = "";
+let activeTaskNav = "escrever";
 
 function getAnalyticsPath(viewName = getViewFromRoute()) {
   const route = VIEW_ROUTES.has(viewName) ? viewName : getViewFromRoute();
@@ -75,6 +76,21 @@ window.addEventListener("escrevaral:analytics-ready", () => {
   trackAnalyticsView(_pendingAnalyticsView || getViewFromRoute());
 });
 
+function syncTaskNavigation(viewName = getViewFromRoute()) {
+  if (viewName === "editor") activeTaskNav = "escrever";
+  else if (viewName === "arquivo") activeTaskNav = "organizar";
+  else if (viewName === "cronograma") activeTaskNav = "plano";
+  else if (viewName === "autoria") activeTaskNav = "proteger";
+  else if (viewName === "biblioteca") activeTaskNav = "revisar";
+  else if (viewName === "academia" && !["revisar", "aprender", "proteger"].includes(activeTaskNav)) activeTaskNav = "revisar";
+
+  taskNavControls.forEach((control) => {
+    const isActive = control.dataset.taskNav === activeTaskNav;
+    control.classList.toggle("is-active", isActive);
+    control.setAttribute("aria-current", isActive ? "page" : "false");
+  });
+}
+
 function setView(viewName, options = {}) {
   if (!VIEW_ROUTES.has(viewName)) {
     return;
@@ -98,6 +114,7 @@ function setView(viewName, options = {}) {
     control.setAttribute("aria-current", isActive ? "page" : "false");
   });
 
+  syncTaskNavigation(viewName);
   updateDockIndicator();
 
   if (viewName === "cronograma") renderCronograma();
@@ -355,7 +372,7 @@ function applyTemplateLayout() {
     }
     // Atualiza texto visível no botão da barra do editor
     const textNode = [...toggle.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
-    if (textNode) textNode.textContent = state.template.open ? " Ocultar guia" : " Mostrar guia";
+    if (textNode) textNode.textContent = " Guia";
   });
 }
 
@@ -552,8 +569,9 @@ function updateCreateNoteHeading() {
   const eyebrow = document.querySelector("[data-create-note-eyebrow]");
   const title = document.querySelector("[data-create-note-title]");
   const isGuide = createNoteContext === "guide";
-  if (eyebrow) eyebrow.textContent = isGuide ? "Guia de escrita" : "Novo texto";
-  if (title) title.textContent = isGuide ? "Escolher um guia" : "Começar";
+  const isProject = createNoteContext === "project";
+  if (eyebrow) eyebrow.textContent = isGuide ? "Guia de escrita" : isProject ? "Organizar projeto" : "Novo texto";
+  if (title) title.textContent = isGuide ? "Escolher um guia" : isProject ? "Escolher uma ficha" : "Começar";
 }
 
 function openCreateNote(options = {}) {
@@ -561,6 +579,14 @@ function openCreateNote(options = {}) {
   createNoteCategory = null;
   updateCreateNoteHeading();
   renderCreateNoteStep(1);
+  createNoteOverlay.hidden = false;
+}
+
+function openOrganizeStart() {
+  createNoteContext = "project";
+  createNoteCategory = "projeto";
+  updateCreateNoteHeading();
+  renderCreateNoteStep(2);
   createNoteOverlay.hidden = false;
 }
 
@@ -693,6 +719,7 @@ function closeCreateNote() {
   createNoteOverlay.hidden = true;
   createNoteParentId = null;
   createNoteContext = "manuscript";
+  createNoteCategory = null;
   updateCreateNoteHeading();
 }
 
@@ -733,11 +760,58 @@ function switchAtelier(tab) {
   const view = document.querySelector(".academy-view");
   if (!view) return;
   view.dataset.atelierActive = tab;
+  activeTaskNav = tab === "guias" ? "aprender" : tab === "publicar" ? "proteger" : "revisar";
+  syncTaskNavigation("academia");
   document.querySelectorAll('[data-action^="switch-atelier-"]').forEach(btn => {
     const isActive = btn.dataset.action === `switch-atelier-${tab}`;
     btn.classList.toggle("is-active", isActive);
     btn.setAttribute("aria-pressed", isActive ? "true" : "false");
   });
+}
+
+function goTaskView(task) {
+  activeTaskNav = task;
+
+  if (task === "escrever") {
+    setView("editor", { updateRoute: true });
+    focusEditor();
+    return;
+  }
+
+  if (task === "organizar") {
+    setView("arquivo", { updateRoute: true });
+    return;
+  }
+
+  if (task === "plano") {
+    setView("cronograma", { updateRoute: true });
+    return;
+  }
+
+  if (task === "proteger") {
+    setView("autoria", { updateRoute: true });
+    return;
+  }
+
+  if (task === "aprender") {
+    setView("academia", { updateRoute: true });
+    switchAtelier("guias");
+    requestAnimationFrame(() => {
+      const studio = document.querySelector(".template-studio");
+      if (studio) studio.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return;
+  }
+
+  if (task === "revisar") {
+    setView("academia", { updateRoute: true });
+    switchAtelier("revisar");
+    const tab = document.getElementById("at-voice");
+    if (tab) tab.checked = true;
+    if (getActiveManuscript() && isManuscriptDocument()) {
+      useActiveManuscriptForVoice();
+    }
+  }
 }
 
 function checkTerms() {
@@ -774,9 +848,16 @@ function acceptTerms(goTo) {
     state.template.selectedId = null;
     createBlankManuscript();
     setView("editor", { updateRoute: true });
+    requestAnimationFrame(() => enterFocusMode());
+  } else if (goTo === "import") {
+    setView("editor", { updateRoute: true });
+    requestAnimationFrame(() => document.querySelector("[data-import-manuscript-input]")?.click());
   } else if (goTo === "guide") {
     // Abre o bento de categorias (passo 1) sem pré-selecionar nenhuma
     openCreateNote({ context: "guide" });
+  } else if (goTo === "organize") {
+    setView("arquivo", { updateRoute: true });
+    openOrganizeStart();
   } else if (goTo === "continue") {
     // Vai direto para o editor com o manuscrito mais recente
     if (state.manuscripts.length > 0) {
@@ -1948,11 +2029,24 @@ const ACTION_HANDLERS = {
       if (det && !det.open) det.open = true;
     }, 200);
   },
+  "open-backup-from-proof":   () => {
+    setView("arquivo", { updateRoute: true });
+    setTimeout(() => {
+      const zone = document.querySelector(".archive-protect-zone");
+      if (!zone) return;
+      zone.scrollIntoView({ behavior: "smooth", block: "start" });
+      const det = zone.querySelector("details.archive-security-details");
+      if (det && !det.open) det.open = true;
+    }, 200);
+  },
   "toggle-audio-player":     () => toggleAudioPanel(),
   "toggle-share-panel":      () => toggleSharePanel(),
   "toggle-pomodoro":         () => togglePomodoro(),
   "toggle-rimalab-encyclopedia": () => toggleRimaLabEncyclopedia(),
   "scroll-rights":           () => rightsLab?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  "go-revisar":              () => goTaskView("revisar"),
+  "go-aprender":             () => goTaskView("aprender"),
+  "go-proteger":             () => goTaskView("proteger"),
   "switch-atelier-revisar":   () => switchAtelier("revisar"),
   "switch-atelier-guias":     () => switchAtelier("guias"),
   "switch-atelier-publicar":  () => switchAtelier("publicar"),
@@ -2000,7 +2094,9 @@ const ACTION_HANDLERS = {
     renderManuscriptNavigation();
   },
   "accept-terms-blank":      () => acceptTerms("blank"),
+  "accept-terms-import":     () => acceptTerms("import"),
   "accept-terms-guide":      () => acceptTerms("guide"),
+  "accept-terms-organize":   () => acceptTerms("organize"),
   "accept-terms-continue":   () => acceptTerms("continue"),
   "toggle-ob-disclosure":    () => {
     const body    = document.getElementById("ob-disc-body");

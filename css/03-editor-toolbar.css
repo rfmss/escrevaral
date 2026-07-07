@@ -175,29 +175,33 @@
   display: flex;
   align-items: center;
   gap: 1px;
-  background: var(--surface-low);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 2px;
+  background: color-mix(in srgb, var(--surface-low) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius: 5px;
+  padding: 1px;
 }
 .editor-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font: inherit;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   color: var(--muted);
   background: transparent;
   border: 0;
   border-radius: 4px;
-  padding: 4px 10px;
+  padding: 3px 7px;
+  min-height: 26px;
   cursor: pointer;
   transition: background var(--motion-quick), color var(--motion-quick);
 }
+.editor-view-btn .material-symbols-outlined { font-size: 15px; }
 .editor-view-btn.is-active,
 .editor-view-btn[aria-pressed="true"] {
-  background: var(--card);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 
@@ -205,17 +209,18 @@
 /* ── WRAPPER — mesmo visual de menu que .editor-mode-bar ── */
 .format-bar-wrap {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   border-radius: 6px;
-  border: 1px solid transparent;
+  border: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+  background: color-mix(in srgb, var(--surface-low) 32%, transparent);
   transition: background 0.18s, border-color 0.18s;
 }
 
 /* Hover: contorno + fundo idênticos ao padrão dos botões de modo */
 .format-bar-wrap:hover,
 .format-bar-wrap.is-scroll-active {
-  background: var(--surface-low);
-  border-color: var(--line);
+  background: color-mix(in srgb, var(--surface-low) 46%, transparent);
+  border-color: color-mix(in srgb, var(--line) 78%, transparent);
 }
 
 /* Gradientes de borda — indicam conteúdo escondido */
@@ -294,7 +299,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 6px 4px 12px;
+  padding: 4px 4px 8px;
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
@@ -326,9 +331,9 @@
 /* Separador entre grupos — mais largo e acinzentado */
 .fmt-sep-editorial {
   width: 1px;
-  height: 18px;
-  background: var(--line);
-  margin: 0 6px;
+  height: 16px;
+  background: color-mix(in srgb, var(--line) 74%, transparent);
+  margin: 0 4px;
   flex-shrink: 0;
   position: relative;
 }
@@ -336,22 +341,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 28px;
+  width: 28px;
+  height: 26px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   background: transparent;
   color: var(--soft-ink);
   cursor: pointer;
   font: inherit;
   transition: background var(--motion-quick), color var(--motion-quick);
 }
-.fmt-btn .material-symbols-outlined { font-size: 18px; }
+.fmt-btn .material-symbols-outlined { font-size: 17px; }
 
 .fmt-label {
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   text-transform: uppercase;
   line-height: 1;
   display: none;
@@ -359,10 +364,10 @@
 
 .fmt-btn-labeled {
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   width: auto;
-  min-width: 30px;
-  padding: 0 6px;
+  min-width: 28px;
+  padding: 0 5px;
 }
 
 /* Labels sempre visíveis no desktop — não dependem do .is-open */
@@ -380,28 +385,28 @@
   .fmt-label { display: block; }
   .fmt-btn-labeled { padding: 0 5px; }
 }
-.fmt-btn:hover { background: var(--surface-low); }
+.fmt-btn:hover { background: color-mix(in srgb, var(--surface-low) 82%, transparent); }
 .fmt-btn.is-active {
   background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: var(--primary);
 }
 .fmt-sep {
   width: 1px;
-  height: 18px;
-  background: var(--line);
-  margin: 0 4px;
+  height: 16px;
+  background: color-mix(in srgb, var(--line) 74%, transparent);
+  margin: 0 3px;
   flex-shrink: 0;
 }
 .fmt-select {
   font: inherit;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--soft-ink);
   background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 3px 6px;
+  border: 1px solid color-mix(in srgb, var(--line) 76%, transparent);
+  border-radius: 4px;
+  padding: 2px 6px;
   cursor: pointer;
-  height: 28px;
+  height: 26px;
 }
 .fmt-select:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
 

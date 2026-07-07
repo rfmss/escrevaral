@@ -13,6 +13,7 @@ function renderActiveManuscript() {
     countStat.textContent = "0 palavras · 0 parágrafos";
     focusCount.textContent = "0 palavras · 0 parágrafos";
     wpmStat.textContent = "—";
+    hideWritingCoach();
     return;
   }
   titleInput.value = manuscript.title;
@@ -317,6 +318,7 @@ function renderInspector() {
 
   const data = analyzeInspector(text);
   const densityEl = document.querySelector("[data-lexical-density]");
+  renderWritingCoach(manuscript, text, wordCount, data);
 
   if (!data) {
     const kind = manuscript?.kind;
@@ -369,6 +371,151 @@ function renderInspector() {
   }
 
   scheduleViciosObserver(manuscript, text, wordCount);
+}
+
+function resetWritingCoachCta() {
+  if (!writingCoachCta) return;
+  writingCoachCta.hidden = true;
+  writingCoachCta.textContent = "";
+  writingCoachCta.removeAttribute("data-action");
+  writingCoachCta.removeAttribute("aria-label");
+}
+
+function hideWritingCoach() {
+  if (!writingCoach) return;
+  writingCoach.hidden = true;
+  if (writingCoachEyebrow) writingCoachEyebrow.textContent = "Pista do texto";
+  if (writingCoachTitle) writingCoachTitle.textContent = "";
+  if (writingCoachBody) writingCoachBody.textContent = "";
+  resetWritingCoachCta();
+}
+
+function getWritingCoachMessage(manuscript, text, wordCount, data) {
+  if (!manuscript) return null;
+
+  const template = window.VeredaTemplates?.getTemplate?.(state.template.selectedId) || null;
+  const trimmedText = text.trim();
+  const topWord = data?.topWords?.[0] || null;
+  const topWordCount = topWord?.[1] || 0;
+  const topWordRatio = wordCount > 0 ? topWordCount / wordCount : 0;
+  const backupNeedsAttention = Boolean(backupWarning && !backupWarning.hidden);
+
+  if (!trimmedText) {
+    if (template) {
+      return {
+        eyebrow: "Folha destravada",
+        title: "O guia já está pronto. Agora entre pela primeira frase.",
+        body: "Escreva algumas linhas sem se preocupar em revisar. O Escrevaral puxa motores e oficinas depois que o texto ganha corpo.",
+      };
+    }
+
+    return {
+      eyebrow: "Primeiro passo",
+      title: "Comece pela folha ou traga um texto seu.",
+      body: "Se já escreveu no Word, no celular ou em outro app, pode puxar o arquivo direto para cá. Se preferir, siga livre por algumas linhas e o resto aparece no tempo certo.",
+      action: "import-manuscript-files",
+      cta: "Trazer texto",
+    };
+  }
+
+  if (!isManuscriptDocument(manuscript)) {
+    return {
+      eyebrow: "Organização do projeto",
+      title: "Preencha primeiro o que destrava o resto.",
+      body: "Nesta ficha, foque no essencial: nome, conflito, objetivo ou contexto. O detalhamento pode vir depois, sem pressa.",
+      action: "go-aprender",
+      cta: "Abrir guias",
+    };
+  }
+
+  if (wordCount < 40) {
+    return {
+      eyebrow: "Fluxo primeiro",
+      title: "Ainda é cedo para revisar.",
+      body: "Com poucas linhas, qualquer diagnóstico pode mais atrapalhar do que ajudar. Continue até formar um bloco e deixe os motores lerem depois.",
+    };
+  }
+
+  if (topWord && topWordCount >= 4 && topWordRatio >= 0.05) {
+    return {
+      eyebrow: "Pista do texto",
+      title: `"${topWord[0]}" já comanda boa parte deste trecho.`,
+      body: "Talvez seja repetição útil, talvez eco sem querer. O modo Revisar mostra isso com leitura local e ajuda a decidir com calma.",
+      action: "go-revisar",
+      cta: "Revisar trecho",
+    };
+  }
+
+  if (data && data.flesch <= 45 && wordCount >= 120) {
+    return {
+      eyebrow: "Leitura brasileira",
+      title: "O trecho ficou mais denso do que o comum.",
+      body: "Pode ser escolha de estilo ou atrito real. A revisão local do Escrevaral ajuda a enxergar frase longa, ritmo e clareza sem depender de internet.",
+      action: "go-revisar",
+      cta: "Ler no revisar",
+    };
+  }
+
+  if (backupNeedsAttention && wordCount >= 120) {
+    return {
+      eyebrow: "Proteção do acervo",
+      title: "Vale guardar este texto antes de seguir.",
+      body: "Um clique já leva você para a cópia de segurança local. O objetivo aqui é não fazer ninguém perder trabalho por falta de nuvem ou assinatura.",
+      action: "open-backup-from-proof",
+      cta: "Guardar acervo",
+    };
+  }
+
+  if (!manuscript.voiceProfile && wordCount >= 180) {
+    return {
+      eyebrow: "Motor de voz",
+      title: "Seu texto já tem material para um espelho de voz.",
+      body: "Abra a leitura completa para ver gesto, pontos cegos, campos de linguagem e exercícios puxados do próprio trecho.",
+      action: "go-revisar",
+      cta: "Abrir revisão",
+    };
+  }
+
+  if (wordCount >= 500) {
+    return {
+      eyebrow: "Oficina sob demanda",
+      title: "O texto ganhou corpo e os motores já acompanham seu ritmo.",
+      body: "Siga escrevendo se estiver no embalo. Quando quiser, revisão, prova de autoria e organização já estão a um clique sem tirar você da folha.",
+      action: "go-proteger",
+      cta: "Ver proteção",
+    };
+  }
+
+  return {
+    eyebrow: "Texto em andamento",
+    title: "Continue mais um pouco antes de trocar de modo.",
+    body: "O Escrevaral está lendo junto, mas sem atropelar sua mão. Quando você sentir que fechou um bloco, a revisão entra mais forte.",
+  };
+}
+
+function renderWritingCoach(manuscript, text, wordCount, data) {
+  if (!writingCoach || !writingCoachTitle || !writingCoachBody) return;
+
+  const coach = getWritingCoachMessage(manuscript, text, wordCount, data);
+  if (!coach) {
+    hideWritingCoach();
+    return;
+  }
+
+  writingCoach.hidden = false;
+  if (writingCoachEyebrow) writingCoachEyebrow.textContent = coach.eyebrow || "Pista do texto";
+  writingCoachTitle.textContent = coach.title || "";
+  writingCoachBody.textContent = coach.body || "";
+
+  if (!writingCoachCta || !coach.action || !coach.cta) {
+    resetWritingCoachCta();
+    return;
+  }
+
+  writingCoachCta.hidden = false;
+  writingCoachCta.dataset.action = coach.action;
+  writingCoachCta.textContent = coach.cta;
+  writingCoachCta.setAttribute("aria-label", coach.cta);
 }
 
 let _viciosTimer = null;
