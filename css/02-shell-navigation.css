@@ -1784,6 +1784,46 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   background: var(--line);
 }
 
+.writing-coach {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-low) 78%, var(--paper));
+}
+
+.writing-coach-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.writing-coach .eyebrow {
+  margin: 0 0 6px;
+}
+
+.writing-coach strong {
+  display: block;
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.writing-coach-copy p:last-child {
+  margin: 6px 0 0;
+  color: var(--soft-ink);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.writing-coach .secondary-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 .writing-area,
 .reading-sample {
   outline: 0;

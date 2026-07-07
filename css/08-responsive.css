@@ -326,6 +326,18 @@
     padding: 4px;
   }
 
+  .writing-coach {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .writing-coach .secondary-button {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* Inspector/análise: oculta em portrait pequeno (distrai na escrita) */
   .app-shell:not(.is-right-expanded) .inspector {
     display: none;

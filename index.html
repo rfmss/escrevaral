@@ -153,13 +153,13 @@
           </div>
         </div>
 
-        <nav class="module-tabs" aria-label="Módulos do Escrevaral">
-          <button class="tab is-active" data-view-target="editor" data-vrda-tooltip="Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui.">Escrever</button>
-          <button class="tab" data-view-target="biblioteca" data-vrda-tooltip="Veja o significado, sinônimos e uso de qualquer palavra do seu manuscrito — sem sair do texto.">Palavras</button>
-          <button class="tab" data-view-target="autoria" data-vrda-tooltip="Registro do seu ritmo de digitação — único como uma assinatura. Exporta prova de autoria humana.">Autoria</button>
-          <button class="tab" data-view-target="arquivo" data-vrda-tooltip="Todos os seus manuscritos: organize, etiquete, exporte e guarde cópias de segurança.">Acervo</button>
-          <button class="tab" data-view-target="academia" data-vrda-tooltip="Guias, revisão, oficinas e publicação — tudo o que conversa com o seu texto.">Ateliê</button>
-          <button class="tab" data-view-target="cronograma" data-vrda-tooltip="Planeje e acompanhe seu calendário de escrita com metas e sessões.">Plano</button>
+        <nav class="module-tabs" aria-label="Trilhas principais do Escrevaral">
+          <button class="tab is-active" data-task-nav="escrever" data-view-target="editor" data-vrda-tooltip="Abra, escreva e edite seus manuscritos.">Escrever</button>
+          <button class="tab" data-task-nav="revisar" data-action="go-revisar" data-vrda-tooltip="Leia o texto com apoio dos motores do Escrevaral: voz, ritmo, palavras e pontos de atenção.">Revisar</button>
+          <button class="tab" data-task-nav="organizar" data-view-target="arquivo" data-vrda-tooltip="Organize manuscritos, notas ligadas, versões e saídas.">Organizar</button>
+          <button class="tab" data-task-nav="aprender" data-action="go-aprender" data-vrda-tooltip="Abra guias, leituras e oficinas para aprender enquanto escreve.">Aprender</button>
+          <button class="tab" data-task-nav="proteger" data-action="go-proteger" data-vrda-tooltip="Proteja o texto com prova de autoria e atalhos para cópia de segurança.">Proteger</button>
+          <button class="tab" data-task-nav="plano" data-view-target="cronograma" data-vrda-tooltip="Planeje seu ritmo de escrita com metas e sessões.">Plano</button>
         </nav>
 
         <div class="topbar-actions">
@@ -363,6 +363,15 @@
                 </div>
                 </div><!-- /format-bar-wrap -->
 
+                <section class="writing-coach" data-writing-coach hidden aria-live="polite">
+                  <div class="writing-coach-copy">
+                    <p class="eyebrow" data-writing-coach-eyebrow>Pista do texto</p>
+                    <strong data-writing-coach-title></strong>
+                    <p data-writing-coach-body></p>
+                  </div>
+                  <button class="secondary-button" data-writing-coach-cta hidden></button>
+                </section>
+
                 <div class="title-block">
                   <input class="title-input" placeholder="Título do texto" aria-label="Título do texto">
                   <span class="title-rule"></span>
@@ -480,6 +489,10 @@
                   <button class="secondary-button proof-send-btn" data-action="send-proof-to-editor">
                     <span class="material-symbols-outlined">forward_to_inbox</span>
                     Enviar para o editor
+                  </button>
+                  <button class="secondary-button" data-action="open-backup-from-proof">
+                    <span class="material-symbols-outlined">shield_locked</span>
+                    Guardar o acervo
                   </button>
                 </div>
                 <p>Funciona sem internet. Guarda os sinais do seu processo — só abre aqui no Escrevaral.</p>
@@ -1493,25 +1506,30 @@
               <button class="ob-btn" data-action="accept-terms-guide">Escolher um guia</button>
             </div>
 
-            <!-- Palavras — informativo -->
             <div class="ob-pillar ob-pillar--info">
-              <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">spellcheck</span>
-              <h2 class="ob-pillar-title">Palavras</h2>
-              <p class="ob-pillar-sub">Léxico, rima, sintaxe e revisão.</p>
+              <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">upload_file</span>
+              <h2 class="ob-pillar-title">Trazer texto</h2>
+              <p class="ob-pillar-sub">Word, TXT ou Markdown.</p>
+              <button class="ob-btn" data-action="accept-terms-import">Trazer do computador</button>
             </div>
 
-            <!-- Tudo seu — informativo -->
+            <div class="ob-pillar ob-pillar--info">
+              <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">workspaces</span>
+              <h2 class="ob-pillar-title">Organizar projeto</h2>
+              <p class="ob-pillar-sub">Personagem, cena, mundo e cronologia.</p>
+              <button class="ob-btn" data-action="accept-terms-organize">Abrir fichas</button>
+            </div>
+
+            <div class="ob-pillar ob-pillar--info">
+              <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">psychology</span>
+              <h2 class="ob-pillar-title">Revisão brasileira</h2>
+              <p class="ob-pillar-sub">Voz, palavras, sintaxe e ritmo em pt-BR.</p>
+            </div>
+
             <div class="ob-pillar ob-pillar--info">
               <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">shield</span>
               <h2 class="ob-pillar-title">Tudo seu</h2>
               <p class="ob-pillar-sub">Sem nuvem. Sem IA. Só seu.</p>
-            </div>
-
-            <!-- Mesa no celular — informativo -->
-            <div class="ob-pillar ob-pillar--info">
-              <span class="material-symbols-outlined ob-pillar-icon" aria-hidden="true">smartphone</span>
-              <h2 class="ob-pillar-title">Mesa no celular</h2>
-              <p class="ob-pillar-sub">Leve e traga seus textos.</p>
             </div>
 
           </div>
@@ -1883,25 +1901,25 @@
   </script>
   <!-- ── NAVEGAÇÃO MÓVEL — dock inferior e rail lateral ───────────────── -->
   <nav class="mobile-dock" id="mobile-dock" aria-label="Navegação principal">
-    <button class="dock-item" data-view-target="editor" aria-current="page">
+    <button class="dock-item" data-task-nav="escrever" data-view-target="editor" aria-current="page">
       <span class="material-symbols-outlined" aria-hidden="true">edit_note</span>
       <span class="dock-label">Escrever</span>
     </button>
-    <button class="dock-item" data-view-target="biblioteca">
-      <span class="material-symbols-outlined" aria-hidden="true">auto_stories</span>
-      <span class="dock-label">Palavras</span>
+    <button class="dock-item" data-task-nav="revisar" data-action="go-revisar">
+      <span class="material-symbols-outlined" aria-hidden="true">psychology</span>
+      <span class="dock-label">Revisar</span>
     </button>
-    <button class="dock-item" data-view-target="autoria">
-      <span class="material-symbols-outlined" aria-hidden="true">fingerprint</span>
-      <span class="dock-label">Autoria</span>
+    <button class="dock-item" data-task-nav="proteger" data-action="go-proteger">
+      <span class="material-symbols-outlined" aria-hidden="true">shield_locked</span>
+      <span class="dock-label">Proteger</span>
     </button>
-    <button class="dock-item" data-view-target="arquivo">
+    <button class="dock-item" data-task-nav="organizar" data-view-target="arquivo">
       <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span>
-      <span class="dock-label">Acervo</span>
+      <span class="dock-label">Organizar</span>
     </button>
-    <button class="dock-item" data-view-target="academia">
+    <button class="dock-item" data-task-nav="aprender" data-action="go-aprender">
       <span class="material-symbols-outlined" aria-hidden="true">school</span>
-      <span class="dock-label">Ateliê</span>
+      <span class="dock-label">Aprender</span>
     </button>
     <!-- Mais: abre bandeja com Plano, impressão e cópia de segurança -->
     <button class="dock-item dock-mais-btn" data-action="toggle-bandeja">
@@ -1909,7 +1927,7 @@
       <span class="dock-label">Mais</span>
     </button>
     <!-- Item extra — apenas no rail do tablet -->
-    <button class="dock-item dock-rail-only" data-view-target="cronograma">
+    <button class="dock-item dock-rail-only" data-task-nav="plano" data-view-target="cronograma">
       <span class="material-symbols-outlined" aria-hidden="true">route</span>
       <span class="dock-label">Plano</span>
     </button>
