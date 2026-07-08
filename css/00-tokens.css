@@ -259,12 +259,18 @@
   color: #3a2c22;
 }
 
-/* Vereda: grupo Guia/Ler/Mesa tem fundo próprio escuro (--surface-low) — ink claro evita texto invisível */
+/* Vereda: grupo Guia/Ler/Fundo fica sobre o pergaminho — usar chip quente, nao bloco escuro */
+[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls {
+  background: rgba(58, 44, 34, 0.08);
+  border-color: rgba(58, 44, 34, 0.18);
+}
 [data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button {
-  color: var(--muted);
+  color: #5f4b3a;
 }
 [data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover {
-  color: var(--soft-ink);
+  background: rgba(58, 44, 34, 0.10);
+  color: #1c1714;
+  border-color: transparent;
 }
 
 [data-theme="scriptorium"] .editor-paper .fmt-btn:hover {
@@ -459,6 +465,12 @@
   background: color-mix(in srgb, var(--primary) 22%, var(--surface-mid));
   color: var(--primary);
   border-color: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+[data-theme="scriptorium"] .editor-split:not(.is-template-collapsed) .editor-paper .editor-mode-bar .editor-view-controls .secondary-button[data-action="toggle-template-panel"],
+[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button[aria-pressed="true"] {
+  background: rgba(201, 125, 50, 0.14);
+  color: #7c4616;
+  border-color: rgba(158, 94, 32, 0.24);
 }
 
 [data-theme="scriptorium"] .crono-month-btn {

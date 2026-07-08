@@ -286,6 +286,40 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   background: var(--surface);
 }
 
+@media (max-width: 560px) {
+  .academy-tools-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
+  }
+
+  .academy-tool-tab {
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+    gap: 6px;
+    padding: 12px 10px;
+    line-height: 1.25;
+  }
+
+  .academy-tools-tabs label[for="at-biblioteca"],
+  .academy-tools-tabs label[for="at-treino"] {
+    margin-left: 0;
+    padding-left: 10px;
+    border-left: none;
+  }
+
+  .academy-tools-tabs label[for="at-vocab"],
+  .academy-tools-tabs label[for="at-biblioteca"],
+  .academy-tools-tabs label[for="at-treino"] {
+    border-top: 1px solid var(--line);
+  }
+
+  .academy-tools-tabs label[for="at-treino"] {
+    grid-column: 1 / -1;
+  }
+}
+
 /* Frame da Biblioteca */
 .academia-biblioteca-frame {
   width: 100%;

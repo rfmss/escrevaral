@@ -310,13 +310,36 @@
         _addUniqueTag(t.tags, "Adverb");
       }
 
+      const nextVerbToken = tks.slice(i + 1).find(token => token?.tags?.includes("Verb"));
+      const nextVerbNorm = nextVerbToken ? _stripDiac(nextVerbToken.normal || "") : "";
+      const nextVerbIsInfinitive = /(?:ar|er|ir)$/.test(nextVerbNorm);
+      const nextLooksObject = nextTags.includes("Determiner")
+        || (nextTags.includes("Pronoun") && !nextTags.includes("Preposition"))
+        || (nextTags.includes("Noun") && !nextTags.includes("Verb") && !nextTags.includes("Adjective"));
+
+      if (t.tags.length === 1 && t.tags[0] === "Adjective"
+          && _VERBOS_PRES.has(na)
+          && prevTags.includes("Noun")
+          && !prevTags.includes("Pronoun")
+          && !prevTags.includes("Preposition")) {
+        if (na === "precisa" && nextNorm === "de") {
+          t.tags[0] = "Verb";
+        } else if (nextLooksObject) {
+          t.tags[0] = "Verb";
+        } else if (na === "precisa"
+            && ["de", "do", "da", "dos", "das"].includes(nextNorm)
+            && (!nextVerbNorm || nextVerbIsInfinitive)) {
+          t.tags[0] = "Verb";
+        }
+      }
+
       // R6 — diacríticos distintivos sem acento: preservar a leitura verbal,
       // mas registrar a leitura adjetiva quando o contexto nominal pede alerta
       // ortográfico ("opinião pública", "conversa séria").
       if (_DIACRITICO_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && nextTags.includes("Verb")) {
         _addUniqueTag(t.tags, "Adjective");
       }
-      if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && _ADV_INTENS_ADJ_CTX.has(nextNorm)) {
+      if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && (_ADV_INTENS_ADJ_CTX.has(nextNorm) || nextTags.includes("Verb"))) {
         _addUniqueTag(t.tags, "Adjective");
       }
 
@@ -457,6 +480,14 @@
       // P0.4: verificar verbos irregulares e presentes ANTES de adjetivos — evita sequestro
       else if (VERBOS_AUX.has(norm)) { tags.push("Verb"); }
       else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) { tags.push("Verb"); }
+      else if (norm === "integra"
+          && i >= 2
+          && !PREPS_OI.has(tokens[i-1].toLowerCase())
+          && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase())
+          && i + 1 < tokens.length
+          && !PREPS_OI.has(tokens[i+1].toLowerCase())
+          && !CONTRACOES_PREP_DEM.has(tokens[i+1].toLowerCase())
+          && !/^[.,;:!?—]$/.test(tokens[i+1])) { tags.push("Verb"); }
       else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm)) && i > 0 && !PREPS_OI.has(tokens[i-1].toLowerCase()) && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase()) && !(i >= 2 && (ARTIGOS_DEF.has(tokens[i-2].toLowerCase()) || tokens[i-2].toLowerCase() === "a"))) { tags.push("Verb"); }
       else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
