@@ -3771,3 +3771,113 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
 .share-option small  { display: block; font-size: 11px; color: var(--muted); margin-top: 1px; }
 
 .share-option.share-copied small { color: var(--primary); }
+
+/* ── Primeira mesa: reduzir susto da primeira visita ───────────────────── */
+.first-session-tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface-low));
+  color: var(--soft-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.first-session-tools[hidden] { display: none !important; }
+.first-session-tools .material-symbols-outlined { font-size: 16px; }
+
+.ob-calm-note {
+  max-width: 560px;
+  margin: -8px auto 22px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.app-shell.is-first-writing-session .module-tabs .tab:not([data-view-target="editor"]),
+.app-shell.is-first-writing-session .topbar-audio-btn,
+.app-shell.is-first-writing-session .topbar-search,
+.app-shell.is-first-writing-session .topbar-share-btn,
+.app-shell.is-first-writing-session [data-offline-status],
+.app-shell.is-first-writing-session [data-action="toggle-dark-mode"],
+.app-shell.is-first-writing-session [data-action="toggle-fullscreen"],
+.app-shell.is-first-writing-session .sidebar,
+.app-shell.is-first-writing-session .panel-rail,
+.app-shell.is-first-writing-session .template-reference,
+.app-shell.is-first-writing-session .split-resizer,
+.app-shell.is-first-writing-session .editor-mode-bar .secondary-button,
+.app-shell.is-first-writing-session .fmt-group-editorial,
+.app-shell.is-first-writing-session .fmt-sep-editorial,
+.app-shell.is-first-writing-session .statusbar-social,
+.app-shell.is-first-writing-session .statusbar-offline-note {
+  display: none !important;
+}
+
+.app-shell.is-first-writing-session .workspace {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.app-shell.is-first-writing-session .editor-split,
+.app-shell.is-first-writing-session .editor-split[data-template-side="right"] {
+  width: min(820px, 100%);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.app-shell.is-first-writing-session .editor-paper,
+.app-shell.is-first-writing-session .editor-split[data-template-side="right"] .editor-paper {
+  grid-column: 1;
+}
+
+.app-shell.is-first-writing-session .editor-mode-bar {
+  justify-content: flex-end;
+}
+
+.app-shell.is-first-writing-session .format-bar {
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .first-session-tools {
+    padding-inline: 10px;
+    font-size: 11px;
+  }
+  .app-shell.is-first-writing-session .module-tabs {
+    display: none;
+  }
+}
+
+/* Onboarding de baixa ansiedade: uma decisão principal, sem vitrine de módulos. */
+.ob-pillar-bento {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 520px;
+  margin-inline: auto;
+}
+.ob-pillar--info {
+  display: none;
+}
+.ob-pillar--guias {
+  background: transparent;
+  border-style: dashed;
+  padding: 10px 12px;
+}
+.ob-pillar--guias .ob-pillar-icon,
+.ob-pillar--guias .ob-pillar-sub {
+  display: none;
+}
+.ob-pillar--guias .ob-pillar-title {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.ob-pillar--guias .ob-btn {
+  padding: 8px 12px;
+  text-align: center;
+  color: var(--muted);
+  background: transparent;
+}

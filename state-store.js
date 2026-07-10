@@ -9,6 +9,8 @@ const BACKUP_META_STORAGE_KEY = "vereda.backup-meta.v1";
 const RIMALAB_STORAGE_KEY = "vereda.rimalab.v1";
 const RIMALAB_SAVED_AT_KEY = "vereda.rimalab-saved-at.v1";
 const FIRST_VISIT_KEY = "vrda-first-visit";
+const FIRST_WRITING_DONE_KEY = "escrevaral-primeira-mesa-concluida-v1";
+const FIRST_WRITING_STARTED_KEY = "escrevaral-primeira-mesa-iniciada-v1";
 const TERMS_KEY       = "escrevaral-termos-v1";
 
 if (new URLSearchParams(window.location.search).get("reset") === "true") {
