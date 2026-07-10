@@ -3801,13 +3801,14 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
 }
 .first-session-tools[hidden] { display: none !important; }
 .first-session-tools .material-symbols-outlined { font-size: 16px; }
 
 .ob-calm-note {
   max-width: 560px;
-  margin: -8px auto 22px;
+  margin: -14px auto 22px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.55;
@@ -3825,6 +3826,8 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
 .app-shell.is-first-writing-session .panel-rail,
 .app-shell.is-first-writing-session .template-reference,
 .app-shell.is-first-writing-session .split-resizer,
+.app-shell.is-first-writing-session .editor-mode-bar,
+.app-shell.is-first-writing-session .format-bar-wrap,
 .app-shell.is-first-writing-session .editor-mode-bar .secondary-button,
 .app-shell.is-first-writing-session .fmt-group-editorial,
 .app-shell.is-first-writing-session .fmt-sep-editorial,
@@ -3866,6 +3869,43 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
   }
 }
 
+
+.first-session-note {
+  display: none;
+}
+
+.app-shell.is-first-writing-session .first-session-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto 22px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--primary) 16%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--primary) 5%, transparent);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.app-shell.is-first-writing-session .first-session-note .material-symbols-outlined {
+  margin-top: 1px;
+  color: var(--primary);
+  font-size: 18px;
+}
+.app-shell.is-first-writing-session .first-session-note p {
+  margin: 0;
+}
+.app-shell.is-first-writing-session .first-session-note strong {
+  color: var(--soft-ink);
+  font-weight: 700;
+}
+
+.app-shell.is-first-writing-session .editor-paper {
+  padding-top: clamp(22px, 4vw, 42px);
+}
+
+
 /* Onboarding de baixa ansiedade: uma decisão principal, sem vitrine de módulos. */
 .ob-pillar-bento {
   grid-template-columns: minmax(0, 1fr);
@@ -3876,22 +3916,26 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
   display: none;
 }
 .ob-pillar--guias {
+  align-items: center;
   background: transparent;
-  border-style: dashed;
-  padding: 10px 12px;
+  border-color: transparent;
+  padding: 2px 12px 0;
 }
 .ob-pillar--guias .ob-pillar-icon,
 .ob-pillar--guias .ob-pillar-sub {
   display: none;
 }
 .ob-pillar--guias .ob-pillar-title {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
+  display: none;
 }
 .ob-pillar--guias .ob-btn {
   padding: 8px 12px;
+  border-color: transparent;
   text-align: center;
   color: var(--muted);
   background: transparent;
+  font-size: 12px;
+}
+.ob-pillar--guias .ob-btn::before {
+  content: "Prefiro ";
 }
