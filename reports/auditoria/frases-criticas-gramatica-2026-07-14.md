@@ -1,0 +1,1929 @@
+# Bancada gramatical - frases criticas - 2026-07-14
+
+Base URL: `http://localhost:8799`
+Navegador: `/usr/bin/chromium`
+Casos: 1915
+Alvos: 1915
+Alvos divergentes: 0
+
+## Resumo por caso
+
+- ok: 1915
+
+## Todos os casos
+
+- `ok` `diacritico-publica-verbo-01`: A revista publica textos novos toda semana.
+- `ok` `diacritico-publica-adjetivo-01`: A opiniao publica mudou depois do debate.
+- `ok` `diacritico-seria-verbo-01`: Ela seria mais cuidadosa se soubesse do risco.
+- `ok` `diacritico-seria-adjetivo-01`: A conversa seria demais para virar brincadeira.
+- `ok` `preso-participio-passiva-01`: O suspeito foi preso ontem.
+- `ok` `preso-adjetivo-predicativo-01`: Ele ficou preso no elevador.
+- `ok` `presos-substantivacao-01`: Os presos chegaram cedo ao patio.
+- `ok` `enquanto-conjuncao-01`: Ela escrevia enquanto a casa dormia.
+- `ok` `enquanto-locucao-adverbial-01`: Por enquanto, ela preferiu esperar.
+- `ok` `enquanto-isso-conector-01`: Enquanto isso, o menino escondia a carta.
+- `ok` `larga-adjetivo-01`: A estrada larga cortava o vale.
+- `ok` `larga-verbo-01`: Ela larga tudo quando se cansa.
+- `ok` `estreita-adjetivo-01`: A rua estreita guardava sombra.
+- `ok` `estreita-verbo-01`: Ele estreita os olhos antes de responder.
+- `ok` `participio-adjetivado-contido-01`: Ele respondeu com um sorriso contido.
+- `ok` `participio-adjetivado-oculto-01`: O socio oculto apareceu no fim.
+- `ok` `homografo-completa-adjetivo-01`: A edição completa do diário preserva cada corte da autora.
+- `ok` `homografo-completa-verbo-01`: A nota completa o argumento do prefácio.
+- `ok` `homografo-critica-adjetivo-01`: A leitura critica do romance incomoda pelo rigor.
+- `ok` `homografo-critica-verbo-01`: A resenhista critica o narrador pela distancia moral.
+- `ok` `homografo-estreito-adjetivo-01`: O corredor estreito obriga a leitura em silencio.
+- `ok` `homografo-estreito-verbo-01`: Eu estreito o foco quando reviso a cena final.
+- `ok` `diacritico-integra-adjetivo-01`: A edicao integra do diario preserva rasuras e cortes.
+- `ok` `diacritico-integra-verbo-01`: O romance integra mito e memoria na mesma respiracao.
+- `ok` `homografo-precisa-verbo-01`: O manuscrito precisa de silencio para amadurecer.
+- `ok` `participio-contido-passiva-01`: O incendio foi contido antes de alcancar o arquivo.
+- `ok` `participio-oculto-passiva-01`: O nome foi oculto na edicao anotada.
+- `ok` `diacritico-publico-adjetivo-01`: O debate publico mudou a leitura do livro.
+- `ok` `diacritico-publico-verbo-01`: Eu publico o conto quando o ritmo finalmente fecha.
+- `ok` `diacritico-serias-adjetivo-01`: As perguntas serias pedem um narrador a altura.
+- `ok` `diacritico-serias-verbo-01`: Tu serias mais convincente com menos ornamento.
+- `ok` `canto-substantivo-01`: O canto do pássaro preencheu o quintal.
+- `ok` `canto-verbo-01`: Eu canto quando estou feliz.
+- `ok` `cedo-adverbio-01`: Ela acordou cedo para escrever.
+- `ok` `cedo-verbo-01`: Cedo meu lugar para quem precisar.
+- `ok` `vale-substantivo-01`: O vale verde escondia uma aldeia.
+- `ok` `vale-verbo-expressao-01`: Vale a pena tentar mais uma vez.
+- `ok` `alto-adverbio-pos-verbo-01`: Ela falou alto para ser ouvida.
+- `ok` `alto-adjetivo-predicativo-01`: A janela estava alta demais para alcançar.
+- `ok` `jogo-verbo-pos-pronome-01`: Eu jogo toda semana com amigos.
+- `ok` `jogo-substantivo-01`: O jogo terminou no último minuto.
+- `ok` `acordo-substantivo-01`: O acordo foi assinado ontem.
+- `ok` `acordo-verbo-01`: Eu acordo cedo todo dia.
+- `ok` `sonho-substantivo-01`: O sonho dela era escrever.
+- `ok` `sonho-verbo-01`: Eu sonho com uma vida diferente.
+- `ok` `gosto-substantivo-01`: O gosto amargo ficou na boca.
+- `ok` `gosto-verbo-01`: Eu gosto de ler antes de dormir.
+- `ok` `fala-sussurrar-definicao-01`: Ela sussurrou o nome dele para que ninguem ouvisse.
+- `ok` `r10-passo-verbo-01`: Eu passo pelo parque todo dia.
+- `ok` `r10-passo-substantivo-01`: O passo do dançarino era preciso.
+- `ok` `r10-peso-verbo-01`: Eu peso os ingredientes antes de cozinhar.
+- `ok` `r10-peso-substantivo-01`: O peso da mochila era grande.
+- `ok` `r10-leio-verbo-01`: Eu leio um livro por semana.
+- `ok` `r10-vejo-verbo-01`: Eu vejo o problema com clareza.
+- `ok` `r10-pego-verbo-01`: Eu pego o ônibus às sete.
+- `ok` `r9-rapido-adverbio-01`: Ela correu rápido para chegar a tempo.
+- `ok` `r9-alto-adverbio-01`: Ela falou alto para ser ouvida.
+- `ok` `r9-claro-adjetivo-copula-01`: O resultado foi claro e direto.
+- `ok` `r9-claro-adverbio-01`: Ele escreveu claro para todos entenderem.
+- `ok` `r9-duro-adjetivo-copula-01`: O jogo foi duro do começo ao fim.
+- `ok` `r9-duro-adverbio-01`: Ela trabalha duro para alcançar seus objetivos.
+- `ok` `r7b-certa-adjetivo-copula-01`: A resposta foi certa desde o início.
+- `ok` `r11-certo-adverbio-01`: Ele chegou certo no horário.
+- `ok` `r10-canto-verbo-01`: Eu canto para me expressar.
+- `ok` `r2-canto-substantivo-01`: O canto do pássaro me acalmou.
+- `ok` `r10-toco-verbo-01`: Eu toco violão nas horas livres.
+- `ok` `r11-certa-adverbio-01`: Ela acertou certa no alvo.
+- `ok` `r1b-versos-noun-01`: O poeta criou versos belos.
+- `ok` `r1b-poemas-noun-01`: Ela leu poemas difíceis.
+- `ok` `r1b-personagens-noun-01`: A escritora criou personagens vivos.
+- `ok` `r1b-leitores-noun-01`: Os leitores amam histórias longas.
+- `ok` `r4-poder-noun-01`: O poder do amor transforma vidas.
+- `ok` `r4-valor-noun-01`: Ele não sabe o valor do silêncio.
+- `ok` `r7-escrito-adj-01`: O manuscrito foi escrito com cuidado.
+- `ok` `r7-feito-adj-01`: O livro foi feito para durar.
+- `ok` `r7a-aberta-adj-01`: A janela estava aberta desde manhã.
+- `ok` `r7a-limpo-adj-01`: O texto ficou limpo depois da revisão.
+- `ok` `r7a-livre-adj-01`: O caminho ficou livre após a tempestade.
+- `ok` `r7b-clara-adj-01`: A resposta foi clara e direta.
+- `ok` `r9-baixo-adv-01`: Ele fala baixo para ninguém ouvir.
+- `ok` `r9-longe-adv-01`: O menino correu longe demais.
+- `ok` `r8-cedo-verbo-01`: Cedo meu lugar para quem precisa mais.
+- `ok` `r8-cedo-adverbio-01`: Ela chegou cedo para garantir lugar.
+- `ok` `r10-escrevemos-01`: Nós escrevemos juntos toda semana.
+- `ok` `r10-publicaram-01`: Eles publicaram o livro no final do ano.
+- `ok` `r2-toque-noun-01`: O toque suave da mão dela me acalmou.
+- `ok` `r4-fundo-noun-01`: O fundo do mar guarda histórias antigas.
+- `ok` `r7-vista-noun-01`: A vista da janela é linda.
+- `ok` `r7-vista-adj-01`: Ela foi vista chegando tarde.
+- `ok` `r2-canto-noun-01`: O canto do pássaro acordou todos.
+- `ok` `r2-marca-noun-01`: A marca da editora ficou conhecida.
+- `ok` `r10-marca-verb-01`: Ela marca o dia da entrega no calendário.
+- `ok` `r7-posto-noun-01`: O posto de escritora é solitário.
+- `ok` `r7-posto-adj-01`: O texto foi posto em evidência.
+- `ok` `r-conj-mas-01`: Ela escreve mas não publica.
+- `ok` `r-conj-e-01`: Ele leu e gostou do manuscrito.
+- `ok` `r-prep-sobre-01`: O livro está sobre a mesa.
+- `ok` `r-prep-sobre-02`: Ela falou sobre o processo de escrita.
+- `ok` `r2-amor-noun-01`: O amor é um sentimento complexo.
+- `ok` `r2-dor-noun-01`: A dor da perda é profunda.
+- `ok` `r2-medo-noun-01`: O medo a paralisa nos momentos difíceis.
+- `ok` `r2-culpa-noun-01`: A culpa sempre volta a assombrar.
+- `ok` `r7-dado-adj-01`: O projeto foi dado como encerrado.
+- `ok` `r7-visto-adj-01`: O plano ficou visto por todos.
+- `ok` `r7-dito-adj-01`: O texto foi dito com cuidado.
+- `ok` `r7a-tida-adj-01`: A obra foi tida como importante.
+- `ok` `r7-coberto-adj-01`: O papel foi coberto de marcas.
+- `ok` `r7-tomada-adj-01`: A decisão foi tomada em conjunto.
+- `ok` `r-det-um-01`: Um manuscrito é sempre uma aposta.
+- `ok` `r-adj-natural-01`: Ela tem um talento natural para a escrita.
+- `ok` `r-verb-foram-01`: Eles foram ao lançamento do livro.
+- `ok` `r-verb-era-01`: Ela era muito jovem quando começou.
+- `ok` `r7a-contida-adj-01`: Ela ficou contida mesmo com muita raiva.
+- `ok` `r7a-mantido-adj-01`: O projeto está mantido pela equipe.
+- `ok` `r7a-obtida-adj-01`: A palavra foi obtida com esforço.
+- `ok` `r-salvo-prep-01`: Todos foram, salvo ela.
+- `ok` `r7-salvo-adj-01`: O arquivo foi salvo no computador.
+- `ok` `r7a-entregue-adj-01`: O trabalho foi entregue com atraso.
+- `ok` `r7a-incluso-adj-01`: O imposto está incluso no valor.
+- `ok` `r-conj-que-01`: O livro que ela escreveu ficou famoso.
+- `ok` `r-adv-lentamente-01`: Ela escreve lentamente quando está cansada.
+- `ok` `r-adv-rapidamente-01`: Ele leu rapidamente o manuscrito inteiro.
+- `ok` `r-adj-grave-01`: Ela tem uma voz grave e serena.
+- `ok` `r-adj-denso-01`: O texto ficou denso demais para o leitor.
+- `ok` `r-verb-publicar-01`: Ela vai publicar o livro em março.
+- `ok` `r-verb-escrever-01`: Ele pode escrever melhor do que pensa.
+- `ok` `r-noun-causa-01`: Ela escreveu por causa da solidão.
+- `ok` `r-adj-primeira-01`: Ela é a primeira a chegar.
+- `ok` `r-verb-parece-01`: O personagem parece perdido no enredo.
+- `ok` `r-verb-continua-01`: Ela continua escrevendo apesar de tudo.
+- `ok` `r-adv-alem-01`: Ela escreve além do que se espera.
+- `ok` `r-adj-carioca-01`: A escritora carioca publicou um romance.
+- `ok` `r-adj-sertaneja-01`: A música sertaneja é muito famosa.
+- `ok` `r-adj-relevante-01`: O texto permanece relevante para a leitora.
+- `ok` `r-adj-essencial-01`: A obra se tornou essencial para o cânone.
+- `ok` `r-adj-ansioso-01`: O personagem ficou ansioso durante a crise.
+- `ok` `r-pron-isso-01`: Isso é o que define a boa escrita.
+- `ok` `r-pron-aquilo-01`: Aquilo que ela escreveu mudou minha vida.
+- `ok` `r-verb-disse-01`: O narrador disse que estava nervoso.
+- `ok` `r-verb-quis-01`: Ela quis escrever um conto diferente.
+- `ok` `r-verb-veio-01`: O personagem veio de longe para contar sua história.
+- `ok` `r-noun-beleza-01`: A beleza do texto reside na sua clareza.
+- `ok` `r-noun-tensao-01`: A tensão entre os personagens é palpável.
+- `ok` `r-adj-lirica-01`: Sua prosa é densa, lírica e precisa.
+- `ok` `r-adj-celebre-01`: O romance ficou célebre entre os leitores.
+- `ok` `r-prep-durante-01`: Ela escreveu durante a noite inteira.
+- `ok` `r-prep-atraves-01`: O narrador fala através de sua personagem.
+- `ok` `r-prep-apesar-01`: Escreveu apesar das dificuldades do dia.
+- `ok` `r-det-uma-01`: Uma escritora publicou seu primeiro romance.
+- `ok` `r-det-os-01`: Os manuscritos ficaram na gaveta por anos.
+- `ok` `r-adj-jovem-01`: A narradora é jovem e talentosa.
+- `ok` `r-adj-incompleto-01`: O romance ficou incompleto depois de sua morte.
+- `ok` `r-adj-culpada-01`: A personagem se sentiu culpada após o evento.
+- `ok` `r-verb-sendo-01`: A escritora continua sendo lembrada.
+- `ok` `r-verb-devia-01`: Ela devia ter publicado antes.
+- `ok` `r-adv-nunca-01`: Ele nunca esqueceu o que leu.
+- `ok` `r-conj-portanto-01`: Ela escreve bem, portanto publica muito.
+- `ok` `r-conj-porem-01`: Ela escrevia devagar, porém com precisão.
+- `ok` `r-adv-tanto-01`: Ela escreve tanto quanto ele.
+- `ok` `r-adv-tampouco-01`: O texto não é curto, tampouco é longo.
+- `ok` `r-conj-que-02`: A escritora que publicou é talentosa.
+- `ok` `r-pron-quem-01`: Ele perguntou quem escreveu o texto.
+- `ok` `r-adj-bom-01`: Bom, o texto ainda precisa de revisão.
+- `ok` `r-adv-raramente-01`: Ela raramente abandona um manuscrito.
+- `ok` `r-adv-frequentemente-01`: Ele frequentemente revisa seus contos.
+- `ok` `r-noun-solidao-01`: A solidão foi sempre sua companheira.
+- `ok` `r-noun-consciencia-01`: A consciência do narrador é fragmentada.
+- `ok` `r-num-tres-01`: Os três livros chegaram juntos.
+- `ok` `r-adj-primeiras-01`: As primeiras páginas são as mais difíceis.
+- `ok` `r-adj-escrito-passiva-01`: O livro foi escrito em três anos.
+- `ok` `r-adj-contada-passiva-01`: A história foi contada no passado.
+- `ok` `r-adj-perdido-passiva-01`: O manuscrito foi perdido após a guerra.
+- `ok` `r-verb-afirmou-01`: A narradora afirmou que estava cansada.
+- `ok` `r-verb-respondeu-01`: O personagem respondeu com silêncio.
+- `ok` `r-verb-confessou-01`: Ela confessou não gostar de epílogos.
+- `ok` `r-adj-abandonado-01`: Ele se sentiu abandonado pelo editor.
+- `ok` `r-adj-carregado-01`: O texto está carregado de metáforas.
+- `ok` `r-prep-sobre-03`: A crítica falou sobre o estilo do livro.
+- `ok` `r-prep-para-01`: Ela escreveu um bilhete para o leitor.
+- `ok` `r-verb-reescreveu-01`: O autor reescreveu o final três vezes.
+- `ok` `r-verb-releu-01`: Ela releu o capítulo antes de publicar.
+- `ok` `r-verb-havia-01`: Ela havia terminado o conto antes do prazo.
+- `ok` `r-verb-tinha-01`: O autor tinha publicado três romances.
+- `ok` `r-adj-confuso-01`: O texto ficou confuso no final.
+- `ok` `r-adj-corajosa-01`: A personagem se mostrou corajosa.
+- `ok` `r-adj-surpreendente-01`: O resultado se revelou surpreendente.
+- `ok` `r-adj-aprofundada-01`: A análise literária foi aprofundada.
+- `ok` `r-adj-onisciente-01`: O narrador onisciente vê tudo.
+- `ok` `r-verb-viu-01`: O leitor viu que o texto era poético.
+- `ok` `r-verb-ouviu-01`: Ela ouviu o editor falar da crise.
+- `ok` `r-adv-ainda-01`: Ela ainda não publicou o romance.
+- `ok` `r-adv-ja-01`: O texto já está pronto para envio.
+- `ok` `r-pron-me-01`: Ela me disse que estava cansada.
+- `ok` `r-pron-lhe-01`: Ela lhe enviou o manuscrito.
+- `ok` `r-noun-rascunho-01`: O rascunho revela muito do autor.
+- `ok` `r-noun-esboco-01`: O esboço é a fase mais criativa.
+- `ok` `r-noun-dialogo-01`: O diálogo entre as personagens é tenso.
+- `ok` `r-noun-enredo-01`: O enredo se complica no segundo ato.
+- `ok` `r-noun-voz-01`: A voz narrativa define o tom do texto.
+- `ok` `r-adj-triste-01`: O personagem ficou triste ao final.
+- `ok` `r-adj-aliviada-01`: Ela se sentiu aliviada com o feedback.
+- `ok` `r-adj-satisfeito-01`: O escritor pareceu satisfeito com o resultado.
+- `ok` `r-verb-compos-01`: Ela compôs o poema durante a madrugada.
+- `ok` `r-verb-narrou-01`: O autor narrou os fatos em ordem cronológica.
+- `ok` `r-verb-criou-01`: Ela criou um universo rico para o leitor.
+- `ok` `r-adv-bem-01`: Ela escreve bem quando está descansada.
+- `ok` `r-adv-devagar-01`: Ele leu o texto devagar para entendê-lo.
+- `ok` `r-pron-voce-01`: Você pode revisar o meu texto?
+- `ok` `r-noun-senhor-01`: O senhor entende o que quis dizer?
+- `ok` `r-noun-gaveta-01`: A escritora guardou o manuscrito na gaveta.
+- `ok` `r-adj-cheio-01`: O caderno dela estava cheio de ideias.
+- `ok` `r-noun-recusa-01`: Ela publicou apesar da recusa inicial.
+- `ok` `r-adj-inconfundivel-01`: O texto revelou um estilo inconfundível.
+- `ok` `r-adv-mais-01`: O narrador sabia mais do que revelava.
+- `ok` `r-adj-dedicado-01`: O livro foi dedicado à sua mãe.
+- `ok` `r-verb-voltou-01`: A personagem voltou à cena do crime.
+- `ok` `r-adj-vazio-01`: O vaso estava vazio depois da chuva.
+- `ok` `r-interj-ora-01`: Ora, ela sabia da resposta o tempo todo.
+- `ok` `r-interj-pronto-01`: Pronto, o manuscrito está salvo.
+- `ok` `r-interj-eis-01`: Eis o texto que ela tanto esperava.
+- `ok` `r-adj-certo-posnominal-01`: Ela encontrou o tom certo.
+- `ok` `r-adj-certa-posnominal-01`: A resposta certa ainda não chegou.
+- `ok` `r-verb-percebido-perf-01`: O narrador havia percebido o erro.
+- `ok` `r-verb-escrito-perf-01`: Ela tinha escrito três versões do conto.
+- `ok` `r-adj-hesitante-01`: A escritora ficou hesitante diante da escolha.
+- `ok` `r-adj-redundante-01`: O texto se tornou redundante com o tempo.
+- `ok` `r-adj-impactante-01`: A cena ficou impactante ao final.
+- `ok` `r-noun-amanhecer-01`: O amanhecer marcou o início da história.
+- `ok` `r-noun-entardecer-01`: O entardecer descrito no livro é poético.
+- `ok` `r-pron-esta-01`: Esta é a última página do manuscrito.
+- `ok` `r-pron-esses-01`: Esses personagens aparecem no terceiro capítulo.
+- `ok` `r-verb-compreendeu-01`: Ela compreendeu o significado da metáfora.
+- `ok` `r-verb-percebe-01`: O leitor percebe a ironia no diálogo.
+- `ok` `r-verb-avanca-01`: A narrativa avança lentamente.
+- `ok` `r-verb-recua-01`: O texto recua ao passado com frequência.
+- `ok` `r-adv-nao-01`: Ela não publicou o texto por medo.
+- `ok` `r-adv-quase-01`: O narrador quase revela o segredo.
+- `ok` `r-adv-so-01`: O texto só aparece no epílogo.
+- `ok` `r-conj-e-02`: Ela escreve poesia e prosa.
+- `ok` `r-conj-mas-02`: O narrador mente mas acredita na mentira.
+- `ok` `r-conj-ou-01`: Ela escreve ou publica, nunca os dois.
+- `ok` `r-noun-sinopse-01`: A sinopse resume o enredo principal.
+- `ok` `r-noun-prefacio-01`: O prefácio apresenta o autor ao leitor.
+- `ok` `r-noun-epigrafe-01`: A epígrafe abre o livro com uma citação.
+- `ok` `r-adj-rancoroso-01`: O personagem é rancoroso e vingativo.
+- `ok` `r-adj-astuta-01`: A narradora é astuta e perspicaz.
+- `ok` `r-verb-descreve-01`: O autor descreve a cena com precisão.
+- `ok` `r-verb-aparece-01`: O narrador nunca aparece em cena.
+- `ok` `r-verb-possui-01`: O texto possui uma estrutura circular.
+- `ok` `r-verb-contem-01`: O livro contém três atos distintos.
+- `ok` `r-pron-meu-01`: O manuscrito é meu.
+- `ok` `r-pron-sua-01`: A voz narrativa é sua.
+- `ok` `r-noun-revisao-01`: A revisão melhorou o texto final.
+- `ok` `r-noun-edicao-01`: A edição do livro demorou dois anos.
+- `ok` `r-adv-ainda-concess-01`: Ela publicou ainda que duvidasse.
+- `ok` `r-verb-considerou-01`: O crítico considerou o livro brilhante.
+- `ok` `r-verb-julgou-01`: O leitor julgou o final precipitado.
+- `ok` `r-adj-simples-01`: O estilo simples agrada ao leitor.
+- `ok` `r-adj-fluida-01`: A prosa fluida conquista o público.
+- `ok` `r-noun-climax-01`: O clímax chega no penúltimo capítulo.
+- `ok` `r-noun-catarse-01`: A catarse ocorre no final da peça.
+- `ok` `r-noun-epifania-01`: A epifania do personagem muda tudo.
+- `ok` `r-noun-analepse-01`: A analepse revela o passado do herói.
+- `ok` `r-prep-em-01`: Ela escreveu em nome da comunidade.
+- `ok` `r-prep-por-01`: O livro fala por si mesmo.
+- `ok` `r-prep-de-01`: O narrador age de acordo com o enredo.
+- `ok` `r-verb-permaneceu-01`: O personagem permaneceu calado.
+- `ok` `r-verb-continua-prep-01`: O mistério continua sem solução.
+- `ok` `r-adj-eloquente-01`: O silêncio é eloquente.
+- `ok` `r-adj-inesperado-01`: O desfecho foi inesperado.
+- `ok` `r-num-duas-01`: Ela leu o segundo capítulo duas vezes.
+- `ok` `r-noun-leitor-01`: O leitor imagina o cenário.
+- `ok` `r-noun-escritor-01`: O escritor revisou o manuscrito.
+- `ok` `r-noun-manhas-01`: Ela escreve todas as manhãs.
+- `ok` `r-adv-ontem-01`: O conto foi publicado ontem.
+- `ok` `r-adv-hoje-01`: Ela publicou o livro hoje.
+- `ok` `r-adj-longo-01`: O texto é mais longo do que o esperado.
+- `ok` `r-adj-rapido-01`: Ela escreve mais rápido do que ele.
+- `ok` `r-verb-lancou-01`: Ela lançou o livro em março.
+- `ok` `r-verb-assinou-01`: O autor assinou o contrato editorial.
+- `ok` `r-verb-entregou-01`: Ela entregou o manuscrito no prazo.
+- `ok` `r-noun-fracasso-01`: Ela não tem medo do fracasso.
+- `ok` `r-noun-vez-01`: Ela publica de vez em quando.
+- `ok` `r-verb-soube-01`: A escritora soube da notícia pelo editor.
+- `ok` `r-verb-trouxe-01`: Ela trouxe o manuscrito para a reunião.
+- `ok` `r-verb-pos-01`: O personagem pôs a carta na gaveta.
+- `ok` `r-verb-fez-01`: Ele fez uma pausa antes de responder.
+- `ok` `r-verb-disse-02`: Ela disse que precisava de mais tempo.
+- `ok` `r-adj-perfeito-01`: O texto ficou absolutamente perfeito.
+- `ok` `r-adj-absurda-01`: A cena é completamente absurda.
+- `ok` `r-noun-monologo-01`: O monólogo interior define o personagem.
+- `ok` `r-noun-flashback-01`: O flashback revela a origem do conflito.
+- `ok` `r-adv-ali-01`: Ela escreveu ali por horas.
+- `ok` `r-adv-longe-01`: O herói vem de longe.
+- `ok` `r-adj-inesperado-total-01`: O final foi totalmente inesperado.
+- `ok` `r-verb-percebe-02`: O leitor percebe a ironia no final.
+- `ok` `r-verb-observa-01`: O narrador observa tudo em silêncio.
+- `ok` `r-verb-imagina-01`: A autora imagina mundos impossíveis.
+- `ok` `r-det-um-02`: Um escritor precisa de paciência.
+- `ok` `r-det-uma-02`: Uma escritora leu o manuscrito.
+- `ok` `r-adj-curta-01`: A frase curta tem mais impacto.
+- `ok` `r-adj-denso-02`: O parágrafo denso dificulta a leitura.
+- `ok` `r-verb-reescreve-01`: Ela reescreve o capítulo várias vezes.
+- `ok` `r-verb-revisou-01`: O autor revisou o texto três vezes.
+- `ok` `r-noun-simbolismo-01`: O simbolismo permeia toda a obra.
+- `ok` `r-noun-realismo-01`: O realismo dominou o século XIX.
+- `ok` `r-num-tres-02`: Ela escreveu três contos em um mês.
+- `ok` `r-adj-longo-v2-01`: O texto longo exige mais revisões.
+- `ok` `r-adj-verossimil-01`: O texto é verossímil e denso.
+- `ok` `r-adj-contraditoria-01`: A personagem é complexa e contraditória.
+- `ok` `r-adj-ambigua-01`: A personagem é ambígua.
+- `ok` `r-adj-ironico-01`: O narrador é irônico.
+- `ok` `r-adj-metaforica-01`: A narrativa é metafórica.
+- `ok` `r-adj-lirico-01`: O texto é lírico e denso.
+- `ok` `r-adj-epica-01`: A prosa é épica e grandiosa.
+- `ok` `r-adj-tragico-01`: O personagem é trágico.
+- `ok` `r-adj-classica-01`: A obra é clássica.
+- `ok` `r-adj-critico-01`: O romance é crítico e político.
+- `ok` `r-adj-tipico-01`: O texto é típico do romantismo.
+- `ok` `r-adj-cetico-01`: O narrador é cético.
+- `ok` `r-adj-poetica-01`: A linguagem é poética.
+- `ok` `r-adj-inevitavel-01`: O desfecho é trágico e inevitável.
+- `ok` `r-adj-arido-01`: O cenário é árido.
+- `ok` `r-adj-lucida-01`: A narradora é lúcida.
+- `ok` `r-adj-agil-01`: O texto é ágil.
+- `ok` `r-adj-brusco-01`: O desfecho é brúsco.
+- `ok` `r-adj-psicologico-01`: O romance é psicológico.
+- `ok` `r-adj-historico-01`: O texto é histórico.
+- `ok` `r-adj-mitica-01`: A obra é mítica.
+- `ok` `r-adj-heroico-01`: O personagem é heróico.
+- `ok` `r-adj-unica-01`: A voz narrativa é única.
+- `ok` `r-adj-dramatico-01`: O conflito é dramático.
+- `ok` `r-adj-onisciente-02`: O narrador é onisciente.
+- `ok` `r-adj-ambivalente-01`: O texto é ambivalente.
+- `ok` `r-adj-fragmentada-01`: A narrativa é fragmentada.
+- `ok` `r-adj-comico-01`: O texto tem um tom cômico.
+- `ok` `r-adj-ironica-01`: A voz é irónica.
+- `ok` `r-adj-etico-01`: O protagonista vive um dilema ético.
+- `ok` `r-adj-simbolica-01`: A linguagem é simbólica.
+- `ok` `r-adj-didatico-01`: O texto é didático.
+- `ok` `r-adj-retorico-01`: O discurso é retórico.
+- `ok` `r-verb-escrevendo-01`: Ela está escrevendo o terceiro capítulo.
+- `ok` `r-verb-dormindo-01`: Ele estava dormindo quando a ideia veio.
+- `ok` `r-adj-fluente-01`: O texto é fluente.
+- `ok` `r-adj-coerente-01`: O diálogo é coerente.
+- `ok` `r-adj-convincente-01`: A narrativa é convincente.
+- `ok` `r-adj-rebuscado-01`: O texto é rebuscado.
+- `ok` `r-adj-introspectivo-01`: O romance é introspectivo.
+- `ok` `r-adj-pertinente-02`: A análise é pertinente.
+- `ok` `r-adj-inconsistente-01`: O argumento é inconsistente.
+- `ok` `r-adj-inconclusivo-01`: O texto é inconclusivo.
+- `ok` `r-verb-narra-01`: A autora narra a história em primeira pessoa.
+- `ok` `r-verb-reflete-01`: O personagem reflete sobre o passado.
+- `ok` `r-verb-explora-01`: O romance explora temas universais.
+- `ok` `r-verb-questiona-01`: O autor questiona a realidade.
+- `ok` `r-adj-elaborada-01`: A trama é elaborada.
+- `ok` `r-adj-intrincado-01`: O enredo é intrincado.
+- `ok` `r-adj-entremeada-01`: A narrativa é entremeada de metáforas.
+- `ok` `r-noun-leitura-01`: A leitura do livro demorou um mês.
+- `ok` `r-noun-interpretacao-01`: A interpretação do texto é pessoal.
+- `ok` `r-noun-recepcao-01`: A recepção da obra foi positiva.
+- `ok` `r-adj-labirintica-01`: O texto tem uma estrutura labiríntica.
+- `ok` `r-prep-durante-02`: O texto foi escrito durante a pandemia.
+- `ok` `r-adv-antes-01`: O livro foi publicado antes da guerra.
+- `ok` `r-adv-depois-01`: Ela escreveu depois de muito pensar.
+- `ok` `r-adv-nunca-02`: O texto nunca perde o fôlego.
+- `ok` `r-adv-jamais-01`: Ela jamais abandona um manuscrito.
+- `ok` `r-pron-este-01`: Este capítulo é o mais forte do livro.
+- `ok` `r-pron-esse-01`: Esse personagem é o protagonista.
+- `ok` `r-pron-aquele-01`: Aquele romance marcou uma geração.
+- `ok` `r-verb-construiu-01`: O autor construiu um mundo coerente.
+- `ok` `r-verb-abandonou-01`: Ela abandonou o projeto por um ano.
+- `ok` `r-verb-destruiu-01`: O personagem destruiu sua própria história.
+- `ok` `r-adv-talvez-01`: Talvez o texto melhore na revisão.
+- `ok` `r-adv-provavelmente-01`: Provavelmente ela publicará em breve.
+- `ok` `r-verb-era-rel-01`: O personagem que era rico perdeu tudo.
+- `ok` `r-verb-venceu-rel-01`: A escritora cujo livro venceu o prêmio.
+- `ok` `r-adj-escrito-pass-01`: O romance foi escrito em três meses.
+- `ok` `r-adj-contada-pass-01`: A história foi contada em primeira pessoa.
+- `ok` `r-adj-absoluto-01`: O silêncio era absoluto.
+- `ok` `r-adj-insuportavel-01`: A tensão ficou insuportável.
+- `ok` `r-adj-opressivo-01`: O clima era opressivo.
+- `ok` `r-noun-narracao-01`: O ponto de vista define a narração.
+- `ok` `r-noun-arco-01`: O arco do personagem é essencial.
+- `ok` `r-noun-gancho-01`: O gancho prende o leitor.
+- `ok` `r-verb-escrever-inf-01`: Escrever é um ato de coragem.
+- `ok` `r-verb-ler-inf-01`: Ler transforma o leitor.
+- `ok` `r-adj-revelador-01`: O texto é revelador.
+- `ok` `r-verb-pode-01`: Ela pode publicar o livro em maio.
+- `ok` `r-verb-deve-01`: O editor deve revisar o texto.
+- `ok` `r-verb-quer-01`: Ela quer escrever uma trilogia.
+- `ok` `r-verb-sabe-01`: O leitor sabe que o narrador mente.
+- `ok` `r-verb-acredita-01`: Ela acredita que a ficção salva.
+- `ok` `r-adj-melancolico-01`: O texto tem um tom melancólico.
+- `ok` `r-adj-nostalgica-01`: A narrativa é nostálgica.
+- `ok` `r-adj-dificil-01`: Ela sabe que escrever é difícil.
+- `ok` `r-verb-murmurou-01`: O personagem murmurou algo inaudível.
+- `ok` `r-verb-sussurrou-01`: Ela sussurrou o segredo.
+- `ok` `r-verb-fugiu-01`: O personagem fugiu sem olhar para trás.
+- `ok` `r-verb-correu-01`: Ela correu até o fim do corredor.
+- `ok` `r-verb-caiu-01`: O herói caiu em desgraça.
+- `ok` `r-verb-ergueu-01`: A narradora ergueu a voz.
+- `ok` `r-noun-intertextualidade-01`: A intertextualidade enriquece a obra.
+- `ok` `r-noun-metalinguagem-01`: A metalinguagem aparece nos parênteses.
+- `ok` `r-noun-subtexto-01`: O subtexto revela o conflito interior.
+- `ok` `r-adj-multifacetado-01`: O personagem é complexo e multifacetado.
+- `ok` `r-adj-acessivel-01`: A linguagem é densa mas acessível.
+- `ok` `r-verb-publicar-neg-01`: Não publicar foi a decisão certa.
+- `ok` `r-verb-transformou-01`: O evento transformou o personagem.
+- `ok` `r-verb-moldou-01`: O trauma moldou sua visão de mundo.
+- `ok` `r-verb-marcou-01`: A experiência marcou a escritora.
+- `ok` `r-adj-conciso-01`: O texto é conciso e objetivo.
+- `ok` `r-adj-laconica-01`: A narradora é lacônica.
+- `ok` `r-adj-prolixo-01`: O romance é prolixo em detalhes.
+- `ok` `r-adj-catartico-01`: O conflito é catártico.
+- `ok` `r-verb-defende-01`: O autor defende uma tese provocadora.
+- `ok` `r-verb-analisa-01`: A crítica analisa o texto com rigor.
+- `ok` `r-verb-interpreta-01`: O leitor interpreta o símbolo.
+- `ok` `r-verb-omite-01`: O narrador omite detalhes essenciais.
+- `ok` `r-adj-introdutorio-01`: O prólogo é breve e introdutório.
+- `ok` `r-adj-conclusivo-01`: O epílogo é conclusivo.
+- `ok` `r-adj-autorreferencial-01`: O texto é autorreferencial.
+- `ok` `r-noun-cenario-01`: O cenário é descrito em detalhes.
+- `ok` `r-noun-atmosfera-01`: A atmosfera do romance é sombria.
+- `ok` `r-verb-ouviu-02`: Ela ouviu passos no corredor escuro.
+- `ok` `r-verb-viu-02`: O personagem viu a cidade pela janela.
+- `ok` `r-adv-bem-02`: O texto é muito bem escrito.
+- `ok` `r-verb-evoca-01`: O texto evoca memórias da infância.
+- `ok` `r-adj-esmerada-01`: A prosa é esmerada e cuidadosa.
+- `ok` `r-adj-refinado-01`: O texto é refinado e elegante.
+- `ok` `r-adj-lapidado-01`: O estilo é lapidado e preciso.
+- `ok` `r-verb-pensou-01`: O personagem pensou em desistir.
+- `ok` `r-verb-hesitou-01`: Ela hesitou antes de responder.
+- `ok` `r-noun-diagramacao-01`: A diagramação do livro é impecável.
+- `ok` `r-noun-tipografia-01`: A tipografia escolhida é elegante.
+- `ok` `r-adj-kafkiano-01`: O cenário é kafkiano e labiríntico.
+- `ok` `r-verb-subverte-01`: A narrativa subverte as convenções.
+- `ok` `r-verb-elide-01`: A elipse elide o tempo morto.
+- `ok` `r-verb-transcende-01`: A arte transcende o tempo.
+- `ok` `r-adj-picaresca-01`: A obra é picaresca e irreverente.
+- `ok` `r-adj-grotescos-01`: O personagem tem traços grotescos.
+- `ok` `r-verb-sorriu-01`: Ela sorriu ao terminar o capítulo.
+- `ok` `r-verb-chorou-01`: O personagem chorou no final.
+- `ok` `r-verb-tremeu-01`: O escritor tremeu ao ler a crítica.
+- `ok` `r-noun-cronica-01`: A crônica é um gênero híbrido.
+- `ok` `r-noun-ensaio-01`: O ensaio argumenta com clareza.
+- `ok` `r-noun-memoria-01`: A memória é matéria literária.
+- `ok` `r-verb-redigiu-01`: Ela redigiu o conto em uma noite.
+- `ok` `r-verb-narrou-02`: O autor narrou os fatos com distância.
+- `ok` `r-verb-criou-02`: Ela criou um universo coerente.
+- `ok` `r-verb-registrou-01`: O texto registrou o momento histórico.
+- `ok` `r-adj-autobiografica-01`: A narrativa é autobiográfica.
+- `ok` `r-noun-coautoria-01`: A coautoria enriquece o projeto.
+- `ok` `r-noun-pseudonimia-01`: A pseudonímia esconde a identidade.
+- `ok` `r-adj-autoficcional-01`: O texto é autoficcional.
+- `ok` `r-adj-realistico-01`: O estilo é realístico.
+- `ok` `r-adj-humanistico-01`: A obra tem caráter humanístico.
+- `ok` `r-verb-refletiu-01`: O personagem refletiu sobre a morte.
+- `ok` `r-verb-imaginou-01`: Ela imaginou um final diferente.
+- `ok` `r-verb-recordou-01`: Ele recordou a infância com saudade.
+- `ok` `r-noun-intertextualidade-02`: A intertextualidade é rica no texto.
+- `ok` `r-noun-dialogismo-01`: A dialogismo é princípio bakhtiniano.
+- `ok` `r-adj-epistolar-01`: O texto é epistolar.
+- `ok` `r-adj-dialogica-01`: A forma dramática é dialógica.
+- `ok` `r-adj-simbolistas-01`: A obra tem influências simbolistas.
+- `ok` `r-adj-parnasiano-01`: O texto é parnasiano.
+- `ok` `r-adj-surrealista-01`: A corrente é surrealista.
+- `ok` `r-verb-caminhou-01`: Ela caminhou até a janela.
+- `ok` `r-verb-correu-02`: Ele correu pelo corredor escuro.
+- `ok` `r-verb-partiu-01`: A protagonista partiu ao amanhecer.
+- `ok` `r-adj-denso-03`: O texto é denso e visceral.
+- `ok` `r-adj-fluida-02`: A prosa é fluida e transparente.
+- `ok` `r-adj-acelerado-01`: O ritmo narrativo é acelerado.
+- `ok` `r-noun-voz-02`: A voz narrativa é onisciente.
+- `ok` `r-noun-ponto-01`: O ponto de vista orienta a leitura.
+- `ok` `r-adj-modernista-01`: O texto é modernista.
+- `ok` `r-adj-expressionistas-01`: A obra tem traços expressionistas.
+- `ok` `r-adj-existencialista-01`: A tendência é existencialista.
+- `ok` `r-adj-estruturalista-01`: O enfoque é estruturalista.
+- `ok` `r-adj-materialista-01`: O projeto tem viés materialista.
+- `ok` `r-adj-regionalista-01`: O texto é regionalista.
+- `ok` `r-adj-concretista-01`: A corrente concretista influenciou a poesia.
+- `ok` `r-adj-cubista-01`: O movimento cubista rompeu com a tradição.
+- `ok` `r-verb-revisando-01`: O escritor está revisando o texto.
+- `ok` `r-verb-escrevendo-02`: Ela estava escrevendo o desfecho.
+- `ok` `r-adv-depois-02`: Logo depois, o personagem saiu.
+- `ok` `r-adv-antes-02`: Antes disso, a narradora hesitou.
+- `ok` `r-verb-revisou-02`: A autora revisou o manuscrito.
+- `ok` `r-verb-corrigiu-01`: Ele corrigiu cada parágrafo.
+- `ok` `r-verb-publicou-01`: Ela publicou seu primeiro romance.
+- `ok` `r-adj-aclamado-01`: O livro é aclamado pela crítica.
+- `ok` `r-adj-celebrada-01`: A obra é celebrada internacionalmente.
+- `ok` `r-noun-revisao-02`: A revisão é etapa indispensável.
+- `ok` `r-noun-releitura-01`: A releitura traz novos sentidos.
+- `ok` `r-noun-reescrita-01`: A reescrita aprimora o texto.
+- `ok` `r-num-primeiro-01`: O primeiro capítulo é o mais denso.
+- `ok` `r-num-terceiro-01`: O terceiro personagem é o narrador.
+- `ok` `r-verb-recebeu-01`: O público recebeu bem a obra.
+- `ok` `r-verb-elogiou-01`: A crítica elogiou o desfecho.
+- `ok` `r-verb-abandonou-02`: O leitor abandonou o livro.
+- `ok` `r-adj-acessivel-02`: O texto é acessível e direto.
+- `ok` `r-adj-inclusiva-01`: A linguagem é inclusiva.
+- `ok` `r-adj-transparente-01`: O estilo é transparente.
+- `ok` `r-noun-climax-02`: O clímax acontece no terceiro ato.
+- `ok` `r-noun-catarse-02`: A catarse purifica o leitor.
+- `ok` `r-adj-comovente-01`: A cena é comovente.
+- `ok` `r-adj-perturbador-01`: O final é perturbador.
+- `ok` `r-pron-dem-este-01`: Este livro mudou minha vida.
+- `ok` `r-pron-dem-aquele-01`: Aquele personagem era memorável.
+- `ok` `r-pron-dem-essa-01`: Essa cena ficou na memória.
+- `ok` `r-conj-mas-03`: O texto é claro, mas redundante.
+- `ok` `r-conj-porem-02`: A obra é breve, porém densa.
+- `ok` `r-conj-todavia-01`: O estilo é econômico, todavia eficaz.
+- `ok` `r-verb-gritou-01`: Ele gritou e saiu da sala.
+- `ok` `r-verb-sussurrou-02`: Ela sussurrou no ouvido do narrador.
+- `ok` `r-verb-murmurou-02`: O protagonista murmurou a resposta.
+- `ok` `r-adj-inicial-01`: O parágrafo inicial define o tom.
+- `ok` `r-adj-magistral-01`: O texto é magistral.
+- `ok` `r-adj-mediocre-01`: A cena é medíocre.
+- `ok` `r-adj-final-01`: O capítulo final é o mais denso.
+- `ok` `r-adj-paradigmatica-01`: A obra é paradigmática.
+- `ok` `r-adj-banal-01`: O tema é banal.
+- `ok` `r-verb-voltou-02`: O narrador voltou ao passado.
+- `ok` `r-verb-fugiu-02`: Ela fugiu para outra cidade.
+- `ok` `r-verb-escapou-01`: O herói escapou no último momento.
+- `ok` `r-adj-arrebatadora-01`: A leitura é arrebatadora.
+- `ok` `r-adj-devastador-01`: O final é devastador.
+- `ok` `r-adj-edificante-01`: A obra é edificante.
+- `ok` `r-noun-verossimilhanca-01`: A verossimilhança sustenta o pacto ficcional.
+- `ok` `r-noun-suspensao-01`: A suspensão da descrença envolve o leitor.
+- `ok` `r-verb-evoluiu-01`: O enredo evoluiu de forma inesperada.
+- `ok` `r-verb-amadureceu-01`: O autor amadureceu o projeto em dez anos.
+- `ok` `r-adj-introspectivo-02`: O personagem é introspectivo.
+- `ok` `r-adj-psicologica-01`: A narrativa é psicológica.
+- `ok` `r-adj-reflexivo-01`: O texto é reflexivo.
+- `ok` `r-adv-sempre-01`: O personagem sempre hesitava.
+- `ok` `r-adv-raramente-02`: O autor raramente usava adjetivos.
+- `ok` `r-adv-nunca-03`: Ele nunca mencionou o nome.
+- `ok` `r-noun-ironia-01`: A ironia é recurso frequente.
+- `ok` `r-noun-humor-01`: O humor alivia a tensão.
+- `ok` `r-adj-lenta-01`: O texto tem cadência lenta.
+- `ok` `r-prep-sobre-04`: O livro fala sobre a perda.
+- `ok` `r-prep-de-02`: A obra trata de identidade.
+- `ok` `r-prep-para-02`: Escreveu para a posteridade.
+- `ok` `r-det-o-01`: O romance é contemporâneo.
+- `ok` `r-det-a-01`: A narradora desaparece no fim.
+- `ok` `r-adj-ironico-02`: O texto é irônico e cortante.
+- `ok` `r-verb-releu-02`: O crítico releu o texto.
+- `ok` `r-verb-relia-01`: Ela relia os rascunhos diariamente.
+- `ok` `r-adj-extenso-01`: O romance é extenso.
+- `ok` `r-adj-conciso-02`: O conto é conciso.
+- `ok` `r-adj-sarcastica-01`: A voz é sarcástica.
+- `ok` `r-adj-cinico-01`: O narrador é cínico.
+- `ok` `r-adj-sintetico-01`: O texto é sintético.
+- `ok` `r-adj-coerente-02`: O argumento é coerente.
+- `ok` `r-adj-coeso-01`: O raciocínio é coeso.
+- `ok` `r-adj-articulado-01`: O texto é articulado.
+- `ok` `r-verb-terminou-01`: O romance terminou em aberto.
+- `ok` `r-verb-concluiu-01`: A história concluiu de forma ambígua.
+- `ok` `r-verb-encerrou-01`: O conto encerrou sem resolução.
+- `ok` `r-adj-coloquial-01`: A prosa é coloquial.
+- `ok` `r-adj-formal-01`: O texto é formal.
+- `ok` `r-noun-silencio-01`: O silêncio tem peso narrativo.
+- `ok` `r-adj-culta-01`: A linguagem é culta.
+- `ok` `r-adj-erudito-01`: O texto é erudito.
+- `ok` `r-pron-mesma-01`: Ele nunca repetiu a mesma palavra.
+- `ok` `r-adj-sarcastico-01`: O tom sarcástico do narrador distanciava o leitor da tragédia.
+- `ok` `r-adj-sarcastico-02`: A resposta sarcástica dela encerrou a discussão de forma cortante.
+- `ok` `r-adj-analitico-01`: A leitura analítica revela camadas de sentido que a leitura rápida ignora.
+- `ok` `r-adj-objetivo-01`: O narrador objetivo registra os fatos sem revelar sua própria opinião.
+- `ok` `r-adj-subjetivo-01`: O relato subjetivo transbordava de memórias afetivas e impressões pessoais.
+- `ok` `r-adj-expressionista-01`: A pintura expressionista influenciou a geração de escritores dos anos 1920.
+- `ok` `r-adj-naturalista-01`: O texto naturalista mergulhava nas condições materiais e biológicas das personagens.
+- `ok` `r-adj-picaresco-01`: O romance picaresco seguia as aventuras de um protagonista de origem humilde.
+- `ok` `r-adj-grotesco-01`: O realismo grotesco misturava o sublime e o abjeto na mesma cena.
+- `ok` `r-adj-medíocre-01`: O crítico classificou o romance como medíocre, sem originalidade nem força.
+- `ok` `r-adj-trivial-01`: Os detalhes triviais da rotina compunham o retrato íntimo da personagem.
+- `ok` `r-verb-emerge-01`: Uma nova voz emerge do silêncio quando a personagem deixa de obedecer.
+- `ok` `r-verb-converge-01`: Todas as histórias convergem no último capítulo para o mesmo ponto de origem.
+- `ok` `r-verb-diverge-01`: Os dois narradores divergem sobre o que aconteceu na noite do crime.
+- `ok` `r-verb-precede-01`: O prólogo precede a narrativa principal e antecipa o tom do romance.
+- `ok` `r-verb-sucede-01`: O silêncio sucede ao discurso como uma forma de presença mais intensa.
+- `ok` `r-noun-narrativa-01`: A narrativa escolhida pela autora priorizava o detalhe sobre a velocidade.
+- `ok` `r-noun-metáfora-01`: A metáfora central do livro retomava a imagem da água e do espelho.
+- `ok` `r-noun-personagem-01`: O personagem principal carregava um segredo que só revelaria na cena final.
+- `ok` `r-noun-enunciador-01`: O enunciador do poema fala de uma posição marginal e não nomeada.
+- `ok` `r-pron-quem-02`: A oficina é para quem queira aprofundar a técnica narrativa sem perder a voz.
+- `ok` `r-pron-cujo-01`: O autor cujo estilo a influenciou ainda era desconhecido no Brasil.
+- `ok` `r-adv-profundamente-01`: A obra profundamente humana tocou gerações de leitores em países diferentes.
+- `ok` `r-conj-conquanto-01`: A narradora mantinha o tom sereno conquanto sua angústia fosse evidente.
+- `ok` `r-conj-porquanto-01`: O texto merece releitura porquanto revela sentidos novos a cada passagem.
+- `ok` `r-prep-mediante-01`: A personagem conquistou espaço mediante muito esforço e resistência cotidiana.
+- `ok` `r-prep-conforme-01`: O texto avança conforme a tensão entre os personagens se intensifica.
+- `ok` `r-num-centenas-01`: Centenas de manuscritos esperavam na pilha antes de serem lidos pelo editor.
+- `ok` `r-adj-melancólico-01`: O personagem melancólico caminhava pelas ruas sem destino definido.
+- `ok` `r-adj-nostálgico-01`: O olhar nostálgico da escritora transformava memórias comuns em imagens literárias.
+- `ok` `r-adj-ambíguo-01`: O final ambíguo do conto permitia múltiplas leituras simultâneas.
+- `ok` `r-adj-enigmático-01`: A personagem enigmática nunca revelava completamente suas intenções ao narrador.
+- `ok` `r-adj-efêmero-01`: A beleza efêmera da cena contrastava com a permanência do texto escrito.
+- `ok` `r-adj-visceral-01`: A prosa visceral da autora não deixava espaço para a indiferença do leitor.
+- `ok` `r-adj-fragmentário-01`: A narrativa fragmentária espelhava a consciência perturbada da protagonista.
+- `ok` `r-adj-lacônico-01`: O estilo lacônico do autor dispensava qualquer ornamento desnecessário.
+- `ok` `r-adj-prolífico-01`: A escritora prolífica publicou mais de quarenta títulos ao longo da carreira.
+- `ok` `r-adj-inédito-01`: O manuscrito inédito foi encontrado entre os pertences da escritora após sua morte.
+- `ok` `r-adj-póstumo-01`: O romance póstumo revelou uma fase mais experimental da obra da autora.
+- `ok` `r-verb-permeia-01`: A ironia permeia todo o texto sem jamais se tornar explícita para o leitor.
+- `ok` `r-verb-ressoa-01`: O tema central ressoa ao longo de todos os capítulos como um motivo musical.
+- `ok` `r-verb-tensiona-01`: O narrador tensiona os dois tempos narrativos sem nunca deixar o fio solto.
+- `ok` `r-verb-desdobra-01`: A trama se desdobra em três linhas temporais paralelas que convergem no final.
+- `ok` `r-verb-configura-01`: O silêncio configura uma forma de resistência na narrativa da protagonista.
+- `ok` `r-noun-epílogo-01`: O epílogo revelava o destino de cada personagem dez anos depois dos eventos.
+- `ok` `r-noun-prólogo-01`: O prólogo apresentava o mundo antes da catástrofe que motivava toda a trama.
+- `ok` `r-noun-intriga-01`: A intriga principal do romance girava em torno de um segredo de família.
+- `ok` `r-prep-perante-01`: Perante a plateia silenciosa, a escritora leu o conto que havia escrito.
+- `ok` `r-prep-salvo-01`: Todos os personagens fracassaram, salvo a protagonista que encontrou seu caminho.
+- `ok` `r-det-cada-01`: Cada parágrafo revelava uma nova camada da consciência da personagem principal.
+- `ok` `r-det-ambos-01`: Ambos os narradores descreviam o mesmo evento de perspectivas opostas e complementares.
+- `ok` `r-adj-defensivo-01`: A postura defensiva do narrador revelava o quanto ele temia a crítica alheia.
+- `ok` `r-adj-introvertido-01`: O personagem introvertido preferia observar a participar das conversas do grupo.
+- `ok` `r-adj-extrovertido-01`: A narradora extrovertida conquistava a confiança dos outros personagens facilmente.
+- `ok` `r-adj-resiliente-01`: A protagonista resiliente não se deixava abater pelas perdas acumuladas.
+- `ok` `r-adj-hipocritas-01`: Os personagens hipócritas sorriam enquanto tramavam na sombra.
+- `ok` `r-adj-bucólico-01`: A paisagem bucólica do interior contrastava com a agitação da cidade deixada para trás.
+- `ok` `r-adj-prosaico-01`: O detalhe prosaico da cena cotidiana escondia uma tensão profunda.
+- `ok` `r-adj-impar-01`: A voz ímpar da autora a distinguia de qualquer outra escritora de sua geração.
+- `ok` `r-adj-sobrio-01`: O estilo sóbrio do conto revelava uma contenção raramente vista na literatura contemporânea.
+- `ok` `r-adj-peculiar-01`: O narrador peculiar via o mundo por um ângulo que o leitor demorava a compreender.
+- `ok` `r-adj-exuberante-01`: A escrita exuberante da autora preenchia cada página com imagens densas.
+- `ok` `r-adj-tragicômico-01`: O tom tragicômico do romance desarmava o leitor e o fazia rir e chorar ao mesmo tempo.
+- `ok` `r-adj-arrasador-01`: O clímax arrasador do romance esgotava emocionalmente os leitores mais atentos.
+- `ok` `r-adj-submisso-01`: O personagem submisso nunca questionava as ordens que recebia, mesmo as mais absurdas.
+- `ok` `r-adj-singular-01`: A perspectiva singular do narrador invertia as expectativas do leitor.
+- `ok` `r-adj-fugaz-01`: O momento fugaz da reconciliação durou apenas uma página, mas ficou na memória.
+- `ok` `r-adj-tenuo-01`: O fio tênue que ligava os personagens se tornou mais visível no último capítulo.
+- `ok` `r-verb-problematiza-01`: O ensaio problematiza a noção de autoria no contexto da literatura digital contemporânea.
+- `ok` `r-verb-contextualiza-01`: A introdução contextualiza a obra dentro do panorama da ficção científica brasileira.
+- `ok` `r-verb-evidencia-01`: O uso repetido da metáfora evidencia a obsessão do narrador com o tempo perdido.
+- `ok` `r-verb-delimita-01`: O prólogo delimita o escopo temporal da narrativa com precisão e elegância.
+- `ok` `r-verb-dilata-01`: O monólogo interior dilata o tempo até que cada segundo pareça uma eternidade.
+- `ok` `r-verb-reverbera-01`: O silêncio reverbera nas últimas páginas do romance como um eco inevitável.
+- `ok` `r-verb-amplifica-01`: A elipse amplifica a tensão ao omitir justamente o que o leitor mais quer saber.
+- `ok` `r-verb-atenua-01`: A ironia atenua a crueldade da cena e impede que o leitor se afaste completamente.
+- `ok` `r-verb-titubeia-01`: O narrador titubeia antes de revelar a verdade sobre o desaparecimento.
+- `ok` `r-verb-divaga-01`: A narradora divaga pelos corredores da memória sem encontrar a cena que procura.
+- `ok` `r-verb-declama-01`: A personagem declama os versos com uma voz que enchia o teatro até o último acento.
+- `ok` `r-verb-balbucia-01`: O personagem balbucia as últimas palavras antes de perder a consciência por completo.
+- `ok` `r-verb-arrepia-01`: O clímax arrepia o leitor com a simplicidade brutal de uma única frase final.
+- `ok` `r-verb-pressupoe-01`: A narrativa pressupõe um leitor que conhece as referências culturais do período.
+- `ok` `r-adj-implacável-01`: A lógica implacável da narrativa não deixava espaço para o acaso ou para a misericórdia.
+- `ok` `r-adj-inexorável-01`: O destino inexorável das personagens estava inscrito desde a primeira linha do romance.
+- `ok` `r-adj-magistral-02`: A técnica magistral da autora tornava cada cena um exercício de precisão e contenção.
+- `ok` `r-adj-lancinante-01`: A dor lancinante do luto atravessava cada parágrafo sem nunca se tornar piegas.
+- `ok` `r-adj-dilacerante-01`: O fim dilacerante do conto deixava o leitor sem palavras por vários minutos.
+- `ok` `r-adj-incontornável-01`: A contradição incontornável no caráter do personagem tornava-o humano e crível.
+- `ok` `r-adj-insolúvel-01`: O enigma insolúvel no centro da trama mantinha o leitor em suspense constante.
+- `ok` `r-adj-desconcertante-01`: O final desconcertante do romance recusava qualquer resolução fácil ou confortável.
+- `ok` `r-verb-circunscreve-01`: O ensaio circunscreve o problema ao contexto da modernidade literária brasileira.
+- `ok` `r-verb-tangencia-01`: O texto tangencia o tema sem nunca nomeá-lo diretamente, o que intensifica o efeito.
+- `ok` `r-verb-suspende-01`: A narradora suspende o tempo narrativo para descrever o rosto da personagem.
+- `ok` `r-verb-interrompe-01`: O monólogo interior interrompe a ação e mergulha o leitor na consciência do herói.
+- `ok` `r-verb-demarca-01`: O uso do itálico demarca as vozes internas das falas pronunciadas em voz alta.
+- `ok` `r-verb-abrevia-01`: A elipse abrevia a cena e deixa a imaginação do leitor completar o que aconteceu.
+- `ok` `r-verb-flerta-01`: A narrativa flerta com o fantástico sem jamais abandonar o realismo do cotidiano.
+- `ok` `r-verb-pulsa-01`: Uma melancolia surda pulsa sob cada linha do romance sem nunca explodir.
+- `ok` `r-verb-ameniza-01`: O humor ameniza a tragédia e impede que o texto afunde no sentimentalismo fácil.
+- `ok` `r-noun-verossimilhança-01`: A verossimilhança da cena dependia de detalhes físicos precisos e inesperados.
+- `ok` `r-noun-diegese-01`: A diegese do romance inclui eventos narrados que nunca chegam a ser mostrados.
+- `ok` `r-noun-focalização-01`: A focalização interna aproxima o leitor da experiência subjetiva da protagonista.
+- `ok` `r-noun-anacronismo-01`: O anacronismo intencional criava um efeito de estranhamento produtivo na leitura.
+- `ok` `r-conj-embora-01`: O narrador mantinha o tom sereno embora os eventos descritos fossem perturbadores.
+- `ok` `r-conj-ainda que-01`: A autora escolheu o silêncio, ainda que tivesse palavras suficientes para responder.
+- `ok` `r-adv-outrora-01`: O lugar que outrora fora sua casa agora parecia pertencer a outra pessoa completamente.
+- `ok` `r-adv-doravante-01`: Doravante, a narradora não se permitiria mais confundir silêncio com consentimento.
+- `ok` `r-det-nenhum-01`: Nenhum personagem do romance saía ileso do confronto com seus próprios medos.
+- `ok` `r-det-qualquer-01`: Qualquer leitura superficial perderia os múltiplos sentidos escondidos na trama.
+- `ok` `r-det-certo-01`: Certo personagem sem nome aparecia em três contos diferentes do mesmo livro.
+- `ok` `r-pron-onde-01`: A cidade onde a autora nasceu aparece em quase todos os seus romances.
+- `ok` `r-pron-onde-02`: O lugar onde a cena acontece nunca é nomeado diretamente pelo narrador.
+- `ok` `r-pron-quanto-01`: Quanto mais o narrador revela, mais o leitor sente que algo está sendo omitido.
+- `ok` `r-pron-qual-01`: O leitor precisa decidir qual das duas versões acreditar até o fim do romance.
+- `ok` `r-pron-quais-01`: As razões pelas quais o personagem fugiu nunca ficam totalmente claras.
+- `ok` `r-adj-efêmero-02`: Os instantes efêmeros de alegria contrastavam com a dor permanente da perda.
+- `ok` `r-adj-eterno-01`: A busca pelo amor eterno atravessa toda a obra da escritora paulistana.
+- `ok` `r-adj-fugidio-01`: A paz fugídia que o personagem encontrava durava sempre menos do que ele esperava.
+- `ok` `r-adj-passageiro-01`: O alívio passageiro da cena cômica tornava a tragédia seguinte ainda mais intensa.
+- `ok` `r-adj-duradouro-01`: O impacto duradouro da obra se mede pela quantidade de leitores que voltam a ela.
+- `ok` `r-adj-vasto-01`: O vasto silêncio da cena final pesava sobre o leitor como uma presença física.
+- `ok` `r-adj-ínfimo-01`: O detalhe ínfimo que o narrador nota revela seu olhar preciso e obsessivo.
+- `ok` `r-adj-irrisório-01`: O valor irrisório do objeto escondia uma importância simbólica enorme para a protagonista.
+- `ok` `r-adj-colossal-01`: A ambição colossal da narrativa se realizava frase a frase, sem jamais parecer pretensiosa.
+- `ok` `r-adj-plausível-01`: A hipótese mais plausível para o sumiço era a que o narrador mais resistia em aceitar.
+- `ok` `r-adj-provável-01`: O desfecho mais provável era justamente o que a autora se recusava a escrever.
+- `ok` `r-adj-inequívoco-01`: O sinal inequívoco de que a narrativa estava se acelerando era o encurtamento das frases.
+- `ok` `r-adj-inegável-01`: A influência inegável de Guimarães Rosa na obra se revelava no ritmo das frases longas.
+- `ok` `r-adj-irrepreensível-01`: A conduta irrepreensível da heroína tornava sua queda ainda mais perturbadora para o leitor.
+- `ok` `r-adj-contraditório-01`: O personagem contraditório atraía e repelia o leitor ao mesmo tempo e com igual força.
+- `ok` `r-adj-dissimulado-01`: O vilão dissimulado enganava todos com uma gentileza perfeita e sem fissuras.
+- `ok` `r-verb-sintetiza-01`: O parágrafo final sintetiza toda a tensão acumulada em uma única imagem precisa.
+- `ok` `r-verb-exemplifica-01`: A cena exemplifica o método da autora de revelar caráter pela ação, não pela descrição.
+- `ok` `r-verb-contradiz-01`: O epílogo contradiz a leitura otimista que alguns faziam do clímax do romance.
+- `ok` `r-verb-consolida-01`: O terceiro ato consolida a transformação que o protagonista havia iniciado no primeiro.
+- `ok` `r-verb-antecipa-01`: O prólogo antecipa o fim sem revelá-lo, criando uma tensão que percorre todo o texto.
+- `ok` `r-verb-corrobora-01`: A cena final corrobora a interpretação de que o narrador sabia mais do que admitia.
+- `ok` `r-noun-cronotopo-01`: O cronotopo do romance é a cidade portuária no início do século vinte.
+- `ok` `r-noun-paratexto-01`: O paratexto do livro incluía uma nota de autora que recontextualizava toda a leitura.
+- `ok` `r-noun-leitora-01`: A leitora implícita do romance é uma mulher que reconhece o silêncio como resistência.
+- `ok` `r-adv-deliberadamente-01`: O narrador deliberadamente omitia os nomes dos lugares para universalizar a história.
+- `ok` `r-adv-paulatinamente-01`: A tensão se acumulava paulatinamente até que uma única frase explodisse tudo.
+- `ok` `r-adv-gradualmente-01`: O leitor gradualmente percebia que o narrador havia mentido desde a primeira página.
+- `ok` `r-adv-sutilmente-01`: A ironia se instalava sutilmente nas brechas entre o que era dito e o que era mostrado.
+- `ok` `r-conj-visto que-01`: A autora escolheu o fragmento, visto que a linearidade traía a experiência que queria contar.
+- `ok` `r-conj-dado que-01`: Dado que o narrador é não confiável, toda informação precisa ser lida com cautela.
+- `ok` `r-conj-uma vez que-01`: Uma vez que o pacto ficcional estava estabelecido, o leitor aceitava os eventos impossíveis.
+- `ok` `r-prep-ante-01`: Ante o fracasso do plano, a protagonista precisou reinventar completamente sua estratégia.
+- `ok` `r-noun-cronotopo-02`: O cronotopo da aldeia remota funcionava como espelho do estado interior da personagem.
+- `ok` `r-verb-sintetiza-02`: O ensaio sintetiza as principais correntes da crítica literária brasileira do século XX.
+- `ok` `r-verb-corrobora-02`: A análise do paratexto corrobora a hipótese de que a autora revisou o romance após 1980.
+- `ok` `r-adj-ambivalente-02`: O sentimento ambivalente perante a morte estruturava toda a lírica do poeta modernista.
+- `ok` `r-adj-contraditório-02`: O discurso contraditório do narrador alertava o leitor atento para sua não-confiabilidade.
+- `ok` `r-adj-plausível-02`: A hipótese mais plausível sobre o sumiço era também a mais difícil de aceitar.
+- `ok` `r-noun-subtexto-02`: O subtexto político do romance ficava claro apenas em uma segunda leitura cuidadosa.
+- `ok` `r-adv-deliberadamente-02`: A autora deliberadamente escolheu não nomear o país onde a ação se passa.
+- `ok` `r-adv-paulatinamente-02`: O leitor paulatinamente percebe que a narradora está reconstruindo o passado de memória.
+- `ok` `r-adj-colossal-02`: O desafio colossal de recriar a língua oral sem perder a legibilidade definia o projeto da autora.
+- `ok` `r-adj-ínfimo-02`: O detalhe ínfimo que o narrador escolhe descrever revela mais do que qualquer discurso.
+- `ok` `r-adj-áspero-01`: A prosa áspera da autora não suavizava nem os momentos de maior delicadeza.
+- `ok` `r-adj-suave-01`: A transição suave entre os capítulos criava uma sensação de fluxo contínuo de consciência.
+- `ok` `r-adj-fluido-01`: O estilo fluido da narradora contrastava com a rigidez dos diálogos formais da trama.
+- `ok` `r-adj-seco-01`: O tom seco do narrador recusava qualquer ornamento emocional na descrição da tragédia.
+- `ok` `r-adj-límpido-01`: A prosa límpida da autora alcançava a profundidade sem jamais recorrer à obscuridade.
+- `ok` `r-adj-opaco-01`: O discurso opaco do personagem escondia uma clareza interior que o leitor aos poucos descobria.
+- `ok` `r-adj-cru-01`: O realismo cru das cenas do mercado popular não deixava espaço para romantização.
+- `ok` `r-adj-cadenciado-01`: O ritmo cadenciado da prosa criava uma sensação de inevitabilidade na progressão da trama.
+- `ok` `r-adj-abrupto-01`: O fim abrupto do capítulo deixava o leitor suspenso entre dois tempos narrativos opostos.
+- `ok` `r-adj-prolongado-01`: O silêncio prolongado entre os personagens funcionava como um diálogo sem palavras.
+- `ok` `r-adj-sombrio-01`: O cenário sombrio do conto prefigurava o estado interior da protagonista em crise.
+- `ok` `r-adj-luminoso-01`: A prosa luminosa da autora transformava até os momentos de sofrimento em beleza literária.
+- `ok` `r-adj-crepuscular-01`: O tom crepuscular do romance sugeria um mundo à beira do fim de uma era histórica.
+- `ok` `r-verb-convida-01`: O texto convida o leitor a questionar sua própria posição diante da narrativa.
+- `ok` `r-verb-desafia-01`: A obra desafia os limites do gênero policial ao misturar lirismo e investigação.
+- `ok` `r-verb-recusa-01`: A narradora recusa a linearidade e opta pelo fragmento como forma de dizer o indizível.
+- `ok` `r-verb-interroga-01`: O conto interroga a noção de memória confiável ao apresentar três versões do mesmo evento.
+- `ok` `r-verb-encena-01`: O romance encena a tensão entre oralidade e escrita como tema e como forma ao mesmo tempo.
+- `ok` `r-verb-incorpora-01`: A obra incorpora elementos do cordel sem cair no regionalismo folclórico e decorativo.
+- `ok` `r-verb-instaura-01`: A voz da narradora instaura uma distância irônica que protege o texto do sentimentalismo.
+- `ok` `r-verb-mobiliza-01`: O autor mobiliza referências da tradição oral para construir uma linguagem literária única.
+- `ok` `r-noun-manuscrito-01`: O manuscrito original da autora revelava camadas de revisão que o livro publicado apagou.
+- `ok` `r-noun-colofão-01`: O colofão do livro registrava a data exata em que a autora terminou de escrever o romance.
+- `ok` `r-noun-dedicatória-01`: A dedicatória revelava uma dimensão autobiográfica que a obra em si mantinha velada.
+- `ok` `r-adv-incessantemente-01`: A personagem buscava incessantemente uma saída que o texto sistematicamente recusava.
+- `ok` `r-adv-obliquamente-01`: A crítica social aparecia obliquamente nas margens da história de amor principal.
+- `ok` `r-adv-sistematicamente-01`: O narrador sistematicamente omitia datas e lugares para universalizar a experiência.
+- `ok` `r-conj-contanto-01`: A autora aceitaria qualquer forma de publicação, contanto que o texto não fosse alterado.
+- `ok` `r-conj-posto-que-01`: O projeto literário era ousado, posto que recusava qualquer concessão ao mercado de massa.
+- `ok` `r-prep-aquém-01`: O conto ficava aquém das expectativas criadas pelo romance anterior da mesma autora.
+- `ok` `r-prep-além-01`: A obra ia além do gênero e criava uma linguagem que só ela poderia ter inventado.
+- `ok` `r-det-toda-01`: Toda a trajetória da personagem culminava nessa única frase do penúltimo capítulo.
+- `ok` `r-det-inúmeros-01`: Inúmeras vozes compunham o coro narrativo que estruturava o romance polifônico.
+- `ok` `r-noun-polifonia-01`: A polifonia do romance bakhtiniano permite que nenhuma voz seja definitivamente silenciada.
+- `ok` `r-noun-enredo-02`: O enredo principal servia de moldura para histórias menores que o enriqueciam e complicavam.
+- `ok` `r-noun-epígrafe-01`: A epígrafe escolhida pela autora antecipava o tema central sem revelá-lo completamente.
+- `ok` `r-adj-informal-01`: O registro informal do conto marcava a presença de uma voz popular e irreverente.
+- `ok` `r-adj-solene-01`: O tom solene do prólogo preparava o leitor para a gravidade do que estava por vir.
+- `ok` `r-adj-irônico-01`: O comentário irônico do narrador desarmava qualquer interpretação sentimental da cena.
+- `ok` `r-adj-cáustico-01`: A crítica cáustica embutida nos diálogos tornava o romance desconfortável para os alvos.
+- `ok` `r-adj-mordaz-01`: O humor mordaz da escritora não poupava nem os personagens com quem o leitor simpatizava.
+- `ok` `r-adj-circular-01`: A estrutura circular do romance devolvia o leitor ao início com um olhar completamente novo.
+- `ok` `r-adj-linear-01`: A narrativa linear do conto contrastava com a complexidade psicológica das personagens.
+- `ok` `r-adj-não-linear-01`: A cronologia não linear do romance obrigava o leitor a reconstruir os eventos por conta própria.
+- `ok` `r-adj-episódico-01`: A estrutura episódica do livro permitia que cada capítulo funcionasse como um conto autônomo.
+- `ok` `r-adj-labiríntico-01`: O enredo labiríntico confundia propositalmente o leitor até a última revelação do fim.
+- `ok` `r-verb-articula-01`: A narradora articula passado e presente como camadas sobrepostas de uma mesma experiência.
+- `ok` `r-verb-integra-01`: O romance integra elementos do mito indígena à narrativa urbana contemporânea com naturalidade.
+- `ok` `r-verb-acumula-01`: O texto acumula detalhes sensoriais até que a cena adquira uma intensidade quase insuportável.
+- `ok` `r-verb-desestabiliza-01`: A revelação do epílogo desestabiliza toda a leitura feita até aquele ponto do romance.
+- `ok` `r-verb-entrecruza-01`: O narrador entrecruza as vozes de forma que nenhuma delas possa ser separada das outras.
+- `ok` `r-verb-embaralha-01`: O texto embaralha os tempos verbais para criar a sensação de memória e esquecimento.
+- `ok` `r-verb-condensa-01`: O poema condensa em quatorze versos uma experiência que o romance levaria duzentas páginas.
+- `ok` `r-verb-espelha-01`: A estrutura do conto espelha o estado psicológico da protagonista ao longo de sua crise.
+- `ok` `r-noun-orelha-01`: A orelha do livro trazia um breve texto crítico que contextualizava a obra para o leitor.
+- `ok` `r-noun-contracapa-01`: A contracapa resumia o enredo sem revelar o desfecho que diferenciava o livro dos demais.
+- `ok` `r-noun-prefácio-01`: O prefácio escrito pela própria autora discutia as escolhas formais que guiaram o projeto.
+- `ok` `r-noun-posfácio-01`: O posfácio da tradutora explicava as decisões que tomou diante das ambiguidades do original.
+- `ok` `r-noun-nota-da-tradutora-01`: A nota da tradutora transformava a invisibilidade do trabalho de tradução em reflexão crítica.
+- `ok` `r-adv-inevitavelmente-01`: A narradora inevitavelmente retornava ao momento da perda, que estruturava toda a narrativa.
+- `ok` `r-adv-propositalmente-01`: O autor propositalmente deixou lacunas que o leitor precisaria preencher com sua imaginação.
+- `ok` `r-adv-paradoxalmente-01`: O silêncio, paradoxalmente, era o elemento mais barulhento de toda a narrativa do romance.
+- `ok` `r-adv-implicitamente-01`: A crítica ao regime aparecia implicitamente nas metáforas que percorriam toda a obra.
+- `ok` `r-conj-na-medida-em-que-01`: A tensão crescia na medida em que os personagens se aproximavam da verdade proibida.
+- `ok` `r-conj-desde-que-01`: A narradora aceitaria qualquer final, desde que fosse honesto com os personagens que criou.
+- `ok` `r-pron-o-que-01`: O que mais surpreendia na obra era justamente o que o crítico considerava sua maior fraqueza.
+- `ok` `r-noun-bildungsroman-01`: O bildungsroman contemporâneo da autora acompanhava uma jovem do interior paulista.
+- `ok` `r-noun-conto-01`: O conto era tão compacto que cada vírgula carregava o peso de um parágrafo inteiro.
+- `ok` `r-noun-novela-01`: A novela se estende além do conto mas não alcança a amplitude necessária para o romance.
+- `ok` `r-adj-tardio-01`: O reconhecimento tardio da autora chegou décadas depois de sua obra mais importante.
+- `ok` `r-adj-precoce-01`: O talento precoce da escritora se revelou já no primeiro conto publicado aos dezoito anos.
+- `ok` `r-adj-inaugural-01`: O romance inaugural de uma escritora costuma revelar mais do que todos os seguintes juntos.
+- `ok` `r-adj-seminal-01`: A obra seminal do autor influenciou toda uma geração de escritores brasileiros dos anos 1970.
+- `ok` `r-adj-derradeiro-01`: O poema derradeiro do volume reunia todos os temas trabalhados ao longo do livro inteiro.
+- `ok` `r-adj-canônico-01`: O texto canônico da literatura brasileira volta a ser relido por cada nova geração de leitores.
+- `ok` `r-adj-marginal-01`: A literatura marginal ganhou espaço nos anos 1970 ao romper com o sistema editorial tradicional.
+- `ok` `r-adj-periférico-01`: A voz periférica do narrador denunciava o que o centro literário preferia não enxergar.
+- `ok` `r-adj-diaspórico-01`: A experiência diaspórica da protagonista estruturava sua relação com a língua portuguesa.
+- `ok` `r-adj-híbrido-01`: O romance híbrido misturava ficção científica e romance histórico sem perder coerência interna.
+- `ok` `r-verb-ressignifica-01`: A autora ressignifica o clichê ao repeti-lo até que perca o sentido original e ganhe outro.
+- `ok` `r-verb-reinventa-01`: O poeta reinventa a forma do soneto mantendo as restrições externas mas liberando o conteúdo.
+- `ok` `r-verb-desloca-01`: A tradutora desloca a voz do original para um espaço entre as duas línguas e culturas.
+- `ok` `r-verb-interpela-01`: O texto interpela o leitor diretamente ao usar o pronome «você» de forma insistente.
+- `ok` `r-noun-voz-narrativa-01`: A voz narrativa do romance oscilava entre a onisciência e a limitação perspectival do sujeito.
+- `ok` `r-noun-fluxo-de-consciência-01`: O fluxo de consciência da personagem transformava o capítulo central em um monólogo interior.
+- `ok` `r-noun-elipse-01`: A elipse temporal entre os capítulos deixava ao leitor a tarefa de imaginar os anos omitidos.
+- `ok` `r-noun-prolepse-01`: A prolepse discreta no início do romance preparava o leitor atento para o desfecho trágico.
+- `ok` `r-adj-metalinguístico-01`: O conto metalinguístico comentava sua própria construção sem deixar de contar uma história.
+- `ok` `r-adj-autorreferente-01`: A prosa autorreferente da autora transformava o ato de escrever em tema e em forma ao mesmo tempo.
+- `ok` `r-adj-polifônico-01`: O romance polifônico de Dostoiévski influenciou gerações de escritores brasileiros do século XX.
+- `ok` `r-conf-por-fim-01`: Por fim, pode-se concluir que a obra marcou definitivamente a literatura brasileira do século.
+- `ok` `r-conf-em-primeiro-01`: Em primeiro lugar, é preciso considerar o contexto histórico em que a obra foi produzida.
+- `ok` `r-conf-diante-01`: Diante disso, fica evidente que a narrativa dialoga com a tradição do romance realista nacional.
+- `ok` `r-conf-de-alguma-01`: De alguma forma, o narrador consegue transmitir a angústia da personagem sem nomeá-la.
+- `ok` `r-adv-absolutamente-01`: A prosa absolutamente despida de ornamentos revelava uma escolha consciente de estilo austero.
+- `ok` `r-adv-inteiramente-01`: O romance era inteiramente narrado em primeira pessoa, sem qualquer distância do protagonista.
+- `ok` `r-adv-amplamente-01`: O livro foi amplamente reconhecido pela crítica internacional como uma obra indispensável.
+- `ok` `r-adv-parcialmente-01`: A crítica apenas parcialmente compreendeu o alcance político da narrativa no momento da publicação.
+- `ok` `r-verb-identifica-01`: A crítica identifica na obra três fases distintas que correspondem às décadas de produção da autora.
+- `ok` `r-verb-distingue-01`: O narrador distingue com precisão cirúrgica as vozes que compõem o coro polifônico do romance.
+- `ok` `r-verb-revela-01`: A análise do manuscrito revela uma versão anterior muito mais longa e estruturalmente diferente.
+- `ok` `r-verb-demonstra-01`: A trajetória da autora demonstra como a experiência vivida alimenta a imaginação literária.
+- `ok` `r-noun-impacto-01`: O impacto da obra se fez sentir muito além do círculo literário para o qual foi inicialmente escrita.
+- `ok` `r-noun-repercussão-01`: A repercussão do romance ultrapassou as fronteiras do mercado editorial e chegou às universidades.
+- `ok` `r-noun-legado-01`: O legado da escritora vai muito além das obras publicadas e inclui sua influência sobre os estudantes.
+- `ok` `r-noun-ruptura-01`: A ruptura com o realismo psicológico foi a aposta mais ousada de toda a obra publicada pela autora.
+- `ok` `r-noun-transgressão-01`: A transgressão formal do romance não era gratuita; ela nascia da necessidade de dizer o indizível.
+- `ok` `r-prep-entre-01`: Entre o silêncio e a palavra, a narradora escolhe um terceiro caminho inesperado e subversivo.
+- `ok` `r-prep-além-de-01`: Além de poeta, a autora foi ensaísta, tradutora e uma das editoras mais influentes de sua geração.
+- `ok` `r-noun-narrador-hetero-01`: O narrador heterodiegético observa os eventos de fora sem nunca participar diretamente da ação.
+- `ok` `r-noun-homodiegético-01`: A voz homodiegética confunde propositalmente as fronteiras entre memória e invenção narrativa.
+- `ok` `r-noun-mise-en-abyme-01`: A mise en abyme do terceiro capítulo reflete a estrutura do romance dentro do próprio romance.
+- `ok` `r-adj-distanciado-01`: O olhar distanciado do narrador cria uma ironia fria que percorre toda a extensão do texto.
+- `ok` `r-adj-engajado-01`: A prosa engajada da autora nunca abre mão da beleza literária em nome da urgência política.
+- `ok` `r-adj-fragmentado-01`: O texto fragmentado reproduz formalmente a experiência de uma consciência em colapso interior.
+- `ok` `r-adj-experimental-01`: O romance experimental recusa as convenções do gênero e inventa suas próprias regras estruturais.
+- `ok` `r-adj-minimalista-01`: A prosa minimalista da autora extrai o máximo de sentido de um vocabulário propositalmente restrito.
+- `ok` `r-adj-maximalista-01`: O romance maximalista acumula detalhes, vozes e referências até criar uma experiência de saturação.
+- `ok` `r-adj-intertextual-01`: A construção intertextual do poema exige que o leitor reconheça as citações implícitas e explícitas.
+- `ok` `r-adj-transtextual-01`: A relação transtextual entre os dois romances vai além da citação e atinge o nível da reescrita.
+- `ok` `r-verb-transgride-01`: A autora transgride as fronteiras do gênero sem jamais perder o fio condutor da narrativa.
+- `ok` `r-verb-dissolve-01`: A narradora dissolve a distinção entre real e imaginário até torná-la irrelevante para a leitura.
+- `ok` `r-verb-apaga-01`: A autora apaga deliberadamente os rastros de sua própria voz para deixar emergir outras vozes.
+- `ok` `r-conj-ainda-que-01`: Ainda que o enredo seja simples, a linguagem transforma cada cena em um evento literário.
+- `ok` `r-conj-tampouco-01`: A obra não é fácil de ler, tampouco é difícil — ela é simplesmente intensa e exigente.
+- `ok` `r-noun-hipertexto-01`: O hipertexto narrativo do romance permite múltiplas entradas e saídas no universo ficcional.
+- `ok` `r-noun-intertexto-01`: O intertexto com Machado de Assis aparece tanto na ironia quanto na escolha da forma narrativa.
+- `ok` `r-noun-peritexto-01`: O peritexto da edição original incluía ilustrações da própria autora que foram suprimidas na reedição.
+- `ok` `r-adv-progressivamente-01`: O leitor vai progressivamente percebendo que o narrador nunca foi confiável desde o início.
+- `ok` `r-adv-diametralmente-01`: As duas narrativas seguem caminhos diametralmente opostos que só se encontram no epílogo.
+- `ok` `r-adj-fundacional-01`: O texto fundacional do movimento definia uma estética que marcaria toda a geração seguinte.
+- `ok` `r-adj-canônico-02`: A leitura canônica da obra ignorou durante décadas as dimensões de gênero presentes no texto.
+- `ok` `r-adj-revisionist-01`: A crítica revisionista dos anos 1990 propôs uma leitura radicalmente diferente da obra da autora.
+- `ok` `r-adj-paradigmático-01`: O romance paradigmático do modernismo brasileiro ainda é referência obrigatória nos cursos de letras.
+- `ok` `r-noun-reedição-01`: A reedição corrigida trouxe à luz variantes do texto que mudavam a interpretação de passagens centrais.
+- `ok` `r-noun-editio-princeps-01`: A editio princeps do romance, publicada em 1942, diferia significativamente das edições posteriores.
+- `ok` `r-noun-tiragem-01`: A primeira tiragem de quinhentos exemplares esgotou-se em menos de uma semana de lançamento.
+- `ok` `r-noun-resenha-01`: A resenha publicada no suplemento literário transformou o livro em fenômeno editorial de vendas.
+- `ok` `r-noun-paráfrase-01`: A paráfrase do crítico simplificava perigosamente um texto que resistia a qualquer resumo justo.
+- `ok` `r-noun-glosa-01`: A glosa medieval era uma forma de comentário que se desenvolvia verso a verso, linha a linha.
+- `ok` `r-adj-autêntico-01`: A voz autêntica da narradora dispensava qualquer mediação retórica entre texto e leitor.
+- `ok` `r-adj-genuíno-01`: O sofrimento genuíno retratado na obra impedia uma leitura puramente estética e distanciada.
+- `ok` `r-adj-singular-02`: A trajetória singular da autora a colocou à margem dos movimentos literários de sua época.
+- `ok` `r-adj-inacabado-01`: O conto inacabado revelava um caminho que a autora havia descartado antes de encontrar a forma final.
+- `ok` `r-adj-panorâmico-01`: O romance panorâmico abrangia três gerações de uma família do nordeste brasileiro ao longo do tempo.
+- `ok` `r-adj-microscópico-01`: O olhar microscópico da narradora transformava cada gesto em um campo de batalha de sentidos.
+- `ok` `r-adj-abrangente-01`: A análise abrangente da crítica cobria desde a forma linguística até o contexto sociopolítico da obra.
+- `ok` `r-adj-restrito-01`: O público restrito da primeira edição contrastava com a enorme repercussão das reedições posteriores.
+- `ok` `r-verb-decodifica-01`: O leitor experiente decodifica as referências culturais que estruturam a camada simbólica do texto.
+- `ok` `r-verb-decifra-01`: A narradora decifra lentamente os sinais que o texto havia deixado ao longo de todos os capítulos.
+- `ok` `r-verb-recontextualiza-01`: O texto recontextualiza a tradição oral para um ambiente urbano sem perder a força do original.
+- `ok` `r-verb-atualiza-01`: A tradução atualiza o vocabulário arcaico sem trair o espírito da obra original do século XVIII.
+- `ok` `r-verb-amplia-01`: A reedição amplia o escopo do texto ao incluir variantes que haviam sido suprimidas na primeira edição.
+- `ok` `r-verb-celebra-01`: O romance celebra a oralidade popular sem ceder ao folclorismo pitoresco que contamina o gênero.
+- `ok` `r-noun-exegese-01`: A exegese minuciosa do texto revelou estruturas de poder que a leitura superficial havia ignorado.
+- `ok` `r-noun-hermenêutica-01`: A hermenêutica do texto literário exige que o crítico suspenda seus próprios pressupostos culturais.
+- `ok` `r-adj-semiotica-uso-01`: A análise semiótica da capa do livro revelava um sistema de signos que antecipava o conteúdo.
+- `ok` `r-noun-estilística-01`: A estilística do texto identificou padrões de repetição que construíam o ritmo único da prosa.
+- `ok` `r-noun-retórica-01`: A retórica da narração seduzia o leitor precisamente porque fingia não ser retórica alguma.
+- `ok` `r-noun-sintagma-01`: O sintagma nominal que abre cada capítulo cria uma expectativa que o texto sistematicamente defrauda.
+- `ok` `r-noun-isotopia-01`: A isotopia semântica da água percorre o romance e unifica os fragmentos aparentemente dispersos.
+- `ok` `r-noun-antítese-01`: A antítese central do romance opõe memória e esquecimento como forças igualmente constitutivas.
+- `ok` `r-noun-oxímoro-01`: O oxímoro «silêncio estridente» na abertura do conto condensava toda a tensão da narrativa.
+- `ok` `r-noun-hipérbole-01`: A hipérbole deliberada da narradora criava um distanciamento irônico em relação ao próprio discurso.
+- `ok` `r-noun-litotes-01`: A litotes «não era sem mérito» concentrava uma ironia que percorria todo o prefácio do editor.
+- `ok` `r-noun-sinédoque-01`: A sinédoque da «mão que escreve» representava a presença da autora no tecido do próprio texto.
+- `ok` `r-noun-metonímia-01`: A metonímia do «chapéu» pelo personagem criava uma distância sardônica que marcava o estilo.
+- `ok` `r-adj-jubiloso-01`: O final jubiloso contrastava com o tom sombrio dos capítulos anteriores de forma quase violenta.
+- `ok` `r-adj-angustiante-01`: A espera angustiante do desfecho criava uma tensão que a escrita da autora habilmente prolongava.
+- `ok` `r-noun-cumplicidade-01`: A cumplicidade construída entre narrador e leitor tornava a traição final ainda mais devastadora.
+- `ok` `r-noun-empatia-01`: A empatia pelo personagem era deliberadamente fabricada para tornar o desfecho moralmente perturbador.
+- `ok` `r-noun-estranhamento-01`: O estranhamento provocado pela prosa impedia o leitor de se identificar passivamente com o narrador.
+- `ok` `r-noun-suspense-01`: O suspense construído ao longo dos capítulos era mais psicológico do que narrativo no sentido estrito.
+- `ok` `r-verb-enreda-01`: A autora enreda deliberadamente o leitor em contradições que o texto se recusa a resolver.
+- `ok` `r-verb-surpreende-01`: O romance sempre surpreende porque cumpre suas promessas de uma forma que não esperávamos.
+- `ok` `r-verb-frustra-01`: O texto frustra sistematicamente as expectativas convencionais do gênero para criar novas possibilidades.
+- `ok` `r-verb-seduz-01`: A narradora seduz o leitor com uma prosa de superfície límpida que esconde abismos de sentido.
+- `ok` `r-verb-provoca-01`: A obra provoca um desconforto produtivo que leva o leitor a rever suas certezas sobre o mundo.
+- `ok` `r-verb-encanta-01`: O texto encanta sem iludir — sua beleza é inseparável de sua capacidade de revelar a realidade.
+- `ok` `r-verb-perturba-01`: A última frase do romance perturba porque transforma o sentido de tudo o que havia sido lido antes.
+- `ok` `r-verb-silencia-01`: O narrador silencia estrategicamente nos momentos em que o leitor mais precisaria de explicação.
+- `ok` `r-adj-precursor-01`: O conto precursor antecipou temas que só se tornariam centrais na literatura brasileira décadas depois.
+- `ok` `r-adj-epigonal-01`: A obra epigonal repetia os gestos do mestre sem encontrar uma voz própria e distintiva na prosa.
+- `ok` `r-adj-vanguardista-01`: O grupo vanguardista propunha uma ruptura radical com as formas estabelecidas da tradição literária.
+- `ok` `r-noun-avant-garde-01`: A avant-garde brasileira dos anos 1950 dialogou intensamente com as tendências europeias da época.
+- `ok` `r-noun-recepção-01`: A recepção crítica da obra variou enormemente entre o momento da publicação e as décadas seguintes.
+- `ok` `r-verb-canoniza-01`: A academia canoniza com atraso o que a geração seguinte já havia reconhecido como fundamental.
+- `ok` `r-verb-marginaliza-01`: O cânone literário marginaliza sistematicamente vozes que não correspondem ao seu centro de poder.
+- `ok` `r-adv-estilisticamente-01`: As duas obras são estilisticamente opostas, mas compartilham a mesma visão de mundo da autora.
+- `ok` `r-adv-tematicamente-01`: Tematicamente coesos, os contos formam um todo orgânico que ultrapassa a soma das partes individuais.
+- `ok` `r-conf-ser-humano-01`: O ser humano sempre buscou na arte uma forma de transcender os limites da própria existência.
+- `ok` `r-conf-todos-sabemos-01`: Todos sabemos que a leitura transforma a percepção que temos do mundo e das outras pessoas.
+- `ok` `r-adj-contemporâneo-01`: O escritor contemporâneo enfrenta a tensão entre a velocidade digital e a lentidão da ficção longa.
+- `ok` `r-adj-atemporal-01`: A beleza atemporal da prosa tornava impossível datar o texto pelo vocabulário ou pelo estilo.
+- `ok` `r-adj-datado-01`: O romance hoje parece datado porque apostou demais nas referências culturais de uma única década.
+- `ok` `r-adj-atual-01`: A obra permanece atual porque as questões que levanta continuam sem resposta definitiva possível.
+- `ok` `r-adj-poliédrico-01`: A narrativa poliédrica oferecia ângulos incompatíveis entre si sem nunca resolver a contradição.
+- `ok` `r-adj-ambíguo-02`: O desfecho ambíguo gerou leituras radicalmente diferentes que ainda hoje dividem a crítica especializada.
+- `ok` `r-adj-hermético-01`: A prosa hermética da autora exigia um leitor disposto a aceitar o não entendimento como experiência.
+- `ok` `r-adj-opaco-02`: O texto opaco resistia à interpretação fácil e pedia uma leitura lenta, atenta e repetida.
+- `ok` `r-noun-topos-01`: O topos da biblioteca como espaço do saber e do poder perpassa toda a tradição do romance europeu.
+- `ok` `r-noun-locus-01`: O locus amoenus da natureza idílica servia de contraste irônico ao caos psicológico da protagonista.
+- `ok` `r-noun-heterotopia-01`: A prisão funcionava como heterotopia — espaço de exclusão que revelava as normas do espaço social.
+- `ok` `r-noun-utopia-01`: A utopia comunitária descrita no romance nunca se concretizava e permanecia como horizonte desejado.
+- `ok` `r-noun-distopia-01`: A distopia tecnológica do romance antecipou debates que só se tornariam urgentes décadas depois.
+- `ok` `r-verb-pondera-01`: A narradora pondera cada palavra com uma atenção que transforma o texto em objeto de contemplação.
+- `ok` `r-verb-oscila-01`: O narrador oscila entre a onisciência e a limitação perspectival sem jamais fixar uma posição.
+- `ok` `r-verb-hesita-01`: A prosa hesita deliberadamente antes de nomear, criando uma suspensão que é ela mesma poética.
+- `ok` `r-verb-recorre-01`: A autora recorre ao mito não para explicar o presente, mas para mostrar sua irredutibilidade.
+- `ok` `r-verb-inverte-01`: O conto inverte as expectativas do gênero ao dar ao perseguido o poder narrativo sobre o perseguidor.
+- `ok` `r-verb-preserva-01`: A tradução preserva o ritmo do original mesmo quando o significado exige uma escolha diferente.
+- `ok` `r-adj-prolífico-02`: O escritor prolífico publicou mais de trinta livros sem jamais repetir a mesma fórmula narrativa.
+- `ok` `r-adj-recluso-01`: A vida reclusa da autora alimentou uma mitologia que a obra acabou por contradizer com sua vivacidade.
+- `ok` `r-adj-combativo-01`: O ensaísta combativo usava a crítica literária como trincheira política sem sacrificar o rigor analítico.
+- `ok` `r-adj-contido-02`: O estilo contido do escritor escondia uma intensidade emocional que explodia nas últimas páginas.
+- `ok` `r-noun-tropicalismo-01`: O tropicalismo reconfigurou a relação entre cultura erudita e popular no Brasil dos anos 1960.
+- `ok` `r-noun-concretismo-01`: O concretismo propôs uma poesia que era também objeto visual, desafiando a hegemonia do verso.
+- `ok` `r-noun-neorrealismo-01`: O neorrealismo português influenciou escritores brasileiros que buscavam retratar a realidade social.
+- `ok` `r-noun-surrealismo-01`: O surrealismo deixou marcas na prosa de ficção científica brasileira muito além do que se reconhece.
+- `ok` `r-noun-expressionismo-01`: O expressionismo da narradora distorcia a realidade para revelar o estado interior da protagonista.
+- `ok` `r-adj-aforístico-01`: O estilo aforístico do ensaísta comprimia teses complexas em frases de memorável síntese intelectual.
+- `ok` `r-adj-paratático-01`: A construção paratática do texto recusava a subordinação e tratava cada frase como unidade autônoma.
+- `ok` `r-adj-hipotático-01`: O período hipotático da prosa construía uma hierarquia de ideias que orientava a leitura com rigor.
+- `ok` `r-adj-polissêmico-01`: O título polissêmico do romance abria múltiplas entradas interpretativas desde a primeira leitura.
+- `ok` `r-verb-enuncia-01`: O texto enuncia uma verdade impossível e depois passa o resto das páginas tentando sustentá-la.
+- `ok` `r-verb-elabora-01`: A ensaísta elabora sua tese ao longo de doze capítulos sem jamais perder o fio condutor central.
+- `ok` `r-verb-recupera-01`: A autora recupera tradições esquecidas sem tratar o passado como modelo a ser simplesmente imitado.
+- `ok` `r-noun-dicção-01`: A dicção inconfundível da autora tornava cada frase reconhecível antes mesmo de identificar o livro.
+- `ok` `r-noun-tonalidade-01`: A tonalidade elegíaca do romance crescia à medida que o desfecho se tornava inevitável e próximo.
+- `ok` `r-noun-cadência-01`: A cadência da prosa era tão precisa que alterar uma única vírgula desfazia o equilíbrio do parágrafo.
+- `ok` `r-noun-simultaneidade-01`: A simultaneidade de planos temporais no romance exigia uma leitura que reconstruísse a cronologia.
+- `ok` `r-noun-contemporaneidade-01`: A contemporaneidade dos eventos narrados criava uma urgência que o pretérito perfeito não permitia.
+- `ok` `r-noun-anterioridade-01`: A anterioridade dos fatos relatados só era revelada gradualmente, criando um efeito de revelação.
+- `ok` `r-noun-posteridade-01`: A posteridade julgaria a obra de forma mais generosa do que os contemporâneos da autora o fizeram.
+- `ok` `r-adj-vernacular-01`: A prosa vernacular da autora recusava tanto o purismo acadêmico quanto a afetação da língua culta.
+- `ok` `r-adj-dialetal-01`: A marcação dialetal nos diálogos situava o romance numa tradição de valorização das falas regionais.
+- `ok` `r-adj-culto-01`: O registro culto da narradora contrastava com o vocabulário popular das personagens secundárias.
+- `ok` `r-adj-popular-01`: A linguagem popular do romance revelava uma escuta atenta da oralidade das ruas e das praças.
+- `ok` `r-verb-compõe-01`: A autora compõe cada parágrafo como se fosse um poema: nenhuma palavra pode ser substituída.
+- `ok` `r-verb-tece-01`: O romancista tece os fios narrativos com uma paciência que só se revela na última página.
+- `ok` `r-verb-esculpe-01`: A poeta esculpe cada verso com uma precisão que transforma a língua em matéria resistente e densa.
+- `ok` `r-verb-forja-01`: O escritor forja uma voz que parece natural mas é o resultado de anos de escolhas conscientes.
+- `ok` `r-verb-lapida-01`: A revisora lapida o texto até que cada frase atinja a clareza máxima sem perder a densidade.
+- `ok` `r-verb-destila-01`: A narradora destila décadas de memória até restar apenas o que não pode ser dito de outra forma.
+- `ok` `r-adj-lírico-01`: O impulso lírico da prosa transformava momentos cotidianos em epifanias de beleza desconcertante.
+- `ok` `r-adj-épico-01`: A dimensão épica do romance abrangia não apenas personagens individuais mas uma geração inteira.
+- `ok` `r-adj-dramático-01`: A intensidade dramática da cena central dispensava qualquer comentário autoral sobre o que ocorria.
+- `ok` `r-adj-trágico-01`: O desfecho trágico era inevitável desde a primeira página, mas a autora adiava a revelação.
+- `ok` `r-adj-cômico-01`: O tom cômico do romance servia de veículo para uma crítica social mais aguda do que aparentava.
+- `ok` `r-adj-satírico-01`: A veia satírica do escritor poupava apenas os que já haviam sofrido o suficiente na trama.
+- `ok` `r-adj-paródico-01`: A releitura paródica do gênero policial transformava as convenções em alvo de humor refinado.
+- `ok` `r-adj-pastiche-01`: O romance pastiche celebrava seus modelos ao mesmo tempo que os desmontava com afeto crítico.
+- `ok` `r-noun-período-01`: O período longo da prosa barroca exigia do leitor uma atenção que a prosa moderna recusa oferecer.
+- `ok` `r-noun-estrofe-01`: A estrofe final do poema concentrava o sentido de tudo o que havia sido dito e não dito antes.
+- `ok` `r-noun-refrão-01`: O refrão que retornava a cada capítulo criava uma estrutura musical no interior da prosa.
+- `ok` `r-noun-cesura-01`: A cesura no meio do verso criava uma pausa que o leitor sentia fisicamente antes de continuar.
+- `ok` `r-noun-encavalgamento-01`: O encavalgamento frequente recusava o fim natural do verso e empurrava o sentido para o seguinte.
+- `ok` `r-adj-hegemônico-01`: O discurso hegemônico da crítica literária silenciou durante décadas as vozes que hoje reconhecemos.
+- `ok` `r-adj-subalterno-01`: A voz subalterna da protagonista conquistava a narração e invertia as hierarquias do gênero.
+- `ok` `r-adj-dissidente-01`: A posição dissidente da escritora a colocou à margem dos prêmios mas no centro da história.
+- `ok` `r-adj-transgressor-01`: A escrita transgressora da autora usava o corpo como campo de batalha político e estético.
+- `ok` `r-noun-interlocutor-01`: O interlocutor implícito do texto era sempre o leitor culto, mas não necessariamente acadêmico.
+- `ok` `r-noun-leitor-modelo-01`: O leitor-modelo do romance conhecia a tradição literária que o texto citava sem jamais nomear.
+- `ok` `r-noun-horizonte-01`: O horizonte de expectativas do leitor da época era radicalmente diferente do leitor contemporâneo.
+- `ok` `r-noun-pacto-01`: O pacto autobiográfico estabelecido no prefácio orientava toda a leitura que se seguia ao contrato.
+- `ok` `r-verb-anuncia-01`: O primeiro parágrafo anuncia o tema central do romance com uma clareza que só se confirma no fim.
+- `ok` `r-verb-retoma-01`: O último capítulo retoma a imagem inicial e a transforma pelo que a narrativa revelou entre elas.
+- `ok` `r-verb-inaugura-01`: O romance inaugura uma linhagem que percorre toda a ficção brasileira das décadas seguintes.
+- `ok` `r-verb-encerra-01`: O poema encerra o volume com uma abertura — não uma conclusão, mas uma nova pergunta urgente.
+- `ok` `r-verb-refrata-01`: A linguagem refrata a realidade em vez de refleti-la, criando um mundo paralelo e complementar.
+- `ok` `r-verb-comprime-01`: A elipse comprime décadas em uma única frase, deixando ao leitor a tarefa de imaginar os anos.
+- `ok` `r-verb-fixa-01`: A imagem final fixa na memória do leitor o sentimento que percorreu todo o romance discretamente.
+- `ok` `r-verb-libera-01`: A forma do conto libera a autora das obrigações do romance e permite uma concentração total.
+- `ok` `r-noun-mise-en-scene-01`: A mise en scène da cena final era tão visual que o leitor sentia estar diante de uma imagem.
+- `ok` `r-adj-incisivo-01`: A crítica incisiva da ensaísta não poupava nem os autores que ela mais admirava e celebrava.
+- `ok` `r-adj-perspicaz-01`: O olhar perspicaz da narradora identificava contradições que os próprios personagens não conseguiam ver.
+- `ok` `r-adj-dissonante-01`: A voz dissonante da narradora recusava o consenso fácil que o gênero costumava oferecer ao leitor.
+- `ok` `r-noun-deslocamento-01`: O deslocamento espacial da protagonista era também um deslocamento identitário e linguístico profundo.
+- `ok` `r-verb-reenquadra-01`: O último parágrafo reenquadra tudo o que foi dito e obriga o leitor a reler o livro inteiro.
+- `ok` `r-verb-escava-01`: A prosa escava camadas de sentido que a leitura superficial não alcançaria nunca na primeira vez.
+- `ok` `r-adj-denunciativo-01`: O tom denunciativo do romance não impedia a autora de construir personagens de grande riqueza.
+- `ok` `r-adj-contemplativo-01`: O ritmo contemplativo do texto pedia uma leitura lenta, quase meditativa, sem pressa de chegar.
+- `ok` `r-noun-impasse-01`: O impasse final do romance resistia à resolução e deixava o leitor com a pergunta sem resposta.
+- `ok` `r-adj-vertiginoso-01`: O ritmo vertiginoso dos últimos capítulos acelerava a narrativa até o ponto de ruptura final.
+- `ok` `r-adj-lacunar-01`: O texto lacunar exigia que o leitor preenchesse os silêncios com sua própria experiência de vida.
+- `ok` `r-noun-vacúolo-01`: Os vacúolos de sentido no texto não eram falhas — eram espaços deliberados para a respiração.
+- `ok` `r-noun-subversão-01`: A subversão das normas do gênero era tão sistemática que se tornava ela mesma uma nova norma.
+- `ok` `r-adj-borgiano-01`: A estrutura borgiana do romance propunha labirintos de sentido que se multiplicavam a cada leitura.
+- `ok` `r-adj-rosiano-01`: A dicção rosiana não era apenas regional — era a criação de uma língua dentro da língua portuguesa.
+- `ok` `r-adj-machadiano-01`: O humor machadiano dissimulava por trás da ironia uma reflexão filosófica sobre o destino humano.
+- `ok` `r-conf-a-saber-01`: As obras do período, a saber: romances, contos e crônicas, formavam um conjunto coeso e articulado.
+- `ok` `r-conf-qual-seja-01`: O recurso central, qual seja a ironia dramática, estruturava toda a arquitetura do romance analisado.
+- `ok` `r-conf-modestia-01`: Modéstia à parte, a interpretação que ofereço supera as leituras anteriores do conto publicado em 1956.
+- `ok` `r-adj-efusivo-01`: O estilo efusivo do crítico contrastava com a contenção que a obra comentada pedia e merecia.
+- `ok` `r-adj-sóbrio-02`: A escrita sóbria do autor eliminava qualquer ornamento que não servisse à precisão do argumento.
+- `ok` `r-adj-assertivo-01`: A voz assertiva da narradora não deixava espaço para a dúvida que o leitor precisava ter.
+- `ok` `r-adj-reticente-01`: A narradora reticente omitia os fatos mais importantes exatamente onde a trama exigia clareza.
+- `ok` `r-adj-evasivo-01`: O personagem evasivo respondia a cada pergunta com outra pergunta, recusando qualquer fixação.
+- `ok` `r-verb-desconstrói-01`: A autora desconstrói os clichês do gênero com uma precisão que transforma o familiar em estranho.
+- `ok` `r-verb-reivindica-01`: O texto reivindica uma tradição esquecida e a insere no centro do debate literário contemporâneo.
+- `ok` `r-verb-confronta-01`: A narradora confronta o leitor com perguntas que o texto recusa responder de forma direta.
+- `ok` `r-verb-contorna-01`: A autora contorna a censura ao usar a alegoria como forma de dizer o que a linguagem direta proibia.
+- `ok` `r-verb-mapeia-01`: O romance mapeia o interior psicológico da protagonista com a precisão de um atlas emocional.
+- `ok` `r-verb-rastreia-01`: A crítica rastreia as influências da autora sem reduzir a obra a um mero produto das leituras.
+- `ok` `r-verb-registra-01`: O diário da escritora registra cada dúvida e cada escolha que resultou no romance publicado.
+- `ok` `r-verb-testemunha-01`: O texto testemunha uma época sem didatismo — os acontecimentos falam por si mesmos na prosa.
+- `ok` `r-noun-mecenato-01`: O mecenato estatal dos anos 1950 permitiu que escritores sem público encontrassem condições de criação.
+- `ok` `r-noun-tertúlia-01`: A tertúlia literária reunia semanalmente escritores, críticos e leitores em torno dos novos manuscritos.
+- `ok` `r-noun-manifesto-01`: O manifesto do grupo definia uma estética que seria transgredida pelos próprios signatários em seguida.
+- `ok` `r-noun-antologia-01`: A antologia organizada pela autora revelava um cânone alternativo que a crítica havia ignorado.
+- `ok` `r-noun-coletânea-01`: A coletânea reunia textos de décadas diferentes que se iluminavam mutuamente pela proximidade.
+- `ok` `r-noun-panorama-01`: O panorama da literatura brasileira traçado no ensaio era inevitavelmente parcial e datado.
+- `ok` `r-adj-rigoroso-01`: A análise rigorosa da crítica não deixava nenhum aspecto formal da obra sem tratamento adequado.
+- `ok` `r-adj-superficial-01`: A leitura superficial do romance perdia exatamente os detalhes que faziam a obra ser o que era.
+- `ok` `r-adj-aprofundado-01`: O estudo aprofundado da recepção da obra revelou que o público havia entendido mais do que a crítica.
+- `ok` `r-adj-criterioso-01`: A seleção criteriosa dos textos da antologia revelava uma visão coerente da tradição literária.
+- `ok` `r-noun-argumento-01`: O argumento central do ensaio dependia de uma premissa que o autor nunca chegava a demonstrar.
+- `ok` `r-noun-premissa-01`: A premissa da análise era discutível, mas o rigor do desenvolvimento compensava a fragilidade inicial.
+- `ok` `r-noun-hipótese-01`: A hipótese de leitura proposta pela crítica transformou completamente a recepção do romance.
+- `ok` `r-noun-tese-01`: A tese do ensaio era provocadora o suficiente para reiniciar um debate que parecia encerrado.
+- `ok` `r-noun-refutação-01`: A refutação da leitura canônica exigia provas textuais que o crítico havia sistematicamente ignorado.
+- `ok` `r-det-certos-01`: Certos recursos estilísticos só se revelam ao leitor que relê a obra com atenção à microestrutura.
+- `ok` `r-pron-si-01`: A obra se dobrava sobre si mesma para encontrar, no centro, não um sentido mas uma pergunta.
+- `ok` `r-noun-memorias-01`: As memórias da escritora revelavam uma versão do processo criativo que os romances haviam encoberto.
+- `ok` `r-noun-autobiografia-01`: A autobiografia confessa menos do que promete — o eu narrado nunca coincide com o eu vivido.
+- `ok` `r-noun-autoficção-01`: A autoficção dissolve as fronteiras do gênero ao tornar indistintos o autor, o narrador e o personagem.
+- `ok` `r-noun-epistolário-01`: O epistolário da autora revelava uma escritora completamente diferente da persona pública construída.
+- `ok` `conf-onde-naoloc-01`: Vivemos numa situação onde tudo parece possível.
+- `ok` `conf-onde-naoloc-02`: É um contexto onde as palavras perdem o sentido.
+- `ok` `conf-onde-naoloc-03`: Chegou ao momento onde tudo precisava ser decidido.
+- `ok` `conf-hedge-01`: Pode-se notar que a narrativa perde fôlego no segundo ato.
+- `ok` `conf-hedge-02`: É possível afirmar que a autora domina o registro coloquial.
+- `ok` `conf-anuncio-01`: Pretendo demonstrar como o silêncio estrutura a cena.
+- `ok` `conf-delegacao-01`: Cabe ressaltar que o personagem nunca chega a chorar.
+- `ok` `conf-delegacao-02`: É válido destacar que a voz narrativa oscila deliberadamente.
+- `ok` `conf-delegacao-03`: Não podemos deixar de mencionar a influência de Clarice.
+- `ok` `conf-onde-loc-01`: O canto dos pássaros onde ela cresceu nunca a deixou.
+- `ok` `conf-onde-loc-02`: Voltou à cidade onde nascera para morrer em paz.
+- `ok` `r-adj-efêmero-03`: A beleza efêmera da cena se dissolve antes do fim do capítulo.
+- `ok` `r-adj-efêmero-04`: Gestos efêmeros compõem o retrato de uma civilização perdida.
+- `ok` `r-adj-fugaz-02`: O prazer fugaz de uma frase perfeita justifica anos de tentativa.
+- `ok` `r-adj-atemporal-02`: A pergunta é atemporal: quem fala quando o narrador cala?
+- `ok` `r-adj-cronológico-01`: A ordem cronológica foi deliberadamente quebrada pela autora.
+- `ok` `r-adj-anacrónico-01`: O anacrónico tom épico contrasta com o cenário doméstico.
+- `ok` `r-adj-ínfimo-03`: O detalhe ínfimo carregava o peso de toda a narrativa.
+- `ok` `r-adj-exíguo-01`: Num espaço exíguo de tempo, tudo se transformou.
+- `ok` `r-adj-efusivo-02`: A recepção efusiva contrastava com a frieza do ambiente.
+- `ok` `r-adj-contido-lit-01`: O choro contido da protagonista dilacerava mais que os gritos.
+- `ok` `r-adj-onisciente-03`: O narrador onisciente conhece os segredos que as personagens escondem.
+- `ok` `r-adj-onisciente-04`: A perspectiva onisciente cede lugar ao monólogo interior.
+- `ok` `r-adj-homodiegético-01`: O narrador homodiegético participa dos eventos que narra.
+- `ok` `r-adj-heterodiegético-01`: A narração heterodiegética mantém distância dos acontecimentos.
+- `ok` `r-adj-autodiegético-01`: Em memórias ficcionais, o narrador autodiegético é protagonista e contador.
+- `ok` `r-adj-afrodiaspórico-01`: A literatura afrodiaspórica reorganiza os centros do cânone ocidental.
+- `ok` `r-adj-indígena-01`: As cosmologias indígenas entram na prosa como forma de resistência.
+- `ok` `r-adj-quilombola-01`: A identidade quilombola se afirma pela memória coletiva da terra.
+- `ok` `r-adj-periurbano-01`: A vida periurbana da protagonista está entre dois mundos sem pertencer a nenhum.
+- `ok` `r-adj-tautológico-01`: O argumento tautológico se dobra sobre si mesmo sem avançar.
+- `ok` `r-adj-assertivo-02`: A voz assertiva da narradora não deixa espaço para a dúvida do leitor.
+- `ok` `r-adj-elíptico-01`: A construção elíptica suprime o verbo e acelera o ritmo.
+- `ok` `r-adj-anacolútico-01`: O período anacolútico mimetiza o pensamento interrompido do personagem.
+- `ok` `r-verb-recapitular-01`: A narradora recapitula os eventos da noite anterior com precisão clínica.
+- `ok` `r-verb-subverter-01`: O romance subverte as expectativas de gênero sem aviso prévio.
+- `ok` `r-verb-delinear-01`: O autor delineia os contornos do personagem por meio do que ele não diz.
+- `ok` `r-verb-sedimentar-01`: As imagens se sedimentam ao longo da narrativa até formarem um padrão.
+- `ok` `r-verb-ressignificar-01`: A protagonista ressignifica a dor transformando-a em escrita.
+- `ok` `r-verb-tensionar-01`: O flashback tensiona a cronologia e força o leitor a reler o início.
+- `ok` `r-noun-verossimilhança-02`: A verossimilhança não exige realidade, apenas coerência interna.
+- `ok` `r-noun-diegese-02`: A diegese e a mimese organizam dois modos distintos de contar.
+- `ok` `r-noun-cronotopo-03`: O cronotopo bakhtiniano une espaço e tempo em categoria única.
+- `ok` `r-noun-intertexto-02`: O intertexto com Machado de Assis não é citação, é contaminação.
+- `ok` `r-noun-palimpsesto-01`: O romance funciona como palimpsesto: cada leitura revela uma camada anterior.
+- `ok` `r-noun-anacronismo-02`: O anacronismo deliberado cria estranhamento produtivo no leitor.
+- `ok` `r-noun-prolepse-02`: A prolepse do primeiro capítulo contamina toda a leitura subsequente.
+- `ok` `r-noun-analepse-02`: A analepse revela o que o leitor precisava saber desde o início.
+- `ok` `r-noun-ekphrasis-01`: A écfrase da pintura interrompe a ação e redefine o espaço ficcional.
+- `ok` `r-noun-hipotexto-01`: O hipotexto homérico subjaz a cada decisão de estrutura.
+- `ok` `r-noun-hipertexto-lit-01`: O romance é um hipertexto que reescreve sua fonte sem a apagar.
+- `ok` `r-adj-distópico-01`: O cenário distópico serve de espelho para o presente.
+- `ok` `r-adj-utópico-01`: A narrativa utópica projeta o que a realidade recusa.
+- `ok` `r-adj-especulativo-01`: A ficção especulativa brasileira ganhou força editorial na última década.
+- `ok` `r-adj-retrofuturista-01`: A estética retrofuturista mistura nostalgia com projeção tecnológica.
+- `ok` `r-adj-pós-colonial-01`: A perspectiva pós-colonial relê o arquivo imperial como documento da violência.
+- `ok` `r-adj-decolonial-lit-01`: A escrita decolonial recusa a neutralidade do ponto de vista dominante.
+- `ok` `r-adj-introvertido-02`: A protagonista introvertida guarda tudo num diário que ninguém lê.
+- `ok` `r-adj-extrovertido-02`: O personagem extrovertido mascara a solidão com excesso de palavras.
+- `ok` `r-adj-ambíguo-03`: O final ambíguo recusa a resolução e devolve a pergunta ao leitor.
+- `ok` `r-adj-antagônico-01`: As forças antagônicas do enredo nunca chegam a uma síntese.
+- `ok` `r-adj-catártico-01`: O desfecho catártico libera a tensão acumulada desde o primeiro ato.
+- `ok` `r-adj-traumático-01`: A memória traumática retorna em fragmentos que resistem à narrativa linear.
+- `ok` `r-pron-cujo-02`: O escritor cujo romance ganhou o prêmio estava na plateia.
+- `ok` `r-pron-cujo-03`: A personagem cujas memórias estruturam o enredo nunca aparece diretamente.
+- `ok` `r-pron-cujo-04`: Um país cujos mitos fundadores foram apagados pela colonização.
+- `ok` `r-pron-qual-02`: A editora para a qual enviou o manuscrito nunca respondeu.
+- `ok` `r-pron-qual-03`: O silêncio no qual a personagem vivia era ensurdecedor.
+- `ok` `r-pron-quem-03`: A mulher com quem ela cresceu reapareceu no terceiro capítulo.
+- `ok` `r-pron-quem-04`: O leitor para quem o livro foi escrito talvez nunca exista.
+- `ok` `r-verb-inf-01`: Escrever é tentar capturar o que foge antes de ser nomeado.
+- `ok` `r-verb-inf-02`: Ler a prosa de Rosa é aprender a desconfiar da clareza.
+- `ok` `r-verb-inf-03`: Publicar sem revisar é trair o leitor e a si mesmo.
+- `ok` `r-verb-inf-04`: Conseguiu terminar o romance sem ceder ao enredo fácil.
+- `ok` `r-verb-inf-05`: Precisava reescrever a cena do encontro para que funcionasse.
+- `ok` `r-adj-lacônico-02`: O estilo lacônico de Hemingway influenciou gerações de contistas.
+- `ok` `r-adj-prolixo-02`: A narração prolixa sufoca o ritmo antes do clímax.
+- `ok` `r-adj-hermético-02`: O poema hermético recusa a leitura fácil como gesto político.
+- `ok` `r-adj-alusivo-01`: O texto alusivo exige do leitor uma biblioteca interior.
+- `ok` `r-adj-digres-01`: A escrita digressiva de Sterne redefiniu o que se entende por romance.
+- `ok` `r-adj-aforístico-02`: O tom aforístico concentra décadas em uma única frase.
+- `ok` `r-adj-parabólico-01`: A narrativa parabólica esconde a moral no próprio movimento da história.
+- `ok` `r-adj-anedótico-01`: O tom anedótico aproxima a narradora do leitor sem perder profundidade.
+- `ok` `r-noun-sinopse-02`: A sinopse precisa convencer o editor sem entregar o final.
+- `ok` `r-noun-orelha-02`: A orelha do livro é o primeiro argumento de venda.
+- `ok` `r-noun-livreiro-01`: O livreiro conhece seus clientes melhor que qualquer algoritmo.
+- `ok` `r-noun-reedição-02`: A reedição revisada corrigiu erros que passaram despercebidos por décadas.
+- `ok` `r-noun-prefácio-02`: O prefácio da nova edição reposicionou o livro no cânone.
+- `ok` `r-noun-posfácio-02`: O posfácio revelou que o final foi reescrito três vezes.
+- `ok` `r-noun-epílogo-02`: O epílogo desfaz o que o penúltimo capítulo havia construído.
+- `ok` `r-noun-prólogo-02`: O prólogo promete uma história que o romance não entrega — deliberadamente.
+- `ok` `r-noun-glossário-01`: O glossário no final revela que o autor inventou metade dos termos.
+- `ok` `r-noun-índice-01`: O índice remissivo transformou o romance em enciclopédia.
+- `ok` `r-verb-canonizar-01`: A academia canonizou a obra décadas depois de sua publicação.
+- `ok` `r-verb-problematizar-01`: O ensaio problematiza a noção de autoria sem resolvê-la.
+- `ok` `r-verb-cartografar-01`: A pesquisadora cartografou a produção de escritoras negras no século XX.
+- `ok` `r-verb-recuperar-01`: A nova crítica recuperou autoras esquecidas pelo cânone masculino.
+- `ok` `r-verb-revisitar-01`: Revisitar Clarice é encontrar um texto diferente a cada década.
+- `ok` `r-adj-cadenciado-02`: A prosa cadenciada de Lispector imita a respiração do pensamento.
+- `ok` `r-adj-sincopado-01`: O ritmo sincopado dos diálogos acelera a tensão sem avisar.
+- `ok` `r-adj-pausado-01`: A narração pausada obriga o leitor a habitar cada detalhe.
+- `ok` `r-adj-vertiginoso-02`: O acúmulo vertiginoso de imagens produz desorientação calculada.
+- `ok` `r-adj-moroso-01`: O andamento moroso do primeiro capítulo é uma armadilha deliberada.
+- `ok` `r-adj-claustrofóbico-01`: O espaço claustrofóbico da narrativa sufoca personagens e leitores.
+- `ok` `r-adj-árido-01`: A paisagem árida reflete o estado interior da protagonista.
+- `ok` `r-adj-opressivo-02`: O silêncio opressivo da casa comunica o que os personagens recusam dizer.
+- `ok` `r-adj-onírico-01`: A sequência onírica rompe o contrato com o realismo sem aviso.
+- `ok` `r-adj-liminar-01`: O espaço liminar entre o quarto e o corredor concentra toda a tensão.
+- `ok` `r-noun-ressentimento-01`: O ressentimento da narradora contamina cada descrição que ela faz.
+- `ok` `r-noun-contemplação-01`: A contemplação substitui a ação nos momentos de maior intensidade.
+- `ok` `r-noun-estranhamento-02`: O estranhamento produzido pela focalização incomum é o efeito desejado.
+- `ok` `r-noun-ambivalência-01`: A ambivalência do personagem em relação à mãe sustenta o romance inteiro.
+- `ok` `r-noun-cumplicidade-02`: A cumplicidade entre narrador e leitor se constrói aos poucos.
+- `ok` `r-noun-desamparo-01`: O desamparo da protagonista não pede solução — só testemunho.
+- `ok` `r-noun-pertencimento-01`: A busca por pertencimento atravessa toda a obra da autora.
+- `ok` `conf-quando-01`: Quando falamos de literatura, estamos falando de liberdade.
+- `ok` `conf-quando-02`: Quando pensamos em identidade, as fronteiras se tornam porosas.
+- `ok` `conf-notorio-01`: É notório que a crítica demorou a reconhecer autoras negras.
+- `ok` `conf-consenso-01`: É consenso que Machado é o maior romancista brasileiro.
+- `ok` `conf-estudiosos-01`: Todos os estudiosos concordam que o modernismo foi divisor de águas.
+- `ok` `conf-maioria-01`: A grande maioria dos leitores abandona o livro no terceiro capítulo.
+- `ok` `conf-suma-01`: A escolha do ponto de vista é de suma importância para o efeito narrativo.
+- `ok` `conf-quando-neg-01`: Quando o sol se pôs, ela ainda não havia chegado.
+- `ok` `conf-quando-neg-02`: Quando chorou foi porque finalmente entendeu.
+- `ok` `conf-maioria-neg-01`: A maioria dos personagens carregava um segredo.
+- `ok` `r-adj-labiríntico-02`: A sintaxe labiríntica de Guimarães Rosa é mapa de um mundo interior.
+- `ok` `r-adj-ramificado-01`: O enredo ramificado exige do leitor uma atenção cartográfica.
+- `ok` `r-adj-truncado-01`: A frase truncada imita o pensamento que não consegue se completar.
+- `ok` `r-adj-entrelaçado-01`: As tramas entrelaçadas convergem apenas no último parágrafo.
+- `ok` `r-adj-fragmentário-02`: O romance fragmentário recusa a ilusão de totalidade.
+- `ok` `r-adj-intercalado-01`: Os capítulos intercalados alternam presente e passado sem aviso.
+- `ok` `r-verb-cinzelar-01`: A poeta cinzela cada verso até que a superfície brilhe sem esforço.
+- `ok` `r-verb-lapidar-01`: Lapidar um conto exige saber o que retirar, não o que adicionar.
+- `ok` `r-verb-elaborar-01`: Ela elaborou o personagem a partir de um gesto visto no metrô.
+- `ok` `r-verb-gestar-01`: O romance foi gestado em dez anos de anotações e silêncios.
+- `ok` `r-verb-amadurecer-01`: A ideia amadureceu durante uma viagem sem destino certo.
+- `ok` `r-verb-apurar-01`: Apurar o estilo é aprender a confiar no que já está na frase.
+- `ok` `r-noun-recepção-02`: A recepção crítica da obra mudou radicalmente após a morte da autora.
+- `ok` `r-noun-legibilidade-01`: A legibilidade do texto é uma escolha política, não apenas estética.
+- `ok` `r-noun-textualidade-01`: A textualidade do diário privado resiste à narrativização.
+- `ok` `r-noun-ficcionalidade-01`: A ficcionalidade da autoficção é sempre negociada com o leitor.
+- `ok` `r-noun-literariedade-01`: A literariedade não reside no texto mas na relação com o leitor.
+- `ok` `r-adj-volátil-01`: O humor volátil da protagonista mantém o leitor em estado de alerta.
+- `ok` `r-adj-impulsivo-01`: As decisões impulsivas do personagem contradizem sua aparência calculada.
+- `ok` `r-adj-resiliente-02`: A narradora resiliente não se define pela dor mas pelo que faz com ela.
+- `ok` `r-adj-obstinado-01`: O personagem obstinado carrega uma promessa feita a si mesmo há décadas.
+- `ok` `r-adj-reticente-02`: A testemunha reticente guarda o segredo até a última cena.
+- `ok` `r-verb-farejar-01`: A detetive farejou a mentira antes de a personagem terminar a frase.
+- `ok` `r-verb-intuir-01`: Ela intuiu o que estava por vir sem conseguir nomear o presságio.
+- `ok` `r-verb-auscultar-01`: A narradora ausculta o silêncio da casa como se fosse um corpo.
+- `ok` `r-noun-dicção-02`: A dicção do romance mistura o erudito e o popular sem hierarquia.
+- `ok` `r-noun-entonação-01`: A entonação irônica só aparece quando o leitor já acreditou no narrador.
+- `ok` `r-noun-cadência-02`: A cadência do parágrafo final é a resolução que a trama recusou.
+- `ok` `r-noun-fraseo-01`: O fraseado curto demarca uma virada na consciência da narradora.
+- `ok` `r-adj-memorialístico-01`: O tom memorialístico confunde deliberadamente lembrança e invenção.
+- `ok` `r-adj-confessional-01`: A escrita confessional expõe o sujeito sem garantir a verdade.
+- `ok` `r-adj-testemunhal-01`: A literatura testemunhal exige um pacto ético com o leitor.
+- `ok` `r-adj-documental-01`: A ficção documental embaralha arquivo e imaginação.
+- `ok` `r-adj-biográfico-01`: O impulso biográfico tensiona o romance com o peso dos fatos reais.
+- `ok` `r-adj-epistolar-02`: A forma epistolar entrega ao leitor as cartas que nunca foram respondidas.
+- `ok` `r-adj-dramático-02`: A ironia dramática nasce da diferença entre o que o leitor e o personagem sabem.
+- `ok` `r-adj-trágico-02`: O destino trágico não precisa de morte — basta a perda irreversível.
+- `ok` `r-adj-cômico-02`: O registro cômico dissolve a tensão exatamente quando ela mais importa.
+- `ok` `conf-portudo-01`: Por tudo isso, concluímos que a literatura é resistência.
+- `ok` `conf-conclui-01`: Conclui-se que a narrativa fragmentada domina o século XXI.
+- `ok` `conf-ficaevid-01`: Fica evidente que o autor não domina o registro literário.
+- `ok` `conf-extremaimp-01`: É de extrema importância preservar a memória oral das comunidades.
+- `ok` `conf-naverdade-01`: Na verdade, o narrador sabe mais do que aparenta.
+- `ok` `conf-emtermos-01`: Em termos gerais, pode-se dizer que o romance é otimista.
+- `ok` `conf-deforma-01`: De forma geral, os personagens carecem de profundidade.
+- `ok` `conf-naverdade-neg-01`: Ela disse a verdade, mesmo sem querer.
+- `ok` `conf-conclui-neg-01`: O personagem concluiu a carta antes do amanhecer.
+- `ok` `r-top-01`: O silêncio, ela jamais conseguiu explicar.
+- `ok` `r-top-02`: Aquela noite, o narrador nunca esqueceu.
+- `ok` `r-top-03`: A metáfora da água, Rosa usou com maestria.
+- `ok` `r-inf-suj-01`: Escrever é resistir ao esquecimento.
+- `ok` `r-inf-suj-02`: Ler é aprender a ver o que estava escondido.
+- `ok` `r-inf-suj-03`: Publicar sem revisar é trair o leitor.
+- `ok` `r-adj-verossímil-01`: A motivação verossímil ancora o leitor mesmo em cenários fantásticos.
+- `ok` `r-adj-inverossímil-01`: O desfecho inverossímil quebra o contrato ficcional estabelecido.
+- `ok` `r-adj-convincente-02`: O personagem convincente não precisa ser simpático.
+- `ok` `r-adj-coerente-03`: A voz narrativa coerente mantém o mesmo grau de acesso emocional.
+- `ok` `r-adj-inconsistente-02`: O arco inconsistente do personagem destrói a credibilidade do final.
+- `ok` `r-noun-rascunho-02`: O rascunho revela o pensamento antes de ele se decidir.
+- `ok` `r-noun-esboço-01`: O esboço do romance ocupava três cadernos e um guardanapo.
+- `ok` `r-noun-versão-01`: A terceira versão foi a que encontrou o tom certo.
+- `ok` `r-noun-revisão-01`: A revisão revelou que o primeiro parágrafo era o último.
+- `ok` `r-noun-manuscrito-02`: O manuscrito sobreviveu ao incêndio por estar numa bolsa esquecida.
+- `ok` `r-noun-caderno-01`: O caderno de notas é o lugar onde o romance ainda não sabe que vai existir.
+- `ok` `r-verb-narrar-01`: Narrar é selecionar — e toda seleção é uma omissão.
+- `ok` `r-verb-ficcionalizar-01`: A autora ficcionaliza a própria infância sem pedir desculpas.
+- `ok` `r-verb-silenciar-01`: O texto silencia exatamente onde o leitor espera falar.
+- `ok` `r-verb-ironizar-01`: O narrador ironiza o próprio discurso sem nunca dizer que está ironizando.
+- `ok` `r-verb-metaforizar-01`: Rosa metaforiza o sertão até torná-lo um estado interior.
+- `ok` `r-adj-linear-02`: A narrativa linear trai a complexidade do evento narrado.
+- `ok` `r-adj-circular-02`: A estrutura circular faz o final ecoar o início com diferença.
+- `ok` `r-adj-espiral-01`: O tempo espiral do romance retorna ao mesmo ponto em níveis distintos.
+- `ok` `r-adj-regressivo-01`: O movimento regressivo da memória distorce os fatos com precisão.
+- `ok` `r-noun-cenário-01`: O cenário não é decoração — é personagem que não fala.
+- `ok` `r-noun-atmosfera-02`: A atmosfera de tensão se instala antes de qualquer evento.
+- `ok` `r-noun-ambientação-01`: A ambientação histórica precisa de um detalhe falso para parecer real.
+- `ok` `r-noun-lugar-01`: O lugar da narrativa sempre revela o lugar do narrador.
+- `ok` `r-adj-clariceano-01`: O fluxo clariceano dissolve o enredo para revelar a consciência.
+- `ok` `r-adj-machadiano-02`: O ironia machadiana nunca se explica — se reconhece.
+- `ok` `r-adj-rosiano-02`: O léxico rosiano reinventa o português pelo avesso.
+- `ok` `r-adj-drummoniano-01`: O eu drummoniano oscila entre a pedra e o abraço.
+- `ok` `r-adj-cabraleano-01`: A precisão cabraleana exclui o ornamento como princípio ético.
+- `ok` `r-adj-canônico-03`: A leitura canônica muitas vezes apaga o que o texto diz obliquamente.
+- `ok` `r-adj-hegemônico-02`: O cânone hegemônico excluiu durante séculos as vozes periféricas.
+- `ok` `r-adj-contracanônico-01`: A leitura contracanônica recupera o que o arquivo oficial apagou.
+- `ok` `r-noun-dialogismo-02`: O dialogismo bakhtiniano transforma toda frase em resposta a outra frase.
+- `ok` `r-noun-carnavalização-01`: A carnavalização inverte hierarquias pela via do riso.
+- `ok` `r-noun-heteroglossia-01`: A heteroglossia do romance incorpora falas sociais em tensão.
+- `ok` `r-noun-polifonia-02`: A polifonia dostoievskiana recusa a voz autoral dominante.
+- `ok` `r-noun-dissonância-01`: A dissonância entre narrador e evento cria o espaço da ironia.
+- `ok` `r-adj-táctil-01`: A escrita táctil de Clarice alcança o que os olhos não conseguem nomear.
+- `ok` `r-adj-sinestésico-01`: A imagem sinestésica confunde sentidos para criar uma percepção nova.
+- `ok` `r-adj-visceral-02`: A reação visceral do leitor é o efeito que o texto estava construindo.
+- `ok` `r-adj-palpável-01`: A angústia palpável da narradora se transfere para o ambiente descrito.
+- `ok` `r-verb-transmutar-01`: A dor transmuta-se em prosa quando não há mais espaço para o grito.
+- `ok` `r-verb-deslocar-01`: O ponto de vista desloca o leitor sem avisar.
+- `ok` `r-verb-condensar-01`: O conto condensa décadas em dez páginas sem perder densidade.
+- `ok` `r-verb-expandir-01`: O romance expande um instante até torná-lo infinito.
+- `ok` `r-adj-comprometido-01`: A escrita comprometida não renuncia à beleza para ser política.
+- `ok` `r-adj-engajado-02`: A literatura engajada fracassa quando sacrifica a forma pela mensagem.
+- `ok` `r-adj-deliberado-01`: A ambiguidade deliberada recusa a interpretação única.
+- `ok` `r-adj-calculado-01`: O efeito calculado da cena final depende do primeiro parágrafo.
+- `ok` `r-adj-intencional-01`: O erro gramatical intencional cria uma voz singular e irrepetível.
+- `ok` `r-noun-enunciador-02`: O enunciador e o autor real raramente coincidem.
+- `ok` `r-noun-enunciatário-01`: O enunciatário construído pelo texto difere do leitor real.
+- `ok` `r-noun-interlocutor-02`: O interlocutor implícito molda o tom mesmo sem aparecer na cena.
+- `ok` `r-adj-instantâneo-01`: O conto capta o instantâneo enquanto o romance habita a duração.
+- `ok` `r-adj-duradouro-02`: O trauma duradouro estrutura o tempo da personagem sem que ela saiba.
+- `ok` `r-adj-passageiro-02`: O afeto passageiro concentra toda a saudade de uma vida.
+- `ok` `r-verb-decifrar-01`: O leitor decifra o símbolo sem saber que estava sendo guiado.
+- `ok` `r-verb-interpretar-01`: Interpretar é sempre traduzir para uma língua que não existia antes.
+- `ok` `r-verb-ressignificar-02`: A releitura ressignifica o que parecia definitivo no texto.
+- `ok` `r-noun-epígrafe-02`: A epígrafe é a primeira decisão de leitura que o autor toma.
+- `ok` `r-noun-dedicatória-02`: A dedicatória sem nome próprio abre uma intimidade com o leitor.
+- `ok` `r-noun-nota-de-rodapé-01`: A nota de rodapé pode ser onde o texto respira fora do argumento.
+- `ok` `r-adj-desconcertante-02`: O final desconcertante recusa o conforto sem ser arbitrário.
+- `ok` `r-adj-perturbador-02`: A imagem perturbadora permanece depois que o livro é fechado.
+- `ok` `r-adj-revelador-02`: O detalhe revelador muda o sentido de tudo o que veio antes.
+- `ok` `r-adj-desconcertante-03`: A pergunta desconcertante da narradora dissolve a certeza do leitor.
+- `ok` `r-noun-imersão-01`: A imersão na ficção suspende temporariamente a leitura crítica.
+- `ok` `r-noun-identificação-01`: A identificação com a personagem não é virtude — é ponto de partida.
+- `ok` `r-noun-estranheza-01`: A estranheza produzida pela focalização incomum é o efeito desejado.
+- `ok` `r-verb-hibridizar-01`: O texto hibridiza gêneros sem pedir licença ao cânone.
+- `ok` `r-verb-transcender-01`: A boa ficção transcende o gênero que a classifica.
+- `ok` `r-adj-polissêmico-02`: O título polissêmico estabelece o contrato de ambiguidade com o leitor.
+- `ok` `r-adj-lacunar-02`: A escrita lacunar obriga o leitor a habitar o espaço entre as frases.
+- `ok` `r-adj-denso-lit-01`: O parágrafo denso acumula significados que pedem reler.
+- `ok` `r-adj-rarefeito-01`: A prosa rarefeita confia no branco para dizer o que a palavra não pode.
+- `ok` `r-noun-fólio-01`: O fólio dobrado ao meio define o formato do livro ocidental.
+- `ok` `r-noun-cólofon-01`: O cólofon medieval localizava o copista no tempo e no espaço.
+- `ok` `r-adj-sombrio-02`: O registro sombrio não precisa de violência explícita para incomodar.
+- `ok` `r-adj-melancólico-02`: O tom melancólico da crônica transforma o cotidiano em elegias.
+- `ok` `r-adj-nostálgico-02`: A nostalgia nostálgica — redundante — vira armadilha sem o distanciamento crítico.
+- `ok` `r-adj-irreverente-01`: A dicção irreverente desestabiliza sem desrespeitar.
+- `ok` `r-adj-solene-02`: O tom solene demais esvazia o gesto que deveria ser singelo.
+- `ok` `r-adj-coloquial-02`: O registro coloquial aproxima sem banalizar quando bem calibrado.
+- `ok` `r-adj-elegíaco-01`: O modo elegíaco transforma a perda em forma.
+- `ok` `r-adj-laudatório-01`: O prefácio laudatório raramente prepara o leitor para o texto real.
+- `ok` `conf-absnec-01`: É absolutamente necessário revisar o texto antes de publicar.
+- `ok` `conf-totdesnec-01`: O adjetivo aqui é totalmente desnecessário e deve ser suprimido.
+- `ok` `conf-compdif-01`: O segundo romance é completamente diferente do primeiro.
+- `ok` `conf-quandose-01`: Quando se trata de narrativa, o tempo é sempre uma escolha.
+- `ok` `conf-confmenc-01`: Conforme mencionado anteriormente, o narrador é não-confiável.
+- `ok` `conf-comodito-01`: Como dito antes, a autora rompe com a linearidade no terceiro capítulo.
+- `ok` `conf-eimpresc-01`: É importante ressaltar que a voz narrativa muda no segundo ato.
+- `ok` `conf-absnec-neg-01`: Ela disse que era necessário partir antes do amanhecer.
+- `ok` `conf-diferente-neg-01`: Os dois romances são muito diferentes entre si.
+- `ok` `r-adj-tridimensional-01`: O personagem tridimensional contradiz a si mesmo sem perder coerência.
+- `ok` `r-adj-plano-lit-01`: O personagem plano serve à sátira quando seu limite é intencional.
+- `ok` `r-adj-redondo-lit-01`: O personagem redondo surpreende sem deixar de ser reconhecível.
+- `ok` `r-adj-arquetípico-01`: O herói arquetípico ganha força quando enfrenta uma versão contemporânea do mito.
+- `ok` `r-adj-estereotipado-01`: O vilão estereotipado esvazia o conflito antes que ele comece.
+- `ok` `r-noun-catarse-03`: A catarse não é alívio — é reconhecimento do que antes era inominável.
+- `ok` `r-noun-peripécia-01`: A peripécia aristotélica inverte a fortuna no momento de maior expectativa.
+- `ok` `r-noun-anagnórise-01`: A anagnórise — o reconhecimento — transforma a ignorância em saber.
+- `ok` `r-noun-hamartia-01`: A hamartia do personagem não é um defeito moral, mas um erro de julgamento.
+- `ok` `r-noun-hybris-01`: A hybris do narrador onisciente se revela quando ele erra uma previsão.
+- `ok` `r-verb-precipitar-01`: O evento precipita o clímax antes que o leitor esteja pronto.
+- `ok` `r-verb-retardar-01`: A digressão retarda o desfecho e acumula pressão narrativa.
+- `ok` `r-verb-antecipar-01`: O presságio antecipa o desfecho sem entregá-lo.
+- `ok` `r-verb-postergar-01`: O narrador posterga a revelação até o leitor precisar dela.
+- `ok` `r-adj-kafkiano-02`: O kafkiano não descreve absurdo — descreve a lógica do absurdo.
+- `ok` `r-adj-borgiano-02`: O labirinto borgiano mapeia o impossível com precisão cartográfica.
+- `ok` `r-adj-proustiano-01`: O tempo proustiano dilata o instante até revelar sua infinidade interior.
+- `ok` `r-adj-beckettiano-01`: O silêncio beckettiano é mais pesado que qualquer frase poderia ser.
+- `ok` `r-adj-woolfiano-01`: O fluxo woolfiano dissolve o evento no estado de consciência.
+- `ok` `r-noun-Bildungsroman-01`: O Bildungsroman brasileiro encontrou na figura do menino do interior seu protagonista clássico.
+- `ok` `r-noun-roman-à-clef-01`: O roman à clef exige que o leitor conheça o original para apreciar o disfarce.
+- `ok` `r-noun-novela-02`: A novela ocupa o espaço entre o conto e o romance sem pertencer a nenhum.
+- `ok` `r-noun-crônica-01`: A crônica brasileira transformou o jornal em escola literária.
+- `ok` `r-noun-aforismo-01`: O aforismo comprime uma filosofia em uma única frase irrefutável.
+- `ok` `r-adj-multifacetado-02`: O conflito multifacetado recusa a resolução binária.
+- `ok` `r-adj-nuançado-01`: A análise nuançada resiste às generalizações que a tese exigiria.
+- `ok` `r-adj-sofisticado-01`: O jogo sofisticado entre narrador e leitor exige releitura.
+- `ok` `r-adj-sutil-01`: A ironia sutil não se anuncia — se reconhece.
+- `ok` `r-verb-modular-01`: O autor modula a velocidade narrativa conforme a urgência emocional da cena.
+- `ok` `r-verb-contrastar-01`: A autora contrasta o registro culto e o popular para criar tensão social.
+- `ok` `r-verb-alternar-01`: O romance alterna capítulos curtos e longos para simular a memória.
+- `ok` `r-verb-entrelaçar-01`: As duas histórias se entrelaçam no capítulo final sem se fundir.
+- `ok` `r-adj-fundacional-02`: O texto fundacional de um movimento raramente é o mais representativo.
+- `ok` `r-adj-inaugural-02`: A obra inaugural define o problema que a tradição passará décadas respondendo.
+- `ok` `r-adj-tardio-lit-01`: A obra tardia concentra a destilação de uma vida inteira de escolhas formais.
+- `ok` `r-adj-póstumo-02`: O romance póstumo impõe ao editor a responsabilidade de uma escolha que não é sua.
+- `ok` `r-noun-oficina-01`: A oficina literária é o lugar onde o texto ainda pode ser outro.
+- `ok` `r-noun-ateliê-01`: O ateliê do escritor existe tanto no espaço físico quanto no hábito de atenção.
+- `ok` `r-noun-mentora-01`: A mentora literária lê o texto como ele poderia ser, não como é.
+- `ok` `r-noun-interlocutora-01`: A interlocutora ideal faz a pergunta que o texto ainda não soube responder.
+- `ok` `r-adj-experimental-02`: A prosa experimental arrisca o fracasso como condição da descoberta.
+- `ok` `r-adj-transgressivo-01`: A poesia transgressiva redefine o que conta como linguagem literária.
+- `ok` `r-adj-conservador-01`: O cânone conservador não é neutro — é uma escolha política disfarçada de gosto.
+- `ok` `r-adj-onisciente-05`: O narrador onisciente sabe mais do que qualquer personagem poderia saber.
+- `ok` `r-adj-onipresente-01`: A câmera onipresente do narrador behaviorista registra sem interpretar.
+- `ok` `r-adj-parcial-01`: O narrador parcial distorce os fatos para proteger a própria imagem.
+- `ok` `r-adj-oblíquo-01`: O olhar oblíquo da narradora diz mais pelo que evita do que pelo que nomeia.
+- `ok` `r-noun-diegese-03`: A diegese abrange tudo o que existe no mundo ficcional da narrativa.
+- `ok` `r-noun-extradiegético-01`: O narrador extradiegético narra de fora do mundo que descreve.
+- `ok` `r-noun-metalepse-01`: A metalepse viola a fronteira entre o nível narrativo e o diegético.
+- `ok` `r-noun-prolepse-03`: A prolepse antecipa eventos futuros e cria expectativa antes do fato.
+- `ok` `r-noun-analepse-03`: A analepse retorna ao passado para iluminar o presente da narrativa.
+- `ok` `r-adj-sincopado-02`: O ritmo sincopado da prosa de Rosa imita a fala do sertanejo culto.
+- `ok` `r-adj-cadenciado-03`: A frase cadenciada de Guimarães cria uma respiração própria no texto.
+- `ok` `r-adj-entrecortado-01`: O monólogo entrecortado reproduz o pensamento antes de ele se organizar.
+- `ok` `r-verb-elidir-01`: O conto elide décadas e deixa o leitor calcular o tempo.
+- `ok` `r-verb-subverter-02`: A autora subverte o final esperado sem trair a lógica interna do texto.
+- `ok` `r-verb-refratar-01`: O narrador refrata a realidade pela sua própria angústia.
+- `ok` `r-verb-elidir-02`: A escritora elide o trauma e o leitor encontra o buraco no texto.
+- `ok` `r-noun-leitmotiv-01`: O leitmotiv da água retorna a cada crise emocional da protagonista.
+- `ok` `r-noun-anáfora-01`: A anáfora acumula força rítmica por repetição intencional no início dos versos.
+- `ok` `r-noun-catáfora-01`: A catáfora aponta para frente e cria suspense antes da revelação.
+- `ok` `r-noun-sinédoque-02`: A sinédoque faz a parte representar o todo com mais força que o todo teria.
+- `ok` `r-noun-metonímia-02`: A metonímia substitui o objeto pela marca que o singulariza.
+- `ok` `r-adj-assertivo-03`: O tom assertivo do narrador oculta a fragilidade da tese que defende.
+- `ok` `r-adj-interrogativo-01`: O modo interrogativo da crônica recusa a resposta fácil.
+- `ok` `r-adj-exclamativo-01`: O discurso exclamativo da personagem revela o que ela não consegue nomear.
+- `ok` `r-noun-resenha-02`: A resenha que não cita o texto está falando de si mesma.
+- `ok` `r-noun-orelha-03`: A orelha do livro precisa seduzir sem entregar o que o texto guarda.
+- `ok` `r-noun-sinopse-03`: A sinopse que conta o final elimina a razão de ler o livro.
+- `ok` `r-noun-tiragem-02`: A tiragem não mede a qualidade — mede a visibilidade da distribuição.
+- `ok` `r-adj-precursor-02`: O texto precursor cria um problema que só as gerações seguintes nomearão.
+- `ok` `r-adj-epigonal-02`: A obra epigonal copia os gestos sem entender o gesto original.
+- `ok` `r-adj-contemporâneo-02`: O gesto contemporâneo não é o mais novo — é o que responde ao presente.
+- `ok` `r-verb-interpelar-01`: O texto interpela o leitor antes que ele saiba que estava sendo chamado.
+- `ok` `r-verb-cooptar-01`: A narrativa coopta o leitor e o torna cúmplice do narrador.
+- `ok` `r-verb-desconcertar-01`: O final desconcerta porque era, afinal, o único possível.
+- `ok` `r-noun-silêncio-01`: O silêncio do escritor que não publica também é uma forma de obra.
+- `ok` `r-noun-bloqueio-01`: O bloqueio criativo é frequentemente a resistência do texto ao que ainda não é verdadeiro.
+- `ok` `r-noun-voz-03`: Encontrar a própria voz é aprender a confiar na estranheza que já estava lá.
+- `ok` `r-adj-autoficional-01`: O pacto autoficional suspende a distinção entre autor e personagem.
+- `ok` `r-adj-testemunhal-02`: A escrita testemunhal carrega o peso ético de dizer o que aconteceu.
+- `ok` `r-adj-documental-02`: A ficção documental borra a fronteira entre o arquivo e a imaginação.
+- `ok` `r-adj-onisciente-neg-01`: Ela era onisciente sobre o passado da família, mas ignorava o presente.
+- `ok` `r-noun-voz-neg-01`: A voz dela chegava até o fundo do corredor com facilidade.
+- `ok` `r-adj-parcial-neg-01`: O pagamento parcial foi recusado pelo editor.
+- `ok` `r-noun-ritmo-01`: O ritmo é a memória do corpo que o texto ativa sem que o leitor perceba.
+- `ok` `r-adj-paratático-02`: A construção paratática justapõe ideias sem anunciar a relação entre elas.
+- `ok` `r-adj-hipotático-02`: A subordinação hipotática hierarquiza o argumento antes de ele ser desenvolvido.
+- `ok` `r-verb-evocar-01`: A metáfora evoca sem nomear — esse é o seu poder sobre a definição.
+- `ok` `r-noun-escansão-01`: A escansão revela que o verso que parecia livre tinha uma régua interna.
+- `ok` `conf-impacto-01`: A campanha gerou um impacto significativo na percepção dos leitores.
+- `ok` `conf-impacto-02`: A obra teve impacto profundo sobre as gerações seguintes.
+- `ok` `conf-resultados-01`: A oficina produziu resultados significativos em seis meses.
+- `ok` `conf-deforma-02`: O texto foi revisado de forma eficaz pela equipe editorial.
+- `ok` `conf-noatual-01`: No atual contexto literário, a autoficção domina as premiações.
+- `ok` `conf-aolongo-01`: Ao longo do tempo, o cânone foi sendo revisto pelas margens.
+- `ok` `conf-degrande-01`: A revisão crítica foi de grande importância para o campo.
+- `ok` `conf-epossivel-01`: É possível afirmar que o narrador mente desde a primeira página.
+- `ok` `conf-impacto-neg-01`: O impacto da pedra no vidro quebrou a janela inteira.
+- `ok` `conf-aolongo-neg-01`: Ao longo do corredor havia retratos de escritores do século XIX.
+- `ok` `r-pron-cujo-05`: O escritor cujo silêncio durou trinta anos publicou um único livro.
+- `ok` `r-pron-cujo-06`: A personagem cuja voz nunca é ouvida é a que mais fala pelo que cala.
+- `ok` `r-pron-quanto-02`: Tudo quanto foi escrito antes volta ressignificado pela última frase.
+- `ok` `r-pron-quanto-03`: Quantos escrevem para entender o que sentiram sem saber que sentiam.
+- `ok` `r-prep-ante-02`: Ante o silêncio da plateia, a narradora recuou para dentro de si.
+- `ok` `r-prep-perante-02`: Perante o manuscrito inacabado, o editor hesitou pela primeira vez.
+- `ok` `r-prep-mediante-02`: Mediante a leitura atenta, o leitor percebe o que o narrador esconde.
+- `ok` `r-prep-conforme-02`: Conforme o romance avança, o leitor perde a certeza sobre quem narra.
+- `ok` `r-prep-segundo-01`: Segundo a narradora, o incêndio começou antes do amanhecer.
+- `ok` `r-adv-obliquamente-02`: O texto diz obliquamente o que o autor não ousou nomear.
+- `ok` `r-adv-paulatinamente-03`: A voz da personagem vai paulatinamente cedendo ao silêncio.
+- `ok` `r-adv-inexoravelmente-01`: O enredo avança inexoravelmente para o ponto que o leitor teme.
+- `ok` `r-adv-doravante-02`: Doravante, o narrador abandonará a pretensão de objetividade.
+- `ok` `r-adv-outrora-02`: Outrora, aquela praça era o centro da vida da personagem.
+- `ok` `r-adv-alhures-01`: O que alhures seria detalhe, aqui se torna o único fato que importa.
+- `ok` `r-conj-conquanto-02`: Conquanto o romance seja breve, cada parágrafo carrega décadas.
+- `ok` `r-conj-outrossim-01`: Outrossim, a narradora recusa toda forma de conclusão tranquilizadora.
+- `ok` `r-conj-porquanto-02`: Porquanto a memória falha, o texto falha com ela intencionalmente.
+- `ok` `r-conj-malgrado-01`: Malgrado a resistência do editor, o final permaneceu em aberto.
+- `ok` `r-verb-assentir-01`: O personagem assentiu sem acreditar no que dizia.
+- `ok` `r-verb-ponderar-01`: O narrador pondera cada detalhe antes de escolher o que revelar.
+- `ok` `r-verb-hesitar-01`: A autora hesitou entre dois finais antes de escolher o que decepciona.
+- `ok` `r-verb-recusar-01`: O texto recusa qualquer leitura que o resolva por completo.
+- `ok` `r-verb-ceder-01`: A narradora cede ao leitor apenas o que ele já esperava perder.
+- `ok` `r-adj-assimétrico-01`: A estrutura assimétrica do romance frustra a expectativa de proporção.
+- `ok` `r-noun-simetria-01`: A simetria entre o primeiro e o último capítulo cria um espelho que distorce.
+- `ok` `r-adj-rizomático-01`: O romance rizomático não tem centro nem início — apenas entradas.
+- `ok` `r-adj-fragmentário-03`: A narrativa fragmentária exige que o leitor monte o que o texto desmontou.
+- `ok` `r-noun-elipse-02`: A elipse narrativa salta décadas e deixa o leitor calcular a perda.
+- `ok` `r-noun-pausa-01`: A pausa descritiva interrompe o enredo para fazer o tempo existir.
+- `ok` `r-noun-sumário-01`: O sumário narrativo comprime anos em uma única frase transitiva.
+- `ok` `r-noun-cena-01`: A cena dilata o tempo e faz o leitor viver o momento junto com a personagem.
+- `ok` `r-adj-involuntário-01`: A memória involuntária proustiana dispensa a vontade de recordar.
+- `ok` `r-adj-voluntário-01`: A memória voluntária só recupera o arquivo — nunca a textura do vivido.
+- `ok` `r-adj-encoberto-01`: O trauma encoberto emerge pela sintaxe antes de ser nomeado.
+- `ok` `r-adj-latente-01`: O conflito latente explode apenas no penúltimo capítulo.
+- `ok` `r-verb-rabiscar-01`: A escritora rabiscou a margem do manuscrito até os rabiscos virarem texto.
+- `ok` `r-verb-rasgar-01`: Ela rasgou a terceira versão e começou pelo final.
+- `ok` `r-verb-copiar-01`: O autor copiava os parágrafos à mão para sentir o peso de cada palavra.
+- `ok` `r-verb-datilografar-01`: Ela datilografou o romance inteiro três vezes antes de enviá-lo.
+- `ok` `r-noun-paratexto-02`: O paratexto — prefácio, orelha, dedicatória — já é leitura.
+- `ok` `r-noun-intertexto-03`: O intertexto não é citação — é a memória involuntária da tradição.
+- `ok` `r-noun-hipotexto-02`: O hipotexto é o texto anterior que a obra absorve e transforma.
+- `ok` `r-noun-hipertexto-02`: O hipertexto literário deriva do hipotexto por transformação ou imitação.
+- `ok` `r-adj-dialetal-02`: A variante dialetal no diálogo situa o personagem antes da descrição.
+- `ok` `r-adj-vernacular-02`: O vocabulário vernacular ancora o texto na oralidade que o precede.
+- `ok` `r-noun-idioleto-01`: O idioleto da personagem é a sua assinatura antes do nome próprio.
+- `ok` `r-adj-empírico-lit-01`: O leitor empírico traz para o texto uma história que o texto não controlou.
+- `ok` `r-adj-implícito-01`: O leitor implícito é construído pelo próprio texto como destinatário ideal.
+- `ok` `r-adj-ingênuo-01`: O leitor ingênuo lê a ironia como afirmação e o texto ganha outro sentido.
+- `ok` `r-adj-resistente-01`: A leitura resistente recusa a cumplicidade que o texto propõe.
+- `ok` `r-noun-neologismo-01`: O neologismo rosiano não é erro — é a língua descobrindo o que ainda não sabia dizer.
+- `ok` `r-noun-arcaísmo-01`: O arcaísmo no texto contemporâneo cria um estranhamento temporal deliberado.
+- `ok` `r-noun-eufemismo-01`: O eufemismo do narrador revela o que ele não consegue nomear diretamente.
+- `ok` `r-noun-disfemismo-01`: O disfemismo agride o leitor exatamente onde o texto quer incomodar.
+- `ok` `r-noun-oxímoro-02`: O oxímoro condensa a contradição que o raciocínio linear não consegue resolver.
+- `ok` `r-noun-paradoxo-01`: O paradoxo não é falha lógica — é a forma da verdade que não cabe na sintaxe comum.
+- `ok` `r-verb-intuir-02`: O leitor intui antes de compreender — esse é o efeito que o texto estava construindo.
+- `ok` `r-verb-pressentir-01`: A narradora pressente o desfecho mas recusa saber que o sabe.
+- `ok` `r-verb-entrever-01`: O leitor entrevê a estrutura do livro antes de terminar a primeira página.
+- `ok` `r-verb-vislumbrar-01`: No final, a personagem vislumbra o que esteve diante dela durante todo o romance.
+- `ok` `r-adj-comprometida-01`: A escrita comprometida não subordina a forma à mensagem.
+- `ok` `r-adj-emancipatória-01`: A leitura emancipatória recusa o texto como objeto de reverência.
+- `ok` `r-adj-subversiva-01`: A literatura subversiva age nos interstícios do que o cânone permite.
+- `ok` `r-adj-conservadora-01`: A estética conservadora confunde tradição com imobilidade.
+- `ok` `r-noun-prompt-port-01`: O ponto de partida da oficina libera o escritor de inventar o início.
+- `ok` `r-noun-disparador-01`: O disparador narrativo oferece uma primeira frase que a oficina pode ir além.
+- `ok` `r-noun-devolução-01`: A devolução do texto pela turma exige uma escuta que a crítica solitária não oferece.
+- `ok` `r-noun-reescrita-02`: A reescrita começa onde a primeira versão para de mentir.
+- `ok` `r-adj-aliterativo-01`: O efeito aliterativo da frase cria uma memória sonora antes da memória semântica.
+- `ok` `r-adj-assonante-01`: A recorrência assonante cria um eco que o leitor sente antes de identificar.
+- `ok` `r-adj-eufônico-01`: A combinação eufônica de vogais cria um fluxo que facilita a leitura em voz alta.
+- `ok` `r-adj-cacofônico-01`: A sequência cacofônica é intencional — o texto quer que a leitura tropece.
+- `ok` `r-verb-editar-01`: Editar é escolher o que o texto pode perder sem deixar de ser o que é.
+- `ok` `r-verb-aparar-01`: O editor aparou as arestas sem perceber que eram as mais vivas do livro.
+- `ok` `r-verb-lapidar-02`: A escritora lapidou cada frase até o texto parecer inevitável.
+- `ok` `r-verb-podar-01`: Podar o excesso é mais difícil do que escrever o que será podado.
+- `ok` `r-noun-subalternidade-01`: A subalternidade não é silêncio — é uma fala que o arquivo não registrou.
+- `ok` `r-noun-epistemicídio-01`: O epistemicídio apaga não só os textos mas a possibilidade de pensar com eles.
+- `ok` `r-noun-afrocentrismo-01`: O afrocentrismo literário propõe outro eixo para a leitura do cânone.
+- `ok` `r-adj-diaspórico-02`: A escrita diaspórica carrega a memória do lugar que não se pode visitar.
+- `ok` `r-adj-periférico-lit-01`: A voz periférica não está na margem — está no centro do que o cânone evitou.
+- `ok` `r-adj-insurgente-01`: A estética insurgente recusa a assimilação como preço da visibilidade.
+- `ok` `r-adj-descolonial-01`: A perspectiva descolonial lê o texto pelo que ele escolheu não dizer.
+- `ok` `r-adj-interseccional-01`: A análise interseccional recusa a abstração de uma única categoria de opressão.
+- `ok` `r-adj-polifônico-02`: O romance polifônico não reserva para si a última palavra sobre o mundo que representa.
+- `ok` `r-adj-monológico-01`: O romance monológico impõe ao leitor a única interpretação que o autor autoriza.
+- `ok` `r-adj-ambíguo-04`: O título ambíguo é um contrato que o leitor assina sem saber todos os termos.
+- `ok` `r-adj-equívoco-01`: O uso equívoco do pronome é intencional — o leitor não deve saber quem fala.
+- `ok` `r-adj-aporético-01`: O final aporético recusa a resolução que o leitor precisava para sair intacto.
+- `ok` `conf-especialistas-01`: Segundo os especialistas, a autoficção domina o mercado editorial atual.
+- `ok` `conf-especialistas-02`: Vários estudiosos concordam que o romance está em crise.
+- `ok` `conf-todosesc-01`: Todos os escritores sabem que a primeira versão nunca é a boa.
+- `ok` `conf-ninguem-01`: Ninguém pode negar que Clarice transformou a prosa brasileira.
+- `ok` `conf-sabidotodos-01`: É sabido por todos que o narrador não confiável é um recurso moderno.
+- `ok` `conf-hojeemdia-01`: Hoje em dia, os leitores preferem narrativas mais curtas e diretas.
+- `ok` `conf-desdesempre-01`: Desde sempre, a literatura buscou dar forma à experiência humana.
+- `ok` `conf-especialistas-neg-01`: Segundo Bakhtin, o romance é o gênero do devir.
+- `ok` `conf-todos-neg-01`: Todos os capítulos do livro terminam com uma pergunta sem resposta.
+- `ok` `r-verb-persistir-01`: A dúvida persiste mesmo depois que o romance encontra seu desfecho.
+- `ok` `r-verb-permanecer-01`: O silêncio permanece onde a fala deveria ter chegado.
+- `ok` `r-verb-subsistir-01`: O texto subsiste na memória do leitor mesmo depois do esquecimento do enredo.
+- `ok` `r-verb-perdurar-01`: A ambiguidade perdura porque o texto a alimenta deliberadamente.
+- `ok` `r-adj-central-01`: O conflito central não é declarado — está na estrutura de quem fala quando.
+- `ok` `r-adj-marginal-lit-01`: O personagem marginal carrega o peso moral que o protagonista evita.
+- `ok` `r-adj-secundário-01`: O personagem secundário revela o que o principal não pode admitir.
+- `ok` `r-adj-episódico-02`: A aparição episódica da personagem concentra o tema que o romance dilui.
+- `ok` `r-noun-cronotopo-04`: O cronotopo bakhtiniano une tempo e espaço como inseparáveis na ficção.
+- `ok` `r-noun-topos-02`: O topos da viagem estrutura o aprendizado do Bildungsroman.
+- `ok` `r-noun-locus-02`: O locus amoenus é o lugar idealizado que a ironia moderna destrói.
+- `ok` `r-noun-utopia-02`: A utopia literária imagina o que o presente proíbe de esperar.
+- `ok` `r-noun-distopia-02`: A distopia amplifica o presente até torná-lo insuportável de reconhecer.
+- `ok` `r-adj-focalizado-01`: O evento focalizado determina o que o leitor pode saber sobre o mundo do texto.
+- `ok` `r-adj-defocalizado-01`: O detalhe defocalizado é o que o narrador não quer que o leitor perceba.
+- `ok` `r-adj-panorâmico-02`: O olhar panorâmico do narrador cede à câmera íntima no segundo capítulo.
+- `ok` `r-adj-microscópico-02`: A atenção microscópica ao detalhe é o estilo que denuncia o ponto de vista.
+- `ok` `r-verb-ressemantizar-01`: A releitura ressemantiza o título que parecia transparente.
+- `ok` `r-verb-conotar-01`: O contexto literário conota sentidos que o uso comum fixou.
+- `ok` `r-verb-desnaturalizar-01`: A metáfora desnaturaliza o que a linguagem cotidiana tornou invisível.
+- `ok` `r-verb-estranhar-01`: O procedimento formalista estranha o familiar e torna legível o automatismo.
+- `ok` `r-adj-autobiográfico-01`: O pacto autobiográfico exige que autor, narrador e personagem compartilhem o nome.
+- `ok` `r-adj-biográfico-02`: O impulso biográfico não lê — julga, e na maioria das vezes condena.
+- `ok` `r-adj-pseudônimo-01`: O pseudônimo literário cria uma máscara que às vezes diz mais que o nome real.
+- `ok` `r-noun-paginação-01`: A paginação irregular do romance mimetiza a fragmentação da consciência.
+- `ok` `r-noun-tipografia-02`: A tipografia do manifesto era tão agressiva quanto o conteúdo.
+- `ok` `r-noun-diagrama-01`: O diagrama inserido no meio do romance interrompe a ficção com o método.
+- `ok` `r-adj-contido-01`: O luto contido da narradora é mais pesado que qualquer lamento explícito.
+- `ok` `r-adj-exacerbado-01`: O sofrimento exacerbado da personagem corre o risco de afastar o leitor.
+- `ok` `r-adj-contundente-01`: A crítica contundente do narrador não poupa nem a si mesmo.
+- `ok` `r-adj-lancinante-02`: A dor lancinante da perda é descrita com a frieza de quem a sobreviveu.
+- `ok` `r-verb-canonizar-02`: A academia canoniza o que a geração seguinte precisará descanonizar.
+- `ok` `r-verb-marginalizar-01`: O mercado marginaliza o que o cânone futuro vai reivindicar.
+- `ok` `r-verb-recuperar-02`: A crítica recupera textos esquecidos sem perguntar por que foram esquecidos.
+- `ok` `r-verb-reabilitar-01`: Reabilitar um autor exige reler sem o peso do que foi dito sobre ele.
+- `ok` `r-noun-griô-01`: O griô transmite pela voz o que o arquivo colonial preferiu ignorar.
+- `ok` `r-noun-oralidade-01`: A oralidade não é o estágio anterior à escrita — é outra forma de conhecer.
+- `ok` `r-noun-ancestralidade-01`: A ancestralidade literária não é nostalgia — é um método de leitura do presente.
+- `ok` `r-adj-queer-lit-01`: A leitura queer do texto clássico revela o que a edição escolar censurou.
+- `ok` `r-adj-feminista-lit-01`: A crítica feminista não lê apenas mulheres — lê o que a escrita masculina apagou.
+- `ok` `r-verb-problematizar-02`: O texto problematiza o que parecia resolvido antes da primeira leitura.
+- `ok` `r-verb-complexificar-01`: A segunda leitura complexifica o que a primeira havia simplificado.
+- `ok` `r-verb-tensionar-02`: O narrador tensiona a relação entre o que sabe e o que revela.
+- `ok` `r-verb-negociar-01`: O texto negocia com o leitor o sentido que nenhum dos dois controla sozinho.
+- `ok` `r-verb-interromper-01`: O narrador interrompe a cena antes da revelação para forçar a imaginação.
+- `ok` `r-verb-suspender-01`: A elipse suspende o tempo e faz o leitor preencher o que falta.
+- `ok` `r-verb-rememorar-01`: A narradora rememora sem saber que está reescrevendo.
+- `ok` `r-verb-reconstituir-01`: O narrador reconstitui o passado com os fragmentos que restaram.
+- `ok` `r-verb-testemunhar-01`: Testemunhar não é apenas ver — é aceitar a responsabilidade do que foi visto.
+- `ok` `r-verb-denunciar-01`: O texto denuncia sem panfleto — pela forma que escolhe, não pela tese que declara.
+- `ok` `r-adj-dilacerante-02`: A despedida dilacerante termina com uma frase banal — e é isso que dói.
+- `ok` `r-adj-arrebatador-01`: O final arrebatador não precisa de barulho — a quietude é sua forma.
+- `ok` `r-adj-perturbante-01`: A imagem perturbante ressurge à noite porque o texto a plantou de dia.
+- `ok` `r-adj-sufocante-01`: O espaço sufocante da narrativa não deixa personagem nem leitor respirar.
+- `ok` `r-noun-frase-01`: A frase curta acelera o tempo da cena e o leitor corre junto.
+- `ok` `r-noun-parágrafo-01`: O parágrafo longo de Clarice é uma câmara de pressão que o ponto alivia.
+- `ok` `r-noun-período-02`: O período hipotático de Machado carrega a ironia na subordinação.
+- `ok` `r-noun-capítulo-01`: O capítulo mais curto do romance diz mais do que o mais longo.
+- `ok` `r-noun-fragmento-01`: O fragmento não é o capítulo que não cresceu — é uma forma que escolheu parar.
+- `ok` `r-adj-hermenêutico-01`: O círculo hermenêutico obriga a reler o início depois de terminar.
+- `ok` `r-adj-exegético-01`: O comentário exegético esgota o texto para não precisar viver com ele.
+- `ok` `r-adj-semiótico-01`: A análise semiótica lê o texto como sistema de signos em relação.
+- `ok` `r-noun-isotopia-02`: A isotopia semântica mantém a coerência do campo figurativo ao longo do texto.
+- `ok` `r-noun-actante-01`: O actante greimasiano não é personagem — é uma função narrativa que qualquer elemento pode exercer.
+- `ok` `r-noun-programa-01`: O programa narrativo descreve a sequência de estados e transformações do actante.
+- `ok` `r-verb-folhear-01`: Ela folheou o livro antes de lê-lo, procurando o tom pelo aspecto das páginas.
+- `ok` `r-verb-grifar-01`: O leitor que grifa demais talvez esteja fugindo da leitura.
+- `ok` `r-verb-reler-01`: Reler é descobrir que não éramos o leitor que achávamos ser.
+- `ok` `r-verb-abandonar-01`: Abandonar um livro também é um ato de leitura.
+- `ok` `r-adj-inacabado-02`: O romance inacabado pode ser a obra mais honesta de um autor.
+- `ok` `r-adj-apócrifo-01`: O texto apócrifo atribuído ao autor clássico diz mais sobre quem o forjou.
+- `ok` `r-adj-interpolado-01`: O trecho interpolado por um editor anônimo mudou o sentido da obra inteira.
+- `ok` `r-noun-autoria-01`: A autoria não é uma origem — é uma função que o texto distribui.
+- `ok` `r-noun-escritura-01`: A escritura barthesiana liberta o texto do intento original do autor.
+- `ok` `r-noun-jouissance-01`: O texto de fruição — jouissance — perturba o leitor sem dar descanso.
+- `ok` `r-adj-coletivo-01`: A escrita coletiva exige que cada voz abra mão de ser a única.
+- `ok` `r-adj-colaborativo-01`: O texto colaborativo carrega a tensão entre o que cada autor cedeu.
+- `ok` `r-verb-partilhar-01`: Partilhar o texto com a turma é expor o pensamento antes de ele ter forma.
+- `ok` `r-verb-devolver-01`: O facilitador devolve o texto com perguntas, não com respostas.
+- `ok` `r-adj-intertextual-02`: A relação intertextual não precisa ser consciente para ser operativa.
+- `ok` `r-adj-metatextual-01`: O comentário metatextual interrompe a ficção para falar sobre ela.
+- `ok` `r-adj-arquitextual-01`: A relação arquitextual classifica o texto antes de qualquer leitura.
+- `ok` `r-noun-epopeia-01`: A epopeia modernista de Drummond faz do pedregulho o centro do universo.
+- `ok` `r-noun-elegia-01`: A elegia transforma a perda em forma sem que a forma consuma o luto.
+- `ok` `r-noun-ode-01`: A ode nerudiana não celebra o objeto — celebra o olhar que o encontra.
+- `ok` `r-noun-sátira-01`: A sátira machadiana não quer reformar — quer que o leitor se reconheça.
+- `ok` `r-noun-paródia-01`: A paródia imita para desviar — é o respeito que não pode ser reverência.
+- `ok` `r-noun-pastiche-01`: O pastiche imita sem distância crítica e por isso não consegue ser irônico.
+- `ok` `r-noun-pastorela-01`: A pastorela medieval idealizava o campo para escapar da cidade — e da realidade.
+- `ok` `r-noun-reportagem-01`: A grande reportagem literária lê o real com a atenção que a ficção reservava à invenção.
+- `ok` `r-noun-ensaio-02`: O ensaio é o único gênero que pensa enquanto se escreve e não esconde o processo.
+- `ok` `conf-reflexao-01`: O livro permite uma reflexão mais profunda sobre a condição humana.
+- `ok` `conf-busca-01`: Este ensaio busca demonstrar que o narrador é não-confiável.
+- `ok` `conf-inegavel-01`: É inegável que Clarice revolucionou a prosa brasileira.
+- `ok` `conf-nempreciso-01`: Nem é preciso dizer que o narrador mente desde o início.
+- `ok` `conf-valesalient-01`: Vale salientar que a voz narrativa muda no terceiro capítulo.
+- `ok` `conf-porsuavez-01`: O segundo romance, por sua vez, abandona a linearidade do primeiro.
+- `ok` `conf-destaforma-01`: Desta forma, o autor constrói uma crítica velada à sociedade burguesa.
+- `ok` `conf-reflexao-neg-01`: Ela parou a reflexão no meio, incapaz de continuar.
+- `ok` `conf-porsuavez-neg-01`: Cada personagem fala por sua vez sem interromper o outro.
+- `ok` `r-adj-irônico-02`: O comentário irônico do narrador exige que o leitor desconfie do que está lendo.
+- `ok` `r-adj-sardônico-01`: O riso sardônico de Machado não perdoa nem quem ri com ele.
+- `ok` `r-adj-cínico-01`: O narrador cínico destrói a ilusão antes que o leitor a construa.
+- `ok` `r-adj-sarcástico-01`: O elogio sarcástico é a crítica que o texto não quer fazer diretamente.
+- `ok` `r-verb-oscilar-01`: A personagem oscila entre o desejo de confessar e o medo da confissão.
+- `ok` `r-verb-afundar-01`: O narrador afunda na memória como quem escolhe o fundo do rio.
+- `ok` `r-verb-desvanecer-01`: A certeza desvanece no momento em que a personagem mais precisa dela.
+- `ok` `r-verb-enrijecer-01`: O personagem enrijece a voz para não deixar o leitor perceber a fratura.
+- `ok` `r-noun-narratário-01`: O narratário é o destinatário construído pelo texto, distinto do leitor real.
+- `ok` `r-noun-narrador-01`: O narrador homodiegético viveu o que narra — o heterodiegético observou de fora.
+- `ok` `r-noun-focalização-02`: A focalização determina o que o leitor sabe, não quem fala.
+- `ok` `r-noun-velocidade-01`: A velocidade narrativa mede a relação entre o tempo da história e o tempo do discurso.
+- `ok` `r-noun-frequência-01`: A frequência narrativa conta quantas vezes o texto narra o que aconteceu uma vez.
+- `ok` `r-adj-inédito-02`: O texto inédito publicado postumamente muda o que sabíamos sobre o autor.
+- `ok` `r-adj-revisto-01`: A edição revista pelo autor corrigiu o que a primeira revelava demais.
+- `ok` `r-adj-definitivo-01`: A edição definitiva raramente é — o texto continua mudando na leitura.
+- `ok` `r-adj-canônico-lit-02`: O texto canônico não é o mais importante — é o mais disponível ao ensino.
+- `ok` `r-verb-arquivar-01`: Arquivar o texto é uma decisão política sobre o que merece ser lembrado.
+- `ok` `r-verb-apagar-01`: O cânone apagou o que não cabia na sua versão do mundo.
+- `ok` `r-verb-restaurar-01`: A crítica feminista restaurou autorias que o arquivo havia atribuído a homens.
+- `ok` `r-verb-exumar-01`: A pesquisa exumou o manuscrito de um porão e devolveu a obra ao mundo.
+- `ok` `r-adj-lírico-02`: O eu lírico não é o poeta — é a posição que o poema constrói para ser dito.
+- `ok` `r-adj-épico-02`: O distanciamento épico transforma o evento em exemplar e o particular em coletivo.
+- `ok` `r-adj-dramático-03`: A tensão dramática não precisa de conflito externo — pode ser toda interior.
+- `ok` `r-adj-trágico-03`: O destino trágico não é cruel — é inevitável, e nisso está a sua lógica.
+- `ok` `r-adj-cômico-03`: O registro cômico pode dizer o que o trágico proíbe de nomear.
+- `ok` `r-noun-haiku-01`: O haiku não descreve — instala uma percepção antes que a mente a processe.
+- `ok` `r-noun-gregueria-01`: A gregeria de Gómez de la Serna é a metáfora que descobriu o humor.
+- `ok` `r-noun-miniatura-01`: A miniatura literária concentra o mundo em poucas linhas sem o miniaturizar.
+- `ok` `r-noun-microconto-01`: O microconto vive do que não diz — a elipse é a sua respiração.
+- `ok` `r-noun-flash-fiction-01`: A flash fiction existe na tensão entre o que aconteceu e o que o leitor imagina ter acontecido.
+- `ok` `r-adj-performativo-01`: A leitura performativa transforma o texto em evento e o leitor em testemunha.
+- `ok` `r-adj-declamatório-01`: O tom declamatório do narrador mascara a fragilidade da tese que anuncia.
+- `ok` `r-adj-conversacional-01`: O registro conversacional da crônica encurta a distância entre autor e leitor.
+- `ok` `r-verb-romper-01`: O romance rompe com a expectativa de gênero antes do segundo capítulo.
+- `ok` `r-verb-desafiar-01`: O texto desafia o leitor sem humilhá-lo — esse é o equilíbrio difícil.
+- `ok` `r-verb-transgredir-01`: A vanguarda transgride o cânone sem saber que está criando um novo.
+- `ok` `r-verb-inovar-01`: Inovar sem raízes é decoração; inovar a partir da tradição é transformação.
+- `ok` `r-adj-premiado-01`: O livro premiado nem sempre é o mais inventivo do ano.
+- `ok` `r-adj-best-seller-01`: O best-seller revela o que o público deseja ler, não o que merece ser escrito.
+- `ok` `r-adj-cult-01`: O livro cult é o que todo mundo cita e pouca gente termina.
+- `ok` `r-noun-genealogia-01`: A genealogia literária de um autor revela as dívidas que ele nunca declarou.
+- `ok` `r-noun-influência-01`: A influência age no texto sem que o autor saiba — e isso é o que a torna produtiva.
+- `ok` `r-noun-tradição-01`: A tradição não é o passado — é o passado que o presente escolheu lembrar.
+- `ok` `r-noun-ruptura-02`: A ruptura com a tradição é sempre parcial — o que nega ainda carrega o que combate.
+- `ok` `r-noun-continuidade-01`: A continuidade com a tradição é uma escolha tão arriscada quanto a ruptura.
+- `ok` `r-noun-inovação-01`: A inovação formal que não nasce de uma necessidade expressiva é decoração.
+- `ok` `r-noun-convenção-01`: A convenção existe para ser usada com consciência, não para ser ignorada por inércia.
+- `ok` `r-noun-experimento-01`: O experimento literário que funciona deixa de ser experimento — vira forma.
+- `ok` `r-noun-manifesto-02`: O manifesto literário é o texto que tenta legislar sobre o que a arte ainda não sabe ser.
+- `ok` `r-noun-programa-estetico-01`: O programa estético do movimento recusa o que a geração anterior celebrava.
+- `ok` `r-adj-vanguardista-02`: O gesto vanguardista envelhece mais rápido que a tradição que combateu.
+- `ok` `r-adj-modernista-02`: O projeto modernista de 22 escolheu a ruptura como método e o Brasil como matéria.
+- `ok` `r-adj-pós-moderno-01`: O romance pós-moderno suspeita da narrativa enquanto a usa.
+- `ok` `r-adj-realista-01`: A ficção realista mente mais sofisticadamente que a fantástica.
+- `ok` `r-adj-naturalista-02`: A escrita naturalista confundiu determinismo com fatalismo e o pobre com o destino.
+- `ok` `r-adj-simbolista-01`: A imagem simbolista sugere em vez de nomear — o véu é o método.
+- `ok` `r-adj-parnasiano-02`: O ideal parnasiano da forma perfeita às vezes esvazia o poema de necessidade.
+- `ok` `r-adj-concretista-02`: A poesia concretista faz da página um campo visual além da linha.
+- `ok` `r-adj-tropicalista-01`: O gesto tropicalista devorou o estrangeiro para cuspir algo irreconhecivelmente brasileiro.
+- `ok` `r-noun-boom-01`: O boom latino-americano chegou à Europa antes de ser lido no próprio continente.
+- `ok` `r-noun-realismo-mágico-01`: O realismo mágico não é fantasia — é o real de quem nunca precisou do Iluminismo para existir.
+- `ok` `r-adj-surrealist-01`: A imagem surrealista libera o inconsciente da obrigação de fazer sentido.
+- `ok` `r-adj-dadaísta-01`: O gesto dadaísta destruiu a arte para lembrar que a arte ainda era possível.
+- `ok` `r-noun-bildung-01`: O processo de Bildung exige que o protagonista perca algo para ganhar a si mesmo.
+- `ok` `r-noun-zeitgeist-01`: O romance que captura o Zeitgeist envelhece com ele — e às vezes isso é a intenção.
+- `ok` `r-noun-weltanschauung-01`: A Weltanschauung do narrador contamina a forma antes de qualquer conteúdo explícito.
+- `ok` `r-adj-kafkiano-03`: A burocracia kafkiana não é fantasia — é a lógica real do absurdo administrado.
+- `ok` `r-noun-absurdo-01`: O absurdo camusiano não é a falta de sentido — é a busca de sentido onde ele foi proibido.
+- `ok` `r-adj-existencialista-02`: O romance existencialista devolve ao sujeito a responsabilidade que ele queria delegar.
+- `ok` `r-adj-fenomenológico-01`: A descrição fenomenológica resiste à interpretação para respeitar o dado da experiência.
+- `ok` `r-noun-dasein-01`: O Dasein heideggeriano é o ser que sempre já está no mundo antes de qualquer reflexão.
+- `ok` `r-adj-lacaniano-01`: O sujeito lacaniano é dividido — e a narrativa em primeira pessoa expõe essa divisão.
+- `ok` `r-adj-freudiano-01`: O lapso freudiano da narradora diz o que ela recusava saber que sabia.
+- `ok` `r-noun-inconsciente-01`: O inconsciente textual fala onde o narrador acredita estar no controle.
+- `ok` `r-noun-recalque-01`: O recalque narrativo emerge nas repetições que o narrador não percebe como tais.
+- `ok` `r-adj-estruturalista-02`: A análise estruturalista suspende o autor para ouvir o sistema que o texto encarna.
+- `ok` `r-adj-desconstrucionista-01`: A leitura desconstrucionista encontra a aporía que o texto não consegue resolver.
+- `ok` `r-noun-pós-estruturalismo-01`: O pós-estruturalismo desconfiou das estruturas que o estruturalismo celebrava.
+- `ok` `r-noun-differance-01`: A différance derridiana adia infinitamente o sentido que o leitor persegue.
+- `ok` `r-noun-logocentrismo-01`: O logocentrismo privilegia a fala sobre a escrita — e Derrida inverte essa hierarquia.
+- `ok` `r-adj-rizomático-02`: O pensamento rizomático de Deleuze recusa o centro e a hierarquia das raízes.
+- `ok` `r-noun-devir-01`: O devir-escritor não é tornar-se escritor — é escrever sem saber que se é.
+- `ok` `r-noun-agenciamento-01`: O agenciamento textual distribui forças sem sujeito e sem objeto fixos.
+- `ok` `r-noun-simulacro-01`: O simulacro baudrillardiano substitui o real antes que ele possa ser perdido.
+- `ok` `r-adj-hiper-real-01`: A ficção hiper-real confunde o referente com a representação até tornarem-se indistinguíveis.
+- `ok` `r-noun-palimpsesto-02`: O palimpsesto textual guarda as camadas de escrita que a última versão tentou apagar.
+- `ok` `r-noun-espectro-01`: O espectro do texto anterior assombra o atual mesmo quando o autor nega a influência.
+- `ok` `r-adj-fantasmático-01`: A presença fantasmática do autor morto ancora o texto na biografia que ele negava.
+- `ok` `r-noun-rastro-01`: O rastro do que foi cortado permanece como ausência que o texto sente mas não nomeia.
+- `ok` `r-noun-suplemento-01`: O suplemento derridiano completa e ao mesmo tempo desloca o que supre.
+- `ok` `conf-analise-01`: A análise demonstra que o narrador mente desde o primeiro parágrafo.
+- `ok` `conf-estudo-01`: Este estudo busca demonstrar a importância da voz narrativa no romance.
+- `ok` `conf-foireali-01`: A análise foi realizada com base nos manuscritos originais.
+- `ok` `conf-levaconc-01`: A estrutura do texto leva a concluir que o narrador é não-confiável.
+- `ok` `conf-tendoem-01`: Tendo em conta o exposto, pode-se afirmar que o romance é uma crítica velada.
+- `ok` `conf-emface-01`: Em face do exposto, a hipótese inicial se confirma.
+- `ok` `conf-apartirda-01`: A partir dos dados apresentados, é possível concluir que a obra é autobiográfica.
+- `ok` `conf-analise-neg-01`: A análise do texto revelou três camadas de ironia que a primeira leitura esconde.
+- `ok` `conf-foireali-neg-01`: Ela foi realizada como escritora quando o terceiro livro venceu o prêmio.
+- `ok` `r-verb-questionar-01`: A escritora questiona o próprio narrador sem deixar de ser ele.
+- `ok` `r-verb-confrontar-01`: O texto confronta o leitor com o que ele preferia não saber.
+- `ok` `r-verb-resistir-01`: A prosa resiste à interpretação fácil sem se tornar hermética.
+- `ok` `r-verb-evocar-02`: O poema evoca sem nomear — e é o não-nomeado que permanece.
+- `ok` `r-verb-sugerir-01`: A metáfora sugere onde a definição imporia e destruiria.
+- `ok` `r-adj-elíptico-02`: O estilo elíptico de Hemingway revela pelo que omite.
+- `ok` `r-adj-reticente-03`: A narradora reticente diz menos do que sabe e mais do que parece.
+- `ok` `r-adj-omisso-01`: O narrador omisso é aquele cuja ausência diz mais do que a presença poderia.
+- `ok` `r-adj-lacônico-03`: O estilo lacônico comprime décadas em três palavras e exige releitura.
+- `ok` `r-noun-provas-01`: As provas tipográficas chegaram com erros que o autor havia introduzido na última versão.
+- `ok` `r-noun-galés-01`: As galés do romance estavam cheias de intervenções do editor que o autor recusou.
+- `ok` `r-noun-contracapa-02`: A contracapa promete o que o livro só entrega se o leitor chegar até o fim.
+- `ok` `r-noun-lombada-01`: A lombada desgastada é o único rastro de quantas mãos o livro passou.
+- `ok` `r-noun-frontispício-01`: O frontispício do incunábulo gravava a data de impressão como um orgulho técnico.
+- `ok` `r-adj-idiossincrático-01`: O estilo idiossincrático do autor é inimitável porque nasce de um tropeço único.
+- `ok` `r-adj-peculiar-02`: A dicção peculiar da autora não é afetação — é o único registro em que ela pensa.
+- `ok` `r-adj-singular-03`: A voz singular de Rosa não pertence a nenhuma escola porque criou a própria.
+- `ok` `r-adj-inconfundível-01`: O ritmo inconfundível de Drummond reconhece-se antes de ler o nome.
+- `ok` `r-verb-notar-01`: O leitor atento nota o erro intencional que a edição não corrigiu por respeito.
+- `ok` `r-verb-perceber-01`: Perceber a ironia exige uma segunda leitura que o ritmo da primeira impossibilita.
+- `ok` `r-verb-captar-01`: O ouvido interno capta o ritmo da prosa antes que a mente o nomeie.
+- `ok` `r-verb-identificar-01`: Identificar a voz narrativa é o primeiro passo para entender o contrato de leitura.
+- `ok` `r-noun-posteridade-02`: A posteridade leu Melville de um modo que os contemporâneos recusaram.
+- `ok` `r-noun-recepção-03`: A recepção crítica da obra muda com cada geração que a lê de dentro do seu tempo.
+- `ok` `r-noun-fortuna-crítica-01`: A fortuna crítica de um autor é um espelho da ideologia das épocas que o releram.
+- `ok` `r-adj-intrincado-02`: O enredo intrincado recompensa o leitor que aceita não entender de imediato.
+- `ok` `r-adj-labiríntico-03`: A estrutura labiríntica do romance propõe que cada leitor encontre saídas diferentes.
+- `ok` `r-adj-vertiginoso-03`: A mise en abyme vertiginosa coloca o leitor dentro do espelho que está descrevendo.
+- `ok` `r-noun-voz-alta-01`: Ler em voz alta revela o que a leitura silenciosa anestesia.
+- `ok` `r-noun-respiração-01`: A respiração do texto é a que o leitor adota sem perceber.
+- `ok` `r-noun-pulsação-01`: A pulsação do verso conta o tempo do poema antes do relógio.
+- `ok` `r-adj-grave-lit-01`: O registro grave da elegia não permite o alívio do riso.
+- `ok` `r-adj-leviano-01`: O tom leviano mascara a gravidade do tema que o texto não quer nomear diretamente.
+- `ok` `r-adj-sereno-01`: A prosa serena de Lispector é a calma que antecede o abismo.
+- `ok` `r-adj-agitado-01`: O período agitado da vanguarda produziu mais manifestos que obras.
+- `ok` `r-verb-polir-01`: O autor poliu o parágrafo até a linguagem perder a fricção.
+- `ok` `r-verb-calibrar-01`: A escritora calibra o tom a cada capítulo para manter a mesma temperatura emocional.
+- `ok` `r-verb-cinzelar-02`: O poeta cinzelou cada estrofe até ela resistir a qualquer corte.
+- `ok` `r-verb-desbastar-01`: A revisão desbastou o excesso e deixou o essencial aparecer.
+- `ok` `r-noun-close-reading-01`: A leitura cerrada concentra-se em cada palavra como se fosse a última.
+- `ok` `r-noun-leitura-distante-01`: A leitura distante usa dados para ver padrões que o olho individual não alcança.
+- `ok` `r-noun-coletânea-02`: A coletânea reúne textos que se comentam mutuamente sem saber que se conheciam.
+- `ok` `r-noun-antologia-02`: A antologia é sempre um argumento sobre o que merece ser preservado.
+- `ok` `r-noun-florilégio-01`: O florilégio medieval reunia flores — fragmentos belos arrancados de seus contextos.
+- `ok` `r-noun-breviário-01`: O breviário do escritor é o caderno onde ele registra o que ainda não sabe que vai usar.
+- `ok` `r-noun-miscelânea-01`: A miscelânea do período colonial misturava gêneros porque os gêneros ainda não tinham nomes.
+- `ok` `r-noun-summa-01`: A summa medieval pretendia conter todo o saber — e nisso revelava o limite do saber possível.
+- `ok` `r-adj-enciclopédico-01`: O romance enciclopédico de Melville acumula o mundo para descobrir que não cabe nele.
+- `ok` `r-adj-totalizante-01`: O gesto totalizante da vanguarda fracassou — e esse fracasso é o seu legado.
+- `ok` `r-adj-minimalista-02`: A prosa minimalista de Carver confia no que não diz para carregar o peso da cena.
+- `ok` `r-adj-maximalista-02`: A ficção maximalista acumula até o excesso virar método.
+- `ok` `r-adj-conciso-03`: O estilo conciso elimina o que a cena já diz pela ação.
+- `ok` `r-adj-prolixo-03`: O narrador prolixo adia a revelação pelo prazer de adiar, não pelo efeito.
+- `ok` `r-adj-sucinto-01`: A resposta sucinta da personagem diz mais sobre ela do que dez páginas de descrição.
+- `ok` `r-adj-exaustivo-01`: A catalogação exaustiva dos objetos da casa revela a obsessão da narradora.
+- `ok` `r-adj-fragmentado-02`: O discurso fragmentado da personagem em colapso imita a dissolução da consciência.
+- `ok` `r-adj-errático-01`: O pensamento errático do narrador desorientado reflete a impossibilidade de ordenar o trauma.
+- `ok` `r-adj-coeso-02`: O texto coeso não é aquele que não contradiz — é o que contradiz com propósito.
+- `ok` `r-adj-coerente-lit-02`: A narrativa coerente com o próprio estilo surpreende sem trair o leitor.
+- `ok` `r-verb-diluir-01`: O excesso de adjetivos dilui a cena que os substantivos haviam erguido.
+- `ok` `r-verb-saturar-01`: A metáfora usada demais satura e perde o poder de apontar.
+- `ok` `r-verb-esvaziar-01`: A repetição esvazia a palavra até ela precisar ser reinventada.
+- `ok` `r-verb-recuperar-03`: O poema recupera o choque do lugar-comum devolvendo-lhe o corpo.
+- `ok` `r-verb-atualizar-01`: A releitura atualiza o clássico sem traí-lo — esse é o difícil equilíbrio.
+- `ok` `r-verb-reinventar-01`: Rosa reinventou o português como quem aprende a língua pela primeira vez sendo fluente.
+- `ok` `r-verb-distorcer-01`: A memória distorce para preservar — e a ficção explora essa distorção como método.
+- `ok` `r-noun-anacronismo-03`: O anacronismo intencional faz o passado falar a língua do presente como provocação.
+- `ok` `r-noun-retrofuturismo-01`: O retrofuturismo imagina o futuro com os olhos de um passado que já não existe.
+- `ok` `r-noun-ucronismo-01`: O ucronismo pergunta o que teria acontecido se e com isso revela o que aconteceu de fato.
+- `ok` `r-adj-contrafactual-01`: O raciocínio contrafactual na ficção expõe as contingências que a história apresenta como inevitáveis.
+- `ok` `r-adj-especulativo-02`: A ficção especulativa interroga o presente deslocando-o para um futuro possível.
+- `ok` `r-adj-utópico-02`: O impulso utópico não descreve o futuro — critica o presente pelo que ele poderia ser.
+- `ok` `r-adj-distópico-02`: O horizonte distópico amplifica o real até torná-lo insuportável de reconhecer.
+- `ok` `r-adj-alegórico-01`: A narrativa alegórica fala de uma coisa para dizer outra e exige dois níveis de leitura.
+- `ok` `r-noun-alegoria-01`: A alegoria não é metáfora estendida — é um sistema de correspondências que o texto sustenta.
+- `ok` `r-noun-fábula-01`: A fábula usa o animal para dizer o que o humano recusaria ouvir sobre si mesmo.
+- `ok` `r-noun-apólogo-01`: O apólogo machadiano usa a narrativa breve para fixar uma ironia que o romance precisaria de páginas para sustentar.
+- `ok` `r-noun-parábola-01`: A parábola não moralizante é a que confia no leitor para extrair a lição sem indicação.
+- `ok` `r-noun-mito-01`: O mito não explica a origem — revela como uma cultura entende a si mesma.
+- `ok` `r-noun-arquétipo-01`: O arquétipo junguiano sobrevive nas narrativas porque toca estruturas anteriores à língua.
+- `ok` `r-noun-cosmogonia-01`: A cosmogonia ficcional de Tolkien é tão detalhada que exige suspensão da descrença antes da leitura.
+- `ok` `r-noun-bestiário-01`: O bestiário medieval classificava animais reais e imaginários pelo que significavam, não pelo que eram.
+- `ok` `r-noun-hagiografia-01`: A hagiografia literária do autor famoso frequentemente apaga o escritor para preservar o mito.
+- `ok` `r-adj-mítico-01`: A dimensão mítica do personagem não nasce da grandeza — nasce da necessidade coletiva.
+- `ok` `r-adj-lendário-01`: O estatuto lendário de um escritor apaga a obra atrás da biografia.
+- `ok` `r-adj-emblemático-01`: O romance emblemático de uma geração é frequentemente o que ela menos conseguiu superar.
+- `ok` `r-adj-paradigmático-02`: O texto paradigmático define o problema que os seguidores passam décadas tentando resolver.
+- `ok` `r-adj-exemplar-01`: A novela exemplar de Cervantes usa o entretenimento para esconder a crítica.
+- `ok` `r-noun-epigrama-01`: O epigrama de Marcial comprime a crueldade em dois versos que ainda doem.
+- `ok` `r-noun-dístico-01`: O dístico elegíaco alternava hexâmetro e pentâmetro como respiração e retenção.
+- `ok` `r-noun-terceto-01`: O terceto dantesco encadeia as rimas de modo que cada estrofe puxa a seguinte.
+- `ok` `r-verb-worldbuild-01`: O romance constrói um mundo que o leitor habita antes de entender suas leis.
+- `ok` `r-verb-imaginar-01`: Imaginar não é escapar da realidade — é construir outra para entender esta.
+- `ok` `r-verb-fabular-01`: O escritor fabula porque o real já aconteceu e só a fabulação o torna legível.
+- `ok` `r-verb-mitificar-01`: O regionalismo mitifica o espaço até torná-lo universal pelo excesso de particular.
+- `ok` `r-verb-desmitificar-01`: A ironia machadiana desmitifica o herói antes que o leitor termine de admirá-lo.
+- `ok` `r-adj-preciso-01`: A escolha precisa da palavra não é perfeccionismo — é respeito pelo leitor.
+- `ok` `r-adj-exato-01`: O detalhe exato ancora o texto no real mesmo quando a trama é impossível.
+- `ok` `r-adj-rigoroso-02`: O trabalho rigoroso com a língua não é obstáculo à espontaneidade — é a sua condição.
+- `ok` `r-adj-criterioso-02`: A revisão criteriosa elimina o que o entusiasmo do primeiro rascunho não pôde ver.
+- `ok` `r-noun-encadernação-01`: A encadernação artesanal transforma o livro num objeto que resiste ao tempo.
+- `ok` `r-noun-guardas-01`: As guardas do livro antigo guardavam dedicatórias de leitores que morreram há cem anos.
+- `ok` `r-noun-orelhas-01`: As orelhas dobradas nas páginas são o mapa de uma leitura que foi interrompida.
+- `ok` `r-noun-marginália-01`: A marginália do leitor anônimo dialoga com o texto num segundo nível de autoria.
+- `ok` `r-adj-frenético-01`: O ritmo frenético do thriller não permite que o leitor pause para duvidar do que leu.
+- `ok` `r-adj-moroso-02`: O andamento moroso do romance proustiano é o tempo da memória, não da ação.
+- `ok` `r-adj-acelerado-02`: A narração acelerada dos eventos finais comprime o tempo como sob pressão.
+- `ok` `r-adj-vagaroso-01`: A prosa vagarosa de Saramago obriga o leitor a habitar o momento com a personagem.
+- `ok` `r-verb-mergulhar-01`: O leitor mergulha no texto e só percebe que esqueceu o tempo ao fechar o livro.
+- `ok` `r-verb-perder-se-01`: Perder-se na ficção é um ato de confiança que o texto precisa merecer.
+- `ok` `r-verb-habitar-01`: A boa ficção faz o leitor habitar um corpo e uma vida que não são os seus.
+- `ok` `r-noun-biopolitica-01`: A biopolítica foucaultiana lê no corpo a inscrição do poder que a lei não precisa mais declarar.
+- `ok` `r-noun-dispositivo-01`: O dispositivo agambeniano captura a vida dentro de uma rede de técnicas e discursos.
+- `ok` `r-noun-genealogia-02`: A genealogia foucaultiana não busca a origem — busca a proveniência e a emergência.
+- `ok` `r-noun-arquivo-01`: O arquivo não é neutro — é uma decisão política sobre o que merece existir no futuro.
+- `ok` `r-noun-episteme-01`: A episteme de cada época define o que pode ser pensado e o que permanece impensável.
+- `ok` `r-adj-hegemônico-03`: O discurso hegemônico apresenta como natural o que é resultado de um processo histórico.
+- `ok` `r-adj-contra-hegemônico-01`: A escrita contra-hegemônica desvela o que o discurso dominante naturaliza.
+- `ok` `r-adj-ideológico-01`: O texto ideológico não é o que declara sua posição — é o que a esconde com mais eficácia.
+- `ok` `r-noun-performativo-01`: O enunciado performativo não descreve um estado — cria um.
+- `ok` `r-noun-ato-de-fala-01`: O ato de fala austiniano distingue o que diz o que acontece do que faz algo acontecer.
+- `ok` `r-adj-regionalist-01`: A escrita regionalista não é menor — é o universal que se recusa a fingir que não tem endereço.
+- `ok` `r-adj-urbano-lit-01`: A ficção urbana cartografa a cidade pela perspectiva de quem vive nos seus interstícios.
+- `ok` `r-adj-rural-lit-01`: O espaço rural rosiano não é pitoresco — é um estado de linguagem.
+- `ok` `r-adj-fronteiriço-01`: A escrita fronteiriça habita o espaço entre línguas, culturas e identidades.
+- `ok` `r-verb-assumir-01`: Assumir a ficção como modo de conhecer é o gesto inaugural de todo escritor.
+- `ok` `r-verb-reconhecer-01`: O texto reconhece seus limites quando para de fingir que sabe o que o leitor sente.
+- `ok` `r-verb-comprometer-01`: O escritor se compromete com a língua como um ato antes de qualquer ideia.
+- `ok` `r-verb-responder-01`: Todo texto responde a outros textos mesmo quando recusa reconhecê-los.
+- `ok` `r-adj-insubmisso-01`: A voz insubmissa não é barulhenta — é a que recusa a moldura que lhe oferecem.
+- `ok` `r-adj-rebelde-01`: O texto rebelde não se opõe por oposição — se opõe porque propõe outro mundo.
+- `ok` `r-adj-incômodo-01`: O clássico incômodo é aquele que ainda não podemos domesticar por completo.
+- `ok` `r-noun-contrato-01`: O contrato de leitura é estabelecido nas primeiras linhas, antes que o leitor perceba.
+- `ok` `r-noun-pacto-02`: O pacto autobiográfico exige que nome real e narrador coincidam — e isso basta para criar o efeito de verdade.
+- `ok` `r-noun-cumplicidade-03`: A cumplicidade entre narrador e leitor é o que permite que a ironia funcione sem ser explicada.
+- `ok` `r-noun-sedução-01`: A sedução do texto está em revelar o suficiente para manter o leitor em movimento.
+- `ok` `r-noun-encantamento-01`: O encantamento literário ocorre quando o texto nos convence de que aquele mundo sempre existiu.
+- `ok` `conf-foi-observado-01`: Foi observado que os leitores preferem capítulos curtos nas leituras noturnas.
+- `ok` `conf-foi-feita-analise-01`: Foi feita uma análise dos três primeiros romances da autora mineira.
+- `ok` `conf-optou-se-01`: Optou-se por narrar toda a história em primeira pessoa.
+- `ok` `conf-humilde-opiniao-01`: Na minha humilde opinião, o conto é superior ao romance nesse aspecto.
+- `ok` `conf-nao-sou-especialista-01`: Não sou especialista, mas acho que o final não funciona.
+- `ok` `conf-proprio-nome-diz-01`: Como o próprio nome diz, o microconto precisa caber em poucas linhas.
+- `ok` `conf-razao-e-porque-01`: A razão é porque o narrador mente desde a primeira página.
+- `ok` `conf-foi-realizada-como-guard-01`: Ela foi realizada como escritora depois do terceiro livro publicado.
+- `ok` `conf-por-sua-vez-guard-01`: Lutou por sua vez de falar na roda de leitura da oficina.
+- `ok` `conf-e-possivel-afirmar-02`: É possível afirmar que o romance brasileiro mudou depois de 1950.
+- `ok` `conf-e-valido-ressaltar-02`: É válido ressaltar que a autora reescreveu o final três vezes.
+- `ok` `conf-e-notorio-02`: É notório que o mercado editorial mudou na última década.
+- `ok` `conf-e-consenso-02`: É consenso que a crônica é um gênero de raiz brasileira.
+- `ok` `conf-e-extrema-importancia-02`: É de extrema importância revisar o manuscrito antes de publicar.
+- `ok` `conf-e-importante-ressaltar-02`: É importante ressaltar que o narrador do segundo capítulo é outro.
+- `ok` `conf-e-sabido-por-todos-02`: É sabido por todos que ela escrevia sempre de madrugada.
+- `ok` `conf-e-inegavel-02`: É inegável que o livro envelheceu bem apesar das modas.
+- `ok` `r-adj-minimalista-03`: A prosa minimalista corta tudo o que não sangra na página.
+- `ok` `r-adj-maximalista-03`: O romance maximalista acumula vozes, notas e digressões sem pedir desculpa.
+- `ok` `r-adj-revisionista-01`: A leitura revisionista devolve às autoras o lugar que a crítica negou.
+- `ok` `r-adj-retrofuturista-02`: O cenário retrofuturista mistura máquinas a vapor e sonhos de outro século.
+- `ok` `r-adj-feminista-01`: A crítica feminista releu o cânone com outras perguntas.
+- `ok` `r-adj-desconstrucionista-02`: O gesto desconstrucionista desmonta a oposição entre fala e escrita.
+- `ok` `r-adj-laudatório-02`: O prefácio laudatório prometia mais do que o livro entregava.
+- `ok` `r-adj-declamatório-02`: O tom declamatório afastava o poema da conversa que ele queria ser.
+- `ok` `r-adj-irrisório-02`: O adiantamento irrisório não pagava nem o café dos meses de escrita.
+- `ok` `r-adj-fugidia-01`: A memória fugidia escapava a cada tentativa de registro.
+- `ok` `r-adj-popular-02`: O folheto popular circulava de mão em mão nas feiras do sertão.
+- `ok` `r-adj-vernacular-03`: A prosa vernacular recusava o verniz das traduções apressadas.
+- `ok` `r-adj-liminar-02`: O espaço liminar entre vigília e sono rege os contos do volume.
+- `ok` `r-adj-exemplar-02`: A novela exemplar ensinava sem nunca apontar o dedo.
+- `ok` `r-adj-queer-01`: A leitura queer ilumina o que o texto diz sem dizer.
+- `ok` `r-adj-drummoniano-02`: O verso drummoniano carrega a pedra no meio de todos os caminhos.
+- `ok` `r-adj-inúmeras-02`: As inúmeras versões do conto dormiam numa gaveta sem fundo.
+- `ok` `r-adj-fragmentária-04`: A estrutura fragmentária espelha a memória interrompida da narradora.
+- `ok` `r-adj-involuntária-02`: A memória involuntária irrompe no meio da cena mais banal.
+- `ok` `r-adj-emancipatória-02`: A escrita emancipatória devolve a palavra a quem foi calado.
+- `ok` `r-verb-pressupõe-02`: A leitura pressupõe um pacto silencioso entre autora e leitor.
+- `ok` `r-verb-constrói-02`: A narradora constrói o mundo tijolo a tijolo, sem pressa.
+- `ok` `r-noun-bildungsroman-02`: O bildungsroman acompanha a formação da protagonista até a partida.
+- `ok` `r-noun-flâneuse-01`: A flâneuse atravessa a cidade colhendo cenas para o caderno.
+- `ok` `r-pron-o-que-02`: Ela entendeu o que o silêncio do pai dizia.
+- `ok` `r-pron-tudo-que-01`: Tudo que ela escreveu naquele inverno virou cinza.
+- `ok` `r-pron-qual-04`: Não sabia qual dos finais escolher para o conto.
+- `ok` `r-pron-qual-05`: A cidade da qual ela fala não existe nos mapas.
+- `ok` `r-pron-quantos-02`: Quantos rascunhos foram precisos até a frase parecer simples?
+- `ok` `r-adv-diante-02`: Diante do manuscrito recusado, ela hesitou pela primeira vez.
+- `ok` `r-prep-malgrado-02`: Malgrado o cansaço, terminou o capítulo antes do amanhecer.
+- `ok` `r-verb-reescrever-01`: Reescrever é a única forma honesta de terminar um livro.
+- `ok` `r-verb-publicar-se-01`: Publicar-se exige uma coragem que ninguém ensina nas oficinas.
+- `ok` `r-adv-estranhamente-01`: Estranhamente, o silêncio dizia mais que o diálogo inteiro.
+- `ok` `r-adv-curiosamente-01`: Curiosamente, ninguém notou a troca de narrador no terceiro capítulo.
+- `ok` `r-noun-pertencimento-02`: O pertencimento nunca foi um tema confortável para ela.
+- `ok` `r-noun-estranhamento-03`: O estranhamento é o primeiro efeito da boa literatura.

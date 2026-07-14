@@ -562,6 +562,12 @@ function openCreateNote(options = {}) {
   updateCreateNoteHeading();
   renderCreateNoteStep(1);
   createNoteOverlay.hidden = false;
+
+  // Acessibilidade: foco inicial no primeiro card de categoria ou botão de folha em branco
+  requestAnimationFrame(() => {
+    const firstBtn = createNoteOverlay.querySelector(".create-cat-card");
+    if (firstBtn) firstBtn.focus();
+  });
 }
 
 async function renderCreateNoteStep(step) {
@@ -694,6 +700,10 @@ function closeCreateNote() {
   createNoteParentId = null;
   createNoteContext = "manuscript";
   updateCreateNoteHeading();
+  // Acessibilidade: restaurar foco para o editor
+  if (typeof writingArea !== "undefined" && writingArea) {
+    writingArea.focus();
+  }
 }
 
 function openAddCompanionNote(bibliType) {
@@ -729,6 +739,56 @@ function openAddCompanionNote(bibliType) {
 const termsOverlay = document.getElementById("terms-overlay");
 const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
 
+function setTermsModalIsolation(active) {
+  if (!termsOverlay) return;
+
+  const protectedNodes = [
+    ...Array.from(document.body.children).filter((node) => node !== shell),
+    ...Array.from(shell.children).filter((node) => node !== termsOverlay),
+  ];
+
+  protectedNodes.forEach((node) => {
+    if (active) {
+      node.dataset.termsModalAriaHidden = node.getAttribute("aria-hidden") || "";
+      node.inert = true;
+      node.setAttribute("aria-hidden", "true");
+      return;
+    }
+
+    if (!("termsModalAriaHidden" in node.dataset)) return;
+    node.inert = false;
+    const previousAriaHidden = node.dataset.termsModalAriaHidden;
+    if (previousAriaHidden) node.setAttribute("aria-hidden", previousAriaHidden);
+    else node.removeAttribute("aria-hidden");
+    delete node.dataset.termsModalAriaHidden;
+  });
+}
+
+function trapTermsFocus(event) {
+  if (event.key !== "Tab" || !termsOverlay || termsOverlay.hidden) return;
+
+  const focusable = [...termsOverlay.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )].filter((node) => !node.closest("[hidden]"));
+
+  if (!focusable.length) {
+    event.preventDefault();
+    return;
+  }
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+}
+
+document.addEventListener("keydown", trapTermsFocus);
+
 function switchAtelier(tab) {
   const view = document.querySelector(".academy-view");
   if (!view) return;
@@ -748,10 +808,7 @@ function checkTerms() {
     if (stateNew)  stateNew.hidden  = hasWork;
     if (stateCont) stateCont.hidden = !hasWork;
 
-    const dock = document.getElementById("mobile-dock");
-    const bandeja = document.getElementById("mobile-bandeja");
-    if (dock)    dock.inert    = true;
-    if (bandeja) bandeja.inert = true;
+    setTermsModalIsolation(true);
     setTimeout(() => {
       termsOverlay.hidden = false;
       const firstBtn = termsOverlay.querySelector('[data-ob-state]:not([hidden]) button') ||
@@ -764,11 +821,8 @@ function checkTerms() {
 function acceptTerms(goTo) {
   localStorage.setItem(TERMS_KEY, new Date().toISOString());
   localStorage.setItem(FIRST_VISIT_KEY, "1");
+  setTermsModalIsolation(false);
   if (termsOverlay) termsOverlay.hidden = true;
-  const dock = document.getElementById("mobile-dock");
-  const bandeja = document.getElementById("mobile-bandeja");
-  if (dock)    dock.inert    = false;
-  if (bandeja) bandeja.inert = false;
   if (goTo === "blank") {
     // Folha em branco direto — sem modal, sem template anterior
     state.template.selectedId = null;
@@ -785,6 +839,13 @@ function acceptTerms(goTo) {
       setActiveManuscript(ms.id);
     }
     setView("editor", { updateRoute: true });
+  }
+
+  // Acessibilidade: restaurar foco para o editor se não estiver indo para um guia
+  if (goTo !== "guide") {
+    if (typeof writingArea !== "undefined" && writingArea) {
+      writingArea.focus();
+    }
   }
 }
 
