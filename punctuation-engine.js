@@ -25,7 +25,12 @@
       acao: "Remova a vírgula entre o sujeito e o verbo.",
       severity: "alta",
       detect(text) {
-        return first(/\b([A-ZÀ-Úa-záàâãéèêíîóòôõúùûç][a-záàâãéèêíîóòôõúùûç]+(?: [a-záàâãéèêíîóòôõúùûç]+){0,4}),\s+(é|foi|será|tinha|tem|teve|disse|fez|fala|escreveu|publicou|criou|quis|pode|deve|vai|vem)\b/, text);
+        const CONECTORES = new Set(["contudo","todavia","entretanto","portanto","pois","então","assim","logo","porém","aliás","ademais","outrossim","destarte","enfim","afinal"]);
+        const matches = first(/\b([A-ZÀ-Úa-záàâãéèêíîóòôõúùûç][a-záàâãéèêíîóòôõúùûç]+(?: [a-záàâãéèêíîóòôõúùûç]+){0,4}),\s+(é|foi|será|tinha|tem|teve|disse|fez|fala|escreveu|publicou|criou|quis|pode|deve|vai|vem)\b/, text);
+        return matches.filter(({ fragment }) => {
+          const sujeito = fragment.split(",")[0].trim().split(/\s+/).pop().toLowerCase();
+          return !CONECTORES.has(sujeito);
+        });
       },
     },
 
@@ -132,7 +137,7 @@
       severity: "média",
       detect(text) {
         const issues = [];
-        const re = /^((?:Em|Na|No|Para|Desde|Após|Antes de|Depois de|Durante|Por causa de|Em virtude de)\s+[A-Za-záàâãéèêíîóòôõúùûç]+(?:\s+[a-záàâãéèêíîóòôõúùûç]+){2,})\s+([a-záàâãéèêíîóòôõúùûç])/mg;
+        const re = /^((?:Em|Na|No|Para|Desde|Após|Antes de|Depois de|Durante|Por causa de|Em virtude de)\s+[A-Za-záàâãéèêíîóòôõúùûç]+(?:\s+[A-Za-záàâãéèêíîóòôõúùûç]+){2,})\s+([a-záàâãéèêíîóòôõúùûç])/mg;
         let m;
         while ((m = re.exec(text)) !== null) {
           if (!m[1].includes(",")) issues.push({ fragment: m[1].trim().slice(0, 80), pos: m.index });
@@ -150,7 +155,11 @@
       acao: "Remova a vírgula depois de 'pois' explicativo: mantenha apenas a vírgula antes.",
       severity: "média",
       detect(text) {
-        return first(/,\s*pois,\s+(?!bem|assim|é)/, text);
+        const matches = first(/,\s*pois,\s+(?!bem|assim|é)/, text);
+        return matches.filter(({ pos }) => {
+          const before = text.slice(Math.max(0, pos - 20), pos).toLowerCase();
+          return !/\b(pode|deve|vai|consegue|fica|está|é|são|tem|têm)\s*$/.test(before);
+        });
       },
     },
 
@@ -163,7 +172,7 @@
       acao: "Isole 'pois' conclusivo com vírgulas: 'pode, pois, sair'.",
       severity: "média",
       detect(text) {
-        return first(/\b(pode|deve|vai|consegue|fica|está|é|são|tem|têm)\s+pois\s+[a-z]/, text);
+        return first(/\b(pode|deve|vai|consegue|fica|está|é|são|tem|têm)\s+pois\s+[a-z]/i, text);
       },
     },
 
@@ -195,7 +204,7 @@
         const issues = [];
         for (const p of text.split(/\n+/).filter(Boolean)) {
           const t = p.trim();
-          if (t.length > 20 && !/[.!?…—"]$/.test(t) && !/^\s*—/.test(t))
+          if (t.length > 20 && !/[.!?…—"”’]$/.test(t) && !/^\s*—/.test(t))
             issues.push({ fragment: t.slice(-50), pos: text.lastIndexOf(t) });
         }
         return issues;
@@ -221,7 +230,7 @@
       id: "PONT-25", categoria: "dois-pontos ausente — citação após verbo dicendi",
       fonte: "Bechara § 627 (2); Moreno p. 107; Cunha & Cintra p. 670",
       criterio: "Citação direta formal após verbo de dizer exige dois-pontos antes das aspas.",
-      exemplo: 'Machado escreveu: "A eternidade é fácil."',
+      exemplo: 'Machado escreveu: “A eternidade é fácil.”',
       contraexemplo: 'Machado escreveu "A eternidade é fácil."',
       acao: 'Adicione dois-pontos antes das aspas: \'disse: "..."\' ',
       severity: "média",
@@ -240,7 +249,11 @@
       severity: "baixa",
       detect(text) {
         return all(/:\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][a-záàâãéèêíîóòôõúùûç]/g, text)
-          .filter(({ fragment }) => !fragment.includes('"') && !fragment.includes('—'));
+          .filter(({ fragment, pos }) => {
+            if (fragment.includes('"') || fragment.includes('—')) return false;
+            const before = text.slice(Math.max(0, pos - 30), pos).toLowerCase();
+            return !/seguinte[s]?\s*$/.test(before);
+          });
       },
     },
 
@@ -270,7 +283,9 @@
       acao: "Separe os verbos coordenados com vírgula ou ponto e vírgula.",
       severity: "média",
       detect(text) {
-        const matches = first(/\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\s+\w[^,;.!?]{2,30}\b(\w+ou|\w+eu|\w+iu)\b/, text);
+        const V = "(?:\\w+(?:ou|eu|iu)|trouxe|fez|disse|teve|veio|p[oô]s|quis|soube|foi|fui)";
+        const re = new RegExp(`\\b${V}\\s+\\w[^,;.!?]{2,30}\\b${V}\\s+\\w[^,;.!?]{2,30}\\b${V}\\b`, "i");
+        const matches = first(re, text);
         return matches.filter(i => !i.fragment.includes(";") && !i.fragment.includes(","));
       },
     },
@@ -284,7 +299,7 @@
       acao: "Substitua a vírgula por ponto e vírgula antes do advérbio pospositivo.",
       severity: "alta",
       detect(text) {
-        return all(/,\s*(contudo|todavia|entretanto|no entanto|não obstante|portanto|logo|por conseguinte|consequentemente)\s*,/g, text);
+        return all(/,\s*(contudo|todavia|entretanto|no entanto|não obstante|portanto|logo|por conseguinte|consequentemente)\b(?!\s*,)/g, text);
       },
     },
 
@@ -527,8 +542,9 @@
       acao: "Isole o aposto com vírgulas dos dois lados: 'Pedro, meu amigo, chegou.'",
       severity: "média",
       detect(text) {
+        const CONECTORES = new Set(["quando","como","onde","enquanto","depois","antes","então","mas","porque","portanto","contudo","todavia","entretanto","se","assim","logo","além","ainda","já","ontem","hoje","aqui","ali","lá","agora","sempre","nunca","talvez","certamente","porém","caso","embora"]);
         return all(/\b([A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]{2,})\s+(meu|minha|seu|sua|nosso|nossa|o|a)\s+[a-záàâãéèêíîóòôõúùûç]{3,}\b(?!,)/g, text)
-          .filter(i => !i.fragment.includes(","));
+          .filter(i => !i.fragment.includes(",") && !CONECTORES.has(i.fragment.split(/\s+/)[0].toLowerCase()));
       },
     },
 
@@ -594,17 +610,23 @@
       id: "PONT-47", categoria: "vírgula obrigatória — conjunção 'e' entre orações longas com sujeitos diferentes",
       fonte: "Bechara § 623 (b); Moreno p. 44; Cunha & Cintra p. 658",
       criterio: "A conjunção 'e' ligando orações com sujeitos diferentes pede vírgula antes para evitar ambiguidade.",
-      exemplo: "Os Estados Unidos atacaram o Iraque, e a Rússia reagiu imediatamente.",
-      contraexemplo: "Os Estados Unidos atacaram o Iraque e a Rússia reagiu imediatamente.",
+      exemplo: "Ele chegou, e a Maria saiu logo depois.",
+      contraexemplo: "Ele chegou e a Maria saiu logo depois.",
       acao: "Adicione vírgula antes de 'e' quando os sujeitos são diferentes nas duas orações.",
       severity: "média",
       detect(text) {
         const issues = [];
-        const re = /\b(chegou|saiu|voltou|entrou|fugiu|correu|falou|disse|respondeu|escreveu|publicou|criou|tentou|conseguiu|percebeu|descobriu)\s+e\s+(ele|ela|eles|elas|eu|nós|você|vocês)\s/gi;
+        const NAO_VERBO = new Set(["meu", "seu", "teu"]);
+        const re = /\b((?:\w+(?:ou|eu|iu|aram|eram|iram)|disse|disseram|fez|fizeram|teve|tiveram|veio|vieram|p[oô]s|puseram|quis|quiseram|soube|souberam|foi|foram))\s+e\s+/gi;
         let m;
         while ((m = re.exec(text)) !== null) {
+          if (NAO_VERBO.has(m[1].toLowerCase())) continue;
+          const rest = text.slice(m.index + m[0].length, m.index + m[0].length + 30);
+          const isNovoSujeito = /^(ele|ela|eles|elas|eu|nós|você|vocês)\b/i.test(rest) || /^[oa]s?\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ]/.test(rest);
+          if (!isNovoSujeito) continue;
           const before = text.slice(Math.max(0, m.index - 2), m.index);
-          if (!before.endsWith(",")) issues.push({ fragment: m[0].trim().slice(0, 80), pos: m.index });
+          if (before.endsWith(",")) continue;
+          issues.push({ fragment: (m[0] + rest.split(/\s+/).slice(0, 3).join(" ")).trim().slice(0, 80), pos: m.index });
         }
         return issues;
       },
