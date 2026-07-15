@@ -20,6 +20,7 @@ import asyncio
 import json
 import shutil
 import sys
+import os
 from datetime import date
 from pathlib import Path
 
@@ -33,7 +34,7 @@ def _navegador_sistema():
             return caminho
     return None
 
-BASE_URL = "http://localhost:8799"
+BASE_URL = os.environ.get("ESCREVARAL_BASE_URL", "http://localhost:8799")
 REPORTS  = Path(__file__).parent.parent / "reports" / "auditoria"
 TIMEOUT  = 15_000
 
@@ -52,7 +53,8 @@ CENARIOS = [
         "descricao": "Editor com manuscrito novo aberto",
         "acao": """
             const btn = document.querySelector('[data-action="new-note"], .create-button, #btn-new-note, button[aria-label*="nova nota"], button[aria-label*="Novo manuscrito"]');
-            if (btn) btn.click();
+            if (!btn) throw new Error('botão esperado não encontrado');
+            btn.click();
         """,
         "seletores_extras": [".editor-paper", ".writing-area", ".editor-split", "#editor-container"],
     },
@@ -61,7 +63,8 @@ CENARIOS = [
         "descricao": "Editor com texto longo (sem quebra forçada)",
         "acao": """
             const area = document.querySelector('.writing-area, [contenteditable="true"], textarea');
-            if (area) {
+            if (!area) throw new Error('área de escrita não encontrada');
+            {
                 area.focus();
                 const texto = 'Esta é uma frase muito longa que testa se o editor horizontal transborda a viewport em dispositivos móveis pequenos como 320px. '.repeat(5);
                 if (area.tagName === 'TEXTAREA') {
@@ -78,7 +81,8 @@ CENARIOS = [
         "descricao": "Guia de escrita aberto ao lado do editor",
         "acao": """
             const btn = document.querySelector('[data-action="toggle-guide"], .guide-toggle, #btn-guia, button[aria-label*="guia"]');
-            if (btn) btn.click();
+            if (!btn) throw new Error('botão esperado não encontrado');
+            btn.click();
         """,
         "seletores_extras": [".guide-panel", ".vereda-guide", ".editor-split", ".writing-guide"],
     },
@@ -87,7 +91,8 @@ CENARIOS = [
         "descricao": "Aba Academia (Espelho de Voz, RimaLab)",
         "acao": """
             const btn = document.querySelector('[data-tab="academia"], [href="#academia"], nav button[aria-label*="Academia"]');
-            if (btn) btn.click();
+            if (!btn) throw new Error('botão esperado não encontrado');
+            btn.click();
         """,
         "seletores_extras": ["#academia-panel", ".academia-content"],
     },
@@ -96,7 +101,8 @@ CENARIOS = [
         "descricao": "Aba Prova de Autoria",
         "acao": """
             const btn = document.querySelector('[data-tab="proof"], [data-tab="prova"], nav button[aria-label*="Prova"]');
-            if (btn) btn.click();
+            if (!btn) throw new Error('botão esperado não encontrado');
+            btn.click();
         """,
         "seletores_extras": ["#proof-panel", ".proof-content"],
     },
@@ -158,11 +164,23 @@ async def rodar_cenario(page, cenario: dict, largura: int) -> dict:
 
     # Executa ação do cenário
     if cenario["acao"]:
-        try:
-            await page.evaluate(cenario["acao"])
-            await page.wait_for_timeout(500)
-        except Exception:
-            pass
+        await page.evaluate(cenario["acao"])
+        await page.wait_for_timeout(500)
+
+    # Um cenário que não conseguiu abrir sua visão não é uma medição válida.
+    # Falhar aqui evita o falso verde causado por seletores desatualizados.
+    if cenario["seletores_extras"]:
+        encontrou_visao = await page.evaluate(
+            """(seletores) => seletores.some((sel) => {
+                const el = document.querySelector(sel);
+                return el && (el.offsetWidth > 0 || el.offsetHeight > 0);
+            })""",
+            cenario["seletores_extras"],
+        )
+        if not encontrou_visao:
+            raise RuntimeError(
+                f"visão esperada não encontrada para o cenário {cenario['nome']}"
+            )
 
     medicao = await medir_overflow(page, cenario["seletores_extras"])
     return medicao
@@ -267,6 +285,7 @@ async def main():
         opcoes = {"headless": True}
         if executavel:
             opcoes["executable_path"] = executavel
+            opcoes["args"] = ["--no-sandbox"]
         browser = await pw.chromium.launch(**opcoes)
         context = await browser.new_context()
         page = await context.new_page()

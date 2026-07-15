@@ -48,7 +48,7 @@ def checar(contexto, viewport, nome):
     page.close()
 
 with sync_playwright() as p:
-    browser = p.chromium.launch()
+    browser = p.chromium.launch(args=["--no-sandbox"])
 
     checar(browser.new_context(viewport={"width": 1366, "height": 900}), None, "desktop 1366×900")
     checar(browser.new_context(viewport={"width": 390, "height": 844}), None, "mobile 390×844")
