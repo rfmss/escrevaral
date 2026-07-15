@@ -18,6 +18,8 @@ Saída:
 
 import asyncio
 import json
+import os
+import shutil
 import sys
 from datetime import date
 from pathlib import Path
@@ -257,7 +259,12 @@ async def main():
     tem_erro = False
 
     async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=True)
+        chromium = os.environ.get("CHROMIUM_PATH") or shutil.which("chromium")
+        launch_options = {"headless": True}
+        if chromium:
+            launch_options["executable_path"] = chromium
+            launch_options["args"] = ["--no-sandbox"]
+        browser = await pw.chromium.launch(**launch_options)
 
         for cenario in CENARIOS:
             print(f"  [{cenario['nome']}]", end=" ", flush=True)

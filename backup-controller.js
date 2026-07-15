@@ -49,10 +49,22 @@ function registerOfflineApp() {
   const tabConflictDismiss = document.getElementById("tab-conflict-dismiss");
   let _tabConflictShown = false;
 
-  document.addEventListener("vrda:tab-conflict", () => {
+  function showTabConflict() {
     if (_tabConflictShown || !tabConflictBanner) return;
     _tabConflictShown = true;
     tabConflictBanner.hidden = false;
+  }
+
+  document.addEventListener("vrda:tab-conflict", showTabConflict);
+  window.addEventListener("storage", (event) => {
+    if (event.key !== STORAGE_KEY || !event.newValue) return;
+    try {
+      const storedAt = JSON.parse(event.newValue)?.meta?.lastSavedAt;
+      const ourAt = state?.meta?.lastSavedAt;
+      if (storedAt && (!ourAt || storedAt > ourAt)) showTabConflict();
+    } catch (_) {
+      // Uma gravação inválida não muda o estado local nem deve interromper a escrita.
+    }
   });
   if (tabConflictReload) tabConflictReload.addEventListener("click", () => { window.location.reload(); });
   if (tabConflictDismiss) tabConflictDismiss.addEventListener("click", () => {
