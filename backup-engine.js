@@ -14,9 +14,13 @@
         focus: state.focus,
         lexical: state.lexical,
         archive: state.archive,
+        template: state.template,
+        layout: state.layout,
+        appearance: state.appearance,
         proofs: state.proofs,
         versions: state.versions,
         proofValidations: state.proofValidations || {},
+        proofAuthor: state.proofAuthor || { name: "", artisticName: "", signedAt: "" },
       },
       { stats: { manuscriptCount: docs.length, noteCount: notes.length, totalWords } }
     );
@@ -74,9 +78,13 @@
       focus: data.focus || currentState.focus,
       lexical: data.lexical || currentState.lexical,
       archive: data.archive || currentState.archive,
+      template: data.template || currentState.template,
+      layout: data.layout || currentState.layout,
+      appearance: data.appearance || currentState.appearance,
       proofs: data.proofs || {},
       versions: data.versions || {},
       proofValidations: data.proofValidations || {},
+      proofAuthor: data.proofAuthor || currentState.proofAuthor || { name: "", artisticName: "", signedAt: "" },
     };
   }
 
