@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v1087";
-const ASSET_VERSION = "20260714-offline-cache";
+const CACHE_NAME = "vereda-offline-v1088";
+const ASSET_VERSION = "20260715-navigation-cache";
 
 const CORE_ASSETS = [
   "./",
@@ -79,6 +79,7 @@ const CORE_ASSETS = [
   "./vereda-editorial.css",
   "./quotes-data.js",
   "./vereda-biblioteca-escrita.html",
+  "./app/index.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
   `./fonts/material-symbols-outlined.woff2`,
   "./icons/wood/escrevaral_wood_spritesheet.png",
@@ -134,11 +135,20 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(event.request)
         .then((response) => {
+          if (!response || response.status >= 400) {
+            return response;
+          }
+
           const responseClone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", responseClone));
+          const requestUrl = new URL(event.request.url);
+          const isRootPage = requestUrl.pathname === "/" || requestUrl.pathname.endsWith("/index.html");
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+            if (isRootPage) cache.put("./index.html", response.clone());
+          });
           return response;
         })
-        .catch(() => caches.match("./index.html"))
+        .catch(() => caches.match(event.request).then((cachedResponse) => cachedResponse || caches.match("./index.html")))
     );
     return;
   }
