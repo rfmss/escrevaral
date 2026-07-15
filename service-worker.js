@@ -47,6 +47,7 @@ const CORE_ASSETS = [
   `./typewriter-engine.js?v=${ASSET_VERSION}`,
   `./criterios-data.js?v=${ASSET_VERSION}`,
   `./syntax-engine.js?v=${ASSET_VERSION}`,
+  `./relative-clause-engine.js?v=${ASSET_VERSION}`,
   `./punctuation-engine.js?v=${ASSET_VERSION}`,
   `./analise-engine.js?v=${ASSET_VERSION}`,
   `./synonym-data.js?v=${ASSET_VERSION}`,

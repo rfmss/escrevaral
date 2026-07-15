@@ -183,6 +183,43 @@ html {
   letter-spacing: 0.03em;
 }
 
+.statusbar-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.statusbar-save::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+  opacity: 0.55;
+}
+
+.statusbar-save[data-save-state="saving"] {
+  color: var(--ochre);
+}
+
+.statusbar-save[data-save-state="saved"] {
+  color: var(--primary);
+}
+
+.statusbar-save[data-save-state="error"] {
+  color: var(--danger, #a33b32);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusbar-save {
+    transition: none;
+  }
+}
+
 .brand-lockup,
 .topbar-actions,
 .offline-badge,

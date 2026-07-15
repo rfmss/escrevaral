@@ -442,6 +442,7 @@ function persistState(status = "Salvo localmente") {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
   } catch (err) {
+    saveStatus.dataset.saveState = "error";
     saveStatus.textContent = err?.name === "QuotaExceededError"
       ? "Não foi possível salvar — espaço do navegador cheio. Faça uma cópia de segurança."
       : "Não foi possível salvar agora. Seu texto continua na tela — tente uma cópia de segurança.";
@@ -450,8 +451,9 @@ function persistState(status = "Salvo localmente") {
   }
 
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
-  saveStatus.textContent = `SALVO ${hhmm}`;
-  saveStatus.title = status;
+  saveStatus.dataset.saveState = "saved";
+  saveStatus.textContent = `Salvo neste navegador às ${hhmm}`;
+  saveStatus.title = `${status}. Para proteger o acervo fora deste aparelho, faça uma cópia de segurança no Arquivo.`;
   saveStatus.dataset.motion = "pulse";
   window.setTimeout(() => { saveStatus.dataset.motion = ""; }, 700);
 }

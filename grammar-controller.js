@@ -176,18 +176,23 @@ function decolorizeTextNodes(el) {
 // ── EDITOR RICO — FORMATAÇÃO E MODOS ────────────────────────────────────
 
 // ── PRIMEIRA ESCRITA SILENCIOSA ──────────────────────────────────────────
-// Ativado por handleWelcomeBlank(). Oculta comandos avançados até o autor
-// ter pelo menos 10 palavras — depois a interface aparece suavemente.
+// Ativado na primeira folha em branco. Oculta comandos avançados até a autora
+// ter pelo menos cinco palavras — ou decidir revelar as ferramentas.
 
 const FIRST_WRITING_WORDS = 5;
 
 function enterFirstWriting() {
-  shell.dataset.firstWriting = "1";
+  shell.classList.add("is-first-writing-session");
+  const revealButton = document.querySelector('[data-action="finish-first-writing-session"]');
+  if (revealButton) revealButton.hidden = false;
+  writingArea.removeEventListener("input", _onFirstWritingInput);
   writingArea.addEventListener("input", _onFirstWritingInput);
 }
 
 function exitFirstWriting() {
-  delete shell.dataset.firstWriting;
+  shell.classList.remove("is-first-writing-session");
+  const revealButton = document.querySelector('[data-action="finish-first-writing-session"]');
+  if (revealButton) revealButton.hidden = true;
   writingArea.removeEventListener("input", _onFirstWritingInput);
 }
 
