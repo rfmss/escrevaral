@@ -729,6 +729,23 @@ function openAddCompanionNote(bibliType) {
 const termsOverlay = document.getElementById("terms-overlay");
 const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
 
+
+function activateFirstWritingSession() {
+  if (!shell || localStorage.getItem(FIRST_WRITING_DONE_KEY)) return;
+  localStorage.setItem(FIRST_WRITING_STARTED_KEY, "1");
+  shell.classList.add("is-first-writing-session");
+  const reveal = document.querySelector('[data-action="finish-first-writing-session"]');
+  if (reveal) reveal.hidden = false;
+}
+
+function finishFirstWritingSession() {
+  localStorage.setItem(FIRST_WRITING_DONE_KEY, "1");
+  localStorage.removeItem(FIRST_WRITING_STARTED_KEY);
+  shell.classList.remove("is-first-writing-session");
+  const reveal = document.querySelector('[data-action="finish-first-writing-session"]');
+  if (reveal) reveal.hidden = true;
+}
+
 function switchAtelier(tab) {
   const view = document.querySelector(".academy-view");
   if (!view) return;
@@ -774,10 +791,13 @@ function acceptTerms(goTo) {
     state.template.selectedId = null;
     createBlankManuscript();
     setView("editor", { updateRoute: true });
+    activateFirstWritingSession();
   } else if (goTo === "guide") {
+    finishFirstWritingSession();
     // Abre o bento de categorias (passo 1) sem pré-selecionar nenhuma
     openCreateNote({ context: "guide" });
   } else if (goTo === "continue") {
+    finishFirstWritingSession();
     // Vai direto para o editor com o manuscrito mais recente
     if (state.manuscripts.length > 0) {
       const ms = [...state.manuscripts].sort((a, b) =>
@@ -1925,6 +1945,7 @@ const ACTION_HANDLERS = {
     }
   },
   "toggle-focus":            () => shell.classList.contains("is-focus") ? exitFocusMode() : enterFocusMode(),
+  "finish-first-writing-session": () => finishFirstWritingSession(),
   "exit-focus":              () => exitFocusMode(),
   "toggle-ruler":            () => toggleRuler(),
   "toggle-template-side":    () => toggleTemplateSide(),
@@ -2220,6 +2241,7 @@ document.addEventListener("click", (event) => {
 
   if (viewTarget) {
     event.preventDefault();
+    finishFirstWritingSession();
     setView(viewTarget.dataset.viewTarget, { updateRoute: true });
     const academiaTool   = viewTarget.dataset.academiaTool;
     const academiaScroll = viewTarget.dataset.academiaScroll;
@@ -3692,6 +3714,9 @@ function _bootstrap() {
   registerOfflineApp();
   initializeFilesystemBackup();
   checkTerms();
+  if (localStorage.getItem(FIRST_WRITING_STARTED_KEY) && !localStorage.getItem(FIRST_WRITING_DONE_KEY)) {
+    activateFirstWritingSession();
+  }
   setTimeout(renderSidebarQuote, 500);
   checkFirstVisit();
 
