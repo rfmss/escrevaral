@@ -311,6 +311,11 @@
   .fmt-editorial-toggle .fmt-label {
     display: block;
   }
+
+  /* Export always visible on mobile */
+  .format-bar:not(.is-editorial-open) [data-action="export-rtf"] {
+    display: flex;
+  }
   .fmt-editorial-toggle {
     display: flex;
   }

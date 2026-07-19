@@ -214,9 +214,22 @@ html {
   font-weight: 700;
 }
 
+.statusbar-save[data-motion="pulse"] {
+  animation: save-pulse 700ms ease;
+}
+
+@keyframes save-pulse {
+  0%   { opacity: 1; }
+  30%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .statusbar-save {
     transition: none;
+  }
+  .statusbar-save[data-motion="pulse"] {
+    animation: none;
   }
 }
 
