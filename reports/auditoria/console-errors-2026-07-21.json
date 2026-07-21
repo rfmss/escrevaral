@@ -1,0 +1,76 @@
+{
+  "data": "2026-07-21",
+  "tem_erro": true,
+  "resultados": [
+    {
+      "cenario": "acervo",
+      "descricao": "Tela inicial — lista de manuscritos",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "editor-novo",
+      "descricao": "Criar e abrir manuscrito novo",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "editor-escrita",
+      "descricao": "Digitar texto no editor",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "guia-de-escrita",
+      "descricao": "Abrir guia de escrita",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    },
+    {
+      "cenario": "academia",
+      "descricao": "Aba Academia",
+      "erros": [
+        {
+          "tipo": "eval-error",
+          "mensagem": "Page.evaluate: Error: aba Academia não encontrada\n    at eval (eval at evaluate (:313:29), <anonymous>:1:114)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:313:29)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "url": "",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "prova-autoria",
+      "descricao": "Aba Prova de Autoria",
+      "erros": [
+        {
+          "tipo": "eval-error",
+          "mensagem": "Page.evaluate: Error: aba Prova não encontrada\n    at eval (eval at evaluate (:313:29), <anonymous>:1:128)\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:313:29)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+          "url": "",
+          "linha": 0
+        }
+      ],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": true
+    },
+    {
+      "cenario": "copia-seguranca",
+      "descricao": "Acionar cópia de segurança",
+      "erros": [],
+      "avisos": [],
+      "erros_rede": [],
+      "tem_problema": false
+    }
+  ]
+}
