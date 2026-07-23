@@ -2,13 +2,13 @@
 
 Base URL: `http://localhost:8799`
 Navegador: `/usr/bin/chromium`
-Casos: 33
-Alvos: 33
+Casos: 17
+Alvos: 17
 Alvos divergentes: 0
 
 ## Resumo por caso
 
-- ok: 33
+- ok: 17
 
 ## Todos os casos
 
@@ -28,20 +28,4 @@ Alvos divergentes: 0
 - `ok` `estreita-verbo-01`: Ele estreita os olhos antes de responder.
 - `ok` `participio-adjetivado-contido-01`: Ele respondeu com um sorriso contido.
 - `ok` `participio-adjetivado-oculto-01`: O socio oculto apareceu no fim.
-- `ok` `canto-substantivo-01`: O canto do pássaro preencheu o quintal.
-- `ok` `canto-verbo-01`: Eu canto quando estou feliz.
-- `ok` `cedo-adverbio-01`: Ela acordou cedo para escrever.
-- `ok` `cedo-verbo-01`: Cedo meu lugar para quem precisar.
-- `ok` `vale-substantivo-01`: O vale verde escondia uma aldeia.
-- `ok` `vale-verbo-expressao-01`: Vale a pena tentar mais uma vez.
-- `ok` `alto-adverbio-pos-verbo-01`: Ela falou alto para ser ouvida.
-- `ok` `alto-adjetivo-predicativo-01`: A janela estava alta demais para alcançar.
-- `ok` `jogo-verbo-pos-pronome-01`: Eu jogo toda semana com amigos.
-- `ok` `jogo-substantivo-01`: O jogo terminou no último minuto.
-- `ok` `acordo-substantivo-01`: O acordo foi assinado ontem.
-- `ok` `acordo-verbo-01`: Eu acordo cedo todo dia.
-- `ok` `sonho-substantivo-01`: O sonho dela era escrever.
-- `ok` `sonho-verbo-01`: Eu sonho com uma vida diferente.
-- `ok` `gosto-substantivo-01`: O gosto amargo ficou na boca.
-- `ok` `gosto-verbo-01`: Eu gosto de ler antes de dormir.
 - `ok` `fala-sussurrar-definicao-01`: Ela sussurrou o nome dele para que ninguem ouvisse.

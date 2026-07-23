@@ -487,18 +487,6 @@
 [data-theme="scriptorium"] .editor-paper .format-bar-wrap::after {
   background: linear-gradient(to left, #d4c5a9 20%, transparent);
 }
-/* No modo página o pergaminho da barra some — o esmaecimento funde para o fundo escuro */
-[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap:hover,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap.is-scroll-active {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--line);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap::before {
-  background: linear-gradient(to right, var(--paper) 20%, transparent);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar-wrap::after {
-  background: linear-gradient(to left, var(--paper) 20%, transparent);
-}
 
 /* Writing area em modo colorido */
 .writing-area.is-grammar-colored {
@@ -525,7 +513,6 @@
 .gw-numeral       { color: #f9a825; }   /* âmbar brilhante    — quantidade */
 .gw-interjeicao   { color: #d84315; }   /* laranja queimado   — emoção */
 .gw-proprio       { color: #1565c0; font-weight: 700; letter-spacing: 0.01em; } /* azul + bold */
-.gw-indeterminado { color: #9e9e9e; }   /* cinza neutro — classe não identificada */
 
 /* Temas escuros: cores mais claras para gramática colorida sobre fundo escuro */
 [data-theme="scriptorium"] .gw-verbo,

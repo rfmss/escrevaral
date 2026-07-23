@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v1087";
-const ASSET_VERSION = "20260714-offline-cache";
+const CACHE_NAME = "vereda-offline-v934";
+const ASSET_VERSION = "20260627-v934";
 
 const CORE_ASSETS = [
   "./",
@@ -24,7 +24,6 @@ const CORE_ASSETS = [
   `./css/10-mobile-nav.css?v=${ASSET_VERSION}`,
   `./css/11-badges.css?v=${ASSET_VERSION}`,
   `./css/12-training-modes.css?v=${ASSET_VERSION}`,
-  `./css/wood-icons.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,
@@ -37,7 +36,6 @@ const CORE_ASSETS = [
   `./badges-engine.js?v=${ASSET_VERSION}`,
   `./version-engine.js?v=${ASSET_VERSION}`,
   `./export-engine.js?v=${ASSET_VERSION}`,
-  `./import-engine.js?v=${ASSET_VERSION}`,
   `./template-engine.js?v=${ASSET_VERSION}`,
   `./precision-engine.js?v=${ASSET_VERSION}`,
   `./voice-engine.js?v=${ASSET_VERSION}`,
@@ -81,7 +79,6 @@ const CORE_ASSETS = [
   "./vereda-biblioteca-escrita.html",
   `./manifest.webmanifest?v=${ASSET_VERSION}`,
   `./fonts/material-symbols-outlined.woff2`,
-  "./icons/wood/escrevaral_wood_spritesheet.png",
   `./icons/escrevaral-aba-dark.svg?v=${ASSET_VERSION}`,
   `./icons/escrevaral-aba-light.svg?v=${ASSET_VERSION}`,
   `./icons/escrevaral-nav-dark.svg?v=${ASSET_VERSION}`,

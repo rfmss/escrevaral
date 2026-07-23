@@ -2,9 +2,6 @@
 // Depende de: state-store.js, voice-engine.js, rimalab-engine.js, decolonial-engine.js, rights-engine.js
 
 function useActiveManuscriptForVoice() {
-  const tab = document.getElementById("at-voice");
-  if (tab) tab.checked = true;
-
   if (!isManuscriptDocument()) {
     voiceInput.value = "";
     updateVoiceCount();
@@ -232,7 +229,7 @@ function exportAnaliseGeral() {
   const alertas = VeredaAnalise.interpretarResultado(criterios);
   const date = new Date().toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
   const sep = "═".repeat(52);
-  const DIM = { economia: "Economia", clareza: "Clareza", ritmo: "Ritmo", voz: "Voz", lexico: "Léxico", pov: "Ponto de vista", norma: "Norma", confusoes: "Confusões", pleonasmos: "Pleonasmos" };
+  const DIM = { economia: "Economia", clareza: "Clareza", ritmo: "Ritmo", voz: "Voz", lexico: "Léxico", pov: "Ponto de vista", norma: "Norma" };
   const lines = [
     "ANÁLISE GERAL — Escrevaral",
     sep,

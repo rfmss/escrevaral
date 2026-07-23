@@ -259,18 +259,12 @@
   color: #3a2c22;
 }
 
-/* Vereda: grupo Guia/Ler/Fundo fica sobre o pergaminho — usar chip quente, nao bloco escuro */
-[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls {
-  background: rgba(58, 44, 34, 0.08);
-  border-color: rgba(58, 44, 34, 0.18);
-}
+/* Vereda: grupo Guia/Ler/Mesa tem fundo próprio escuro (--surface-low) — ink claro evita texto invisível */
 [data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button {
-  color: #5f4b3a;
+  color: var(--muted);
 }
 [data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover {
-  background: rgba(58, 44, 34, 0.10);
-  color: #1c1714;
-  border-color: transparent;
+  color: var(--soft-ink);
 }
 
 [data-theme="scriptorium"] .editor-paper .fmt-btn:hover {
@@ -349,58 +343,6 @@
   opacity: 1;
 }
 
-/* Vereda: folha do modo página segue o pergaminho do editor-paper — tinta fixa escura */
-[data-theme="scriptorium"] .manuscript-page {
-  background: #d4c5a9;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.4);
-}
-[data-theme="scriptorium"] .page-body {
-  color: #3a2c22;
-}
-[data-theme="scriptorium"] .page-body:focus {
-  background: #d8cab0;
-  color: #1c1714;
-}
-[data-theme="scriptorium"] .page-body h1 {
-  color: #1c1714;
-}
-[data-theme="scriptorium"] .page-header {
-  color: #7a6850;
-  border-bottom-color: rgba(58, 44, 34, 0.18);
-}
-[data-theme="scriptorium"] .page-footer {
-  color: #7a6850;
-  border-top-color: rgba(58, 44, 34, 0.18);
-}
-
-/* Vereda: no modo página o pergaminho da barra some — ferramentas voltam à tinta clara do tema */
-[data-theme="scriptorium"] .is-page-mode .editor-paper .title-input,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .format-bar,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .fmt-btn,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .editor-mode-bar .secondary-button,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .editor-view-btn,
-[data-theme="scriptorium"] .is-page-mode .editor-paper .editor-delete-btn,
-[data-theme="scriptorium"] .is-page-mode .editor-paper [data-action="open-reader-mode"],
-[data-theme="scriptorium"] .is-page-mode .editor-paper .page-settings-label {
-  color: var(--soft-ink);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .fmt-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--ink);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .editor-view-btn.is-active {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--ink);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .fmt-select {
-  background: var(--surface-low);
-  border-color: var(--line);
-  color: var(--soft-ink);
-}
-[data-theme="scriptorium"] .is-page-mode .editor-paper .fmt-scroll-arrow {
-  color: var(--soft-ink);
-}
-
 [data-theme="scriptorium"] .certificate-paper .proof-session-bar,
 [data-theme="scriptorium"] .certificate-paper .proof-actions {
   background: rgba(19, 15, 13, 0.10);
@@ -465,12 +407,6 @@
   background: color-mix(in srgb, var(--primary) 22%, var(--surface-mid));
   color: var(--primary);
   border-color: color-mix(in srgb, var(--primary) 35%, transparent);
-}
-[data-theme="scriptorium"] .editor-split:not(.is-template-collapsed) .editor-paper .editor-mode-bar .editor-view-controls .secondary-button[data-action="toggle-template-panel"],
-[data-theme="scriptorium"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button[aria-pressed="true"] {
-  background: rgba(201, 125, 50, 0.14);
-  color: #7c4616;
-  border-color: rgba(158, 94, 32, 0.24);
 }
 
 [data-theme="scriptorium"] .crono-month-btn {
@@ -842,11 +778,6 @@
 [data-theme="cerrado-dark"] .gw-substantivo,
 [data-theme="mata-dark"] .gw-substantivo,
 [data-theme="amazonia-dark"] .gw-substantivo   { color: #64b5f6; }
-
-[data-theme="scriptorium"] .gw-indeterminado,
-[data-theme="cerrado-dark"] .gw-indeterminado,
-[data-theme="mata-dark"] .gw-indeterminado,
-[data-theme="amazonia-dark"] .gw-indeterminado { color: #616161; }
 
 [data-theme="scriptorium"] .gw-adjetivo,
 [data-theme="cerrado-dark"] .gw-adjetivo,

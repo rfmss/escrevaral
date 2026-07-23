@@ -327,8 +327,6 @@ function renderInspector() {
     if (fleschScoreEl) fleschScoreEl.textContent = "—";
     if (fleschLabelEl) fleschLabelEl.innerHTML = "Escreva para ver";
     if (densityEl) densityEl.hidden = true;
-    clearTimeout(_viciosTimer);
-    renderViciosObserver(manuscript, text, wordCount);
     return;
   }
 
@@ -367,61 +365,6 @@ function renderInspector() {
   } else if (vpSection) {
     vpSection.hidden = true;
   }
-
-  scheduleViciosObserver(manuscript, text, wordCount);
-}
-
-let _viciosTimer = null;
-function scheduleViciosObserver(manuscript, text, wordCount) {
-  clearTimeout(_viciosTimer);
-  _viciosTimer = setTimeout(() => renderViciosObserver(manuscript, text, wordCount), 700);
-}
-
-function renderViciosObserver(manuscript, text, wordCount) {
-  const section   = document.querySelector("[data-vicios-section]");
-  const summaryEl = document.querySelector("[data-vicios-summary]");
-  const listEl    = document.querySelector("[data-vicios-list]");
-  const moreBtn   = document.querySelector("[data-vicios-more]");
-  if (!section || !summaryEl || !listEl) return;
-
-  if (!manuscript || !isManuscriptDocument(manuscript)) {
-    section.hidden = true;
-    return;
-  }
-  section.hidden = false;
-
-  if (wordCount < 50 || !window.VeredaAnalise) {
-    summaryEl.innerHTML = `<span class="inspector-empty">Os pontos de atenção aparecem aqui a partir de 50 palavras</span>`;
-    listEl.innerHTML = "";
-    if (moreBtn) moreBtn.hidden = true;
-    return;
-  }
-
-  // Teto de leitura: em manuscritos muito longos, analisa só o trecho mais recente
-  // para manter a leitura ao vivo leve. A leitura completa continua no Espelho de Voz.
-  const VICIOS_CHAR_CAP = 20000;
-  const textoLido = text.length > VICIOS_CHAR_CAP ? text.slice(-VICIOS_CHAR_CAP) : text;
-
-  const criterios = VeredaAnalise.analisar(textoLido, buildAnaliseContext(manuscript));
-  const alertas = VeredaAnalise.interpretarResultado(criterios);
-  const score = _calcHealthScore(alertas);
-
-  if (!alertas.length) {
-    summaryEl.innerHTML = `${_healthScoreBadge(score)}<span>Nenhum ponto sinalizado nesta leitura.</span>`;
-    listEl.innerHTML = "";
-    if (moreBtn) moreBtn.hidden = true;
-    return;
-  }
-
-  const top = alertas.slice(0, 3);
-  summaryEl.innerHTML = `${_healthScoreBadge(score)}<span>${alertas.length} ${alertas.length === 1 ? "ponto" : "pontos"} de atenção</span>`;
-  listEl.innerHTML = top.map(a => `
-    <li class="voice-alerta voice-alerta-${escapeHtml(a.nivel)}">
-      <span class="voice-alerta-dim">${escapeHtml(getDimLabel(a.dim))}</span>
-      <span class="voice-alerta-body">${escapeHtml(a.msg)}</span>
-    </li>
-  `).join("");
-  if (moreBtn) moreBtn.hidden = false;
 }
 
 function renderTemplateReference() {

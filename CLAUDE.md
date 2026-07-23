@@ -2,7 +2,7 @@
 
 Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + HTML único. Sem framework, sem IA de terceiros, sem envio de dados.
 
-**Pasta oficial de trabalho:** `/home/rafamass/projetos/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Workspace/Writing/Vereda/variantes/Veredav3-principal/`
+**Pasta oficial de trabalho:** `/home/rafamass/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Veredav3/`
 **Projeto atual:** Escrevaral. "Vereda" é legado/histórico e pode aparecer em nomes internos antigos.
 **Deploy:** push em `main` → https://escrevaral.com (GitHub Pages + Cloudflare)
 **QA local:** `python3 -m http.server 8799` + Playwright headless
@@ -211,7 +211,7 @@ Antes de adicionar qualquer entrada em `adjetivos_comuns`, verificar se a forma 
 
 Ao compactar, preservar obrigatoriamente:
 
-1. **Pasta oficial:** `/home/rafamass/projetos/escrevaral/` — ignorar `/home/rafamass/Workspace/Writing/Vereda/variantes/Veredav3-principal/`
+1. **Pasta oficial:** `/home/rafamass/escrevaral/` — ignorar `/home/rafamass/Veredav3/`
 2. **Versionamento:** toda edição JS/CSS exige bump de `?v=YYYYMMDD-slug` em `index.html` (71 ocorrências) + `ASSET_VERSION` + `CACHE_NAME` em `service-worker.js`
 3. **Pilares inegociáveis:** português brasileiro integral; sem rolagem horizontal; metáforas silenciosas; localStorage intacto
 4. **Vocabulário:** Manuscrito não Texto; Acervo não repositório; Guia de escrita não template

@@ -5,23 +5,6 @@
 
 ---
 
-## Meta da equipe
-
-A meta de continuidade do Escrevaral e montar, coordenar e manter documentada no repositório uma equipe de agentes especializados.
-
-Nucleo minimo esperado:
-
-- frontend
-- backend
-- QA
-- DevOps
-- documentacao
-- revisao
-
-Esses papeis convivem com os cargos operacionais abaixo. Quando algum deles estiver implicito demais ou sem dono claro, isso conta como lacuna de continuidade do projeto.
-
----
-
 ## Recado operacional
 
 Claude: este arquivo é um quadro de operação. As pílulas abaixo estão prontas para pickup. Pode executar em ordem, uma por vez, validando risco local antes de abrir a próxima.

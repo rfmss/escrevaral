@@ -45,19 +45,6 @@
             "Noun"
           ],
           "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 6,
-          "token": "alto",
-          "antes": [
-            "Adjective"
-          ],
-          "depois": [
-            "Adjective",
-            "Adverb"
-          ],
-          "classe": "evolucao"
         }
       ]
     },
@@ -356,21 +343,7 @@
       "frase": "Ela terminou em segundo lugar sem reclamar.",
       "zona": "ordinal",
       "gabarito": "\"segundo\" = Numeral ordinal (não Conjunção nem Preposição)",
-      "diffs": [
-        {
-          "tipo": "morfologia",
-          "indice": 3,
-          "token": "segundo",
-          "antes": [
-            "Conjunction"
-          ],
-          "depois": [
-            "Preposition",
-            "Conjunction"
-          ],
-          "classe": "neutro"
-        }
-      ]
+      "diffs": []
     },
     {
       "frase": "Foi a terceira vez que ele tentou começar o romance.",
@@ -449,9 +422,9 @@
           "token": "Ora",
           "antes": [],
           "depois": [
-            "Interjection"
+            "Noun"
           ],
-          "classe": "evolucao"
+          "classe": "neutro"
         }
       ]
     },
@@ -473,18 +446,6 @@
           "antes": [],
           "depois": [
             "Preposition"
-          ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 8,
-          "token": "corredor",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Noun"
           ],
           "classe": "neutro"
         }
@@ -630,8 +591,7 @@
           "token": "escrito",
           "antes": [],
           "depois": [
-            "Verb",
-            "Adjective"
+            "Verb"
           ],
           "classe": "neutro"
         }
@@ -715,8 +675,7 @@
           "token": "entregue",
           "antes": [],
           "depois": [
-            "Verb",
-            "Adjective"
+            "Verb"
           ],
           "classe": "neutro"
         }
@@ -746,8 +705,7 @@
           "token": "lidos",
           "antes": [],
           "depois": [
-            "Verb",
-            "Adjective"
+            "Verb"
           ],
           "classe": "neutro"
         }
@@ -851,16 +809,6 @@
             "Adjective"
           ],
           "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 4,
-          "token": "diante",
-          "antes": [],
-          "depois": [
-            "Noun"
-          ],
-          "classe": "neutro"
         }
       ]
     },
@@ -927,17 +875,6 @@
             "Verb"
           ],
           "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 7,
-          "token": "quem",
-          "antes": [],
-          "depois": [
-            "Pronoun",
-            "Noun"
-          ],
-          "classe": "neutro"
         }
       ]
     },
@@ -953,18 +890,6 @@
           "antes": [],
           "depois": [
             "Noun"
-          ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 10,
-          "token": "vazio",
-          "antes": [
-            "Noun"
-          ],
-          "depois": [
-            "Adjective"
           ],
           "classe": "neutro"
         }
@@ -1160,16 +1085,6 @@
             "Verb"
           ],
           "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 6,
-          "token": "meses",
-          "antes": [],
-          "depois": [
-            "Noun"
-          ],
-          "classe": "neutro"
         }
       ]
     },
@@ -1188,18 +1103,6 @@
           "depois": [
             "Determiner",
             "Noun"
-          ],
-          "classe": "neutro"
-        },
-        {
-          "tipo": "morfologia",
-          "indice": 6,
-          "token": "final",
-          "antes": [
-            "Noun"
-          ],
-          "depois": [
-            "Adjective"
           ],
           "classe": "neutro"
         }
@@ -1625,18 +1528,6 @@
       "zona": "tempo-verbal",
       "gabarito": "sem alerta; alternância temporal é recurso narrativo",
       "diffs": [
-        {
-          "tipo": "morfologia",
-          "indice": 5,
-          "token": "redor",
-          "antes": [
-            "Verb"
-          ],
-          "depois": [
-            "Noun"
-          ],
-          "classe": "neutro"
-        },
         {
           "tipo": "morfologia",
           "indice": 7,
