@@ -422,6 +422,7 @@ function getDefaultAppearanceState() {
 }
 
 function persistState(status = "Salvo localmente") {
+  const now = new Date();
   state.meta = state.meta || {};
 
   try {
@@ -431,36 +432,28 @@ function persistState(status = "Salvo localmente") {
       const ourAt = state.meta.lastSavedAt;
       if (storedAt && ourAt && storedAt > ourAt) {
         document.dispatchEvent(new CustomEvent("vrda:tab-conflict"));
-        saveStatus.dataset.saveState = "error";
-        saveStatus.textContent = "Outra aba salvou uma versão mais nova — esta aba não sobrescreveu o texto";
-        saveStatus.title = "Recarregue para abrir a revisão mais recente ou faça uma cópia do texto desta aba antes de fechar.";
-        return false;
       }
     }
   } catch (_) {}
 
-  const now = new Date();
   state.meta.lastSavedAt = now.toISOString();
   const { lexical: { selectedPhrase: _sp, selectedRange: _sr, selectedContext: _sc, ...lexicalRest }, ...stateRest } = state;
 
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
   } catch (err) {
-    saveStatus.dataset.saveState = "error";
     saveStatus.textContent = err?.name === "QuotaExceededError"
       ? "Não foi possível salvar — espaço do navegador cheio. Faça uma cópia de segurança."
       : "Não foi possível salvar agora. Seu texto continua na tela — tente uma cópia de segurança.";
     saveStatus.title = "Erro ao salvar localmente";
-    return false;
+    return;
   }
 
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
-  saveStatus.dataset.saveState = "saved";
-  saveStatus.textContent = `Salvo neste navegador às ${hhmm}`;
-  saveStatus.title = `${status}. Para proteger o acervo fora deste aparelho, faça uma cópia de segurança no Arquivo.`;
+  saveStatus.textContent = `SALVO ${hhmm}`;
+  saveStatus.title = status;
   saveStatus.dataset.motion = "pulse";
   window.setTimeout(() => { saveStatus.dataset.motion = ""; }, 700);
-  return true;
 }
 
 function persistChecklistState(status = "Checklist atualizado") {

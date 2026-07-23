@@ -20,13 +20,12 @@ import argparse
 import json
 import shutil
 import sys
-import os
 from pathlib import Path
 from datetime import date
 
 from playwright.async_api import async_playwright
 
-BASE_URL   = os.environ.get("ESCREVARAL_BASE_URL", "http://localhost:8799")
+BASE_URL   = "http://localhost:8799"
 CORPUS     = Path(__file__).parent / "corpus-catedratico.txt"
 GOLDEN     = Path(__file__).parent / "golden" / "corpus-output.json"
 REPORTS    = Path(__file__).parent.parent / "reports" / "agente"

@@ -531,8 +531,6 @@ function updateCurrentMetadata() {
 
 function queueSave() {
   saveStatus.textContent = "Salvando...";
-  saveStatus.dataset.saveState = "saving";
-  saveStatus.title = "Alterações ainda não gravadas";
   window.clearTimeout(saveTimer);
   saveTimer = window.setTimeout(() => { saveTimer = null; persistState(); }, 450);
 }
@@ -830,7 +828,6 @@ function acceptTerms(goTo) {
     state.template.selectedId = null;
     createBlankManuscript();
     setView("editor", { updateRoute: true });
-    enterFirstWriting();
   } else if (goTo === "guide") {
     // Abre o bento de categorias (passo 1) sem pré-selecionar nenhuma
     openCreateNote({ context: "guide" });
@@ -2066,7 +2063,6 @@ const ACTION_HANDLERS = {
   "accept-terms-blank":      () => acceptTerms("blank"),
   "accept-terms-guide":      () => acceptTerms("guide"),
   "accept-terms-continue":   () => acceptTerms("continue"),
-  "finish-first-writing-session": () => exitFirstWriting(),
   "toggle-ob-disclosure":    () => {
     const body    = document.getElementById("ob-disc-body");
     const toggle  = document.querySelector("[data-action='toggle-ob-disclosure']");

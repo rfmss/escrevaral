@@ -1,76 +1,101 @@
-# Logs and temp files
-*.log
-*.tmp
-*.swp
+# ── Design / binários ────────────────────────────────────────────
+*.psd
+*.ai
+*.sketch
+*.xd
+*.fig
 
-# Environment
+# ── Documentos ───────────────────────────────────────────────────
+*.pdf
+*.docx
+*.doc
+
+# ── Sistema ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Node ─────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Ambiente ─────────────────────────────────────────────────────
 .env
 .env.local
-*.env.*
+.escrevaral-qa.env
 
-# Dependencies
-.venv/
-venv/
-node_modules/
+# ── Editor ───────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
 
-# Build artifacts
+# ── Builds ───────────────────────────────────────────────────────
 dist/
 build/
-target/
 
-# Python
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+
+# ── Ferramentas de IA / CLI local ────────────────────────────────
+.claude/*
+!.claude/settings.json
+!.claude/skills/
+!.claude/skills/**
+.codex/
+.agents/sentinel/*.log
+.agents/sentinel/*.pid
+.agents/sentinel/state.json
+.agents/sentinel/*.tmp
+.agents/sentinel-auto/*.log
+.agents/sentinel-auto/*.pid
+.agents/sentinel-auto/state.json
+.agents/sentinel-auto/*.tmp
+.agents/awake-ides/*.log
+.agents/awake-ides/*.pid
+.agents/awake-ides/state.json
+.agents/awake-ides/*.tmp
+.agents/conversas/*.md
+.agents/auditorias/*.md
+
+# ── Credenciais e chaves ─────────────────────────────────────────
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*secret*
+*credentials*
+*token*.json
+*token*.txt
+auth.json
+playwright-state.json
+
+# ── Python ───────────────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
-.Python
-*.so
-.coverage
-coverage/
-htmlcov/
+venv/
+.venv/
+.python-version
 
-# Editors
-.vscode/
-.idea/
+# ── Acervos locais de livros (pesados, não vão ao repo) ──────────
+Livros/
+LivrosENG/
+livrosPTBR/
 
-# OS
-.DS_Store
-Thumbs.db
+# ── Experimentos e rascunhos locais ──────────────────────────────
+dark-ensaio/
+experimentos/
 
-# Compression
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
+# ── Snapshots e provas locais ────────────────────────────────────
+snapshots/
 
-# Testing
-.mypy_cache/
-.pytest_cache/
-coverage.xml
-*.gcda
-*.gcno
+# ── Screenshots de auditoria (PNG pesados, gerados localmente) ───
+reports/**/*.png
+reports/**/*.jpg
 
-# Gradle
-.gradle/
-build/
+# ── Marca histórica e ativos de design (movidos para assets/marca-historico) ──
+assets/marca-historico/
 
-# Reports
-reports/auditoria/*.md
+# ── Legado não publicado ──────────────────────────────────────────
+docs/_legado/
