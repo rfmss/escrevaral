@@ -83,14 +83,3 @@ a {
   background-size: 180px 180px;
 }
 
-/* ── FOCUS VISUAL ──────────────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-  border-radius: inherit;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
-}
-

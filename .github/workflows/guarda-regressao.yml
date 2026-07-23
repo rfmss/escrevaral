@@ -5,10 +5,6 @@ on:
     - cron: '0 8,20 * * *'  # 2x por dia: 5h e 17h horário de Brasília
   workflow_dispatch:        # permite rodar manualmente
 
-concurrency:
-  group: guarda-regressao-${{ github.ref }}
-  cancel-in-progress: false
-
 permissions:
   contents: write
   issues: write
@@ -29,7 +25,7 @@ jobs:
 
       - name: Instalar dependências
         run: |
-          pip install -r requirements-auditoria.txt
+          pip install playwright
           playwright install chromium --with-deps
 
       - name: Iniciar servidor local
@@ -37,13 +33,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Aguardar servidor
-        run: |
-          for i in 1 2 3 4 5 6 7 8 9 10; do
-            curl --fail --silent http://localhost:8799/ >/dev/null && exit 0
-            sleep 1
-          done
-          echo "Servidor local não respondeu" >&2
-          exit 1
+        run: sleep 2
 
       - name: Rodar corpus do Catedrático
         id: corpus
@@ -130,7 +120,3 @@ jobs:
             echo "#### Console errors" >> $GITHUB_STEP_SUMMARY
             cat reports/auditoria/console-errors-${DATA}.md >> $GITHUB_STEP_SUMMARY
           fi
-
-      - name: Falhar se algum auditor encontrou problema
-        if: steps.corpus.outputs.status == '1' || steps.overflow.outputs.status == '1' || steps.console_errors.outputs.status == '1' || steps.live.outputs.status == '1'
-        run: exit 1

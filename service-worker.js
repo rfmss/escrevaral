@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v1089";
-const ASSET_VERSION = "20260719-confianca";
+const CACHE_NAME = "vereda-offline-v1087";
+const ASSET_VERSION = "20260714-offline-cache";
 
 const CORE_ASSETS = [
   "./",
@@ -47,7 +47,6 @@ const CORE_ASSETS = [
   `./typewriter-engine.js?v=${ASSET_VERSION}`,
   `./criterios-data.js?v=${ASSET_VERSION}`,
   `./syntax-engine.js?v=${ASSET_VERSION}`,
-  `./relative-clause-engine.js?v=${ASSET_VERSION}`,
   `./punctuation-engine.js?v=${ASSET_VERSION}`,
   `./analise-engine.js?v=${ASSET_VERSION}`,
   `./synonym-data.js?v=${ASSET_VERSION}`,

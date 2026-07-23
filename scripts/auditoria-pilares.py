@@ -172,7 +172,7 @@ def auditar(browser, vp):
 
 
 with sync_playwright() as p:
-    browser = p.chromium.launch(args=["--no-sandbox"])
+    browser = p.chromium.launch()
     for vp in VIEWPORTS:
         auditar(browser, vp)
     browser.close()

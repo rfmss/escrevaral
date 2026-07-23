@@ -494,48 +494,42 @@
     {
       id: "PONT-18", categoria: "vírgula obrigatória — oração adjetiva explicativa",
       fonte: "Bechara § 623 (g); Moreno p. 79; Cunha & Cintra p. 655",
-      criterio: "Oração adjetiva com leitura explicativa segura exige vírgula antes de 'que'.",
+      criterio: "Oração adjetiva explicativa (referência ao conjunto todo) exige vírgula antes de 'que'.",
       exemplo: "As baleias, que têm sangue quente, precisam respirar.",
       contraexemplo: "As baleias que têm sangue quente precisam respirar. [quando sentido é explicativo]",
-      acao: "Adicione a vírgula: o contexto indica que a oração explica o referente inteiro, sem selecionar um subconjunto.",
+      acao: "Adicione vírgula antes de 'que' se a oração se refere ao conjunto inteiro do antecedente.",
       severity: "alta",
-      detect(text, contextualReadings) {
-        if (!global.VeredaRelativeClauses) return [];
-        return contextualReadings
-          .filter(reading => reading.type === "explicativa" && reading.confidence === "alta" && !reading.hasComma)
-          .map(reading => ({
-            fragment: reading.fragment,
-            pos: reading.pos,
-            confidence: reading.confidence,
-            interpretation: reading.type,
-            evidence: reading.evidence,
-            score: reading.score,
-            contextual: true,
-          }));
+      detect(text) {
+        const issues = [];
+        const re = /\b([A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]{2,}(?:\s+[A-ZÁÉÍÓÚ][a-záàâãéèêíîóòôõúùûç]+)*)\s+que\b/g;
+        let m;
+        while ((m = re.exec(text)) !== null) {
+          const before = text.slice(Math.max(0, m.index - 3), m.index);
+          if (before.includes(",")) continue;
+          if (/^(um|uma|o|a|os|as|seu|sua|meu|minha)\s/.test(m[1].toLowerCase())) continue;
+          // Nome próprio simples (sem espaço) — ambíguo demais para marcar com segurança
+          if (!/\s/.test(m[1])) continue;
+          issues.push({ fragment: m[0].trim(), pos: m.index });
+        }
+        const reUniv = /\b(todos os|todas as|ambos os|ambas as)\s+[a-záàâãéèêíîóòôõúùûç]+\s+que\b/g;
+        while ((m = reUniv.exec(text)) !== null) {
+          if (!text.slice(Math.max(0, m.index - 2), m.index).includes(","))
+            issues.push({ fragment: m[0].trim(), pos: m.index });
+        }
+        return issues;
       },
     },
 
     {
       id: "PONT-19", categoria: "vírgula proibida — oração adjetiva restritiva",
       fonte: "Bechara (conclusão); Moreno p. 79; Cunha & Cintra p. 655",
-      criterio: "Oração adjetiva com leitura restritiva segura não leva vírgula antes de 'que'.",
-      exemplo: "Apenas os políticos que foram condenados perderam o mandato após o julgamento.",
-      contraexemplo: "Apenas os políticos, que foram condenados, perderam o mandato após o julgamento.",
-      acao: "Remova a vírgula: o contexto delimita explicitamente quais referentes pertencem ao conjunto.",
+      criterio: "Oração adjetiva restritiva (delimita o antecedente) não leva vírgula antes de 'que'.",
+      exemplo: "Os políticos que são corruptos deveriam perder o mandato.",
+      contraexemplo: "Os políticos, que são corruptos, deveriam perder o mandato. [quando sentido é restritivo]",
+      acao: "Remova a vírgula antes de 'que' se a oração restringe e identifica o antecedente.",
       severity: "alta",
-      detect(text, contextualReadings) {
-        if (!global.VeredaRelativeClauses) return [];
-        return contextualReadings
-          .filter(reading => reading.type === "restritiva" && reading.confidence === "alta" && reading.hasComma)
-          .map(reading => ({
-            fragment: reading.fragment,
-            pos: reading.pos,
-            confidence: reading.confidence,
-            interpretation: reading.type,
-            evidence: reading.evidence,
-            score: reading.score,
-            contextual: true,
-          }));
+      detect(text) {
+        return all(/\b(um|uma)\s+[a-záàâãéèêíîóòôõúùûç]{3,},\s+que\b/g, text);
       },
     },
 
@@ -645,25 +639,17 @@
   const SEVERITY_MAP = Object.fromEntries(ALL_RULES.map(r => [r.id, r.severity || "média"]));
 
   function analyze(text) {
-    if (!text?.trim()) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 }, contextualReadings: [] };
-    const contextualReadings = global.VeredaRelativeClauses ? global.VeredaRelativeClauses.analyze(text) : [];
-    if (text.trim().split(/\s+/).length < 10) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 }, contextualReadings };
+    if (!text?.trim()) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 } };
+    if (text.trim().split(/\s+/).length < 10) return { issues: [], ruleCount: ALL_RULES.length, resumo: { alta: 0, media: 0, baixa: 0 } };
     const issues = [];
     for (const rule of ALL_RULES) {
       try {
-        for (const issue of rule.detect(text, contextualReadings)) {
+        for (const issue of rule.detect(text)) {
           issues.push({
             ruleId: rule.id, categoria: rule.categoria, fonte: rule.fonte,
             criterio: rule.criterio, exemplo: rule.exemplo, acao: rule.acao || "",
             fragment: issue.fragment, pos: issue.pos ?? -1,
             severity: SEVERITY_MAP[rule.id],
-            ...(issue.contextual ? {
-              contextual: true,
-              confidence: issue.confidence,
-              interpretation: issue.interpretation,
-              evidence: issue.evidence,
-              score: issue.score,
-            } : {}),
           });
         }
       } catch (_) { /* regex falhou — ignorar */ }
@@ -673,12 +659,7 @@
       media: issues.filter(i => i.severity === "média").length,
       baixa: issues.filter(i => i.severity === "baixa").length,
     };
-    return {
-      issues,
-      ruleCount: ALL_RULES.length,
-      resumo,
-      contextualReadings,
-    };
+    return { issues, ruleCount: ALL_RULES.length, resumo };
   }
 
   // ── analyzeDeep — usa syntax-engine quando disponível ────────────────────

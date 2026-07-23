@@ -1939,16 +1939,11 @@
 
     if (norma?.pontuacao?.issues?.length > 0) {
       const first = norma.pontuacao.issues[0];
-      const contextualEvidence = first.contextual && first.evidence?.length
-        ? ` Evidência contextual: ${first.evidence.join("; ")}.`
-        : "";
       alertas.push({
         dim: "norma", id: "pontuacao",
         nivel: first.severity === "alta" ? "alto" : "moderado",
-        msg: `${norma.pontuacao.issues.length} alerta(s) de pontuação funcional. Principal: ${first.criterio}${contextualEvidence}`,
-        acao: first.contextual
-          ? `${first.acao} Se a leitura não corresponde à sua intenção, preserve a pontuação e o sentido que você escolheu.`
-          : first.acao || "Revise a pontuação no trecho indicado.",
+        msg: `${norma.pontuacao.issues.length} alerta(s) de pontuação funcional. Principal: ${first.criterio}`,
+        acao: first.acao || "Revise a pontuação no trecho indicado.",
       });
     }
 
