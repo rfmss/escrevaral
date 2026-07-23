@@ -1390,17 +1390,7 @@
           "primary": "Criar romantasy"
         }
       ],
-      "text": "",
-      "model": {
-        "exemplar": "Bloom Books, selo da Companhia das Letras dedicado ao gênero, e autoras brasileiras que vieram do Wattpad, como Lilian Carmine — pela mistura de mundo mágico e arco romântico sem atalho.",
-        "why": "O romantasy é importação recente no mercado brasileiro, mas a exigência é a mesma de sempre: mundo consistente e romance que se conquista, não que simplesmente acontece.",
-        "references": [
-          "Bloom Books (Companhia das Letras)",
-          "Lilian Carmine",
-          "Comunidade BookTok e Wattpad brasileira"
-        ],
-        "placeholder": "[NOME] sentiu a magia reagir antes mesmo de decidir se odiava ou queria [NOME DO OUTRO PROTAGONISTA] tanto quanto parecia."
-      }
+      "text": ""
     },
     {
       "id": "new-adult",
@@ -1481,17 +1471,7 @@
           "primary": "Criar New Adult"
         }
       ],
-      "text": "",
-      "model": {
-        "exemplar": "Autoras brasileiras que migraram do Wattpad para o mercado nacional, como Lilian Carmine e Valéria Veiga — pela voz de quem está na primeira independência de verdade.",
-        "why": "New Adult ocupa o que o Young Adult não alcança: personagens de 18 a 25 anos no primeiro emprego, primeiro apartamento, primeiro relacionamento adulto.",
-        "references": [
-          "Lilian Carmine",
-          "Valéria Veiga",
-          "Comunidade Wattpad brasileira"
-        ],
-        "placeholder": "[NOME] tinha 22 anos, um aluguel que mal cabia no salário e a certeza de que ninguém tinha preparado ela para essa parte da vida adulta."
-      }
+      "text": ""
     },
     {
       "id": "suspense-psicologico",
@@ -1572,18 +1552,7 @@
           "primary": "Criar suspense psicológico"
         }
       ],
-      "text": "",
-      "model": {
-        "exemplar": "Raphael Montes e Patrícia Melo, pelo suspense que mora na cabeça do leitor antes de morar na cena.",
-        "why": "O suspense psicológico vende a dúvida, não o susto — o medo mora no que o narrador pode estar escondendo de você.",
-        "references": [
-          "Raphael Montes",
-          "Patrícia Melo",
-          "Rubem Fonseca",
-          "Tony Bellotto"
-        ],
-        "placeholder": "[NOME] tinha certeza de uma coisa: a versão que contava para os outros não era a mesma que contava para si mesma."
-      }
+      "text": ""
     },
     {
       "id": "sci-fi-romantico",
@@ -1664,17 +1633,7 @@
           "primary": "Criar ficção científica romântica"
         }
       ],
-      "text": "",
-      "model": {
-        "exemplar": "A ficção científica brasileira de Braulio Tavares e Gerson Lodi-Ribeiro dá o mundo; a fórmula do sci-fi romance internacional dá o arco — o cruzamento ainda é raro em livros nacionais.",
-        "why": "É um subgênero em formação no Brasil: falta menos mundo construído e mais o hábito de resolver romance e ficção científica na mesma cena, sem um vencer o outro.",
-        "references": [
-          "Braulio Tavares",
-          "Gerson Lodi-Ribeiro",
-          "Sci-fi romance internacional (referência de fórmula)"
-        ],
-        "placeholder": "[NOME] não esperava se apaixonar durante a missão — muito menos por alguém que talvez não fosse, tecnicamente, humano."
-      }
+      "text": ""
     },
     {
       "id": "roteiro-filme",
@@ -4231,7 +4190,7 @@
       "text": "",
       "model": {
         "exemplar": "Resumo e resenha: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
-        "why": "Resumo mostra que você entendeu o texto; resenha mostra que você pensou sobre o que entendeu — são habilidades diferentes na mesma prova.",
+        "why": "Resumo e resenha funciona quando técnica, público e voz trabalham juntos.",
         "references": [
           "Matriz ENEM",
           "Cartilhas do Inep",
@@ -4300,7 +4259,7 @@
       "text": "",
       "model": {
         "exemplar": "Interpretação literária: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
-        "why": "Interpretação literária pede evidência do texto, não opinião solta — toda leitura precisa provar de onde veio.",
+        "why": "Interpretação funciona quando técnica, público e voz trabalham juntos.",
         "references": [
           "Matriz ENEM",
           "Cartilhas do Inep",
@@ -4369,7 +4328,7 @@
       "text": "",
       "model": {
         "exemplar": "Revisão gramatical: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
-        "why": "Revisão gramatical é a última rede de proteção — pega o erro que a pressa da escrita deixou passar.",
+        "why": "Revisão funciona quando técnica, público e voz trabalham juntos.",
         "references": [
           "Matriz ENEM",
           "Cartilhas do Inep",
@@ -4437,13 +4396,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "SNEL e Câmara Brasileira do Livro pelo retrato do mercado editorial; Amazon KDP e Clube de Autores pela rota independente.",
+        "exemplar": "Mapa de lançamento: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "A clareza estratégica reduz ansiedade e evita gasto antes da hora.",
         "references": [
-          "SNEL",
-          "Câmara Brasileira do Livro (CBL)",
           "Amazon KDP",
-          "Clube de Autores"
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Meu livro está em [fase]. O caminho mais coerente agora é [rota], porque [motivo]. Antes de lançar, preciso concluir [ativo 1], [ativo 2] e [ativo 3]."
       }
@@ -4505,12 +4465,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Amazon KDP e Clube de Autores como as duas portas mais usadas por quem publica sozinho no Brasil.",
+        "exemplar": "Autopublicação independente: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "O autor independente precisa pensar como pequena editora.",
         "references": [
           "Amazon KDP",
           "Clube de Autores",
-          "Comunidade de autoras independentes brasileiras"
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Antes de subir o arquivo, vou validar texto, capa, descrição e preço. Só depois faz sentido convidar leitores e investir energia em divulgação."
       }
@@ -4572,12 +4534,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "SNEL pelo retrato de quem edita no Brasil; editoras de pequeno e médio porte com política de originais aberta.",
+        "exemplar": "Submissão a editoras: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "Submissão profissional é adequação de catálogo, clareza de pitch e paciência documentada.",
         "references": [
-          "SNEL",
-          "Editoras de pequeno e médio porte com originais abertos",
-          "Agentes literários brasileiros"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Prezada equipe, apresento [título], um [gênero] de [tamanho] palavras, voltado a leitores de [comparáveis]. A obra acompanha [premissa] e investiga [tema]."
       }
@@ -4639,13 +4603,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "SNEL e CBL pelo panorama tradicional; Amazon KDP e Clube de Autores pelo panorama independente — as rotas reais no Brasil hoje.",
+        "exemplar": "Comparativo de publicação: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "Comparar rotas torna a decisão menos romântica e mais honesta.",
         "references": [
-          "SNEL",
-          "Câmara Brasileira do Livro (CBL)",
           "Amazon KDP",
-          "Editoras híbridas brasileiras"
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Para este livro, eu valorizo mais [critério] do que [critério]. Por isso, a rota mais coerente neste momento é [rota]."
       }
@@ -4707,12 +4672,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Bienal do Livro e FLIP como vitrines reais de lançamento; Câmara Brasileira do Livro pelo calendário do setor.",
+        "exemplar": "Checklist de lançamento: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "O lançamento ganha força quando as partes invisíveis foram resolvidas antes.",
         "references": [
-          "Bienal do Livro (SP/RJ)",
-          "FLIP — Festa Literária Internacional de Paraty",
-          "Câmara Brasileira do Livro (CBL)"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Meu livro só entra em lançamento quando texto, capa, sinopse, página de venda e lista de leitores estiverem minimamente testados."
       }
@@ -4774,12 +4741,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Relatos de autoras brasileiras publicadas — independentes e tradicionais — sobre rejeição, ritmo de mercado e carreira de longo prazo.",
+        "exemplar": "Mentalidade de autor: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "A técnica precisa de uma psicologia capaz de executar.",
         "references": [
-          "Comunidade de autoras publicadas no Brasil",
-          "SNEL",
-          "Clube de Autores"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Meu livro não precisa provar minha existência inteira. Ele precisa encontrar seus leitores possíveis e me ensinar a publicar melhor o próximo."
       }
@@ -4820,7 +4789,7 @@
           ],
           [
             "Precificação",
-            "No Brasil, os 70% de royalties exigem inscrição no KDP Select (exclusividade de 90 dias) e preço na faixa equivalente a US$2,99–US$9,99 — não é só cruzar um teto de preço. Fora disso, ou sem o KDP Select, o royalty cai para 35%. Confira o valor exato em R$ na página oficial de preços do KDP antes de publicar."
+            "R$9,99 para iniciantes no KU (Kindle Unlimited). R$14,99 para quem tem catálogo. Acima de R$9,99 e abaixo de R$199,99 dá 70% de royalties."
           ],
           [
             "Checklist final",
@@ -4871,7 +4840,7 @@
             ],
             [
               "Precificação",
-              "70% de royalties no Brasil exigem KDP Select (exclusividade) e preço na faixa de US$2,99–US$9,99 — confira o valor em R$ atualizado no KDP.",
+              "R$9,99 para estrear no KU. 70% de royalties acima de R$9,99.",
               "done"
             ],
             [
@@ -4883,18 +4852,7 @@
           "primary": "Criar projeto KDP"
         }
       ],
-      "text": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\n\n━━━ IDENTIDADE DO LIVRO ━━━\n\nTítulo:\nSubtítulo (opcional):\nNome da autora/autor (como aparece na Amazon):\nSérie (se houver):\nVolume:\n\n\n━━━ SINOPSE (400–800 caracteres) ━━━\n\n[Gancho — a primeira frase que cria curiosidade ou tensão:]\n\n\n[Conflito central — o que está em jogo para a protagonista:]\n\n\n[Promessa emocional — o que a leitora vai sentir (sem spoiler do final):]\n\n\n━━━ PALAVRAS-CHAVE ━━━\n\nPense no que sua leitora digita quando procura um livro como o seu.\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n\n\n━━━ CATEGORIAS ━━━\n\nPrincipal:\nSecundária:\n\nExemplos comuns:\n• Romance contemporâneo → Fiction > Romance > Contemporary\n• Fantasia romântica → Fiction > Fantasy > Romantic\n• Suspense psicológico → Fiction > Thrillers > Psychological\n\n\n━━━ PRECIFICAÇÃO ━━━\n\nPreço em R$:\nKindle Unlimited (exclusividade por 90 dias): [ ] Sim  [ ] Não\n\nReferência: no Brasil, os 70% de royalties exigem KDP Select (exclusividade de 90 dias) e preço na faixa equivalente a US$2,99–US$9,99 — confira o valor atual em R$ na página oficial de preços do KDP antes de fixar o preço.\nPara estrear: um preço mais baixo dentro dessa faixa costuma gerar mais downloads e reviews iniciais.\n\n\n━━━ CHECKLIST FINAL ━━━\n\n[ ] Revisão completa — sem erros gramaticais visíveis\n[ ] Capa criada — 2560×1600 pixels, JPEG ou TIFF\n[ ] Conta KDP ativa — com dados bancários cadastrados\n[ ] ISBN — opcional (o KDP oferece um gratuito)\n[ ] Manuscrito exportado — ePub ou DOCX limpo\n[ ] Prévia aprovada no KDP Previewer antes de publicar\n[ ] Página do livro revisada — título, sinopse, categorias confirmados\n\n\n━━━ SOBRE A AUTORA ━━━\n\n[Texto de 100–200 palavras em primeira pessoa.\nOnde encontrar você: Instagram, Wattpad, site.]\n\nPróximo lançamento:\n\n\n━━━ LINKS DE APOIO ━━━\n\nKDP: kdp.amazon.com\nPreviewer: kdp.amazon.com/pt_BR/help/topic/G202131170\nCategorias BISAC: bisg.org/page/bisac-subject-codes-list\nPreços por gênero: kdp.amazon.com/pt_BR/help/topic/G201541130",
-      "model": {
-        "exemplar": "Guias oficiais do Kindle Direct Publishing e a prática de autoras independentes brasileiras que já vivem de vendas no Kindle Unlimited.",
-        "why": "Publicar no KDP é decisão técnica e comercial — cada campo do formulário existe para vender o livro, não só para publicá-lo.",
-        "references": [
-          "KDP (Kindle Direct Publishing)",
-          "KDP Select / Kindle Unlimited",
-          "Categorias BISAC",
-          "Comunidade de autoras independentes brasileiras"
-        ],
-        "placeholder": "Meu livro está pronto para o KDP quando título, sinopse, palavras-chave, categoria e preço já pensam em quem vai comprar — não só em quem escreveu."
-      }
+      "text": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\n\n━━━ IDENTIDADE DO LIVRO ━━━\n\nTítulo:\nSubtítulo (opcional):\nNome da autora/autor (como aparece na Amazon):\nSérie (se houver):\nVolume:\n\n\n━━━ SINOPSE (400–800 caracteres) ━━━\n\n[Gancho — a primeira frase que cria curiosidade ou tensão:]\n\n\n[Conflito central — o que está em jogo para a protagonista:]\n\n\n[Promessa emocional — o que a leitora vai sentir (sem spoiler do final):]\n\n\n━━━ PALAVRAS-CHAVE ━━━\n\nPense no que sua leitora digita quando procura um livro como o seu.\n\n1.\n2.\n3.\n4.\n5.\n6.\n7.\n\n\n━━━ CATEGORIAS ━━━\n\nPrincipal:\nSecundária:\n\nExemplos comuns:\n• Romance contemporâneo → Fiction > Romance > Contemporary\n• Fantasia romântica → Fiction > Fantasy > Romantic\n• Suspense psicológico → Fiction > Thrillers > Psychological\n\n\n━━━ PRECIFICAÇÃO ━━━\n\nPreço em R$:\nKindle Unlimited (exclusividade por 90 dias): [ ] Sim  [ ] Não\n\nReferência: acima de R$9,99 e abaixo de R$199,99 = 70% de royalties.\nPara estrear: R$9,99–R$12,99 no KU gera mais downloads e reviews iniciais.\n\n\n━━━ CHECKLIST FINAL ━━━\n\n[ ] Revisão completa — sem erros gramaticais visíveis\n[ ] Capa criada — 2560×1600 pixels, JPEG ou TIFF\n[ ] Conta KDP ativa — com dados bancários cadastrados\n[ ] ISBN — opcional (o KDP oferece um gratuito)\n[ ] Manuscrito exportado — ePub ou DOCX limpo\n[ ] Prévia aprovada no KDP Previewer antes de publicar\n[ ] Página do livro revisada — título, sinopse, categorias confirmados\n\n\n━━━ SOBRE A AUTORA ━━━\n\n[Texto de 100–200 palavras em primeira pessoa.\nOnde encontrar você: Instagram, Wattpad, site.]\n\nPróximo lançamento:\n\n\n━━━ LINKS DE APOIO ━━━\n\nKDP: kdp.amazon.com\nPreviewer: kdp.amazon.com/pt_BR/help/topic/G202131170\nCategorias BISAC: bisg.org/page/bisac-subject-codes-list\nPreços por gênero: kdp.amazon.com/pt_BR/help/topic/G201541130"
     },
     {
       "id": "anatomia-fisica-livro",
@@ -4953,12 +4911,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Manuais de produção gráfica editorial e a prática de diagramadores brasileiros — pela nomenclatura que todo profissional do livro físico espera que a autora conheça.",
+        "exemplar": "Partes físicas do livro: anatomia editorial, produção gráfica e design de livros.",
         "why": "Conhecer o objeto ajuda o escritor a pensar leitura, venda e produção.",
         "references": [
-          "Produção gráfica editorial",
-          "Diagramadores e designers de livro",
-          "Câmara Brasileira do Livro (CBL)"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "A capa promete [experiência]. A lombada identifica [obra/autoria]. A contracapa convence o leitor de que [benefício de leitura]."
       }
@@ -5020,12 +4980,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Normas de editoração da ABNT e a prática de diagramação de editoras brasileiras — pela ordem que organiza pré-texto, miolo e pós-texto.",
+        "exemplar": "Miolo, pré e pós-texto: anatomia editorial, produção gráfica e design de livros.",
         "why": "A arquitetura interna decide como o leitor entra, atravessa e sai do livro.",
         "references": [
-          "ABNT (normas de editoração)",
-          "Diagramadores e designers de livro",
-          "Editoras brasileiras"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "Este livro terá [pré-textos], seguido por [estrutura do corpo] e encerrado com [pós-textos], porque o leitor precisa de [função]."
       }
@@ -5087,11 +5049,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Prática editorial de folha de rosto, dedicatória e epígrafe em livros brasileiros — o pacto que o livro propõe antes do capítulo 1.",
+        "exemplar": "Ritos de entrada: anatomia editorial, produção gráfica e design de livros.",
         "why": "As páginas iniciais dizem ao leitor que tipo de pacto está começando.",
         "references": [
-          "Produção editorial brasileira",
-          "Diagramadores e designers de livro"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "Antes do capítulo 1, o leitor atravessa [elementos]. Cada um prepara uma camada: identidade, contexto, afeto e orientação."
       }
@@ -5153,12 +5118,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Boas práticas de organização de arquivo digital usadas por diagramadoras e revisoras freelance no mercado editorial brasileiro.",
+        "exemplar": "Livro como arquivo digital: anatomia editorial, produção gráfica e design de livros.",
         "why": "A organização do arquivo antecipa revisão, submissão e publicação.",
         "references": [
-          "Diagramadores e revisores freelance",
-          "Formatos ePub e DOCX",
-          "Câmara Brasileira do Livro (CBL)"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "Meu arquivo mestre fica em [local] e os finais em [pasta]. Cada versão recebe data para que eu saiba exatamente o que foi enviado ou publicado."
       }
@@ -5220,11 +5187,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Prática de diagramação de capítulo em editoras brasileiras — recto sempre à direita, numeração e título corrente.",
+        "exemplar": "Página de capítulo: anatomia editorial, produção gráfica e design de livros.",
         "why": "A página de capítulo cria cerimônia e ritmo para a leitura.",
         "references": [
-          "Diagramadores e designers de livro",
-          "Produção gráfica editorial"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "Este capítulo começa com [respiro/título/ornamento] porque a entrada precisa sugerir [tom da cena ou parte]."
       }
@@ -5286,12 +5256,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Prática de ficha catalográfica e glossário de editoras brasileiras — e o ISBN emitido pela Agência Brasileira do ISBN, na Fundação Biblioteca Nacional.",
+        "exemplar": "Glossário do livro: anatomia editorial, produção gráfica e design de livros.",
         "why": "Quem conhece os termos participa melhor das decisões editoriais.",
         "references": [
-          "Agência Brasileira do ISBN (Fundação Biblioteca Nacional)",
-          "Diagramadores e designers de livro",
-          "Câmara Brasileira do Livro (CBL)"
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
         ],
         "placeholder": "Quando eu disser [termo], quero me referir a [definição]. Se houver dúvida, registro exemplo visual antes de pedir alteração."
       }
@@ -5353,12 +5325,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Lei 9.610/98 (Lei de Direitos Autorais) e o Escritório de Direitos Autorais da Fundação Biblioteca Nacional (EDA/FBN).",
+        "exemplar": "Primeiro mapa de direitos: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "O escritor ganha segurança quando separa criação, prova, mercado e fonte oficial.",
         "references": [
-          "Lei 9.610/98 (LDA)",
-          "EDA — Fundação Biblioteca Nacional",
-          "Escritórios de advocacia especializados em direito autoral"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "O Escrevaral me mostra o mapa. Antes de assinar, registrar ou litigar, eu confiro a fonte oficial atualizada e, se necessário, consulto especialista."
       }
@@ -5420,12 +5394,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Editais de bolsa e residência literária brasileiros, e a prática de registro do EDA/FBN.",
+        "exemplar": "Checklist de submissão e direitos: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "Submeter melhor é conseguir provar o que foi enviado, quando e sob quais regras.",
         "references": [
-          "EDA — Fundação Biblioteca Nacional",
-          "Editais de bolsa e residência literária",
-          "SNEL"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Enviei [obra] para [editora/agente] em [data], seguindo [edital/política]. A versão preservada é [arquivo]."
       }
@@ -5487,12 +5463,14 @@
       ],
       "text": "",
       "model": {
-        "exemplar": "Lei 9.610/98 (Lei de Direitos Autorais) e a prática de contratos do mercado editorial brasileiro.",
+        "exemplar": "Leitura de contrato editorial: prática editorial brasileira, autopublicação e lançamento de livros.",
         "why": "O contrato deve dizer exatamente o que sai da mão do autor, por quanto tempo e em troca de quê.",
         "references": [
-          "Lei 9.610/98 (LDA)",
-          "SNEL",
-          "Advocacia especializada em direito autoral"
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
         ],
         "placeholder": "Antes de assinar, eu preciso entender escopo, prazo, território, remuneração, preferência e reversão."
       }

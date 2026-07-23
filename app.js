@@ -532,19 +532,8 @@ function updateCurrentMetadata() {
 function queueSave() {
   saveStatus.textContent = "Salvando...";
   window.clearTimeout(saveTimer);
-  saveTimer = window.setTimeout(() => { saveTimer = null; persistState(); }, 450);
+  saveTimer = window.setTimeout(() => persistState(), 450);
 }
-
-// Garante que o salvamento pendente (debounce de 450ms) não se perca
-// se a escritora fechar ou trocar de aba logo depois de digitar.
-function flushPendingSave() {
-  if (!saveTimer) return;
-  window.clearTimeout(saveTimer);
-  saveTimer = null;
-  persistState();
-}
-document.addEventListener("visibilitychange", () => { if (document.hidden) flushPendingSave(); });
-window.addEventListener("pagehide", flushPendingSave);
 
 let createNoteContext = "manuscript";
 
@@ -562,12 +551,6 @@ function openCreateNote(options = {}) {
   updateCreateNoteHeading();
   renderCreateNoteStep(1);
   createNoteOverlay.hidden = false;
-
-  // Acessibilidade: foco inicial no primeiro card de categoria ou botão de folha em branco
-  requestAnimationFrame(() => {
-    const firstBtn = createNoteOverlay.querySelector(".create-cat-card");
-    if (firstBtn) firstBtn.focus();
-  });
 }
 
 async function renderCreateNoteStep(step) {
@@ -700,10 +683,6 @@ function closeCreateNote() {
   createNoteParentId = null;
   createNoteContext = "manuscript";
   updateCreateNoteHeading();
-  // Acessibilidade: restaurar foco para o editor
-  if (typeof writingArea !== "undefined" && writingArea) {
-    writingArea.focus();
-  }
 }
 
 function openAddCompanionNote(bibliType) {
@@ -739,56 +718,6 @@ function openAddCompanionNote(bibliType) {
 const termsOverlay = document.getElementById("terms-overlay");
 const _TERMS_ACCEPTED = !!localStorage.getItem(TERMS_KEY);
 
-function setTermsModalIsolation(active) {
-  if (!termsOverlay) return;
-
-  const protectedNodes = [
-    ...Array.from(document.body.children).filter((node) => node !== shell),
-    ...Array.from(shell.children).filter((node) => node !== termsOverlay),
-  ];
-
-  protectedNodes.forEach((node) => {
-    if (active) {
-      node.dataset.termsModalAriaHidden = node.getAttribute("aria-hidden") || "";
-      node.inert = true;
-      node.setAttribute("aria-hidden", "true");
-      return;
-    }
-
-    if (!("termsModalAriaHidden" in node.dataset)) return;
-    node.inert = false;
-    const previousAriaHidden = node.dataset.termsModalAriaHidden;
-    if (previousAriaHidden) node.setAttribute("aria-hidden", previousAriaHidden);
-    else node.removeAttribute("aria-hidden");
-    delete node.dataset.termsModalAriaHidden;
-  });
-}
-
-function trapTermsFocus(event) {
-  if (event.key !== "Tab" || !termsOverlay || termsOverlay.hidden) return;
-
-  const focusable = [...termsOverlay.querySelectorAll(
-    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-  )].filter((node) => !node.closest("[hidden]"));
-
-  if (!focusable.length) {
-    event.preventDefault();
-    return;
-  }
-
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-  if (event.shiftKey && document.activeElement === first) {
-    event.preventDefault();
-    last.focus();
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault();
-    first.focus();
-  }
-}
-
-document.addEventListener("keydown", trapTermsFocus);
-
 function switchAtelier(tab) {
   const view = document.querySelector(".academy-view");
   if (!view) return;
@@ -808,7 +737,10 @@ function checkTerms() {
     if (stateNew)  stateNew.hidden  = hasWork;
     if (stateCont) stateCont.hidden = !hasWork;
 
-    setTermsModalIsolation(true);
+    const dock = document.getElementById("mobile-dock");
+    const bandeja = document.getElementById("mobile-bandeja");
+    if (dock)    dock.inert    = true;
+    if (bandeja) bandeja.inert = true;
     setTimeout(() => {
       termsOverlay.hidden = false;
       const firstBtn = termsOverlay.querySelector('[data-ob-state]:not([hidden]) button') ||
@@ -821,8 +753,11 @@ function checkTerms() {
 function acceptTerms(goTo) {
   localStorage.setItem(TERMS_KEY, new Date().toISOString());
   localStorage.setItem(FIRST_VISIT_KEY, "1");
-  setTermsModalIsolation(false);
   if (termsOverlay) termsOverlay.hidden = true;
+  const dock = document.getElementById("mobile-dock");
+  const bandeja = document.getElementById("mobile-bandeja");
+  if (dock)    dock.inert    = false;
+  if (bandeja) bandeja.inert = false;
   if (goTo === "blank") {
     // Folha em branco direto — sem modal, sem template anterior
     state.template.selectedId = null;
@@ -839,13 +774,6 @@ function acceptTerms(goTo) {
       setActiveManuscript(ms.id);
     }
     setView("editor", { updateRoute: true });
-  }
-
-  // Acessibilidade: restaurar foco para o editor se não estiver indo para um guia
-  if (goTo !== "guide") {
-    if (typeof writingArea !== "undefined" && writingArea) {
-      writingArea.focus();
-    }
   }
 }
 
@@ -1041,51 +969,6 @@ function createBlankManuscript() {
   addManuscript(manuscript, "Texto em branco criado");
 }
 
-async function importManuscriptFiles(fileList) {
-  const arquivos = Array.from(fileList || []).filter((f) => VeredaImport.aceita(f));
-  if (!arquivos.length) {
-    saveStatus.textContent = "Nenhum arquivo compatível — traga .docx, .txt ou .md";
-    return;
-  }
-  saveStatus.textContent = arquivos.length === 1 ? "Trazendo texto…" : `Trazendo ${arquivos.length} textos…`;
-  let ultimo = null;
-  const falhas = [];
-  for (const [i, arquivo] of arquivos.entries()) {
-    try {
-      const { title, html } = await VeredaImport.importFile(arquivo);
-      const htmlLimpo = VeredaDocument.sanitizeHtml(html);
-      const manuscript = VeredaArchive.createManuscript({
-        id: `manuscrito-${Date.now()}-${i}`,
-        title,
-        text: VeredaDocument.htmlToText(htmlLimpo),
-        type: "manuscrito",
-        folder: "Ficção",
-      });
-      manuscript.html = htmlLimpo;
-      state.manuscripts.unshift(manuscript);
-      ultimo = manuscript;
-    } catch (err) {
-      falhas.push(arquivo.name);
-    }
-  }
-  if (ultimo) {
-    state.activeId = ultimo.id;
-    state.layout.leftCollapsed = true;
-    state.layout.rightCollapsed = true;
-    applyPanelLayout();
-    renderActiveManuscript();
-    renderManuscriptNavigation();
-    renderProjectGrid();
-    renderMetadataForm();
-    const trazidos = arquivos.length - falhas.length;
-    persistState(trazidos === 1 ? `"${ultimo.title}" trazido para o acervo` : `${trazidos} textos trazidos para o acervo`);
-    setView("editor");
-  }
-  if (falhas.length) {
-    saveStatus.textContent = `Não consegui ler: ${falhas.join(", ")}`;
-  }
-}
-
 async function createManuscriptFromTemplate(templateId) {
   if (!templateId) { createBlankManuscript(); return; }
 
@@ -1130,13 +1013,231 @@ async function createManuscriptFromTemplate(templateId) {
 }
 
 function createProjectNoteText(type) {
-  // Personagem, Mundo, Lugar, Cronologia, Objeto, Tema, Glossário, Instituição
-  // e Projeto usam o editor de ficha (campos guiados de FICHA_SCHEMAS) — não
-  // precisam de rascunho em texto corrido. Um rascunho aqui só duplicaria os
-  // placeholders da ficha e, pior, alguns viravam texto "já preenchido"
-  // silenciosamente (linhas terminadas em ":" que a migração de texto legado
-  // não reconhecia como dica a esvaziar). Ficha vazia = campo realmente vazio.
-  const fichas = {};
+  const fichas = {
+    personagem: `NOME
+(nome completo · apelido · como os outros o chamam)
+
+
+APARÊNCIA
+(o detalhe que fica — não a lista inteira)
+
+
+DESEJO
+(o que quer conscientemente · o objetivo declarado)
+
+
+NECESSIDADE
+(o que precisa mas ainda não sabe · o que a história vai dar)
+
+
+CONTRADIÇÃO
+(o que a torna humana, não previsível · o defeito que é também uma força)
+
+
+VOZ
+(palavras que usa muito · palavras que evita · como interrompe · como mente)
+
+
+ARCO
+onde começa:
+onde termina:
+o que muda:
+o que não muda:
+
+
+RELAÇÕES
+— com [personagem]:
+— com [personagem]:
+
+
+DETALHES PARA NÃO ESQUECER
+(cor dos olhos, cheiro, maneirismo, objeto que carrega)`,
+
+    mundo: `REGRAS FUNDAMENTAIS
+(o que é diferente deste mundo em relação ao nosso)
+
+
+MAGIA / TECNOLOGIA / SISTEMA
+como funciona:
+quais os limites:
+qual o custo ou consequência:
+
+
+HISTÓRIA
+(o que aconteceu antes da história começar · o trauma coletivo)
+
+
+TENSÃO ESTRUTURAL
+(o conflito que existe antes da protagonista aparecer)
+
+
+LUGARES IMPORTANTES
+—
+—
+
+
+INSTITUIÇÕES E FACÇÕES
+— [nome]: função, poder, quem representa
+— [nome]: função, poder, quem representa
+
+
+TERMOS E VOCABULÁRIO PRÓPRIO
+— [termo]:`,
+
+    lugar: `NOME
+
+
+LOCALIZAÇÃO
+(onde fica no mundo · como se chega)
+
+
+ATMOSFERA
+(o que se sente ao entrar · temperatura emocional do espaço)
+
+
+DETALHES SENSORIAIS
+visão:
+som:
+cheiro:
+toque:
+
+
+HISTÓRIA DO LUGAR
+(o que aconteceu aqui antes)
+
+
+QUEM ESTÁ AQUI
+(moradores, frequentadores, fantasmas)
+
+
+SIGNIFICADO NA HISTÓRIA
+(por que este lugar importa para a protagonista)`,
+
+    cronologia: `ANTES DA HISTÓRIA COMEÇAR
+— [período]:
+— [período]:
+— [evento que mudou tudo]:
+
+
+A HISTÓRIA
+— cena/cap 1:
+— [primeiro ponto de virada]:
+— [meio]:
+— [segundo ponto de virada]:
+— [clímax]:
+— [resolução]:
+
+
+PARALELOS E FLASHBACKS
+— [memória de X]: aparece em:
+— [evento passado]: revelado quando:
+
+
+DATAS E DURAÇÕES
+início da história:
+duração total:
+datas importantes:`,
+
+    objeto: `NOME
+
+
+DESCRIÇÃO FÍSICA
+(o detalhe que fica na memória do leitor)
+
+
+HISTÓRIA DO OBJETO
+(de onde veio · quem teve antes)
+
+
+SIGNIFICADO SIMBÓLICO
+(o que representa além do que é)
+
+
+QUEM TEM / QUEM QUER / QUEM TEME
+—
+
+
+COMO APARECE NA HISTÓRIA
+— primeira vez:
+— ponto de virada:
+— cena final:`,
+
+    tema: `INTENÇÃO
+(o que este texto quer dizer — em uma frase)
+
+
+TENSÃO TEMÁTICA
+(as duas forças opostas que o texto explora)
+
+
+IMAGEM CENTRAL
+(a cena, o objeto ou o momento que cristaliza o tema)
+
+
+PERGUNTA QUE O TEXTO FAZ
+(não precisa responder — precisa fazer a pergunta certa)
+
+
+CONTRA-ARGUMENTO
+(o que o texto reconhece como verdade no lado oposto)`,
+
+    glossário: `TERMOS DO PROJETO
+
+— [termo]:
+  definição:
+  contexto de uso:
+  primeira aparição:
+
+— [termo]:
+  definição:
+  contexto de uso:
+  primeira aparição:`,
+
+    instituição: `NOME
+
+
+FUNÇÃO
+(o que faz · para quem existe)
+
+
+PODER
+(de onde vem · como se mantém · o que teme perder)
+
+
+QUEM REPRESENTA
+(interesses de qual grupo · inimigos declarados · aliados secretos)
+
+
+ESTRUTURA INTERNA
+(hierarquia · regras · ritos de entrada e saída)
+
+
+PAPEL NA HISTÓRIA
+(como afeta a protagonista · o que quer dela)`,
+
+    projeto: `SINOPSE
+(2-3 frases que explicam o livro para um editor)
+
+
+PÚBLICO
+(quem lê · que outros livros essa pessoa também lê)
+
+
+PROMESSA DE LEITURA
+(o que o leitor vai sentir · o que vai levar)
+
+
+ESTÁGIO ATUAL
+(rascunho / revisão / finalização)
+
+
+PRAZO
+(data de entrega real ou desejada)
+
+
+NOTAS DE DESENVOLVIMENTO
+`,
+  };
 
   return fichas[type.id] || "";
 }
@@ -1670,7 +1771,7 @@ function renderTemplateStudio() {
     templateTabs.innerHTML = `<p class="template-empty">Nenhum guia encontrado para "${escapeHtml(templateState.query)}".</p>`;
   }
 
-  templateStepLabel.textContent = `passo ${activeStep.index + 1} de ${activeStep.total}`;
+  templateStepLabel.textContent = `tela ${activeStep.index + 1} de ${activeStep.total}`;
   templateScreen.innerHTML = createTemplateStepMarkup(activeTemplate, activeStep);
 }
 
@@ -1758,7 +1859,7 @@ function changeTemplateStep(direction) {
 }
 
 function getDimLabel(dimId) {
-  const map = { economia:"Economia", clareza:"Clareza", ritmo:"Ritmo", voz:"Voz", estrutura:"Estrutura", pov:"POV", lexico:"Léxico", norma:"Norma", confusoes:"Confusões", pleonasmos:"Pleonasmos" };
+  const map = { economia:"Economia", clareza:"Clareza", ritmo:"Ritmo", voz:"Voz", estrutura:"Estrutura", pov:"POV", lexico:"Léxico", norma:"Norma" };
   return map[dimId] || dimId;
 }
 
@@ -2108,7 +2209,6 @@ const ACTION_HANDLERS = {
   "new-proof-session":       () => startNewProofSession(),
   "export-backup":           () => exportBackup(),
   "import-backup":           () => requestBackupImport(),
-  "import-manuscript-files": () => document.querySelector("[data-import-manuscript-input]")?.click(),
   "choose-filesystem-backup":  () => chooseFilesystemBackup(),
   "save-filesystem-backup":    () => saveFilesystemBackup(true),
   "stop-filesystem-backup":    () => stopFilesystemBackup(),
@@ -2451,14 +2551,6 @@ window.addEventListener("appinstalled", () => {
 
 titleInput.addEventListener("input", updateCurrentManuscript);
 writingArea.addEventListener("input", updateCurrentManuscript);
-
-const importManuscriptInput = document.querySelector("[data-import-manuscript-input]");
-if (importManuscriptInput) {
-  importManuscriptInput.addEventListener("change", () => {
-    void importManuscriptFiles(importManuscriptInput.files);
-    importManuscriptInput.value = "";
-  });
-}
 
 if (specializedEditor) {
   specializedEditor.addEventListener("input", (e) => {
@@ -3470,126 +3562,10 @@ const FICHA_SCHEMAS = {
     { key:"prazo",       label:"Prazo",              ph:"Data de entrega real ou desejada" },
     { key:"notas",       label:"Notas de desenvolvimento", ph:"", area:true },
   ],
-  "Cena": [
-    { key:"objetivo",    label:"Objetivo da cena",   ph:"O que a personagem quer ao entrar nesta cena" },
-    { key:"conflito",    label:"Conflito",           ph:"O que ou quem impede — obstáculo, oposição, dilema" },
-    { key:"pov",         label:"Ponto de vista",     ph:"De quem é o olhar desta cena" },
-    { key:"local_tempo", label:"Onde e quando",      ph:"Local, hora do dia, quanto tempo depois da cena anterior" },
-    { key:"virada",      label:"Virada",             ph:"O que muda do início para o fim da cena", area:true },
-    { key:"subtexto",    label:"Subtexto",           ph:"O que os personagens não dizem em voz alta", area:true },
-    { key:"em_aberto",   label:"Fica em aberto",     ph:"O que não se resolve — gancho para a próxima cena" },
-  ],
-  "Capítulo": [
-    { key:"funcao",      label:"Função na estrutura", ph:"O que este capítulo empurra na história — não pode ser 'nada'" },
-    { key:"pov_cap",     label:"Ponto de vista / narrador", ph:"De quem é a voz que conta este capítulo" },
-    { key:"personagens", label:"Quem aparece",       ph:"Personagens presentes neste capítulo" },
-    { key:"resumo",      label:"Resumo",             ph:"O que acontece, do início ao fim do capítulo", area:true },
-    { key:"abertura",    label:"Como abre",          ph:"A primeira imagem ou linha" },
-    { key:"fechamento",  label:"Como fecha",         ph:"O que puxa o leitor para o próximo capítulo" },
-  ],
-  "Escaleta": [
-    { key:"premissa",    label:"Premissa",           ph:"Do que se trata a história — em uma frase" },
-    { key:"ato1",        label:"Ato 1",              ph:"Cena por cena — o mundo antes da virada", area:true },
-    { key:"ato2",        label:"Ato 2",              ph:"Cena por cena — a jornada, o meio que resiste a terminar", area:true },
-    { key:"ato3",        label:"Ato 3",              ph:"Cena por cena — clímax e resolução", area:true },
-    { key:"viradas",     label:"Pontos de virada",   ph:"Os momentos que mudam a direção da história", area:true },
-  ],
-  "Cena de roteiro": [
-    { key:"cabecalho",   label:"Cabeçalho",          ph:"INT./EXT. LOCAL — DIA/NOITE" },
-    { key:"objetivo_cena", label:"Objetivo da cena", ph:"O que esta cena precisa entregar na história" },
-    { key:"personagens_cena", label:"Quem está em cena", ph:"Personagens presentes" },
-    { key:"acao",        label:"Ação",               ph:"O que a câmera vê — não o que a personagem sente", area:true },
-    { key:"conflito_cena", label:"Tensão da cena",   ph:"O que move o embate ou a espera" },
-    { key:"saida",       label:"Saída",              ph:"Como a cena termina — corte para onde" },
-  ],
-  "Ato": [
-    { key:"funcao_ato",  label:"Função deste ato",   ph:"O papel dele na história inteira" },
-    { key:"estado_inicial", label:"Estado inicial",  ph:"Onde os personagens estão emocionalmente ao abrir o ato" },
-    { key:"estado_final", label:"Estado final",      ph:"Onde estão ao fechar o ato" },
-    { key:"cenas_previstas", label:"Cenas previstas", ph:"O que precisa acontecer aqui dentro", area:true },
-    { key:"virada_ato",  label:"Virada que fecha o ato", ph:"O evento que empurra para o próximo ato" },
-  ],
-  "Personagem de roteiro": [
-    { key:"nome_pers",   label:"Nome",               ph:"Como aparece nos créditos" },
-    { key:"funcao_dramatica", label:"Função dramática", ph:"Protagonista, antagonista, mentor, obstáculo" },
-    { key:"apresentacao_visual", label:"Apresentação visual", ph:"Como a câmera apresenta essa pessoa na primeira cena" },
-    { key:"quer_roteiro", label:"O que quer",        ph:"Objetivo visível, perseguido em ação — não em pensamento" },
-    { key:"voz_propria", label:"Voz própria",        ph:"Cadência de fala · gírias · o que nunca diria" },
-    { key:"arco_roteiro", label:"Arco",              ph:"De onde sai, para onde vai, em que cena muda", area:true },
-  ],
-  "Pauta": [
-    { key:"angulo",      label:"Ângulo",             ph:"O que torna esta pauta diferente de já ter sido contada" },
-    { key:"pergunta_central", label:"Pergunta central", ph:"O que a reportagem precisa responder" },
-    { key:"por_que_agora", label:"Por que agora",    ph:"O gancho de atualidade" },
-    { key:"fontes_previstas", label:"Fontes previstas", ph:"Quem precisa ser ouvido", area:true },
-    { key:"formato_pauta", label:"Formato previsto", ph:"Tamanho, veículo, prazo de entrega" },
-  ],
-  "Fonte jornalística": [
-    { key:"nome_fonte",  label:"Nome e cargo",       ph:"Quem é · relação com o assunto" },
-    { key:"relevancia",  label:"Relevância",         ph:"Por que essa pessoa importa para esta pauta" },
-    { key:"contato",     label:"Contato",            ph:"Como falar com essa pessoa" },
-    { key:"ja_disse",    label:"O que já disse",     ph:"On ou off the record", area:true },
-    { key:"pode_confirmar", label:"Pode confirmar",  ph:"O que ela pode confirmar ou desmentir" },
-    { key:"confiabilidade", label:"Confiabilidade",  ph:"Grau de confiança na informação · precisa de segunda fonte?" },
-  ],
-  "Entrevista": [
-    { key:"entrevistado", label:"Entrevistado",      ph:"Quem é · por que essa pessoa" },
-    { key:"perguntas",   label:"Perguntas preparadas", ph:"O roteiro de perguntas", area:true },
-    { key:"respostas",   label:"Respostas",          ph:"O que foi respondido", area:true },
-    { key:"citacoes_fortes", label:"Citações fortes", ph:"As frases que podem virar citação direta", area:true },
-    { key:"pendencias",  label:"Pendências",         ph:"O que ainda falta perguntar ou confirmar" },
-  ],
-  "Fato": [
-    { key:"afirmacao",   label:"O fato",             ph:"A afirmação, em uma frase" },
-    { key:"fonte_fato",  label:"Fonte",              ph:"De onde veio o dado" },
-    { key:"checado",     label:"Como foi checado",   ph:"Segunda fonte, documento, registro público" },
-    { key:"situacao_fato", label:"Situação",         ph:"Confirmado · a checar · contestado" },
-    { key:"ressalva",    label:"Ressalva",           ph:"Contexto importante ou limite do dado", area:true },
-  ],
-  "Série poética": [
-    { key:"tema_unificador", label:"Tema unificador", ph:"O que conecta os poemas — imagem, pergunta, obsessão" },
-    { key:"arco_serie",  label:"Arco da série",      ph:"Como ela se move do primeiro ao último poema", area:true },
-    { key:"ordem",       label:"Ordem prevista",     ph:"Ordem dos poemas e por quê", area:true },
-    { key:"titulos_previstos", label:"Poemas da série", ph:"Lista de títulos e situação de cada um", area:true },
-  ],
-  "Argumento": [
-    { key:"tese",        label:"Tese",               ph:"A tese — em uma frase, defensável" },
-    { key:"publico_ensaio", label:"Público",         ph:"Para quem este ensaio fala" },
-    { key:"evidencias",  label:"Evidências",         ph:"Exemplos e dados que sustentam a tese", area:true },
-    { key:"contraponto", label:"Contraponto",        ph:"O contra-argumento mais forte — e como você responde", area:true },
-    { key:"estrutura_prevista", label:"Estrutura prevista", ph:"Como o argumento se desenvolve, parágrafo a parágrafo", area:true },
-  ],
-  "Crônica": [
-    { key:"gancho",      label:"Gancho",             ph:"O fato ou momento cotidiano que dispara a crônica" },
-    { key:"tom",         label:"Tom",                ph:"Lírico, irônico, saudoso, urgente..." },
-    { key:"virada_cronica", label:"Virada",          ph:"Quando o cotidiano toca o universal", area:true },
-    { key:"veiculo",     label:"Veículo",            ph:"Onde vai ser publicada — coluna, blog, jornal, antologia" },
-  ],
-  "Submissão": [
-    { key:"destino",     label:"Destino",            ph:"Editora, revista, agente ou concurso" },
-    { key:"formato_exigido", label:"Formato exigido", ph:"O que pediram — sinopse, primeiras páginas, manuscrito completo" },
-    { key:"data_envio",  label:"Data do envio",      ph:"Quando foi enviado" },
-    { key:"prazo_resposta", label:"Prazo de resposta", ph:"Quando esperam responder" },
-    { key:"status_submissao", label:"Situação",      ph:"Enviado · em análise · resposta recebida · recusa" },
-    { key:"historico",   label:"Histórico",          ph:"Contatos e respostas, em ordem", area:true },
-  ],
-  "Revisão": [
-    { key:"funciona",    label:"O que funciona",     ph:"O que já está bom — não mexer", area:true },
-    { key:"pede_mais",   label:"O que pede mais",    ph:"O que ainda precisa de trabalho", area:true },
-    { key:"decisao",     label:"Decisão desta rodada", ph:"O que foi decidido mudar ou manter" },
-    { key:"proxima_rodada", label:"Próxima rodada",  ph:"O que fica para a próxima leitura" },
-  ],
-  "Pesquisa": [
-    { key:"pergunta_pesquisa", label:"Pergunta",     ph:"O que você está tentando descobrir" },
-    { key:"fontes_pesquisa", label:"Fontes",         ph:"Livros, artigos, pessoas, lugares visitados", area:true },
-    { key:"descobertas", label:"Descobertas",        ph:"O que já foi confirmado", area:true },
-    { key:"perguntas_abertas", label:"Perguntas em aberto", ph:"O que ainda não tem resposta", area:true },
-  ],
 };
 
 const FICHA_KINDS = new Set(Object.keys(FICHA_SCHEMAS));
 window.FICHA_KINDS = FICHA_KINDS; // expõe para editor-controller.js e outros módulos
-window.FICHA_SCHEMAS = FICHA_SCHEMAS; // idem — buildFichaEditor() em editor-controller.js lê via window.
 
 function parseFichaData(text, kind) {
   if (!text) return {};

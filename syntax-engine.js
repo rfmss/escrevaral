@@ -39,7 +39,7 @@
         _SIGLAS     = new Set(_norma.siglas_pt_br || []);
         _SUBST_IA   = new Set(_norma.substantivos_ia || []);
         _VERBOS_PRES = new Set(_norma.verbos_pres_reg || []);
-        _ADJ_EXT    = new Set((_norma.adjetivos_comuns || []).map(_stripDiac));
+        _ADJ_EXT    = new Set(_norma.adjetivos_comuns || []);
       }
       return true;
     } catch (e) {
@@ -67,9 +67,6 @@
     "certo","certa","tal","tais",
     "mesmo","mesma","mesmos","mesmas",
     "próprio","própria","próprios","próprias",
-    // pronomes relativos/interrogativos — Bechara §§ 220-224
-    "quem","cujo","cuja","cujos","cujas",
-    "qual","quais","quanto","quanta","quantos","quantas",
   ]);
   const PRONOMES_DEM = new Set([
     "este","esta","estes","estas","esse","essa","esses","essas",
@@ -163,8 +160,6 @@
     "oba","ufa","xi","vixe","epa","ué","opa","poxa","bah","hem","hein",
     "caramba","eita","eta","arre","ena","uai","credo","ave",
     "alô","tchau","psiu","oxalá",
-    // marcadores de discurso sem ambiguidade lexical — Cunha&Cintra cap.16
-    "ora","pronto","eis",
   ]);
 
   // Ordinais canônicos sem ambiguidade de substantivo (Cunha&Cintra cap.12)
@@ -191,39 +186,19 @@
   // "-oes": plurais de -ção/-são (soluções, ações, nações)
   // "-ao" e "-i" excluídos: ambíguos com verbos (vão, saí)
   const _SUFIXOS_NOM = /(?:cao|sao|oes|dade|tude|eza|ez|ismo|ncia|mento|agem|ista|ura|aria|orio)$/;
-  const _SUFIXOS_NOM_PLURAL = /(?:emas|omas|imas|uras|ores|ares|anes|etes|otes|umas|ersas|ivas|amas)$/;
 
   // Transições de alta confiança extraídas do Mac-Morpho (1.17M tokens, NLTK)
   // Só transições com P >= 0.70 entram como regra determinística
   // P(curr | prev): Determiner→Noun 0.76, Numeral→Noun 0.87
   const _BIGRAM_NOUN_PREV = new Set(["Determiner", "Numeral"]);
-  const _POSSESSIVOS = new Set(["meu","minha","meus","minhas","seu","sua","seus","suas","teu","tua","teus","tuas","nosso","nossa","nossos","nossas","vosso","vossa","vossos","vossas"]);
-  const _PRON_PESSOAL = new Set(["eu","tu","ele","ela","nos","nós","vos","vós","eles","elas","voce","vocês","voces","a gente"]);
-  const _SUBST_INF_LIKE = new Set(["lugar","jantar","prazer","lazer","mulher","colher","mar","lar","luar","altar","pilar","acucar","talher","elixir","mister","carater"]);
-  const _ADJ_FLAT_ADV  = new Set(["alto","alta","baixo","baixa","claro","clara","rapido","rapida","errado","errada","certo","certa","largo","larga","longe","perto","duro","dura","fundo","funda","forte","firme","limpo","limpa","fundo","funda","livre","leve","grave","suave"]);
   const _DIACRITICO_ADJ_AMBIG = new Set(["publica", "publicas", "publico", "publicos"]);
   const _SERIA_ADJ_AMBIG = new Set(["seria", "serias"]);
   const _ADV_INTENS_ADJ_CTX = new Set(["demais", "muito", "muita", "pouco", "pouca", "bastante", "mais", "menos", "tao", "tão", "quase"]);
   const _COPULAS_ADJ_CTX = new Set([
-    // ser
-    "ser", "e", "é", "sao", "são", "era", "eras", "eram", "foi", "fomos", "foram",
-    "fora", "foras", "fosse", "fossem", "for", "forem", "seja", "sejam", "serei",
-    "sera", "será", "serao", "serão", "seria", "seriam", "sendo", "sido",
-    // estar
-    "estar", "esta", "está", "estao", "estão", "estava", "estavam", "esteve",
-    "estivera", "estaria", "estivesse", "fique",
-    // ficar
-    "ficar", "fica", "ficou", "ficava", "ficavam", "ficara", "ficaram", "ficará", "ficaria", "ficasse",
-    // outros
+    "ficar", "fica", "ficou", "ficava", "ficavam", "ficara", "ficaram", "ficará", "ficaria", "ficasse", "fique",
+    "estar", "esta", "está", "estao", "estão", "estava", "estavam", "esteve", "estivera", "estaria", "estivesse",
     "parecer", "parece", "pareceu", "parecia", "continuar", "continua", "continuava",
     "permanecer", "permanece", "permanecia", "tornar", "tornou", "tornava",
-    // sentir(-se), achar(-se), mostrar(-se), revelar(-se) como semi-cópulas
-    "sentiu", "sente", "sentia", "sentira", "sentiria", "sentir",
-    "achou", "acha", "achava", "achara", "achar",
-    "mostrou", "mostra", "mostrava", "mostrara","mostrar",
-    "revelou", "revela", "revelava", "revelara","revelar",
-    "julgou", "julga", "julgava", "julgar",
-    "considerou", "considera", "considerava","considerar",
   ]);
   const _PARTICIPIOS_IRR_CTX = new Set([
     "aberto", "aberta", "abertos", "abertas",
@@ -238,18 +213,6 @@
     "expulso", "expulsa", "expulsos", "expulsas",
     "aceito", "aceita", "aceitos", "aceitas",
     "oculto", "oculta", "ocultos", "ocultas",
-    "tido", "tida", "tidos", "tidas",
-    "eleito", "eleita", "eleitos", "eleitas",
-    "contido", "contida", "contidos", "contidas",
-    "mantido", "mantida", "mantidos", "mantidas",
-    "obtido", "obtida", "obtidos", "obtidas",
-    "retido", "retida", "retidos", "retidas",
-    "conduzido", "conduzida", "conduzidos", "conduzidas",
-    "previsto", "prevista", "previstos", "previstas",
-    "salvo", "salva", "salvos", "salvas",
-    "entregue", "entregues",
-    "incluso", "inclusa", "inclusos", "inclusas",
-    "excluso", "exclusa",
   ]);
 
   function _isParticipleLike(normNoAccent) {
@@ -279,12 +242,6 @@
       if (t.tags.length === 0 && na.length > 4 && _SUFIXOS_NOM.test(na))
         t.tags.push("Noun");
 
-      // R1b — após verbo transitivo não-cópula, palavra ainda sem tag → objeto nominal provável:
-      // "criou versos", "leram poemas", "visitou personagens" — palavra desconhecida pós-verbo é noun
-      if (t.tags.length === 0 && na.length > 2
-          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm))
-        t.tags.push("Noun");
-
       // R2 — após Determinante ou Preposição, ainda sem tag → Substantivo
       if (t.tags.length === 0 && prevIsCtx)
         t.tags.push("Noun");
@@ -310,44 +267,13 @@
         _addUniqueTag(t.tags, "Adverb");
       }
 
-      const nextVerbToken = tks.slice(i + 1).find(token => token?.tags?.includes("Verb"));
-      const nextVerbNorm = nextVerbToken ? _stripDiac(nextVerbToken.normal || "") : "";
-      const nextVerbIsInfinitive = /(?:ar|er|ir)$/.test(nextVerbNorm);
-      const nextLooksObject = nextTags.includes("Determiner")
-        || (nextTags.includes("Pronoun") && !nextTags.includes("Preposition"))
-        || (nextTags.includes("Noun") && !nextTags.includes("Verb") && !nextTags.includes("Adjective"));
-
-      if (t.tags.length === 1 && t.tags[0] === "Adjective"
-          && _VERBOS_PRES.has(na)
-          && prevTags.includes("Noun")
-          && !prevTags.includes("Pronoun")
-          && !prevTags.includes("Preposition")) {
-        if (na === "precisa" && nextNorm === "de") {
-          t.tags[0] = "Verb";
-        } else if (nextLooksObject) {
-          t.tags[0] = "Verb";
-        } else if (na === "precisa"
-            && ["de", "do", "da", "dos", "das"].includes(nextNorm)
-            && (!nextVerbNorm || nextVerbIsInfinitive)) {
-          t.tags[0] = "Verb";
-        }
-      }
-
       // R6 — diacríticos distintivos sem acento: preservar a leitura verbal,
       // mas registrar a leitura adjetiva quando o contexto nominal pede alerta
       // ortográfico ("opinião pública", "conversa séria").
       if (_DIACRITICO_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && nextTags.includes("Verb")) {
         _addUniqueTag(t.tags, "Adjective");
       }
-      if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && (_ADV_INTENS_ADJ_CTX.has(nextNorm) || nextTags.includes("Verb"))) {
-        _addUniqueTag(t.tags, "Adjective");
-      }
-
-      // R7a — palavra sem tag após cópula → Adjective predicativo:
-      // cobre particípios irregulares sem entrada lexical (aberta, coberta)
-      // e adjetivos planos sem entrada (limpo, livre, leve)
-      if (t.tags.length === 0 && _COPULAS_ADJ_CTX.has(prevNorm)
-          && (_PARTICIPIOS_IRR_CTX.has(na) || _ADJ_FLAT_ADV.has(na))) {
+      if (_SERIA_ADJ_AMBIG.has(na) && t.tags.includes("Verb") && prevTags.includes("Noun") && !prevTags.includes("Pronoun") && _ADV_INTENS_ADJ_CTX.has(nextNorm)) {
         _addUniqueTag(t.tags, "Adjective");
       }
 
@@ -357,93 +283,6 @@
         if ((prevLooksNominal && !prevTags.includes("Preposition")) || _COPULAS_ADJ_CTX.has(prevNorm)) {
           _addUniqueTag(t.tags, "Adjective");
         }
-      }
-
-      // R8 — "cedo" como verbo (ceder) quando seguido de possessivo:
-      // "Cedo meu lugar" ≠ "Chegou cedo"; possessivo após cedo indica objeto direto.
-      if (na === "cedo" && t.tags.includes("Adverb") && _POSSESSIVOS.has(nextNorm)) {
-        t.tags = t.tags.filter(tt => tt !== "Adverb");
-        _addUniqueTag(t.tags, "Verb");
-      }
-
-      // R9 — adjetivos usados como advérbios planos após verbo não-cópula:
-      // "falou alto", "correu rápido" — adjective form but adverbial function.
-      if (_ADJ_FLAT_ADV.has(na) && t.tags.length === 1 && t.tags[0] === "Adjective"
-          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
-        _addUniqueTag(t.tags, "Adverb");
-      }
-
-      // R9b — adj plano com leitura verbal (sem Adjective) após verbo não-cópula sem objeto direto → Adverb:
-      // "respirou fundo", "cantou forte" — distingue de "eu fundo coisas" onde fundo toma objeto nominal
-      if (_ADJ_FLAT_ADV.has(na) && t.tags.includes("Verb") && !t.tags.includes("Adjective")
-          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)
-          && !nextTags.includes("Noun") && !nextTags.includes("Pronoun") && !nextTags.includes("Determiner")) {
-        _addUniqueTag(t.tags, "Adverb");
-      }
-
-      // R7b — pronome indefinido em _ADJ_FLAT_ADV como predicativo após cópula:
-      // "certa" em "A resposta foi certa" deve ser Adjective, não só Pronome
-      if (_COPULAS_ADJ_CTX.has(prevNorm) && _ADJ_FLAT_ADV.has(na)
-          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
-          && !t.tags.includes("Adjective")) {
-        _addUniqueTag(t.tags, "Adjective");
-      }
-
-      // R7c — adj plano com leitura verbal após intensificador → Adjective predicativo:
-      // "é muito fundo", "ficou muito forte", "está muito limpo" (verb=fundir, mas contexto = adj)
-      if (_ADJ_FLAT_ADV.has(na) && t.tags.includes("Verb") && !t.tags.includes("Adjective")
-          && _ADV_INTENS_ADJ_CTX.has(prevNorm)) {
-        _addUniqueTag(t.tags, "Adjective");
-      }
-
-      // R11 — "certo/certa" como advérbio plano após verbo não-cópula:
-      // pronome indefinido que funciona adverbialmente ("chegou certo", "acertou certa")
-      if ((na === "certo" || na === "certa")
-          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
-          && prevTags.includes("Verb") && !_COPULAS_ADJ_CTX.has(prevNorm)) {
-        _addUniqueTag(t.tags, "Adverb");
-      }
-
-      // R11b — "certo/certa" pós-nominal → Adjective adnominal:
-      // "o tom certo", "a resposta certa" — certo/certa após Noun é adjetivo, não pronome indefinido
-      if ((na === "certo" || na === "certa")
-          && (t.tags.includes("Pronoun") || t.tags.includes("Noun"))
-          && !t.tags.includes("Adjective")
-          && (prevTags.includes("Noun") || prevTags.includes("Adjective"))
-          && !prevTags.includes("Verb")) {
-        _addUniqueTag(t.tags, "Adjective");
-      }
-
-      // R_SALVO — "salvo/exceto/menos" como preposição excludente após pontuação:
-      // "Todos foram, salvo ela" — vírgula antecede salvo, próximo é pronome/nome → Preposition
-      if ((na === "salvo" || na === "exceto" || na === "menos" || na === "senao" || na === "senão")
-          && t.tags.includes("Verb") && !t.tags.includes("Adjective")
-          && (prevNorm === "," || prevNorm === ";" || prevNorm === "")
-          && (nextTags.includes("Pronoun") || nextTags.includes("Noun") || nextTags.includes("Determiner"))) {
-        _addUniqueTag(t.tags, "Preposition");
-      }
-
-      // R10 — palavra sem tags após pronome pessoal sujeito → leitura verbal:
-      // "Eu jogo", "Ela canta" — pronome pessoal como sujeito indica que o próximo
-      // conteúdo sem classe atribuída é provavelmente verbo.
-      if (t.tags.length === 0 && _PRON_PESSOAL.has(prevNorm)) {
-        _addUniqueTag(t.tags, "Verb");
-      }
-
-      // R12 — palavra de conteúdo ainda sem tag → substantivo (classe aberta padrão)
-      if (t.tags.length === 0 && /\p{L}/u.test(t.text)) {
-        t.tags.push("Noun");
-      }
-
-      // R13 — "que" relativo após demonstrativo neutro: "o que", "tudo que", "aquilo que"
-      if (na === "que" && (prevNorm === "o" || prevNorm === "tudo" || prevNorm === "aquilo" || prevNorm === "isso" || prevNorm === "isto")) {
-        _addUniqueTag(t.tags, "Pronoun");
-      }
-
-      // R14 — substantivos comuns com cara de infinitivo em posição 0 → leitura nominal:
-      // "Lugar de mulher…", "Jantar com ela…" (não são verbos; infinitivos reais mantêm Verb)
-      if (i === 0 && t.tags.includes("Verb") && t.tags.includes("Noun") && _SUBST_INF_LIKE.has(na)) {
-        t.tags = t.tags.filter(tt => tt !== "Verb");
       }
     }
     return tks;
@@ -480,14 +319,6 @@
       // P0.4: verificar verbos irregulares e presentes ANTES de adjetivos — evita sequestro
       else if (VERBOS_AUX.has(norm)) { tags.push("Verb"); }
       else if (_VERBOS_IRR.size > 0 && !PREPS_OI.has(norm) && _VERBOS_IRR.has(_stripDiac(norm))) { tags.push("Verb"); }
-      else if (norm === "integra"
-          && i >= 2
-          && !PREPS_OI.has(tokens[i-1].toLowerCase())
-          && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase())
-          && i + 1 < tokens.length
-          && !PREPS_OI.has(tokens[i+1].toLowerCase())
-          && !CONTRACOES_PREP_DEM.has(tokens[i+1].toLowerCase())
-          && !/^[.,;:!?—]$/.test(tokens[i+1])) { tags.push("Verb"); }
       else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(_stripDiac(norm)) && i > 0 && !PREPS_OI.has(tokens[i-1].toLowerCase()) && !ARTIGOS_DEF.has(tokens[i-1].toLowerCase()) && !(i >= 2 && (ARTIGOS_DEF.has(tokens[i-2].toLowerCase()) || tokens[i-2].toLowerCase() === "a"))) { tags.push("Verb"); }
       else if (ADJETIVOS_PRIM.has(norm) || (_ADJ_EXT.size > 0 && _ADJ_EXT.has(_stripDiac(norm)))) { tags.push("Adjective"); }
       else if (ADV_NEGACAO.has(norm)) { tags.push("Adverb"); tags.push("Negative"); }
@@ -525,17 +356,8 @@
           } else if (_VERBOS_PRES.size > 0 && _VERBOS_PRES.has(normNacc)) {
             tags.push("Verb");
           } else {
-            const _cliSet0 = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
-            const _clParts0 = norm.split("-");
-            if (_clParts0.length >= 2 && _clParts0.slice(1).every(p => _cliSet0.has(p))) {
-              tags.push("Verb");
-              if (/(?:ar|er|ir)$/.test(_clParts0[0])) tags.push("Noun");
-            }
-            else if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
+            if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
             else if (norm.length > 4 && /(?:aram|eram|iram|ava|avam|ará|erá|irá|asse|esse|isse|ou|eu|iu|ei)$/.test(norm)) tags.push("Verb");
-            else if (/mente$/.test(norm) && norm.length > 6) tags.push("Adverb");
-            // Infinitivo-sujeito: "Publicar é expor-se" — verbo, mas mantém Noun pela substantivação
-            else if (/(?:ar|er|ir)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) { tags.push("Verb"); tags.push("Noun"); }
             else tags.push("Noun");
           }
         } else {
@@ -545,20 +367,15 @@
           if (/(?:avel|ivel)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           if (/(?:ante|ente)$/.test(_na) && _na.length > 6) tags.push("Adjective");
           if (/(?:udo|uda|udos|udas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
-          // "-mento" é sufixo nominal (deslocamento, pertencimento) — não marcar adjetivo
-          if (/(?:ento|enta)$/.test(_na) && _na.length > 6 && !/ment[oa]$/.test(_na)) tags.push("Adjective");
-          // "-ivo/-iva" são adjetivos (cognitivo/afetivo) mas "arquivo" é substantivo comum
-          const _SUBST_EXC_IVO = new Set(["arquivo","arquivos","dispositivo","dispositivos"]);
-          if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5 && !_SUBST_EXC_IVO.has(_na)) tags.push("Adjective");
+          if (/(?:ento|enta)$/.test(_na) && _na.length > 6) tags.push("Adjective");
+          if (/(?:ivo|iva|ivos|ivas)$/.test(_na) && _na.length > 5) tags.push("Adjective");
           // P0.6: clitico hifenizado → base verbal + clitico
           const _cliSet = new Set(["me","te","se","o","a","lo","la","lhe","nos","vos","lhes","los","las"]);
           const _clParts = norm.split("-");
           if (_clParts.length >= 2 && _clParts.slice(1).every(p => _cliSet.has(p))) {
             tags.push("Verb"); // base + clítico = verbo
           } else if (/(?:ando|endo|indo)$/.test(norm)) { tags.push("Verb"); tags.push("Gerund"); }
-          // infinitivos terminam em -ar/-er/-ir; "-or" não é desinência verbal → excluído para evitar
-          // que "computador", "monitor", "editor" sejam classificados como Verb
-          else if (/(?:ar|er|ir)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
+          else if (/(?:ar|er|ir|or)$/.test(norm) && norm.length > 3 && !PREPS_OI.has(norm)) tags.push("Verb");
           // P0.5: flexões acentuadas — usar _na (sem acento) para reconhecer -arão/-erão/-irão etc
           else if (/(?:arao|erao|irao|avamos|iamos|ariamos|eriamos|iriamos|assemos|essemos|issemos|aramos|eramos|iramos|ado|ada|ados|adas|ido|ida|idos|idas)$/.test(_na) && _na.length > 4) {
             // Particípios: verificar se não é substantivo
@@ -755,8 +572,6 @@
     "a","ao","à","aos","às","de","do","da","dos","das","em","no","na","nos","nas",
     "para","por","pelo","pela","pelos","pelas",
     "com","sem","sobre","sob","entre","contra","ante","após","desde","até","perante","durante",
-    "através","atraves","apesar","mediante","conforme","segundo","perante","exceto","salvo","senão","senao","malgrado",
-    "acerca","acerca de","além de","aquém de",
   ]);
 
   // ── Artigos definidos/indefinidos inequívocos — Bechara §§ 128-130 ─────────
@@ -826,11 +641,11 @@
   }
 
   // ── Advérbios por tipo — Cunha&Cintra cap.14 + syntax-data ────────────────
-  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente","doravante"]);
-  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá","além","aquém","acima","abaixo","adiante","atrás","defronte","acolá","diante"]);
+  const ADV_TEMPO   = new Set(["ontem","hoje","amanhã","agora","antes","depois","cedo","tarde","logo","já","sempre","nunca","jamais","antigamente","outrora","então","enfim","finalmente","ainda","brevemente","imediatamente"]);
+  const ADV_LUGAR   = new Set(["aqui","ali","lá","cá","aí","abaixo","acima","dentro","fora","atrás","adiante","perto","longe","onde","alhures","algures","acolá"]);
   const ADV_MODO    = new Set(["assim","bem","mal","melhor","pior","devagar","depressa","rapidamente","lentamente","facilmente","dificilmente","calmamente"]);
   const ADV_NEGACAO = new Set(["não","nem","jamais","nunca","tampouco"]);
-  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive","outrossim"]);
+  const ADV_AFIRM   = new Set(["sim","certamente","decerto","efetivamente","realmente","também","inclusive"]);
   const ADV_INTENS  = new Set(["muito","muita","pouco","pouca","bastante","mais","menos","tão","tanto","quão","quase","demais","apenas","somente","só"]);
   const ADV_DUVIDA  = new Set(["talvez","provavelmente","possivelmente","porventura","quiçá","eventualmente"]);
 
@@ -869,7 +684,6 @@
     let ultimoSujeito = null;
     let ultimoVerboText = null;
     let prepVistaAntes = false; // rastreia se havia preposição antes do SN atual
-    let emSubordinada = false;  // true após conjunção subordinativa, até o verbo da subordinada
 
     // Pré-detectar vocativo: primeiro token real seguido de vírgula
     // que não seja conjunção, advérbio ou preposição conhecida
@@ -928,8 +742,6 @@
       const conj = identificarConjuncao(txt, { posInicio: i === 0 || estado === "inicio", conjTempCond });
       if (conj || tags.includes("Conjunction")) {
         resultado.push({ ...t, funcao: "Conjunção", conjuncao: conj, tagsLegíveis: mapearTag(tags) });
-        if (conj?.classe === "subordinativa") emSubordinada = true;
-        else if (conj?.classe === "coordenativa") { emSubordinada = false; verboVisto = false; }
         estado = "inicio";
         prepVistaAntes = false;
         continue;
@@ -952,9 +764,7 @@
 
       // ── Verbo — fix: usar VERBOS_LIGACAO local em vez de _data.verbos_ligacao
       if (tags.includes("Verb") && !tags.includes("Negative")) {
-        const eraSubord = emSubordinada;
-        if (emSubordinada) emSubordinada = false;
-        if (!eraSubord) verboVisto = true; // só verbo da oração principal atualiza verboVisto
+        verboVisto = true;
         const ctx = { conjTempCond, posPrep: prepVistaAntes };
         const tempo = identificarTempoVerbal(txt, tags, ctx);
         const verbBase = norm.replace(/(ar|er|ir|ou|eu|iu|ei|ava|ia|ará|erá|irá|aria|eria|iria)$/, "");
@@ -975,7 +785,7 @@
         ultimoVerboIsLigacao = isLig;
         ultimoVerboText = txt;
         resultado.push({ ...t, funcao: isLig ? "Verbo de ligação" : "Núcleo do predicado", tempo, tagsLegíveis: mapearTag(tags) });
-        estado = eraSubord ? "inicio" : "apos_verbo"; // após verbo de subordinada, volta a buscar sujeito principal
+        estado = "apos_verbo";
         prepVistaAntes = false;
         continue;
       }
@@ -990,9 +800,8 @@
       // ── Nomes, pronomes, adjetivos
       if (tags.includes("Noun") || tags.includes("Pronoun") || tags.includes("Person") || tags.includes("Adjective")) {
         if (!verboVisto) {
-          const funcaoSuj = emSubordinada ? "Sujeito da oração subordinada" : "Sujeito (provável)";
-          resultado.push({ ...t, funcao: funcaoSuj, tagsLegíveis: mapearTag(tags) });
-          if (!emSubordinada) ultimoSujeito = txt;
+          resultado.push({ ...t, funcao: "Sujeito (provável)", tagsLegíveis: mapearTag(tags) });
+          ultimoSujeito = txt;
           estado = "apos_sujeito";
         } else if (estado === "voz_passiva") {
           resultado.push({ ...t, funcao: "Sujeito paciente (voz passiva)", tagsLegíveis: mapearTag(tags) });

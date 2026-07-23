@@ -1,4 +1,4 @@
-const CACHE = 'escrevaral-pegar-v5';
+const CACHE = 'escrevaral-pegar-v4';
 const ASSETS = [
   '/pegar/',
   '/pegar/index.html',
