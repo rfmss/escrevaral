@@ -93,6 +93,8 @@
     border: none;
     cursor: pointer;
     color: var(--muted);
+    min-width: 44px;
+    min-height: 44px;
     padding: 6px 4px 4px;
     transition: color var(--motion-quick);
     font-family: inherit;
@@ -181,6 +183,7 @@
     border: none;
     cursor: pointer;
     color: var(--muted);
+    min-height: 56px;
     padding: 12px 6px;
     transition: color var(--motion-quick), background var(--motion-quick);
     font-family: inherit;

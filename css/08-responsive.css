@@ -6,6 +6,43 @@
   :root { --page-gutter: 20px; }
 }
 
+/* Notebook: os painéis continuam disponíveis, mas deixam largura suficiente
+   para uma linha de manuscrito confortável quando guia e análise estão abertos. */
+@media (min-width: 821px) and (max-width: 1440px) {
+  .sidebar {
+    width: 232px;
+    flex-basis: 232px;
+    padding-inline: var(--space-3);
+  }
+
+  .inspector {
+    width: 272px;
+    flex-basis: 272px;
+    padding-inline: var(--space-4);
+  }
+
+  .view-editor {
+    padding-inline: var(--space-4);
+  }
+
+  .editor-split {
+    --template-panel-width: 280px;
+  }
+}
+
+/* Reflow próximo de 200% em desktop: mantém destinos e ações, mas usa a
+   composição de tablet em vez de comprimir três colunas. */
+@media (max-width: 900px) {
+  .topbar {
+    gap: var(--space-2);
+    padding-inline: var(--space-3);
+  }
+
+  .brand-lockup > div > span {
+    display: none;
+  }
+}
+
 /* ── MOBILE PHONE (≤480px) — topbar silenciosa, statusbar essencial ── */
 @media (max-width: 480px) {
   /* Topbar: esconde áudio e busca — foco em escrita */

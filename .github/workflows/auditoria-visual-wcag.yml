@@ -1,0 +1,33 @@
+name: Auditoria visual e WCAG
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual-wcag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@v5.6.0
+        with:
+          python-version: '3.12'
+      - name: Instalar Playwright e navegadores
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium firefox
+      - name: Iniciar aplicação local
+        run: python3 -m http.server 8799 >/tmp/escrevaral-http.log 2>&1 &
+      - name: Executar matriz visual e WCAG
+        run: python3 scripts/auditor-visual-wcag.py --browser all
+      - name: Publicar relatório e screenshots
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: auditoria-visual-wcag
+          path: reports/auditoria/visual-wcag/
+          if-no-files-found: warn

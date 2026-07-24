@@ -10,6 +10,10 @@ const RIMALAB_STORAGE_KEY = "vereda.rimalab.v1";
 const RIMALAB_SAVED_AT_KEY = "vereda.rimalab-saved-at.v1";
 const FIRST_VISIT_KEY = "vrda-first-visit";
 const TERMS_KEY       = "escrevaral-termos-v1";
+const RECOVERY_STORAGE_KEY = "vereda.recovery.v1";
+const RESTORE_SNAPSHOT_STORAGE_KEY = "vereda.before-restore.v1";
+let storageRecoveryNeeded = false;
+let storageRecoveryRaw = null;
 
 if (new URLSearchParams(window.location.search).get("reset") === "true") {
   // Compatibilidade com links antigos: a query é removida, mas nunca apaga
@@ -339,10 +343,24 @@ function loadState() {
       proofValidations: parsed.proofValidations || {},
         proofAuthor: parsed.proofAuthor || { name: "", artisticName: "", signedAt: "" },
     };
-  } catch {
+  } catch (error) {
+    // Nunca trate um acervo ilegível como um acervo novo: uma gravação posterior
+    // apagaria a melhor cópia ainda recuperável. Mantemos o valor bruto separado
+    // e bloqueamos persistência até a pessoa exportar e decidir recomeçar.
+    storageRecoveryNeeded = true;
+    storageRecoveryRaw = saved;
+    try {
+      localStorage.setItem(RECOVERY_STORAGE_KEY, JSON.stringify({
+        capturedAt: new Date().toISOString(),
+        error: error?.message || "Estado local ilegível",
+        raw: saved,
+      }));
+    } catch (_) {
+      // Mesmo sem quota para a cópia, `storageRecoveryRaw` mantém o valor nesta aba.
+    }
     return {
-      activeId: starterManuscripts[0]?.id ?? null,
-      manuscripts: starterManuscripts,
+      activeId: null,
+      manuscripts: [],
       focus: getDefaultFocusSettings(),
       lexical: getDefaultLexicalState(),
       template: getDefaultTemplateState(),
@@ -481,6 +499,12 @@ function showSaveFailure(error) {
 }
 
 function persistStateNow(status = "Salvo localmente") {
+  if (storageRecoveryNeeded) {
+    showSaveFailure(new Error("Acervo local em modo de recuperação"));
+    saveStatus.textContent = "RECUPERAÇÃO NECESSÁRIA — gravação bloqueada";
+    saveStatus.title = "Exporte o acervo recuperável antes de recomeçar. O Escrevaral não sobrescreverá os dados ilegíveis.";
+    return false;
+  }
   const now = new Date();
   const previousState = state;
   const localPayload = buildPersistableState(state);

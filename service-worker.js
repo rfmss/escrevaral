@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v935";
-const ASSET_VERSION = "20260723-v935";
+const CACHE_NAME = "vereda-offline-v938";
+const ASSET_VERSION = "20260724-v938";
 
 const CORE_ASSETS = [
   "./",
@@ -104,7 +104,15 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(CORE_ASSETS))
+      // `addAll` tornava a oficina inteira indisponível offline quando um único
+      // áudio, ícone ou material opcional falhava. O documento é obrigatório;
+      // os demais recursos são tentados individualmente e podem ser completados
+      // pela estratégia de runtime cache no próximo acesso online.
+      .then(async (cache) => {
+        await cache.addAll(["./", "./index.html"]);
+        const optionalAssets = CORE_ASSETS.filter((asset) => asset !== "./" && asset !== "./index.html");
+        await Promise.allSettled(optionalAssets.map((asset) => cache.add(asset)));
+      })
       .then(() => self.skipWaiting())
   );
 });

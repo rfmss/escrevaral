@@ -141,6 +141,8 @@ function openBandeja() {
   if (printBtn) printBtn.disabled = !getActiveManuscript();
   if (typeof hideSaveHint === "function") hideSaveHint();
   bandeja.removeAttribute("hidden");
+  document.querySelector(".app-shell")?.setAttribute("inert", "");
+  document.getElementById("mobile-dock")?.setAttribute("inert", "");
   requestAnimationFrame(() => bandeja.classList.add("is-open"));
   if (btn) btn.setAttribute("aria-expanded", "true");
   const sheet = bandeja.querySelector(".bandeja-sheet");
@@ -152,6 +154,8 @@ function closeBandeja() {
   const btn = document.querySelector("[data-action='toggle-bandeja']");
   if (!bandeja || bandeja.hidden) return;
   bandeja.classList.remove("is-open");
+  document.querySelector(".app-shell")?.removeAttribute("inert");
+  document.getElementById("mobile-dock")?.removeAttribute("inert");
   if (btn) {
     btn.setAttribute("aria-expanded", "false");
     btn.focus();
@@ -730,6 +734,7 @@ function switchAtelier(tab) {
 }
 
 function checkTerms() {
+  if (storageRecoveryNeeded) return;
   if (!_TERMS_ACCEPTED && termsOverlay) {
     const hasWork = state.manuscripts && state.manuscripts.length > 0;
     const stateNew  = termsOverlay.querySelector('[data-ob-state="new"]');
@@ -739,8 +744,14 @@ function checkTerms() {
 
     const dock = document.getElementById("mobile-dock");
     const bandeja = document.getElementById("mobile-bandeja");
+    const appShell = document.querySelector(".app-shell");
     if (dock)    dock.inert    = true;
     if (bandeja) bandeja.inert = true;
+    if (appShell) {
+      [...appShell.children].forEach((child) => {
+        if (child !== termsOverlay) child.inert = true;
+      });
+    }
     setTimeout(() => {
       termsOverlay.hidden = false;
       const firstBtn = termsOverlay.querySelector('[data-ob-state]:not([hidden]) button') ||
@@ -756,8 +767,10 @@ function acceptTerms(goTo) {
   if (termsOverlay) termsOverlay.hidden = true;
   const dock = document.getElementById("mobile-dock");
   const bandeja = document.getElementById("mobile-bandeja");
+  const appShell = document.querySelector(".app-shell");
   if (dock)    dock.inert    = false;
   if (bandeja) bandeja.inert = false;
+  if (appShell) [...appShell.children].forEach((child) => { child.inert = false; });
   if (goTo === "blank") {
     // Folha em branco direto — sem modal, sem template anterior
     state.template.selectedId = null;
@@ -3717,6 +3730,7 @@ function _bootstrap() {
   setView(getViewFromRoute(), { updateRoute: true, routeMode: "replace" });
   registerOfflineApp();
   initializeFilesystemBackup();
+  initializeStorageRecovery();
   checkTerms();
   setTimeout(renderSidebarQuote, 500);
   checkFirstVisit();
