@@ -88,7 +88,8 @@ function renderSpecializedEditor(manuscript) {
   } else if (mode === "screenplay") {
     writingArea.hidden = true;
     specializedEditor.hidden = false;
-    specializedEditor.innerHTML = buildScreenplayEditor(manuscript.text);
+    const screenplayBlocks = VeredaScreenplayCodec.fromStored(manuscript);
+    specializedEditor.innerHTML = buildScreenplayEditor(manuscript.text, screenplayBlocks);
     // Foca o primeiro campo de ação para deixar claro que é editável
     requestAnimationFrame(() => {
       const firstAction = specializedEditor.querySelector(".sp-slug-input, .sp-action-area");
@@ -166,14 +167,63 @@ function renderMetadataForm() {
 }
 
 let _undoTimer = null;
+
+function readCurrentEditorPayload() {
+  const manuscript = getActiveManuscript();
+  const template = VeredaTemplates.getTemplate(state.template.selectedId);
+  const mode = template?.editorMode;
+  let text = null;
+  let editorData;
+
+  if (mode === "screenplay") {
+    const blocks = readScreenplayBlocks();
+    text = VeredaScreenplayCodec.toText(blocks);
+    editorData = { format: "screenplay", version: 1, blocks };
+  } else if (mode === "soneto") {
+    text = serializeSoneto();
+  } else if (mode === "teatro") {
+    text = serializeTeatro();
+  } else if (mode === "enem") {
+    text = serializeENEM();
+  } else if (mode === "slam") {
+    text = specializedEditor.querySelector("[data-slam-area]")?.innerText || "";
+  } else if (!mode && window.FICHA_KINDS?.has(manuscript?.kind)) {
+    text = serializeFicha();
+  } else if (!mode && manuscript?.type === "personagem") {
+    text = serializePersonagem();
+  }
+
+  if (text !== null) {
+    return {
+      text,
+      html: VeredaDocument.textToHtml(text),
+      editorData,
+    };
+  }
+
+  return {
+    text: writingArea.innerText,
+    html: writingArea.innerHTML,
+    editorData: undefined,
+  };
+}
+
 function updateCurrentManuscript() {
   scheduleUndoPush();
   const manuscript = getActiveManuscript();
+  if (!manuscript) return;
+  const editorPayload = readCurrentEditorPayload();
+  if (writingArea.hidden && writingArea.innerHTML !== editorPayload.html) {
+    // Mantém exportação, impressão e análise sincronizadas sem usar o elemento
+    // oculto como fonte da verdade do editor especializado.
+    writingArea.innerHTML = editorPayload.html;
+  }
   const nextManuscript = {
     ...manuscript,
     title: titleInput.value.trim() || "Texto sem título",
-    text: writingArea.innerText.trim(),
-    html:  writingArea.innerHTML,
+    text: editorPayload.text.trim(),
+    html: editorPayload.html,
+    editorData: editorPayload.editorData,
     updatedAt: new Date().toISOString(),
   };
 
