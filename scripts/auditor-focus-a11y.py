@@ -125,6 +125,7 @@ ACTIVE_JS = r"""
     outlineColor: style.outlineColor,
     outlineOffset: offset,
     boxShadow: style.boxShadow,
+    hasInsetFocus: el.matches(":focus-visible") && String(style.boxShadow).includes("inset"),
     shadowColors,
     background,
     rect: {left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom},
@@ -179,7 +180,11 @@ def issue(severity: str, viewport: str, theme: str, view: str, kind: str, elemen
 
 
 def visible_count(page, scope: str | None = None) -> int:
-    selector = f"{scope} {FOCUSABLE}" if scope else FOCUSABLE
+    selector = (
+        ",".join(f"{scope} {part.strip()}" for part in FOCUSABLE.split(","))
+        if scope
+        else FOCUSABLE
+    )
     return page.locator(selector).evaluate_all(
         """elements => elements.filter(el => {
           if (!(el instanceof HTMLElement)) return false;
@@ -268,7 +273,7 @@ def inspect_active(page, viewport: str, theme: str, view: str, enforce_scope: st
     if not ok:
         problems.append(issue("error", viewport, theme, view, "focus-low-contrast", descriptor, detail))
 
-    if data.get("clipped"):
+    if data.get("clipped") and not data.get("hasInsetFocus"):
         problems.append(issue("error", viewport, theme, view, "focus-clipped", descriptor, json.dumps(data["clipped"], ensure_ascii=False)))
 
     rect, screen = data["rect"], data["viewport"]
