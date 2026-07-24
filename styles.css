@@ -1,1 +1,57 @@
 /* CSS modularizado. Ver links em index.html. */
+
+/*
+ * Fundação de acessibilidade para foco por teclado.
+ * Mantida neste ponto de entrada para cobrir os módulos sem substituir
+ * os estados :focus específicos de campos e áreas de edição.
+ */
+:root {
+  --focus-ring-color: var(--primary);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 3px;
+}
+
+:where(
+  a[href],
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  [contenteditable="true"],
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
+  outline-offset: var(--focus-ring-offset);
+}
+
+:where(
+  button,
+  input,
+  select,
+  textarea,
+  [contenteditable="true"]
+):disabled:focus-visible,
+:where([aria-disabled="true"]):focus-visible {
+  outline: none !important;
+}
+
+/* A folha recebe foco sem parecer uma caixa pesada. */
+.writing-area:focus-visible {
+  outline-offset: 6px;
+}
+
+@media (forced-colors: active) {
+  :where(
+    a[href],
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [contenteditable="true"],
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline-color: Highlight !important;
+  }
+}
