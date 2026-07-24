@@ -11,7 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+from playwright.sync_api import sync_playwright
 
 VIEWPORTS = (
     ("360", 360, 800),
@@ -65,13 +66,13 @@ ACTIVE_JS = r"""
 
   const style = getComputedStyle(el);
   const rect = el.getBoundingClientRect();
-  const width = Number.parseFloat(style.outlineWidth) || 0;
-  const offset = Number.parseFloat(style.outlineOffset) || 0;
-  const extent = Math.max(0, width + offset);
+  const outlineWidth = Number.parseFloat(style.outlineWidth) || 0;
+  const outlineOffset = Number.parseFloat(style.outlineOffset) || 0;
+  const extent = Math.max(0, outlineWidth + outlineOffset);
   const tolerance = 1.5;
 
-  let background = "rgba(0, 0, 0, 0)";
-  let backgroundNode = el.parentElement;
+  let background = getComputedStyle(document.body).backgroundColor;
+  let backgroundNode = el;
   while (backgroundNode) {
     const candidate = getComputedStyle(backgroundNode).backgroundColor;
     const values = candidate.match(/[\d.]+/g) || [];
@@ -94,23 +95,16 @@ ACTIVE_JS = r"""
       const outsideX = rect.left - extent < parentRect.left - tolerance || rect.right + extent > parentRect.right + tolerance;
       const outsideY = rect.top - extent < parentRect.top - tolerance || rect.bottom + extent > parentRect.bottom + tolerance;
       if ((clipX && outsideX) || (clipY && outsideY)) {
-        clipped.push({
-          path: pathFor(ancestor),
-          overflowX: parentStyle.overflowX,
-          overflowY: parentStyle.overflowY
-        });
+        clipped.push({path: pathFor(ancestor), overflowX: parentStyle.overflowX, overflowY: parentStyle.overflowY});
       }
     }
     ancestor = ancestor.parentElement;
   }
 
   const label = (
-    el.getAttribute("aria-label") ||
-    el.getAttribute("title") ||
-    el.getAttribute("placeholder") ||
-    el.textContent ||
-    el.getAttribute("name") ||
-    ""
+    el.getAttribute("aria-label") || el.getAttribute("title") ||
+    el.getAttribute("placeholder") || el.textContent ||
+    el.getAttribute("name") || ""
   ).replace(/\s+/g, " ").trim().slice(0, 100);
 
   const shadowColors = [...String(style.boxShadow).matchAll(/rgba?\([^)]*\)/g)].map(match => match[0]);
@@ -121,9 +115,9 @@ ACTIVE_JS = r"""
     label,
     focusVisible: el.matches(":focus-visible"),
     outlineStyle: style.outlineStyle,
-    outlineWidth: width,
+    outlineWidth,
     outlineColor: style.outlineColor,
-    outlineOffset: offset,
+    outlineOffset,
     boxShadow: style.boxShadow,
     hasInsetFocus: el.matches(":focus-visible") && String(style.boxShadow).includes("inset"),
     shadowColors,
@@ -152,7 +146,7 @@ def rgb(value: str) -> tuple[float, float, float, float] | None:
 
 
 def luminance(color: tuple[float, float, float, float]) -> float:
-    channels = []
+    channels: list[float] = []
     for channel in color[:3]:
         value = channel / 255
         channels.append(value / 12.92 if value <= .04045 else ((value + .055) / 1.055) ** 2.4)
@@ -167,7 +161,7 @@ def ratio(first: str, second: str) -> float | None:
     return (max(one, two) + .05) / (min(one, two) + .05)
 
 
-def issue(severity: str, viewport: str, theme: str, view: str, kind: str, element: str, detail: str) -> dict:
+def issue(severity: str, viewport: str, theme: str, view: str, kind: str, element: str, detail: str) -> dict[str, str]:
     return {
         "severity": severity,
         "viewport": viewport,
@@ -180,11 +174,7 @@ def issue(severity: str, viewport: str, theme: str, view: str, kind: str, elemen
 
 
 def visible_count(page, scope: str | None = None) -> int:
-    selector = (
-        ",".join(f"{scope} {part.strip()}" for part in FOCUSABLE.split(","))
-        if scope
-        else FOCUSABLE
-    )
+    selector = ",".join(f"{scope} {part.strip()}" for part in FOCUSABLE.split(",")) if scope else FOCUSABLE
     return page.locator(selector).evaluate_all(
         """elements => elements.filter(el => {
           if (!(el instanceof HTMLElement)) return false;
@@ -210,16 +200,23 @@ def switch_view(page, view: str) -> None:
         arg=view,
         timeout=8_000,
     )
-    page.wait_for_timeout(60)
+    page.wait_for_timeout(80)
+
+
+def scroll_active_into_view(page) -> None:
+    page.evaluate(
+        """() => {
+          const active = document.activeElement;
+          if (active instanceof HTMLElement) active.scrollIntoView({block: "nearest", inline: "nearest"});
+        }"""
+    )
+    page.wait_for_timeout(16)
 
 
 def indicator_ok(data: dict[str, Any]) -> bool:
     if not data.get("focusVisible"):
         return False
-    outline = (
-        data.get("outlineStyle") not in {"none", "hidden", ""}
-        and float(data.get("outlineWidth") or 0) >= 1
-    )
+    outline = data.get("outlineStyle") not in {"none", "hidden", ""} and float(data.get("outlineWidth") or 0) >= 1
     shadow = str(data.get("boxShadow") or "").lower() not in {"", "none"}
     return bool(outline or shadow)
 
@@ -234,34 +231,21 @@ def contrast_ok(data: dict[str, Any]) -> tuple[bool, str]:
     return best >= 3, f"melhor contraste: {best:.2f}:1"
 
 
-def scroll_active_into_view(page) -> None:
-    page.evaluate(
-        """() => {
-          const active = document.activeElement;
-          if (active instanceof HTMLElement) {
-            active.scrollIntoView({block: "nearest", inline: "nearest"});
-          }
-        }"""
-    )
-    page.wait_for_timeout(16)
-
-
-def inspect_active(page, viewport: str, theme: str, view: str, enforce_scope: str | None = None) -> tuple[dict | None, list[dict]]:
+def inspect_active(page, viewport: str, theme: str, view: str, enforce_scope: str | None = None) -> tuple[dict[str, Any] | None, list[dict[str, str]]]:
     scroll_active_into_view(page)
     data = page.evaluate(ACTIVE_JS)
-    problems: list[dict] = []
+    problems: list[dict[str, str]] = []
     if not data:
         return None, problems
 
     descriptor = f'{data["path"]} — {data.get("label") or "(sem rótulo)"}'
-
     if enforce_scope:
         inside = page.evaluate(
             """selector => {
               const scope = document.querySelector(selector);
               return !!scope && scope.contains(document.activeElement);
             }""",
-            enforce_scope,
+            arg=enforce_scope,
         )
         if not inside:
             problems.append(issue("error", viewport, theme, view, "focus-escaped-dialog", descriptor, f"O foco saiu de {enforce_scope}."))
@@ -283,28 +267,14 @@ def inspect_active(page, viewport: str, theme: str, view: str, enforce_scope: st
     return data, problems
 
 
-def keyboard_cycle(
-    page,
-    viewport: str,
-    theme: str,
-    view: str,
-    *,
-    scope: str | None = None,
-    enforce_scope: str | None = None,
-) -> tuple[int, int, bool, bool, list[dict]]:
+def keyboard_cycle(page, viewport: str, theme: str, view: str, *, scope: str | None = None, enforce_scope: str | None = None) -> tuple[int, int, bool, bool, list[dict[str, str]]]:
     expected = visible_count(page, scope)
-    page.evaluate(
-        """() => {
-          if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-          scrollTo(0, 0);
-        }"""
-    )
-
-    found: dict[str, dict] = {}
-    first = None
+    page.evaluate("""() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); scrollTo(0, 0); }""")
+    found: dict[str, dict[str, Any]] = {}
+    first: str | None = None
     closed = False
     writing = False
-    problems: list[dict] = []
+    problems: list[dict[str, str]] = []
 
     for _ in range(min(max(expected + 24, 48), 280)):
         page.keyboard.press("Tab")
@@ -329,28 +299,21 @@ def keyboard_cycle(
     return expected, len(found), closed, writing, problems
 
 
-def screenshot(page, output: Path, viewport: str, theme: str, view: str, suffix: str = "focus") -> str:
+def screenshot(page, output: Path, viewport: str, theme: str, view: str) -> str:
     directory = output / "screenshots"
     directory.mkdir(parents=True, exist_ok=True)
-    name = f"{viewport}-{theme}-{view}-{suffix}.png"
+    name = f"{viewport}-{theme}-{view}-focus.png"
     page.screenshot(path=str(directory / name), full_page=True)
     return f"screenshots/{name}"
 
 
-def audit_onboarding(page, output: Path, viewport: str, theme: str) -> dict | None:
+def audit_onboarding(page, output: Path, viewport: str, theme: str) -> dict[str, Any] | None:
     overlay = page.locator("#terms-overlay").first
     if overlay.count() == 0 or not overlay.is_visible():
         return None
-
     expected, visited, closed, _, problems = keyboard_cycle(
-        page,
-        viewport,
-        theme,
-        "onboarding",
-        scope="#terms-overlay",
-        enforce_scope="#terms-overlay",
+        page, viewport, theme, "onboarding", scope="#terms-overlay", enforce_scope="#terms-overlay"
     )
-    evidence = screenshot(page, output, viewport, theme, "onboarding")
     return {
         "viewport": viewport,
         "theme": theme,
@@ -359,7 +322,7 @@ def audit_onboarding(page, output: Path, viewport: str, theme: str) -> dict | No
         "visited_focusables": visited,
         "focus_cycle_closed": closed,
         "writing_area_reached": False,
-        "screenshot": evidence,
+        "screenshot": screenshot(page, output, viewport, theme, "onboarding"),
         "issues": problems,
     }
 
@@ -373,26 +336,26 @@ def dismiss_onboarding(page) -> None:
         raise RuntimeError("Botão para concluir onboarding ausente")
     button.click()
     overlay.wait_for(state="hidden", timeout=8_000)
-    page.wait_for_timeout(120)
+    page.wait_for_timeout(150)
 
 
-def writing_area_check(page, viewport: str, theme: str) -> tuple[bool, list[dict]]:
+def writing_area_check(page, viewport: str, theme: str) -> tuple[bool, list[dict[str, str]]]:
     switch_view(page, "editor")
     title = page.locator(".title-input").first
     writing = page.locator(".writing-area").first
     if title.count() == 0 or writing.count() == 0:
         return False, [issue("error", viewport, theme, "editor", "editor-focus-missing", ".title-input / .writing-area", "Campos centrais ausentes.")]
-
     title.focus()
     page.keyboard.press("Tab")
     data, problems = inspect_active(page, viewport, theme, "editor")
     if not data or "writing-area" not in data.get("classes", []):
-        return False, [*problems, issue("error", viewport, theme, "editor", "writing-area-tab-order", ".writing-area", "Tab a partir do título não chegou à área de escrita.")]
+        problems.append(issue("error", viewport, theme, "editor", "writing-area-tab-order", ".writing-area", "Tab a partir do título não chegou à área de escrita."))
+        return False, problems
     return not any(item["severity"] == "error" for item in problems), problems
 
 
-def module_keyboard_check(page, viewport: str, theme: str) -> list[dict]:
-    problems: list[dict] = []
+def module_keyboard_check(page, viewport: str, theme: str) -> list[dict[str, str]]:
+    problems: list[dict[str, str]] = []
     for view in VIEWS:
         tab = page.locator(f'[data-view-target="{view}"]').first
         if tab.count() == 0:
@@ -427,12 +390,12 @@ def prepare_page(page, base_url: str, theme_value: str | None, console_errors: l
           if (theme) document.documentElement.dataset.theme = theme;
           else delete document.documentElement.dataset.theme;
         }""",
-        theme_value,
+        arg=theme_value,
     )
-    page.wait_for_timeout(80)
+    page.wait_for_timeout(200)
 
 
-def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tuple, views: tuple[str, ...]) -> list[dict]:
+def run_context(browser, base_url: str, output: Path, viewport: tuple[str, int, int], theme: tuple[str, str | None], views: tuple[str, ...]) -> list[dict[str, Any]]:
     viewport_name, width, height = viewport
     theme_name, theme_value = theme
     context = browser.new_context(
@@ -442,7 +405,7 @@ def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tu
     )
     page = context.new_page()
     console_errors: list[str] = []
-    cases: list[dict] = []
+    cases: list[dict[str, Any]] = []
 
     try:
         prepare_page(page, base_url, theme_value, console_errors)
@@ -453,10 +416,7 @@ def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tu
 
         for view in views:
             switch_view(page, view)
-            expected, visited, closed, writing_reached, problems = keyboard_cycle(
-                page, viewport_name, theme_name, view
-            )
-
+            expected, visited, closed, writing_reached, problems = keyboard_cycle(page, viewport_name, theme_name, view)
             if view == "editor":
                 direct_ok, direct_problems = writing_area_check(page, viewport_name, theme_name)
                 writing_reached = writing_reached or direct_ok
@@ -469,7 +429,6 @@ def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tu
                     page.keyboard.press("Tab")
                     scroll_active_into_view(page)
 
-            evidence = screenshot(page, output, viewport_name, theme_name, view)
             cases.append({
                 "viewport": viewport_name,
                 "theme": theme_name,
@@ -478,17 +437,15 @@ def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tu
                 "visited_focusables": visited,
                 "focus_cycle_closed": closed,
                 "writing_area_reached": writing_reached,
-                "screenshot": evidence,
+                "screenshot": screenshot(page, output, viewport_name, theme_name, view),
                 "issues": problems,
             })
 
-        if console_errors:
-            target = cases[-1] if cases else None
-            if target:
-                target["issues"].extend(
-                    issue("error", viewport_name, theme_name, target["view"], "console-error", "console", message[:500])
-                    for message in console_errors
-                )
+        if console_errors and cases:
+            cases[-1]["issues"].extend(
+                issue("error", viewport_name, theme_name, cases[-1]["view"], "console-error", "console", message[:500])
+                for message in console_errors
+            )
     except Exception as error:
         cases.append({
             "viewport": viewport_name,
@@ -507,7 +464,7 @@ def run_context(browser, base_url: str, output: Path, viewport: tuple, theme: tu
     return cases
 
 
-def markdown(cases: list[dict], generated: str) -> str:
+def markdown(cases: list[dict[str, Any]], generated: str) -> str:
     all_issues = [item for case in cases for item in case["issues"]]
     errors = [item for item in all_issues if item["severity"] == "error"]
     warnings = [item for item in all_issues if item["severity"] == "warning"]
@@ -530,7 +487,7 @@ def markdown(cases: list[dict], generated: str) -> str:
             f"| {case['viewport']} | {case['theme']} | {case['view']} | "
             f"{case['expected_focusables']} | {case['visited_focusables']} | "
             f"{'sim' if case['focus_cycle_closed'] else 'não'} | "
-            f"{'sim' if case['writing_area_reached'] else 'n/a' if case['view'] not in {'editor'} else 'não'} |"
+            f"{'sim' if case['writing_area_reached'] else 'n/a' if case['view'] != 'editor' else 'não'} |"
         )
     lines += ["", "## Ocorrências", ""]
     if not all_issues:
@@ -556,7 +513,7 @@ def main() -> None:
 
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    cases: list[dict] = []
+    cases: list[dict[str, Any]] = []
 
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
