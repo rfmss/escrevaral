@@ -46,6 +46,52 @@ function testResetUrlCannotEraseStorage() {
   );
 }
 
+function testCorruptStorageCannotBeOverwrittenSilently() {
+  const source = fs.readFileSync(path.join(ROOT, "state-store.js"), "utf8");
+  assert.match(source, /RECOVERY_STORAGE_KEY/, "estado ilegível deve ganhar uma cópia de recuperação");
+  assert.match(source, /storageRecoveryNeeded\s*=\s*true/, "corrupção deve ativar modo de recuperação");
+  assert.match(
+    source,
+    /function persistStateNow[\s\S]*?if \(storageRecoveryNeeded\)[\s\S]*?return false/,
+    "persistência deve ser bloqueada enquanto houver recuperação pendente"
+  );
+  assert.doesNotMatch(
+    source,
+    /catch \([^)]*\) \{[\s\S]{0,700}?manuscripts:\s*starterManuscripts/,
+    "estado corrompido não pode ressuscitar conteúdo inicial"
+  );
+}
+
+function testOfflineInstallToleratesOptionalAssetFailures() {
+  const source = fs.readFileSync(path.join(ROOT, "service-worker.js"), "utf8");
+  assert.match(source, /Promise\.allSettled/, "recursos opcionais não podem abortar toda a instalação");
+  assert.match(source, /cache\.addAll\(\["\.\/", "\.\/index\.html"\]\)/, "documento base deve continuar obrigatório");
+}
+
+function testRestoreCreatesRollbackSnapshot() {
+  const source = fs.readFileSync(path.join(ROOT, "backup-controller.js"), "utf8");
+  assert.match(
+    source,
+    /VeredaBackup\.createBackup\(state\)[\s\S]{0,300}?RESTORE_SNAPSHOT_STORAGE_KEY/,
+    "restauração deve preservar uma cópia do acervo substituído"
+  );
+  assert.match(
+    source,
+    /Restauração cancelada — guarde uma cópia/,
+    "falha ao criar rollback deve cancelar a substituição"
+  );
+}
+
+function testUpdateReloadRequiresConfirmedSave() {
+  const source = fs.readFileSync(path.join(ROOT, "backup-controller.js"), "utf8");
+  assert.doesNotMatch(source, /window\.state\?\.manuscripts/, "estado lexical não deve ser procurado em window.state");
+  assert.match(
+    source,
+    /updateReloadBtn[\s\S]{0,500}?await persistState[\s\S]{0,400}?window\.location\.reload/,
+    "atualização deve confirmar a gravação antes de recarregar"
+  );
+}
+
 function testScreenplayStructuredRoundTrip() {
   const blocks = [
     {
@@ -200,6 +246,10 @@ function testReleaseVersionAndOfflineAssetsStayAligned() {
 
 const tests = [
   testResetUrlCannotEraseStorage,
+  testCorruptStorageCannotBeOverwrittenSilently,
+  testOfflineInstallToleratesOptionalAssetFailures,
+  testRestoreCreatesRollbackSnapshot,
+  testUpdateReloadRequiresConfirmedSave,
   testScreenplayStructuredRoundTrip,
   testLegacyScreenplayMigration,
   testDisjointTabEditsMerge,

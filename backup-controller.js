@@ -21,6 +21,12 @@ function _checkCacheHealth() {
       const count = keys.length;
       if (count === 0) {
         _setOfflineStatus("cloud_sync", "Preparando modo sem internet…", "Instalando arquivos para funcionar sem conexão. Pronto em instantes.");
+      } else if (count < 90) {
+        _setOfflineStatus(
+          "cloud_sync",
+          "Modo sem internet parcial",
+          `${count} arquivos disponíveis. Abra as ferramentas enquanto estiver online para completar a oficina sem internet.`
+        );
       } else {
         offlineStatus.dataset.vrdaTooltip = `${count} arquivo${count !== 1 ? "s" : ""} disponíveis localmente · oficina funciona sem internet`;
       }
@@ -73,7 +79,7 @@ function registerOfflineApp() {
   function showUpdateBanner() {
     if (!updateBanner) return;
     // Não mostrar na primeira visita — usuário ainda não tem nada salvo
-    if (!window.state?.manuscripts?.length) return;
+    if (!state?.manuscripts?.length || storageRecoveryNeeded) return;
     updateBanner.hidden = false;
     if (window.innerWidth <= 768) {
       const wa = document.querySelector(".writing-area");
@@ -81,8 +87,15 @@ function registerOfflineApp() {
     }
   }
 
-  if (updateReloadBtn) updateReloadBtn.addEventListener("click", () => {
+  if (updateReloadBtn) updateReloadBtn.addEventListener("click", async () => {
     updateReloadBtn.disabled = true;
+    updateReloadBtn.textContent = "Confirmando gravação…";
+    const saved = await persistState("Gravação confirmada antes da atualização");
+    if (saved === false) {
+      updateReloadBtn.disabled = false;
+      updateReloadBtn.textContent = "Tentar recarregar novamente";
+      return;
+    }
     updateReloadBtn.textContent = "Recarregando…";
     window.location.reload();
   });
@@ -130,6 +143,38 @@ function registerOfflineApp() {
         "Não foi possível ativar o modo sem internet. Suas notas continuam salvas no navegador — exporte uma cópia de segurança quando puder."
       );
     });
+}
+
+function initializeStorageRecovery() {
+  if (!storageRecoveryNeeded) return;
+  const banner = document.getElementById("storage-recovery-banner");
+  const download = document.getElementById("storage-recovery-download");
+  const reset = document.getElementById("storage-recovery-reset");
+  if (!banner || !download || !reset) return;
+
+  banner.hidden = false;
+  document.querySelector(".app-shell")?.setAttribute("inert", "");
+  download.focus();
+
+  download.addEventListener("click", () => {
+    const blob = new Blob([storageRecoveryRaw || ""], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `escrevaral-recuperacao-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.click();
+    URL.revokeObjectURL(url);
+    reset.disabled = false;
+    reset.dataset.recoveryDownloaded = "true";
+  });
+
+  reset.disabled = true;
+  reset.addEventListener("click", () => {
+    if (reset.dataset.recoveryDownloaded !== "true") return;
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(RECOVERY_STORAGE_KEY);
+    window.location.reload();
+  });
 }
 
 async function checkForSWUpdate() {
@@ -494,6 +539,15 @@ async function _executeImport(file, backup) {
   try {
     const envSummary = VeredaVrda.summarizeEnvelope(backup);
     const previousCount = state.manuscripts.length;
+    if (previousCount > 0) {
+      try {
+        const rollback = VeredaBackup.createBackup(state);
+        localStorage.setItem(RESTORE_SNAPSHOT_STORAGE_KEY, JSON.stringify(rollback));
+      } catch (_) {
+        saveStatus.textContent = "Restauração cancelada — guarde uma cópia do acervo atual antes de substituí-lo";
+        return;
+      }
+    }
     state = VeredaBackup.restoreBackup(state, backup);
     state.manuscripts = VeredaArchive.normalizeManuscripts(state.manuscripts);
     state.versions = state.versions || {};
