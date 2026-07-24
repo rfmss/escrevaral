@@ -1,0 +1,72 @@
+name: Integridade de Dados
+
+on:
+  pull_request:
+    paths:
+      - "app.js"
+      - "editor-controller.js"
+      - "editor-modes.js"
+      - "screenplay-codec.js"
+      - "state-integrity.js"
+      - "state-store.js"
+      - "backup-controller.js"
+      - "index.html"
+      - "service-worker.js"
+      - "scripts/testar-integridade-*.js"
+      - ".github/workflows/integridade-dados.yml"
+  push:
+    branches: [main]
+    paths:
+      - "app.js"
+      - "editor-controller.js"
+      - "editor-modes.js"
+      - "screenplay-codec.js"
+      - "state-integrity.js"
+      - "state-store.js"
+      - "backup-controller.js"
+      - "index.html"
+      - "service-worker.js"
+      - "scripts/testar-integridade-*.js"
+      - ".github/workflows/integridade-dados.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preservar-manuscritos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Testar codecs e merge sem navegador
+        run: node scripts/testar-integridade-dados.js
+
+      - name: Preparar navegador de teste
+        run: |
+          npm install --no-save --prefix /tmp/escrevaral-playwright playwright@1.61.1
+          /tmp/escrevaral-playwright/node_modules/.bin/playwright install chromium --with-deps
+
+      - name: Iniciar Escrevaral local
+        run: |
+          python3 -m http.server 8799 --bind 127.0.0.1 > /tmp/escrevaral-http.log 2>&1 &
+          for tentativa in {1..20}; do
+            curl -fsS http://127.0.0.1:8799/ >/dev/null && exit 0
+            sleep 0.5
+          done
+          cat /tmp/escrevaral-http.log
+          exit 1
+
+      - name: Testar reset, roteiro e duas abas
+        env:
+          NODE_PATH: /tmp/escrevaral-playwright/node_modules
+          ESCREVARAL_TEST_URL: http://127.0.0.1:8799
+        run: node scripts/testar-integridade-browser.js

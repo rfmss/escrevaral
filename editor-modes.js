@@ -63,68 +63,38 @@ function buildSonetoEditor(text) {
 
 // ── EDITOR ROTEIRO (screenplay) ──────────────────────
 function parseScreenplayText(text) {
-  const blocks = [];
-  const lines = text.split("\n");
-  let current = null;
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      if (current) { blocks.push(current); current = null; }
-      continue;
-    }
-    const isSlug = /^(INT\.|EXT\.|INT\/EXT\.|I\/E\.)/i.test(trimmed);
-    const isChar = /^[A-ZÁÀÂÃÉÊÍÓÔÕÚ\s]{2,}$/.test(trimmed) && trimmed.length < 40;
-
-    if (isSlug) {
-      if (current) blocks.push(current);
-      current = { type: "scene", slug: trimmed, action: "" };
-    } else if (current?.type === "scene" && !isChar) {
-      current.action = (current.action ? current.action + "\n" : "") + trimmed;
-    } else if (isChar) {
-      if (current) blocks.push(current);
-      current = { type: "dialogue", character: trimmed, lines: [] };
-    } else if (current?.type === "dialogue") {
-      current.lines.push(trimmed);
-    } else {
-      if (current) blocks.push(current);
-      current = { type: "action", text: trimmed };
-    }
-  }
-  if (current) blocks.push(current);
-
-  if (blocks.length === 0) {
-    blocks.push({ type: "scene", slug: "", action: "" });
-  }
-  return blocks;
+  return VeredaScreenplayCodec.parseText(text);
 }
 
-function serializeScreenplay() {
+function readScreenplayBlocks() {
   const sections = specializedEditor.querySelectorAll("[data-sp-block]");
-  const parts = [];
+  const blocks = [];
   sections.forEach((block) => {
     const type = block.dataset.spBlock;
     if (type === "scene") {
       const slug = block.querySelector("[data-sp-slug]")?.value?.trim() || "";
       const action = block.querySelector("[data-sp-action]")?.value?.trim() || "";
-      parts.push(slug.toUpperCase());
-      if (action) parts.push(action);
+      blocks.push({ type: "scene", slug, action });
     } else if (type === "dialogue") {
       const char = block.querySelector("[data-sp-char]")?.value?.trim() || "";
       const lines = block.querySelector("[data-sp-lines]")?.value?.trim() || "";
-      if (char) parts.push(char.toUpperCase());
-      if (lines) parts.push(lines);
+      blocks.push({ type: "dialogue", character: char, lines: lines.split("\n") });
     } else if (type === "action") {
       const text = block.querySelector("[data-sp-text]")?.value?.trim() || "";
-      if (text) parts.push(text);
+      blocks.push({ type: "action", text });
     }
-    parts.push("");
   });
-  return parts.join("\n");
+  return VeredaScreenplayCodec.normalizeBlocks(blocks);
 }
 
-function buildScreenplayEditor(text) {
-  const blocks = parseScreenplayText(text);
+function serializeScreenplay() {
+  return VeredaScreenplayCodec.toText(readScreenplayBlocks());
+}
+
+function buildScreenplayEditor(text, storedBlocks = null) {
+  const blocks = storedBlocks
+    ? VeredaScreenplayCodec.normalizeBlocks(storedBlocks)
+    : parseScreenplayText(text);
   const blocksHtml = blocks.map((block, idx) => {
     if (block.type === "scene") {
       return `
@@ -132,11 +102,11 @@ function buildScreenplayEditor(text) {
           <div class="sp-slug-row">
             <span class="sp-slug-tag">Cena</span>
             <input class="sp-slug-input" data-sp-slug
-              value="${(block.slug || "").replace(/"/g, "&quot;")}"
+              value="${escapeHtml(block.slug || "")}"
               placeholder="INT./EXT. LOCAL — DIA/NOITE" />
           </div>
           <textarea class="sp-action-area" data-sp-action
-            placeholder="Ação — o que a câmera vê, em presente e 3ª pessoa.">${block.action || ""}</textarea>
+            placeholder="Ação — o que a câmera vê, em presente e 3ª pessoa.">${escapeHtml(block.action || "")}</textarea>
           <button class="sp-add-dialogue" data-action="sp-add-dialogue" data-sp-after="${idx}" type="button">
             <span class="material-symbols-outlined">add</span> Diálogo
           </button>
@@ -146,10 +116,17 @@ function buildScreenplayEditor(text) {
       return `
         <div class="sp-block sp-dialogue-block" data-sp-block="dialogue">
           <input class="sp-char-input" data-sp-char
-            value="${(block.character || "").replace(/"/g, "&quot;")}"
+            value="${escapeHtml(block.character || "")}"
             placeholder="PERSONAGEM" />
           <textarea class="sp-lines-area" data-sp-lines
-            placeholder="Fala do personagem.">${(block.lines || []).join("\n")}</textarea>
+            placeholder="Fala do personagem.">${escapeHtml((block.lines || []).join("\n"))}</textarea>
+        </div>
+      `;
+    } else if (block.type === "action") {
+      return `
+        <div class="sp-block" data-sp-block="action">
+          <textarea class="sp-action-area" data-sp-text
+            placeholder="Ação — o que a câmera vê, em presente.">${escapeHtml(block.text || "")}</textarea>
         </div>
       `;
     }

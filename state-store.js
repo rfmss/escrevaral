@@ -12,8 +12,10 @@ const FIRST_VISIT_KEY = "vrda-first-visit";
 const TERMS_KEY       = "escrevaral-termos-v1";
 
 if (new URLSearchParams(window.location.search).get("reset") === "true") {
-  localStorage.clear();
+  // Compatibilidade com links antigos: a query é removida, mas nunca apaga
+  // manuscritos. Limpeza de acervo precisa ser uma ação explícita e recuperável.
   window.history.replaceState({}, "Escrevaral", window.location.pathname);
+  console.warn("[Escrevaral] reset por URL ignorado para proteger o acervo local.");
 }
 
 const _IS_FIRST_VISIT = !localStorage.getItem(STORAGE_KEY) && !localStorage.getItem(FIRST_VISIT_KEY);
@@ -189,6 +191,7 @@ const documentTypes = [
 ];
 
 let state = loadState();
+let persistedStateSnapshot = VeredaStateIntegrity.clone(state);
 let checklistState = loadChecklistState();
 
 function applyProgressLevel() { shell.dataset.progress = "4"; }
@@ -421,30 +424,142 @@ function getDefaultAppearanceState() {
   };
 }
 
-function persistState(status = "Salvo localmente") {
+function buildPersistableState(sourceState = state) {
+  const lexical = sourceState.lexical || {};
+  const {
+    selectedPhrase: _selectedPhrase,
+    selectedRange: _selectedRange,
+    selectedContext: _selectedContext,
+    ...lexicalRest
+  } = lexical;
+  return {
+    ...sourceState,
+    lexical: lexicalRest,
+  };
+}
+
+function getStateRevision(sourceState) {
+  const revision = Number(sourceState?.meta?.revision || 0);
+  return Number.isFinite(revision) && revision >= 0 ? revision : 0;
+}
+
+function hasRemoteStateChanged(remoteState, baselineState) {
+  const remoteRevision = getStateRevision(remoteState);
+  const baselineRevision = getStateRevision(baselineState);
+  if (remoteRevision || baselineRevision) return remoteRevision !== baselineRevision;
+
+  const remoteSavedAt = remoteState?.meta?.lastSavedAt || null;
+  const baselineSavedAt = baselineState?.meta?.lastSavedAt || null;
+  if (remoteSavedAt || baselineSavedAt) return remoteSavedAt !== baselineSavedAt;
+
+  // Compatibilidade para estados antigos, anteriores a revision/lastSavedAt.
+  return !VeredaStateIntegrity.equal(remoteState, baselineState);
+}
+
+function restoreTransientLexical(nextState, previousState) {
+  return {
+    ...nextState,
+    lexical: {
+      ...getDefaultLexicalState(),
+      ...(nextState.lexical || {}),
+      selectedPhrase: previousState.lexical?.selectedPhrase || null,
+      selectedRange: previousState.lexical?.selectedRange || null,
+      selectedContext: previousState.lexical?.selectedContext || null,
+    },
+  };
+}
+
+function showSaveFailure(error) {
+  saveStatus.textContent = "NÃO SALVO — copie ou exporte este texto";
+  saveStatus.title = error?.name === "QuotaExceededError"
+    ? "O armazenamento deste navegador está cheio. Seu texto continua aberto; exporte uma cópia antes de fechar."
+    : "O navegador recusou o salvamento. Seu texto continua aberto; exporte uma cópia antes de fechar.";
+  saveStatus.dataset.motion = "";
+  document.dispatchEvent(new CustomEvent("vrda:save-error", {
+    detail: { name: error?.name || "StorageError" },
+  }));
+}
+
+function persistStateNow(status = "Salvo localmente") {
   const now = new Date();
-  state.meta = state.meta || {};
+  const previousState = state;
+  const localPayload = buildPersistableState(state);
+  let nextPayload = localPayload;
+  let conflicts = [];
+  let remotePayload = null;
 
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const storedAt = JSON.parse(raw)?.meta?.lastSavedAt;
-      const ourAt = state.meta.lastSavedAt;
-      if (storedAt && ourAt && storedAt > ourAt) {
-        document.dispatchEvent(new CustomEvent("vrda:tab-conflict"));
-      }
-    }
-  } catch (_) {}
+    if (raw) remotePayload = JSON.parse(raw);
+  } catch (_) {
+    // Estado remoto ilegível não deve impedir que o rascunho aberto seja salvo.
+  }
 
-  state.meta.lastSavedAt = now.toISOString();
-  const { lexical: { selectedPhrase: _sp, selectedRange: _sr, selectedContext: _sc, ...lexicalRest }, ...stateRest } = state;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stateRest, lexical: lexicalRest }));
+  if (remotePayload && hasRemoteStateChanged(remotePayload, persistedStateSnapshot)) {
+    const mergeResult = VeredaStateIntegrity.mergeConcurrentStates(
+      persistedStateSnapshot,
+      localPayload,
+      remotePayload,
+      { at: now.toISOString() }
+    );
+    nextPayload = mergeResult.state;
+    conflicts = mergeResult.conflicts;
+  }
+
+  const nextRevision = Math.max(
+    getStateRevision(persistedStateSnapshot),
+    getStateRevision(localPayload),
+    getStateRevision(remotePayload)
+  ) + 1;
+  nextPayload.meta = {
+    ...(nextPayload.meta || {}),
+    revision: nextRevision,
+    lastSavedAt: now.toISOString(),
+  };
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextPayload));
+  } catch (error) {
+    showSaveFailure(error);
+    return false;
+  }
+
+  state = restoreTransientLexical(nextPayload, previousState);
+  persistedStateSnapshot = VeredaStateIntegrity.clone(nextPayload);
+
   const hhmm = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`;
-  saveStatus.textContent = `SALVO ${hhmm}`;
-  saveStatus.title = status;
+  if (conflicts.length) {
+    saveStatus.textContent = `VERSÕES PRESERVADAS ${hhmm}`;
+    saveStatus.title = "Outra aba editou o mesmo texto. As duas versões foram mantidas no Acervo.";
+    document.dispatchEvent(new CustomEvent("vrda:tab-conflict", {
+      detail: { conflicts, preserved: true },
+    }));
+  } else {
+    saveStatus.textContent = `SALVO ${hhmm}`;
+    saveStatus.title = status;
+  }
   saveStatus.dataset.motion = "pulse";
   window.setTimeout(() => { saveStatus.dataset.motion = ""; }, 700);
+  return true;
 }
+
+function persistState(status = "Salvo localmente") {
+  if (navigator.locks?.request) {
+    return navigator.locks.request(
+      "escrevaral-manuscript-state",
+      { mode: "exclusive" },
+      () => persistStateNow(status)
+    );
+  }
+  return persistStateNow(status);
+}
+
+window.addEventListener("storage", (event) => {
+  if (event.key !== STORAGE_KEY || event.newValue === event.oldValue) return;
+  document.dispatchEvent(new CustomEvent("vrda:tab-conflict", {
+    detail: { preserved: false, externalChange: true },
+  }));
+});
 
 function persistChecklistState(status = "Checklist atualizado") {
   localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(checklistState));

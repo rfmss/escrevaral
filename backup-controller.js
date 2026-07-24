@@ -47,16 +47,27 @@ function registerOfflineApp() {
   const tabConflictBanner = document.getElementById("tab-conflict-banner");
   const tabConflictReload = document.getElementById("tab-conflict-reload");
   const tabConflictDismiss = document.getElementById("tab-conflict-dismiss");
+  const tabConflictText = tabConflictBanner?.querySelector(".tab-conflict-text");
   let _tabConflictShown = false;
 
-  document.addEventListener("vrda:tab-conflict", () => {
-    if (_tabConflictShown || !tabConflictBanner) return;
+  document.addEventListener("vrda:tab-conflict", (event) => {
+    if (!tabConflictBanner) return;
+    if (tabConflictText) {
+      tabConflictText.textContent = event.detail?.preserved
+        ? "Duas abas editaram o mesmo texto. As duas versões foram preservadas no Acervo."
+        : "Outra aba alterou o acervo. Continue escrevendo: se houver conflito, as duas versões serão preservadas.";
+    }
     _tabConflictShown = true;
     tabConflictBanner.hidden = false;
   });
-  if (tabConflictReload) tabConflictReload.addEventListener("click", () => { window.location.reload(); });
+  if (tabConflictReload) tabConflictReload.addEventListener("click", () => {
+    setView("arquivo", { updateRoute: true });
+    if (tabConflictBanner) tabConflictBanner.hidden = true;
+    _tabConflictShown = false;
+  });
   if (tabConflictDismiss) tabConflictDismiss.addEventListener("click", () => {
     if (tabConflictBanner) tabConflictBanner.hidden = true;
+    _tabConflictShown = false;
   });
 
   function showUpdateBanner() {

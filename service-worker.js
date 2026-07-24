@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v934";
-const ASSET_VERSION = "20260627-v934";
+const CACHE_NAME = "vereda-offline-v935";
+const ASSET_VERSION = "20260723-v935";
 
 const CORE_ASSETS = [
   "./",
@@ -48,6 +48,8 @@ const CORE_ASSETS = [
   `./punctuation-engine.js?v=${ASSET_VERSION}`,
   `./analise-engine.js?v=${ASSET_VERSION}`,
   `./synonym-data.js?v=${ASSET_VERSION}`,
+  `./state-integrity.js?v=${ASSET_VERSION}`,
+  `./screenplay-codec.js?v=${ASSET_VERSION}`,
   `./state-store.js?v=${ASSET_VERSION}`,
   `./cronograma-controller.js?v=${ASSET_VERSION}`,
   `./editor-modes.js?v=${ASSET_VERSION}`,

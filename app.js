@@ -2568,26 +2568,15 @@ if (specializedEditor) {
           sylEl.className = "soneto-syl" + (n === null ? "" : n === 10 ? " syl-ok" : n > 10 ? " syl-over" : "");
         }
       }
-      writingArea.innerText = serializeSoneto();
-    } else if (mode === "screenplay") {
-      writingArea.innerText = serializeScreenplay();
-    } else if (mode === "teatro") {
-      writingArea.innerText = serializeTeatro();
-    } else if (!mode && window.FICHA_KINDS?.has(getActiveManuscript()?.kind)) {
-      writingArea.innerText = serializeFicha();
-    } else if (!mode && getActiveManuscript()?.type === "personagem") {
-      writingArea.innerText = serializePersonagem();
     } else if (mode === "enem") {
       const enemArea = specializedEditor.querySelector("[data-enem-area]");
       if (enemArea) {
-        writingArea.innerText = enemArea.innerText || "";
         updateENEMCounter();
       }
     } else if (mode === "slam") {
       const slamArea = specializedEditor.querySelector("[data-slam-area]");
       if (slamArea) {
         const text = slamArea.innerText || "";
-        writingArea.innerText = text;
         // update live slam header
         const header = specializedEditor.querySelector("[data-slam-header]");
         if (header) {
