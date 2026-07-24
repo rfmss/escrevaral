@@ -25,17 +25,6 @@
   outline-offset: var(--focus-ring-offset);
 }
 
-:where(
-  button,
-  input,
-  select,
-  textarea,
-  [contenteditable="true"]
-):disabled:focus-visible,
-:where([aria-disabled="true"]):focus-visible {
-  outline: none !important;
-}
-
 /* A folha recebe foco sem parecer uma caixa pesada. */
 .writing-area:focus-visible {
   outline-offset: 6px;
