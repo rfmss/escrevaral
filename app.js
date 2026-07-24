@@ -34,46 +34,26 @@ function updateRouteForView(viewName, mode = "push") {
   window.history.pushState(null, "", nextHash);
 }
 
-const ANALYTICS_VIEW_TITLES = {
-  editor: "Manuscrito",
-  biblioteca: "Biblioteca",
+const VIEW_TITLES = Object.freeze({
+  editor: "Mesa de escrita",
+  biblioteca: "Palavras",
   autoria: "Prova de autoria",
-  arquivo: "Arquivo",
+  arquivo: "Acervo",
   academia: "Ateliê",
-  cronograma: "Cronograma",
-};
-
-let _pendingAnalyticsView = null;
-let _lastAnalyticsPath = "";
-
-function getAnalyticsPath(viewName = getViewFromRoute()) {
-  const route = VIEW_ROUTES.has(viewName) ? viewName : getViewFromRoute();
-  return `${window.location.pathname}${window.location.search}#${route}`;
-}
-
-function trackAnalyticsView(viewName = getViewFromRoute()) {
-  _pendingAnalyticsView = viewName;
-  if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
-  if (!window.goatcounter || typeof window.goatcounter.count !== "function") return;
-
-  const path = getAnalyticsPath(viewName);
-  if (path === _lastAnalyticsPath) return;
-
-  _lastAnalyticsPath = path;
-  _pendingAnalyticsView = null;
-  try {
-    window.goatcounter.count({
-      path,
-      title: `Escrevaral — ${ANALYTICS_VIEW_TITLES[viewName] || "Editor"}`,
-    });
-  } catch {
-    // Analytics nunca deve interromper a escrita.
-  }
-}
-
-window.addEventListener("escrevaral:analytics-ready", () => {
-  trackAnalyticsView(_pendingAnalyticsView || getViewFromRoute());
+  cronograma: "Plano",
 });
+
+let _announcedView = "";
+
+function updateViewContext(viewName) {
+  const viewTitle = VIEW_TITLES[viewName] || "Escrevaral";
+  document.title = `${viewTitle} — Escrevaral`;
+
+  if (_announcedView === viewName) return;
+  _announcedView = viewName;
+  const announcer = document.getElementById("view-announcer");
+  if (announcer) announcer.textContent = `Área aberta: ${viewTitle}.`;
+}
 
 function setView(viewName, options = {}) {
   if (!VIEW_ROUTES.has(viewName)) {
@@ -95,7 +75,8 @@ function setView(viewName, options = {}) {
   document.querySelectorAll("[data-view-target]").forEach((control) => {
     const isActive = control.dataset.viewTarget === viewName;
     control.classList.toggle("is-active", isActive);
-    control.setAttribute("aria-current", isActive ? "page" : "false");
+    if (isActive) control.setAttribute("aria-current", "page");
+    else control.removeAttribute("aria-current");
   });
 
   updateDockIndicator();
@@ -128,7 +109,7 @@ function setView(viewName, options = {}) {
     updateRouteForView(viewName, options.routeMode);
   }
 
-  trackAnalyticsView(viewName);
+  updateViewContext(viewName);
 }
 
 // ── NAVEGAÇÃO MÓVEL: bandeja e indicador ─────────────────────────────────
