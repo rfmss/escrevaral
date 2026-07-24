@@ -52,7 +52,7 @@
   border-bottom: 1px solid var(--line);
   margin-bottom: 32px;
 }
-.academy-banner h2 {
+.academy-banner h1 {
   font-family: "Noto Serif", Georgia, serif;
   font-size: clamp(20px, 2.5vw, 26px);
   font-weight: 700;
