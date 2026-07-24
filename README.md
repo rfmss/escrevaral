@@ -222,4 +222,4 @@ O código aceita contribuições sob a licença MIT. Mudanças grandes de produt
 
 Criado por **[RafaMass](https://rafa.pro.br)**, criador independente brasileiro desenvolvendo aplicativos, jogos e ferramentas digitais com estudo, método e atenção ao acabamento.
 
-Contato: **rafamass@proton.me**
+Contato geral: use as issues do repositório. Relatos sensíveis devem seguir a [`SECURITY.md`](SECURITY.md).
