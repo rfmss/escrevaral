@@ -14,4 +14,4 @@ Esses materiais podem ser vistos no repositório para permitir o funcionamento, 
 
 Dependências, fontes, ícones, áudios e demais materiais de terceiros continuam sujeitos às licenças e aos termos de seus respectivos autores. A presença de um arquivo no repositório não substitui esses termos.
 
-Para dúvidas sobre reutilização de marca ou materiais criativos, escreva para **oi@escrevaral.com**.
+Para dúvidas sobre reutilização de marca ou materiais criativos, abra uma issue sem incluir informações pessoais ou conteúdo protegido.
