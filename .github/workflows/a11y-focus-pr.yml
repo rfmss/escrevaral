@@ -87,23 +87,33 @@ jobs:
         continue-on-error: true
         run: python3 scripts/smoke-live.py
 
+      - name: Preparar evidências da execução atual
+        if: always()
+        run: |
+          DATA=$(date +%Y-%m-%d)
+          DESTINO=artifacts/validation
+          mkdir -p "$DESTINO"
+
+          cp -R reports/auditoria/focus-a11y-artifacts "$DESTINO/" 2>/dev/null || true
+          cp "reports/auditoria/overflow-mobile-${DATA}.md" "$DESTINO/" 2>/dev/null || true
+          cp "reports/auditoria/overflow-mobile-${DATA}.json" "$DESTINO/" 2>/dev/null || true
+          cp "reports/auditoria/console-errors-${DATA}.md" "$DESTINO/" 2>/dev/null || true
+          cp "reports/auditoria/console-errors-${DATA}.json" "$DESTINO/" 2>/dev/null || true
+          cp "reports/auditoria/smoke-live-${DATA}.md" "$DESTINO/" 2>/dev/null || true
+          cp "reports/agente/${DATA}.md" "$DESTINO/" 2>/dev/null || true
+          cp "reports/agente/${DATA}.json" "$DESTINO/" 2>/dev/null || true
+          cp /tmp/escrevaral-http.log "$DESTINO/" 2>/dev/null || true
+
+          find "$DESTINO" -type f -maxdepth 4 -print
+
       - name: Guardar relatórios e capturas
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: a11y-focus-e-regressao-${{ github.run_id }}
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 14
-          path: |
-            reports/auditoria/focus-a11y-artifacts/**
-            reports/auditoria/overflow-mobile-*.md
-            reports/auditoria/overflow-mobile-*.json
-            reports/auditoria/console-errors-*.md
-            reports/auditoria/console-errors-*.json
-            reports/auditoria/smoke-live-*.md
-            reports/agente/*.md
-            reports/agente/*.json
-            /tmp/escrevaral-http.log
+          path: artifacts/validation/**
 
       - name: Consolidar resultado
         if: always()
