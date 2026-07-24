@@ -23,6 +23,14 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Salvaguarda WCAG 2.4.7/2.4.11: componentes especializados podem remover o
+   outline para desenhar o próprio estado, mas nunca deixam o teclado sem uma
+   indicação perceptível caso esse estado falhe ou não tenha contraste. */
+:where(a, button, input, select, textarea, [contenteditable="true"], [tabindex]):focus-visible {
+  outline: 3px solid var(--primary, #6f351b) !important;
+  outline-offset: 3px !important;
+}
+
 @font-face {
   font-family: 'Material Symbols Outlined';
   font-style: normal;
@@ -82,4 +90,3 @@ a {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
-

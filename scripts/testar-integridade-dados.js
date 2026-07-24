@@ -92,6 +92,20 @@ function testUpdateReloadRequiresConfirmedSave() {
   );
 }
 
+function testKeyboardFocusAndDialogLifecycle() {
+  const css = fs.readFileSync(path.join(ROOT, "css/01-base.css"), "utf8");
+  const dialog = fs.readFileSync(path.join(ROOT, "ui-dialog.js"), "utf8");
+  assert.match(css, /:focus-visible[\s\S]*?outline:[^;]+!important/, "foco visível precisa de salvaguarda global");
+  assert.match(dialog, /event\.key !== "Tab"/, "diálogo precisa conter a navegação por Tab");
+  assert.match(dialog, /event\.key === "Escape"/, "diálogo precisa fechar por Escape");
+  assert.match(dialog, /_vrdaDialogReturnFocus\.focus\(\)|_vrdaDialogReturnFocus\?\.isConnected[\s\S]{0,80}?\.focus\(\)/, "diálogo precisa devolver o foco ao acionador");
+  assert.equal(
+    (dialog.match(/vrdaDialogOk\.addEventListener\("click"/g) || []).length,
+    1,
+    "botão OK não pode registrar listeners duplicados"
+  );
+}
+
 function testScreenplayStructuredRoundTrip() {
   const blocks = [
     {
@@ -250,6 +264,7 @@ const tests = [
   testOfflineInstallToleratesOptionalAssetFailures,
   testRestoreCreatesRollbackSnapshot,
   testUpdateReloadRequiresConfirmedSave,
+  testKeyboardFocusAndDialogLifecycle,
   testScreenplayStructuredRoundTrip,
   testLegacyScreenplayMigration,
   testDisjointTabEditsMerge,
