@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v935";
-const ASSET_VERSION = "20260723-v935";
+const CACHE_NAME = "vereda-offline-v936";
+const ASSET_VERSION = "20260723-uxp1";
 
 const CORE_ASSETS = [
   "./",
@@ -24,6 +24,7 @@ const CORE_ASSETS = [
   `./css/10-mobile-nav.css?v=${ASSET_VERSION}`,
   `./css/11-badges.css?v=${ASSET_VERSION}`,
   `./css/12-training-modes.css?v=${ASSET_VERSION}`,
+  `./css/13-accessibility.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,

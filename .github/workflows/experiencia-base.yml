@@ -1,0 +1,41 @@
+name: Experiência-base
+
+on:
+  pull_request:
+    paths:
+      - "app.js"
+      - "index.html"
+      - "service-worker.js"
+      - "css/**"
+      - "scripts/testar-experiencia-base.js"
+      - ".github/workflows/experiencia-base.yml"
+  push:
+    branches: [main]
+    paths:
+      - "app.js"
+      - "index.html"
+      - "service-worker.js"
+      - "css/**"
+      - "scripts/testar-experiencia-base.js"
+      - ".github/workflows/experiencia-base.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  navegacao-acessivel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Testar navegação, privacidade e recursos sem internet
+        run: node scripts/testar-experiencia-base.js
