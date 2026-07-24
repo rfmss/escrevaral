@@ -3745,7 +3745,7 @@ body:has(#terms-overlay:not([hidden])) #mobile-bandeja {
   text-align: center;
 }
 
-.share-option div { flex: 1; min-width: 0; }
+.share-option-copy { flex: 1; min-width: 0; }
 .share-option strong { display: block; font-size: 13px; color: var(--ink); font-weight: 600; }
 .share-option small  { display: block; font-size: 11px; color: var(--muted); margin-top: 1px; }
 
