@@ -7,6 +7,7 @@
  */
 :root {
   --focus-ring-color: var(--primary);
+  --focus-ring-contrast: var(--paper);
   --focus-ring-width: 2px;
   --focus-ring-offset: 3px;
 }
@@ -23,11 +24,12 @@
 ):focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
   outline-offset: var(--focus-ring-offset);
+  box-shadow: 0 0 0 var(--focus-ring-offset) var(--focus-ring-contrast) !important;
 }
 
 /* A folha recebe foco sem parecer uma caixa pesada. */
 .writing-area:focus-visible {
-  outline-offset: 6px;
+  --focus-ring-offset: 6px;
 }
 
 @media (forced-colors: active) {
@@ -42,5 +44,6 @@
     [tabindex]:not([tabindex="-1"])
   ):focus-visible {
     outline-color: Highlight !important;
+    box-shadow: none !important;
   }
 }
