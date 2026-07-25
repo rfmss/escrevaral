@@ -176,18 +176,29 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
             issues.append(f"overflow: {overflow_data}")
         image = screenshot(page, output, f"{viewport_name}-{theme_name}-entrada-retorno")
 
-        before = json.loads(page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY))
+        stored_raw = page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY)
+        before = json.loads(stored_raw) if stored_raw else {}
         before_ids = [item.get("id") for item in before.get("manuscripts", [])]
-        page.locator('[data-action="accept-terms-continue"]').click()
-        overlay.wait_for(state="hidden", timeout=8_000)
-        page.wait_for_selector(".writing-area", state="visible", timeout=8_000)
-        page.wait_for_timeout(250)
-        after = json.loads(page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY))
-        after_ids = [item.get("id") for item in after.get("manuscripts", [])]
-        if before_ids != after_ids:
-            issues.append("retomada alterou a coleção de manuscritos")
-        if not after.get("activeId"):
-            issues.append("retomada não definiu manuscrito ativo")
+        debug = {
+            "stored": bool(stored_raw),
+            "manuscripts": len(before_ids),
+            "activeId": before.get("activeId"),
+            "newVisible": visible(new_state),
+            "continueVisible": visible(continue_state),
+        }
+        if not visible(continue_state):
+            issues.append(f"diagnóstico do retorno: {json.dumps(debug, ensure_ascii=False)}")
+        else:
+            page.locator('[data-action="accept-terms-continue"]').click()
+            overlay.wait_for(state="hidden", timeout=8_000)
+            page.wait_for_selector(".writing-area", state="visible", timeout=8_000)
+            page.wait_for_timeout(250)
+            after = json.loads(page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY))
+            after_ids = [item.get("id") for item in after.get("manuscripts", [])]
+            if before_ids != after_ids:
+                issues.append("retomada alterou a coleção de manuscritos")
+            if not after.get("activeId"):
+                issues.append("retomada não definiu manuscrito ativo")
         if console_errors:
             issues.extend(f"console: {item}" for item in console_errors)
         return {
