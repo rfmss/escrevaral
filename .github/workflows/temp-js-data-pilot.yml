@@ -1,0 +1,166 @@
+name: Piloto de organização JavaScript — dados
+
+on:
+  push:
+    branches:
+      - agent/js-data-pilot
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Clonar branch estrutural
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/js-data-pilot
+          fetch-depth: 0
+
+      - name: Mover índices de dados e atualizar caminhos
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          version = "20260725-js-data-pilot-v1"
+          mapping = {
+              "criterios-data.js": "js/data/criterios-data.js",
+              "quotes-data.js": "js/data/quotes-data.js",
+              "synonym-data.js": "js/data/synonym-data.js",
+          }
+
+          Path("js/data").mkdir(parents=True, exist_ok=True)
+
+          for old, new in mapping.items():
+              source = Path(old)
+              target = Path(new)
+              if not source.is_file():
+                  raise SystemExit(f"Arquivo de origem ausente: {old}")
+              if target.exists():
+                  raise SystemExit(f"Destino já existe: {new}")
+              source.rename(target)
+
+          def replace_paths(path: Path) -> None:
+              text = path.read_text(encoding="utf-8")
+              original = text
+              for old, new in mapping.items():
+                  pattern = re.compile(rf"(?<![\w/])(?P<dot>\./)?{re.escape(old)}")
+                  text, count = pattern.subn(
+                      lambda match: ("./" if match.group("dot") else "") + new,
+                      text,
+                  )
+                  if count == 0:
+                      raise SystemExit(f"Referência não encontrada em {path}: {old}")
+              if text == original:
+                  raise SystemExit(f"Nenhuma alteração registrada em {path}")
+              path.write_text(text, encoding="utf-8")
+
+          index_path = Path("index.html")
+          replace_paths(index_path)
+          index_text = index_path.read_text(encoding="utf-8")
+          index_text = re.sub(r"\?v=[A-Za-z0-9._-]+", f"?v={version}", index_text)
+          index_path.write_text(index_text, encoding="utf-8")
+
+          worker_path = Path("service-worker.js")
+          replace_paths(worker_path)
+          worker_text = worker_path.read_text(encoding="utf-8")
+          worker_text, cache_count = re.subn(
+              r'const CACHE_NAME = "[^"]+";',
+              'const CACHE_NAME = "vereda-offline-v955";',
+              worker_text,
+              count=1,
+          )
+          worker_text, version_count = re.subn(
+              r'const ASSET_VERSION = "[^"]+";',
+              f'const ASSET_VERSION = "{version}";',
+              worker_text,
+              count=1,
+          )
+          worker_text = re.sub(r"\?v=[A-Za-z0-9._-]+", f"?v={version}", worker_text)
+          if cache_count != 1 or version_count != 1:
+              raise SystemExit("Versões do service worker não foram atualizadas de forma inequívoca.")
+          worker_path.write_text(worker_text, encoding="utf-8")
+
+          decision = Path("docs/_decisoes/PILOTO_ESTRUTURA_JS_DATA_2026-07-25.md")
+          decision.write_text(
+              """# Piloto de organização JavaScript — índices de dados\n\n"
+              "Data: 2026-07-25\n\n"
+              "## Decisão\n\n"
+              "Os três arquivos JavaScript que indexam dados foram movidos da raiz para `js/data/`:\n\n"
+              "- `criterios-data.js`;\n"
+              "- `quotes-data.js`;\n"
+              "- `synonym-data.js`.\n\n"
+              "Os arquivos JSON consumidos por `fetch()` permanecem na raiz nesta etapa. Scripts clássicos resolvem essas requisições a partir da página, e não da pasta física do arquivo JavaScript.\n\n"
+              "## Escopo preservado\n\n"
+              "- `service-worker.js` permanece na raiz para preservar seu escopo;\n"
+              "- nenhuma lógica dos três arquivos foi alterada;\n"
+              "- a ordem de carregamento no `index.html` foi preservada;\n"
+              "- os novos caminhos foram incluídos no cache offline;\n"
+              "- versões de assets e cache foram promovidas.\n\n"
+              "## Critério para continuar\n\n"
+              "A migração das demais categorias só deve avançar após a candidata a lançamento confirmar carregamento, console limpo, integridade de dados e funcionamento sem internet.\n"
+              """,
+              encoding="utf-8",
+          )
+
+          prior = Path("docs/_decisoes/ESTRUTURA_RAIZ.md")
+          prior_text = prior.read_text(encoding="utf-8")
+          revision = """
+
+          ## Revisão em 2026-07-25
+
+          O limite de reavaliação foi atingido. O primeiro piloto moveu os índices JavaScript de dados para `js/data/`, sem alterar a lógica do produto. A decisão original de manter todos os JavaScripts na raiz deixa de valer gradualmente, por categorias verificadas e sem mover o service worker.
+          """
+          if "## Revisão em 2026-07-25" not in prior_text:
+              prior.write_text(prior_text.rstrip() + revision + "\n", encoding="utf-8")
+
+      - name: Validar o piloto
+        run: |
+          set -euo pipefail
+
+          test ! -e criterios-data.js
+          test ! -e quotes-data.js
+          test ! -e synonym-data.js
+          test -f js/data/criterios-data.js
+          test -f js/data/quotes-data.js
+          test -f js/data/synonym-data.js
+
+          node --check js/data/criterios-data.js
+          node --check js/data/quotes-data.js
+          node --check js/data/synonym-data.js
+
+          grep -F 'src="js/data/criterios-data.js?v=20260725-js-data-pilot-v1"' index.html
+          grep -F 'src="js/data/quotes-data.js?v=20260725-js-data-pilot-v1"' index.html
+          grep -F 'src="js/data/synonym-data.js?v=20260725-js-data-pilot-v1"' index.html
+          grep -F './js/data/criterios-data.js?v=${ASSET_VERSION}' service-worker.js
+          grep -F './js/data/quotes-data.js?v=${ASSET_VERSION}' service-worker.js
+          grep -F './js/data/synonym-data.js?v=${ASSET_VERSION}' service-worker.js
+
+          ! grep -F 'src="criterios-data.js' index.html
+          ! grep -F 'src="quotes-data.js' index.html
+          ! grep -F 'src="synonym-data.js' index.html
+
+          python3 scripts/auditor-asset-version.py
+
+          python3 -m http.server 8799 >/tmp/escrevaral-js-data-pilot.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          sleep 2
+          curl -fsS http://127.0.0.1:8799/ >/dev/null
+          curl -fsS 'http://127.0.0.1:8799/js/data/criterios-data.js?v=20260725-js-data-pilot-v1' >/dev/null
+          curl -fsS 'http://127.0.0.1:8799/js/data/quotes-data.js?v=20260725-js-data-pilot-v1' >/dev/null
+          curl -fsS 'http://127.0.0.1:8799/js/data/synonym-data.js?v=20260725-js-data-pilot-v1' >/dev/null
+
+      - name: Registrar piloto na branch
+        run: |
+          rm .github/workflows/temp-js-data-pilot.yml
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add -A
+          git commit -m "refactor(structure): mover índices JavaScript para js/data"
+          git push origin HEAD:agent/js-data-pilot
