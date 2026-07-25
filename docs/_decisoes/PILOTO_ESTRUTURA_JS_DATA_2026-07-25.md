@@ -20,6 +20,19 @@ Os arquivos JSON consumidos por `fetch()` permanecem na raiz nesta etapa. Script
 - os novos caminhos foram incluídos no cache offline;
 - versões de assets, carregamento dinâmico e cache foram promovidas.
 
+## Evidência do piloto
+
+A execução direcionada concluiu com sucesso:
+
+- movimentação dos três arquivos;
+- verificação sintática com Node;
+- conferência dos novos caminhos no HTML e no service worker;
+- alinhamento da versão do carregamento dinâmico em `ui-dialog.js`;
+- auditoria de versão de assets;
+- resposta HTTP dos três novos endereços.
+
+A matriz completa da candidata deve validar o commit final antes de qualquer incorporação.
+
 ## Critério para continuar
 
 A migração das demais categorias só deve avançar após a candidata a lançamento confirmar carregamento, console limpo, integridade de dados e funcionamento sem internet.
