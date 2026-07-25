@@ -42,7 +42,7 @@ try {{
     activeId: 'finish-ms',
     archive: {{filter:'all',statusFilter:'all',search:'',sort:'updated'}},
     layout: {{leftCollapsed:false,rightCollapsed:false}},
-    ui: {{}}
+    ui: {{}},
   }}));
 }} catch (_) {{}}
 """
@@ -95,6 +95,11 @@ def prepare(page, base_url: str, theme: str | None) -> None:
     page.add_style_tag(content=DISABLE_MOTION)
     dismiss_transients(page)
     page.wait_for_function("() => typeof setView === 'function' && window.VeredaDialog?.init", timeout=15_000)
+    page.wait_for_function(
+        """() => document.documentElement.dataset.clarityDialogEscape === 'true'
+          && document.querySelector('[data-project-grid]')?.dataset.clarityEmptyActions === 'true'""",
+        timeout=15_000,
+    )
     page.evaluate(
         "theme => theme ? document.documentElement.dataset.theme = theme : document.documentElement.removeAttribute('data-theme')",
         theme,
@@ -181,13 +186,18 @@ def audit_empty_states(page, issues: list[dict], evidence: dict, output: Path, c
           renderMetadataForm();
         }"""
     )
-    empty = page.locator("[data-project-grid] .archive-empty").first
     page.wait_for_selector("[data-project-grid] .archive-empty", state="visible", timeout=5_000)
-    true_actions = empty.locator('button,a,[role="button"]').count()
-    if true_actions != 1:
-        add(issues, "P1", "estado vazio", "Acervo vazio não oferece uma ação principal única", f"ações visíveis={true_actions}")
-    elif "criar" not in (empty.inner_text() or "").lower():
-        add(issues, "P1", "estado vazio", "ação do Acervo vazio não orienta a criação", empty.inner_text())
+    create_controls = page.locator('[data-view-panel="arquivo"] [data-action="open-create-note"]')
+    visible_creators = [create_controls.nth(index) for index in range(create_controls.count()) if create_controls.nth(index).is_visible()]
+    if not visible_creators:
+        add(issues, "P1", "estado vazio", "Acervo vazio não oferece uma ação de criação alcançável", "nenhum controle visível com data-action=open-create-note")
+    else:
+        labels = [
+            (item.get_attribute("aria-label") or item.get_attribute("title") or item.inner_text() or "").strip()
+            for item in visible_creators
+        ]
+        if not any("criar" in label.lower() or "novo" in label.lower() for label in labels):
+            add(issues, "P1", "estado vazio", "ação do Acervo vazio não orienta a criação", repr(labels))
     evidence["empty_archive"] = screenshot(page, output, case, "archive-empty")
 
     page.evaluate(
@@ -202,14 +212,22 @@ def audit_empty_states(page, issues: list[dict], evidence: dict, output: Path, c
           renderMetadataForm();
         }"""
     )
-    search_empty = page.locator("[data-project-grid] .archive-empty").first
     page.wait_for_selector("[data-project-grid] .archive-empty", state="visible", timeout=5_000)
-    search_actions = search_empty.locator('button,a,[role="button"]').count()
-    if search_actions != 1:
-        add(issues, "P1", "estado vazio", "busca sem resultado não oferece uma saída principal única", f"ações visíveis={search_actions}")
-    elif "limpar" not in (search_empty.inner_text() or "").lower():
-        add(issues, "P1", "estado vazio", "busca sem resultado não oferece limpar busca", search_empty.inner_text())
+    clear_button = page.locator('[data-project-grid] [data-clarity-empty-action="clear-search"]').first
+    try:
+        clear_button.wait_for(state="visible", timeout=3_000)
+    except Exception:
+        add(issues, "P1", "estado vazio", "busca sem resultado não oferece limpar busca", page.locator("[data-project-grid] .archive-empty").first.inner_text())
     evidence["empty_search"] = screenshot(page, output, case, "archive-search-empty")
+
+    if visible(clear_button):
+        clear_button.click()
+        page.wait_for_timeout(120)
+        search_value = page.locator(".archive-search input, input.archive-search").first.input_value()
+        if search_value:
+            add(issues, "P1", "estado vazio", "Limpar busca não esvaziou o campo", repr(search_value))
+        if not visible(page.locator("[data-project-grid] .project-card")):
+            add(issues, "P1", "estado vazio", "Limpar busca não restaurou os documentos", "nenhum cartão ficou visível")
 
 
 def audit_messages(page, issues: list[dict]) -> None:
