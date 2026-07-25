@@ -1,0 +1,42 @@
+name: Migração da entrada Argila
+
+on:
+  push:
+    branches:
+      - refactor/argila-entry-return
+    paths:
+      - "scripts/migrar-argila-entry.py"
+      - ".github/workflows/migrar-argila-entry.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: refactor/argila-entry-return
+          fetch-depth: 0
+
+      - name: Aplicar migração
+        run: python3 scripts/migrar-argila-entry.py
+
+      - name: Verificar pacote
+        run: |
+          python3 scripts/auditor-asset-version.py
+          git diff --check
+          grep -q "20260725-argila-entry" index.html
+          grep -q "16-entry-argila.css" service-worker.js
+          grep -q "Abra uma página." index.html
+          grep -q "Seu texto está esperando." index.html
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat(entry): ativa entrada e retomada Argila" || exit 0
+          git push origin HEAD:refactor/argila-entry-return
