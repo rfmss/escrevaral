@@ -139,7 +139,7 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
                 page.goto(urljoin(BASE_URL, f"#{route}"), wait_until="domcontentloaded")
                 page.wait_for_function(
                     "route => document.querySelector(`[data-view-panel=\"${route}\"]`)?.classList.contains('is-active')",
-                    route,
+                    arg=route,
                 )
                 headings = visible_h1_details(page)
                 require(
