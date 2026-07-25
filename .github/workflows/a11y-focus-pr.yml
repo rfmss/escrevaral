@@ -9,6 +9,7 @@ on:
       - "css/**"
       - "index.html"
       - "scripts/auditor-focus-a11y.py"
+      - "scripts/auditor-editor-toolbar.py"
       - "scripts/auditor-console-errors.py"
       - "scripts/auditor-overflow-mobile.py"
       - "scripts/comparar-golden.py"
@@ -43,8 +44,10 @@ jobs:
           pip install playwright
           playwright install chromium --with-deps
 
-      - name: Validar sintaxe do novo auditor
-        run: python -m py_compile scripts/auditor-focus-a11y.py
+      - name: Validar sintaxe dos auditores
+        run: |
+          python -m py_compile scripts/auditor-focus-a11y.py
+          python -m py_compile scripts/auditor-editor-toolbar.py
 
       - name: Iniciar servidor local
         run: |
@@ -82,6 +85,14 @@ jobs:
             --base-url http://127.0.0.1:8799 \
             --output-dir reports/auditoria/focus-a11y-artifacts
 
+      - name: Auditor da barra do editor
+        id: toolbar
+        continue-on-error: true
+        run: |
+          python3 scripts/auditor-editor-toolbar.py \
+            --base-url http://127.0.0.1:8799 \
+            --output-dir reports/auditoria/editor-toolbar-artifacts
+
       - name: Smoke test do site publicado
         id: live
         continue-on-error: true
@@ -95,6 +106,7 @@ jobs:
           mkdir -p "$DESTINO"
 
           cp -R reports/auditoria/focus-a11y-artifacts "$DESTINO/" 2>/dev/null || true
+          cp -R reports/auditoria/editor-toolbar-artifacts "$DESTINO/" 2>/dev/null || true
           cp "reports/auditoria/overflow-mobile-${DATA}.md" "$DESTINO/" 2>/dev/null || true
           cp "reports/auditoria/overflow-mobile-${DATA}.json" "$DESTINO/" 2>/dev/null || true
           cp "reports/auditoria/console-errors-${DATA}.md" "$DESTINO/" 2>/dev/null || true
@@ -122,6 +134,7 @@ jobs:
           echo "overflow=${{ steps.overflow.outcome }}"
           echo "console=${{ steps.console.outcome }}"
           echo "focus=${{ steps.focus.outcome }}"
+          echo "toolbar=${{ steps.toolbar.outcome }}"
           echo "live=${{ steps.live.outcome }}"
 
           falhou=0
@@ -130,6 +143,7 @@ jobs:
             "${{ steps.overflow.outcome }}" \
             "${{ steps.console.outcome }}" \
             "${{ steps.focus.outcome }}" \
+            "${{ steps.toolbar.outcome }}" \
             "${{ steps.live.outcome }}"; do
             if [ "$resultado" != "success" ]; then
               falhou=1
