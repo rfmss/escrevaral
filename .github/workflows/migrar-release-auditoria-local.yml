@@ -1,0 +1,37 @@
+name: Migração da auditoria local da candidata
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    if: github.head_ref == 'stabilize/release-candidate-argila'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Aplicar migração
+        run: python scripts/migrar-release-auditoria-local.py
+
+      - name: Validar configuração
+        run: |
+          python -m py_compile scripts/auditor-navegacao-visual.py scripts/teste-master.py
+          grep -q 'ESCREVARAL_AUDIT_URL' .github/workflows/release-candidate-argila.yml
+          ! grep -q -- '--sem-local' .github/workflows/release-candidate-argila.yml
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix(release): auditar visual e runtime na branch local"
+          git push origin HEAD:${{ github.head_ref }}
