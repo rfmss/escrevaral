@@ -1,0 +1,159 @@
+/*
+ * Acervo — painel da nota como margem de trabalho.
+ * A identidade da nota orienta o painel; organização e exportação ficam
+ * separadas por ritmo e tipografia, sem criar um segundo cartão concorrente.
+ */
+
+html body .app-shell[data-view="arquivo"] .archive-layout {
+  align-items: start;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-detail-panel {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  border: 0;
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 4px 0 12px 28px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-panel-content {
+  display: grid;
+  gap: 0;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-note-identity {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+html body .app-shell[data-view="arquivo"] .archive-note-identity[hidden] {
+  display: none;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-note-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font: 700 clamp(21px, 2.2vw, 28px)/1.18 "Noto Serif", Georgia, serif;
+  letter-spacing: -0.015em;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-note-kind {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-open-btn {
+  width: 100%;
+  min-height: 42px;
+  justify-content: center;
+  margin: 0 0 14px;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-section {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-section + .archive-details-section {
+  margin-top: 10px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-summary {
+  min-height: 44px;
+  padding: 13px 0;
+  color: var(--soft-ink);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-summary > .material-symbols-outlined:first-child {
+  color: var(--primary);
+  font-size: 18px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-chevron {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-details-section[open] > .archive-details-summary {
+  color: var(--ink);
+}
+
+html body .app-shell[data-view="arquivo"] .metadata-form {
+  padding: 4px 0 20px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-export-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px 0 10px;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-export-actions .ghost-button {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  justify-content: flex-start;
+  border-color: transparent;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+}
+
+html body .app-shell[data-view="arquivo"] .archive-export-actions .ghost-button:hover {
+  border-color: var(--line);
+  background: var(--surface-low);
+}
+
+html body .app-shell[data-view="arquivo"] .obsidian-help {
+  margin: 2px 0 18px;
+  border-top: 0;
+}
+
+@media (max-width: 820px) {
+  html body .app-shell[data-view="arquivo"] .archive-detail-panel {
+    position: static;
+    top: auto;
+    padding: 18px 0 20px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  html body .app-shell[data-view="arquivo"] .archive-note-title {
+    font-size: clamp(21px, 6vw, 26px);
+  }
+
+  html body .app-shell[data-view="arquivo"] .archive-open-btn {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 420px) {
+  html body .app-shell[data-view="arquivo"] .archive-export-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
