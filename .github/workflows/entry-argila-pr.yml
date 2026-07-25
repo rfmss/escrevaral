@@ -48,9 +48,16 @@ jobs:
           exit 1
       - name: Auditar primeira visita e retorno
         run: |
+          DESTINO=reports/auditoria/entry-argila-artifacts
+          mkdir -p "$DESTINO"
+          set +e
           python3 scripts/auditor-entry-argila.py \
             --base-url http://127.0.0.1:8799/ \
-            --output-dir reports/auditoria/entry-argila-artifacts
+            --output-dir "$DESTINO" \
+            > "$DESTINO/auditor.log" 2>&1
+          status=$?
+          cat "$DESTINO/auditor.log"
+          exit $status
       - name: Guardar evidências
         if: always()
         uses: actions/upload-artifact@v4
