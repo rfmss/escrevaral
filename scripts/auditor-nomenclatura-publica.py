@@ -80,6 +80,17 @@ def theme_labels(page) -> list[str | None]:
     )
 
 
+def visible_h1_details(page) -> list[dict[str, str]]:
+    return page.locator("h1:visible").evaluate_all(
+        """elements => elements.map(element => ({
+          text: (element.textContent || '').trim(),
+          className: element.className || '',
+          parentClass: element.parentElement?.className || '',
+          view: element.closest('[data-view-panel]')?.getAttribute('data-view-panel') || 'fora-de-view'
+        }))"""
+    )
+
+
 def audit_browser(failures: list[str], checks: list[str]) -> None:
     console_errors: list[str] = []
     routes = ["editor", "biblioteca", "autoria", "arquivo", "academia", "cronograma"]
@@ -126,15 +137,26 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
 
             for route in routes:
                 page.goto(urljoin(BASE_URL, f"#{route}"), wait_until="domcontentloaded")
-                page.wait_for_selector(".view.is-active")
-                visible_h1 = page.locator("h1:visible").count()
-                require(visible_h1 <= 1, f"Rota #{route} expõe {visible_h1} títulos H1 visíveis.", failures)
+                page.wait_for_function(
+                    "route => document.querySelector(`[data-view-panel=\"${route}\"]`)?.classList.contains('is-active')",
+                    route,
+                )
+                headings = visible_h1_details(page)
+                require(
+                    len(headings) <= 1,
+                    f"Rota #{route} expõe {len(headings)} títulos H1 visíveis: {headings}.",
+                    failures,
+                )
             checks.append("No máximo um H1 visível em cada rota principal")
 
             page.goto(urljoin(BASE_URL, "#academia"), wait_until="domcontentloaded")
-            page.wait_for_selector('[data-view-target="academia"].is-active')
-            active_atelie = page.locator('[data-view-target="academia"].is-active', has_text="Ateliê")
-            require(active_atelie.count() >= 1, "A rota #academia não ativa o destino público Ateliê.", failures)
+            page.wait_for_function(
+                "() => document.querySelector('[data-view-panel=\"academia\"]')?.classList.contains('is-active')"
+            )
+            active_panel = page.locator('[data-view-panel="academia"].is-active')
+            require(active_panel.count() == 1, "A rota #academia não ativa um único painel do Ateliê.", failures)
+            active_atelie_nav = page.locator('[data-view-target="academia"].is-active', has_text="Ateliê")
+            require(active_atelie_nav.count() >= 1, "A navegação ativa de #academia não usa o nome Ateliê.", failures)
             checks.append("Rota técnica #academia abre o Ateliê")
 
             for filename in [
