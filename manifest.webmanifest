@@ -30,8 +30,8 @@
   ],
   "shortcuts": [
     {
-      "name": "Manuscrito",
-      "short_name": "Editor",
+      "name": "Escrever",
+      "short_name": "Escrever",
       "description": "Abrir o editor de manuscrito.",
       "url": "https://escrevaral.com/#editor",
       "icons": [
@@ -42,9 +42,9 @@
       ]
     },
     {
-      "name": "Academia",
-      "short_name": "Academia",
-      "description": "Abrir o Escrevaral para consultar guias de escrita.",
+      "name": "Ateliê",
+      "short_name": "Ateliê",
+      "description": "Abrir o Ateliê do Escrevaral para consultar guias de escrita.",
       "url": "https://escrevaral.com/#academia",
       "icons": [
         {
