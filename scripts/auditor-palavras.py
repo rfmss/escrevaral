@@ -37,6 +37,13 @@ def wait_for_controller(page: Page) -> None:
     )
 
 
+def open_words(page: Page) -> None:
+    target = page.locator('[data-view-target="biblioteca"]:visible').first
+    target.wait_for(state="visible", timeout=10_000)
+    target.click()
+    page.wait_for_selector('.app-shell[data-view="biblioteca"]', timeout=10_000)
+
+
 def seed_manuscript(page: Page) -> None:
     page.evaluate(
         """() => {
@@ -92,8 +99,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         wait_for_controller(page)
         seed_manuscript(page)
 
-        page.locator('[data-view-target="biblioteca"]').first.click()
-        page.wait_for_selector('.app-shell[data-view="biblioteca"]', timeout=10_000)
+        open_words(page)
         page.wait_for_selector('[data-lexical-empty]', state="visible", timeout=10_000)
 
         assert_title(page, issues, viewport_name, "estado vazio")
@@ -170,7 +176,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             context.set_offline(True)
             page.reload(wait_until="domcontentloaded", timeout=30_000)
             wait_for_controller(page)
-            page.locator('[data-view-target="biblioteca"]').first.click()
+            open_words(page)
             page.wait_for_selector('[data-lexical-empty]', state="visible", timeout=15_000)
             assert_title(page, issues, viewport_name, "offline")
             evidence["offline"] = screenshot(page, output, viewport_name, "offline")
