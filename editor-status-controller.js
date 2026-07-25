@@ -96,7 +96,7 @@
 
     const panel = makeElement("div", "statusbar-session-panel", { "aria-label": "Meta e temporizador" });
     const goalSection = createSessionSection("Meta");
-    goalSection.control.append(goal, goalButton);
+    goalSection.control.append(goalButton, goal);
     const timerSection = createSessionSection("Temporizador");
     timerSection.control.append(timer);
     panel.append(goalSection.section, timerSection.section);
