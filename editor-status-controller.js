@@ -3,6 +3,23 @@
 (() => {
   "use strict";
 
+  const controllerVersion = (() => {
+    try {
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-editor-status";
+    } catch {
+      return "20260725-editor-status";
+    }
+  })();
+
+  function ensureLayoutStyles() {
+    if (document.querySelector('link[data-editor-status-layout="true"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `./css/18-editor-status-layout.css?v=${encodeURIComponent(controllerVersion)}`;
+    link.dataset.editorStatusLayout = "true";
+    document.head.appendChild(link);
+  }
+
   function classifySaveStatus(text) {
     const normalized = String(text || "").trim().toLocaleLowerCase("pt-BR");
     if (/não salvo|recuperação necessária|gravação bloqueada|erro|falh/.test(normalized)) {
@@ -31,9 +48,7 @@
   function makeElement(tag, className, attributes = {}) {
     const element = document.createElement(tag);
     element.className = className;
-    Object.entries(attributes).forEach(([name, value]) => {
-      element.setAttribute(name, value);
-    });
+    Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
     return element;
   }
 
@@ -47,6 +62,7 @@
   }
 
   function initEditorStatus() {
+    ensureLayoutStyles();
     const statusbar = document.querySelector(".statusbar");
     if (!statusbar || statusbar.dataset.statusArgila === "true") return;
 
@@ -56,20 +72,16 @@
     const goal = statusbar.querySelector("[data-goal-bar]");
     const goalButton = statusbar.querySelector("[data-goal-set-btn]");
     const timer = statusbar.querySelector("[data-pomodoro]");
-
     if (!count || !save || !goal || !goalButton || !timer) return;
 
     statusbar.dataset.statusArgila = "true";
     statusbar.setAttribute("aria-label", "Situação do texto");
-
     count.classList.add("statusbar-count");
     save.classList.add("statusbar-save");
     save.setAttribute("role", "status");
     save.setAttribute("aria-live", "polite");
 
-    const writing = makeElement("div", "statusbar-writing", {
-      "aria-label": "Contagem e salvamento",
-    });
+    const writing = makeElement("div", "statusbar-writing", { "aria-label": "Contagem e salvamento" });
     writing.append(count, save);
     if (pageCount) writing.append(pageCount);
 
@@ -82,9 +94,7 @@
       '<span class="statusbar-session-label">Sessão</span>',
     ].join("");
 
-    const panel = makeElement("div", "statusbar-session-panel", {
-      "aria-label": "Meta e temporizador",
-    });
+    const panel = makeElement("div", "statusbar-session-panel", { "aria-label": "Meta e temporizador" });
     const goalSection = createSessionSection("Meta");
     goalSection.control.append(goal, goalButton);
     const timerSection = createSessionSection("Temporizador");
@@ -92,18 +102,15 @@
     panel.append(goalSection.section, timerSection.section);
     session.append(summary, panel);
 
-    const community = makeElement("div", "statusbar-community", {
-      "aria-label": "Informações do Escrevaral",
-    });
-    const institutionalSelectors = [
+    const community = makeElement("div", "statusbar-community", { "aria-label": "Informações do Escrevaral" });
+    [
       "[data-visitors-count]",
       ".statusbar-social",
       "[data-offline-note]",
       "[data-visitors]",
       "#levar-mesa-anchor",
       ".statusbar-copyright",
-    ];
-    institutionalSelectors.forEach((selector) => {
+    ].forEach((selector) => {
       statusbar.querySelectorAll(selector).forEach((node) => community.append(node));
     });
 
@@ -127,16 +134,12 @@
       save.setAttribute("aria-label", full || meta.compact);
     }
 
-    const countObserver = new MutationObserver(syncCount);
-    countObserver.observe(count, { childList: true, characterData: true, subtree: true });
-    const saveObserver = new MutationObserver(syncSave);
-    saveObserver.observe(save, { childList: true, characterData: true, subtree: true });
+    new MutationObserver(syncCount).observe(count, { childList: true, characterData: true, subtree: true });
+    new MutationObserver(syncSave).observe(save, { childList: true, characterData: true, subtree: true });
     syncCount();
     syncSave();
 
-    session.addEventListener("toggle", () => {
-      summary.setAttribute("aria-expanded", String(session.open));
-    });
+    session.addEventListener("toggle", () => summary.setAttribute("aria-expanded", String(session.open)));
     summary.setAttribute("aria-expanded", "false");
 
     document.addEventListener("pointerdown", (event) => {
