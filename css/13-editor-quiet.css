@@ -182,6 +182,39 @@ html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open .editor-vi
     max-width: 150px;
   }
 
+  /* Aberta: bloco e alinhamentos ganham linhas próprias, sem esmagar o seletor. */
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 4px;
+  }
+
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > [data-fmt="bold"] {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > [data-fmt="italic"] {
+    grid-column: 2;
+    width: 100%;
+  }
+
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > .fmt-select {
+    grid-column: 3 / -1;
+    width: 100%;
+    max-width: none;
+  }
+
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > .fmt-sep {
+    display: none !important;
+  }
+
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > [data-fmt^="justify"] {
+    width: 100%;
+    min-width: 0;
+  }
+
   html body .app-shell[data-view="editor"] .fmt-group-editorial {
     width: 100%;
     display: flex;
