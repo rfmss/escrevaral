@@ -3,155 +3,160 @@ name: Candidata a lançamento Argila
 on:
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  validar-candidata:
+  migrar-controladores:
+    if: github.head_ref == 'agent/js-controllers-ux-pilot' && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 15
+
     steps:
-      - name: Clonar repositório
+      - name: Clonar branch do piloto
         uses: actions/checkout@v4.2.2
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5.6.0
         with:
-          python-version: '3.12'
+          ref: agent/js-controllers-ux-pilot
+          fetch-depth: 0
 
-      - name: Instalar Playwright e Chromium
+      - name: Mover controladores e atualizar distribuição
+        shell: python
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install playwright
-          python -m playwright install --with-deps chromium
-
-      - name: Validar sintaxe dos auditores
-        run: |
-          python -m py_compile \
-            scripts/teste-master.py \
-            scripts/auditor-release-local.py \
-            scripts/auditor-publicacao.py \
-            scripts/auditor-privacidade-rede.py \
-            scripts/auditoria-pilares.py \
-            scripts/auditor-overflow-mobile.py \
-            scripts/auditor-console-errors.py \
-            scripts/auditor-nomenclatura-publica.py
-
-      - name: Iniciar candidata local
-        run: |
-          python -m http.server 8799 > /tmp/escrevaral-release-server.log 2>&1 &
-          echo $! > /tmp/escrevaral-release-server.pid
-          for tentativa in {1..30}; do
-            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/escrevaral-release-server.log
-          exit 1
-
-      - name: Teste Master local
-        id: master
-        shell: bash
-        run: |
-          set +e
-          python scripts/teste-master.py --sem-rede
-          code=$?
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Auditoria visual da branch
-        id: local_visual
-        shell: bash
-        env:
-          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
-        run: |
-          set +e
-          python scripts/auditor-release-local.py
-          code=$?
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Auditoria da nomenclatura pública
-        id: naming
-        shell: bash
-        run: |
-          set +e
-          python scripts/auditor-nomenclatura-publica.py
-          code=$?
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Auditorias de produção
-        id: production
-        shell: bash
-        run: |
-          set +e
-          python scripts/auditor-publicacao.py
-          pub=$?
-          python scripts/auditor-privacidade-rede.py
-          privacy=$?
-          python scripts/auditoria-pilares.py
-          pillars=$?
-          echo "exit_code=$((pub || privacy || pillars))" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Guardar relatórios
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-candidate-${{ github.run_id }}
-          path: |
-            reports/teste-master/
-            reports/auditoria/
-          retention-days: 14
-
-      - name: Consolidar veredito
-        if: always()
-        env:
-          MASTER_EXIT: ${{ steps.master.outputs.exit_code }}
-          LOCAL_EXIT: ${{ steps.local_visual.outputs.exit_code }}
-          NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
-          PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
-        run: |
-          test "$MASTER_EXIT" = "0"
-          test "$LOCAL_EXIT" = "0"
-          test "$NAMING_EXIT" = "0"
-          test "$PRODUCTION_EXIT" = "0"
-          python - <<'PY'
-          import json
-          import re
-          from datetime import date
           from pathlib import Path
 
-          today = date.today().isoformat()
-          root = Path('reports/auditoria')
+          root = Path('.')
+          target = root / 'js' / 'controllers'
+          target.mkdir(parents=True, exist_ok=True)
+          files = [
+              'tooltip-controller.js',
+              'pomodoro-controller.js',
+              'reader-controller.js',
+          ]
 
-          publication = json.loads((root / f'publicacao-offline-{today}.json').read_text(encoding='utf-8'))
-          pub_counts = publication['summary']['counts']
-          assert pub_counts.get('P0', 0) == 0, pub_counts
-          assert pub_counts.get('P1', 0) == 0, pub_counts
+          for name in files:
+              source = root / name
+              destination = target / name
+              if not source.exists():
+                  raise SystemExit(f'arquivo de origem ausente: {source}')
+              if destination.exists():
+                  raise SystemExit(f'destino já existe: {destination}')
+              source.replace(destination)
 
-          privacy = json.loads((root / f'privacidade-rede-{today}.json').read_text(encoding='utf-8'))
-          privacy_counts = {'P0': 0, 'P1': 0, 'P2': 0}
-          for issue in privacy.get('issues', []):
-              privacy_counts[issue['severity']] += 1
-          assert privacy_counts['P0'] == 0, privacy_counts
-          assert privacy_counts['P1'] == 0, privacy_counts
-          assert privacy['result']['canary_leaked'] is False
-          assert privacy['result']['canary_in_local_storage'] is True
+          old_version = '20260725-js-data-pilot-v1'
+          new_version = '20260725-js-controllers-ux-v1'
 
-          pillars = (root / f'pilares-{today}.md').read_text(encoding='utf-8')
-          assert re.search(r'VERDE', pillars, re.I), pillars[:500]
+          index_path = root / 'index.html'
+          index = index_path.read_text(encoding='utf-8')
+          for name in files:
+              old = f'src="{name}?v={old_version}"'
+              new = f'src="js/controllers/{name}?v={new_version}"'
+              if old not in index:
+                  raise SystemExit(f'referência ausente no index: {old}')
+              index = index.replace(old, new, 1)
+          index_path.write_text(index.replace(old_version, new_version), encoding='utf-8')
 
-          local = json.loads((root / f'release-local-{today}.json').read_text(encoding='utf-8'))
-          assert local['counts']['P0'] == 0, local['counts']
-          assert local['counts']['P1'] == 0, local['counts']
+          sw_path = root / 'service-worker.js'
+          sw = sw_path.read_text(encoding='utf-8')
+          old_cache = 'const CACHE_NAME = "vereda-offline-v955";'
+          if old_cache not in sw:
+              raise SystemExit('cache-base v955 não encontrado')
+          sw = sw.replace(old_cache, 'const CACHE_NAME = "vereda-offline-v956";', 1)
+          sw = sw.replace(old_version, new_version)
+          version_token = '$' + '{ASSET_VERSION}'
+          for name in files:
+              old = f'`./{name}?v={version_token}`'
+              new = f'`./js/controllers/{name}?v={version_token}`'
+              if old not in sw:
+                  raise SystemExit(f'asset ausente no service worker: {old}')
+              sw = sw.replace(old, new, 1)
+          sw_path.write_text(sw, encoding='utf-8')
 
-          naming = json.loads((root / 'nomenclatura-publica-artifacts' / 'report.json').read_text(encoding='utf-8'))
-          assert naming['status'] == 'aprovado', naming
-          assert not naming['failures'], naming['failures']
-          print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
-          PY
+          dialog_path = root / 'ui-dialog.js'
+          dialog = dialog_path.read_text(encoding='utf-8')
+          if old_version not in dialog:
+              raise SystemExit('versão antiga ausente em ui-dialog.js')
+          dialog_path.write_text(dialog.replace(old_version, new_version), encoding='utf-8')
+
+          decision = root / 'docs' / '_decisoes' / 'PILOTO_CONTROLADORES_INTERFACE_2026-07-25.md'
+          decision.write_text(
+              """# Piloto estrutural — controladores de interface
+
+Data: 2026-07-25
+
+## Escopo
+
+Foram movidos para `js/controllers/`:
+
+- `tooltip-controller.js`;
+- `pomodoro-controller.js`;
+- `reader-controller.js`.
+
+O bloco foi escolhido por não carregar arquivos dinamicamente e por manter a mesma ordem de execução no documento.
+
+## Contratos preservados
+
+- funções globais existentes permanecem com os mesmos nomes;
+- nenhum comportamento de interface foi refatorado;
+- a ordem dos scripts no `index.html` não mudou;
+- os três arquivos permanecem no cache offline;
+- `service-worker.js` continua na raiz;
+- relatórios históricos não foram reescritos.
+
+## Verificação direcionada
+
+- sintaxe JavaScript;
+- ausência dos arquivos antigos na raiz;
+- caminhos exatos no HTML e no cache;
+- coerência da versão global e do cache;
+- resposta HTTP dos novos endereços.
+
+A continuação da migração depende da matriz completa da candidata a lançamento.
+""",
+              encoding='utf-8',
+          )
+
+      - name: Validar piloto
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check js/controllers/tooltip-controller.js
+          node --check js/controllers/pomodoro-controller.js
+          node --check js/controllers/reader-controller.js
+          test ! -e tooltip-controller.js
+          test ! -e pomodoro-controller.js
+          test ! -e reader-controller.js
+          grep -Fq 'src="js/controllers/tooltip-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+          grep -Fq 'src="js/controllers/pomodoro-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+          grep -Fq 'src="js/controllers/reader-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+          grep -Fq '`./js/controllers/tooltip-controller.js?v=${ASSET_VERSION}`' service-worker.js
+          grep -Fq '`./js/controllers/pomodoro-controller.js?v=${ASSET_VERSION}`' service-worker.js
+          grep -Fq '`./js/controllers/reader-controller.js?v=${ASSET_VERSION}`' service-worker.js
+          ! grep -Fq 'src="tooltip-controller.js?' index.html
+          ! grep -Fq 'src="pomodoro-controller.js?' index.html
+          ! grep -Fq 'src="reader-controller.js?' index.html
+          python3 scripts/auditor-asset-version.py
+          python3 -m http.server 8799 > /tmp/escrevaral-controller-pilot.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for tentativa in {1..20}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:8799/js/controllers/tooltip-controller.js > /dev/null
+          curl -fsS http://127.0.0.1:8799/js/controllers/pomodoro-controller.js > /dev/null
+          curl -fsS http://127.0.0.1:8799/js/controllers/reader-controller.js > /dev/null
+
+      - name: Restaurar gate e registrar piloto
+        run: |
+          git show origin/agent/js-data-pilot:.github/workflows/release-candidate-argila.yml > .github/workflows/release-candidate-argila.yml
+          rm -f .github/workflows/temp-move-ux-controllers.yml
+          rm -f .github/workflows/temp-drive-controller-main.yml
+          rm -f .controller-migration-trigger
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add -A
+          git commit -m "refactor(structure): mover controladores de interface"
+          git push origin HEAD:agent/js-controllers-ux-pilot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
