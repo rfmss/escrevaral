@@ -102,7 +102,7 @@ def decode_js_string(raw: str) -> str:
 
 
 def parse_synonyms() -> list[dict[str, Any]]:
-    path = ROOT / "synonym-data.js"
+    path = ROOT / "js" / "data" / "synonym-data.js"
     entries: list[dict[str, Any]] = []
     for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         match = SYN_ENTRY_RE.match(line)
