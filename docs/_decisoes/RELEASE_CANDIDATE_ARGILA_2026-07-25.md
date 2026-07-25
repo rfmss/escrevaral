@@ -22,6 +22,20 @@ Encerrar a estabilização sem abrir uma nova rodada de redesign. Esta etapa nã
 - rotas e pilares do produto;
 - coerência de versões e pacote do service worker.
 
+## Primeira rodada consolidada
+
+O Teste Master inicial encontrou `P0: 0`, `P1: 9` e `P2: 70`.
+
+A triagem separou evidência de risco estático:
+
+- dois defeitos visuais reproduzidos: abas do Ateliê e da Biblioteca da Escrita escapavam em 390 px;
+- quatro avisos linguísticos eram colisões lexicais estáticas, duas já explicitamente mitigadas por guardas contextuais;
+- quatro ocorrências de navegação nos auditores dependiam da posição antiga das abas;
+- ausência de CSP em cabeçalho é hardening da hospedagem, sem vazamento do texto-canário;
+- publicação/offline e pilares já estavam verdes.
+
+A candidata corrige os dois overflows, passa a navegar pelos contratos públicos das views, mantém ambiguidades linguísticas documentadas como P2 quando a guarda existe e renova o pacote offline para `20260725-release-candidate` / cache `v949`.
+
 ## Critério de saída
 
 A candidata só entra na `main` com:
