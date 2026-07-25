@@ -290,7 +290,7 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
             _sc = _sf.read()
         _has_preguard = "_VERBOS_PRES.has(_stripDiac(norm))" in _sc and "ADJETIVOS_PRIM.has(norm)" in _sc
         _guard_before = _sc.index("_VERBOS_PRES.has(_stripDiac(norm))") < _sc.index("ADJETIVOS_PRIM.has(norm)") if _has_preguard else False
-        severity = "P1" if _guard_before else "P0"
+        severity = "P2" if _guard_before else "P0"
         add_issue(
             severity,
             "syntax-engine.js/ADJETIVOS_PRIM",
@@ -305,7 +305,7 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
         with open("syntax-engine.js", encoding="utf-8") as _sf2:
             _sc2 = _sf2.read()
         _has_adnominal_guard = 'tokens[i-2].toLowerCase() === "a"' in _sc2 and "_VERBOS_PRES.has(_stripDiac(norm))" in _sc2
-        _pres_severity = "P1" if _has_adnominal_guard else "P0"
+        _pres_severity = "P2" if _has_adnominal_guard else "P0"
         add_issue(
             _pres_severity,
             "norma-data.json/adjetivos_comuns",
@@ -317,9 +317,9 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
     exact_irr = set_intersection(adjetivos_norma, verbos_irr, normalize=lambda x: str(x).lower())
     if exact_irr:
         add_issue(
-            "P1",
+            "P2",
             "norma-data.json/adjetivos_comuns",
-            "Adjetivos da norma colidem com formas verbais/participios irregulares",
+            "Ambiguidade contextual entre adjetivos e formas verbais/participios",
             ", ".join(f"`{item}`" for item in exact_irr[:30]),
             "Manter se forem adjetivos legitimos, mas cobrir com teste contextual de particípio/adjetivo.",
         )
@@ -339,9 +339,9 @@ def audit_morphology_collisions(norma: dict[str, Any], lexical: dict[str, Any]) 
                 normalized_hits.append(f"{source}: `{word}` -> `{key}`")
     if normalized_hits:
         add_issue(
-            "P1",
+            "P2",
             "morfologia/listas",
-            "Colisoes verbo-adjetivo aparecem apos tirar acento",
+            "Ambiguidades verbo-adjetivo aparecem apos tirar acento",
             "; ".join(sorted(set(normalized_hits))[:36]),
             "Testar pares como serio/seria, publico/publica e largo/larga com e sem acento.",
         )

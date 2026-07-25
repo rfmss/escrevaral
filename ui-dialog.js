@@ -249,7 +249,7 @@ _installMesaPortatilEntries();
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('script[data-post-app-controller="palavras"]')) return;
   const script = document.createElement('script');
-  script.src = './lexical-view-controller.js?v=20260725-oficina-nav';
+  script.src = './lexical-view-controller.js?v=20260725-release-candidate';
   script.defer = true;
   script.dataset.postAppController = 'palavras';
   document.body.appendChild(script);

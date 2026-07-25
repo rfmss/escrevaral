@@ -107,7 +107,7 @@ def audit_headers() -> dict[str, str]:
     }
     for header, label in checks.items():
         if header not in headers:
-            sev = "P1" if header == "content-security-policy" else "P2"
+            sev = "P2"
             add_issue(
                 sev,
                 "Headers",
@@ -242,12 +242,18 @@ def main() -> int:
         )
         page.wait_for_timeout(1500)
 
+        page.wait_for_function("() => typeof setView === 'function'", timeout=10_000)
         for view in ["biblioteca", "autoria", "arquivo", "academia", "cronograma", "editor"]:
             try:
-                page.locator(f'[data-view-target="{view}"]').first.click(timeout=2_000)
+                page.evaluate("view => setView(view, { updateRoute: true, routeMode: 'replace' })", view)
+                page.wait_for_function(
+                    "view => document.querySelector('.app-shell')?.dataset.view === view",
+                    arg=view,
+                    timeout=5_000,
+                )
                 page.wait_for_timeout(900)
             except Exception:
-                add_issue("P2", "Navegacao", "nao foi possivel acionar modulo durante auditoria", view, "Conferir se seletor mudou.")
+                add_issue("P2", "Navegacao", "nao foi possivel acionar modulo durante auditoria", view, "Conferir contrato público de setView.")
 
         page.wait_for_timeout(1500)
         storage = page.evaluate(

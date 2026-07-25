@@ -206,6 +206,42 @@ body {
 .dim-icon-sm { font-size: 14px; color: var(--ink3); }
 .dim-name-sm { font-size: 12.5px; font-weight: 600; color: var(--ink); }
 .dim-desc-sm { font-size: 11px; color: var(--ink2); }
+
+/* release-candidate: topbar móvel sem aba parcial */
+@media (max-width: 520px) {
+  .topbar {
+    height: auto;
+    min-height: 54px;
+    padding: 0 12px;
+    gap: 8px;
+    overflow: visible;
+  }
+
+  .topbar-brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+  }
+
+  .topbar-brand span:not(.topbar-brand-mark) {
+    display: none;
+  }
+
+  .topbar-tabs {
+    flex: 0 1 auto;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    overflow: visible;
+  }
+
+  .tab-btn {
+    min-width: 0;
+    height: 54px;
+    padding: 0 8px;
+    font-size: 10.5px;
+  }
+}
 </style>
 <!-- Cinzel carregado pelo app principal via index.html; aqui usamos fallback -->
 </head>
