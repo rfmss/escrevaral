@@ -127,6 +127,10 @@
     box-shadow: none;
   }
 
+  html body .app-shell[data-view="arquivo"] .archive-detail-panel:has(.archive-panel-empty:not([hidden])) {
+    display: none;
+  }
+
   html body .app-shell[data-view="arquivo"] .archive-panel-content,
   html body .app-shell[data-view="arquivo"] .metadata-form {
     width: 100%;
