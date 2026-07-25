@@ -1,0 +1,77 @@
+/* Revisão visual do Bloco 3: protege ferramentas densas dentro da bancada. */
+
+@media (min-width: 821px) {
+  html body .app-shell[data-view="academia"] .academy-tool-panel,
+  html body .app-shell[data-view="academia"] .academy-tool-panel > *,
+  html body .app-shell[data-view="academia"] .rimalab-tool,
+  html body .app-shell[data-view="academia"] .rimalab-workbench,
+  html body .app-shell[data-view="academia"] .rimalab-editor,
+  html body .app-shell[data-view="academia"] .rimalab-dashboard {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-editor textarea {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1350px) {
+  html body .app-shell[data-view="academia"] .rimalab-tool {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 12px 22px;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-copy > .eyebrow,
+  html body .app-shell[data-view="academia"] .rimalab-copy > h2,
+  html body .app-shell[data-view="academia"] .rimalab-copy > p {
+    grid-column: 1;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-actions {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: end;
+    max-width: 230px;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-workbench {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-encyclopedia {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1020px) {
+  html body .app-shell[data-view="academia"] .rimalab-copy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-actions {
+    grid-column: 1;
+    grid-row: auto;
+    max-width: none;
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-dashboard {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html body .app-shell[data-view="academia"] .rimalab-encyclopedia {
+    grid-column: auto;
+  }
+}
