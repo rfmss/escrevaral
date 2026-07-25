@@ -57,13 +57,18 @@
     details.className = "oficina-navigation";
     const summary = document.createElement("summary");
     summary.setAttribute("aria-label", "Abrir ferramentas da Oficina");
+    summary.setAttribute("aria-controls", "oficina-navigation-menu");
     summary.innerHTML = [
       '<span>Oficina</span>',
       '<span class="material-symbols-outlined oficina-navigation-chevron" aria-hidden="true">expand_more</span>',
     ].join("");
+
+    // O menu vive no body para não ser recortado por contêineres responsivos do editor.
     const menu = document.createElement("div");
+    menu.id = "oficina-navigation-menu";
     menu.className = "oficina-navigation-menu";
     menu.setAttribute("aria-label", "Ferramentas da Oficina");
+    menu.hidden = true;
 
     grouped.forEach((button) => {
       const view = button.dataset.viewTarget;
@@ -74,8 +79,9 @@
       menu.appendChild(button);
     });
 
-    details.append(summary, menu);
+    details.append(summary);
     tabs.replaceChildren(editor, archive, details);
+    document.body.appendChild(menu);
     tabs.dataset.oficinaNavigation = "true";
 
     function positionMenu() {
@@ -110,6 +116,7 @@
 
     details.addEventListener("toggle", () => {
       summary.setAttribute("aria-expanded", String(details.open));
+      menu.hidden = !details.open;
       if (details.open) requestAnimationFrame(positionMenu);
     });
     summary.setAttribute("aria-expanded", "false");
@@ -118,7 +125,8 @@
     window.addEventListener("scroll", positionMenu, { passive: true, capture: true });
 
     document.addEventListener("pointerdown", (event) => {
-      if (details.open && !details.contains(event.target)) details.open = false;
+      if (!details.open) return;
+      if (!details.contains(event.target) && !menu.contains(event.target)) details.open = false;
     });
 
     document.addEventListener("keydown", (event) => {
