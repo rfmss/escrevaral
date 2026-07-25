@@ -1,0 +1,45 @@
+name: Migração de versão — Clareza desktop
+
+on:
+  push:
+    branches:
+      - clarity/desktop-shell-editor
+    paths:
+      - scripts/migrate-clarity-desktop-version.py
+      - .github/workflows/migrate-clarity-desktop-version.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: clarity/desktop-shell-editor
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Aplicar versão global
+        run: python3 scripts/migrate-clarity-desktop-version.py
+
+      - name: Validar distribuição
+        run: python3 scripts/auditor-asset-version.py
+        env:
+          GITHUB_BASE_REF: main
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js ui-dialog.js
+          git commit -m "build(clarity): sincronize versão global desktop"
+          git push origin HEAD:clarity/desktop-shell-editor
