@@ -6,6 +6,23 @@
   const root = document.documentElement;
   let lastModality = "keyboard";
 
+  const scriptVersion = (() => {
+    try {
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-desktop-v1";
+    } catch {
+      return "20260725-clarity-desktop-v1";
+    }
+  })();
+
+  function ensureStyles() {
+    if (document.querySelector('link[data-product-clarity-controls="true"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `./css/20-product-clarity-desktop-controls.css?v=${encodeURIComponent(scriptVersion)}`;
+    link.dataset.productClarityControls = "true";
+    document.head.appendChild(link);
+  }
+
   function setModality(next) {
     if (next === lastModality && root.dataset.inputModality === next) return;
     lastModality = next;
@@ -23,6 +40,7 @@
     setModality("keyboard");
   }, true);
   setModality("keyboard");
+  ensureStyles();
 
   function initUtilityMenu() {
     const actions = document.querySelector(".topbar-actions");
