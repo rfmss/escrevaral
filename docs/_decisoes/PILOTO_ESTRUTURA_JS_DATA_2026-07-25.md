@@ -31,6 +31,8 @@ A execução direcionada concluiu com sucesso:
 - auditoria de versão de assets;
 - resposta HTTP dos três novos endereços.
 
+A primeira execução da matriz completa revelou que `scripts/auditor-dados.py` ainda procurava `synonym-data.js` na raiz. O consumidor foi atualizado para `js/data/synonym-data.js` e executado novamente sem P0. Essa falha foi tratada como dependência estrutural, não como falso negativo a ser ignorado.
+
 A matriz completa da candidata deve validar o commit final antes de qualquer incorporação.
 
 ## Critério para continuar
