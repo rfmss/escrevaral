@@ -37,14 +37,18 @@ def visible(page, selector: str) -> bool:
 
 
 def dismiss_onboarding(page) -> None:
-    overlay = page.locator("#terms-overlay").first
-    if overlay.count() == 0 or not overlay.is_visible():
-        return
-    button = page.locator('[data-action="accept-terms-blank"]').first
-    if button.count() == 0:
-        raise RuntimeError("Botão para concluir onboarding ausente")
-    button.click()
-    overlay.wait_for(state="hidden", timeout=8_000)
+    terms = page.locator("#terms-overlay").first
+    if terms.count() > 0 and terms.is_visible():
+        button = page.locator('[data-action="accept-terms-blank"]').first
+        if button.count() == 0:
+            raise RuntimeError("Botão para concluir termos ausente")
+        button.click()
+        terms.wait_for(state="hidden", timeout=8_000)
+
+    welcome_button = page.locator('[data-action="welcome-write"]').first
+    if welcome_button.count() > 0 and welcome_button.is_visible():
+        welcome_button.click()
+        welcome_button.wait_for(state="hidden", timeout=8_000)
 
 
 def screenshot(page, output: Path, viewport: str, theme: str, state: str) -> str:
@@ -82,7 +86,7 @@ def run_case(browser, base_url: str, output: Path, viewport: tuple, theme: tuple
             theme_value,
         )
         dismiss_onboarding(page)
-        page.wait_for_selector('[data-action="toggle-editorial-group"]', timeout=10_000)
+        page.wait_for_selector('[data-action="toggle-editorial-group"]', state="visible", timeout=10_000)
 
         toggle = page.locator('[data-action="toggle-editorial-group"]').first
         group = page.locator("[data-editorial-group]").first
@@ -111,7 +115,7 @@ def run_case(browser, base_url: str, output: Path, viewport: tuple, theme: tuple
         evidence["collapsed"] = screenshot(page, output, viewport_name, theme_name, "collapsed")
 
         toggle.focus()
-        page.keyboard.press("Enter")
+        toggle.press("Enter")
         page.wait_for_function(
             """() => {
               const group = document.querySelector('[data-editorial-group]');
@@ -138,7 +142,7 @@ def run_case(browser, base_url: str, output: Path, viewport: tuple, theme: tuple
 
         evidence["expanded"] = screenshot(page, output, viewport_name, theme_name, "expanded")
 
-        page.keyboard.press("Enter")
+        toggle.press("Enter")
         page.wait_for_function(
             """() => {
               const group = document.querySelector('[data-editorial-group]');
