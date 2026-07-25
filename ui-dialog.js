@@ -199,3 +199,46 @@ window.VeredaModalFocus = {
   getOpen: _getOpenModal,
   sync: _syncActiveModal,
 };
+
+function _createMesaPortatilLink(className, locationName) {
+  const link = document.createElement('a');
+  link.href = '/pegar/';
+  link.className = className;
+  link.dataset.mesaPortatilEntry = locationName;
+  link.setAttribute('aria-label', 'Mesa no celular — levar e trazer textos entre dispositivos');
+  link.title = 'Leve e traga seus textos entre dispositivos, sem conta e sem servidor';
+  link.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">smartphone</span><span>Mesa no celular</span>';
+  link.addEventListener('click', async (event) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const saved = typeof persistState === 'function'
+      ? await persistState('Texto guardado antes de abrir a mesa no celular')
+      : true;
+    if (saved === false) {
+      if (typeof saveStatus !== 'undefined' && saveStatus) {
+        saveStatus.textContent = 'Não foi possível guardar o texto antes de sair';
+      }
+      return;
+    }
+    window.location.assign(link.href);
+  });
+  return link;
+}
+
+function _installMesaPortatilEntries() {
+  const mobileNav = document.querySelector('#mobile-bandeja .bandeja-nav');
+  if (mobileNav && !mobileNav.querySelector('[data-mesa-portatil-entry="bandeja"]')) {
+    const link = _createMesaPortatilLink('bandeja-item', 'bandeja');
+    const backupItem = mobileNav.querySelector('[data-action="open-backup-from-bandeja"]');
+    if (backupItem) backupItem.insertAdjacentElement('afterend', link);
+    else mobileNav.appendChild(link);
+  }
+
+  const archiveActions = document.querySelector('.archive-backup-actions');
+  if (archiveActions && !archiveActions.querySelector('[data-mesa-portatil-entry="acervo"]')) {
+    const link = _createMesaPortatilLink('secondary-button', 'acervo');
+    archiveActions.insertAdjacentElement('afterbegin', link);
+  }
+}
+
+_installMesaPortatilEntries();
