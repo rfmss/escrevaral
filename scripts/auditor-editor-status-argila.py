@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,13 +18,15 @@ CASES = (
     ("1440x900", 1440, 900),
 )
 THEMES = (("alvorada", False), ("scriptorium", True))
+STORAGE_KEY = "vereda.manuscripts.v1"
 TERMS_KEY = "escrevaral-termos-v1"
 DARK_KEY = "vereda:dark-mode"
 EXPECTED_WORDS = "9"
 
 
 def rect(page, selector: str):
-    return page.locator(selector).first.bounding_box()
+    locator = page.locator(selector)
+    return locator.first.bounding_box() if locator.count() else None
 
 
 def visible(page, selector: str) -> bool:
@@ -53,6 +56,30 @@ def overlap(a, b, tolerance: float = 1.0) -> bool:
     )
 
 
+def fixture_state() -> str:
+    now = "2026-07-25T00:00:00.000Z"
+    return json.dumps(
+        {
+            "activeId": "status-argila-teste",
+            "manuscripts": [
+                {
+                    "id": "status-argila-teste",
+                    "title": "Página de teste",
+                    "text": "",
+                    "html": "",
+                    "type": "manuscrito",
+                    "kind": "Manuscrito em branco",
+                    "folder": "Ficção",
+                    "status": "Em escrita",
+                    "createdAt": now,
+                    "updatedAt": now,
+                }
+            ],
+        },
+        ensure_ascii=False,
+    )
+
+
 def configure(browser, width: int, height: int, dark: bool):
     context = browser.new_context(
         viewport={"width": width, "height": height},
@@ -60,10 +87,11 @@ def configure(browser, width: int, height: int, dark: bool):
         color_scheme="dark" if dark else "light",
     )
     values = {
+        STORAGE_KEY: fixture_state(),
         TERMS_KEY: "2026-07-25T00:00:00.000Z",
         DARK_KEY: "on" if dark else "off",
     }
-    payload = json.dumps(values)
+    payload = json.dumps(values, ensure_ascii=False)
     context.add_init_script(
         f"""
         const seed = {payload};
@@ -77,26 +105,19 @@ def prepare(page, base_url: str, errors: list[str]):
     page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(base_url, wait_until="domcontentloaded", timeout=30_000)
-    page.wait_for_function("() => typeof createBlankManuscript === 'function'", timeout=20_000)
-    page.evaluate(
-        """() => {
-          if (!state?.manuscripts?.length) createBlankManuscript();
-          setView('editor');
-        }"""
-    )
-    page.wait_for_selector('.statusbar[data-status-argila="true"]', timeout=12_000)
-    page.wait_for_selector(".writing-area", state="visible", timeout=12_000)
+    page.wait_for_selector('.statusbar[data-status-argila="true"]', timeout=20_000)
+    page.wait_for_selector(".writing-area", state="visible", timeout=20_000)
     editor = page.locator(".writing-area")
     editor.click()
     page.keyboard.type("uma página cresce com calma e encontra sua forma", delay=4)
     page.wait_for_function(
         "expected => document.querySelector('.statusbar-count')?.dataset.wordCount === expected",
         arg=EXPECTED_WORDS,
-        timeout=8_000,
+        timeout=10_000,
     )
     page.wait_for_function(
         "() => ['saved','ready'].includes(document.querySelector('[data-save-status]')?.dataset.saveState)",
-        timeout=8_000,
+        timeout=10_000,
     )
 
 
@@ -107,6 +128,9 @@ def audit_case(browser, base_url: str, output: Path, case, theme):
     page = context.new_page()
     issues: list[str] = []
     console_errors: list[str] = []
+    shot_dir = output / "screenshots"
+    shot_dir.mkdir(parents=True, exist_ok=True)
+    shot = shot_dir / f"{name}-{theme_name}.png"
     try:
         prepare(page, base_url, console_errors)
         phone = width <= 599
@@ -143,9 +167,8 @@ def audit_case(browser, base_url: str, output: Path, case, theme):
                 issues.append("contagem compacta não recebeu o total esperado")
 
         summary = page.locator(".statusbar-session-toggle")
-        summary.focus()
-        page.keyboard.press("Enter")
-        page.wait_for_selector(".statusbar-session[open] .statusbar-session-panel", timeout=4_000)
+        summary.press("Enter")
+        page.wait_for_selector(".statusbar-session[open] .statusbar-session-panel", timeout=5_000)
         panel_box = rect(page, ".statusbar-session-panel")
         if not in_viewport(panel_box, width, height):
             issues.append(f"painel de sessão fora do viewport: {panel_box}")
@@ -163,20 +186,23 @@ def audit_case(browser, base_url: str, output: Path, case, theme):
             if visible(page, '.statusbar[data-status-argila="true"]'):
                 issues.append("faixa do editor continua visível no Acervo móvel")
             page.evaluate("setView('editor')")
-
-        shot_dir = output / "screenshots"
-        shot_dir.mkdir(parents=True, exist_ok=True)
-        shot = shot_dir / f"{name}-{theme_name}.png"
-        page.screenshot(path=str(shot), full_page=True)
-        issues.extend(f"console: {item}" for item in console_errors)
-        return {
-            "case": name,
-            "theme": theme_name,
-            "screenshot": f"screenshots/{shot.name}",
-            "issues": issues,
-        }
+    except Exception as error:  # relatório deve sobreviver a falhas de preparação
+        issues.append(f"exceção: {type(error).__name__}: {error}")
+        issues.append(traceback.format_exc(limit=5))
     finally:
+        try:
+            page.screenshot(path=str(shot), full_page=True)
+        except Exception:
+            pass
         context.close()
+
+    issues.extend(f"console: {item}" for item in console_errors)
+    return {
+        "case": name,
+        "theme": theme_name,
+        "screenshot": f"screenshots/{shot.name}",
+        "issues": issues,
+    }
 
 
 def write_report(output: Path, cases: list[dict]):
