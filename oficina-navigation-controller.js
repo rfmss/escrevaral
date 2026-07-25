@@ -12,9 +12,9 @@
 
   const scriptVersion = (() => {
     try {
-      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-release-candidate";
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-desktop-v1";
     } catch {
-      return "20260725-release-candidate";
+      return "20260725-clarity-desktop-v1";
     }
   })();
 
@@ -25,6 +25,15 @@
     link.href = `./css/19-oficina-navigation.css?v=${encodeURIComponent(scriptVersion)}`;
     link.dataset.oficinaNavigationStyle = "true";
     document.head.appendChild(link);
+  }
+
+  function ensureProductClarityController() {
+    if (document.querySelector('script[data-product-clarity-controller="true"]')) return;
+    const script = document.createElement("script");
+    script.src = `./product-clarity-controller.js?v=${encodeURIComponent(scriptVersion)}`;
+    script.defer = true;
+    script.dataset.productClarityController = "true";
+    document.body.appendChild(script);
   }
 
   function makeItemCopy(button, view) {
@@ -153,9 +162,14 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initOficinaNavigation, { once: true });
-  } else {
+  function init() {
     initOficinaNavigation();
+    ensureProductClarityController();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
   }
 })();

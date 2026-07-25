@@ -1,0 +1,399 @@
+/*
+ * Escrevaral — Clareza do Produto, bloco 1.
+ * Desktop first: shell + editor. Esta camada não altera estado, engines,
+ * persistência, rotas ou formatos; apenas reorganiza peso, proximidade e foco.
+ */
+
+@media (min-width: 821px) {
+  /* ── SHELL: navegação primeiro, utilidades em repouso ─────────────── */
+  .app-shell {
+    grid-template-rows: 64px minmax(0, 1fr) 30px;
+  }
+
+  .topbar {
+    min-height: 64px;
+    padding-inline: clamp(24px, 3vw, 48px);
+    gap: clamp(22px, 3vw, 44px);
+  }
+
+  .brand-lockup {
+    min-width: 168px;
+  }
+
+  .brand-lockup strong {
+    font-size: 16px;
+  }
+
+  .module-tabs {
+    gap: clamp(24px, 3vw, 42px);
+  }
+
+  .module-tabs .tab {
+    min-height: 42px;
+  }
+
+  .topbar-actions {
+    min-width: 0;
+    gap: 1px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line);
+  }
+
+  .topbar-actions .icon-button,
+  .topbar-actions .offline-badge,
+  .topbar-actions .proof-chip {
+    min-width: 34px;
+    min-height: 34px;
+    padding: 5px 7px;
+    border: 0;
+    background: transparent;
+    opacity: 0.68;
+    transition: opacity var(--motion-quick), background var(--motion-quick), color var(--motion-quick);
+  }
+
+  .topbar-actions:hover .icon-button,
+  .topbar-actions:focus-within .icon-button,
+  .topbar-actions:hover .offline-badge,
+  .topbar-actions:focus-within .offline-badge,
+  .topbar-actions:hover .proof-chip,
+  .topbar-actions:focus-within .proof-chip {
+    opacity: 0.9;
+  }
+
+  .topbar-actions .icon-button:hover,
+  .topbar-actions .icon-button:focus-visible,
+  .topbar-actions .offline-badge:hover,
+  .topbar-actions .proof-chip:hover {
+    opacity: 1;
+    background: var(--surface-low);
+  }
+
+  .topbar-actions .offline-badge-label,
+  .topbar-actions .topbar-audio-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .topbar-actions .material-symbols-outlined {
+    font-size: 19px;
+  }
+
+  .panel-rail {
+    opacity: 0.45;
+    box-shadow: none;
+    transition: opacity var(--motion-quick), border-color var(--motion-quick), background var(--motion-quick);
+  }
+
+  .panel-rail:hover,
+  .panel-rail:focus-visible {
+    opacity: 1;
+  }
+
+  /* ── EDITOR: cabeçalho do documento, toolbar e folha ────────────── */
+  .app-shell[data-view="editor"] .content-stage {
+    padding: clamp(28px, 3.4vw, 48px) clamp(32px, 4.8vw, 76px) 44px;
+  }
+
+  .app-shell[data-view="editor"] .view-editor {
+    padding: 0;
+  }
+
+  .app-shell[data-view="editor"] .editor-split {
+    width: min(100%, 1200px);
+    margin-inline: auto;
+    align-items: start;
+    gap: clamp(22px, 2.5vw, 36px);
+  }
+
+  .app-shell[data-view="editor"] .template-reference {
+    width: clamp(250px, 22vw, 300px);
+    min-width: 250px;
+    padding: 10px 26px 18px 0;
+    border: 0;
+    border-right: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .app-shell[data-view="editor"] .split-resizer {
+    width: 1px;
+    background: transparent;
+    opacity: 0;
+  }
+
+  .app-shell[data-view="editor"] .editor-paper {
+    width: min(100%, 920px);
+    min-width: 0;
+    margin-inline: auto;
+    padding: 0 clamp(42px, 5vw, 74px) clamp(54px, 6vw, 88px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title context"
+      "toolbar toolbar"
+      "writing writing";
+    align-content: start;
+    column-gap: 24px;
+    border: 1px solid rgba(74, 67, 59, 0.12);
+    border-radius: 2px;
+    background: var(--brand-paper, var(--card));
+    box-shadow: 0 12px 34px rgba(30, 25, 21, 0.065), 0 1px 4px rgba(30, 25, 21, 0.035);
+  }
+
+  .app-shell[data-view="editor"] .title-block {
+    grid-area: title;
+    min-width: 0;
+    margin: 0;
+    padding: clamp(30px, 4vw, 48px) 0 16px;
+    align-self: end;
+  }
+
+  .app-shell[data-view="editor"] .title-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--argila-font-reading, Literata, Georgia, serif);
+    font-size: clamp(25px, 2.4vw, 34px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    box-shadow: none;
+  }
+
+  .app-shell[data-view="editor"] .title-input::placeholder {
+    color: color-mix(in srgb, var(--muted) 58%, transparent);
+  }
+
+  .app-shell[data-view="editor"] .title-rule {
+    display: none;
+  }
+
+  .app-shell[data-view="editor"] .editor-mode-bar {
+    grid-area: context;
+    align-self: end;
+    justify-self: end;
+    min-width: max-content;
+    margin: 0;
+    padding: clamp(30px, 4vw, 48px) 0 16px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls {
+    gap: 2px;
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button {
+    min-height: 34px;
+    padding: 5px 8px;
+    border-color: transparent;
+    background: transparent;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button:hover,
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button:focus-visible,
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button[aria-expanded="true"],
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button[aria-pressed="true"] {
+    border-color: transparent;
+    background: var(--surface-low);
+    color: var(--soft-ink);
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls .material-symbols-outlined {
+    font-size: 17px;
+  }
+
+  .app-shell[data-view="editor"] .editor-delete-btn {
+    min-width: 32px;
+    min-height: 32px;
+    margin-left: 8px;
+    opacity: 0.32;
+  }
+
+  .app-shell[data-view="editor"] .editor-delete-btn:hover,
+  .app-shell[data-view="editor"] .editor-delete-btn:focus-visible {
+    opacity: 0.85;
+  }
+
+  .app-shell[data-view="editor"] .format-bar-wrap {
+    grid-area: toolbar;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .app-shell[data-view="editor"] .format-bar-wrap:hover,
+  .app-shell[data-view="editor"] .format-bar-wrap.is-scroll-active {
+    border-color: var(--line);
+    background: transparent;
+  }
+
+  .app-shell[data-view="editor"] .format-bar-wrap::before,
+  .app-shell[data-view="editor"] .format-bar-wrap::after,
+  .app-shell[data-view="editor"] .fmt-scroll-arrow {
+    display: none;
+  }
+
+  .app-shell[data-view="editor"] .format-bar {
+    min-height: 44px;
+    padding: 7px 0;
+    gap: 6px;
+    overflow: visible;
+  }
+
+  .app-shell[data-view="editor"] .fmt-group-writing {
+    flex: 1 1 auto;
+  }
+
+  .app-shell[data-view="editor"] .fmt-group-editorial {
+    margin-left: auto;
+  }
+
+  .app-shell[data-view="editor"] .fmt-sep-editorial {
+    display: none;
+  }
+
+  .app-shell[data-view="editor"] .fmt-btn {
+    width: 32px;
+    height: 30px;
+    border-radius: 4px;
+  }
+
+  .app-shell[data-view="editor"] .fmt-btn-labeled {
+    width: auto;
+    min-width: 38px;
+    padding-inline: 6px;
+  }
+
+  .app-shell[data-view="editor"] .fmt-select {
+    min-height: 30px;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .app-shell[data-view="editor"] .fmt-select:hover,
+  .app-shell[data-view="editor"] .fmt-select:focus-visible {
+    border-color: var(--line);
+    background: var(--surface-low);
+  }
+
+  .app-shell[data-view="editor"] .writing-area {
+    grid-area: writing;
+    width: min(100%, 69ch);
+    max-width: 69ch;
+    min-height: clamp(460px, 58vh, 700px);
+    margin-inline: auto;
+    padding: clamp(44px, 5.5vw, 72px) 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--argila-font-reading, Literata, Georgia, serif);
+    font-size: clamp(17px, 1.25vw, 19px);
+    line-height: 1.78;
+    box-shadow: none;
+  }
+
+  .app-shell[data-view="editor"] .paged-editor,
+  .app-shell[data-view="editor"] .specialized-editor,
+  .app-shell[data-view="editor"] .editor-quote {
+    grid-column: 1 / -1;
+  }
+
+  /* Mouse: cursor e seleção bastam. Teclado: um único anel inequívoco. */
+  .app-shell[data-view="editor"] .title-input:focus,
+  .app-shell[data-view="editor"] .writing-area:focus {
+    border-color: transparent;
+    outline: none;
+    box-shadow: none !important;
+  }
+
+  .app-shell[data-view="editor"] .title-input:focus-visible,
+  .app-shell[data-view="editor"] .writing-area:focus-visible {
+    outline: 2px solid var(--focus-ring-color) !important;
+    outline-offset: 5px;
+    box-shadow: none !important;
+  }
+
+  .app-shell[data-view="editor"] .writing-area:focus-visible {
+    outline-width: 1.5px !important;
+    outline-offset: 8px;
+  }
+
+  .app-shell[data-view="editor"] .statusbar {
+    min-height: 30px;
+    color: color-mix(in srgb, var(--muted) 84%, transparent);
+  }
+
+  .app-shell[data-view="editor"] .statusbar button,
+  .app-shell[data-view="editor"] .statusbar [role="button"] {
+    min-height: 26px;
+  }
+
+  /* Foco sem distração mantém a folha, mas remove ruído global. */
+  .app-shell.is-focus-mode[data-view="editor"] .topbar-actions,
+  .app-shell.is-focus-mode[data-view="editor"] .panel-rail {
+    opacity: 0.18;
+  }
+
+  .app-shell.is-focus-mode[data-view="editor"] .topbar-actions:hover,
+  .app-shell.is-focus-mode[data-view="editor"] .topbar-actions:focus-within,
+  .app-shell.is-focus-mode[data-view="editor"] .panel-rail:hover,
+  .app-shell.is-focus-mode[data-view="editor"] .panel-rail:focus-visible {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1120px) {
+  .topbar {
+    padding-inline: 20px;
+    gap: 18px;
+  }
+
+  .brand-lockup {
+    min-width: 142px;
+  }
+
+  .module-tabs {
+    gap: 20px;
+  }
+
+  .app-shell[data-view="editor"] .content-stage {
+    padding-inline: 28px;
+  }
+
+  .app-shell[data-view="editor"] .editor-paper {
+    padding-inline: 42px;
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls .secondary-button {
+    font-size: 0;
+  }
+
+  .app-shell[data-view="editor"] .editor-view-controls .material-symbols-outlined {
+    font-size: 18px;
+  }
+}
+
+@media (forced-colors: active) and (min-width: 821px) {
+  .app-shell[data-view="editor"] .title-input:focus-visible,
+  .app-shell[data-view="editor"] .writing-area:focus-visible {
+    outline-color: Highlight !important;
+  }
+}
