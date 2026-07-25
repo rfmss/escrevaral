@@ -2,6 +2,8 @@
 
 Data: 2026-07-25
 Branch: `stabilize/clarity-finish`
+Versão candidata: `20260725-clarity-final-v1`
+Cache offline: `vereda-offline-v953`
 
 ## Objetivo
 
@@ -43,6 +45,14 @@ Não alterar sem falha reproduzida:
 8. Editor, Acervo, Oficina, Palavras, Autoria e Mesa móvel permanecem verdes.
 9. Cache, versão global e pacote offline permanecem coerentes.
 10. Deploy seguido de smoke test público aprovado.
+
+## Evidências pré-merge
+
+- Escape da confirmação usa o cancelamento já existente e preserva retorno de foco.
+- Busca sem resultado oferece `Limpar busca` e restaura os documentos.
+- O estado realmente vazio mantém a ação principal existente de criação.
+- A auditoria final cobre 1280 px, 1440 px em Scriptorium e 390 px.
+- A promoção da versão substituiu atomicamente todas as referências distribuídas.
 
 ## Regra de decisão
 
