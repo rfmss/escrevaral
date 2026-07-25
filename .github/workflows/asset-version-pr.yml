@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Configurar Python
         uses: actions/setup-python@v5.6.0
