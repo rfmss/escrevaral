@@ -1,18 +1,21 @@
 name: Sincronização da situação Argila
 
 on:
-  push:
+  pull_request:
     branches:
-      - refactor/argila-editor-status
+      - main
     paths:
       - "scripts/migrar-editor-status-argila.py"
       - ".github/workflows/migrar-editor-status-argila.yml"
+      - "css/17-editor-status-argila.css"
+      - "editor-status-controller.js"
 
 permissions:
   contents: write
 
 jobs:
   migrar:
+    if: github.head_ref == 'refactor/argila-editor-status'
     runs-on: ubuntu-latest
     steps:
       - name: Clonar branch
