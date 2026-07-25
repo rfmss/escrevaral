@@ -64,9 +64,10 @@ jobs:
               raise SystemExit('cache-base v955 não encontrado')
           sw = sw.replace(old_cache, 'const CACHE_NAME = "vereda-offline-v956";', 1)
           sw = sw.replace(old_version, new_version)
+          version_token = '$' + '{ASSET_VERSION}'
           for name in files:
-              old = f'`./{name}?v=${{ASSET_VERSION}}`'
-              new = f'`./js/controllers/{name}?v=${{ASSET_VERSION}}`'
+              old = f'`./{name}?v={version_token}`'
+              new = f'`./js/controllers/{name}?v={version_token}`'
               if old not in sw:
                   raise SystemExit(f'asset ausente no service worker: {old}')
               sw = sw.replace(old, new, 1)
