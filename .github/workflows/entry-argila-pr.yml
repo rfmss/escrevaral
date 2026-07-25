@@ -54,9 +54,8 @@ jobs:
           python3 scripts/auditor-entry-argila.py \
             --base-url http://127.0.0.1:8799/ \
             --output-dir "$DESTINO" \
-            > "$DESTINO/auditor.log" 2>&1
-          status=$?
-          cat "$DESTINO/auditor.log"
+            2>&1 | tee "$DESTINO/auditor.log" -a /tmp/escrevaral-entry-http.log
+          status=${PIPESTATUS[0]}
           exit $status
       - name: Guardar evidências
         if: always()
