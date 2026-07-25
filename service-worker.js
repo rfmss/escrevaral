@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v952";
-const ASSET_VERSION = "20260725-clarity-workshop-v1";
+const CACHE_NAME = "vereda-offline-v953";
+const ASSET_VERSION = "20260725-clarity-final-v2";
 
 const CORE_ASSETS = [
   "./",
