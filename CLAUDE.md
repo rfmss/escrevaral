@@ -2,18 +2,20 @@
 
 Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + HTML único. Sem framework, sem IA de terceiros, sem envio de dados.
 
-**Pasta oficial de trabalho:** `/home/rafamass/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Veredav3/`
+**Fonte de verdade:** a branch remota `main` de `rfmss/escrevaral`. Qualquer cópia local divergente deve ser tratada como não confiável até ser comparada explicitamente com o remoto.
 **Projeto atual:** Escrevaral. "Vereda" é legado/histórico e pode aparecer em nomes internos antigos.
 **Deploy:** push em `main` → https://escrevaral.com (GitHub Pages + Cloudflare)
 **QA local:** `python3 -m http.server 8799` + Playwright headless
 **Repositório:** github.com/rfmss/escrevaral
 
-**Stack de automação (URLs — consultar memória `reference-infra-n8n-hf.md`):**
-- n8n: `rafamass-n8n.hf.space` (HF Space, mantido acordado pelo cron-job.org)
-- Hugging Face: `huggingface.co/rafamass`
-- Banco: Neon — projeto `falling-frog-41677820`
-- Wake-up: `console.cron-job.org/dashboard` (conectado via GitHub)
-- Analíticas: `escrevaral.goatcounter.com` (ver `docs/_decisoes/ANALITICAS_GOATCOUNTER.md`)
+**Infraestrutura externa:**
+- automação autogerenciada para rotinas auxiliares;
+- hospedagem externa de apoio;
+- banco gerenciado para serviços opcionais;
+- monitor externo de disponibilidade;
+- analíticas sem identificação pessoal.
+
+Nomes concretos, URLs administrativas e identificadores de projeto ficam em `CLAUDE.local.md`, arquivo local ignorado pelo Git. O produto principal continua offline-first e não depende desses serviços para editar ou preservar manuscritos.
 
 ---
 
@@ -211,7 +213,7 @@ Antes de adicionar qualquer entrada em `adjetivos_comuns`, verificar se a forma 
 
 Ao compactar, preservar obrigatoriamente:
 
-1. **Pasta oficial:** `/home/rafamass/escrevaral/` — ignorar `/home/rafamass/Veredav3/`
+1. **Fonte de verdade:** `origin/main` de `rfmss/escrevaral`; não incorporar estado local divergente sem confirmação do mantenedor
 2. **Versionamento:** toda edição JS/CSS exige bump de `?v=YYYYMMDD-slug` em `index.html` (71 ocorrências) + `ASSET_VERSION` + `CACHE_NAME` em `service-worker.js`
 3. **Pilares inegociáveis:** português brasileiro integral; sem rolagem horizontal; metáforas silenciosas; localStorage intacto
 4. **Vocabulário:** Manuscrito não Texto; Acervo não repositório; Guia de escrita não template

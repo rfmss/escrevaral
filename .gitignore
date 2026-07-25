@@ -99,3 +99,6 @@ assets/marca-historico/
 
 # ── Legado não publicado ──────────────────────────────────────────
 docs/_legado/
+
+# ── Infraestrutura local não versionada ─────────────────────────────
+CLAUDE.local.md
