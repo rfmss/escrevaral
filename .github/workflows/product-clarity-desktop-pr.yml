@@ -5,11 +5,14 @@ on:
     branches: [main]
     paths:
       - "css/20-product-clarity-desktop.css"
+      - "css/20-product-clarity-desktop-controls.css"
+      - "product-clarity-controller.js"
       - "styles.css"
       - "service-worker.js"
       - "index.html"
       - "ui-dialog.js"
       - "scripts/auditor-product-clarity-desktop.py"
+      - "scripts/auditor-scriptorium-paper.py"
       - ".github/workflows/product-clarity-desktop-pr.yml"
   workflow_dispatch:
 
@@ -24,6 +27,7 @@ jobs:
   validar:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4.2.2
@@ -40,7 +44,9 @@ jobs:
           python -m playwright install --with-deps chromium
 
       - name: Validar sintaxe
-        run: python -m py_compile scripts/auditor-product-clarity-desktop.py
+        run: |
+          python -m py_compile scripts/auditor-product-clarity-desktop.py
+          python -m py_compile scripts/auditor-scriptorium-paper.py
 
       - name: Servir branch
         run: |
@@ -55,6 +61,9 @@ jobs:
 
       - name: Auditar clareza desktop
         run: python scripts/auditor-product-clarity-desktop.py
+
+      - name: Auditar contraste da folha Scriptorium
+        run: python scripts/auditor-scriptorium-paper.py
 
       - name: Guardar evidências
         if: always()
