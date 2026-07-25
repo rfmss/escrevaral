@@ -84,27 +84,38 @@ def run_case(browser, base_url: str, output: Path, case):
                 add(issues, name, "horizontal-overflow", str(overflow))
             evidence["mobile"] = screenshot(page, output, name, "mobile-original-flow")
         else:
-            # Ateliê
             page.evaluate("() => setView('academia', {updateRoute:true, routeMode:'replace'})")
             page.wait_for_selector('[data-view-panel="academia"] .academy-tools', state="visible")
+            tablist = page.locator('[data-view-panel="academia"] .academy-tools-tabs').first
             tabs = page.locator('[data-view-panel="academia"] .academy-tool-tab')
             if tabs.count() != 5:
                 add(issues, name, "atelier-tabs", f"abas encontradas={tabs.count()}, esperado=5")
+            if tablist.get_attribute("role") != "tablist":
+                add(issues, name, "atelier-semantics", "A bancada não foi exposta como lista de ferramentas.")
             visible_panels = page.locator('[data-view-panel="academia"] .academy-tool-panel').evaluate_all(
                 "els => els.filter(el => {const r=el.getBoundingClientRect();const s=getComputedStyle(el);return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'}).length"
             )
             if visible_panels != 1:
                 add(issues, name, "atelier-density", f"painéis detalhados visíveis={visible_panels}, esperado=1")
-            second = tabs.nth(1)
-            if second.get_attribute("tabindex") != "0":
-                add(issues, name, "atelier-keyboard", "A segunda ferramenta não entrou na ordem de foco desktop.")
-            second.focus()
-            second.press("Enter")
+
+            focusable_tabs = tabs.evaluate_all("els => els.filter(el => el.tabIndex === 0).length")
+            if focusable_tabs != 1:
+                add(issues, name, "atelier-keyboard", f"paradas de Tab={focusable_tabs}, esperado=1")
+            selected_tabs = tabs.evaluate_all("els => els.filter(el => el.getAttribute('aria-selected') === 'true').length")
+            if selected_tabs != 1:
+                add(issues, name, "atelier-keyboard", f"ferramentas selecionadas={selected_tabs}, esperado=1")
+
+            first = tabs.nth(0)
+            first.focus()
+            first.press("ArrowDown")
             page.wait_for_timeout(220)
+            second = tabs.nth(1)
             target_id = second.get_attribute("for")
             checked = page.locator(f"#{target_id}").is_checked() if target_id else False
-            if not checked:
-                add(issues, name, "atelier-keyboard", "Enter não ativou a ferramenta escolhida.")
+            if not checked or second.get_attribute("aria-selected") != "true":
+                add(issues, name, "atelier-keyboard", "Seta para baixo não ativou a ferramenta seguinte.")
+            if second.get_attribute("tabindex") != "0":
+                add(issues, name, "atelier-keyboard", "O foco composto não acompanhou a ferramenta ativa.")
 
             for selector, label in ((".at-panel-rimalab", "painel"), (".rimalab-tool", "ferramenta"), (".rimalab-workbench", "bancada")):
                 node = page.locator(f'[data-view-panel="academia"] {selector}').first
@@ -116,7 +127,6 @@ def run_case(browser, base_url: str, output: Path, case):
                     add(issues, name, "rimalab-internal-overflow", f"{label}: {dimensions}")
             evidence["atelier"] = screenshot(page, output, name, "atelier-rimalab")
 
-            # Autoria
             page.evaluate("() => setView('autoria', {updateRoute:true, routeMode:'replace'})")
             page.wait_for_selector(".proof-clarity-journey", state="visible")
             steps = page.locator(".proof-clarity-step")
