@@ -54,6 +54,11 @@
   }
 }
 
+/* O estilo flex do componente não pode anular o atributo semântico hidden. */
+.archive-panel-empty[hidden] {
+  display: none;
+}
+
 /*
  * Acervo em telas estreitas.
  * No desktop, lista e painel continuam lado a lado. No mobile, o painel deixa
