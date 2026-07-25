@@ -54,6 +54,9 @@ Não alterar sem falha reproduzida:
 - O cartão vazio do Acervo permanece sobre papel claro também no Scriptorium.
 - A auditoria final cobre 1280 px, 1440 px em Scriptorium e 390 px.
 - A promoção da versão substituiu atomicamente todas as referências distribuídas.
+- Matriz de pull request: 13 de 13 workflows aprovados.
+- Auditoria final: P0=0, P1=0 e P2=0.
+- Revisão visual final: Alvorada, Scriptorium e proteção móvel aprovados.
 
 ## Regra de decisão
 
