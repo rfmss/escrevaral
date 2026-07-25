@@ -74,6 +74,12 @@ def allow_local_only(route: Route) -> None:
         route.abort()
 
 
+def theme_labels(page) -> list[str | None]:
+    return page.locator('[data-action="toggle-dark-mode"]').evaluate_all(
+        "elements => elements.map(element => element.getAttribute('aria-label'))"
+    )
+
+
 def audit_browser(failures: list[str], checks: list[str]) -> None:
     console_errors: list[str] = []
     routes = ["editor", "biblioteca", "autoria", "arquivo", "academia", "cronograma"]
@@ -95,19 +101,27 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
             page.wait_for_selector(".app-shell")
             require(page.locator("html").get_attribute("lang") == "pt-BR", 'Documento principal sem lang="pt-BR".', failures)
 
-            theme_button = page.locator('[data-action="toggle-dark-mode"]:visible').first
+            initial_labels = theme_labels(page)
+            require(bool(initial_labels), "Nenhum controle de tema foi encontrado.", failures)
             require(
-                theme_button.get_attribute("aria-label") == "Mudar para Scriptorium",
-                "Tema claro não oferece ‘Mudar para Scriptorium’.",
+                all(label == "Mudar para Scriptorium" for label in initial_labels),
+                f"Tema claro possui rótulos inesperados: {initial_labels}.",
                 failures,
             )
-            theme_button.click()
+            page.evaluate("applyDarkMode(true)")
+            dark_labels = theme_labels(page)
             require(
-                theme_button.get_attribute("aria-label") == "Mudar para Alvorada",
-                "Tema escuro não oferece ‘Mudar para Alvorada’.",
+                all(label == "Mudar para Alvorada" for label in dark_labels),
+                f"Tema escuro possui rótulos inesperados: {dark_labels}.",
                 failures,
             )
-            theme_button.click()
+            page.evaluate("applyDarkMode(false)")
+            restored_labels = theme_labels(page)
+            require(
+                all(label == "Mudar para Scriptorium" for label in restored_labels),
+                f"Tema restaurado possui rótulos inesperados: {restored_labels}.",
+                failures,
+            )
             checks.append("Alternância de tema: Alvorada ↔ Scriptorium")
 
             for route in routes:
