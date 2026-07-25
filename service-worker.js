@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v951";
-const ASSET_VERSION = "20260725-clarity-archive-v1";
+const CACHE_NAME = "vereda-offline-v952";
+const ASSET_VERSION = "20260725-clarity-workshop-v1";
 
 const CORE_ASSETS = [
   "./",
@@ -13,6 +13,7 @@ const CORE_ASSETS = [
   `./css/20-product-clarity-desktop-controls.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
+  `./css/22-product-clarity-workshop-authorship.css?v=${ASSET_VERSION}`,
   "./css/14-archive-inspector.css?v=20260725-v4",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
@@ -77,6 +78,7 @@ const CORE_ASSETS = [
   `./pomodoro-controller.js?v=${ASSET_VERSION}`,
   `./editor-status-controller.js?v=${ASSET_VERSION}`,
   `./oficina-navigation-controller.js?v=${ASSET_VERSION}`,
+  `./workshop-authorship-clarity-controller.js?v=${ASSET_VERSION}`,
   `./product-clarity-controller.js?v=${ASSET_VERSION}`,
   `./archive-clarity-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
