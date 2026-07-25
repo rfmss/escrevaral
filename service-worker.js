@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v938";
+const CACHE_NAME = "vereda-offline-v940";
 const ASSET_VERSION = "20260724-v936";
 
 const CORE_ASSETS = [
@@ -8,6 +8,7 @@ const CORE_ASSETS = [
   `./css/01-base.css?v=${ASSET_VERSION}`,
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
+  "./css/13-editor-quiet.css?v=20260725-v2",
   `./css/03-editor-layout.css?v=${ASSET_VERSION}`,
   `./css/04-cronograma.css?v=${ASSET_VERSION}`,
   `./css/03-editor-modes.css?v=${ASSET_VERSION}`,
