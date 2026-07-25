@@ -36,11 +36,11 @@ function updateRouteForView(viewName, mode = "push") {
 
 const ANALYTICS_VIEW_TITLES = {
   editor: "Manuscrito",
-  biblioteca: "Biblioteca",
+  biblioteca: "Palavras",
   autoria: "Prova de autoria",
-  arquivo: "Arquivo",
+  arquivo: "Acervo",
   academia: "Ateliê",
-  cronograma: "Cronograma",
+  cronograma: "Plano",
 };
 
 let _pendingAnalyticsView = null;
@@ -230,8 +230,8 @@ function applyDarkMode(isDark) {
   const btn = document.querySelector("[data-action='toggle-dark-mode']");
   if (btn) {
     btn.setAttribute("aria-pressed", String(isDark));
-    btn.title = isDark ? "Mudar para Alvorada" : "Mudar para Vereda";
-    btn.setAttribute("aria-label", isDark ? "Mudar para Alvorada" : "Mudar para Vereda");
+    btn.title = isDark ? "Mudar para Alvorada" : "Mudar para Scriptorium";
+    btn.setAttribute("aria-label", isDark ? "Mudar para Alvorada" : "Mudar para Scriptorium");
   }
 }
 
