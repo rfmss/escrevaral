@@ -1,45 +1,82 @@
 # Escrevaral
 
-Oficina literária gratuita para escritoras e escritores brasileiros.
+Oficina de escrita feita no Brasil, para gente brasileira.
 
-→ **[escrevaral.com](https://escrevaral.com)**
+[Usar o Escrevaral](https://escrevaral.com)
 
----
+Status: preparação para o primeiro lançamento público estável.
 
-## O que é
+## Visão geral
 
-Editor de texto completo que roda inteiramente no navegador, sem servidor, sem conta, sem custo.
+O Escrevaral é uma aplicação de escrita que roda no navegador. Não exige conta, servidor próprio do produto ou envio de manuscritos para serviços externos.
 
-- **Editor** com modos de escrita, guias de ofício e folha paginada (ENEM/vestibular)
-- **Espelho de Voz** — análise de ritmo, vocabulário e estilo da escrita
-- **RimaLab** — métrica e rima para verso e poesia
-- **Vocabulário Decolonizador** — revisão crítica de termos
-- **Prova de Autoria** — registro de autoria com hash e timestamp local
-- **Cópia de segurança automática** — tudo salvo no dispositivo, exportável a qualquer momento
-- **Funciona sem internet** — PWA com service worker
+A aplicação foi construída com HTML, CSS e JavaScript sem framework. O projeto prioriza:
 
-## Stack
+- escrita e leitura em português brasileiro;
+- preservação local dos manuscritos;
+- funcionamento sem internet após a primeira visita;
+- ausência de telemetria identificável;
+- interfaces compreensíveis sem vocabulário técnico;
+- compatibilidade com teclado, mouse e toque.
 
+## Recursos principais
+
+- Editor com modos de escrita, guias de ofício e folha paginada
+- Espelho de Voz para ritmo, vocabulário e estilo
+- RimaLab para métrica, rima e sonoridade
+- Vocabulário Decolonizador para revisão crítica de termos
+- Prova de Autoria com assinatura e marca temporal locais
+- Cópia de segurança exportável
+- Aplicação instalável e preparada para uso sem internet
+
+## Arquitetura
+
+```text
+HTML único de entrada
+├── CSS modular
+├── controladores de interface
+├── engines locais de linguagem
+├── dados linguísticos versionados
+├── armazenamento no navegador
+└── service worker para funcionamento sem internet
 ```
-HTML · CSS · JS vanilla
-sem framework · sem dependência externa · sem envio de dados
-```
 
-## Rodar localmente
+Não há framework de interface, serviço de processamento remoto ou dependência externa necessária para editar e preservar um manuscrito.
+
+## Executar localmente
+
+Requer Python 3 para servir os arquivos por HTTP:
 
 ```bash
 python3 -m http.server 8799
-# abre http://localhost:8799
 ```
 
-Service workers exigem `localhost` ou HTTPS — não abre via `file://`.
+Depois, abra `http://localhost:8799`.
 
-## Contribuir
+Service workers exigem `localhost` ou HTTPS. A aplicação não deve ser testada por `file://`.
 
-Issues abertas. Toda sugestão é bem-vinda.
+## Verificação
 
-Se você escreve, ensina ou estuda: use, teste e conta o que faltou → **oi@escrevaral.com**
+O repositório mantém auditores automatizados para publicação, privacidade de rede, erros de console, responsividade, integridade de dados e regressões das engines.
 
----
+A candidata a lançamento é validada por GitHub Actions antes da incorporação em `main`.
 
-Criado por [Rafa Mass](https://rafa.pro.br)
+## Privacidade
+
+Os manuscritos permanecem no navegador da pessoa usuária. O produto principal não envia o texto para inteligência artificial, servidor de análise ou nuvem de terceiros.
+
+Consulte [privacidade.html](https://escrevaral.com/privacidade.html) para os limites e cuidados do armazenamento local.
+
+## Relatar problemas e sugerir melhorias
+
+Relatos reproduzíveis de erro e sugestões de produto são bem-vindos pelo rastreador de issues.
+
+Este é um repositório de código-fonte público com licença proprietária. O envio de código, modificações ou obras derivadas depende de autorização prévia do titular. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) e [LICENSE](LICENSE) antes de abrir uma contribuição técnica.
+
+Questões de uso: [oi@escrevaral.com](mailto:oi@escrevaral.com)
+
+Questões de segurança: consulte [SECURITY.md](SECURITY.md).
+
+## Autoria
+
+Criado e mantido por [Rafa Mass](https://rafa.pro.br).
