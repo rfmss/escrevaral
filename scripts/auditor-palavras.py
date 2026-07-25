@@ -37,6 +37,12 @@ def wait_for_controller(page: Page) -> None:
     )
 
 
+def dismiss_update_banner(page: Page) -> None:
+    button = page.locator("#update-dismiss-btn")
+    if button.count() and button.is_visible():
+        button.click()
+
+
 def open_words(page: Page) -> None:
     target = page.locator('[data-view-target="biblioteca"]:visible').first
     target.wait_for(state="visible", timeout=10_000)
@@ -72,6 +78,7 @@ def seed_manuscript(page: Page) -> None:
 
 
 def screenshot(page: Page, output: Path, viewport: str, state_name: str) -> str:
+    dismiss_update_banner(page)
     directory = output / "screenshots"
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / f"{viewport}-palavras-{state_name}.png"
@@ -85,6 +92,28 @@ def assert_title(page: Page, issues: list[dict], viewport: str, stage: str) -> N
         add_issue(issues, viewport, stage, f"título do módulo virou {value!r}")
 
 
+def assert_no_overflow(page: Page, issues: list[dict], viewport: str, stage: str) -> None:
+    panel = page.locator('.view[data-view-panel="biblioteca"]')
+    overflow = panel.evaluate("element => element.scrollWidth > element.clientWidth + 2")
+    if overflow:
+        add_issue(issues, viewport, stage, "Palavras criou rolagem horizontal interna")
+
+    card = page.locator('[data-lexical-card]')
+    if card.count() and card.is_visible():
+        bounds = card.bounding_box()
+        viewport_size = page.viewport_size or {}
+        viewport_width = viewport_size.get("width", 0)
+        if bounds and viewport_width and (
+            bounds["x"] < -1 or bounds["x"] + bounds["width"] > viewport_width + 1
+        ):
+            add_issue(
+                issues,
+                viewport,
+                stage,
+                f"cartão lexical saiu da tela: x={bounds['x']:.1f}, largura={bounds['width']:.1f}",
+            )
+
+
 def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple[str, int, int]) -> dict:
     viewport_name, width, height = viewport_data
     context = browser.new_context(
@@ -96,9 +125,18 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
     page = context.new_page()
     issues: list[dict] = []
     evidence: dict[str, str] = {}
-    console_errors: list[str] = []
-    page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
-    page.on("pageerror", lambda error: console_errors.append(str(error)))
+    console_events: list[dict] = []
+    phase = {"offline": False}
+
+    def record_console(message) -> None:
+        if message.type == "error":
+            console_events.append({"text": message.text, "offline": phase["offline"]})
+
+    page.on("console", record_console)
+    page.on(
+        "pageerror",
+        lambda error: console_events.append({"text": str(error), "offline": phase["offline"]}),
+    )
 
     try:
         print(f"[palavras:{viewport_name}] abrir", flush=True)
@@ -106,6 +144,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         page.wait_for_selector(".app-shell", timeout=20_000)
         page.add_style_tag(content=DISABLE_MOTION)
         wait_for_controller(page)
+        dismiss_update_banner(page)
         seed_manuscript(page)
 
         print(f"[palavras:{viewport_name}] vazio", flush=True)
@@ -118,6 +157,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             add_issue(issues, viewport_name, "estado vazio", "a orientação não informou a ação e o texto atual")
         if page.locator('[data-lexical-card]').is_visible():
             add_issue(issues, viewport_name, "estado vazio", "o cartão lexical vazio continuou visível")
+        assert_no_overflow(page, issues, viewport_name, "estado vazio")
         evidence["empty"] = screenshot(page, output, viewport_name, "vazio")
 
         print(f"[palavras:{viewport_name}] palavra", flush=True)
@@ -131,6 +171,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         assert_title(page, issues, viewport_name, "busca de palavra")
         if page.locator('[data-lexical-context] mark').count() < 1:
             add_issue(issues, viewport_name, "busca de palavra", "nenhuma ocorrência foi destacada no texto")
+        assert_no_overflow(page, issues, viewport_name, "busca de palavra")
         evidence["word"] = screenshot(page, output, viewport_name, "palavra")
 
         print(f"[palavras:{viewport_name}] frase para palavra", flush=True)
@@ -144,6 +185,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         )
         page.wait_for_selector('.lexical-frase-texto', state="visible", timeout=15_000)
         assert_title(page, issues, viewport_name, "análise de frase")
+        assert_no_overflow(page, issues, viewport_name, "análise de frase")
 
         search.fill("")
         search.fill("canto")
@@ -157,6 +199,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             timeout=15_000,
         )
         assert_title(page, issues, viewport_name, "busca após frase")
+        assert_no_overflow(page, issues, viewport_name, "busca após frase")
         evidence["after_phrase"] = screenshot(page, output, viewport_name, "busca-apos-frase")
 
         print(f"[palavras:{viewport_name}] limpar", flush=True)
@@ -168,12 +211,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         if not cleared:
             add_issue(issues, viewport_name, "limpeza", "Escape deixou seleção lexical obsoleta")
         assert_title(page, issues, viewport_name, "limpeza")
-
-        overflow = page.locator('.view[data-view-panel="biblioteca"]').evaluate(
-            "element => element.scrollWidth > element.clientWidth + 2"
-        )
-        if overflow:
-            add_issue(issues, viewport_name, "layout", "Palavras criou rolagem horizontal interna")
+        assert_no_overflow(page, issues, viewport_name, "limpeza")
 
         if viewport_name == "390":
             print("[palavras:390] offline", flush=True)
@@ -183,22 +221,31 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             except TimeoutError:
                 page.reload(wait_until="domcontentloaded", timeout=30_000)
                 wait_for_controller(page)
+                dismiss_update_banner(page)
                 page.wait_for_function("() => Boolean(navigator.serviceWorker.controller)", timeout=12_000)
 
+            phase["offline"] = True
             context.set_offline(True)
             page.reload(wait_until="domcontentloaded", timeout=30_000)
             wait_for_controller(page)
+            dismiss_update_banner(page)
             open_words(page)
             page.wait_for_selector('[data-lexical-empty]', state="visible", timeout=15_000)
             assert_title(page, issues, viewport_name, "offline")
+            assert_no_overflow(page, issues, viewport_name, "offline")
             evidence["offline"] = screenshot(page, output, viewport_name, "offline")
             context.set_offline(False)
+            phase["offline"] = False
 
-        for message in console_errors:
-            add_issue(issues, viewport_name, "console", message[:500])
+        for event in console_events:
+            text = event["text"]
+            if event["offline"] and "503 (Offline)" in text:
+                continue
+            add_issue(issues, viewport_name, "console", text[:500])
     except Exception as error:  # noqa: BLE001
         add_issue(issues, viewport_name, "execução", repr(error))
     finally:
+        phase["offline"] = False
         try:
             context.set_offline(False)
         except Exception:  # noqa: BLE001
