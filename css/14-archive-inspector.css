@@ -45,7 +45,7 @@ html body .app-shell[data-view="arquivo"] .archive-note-title {
   min-width: 0;
   overflow-wrap: anywhere;
   color: var(--ink);
-  font: 700 clamp(21px, 2.2vw, 28px)/1.18 "Noto Serif", Georgia, serif;
+  font: 700 clamp(21px, 2.2vw, 28px)/1.18 Literata, "Noto Serif", Georgia, serif;
   letter-spacing: -0.015em;
 }
 
