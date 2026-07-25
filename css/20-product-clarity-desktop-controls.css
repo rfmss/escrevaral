@@ -127,6 +127,21 @@
   .clarity-utility-menu {
     display: none !important;
   }
+
+  /* Proteção de regressão: Palavras troca a mesa de duas colunas por fluxo vertical. */
+  .app-shell[data-view="biblioteca"] .split-paper {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .app-shell[data-view="biblioteca"] .split-paper > *,
+  .app-shell[data-view="biblioteca"] .lexical-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 @media (forced-colors: active) and (min-width: 821px) {
