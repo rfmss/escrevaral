@@ -1,0 +1,114 @@
+name: Acabamento final da Clareza do Produto
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/auditor-clarity-finish.py"
+      - "ui-dialog.js"
+      - "archive-controller.js"
+      - "index.html"
+      - "service-worker.js"
+      - "css/**"
+      - ".github/workflows/clarity-finish-pr.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: clarity-finish-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Validar sintaxe
+        run: |
+          python -m py_compile scripts/auditor-clarity-finish.py
+          node --check ui-dialog.js
+          node --check archive-controller.js
+
+      - name: Iniciar candidata local
+        run: |
+          python -m http.server 8799 > /tmp/escrevaral-clarity-finish.log 2>&1 &
+          echo $! > /tmp/escrevaral-clarity-finish.pid
+          for tentativa in {1..30}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-clarity-finish.log
+          exit 1
+
+      - name: Auditar acabamento final
+        id: finish
+        continue-on-error: true
+        run: |
+          python scripts/auditor-clarity-finish.py \
+            --base-url http://127.0.0.1:8799 \
+            --output-dir reports/auditoria/clarity-finish-artifacts
+
+      - name: Executar Teste Master local
+        id: master
+        continue-on-error: true
+        run: python scripts/teste-master.py --sem-rede
+
+      - name: Auditar superfícies da candidata
+        id: surfaces
+        continue-on-error: true
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: python scripts/auditor-release-local.py
+
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clarity-finish-${{ github.run_id }}
+          path: |
+            reports/auditoria/clarity-finish-artifacts/
+            reports/auditoria/release-local-*.json
+            reports/auditoria/release-local-*.md
+            reports/auditoria/screenshots/
+            reports/teste-master/
+            /tmp/escrevaral-clarity-finish.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Consolidar veredito
+        if: always()
+        env:
+          FINISH: ${{ steps.finish.outcome }}
+          MASTER: ${{ steps.master.outcome }}
+          SURFACES: ${{ steps.surfaces.outcome }}
+        run: |
+          test "$FINISH" = "success"
+          test "$MASTER" = "success"
+          test "$SURFACES" = "success"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path('reports/auditoria/clarity-finish-artifacts/clarity-finish.json').read_text(encoding='utf-8'))
+          assert report['counts'].get('P0', 0) == 0, report['counts']
+          assert report['counts'].get('P1', 0) == 0, report['counts']
+          print('Acabamento final aprovado: nenhum P0/P1 reproduzido.')
+          PY
