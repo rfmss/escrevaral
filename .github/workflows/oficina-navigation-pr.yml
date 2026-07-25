@@ -1,0 +1,72 @@
+name: Validação da navegação Oficina Argila
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "css/19-oficina-navigation.css"
+      - "oficina-navigation-controller.js"
+      - "index.html"
+      - "service-worker.js"
+      - "scripts/auditor-oficina-navigation.py"
+      - ".github/workflows/oficina-navigation-pr.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oficina-navigation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Validar sintaxe
+        run: python -m py_compile scripts/auditor-oficina-navigation.py
+
+      - name: Iniciar Escrevaral local
+        run: |
+          python3 -m http.server 8799 > /tmp/escrevaral-oficina-navigation.log 2>&1 &
+          echo $! > /tmp/escrevaral-oficina-navigation.pid
+          for tentativa in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-oficina-navigation.log
+          exit 1
+
+      - name: Auditar hierarquia e acessos
+        run: |
+          python3 scripts/auditor-oficina-navigation.py \
+            --base-url http://127.0.0.1:8799/ \
+            --output-dir reports/auditoria/oficina-navigation-artifacts
+
+      - name: Guardar relatório e capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oficina-navigation-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: |
+            reports/auditoria/oficina-navigation-artifacts/**
+            /tmp/escrevaral-oficina-navigation.log

@@ -1,0 +1,167 @@
+/*
+ * Navegação Argila — Oficina como segundo nível.
+ * Desktop preserva somente Escrever, Acervo e Oficina no primeiro plano.
+ */
+
+.oficina-navigation-menu[hidden] {
+  display: none !important;
+}
+
+@media (min-width: 820px) {
+  .topbar:has(.module-tabs[data-oficina-navigation="true"]),
+  .module-tabs[data-oficina-navigation="true"] {
+    overflow: visible;
+  }
+
+  .module-tabs[data-oficina-navigation="true"] {
+    justify-content: center;
+    gap: clamp(12px, 1.8vw, 28px);
+  }
+
+  .module-tabs[data-oficina-navigation="true"] > .tab,
+  .oficina-navigation > summary {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 2px 6px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: var(--muted);
+    font-family: "Libre Franklin", Inter, system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--motion-quick), border-color var(--motion-quick);
+  }
+
+  .module-tabs[data-oficina-navigation="true"] > .tab:hover,
+  .oficina-navigation > summary:hover,
+  .oficina-navigation[open] > summary {
+    color: var(--ink);
+  }
+
+  .module-tabs[data-oficina-navigation="true"] > .tab.is-active,
+  .oficina-navigation.is-active > summary {
+    color: var(--ink);
+    border-bottom-color: var(--primary);
+  }
+
+  .oficina-navigation {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .oficina-navigation > summary {
+    list-style: none;
+    gap: 5px;
+  }
+
+  .oficina-navigation > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .oficina-navigation-chevron {
+    font-size: 15px;
+    color: currentColor;
+    transition: transform var(--motion-quick);
+  }
+
+  .oficina-navigation[open] .oficina-navigation-chevron {
+    transform: rotate(180deg);
+  }
+
+  .oficina-navigation-menu {
+    position: fixed;
+    z-index: 1000;
+    width: min(330px, calc(100vw - 32px));
+    display: grid;
+    gap: 2px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    box-shadow: 0 22px 54px rgba(65, 45, 32, 0.18);
+    transform: none;
+  }
+
+  .oficina-navigation-menu::before {
+    content: "Trabalhar o texto";
+    display: block;
+    padding: 8px 10px 7px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .oficina-navigation-menu .tab {
+    width: 100%;
+    min-height: 54px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: center;
+    gap: 3px;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--soft-ink);
+    text-align: left;
+    cursor: pointer;
+    transition: color var(--motion-quick), background var(--motion-quick);
+  }
+
+  .oficina-navigation-menu .tab:hover,
+  .oficina-navigation-menu .tab:focus-visible,
+  .oficina-navigation-menu .tab.is-active {
+    background: color-mix(in srgb, var(--primary) 7%, var(--surface-low));
+    color: var(--ink);
+  }
+
+  .oficina-navigation-item-title {
+    color: inherit;
+    font-family: Literata, "Noto Serif", Georgia, serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .oficina-navigation-item-description {
+    color: var(--muted);
+    font-size: 10.5px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .oficina-navigation-menu .tab.is-active .oficina-navigation-item-description {
+    color: color-mix(in srgb, var(--soft-ink) 84%, var(--primary));
+  }
+}
+
+@media (min-width: 820px) and (max-width: 920px) {
+  .module-tabs[data-oficina-navigation="true"] {
+    gap: 14px;
+  }
+
+  .module-tabs[data-oficina-navigation="true"] > .tab,
+  .oficina-navigation > summary {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (forced-colors: active) {
+  .oficina-navigation-menu {
+    border: 1px solid CanvasText;
+  }
+}
