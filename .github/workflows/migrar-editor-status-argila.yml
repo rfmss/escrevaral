@@ -1,0 +1,42 @@
+name: Sincronização da situação Argila
+
+on:
+  push:
+    branches:
+      - refactor/argila-editor-status
+    paths:
+      - "scripts/migrar-editor-status-argila.py"
+      - ".github/workflows/migrar-editor-status-argila.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: refactor/argila-editor-status
+          fetch-depth: 0
+
+      - name: Aplicar migração
+        run: python3 scripts/migrar-editor-status-argila.py
+
+      - name: Verificar distribuição
+        run: |
+          python3 scripts/auditor-asset-version.py
+          git diff --check
+          grep -q "20260725-editor-status" index.html
+          grep -q "editor-status-controller.js" index.html
+          grep -q "vereda-offline-v947" service-worker.js
+          grep -q "17-editor-status-argila.css" service-worker.js
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat(editor): distribua a nova faixa de situação" || exit 0
+          git push origin HEAD:refactor/argila-editor-status
