@@ -204,6 +204,7 @@ function _createMesaPortatilLink(className, locationName) {
   const link = document.createElement('a');
   link.href = '/pegar/';
   link.className = className;
+  link.style.textDecoration = 'none';
   link.dataset.mesaPortatilEntry = locationName;
   link.setAttribute('aria-label', 'Mesa no celular — levar e trazer textos entre dispositivos');
   link.title = 'Leve e traga seus textos entre dispositivos, sem conta e sem servidor';
