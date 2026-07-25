@@ -117,12 +117,42 @@ Não alterar sem falha reproduzida:
 
 ## Aprovação do Bloco 1
 
-O bloco só pode entrar na `main` quando:
+Critérios exigidos:
 
-- a folha for o protagonista em 1280, 1366 e 1440 px;
-- título, ferramentas e texto formarem uma sequência legível;
-- não houver borda dupla ou tripla na digitação;
-- foco por teclado continuar claramente visível;
-- engines e ações existentes permanecerem acessíveis;
-- console, overflow, integridade, entrada, Palavras, Oficina e Mesa móvel permanecerem verdes;
-- capturas antes/depois forem preservadas.
+- a folha é protagonista em 1280, 1366 e 1440 px;
+- título, ferramentas e texto formam uma sequência legível;
+- não há borda dupla ou tripla na digitação por ponteiro;
+- foco por teclado permanece claramente visível;
+- engines e ações existentes permanecem acessíveis;
+- console, overflow, integridade, entrada, Palavras, Oficina e Mesa móvel permanecem verdes;
+- capturas e relatórios são preservados.
+
+### Veredito
+
+Aprovado em 25 de julho de 2026.
+
+A rodada final passou em dez frentes independentes:
+
+- coerência de versões;
+- integridade de dados;
+- entrada Argila;
+- navegação Oficina;
+- situação do editor;
+- Palavras;
+- Mesa no celular;
+- foco e regressão;
+- candidata consolidada;
+- auditoria específica da Clareza desktop.
+
+Cenários visuais aprovados:
+
+- 1280 × 800;
+- 1366 × 900;
+- 1440 × 900;
+- 1440 × 900 no Scriptorium.
+
+O menu Ambiente preserva compartilhamento, tema, foco e tela cheia; a abertura por teclado leva o foco à primeira opção e `Escape` o devolve ao gatilho.
+
+O Scriptorium mantém ambiente escuro, folha clara e tinta grafite. O contraste computado de título e manuscrito sobre o papel é **12,89:1**.
+
+Nenhuma engine, chave de armazenamento, estrutura de manuscrito, formato `.esc`, exportador ou rota foi alterado.
