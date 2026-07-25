@@ -59,7 +59,7 @@ def add_issue(issues: list[dict], viewport: str, kind: str, detail: str) -> None
     issues.append({"viewport": viewport, "kind": kind, "detail": detail})
 
 
-def dismiss_onboarding(page) -> None:
+def dismiss_transients(page) -> None:
     terms = page.locator("#terms-overlay").first
     if terms.count() and terms.is_visible():
         button = page.locator('[data-action="accept-terms-blank"]').first
@@ -72,6 +72,14 @@ def dismiss_onboarding(page) -> None:
         welcome.click()
         welcome.wait_for(state="hidden", timeout=8_000)
 
+    for selector in ("#update-dismiss-btn", "#save-hint-dismiss", "#levar-mesa-dismiss"):
+        button = page.locator(selector).first
+        try:
+            if button.count() and button.is_visible(timeout=300):
+                button.click()
+        except Exception:
+            pass
+
 
 def rect(page, selector: str) -> dict:
     return page.locator(selector).first.evaluate(
@@ -82,12 +90,37 @@ def rect(page, selector: str) -> dict:
     )
 
 
+def any_visible(page, selector: str) -> bool:
+    return bool(page.locator(selector).evaluate_all(
+        """els => els.some(el => {
+          const r = el.getBoundingClientRect();
+          const cs = getComputedStyle(el);
+          return !el.hidden && r.width > 0 && r.height > 0 && cs.display !== 'none' && cs.visibility !== 'hidden';
+        })"""
+    ))
+
+
 def screenshot(page, output: Path, viewport: str, state: str) -> str:
     directory = output / "screenshots"
     directory.mkdir(parents=True, exist_ok=True)
     name = f"{viewport}-clarity-{state}.png"
     page.screenshot(path=str(directory / name), full_page=False)
     return f"screenshots/{name}"
+
+
+def focus_style(locator) -> dict:
+    return locator.evaluate(
+        """el => { const cs=getComputedStyle(el); return {
+          borderTop:cs.borderTopWidth,
+          outline:cs.outlineStyle,
+          outlineWidth:cs.outlineWidth,
+          boxShadow:cs.boxShadow
+        }; }"""
+    )
+
+
+def has_outline(style: dict) -> bool:
+    return style.get("outline") not in ("none", "") and style.get("outlineWidth") not in ("0px", "")
 
 
 def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
@@ -118,8 +151,12 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
             }""",
             theme,
         )
-        dismiss_onboarding(page)
+        dismiss_transients(page)
         page.wait_for_function("() => typeof setView === 'function'", timeout=10_000)
+        page.wait_for_function(
+            "() => document.documentElement.dataset.inputModality && document.querySelector('.topbar-actions')?.dataset.clarityUtilities === 'true'",
+            timeout=10_000,
+        )
         page.evaluate("() => setView('editor', { updateRoute: true, routeMode: 'replace' })")
         page.wait_for_selector(".editor-paper", state="visible", timeout=10_000)
         page.wait_for_selector(".writing-area", state="visible", timeout=10_000)
@@ -150,7 +187,11 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
         )
         metrics["document"] = doc_overflow
 
-        visible_primary = page.locator('.module-tabs [data-view-target="editor"], .module-tabs [data-view-target="arquivo"], .module-tabs [data-oficina-trigger]').evaluate_all(
+        visible_primary = page.locator(
+            '.module-tabs [data-view-target="editor"], '
+            '.module-tabs [data-view-target="arquivo"], '
+            '.module-tabs .oficina-navigation > summary'
+        ).evaluate_all(
             "els => els.filter(el => { const r=el.getBoundingClientRect(); const cs=getComputedStyle(el); return r.width>0 && r.height>0 && cs.display!=='none' && cs.visibility!=='hidden'; }).length"
         )
         metrics["visible_primary_navigation"] = visible_primary
@@ -176,7 +217,7 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
             add_issue(issues, name, "sequence", "toolbar invade o começo da escrita")
         if abs(title_rect["bottom"] - context_rect["bottom"]) > 34:
             add_issue(issues, name, "header-alignment", f"título e contexto não compartilham a mesma linha: título={title_rect}, contexto={context_rect}")
-        if utilities["width"] > 330:
+        if utilities["width"] > 240:
             add_issue(issues, name, "utility-density", f"utilidades ocupam {utilities['width']:.1f}px")
         if visible_primary != 3:
             add_issue(issues, name, "primary-navigation", f"destinos primários visíveis={visible_primary}, esperado=3")
@@ -190,40 +231,48 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
             ('[data-action="export-rtf"]', "Baixar"),
         )
         for selector, label in required:
-            locator = page.locator(selector).first
-            if not locator.count() or not locator.is_visible():
+            if not any_visible(page, selector):
                 add_issue(issues, name, "tool-missing", f"{label} não está acessível no editor")
 
-        # Clique: não pode recriar caixa com borda e sombra múltiplas.
+        # O menu Ambiente reduz a fila sem tornar ações órfãs.
+        utility_trigger = page.locator(".clarity-utility-trigger").first
+        if not utility_trigger.count() or not utility_trigger.is_visible():
+            add_issue(issues, name, "utility-menu", "gatilho Ambiente ausente")
+        else:
+            utility_trigger.focus()
+            utility_trigger.press("Enter")
+            page.wait_for_selector(".clarity-utility-panel", state="visible", timeout=5_000)
+            utility_items = page.locator(".clarity-utility-panel .clarity-utility-item").count()
+            if utility_items != 4:
+                add_issue(issues, name, "utility-menu", f"ações no Ambiente={utility_items}, esperado=4")
+            utility_panel = rect(page, ".clarity-utility-panel")
+            if utility_panel["left"] < 0 or utility_panel["right"] > width:
+                add_issue(issues, name, "utility-menu", f"painel fora da viewport={utility_panel}")
+            evidence["environment"] = screenshot(page, output, name, "environment-open")
+            page.keyboard.press("Escape")
+
+        # Clique: cursor e seleção bastam; não pode recriar caixa de foco.
         writing.click(position={"x": 24, "y": 24})
-        pointer_focus = writing.evaluate(
-            """el => { const cs=getComputedStyle(el); return {
-              borderTop:cs.borderTopWidth,
-              outline:cs.outlineStyle,
-              outlineWidth:cs.outlineWidth,
-              boxShadow:cs.boxShadow
-            }; }"""
-        )
+        pointer_focus = focus_style(writing)
         metrics["pointer_focus"] = pointer_focus
-        if pointer_focus["borderTop"] not in ("0px", ""):
-            add_issue(issues, name, "writing-border", f"borda durante digitação={pointer_focus}")
-        if pointer_focus["boxShadow"] != "none":
-            add_issue(issues, name, "writing-shadow", f"sombra durante digitação={pointer_focus}")
+        if pointer_focus["borderTop"] not in ("0px", "") or pointer_focus["boxShadow"] != "none" or has_outline(pointer_focus):
+            add_issue(issues, name, "writing-pointer-focus", f"área cercada durante digitação={pointer_focus}")
 
         title.click()
-        title_focus = title.evaluate(
-            """el => { const cs=getComputedStyle(el); return {
-              borderTop:cs.borderTopWidth,
-              outline:cs.outlineStyle,
-              outlineWidth:cs.outlineWidth,
-              boxShadow:cs.boxShadow
-            }; }"""
-        )
+        title_focus = focus_style(title)
         metrics["title_focus"] = title_focus
-        if title_focus["borderTop"] not in ("0px", "") or title_focus["boxShadow"] != "none":
-            add_issue(issues, name, "title-border", f"título cercado durante edição={title_focus}")
+        if title_focus["borderTop"] not in ("0px", "") or title_focus["boxShadow"] != "none" or has_outline(title_focus):
+            add_issue(issues, name, "title-pointer-focus", f"título cercado durante edição={title_focus}")
 
         evidence["editor"] = screenshot(page, output, name, "editor")
+
+        # Teclado continua recebendo um único indicador visível.
+        page.keyboard.press("Tab")
+        writing.focus()
+        keyboard_focus = focus_style(writing)
+        metrics["keyboard_focus"] = keyboard_focus
+        if not has_outline(keyboard_focus) or keyboard_focus["boxShadow"] != "none":
+            add_issue(issues, name, "keyboard-focus", f"anel de teclado ausente ou duplicado={keyboard_focus}")
 
         toggle = page.locator('[data-action="toggle-editorial-group"]').first
         toggle.focus()
@@ -271,7 +320,7 @@ def markdown(cases: list[dict], generated: str) -> str:
             f"- Detalhe: {issue['detail']}",
             "",
         ]
-    lines += ["## Evidências", "", "Capturas do editor e da bancada Mais estão em `screenshots/`.", ""]
+    lines += ["## Evidências", "", "Capturas do editor, do menu Ambiente e da bancada Mais estão em `screenshots/`.", ""]
     return "\n".join(lines)
 
 
