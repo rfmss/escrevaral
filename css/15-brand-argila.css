@@ -1,0 +1,552 @@
+/*
+ * Escrevaral — fundação visual Argila.
+ * Tema canônico de lançamento: gesso, papel, grafite e barro.
+ * Esta camada altera apresentação; não altera estado, engines ou persistência.
+ */
+
+:root,
+[data-theme="cerrado"],
+[data-theme="mata"],
+[data-theme="amazonia"] {
+  --brand-plaster: #f5f2ec;
+  --brand-paper: #fcfaf7;
+  --brand-bone: #ebe7df;
+  --brand-linen: #e2ddd4;
+  --brand-fog: #d4cec5;
+  --brand-ash: #817970;
+  --brand-graphite: #4a433b;
+  --brand-ink: #1e1915;
+  --brand-clay: #9c5f44;
+  --brand-clay-deep: #7a4a35;
+  --brand-indigo: #5c6b78;
+
+  --paper: var(--brand-plaster);
+  --surface: var(--brand-plaster);
+  --surface-low: var(--brand-bone);
+  --surface-mid: var(--brand-linen);
+  --surface-high: var(--brand-fog);
+  --card: var(--brand-paper);
+  --topbar-bg: rgba(252, 250, 247, 0.97);
+  --sidebar-bg: var(--brand-plaster);
+  --overlay-bg: rgba(30, 25, 21, 0.24);
+  --ink: var(--brand-ink);
+  --muted: var(--brand-ash);
+  --soft-ink: var(--brand-graphite);
+  --on-primary: var(--brand-paper);
+  --on-primary-soft: rgba(252, 250, 247, 0.18);
+  --glass-bg: rgba(252, 250, 247, 0.94);
+  --glass-bg-soft: rgba(252, 250, 247, 0.88);
+  --glass-bg-strong: rgba(252, 250, 247, 0.98);
+  --highlight-start: var(--brand-paper);
+  --highlight-end: var(--brand-plaster);
+  --highlight-alt-end: var(--brand-bone);
+  --highlight-neutral-end: var(--brand-linen);
+  --highlight-template-end: var(--brand-plaster);
+  --tip-bg: #f2e7dc;
+  --tip-ink: #6f4938;
+  --line: rgba(74, 67, 59, 0.14);
+  --primary: var(--brand-clay);
+  --primary-deep: var(--brand-clay-deep);
+  --sage: #7c8a78;
+  --ochre: #b9905e;
+  --sienna: var(--brand-clay);
+  --cedar: var(--brand-graphite);
+  --shadow: 0 18px 50px rgba(30, 25, 21, 0.07);
+  --focus-ring-color: var(--brand-clay);
+  --parchment: var(--brand-paper);
+  --parchment-deep: var(--brand-bone);
+  --paper-wash: transparent;
+  --border-aged: rgba(74, 67, 59, 0.12);
+  --pigment-shadow: 0 18px 50px rgba(30, 25, 21, 0.07);
+  --forest-ink: var(--brand-graphite);
+
+  --argila-font-ui: "Libre Franklin", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --argila-font-reading: Literata, "Noto Serif", Georgia, serif;
+  --argila-content-narrow: 700px;
+  --argila-content-wide: 980px;
+  --argila-radius-sm: 5px;
+  --argila-radius-md: 8px;
+  --argila-space-1: 4px;
+  --argila-space-2: 8px;
+  --argila-space-3: 12px;
+  --argila-space-4: 16px;
+  --argila-space-5: 24px;
+  --argila-space-6: 32px;
+  --argila-space-7: 48px;
+  --argila-space-8: 72px;
+  --argila-space-9: 96px;
+
+  font-family: var(--argila-font-ui);
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--argila-font-ui);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand-clay) 24%, var(--brand-paper));
+  color: var(--brand-ink);
+}
+
+/* A textura não desaparece do patrimônio; sai do caminho principal do lançamento. */
+#watercolor-layer,
+body > svg[aria-hidden="true"] {
+  display: none !important;
+}
+
+.app-shell {
+  grid-template-rows: 68px minmax(0, 1fr) 30px;
+  background: var(--brand-plaster);
+}
+
+.topbar,
+.statusbar {
+  background: var(--topbar-bg);
+  border-color: var(--line);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+.topbar {
+  gap: clamp(18px, 3vw, 44px);
+  padding-inline: clamp(18px, 3.2vw, 52px);
+}
+
+.brand-lockup {
+  min-width: 205px;
+  gap: 11px;
+}
+
+.brand-lockup strong {
+  color: var(--brand-ink);
+  font-family: var(--argila-font-reading);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.brand-lockup > div > span {
+  display: none;
+}
+
+.brand-logo,
+.brand-mark,
+.brand-mark-3d {
+  opacity: 0.55;
+  filter: grayscale(1) sepia(0.15);
+}
+
+.module-tabs {
+  justify-content: center;
+  gap: clamp(12px, 2.3vw, 34px);
+}
+
+.tab {
+  min-height: 44px;
+  padding: 5px 0 3px;
+  border-bottom-width: 1.5px;
+  color: var(--brand-ash);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tab:hover {
+  color: var(--brand-graphite);
+}
+
+.tab.is-active {
+  color: var(--brand-ink);
+  border-bottom-color: var(--brand-clay);
+  font-weight: 600;
+}
+
+.topbar-actions {
+  gap: 4px;
+}
+
+.topbar-actions .icon-button,
+.topbar-actions .offline-badge,
+.topbar-actions .install-button,
+.topbar-actions .theme-button {
+  color: var(--brand-ash);
+}
+
+.icon-button {
+  border-radius: var(--argila-radius-sm);
+  color: var(--brand-graphite);
+}
+
+.icon-button:hover,
+.icon-button[aria-pressed="true"] {
+  background: var(--brand-bone);
+  color: var(--brand-clay-deep);
+  box-shadow: none;
+}
+
+.offline-badge,
+.install-button,
+.theme-button {
+  border-radius: var(--argila-radius-sm);
+}
+
+.workspace,
+.main-stage,
+.view,
+.editor-view,
+.archive-view,
+.academy-view,
+.library-view,
+.proof-view,
+.cronograma-view {
+  background: transparent;
+}
+
+.view {
+  padding: clamp(28px, 4.5vw, 72px) clamp(20px, 5vw, 80px);
+}
+
+/* Tipografia editorial comum. */
+.view h1,
+.view h2,
+.view h3,
+.archive-heading-title,
+.academy-heading h2,
+.library-heading h2,
+.proof-heading h2,
+.cronograma-heading h2 {
+  color: var(--brand-ink);
+  font-family: var(--argila-font-reading);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow,
+.section-label {
+  color: var(--brand-ash);
+  font-family: var(--argila-font-ui);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.muted,
+small,
+.archive-card-meta,
+.project-card-meta {
+  color: var(--brand-ash);
+}
+
+/* Botões: ação, apoio e gesto silencioso. */
+.primary-button,
+.create-button {
+  min-height: 42px;
+  border: 1px solid var(--brand-clay);
+  border-radius: var(--argila-radius-sm);
+  background: var(--brand-clay);
+  color: var(--brand-paper);
+  box-shadow: 0 2px 8px rgba(156, 95, 68, 0.13);
+  font-weight: 600;
+}
+
+.primary-button:hover,
+.create-button:hover {
+  border-color: var(--brand-clay-deep);
+  background: var(--brand-clay-deep);
+  transform: none;
+  box-shadow: 0 3px 10px rgba(122, 74, 53, 0.14);
+}
+
+.secondary-button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--argila-radius-sm);
+  background: transparent;
+  color: var(--brand-graphite);
+  box-shadow: none;
+}
+
+.secondary-button:hover {
+  border-color: color-mix(in srgb, var(--brand-clay) 45%, var(--line));
+  background: var(--brand-paper);
+  color: var(--brand-clay-deep);
+}
+
+.ghost-button {
+  border-radius: var(--argila-radius-sm);
+  color: var(--brand-graphite);
+}
+
+.ghost-button:hover {
+  background: var(--brand-bone);
+  color: var(--brand-clay-deep);
+}
+
+input,
+textarea,
+select {
+  border-color: var(--line);
+  border-radius: var(--argila-radius-sm);
+  background: transparent;
+  color: var(--brand-ink);
+  box-shadow: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--brand-clay);
+  box-shadow: 0 0 0 3px rgba(156, 95, 68, 0.07);
+}
+
+/* Editor: familiar como processador de texto, silencioso como oficina. */
+.editor-layout,
+.editor-workspace {
+  background: var(--brand-plaster);
+}
+
+.editor-paper,
+.page-sheet,
+.writing-sheet {
+  border: 1px solid rgba(74, 67, 59, 0.13);
+  border-radius: 2px;
+  background: var(--brand-paper);
+  box-shadow: 0 5px 28px rgba(30, 25, 21, 0.07), 0 1px 4px rgba(30, 25, 21, 0.04);
+}
+
+.writing-area,
+.reading-sample,
+.editor-paper [contenteditable="true"] {
+  color: var(--brand-ink);
+  font-family: var(--argila-font-reading);
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.78;
+  max-width: 72ch;
+}
+
+.writing-area:empty::before {
+  color: color-mix(in srgb, var(--brand-ash) 58%, transparent);
+}
+
+.format-bar,
+.format-bar-wrap,
+.editor-toolbar,
+.editor-controls {
+  border-color: var(--line);
+  background: rgba(252, 250, 247, 0.96);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.format-button,
+.toolbar-button,
+.fmt-button {
+  border-radius: 4px;
+  color: var(--brand-graphite);
+}
+
+.format-button:hover,
+.toolbar-button:hover,
+.fmt-button:hover,
+.format-button.is-active,
+.toolbar-button.is-active,
+.fmt-button.is-active {
+  background: var(--brand-bone);
+  color: var(--brand-clay-deep);
+}
+
+.statusbar {
+  min-height: 30px;
+  padding-inline: clamp(16px, 3vw, 44px);
+  color: var(--brand-ash);
+  font-size: 10px;
+  letter-spacing: 0.01em;
+}
+
+/* Acervo: lista editorial e inspector como margem. */
+.archive-view {
+  width: min(100%, 1180px);
+  margin-inline: auto;
+}
+
+.archive-heading {
+  margin-bottom: clamp(34px, 5vw, 64px);
+}
+
+.archive-heading-title {
+  font-size: clamp(29px, 3.1vw, 43px);
+}
+
+.archive-controls {
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.archive-search,
+.archive-sort {
+  border-color: var(--line);
+  border-radius: var(--argila-radius-sm);
+  background: transparent;
+  box-shadow: none;
+}
+
+.project-grid {
+  gap: 0;
+}
+
+.project-card,
+.archive-card,
+.resume-document-card {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.project-card:hover,
+.archive-card:hover,
+.resume-document-card:hover {
+  background: color-mix(in srgb, var(--brand-paper) 72%, transparent);
+  box-shadow: none;
+  transform: none;
+}
+
+.archive-detail-panel {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Oficina e superfícies de apoio: menos vitrines, mais mesa. */
+.academy-tool-card,
+.tool-card,
+.training-card,
+.proof-card,
+.cronograma-card,
+.library-card {
+  border: 1px solid var(--line);
+  border-radius: var(--argila-radius-md);
+  background: var(--brand-paper);
+  box-shadow: none;
+}
+
+.academy-tool-card:hover,
+.tool-card:hover,
+.training-card:hover,
+.proof-card:hover,
+.cronograma-card:hover,
+.library-card:hover {
+  border-color: color-mix(in srgb, var(--brand-clay) 28%, var(--line));
+  box-shadow: 0 8px 24px rgba(30, 25, 21, 0.045);
+  transform: none;
+}
+
+.update-banner,
+.backup-nudge-banner,
+.tab-conflict-banner {
+  border-color: color-mix(in srgb, var(--brand-clay) 28%, var(--line));
+  background: color-mix(in srgb, var(--brand-clay) 7%, var(--brand-paper));
+  color: var(--brand-ink);
+}
+
+@media (max-width: 980px) {
+  .topbar {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+
+  .brand-lockup {
+    min-width: auto;
+  }
+
+  .module-tabs {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .tab {
+    font-size: 10px;
+  }
+
+  .offline-badge-label,
+  .topbar-audio-label {
+    display: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .app-shell {
+    grid-template-rows: 58px minmax(0, 1fr) 34px;
+  }
+
+  .topbar {
+    background: var(--brand-paper);
+  }
+
+  .brand-lockup strong {
+    font-size: 15px;
+  }
+
+  .view {
+    padding: 26px 16px calc(90px + env(safe-area-inset-bottom));
+  }
+
+  .editor-paper,
+  .page-sheet,
+  .writing-sheet {
+    border-inline: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .writing-area,
+  .reading-sample,
+  .editor-paper [contenteditable="true"] {
+    font-size: 17px;
+    line-height: 1.72;
+  }
+
+  .archive-heading {
+    margin-bottom: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  #watercolor-layer,
+  .topbar,
+  .statusbar,
+  .mobile-dock {
+    display: none !important;
+  }
+
+  .editor-paper,
+  .page-sheet,
+  .writing-sheet {
+    border: 0;
+    box-shadow: none;
+    background: #fff;
+  }
+}
