@@ -78,14 +78,27 @@
     tabs.replaceChildren(editor, archive, details);
     tabs.dataset.oficinaNavigation = "true";
 
+    function positionMenu() {
+      if (!details.open || window.innerWidth < 820) return;
+      const anchor = summary.getBoundingClientRect();
+      const width = Math.min(330, Math.max(240, window.innerWidth - 32));
+      const desiredLeft = anchor.left + anchor.width / 2 - width / 2;
+      const left = Math.min(window.innerWidth - width - 16, Math.max(16, desiredLeft));
+      menu.style.width = `${width}px`;
+      menu.style.left = `${left}px`;
+      menu.style.top = `${Math.round(anchor.bottom + 9)}px`;
+    }
+
     function syncActive() {
       const current = shell.dataset.view || "editor";
       const inGroup = GROUP_VIEWS.has(current);
       details.classList.toggle("is-active", inGroup);
-      summary.setAttribute("aria-current", inGroup ? "page" : "false");
+      if (inGroup) summary.setAttribute("aria-current", "page");
+      else summary.removeAttribute("aria-current");
       grouped.forEach((button) => {
         const active = button.dataset.viewTarget === current;
-        button.setAttribute("aria-current", active ? "page" : "false");
+        if (active) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
       });
     }
 
@@ -97,8 +110,12 @@
 
     details.addEventListener("toggle", () => {
       summary.setAttribute("aria-expanded", String(details.open));
+      if (details.open) requestAnimationFrame(positionMenu);
     });
     summary.setAttribute("aria-expanded", "false");
+
+    window.addEventListener("resize", positionMenu, { passive: true });
+    window.addEventListener("scroll", positionMenu, { passive: true, capture: true });
 
     document.addEventListener("pointerdown", (event) => {
       if (details.open && !details.contains(event.target)) details.open = false;
