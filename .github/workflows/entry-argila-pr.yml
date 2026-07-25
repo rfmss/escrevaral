@@ -1,0 +1,63 @@
+name: Validação da entrada Argila
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "css/14-archive-inspector.css"
+      - "css/16-entry-argila.css"
+      - "service-worker.js"
+      - "ui-dialog.js"
+      - "scripts/auditor-entry-argila.py"
+      - ".github/workflows/entry-argila-pr.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: entry-argila-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium --with-deps
+      - name: Validar sintaxe
+        run: python -m py_compile scripts/auditor-entry-argila.py
+      - name: Iniciar Escrevaral local
+        run: |
+          python3 -m http.server 8799 > /tmp/escrevaral-entry-http.log 2>&1 &
+          for tentativa in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:8799/ > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/escrevaral-entry-http.log
+          exit 1
+      - name: Auditar primeira visita e retorno
+        run: |
+          python3 scripts/auditor-entry-argila.py \
+            --base-url http://127.0.0.1:8799/ \
+            --output-dir reports/auditoria/entry-argila-artifacts
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: entrada-argila-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            reports/auditoria/entry-argila-artifacts/**
+            /tmp/escrevaral-entry-http.log
