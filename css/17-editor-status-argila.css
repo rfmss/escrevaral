@@ -1,0 +1,372 @@
+/*
+ * Editor Argila — faixa de situação.
+ * Palavras e salvamento ficam imediatos; meta e temporizador formam uma sessão
+ * secundária. A camada apenas reorganiza os controles existentes.
+ */
+
+.statusbar[data-status-argila] {
+  justify-content: flex-start;
+  gap: 18px;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.statusbar[data-status-argila] > *,
+.statusbar[data-status-argila] .statusbar-writing > *,
+.statusbar[data-status-argila] .statusbar-community > * {
+  min-width: 0;
+  max-width: none;
+}
+
+.statusbar-writing,
+.statusbar-community {
+  display: flex;
+  align-items: center;
+}
+
+.statusbar-writing {
+  flex: 0 1 auto;
+  gap: 12px;
+  color: var(--soft-ink);
+}
+
+.statusbar-count {
+  color: var(--soft-ink);
+  font-weight: 500;
+}
+
+.statusbar-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.statusbar-save::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.42;
+}
+
+.statusbar-save[data-save-state="saving"] {
+  color: var(--primary);
+}
+
+.statusbar-save[data-save-state="saving"]::before {
+  animation: statusbar-save-breathe 900ms ease-in-out infinite alternate;
+}
+
+.statusbar-save[data-save-state="saved"] {
+  color: color-mix(in srgb, var(--soft-ink) 82%, var(--primary));
+}
+
+.statusbar-save[data-save-state="error"],
+.statusbar-save[data-save-state="conflict"] {
+  color: var(--danger, #9f3e2f);
+  font-weight: 650;
+}
+
+@keyframes statusbar-save-breathe {
+  from { opacity: 0.28; transform: scale(0.82); }
+  to { opacity: 0.9; transform: scale(1); }
+}
+
+.statusbar-session {
+  position: relative;
+  flex: 0 0 auto;
+  overflow: visible !important;
+}
+
+.statusbar-session > summary {
+  list-style: none;
+}
+
+.statusbar-session > summary::-webkit-details-marker {
+  display: none;
+}
+
+.statusbar-session-toggle {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border-radius: 5px;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--motion-quick), background var(--motion-quick);
+}
+
+.statusbar-session-toggle:hover,
+.statusbar-session[open] .statusbar-session-toggle {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+.statusbar-session-toggle .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.statusbar-session-label {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.statusbar-session:has([data-pomodoro-active="true"]) .statusbar-session-toggle {
+  color: var(--primary);
+}
+
+.statusbar-session-panel {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 9px);
+  z-index: 80;
+  width: min(310px, calc(100vw - 32px));
+  display: grid;
+  gap: 0;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 18px 46px rgba(65, 45, 32, 0.14);
+}
+
+.statusbar-session-section {
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: minmax(82px, auto) minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+}
+
+.statusbar-session-section + .statusbar-session-section {
+  border-top: 1px solid var(--line);
+}
+
+.statusbar-session-name {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.statusbar-session-control {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.statusbar-session-panel .statusbar-goal {
+  min-width: 0;
+  flex: 1;
+}
+
+.statusbar-session-panel .statusbar-goal[hidden],
+.statusbar-session-panel .statusbar-goal-btn[hidden] {
+  display: none !important;
+}
+
+.statusbar-session-panel .statusbar-goal-btn,
+.statusbar-session-panel .statusbar-timer-btn {
+  min-width: 32px;
+  min-height: 32px;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.statusbar-session-panel .statusbar-goal-btn:hover,
+.statusbar-session-panel .statusbar-timer-btn:hover {
+  background: var(--surface-low);
+}
+
+.statusbar-session-panel .statusbar-timer {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.statusbar-session-panel .statusbar-timer-display,
+.statusbar-session-panel .goal-label {
+  color: var(--soft-ink);
+  font-family: "Libre Franklin", Inter, system-ui, sans-serif;
+  font-size: 12px;
+}
+
+.statusbar-community {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  gap: 8px;
+  opacity: 0.58;
+  transition: opacity var(--motion-quick);
+}
+
+.statusbar-community:hover,
+.statusbar-community:focus-within {
+  opacity: 0.92;
+}
+
+.statusbar-community .statusbar-social {
+  flex: 0 0 auto;
+}
+
+.statusbar-community .statusbar-copyright {
+  margin-left: 4px;
+}
+
+@media (max-width: 1100px) and (min-width: 600px) {
+  .statusbar-community .statusbar-social,
+  .statusbar-community .statusbar-brand,
+  .statusbar-community .statusbar-visitors,
+  .statusbar-community .statusbar-copyright {
+    display: none !important;
+  }
+}
+
+@media (max-width: 599px) {
+  .app-shell {
+    grid-template-rows: var(--topbar-h) minmax(0, 1fr) 0;
+  }
+
+  .app-shell:not([data-view="editor"]) .statusbar[data-status-argila] {
+    display: none !important;
+  }
+
+  .app-shell[data-view="editor"] .statusbar[data-status-argila] {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(60px + env(safe-area-inset-bottom));
+    z-index: 24;
+    width: 100%;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+    background: var(--topbar-bg);
+    backdrop-filter: blur(16px) saturate(1.18);
+    -webkit-backdrop-filter: blur(16px) saturate(1.18);
+    overflow: visible;
+  }
+
+  .app-shell[data-view="editor"] .view-editor {
+    padding-bottom: calc(108px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .statusbar-writing {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    gap: 10px;
+    overflow: visible;
+  }
+
+  .statusbar-count {
+    flex: 0 0 auto;
+    font-size: 0;
+    overflow: visible !important;
+    white-space: nowrap;
+  }
+
+  .statusbar-count::before {
+    content: attr(data-word-count) " palavras";
+    color: var(--soft-ink);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .statusbar-save {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-size: 0;
+    overflow: visible !important;
+    white-space: nowrap;
+  }
+
+  .statusbar-save::before {
+    width: 5px;
+    height: 5px;
+    flex-basis: 5px;
+  }
+
+  .statusbar-save::after {
+    content: attr(data-compact-label);
+    color: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+  }
+
+  .statusbar-page-count,
+  .statusbar-community {
+    display: none !important;
+  }
+
+  .statusbar-session {
+    margin-left: auto;
+  }
+
+  .statusbar-session-toggle {
+    min-height: 34px;
+    padding: 5px 7px;
+  }
+
+  .statusbar-session-panel {
+    left: auto;
+    right: 0;
+    bottom: calc(100% + 8px);
+    width: min(300px, calc(100vw - 24px));
+    max-height: calc(100svh - 132px - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (max-width: 340px) {
+  .app-shell[data-view="editor"] .statusbar[data-status-argila] {
+    gap: 7px;
+    padding-inline: 9px;
+  }
+
+  .statusbar-writing {
+    gap: 7px;
+  }
+
+  .statusbar-session-label {
+    font-size: 9px;
+  }
+
+  .statusbar-session-toggle {
+    gap: 3px;
+    padding-inline: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statusbar-save[data-save-state="saving"]::before {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+@media (forced-colors: active) {
+  .statusbar-session-panel {
+    border: 1px solid CanvasText;
+  }
+
+  .statusbar-save::before {
+    forced-color-adjust: none;
+    background: currentColor;
+  }
+}
