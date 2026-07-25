@@ -1,4 +1,5 @@
-@import url("./15-brand-argila.css?v=20260725-argila-foundation");
+@import url("./15-brand-argila.css?v=20260725-argila-entry");
+@import url("./16-entry-argila.css?v=20260725-argila-entry");
 
 /*
  * Scriptorium preserva a mesma ética material em baixa luz.
@@ -70,6 +71,11 @@
 
 [data-theme="scriptorium"] .tab:hover {
   color: var(--soft-ink);
+}
+
+/* A marca é um nome próprio; versais ficam reservadas ao kicker editorial. */
+.ob-logo {
+  text-transform: none;
 }
 
 /*

@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v945";
-const ASSET_VERSION = "20260725-argila-foundation";
+const CACHE_NAME = "vereda-offline-v946";
+const ASSET_VERSION = "20260725-argila-entry";
 
 const CORE_ASSETS = [
   "./",
@@ -9,7 +9,8 @@ const CORE_ASSETS = [
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
   "./css/13-editor-quiet.css?v=20260725-v2",
-  "./css/14-archive-inspector.css?v=20260725-v2",
+  "./css/14-archive-inspector.css?v=20260725-v3",
+  `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/15-brand-argila.css?v=${ASSET_VERSION}`,
   `./css/wood-icons.css?v=${ASSET_VERSION}`,
   `./css/03-editor-layout.css?v=${ASSET_VERSION}`,
