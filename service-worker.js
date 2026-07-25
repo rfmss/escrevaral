@@ -14,6 +14,7 @@ const CORE_ASSETS = [
   `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-authorship.css?v=${ASSET_VERSION}`,
+  `./css/22-product-clarity-workshop-refine.css?v=${ASSET_VERSION}`,
   "./css/14-archive-inspector.css?v=20260725-v4",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,

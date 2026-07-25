@@ -100,12 +100,21 @@ def run_case(browser, base_url: str, output: Path, case):
                 add(issues, name, "atelier-keyboard", "A segunda ferramenta não entrou na ordem de foco desktop.")
             second.focus()
             second.press("Enter")
-            page.wait_for_timeout(150)
+            page.wait_for_timeout(220)
             target_id = second.get_attribute("for")
             checked = page.locator(f"#{target_id}").is_checked() if target_id else False
             if not checked:
                 add(issues, name, "atelier-keyboard", "Enter não ativou a ferramenta escolhida.")
-            evidence["atelier"] = screenshot(page, output, name, "atelier")
+
+            for selector, label in ((".at-panel-rimalab", "painel"), (".rimalab-tool", "ferramenta"), (".rimalab-workbench", "bancada")):
+                node = page.locator(f'[data-view-panel="academia"] {selector}').first
+                if not node.count() or not node.is_visible():
+                    add(issues, name, "rimalab-missing", f"{label} do RimaLab não ficou visível.")
+                    continue
+                dimensions = node.evaluate("el => ({scroll:el.scrollWidth, client:el.clientWidth})")
+                if dimensions["scroll"] > dimensions["client"] + 2:
+                    add(issues, name, "rimalab-internal-overflow", f"{label}: {dimensions}")
+            evidence["atelier"] = screenshot(page, output, name, "atelier-rimalab")
 
             # Autoria
             page.evaluate("() => setView('autoria', {updateRoute:true, routeMode:'replace'})")
@@ -116,6 +125,7 @@ def run_case(browser, base_url: str, output: Path, case):
             open_count = steps.evaluate_all("els => els.filter(el => el.open).length")
             if open_count != 1 or not steps.nth(0).evaluate("el => el.open"):
                 add(issues, name, "authorship-initial", f"etapas abertas={open_count}; a primeira deveria estar aberta.")
+            evidence["authorship_initial"] = screenshot(page, output, name, "authorship-initial")
 
             required = (
                 (0, '[data-action="sign-proof-author"]', "assinatura"),
