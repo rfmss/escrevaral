@@ -52,7 +52,6 @@ def prepare(page, base_url: str, errors: list[str]):
     page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(base_url, wait_until="domcontentloaded", timeout=30_000)
-    # No mobile as tabs existem, mas ficam ocultas porque o dock assume a navegação.
     page.wait_for_selector(
         '.module-tabs[data-oficina-navigation="true"]',
         state="attached",
@@ -102,7 +101,7 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
         summary.press("Enter")
         page.wait_for_selector(".oficina-navigation[open] .oficina-navigation-menu", timeout=5_000)
         page.wait_for_function(
-            "() => getComputedStyle(document.querySelector('.oficina-navigation-menu')).position === 'absolute'"
+            "() => getComputedStyle(document.querySelector('.oficina-navigation-menu')).position === 'fixed'"
         )
         menu_box = page.locator(".oficina-navigation-menu").bounding_box()
         if not in_viewport(menu_box, width, height):
