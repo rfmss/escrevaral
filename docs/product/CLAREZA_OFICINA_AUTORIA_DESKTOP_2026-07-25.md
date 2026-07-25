@@ -65,3 +65,7 @@ Não alterar:
 - mobile preservado abaixo de 821 px;
 - zero erro de console e overflow;
 - integridade, Palavras, Mesa, editor, Acervo, Oficina e PWA verdes.
+
+## Primeira auditoria
+
+A primeira execução detectou que os nós de Autoria eram movidos antes da verificação da largura. A montagem foi corrigida para acontecer somente a partir de 821 px. O auditor também passou a selecionar explicitamente o resumo externo de cada etapa, sem confundi-lo com detalhes internos do conteúdo.
