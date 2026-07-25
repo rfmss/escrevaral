@@ -8,7 +8,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from playwright.sync_api import Browser, BrowserContext, Page, TimeoutError, sync_playwright
+from playwright.sync_api import Browser, Page, TimeoutError, sync_playwright
 
 
 TERMS_SCRIPT = """
@@ -99,7 +99,7 @@ def test_archive_entry(browser: Browser, base_url: str, output: Path) -> dict:
         page.goto(f"{base_url}#arquivo", wait_until="domcontentloaded", timeout=30_000)
         page.wait_for_selector('.app-shell[data-view="arquivo"]', timeout=20_000)
         details = page.locator(".archive-security-details")
-        if details.count() and not details.get_attribute("open"):
+        if details.count() and not details.evaluate("element => element.open"):
             details.locator("summary").click()
 
         entry = page.locator('[data-mesa-portatil-entry="acervo"]')
