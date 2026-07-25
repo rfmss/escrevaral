@@ -96,17 +96,18 @@ html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open {
   background: transparent;
 }
 
-html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open > .fmt-btn,
-html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open > .editor-view-btn,
-html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open > .page-settings-inputs {
+/* A classe extra .format-bar supera deliberadamente a regra de recolhimento. */
+html body .app-shell[data-view="editor"] .format-bar .fmt-group-editorial.is-open > .fmt-btn,
+html body .app-shell[data-view="editor"] .format-bar .fmt-group-editorial.is-open > .editor-view-btn,
+html body .app-shell[data-view="editor"] .format-bar .fmt-group-editorial.is-open > .page-settings-inputs {
   display: flex !important;
 }
 
-html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open > .fmt-select {
+html body .app-shell[data-view="editor"] .format-bar .fmt-group-editorial.is-open > .fmt-select {
   display: block !important;
 }
 
-html body .app-shell[data-view="editor"] .fmt-group-editorial.is-open > .fmt-sep {
+html body .app-shell[data-view="editor"] .format-bar .fmt-group-editorial.is-open > .fmt-sep {
   display: block !important;
 }
 
