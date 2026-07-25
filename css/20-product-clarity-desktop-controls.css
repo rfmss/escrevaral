@@ -10,6 +10,16 @@
     --editor-focus-color: #3a2c22;
   }
 
+  html[data-theme="scriptorium"] .app-shell[data-view="editor"] .title-input,
+  html[data-theme="scriptorium"] .app-shell[data-view="editor"] .writing-area {
+    color: #3a2c22 !important;
+    caret-color: #3a2c22;
+  }
+
+  html[data-theme="scriptorium"] .app-shell[data-view="editor"] .writing-area:empty::before {
+    color: #8c7060 !important;
+  }
+
   .topbar-actions[data-clarity-utilities="true"] {
     width: auto;
     max-width: 230px;
