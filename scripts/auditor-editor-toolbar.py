@@ -67,6 +67,16 @@ def run_case(browser, base_url: str, output: Path, viewport: tuple, theme: tuple
         reduced_motion="reduce",
         color_scheme="dark" if theme_value else "light",
     )
+    context.add_init_script(
+        """
+        try {
+          localStorage.setItem("escrevaral-termos-v1", "auditoria");
+          localStorage.setItem("vrda-first-visit", "1");
+        } catch (_) {
+          // A navegação seguinte executa novamente no domínio do aplicativo.
+        }
+        """
+    )
     page = context.new_page()
     console_errors: list[str] = []
     page.on("console", lambda message: console_errors.append(message.text) if message.type == "error" else None)
