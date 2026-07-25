@@ -1,0 +1,41 @@
+name: Coerência de versões dos arquivos
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "service-worker.js"
+      - "ui-dialog.js"
+      - "**/*.js"
+      - "**/*.css"
+      - "scripts/auditor-asset-version.py"
+      - ".github/workflows/asset-version-pr.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: asset-version-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Validar coerência de distribuição
+        run: python3 scripts/auditor-asset-version.py
