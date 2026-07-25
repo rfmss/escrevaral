@@ -1,0 +1,170 @@
+name: Executar piloto empilhado de controladores
+
+on:
+  pull_request:
+    branches:
+      - agent/js-data-pilot
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    if: github.head_ref == 'agent/js-controllers-ux-pilot' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Clonar branch do piloto
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/js-controllers-ux-pilot
+          fetch-depth: 0
+
+      - name: Mover controladores e atualizar distribuição
+        shell: python
+        run: |
+          from pathlib import Path
+
+          root = Path('.')
+          target = root / 'js' / 'controllers'
+          target.mkdir(parents=True, exist_ok=True)
+          files = [
+              'tooltip-controller.js',
+              'pomodoro-controller.js',
+              'reader-controller.js',
+          ]
+
+          for name in files:
+              source = root / name
+              destination = target / name
+              if not source.exists():
+                  raise SystemExit(f'arquivo de origem ausente: {source}')
+              if destination.exists():
+                  raise SystemExit(f'destino já existe: {destination}')
+              source.replace(destination)
+
+          old_version = '20260725-js-data-pilot-v1'
+          new_version = '20260725-js-controllers-ux-v1'
+
+          index_path = root / 'index.html'
+          index = index_path.read_text(encoding='utf-8')
+          for name in files:
+              old = f'src="{name}?v={old_version}"'
+              new = f'src="js/controllers/{name}?v={new_version}"'
+              if old not in index:
+                  raise SystemExit(f'referência ausente no index: {old}')
+              index = index.replace(old, new, 1)
+          index_path.write_text(index.replace(old_version, new_version), encoding='utf-8')
+
+          sw_path = root / 'service-worker.js'
+          sw = sw_path.read_text(encoding='utf-8')
+          old_cache = 'const CACHE_NAME = "vereda-offline-v955";'
+          if old_cache not in sw:
+              raise SystemExit('cache-base v955 não encontrado')
+          sw = sw.replace(old_cache, 'const CACHE_NAME = "vereda-offline-v956";', 1)
+          sw = sw.replace(old_version, new_version)
+          for name in files:
+              old = f'`./{name}?v=${{ASSET_VERSION}}`'
+              new = f'`./js/controllers/{name}?v=${{ASSET_VERSION}}`'
+              if old not in sw:
+                  raise SystemExit(f'asset ausente no service worker: {old}')
+              sw = sw.replace(old, new, 1)
+          sw_path.write_text(sw, encoding='utf-8')
+
+          dialog_path = root / 'ui-dialog.js'
+          dialog = dialog_path.read_text(encoding='utf-8')
+          if old_version not in dialog:
+              raise SystemExit('versão antiga ausente em ui-dialog.js')
+          dialog_path.write_text(dialog.replace(old_version, new_version), encoding='utf-8')
+
+          decision = root / 'docs' / '_decisoes' / 'PILOTO_CONTROLADORES_INTERFACE_2026-07-25.md'
+          decision.write_text(
+              """# Piloto estrutural — controladores de interface
+
+Data: 2026-07-25
+
+## Escopo
+
+Foram movidos para `js/controllers/`:
+
+- `tooltip-controller.js`;
+- `pomodoro-controller.js`;
+- `reader-controller.js`.
+
+O bloco foi escolhido por não carregar arquivos dinamicamente e por manter a mesma ordem de execução no documento.
+
+## Contratos preservados
+
+- funções globais existentes permanecem com os mesmos nomes;
+- nenhum comportamento de interface foi refatorado;
+- a ordem dos scripts no `index.html` não mudou;
+- os três arquivos permanecem no cache offline;
+- `service-worker.js` continua na raiz;
+- relatórios históricos não foram reescritos.
+
+## Verificação direcionada
+
+- sintaxe JavaScript;
+- ausência dos arquivos antigos na raiz;
+- caminhos exatos no HTML e no cache;
+- coerência da versão global e do cache;
+- resposta HTTP dos novos endereços.
+
+A continuação da migração depende da matriz completa da candidata a lançamento.
+""",
+              encoding='utf-8',
+          )
+
+      - name: Validar piloto
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          node --check js/controllers/tooltip-controller.js
+          node --check js/controllers/pomodoro-controller.js
+          node --check js/controllers/reader-controller.js
+
+          test ! -e tooltip-controller.js
+          test ! -e pomodoro-controller.js
+          test ! -e reader-controller.js
+
+          grep -Fq 'src="js/controllers/tooltip-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+          grep -Fq 'src="js/controllers/pomodoro-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+          grep -Fq 'src="js/controllers/reader-controller.js?v=20260725-js-controllers-ux-v1"' index.html
+
+          grep -Fq '`./js/controllers/tooltip-controller.js?v=${ASSET_VERSION}`' service-worker.js
+          grep -Fq '`./js/controllers/pomodoro-controller.js?v=${ASSET_VERSION}`' service-worker.js
+          grep -Fq '`./js/controllers/reader-controller.js?v=${ASSET_VERSION}`' service-worker.js
+
+          ! grep -Fq 'src="tooltip-controller.js?' index.html
+          ! grep -Fq 'src="pomodoro-controller.js?' index.html
+          ! grep -Fq 'src="reader-controller.js?' index.html
+
+          python3 scripts/auditor-asset-version.py
+
+          python3 -m http.server 8799 > /tmp/escrevaral-controller-pilot.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for tentativa in {1..20}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl -fsS http://127.0.0.1:8799/js/controllers/tooltip-controller.js > /dev/null
+          curl -fsS http://127.0.0.1:8799/js/controllers/pomodoro-controller.js > /dev/null
+          curl -fsS http://127.0.0.1:8799/js/controllers/reader-controller.js > /dev/null
+
+      - name: Registrar resultado na branch do piloto
+        run: |
+          rm -f .github/workflows/temp-move-ux-controllers.yml
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add -A
+          git commit -m "refactor(structure): mover controladores de interface"
+          git push origin HEAD:agent/js-controllers-ux-pilot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
