@@ -52,7 +52,12 @@ def prepare(page, base_url: str, errors: list[str]):
     page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
     page.on("pageerror", lambda error: errors.append(str(error)))
     page.goto(base_url, wait_until="domcontentloaded", timeout=30_000)
-    page.wait_for_selector('.module-tabs[data-oficina-navigation="true"]', timeout=20_000)
+    # No mobile as tabs existem, mas ficam ocultas porque o dock assume a navegação.
+    page.wait_for_selector(
+        '.module-tabs[data-oficina-navigation="true"]',
+        state="attached",
+        timeout=20_000,
+    )
     page.wait_for_function("() => typeof setView === 'function'", timeout=20_000)
 
 
@@ -96,6 +101,9 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
         closed_shot = screenshot(page, output, f"{name}-{theme_name}-oficina-fechada")
         summary.press("Enter")
         page.wait_for_selector(".oficina-navigation[open] .oficina-navigation-menu", timeout=5_000)
+        page.wait_for_function(
+            "() => getComputedStyle(document.querySelector('.oficina-navigation-menu')).position === 'absolute'"
+        )
         menu_box = page.locator(".oficina-navigation-menu").bounding_box()
         if not in_viewport(menu_box, width, height):
             issues.append(f"menu fora do viewport: {menu_box}")
@@ -110,7 +118,10 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
                 issues.append(f"destino inacessível: {view}")
                 continue
             item.click()
-            page.wait_for_function("expected => document.querySelector('.app-shell')?.dataset.view === expected", arg=view)
+            page.wait_for_function(
+                "expected => document.querySelector('.app-shell')?.dataset.view === expected",
+                arg=view,
+            )
             if details.get_attribute("open") is not None:
                 issues.append(f"menu não fechou após abrir {view}")
             if "is-active" not in (details.get_attribute("class") or ""):
@@ -123,13 +134,14 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
         page.keyboard.press("Escape")
         if details.get_attribute("open") is not None:
             issues.append("Escape não fechou Oficina")
-        if not summary.is_focused():
+        if not summary.evaluate("el => document.activeElement === el"):
             issues.append("foco não voltou ao agrupador Oficina")
     except Exception as error:
         issues.append(f"exceção: {type(error).__name__}: {error}")
         issues.append(traceback.format_exc(limit=5))
     finally:
-        console_errors and issues.extend(f"console: {item}" for item in console_errors)
+        if console_errors:
+            issues.extend(f"console: {item}" for item in console_errors)
         context.close()
 
     return {
@@ -169,7 +181,8 @@ def audit_mobile(browser, base_url: str, output: Path, viewport, theme):
         issues.append(f"exceção: {type(error).__name__}: {error}")
         issues.append(traceback.format_exc(limit=5))
     finally:
-        console_errors and issues.extend(f"console: {item}" for item in console_errors)
+        if console_errors:
+            issues.extend(f"console: {item}" for item in console_errors)
         context.close()
 
     return {
