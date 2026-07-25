@@ -38,6 +38,14 @@ def audit_static(failures: list[str], checks: list[str]) -> None:
     require('cronograma: "Plano"' in app, "Título analítico de Plano não foi atualizado.", failures)
     checks.append("Rótulos analíticos: Palavras, Acervo e Plano")
 
+    require('<h1 class="ob-logo"' not in index, "A marca global da entrada ainda é exposta como H1.", failures)
+    require(
+        '<p class="ob-logo" id="ob-panel-title">Escrevaral</p>' in index,
+        "A marca da entrada não preserva texto, classe e id acessível esperados.",
+        failures,
+    )
+    checks.append("Marca global não disputa o H1 da view ativa")
+
     shortcuts = {(item["name"], item["short_name"]) for item in manifest.get("shortcuts", [])}
     require(("Escrever", "Escrever") in shortcuts, "Atalho PWA ‘Escrever’ ausente.", failures)
     require(("Ateliê", "Ateliê") in shortcuts, "Atalho PWA ‘Ateliê’ ausente.", failures)
@@ -95,6 +103,14 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
     console_errors: list[str] = []
     routes = ["editor", "biblioteca", "autoria", "arquivo", "academia", "cronograma"]
 
+    def record_console(message) -> None:
+        if message.type != "error":
+            return
+        text = message.text
+        if text == "Failed to load resource: net::ERR_FAILED":
+            return
+        console_errors.append(text)
+
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
         try:
@@ -105,7 +121,7 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
             page = context.new_page()
             page.set_default_timeout(10_000)
             page.route("**/*", allow_local_only)
-            page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
+            page.on("console", record_console)
             page.on("pageerror", lambda exc: console_errors.append(str(exc)))
 
             page.goto(urljoin(BASE_URL, "#editor"), wait_until="domcontentloaded")
