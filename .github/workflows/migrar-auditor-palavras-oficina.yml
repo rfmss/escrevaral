@@ -1,0 +1,34 @@
+name: Migração do auditor de Palavras
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    if: github.head_ref == 'refactor/argila-oficina-nav'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Aplicar migração
+        run: python scripts/migrar-auditor-palavras-oficina.py
+
+      - name: Validar sintaxe
+        run: python -m py_compile scripts/auditor-palavras.py
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/auditor-palavras.py scripts/migrar-auditor-palavras-oficina.py .github/workflows/migrar-auditor-palavras-oficina.yml
+          git commit -m "fix(test): desacoplar Palavras da navegação visual"
+          git push origin HEAD:${{ github.head_ref }}
