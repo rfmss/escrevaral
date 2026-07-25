@@ -2,11 +2,11 @@ name: Auditoria Noturna — Escrevaral
 
 on:
   schedule:
-    - cron: '30 8 * * *'   # todo dia às 5h30 BRT (8h30 UTC) — relatório pronto antes das 9h
-  workflow_dispatch:        # disparo manual a qualquer hora
+    - cron: '30 8 * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   issues: write
 
 jobs:
@@ -37,35 +37,36 @@ jobs:
 
       - name: Corpus das engines
         id: corpus
-        run: python3 scripts/comparar-golden.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        run: python3 scripts/comparar-golden.py && echo "status=0" >> "$GITHUB_OUTPUT" || echo "status=1" >> "$GITHUB_OUTPUT"
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
       - name: Overflow mobile (local)
         id: overflow
-        run: python3 scripts/auditor-overflow-mobile.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        run: python3 scripts/auditor-overflow-mobile.py && echo "status=0" >> "$GITHUB_OUTPUT" || echo "status=1" >> "$GITHUB_OUTPUT"
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
       - name: Erros de console (local)
         id: console_errors
-        run: python3 scripts/auditor-console-errors.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        run: python3 scripts/auditor-console-errors.py && echo "status=0" >> "$GITHUB_OUTPUT" || echo "status=1" >> "$GITHUB_OUTPUT"
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
       - name: Smoke test site live
         id: live
-        run: python3 scripts/smoke-live.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        run: python3 scripts/smoke-live.py && echo "status=0" >> "$GITHUB_OUTPUT" || echo "status=1" >> "$GITHUB_OUTPUT"
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
       - name: Auditoria de pilares (site live)
         id: pilares
-        run: python3 scripts/auditoria-pilares.py && echo "status=0" >> $GITHUB_OUTPUT || echo "status=1" >> $GITHUB_OUTPUT
+        run: python3 scripts/auditoria-pilares.py && echo "status=0" >> "$GITHUB_OUTPUT" || echo "status=1" >> "$GITHUB_OUTPUT"
         working-directory: ${{ github.workspace }}
         continue-on-error: true
 
       - name: Compilar relatório noturno
+        id: relatorio
         run: |
           DATA=$(date +%Y-%m-%d)
           HORA=$(date +%H:%M)
@@ -73,11 +74,11 @@ jobs:
           mkdir -p reports/auditoria
 
           STATUS_GLOBAL=0
-          [ "${{ steps.corpus.outputs.status }}"        = "1" ] && STATUS_GLOBAL=1
-          [ "${{ steps.overflow.outputs.status }}"      = "1" ] && STATUS_GLOBAL=1
+          [ "${{ steps.corpus.outputs.status }}" = "1" ] && STATUS_GLOBAL=1
+          [ "${{ steps.overflow.outputs.status }}" = "1" ] && STATUS_GLOBAL=1
           [ "${{ steps.console_errors.outputs.status }}" = "1" ] && STATUS_GLOBAL=1
-          [ "${{ steps.live.outputs.status }}"          = "1" ] && STATUS_GLOBAL=1
-          [ "${{ steps.pilares.outputs.status }}"       = "1" ] && STATUS_GLOBAL=1
+          [ "${{ steps.live.outputs.status }}" = "1" ] && STATUS_GLOBAL=1
+          [ "${{ steps.pilares.outputs.status }}" = "1" ] && STATUS_GLOBAL=1
 
           [ "$STATUS_GLOBAL" = "1" ] && SEMAFORO="🔴 VERMELHO" || SEMAFORO="🟢 VERDE"
 
@@ -110,43 +111,81 @@ jobs:
             done
           } > "$RELATORIO"
 
-          echo "RELATORIO=$RELATORIO" >> $GITHUB_ENV
-          echo "SEMAFORO=$SEMAFORO"   >> $GITHUB_ENV
+          echo "RELATORIO=$RELATORIO" >> "$GITHUB_ENV"
+          echo "SEMAFORO=$SEMAFORO" >> "$GITHUB_ENV"
+          echo "status_global=$STATUS_GLOBAL" >> "$GITHUB_OUTPUT"
 
-      - name: Commitar relatórios e screenshots
-        run: |
-          git config user.name  "Auditoria Noturna [bot]"
-          git config user.email "auditoria@escrevaral.com"
-          git add reports/
-          git diff --staged --quiet || git commit -m "relatório: auditoria noturna $(date +%Y-%m-%d)"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Guardar relatórios como artefato
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-noturna-${{ github.run_id }}
+          path: |
+            reports/agente/
+            reports/auditoria/
+          if-no-files-found: warn
+          retention-days: 14
 
-      - name: Abrir Issue com resumo
+      - name: Abrir ou atualizar incidente
+        if: steps.relatorio.outputs.status_global == '1'
         run: |
           DATA=$(date +%Y-%m-%d)
           icon() { [ "$1" = "0" ] && echo "✅" || echo "❌"; }
 
           gh label create "auditoria-noturna" --color "0ea5e9" \
-            --description "Relatório da auditoria noturna" 2>/dev/null || true
+            --description "Falha detectada pela auditoria noturna" 2>/dev/null || true
+          gh label create "incidente-automatizado" --color "b91c1c" \
+            --description "Incidente mantido por automação" 2>/dev/null || true
 
           CORPO="$(printf \
-            '# Auditoria Noturna — %s\n\n**Semáforo:** %s\n\n| Auditor | Resultado |\n|---|---|\n| Corpus/Engines | %s |\n| Overflow mobile | %s |\n| Console errors | %s |\n| Site live | %s |\n| Pilares | %s |\n\nRelatório completo em `reports/auditoria/noturna-%s.md`' \
+            'Nova falha detectada em %s.\n\n**Semáforo:** %s\n\n| Auditor | Resultado |\n|---|---|\n| Corpus/Engines | %s |\n| Overflow mobile | %s |\n| Console errors | %s |\n| Site live | %s |\n| Pilares | %s |\n\nExecução: %s/actions/runs/%s' \
             "$DATA" "$SEMAFORO" \
             "$(icon ${{ steps.corpus.outputs.status }})" \
             "$(icon ${{ steps.overflow.outputs.status }})" \
             "$(icon ${{ steps.console_errors.outputs.status }})" \
             "$(icon ${{ steps.live.outputs.status }})" \
             "$(icon ${{ steps.pilares.outputs.status }})" \
-            "$DATA")"
+            "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")"
 
-          gh issue create \
-            --title "Auditoria Noturna — $DATA — $SEMAFORO" \
-            --body "$CORPO" \
-            --label "auditoria-noturna"
+          ISSUE=$(gh issue list \
+            --state open \
+            --label "auditoria-noturna" \
+            --search '"Auditoria noturna falhando" in:title' \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [ -n "$ISSUE" ]; then
+            gh issue edit "$ISSUE" \
+              --title "Auditoria noturna falhando — última ocorrência $DATA" \
+              --add-label "incidente-automatizado"
+            gh issue comment "$ISSUE" --body "$CORPO"
+          else
+            gh issue create \
+              --title "Auditoria noturna falhando — última ocorrência $DATA" \
+              --body "$CORPO" \
+              --label "auditoria-noturna,incidente-automatizado"
+          fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fechar incidente após recuperação
+        if: steps.relatorio.outputs.status_global == '0'
+        run: |
+          DATA=$(date +%Y-%m-%d)
+          ISSUE=$(gh issue list \
+            --state open \
+            --label "auditoria-noturna" \
+            --search '"Auditoria noturna falhando" in:title' \
+            --json number \
+            --jq '.[0].number // empty')
+
+          if [ -n "$ISSUE" ]; then
+            gh issue comment "$ISSUE" \
+              --body "Recuperação confirmada em $DATA. A auditoria voltou ao estado verde na execução $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
+            gh issue close "$ISSUE" --reason completed
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Teste Master — veredito unificado + Telegram
         run: python3 scripts/teste-master.py --usar-existentes --notificar
@@ -157,8 +196,9 @@ jobs:
         continue-on-error: true
 
       - name: Resumo da execução
+        if: always()
         run: |
           DATA=$(date +%Y-%m-%d)
-          echo "### Auditoria Noturna — $DATA" >> $GITHUB_STEP_SUMMARY
-          echo "**Semáforo:** $SEMAFORO" >> $GITHUB_STEP_SUMMARY
-          [ -f "$RELATORIO" ] && cat "$RELATORIO" >> $GITHUB_STEP_SUMMARY
+          echo "### Auditoria Noturna — $DATA" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Semáforo:** $SEMAFORO" >> "$GITHUB_STEP_SUMMARY"
+          [ -f "$RELATORIO" ] && cat "$RELATORIO" >> "$GITHUB_STEP_SUMMARY"
