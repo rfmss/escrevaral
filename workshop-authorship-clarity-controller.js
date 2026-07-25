@@ -33,7 +33,6 @@
 
     const body = document.createElement("div");
     body.className = "proof-clarity-body";
-    nodes.forEach((node) => body.appendChild(node));
 
     summary.append(number, copy, chevron);
     details.append(summary, body);

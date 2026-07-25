@@ -125,7 +125,7 @@ def run_case(browser, base_url: str, output: Path, case):
                 (4, '[data-action="create-version"]', "versão"),
             )
             for index, selector, label in required:
-                summary = steps.nth(index).locator("summary")
+                summary = steps.nth(index).locator(".proof-clarity-summary").first
                 if not steps.nth(index).evaluate("el => el.open"):
                     summary.focus()
                     summary.press("Enter")
