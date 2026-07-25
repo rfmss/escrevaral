@@ -136,11 +136,17 @@
       }
       panel.hidden = false;
       summary.setAttribute("aria-expanded", "true");
-      requestAnimationFrame(positionPanel);
+      requestAnimationFrame(() => {
+        positionPanel();
+        if (lastModality === "keyboard") {
+          panel.querySelector("button")?.focus({ preventScroll: true });
+        }
+      });
     });
 
     panel.addEventListener("click", (event) => {
-      if (event.target.closest("button")) closeMenu();
+      if (!event.target.closest("button")) return;
+      closeMenu({ restoreFocus: lastModality === "keyboard" });
     });
 
     document.addEventListener("pointerdown", (event) => {
