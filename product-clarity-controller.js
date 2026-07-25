@@ -8,9 +8,9 @@
 
   const scriptVersion = (() => {
     try {
-      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-desktop-v1";
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-archive-v1";
     } catch {
-      return "20260725-clarity-desktop-v1";
+      return "20260725-clarity-archive-v1";
     }
   })();
 
@@ -21,6 +21,15 @@
     link.href = `./css/20-product-clarity-desktop-controls.css?v=${encodeURIComponent(scriptVersion)}`;
     link.dataset.productClarityControls = "true";
     document.head.appendChild(link);
+  }
+
+  function loadArchiveClarity() {
+    if (document.querySelector('script[data-archive-clarity-controller="true"]')) return;
+    const script = document.createElement("script");
+    script.src = `./archive-clarity-controller.js?v=${encodeURIComponent(scriptVersion)}`;
+    script.defer = true;
+    script.dataset.archiveClarityController = "true";
+    document.body.appendChild(script);
   }
 
   function setModality(next) {
@@ -166,9 +175,14 @@
     syncViewport();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initUtilityMenu, { once: true });
-  } else {
+  function boot() {
     initUtilityMenu();
+    loadArchiveClarity();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
   }
 })();

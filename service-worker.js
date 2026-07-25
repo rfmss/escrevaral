@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v950";
-const ASSET_VERSION = "20260725-clarity-desktop-v1";
+const CACHE_NAME = "vereda-offline-v951";
+const ASSET_VERSION = "20260725-clarity-archive-v1";
 
 const CORE_ASSETS = [
   "./",
@@ -9,8 +9,10 @@ const CORE_ASSETS = [
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
   "./css/13-editor-quiet.css?v=20260725-v2",
-  "./css/20-product-clarity-desktop.css?v=20260725-clarity-desktop-v1",
-  "./css/20-product-clarity-desktop-controls.css?v=20260725-clarity-desktop-v1",
+  `./css/20-product-clarity-desktop.css?v=${ASSET_VERSION}`,
+  `./css/20-product-clarity-desktop-controls.css?v=${ASSET_VERSION}`,
+  `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
+  `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
   "./css/14-archive-inspector.css?v=20260725-v4",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
@@ -76,6 +78,7 @@ const CORE_ASSETS = [
   `./editor-status-controller.js?v=${ASSET_VERSION}`,
   `./oficina-navigation-controller.js?v=${ASSET_VERSION}`,
   `./product-clarity-controller.js?v=${ASSET_VERSION}`,
+  `./archive-clarity-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
   `./tooltip-controller.js?v=${ASSET_VERSION}`,
   `./combo-detector.js?v=${ASSET_VERSION}`,

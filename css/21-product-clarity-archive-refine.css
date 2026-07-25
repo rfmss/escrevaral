@@ -1,0 +1,62 @@
+/* Ajustes de revisão visual do Acervo desktop. */
+
+@media (min-width: 821px) {
+  /* O Scriptorium mantém a moldura escura, mas o Acervo usa papel claro. */
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-view {
+    --ink: #2f261f;
+    --soft-ink: #51483f;
+    --muted: #786e65;
+    --line: rgba(58, 44, 34, 0.18);
+    --card: #fcfaf7;
+    --surface-low: #ebe7df;
+    --surface-mid: #e2ddd4;
+    --primary: #9c5f44;
+    --primary-deep: #7a4a35;
+    --on-primary: #fcfaf7;
+    color: var(--ink);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-heading-title,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-note-title,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .project-card h2,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .resume-document strong {
+    color: var(--ink) !important;
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-search,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-sort,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .metadata-form input,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .metadata-form textarea,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .metadata-form select {
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--card) 82%, transparent);
+    color: var(--ink);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-search input,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-sort select {
+    color: var(--ink);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-search input::placeholder {
+    color: var(--muted);
+  }
+
+  /* Foco do cartão: uma marca lateral, não uma caixa dupla. */
+  html body .app-shell[data-view="arquivo"] .project-card:focus-visible {
+    outline: none !important;
+    box-shadow: inset 3px 0 0 var(--primary) !important;
+  }
+
+  html body .app-shell[data-view="arquivo"] .project-card:focus-visible:not(.is-selected) {
+    background: color-mix(in srgb, var(--primary) 4%, transparent);
+  }
+}
+
+@media (forced-colors: active) and (min-width: 821px) {
+  html body .app-shell[data-view="arquivo"] .project-card:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: -3px;
+    box-shadow: none !important;
+  }
+}
