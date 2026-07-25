@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v943";
-const ASSET_VERSION = "20260725-palavras";
+const CACHE_NAME = "vereda-offline-v944";
+const ASSET_VERSION = "20260725-archive-inspector";
 
 const CORE_ASSETS = [
   "./",
@@ -9,6 +9,8 @@ const CORE_ASSETS = [
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
   "./css/13-editor-quiet.css?v=20260725-v2",
+  "./css/14-archive-inspector.css?v=20260725-v1",
+  "./css/wood-icons.css",
   `./css/03-editor-layout.css?v=${ASSET_VERSION}`,
   `./css/04-cronograma.css?v=${ASSET_VERSION}`,
   `./css/03-editor-modes.css?v=${ASSET_VERSION}`,
