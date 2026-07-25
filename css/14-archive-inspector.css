@@ -2,6 +2,7 @@
  * Acervo — painel da nota como margem de trabalho.
  * A identidade da nota orienta o painel; organização e exportação ficam
  * separadas por ritmo e tipografia, sem criar um segundo cartão concorrente.
+ * Condição de parada: hierarquia clara sem alterar estado, dados ou exportação.
  */
 
 html body .app-shell[data-view="arquivo"] .archive-layout {
