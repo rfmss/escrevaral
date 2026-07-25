@@ -1,5 +1,11 @@
 @import url("./15-brand-argila.css?v=20260725-argila-foundation");
 
+/* O barro claro permanece identificável sobre o ambiente escuro. */
+[data-theme="scriptorium"] {
+  --focus-ring-color: #e3a05f;
+  --focus-ring-contrast: #130f0d;
+}
+
 /*
  * Acervo — painel da nota como margem de trabalho.
  * A identidade da nota orienta o painel; organização e exportação ficam
