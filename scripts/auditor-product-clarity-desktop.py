@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audita hierarquia, densidade e foco do shell/editor desktop do Escrevaral."""
+"""Audita hierarquia, densidade, ferramentas e foco do editor desktop."""
 
 from __future__ import annotations
 
@@ -95,7 +95,8 @@ def any_visible(page, selector: str) -> bool:
         """els => els.some(el => {
           const r = el.getBoundingClientRect();
           const cs = getComputedStyle(el);
-          return !el.hidden && r.width > 0 && r.height > 0 && cs.display !== 'none' && cs.visibility !== 'hidden';
+          return !el.hidden && !el.closest('[hidden]') && r.width > 0 && r.height > 0
+            && cs.display !== 'none' && cs.visibility !== 'hidden';
         })"""
     ))
 
@@ -114,6 +115,7 @@ def focus_style(locator) -> dict:
           borderTop:cs.borderTopWidth,
           outline:cs.outlineStyle,
           outlineWidth:cs.outlineWidth,
+          outlineColor:cs.outlineColor,
           boxShadow:cs.boxShadow
         }; }"""
     )
@@ -121,6 +123,10 @@ def focus_style(locator) -> dict:
 
 def has_outline(style: dict) -> bool:
     return style.get("outline") not in ("none", "") and style.get("outlineWidth") not in ("0px", "")
+
+
+def has_shadow(style: dict) -> bool:
+    return style.get("boxShadow") not in ("none", "")
 
 
 def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
@@ -165,7 +171,7 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
         writing = page.locator(".writing-area").first
         title.fill("Caderno de campo")
         writing.fill(TEXT)
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(400)
 
         selectors = {
             "topbar": ".topbar",
@@ -178,14 +184,11 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
             "writing": ".writing-area",
         }
         metrics = {key: rect(page, selector) for key, selector in selectors.items()}
-
-        doc_overflow = page.evaluate(
-            """() => {
-              const d = document.scrollingElement || document.documentElement;
-              return {scroll:d.scrollWidth, client:d.clientWidth};
-            }"""
+        document_width = page.evaluate(
+            """() => { const d=document.scrollingElement||document.documentElement;
+            return {scroll:d.scrollWidth,client:d.clientWidth}; }"""
         )
-        metrics["document"] = doc_overflow
+        metrics["document"] = document_width
 
         visible_primary = page.locator(
             '.module-tabs [data-view-target="editor"], '
@@ -203,8 +206,8 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
         writing_rect = metrics["writing"]
         utilities = metrics["utilities"]
 
-        if doc_overflow["scroll"] > doc_overflow["client"] + 2:
-            add_issue(issues, name, "horizontal-overflow", f"documento {doc_overflow}")
+        if document_width["scroll"] > document_width["client"] + 2:
+            add_issue(issues, name, "horizontal-overflow", f"documento {document_width}")
         if paper["left"] < -1 or paper["right"] > width + 1:
             add_issue(issues, name, "paper-outside-viewport", f"folha={paper}")
         if not 640 <= paper["width"] <= 940:
@@ -216,68 +219,79 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
         if toolbar["bottom"] > writing_rect["top"] + 1:
             add_issue(issues, name, "sequence", "toolbar invade o começo da escrita")
         if abs(title_rect["bottom"] - context_rect["bottom"]) > 34:
-            add_issue(issues, name, "header-alignment", f"título e contexto não compartilham a mesma linha: título={title_rect}, contexto={context_rect}")
+            add_issue(issues, name, "header-alignment", f"título={title_rect}, contexto={context_rect}")
         if utilities["width"] > 240:
             add_issue(issues, name, "utility-density", f"utilidades ocupam {utilities['width']:.1f}px")
         if visible_primary != 3:
             add_issue(issues, name, "primary-navigation", f"destinos primários visíveis={visible_primary}, esperado=3")
 
-        required = (
+        for selector, label in (
             ('[data-action="toggle-template-panel"]', "guia"),
             ('[data-action="open-reader-mode"]', "leitura"),
             ('[data-action="toggle-desk-background"]', "fundo"),
             ('[data-action="toggle-editorial-group"]', "Mais"),
             ('[data-action="copy-manuscript-text"]', "Copiar"),
             ('[data-action="export-rtf"]', "Baixar"),
-        )
-        for selector, label in required:
+        ):
             if not any_visible(page, selector):
                 add_issue(issues, name, "tool-missing", f"{label} não está acessível no editor")
 
-        # O menu Ambiente reduz a fila sem tornar ações órfãs.
+        # Ambiente reduz a fila sem criar um beco de teclado.
         utility_trigger = page.locator(".clarity-utility-trigger").first
         if not utility_trigger.count() or not utility_trigger.is_visible():
             add_issue(issues, name, "utility-menu", "gatilho Ambiente ausente")
         else:
             utility_trigger.focus()
             utility_trigger.press("Enter")
-            page.wait_for_selector(".clarity-utility-panel", state="visible", timeout=5_000)
-            utility_items = page.locator(".clarity-utility-panel .clarity-utility-item").count()
-            if utility_items != 4:
-                add_issue(issues, name, "utility-menu", f"ações no Ambiente={utility_items}, esperado=4")
-            utility_panel = rect(page, ".clarity-utility-panel")
-            if utility_panel["left"] < 0 or utility_panel["right"] > width:
-                add_issue(issues, name, "utility-menu", f"painel fora da viewport={utility_panel}")
+            panel = page.locator(".clarity-utility-panel").first
+            panel.wait_for(state="visible", timeout=5_000)
+            items = page.locator(".clarity-utility-panel .clarity-utility-item")
+            if items.count() != 4:
+                add_issue(issues, name, "utility-menu", f"ações no Ambiente={items.count()}, esperado=4")
+            if items.count() and not items.first.evaluate("el => document.activeElement === el"):
+                add_issue(issues, name, "utility-keyboard", "a abertura por teclado não focou a primeira opção")
+            panel_rect = rect(page, ".clarity-utility-panel")
+            if panel_rect["left"] < 0 or panel_rect["right"] > width:
+                add_issue(issues, name, "utility-menu", f"painel fora da viewport={panel_rect}")
             evidence["environment"] = screenshot(page, output, name, "environment-open")
             page.keyboard.press("Escape")
+            page.wait_for_timeout(80)
+            if panel.is_visible():
+                add_issue(issues, name, "utility-keyboard", "Escape não fechou Ambiente")
+            if not utility_trigger.evaluate("el => document.activeElement === el"):
+                add_issue(issues, name, "utility-keyboard", "Escape não devolveu o foco ao gatilho")
 
-        # Clique: cursor e seleção bastam; não pode recriar caixa de foco.
+        # Ponteiro: cursor e seleção bastam.
         writing.click(position={"x": 24, "y": 24})
         pointer_focus = focus_style(writing)
         metrics["pointer_focus"] = pointer_focus
-        if pointer_focus["borderTop"] not in ("0px", "") or pointer_focus["boxShadow"] != "none" or has_outline(pointer_focus):
+        if pointer_focus["borderTop"] not in ("0px", "") or has_shadow(pointer_focus) or has_outline(pointer_focus):
             add_issue(issues, name, "writing-pointer-focus", f"área cercada durante digitação={pointer_focus}")
 
         title.click()
         title_focus = focus_style(title)
         metrics["title_focus"] = title_focus
-        if title_focus["borderTop"] not in ("0px", "") or title_focus["boxShadow"] != "none" or has_outline(title_focus):
+        if title_focus["borderTop"] not in ("0px", "") or has_shadow(title_focus) or has_outline(title_focus):
             add_issue(issues, name, "title-pointer-focus", f"título cercado durante edição={title_focus}")
 
         evidence["editor"] = screenshot(page, output, name, "editor")
 
-        # Teclado continua recebendo um único indicador visível.
+        # Teclado: exatamente um indicador, externo ou interno.
         page.keyboard.press("Tab")
         writing.focus()
         keyboard_focus = focus_style(writing)
         metrics["keyboard_focus"] = keyboard_focus
-        if not has_outline(keyboard_focus) or keyboard_focus["boxShadow"] != "none":
-            add_issue(issues, name, "keyboard-focus", f"anel de teclado ausente ou duplicado={keyboard_focus}")
+        outline = has_outline(keyboard_focus)
+        shadow = has_shadow(keyboard_focus)
+        if not outline and not shadow:
+            add_issue(issues, name, "keyboard-focus", f"indicador de teclado ausente={keyboard_focus}")
+        if outline and shadow:
+            add_issue(issues, name, "keyboard-focus", f"indicadores de teclado duplicados={keyboard_focus}")
 
         toggle = page.locator('[data-action="toggle-editorial-group"]').first
         toggle.focus()
         toggle.press("Enter")
-        page.wait_for_timeout(400)
+        page.wait_for_timeout(300)
         bar = page.locator("[data-format-bar]").first
         if bar.evaluate("el => el.scrollWidth > el.clientWidth + 2"):
             add_issue(issues, name, "toolbar-overflow", "Mais aberto criou rolagem interna")
@@ -294,7 +308,7 @@ def run_case(browser, base_url: str, output: Path, case: tuple) -> dict:
 
 
 def markdown(cases: list[dict], generated: str) -> str:
-    issues = [issue for case in cases for issue in case["issues"]]
+    issues = [item for case in cases for item in case["issues"]]
     lines = [
         "# Auditoria de Clareza do Produto — desktop",
         "",
@@ -308,16 +322,15 @@ def markdown(cases: list[dict], generated: str) -> str:
     ]
     for case in cases:
         lines.append(f"| {case['viewport']} | {'aprovado' if not case['issues'] else 'falhou'} |")
-
     lines += ["", "## Ocorrências", ""]
     if not issues:
         lines.append("Nenhuma falha detectada.")
-    for issue in issues:
+    for item in issues:
         lines += [
-            f"### {issue['kind']}",
+            f"### {item['kind']}",
             "",
-            f"- Cenário: {issue['viewport']}",
-            f"- Detalhe: {issue['detail']}",
+            f"- Cenário: {item['viewport']}",
+            f"- Detalhe: {item['detail']}",
             "",
         ]
     lines += ["## Evidências", "", "Capturas do editor, do menu Ambiente e da bancada Mais estão em `screenshots/`.", ""]
@@ -346,7 +359,7 @@ def main() -> None:
     (output / "product-clarity-desktop.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     (output / "product-clarity-desktop.md").write_text(markdown(cases, generated), encoding="utf-8")
 
-    errors = [issue for case in cases for issue in case["issues"]]
+    errors = [item for case in cases for item in case["issues"]]
     print(f"[clarity-desktop] cenários={len(cases)} falhas={len(errors)}", flush=True)
     raise SystemExit(1 if errors else 0)
 
