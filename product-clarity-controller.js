@@ -136,12 +136,11 @@
       }
       panel.hidden = false;
       summary.setAttribute("aria-expanded", "true");
-      requestAnimationFrame(() => {
-        positionPanel();
-        if (lastModality === "keyboard") {
-          panel.querySelector("button")?.focus({ preventScroll: true });
-        }
-      });
+      positionPanel();
+      if (lastModality === "keyboard") {
+        panel.querySelector("button")?.focus({ preventScroll: true });
+      }
+      requestAnimationFrame(positionPanel);
     });
 
     panel.addEventListener("click", (event) => {
