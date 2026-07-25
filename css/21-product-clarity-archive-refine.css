@@ -42,6 +42,34 @@
     color: var(--muted);
   }
 
+  /* O estado vazio pertence ao papel claro, não ao vidro escuro da moldura. */
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty {
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--card) 86%, var(--surface-low));
+    color: var(--muted);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty strong {
+    color: var(--ink);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty .material-symbols-outlined {
+    color: var(--primary-deep);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty .secondary-button {
+    border-color: color-mix(in srgb, var(--primary) 34%, var(--line));
+    background: var(--card);
+    color: var(--primary-deep);
+  }
+
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty .secondary-button:hover,
+  html[data-theme="scriptorium"] body .app-shell[data-view="arquivo"] .archive-empty .secondary-button:focus-visible {
+    border-color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 8%, var(--card));
+    color: var(--primary-deep);
+  }
+
   /* Foco do cartão: uma marca lateral, não uma caixa dupla. */
   html body .app-shell[data-view="arquivo"] .project-card:focus-visible {
     outline: none !important;
