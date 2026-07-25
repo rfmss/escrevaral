@@ -175,6 +175,11 @@
   html body .app-shell[data-view="arquivo"] .project-card h2 {
     font-size: clamp(20px, 5vw, 24px);
   }
+
+  /* O separador oculto não deve reservar uma coluna na grade aberta. */
+  html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > .fmt-sep.fmt-mobile-secondary {
+    display: none !important;
+  }
 }
 
 @media (max-width: 560px) {
