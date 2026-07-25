@@ -34,4 +34,14 @@ if "./css/20-product-clarity-desktop.css?v=20260725-clarity-desktop-v1" not in s
     raise SystemExit("camada de clareza ausente do pacote offline")
 sw.write_text(sw_text, encoding="utf-8")
 
-ui_text = ui.read_text(encoding="utf-8")n
+ui_text = ui.read_text(encoding="utf-8")
+ui_text, count = re.subn(
+    r"lexical-view-controller\.js\?v=[0-9]{8}-[A-Za-z0-9._-]+",
+    f"lexical-view-controller.js?v={NEW}",
+    ui_text,
+)
+if count < 1:
+    raise SystemExit("versão lexical não migrada em ui-dialog.js")
+ui.write_text(ui_text, encoding="utf-8")
+
+print(f"migração concluída: {OLD} -> {NEW}; referências={len(versions)}; lexical={count}")
