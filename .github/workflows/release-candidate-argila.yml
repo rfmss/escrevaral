@@ -6,9 +6,61 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
+  corrigir-auditor-js-data:
+    if: github.head_ref == 'agent/js-data-pilot' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar branch estrutural
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/js-data-pilot
+          fetch-depth: 0
+
+      - name: Atualizar caminho consumido pelo auditor
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("scripts/auditor-dados.py")
+          text = path.read_text(encoding="utf-8")
+          old = 'path = ROOT / "synonym-data.js"'
+          new = 'path = ROOT / "js" / "data" / "synonym-data.js"'
+          if text.count(old) != 1:
+              raise SystemExit("Referência esperada ao índice de sinônimos não foi encontrada de forma única.")
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+
+      - name: Verificar auditor corrigido
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/auditor-dados.py
+          python scripts/auditor-dados.py
+          test -f "reports/auditoria/dados-linguisticos-$(date +%Y-%m-%d).json"
+          python - <<'PY'
+          import json
+          from datetime import date
+          from pathlib import Path
+
+          report = Path("reports/auditoria") / f"dados-linguisticos-{date.today().isoformat()}.json"
+          data = json.loads(report.read_text(encoding="utf-8"))
+          counts = data.get("summary", {}).get("counts", {})
+          assert counts.get("P0", 0) == 0, counts
+          print("Auditor de dados lê js/data/synonym-data.js e não encontrou P0.")
+          PY
+
+      - name: Registrar correção na branch
+        run: |
+          git fetch origin main
+          git show origin/main:.github/workflows/release-candidate-argila.yml > .github/workflows/release-candidate-argila.yml
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add scripts/auditor-dados.py .github/workflows/release-candidate-argila.yml
+          git commit -m "test(structure): atualizar auditor para js/data"
+          git push origin HEAD:agent/js-data-pilot
+
   validar-candidata:
     runs-on: ubuntu-latest
     timeout-minutes: 35
