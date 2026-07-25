@@ -6,9 +6,9 @@
   const DESKTOP_MIN = 821;
   const scriptVersion = (() => {
     try {
-      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-workshop-v1";
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-final-v1";
     } catch {
-      return "20260725-clarity-workshop-v1";
+      return "20260725-clarity-final-v1";
     }
   })();
 
