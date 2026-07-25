@@ -3,8 +3,25 @@
   "use strict";
 
   const DESKTOP_MIN = 821;
+  const scriptVersion = (() => {
+    try {
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-archive-v1";
+    } catch {
+      return "20260725-clarity-archive-v1";
+    }
+  })();
+
+  function ensureRefinementStyles() {
+    if (document.querySelector('link[data-archive-clarity-refine="true"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `./css/21-product-clarity-archive-refine.css?v=${encodeURIComponent(scriptVersion)}`;
+    link.dataset.archiveClarityRefine = "true";
+    document.head.appendChild(link);
+  }
 
   function initArchiveClarity() {
+    ensureRefinementStyles();
     const controls = document.querySelector(".archive-controls");
     const filterBar = controls?.querySelector("[data-archive-filter-bar]");
     const statusBar = controls?.querySelector("[data-archive-status-bar]");
