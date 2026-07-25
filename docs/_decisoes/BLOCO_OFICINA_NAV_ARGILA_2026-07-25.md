@@ -52,3 +52,7 @@ Dentro de **Oficina** permanecem:
 - menu inteiramente dentro da janela em 820, 1024 e 1440 px;
 - em 390 e 768 px, dock e rail permanecem iguais;
 - foco, contraste, Escape, console, overflow, offline e integridade permanecem aprovados.
+
+## Guarda de regressão
+
+O auditor de **Palavras** abre a view pública `biblioteca` por `setView`, em vez de depender da posição visual de um botão. Assim, a cobertura funcional permanece válida quando desktop, rail e dock apresentam hierarquias diferentes, sem enfraquecer os testes de contexto, busca, limpeza e continuidade offline.
