@@ -1,4 +1,4 @@
-const CACHE_NAME = "vereda-offline-v941";
+const CACHE_NAME = "vereda-offline-v942";
 const ASSET_VERSION = "20260724-v936";
 
 const CORE_ASSETS = [
@@ -26,6 +26,7 @@ const CORE_ASSETS = [
   `./css/11-badges.css?v=${ASSET_VERSION}`,
   `./css/12-training-modes.css?v=${ASSET_VERSION}`,
   `./app.js?v=${ASSET_VERSION}`,
+  "./lexical-view-controller.js?v=20260725-v1",
   `./document-engine.js?v=${ASSET_VERSION}`,
   `./pagination-engine.js?v=${ASSET_VERSION}`,
   `./lexical-engine.js?v=${ASSET_VERSION}`,

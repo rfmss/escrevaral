@@ -243,3 +243,14 @@ function _installMesaPortatilEntries() {
 }
 
 _installMesaPortatilEntries();
+
+// Controladores que dependem das funções globais declaradas em app.js entram
+// somente após todos os scripts deferidos terminarem sua inicialização.
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelector('script[data-post-app-controller="palavras"]')) return;
+  const script = document.createElement('script');
+  script.src = './lexical-view-controller.js?v=20260725-v1';
+  script.defer = true;
+  script.dataset.postAppController = 'palavras';
+  document.body.appendChild(script);
+}, { once: true });
