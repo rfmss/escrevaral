@@ -1,0 +1,103 @@
+name: Relatar um erro
+description: Registre um problema concreto e reproduzível do Escrevaral.
+title: "[Erro]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar a proteger a experiência de escrita. Não inclua manuscritos, credenciais ou dados pessoais.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações iniciais
+      options:
+        - label: Testei novamente em https://escrevaral.com.
+          required: true
+        - label: Procurei uma issue equivalente.
+          required: true
+        - label: O relato descreve um comportamento observável, não apenas uma preferência visual.
+          required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área afetada
+      options:
+        - Página inicial e navegação
+        - Editor
+        - Acervo
+        - Ateliê e ferramentas
+        - Cópia de segurança e importação
+        - Prova de autoria
+        - Funcionamento sem internet
+        - Acessibilidade
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Como reproduzir
+      description: Liste o menor conjunto de passos que faz o problema aparecer.
+      placeholder: |
+        1. Abrir...
+        2. Selecionar...
+        3. Observar...
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Comportamento observado
+      description: Descreva exatamente o que aconteceu.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: Explique o resultado esperado sem propor um redesign.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Navegador, versão aproximada, sistema e dispositivo.
+      placeholder: Firefox 151, MX Linux 25, notebook
+    validations:
+      required: true
+
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequência
+      options:
+        - Sempre
+        - Frequentemente
+        - Às vezes
+        - Aconteceu uma vez
+        - Não consegui repetir
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidência adicional
+      description: Inclua mensagens de erro ou capturas apenas quando ajudarem a reproduzir. Remova dados pessoais.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto real
+      description: Explique o que a falha impede, compromete ou torna arriscado.
+    validations:
+      required: true

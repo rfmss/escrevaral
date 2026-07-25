@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usar o Escrevaral
+    url: https://escrevaral.com
+    about: Abra a versão pública atual do produto.
+  - name: Dúvidas de uso
+    url: mailto:oi@escrevaral.com
+    about: Envie dúvidas que não sejam relatos técnicos reproduzíveis.
+  - name: Política de segurança
+    url: https://github.com/rfmss/escrevaral/security/policy
+    about: Consulte o canal correto antes de relatar uma vulnerabilidade.
