@@ -23,15 +23,17 @@ def visible(locator) -> bool:
 def focus_visible(page, selector: str) -> bool:
     target = page.locator(selector).first
     target.focus()
-    return bool(page.evaluate(
-        """selector => {
-          const el = document.querySelector(selector);
-          if (!el || !el.matches(':focus-visible')) return false;
-          const style = getComputedStyle(el);
-          return style.outlineStyle !== 'none' || style.boxShadow !== 'none';
-        }""",
-        selector,
-    ))
+    return bool(
+        page.evaluate(
+            """selector => {
+              const el = document.querySelector(selector);
+              if (!el || !el.matches(':focus-visible')) return false;
+              const style = getComputedStyle(el);
+              return style.outlineStyle !== 'none' || style.boxShadow !== 'none';
+            }""",
+            selector,
+        )
+    )
 
 
 def no_overflow(page) -> tuple[bool, str]:
@@ -43,7 +45,10 @@ def no_overflow(page) -> tuple[bool, str]:
           panelClient: document.querySelector('.ob-panel')?.clientWidth || 0
         })"""
     )
-    ok = data["documentWidth"] <= data["viewportWidth"] + 1 and data["panelWidth"] <= data["panelClient"] + 1
+    ok = (
+        data["documentWidth"] <= data["viewportWidth"] + 1
+        and data["panelWidth"] <= data["panelClient"] + 1
+    )
     return ok, json.dumps(data, ensure_ascii=False)
 
 
@@ -55,33 +60,42 @@ def screenshot(page, output: Path, name: str) -> str:
     return f"screenshots/{path.name}"
 
 
-def configure_context(browser, width: int, height: int, dark: bool, seed: dict[str, str] | None = None):
+def configure_context(
+    browser,
+    width: int,
+    height: int,
+    dark: bool,
+    seed: dict[str, str | None] | None = None,
+):
     context = browser.new_context(
         viewport={"width": width, "height": height},
         reduced_motion="reduce",
         color_scheme="dark" if dark else "light",
     )
     values = dict(seed or {})
-    if dark:
-        values[DARK_KEY] = "on"
-    else:
-        values[DARK_KEY] = "off"
+    values[DARK_KEY] = "on" if dark else "off"
+    values[TERMS_KEY] = None
     payload = json.dumps(values, ensure_ascii=False)
+
+    # add_init_script executa o texto fornecido. Uma arrow function isolada seria
+    # apenas criada, sem ser chamada; por isso usamos instruções no escopo global.
     context.add_init_script(
-        f"""() => {{
-          const values = {payload};
-          for (const [key, value] of Object.entries(values)) {{
-            if (value === null) localStorage.removeItem(key);
-            else localStorage.setItem(key, value);
-          }}
-          localStorage.removeItem('escrevaral-termos-v1');
-        }}"""
+        f"""
+        const __escrevaralSeed = {payload};
+        for (const [key, value] of Object.entries(__escrevaralSeed)) {{
+          if (value === null) localStorage.removeItem(key);
+          else localStorage.setItem(key, value);
+        }}
+        """
     )
     return context
 
 
 def prepare(page, base_url: str, console_errors: list[str]) -> None:
-    page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
+    page.on(
+        "console",
+        lambda msg: console_errors.append(msg.text) if msg.type == "error" else None,
+    )
     page.on("pageerror", lambda error: console_errors.append(str(error)))
     page.goto(base_url, wait_until="domcontentloaded", timeout=30_000)
     page.wait_for_selector("#terms-overlay:not([hidden])", timeout=20_000)
@@ -129,7 +143,9 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
 
         page.locator('[data-action="accept-terms-blank"]').first.click()
         overlay.wait_for(state="hidden", timeout=8_000)
-        page.wait_for_function("key => !!localStorage.getItem(key)", arg=STORAGE_KEY, timeout=8_000)
+        page.wait_for_function(
+            "key => !!localStorage.getItem(key)", arg=STORAGE_KEY, timeout=8_000
+        )
         page.wait_for_timeout(250)
         saved_state = page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY)
         parsed = json.loads(saved_state)
@@ -140,13 +156,16 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
             issues.append("área de escrita não ficou disponível")
         if console_errors:
             issues.extend(f"console: {item}" for item in console_errors)
-        return ({
-            "viewport": viewport_name,
-            "theme": theme_name,
-            "state": "new",
-            "screenshot": image,
-            "issues": issues,
-        }, saved_state)
+        return (
+            {
+                "viewport": viewport_name,
+                "theme": theme_name,
+                "state": "new",
+                "screenshot": image,
+                "issues": issues,
+            },
+            saved_state,
+        )
     finally:
         context.close()
 
@@ -169,7 +188,9 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
             issues.append("estado de retorno não está visível")
         if "Seu texto está esperando." not in overlay.inner_text():
             issues.append("mensagem de retomada ausente")
-        if not focus_visible(page, '[data-action="accept-terms-continue"]'):
+        if visible(continue_state) and not focus_visible(
+            page, '[data-action="accept-terms-continue"]'
+        ):
             issues.append("ação de continuidade sem foco perceptível")
         overflow_ok, overflow_data = no_overflow(page)
         if not overflow_ok:
@@ -179,14 +200,14 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
         stored_raw = page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY)
         before = json.loads(stored_raw) if stored_raw else {}
         before_ids = [item.get("id") for item in before.get("manuscripts", [])]
-        debug = {
-            "stored": bool(stored_raw),
-            "manuscripts": len(before_ids),
-            "activeId": before.get("activeId"),
-            "newVisible": visible(new_state),
-            "continueVisible": visible(continue_state),
-        }
         if not visible(continue_state):
+            debug = {
+                "stored": bool(stored_raw),
+                "manuscripts": len(before_ids),
+                "activeId": before.get("activeId"),
+                "newVisible": visible(new_state),
+                "continueVisible": visible(continue_state),
+            }
             issues.append(f"diagnóstico do retorno: {json.dumps(debug, ensure_ascii=False)}")
         else:
             page.locator('[data-action="accept-terms-continue"]').click()
@@ -216,7 +237,9 @@ def write_report(output: Path, cases: list[dict]) -> None:
     generated = datetime.now(timezone.utc).isoformat()
     errors = sum(len(case["issues"]) for case in cases)
     payload = {"generated_at": generated, "cases": cases, "errors": errors}
-    (output / "resultado.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    (output / "resultado.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     lines = [
         "# Auditoria da entrada Argila",
         "",
@@ -228,21 +251,28 @@ def write_report(output: Path, cases: list[dict]) -> None:
         "|---:|---|---|---|",
     ]
     for case in cases:
-        lines.append(f"| {case['viewport']} | {case['theme']} | {case['state']} | {'aprovado' if not case['issues'] else 'falhou'} |")
+        result = "aprovado" if not case["issues"] else "falhou"
+        lines.append(
+            f"| {case['viewport']} | {case['theme']} | {case['state']} | {result} |"
+        )
     lines += ["", "## Ocorrências", ""]
     if not errors:
         lines.append("Nenhuma falha detectada.")
     else:
         for case in cases:
             for item in case["issues"]:
-                lines.append(f"- **{case['viewport']} · {case['theme']} · {case['state']}** — {item}")
+                lines.append(
+                    f"- **{case['viewport']} · {case['theme']} · {case['state']}** — {item}"
+                )
     (output / "relatorio.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default="http://127.0.0.1:8799/")
-    parser.add_argument("--output-dir", default="reports/auditoria/entry-argila-artifacts")
+    parser.add_argument(
+        "--output-dir", default="reports/auditoria/entry-argila-artifacts"
+    )
     args = parser.parse_args()
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
@@ -251,10 +281,16 @@ def main() -> None:
         browser = playwright.chromium.launch(headless=True)
         for viewport in VIEWPORTS:
             for theme in THEMES:
-                new_case, saved_state = audit_new(browser, args.base_url, output, viewport, theme)
+                new_case, saved_state = audit_new(
+                    browser, args.base_url, output, viewport, theme
+                )
                 cases.append(new_case)
                 if saved_state:
-                    cases.append(audit_returning(browser, args.base_url, output, viewport, theme, saved_state))
+                    cases.append(
+                        audit_returning(
+                            browser, args.base_url, output, viewport, theme, saved_state
+                        )
+                    )
         browser.close()
     write_report(output, cases)
     failures = [issue for case in cases for issue in case["issues"]]
