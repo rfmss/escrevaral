@@ -1,0 +1,199 @@
+/* ── Faixa móvel de situação ────────────────────────────────────────────────
+ * No celular, o rodapé deixa de participar do fluxo da página e passa a formar
+ * a borda superior do dock. Só permanecem informações da escrita: contagem,
+ * salvamento, meta e temporizador.
+ */
+
+@media (max-width: 599px) {
+  :root {
+    --mobile-dock-height: 60px;
+    --mobile-status-height: 34px;
+  }
+
+  html body .app-shell {
+    grid-template-rows: 58px minmax(0, 1fr);
+  }
+
+  html body .view {
+    padding-bottom: calc(
+      var(--mobile-dock-height) +
+      var(--mobile-status-height) +
+      env(safe-area-inset-bottom)
+    ) !important;
+  }
+
+  html body .statusbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom));
+    z-index: 24;
+    width: 100%;
+    height: var(--mobile-status-height);
+    min-height: var(--mobile-status-height);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    align-items: center;
+    justify-content: stretch;
+    gap: 4px;
+    overflow: hidden;
+    padding: 0 8px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+    background: var(--topbar-bg);
+    color: var(--muted);
+    box-shadow: 0 -4px 18px color-mix(in srgb, var(--ink) 5%, transparent);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  }
+
+  html body .statusbar > * {
+    min-width: 0;
+    max-width: none;
+  }
+
+  html body .statusbar > :not(
+    [data-stat="count"]
+  ):not(
+    [data-save-status]
+  ):not(
+    [data-goal-set-btn]
+  ):not(
+    [data-pomodoro]
+  ) {
+    display: none !important;
+  }
+
+  html body .statusbar [data-stat="count"] {
+    grid-column: 1;
+    overflow: visible;
+    white-space: nowrap;
+    text-overflow: clip;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  html body .statusbar [data-save-status] {
+    grid-column: 2;
+    overflow: visible;
+    white-space: nowrap;
+    text-overflow: clip;
+    color: var(--soft-ink);
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  html body .statusbar [data-goal-set-btn] {
+    grid-column: 3;
+    display: inline-grid !important;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    padding: 0;
+    cursor: pointer;
+  }
+
+  html body .statusbar [data-goal-set-btn]:hover,
+  html body .statusbar [data-goal-set-btn]:focus-visible {
+    background: var(--surface-low);
+    color: var(--primary);
+  }
+
+  html body .statusbar [data-goal-set-btn] .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  html body .statusbar [data-pomodoro] {
+    grid-column: 4;
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1px;
+    height: 32px;
+    min-width: 49px;
+  }
+
+  html body .statusbar [data-action="toggle-pomodoro"] {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--muted);
+    padding: 0;
+    cursor: pointer;
+  }
+
+  html body .statusbar [data-action="toggle-pomodoro"]:hover,
+  html body .statusbar [data-action="toggle-pomodoro"]:focus-visible {
+    background: var(--surface-low);
+    color: var(--primary);
+  }
+
+  html body .statusbar [data-pomodoro-icon] {
+    font-size: 16px;
+  }
+
+  html body .statusbar [data-pomodoro-display] {
+    display: inline !important;
+    white-space: nowrap;
+    color: var(--soft-ink);
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  html body .mobile-dock {
+    border-top: 0;
+  }
+
+  html body #save-hint-toast,
+  html body #delete-undo-toast,
+  html body #academia-hint-toast,
+  html body .pomodoro-done-toast {
+    bottom: calc(
+      var(--mobile-dock-height) +
+      var(--mobile-status-height) +
+      12px +
+      env(safe-area-inset-bottom)
+    ) !important;
+  }
+}
+
+@media (max-width: 350px) {
+  html body .statusbar {
+    gap: 2px;
+    padding-inline: 6px;
+  }
+
+  html body .statusbar [data-stat="count"],
+  html body .statusbar [data-save-status],
+  html body .statusbar [data-pomodoro-display] {
+    font-size: 8.5px;
+  }
+
+  html body .statusbar [data-goal-set-btn] {
+    width: 30px;
+    min-width: 30px;
+  }
+
+  html body .statusbar [data-pomodoro] {
+    min-width: 46px;
+  }
+}
+
+@media print {
+  .statusbar {
+    position: static !important;
+  }
+}
