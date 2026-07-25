@@ -3,6 +3,10 @@
  * Desktop preserva somente Escrever, Acervo e Oficina no primeiro plano.
  */
 
+.oficina-navigation-menu[hidden] {
+  display: none !important;
+}
+
 @media (min-width: 820px) {
   .topbar:has(.module-tabs[data-oficina-navigation="true"]),
   .module-tabs[data-oficina-navigation="true"] {
