@@ -1,0 +1,377 @@
+/* Clareza do Produto — Oficina e Autoria desktop.
+ * Apenas apresentação: engines, dados e ações permanecem intactos.
+ */
+
+@media (min-width: 821px) {
+  /* ── ATELIÊ: propósito, tarefa e bancada ───────────────────────────── */
+  html body .app-shell[data-view="academia"] .academy-view {
+    width: min(1120px, 100%);
+    margin-inline: auto;
+    padding-inline: clamp(28px, 4vw, 64px);
+    padding-bottom: 88px;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner {
+    max-width: 880px;
+    margin: 0 0 clamp(42px, 5vw, 66px);
+    padding: clamp(18px, 2vw, 28px) 0 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner h2 {
+    margin: 8px 0 12px;
+    font-family: var(--font-reading, "Literata", Georgia, serif);
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner > p:not(.eyebrow) {
+    max-width: 650px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner-actions {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 2px;
+    margin-top: 28px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--surface-low) 62%, transparent);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner-action {
+    min-height: 42px;
+    padding: 9px 15px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    box-shadow: none;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner-action:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--card) 64%, transparent);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner-action.is-active,
+  html body .app-shell[data-view="academia"] .academy-banner-action[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--card);
+    box-shadow: 0 1px 2px rgba(44, 34, 27, 0.08);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-banner-action .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--primary);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-section-intro {
+    max-width: 760px;
+    margin: 0 0 24px;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-section-intro h3 {
+    margin: 7px 0 8px;
+    font-family: var(--font-reading, "Literata", Georgia, serif);
+    font-size: clamp(25px, 2.4vw, 34px);
+    font-weight: 500;
+    line-height: 1.18;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-section-intro > p:last-child {
+    max-width: 680px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tools {
+    display: grid;
+    grid-template-columns: 188px minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(30px, 4vw, 58px);
+    padding: 26px 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tools-tabs {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    position: sticky;
+    top: 92px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tool-tab {
+    justify-content: flex-start;
+    min-height: 42px;
+    padding: 9px 11px;
+    border: 0;
+    border-left: 2px solid transparent;
+    border-radius: 0 5px 5px 0;
+    background: transparent;
+    color: var(--muted);
+    text-align: left;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tool-tab:hover {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--surface-low) 62%, transparent);
+  }
+
+  html body .app-shell[data-view="academia"] #at-voice:checked ~ .academy-tools-tabs label[for="at-voice"],
+  html body .app-shell[data-view="academia"] #at-rimalab:checked ~ .academy-tools-tabs label[for="at-rimalab"],
+  html body .app-shell[data-view="academia"] #at-vocab:checked ~ .academy-tools-tabs label[for="at-vocab"],
+  html body .app-shell[data-view="academia"] #at-biblioteca:checked ~ .academy-tools-tabs label[for="at-biblioteca"],
+  html body .app-shell[data-view="academia"] #at-treino:checked ~ .academy-tools-tabs label[for="at-treino"] {
+    color: var(--ink);
+    border-left-color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tool-tab .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--primary);
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tool-panel {
+    grid-column: 2;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  html body .app-shell[data-view="academia"] .academy-tool-panel > :first-child {
+    margin-top: 0;
+  }
+
+  html body .app-shell[data-view="academia"] .voice-mirror,
+  html body .app-shell[data-view="academia"] .rimalab-shell,
+  html body .app-shell[data-view="academia"] .vocab-shell,
+  html body .app-shell[data-view="academia"] .academy-library,
+  html body .app-shell[data-view="academia"] .training-shell {
+    border-color: color-mix(in srgb, var(--line) 72%, transparent);
+    background: color-mix(in srgb, var(--card) 58%, transparent);
+    box-shadow: none;
+  }
+
+  /* ── AUTORIA: jornada, não mural ───────────────────────────────────── */
+  html body .app-shell[data-view="autoria"] .certificate-paper {
+    width: min(960px, calc(100% - 72px));
+    margin-inline: auto;
+    padding: clamp(48px, 6vw, 82px) clamp(44px, 6.5vw, 92px) 96px;
+  }
+
+  html body .app-shell[data-view="autoria"] .certificate-paper > .eyebrow,
+  html body .app-shell[data-view="autoria"] .certificate-paper > h1,
+  html body .app-shell[data-view="autoria"] .certificate-paper > .section-intro,
+  html body .app-shell[data-view="autoria"] .certificate-paper > .proof-context-note,
+  html body .app-shell[data-view="autoria"] .certificate-paper > .proof-distinction {
+    max-width: 720px;
+  }
+
+  html body .app-shell[data-view="autoria"] .certificate-paper > h1 {
+    margin: 8px 0 18px;
+    font-size: clamp(38px, 4vw, 56px);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+  }
+
+  html body .app-shell[data-view="autoria"] .section-intro {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-context-note {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-distinction {
+    margin: 32px 0 48px;
+    padding: 18px 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-journey {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-step {
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-step[hidden] {
+    display: none;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-summary {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    min-height: 74px;
+    padding: 14px 0;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-summary::marker {
+    content: "";
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-number {
+    color: var(--primary);
+    font-family: var(--font-interface, "Libre Franklin", sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-title {
+    display: block;
+    color: var(--ink);
+    font-family: var(--font-reading, "Literata", Georgia, serif);
+    font-size: 20px;
+    font-weight: 550;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-description {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-chevron {
+    color: var(--muted);
+    transition: transform 160ms ease;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-step[open] .proof-clarity-chevron {
+    transform: rotate(180deg);
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-body {
+    padding: 4px 0 44px 48px;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-clarity-body > :first-child {
+    margin-top: 0;
+  }
+
+  html body .app-shell[data-view="autoria"] .certificate-grid {
+    grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(110px, 0.65fr));
+    gap: 1px;
+    margin: 0 0 22px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--line);
+  }
+
+  html body .app-shell[data-view="autoria"] .metric-block {
+    min-height: 104px;
+    padding: 18px;
+    border: 0;
+    border-radius: 0;
+    background: var(--card);
+    box-shadow: none;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-session-bar,
+  html body .app-shell[data-view="autoria"] .proof-author-section,
+  html body .app-shell[data-view="autoria"] .proof-actions,
+  html body .app-shell[data-view="autoria"] .proof-blockchain-section,
+  html body .app-shell[data-view="autoria"] .proof-validate-section,
+  html body .app-shell[data-view="autoria"] .proof-scope-note,
+  html body .app-shell[data-view="autoria"] .timeline,
+  html body .app-shell[data-view="autoria"] .version-panel,
+  html body .app-shell[data-view="autoria"] .version-list {
+    box-shadow: none;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-actions,
+  html body .app-shell[data-view="autoria"] .proof-blockchain-section,
+  html body .app-shell[data-view="autoria"] .proof-validate-section,
+  html body .app-shell[data-view="autoria"] .proof-scope-note {
+    border-color: color-mix(in srgb, var(--line) 82%, transparent);
+    background: color-mix(in srgb, var(--card) 58%, transparent);
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-actions > p,
+  html body .app-shell[data-view="autoria"] .proof-blockchain-section > p,
+  html body .app-shell[data-view="autoria"] .proof-validate-section > p,
+  html body .app-shell[data-view="autoria"] .proof-scope-note p {
+    max-width: 680px;
+  }
+
+  html body .app-shell[data-view="autoria"] .proof-actions-row {
+    margin-bottom: 14px;
+  }
+
+  /* Papel claro também dentro do Scriptorium. */
+  html[data-theme="scriptorium"] body .app-shell[data-view="academia"] .academy-view,
+  html[data-theme="scriptorium"] body .app-shell[data-view="autoria"] .certificate-paper {
+    --ink: #2f261f;
+    --soft-ink: #51483f;
+    --muted: #786e65;
+    --line: rgba(58, 44, 34, 0.18);
+    --card: #fcfaf7;
+    --surface-low: #ebe7df;
+    --surface-mid: #e2ddd4;
+    --primary: #9c5f44;
+    --primary-deep: #7a4a35;
+    --on-primary: #fcfaf7;
+    color: var(--ink);
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1120px) {
+  html body .app-shell[data-view="academia"] .academy-tools {
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  html body .app-shell[data-view="autoria"] .certificate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (forced-colors: active) and (min-width: 821px) {
+  html body .app-shell[data-view="academia"] .academy-tool-tab,
+  html body .app-shell[data-view="autoria"] .proof-clarity-summary {
+    border: 1px solid CanvasText;
+  }
+}
