@@ -12,9 +12,9 @@
 
   const scriptVersion = (() => {
     try {
-      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-oficina-nav";
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-release-candidate";
     } catch {
-      return "20260725-oficina-nav";
+      return "20260725-release-candidate";
     }
   })();
 
