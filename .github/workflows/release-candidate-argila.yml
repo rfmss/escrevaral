@@ -65,6 +65,18 @@ jobs:
           index_text = re.sub(r"\?v=[A-Za-z0-9._-]+", f"?v={version}", index_text)
           index_path.write_text(index_text, encoding="utf-8")
 
+          ui_path = Path("ui-dialog.js")
+          ui_text = ui_path.read_text(encoding="utf-8")
+          ui_text, ui_count = re.subn(
+              r"(lexical-view-controller\.js\?v=)[0-9]{8}-[A-Za-z0-9._-]+",
+              rf"\g<1>{version}",
+              ui_text,
+              count=1,
+          )
+          if ui_count != 1:
+              raise SystemExit("Versão dinâmica do lexical-view-controller não foi encontrada de forma inequívoca.")
+          ui_path.write_text(ui_text, encoding="utf-8")
+
           worker_path = Path("service-worker.js")
           replace_paths(worker_path)
           worker_text = worker_path.read_text(encoding="utf-8")
@@ -112,7 +124,7 @@ jobs:
               "- nenhuma lógica dos três arquivos foi alterada;",
               "- a ordem de carregamento no `index.html` foi preservada;",
               "- os novos caminhos foram incluídos no cache offline;",
-              "- versões de assets e cache foram promovidas.",
+              "- versões de assets, carregamento dinâmico e cache foram promovidas.",
               "",
               "## Critério para continuar",
               "",
@@ -153,10 +165,12 @@ jobs:
           node --check js/data/criterios-data.js
           node --check js/data/quotes-data.js
           node --check js/data/synonym-data.js
+          node --check ui-dialog.js
 
           grep -F 'src="js/data/criterios-data.js?v=20260725-js-data-pilot-v1"' index.html
           grep -F 'src="js/data/quotes-data.js?v=20260725-js-data-pilot-v1"' index.html
           grep -F 'src="js/data/synonym-data.js?v=20260725-js-data-pilot-v1"' index.html
+          grep -F 'lexical-view-controller.js?v=20260725-js-data-pilot-v1' ui-dialog.js
           grep -F './js/data/criterios-data.js?v=${ASSET_VERSION}' service-worker.js
           grep -F './js/data/quotes-data.js?v=${ASSET_VERSION}' service-worker.js
           grep -F './js/data/synonym-data.js?v=${ASSET_VERSION}' service-worker.js
