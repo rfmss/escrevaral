@@ -1,8 +1,13 @@
 /* Refinamento do bloco Clareza desktop: utilidades progressivas e foco por modalidade. */
 
 @media (min-width: 821px) {
-  html[data-theme="scriptorium"] {
-    --focus-ring-color: var(--ink);
+  .app-shell[data-view="editor"] {
+    --editor-focus-color: var(--focus-ring-color);
+  }
+
+  html[data-theme="scriptorium"] .app-shell[data-view="editor"] {
+    /* O ambiente é escuro, mas a folha permanece pergaminho claro. */
+    --editor-focus-color: #3a2c22;
   }
 
   .topbar-actions[data-clarity-utilities="true"] {
@@ -115,13 +120,13 @@
   html[data-input-modality="keyboard"] .app-shell[data-view="editor"] .title-input:focus-visible {
     border-color: transparent !important;
     outline: none !important;
-    box-shadow: inset 0 -2px 0 var(--focus-ring-color) !important;
+    box-shadow: inset 0 -2px 0 var(--editor-focus-color) !important;
   }
 
   html[data-input-modality="keyboard"] .app-shell[data-view="editor"] .writing-area:focus-visible {
     border-color: transparent !important;
     outline: none !important;
-    box-shadow: inset 2px 0 0 var(--focus-ring-color) !important;
+    box-shadow: inset 2px 0 0 var(--editor-focus-color) !important;
   }
 }
 
