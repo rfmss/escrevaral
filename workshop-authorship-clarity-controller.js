@@ -21,7 +21,7 @@
     document.head.appendChild(link);
   }
 
-  function makeStep(index, title, description, nodes, startsOpen = false) {
+  function makeStep(index, title, description, startsOpen = false) {
     const details = document.createElement("details");
     details.className = "proof-clarity-step";
     details.open = startsOpen;
@@ -102,7 +102,6 @@
       index + 1,
       group.title,
       group.description,
-      group.nodes,
       group.startsOpen,
     ));
     steps.forEach((step) => journey.appendChild(step));
@@ -148,33 +147,76 @@
   }
 
   function initAtelierKeyboard() {
+    const tablist = document.querySelector('[data-view-panel="academia"] .academy-tools-tabs');
     const tabs = [...document.querySelectorAll('[data-view-panel="academia"] .academy-tool-tab')];
-    if (!tabs.length) return;
+    if (!tablist || !tabs.length) return;
+
+    function inputFor(tab) {
+      return document.getElementById(tab.getAttribute("for") || "");
+    }
+
+    function activeIndex() {
+      const index = tabs.findIndex((tab) => inputFor(tab)?.checked);
+      return index >= 0 ? index : 0;
+    }
 
     function syncSelection() {
-      tabs.forEach((tab) => {
-        const input = document.getElementById(tab.getAttribute("for") || "");
-        if (input?.checked) tab.setAttribute("aria-current", "true");
-        else tab.removeAttribute("aria-current");
+      const selectedIndex = activeIndex();
+      tabs.forEach((tab, index) => {
+        const selected = index === selectedIndex;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.toggleAttribute("data-active", selected);
+        if (window.innerWidth >= DESKTOP_MIN) tab.tabIndex = selected ? 0 : -1;
       });
     }
 
-    tabs.forEach((tab) => {
+    function activate(index, { focus = true } = {}) {
+      const normalized = (index + tabs.length) % tabs.length;
+      const tab = tabs[normalized];
+      tab.click();
+      syncSelection();
+      if (focus) tab.focus({ preventScroll: true });
+    }
+
+    tabs.forEach((tab, index) => {
       tab.addEventListener("keydown", (event) => {
-        if (window.innerWidth < DESKTOP_MIN || (event.key !== "Enter" && event.key !== " ")) return;
+        if (window.innerWidth < DESKTOP_MIN) return;
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          activate(index, { focus: false });
+          return;
+        }
+        const destinations = {
+          ArrowDown: index + 1,
+          ArrowRight: index + 1,
+          ArrowUp: index - 1,
+          ArrowLeft: index - 1,
+          Home: 0,
+          End: tabs.length - 1,
+        };
+        if (!(event.key in destinations)) return;
         event.preventDefault();
-        tab.click();
+        activate(destinations[event.key]);
       });
-      const input = document.getElementById(tab.getAttribute("for") || "");
-      input?.addEventListener("change", syncSelection);
+      inputFor(tab)?.addEventListener("change", syncSelection);
     });
 
     function syncViewport() {
+      if (window.innerWidth >= DESKTOP_MIN) {
+        tablist.setAttribute("role", "tablist");
+        tablist.setAttribute("aria-label", "Ferramentas do Ateliê");
+        tabs.forEach((tab) => tab.setAttribute("role", "tab"));
+        syncSelection();
+        return;
+      }
+      tablist.removeAttribute("role");
+      tablist.removeAttribute("aria-label");
       tabs.forEach((tab) => {
-        if (window.innerWidth >= DESKTOP_MIN) tab.setAttribute("tabindex", "0");
-        else tab.removeAttribute("tabindex");
+        tab.removeAttribute("role");
+        tab.removeAttribute("aria-selected");
+        tab.removeAttribute("data-active");
+        tab.removeAttribute("tabindex");
       });
-      syncSelection();
     }
 
     window.addEventListener("resize", syncViewport, { passive: true });
