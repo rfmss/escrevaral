@@ -156,3 +156,17 @@ O menu Ambiente preserva compartilhamento, tema, foco e tela cheia; a abertura p
 O Scriptorium mantém ambiente escuro, folha clara e tinta grafite. O contraste computado de título e manuscrito sobre o papel é **12,89:1**.
 
 Nenhuma engine, chave de armazenamento, estrutura de manuscrito, formato `.esc`, exportador ou rota foi alterado.
+
+## Norte do Bloco 2
+
+O Acervo desktop deve ser lido nesta ordem:
+
+1. identidade e ação de criar;
+2. busca e ordenação;
+3. filtros secundários;
+4. retomada imediata;
+5. lista ou grade principal;
+6. inspector da seleção ativa;
+7. backup e exportações sob demanda.
+
+A intervenção não removerá filtros, inspector, exportadores ou dados. Ela reduzirá competição visual, repetição e truncamento.
