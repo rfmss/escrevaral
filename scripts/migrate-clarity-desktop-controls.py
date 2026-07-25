@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 
+# Migração idempotente: executa depois que o workflow já existe na branch.
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "20260725-clarity-desktop-v1"
 
