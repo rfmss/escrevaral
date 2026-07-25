@@ -1,221 +1,146 @@
-# Escrevaral — instruções para Claude
+# Escrevaral — instruções de manutenção
 
-Oficina literária offline para escritores brasileiros. JS vanilla + CSS puro + HTML único. Sem framework, sem IA de terceiros, sem envio de dados.
+Este arquivo contém apenas regras estáveis para agentes de código. Campanhas, estado de sessão, personas, infraestrutura administrativa e relatórios datados não são instruções permanentes do repositório.
 
-**Fonte de verdade:** a branch remota `main` de `rfmss/escrevaral`. Qualquer cópia local divergente deve ser tratada como não confiável até ser comparada explicitamente com o remoto.
-**Projeto atual:** Escrevaral. "Vereda" é legado/histórico e pode aparecer em nomes internos antigos.
-**Deploy:** push em `main` → https://escrevaral.com (GitHub Pages + Cloudflare)
-**QA local:** `python3 -m http.server 8799` + Playwright headless
-**Repositório:** github.com/rfmss/escrevaral
+## Fonte de verdade
 
-**Infraestrutura externa:**
-- automação autogerenciada para rotinas auxiliares;
-- hospedagem externa de apoio;
-- banco gerenciado para serviços opcionais;
-- monitor externo de disponibilidade;
-- analíticas sem identificação pessoal.
+- Repositório: `rfmss/escrevaral`.
+- Linha de referência: `origin/main`.
+- Uma cópia local divergente não deve ser incorporada sem comparação explícita com o remoto.
+- Produto atual: Escrevaral.
+- `Vereda` é nome legado e pode permanecer em identificadores cuja renomeação ainda exige compatibilidade.
 
-Nomes concretos, URLs administrativas e identificadores de projeto ficam em `CLAUDE.local.md`, arquivo local ignorado pelo Git. O produto principal continua offline-first e não depende desses serviços para editar ou preservar manuscritos.
+Antes de alterar arquitetura, ler `ARCHITECTURE.md` e a decisão correspondente em `docs/_decisoes/`.
 
----
+## Contrato do produto
 
-## Leitura obrigatória ao abrir
+O Escrevaral é uma oficina de escrita em HTML, CSS e JavaScript vanilla.
 
-1. `META_ENGINES_100.md` — estado de maturidade das engines; identificar qual avançar hoje.
-2. `docs/_campanhas/MARCA_CANAIS.md` — marca, autoria, canais sociais e proteção legal do criador.
-3. `docs/_decisoes/DOMINIO_DNS_EMAIL.md` — domínio, Cloudflare, HTTPS, DNS e e-mail.
-4. `docs/_campanhas/CAMPANHA.md` — posicionamento, taglines, voz do produto e roteiros de lançamento.
+Regras inegociáveis:
 
-Pergunta padrão: **qual engine vamos aproximar de 100% hoje, e por qual evidência?**
+- manuscritos permanecem no dispositivo por padrão;
+- editar, abrir, preservar e exportar textos não dependem de conta ou servidor de aplicação;
+- o produto continua útil sem internet depois da instalação;
+- texto de manuscrito não é enviado implicitamente a serviços externos;
+- a interface visível usa português brasileiro;
+- nenhuma mudança pode apagar, invalidar ou tornar inacessível o estado local existente.
 
-Relatórios ativos de auditoria:
+## Limites de escopo
 
-- `docs/_decisoes/AUDITORIA_ROUND1_JOBS_RESPONSIVIDADE.md` para decisões sobre guia de escrita, bordas das telas internas e responsividade em notebook, celular e TV vertical.
-- `reports/auditoria/vereda-dark-audit-20260524.md` para o estado atual do tema escuro Vereda, contraste, responsividade mobile e decisão de manter `scriptorium` como identificador técnico legado.
-- `reports/auditoria/hints-nativos-tooltip-clone-20260526.md` para a decisão de produto sobre não depender de dicas nativas do navegador (`title`) e migrar hints visuais para um clone próprio Alvorada/Vereda.
+- Não refatorar além do problema demonstrado.
+- Não adicionar framework, bundler ou dependência para resolver preferência estética.
+- Não criar abstração para uso hipotético.
+- Não misturar movimentação de arquivos com alteração comportamental.
+- Não alterar dados linguísticos calibrados sem evidência e auditoria específica.
+- Não publicar, fazer merge ou alterar `main` sem pedido explícito do mantenedor.
+- Não registrar credenciais, caminhos locais de segredo, URLs administrativas ou identificadores privados em issues ou documentação pública.
 
----
+## Organização atual
 
-## Banca economica de agentes
+A arquitetura vigente está documentada em `ARCHITECTURE.md`.
 
-Meta acima de tudo: economizar tokens para funcionar bem em cotas gratuitas e modelos leves, como Gemini Flash. A banca fica em `.claude/agents/`, mas so entra quando economiza erro ou retrabalho.
+Convenções principais:
 
-Regra: tarefa clara e baixo risco segue direto. Se o risco nao for obvio, chamar `banca-coordenadora`. Preferir 0 ou 1 agente; 2 so com dois riscos fortes; 3+ apenas em mudanca estrutural. Cada agente le apenas arquivos ligados ao risco e responde em ate 5 linhas.
+- `*-engine.js`: lógica de domínio, análise, transformação ou exportação;
+- `*-controller.js`: coordenação do DOM e interação;
+- `*-data.js` e `*-data.json`: índices e bases de dados;
+- `*-mode.js`: modos de comportamento do editor;
+- `service-worker.js`: infraestrutura offline e escopo raiz;
+- `scripts/`: auditores, manutenção e preparação de release;
+- `reports/`: histórico existente; novos relatórios gerados devem preferir artefatos do GitHub Actions.
 
-Mapa rapido: preservacao -> `guardiao-preservacao`; UX/copy/mobile -> `ux-escritora`; JS/CSS/cache -> `arquiteto-vanilla`; QA -> `auditor-qa`; engines -> `curador-engines`; marca -> `marca-campanha`; direitos/autoria -> `publicacao-direitos`; decisao estrutural -> `codex-par`; pastas/nomenclatura/higiene -> `arquivista`; click depth / acao fora de contexto / recurso distante / fluxo com etapas demais -> `analista-fluxo`.
+A migração para `js/core`, `js/controllers`, `js/data`, `js/engines` e `js/modes` é incremental. Atualizar todos os consumidores de caminho antes de concluir qualquer movimento.
 
-Formato: Tarefa / Risco / Agente necessario / Menor passo / Evidencia.
+## Versionamento de distribuição
 
-**Auditoria pós-implementação (obrigatória em mudanças visuais ou estruturais):** após implementar e verificar com `/verify`, invocar `codex-par` automaticamente via Agent tool — passar o diff (`git diff HEAD`), a spec acordada e os arquivos tocados. Ler o retorno e implementar os achados no mesmo turno, sem relay manual. O PO não precisa copiar nada entre agentes.
+Toda alteração distribuída em JavaScript ou CSS exige:
 
----
+1. nova versão global `?v=YYYYMMDD-slug` no `index.html`;
+2. o mesmo valor em `ASSET_VERSION` no `service-worker.js`;
+3. incremento de `CACHE_NAME`;
+4. atualização de `CORE_ASSETS` para arquivos adicionados ou movidos;
+5. atualização de carregadores dinâmicos com versão fixada;
+6. execução do auditor de coerência de versões.
 
-## Pilar inegociável: português brasileiro integral
+Um arquivo movido conta como alteração distribuída mesmo quando seu conteúdo não muda.
 
-Todo texto visível do Escrevaral deve estar em português brasileiro. Não usar estrangeirismos na interface, mesmo quando parecerem comuns em produto digital.
+`service-worker.js` permanece na raiz para preservar seu escopo padrão.
 
-Regra: benefício humano primeiro; mecanismo técnico só em detalhe, ajuda, documentação ou exportação técnica.
+## Preservação de dados
 
-| Usar na interface | Não usar na interface |
-|---|---|
-| Cópia de segurança | backup |
-| Salvamento automático / cópia automática | autosave |
-| Sem internet | offline |
-| Botão de ligar e desligar | toggle |
-| Guia da forma / estrutura do texto | blueprint |
-| Guia de escrita / ponto de partida | template |
-| Olhar do texto / painel de leitura | inspector |
-| Pistas do texto | precision |
-| Situação | status |
-| Janela | modal |
-| Dica | tooltip |
-| Baixar / trazer arquivo | download / upload |
-| Assinatura do texto | hash |
-| Dados do navegador | cache |
+- Não renomear chaves de armazenamento sem migração compatível.
+- Não limpar localStorage como solução de desenvolvimento.
+- Importações inválidas não podem destruir o acervo existente.
+- Em conflito entre abas, preservar versões quando não houver reconciliação segura.
+- Manter exportação e cópia externa como saída do armazenamento do navegador.
 
-Critério de aceite: uma escritora brasileira deve entender a tela sem saber inglês técnico e sem aprender vocabulário de desenvolvimento.
+## Interface
 
----
+Todo texto visível deve ser compreensível em português brasileiro sem exigir vocabulário de desenvolvimento.
 
-## Pilar de mobilidade: teclado físico sem atrito
+Preferir:
 
-O Escrevaral deve poder ser usado em qualquer lugar, inclusive em tablet ou celular com teclado físico conectado. Esse cenário é parte natural da oficina portátil, não um caso secundário.
+- cópia de segurança;
+- salvamento automático;
+- sem internet;
+- guia de escrita;
+- situação;
+- janela;
+- dica;
+- baixar ou trazer arquivo;
+- assinatura do texto.
 
-Regra de produto:
+Evitar estrangeirismos técnicos na interface quando houver expressão brasileira clara.
 
-- Ao abrir ou navegar por manuscritos em dispositivo touch, não forçar foco em campo editável quando a intenção pode ser apenas ler.
-- Se houver sinal de teclado físico, o editor pode receber foco automaticamente como no desktop.
-- Não prometer detecção perfeita de teclado físico: navegador e sistema operacional variam. Tratar como melhoria progressiva e silenciosa.
-- Não criar painel ou configuração visível enquanto a experiência puder ser resolvida por comportamento discreto.
-- Focos necessários para substituição, formatação e comandos de edição podem ser mantidos.
+Regras de interação:
 
-Critério de aceite: em celular/tablet sem teclado físico, abrir um manuscrito não deve empurrar o teclado virtual sem necessidade; com teclado físico, a escrita deve continuar fluida e sem passos extras.
+- não produzir rolagem horizontal da página em superfícies de escrita;
+- medir `scrollWidth > clientWidth` em 320, 390 e 430 pixels;
+- preservar foco visível para teclado;
+- não abrir teclado virtual em dispositivo touch sem intenção clara de escrita;
+- manter a folha como elemento principal quando painéis auxiliares estiverem abertos;
+- usar metáforas de oficina apenas quando orientarem uma função real.
 
----
+## Verificação mínima
 
-## Pilar de responsividade: sem rolagem horizontal em editores
+Escolher os testes pelo risco da mudança.
 
-Rolagem horizontal em telas de escrita é proibida. O editor precisa preservar a borda direita em celular, tablet e desktop; texto, toolbar, guia de escrita, modo página e editores especializados devem quebrar, empilhar ou encolher antes de empurrar a viewport.
+Mudança documental:
 
-Regra de produto:
+- conferir links, caminhos, contradições e estado atual do repositório.
 
-- `body`, `content-stage`, `.editor-split`, `.editor-paper`, `.writing-area`, `.specialized-editor` e `.paged-editor` não podem produzir rolagem horizontal em mobile.
-- Exceção permitida: menus, trilhos e listas horizontais claramente intencionais, com gesto local e sem deslocar a página inteira.
-- No mobile, painéis auxiliares como Guia de escrita devem empilhar ou virar folha/painel; nunca podem dividir a tela a ponto de esmagar a folha.
-- Toda auditoria mobile deve medir `scrollWidth > clientWidth`, não só olhar screenshot.
+Mudança em JavaScript ou CSS:
 
-Critério de aceite: em 320px, 390px e 430px, a página inteira deve manter `document.scrollingElement.scrollWidth <= document.scrollingElement.clientWidth`; qualquer overflow permitido precisa estar contido no próprio menu.
+- validar sintaxe;
+- iniciar servidor local em `localhost:8799`;
+- executar auditores relacionados;
+- executar coerência de versões;
+- executar a candidata a lançamento antes de considerar incorporação.
 
----
+Mudança estrutural:
 
-## Pilar visual: metáforas alinhadas e silenciosas
+- inventariar consumidores antes do movimento;
+- atualizar HTML, service worker, carregamentos dinâmicos, scripts, workflows e documentação ativa;
+- provar resposta HTTP dos novos caminhos;
+- verificar console, armazenamento, funcionamento sem internet e telas afetadas;
+- manter o pull request em rascunho até o gate consolidado ficar verde.
 
-O Escrevaral usa metáforas de escrita brasileiras: mesa, folha, acervo, guia, oficina, autoria, leitura e cuidado. Toda nova metáfora visual precisa nascer de uma função real da escrita, não de decoração.
+## Documentação
 
-Ler `docs/_decisoes/MAPA_ICONES_METAFORAS.md` sempre que a tarefa tocar em ícone, botão, metáfora, logo, textura, favicon ou estado visual.
+- `README.md`: recepção pública do produto.
+- `ARCHITECTURE.md`: sistema técnico atual.
+- `docs/README.md`: mapa da documentação.
+- `docs/_decisoes/`: decisões duráveis e critérios de reabertura.
+- `CHANGELOG.md`: histórico orientado a versões quando incorporado.
+- `SECURITY.md`, `SUPPORT.md` e `CONTRIBUTING.md`: governança pública quando incorporados.
 
-Regra: a metáfora deve orientar sem chamar mais atenção que o texto.
+Arquivos datados são evidência histórica, não instrução atual. Não criar uma nova fotografia da estrutura quando a mudança pode ser registrada em `ARCHITECTURE.md` e no Git.
 
-| Metáfora | Serve para | Não pode virar |
-|---|---|---|
-| Mesa | ambiente de escrita, fundo opcional, sensação de oficina | textura obrigatória, ornamento pesado, tema mais importante que a folha |
-| Folha | espaço principal de escrita e leitura | cartão decorativo, moldura grossa, vitrine |
-| Ferramenta | ação discreta e útil | botão barulhento, placa, selo, troféu |
-| Guia | companhia de ofício | formulário, tutorial invasivo, texto dentro do editor |
-| Acervo | guarda e organização | painel técnico, repositório frio |
-| Prova de autoria | cuidado com o processo humano | juridiquês, painel pericial, linguagem de sistema |
-| Foco | mesa limpa para escrever | painel de controles, régua de leitura, cronômetro dominante |
-| Ler | revisão como leitor | editor com outro nome |
+## Conduta de implementação
 
-Critérios de aceite visual:
-
-- Botões globais devem parecer ferramentas em repouso: pequenos, quietos, sem moldura pesada.
-- Abas de navegação devem orientar lugar, não disputar atenção com o manuscrito.
-- Um botão de metáfora, como "Fundo de mesa", precisa deixar claro o efeito e continuar secundário.
-- Se uma metáfora exigir explicação longa para ser entendida, ela ainda não está madura.
-- A interface deve parecer uma mesa preparada, não um painel de demonstração.
-
----
-
-## Stack
-
-| Camada | Arquivo(s) |
-|--------|-----------|
-| Entrada | `index.html` (único) |
-| Orquestração | `app.js` |
-| Estado global | `state-store.js` |  
-| Estilos | `styles.css` → `@import css/*.css` |
-| Service worker | `service-worker.js` |
-| Anatomia do livro | `anatomia-do-livro.html` — visualizador interativo do livro físico (capa, miolo, pré-texto, texto, pós-texto). Embeddado na Academia, seção Objeto Livro. Arquivo standalone com CSS/JS próprios. Não altera `index.html`. |
-
-**Engines de linguagem** (carregam antes do app.js, nesta ordem):
-```
-syntax-engine.js → punctuation-engine.js → analise-engine.js
-lexical-engine.js, rimalab-engine.js, voice-engine.js
-decolonial-engine.js, precision-engine.js, proof-engine.js
-```
-
-**Dados JSON:** `syntax-data.json`, `lexical-data.json`, `rimalab-data.json`, `analise-data.json`, `decolonial-data.json`, `criterios-data.js`, `templates-data.json`
-
----
-
-## [norma-data.json]
-
-Antes de adicionar qualquer entrada em `adjetivos_comuns`, verificar se a forma `_stripDiac()` colide com forma verbal. Formas em `-ia`, `-ava` e `-era` sao risco alto. Formas mais seguras: `-oso/a`, `-avel/-ivel`, `-ente`, `-udo/a`, `-ivo/a`.
-
----
-
-## Convenções obrigatórias
-
-**Versionamento de assets:** toda alteração em JS ou CSS exige bump da string `?v=` no `index.html` e do `ASSET_VERSION` no `service-worker.js`. Formato: `YYYYMMDD-slug`.
-
-**Cache do SW:** quando mudar `ASSET_VERSION`, incrementar `CACHE_NAME` (vereda-offline-vN).
-
-**Globals implícitos** (definidos em `state-store.js` ou `app.js`, usados por todos):
-`state`, `shell`, `writingArea`, `escapeHtml`, `countWords`, `persistState`, `getActiveManuscript`
-
-**Novos engines** são carregados via `<script defer>` no `index.html` antes do `app.js`. Sempre adicionar ao `CORE_ASSETS` do service worker.
-
----
-
-## Vocabulário do produto (usar na interface)
-
-| Usar | Não usar |
-|------|----------|
-| Nota | documento, item, post |
-| Manuscrito | conteúdo, draft |
-| Acervo | repositório, biblioteca genérica |
-| Guia de escrita | template, modelo |
-| Olhar do texto / análise local | motor, IA, processamento |
-| Prova de autoria | certificado, prova jurídica |
-| Formato | tipo |
-| Apagar nota | deletar, remover |
-| Cópia de segurança | backup |
-| Salvamento automático | autosave |
-| Sem internet | offline |
-
----
-
-## O que não fazer
-
-- Não criar arquivos `.md` de documentação sem pedido explícito
-- Não adicionar comentários no código (só se o WHY for não-óbvio)
-- Não refatorar além do escopo pedido
-- Não criar abstrações para uso hipotético futuro
-- Não oferecer alternativas ao final — executar e parar
-- Não fazer push sem pedido explícito
-- Não quebrar o estado do localStorage (estrutura em `state-store.js`)
-- Não alterar `templates-data.json` sem pedido — tem 63 templates calibrados
-
----
-
-## Compact Instructions
-
-Ao compactar, preservar obrigatoriamente:
-
-1. **Fonte de verdade:** `origin/main` de `rfmss/escrevaral`; não incorporar estado local divergente sem confirmação do mantenedor
-2. **Versionamento:** toda edição JS/CSS exige bump de `?v=YYYYMMDD-slug` em `index.html` (71 ocorrências) + `ASSET_VERSION` + `CACHE_NAME` em `service-worker.js`
-3. **Pilares inegociáveis:** português brasileiro integral; sem rolagem horizontal; metáforas silenciosas; localStorage intacto
-4. **Vocabulário:** Manuscrito não Texto; Acervo não repositório; Guia de escrita não template
-5. **Autorização corrente:** push em `main` autorizado; ciclo autônomo ativo até limite de tokens
-6. **Próximo foco:** estado das pílulas em `docs/_decisoes/AGENCIA_CONTINUIDADE_2026-06-16.md`
+- Trabalhar em branch isolada.
+- Produzir commits descritivos.
+- Manter cada pull request com um único propósito verificável.
+- Registrar riscos e evidências no corpo do pull request.
+- Interromper diante de barreira real; não converter falha de teste em falso verde.
+- Remover gatilhos, marcadores e workflows temporários antes de concluir a branch.
