@@ -21,6 +21,11 @@ def add_issue(issues: list[dict], area: str, detail: str) -> None:
     issues.append({"area": area, "detail": detail})
 
 
+def visible_label(entry) -> str:
+    labels = entry.locator("span:not(.material-symbols-outlined)")
+    return labels.last.inner_text().strip() if labels.count() else entry.inner_text().strip()
+
+
 def wait_for_controller(page: Page, expected_suffix: str) -> str:
     page.evaluate("""async () => {
       if (!('serviceWorker' in navigator)) throw new Error('service worker indisponível');
@@ -55,8 +60,9 @@ def test_mobile_entry(browser: Browser, base_url: str, output: Path) -> dict:
         entry = page.locator('[data-mesa-portatil-entry="bandeja"]')
         entry.wait_for(state="visible", timeout=8_000)
 
-        if entry.inner_text().strip() != "Mesa no celular":
-            add_issue(issues, "descoberta móvel", f"texto inesperado: {entry.inner_text()!r}")
+        label = visible_label(entry)
+        if label != "Mesa no celular":
+            add_issue(issues, "descoberta móvel", f"rótulo inesperado: {label!r}")
         if not entry.get_attribute("href") or not entry.get_attribute("href").endswith("/pegar/"):
             add_issue(issues, "descoberta móvel", f"destino inesperado: {entry.get_attribute('href')}")
 
@@ -104,8 +110,9 @@ def test_archive_entry(browser: Browser, base_url: str, output: Path) -> dict:
 
         entry = page.locator('[data-mesa-portatil-entry="acervo"]')
         entry.wait_for(state="visible", timeout=8_000)
-        if entry.inner_text().strip() != "Mesa no celular":
-            add_issue(issues, "descoberta no Acervo", f"texto inesperado: {entry.inner_text()!r}")
+        label = visible_label(entry)
+        if label != "Mesa no celular":
+            add_issue(issues, "descoberta no Acervo", f"rótulo inesperado: {label!r}")
         if not entry.get_attribute("href") or not entry.get_attribute("href").endswith("/pegar/"):
             add_issue(issues, "descoberta no Acervo", f"destino inesperado: {entry.get_attribute('href')}")
 
