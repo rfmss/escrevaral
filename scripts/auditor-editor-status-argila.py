@@ -19,6 +19,7 @@ CASES = (
 THEMES = (("alvorada", False), ("scriptorium", True))
 TERMS_KEY = "escrevaral-termos-v1"
 DARK_KEY = "vereda:dark-mode"
+EXPECTED_WORDS = "9"
 
 
 def rect(page, selector: str):
@@ -79,7 +80,7 @@ def prepare(page, base_url: str, errors: list[str]):
     page.wait_for_function("() => typeof createBlankManuscript === 'function'", timeout=20_000)
     page.evaluate(
         """() => {
-          if (!window.state?.manuscripts?.length) createBlankManuscript();
+          if (!state?.manuscripts?.length) createBlankManuscript();
           setView('editor');
         }"""
     )
@@ -89,7 +90,8 @@ def prepare(page, base_url: str, errors: list[str]):
     editor.click()
     page.keyboard.type("uma página cresce com calma e encontra sua forma", delay=4)
     page.wait_for_function(
-        "() => Number(document.querySelector('.statusbar-count')?.dataset.wordCount || 0) >= 8",
+        "expected => document.querySelector('.statusbar-count')?.dataset.wordCount === expected",
+        arg=EXPECTED_WORDS,
         timeout=8_000,
     )
     page.wait_for_function(
@@ -137,7 +139,7 @@ def audit_case(browser, base_url: str, output: Path, case, theme):
                 issues.append(f"faixa não encosta no dock: faixa={status_box}, dock={dock_box}")
             if visible(page, ".statusbar-community"):
                 issues.append("informações institucionais aparecem na faixa móvel")
-            if page.locator(".statusbar-count").get_attribute("data-word-count") != "8":
+            if page.locator(".statusbar-count").get_attribute("data-word-count") != EXPECTED_WORDS:
                 issues.append("contagem compacta não recebeu o total esperado")
 
         summary = page.locator(".statusbar-session-toggle")
@@ -147,9 +149,9 @@ def audit_case(browser, base_url: str, output: Path, case, theme):
         panel_box = rect(page, ".statusbar-session-panel")
         if not in_viewport(panel_box, width, height):
             issues.append(f"painel de sessão fora do viewport: {panel_box}")
-        if not visible(page, "[data-action='edit-word-goal']"):
+        if not visible(page, ".statusbar-session-panel [data-action='edit-word-goal']"):
             issues.append("meta não está acessível no painel")
-        if not visible(page, "[data-action='toggle-pomodoro']"):
+        if not visible(page, ".statusbar-session-panel [data-action='toggle-pomodoro']"):
             issues.append("temporizador não está acessível no painel")
         page.keyboard.press("Escape")
         if page.locator(".statusbar-session").get_attribute("open") is not None:
@@ -183,14 +185,9 @@ def write_report(output: Path, cases: list[dict]):
     payload = {"generated_at": generated, "failures": failures, "cases": cases}
     (output / "resultado.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     lines = [
-        "# Auditoria da situação do editor Argila",
-        "",
-        f"Gerada em: {generated}",
-        f"Cenários: {len(cases)}",
-        f"Falhas: {failures}",
-        "",
-        "| Tela | Tema | Resultado |",
-        "|---|---|---|",
+        "# Auditoria da situação do editor Argila", "", f"Gerada em: {generated}",
+        f"Cenários: {len(cases)}", f"Falhas: {failures}", "",
+        "| Tela | Tema | Resultado |", "|---|---|---|",
     ]
     for case in cases:
         lines.append(f"| {case['case']} | {case['theme']} | {'aprovado' if not case['issues'] else 'falhou'} |")
