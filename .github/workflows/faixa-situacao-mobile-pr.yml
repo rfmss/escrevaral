@@ -1,0 +1,100 @@
+name: Auditoria da faixa móvel
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "styles.css"
+      - "css/**"
+      - "app.js"
+      - "ui-dialog.js"
+      - "scripts/auditor-faixa-situacao-mobile.py"
+      - ".github/workflows/faixa-situacao-mobile-pr.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: faixa-mobile-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  auditar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Validar sintaxe do auditor
+        run: python -m py_compile scripts/auditor-faixa-situacao-mobile.py
+
+      - name: Iniciar Escrevaral local
+        run: |
+          python3 -m http.server 8799 > /tmp/escrevaral-http.log 2>&1 &
+          echo $! > /tmp/escrevaral-http.pid
+          for tentativa in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-http.log
+          exit 1
+
+      - name: Guarda de regressão das engines
+        id: golden
+        continue-on-error: true
+        run: python3 scripts/comparar-golden.py
+
+      - name: Medir faixa de situação
+        id: faixa
+        continue-on-error: true
+        run: |
+          python3 scripts/auditor-faixa-situacao-mobile.py \
+            --base-url http://127.0.0.1:8799/ \
+            --output-dir reports/auditoria/faixa-situacao-mobile-artifacts
+
+      - name: Preparar evidências
+        if: always()
+        run: |
+          DESTINO=artifacts/faixa-mobile
+          mkdir -p "$DESTINO"
+          cp -R reports/auditoria/faixa-situacao-mobile-artifacts "$DESTINO/" 2>/dev/null || true
+          cp /tmp/escrevaral-http.log "$DESTINO/" 2>/dev/null || true
+          find "$DESTINO" -type f -maxdepth 5 -print
+
+      - name: Guardar relatórios e capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: faixa-mobile-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: artifacts/faixa-mobile/**
+
+      - name: Consolidar resultado
+        if: always()
+        run: |
+          echo "golden=${{ steps.golden.outcome }}"
+          echo "faixa=${{ steps.faixa.outcome }}"
+          if [ "${{ steps.golden.outcome }}" != "success" ] || [ "${{ steps.faixa.outcome }}" != "success" ]; then
+            echo "A faixa móvel ainda possui falhas reproduzidas. Consulte o artefato."
+            exit 1
+          fi
+          echo "Faixa móvel aprovada em todos os estados."
