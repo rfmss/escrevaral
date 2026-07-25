@@ -51,6 +51,67 @@
   setModality("keyboard");
   ensureStyles();
 
+  function initDialogEscape() {
+    if (root.dataset.clarityDialogEscape === "true") return;
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const overlay = document.getElementById("vrda-dialog-overlay");
+      if (!overlay || overlay.hidden) return;
+      const cancel = overlay.querySelector("#vrda-dialog-cancel");
+      if (!(cancel instanceof HTMLButtonElement)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      cancel.click();
+    }, true);
+
+    root.dataset.clarityDialogEscape = "true";
+  }
+
+  function initArchiveEmptyActions() {
+    const grid = document.querySelector("[data-project-grid]");
+    if (!grid || grid.dataset.clarityEmptyActions === "true") return;
+
+    function syncEmptyAction() {
+      const empty = grid.querySelector(".archive-empty");
+      if (!empty) return;
+
+      const searchInput = document.querySelector(".archive-search input, input.archive-search");
+      const query = searchInput instanceof HTMLInputElement ? searchInput.value.trim() : "";
+      const isSearchEmpty = query.length > 0 || /nenhuma nota encontrada/i.test(empty.textContent || "");
+      const existing = empty.querySelector('[data-clarity-empty-action="clear-search"]');
+
+      if (!isSearchEmpty) {
+        existing?.remove();
+        return;
+      }
+      if (existing) return;
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "secondary-button archive-empty-action";
+      button.dataset.clarityEmptyAction = "clear-search";
+      button.textContent = "Limpar busca";
+      button.addEventListener("click", () => {
+        if (searchInput instanceof HTMLInputElement) {
+          searchInput.value = "";
+          searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+          searchInput.focus({ preventScroll: true });
+          return;
+        }
+        if (typeof window.setArchiveSearch === "function") {
+          window.setArchiveSearch("");
+        }
+      });
+      empty.appendChild(button);
+    }
+
+    const observer = new MutationObserver(syncEmptyAction);
+    observer.observe(grid, { childList: true, subtree: true });
+    grid.dataset.clarityEmptyActions = "true";
+    syncEmptyAction();
+  }
+
   function initUtilityMenu() {
     const actions = document.querySelector(".topbar-actions");
     if (!actions || actions.dataset.clarityUtilities === "true") return;
@@ -176,6 +237,8 @@
   }
 
   function boot() {
+    initDialogEscape();
+    initArchiveEmptyActions();
     initUtilityMenu();
     loadArchiveClarity();
   }
