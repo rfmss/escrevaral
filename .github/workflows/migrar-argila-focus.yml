@@ -1,0 +1,40 @@
+name: Sincronização Argila focus
+
+on:
+  push:
+    branches:
+      - refactor/brand-argila-launch
+    paths:
+      - "scripts/migrar-argila-focus.py"
+      - ".github/workflows/migrar-argila-focus.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: refactor/brand-argila-launch
+          fetch-depth: 0
+
+      - name: Aplicar migração
+        run: python3 scripts/migrar-argila-focus.py
+
+      - name: Verificar resultado
+        run: |
+          python3 scripts/auditor-asset-version.py
+          git diff --check
+          grep -q "20260725-argila-foundation-2" index.html
+          grep -q "vereda-offline-v946" service-worker.js
+
+      - name: Registrar migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "fix(a11y): distribua foco contrastante no Scriptorium" || exit 0
+          git push origin HEAD:refactor/brand-argila-launch
