@@ -1,0 +1,412 @@
+/*
+ * Escrevaral — entrada e retomada Argila.
+ * A primeira experiência funciona como porta da oficina, não como vitrine de recursos.
+ */
+
+.ob-overlay {
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: clamp(18px, 4vw, 56px);
+  background: rgba(30, 25, 21, 0.24);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.ob-panel {
+  width: min(100%, 920px);
+  max-height: none;
+  overflow: visible;
+  padding: clamp(36px, 5.2vw, 72px) clamp(28px, 5.8vw, 80px) clamp(28px, 4.2vw, 54px);
+  border: 1px solid rgba(74, 67, 59, 0.11);
+  border-radius: 12px;
+  background: var(--brand-paper, #fcfaf7);
+  color: var(--brand-ink, #1e1915);
+  box-shadow: 0 28px 80px rgba(30, 25, 21, 0.16), 0 4px 16px rgba(30, 25, 21, 0.06);
+}
+
+.ob-brand {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  margin: 0;
+}
+
+.ob-brand-mark {
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  opacity: 0.52;
+  filter: grayscale(1) sepia(0.12);
+}
+
+.ob-brand-copy {
+  min-width: 0;
+}
+
+.ob-kicker {
+  margin: 0 0 18px;
+  color: var(--brand-ash, #817970);
+  font-family: var(--argila-font-ui, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.ob-logo {
+  display: block;
+  margin: 0;
+  color: var(--brand-ink, #1e1915);
+  font-family: var(--argila-font-reading, Georgia, serif);
+  font-size: clamp(42px, 6vw, 62px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.ob-tagline {
+  margin: 24px 0 0;
+  color: var(--brand-ash, #817970);
+  font-family: var(--argila-font-reading, Georgia, serif);
+  font-size: clamp(14px, 1.35vw, 17px);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.ob-lede {
+  max-width: 38em;
+  margin: 18px 0 0;
+  color: var(--brand-graphite, #4a433b);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.ob-pillar-bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0 22px;
+  margin: clamp(44px, 6vw, 72px) 0 0;
+}
+
+.ob-pillar {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ob-pillar--mesa {
+  grid-column: span 4;
+  padding: 0 clamp(12px, 3.5vw, 44px) 0 0;
+  border-right: 1px solid var(--line);
+}
+
+.ob-pillar--guias {
+  grid-column: span 2;
+  align-self: stretch;
+  padding: 24px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--brand-bone, #ebe7df) 64%, transparent);
+}
+
+.ob-pillar--info {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-content: start;
+  margin-top: 34px;
+  padding: 18px 4px 0;
+  border-top: 1px solid var(--line);
+}
+
+.ob-pillar-icon {
+  color: var(--brand-clay, #9c5f44);
+  font-size: 20px;
+}
+
+.ob-pillar--info .ob-pillar-icon {
+  grid-row: 1 / span 2;
+  margin-top: 1px;
+  color: var(--brand-ash, #817970);
+  font-size: 18px;
+}
+
+.ob-pillar-title {
+  margin: 0;
+  color: var(--brand-ink, #1e1915);
+  font-family: var(--argila-font-reading, Georgia, serif);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.ob-pillar--mesa .ob-pillar-title {
+  margin-top: 16px;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 500;
+}
+
+.ob-pillar--info .ob-pillar-title {
+  font-family: var(--argila-font-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.ob-pillar-sub {
+  margin: 8px 0 0;
+  color: var(--brand-ash, #817970);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.ob-pillar--mesa .ob-pillar-sub {
+  max-width: 36em;
+  margin-top: 12px;
+  color: var(--brand-graphite, #4a433b);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ob-pillar--info .ob-pillar-sub {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.ob-pillar-body {
+  display: grid;
+  align-content: start;
+}
+
+.ob-pillar-body[hidden] {
+  display: none !important;
+}
+
+.ob-btn {
+  width: auto;
+  min-height: 42px;
+  margin-top: 22px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--brand-graphite, #4a433b);
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ob-btn:hover {
+  border-color: color-mix(in srgb, var(--brand-clay, #9c5f44) 52%, var(--line));
+  background: var(--brand-paper, #fcfaf7);
+  color: var(--brand-clay-deep, #7a4a35);
+  transform: none;
+}
+
+.ob-btn--primary {
+  justify-self: start;
+  min-width: 190px;
+  margin-top: 30px;
+  border-color: var(--brand-clay, #9c5f44);
+  background: var(--brand-clay, #9c5f44);
+  color: var(--brand-paper, #fcfaf7);
+  box-shadow: 0 2px 8px rgba(156, 95, 68, 0.14);
+}
+
+.ob-btn--primary:hover {
+  border-color: var(--brand-clay-deep, #7a4a35);
+  background: var(--brand-clay-deep, #7a4a35);
+  color: var(--brand-paper, #fcfaf7);
+}
+
+.ob-btn--ghost {
+  justify-self: start;
+  min-height: 34px;
+  margin-top: 10px;
+  padding: 5px 0;
+  border-color: transparent;
+  color: var(--brand-ash, #817970);
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 36%, transparent);
+  text-underline-offset: 4px;
+}
+
+.ob-btn--ghost:hover {
+  border-color: transparent;
+  background: transparent;
+  color: var(--brand-clay-deep, #7a4a35);
+}
+
+.ob-terms-note {
+  margin: clamp(34px, 5vw, 52px) 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--brand-ash, #817970);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.ob-link {
+  color: var(--brand-clay-deep, #7a4a35);
+  text-underline-offset: 3px;
+}
+
+[data-theme="scriptorium"] .ob-overlay {
+  background: rgba(0, 0, 0, 0.62);
+}
+
+[data-theme="scriptorium"] .ob-panel {
+  border-color: #382c26;
+  background: #1a1411;
+  color: #e6dcc8;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.54);
+}
+
+[data-theme="scriptorium"] .ob-logo,
+[data-theme="scriptorium"] .ob-pillar-title {
+  color: #e6dcc8;
+}
+
+[data-theme="scriptorium"] .ob-tagline,
+[data-theme="scriptorium"] .ob-pillar-sub,
+[data-theme="scriptorium"] .ob-terms-note,
+[data-theme="scriptorium"] .ob-lede {
+  color: #b7a68f;
+}
+
+[data-theme="scriptorium"] .ob-pillar--guias {
+  background: #211a16;
+}
+
+[data-theme="scriptorium"] .ob-btn:hover {
+  background: #211a16;
+}
+
+@media (max-width: 720px) {
+  .ob-overlay {
+    align-items: flex-start;
+    padding: 0;
+    background: var(--brand-paper, #fcfaf7);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .ob-panel {
+    width: 100%;
+    min-height: 100dvh;
+    padding: 42px 24px calc(30px + env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .ob-brand {
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .ob-brand-mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ob-kicker {
+    margin-bottom: 14px;
+    font-size: 9px;
+  }
+
+  .ob-logo {
+    font-size: clamp(40px, 14vw, 52px);
+  }
+
+  .ob-tagline {
+    margin-top: 20px;
+  }
+
+  .ob-lede {
+    margin-top: 14px;
+    font-size: 13px;
+  }
+
+  .ob-pillar-bento {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 44px;
+  }
+
+  .ob-pillar--mesa,
+  .ob-pillar--guias,
+  .ob-pillar--info {
+    grid-column: 1;
+  }
+
+  .ob-pillar--mesa {
+    padding: 0 0 34px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .ob-pillar--guias {
+    margin-top: 24px;
+    padding: 20px;
+  }
+
+  .ob-pillar--info {
+    margin-top: 0;
+    padding: 18px 2px;
+  }
+
+  .ob-pillar--info:first-of-type {
+    margin-top: 22px;
+  }
+
+  .ob-btn--primary {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .ob-terms-note {
+    margin-top: 26px;
+  }
+
+  [data-theme="scriptorium"] .ob-overlay {
+    background: #1a1411;
+  }
+}
+
+@media (max-height: 680px) and (min-width: 721px) {
+  .ob-overlay {
+    align-items: flex-start;
+  }
+
+  .ob-panel {
+    margin-block: 18px;
+    padding-block: 34px 28px;
+  }
+
+  .ob-pillar-bento {
+    margin-top: 32px;
+  }
+
+  .ob-terms-note {
+    margin-top: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-overlay,
+  .ob-panel,
+  .ob-btn {
+    transition: none !important;
+    animation: none !important;
+  }
+}
