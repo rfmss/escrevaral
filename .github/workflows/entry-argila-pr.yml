@@ -61,3 +61,5 @@ jobs:
           path: |
             reports/auditoria/entry-argila-artifacts/**
             /tmp/escrevaral-entry-http.log
+
+# A entrada só avança depois de provar primeira visita e retomada sem perda.
