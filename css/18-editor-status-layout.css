@@ -1,0 +1,43 @@
+/*
+ * Compatibilidade vertical do editor Argila.
+ * Avisos do sistema ocupam espaço real; a oficina usa o restante da janela.
+ */
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+body > .tab-conflict-banner,
+body > .backup-nudge-banner,
+body > .storage-recovery-banner,
+body > .update-banner {
+  flex: 0 0 auto;
+}
+
+body > .app-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  max-height: none;
+}
+
+@media (max-width: 599px) {
+  #save-hint-toast,
+  #academia-hint-toast,
+  #delete-undo-toast {
+    bottom: calc(115px + env(safe-area-inset-bottom)) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  #academia-hint-toast {
+    right: 12px !important;
+  }
+}
