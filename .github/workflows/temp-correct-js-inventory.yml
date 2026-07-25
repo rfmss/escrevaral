@@ -1,0 +1,55 @@
+name: Corrigir inventário do service worker
+
+on:
+  push:
+    branches:
+      - refactor/js-structure-inventory
+
+permissions:
+  contents: write
+
+jobs:
+  corrigir:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refactor/js-structure-inventory
+          fetch-depth: 0
+
+      - name: Corrigir classificação estrutural
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('docs/_decisoes/REAVALIACAO_ESTRUTURA_JS_2026-07-25.md')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              'A raiz contém atualmente **53 arquivos `.js`**. A condição de reavaliação foi atingida.',
+              'A raiz contém atualmente **53 arquivos `.js`**: **52 candidatos à organização em subpastas** e **1 arquivo de infraestrutura que deve permanecer na raiz** (`service-worker.js`). A condição de reavaliação foi atingida.'
+          )
+          text = text.replace('### Núcleo e utilitários — 10', '### Núcleo e utilitários — 9')
+          text = text.replace('- `service-worker.js` → `js/core/service-worker.js`\n', '')
+          marker = '## HTML da raiz e scripts carregados'
+          fixed = '''### Infraestrutura fixa na raiz — 1
+
+- `service-worker.js` permanece na raiz. Movê-lo alteraria o caminho de registro e, sem configuração explícita adicional, reduziria o escopo padrão do service worker ao novo diretório. A migração deve atualizar sua lista de assets, mas não sua localização.
+
+'''
+          if fixed not in text:
+              text = text.replace(marker, fixed + marker, 1)
+          text = text.replace(
+              'Próxima etapa autorizada: implementar a migração nesta mesma branch em commits pequenos, começando por uma categoria e mantendo compatibilidade offline comprovada.',
+              'Próxima etapa autorizada: implementar a migração dos 52 arquivos candidatos nesta mesma branch em commits pequenos, mantendo `service-worker.js` na raiz e começando por uma categoria com compatibilidade offline comprovada.'
+          )
+          path.write_text(text, encoding='utf-8')
+          Path('.github/workflows/temp-correct-js-inventory.yml').unlink()
+
+      - name: Registrar correção
+        run: |
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add docs/_decisoes/REAVALIACAO_ESTRUTURA_JS_2026-07-25.md .github/workflows/temp-correct-js-inventory.yml
+          git commit -m "fix(structure): manter service worker na raiz"
+          git push origin HEAD:refactor/js-structure-inventory
