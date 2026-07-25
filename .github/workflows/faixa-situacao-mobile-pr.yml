@@ -62,6 +62,7 @@ jobs:
         continue-on-error: true
         run: python3 scripts/comparar-golden.py
 
+      # Mede o estado atual antes de qualquer decisão visual.
       - name: Medir faixa de situação
         id: faixa
         continue-on-error: true
