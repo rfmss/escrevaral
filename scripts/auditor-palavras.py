@@ -46,16 +46,23 @@ def open_words(page: Page) -> None:
 
 def seed_manuscript(page: Page) -> None:
     page.evaluate(
-        """() => {
-          if (!getActiveManuscript()) createBlankManuscript();
-          titleInput.value = 'A casa de barro';
-          writingArea.innerHTML = '<p>A casa guardava um canto escuro. A casa respirava devagar.</p>';
-          titleInput.dispatchEvent(new Event('input', { bubbles: true }));
-          writingArea.dispatchEvent(new InputEvent('input', {
-            bubbles: true,
-            inputType: 'insertText',
-            data: null,
-          }));
+        """async () => {
+          const text = 'A casa guardava um canto escuro. A casa respirava devagar.';
+          const html = '<p>A casa guardava um canto escuro. A casa respirava devagar.</p>';
+          const manuscript = VeredaArchive.createManuscript({
+            id: 'auditoria-palavras',
+            title: 'A casa de barro',
+            text,
+            html,
+            type: 'manuscrito',
+            folder: 'Ficção',
+          });
+          state.manuscripts = [manuscript];
+          state.activeId = manuscript.id;
+          titleInput.value = manuscript.title;
+          writingArea.innerHTML = html;
+          await persistState('Massa lexical preparada');
+          await window.renderLexicalView();
         }"""
     )
     page.wait_for_function(
@@ -83,6 +90,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
     context = browser.new_context(
         viewport={"width": width, "height": height},
         reduced_motion="reduce",
+        extra_http_headers={"DNT": "1"},
     )
     context.add_init_script(TERMS_SCRIPT)
     page = context.new_page()
@@ -93,12 +101,14 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
     page.on("pageerror", lambda error: console_errors.append(str(error)))
 
     try:
+        print(f"[palavras:{viewport_name}] abrir", flush=True)
         page.goto(base_url, wait_until="domcontentloaded", timeout=30_000)
         page.wait_for_selector(".app-shell", timeout=20_000)
         page.add_style_tag(content=DISABLE_MOTION)
         wait_for_controller(page)
         seed_manuscript(page)
 
+        print(f"[palavras:{viewport_name}] vazio", flush=True)
         open_words(page)
         page.wait_for_selector('[data-lexical-empty]', state="visible", timeout=10_000)
 
@@ -110,6 +120,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             add_issue(issues, viewport_name, "estado vazio", "o cartão lexical vazio continuou visível")
         evidence["empty"] = screenshot(page, output, viewport_name, "vazio")
 
+        print(f"[palavras:{viewport_name}] palavra", flush=True)
         search = page.locator('[data-lexical-search]')
         search.fill("casa")
         page.wait_for_selector('[data-lexical-card] h2', state="visible", timeout=15_000)
@@ -122,7 +133,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
             add_issue(issues, viewport_name, "busca de palavra", "nenhuma ocorrência foi destacada no texto")
         evidence["word"] = screenshot(page, output, viewport_name, "palavra")
 
-        # Reproduz o defeito anterior: frase ativa seguida de busca digitada.
+        print(f"[palavras:{viewport_name}] frase para palavra", flush=True)
         page.evaluate(
             """async () => {
               state.lexical.selectedWord = null;
@@ -148,6 +159,7 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         assert_title(page, issues, viewport_name, "busca após frase")
         evidence["after_phrase"] = screenshot(page, output, viewport_name, "busca-apos-frase")
 
+        print(f"[palavras:{viewport_name}] limpar", flush=True)
         search.press("Escape")
         page.wait_for_selector('[data-lexical-empty]', state="visible", timeout=10_000)
         cleared = page.evaluate(
@@ -163,8 +175,8 @@ def run_case(browser: Browser, base_url: str, output: Path, viewport_data: tuple
         if overflow:
             add_issue(issues, viewport_name, "layout", "Palavras criou rolagem horizontal interna")
 
-        # O controlador novo precisa continuar presente no pacote offline.
         if viewport_name == "390":
+            print("[palavras:390] offline", flush=True)
             page.evaluate("async () => { await navigator.serviceWorker.ready; }")
             try:
                 page.wait_for_function("() => Boolean(navigator.serviceWorker.controller)", timeout=8_000)
