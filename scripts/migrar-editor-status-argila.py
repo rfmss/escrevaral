@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Migração transitória: desaparece da branch depois de sincronizar a entrega.
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
