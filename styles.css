@@ -180,6 +180,30 @@
   html body .app-shell[data-view="editor"] .format-bar.is-editorial-open .fmt-group-writing > .fmt-sep.fmt-mobile-secondary {
     display: none !important;
   }
+
+  /* Palavras deixa de manter a coluna lateral fixa de desktop. */
+  html body .app-shell[data-view="biblioteca"] .split-paper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  html body .app-shell[data-view="biblioteca"] .split-paper > div,
+  html body .app-shell[data-view="biblioteca"] .lexical-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  html body .app-shell[data-view="biblioteca"] .lexical-card {
+    position: static;
+    top: auto;
+    padding: 22px;
+  }
+
+  html body .app-shell[data-view="biblioteca"] .reading-sample {
+    overflow-wrap: anywhere;
+  }
 }
 
 @media (max-width: 560px) {
@@ -256,6 +280,9 @@ html body .app-shell[data-view="biblioteca"] .split-paper:has(.lexical-card:empt
   min-height: 44px;
   margin-top: 18px;
   padding-inline: 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .lexical-empty-state .secondary-button:hover {
