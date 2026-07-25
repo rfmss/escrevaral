@@ -46,8 +46,8 @@ def prepare_editor(page: Page) -> None:
     page.evaluate(
         """async () => {
           const paragraph = 'A casa guardava a noite em silêncio, enquanto o vento atravessava as frestas da janela.';
-          const text = Array.from({ length: 48 }, (_, index) => `${index + 1}. ${paragraph}`).join('\n\n');
-          const html = text.split('\n\n').map(item => `<p>${item}</p>`).join('');
+          const text = Array.from({ length: 48 }, (_, index) => `${index + 1}. ${paragraph}`).join('\\n\\n');
+          const html = text.split('\\n\\n').map(item => `<p>${item}</p>`).join('');
           const manuscript = VeredaArchive.createManuscript({
             id: 'auditoria-faixa-mobile',
             title: 'Caderno da noite',
