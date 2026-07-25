@@ -8,9 +8,9 @@
 
   const scriptVersion = (() => {
     try {
-      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-desktop-v1";
+      return new URL(document.currentScript?.src || location.href).searchParams.get("v") || "20260725-clarity-archive-v1";
     } catch {
-      return "20260725-clarity-desktop-v1";
+      return "20260725-clarity-archive-v1";
     }
   })();
 
