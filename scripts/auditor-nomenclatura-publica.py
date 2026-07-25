@@ -95,7 +95,7 @@ def audit_browser(failures: list[str], checks: list[str]) -> None:
             page.wait_for_selector(".app-shell")
             require(page.locator("html").get_attribute("lang") == "pt-BR", 'Documento principal sem lang="pt-BR".', failures)
 
-            theme_button = page.locator('[data-action="toggle-dark-mode"]')
+            theme_button = page.locator('[data-action="toggle-dark-mode"]:visible').first
             require(
                 theme_button.get_attribute("aria-label") == "Mudar para Scriptorium",
                 "Tema claro não oferece ‘Mudar para Scriptorium’.",
