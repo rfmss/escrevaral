@@ -6,197 +6,152 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  migrar-js-data:
-    if: github.head_ref == 'agent/js-data-pilot' && github.actor != 'github-actions[bot]'
+  validar-candidata:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 35
     steps:
-      - name: Clonar branch estrutural
+      - name: Clonar repositório
         uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
         with:
-          ref: agent/js-data-pilot
-          fetch-depth: 0
+          python-version: '3.12'
 
-      - name: Mover índices de dados e atualizar caminhos
-        shell: python
+      - name: Instalar Playwright e Chromium
         run: |
-          from pathlib import Path
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Validar sintaxe dos auditores
+        run: |
+          python -m py_compile \
+            scripts/teste-master.py \
+            scripts/auditor-release-local.py \
+            scripts/auditor-publicacao.py \
+            scripts/auditor-privacidade-rede.py \
+            scripts/auditoria-pilares.py \
+            scripts/auditor-overflow-mobile.py \
+            scripts/auditor-console-errors.py \
+            scripts/auditor-nomenclatura-publica.py
+
+      - name: Iniciar candidata local
+        run: |
+          python -m http.server 8799 > /tmp/escrevaral-release-server.log 2>&1 &
+          echo $! > /tmp/escrevaral-release-server.pid
+          for tentativa in {1..30}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-release-server.log
+          exit 1
+
+      - name: Teste Master local
+        id: master
+        shell: bash
+        run: |
+          set +e
+          python scripts/teste-master.py --sem-rede
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditoria visual da branch
+        id: local_visual
+        shell: bash
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: |
+          set +e
+          python scripts/auditor-release-local.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditoria da nomenclatura pública
+        id: naming
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-nomenclatura-publica.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditorias de produção
+        id: production
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-publicacao.py
+          pub=$?
+          python scripts/auditor-privacidade-rede.py
+          privacy=$?
+          python scripts/auditoria-pilares.py
+          pillars=$?
+          echo "exit_code=$((pub || privacy || pillars))" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Guardar relatórios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-candidate-${{ github.run_id }}
+          path: |
+            reports/teste-master/
+            reports/auditoria/
+          retention-days: 14
+
+      - name: Consolidar veredito
+        if: always()
+        env:
+          MASTER_EXIT: ${{ steps.master.outputs.exit_code }}
+          LOCAL_EXIT: ${{ steps.local_visual.outputs.exit_code }}
+          NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
+          PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
+        run: |
+          test "$MASTER_EXIT" = "0"
+          test "$LOCAL_EXIT" = "0"
+          test "$NAMING_EXIT" = "0"
+          test "$PRODUCTION_EXIT" = "0"
+          python - <<'PY'
+          import json
           import re
+          from datetime import date
+          from pathlib import Path
 
-          version = "20260725-js-data-pilot-v1"
-          mapping = {
-              "criterios-data.js": "js/data/criterios-data.js",
-              "quotes-data.js": "js/data/quotes-data.js",
-              "synonym-data.js": "js/data/synonym-data.js",
-          }
+          today = date.today().isoformat()
+          root = Path('reports/auditoria')
 
-          Path("js/data").mkdir(parents=True, exist_ok=True)
+          publication = json.loads((root / f'publicacao-offline-{today}.json').read_text(encoding='utf-8'))
+          pub_counts = publication['summary']['counts']
+          assert pub_counts.get('P0', 0) == 0, pub_counts
+          assert pub_counts.get('P1', 0) == 0, pub_counts
 
-          for old, new in mapping.items():
-              source = Path(old)
-              target = Path(new)
-              if not source.is_file():
-                  raise SystemExit(f"Arquivo de origem ausente: {old}")
-              if target.exists():
-                  raise SystemExit(f"Destino já existe: {new}")
-              source.rename(target)
+          privacy = json.loads((root / f'privacidade-rede-{today}.json').read_text(encoding='utf-8'))
+          privacy_counts = {'P0': 0, 'P1': 0, 'P2': 0}
+          for issue in privacy.get('issues', []):
+              privacy_counts[issue['severity']] += 1
+          assert privacy_counts['P0'] == 0, privacy_counts
+          assert privacy_counts['P1'] == 0, privacy_counts
+          assert privacy['result']['canary_leaked'] is False
+          assert privacy['result']['canary_in_local_storage'] is True
 
-          def replace_paths(path: Path) -> None:
-              text = path.read_text(encoding="utf-8")
-              original = text
-              for old, new in mapping.items():
-                  pattern = re.compile(rf"(?<![\w/])(?P<dot>\./)?{re.escape(old)}")
-                  text, count = pattern.subn(
-                      lambda match: ("./" if match.group("dot") else "") + new,
-                      text,
-                  )
-                  if count == 0:
-                      raise SystemExit(f"Referência não encontrada em {path}: {old}")
-              if text == original:
-                  raise SystemExit(f"Nenhuma alteração registrada em {path}")
-              path.write_text(text, encoding="utf-8")
+          pillars = (root / f'pilares-{today}.md').read_text(encoding='utf-8')
+          assert re.search(r'VERDE', pillars, re.I), pillars[:500]
 
-          index_path = Path("index.html")
-          replace_paths(index_path)
-          index_text = index_path.read_text(encoding="utf-8")
-          index_text = re.sub(r"\?v=[A-Za-z0-9._-]+", f"?v={version}", index_text)
-          index_path.write_text(index_text, encoding="utf-8")
+          local = json.loads((root / f'release-local-{today}.json').read_text(encoding='utf-8'))
+          assert local['counts']['P0'] == 0, local['counts']
+          assert local['counts']['P1'] == 0, local['counts']
 
-          ui_path = Path("ui-dialog.js")
-          ui_text = ui_path.read_text(encoding="utf-8")
-          ui_text, ui_count = re.subn(
-              r"(lexical-view-controller\.js\?v=)[0-9]{8}-[A-Za-z0-9._-]+",
-              rf"\g<1>{version}",
-              ui_text,
-              count=1,
-          )
-          if ui_count != 1:
-              raise SystemExit("Versão dinâmica do lexical-view-controller não foi encontrada de forma inequívoca.")
-          ui_path.write_text(ui_text, encoding="utf-8")
-
-          worker_path = Path("service-worker.js")
-          replace_paths(worker_path)
-          worker_text = worker_path.read_text(encoding="utf-8")
-          worker_text, cache_count = re.subn(
-              r'const CACHE_NAME = "[^"]+";',
-              'const CACHE_NAME = "vereda-offline-v955";',
-              worker_text,
-              count=1,
-          )
-          worker_text, version_count = re.subn(
-              r'const ASSET_VERSION = "[^"]+";',
-              f'const ASSET_VERSION = "{version}";',
-              worker_text,
-              count=1,
-          )
-          worker_text = re.sub(r"\?v=[A-Za-z0-9._-]+", f"?v={version}", worker_text)
-          worker_text, quote_count = re.subn(
-              r'"\./js/data/quotes-data\.js",',
-              r'`./js/data/quotes-data.js?v=${ASSET_VERSION}`,',
-              worker_text,
-              count=1,
-          )
-          if cache_count != 1 or version_count != 1 or quote_count != 1:
-              raise SystemExit("Versões ou entrada de cache não foram atualizadas de forma inequívoca.")
-          worker_path.write_text(worker_text, encoding="utf-8")
-
-          decision_lines = [
-              "# Piloto de organização JavaScript — índices de dados",
-              "",
-              "Data: 2026-07-25",
-              "",
-              "## Decisão",
-              "",
-              "Os três arquivos JavaScript que indexam dados foram movidos da raiz para `js/data/`:",
-              "",
-              "- `criterios-data.js`;",
-              "- `quotes-data.js`;",
-              "- `synonym-data.js`.",
-              "",
-              "Os arquivos JSON consumidos por `fetch()` permanecem na raiz nesta etapa. Scripts clássicos resolvem essas requisições a partir da página, e não da pasta física do arquivo JavaScript.",
-              "",
-              "## Escopo preservado",
-              "",
-              "- `service-worker.js` permanece na raiz para preservar seu escopo;",
-              "- nenhuma lógica dos três arquivos foi alterada;",
-              "- a ordem de carregamento no `index.html` foi preservada;",
-              "- os novos caminhos foram incluídos no cache offline;",
-              "- versões de assets, carregamento dinâmico e cache foram promovidas.",
-              "",
-              "## Critério para continuar",
-              "",
-              "A migração das demais categorias só deve avançar após a candidata a lançamento confirmar carregamento, console limpo, integridade de dados e funcionamento sem internet.",
-              "",
-          ]
-          Path("docs/_decisoes/PILOTO_ESTRUTURA_JS_DATA_2026-07-25.md").write_text(
-              "\n".join(decision_lines),
-              encoding="utf-8",
-          )
-
-          prior = Path("docs/_decisoes/ESTRUTURA_RAIZ.md")
-          prior_text = prior.read_text(encoding="utf-8")
-          revision_lines = [
-              "",
-              "## Revisão em 2026-07-25",
-              "",
-              "O limite de reavaliação foi atingido. O primeiro piloto moveu os índices JavaScript de dados para `js/data/`, sem alterar a lógica do produto. A decisão original de manter todos os JavaScripts na raiz deixa de valer gradualmente, por categorias verificadas e sem mover o service worker.",
-              "",
-          ]
-          if "## Revisão em 2026-07-25" not in prior_text:
-              prior.write_text(
-                  prior_text.rstrip() + "\n" + "\n".join(revision_lines),
-                  encoding="utf-8",
-              )
-
-      - name: Validar o piloto
-        run: |
-          set -euo pipefail
-
-          test ! -e criterios-data.js
-          test ! -e quotes-data.js
-          test ! -e synonym-data.js
-          test -f js/data/criterios-data.js
-          test -f js/data/quotes-data.js
-          test -f js/data/synonym-data.js
-
-          node --check js/data/criterios-data.js
-          node --check js/data/quotes-data.js
-          node --check js/data/synonym-data.js
-          node --check ui-dialog.js
-
-          grep -F 'src="js/data/criterios-data.js?v=20260725-js-data-pilot-v1"' index.html
-          grep -F 'src="js/data/quotes-data.js?v=20260725-js-data-pilot-v1"' index.html
-          grep -F 'src="js/data/synonym-data.js?v=20260725-js-data-pilot-v1"' index.html
-          grep -F 'lexical-view-controller.js?v=20260725-js-data-pilot-v1' ui-dialog.js
-          grep -F './js/data/criterios-data.js?v=${ASSET_VERSION}' service-worker.js
-          grep -F './js/data/quotes-data.js?v=${ASSET_VERSION}' service-worker.js
-          grep -F './js/data/synonym-data.js?v=${ASSET_VERSION}' service-worker.js
-
-          ! grep -F 'src="criterios-data.js' index.html
-          ! grep -F 'src="quotes-data.js' index.html
-          ! grep -F 'src="synonym-data.js' index.html
-
-          python3 scripts/auditor-asset-version.py
-
-          python3 -m http.server 8799 >/tmp/escrevaral-js-data-pilot.log 2>&1 &
-          SERVER_PID=$!
-          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
-          sleep 2
-          curl -fsS http://127.0.0.1:8799/ >/dev/null
-          curl -fsS 'http://127.0.0.1:8799/js/data/criterios-data.js?v=20260725-js-data-pilot-v1' >/dev/null
-          curl -fsS 'http://127.0.0.1:8799/js/data/quotes-data.js?v=20260725-js-data-pilot-v1' >/dev/null
-          curl -fsS 'http://127.0.0.1:8799/js/data/synonym-data.js?v=20260725-js-data-pilot-v1' >/dev/null
-
-      - name: Registrar piloto na branch
-        run: |
-          git fetch origin main
-          git show origin/main:.github/workflows/release-candidate-argila.yml > .github/workflows/release-candidate-argila.yml
-          rm -f .github/workflows/temp-js-data-pilot.yml
-          git config user.name "rfmss"
-          git config user.email "198406865+rfmss@users.noreply.github.com"
-          git add -A
-          git commit -m "refactor(structure): mover índices JavaScript para js/data"
-          git push origin HEAD:agent/js-data-pilot
+          naming = json.loads((root / 'nomenclatura-publica-artifacts' / 'report.json').read_text(encoding='utf-8'))
+          assert naming['status'] == 'aprovado', naming
+          assert not naming['failures'], naming['failures']
+          print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
+          PY
