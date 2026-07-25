@@ -22,6 +22,10 @@
       .replaceAll('"', '&quot;')
       .replaceAll("'", '&#039;');
 
+  function getLexicalState() {
+    return typeof state !== 'undefined' ? state.lexical : null;
+  }
+
   function keepModuleTitle() {
     title.textContent = 'Palavras';
   }
@@ -80,7 +84,7 @@
 
   async function enhancedRenderLexicalView() {
     const manuscript = getManuscript();
-    const lexical = global.state?.lexical;
+    const lexical = getLexicalState();
 
     if (!lexical?.selectedWord && !lexical?.selectedPhrase) {
       renderEmptyState(manuscript);
@@ -110,7 +114,7 @@
   // A busca precisa vencer uma frase analisada anteriormente. O listener em captura
   // limpa o estado obsoleto antes do listener original do aplicativo executar.
   search.addEventListener('input', () => {
-    const lexical = global.state?.lexical;
+    const lexical = getLexicalState();
     if (!lexical) return;
 
     const query = search.value.trim().toLowerCase().replace(/[^a-záéíóúâêôãõçàü\-]/g, '');
@@ -128,7 +132,7 @@
 
   search.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
-    const lexical = global.state?.lexical;
+    const lexical = getLexicalState();
     if (!lexical) return;
     lexical.selectedWord = null;
     lexical.selectedPhrase = null;
