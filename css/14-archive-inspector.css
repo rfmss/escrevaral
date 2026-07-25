@@ -73,6 +73,11 @@
   color: var(--soft-ink);
 }
 
+/* A marca é um nome próprio; versais ficam reservadas ao kicker editorial. */
+.ob-logo {
+  text-transform: none;
+}
+
 /*
  * Acervo — painel da nota como margem de trabalho.
  * A identidade da nota orienta o painel; organização e exportação ficam
