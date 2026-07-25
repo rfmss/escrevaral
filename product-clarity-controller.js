@@ -23,6 +23,15 @@
     document.head.appendChild(link);
   }
 
+  function loadArchiveClarity() {
+    if (document.querySelector('script[data-archive-clarity-controller="true"]')) return;
+    const script = document.createElement("script");
+    script.src = `./archive-clarity-controller.js?v=${encodeURIComponent(scriptVersion)}`;
+    script.defer = true;
+    script.dataset.archiveClarityController = "true";
+    document.body.appendChild(script);
+  }
+
   function setModality(next) {
     if (next === lastModality && root.dataset.inputModality === next) return;
     lastModality = next;
@@ -166,9 +175,14 @@
     syncViewport();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initUtilityMenu, { once: true });
-  } else {
+  function boot() {
     initUtilityMenu();
+    loadArchiveClarity();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
   }
 })();
