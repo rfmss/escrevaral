@@ -1,0 +1,79 @@
+name: Generalizar infraestrutura pública
+
+on:
+  push:
+    branches:
+      - governance/private-infra-docs
+
+permissions:
+  contents: write
+
+jobs:
+  generalizar:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4
+        with:
+          ref: governance/private-infra-docs
+          fetch-depth: 0
+
+      - name: Generalizar documentação e reservar arquivo local
+        shell: python
+        run: |
+          from pathlib import Path
+
+          claude = Path("CLAUDE.md")
+          text = claude.read_text(encoding="utf-8")
+
+          old_source = "**Pasta oficial de trabalho:** `/home/rafamass/escrevaral/` — esta é a pasta oficial; ignorar `/home/rafamass/Veredav3/`"
+          new_source = "**Fonte de verdade:** a branch remota `main` de `rfmss/escrevaral`. Qualquer cópia local divergente deve ser tratada como não confiável até ser comparada explicitamente com o remoto."
+          if old_source not in text:
+              raise SystemExit("Linha de pasta oficial não encontrada")
+          text = text.replace(old_source, new_source, 1)
+
+          old_infra = """**Stack de automação (URLs — consultar memória `reference-infra-n8n-hf.md`):**
+          - n8n: `rafamass-n8n.hf.space` (HF Space, mantido acordado pelo cron-job.org)
+          - Hugging Face: `huggingface.co/rafamass`
+          - Banco: Neon — projeto `falling-frog-41677820`
+          - Wake-up: `console.cron-job.org/dashboard` (conectado via GitHub)
+          - Analíticas: `escrevaral.goatcounter.com` (ver `docs/_decisoes/ANALITICAS_GOATCOUNTER.md`)"""
+          new_infra = """**Infraestrutura externa:**
+          - automação autogerenciada para rotinas auxiliares;
+          - hospedagem externa de apoio;
+          - banco gerenciado para serviços opcionais;
+          - monitor externo de disponibilidade;
+          - analíticas sem identificação pessoal.
+
+          Nomes concretos, URLs administrativas e identificadores de projeto ficam em `CLAUDE.local.md`, arquivo local ignorado pelo Git. O produto principal continua offline-first e não depende desses serviços para editar ou preservar manuscritos."""
+          if old_infra not in text:
+              raise SystemExit("Bloco de infraestrutura não encontrado")
+          text = text.replace(old_infra, new_infra, 1)
+
+          old_compact = "1. **Pasta oficial:** `/home/rafamass/escrevaral/` — ignorar `/home/rafamass/Veredav3/`"
+          new_compact = "1. **Fonte de verdade:** `origin/main` de `rfmss/escrevaral`; não incorporar estado local divergente sem confirmação do mantenedor"
+          if old_compact not in text:
+              raise SystemExit("Instrução compacta de pasta não encontrada")
+          text = text.replace(old_compact, new_compact, 1)
+          claude.write_text(text, encoding="utf-8")
+
+          ignore = Path(".gitignore")
+          ignore_text = ignore.read_text(encoding="utf-8")
+          block = """
+
+          # ── Infraestrutura local não versionada ─────────────────────────────
+          CLAUDE.local.md
+          """.strip("\n")
+          if "CLAUDE.local.md" not in ignore_text:
+              ignore.write_text(ignore_text.rstrip() + "\n\n" + block + "\n", encoding="utf-8")
+
+          Path(".github/workflows/temp-generalize-private-infra.yml").unlink()
+
+      - name: Registrar mudança atômica
+        run: |
+          git config user.name "rfmss"
+          git config user.email "198406865+rfmss@users.noreply.github.com"
+          git add CLAUDE.md .gitignore .github/workflows/temp-generalize-private-infra.yml
+          git commit -m "docs(governance): generalizar infraestrutura e reservar configuração local"
+          git push origin HEAD:governance/private-infra-docs
