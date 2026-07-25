@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v947";
-const ASSET_VERSION = "20260725-editor-status";
+const CACHE_NAME = "vereda-offline-v948";
+const ASSET_VERSION = "20260725-oficina-nav";
 
 const CORE_ASSETS = [
   "./",
@@ -12,6 +12,8 @@ const CORE_ASSETS = [
   "./css/14-archive-inspector.css?v=20260725-v4",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
+  `./css/18-editor-status-layout.css?v=${ASSET_VERSION}`,
+  `./css/19-oficina-navigation.css?v=${ASSET_VERSION}`,
   `./css/15-brand-argila.css?v=${ASSET_VERSION}`,
   `./css/wood-icons.css?v=${ASSET_VERSION}`,
   `./css/03-editor-layout.css?v=${ASSET_VERSION}`,
@@ -70,6 +72,7 @@ const CORE_ASSETS = [
   `./reader-controller.js?v=${ASSET_VERSION}`,
   `./pomodoro-controller.js?v=${ASSET_VERSION}`,
   `./editor-status-controller.js?v=${ASSET_VERSION}`,
+  `./oficina-navigation-controller.js?v=${ASSET_VERSION}`,
   `./syntax-controller.js?v=${ASSET_VERSION}`,
   `./tooltip-controller.js?v=${ASSET_VERSION}`,
   `./combo-detector.js?v=${ASSET_VERSION}`,
