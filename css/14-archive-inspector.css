@@ -1,9 +1,75 @@
 @import url("./15-brand-argila.css?v=20260725-argila-foundation");
 
-/* O barro claro permanece identificável sobre o ambiente escuro. */
+/*
+ * Scriptorium preserva a mesma ética material em baixa luz.
+ * A folha continua pergaminho; o entorno volta a ser tinta, madeira escura e barro.
+ */
 [data-theme="scriptorium"] {
+  --paper: #130f0d;
+  --surface: #1a1411;
+  --surface-low: #1e1814;
+  --surface-mid: #261e1a;
+  --surface-high: #3a2e28;
+  --card: #1c1814;
+  --topbar-bg: rgba(19, 15, 13, 0.96);
+  --sidebar-bg: #1a1411;
+  --overlay-bg: rgba(0, 0, 0, 0.58);
+  --ink: #e6dcc8;
+  --muted: #a69580;
+  --soft-ink: #c8b89a;
+  --on-primary: #130f0d;
+  --on-primary-soft: rgba(19, 15, 13, 0.22);
+  --glass-bg: rgba(19, 15, 13, 0.90);
+  --glass-bg-soft: rgba(19, 15, 13, 0.82);
+  --glass-bg-strong: rgba(19, 15, 13, 0.96);
+  --highlight-start: #1e1814;
+  --highlight-end: #1a1411;
+  --highlight-alt-end: #221a14;
+  --highlight-neutral-end: #261e1a;
+  --highlight-template-end: #201816;
+  --tip-bg: #2e2418;
+  --tip-ink: #f5e4c0;
+  --line: #382c26;
+  --primary: #d08a49;
+  --primary-deep: #e3a05f;
+  --sage: #b8a060;
+  --ochre: #d4993e;
+  --sienna: #b76447;
+  --cedar: #e6dcc8;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.48);
+  --parchment: #d4c5a9;
+  --parchment-deep: #c8b89a;
+  --paper-wash: rgba(201, 125, 50, 0.08);
+  --border-aged: rgba(201, 125, 50, 0.22);
+  --forest-ink: #1a1411;
   --focus-ring-color: #e3a05f;
   --focus-ring-contrast: #130f0d;
+}
+
+[data-theme="scriptorium"] .topbar,
+[data-theme="scriptorium"] .statusbar {
+  background: var(--topbar-bg);
+  color: var(--muted);
+}
+
+[data-theme="scriptorium"] .brand-lockup strong,
+[data-theme="scriptorium"] .tab.is-active,
+[data-theme="scriptorium"] .view h1,
+[data-theme="scriptorium"] .view h2,
+[data-theme="scriptorium"] .view h3 {
+  color: var(--ink);
+}
+
+[data-theme="scriptorium"] .topbar-actions .icon-button,
+[data-theme="scriptorium"] .topbar-actions .offline-badge,
+[data-theme="scriptorium"] .topbar-actions .install-button,
+[data-theme="scriptorium"] .topbar-actions .theme-button,
+[data-theme="scriptorium"] .tab {
+  color: var(--muted);
+}
+
+[data-theme="scriptorium"] .tab:hover {
+  color: var(--soft-ink);
 }
 
 /*
