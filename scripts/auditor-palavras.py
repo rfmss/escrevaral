@@ -44,10 +44,17 @@ def dismiss_update_banner(page: Page) -> None:
 
 
 def open_words(page: Page) -> None:
-    target = page.locator('[data-view-target="biblioteca"]:visible').first
-    target.wait_for(state="visible", timeout=10_000)
-    target.click()
+    # Palavras é uma view pública do produto. O auditor não deve depender
+    # da posição visual do controle que a abre, pois desktop e mobile usam
+    # hierarquias de navegação diferentes.
+    page.wait_for_function("() => typeof setView === 'function'", timeout=10_000)
+    page.evaluate("() => setView('biblioteca', { updateRoute: true, routeMode: 'replace' })")
     page.wait_for_selector('.app-shell[data-view="biblioteca"]', timeout=10_000)
+    page.wait_for_selector(
+        '.view[data-view-panel="biblioteca"].is-active',
+        state="visible",
+        timeout=10_000,
+    )
 
 
 def seed_manuscript(page: Page) -> None:
