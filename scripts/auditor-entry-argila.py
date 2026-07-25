@@ -52,7 +52,7 @@ def no_overflow(page) -> tuple[bool, str]:
     return ok, json.dumps(data, ensure_ascii=False)
 
 
-def screenshot(page, output: Path, name: str) -> str:
+def capture(page, output: Path, name: str) -> str:
     directory = output / "screenshots"
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / f"{name}.png"
@@ -60,13 +60,7 @@ def screenshot(page, output: Path, name: str) -> str:
     return f"screenshots/{path.name}"
 
 
-def configure_context(
-    browser,
-    width: int,
-    height: int,
-    dark: bool,
-    seed: dict[str, str | None] | None = None,
-):
+def configure_context(browser, width: int, height: int, dark: bool, seed=None):
     context = browser.new_context(
         viewport={"width": width, "height": height},
         reduced_motion="reduce",
@@ -76,9 +70,6 @@ def configure_context(
     values[DARK_KEY] = "on" if dark else "off"
     values[TERMS_KEY] = None
     payload = json.dumps(values, ensure_ascii=False)
-
-    # add_init_script executa o texto fornecido. Uma arrow function isolada seria
-    # apenas criada, sem ser chamada; por isso usamos instruções no escopo global.
     context.add_init_script(
         f"""
         const __escrevaralSeed = {payload};
@@ -102,6 +93,13 @@ def prepare(page, base_url: str, console_errors: list[str]) -> None:
     page.wait_for_timeout(250)
 
 
+def content_missing(overlay, expected: tuple[str, ...]) -> list[str]:
+    # innerText reflete text-transform. A auditoria deve validar a mensagem,
+    # não falhar porque o kicker é apresentado em versais.
+    rendered = overlay.inner_text().casefold()
+    return [text for text in expected if text.casefold() not in rendered]
+
+
 def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[dict, str]:
     viewport_name, width, height = viewport
     theme_name, dark = theme
@@ -114,8 +112,8 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
         prepare(page, base_url, console_errors)
         overlay = page.locator("#terms-overlay")
         new_state = page.locator('[data-ob-state="new"]')
-        continue_state = page.locator('[data-ob-state="continue"]')
-        expected_texts = (
+        return_state = page.locator('[data-ob-state="continue"]')
+        expected = (
             "Oficina literária digital",
             "Escrevaral",
             "Antes que as palavras sequem.",
@@ -123,13 +121,10 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
             "Abra uma página.",
             "Conhecer a oficina",
         )
-        body_text = overlay.inner_text()
-        for text in expected_texts:
-            if text not in body_text:
-                issues.append(f"texto ausente: {text}")
+        issues.extend(f"texto ausente: {text}" for text in content_missing(overlay, expected))
         if not visible(new_state):
             issues.append("estado de primeira visita não está visível")
-        if visible(continue_state):
+        if visible(return_state):
             issues.append("estado de retorno aparece junto da primeira visita")
         visible_states = page.locator('#terms-overlay [data-ob-state]:visible').count()
         if visible_states != 1:
@@ -139,7 +134,7 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
         overflow_ok, overflow_data = no_overflow(page)
         if not overflow_ok:
             issues.append(f"overflow: {overflow_data}")
-        image = screenshot(page, output, f"{viewport_name}-{theme_name}-entrada-nova")
+        image = capture(page, output, f"{viewport_name}-{theme_name}-entrada-nova")
 
         page.locator('[data-action="accept-terms-blank"]').first.click()
         overlay.wait_for(state="hidden", timeout=8_000)
@@ -154,18 +149,14 @@ def audit_new(browser, base_url: str, output: Path, viewport, theme) -> tuple[di
             issues.append(f"abrir página deveria criar 1 manuscrito; criou {len(manuscripts)}")
         if not visible(page.locator(".writing-area")):
             issues.append("área de escrita não ficou disponível")
-        if console_errors:
-            issues.extend(f"console: {item}" for item in console_errors)
-        return (
-            {
-                "viewport": viewport_name,
-                "theme": theme_name,
-                "state": "new",
-                "screenshot": image,
-                "issues": issues,
-            },
-            saved_state,
-        )
+        issues.extend(f"console: {item}" for item in console_errors)
+        return ({
+            "viewport": viewport_name,
+            "theme": theme_name,
+            "state": "new",
+            "screenshot": image,
+            "issues": issues,
+        }, saved_state)
     finally:
         context.close()
 
@@ -181,34 +172,41 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
         prepare(page, base_url, console_errors)
         overlay = page.locator("#terms-overlay")
         new_state = page.locator('[data-ob-state="new"]')
-        continue_state = page.locator('[data-ob-state="continue"]')
+        return_state = page.locator('[data-ob-state="continue"]')
         if visible(new_state):
             issues.append("estado novo aparece no retorno")
-        if not visible(continue_state):
+        if not visible(return_state):
             issues.append("estado de retorno não está visível")
-        if "Seu texto está esperando." not in overlay.inner_text():
-            issues.append("mensagem de retomada ausente")
-        if visible(continue_state) and not focus_visible(
+        issues.extend(
+            f"texto ausente: {text}"
+            for text in content_missing(overlay, ("Seu texto está esperando.",))
+        )
+        if visible(return_state) and not focus_visible(
             page, '[data-action="accept-terms-continue"]'
         ):
             issues.append("ação de continuidade sem foco perceptível")
         overflow_ok, overflow_data = no_overflow(page)
         if not overflow_ok:
             issues.append(f"overflow: {overflow_data}")
-        image = screenshot(page, output, f"{viewport_name}-{theme_name}-entrada-retorno")
+        image = capture(page, output, f"{viewport_name}-{theme_name}-entrada-retorno")
 
         stored_raw = page.evaluate("key => localStorage.getItem(key)", STORAGE_KEY)
         before = json.loads(stored_raw) if stored_raw else {}
         before_ids = [item.get("id") for item in before.get("manuscripts", [])]
-        if not visible(continue_state):
-            debug = {
-                "stored": bool(stored_raw),
-                "manuscripts": len(before_ids),
-                "activeId": before.get("activeId"),
-                "newVisible": visible(new_state),
-                "continueVisible": visible(continue_state),
-            }
-            issues.append(f"diagnóstico do retorno: {json.dumps(debug, ensure_ascii=False)}")
+        if not visible(return_state):
+            issues.append(
+                "diagnóstico do retorno: "
+                + json.dumps(
+                    {
+                        "stored": bool(stored_raw),
+                        "manuscripts": len(before_ids),
+                        "activeId": before.get("activeId"),
+                        "newVisible": visible(new_state),
+                        "continueVisible": visible(return_state),
+                    },
+                    ensure_ascii=False,
+                )
+            )
         else:
             page.locator('[data-action="accept-terms-continue"]').click()
             overlay.wait_for(state="hidden", timeout=8_000)
@@ -220,8 +218,7 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
                 issues.append("retomada alterou a coleção de manuscritos")
             if not after.get("activeId"):
                 issues.append("retomada não definiu manuscrito ativo")
-        if console_errors:
-            issues.extend(f"console: {item}" for item in console_errors)
+        issues.extend(f"console: {item}" for item in console_errors)
         return {
             "viewport": viewport_name,
             "theme": theme_name,
@@ -236,43 +233,32 @@ def audit_returning(browser, base_url: str, output: Path, viewport, theme, saved
 def write_report(output: Path, cases: list[dict]) -> None:
     generated = datetime.now(timezone.utc).isoformat()
     errors = sum(len(case["issues"]) for case in cases)
-    payload = {"generated_at": generated, "cases": cases, "errors": errors}
     (output / "resultado.json").write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps({"generated_at": generated, "cases": cases, "errors": errors}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
     )
     lines = [
-        "# Auditoria da entrada Argila",
-        "",
-        f"Gerada em: {generated}",
-        f"Casos: {len(cases)}",
-        f"Falhas: {errors}",
-        "",
-        "| Largura | Tema | Estado | Resultado |",
-        "|---:|---|---|---|",
+        "# Auditoria da entrada Argila", "", f"Gerada em: {generated}",
+        f"Casos: {len(cases)}", f"Falhas: {errors}", "",
+        "| Largura | Tema | Estado | Resultado |", "|---:|---|---|---|",
     ]
     for case in cases:
         result = "aprovado" if not case["issues"] else "falhou"
-        lines.append(
-            f"| {case['viewport']} | {case['theme']} | {case['state']} | {result} |"
-        )
+        lines.append(f"| {case['viewport']} | {case['theme']} | {case['state']} | {result} |")
     lines += ["", "## Ocorrências", ""]
     if not errors:
         lines.append("Nenhuma falha detectada.")
     else:
         for case in cases:
             for item in case["issues"]:
-                lines.append(
-                    f"- **{case['viewport']} · {case['theme']} · {case['state']}** — {item}"
-                )
+                lines.append(f"- **{case['viewport']} · {case['theme']} · {case['state']}** — {item}")
     (output / "relatorio.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--base-url", default="http://127.0.0.1:8799/")
-    parser.add_argument(
-        "--output-dir", default="reports/auditoria/entry-argila-artifacts"
-    )
+    parser.add_argument("--output-dir", default="reports/auditoria/entry-argila-artifacts")
     args = parser.parse_args()
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
@@ -281,16 +267,10 @@ def main() -> None:
         browser = playwright.chromium.launch(headless=True)
         for viewport in VIEWPORTS:
             for theme in THEMES:
-                new_case, saved_state = audit_new(
-                    browser, args.base_url, output, viewport, theme
-                )
+                new_case, saved_state = audit_new(browser, args.base_url, output, viewport, theme)
                 cases.append(new_case)
                 if saved_state:
-                    cases.append(
-                        audit_returning(
-                            browser, args.base_url, output, viewport, theme, saved_state
-                        )
-                    )
+                    cases.append(audit_returning(browser, args.base_url, output, viewport, theme, saved_state))
         browser.close()
     write_report(output, cases)
     failures = [issue for case in cases for issue in case["issues"]]
