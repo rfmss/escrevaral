@@ -16,6 +16,7 @@ THEMES = (("alvorada", False), ("scriptorium", True))
 TERMS_KEY = "escrevaral-termos-v1"
 DARK_KEY = "vereda:dark-mode"
 GROUP_VIEWS = ("academia", "biblioteca", "autoria", "cronograma")
+MENU_SELECTOR = "#oficina-navigation-menu"
 
 
 def configure(browser, width: int, height: int, dark: bool):
@@ -57,6 +58,7 @@ def prepare(page, base_url: str, errors: list[str]):
         state="attached",
         timeout=20_000,
     )
+    page.wait_for_selector(MENU_SELECTOR, state="attached", timeout=20_000)
     page.wait_for_function("() => typeof setView === 'function'", timeout=20_000)
 
 
@@ -66,6 +68,16 @@ def screenshot(page, output: Path, name: str) -> str:
     path = directory / f"{name}.png"
     page.screenshot(path=str(path), full_page=True)
     return f"screenshots/{path.name}"
+
+
+def open_menu(page, summary):
+    summary.press("Enter")
+    page.wait_for_selector(".oficina-navigation[open]", timeout=5_000)
+    page.wait_for_selector(f"{MENU_SELECTOR}:not([hidden])", state="visible", timeout=5_000)
+    page.wait_for_function(
+        "selector => getComputedStyle(document.querySelector(selector)).position === 'fixed'",
+        arg=MENU_SELECTOR,
+    )
 
 
 def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
@@ -91,28 +103,26 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
 
         details = page.locator(".oficina-navigation")
         summary = page.locator(".oficina-navigation > summary")
+        menu = page.locator(MENU_SELECTOR)
         if details.get_attribute("open") is not None:
             issues.append("Oficina inicia aberta")
+        if menu.is_visible():
+            issues.append("menu da Oficina inicia visível")
         for view in GROUP_VIEWS:
-            if page.locator(f'.oficina-navigation-menu [data-view-target="{view}"]').is_visible():
+            if page.locator(f'{MENU_SELECTOR} [data-view-target="{view}"]').is_visible():
                 issues.append(f"{view} aparece fora do segundo nível")
 
         closed_shot = screenshot(page, output, f"{name}-{theme_name}-oficina-fechada")
-        summary.press("Enter")
-        page.wait_for_selector(".oficina-navigation[open] .oficina-navigation-menu", timeout=5_000)
-        page.wait_for_function(
-            "() => getComputedStyle(document.querySelector('.oficina-navigation-menu')).position === 'fixed'"
-        )
-        menu_box = page.locator(".oficina-navigation-menu").bounding_box()
+        open_menu(page, summary)
+        menu_box = menu.bounding_box()
         if not in_viewport(menu_box, width, height):
             issues.append(f"menu fora do viewport: {menu_box}")
         open_shot = screenshot(page, output, f"{name}-{theme_name}-oficina-aberta")
 
         for index, view in enumerate(GROUP_VIEWS):
             if index:
-                summary.press("Enter")
-                page.wait_for_selector(".oficina-navigation[open]", timeout=3_000)
-            item = page.locator(f'.oficina-navigation-menu [data-view-target="{view}"]')
+                open_menu(page, summary)
+            item = page.locator(f'{MENU_SELECTOR} [data-view-target="{view}"]')
             if not item.is_visible():
                 issues.append(f"destino inacessível: {view}")
                 continue
@@ -123,16 +133,19 @@ def audit_desktop(browser, base_url: str, output: Path, viewport, theme):
             )
             if details.get_attribute("open") is not None:
                 issues.append(f"menu não fechou após abrir {view}")
+            if menu.is_visible():
+                issues.append(f"portal continua visível após abrir {view}")
             if "is-active" not in (details.get_attribute("class") or ""):
                 issues.append(f"Oficina não ficou ativa em {view}")
             if item.get_attribute("aria-current") != "page":
                 issues.append(f"item ativo sem aria-current: {view}")
 
-        summary.press("Enter")
-        page.wait_for_selector(".oficina-navigation[open]", timeout=3_000)
+        open_menu(page, summary)
         page.keyboard.press("Escape")
         if details.get_attribute("open") is not None:
             issues.append("Escape não fechou Oficina")
+        if menu.is_visible():
+            issues.append("Escape não ocultou o portal da Oficina")
         if not summary.evaluate("el => document.activeElement === el"):
             issues.append("foco não voltou ao agrupador Oficina")
     except Exception as error:
@@ -165,6 +178,8 @@ def audit_mobile(browser, base_url: str, output: Path, viewport, theme):
         prepare(page, base_url, console_errors)
         if page.locator(".module-tabs").is_visible():
             issues.append("tabs desktop aparecem junto do dock/rail")
+        if page.locator(MENU_SELECTOR).is_visible():
+            issues.append("portal desktop aparece no modo móvel")
         dock = page.locator("#mobile-dock")
         if not dock.is_visible():
             issues.append("dock/rail móvel não está visível")
