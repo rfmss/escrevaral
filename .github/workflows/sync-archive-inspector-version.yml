@@ -1,0 +1,57 @@
+name: Sincronizar versão do painel do Acervo
+
+on:
+  push:
+    branches:
+      - refactor/archive-inspector-hierarchy
+    paths:
+      - ".github/workflows/sync-archive-inspector-version.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  sincronizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar a branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: refactor/archive-inspector-hierarchy
+          fetch-depth: 0
+
+      - name: Atualizar identificadores de distribuição
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          anterior = "20260725-palavras"
+          nova = "20260725-archive-inspector"
+          arquivos = [Path("index.html"), Path("service-worker.js"), Path("ui-dialog.js")]
+
+          for caminho in arquivos:
+              texto = caminho.read_text(encoding="utf-8")
+              if anterior not in texto:
+                  raise SystemExit(f"versão anterior ausente em {caminho}")
+              caminho.write_text(texto.replace(anterior, nova), encoding="utf-8")
+
+          index = Path("index.html").read_text(encoding="utf-8")
+          if anterior in index or nova not in index:
+              raise SystemExit("index.html não foi atualizado de forma coerente")
+          PY
+
+      - name: Remover a migração temporária
+        run: rm .github/workflows/sync-archive-inspector-version.yml
+
+      - name: Validar coerência antes do commit
+        run: python3 scripts/auditor-asset-version.py
+        env:
+          GITHUB_BASE_REF: main
+
+      - name: Gravar a migração
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html service-worker.js ui-dialog.js .github/workflows/sync-archive-inspector-version.yml
+          git commit -m "chore(distribuição): sincronize a versão do painel do Acervo"
+          git push origin HEAD:refactor/archive-inspector-hierarchy
