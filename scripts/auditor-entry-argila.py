@@ -66,15 +66,16 @@ def configure_context(browser, width: int, height: int, dark: bool, seed: dict[s
         values[DARK_KEY] = "on"
     else:
         values[DARK_KEY] = "off"
+    payload = json.dumps(values, ensure_ascii=False)
     context.add_init_script(
-        """values => {
-          for (const [key, value] of Object.entries(values)) {
+        f"""() => {{
+          const values = {payload};
+          for (const [key, value] of Object.entries(values)) {{
             if (value === null) localStorage.removeItem(key);
             else localStorage.setItem(key, value);
-          }
+          }}
           localStorage.removeItem('escrevaral-termos-v1');
-        }""",
-        values,
+        }}"""
     )
     return context
 
