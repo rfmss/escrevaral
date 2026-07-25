@@ -1,0 +1,73 @@
+name: Sugerir uma melhoria
+description: Proponha uma mudança de produto ligada a uma necessidade real de escrita.
+title: "[Sugestão]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        O Escrevaral evita adicionar funções sem necessidade demonstrada. Descreva primeiro a situação de escrita; deixe a solução para depois.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações iniciais
+      options:
+        - label: Procurei uma sugestão equivalente.
+          required: true
+        - label: A proposta não exige enviar manuscritos para serviços externos.
+          required: true
+        - label: Li a política de participação em CONTRIBUTING.md.
+          required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Quem encontra essa necessidade
+      options:
+        - Pessoa que escreve ficção
+        - Pessoa que escreve poesia
+        - Pessoa que estuda
+        - Pessoa que ensina
+        - Pessoa que revisa
+        - Pessoa que usa tecnologia assistiva
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: situation
+    attributes:
+      label: Situação concreta
+      description: O que a pessoa está tentando fazer quando encontra a dificuldade?
+    validations:
+      required: true
+
+  - type: textarea
+    id: limitation
+    attributes:
+      label: Limitação atual
+      description: O que o Escrevaral não permite, esconde ou torna trabalhoso hoje?
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado desejado
+      description: Descreva o benefício esperado sem exigir uma implementação específica.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Alternativa usada hoje
+      description: Há alguma forma de contornar a limitação? Qual é o custo desse caminho?
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Restrições que devem ser preservadas
+      description: Considere privacidade, uso sem internet, português brasileiro, acessibilidade e preservação do texto.
