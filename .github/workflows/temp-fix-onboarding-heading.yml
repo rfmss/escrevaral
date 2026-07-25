@@ -25,8 +25,8 @@ jobs:
 
           path = Path('index.html')
           text = path.read_text(encoding='utf-8')
-          old = '<h1 class="ob-logo">Escrevaral</h1>'
-          new = '<p class="ob-logo">Escrevaral</p>'
+          old = '<h1 class="ob-logo" id="ob-panel-title">Escrevaral</h1>'
+          new = '<p class="ob-logo" id="ob-panel-title">Escrevaral</p>'
           count = text.count(old)
           if count != 1:
               raise SystemExit(f'Esperada 1 ocorrência do H1 global; encontradas {count}.')
