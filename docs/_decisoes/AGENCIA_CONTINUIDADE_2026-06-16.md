@@ -172,29 +172,51 @@ Dono temporário:
 
 Objetivo:
 
-- reforçar que o painel direito serve para editar metadados e exportar, não para competir com o card principal
-
-Possível melhoria:
-
-- cabeçalho mais forte para a nota ativa
-- separação visual maior entre `Detalhes` e `Exportar`
+- reforçar que o painel direito serve para editar metadados e exportar, não para competir com a lista de manuscritos
 
 Status:
 
-- **pronto para execução**
+- **encerrada** (2026-07-25, PR #97)
+
+Resultado:
+
+- identidade da nota ativa passou a abrir o painel com título e formato em hierarquia editorial;
+- o painel deixou de parecer um segundo cartão e virou uma margem de trabalho separada por um divisor discreto;
+- `Abrir no editor` permanece como ação principal;
+- `Detalhes` e `Exportar` foram separados por ritmo, tipografia e revelação progressiva;
+- exportações foram organizadas em grade responsiva;
+- comportamento móvel, dados, exportadores e persistência permaneceram intactos;
+- validações de versões, integridade, Palavras, Mesa no celular, foco, overflow, console, engines e smoke foram aprovadas.
 
 Dono temporário:
 
 - frontend de superfície
 
+### PIL-MOB-01 — Faixa de situação no celular
+
+Objetivo:
+
+- reduzir a massa persistente abaixo da escrita sem esconder contagem, salvamento, meta e temporizador
+
+Status:
+
+- **em execução** (PR #96 — etapa de medição antes da decisão visual)
+
+Condição de parada:
+
+- não abrir outra pílula de superfície enquanto a auditoria da faixa móvel não produzir uma correção pequena, verificável e sem sobreposição com o dock
+
+Dono temporário:
+
+- frontend de superfície + arquitetura de informação + QA
+
 ---
 
-## Sequência recomendada
+## Sequência atual
 
-1. `PIL-ARQ-01`
-2. auditoria visual rápida do `Arquivo`
-3. `PIL-NAV-01` ou decisão explícita de manter a diferença
-4. nova rodada do `Ateliê`
+1. concluir e validar `PIL-MOB-01` no PR #96;
+2. revisar a rota atual do produto antes de escolher nova superfície;
+3. não reabrir Mesa no celular, Palavras ou o hub do Ateliê sem nova evidência, pois essas entregas já foram concluídas e protegidas por workflows próprios.
 
 ---
 
@@ -202,6 +224,6 @@ Dono temporário:
 
 Se uma pílula for executada, o agente da vez deve:
 
-- atualizar este arquivo com status novo
+- atualizar status da pílula
 - deixar o próximo passo escrito
 - não assumir que o usuário viu a conversa anterior
