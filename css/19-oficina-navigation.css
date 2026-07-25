@@ -4,10 +4,18 @@
  */
 
 @media (min-width: 820px) {
+  .topbar:has(.module-tabs[data-oficina-navigation="true"]),
+  .module-tabs[data-oficina-navigation="true"] {
+    overflow: visible;
+  }
+
+  .topbar:has(.module-tabs[data-oficina-navigation="true"]) {
+    isolation: isolate;
+  }
+
   .module-tabs[data-oficina-navigation="true"] {
     justify-content: center;
     gap: clamp(12px, 1.8vw, 28px);
-    overflow: visible;
   }
 
   .module-tabs[data-oficina-navigation="true"] > .tab,
@@ -45,6 +53,7 @@
 
   .oficina-navigation {
     position: relative;
+    z-index: 3;
     flex: 0 0 auto;
   }
 
@@ -71,7 +80,7 @@
     position: absolute;
     top: calc(100% + 11px);
     left: 50%;
-    z-index: 90;
+    z-index: 100;
     width: min(330px, calc(100vw - 32px));
     display: grid;
     gap: 2px;
