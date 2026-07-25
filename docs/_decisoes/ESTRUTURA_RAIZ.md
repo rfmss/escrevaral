@@ -50,3 +50,7 @@ Resultado: três pontos de sincronização em vez de dois, sem ganho funcional p
 ## Quando revisitar
 
 Se o projeto crescer a ponto de ter mais de 50 arquivos JS na raiz, ou se houver um bundler/build step, aí faz sentido reorganizar. Hoje não.
+
+## Revisão em 2026-07-25
+
+O limite de reavaliação foi atingido. O primeiro piloto moveu os índices JavaScript de dados para `js/data/`, sem alterar a lógica do produto. A decisão original de manter todos os JavaScripts na raiz deixa de valer gradualmente, por categorias verificadas e sem mover o service worker.
