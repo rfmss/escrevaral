@@ -70,22 +70,8 @@
     menu.setAttribute("aria-label", "Ferramentas da Oficina");
     menu.hidden = true;
 
-    grouped.forEach((button) => {
-      const view = button.dataset.viewTarget;
-      makeItemCopy(button, view);
-      button.addEventListener("click", () => {
-        details.open = false;
-      });
-      menu.appendChild(button);
-    });
-
-    details.append(summary);
-    tabs.replaceChildren(editor, archive, details);
-    document.body.appendChild(menu);
-    tabs.dataset.oficinaNavigation = "true";
-
     function positionMenu() {
-      if (!details.open || window.innerWidth < 820) return;
+      if (!details.open || menu.hidden || window.innerWidth < 820) return;
       const anchor = summary.getBoundingClientRect();
       const width = Math.min(330, Math.max(240, window.innerWidth - 32));
       const desiredLeft = anchor.left + anchor.width / 2 - width / 2;
@@ -94,6 +80,26 @@
       menu.style.left = `${left}px`;
       menu.style.top = `${Math.round(anchor.bottom + 9)}px`;
     }
+
+    function closeMenu({ restoreFocus = false } = {}) {
+      // Oculta primeiro para não depender da ordem assíncrona do evento toggle.
+      menu.hidden = true;
+      summary.setAttribute("aria-expanded", "false");
+      if (details.open) details.open = false;
+      if (restoreFocus) summary.focus();
+    }
+
+    grouped.forEach((button) => {
+      const view = button.dataset.viewTarget;
+      makeItemCopy(button, view);
+      button.addEventListener("click", () => closeMenu());
+      menu.appendChild(button);
+    });
+
+    details.append(summary);
+    tabs.replaceChildren(editor, archive, details);
+    document.body.appendChild(menu);
+    tabs.dataset.oficinaNavigation = "true";
 
     function syncActive() {
       const current = shell.dataset.view || "editor";
@@ -115,25 +121,35 @@
     syncActive();
 
     details.addEventListener("toggle", () => {
-      summary.setAttribute("aria-expanded", String(details.open));
-      menu.hidden = !details.open;
-      if (details.open) requestAnimationFrame(positionMenu);
+      if (details.open && window.innerWidth >= 820) {
+        menu.hidden = false;
+        summary.setAttribute("aria-expanded", "true");
+        requestAnimationFrame(positionMenu);
+        return;
+      }
+      menu.hidden = true;
+      summary.setAttribute("aria-expanded", "false");
     });
     summary.setAttribute("aria-expanded", "false");
 
-    window.addEventListener("resize", positionMenu, { passive: true });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 820) {
+        closeMenu();
+        return;
+      }
+      positionMenu();
+    }, { passive: true });
     window.addEventListener("scroll", positionMenu, { passive: true, capture: true });
 
     document.addEventListener("pointerdown", (event) => {
       if (!details.open) return;
-      if (!details.contains(event.target) && !menu.contains(event.target)) details.open = false;
+      if (!details.contains(event.target) && !menu.contains(event.target)) closeMenu();
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape" || !details.open) return;
       event.preventDefault();
-      details.open = false;
-      summary.focus();
+      closeMenu({ restoreFocus: true });
     });
   }
 
