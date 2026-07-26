@@ -1,6 +1,7 @@
 name: Fundação dos componentes do Design System
 
 # Gate exclusivo da fundação; não valida migrações de telas de produto.
+# O harness permanece em reports/ e nunca integra a superfície publicada.
 on:
   pull_request:
     branches:
