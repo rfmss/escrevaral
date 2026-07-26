@@ -1,5 +1,6 @@
 name: Aplicar fronteira do repositório público
 
+# Disparo temporário e isolado para materializar a limpeza na branch.
 on:
   push:
     branches:
