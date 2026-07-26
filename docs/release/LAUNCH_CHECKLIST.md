@@ -1,6 +1,6 @@
 # Checklist de lançamento 1.0.0
 
-Estado: baseline `1.0.0-rc.1` em estabilização final.
+Estado: baseline `1.0.0-rc.1` validada; promoção final em preparação.
 
 Este checklist é binário. Um item só é concluído quando há evidência observável; intenção ou aparência não bastam.
 
@@ -13,7 +13,7 @@ Este checklist é binário. Um item só é concluído quando há evidência obse
 - [x] Arquitetura atual possui fonte de verdade única.
 - [x] Relatórios gerados não são versionados.
 - [x] Fronteira pública possui auditor automático.
-- [ ] `VERSION`, `README.md`, `CHANGELOG.md` e documentos de release coerentes na `main`.
+- [x] `VERSION`, `README.md`, `CHANGELOG.md` e documentos de release coerentes na `main`.
 
 ## 2. Produto e dados
 
@@ -40,20 +40,20 @@ Este checklist é binário. Um item só é concluído quando há evidência obse
 - [x] Manifesto, ícones, sitemap e robots estão disponíveis.
 - [x] Domínio canônico é `escrevaral.com`.
 - [x] Candidata de lançamento sem P0/P1.
-- [ ] Verificação pós-merge da baseline na produção concluída.
-- [ ] Teste de atualização da PWA da versão anterior para a baseline concluído.
+- [x] Verificação pós-merge da baseline na produção concluída.
+- [x] Atualização da PWA remove caches antigos, preserva caches não relacionados e recarrega offline.
 
 ## 5. Comunicação de versão
 
-- [ ] `CHANGELOG.md` encerra a candidata `1.0.0-rc.1`.
-- [ ] `README.md` aponta para a versão e o checklist atuais.
-- [ ] Limitações P2 conhecidas permanecem publicadas.
+- [x] `CHANGELOG.md` registra e encerra a candidata `1.0.0-rc.1`.
+- [x] `README.md` aponta para a versão e o checklist atuais.
+- [x] Limitações P2 conhecidas permanecem publicadas.
 - [ ] Commit final de promoção identificado.
 - [ ] Tag ou GitHub Release `v1.0.0` criada após o último gate verde.
 
 ## Saída
 
-A promoção para `1.0.0` exige todos os itens acima concluídos e uma última execução verde da candidata de lançamento sobre o diff final.
+A promoção para `1.0.0` exige os dois itens finais acima, a atualização da documentação para a versão estável e uma última execução verde da candidata sobre o diff de promoção.
 
 Depois da promoção:
 
