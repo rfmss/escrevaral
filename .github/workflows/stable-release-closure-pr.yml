@@ -1,0 +1,82 @@
+name: Encerramento da versão estável
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/release/CLOSURE_1.0.0.md"
+      - "docs/release/README.md"
+      - ".github/workflows/stable-release-closure-pr.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stable-release-closure-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório e tags
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Verificar tag e commit de promoção
+        run: |
+          set -euo pipefail
+          git fetch --tags --force
+          expected="4186776a9dfb1fa408bdf1387cac82a2ce12e9cd"
+          actual="$(git rev-list -n 1 v1.0.0)"
+          test "$actual" = "$expected"
+          echo "Tag v1.0.0 aponta para $actual"
+
+      - name: Verificar GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p reports/auditoria/stable-release-closure-artifacts
+          gh release view v1.0.0 \
+            --repo "$GITHUB_REPOSITORY" \
+            --json tagName,name,isDraft,isPrerelease,isLatest,publishedAt,targetCommitish,url \
+            > reports/auditoria/stable-release-closure-artifacts/release.json
+
+          jq -e '.tagName == "v1.0.0"' reports/auditoria/stable-release-closure-artifacts/release.json
+          jq -e '.name == "Escrevaral 1.0.0 — Argila"' reports/auditoria/stable-release-closure-artifacts/release.json
+          jq -e '.isDraft == false' reports/auditoria/stable-release-closure-artifacts/release.json
+          jq -e '.isPrerelease == false' reports/auditoria/stable-release-closure-artifacts/release.json
+          jq -e '.publishedAt != null' reports/auditoria/stable-release-closure-artifacts/release.json
+
+      - name: Verificar produção
+        run: |
+          set -euo pipefail
+          mkdir -p reports/auditoria/stable-release-closure-artifacts
+          curl --fail --silent --show-error --location \
+            https://escrevaral.com/ \
+            --output reports/auditoria/stable-release-closure-artifacts/production.html
+          grep -q 'Escrevaral' reports/auditoria/stable-release-closure-artifacts/production.html
+          grep -q 'data-view-target="editor"' reports/auditoria/stable-release-closure-artifacts/production.html
+          grep -q 'data-view-target="arquivo"' reports/auditoria/stable-release-closure-artifacts/production.html
+
+      - name: Registrar veredito
+        run: |
+          cat > reports/auditoria/stable-release-closure-artifacts/veredito.md <<'EOF'
+          # Encerramento 1.0.0 aprovado
+
+          - tag `v1.0.0` ligada ao commit de promoção;
+          - GitHub Release publicada, não rascunho e não pré-release;
+          - produção acessível com navegação essencial presente.
+          EOF
+
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stable-release-closure-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 30
+          path: reports/auditoria/stable-release-closure-artifacts/**
