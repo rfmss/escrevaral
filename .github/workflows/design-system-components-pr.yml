@@ -69,21 +69,15 @@ jobs:
           exit 1
 
       - name: Auditar componentes compartilhados
-        id: components
-        continue-on-error: true
         run: |
           python scripts/auditor-design-system-components.py \
             --base-url http://127.0.0.1:8799/reports/auditoria/design-system-components-harness/index.html \
             --output-dir reports/auditoria/design-system-components-artifacts
 
       - name: Auditar versionamento de assets
-        id: assets
-        continue-on-error: true
         run: python scripts/auditor-asset-version.py
 
       - name: Auditar fronteira pública
-        id: boundary
-        continue-on-error: true
         run: python scripts/auditor-repository-boundary.py
 
       - name: Preparar evidências
@@ -104,27 +98,3 @@ jobs:
           path: artifacts/design-system-components/**
           if-no-files-found: error
           retention-days: 14
-
-      - name: Consolidar resultado
-        if: always()
-        run: |
-          echo "components=${{ steps.components.outcome }}"
-          echo "assets=${{ steps.assets.outcome }}"
-          echo "boundary=${{ steps.boundary.outcome }}"
-
-          falhou=0
-          for resultado in \
-            "${{ steps.components.outcome }}" \
-            "${{ steps.assets.outcome }}" \
-            "${{ steps.boundary.outcome }}"; do
-            if [ "$resultado" != "success" ]; then
-              falhou=1
-            fi
-          done
-
-          if [ "$falhou" -ne 0 ]; then
-            echo "Uma ou mais validações falharam. Consulte os logs e o artefato."
-            exit 1
-          fi
-
-          echo "Fundação dos componentes aprovada."
