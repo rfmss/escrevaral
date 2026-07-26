@@ -4,7 +4,9 @@ Oficina de escrita feita no Brasil, para gente brasileira.
 
 [Usar o Escrevaral](https://escrevaral.com)
 
-Status: preparação para o primeiro lançamento público estável.
+Versão: `1.0.0-rc.1` — Argila, em estabilização final para o primeiro lançamento público estável.
+
+Documentação: [arquitetura](ARCHITECTURE.md) · [lançamentos](docs/release/README.md) · [checklist](docs/release/LAUNCH_CHECKLIST.md) · [mudanças](CHANGELOG.md)
 
 ## Visão geral
 
@@ -57,9 +59,9 @@ Service workers exigem `localhost` ou HTTPS. A aplicação não deve ser testada
 
 ## Verificação
 
-O repositório mantém auditores automatizados para publicação, privacidade de rede, erros de console, responsividade, integridade de dados e regressões das engines.
+O repositório mantém auditores automatizados para publicação, privacidade de rede, erros de console, responsividade, integridade de dados, fronteira pública, coerência de release e regressões das engines.
 
-A candidata a lançamento é validada por GitHub Actions antes da incorporação em `main`.
+A candidata a lançamento é validada por GitHub Actions antes da incorporação em `main`. Os critérios de promoção estão em [docs/release/LAUNCH_CHECKLIST.md](docs/release/LAUNCH_CHECKLIST.md).
 
 ## Privacidade
 
