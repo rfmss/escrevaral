@@ -7,7 +7,7 @@ on:
     paths:
       - "css/17-editor-status-argila.css"
       - "css/14-archive-inspector.css"
-      - "editor-status-controller.js"
+      - "js/controllers/editor-status-controller.js"
       - "index.html"
       - "service-worker.js"
       - "scripts/auditor-editor-status-argila.py"

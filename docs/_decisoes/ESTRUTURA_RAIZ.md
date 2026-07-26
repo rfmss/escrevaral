@@ -58,3 +58,7 @@ O limite de reavaliação foi atingido. O primeiro piloto moveu os índices Java
 ## Piloto de controladores — 2026-07-25
 
 Três controladores de baixo acoplamento foram migrados para `js/controllers/` em um lote isolado. A migração física não incluiu refatoração comportamental.
+
+## Segundo lote de controladores — 2026-07-26
+
+Mais três controladores de interface foram migrados para `js/controllers/` em um lote isolado. Os workflows especializados que validam situação do editor e navegação da Oficina foram atualizados junto; nenhuma lógica de produto foi refatorada.

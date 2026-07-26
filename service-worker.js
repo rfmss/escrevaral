@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v956";
-const ASSET_VERSION = "20260725-js-controllers-pilot-v1";
+const CACHE_NAME = "vereda-offline-v957";
+const ASSET_VERSION = "20260726-js-controllers-ui-v1";
 
 const CORE_ASSETS = [
   "./",
@@ -8,14 +8,14 @@ const CORE_ASSETS = [
   `./css/01-base.css?v=${ASSET_VERSION}`,
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
-  "./css/13-editor-quiet.css?v=20260725-js-controllers-pilot-v1",
+  "./css/13-editor-quiet.css?v=20260726-js-controllers-ui-v1",
   `./css/20-product-clarity-desktop.css?v=${ASSET_VERSION}`,
   `./css/20-product-clarity-desktop-controls.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-authorship.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-refine.css?v=${ASSET_VERSION}`,
-  "./css/14-archive-inspector.css?v=20260725-js-controllers-pilot-v1",
+  "./css/14-archive-inspector.css?v=20260726-js-controllers-ui-v1",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
   `./css/18-editor-status-layout.css?v=${ASSET_VERSION}`,
@@ -77,8 +77,8 @@ const CORE_ASSETS = [
   `./grammar-controller.js?v=${ASSET_VERSION}`,
   `./js/controllers/reader-controller.js?v=${ASSET_VERSION}`,
   `./js/controllers/pomodoro-controller.js?v=${ASSET_VERSION}`,
-  `./editor-status-controller.js?v=${ASSET_VERSION}`,
-  `./oficina-navigation-controller.js?v=${ASSET_VERSION}`,
+  `./js/controllers/editor-status-controller.js?v=${ASSET_VERSION}`,
+  `./js/controllers/oficina-navigation-controller.js?v=${ASSET_VERSION}`,
   `./workshop-authorship-clarity-controller.js?v=${ASSET_VERSION}`,
   `./product-clarity-controller.js?v=${ASSET_VERSION}`,
   `./archive-clarity-controller.js?v=${ASSET_VERSION}`,
@@ -87,7 +87,7 @@ const CORE_ASSETS = [
   `./combo-detector.js?v=${ASSET_VERSION}`,
   `./deriva-mode.js?v=${ASSET_VERSION}`,
   `./perseguicao-mode.js?v=${ASSET_VERSION}`,
-  `./training-controller.js?v=${ASSET_VERSION}`,
+  `./js/controllers/training-controller.js?v=${ASSET_VERSION}`,
   `./print-engine.js?v=${ASSET_VERSION}`,
   "./syntax-data.json",
   "./norma-data.json",
