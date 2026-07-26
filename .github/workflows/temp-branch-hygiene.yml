@@ -1,0 +1,36 @@
+name: Inventário temporário de branches
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  inventariar:
+    if: github.head_ref == 'ops/branch-hygiene'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 1
+
+      - name: Inventariar branches remotas
+        run: |
+          mkdir -p reports/auditoria/branch-hygiene-artifacts
+          git ls-remote --heads origin \
+            | sed 's#refs/heads/##' \
+            | sort -k2 \
+            > reports/auditoria/branch-hygiene-artifacts/branches.txt
+          cat reports/auditoria/branch-hygiene-artifacts/branches.txt
+
+      - name: Guardar inventário
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-hygiene-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 7
+          path: reports/auditoria/branch-hygiene-artifacts/**
