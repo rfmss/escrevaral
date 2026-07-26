@@ -164,14 +164,26 @@ jobs:
           print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
           PY
 
-      - name: Gravar lote sem instrumentação temporária
+      - name: Gravar somente o lote estrutural
         run: |
-          git checkout origin/main -- .github/workflows/release-candidate-argila.yml scripts/auditor-nomenclatura-publica.py
-          git rm scripts/migrar-controladores-ui-pilot.py
-          rm -rf reports/auditoria/migracao-controladores
+          git restore --source=HEAD --staged --worktree reports/
+          git clean -fd reports/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
+          git add \
+            index.html \
+            service-worker.js \
+            ui-dialog.js \
+            .github/workflows/editor-status-argila-pr.yml \
+            .github/workflows/oficina-navigation-pr.yml \
+            docs/_decisoes/ESTRUTURA_RAIZ.md \
+            docs/_decisoes/PILOTO_ESTRUTURA_JS_CONTROLLERS_UI_2026-07-26.md \
+            js/controllers/editor-status-controller.js \
+            js/controllers/oficina-navigation-controller.js \
+            js/controllers/training-controller.js \
+            editor-status-controller.js \
+            oficina-navigation-controller.js \
+            training-controller.js
           git diff --cached --check
           git commit -m "refactor(structure): ampliar organização de controladores"
           git push origin HEAD:agent/js-controllers-ux-pilot
