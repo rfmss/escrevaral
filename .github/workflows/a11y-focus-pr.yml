@@ -9,6 +9,7 @@ on:
       - "css/**"
       - "index.html"
       - "scripts/auditor-focus-a11y.py"
+      - "scripts/auditor-design-tokens-contrast.py"
       - "scripts/auditor-editor-toolbar.py"
       - "scripts/auditor-console-errors.py"
       - "scripts/auditor-overflow-mobile.py"
@@ -47,7 +48,13 @@ jobs:
       - name: Validar sintaxe dos auditores
         run: |
           python -m py_compile scripts/auditor-focus-a11y.py
+          python -m py_compile scripts/auditor-design-tokens-contrast.py
           python -m py_compile scripts/auditor-editor-toolbar.py
+
+      - name: Auditor de contraste dos tokens de texto
+        id: tokens
+        continue-on-error: true
+        run: python3 scripts/auditor-design-tokens-contrast.py
 
       - name: Iniciar servidor local
         run: |
@@ -130,6 +137,7 @@ jobs:
       - name: Consolidar resultado
         if: always()
         run: |
+          echo "tokens=${{ steps.tokens.outcome }}"
           echo "golden=${{ steps.golden.outcome }}"
           echo "overflow=${{ steps.overflow.outcome }}"
           echo "console=${{ steps.console.outcome }}"
@@ -139,6 +147,7 @@ jobs:
 
           falhou=0
           for resultado in \
+            "${{ steps.tokens.outcome }}" \
             "${{ steps.golden.outcome }}" \
             "${{ steps.overflow.outcome }}" \
             "${{ steps.console.outcome }}" \
