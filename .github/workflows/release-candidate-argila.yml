@@ -1,79 +1,157 @@
-name: Aplicar lote estrutural validado
+name: Candidata a lançamento Argila
 
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  aplicar:
-    if: github.head_ref == 'agent/js-controllers-ux-pilot'
+  validar-candidata:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 35
     steps:
-      - name: Clonar branch do piloto
+      - name: Clonar repositório
         uses: actions/checkout@v4.2.2
-        with:
-          ref: agent/js-controllers-ux-pilot
-          fetch-depth: 1
 
       - name: Configurar Python
         uses: actions/setup-python@v5.6.0
         with:
           python-version: '3.12'
 
-      - name: Aplicar e gravar lote
-        id: commit
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Validar sintaxe dos auditores
+        run: |
+          python -m py_compile \
+            scripts/teste-master.py \
+            scripts/auditor-release-local.py \
+            scripts/auditor-publicacao.py \
+            scripts/auditor-privacidade-rede.py \
+            scripts/auditoria-pilares.py \
+            scripts/auditor-overflow-mobile.py \
+            scripts/auditor-console-errors.py \
+            scripts/auditor-nomenclatura-publica.py
+
+      - name: Iniciar candidata local
+        run: |
+          python -m http.server 8799 > /tmp/escrevaral-release-server.log 2>&1 &
+          echo $! > /tmp/escrevaral-release-server.pid
+          for tentativa in {1..30}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-release-server.log
+          exit 1
+
+      - name: Teste Master local
+        id: master
         shell: bash
         run: |
           set +e
-          {
-            set -x
-            python scripts/migrar-controladores-ui-pilot.py
-            git checkout origin/main -- scripts/auditor-nomenclatura-publica.py
-            git restore --source=HEAD --staged --worktree \
-              .github/workflows/editor-status-argila-pr.yml \
-              .github/workflows/oficina-navigation-pr.yml
-            git restore --source=HEAD --staged --worktree reports/ || true
-            git clean -fd reports/
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git status --short
-            git add --all -- \
-              index.html \
-              service-worker.js \
-              ui-dialog.js \
-              scripts/auditor-nomenclatura-publica.py \
-              docs/_decisoes/ESTRUTURA_RAIZ.md \
-              docs/_decisoes/PILOTO_ESTRUTURA_JS_CONTROLLERS_UI_2026-07-26.md \
-              js/controllers/editor-status-controller.js \
-              js/controllers/oficina-navigation-controller.js \
-              js/controllers/training-controller.js \
-              editor-status-controller.js \
-              oficina-navigation-controller.js \
-              training-controller.js
-            git diff --cached --check
-            git status --short
-            git diff --cached --stat
-            git commit -m "refactor(structure): ampliar organização de controladores"
-            git push origin HEAD:agent/js-controllers-ux-pilot
-          } > /tmp/aplicar-lote.log 2>&1
+          python scripts/teste-master.py --sem-rede
           code=$?
-          cat /tmp/aplicar-lote.log
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
 
-      - name: Guardar log de aplicação
+      - name: Auditoria visual da branch
+        id: local_visual
+        shell: bash
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: |
+          set +e
+          python scripts/auditor-release-local.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditoria da nomenclatura pública
+        id: naming
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-nomenclatura-publica.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditorias de produção
+        id: production
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-publicacao.py
+          pub=$?
+          python scripts/auditor-privacidade-rede.py
+          privacy=$?
+          python scripts/auditoria-pilares.py
+          pillars=$?
+          echo "exit_code=$((pub || privacy || pillars))" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Guardar relatórios
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: aplicar-lote-${{ github.run_id }}
-          path: /tmp/aplicar-lote.log
+          name: release-candidate-${{ github.run_id }}
+          path: |
+            reports/teste-master/
+            reports/auditoria/
           retention-days: 14
 
-      - name: Confirmar aplicação
+      - name: Consolidar veredito
+        if: always()
         env:
-          EXIT_CODE: ${{ steps.commit.outputs.exit_code }}
-        run: test "$EXIT_CODE" = "0"
+          MASTER_EXIT: ${{ steps.master.outputs.exit_code }}
+          LOCAL_EXIT: ${{ steps.local_visual.outputs.exit_code }}
+          NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
+          PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
+        run: |
+          test "$MASTER_EXIT" = "0"
+          test "$LOCAL_EXIT" = "0"
+          test "$NAMING_EXIT" = "0"
+          test "$PRODUCTION_EXIT" = "0"
+          python - <<'PY'
+          import json
+          import re
+          from datetime import date
+          from pathlib import Path
+
+          today = date.today().isoformat()
+          root = Path('reports/auditoria')
+
+          publication = json.loads((root / f'publicacao-offline-{today}.json').read_text(encoding='utf-8'))
+          pub_counts = publication['summary']['counts']
+          assert pub_counts.get('P0', 0) == 0, pub_counts
+          assert pub_counts.get('P1', 0) == 0, pub_counts
+
+          privacy = json.loads((root / f'privacidade-rede-{today}.json').read_text(encoding='utf-8'))
+          privacy_counts = {'P0': 0, 'P1': 0, 'P2': 0}
+          for issue in privacy.get('issues', []):
+              privacy_counts[issue['severity']] += 1
+          assert privacy_counts['P0'] == 0, privacy_counts
+          assert privacy_counts['P1'] == 0, privacy_counts
+          assert privacy['result']['canary_leaked'] is False
+          assert privacy['result']['canary_in_local_storage'] is True
+
+          pillars = (root / f'pilares-{today}.md').read_text(encoding='utf-8')
+          assert re.search(r'VERDE', pillars, re.I), pillars[:500]
+
+          local = json.loads((root / f'release-local-{today}.json').read_text(encoding='utf-8'))
+          assert local['counts']['P0'] == 0, local['counts']
+          assert local['counts']['P1'] == 0, local['counts']
+
+          naming = json.loads((root / 'nomenclatura-publica-artifacts' / 'report.json').read_text(encoding='utf-8'))
+          assert naming['status'] == 'aprovado', naming
+          assert not naming['failures'], naming['failures']
+          print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
+          PY
