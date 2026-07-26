@@ -1,5 +1,6 @@
 name: Fundação dos componentes do Design System
 
+# Gate exclusivo da fundação; não valida migrações de telas de produto.
 on:
   pull_request:
     branches:
