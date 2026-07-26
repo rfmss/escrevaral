@@ -151,7 +151,20 @@ Nenhuma função, variável global, chave de armazenamento, evento, ordem de scr
     for path in MOVES.values():
         subprocess.run(["node", "--check", str(ROOT / path)], check=True, cwd=ROOT)
 
-    subprocess.run(["python", "scripts/auditor-asset-version.py"], check=True, cwd=ROOT)
+    subprocess.run(["git", "fetch", "origin", "main"], check=True, cwd=ROOT)
+    result = subprocess.run(
+        ["python", "scripts/auditor-asset-version.py"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    (PACKAGE / "asset-version.stdout.txt").write_text(result.stdout, encoding="utf-8")
+    (PACKAGE / "asset-version.stderr.txt").write_text(result.stderr, encoding="utf-8")
+    if result.returncode != 0:
+        raise RuntimeError(
+            "auditor-asset-version.py recusou a candidata: "
+            + (result.stderr or result.stdout or f"exit {result.returncode}")
+        )
 
     package_files = [
         "index.html",
