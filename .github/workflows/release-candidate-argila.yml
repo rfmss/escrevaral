@@ -11,7 +11,7 @@ permissions:
 jobs:
   validar-candidata:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4.2.2
@@ -39,7 +39,8 @@ jobs:
             scripts/auditor-console-errors.py \
             scripts/auditor-nomenclatura-publica.py \
             scripts/auditor-repository-boundary.py \
-            scripts/auditor-release-baseline.py
+            scripts/auditor-release-baseline.py \
+            scripts/auditor-pwa-upgrade.py
 
       - name: Iniciar candidata local
         run: |
@@ -106,6 +107,18 @@ jobs:
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
 
+      - name: Atualização e recarga offline da PWA
+        id: pwa_upgrade
+        shell: bash
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: |
+          set +e
+          python scripts/auditor-pwa-upgrade.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
       - name: Auditorias de produção
         id: production
         shell: bash
@@ -138,6 +151,7 @@ jobs:
           NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
           BOUNDARY_EXIT: ${{ steps.boundary.outputs.exit_code }}
           BASELINE_EXIT: ${{ steps.baseline.outputs.exit_code }}
+          PWA_UPGRADE_EXIT: ${{ steps.pwa_upgrade.outputs.exit_code }}
           PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
         run: |
           test "$MASTER_EXIT" = "0"
@@ -145,6 +159,7 @@ jobs:
           test "$NAMING_EXIT" = "0"
           test "$BOUNDARY_EXIT" = "0"
           test "$BASELINE_EXIT" = "0"
+          test "$PWA_UPGRADE_EXIT" = "0"
           test "$PRODUCTION_EXIT" = "0"
           python - <<'PY'
           import json
@@ -188,5 +203,9 @@ jobs:
           assert baseline['status'] == 'aprovado', baseline
           assert not baseline['failures'], baseline['failures']
 
-          print('Candidata Argila aprovada: nenhum P0/P1 e contratos públicos de release coerentes.')
+          pwa = json.loads((root / 'pwa-upgrade-artifacts' / 'report.json').read_text(encoding='utf-8'))
+          assert pwa['status'] == 'aprovado', pwa
+          assert not pwa['failures'], pwa['failures']
+
+          print('Candidata Argila aprovada: nenhum P0/P1, release coerente e atualização offline validada.')
           PY
