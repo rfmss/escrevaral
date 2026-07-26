@@ -1,0 +1,288 @@
+{
+  "line_matches": [
+    {
+      "line": 94,
+      "text": "<link rel=\"stylesheet\" href=\"css/12-training-modes.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 901,
+      "text": "<h3>Espelho, laboratório e prática</h3>"
+    },
+    {
+      "line": 911,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-treino\" class=\"at-radio\" hidden>"
+    },
+    {
+      "line": 930,
+      "text": "<label for=\"at-treino\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 932,
+      "text": "Prática"
+    },
+    {
+      "line": 1087,
+      "text": "<p class=\"training-intro muted\">Textos de referência pra inspirar, não pra copiar.</p>"
+    },
+    {
+      "line": 1096,
+      "text": "<!-- Painel: Treino (Deriva + Perseguição) -->"
+    },
+    {
+      "line": 1097,
+      "text": "<div class=\"academy-tool-panel at-panel-treino\">"
+    },
+    {
+      "line": 1098,
+      "text": "<p class=\"training-intro muted\">Exercícios curtos pra destravar quando a página está parada.</p>"
+    },
+    {
+      "line": 1100,
+      "text": "<div class=\"training-cards\" id=\"training-cards\">"
+    },
+    {
+      "line": 1101,
+      "text": "<button class=\"training-card\" id=\"btn-modo-deriva\" type=\"button\">"
+    },
+    {
+      "line": 1102,
+      "text": "<span class=\"material-symbols-outlined training-card-icon\">water</span>"
+    },
+    {
+      "line": 1106,
+      "text": "<button class=\"training-card\" id=\"btn-modo-perseguicao\" type=\"button\">"
+    },
+    {
+      "line": 1107,
+      "text": "<span class=\"material-symbols-outlined training-card-icon\">bolt</span>"
+    },
+    {
+      "line": 1320,
+      "text": "<p>Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizada.</p>"
+    },
+    {
+      "line": 1638,
+      "text": "<script src=\"js/controllers/training-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    }
+  ],
+  "elements": [
+    {
+      "tag": "link",
+      "line": 94,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 899,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura do texto Espelho, laboratório e prática Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+    },
+    {
+      "tag": "h3",
+      "line": 901,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Espelho, laboratório e prática"
+    },
+    {
+      "tag": "section",
+      "line": 906,
+      "id": null,
+      "class": [
+        "academy-tools"
+      ],
+      "role": null,
+      "aria_label": "Ferramentas do Ateliê",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, voca"
+    },
+    {
+      "tag": "input",
+      "line": 911,
+      "id": "at-treino",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "nav",
+      "line": 913,
+      "id": null,
+      "class": [
+        "academy-tools-tabs"
+      ],
+      "role": null,
+      "aria_label": "Selecionar ferramenta",
+      "data": {},
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática"
+    },
+    {
+      "tag": "label",
+      "line": 930,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "edit_note Prática"
+    },
+    {
+      "tag": "p",
+      "line": 1087,
+      "id": null,
+      "class": [
+        "training-intro",
+        "muted"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Textos de referência pra inspirar, não pra copiar."
+    },
+    {
+      "tag": "div",
+      "line": 1097,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-treino"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Exercícios curtos pra destravar quando a página está parada. water Deriva Escreva sem destino. O fio fica vivo enquanto você digita — se parar, ele quebra. Para extravasar e fluir. bolt Perseguição Escreva sem frear. Os combos surgem quando"
+    },
+    {
+      "tag": "p",
+      "line": 1098,
+      "id": null,
+      "class": [
+        "training-intro",
+        "muted"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Exercícios curtos pra destravar quando a página está parada."
+    },
+    {
+      "tag": "div",
+      "line": 1100,
+      "id": "training-cards",
+      "class": [
+        "training-cards"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "water Deriva Escreva sem destino. O fio fica vivo enquanto você digita — se parar, ele quebra. Para extravasar e fluir. bolt Perseguição Escreva sem frear. Os combos surgem quando o texto se conecta."
+    },
+    {
+      "tag": "button",
+      "line": 1101,
+      "id": "btn-modo-deriva",
+      "class": [
+        "training-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "water Deriva Escreva sem destino. O fio fica vivo enquanto você digita — se parar, ele quebra. Para extravasar e fluir."
+    },
+    {
+      "tag": "span",
+      "line": 1102,
+      "id": null,
+      "class": [
+        "material-symbols-outlined",
+        "training-card-icon"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "water"
+    },
+    {
+      "tag": "button",
+      "line": 1106,
+      "id": "btn-modo-perseguicao",
+      "class": [
+        "training-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "bolt Perseguição Escreva sem frear. Os combos surgem quando o texto se conecta."
+    },
+    {
+      "tag": "span",
+      "line": 1107,
+      "id": null,
+      "class": [
+        "material-symbols-outlined",
+        "training-card-icon"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "bolt"
+    },
+    {
+      "tag": "article",
+      "line": 1313,
+      "id": null,
+      "class": [
+        "academy-path",
+        "is-rights"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "03 gavel Cuidados com autoria Saiba quando guardar prova, fonte e contrato Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizad"
+    },
+    {
+      "tag": "p",
+      "line": 1320,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizada."
+    },
+    {
+      "tag": "script",
+      "line": 1638,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "file_hit_counts": {
+    "app.js": 49,
+    "archive-controller.js": 1,
+    "backup-controller.js": 2,
+    "badges-engine.js": 1,
+    "js/controllers/oficina-navigation-controller.js": 19,
+    "js/data/criterios-data.js": 1,
+    "js/data/quotes-data.js": 1,
+    "js/data/synonym-data.js": 1,
+    "lexical-engine.js": 6,
+    "lexical-view-controller.js": 1,
+    "rights-engine.js": 1,
+    "rimalab-engine.js": 1,
+    "service-worker.js": 8,
+    "state-store.js": 4,
+    "workshop-authorship-clarity-controller.js": 9
+  },
+  "selectors": [
+    [
+      "[data-academy-resume]",
+      1
+    ],
+    [
+      "[data-academy-enem-hint]",
+      1
+    ],
+    [
+      "[data-create-note-eyebrow]",
+      1
+    ],
+    [
+      "[data-create-note-title]",
+      1
+    ],
+    [
+      ".create-note-panel[aria-labelledby=",
+      1
+    ],
+    [
+      ".academy-view",
+      1
+    ],
+    [
+      "[data-craft-select]",
+      1
+    ],
+    [
+      "[data-create-note-type]",
+      1
+    ],
+    [
+      "[data-create-category]",
+      1
+    ],
+    [
+      "link[data-oficina-navigation-style=",
+      1
+    ],
+    [
+      "[data-craft-tabs]",
+      1
+    ],
+    [
+      "[data-create-note-overlay]",
+      1
+    ],
+    [
+      "[data-create-note-types]",
+      1
+    ],
+    [
+      "link[data-workshop-clarity-refine=",
+      1
+    ]
+  ],
+  "number_formatting": []
+}

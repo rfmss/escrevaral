@@ -1,0 +1,1472 @@
+{
+  "line_matches": [
+    {
+      "line": 8,
+      "text": "<meta name=\"description\" content=\"Oficina de escrita feita no Brasil, para gente brasileira. Escreva, organize manuscritos, analise sua voz e prove sua autoria — grátis e sem IA.\">"
+    },
+    {
+      "line": 34,
+      "text": "\"description\": \"Oficina literária offline-first para gente brasileira que escreve. Escreva, organize manuscritos, analise sua voz narrativa e prove sua autoria sem depender da internet ou de inteligência artificial.\","
+    },
+    {
+      "line": 89,
+      "text": "<link rel=\"stylesheet\" href=\"css/04-analysis-academy.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 90,
+      "text": "<link rel=\"stylesheet\" href=\"css/06-academy-tools.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 170,
+      "text": "<button class=\"tab\" data-view-target=\"academia\" data-vrda-tooltip=\"Guias, revisão, oficinas e publicação — tudo o que conversa com o seu texto.\">Ateliê</button>"
+    },
+    {
+      "line": 225,
+      "text": "<button class=\"icon-button sidebar-new-btn\" data-action=\"open-create-note\" aria-label=\"Novo texto\" data-vrda-tooltip=\"Novo texto\">"
+    },
+    {
+      "line": 275,
+      "text": "<button class=\"icon-button editor-mobile-new\" data-action=\"open-create-note\" aria-label=\"Novo texto\" data-vrda-tooltip=\"Novo texto\">"
+    },
+    {
+      "line": 594,
+      "text": "<button class=\"create-button\" data-action=\"open-create-note\">"
+    },
+    {
+      "line": 862,
+      "text": "<article class=\"academy-view\" data-atelier-active=\"revisar\">"
+    },
+    {
+      "line": 865,
+      "text": "<section class=\"academy-banner\">"
+    },
+    {
+      "line": 867,
+      "text": "<h2>Ateliê</h2>"
+    },
+    {
+      "line": 869,
+      "text": "<div class=\"academy-banner-actions\" aria-label=\"Entradas rápidas do Ateliê\">"
+    },
+    {
+      "line": 870,
+      "text": "<button class=\"academy-banner-action is-active\" type=\"button\" data-action=\"switch-atelier-revisar\" aria-pressed=\"true\">"
+    },
+    {
+      "line": 874,
+      "text": "<button class=\"academy-banner-action\" type=\"button\" data-action=\"switch-atelier-guias\" aria-pressed=\"false\">"
+    },
+    {
+      "line": 878,
+      "text": "<button class=\"academy-banner-action\" type=\"button\" data-action=\"switch-atelier-publicar\" aria-pressed=\"false\">"
+    },
+    {
+      "line": 883,
+      "text": "<button class=\"academy-resume-link\" type=\"button\" data-action=\"switch-view-editor\" data-academy-resume hidden>"
+    },
+    {
+      "line": 887,
+      "text": "<div class=\"academy-enem-hint\" data-academy-enem-hint hidden>"
+    },
+    {
+      "line": 889,
+      "text": "<div class=\"academy-enem-copy\">"
+    },
+    {
+      "line": 891,
+      "text": "<button class=\"academy-enem-action\" type=\"button\" data-action=\"academy-open-enem-guide\">"
+    },
+    {
+      "line": 899,
+      "text": "<div class=\"academy-section-intro\" data-atelier-section=\"revisar\">"
+    },
+    {
+      "line": 905,
+      "text": "<!-- ── 2. FERRAMENTAS DO ATELIÊ ── -->"
+    },
+    {
+      "line": 906,
+      "text": "<section class=\"academy-tools\" aria-label=\"Ferramentas do Ateliê\" data-atelier-section=\"revisar\">"
+    },
+    {
+      "line": 907,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-voice\" class=\"at-radio\" hidden checked>"
+    },
+    {
+      "line": 908,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-rimalab\" class=\"at-radio\" hidden>"
+    },
+    {
+      "line": 909,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-vocab\" class=\"at-radio\" hidden>"
+    },
+    {
+      "line": 910,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-biblioteca\" class=\"at-radio\" hidden>"
+    },
+    {
+      "line": 911,
+      "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-treino\" class=\"at-radio\" hidden>"
+    },
+    {
+      "line": 913,
+      "text": "<nav class=\"academy-tools-tabs\" aria-label=\"Selecionar ferramenta\">"
+    },
+    {
+      "line": 914,
+      "text": "<label for=\"at-voice\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 918,
+      "text": "<label for=\"at-rimalab\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 922,
+      "text": "<label for=\"at-vocab\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 926,
+      "text": "<label for=\"at-biblioteca\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 930,
+      "text": "<label for=\"at-treino\" class=\"academy-tool-tab\">"
+    },
+    {
+      "line": 937,
+      "text": "<div class=\"academy-tool-panel at-panel-voice\">"
+    },
+    {
+      "line": 980,
+      "text": "<div class=\"academy-tool-panel at-panel-rimalab\">"
+    },
+    {
+      "line": 1048,
+      "text": "<div class=\"academy-tool-panel at-panel-vocab\">"
+    },
+    {
+      "line": 1086,
+      "text": "<div class=\"academy-tool-panel at-panel-biblioteca\">"
+    },
+    {
+      "line": 1097,
+      "text": "<div class=\"academy-tool-panel at-panel-treino\">"
+    },
+    {
+      "line": 1159,
+      "text": "<div class=\"academy-section-intro\" data-atelier-section=\"guias\">"
+    },
+    {
+      "line": 1166,
+      "text": "<section class=\"template-studio\" aria-label=\"Guia de Ofícios Literários\" data-atelier-section=\"guias\">"
+    },
+    {
+      "line": 1168,
+      "text": "<p class=\"eyebrow\">Conhecer a oficina</p>"
+    },
+    {
+      "line": 1176,
+      "text": "<div class=\"craft-tabs\" data-craft-tabs></div>"
+    },
+    {
+      "line": 1200,
+      "text": "<section class=\"academy-leitura\" aria-label=\"Leitura editorial\" data-atelier-section=\"revisar\">"
+    },
+    {
+      "line": 1226,
+      "text": "<div class=\"academy-section-intro\" data-atelier-section=\"publicar\">"
+    },
+    {
+      "line": 1233,
+      "text": "<section class=\"rights-lab\" aria-label=\"Direitos do Autor\" data-rights-lab data-atelier-section=\"publicar\">"
+    },
+    {
+      "line": 1267,
+      "text": "<details class=\"academy-publishing-track\" data-atelier-section=\"publicar\">"
+    },
+    {
+      "line": 1271,
+      "text": "<span class=\"academy-track-sub\">Mercado editorial · Objeto livro · Anatomia do livro</span>"
+    },
+    {
+      "line": 1272,
+      "text": "<span class=\"material-symbols-outlined academy-track-chevron\">expand_more</span>"
+    },
+    {
+      "line": 1274,
+      "text": "<div class=\"academy-paths\">"
+    },
+    {
+      "line": 1275,
+      "text": "<article class=\"academy-path\">"
+    },
+    {
+      "line": 1276,
+      "text": "<span class=\"academy-path-number\">01</span>"
+    },
+    {
+      "line": 1277,
+      "text": "<div class=\"academy-path-icon\">"
+    },
+    {
+      "line": 1283,
+      "text": "<div class=\"academy-tags\">"
+    },
+    {
+      "line": 1288,
+      "text": "<button class=\"secondary-button\" data-craft-select=\"mercado-editorial\">"
+    },
+    {
+      "line": 1294,
+      "text": "<article class=\"academy-path is-book\">"
+    },
+    {
+      "line": 1295,
+      "text": "<span class=\"academy-path-number\">02</span>"
+    },
+    {
+      "line": 1296,
+      "text": "<div class=\"academy-path-icon\">"
+    },
+    {
+      "line": 1302,
+      "text": "<div class=\"academy-tags\">"
+    },
+    {
+      "line": 1307,
+      "text": "<button class=\"secondary-button\" data-craft-select=\"objeto-livro\">"
+    },
+    {
+      "line": 1313,
+      "text": "<article class=\"academy-path is-rights\">"
+    },
+    {
+      "line": 1314,
+      "text": "<span class=\"academy-path-number\">03</span>"
+    },
+    {
+      "line": 1315,
+      "text": "<div class=\"academy-path-icon\">"
+    },
+    {
+      "line": 1321,
+      "text": "<div class=\"academy-tags\">"
+    },
+    {
+      "line": 1333,
+      "text": "<div class=\"academy-book-anatomy\">"
+    },
+    {
+      "line": 1334,
+      "text": "<a href=\"./anatomia-do-livro.html\" target=\"_blank\" class=\"secondary-button academy-anatomy-btn\">"
+    },
+    {
+      "line": 1466,
+      "text": "<div class=\"create-note-overlay ob-overlay\" id=\"terms-overlay\" data-terms-overlay hidden>"
+    },
+    {
+      "line": 1471,
+      "text": "<p class=\"ob-kicker\">Oficina literária digital</p>"
+    },
+    {
+      "line": 1474,
+      "text": "<p class=\"ob-lede\">Uma oficina de escrita feita no Brasil, para gente brasileira.</p>"
+    },
+    {
+      "line": 1497,
+      "text": "<!-- Oficina — entrada secundária -->"
+    },
+    {
+      "line": 1500,
+      "text": "<h2 class=\"ob-pillar-title\">Conhecer a oficina</h2>"
+    },
+    {
+      "line": 1532,
+      "text": "<div class=\"create-note-overlay\" data-create-note-overlay hidden>"
+    },
+    {
+      "line": 1533,
+      "text": "<section class=\"create-note-panel\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"create-note-title\">"
+    },
+    {
+      "line": 1534,
+      "text": "<div class=\"create-note-heading\">"
+    },
+    {
+      "line": 1536,
+      "text": "<p class=\"eyebrow\" data-create-note-eyebrow>Novo texto</p>"
+    },
+    {
+      "line": 1537,
+      "text": "<h2 id=\"create-note-title\" data-create-note-title>Começar</h2>"
+    },
+    {
+      "line": 1539,
+      "text": "<button class=\"icon-button\" data-action=\"close-create-note\" aria-label=\"Fechar painel de novo texto\">"
+    },
+    {
+      "line": 1543,
+      "text": "<div class=\"create-note-step\" data-create-step=\"1\"></div>"
+    },
+    {
+      "line": 1544,
+      "text": "<div class=\"create-note-step\" data-create-step=\"2\" hidden></div>"
+    },
+    {
+      "line": 1633,
+      "text": "<script src=\"js/controllers/oficina-navigation-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1646,
+      "text": "<script src=\"workshop-authorship-clarity-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1673,
+      "text": "Você pausou por aqui. O <button data-action=\"hint-goto-academia\" style=\"background:none;border:none;padding:0;color:var(--primary,#150a03);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;\">Ateliê</button> tem guias para o seu gênero, leitura do texto e oficinas de trabalho."
+    },
+    {
+      "line": 1834,
+      "text": "<div id=\"vrda-dialog-overlay\" class=\"create-note-overlay\" hidden aria-hidden=\"true\">"
+    },
+    {
+      "line": 1909,
+      "text": "<span class=\"dock-label\">Ateliê</span>"
+    }
+  ],
+  "elements": [
+    {
+      "tag": "meta",
+      "line": 8,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 28,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "{\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"WebApplication\",\n      \"name\": \"Escrevaral\",\n      \"url\": \"https://escrevaral.com\",\n      \"description\": \"Oficina literária offline-first para gente brasileira que escreve. Escreva, "
+    },
+    {
+      "tag": "link",
+      "line": 89,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 90,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 152,
+      "id": null,
+      "class": [
+        "app-shell"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view": "editor"
+      },
+      "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen right_panel_open left_panel_close Texto"
+    },
+    {
+      "tag": "header",
+      "line": 153,
+      "id": null,
+      "class": [
+        "topbar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen"
+    },
+    {
+      "tag": "nav",
+      "line": 165,
+      "id": null,
+      "class": [
+        "module-tabs"
+      ],
+      "role": null,
+      "aria_label": "Módulos do Escrevaral",
+      "data": {},
+      "text": "Escrever Palavras Autoria Acervo Ateliê Planejamento"
+    },
+    {
+      "tag": "button",
+      "line": 170,
+      "id": null,
+      "class": [
+        "tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "academia",
+        "data-vrda-tooltip": "Guias, revisão, oficinas e publicação — tudo o que conversa com o seu texto."
+      },
+      "text": "Ateliê"
+    },
+    {
+      "tag": "button",
+      "line": 225,
+      "id": null,
+      "class": [
+        "icon-button",
+        "sidebar-new-btn"
+      ],
+      "role": null,
+      "aria_label": "Novo texto",
+      "data": {
+        "data-action": "open-create-note",
+        "data-vrda-tooltip": "Novo texto"
+      },
+      "text": "add"
+    },
+    {
+      "tag": "button",
+      "line": 275,
+      "id": null,
+      "class": [
+        "icon-button",
+        "editor-mobile-new"
+      ],
+      "role": null,
+      "aria_label": "Novo texto",
+      "data": {
+        "data-action": "open-create-note",
+        "data-vrda-tooltip": "Novo texto"
+      },
+      "text": "add"
+    },
+    {
+      "tag": "button",
+      "line": 594,
+      "id": null,
+      "class": [
+        "create-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "open-create-note"
+      },
+      "text": "add Novo manuscrito"
+    },
+    {
+      "tag": "section",
+      "line": 861,
+      "id": null,
+      "class": [
+        "view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "academia"
+      },
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "article",
+      "line": 862,
+      "id": null,
+      "class": [
+        "academy-view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-active": "revisar"
+      },
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "section",
+      "line": 865,
+      "id": null,
+      "class": [
+        "academy-banner"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "h2",
+      "line": 867,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Ateliê"
+    },
+    {
+      "tag": "div",
+      "line": 869,
+      "id": null,
+      "class": [
+        "academy-banner-actions"
+      ],
+      "role": null,
+      "aria_label": "Entradas rápidas do Ateliê",
+      "data": {},
+      "text": "psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação"
+    },
+    {
+      "tag": "button",
+      "line": 870,
+      "id": null,
+      "class": [
+        "academy-banner-action",
+        "is-active"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "switch-atelier-revisar"
+      },
+      "text": "psychology Revisar meu texto"
+    },
+    {
+      "tag": "button",
+      "line": 874,
+      "id": null,
+      "class": [
+        "academy-banner-action"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "switch-atelier-guias"
+      },
+      "text": "menu_book Abrir um guia"
+    },
+    {
+      "tag": "button",
+      "line": 878,
+      "id": null,
+      "class": [
+        "academy-banner-action"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "switch-atelier-publicar"
+      },
+      "text": "route Planejar publicação"
+    },
+    {
+      "tag": "button",
+      "line": 883,
+      "id": null,
+      "class": [
+        "academy-resume-link"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "switch-view-editor",
+        "data-academy-resume": ""
+      },
+      "text": "arrow_back Continuar com o texto atual"
+    },
+    {
+      "tag": "div",
+      "line": 887,
+      "id": null,
+      "class": [
+        "academy-enem-hint"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-academy-enem-hint": ""
+      },
+      "text": "school Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+    },
+    {
+      "tag": "div",
+      "line": 889,
+      "id": null,
+      "class": [
+        "academy-enem-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+    },
+    {
+      "tag": "button",
+      "line": 891,
+      "id": null,
+      "class": [
+        "academy-enem-action"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "academy-open-enem-guide"
+      },
+      "text": "rule Ver as 5 Competências"
+    },
+    {
+      "tag": "div",
+      "line": 899,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura do texto Espelho, laboratório e prática Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+    },
+    {
+      "tag": "section",
+      "line": 906,
+      "id": null,
+      "class": [
+        "academy-tools"
+      ],
+      "role": null,
+      "aria_label": "Ferramentas do Ateliê",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, voca"
+    },
+    {
+      "tag": "input",
+      "line": 907,
+      "id": "at-voice",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "input",
+      "line": 908,
+      "id": "at-rimalab",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "input",
+      "line": 909,
+      "id": "at-vocab",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "input",
+      "line": 910,
+      "id": "at-biblioteca",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "input",
+      "line": 911,
+      "id": "at-treino",
+      "class": [
+        "at-radio"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "nav",
+      "line": 913,
+      "id": null,
+      "class": [
+        "academy-tools-tabs"
+      ],
+      "role": null,
+      "aria_label": "Selecionar ferramenta",
+      "data": {},
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática"
+    },
+    {
+      "tag": "label",
+      "line": 914,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "psychology Espelho de Voz"
+    },
+    {
+      "tag": "label",
+      "line": 918,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "graphic_eq Rimas"
+    },
+    {
+      "tag": "label",
+      "line": 922,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "language Vocabulário"
+    },
+    {
+      "tag": "label",
+      "line": 926,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "library_books Leituras"
+    },
+    {
+      "tag": "label",
+      "line": 930,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "edit_note Prática"
+    },
+    {
+      "tag": "div",
+      "line": 937,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-voice"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença. psychology Analisar voz edit_note Usar o te"
+    },
+    {
+      "tag": "div",
+      "line": 980,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-rimalab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Rimas Rima, ritmo e ouvido para o verso Encontre rimas e sinta a métrica do seu verso. edit_note Usar o texto em edição download Baixar TXT content_copy Copiar análise delete_sweep Limpar menu_book Enciclopédia 0 versos salvo localmente Agu"
+    },
+    {
+      "tag": "div",
+      "line": 1048,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-vocab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+    },
+    {
+      "tag": "div",
+      "line": 1086,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-biblioteca"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Textos de referência pra inspirar, não pra copiar."
+    },
+    {
+      "tag": "div",
+      "line": 1097,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-treino"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Exercícios curtos pra destravar quando a página está parada. water Deriva Escreva sem destino. O fio fica vivo enquanto você digita — se parar, ele quebra. Para extravasar e fluir. bolt Perseguição Escreva sem frear. Os combos surgem quando"
+    },
+    {
+      "tag": "div",
+      "line": 1159,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "guias"
+      },
+      "text": "Direção Guias e referências para escolher o próximo passo Quando o problema ainda não é frase, mas forma, estrutura ou repertório, o caminho começa aqui."
+    },
+    {
+      "tag": "section",
+      "line": 1166,
+      "id": null,
+      "class": [
+        "template-studio"
+      ],
+      "role": null,
+      "aria_label": "Guia de Ofícios Literários",
+      "data": {
+        "data-atelier-section": "guias"
+      },
+      "text": "Conhecer a oficina Escolha o guia para o seu gênero Romance, fantasia, suspense, poesia, roteiro, ENEM — cada gênero tem uma lógica própria. O guia organiza a sua escrita sem invadir a sua voz. search Escrevaral offline_bolt arrow_back Ante"
+    },
+    {
+      "tag": "div",
+      "line": 1167,
+      "id": null,
+      "class": [
+        "template-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Conhecer a oficina Escolha o guia para o seu gênero Romance, fantasia, suspense, poesia, roteiro, ENEM — cada gênero tem uma lógica própria. O guia organiza a sua escrita sem invadir a sua voz. search"
+    },
+    {
+      "tag": "p",
+      "line": 1168,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Conhecer a oficina"
+    },
+    {
+      "tag": "div",
+      "line": 1176,
+      "id": null,
+      "class": [
+        "craft-tabs"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-craft-tabs": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "section",
+      "line": 1200,
+      "id": null,
+      "class": [
+        "academy-leitura"
+      ],
+      "role": null,
+      "aria_label": "Leitura editorial",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura editorial Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editori"
+    },
+    {
+      "tag": "div",
+      "line": 1226,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "publicar"
+      },
+      "text": "Circulação Publicação, prova e cuidados antes de soltar o texto no mundo Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página."
+    },
+    {
+      "tag": "details",
+      "line": 1267,
+      "id": null,
+      "class": [
+        "academy-publishing-track"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "publicar"
+      },
+      "text": "route Trilha de publicação Mercado editorial · Objeto livro · Anatomia do livro expand_more 01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e me"
+    },
+    {
+      "tag": "span",
+      "line": 1271,
+      "id": null,
+      "class": [
+        "academy-track-sub"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mercado editorial · Objeto livro · Anatomia do livro"
+    },
+    {
+      "tag": "span",
+      "line": 1272,
+      "id": null,
+      "class": [
+        "material-symbols-outlined",
+        "academy-track-chevron"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "expand_more"
+    },
+    {
+      "tag": "div",
+      "line": 1274,
+      "id": null,
+      "class": [
+        "academy-paths"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+    },
+    {
+      "tag": "article",
+      "line": 1275,
+      "id": null,
+      "class": [
+        "academy-path"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+    },
+    {
+      "tag": "span",
+      "line": 1276,
+      "id": null,
+      "class": [
+        "academy-path-number"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "01"
+    },
+    {
+      "tag": "div",
+      "line": 1277,
+      "id": null,
+      "class": [
+        "academy-path-icon"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "storefront"
+    },
+    {
+      "tag": "div",
+      "line": 1283,
+      "id": null,
+      "class": [
+        "academy-tags"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Independente Editoras Submissão"
+    },
+    {
+      "tag": "article",
+      "line": 1294,
+      "id": null,
+      "class": [
+        "academy-path",
+        "is-book"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "02 book_4 Objeto livro Conheça a arquitetura da obra Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras. Capa Miolo Glossário view_in_ar Ver guias"
+    },
+    {
+      "tag": "span",
+      "line": 1295,
+      "id": null,
+      "class": [
+        "academy-path-number"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "02"
+    },
+    {
+      "tag": "div",
+      "line": 1296,
+      "id": null,
+      "class": [
+        "academy-path-icon"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "book_4"
+    },
+    {
+      "tag": "div",
+      "line": 1302,
+      "id": null,
+      "class": [
+        "academy-tags"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Capa Miolo Glossário"
+    },
+    {
+      "tag": "article",
+      "line": 1313,
+      "id": null,
+      "class": [
+        "academy-path",
+        "is-rights"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "03 gavel Cuidados com autoria Saiba quando guardar prova, fonte e contrato Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizad"
+    },
+    {
+      "tag": "span",
+      "line": 1314,
+      "id": null,
+      "class": [
+        "academy-path-number"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "03"
+    },
+    {
+      "tag": "div",
+      "line": 1315,
+      "id": null,
+      "class": [
+        "academy-path-icon"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "gavel"
+    },
+    {
+      "tag": "div",
+      "line": 1321,
+      "id": null,
+      "class": [
+        "academy-tags"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "LDA Registro Contratos"
+    },
+    {
+      "tag": "div",
+      "line": 1333,
+      "id": null,
+      "class": [
+        "academy-book-anatomy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "menu_book Abrir Anatomia do Livro"
+    },
+    {
+      "tag": "a",
+      "line": 1334,
+      "id": null,
+      "class": [
+        "secondary-button",
+        "academy-anatomy-btn"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "menu_book Abrir Anatomia do Livro"
+    },
+    {
+      "tag": "div",
+      "line": 1466,
+      "id": "terms-overlay",
+      "class": [
+        "create-note-overlay",
+        "ob-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-terms-overlay": ""
+      },
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+    },
+    {
+      "tag": "section",
+      "line": 1467,
+      "id": null,
+      "class": [
+        "ob-panel"
+      ],
+      "role": "dialog",
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+    },
+    {
+      "tag": "div",
+      "line": 1468,
+      "id": null,
+      "class": [
+        "ob-brand"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira."
+    },
+    {
+      "tag": "div",
+      "line": 1470,
+      "id": null,
+      "class": [
+        "ob-brand-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira."
+    },
+    {
+      "tag": "p",
+      "line": 1471,
+      "id": null,
+      "class": [
+        "ob-kicker"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital"
+    },
+    {
+      "tag": "p",
+      "line": 1474,
+      "id": null,
+      "class": [
+        "ob-lede"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Uma oficina de escrita feita no Brasil, para gente brasileira."
+    },
+    {
+      "tag": "div",
+      "line": 1498,
+      "id": null,
+      "class": [
+        "ob-pillar",
+        "ob-pillar--guias"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "auto_stories Conhecer a oficina Guias, revisão e ferramentas quando o texto pedir. Abrir os guias"
+    },
+    {
+      "tag": "h2",
+      "line": 1500,
+      "id": null,
+      "class": [
+        "ob-pillar-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Conhecer a oficina"
+    },
+    {
+      "tag": "div",
+      "line": 1532,
+      "id": null,
+      "class": [
+        "create-note-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-create-note-overlay": ""
+      },
+      "text": "Novo texto Começar close"
+    },
+    {
+      "tag": "section",
+      "line": 1533,
+      "id": null,
+      "class": [
+        "create-note-panel"
+      ],
+      "role": "dialog",
+      "aria_label": null,
+      "data": {},
+      "text": "Novo texto Começar close"
+    },
+    {
+      "tag": "div",
+      "line": 1534,
+      "id": null,
+      "class": [
+        "create-note-heading"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Novo texto Começar close"
+    },
+    {
+      "tag": "h2",
+      "line": 1537,
+      "id": "create-note-title",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-create-note-title": ""
+      },
+      "text": "Começar"
+    },
+    {
+      "tag": "button",
+      "line": 1539,
+      "id": null,
+      "class": [
+        "icon-button"
+      ],
+      "role": null,
+      "aria_label": "Fechar painel de novo texto",
+      "data": {
+        "data-action": "close-create-note"
+      },
+      "text": "close"
+    },
+    {
+      "tag": "div",
+      "line": 1543,
+      "id": null,
+      "class": [
+        "create-note-step"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-create-step": "1"
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1544,
+      "id": null,
+      "class": [
+        "create-note-step"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-create-step": "2"
+      },
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1633,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1646,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1649,
+      "id": "academia-hint-toast",
+      "class": [],
+      "role": "status",
+      "aria_label": null,
+      "data": {},
+      "text": "school Você pausou por aqui. O Ateliê tem guias para o seu gênero, leitura do texto e oficinas de trabalho. ×"
+    },
+    {
+      "tag": "span",
+      "line": 1672,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Você pausou por aqui. O Ateliê tem guias para o seu gênero, leitura do texto e oficinas de trabalho."
+    },
+    {
+      "tag": "button",
+      "line": 1673,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "hint-goto-academia"
+      },
+      "text": "Ateliê"
+    },
+    {
+      "tag": "div",
+      "line": 1834,
+      "id": "vrda-dialog-overlay",
+      "class": [
+        "create-note-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Cancelar OK"
+    },
+    {
+      "tag": "nav",
+      "line": 1898,
+      "id": "mobile-dock",
+      "class": [
+        "mobile-dock"
+      ],
+      "role": null,
+      "aria_label": "Navegação principal",
+      "data": {},
+      "text": "edit_note Escrever inventory_2 Acervo school Ateliê fingerprint Autoria auto_stories Palavras more_horiz Mais route Planejamento"
+    },
+    {
+      "tag": "button",
+      "line": 1907,
+      "id": null,
+      "class": [
+        "dock-item"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "academia"
+      },
+      "text": "school Ateliê"
+    },
+    {
+      "tag": "span",
+      "line": 1909,
+      "id": null,
+      "class": [
+        "dock-label"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Ateliê"
+    }
+  ]
+}

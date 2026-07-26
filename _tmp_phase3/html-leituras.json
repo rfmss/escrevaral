@@ -1,0 +1,830 @@
+{
+  "line_matches": [
+    {
+      "line": 265,
+      "text": "<button class=\"secondary-button\" data-action=\"open-reader-mode\" title=\"Ler — revisão como leitor\" aria-label=\"Ler como leitor\">"
+    },
+    {
+      "line": 329,
+      "text": "<option value=\"reading\">Leitura confortável</option>"
+    },
+    {
+      "line": 395,
+      "text": "<div class=\"reading-sample\" data-lexical-context></div>"
+    },
+    {
+      "line": 868,
+      "text": "<p>Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação.</p>"
+    },
+    {
+      "line": 900,
+      "text": "<p class=\"eyebrow\">Leitura do texto</p>"
+    },
+    {
+      "line": 928,
+      "text": "Leituras"
+    },
+    {
+      "line": 955,
+      "text": "<textarea data-voice-input placeholder=\"Cole aqui um capítulo, cena ou trecho do seu romance ou conto. Acima de 500 palavras a leitura fica mais estável.\" aria-label=\"Texto para o Espelho de Voz\"></textarea>"
+    },
+    {
+      "line": 1199,
+      "text": "<!-- ── 4. LEITURA EDITORIAL (secundária) ── -->"
+    },
+    {
+      "line": 1200,
+      "text": "<section class=\"academy-leitura\" aria-label=\"Leitura editorial\" data-atelier-section=\"revisar\">"
+    },
+    {
+      "line": 1201,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1202,
+      "text": "<div class=\"leitura-editorial-grid\">"
+    },
+    {
+      "line": 1203,
+      "text": "<a href=\"./vereda-titulo-do-livro.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1204,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1208,
+      "text": "<a href=\"./vereda-primeiras-linhas.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1209,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1213,
+      "text": "<a href=\"./vereda-revisao-manuscrito.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1214,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1218,
+      "text": "<a href=\"./vereda-bloqueio-criativo.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1219,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1411,
+      "text": "<h3>Leitura fácil?</h3>"
+    },
+    {
+      "line": 1456,
+      "text": "<button class=\"focus-pill\" data-action=\"toggle-ruler\" type=\"button\" aria-pressed=\"false\" title=\"Linha de leitura\">"
+    },
+    {
+      "line": 1630,
+      "text": "<script src=\"js/controllers/reader-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1673,
+      "text": "Você pausou por aqui. O <button data-action=\"hint-goto-academia\" style=\"background:none;border:none;padding:0;color:var(--primary,#150a03);font-weight:700;font-size:inherit;cursor:pointer;text-decoration:underline;\">Ateliê</button> tem guias para o seu gênero, leitura do texto e oficinas de trabalho."
+    },
+    {
+      "line": 1801,
+      "text": "<!-- Modo leitura -->"
+    },
+    {
+      "line": 1802,
+      "text": "<div id=\"reader-overlay\" class=\"reader-overlay\" hidden>"
+    },
+    {
+      "line": 1803,
+      "text": "<header class=\"reader-header\">"
+    },
+    {
+      "line": 1804,
+      "text": "<button class=\"icon-button\" data-action=\"close-reader-mode\" aria-label=\"Fechar modo leitura\">"
+    },
+    {
+      "line": 1807,
+      "text": "<span class=\"reader-title\" id=\"reader-title\"></span>"
+    },
+    {
+      "line": 1808,
+      "text": "<div class=\"reader-controls\">"
+    },
+    {
+      "line": 1809,
+      "text": "<button class=\"reader-pill\" id=\"reader-play\" data-action=\"reader-play-pause\" aria-label=\"Rolar o texto automaticamente\">"
+    },
+    {
+      "line": 1811,
+      "text": "<span id=\"reader-play-label\">Rolar</span>"
+    },
+    {
+      "line": 1813,
+      "text": "<button class=\"reader-pill\" id=\"reader-speed\" data-action=\"reader-cycle-speed\" title=\"Ritmo de rolagem\">"
+    },
+    {
+      "line": 1815,
+      "text": "<span id=\"reader-speed-label\">Ritmo 1</span>"
+    },
+    {
+      "line": 1817,
+      "text": "<button class=\"reader-pill\" id=\"reader-ruler-btn\" data-action=\"reader-toggle-ruler\" title=\"Linha de leitura\">"
+    },
+    {
+      "line": 1821,
+      "text": "<button class=\"reader-pill\" id=\"reader-font-btn\" data-action=\"reader-cycle-font\" title=\"Tamanho da letra\">"
+    },
+    {
+      "line": 1823,
+      "text": "<span id=\"reader-font-label\">Letra média</span>"
+    },
+    {
+      "line": 1827,
+      "text": "<div class=\"reader-canvas\" id=\"reader-canvas\">"
+    },
+    {
+      "line": 1828,
+      "text": "<article class=\"reader-article\" id=\"reader-article\"></article>"
+    },
+    {
+      "line": 1830,
+      "text": "<div class=\"reader-ruler\" id=\"reader-ruler\" hidden></div>"
+    },
+    {
+      "line": 1872,
+      "text": "<span class=\"editorial-bar-title\" id=\"editorial-bar-title\">Leitura editorial</span>"
+    },
+    {
+      "line": 1877,
+      "text": "<iframe id=\"editorial-frame\" class=\"editorial-frame\" src=\"\" title=\"Leitura editorial\" loading=\"lazy\"></iframe>"
+    }
+  ],
+  "elements": [
+    {
+      "tag": "button",
+      "line": 265,
+      "id": null,
+      "class": [
+        "secondary-button"
+      ],
+      "role": null,
+      "aria_label": "Ler como leitor",
+      "data": {
+        "data-action": "open-reader-mode"
+      },
+      "text": "menu_book Ler"
+    },
+    {
+      "tag": "div",
+      "line": 321,
+      "id": null,
+      "class": [
+        "fmt-group",
+        "fmt-group-editorial"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-group": ""
+      },
+      "text": "more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo página p. format_color_text Classes insert_page_break Quebra content_copy Copiar file_download Baixar print Imprimir"
+    },
+    {
+      "tag": "select",
+      "line": 326,
+      "id": null,
+      "class": [
+        "fmt-select",
+        "editor-preset-select"
+      ],
+      "role": null,
+      "aria_label": "Formato de página do texto",
+      "data": {
+        "data-page-preset": "",
+        "data-vrda-tooltip": "Formato de página"
+      },
+      "text": "Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5"
+    },
+    {
+      "tag": "option",
+      "line": 329,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura confortável"
+    },
+    {
+      "tag": "div",
+      "line": 395,
+      "id": null,
+      "class": [
+        "reading-sample"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-lexical-context": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "section",
+      "line": 861,
+      "id": null,
+      "class": [
+        "view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "academia"
+      },
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "article",
+      "line": 862,
+      "id": null,
+      "class": [
+        "academy-view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-active": "revisar"
+      },
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "section",
+      "line": 865,
+      "id": null,
+      "class": [
+        "academy-banner"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Ofício Ateliê Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação. psychology Revisar meu texto menu_book Abrir um guia route Planejar publicação arrow_back Continuar com o texto atual school Redação para vest"
+    },
+    {
+      "tag": "p",
+      "line": 868,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escolha o que o seu texto precisa agora: leitura, direção ou caminho de publicação."
+    },
+    {
+      "tag": "div",
+      "line": 899,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura do texto Espelho, laboratório e prática Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+    },
+    {
+      "tag": "p",
+      "line": 900,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura do texto"
+    },
+    {
+      "tag": "section",
+      "line": 906,
+      "id": null,
+      "class": [
+        "academy-tools"
+      ],
+      "role": null,
+      "aria_label": "Ferramentas do Ateliê",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, voca"
+    },
+    {
+      "tag": "nav",
+      "line": 913,
+      "id": null,
+      "class": [
+        "academy-tools-tabs"
+      ],
+      "role": null,
+      "aria_label": "Selecionar ferramenta",
+      "data": {},
+      "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática"
+    },
+    {
+      "tag": "label",
+      "line": 926,
+      "id": null,
+      "class": [
+        "academy-tool-tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "library_books Leituras"
+    },
+    {
+      "tag": "textarea",
+      "line": 955,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": "Texto para o Espelho de Voz",
+      "data": {
+        "data-voice-input": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "section",
+      "line": 1200,
+      "id": null,
+      "class": [
+        "academy-leitura"
+      ],
+      "role": null,
+      "aria_label": "Leitura editorial",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura editorial Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editori"
+    },
+    {
+      "tag": "p",
+      "line": 1201,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "div",
+      "line": 1202,
+      "id": null,
+      "class": [
+        "leitura-editorial-grid"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editorial Como revisar um"
+    },
+    {
+      "tag": "a",
+      "line": 1203,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios →"
+    },
+    {
+      "tag": "p",
+      "line": 1204,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1208,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos →"
+    },
+    {
+      "tag": "p",
+      "line": 1209,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1213,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como revisar um manuscrito As 5 camadas de revisão e a lista cena por cena →"
+    },
+    {
+      "tag": "p",
+      "line": 1214,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1218,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como vencer o bloqueio criativo Causas reais e técnicas imediatas para retomar a escrita →"
+    },
+    {
+      "tag": "p",
+      "line": 1219,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "aside",
+      "line": 1386,
+      "id": null,
+      "class": [
+        "inspector"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "right_panel_close Olhar do texto — escreva para ver Palavras que voltam Tipos de palavra Leitura fácil? — Escreva para ver Voz do texto Análise da frase selecionada"
+    },
+    {
+      "tag": "div",
+      "line": 1390,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-linguistic-panel": ""
+      },
+      "text": "Olhar do texto — escreva para ver Palavras que voltam Tipos de palavra Leitura fácil? — Escreva para ver Voz do texto"
+    },
+    {
+      "tag": "div",
+      "line": 1410,
+      "id": null,
+      "class": [
+        "inspector-section",
+        "readability"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura fácil? — Escreva para ver"
+    },
+    {
+      "tag": "h3",
+      "line": 1411,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura fácil?"
+    },
+    {
+      "tag": "button",
+      "line": 1456,
+      "id": null,
+      "class": [
+        "focus-pill"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "toggle-ruler"
+      },
+      "text": "horizontal_rule Linha"
+    },
+    {
+      "tag": "script",
+      "line": 1630,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1649,
+      "id": "academia-hint-toast",
+      "class": [],
+      "role": "status",
+      "aria_label": null,
+      "data": {},
+      "text": "school Você pausou por aqui. O Ateliê tem guias para o seu gênero, leitura do texto e oficinas de trabalho. ×"
+    },
+    {
+      "tag": "span",
+      "line": 1672,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Você pausou por aqui. O Ateliê tem guias para o seu gênero, leitura do texto e oficinas de trabalho."
+    },
+    {
+      "tag": "div",
+      "line": 1802,
+      "id": "reader-overlay",
+      "class": [
+        "reader-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "close play_circle Rolar speed Ritmo 1 view_day Linha-guia text_fields Letra média"
+    },
+    {
+      "tag": "header",
+      "line": 1803,
+      "id": null,
+      "class": [
+        "reader-header"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "close play_circle Rolar speed Ritmo 1 view_day Linha-guia text_fields Letra média"
+    },
+    {
+      "tag": "button",
+      "line": 1804,
+      "id": null,
+      "class": [
+        "icon-button"
+      ],
+      "role": null,
+      "aria_label": "Fechar modo leitura",
+      "data": {
+        "data-action": "close-reader-mode"
+      },
+      "text": "close"
+    },
+    {
+      "tag": "span",
+      "line": 1807,
+      "id": "reader-title",
+      "class": [
+        "reader-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1808,
+      "id": null,
+      "class": [
+        "reader-controls"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "play_circle Rolar speed Ritmo 1 view_day Linha-guia text_fields Letra média"
+    },
+    {
+      "tag": "button",
+      "line": 1809,
+      "id": "reader-play",
+      "class": [
+        "reader-pill"
+      ],
+      "role": null,
+      "aria_label": "Rolar o texto automaticamente",
+      "data": {
+        "data-action": "reader-play-pause"
+      },
+      "text": "play_circle Rolar"
+    },
+    {
+      "tag": "span",
+      "line": 1811,
+      "id": "reader-play-label",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Rolar"
+    },
+    {
+      "tag": "button",
+      "line": 1813,
+      "id": "reader-speed",
+      "class": [
+        "reader-pill"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "reader-cycle-speed"
+      },
+      "text": "speed Ritmo 1"
+    },
+    {
+      "tag": "span",
+      "line": 1815,
+      "id": "reader-speed-label",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Ritmo 1"
+    },
+    {
+      "tag": "button",
+      "line": 1817,
+      "id": "reader-ruler-btn",
+      "class": [
+        "reader-pill"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "reader-toggle-ruler"
+      },
+      "text": "view_day Linha-guia"
+    },
+    {
+      "tag": "button",
+      "line": 1821,
+      "id": "reader-font-btn",
+      "class": [
+        "reader-pill"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "reader-cycle-font"
+      },
+      "text": "text_fields Letra média"
+    },
+    {
+      "tag": "span",
+      "line": 1823,
+      "id": "reader-font-label",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Letra média"
+    },
+    {
+      "tag": "div",
+      "line": 1827,
+      "id": "reader-canvas",
+      "class": [
+        "reader-canvas"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "article",
+      "line": 1828,
+      "id": "reader-article",
+      "class": [
+        "reader-article"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1830,
+      "id": "reader-ruler",
+      "class": [
+        "reader-ruler"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1867,
+      "id": "editorial-overlay",
+      "class": [
+        "editorial-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "arrow_back Leitura editorial open_in_new"
+    },
+    {
+      "tag": "div",
+      "line": 1868,
+      "id": null,
+      "class": [
+        "editorial-bar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "arrow_back Leitura editorial open_in_new"
+    },
+    {
+      "tag": "span",
+      "line": 1872,
+      "id": "editorial-bar-title",
+      "class": [
+        "editorial-bar-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "iframe",
+      "line": 1877,
+      "id": "editorial-frame",
+      "class": [
+        "editorial-frame"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    }
+  ]
+}

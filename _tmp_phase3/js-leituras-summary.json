@@ -1,0 +1,26 @@
+{
+  "file_hit_counts": {
+    "academia-controller.js": 3,
+    "app.js": 15,
+    "archive-engine.js": 1,
+    "backup-controller.js": 1,
+    "backup-engine.js": 5,
+    "document-engine.js": 1,
+    "editor-controller.js": 2,
+    "filesystem-backup-engine.js": 1,
+    "js/controllers/reader-controller.js": 75,
+    "js/data/criterios-data.js": 1,
+    "js/data/synonym-data.js": 12,
+    "lexical-engine.js": 28,
+    "lexical-view-controller.js": 2,
+    "pagination-engine.js": 1,
+    "pegar/jsqr.min.js": 3,
+    "precision-engine.js": 5,
+    "print-engine.js": 1,
+    "service-worker.js": 1,
+    "syntax-engine.js": 3,
+    "voice-engine.js": 9
+  },
+  "selectors": [],
+  "number_formatting": []
+}

@@ -1,0 +1,2256 @@
+{
+  "line_matches": [
+    {
+      "line": 7,
+      "text": "<title>Escrevaral — antes que as palavras sequem.</title>"
+    },
+    {
+      "line": 12,
+      "text": "<meta property=\"og:title\" content=\"Escrevaral — antes que as palavras sequem.\">"
+    },
+    {
+      "line": 23,
+      "text": "<meta name=\"twitter:title\" content=\"Escrevaral — antes que as palavras sequem.\">"
+    },
+    {
+      "line": 65,
+      "text": "<link rel=\"manifest\" href=\"manifest.webmanifest?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 66,
+      "text": "<link rel=\"icon\" href=\"favicon.svg?v=20260726-lexical-hint-v1\" type=\"image/svg+xml\">"
+    },
+    {
+      "line": 67,
+      "text": "<link rel=\"icon\" href=\"favicon_io/favicon.ico?v=20260726-lexical-hint-v1\" type=\"image/x-icon\">"
+    },
+    {
+      "line": 68,
+      "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-48x48.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"48x48\">"
+    },
+    {
+      "line": 69,
+      "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-32x32.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"32x32\">"
+    },
+    {
+      "line": 70,
+      "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-16x16.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"16x16\">"
+    },
+    {
+      "line": 71,
+      "text": "<link rel=\"apple-touch-icon\" href=\"favicon_io/apple-touch-icon.png?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 75,
+      "text": "<link rel=\"stylesheet\" href=\"css/00-tokens.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 76,
+      "text": "<link rel=\"stylesheet\" href=\"css/01-base.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 77,
+      "text": "<link rel=\"stylesheet\" href=\"css/02-shell-navigation.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 78,
+      "text": "<link rel=\"stylesheet\" href=\"styles.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 79,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-layout.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 80,
+      "text": "<link rel=\"stylesheet\" href=\"css/04-cronograma.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 81,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-modes.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 82,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-writing-area.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 83,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-guide-reference.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 84,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-inspector-precision.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 85,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-toolbar.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 86,
+      "text": "<link rel=\"stylesheet\" href=\"css/05-archive.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 87,
+      "text": "<link rel=\"stylesheet\" href=\"css/07-enem.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 88,
+      "text": "<link rel=\"stylesheet\" href=\"css/09-print.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 89,
+      "text": "<link rel=\"stylesheet\" href=\"css/04-analysis-academy.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 90,
+      "text": "<link rel=\"stylesheet\" href=\"css/06-academy-tools.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 91,
+      "text": "<link rel=\"stylesheet\" href=\"css/08-responsive.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 92,
+      "text": "<link rel=\"stylesheet\" href=\"css/10-mobile-nav.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 93,
+      "text": "<link rel=\"stylesheet\" href=\"css/11-badges.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 94,
+      "text": "<link rel=\"stylesheet\" href=\"css/12-training-modes.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 95,
+      "text": "<link rel=\"stylesheet\" href=\"css/wood-icons.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 161,
+      "text": "<span>Antes que as palavras sequem.</span>"
+    },
+    {
+      "line": 167,
+      "text": "<button class=\"tab\" data-view-target=\"biblioteca\" data-vrda-tooltip=\"Veja como cada palavra do seu texto se comporta — e o que ela pode virar.\">Palavras</button>"
+    },
+    {
+      "line": 389,
+      "text": "<h1 data-lexical-title>Palavras</h1>"
+    },
+    {
+      "line": 390,
+      "text": "<p class=\"lexical-hint muted\" data-lexical-hint>Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui.</p>"
+    },
+    {
+      "line": 391,
+      "text": "<label class=\"lexical-search-row\" aria-label=\"Buscar palavra\">"
+    },
+    {
+      "line": 393,
+      "text": "<input type=\"search\" data-lexical-search placeholder=\"Buscar palavra…\" autocomplete=\"off\" aria-label=\"Buscar palavra\">"
+    },
+    {
+      "line": 395,
+      "text": "<div class=\"reading-sample\" data-lexical-context></div>"
+    },
+    {
+      "line": 397,
+      "text": "<aside class=\"lexical-card\" data-lexical-card></aside>"
+    },
+    {
+      "line": 409,
+      "text": "<p class=\"proof-context-note\">Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra.</p>"
+    },
+    {
+      "line": 434,
+      "text": "<span>Palavras testemunhadas</span>"
+    },
+    {
+      "line": 614,
+      "text": "<option value=\"words\">Palavras</option>"
+    },
+    {
+      "line": 955,
+      "text": "<textarea data-voice-input placeholder=\"Cole aqui um capítulo, cena ou trecho do seu romance ou conto. Acima de 500 palavras a leitura fica mais estável.\" aria-label=\"Texto para o Espelho de Voz\"></textarea>"
+    },
+    {
+      "line": 957,
+      "text": "<span data-voice-count>0 palavras</span>"
+    },
+    {
+      "line": 1038,
+      "text": "<input type=\"search\" id=\"rimalab-finder-input\" data-rimalab-finder placeholder=\"ex.: saudade, flor, amor…\" autocomplete=\"off\" aria-label=\"Buscar palavras que rimam\">"
+    },
+    {
+      "line": 1052,
+      "text": "<h2>Revise palavras que podem pesar mais do que parecem</h2>"
+    },
+    {
+      "line": 1053,
+      "text": "<p>Palavras que talvez você não queira mais usar — e o que colocar no lugar.</p>"
+    },
+    {
+      "line": 1066,
+      "text": "<span>Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra.</span>"
+    },
+    {
+      "line": 1117,
+      "text": "<span class=\"deriva-contador\" id=\"deriva-contador\">0 palavras</span>"
+    },
+    {
+      "line": 1125,
+      "text": "placeholder=\"Comece a digitar. O fio nasce com a primeira palavra.\""
+    },
+    {
+      "line": 1376,
+      "text": "<button class=\"crono-empty-action\" data-action=\"edit-word-goal\">"
+    },
+    {
+      "line": 1378,
+      "text": "Meta de palavras"
+    },
+    {
+      "line": 1400,
+      "text": "<h3>Palavras que voltam</h3>"
+    },
+    {
+      "line": 1401,
+      "text": "<div class=\"word-cloud\" data-word-cloud></div>"
+    },
+    {
+      "line": 1405,
+      "text": "<h3>Tipos de palavra</h3>"
+    },
+    {
+      "line": 1416,
+      "text": "<p class=\"inspector-density\" data-lexical-density hidden></p>"
+    },
+    {
+      "line": 1462,
+      "text": "<div class=\"focus-counter\" data-focus-count>0 palavras</div>"
+    },
+    {
+      "line": 1473,
+      "text": "<p class=\"ob-tagline\">Antes que as palavras sequem.</p>"
+    },
+    {
+      "line": 1505,
+      "text": "<!-- Palavras — informativo -->"
+    },
+    {
+      "line": 1508,
+      "text": "<h2 class=\"ob-pillar-title\">Palavras</h2>"
+    },
+    {
+      "line": 1563,
+      "text": "<span data-stat=\"count\">186 palavras · 4 parágrafos</span>"
+    },
+    {
+      "line": 1566,
+      "text": "<button class=\"goal-label\" data-action=\"edit-word-goal\" data-goal-label title=\"Alterar meta\">0 / 0 palavras</button>"
+    },
+    {
+      "line": 1568,
+      "text": "<button class=\"statusbar-goal-btn\" data-action=\"edit-word-goal\" data-goal-set-btn aria-label=\"Definir meta de palavras\" title=\"Definir meta de palavras\">"
+    },
+    {
+      "line": 1593,
+      "text": "<script src=\"document-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1594,
+      "text": "<script src=\"pagination-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1595,
+      "text": "<script src=\"lexical-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1596,
+      "text": "<script src=\"proof-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1597,
+      "text": "<script src=\"vrda-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1598,
+      "text": "<script src=\"backup-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1599,
+      "text": "<script src=\"filesystem-backup-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1600,
+      "text": "<script src=\"archive-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1601,
+      "text": "<script src=\"badges-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1602,
+      "text": "<script src=\"version-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1603,
+      "text": "<script src=\"export-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1604,
+      "text": "<script src=\"template-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1605,
+      "text": "<script src=\"precision-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1606,
+      "text": "<script src=\"js/data/criterios-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1607,
+      "text": "<script src=\"syntax-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1608,
+      "text": "<script src=\"punctuation-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1609,
+      "text": "<script src=\"analise-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1610,
+      "text": "<script src=\"voice-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1611,
+      "text": "<script src=\"rimalab-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1612,
+      "text": "<script src=\"decolonial-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1613,
+      "text": "<script src=\"rights-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1614,
+      "text": "<script src=\"typewriter-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1615,
+      "text": "<script src=\"js/data/synonym-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1617,
+      "text": "<script src=\"state-integrity.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1618,
+      "text": "<script src=\"screenplay-codec.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1619,
+      "text": "<script src=\"state-store.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1621,
+      "text": "<script src=\"cronograma-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1622,
+      "text": "<script src=\"editor-modes.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1623,
+      "text": "<script src=\"editor-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1624,
+      "text": "<script src=\"proof-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1625,
+      "text": "<script src=\"ui-dialog.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1626,
+      "text": "<script src=\"academia-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1627,
+      "text": "<script src=\"backup-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1628,
+      "text": "<script src=\"archive-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1629,
+      "text": "<script src=\"grammar-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1630,
+      "text": "<script src=\"js/controllers/reader-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1631,
+      "text": "<script src=\"js/controllers/pomodoro-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1632,
+      "text": "<script src=\"js/controllers/editor-status-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1633,
+      "text": "<script src=\"js/controllers/oficina-navigation-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1634,
+      "text": "<script src=\"syntax-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1635,
+      "text": "<script src=\"combo-detector.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1636,
+      "text": "<script src=\"deriva-mode.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1637,
+      "text": "<script src=\"perseguicao-mode.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1638,
+      "text": "<script src=\"js/controllers/training-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1640,
+      "text": "<script src=\"js/controllers/tooltip-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1642,
+      "text": "<script src=\"print-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1644,
+      "text": "<script src=\"js/data/quotes-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1645,
+      "text": "<script src=\"app.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1646,
+      "text": "<script src=\"workshop-authorship-clarity-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1848,
+      "text": "<!-- Popover de palavra — abre ao clicar no editor -->"
+    },
+    {
+      "line": 1849,
+      "text": "<div id=\"word-popover\" class=\"word-popover\" hidden role=\"tooltip\" aria-live=\"polite\">"
+    },
+    {
+      "line": 1850,
+      "text": "<div class=\"word-popover-head\">"
+    },
+    {
+      "line": 1852,
+      "text": "<span class=\"word-popover-class\" data-popover-class></span>"
+    },
+    {
+      "line": 1854,
+      "text": "<div class=\"word-popover-body\">"
+    },
+    {
+      "line": 1856,
+      "text": "<div class=\"word-popover-definition\" data-popover-definition hidden>"
+    },
+    {
+      "line": 1857,
+      "text": "<p class=\"word-popover-field\" data-popover-field></p>"
+    },
+    {
+      "line": 1858,
+      "text": "<p class=\"word-popover-note\" data-popover-note></p>"
+    },
+    {
+      "line": 1861,
+      "text": "<button class=\"word-popover-close\" data-action=\"popover-close\" aria-label=\"Fechar painel de definição\">"
+    },
+    {
+      "line": 1917,
+      "text": "<span class=\"dock-label\">Palavras</span>"
+    }
+  ],
+  "elements": [
+    {
+      "tag": "html",
+      "line": 2,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escrevaral — antes que as palavras sequem. sync_problem Outra aba alterou o acervo. Se houver conflito, as duas versões serão preservadas. Abrir Acervo close shield_locked Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é"
+    },
+    {
+      "tag": "head",
+      "line": 3,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escrevaral — antes que as palavras sequem."
+    },
+    {
+      "tag": "title",
+      "line": 7,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escrevaral — antes que as palavras sequem."
+    },
+    {
+      "tag": "meta",
+      "line": 12,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "meta",
+      "line": 23,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 65,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 66,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 67,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 68,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 69,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 70,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 71,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 75,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 76,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 77,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 78,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 79,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 80,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 81,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 82,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 83,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 84,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 85,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 86,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 87,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 88,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 89,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 90,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 91,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 92,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 93,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 94,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 95,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 152,
+      "id": null,
+      "class": [
+        "app-shell"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view": "editor"
+      },
+      "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen right_panel_open left_panel_close Texto"
+    },
+    {
+      "tag": "header",
+      "line": 153,
+      "id": null,
+      "class": [
+        "topbar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen"
+    },
+    {
+      "tag": "div",
+      "line": 154,
+      "id": null,
+      "class": [
+        "brand-lockup"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "menu Escrevaral Antes que as palavras sequem."
+    },
+    {
+      "tag": "div",
+      "line": 159,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escrevaral Antes que as palavras sequem."
+    },
+    {
+      "tag": "span",
+      "line": 161,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Antes que as palavras sequem."
+    },
+    {
+      "tag": "nav",
+      "line": 165,
+      "id": null,
+      "class": [
+        "module-tabs"
+      ],
+      "role": null,
+      "aria_label": "Módulos do Escrevaral",
+      "data": {},
+      "text": "Escrever Palavras Autoria Acervo Ateliê Planejamento"
+    },
+    {
+      "tag": "button",
+      "line": 167,
+      "id": null,
+      "class": [
+        "tab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "biblioteca",
+        "data-vrda-tooltip": "Veja como cada palavra do seu texto se comporta — e o que ela pode virar."
+      },
+      "text": "Palavras"
+    },
+    {
+      "tag": "section",
+      "line": 386,
+      "id": null,
+      "class": [
+        "view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "biblioteca"
+      },
+      "text": "Palavras Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui. search"
+    },
+    {
+      "tag": "article",
+      "line": 387,
+      "id": null,
+      "class": [
+        "paper",
+        "split-paper"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui. search"
+    },
+    {
+      "tag": "div",
+      "line": 388,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui. search"
+    },
+    {
+      "tag": "h1",
+      "line": 389,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-lexical-title": ""
+      },
+      "text": "Palavras"
+    },
+    {
+      "tag": "p",
+      "line": 390,
+      "id": null,
+      "class": [
+        "lexical-hint",
+        "muted"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-lexical-hint": ""
+      },
+      "text": "Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui."
+    },
+    {
+      "tag": "label",
+      "line": 391,
+      "id": null,
+      "class": [
+        "lexical-search-row"
+      ],
+      "role": null,
+      "aria_label": "Buscar palavra",
+      "data": {},
+      "text": "search"
+    },
+    {
+      "tag": "input",
+      "line": 393,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": "Buscar palavra",
+      "data": {
+        "data-lexical-search": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "aside",
+      "line": 397,
+      "id": null,
+      "class": [
+        "lexical-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-lexical-card": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "p",
+      "line": 409,
+      "id": null,
+      "class": [
+        "proof-context-note"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra."
+    },
+    {
+      "tag": "div",
+      "line": 416,
+      "id": null,
+      "class": [
+        "certificate-grid"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Impressão digital da escrita Aguardando sua escrita Escreva no editor para iniciar o registro Teclas testemunhadas 0 0 descartadas Seu ritmo — Tempo médio entre teclas Palavras testemunhadas — Do texto ativo"
+    },
+    {
+      "tag": "div",
+      "line": 433,
+      "id": null,
+      "class": [
+        "metric-block"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras testemunhadas — Do texto ativo"
+    },
+    {
+      "tag": "span",
+      "line": 434,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras testemunhadas"
+    },
+    {
+      "tag": "section",
+      "line": 584,
+      "id": null,
+      "class": [
+        "view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "arquivo"
+      },
+      "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+    },
+    {
+      "tag": "article",
+      "line": 585,
+      "id": null,
+      "class": [
+        "archive-view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+    },
+    {
+      "tag": "div",
+      "line": 602,
+      "id": null,
+      "class": [
+        "archive-controls"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "search sort Atualizados Título Palavras Progresso Tipo"
+    },
+    {
+      "tag": "label",
+      "line": 609,
+      "id": null,
+      "class": [
+        "archive-sort"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "sort Atualizados Título Palavras Progresso Tipo"
+    },
+    {
+      "tag": "select",
+      "line": 611,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": "Ordenar acervo",
+      "data": {
+        "data-archive-sort": ""
+      },
+      "text": "Atualizados Título Palavras Progresso Tipo"
+    },
+    {
+      "tag": "option",
+      "line": 614,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras"
+    },
+    {
+      "tag": "div",
+      "line": 950,
+      "id": null,
+      "class": [
+        "voice-mirror-workbench"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "edit_note Usar o texto em edição 0 palavras lido aqui · nada sai do navegador download Baixar TXT analytics Análise do manuscrito content_copy Copiar resultado O espelho ainda está vazio. Traga texto suficiente para que a voz deixe marcas."
+    },
+    {
+      "tag": "textarea",
+      "line": 955,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": "Texto para o Espelho de Voz",
+      "data": {
+        "data-voice-input": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 956,
+      "id": null,
+      "class": [
+        "voice-meta"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "0 palavras lido aqui · nada sai do navegador download Baixar TXT analytics Análise do manuscrito content_copy Copiar resultado"
+    },
+    {
+      "tag": "span",
+      "line": 957,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-voice-count": ""
+      },
+      "text": "0 palavras"
+    },
+    {
+      "tag": "input",
+      "line": 1038,
+      "id": "rimalab-finder-input",
+      "class": [],
+      "role": null,
+      "aria_label": "Buscar palavras que rimam",
+      "data": {
+        "data-rimalab-finder": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1048,
+      "id": null,
+      "class": [
+        "academy-tool-panel",
+        "at-panel-vocab"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+    },
+    {
+      "tag": "div",
+      "line": 1049,
+      "id": null,
+      "class": [
+        "decolonial-tool"
+      ],
+      "role": null,
+      "aria_label": "Vocabulário Decolonizador",
+      "data": {},
+      "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+    },
+    {
+      "tag": "div",
+      "line": 1050,
+      "id": null,
+      "class": [
+        "decolonial-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+    },
+    {
+      "tag": "h2",
+      "line": 1052,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Revise palavras que podem pesar mais do que parecem"
+    },
+    {
+      "tag": "p",
+      "line": 1053,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras que talvez você não queira mais usar — e o que colocar no lugar."
+    },
+    {
+      "tag": "div",
+      "line": 1062,
+      "id": null,
+      "class": [
+        "decolonial-workbench"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Observador pronto. Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra. download Baixar TXT search"
+    },
+    {
+      "tag": "div",
+      "line": 1063,
+      "id": null,
+      "class": [
+        "decolonial-observer"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-decolonial-observer": ""
+      },
+      "text": "Observador pronto. Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra. download Baixar TXT"
+    },
+    {
+      "tag": "div",
+      "line": 1064,
+      "id": null,
+      "class": [
+        "decolonial-observer-summary"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Observador pronto. Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra. download Baixar TXT"
+    },
+    {
+      "tag": "span",
+      "line": 1066,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra."
+    },
+    {
+      "tag": "div",
+      "line": 1114,
+      "id": "deriva-arena",
+      "class": [
+        "deriva-arena"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Deriva 0 palavras Descartar Salvar como rascunho"
+    },
+    {
+      "tag": "div",
+      "line": 1115,
+      "id": null,
+      "class": [
+        "deriva-header"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Deriva 0 palavras"
+    },
+    {
+      "tag": "span",
+      "line": 1117,
+      "id": "deriva-contador",
+      "class": [
+        "deriva-contador"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "0 palavras"
+    },
+    {
+      "tag": "textarea",
+      "line": 1122,
+      "id": "deriva-textarea",
+      "class": [
+        "deriva-textarea"
+      ],
+      "role": null,
+      "aria_label": "Área de escrita livre — Deriva",
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1367,
+      "id": null,
+      "class": [
+        "crono-empty-actions"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-crono-empty-actions": ""
+      },
+      "text": "edit_calendar Planejar sessão calendar_month Ver calendário flag Meta de palavras"
+    },
+    {
+      "tag": "button",
+      "line": 1376,
+      "id": null,
+      "class": [
+        "crono-empty-action"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "edit-word-goal"
+      },
+      "text": "flag Meta de palavras"
+    },
+    {
+      "tag": "aside",
+      "line": 1386,
+      "id": null,
+      "class": [
+        "inspector"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "right_panel_close Olhar do texto — escreva para ver Palavras que voltam Tipos de palavra Leitura fácil? — Escreva para ver Voz do texto Análise da frase selecionada"
+    },
+    {
+      "tag": "div",
+      "line": 1390,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-linguistic-panel": ""
+      },
+      "text": "Olhar do texto — escreva para ver Palavras que voltam Tipos de palavra Leitura fácil? — Escreva para ver Voz do texto"
+    },
+    {
+      "tag": "div",
+      "line": 1399,
+      "id": null,
+      "class": [
+        "inspector-section"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras que voltam"
+    },
+    {
+      "tag": "h3",
+      "line": 1400,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras que voltam"
+    },
+    {
+      "tag": "div",
+      "line": 1401,
+      "id": null,
+      "class": [
+        "word-cloud"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-word-cloud": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1404,
+      "id": null,
+      "class": [
+        "inspector-section"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Tipos de palavra"
+    },
+    {
+      "tag": "h3",
+      "line": 1405,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Tipos de palavra"
+    },
+    {
+      "tag": "div",
+      "line": 1462,
+      "id": null,
+      "class": [
+        "focus-counter"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-focus-count": ""
+      },
+      "text": "0 palavras"
+    },
+    {
+      "tag": "div",
+      "line": 1466,
+      "id": "terms-overlay",
+      "class": [
+        "create-note-overlay",
+        "ob-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-terms-overlay": ""
+      },
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+    },
+    {
+      "tag": "section",
+      "line": 1467,
+      "id": null,
+      "class": [
+        "ob-panel"
+      ],
+      "role": "dialog",
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+    },
+    {
+      "tag": "div",
+      "line": 1468,
+      "id": null,
+      "class": [
+        "ob-brand"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira."
+    },
+    {
+      "tag": "div",
+      "line": 1470,
+      "id": null,
+      "class": [
+        "ob-brand-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira."
+    },
+    {
+      "tag": "p",
+      "line": 1473,
+      "id": null,
+      "class": [
+        "ob-tagline"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Antes que as palavras sequem."
+    },
+    {
+      "tag": "div",
+      "line": 1506,
+      "id": null,
+      "class": [
+        "ob-pillar",
+        "ob-pillar--info"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "spellcheck Palavras Léxico, rima e sintaxe sem sair do manuscrito."
+    },
+    {
+      "tag": "h2",
+      "line": 1508,
+      "id": null,
+      "class": [
+        "ob-pillar-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras"
+    },
+    {
+      "tag": "footer",
+      "line": 1548,
+      "id": null,
+      "class": [
+        "statusbar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Você está sem internet — o e-mail não vai chegar agora. 186 palavras · 4 parágrafos 0 / 0 palavras flag timer 25:00 Pronto 📡 © 2026 Escrevaral"
+    },
+    {
+      "tag": "span",
+      "line": 1563,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-stat": "count"
+      },
+      "text": "186 palavras · 4 parágrafos"
+    },
+    {
+      "tag": "div",
+      "line": 1564,
+      "id": null,
+      "class": [
+        "statusbar-goal"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-goal-bar": ""
+      },
+      "text": "0 / 0 palavras"
+    },
+    {
+      "tag": "button",
+      "line": 1566,
+      "id": null,
+      "class": [
+        "goal-label"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "edit-word-goal",
+        "data-goal-label": ""
+      },
+      "text": "0 / 0 palavras"
+    },
+    {
+      "tag": "button",
+      "line": 1568,
+      "id": null,
+      "class": [
+        "statusbar-goal-btn"
+      ],
+      "role": null,
+      "aria_label": "Definir meta de palavras",
+      "data": {
+        "data-action": "edit-word-goal",
+        "data-goal-set-btn": ""
+      },
+      "text": "flag"
+    },
+    {
+      "tag": "script",
+      "line": 1593,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1594,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1595,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1596,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1597,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1598,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1599,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1600,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1601,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1602,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1603,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1604,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1605,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1606,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1607,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1608,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1609,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1610,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1611,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1612,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1613,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1614,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1615,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1617,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1618,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1619,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1621,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1622,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1623,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1624,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1625,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1626,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1627,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1628,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1629,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1630,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1631,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1632,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1633,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1634,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1635,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1636,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1637,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1638,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1640,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1642,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1644,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1645,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1646,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1849,
+      "id": "word-popover",
+      "class": [
+        "word-popover"
+      ],
+      "role": "tooltip",
+      "aria_label": null,
+      "data": {},
+      "text": "close"
+    },
+    {
+      "tag": "div",
+      "line": 1850,
+      "id": null,
+      "class": [
+        "word-popover-head"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "span",
+      "line": 1852,
+      "id": null,
+      "class": [
+        "word-popover-class"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-popover-class": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1854,
+      "id": null,
+      "class": [
+        "word-popover-body"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1856,
+      "id": null,
+      "class": [
+        "word-popover-definition"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-popover-definition": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "p",
+      "line": 1857,
+      "id": null,
+      "class": [
+        "word-popover-field"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-popover-field": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "p",
+      "line": 1858,
+      "id": null,
+      "class": [
+        "word-popover-note"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-popover-note": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "button",
+      "line": 1861,
+      "id": null,
+      "class": [
+        "word-popover-close"
+      ],
+      "role": null,
+      "aria_label": "Fechar painel de definição",
+      "data": {
+        "data-action": "popover-close"
+      },
+      "text": "close"
+    },
+    {
+      "tag": "nav",
+      "line": 1898,
+      "id": "mobile-dock",
+      "class": [
+        "mobile-dock"
+      ],
+      "role": null,
+      "aria_label": "Navegação principal",
+      "data": {},
+      "text": "edit_note Escrever inventory_2 Acervo school Ateliê fingerprint Autoria auto_stories Palavras more_horiz Mais route Planejamento"
+    },
+    {
+      "tag": "button",
+      "line": 1915,
+      "id": null,
+      "class": [
+        "dock-item"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "biblioteca"
+      },
+      "text": "auto_stories Palavras"
+    },
+    {
+      "tag": "span",
+      "line": 1917,
+      "id": null,
+      "class": [
+        "dock-label"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras"
+    }
+  ]
+}

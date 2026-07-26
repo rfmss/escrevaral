@@ -1,0 +1,15 @@
+{
+  "file_hit_counts": {
+    "academia-controller.js": 10,
+    "app.js": 5,
+    "archive-engine.js": 1,
+    "js/data/criterios-data.js": 4,
+    "js/data/synonym-data.js": 1,
+    "lexical-engine.js": 13,
+    "lexical-view-controller.js": 4,
+    "state-store.js": 1,
+    "voice-engine.js": 3
+  },
+  "selectors": [],
+  "number_formatting": []
+}

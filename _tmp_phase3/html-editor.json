@@ -1,0 +1,1877 @@
+{
+  "line_matches": [
+    {
+      "line": 9,
+      "text": "<meta name=\"keywords\" content=\"editor de escrita, gente brasileira que escreve, romance, fantasia, suspense, romantasy, new adult, prova de autoria, verificar autoria manuscrito, alternativa ao Scrivener, KDP Brasil, epub gratuito\">"
+    },
+    {
+      "line": 20,
+      "text": "<meta property=\"og:image:alt\" content=\"Escrevaral — editor de escrita para gente brasileira que escreve. Romance, fantasia, suspense.\">"
+    },
+    {
+      "line": 35,
+      "text": "\"applicationCategory\": \"WritingApplication\","
+    },
+    {
+      "line": 46,
+      "text": "\"Editor de manuscritos offline\","
+    },
+    {
+      "line": 79,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-layout.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 81,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-modes.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 82,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-writing-area.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 85,
+      "text": "<link rel=\"stylesheet\" href=\"css/03-editor-toolbar.css?v=20260726-lexical-hint-v1\">"
+    },
+    {
+      "line": 122,
+      "text": "<span>Sua mesa voltou.</span>"
+    },
+    {
+      "line": 152,
+      "text": "<div class=\"app-shell\" data-view=\"editor\">"
+    },
+    {
+      "line": 166,
+      "text": "<button class=\"tab is-active\" data-view-target=\"editor\" data-vrda-tooltip=\"Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui.\">Escrever</button>"
+    },
+    {
+      "line": 229,
+      "text": "<div class=\"manuscript-list\" data-manuscript-list></div>"
+    },
+    {
+      "line": 235,
+      "text": "<section class=\"view view-editor is-active\" data-view-panel=\"editor\">"
+    },
+    {
+      "line": 237,
+      "text": "<div class=\"editor-split\" data-template-side=\"left\">"
+    },
+    {
+      "line": 258,
+      "text": "<article class=\"paper editor-paper\">"
+    },
+    {
+      "line": 259,
+      "text": "<div class=\"editor-mode-bar\">"
+    },
+    {
+      "line": 260,
+      "text": "<div class=\"editor-view-controls\">"
+    },
+    {
+      "line": 269,
+      "text": "<button class=\"secondary-button desk-bg-toggle\" data-action=\"toggle-desk-background\" aria-pressed=\"false\" title=\"Mudar fundo do editor\" aria-label=\"Mudar fundo do editor\">"
+    },
+    {
+      "line": 275,
+      "text": "<button class=\"icon-button editor-mobile-new\" data-action=\"open-create-note\" aria-label=\"Novo texto\" data-vrda-tooltip=\"Novo texto\">"
+    },
+    {
+      "line": 279,
+      "text": "<button class=\"icon-button editor-delete-btn\" data-action=\"delete-active-manuscript\" aria-label=\"Apagar este texto\" data-vrda-tooltip=\"Apagar este texto\">"
+    },
+    {
+      "line": 285,
+      "text": "<div class=\"format-bar-wrap\" data-format-bar-wrap>"
+    },
+    {
+      "line": 286,
+      "text": "<div class=\"format-bar\" data-format-bar>"
+    },
+    {
+      "line": 288,
+      "text": "<div class=\"fmt-group fmt-group-writing\">"
+    },
+    {
+      "line": 317,
+      "text": "<!-- Separador editorial — marca passagem para comandos de saída -->"
+    },
+    {
+      "line": 318,
+      "text": "<span class=\"fmt-sep-editorial\" aria-hidden=\"true\"></span>"
+    },
+    {
+      "line": 320,
+      "text": "<!-- Grupo 2: saída editorial — visualmente secundário -->"
+    },
+    {
+      "line": 321,
+      "text": "<div class=\"fmt-group fmt-group-editorial\" data-editorial-group>"
+    },
+    {
+      "line": 322,
+      "text": "<button class=\"fmt-btn fmt-btn-labeled fmt-editorial-toggle\" data-action=\"toggle-editorial-group\" title=\"Mais ferramentas de página e exportação\" aria-label=\"Mais ferramentas de página e exportação\" aria-expanded=\"false\">"
+    },
+    {
+      "line": 326,
+      "text": "<select class=\"fmt-select editor-preset-select\" data-page-preset data-vrda-tooltip=\"Formato de página\" aria-label=\"Formato de página do texto\">"
+    },
+    {
+      "line": 333,
+      "text": "<button class=\"editor-view-btn\" data-action=\"toggle-page-view\" aria-pressed=\"false\" title=\"Ativar modo página\">"
+    },
+    {
+      "line": 359,
+      "text": "<button class=\"fmt-btn fmt-btn-labeled\" data-action=\"copy-manuscript-text\" title=\"Copiar texto para a área de transferência\" aria-label=\"Copiar texto\">"
+    },
+    {
+      "line": 373,
+      "text": "</div><!-- /format-bar-wrap -->"
+    },
+    {
+      "line": 379,
+      "text": "<div class=\"writing-area\" contenteditable=\"true\" spellcheck=\"true\" aria-label=\"Área de escrita\" data-view-mode=\"flow\"></div>"
+    },
+    {
+      "line": 380,
+      "text": "<div class=\"paged-editor\" data-paged-editor></div>"
+    },
+    {
+      "line": 381,
+      "text": "<div class=\"specialized-editor\" data-specialized-editor hidden></div>"
+    },
+    {
+      "line": 387,
+      "text": "<article class=\"paper split-paper\">"
+    },
+    {
+      "line": 402,
+      "text": "<article class=\"paper certificate-paper\">"
+    },
+    {
+      "line": 409,
+      "text": "<p class=\"proof-context-note\">Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra.</p>"
+    },
+    {
+      "line": 420,
+      "text": "<small data-proof-status>Escreva no editor para iniciar o registro</small>"
+    },
+    {
+      "line": 494,
+      "text": "<button class=\"secondary-button proof-send-btn\" data-action=\"send-proof-to-editor\">"
+    },
+    {
+      "line": 496,
+      "text": "Enviar para o editor"
+    },
+    {
+      "line": 502,
+      "text": "\"Enviar para o editor\" baixa o arquivo e abre seu email com as instruções prontas. Só anexar e mandar."
+    },
+    {
+      "line": 530,
+      "text": "<div class=\"proof-what-editor-sees\">"
+    },
+    {
+      "line": 531,
+      "text": "<p class=\"proof-share-label\">O que o editor vê ao verificar</p>"
+    },
+    {
+      "line": 532,
+      "text": "<ul class=\"proof-editor-view-list\">"
+    },
+    {
+      "line": 641,
+      "text": "<button class=\"primary-button archive-open-btn\" data-action=\"open-active-manuscript\">"
+    },
+    {
+      "line": 643,
+      "text": "Abrir no editor"
+    },
+    {
+      "line": 696,
+      "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"txt\" title=\"Baixar como texto simples (.txt)\">"
+    },
+    {
+      "line": 700,
+      "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"md\" title=\"Baixar em Markdown (.md)\">"
+    },
+    {
+      "line": 704,
+      "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"html\" title=\"Baixar como página HTML com CSS de impressão (.html)\">"
+    },
+    {
+      "line": 708,
+      "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"docx\" title=\"Baixar para Word e LibreOffice (.docx)\">"
+    },
+    {
+      "line": 712,
+      "text": "<button class=\"ghost-button archive-epub-btn\" data-action=\"export-manuscript\" data-export-format=\"epub\" title=\"ePub para Amazon KDP e leitores de e-book\">"
+    },
+    {
+      "line": 716,
+      "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"obsidian\" title=\"Gerar arquivo .md preparado para abrir no Obsidian\">"
+    },
+    {
+      "line": 883,
+      "text": "<button class=\"academy-resume-link\" type=\"button\" data-action=\"switch-view-editor\" data-academy-resume hidden>"
+    },
+    {
+      "line": 890,
+      "text": "<p>Redação para vestibular — confira o <label for=\"at-voice\" class=\"link-inline\">Espelho de Voz</label> ou abra o guia ENEM no editor.</p>"
+    },
+    {
+      "line": 902,
+      "text": "<p>Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência.</p>"
+    },
+    {
+      "line": 1010,
+      "text": "<textarea data-rimalab-input placeholder=\"Escreva versos, uma quadra, uma letra de música ou um refrão. Cada linha será lida como verso.\" aria-label=\"Editor de Rimas\"></textarea>"
+    },
+    {
+      "line": 1199,
+      "text": "<!-- ── 4. LEITURA EDITORIAL (secundária) ── -->"
+    },
+    {
+      "line": 1200,
+      "text": "<section class=\"academy-leitura\" aria-label=\"Leitura editorial\" data-atelier-section=\"revisar\">"
+    },
+    {
+      "line": 1201,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1202,
+      "text": "<div class=\"leitura-editorial-grid\">"
+    },
+    {
+      "line": 1203,
+      "text": "<a href=\"./vereda-titulo-do-livro.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1204,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1208,
+      "text": "<a href=\"./vereda-primeiras-linhas.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1209,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1213,
+      "text": "<a href=\"./vereda-revisao-manuscrito.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1214,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1218,
+      "text": "<a href=\"./vereda-bloqueio-criativo.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+    },
+    {
+      "line": 1219,
+      "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+    },
+    {
+      "line": 1229,
+      "text": "<p>Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página.</p>"
+    },
+    {
+      "line": 1271,
+      "text": "<span class=\"academy-track-sub\">Mercado editorial · Objeto livro · Anatomia do livro</span>"
+    },
+    {
+      "line": 1280,
+      "text": "<p class=\"eyebrow\">Mercado editorial</p>"
+    },
+    {
+      "line": 1282,
+      "text": "<p>Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao leitor.</p>"
+    },
+    {
+      "line": 1285,
+      "text": "<span>Editoras</span>"
+    },
+    {
+      "line": 1288,
+      "text": "<button class=\"secondary-button\" data-craft-select=\"mercado-editorial\">"
+    },
+    {
+      "line": 1301,
+      "text": "<p>Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras.</p>"
+    },
+    {
+      "line": 1442,
+      "text": "<div class=\"focus-toolbar\" aria-label=\"Controles do modo foco\">"
+    },
+    {
+      "line": 1481,
+      "text": "<div class=\"ob-pillar ob-pillar--mesa\">"
+    },
+    {
+      "line": 1519,
+      "text": "<!-- Mesa no celular — informativo -->"
+    },
+    {
+      "line": 1522,
+      "text": "<h2 class=\"ob-pillar-title\">Mesa no celular</h2>"
+    },
+    {
+      "line": 1583,
+      "text": "<button id=\"levar-mesa-anchor\" title=\"Trazer do celular\" aria-label=\"Trazer do celular\" style=\""
+    },
+    {
+      "line": 1622,
+      "text": "<script src=\"editor-modes.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1623,
+      "text": "<script src=\"editor-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1632,
+      "text": "<script src=\"js/controllers/editor-status-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+    },
+    {
+      "line": 1641,
+      "text": "<!-- Impressão isolada via iframe — sem acoplamento com o modo do editor -->"
+    },
+    {
+      "line": 1719,
+      "text": "<!-- Nudge: Levar a mesa -->"
+    },
+    {
+      "line": 1720,
+      "text": "<div id=\"levar-mesa-toast\" role=\"status\" aria-live=\"polite\" style=\""
+    },
+    {
+      "line": 1731,
+      "text": "<span>Sua mesa inteira pode ir pro celular — sem internet.</span>"
+    },
+    {
+      "line": 1735,
+      "text": "\" id=\"levar-mesa-link\">Leve sua mesa</a>"
+    },
+    {
+      "line": 1736,
+      "text": "<button id=\"levar-mesa-dismiss\" aria-label=\"Fechar\" style=\""
+    },
+    {
+      "line": 1848,
+      "text": "<!-- Popover de palavra — abre ao clicar no editor -->"
+    },
+    {
+      "line": 1866,
+      "text": "<!-- Leitor editorial — iframe embutido -->"
+    },
+    {
+      "line": 1867,
+      "text": "<div id=\"editorial-overlay\" class=\"editorial-overlay\" hidden aria-hidden=\"true\">"
+    },
+    {
+      "line": 1868,
+      "text": "<div class=\"editorial-bar\">"
+    },
+    {
+      "line": 1869,
+      "text": "<button class=\"icon-button\" id=\"editorial-back\" aria-label=\"Voltar ao Escrevaral\">"
+    },
+    {
+      "line": 1872,
+      "text": "<span class=\"editorial-bar-title\" id=\"editorial-bar-title\">Leitura editorial</span>"
+    },
+    {
+      "line": 1873,
+      "text": "<button class=\"icon-button\" id=\"editorial-external\" aria-label=\"Abrir em nova aba\" title=\"Abrir em nova aba\">"
+    },
+    {
+      "line": 1877,
+      "text": "<iframe id=\"editorial-frame\" class=\"editorial-frame\" src=\"\" title=\"Leitura editorial\" loading=\"lazy\"></iframe>"
+    },
+    {
+      "line": 1899,
+      "text": "<button class=\"dock-item\" data-view-target=\"editor\" aria-current=\"page\">"
+    },
+    {
+      "line": 2031,
+      "text": "Abra o <strong>Mesa Portátil</strong> no celular, toque em"
+    },
+    {
+      "line": 2065,
+      "text": "<p style=\"font-size: 15px; font-weight: 700; margin-bottom: 4px;\">Mesa recebida</p>"
+    }
+  ],
+  "elements": [
+    {
+      "tag": "html",
+      "line": 2,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Escrevaral — antes que as palavras sequem. sync_problem Outra aba alterou o acervo. Se houver conflito, as duas versões serão preservadas. Abrir Acervo close shield_locked Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é"
+    },
+    {
+      "tag": "meta",
+      "line": 9,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "meta",
+      "line": 20,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 79,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 81,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 82,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "link",
+      "line": 85,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "body",
+      "line": 97,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "sync_problem Outra aba alterou o acervo. Se houver conflito, as duas versões serão preservadas. Abrir Acervo close shield_locked Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é nuvem. Salve uma cópia para proteger seus "
+    },
+    {
+      "tag": "div",
+      "line": 119,
+      "id": "backup-nudge-banner",
+      "class": [
+        "backup-nudge-banner"
+      ],
+      "role": "status",
+      "aria_label": null,
+      "data": {},
+      "text": "shield_locked Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é nuvem. Salve uma cópia para proteger seus manuscritos. Guardar cópia close"
+    },
+    {
+      "tag": "div",
+      "line": 121,
+      "id": null,
+      "class": [
+        "backup-nudge-text"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é nuvem. Salve uma cópia para proteger seus manuscritos."
+    },
+    {
+      "tag": "span",
+      "line": 122,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Sua mesa voltou."
+    },
+    {
+      "tag": "div",
+      "line": 152,
+      "id": null,
+      "class": [
+        "app-shell"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view": "editor"
+      },
+      "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen right_panel_open left_panel_close Texto"
+    },
+    {
+      "tag": "button",
+      "line": 166,
+      "id": null,
+      "class": [
+        "tab",
+        "is-active"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "editor",
+        "data-vrda-tooltip": "Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui."
+      },
+      "text": "Escrever"
+    },
+    {
+      "tag": "div",
+      "line": 229,
+      "id": null,
+      "class": [
+        "manuscript-list"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-manuscript-list": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "section",
+      "line": 235,
+      "id": null,
+      "class": [
+        "view",
+        "view-editor",
+        "is-active"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "editor"
+      },
+      "text": "Guia de escrita Escolha um guia swap_horiz close view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_ali"
+    },
+    {
+      "tag": "div",
+      "line": 237,
+      "id": null,
+      "class": [
+        "editor-split"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-template-side": "left"
+      },
+      "text": "Guia de escrita Escolha um guia swap_horiz close view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_ali"
+    },
+    {
+      "tag": "article",
+      "line": 258,
+      "id": null,
+      "class": [
+        "paper",
+        "editor-paper"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página d"
+    },
+    {
+      "tag": "div",
+      "line": 259,
+      "id": null,
+      "class": [
+        "editor-mode-bar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo add delete"
+    },
+    {
+      "tag": "div",
+      "line": 260,
+      "id": null,
+      "class": [
+        "editor-view-controls"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo"
+    },
+    {
+      "tag": "button",
+      "line": 269,
+      "id": null,
+      "class": [
+        "secondary-button",
+        "desk-bg-toggle"
+      ],
+      "role": null,
+      "aria_label": "Mudar fundo do editor",
+      "data": {
+        "data-action": "toggle-desk-background"
+      },
+      "text": "texture Fundo"
+    },
+    {
+      "tag": "button",
+      "line": 275,
+      "id": null,
+      "class": [
+        "icon-button",
+        "editor-mobile-new"
+      ],
+      "role": null,
+      "aria_label": "Novo texto",
+      "data": {
+        "data-action": "open-create-note",
+        "data-vrda-tooltip": "Novo texto"
+      },
+      "text": "add"
+    },
+    {
+      "tag": "button",
+      "line": 279,
+      "id": null,
+      "class": [
+        "icon-button",
+        "editor-delete-btn"
+      ],
+      "role": null,
+      "aria_label": "Apagar este texto",
+      "data": {
+        "data-action": "delete-active-manuscript",
+        "data-vrda-tooltip": "Apagar este texto"
+      },
+      "text": "delete"
+    },
+    {
+      "tag": "div",
+      "line": 285,
+      "id": null,
+      "class": [
+        "format-bar-wrap"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-format-bar-wrap": ""
+      },
+      "text": "format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo pág"
+    },
+    {
+      "tag": "div",
+      "line": 286,
+      "id": null,
+      "class": [
+        "format-bar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-format-bar": ""
+      },
+      "text": "format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo pág"
+    },
+    {
+      "tag": "div",
+      "line": 288,
+      "id": null,
+      "class": [
+        "fmt-group",
+        "fmt-group-writing"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify"
+    },
+    {
+      "tag": "span",
+      "line": 318,
+      "id": null,
+      "class": [
+        "fmt-sep-editorial"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 321,
+      "id": null,
+      "class": [
+        "fmt-group",
+        "fmt-group-editorial"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-group": ""
+      },
+      "text": "more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo página p. format_color_text Classes insert_page_break Quebra content_copy Copiar file_download Baixar print Imprimir"
+    },
+    {
+      "tag": "button",
+      "line": 322,
+      "id": null,
+      "class": [
+        "fmt-btn",
+        "fmt-btn-labeled",
+        "fmt-editorial-toggle"
+      ],
+      "role": null,
+      "aria_label": "Mais ferramentas de página e exportação",
+      "data": {
+        "data-action": "toggle-editorial-group"
+      },
+      "text": "more_horiz Mais"
+    },
+    {
+      "tag": "select",
+      "line": 326,
+      "id": null,
+      "class": [
+        "fmt-select",
+        "editor-preset-select"
+      ],
+      "role": null,
+      "aria_label": "Formato de página do texto",
+      "data": {
+        "data-page-preset": "",
+        "data-vrda-tooltip": "Formato de página"
+      },
+      "text": "Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5"
+    },
+    {
+      "tag": "button",
+      "line": 333,
+      "id": null,
+      "class": [
+        "editor-view-btn"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "toggle-page-view"
+      },
+      "text": "article Modo página"
+    },
+    {
+      "tag": "button",
+      "line": 359,
+      "id": null,
+      "class": [
+        "fmt-btn",
+        "fmt-btn-labeled"
+      ],
+      "role": null,
+      "aria_label": "Copiar texto",
+      "data": {
+        "data-action": "copy-manuscript-text"
+      },
+      "text": "content_copy Copiar"
+    },
+    {
+      "tag": "div",
+      "line": 379,
+      "id": null,
+      "class": [
+        "writing-area"
+      ],
+      "role": null,
+      "aria_label": "Área de escrita",
+      "data": {
+        "data-view-mode": "flow"
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 380,
+      "id": null,
+      "class": [
+        "paged-editor"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-paged-editor": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 381,
+      "id": null,
+      "class": [
+        "specialized-editor"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-specialized-editor": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "article",
+      "line": 387,
+      "id": null,
+      "class": [
+        "paper",
+        "split-paper"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Palavras Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui. search"
+    },
+    {
+      "tag": "article",
+      "line": 402,
+      "id": null,
+      "class": [
+        "paper",
+        "certificate-paper"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Prova de autoria Sua escrita tem uma impressão digital. Enquanto você escreve, o Escrevaral registra o ritmo exato entre cada tecla — único como uma assinatura. de impressão digital da sua escrita — um retrato de como você escreve, construí"
+    },
+    {
+      "tag": "p",
+      "line": 409,
+      "id": null,
+      "class": [
+        "proof-context-note"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra."
+    },
+    {
+      "tag": "div",
+      "line": 416,
+      "id": null,
+      "class": [
+        "certificate-grid"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Impressão digital da escrita Aguardando sua escrita Escreva no editor para iniciar o registro Teclas testemunhadas 0 0 descartadas Seu ritmo — Tempo médio entre teclas Palavras testemunhadas — Do texto ativo"
+    },
+    {
+      "tag": "div",
+      "line": 417,
+      "id": null,
+      "class": [
+        "metric-block",
+        "metric-block--primary"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Impressão digital da escrita Aguardando sua escrita Escreva no editor para iniciar o registro"
+    },
+    {
+      "tag": "small",
+      "line": 420,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-proof-status": ""
+      },
+      "text": "Escreva no editor para iniciar o registro"
+    },
+    {
+      "tag": "div",
+      "line": 488,
+      "id": null,
+      "class": [
+        "proof-actions"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "download Guardar cópia forward_to_inbox Enviar para o editor Funciona sem internet. Guarda os sinais do seu processo — só abre aqui no Escrevaral. info \"Enviar para o editor\" baixa o arquivo e abre seu email com as instruções prontas. Só an"
+    },
+    {
+      "tag": "div",
+      "line": 489,
+      "id": null,
+      "class": [
+        "proof-actions-row"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "download Guardar cópia forward_to_inbox Enviar para o editor"
+    },
+    {
+      "tag": "button",
+      "line": 494,
+      "id": null,
+      "class": [
+        "secondary-button",
+        "proof-send-btn"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "send-proof-to-editor"
+      },
+      "text": "forward_to_inbox Enviar para o editor"
+    },
+    {
+      "tag": "p",
+      "line": 500,
+      "id": null,
+      "class": [
+        "proof-send-hint"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "info \"Enviar para o editor\" baixa o arquivo e abre seu email com as instruções prontas. Só anexar e mandar."
+    },
+    {
+      "tag": "div",
+      "line": 528,
+      "id": null,
+      "class": [
+        "proof-validate-story"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Se alguém questionar se foi você que escreveu — ou uma IA — compartilhe o arquivo de autoria. Quem receber pode verificar aqui, sem precisar de conta. O que o editor vê ao verificar check_circle Se o arquivo pertence ao manuscrito enviado c"
+    },
+    {
+      "tag": "div",
+      "line": 530,
+      "id": null,
+      "class": [
+        "proof-what-editor-sees"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "O que o editor vê ao verificar check_circle Se o arquivo pertence ao manuscrito enviado check_circle Quantas sessões de escrita foram registradas check_circle O padrão de ritmo — consistente ao longo das sessões check_circle Se o texto foi "
+    },
+    {
+      "tag": "p",
+      "line": 531,
+      "id": null,
+      "class": [
+        "proof-share-label"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "O que o editor vê ao verificar"
+    },
+    {
+      "tag": "ul",
+      "line": 532,
+      "id": null,
+      "class": [
+        "proof-editor-view-list"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "check_circle Se o arquivo pertence ao manuscrito enviado check_circle Quantas sessões de escrita foram registradas check_circle O padrão de ritmo — consistente ao longo das sessões check_circle Se o texto foi alterado depois do registro"
+    },
+    {
+      "tag": "section",
+      "line": 584,
+      "id": null,
+      "class": [
+        "view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-panel": "arquivo"
+      },
+      "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+    },
+    {
+      "tag": "article",
+      "line": 585,
+      "id": null,
+      "class": [
+        "archive-view"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+    },
+    {
+      "tag": "div",
+      "line": 624,
+      "id": null,
+      "class": [
+        "archive-layout"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progress"
+    },
+    {
+      "tag": "aside",
+      "line": 626,
+      "id": null,
+      "class": [
+        "archive-detail-panel"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progress"
+    },
+    {
+      "tag": "div",
+      "line": 634,
+      "id": null,
+      "class": [
+        "archive-panel-content"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-archive-panel-content": ""
+      },
+      "text": "edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progresso próprio 0% Tags Descrição file_download Exportar expand_m"
+    },
+    {
+      "tag": "button",
+      "line": 641,
+      "id": null,
+      "class": [
+        "primary-button",
+        "archive-open-btn"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "open-active-manuscript"
+      },
+      "text": "edit_note Abrir no editor"
+    },
+    {
+      "tag": "button",
+      "line": 696,
+      "id": null,
+      "class": [
+        "ghost-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "txt"
+      },
+      "text": "article Texto"
+    },
+    {
+      "tag": "button",
+      "line": 700,
+      "id": null,
+      "class": [
+        "ghost-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "md"
+      },
+      "text": "markdown Markdown"
+    },
+    {
+      "tag": "button",
+      "line": 704,
+      "id": null,
+      "class": [
+        "ghost-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "html"
+      },
+      "text": "html HTML"
+    },
+    {
+      "tag": "button",
+      "line": 708,
+      "id": null,
+      "class": [
+        "ghost-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "docx"
+      },
+      "text": "description Word"
+    },
+    {
+      "tag": "button",
+      "line": 712,
+      "id": null,
+      "class": [
+        "ghost-button",
+        "archive-epub-btn"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "epub"
+      },
+      "text": "auto_stories ePub · KDP"
+    },
+    {
+      "tag": "button",
+      "line": 716,
+      "id": null,
+      "class": [
+        "ghost-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "export-manuscript",
+        "data-export-format": "obsidian"
+      },
+      "text": "hub Obsidian"
+    },
+    {
+      "tag": "button",
+      "line": 883,
+      "id": null,
+      "class": [
+        "academy-resume-link"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-action": "switch-view-editor",
+        "data-academy-resume": ""
+      },
+      "text": "arrow_back Continuar com o texto atual"
+    },
+    {
+      "tag": "div",
+      "line": 887,
+      "id": null,
+      "class": [
+        "academy-enem-hint"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-academy-enem-hint": ""
+      },
+      "text": "school Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+    },
+    {
+      "tag": "div",
+      "line": 889,
+      "id": null,
+      "class": [
+        "academy-enem-copy"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+    },
+    {
+      "tag": "p",
+      "line": 890,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor."
+    },
+    {
+      "tag": "div",
+      "line": 899,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura do texto Espelho, laboratório e prática Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+    },
+    {
+      "tag": "p",
+      "line": 902,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+    },
+    {
+      "tag": "textarea",
+      "line": 1010,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": "Editor de Rimas",
+      "data": {
+        "data-rimalab-input": ""
+      },
+      "text": ""
+    },
+    {
+      "tag": "section",
+      "line": 1200,
+      "id": null,
+      "class": [
+        "academy-leitura"
+      ],
+      "role": null,
+      "aria_label": "Leitura editorial",
+      "data": {
+        "data-atelier-section": "revisar"
+      },
+      "text": "Leitura editorial Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editori"
+    },
+    {
+      "tag": "p",
+      "line": 1201,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "div",
+      "line": 1202,
+      "id": null,
+      "class": [
+        "leitura-editorial-grid"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editorial Como revisar um"
+    },
+    {
+      "tag": "a",
+      "line": 1203,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios →"
+    },
+    {
+      "tag": "p",
+      "line": 1204,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1208,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos →"
+    },
+    {
+      "tag": "p",
+      "line": 1209,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1213,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como revisar um manuscrito As 5 camadas de revisão e a lista cena por cena →"
+    },
+    {
+      "tag": "p",
+      "line": 1214,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "a",
+      "line": 1218,
+      "id": null,
+      "class": [
+        "leitura-editorial-card"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-editorial-page": ""
+      },
+      "text": "Leitura editorial Como vencer o bloqueio criativo Causas reais e técnicas imediatas para retomar a escrita →"
+    },
+    {
+      "tag": "p",
+      "line": 1219,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "div",
+      "line": 1226,
+      "id": null,
+      "class": [
+        "academy-section-intro"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "publicar"
+      },
+      "text": "Circulação Publicação, prova e cuidados antes de soltar o texto no mundo Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página."
+    },
+    {
+      "tag": "p",
+      "line": 1229,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página."
+    },
+    {
+      "tag": "details",
+      "line": 1267,
+      "id": null,
+      "class": [
+        "academy-publishing-track"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-atelier-section": "publicar"
+      },
+      "text": "route Trilha de publicação Mercado editorial · Objeto livro · Anatomia do livro expand_more 01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e me"
+    },
+    {
+      "tag": "summary",
+      "line": 1268,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "route Trilha de publicação Mercado editorial · Objeto livro · Anatomia do livro expand_more"
+    },
+    {
+      "tag": "span",
+      "line": 1271,
+      "id": null,
+      "class": [
+        "academy-track-sub"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mercado editorial · Objeto livro · Anatomia do livro"
+    },
+    {
+      "tag": "div",
+      "line": 1274,
+      "id": null,
+      "class": [
+        "academy-paths"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+    },
+    {
+      "tag": "article",
+      "line": 1275,
+      "id": null,
+      "class": [
+        "academy-path"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+    },
+    {
+      "tag": "p",
+      "line": 1280,
+      "id": null,
+      "class": [
+        "eyebrow"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mercado editorial"
+    },
+    {
+      "tag": "p",
+      "line": 1282,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao leitor."
+    },
+    {
+      "tag": "div",
+      "line": 1283,
+      "id": null,
+      "class": [
+        "academy-tags"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Independente Editoras Submissão"
+    },
+    {
+      "tag": "span",
+      "line": 1285,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Editoras"
+    },
+    {
+      "tag": "button",
+      "line": 1288,
+      "id": null,
+      "class": [
+        "secondary-button"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-craft-select": "mercado-editorial"
+      },
+      "text": "route Ver guias"
+    },
+    {
+      "tag": "article",
+      "line": 1294,
+      "id": null,
+      "class": [
+        "academy-path",
+        "is-book"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "02 book_4 Objeto livro Conheça a arquitetura da obra Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras. Capa Miolo Glossário view_in_ar Ver guias"
+    },
+    {
+      "tag": "p",
+      "line": 1301,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras."
+    },
+    {
+      "tag": "div",
+      "line": 1442,
+      "id": null,
+      "class": [
+        "focus-toolbar"
+      ],
+      "role": null,
+      "aria_label": "Controles do modo foco",
+      "data": {},
+      "text": "fullscreen_exit format_size Letra width Largura horizontal_rule Linha"
+    },
+    {
+      "tag": "div",
+      "line": 1481,
+      "id": null,
+      "class": [
+        "ob-pillar",
+        "ob-pillar--mesa"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto está esperando. Continue de onde parou, sem perder o fio. Continuar de onde parei Abrir uma página nova"
+    },
+    {
+      "tag": "div",
+      "line": 1520,
+      "id": null,
+      "class": [
+        "ob-pillar",
+        "ob-pillar--info"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "smartphone Mesa no celular Leve e traga o acervo, inclusive sem internet."
+    },
+    {
+      "tag": "h2",
+      "line": 1522,
+      "id": null,
+      "class": [
+        "ob-pillar-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mesa no celular"
+    },
+    {
+      "tag": "button",
+      "line": 1583,
+      "id": "levar-mesa-anchor",
+      "class": [],
+      "role": null,
+      "aria_label": "Trazer do celular",
+      "data": {},
+      "text": "📡"
+    },
+    {
+      "tag": "script",
+      "line": 1622,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1623,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "script",
+      "line": 1632,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "div",
+      "line": 1720,
+      "id": "levar-mesa-toast",
+      "class": [],
+      "role": "status",
+      "aria_label": null,
+      "data": {},
+      "text": "📡 Sua mesa inteira pode ir pro celular — sem internet. Leve sua mesa ×"
+    },
+    {
+      "tag": "span",
+      "line": 1731,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Sua mesa inteira pode ir pro celular — sem internet."
+    },
+    {
+      "tag": "a",
+      "line": 1732,
+      "id": "levar-mesa-link",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leve sua mesa"
+    },
+    {
+      "tag": "button",
+      "line": 1736,
+      "id": "levar-mesa-dismiss",
+      "class": [],
+      "role": null,
+      "aria_label": "Fechar",
+      "data": {},
+      "text": "×"
+    },
+    {
+      "tag": "div",
+      "line": 1867,
+      "id": "editorial-overlay",
+      "class": [
+        "editorial-overlay"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "arrow_back Leitura editorial open_in_new"
+    },
+    {
+      "tag": "div",
+      "line": 1868,
+      "id": null,
+      "class": [
+        "editorial-bar"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "arrow_back Leitura editorial open_in_new"
+    },
+    {
+      "tag": "button",
+      "line": 1869,
+      "id": "editorial-back",
+      "class": [
+        "icon-button"
+      ],
+      "role": null,
+      "aria_label": "Voltar ao Escrevaral",
+      "data": {},
+      "text": "arrow_back"
+    },
+    {
+      "tag": "span",
+      "line": 1872,
+      "id": "editorial-bar-title",
+      "class": [
+        "editorial-bar-title"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Leitura editorial"
+    },
+    {
+      "tag": "button",
+      "line": 1873,
+      "id": "editorial-external",
+      "class": [
+        "icon-button"
+      ],
+      "role": null,
+      "aria_label": "Abrir em nova aba",
+      "data": {},
+      "text": "open_in_new"
+    },
+    {
+      "tag": "iframe",
+      "line": 1877,
+      "id": "editorial-frame",
+      "class": [
+        "editorial-frame"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": ""
+    },
+    {
+      "tag": "button",
+      "line": 1899,
+      "id": null,
+      "class": [
+        "dock-item"
+      ],
+      "role": null,
+      "aria_label": null,
+      "data": {
+        "data-view-target": "editor"
+      },
+      "text": "edit_note Escrever"
+    },
+    {
+      "tag": "div",
+      "line": 2002,
+      "id": "trazer-modal",
+      "class": [],
+      "role": "dialog",
+      "aria_label": "Trazer do celular",
+      "data": {},
+      "text": "Trazer do celular × Abra o Mesa Portátil no celular, toque em \"Enviar para outro PC\" e aponte o celular para a webcam. aguardando câmera… ✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+    },
+    {
+      "tag": "div",
+      "line": 2010,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Trazer do celular × Abra o Mesa Portátil no celular, toque em \"Enviar para outro PC\" e aponte o celular para a webcam. aguardando câmera… ✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+    },
+    {
+      "tag": "div",
+      "line": 2029,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Abra o Mesa Portátil no celular, toque em \"Enviar para outro PC\" e aponte o celular para a webcam. aguardando câmera… ✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+    },
+    {
+      "tag": "p",
+      "line": 2030,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Abra o Mesa Portátil no celular, toque em \"Enviar para outro PC\" e aponte o celular para a webcam."
+    },
+    {
+      "tag": "strong",
+      "line": 2031,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mesa Portátil"
+    },
+    {
+      "tag": "div",
+      "line": 2063,
+      "id": "trazer-sucesso",
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+    },
+    {
+      "tag": "p",
+      "line": 2065,
+      "id": null,
+      "class": [],
+      "role": null,
+      "aria_label": null,
+      "data": {},
+      "text": "Mesa recebida"
+    }
+  ]
+}

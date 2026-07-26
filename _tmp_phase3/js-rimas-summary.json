@@ -1,0 +1,75 @@
+{
+  "file_hit_counts": {
+    "academia-controller.js": 137,
+    "analise-engine.js": 9,
+    "app.js": 15,
+    "archive-engine.js": 1,
+    "cronograma-controller.js": 1,
+    "editor-modes.js": 7,
+    "js/data/quotes-data.js": 1,
+    "js/data/synonym-data.js": 11,
+    "lexical-engine.js": 11,
+    "precision-engine.js": 4,
+    "proof-controller.js": 1,
+    "punctuation-engine.js": 2,
+    "rimalab-engine.js": 66,
+    "service-worker.js": 2,
+    "state-store.js": 16,
+    "voice-engine.js": 3
+  },
+  "selectors": [
+    [
+      "[data-rimalab-input]",
+      1
+    ],
+    [
+      "[data-rimalab-count]",
+      1
+    ],
+    [
+      "[data-rimalab-save]",
+      1
+    ],
+    [
+      "[data-rimalab-isometry]",
+      1
+    ],
+    [
+      "[data-rimalab-isometry-title]",
+      1
+    ],
+    [
+      "[data-rimalab-isometry-copy]",
+      1
+    ],
+    [
+      "[data-rimalab-metrics]",
+      1
+    ],
+    [
+      "[data-rimalab-rhymes]",
+      1
+    ],
+    [
+      "[data-rimalab-scheme]",
+      1
+    ],
+    [
+      "[data-rimalab-encyclopedia]",
+      1
+    ],
+    [
+      "[data-rimalab-note]",
+      1
+    ],
+    [
+      "[data-rimalab-finder]",
+      1
+    ],
+    [
+      "[data-rimalab-finder-results]",
+      1
+    ]
+  ],
+  "number_formatting": []
+}

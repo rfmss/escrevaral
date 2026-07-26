@@ -1,0 +1,14 @@
+{
+  "file_hit_counts": {
+    "analise-engine.js": 1,
+    "editor-controller.js": 1,
+    "js/controllers/training-controller.js": 7,
+    "js/data/synonym-data.js": 7,
+    "lexical-engine.js": 14,
+    "rights-engine.js": 3,
+    "service-worker.js": 2,
+    "voice-engine.js": 4
+  },
+  "selectors": [],
+  "number_formatting": []
+}

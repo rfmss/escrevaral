@@ -1,0 +1,175 @@
+{
+  "file_hit_counts": {
+    "app.js": 38,
+    "archive-clarity-controller.js": 31,
+    "archive-controller.js": 74,
+    "archive-engine.js": 6,
+    "backup-controller.js": 16,
+    "backup-engine.js": 2,
+    "editor-controller.js": 6,
+    "export-engine.js": 1,
+    "js/controllers/oficina-navigation-controller.js": 5,
+    "js/controllers/tooltip-controller.js": 1,
+    "js/controllers/training-controller.js": 3,
+    "js/data/synonym-data.js": 1,
+    "product-clarity-controller.js": 14,
+    "proof-controller.js": 1,
+    "rights-engine.js": 1,
+    "scripts/testar-integridade-browser.js": 1,
+    "scripts/testar-integridade-dados.js": 1,
+    "service-worker.js": 7,
+    "state-store.js": 19,
+    "ui-dialog.js": 4,
+    "vrda-engine.js": 1
+  },
+  "selectors": [
+    [
+      "[data-archive-pin]",
+      2
+    ],
+    [
+      "[data-archive-filter-bar]",
+      2
+    ],
+    [
+      "[data-archive-status-bar]",
+      2
+    ],
+    [
+      ".archive-protect-zone",
+      1
+    ],
+    [
+      "details.archive-security-details",
+      1
+    ],
+    [
+      "[data-archive-quick]",
+      1
+    ],
+    [
+      "[data-archive-select]",
+      1
+    ],
+    [
+      "[data-archive-filter]",
+      1
+    ],
+    [
+      "[data-archive-status-filter]",
+      1
+    ],
+    [
+      ".project-card[data-archive-select]",
+      1
+    ],
+    [
+      "button, [data-archive-pin]",
+      1
+    ],
+    [
+      "link[data-archive-clarity-refine=",
+      1
+    ],
+    [
+      ".archive-controls",
+      1
+    ],
+    [
+      ".archive-filter-summary-count",
+      1
+    ],
+    [
+      ".archive-filter.is-active[data-archive-filter]:not([data-archive-filter=",
+      1
+    ],
+    [
+      ".archive-filter.is-active[data-archive-status-filter]:not([data-archive-status-filter=",
+      1
+    ],
+    [
+      "[data-archive-filter], [data-archive-status-filter]",
+      1
+    ],
+    [
+      ".archive-security-details",
+      1
+    ],
+    [
+      "[data-archive-panel-empty]",
+      1
+    ],
+    [
+      "[data-archive-panel-content]",
+      1
+    ],
+    [
+      "[data-archive-note-identity]",
+      1
+    ],
+    [
+      "[data-archive-note-title]",
+      1
+    ],
+    [
+      "[data-archive-note-kind]",
+      1
+    ],
+    [
+      "script[data-archive-clarity-controller=",
+      1
+    ],
+    [
+      ".archive-empty",
+      1
+    ],
+    [
+      ".archive-search input, input.archive-search",
+      1
+    ],
+    [
+      "[data-archive-search]",
+      1
+    ],
+    [
+      "[data-archive-sort]",
+      1
+    ],
+    [
+      ".archive-backup-actions",
+      1
+    ]
+  ],
+  "number_formatting": [
+    {
+      "file": "app.js",
+      "line": 472,
+      "text": "lines.push(`${i + 1}. ${ms.title || \"sem título\"}  ·  ${wc.toLocaleString(\"pt-BR\")} palavras  ·  ${ms.status || \"Em escrita\"}`);"
+    },
+    {
+      "file": "app.js",
+      "line": 478,
+      "text": "lines.push(`Total: ${totalWords.toLocaleString(\"pt-BR\")} palavras em ${docs.length} item${docs.length !== 1 ? \"s\" : \"\"}.`);"
+    },
+    {
+      "file": "app.js",
+      "line": 481,
+      "text": "saveStatus.textContent = `Exportado — ${docs.length} item${docs.length !== 1 ? \"s\" : \"\"}, ${totalWords.toLocaleString(\"pt-BR\")} palavras`;"
+    },
+    {
+      "file": "archive-controller.js",
+      "line": 496,
+      "text": "? `<span class=\"archive-word-total\">${totalWords.toLocaleString(\"pt-BR\")} pal. no acervo</span>`"
+    },
+    {
+      "file": "backup-controller.js",
+      "line": 578,
+      "text": "const wordsPart = totalWords > 0 ? ` · ${totalWords.toLocaleString(\"pt-BR\")} palavras` : \"\";"
+    },
+    {
+      "file": "export-engine.js",
+      "line": 672,
+      "text": "\"Vault exportado em \" + date + \" pelo Escrevaral. \" + pkg.stats.manuscripts + \" manuscrito\" + (pkg.stats.manuscripts !== 1 ? \"s\" : \"\") + \", \" + pkg.stats.words.toLocaleString(\"pt-BR\") + \" palavras.\","
+    }
+  ]
+}
