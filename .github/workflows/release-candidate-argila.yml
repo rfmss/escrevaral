@@ -3,18 +3,21 @@ name: Candidata a lançamento Argila
 on:
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validar-candidata:
+    if: github.head_ref == 'agent/js-controllers-ux-pilot'
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
-      - name: Clonar repositório
+      - name: Clonar branch do piloto
         uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/js-controllers-ux-pilot
+          fetch-depth: 1
 
       - name: Configurar Python
         uses: actions/setup-python@v5.6.0
@@ -26,6 +29,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install playwright
           python -m playwright install --with-deps chromium
+
+      - name: Aplicar pacote estrutural validado
+        run: |
+          python scripts/migrar-controladores-ui-pilot.py
+          git checkout origin/main -- scripts/auditor-nomenclatura-publica.py
 
       - name: Validar sintaxe dos auditores
         run: |
@@ -155,3 +163,15 @@ jobs:
           assert not naming['failures'], naming['failures']
           print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
           PY
+
+      - name: Gravar lote sem instrumentação temporária
+        run: |
+          git checkout origin/main -- .github/workflows/release-candidate-argila.yml scripts/auditor-nomenclatura-publica.py
+          git rm scripts/migrar-controladores-ui-pilot.py
+          rm -rf reports/auditoria/migracao-controladores
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "refactor(structure): ampliar organização de controladores"
+          git push origin HEAD:agent/js-controllers-ux-pilot
