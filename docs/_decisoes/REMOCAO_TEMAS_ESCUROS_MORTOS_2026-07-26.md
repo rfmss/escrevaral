@@ -61,6 +61,8 @@ Não houve mudança na lista de assets, estratégia, escopo, instalação, ativa
 
 Após o squash merge do PR #137, esta branch foi reconstruída sobre a nova `main`. O contraste corrigido de `text-muted`, a fundação de `ActionButton` e `TextStatistic`, o harness e os auditores permanecem preservados; o cache avança de forma estritamente crescente para `v963`.
 
+A reconstrução executou e aprovou `scripts/auditor-asset-version.py`, `scripts/auditor-design-tokens-contrast.py`, `scripts/auditor-repository-boundary.py` e `git diff --check` antes do force-push.
+
 ## Validação obrigatória
 
 A limpeza só é considerada pronta quando:
