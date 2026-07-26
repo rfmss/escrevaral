@@ -151,7 +151,20 @@ Nenhuma função, variável global, chave de armazenamento, evento, ordem de scr
     for path in MOVES.values():
         subprocess.run(["node", "--check", str(ROOT / path)], check=True, cwd=ROOT)
 
-    subprocess.run(["git", "fetch", "origin", "main"], check=True, cwd=ROOT)
+    subprocess.run(
+        [
+            "git",
+            "fetch",
+            "--no-tags",
+            "--prune",
+            "--unshallow",
+            "origin",
+            "+refs/heads/main:refs/remotes/origin/main",
+            "+refs/heads/agent/js-controllers-ux-pilot:refs/remotes/origin/agent/js-controllers-ux-pilot",
+        ],
+        check=True,
+        cwd=ROOT,
+    )
     result = subprocess.run(
         ["python", "scripts/auditor-asset-version.py"],
         cwd=ROOT,
