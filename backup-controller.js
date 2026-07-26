@@ -105,7 +105,7 @@ function registerOfflineApp() {
 
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     showUpdateBanner();
-    _setOfflineStatus("cloud_done", "Pronto sem internet", "Nova versão ativa — o Escrevaral está atualizado e funciona sem rede.");
+    _setOfflineStatus("cloud_done", "Funciona sem internet", "Nova versão ativa — o Escrevaral está atualizado e funciona sem rede.");
     _checkCacheHealth();
   });
 
@@ -114,7 +114,7 @@ function registerOfflineApp() {
     .then((registration) => {
       const isControlled = Boolean(navigator.serviceWorker.controller);
       if (isControlled) {
-        _setOfflineStatus("cloud_done", "Pronto sem internet", "O Escrevaral funciona sem conexão — suas notas ficam salvas aqui no navegador.");
+        _setOfflineStatus("cloud_done", "Funciona sem internet", "O Escrevaral funciona sem conexão — suas notas ficam salvas aqui no navegador.");
         _checkCacheHealth();
       } else {
         _setOfflineStatus("downloading", "Preparando uso sem internet…", "Baixando arquivos para funcionar sem conexão. Pronto em instantes.");

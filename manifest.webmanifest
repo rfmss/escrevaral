@@ -2,7 +2,7 @@
   "id": "https://escrevaral.com/",
   "name": "Escrevaral",
   "short_name": "Escrevaral",
-  "description": "Oficina literária offline-first para escritoras e escritores brasileiros. Escreva, organize manuscritos e prove sua autoria sem depender de internet.",
+  "description": "Oficina literária offline-first para gente brasileira que escreve. Escreva, organize manuscritos e prove sua autoria sem depender de internet.",
   "lang": "pt-BR",
   "start_url": "https://escrevaral.com/#editor",
   "scope": "https://escrevaral.com/",

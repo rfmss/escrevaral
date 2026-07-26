@@ -35,8 +35,8 @@ def audit_static(failures: list[str], checks: list[str]) -> None:
     require("Mudar para Vereda" not in app, "app.js ainda produz ‘Mudar para Vereda’.", failures)
     require('biblioteca: "Palavras"' in app, "Título analítico de Palavras não foi atualizado.", failures)
     require('arquivo: "Acervo"' in app, "Título analítico de Acervo não foi atualizado.", failures)
-    require('cronograma: "Plano"' in app, "Título analítico de Plano não foi atualizado.", failures)
-    checks.append("Rótulos analíticos: Palavras, Acervo e Plano")
+    require('cronograma: "Planejamento"' in app, "Título analítico de Planejamento não foi atualizado.", failures)
+    checks.append("Rótulos analíticos: Palavras, Acervo e Planejamento")
 
     require('<h1 class="ob-logo"' not in index, "A marca global da entrada ainda é exposta como H1.", failures)
     require(

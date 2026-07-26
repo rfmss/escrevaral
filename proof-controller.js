@@ -278,11 +278,15 @@ function renderProofView() {
 
   const adjustedIntegrity = calcAdjustedIntegrity(summary.integrity);
   const hasPasteDiscount = adjustedIntegrity < summary.integrity;
+  const fingerprintCopy = document.querySelector("[data-proof-fingerprint-copy]");
 
   proofSessionName.textContent = session.name;
   proofIntegrity.textContent = adjustedIntegrity > 0
     ? `${adjustedIntegrity}%${hasPasteDiscount ? " ✱" : ""}`
     : "Aguardando sua escrita";
+  if (fingerprintCopy) {
+    fingerprintCopy.textContent = `${adjustedIntegrity}% de impressão digital da sua escrita — um retrato de como você escreve, construído a partir do seu próprio processo.`;
+  }
 
   // Nota de desconto por paste
   const discountNote = document.querySelector("[data-proof-paste-note]");

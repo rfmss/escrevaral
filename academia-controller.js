@@ -290,7 +290,7 @@ function exportRimaLabText() {
   const text = rimalabInput.value.trim();
 
   if (!text) {
-    saveStatus.textContent = "RimaLab ainda está vazio";
+    saveStatus.textContent = "Rimas ainda não tem versos";
     return;
   }
 
@@ -301,21 +301,21 @@ function exportRimaLabText() {
     : text;
   downloadFile(report, `${slugify(title)}-rimalab.txt`, "text/plain;charset=utf-8");
   saveStatus.textContent = analysis && !analysis.isProse
-    ? "Análise RimaLab exportada em TXT"
-    : "RimaLab exportado em TXT";
+    ? "Análise de Rimas exportada em TXT"
+    : "Texto de Rimas exportado em TXT";
 }
 
 function copyRimaLabAnalysis() {
   if (!rimalabInput) return;
   const text = rimalabInput.value.trim();
-  if (!text) { saveStatus.textContent = "RimaLab ainda está vazio."; return; }
+  if (!text) { saveStatus.textContent = "Rimas ainda não tem versos."; return; }
   const title = getActiveManuscript()?.title || "rimalab";
   const analysis = window.VeredaRimaLab ? VeredaRimaLab.analyze(text) : null;
   const report = analysis && window.VeredaRimaLab
     ? VeredaRimaLab.exportAnalysisText(analysis, title)
     : text;
   navigator.clipboard?.writeText(report).then(() => {
-    saveStatus.textContent = "Análise RimaLab copiada";
+    saveStatus.textContent = "Análise de Rimas copiada";
   }).catch(() => {
     saveStatus.textContent = "Cópia não disponível — use Baixar TXT";
   });
@@ -332,7 +332,7 @@ function clearRimaLabText() {
     rimalabInput.focus();
   };
   if (!rimalabInput.value.trim()) { doRimaLabClear(); return; }
-  vrdaConfirm("Limpar o texto do RimaLab? O manuscrito principal não será alterado.", (ok) => {
+  vrdaConfirm("Limpar o texto de Rimas? O manuscrito principal não será alterado.", (ok) => {
     if (ok) doRimaLabClear();
   });
 }
