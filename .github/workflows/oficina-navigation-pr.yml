@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "css/19-oficina-navigation.css"
-      - "oficina-navigation-controller.js"
+      - "js/controllers/oficina-navigation-controller.js"
       - "index.html"
       - "service-worker.js"
       - "scripts/auditor-oficina-navigation.py"
