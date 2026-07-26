@@ -362,7 +362,7 @@
       createCheck("Abertura perturbadora", firstSentence.length >= 15 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase precisa criar desconforto imediato — algo errado, algo fora do lugar."),
       createCheck("Tensão sustentada", tensionHits >= 3, Math.min(100, tensionHits * 16), "Terror vive de antecipação — o que pode acontecer assusta mais do que o que já aconteceu."),
       createCheck("Ritmo cortante", hasRhythm, hasRhythm ? 90 : Math.min(60, shortSentences * 22), "Frases curtas em momentos de clímax criam o pulso do terror. Frases longas desaceleram e criam tensão diferente."),
-      createCheck("Cenário ou presença", atmosphereHits >= 2 || paragraphs.length >= 3, Math.min(100, atmosphereHits * 22 + paragraphs.length * 14), "O espaço em que o perigo existe precisa de detalhes que o escritor escolhe com cuidado."),
+      createCheck("Cenário ou presença", atmosphereHits >= 2 || paragraphs.length >= 3, Math.min(100, atmosphereHits * 22 + paragraphs.length * 14), "O espaço em que o perigo existe precisa de detalhes que você escolhe com cuidado."),
     ];
 
     return summarize(checks, words, 0);

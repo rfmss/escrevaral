@@ -40,7 +40,7 @@ const ANALYTICS_VIEW_TITLES = {
   autoria: "Prova de autoria",
   arquivo: "Acervo",
   academia: "Ateliê",
-  cronograma: "Plano",
+  cronograma: "Planejamento",
 };
 
 let _pendingAnalyticsView = null;
@@ -362,7 +362,7 @@ function applyTemplateLayout() {
 function updateConnectionStatus() {
   if (!offlineStatus) return;
   const online = navigator.onLine;
-  const label = online ? "Pronto sem internet" : "Sem rede — escrita continua";
+  const label = online ? "Funciona sem internet" : "Sem rede — escrita continua";
   const icon  = online ? "cloud_done" : "cloud_off";
   const tip   = online
     ? "O Escrevaral funciona sem conexão — suas notas ficam salvas aqui no navegador."

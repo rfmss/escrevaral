@@ -611,10 +611,10 @@
   // ── Exportação da análise em texto ───────────────────────────────────────────
   function exportAnalysisText(analysis, title) {
     if (!analysis || analysis.isProse) {
-      return `${title || "RimaLab"}\n${"─".repeat(40)}\n\n${analysis?.proseNote || "Nenhum verso para analisar."}\n`;
+      return `${title || "Rimas"}\n${"─".repeat(40)}\n\n${analysis?.proseNote || "Nenhum verso para analisar."}\n`;
     }
     const lines = [
-      title || "Análise RimaLab",
+      title || "Análise de Rimas",
       "═".repeat(48),
       "",
       `Versos: ${analysis.totalVerses}`,

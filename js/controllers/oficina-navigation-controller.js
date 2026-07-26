@@ -5,9 +5,9 @@
   const GROUP_VIEWS = new Set(["academia", "biblioteca", "autoria", "cronograma"]);
   const ITEM_COPY = {
     academia: ["Visão geral", "Revisão, guias e publicação"],
-    biblioteca: ["Palavras", "Léxico e contexto do manuscrito"],
-    autoria: ["Autoria", "Prova do processo humano"],
-    cronograma: ["Plano", "Metas, calendário e rotina"],
+    biblioteca: ["Palavras", "Veja como cada palavra do seu texto se comporta — e o que ela pode virar."],
+    autoria: ["Autoria", "O registro do seu processo de escrita, do primeiro rascunho até aqui."],
+    cronograma: ["Planejamento", "Metas, rotina e prazos — no seu ritmo, não no de ninguém."],
   };
 
   const scriptVersion = (() => {
