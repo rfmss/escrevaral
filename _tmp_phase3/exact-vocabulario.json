@@ -1,0 +1,2328 @@
+{
+  "rule_count": 50,
+  "files": {
+    "css/04-analysis-academy.css": 46,
+    "css/06-academy-tools.css": 1,
+    "css/08-responsive.css": 3
+  },
+  "token_usage": {
+    "--primary": 21,
+    "--card": 10,
+    "--line": 8,
+    "--muted": 8,
+    "--ink": 6,
+    "--soft-ink": 5,
+    "--surface-low": 4,
+    "--surface-mid": 3,
+    "--sienna": 2,
+    "--shadow": 1,
+    "--ochre": 1
+  },
+  "literal_colors": [],
+  "typography": [
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 522
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "30px",
+      "declarationLine": 523
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.12",
+      "declarationLine": 524
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 527,
+      "selector": ".decolonial-copy p:not(.eyebrow)",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.6",
+      "declarationLine": 530
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 553,
+      "selector": ".decolonial-toggle-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 556
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 553,
+      "selector": ".decolonial-toggle-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.35",
+      "declarationLine": 557
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 560,
+      "selector": ".decolonial-toggle-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 564
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 560,
+      "selector": ".decolonial-toggle-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 565
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 591,
+      "selector": ".decolonial-observer-summary strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 593
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 596,
+      "selector": ".decolonial-observer-summary span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 598
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 596,
+      "selector": ".decolonial-observer-summary span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 599
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 634,
+      "selector": ".decolonial-alert-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 640
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 634,
+      "selector": ".decolonial-alert-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "900",
+      "declarationLine": 641
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 649,
+      "selector": ".decolonial-alert p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 652
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 649,
+      "selector": ".decolonial-alert p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 653
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 656,
+      "selector": ".decolonial-alert small,\n.decolonial-observer-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 659
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 656,
+      "selector": ".decolonial-alert small,\n.decolonial-observer-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 660
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 689,
+      "selector": ".decolonial-filter",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 699
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 689,
+      "selector": ".decolonial-filter",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "800",
+      "declarationLine": 700
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 730,
+      "selector": ".decolonial-count",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 732
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 730,
+      "selector": ".decolonial-count",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "900",
+      "declarationLine": 733
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 730,
+      "selector": ".decolonial-count",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "letter-spacing",
+      "value": "0.1em",
+      "declarationLine": 734
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 761,
+      "selector": ".decolonial-entry-header strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "18px",
+      "declarationLine": 763
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 769,
+      "selector": ".decolonial-entry-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 774
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 769,
+      "selector": ".decolonial-entry-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "900",
+      "declarationLine": 775
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 787,
+      "selector": ".decolonial-alternatives i",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "16px",
+      "declarationLine": 789
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 792,
+      "selector": ".decolonial-alternatives span,\n.decolonial-alt-copy",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 799
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 792,
+      "selector": ".decolonial-alternatives span,\n.decolonial-alt-copy",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "900",
+      "declarationLine": 800
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 822
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "700",
+      "declarationLine": 823
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "letter-spacing",
+      "value": "0.06em",
+      "declarationLine": 826
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 833,
+      "selector": ".decolonial-category-heading b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "10px",
+      "declarationLine": 834
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 833,
+      "selector": ".decolonial-category-heading b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "700",
+      "declarationLine": 839
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 842,
+      "selector": ".decolonial-entry p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 845
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 842,
+      "selector": ".decolonial-entry p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.55",
+      "declarationLine": 846
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 849,
+      "selector": ".decolonial-entry small,\n.decolonial-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 852
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 849,
+      "selector": ".decolonial-entry small,\n.decolonial-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 853
+    }
+  ],
+  "spacing": [
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 505,
+      "selector": ".decolonial-tool",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "20px",
+      "declarationLine": 508
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 505,
+      "selector": ".decolonial-tool",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "20px",
+      "declarationLine": 515
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "max-width",
+      "value": "420px",
+      "declarationLine": 519
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0 0 12px",
+      "declarationLine": 520
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 533,
+      "selector": ".decolonial-toggle-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "10px",
+      "declarationLine": 536
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 533,
+      "selector": ".decolonial-toggle-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "12px",
+      "declarationLine": 543
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 546,
+      "selector": ".decolonial-toggle-card input",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "18px",
+      "declarationLine": 547
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 546,
+      "selector": ".decolonial-toggle-card input",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "height",
+      "value": "18px",
+      "declarationLine": 548
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 568,
+      "selector": ".decolonial-workbench",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 570
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 573,
+      "selector": ".decolonial-observer",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "10px",
+      "declarationLine": 575
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 573,
+      "selector": ".decolonial-observer",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "14px",
+      "declarationLine": 579
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 586,
+      "selector": ".decolonial-observer-summary",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "4px",
+      "declarationLine": 588
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 602,
+      "selector": ".decolonial-observer-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "8px",
+      "declarationLine": 604
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 602,
+      "selector": ".decolonial-observer-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "max-height",
+      "value": "360px",
+      "declarationLine": 605
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 612,
+      "selector": ".decolonial-alert,\n.decolonial-observer-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "12px",
+      "declarationLine": 617
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 620,
+      "selector": ".decolonial-alert-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "10px",
+      "declarationLine": 624
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 634,
+      "selector": ".decolonial-alert-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "3px 8px",
+      "declarationLine": 639
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 649,
+      "selector": ".decolonial-alert p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0 0 6px",
+      "declarationLine": 650
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 663,
+      "selector": ".decolonial-search",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "8px",
+      "declarationLine": 666
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 663,
+      "selector": ".decolonial-search",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "10px 12px",
+      "declarationLine": 671
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 674,
+      "selector": ".decolonial-search input",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 675
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 683,
+      "selector": ".decolonial-filters",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "8px",
+      "declarationLine": 686
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 689,
+      "selector": ".decolonial-filter",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "6px",
+      "declarationLine": 692
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 689,
+      "selector": ".decolonial-filter",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "7px 10px",
+      "declarationLine": 698
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 715,
+      "selector": ".decolonial-filter b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "min-width",
+      "value": "20px",
+      "declarationLine": 716
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 715,
+      "selector": ".decolonial-filter b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "1px 6px",
+      "declarationLine": 720
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 738,
+      "selector": ".decolonial-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "10px",
+      "declarationLine": 740
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 738,
+      "selector": ".decolonial-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "max-height",
+      "value": "560px",
+      "declarationLine": 741
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 746,
+      "selector": ".decolonial-entry,\n.decolonial-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "14px",
+      "declarationLine": 751
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 754,
+      "selector": ".decolonial-entry-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 757
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 769,
+      "selector": ".decolonial-entry-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "3px 8px",
+      "declarationLine": 773
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 779,
+      "selector": ".decolonial-alternatives",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "7px",
+      "declarationLine": 782
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 779,
+      "selector": ".decolonial-alternatives",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "10px 0",
+      "declarationLine": 784
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 792,
+      "selector": ".decolonial-alternatives span,\n.decolonial-alt-copy",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "3px 9px",
+      "declarationLine": 798
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0 0 8px",
+      "declarationLine": 827
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "6px",
+      "declarationLine": 830
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 833,
+      "selector": ".decolonial-category-heading b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "1px 6px",
+      "declarationLine": 837
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 842,
+      "selector": ".decolonial-entry p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0 0 8px",
+      "declarationLine": 843
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 347,
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea",
+      "media": "(max-width: 820px)",
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 355
+    }
+  ],
+  "rules": [
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 505,
+      "selector": ".decolonial-tool",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 506
+        },
+        {
+          "property": "grid-template-columns",
+          "value": "minmax(240px, 0.6fr) minmax(0, 1.4fr)",
+          "line": 507
+        },
+        {
+          "property": "gap",
+          "value": "20px",
+          "line": 508
+        },
+        {
+          "property": "align-items",
+          "value": "start",
+          "line": 509
+        },
+        {
+          "property": "margin-bottom",
+          "value": "22px",
+          "line": 510
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 511
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 512
+        },
+        {
+          "property": "background",
+          "value": "var(--card)",
+          "line": 513
+        },
+        {
+          "property": "box-shadow",
+          "value": "var(--shadow)",
+          "line": 514
+        },
+        {
+          "property": "padding",
+          "value": "20px",
+          "line": 515
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 518,
+      "selector": ".decolonial-copy h2",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "max-width",
+          "value": "420px",
+          "line": 519
+        },
+        {
+          "property": "margin",
+          "value": "0 0 12px",
+          "line": 520
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 521
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 522
+        },
+        {
+          "property": "font-size",
+          "value": "30px",
+          "line": 523
+        },
+        {
+          "property": "line-height",
+          "value": "1.12",
+          "line": 524
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 527,
+      "selector": ".decolonial-copy p:not(.eyebrow)",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin",
+          "value": "0",
+          "line": 528
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 529
+        },
+        {
+          "property": "line-height",
+          "value": "1.6",
+          "line": 530
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 533,
+      "selector": ".decolonial-toggle-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 534
+        },
+        {
+          "property": "grid-template-columns",
+          "value": "20px minmax(0, 1fr)",
+          "line": 535
+        },
+        {
+          "property": "gap",
+          "value": "10px",
+          "line": 536
+        },
+        {
+          "property": "align-items",
+          "value": "start",
+          "line": 537
+        },
+        {
+          "property": "margin-top",
+          "value": "18px",
+          "line": 538
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 539
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 540
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 541
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 542
+        },
+        {
+          "property": "padding",
+          "value": "12px",
+          "line": 543
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 546,
+      "selector": ".decolonial-toggle-card input",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "width",
+          "value": "18px",
+          "line": 547
+        },
+        {
+          "property": "height",
+          "value": "18px",
+          "line": 548
+        },
+        {
+          "property": "accent-color",
+          "value": "var(--primary)",
+          "line": 549
+        },
+        {
+          "property": "margin-top",
+          "value": "2px",
+          "line": 550
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 553,
+      "selector": ".decolonial-toggle-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "block",
+          "line": 554
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 555
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 556
+        },
+        {
+          "property": "line-height",
+          "value": "1.35",
+          "line": 557
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 560,
+      "selector": ".decolonial-toggle-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "block",
+          "line": 561
+        },
+        {
+          "property": "margin-top",
+          "value": "5px",
+          "line": 562
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 563
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 564
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 565
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 568,
+      "selector": ".decolonial-workbench",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 569
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 570
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 573,
+      "selector": ".decolonial-observer",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 574
+        },
+        {
+          "property": "gap",
+          "value": "10px",
+          "line": 575
+        },
+        {
+          "property": "border",
+          "value": "1px solid color-mix(in srgb, var(--primary) 26%, var(--line))",
+          "line": 576
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 577
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 7%, var(--card))",
+          "line": 578
+        },
+        {
+          "property": "padding",
+          "value": "14px",
+          "line": 579
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 582,
+      "selector": ".decolonial-observer[hidden]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "none",
+          "line": 583
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 586,
+      "selector": ".decolonial-observer-summary",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 587
+        },
+        {
+          "property": "gap",
+          "value": "4px",
+          "line": 588
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 591,
+      "selector": ".decolonial-observer-summary strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 592
+        },
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 593
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 596,
+      "selector": ".decolonial-observer-summary span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 597
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 598
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 599
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 602,
+      "selector": ".decolonial-observer-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 603
+        },
+        {
+          "property": "gap",
+          "value": "8px",
+          "line": 604
+        },
+        {
+          "property": "max-height",
+          "value": "360px",
+          "line": 605
+        },
+        {
+          "property": "overflow",
+          "value": "auto",
+          "line": 606
+        },
+        {
+          "property": "padding-right",
+          "value": "4px",
+          "line": 607
+        },
+        {
+          "property": "scrollbar-width",
+          "value": "thin",
+          "line": 608
+        },
+        {
+          "property": "scrollbar-color",
+          "value": "color-mix(in srgb, var(--primary) 34%, transparent) transparent",
+          "line": 609
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 612,
+      "selector": ".decolonial-alert,\n.decolonial-observer-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 614
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 615
+        },
+        {
+          "property": "background",
+          "value": "var(--card)",
+          "line": 616
+        },
+        {
+          "property": "padding",
+          "value": "12px",
+          "line": 617
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 620,
+      "selector": ".decolonial-alert-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 621
+        },
+        {
+          "property": "align-items",
+          "value": "flex-start",
+          "line": 622
+        },
+        {
+          "property": "justify-content",
+          "value": "space-between",
+          "line": 623
+        },
+        {
+          "property": "gap",
+          "value": "10px",
+          "line": 624
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 627,
+      "selector": ".decolonial-alert-header strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 628
+        },
+        {
+          "property": "text-decoration",
+          "value": "line-through",
+          "line": 629
+        },
+        {
+          "property": "text-decoration-color",
+          "value": "var(--sienna)",
+          "line": 630
+        },
+        {
+          "property": "text-decoration-thickness",
+          "value": "2px",
+          "line": 631
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 634,
+      "selector": ".decolonial-alert-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "0 0 auto",
+          "line": 635
+        },
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 636
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-mid)",
+          "line": 637
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 638
+        },
+        {
+          "property": "padding",
+          "value": "3px 8px",
+          "line": 639
+        },
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 640
+        },
+        {
+          "property": "font-weight",
+          "value": "900",
+          "line": 641
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 642
+        },
+        {
+          "property": "user-select",
+          "value": "none",
+          "line": 642
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 645,
+      "selector": ".decolonial-alert.is-contextual",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-left",
+          "value": "3px solid var(--ochre)",
+          "line": 646
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 649,
+      "selector": ".decolonial-alert p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin",
+          "value": "0 0 6px",
+          "line": 650
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 651
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 652
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 653
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 656,
+      "selector": ".decolonial-alert small,\n.decolonial-observer-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 658
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 659
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 660
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 663,
+      "selector": ".decolonial-search",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 664
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 665
+        },
+        {
+          "property": "gap",
+          "value": "8px",
+          "line": 666
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 667
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 668
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 669
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 670
+        },
+        {
+          "property": "padding",
+          "value": "10px 12px",
+          "line": 671
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 674,
+      "selector": ".decolonial-search input",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 675
+        },
+        {
+          "property": "border",
+          "value": "0",
+          "line": 676
+        },
+        {
+          "property": "outline",
+          "value": "0",
+          "line": 677
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 678
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 679
+        },
+        {
+          "property": "font",
+          "value": "inherit",
+          "line": 680
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 683,
+      "selector": ".decolonial-filters",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 684
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 685
+        },
+        {
+          "property": "gap",
+          "value": "8px",
+          "line": 686
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 689,
+      "selector": ".decolonial-filter",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "inline-flex",
+          "line": 690
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 691
+        },
+        {
+          "property": "gap",
+          "value": "6px",
+          "line": 692
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 693
+        },
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 694
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 695
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 696
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 697
+        },
+        {
+          "property": "padding",
+          "value": "7px 10px",
+          "line": 698
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 699
+        },
+        {
+          "property": "font-weight",
+          "value": "800",
+          "line": 700
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 703,
+      "selector": ".decolonial-filter:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "var(--primary)",
+          "line": 704
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 8%, var(--card))",
+          "line": 705
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 706
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 709,
+      "selector": ".decolonial-filter.is-active",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "var(--primary)",
+          "line": 710
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 14%, var(--card))",
+          "line": 711
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 712
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 715,
+      "selector": ".decolonial-filter b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "min-width",
+          "value": "20px",
+          "line": 716
+        },
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 717
+        },
+        {
+          "property": "background",
+          "value": "var(--card)",
+          "line": 718
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 719
+        },
+        {
+          "property": "padding",
+          "value": "1px 6px",
+          "line": 720
+        },
+        {
+          "property": "text-align",
+          "value": "center",
+          "line": 721
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 724,
+      "selector": ".decolonial-filter:hover b,\n.decolonial-filter.is-active b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 20%, var(--card))",
+          "line": 726
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 727
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 730,
+      "selector": ".decolonial-count",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 731
+        },
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 732
+        },
+        {
+          "property": "font-weight",
+          "value": "900",
+          "line": 733
+        },
+        {
+          "property": "letter-spacing",
+          "value": "0.1em",
+          "line": 734
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 738,
+      "selector": ".decolonial-list",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 739
+        },
+        {
+          "property": "gap",
+          "value": "10px",
+          "line": 740
+        },
+        {
+          "property": "max-height",
+          "value": "560px",
+          "line": 741
+        },
+        {
+          "property": "overflow",
+          "value": "auto",
+          "line": 742
+        },
+        {
+          "property": "padding-right",
+          "value": "4px",
+          "line": 743
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 746,
+      "selector": ".decolonial-entry,\n.decolonial-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 748
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 749
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 750
+        },
+        {
+          "property": "padding",
+          "value": "14px",
+          "line": 751
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 754,
+      "selector": ".decolonial-entry-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 755
+        },
+        {
+          "property": "justify-content",
+          "value": "space-between",
+          "line": 756
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 757
+        },
+        {
+          "property": "align-items",
+          "value": "flex-start",
+          "line": 758
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 761,
+      "selector": ".decolonial-entry-header strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 762
+        },
+        {
+          "property": "font-size",
+          "value": "18px",
+          "line": 763
+        },
+        {
+          "property": "text-decoration",
+          "value": "line-through",
+          "line": 764
+        },
+        {
+          "property": "text-decoration-color",
+          "value": "var(--sienna)",
+          "line": 765
+        },
+        {
+          "property": "text-decoration-thickness",
+          "value": "2px",
+          "line": 766
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 769,
+      "selector": ".decolonial-entry-header span",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 770
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-mid)",
+          "line": 771
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 772
+        },
+        {
+          "property": "padding",
+          "value": "3px 8px",
+          "line": 773
+        },
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 774
+        },
+        {
+          "property": "font-weight",
+          "value": "900",
+          "line": 775
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 776
+        },
+        {
+          "property": "user-select",
+          "value": "none",
+          "line": 776
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 779,
+      "selector": ".decolonial-alternatives",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 780
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 781
+        },
+        {
+          "property": "gap",
+          "value": "7px",
+          "line": 782
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 783
+        },
+        {
+          "property": "margin",
+          "value": "10px 0",
+          "line": 784
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 787,
+      "selector": ".decolonial-alternatives i",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 788
+        },
+        {
+          "property": "font-size",
+          "value": "16px",
+          "line": 789
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 792,
+      "selector": ".decolonial-alternatives span,\n.decolonial-alt-copy",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border",
+          "value": "1px solid color-mix(in srgb, var(--primary) 38%, var(--line))",
+          "line": 794
+        },
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 795
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 10%, var(--card))",
+          "line": 796
+        },
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 797
+        },
+        {
+          "property": "padding",
+          "value": "3px 9px",
+          "line": 798
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 799
+        },
+        {
+          "property": "font-weight",
+          "value": "900",
+          "line": 800
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 803,
+      "selector": ".decolonial-alt-copy",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 804
+        },
+        {
+          "property": "transition",
+          "value": "background 0.15s",
+          "line": 805
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 808,
+      "selector": ".decolonial-alt-copy:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 20%, var(--card))",
+          "line": 809
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 812,
+      "selector": ".decolonial-alt-copy.is-copied",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 30%, var(--card))",
+          "line": 813
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 814
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 817,
+      "selector": ".decolonial-category-group",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-bottom",
+          "value": "12px",
+          "line": 818
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 821,
+      "selector": ".decolonial-category-heading",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 822
+        },
+        {
+          "property": "font-weight",
+          "value": "700",
+          "line": 823
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 824
+        },
+        {
+          "property": "text-transform",
+          "value": "uppercase",
+          "line": 825
+        },
+        {
+          "property": "letter-spacing",
+          "value": "0.06em",
+          "line": 826
+        },
+        {
+          "property": "margin",
+          "value": "0 0 8px",
+          "line": 827
+        },
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 828
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 829
+        },
+        {
+          "property": "gap",
+          "value": "6px",
+          "line": 830
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 833,
+      "selector": ".decolonial-category-heading b",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "10px",
+          "line": 834
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-mid)",
+          "line": 835
+        },
+        {
+          "property": "border-radius",
+          "value": "999px",
+          "line": 836
+        },
+        {
+          "property": "padding",
+          "value": "1px 6px",
+          "line": 837
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 838
+        },
+        {
+          "property": "font-weight",
+          "value": "700",
+          "line": 839
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 842,
+      "selector": ".decolonial-entry p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin",
+          "value": "0 0 8px",
+          "line": 843
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 844
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 845
+        },
+        {
+          "property": "line-height",
+          "value": "1.55",
+          "line": 846
+        }
+      ]
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 849,
+      "selector": ".decolonial-entry small,\n.decolonial-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 851
+        },
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 852
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 853
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 298,
+      "selector": ".academy-tool-panel > .voice-mirror,\n.academy-tool-panel > .rimalab-tool,\n.academy-tool-panel > .decolonial-tool",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border",
+          "value": "none",
+          "line": 301
+        },
+        {
+          "property": "border-radius",
+          "value": "0",
+          "line": 302
+        },
+        {
+          "property": "box-shadow",
+          "value": "none",
+          "line": 303
+        },
+        {
+          "property": "margin",
+          "value": "0",
+          "line": 304
+        }
+      ]
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 39,
+      "selector": ".archive-security-details,\n  .academy-view > *,\n  .cronograma-wrap,\n  .voice-tool,\n  .rimalab-tool,\n  .decolonial-tool,\n  .rights-lab,\n  [data-view-panel=\"autoria\"] > *,\n  .certificate-paper,\n  .proof-session,\n  .proof-actions,\n  .version-panel",
+      "media": "(max-width: 480px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "padding-left",
+          "value": "16px",
+          "line": 51
+        },
+        {
+          "property": "padding-right",
+          "value": "16px",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 334,
+      "selector": ".rimalab-tool,\n  .rimalab-workbench,\n  .voice-mirror,\n  .decolonial-tool,\n  .rights-lab",
+      "media": "(max-width: 820px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "grid-template-columns",
+          "value": "1fr",
+          "line": 339
+        }
+      ]
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 347,
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea",
+      "media": "(max-width: 820px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "min-width",
+          "value": "0",
+          "line": 354
+        },
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 355
+        },
+        {
+          "property": "box-sizing",
+          "value": "border-box",
+          "line": 356
+        }
+      ]
+    }
+  ]
+}

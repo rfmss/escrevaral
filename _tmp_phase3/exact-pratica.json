@@ -1,0 +1,1463 @@
+{
+  "rule_count": 35,
+  "files": {
+    "css/12-training-modes.css": 26,
+    "css/15-brand-argila.css": 2,
+    "css/22-product-clarity-workshop-authorship.css": 1,
+    "vereda-editorial.css": 6
+  },
+  "token_usage": {
+    "--line": 9,
+    "--primary": 9,
+    "--muted": 7,
+    "--motion-quick": 6,
+    "--card": 4,
+    "--ink": 4,
+    "--ink-soft": 3,
+    "--surface": 2,
+    "--surface-low": 1,
+    "--argila-radius-md": 1,
+    "--brand-paper": 1,
+    "--brand-clay": 1,
+    "--paper": 1,
+    "--ff-serif": 1
+  },
+  "literal_colors": [
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 445,
+      "selector": ".academy-tool-card:hover,\n.tool-card:hover,\n.training-card:hover,\n.proof-card:hover,\n.cronograma-card:hover,\n.library-card:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "box-shadow",
+      "value": "0 8px 24px rgba(30, 25, 21, 0.045)",
+      "declarationLine": 452
+    }
+  ],
+  "typography": [
+    {
+      "file": "css/12-training-modes.css",
+      "line": 26,
+      "selector": ".training-card-icon",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "24px",
+      "declarationLine": 27
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 33,
+      "selector": ".training-card h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 34
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 33,
+      "selector": ".training-card h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "600",
+      "declarationLine": 35
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 40,
+      "selector": ".training-card p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 41
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 40,
+      "selector": ".training-card p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.5",
+      "declarationLine": 44
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 69,
+      "selector": ".deriva-titulo",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 70
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 69,
+      "selector": ".deriva-titulo",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "500",
+      "declarationLine": 71
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 75,
+      "selector": ".deriva-contador",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "12px",
+      "declarationLine": 76
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "14px",
+      "declarationLine": 116
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.7",
+      "declarationLine": 117
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 143,
+      "selector": ".deriva-btn-salvar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 150
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 143,
+      "selector": ".deriva-btn-salvar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "600",
+      "declarationLine": 151
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 158,
+      "selector": ".deriva-btn-descartar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 165
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 175,
+      "selector": ".deriva-resumo",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 176
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 232,
+      "selector": ".ed-exercise p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 232
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 241
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.6",
+      "declarationLine": 242
+    }
+  ],
+  "spacing": [
+    {
+      "file": "css/12-training-modes.css",
+      "line": 3,
+      "selector": ".training-cards",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "16px",
+      "declarationLine": 5
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 3,
+      "selector": ".training-cards",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "20px 0 8px",
+      "declarationLine": 6
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 10,
+      "selector": ".training-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "20px",
+      "declarationLine": 14
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 33,
+      "selector": ".training-card h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0 0 6px",
+      "declarationLine": 37
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 55,
+      "selector": ".deriva-arena",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 58
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 55,
+      "selector": ".deriva-arena",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "16px 0 8px",
+      "declarationLine": 59
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 62,
+      "selector": ".deriva-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 66
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 82,
+      "selector": ".fio-container",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "height",
+      "value": "3px",
+      "declarationLine": 83
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 89,
+      "selector": ".fio-bar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "height",
+      "value": "100%",
+      "declarationLine": 90
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 89,
+      "selector": ".fio-bar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 91
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 109
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "min-height",
+      "value": "260px",
+      "declarationLine": 110
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "16px",
+      "declarationLine": 114
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 136,
+      "selector": ".deriva-actions",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "8px",
+      "declarationLine": 138
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 143,
+      "selector": ".deriva-btn-salvar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "7px 16px",
+      "declarationLine": 144
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 158,
+      "selector": ".deriva-btn-descartar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "7px 16px",
+      "declarationLine": 159
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 183,
+      "selector": ".fio-p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "height",
+      "value": "100%",
+      "declarationLine": 184
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 183,
+      "selector": ".fio-p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 185
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 224,
+      "selector": ".ed-exercise",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "24px",
+      "declarationLine": 228
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 224,
+      "selector": ".ed-exercise",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "24px 0",
+      "declarationLine": 229
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 234
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "min-height",
+      "value": "100px",
+      "declarationLine": 235
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "12px 14px",
+      "declarationLine": 243
+    }
+  ],
+  "rules": [
+    {
+      "file": "css/12-training-modes.css",
+      "line": 3,
+      "selector": ".training-cards",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 4
+        },
+        {
+          "property": "gap",
+          "value": "16px",
+          "line": 5
+        },
+        {
+          "property": "padding",
+          "value": "20px 0 8px",
+          "line": 6
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 10,
+      "selector": ".training-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "1 1 200px",
+          "line": 11
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 12
+        },
+        {
+          "property": "border-radius",
+          "value": "12px",
+          "line": 13
+        },
+        {
+          "property": "padding",
+          "value": "20px",
+          "line": 14
+        },
+        {
+          "property": "background",
+          "value": "var(--card)",
+          "line": 15
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 16
+        },
+        {
+          "property": "text-align",
+          "value": "left",
+          "line": 17
+        },
+        {
+          "property": "transition",
+          "value": "border-color var(--motion-quick), background var(--motion-quick)",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 21,
+      "selector": ".training-card:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "var(--primary)",
+          "line": 22
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 4%, var(--card))",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 26,
+      "selector": ".training-card-icon",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "24px",
+          "line": 27
+        },
+        {
+          "property": "color",
+          "value": "var(--ink-soft)",
+          "line": 28
+        },
+        {
+          "property": "margin-bottom",
+          "value": "10px",
+          "line": 29
+        },
+        {
+          "property": "display",
+          "value": "block",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 33,
+      "selector": ".training-card h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 34
+        },
+        {
+          "property": "font-weight",
+          "value": "600",
+          "line": 35
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 36
+        },
+        {
+          "property": "margin",
+          "value": "0 0 6px",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 40,
+      "selector": ".training-card p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 41
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 42
+        },
+        {
+          "property": "margin",
+          "value": "0",
+          "line": 43
+        },
+        {
+          "property": "line-height",
+          "value": "1.5",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 47,
+      "selector": ".training-card[data-em-breve]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "opacity",
+          "value": "0.5",
+          "line": 48
+        },
+        {
+          "property": "cursor",
+          "value": "default",
+          "line": 49
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 55,
+      "selector": ".deriva-arena",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 56
+        },
+        {
+          "property": "flex-direction",
+          "value": "column",
+          "line": 57
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 58
+        },
+        {
+          "property": "padding",
+          "value": "16px 0 8px",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 62,
+      "selector": ".deriva-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 63
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 64
+        },
+        {
+          "property": "justify-content",
+          "value": "space-between",
+          "line": 65
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 69,
+      "selector": ".deriva-titulo",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 70
+        },
+        {
+          "property": "font-weight",
+          "value": "500",
+          "line": 71
+        },
+        {
+          "property": "color",
+          "value": "var(--ink-soft)",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 75,
+      "selector": ".deriva-contador",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "12px",
+          "line": 76
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 77
+        },
+        {
+          "property": "font-variant-numeric",
+          "value": "tabular-nums",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 82,
+      "selector": ".fio-container",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "height",
+          "value": "3px",
+          "line": 83
+        },
+        {
+          "property": "background",
+          "value": "var(--line)",
+          "line": 84
+        },
+        {
+          "property": "border-radius",
+          "value": "99px",
+          "line": 85
+        },
+        {
+          "property": "overflow",
+          "value": "hidden",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 89,
+      "selector": ".fio-bar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "height",
+          "value": "100%",
+          "line": 90
+        },
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 91
+        },
+        {
+          "property": "background",
+          "value": "var(--primary)",
+          "line": 92
+        },
+        {
+          "property": "transform",
+          "value": "scaleX(0)",
+          "line": 93
+        },
+        {
+          "property": "transform-origin",
+          "value": "left",
+          "line": 94
+        },
+        {
+          "property": "border-radius",
+          "value": "99px",
+          "line": 95
+        },
+        {
+          "property": "transition",
+          "value": "background 0.3s ease",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 99,
+      "selector": ".fio-bar[data-estado=\"vivo\"]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--primary)",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 103,
+      "selector": ".fio-bar[data-estado=\"quebrado\"]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--muted)",
+          "line": 104
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 108,
+      "selector": ".deriva-textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 109
+        },
+        {
+          "property": "min-height",
+          "value": "260px",
+          "line": 110
+        },
+        {
+          "property": "resize",
+          "value": "vertical",
+          "line": 111
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 112
+        },
+        {
+          "property": "border-radius",
+          "value": "10px",
+          "line": 113
+        },
+        {
+          "property": "padding",
+          "value": "16px",
+          "line": 114
+        },
+        {
+          "property": "font",
+          "value": "inherit",
+          "line": 115
+        },
+        {
+          "property": "font-size",
+          "value": "14px",
+          "line": 116
+        },
+        {
+          "property": "line-height",
+          "value": "1.7",
+          "line": 117
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 118
+        },
+        {
+          "property": "background",
+          "value": "var(--surface-low, var(--surface))",
+          "line": 119
+        },
+        {
+          "property": "caret-color",
+          "value": "var(--primary)",
+          "line": 120
+        },
+        {
+          "property": "box-sizing",
+          "value": "border-box",
+          "line": 121
+        },
+        {
+          "property": "transition",
+          "value": "border-color var(--motion-quick)",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 125,
+      "selector": ".deriva-textarea:focus",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "outline",
+          "value": "none",
+          "line": 126
+        },
+        {
+          "property": "border-color",
+          "value": "var(--primary)",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 130,
+      "selector": ".deriva-textarea::placeholder",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 131
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 132
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 136,
+      "selector": ".deriva-actions",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 137
+        },
+        {
+          "property": "gap",
+          "value": "8px",
+          "line": 138
+        },
+        {
+          "property": "justify-content",
+          "value": "flex-end",
+          "line": 139
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 140
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 143,
+      "selector": ".deriva-btn-salvar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "padding",
+          "value": "7px 16px",
+          "line": 144
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 145
+        },
+        {
+          "property": "border",
+          "value": "none",
+          "line": 146
+        },
+        {
+          "property": "background",
+          "value": "var(--primary)",
+          "line": 147
+        },
+        {
+          "property": "color",
+          "value": "var(--surface)",
+          "line": 148
+        },
+        {
+          "property": "font",
+          "value": "inherit",
+          "line": 149
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 150
+        },
+        {
+          "property": "font-weight",
+          "value": "600",
+          "line": 151
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 152
+        },
+        {
+          "property": "transition",
+          "value": "opacity var(--motion-quick)",
+          "line": 153
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 156,
+      "selector": ".deriva-btn-salvar:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "opacity",
+          "value": "0.85",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 158,
+      "selector": ".deriva-btn-descartar",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "padding",
+          "value": "7px 16px",
+          "line": 159
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 160
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 161
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 162
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 163
+        },
+        {
+          "property": "font",
+          "value": "inherit",
+          "line": 164
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 165
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 166
+        },
+        {
+          "property": "transition",
+          "value": "color var(--motion-quick), border-color var(--motion-quick)",
+          "line": 167
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 170,
+      "selector": ".deriva-btn-descartar:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 171
+        },
+        {
+          "property": "border-color",
+          "value": "var(--ink-soft)",
+          "line": 172
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 175,
+      "selector": ".deriva-resumo",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 176
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 177
+        },
+        {
+          "property": "text-align",
+          "value": "right",
+          "line": 178
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 183,
+      "selector": ".fio-p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "height",
+          "value": "100%",
+          "line": 184
+        },
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 185
+        },
+        {
+          "property": "background",
+          "value": "var(--primary)",
+          "line": 186
+        },
+        {
+          "property": "border-radius",
+          "value": "99px",
+          "line": 187
+        }
+      ]
+    },
+    {
+      "file": "css/12-training-modes.css",
+      "line": 190,
+      "selector": ".fio-p.pulsando",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "animation",
+          "value": "fio-pulso 0.35s ease-out",
+          "line": 191
+        }
+      ]
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 433,
+      "selector": ".academy-tool-card,\n.tool-card,\n.training-card,\n.proof-card,\n.cronograma-card,\n.library-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 439
+        },
+        {
+          "property": "border-radius",
+          "value": "var(--argila-radius-md)",
+          "line": 440
+        },
+        {
+          "property": "background",
+          "value": "var(--brand-paper)",
+          "line": 441
+        },
+        {
+          "property": "box-shadow",
+          "value": "none",
+          "line": 442
+        }
+      ]
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 445,
+      "selector": ".academy-tool-card:hover,\n.tool-card:hover,\n.training-card:hover,\n.proof-card:hover,\n.cronograma-card:hover,\n.library-card:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "color-mix(in srgb, var(--brand-clay) 28%, var(--line))",
+          "line": 451
+        },
+        {
+          "property": "box-shadow",
+          "value": "0 8px 24px rgba(30, 25, 21, 0.045)",
+          "line": 452
+        },
+        {
+          "property": "transform",
+          "value": "none",
+          "line": 453
+        }
+      ]
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 164,
+      "selector": "html body .app-shell[data-view=\"academia\"] .voice-mirror,\n  html body .app-shell[data-view=\"academia\"] .rimalab-shell,\n  html body .app-shell[data-view=\"academia\"] .vocab-shell,\n  html body .app-shell[data-view=\"academia\"] .academy-library,\n  html body .app-shell[data-view=\"academia\"] .training-shell",
+      "media": "(min-width: 821px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "color-mix(in srgb, var(--line) 72%, transparent)",
+          "line": 169
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--card) 58%, transparent)",
+          "line": 170
+        },
+        {
+          "property": "box-shadow",
+          "value": "none",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 224,
+      "selector": ".ed-exercise",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--card)",
+          "line": 225
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 226
+        },
+        {
+          "property": "border-radius",
+          "value": "10px",
+          "line": 227
+        },
+        {
+          "property": "padding",
+          "value": "24px",
+          "line": 228
+        },
+        {
+          "property": "margin",
+          "value": "24px 0",
+          "line": 229
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 231,
+      "selector": ".ed-exercise h4",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-bottom",
+          "value": "8px",
+          "line": 231
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 232,
+      "selector": ".ed-exercise p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 232
+        },
+        {
+          "property": "margin-bottom",
+          "value": "12px",
+          "line": 232
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 233,
+      "selector": ".ed-exercise textarea",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 234
+        },
+        {
+          "property": "min-height",
+          "value": "100px",
+          "line": 235
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 236
+        },
+        {
+          "property": "border-radius",
+          "value": "6px",
+          "line": 237
+        },
+        {
+          "property": "background",
+          "value": "var(--paper)",
+          "line": 238
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 239
+        },
+        {
+          "property": "font-family",
+          "value": "var(--ff-serif)",
+          "line": 240
+        },
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 241
+        },
+        {
+          "property": "line-height",
+          "value": "1.6",
+          "line": 242
+        },
+        {
+          "property": "padding",
+          "value": "12px 14px",
+          "line": 243
+        },
+        {
+          "property": "resize",
+          "value": "vertical",
+          "line": 244
+        },
+        {
+          "property": "outline",
+          "value": "none",
+          "line": 245
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 247,
+      "selector": ".ed-exercise textarea:focus",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-color",
+          "value": "var(--primary)",
+          "line": 247
+        }
+      ]
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 248,
+      "selector": ".ed-exercise textarea::placeholder",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 248
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 248
+        }
+      ]
+    }
+  ]
+}

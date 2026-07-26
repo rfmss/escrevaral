@@ -1,0 +1,2401 @@
+{
+  "rule_count": 57,
+  "files": {
+    "css/03-editor-modes.css": 28,
+    "css/06-academy-tools.css": 9,
+    "css/editor-modes.css": 20
+  },
+  "token_usage": {
+    "--primary": 11,
+    "--muted": 7,
+    "--ink": 6,
+    "--paper": 4,
+    "--surface-low": 3,
+    "--line": 3,
+    "--soft-ink": 2,
+    "--ochre": 2,
+    "--highlight-start": 1,
+    "--highlight-neutral-end": 1
+  },
+  "literal_colors": [
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 396,
+      "selector": ".reader-overlay",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "background",
+      "value": "#f0ede8",
+      "declarationLine": 399
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 396,
+      "selector": ".reader-overlay",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "background-image",
+      "value": "repeating-linear-gradient(\n      0deg,\n      transparent,\n      transparent 31px,\n      rgba(160,145,130,.08) 31px,\n      rgba(160,145,130,.08) 32px\n    )",
+      "declarationLine": 400
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 375,
+      "selector": ".leitura-editorial-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "box-shadow",
+      "value": "0 2px 6px rgba(140, 100, 55, 0.07), 0 1px 0 rgba(255, 255, 255, 0.5) inset",
+      "declarationLine": 384
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 388,
+      "selector": ".leitura-editorial-card:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "box-shadow",
+      "value": "0 8px 22px rgba(140, 100, 55, 0.15), 0 1px 0 rgba(255, 255, 255, 0.5) inset",
+      "declarationLine": 390
+    }
+  ],
+  "typography": [
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 441,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 442
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 441,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "400",
+      "declarationLine": 442
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 441,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 443
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 452
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "500",
+      "declarationLine": 452
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "letter-spacing",
+      "value": "0.02em",
+      "declarationLine": 452
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 460,
+      "selector": ".reader-pill .material-symbols-outlined",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 460
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 476,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 478
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 476,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "18px",
+      "declarationLine": 479
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 476,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.75",
+      "declarationLine": 479
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 482,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 485
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 488,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "16px",
+      "declarationLine": 490
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 488,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.6",
+      "declarationLine": 491
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 585,
+      "selector": ".reader-hint-toast",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 592
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 612,
+      "selector": ".reader-title",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 612
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 613,
+      "selector": ".reader-pill",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "10px",
+      "declarationLine": 614
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 621,
+      "selector": ".reader-article",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "16px",
+      "declarationLine": 622
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 621,
+      "selector": ".reader-article",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.7",
+      "declarationLine": 623
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "0.95rem",
+      "declarationLine": 402
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "'Cinzel', \"Noto Serif\", Georgia, serif",
+      "declarationLine": 403
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "600",
+      "declarationLine": 404
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.35",
+      "declarationLine": 405
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 409,
+      "selector": ".leitura-editorial-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "0.78rem",
+      "declarationLine": 411
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 409,
+      "selector": ".leitura-editorial-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.4",
+      "declarationLine": 413
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 480,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "13px",
+      "declarationLine": 481
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 480,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "400",
+      "declarationLine": 481
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 480,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 482
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "11px",
+      "declarationLine": 491
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-weight",
+      "value": "500",
+      "declarationLine": 491
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "letter-spacing",
+      "value": "0.02em",
+      "declarationLine": 491
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 499,
+      "selector": ".reader-pill .material-symbols-outlined",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "15px",
+      "declarationLine": 499
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 515,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 517
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 515,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "20px",
+      "declarationLine": 518
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 515,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.9",
+      "declarationLine": 518
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 521,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "declarationLine": 524
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 527,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "font-size",
+      "value": "16px",
+      "declarationLine": 529
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 527,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "line-height",
+      "value": "1.6",
+      "declarationLine": 530
+    }
+  ],
+  "spacing": [
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 426,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 427
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 426,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "8px 20px",
+      "declarationLine": 428
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 447,
+      "selector": ".reader-controls",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "4px",
+      "declarationLine": 447
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "4px",
+      "declarationLine": 451
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "4px 8px",
+      "declarationLine": 455
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 470,
+      "selector": ".reader-canvas",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "40px 20px 80px",
+      "declarationLine": 471
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 476,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "max-width",
+      "value": "640px",
+      "declarationLine": 477
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 482,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "1.4em 0 0.5em",
+      "declarationLine": 484
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 585,
+      "selector": ".reader-hint-toast",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "bottom",
+      "value": "80px",
+      "declarationLine": 587
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 585,
+      "selector": ".reader-hint-toast",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "left",
+      "value": "50%",
+      "declarationLine": 588
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 585,
+      "selector": ".reader-hint-toast",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "9px 18px",
+      "declarationLine": 593
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 608,
+      "selector": ".reader-header",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "6px 12px",
+      "declarationLine": 609
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 608,
+      "selector": ".reader-header",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "6px",
+      "declarationLine": 610
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 613,
+      "selector": ".reader-pill",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "3px 6px",
+      "declarationLine": 615
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 613,
+      "selector": ".reader-pill",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "3px",
+      "declarationLine": 616
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 618,
+      "selector": ".reader-canvas",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "24px 16px 60px",
+      "declarationLine": 619
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 290,
+      "selector": ".academia-biblioteca-frame",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "width",
+      "value": "100%",
+      "declarationLine": 291
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 290,
+      "selector": ".academia-biblioteca-frame",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "height",
+      "value": "600px",
+      "declarationLine": 292
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 368,
+      "selector": ".leitura-editorial-grid",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "6px",
+      "declarationLine": 372
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 375,
+      "selector": ".leitura-editorial-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "1.25rem 1.25rem 1rem",
+      "declarationLine": 377
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "0.4rem 0 0.5rem",
+      "declarationLine": 401
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 465,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "12px",
+      "declarationLine": 466
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 465,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "8px 20px",
+      "declarationLine": 467
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 486,
+      "selector": ".reader-controls",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "4px",
+      "declarationLine": 486
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "gap",
+      "value": "4px",
+      "declarationLine": 490
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "4px 8px",
+      "declarationLine": 494
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 509,
+      "selector": ".reader-canvas",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "padding",
+      "value": "56px 24px 120px",
+      "declarationLine": 510
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 515,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "max-width",
+      "value": "640px",
+      "declarationLine": 516
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 521,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "property": "margin",
+      "value": "1.4em 0 0.5em",
+      "declarationLine": 523
+    }
+  ],
+  "rules": [
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 396,
+      "selector": ".reader-overlay",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "position",
+          "value": "fixed",
+          "line": 397
+        },
+        {
+          "property": "inset",
+          "value": "0",
+          "line": 397
+        },
+        {
+          "property": "z-index",
+          "value": "200",
+          "line": 397
+        },
+        {
+          "property": "background",
+          "value": "#f0ede8",
+          "line": 399
+        },
+        {
+          "property": "background-image",
+          "value": "repeating-linear-gradient(\n      0deg,\n      transparent,\n      transparent 31px,\n      rgba(160,145,130,.08) 31px,\n      rgba(160,145,130,.08) 32px\n    )",
+          "line": 400
+        },
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 408
+        },
+        {
+          "property": "flex-direction",
+          "value": "column",
+          "line": 408
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 410,
+      "selector": "[data-theme=\"scriptorium\"] .reader-overlay,\n[data-theme=\"cerrado-dark\"] .reader-overlay,\n[data-theme=\"mata-dark\"] .reader-overlay,\n[data-theme=\"amazonia-dark\"] .reader-overlay",
+      "media": null,
+      "theme": "Vereda",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 414
+        },
+        {
+          "property": "background-image",
+          "value": "repeating-linear-gradient(\n    0deg,\n    transparent,\n    transparent 31px,\n    color-mix(in srgb, var(--line) 30%, transparent) 31px,\n    color-mix(in srgb, var(--line) 30%, transparent) 32px\n  )",
+          "line": 415
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 423,
+      "selector": ".reader-overlay[hidden]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "none",
+          "line": 423
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 426,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 427
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 427
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 427
+        },
+        {
+          "property": "padding",
+          "value": "8px 20px",
+          "line": 428
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 429
+        },
+        {
+          "property": "border-bottom",
+          "value": "1px solid transparent",
+          "line": 430
+        },
+        {
+          "property": "position",
+          "value": "sticky",
+          "line": 431
+        },
+        {
+          "property": "top",
+          "value": "0",
+          "line": 431
+        },
+        {
+          "property": "z-index",
+          "value": "10",
+          "line": 431
+        },
+        {
+          "property": "opacity",
+          "value": "0.45",
+          "line": 432
+        },
+        {
+          "property": "transition",
+          "value": "opacity 0.3s ease",
+          "line": 433
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 435,
+      "selector": ".reader-header:hover,\n.reader-header:focus-within",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "opacity",
+          "value": "1",
+          "line": 437
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 441,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 442
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 442
+        },
+        {
+          "property": "font-weight",
+          "value": "400",
+          "line": 442
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 442
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 443
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 443
+        },
+        {
+          "property": "white-space",
+          "value": "nowrap",
+          "line": 444
+        },
+        {
+          "property": "overflow",
+          "value": "hidden",
+          "line": 444
+        },
+        {
+          "property": "text-overflow",
+          "value": "ellipsis",
+          "line": 444
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 447,
+      "selector": ".reader-controls",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 447
+        },
+        {
+          "property": "gap",
+          "value": "4px",
+          "line": 447
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 447
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 450,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "inline-flex",
+          "line": 451
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 451
+        },
+        {
+          "property": "gap",
+          "value": "4px",
+          "line": 451
+        },
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 452
+        },
+        {
+          "property": "font-weight",
+          "value": "500",
+          "line": 452
+        },
+        {
+          "property": "letter-spacing",
+          "value": "0.02em",
+          "line": 452
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 453
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 453
+        },
+        {
+          "property": "border",
+          "value": "1px solid transparent",
+          "line": 454
+        },
+        {
+          "property": "border-radius",
+          "value": "6px",
+          "line": 454
+        },
+        {
+          "property": "padding",
+          "value": "4px 8px",
+          "line": 455
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 455
+        },
+        {
+          "property": "transition",
+          "value": "background 0.15s, color 0.15s",
+          "line": 456
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 458,
+      "selector": ".reader-pill:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 458
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 458
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 459,
+      "selector": ".reader-pill.is-active",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 459
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 8%, transparent)",
+          "line": 459
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 460,
+      "selector": ".reader-pill .material-symbols-outlined",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 460
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 463,
+      "selector": ".reader-pill:focus-visible",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "outline",
+          "value": "2px solid var(--primary)",
+          "line": 464
+        },
+        {
+          "property": "outline-offset",
+          "value": "2px",
+          "line": 465
+        },
+        {
+          "property": "opacity",
+          "value": "1",
+          "line": 466
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 470,
+      "selector": ".reader-canvas",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 471
+        },
+        {
+          "property": "overflow-y",
+          "value": "auto",
+          "line": 471
+        },
+        {
+          "property": "padding",
+          "value": "40px 20px 80px",
+          "line": 471
+        },
+        {
+          "property": "scroll-behavior",
+          "value": "auto",
+          "line": 472
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 476,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "max-width",
+          "value": "640px",
+          "line": 477
+        },
+        {
+          "property": "margin",
+          "value": "0 auto",
+          "line": 477
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 478
+        },
+        {
+          "property": "font-size",
+          "value": "18px",
+          "line": 479
+        },
+        {
+          "property": "line-height",
+          "value": "1.75",
+          "line": 479
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 479
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 481,
+      "selector": ".reader-article p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-bottom",
+          "value": "1.2em",
+          "line": 481
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 482,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 483
+        },
+        {
+          "property": "margin",
+          "value": "1.4em 0 0.5em",
+          "line": 484
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 485
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 488,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 489
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 489
+        },
+        {
+          "property": "font-size",
+          "value": "16px",
+          "line": 490
+        },
+        {
+          "property": "text-align",
+          "value": "center",
+          "line": 490
+        },
+        {
+          "property": "margin-top",
+          "value": "4rem",
+          "line": 491
+        },
+        {
+          "property": "line-height",
+          "value": "1.6",
+          "line": 491
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 496,
+      "selector": ".reader-ruler",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "position",
+          "value": "fixed",
+          "line": 497
+        },
+        {
+          "property": "inset",
+          "value": "0",
+          "line": 497
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 497
+        },
+        {
+          "property": "z-index",
+          "value": "5",
+          "line": 497
+        },
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 498
+        },
+        {
+          "property": "flex-direction",
+          "value": "column",
+          "line": 498
+        },
+        {
+          "property": "justify-content",
+          "value": "center",
+          "line": 498
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 500,
+      "selector": ".reader-ruler::before, .reader-ruler::after",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "content",
+          "value": "''",
+          "line": 501
+        },
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 501
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--paper) 42%, transparent)",
+          "line": 503
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 505,
+      "selector": ".reader-ruler::before",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-bottom",
+          "value": "1.5px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+          "line": 505
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 506,
+      "selector": ".reader-ruler::after",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-top",
+          "value": "1.5px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+          "line": 506
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 585,
+      "selector": ".reader-hint-toast",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "position",
+          "value": "fixed",
+          "line": 586
+        },
+        {
+          "property": "bottom",
+          "value": "80px",
+          "line": 587
+        },
+        {
+          "property": "left",
+          "value": "50%",
+          "line": 588
+        },
+        {
+          "property": "transform",
+          "value": "translateX(-50%) translateY(8px)",
+          "line": 589
+        },
+        {
+          "property": "background",
+          "value": "var(--ink)",
+          "line": 590
+        },
+        {
+          "property": "color",
+          "value": "var(--paper)",
+          "line": 591
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 592
+        },
+        {
+          "property": "padding",
+          "value": "9px 18px",
+          "line": 593
+        },
+        {
+          "property": "border-radius",
+          "value": "8px",
+          "line": 594
+        },
+        {
+          "property": "opacity",
+          "value": "0",
+          "line": 595
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 596
+        },
+        {
+          "property": "transition",
+          "value": "opacity .2s, transform .2s",
+          "line": 597
+        },
+        {
+          "property": "z-index",
+          "value": "300",
+          "line": 598
+        },
+        {
+          "property": "white-space",
+          "value": "nowrap",
+          "line": 599
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 601,
+      "selector": ".reader-hint-toast.is-visible",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "opacity",
+          "value": "1",
+          "line": 602
+        },
+        {
+          "property": "transform",
+          "value": "translateX(-50%) translateY(0)",
+          "line": 603
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 608,
+      "selector": ".reader-header",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "padding",
+          "value": "6px 12px",
+          "line": 609
+        },
+        {
+          "property": "gap",
+          "value": "6px",
+          "line": 610
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 612,
+      "selector": ".reader-title",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 612
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 613,
+      "selector": ".reader-pill",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "10px",
+          "line": 614
+        },
+        {
+          "property": "padding",
+          "value": "3px 6px",
+          "line": 615
+        },
+        {
+          "property": "gap",
+          "value": "3px",
+          "line": 616
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 618,
+      "selector": ".reader-canvas",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "padding",
+          "value": "24px 16px 60px",
+          "line": 619
+        }
+      ]
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 621,
+      "selector": ".reader-article",
+      "media": "(max-width: 600px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "16px",
+          "line": 622
+        },
+        {
+          "property": "line-height",
+          "value": "1.7",
+          "line": 623
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 290,
+      "selector": ".academia-biblioteca-frame",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "width",
+          "value": "100%",
+          "line": 291
+        },
+        {
+          "property": "height",
+          "value": "600px",
+          "line": 292
+        },
+        {
+          "property": "border",
+          "value": "none",
+          "line": 293
+        },
+        {
+          "property": "display",
+          "value": "block",
+          "line": 294
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 368,
+      "selector": ".leitura-editorial-grid",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-top",
+          "value": "2rem",
+          "line": 369
+        },
+        {
+          "property": "display",
+          "value": "grid",
+          "line": 370
+        },
+        {
+          "property": "grid-template-columns",
+          "value": "repeat(3, 1fr)",
+          "line": 371
+        },
+        {
+          "property": "gap",
+          "value": "6px",
+          "line": 372
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 375,
+      "selector": ".leitura-editorial-card",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "block",
+          "line": 376
+        },
+        {
+          "property": "padding",
+          "value": "1.25rem 1.25rem 1rem",
+          "line": 377
+        },
+        {
+          "property": "background",
+          "value": "linear-gradient(145deg, var(--highlight-start) 0%, var(--highlight-neutral-end) 100%)",
+          "line": 378
+        },
+        {
+          "property": "border",
+          "value": "1px solid var(--line)",
+          "line": 379
+        },
+        {
+          "property": "border-left",
+          "value": "3px solid var(--ochre)",
+          "line": 380
+        },
+        {
+          "property": "border-radius",
+          "value": "4px",
+          "line": 381
+        },
+        {
+          "property": "text-decoration",
+          "value": "none",
+          "line": 382
+        },
+        {
+          "property": "color",
+          "value": "inherit",
+          "line": 383
+        },
+        {
+          "property": "box-shadow",
+          "value": "0 2px 6px rgba(140, 100, 55, 0.07), 0 1px 0 rgba(255, 255, 255, 0.5) inset",
+          "line": 384
+        },
+        {
+          "property": "transition",
+          "value": "transform 0.18s ease, box-shadow 0.18s ease, border-left-color 0.18s ease",
+          "line": 385
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 388,
+      "selector": ".leitura-editorial-card:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "transform",
+          "value": "translateY(-3px) rotate(0.25deg)",
+          "line": 389
+        },
+        {
+          "property": "box-shadow",
+          "value": "0 8px 22px rgba(140, 100, 55, 0.15), 0 1px 0 rgba(255, 255, 255, 0.5) inset",
+          "line": 390
+        },
+        {
+          "property": "border-left-color",
+          "value": "var(--primary)",
+          "line": 391
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 394,
+      "selector": ".leitura-editorial-card .eyebrow",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-bottom",
+          "value": "0.4rem",
+          "line": 395
+        },
+        {
+          "property": "color",
+          "value": "var(--ochre)",
+          "line": 396
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 399,
+      "selector": ".leitura-editorial-card strong",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "block",
+          "line": 400
+        },
+        {
+          "property": "margin",
+          "value": "0.4rem 0 0.5rem",
+          "line": 401
+        },
+        {
+          "property": "font-size",
+          "value": "0.95rem",
+          "line": 402
+        },
+        {
+          "property": "font-family",
+          "value": "'Cinzel', \"Noto Serif\", Georgia, serif",
+          "line": 403
+        },
+        {
+          "property": "font-weight",
+          "value": "600",
+          "line": 404
+        },
+        {
+          "property": "line-height",
+          "value": "1.35",
+          "line": 405
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 406
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 409,
+      "selector": ".leitura-editorial-card small",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "block",
+          "line": 410
+        },
+        {
+          "property": "font-size",
+          "value": "0.78rem",
+          "line": 411
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 412
+        },
+        {
+          "property": "line-height",
+          "value": "1.4",
+          "line": 413
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 417,
+      "selector": ".leitura-editorial-grid",
+      "media": "(max-width: 900px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "grid-template-columns",
+          "value": "1fr 1fr",
+          "line": 417
+        }
+      ]
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 420,
+      "selector": ".leitura-editorial-grid",
+      "media": "(max-width: 560px)",
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "grid-template-columns",
+          "value": "1fr",
+          "line": 420
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 457,
+      "selector": ".reader-overlay",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "position",
+          "value": "fixed",
+          "line": 458
+        },
+        {
+          "property": "inset",
+          "value": "0",
+          "line": 458
+        },
+        {
+          "property": "z-index",
+          "value": "200",
+          "line": 458
+        },
+        {
+          "property": "background",
+          "value": "var(--paper)",
+          "line": 459
+        },
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 460
+        },
+        {
+          "property": "flex-direction",
+          "value": "column",
+          "line": 460
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 462,
+      "selector": ".reader-overlay[hidden]",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "none",
+          "line": 462
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 465,
+      "selector": ".reader-header",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 466
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 466
+        },
+        {
+          "property": "gap",
+          "value": "12px",
+          "line": 466
+        },
+        {
+          "property": "padding",
+          "value": "8px 20px",
+          "line": 467
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 468
+        },
+        {
+          "property": "border-bottom",
+          "value": "1px solid transparent",
+          "line": 469
+        },
+        {
+          "property": "position",
+          "value": "sticky",
+          "line": 470
+        },
+        {
+          "property": "top",
+          "value": "0",
+          "line": 470
+        },
+        {
+          "property": "z-index",
+          "value": "10",
+          "line": 470
+        },
+        {
+          "property": "opacity",
+          "value": "0.45",
+          "line": 471
+        },
+        {
+          "property": "transition",
+          "value": "opacity 0.3s ease",
+          "line": 472
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 474,
+      "selector": ".reader-header:hover,\n.reader-header:focus-within",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "opacity",
+          "value": "1",
+          "line": 476
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 480,
+      "selector": ".reader-title",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 481
+        },
+        {
+          "property": "font-size",
+          "value": "13px",
+          "line": 481
+        },
+        {
+          "property": "font-weight",
+          "value": "400",
+          "line": 481
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 481
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 482
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 482
+        },
+        {
+          "property": "white-space",
+          "value": "nowrap",
+          "line": 483
+        },
+        {
+          "property": "overflow",
+          "value": "hidden",
+          "line": 483
+        },
+        {
+          "property": "text-overflow",
+          "value": "ellipsis",
+          "line": 483
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 486,
+      "selector": ".reader-controls",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 486
+        },
+        {
+          "property": "gap",
+          "value": "4px",
+          "line": 486
+        },
+        {
+          "property": "flex-wrap",
+          "value": "wrap",
+          "line": 486
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 489,
+      "selector": ".reader-pill",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "display",
+          "value": "inline-flex",
+          "line": 490
+        },
+        {
+          "property": "align-items",
+          "value": "center",
+          "line": 490
+        },
+        {
+          "property": "gap",
+          "value": "4px",
+          "line": 490
+        },
+        {
+          "property": "font-size",
+          "value": "11px",
+          "line": 491
+        },
+        {
+          "property": "font-weight",
+          "value": "500",
+          "line": 491
+        },
+        {
+          "property": "letter-spacing",
+          "value": "0.02em",
+          "line": 491
+        },
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 492
+        },
+        {
+          "property": "background",
+          "value": "transparent",
+          "line": 492
+        },
+        {
+          "property": "border",
+          "value": "1px solid transparent",
+          "line": 493
+        },
+        {
+          "property": "border-radius",
+          "value": "6px",
+          "line": 493
+        },
+        {
+          "property": "padding",
+          "value": "4px 8px",
+          "line": 494
+        },
+        {
+          "property": "cursor",
+          "value": "pointer",
+          "line": 494
+        },
+        {
+          "property": "transition",
+          "value": "background 0.15s, color 0.15s",
+          "line": 495
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 497,
+      "selector": ".reader-pill:hover",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "background",
+          "value": "var(--surface-low)",
+          "line": 497
+        },
+        {
+          "property": "color",
+          "value": "var(--soft-ink)",
+          "line": 497
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 498,
+      "selector": ".reader-pill.is-active",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--primary)",
+          "line": 498
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--primary) 8%, transparent)",
+          "line": 498
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 499,
+      "selector": ".reader-pill .material-symbols-outlined",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "font-size",
+          "value": "15px",
+          "line": 499
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 502,
+      "selector": ".reader-pill:focus-visible",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "outline",
+          "value": "2px solid var(--primary)",
+          "line": 503
+        },
+        {
+          "property": "outline-offset",
+          "value": "2px",
+          "line": 504
+        },
+        {
+          "property": "opacity",
+          "value": "1",
+          "line": 505
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 509,
+      "selector": ".reader-canvas",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 510
+        },
+        {
+          "property": "overflow-y",
+          "value": "auto",
+          "line": 510
+        },
+        {
+          "property": "padding",
+          "value": "56px 24px 120px",
+          "line": 510
+        },
+        {
+          "property": "scroll-behavior",
+          "value": "auto",
+          "line": 511
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 515,
+      "selector": ".reader-article",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "max-width",
+          "value": "640px",
+          "line": 516
+        },
+        {
+          "property": "margin",
+          "value": "0 auto",
+          "line": 516
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 517
+        },
+        {
+          "property": "font-size",
+          "value": "20px",
+          "line": 518
+        },
+        {
+          "property": "line-height",
+          "value": "1.9",
+          "line": 518
+        },
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 518
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 520,
+      "selector": ".reader-article p",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "margin-bottom",
+          "value": "1.5em",
+          "line": 520
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 521,
+      "selector": ".reader-article h1, .reader-article h2, .reader-article h3",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--ink)",
+          "line": 522
+        },
+        {
+          "property": "margin",
+          "value": "1.4em 0 0.5em",
+          "line": 523
+        },
+        {
+          "property": "font-family",
+          "value": "\"Noto Serif\", Georgia, serif",
+          "line": 524
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 527,
+      "selector": ".reader-empty",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "color",
+          "value": "var(--muted)",
+          "line": 528
+        },
+        {
+          "property": "font-style",
+          "value": "italic",
+          "line": 528
+        },
+        {
+          "property": "font-size",
+          "value": "16px",
+          "line": 529
+        },
+        {
+          "property": "text-align",
+          "value": "center",
+          "line": 529
+        },
+        {
+          "property": "margin-top",
+          "value": "4rem",
+          "line": 530
+        },
+        {
+          "property": "line-height",
+          "value": "1.6",
+          "line": 530
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 535,
+      "selector": ".reader-ruler",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "position",
+          "value": "fixed",
+          "line": 536
+        },
+        {
+          "property": "inset",
+          "value": "0",
+          "line": 536
+        },
+        {
+          "property": "pointer-events",
+          "value": "none",
+          "line": 536
+        },
+        {
+          "property": "z-index",
+          "value": "5",
+          "line": 536
+        },
+        {
+          "property": "display",
+          "value": "flex",
+          "line": 537
+        },
+        {
+          "property": "flex-direction",
+          "value": "column",
+          "line": 537
+        },
+        {
+          "property": "justify-content",
+          "value": "center",
+          "line": 537
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 539,
+      "selector": ".reader-ruler::before, .reader-ruler::after",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "content",
+          "value": "''",
+          "line": 540
+        },
+        {
+          "property": "flex",
+          "value": "1",
+          "line": 540
+        },
+        {
+          "property": "background",
+          "value": "color-mix(in srgb, var(--paper) 42%, transparent)",
+          "line": 542
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 544,
+      "selector": ".reader-ruler::before",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-bottom",
+          "value": "1.5px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+          "line": 544
+        }
+      ]
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 545,
+      "selector": ".reader-ruler::after",
+      "media": null,
+      "theme": "base/Alvorada",
+      "declarations": [
+        {
+          "property": "border-top",
+          "value": "1.5px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+          "line": 545
+        }
+      ]
+    }
+  ]
+}
