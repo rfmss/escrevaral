@@ -6,6 +6,7 @@ Este diretório é a fonte de verdade para preparação e encerramento de versõ
 
 - versão: `1.0.0`;
 - codinome: Argila;
+- encerramento verificado: `CLOSURE_1.0.0.md`;
 - notas públicas: `RELEASE_NOTES_1.0.0.md`;
 - checklist de saída: `LAUNCH_CHECKLIST.md`;
 - baseline técnica: `BASELINE_1.0.0_RC1_2026-07-26.md`;
@@ -31,6 +32,7 @@ Uma versão pública só pode ser encerrada quando:
 4. `README.md`, `CHANGELOG.md`, `VERSION` e esta documentação estiverem coerentes;
 5. não houver PR ou issue bloqueadora aberta;
 6. o workflow de publicação apontar a tag para o SHA exato incorporado em `main`;
-7. a produção permanecer acessível após a publicação.
+7. a GitHub Release estiver publicada;
+8. a produção permanecer acessível após a publicação.
 
 Mudanças estruturais posteriores voltam a ocorrer em lotes isolados e versionados. Uma versão estável não deve ser usada para reorganizações cosméticas ou para perseguir uma raiz artificialmente vazia.
