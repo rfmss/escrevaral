@@ -1,22 +1,28 @@
 # Registro de mudanças
 
-Este arquivo registra mudanças públicas relevantes do Escrevaral a partir da preparação para a versão 1.0.
+Este arquivo registra mudanças públicas relevantes do Escrevaral a partir da versão 1.0.
 
 O histórico técnico anterior permanece disponível nos commits e pull requests do repositório. Ele não será reproduzido retroativamente aqui.
 
 ## Não lançado
 
-- promoção da candidata para `1.0.0`, condicionada ao checklist de lançamento e ao último gate verde.
+Nenhuma mudança pública registrada após a versão 1.0.0.
 
-## [1.0.0-rc.1] - 2026-07-26
+## [1.0.0] - 2026-07-26
+
+Primeiro lançamento público estável, codinome Argila.
 
 ### Adicionado
 
+- aplicação de escrita local-first para português brasileiro;
+- editor com guias, folha paginada e modos de escrita;
+- Espelho de Voz, RimaLab e ferramentas linguísticas locais;
+- Prova de Autoria e cópia de segurança exportável;
+- instalação como PWA e continuidade offline após a primeira visita;
 - baseline pública de versão em `VERSION`;
 - fonte única de lançamento em `docs/release/`;
-- checklist binário para promoção à versão 1.0.0;
 - políticas públicas de segurança, suporte, contribuição e propriedade;
-- auditor permanente da fronteira entre produto, documentação e material operacional.
+- auditores permanentes de release, fronteira pública e atualização da PWA.
 
 ### Alterado
 
@@ -30,12 +36,13 @@ O histórico técnico anterior permanece disponível nos commits e pull requests
 
 - riscos críticos de perda silenciosa de manuscrito, conflito entre abas e restauração de estado foram estabilizados e protegidos por testes;
 - caminhos de assets, cache offline e carregadores dinâmicos foram alinhados após movimentos estruturais;
+- atualização da PWA passou a ter teste automático de remoção de caches antigos e recarga offline;
 - rastreador público foi limpo de resultados verdes, duplicatas e lembretes internos.
 
 ### Removido
 
 - 374 relatórios históricos e regeneráveis da árvore principal;
-- mais de 150 mil linhas de saídas repetitivas que já são preservadas como artefatos temporários de CI;
+- mais de 150 mil linhas de saídas repetitivas preservadas de forma mais adequada como artefatos temporários de CI;
 - planos e pull requests obsoletos que não representavam mais a arquitetura atual.
 
 ### Limitações conhecidas

@@ -2,13 +2,14 @@
 
 Este diretório é a fonte de verdade para preparação e encerramento de versões públicas.
 
-## Versão em estabilização
+## Versão estável
 
-- versão: `1.0.0-rc.1`;
+- versão: `1.0.0`;
 - codinome: Argila;
-- baseline técnica: `BASELINE_1.0.0_RC1_2026-07-26.md`;
+- notas públicas: `RELEASE_NOTES_1.0.0.md`;
 - checklist de saída: `LAUNCH_CHECKLIST.md`;
-- candidata anterior e evidências históricas: `ARGILA_RELEASE_CANDIDATE_2026-07-25.md`.
+- baseline técnica: `BASELINE_1.0.0_RC1_2026-07-26.md`;
+- candidata e evidências anteriores: `ARGILA_RELEASE_CANDIDATE_2026-07-25.md`.
 
 ## Política de versão
 
@@ -20,15 +21,16 @@ O Escrevaral usa versionamento semântico para versões públicas:
 
 Os identificadores de assets e cache do service worker são mecanismos técnicos de invalidação. Eles não substituem a versão pública registrada em `VERSION`.
 
-## Regra de promoção
+## Contrato de publicação
 
-Uma candidata só pode ser promovida quando:
+Uma versão pública só pode ser encerrada quando:
 
 1. não houver P0 ou P1 reproduzido;
 2. a candidata de lançamento estiver verde;
-3. o checklist de saída estiver integralmente resolvido;
+3. o teste de atualização e recarga offline da PWA estiver verde;
 4. `README.md`, `CHANGELOG.md`, `VERSION` e esta documentação estiverem coerentes;
 5. não houver PR ou issue bloqueadora aberta;
-6. a produção estiver acessível e os principais fluxos funcionarem após a publicação.
+6. o workflow de publicação apontar a tag para o SHA exato incorporado em `main`;
+7. a produção permanecer acessível após a publicação.
 
-Depois da promoção para `1.0.0`, mudanças estruturais voltam a ocorrer em lotes isolados. A versão de lançamento não deve ser usada para esvaziar a raiz ou executar refatorações cosméticas.
+Mudanças estruturais posteriores voltam a ocorrer em lotes isolados e versionados. Uma versão estável não deve ser usada para reorganizações cosméticas ou para perseguir uma raiz artificialmente vazia.

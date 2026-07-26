@@ -1,0 +1,62 @@
+name: Publicar versão estável
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "VERSION"
+      - "CHANGELOG.md"
+      - "README.md"
+      - "docs/release/RELEASE_NOTES_1.0.0.md"
+      - ".github/workflows/publish-stable-release.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stable-release-v1.0.0
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Confirmar versão estável
+        run: test "$(tr -d '\n\r' < VERSION)" = "1.0.0"
+
+      - name: Validar documentação da release
+        run: python scripts/auditor-release-baseline.py
+
+      - name: Criar tag e GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="$(tr -d '\n\r' < VERSION)"
+          tag="v${version}"
+
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release $tag já existe; nenhuma duplicata será criada."
+            exit 0
+          fi
+
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "Escrevaral 1.0.0 — Argila" \
+            --notes-file docs/release/RELEASE_NOTES_1.0.0.md \
+            --latest
+
+          gh release view "$tag" --repo "$GITHUB_REPOSITORY" --json tagName,targetCommitish,url
