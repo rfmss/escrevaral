@@ -37,7 +37,8 @@ jobs:
             scripts/auditoria-pilares.py \
             scripts/auditor-overflow-mobile.py \
             scripts/auditor-console-errors.py \
-            scripts/auditor-nomenclatura-publica.py
+            scripts/auditor-nomenclatura-publica.py \
+            scripts/auditor-repository-boundary.py
 
       - name: Iniciar candidata local
         run: |
@@ -84,6 +85,16 @@ jobs:
           echo "exit_code=$code" >> "$GITHUB_OUTPUT"
           exit 0
 
+      - name: Auditoria da fronteira pública
+        id: boundary
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-repository-boundary.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
       - name: Auditorias de produção
         id: production
         shell: bash
@@ -114,11 +125,13 @@ jobs:
           MASTER_EXIT: ${{ steps.master.outputs.exit_code }}
           LOCAL_EXIT: ${{ steps.local_visual.outputs.exit_code }}
           NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
+          BOUNDARY_EXIT: ${{ steps.boundary.outputs.exit_code }}
           PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
         run: |
           test "$MASTER_EXIT" = "0"
           test "$LOCAL_EXIT" = "0"
           test "$NAMING_EXIT" = "0"
+          test "$BOUNDARY_EXIT" = "0"
           test "$PRODUCTION_EXIT" = "0"
           python - <<'PY'
           import json
@@ -153,5 +166,10 @@ jobs:
           naming = json.loads((root / 'nomenclatura-publica-artifacts' / 'report.json').read_text(encoding='utf-8'))
           assert naming['status'] == 'aprovado', naming
           assert not naming['failures'], naming['failures']
-          print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
+
+          boundary = json.loads((root / 'repository-boundary-artifacts' / 'report.json').read_text(encoding='utf-8'))
+          assert boundary['status'] == 'aprovado', boundary
+          assert not boundary['failures'], boundary['failures']
+
+          print('Candidata Argila aprovada: nenhum P0/P1, nomenclatura e fronteira pública coerentes.')
           PY
