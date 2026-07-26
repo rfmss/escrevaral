@@ -39,6 +39,7 @@ jobs:
 
           old_version = "20260725-js-controllers-pilot-v1"
           new_version = "20260726-js-controllers-ui-v1"
+          dollar = "$"
 
           moves = {
               "editor-status-controller.js": "js/controllers/editor-status-controller.js",
@@ -64,9 +65,10 @@ jobs:
           sw = sw.replace(f'const ASSET_VERSION = "{old_version}";', f'const ASSET_VERSION = "{new_version}";')
           sw = sw.replace(old_version, new_version)
           for old, new in moves.items():
-              marker = f'`./{old}?v=${{ASSET_VERSION}}`'
+              marker = f'`./{old}?v={dollar}{{ASSET_VERSION}}`'
               assert marker in sw, marker
-              sw = sw.replace(marker, f'`./{new}?v=${{ASSET_VERSION}}`')
+              replacement = f'`./{new}?v={dollar}{{ASSET_VERSION}}`'
+              sw = sw.replace(marker, replacement)
           sw_path.write_text(sw, encoding="utf-8")
 
           dialog_path = Path("ui-dialog.js")
