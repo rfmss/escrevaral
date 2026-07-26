@@ -1,4 +1,4 @@
-name: Operação temporária — inventariar temas escuros mortos
+name: Operação temporária — classificar temas escuros mortos
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  inventariar:
+  classificar:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -18,45 +18,45 @@ jobs:
       - name: Clonar branch
         uses: actions/checkout@v4.2.2
 
-      - name: Contar ocorrências em CSS
+      - name: Classificar grupos de seletores
         run: |
           python3 - <<'PY'
           import json
+          import re
+          from collections import Counter
           from pathlib import Path
 
           tokens = ("cerrado-dark", "mata-dark", "amazonia-dark")
-          files = {}
-          totals = {token: 0 for token in tokens}
+          result = {}
 
           for path in sorted(Path("css").rglob("*.css")):
               text = path.read_text(encoding="utf-8")
-              counts = {token: text.count(token) for token in tokens}
-              if any(counts.values()):
-                  files[path.as_posix()] = counts
-                  for token, count in counts.items():
-                      totals[token] += count
+              if not any(token in text for token in tokens):
+                  continue
 
-          result = {
-              "files": files,
-              "totals_by_variant": totals,
-              "total_occurrences": sum(totals.values()),
-              "file_count": len(files),
-          }
+              preludes = Counter()
+              for match in re.finditer(r"([^{}]+)\{", text):
+                  prelude = match.group(1).strip()
+                  if any(token in prelude for token in tokens):
+                      normalized = " ".join(prelude.split())
+                      preludes[normalized] += 1
 
-          if len(files) != 6:
-              raise SystemExit(f"esperados 6 arquivos CSS; encontrados {len(files)}: {sorted(files)}")
+              result[path.as_posix()] = [
+                  {"prelude": prelude, "count": count}
+                  for prelude, count in sorted(preludes.items())
+              ]
 
-          Path("_tmp_dead_dark_inventory.json").write_text(
+          Path("_tmp_dead_dark_context.json").write_text(
               json.dumps(result, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8",
           )
           print(json.dumps(result, ensure_ascii=False, indent=2))
           PY
 
-      - name: Registrar inventário temporário
+      - name: Registrar classificação temporária
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add _tmp_dead_dark_inventory.json
-          git commit -m "Registra inventário temporário dos temas escuros mortos"
+          git add _tmp_dead_dark_context.json
+          git commit -m "Classifica seletores temporários dos temas escuros mortos"
           git push origin "HEAD:${GITHUB_REF_NAME}"
