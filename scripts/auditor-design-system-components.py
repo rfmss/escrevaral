@@ -179,7 +179,7 @@ def audit_theme(page, viewport: str, theme: str) -> tuple[dict[str, Any], list[d
         )
 
     for variant in ("primary", "secondary", "ghost"):
-        selector = f'{scope} [data-variant="{variant}"]:not([data-size]):not([data-state])'
+        selector = f'{scope} [data-variant="{variant}"]:not([data-size]):not([data-state]):not([data-icon-only])'
         style = computed(page, selector)
         background = resolved_background(page, selector)
         ratio = contrast(style["color"], background)
