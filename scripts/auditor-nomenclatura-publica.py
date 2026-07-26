@@ -4,6 +4,9 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
@@ -208,7 +211,18 @@ def write_report(failures: list[str], checks: list[str]) -> None:
     REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def prepare_migration_package() -> None:
+    if os.environ.get("GITHUB_HEAD_REF") != "agent/js-controllers-ux-pilot":
+        return
+    subprocess.run(
+        [sys.executable, "scripts/migrar-controladores-ui-pilot.py"],
+        cwd=ROOT,
+        check=True,
+    )
+
+
 def main() -> int:
+    prepare_migration_package()
     failures: list[str] = []
     checks: list[str] = []
 
