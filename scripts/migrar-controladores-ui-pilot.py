@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
+import traceback
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -181,4 +182,10 @@ Nenhuma função, variável global, chave de armazenamento, evento, ordem de scr
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        exit_code = main()
+    except Exception:
+        PACKAGE.mkdir(parents=True, exist_ok=True)
+        (PACKAGE / "error.txt").write_text(traceback.format_exc(), encoding="utf-8")
+        raise
+    raise SystemExit(exit_code)
