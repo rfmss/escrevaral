@@ -63,6 +63,14 @@ def main() -> int:
         "docs/release/BASELINE_1.0.0_RC1_2026-07-26.md",
         "docs/release/ARGILA_RELEASE_CANDIDATE_2026-07-25.md",
     }
+    if version_text == "1.0.0":
+        required_paths.update(
+            {
+                "docs/release/RELEASE_NOTES_1.0.0.md",
+                ".github/workflows/publish-stable-release.yml",
+            }
+        )
+
     tracked = tracked_files()
     missing_tracked = sorted(required_paths - tracked)
     require(
@@ -98,7 +106,7 @@ def main() -> int:
     )
     require(
         version_text in checklist,
-        "checklist declara a versão em estabilização",
+        "checklist declara a versão atual",
         "checklist diverge de VERSION",
     )
     require(
@@ -123,6 +131,28 @@ def main() -> int:
             "[ ]" not in checklist,
             "checklist final está integralmente concluído",
             "VERSION é 1.0.0, mas o checklist ainda contém itens pendentes",
+        )
+        release_notes = read("docs/release/RELEASE_NOTES_1.0.0.md")
+        publish_workflow = read(".github/workflows/publish-stable-release.yml")
+        require(
+            "Escrevaral 1.0.0" in release_notes and "Limitações conhecidas" in release_notes,
+            "notas públicas da versão estão completas",
+            "notas públicas não identificam a versão ou suas limitações",
+        )
+        require(
+            "permissions:\n  contents: write" in publish_workflow,
+            "workflow de release possui permissão explícita de publicação",
+            "workflow de release sem contents: write",
+        )
+        require(
+            'gh release create "$tag"' in publish_workflow,
+            "workflow cria GitHub Release de forma explícita",
+            "workflow de release não contém criação da GitHub Release",
+        )
+        require(
+            '--target "$GITHUB_SHA"' in publish_workflow,
+            "tag será ligada ao SHA incorporado em main",
+            "workflow de release não aponta para GITHUB_SHA",
         )
 
     status = "aprovado" if not FAILURES else "reprovado"
