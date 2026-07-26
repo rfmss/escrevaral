@@ -1,171 +1,157 @@
-name: Migração isolada de controladores de interface
+name: Candidata a lançamento Argila
 
 on:
-  push:
-    branches:
-      - agent/js-controllers-ux-pilot
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  migrar:
+  validar-candidata:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
-      - name: Clonar branch
+      - name: Clonar repositório
         uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
         with:
-          fetch-depth: 0
+          python-version: '3.12'
 
-      - name: Migrar lote e validar
-        shell: bash
+      - name: Instalar Playwright e Chromium
         run: |
-          set -euo pipefail
-          git fetch origin main
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
 
-          test -f editor-status-controller.js
-          test -f oficina-navigation-controller.js
-          test -f training-controller.js
+      - name: Validar sintaxe dos auditores
+        run: |
+          python -m py_compile \
+            scripts/teste-master.py \
+            scripts/auditor-release-local.py \
+            scripts/auditor-publicacao.py \
+            scripts/auditor-privacidade-rede.py \
+            scripts/auditoria-pilares.py \
+            scripts/auditor-overflow-mobile.py \
+            scripts/auditor-console-errors.py \
+            scripts/auditor-nomenclatura-publica.py
 
-          mkdir -p js/controllers
-          git mv editor-status-controller.js js/controllers/editor-status-controller.js
-          git mv oficina-navigation-controller.js js/controllers/oficina-navigation-controller.js
-          git mv training-controller.js js/controllers/training-controller.js
-
-          python3 - <<'PY'
-          from pathlib import Path
-
-          old_version = "20260725-js-controllers-pilot-v1"
-          new_version = "20260726-js-controllers-ui-v1"
-          dollar = "$"
-
-          moves = {
-              "editor-status-controller.js": "js/controllers/editor-status-controller.js",
-              "oficina-navigation-controller.js": "js/controllers/oficina-navigation-controller.js",
-              "training-controller.js": "js/controllers/training-controller.js",
-          }
-
-          index_path = Path("index.html")
-          index = index_path.read_text(encoding="utf-8")
-          assert old_version in index
-          index = index.replace(old_version, new_version)
-          for old, new in moves.items():
-              marker = f'src="{old}?v='
-              assert marker in index, marker
-              index = index.replace(marker, f'src="{new}?v=')
-          index_path.write_text(index, encoding="utf-8")
-
-          sw_path = Path("service-worker.js")
-          sw = sw_path.read_text(encoding="utf-8")
-          assert 'const CACHE_NAME = "vereda-offline-v956";' in sw
-          assert f'const ASSET_VERSION = "{old_version}";' in sw
-          sw = sw.replace('const CACHE_NAME = "vereda-offline-v956";', 'const CACHE_NAME = "vereda-offline-v957";')
-          sw = sw.replace(f'const ASSET_VERSION = "{old_version}";', f'const ASSET_VERSION = "{new_version}";')
-          sw = sw.replace(old_version, new_version)
-          for old, new in moves.items():
-              marker = f'`./{old}?v={dollar}{{ASSET_VERSION}}`'
-              assert marker in sw, marker
-              replacement = f'`./{new}?v={dollar}{{ASSET_VERSION}}`'
-              sw = sw.replace(marker, replacement)
-          sw_path.write_text(sw, encoding="utf-8")
-
-          dialog_path = Path("ui-dialog.js")
-          dialog = dialog_path.read_text(encoding="utf-8")
-          assert old_version in dialog
-          dialog_path.write_text(dialog.replace(old_version, new_version), encoding="utf-8")
-
-          workflow_updates = {
-              Path(".github/workflows/editor-status-argila-pr.yml"): moves["editor-status-controller.js"],
-              Path(".github/workflows/oficina-navigation-pr.yml"): moves["oficina-navigation-controller.js"],
-          }
-          for path, new_path in workflow_updates.items():
-              text = path.read_text(encoding="utf-8")
-              old_name = Path(new_path).name
-              assert old_name in text, (path, old_name)
-              path.write_text(text.replace(old_name, new_path), encoding="utf-8")
-
-          root_decision = Path("docs/_decisoes/ESTRUTURA_RAIZ.md")
-          root_text = root_decision.read_text(encoding="utf-8")
-          addition = """
-
-## Segundo lote de controladores — 2026-07-26
-
-Mais três controladores de interface foram migrados para `js/controllers/` em um lote isolado. Os workflows especializados que validam situação do editor e navegação da Oficina foram atualizados junto; nenhuma lógica de produto foi refatorada.
-"""
-          if "## Segundo lote de controladores — 2026-07-26" not in root_text:
-              root_decision.write_text(root_text.rstrip() + addition, encoding="utf-8")
-
-          evidence = """# Segundo lote estrutural — controladores de interface
-
-Data: 2026-07-26
-
-## Decisão
-
-Mover um novo grupo pequeno de controladores para `js/controllers/`, mantendo conteúdo, ordem de carregamento e comportamento.
-
-## Arquivos
-
-- `editor-status-controller.js` → `js/controllers/editor-status-controller.js`;
-- `oficina-navigation-controller.js` → `js/controllers/oficina-navigation-controller.js`;
-- `training-controller.js` → `js/controllers/training-controller.js`.
-
-## Consumidores atualizados
-
-- `index.html`;
-- `service-worker.js`;
-- `ui-dialog.js`, apenas para coerência da versão global;
-- `.github/workflows/editor-status-argila-pr.yml`;
-- `.github/workflows/oficina-navigation-pr.yml`.
-
-## Limites
-
-Nenhuma função, variável global, chave de armazenamento, evento, ordem de script ou comportamento de interface foi alterado.
-
-## Evidência mínima
-
-- conteúdos preservados pelo `git mv`;
-- sintaxe dos três destinos verificada;
-- referências executáveis atualizadas;
-- novos caminhos servidos por HTTP;
-- coerência de versão e cache validada.
-"""
-          Path("docs/_decisoes/PILOTO_ESTRUTURA_JS_CONTROLLERS_UI_2026-07-26.md").write_text(evidence, encoding="utf-8")
-          PY
-
-          node --check js/controllers/editor-status-controller.js
-          node --check js/controllers/oficina-navigation-controller.js
-          node --check js/controllers/training-controller.js
-
-          test ! -e editor-status-controller.js
-          test ! -e oficina-navigation-controller.js
-          test ! -e training-controller.js
-
-          grep -F 'js/controllers/editor-status-controller.js' index.html service-worker.js .github/workflows/editor-status-argila-pr.yml
-          grep -F 'js/controllers/oficina-navigation-controller.js' index.html service-worker.js .github/workflows/oficina-navigation-pr.yml
-          grep -F 'js/controllers/training-controller.js' index.html service-worker.js
-
-          python scripts/auditor-asset-version.py
-
-          python3 -m http.server 8799 >/tmp/escrevaral-controller-server.log 2>&1 &
-          server_pid=$!
-          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
-          for tentativa in {1..20}; do
-            if curl -fsS http://127.0.0.1:8799/ >/dev/null; then
-              break
+      - name: Iniciar candidata local
+        run: |
+          python -m http.server 8799 > /tmp/escrevaral-release-server.log 2>&1 &
+          echo $! > /tmp/escrevaral-release-server.pid
+          for tentativa in {1..30}; do
+            if curl -fsS http://127.0.0.1:8799/ > /dev/null; then
+              exit 0
             fi
             sleep 1
           done
-          curl -fsS http://127.0.0.1:8799/js/controllers/editor-status-controller.js >/dev/null
-          curl -fsS http://127.0.0.1:8799/js/controllers/oficina-navigation-controller.js >/dev/null
-          curl -fsS http://127.0.0.1:8799/js/controllers/training-controller.js >/dev/null
+          cat /tmp/escrevaral-release-server.log
+          exit 1
 
-          git diff --check
+      - name: Teste Master local
+        id: master
+        shell: bash
+        run: |
+          set +e
+          python scripts/teste-master.py --sem-rede
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
 
-          git checkout origin/main -- .github/workflows/release-candidate-argila.yml
+      - name: Auditoria visual da branch
+        id: local_visual
+        shell: bash
+        env:
+          ESCREVARAL_AUDIT_URL: http://127.0.0.1:8799
+        run: |
+          set +e
+          python scripts/auditor-release-local.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "refactor(structure): ampliar organização de controladores"
-          git push origin HEAD:agent/js-controllers-ux-pilot
+      - name: Auditoria da nomenclatura pública
+        id: naming
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-nomenclatura-publica.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Auditorias de produção
+        id: production
+        shell: bash
+        run: |
+          set +e
+          python scripts/auditor-publicacao.py
+          pub=$?
+          python scripts/auditor-privacidade-rede.py
+          privacy=$?
+          python scripts/auditoria-pilares.py
+          pillars=$?
+          echo "exit_code=$((pub || privacy || pillars))" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Guardar relatórios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-candidate-${{ github.run_id }}
+          path: |
+            reports/teste-master/
+            reports/auditoria/
+          retention-days: 14
+
+      - name: Consolidar veredito
+        if: always()
+        env:
+          MASTER_EXIT: ${{ steps.master.outputs.exit_code }}
+          LOCAL_EXIT: ${{ steps.local_visual.outputs.exit_code }}
+          NAMING_EXIT: ${{ steps.naming.outputs.exit_code }}
+          PRODUCTION_EXIT: ${{ steps.production.outputs.exit_code }}
+        run: |
+          test "$MASTER_EXIT" = "0"
+          test "$LOCAL_EXIT" = "0"
+          test "$NAMING_EXIT" = "0"
+          test "$PRODUCTION_EXIT" = "0"
+          python - <<'PY'
+          import json
+          import re
+          from datetime import date
+          from pathlib import Path
+
+          today = date.today().isoformat()
+          root = Path('reports/auditoria')
+
+          publication = json.loads((root / f'publicacao-offline-{today}.json').read_text(encoding='utf-8'))
+          pub_counts = publication['summary']['counts']
+          assert pub_counts.get('P0', 0) == 0, pub_counts
+          assert pub_counts.get('P1', 0) == 0, pub_counts
+
+          privacy = json.loads((root / f'privacidade-rede-{today}.json').read_text(encoding='utf-8'))
+          privacy_counts = {'P0': 0, 'P1': 0, 'P2': 0}
+          for issue in privacy.get('issues', []):
+              privacy_counts[issue['severity']] += 1
+          assert privacy_counts['P0'] == 0, privacy_counts
+          assert privacy_counts['P1'] == 0, privacy_counts
+          assert privacy['result']['canary_leaked'] is False
+          assert privacy['result']['canary_in_local_storage'] is True
+
+          pillars = (root / f'pilares-{today}.md').read_text(encoding='utf-8')
+          assert re.search(r'VERDE', pillars, re.I), pillars[:500]
+
+          local = json.loads((root / f'release-local-{today}.json').read_text(encoding='utf-8'))
+          assert local['counts']['P0'] == 0, local['counts']
+          assert local['counts']['P1'] == 0, local['counts']
+
+          naming = json.loads((root / 'nomenclatura-publica-artifacts' / 'report.json').read_text(encoding='utf-8'))
+          assert naming['status'] == 'aprovado', naming
+          assert not naming['failures'], naming['failures']
+          print('Candidata Argila aprovada: nenhum P0/P1 e nomenclatura pública coerente.')
+          PY
