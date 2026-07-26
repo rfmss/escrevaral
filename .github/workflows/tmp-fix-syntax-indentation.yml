@@ -1,0 +1,42 @@
+name: Correção temporária de indentação sintática
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.head_ref == 'agent/syntax-token-palette'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout da branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/syntax-token-palette
+          fetch-depth: 0
+
+      - name: Corrigir indentação e auto-remover
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          css_path = Path('css/00-tokens.css')
+          css = css_path.read_text(encoding='utf-8')
+          if css.count('\n--syntax-') != 14:
+              raise SystemExit('Quantidade inesperada de tokens sem indentação')
+          css_path.write_text(css.replace('\n--syntax-', '\n  --syntax-'), encoding='utf-8')
+          Path('.github/workflows/tmp-fix-syntax-indentation.yml').unlink()
+          PY
+
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Alinha indentação dos tokens sintáticos"
+          git push origin HEAD:agent/syntax-token-palette
