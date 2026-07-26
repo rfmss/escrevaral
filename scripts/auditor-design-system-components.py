@@ -202,7 +202,7 @@ def audit_theme(page, viewport: str, theme: str) -> tuple[dict[str, Any], list[d
             f"Altura mínima computada {style['minHeight']:.1f}px; esperado ao menos 42px.",
         )
 
-    compact_selector = f'{scope} [data-size="compact"]'
+    compact_selector = f'{scope} [data-component="action-button"][data-size="compact"]'
     compact = computed(page, compact_selector)
     require(
         compact["minHeight"] >= 36,

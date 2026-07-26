@@ -106,6 +106,24 @@
   font-family: var(--argila-font-ui);
 }
 
+/*
+ * Aliases semânticos precisam ser recomputados no mesmo escopo que redefine
+ * os tokens físicos. Sem isso, o valor resolvido em :root seria herdado de
+ * Alvorada dentro de Vereda.
+ */
+[data-theme="scriptorium"] {
+  --action-button-primary-background: var(--primary);
+  --action-button-primary-border: var(--primary);
+  --action-button-primary-text: var(--on-primary);
+  --action-button-secondary-border: var(--line);
+  --action-button-secondary-text: var(--soft-ink);
+  --action-button-secondary-hover-background: var(--card);
+  --action-button-ghost-hover-background: var(--surface-low);
+  --text-statistic-label: var(--soft-ink);
+  --text-statistic-value: var(--ink);
+  --text-statistic-detail: var(--soft-ink);
+}
+
 html,
 body {
   background: var(--paper);
