@@ -54,3 +54,7 @@ Se o projeto crescer a ponto de ter mais de 50 arquivos JS na raiz, ou se houver
 ## Revisão em 2026-07-25
 
 O limite de reavaliação foi atingido. O primeiro piloto moveu os índices JavaScript de dados para `js/data/`, sem alterar a lógica do produto. A decisão original de manter todos os JavaScripts na raiz deixa de valer gradualmente, por categorias verificadas e sem mover o service worker.
+
+## Piloto de controladores — 2026-07-25
+
+Três controladores de baixo acoplamento foram migrados para `js/controllers/` em um lote isolado. A migração física não incluiu refatoração comportamental.
