@@ -1,0 +1,3860 @@
+{
+  "files": {
+    "css/00-tokens.css": 35,
+    "css/02-shell-navigation.css": 34,
+    "css/03-editor-layout.css": 96,
+    "css/03-editor-modes.css": 117,
+    "css/03-editor-toolbar.css": 167,
+    "css/03-inspector-precision.css": 6,
+    "css/03-writing-area.css": 48,
+    "css/04-analysis-academy.css": 5,
+    "css/06-academy-tools.css": 14,
+    "css/07-enem.css": 4,
+    "css/08-responsive.css": 36,
+    "css/09-print.css": 23,
+    "css/10-mobile-nav.css": 3,
+    "css/13-editor-quiet.css": 51,
+    "css/15-brand-argila.css": 11,
+    "css/16-entry-argila.css": 5,
+    "css/17-editor-status-argila.css": 58,
+    "css/18-editor-status-layout.css": 6,
+    "css/20-product-clarity-desktop-controls.css": 8,
+    "css/20-product-clarity-desktop.css": 42,
+    "css/21-product-clarity-archive.css": 1,
+    "css/22-product-clarity-workshop-authorship.css": 4,
+    "css/22-product-clarity-workshop-refine.css": 2,
+    "css/editor-modes.css": 130,
+    "styles.css": 6,
+    "vereda-editorial.css": 62
+  },
+  "top_tokens": [
+    [
+      "--primary",
+      129
+    ],
+    [
+      "--muted",
+      104
+    ],
+    [
+      "--line",
+      84
+    ],
+    [
+      "--ink",
+      56
+    ],
+    [
+      "--soft-ink",
+      37
+    ],
+    [
+      "--surface-low",
+      28
+    ],
+    [
+      "--motion-quick",
+      18
+    ],
+    [
+      "--paper",
+      17
+    ],
+    [
+      "--sienna",
+      14
+    ],
+    [
+      "--card",
+      13
+    ],
+    [
+      "--ff-serif",
+      7
+    ],
+    [
+      "--ff-sans",
+      6
+    ],
+    [
+      "--surface-mid",
+      3
+    ],
+    [
+      "--border-aged",
+      3
+    ],
+    [
+      "--ochre",
+      3
+    ],
+    [
+      "--topbar-bg",
+      3
+    ],
+    [
+      "--argila-font-reading",
+      3
+    ],
+    [
+      "--forest-ink",
+      2
+    ],
+    [
+      "--primary-deep",
+      2
+    ],
+    [
+      "--surface-high",
+      2
+    ],
+    [
+      "--template-panel-width",
+      2
+    ],
+    [
+      "--reading-size",
+      2
+    ],
+    [
+      "--on-primary",
+      2
+    ],
+    [
+      "--motion-calm",
+      2
+    ],
+    [
+      "--focus-width",
+      2
+    ],
+    [
+      "--surface",
+      2
+    ],
+    [
+      "--p",
+      2
+    ],
+    [
+      "--on-focus",
+      2
+    ],
+    [
+      "--brand-paper",
+      2
+    ],
+    [
+      "--brand-graphite",
+      2
+    ],
+    [
+      "--focus-ring-color",
+      2
+    ],
+    [
+      "--editor-focus-color",
+      2
+    ],
+    [
+      "--ff-display",
+      2
+    ],
+    [
+      "--sage",
+      1
+    ],
+    [
+      "--score",
+      1
+    ]
+  ],
+  "hardcoded_counts": [
+    {
+      "category": "aviso-global",
+      "theme": "base/Alvorada",
+      "count": 26
+    },
+    {
+      "category": "botao",
+      "theme": "Vereda",
+      "count": 11
+    },
+    {
+      "category": "botao",
+      "theme": "base/Alvorada",
+      "count": 154
+    },
+    {
+      "category": "cor",
+      "theme": "Vereda",
+      "count": 85
+    },
+    {
+      "category": "cor",
+      "theme": "base/Alvorada",
+      "count": 101
+    },
+    {
+      "category": "espacamento",
+      "theme": "base/Alvorada",
+      "count": 504
+    },
+    {
+      "category": "estatistica",
+      "theme": "base/Alvorada",
+      "count": 213
+    },
+    {
+      "category": "formulario",
+      "theme": "base/Alvorada",
+      "count": 380
+    },
+    {
+      "category": "tipografia",
+      "theme": "base/Alvorada",
+      "count": 595
+    }
+  ],
+  "samples": {
+    "cor:Vereda": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 202,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper",
+        "property": "background",
+        "value": "#d4c5a9",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 207,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area,\n[data-theme=\"scriptorium\"] .reading-sample",
+        "property": "color",
+        "value": "#3a2c22",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 211,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area:focus",
+        "property": "color",
+        "value": "#1c1714",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 215,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area:empty::before",
+        "property": "color",
+        "value": "#8c7060",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 224,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block",
+        "property": "background",
+        "value": "rgba(19, 15, 13, 0.08)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 225,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block",
+        "property": "border-color",
+        "value": "rgba(140, 110, 80, 0.28)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 236,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button",
+        "property": "background",
+        "value": "rgba(19, 15, 13, 0.10)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 238,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button",
+        "property": "border-color",
+        "value": "rgba(140, 110, 80, 0.35)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 242,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+        "property": "background",
+        "value": "#8c5a20",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 243,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+        "property": "color",
+        "value": "#f5e4c0",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 276,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-select",
+        "property": "background",
+        "value": "rgba(255, 255, 255, 0.18)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 277,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-select",
+        "property": "border-color",
+        "value": "rgba(58, 44, 34, 0.25)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 321,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn",
+        "property": "border-left-color",
+        "value": "rgba(58, 44, 34, 0.25)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 326,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn:hover",
+        "property": "color",
+        "value": "#8c3a2b",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 356,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input",
+        "property": "background",
+        "value": "rgba(255, 255, 255, 0.55)",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 357,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input",
+        "property": "border-color",
+        "value": "rgba(58, 44, 34, 0.35)",
+        "category": "cor",
+        "theme": "Vereda"
+      }
+    ],
+    "botao:Vereda": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 264,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 267,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover",
+        "property": "color",
+        "value": "var(--soft-ink)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 322,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn",
+        "property": "opacity",
+        "value": "0.82",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 327,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn:hover",
+        "property": "opacity",
+        "value": "0.9",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 401,
+        "selector": "[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button:hover",
+        "property": "background",
+        "value": "var(--surface-high)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 403,
+        "selector": "[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button:hover",
+        "property": "border-color",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 407,
+        "selector": "[data-theme=\"scriptorium\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--primary) 22%, var(--surface-mid))",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 408,
+        "selector": "[data-theme=\"scriptorium\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 409,
+        "selector": "[data-theme=\"scriptorium\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "border-color",
+        "value": "color-mix(in srgb, var(--primary) 35%, transparent)",
+        "category": "botao",
+        "theme": "Vereda"
+      }
+    ],
+    "espacamento:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1505,
+        "selector": ".paper,\n.archive-view,\n.academy-view",
+        "property": "width",
+        "value": "min(760px, 100%)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1511,
+        "selector": ".paper",
+        "property": "padding",
+        "value": "clamp(28px, 4vw, 48px) clamp(16px, 3vw, 40px) clamp(40px, 5vw, 64px)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1515,
+        "selector": ".view-editor",
+        "property": "padding",
+        "value": "26px clamp(18px, 3vw, 42px) 56px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1520,
+        "selector": ".editor-split",
+        "property": "width",
+        "value": "min(1180px, 100%)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1521,
+        "selector": ".editor-split",
+        "property": "height",
+        "value": "max(520px, calc(100vh - 176px))",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1549,
+        "selector": ".editor-split.is-template-collapsed",
+        "property": "width",
+        "value": "min(860px, 100%)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1685,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "padding",
+        "value": "5px 10px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2049,
+        "selector": ".split-paper",
+        "property": "width",
+        "value": "min(1080px, 100%)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2052,
+        "selector": ".split-paper",
+        "property": "gap",
+        "value": "46px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2260,
+        "selector": ".certificate-paper",
+        "property": "width",
+        "value": "min(960px, 100%)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3054,
+        "selector": ".proof-what-editor-sees",
+        "property": "padding",
+        "value": "14px 16px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3055,
+        "selector": ".proof-what-editor-sees",
+        "property": "margin",
+        "value": "10px 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3059,
+        "selector": ".proof-editor-view-list",
+        "property": "margin",
+        "value": "8px 0 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3063,
+        "selector": ".proof-editor-view-list",
+        "property": "gap",
+        "value": "8px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3067,
+        "selector": ".proof-editor-view-list li",
+        "property": "gap",
+        "value": "10px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 6,
+        "selector": ".template-reference",
+        "property": "min-width",
+        "value": "200px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "tipografia:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1686,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "font-size",
+        "value": "12px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1687,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "font-weight",
+        "value": "600",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1746,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "font-family",
+        "value": "\"Noto Serif\", Georgia, serif",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1747,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "font-size",
+        "value": "clamp(26px, 3.5vw, 38px)",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1748,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "line-height",
+        "value": "1.2",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1749,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "letter-spacing",
+        "value": "0",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1751,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "font-weight",
+        "value": "700",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1793,
+        "selector": ".writing-area,\n.reading-sample",
+        "property": "line-height",
+        "value": "1.78",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1809,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "font-size",
+        "value": "11px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1811,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "letter-spacing",
+        "value": "0.06em",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1815,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "font-family",
+        "value": "\"Inter\", sans-serif",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1816,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "font-style",
+        "value": "normal",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3069,
+        "selector": ".proof-editor-view-list li",
+        "property": "font-size",
+        "value": "13px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3073,
+        "selector": ".proof-editor-view-list li .material-symbols-outlined",
+        "property": "font-size",
+        "value": "16px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 38,
+        "selector": ".template-reference-header strong",
+        "property": "font-size",
+        "value": "20px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 63,
+        "selector": ".reference-tab",
+        "property": "font-size",
+        "value": "12px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "botao:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1688,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1689,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "border-color",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1690,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "background",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1691,
+        "selector": ".editor-mode-bar .secondary-button",
+        "property": "border-radius",
+        "value": "6px",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1699,
+        "selector": ".editor-mode-bar .secondary-button:hover",
+        "property": "background",
+        "value": "var(--card)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1700,
+        "selector": ".editor-mode-bar .secondary-button:hover",
+        "property": "color",
+        "value": "var(--soft-ink)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1706,
+        "selector": ".editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n.editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--primary) 10%, transparent)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1707,
+        "selector": ".editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n.editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1708,
+        "selector": ".editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n.editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "border-color",
+        "value": "color-mix(in srgb, var(--primary) 20%, transparent)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1721,
+        "selector": "[data-theme=\"cerrado-dark\"] .module-tabs .tab,\n[data-theme=\"mata-dark\"] .module-tabs .tab,\n[data-theme=\"amazonia-dark\"] .module-tabs .tab,\n[data-theme=\"cerrado-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"mata-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"amazonia-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"cerrado-dark\"] .biblia-quick-btn,\n[data-theme=\"mata-dark\"] .biblia-quick-btn,\n[data-theme=\"amazonia-dark\"] .biblia-quick-btn",
+        "property": "opacity",
+        "value": "1",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1739,
+        "selector": "[data-theme=\"cerrado-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"cerrado-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"],\n[data-theme=\"mata-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"mata-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"],\n[data-theme=\"amazonia-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"amazonia-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 326,
+        "selector": ".teatro-remove-btn",
+        "property": "position",
+        "value": "absolute",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 326,
+        "selector": ".teatro-remove-btn",
+        "property": "right",
+        "value": "0",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 327,
+        "selector": ".teatro-remove-btn",
+        "property": "background",
+        "value": "none",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 327,
+        "selector": ".teatro-remove-btn",
+        "property": "border",
+        "value": "none",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 327,
+        "selector": ".teatro-remove-btn",
+        "property": "cursor",
+        "value": "pointer",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "formulario:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1745,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "margin",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1750,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1806,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "content",
+        "value": "\"exemplo de registro\"",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1807,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "display",
+        "value": "block",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1808,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "margin-top",
+        "value": "16px",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1813,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1814,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after",
+        "property": "opacity",
+        "value": "0.5",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 252,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "flex",
+        "value": "0 0 18px",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 253,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "margin",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 254,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "accent-color",
+        "value": "var(--primary)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 114,
+        "selector": ".soneto-verso::placeholder",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 159,
+        "selector": ".sp-slug-input",
+        "property": "flex",
+        "value": "1",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 160,
+        "selector": ".sp-slug-input",
+        "property": "border",
+        "value": "none",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 161,
+        "selector": ".sp-slug-input",
+        "property": "border-bottom",
+        "value": "1.5px solid var(--line)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 162,
+        "selector": ".sp-slug-input",
+        "property": "background",
+        "value": "transparent",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 163,
+        "selector": ".sp-slug-input",
+        "property": "outline",
+        "value": "none",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "estatistica:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3466,
+        "selector": ".ob-pillar--mesa",
+        "property": "grid-column",
+        "value": "span 2",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3467,
+        "selector": ".ob-pillar--mesa",
+        "property": "background",
+        "value": "var(--card)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3516,
+        "selector": ".ob-pillar--mesa",
+        "property": "grid-column",
+        "value": "span 1",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 311,
+        "selector": ".reference-pills",
+        "property": "display",
+        "value": "flex",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 312,
+        "selector": ".reference-pills",
+        "property": "flex-wrap",
+        "value": "wrap",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 317,
+        "selector": ".reference-pills span",
+        "property": "border-radius",
+        "value": "999px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 318,
+        "selector": ".reference-pills span",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--primary) 10%, transparent)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 319,
+        "selector": ".reference-pills span",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 515,
+        "selector": ".app-shell.is-focus .topbar,\n.app-shell.is-focus .sidebar,\n.app-shell.is-focus .panel-rail,\n.app-shell.is-focus .panel-toggle,\n.app-shell.is-focus .inspector,\n.app-shell.is-focus .template-reference,\n.app-shell.is-focus .editor-mode-bar,\n.app-shell.is-focus .format-bar,\n.app-shell.is-focus .statusbar",
+        "property": "display",
+        "value": "none",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 621,
+        "selector": ".focus-pill",
+        "property": "align-items",
+        "value": "center",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 623,
+        "selector": ".focus-pill",
+        "property": "border",
+        "value": "1px solid var(--line)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 625,
+        "selector": ".focus-pill",
+        "property": "background",
+        "value": "var(--surface-low)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 627,
+        "selector": ".focus-pill",
+        "property": "cursor",
+        "value": "pointer",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 634,
+        "selector": ".focus-pill.is-active",
+        "property": "background",
+        "value": "var(--primary)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 635,
+        "selector": ".focus-pill.is-active",
+        "property": "border-color",
+        "value": "var(--primary)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 636,
+        "selector": ".focus-pill.is-active",
+        "property": "color",
+        "value": "var(--on-primary)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "cor:base/Alvorada": [
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 133,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "color",
+        "value": "#fff",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 146,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "box-shadow",
+        "value": "0 4px 16px rgba(0,0,0,0.18)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 445,
+        "selector": ".app-shell[data-view=\"editor\"].has-desk-background .content-stage::before",
+        "property": "background",
+        "value": "repeating-linear-gradient(\n      178deg,\n      transparent 0px, transparent 12px,\n      rgba(150, 90, 30, 0.06) 12px, rgba(150, 90, 30, 0.06) 13px,\n      transparent 13px, transparent 22px,\n      rgba(130, 75, 20, 0.05) 22px, rgba(130, 75, 20, 0.05) 23px,\n      transparent 23px, transparent 38px,\n      rgba(160, 95, 32, 0.07) 38px, rgba(160, 95, 32, 0.07) 39px\n    ),\n    repeating-linear-gradient(\n      91deg,\n      transparent 0px, transparent 18px,\n      rgba(120, 70, 20, 0.03) 18px, rgba(120, 70, 20, 0.03) 20px\n    ),\n    \n    linear-gradient(\n      175deg,\n      #deb882 0%,\n      #d4ac76 15%,\n      #dab87e 28%,\n      #cda36c 40%,\n      #d8b47c 52%,\n      #cfa870 65%,\n      #d6b27a 78%,\n      #caa56e 90%,\n      #d2ae78 100%\n    )",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 483,
+        "selector": ".app-shell[data-view=\"editor\"].has-desk-background .content-stage::after",
+        "property": "background",
+        "value": "linear-gradient(\n      118deg,\n      rgba(255, 245, 220, 0.28) 0%,\n      rgba(255, 238, 200, 0.12) 25%,\n      transparent 52%,\n      rgba(0, 0, 0, 0.04) 80%,\n      rgba(0, 0, 0, 0.07) 100%\n    ),\n    radial-gradient(ellipse at 20% 18%, rgba(255, 248, 225, 0.20) 0%, transparent 42%)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 521,
+        "selector": ".app-shell.is-focus",
+        "property": "background",
+        "value": "radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--primary) 14%, transparent), transparent 34%),\n    var(--paper)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 74,
+        "selector": ".soneto-a",
+        "property": "background",
+        "value": "#EEEDFE",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 74,
+        "selector": ".soneto-a",
+        "property": "color",
+        "value": "#3C3489",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 75,
+        "selector": ".soneto-b",
+        "property": "background",
+        "value": "#E1F5EE",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 75,
+        "selector": ".soneto-b",
+        "property": "color",
+        "value": "#085041",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 76,
+        "selector": ".soneto-c",
+        "property": "background",
+        "value": "#FAECE7",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 76,
+        "selector": ".soneto-c",
+        "property": "color",
+        "value": "#712B13",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 77,
+        "selector": ".soneto-d",
+        "property": "background",
+        "value": "#FAEEDA",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 77,
+        "selector": ".soneto-d",
+        "property": "color",
+        "value": "#633806",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 399,
+        "selector": ".reader-overlay",
+        "property": "background",
+        "value": "#f0ede8",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 400,
+        "selector": ".reader-overlay",
+        "property": "background-image",
+        "value": "repeating-linear-gradient(\n      0deg,\n      transparent,\n      transparent 31px,\n      rgba(160,145,130,.08) 31px,\n      rgba(160,145,130,.08) 32px\n    )",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 43,
+        "selector": ".audio-panel",
+        "property": "box-shadow",
+        "value": "0 8px 32px rgba(0,0,0,0.13)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "aviso-global:base/Alvorada": [
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 586,
+        "selector": ".reader-hint-toast",
+        "property": "position",
+        "value": "fixed",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 588,
+        "selector": ".reader-hint-toast",
+        "property": "left",
+        "value": "50%",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 589,
+        "selector": ".reader-hint-toast",
+        "property": "transform",
+        "value": "translateX(-50%) translateY(8px)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 590,
+        "selector": ".reader-hint-toast",
+        "property": "background",
+        "value": "var(--ink)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 591,
+        "selector": ".reader-hint-toast",
+        "property": "color",
+        "value": "var(--paper)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 594,
+        "selector": ".reader-hint-toast",
+        "property": "border-radius",
+        "value": "8px",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 595,
+        "selector": ".reader-hint-toast",
+        "property": "opacity",
+        "value": "0",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 596,
+        "selector": ".reader-hint-toast",
+        "property": "pointer-events",
+        "value": "none",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 597,
+        "selector": ".reader-hint-toast",
+        "property": "transition",
+        "value": "opacity .2s, transform .2s",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 598,
+        "selector": ".reader-hint-toast",
+        "property": "z-index",
+        "value": "300",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 599,
+        "selector": ".reader-hint-toast",
+        "property": "white-space",
+        "value": "nowrap",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 602,
+        "selector": ".reader-hint-toast.is-visible",
+        "property": "opacity",
+        "value": "1",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 603,
+        "selector": ".reader-hint-toast.is-visible",
+        "property": "transform",
+        "value": "translateX(-50%) translateY(0)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 775,
+        "selector": ".pomodoro-done-toast",
+        "property": "position",
+        "value": "fixed",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 777,
+        "selector": ".pomodoro-done-toast",
+        "property": "left",
+        "value": "50%",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 778,
+        "selector": ".pomodoro-done-toast",
+        "property": "transform",
+        "value": "translateX(-50%) translateY(10px)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      }
+    ]
+  },
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 235,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 241,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 254,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .title-input,\n[data-theme=\"scriptorium\"] .editor-paper .format-bar,\n[data-theme=\"scriptorium\"] .editor-paper .fmt-btn,\n[data-theme=\"scriptorium\"] .editor-paper .fmt-select,\n[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 263,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 266,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 270,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-btn:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 309,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-view-btn,\n[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn,\n[data-theme=\"scriptorium\"] .editor-paper [data-action=\"open-reader-mode\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 315,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-view-btn.is-active"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 320,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 325,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 397,
+        "selector": "[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 400,
+        "selector": "[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 405,
+        "selector": "[data-theme=\"scriptorium\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"scriptorium\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1684,
+        "selector": ".editor-mode-bar .secondary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1695,
+        "selector": "html:not([data-theme=\"scriptorium\"]):not([data-theme=\"cerrado-dark\"]):not([data-theme=\"mata-dark\"]):not([data-theme=\"amazonia-dark\"]) .editor-mode-bar .secondary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1698,
+        "selector": ".editor-mode-bar .secondary-button:hover"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1704,
+        "selector": ".editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n.editor-mode-bar .secondary-button[aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1711,
+        "selector": "[data-theme=\"cerrado-dark\"] .module-tabs .tab,\n[data-theme=\"mata-dark\"] .module-tabs .tab,\n[data-theme=\"amazonia-dark\"] .module-tabs .tab,\n[data-theme=\"cerrado-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"mata-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"amazonia-dark\"] .editor-mode-bar .secondary-button,\n[data-theme=\"cerrado-dark\"] .biblia-quick-btn,\n[data-theme=\"mata-dark\"] .biblia-quick-btn,\n[data-theme=\"amazonia-dark\"] .biblia-quick-btn"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1733,
+        "selector": "[data-theme=\"cerrado-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"cerrado-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"],\n[data-theme=\"mata-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"mata-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"],\n[data-theme=\"amazonia-dark\"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action=\"toggle-template-panel\"],\n[data-theme=\"amazonia-dark\"] .editor-mode-bar .secondary-button[aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 325,
+        "selector": ".teatro-remove-btn"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 331,
+        "selector": ".teatro-remove-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 332,
+        "selector": ".teatro-fala-block:hover .teatro-remove-btn"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 333,
+        "selector": ".teatro-remove-btn:hover"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 338,
+        "selector": ".teatro-add-btn"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 344,
+        "selector": ".teatro-add-btn:hover"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 345,
+        "selector": ".teatro-add-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 2,
+        "selector": ".statusbar-goal-btn"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 7,
+        "selector": ".statusbar-goal-btn:hover"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 8,
+        "selector": ".statusbar-goal-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 183,
+        "selector": ".editor-view-btn"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 223,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3465,
+        "selector": ".ob-pillar--mesa"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3516,
+        "selector": ".ob-pillar--mesa"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 310,
+        "selector": ".reference-pills"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 316,
+        "selector": ".reference-pills span"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 506,
+        "selector": ".app-shell.is-focus .topbar,\n.app-shell.is-focus .sidebar,\n.app-shell.is-focus .panel-rail,\n.app-shell.is-focus .panel-toggle,\n.app-shell.is-focus .inspector,\n.app-shell.is-focus .template-reference,\n.app-shell.is-focus .editor-mode-bar,\n.app-shell.is-focus .format-bar,\n.app-shell.is-focus .statusbar"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 619,
+        "selector": ".focus-pill"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 633,
+        "selector": ".focus-pill.is-active"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 639,
+        "selector": ".focus-control,\n.focus-pill"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 645,
+        "selector": ".focus-counter"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 658,
+        "selector": ".app-shell.is-focus .focus-counter"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 715,
+        "selector": "[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-toolbar,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-counter"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 722,
+        "selector": "[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-control,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-counter"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 727,
+        "selector": "[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-pill"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 733,
+        "selector": "[data-theme=\"scriptorium\"] .app-shell.is-focus .focus-pill.is-active"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 450,
+        "selector": ".reader-pill"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 458,
+        "selector": ".reader-pill:hover"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 459,
+        "selector": ".reader-pill.is-active"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 460,
+        "selector": ".reader-pill .material-symbols-outlined"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 463,
+        "selector": ".reader-pill:focus-visible"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 613,
+        "selector": ".reader-pill"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 10,
+        "selector": ".statusbar-goal"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 410,
+        "selector": ".statusbar-page-count"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 417,
+        "selector": ".statusbar-page-count[hidden]"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 418,
+        "selector": "[data-page-count-label]"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 419,
+        "selector": "[data-page-count-label]:hover"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 434,
+        "selector": ".statusbar-offline-note"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 439,
+        "selector": ".statusbar-offline-note[hidden]"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 442,
+        "selector": ".statusbar-copyright"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 451,
+        "selector": ".statusbar-visitors"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 275,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-select"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 355,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 360,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input::placeholder"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1742,
+        "selector": ".title-input,\n.paper h1,\n.archive-heading h1"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1805,
+        "selector": ".writing-area[data-placeholder-is-example=\"true\"]:empty::after"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 249,
+        "selector": ".precision-check input[type=\"checkbox\"]"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 614,
+        "selector": ".focus-control input"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 685,
+        "selector": ".focus-control input"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 703,
+        "selector": "[data-theme=\"scriptorium\"] .app-shell.is-focus .title-input,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .writing-area,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .writing-area h1,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .writing-area h2,\n[data-theme=\"scriptorium\"] .app-shell.is-focus .writing-area h3"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 113,
+        "selector": ".soneto-verso::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 158,
+        "selector": ".sp-slug-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 173,
+        "selector": ".sp-slug-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 194,
+        "selector": ".sp-action-area::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 201,
+        "selector": ".sp-char-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 218,
+        "selector": ".sp-char-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 235,
+        "selector": ".sp-lines-area::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 281,
+        "selector": ".teatro-local-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 289,
+        "selector": ".teatro-local-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 291,
+        "selector": ".teatro-char-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 298,
+        "selector": ".teatro-char-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 300,
+        "selector": ".teatro-rub-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 306,
+        "selector": ".teatro-rub-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 315,
+        "selector": ".teatro-dial-area::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 317,
+        "selector": ".teatro-rubrica-input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 323,
+        "selector": ".teatro-rubrica-input::placeholder"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 538,
+        "selector": ".persona-fields"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 544,
+        "selector": ".persona-field"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 545,
+        "selector": ".persona-field.wide"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 546,
+        "selector": ".persona-field.narrow"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 556,
+        "selector": ".persona-input"
+      }
+    ],
+    "aviso-global": [
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 585,
+        "selector": ".reader-hint-toast"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 601,
+        "selector": ".reader-hint-toast.is-visible"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 774,
+        "selector": ".pomodoro-done-toast"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 792,
+        "selector": ".pomodoro-done-toast.is-visible"
+      },
+      {
+        "file": "css/18-editor-status-layout.css",
+        "line": 18,
+        "selector": "body > .tab-conflict-banner,\nbody > .backup-nudge-banner,\nbody > .storage-recovery-banner,\nbody > .update-banner"
+      },
+      {
+        "file": "css/18-editor-status-layout.css",
+        "line": 33,
+        "selector": "#save-hint-toast,\n  #academia-hint-toast,\n  #delete-undo-toast"
+      },
+      {
+        "file": "css/18-editor-status-layout.css",
+        "line": 40,
+        "selector": "#academia-hint-toast"
+      }
+    ]
+  },
+  "responsive": {
+    "count": 205,
+    "samples": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3516,
+        "media": "(max-width: 580px)",
+        "selector": ".ob-pillar--mesa"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 394,
+        "media": "(prefers-reduced-motion: reduce)",
+        "selector": "*,\n  *::before,\n  *::after"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 408,
+        "media": "(max-width: 820px) and (min-height: 700px) and (orientation: portrait)",
+        "selector": ".editor-paper"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 414,
+        "media": "(max-width: 820px) and (min-height: 700px) and (orientation: portrait)",
+        "selector": ".writing-area"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 419,
+        "media": "(max-width: 820px) and (min-height: 700px) and (orientation: portrait)",
+        "selector": ".editor-split"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 424,
+        "media": "(max-width: 820px) and (min-height: 700px) and (orientation: portrait)",
+        "selector": ".template-reference"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 498,
+        "media": "print",
+        "selector": ".content-stage::before,\n  .content-stage::after"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 663,
+        "media": "(max-width: 680px)",
+        "selector": ".app-shell.is-focus .editor-split"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 667,
+        "media": "(max-width: 680px)",
+        "selector": ".app-shell.is-focus .editor-paper"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 673,
+        "media": "(max-width: 680px)",
+        "selector": ".app-shell.is-focus .focus-toolbar"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 681,
+        "media": "(max-width: 680px)",
+        "selector": ".app-shell.is-focus .focus-toolbar::-webkit-scrollbar"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 685,
+        "media": "(max-width: 680px)",
+        "selector": ".focus-control input"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 608,
+        "media": "(max-width: 600px)",
+        "selector": ".reader-header"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 612,
+        "media": "(max-width: 600px)",
+        "selector": ".reader-title"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 613,
+        "media": "(max-width: 600px)",
+        "selector": ".reader-pill"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 618,
+        "media": "(max-width: 600px)",
+        "selector": ".reader-canvas"
+      },
+      {
+        "file": "css/03-editor-modes.css",
+        "line": 621,
+        "media": "(max-width: 600px)",
+        "selector": ".reader-article"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 380,
+        "media": "(max-width: 768px)",
+        "selector": ".fmt-label"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 381,
+        "media": "(max-width: 768px)",
+        "selector": ".fmt-btn-labeled"
+      },
+      {
+        "file": "css/03-writing-area.css",
+        "line": 253,
+        "media": "(max-width: 900px)",
+        "selector": ".paged-editor"
+      },
+      {
+        "file": "css/06-academy-tools.css",
+        "line": 417,
+        "media": "(max-width: 900px)",
+        "selector": ".leitura-editorial-grid"
+      },
+      {
+        "file": "css/06-academy-tools.css",
+        "line": 420,
+        "media": "(max-width: 560px)",
+        "selector": ".leitura-editorial-grid"
+      },
+      {
+        "file": "css/07-enem.css",
+        "line": 226,
+        "media": "print",
+        "selector": ".enem-writing-area"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 30,
+        "media": "(max-width: 480px)",
+        "selector": ".editor-paper"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 39,
+        "media": "(max-width: 480px)",
+        "selector": ".archive-security-details,\n  .academy-view > *,\n  .cronograma-wrap,\n  .voice-tool,\n  .rimalab-tool,\n  .decolonial-tool,\n  .rights-lab,\n  [data-view-panel=\"autoria\"] > *,\n  .certificate-paper,\n  .proof-session,\n  .proof-actions,\n  .version-panel"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 66,
+        "media": "(max-width: 390px)",
+        "selector": ".paper h1, .archive-heading h1"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 89,
+        "media": "(max-width: 820px)",
+        "selector": "html,\n  body,\n  .app-shell,\n  .workspace,\n  .content-stage,\n  .view-editor,\n  .editor-split,\n  .editor-paper"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 101,
+        "media": "(max-width: 820px)",
+        "selector": ".view-editor"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 106,
+        "media": "(max-width: 820px)",
+        "selector": ".editor-split,\n  .editor-split[data-template-side=\"right\"],\n  .editor-split.is-template-collapsed"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 117,
+        "media": "(max-width: 820px)",
+        "selector": ".editor-split[data-template-side=\"right\"] .template-reference,\n  .editor-split[data-template-side=\"right\"] .editor-paper"
+      }
+    ]
+  },
+  "vereda": {
+    "count": 69,
+    "samples": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 201,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 205,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area,\n[data-theme=\"scriptorium\"] .reading-sample"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 210,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area:focus"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 214,
+        "selector": "[data-theme=\"scriptorium\"] .writing-area:empty::before"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 218,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 223,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 228,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper strong,\n[data-theme=\"scriptorium\"] .certificate-paper span,\n[data-theme=\"scriptorium\"] .certificate-paper small,\n[data-theme=\"scriptorium\"] .certificate-paper p"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 235,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 241,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 247,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper h1,\n[data-theme=\"scriptorium\"] .certificate-paper .eyebrow,\n[data-theme=\"scriptorium\"] .certificate-paper .section-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 254,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .title-input,\n[data-theme=\"scriptorium\"] .editor-paper .format-bar,\n[data-theme=\"scriptorium\"] .editor-paper .fmt-btn,\n[data-theme=\"scriptorium\"] .editor-paper .fmt-select,\n[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 263,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 266,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-mode-bar .editor-view-controls .secondary-button:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 270,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-btn:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 275,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-select"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 309,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-view-btn,\n[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn,\n[data-theme=\"scriptorium\"] .editor-paper [data-action=\"open-reader-mode\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 315,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-view-btn.is-active"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 320,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 325,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .editor-delete-btn:hover"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 330,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-group-editorial"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 334,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .page-settings-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 338,
+        "selector": "[data-theme=\"scriptorium\"] .fmt-scroll-arrow"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 342,
+        "selector": "[data-theme=\"scriptorium\"] .editor-paper .fmt-group-editorial:not(.is-open) .fmt-editorial-toggle"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 346,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-session-bar,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-actions"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 355,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 360,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input::placeholder"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 365,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-validation-result"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 374,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 379,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint summary"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 382,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-editor-view-list li .material-symbols-outlined"
+      }
+    ]
+  },
+  "html": {
+    "line_matches": [
+      {
+        "line": 9,
+        "text": "<meta name=\"keywords\" content=\"editor de escrita, gente brasileira que escreve, romance, fantasia, suspense, romantasy, new adult, prova de autoria, verificar autoria manuscrito, alternativa ao Scrivener, KDP Brasil, epub gratuito\">"
+      },
+      {
+        "line": 20,
+        "text": "<meta property=\"og:image:alt\" content=\"Escrevaral — editor de escrita para gente brasileira que escreve. Romance, fantasia, suspense.\">"
+      },
+      {
+        "line": 35,
+        "text": "\"applicationCategory\": \"WritingApplication\","
+      },
+      {
+        "line": 46,
+        "text": "\"Editor de manuscritos offline\","
+      },
+      {
+        "line": 79,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-layout.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 81,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-modes.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 82,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-writing-area.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 85,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-toolbar.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 122,
+        "text": "<span>Sua mesa voltou.</span>"
+      },
+      {
+        "line": 152,
+        "text": "<div class=\"app-shell\" data-view=\"editor\">"
+      },
+      {
+        "line": 166,
+        "text": "<button class=\"tab is-active\" data-view-target=\"editor\" data-vrda-tooltip=\"Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui.\">Escrever</button>"
+      },
+      {
+        "line": 229,
+        "text": "<div class=\"manuscript-list\" data-manuscript-list></div>"
+      },
+      {
+        "line": 235,
+        "text": "<section class=\"view view-editor is-active\" data-view-panel=\"editor\">"
+      },
+      {
+        "line": 237,
+        "text": "<div class=\"editor-split\" data-template-side=\"left\">"
+      },
+      {
+        "line": 258,
+        "text": "<article class=\"paper editor-paper\">"
+      },
+      {
+        "line": 259,
+        "text": "<div class=\"editor-mode-bar\">"
+      },
+      {
+        "line": 260,
+        "text": "<div class=\"editor-view-controls\">"
+      },
+      {
+        "line": 269,
+        "text": "<button class=\"secondary-button desk-bg-toggle\" data-action=\"toggle-desk-background\" aria-pressed=\"false\" title=\"Mudar fundo do editor\" aria-label=\"Mudar fundo do editor\">"
+      },
+      {
+        "line": 275,
+        "text": "<button class=\"icon-button editor-mobile-new\" data-action=\"open-create-note\" aria-label=\"Novo texto\" data-vrda-tooltip=\"Novo texto\">"
+      },
+      {
+        "line": 279,
+        "text": "<button class=\"icon-button editor-delete-btn\" data-action=\"delete-active-manuscript\" aria-label=\"Apagar este texto\" data-vrda-tooltip=\"Apagar este texto\">"
+      },
+      {
+        "line": 285,
+        "text": "<div class=\"format-bar-wrap\" data-format-bar-wrap>"
+      },
+      {
+        "line": 286,
+        "text": "<div class=\"format-bar\" data-format-bar>"
+      },
+      {
+        "line": 288,
+        "text": "<div class=\"fmt-group fmt-group-writing\">"
+      },
+      {
+        "line": 317,
+        "text": "<!-- Separador editorial — marca passagem para comandos de saída -->"
+      },
+      {
+        "line": 318,
+        "text": "<span class=\"fmt-sep-editorial\" aria-hidden=\"true\"></span>"
+      },
+      {
+        "line": 320,
+        "text": "<!-- Grupo 2: saída editorial — visualmente secundário -->"
+      },
+      {
+        "line": 321,
+        "text": "<div class=\"fmt-group fmt-group-editorial\" data-editorial-group>"
+      },
+      {
+        "line": 322,
+        "text": "<button class=\"fmt-btn fmt-btn-labeled fmt-editorial-toggle\" data-action=\"toggle-editorial-group\" title=\"Mais ferramentas de página e exportação\" aria-label=\"Mais ferramentas de página e exportação\" aria-expanded=\"false\">"
+      },
+      {
+        "line": 326,
+        "text": "<select class=\"fmt-select editor-preset-select\" data-page-preset data-vrda-tooltip=\"Formato de página\" aria-label=\"Formato de página do texto\">"
+      },
+      {
+        "line": 333,
+        "text": "<button class=\"editor-view-btn\" data-action=\"toggle-page-view\" aria-pressed=\"false\" title=\"Ativar modo página\">"
+      },
+      {
+        "line": 359,
+        "text": "<button class=\"fmt-btn fmt-btn-labeled\" data-action=\"copy-manuscript-text\" title=\"Copiar texto para a área de transferência\" aria-label=\"Copiar texto\">"
+      },
+      {
+        "line": 373,
+        "text": "</div><!-- /format-bar-wrap -->"
+      },
+      {
+        "line": 379,
+        "text": "<div class=\"writing-area\" contenteditable=\"true\" spellcheck=\"true\" aria-label=\"Área de escrita\" data-view-mode=\"flow\"></div>"
+      },
+      {
+        "line": 380,
+        "text": "<div class=\"paged-editor\" data-paged-editor></div>"
+      },
+      {
+        "line": 381,
+        "text": "<div class=\"specialized-editor\" data-specialized-editor hidden></div>"
+      },
+      {
+        "line": 387,
+        "text": "<article class=\"paper split-paper\">"
+      },
+      {
+        "line": 402,
+        "text": "<article class=\"paper certificate-paper\">"
+      },
+      {
+        "line": 409,
+        "text": "<p class=\"proof-context-note\">Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra.</p>"
+      },
+      {
+        "line": 420,
+        "text": "<small data-proof-status>Escreva no editor para iniciar o registro</small>"
+      },
+      {
+        "line": 494,
+        "text": "<button class=\"secondary-button proof-send-btn\" data-action=\"send-proof-to-editor\">"
+      },
+      {
+        "line": 496,
+        "text": "Enviar para o editor"
+      },
+      {
+        "line": 502,
+        "text": "\"Enviar para o editor\" baixa o arquivo e abre seu email com as instruções prontas. Só anexar e mandar."
+      },
+      {
+        "line": 530,
+        "text": "<div class=\"proof-what-editor-sees\">"
+      },
+      {
+        "line": 531,
+        "text": "<p class=\"proof-share-label\">O que o editor vê ao verificar</p>"
+      },
+      {
+        "line": 532,
+        "text": "<ul class=\"proof-editor-view-list\">"
+      },
+      {
+        "line": 641,
+        "text": "<button class=\"primary-button archive-open-btn\" data-action=\"open-active-manuscript\">"
+      },
+      {
+        "line": 643,
+        "text": "Abrir no editor"
+      },
+      {
+        "line": 696,
+        "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"txt\" title=\"Baixar como texto simples (.txt)\">"
+      },
+      {
+        "line": 700,
+        "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"md\" title=\"Baixar em Markdown (.md)\">"
+      },
+      {
+        "line": 704,
+        "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"html\" title=\"Baixar como página HTML com CSS de impressão (.html)\">"
+      },
+      {
+        "line": 708,
+        "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"docx\" title=\"Baixar para Word e LibreOffice (.docx)\">"
+      },
+      {
+        "line": 712,
+        "text": "<button class=\"ghost-button archive-epub-btn\" data-action=\"export-manuscript\" data-export-format=\"epub\" title=\"ePub para Amazon KDP e leitores de e-book\">"
+      },
+      {
+        "line": 716,
+        "text": "<button class=\"ghost-button\" data-action=\"export-manuscript\" data-export-format=\"obsidian\" title=\"Gerar arquivo .md preparado para abrir no Obsidian\">"
+      },
+      {
+        "line": 883,
+        "text": "<button class=\"academy-resume-link\" type=\"button\" data-action=\"switch-view-editor\" data-academy-resume hidden>"
+      },
+      {
+        "line": 890,
+        "text": "<p>Redação para vestibular — confira o <label for=\"at-voice\" class=\"link-inline\">Espelho de Voz</label> ou abra o guia ENEM no editor.</p>"
+      },
+      {
+        "line": 902,
+        "text": "<p>Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência.</p>"
+      },
+      {
+        "line": 1010,
+        "text": "<textarea data-rimalab-input placeholder=\"Escreva versos, uma quadra, uma letra de música ou um refrão. Cada linha será lida como verso.\" aria-label=\"Editor de Rimas\"></textarea>"
+      },
+      {
+        "line": 1199,
+        "text": "<!-- ── 4. LEITURA EDITORIAL (secundária) ── -->"
+      },
+      {
+        "line": 1200,
+        "text": "<section class=\"academy-leitura\" aria-label=\"Leitura editorial\" data-atelier-section=\"revisar\">"
+      },
+      {
+        "line": 1201,
+        "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+      },
+      {
+        "line": 1202,
+        "text": "<div class=\"leitura-editorial-grid\">"
+      },
+      {
+        "line": 1203,
+        "text": "<a href=\"./vereda-titulo-do-livro.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+      },
+      {
+        "line": 1204,
+        "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+      },
+      {
+        "line": 1208,
+        "text": "<a href=\"./vereda-primeiras-linhas.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+      },
+      {
+        "line": 1209,
+        "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+      },
+      {
+        "line": 1213,
+        "text": "<a href=\"./vereda-revisao-manuscrito.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+      },
+      {
+        "line": 1214,
+        "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+      },
+      {
+        "line": 1218,
+        "text": "<a href=\"./vereda-bloqueio-criativo.html\" class=\"leitura-editorial-card\" data-editorial-page>"
+      },
+      {
+        "line": 1219,
+        "text": "<p class=\"eyebrow\">Leitura editorial</p>"
+      },
+      {
+        "line": 1229,
+        "text": "<p>Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página.</p>"
+      },
+      {
+        "line": 1271,
+        "text": "<span class=\"academy-track-sub\">Mercado editorial · Objeto livro · Anatomia do livro</span>"
+      },
+      {
+        "line": 1280,
+        "text": "<p class=\"eyebrow\">Mercado editorial</p>"
+      },
+      {
+        "line": 1282,
+        "text": "<p>Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao leitor.</p>"
+      },
+      {
+        "line": 1285,
+        "text": "<span>Editoras</span>"
+      },
+      {
+        "line": 1288,
+        "text": "<button class=\"secondary-button\" data-craft-select=\"mercado-editorial\">"
+      },
+      {
+        "line": 1301,
+        "text": "<p>Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras.</p>"
+      },
+      {
+        "line": 1442,
+        "text": "<div class=\"focus-toolbar\" aria-label=\"Controles do modo foco\">"
+      },
+      {
+        "line": 1481,
+        "text": "<div class=\"ob-pillar ob-pillar--mesa\">"
+      },
+      {
+        "line": 1519,
+        "text": "<!-- Mesa no celular — informativo -->"
+      },
+      {
+        "line": 1522,
+        "text": "<h2 class=\"ob-pillar-title\">Mesa no celular</h2>"
+      },
+      {
+        "line": 1583,
+        "text": "<button id=\"levar-mesa-anchor\" title=\"Trazer do celular\" aria-label=\"Trazer do celular\" style=\""
+      },
+      {
+        "line": 1622,
+        "text": "<script src=\"editor-modes.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1623,
+        "text": "<script src=\"editor-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1632,
+        "text": "<script src=\"js/controllers/editor-status-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1641,
+        "text": "<!-- Impressão isolada via iframe — sem acoplamento com o modo do editor -->"
+      },
+      {
+        "line": 1719,
+        "text": "<!-- Nudge: Levar a mesa -->"
+      },
+      {
+        "line": 1720,
+        "text": "<div id=\"levar-mesa-toast\" role=\"status\" aria-live=\"polite\" style=\""
+      },
+      {
+        "line": 1731,
+        "text": "<span>Sua mesa inteira pode ir pro celular — sem internet.</span>"
+      },
+      {
+        "line": 1735,
+        "text": "\" id=\"levar-mesa-link\">Leve sua mesa</a>"
+      },
+      {
+        "line": 1736,
+        "text": "<button id=\"levar-mesa-dismiss\" aria-label=\"Fechar\" style=\""
+      },
+      {
+        "line": 1848,
+        "text": "<!-- Popover de palavra — abre ao clicar no editor -->"
+      },
+      {
+        "line": 1866,
+        "text": "<!-- Leitor editorial — iframe embutido -->"
+      },
+      {
+        "line": 1867,
+        "text": "<div id=\"editorial-overlay\" class=\"editorial-overlay\" hidden aria-hidden=\"true\">"
+      },
+      {
+        "line": 1868,
+        "text": "<div class=\"editorial-bar\">"
+      },
+      {
+        "line": 1869,
+        "text": "<button class=\"icon-button\" id=\"editorial-back\" aria-label=\"Voltar ao Escrevaral\">"
+      },
+      {
+        "line": 1872,
+        "text": "<span class=\"editorial-bar-title\" id=\"editorial-bar-title\">Leitura editorial</span>"
+      },
+      {
+        "line": 1873,
+        "text": "<button class=\"icon-button\" id=\"editorial-external\" aria-label=\"Abrir em nova aba\" title=\"Abrir em nova aba\">"
+      },
+      {
+        "line": 1877,
+        "text": "<iframe id=\"editorial-frame\" class=\"editorial-frame\" src=\"\" title=\"Leitura editorial\" loading=\"lazy\"></iframe>"
+      },
+      {
+        "line": 1899,
+        "text": "<button class=\"dock-item\" data-view-target=\"editor\" aria-current=\"page\">"
+      },
+      {
+        "line": 2031,
+        "text": "Abra o <strong>Mesa Portátil</strong> no celular, toque em"
+      },
+      {
+        "line": 2065,
+        "text": "<p style=\"font-size: 15px; font-weight: 700; margin-bottom: 4px;\">Mesa recebida</p>"
+      }
+    ],
+    "key_elements": [
+      {
+        "tag": "div",
+        "line": 119,
+        "id": "backup-nudge-banner",
+        "class": [
+          "backup-nudge-banner"
+        ],
+        "role": "status",
+        "aria_label": null,
+        "data": {},
+        "text": "shield_locked Sua mesa voltou. O Escrevaral guarda tudo neste navegador, mas não é nuvem. Salve uma cópia para proteger seus manuscritos. Guardar cópia close"
+      },
+      {
+        "tag": "div",
+        "line": 152,
+        "id": null,
+        "class": [
+          "app-shell"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view": "editor"
+        },
+        "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen right_panel_open left_panel_close Texto"
+      },
+      {
+        "tag": "button",
+        "line": 166,
+        "id": null,
+        "class": [
+          "tab",
+          "is-active"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-target": "editor",
+          "data-vrda-tooltip": "Abra, escreva e edite seus manuscritos. Todos os modos de escrita ficam aqui."
+        },
+        "text": "Escrever"
+      },
+      {
+        "tag": "div",
+        "line": 229,
+        "id": null,
+        "class": [
+          "manuscript-list"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-manuscript-list": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "section",
+        "line": 235,
+        "id": null,
+        "class": [
+          "view",
+          "view-editor",
+          "is-active"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-panel": "editor"
+        },
+        "text": "Guia de escrita Escolha um guia swap_horiz close view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_ali"
+      },
+      {
+        "tag": "div",
+        "line": 237,
+        "id": null,
+        "class": [
+          "editor-split"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-template-side": "left"
+        },
+        "text": "Guia de escrita Escolha um guia swap_horiz close view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_ali"
+      },
+      {
+        "tag": "article",
+        "line": 258,
+        "id": null,
+        "class": [
+          "paper",
+          "editor-paper"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo add delete format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página d"
+      },
+      {
+        "tag": "div",
+        "line": 259,
+        "id": null,
+        "class": [
+          "editor-mode-bar"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo add delete"
+      },
+      {
+        "tag": "div",
+        "line": 260,
+        "id": null,
+        "class": [
+          "editor-view-controls"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "view_sidebar Mostrar guia menu_book Ler texture Fundo"
+      },
+      {
+        "tag": "button",
+        "line": 269,
+        "id": null,
+        "class": [
+          "secondary-button",
+          "desk-bg-toggle"
+        ],
+        "role": null,
+        "aria_label": "Mudar fundo do editor",
+        "data": {
+          "data-action": "toggle-desk-background"
+        },
+        "text": "texture Fundo"
+      },
+      {
+        "tag": "button",
+        "line": 275,
+        "id": null,
+        "class": [
+          "icon-button",
+          "editor-mobile-new"
+        ],
+        "role": null,
+        "aria_label": "Novo texto",
+        "data": {
+          "data-action": "open-create-note",
+          "data-vrda-tooltip": "Novo texto"
+        },
+        "text": "add"
+      },
+      {
+        "tag": "button",
+        "line": 279,
+        "id": null,
+        "class": [
+          "icon-button",
+          "editor-delete-btn"
+        ],
+        "role": null,
+        "aria_label": "Apagar este texto",
+        "data": {
+          "data-action": "delete-active-manuscript",
+          "data-vrda-tooltip": "Apagar este texto"
+        },
+        "text": "delete"
+      },
+      {
+        "tag": "div",
+        "line": 285,
+        "id": null,
+        "class": [
+          "format-bar-wrap"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-format-bar-wrap": ""
+        },
+        "text": "format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo pág"
+      },
+      {
+        "tag": "div",
+        "line": 286,
+        "id": null,
+        "class": [
+          "format-bar"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-format-bar": ""
+        },
+        "text": "format_bold format_italic Parágrafo Título Subtítulo Seção format_align_left format_align_center format_align_right format_align_justify more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo pág"
+      },
+      {
+        "tag": "span",
+        "line": 318,
+        "id": null,
+        "class": [
+          "fmt-sep-editorial"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 321,
+        "id": null,
+        "class": [
+          "fmt-group",
+          "fmt-group-editorial"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-editorial-group": ""
+        },
+        "text": "more_horiz Mais Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5 article Modo página p. format_color_text Classes insert_page_break Quebra content_copy Copiar file_download Baixar print Imprimir"
+      },
+      {
+        "tag": "button",
+        "line": 322,
+        "id": null,
+        "class": [
+          "fmt-btn",
+          "fmt-btn-labeled",
+          "fmt-editorial-toggle"
+        ],
+        "role": null,
+        "aria_label": "Mais ferramentas de página e exportação",
+        "data": {
+          "data-action": "toggle-editorial-group"
+        },
+        "text": "more_horiz Mais"
+      },
+      {
+        "tag": "select",
+        "line": 326,
+        "id": null,
+        "class": [
+          "fmt-select",
+          "editor-preset-select"
+        ],
+        "role": null,
+        "aria_label": "Formato de página do texto",
+        "data": {
+          "data-page-preset": "",
+          "data-vrda-tooltip": "Formato de página"
+        },
+        "text": "Texto corrido Página de envio Leitura confortável Word / ABNT Livro A5"
+      },
+      {
+        "tag": "button",
+        "line": 333,
+        "id": null,
+        "class": [
+          "editor-view-btn"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "toggle-page-view"
+        },
+        "text": "article Modo página"
+      },
+      {
+        "tag": "button",
+        "line": 359,
+        "id": null,
+        "class": [
+          "fmt-btn",
+          "fmt-btn-labeled"
+        ],
+        "role": null,
+        "aria_label": "Copiar texto",
+        "data": {
+          "data-action": "copy-manuscript-text"
+        },
+        "text": "content_copy Copiar"
+      },
+      {
+        "tag": "div",
+        "line": 379,
+        "id": null,
+        "class": [
+          "writing-area"
+        ],
+        "role": null,
+        "aria_label": "Área de escrita",
+        "data": {
+          "data-view-mode": "flow"
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 380,
+        "id": null,
+        "class": [
+          "paged-editor"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-paged-editor": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 381,
+        "id": null,
+        "class": [
+          "specialized-editor"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-specialized-editor": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 417,
+        "id": null,
+        "class": [
+          "metric-block",
+          "metric-block--primary"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Impressão digital da escrita Aguardando sua escrita Escreva no editor para iniciar o registro"
+      },
+      {
+        "tag": "small",
+        "line": 420,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-proof-status": ""
+        },
+        "text": "Escreva no editor para iniciar o registro"
+      },
+      {
+        "tag": "button",
+        "line": 494,
+        "id": null,
+        "class": [
+          "secondary-button",
+          "proof-send-btn"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "send-proof-to-editor"
+        },
+        "text": "forward_to_inbox Enviar para o editor"
+      },
+      {
+        "tag": "div",
+        "line": 530,
+        "id": null,
+        "class": [
+          "proof-what-editor-sees"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "O que o editor vê ao verificar check_circle Se o arquivo pertence ao manuscrito enviado check_circle Quantas sessões de escrita foram registradas check_circle O padrão de ritmo — consistente ao longo das sessões check_circle Se o texto foi "
+      },
+      {
+        "tag": "ul",
+        "line": 532,
+        "id": null,
+        "class": [
+          "proof-editor-view-list"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "check_circle Se o arquivo pertence ao manuscrito enviado check_circle Quantas sessões de escrita foram registradas check_circle O padrão de ritmo — consistente ao longo das sessões check_circle Se o texto foi alterado depois do registro"
+      },
+      {
+        "tag": "section",
+        "line": 584,
+        "id": null,
+        "class": [
+          "view"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-panel": "arquivo"
+        },
+        "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+      },
+      {
+        "tag": "article",
+        "line": 585,
+        "id": null,
+        "class": [
+          "archive-view"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+      },
+      {
+        "tag": "div",
+        "line": 624,
+        "id": null,
+        "class": [
+          "archive-layout"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progress"
+      },
+      {
+        "tag": "aside",
+        "line": 626,
+        "id": null,
+        "class": [
+          "archive-detail-panel"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progress"
+      },
+      {
+        "tag": "div",
+        "line": 634,
+        "id": null,
+        "class": [
+          "archive-panel-content"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-archive-panel-content": ""
+        },
+        "text": "edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão Pausado Concluído Estou em Meu progresso Ajuste livre — guias com checklist calculam progresso próprio 0% Tags Descrição file_download Exportar expand_m"
+      },
+      {
+        "tag": "button",
+        "line": 641,
+        "id": null,
+        "class": [
+          "primary-button",
+          "archive-open-btn"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "open-active-manuscript"
+        },
+        "text": "edit_note Abrir no editor"
+      },
+      {
+        "tag": "button",
+        "line": 696,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "txt"
+        },
+        "text": "article Texto"
+      },
+      {
+        "tag": "button",
+        "line": 700,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "md"
+        },
+        "text": "markdown Markdown"
+      },
+      {
+        "tag": "button",
+        "line": 704,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "html"
+        },
+        "text": "html HTML"
+      },
+      {
+        "tag": "button",
+        "line": 708,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "docx"
+        },
+        "text": "description Word"
+      },
+      {
+        "tag": "button",
+        "line": 712,
+        "id": null,
+        "class": [
+          "ghost-button",
+          "archive-epub-btn"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "epub"
+        },
+        "text": "auto_stories ePub · KDP"
+      },
+      {
+        "tag": "button",
+        "line": 716,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "export-manuscript",
+          "data-export-format": "obsidian"
+        },
+        "text": "hub Obsidian"
+      },
+      {
+        "tag": "button",
+        "line": 883,
+        "id": null,
+        "class": [
+          "academy-resume-link"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "switch-view-editor",
+          "data-academy-resume": ""
+        },
+        "text": "arrow_back Continuar com o texto atual"
+      },
+      {
+        "tag": "div",
+        "line": 887,
+        "id": null,
+        "class": [
+          "academy-enem-hint"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-academy-enem-hint": ""
+        },
+        "text": "school Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+      },
+      {
+        "tag": "div",
+        "line": 889,
+        "id": null,
+        "class": [
+          "academy-enem-copy"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Redação para vestibular — confira o Espelho de Voz ou abra o guia ENEM no editor. rule Ver as 5 Competências"
+      },
+      {
+        "tag": "div",
+        "line": 899,
+        "id": null,
+        "class": [
+          "academy-section-intro"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-atelier-section": "revisar"
+        },
+        "text": "Leitura do texto Espelho, laboratório e prática Três ferramentas que leem o texto ativo, um acervo editorial de referência e modos de escrita com urgência."
+      },
+      {
+        "tag": "textarea",
+        "line": 1010,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": "Editor de Rimas",
+        "data": {
+          "data-rimalab-input": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "section",
+        "line": 1200,
+        "id": null,
+        "class": [
+          "academy-leitura"
+        ],
+        "role": null,
+        "aria_label": "Leitura editorial",
+        "data": {
+          "data-atelier-section": "revisar"
+        },
+        "text": "Leitura editorial Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editori"
+      },
+      {
+        "tag": "div",
+        "line": 1202,
+        "id": null,
+        "class": [
+          "leitura-editorial-grid"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios → Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos → Leitura editorial Como revisar um"
+      },
+      {
+        "tag": "a",
+        "line": 1203,
+        "id": null,
+        "class": [
+          "leitura-editorial-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-editorial-page": ""
+        },
+        "text": "Leitura editorial Como escolher o título do livro Guia completo com técnicas, exemplos e exercícios →"
+      },
+      {
+        "tag": "a",
+        "line": 1208,
+        "id": null,
+        "class": [
+          "leitura-editorial-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-editorial-page": ""
+        },
+        "text": "Leitura editorial Como escrever as primeiras linhas Análise de aberturas famosas e exercícios práticos →"
+      },
+      {
+        "tag": "a",
+        "line": 1213,
+        "id": null,
+        "class": [
+          "leitura-editorial-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-editorial-page": ""
+        },
+        "text": "Leitura editorial Como revisar um manuscrito As 5 camadas de revisão e a lista cena por cena →"
+      },
+      {
+        "tag": "a",
+        "line": 1218,
+        "id": null,
+        "class": [
+          "leitura-editorial-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-editorial-page": ""
+        },
+        "text": "Leitura editorial Como vencer o bloqueio criativo Causas reais e técnicas imediatas para retomar a escrita →"
+      },
+      {
+        "tag": "div",
+        "line": 1226,
+        "id": null,
+        "class": [
+          "academy-section-intro"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-atelier-section": "publicar"
+        },
+        "text": "Circulação Publicação, prova e cuidados antes de soltar o texto no mundo Esta parte organiza mercado, objeto editorial e proteção de autoria sem misturar isso com a escrita da página."
+      },
+      {
+        "tag": "details",
+        "line": 1267,
+        "id": null,
+        "class": [
+          "academy-publishing-track"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-atelier-section": "publicar"
+        },
+        "text": "route Trilha de publicação Mercado editorial · Objeto livro · Anatomia do livro expand_more 01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e me"
+      },
+      {
+        "tag": "span",
+        "line": 1271,
+        "id": null,
+        "class": [
+          "academy-track-sub"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Mercado editorial · Objeto livro · Anatomia do livro"
+      },
+      {
+        "tag": "div",
+        "line": 1274,
+        "id": null,
+        "class": [
+          "academy-paths"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+      },
+      {
+        "tag": "article",
+        "line": 1275,
+        "id": null,
+        "class": [
+          "academy-path"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "01 storefront Mercado editorial Escolha a rota antes de lançar Autopublicação, editoras, carta de apresentação, lista de verificação, audiência e mentalidade de autor publicado. O livro deixa de ser só arquivo e vira projeto de chegada ao l"
+      },
+      {
+        "tag": "div",
+        "line": 1283,
+        "id": null,
+        "class": [
+          "academy-tags"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Independente Editoras Submissão"
+      },
+      {
+        "tag": "button",
+        "line": 1288,
+        "id": null,
+        "class": [
+          "secondary-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-craft-select": "mercado-editorial"
+        },
+        "text": "route Ver guias"
+      },
+      {
+        "tag": "article",
+        "line": 1294,
+        "id": null,
+        "class": [
+          "academy-path",
+          "is-book"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "02 book_4 Objeto livro Conheça a arquitetura da obra Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras. Capa Miolo Glossário view_in_ar Ver guias"
+      },
+      {
+        "tag": "div",
+        "line": 1442,
+        "id": null,
+        "class": [
+          "focus-toolbar"
+        ],
+        "role": null,
+        "aria_label": "Controles do modo foco",
+        "data": {},
+        "text": "fullscreen_exit format_size Letra width Largura horizontal_rule Linha"
+      },
+      {
+        "tag": "button",
+        "line": 1583,
+        "id": "levar-mesa-anchor",
+        "class": [],
+        "role": null,
+        "aria_label": "Trazer do celular",
+        "data": {},
+        "text": "📡"
+      },
+      {
+        "tag": "div",
+        "line": 1720,
+        "id": "levar-mesa-toast",
+        "class": [],
+        "role": "status",
+        "aria_label": null,
+        "data": {},
+        "text": "📡 Sua mesa inteira pode ir pro celular — sem internet. Leve sua mesa ×"
+      },
+      {
+        "tag": "a",
+        "line": 1732,
+        "id": "levar-mesa-link",
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Leve sua mesa"
+      },
+      {
+        "tag": "button",
+        "line": 1736,
+        "id": "levar-mesa-dismiss",
+        "class": [],
+        "role": null,
+        "aria_label": "Fechar",
+        "data": {},
+        "text": "×"
+      },
+      {
+        "tag": "div",
+        "line": 1867,
+        "id": "editorial-overlay",
+        "class": [
+          "editorial-overlay"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "arrow_back Leitura editorial open_in_new"
+      },
+      {
+        "tag": "div",
+        "line": 1868,
+        "id": null,
+        "class": [
+          "editorial-bar"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "arrow_back Leitura editorial open_in_new"
+      },
+      {
+        "tag": "button",
+        "line": 1869,
+        "id": "editorial-back",
+        "class": [
+          "icon-button"
+        ],
+        "role": null,
+        "aria_label": "Voltar ao Escrevaral",
+        "data": {},
+        "text": "arrow_back"
+      },
+      {
+        "tag": "span",
+        "line": 1872,
+        "id": "editorial-bar-title",
+        "class": [
+          "editorial-bar-title"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Leitura editorial"
+      },
+      {
+        "tag": "button",
+        "line": 1873,
+        "id": "editorial-external",
+        "class": [
+          "icon-button"
+        ],
+        "role": null,
+        "aria_label": "Abrir em nova aba",
+        "data": {},
+        "text": "open_in_new"
+      },
+      {
+        "tag": "iframe",
+        "line": 1877,
+        "id": "editorial-frame",
+        "class": [
+          "editorial-frame"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": ""
+      },
+      {
+        "tag": "button",
+        "line": 1899,
+        "id": null,
+        "class": [
+          "dock-item"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-target": "editor"
+        },
+        "text": "edit_note Escrever"
+      },
+      {
+        "tag": "div",
+        "line": 2002,
+        "id": "trazer-modal",
+        "class": [],
+        "role": "dialog",
+        "aria_label": "Trazer do celular",
+        "data": {},
+        "text": "Trazer do celular × Abra o Mesa Portátil no celular, toque em \"Enviar para outro PC\" e aponte o celular para a webcam. aguardando câmera… ✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+      },
+      {
+        "tag": "div",
+        "line": 2063,
+        "id": "trazer-sucesso",
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "✅ Mesa recebida Recarregue para ver seus manuscritos. Recarregar agora"
+      }
+    ]
+  },
+  "javascript": {
+    "file_hit_counts": {
+      "academia-controller.js": 30,
+      "analise-engine.js": 2,
+      "app.js": 329,
+      "archive-controller.js": 153,
+      "archive-engine.js": 32,
+      "backup-controller.js": 20,
+      "backup-engine.js": 12,
+      "badges-engine.js": 16,
+      "cronograma-controller.js": 2,
+      "document-engine.js": 1,
+      "editor-controller.js": 146,
+      "editor-modes.js": 20,
+      "export-engine.js": 79,
+      "grammar-controller.js": 87,
+      "js/controllers/editor-status-controller.js": 15,
+      "js/controllers/oficina-navigation-controller.js": 5,
+      "js/controllers/reader-controller.js": 8,
+      "js/controllers/training-controller.js": 7,
+      "js/data/criterios-data.js": 5,
+      "js/data/quotes-data.js": 9,
+      "js/data/synonym-data.js": 13,
+      "lexical-engine.js": 31,
+      "lexical-view-controller.js": 12,
+      "pagination-engine.js": 10,
+      "precision-engine.js": 4,
+      "print-engine.js": 2,
+      "proof-controller.js": 81,
+      "proof-engine.js": 10,
+      "punctuation-engine.js": 6,
+      "rights-engine.js": 10,
+      "screenplay-codec.js": 4,
+      "scripts/testar-integridade-browser.js": 18,
+      "scripts/testar-integridade-dados.js": 19,
+      "service-worker.js": 11,
+      "state-integrity.js": 26,
+      "state-store.js": 29,
+      "syntax-controller.js": 9,
+      "template-engine.js": 2,
+      "ui-dialog.js": 17,
+      "version-engine.js": 28,
+      "voice-engine.js": 2,
+      "vrda-engine.js": 6,
+      "workshop-authorship-clarity-controller.js": 5
+    },
+    "selectors": [
+      [
+        ".manuscript-page",
+        9
+      ],
+      [
+        ".teatro-editor",
+        3
+      ],
+      [
+        "[data-editor-view]",
+        2
+      ],
+      [
+        "[data-mesa-portatil-entry=",
+        2
+      ],
+      [
+        "[data-editorial-group]",
+        1
+      ],
+      [
+        ".screenplay-editor",
+        1
+      ],
+      [
+        "[data-manuscript-delete]",
+        1
+      ],
+      [
+        "[data-manuscript-id]",
+        1
+      ],
+      [
+        "[data-editorial-page]",
+        1
+      ],
+      [
+        ".writing-area",
+        1
+      ],
+      [
+        "[data-editor-quote]",
+        1
+      ],
+      [
+        "[data-editor-quote-text]",
+        1
+      ],
+      [
+        "[data-editor-quote-author]",
+        1
+      ],
+      [
+        "link[data-editor-status-layout=",
+        1
+      ],
+      [
+        "[data-paged-editor]",
+        1
+      ],
+      [
+        "[data-format-bar]",
+        1
+      ],
+      [
+        "[data-format-bar-wrap]",
+        1
+      ],
+      [
+        "[data-manuscript-list]",
+        1
+      ],
+      [
+        ".editor-split",
+        1
+      ],
+      [
+        "[data-specialized-editor]",
+        1
+      ]
+    ],
+    "number_formatting": [
+      {
+        "file": "app.js",
+        "line": 481,
+        "text": "saveStatus.textContent = `Exportado — ${docs.length} item${docs.length !== 1 ? \"s\" : \"\"}, ${totalWords.toLocaleString(\"pt-BR\")} palavras`;"
+      },
+      {
+        "file": "archive-controller.js",
+        "line": 496,
+        "text": "? `<span class=\"archive-word-total\">${totalWords.toLocaleString(\"pt-BR\")} pal. no acervo</span>`"
+      },
+      {
+        "file": "backup-controller.js",
+        "line": 489,
+        "text": "const wordsPart = s.totalWords > 0 ? `, ${s.totalWords.toLocaleString(\"pt-BR\")} palavras` : \"\";"
+      },
+      {
+        "file": "backup-controller.js",
+        "line": 578,
+        "text": "const wordsPart = totalWords > 0 ? ` · ${totalWords.toLocaleString(\"pt-BR\")} palavras` : \"\";"
+      },
+      {
+        "file": "export-engine.js",
+        "line": 672,
+        "text": "\"Vault exportado em \" + date + \" pelo Escrevaral. \" + pkg.stats.manuscripts + \" manuscrito\" + (pkg.stats.manuscripts !== 1 ? \"s\" : \"\") + \", \" + pkg.stats.words.toLocaleString(\"pt-BR\") + \" palavras.\","
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 154,
+        "text": "const header = `${snapshot.title || \"Manuscrito\"}\\n${\"─\".repeat(40)}\\nVersão: ${snapshot.reason}\\nData: ${new Date(snapshot.createdAt).toLocaleString(\"pt-BR\")}\\nPalavras: ${snapshot.wordCount}\\n${\"─\".repeat(40)}\\n\\n`;"
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 821,
+        "text": "if (generatedAt) lines.push(`✓ Gerado em: ${new Date(generatedAt).toLocaleString(\"pt-BR\")}`);"
+      },
+      {
+        "file": "version-engine.js",
+        "line": 102,
+        "text": "return `Marco: ${m.toLocaleString(\"pt-BR\")} palavra${m === 1 ? \"\" : \"s\"}`;"
+      }
+    ]
+  }
+}

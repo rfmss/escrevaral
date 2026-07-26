@@ -1,0 +1,2075 @@
+{
+  "files": {
+    "css/02-shell-navigation.css": 33,
+    "css/03-editor-toolbar.css": 13,
+    "css/05-archive.css": 1,
+    "css/21-product-clarity-archive.css": 1,
+    "styles.css": 12
+  },
+  "top_tokens": [
+    [
+      "--muted",
+      13
+    ],
+    [
+      "--line",
+      11
+    ],
+    [
+      "--primary",
+      10
+    ],
+    [
+      "--ink",
+      6
+    ],
+    [
+      "--soft-ink",
+      6
+    ],
+    [
+      "--surface-low",
+      5
+    ],
+    [
+      "--sienna",
+      3
+    ],
+    [
+      "--card",
+      2
+    ],
+    [
+      "--motion-quick",
+      2
+    ],
+    [
+      "--highlight-neutral-end",
+      1
+    ],
+    [
+      "--surface",
+      1
+    ],
+    [
+      "--surface-mid",
+      1
+    ],
+    [
+      "--muted-ink",
+      1
+    ]
+  ],
+  "hardcoded_counts": [
+    {
+      "category": "aviso-global",
+      "theme": "base/Alvorada",
+      "count": 3
+    },
+    {
+      "category": "botao",
+      "theme": "base/Alvorada",
+      "count": 10
+    },
+    {
+      "category": "cor",
+      "theme": "base/Alvorada",
+      "count": 4
+    },
+    {
+      "category": "espacamento",
+      "theme": "base/Alvorada",
+      "count": 47
+    },
+    {
+      "category": "estatistica",
+      "theme": "base/Alvorada",
+      "count": 16
+    },
+    {
+      "category": "formulario",
+      "theme": "base/Alvorada",
+      "count": 9
+    },
+    {
+      "category": "tipografia",
+      "theme": "base/Alvorada",
+      "count": 58
+    }
+  ],
+  "samples": {
+    "espacamento:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1824,
+        "selector": ".lexical-hint",
+        "property": "max-width",
+        "value": "480px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1825,
+        "selector": ".lexical-hint",
+        "property": "margin",
+        "value": "6px 0 14px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1833,
+        "selector": ".lexical-search-row",
+        "property": "gap",
+        "value": "8px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1837,
+        "selector": ".lexical-search-row",
+        "property": "padding",
+        "value": "8px 12px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1839,
+        "selector": ".lexical-search-row",
+        "property": "max-width",
+        "value": "340px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1937,
+        "selector": ".word-cloud",
+        "property": "padding",
+        "value": "14px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2084,
+        "selector": ".lexical-card",
+        "property": "padding",
+        "value": "26px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2086,
+        "selector": ".lexical-card",
+        "property": "top",
+        "value": "20px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2095,
+        "selector": ".lexical-card h2",
+        "property": "margin",
+        "value": "10px 0 4px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2115,
+        "selector": ".lexical-card dl",
+        "property": "margin",
+        "value": "22px 0 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2122,
+        "selector": ".lexical-card dl div",
+        "property": "padding",
+        "value": "12px 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2123,
+        "selector": ".lexical-card dl div",
+        "property": "gap",
+        "value": "20px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2138,
+        "selector": ".lexical-disclaimer",
+        "property": "margin",
+        "value": "18px 0 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2151,
+        "selector": ".lexical-frase-texto",
+        "property": "margin",
+        "value": "0 0 12px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2159,
+        "selector": ".lexical-frase-verbos dd,\n.lexical-frase-conj dd",
+        "property": "gap",
+        "value": "6px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2166,
+        "selector": ".lexical-frase-alerta",
+        "property": "gap",
+        "value": "4px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "tipografia:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1827,
+        "selector": ".lexical-hint",
+        "property": "font-size",
+        "value": "13px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1828,
+        "selector": ".lexical-hint",
+        "property": "line-height",
+        "value": "1.5",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1948,
+        "selector": ".word-cloud button",
+        "property": "font-weight",
+        "value": "600",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2091,
+        "selector": ".lexical-card > .material-symbols-outlined",
+        "property": "font-size",
+        "value": "30px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2096,
+        "selector": ".lexical-card h2",
+        "property": "font-family",
+        "value": "\"Noto Serif\", Georgia, serif",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2097,
+        "selector": ".lexical-card h2",
+        "property": "font-size",
+        "value": "40px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2133,
+        "selector": ".lexical-card dd",
+        "property": "font-weight",
+        "value": "700",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2142,
+        "selector": ".lexical-disclaimer",
+        "property": "font-size",
+        "value": "12px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2147,
+        "selector": ".lexical-frase-texto",
+        "property": "font-style",
+        "value": "italic",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2150,
+        "selector": ".lexical-frase-texto",
+        "property": "line-height",
+        "value": "1.55",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2186,
+        "selector": ".lexical-funcao-tag",
+        "property": "font-size",
+        "value": "11px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2188,
+        "selector": ".lexical-funcao-tag",
+        "property": "letter-spacing",
+        "value": ".04em",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2189,
+        "selector": ".lexical-funcao-tag",
+        "property": "text-transform",
+        "value": "uppercase",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2199,
+        "selector": ".lexical-definicao",
+        "property": "line-height",
+        "value": "1.6",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2216,
+        "selector": ".lexical-frase-termos dt",
+        "property": "letter-spacing",
+        "value": ".05em",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2252,
+        "selector": ".lexical-alt",
+        "property": "line-height",
+        "value": "1.45",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "formulario:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1844,
+        "selector": ".lexical-search-row input",
+        "property": "border",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1845,
+        "selector": ".lexical-search-row input",
+        "property": "outline",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1846,
+        "selector": ".lexical-search-row input",
+        "property": "background",
+        "value": "transparent",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1847,
+        "selector": ".lexical-search-row input",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1848,
+        "selector": ".lexical-search-row input",
+        "property": "font",
+        "value": "inherit",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1850,
+        "selector": ".lexical-search-row input",
+        "property": "width",
+        "value": "100%",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1852,
+        "selector": ".lexical-search-row input::placeholder",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 695,
+        "selector": ".word-popover-field",
+        "property": "color",
+        "value": "var(--soft-ink)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 696,
+        "selector": ".word-popover-field",
+        "property": "margin",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "botao:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1944,
+        "selector": ".word-cloud button",
+        "property": "border",
+        "value": "0",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1945,
+        "selector": ".word-cloud button",
+        "property": "background",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1946,
+        "selector": ".word-cloud button",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1947,
+        "selector": ".word-cloud button",
+        "property": "cursor",
+        "value": "pointer",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 283,
+        "selector": ".lexical-empty-state .secondary-button",
+        "property": "justify-content",
+        "value": "flex-start",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 285,
+        "selector": ".lexical-empty-state .secondary-button",
+        "property": "margin-top",
+        "value": "18px",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 286,
+        "selector": ".lexical-empty-state .secondary-button",
+        "property": "padding-inline",
+        "value": "0",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 293,
+        "selector": ".lexical-empty-state .secondary-button:hover",
+        "property": "border-color",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 294,
+        "selector": ".lexical-empty-state .secondary-button:hover",
+        "property": "background",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 295,
+        "selector": ".lexical-empty-state .secondary-button:hover",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "estatistica:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2075,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+        "property": "border",
+        "value": "1px solid var(--line)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2076,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+        "property": "border-radius",
+        "value": "8px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2077,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+        "property": "background",
+        "value": "var(--card)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2078,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+        "property": "box-shadow",
+        "value": "none",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2079,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+        "property": "transition",
+        "value": "background var(--motion-quick), border-color var(--motion-quick)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 244,
+        "selector": ".lexical-empty-state",
+        "property": "margin-top",
+        "value": "clamp(30px, 6vw, 72px)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 246,
+        "selector": ".lexical-empty-state",
+        "property": "border-top",
+        "value": "1px solid var(--line)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 247,
+        "selector": ".lexical-empty-state",
+        "property": "border-bottom",
+        "value": "1px solid var(--line)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 251,
+        "selector": ".lexical-empty-state > .material-symbols-outlined",
+        "property": "display",
+        "value": "block",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 252,
+        "selector": ".lexical-empty-state > .material-symbols-outlined",
+        "property": "margin-bottom",
+        "value": "16px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 253,
+        "selector": ".lexical-empty-state > .material-symbols-outlined",
+        "property": "color",
+        "value": "var(--primary)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 260,
+        "selector": ".lexical-empty-state strong",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 269,
+        "selector": ".lexical-empty-state p",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 309,
+        "selector": ".lexical-empty-state",
+        "property": "margin-top",
+        "value": "24px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "styles.css",
+        "line": 310,
+        "selector": ".lexical-empty-state",
+        "property": "padding-block",
+        "value": "24px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "aviso-global:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2163,
+        "selector": ".lexical-frase-alerta",
+        "property": "margin-top",
+        "value": "12px",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2164,
+        "selector": ".lexical-frase-alerta",
+        "property": "display",
+        "value": "flex",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2165,
+        "selector": ".lexical-frase-alerta",
+        "property": "flex-direction",
+        "value": "column",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "cor:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2168,
+        "selector": ".lexical-frase-alerta",
+        "property": "color",
+        "value": "var(--sienna, #8a4a2a)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2191,
+        "selector": ".lexical-funcao-tag",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--sienna, #8a4a2a) 10%, var(--surface-low))",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2192,
+        "selector": ".lexical-funcao-tag",
+        "property": "border",
+        "value": "1px solid color-mix(in srgb, var(--sienna, #8a4a2a) 20%, var(--line))",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 648,
+        "selector": ".word-popover",
+        "property": "box-shadow",
+        "value": "0 8px 32px rgba(26, 26, 26, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      }
+    ]
+  },
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1943,
+        "selector": ".word-cloud button"
+      },
+      {
+        "file": "styles.css",
+        "line": 282,
+        "selector": ".lexical-empty-state .secondary-button"
+      },
+      {
+        "file": "styles.css",
+        "line": 292,
+        "selector": ".lexical-empty-state .secondary-button:hover"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2071,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card"
+      },
+      {
+        "file": "styles.css",
+        "line": 242,
+        "selector": ".lexical-empty-state"
+      },
+      {
+        "file": "styles.css",
+        "line": 250,
+        "selector": ".lexical-empty-state > .material-symbols-outlined"
+      },
+      {
+        "file": "styles.css",
+        "line": 257,
+        "selector": ".lexical-empty-state strong"
+      },
+      {
+        "file": "styles.css",
+        "line": 266,
+        "selector": ".lexical-empty-state p"
+      },
+      {
+        "file": "styles.css",
+        "line": 308,
+        "selector": ".lexical-empty-state"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1843,
+        "selector": ".lexical-search-row input"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1852,
+        "selector": ".lexical-search-row input::placeholder"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 693,
+        "selector": ".word-popover-field"
+      }
+    ],
+    "aviso-global": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2162,
+        "selector": ".lexical-frase-alerta"
+      }
+    ]
+  },
+  "responsive": {
+    "count": 5,
+    "samples": [
+      {
+        "file": "css/21-product-clarity-archive.css",
+        "line": 195,
+        "media": "(min-width: 821px)",
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-filter-panel .archive-word-total"
+      },
+      {
+        "file": "styles.css",
+        "line": 196,
+        "media": "(max-width: 820px)",
+        "selector": "html body .app-shell[data-view=\"biblioteca\"] .split-paper > div,\n  html body .app-shell[data-view=\"biblioteca\"] .lexical-card"
+      },
+      {
+        "file": "styles.css",
+        "line": 202,
+        "media": "(max-width: 820px)",
+        "selector": "html body .app-shell[data-view=\"biblioteca\"] .lexical-card"
+      },
+      {
+        "file": "styles.css",
+        "line": 303,
+        "media": "(max-width: 600px)",
+        "selector": ".lexical-search-row"
+      },
+      {
+        "file": "styles.css",
+        "line": 308,
+        "media": "(max-width: 600px)",
+        "selector": ".lexical-empty-state"
+      }
+    ]
+  },
+  "vereda": {
+    "count": 0,
+    "samples": []
+  },
+  "html": {
+    "line_matches": [
+      {
+        "line": 7,
+        "text": "<title>Escrevaral — antes que as palavras sequem.</title>"
+      },
+      {
+        "line": 12,
+        "text": "<meta property=\"og:title\" content=\"Escrevaral — antes que as palavras sequem.\">"
+      },
+      {
+        "line": 23,
+        "text": "<meta name=\"twitter:title\" content=\"Escrevaral — antes que as palavras sequem.\">"
+      },
+      {
+        "line": 65,
+        "text": "<link rel=\"manifest\" href=\"manifest.webmanifest?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 66,
+        "text": "<link rel=\"icon\" href=\"favicon.svg?v=20260726-lexical-hint-v1\" type=\"image/svg+xml\">"
+      },
+      {
+        "line": 67,
+        "text": "<link rel=\"icon\" href=\"favicon_io/favicon.ico?v=20260726-lexical-hint-v1\" type=\"image/x-icon\">"
+      },
+      {
+        "line": 68,
+        "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-48x48.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"48x48\">"
+      },
+      {
+        "line": 69,
+        "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-32x32.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"32x32\">"
+      },
+      {
+        "line": 70,
+        "text": "<link rel=\"icon\" href=\"favicon_io/tab-favicon-16x16.png?v=20260726-lexical-hint-v1\" type=\"image/png\" sizes=\"16x16\">"
+      },
+      {
+        "line": 71,
+        "text": "<link rel=\"apple-touch-icon\" href=\"favicon_io/apple-touch-icon.png?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 75,
+        "text": "<link rel=\"stylesheet\" href=\"css/00-tokens.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 76,
+        "text": "<link rel=\"stylesheet\" href=\"css/01-base.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 77,
+        "text": "<link rel=\"stylesheet\" href=\"css/02-shell-navigation.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 78,
+        "text": "<link rel=\"stylesheet\" href=\"styles.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 79,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-layout.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 80,
+        "text": "<link rel=\"stylesheet\" href=\"css/04-cronograma.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 81,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-modes.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 82,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-writing-area.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 83,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-guide-reference.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 84,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-inspector-precision.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 85,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-editor-toolbar.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 86,
+        "text": "<link rel=\"stylesheet\" href=\"css/05-archive.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 87,
+        "text": "<link rel=\"stylesheet\" href=\"css/07-enem.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 88,
+        "text": "<link rel=\"stylesheet\" href=\"css/09-print.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 89,
+        "text": "<link rel=\"stylesheet\" href=\"css/04-analysis-academy.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 90,
+        "text": "<link rel=\"stylesheet\" href=\"css/06-academy-tools.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 91,
+        "text": "<link rel=\"stylesheet\" href=\"css/08-responsive.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 92,
+        "text": "<link rel=\"stylesheet\" href=\"css/10-mobile-nav.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 93,
+        "text": "<link rel=\"stylesheet\" href=\"css/11-badges.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 94,
+        "text": "<link rel=\"stylesheet\" href=\"css/12-training-modes.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 95,
+        "text": "<link rel=\"stylesheet\" href=\"css/wood-icons.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 161,
+        "text": "<span>Antes que as palavras sequem.</span>"
+      },
+      {
+        "line": 167,
+        "text": "<button class=\"tab\" data-view-target=\"biblioteca\" data-vrda-tooltip=\"Veja como cada palavra do seu texto se comporta — e o que ela pode virar.\">Palavras</button>"
+      },
+      {
+        "line": 389,
+        "text": "<h1 data-lexical-title>Palavras</h1>"
+      },
+      {
+        "line": 390,
+        "text": "<p class=\"lexical-hint muted\" data-lexical-hint>Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui.</p>"
+      },
+      {
+        "line": 391,
+        "text": "<label class=\"lexical-search-row\" aria-label=\"Buscar palavra\">"
+      },
+      {
+        "line": 393,
+        "text": "<input type=\"search\" data-lexical-search placeholder=\"Buscar palavra…\" autocomplete=\"off\" aria-label=\"Buscar palavra\">"
+      },
+      {
+        "line": 395,
+        "text": "<div class=\"reading-sample\" data-lexical-context></div>"
+      },
+      {
+        "line": 397,
+        "text": "<aside class=\"lexical-card\" data-lexical-card></aside>"
+      },
+      {
+        "line": 409,
+        "text": "<p class=\"proof-context-note\">Em 2026, editoras e concursos já pedem prova de autoria humana. Aqui você tem a mais honesta: o registro do seu próprio processo, gerado em silêncio desde a primeira palavra.</p>"
+      },
+      {
+        "line": 434,
+        "text": "<span>Palavras testemunhadas</span>"
+      },
+      {
+        "line": 614,
+        "text": "<option value=\"words\">Palavras</option>"
+      },
+      {
+        "line": 955,
+        "text": "<textarea data-voice-input placeholder=\"Cole aqui um capítulo, cena ou trecho do seu romance ou conto. Acima de 500 palavras a leitura fica mais estável.\" aria-label=\"Texto para o Espelho de Voz\"></textarea>"
+      },
+      {
+        "line": 957,
+        "text": "<span data-voice-count>0 palavras</span>"
+      },
+      {
+        "line": 1038,
+        "text": "<input type=\"search\" id=\"rimalab-finder-input\" data-rimalab-finder placeholder=\"ex.: saudade, flor, amor…\" autocomplete=\"off\" aria-label=\"Buscar palavras que rimam\">"
+      },
+      {
+        "line": 1052,
+        "text": "<h2>Revise palavras que podem pesar mais do que parecem</h2>"
+      },
+      {
+        "line": 1053,
+        "text": "<p>Palavras que talvez você não queira mais usar — e o que colocar no lugar.</p>"
+      },
+      {
+        "line": 1066,
+        "text": "<span>Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra.</span>"
+      },
+      {
+        "line": 1117,
+        "text": "<span class=\"deriva-contador\" id=\"deriva-contador\">0 palavras</span>"
+      },
+      {
+        "line": 1125,
+        "text": "placeholder=\"Comece a digitar. O fio nasce com a primeira palavra.\""
+      },
+      {
+        "line": 1376,
+        "text": "<button class=\"crono-empty-action\" data-action=\"edit-word-goal\">"
+      },
+      {
+        "line": 1378,
+        "text": "Meta de palavras"
+      },
+      {
+        "line": 1400,
+        "text": "<h3>Palavras que voltam</h3>"
+      },
+      {
+        "line": 1401,
+        "text": "<div class=\"word-cloud\" data-word-cloud></div>"
+      },
+      {
+        "line": 1405,
+        "text": "<h3>Tipos de palavra</h3>"
+      },
+      {
+        "line": 1416,
+        "text": "<p class=\"inspector-density\" data-lexical-density hidden></p>"
+      },
+      {
+        "line": 1462,
+        "text": "<div class=\"focus-counter\" data-focus-count>0 palavras</div>"
+      },
+      {
+        "line": 1473,
+        "text": "<p class=\"ob-tagline\">Antes que as palavras sequem.</p>"
+      },
+      {
+        "line": 1505,
+        "text": "<!-- Palavras — informativo -->"
+      },
+      {
+        "line": 1508,
+        "text": "<h2 class=\"ob-pillar-title\">Palavras</h2>"
+      },
+      {
+        "line": 1563,
+        "text": "<span data-stat=\"count\">186 palavras · 4 parágrafos</span>"
+      },
+      {
+        "line": 1566,
+        "text": "<button class=\"goal-label\" data-action=\"edit-word-goal\" data-goal-label title=\"Alterar meta\">0 / 0 palavras</button>"
+      },
+      {
+        "line": 1568,
+        "text": "<button class=\"statusbar-goal-btn\" data-action=\"edit-word-goal\" data-goal-set-btn aria-label=\"Definir meta de palavras\" title=\"Definir meta de palavras\">"
+      },
+      {
+        "line": 1593,
+        "text": "<script src=\"document-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1594,
+        "text": "<script src=\"pagination-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1595,
+        "text": "<script src=\"lexical-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1596,
+        "text": "<script src=\"proof-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1597,
+        "text": "<script src=\"vrda-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1598,
+        "text": "<script src=\"backup-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1599,
+        "text": "<script src=\"filesystem-backup-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1600,
+        "text": "<script src=\"archive-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1601,
+        "text": "<script src=\"badges-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1602,
+        "text": "<script src=\"version-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1603,
+        "text": "<script src=\"export-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1604,
+        "text": "<script src=\"template-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1605,
+        "text": "<script src=\"precision-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1606,
+        "text": "<script src=\"js/data/criterios-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1607,
+        "text": "<script src=\"syntax-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1608,
+        "text": "<script src=\"punctuation-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1609,
+        "text": "<script src=\"analise-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1610,
+        "text": "<script src=\"voice-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1611,
+        "text": "<script src=\"rimalab-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1612,
+        "text": "<script src=\"decolonial-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1613,
+        "text": "<script src=\"rights-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1614,
+        "text": "<script src=\"typewriter-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1615,
+        "text": "<script src=\"js/data/synonym-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1617,
+        "text": "<script src=\"state-integrity.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1618,
+        "text": "<script src=\"screenplay-codec.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1619,
+        "text": "<script src=\"state-store.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1621,
+        "text": "<script src=\"cronograma-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1622,
+        "text": "<script src=\"editor-modes.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1623,
+        "text": "<script src=\"editor-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1624,
+        "text": "<script src=\"proof-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1625,
+        "text": "<script src=\"ui-dialog.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1626,
+        "text": "<script src=\"academia-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1627,
+        "text": "<script src=\"backup-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1628,
+        "text": "<script src=\"archive-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1629,
+        "text": "<script src=\"grammar-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1630,
+        "text": "<script src=\"js/controllers/reader-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1631,
+        "text": "<script src=\"js/controllers/pomodoro-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1632,
+        "text": "<script src=\"js/controllers/editor-status-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1633,
+        "text": "<script src=\"js/controllers/oficina-navigation-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1634,
+        "text": "<script src=\"syntax-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1635,
+        "text": "<script src=\"combo-detector.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1636,
+        "text": "<script src=\"deriva-mode.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1637,
+        "text": "<script src=\"perseguicao-mode.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1638,
+        "text": "<script src=\"js/controllers/training-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1640,
+        "text": "<script src=\"js/controllers/tooltip-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1642,
+        "text": "<script src=\"print-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1644,
+        "text": "<script src=\"js/data/quotes-data.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1645,
+        "text": "<script src=\"app.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1646,
+        "text": "<script src=\"workshop-authorship-clarity-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1848,
+        "text": "<!-- Popover de palavra — abre ao clicar no editor -->"
+      },
+      {
+        "line": 1849,
+        "text": "<div id=\"word-popover\" class=\"word-popover\" hidden role=\"tooltip\" aria-live=\"polite\">"
+      },
+      {
+        "line": 1850,
+        "text": "<div class=\"word-popover-head\">"
+      },
+      {
+        "line": 1852,
+        "text": "<span class=\"word-popover-class\" data-popover-class></span>"
+      },
+      {
+        "line": 1854,
+        "text": "<div class=\"word-popover-body\">"
+      },
+      {
+        "line": 1856,
+        "text": "<div class=\"word-popover-definition\" data-popover-definition hidden>"
+      },
+      {
+        "line": 1857,
+        "text": "<p class=\"word-popover-field\" data-popover-field></p>"
+      },
+      {
+        "line": 1858,
+        "text": "<p class=\"word-popover-note\" data-popover-note></p>"
+      },
+      {
+        "line": 1861,
+        "text": "<button class=\"word-popover-close\" data-action=\"popover-close\" aria-label=\"Fechar painel de definição\">"
+      },
+      {
+        "line": 1917,
+        "text": "<span class=\"dock-label\">Palavras</span>"
+      }
+    ],
+    "key_elements": [
+      {
+        "tag": "div",
+        "line": 152,
+        "id": null,
+        "class": [
+          "app-shell"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view": "editor"
+        },
+        "text": "menu Escrevaral Antes que as palavras sequem. Escrever Palavras Autoria Acervo Ateliê Planejamento — headphones Sons search search share cloud_done Funciona sem internet dark_mode edit_note fullscreen right_panel_open left_panel_close Texto"
+      },
+      {
+        "tag": "button",
+        "line": 167,
+        "id": null,
+        "class": [
+          "tab"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-target": "biblioteca",
+          "data-vrda-tooltip": "Veja como cada palavra do seu texto se comporta — e o que ela pode virar."
+        },
+        "text": "Palavras"
+      },
+      {
+        "tag": "section",
+        "line": 386,
+        "id": null,
+        "class": [
+          "view"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-panel": "biblioteca"
+        },
+        "text": "Palavras Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui. search"
+      },
+      {
+        "tag": "h1",
+        "line": 389,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-lexical-title": ""
+        },
+        "text": "Palavras"
+      },
+      {
+        "tag": "p",
+        "line": 390,
+        "id": null,
+        "class": [
+          "lexical-hint",
+          "muted"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-lexical-hint": ""
+        },
+        "text": "Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui."
+      },
+      {
+        "tag": "input",
+        "line": 393,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": "Buscar palavra",
+        "data": {
+          "data-lexical-search": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "aside",
+        "line": 397,
+        "id": null,
+        "class": [
+          "lexical-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-lexical-card": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 433,
+        "id": null,
+        "class": [
+          "metric-block"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Palavras testemunhadas — Do texto ativo"
+      },
+      {
+        "tag": "section",
+        "line": 584,
+        "id": null,
+        "class": [
+          "view"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-panel": "arquivo"
+        },
+        "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+      },
+      {
+        "tag": "article",
+        "line": 585,
+        "id": null,
+        "class": [
+          "archive-view"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Acervo Seus textos add Novo manuscrito search sort Atualizados Título Palavras Progresso Tipo touch_app Selecione uma nota para ver e editar os detalhes edit_note Abrir no editor tune Detalhes expand_more Formato Situação Em escrita Revisão"
+      },
+      {
+        "tag": "div",
+        "line": 602,
+        "id": null,
+        "class": [
+          "archive-controls"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "search sort Atualizados Título Palavras Progresso Tipo"
+      },
+      {
+        "tag": "label",
+        "line": 609,
+        "id": null,
+        "class": [
+          "archive-sort"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "sort Atualizados Título Palavras Progresso Tipo"
+      },
+      {
+        "tag": "select",
+        "line": 611,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": "Ordenar acervo",
+        "data": {
+          "data-archive-sort": ""
+        },
+        "text": "Atualizados Título Palavras Progresso Tipo"
+      },
+      {
+        "tag": "textarea",
+        "line": 955,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": "Texto para o Espelho de Voz",
+        "data": {
+          "data-voice-input": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "span",
+        "line": 957,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-count": ""
+        },
+        "text": "0 palavras"
+      },
+      {
+        "tag": "input",
+        "line": 1038,
+        "id": "rimalab-finder-input",
+        "class": [],
+        "role": null,
+        "aria_label": "Buscar palavras que rimam",
+        "data": {
+          "data-rimalab-finder": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1048,
+        "id": null,
+        "class": [
+          "academy-tool-panel",
+          "at-panel-vocab"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+      },
+      {
+        "tag": "div",
+        "line": 1049,
+        "id": null,
+        "class": [
+          "decolonial-tool"
+        ],
+        "role": null,
+        "aria_label": "Vocabulário Decolonizador",
+        "data": {},
+        "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+      },
+      {
+        "tag": "div",
+        "line": 1063,
+        "id": null,
+        "class": [
+          "decolonial-observer"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-decolonial-observer": ""
+        },
+        "text": "Observador pronto. Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra. download Baixar TXT"
+      },
+      {
+        "tag": "div",
+        "line": 1114,
+        "id": "deriva-arena",
+        "class": [
+          "deriva-arena"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Deriva 0 palavras Descartar Salvar como rascunho"
+      },
+      {
+        "tag": "span",
+        "line": 1117,
+        "id": "deriva-contador",
+        "class": [
+          "deriva-contador"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "0 palavras"
+      },
+      {
+        "tag": "textarea",
+        "line": 1122,
+        "id": "deriva-textarea",
+        "class": [
+          "deriva-textarea"
+        ],
+        "role": null,
+        "aria_label": "Área de escrita livre — Deriva",
+        "data": {},
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1367,
+        "id": null,
+        "class": [
+          "crono-empty-actions"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-crono-empty-actions": ""
+        },
+        "text": "edit_calendar Planejar sessão calendar_month Ver calendário flag Meta de palavras"
+      },
+      {
+        "tag": "button",
+        "line": 1376,
+        "id": null,
+        "class": [
+          "crono-empty-action"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "edit-word-goal"
+        },
+        "text": "flag Meta de palavras"
+      },
+      {
+        "tag": "div",
+        "line": 1390,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-linguistic-panel": ""
+        },
+        "text": "Olhar do texto — escreva para ver Palavras que voltam Tipos de palavra Leitura fácil? — Escreva para ver Voz do texto"
+      },
+      {
+        "tag": "div",
+        "line": 1401,
+        "id": null,
+        "class": [
+          "word-cloud"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-word-cloud": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1462,
+        "id": null,
+        "class": [
+          "focus-counter"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-focus-count": ""
+        },
+        "text": "0 palavras"
+      },
+      {
+        "tag": "div",
+        "line": 1466,
+        "id": "terms-overlay",
+        "class": [
+          "create-note-overlay",
+          "ob-overlay"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-terms-overlay": ""
+        },
+        "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+      },
+      {
+        "tag": "section",
+        "line": 1467,
+        "id": null,
+        "class": [
+          "ob-panel"
+        ],
+        "role": "dialog",
+        "aria_label": null,
+        "data": {},
+        "text": "Oficina literária digital Escrevaral Antes que as palavras sequem. Uma oficina de escrita feita no Brasil, para gente brasileira. edit Abra uma página. O texto fica neste navegador e pode seguir sem internet. Abrir uma página edit Seu texto"
+      },
+      {
+        "tag": "footer",
+        "line": 1548,
+        "id": null,
+        "class": [
+          "statusbar"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Você está sem internet — o e-mail não vai chegar agora. 186 palavras · 4 parágrafos 0 / 0 palavras flag timer 25:00 Pronto 📡 © 2026 Escrevaral"
+      },
+      {
+        "tag": "span",
+        "line": 1563,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-stat": "count"
+        },
+        "text": "186 palavras · 4 parágrafos"
+      },
+      {
+        "tag": "div",
+        "line": 1564,
+        "id": null,
+        "class": [
+          "statusbar-goal"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-goal-bar": ""
+        },
+        "text": "0 / 0 palavras"
+      },
+      {
+        "tag": "button",
+        "line": 1566,
+        "id": null,
+        "class": [
+          "goal-label"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "edit-word-goal",
+          "data-goal-label": ""
+        },
+        "text": "0 / 0 palavras"
+      },
+      {
+        "tag": "button",
+        "line": 1568,
+        "id": null,
+        "class": [
+          "statusbar-goal-btn"
+        ],
+        "role": null,
+        "aria_label": "Definir meta de palavras",
+        "data": {
+          "data-action": "edit-word-goal",
+          "data-goal-set-btn": ""
+        },
+        "text": "flag"
+      },
+      {
+        "tag": "div",
+        "line": 1849,
+        "id": "word-popover",
+        "class": [
+          "word-popover"
+        ],
+        "role": "tooltip",
+        "aria_label": null,
+        "data": {},
+        "text": "close"
+      },
+      {
+        "tag": "span",
+        "line": 1852,
+        "id": null,
+        "class": [
+          "word-popover-class"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-popover-class": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1856,
+        "id": null,
+        "class": [
+          "word-popover-definition"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-popover-definition": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "p",
+        "line": 1857,
+        "id": null,
+        "class": [
+          "word-popover-field"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-popover-field": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "p",
+        "line": 1858,
+        "id": null,
+        "class": [
+          "word-popover-note"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-popover-note": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "button",
+        "line": 1861,
+        "id": null,
+        "class": [
+          "word-popover-close"
+        ],
+        "role": null,
+        "aria_label": "Fechar painel de definição",
+        "data": {
+          "data-action": "popover-close"
+        },
+        "text": "close"
+      },
+      {
+        "tag": "nav",
+        "line": 1898,
+        "id": "mobile-dock",
+        "class": [
+          "mobile-dock"
+        ],
+        "role": null,
+        "aria_label": "Navegação principal",
+        "data": {},
+        "text": "edit_note Escrever inventory_2 Acervo school Ateliê fingerprint Autoria auto_stories Palavras more_horiz Mais route Planejamento"
+      },
+      {
+        "tag": "button",
+        "line": 1915,
+        "id": null,
+        "class": [
+          "dock-item"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-view-target": "biblioteca"
+        },
+        "text": "auto_stories Palavras"
+      }
+    ]
+  },
+  "javascript": {
+    "file_hit_counts": {
+      "academia-controller.js": 8,
+      "analise-engine.js": 46,
+      "app.js": 90,
+      "archive-controller.js": 2,
+      "archive-engine.js": 1,
+      "backup-controller.js": 4,
+      "backup-engine.js": 2,
+      "combo-detector.js": 4,
+      "deriva-mode.js": 1,
+      "editor-controller.js": 17,
+      "editor-modes.js": 4,
+      "export-engine.js": 3,
+      "grammar-controller.js": 23,
+      "js/controllers/editor-status-controller.js": 3,
+      "js/controllers/oficina-navigation-controller.js": 1,
+      "js/controllers/training-controller.js": 6,
+      "js/data/criterios-data.js": 14,
+      "js/data/quotes-data.js": 12,
+      "js/data/synonym-data.js": 36,
+      "lexical-engine.js": 97,
+      "lexical-view-controller.js": 44,
+      "pagination-engine.js": 1,
+      "perseguicao-mode.js": 1,
+      "precision-engine.js": 6,
+      "print-engine.js": 1,
+      "proof-controller.js": 13,
+      "punctuation-engine.js": 4,
+      "rimalab-engine.js": 14,
+      "scripts/testar-integridade-browser.js": 1,
+      "scripts/testar-integridade-dados.js": 1,
+      "service-worker.js": 6,
+      "state-store.js": 24,
+      "syntax-controller.js": 7,
+      "syntax-engine.js": 15,
+      "ui-dialog.js": 3,
+      "version-engine.js": 2,
+      "voice-engine.js": 22
+    },
+    "selectors": [
+      [
+        "[data-lexical-title]",
+        2
+      ],
+      [
+        "[data-lexical-search]",
+        2
+      ],
+      [
+        "[data-lexical-context]",
+        2
+      ],
+      [
+        "[data-lexical-card]",
+        2
+      ],
+      [
+        "[data-word-cloud]",
+        1
+      ],
+      [
+        "[data-lexical-density]",
+        1
+      ],
+      [
+        "[data-lexical-hint]",
+        1
+      ],
+      [
+        ".lexical-disclaimer",
+        1
+      ]
+    ],
+    "number_formatting": [
+      {
+        "file": "app.js",
+        "line": 472,
+        "text": "lines.push(`${i + 1}. ${ms.title || \"sem título\"}  ·  ${wc.toLocaleString(\"pt-BR\")} palavras  ·  ${ms.status || \"Em escrita\"}`);"
+      },
+      {
+        "file": "app.js",
+        "line": 478,
+        "text": "lines.push(`Total: ${totalWords.toLocaleString(\"pt-BR\")} palavras em ${docs.length} item${docs.length !== 1 ? \"s\" : \"\"}.`);"
+      },
+      {
+        "file": "app.js",
+        "line": 481,
+        "text": "saveStatus.textContent = `Exportado — ${docs.length} item${docs.length !== 1 ? \"s\" : \"\"}, ${totalWords.toLocaleString(\"pt-BR\")} palavras`;"
+      },
+      {
+        "file": "archive-controller.js",
+        "line": 496,
+        "text": "? `<span class=\"archive-word-total\">${totalWords.toLocaleString(\"pt-BR\")} pal. no acervo</span>`"
+      },
+      {
+        "file": "backup-controller.js",
+        "line": 489,
+        "text": "const wordsPart = s.totalWords > 0 ? `, ${s.totalWords.toLocaleString(\"pt-BR\")} palavras` : \"\";"
+      },
+      {
+        "file": "backup-controller.js",
+        "line": 578,
+        "text": "const wordsPart = totalWords > 0 ? ` · ${totalWords.toLocaleString(\"pt-BR\")} palavras` : \"\";"
+      },
+      {
+        "file": "export-engine.js",
+        "line": 672,
+        "text": "\"Vault exportado em \" + date + \" pelo Escrevaral. \" + pkg.stats.manuscripts + \" manuscrito\" + (pkg.stats.manuscripts !== 1 ? \"s\" : \"\") + \", \" + pkg.stats.words.toLocaleString(\"pt-BR\") + \" palavras.\","
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 154,
+        "text": "const header = `${snapshot.title || \"Manuscrito\"}\\n${\"─\".repeat(40)}\\nVersão: ${snapshot.reason}\\nData: ${new Date(snapshot.createdAt).toLocaleString(\"pt-BR\")}\\nPalavras: ${snapshot.wordCount}\\n${\"─\".repeat(40)}\\n\\n`;"
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 331,
+        "text": "wordcountEl.textContent = wc > 0 ? wc.toLocaleString(\"pt-BR\") : \"—\";"
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 340,
+        "text": "? `${sign}${delta.toLocaleString(\"pt-BR\")} palavras desde o último registro${dateStr ? ` (${dateStr})` : \"\"}`"
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 346,
+        "text": "wordcountHintEl.textContent = nextMilestone ? `Próximo marco: ${nextMilestone.toLocaleString(\"pt-BR\")} palavras` : \"Marco de 10 mil alcançado\";"
+      },
+      {
+        "file": "proof-controller.js",
+        "line": 399,
+        "text": "const when = new Date(savedValidation.at).toLocaleString(\"pt-BR\", { day:\"2-digit\", month:\"short\", hour:\"2-digit\", minute:\"2-digit\" });"
+      },
+      {
+        "file": "version-engine.js",
+        "line": 102,
+        "text": "return `Marco: ${m.toLocaleString(\"pt-BR\")} palavra${m === 1 ? \"\" : \"s\"}`;"
+      }
+    ]
+  }
+}

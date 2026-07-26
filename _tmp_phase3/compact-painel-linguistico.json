@@ -1,0 +1,3209 @@
+{
+  "files": {
+    "css/00-tokens.css": 15,
+    "css/02-shell-navigation.css": 13,
+    "css/03-editor-layout.css": 34,
+    "css/03-editor-toolbar.css": 5,
+    "css/03-inspector-precision.css": 62,
+    "css/04-analysis-academy.css": 304,
+    "css/05-archive.css": 30,
+    "css/06-academy-tools.css": 3,
+    "css/08-responsive.css": 10,
+    "css/09-print.css": 1,
+    "css/14-archive-inspector.css": 29,
+    "css/22-product-clarity-workshop-authorship.css": 2
+  },
+  "top_tokens": [
+    [
+      "--primary",
+      128
+    ],
+    [
+      "--muted",
+      71
+    ],
+    [
+      "--line",
+      70
+    ],
+    [
+      "--ink",
+      54
+    ],
+    [
+      "--card",
+      40
+    ],
+    [
+      "--soft-ink",
+      30
+    ],
+    [
+      "--surface-low",
+      27
+    ],
+    [
+      "--motion-quick",
+      24
+    ],
+    [
+      "--sienna",
+      21
+    ],
+    [
+      "--surface",
+      13
+    ],
+    [
+      "--surface-mid",
+      11
+    ],
+    [
+      "--sage",
+      7
+    ],
+    [
+      "--shadow",
+      7
+    ],
+    [
+      "--motion-calm",
+      6
+    ],
+    [
+      "--ochre",
+      5
+    ],
+    [
+      "--surface-high",
+      4
+    ],
+    [
+      "--on-primary",
+      4
+    ],
+    [
+      "--paper",
+      3
+    ],
+    [
+      "--highlight-start",
+      3
+    ],
+    [
+      "--w",
+      2
+    ],
+    [
+      "--border-aged",
+      2
+    ],
+    [
+      "--glass-bg",
+      2
+    ],
+    [
+      "--c",
+      1
+    ],
+    [
+      "--score",
+      1
+    ],
+    [
+      "--muted-ink",
+      1
+    ],
+    [
+      "--tip-bg",
+      1
+    ],
+    [
+      "--tip-ink",
+      1
+    ],
+    [
+      "--primary-deep",
+      1
+    ],
+    [
+      "--glass-bg-strong",
+      1
+    ],
+    [
+      "--highlight-neutral-end",
+      1
+    ],
+    [
+      "--highlight-end",
+      1
+    ],
+    [
+      "--highlight-template-end",
+      1
+    ],
+    [
+      "--glass-bg-soft",
+      1
+    ],
+    [
+      "--progress",
+      1
+    ],
+    [
+      "--topbar-bg",
+      1
+    ]
+  ],
+  "hardcoded_counts": [
+    {
+      "category": "aviso-global",
+      "theme": "base/Alvorada",
+      "count": 42
+    },
+    {
+      "category": "botao",
+      "theme": "Vereda",
+      "count": 3
+    },
+    {
+      "category": "botao",
+      "theme": "base/Alvorada",
+      "count": 57
+    },
+    {
+      "category": "cor",
+      "theme": "Vereda",
+      "count": 32
+    },
+    {
+      "category": "cor",
+      "theme": "base/Alvorada",
+      "count": 44
+    },
+    {
+      "category": "espacamento",
+      "theme": "base/Alvorada",
+      "count": 299
+    },
+    {
+      "category": "estatistica",
+      "theme": "Vereda",
+      "count": 4
+    },
+    {
+      "category": "estatistica",
+      "theme": "base/Alvorada",
+      "count": 101
+    },
+    {
+      "category": "formulario",
+      "theme": "base/Alvorada",
+      "count": 76
+    },
+    {
+      "category": "tipografia",
+      "theme": "base/Alvorada",
+      "count": 356
+    }
+  ],
+  "samples": {
+    "cor:Vereda": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 577,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"]",
+        "property": "border-color",
+        "value": "#52b888",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 581,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label",
+        "property": "color",
+        "value": "#52b888",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 586,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"]",
+        "property": "border-color",
+        "value": "#6aade0",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 590,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label",
+        "property": "color",
+        "value": "#6aade0",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 595,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"]",
+        "property": "border-color",
+        "value": "#e0a04e",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 599,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label",
+        "property": "color",
+        "value": "#e0a04e",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 604,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"]",
+        "property": "border-color",
+        "value": "#c07cd8",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 608,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label",
+        "property": "color",
+        "value": "#c07cd8",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 613,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"]",
+        "property": "border-color",
+        "value": "#e07470",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 617,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label",
+        "property": "color",
+        "value": "#e07470",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 622,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"]",
+        "property": "border-color",
+        "value": "#d4a85c",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 626,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label",
+        "property": "color",
+        "value": "#d4a85c",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 631,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"]",
+        "property": "border-color",
+        "value": "#8ab858",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 635,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label",
+        "property": "color",
+        "value": "#8ab858",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 473,
+        "selector": "[data-theme=\"scriptorium\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"cerrado-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"mata-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"amazonia-dark\"] [data-grammar-btn][aria-pressed=\"true\"]",
+        "property": "color",
+        "value": "#c5bfff",
+        "category": "cor",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 164,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"]",
+        "property": "border-color",
+        "value": "#5ecf96",
+        "category": "cor",
+        "theme": "Vereda"
+      }
+    ],
+    "estatistica:Vereda": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 706,
+        "selector": "[data-theme=\"scriptorium\"] .voice-health-score.health-low,\n[data-theme=\"cerrado-dark\"] .voice-health-score.health-low,\n[data-theme=\"mata-dark\"] .voice-health-score.health-low,\n[data-theme=\"amazonia-dark\"] .voice-health-score.health-low",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--sienna) 18%, var(--surface))",
+        "category": "estatistica",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 707,
+        "selector": "[data-theme=\"scriptorium\"] .voice-health-score.health-low,\n[data-theme=\"cerrado-dark\"] .voice-health-score.health-low,\n[data-theme=\"mata-dark\"] .voice-health-score.health-low,\n[data-theme=\"amazonia-dark\"] .voice-health-score.health-low",
+        "property": "color",
+        "value": "color-mix(in srgb, var(--sienna) 55%, var(--ink))",
+        "category": "estatistica",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 53,
+        "selector": "[data-theme=\"scriptorium\"] .topbar,\n[data-theme=\"scriptorium\"] .statusbar",
+        "property": "background",
+        "value": "var(--topbar-bg)",
+        "category": "estatistica",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 54,
+        "selector": "[data-theme=\"scriptorium\"] .topbar,\n[data-theme=\"scriptorium\"] .statusbar",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "estatistica",
+        "theme": "Vereda"
+      }
+    ],
+    "espacamento:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1869,
+        "selector": ".inspector",
+        "property": "width",
+        "value": "330px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1874,
+        "selector": ".inspector",
+        "property": "padding",
+        "value": "28px 24px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1905,
+        "selector": ".inspector h2,\n.inspector h3",
+        "property": "margin",
+        "value": "0 0 16px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1952,
+        "selector": ".grammar-bar",
+        "property": "height",
+        "value": "12px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2019,
+        "selector": ".inspector-density",
+        "property": "margin",
+        "value": "6px 0 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2024,
+        "selector": ".inspector-voice-row",
+        "property": "gap",
+        "value": "7px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2030,
+        "selector": ".inspector-voice-gesture",
+        "property": "padding",
+        "value": "2px 8px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2045,
+        "selector": ".inspector-voice-hint",
+        "property": "margin",
+        "value": "4px 0 0",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 82,
+        "selector": ".precision-card",
+        "property": "padding",
+        "value": "14px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 90,
+        "selector": ".precision-top",
+        "property": "gap",
+        "value": "12px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 103,
+        "selector": ".precision-top-label",
+        "property": "gap",
+        "value": "4px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 129,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "top",
+        "value": "calc(100% + 8px)",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 137,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "padding",
+        "value": "8px 12px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 139,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "width",
+        "value": "220px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 153,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip::before",
+        "property": "left",
+        "value": "8px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 169,
+        "selector": ".precision-meter",
+        "property": "height",
+        "value": "7px",
+        "category": "espacamento",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "tipografia:base/Alvorada": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1910,
+        "selector": ".inspector h2",
+        "property": "font-size",
+        "value": "24px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1911,
+        "selector": ".inspector h2",
+        "property": "line-height",
+        "value": "1.3",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1916,
+        "selector": ".inspector h3",
+        "property": "font-size",
+        "value": "11px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1917,
+        "selector": ".inspector h3",
+        "property": "letter-spacing",
+        "value": "0.12em",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1918,
+        "selector": ".inspector h3",
+        "property": "letter-spacing",
+        "value": "0.04em",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2029,
+        "selector": ".inspector-voice-gesture",
+        "property": "font-weight",
+        "value": "700",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2038,
+        "selector": ".inspector-voice-label",
+        "property": "font-size",
+        "value": "11.5px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2040,
+        "selector": ".inspector-voice-label",
+        "property": "line-height",
+        "value": "1.4",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2043,
+        "selector": ".inspector-voice-hint",
+        "property": "font-size",
+        "value": "10px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 95,
+        "selector": ".precision-top span",
+        "property": "font-size",
+        "value": "11px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 96,
+        "selector": ".precision-top span",
+        "property": "font-weight",
+        "value": "800",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 97,
+        "selector": ".precision-top span",
+        "property": "text-transform",
+        "value": "uppercase",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 111,
+        "selector": ".precision-hint-anchor",
+        "property": "text-transform",
+        "value": "none",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 112,
+        "selector": ".precision-hint-anchor",
+        "property": "font-weight",
+        "value": "400",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 116,
+        "selector": ".precision-hint-anchor .material-symbols-outlined",
+        "property": "font-size",
+        "value": "13px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 134,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "font-size",
+        "value": "11.5px",
+        "category": "tipografia",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "cor:base/Alvorada": [
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 133,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "color",
+        "value": "#fff",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 146,
+        "selector": ".precision-hint-anchor .precision-hint-tooltip",
+        "property": "box-shadow",
+        "value": "0 4px 16px rgba(0,0,0,0.18)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 463,
+        "selector": "[data-grammar-btn][aria-pressed=\"true\"]",
+        "property": "background",
+        "value": "color-mix(in srgb, #8e44ad 12%, transparent)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 464,
+        "selector": "[data-grammar-btn][aria-pressed=\"true\"]",
+        "property": "border-color",
+        "value": "#8e44ad",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 465,
+        "selector": "[data-grammar-btn][aria-pressed=\"true\"]",
+        "property": "color",
+        "value": "#6c3483",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 577,
+        "selector": ".grammar-tooltip",
+        "property": "background",
+        "value": "#1a1a1a",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 578,
+        "selector": ".grammar-tooltip",
+        "property": "color",
+        "value": "#fff",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 589,
+        "selector": ".grammar-tooltip",
+        "property": "box-shadow",
+        "value": "0 10px 26px rgba(0, 0, 0, 0.18)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 65,
+        "selector": ".editor-paper",
+        "property": "box-shadow",
+        "value": "0 2px 8px rgba(80, 55, 20, 0.07)",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 146,
+        "selector": ".syntax-token[data-funcao=\"sujeito\"]",
+        "property": "border-color",
+        "value": "#2a7d52",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 147,
+        "selector": ".syntax-token[data-funcao=\"sujeito\"]     .syntax-token-label",
+        "property": "color",
+        "value": "#2a7d52",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 148,
+        "selector": ".syntax-token[data-funcao=\"verbo\"]",
+        "property": "border-color",
+        "value": "#1a5fa8",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 149,
+        "selector": ".syntax-token[data-funcao=\"verbo\"]       .syntax-token-label",
+        "property": "color",
+        "value": "#1a5fa8",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 150,
+        "selector": ".syntax-token[data-funcao=\"objeto\"]",
+        "property": "border-color",
+        "value": "#b06000",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 151,
+        "selector": ".syntax-token[data-funcao=\"objeto\"]      .syntax-token-label",
+        "property": "color",
+        "value": "#b06000",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 152,
+        "selector": ".syntax-token[data-funcao=\"adjunto\"]",
+        "property": "border-color",
+        "value": "#7a2d8a",
+        "category": "cor",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "formulario:base/Alvorada": [
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 252,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "flex",
+        "value": "0 0 18px",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 253,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "margin",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 254,
+        "selector": ".precision-check input[type=\"checkbox\"]",
+        "property": "accent-color",
+        "value": "var(--primary)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 191,
+        "selector": ".rimalab-editor textarea",
+        "property": "width",
+        "value": "100%",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 193,
+        "selector": ".rimalab-editor textarea",
+        "property": "border",
+        "value": "1px solid var(--line)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 194,
+        "selector": ".rimalab-editor textarea",
+        "property": "border-radius",
+        "value": "8px",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 195,
+        "selector": ".rimalab-editor textarea",
+        "property": "outline",
+        "value": "0",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 196,
+        "selector": ".rimalab-editor textarea",
+        "property": "resize",
+        "value": "vertical",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 197,
+        "selector": ".rimalab-editor textarea",
+        "property": "background",
+        "value": "var(--surface-low)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 198,
+        "selector": ".rimalab-editor textarea",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 200,
+        "selector": ".rimalab-editor textarea",
+        "property": "font",
+        "value": "15px/1.8 \"Noto Serif\", Georgia, serif",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 204,
+        "selector": ".rimalab-editor textarea:focus",
+        "property": "border-color",
+        "value": "var(--primary)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 205,
+        "selector": ".rimalab-editor textarea:focus",
+        "property": "background",
+        "value": "var(--card)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 299,
+        "selector": ".rimalab-finder-row input[type=\"search\"]",
+        "property": "border-radius",
+        "value": "6px",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 300,
+        "selector": ".rimalab-finder-row input[type=\"search\"]",
+        "property": "background",
+        "value": "var(--surface)",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 302,
+        "selector": ".rimalab-finder-row input[type=\"search\"]",
+        "property": "font",
+        "value": "inherit",
+        "category": "formulario",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "estatistica:base/Alvorada": [
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 515,
+        "selector": ".app-shell.is-focus .topbar,\n.app-shell.is-focus .sidebar,\n.app-shell.is-focus .panel-rail,\n.app-shell.is-focus .panel-toggle,\n.app-shell.is-focus .inspector,\n.app-shell.is-focus .template-reference,\n.app-shell.is-focus .editor-mode-bar,\n.app-shell.is-focus .format-bar,\n.app-shell.is-focus .statusbar",
+        "property": "display",
+        "value": "none",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 26,
+        "selector": ".voice-health-score",
+        "property": "margin-left",
+        "value": "auto",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 31,
+        "selector": ".voice-health-score",
+        "property": "border-radius",
+        "value": "20px",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 33,
+        "selector": ".voice-health-score",
+        "property": "flex-shrink",
+        "value": "0",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 34,
+        "selector": ".voice-health-score",
+        "property": "pointer-events",
+        "value": "none",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 34,
+        "selector": ".voice-health-score",
+        "property": "user-select",
+        "value": "none",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 39,
+        "selector": ".voice-health-score small",
+        "property": "opacity",
+        "value": "0.7",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 41,
+        "selector": ".voice-health-score.health-ok",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--sage) 20%, var(--surface))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 41,
+        "selector": ".voice-health-score.health-ok",
+        "property": "color",
+        "value": "color-mix(in srgb, var(--sage) 80%, var(--ink))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 43,
+        "selector": ".voice-health-score.health-low",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--sienna) 15%, var(--surface))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 43,
+        "selector": ".voice-health-score.health-low",
+        "property": "color",
+        "value": "color-mix(in srgb, var(--sienna) 85%, var(--ink))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 239,
+        "selector": ".rimalab-isometry.is-isometric",
+        "property": "border-color",
+        "value": "color-mix(in srgb, var(--primary) 46%, var(--line))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 240,
+        "selector": ".rimalab-isometry.is-isometric",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--primary) 10%, var(--card))",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 241,
+        "selector": ".rimalab-isometry.is-isometric",
+        "property": "transform",
+        "value": "translateY(-1px)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 341,
+        "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+        "property": "display",
+        "value": "grid",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 342,
+        "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+        "property": "grid-template-columns",
+        "value": "32px minmax(0, 1fr)",
+        "category": "estatistica",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "botao:base/Alvorada": [
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 86,
+        "selector": ".editor-delete-btn",
+        "property": "opacity",
+        "value": "0.22",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 87,
+        "selector": ".editor-delete-btn",
+        "property": "transition",
+        "value": "opacity 0.15s, color 0.15s",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 88,
+        "selector": ".editor-delete-btn",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 89,
+        "selector": ".editor-delete-btn",
+        "property": "margin-left",
+        "value": "auto",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 93,
+        "selector": ".editor-delete-btn:hover",
+        "property": "color",
+        "value": "var(--sienna)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 94,
+        "selector": ".editor-delete-btn:hover",
+        "property": "opacity",
+        "value": "1",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 95,
+        "selector": ".editor-delete-btn:hover",
+        "property": "background",
+        "value": "color-mix(in srgb, var(--sienna) 10%, transparent)",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 318,
+        "selector": ".precision-export-btn",
+        "property": "display",
+        "value": "flex",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 319,
+        "selector": ".precision-export-btn",
+        "property": "align-items",
+        "value": "center",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 322,
+        "selector": ".precision-export-btn",
+        "property": "color",
+        "value": "var(--muted-ink, var(--ink))",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 323,
+        "selector": ".precision-export-btn",
+        "property": "opacity",
+        "value": "0.6",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 324,
+        "selector": ".precision-export-btn",
+        "property": "margin-top",
+        "value": "8px",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 326,
+        "selector": ".precision-export-btn",
+        "property": "border",
+        "value": "none",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 327,
+        "selector": ".precision-export-btn",
+        "property": "background",
+        "value": "transparent",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 328,
+        "selector": ".precision-export-btn",
+        "property": "cursor",
+        "value": "pointer",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 329,
+        "selector": ".precision-export-btn",
+        "property": "border-radius",
+        "value": "4px",
+        "category": "botao",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "aviso-global:base/Alvorada": [
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 282,
+        "selector": ".syntax-summary-alerta .syntax-summary-label,\n.syntax-summary-alerta .syntax-summary-value",
+        "property": "color",
+        "value": "var(--sienna)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 44,
+        "selector": ".voice-alertas",
+        "property": "display",
+        "value": "flex",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 44,
+        "selector": ".voice-alertas",
+        "property": "flex-direction",
+        "value": "column",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 47,
+        "selector": ".voice-alerta",
+        "property": "align-items",
+        "value": "baseline",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 50,
+        "selector": ".voice-alerta",
+        "property": "border-bottom",
+        "value": "1px solid var(--line)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 52,
+        "selector": ".voice-alerta",
+        "property": "color",
+        "value": "var(--soft-ink)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 55,
+        "selector": ".voice-alerta:last-child",
+        "property": "border-bottom",
+        "value": "none",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 56,
+        "selector": ".voice-alerta-alto",
+        "property": "border-left",
+        "value": "3px solid var(--sienna)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 57,
+        "selector": ".voice-alerta-moderado",
+        "property": "border-left",
+        "value": "3px solid var(--ochre)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 63,
+        "selector": ".voice-alerta-dim",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 64,
+        "selector": ".voice-alerta-dim",
+        "property": "white-space",
+        "value": "nowrap",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 65,
+        "selector": ".voice-alerta-dim",
+        "property": "flex-shrink",
+        "value": "0",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 68,
+        "selector": ".voice-alerta-body",
+        "property": "flex",
+        "value": "1",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 70,
+        "selector": ".voice-alerta-fonte",
+        "property": "display",
+        "value": "block",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 73,
+        "selector": ".voice-alerta-fonte",
+        "property": "margin-top",
+        "value": "2px",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 79,
+        "selector": ".voice-alerta-acao",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "aviso-global",
+        "theme": "base/Alvorada"
+      }
+    ],
+    "botao:Vereda": [
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 62,
+        "selector": "[data-theme=\"scriptorium\"] .brand-lockup strong,\n[data-theme=\"scriptorium\"] .tab.is-active,\n[data-theme=\"scriptorium\"] .view h1,\n[data-theme=\"scriptorium\"] .view h2,\n[data-theme=\"scriptorium\"] .view h3",
+        "property": "color",
+        "value": "var(--ink)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 70,
+        "selector": "[data-theme=\"scriptorium\"] .topbar-actions .icon-button,\n[data-theme=\"scriptorium\"] .topbar-actions .offline-badge,\n[data-theme=\"scriptorium\"] .topbar-actions .install-button,\n[data-theme=\"scriptorium\"] .topbar-actions .theme-button,\n[data-theme=\"scriptorium\"] .tab",
+        "property": "color",
+        "value": "var(--muted)",
+        "category": "botao",
+        "theme": "Vereda"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 74,
+        "selector": "[data-theme=\"scriptorium\"] .tab:hover",
+        "property": "color",
+        "value": "var(--soft-ink)",
+        "category": "botao",
+        "theme": "Vereda"
+      }
+    ]
+  },
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 462,
+        "selector": "[data-grammar-btn][aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 469,
+        "selector": "[data-theme=\"scriptorium\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"cerrado-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"mata-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"amazonia-dark\"] [data-grammar-btn][aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 85,
+        "selector": ".editor-delete-btn"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 92,
+        "selector": ".editor-delete-btn:hover"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 317,
+        "selector": ".precision-export-btn"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 333,
+        "selector": ".precision-export-btn:hover"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 337,
+        "selector": ".precision-export-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1580,
+        "selector": ".template-nav .secondary-button"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1914,
+        "selector": ".project-actions button[data-archive-quick=\"open\"]"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1923,
+        "selector": ".project-actions button"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1938,
+        "selector": ".project-actions button:hover"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1978,
+        "selector": ".project-export-options button"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1992,
+        "selector": ".project-export-options button:hover"
+      },
+      {
+        "file": "css/09-print.css",
+        "line": 7,
+        "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 57,
+        "selector": "[data-theme=\"scriptorium\"] .brand-lockup strong,\n[data-theme=\"scriptorium\"] .tab.is-active,\n[data-theme=\"scriptorium\"] .view h1,\n[data-theme=\"scriptorium\"] .view h2,\n[data-theme=\"scriptorium\"] .view h3"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 65,
+        "selector": "[data-theme=\"scriptorium\"] .topbar-actions .icon-button,\n[data-theme=\"scriptorium\"] .topbar-actions .offline-badge,\n[data-theme=\"scriptorium\"] .topbar-actions .install-button,\n[data-theme=\"scriptorium\"] .topbar-actions .theme-button,\n[data-theme=\"scriptorium\"] .tab"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 73,
+        "selector": "[data-theme=\"scriptorium\"] .tab:hover"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 140,
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-open-btn"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 197,
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-export-actions .ghost-button"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 208,
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-export-actions .ghost-button:hover"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 232,
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-open-btn"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 702,
+        "selector": "[data-theme=\"scriptorium\"] .voice-health-score.health-low,\n[data-theme=\"cerrado-dark\"] .voice-health-score.health-low,\n[data-theme=\"mata-dark\"] .voice-health-score.health-low,\n[data-theme=\"amazonia-dark\"] .voice-health-score.health-low"
+      },
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 506,
+        "selector": ".app-shell.is-focus .topbar,\n.app-shell.is-focus .sidebar,\n.app-shell.is-focus .panel-rail,\n.app-shell.is-focus .panel-toggle,\n.app-shell.is-focus .inspector,\n.app-shell.is-focus .template-reference,\n.app-shell.is-focus .editor-mode-bar,\n.app-shell.is-focus .format-bar,\n.app-shell.is-focus .statusbar"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 25,
+        "selector": ".voice-health-score"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 36,
+        "selector": ".voice-health-score small"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 41,
+        "selector": ".voice-health-score.health-ok"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 42,
+        "selector": ".voice-health-score.health-mid"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 43,
+        "selector": ".voice-health-score.health-low"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 238,
+        "selector": ".rimalab-isometry.is-isometric"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 339,
+        "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 349,
+        "selector": ".rimalab-metric-row:first-child,\n.rimalab-rhyme-row:first-child"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 355,
+        "selector": ".rimalab-metric-row > strong"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 366,
+        "selector": ".rimalab-metric-row b,\n.rimalab-rhyme-row b"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 373,
+        "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 394,
+        "selector": ".rimalab-rhyme-badge"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 408,
+        "selector": ".rimalab-rhyme-badge.is-rica,\n.rimalab-rhyme-badge.is-preciosa"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 414,
+        "selector": ".rimalab-rhyme-badge.is-pobre"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 419,
+        "selector": ".rimalab-rhyme-badge.is-toante"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 730,
+        "selector": ".decolonial-count"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1117,
+        "selector": ".rights-count"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1297,
+        "selector": ".template-search-count"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1506,
+        "selector": ".template-check-item[data-status=\"done\"] .template-check-icon"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1512,
+        "selector": ".template-check-item[data-status=\"info\"] .template-check-icon"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1518,
+        "selector": ".template-check-item[data-status=\"warn\"] .template-check-icon"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1637,
+        "selector": ".progress-label-group"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1642,
+        "selector": ".progress-hint"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1649,
+        "selector": ".progress-row"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1654,
+        "selector": ".progress-row input[type=\"range\"]"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1712,
+        "selector": ".progress-readout"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1819,
+        "selector": ".filesystem-backup-inline-status"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1889,
+        "selector": ".project-editor-badge"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/03-editor-layout.css",
+        "line": 249,
+        "selector": ".precision-check input[type=\"checkbox\"]"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 190,
+        "selector": ".rimalab-editor textarea"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 203,
+        "selector": ".rimalab-editor textarea:focus"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 297,
+        "selector": ".rimalab-finder-row input[type=\"search\"]"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 309,
+        "selector": ".rimalab-finder-row input:focus"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 546,
+        "selector": ".decolonial-toggle-card input"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 674,
+        "selector": ".decolonial-search input"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 922,
+        "selector": ".rights-search input"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 952,
+        "selector": ".rights-calc-input"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 962,
+        "selector": ".rights-calc-input:focus"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1270,
+        "selector": ".template-search input"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1279,
+        "selector": ".template-search input::placeholder"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1675,
+        "selector": ".metadata-form"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1681,
+        "selector": ".metadata-form label"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1689,
+        "selector": ".metadata-form input,\n.metadata-form select,\n.metadata-form textarea"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1701,
+        "selector": ".metadata-form textarea"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1705,
+        "selector": ".metadata-form input:focus,\n.metadata-form select:focus,\n.metadata-form textarea:focus"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 1752,
+        "selector": ".project-card.is-selected"
+      },
+      {
+        "file": "css/05-archive.css",
+        "line": 804,
+        "selector": ".voice-mirror textarea"
+      },
+      {
+        "file": "css/05-archive.css",
+        "line": 817,
+        "selector": ".voice-mirror textarea:focus"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 347,
+        "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 186,
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .metadata-form"
+      }
+    ],
+    "aviso-global": [
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 281,
+        "selector": ".syntax-summary-alerta .syntax-summary-label,\n.syntax-summary-alerta .syntax-summary-value"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 44,
+        "selector": ".voice-alertas"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 45,
+        "selector": ".voice-alerta"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 55,
+        "selector": ".voice-alerta:last-child"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 56,
+        "selector": ".voice-alerta-alto"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 57,
+        "selector": ".voice-alerta-moderado"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 58,
+        "selector": ".voice-alerta-dim"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 68,
+        "selector": ".voice-alerta-body"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 69,
+        "selector": ".voice-alerta-fonte"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 76,
+        "selector": ".voice-alerta-acao"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 612,
+        "selector": ".decolonial-alert,\n.decolonial-observer-empty"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 620,
+        "selector": ".decolonial-alert-header"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 627,
+        "selector": ".decolonial-alert-header strong"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 634,
+        "selector": ".decolonial-alert-header span"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 645,
+        "selector": ".decolonial-alert.is-contextual"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 649,
+        "selector": ".decolonial-alert p"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 656,
+        "selector": ".decolonial-alert small,\n.decolonial-observer-empty"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 69,
+        "selector": ".academy-banner h2,\n  .template-copy h2,\n  .rights-copy h2"
+      }
+    ]
+  },
+  "responsive": {
+    "count": 17,
+    "samples": [
+      {
+        "file": "css/08-responsive.css",
+        "line": 39,
+        "media": "(max-width: 480px)",
+        "selector": ".archive-security-details,\n  .academy-view > *,\n  .cronograma-wrap,\n  .voice-tool,\n  .rimalab-tool,\n  .decolonial-tool,\n  .rights-lab,\n  [data-view-panel=\"autoria\"] > *,\n  .certificate-paper,\n  .proof-session,\n  .proof-actions,\n  .version-panel"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 69,
+        "media": "(max-width: 390px)",
+        "selector": ".academy-banner h2,\n  .template-copy h2,\n  .rights-copy h2"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 305,
+        "media": "(max-width: 820px)",
+        "selector": ".app-shell:not(.is-right-expanded) .inspector"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 310,
+        "media": "(max-width: 820px)",
+        "selector": ".archive-layout,\n  .voice-metrics,\n  .academy-paths"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 334,
+        "media": "(max-width: 820px)",
+        "selector": ".rimalab-tool,\n  .rimalab-workbench,\n  .voice-mirror,\n  .decolonial-tool,\n  .rights-lab"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 342,
+        "media": "(max-width: 820px)",
+        "selector": ".rights-cards"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 347,
+        "media": "(max-width: 820px)",
+        "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 359,
+        "media": "(max-width: 820px)",
+        "selector": ".voice-mirror"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 364,
+        "media": "(max-width: 820px)",
+        "selector": ".voice-mirror-copy h2"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 370,
+        "media": "(max-width: 820px)",
+        "selector": ".voice-mirror-copy p:not(.eyebrow),\n  .voice-actions"
+      },
+      {
+        "file": "css/09-print.css",
+        "line": 7,
+        "media": "print",
+        "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 219,
+        "media": "(max-width: 820px)",
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-detail-panel"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 228,
+        "media": "(max-width: 820px)",
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-note-title"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 232,
+        "media": "(max-width: 820px)",
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-open-btn"
+      },
+      {
+        "file": "css/14-archive-inspector.css",
+        "line": 238,
+        "media": "(max-width: 420px)",
+        "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-export-actions"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 136,
+        "media": "(min-width: 821px)",
+        "selector": "html body .app-shell[data-view=\"academia\"] #at-voice:checked ~ .academy-tools-tabs label[for=\"at-voice\"],\n  html body .app-shell[data-view=\"academia\"] #at-rimalab:checked ~ .academy-tools-tabs label[for=\"at-rimalab\"],\n  html body .app-shell[data-view=\"academia\"] #at-vocab:checked ~ .academy-tools-tabs label[for=\"at-vocab\"],\n  html body .app-shell[data-view=\"academia\"] #at-biblioteca:checked ~ .academy-tools-tabs label[for=\"at-biblioteca\"],\n  html body .app-shell[data-view=\"academia\"] #at-treino:checked ~ .academy-tools-tabs label[for=\"at-treino\"]"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 164,
+        "media": "(min-width: 821px)",
+        "selector": "html body .app-shell[data-view=\"academia\"] .voice-mirror,\n  html body .app-shell[data-view=\"academia\"] .rimalab-shell,\n  html body .app-shell[data-view=\"academia\"] .vocab-shell,\n  html body .app-shell[data-view=\"academia\"] .academy-library,\n  html body .app-shell[data-view=\"academia\"] .training-shell"
+      }
+    ]
+  },
+  "vereda": {
+    "count": 35,
+    "samples": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 574,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 578,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 583,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 587,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 592,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 596,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 601,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 605,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 610,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 614,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 619,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 623,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 628,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"]"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 632,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 702,
+        "selector": "[data-theme=\"scriptorium\"] .voice-health-score.health-low,\n[data-theme=\"cerrado-dark\"] .voice-health-score.health-low,\n[data-theme=\"mata-dark\"] .voice-health-score.health-low,\n[data-theme=\"amazonia-dark\"] .voice-health-score.health-low"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 469,
+        "selector": "[data-theme=\"scriptorium\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"cerrado-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"mata-dark\"] [data-grammar-btn][aria-pressed=\"true\"],\n[data-theme=\"amazonia-dark\"] [data-grammar-btn][aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 161,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 165,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"sujeito\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 170,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 174,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"verbo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 179,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 183,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"objeto\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 188,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 192,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"adjunto\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 197,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 201,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"predicativo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 206,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 210,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"vocativo\"] .syntax-token-label"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 215,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"],\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"]"
+      },
+      {
+        "file": "css/03-inspector-precision.css",
+        "line": 219,
+        "selector": "[data-theme=\"scriptorium\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"cerrado-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"mata-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label,\n[data-theme=\"amazonia-dark\"] .syntax-token[data-funcao=\"aposto\"] .syntax-token-label"
+      }
+    ]
+  },
+  "html": {
+    "line_matches": [
+      {
+        "line": 84,
+        "text": "<link rel=\"stylesheet\" href=\"css/03-inspector-precision.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 89,
+        "text": "<link rel=\"stylesheet\" href=\"css/04-analysis-academy.css?v=20260726-lexical-hint-v1\">"
+      },
+      {
+        "line": 252,
+        "text": "<div class=\"precision-card\" data-precision-card></div>"
+      },
+      {
+        "line": 350,
+        "text": "<button class=\"fmt-btn fmt-btn-labeled\" data-action=\"toggle-grammar-color\" data-grammar-btn aria-pressed=\"false\" title=\"Colorir por classe gramatical\" aria-label=\"Classes gramaticais\">"
+      },
+      {
+        "line": 890,
+        "text": "<p>Redação para vestibular — confira o <label for=\"at-voice\" class=\"link-inline\">Espelho de Voz</label> ou abra o guia ENEM no editor.</p>"
+      },
+      {
+        "line": 907,
+        "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-voice\" class=\"at-radio\" hidden checked>"
+      },
+      {
+        "line": 914,
+        "text": "<label for=\"at-voice\" class=\"academy-tool-tab\">"
+      },
+      {
+        "line": 937,
+        "text": "<div class=\"academy-tool-panel at-panel-voice\">"
+      },
+      {
+        "line": 938,
+        "text": "<div class=\"voice-mirror\" aria-label=\"Espelho de Voz\">"
+      },
+      {
+        "line": 939,
+        "text": "<div class=\"voice-mirror-copy\">"
+      },
+      {
+        "line": 943,
+        "text": "<div class=\"voice-actions\">"
+      },
+      {
+        "line": 944,
+        "text": "<button class=\"primary-button\" data-action=\"voice-analyze\">"
+      },
+      {
+        "line": 950,
+        "text": "<div class=\"voice-mirror-workbench\">"
+      },
+      {
+        "line": 951,
+        "text": "<button class=\"secondary-button voice-use-active-shortcut\" data-action=\"voice-use-active\">"
+      },
+      {
+        "line": 955,
+        "text": "<textarea data-voice-input placeholder=\"Cole aqui um capítulo, cena ou trecho do seu romance ou conto. Acima de 500 palavras a leitura fica mais estável.\" aria-label=\"Texto para o Espelho de Voz\"></textarea>"
+      },
+      {
+        "line": 956,
+        "text": "<div class=\"voice-meta\">"
+      },
+      {
+        "line": 957,
+        "text": "<span data-voice-count>0 palavras</span>"
+      },
+      {
+        "line": 959,
+        "text": "<button class=\"ghost-button voice-export-btn\" data-action=\"export-voice-mirror\" title=\"Baixar análise em TXT\" aria-label=\"Baixar análise em TXT\">"
+      },
+      {
+        "line": 963,
+        "text": "<button class=\"ghost-button voice-export-btn\" data-action=\"export-analise\" title=\"Baixar análise geral do manuscrito em TXT\" aria-label=\"Baixar análise geral em TXT\">"
+      },
+      {
+        "line": 967,
+        "text": "<button class=\"ghost-button voice-export-btn\" data-action=\"copy-voice-result\" title=\"Copiar resultado do Espelho de Voz\" aria-label=\"Copiar resultado em texto\">"
+      },
+      {
+        "line": 972,
+        "text": "<div class=\"voice-result\" data-voice-result>"
+      },
+      {
+        "line": 1049,
+        "text": "<div class=\"decolonial-tool\" aria-label=\"Vocabulário Decolonizador\">"
+      },
+      {
+        "line": 1050,
+        "text": "<div class=\"decolonial-copy\">"
+      },
+      {
+        "line": 1054,
+        "text": "<label class=\"decolonial-toggle-card\">"
+      },
+      {
+        "line": 1055,
+        "text": "<input type=\"checkbox\" data-decolonial-observer-toggle>"
+      },
+      {
+        "line": 1062,
+        "text": "<div class=\"decolonial-workbench\">"
+      },
+      {
+        "line": 1063,
+        "text": "<div class=\"decolonial-observer\" data-decolonial-observer hidden>"
+      },
+      {
+        "line": 1064,
+        "text": "<div class=\"decolonial-observer-summary\">"
+      },
+      {
+        "line": 1065,
+        "text": "<strong data-decolonial-observer-summary>Observador pronto.</strong>"
+      },
+      {
+        "line": 1067,
+        "text": "<button class=\"ghost-button\" data-action=\"export-decolonial\" title=\"Exportar termos detectados em TXT\" aria-label=\"Exportar detecção em TXT\">"
+      },
+      {
+        "line": 1072,
+        "text": "<div class=\"decolonial-observer-list\" data-decolonial-observer-list></div>"
+      },
+      {
+        "line": 1074,
+        "text": "<label class=\"decolonial-search\">"
+      },
+      {
+        "line": 1076,
+        "text": "<input type=\"search\" data-decolonial-search placeholder=\"Buscar termo, alternativa ou motivo\" aria-label=\"Buscar no vocabulário decolonizador\">"
+      },
+      {
+        "line": 1078,
+        "text": "<div class=\"decolonial-filters\" data-decolonial-filters aria-label=\"Categorias do vocabulário decolonizador\"></div>"
+      },
+      {
+        "line": 1079,
+        "text": "<div class=\"decolonial-count\" data-decolonial-count></div>"
+      },
+      {
+        "line": 1080,
+        "text": "<div class=\"decolonial-list\" data-decolonial-list></div>"
+      },
+      {
+        "line": 1233,
+        "text": "<section class=\"rights-lab\" aria-label=\"Direitos do Autor\" data-rights-lab data-atelier-section=\"publicar\">"
+      },
+      {
+        "line": 1234,
+        "text": "<div class=\"rights-copy\">"
+      },
+      {
+        "line": 1238,
+        "text": "<div class=\"rights-disclaimer\">"
+      },
+      {
+        "line": 1242,
+        "text": "<label class=\"rights-search\">"
+      },
+      {
+        "line": 1244,
+        "text": "<input type=\"search\" data-rights-search placeholder=\"Buscar contrato, ISBN, plágio, coautoria...\" aria-label=\"Buscar em Direitos do Autor\">"
+      },
+      {
+        "line": 1245,
+        "text": "<button type=\"button\" class=\"rights-search-clear\" data-rights-search-clear aria-label=\"Limpar busca\" hidden>"
+      },
+      {
+        "line": 1250,
+        "text": "<div class=\"rights-calc-strip\">"
+      },
+      {
+        "line": 1251,
+        "text": "<label class=\"rights-calc-label\" for=\"rights-death-year\">Domínio público: ano de morte do autor</label>"
+      },
+      {
+        "line": 1252,
+        "text": "<div class=\"rights-calc-row\">"
+      },
+      {
+        "line": 1253,
+        "text": "<input type=\"number\" id=\"rights-death-year\" data-rights-death-year class=\"rights-calc-input\" min=\"1400\" max=\"2025\" placeholder=\"ex.: 1955\" aria-label=\"Ano de falecimento do autor\">"
+      },
+      {
+        "line": 1254,
+        "text": "<span data-rights-calc-result class=\"rights-calc-result\" aria-live=\"polite\"></span>"
+      },
+      {
+        "line": 1257,
+        "text": "<div class=\"rights-workbench\">"
+      },
+      {
+        "line": 1258,
+        "text": "<div class=\"rights-cards\" data-rights-cards></div>"
+      },
+      {
+        "line": 1259,
+        "text": "<div class=\"rights-sources\">"
+      },
+      {
+        "line": 1261,
+        "text": "<div data-rights-sources></div>"
+      },
+      {
+        "line": 1313,
+        "text": "<article class=\"academy-path is-rights\">"
+      },
+      {
+        "line": 1326,
+        "text": "<button class=\"secondary-button\" data-action=\"scroll-rights\">"
+      },
+      {
+        "line": 1386,
+        "text": "<aside class=\"inspector\">"
+      },
+      {
+        "line": 1387,
+        "text": "<button class=\"panel-toggle panel-toggle-right\" data-action=\"toggle-right-panel\" aria-label=\"Ocultar análise linguística\" title=\"Ocultar análise linguística\">"
+      },
+      {
+        "line": 1390,
+        "text": "<div data-linguistic-panel>"
+      },
+      {
+        "line": 1391,
+        "text": "<div class=\"inspector-section\">"
+      },
+      {
+        "line": 1399,
+        "text": "<div class=\"inspector-section\">"
+      },
+      {
+        "line": 1404,
+        "text": "<div class=\"inspector-section\">"
+      },
+      {
+        "line": 1406,
+        "text": "<div class=\"grammar-bar\" data-grammar-bar aria-label=\"Distribuição gramatical\"></div>"
+      },
+      {
+        "line": 1407,
+        "text": "<ul class=\"legend\" data-grammar-legend></ul>"
+      },
+      {
+        "line": 1410,
+        "text": "<div class=\"inspector-section readability\">"
+      },
+      {
+        "line": 1416,
+        "text": "<p class=\"inspector-density\" data-lexical-density hidden></p>"
+      },
+      {
+        "line": 1419,
+        "text": "<div class=\"inspector-section inspector-voice-profile\" data-voice-profile-section hidden>"
+      },
+      {
+        "line": 1421,
+        "text": "<div class=\"inspector-voice-row\">"
+      },
+      {
+        "line": 1422,
+        "text": "<span class=\"inspector-voice-gesture\" data-voice-profile-gesture></span>"
+      },
+      {
+        "line": 1423,
+        "text": "<span class=\"inspector-voice-label\" data-voice-profile-title></span>"
+      },
+      {
+        "line": 1425,
+        "text": "<p class=\"inspector-voice-hint\" data-voice-profile-hint></p>"
+      },
+      {
+        "line": 1429,
+        "text": "<div class=\"syntax-panel\" data-syntax-panel hidden>"
+      },
+      {
+        "line": 1430,
+        "text": "<div class=\"inspector-section\">"
+      },
+      {
+        "line": 1431,
+        "text": "<p class=\"syntax-panel-hint\">Análise da frase selecionada</p>"
+      },
+      {
+        "line": 1432,
+        "text": "<div class=\"syntax-tokens\" data-syntax-tokens></div>"
+      },
+      {
+        "line": 1434,
+        "text": "<div class=\"syntax-summary\" data-syntax-summary></div>"
+      },
+      {
+        "line": 1437,
+        "text": "<button class=\"panel-rail panel-rail-right\" data-action=\"toggle-right-panel\" aria-label=\"Abrir análise linguística\" title=\"Abrir análise linguística\">"
+      },
+      {
+        "line": 1605,
+        "text": "<script src=\"precision-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1607,
+        "text": "<script src=\"syntax-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1610,
+        "text": "<script src=\"voice-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1612,
+        "text": "<script src=\"decolonial-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1613,
+        "text": "<script src=\"rights-engine.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1629,
+        "text": "<script src=\"grammar-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1634,
+        "text": "<script src=\"syntax-controller.js?v=20260726-lexical-hint-v1\" defer></script>"
+      },
+      {
+        "line": 1846,
+        "text": "<div id=\"grammar-tooltip\" class=\"grammar-tooltip\" hidden aria-hidden=\"true\"></div>"
+      }
+    ],
+    "key_elements": [
+      {
+        "tag": "div",
+        "line": 252,
+        "id": null,
+        "class": [
+          "precision-card"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-precision-card": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "button",
+        "line": 350,
+        "id": null,
+        "class": [
+          "fmt-btn",
+          "fmt-btn-labeled"
+        ],
+        "role": null,
+        "aria_label": "Classes gramaticais",
+        "data": {
+          "data-action": "toggle-grammar-color",
+          "data-grammar-btn": ""
+        },
+        "text": "format_color_text Classes"
+      },
+      {
+        "tag": "input",
+        "line": 907,
+        "id": "at-voice",
+        "class": [
+          "at-radio"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": ""
+      },
+      {
+        "tag": "label",
+        "line": 914,
+        "id": null,
+        "class": [
+          "academy-tool-tab"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "psychology Espelho de Voz"
+      },
+      {
+        "tag": "div",
+        "line": 937,
+        "id": null,
+        "class": [
+          "academy-tool-panel",
+          "at-panel-voice"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença. psychology Analisar voz edit_note Usar o te"
+      },
+      {
+        "tag": "button",
+        "line": 944,
+        "id": null,
+        "class": [
+          "primary-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "voice-analyze"
+        },
+        "text": "psychology Analisar voz"
+      },
+      {
+        "tag": "button",
+        "line": 951,
+        "id": null,
+        "class": [
+          "secondary-button",
+          "voice-use-active-shortcut"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "voice-use-active"
+        },
+        "text": "edit_note Usar o texto em edição"
+      },
+      {
+        "tag": "button",
+        "line": 959,
+        "id": null,
+        "class": [
+          "ghost-button",
+          "voice-export-btn"
+        ],
+        "role": null,
+        "aria_label": "Baixar análise em TXT",
+        "data": {
+          "data-action": "export-voice-mirror"
+        },
+        "text": "download Baixar TXT"
+      },
+      {
+        "tag": "button",
+        "line": 963,
+        "id": null,
+        "class": [
+          "ghost-button",
+          "voice-export-btn"
+        ],
+        "role": null,
+        "aria_label": "Baixar análise geral em TXT",
+        "data": {
+          "data-action": "export-analise"
+        },
+        "text": "analytics Análise do manuscrito"
+      },
+      {
+        "tag": "button",
+        "line": 967,
+        "id": null,
+        "class": [
+          "ghost-button",
+          "voice-export-btn"
+        ],
+        "role": null,
+        "aria_label": "Copiar resultado em texto",
+        "data": {
+          "data-action": "copy-voice-result"
+        },
+        "text": "content_copy Copiar resultado"
+      },
+      {
+        "tag": "div",
+        "line": 972,
+        "id": null,
+        "class": [
+          "voice-result"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-result": ""
+        },
+        "text": "O espelho ainda está vazio. Traga texto suficiente para que a voz deixe marcas."
+      },
+      {
+        "tag": "div",
+        "line": 1049,
+        "id": null,
+        "class": [
+          "decolonial-tool"
+        ],
+        "role": null,
+        "aria_label": "Vocabulário Decolonizador",
+        "data": {},
+        "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+      },
+      {
+        "tag": "div",
+        "line": 1063,
+        "id": null,
+        "class": [
+          "decolonial-observer"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-decolonial-observer": ""
+        },
+        "text": "Observador pronto. Nada sai do navegador. Revise contexto, narrador e intenção antes de trocar uma palavra. download Baixar TXT"
+      },
+      {
+        "tag": "button",
+        "line": 1067,
+        "id": null,
+        "class": [
+          "ghost-button"
+        ],
+        "role": null,
+        "aria_label": "Exportar detecção em TXT",
+        "data": {
+          "data-action": "export-decolonial"
+        },
+        "text": "download Baixar TXT"
+      },
+      {
+        "tag": "div",
+        "line": 1072,
+        "id": null,
+        "class": [
+          "decolonial-observer-list"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-decolonial-observer-list": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1078,
+        "id": null,
+        "class": [
+          "decolonial-filters"
+        ],
+        "role": null,
+        "aria_label": "Categorias do vocabulário decolonizador",
+        "data": {
+          "data-decolonial-filters": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1079,
+        "id": null,
+        "class": [
+          "decolonial-count"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-decolonial-count": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1080,
+        "id": null,
+        "class": [
+          "decolonial-list"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-decolonial-list": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "section",
+        "line": 1233,
+        "id": null,
+        "class": [
+          "rights-lab"
+        ],
+        "role": null,
+        "aria_label": "Direitos do Autor",
+        "data": {
+          "data-rights-lab": "",
+          "data-atelier-section": "publicar"
+        },
+        "text": "Direitos do Autor Um mapa para não entrar no mercado no escuro Direito autoral muda de detalhe, mas algumas perguntas envelhecem bem: o que criei, o que enviei, o que assinei, o que provei e qual órgão preciso consultar agora. info O Escrev"
+      },
+      {
+        "tag": "button",
+        "line": 1245,
+        "id": null,
+        "class": [
+          "rights-search-clear"
+        ],
+        "role": null,
+        "aria_label": "Limpar busca",
+        "data": {
+          "data-rights-search-clear": ""
+        },
+        "text": "close"
+      },
+      {
+        "tag": "input",
+        "line": 1253,
+        "id": "rights-death-year",
+        "class": [
+          "rights-calc-input"
+        ],
+        "role": null,
+        "aria_label": "Ano de falecimento do autor",
+        "data": {
+          "data-rights-death-year": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "span",
+        "line": 1254,
+        "id": null,
+        "class": [
+          "rights-calc-result"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-rights-calc-result": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1258,
+        "id": null,
+        "class": [
+          "rights-cards"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-rights-cards": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "article",
+        "line": 1313,
+        "id": null,
+        "class": [
+          "academy-path",
+          "is-rights"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "03 gavel Cuidados com autoria Saiba quando guardar prova, fonte e contrato Orientação prática sobre autoria, submissão, registro, coautoria, contrato, autoedição e IA. O Escrevaral mostra o mapa; a decisão final pede fonte oficial atualizad"
+      },
+      {
+        "tag": "button",
+        "line": 1326,
+        "id": null,
+        "class": [
+          "secondary-button"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-action": "scroll-rights"
+        },
+        "text": "policy Ver cuidados"
+      },
+      {
+        "tag": "button",
+        "line": 1387,
+        "id": null,
+        "class": [
+          "panel-toggle",
+          "panel-toggle-right"
+        ],
+        "role": null,
+        "aria_label": "Ocultar análise linguística",
+        "data": {
+          "data-action": "toggle-right-panel"
+        },
+        "text": "right_panel_close"
+      },
+      {
+        "tag": "div",
+        "line": 1406,
+        "id": null,
+        "class": [
+          "grammar-bar"
+        ],
+        "role": null,
+        "aria_label": "Distribuição gramatical",
+        "data": {
+          "data-grammar-bar": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "p",
+        "line": 1416,
+        "id": null,
+        "class": [
+          "inspector-density"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-lexical-density": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1419,
+        "id": null,
+        "class": [
+          "inspector-section",
+          "inspector-voice-profile"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-profile-section": ""
+        },
+        "text": "Voz do texto"
+      },
+      {
+        "tag": "span",
+        "line": 1422,
+        "id": null,
+        "class": [
+          "inspector-voice-gesture"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-profile-gesture": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "span",
+        "line": 1423,
+        "id": null,
+        "class": [
+          "inspector-voice-label"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-profile-title": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "p",
+        "line": 1425,
+        "id": null,
+        "class": [
+          "inspector-voice-hint"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-voice-profile-hint": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1429,
+        "id": null,
+        "class": [
+          "syntax-panel"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-syntax-panel": ""
+        },
+        "text": "Análise da frase selecionada"
+      },
+      {
+        "tag": "p",
+        "line": 1431,
+        "id": null,
+        "class": [
+          "syntax-panel-hint"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Análise da frase selecionada"
+      },
+      {
+        "tag": "div",
+        "line": 1432,
+        "id": null,
+        "class": [
+          "syntax-tokens"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-syntax-tokens": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1434,
+        "id": null,
+        "class": [
+          "syntax-summary"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {
+          "data-syntax-summary": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "button",
+        "line": 1437,
+        "id": null,
+        "class": [
+          "panel-rail",
+          "panel-rail-right"
+        ],
+        "role": null,
+        "aria_label": "Abrir análise linguística",
+        "data": {
+          "data-action": "toggle-right-panel"
+        },
+        "text": "right_panel_open"
+      },
+      {
+        "tag": "div",
+        "line": 1846,
+        "id": "grammar-tooltip",
+        "class": [
+          "grammar-tooltip"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": ""
+      }
+    ]
+  },
+  "javascript": {
+    "file_hit_counts": {
+      "academia-controller.js": 172,
+      "analise-engine.js": 13,
+      "app.js": 53,
+      "archive-controller.js": 3,
+      "backup-controller.js": 2,
+      "decolonial-engine.js": 3,
+      "editor-controller.js": 91,
+      "export-engine.js": 1,
+      "grammar-controller.js": 56,
+      "js/data/criterios-data.js": 8,
+      "js/data/quotes-data.js": 3,
+      "js/data/synonym-data.js": 12,
+      "lexical-engine.js": 30,
+      "precision-engine.js": 4,
+      "print-engine.js": 1,
+      "punctuation-engine.js": 17,
+      "rights-engine.js": 2,
+      "rimalab-engine.js": 23,
+      "service-worker.js": 12,
+      "state-store.js": 23,
+      "syntax-controller.js": 68,
+      "syntax-engine.js": 6,
+      "typewriter-engine.js": 2,
+      "voice-engine.js": 13
+    },
+    "selectors": [
+      [
+        ".decolonial-alt-copy",
+        1
+      ],
+      [
+        "[data-decolonial-category]",
+        1
+      ],
+      [
+        "[data-grammar-bar]",
+        1
+      ],
+      [
+        "[data-grammar-legend]",
+        1
+      ],
+      [
+        "[data-voice-profile-section]",
+        1
+      ],
+      [
+        "[data-voice-profile-gesture]",
+        1
+      ],
+      [
+        "[data-voice-profile-title]",
+        1
+      ],
+      [
+        "[data-voice-profile-hint]",
+        1
+      ],
+      [
+        "[data-grammar-btn]",
+        1
+      ],
+      [
+        ".syntax-token, [data-grammar-mark], .grammar-mark, .proof-chip, script, style",
+        1
+      ],
+      [
+        "[data-precision-card]",
+        1
+      ],
+      [
+        "[data-voice-input]",
+        1
+      ],
+      [
+        "[data-voice-count]",
+        1
+      ],
+      [
+        "[data-voice-result]",
+        1
+      ],
+      [
+        "[data-decolonial-search]",
+        1
+      ],
+      [
+        "[data-decolonial-filters]",
+        1
+      ],
+      [
+        "[data-decolonial-count]",
+        1
+      ],
+      [
+        "[data-decolonial-list]",
+        1
+      ],
+      [
+        "[data-decolonial-observer-toggle]",
+        1
+      ],
+      [
+        "[data-decolonial-observer]",
+        1
+      ],
+      [
+        "[data-decolonial-observer-summary]",
+        1
+      ],
+      [
+        "[data-decolonial-observer-list]",
+        1
+      ],
+      [
+        "[data-rights-lab]",
+        1
+      ],
+      [
+        "[data-rights-search]",
+        1
+      ],
+      [
+        "[data-rights-search-clear]",
+        1
+      ],
+      [
+        "[data-rights-cards]",
+        1
+      ],
+      [
+        "[data-rights-sources]",
+        1
+      ],
+      [
+        "[data-rights-death-year]",
+        1
+      ],
+      [
+        "[data-rights-calc-result]",
+        1
+      ],
+      [
+        "[data-syntax-panel]",
+        1
+      ],
+      [
+        "[data-syntax-tokens]",
+        1
+      ],
+      [
+        "[data-syntax-summary]",
+        1
+      ],
+      [
+        "[data-linguistic-panel]",
+        1
+      ],
+      [
+        ".syntax-token",
+        1
+      ],
+      [
+        ".syntax-token-tooltip",
+        1
+      ]
+    ],
+    "number_formatting": []
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "files": {
+    "css/06-academy-tools.css": 2,
+    "css/22-product-clarity-workshop-authorship.css": 2
+  },
+  "top_tokens": [
+    [
+      "--primary",
+      4
+    ],
+    [
+      "--surface",
+      1
+    ],
+    [
+      "--ink",
+      1
+    ],
+    [
+      "--line",
+      1
+    ],
+    [
+      "--card",
+      1
+    ]
+  ],
+  "hardcoded_counts": [],
+  "samples": {},
+  "component_selectors": {
+    "botao": [],
+    "estatistica": [],
+    "formulario": [],
+    "aviso-global": []
+  },
+  "responsive": {
+    "count": 2,
+    "samples": [
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 136,
+        "media": "(min-width: 821px)",
+        "selector": "html body .app-shell[data-view=\"academia\"] #at-voice:checked ~ .academy-tools-tabs label[for=\"at-voice\"],\n  html body .app-shell[data-view=\"academia\"] #at-rimalab:checked ~ .academy-tools-tabs label[for=\"at-rimalab\"],\n  html body .app-shell[data-view=\"academia\"] #at-vocab:checked ~ .academy-tools-tabs label[for=\"at-vocab\"],\n  html body .app-shell[data-view=\"academia\"] #at-biblioteca:checked ~ .academy-tools-tabs label[for=\"at-biblioteca\"],\n  html body .app-shell[data-view=\"academia\"] #at-treino:checked ~ .academy-tools-tabs label[for=\"at-treino\"]"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 164,
+        "media": "(min-width: 821px)",
+        "selector": "html body .app-shell[data-view=\"academia\"] .voice-mirror,\n  html body .app-shell[data-view=\"academia\"] .rimalab-shell,\n  html body .app-shell[data-view=\"academia\"] .vocab-shell,\n  html body .app-shell[data-view=\"academia\"] .academy-library,\n  html body .app-shell[data-view=\"academia\"] .training-shell"
+      }
+    ]
+  },
+  "vereda": {
+    "count": 0,
+    "samples": []
+  },
+  "html": {
+    "line_matches": [
+      {
+        "line": 50,
+        "text": "\"Vocabulário decolonizador brasileiro\","
+      },
+      {
+        "line": 909,
+        "text": "<input type=\"radio\" name=\"academy-tool\" id=\"at-vocab\" class=\"at-radio\" hidden>"
+      },
+      {
+        "line": 922,
+        "text": "<label for=\"at-vocab\" class=\"academy-tool-tab\">"
+      },
+      {
+        "line": 924,
+        "text": "Vocabulário"
+      },
+      {
+        "line": 942,
+        "text": "<p>Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença.</p>"
+      },
+      {
+        "line": 1047,
+        "text": "<!-- Painel: Vocabulário Decolonizador -->"
+      },
+      {
+        "line": 1048,
+        "text": "<div class=\"academy-tool-panel at-panel-vocab\">"
+      },
+      {
+        "line": 1049,
+        "text": "<div class=\"decolonial-tool\" aria-label=\"Vocabulário Decolonizador\">"
+      },
+      {
+        "line": 1051,
+        "text": "<p class=\"eyebrow\">Vocabulário Decolonizador</p>"
+      },
+      {
+        "line": 1076,
+        "text": "<input type=\"search\" data-decolonial-search placeholder=\"Buscar termo, alternativa ou motivo\" aria-label=\"Buscar no vocabulário decolonizador\">"
+      },
+      {
+        "line": 1078,
+        "text": "<div class=\"decolonial-filters\" data-decolonial-filters aria-label=\"Categorias do vocabulário decolonizador\"></div>"
+      },
+      {
+        "line": 1301,
+        "text": "<p>Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras.</p>"
+      }
+    ],
+    "key_elements": [
+      {
+        "tag": "section",
+        "line": 906,
+        "id": null,
+        "class": [
+          "academy-tools"
+        ],
+        "role": null,
+        "aria_label": "Ferramentas do Ateliê",
+        "data": {
+          "data-atelier-section": "revisar"
+        },
+        "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, voca"
+      },
+      {
+        "tag": "input",
+        "line": 909,
+        "id": "at-vocab",
+        "class": [
+          "at-radio"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": ""
+      },
+      {
+        "tag": "nav",
+        "line": 913,
+        "id": null,
+        "class": [
+          "academy-tools-tabs"
+        ],
+        "role": null,
+        "aria_label": "Selecionar ferramenta",
+        "data": {},
+        "text": "psychology Espelho de Voz graphic_eq Rimas language Vocabulário library_books Leituras edit_note Prática"
+      },
+      {
+        "tag": "label",
+        "line": 922,
+        "id": null,
+        "class": [
+          "academy-tool-tab"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "language Vocabulário"
+      },
+      {
+        "tag": "div",
+        "line": 937,
+        "id": null,
+        "class": [
+          "academy-tool-panel",
+          "at-panel-voice"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Espelho de Voz Um espelho do jeito que você escreve Cole um trecho ou use o texto em edição. O Escrevaral devolve pistas de ritmo, vocabulário e voz — como hipótese de trabalho, não como sentença. psychology Analisar voz edit_note Usar o te"
+      },
+      {
+        "tag": "div",
+        "line": 1048,
+        "id": null,
+        "class": [
+          "academy-tool-panel",
+          "at-panel-vocab"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+      },
+      {
+        "tag": "div",
+        "line": 1049,
+        "id": null,
+        "class": [
+          "decolonial-tool"
+        ],
+        "role": null,
+        "aria_label": "Vocabulário Decolonizador",
+        "data": {},
+        "text": "Vocabulário Decolonizador Revise palavras que podem pesar mais do que parecem Palavras que talvez você não queira mais usar — e o que colocar no lugar. Observar meu manuscrito nesta revisão Sinaliza termos que podem carregar racismo, coloni"
+      },
+      {
+        "tag": "input",
+        "line": 1076,
+        "id": null,
+        "class": [],
+        "role": null,
+        "aria_label": "Buscar no vocabulário decolonizador",
+        "data": {
+          "data-decolonial-search": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "div",
+        "line": 1078,
+        "id": null,
+        "class": [
+          "decolonial-filters"
+        ],
+        "role": null,
+        "aria_label": "Categorias do vocabulário decolonizador",
+        "data": {
+          "data-decolonial-filters": ""
+        },
+        "text": ""
+      },
+      {
+        "tag": "article",
+        "line": 1294,
+        "id": null,
+        "class": [
+          "academy-path",
+          "is-book"
+        ],
+        "role": null,
+        "aria_label": null,
+        "data": {},
+        "text": "02 book_4 Objeto livro Conheça a arquitetura da obra Capa, lombada, miolo, pré-texto, pós-texto, capítulo, arquivo digital e vocabulário editorial para conversar com revisores, designers e editoras. Capa Miolo Glossário view_in_ar Ver guias"
+      }
+    ]
+  },
+  "javascript": {
+    "file_hit_counts": {
+      "academia-controller.js": 10,
+      "app.js": 5,
+      "archive-engine.js": 1,
+      "js/data/criterios-data.js": 4,
+      "js/data/synonym-data.js": 1,
+      "lexical-engine.js": 13,
+      "lexical-view-controller.js": 4,
+      "state-store.js": 1,
+      "voice-engine.js": 3
+    },
+    "selectors": [],
+    "number_formatting": []
+  }
+}
