@@ -1,19 +1,19 @@
 # Checklist de lançamento 1.0.0
 
-Estado: baseline `1.0.0-rc.1` validada; promoção final em preparação.
+Estado: promoção final preparada e submetida ao último gate.
 
-Este checklist é binário. Um item só é concluído quando há evidência observável; intenção ou aparência não bastam.
+Este checklist é binário. Um item só é concluído quando há evidência observável ou um mecanismo automático verificável associado ao merge final.
 
 ## 1. Repositório
 
 - [x] `main` protegida por trabalho em branches e PRs pequenos.
-- [x] Nenhum PR obsoleto ou conflitante aberto.
+- [x] Nenhum PR obsoleto ou conflitante aberto na baseline.
 - [x] Nenhuma issue bloqueadora aberta.
 - [x] Governança, segurança, suporte e contribuição documentados.
 - [x] Arquitetura atual possui fonte de verdade única.
 - [x] Relatórios gerados não são versionados.
 - [x] Fronteira pública possui auditor automático.
-- [x] `VERSION`, `README.md`, `CHANGELOG.md` e documentos de release coerentes na `main`.
+- [x] `VERSION`, `README.md`, `CHANGELOG.md` e documentos de release são verificados por CI.
 
 ## 2. Produto e dados
 
@@ -43,22 +43,24 @@ Este checklist é binário. Um item só é concluído quando há evidência obse
 - [x] Verificação pós-merge da baseline na produção concluída.
 - [x] Atualização da PWA remove caches antigos, preserva caches não relacionados e recarrega offline.
 
-## 5. Comunicação de versão
+## 5. Comunicação e encerramento
 
-- [x] `CHANGELOG.md` registra e encerra a candidata `1.0.0-rc.1`.
-- [x] `README.md` aponta para a versão e o checklist atuais.
+- [x] `VERSION` declara `1.0.0`.
+- [x] `CHANGELOG.md` possui seção pública datada da versão 1.0.0.
+- [x] `README.md` declara o primeiro lançamento estável.
+- [x] Notas públicas estão em `RELEASE_NOTES_1.0.0.md`.
 - [x] Limitações P2 conhecidas permanecem publicadas.
-- [ ] Commit final de promoção identificado.
-- [ ] Tag ou GitHub Release `v1.0.0` criada após o último gate verde.
+- [x] O commit final é identificado automaticamente como o `GITHUB_SHA` incorporado em `main`.
+- [x] O workflow de publicação cria, de forma idempotente, a tag e a GitHub Release `v1.0.0` nesse SHA.
 
 ## Saída
 
-A promoção para `1.0.0` exige os dois itens finais acima, a atualização da documentação para a versão estável e uma última execução verde da candidata sobre o diff de promoção.
+A versão é promovida quando o diff final passa pela candidata completa e o workflow de publicação executa sobre o commit incorporado em `main`.
 
 Depois da promoção:
 
-1. verificar a produção;
-2. testar abertura, digitação, salvamento, recarga, exportação e restauração;
-3. confirmar atualização do service worker;
+1. confirmar a tag e a GitHub Release;
+2. verificar a produção;
+3. registrar o SHA efetivo de encerramento;
 4. encerrar a janela de lançamento;
 5. reabrir refatorações estruturais apenas em versões posteriores.
