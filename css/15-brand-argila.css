@@ -76,6 +76,33 @@
   --argila-space-8: 72px;
   --argila-space-9: 96px;
 
+  /* Componentes compartilhados do Design System.
+   * Este lote declara contratos novos sem migrar telas existentes.
+   */
+  --action-button-height: 42px;
+  --action-button-height-compact: 36px;
+  --action-button-padding-inline: var(--argila-space-4);
+  --action-button-gap: var(--argila-space-2);
+  --action-button-radius: var(--argila-radius-sm);
+  --action-button-font-size: 0.875rem;
+  --action-button-font-weight: 600;
+  --action-button-primary-background: var(--primary);
+  --action-button-primary-border: var(--primary);
+  --action-button-primary-text: var(--on-primary);
+  --action-button-secondary-background: transparent;
+  --action-button-secondary-border: var(--line);
+  --action-button-secondary-text: var(--soft-ink);
+  --action-button-secondary-hover-background: var(--card);
+  --action-button-ghost-hover-background: var(--surface-low);
+  --action-button-disabled-opacity: 0.48;
+
+  --text-statistic-label: var(--muted);
+  --text-statistic-value: var(--ink);
+  --text-statistic-detail: var(--soft-ink);
+  --text-statistic-label-size: 0.75rem;
+  --text-statistic-value-size: 1.5rem;
+  --text-statistic-detail-size: 0.875rem;
+
   font-family: var(--argila-font-ui);
 }
 
@@ -291,6 +318,183 @@ small,
 .ghost-button:hover {
   background: var(--brand-bone);
   color: var(--brand-clay-deep);
+}
+
+/*
+ * ActionButton
+ *
+ * Componente novo e ainda sem consumidor no produto.
+ * Tabs, chips, resizers e controles de formatação não são convertidos
+ * automaticamente em ActionButton.
+ */
+.action-button {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--action-button-gap);
+  min-height: var(--action-button-height);
+  padding-inline: var(--action-button-padding-inline);
+  border: 1px solid transparent;
+  border-radius: var(--action-button-radius);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--argila-font-ui);
+  font-size: var(--action-button-font-size);
+  font-weight: var(--action-button-font-weight);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition:
+    background-color var(--motion-quick),
+    border-color var(--motion-quick),
+    color var(--motion-quick),
+    box-shadow var(--motion-quick);
+}
+
+.action-button[data-variant="primary"] {
+  border-color: var(--action-button-primary-border);
+  background: var(--action-button-primary-background);
+  color: var(--action-button-primary-text);
+}
+
+.action-button[data-variant="secondary"] {
+  border-color: var(--action-button-secondary-border);
+  background: var(--action-button-secondary-background);
+  color: var(--action-button-secondary-text);
+}
+
+.action-button[data-variant="ghost"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--action-button-secondary-text);
+}
+
+.action-button[data-size="compact"] {
+  min-height: var(--action-button-height-compact);
+  padding-inline: var(--argila-space-3);
+  font-size: 0.8125rem;
+}
+
+.action-button[data-icon-only="true"] {
+  width: var(--action-button-height);
+  min-width: var(--action-button-height);
+  padding-inline: 0;
+}
+
+.action-button[data-size="compact"][data-icon-only="true"] {
+  width: var(--action-button-height-compact);
+  min-width: var(--action-button-height-compact);
+}
+
+.action-button__icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 1em;
+  height: 1em;
+  pointer-events: none;
+}
+
+.action-button:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+.action-button:active:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: inset 0 0 0 1px var(--on-primary-soft);
+}
+
+.action-button:is(:disabled, [aria-disabled="true"]) {
+  opacity: var(--action-button-disabled-opacity);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .action-button[data-variant="primary"]:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: color-mix(
+      in srgb,
+      var(--action-button-primary-text) 28%,
+      var(--action-button-primary-border)
+    );
+    box-shadow: 0 3px 10px color-mix(in srgb, var(--primary) 20%, transparent);
+  }
+
+  .action-button[data-variant="secondary"]:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: color-mix(in srgb, var(--primary) 45%, var(--line));
+    background: var(--action-button-secondary-hover-background);
+    color: var(--primary-deep);
+  }
+
+  .action-button[data-variant="ghost"]:hover:not(:disabled):not([aria-disabled="true"]) {
+    background: var(--action-button-ghost-hover-background);
+    color: var(--primary-deep);
+  }
+}
+
+/*
+ * TextStatistic
+ *
+ * Contagens, percentuais, tempos e medidas curtas.
+ * Badges, tags, classificações e chips continuam componentes próprios.
+ */
+.text-statistic {
+  display: inline-grid;
+  gap: var(--argila-space-1);
+  min-width: 0;
+  color: var(--text-statistic-value);
+  font-family: var(--argila-font-ui);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.text-statistic__label {
+  color: var(--text-statistic-label);
+  font-size: var(--text-statistic-label-size);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.text-statistic__value {
+  min-width: 0;
+  color: var(--text-statistic-value);
+  font-size: var(--text-statistic-value-size);
+  font-weight: 600;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.text-statistic__detail {
+  color: var(--text-statistic-detail);
+  font-size: var(--text-statistic-detail-size);
+  line-height: 1.4;
+}
+
+.text-statistic[data-layout="inline"] {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--argila-space-2);
+}
+
+.text-statistic[data-layout="inline"] .text-statistic__value {
+  font-size: var(--text-statistic-detail-size);
+}
+
+.text-statistic[data-size="compact"] {
+  gap: 2px;
+}
+
+.text-statistic[data-size="compact"] .text-statistic__label {
+  font-size: 0.6875rem;
+}
+
+.text-statistic[data-size="compact"] .text-statistic__value {
+  font-size: 1rem;
 }
 
 input,
