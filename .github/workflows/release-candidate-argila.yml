@@ -33,6 +33,9 @@ jobs:
             set -x
             python scripts/migrar-controladores-ui-pilot.py
             git checkout origin/main -- scripts/auditor-nomenclatura-publica.py
+            git restore --source=HEAD --staged --worktree \
+              .github/workflows/editor-status-argila-pr.yml \
+              .github/workflows/oficina-navigation-pr.yml
             git restore --source=HEAD --staged --worktree reports/ || true
             git clean -fd reports/
             git config user.name "github-actions[bot]"
@@ -42,8 +45,7 @@ jobs:
               index.html \
               service-worker.js \
               ui-dialog.js \
-              .github/workflows/editor-status-argila-pr.yml \
-              .github/workflows/oficina-navigation-pr.yml \
+              scripts/auditor-nomenclatura-publica.py \
               docs/_decisoes/ESTRUTURA_RAIZ.md \
               docs/_decisoes/PILOTO_ESTRUTURA_JS_CONTROLLERS_UI_2026-07-26.md \
               js/controllers/editor-status-controller.js \
