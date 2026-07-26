@@ -1,0 +1,46 @@
+name: Fronteira do repositório público
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".gitignore"
+      - "CNAME"
+      - ".nojekyll"
+      - "index.html"
+      - "service-worker.js"
+      - "manifest.webmanifest"
+      - "reports/**"
+      - "scripts/auditor-repository-boundary.py"
+      - ".github/workflows/repository-boundary-pr.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Validar sintaxe
+        run: python -m py_compile scripts/auditor-repository-boundary.py
+
+      - name: Auditar fronteira pública
+        run: python scripts/auditor-repository-boundary.py
+
+      - name: Guardar relatório
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repository-boundary-${{ github.run_id }}
+          path: reports/auditoria/repository-boundary-artifacts/**
+          if-no-files-found: error
+          retention-days: 14
