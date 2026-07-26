@@ -1,0 +1,130 @@
+name: Fundação dos componentes do Design System
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "css/15-brand-argila.css"
+      - "css/14-archive-inspector.css"
+      - "css/wood-icons.css"
+      - "scripts/gerar-harness-componentes-design-system.py"
+      - "scripts/auditor-design-system-components.py"
+      - ".github/workflows/design-system-components-pr.yml"
+      - "index.html"
+      - "service-worker.js"
+      - "ui-dialog.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: design-system-components-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Validar sintaxe dos scripts
+        run: |
+          python -m py_compile scripts/gerar-harness-componentes-design-system.py
+          python -m py_compile scripts/auditor-design-system-components.py
+
+      - name: Gerar harness interno
+        run: python scripts/gerar-harness-componentes-design-system.py
+
+      - name: Iniciar servidor local
+        run: |
+          python3 -m http.server 8799 > /tmp/escrevaral-design-system-http.log 2>&1 &
+          echo $! > /tmp/escrevaral-design-system-http.pid
+          for tentativa in $(seq 1 30); do
+            if curl --fail --silent \
+              http://127.0.0.1:8799/reports/auditoria/design-system-components-harness/index.html \
+              > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/escrevaral-design-system-http.log
+          exit 1
+
+      - name: Auditar componentes compartilhados
+        id: components
+        continue-on-error: true
+        run: |
+          python scripts/auditor-design-system-components.py \
+            --base-url http://127.0.0.1:8799/reports/auditoria/design-system-components-harness/index.html \
+            --output-dir reports/auditoria/design-system-components-artifacts
+
+      - name: Auditar versionamento de assets
+        id: assets
+        continue-on-error: true
+        run: python scripts/auditor-asset-version.py
+
+      - name: Auditar fronteira pública
+        id: boundary
+        continue-on-error: true
+        run: python scripts/auditor-repository-boundary.py
+
+      - name: Preparar evidências
+        if: always()
+        run: |
+          DESTINO=artifacts/design-system-components
+          mkdir -p "$DESTINO"
+          cp -R reports/auditoria/design-system-components-artifacts "$DESTINO/" 2>/dev/null || true
+          cp -R reports/auditoria/design-system-components-harness "$DESTINO/" 2>/dev/null || true
+          cp /tmp/escrevaral-design-system-http.log "$DESTINO/" 2>/dev/null || true
+          find "$DESTINO" -type f -maxdepth 5 -print
+
+      - name: Guardar relatório e capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-system-components-${{ github.run_id }}
+          path: artifacts/design-system-components/**
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Consolidar resultado
+        if: always()
+        run: |
+          echo "components=${{ steps.components.outcome }}"
+          echo "assets=${{ steps.assets.outcome }}"
+          echo "boundary=${{ steps.boundary.outcome }}"
+
+          falhou=0
+          for resultado in \
+            "${{ steps.components.outcome }}" \
+            "${{ steps.assets.outcome }}" \
+            "${{ steps.boundary.outcome }}"; do
+            if [ "$resultado" != "success" ]; then
+              falhou=1
+            fi
+          done
+
+          if [ "$falhou" -ne 0 ]; then
+            echo "Uma ou mais validações falharam. Consulte os logs e o artefato."
+            exit 1
+          fi
+
+          echo "Fundação dos componentes aprovada."
