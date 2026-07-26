@@ -1,0 +1,208 @@
+name: Verificação temporária de produção v964
+
+on:
+  push:
+    branches:
+      - agent/syntax-token-palette
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout da branch preservada
+        uses: actions/checkout@v4
+        with:
+          ref: agent/syntax-token-palette
+          fetch-depth: 0
+
+      - name: Instalar Playwright
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Aguardar propagação e validar arquivos públicos
+        run: |
+          python3 - <<'PY'
+          import time
+          import urllib.request
+
+          expected = {
+              "https://escrevaral.com/?verify-v964=1": ["20260726-syntax-token-palette-v1"],
+              "https://escrevaral.com/service-worker.js?verify-v964=1": [
+                  'const CACHE_NAME = "vereda-offline-v964";',
+                  'const ASSET_VERSION = "20260726-syntax-token-palette-v1";',
+              ],
+              "https://escrevaral.com/css/00-tokens.css?v=20260726-syntax-token-palette-v1&verify-v964=1": [
+                  "--syntax-sujeito: #465A55;",
+                  "--syntax-predicativo: #5F0032;",
+                  "--syntax-aposto: #343800;",
+                  "--syntax-sujeito: #82D2A1;",
+                  "--syntax-predicativo: #C48590;",
+                  "--syntax-aposto: #C9F28A;",
+              ],
+              "https://escrevaral.com/css/03-inspector-precision.css?v=20260726-syntax-token-palette-v1&verify-v964=1": [
+                  'var(--syntax-sujeito)',
+                  'var(--syntax-predicativo)',
+                  'var(--syntax-aposto)',
+              ],
+          }
+
+          def fetch(url):
+              req = urllib.request.Request(url, headers={
+                  "User-Agent": "Escrevaral production verification",
+                  "Cache-Control": "no-cache",
+                  "Pragma": "no-cache",
+              })
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  return response.status, response.read().decode("utf-8", errors="replace")
+
+          last_error = None
+          for attempt in range(30):
+              try:
+                  for url, needles in expected.items():
+                      status, body = fetch(url)
+                      if status != 200:
+                          raise RuntimeError(f"{url}: HTTP {status}")
+                      missing = [needle for needle in needles if needle not in body]
+                      if missing:
+                          raise RuntimeError(f"{url}: ausente {missing}")
+                  print("Produção propagada com v964 e assets sintáticos.")
+                  break
+              except Exception as exc:
+                  last_error = exc
+                  print(f"Tentativa {attempt + 1}/30 ainda não propagada: {exc}")
+                  time.sleep(10)
+          else:
+              raise SystemExit(f"Produção não propagou dentro da janela: {last_error}")
+          PY
+
+      - name: Verificar cores computadas em Chromium
+        run: |
+          mkdir -p production-verification
+          cat > /tmp/verify_production.py <<'PY'
+          import json
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          expected = {
+              "alvorada": {
+                  "sujeito": "rgb(70, 90, 85)",
+                  "verbo": "rgb(18, 80, 177)",
+                  "objeto": "rgb(91, 64, 49)",
+                  "adjunto": "rgb(76, 44, 103)",
+                  "predicativo": "rgb(95, 0, 50)",
+                  "vocativo": "rgb(112, 81, 3)",
+                  "aposto": "rgb(52, 56, 0)",
+              },
+              "vereda": {
+                  "sujeito": "rgb(130, 210, 161)",
+                  "verbo": "rgb(123, 153, 180)",
+                  "objeto": "rgb(236, 148, 94)",
+                  "adjunto": "rgb(201, 156, 241)",
+                  "predicativo": "rgb(196, 133, 144)",
+                  "vocativo": "rgb(251, 183, 14)",
+                  "aposto": "rgb(201, 242, 138)",
+              },
+          }
+
+          labels = {
+              "sujeito": ("A autora", "Sujeito"),
+              "verbo": ("escreveu", "Verbo"),
+              "objeto": ("o conto", "Objeto"),
+              "adjunto": ("à noite", "Adjunto"),
+              "predicativo": ("inquieta", "Predicativo"),
+              "vocativo": ("Rafa", "Vocativo"),
+              "aposto": ("poeta", "Aposto"),
+          }
+
+          results = {}
+          with sync_playwright() as p:
+              browser = p.chromium.launch()
+              context = browser.new_context(viewport={"width": 1440, "height": 900}, service_workers="block")
+              page = context.new_page()
+              page.goto("https://escrevaral.com/?verify-v964-browser=1", wait_until="networkidle", timeout=120000)
+
+              for theme in ("alvorada", "vereda"):
+                  page.evaluate("document.documentElement.removeAttribute('data-theme')")
+                  if theme == "vereda":
+                      page.evaluate("document.documentElement.dataset.theme = 'scriptorium'")
+
+                  page.evaluate("""(labels) => {
+                    document.getElementById('prod-syntax-verification')?.remove();
+                    const host = document.createElement('section');
+                    host.id = 'prod-syntax-verification';
+                    host.setAttribute('aria-label', 'Verificação visual dos tokens sintáticos');
+                    Object.assign(host.style, {
+                      position: 'fixed', left: '40px', right: '40px', bottom: '40px', zIndex: '2147483647',
+                      display: 'flex', flexWrap: 'wrap', gap: '10px', padding: '24px',
+                      background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '12px',
+                      boxShadow: '0 18px 50px rgba(0,0,0,.22)'
+                    });
+                    for (const [funcao, pair] of Object.entries(labels)) {
+                      const token = document.createElement('span');
+                      token.className = 'syntax-token';
+                      token.dataset.funcao = funcao;
+                      const word = document.createElement('span');
+                      word.className = 'syntax-token-word';
+                      word.textContent = pair[0];
+                      const label = document.createElement('span');
+                      label.className = 'syntax-token-label';
+                      label.textContent = pair[1];
+                      token.append(word, label);
+                      host.append(token);
+                    }
+                    document.body.append(host);
+                  }""", labels)
+
+                  page.wait_for_timeout(300)
+                  measured = page.evaluate("""() => Object.fromEntries(
+                    [...document.querySelectorAll('#prod-syntax-verification .syntax-token')].map(token => {
+                      const label = token.querySelector('.syntax-token-label');
+                      return [token.dataset.funcao, {
+                        border: getComputedStyle(token).borderTopColor,
+                        label: getComputedStyle(label).color
+                      }];
+                    })
+                  )""")
+
+                  for funcao, wanted in expected[theme].items():
+                      got = measured.get(funcao)
+                      if not got:
+                          raise AssertionError(f"{theme}/{funcao}: token não renderizado")
+                      if got["border"] != wanted or got["label"] != wanted:
+                          raise AssertionError(f"{theme}/{funcao}: esperado {wanted}, obtido {got}")
+
+                  results[theme] = measured
+                  page.locator('#prod-syntax-verification').screenshot(
+                      path=f"production-verification/painel-sintatico-{theme}.png"
+                  )
+
+              browser.close()
+
+          Path("production-verification/metricas.json").write_text(
+              json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(results, ensure_ascii=False, indent=2))
+          PY
+          python3 /tmp/verify_production.py
+
+      - name: Guardar evidências de produção
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-v964-syntax-colors-${{ github.run_id }}
+          path: production-verification
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Remover workflow temporário da branch preservada
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/tmp-verify-production-v964.yml
+          git commit -m "Remove verificação temporária de produção v964"
+          git push origin HEAD:agent/syntax-token-palette
