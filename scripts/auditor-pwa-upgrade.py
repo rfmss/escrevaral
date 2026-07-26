@@ -62,8 +62,8 @@ def main() -> int:
             context = browser.new_context(service_workers="allow")
             page = context.new_page()
 
-            # Usa um recurso sem scripts da aplicação para preparar caches antes do registro.
-            response = page.goto(f"{BASE_URL}/CNAME", wait_until="domcontentloaded")
+            # Usa uma página textual sem scripts da aplicação para preparar caches antes do registro.
+            response = page.goto(f"{BASE_URL}/robots.txt", wait_until="domcontentloaded")
             require(response is not None and response.ok, "origem local acessível", "não foi possível abrir a origem local")
 
             before = page.evaluate(
