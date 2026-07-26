@@ -1,15 +1,20 @@
 name: Aplicação temporária da paleta sintática
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/syntax-token-palette
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: write
 
 jobs:
   apply:
+    if: github.head_ref == 'agent/syntax-token-palette'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout da branch
@@ -152,9 +157,9 @@ jobs:
                   raise SystemExit(f"Token ausente em Alvorada: {expected}")
               if precision.count(f"var(--syntax-{key})") != 2:
                   raise SystemExit(f"Consumo incorreto do token {key}")
+          block = re.search(r'\[data-theme="scriptorium"\]\s*\{(?P<body>.*?)\n\}', css, re.S)
           for name, value in VEREDA.items():
               key = name.lower()
-              block = re.search(r'\[data-theme="scriptorium"\]\s*\{(?P<body>.*?)\n\}', css, re.S)
               if not block or f"--syntax-{key}: {value};" not in block.group("body"):
                   raise SystemExit(f"Token ausente em Vereda: --syntax-{key}: {value}")
           if ".syntax-token[data-funcao" in css:
