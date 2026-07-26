@@ -102,3 +102,7 @@ docs/_legado/
 
 # ── Infraestrutura local não versionada ─────────────────────────────
 CLAUDE.local.md
+
+# ── Saídas geradas por auditorias e testes ────────────────────────
+reports/**
+!reports/README.md
