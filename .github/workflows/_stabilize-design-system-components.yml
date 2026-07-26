@@ -1,0 +1,41 @@
+name: Estabilização transitória dos componentes do Design System
+
+on:
+  push:
+    branches:
+      - agent/design-system-components-foundation
+    paths:
+      - "scripts/_estabilizar-componentes-design-system.py"
+      - ".github/workflows/_stabilize-design-system-components.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  estabilizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/design-system-components-foundation
+          fetch-depth: 0
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Aplicar correções validadas
+        run: python scripts/_estabilizar-componentes-design-system.py
+
+      - name: Registrar estabilização e remover rotina transitória
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git commit -m "Estabiliza aliases temáticos dos componentes"
+          git push origin HEAD:agent/design-system-components-foundation
