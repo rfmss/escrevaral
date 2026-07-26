@@ -1,0 +1,54 @@
+name: Operação temporária — limpar inventário da Fase 3
+
+on:
+  push:
+    branches:
+      - agent/relatorio-design-system-fase-3
+
+permissions:
+  contents: write
+
+jobs:
+  limpar:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Remover artefatos temporários
+        run: |
+          rm -rf _tmp_phase3
+          rm -f .github/workflows/tmp-phase3-*.yml
+
+      - name: Confirmar diff final somente documental
+        run: |
+          python3 - <<'PY'
+          import subprocess
+
+          expected = {"docs/_decisoes/MAPEAMENTO_DESIGN_SYSTEM_FASE_3_2026-07-26.md"}
+          changed = set(
+              subprocess.check_output(
+                  ["git", "diff", "--name-only", "origin/main"],
+                  text=True,
+              ).splitlines()
+          )
+          if changed != expected:
+              raise SystemExit(
+                  "diff final inesperado: " + repr(sorted(changed))
+              )
+          print("diff final documental confirmado")
+          PY
+          git diff --check
+
+      - name: Registrar limpeza na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Remove inventário temporário da Fase 3"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
