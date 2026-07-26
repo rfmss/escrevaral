@@ -4,6 +4,8 @@
 
 Decisão executada na Tarefa 2 da frente de Design System.
 
+Em 26 de julho de 2026, após o squash merge do PR #134, a branch do PR #135 foi reconstruída sobre a nova `main`. O estado anterior permanece preservado em `backup/pr-135-pre-main-29b75b3`.
+
 Foram removidos exclusivamente os seletores e blocos pertencentes às variantes técnicas `cerrado-dark`, `mata-dark` e `amazonia-dark`.
 
 O tema escuro ativo continua sendo Vereda, identificado internamente por `data-theme="scriptorium"`. O tema claro principal continua sendo Alvorada.
