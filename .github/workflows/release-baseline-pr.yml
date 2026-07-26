@@ -1,0 +1,48 @@
+name: Coerência da baseline de lançamento
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "VERSION"
+      - "README.md"
+      - "CHANGELOG.md"
+      - "docs/release/**"
+      - "scripts/auditor-release-baseline.py"
+      - ".github/workflows/release-baseline-pr.yml"
+      - ".github/workflows/release-candidate-argila.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-baseline-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Validar sintaxe
+        run: python -m py_compile scripts/auditor-release-baseline.py
+
+      - name: Auditar baseline
+        run: python scripts/auditor-release-baseline.py
+
+      - name: Guardar relatório
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-baseline-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: reports/auditoria/release-baseline-artifacts/**
