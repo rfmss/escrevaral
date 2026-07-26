@@ -1,0 +1,1457 @@
+{
+  "files": {
+    "css/02-shell-navigation.css": 33,
+    "css/03-editor-toolbar.css": 13,
+    "css/05-archive.css": 1,
+    "css/21-product-clarity-archive.css": 1,
+    "styles.css": 12
+  },
+  "token_usage": {
+    "--muted": 13,
+    "--line": 11,
+    "--primary": 10,
+    "--ink": 6,
+    "--soft-ink": 6,
+    "--surface-low": 5,
+    "--sienna": 3,
+    "--card": 2,
+    "--motion-quick": 2,
+    "--highlight-neutral-end": 1,
+    "--surface": 1,
+    "--surface-mid": 1,
+    "--muted-ink": 1
+  },
+  "hardcoded": [
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1824,
+      "selector": ".lexical-hint",
+      "property": "max-width",
+      "value": "480px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1825,
+      "selector": ".lexical-hint",
+      "property": "margin",
+      "value": "6px 0 14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1827,
+      "selector": ".lexical-hint",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1828,
+      "selector": ".lexical-hint",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1833,
+      "selector": ".lexical-search-row",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1837,
+      "selector": ".lexical-search-row",
+      "property": "padding",
+      "value": "8px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1839,
+      "selector": ".lexical-search-row",
+      "property": "max-width",
+      "value": "340px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1844,
+      "selector": ".lexical-search-row input",
+      "property": "border",
+      "value": "0",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1845,
+      "selector": ".lexical-search-row input",
+      "property": "outline",
+      "value": "0",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1846,
+      "selector": ".lexical-search-row input",
+      "property": "background",
+      "value": "transparent",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1847,
+      "selector": ".lexical-search-row input",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1848,
+      "selector": ".lexical-search-row input",
+      "property": "font",
+      "value": "inherit",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1849,
+      "selector": ".lexical-search-row input",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1850,
+      "selector": ".lexical-search-row input",
+      "property": "width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1852,
+      "selector": ".lexical-search-row input::placeholder",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1936,
+      "selector": ".word-cloud",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1937,
+      "selector": ".word-cloud",
+      "property": "padding",
+      "value": "14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1944,
+      "selector": ".word-cloud button",
+      "property": "border",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1945,
+      "selector": ".word-cloud button",
+      "property": "background",
+      "value": "transparent",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1946,
+      "selector": ".word-cloud button",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1947,
+      "selector": ".word-cloud button",
+      "property": "cursor",
+      "value": "pointer",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1948,
+      "selector": ".word-cloud button",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2075,
+      "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+      "property": "border",
+      "value": "1px solid var(--line)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2076,
+      "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+      "property": "border-radius",
+      "value": "8px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2077,
+      "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+      "property": "background",
+      "value": "var(--card)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2078,
+      "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+      "property": "box-shadow",
+      "value": "none",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2079,
+      "selector": ".lexical-card,\n.metric-block,\n\n.project-card",
+      "property": "transition",
+      "value": "background var(--motion-quick), border-color var(--motion-quick)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2084,
+      "selector": ".lexical-card",
+      "property": "padding",
+      "value": "26px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2086,
+      "selector": ".lexical-card",
+      "property": "top",
+      "value": "20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2091,
+      "selector": ".lexical-card > .material-symbols-outlined",
+      "property": "font-size",
+      "value": "30px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2095,
+      "selector": ".lexical-card h2",
+      "property": "margin",
+      "value": "10px 0 4px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2096,
+      "selector": ".lexical-card h2",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2097,
+      "selector": ".lexical-card h2",
+      "property": "font-size",
+      "value": "40px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2115,
+      "selector": ".lexical-card dl",
+      "property": "margin",
+      "value": "22px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2122,
+      "selector": ".lexical-card dl div",
+      "property": "padding",
+      "value": "12px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2123,
+      "selector": ".lexical-card dl div",
+      "property": "gap",
+      "value": "20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2133,
+      "selector": ".lexical-card dd",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2138,
+      "selector": ".lexical-disclaimer",
+      "property": "margin",
+      "value": "18px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2142,
+      "selector": ".lexical-disclaimer",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2143,
+      "selector": ".lexical-disclaimer",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2147,
+      "selector": ".lexical-frase-texto",
+      "property": "font-style",
+      "value": "italic",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2148,
+      "selector": ".lexical-frase-texto",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2150,
+      "selector": ".lexical-frase-texto",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2151,
+      "selector": ".lexical-frase-texto",
+      "property": "margin",
+      "value": "0 0 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2159,
+      "selector": ".lexical-frase-verbos dd,\n.lexical-frase-conj dd",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2163,
+      "selector": ".lexical-frase-alerta",
+      "property": "margin-top",
+      "value": "12px",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2164,
+      "selector": ".lexical-frase-alerta",
+      "property": "display",
+      "value": "flex",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2165,
+      "selector": ".lexical-frase-alerta",
+      "property": "flex-direction",
+      "value": "column",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2166,
+      "selector": ".lexical-frase-alerta",
+      "property": "gap",
+      "value": "4px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2167,
+      "selector": ".lexical-frase-alerta",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2168,
+      "selector": ".lexical-frase-alerta",
+      "property": "color",
+      "value": "var(--sienna, #8a4a2a)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2171,
+      "selector": ".lexical-phrase-loading",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2179,
+      "selector": ".lexical-tags-row",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2186,
+      "selector": ".lexical-funcao-tag",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2187,
+      "selector": ".lexical-funcao-tag",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2188,
+      "selector": ".lexical-funcao-tag",
+      "property": "letter-spacing",
+      "value": ".04em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2189,
+      "selector": ".lexical-funcao-tag",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2191,
+      "selector": ".lexical-funcao-tag",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--sienna, #8a4a2a) 10%, var(--surface-low))",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2192,
+      "selector": ".lexical-funcao-tag",
+      "property": "border",
+      "value": "1px solid color-mix(in srgb, var(--sienna, #8a4a2a) 20%, var(--line))",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2194,
+      "selector": ".lexical-funcao-tag",
+      "property": "padding",
+      "value": "3px 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2197,
+      "selector": ".lexical-definicao",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2199,
+      "selector": ".lexical-definicao",
+      "property": "line-height",
+      "value": "1.6",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2200,
+      "selector": ".lexical-definicao",
+      "property": "margin",
+      "value": "0 0 10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2201,
+      "selector": ".lexical-definicao",
+      "property": "padding",
+      "value": "10px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2207,
+      "selector": ".lexical-note",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2209,
+      "selector": ".lexical-note",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2210,
+      "selector": ".lexical-note",
+      "property": "margin",
+      "value": "0 0 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2213,
+      "selector": ".lexical-frase-termos dt",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2214,
+      "selector": ".lexical-frase-termos dt",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2215,
+      "selector": ".lexical-frase-termos dt",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2216,
+      "selector": ".lexical-frase-termos dt",
+      "property": "letter-spacing",
+      "value": ".05em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2222,
+      "selector": ".lexical-frase-termos dd",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2229,
+      "selector": ".lexical-alternatives",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2232,
+      "selector": ".lexical-alternatives dt",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2233,
+      "selector": ".lexical-alternatives dt",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2234,
+      "selector": ".lexical-alternatives dt",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2235,
+      "selector": ".lexical-alternatives dt",
+      "property": "letter-spacing",
+      "value": ".05em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2241,
+      "selector": ".lexical-alt-list",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2246,
+      "selector": ".lexical-alt",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2251,
+      "selector": ".lexical-alt",
+      "property": "padding",
+      "value": "3px 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2252,
+      "selector": ".lexical-alt",
+      "property": "line-height",
+      "value": "1.45",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 648,
+      "selector": ".word-popover",
+      "property": "box-shadow",
+      "value": "0 8px 32px rgba(26, 26, 26, 0.16), 0 2px 8px rgba(0, 0, 0, 0.08)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 649,
+      "selector": ".word-popover",
+      "property": "padding",
+      "value": "12px 14px 10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 650,
+      "selector": ".word-popover",
+      "property": "min-width",
+      "value": "200px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 651,
+      "selector": ".word-popover",
+      "property": "max-width",
+      "value": "280px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 659,
+      "selector": ".word-popover-head",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 663,
+      "selector": ".word-popover-head strong",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 664,
+      "selector": ".word-popover-head strong",
+      "property": "font-family",
+      "value": "'Noto Serif', Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 668,
+      "selector": ".word-popover-class",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 669,
+      "selector": ".word-popover-class",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 670,
+      "selector": ".word-popover-class",
+      "property": "letter-spacing",
+      "value": "0.08em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 671,
+      "selector": ".word-popover-class",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 675,
+      "selector": ".word-popover-class",
+      "property": "padding",
+      "value": "1px 6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 680,
+      "selector": ".word-popover-body",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 683,
+      "selector": ".word-popover-body",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 689,
+      "selector": ".word-popover-definition",
+      "property": "gap",
+      "value": "5px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 694,
+      "selector": ".word-popover-field",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 695,
+      "selector": ".word-popover-field",
+      "property": "color",
+      "value": "var(--soft-ink)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 696,
+      "selector": ".word-popover-field",
+      "property": "margin",
+      "value": "0",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 697,
+      "selector": ".word-popover-field",
+      "property": "line-height",
+      "value": "1.4",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 700,
+      "selector": ".word-popover-note",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 702,
+      "selector": ".word-popover-note",
+      "property": "font-style",
+      "value": "italic",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 704,
+      "selector": ".word-popover-note",
+      "property": "line-height",
+      "value": "1.4",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 708,
+      "selector": ".word-popover-close",
+      "property": "top",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 709,
+      "selector": ".word-popover-close",
+      "property": "right",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 714,
+      "selector": ".word-popover-close",
+      "property": "padding",
+      "value": "2px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 720,
+      "selector": ".word-popover-close .material-symbols-outlined",
+      "property": "font-size",
+      "value": "16px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/05-archive.css",
+      "line": 385,
+      "selector": ".archive-word-total",
+      "property": "font-size",
+      "value": "0.72rem",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/05-archive.css",
+      "line": 388,
+      "selector": ".archive-word-total",
+      "property": "padding",
+      "value": "0 6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/21-product-clarity-archive.css",
+      "line": 197,
+      "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-filter-panel .archive-word-total",
+      "property": "padding",
+      "value": "5px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 205,
+      "selector": "html body .app-shell[data-view=\"biblioteca\"] .lexical-card",
+      "property": "padding",
+      "value": "22px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 239,
+      "selector": "html body .app-shell[data-view=\"biblioteca\"] .split-paper:has(.lexical-card:empty)",
+      "property": "width",
+      "value": "min(760px, 100%)",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 243,
+      "selector": ".lexical-empty-state",
+      "property": "max-width",
+      "value": "560px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 244,
+      "selector": ".lexical-empty-state",
+      "property": "margin-top",
+      "value": "clamp(30px, 6vw, 72px)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 245,
+      "selector": ".lexical-empty-state",
+      "property": "padding",
+      "value": "clamp(24px, 4vw, 36px) 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 246,
+      "selector": ".lexical-empty-state",
+      "property": "border-top",
+      "value": "1px solid var(--line)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 247,
+      "selector": ".lexical-empty-state",
+      "property": "border-bottom",
+      "value": "1px solid var(--line)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 251,
+      "selector": ".lexical-empty-state > .material-symbols-outlined",
+      "property": "display",
+      "value": "block",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 252,
+      "selector": ".lexical-empty-state > .material-symbols-outlined",
+      "property": "margin-bottom",
+      "value": "16px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 253,
+      "selector": ".lexical-empty-state > .material-symbols-outlined",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 254,
+      "selector": ".lexical-empty-state > .material-symbols-outlined",
+      "property": "font-size",
+      "value": "28px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 258,
+      "selector": ".lexical-empty-state strong",
+      "property": "display",
+      "value": "block",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 259,
+      "selector": ".lexical-empty-state strong",
+      "property": "max-width",
+      "value": "470px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 260,
+      "selector": ".lexical-empty-state strong",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 261,
+      "selector": ".lexical-empty-state strong",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 262,
+      "selector": ".lexical-empty-state strong",
+      "property": "font-size",
+      "value": "clamp(20px, 3vw, 28px)",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 263,
+      "selector": ".lexical-empty-state strong",
+      "property": "line-height",
+      "value": "1.3",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 267,
+      "selector": ".lexical-empty-state p",
+      "property": "max-width",
+      "value": "520px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 268,
+      "selector": ".lexical-empty-state p",
+      "property": "margin",
+      "value": "10px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 269,
+      "selector": ".lexical-empty-state p",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 270,
+      "selector": ".lexical-empty-state p",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 271,
+      "selector": ".lexical-empty-state p",
+      "property": "line-height",
+      "value": "1.65",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 278,
+      "selector": ".lexical-current-text",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 279,
+      "selector": ".lexical-current-text",
+      "property": "font-style",
+      "value": "italic",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 283,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "justify-content",
+      "value": "flex-start",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 284,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "min-height",
+      "value": "44px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 285,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "margin-top",
+      "value": "18px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 286,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "padding-inline",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 287,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "font-family",
+      "value": "Inter, system-ui, sans-serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 288,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 289,
+      "selector": ".lexical-empty-state .secondary-button",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 293,
+      "selector": ".lexical-empty-state .secondary-button:hover",
+      "property": "border-color",
+      "value": "transparent",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 294,
+      "selector": ".lexical-empty-state .secondary-button:hover",
+      "property": "background",
+      "value": "transparent",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 295,
+      "selector": ".lexical-empty-state .secondary-button:hover",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 305,
+      "selector": ".lexical-search-row",
+      "property": "min-height",
+      "value": "44px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 309,
+      "selector": ".lexical-empty-state",
+      "property": "margin-top",
+      "value": "24px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "styles.css",
+      "line": 310,
+      "selector": ".lexical-empty-state",
+      "property": "padding-block",
+      "value": "24px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    }
+  ],
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1943,
+        "selector": ".word-cloud button"
+      },
+      {
+        "file": "styles.css",
+        "line": 282,
+        "selector": ".lexical-empty-state .secondary-button"
+      },
+      {
+        "file": "styles.css",
+        "line": 292,
+        "selector": ".lexical-empty-state .secondary-button:hover"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2071,
+        "selector": ".lexical-card,\n.metric-block,\n\n.project-card"
+      },
+      {
+        "file": "styles.css",
+        "line": 242,
+        "selector": ".lexical-empty-state"
+      },
+      {
+        "file": "styles.css",
+        "line": 250,
+        "selector": ".lexical-empty-state > .material-symbols-outlined"
+      },
+      {
+        "file": "styles.css",
+        "line": 257,
+        "selector": ".lexical-empty-state strong"
+      },
+      {
+        "file": "styles.css",
+        "line": 266,
+        "selector": ".lexical-empty-state p"
+      },
+      {
+        "file": "styles.css",
+        "line": 308,
+        "selector": ".lexical-empty-state"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1843,
+        "selector": ".lexical-search-row input"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 1852,
+        "selector": ".lexical-search-row input::placeholder"
+      },
+      {
+        "file": "css/03-editor-toolbar.css",
+        "line": 693,
+        "selector": ".word-popover-field"
+      }
+    ],
+    "aviso-global": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2162,
+        "selector": ".lexical-frase-alerta"
+      }
+    ]
+  },
+  "responsive_rules": [
+    {
+      "file": "css/21-product-clarity-archive.css",
+      "line": 195,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"arquivo\"] .archive-filter-panel .archive-word-total"
+    },
+    {
+      "file": "styles.css",
+      "line": 196,
+      "media": "(max-width: 820px)",
+      "selector": "html body .app-shell[data-view=\"biblioteca\"] .split-paper > div,\n  html body .app-shell[data-view=\"biblioteca\"] .lexical-card"
+    },
+    {
+      "file": "styles.css",
+      "line": 202,
+      "media": "(max-width: 820px)",
+      "selector": "html body .app-shell[data-view=\"biblioteca\"] .lexical-card"
+    },
+    {
+      "file": "styles.css",
+      "line": 303,
+      "media": "(max-width: 600px)",
+      "selector": ".lexical-search-row"
+    },
+    {
+      "file": "styles.css",
+      "line": 308,
+      "media": "(max-width: 600px)",
+      "selector": ".lexical-empty-state"
+    }
+  ],
+  "vereda_rules": []
+}

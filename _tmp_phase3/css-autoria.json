@@ -1,0 +1,3687 @@
+{
+  "files": {
+    "css/00-tokens.css": 19,
+    "css/02-shell-navigation.css": 87,
+    "css/03-editor-toolbar.css": 12,
+    "css/04-analysis-academy.css": 3,
+    "css/08-responsive.css": 3,
+    "css/09-print.css": 1,
+    "css/15-brand-argila.css": 4,
+    "css/20-product-clarity-desktop.css": 3,
+    "css/22-product-clarity-workshop-authorship.css": 50
+  },
+  "token_usage": {
+    "--primary": 34,
+    "--line": 22,
+    "--muted": 22,
+    "--ink": 13,
+    "--soft-ink": 11,
+    "--card": 11,
+    "--motion-quick": 10,
+    "--surface-low": 9,
+    "--sienna": 6,
+    "--sage": 4,
+    "--ochre": 4,
+    "--surface": 3,
+    "--font-reading": 3,
+    "--glass-bg": 2,
+    "--primary-deep": 1,
+    "--highlight-neutral-end": 1,
+    "--paper": 1,
+    "--surface-mid": 1,
+    "--motion-calm": 1,
+    "--brand-ink": 1,
+    "--argila-font-reading": 1,
+    "--argila-radius-md": 1,
+    "--brand-paper": 1,
+    "--brand-clay": 1,
+    "--font-interface": 1
+  },
+  "hardcoded": [
+    {
+      "file": "css/00-tokens.css",
+      "line": 219,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper",
+      "property": "background",
+      "value": "#d4c5a9",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 220,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 224,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block",
+      "property": "background",
+      "value": "rgba(19, 15, 13, 0.08)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 225,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block",
+      "property": "border-color",
+      "value": "rgba(140, 110, 80, 0.28)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 232,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper strong,\n[data-theme=\"scriptorium\"] .certificate-paper span,\n[data-theme=\"scriptorium\"] .certificate-paper small,\n[data-theme=\"scriptorium\"] .certificate-paper p",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 236,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button",
+      "property": "background",
+      "value": "rgba(19, 15, 13, 0.10)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 237,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 238,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button",
+      "property": "border-color",
+      "value": "rgba(140, 110, 80, 0.35)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 242,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+      "property": "background",
+      "value": "#8c5a20",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 243,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+      "property": "color",
+      "value": "#f5e4c0",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 250,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper h1,\n[data-theme=\"scriptorium\"] .certificate-paper .eyebrow,\n[data-theme=\"scriptorium\"] .certificate-paper .section-label",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 348,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-session-bar,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-actions",
+      "property": "background",
+      "value": "rgba(19, 15, 13, 0.10)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 349,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-session-bar,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-actions",
+      "property": "border-color",
+      "value": "rgba(140, 110, 80, 0.35)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 356,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input",
+      "property": "background",
+      "value": "rgba(255, 255, 255, 0.55)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 357,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input",
+      "property": "border-color",
+      "value": "rgba(58, 44, 34, 0.35)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 358,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 361,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input::placeholder",
+      "property": "color",
+      "value": "rgba(58, 44, 34, 0.55)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 369,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-validation-result",
+      "property": "background",
+      "value": "rgba(19, 15, 13, 0.08)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 370,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-validation-result",
+      "property": "border-color",
+      "value": "rgba(140, 110, 80, 0.3)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 377,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 380,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint summary",
+      "property": "color",
+      "value": "var(--primary-deep, #8c5a20)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 383,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-editor-view-list li .material-symbols-outlined",
+      "property": "color",
+      "value": "#8c5a20",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 388,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction",
+      "property": "background",
+      "value": "rgba(140, 90, 32, 0.12)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 389,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction",
+      "property": "border-color",
+      "value": "rgba(140, 90, 32, 0.3)",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 393,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction p,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction strong",
+      "property": "color",
+      "value": "#1c1714",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2260,
+      "selector": ".certificate-paper",
+      "property": "width",
+      "value": "min(960px, 100%)",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2265,
+      "selector": ".proof-scope-note",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2267,
+      "selector": ".proof-scope-note",
+      "property": "padding",
+      "value": "14px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2272,
+      "selector": ".proof-scope-note",
+      "property": "margin",
+      "value": "16px 0 24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2276,
+      "selector": ".proof-scope-note .material-symbols-outlined",
+      "property": "font-size",
+      "value": "20px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2281,
+      "selector": ".proof-scope-note p",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2283,
+      "selector": ".proof-scope-note p",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2284,
+      "selector": ".proof-scope-note p",
+      "property": "margin",
+      "value": "0 0 6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2291,
+      "selector": ".certificate-grid",
+      "property": "gap",
+      "value": "16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2292,
+      "selector": ".certificate-grid",
+      "property": "margin",
+      "value": "36px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2344,
+      "selector": ".proof-session-bar",
+      "property": "gap",
+      "value": "16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2345,
+      "selector": ".proof-session-bar",
+      "property": "margin",
+      "value": "0 0 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2349,
+      "selector": ".proof-session-bar",
+      "property": "padding",
+      "value": "16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2354,
+      "selector": ".proof-session-bar div",
+      "property": "gap",
+      "value": "5px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2359,
+      "selector": ".proof-session-bar span",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2364,
+      "selector": ".proof-session-bar strong",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2370,
+      "selector": ".proof-session-bar-actions",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2375,
+      "selector": ".proof-sessions-history",
+      "property": "margin",
+      "value": "0 0 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2378,
+      "selector": ".proof-sessions-history",
+      "property": "padding",
+      "value": "12px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2381,
+      "selector": ".proof-sessions-history",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2387,
+      "selector": ".proof-session-history-row",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2388,
+      "selector": ".proof-session-history-row",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2390,
+      "selector": ".proof-session-history-row",
+      "property": "padding",
+      "value": "6px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2400,
+      "selector": ".proof-session-history-row span:first-child",
+      "property": "min-width",
+      "value": "140px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2406,
+      "selector": ".proof-session-history-row small",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2410,
+      "selector": ".proof-sessions-empty",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2414,
+      "selector": ".proof-sessions-empty",
+      "property": "padding",
+      "value": "8px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2421,
+      "selector": ".proof-sessions-header",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2426,
+      "selector": ".proof-sessions-count",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2427,
+      "selector": ".proof-sessions-count",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2431,
+      "selector": ".proof-filter-btn",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2432,
+      "selector": ".proof-filter-btn",
+      "property": "padding",
+      "value": "2px 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2433,
+      "selector": ".proof-filter-btn",
+      "property": "height",
+      "value": "auto",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2434,
+      "selector": ".proof-filter-btn",
+      "property": "min-height",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2435,
+      "selector": ".proof-filter-btn",
+      "property": "line-height",
+      "value": "1.4",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2439,
+      "selector": ".proof-filter-btn.is-active",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--primary) 18%, var(--surface))",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2440,
+      "selector": ".proof-filter-btn.is-active",
+      "property": "border-color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2441,
+      "selector": ".proof-filter-btn.is-active",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2447,
+      "selector": ".proof-actions",
+      "property": "gap",
+      "value": "18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2448,
+      "selector": ".proof-actions",
+      "property": "margin",
+      "value": "0 0 34px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2452,
+      "selector": ".proof-actions",
+      "property": "padding",
+      "value": "16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2456,
+      "selector": ".proof-blockchain-section",
+      "property": "margin",
+      "value": "0 0 24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2458,
+      "selector": ".proof-blockchain-section",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2463,
+      "selector": ".proof-blockchain-actions",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2467,
+      "selector": ".proof-stamp-status",
+      "property": "font-size",
+      "value": "0.8rem",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2468,
+      "selector": ".proof-stamp-status",
+      "property": "opacity",
+      "value": "0.65",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2470,
+      "selector": ".proof-stamp-status[hidden]",
+      "property": "display",
+      "value": "none",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2472,
+      "selector": ".proof-blockchain-section code",
+      "property": "font-size",
+      "value": "0.82em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2477,
+      "selector": ".proof-internet-note",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2478,
+      "selector": ".proof-internet-note",
+      "property": "padding",
+      "value": "7px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2482,
+      "selector": ".proof-internet-note",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2483,
+      "selector": ".proof-internet-note",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2487,
+      "selector": ".proof-internet-note .material-symbols-outlined",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2493,
+      "selector": ".proof-validate-section",
+      "property": "margin",
+      "value": "0 0 24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2495,
+      "selector": ".proof-validate-section",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2505,
+      "selector": ".proof-validation-result",
+      "property": "padding",
+      "value": "14px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2509,
+      "selector": ".proof-validation-result",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2525,
+      "selector": ".proof-veredito-row",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2529,
+      "selector": ".proof-veredito-row .material-symbols-outlined",
+      "property": "font-size",
+      "value": "20px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2540,
+      "selector": ".proof-veredito",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2541,
+      "selector": ".proof-veredito",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2542,
+      "selector": ".proof-veredito",
+      "property": "line-height",
+      "value": "1.4",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2547,
+      "selector": ".proof-detail-list",
+      "property": "gap",
+      "value": "3px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2553,
+      "selector": ".proof-detail",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2555,
+      "selector": ".proof-detail",
+      "property": "line-height",
+      "value": "1.45",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2561,
+      "selector": ".proof-actions p",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2562,
+      "selector": ".proof-actions p",
+      "property": "line-height",
+      "value": "1.45",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2955,
+      "selector": ".proof-validate-story",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2957,
+      "selector": ".proof-validate-story",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2961,
+      "selector": ".proof-validate-story",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2970,
+      "selector": ".proof-share-hint summary",
+      "property": "padding",
+      "value": "8px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2972,
+      "selector": ".proof-share-hint summary",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2973,
+      "selector": ".proof-share-hint summary",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2978,
+      "selector": ".proof-share-message",
+      "property": "padding",
+      "value": "0 12px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2980,
+      "selector": ".proof-share-label",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2981,
+      "selector": ".proof-share-label",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2982,
+      "selector": ".proof-share-label",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2983,
+      "selector": ".proof-share-label",
+      "property": "letter-spacing",
+      "value": "0.05em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2988,
+      "selector": ".proof-share-quote",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2989,
+      "selector": ".proof-share-quote",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2991,
+      "selector": ".proof-share-quote",
+      "property": "font-style",
+      "value": "italic",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2994,
+      "selector": ".proof-share-quote",
+      "property": "padding",
+      "value": "8px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2999,
+      "selector": ".proof-validate-hint",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3006,
+      "selector": ".proof-context-note",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3008,
+      "selector": ".proof-context-note",
+      "property": "line-height",
+      "value": "1.6",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3009,
+      "selector": ".proof-context-note",
+      "property": "margin",
+      "value": "-8px 0 20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3013,
+      "selector": ".proof-distinction",
+      "property": "gap",
+      "value": "14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3015,
+      "selector": ".proof-distinction",
+      "property": "padding",
+      "value": "16px 18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3023,
+      "selector": ".proof-distinction .material-symbols-outlined",
+      "property": "font-size",
+      "value": "24px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3029,
+      "selector": ".proof-distinction p",
+      "property": "font-size",
+      "value": "13.5px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3030,
+      "selector": ".proof-distinction p",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3036,
+      "selector": ".proof-when-hint",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3038,
+      "selector": ".proof-when-hint",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3040,
+      "selector": ".proof-when-hint",
+      "property": "padding",
+      "value": "8px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3046,
+      "selector": ".proof-blockchain-tech",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3054,
+      "selector": ".proof-what-editor-sees",
+      "property": "padding",
+      "value": "14px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3055,
+      "selector": ".proof-what-editor-sees",
+      "property": "margin",
+      "value": "10px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3059,
+      "selector": ".proof-editor-view-list",
+      "property": "margin",
+      "value": "8px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3063,
+      "selector": ".proof-editor-view-list",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3067,
+      "selector": ".proof-editor-view-list li",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3069,
+      "selector": ".proof-editor-view-list li",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3073,
+      "selector": ".proof-editor-view-list li .material-symbols-outlined",
+      "property": "font-size",
+      "value": "16px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3080,
+      "selector": ".proof-actions-row",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3084,
+      "selector": ".proof-send-btn",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3089,
+      "selector": ".proof-send-hint",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3090,
+      "selector": ".proof-send-hint",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3093,
+      "selector": ".proof-send-hint",
+      "property": "line-height",
+      "value": "1.4",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3096,
+      "selector": ".proof-send-hint .material-symbols-outlined",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3104,
+      "selector": ".proof-author-form",
+      "property": "display",
+      "value": "flex",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3104,
+      "selector": ".proof-author-form",
+      "property": "flex-direction",
+      "value": "column",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3104,
+      "selector": ".proof-author-form",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3106,
+      "selector": ".proof-author-intro",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3108,
+      "selector": ".proof-author-intro",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3110,
+      "selector": ".proof-author-inputs",
+      "property": "display",
+      "value": "flex",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3110,
+      "selector": ".proof-author-inputs",
+      "property": "flex-direction",
+      "value": "column",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3110,
+      "selector": ".proof-author-inputs",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3112,
+      "selector": ".proof-author-input",
+      "property": "border",
+      "value": "1.5px solid var(--line)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3113,
+      "selector": ".proof-author-input",
+      "property": "border-radius",
+      "value": "8px",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3114,
+      "selector": ".proof-author-input",
+      "property": "background",
+      "value": "var(--card)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3115,
+      "selector": ".proof-author-input",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3116,
+      "selector": ".proof-author-input",
+      "property": "font",
+      "value": "inherit",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3117,
+      "selector": ".proof-author-input",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3118,
+      "selector": ".proof-author-input",
+      "property": "padding",
+      "value": "10px 14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3119,
+      "selector": ".proof-author-input",
+      "property": "width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3120,
+      "selector": ".proof-author-input",
+      "property": "box-sizing",
+      "value": "border-box",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3121,
+      "selector": ".proof-author-input",
+      "property": "transition",
+      "value": "border-color var(--motion-quick)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3123,
+      "selector": ".proof-author-input:focus",
+      "property": "outline",
+      "value": "none",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3123,
+      "selector": ".proof-author-input:focus",
+      "property": "border-color",
+      "value": "var(--primary)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3124,
+      "selector": ".proof-author-input::placeholder",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3126,
+      "selector": ".proof-author-input.proof-input-error",
+      "property": "border-color",
+      "value": "var(--sienna)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3127,
+      "selector": ".proof-author-input.proof-input-error",
+      "property": "animation",
+      "value": "proof-shake 0.3s ease",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3135,
+      "selector": ".proof-author-sign-btn",
+      "property": "display",
+      "value": "inline-flex",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3136,
+      "selector": ".proof-author-sign-btn",
+      "property": "align-items",
+      "value": "center",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3137,
+      "selector": ".proof-author-sign-btn",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3138,
+      "selector": ".proof-author-sign-btn",
+      "property": "padding",
+      "value": "10px 18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3139,
+      "selector": ".proof-author-sign-btn",
+      "property": "border",
+      "value": "1.5px solid var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3140,
+      "selector": ".proof-author-sign-btn",
+      "property": "border-radius",
+      "value": "8px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3141,
+      "selector": ".proof-author-sign-btn",
+      "property": "background",
+      "value": "transparent",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3142,
+      "selector": ".proof-author-sign-btn",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3143,
+      "selector": ".proof-author-sign-btn",
+      "property": "font",
+      "value": "inherit",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3144,
+      "selector": ".proof-author-sign-btn",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3145,
+      "selector": ".proof-author-sign-btn",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3146,
+      "selector": ".proof-author-sign-btn",
+      "property": "cursor",
+      "value": "pointer",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3147,
+      "selector": ".proof-author-sign-btn",
+      "property": "transition",
+      "value": "background var(--motion-quick), color var(--motion-quick)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3148,
+      "selector": ".proof-author-sign-btn",
+      "property": "align-self",
+      "value": "flex-start",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3151,
+      "selector": ".proof-author-sign-btn:hover",
+      "property": "background",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3152,
+      "selector": ".proof-author-sign-btn:hover",
+      "property": "color",
+      "value": "var(--paper)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3154,
+      "selector": ".proof-author-sign-btn .material-symbols-outlined",
+      "property": "font-size",
+      "value": "18px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3165,
+      "selector": ".proof-author-badge",
+      "property": "display",
+      "value": "flex",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3166,
+      "selector": ".proof-author-badge",
+      "property": "align-items",
+      "value": "center",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3167,
+      "selector": ".proof-author-badge",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3168,
+      "selector": ".proof-author-badge",
+      "property": "padding",
+      "value": "14px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3169,
+      "selector": ".proof-author-badge",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--primary) 8%, var(--card))",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3170,
+      "selector": ".proof-author-badge",
+      "property": "border",
+      "value": "1.5px solid color-mix(in srgb, var(--primary) 30%, transparent)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3171,
+      "selector": ".proof-author-badge",
+      "property": "border-radius",
+      "value": "10px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3174,
+      "selector": ".proof-author-badge-icon",
+      "property": "font-size",
+      "value": "28px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3175,
+      "selector": ".proof-author-badge-icon",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3176,
+      "selector": ".proof-author-badge-icon",
+      "property": "flex-shrink",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3178,
+      "selector": ".proof-author-badge-info",
+      "property": "flex",
+      "value": "1",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3178,
+      "selector": ".proof-author-badge-info",
+      "property": "min-width",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3180,
+      "selector": ".proof-author-badge-info strong",
+      "property": "display",
+      "value": "block",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3181,
+      "selector": ".proof-author-badge-info strong",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3182,
+      "selector": ".proof-author-badge-info strong",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3183,
+      "selector": ".proof-author-badge-info strong",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3184,
+      "selector": ".proof-author-badge-info strong",
+      "property": "margin-bottom",
+      "value": "3px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3185,
+      "selector": ".proof-author-badge-info strong",
+      "property": "overflow",
+      "value": "hidden",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3186,
+      "selector": ".proof-author-badge-info strong",
+      "property": "text-overflow",
+      "value": "ellipsis",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3187,
+      "selector": ".proof-author-badge-info strong",
+      "property": "white-space",
+      "value": "nowrap",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3189,
+      "selector": ".proof-author-badge-info small",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3189,
+      "selector": ".proof-author-badge-info small",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3191,
+      "selector": ".proof-author-change-btn",
+      "property": "background",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3192,
+      "selector": ".proof-author-change-btn",
+      "property": "border",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3193,
+      "selector": ".proof-author-change-btn",
+      "property": "cursor",
+      "value": "pointer",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3194,
+      "selector": ".proof-author-change-btn",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3195,
+      "selector": ".proof-author-change-btn",
+      "property": "padding",
+      "value": "4px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3196,
+      "selector": ".proof-author-change-btn",
+      "property": "border-radius",
+      "value": "6px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3197,
+      "selector": ".proof-author-change-btn",
+      "property": "display",
+      "value": "grid",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3198,
+      "selector": ".proof-author-change-btn",
+      "property": "place-items",
+      "value": "center",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3199,
+      "selector": ".proof-author-change-btn",
+      "property": "transition",
+      "value": "color var(--motion-quick), background var(--motion-quick)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3200,
+      "selector": ".proof-author-change-btn",
+      "property": "flex-shrink",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3202,
+      "selector": ".proof-author-change-btn:hover",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3202,
+      "selector": ".proof-author-change-btn:hover",
+      "property": "background",
+      "value": "var(--surface-low)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3203,
+      "selector": ".proof-author-change-btn .material-symbols-outlined",
+      "property": "font-size",
+      "value": "16px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 598,
+      "selector": ".proof-chip",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 599,
+      "selector": ".proof-chip",
+      "property": "padding",
+      "value": "4px 10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 604,
+      "selector": ".proof-chip",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 605,
+      "selector": ".proof-chip",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 606,
+      "selector": ".proof-chip",
+      "property": "letter-spacing",
+      "value": "0.04em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 615,
+      "selector": ".proof-chip-dot",
+      "property": "width",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 616,
+      "selector": ".proof-chip-dot",
+      "property": "height",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 623,
+      "selector": ".proof-chip[data-level=\"high\"]   .proof-chip-dot",
+      "property": "background",
+      "value": "#3a7d52",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 626,
+      "selector": ".proof-chip[data-level=\"high\"]",
+      "property": "border-color",
+      "value": "rgba(58, 125, 82, 0.35)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 626,
+      "selector": ".proof-chip[data-level=\"high\"]",
+      "property": "color",
+      "value": "#2a5a3a",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 627,
+      "selector": ".proof-chip[data-level=\"medium\"]",
+      "property": "border-color",
+      "value": "rgba(200, 149, 90, 0.45)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 628,
+      "selector": ".proof-chip[data-level=\"low\"]",
+      "property": "border-color",
+      "value": "rgba(160, 82, 45, 0.45)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 635,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"high\"]",
+      "property": "color",
+      "value": "#5fc990",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1174,
+      "selector": ".rights-proof-link",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1179,
+      "selector": ".rights-proof-link",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1180,
+      "selector": ".rights-proof-link",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1181,
+      "selector": ".rights-proof-link",
+      "property": "padding",
+      "value": "7px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1191,
+      "selector": ".rights-proof-link .material-symbols-outlined",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/09-print.css",
+      "line": 17,
+      "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]",
+      "property": "display",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/09-print.css",
+      "line": 18,
+      "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]",
+      "property": "visibility",
+      "value": "hidden",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 230,
+      "selector": ".view h1,\n.view h2,\n.view h3,\n.archive-heading-title,\n.academy-heading h2,\n.library-heading h2,\n.proof-heading h2,\n.cronograma-heading h2",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 231,
+      "selector": ".view h1,\n.view h2,\n.view h3,\n.archive-heading-title,\n.academy-heading h2,\n.library-heading h2,\n.proof-heading h2,\n.cronograma-heading h2",
+      "property": "letter-spacing",
+      "value": "-0.025em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 452,
+      "selector": ".academy-tool-card:hover,\n.tool-card:hover,\n.training-card:hover,\n.proof-card:hover,\n.cronograma-card:hover,\n.library-card:hover",
+      "property": "box-shadow",
+      "value": "0 8px 24px rgba(30, 25, 21, 0.045)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 45,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "min-width",
+      "value": "34px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 46,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "min-height",
+      "value": "34px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 47,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "padding",
+      "value": "5px 7px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 48,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "border",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 49,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "background",
+      "value": "transparent",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 50,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "opacity",
+      "value": "0.68",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 51,
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip",
+      "property": "transition",
+      "value": "opacity var(--motion-quick), background var(--motion-quick), color var(--motion-quick)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 60,
+      "selector": ".topbar-actions:hover .icon-button,\n  .topbar-actions:focus-within .icon-button,\n  .topbar-actions:hover .offline-badge,\n  .topbar-actions:focus-within .offline-badge,\n  .topbar-actions:hover .proof-chip,\n  .topbar-actions:focus-within .proof-chip",
+      "property": "opacity",
+      "value": "0.9",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 67,
+      "selector": ".topbar-actions .icon-button:hover,\n  .topbar-actions .icon-button:focus-visible,\n  .topbar-actions .offline-badge:hover,\n  .topbar-actions .proof-chip:hover",
+      "property": "opacity",
+      "value": "1",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 68,
+      "selector": ".topbar-actions .icon-button:hover,\n  .topbar-actions .icon-button:focus-visible,\n  .topbar-actions .offline-badge:hover,\n  .topbar-actions .proof-chip:hover",
+      "property": "background",
+      "value": "var(--surface-low)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 8,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-view",
+      "property": "width",
+      "value": "min(1120px, 100%)",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 15,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "max-width",
+      "value": "880px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 16,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "margin",
+      "value": "0 0 clamp(42px, 5vw, 66px)",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 17,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "padding",
+      "value": "clamp(18px, 2vw, 28px) 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 18,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "border",
+      "value": "0",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 19,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "background",
+      "value": "transparent",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 20,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner",
+      "property": "box-shadow",
+      "value": "none",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 24,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "margin",
+      "value": "8px 0 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 25,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "font-family",
+      "value": "var(--font-reading, \"Literata\", Georgia, serif)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 26,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "font-size",
+      "value": "clamp(36px, 4vw, 54px)",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 27,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 28,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "line-height",
+      "value": "1.05",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 29,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2",
+      "property": "letter-spacing",
+      "value": "-0.035em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 33,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)",
+      "property": "max-width",
+      "value": "650px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 34,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)",
+      "property": "margin",
+      "value": "0",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 35,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 36,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)",
+      "property": "font-size",
+      "value": "16px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 37,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)",
+      "property": "line-height",
+      "value": "1.65",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 41,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "display",
+      "value": "inline-flex",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 42,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "align-items",
+      "value": "stretch",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 43,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "gap",
+      "value": "2px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 44,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "margin-top",
+      "value": "28px",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 45,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "padding",
+      "value": "4px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 46,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "border",
+      "value": "1px solid var(--line)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 47,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "border-radius",
+      "value": "9px",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 48,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--surface-low) 62%, transparent)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 52,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "min-height",
+      "value": "42px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 53,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "padding",
+      "value": "9px 15px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 54,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "border",
+      "value": "0",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 55,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "border-radius",
+      "value": "6px",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 56,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "background",
+      "value": "transparent",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 57,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 58,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action",
+      "property": "box-shadow",
+      "value": "none",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 62,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action:hover",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 63,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action:hover",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--card) 64%, transparent)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 68,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action.is-active,\n  html body .app-shell[data-view=\"academia\"] .academy-banner-action[aria-pressed=\"true\"]",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 69,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action.is-active,\n  html body .app-shell[data-view=\"academia\"] .academy-banner-action[aria-pressed=\"true\"]",
+      "property": "background",
+      "value": "var(--card)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 70,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action.is-active,\n  html body .app-shell[data-view=\"academia\"] .academy-banner-action[aria-pressed=\"true\"]",
+      "property": "box-shadow",
+      "value": "0 1px 2px rgba(44, 34, 27, 0.08)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 74,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action .material-symbols-outlined",
+      "property": "font-size",
+      "value": "18px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 75,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action .material-symbols-outlined",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "aviso-global",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 79,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro",
+      "property": "max-width",
+      "value": "760px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 80,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro",
+      "property": "margin",
+      "value": "0 0 24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 84,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro h3",
+      "property": "margin",
+      "value": "7px 0 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 86,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro h3",
+      "property": "font-size",
+      "value": "clamp(25px, 2.4vw, 34px)",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 87,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro h3",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 88,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro h3",
+      "property": "line-height",
+      "value": "1.18",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 92,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro > p:last-child",
+      "property": "max-width",
+      "value": "680px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 94,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro > p:last-child",
+      "property": "line-height",
+      "value": "1.65",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 101,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools",
+      "property": "gap",
+      "value": "clamp(30px, 4vw, 58px)",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 102,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools",
+      "property": "padding",
+      "value": "26px 0 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 111,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools-tabs",
+      "property": "gap",
+      "value": "2px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 113,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools-tabs",
+      "property": "top",
+      "value": "92px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 121,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab",
+      "property": "min-height",
+      "value": "42px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 122,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab",
+      "property": "padding",
+      "value": "9px 11px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 147,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab .material-symbols-outlined",
+      "property": "font-size",
+      "value": "18px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 176,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper",
+      "property": "width",
+      "value": "min(960px, calc(100% - 72px))",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 178,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper",
+      "property": "padding",
+      "value": "clamp(48px, 6vw, 82px) clamp(44px, 6.5vw, 92px) 96px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 186,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > .eyebrow,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .section-intro,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .proof-context-note,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .proof-distinction",
+      "property": "max-width",
+      "value": "720px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 190,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1",
+      "property": "margin",
+      "value": "8px 0 18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 191,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1",
+      "property": "font-size",
+      "value": "clamp(38px, 4vw, 56px)",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 192,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 193,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1",
+      "property": "line-height",
+      "value": "1.06",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 194,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1",
+      "property": "letter-spacing",
+      "value": "-0.035em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 198,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .section-intro",
+      "property": "font-size",
+      "value": "17px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 199,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .section-intro",
+      "property": "line-height",
+      "value": "1.7",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 205,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-context-note",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 206,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-context-note",
+      "property": "line-height",
+      "value": "1.65",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 210,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-distinction",
+      "property": "margin",
+      "value": "32px 0 48px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 211,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-distinction",
+      "property": "padding",
+      "value": "18px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 238,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary",
+      "property": "gap",
+      "value": "14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 239,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary",
+      "property": "min-height",
+      "value": "74px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 240,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary",
+      "property": "padding",
+      "value": "14px 0",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 256,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-number",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 257,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-number",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 258,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-number",
+      "property": "letter-spacing",
+      "value": "0.12em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 265,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-title",
+      "property": "font-size",
+      "value": "20px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 266,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-title",
+      "property": "font-weight",
+      "value": "550",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 273,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-description",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 274,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-description",
+      "property": "line-height",
+      "value": "1.45",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 287,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-body",
+      "property": "padding",
+      "value": "4px 0 44px 48px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 296,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-grid",
+      "property": "gap",
+      "value": "1px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 297,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-grid",
+      "property": "margin",
+      "value": "0 0 22px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 305,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "min-height",
+      "value": "104px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 306,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "padding",
+      "value": "18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 307,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "border",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 308,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "border-radius",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 309,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "background",
+      "value": "var(--card)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 310,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block",
+      "property": "box-shadow",
+      "value": "none",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 337,
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-actions > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-blockchain-section > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-validate-section > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-scope-note p",
+      "property": "max-width",
+      "value": "680px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 364,
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools",
+      "property": "gap",
+      "value": "28px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    }
+  ],
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 235,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 241,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2430,
+        "selector": ".proof-filter-btn"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2438,
+        "selector": ".proof-filter-btn.is-active"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3083,
+        "selector": ".proof-send-btn"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3134,
+        "selector": ".proof-author-sign-btn"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3150,
+        "selector": ".proof-author-sign-btn:hover"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3154,
+        "selector": ".proof-author-sign-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3190,
+        "selector": ".proof-author-change-btn"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3202,
+        "selector": ".proof-author-change-btn:hover"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3203,
+        "selector": ".proof-author-change-btn .material-symbols-outlined"
+      },
+      {
+        "file": "css/09-print.css",
+        "line": 7,
+        "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]"
+      },
+      {
+        "file": "css/20-product-clarity-desktop.css",
+        "line": 42,
+        "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip"
+      },
+      {
+        "file": "css/20-product-clarity-desktop.css",
+        "line": 54,
+        "selector": ".topbar-actions:hover .icon-button,\n  .topbar-actions:focus-within .icon-button,\n  .topbar-actions:hover .offline-badge,\n  .topbar-actions:focus-within .offline-badge,\n  .topbar-actions:hover .proof-chip,\n  .topbar-actions:focus-within .proof-chip"
+      },
+      {
+        "file": "css/20-product-clarity-desktop.css",
+        "line": 63,
+        "selector": ".topbar-actions .icon-button:hover,\n  .topbar-actions .icon-button:focus-visible,\n  .topbar-actions .offline-badge:hover,\n  .topbar-actions .proof-chip:hover"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 223,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2425,
+        "selector": ".proof-sessions-count"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2466,
+        "selector": ".proof-stamp-status"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2470,
+        "selector": ".proof-stamp-status[hidden]"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3164,
+        "selector": ".proof-author-badge"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3173,
+        "selector": ".proof-author-badge-icon"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3178,
+        "selector": ".proof-author-badge-info"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3179,
+        "selector": ".proof-author-badge-info strong"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3189,
+        "selector": ".proof-author-badge-info small"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 304,
+        "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 355,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input"
+      },
+      {
+        "file": "css/00-tokens.css",
+        "line": 360,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input::placeholder"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3104,
+        "selector": ".proof-author-form"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3110,
+        "selector": ".proof-author-inputs"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3111,
+        "selector": ".proof-author-input"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3123,
+        "selector": ".proof-author-input:focus"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3124,
+        "selector": ".proof-author-input::placeholder"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3125,
+        "selector": ".proof-author-input.proof-input-error"
+      }
+    ],
+    "aviso-global": [
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 14,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 23,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 32,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 40,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 51,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 61,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action:hover"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 66,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action.is-active,\n  html body .app-shell[data-view=\"academia\"] .academy-banner-action[aria-pressed=\"true\"]"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-authorship.css",
+        "line": 73,
+        "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action .material-symbols-outlined"
+      }
+    ]
+  },
+  "responsive_rules": [
+    {
+      "file": "css/08-responsive.css",
+      "line": 39,
+      "media": "(max-width: 480px)",
+      "selector": ".archive-security-details,\n  .academy-view > *,\n  .cronograma-wrap,\n  .voice-tool,\n  .rimalab-tool,\n  .decolonial-tool,\n  .rights-lab,\n  [data-view-panel=\"autoria\"] > *,\n  .certificate-paper,\n  .proof-session,\n  .proof-actions,\n  .version-panel"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 209,
+      "media": "(max-width: 820px)",
+      "selector": ".app-shell[data-view=\"autoria\"] .sidebar,\n  .app-shell[data-view=\"arquivo\"] .sidebar,\n  .app-shell[data-view=\"academia\"] .sidebar,\n  .app-shell[data-view=\"biblioteca\"] .sidebar,\n  .app-shell[data-view=\"cronograma\"] .sidebar"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 317,
+      "media": "(max-width: 820px)",
+      "selector": ".certificate-grid"
+    },
+    {
+      "file": "css/09-print.css",
+      "line": 7,
+      "media": "print",
+      "selector": ".topbar, .sidebar, .inspector, .statusbar,\n  .format-bar, .editor-mode-bar, .panel-rail,\n  .panel-toggle, .panel-toggle-left, .panel-toggle-right,\n  .template-reference, .focus-toolbar, .focus-counter,\n  .focus-ruler, .proof-chip, #watercolor-layer,\n  .paged-editor .page-footer, .create-note-overlay,\n  .global-search-results, .theme-picker, .offline-badge,\n  .install-button, .editor-split > .panel-rail,\n  [data-action=\"toggle-left-panel\"],\n  [data-action=\"toggle-right-panel\"]"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 42,
+      "media": "(min-width: 821px)",
+      "selector": ".topbar-actions .icon-button,\n  .topbar-actions .offline-badge,\n  .topbar-actions .proof-chip"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 54,
+      "media": "(min-width: 821px)",
+      "selector": ".topbar-actions:hover .icon-button,\n  .topbar-actions:focus-within .icon-button,\n  .topbar-actions:hover .offline-badge,\n  .topbar-actions:focus-within .offline-badge,\n  .topbar-actions:hover .proof-chip,\n  .topbar-actions:focus-within .proof-chip"
+    },
+    {
+      "file": "css/20-product-clarity-desktop.css",
+      "line": 63,
+      "media": "(min-width: 821px)",
+      "selector": ".topbar-actions .icon-button:hover,\n  .topbar-actions .icon-button:focus-visible,\n  .topbar-actions .offline-badge:hover,\n  .topbar-actions .proof-chip:hover"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 7,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-view"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 14,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 23,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner h2"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 32,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner > p:not(.eyebrow)"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 40,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-actions"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 51,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 61,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action:hover"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 66,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action.is-active,\n  html body .app-shell[data-view=\"academia\"] .academy-banner-action[aria-pressed=\"true\"]"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 73,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-banner-action .material-symbols-outlined"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 78,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 83,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro h3"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 91,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-section-intro > p:last-child"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 97,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 106,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools-tabs"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 119,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 131,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab:hover"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 136,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] #at-voice:checked ~ .academy-tools-tabs label[for=\"at-voice\"],\n  html body .app-shell[data-view=\"academia\"] #at-rimalab:checked ~ .academy-tools-tabs label[for=\"at-rimalab\"],\n  html body .app-shell[data-view=\"academia\"] #at-vocab:checked ~ .academy-tools-tabs label[for=\"at-vocab\"],\n  html body .app-shell[data-view=\"academia\"] #at-biblioteca:checked ~ .academy-tools-tabs label[for=\"at-biblioteca\"],\n  html body .app-shell[data-view=\"academia\"] #at-treino:checked ~ .academy-tools-tabs label[for=\"at-treino\"]"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 146,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab .material-symbols-outlined"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 151,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-panel"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 160,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-panel > :first-child"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 164,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .voice-mirror,\n  html body .app-shell[data-view=\"academia\"] .rimalab-shell,\n  html body .app-shell[data-view=\"academia\"] .vocab-shell,\n  html body .app-shell[data-view=\"academia\"] .academy-library,\n  html body .app-shell[data-view=\"academia\"] .training-shell"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 175,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 181,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > .eyebrow,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .section-intro,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .proof-context-note,\n  html body .app-shell[data-view=\"autoria\"] .certificate-paper > .proof-distinction"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 189,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-paper > h1"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 197,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .section-intro"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 202,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-context-note"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 209,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-distinction"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 218,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-journey"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 224,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-step"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 230,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-step[hidden]"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 234,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 245,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary::-webkit-details-marker"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 249,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary::marker"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 253,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-number"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 261,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-title"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 269,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-description"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 277,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-chevron"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 282,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-step[open] .proof-clarity-chevron"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 286,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-body"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 290,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-clarity-body > :first-child"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 294,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-grid"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 304,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .metric-block"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 313,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-session-bar,\n  html body .app-shell[data-view=\"autoria\"] .proof-author-section,\n  html body .app-shell[data-view=\"autoria\"] .proof-actions,\n  html body .app-shell[data-view=\"autoria\"] .proof-blockchain-section,\n  html body .app-shell[data-view=\"autoria\"] .proof-validate-section,\n  html body .app-shell[data-view=\"autoria\"] .proof-scope-note,\n  html body .app-shell[data-view=\"autoria\"] .timeline,\n  html body .app-shell[data-view=\"autoria\"] .version-panel,\n  html body .app-shell[data-view=\"autoria\"] .version-list"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 325,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-actions,\n  html body .app-shell[data-view=\"autoria\"] .proof-blockchain-section,\n  html body .app-shell[data-view=\"autoria\"] .proof-validate-section,\n  html body .app-shell[data-view=\"autoria\"] .proof-scope-note"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 333,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-actions > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-blockchain-section > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-validate-section > p,\n  html body .app-shell[data-view=\"autoria\"] .proof-scope-note p"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 340,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .proof-actions-row"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 345,
+      "media": "(min-width: 821px)",
+      "selector": "html[data-theme=\"scriptorium\"] body .app-shell[data-view=\"academia\"] .academy-view,\n  html[data-theme=\"scriptorium\"] body .app-shell[data-view=\"autoria\"] .certificate-paper"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 362,
+      "media": "(min-width: 821px) and (max-width: 1120px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tools"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 367,
+      "media": "(min-width: 821px) and (max-width: 1120px)",
+      "selector": "html body .app-shell[data-view=\"autoria\"] .certificate-grid"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 373,
+      "media": "(forced-colors: active) and (min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-tab,\n  html body .app-shell[data-view=\"autoria\"] .proof-clarity-summary"
+    }
+  ],
+  "vereda_rules": [
+    {
+      "file": "css/00-tokens.css",
+      "line": 218,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 223,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .metric-block"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 228,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper strong,\n[data-theme=\"scriptorium\"] .certificate-paper span,\n[data-theme=\"scriptorium\"] .certificate-paper small,\n[data-theme=\"scriptorium\"] .certificate-paper p"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 235,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .secondary-button"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 241,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 247,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper h1,\n[data-theme=\"scriptorium\"] .certificate-paper .eyebrow,\n[data-theme=\"scriptorium\"] .certificate-paper .section-label"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 346,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-session-bar,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-actions"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 355,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 360,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-author-input::placeholder"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 365,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-validation-result"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 374,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-what-editor-sees *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint *,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-share-quote"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 379,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-share-hint summary"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 382,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-editor-view-list li .material-symbols-outlined"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 387,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 391,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction p,\n[data-theme=\"scriptorium\"] .certificate-paper .proof-distinction strong"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 674,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"high\"]"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 681,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"high\"] .proof-chip-dot,\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"high\"] .proof-chip-dot,\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"high\"] .proof-chip-dot,\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"high\"] .proof-chip-dot"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 689,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"low\"],\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"low\"],\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"low\"],\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"low\"]"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 696,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"low\"] .proof-chip-dot,\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"low\"] .proof-chip-dot,\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"low\"] .proof-chip-dot,\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"low\"] .proof-chip-dot"
+    },
+    {
+      "file": "css/03-editor-toolbar.css",
+      "line": 631,
+      "selector": "[data-theme=\"scriptorium\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"cerrado-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"mata-dark\"] .proof-chip[data-level=\"high\"],\n[data-theme=\"amazonia-dark\"] .proof-chip[data-level=\"high\"]"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 345,
+      "selector": "html[data-theme=\"scriptorium\"] body .app-shell[data-view=\"academia\"] .academy-view,\n  html[data-theme=\"scriptorium\"] body .app-shell[data-view=\"autoria\"] .certificate-paper"
+    }
+  ]
+}

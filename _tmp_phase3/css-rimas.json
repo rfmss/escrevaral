@@ -1,0 +1,2541 @@
+{
+  "files": {
+    "css/00-tokens.css": 1,
+    "css/02-shell-navigation.css": 16,
+    "css/03-editor-modes.css": 1,
+    "css/04-analysis-academy.css": 57,
+    "css/06-academy-tools.css": 4,
+    "css/08-responsive.css": 3,
+    "css/15-brand-argila.css": 2,
+    "css/16-entry-argila.css": 3,
+    "css/22-product-clarity-workshop-authorship.css": 2,
+    "css/22-product-clarity-workshop-refine.css": 13,
+    "css/editor-modes.css": 1,
+    "vereda-editorial.css": 2
+  },
+  "token_usage": {
+    "--primary": 30,
+    "--ink": 11,
+    "--line": 10,
+    "--muted": 10,
+    "--card": 9,
+    "--on-primary": 6,
+    "--sienna": 6,
+    "--surface-low": 4,
+    "--surface": 4,
+    "--brand-clay": 4,
+    "--brand-clay-deep": 4,
+    "--motion-quick": 3,
+    "--primary-deep": 3,
+    "--soft-ink": 3,
+    "--surface-mid": 3,
+    "--brand-paper": 3,
+    "--paper": 1,
+    "--shadow": 1,
+    "--ochre": 1,
+    "--argila-radius-sm": 1,
+    "--ff-sans": 1
+  },
+  "hardcoded": [
+    {
+      "file": "css/00-tokens.css",
+      "line": 242,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+      "property": "background",
+      "value": "#8c5a20",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/00-tokens.css",
+      "line": 243,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button",
+      "property": "color",
+      "value": "#f5e4c0",
+      "category": "cor",
+      "theme": "Vereda"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 197,
+      "selector": ".brand-lockup,\n.topbar-actions,\n.offline-badge,\n.module-tabs,\n.workspace,\n.tree-row,\n.nav-row,\n.primary-button,\n.create-button,\n.archive-heading,\n.readability > div",
+      "property": "display",
+      "value": "flex",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 198,
+      "selector": ".brand-lockup,\n.topbar-actions,\n.offline-badge,\n.module-tabs,\n.workspace,\n.tree-row,\n.nav-row,\n.primary-button,\n.create-button,\n.archive-heading,\n.readability > div",
+      "property": "align-items",
+      "value": "center",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 723,
+      "selector": ".primary-button",
+      "property": "justify-content",
+      "value": "center",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 724,
+      "selector": ".primary-button",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 725,
+      "selector": ".primary-button",
+      "property": "border",
+      "value": "0",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 726,
+      "selector": ".primary-button",
+      "property": "border-radius",
+      "value": "7px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 727,
+      "selector": ".primary-button",
+      "property": "background",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 728,
+      "selector": ".primary-button",
+      "property": "color",
+      "value": "var(--on-primary, #f0ede4)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 729,
+      "selector": ".primary-button",
+      "property": "cursor",
+      "value": "pointer",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 730,
+      "selector": ".primary-button",
+      "property": "padding",
+      "value": "12px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 731,
+      "selector": ".primary-button",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 732,
+      "selector": ".primary-button",
+      "property": "box-shadow",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 733,
+      "selector": ".primary-button",
+      "property": "transition",
+      "value": "background var(--motion-quick)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 736,
+      "selector": ".primary-button:hover",
+      "property": "background",
+      "value": "var(--primary-deep, color-mix(in srgb, var(--primary) 85%, #000))",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 859,
+      "selector": ".sidebar > .primary-button",
+      "property": "margin-top",
+      "value": "auto",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 944,
+      "selector": ".welcome-card-primary",
+      "property": "padding",
+      "value": "20px 18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 946,
+      "selector": ".welcome-card-primary .material-symbols-outlined",
+      "property": "font-size",
+      "value": "26px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 947,
+      "selector": ".welcome-card-primary strong",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 948,
+      "selector": ".welcome-card-primary small",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1020,
+      "selector": ".welcome-card-primary",
+      "property": "padding",
+      "value": "16px 14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2308,
+      "selector": ".metric-block--primary",
+      "property": "grid-column",
+      "value": "1 / -1",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2309,
+      "selector": ".metric-block--primary",
+      "property": "display",
+      "value": "flex",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2310,
+      "selector": ".metric-block--primary",
+      "property": "align-items",
+      "value": "baseline",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2311,
+      "selector": ".metric-block--primary",
+      "property": "gap",
+      "value": "24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2312,
+      "selector": ".metric-block--primary",
+      "property": "flex-wrap",
+      "value": "wrap",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2316,
+      "selector": ".metric-block--primary strong",
+      "property": "font-size",
+      "value": "36px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2337,
+      "selector": ".metric-block--primary span",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2337,
+      "selector": ".metric-block--primary span",
+      "property": "font-weight",
+      "value": "500",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2338,
+      "selector": ".metric-block--primary small",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 2338,
+      "selector": ".metric-block--primary small",
+      "property": "margin-top",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3384,
+      "selector": ".ob-btn--primary",
+      "property": "background",
+      "value": "var(--ink)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3385,
+      "selector": ".ob-btn--primary",
+      "property": "color",
+      "value": "var(--paper)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3386,
+      "selector": ".ob-btn--primary",
+      "property": "border-color",
+      "value": "var(--ink)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3388,
+      "selector": ".ob-btn--primary:hover",
+      "property": "opacity",
+      "value": "0.88",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 3388,
+      "selector": ".ob-btn--primary:hover",
+      "property": "background",
+      "value": "var(--ink)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 64,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 65,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 66,
+      "selector": ".soneto-rhyme-tag",
+      "property": "min-width",
+      "value": "18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 69,
+      "selector": ".soneto-rhyme-tag",
+      "property": "padding",
+      "value": "2px 5px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/03-editor-modes.css",
+      "line": 70,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-family",
+      "value": "\"Courier New\", monospace",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 141,
+      "selector": ".rimalab-tool",
+      "property": "gap",
+      "value": "20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 148,
+      "selector": ".rimalab-tool",
+      "property": "padding",
+      "value": "20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 154,
+      "selector": ".rimalab-copy",
+      "property": "gap",
+      "value": "14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 158,
+      "selector": ".rimalab-copy h2",
+      "property": "max-width",
+      "value": "430px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 161,
+      "selector": ".rimalab-copy h2",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 162,
+      "selector": ".rimalab-copy h2",
+      "property": "font-size",
+      "value": "30px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 163,
+      "selector": ".rimalab-copy h2",
+      "property": "line-height",
+      "value": "1.12",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 169,
+      "selector": ".rimalab-copy p:not(.eyebrow)",
+      "property": "line-height",
+      "value": "1.6",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 175,
+      "selector": ".rimalab-actions",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 182,
+      "selector": ".rimalab-workbench",
+      "property": "gap",
+      "value": "14px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 187,
+      "selector": ".rimalab-editor",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 191,
+      "selector": ".rimalab-editor textarea",
+      "property": "width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 192,
+      "selector": ".rimalab-editor textarea",
+      "property": "min-height",
+      "value": "360px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 193,
+      "selector": ".rimalab-editor textarea",
+      "property": "border",
+      "value": "1px solid var(--line)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 194,
+      "selector": ".rimalab-editor textarea",
+      "property": "border-radius",
+      "value": "8px",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 195,
+      "selector": ".rimalab-editor textarea",
+      "property": "outline",
+      "value": "0",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 196,
+      "selector": ".rimalab-editor textarea",
+      "property": "resize",
+      "value": "vertical",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 197,
+      "selector": ".rimalab-editor textarea",
+      "property": "background",
+      "value": "var(--surface-low)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 198,
+      "selector": ".rimalab-editor textarea",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 199,
+      "selector": ".rimalab-editor textarea",
+      "property": "padding",
+      "value": "16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 200,
+      "selector": ".rimalab-editor textarea",
+      "property": "font",
+      "value": "15px/1.8 \"Noto Serif\", Georgia, serif",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 204,
+      "selector": ".rimalab-editor textarea:focus",
+      "property": "border-color",
+      "value": "var(--primary)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 205,
+      "selector": ".rimalab-editor textarea:focus",
+      "property": "background",
+      "value": "var(--card)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 211,
+      "selector": ".rimalab-meta",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 213,
+      "selector": ".rimalab-meta",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 214,
+      "selector": ".rimalab-meta",
+      "property": "font-weight",
+      "value": "800",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 215,
+      "selector": ".rimalab-meta",
+      "property": "letter-spacing",
+      "value": "0.08em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 221,
+      "selector": ".rimalab-dashboard",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 230,
+      "selector": ".rimalab-isometry,\n.rimalab-panel,\n.rimalab-encyclopedia",
+      "property": "padding",
+      "value": "13px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 239,
+      "selector": ".rimalab-isometry.is-isometric",
+      "property": "border-color",
+      "value": "color-mix(in srgb, var(--primary) 46%, var(--line))",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 240,
+      "selector": ".rimalab-isometry.is-isometric",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--primary) 10%, var(--card))",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 241,
+      "selector": ".rimalab-isometry.is-isometric",
+      "property": "transform",
+      "value": "translateY(-1px)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 247,
+      "selector": ".rimalab-isometry strong",
+      "property": "font-size",
+      "value": "22px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 248,
+      "selector": ".rimalab-isometry strong",
+      "property": "line-height",
+      "value": "1.15",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 255,
+      "selector": ".rimalab-isometry span,\n.rimalab-empty,\n.rimalab-note",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 256,
+      "selector": ".rimalab-isometry span,\n.rimalab-empty,\n.rimalab-note",
+      "property": "line-height",
+      "value": "1.5",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 259,
+      "selector": ".rimalab-prose-rhyme-title",
+      "property": "font-size",
+      "value": "11px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 260,
+      "selector": ".rimalab-prose-rhyme-title",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 262,
+      "selector": ".rimalab-prose-rhyme-title",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 263,
+      "selector": ".rimalab-prose-rhyme-title",
+      "property": "letter-spacing",
+      "value": "0.06em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 264,
+      "selector": ".rimalab-prose-rhyme-title",
+      "property": "margin",
+      "value": "0 0 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 269,
+      "selector": ".rimalab-prose-rhyme-group",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 274,
+      "selector": ".rimalab-prose-rhyme-word",
+      "property": "padding",
+      "value": "3px 9px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 278,
+      "selector": ".rimalab-prose-rhyme-word",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 279,
+      "selector": ".rimalab-prose-rhyme-word",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 283,
+      "selector": ".rimalab-finder",
+      "property": "margin",
+      "value": "12px 0 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 284,
+      "selector": ".rimalab-finder",
+      "property": "padding",
+      "value": "10px 12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 291,
+      "selector": ".rimalab-finder-label",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 292,
+      "selector": ".rimalab-finder-label",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 293,
+      "selector": ".rimalab-finder-label",
+      "property": "letter-spacing",
+      "value": "0.06em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 298,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "border",
+      "value": "1px solid var(--line)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 299,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "border-radius",
+      "value": "6px",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 300,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "background",
+      "value": "var(--surface)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 301,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 302,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "font",
+      "value": "inherit",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 303,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 304,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "padding",
+      "value": "6px 10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 305,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 306,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "box-sizing",
+      "value": "border-box",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 307,
+      "selector": ".rimalab-finder-row input[type=\"search\"]",
+      "property": "margin-bottom",
+      "value": "8px",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 309,
+      "selector": ".rimalab-finder-row input:focus",
+      "property": "outline",
+      "value": "2px solid var(--primary)",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 309,
+      "selector": ".rimalab-finder-row input:focus",
+      "property": "outline-offset",
+      "value": "1px",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 310,
+      "selector": ".rimalab-finder-results",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 310,
+      "selector": ".rimalab-finder-results",
+      "property": "min-height",
+      "value": "24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 311,
+      "selector": ".rimalab-finder-group",
+      "property": "gap",
+      "value": "5px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 312,
+      "selector": ".rimalab-finder-group-label",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 312,
+      "selector": ".rimalab-finder-group-label",
+      "property": "text-transform",
+      "value": "uppercase",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 312,
+      "selector": ".rimalab-finder-group-label",
+      "property": "letter-spacing",
+      "value": ".06em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 314,
+      "selector": ".rimalab-finder-chip",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 315,
+      "selector": ".rimalab-finder-chip",
+      "property": "padding",
+      "value": "3px 9px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 323,
+      "selector": ".rimalab-finder-chip.is-toante",
+      "property": "border-color",
+      "value": "var(--sienna, #8b4513)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 323,
+      "selector": ".rimalab-finder-chip.is-toante",
+      "property": "color",
+      "value": "var(--sienna, #8b4513)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 323,
+      "selector": ".rimalab-finder-chip.is-toante",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--sienna, #8b4513) 6%, var(--surface))",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 324,
+      "selector": ".rimalab-finder-empty",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 324,
+      "selector": ".rimalab-finder-empty",
+      "property": "font-style",
+      "value": "italic",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 327,
+      "selector": ".rimalab-panel h3",
+      "property": "margin",
+      "value": "0 0 10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 329,
+      "selector": ".rimalab-panel h3",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 330,
+      "selector": ".rimalab-panel h3",
+      "property": "letter-spacing",
+      "value": "0.1em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 336,
+      "selector": ".rimalab-list",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 341,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "display",
+      "value": "grid",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 342,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "grid-template-columns",
+      "value": "32px minmax(0, 1fr)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 343,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "gap",
+      "value": "10px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 344,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "align-items",
+      "value": "start",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 345,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "border-top",
+      "value": "1px solid var(--line)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 346,
+      "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row",
+      "property": "padding-top",
+      "value": "8px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 351,
+      "selector": ".rimalab-metric-row:first-child,\n.rimalab-rhyme-row:first-child",
+      "property": "border-top",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 352,
+      "selector": ".rimalab-metric-row:first-child,\n.rimalab-rhyme-row:first-child",
+      "property": "padding-top",
+      "value": "0",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 356,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "display",
+      "value": "grid",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 357,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "place-items",
+      "value": "center",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 358,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "width",
+      "value": "28px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 359,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "height",
+      "value": "28px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 360,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "border-radius",
+      "value": "50%",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 361,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "background",
+      "value": "var(--surface-mid)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 362,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 363,
+      "selector": ".rimalab-metric-row > strong",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 368,
+      "selector": ".rimalab-metric-row b,\n.rimalab-rhyme-row b",
+      "property": "display",
+      "value": "block",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 369,
+      "selector": ".rimalab-metric-row b,\n.rimalab-rhyme-row b",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 370,
+      "selector": ".rimalab-metric-row b,\n.rimalab-rhyme-row b",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 375,
+      "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small",
+      "property": "display",
+      "value": "block",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 376,
+      "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small",
+      "property": "margin-top",
+      "value": "3px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 377,
+      "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 378,
+      "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small",
+      "property": "font-size",
+      "value": "12px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 379,
+      "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small",
+      "property": "line-height",
+      "value": "1.45",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 387,
+      "selector": ".rimalab-verse-pair",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 395,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "display",
+      "value": "inline-flex",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 396,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "justify-content",
+      "value": "center",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 397,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "border-radius",
+      "value": "999px",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 398,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "background",
+      "value": "var(--surface-mid)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 399,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "color",
+      "value": "var(--muted)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 400,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "padding",
+      "value": "5px 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 401,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 402,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "font-weight",
+      "value": "900",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 403,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "letter-spacing",
+      "value": "0.06em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 405,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "pointer-events",
+      "value": "none",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 405,
+      "selector": ".rimalab-rhyme-badge",
+      "property": "user-select",
+      "value": "none",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 410,
+      "selector": ".rimalab-rhyme-badge.is-rica,\n.rimalab-rhyme-badge.is-preciosa",
+      "property": "background",
+      "value": "var(--primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 411,
+      "selector": ".rimalab-rhyme-badge.is-rica,\n.rimalab-rhyme-badge.is-preciosa",
+      "property": "color",
+      "value": "var(--on-primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 415,
+      "selector": ".rimalab-rhyme-badge.is-pobre",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--ochre) 42%, var(--card))",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 416,
+      "selector": ".rimalab-rhyme-badge.is-pobre",
+      "property": "color",
+      "value": "var(--ink)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 420,
+      "selector": ".rimalab-rhyme-badge.is-toante",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--primary) 18%, var(--card))",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 421,
+      "selector": ".rimalab-rhyme-badge.is-toante",
+      "property": "color",
+      "value": "var(--primary)",
+      "category": "estatistica",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 426,
+      "selector": ".rimalab-scheme",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 427,
+      "selector": ".rimalab-scheme",
+      "property": "font-size",
+      "value": "18px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 428,
+      "selector": ".rimalab-scheme",
+      "property": "font-weight",
+      "value": "800",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 431,
+      "selector": ".rimalab-scheme",
+      "property": "gap",
+      "value": "8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 438,
+      "selector": ".rimalab-stanza-scheme",
+      "property": "gap",
+      "value": "4px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 439,
+      "selector": ".rimalab-stanza-scheme",
+      "property": "font-size",
+      "value": "15px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 443,
+      "selector": ".rimalab-stanza-scheme em",
+      "property": "font-style",
+      "value": "normal",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 444,
+      "selector": ".rimalab-stanza-scheme em",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 445,
+      "selector": ".rimalab-stanza-scheme em",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 447,
+      "selector": ".rimalab-stanza-scheme em",
+      "property": "letter-spacing",
+      "value": "0.04em",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 454,
+      "selector": ".rimalab-encyclopedia",
+      "property": "gap",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 465,
+      "selector": ".rimalab-encyclopedia article",
+      "property": "padding",
+      "value": "12px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 469,
+      "selector": ".rimalab-encyclopedia h3",
+      "property": "margin",
+      "value": "0 0 8px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 471,
+      "selector": ".rimalab-encyclopedia h3",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 472,
+      "selector": ".rimalab-encyclopedia h3",
+      "property": "font-size",
+      "value": "20px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 478,
+      "selector": ".rimalab-encyclopedia div",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 485,
+      "selector": ".rimalab-encyclopedia span",
+      "property": "padding",
+      "value": "4px 7px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 486,
+      "selector": ".rimalab-encyclopedia span",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 487,
+      "selector": ".rimalab-encyclopedia span",
+      "property": "font-weight",
+      "value": "900",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 493,
+      "selector": ".rimalab-encyclopedia p",
+      "property": "font-size",
+      "value": "13px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 494,
+      "selector": ".rimalab-encyclopedia p",
+      "property": "line-height",
+      "value": "1.55",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 501,
+      "selector": ".rimalab-encyclopedia blockquote",
+      "property": "font-family",
+      "value": "\"Noto Serif\", Georgia, serif",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1557,
+      "selector": ".template-primary",
+      "property": "color",
+      "value": "var(--on-primary, #f0ede4)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1558,
+      "selector": ".template-primary",
+      "property": "padding",
+      "value": "12px 16px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1559,
+      "selector": ".template-primary",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/04-analysis-academy.css",
+      "line": 1562,
+      "selector": ".template-primary:hover",
+      "property": "background",
+      "value": "var(--primary-deep, color-mix(in srgb, var(--primary) 85%, #000))",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 424,
+      "selector": ".secondary-button[data-action=\"clear-rimalab\"]:hover",
+      "property": "color",
+      "value": "var(--sienna)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 425,
+      "selector": ".secondary-button[data-action=\"clear-rimalab\"]:hover",
+      "property": "border-color",
+      "value": "color-mix(in srgb, var(--sienna) 40%, transparent)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/06-academy-tools.css",
+      "line": 426,
+      "selector": ".secondary-button[data-action=\"clear-rimalab\"]:hover",
+      "property": "background",
+      "value": "color-mix(in srgb, var(--sienna) 6%, transparent)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 354,
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea",
+      "property": "min-width",
+      "value": "0",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 355,
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea",
+      "property": "width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 356,
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea",
+      "property": "box-sizing",
+      "value": "border-box",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 254,
+      "selector": ".primary-button,\n.create-button",
+      "property": "min-height",
+      "value": "42px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 255,
+      "selector": ".primary-button,\n.create-button",
+      "property": "border",
+      "value": "1px solid var(--brand-clay)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 256,
+      "selector": ".primary-button,\n.create-button",
+      "property": "border-radius",
+      "value": "var(--argila-radius-sm)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 257,
+      "selector": ".primary-button,\n.create-button",
+      "property": "background",
+      "value": "var(--brand-clay)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 258,
+      "selector": ".primary-button,\n.create-button",
+      "property": "color",
+      "value": "var(--brand-paper)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 259,
+      "selector": ".primary-button,\n.create-button",
+      "property": "box-shadow",
+      "value": "0 2px 8px rgba(156, 95, 68, 0.13)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 260,
+      "selector": ".primary-button,\n.create-button",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 265,
+      "selector": ".primary-button:hover,\n.create-button:hover",
+      "property": "border-color",
+      "value": "var(--brand-clay-deep)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 266,
+      "selector": ".primary-button:hover,\n.create-button:hover",
+      "property": "background",
+      "value": "var(--brand-clay-deep)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 267,
+      "selector": ".primary-button:hover,\n.create-button:hover",
+      "property": "transform",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/15-brand-argila.css",
+      "line": 268,
+      "selector": ".primary-button:hover,\n.create-button:hover",
+      "property": "box-shadow",
+      "value": "0 3px 10px rgba(122, 74, 53, 0.14)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 215,
+      "selector": ".ob-btn--primary",
+      "property": "justify-self",
+      "value": "start",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 216,
+      "selector": ".ob-btn--primary",
+      "property": "min-width",
+      "value": "190px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 217,
+      "selector": ".ob-btn--primary",
+      "property": "margin-top",
+      "value": "30px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 218,
+      "selector": ".ob-btn--primary",
+      "property": "border-color",
+      "value": "var(--brand-clay, #9c5f44)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 219,
+      "selector": ".ob-btn--primary",
+      "property": "background",
+      "value": "var(--brand-clay, #9c5f44)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 220,
+      "selector": ".ob-btn--primary",
+      "property": "color",
+      "value": "var(--brand-paper, #fcfaf7)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 221,
+      "selector": ".ob-btn--primary",
+      "property": "box-shadow",
+      "value": "0 2px 8px rgba(156, 95, 68, 0.14)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 225,
+      "selector": ".ob-btn--primary:hover",
+      "property": "border-color",
+      "value": "var(--brand-clay-deep, #7a4a35)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 226,
+      "selector": ".ob-btn--primary:hover",
+      "property": "background",
+      "value": "var(--brand-clay-deep, #7a4a35)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 227,
+      "selector": ".ob-btn--primary:hover",
+      "property": "color",
+      "value": "var(--brand-paper, #fcfaf7)",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 373,
+      "selector": ".ob-btn--primary",
+      "property": "width",
+      "value": "100%",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 374,
+      "selector": ".ob-btn--primary",
+      "property": "justify-self",
+      "value": "stretch",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 15,
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-editor textarea",
+      "property": "box-sizing",
+      "value": "border-box",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 16,
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-editor textarea",
+      "property": "max-width",
+      "value": "100%",
+      "category": "formulario",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 23,
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-tool",
+      "property": "gap",
+      "value": "24px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 30,
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-copy",
+      "property": "gap",
+      "value": "12px 22px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 43,
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-actions",
+      "property": "max-width",
+      "value": "230px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 64,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-size",
+      "value": "10px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 65,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-weight",
+      "value": "700",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 66,
+      "selector": ".soneto-rhyme-tag",
+      "property": "min-width",
+      "value": "18px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 69,
+      "selector": ".soneto-rhyme-tag",
+      "property": "padding",
+      "value": "2px 5px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "css/editor-modes.css",
+      "line": 70,
+      "selector": ".soneto-rhyme-tag",
+      "property": "font-family",
+      "value": "\"Courier New\", monospace",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 352,
+      "selector": ".ed-btn-primary",
+      "property": "display",
+      "value": "inline-flex",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 353,
+      "selector": ".ed-btn-primary",
+      "property": "align-items",
+      "value": "center",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 354,
+      "selector": ".ed-btn-primary",
+      "property": "gap",
+      "value": "6px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 355,
+      "selector": ".ed-btn-primary",
+      "property": "padding",
+      "value": "11px 20px",
+      "category": "espacamento",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 356,
+      "selector": ".ed-btn-primary",
+      "property": "background",
+      "value": "var(--primary)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 357,
+      "selector": ".ed-btn-primary",
+      "property": "color",
+      "value": "#fff",
+      "category": "cor",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 358,
+      "selector": ".ed-btn-primary",
+      "property": "border",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 359,
+      "selector": ".ed-btn-primary",
+      "property": "border-radius",
+      "value": "8px",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 360,
+      "selector": ".ed-btn-primary",
+      "property": "font-family",
+      "value": "var(--ff-sans)",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 361,
+      "selector": ".ed-btn-primary",
+      "property": "font-size",
+      "value": "14px",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 362,
+      "selector": ".ed-btn-primary",
+      "property": "font-weight",
+      "value": "600",
+      "category": "tipografia",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 363,
+      "selector": ".ed-btn-primary",
+      "property": "text-decoration",
+      "value": "none",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 364,
+      "selector": ".ed-btn-primary",
+      "property": "cursor",
+      "value": "pointer",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 365,
+      "selector": ".ed-btn-primary",
+      "property": "transition",
+      "value": "opacity 0.15s",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    },
+    {
+      "file": "vereda-editorial.css",
+      "line": 367,
+      "selector": ".ed-btn-primary:hover",
+      "property": "opacity",
+      "value": "0.88",
+      "category": "botao",
+      "theme": "base/Alvorada"
+    }
+  ],
+  "component_selectors": {
+    "botao": [
+      {
+        "file": "css/00-tokens.css",
+        "line": 241,
+        "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 186,
+        "selector": ".brand-lockup,\n.topbar-actions,\n.offline-badge,\n.module-tabs,\n.workspace,\n.tree-row,\n.nav-row,\n.primary-button,\n.create-button,\n.archive-heading,\n.readability > div"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 722,
+        "selector": ".primary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 735,
+        "selector": ".primary-button:hover"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 858,
+        "selector": ".sidebar > .primary-button"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3383,
+        "selector": ".ob-btn--primary"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 3388,
+        "selector": ".ob-btn--primary:hover"
+      },
+      {
+        "file": "css/06-academy-tools.css",
+        "line": 423,
+        "selector": ".secondary-button[data-action=\"clear-rimalab\"]:hover"
+      },
+      {
+        "file": "css/15-brand-argila.css",
+        "line": 252,
+        "selector": ".primary-button,\n.create-button"
+      },
+      {
+        "file": "css/15-brand-argila.css",
+        "line": 263,
+        "selector": ".primary-button:hover,\n.create-button:hover"
+      },
+      {
+        "file": "css/16-entry-argila.css",
+        "line": 214,
+        "selector": ".ob-btn--primary"
+      },
+      {
+        "file": "css/16-entry-argila.css",
+        "line": 224,
+        "selector": ".ob-btn--primary:hover"
+      },
+      {
+        "file": "css/16-entry-argila.css",
+        "line": 372,
+        "selector": ".ob-btn--primary"
+      },
+      {
+        "file": "vereda-editorial.css",
+        "line": 351,
+        "selector": ".ed-btn-primary"
+      },
+      {
+        "file": "vereda-editorial.css",
+        "line": 367,
+        "selector": ".ed-btn-primary:hover"
+      }
+    ],
+    "estatistica": [
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2307,
+        "selector": ".metric-block--primary"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2315,
+        "selector": ".metric-block--primary strong"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2337,
+        "selector": ".metric-block--primary span"
+      },
+      {
+        "file": "css/02-shell-navigation.css",
+        "line": 2338,
+        "selector": ".metric-block--primary small"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 238,
+        "selector": ".rimalab-isometry.is-isometric"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 339,
+        "selector": ".rimalab-metric-row,\n.rimalab-rhyme-row"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 349,
+        "selector": ".rimalab-metric-row:first-child,\n.rimalab-rhyme-row:first-child"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 355,
+        "selector": ".rimalab-metric-row > strong"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 366,
+        "selector": ".rimalab-metric-row b,\n.rimalab-rhyme-row b"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 373,
+        "selector": ".rimalab-metric-row span,\n.rimalab-rhyme-row small"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 394,
+        "selector": ".rimalab-rhyme-badge"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 408,
+        "selector": ".rimalab-rhyme-badge.is-rica,\n.rimalab-rhyme-badge.is-preciosa"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 414,
+        "selector": ".rimalab-rhyme-badge.is-pobre"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 419,
+        "selector": ".rimalab-rhyme-badge.is-toante"
+      }
+    ],
+    "formulario": [
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 190,
+        "selector": ".rimalab-editor textarea"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 203,
+        "selector": ".rimalab-editor textarea:focus"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 297,
+        "selector": ".rimalab-finder-row input[type=\"search\"]"
+      },
+      {
+        "file": "css/04-analysis-academy.css",
+        "line": 309,
+        "selector": ".rimalab-finder-row input:focus"
+      },
+      {
+        "file": "css/08-responsive.css",
+        "line": 347,
+        "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea"
+      },
+      {
+        "file": "css/22-product-clarity-workshop-refine.css",
+        "line": 14,
+        "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-editor textarea"
+      }
+    ],
+    "aviso-global": []
+  },
+  "responsive_rules": [
+    {
+      "file": "css/02-shell-navigation.css",
+      "line": 1020,
+      "media": "(max-width: 480px)",
+      "selector": ".welcome-card-primary"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 39,
+      "media": "(max-width: 480px)",
+      "selector": ".archive-security-details,\n  .academy-view > *,\n  .cronograma-wrap,\n  .voice-tool,\n  .rimalab-tool,\n  .decolonial-tool,\n  .rights-lab,\n  [data-view-panel=\"autoria\"] > *,\n  .certificate-paper,\n  .proof-session,\n  .proof-actions,\n  .version-panel"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 334,
+      "media": "(max-width: 820px)",
+      "selector": ".rimalab-tool,\n  .rimalab-workbench,\n  .voice-mirror,\n  .decolonial-tool,\n  .rights-lab"
+    },
+    {
+      "file": "css/08-responsive.css",
+      "line": 347,
+      "media": "(max-width: 820px)",
+      "selector": ".rimalab-editor,\n  .voice-mirror-copy,\n  .voice-mirror-workbench,\n  .voice-mirror textarea,\n  .decolonial-tool textarea,\n  .rights-lab textarea,\n  .rimalab-tool textarea"
+    },
+    {
+      "file": "css/16-entry-argila.css",
+      "line": 372,
+      "media": "(max-width: 720px)",
+      "selector": ".ob-btn--primary"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 136,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] #at-voice:checked ~ .academy-tools-tabs label[for=\"at-voice\"],\n  html body .app-shell[data-view=\"academia\"] #at-rimalab:checked ~ .academy-tools-tabs label[for=\"at-rimalab\"],\n  html body .app-shell[data-view=\"academia\"] #at-vocab:checked ~ .academy-tools-tabs label[for=\"at-vocab\"],\n  html body .app-shell[data-view=\"academia\"] #at-biblioteca:checked ~ .academy-tools-tabs label[for=\"at-biblioteca\"],\n  html body .app-shell[data-view=\"academia\"] #at-treino:checked ~ .academy-tools-tabs label[for=\"at-treino\"]"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-authorship.css",
+      "line": 164,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .voice-mirror,\n  html body .app-shell[data-view=\"academia\"] .rimalab-shell,\n  html body .app-shell[data-view=\"academia\"] .vocab-shell,\n  html body .app-shell[data-view=\"academia\"] .academy-library,\n  html body .app-shell[data-view=\"academia\"] .training-shell"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 4,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .academy-tool-panel,\n  html body .app-shell[data-view=\"academia\"] .academy-tool-panel > *,\n  html body .app-shell[data-view=\"academia\"] .rimalab-tool,\n  html body .app-shell[data-view=\"academia\"] .rimalab-workbench,\n  html body .app-shell[data-view=\"academia\"] .rimalab-editor,\n  html body .app-shell[data-view=\"academia\"] .rimalab-dashboard"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 14,
+      "media": "(min-width: 821px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-editor textarea"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 21,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-tool"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 26,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-copy"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 33,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-copy > .eyebrow,\n  html body .app-shell[data-view=\"academia\"] .rimalab-copy > h2,\n  html body .app-shell[data-view=\"academia\"] .rimalab-copy > p"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 39,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-actions"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 46,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-workbench"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 50,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-dashboard"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 54,
+      "media": "(min-width: 821px) and (max-width: 1350px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-encyclopedia"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 60,
+      "media": "(min-width: 821px) and (max-width: 1020px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-copy"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 64,
+      "media": "(min-width: 821px) and (max-width: 1020px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-actions"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 70,
+      "media": "(min-width: 821px) and (max-width: 1020px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-dashboard"
+    },
+    {
+      "file": "css/22-product-clarity-workshop-refine.css",
+      "line": 74,
+      "media": "(min-width: 821px) and (max-width: 1020px)",
+      "selector": "html body .app-shell[data-view=\"academia\"] .rimalab-encyclopedia"
+    }
+  ],
+  "vereda_rules": [
+    {
+      "file": "css/00-tokens.css",
+      "line": 241,
+      "selector": "[data-theme=\"scriptorium\"] .certificate-paper .primary-button"
+    }
+  ]
+}
