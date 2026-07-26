@@ -1,0 +1,76 @@
+name: Operação temporária — aplicar contraste de Vereda
+
+on:
+  push:
+    branches:
+      - agent/contraste-text-muted-vereda
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Clonar branch
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Aplicar substituições exatas
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          OLD_VERSION = "20260726-lexical-hint-v1"
+          NEW_VERSION = "20260726-text-muted-contrast-v1"
+
+          def replace_exact(path, old, new, *, expected=None, minimum=None):
+              file = Path(path)
+              text = file.read_text(encoding="utf-8")
+              count = text.count(old)
+              if expected is not None and count != expected:
+                  raise SystemExit(
+                      f"{path}: esperado {expected} ocorrência(s) de {old!r}; encontrado {count}"
+                  )
+              if minimum is not None and count < minimum:
+                  raise SystemExit(
+                      f"{path}: esperado ao menos {minimum} ocorrência(s) de {old!r}; encontrado {count}"
+                  )
+              file.write_text(text.replace(old, new), encoding="utf-8")
+              print(f"{path}: {count} substituição(ões)")
+
+          replace_exact(
+              "css/00-tokens.css",
+              "  --muted: #a69580;",
+              "  --muted: #b7a996;",
+              expected=1,
+          )
+          replace_exact("index.html", OLD_VERSION, NEW_VERSION, minimum=60)
+          replace_exact("service-worker.js", OLD_VERSION, NEW_VERSION, minimum=2)
+          replace_exact("ui-dialog.js", OLD_VERSION, NEW_VERSION, expected=1)
+          replace_exact(
+              "service-worker.js",
+              'const CACHE_NAME = "vereda-offline-v959";',
+              'const CACHE_NAME = "vereda-offline-v960";',
+              expected=1,
+          )
+          PY
+
+      - name: Validar alteração
+        run: |
+          python3 -m py_compile scripts/auditor-design-tokens-contrast.py
+          python3 scripts/auditor-design-tokens-contrast.py
+          python3 scripts/auditor-asset-version.py
+          git diff --check
+
+      - name: Registrar alteração na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add css/00-tokens.css index.html service-worker.js ui-dialog.js
+          git commit -m "Corrige contraste de text-muted em Vereda"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
