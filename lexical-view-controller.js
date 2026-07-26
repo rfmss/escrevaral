@@ -108,7 +108,7 @@
   global.renderLexicalView = enhancedRenderLexicalView;
 
   if (hint) {
-    hint.textContent = 'Busque uma palavra ou selecione uma palavra ou frase no texto — sem sair da sua mesa.';
+    hint.textContent = 'Selecione uma palavra no texto para ler seu significado, sinônimos e uso — sem sair daqui.';
   }
 
   // A busca precisa vencer uma frase analisada anteriormente. O listener em captura
