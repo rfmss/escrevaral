@@ -112,11 +112,20 @@ def main() -> int:
             context.set_offline(True)
             page.reload(wait_until="domcontentloaded", timeout=15_000)
             title_offline = page.title()
-            body_text = page.locator("body").inner_text(timeout=10_000)
+            page.wait_for_selector('[data-view-target="editor"]', state="attached", timeout=10_000)
+            page.wait_for_selector('[data-view-target="arquivo"]', state="attached", timeout=10_000)
+            editor_controls = page.locator('[data-view-target="editor"]').count()
+            archive_controls = page.locator('[data-view-target="arquivo"]').count()
             observed["title_online"] = title_online
             observed["title_offline"] = title_offline
+            observed["editor_controls_offline"] = editor_controls
+            observed["archive_controls_offline"] = archive_controls
             require("Escrevaral" in title_offline, "aplicação recarregou offline", f"recarga offline falhou: {title_offline!r}")
-            require("Escrever" in body_text and "Acervo" in body_text, "navegação essencial disponível offline", "interface essencial ausente na recarga offline")
+            require(
+                editor_controls > 0 and archive_controls > 0,
+                "navegação essencial disponível offline",
+                f"controles essenciais ausentes: editor={editor_controls}, acervo={archive_controls}",
+            )
 
             context.set_offline(False)
             browser.close()
