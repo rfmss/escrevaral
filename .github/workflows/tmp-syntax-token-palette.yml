@@ -1,0 +1,297 @@
+name: Aplicação temporária da paleta sintática
+
+on:
+  push:
+    branches:
+      - agent/syntax-token-palette
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout da branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/syntax-token-palette
+          fetch-depth: 0
+
+      - name: Aplicar tokens e sincronizar distribuição
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          root_path = Path("css/00-tokens.css")
+          root_css = root_path.read_text(encoding="utf-8")
+
+          light_anchor = "  --sienna: #a0522d;\n"
+          light_tokens = """  --sienna: #a0522d;
+          --syntax-sujeito: #465A55;
+          --syntax-verbo: #1250B1;
+          --syntax-objeto: #5B4031;
+          --syntax-adjunto: #4C2C67;
+          --syntax-predicativo: #5F0032;
+          --syntax-vocativo: #705103;
+          --syntax-aposto: #343800;
+          """
+          if root_css.count(light_anchor) != 1:
+              raise SystemExit("Âncora dos tokens de Alvorada não é única")
+          root_css = root_css.replace(light_anchor, light_tokens, 1)
+
+          dark_anchor = "  --sienna: #8c3a2b;\n"
+          dark_tokens = """  --sienna: #8c3a2b;
+          --syntax-sujeito: #82D2A1;
+          --syntax-verbo: #7B99B4;
+          --syntax-objeto: #EC945E;
+          --syntax-adjunto: #C99CF1;
+          --syntax-predicativo: #C48590;
+          --syntax-vocativo: #FBB70E;
+          --syntax-aposto: #C9F28A;
+          """
+          if root_css.count(dark_anchor) != 1:
+              raise SystemExit("Âncora dos tokens de Vereda não é única")
+          root_css = root_css.replace(dark_anchor, dark_tokens, 1)
+
+          legacy_start = "/* ─── Painel sintático — cores luminosas para temas escuros ─── */"
+          next_section = "/* ─── Clone de dica visual — substitui title nativo ─── */"
+          if root_css.count(legacy_start) != 1 or root_css.count(next_section) != 1:
+              raise SystemExit("Bloco sintático legado em 00-tokens.css não foi localizado de forma única")
+          start = root_css.index(legacy_start)
+          end = root_css.index(next_section, start)
+          root_css = root_css[:start] + next_section + root_css[end + len(next_section):]
+          root_path.write_text(root_css, encoding="utf-8")
+
+          precision_path = Path("css/03-inspector-precision.css")
+          precision_css = precision_path.read_text(encoding="utf-8")
+          selector_start = '.syntax-token[data-funcao="sujeito"]'
+          tooltip_start = ".syntax-token-tooltip {"
+          if precision_css.count(selector_start) != 1 or precision_css.count(tooltip_start) != 1:
+              raise SystemExit("Bloco efetivo do painel sintático não foi localizado de forma única")
+          start = precision_css.index(selector_start)
+          end = precision_css.index(tooltip_start, start)
+          semantic_rules = """.syntax-token[data-funcao="sujeito"]     { border-color: var(--syntax-sujeito); }
+          .syntax-token[data-funcao="sujeito"]     .syntax-token-label { color: var(--syntax-sujeito); }
+          .syntax-token[data-funcao="verbo"]       { border-color: var(--syntax-verbo); }
+          .syntax-token[data-funcao="verbo"]       .syntax-token-label { color: var(--syntax-verbo); }
+          .syntax-token[data-funcao="objeto"]      { border-color: var(--syntax-objeto); }
+          .syntax-token[data-funcao="objeto"]      .syntax-token-label { color: var(--syntax-objeto); }
+          .syntax-token[data-funcao="adjunto"]     { border-color: var(--syntax-adjunto); }
+          .syntax-token[data-funcao="adjunto"]     .syntax-token-label { color: var(--syntax-adjunto); }
+          .syntax-token[data-funcao="predicativo"] { border-color: var(--syntax-predicativo); }
+          .syntax-token[data-funcao="predicativo"] .syntax-token-label { color: var(--syntax-predicativo); }
+          .syntax-token[data-funcao="vocativo"]    { border-color: var(--syntax-vocativo); }
+          .syntax-token[data-funcao="vocativo"]    .syntax-token-label { color: var(--syntax-vocativo); }
+          .syntax-token[data-funcao="aposto"]      { border-color: var(--syntax-aposto); }
+          .syntax-token[data-funcao="aposto"]      .syntax-token-label { color: var(--syntax-aposto); }
+
+          """
+          precision_css = precision_css[:start] + semantic_rules + precision_css[end:]
+          precision_path.write_text(precision_css, encoding="utf-8")
+
+          old_asset = "20260726-remove-dead-dark-themes-v2"
+          new_asset = "20260726-syntax-token-palette-v1"
+          versioned_paths = [
+              Path("index.html"),
+              Path("service-worker.js"),
+              Path("ui-dialog.js"),
+              Path("css/14-archive-inspector.css"),
+              Path("css/wood-icons.css"),
+          ]
+          for path in versioned_paths:
+              text = path.read_text(encoding="utf-8")
+              if old_asset not in text:
+                  raise SystemExit(f"Versão anterior ausente em {path}")
+              path.write_text(text.replace(old_asset, new_asset), encoding="utf-8")
+
+          sw_path = Path("service-worker.js")
+          sw = sw_path.read_text(encoding="utf-8")
+          old_cache = 'const CACHE_NAME = "vereda-offline-v963";'
+          new_cache = 'const CACHE_NAME = "vereda-offline-v964";'
+          if sw.count(old_cache) != 1:
+              raise SystemExit("Cache v963 não foi localizado de forma única")
+          sw_path.write_text(sw.replace(old_cache, new_cache, 1), encoding="utf-8")
+
+          Path(".github/workflows/tmp-syntax-token-palette.yml").unlink()
+          PY
+
+      - name: Validar paletas, contraste e simulações
+        run: |
+          python3 - <<'PY'
+          import itertools
+          import math
+          import re
+          from pathlib import Path
+
+          ALVORADA = {
+              "Sujeito": "#465A55",
+              "Verbo": "#1250B1",
+              "Objeto": "#5B4031",
+              "Adjunto": "#4C2C67",
+              "Predicativo": "#5F0032",
+              "Vocativo": "#705103",
+              "Aposto": "#343800",
+          }
+          VEREDA = {
+              "Sujeito": "#82D2A1",
+              "Verbo": "#7B99B4",
+              "Objeto": "#EC945E",
+              "Adjunto": "#C99CF1",
+              "Predicativo": "#C48590",
+              "Vocativo": "#FBB70E",
+              "Aposto": "#C9F28A",
+          }
+
+          css = Path("css/00-tokens.css").read_text(encoding="utf-8")
+          precision = Path("css/03-inspector-precision.css").read_text(encoding="utf-8")
+          for name, value in ALVORADA.items():
+              key = name.lower()
+              expected = f"--syntax-{key}: {value};"
+              if expected not in css:
+                  raise SystemExit(f"Token ausente em Alvorada: {expected}")
+              if precision.count(f"var(--syntax-{key})") != 2:
+                  raise SystemExit(f"Consumo incorreto do token {key}")
+          for name, value in VEREDA.items():
+              key = name.lower()
+              block = re.search(r'\[data-theme="scriptorium"\]\s*\{(?P<body>.*?)\n\}', css, re.S)
+              if not block or f"--syntax-{key}: {value};" not in block.group("body"):
+                  raise SystemExit(f"Token ausente em Vereda: --syntax-{key}: {value}")
+          if ".syntax-token[data-funcao" in css:
+              raise SystemExit("Seletores sintáticos legados permaneceram em 00-tokens.css")
+
+          def rgb(hex_value):
+              h = hex_value.lstrip("#")
+              return tuple(int(h[i:i+2], 16) / 255 for i in (0, 2, 4))
+
+          def linear_channel(c):
+              return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+
+          def encode_channel(c):
+              c = min(1.0, max(0.0, c))
+              return 12.92 * c if c <= 0.0031308 else 1.055 * (c ** (1 / 2.4)) - 0.055
+
+          def luminance(hex_value):
+              r, g, b = (linear_channel(c) for c in rgb(hex_value))
+              return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+          def contrast(a, b):
+              l1, l2 = sorted((luminance(a), luminance(b)), reverse=True)
+              return (l1 + 0.05) / (l2 + 0.05)
+
+          MATRICES = {
+              "deuteranopia": (
+                  (0.367322, 0.860646, -0.227968),
+                  (0.280085, 0.672501, 0.047413),
+                  (-0.011820, 0.042940, 0.968881),
+              ),
+              "protanopia": (
+                  (0.152286, 1.052583, -0.204868),
+                  (0.114503, 0.786281, 0.099216),
+                  (-0.003882, -0.048116, 1.051998),
+              ),
+          }
+
+          def simulate(hex_value, matrix):
+              lin = tuple(linear_channel(c) for c in rgb(hex_value))
+              transformed = tuple(sum(matrix[row][col] * lin[col] for col in range(3)) for row in range(3))
+              encoded = tuple(round(255 * encode_channel(c)) for c in transformed)
+              return "#" + "".join(f"{min(255, max(0, c)):02X}" for c in encoded)
+
+          def lab(hex_value):
+              r, g, b = (linear_channel(c) for c in rgb(hex_value))
+              x = 0.4124564*r + 0.3575761*g + 0.1804375*b
+              y = 0.2126729*r + 0.7151522*g + 0.0721750*b
+              z = 0.0193339*r + 0.1191920*g + 0.9503041*b
+              x, y, z = x/0.95047, y/1.0, z/1.08883
+              delta = 6/29
+              def f(v):
+                  return v ** (1/3) if v > delta**3 else v/(3*delta**2) + 4/29
+              fx, fy, fz = f(x), f(y), f(z)
+              return (116*fy - 16, 500*(fx-fy), 200*(fy-fz))
+
+          def de2000(first, second):
+              L1,a1,b1 = lab(first)
+              L2,a2,b2 = lab(second)
+              C1, C2 = math.hypot(a1,b1), math.hypot(a2,b2)
+              Cbar = (C1+C2)/2
+              G = 0.5*(1-math.sqrt(Cbar**7/(Cbar**7+25**7))) if Cbar else 0.5
+              a1p, a2p = (1+G)*a1, (1+G)*a2
+              C1p, C2p = math.hypot(a1p,b1), math.hypot(a2p,b2)
+              h1p = math.degrees(math.atan2(b1,a1p)) % 360 if C1p else 0
+              h2p = math.degrees(math.atan2(b2,a2p)) % 360 if C2p else 0
+              dLp, dCp = L2-L1, C2p-C1p
+              dh = h2p-h1p
+              if C1p*C2p == 0: dhp = 0
+              elif abs(dh) <= 180: dhp = dh
+              elif dh > 180: dhp = dh-360
+              else: dhp = dh+360
+              dHp = 2*math.sqrt(C1p*C2p)*math.sin(math.radians(dhp/2))
+              Lbar, Cbarp = (L1+L2)/2, (C1p+C2p)/2
+              if C1p*C2p == 0: hbar = h1p+h2p
+              elif abs(h1p-h2p) <= 180: hbar = (h1p+h2p)/2
+              elif h1p+h2p < 360: hbar = (h1p+h2p+360)/2
+              else: hbar = (h1p+h2p-360)/2
+              T = 1 - 0.17*math.cos(math.radians(hbar-30)) + 0.24*math.cos(math.radians(2*hbar)) + 0.32*math.cos(math.radians(3*hbar+6)) - 0.20*math.cos(math.radians(4*hbar-63))
+              dtheta = 30*math.exp(-((hbar-275)/25)**2)
+              Rc = 2*math.sqrt(Cbarp**7/(Cbarp**7+25**7)) if Cbarp else 0
+              Sl = 1 + 0.015*(Lbar-50)**2/math.sqrt(20+(Lbar-50)**2)
+              Sc = 1 + 0.045*Cbarp
+              Sh = 1 + 0.015*Cbarp*T
+              Rt = -math.sin(math.radians(2*dtheta))*Rc
+              return math.sqrt((dLp/Sl)**2 + (dCp/Sc)**2 + (dHp/Sh)**2 + Rt*(dCp/Sc)*(dHp/Sh))
+
+          backgrounds = {"Alvorada": "#E8DECE", "Vereda": "#261E1A"}
+          palettes = {"Alvorada": ALVORADA, "Vereda": VEREDA}
+          allowed = {
+              ("Alvorada", "deuteranopia"): {frozenset(("Objeto", "Aposto"))},
+              ("Alvorada", "protanopia"): {
+                  frozenset(("Objeto", "Aposto")),
+                  frozenset(("Vocativo", "Aposto")),
+              },
+          }
+
+          for theme, palette in palettes.items():
+              for name, value in palette.items():
+                  ratio = contrast(value, backgrounds[theme])
+                  if ratio < 5.5:
+                      raise SystemExit(f"Contraste insuficiente: {theme} {name} = {ratio:.2f}:1")
+              for a, b in itertools.combinations(palette, 2):
+                  normal = de2000(palette[a], palette[b])
+                  if normal < 16:
+                      raise SystemExit(f"ΔE00 normal insuficiente: {theme} {a}×{b} = {normal:.2f}")
+                  for condition, matrix in MATRICES.items():
+                      value = de2000(simulate(palette[a], matrix), simulate(palette[b], matrix))
+                      pair = frozenset((a, b))
+                      if value < 11 and pair not in allowed.get((theme, condition), set()):
+                          raise SystemExit(f"Conflito não aprovado: {theme} {condition} {a}×{b} = {value:.2f}")
+
+          known = {
+              ("deuteranopia", "Objeto", "Aposto"): 9.59,
+              ("protanopia", "Objeto", "Aposto"): 10.49,
+              ("protanopia", "Vocativo", "Aposto"): 10.71,
+          }
+          for (condition, a, b), expected in known.items():
+              matrix = MATRICES[condition]
+              actual = de2000(simulate(ALVORADA[a], matrix), simulate(ALVORADA[b], matrix))
+              if round(actual, 2) != expected:
+                  raise SystemExit(f"Métrica conhecida mudou: {condition} {a}×{b} = {actual:.2f}")
+              print(f"Conflito moderado conhecido: Alvorada {condition} {a}×{b} = {actual:.2f}")
+
+          print("Paletas sintáticas, contraste e simulações validados.")
+          PY
+
+      - name: Executar auditores do repositório
+        run: |
+          python3 scripts/auditor-asset-version.py
+          python3 scripts/auditor-design-tokens-contrast.py
+          python3 scripts/auditor-repository-boundary.py
+          git diff --check
+
+      - name: Commitar resultado sem o workflow temporário
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add css/00-tokens.css css/03-inspector-precision.css index.html service-worker.js ui-dialog.js css/14-archive-inspector.css css/wood-icons.css .github/workflows/tmp-syntax-token-palette.yml
+          git commit -m "Implementa paleta sintática acessível"
+          git push origin HEAD:agent/syntax-token-palette
