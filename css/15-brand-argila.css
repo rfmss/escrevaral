@@ -96,7 +96,7 @@
   --action-button-ghost-hover-background: var(--surface-low);
   --action-button-disabled-opacity: 0.48;
 
-  --text-statistic-label: var(--muted);
+  --text-statistic-label: var(--soft-ink);
   --text-statistic-value: var(--ink);
   --text-statistic-detail: var(--soft-ink);
   --text-statistic-label-size: 0.75rem;
