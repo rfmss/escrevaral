@@ -1,36 +1,154 @@
-name: Inventário temporário de branches
+name: Higiene temporária de branches
 
 on:
   pull_request:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: read
 
 jobs:
-  inventariar:
+  limpar:
     if: github.head_ref == 'ops/branch-hygiene'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4.2.2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - name: Inventariar branches remotas
+      - name: Classificar branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p reports/auditoria/branch-hygiene-artifacts
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+
+          gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state all \
+            --limit 500 \
+            --json headRefName,number,title,state,mergedAt,closedAt \
+            > reports/auditoria/branch-hygiene-artifacts/pull-requests.json
+
           git ls-remote --heads origin \
             | sed 's#refs/heads/##' \
             | sort -k2 \
-            > reports/auditoria/branch-hygiene-artifacts/branches.txt
-          cat reports/auditoria/branch-hygiene-artifacts/branches.txt
+            > reports/auditoria/branch-hygiene-artifacts/branches-before.txt
 
-      - name: Guardar inventário
+          : > reports/auditoria/branch-hygiene-artifacts/delete.tsv
+          : > reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+
+          while IFS=$'\t' read -r sha branch; do
+            case "$branch" in
+              main)
+                printf '%s\t%s\n' "$branch" 'branch padrão' >> reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+                continue
+                ;;
+              ops/branch-hygiene)
+                printf '%s\t%s\n' "$branch" 'branch operacional; remover ao final' >> reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+                continue
+                ;;
+              backup-before-*|restore-*|restore-full-*)
+                printf '%s\t%s\n' "$branch" 'backup ou restauração preservado' >> reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+                continue
+                ;;
+            esac
+
+            if jq -e --arg branch "$branch" 'any(.[]; .headRefName == $branch and .mergedAt != null)' \
+              reports/auditoria/branch-hygiene-artifacts/pull-requests.json >/dev/null; then
+              printf '%s\t%s\n' "$branch" 'PR incorporado' >> reports/auditoria/branch-hygiene-artifacts/delete.tsv
+              continue
+            fi
+
+            if git merge-base --is-ancestor "$sha" origin/main; then
+              printf '%s\t%s\n' "$branch" 'commit já alcançável por main' >> reports/auditoria/branch-hygiene-artifacts/delete.tsv
+              continue
+            fi
+
+            case "$branch" in
+              agent/js-controllers-ui-pilot|feature/task-first-writing-flow-28au4lgddzt2f|refactor/js-structure-inventory)
+                printf '%s\t%s\n' "$branch" 'tentativa formalmente encerrada como obsoleta' >> reports/auditoria/branch-hygiene-artifacts/delete.tsv
+                ;;
+              *)
+                printf '%s\t%s\n' "$branch" 'sem classificação segura; preservado' >> reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+                ;;
+            esac
+          done < reports/auditoria/branch-hygiene-artifacts/branches-before.txt
+
+          echo 'Branches marcadas para remoção:'
+          cat reports/auditoria/branch-hygiene-artifacts/delete.tsv
+          echo 'Branches preservadas:'
+          cat reports/auditoria/branch-hygiene-artifacts/preserve.tsv
+
+      - name: Remover branches classificadas
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > reports/auditoria/branch-hygiene-artifacts/deleted.tsv
+          : > reports/auditoria/branch-hygiene-artifacts/failed.tsv
+
+          while IFS=$'\t' read -r branch reason; do
+            test -n "$branch" || continue
+            if git push origin --delete "$branch"; then
+              printf '%s\t%s\n' "$branch" "$reason" >> reports/auditoria/branch-hygiene-artifacts/deleted.tsv
+            else
+              printf '%s\t%s\n' "$branch" "$reason" >> reports/auditoria/branch-hygiene-artifacts/failed.tsv
+            fi
+          done < reports/auditoria/branch-hygiene-artifacts/delete.tsv
+
+          if test -s reports/auditoria/branch-hygiene-artifacts/failed.tsv; then
+            echo 'Falhas ao remover branches:'
+            cat reports/auditoria/branch-hygiene-artifacts/failed.tsv
+            exit 1
+          fi
+
+      - name: Verificar resultado
+        shell: bash
+        run: |
+          set -euo pipefail
+          git ls-remote --heads origin \
+            | sed 's#refs/heads/##' \
+            | sort -k2 \
+            > reports/auditoria/branch-hygiene-artifacts/branches-after.txt
+
+          while IFS=$'\t' read -r branch _reason; do
+            test -n "$branch" || continue
+            if awk -F '\t' -v branch="$branch" '$2 == branch { found=1 } END { exit found ? 0 : 1 }' \
+              reports/auditoria/branch-hygiene-artifacts/branches-after.txt; then
+              echo "Branch ainda existe após remoção: $branch"
+              exit 1
+            fi
+          done < reports/auditoria/branch-hygiene-artifacts/deleted.tsv
+
+          before="$(wc -l < reports/auditoria/branch-hygiene-artifacts/branches-before.txt)"
+          deleted="$(wc -l < reports/auditoria/branch-hygiene-artifacts/deleted.tsv)"
+          preserved="$(wc -l < reports/auditoria/branch-hygiene-artifacts/preserve.tsv)"
+          after="$(wc -l < reports/auditoria/branch-hygiene-artifacts/branches-after.txt)"
+
+          cat > reports/auditoria/branch-hygiene-artifacts/summary.md <<EOF
+          # Higiene de branches
+
+          - antes: $before branches;
+          - removidas: $deleted;
+          - preservadas por classificação: $preserved;
+          - remotas após a limpeza, antes de remover a branch operacional: $after.
+
+          Backups, restores e branches sem classificação segura foram preservados.
+          EOF
+
+      - name: Guardar relatório
         uses: actions/upload-artifact@v4
         with:
           name: branch-hygiene-${{ github.run_id }}
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 30
           path: reports/auditoria/branch-hygiene-artifacts/**
+
+      - name: Remover a própria branch operacional
+        if: success()
+        run: git push origin --delete ops/branch-hygiene
