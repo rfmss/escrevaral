@@ -424,215 +424,37 @@
   opacity: 1;
 }
 
-[data-theme="scriptorium"] #delete-undo-toast,
-[data-theme="cerrado-dark"] #delete-undo-toast,
-[data-theme="mata-dark"] #delete-undo-toast,
-[data-theme="amazonia-dark"] #delete-undo-toast {
+[data-theme="scriptorium"] #delete-undo-toast {
   background: var(--surface-high) !important;
   border: 1px solid var(--line);
   color: var(--ink) !important;
 }
 
-[data-theme="scriptorium"] #delete-undo-btn,
-[data-theme="cerrado-dark"] #delete-undo-btn,
-[data-theme="mata-dark"] #delete-undo-btn,
-[data-theme="amazonia-dark"] #delete-undo-btn {
+[data-theme="scriptorium"] #delete-undo-btn {
   color: var(--ink) !important;
 }
 
-[data-theme="cerrado-dark"] .tree-row.is-current,
-[data-theme="mata-dark"] .tree-row.is-current,
-[data-theme="amazonia-dark"] .tree-row.is-current {
-  color: var(--ink);
-}
-
-[data-theme="cerrado-dark"] .crono-month-btn,
-[data-theme="mata-dark"] .crono-month-btn,
-[data-theme="amazonia-dark"] .crono-month-btn {
-  color: var(--muted);
-  opacity: 1;
-}
-
-[data-theme="cerrado-dark"] .crono-month-btn:hover,
-[data-theme="mata-dark"] .crono-month-btn:hover,
-[data-theme="amazonia-dark"] .crono-month-btn:hover {
-  color: var(--soft-ink);
-}
-
-[data-theme="cerrado-dark"] .crono-month-btn.is-current,
-[data-theme="mata-dark"] .crono-month-btn.is-current,
-[data-theme="amazonia-dark"] .crono-month-btn.is-current {
-  color: var(--primary);
-}
-
-[data-theme="cerrado-dark"] {
-  --paper: #1c1a14;
-  --surface: #242015;
-  --surface-low: #2c2617;
-  --surface-mid: #3d3219;
-  --surface-high: #574725;
-  --card: #252116;
-  --topbar-bg: rgba(28, 26, 20, 0.94);
-  --sidebar-bg: #211e15;
-  --ink: #f5edd2;
-  --muted: #c9b77c;
-  --soft-ink: #e8d9a0;
-  --on-primary: #1c1a14;
-  --on-primary-soft: rgba(28, 26, 20, 0.22);
-  --glass-bg: rgba(28, 26, 20, 0.58);
-  --glass-bg-soft: rgba(28, 26, 20, 0.46);
-  --glass-bg-strong: rgba(28, 26, 20, 0.68);
-  --highlight-start: #2c2617;
-  --highlight-end: #242015;
-  --highlight-alt-end: #302817;
-  --highlight-neutral-end: #3d3219;
-  --highlight-template-end: #2f2a1b;
-  --tip-bg: #3d3219;
-  --tip-ink: #f5e2a3;
-  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
-  --line: #4d4022;
-  --primary: #e8c84a;
-  --primary-deep: #c68b2e;
-  --sage: #b8a657;
-  --ochre: #c68b2e;
-  --sienna: #d4923d;
-  --cedar: #e8d9a0;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-}
-
-[data-theme="mata-dark"] {
-  --paper: #0d1f18;
-  --surface: #10271e;
-  --surface-low: #143026;
-  --surface-mid: #1a4533;
-  --surface-high: #236245;
-  --card: #10261e;
-  --topbar-bg: rgba(13, 31, 24, 0.94);
-  --sidebar-bg: #10271e;
-  --ink: #f5f0e8;
-  --muted: #9fb7a8;
-  --soft-ink: #c8e8d4;
-  --on-primary: #0d1f18;
-  --on-primary-soft: rgba(13, 31, 24, 0.22);
-  --glass-bg: rgba(13, 31, 24, 0.58);
-  --glass-bg-soft: rgba(13, 31, 24, 0.46);
-  --glass-bg-strong: rgba(13, 31, 24, 0.68);
-  --highlight-start: #143026;
-  --highlight-end: #10271e;
-  --highlight-alt-end: #182e25;
-  --highlight-neutral-end: #1a4533;
-  --highlight-template-end: #18352b;
-  --tip-bg: #2b3727;
-  --tip-ink: #f0c89c;
-  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
-  --line: #24513d;
-  --primary: #e8a060;
-  --primary-deep: #2e7d52;
-  --sage: #76bf8c;
-  --ochre: #e8a060;
-  --sienna: #bf7444;
-  --cedar: #c8e8d4;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-}
-
-[data-theme="amazonia-dark"] {
-  --paper: #1a0f2e;
-  --surface: #21133b;
-  --surface-low: #2b1a4a;
-  --surface-mid: #3b2068;
-  --surface-high: #513080;
-  --card: #21133b;
-  --topbar-bg: rgba(26, 15, 46, 0.94);
-  --sidebar-bg: #21133b;
-  --ink: #faf6f0;
-  --muted: #b8a9c8;
-  --soft-ink: #d0c4f0;
-  --on-primary: #1a0f2e;
-  --on-primary-soft: rgba(26, 15, 46, 0.22);
-  --glass-bg: rgba(26, 15, 46, 0.58);
-  --glass-bg-soft: rgba(26, 15, 46, 0.46);
-  --glass-bg-strong: rgba(26, 15, 46, 0.68);
-  --highlight-start: #2b1a4a;
-  --highlight-end: #21133b;
-  --highlight-alt-end: #2d1b45;
-  --highlight-neutral-end: #3b2068;
-  --highlight-template-end: #2c2047;
-  --tip-bg: #3a2449;
-  --tip-ink: #f0c9a0;
-  --brand-mark-image: url("../icons/escrevaral-nav-light.svg");
-  --line: #4c3370;
-  --primary: #f0c070;
-  --primary-deep: #c45b7e;
-  --sage: #7dbf9a;
-  --ochre: #f0c070;
-  --sienna: #c45b7e;
-  --cedar: #d0c4f0;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
-}
-
 /* ─── Painel sintático — cores luminosas para temas escuros ─── */
-[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="sujeito"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="sujeito"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="sujeito"]     { border-color: #52b888; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="sujeito"] .syntax-token-label { color: #52b888; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"]     { border-color: #52b888; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="sujeito"] .syntax-token-label { color: #52b888; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="verbo"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="verbo"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="verbo"]       { border-color: #6aade0; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="verbo"] .syntax-token-label { color: #6aade0; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"]       { border-color: #6aade0; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="verbo"] .syntax-token-label { color: #6aade0; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="objeto"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="objeto"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="objeto"]      { border-color: #e0a04e; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="objeto"] .syntax-token-label { color: #e0a04e; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"]      { border-color: #e0a04e; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="objeto"] .syntax-token-label { color: #e0a04e; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="adjunto"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="adjunto"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="adjunto"]     { border-color: #c07cd8; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="adjunto"] .syntax-token-label { color: #c07cd8; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"]     { border-color: #c07cd8; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="adjunto"] .syntax-token-label { color: #c07cd8; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="predicativo"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="predicativo"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="predicativo"] { border-color: #e07470; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="predicativo"] .syntax-token-label { color: #e07470; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] { border-color: #e07470; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="predicativo"] .syntax-token-label { color: #e07470; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="vocativo"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="vocativo"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="vocativo"]    { border-color: #d4a85c; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="vocativo"] .syntax-token-label { color: #d4a85c; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"]    { border-color: #d4a85c; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="vocativo"] .syntax-token-label { color: #d4a85c; }
 
-[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"],
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="aposto"],
-[data-theme="mata-dark"] .syntax-token[data-funcao="aposto"],
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="aposto"]      { border-color: #8ab858; }
-[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
-[data-theme="cerrado-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
-[data-theme="mata-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label,
-[data-theme="amazonia-dark"] .syntax-token[data-funcao="aposto"] .syntax-token-label { color: #8ab858; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"]      { border-color: #8ab858; }
+[data-theme="scriptorium"] .syntax-token[data-funcao="aposto"] .syntax-token-label { color: #8ab858; }
 
 /* ─── Clone de dica visual — substitui title nativo ─── */
 #vrda-tooltip {
@@ -671,80 +493,50 @@
 /* ── Contraste: cores fixas de tema claro não adaptam em temas escuros ── */
 
 /* proof-chip "high" usa #2a5a3a fixo — invisível em fundos escuros */
-[data-theme="scriptorium"] .proof-chip[data-level="high"],
-[data-theme="cerrado-dark"] .proof-chip[data-level="high"],
-[data-theme="mata-dark"] .proof-chip[data-level="high"],
-[data-theme="amazonia-dark"] .proof-chip[data-level="high"] {
+[data-theme="scriptorium"] .proof-chip[data-level="high"] {
   color: color-mix(in srgb, var(--sage) 75%, var(--ink));
   border-color: color-mix(in srgb, var(--sage) 28%, transparent);
 }
-[data-theme="scriptorium"] .proof-chip[data-level="high"] .proof-chip-dot,
-[data-theme="cerrado-dark"] .proof-chip[data-level="high"] .proof-chip-dot,
-[data-theme="mata-dark"] .proof-chip[data-level="high"] .proof-chip-dot,
-[data-theme="amazonia-dark"] .proof-chip[data-level="high"] .proof-chip-dot {
+[data-theme="scriptorium"] .proof-chip[data-level="high"] .proof-chip-dot {
   background: color-mix(in srgb, var(--sage) 65%, var(--surface));
 }
 
 /* proof-chip "low" e health-score — sienna escuro falha contraste em todos os temas escuros */
-[data-theme="scriptorium"] .proof-chip[data-level="low"],
-[data-theme="cerrado-dark"] .proof-chip[data-level="low"],
-[data-theme="mata-dark"] .proof-chip[data-level="low"],
-[data-theme="amazonia-dark"] .proof-chip[data-level="low"] {
+[data-theme="scriptorium"] .proof-chip[data-level="low"] {
   color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
   border-color: color-mix(in srgb, var(--sienna) 35%, transparent);
 }
-[data-theme="scriptorium"] .proof-chip[data-level="low"] .proof-chip-dot,
-[data-theme="cerrado-dark"] .proof-chip[data-level="low"] .proof-chip-dot,
-[data-theme="mata-dark"] .proof-chip[data-level="low"] .proof-chip-dot,
-[data-theme="amazonia-dark"] .proof-chip[data-level="low"] .proof-chip-dot {
+[data-theme="scriptorium"] .proof-chip[data-level="low"] .proof-chip-dot {
   background: color-mix(in srgb, var(--sienna) 60%, var(--surface));
 }
-[data-theme="scriptorium"] .voice-health-score.health-low,
-[data-theme="cerrado-dark"] .voice-health-score.health-low,
-[data-theme="mata-dark"] .voice-health-score.health-low,
-[data-theme="amazonia-dark"] .voice-health-score.health-low {
+[data-theme="scriptorium"] .voice-health-score.health-low {
   background: color-mix(in srgb, var(--sienna) 18%, var(--surface));
   color: color-mix(in srgb, var(--sienna) 55%, var(--ink));
 }
 
 /* template-check icons com hex fixos de tema claro (#eaf3de, #e6f1fb, #faeeda) */
-[data-theme="scriptorium"] .template-check-item[data-status="done"] .template-check-icon,
-[data-theme="cerrado-dark"] .template-check-item[data-status="done"] .template-check-icon,
-[data-theme="mata-dark"] .template-check-item[data-status="done"] .template-check-icon,
-[data-theme="amazonia-dark"] .template-check-item[data-status="done"] .template-check-icon {
+[data-theme="scriptorium"] .template-check-item[data-status="done"] .template-check-icon {
   background: color-mix(in srgb, var(--sage) 22%, var(--surface-mid));
   color: color-mix(in srgb, var(--sage) 75%, var(--ink));
 }
-[data-theme="scriptorium"] .template-check-item[data-status="info"] .template-check-icon,
-[data-theme="cerrado-dark"] .template-check-item[data-status="info"] .template-check-icon,
-[data-theme="mata-dark"] .template-check-item[data-status="info"] .template-check-icon,
-[data-theme="amazonia-dark"] .template-check-item[data-status="info"] .template-check-icon {
+[data-theme="scriptorium"] .template-check-item[data-status="info"] .template-check-icon {
   background: color-mix(in srgb, var(--primary) 18%, var(--surface-mid));
   color: color-mix(in srgb, var(--primary) 65%, var(--ink));
 }
-[data-theme="scriptorium"] .template-check-item[data-status="warn"] .template-check-icon,
-[data-theme="cerrado-dark"] .template-check-item[data-status="warn"] .template-check-icon,
-[data-theme="mata-dark"] .template-check-item[data-status="warn"] .template-check-icon,
-[data-theme="amazonia-dark"] .template-check-item[data-status="warn"] .template-check-icon {
+[data-theme="scriptorium"] .template-check-item[data-status="warn"] .template-check-icon {
   background: color-mix(in srgb, var(--ochre) 22%, var(--surface-mid));
   color: color-mix(in srgb, var(--ochre) 75%, var(--ink));
 }
 
 /* mark (highlight de busca em Palavras) — fundo claro fixo fica jarring em temas escuros */
-[data-theme="scriptorium"] mark,
-[data-theme="cerrado-dark"] mark,
-[data-theme="mata-dark"] mark,
-[data-theme="amazonia-dark"] mark {
+[data-theme="scriptorium"] mark {
   background: color-mix(in srgb, var(--sage) 30%, var(--surface-mid));
   color: var(--ink);
   border-color: color-mix(in srgb, var(--sage) 28%, transparent);
 }
 
 /* crono-holiday — fundo amarelo claro fixo fica jarring em temas escuros */
-[data-theme="scriptorium"] .crono-holiday,
-[data-theme="cerrado-dark"] .crono-holiday,
-[data-theme="mata-dark"] .crono-holiday,
-[data-theme="amazonia-dark"] .crono-holiday {
+[data-theme="scriptorium"] .crono-holiday {
   background: color-mix(in srgb, var(--ochre) 18%, var(--surface-mid));
   color: color-mix(in srgb, var(--ochre) 80%, var(--ink));
   border-color: color-mix(in srgb, var(--ochre) 30%, transparent);
@@ -769,57 +561,24 @@
 }
 
 /* Gramática colorida — cores claras para temas escuros */
-[data-theme="scriptorium"] .gw-verbo,
-[data-theme="cerrado-dark"] .gw-verbo,
-[data-theme="mata-dark"] .gw-verbo,
-[data-theme="amazonia-dark"] .gw-verbo         { color: #ef5350; }
+[data-theme="scriptorium"] .gw-verbo         { color: #ef5350; }
 
-[data-theme="scriptorium"] .gw-substantivo,
-[data-theme="cerrado-dark"] .gw-substantivo,
-[data-theme="mata-dark"] .gw-substantivo,
-[data-theme="amazonia-dark"] .gw-substantivo   { color: #64b5f6; }
+[data-theme="scriptorium"] .gw-substantivo   { color: #64b5f6; }
 
-[data-theme="scriptorium"] .gw-adjetivo,
-[data-theme="cerrado-dark"] .gw-adjetivo,
-[data-theme="mata-dark"] .gw-adjetivo,
-[data-theme="amazonia-dark"] .gw-adjetivo      { color: #ba68c8; }
+[data-theme="scriptorium"] .gw-adjetivo      { color: #ba68c8; }
 
-[data-theme="scriptorium"] .gw-pronome,
-[data-theme="cerrado-dark"] .gw-pronome,
-[data-theme="mata-dark"] .gw-pronome,
-[data-theme="amazonia-dark"] .gw-pronome       { color: #81c784; }
+[data-theme="scriptorium"] .gw-pronome       { color: #81c784; }
 
-[data-theme="scriptorium"] .gw-artigo,
-[data-theme="cerrado-dark"] .gw-artigo,
-[data-theme="mata-dark"] .gw-artigo,
-[data-theme="amazonia-dark"] .gw-artigo        { color: #b0bec5; }
+[data-theme="scriptorium"] .gw-artigo        { color: #b0bec5; }
 
-[data-theme="scriptorium"] .gw-preposicao,
-[data-theme="cerrado-dark"] .gw-preposicao,
-[data-theme="mata-dark"] .gw-preposicao,
-[data-theme="amazonia-dark"] .gw-preposicao    { color: #ff8a65; }
+[data-theme="scriptorium"] .gw-preposicao    { color: #ff8a65; }
 
-[data-theme="scriptorium"] .gw-conjuncao,
-[data-theme="cerrado-dark"] .gw-conjuncao,
-[data-theme="mata-dark"] .gw-conjuncao,
-[data-theme="amazonia-dark"] .gw-conjuncao     { color: #f06292; }
+[data-theme="scriptorium"] .gw-conjuncao     { color: #f06292; }
 
-[data-theme="scriptorium"] .gw-adverbio,
-[data-theme="cerrado-dark"] .gw-adverbio,
-[data-theme="mata-dark"] .gw-adverbio,
-[data-theme="amazonia-dark"] .gw-adverbio      { color: #4db6ac; }
+[data-theme="scriptorium"] .gw-adverbio      { color: #4db6ac; }
 
-[data-theme="scriptorium"] .gw-numeral,
-[data-theme="cerrado-dark"] .gw-numeral,
-[data-theme="mata-dark"] .gw-numeral,
-[data-theme="amazonia-dark"] .gw-numeral       { color: #ffd54f; }
+[data-theme="scriptorium"] .gw-numeral       { color: #ffd54f; }
 
-[data-theme="scriptorium"] .gw-interjeicao,
-[data-theme="cerrado-dark"] .gw-interjeicao,
-[data-theme="mata-dark"] .gw-interjeicao,
-[data-theme="amazonia-dark"] .gw-interjeicao   { color: #ff8a65; }
+[data-theme="scriptorium"] .gw-interjeicao   { color: #ff8a65; }
 
-[data-theme="scriptorium"] .gw-proprio,
-[data-theme="cerrado-dark"] .gw-proprio,
-[data-theme="mata-dark"] .gw-proprio,
-[data-theme="amazonia-dark"] .gw-proprio       { color: #64b5f6; font-weight: 700; }
+[data-theme="scriptorium"] .gw-proprio       { color: #64b5f6; font-weight: 700; }

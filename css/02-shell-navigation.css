@@ -1163,51 +1163,22 @@ html {
 .create-note-panel[data-craft="comercial"]  { --craft: #1B6B6B; --craft-bg: color-mix(in srgb, var(--craft) 9%, transparent); }
 
 /* No tema Amazônia, Poesia usa magenta para não conflitar com o primary roxo */
-[data-theme="amazonia"] .create-note-panel[data-craft="poesia"],
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="poesia"] {
+[data-theme="amazonia"] .create-note-panel[data-craft="poesia"] {
   --craft: #9B2D6A;
 }
 
 /* Temas escuros: cores de ofício mais claras para contraste sobre fundos escuros */
-[data-theme="scriptorium"] .create-note-panel[data-craft="roteiro"],
-[data-theme="cerrado-dark"] .create-note-panel[data-craft="roteiro"],
-[data-theme="mata-dark"] .create-note-panel[data-craft="roteiro"],
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="roteiro"]    { --craft: #5b9fe0; }
-[data-theme="scriptorium"] .create-note-panel[data-craft="poesia"],
-[data-theme="cerrado-dark"] .create-note-panel[data-craft="poesia"],
-[data-theme="mata-dark"] .create-note-panel[data-craft="poesia"]          { --craft: #a080e8; }
-[data-theme="scriptorium"] .create-note-panel[data-craft="nao-ficcao"],
-[data-theme="cerrado-dark"] .create-note-panel[data-craft="nao-ficcao"],
-[data-theme="mata-dark"] .create-note-panel[data-craft="nao-ficcao"],
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="nao-ficcao"] { --craft: #d4a040; }
-[data-theme="scriptorium"] .create-note-panel[data-craft="vestibular"],
-[data-theme="cerrado-dark"] .create-note-panel[data-craft="vestibular"],
-[data-theme="mata-dark"] .create-note-panel[data-craft="vestibular"],
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="vestibular"] { --craft: #e07060; }
-[data-theme="scriptorium"] .create-note-panel[data-craft="comercial"],
-[data-theme="cerrado-dark"] .create-note-panel[data-craft="comercial"],
-[data-theme="mata-dark"] .create-note-panel[data-craft="comercial"],
-[data-theme="amazonia-dark"] .create-note-panel[data-craft="comercial"]  { --craft: #40a8a8; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="roteiro"]    { --craft: #5b9fe0; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="poesia"]          { --craft: #a080e8; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="nao-ficcao"] { --craft: #d4a040; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="vestibular"] { --craft: #e07060; }
+[data-theme="scriptorium"] .create-note-panel[data-craft="comercial"]  { --craft: #40a8a8; }
 
-[data-theme="scriptorium"] .create-cat-card[data-craft="roteiro"]    .material-symbols-outlined,
-[data-theme="cerrado-dark"] .create-cat-card[data-craft="roteiro"]   .material-symbols-outlined,
-[data-theme="mata-dark"] .create-cat-card[data-craft="roteiro"]      .material-symbols-outlined,
-[data-theme="amazonia-dark"] .create-cat-card[data-craft="roteiro"]  .material-symbols-outlined { color: #5b9fe0; }
-[data-theme="scriptorium"] .create-cat-card[data-craft="poesia"]     .material-symbols-outlined,
-[data-theme="cerrado-dark"] .create-cat-card[data-craft="poesia"]    .material-symbols-outlined,
-[data-theme="mata-dark"] .create-cat-card[data-craft="poesia"]       .material-symbols-outlined { color: #a080e8; }
-[data-theme="scriptorium"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined,
-[data-theme="cerrado-dark"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined,
-[data-theme="mata-dark"] .create-cat-card[data-craft="nao-ficcao"]   .material-symbols-outlined,
-[data-theme="amazonia-dark"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined { color: #d4a040; }
-[data-theme="scriptorium"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined,
-[data-theme="cerrado-dark"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined,
-[data-theme="mata-dark"] .create-cat-card[data-craft="vestibular"]   .material-symbols-outlined,
-[data-theme="amazonia-dark"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined { color: #e07060; }
-[data-theme="scriptorium"] .create-cat-card[data-craft="comercial"]  .material-symbols-outlined,
-[data-theme="cerrado-dark"] .create-cat-card[data-craft="comercial"] .material-symbols-outlined,
-[data-theme="mata-dark"] .create-cat-card[data-craft="comercial"]    .material-symbols-outlined,
-[data-theme="amazonia-dark"] .create-cat-card[data-craft="comercial"] .material-symbols-outlined { color: #40a8a8; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="roteiro"]    .material-symbols-outlined { color: #5b9fe0; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="poesia"]     .material-symbols-outlined { color: #a080e8; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="nao-ficcao"] .material-symbols-outlined { color: #d4a040; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="vestibular"] .material-symbols-outlined { color: #e07060; }
+[data-theme="scriptorium"] .create-cat-card[data-craft="comercial"]  .material-symbols-outlined { color: #40a8a8; }
 
 
 /* ── Step 1: grade de categorias ── */
@@ -1692,7 +1663,7 @@ html {
 }
 /* --muted dos 4 temas claros fica entre 4.08-4.41:1 em --surface-low (abaixo de 4.5);
    tom mais escuro mantém o "quieto" e passa em 4.5-4.9. Vereda já tem contraste correto com --muted. */
-html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-theme="mata-dark"]):not([data-theme="amazonia-dark"]) .editor-mode-bar .secondary-button {
+html:not([data-theme="scriptorium"]) .editor-mode-bar .secondary-button {
   color: #6f6459;
 }
 .editor-mode-bar .secondary-button:hover {
@@ -1706,37 +1677,6 @@ html:not([data-theme="scriptorium"]):not([data-theme="cerrado-dark"]):not([data-
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
   border-color: color-mix(in srgb, var(--primary) 20%, transparent);
-}
-
-[data-theme="cerrado-dark"] .module-tabs .tab,
-[data-theme="mata-dark"] .module-tabs .tab,
-[data-theme="amazonia-dark"] .module-tabs .tab,
-[data-theme="cerrado-dark"] .editor-mode-bar .secondary-button,
-[data-theme="mata-dark"] .editor-mode-bar .secondary-button,
-[data-theme="amazonia-dark"] .editor-mode-bar .secondary-button,
-[data-theme="cerrado-dark"] .biblia-quick-btn,
-[data-theme="mata-dark"] .biblia-quick-btn,
-[data-theme="amazonia-dark"] .biblia-quick-btn {
-  color: var(--muted);
-  opacity: 1;
-}
-
-[data-theme="cerrado-dark"] .module-tabs .tab:hover,
-[data-theme="cerrado-dark"] .module-tabs .tab.is-active,
-[data-theme="mata-dark"] .module-tabs .tab:hover,
-[data-theme="mata-dark"] .module-tabs .tab.is-active,
-[data-theme="amazonia-dark"] .module-tabs .tab:hover,
-[data-theme="amazonia-dark"] .module-tabs .tab.is-active {
-  color: var(--primary);
-}
-
-[data-theme="cerrado-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
-[data-theme="cerrado-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"],
-[data-theme="mata-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
-[data-theme="mata-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"],
-[data-theme="amazonia-dark"] .editor-split:not(.is-template-collapsed) .editor-mode-bar .secondary-button[data-action="toggle-template-panel"],
-[data-theme="amazonia-dark"] .editor-mode-bar .secondary-button[aria-pressed="true"] {
-  color: var(--ink);
 }
 
 .title-input,
@@ -2059,10 +1999,7 @@ mark {
   color: #002018;
   padding: 0 4px;
 }
-[data-theme="scriptorium"] mark,
-[data-theme="cerrado-dark"] mark,
-[data-theme="mata-dark"] mark,
-[data-theme="amazonia-dark"] mark {
+[data-theme="scriptorium"] mark {
   background: color-mix(in srgb, var(--primary) 22%, transparent);
   color: var(--ink);
   border-color: color-mix(in srgb, var(--primary) 35%, transparent);
