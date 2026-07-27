@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
+import { ContextPanel } from './ContextPanel'
 import { useModalDrawer } from './useModalDrawer'
 
-type Tab = 'pulso' | 'revisao' | 'voz' | 'ferramentas'
+type Tab = 'pulso' | 'revisao' | 'voz' | 'contexto' | 'ferramentas'
 
 type Props = {
   document: EscrevaralDocument
@@ -105,7 +106,7 @@ export function RightRail({
         <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
       </div>
       <div className="tabs" role="tablist" aria-label="Ferramentas">
-        {(['pulso', 'revisao', 'voz', 'ferramentas'] as const).map((item) => (
+        {(['pulso', 'revisao', 'voz', 'contexto', 'ferramentas'] as const).map((item) => (
           <button
             key={item}
             id={`tab-${item}`}
@@ -227,6 +228,12 @@ export function RightRail({
                 <p className="voice-disclaimer">{voiceReading.disclaimer}</p>
               </div>
             )}
+          </section>
+        )}
+
+        {tab === 'contexto' && (
+          <section id="panel-contexto" role="tabpanel" aria-labelledby="tab-contexto" className="panel active">
+            <ContextPanel document={document} />
           </section>
         )}
 
