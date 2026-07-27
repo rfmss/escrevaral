@@ -11,7 +11,9 @@ Atualizado em: 2026-07-27
 - editor artesanal anterior: referência de UX, não fundação técnica;
 - Gate 1: verde;
 - Gate 2: verde em Chromium e Firefox;
-- lote autorizado: Gate 3, Espelho de Voz.
+- Gate 3: verde em Chromium e Firefox;
+- engines integradas: Revisão e Espelho de Voz;
+- próximo passo: avaliação manual do Espelho de Voz antes do Gate 4.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -25,6 +27,8 @@ Atualizado em: 2026-07-27
 8. A identidade visual é editorial brasileira, sem ornamentos cobrindo o papel.
 9. Não criar regras próprias de cursor quando o comportamento válido do ProseMirror é suficiente.
 10. Documentação, testes e logs fazem parte da definição de pronto.
+11. Uma análise linguística é invalidada por mudança do documento ou do conteúdo, não por autosave do mesmo conteúdo.
+12. Voz, público e ecos literários devem ser apresentados como hipóteses heurísticas, nunca diagnóstico definitivo.
 
 ## Incidentes que orientam a arquitetura
 
@@ -33,6 +37,7 @@ Atualizado em: 2026-07-27
 - O primeiro drawer móvel ficou abaixo do overlay por stacking context.
 - O histórico Tiptap inicialmente atravessava documentos; foi isolado remontando a instância por documento.
 - O workflow passou a bloquear a publicação da preview quando o gate falha.
+- O Espelho de Voz inicialmente desaparecia após autosave porque a revisão persistida era confundida com mudança semântica; Firefox revelou a condição temporal.
 
 ## Contratos técnicos ativos
 
@@ -58,11 +63,12 @@ Cada adaptador deve:
 - tratar ausência ou exceção;
 - não manipular DOM;
 - receber snapshot explícito;
-- permitir descarte de resultado obsoleto.
+- permitir descarte de resultado obsoleto;
+- preservar disclaimers e níveis de confiança importantes para a interpretação.
 
 ### Qualidade
 
-Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor.
+Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor e para cada nova engine integrada.
 
 ## Limitações conhecidas
 
@@ -74,7 +80,8 @@ Ainda não estão aprovados:
 - paginação física;
 - leitores de tela reais;
 - teclado virtual real;
-- todas as engines;
+- RimaLab e vocabulário decolonizador na nova shell;
+- decorations inline;
 - promoção para a entrada pública.
 
 ## Como retomar
