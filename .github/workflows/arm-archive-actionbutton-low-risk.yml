@@ -1,0 +1,37 @@
+name: Armar executor ActionButton do Acervo
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  armar:
+    if: github.head_ref == 'agent/archive-actionbutton-low-risk'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/archive-actionbutton-low-risk
+          fetch-depth: 0
+      - name: Habilitar executor no próximo head
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/apply-archive-actionbutton-low-risk.yml')
+          text = path.read_text(encoding='utf-8')
+          old = '    types: [opened]'
+          new = '    types: [opened, synchronize]'
+          if text.count(old) != 1:
+              raise SystemExit('gatilho esperado não encontrado')
+          path.write_text(text.replace(old, new), encoding='utf-8')
+          PY
+          rm .github/workflows/arm-archive-actionbutton-low-risk.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/apply-archive-actionbutton-low-risk.yml .github/workflows/arm-archive-actionbutton-low-risk.yml
+          git commit -m "Arma executor temporário do Acervo"
+          git push origin HEAD:agent/archive-actionbutton-low-risk
