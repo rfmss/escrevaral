@@ -27,6 +27,27 @@ export function MassNotesEditor({ documentId, content, resetKey, onChange }: Pro
         spellcheck: 'true',
         lang: 'pt-BR',
       },
+      handleKeyDown(view, event) {
+        const { $from, empty } = view.state.selection
+        if (!empty) return false
+
+        if (event.key === 'Backspace' && $from.parentOffset === 0 && $from.parent.type.name === 'paragraph') {
+          const previous = view.state.doc.resolve($from.before()).nodeBefore
+          if (previous?.type.name === 'heading') {
+            event.preventDefault()
+            return true
+          }
+        }
+
+        if (event.key === 'Delete' && $from.parentOffset === $from.parent.content.size && $from.parent.type.name === 'heading') {
+          const next = view.state.doc.resolve($from.after()).nodeAfter
+          if (next?.type.name === 'paragraph') {
+            event.preventDefault()
+            return true
+          }
+        }
+        return false
+      },
     },
     onUpdate: ({ editor: current }) => {
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })

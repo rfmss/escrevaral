@@ -32,6 +32,21 @@ test('Enter após T1 cria parágrafo e Backspace não o absorve no título', asy
   await page.keyboard.press('Backspace')
   await expect(editor.locator('h1')).toHaveText('Título principal')
   await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
+
+  await page.evaluate(() => {
+    const heading = document.querySelector('.ProseMirror h1')
+    const text = heading?.firstChild
+    if (!text) throw new Error('Título não encontrado')
+    const range = document.createRange()
+    range.setStart(text, text.textContent?.length ?? 0)
+    range.collapse(true)
+    const selection = getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+  })
+  await page.keyboard.press('Delete')
+  await expect(editor.locator('h1')).toHaveText('Título principal')
+  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 })
 
 test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ context, page }) => {
