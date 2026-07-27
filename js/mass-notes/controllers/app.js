@@ -3,7 +3,9 @@
 
   const ACTIVE_DOCUMENT_KEY = "mass-notes-experiment-active-document";
   const THEME_KEY = "mass-notes-theme";
+  const RECOVERY_KEY = "mass-notes-experiment-recovery-v1";
   const SAVE_DELAY = 450;
+  const RECOVERY_DELAY = 700;
 
   const state = {
     documents: [],
@@ -11,9 +13,14 @@
     view: "all",
     search: "",
     saveTimer: null,
-    saving: false,
+    recoveryTimer: null,
+    saveLanes: new Map(),
+    dirtyIds: new Set(),
     activePanel: "structure",
     drawerTrigger: null,
+    drawerKind: null,
+    engineTokens: new Map(),
+    editEpoch: 0,
   };
 
   const el = {};
@@ -21,6 +28,8 @@
   function collectElements() {
     Object.assign(el, {
       body: document.body,
+      app: document.getElementById("mn-app"),
+      main: document.querySelector(".mn-main"),
       library: document.getElementById("mn-library"),
       inspector: document.getElementById("mn-inspector"),
       overlay: document.getElementById("mn-overlay"),
@@ -28,6 +37,7 @@
       documentEmpty: document.getElementById("mn-document-empty"),
       search: document.getElementById("mn-search"),
       title: document.getElementById("mn-title"),
+      documentPage: document.getElementById("mn-document"),
       editor: document.getElementById("mn-editor"),
       saveState: document.getElementById("mn-save-state"),
       wordCount: document.getElementById("mn-word-count"),
@@ -47,6 +57,9 @@
       toastRegion: document.getElementById("mn-toast-region"),
       blockFormat: document.getElementById("mn-block-format"),
     });
+
+    const missing = Object.entries(el).filter(([, value]) => !value).map(([key]) => key);
+    if (missing.length) throw new Error(`Elementos obrigatórios ausentes: ${missing.join(", ")}`);
   }
 
   async function init() {
@@ -63,15 +76,21 @@
     }
 
     await refreshDocuments();
+    await recoverEmergencySnapshot();
+    await refreshDocuments();
     chooseInitialDocument();
     renderAll();
     updateEngineAvailability();
+    updateFocusControls(false);
     setSaveState(global.MassNotesStore.isMemoryMode() ? "Alterações temporárias" : "Salvo");
   }
 
   function bindEvents() {
     document.addEventListener("click", handleClick);
     document.addEventListener("keydown", handleGlobalKeydown);
+    document.addEventListener("selectionchange", updateToolbarState);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     el.search.addEventListener("input", () => {
       state.search = el.search.value;
       renderLibrary();
@@ -79,6 +98,8 @@
     el.title.addEventListener("input", handleDocumentInput);
     el.editor.addEventListener("input", handleDocumentInput);
     el.editor.addEventListener("keydown", handleEditorKeydown);
+    el.editor.addEventListener("paste", handleEditorPaste);
+    el.editor.addEventListener("drop", handleEditorDrop);
     el.tags.addEventListener("change", handlePropertiesChange);
     el.favorite.addEventListener("change", handlePropertiesChange);
     el.blockFormat.addEventListener("change", () => {
@@ -87,8 +108,8 @@
     });
     document.querySelector(".mn-tabs")?.addEventListener("keydown", handleTabKeydown);
     el.overlay.addEventListener("click", closeDrawers);
-    document.addEventListener("selectionchange", updateToolbarState);
-    global.addEventListener("beforeunload", flushSave);
+    global.addEventListener("pagehide", handlePageExit);
+    global.addEventListener("beforeunload", handlePageExit);
   }
 
   async function refreshDocuments() {
@@ -100,12 +121,19 @@
   function chooseInitialDocument() {
     let savedId = null;
     try { savedId = localStorage.getItem(ACTIVE_DOCUMENT_KEY); } catch (_) {}
-    const preferred = state.documents.find((documentRecord) => documentRecord.id === savedId) || state.documents[0];
+    const preferred = state.documents.find((documentRecord) => documentRecord.id === state.activeId)
+      || state.documents.find((documentRecord) => documentRecord.id === savedId)
+      || state.documents[0];
     state.activeId = preferred?.id || null;
   }
 
   function activeDocument() {
     return state.documents.find((documentRecord) => documentRecord.id === state.activeId) || null;
+  }
+
+  function cloneRecord(value) {
+    if (global.structuredClone) return structuredClone(value);
+    return JSON.parse(JSON.stringify(value));
   }
 
   function renderAll() {
@@ -119,7 +147,7 @@
   function renderLibrary() {
     const query = normalizeSearch(state.search);
     const now = Date.now();
-    let documents = state.documents.filter((documentRecord) => {
+    const documents = state.documents.filter((documentRecord) => {
       if (state.view === "favorite" && !documentRecord.favorite) return false;
       if (state.view === "recent" && now - documentRecord.updatedAt > 1000 * 60 * 60 * 24 * 14) return false;
       if (!query) return true;
@@ -185,11 +213,15 @@
     if (!documentRecord) {
       el.title.value = "";
       el.editor.innerHTML = "";
+      el.documentPage.dataset.printTitle = "";
+      updateEditorEmptyState();
       return;
     }
-    el.title.value = documentRecord.title || "";
+    el.title.value = documentRecord.title === "Documento sem título" ? "" : documentRecord.title || "";
     el.editor.innerHTML = sanitizeHtml(documentRecord.contentHtml || "<p><br></p>");
+    el.documentPage.dataset.printTitle = documentRecord.title || "Documento sem título";
     ensureEditableParagraph();
+    updateEditorEmptyState();
     renderCounts();
   }
 
@@ -205,10 +237,7 @@
     el.outline.replaceChildren();
     const headings = [...el.editor.querySelectorAll("h1,h2,h3")].filter((heading) => heading.textContent.trim());
     if (!headings.length) {
-      const empty = document.createElement("li");
-      empty.className = "mn-empty";
-      empty.textContent = "Use Título 1, 2 ou 3 para criar uma estrutura navegável.";
-      el.outline.append(empty);
+      appendEmpty(el.outline, "Use Título 1, 2 ou 3 para criar uma estrutura navegável.");
       return;
     }
     headings.forEach((heading, index) => {
@@ -252,7 +281,7 @@
   function handleClick(event) {
     const actionButton = event.target.closest("[data-action]");
     if (actionButton) {
-      runAction(actionButton.dataset.action, actionButton);
+      Promise.resolve(runAction(actionButton.dataset.action, actionButton)).catch(handleActionError);
       return;
     }
 
@@ -265,8 +294,7 @@
 
     const documentButton = event.target.closest("[data-document-id]");
     if (documentButton) {
-      selectDocument(documentButton.dataset.documentId);
-      closeDrawers();
+      selectDocument(documentButton.dataset.documentId).catch(handleActionError);
       return;
     }
 
@@ -277,7 +305,10 @@
     }
 
     const tab = event.target.closest("[role='tab'][data-panel]");
-    if (tab) activatePanel(tab.dataset.panel, true);
+    if (tab) {
+      activatePanel(tab.dataset.panel, true);
+      return;
+    }
 
     const commandButton = event.target.closest("[data-command]");
     if (commandButton) runEditorCommand(commandButton.dataset.command);
@@ -302,8 +333,13 @@
     }
   }
 
+  function handleActionError(error) {
+    console.error("[Mass Notes] Ação não concluída.", error);
+    toast("A ação não pôde ser concluída.");
+  }
+
   async function createDocument() {
-    await flushSave();
+    await flushSave(state.activeId);
     const saved = await global.MassNotesStore.saveDocument({
       title: "Documento sem título",
       contentHtml: "<p><br></p>",
@@ -313,85 +349,154 @@
     await refreshDocuments();
     state.activeId = saved.id;
     rememberActiveDocument();
+    clearEngineResults();
     renderAll();
+    closeDrawers(false);
     el.title.focus();
     el.title.select();
     toast("Novo documento criado.");
   }
 
   async function selectDocument(id) {
-    if (id === state.activeId) return;
-    await flushSave();
+    if (id === state.activeId) {
+      closeDrawers();
+      return;
+    }
+    await flushSave(state.activeId);
     state.activeId = id;
     rememberActiveDocument();
     clearEngineResults();
     renderAll();
+    closeDrawers();
   }
 
   function handleDocumentInput() {
     const documentRecord = activeDocument();
     if (!documentRecord) return;
-    documentRecord.title = el.title.value.slice(0, 180) || "Documento sem título";
+    captureEditorIntoRecord(documentRecord);
+    state.editEpoch += 1;
+    markDirty(documentRecord.id);
+    setSaveState("Salvando…");
+    renderCounts();
+    renderOutline();
+    renderLibrary();
+    scheduleRecoverySnapshot();
+    scheduleSave();
+  }
+
+  function captureEditorIntoRecord(documentRecord) {
+    documentRecord.title = el.title.value.slice(0, 180).trim() || "Documento sem título";
     documentRecord.contentHtml = sanitizeHtml(el.editor.innerHTML);
     documentRecord.plainText = global.MassNotesStore.plainTextFromHtml(documentRecord.contentHtml);
     documentRecord.updatedAt = Date.now();
     documentRecord.wordCount = global.MassNotesStore.countWords(documentRecord.plainText);
     documentRecord.characterCount = documentRecord.plainText.length;
-    setSaveState("Salvando…");
-    renderCounts();
-    renderOutline();
-    renderLibrary();
-    scheduleSave();
+    el.documentPage.dataset.printTitle = documentRecord.title;
+    updateEditorEmptyState();
   }
 
   function handleEditorKeydown(event) {
     const documentRecord = activeDocument();
     if (!documentRecord) return;
     documentRecord.authorshipRecord = global.MassNotesEngines.recordKey(documentRecord.authorshipRecord, event, Date.now());
-    if (event.key === "Tab") {
-      event.preventDefault();
-      document.execCommand("insertText", false, "    ");
+    // Tab continua sendo navegação de teclado. Recuos pertencem aos comandos de lista.
+  }
+
+  function handleEditorPaste(event) {
+    event.preventDefault();
+    const clipboard = event.clipboardData;
+    const rich = clipboard?.getData("text/html") || "";
+    const plain = clipboard?.getData("text/plain") || "";
+    const safe = rich ? sanitizeHtml(rich) : plainTextToHtml(plain);
+    document.execCommand("insertHTML", false, safe);
+    handleDocumentInput();
+  }
+
+  function handleEditorDrop(event) {
+    event.preventDefault();
+    const plain = event.dataTransfer?.getData("text/plain") || "";
+    if (!plain) {
+      toast("Solte apenas texto no editor.");
+      return;
     }
+    document.execCommand("insertHTML", false, plainTextToHtml(plain));
+    handleDocumentInput();
   }
 
   function handlePropertiesChange() {
     const documentRecord = activeDocument();
     if (!documentRecord) return;
-    documentRecord.tags = el.tags.value.split(",").map((tag) => tag.trim()).filter(Boolean).slice(0, 30);
+    documentRecord.tags = [...new Set(el.tags.value.split(",").map((tag) => tag.trim()).filter(Boolean))].slice(0, 30);
     documentRecord.favorite = el.favorite.checked;
     documentRecord.updatedAt = Date.now();
+    markDirty(documentRecord.id);
+    setSaveState("Salvando…");
     renderLibrary();
+    scheduleRecoverySnapshot();
     scheduleSave();
+  }
+
+  function markDirty(id) {
+    if (id) state.dirtyIds.add(id);
   }
 
   function scheduleSave() {
     clearTimeout(state.saveTimer);
-    state.saveTimer = setTimeout(flushSave, SAVE_DELAY);
+    state.saveTimer = setTimeout(() => flushSave(state.activeId).catch(handleActionError), SAVE_DELAY);
   }
 
-  async function flushSave() {
+  async function flushSave(id = state.activeId) {
     clearTimeout(state.saveTimer);
     state.saveTimer = null;
-    if (state.saving) return;
-    const documentRecord = activeDocument();
-    if (!documentRecord) return;
-    state.saving = true;
+    if (!id || !state.dirtyIds.has(id)) return state.documents.find((item) => item.id === id) || null;
+
+    const previousLane = state.saveLanes.get(id) || Promise.resolve();
+    const task = previousLane.catch(() => null).then(async () => {
+      if (!state.dirtyIds.has(id)) return state.documents.find((item) => item.id === id) || null;
+      const current = state.documents.find((item) => item.id === id);
+      if (!current) return null;
+
+      const candidate = cloneRecord(current);
+      const capturedUpdatedAt = candidate.updatedAt;
+      state.dirtyIds.delete(id);
+
+      try {
+        const saved = await global.MassNotesStore.saveDocument(candidate);
+        const live = state.documents.find((item) => item.id === id);
+        const index = state.documents.findIndex((item) => item.id === id);
+        if (live && live.updatedAt > capturedUpdatedAt) {
+          live.revision = Math.max(Number(live.revision) || 0, Number(saved.revision) || 0);
+        } else if (index >= 0) {
+          state.documents[index] = saved;
+        } else {
+          state.documents.unshift(saved);
+        }
+        if (id === state.activeId) {
+          setSaveState(global.MassNotesStore.isMemoryMode() ? "Alterações temporárias" : "Salvo");
+          renderProperties();
+        }
+        clearEmergencySnapshotIfCovered(id, capturedUpdatedAt);
+        return saved;
+      } catch (error) {
+        state.dirtyIds.add(id);
+        if (id === state.activeId) {
+          setSaveState("Falha ao salvar");
+          el.storageBanner.hidden = false;
+          el.storageMessage.textContent = "Não foi possível gravar as alterações. Exporte o documento antes de fechar esta aba.";
+        }
+        throw error;
+      }
+    });
+
+    state.saveLanes.set(id, task);
     try {
-      const saved = await global.MassNotesStore.saveDocument(documentRecord);
-      const index = state.documents.findIndex((item) => item.id === saved.id);
-      if (index >= 0) state.documents[index] = saved;
-      else state.documents.unshift(saved);
-      state.activeId = saved.id;
-      setSaveState(global.MassNotesStore.isMemoryMode() ? "Alterações temporárias" : "Salvo");
-      renderProperties();
-    } catch (error) {
-      console.error("[Mass Notes] Falha ao salvar.", error);
-      setSaveState("Falha ao salvar");
-      el.storageBanner.hidden = false;
-      el.storageMessage.textContent = "Não foi possível gravar as alterações. Exporte o documento antes de fechar esta aba.";
+      await task;
     } finally {
-      state.saving = false;
+      if (state.saveLanes.get(id) === task) state.saveLanes.delete(id);
     }
+
+    if (state.dirtyIds.has(id)) return flushSave(id);
+    return state.documents.find((item) => item.id === id) || null;
   }
 
   function setSaveState(value) {
@@ -412,8 +517,8 @@
 
   function createLink() {
     const selection = global.getSelection();
-    if (!selection || selection.isCollapsed) {
-      toast("Selecione um trecho antes de criar o link.");
+    if (!selection || selection.isCollapsed || !el.editor.contains(selection.anchorNode)) {
+      toast("Selecione um trecho do documento antes de criar o link.");
       return;
     }
     const value = global.prompt("Endereço do link (https://, http://, mailto: ou tel:)", "https://");
@@ -433,7 +538,8 @@
   }
 
   function updateToolbarState() {
-    if (!el.editor.contains(document.activeElement)) return;
+    const selection = global.getSelection();
+    if (!selection || !el.editor.contains(selection.anchorNode)) return;
     document.querySelectorAll("[data-command='bold'],[data-command='italic'],[data-command='underline'],[data-command='strikeThrough']").forEach((button) => {
       try { button.setAttribute("aria-pressed", String(document.queryCommandState(button.dataset.command))); }
       catch (_) { button.setAttribute("aria-pressed", "false"); }
@@ -441,9 +547,15 @@
   }
 
   async function executeEngine(type, button) {
+    const currentBeforeSave = activeDocument();
+    if (!currentBeforeSave) return;
+    await flushSave(currentBeforeSave.id);
     const documentRecord = activeDocument();
-    if (!documentRecord) return;
-    await flushSave();
+    if (!documentRecord || documentRecord.id !== currentBeforeSave.id) return;
+
+    const token = Symbol(type);
+    const startedEpoch = state.editEpoch;
+    state.engineTokens.set(type, token);
     setEngineState(type, "Analisando…");
     button.disabled = true;
     try {
@@ -452,15 +564,34 @@
         : type === "voice"
           ? await global.MassNotesEngines.runVoice(documentRecord)
           : await global.MassNotesEngines.runRhyme(documentRecord);
-      if (result.revision !== activeDocument()?.revision && result.documentId === activeDocument()?.id) {
+
+      if (state.engineTokens.get(type) !== token) return;
+      const current = activeDocument();
+      if (!current || result.documentId !== current.id || result.revision !== current.revision || state.editEpoch !== startedEpoch) {
         setEngineState(type, "Texto mudou");
         return;
       }
       renderEngineResult(type, result);
       setEngineState(type, result.ok ? "Concluído" : "Indisponível");
+    } catch (error) {
+      console.error(`[Mass Notes] Engine ${type} falhou fora do adaptador.`, error);
+      setEngineState(type, "Falha");
+      const target = engineContainer(type);
+      if (target) {
+        target.replaceChildren();
+        appendEmpty(target, "A análise não pôde ser concluída.");
+      }
     } finally {
+      if (state.engineTokens.get(type) === token) state.engineTokens.delete(type);
       button.disabled = false;
     }
+  }
+
+  function engineContainer(type) {
+    if (type === "review") return el.reviewResults;
+    if (type === "voice") return el.voiceResults;
+    if (type === "rhyme") return el.rhymeResults;
+    return null;
   }
 
   function renderEngineResult(type, result) {
@@ -523,7 +654,7 @@
   }
 
   function appendEmpty(container, message) {
-    const empty = document.createElement("p");
+    const empty = document.createElement(container.tagName === "UL" ? "li" : "p");
     empty.className = "mn-empty";
     empty.textContent = message;
     container.append(empty);
@@ -535,6 +666,7 @@
   }
 
   function clearEngineResults() {
+    state.engineTokens.clear();
     [el.reviewResults, el.voiceResults, el.rhymeResults].forEach((container) => container.replaceChildren());
     ["review", "voice", "rhyme"].forEach((type) => setEngineState(type, "Aguardando"));
   }
@@ -568,45 +700,109 @@
   }
 
   function handleGlobalKeydown(event) {
+    if (event.key === "Tab" && state.drawerKind) {
+      trapDrawerFocus(event);
+      return;
+    }
     if (event.key === "Escape") {
+      if (state.drawerKind) {
+        closeDrawers();
+        return;
+      }
       if (document.body.classList.contains("mn-focus")) toggleFocus(false);
-      closeDrawers();
       return;
     }
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "n") {
       event.preventDefault();
-      createDocument();
+      createDocument().catch(handleActionError);
     }
     if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
       event.preventDefault();
-      flushSave();
+      flushSave(state.activeId).catch(handleActionError);
     }
   }
 
   function openDrawer(kind, trigger) {
     closeDrawers(false);
+    state.drawerKind = kind;
     state.drawerTrigger = trigger || null;
-    if (kind === "library") document.body.classList.add("mn-library-open");
-    if (kind === "inspector") document.body.classList.add("mn-inspector-open");
+    const panel = kind === "library" ? el.library : el.inspector;
+    document.body.classList.add(kind === "library" ? "mn-library-open" : "mn-inspector-open");
     el.overlay.hidden = false;
     trigger?.setAttribute("aria-expanded", "true");
-    const panel = kind === "library" ? el.library : el.inspector;
-    panel.querySelector("button,input,[tabindex]:not([tabindex='-1'])")?.focus();
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    setBackgroundInert(kind, true);
+    getFocusable(panel)[0]?.focus();
   }
 
   function closeDrawers(restoreFocus = true) {
-    const wasOpen = document.body.classList.contains("mn-library-open") || document.body.classList.contains("mn-inspector-open");
+    const wasOpen = Boolean(state.drawerKind);
     document.body.classList.remove("mn-library-open", "mn-inspector-open");
     el.overlay.hidden = true;
     document.querySelectorAll("[data-action='open-library'],[data-action='open-inspector']").forEach((button) => button.setAttribute("aria-expanded", "false"));
-    if (wasOpen && restoreFocus) state.drawerTrigger?.focus();
+    [el.library, el.inspector].forEach((panel) => {
+      panel.removeAttribute("role");
+      panel.removeAttribute("aria-modal");
+    });
+    setBackgroundInert(null, false);
+    const trigger = state.drawerTrigger;
+    state.drawerKind = null;
     state.drawerTrigger = null;
+    if (wasOpen && restoreFocus && trigger?.isConnected) trigger.focus();
+  }
+
+  function setBackgroundInert(kind, enabled) {
+    const entries = [
+      [el.main, true],
+      [el.library, kind !== "library"],
+      [el.inspector, kind !== "inspector"],
+    ];
+    entries.forEach(([node, shouldInert]) => {
+      const inert = enabled && shouldInert;
+      node.inert = inert;
+      if (inert) node.setAttribute("inert", "");
+      else node.removeAttribute("inert");
+    });
+  }
+
+  function trapDrawerFocus(event) {
+    const panel = state.drawerKind === "library" ? el.library : el.inspector;
+    const focusable = getFocusable(panel);
+    if (!focusable.length) {
+      event.preventDefault();
+      panel.focus();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function getFocusable(container) {
+    return [...container.querySelectorAll("button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])")]
+      .filter((node) => !node.hidden && node.getClientRects().length > 0);
   }
 
   function toggleFocus(force) {
     const enabled = typeof force === "boolean" ? force : !document.body.classList.contains("mn-focus");
+    if (enabled) closeDrawers(false);
     document.body.classList.toggle("mn-focus", enabled);
-    if (!enabled) closeDrawers(false);
+    updateFocusControls(enabled);
+    if (!enabled) el.editor.focus();
+  }
+
+  function updateFocusControls(enabled) {
+    document.querySelectorAll("[data-action='toggle-focus']").forEach((button) => {
+      button.setAttribute("aria-pressed", String(enabled));
+      button.setAttribute("aria-label", enabled ? "Sair do modo foco" : "Ativar modo foco");
+    });
   }
 
   function toggleTheme() {
@@ -650,6 +846,78 @@
     setTimeout(() => toastElement.remove(), 3400);
   }
 
+  function scheduleRecoverySnapshot() {
+    clearTimeout(state.recoveryTimer);
+    state.recoveryTimer = setTimeout(saveEmergencySnapshot, RECOVERY_DELAY);
+  }
+
+  function saveEmergencySnapshot() {
+    clearTimeout(state.recoveryTimer);
+    state.recoveryTimer = null;
+    const documentRecord = activeDocument();
+    if (!documentRecord || (!state.dirtyIds.has(documentRecord.id) && !state.saveLanes.has(documentRecord.id))) return;
+    try {
+      localStorage.setItem(RECOVERY_KEY, JSON.stringify({
+        capturedAt: Date.now(),
+        document: cloneRecord(documentRecord),
+      }));
+    } catch (_) {}
+  }
+
+  async function recoverEmergencySnapshot() {
+    let parsed = null;
+    try {
+      const raw = localStorage.getItem(RECOVERY_KEY);
+      parsed = raw ? JSON.parse(raw) : null;
+    } catch (_) {
+      return;
+    }
+    const candidate = parsed?.document;
+    if (!candidate?.id || !candidate.updatedAt) return;
+    const persisted = state.documents.find((item) => item.id === candidate.id);
+    if (persisted && Number(persisted.updatedAt) >= Number(candidate.updatedAt)) {
+      clearEmergencySnapshot();
+      return;
+    }
+    try {
+      const saved = await global.MassNotesStore.saveDocument(candidate);
+      state.activeId = saved.id;
+      rememberActiveDocument();
+      clearEmergencySnapshot();
+      toast("Uma edição interrompida foi recuperada.");
+    } catch (error) {
+      console.error("[Mass Notes] Snapshot emergencial não pôde ser recuperado.", error);
+      el.storageBanner.hidden = false;
+      el.storageMessage.textContent = "Existe uma edição de recuperação que ainda não pôde ser gravada.";
+    }
+  }
+
+  function clearEmergencySnapshotIfCovered(id, updatedAt) {
+    try {
+      const raw = localStorage.getItem(RECOVERY_KEY);
+      if (!raw) return;
+      const snapshot = JSON.parse(raw);
+      if (snapshot?.document?.id === id && Number(snapshot.document.updatedAt) <= Number(updatedAt) && !state.dirtyIds.has(id)) {
+        localStorage.removeItem(RECOVERY_KEY);
+      }
+    } catch (_) {}
+  }
+
+  function clearEmergencySnapshot() {
+    try { localStorage.removeItem(RECOVERY_KEY); } catch (_) {}
+  }
+
+  function handlePageExit() {
+    saveEmergencySnapshot();
+    flushSave(state.activeId).catch(() => {});
+  }
+
+  function handleVisibilityChange() {
+    if (document.visibilityState !== "hidden") return;
+    saveEmergencySnapshot();
+    flushSave(state.activeId).catch(() => {});
+  }
+
   function sanitizeHtml(html) {
     const template = document.createElement("template");
     template.innerHTML = String(html || "");
@@ -664,7 +932,7 @@
       }
       [...node.attributes].forEach((attribute) => {
         if (node.tagName === "A" && ["href", "target", "rel"].includes(attribute.name)) return;
-        if (["id"].includes(attribute.name) && /^mn-heading-/.test(attribute.value)) return;
+        if (attribute.name === "id" && /^mn-heading-/.test(attribute.value)) return;
         node.removeAttribute(attribute.name);
       });
       if (node.tagName === "A") {
@@ -674,13 +942,35 @@
           if (!["https:", "http:", "mailto:", "tel:"].includes(url.protocol)) node.removeAttribute("href");
         } catch (_) { node.removeAttribute("href"); }
         node.setAttribute("rel", "noopener noreferrer");
+        if (/^https?:/i.test(node.getAttribute("href") || "")) node.setAttribute("target", "_blank");
+        else node.removeAttribute("target");
       }
     });
     return template.innerHTML || "<p><br></p>";
   }
 
+  function plainTextToHtml(text) {
+    const value = String(text || "").replace(/\r\n?/g, "\n");
+    if (!value) return "";
+    return value.split(/\n{2,}/).map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`).join("");
+  }
+
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   function ensureEditableParagraph() {
     if (!el.editor.innerHTML.trim()) el.editor.innerHTML = "<p><br></p>";
+  }
+
+  function updateEditorEmptyState() {
+    const empty = !global.MassNotesStore.plainTextFromHtml(el.editor.innerHTML).trim();
+    el.editor.dataset.empty = String(empty);
   }
 
   function rememberActiveDocument() {
