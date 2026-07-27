@@ -1,0 +1,70 @@
+name: Mass Notes Tiptap
+
+on:
+  push:
+    branches:
+      - experiment/mass-notes-tiptap
+    paths:
+      - "mass-notes-next/**"
+      - ".github/workflows/mass-notes-tiptap.yml"
+      - "analise-engine.js"
+      - "syntax-engine.js"
+      - "punctuation-engine.js"
+      - "js/data/criterios-data.js"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "mass-notes-next/**"
+      - ".github/workflows/mass-notes-tiptap.yml"
+      - "analise-engine.js"
+      - "syntax-engine.js"
+      - "punctuation-engine.js"
+      - "js/data/criterios-data.js"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mass-notes-tiptap-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: mass-notes-next
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Instalar dependências
+        run: npm install --no-audit --no-fund
+
+      - name: Compilar aplicação
+        run: npm run build
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Testar fundação no navegador
+        run: npm run test:e2e
+
+      - name: Guardar relatório do Playwright
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mass-notes-tiptap-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            mass-notes-next/playwright-report/**
+            mass-notes-next/test-results/**
