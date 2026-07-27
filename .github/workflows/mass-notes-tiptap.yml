@@ -24,7 +24,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: mass-notes-tiptap-${{ github.event.pull_request.number || github.ref }}
@@ -33,7 +33,7 @@ concurrency:
 jobs:
   foundation:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: mass-notes-next
@@ -52,11 +52,27 @@ jobs:
       - name: Compilar aplicação
         run: npm run build
 
-      - name: Instalar Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Instalar Chromium e Firefox
+        run: npx playwright install --with-deps chromium firefox
 
-      - name: Testar fundação no navegador
+      - name: Testar fundação nos navegadores
         run: npm run test:e2e
+
+      - name: Publicar preview estática isolada
+        if: github.event_name == 'push' && github.ref == 'refs/heads/experiment/mass-notes-tiptap'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd dist
+          touch .nojekyll
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "preview: ${GITHUB_SHA}"
+          git branch -M preview-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/preview-mass-notes-tiptap
 
       - name: Guardar relatório do Playwright
         if: always()
