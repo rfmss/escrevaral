@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   audit:
@@ -177,6 +178,29 @@ jobs:
           }
           NODE
           node /tmp/audit-atelier.mjs
+
+      - name: Publicar diagnóstico no PR
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          success = Path('audit-artifacts/resultado-atelier-v967.json')
+          failure = Path('audit-artifacts/falha-atelier-v967.json')
+          source = success if success.exists() else failure
+          status = 'sucesso' if success.exists() else 'falha'
+          payload = source.read_text(encoding='utf-8') if source.exists() else '{"erro":"nenhum relatório gerado"}'
+          Path('/tmp/audit-comment.md').write_text(
+              f"## Auditoria de produção Ateliê v967 — {status}\n\n"
+              "```json\n" + payload + "\n```\n\n"
+              f"Workflow: https://github.com/rfmss/escrevaral/actions/runs/${{GITHUB_RUN_ID}}\n",
+              encoding='utf-8'
+          )
+          PY
+          gh pr comment "$PR_NUMBER" --body-file /tmp/audit-comment.md
 
       - name: Publicar evidências
         if: always()
