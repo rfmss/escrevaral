@@ -37,6 +37,11 @@ export function RightRail({
   const words = countWords(document.plainText)
   const pulse = averageSentenceLength(document.plainText)
 
+  const readText = () => {
+    setTab('revisao')
+    onAnalyze()
+  }
+
   return (
     <aside className={`rail ${open ? 'open' : ''}`} aria-label="Ferramentas do texto">
       <div className="rail-title">
@@ -88,6 +93,14 @@ export function RightRail({
                   {status}
                 </button>
               ))}
+            </div>
+
+            <div className="rail-actions" aria-label="Ações rápidas">
+              <div className="section-label">Ações</div>
+              <button className="action reading" type="button" onClick={readText} disabled={analyzing}>
+                {analyzing ? 'Lendo o texto…' : 'Ler o texto'}
+              </button>
+              <button className="action subtle" type="button" onClick={onExport}>Exportar cena</button>
             </div>
           </section>
         )}
