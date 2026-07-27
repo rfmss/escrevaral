@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { ReviewIssue } from '../engines/reviewAdapter'
+import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
 import { useModalDrawer } from './useModalDrawer'
 
-type Tab = 'pulso' | 'revisao' | 'ferramentas'
+type Tab = 'pulso' | 'revisao' | 'voz' | 'ferramentas'
 
 type Props = {
   document: EscrevaralDocument
@@ -18,6 +19,16 @@ type Props = {
   onExport: () => void
   onFocus: () => void
   onTheme: () => void
+}
+
+function VoiceList({ title, items }: { title: string; items: string[] }) {
+  if (!items.length) return null
+  return (
+    <section className="voice-section">
+      <h3>{title}</h3>
+      <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
+    </section>
+  )
 }
 
 export function RightRail({
@@ -35,13 +46,50 @@ export function RightRail({
   onTheme,
 }: Props) {
   const [tab, setTab] = useState<Tab>('pulso')
+  const [voiceReading, setVoiceReading] = useState<VoiceReading | null>(null)
+  const [voiceMessage, setVoiceMessage] = useState('Aguardando uma escuta.')
+  const [voiceAnalyzing, setVoiceAnalyzing] = useState(false)
+  const voiceToken = useRef(0)
   const panelRef = useModalDrawer<HTMLElement>(open, onClose)
   const words = countWords(document.plainText)
   const pulse = averageSentenceLength(document.plainText)
 
+  useEffect(() => {
+    voiceToken.current += 1
+    setVoiceReading(null)
+    setVoiceAnalyzing(false)
+    setVoiceMessage('O texto mudou. Faça uma nova escuta quando quiser.')
+  }, [document.id, document.revision, document.plainText])
+
   const readText = () => {
     setTab('revisao')
     onAnalyze()
+  }
+
+  const runVoice = async () => {
+    const token = ++voiceToken.current
+    const documentId = document.id
+    const revision = document.revision
+    setVoiceAnalyzing(true)
+    setVoiceMessage('O Espelho de Voz está escutando o rascunho localmente…')
+
+    try {
+      const result = await analyzeVoice(document.plainText, { formato: 'prosa' })
+      if (token !== voiceToken.current || document.id !== documentId || document.revision !== revision) return
+      setVoiceReading(result)
+      setVoiceMessage(
+        result
+          ? `Leitura concluída com confiança ${result.confidence}.`
+          : 'A página está vazia. Escreva um pouco antes de escutar a voz.',
+      )
+    } catch (error) {
+      console.error('[Escrevaral] Espelho de Voz não concluído.', error)
+      if (token !== voiceToken.current) return
+      setVoiceReading(null)
+      setVoiceMessage('O Espelho de Voz não pôde concluir a leitura agora.')
+    } finally {
+      if (token === voiceToken.current) setVoiceAnalyzing(false)
+    }
   }
 
   return (
@@ -59,7 +107,7 @@ export function RightRail({
         <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
       </div>
       <div className="tabs" role="tablist" aria-label="Ferramentas">
-        {(['pulso', 'revisao', 'ferramentas'] as const).map((item) => (
+        {(['pulso', 'revisao', 'voz', 'ferramentas'] as const).map((item) => (
           <button
             key={item}
             id={`tab-${item}`}
@@ -120,7 +168,7 @@ export function RightRail({
 
         {tab === 'revisao' && (
           <section id="panel-revisao" role="tabpanel" aria-labelledby="tab-revisao" className="panel active">
-            <p className="panel-intro">A primeira engine real do Escrevaral lê o texto localmente, sem enviar seu rascunho para fora.</p>
+            <p className="panel-intro">A engine de Revisão lê o texto localmente, sem enviar seu rascunho para fora.</p>
             <button className="action primary" type="button" onClick={onAnalyze} disabled={analyzing}>
               {analyzing ? 'Lendo o texto…' : 'Analisar em português brasileiro'}
             </button>
@@ -133,6 +181,54 @@ export function RightRail({
                 </article>
               ))}
             </div>
+          </section>
+        )}
+
+        {tab === 'voz' && (
+          <section id="panel-voz" role="tabpanel" aria-labelledby="tab-voz" className="panel active voice-panel">
+            <p className="panel-intro">O Espelho de Voz procura padrões de frase, vocabulário, repetição e pontuação. A leitura é local e serve como hipótese de trabalho.</p>
+            <button className="action primary" type="button" onClick={() => { void runVoice() }} disabled={voiceAnalyzing}>
+              {voiceAnalyzing ? 'Escutando o texto…' : 'Escutar minha voz'}
+            </button>
+            <p className="voice-message" role="status">{voiceMessage}</p>
+
+            {voiceReading && (
+              <div className="voice-reading">
+                <div className={`voice-confidence confidence-${voiceReading.confidence}`}>
+                  <span>Confiança</span>
+                  <strong>{voiceReading.confidence}</strong>
+                </div>
+                {voiceReading.confidenceNote && <p className="voice-caution">{voiceReading.confidenceNote}</p>}
+
+                <article className="voice-card">
+                  <span className="voice-gesture">{voiceReading.voice.gesture}</span>
+                  <h2>{voiceReading.voice.title}</h2>
+                  <p>{voiceReading.voice.description}</p>
+                </article>
+
+                <div className="voice-metrics" aria-label="Métricas de voz">
+                  <div><strong>{voiceReading.metrics.ttr}%</strong><span>variedade</span></div>
+                  <div><strong>{voiceReading.metrics.lexicalDensity}%</strong><span>densidade</span></div>
+                  <div><strong>{voiceReading.metrics.avgSentence}</strong><span>palavras/frase</span></div>
+                </div>
+
+                <VoiceList title="Forças percebidas" items={voiceReading.strengths} />
+                <VoiceList title="Pontos para observar" items={voiceReading.blindSpots} />
+                <VoiceList title="Exercícios" items={voiceReading.exercises} />
+                <VoiceList title="Ecos para leitura" items={voiceReading.voice.echoes} />
+
+                {(voiceReading.audience.core || voiceReading.audience.secondary || voiceReading.audience.risk) && (
+                  <section className="voice-section audience-reading">
+                    <h3>Leitores possíveis</h3>
+                    {voiceReading.audience.core && <p>{voiceReading.audience.core}</p>}
+                    {voiceReading.audience.secondary && <p>{voiceReading.audience.secondary}</p>}
+                    {voiceReading.audience.risk && <p><strong>Atenção:</strong> {voiceReading.audience.risk}</p>}
+                  </section>
+                )}
+
+                <p className="voice-disclaimer">{voiceReading.disclaimer}</p>
+              </div>
+            )}
           </section>
         )}
 
