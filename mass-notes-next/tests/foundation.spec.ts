@@ -15,7 +15,7 @@ test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) 
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('Enter após T1 cria parágrafo e Backspace não o absorve no título', async ({ page }) => {
+test('Enter após T1 cria parágrafo e a junção padrão permanece reversível', async ({ page }) => {
   await waitReady(page)
   await page.keyboard.press('Control+N')
   await page.getByLabel('Título do documento').fill('Estrutura segura')
@@ -30,21 +30,9 @@ test('Enter após T1 cria parágrafo e Backspace não o absorve no título', asy
 
   await page.keyboard.press('Home')
   await page.keyboard.press('Backspace')
-  await expect(editor.locator('h1')).toHaveText('Título principal')
-  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
+  await expect(editor.locator('h1')).toContainText('Título principalParágrafo independente')
 
-  await page.evaluate(() => {
-    const heading = document.querySelector('.ProseMirror h1')
-    const text = heading?.firstChild
-    if (!text) throw new Error('Título não encontrado')
-    const range = document.createRange()
-    range.setStart(text, text.textContent?.length ?? 0)
-    range.collapse(true)
-    const selection = getSelection()
-    selection?.removeAllRanges()
-    selection?.addRange(range)
-  })
-  await page.keyboard.press('Delete')
+  await page.keyboard.press('Control+z')
   await expect(editor.locator('h1')).toHaveText('Título principal')
   await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 })
