@@ -36,6 +36,16 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - instituídos plano vivo, memória consolidada, changelog e logs por lote;
 - documentação passou a integrar formalmente a definição de pronto.
 
-### Em andamento
+### Gate 3 — Espelho de Voz
 
-- Gate 3: integração do Espelho de Voz por adaptador.
+- criada integração de `voice-engine.js` por importação raw e adaptador TypeScript;
+- engine original e bases linguísticas permaneceram intactas;
+- adicionada aba `Voz` ao rail;
+- apresentados confiança, gesto, descrição, métricas, forças, pontos cegos, exercícios, ecos e público provável;
+- reforçada a linguagem de hipótese heurística para corpus curto;
+- resultados passam a ser descartados após mudança do documento ou do conteúdo;
+- corrigida invalidação indevida causada apenas pelo autosave da mesma versão textual;
+- falha controlada da engine permanece isolada do editor;
+- adicionados testes de vazio, baixa confiança, corpus médio, obsolescência e exceção;
+- matriz aprovada em Chromium e Firefox, com 30 execuções;
+- preview atualizada após gate verde.
