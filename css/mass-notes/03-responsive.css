@@ -1,5 +1,6 @@
 [data-action="open-inspector"],
 [data-action="close-inspector"] { display: none; }
+body.mn-focus [data-action="open-inspector"] { display: none !important; }
 
 @media (max-width: 1199px) {
   .mn-app { grid-template-columns: var(--mn-sidebar) minmax(0, 1fr); }
