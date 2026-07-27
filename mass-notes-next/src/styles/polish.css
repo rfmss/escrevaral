@@ -1,10 +1,68 @@
-/* Ajustes de leitura preservando a identidade visual do protótipo. */
+/* Ajustes de leitura preservando a identidade visual editorial. */
 .title-input {
   font-size: clamp(2rem, 3vw, 2.7rem);
+}
+
+/* A marca fica tipográfica e limpa: sem fita, recorte ou moldura inclinada. */
+.brand::before,
+.brand::after,
+.slash,
+.impact-button {
+  display: none !important;
+}
+
+.brand {
+  background:
+    linear-gradient(90deg, var(--red) 0 38px, var(--blue) 38px 92px, transparent 92px)
+    top 20px right 22px / 92px 4px no-repeat;
+}
+
+.brand h1 {
+  max-width: none;
+  font-size: 2rem;
+  line-height: .9;
+}
+
+.brand h1 span {
+  display: inline;
+  margin-left: 1px;
+  text-shadow: none;
+}
+
+/* As ações pertencem ao rail, sem cobrir o papel ou competir com o texto. */
+.rail-actions {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.rail-actions .section-label {
+  margin-top: 0;
+}
+
+.action.reading {
+  border-color: var(--blue-deep);
+  background: var(--blue-deep);
+  color: #fff;
+  text-align: center;
+}
+
+.action.subtle {
+  background: color-mix(in srgb, var(--paper) 72%, var(--blue) 28%);
+  text-align: center;
+}
+
+.rail-actions .action:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 @media (max-width: 520px) {
   .title-input {
     font-size: 1.85rem;
+  }
+
+  .brand {
+    background-size: 72px 4px;
   }
 }
