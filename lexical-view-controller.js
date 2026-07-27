@@ -46,8 +46,9 @@
           <span class="material-symbols-outlined" aria-hidden="true">text_fields</span>
           <strong>Comece um texto para trabalhar as palavras.</strong>
           <p>O vocabulário fica no próprio navegador e acompanha a escrita sem enviar conteúdo para fora.</p>
-          <button class="secondary-button" data-action="open-create-note" type="button">
-            <span class="material-symbols-outlined" aria-hidden="true">add</span>
+          <button class="action-button" data-action="open-create-note" type="button"
+                  data-component="action-button" data-variant="primary">
+            <span class="material-symbols-outlined action-button__icon" aria-hidden="true">add</span>
             Começar um texto
           </button>
         </div>`;
@@ -65,8 +66,9 @@
         <strong>Escolha uma palavra do seu texto.</strong>
         <p>Busque acima ou selecione uma palavra ou frase no editor. O Escrevaral mostra leituras e trocas possíveis sem enviar seu manuscrito.</p>
         ${currentText}
-        <button class="secondary-button" data-action="switch-view-editor" type="button">
-          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+        <button class="action-button" data-action="switch-view-editor" type="button"
+                data-component="action-button" data-variant="secondary">
+          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">arrow_back</span>
           Voltar ao texto
         </button>
       </div>`;

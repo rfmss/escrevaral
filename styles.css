@@ -279,20 +279,8 @@ html body .app-shell[data-view="biblioteca"] .split-paper:has(.lexical-card:empt
   font-style: italic;
 }
 
-.lexical-empty-state .secondary-button {
-  justify-content: flex-start;
-  min-height: 44px;
+.lexical-empty-state .action-button {
   margin-top: 18px;
-  padding-inline: 0;
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.lexical-empty-state .secondary-button:hover {
-  border-color: transparent;
-  background: transparent;
-  color: var(--primary);
 }
 
 @media (max-width: 600px) {
