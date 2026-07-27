@@ -28,6 +28,8 @@ test('Enter após T1 cria parágrafo e a junção padrão permanece reversível'
   await expect(editor.locator('h1')).toHaveText('Título principal')
   await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 
+  // Separa a digitação da ação estrutural no histórico do ProseMirror.
+  await page.waitForTimeout(800)
   await page.keyboard.press('Home')
   await page.keyboard.press('Backspace')
   await expect(editor.locator('h1')).toContainText('Título principalParágrafo independente')
