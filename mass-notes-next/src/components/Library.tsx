@@ -1,4 +1,5 @@
 import { displayTitle, type EscrevaralDocument } from '../domain/document'
+import { useModalDrawer } from './useModalDrawer'
 
 type Props = {
   documents: EscrevaralDocument[]
@@ -21,6 +22,7 @@ function relativeTime(timestamp: number): string {
 }
 
 export function Library({ documents, activeId, search, open, onSearch, onSelect, onNew, onClose }: Props) {
+  const panelRef = useModalDrawer<HTMLElement>(open, onClose)
   const query = search.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR')
   const visible = documents.filter((document) => {
     if (!query) return true
@@ -32,12 +34,20 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
   })
 
   return (
-    <aside className={`sidebar ${open ? 'open' : ''}`} aria-label="Arquivo de documentos">
+    <aside
+      ref={panelRef}
+      id="document-library"
+      className={`sidebar ${open ? 'open' : ''}`}
+      aria-label="Arquivo de documentos"
+      role={open ? 'dialog' : undefined}
+      aria-modal={open || undefined}
+      tabIndex={-1}
+    >
       <header className="brand">
         <div className="eyebrow">Oficina de escrita brasileira</div>
         <h1>Escreva<span>ral</span></h1>
         <div className="issue">MOTOR TIPTAP // FUNDAÇÃO 01</div>
-        <button className="drawer-close" type="button" onClick={onClose} aria-label="Fechar arquivo">×</button>
+        <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar arquivo">×</button>
       </header>
 
       <div className="side-tools">
