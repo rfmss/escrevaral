@@ -10,6 +10,7 @@ on:
       - "js/mass-notes/**"
       - "scripts/auditor-mass-notes-mvp.py"
       - "scripts/test-mass-notes-browser.py"
+      - "scripts/run-mass-notes-browser.py"
       - ".github/workflows/mass-notes-experiment.yml"
       - "docs/_decisoes/MASS_NOTES_INTEGRATION.md"
       - "docs/product/MASS_NOTES_MVP.md"
@@ -22,6 +23,7 @@ on:
       - "js/mass-notes/**"
       - "scripts/auditor-mass-notes-mvp.py"
       - "scripts/test-mass-notes-browser.py"
+      - "scripts/run-mass-notes-browser.py"
       - ".github/workflows/mass-notes-experiment.yml"
       - "docs/_decisoes/MASS_NOTES_INTEGRATION.md"
       - "docs/product/MASS_NOTES_MVP.md"
@@ -61,12 +63,13 @@ jobs:
         run: |
           python -m py_compile scripts/auditor-mass-notes-mvp.py
           python -m py_compile scripts/test-mass-notes-browser.py
+          python -m py_compile scripts/run-mass-notes-browser.py
 
       - name: Auditar estrutura do Mass Notes
         run: python scripts/auditor-mass-notes-mvp.py
 
       - name: Executar smoke no Chromium
-        run: python scripts/test-mass-notes-browser.py
+        run: python scripts/run-mass-notes-browser.py
 
       - name: Guardar relatórios e capturas
         if: always()
