@@ -21,11 +21,9 @@ async function pasteRichText(page: Page, html: string, plain: string) {
     const transfer = new DataTransfer()
     transfer.setData('text/html', payload.html)
     transfer.setData('text/plain', payload.plain)
-    element.dispatchEvent(new ClipboardEvent('paste', {
-      bubbles: true,
-      cancelable: true,
-      clipboardData: transfer,
-    }))
+    const event = new Event('paste', { bubbles: true, cancelable: true })
+    Object.defineProperty(event, 'clipboardData', { value: transfer })
+    element.dispatchEvent(event)
   }, { html, plain })
 }
 
@@ -45,7 +43,7 @@ test('paste de Word e Google Docs produz documento estruturado e seguro', async 
   `, 'Capítulo brasileiro\nComeço com ênfase.\nPrimeiro item\nSegundo item\natalho perigoso')
 
   await expect(editor.locator('h2')).toHaveText('Capítulo brasileiro')
-  await expect(editor.locator('strong')).toContainText('Começo')
+  await expect(editor.locator('strong').first()).toContainText('Começo')
   await expect(editor.locator('li')).toHaveCount(2)
   await expect(editor.locator('script, style, img')).toHaveCount(0)
   const html = await editor.innerHTML()
@@ -71,10 +69,21 @@ test('toolbar preserva seleção e listas continuam estruturadas', async ({ page
   await page.getByRole('button', { name: 'N', exact: true }).click()
   await expect(editor.locator('strong')).toHaveText('Texto selecionado')
 
-  await page.keyboard.press('End')
-  await page.keyboard.press('Enter')
+  await editor.click()
+  await page.keyboard.press('Control+A')
   await page.keyboard.type('Primeiro')
+  await editor.evaluate((element) => {
+    const paragraph = element.querySelector('p')
+    if (!paragraph) throw new Error('Parágrafo ausente para criar lista.')
+    const range = document.createRange()
+    range.selectNodeContents(paragraph)
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+  })
   await page.getByRole('button', { name: '• Lista', exact: true }).click()
+  await expect(editor.locator('ul li')).toHaveCount(1)
+  await editor.locator('li').first().click()
   await page.keyboard.press('End')
   await page.keyboard.press('Enter')
   await page.keyboard.type('Segundo')
@@ -110,6 +119,9 @@ test('conflito preserva a versão local como nova página', async ({ context, pa
   await expect(second.getByLabel('Título do documento')).toHaveValue('Versão local B — conflito')
 
   await page.reload()
+  await expect(page.getByText('Versão local B — conflito', { exact: true })).toBeVisible()
+  await expect(page.getByText('Versão persistida A', { exact: true })).toBeVisible()
+  await page.getByText('Versão persistida A', { exact: true }).click()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão persistida A')
 })
 
