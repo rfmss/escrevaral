@@ -79,18 +79,19 @@ jobs:
 
           def css_diagnosis(root):
               css_files = list(Path(root).rglob("*.css"))
-              selectors = []
+              dependent_selectors = []
               for path in css_files:
                   text = path.read_text(encoding="utf-8", errors="ignore")
-                  for selector in re.findall(r"([^{}]+)\{", text):
+                  text_without_comments = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+                  for selector in re.findall(r"([^{}]+)\{", text_without_comments):
                       compact = " ".join(selector.split())
                       if "master-reset" in compact and ("secondary-button" in compact or "action-button" in compact or ":has(" in compact):
-                          selectors.append({"arquivo": str(path), "seletor": compact})
+                          dependent_selectors.append({"arquivo": str(path), "seletor": compact})
               shell = Path(root, "css/02-shell-navigation.css").read_text(encoding="utf-8")
               return {
                   "modal_display_flex": bool(re.search(r"#master-reset-modal\s*\{[^}]*display\s*:\s*flex", shell, re.S)),
                   "modal_hidden_rule": bool(re.search(r"#master-reset-modal\s*\[hidden\]", shell)),
-                  "seletores_dependentes_da_classe_do_botao": selectors,
+                  "seletores_dependentes_da_classe_do_botao": dependent_selectors,
               }
 
           results = {
@@ -106,44 +107,47 @@ jobs:
                           context = browser.new_context(viewport={"width": 1366, "height": 900})
                           context.add_init_script(init)
                           page = context.new_page()
-                          page.goto(f"http://127.0.0.1:{port}/#arquivo", wait_until="domcontentloaded")
-                          page.wait_for_function("() => typeof setView === 'function'")
-                          page.evaluate("theme => { document.documentElement.dataset.theme = theme; setView('arquivo',{updateRoute:false}); }", theme_id)
-                          page.locator('[data-action="master-reset"]').click()
-                          modal = page.locator('#master-reset-modal')
-                          modal.wait_for(state="visible")
-                          cancel = modal.locator('[data-action="cancel-master-reset"]')
-                          before = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
-                          cancel_class = cancel.get_attribute("class")
-                          cancel.click()
-                          page.wait_for_timeout(100)
-                          after = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
-                          results[version]["temas"][theme] = {
-                              "classe_cancelar": cancel_class,
-                              "antes": before,
-                              "depois": after,
-                          }
-                          page.screenshot(path=str(OUT / f"{version}-{theme}-apos-cancelar.png"))
-                          context.close()
+                          try:
+                              page.goto(f"http://127.0.0.1:{port}/#arquivo", wait_until="domcontentloaded")
+                              page.wait_for_function("() => typeof setView === 'function'")
+                              page.evaluate("theme => { document.documentElement.dataset.theme = theme; setView('arquivo',{updateRoute:false}); }", theme_id)
+                              page.locator('[data-action="master-reset"]').click()
+                              modal = page.locator('#master-reset-modal')
+                              modal.wait_for(state="visible")
+                              cancel = modal.locator('[data-action="cancel-master-reset"]')
+                              before = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
+                              cancel_class = cancel.get_attribute("class")
+                              cancel.click()
+                              page.wait_for_timeout(100)
+                              after = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
+                              results[version]["temas"][theme] = {
+                                  "classe_cancelar": cancel_class,
+                                  "antes": before,
+                                  "depois": after,
+                              }
+                              page.screenshot(path=str(OUT / f"{version}-{theme}-apos-cancelar.png"))
+                          except Exception as exc:
+                              results[version]["temas"][theme] = {"erro": str(exc)}
+                          finally:
+                              context.close()
                   browser.close()
           finally:
               for server in servers:
                   server.terminate()
 
-          # A reprodução histórica deve provar o mesmo defeito antes e depois.
+          (OUT / "resultado.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+          print(json.dumps(results, ensure_ascii=False, indent=2))
+
           for version in ("pre139", "post139"):
               assert results[version]["css"]["modal_display_flex"] is True
               assert results[version]["css"]["modal_hidden_rule"] is False
               assert results[version]["css"]["seletores_dependentes_da_classe_do_botao"] == []
               for theme in ("alvorada", "vereda"):
-                  after = results[version]["temas"][theme]["depois"]
-                  assert after == {"hidden": True, "display": "flex", "visible": True}, results
+                  assert "erro" not in results[version]["temas"][theme], results
+                  assert results[version]["temas"][theme]["depois"] == {"hidden": True, "display": "flex", "visible": True}, results
 
           assert results["pre139"]["temas"]["alvorada"]["classe_cancelar"] == "secondary-button"
           assert "action-button" in results["post139"]["temas"]["alvorada"]["classe_cancelar"]
-
-          (OUT / "resultado.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
-          print(json.dumps(results, ensure_ascii=False, indent=2))
 
       - name: Guardar evidências
         if: always()
