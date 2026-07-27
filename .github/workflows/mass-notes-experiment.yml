@@ -9,6 +9,19 @@ on:
       - "css/mass-notes/**"
       - "js/mass-notes/**"
       - "scripts/auditor-mass-notes-mvp.py"
+      - "scripts/test-mass-notes-browser.py"
+      - ".github/workflows/mass-notes-experiment.yml"
+      - "docs/_decisoes/MASS_NOTES_INTEGRATION.md"
+      - "docs/product/MASS_NOTES_MVP.md"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "mass-notes.html"
+      - "css/mass-notes/**"
+      - "js/mass-notes/**"
+      - "scripts/auditor-mass-notes-mvp.py"
+      - "scripts/test-mass-notes-browser.py"
       - ".github/workflows/mass-notes-experiment.yml"
       - "docs/_decisoes/MASS_NOTES_INTEGRATION.md"
       - "docs/product/MASS_NOTES_MVP.md"
@@ -18,13 +31,13 @@ permissions:
   contents: read
 
 concurrency:
-  group: mass-notes-experiment-${{ github.ref }}
+  group: mass-notes-experiment-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  validar-estrutura:
+  validar-scaffold:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - name: Clonar repositório
         uses: actions/checkout@v4.2.2
@@ -39,17 +52,29 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Validar sintaxe do auditor
-        run: python -m py_compile scripts/auditor-mass-notes-mvp.py
+      - name: Instalar Playwright
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.55.0
+          python -m playwright install --with-deps chromium
 
-      - name: Auditar scaffold do Mass Notes
+      - name: Validar sintaxe dos auditores
+        run: |
+          python -m py_compile scripts/auditor-mass-notes-mvp.py
+          python -m py_compile scripts/test-mass-notes-browser.py
+
+      - name: Auditar estrutura do Mass Notes
         run: python scripts/auditor-mass-notes-mvp.py
 
-      - name: Guardar relatório
+      - name: Executar smoke no Chromium
+        run: python scripts/test-mass-notes-browser.py
+
+      - name: Guardar relatórios e capturas
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: mass-notes-mvp-${{ github.run_id }}
           if-no-files-found: error
           retention-days: 14
-          path: reports/auditoria/mass-notes-mvp-artifacts/**
+          path: |
+            reports/auditoria/mass-notes-mvp-artifacts/**
+            reports/auditoria/mass-notes-browser-artifacts/**
