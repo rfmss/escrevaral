@@ -59,7 +59,7 @@ jobs:
         run: npm run test:e2e
 
       - name: Publicar preview estática isolada
-        if: github.event_name == 'push' && github.ref == 'refs/heads/experiment/mass-notes-tiptap'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
