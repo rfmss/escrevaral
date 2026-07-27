@@ -57,6 +57,13 @@
   box-shadow: none;
 }
 
+@media (max-width: 820px) {
+  /* Remove o stacking context da shell: o overlay fica sobre o texto e atrás do drawer. */
+  .app-shell {
+    z-index: auto;
+  }
+}
+
 @media (max-width: 520px) {
   .title-input {
     font-size: 1.85rem;
