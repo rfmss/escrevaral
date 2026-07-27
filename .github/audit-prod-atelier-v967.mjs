@@ -32,6 +32,8 @@ for (const theme of [
 ]) {
   const context = await browser.newContext({ acceptDownloads: true });
   await context.addInitScript(({ dark }) => {
+    localStorage.setItem('escrevaral-termos-v1', 'auditoria');
+    localStorage.setItem('vrda-first-visit', '1');
     if (dark) localStorage.setItem('vereda:dark-mode', 'on');
     else localStorage.removeItem('vereda:dark-mode');
   }, { dark: theme.dark });
@@ -52,6 +54,20 @@ for (const theme of [
       waitUntil: 'networkidle',
       timeout: 90000,
     });
+
+    const terms = page.locator('#terms-overlay');
+    if (await terms.count() && await terms.isVisible()) {
+      const accept = page.locator('[data-action="accept-terms-blank"]').first();
+      if (await accept.count()) {
+        await accept.click();
+        await terms.waitFor({ state: 'hidden', timeout: 10000 });
+      }
+    }
+
+    const welcome = page.locator('[data-action="welcome-write"]').first();
+    if (await welcome.count() && await welcome.isVisible()) {
+      await welcome.click();
+    }
 
     const resolvedTheme = await page.evaluate(
       () => document.documentElement.dataset.theme || 'alvorada',
