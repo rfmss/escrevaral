@@ -26,12 +26,12 @@ test('Enter após T1 cria parágrafo e Backspace não o absorve no título', asy
 
   const editor = page.locator('.ProseMirror')
   await expect(editor.locator('h1')).toHaveText('Título principal')
-  await expect(editor.locator('p')).toContainText('Parágrafo independente')
+  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 
   await page.keyboard.press('Home')
   await page.keyboard.press('Backspace')
   await expect(editor.locator('h1')).toHaveText('Título principal')
-  await expect(editor.locator('p')).toContainText('Parágrafo independente')
+  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 })
 
 test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ context, page }) => {
@@ -55,9 +55,9 @@ test('a engine real de revisão é acessada pelo adaptador', async ({ page }) =>
   await editor.click()
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Ela entrou para dentro da casa. O coração acelerou, o coração acelerou.')
-  await page.getByRole('button', { name: 'revisao', exact: true }).click()
+  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
   await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
-  await expect(page.getByRole('status')).not.toContainText('não pôde ser concluída', { timeout: 15_000 })
+  await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma|página está vazia/i, { timeout: 15_000 })
 })
 
 test('mobile não cria overflow e mantém drawers fecháveis', async ({ page }) => {
