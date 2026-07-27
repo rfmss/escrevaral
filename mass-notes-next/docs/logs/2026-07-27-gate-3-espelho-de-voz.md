@@ -1,7 +1,7 @@
 # Log — Gate 3: Espelho de Voz
 
 Data: 2026-07-27
-Estado: em andamento
+Estado: aprovado para continuidade experimental
 Branch: `experiment/mass-notes-tiptap`
 PR: `#155` (rascunho)
 
@@ -19,48 +19,26 @@ Não alterar:
 - editor Tiptap;
 - schema do documento.
 
-## Hipóteses
+## Hipóteses validadas
 
 1. A API pública da engine é `window.VeredaVoice.analyze(text, contexto?)`.
 2. A engine devolve contagens, métricas, confiança, leitura da voz, forças, pontos cegos, público e exercícios.
-3. Textos com menos de 200 palavras devem ser apresentados como hipótese de baixa confiança.
-4. O painel pode validar a arquitetura sem decorations inline.
+3. Textos com menos de 200 palavras são apresentados como hipótese de baixa confiança.
+4. O painel valida a arquitetura sem decorations inline.
 
-## Riscos
+## Implementação
 
-- assumir campos fixos demais da resposta legada;
-- exibir diagnóstico forte para corpus curto;
-- deixar resultado antigo atravessar edição ou troca de documento;
-- misturar estado da Revisão com estado da Voz;
-- tornar o rail apertado em mobile;
-- quebrar Firefox por carregamento de script clássico.
+- adaptador defensivo em `src/engines/voiceAdapter.ts`;
+- carregamento raw de `voice-engine.js`;
+- contrato TypeScript independente da resposta legada;
+- aba `voz` no rail;
+- execução apenas por ação explícita;
+- confiança, gesto, métricas, forças, pontos cegos, exercícios, ecos, público e disclaimer;
+- resultado apagado quando documento ou conteúdo muda;
+- exceção da engine isolada do editor;
+- estilos editoriais próprios, sem aparência clínica.
 
-## Plano técnico
-
-1. criar `src/engines/voiceAdapter.ts`;
-2. carregar `voice-engine.js` por importação raw;
-3. normalizar retorno em contrato TypeScript do produto;
-4. adicionar aba `voz` ao rail;
-5. executar somente por ação explícita;
-6. limpar resultado quando documento ou conteúdo mudar;
-7. testar vazio, corpus curto, resultado normal, falha e obsolescência;
-8. executar Chromium e Firefox;
-9. atualizar preview somente após gate verde;
-10. completar este log com commits, workflows e limitações.
-
-## Evidência prévia
-
-A engine original expõe `analyze` e `analyzeComplete` em `window.VeredaVoice`. A leitura retorna uma ressalva explícita de que voz, público e ecos são hipóteses heurísticas, não diagnóstico definitivo.
-
-## Implementação inicial
-
-- adaptador defensivo criado em `src/engines/voiceAdapter.ts`;
-- aba `voz` adicionada ao rail;
-- interface apresenta confiança, gesto, métricas, forças, pontos cegos, exercícios, ecos, público e disclaimer;
-- teste criado para vazio, baixa confiança e invalidação após edição;
-- workflow passou a observar `voice-engine.js`.
-
-## Tentativa 1
+## Tentativa 1 — falha útil
 
 - commit testado: `63489f1bf316643d377b14fa97adbb34fbbc7eea`;
 - workflow: `30314492067`;
@@ -73,22 +51,62 @@ A engine original expõe `analyze` e `analyzeComplete` em `window.VeredaVoice`. 
 
 No Firefox, a leitura aparecia e sumia durante as asserções. O autosave concluía após 650 ms, incrementava `document.revision` e acionava a invalidação da Voz, apesar de o conteúdo continuar idêntico.
 
-Chromium ocultou o defeito por executar as asserções antes do autosave. O Firefox, mais lento, tornou a condição visível.
+Chromium ocultou o defeito por executar as asserções antes do autosave. O Firefox, mais lento, tornou a condição temporal visível.
 
-### Decisão
+### Decisão arquitetural
 
-Revisão persistida não significa mudança semântica. O resultado será invalidado somente quando `document.id` ou `plainText` mudar. A revisão continua importante para persistência, mas não faz parte da identidade do snapshot linguístico quando o texto é igual.
+Revisão persistida não significa mudança semântica. Um resultado linguístico é identificado pelo documento e pelo conteúdo analisado. A revisão continua importante para persistência, mas não invalida uma leitura quando `plainText` permanece igual.
 
 ### Correção
 
 - removida `document.revision` da dependência de invalidação;
-- token de análise continua descartando qualquer resultado depois de edição ou troca de documento;
-- correção registrada no commit `0670c6a25f6f11bfc387b3d1fdd7f4263b55f530`.
+- token de análise continua descartando resultado depois de edição ou troca de documento;
+- correção-base: `0670c6a25f6f11bfc387b3d1fdd7f4263b55f530`.
 
-## Próxima execução
+## Tentativa 2 — núcleo verde
 
-Repetir build e todos os cenários em Chromium e Firefox. Preview permanece bloqueada até gate verde.
+- workflow: `30314730130`;
+- Chromium: aprovado;
+- Firefox: aprovado;
+- preview: publicada;
+- cenário temporal do autosave: aprovado.
+
+## Matriz final
+
+A matriz foi ampliada antes da aprovação final:
+
+1. documento vazio sem falso diagnóstico;
+2. corpus curto com confiança baixa e ressalva;
+3. corpus médio com leitura normalizada e métricas;
+4. alteração do conteúdo invalida leitura antiga;
+5. falha controlada da engine não quebra editor.
+
+Somados aos dez cenários anteriores da fundação e do Gate 2, foram executados 15 cenários por navegador, totalizando 30 execuções em Chromium e Firefox.
+
+## Execução final
+
+- commit funcional: `0ce407aa609e144d23ae0e97df9d1592c5df7f42`;
+- workflow: `30314881409`;
+- dependências: aprovadas;
+- TypeScript/Vite: aprovado;
+- Chromium: aprovado;
+- Firefox: aprovado;
+- publicação da preview: aprovada;
+- artefato: `mass-notes-tiptap-30314881409`;
+- captura do Espelho de Voz gerada por navegador.
+
+## Limites honestos
+
+Ainda não foram testados:
+
+- leitores de tela reais;
+- teclado virtual real;
+- corpus literário amplo para calibrar a utilidade editorial dos resultados;
+- decorations inline;
+- funcionamento offline em nova sessão.
 
 ## Decisão final
 
-Pendente.
+**Gate 3 aprovado para avaliação manual e continuidade experimental.**
+
+O próximo gate não começa automaticamente. O mantenedor deve experimentar a linguagem e a utilidade do Espelho de Voz na preview. P0/P1 interrompem a sequência. Sem bloqueadores, o próximo lote proposto é o vocabulário decolonizador apresentado como “Termos que pedem contexto”.
