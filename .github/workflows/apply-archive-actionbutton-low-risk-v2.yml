@@ -1,0 +1,125 @@
+name: Aplicar migração ActionButton do Acervo v2
+
+on:
+  pull_request:
+    branches: [main]
+    types: [synchronize]
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    if: github.head_ref == 'agent/archive-actionbutton-low-risk'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/archive-actionbutton-low-risk
+          fetch-depth: 0
+
+      - name: Aplicar patch aprovado
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          OLD = '20260726-syntax-token-palette-v1'
+          NEW = '20260726-archive-actionbutton-low-risk-v1'
+
+          def migrate(path, specs):
+              text = Path(path).read_text(encoding='utf-8')
+              for marker, label, old_class, variant, size, icon_only in specs:
+                  pattern = re.compile(r'<button(?P<attrs>[^>]*)>(?P<body>.*?)</button>', re.S)
+                  hits = []
+                  for match in pattern.finditer(text):
+                      attrs, body = match.group('attrs'), match.group('body')
+                      if marker in attrs and label in re.sub(r'<[^>]+>', ' ', body):
+                          hits.append(match)
+                  if len(hits) != 1:
+                      raise SystemExit(f'{path} {label}: esperado 1 botão, encontrados {len(hits)}')
+                  match = hits[0]
+                  attrs, body = match.group('attrs'), match.group('body')
+                  class_match = re.search(r'class="([^"]*)"', attrs)
+                  classes = class_match.group(1).split() if class_match else []
+                  classes = [c for c in classes if c != old_class]
+                  if 'action-button' not in classes:
+                      classes.insert(0, 'action-button')
+                  class_attr = f'class="{" ".join(classes)}"'
+                  attrs = re.sub(r'class="[^"]*"', class_attr, attrs, count=1) if class_match else f' {class_attr}' + attrs
+                  additions = [('data-component', 'action-button'), ('data-variant', variant)]
+                  if size:
+                      additions.append(('data-size', size))
+                  if icon_only:
+                      additions.append(('data-icon-only', 'true'))
+                  for key, value in additions:
+                      if f'{key}=' not in attrs:
+                          attrs += f' {key}="{value}"'
+                  if 'material-symbols-outlined' in body and 'action-button__icon' not in body:
+                      body = body.replace('class="material-symbols-outlined"', 'class="material-symbols-outlined action-button__icon" aria-hidden="true"', 1)
+                  replacement = f'<button{attrs}>{body}</button>'
+                  text = text[:match.start()] + replacement + text[match.end():]
+              Path(path).write_text(text, encoding='utf-8')
+
+          migrate('index.html', [
+              ('data-action="open-create-note"', 'Novo manuscrito', 'create-button', 'primary', None, False),
+              ('data-action="open-active-manuscript"', 'Abrir no editor', 'primary-button', 'primary', None, False),
+              ('data-export-format="txt"', 'Texto', 'ghost-button', 'ghost', 'compact', False),
+              ('data-export-format="md"', 'Markdown', 'ghost-button', 'ghost', 'compact', False),
+              ('data-export-format="html"', 'HTML', 'ghost-button', 'ghost', 'compact', False),
+              ('data-export-format="docx"', 'Word', 'ghost-button', 'ghost', 'compact', False),
+              ('data-export-format="epub"', 'ePub · KDP', 'ghost-button', 'ghost', 'compact', False),
+              ('data-export-format="obsidian"', 'Obsidian', 'ghost-button', 'ghost', 'compact', False),
+              ('data-action="export-backup"', 'Guardar cópia do acervo', 'secondary-button', 'secondary', None, False),
+              ('data-action="export-backup"', 'Guardar cópia', 'secondary-button', 'secondary', None, False),
+              ('data-action="export-rtf"', 'Exportar .rtf', 'secondary-button', 'secondary', None, False),
+              ('data-action="export-acervo"', 'Exportar textos', 'secondary-button', 'secondary', None, False),
+              ('data-action="export-obsidian-vault"', 'Exportar para Obsidian', 'secondary-button', 'secondary', None, False),
+              ('data-action="close-create-note"', 'close', 'icon-button', 'ghost', 'compact', True),
+          ])
+          migrate('app.js', [
+              ('data-action="create-step-back"', 'voltar', 'create-tpl-back', 'ghost', 'compact', False),
+          ])
+          migrate('archive-controller.js', [
+              ('data-action="export-backup"', 'Exportar cópia de segurança', 'secondary-button', 'secondary', None, False),
+              ('data-action="cancel-master-reset"', 'Cancelar', 'secondary-button', 'secondary', None, False),
+          ])
+
+          index = Path('index.html').read_text(encoding='utf-8').replace(OLD, NEW)
+          Path('index.html').write_text(index, encoding='utf-8')
+
+          sw = Path('service-worker.js').read_text(encoding='utf-8')
+          if sw.count('const CACHE_NAME = "vereda-offline-v964";') != 1:
+              raise SystemExit('cache v964 não encontrado de forma única')
+          sw = sw.replace('const CACHE_NAME = "vereda-offline-v964";', 'const CACHE_NAME = "vereda-offline-v965";').replace(OLD, NEW)
+          Path('service-worker.js').write_text(sw, encoding='utf-8')
+
+          for name in ('ui-dialog.js', 'css/14-archive-inspector.css', 'css/wood-icons.css'):
+              path = Path(name)
+              text = path.read_text(encoding='utf-8')
+              if OLD not in text:
+                  raise SystemExit(f'{name}: versão antiga ausente')
+              path.write_text(text.replace(OLD, NEW), encoding='utf-8')
+
+          index = Path('index.html').read_text(encoding='utf-8')
+          app = Path('app.js').read_text(encoding='utf-8')
+          archive = Path('archive-controller.js').read_text(encoding='utf-8')
+          assert 'class="secondary-button" data-action="import-backup"' in index
+          assert 'class="danger-button" data-action="master-reset"' in index
+          assert 'class="create-tpl-free" data-action="create-quick-note"' in app
+          assert 'class="danger-button" data-action="confirm-master-reset"' in archive
+
+      - name: Validar sintaxe e distribuição
+        run: |
+          node --check app.js
+          node --check archive-controller.js
+          node --check ui-dialog.js
+          python3 scripts/auditor-asset-version.py
+
+      - name: Publicar arquivos aprovados
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app.js archive-controller.js service-worker.js ui-dialog.js css/14-archive-inspector.css css/wood-icons.css
+          git commit -m "Migra ações de baixo risco do Acervo para ActionButton"
+          git push origin HEAD:agent/archive-actionbutton-low-risk
