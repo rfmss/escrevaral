@@ -7,7 +7,10 @@ async function waitReady(page: Page) {
 }
 
 async function newDocument(page: Page, title: string) {
+  const documentsBefore = await page.locator('.note-card').count()
   await page.keyboard.press('Control+N')
+  await expect(page.locator('.note-card')).toHaveCount(documentsBefore + 1)
+  await expect(page.getByLabel('Título do documento')).toHaveValue('')
   await page.getByLabel('Título do documento').fill(title)
   const editor = page.locator('.ProseMirror')
   await editor.click()
