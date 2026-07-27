@@ -10,6 +10,7 @@ on:
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
+      - "voice-engine.js"
       - "js/data/criterios-data.js"
   pull_request:
     branches:
@@ -20,6 +21,7 @@ on:
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
+      - "voice-engine.js"
       - "js/data/criterios-data.js"
   workflow_dispatch:
 
