@@ -22,8 +22,6 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 
 ### Gate 1 — fundação
 
-Aprovado:
-
 - documento estruturado;
 - Enter após título;
 - histórico isolado por documento;
@@ -33,8 +31,6 @@ Aprovado:
 
 ### Gate 2 — confiabilidade
 
-Aprovado:
-
 - Chromium e Firefox;
 - paste representativo de Word e Google Docs;
 - seleção, toolbar e listas;
@@ -43,51 +39,56 @@ Aprovado:
 - drawers acessíveis;
 - preview somente após gate verde.
 
-## Lote atual — Gate 3: Espelho de Voz
+### Gate 3 — Espelho de Voz
 
-Objetivo: integrar `voice-engine.js` por adaptador, sem alterar a engine e sem criar decorations inline.
+Aprovado em Chromium e Firefox:
 
-Escopo autorizado:
+- `voice-engine.js` intacta e carregada por adaptador;
+- resposta normalizada em contrato TypeScript;
+- aba `Voz` no rail, sem decorations inline;
+- documento vazio sem falso diagnóstico;
+- corpus curto apresentado com baixa confiança;
+- corpus médio com leitura, métricas e hipótese editorial;
+- resultado invalidado quando documento ou conteúdo muda;
+- resultado preservado quando apenas o autosave avança a revisão;
+- falha da engine isolada sem quebrar o editor;
+- preview atualizada somente após gate verde.
 
-1. criar adaptador tipado e normalização defensiva;
-2. adicionar aba `Voz` ao rail;
-3. mostrar confiança, gesto, descrição, forças, pontos cegos, ecos, público e exercícios;
-4. descartar resultado quando documento ou revisão mudarem;
-5. executar localmente, por ação explícita;
-6. cobrir Chromium e Firefox;
-7. atualizar documentação e preview após gate verde.
+Evidência principal: workflow `30314881409`, 15 cenários em Chromium e Firefox, total de 30 execuções.
 
-Fora do Gate 3:
+## Lote atual — revisão manual do Gate 3
 
-- destaques dentro do editor;
-- aplicação automática de sugestões;
-- RimaLab;
-- vocabulário decolonizador;
-- paginação física;
-- service worker;
-- Tauri/SQLite;
-- promoção para `main`.
+Antes de iniciar uma nova engine:
 
-## Critério de aprovação do Gate 3
+1. usar a preview com textos reais curtos e longos;
+2. avaliar linguagem, hierarquia e utilidade das hipóteses;
+3. registrar qualquer P0/P1;
+4. confirmar que o rail continua legível no desktop e mobile;
+5. não iniciar decorations inline.
 
-- engine original intacta;
-- carregamento por adaptador isolado;
-- documento vazio tratado sem falso diagnóstico;
-- texto curto identificado como baixa confiança;
-- texto suficiente produz leitura normalizada;
-- edição ou troca de documento invalida resultado antigo;
-- falha da engine não quebra editor nem outras abas;
-- Chromium e Firefox verdes;
-- documentação e log atualizados;
-- preview publicada somente após gate verde.
+## Próximo lote proposto — Gate 4: termos que pedem contexto
+
+Somente após a revisão manual do Gate 3.
+
+Objetivo previsto: integrar o vocabulário decolonizador como leitura contextual, sem acusação e sem substituição automática.
+
+Escopo preliminar:
+
+- adaptador tipado;
+- seção ou aba contextual;
+- termo, categoria, motivo, contexto e alternativas;
+- contagem de ocorrências;
+- nenhuma alteração automática do texto;
+- Chromium e Firefox;
+- documentação e log próprios.
 
 ## Sequência posterior planejada
 
-1. Vocabulário decolonizador em painel contextual;
+1. Gate 4 — vocabulário decolonizador;
 2. RimaLab sem marcações inline;
 3. contrato de posições para issues linguísticas;
 4. decorations ProseMirror;
 5. PWA/offline em nova sessão;
 6. avaliação de promoção arquitetural.
 
-O próximo passo só é autorizado após o gate atual ficar verde ou ser explicitamente interrompido por P0/P1.
+O próximo gate só começa depois da avaliação manual ou de autorização explícita do mantenedor.
