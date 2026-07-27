@@ -17,26 +17,28 @@ jobs:
       - name: Obter auditor técnico
         uses: actions/checkout@v4.2.2
 
-      - name: Aguardar propagação de v966
+      - name: Ler versão publicada
         shell: bash
         run: |
           set -euo pipefail
-          for tentativa in $(seq 1 36); do
-            nonce="${GITHUB_RUN_ID}-${tentativa}-$(date +%s)"
-            sw="$(curl -fsSL -H 'Cache-Control: no-cache' "https://escrevaral.com/service-worker.js?verify=${nonce}" || true)"
-            css="$(curl -fsSL -H 'Cache-Control: no-cache' "https://escrevaral.com/css/02-shell-navigation.css?verify=${nonce}" || true)"
-            if grep -Fq 'vereda-offline-v966' <<<"$sw" \
-              && grep -Fq '20260727-master-reset-hidden-v1' <<<"$sw" \
-              && grep -Eq '#master-reset-modal\[hidden\][[:space:]]*\{[[:space:]]*display[[:space:]]*:[[:space:]]*none[[:space:]]*;' <<<"$css"; then
-              printf '%s' "$sw" > service-worker-production.js
-              printf '%s' "$css" > shell-production.css
-              echo "v966 propagado na tentativa ${tentativa}."
-              exit 0
-            fi
-            sleep 10
-          done
-          echo 'v966 não propagou dentro da janela de verificação.' >&2
-          exit 1
+          nonce="${GITHUB_RUN_ID}-$(date +%s)"
+          curl -fsSL -H 'Cache-Control: no-cache' "https://escrevaral.com/service-worker.js?verify=${nonce}" -o service-worker-production.js
+          curl -fsSL -H 'Cache-Control: no-cache' "https://escrevaral.com/css/02-shell-navigation.css?verify=${nonce}" -o shell-production.css
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          sw = Path('service-worker-production.js').read_text(encoding='utf-8', errors='replace')
+          css = Path('shell-production.css').read_text(encoding='utf-8', errors='replace')
+          checks = {
+              'cache_v966': 'vereda-offline-v966' in sw,
+              'asset_v1': '20260727-master-reset-hidden-v1' in sw,
+              'hidden_rule': bool(re.search(r'#master-reset-modal\[hidden\]\s*\{[^}]*display\s*:\s*none\s*;', css, re.S)),
+          }
+          print('SW_HEAD=', repr(sw[:240]))
+          print('CSS_MATCH_CONTEXT=', repr(css[max(0, css.find('#master-reset-modal')-80):css.find('#master-reset-modal')+360]))
+          print('CHECKS=', checks)
+          assert all(checks.values()), checks
+          PY
 
       - name: Instalar Playwright e Chromium
         run: |
