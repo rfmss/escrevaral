@@ -7,9 +7,9 @@ async function waitReady(page: Page) {
 }
 
 async function createCleanDocument(page: Page, title: string) {
-  const initialId = await page.locator('.note-card.active').getAttribute('data-document-id')
+  const initialCount = await page.locator('.note-card').count()
   await page.keyboard.press('Control+N')
-  await expect.poll(async () => page.locator('.note-card.active').getAttribute('data-document-id')).not.toBe(initialId)
+  await expect(page.locator('.note-card')).toHaveCount(initialCount + 1)
   await page.getByLabel('Título do documento').fill(title)
   const editor = page.locator('.ProseMirror')
   await editor.click()
