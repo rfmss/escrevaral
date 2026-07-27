@@ -1,0 +1,107 @@
+name: Auditoria efêmera de produção do Acervo v965 v6
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/post-merge-verify-archive-v965-pr-v6.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+      - name: Instalar navegador de auditoria
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Auditar produção
+        shell: python
+        run: |
+          import json,time,urllib.request
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright,expect
+          BASE="https://escrevaral.com/";ASSET="20260726-archive-actionbutton-low-risk-v1";CACHE="vereda-offline-v965"
+          OUT=Path("reports/auditoria/post-merge-archive-v965-v6");OUT.mkdir(parents=True,exist_ok=True);RESULT=OUT/"resultado.json"
+          report={"propagacao":{},"temas":{},"concluido":False}
+          def save():RESULT.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+          def fetch(path):
+              sep="&" if "?" in path else "?";req=urllib.request.Request(BASE+path+sep+f"audit={time.time_ns()}",headers={"User-Agent":"Escrevaral audit","Cache-Control":"no-cache","Pragma":"no-cache"})
+              with urllib.request.urlopen(req,timeout=30) as response:return response.read().decode("utf-8")
+          deadline=time.time()+600
+          while time.time()<deadline:
+              try:
+                  html,sw=fetch(""),fetch("service-worker.js");report["propagacao"]={"asset_html":ASSET in html,"asset_sw":ASSET in sw,"cache_v965":CACHE in sw};save()
+                  if all(report["propagacao"].values()):break
+              except Exception as exc:report["propagacao"]={"erro":str(exc)};save()
+              time.sleep(10)
+          else:raise AssertionError(report["propagacao"])
+
+          ms={"id":"audit-v965","title":"Manuscrito de auditoria","kind":"Conto","type":"manuscrito","status":"Em escrita","text":"Texto temporário para testar exportação.","html":"<p>Texto temporário para testar exportação.</p>","description":"Estado local isolado.","tags":[],"progress":42,"pagePreset":"draft","author":"","createdAt":"2026-07-26T12:00:00.000Z","updatedAt":"2026-07-26T12:00:00.000Z"}
+          state=json.dumps({"manuscripts":[ms],"activeId":"audit-v965","archive":{"filter":"all","statusFilter":"all","search":"","sort":"updated"},"layout":{"leftCollapsed":True,"rightCollapsed":True},"ui":{}},ensure_ascii=False)
+          init=f"localStorage.setItem('escrevaral-termos-v1','audit');localStorage.setItem('vrda-first-visit','1');localStorage.setItem('vereda.manuscripts.v1',{json.dumps(state)});"
+          def check(locator,variant,size=None,icon=False):
+              expect(locator).to_be_visible();assert "action-button" in (locator.get_attribute("class") or "").split();assert locator.get_attribute("data-component")=="action-button";assert locator.get_attribute("data-variant")==variant;assert locator.get_attribute("data-size")==size
+              if icon:assert locator.get_attribute("data-icon-only")=="true" and locator.get_attribute("aria-label")
+              style=locator.evaluate("el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return {height:r.height,width:r.width,background:s.backgroundColor,color:s.color,border:s.borderColor,cursor:s.cursor}}")
+              if size=="compact":assert abs(style["height"]-36)<=1.5,style
+              else:assert style["height"]>=40.5,style
+              return style
+          def download(page,locator,name):
+              with page.expect_download(timeout=20000) as pending:locator.click()
+              item=pending.value;target=OUT/"downloads"/name;target.parent.mkdir(parents=True,exist_ok=True);item.save_as(target);assert target.stat().st_size>0
+              return {"nome":item.suggested_filename,"bytes":target.stat().st_size}
+
+          with sync_playwright() as p:
+              browser=p.chromium.launch()
+              for theme,theme_id,scheme in (("alvorada",None,"light"),("vereda","scriptorium","dark")):
+                  data={"etapas":[],"controles":{},"downloads":{},"erros":[]};report["temas"][theme]=data;save()
+                  context=browser.new_context(viewport={"width":1440,"height":1000},color_scheme=scheme,reduced_motion="reduce",accept_downloads=True);context.add_init_script(init);page=context.new_page();page.on("pageerror",lambda error:data["erros"].append(str(error)))
+                  try:
+                      page.goto(BASE+f"?audit={time.time_ns()}#arquivo",wait_until="domcontentloaded",timeout=60000);page.wait_for_function("()=>typeof setView==='function'",timeout=30000);page.evaluate("t=>{if(t)document.documentElement.dataset.theme=t;else document.documentElement.removeAttribute('data-theme');setView('arquivo',{updateRoute:false})}",theme_id);page.wait_for_selector('.project-card',timeout=20000)
+                      archive=page.locator('[data-view-panel="arquivo"]');data["etapas"].append("acervo")
+                      dismiss=page.locator('#update-dismiss-btn');
+                      if dismiss.count() and dismiss.is_visible():dismiss.click()
+
+                      novo=archive.locator('button[data-action="open-create-note"]');data["controles"]["novo"]=check(novo,"primary");novo.click();overlay=page.locator('[data-create-note-overlay]');expect(overlay).to_be_visible();data["etapas"].append("novo-abriu")
+                      category=overlay.locator('[data-create-category]').first
+                      if category.count():category.click();back=overlay.locator('button[data-action="create-step-back"]');data["controles"]["voltar"]=check(back,"ghost","compact");back.click();data["etapas"].append("voltar")
+                      close=overlay.locator('button[data-action="close-create-note"]');data["controles"]["fechar"]=check(close,"ghost","compact",True);close.click();expect(overlay).to_be_hidden();data["etapas"].append("fechar")
+
+                      abrir=archive.locator('button[data-action="open-active-manuscript"]');data["controles"]["abrir"]=check(abrir,"primary");abrir.click();page.wait_for_function("()=>document.querySelector('.app-shell')?.dataset.view==='editor'",timeout=10000);data["etapas"].append("abrir-editor");page.evaluate("()=>setView('arquivo',{updateRoute:false})")
+                      details=archive.locator('.archive-detail-panel details').filter(has_text="Exportar").first
+                      if details.count():details.evaluate("el=>el.open=true")
+                      for fmt in ("txt","md","html","docx","epub","obsidian"):
+                          item=archive.locator(f'button[data-action="export-manuscript"][data-export-format="{fmt}"]');data["controles"][fmt]=check(item,"ghost","compact");data["downloads"][fmt]=download(page,item,f"{theme}-{fmt}");data["etapas"].append(f"export-{fmt}");save()
+
+                      archive.locator('details.archive-security-details').evaluate("el=>el.open=true")
+                      backups=archive.locator('button.action-button[data-action="export-backup"]');assert backups.count()==2
+                      for index,label in enumerate(("Guardar cópia","Guardar cópia do acervo")):
+                          item=backups.nth(index);data["controles"][label]=check(item,"secondary");data["downloads"][label]=download(page,item,f"{theme}-backup-{index}.esc");data["etapas"].append(label);save()
+
+                      rtf=archive.locator('button[data-action="export-rtf"]');data["controles"]["rtf"]=check(rtf,"secondary");rtf.click();status=page.locator('[data-save-status]');expect(status).to_contain_text("RTF exportado",timeout=10000);data["feedback_rtf"]=status.inner_text();data["etapas"].append("rtf");save()
+                      for selector,key,label in (("export-acervo","textos","Exportar textos"),("export-obsidian-vault","obsidian-vault","Exportar para Obsidian")):
+                          item=archive.locator(f'button[data-action="{selector}"]');data["controles"][label]=check(item,"secondary");data["downloads"][label]=download(page,item,f"{theme}-{key}");data["etapas"].append(label);save()
+
+                      archive.locator('button[data-action="master-reset"]').click();modal=page.locator('.master-reset-modal');expect(modal).to_be_visible();modal_backup=modal.locator('button[data-action="export-backup"]');data["controles"]["modal-backup"]=check(modal_backup,"secondary");data["downloads"]["modal-backup"]=download(page,modal_backup,f"{theme}-modal-backup.esc");cancel=modal.locator('button[data-action="cancel-master-reset"]');data["controles"]["cancelar"]=check(cancel,"secondary");cancel.click();expect(modal).to_be_hidden();data["etapas"].append("modal-backup-cancelar")
+                      assert not data["erros"],data["erros"];page.screenshot(path=str(OUT/f"acervo-{theme}.png"),full_page=False);data["concluido"]=True;save()
+                  except Exception as exc:data["falha"]=repr(exc);page.screenshot(path=str(OUT/f"falha-{theme}.png"),full_page=False);save();raise
+                  finally:context.close()
+              browser.close()
+          report["concluido"]=all(x.get("concluido") for x in report["temas"].values());save();assert report["concluido"]
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-merge-archive-v965-v6-${{ github.run_id }}
+          path: reports/auditoria/post-merge-archive-v965-v6/
+          retention-days: 14
