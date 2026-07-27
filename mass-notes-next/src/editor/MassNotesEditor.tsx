@@ -31,17 +31,26 @@ export function MassNotesEditor({ documentId, content, resetKey, onChange }: Pro
         const { $from, empty } = view.state.selection
         if (!empty) return false
 
-        if (event.key === 'Backspace' && $from.parentOffset === 0 && $from.parent.type.name === 'paragraph') {
-          const previous = view.state.doc.resolve($from.before()).nodeBefore
-          if (previous?.type.name === 'heading') {
+        const blockIndex = $from.index(0)
+        const currentBlock = blockIndex < view.state.doc.childCount
+          ? view.state.doc.child(blockIndex)
+          : null
+
+        if (event.key === 'Backspace' && view.endOfTextblock('backward')) {
+          const previousBlock = blockIndex > 0
+            ? view.state.doc.child(blockIndex - 1)
+            : null
+          if (currentBlock?.type.name === 'paragraph' && previousBlock?.type.name === 'heading') {
             event.preventDefault()
             return true
           }
         }
 
-        if (event.key === 'Delete' && $from.parentOffset === $from.parent.content.size && $from.parent.type.name === 'heading') {
-          const next = view.state.doc.resolve($from.after()).nodeAfter
-          if (next?.type.name === 'paragraph') {
+        if (event.key === 'Delete' && view.endOfTextblock('forward')) {
+          const nextBlock = blockIndex + 1 < view.state.doc.childCount
+            ? view.state.doc.child(blockIndex + 1)
+            : null
+          if (currentBlock?.type.name === 'heading' && nextBlock?.type.name === 'paragraph') {
             event.preventDefault()
             return true
           }
