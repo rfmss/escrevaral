@@ -1,14 +1,24 @@
 (function bootstrapMassNotes(global) {
   "use strict";
 
+  function exposeLexicalGlobals() {
+    try {
+      if (!global.VeredaPagination && typeof VeredaPagination !== "undefined") {
+        global.VeredaPagination = VeredaPagination;
+      }
+    } catch (_) {
+      // A paginação continua opcional se o binding lexical não estiver disponível.
+    }
+  }
+
   async function start() {
+    exposeLexicalGlobals();
+
     if (!global.MassNotesStore || !global.MassNotesEngines || !global.MassNotesApp) {
       throw new Error("Camadas obrigatórias do Mass Notes não foram carregadas.");
     }
 
-    // O controlador conserva o objeto ativo durante ações como “salvar e analisar”.
-    // Sincronizar o mesmo objeto com o registro confirmado evita descartar um
-    // resultado válido como se pertencesse a uma revisão antiga.
+    // Sincroniza o mesmo objeto enviado pelo controlador com a revisão confirmada.
     const saveDocument = global.MassNotesStore.saveDocument;
     global.MassNotesStore.saveDocument = async function saveAndSynchronize(input) {
       const saved = await saveDocument(input);
