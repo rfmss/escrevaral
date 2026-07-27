@@ -1,0 +1,91 @@
+name: Auditoria estável Ateliê v967
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  audit-stable:
+    if: github.event.pull_request.head.ref == 'agent/audit-prod-atelier-v967'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Aguardar v967 no domínio público
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            sw="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/service-worker.js?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            html="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            if grep -q 'vereda-offline-v967' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$html"; then
+              echo 'Produção v967 propagada.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'v967 não propagou.' >&2
+          exit 1
+
+      - name: Instalar Chromium
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --silent playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Executar auditoria
+        shell: bash
+        run: node .github/audit-prod-atelier-v967.mjs
+
+      - name: Publicar resultado no PR
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          path = Path('audit-artifacts/resultado-atelier-v967.json')
+          payload = path.read_text(encoding='utf-8') if path.exists() else '{"error":"relatório ausente"}'
+          run_url = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+          Path('/tmp/comment.md').write_text(
+              "## Auditoria estável de produção do Ateliê v967\n\n```json\n"
+              + payload + "\n```\n\nWorkflow: " + run_url + "\n",
+              encoding='utf-8'
+          )
+          PY
+          gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md
+
+      - name: Validar resultado
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          data = json.load(open('audit-artifacts/resultado-atelier-v967.json', encoding='utf-8'))
+          failures = []
+          for theme in data['themes']:
+              if theme['setup']['status'] != 'ok':
+                  failures.append(f"{theme['theme']}: setup")
+              for check in theme['checks']:
+                  if check['status'] != 'ok':
+                      failures.append(f"{theme['theme']}: {check['name']}")
+              if theme['pageErrors']:
+                  failures.append(f"{theme['theme']}: pageErrors")
+          if failures:
+              raise SystemExit('Falhas: ' + ', '.join(failures))
+          print('Todos os controles passaram nos dois temas.')
+          PY
