@@ -1,6 +1,5 @@
 import type { JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
-import { useEffect } from 'react'
 import { editorExtensions } from './editorExtensions'
 
 type EditorSnapshot = {
@@ -15,7 +14,11 @@ type Props = {
   onChange: (snapshot: EditorSnapshot) => void
 }
 
-export function MassNotesEditor({ documentId, content, resetKey, onChange }: Props) {
+export function MassNotesEditor(props: Props) {
+  return <MassNotesEditorInstance key={`${props.documentId}:${props.resetKey}`} {...props} />
+}
+
+function MassNotesEditorInstance({ content, onChange }: Props) {
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -32,11 +35,6 @@ export function MassNotesEditor({ documentId, content, resetKey, onChange }: Pro
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
     },
   })
-
-  useEffect(() => {
-    if (!editor) return
-    editor.commands.setContent(content, { emitUpdate: false })
-  }, [documentId, resetKey, editor])
 
   const state = useEditorState({
     editor,
