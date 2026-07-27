@@ -27,12 +27,7 @@ jobs:
             css="$(curl -fsSL -H 'Cache-Control: no-cache' "https://escrevaral.com/css/02-shell-navigation.css?verify=${nonce}" || true)"
             if grep -Fq 'vereda-offline-v966' <<<"$sw" \
               && grep -Fq '20260727-master-reset-hidden-v1' <<<"$sw" \
-              && python - "$css" <<'PY'
-import re, sys
-css = sys.argv[1]
-raise SystemExit(0 if re.search(r'#master-reset-modal\[hidden\]\s*\{\s*display\s*:\s*none\s*;\s*\}', css, re.S) else 1)
-PY
-            then
+              && grep -Eq '#master-reset-modal\[hidden\][[:space:]]*\{[[:space:]]*display[[:space:]]*:[[:space:]]*none[[:space:]]*;' <<<"$css"; then
               printf '%s' "$sw" > service-worker-production.js
               printf '%s' "$css" > shell-production.css
               echo "v966 propagado na tentativa ${tentativa}."
