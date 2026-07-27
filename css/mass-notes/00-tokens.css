@@ -11,6 +11,7 @@
   --mn-accent: #315fc4;
   --mn-accent-hover: #244b9d;
   --mn-accent-soft: #e8efff;
+  --mn-accent-contrast: #ffffff;
   --mn-danger: #b3261e;
   --mn-success: #176b3a;
   --mn-warning: #8a5200;
@@ -40,6 +41,7 @@
   --mn-accent: #8aabff;
   --mn-accent-hover: #b1c7ff;
   --mn-accent-soft: #293a60;
+  --mn-accent-contrast: #10182a;
   --mn-danger: #ffb4ab;
   --mn-success: #8bd7a8;
   --mn-warning: #ffc46b;
