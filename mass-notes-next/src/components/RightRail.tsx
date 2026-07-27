@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { ReviewIssue } from '../engines/reviewAdapter'
+import { useModalDrawer } from './useModalDrawer'
 
 type Tab = 'pulso' | 'revisao' | 'ferramentas'
 
@@ -34,6 +35,7 @@ export function RightRail({
   onTheme,
 }: Props) {
   const [tab, setTab] = useState<Tab>('pulso')
+  const panelRef = useModalDrawer<HTMLElement>(open, onClose)
   const words = countWords(document.plainText)
   const pulse = averageSentenceLength(document.plainText)
 
@@ -43,19 +45,30 @@ export function RightRail({
   }
 
   return (
-    <aside className={`rail ${open ? 'open' : ''}`} aria-label="Ferramentas do texto">
+    <aside
+      ref={panelRef}
+      id="text-tools"
+      className={`rail ${open ? 'open' : ''}`}
+      aria-label="Ferramentas do texto"
+      role={open ? 'dialog' : undefined}
+      aria-modal={open || undefined}
+      tabIndex={-1}
+    >
       <div className="rail-title">
         <span>Copiar / Desenvolver / Aprovar</span>
-        <button className="drawer-close" type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
+        <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
       </div>
       <div className="tabs" role="tablist" aria-label="Ferramentas">
         {(['pulso', 'revisao', 'ferramentas'] as const).map((item) => (
           <button
             key={item}
+            id={`tab-${item}`}
             type="button"
             role="tab"
             className={`tab ${tab === item ? 'active' : ''}`}
             aria-selected={tab === item}
+            aria-controls={`panel-${item}`}
+            tabIndex={tab === item ? 0 : -1}
             onClick={() => setTab(item)}
           >
             {item}
@@ -65,7 +78,7 @@ export function RightRail({
 
       <div className="rail-scroll">
         {tab === 'pulso' && (
-          <section className="panel active" aria-label="Pulso do documento">
+          <section id="panel-pulso" role="tabpanel" aria-labelledby="tab-pulso" className="panel active">
             <div className="metric">
               <div className="metric-label">Palavras</div>
               <div className="metric-value">{words}</div>
@@ -106,7 +119,7 @@ export function RightRail({
         )}
 
         {tab === 'revisao' && (
-          <section className="panel active" aria-label="Revisão linguística">
+          <section id="panel-revisao" role="tabpanel" aria-labelledby="tab-revisao" className="panel active">
             <p className="panel-intro">A primeira engine real do Escrevaral lê o texto localmente, sem enviar seu rascunho para fora.</p>
             <button className="action primary" type="button" onClick={onAnalyze} disabled={analyzing}>
               {analyzing ? 'Lendo o texto…' : 'Analisar em português brasileiro'}
@@ -124,7 +137,7 @@ export function RightRail({
         )}
 
         {tab === 'ferramentas' && (
-          <section className="panel active" aria-label="Ferramentas do documento">
+          <section id="panel-ferramentas" role="tabpanel" aria-labelledby="tab-ferramentas" className="panel active">
             <button className="action primary" type="button" onClick={onExport}>Exportar .txt</button>
             <button className="action" type="button" onClick={onDuplicate}>Duplicar página</button>
             <button className="action" type="button" onClick={onFocus}>Modo concentração</button>
