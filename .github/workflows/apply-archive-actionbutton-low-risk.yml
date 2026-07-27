@@ -1,0 +1,199 @@
+name: Aplicar migração ActionButton do Acervo
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+
+permissions:
+  contents: write
+
+jobs:
+  aplicar:
+    if: github.head_ref == 'agent/archive-actionbutton-low-risk'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          ref: agent/archive-actionbutton-low-risk
+          fetch-depth: 0
+
+      - name: Aplicar patch aprovado
+        shell: python
+        run: |
+          from pathlib import Path
+
+          OLD = "20260726-syntax-token-palette-v1"
+          NEW = "20260726-archive-actionbutton-low-risk-v1"
+
+          def replace_once(text, old, new, label):
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f"{label}: esperado 1, encontrado {count}")
+              return text.replace(old, new, 1)
+
+          index_path = Path("index.html")
+          index = index_path.read_text(encoding="utf-8")
+
+          replacements = [
+          ('''<button class="create-button" data-action="open-create-note">
+                    <span class="material-symbols-outlined">add</span>
+                    Novo manuscrito
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="primary" data-action="open-create-note">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">add</span>
+                    Novo manuscrito
+                  </button>''', "Novo manuscrito"),
+          ('''<button class="primary-button archive-open-btn" data-action="open-active-manuscript">
+                      <span class="material-symbols-outlined">edit_note</span>
+                      Abrir no editor
+                    </button>''', '''<button class="action-button archive-open-btn" data-component="action-button" data-variant="primary" data-action="open-active-manuscript">
+                      <span class="material-symbols-outlined action-button__icon" aria-hidden="true">edit_note</span>
+                      Abrir no editor
+                    </button>''', "Abrir no editor"),
+          ('''<button class="ghost-button" data-action="export-manuscript" data-export-format="txt" title="Baixar como texto simples (.txt)">
+                          <span class="material-symbols-outlined">article</span>
+                          Texto
+                        </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="txt" title="Baixar como texto simples (.txt)">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">article</span>
+                          Texto
+                        </button>''', "Exportar TXT"),
+          ('''<button class="ghost-button" data-action="export-manuscript" data-export-format="md" title="Baixar em Markdown (.md)">
+                          <span class="material-symbols-outlined">markdown</span>
+                          Markdown
+                        </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="md" title="Baixar em Markdown (.md)">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">markdown</span>
+                          Markdown
+                        </button>''', "Exportar Markdown"),
+          ('''<button class="ghost-button" data-action="export-manuscript" data-export-format="html" title="Baixar como página HTML com CSS de impressão (.html)">
+                          <span class="material-symbols-outlined">html</span>
+                          HTML
+                        </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="html" title="Baixar como página HTML com CSS de impressão (.html)">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">html</span>
+                          HTML
+                        </button>''', "Exportar HTML"),
+          ('''<button class="ghost-button" data-action="export-manuscript" data-export-format="docx" title="Baixar para Word e LibreOffice (.docx)">
+                          <span class="material-symbols-outlined">description</span>
+                          Word
+                        </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="docx" title="Baixar para Word e LibreOffice (.docx)">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">description</span>
+                          Word
+                        </button>''', "Exportar Word"),
+          ('''<button class="ghost-button archive-epub-btn" data-action="export-manuscript" data-export-format="epub" title="ePub para Amazon KDP e leitores de e-book">
+                          <span class="material-symbols-outlined">auto_stories</span>
+                          ePub · KDP
+                        </button>''', '''<button class="action-button archive-epub-btn" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="epub" title="ePub para Amazon KDP e leitores de e-book">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">auto_stories</span>
+                          ePub · KDP
+                        </button>''', "Exportar ePub"),
+          ('''<button class="ghost-button" data-action="export-manuscript" data-export-format="obsidian" title="Gerar arquivo .md preparado para abrir no Obsidian">
+                          <span class="material-symbols-outlined">hub</span>
+                          Obsidian
+                        </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="export-manuscript" data-export-format="obsidian" title="Gerar arquivo .md preparado para abrir no Obsidian">
+                          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">hub</span>
+                          Obsidian
+                        </button>''', "Exportar Obsidian"),
+          ('''<button class="secondary-button" data-action="export-backup">
+                    <span class="material-symbols-outlined">file_save</span>
+                    Guardar cópia
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-backup">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_save</span>
+                    Guardar cópia
+                  </button>''', "Guardar cópia"),
+          ('''<button class="secondary-button" data-action="export-backup">
+                    <span class="material-symbols-outlined">file_save</span>
+                    Guardar cópia do acervo
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-backup">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_save</span>
+                    Guardar cópia do acervo
+                  </button>''', "Guardar cópia do acervo"),
+          ('''<button class="secondary-button" data-action="export-rtf" title="Baixar para Word / LibreOffice (.rtf)">
+                    <span class="material-symbols-outlined">file_download</span>
+                    Exportar .rtf
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-rtf" title="Baixar para Word / LibreOffice (.rtf)">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_download</span>
+                    Exportar .rtf
+                  </button>''', "Exportar RTF"),
+          ('''<button class="secondary-button" data-action="export-acervo" title="Baixar manuscritos conforme seleção acima">
+                    <span class="material-symbols-outlined">file_download</span>
+                    Exportar textos
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-acervo" title="Baixar manuscritos conforme seleção acima">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_download</span>
+                    Exportar textos
+                  </button>''', "Exportar textos"),
+          ('''<button class="secondary-button" data-action="export-obsidian-vault" title="Baixar textos conforme seleção acima como pasta Obsidian (.zip)">
+                    <span class="material-symbols-outlined">hub</span>
+                    Exportar para Obsidian
+                  </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-obsidian-vault" title="Baixar textos conforme seleção acima como pasta Obsidian (.zip)">
+                    <span class="material-symbols-outlined action-button__icon" aria-hidden="true">hub</span>
+                    Exportar para Obsidian
+                  </button>''', "Exportar cofre Obsidian"),
+          ('''<button class="icon-button" data-action="close-create-note" aria-label="Fechar painel de novo texto">
+              <span class="material-symbols-outlined">close</span>
+            </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-icon-only="true" data-action="close-create-note" aria-label="Fechar painel de novo texto">
+              <span class="material-symbols-outlined action-button__icon" aria-hidden="true">close</span>
+            </button>''', "Fechar modal de criação"),
+          ]
+
+          for old, new, label in replacements:
+              index = replace_once(index, old, new, label)
+          index = index.replace(OLD, NEW)
+          index_path.write_text(index, encoding="utf-8")
+
+          app_path = Path("app.js")
+          app = app_path.read_text(encoding="utf-8")
+          app = replace_once(app, '''<button class="create-tpl-back" data-action="create-step-back" type="button">
+        <span class="material-symbols-outlined">arrow_back</span>
+        voltar
+      </button>''', '''<button class="action-button" data-component="action-button" data-variant="ghost" data-size="compact" data-action="create-step-back" type="button">
+        <span class="material-symbols-outlined action-button__icon" aria-hidden="true">arrow_back</span>
+        voltar
+      </button>''', "Voltar no modal")
+          app_path.write_text(app, encoding="utf-8")
+
+          archive_path = Path("archive-controller.js")
+          archive = archive_path.read_text(encoding="utf-8")
+          archive = replace_once(archive, '''<button class="secondary-button" data-action="export-backup">
+          <span class="material-symbols-outlined">file_save</span>
+          Exportar cópia de segurança
+        </button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="export-backup">
+          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_save</span>
+          Exportar cópia de segurança
+        </button>''', "Exportar backup no modal destrutivo")
+          archive = replace_once(archive, '''<button class="secondary-button" data-action="cancel-master-reset">Cancelar</button>''', '''<button class="action-button" data-component="action-button" data-variant="secondary" data-action="cancel-master-reset">Cancelar</button>''', "Cancelar modal destrutivo")
+          archive_path.write_text(archive, encoding="utf-8")
+
+          sw_path = Path("service-worker.js")
+          sw = sw_path.read_text(encoding="utf-8")
+          sw = replace_once(sw, 'const CACHE_NAME = "vereda-offline-v964";', 'const CACHE_NAME = "vereda-offline-v965";', "cache v965")
+          sw = sw.replace(OLD, NEW)
+          sw_path.write_text(sw, encoding="utf-8")
+
+          for name in ("ui-dialog.js", "css/14-archive-inspector.css", "css/wood-icons.css"):
+              path = Path(name)
+              text = path.read_text(encoding="utf-8")
+              if OLD not in text:
+                  raise SystemExit(f"{name}: versão antiga não encontrada")
+              path.write_text(text.replace(OLD, NEW), encoding="utf-8")
+
+          # Escopo e contratos aprovados.
+          assert index.count('data-component="action-button"') >= 14
+          assert 'data-action="import-backup"' in index and 'class="secondary-button" data-action="import-backup"' in index
+          assert 'class="danger-button" data-action="master-reset"' in index
+          assert 'class="danger-button" data-action="confirm-master-reset"' in archive
+          assert 'class="create-tpl-free" data-action="create-quick-note"' in app
+
+      - name: Validar sintaxe e distribuição
+        run: |
+          node --check app.js
+          node --check archive-controller.js
+          node --check ui-dialog.js
+          python3 scripts/auditor-asset-version.py
+
+      - name: Remover executor temporário e publicar
+        run: |
+          rm .github/workflows/apply-archive-actionbutton-low-risk.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app.js archive-controller.js service-worker.js ui-dialog.js css/14-archive-inspector.css css/wood-icons.css .github/workflows/apply-archive-actionbutton-low-risk.yml
+          git commit -m "Migra ações de baixo risco do Acervo para ActionButton"
+          git push origin HEAD:agent/archive-actionbutton-low-risk
