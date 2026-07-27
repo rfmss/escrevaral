@@ -59,7 +59,7 @@ export function RightRail({
     setVoiceReading(null)
     setVoiceAnalyzing(false)
     setVoiceMessage('O texto mudou. Faça uma nova escuta quando quiser.')
-  }, [document.id, document.revision, document.plainText])
+  }, [document.id, document.plainText])
 
   const readText = () => {
     setTab('revisao')
@@ -68,14 +68,12 @@ export function RightRail({
 
   const runVoice = async () => {
     const token = ++voiceToken.current
-    const documentId = document.id
-    const revision = document.revision
     setVoiceAnalyzing(true)
     setVoiceMessage('O Espelho de Voz está escutando o rascunho localmente…')
 
     try {
       const result = await analyzeVoice(document.plainText, { formato: 'prosa' })
-      if (token !== voiceToken.current || document.id !== documentId || document.revision !== revision) return
+      if (token !== voiceToken.current) return
       setVoiceReading(result)
       setVoiceMessage(
         result
