@@ -8,7 +8,7 @@
   gap: 7px;
   background: transparent;
 }
-.mn-button { width: 100%; padding: 0 12px; background: var(--mn-accent); color: #fff; font-weight: 750; }
+.mn-button { width: 100%; padding: 0 12px; background: var(--mn-accent); color: var(--mn-accent-contrast); font-weight: 750; }
 .mn-button:hover { background: var(--mn-accent-hover); }
 .mn-button.mn-secondary { width: auto; background: var(--mn-surface); color: var(--mn-text); border-color: var(--mn-border); }
 .mn-button.mn-secondary:hover, .mn-icon-button:hover, .mn-toolbar-button:hover, .mn-nav-button:hover, .mn-doc-button:hover { background: var(--mn-surface-hover); }
@@ -66,6 +66,7 @@
   .mn-app, .mn-main { display: block; overflow: visible; }
   .mn-editor-scroll { overflow: visible; padding: 0; }
   .mn-document { width: auto; min-height: 0; margin: 0; padding: 0; border: 0; box-shadow: none; }
+  .mn-document::before { content: attr(data-print-title); display: block; margin: 0 0 1.2rem; font-family: var(--mn-font-document); font-size: 20pt; line-height: 1.2; font-weight: 700; }
   .mn-editor { font-size: 12pt; line-height: 1.7; }
 }
 
