@@ -1,0 +1,55 @@
+name: Experimento Mass Notes
+
+on:
+  push:
+    branches:
+      - experiment/mass-notes-integration
+    paths:
+      - "mass-notes.html"
+      - "css/mass-notes/**"
+      - "js/mass-notes/**"
+      - "scripts/auditor-mass-notes-mvp.py"
+      - ".github/workflows/mass-notes-experiment.yml"
+      - "docs/_decisoes/MASS_NOTES_INTEGRATION.md"
+      - "docs/product/MASS_NOTES_MVP.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mass-notes-experiment-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validar-estrutura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+
+      - name: Validar sintaxe do auditor
+        run: python -m py_compile scripts/auditor-mass-notes-mvp.py
+
+      - name: Auditar scaffold do Mass Notes
+        run: python scripts/auditor-mass-notes-mvp.py
+
+      - name: Guardar relatório
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mass-notes-mvp-${{ github.run_id }}
+          if-no-files-found: error
+          retention-days: 14
+          path: reports/auditoria/mass-notes-mvp-artifacts/**
