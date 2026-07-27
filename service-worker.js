@@ -1,5 +1,5 @@
-const CACHE_NAME = "vereda-offline-v965";
-const ASSET_VERSION = "20260726-archive-actionbutton-low-risk-v1";
+const CACHE_NAME = "vereda-offline-v966";
+const ASSET_VERSION = "20260727-master-reset-hidden-v1";
 
 const CORE_ASSETS = [
   "./",
@@ -8,14 +8,14 @@ const CORE_ASSETS = [
   `./css/01-base.css?v=${ASSET_VERSION}`,
   `./css/02-shell-navigation.css?v=${ASSET_VERSION}`,
   `./styles.css?v=${ASSET_VERSION}`,
-  "./css/13-editor-quiet.css?v=20260726-archive-actionbutton-low-risk-v1",
+  "./css/13-editor-quiet.css?v=20260727-master-reset-hidden-v1",
   `./css/20-product-clarity-desktop.css?v=${ASSET_VERSION}`,
   `./css/20-product-clarity-desktop-controls.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive.css?v=${ASSET_VERSION}`,
   `./css/21-product-clarity-archive-refine.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-authorship.css?v=${ASSET_VERSION}`,
   `./css/22-product-clarity-workshop-refine.css?v=${ASSET_VERSION}`,
-  "./css/14-archive-inspector.css?v=20260726-archive-actionbutton-low-risk-v1",
+  "./css/14-archive-inspector.css?v=20260727-master-reset-hidden-v1",
   `./css/16-entry-argila.css?v=${ASSET_VERSION}`,
   `./css/17-editor-status-argila.css?v=${ASSET_VERSION}`,
   `./css/18-editor-status-layout.css?v=${ASSET_VERSION}`,
