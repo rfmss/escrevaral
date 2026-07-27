@@ -668,8 +668,8 @@ function renderCreateTemplateList(categoryId) {
   ` : "";
 
   return `
-    <button class="create-tpl-back" data-action="create-step-back" type="button">
-      <span class="material-symbols-outlined">arrow_back</span>
+    <button class="action-button" data-action="create-step-back" type="button" data-component="action-button" data-variant="ghost" data-size="compact">
+      <span class="material-symbols-outlined action-button__icon" aria-hidden="true">arrow_back</span>
       voltar
     </button>
     <p class="create-tpl-heading">${escapeHtml(cat.label)}</p>

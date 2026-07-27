@@ -249,7 +249,7 @@ _installMesaPortatilEntries();
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('script[data-post-app-controller="palavras"]')) return;
   const script = document.createElement('script');
-  script.src = './lexical-view-controller.js?v=20260726-syntax-token-palette-v1';
+  script.src = './lexical-view-controller.js?v=20260726-archive-actionbutton-low-risk-v1';
   script.defer = true;
   script.dataset.postAppController = 'palavras';
   document.body.appendChild(script);

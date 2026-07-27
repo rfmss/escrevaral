@@ -188,11 +188,11 @@ function showMasterResetModal() {
         <input id="master-reset-input" class="master-reset-input" type="text" autocomplete="off" placeholder="apagar" aria-label="Digite apagar para confirmar">
       </div>
       <div class="master-reset-actions">
-        <button class="secondary-button" data-action="export-backup">
-          <span class="material-symbols-outlined">file_save</span>
+        <button class="action-button" data-action="export-backup" data-component="action-button" data-variant="secondary">
+          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">file_save</span>
           Exportar cópia de segurança
         </button>
-        <button class="secondary-button" data-action="cancel-master-reset">Cancelar</button>
+        <button class="action-button" data-action="cancel-master-reset" data-component="action-button" data-variant="secondary">Cancelar</button>
         <button class="danger-button" data-action="confirm-master-reset" id="master-reset-confirm-btn" disabled>Apagar tudo mesmo assim</button>
       </div>
     </div>
