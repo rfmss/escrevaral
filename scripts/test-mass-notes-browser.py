@@ -211,7 +211,7 @@ def run_main_flow(browser, audit: Audit) -> None:
               const value = document.querySelector(`[data-engine-state='${name}']`)?.textContent?.trim();
               return value && value !== 'Analisando…';
             }""",
-            state_name,
+            arg=state_name,
             timeout=30_000,
         )
         status = page.locator(f"[data-engine-state='{state_name}']").inner_text().strip()
