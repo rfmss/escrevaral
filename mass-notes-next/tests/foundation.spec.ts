@@ -21,6 +21,24 @@ test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) 
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
+test('ações ficam integradas ao rail sem adesivos sobre o papel', async ({ page }) => {
+  await waitReady(page)
+
+  await expect(page.locator('.slash')).toBeHidden()
+  await expect(page.locator('.impact-button')).toBeHidden()
+
+  const brandDecorations = await page.locator('.brand').evaluate((node) => ({
+    before: getComputedStyle(node, '::before').display,
+    after: getComputedStyle(node, '::after').display,
+  }))
+  expect(brandDecorations).toEqual({ before: 'none', after: 'none' })
+
+  const readButton = page.getByRole('button', { name: 'Ler o texto', exact: true })
+  await expect(readButton).toBeVisible()
+  await readButton.click()
+  await expect(page.getByRole('tab', { name: 'revisao', exact: true })).toHaveAttribute('aria-selected', 'true')
+})
+
 test('Enter após T1 cria parágrafo e a junção padrão permanece reversível', async ({ page }) => {
   await waitReady(page)
   await page.keyboard.press('Control+N')
