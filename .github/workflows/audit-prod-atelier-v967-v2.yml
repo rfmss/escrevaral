@@ -1,0 +1,220 @@
+name: Auditoria funcional Ateliê v967
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  audit-functional:
+    if: github.event.pull_request.head.ref == 'agent/audit-prod-atelier-v967'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Aguardar v967 no domínio público
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            sw="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/service-worker.js?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            html="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            if grep -q 'vereda-offline-v967' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$html"; then
+              echo 'Produção v967 propagada.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'v967 não propagou.' >&2
+          exit 1
+
+      - name: Instalar Chromium
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --silent playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Executar auditoria completa
+        shell: bash
+        run: |
+          mkdir -p audit-artifacts
+          cat > /tmp/audit-functional.mjs <<'NODE'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          const browser = await chromium.launch({ headless: true });
+          const report = {
+            production: 'https://escrevaral.com',
+            cache: 'vereda-offline-v967',
+            assetVersion: '20260727-atelier-actionbutton-low-risk-v1',
+            themes: [],
+          };
+
+          async function check(name, fn) {
+            try {
+              const detail = await fn();
+              return { name, status: 'ok', detail };
+            } catch (error) {
+              return { name, status: 'failure', error: String(error), stack: error?.stack || null };
+            }
+          }
+
+          for (const theme of [
+            { name: 'alvorada', dark: false },
+            { name: 'vereda', dark: true },
+          ]) {
+            const context = await browser.newContext({ acceptDownloads: true });
+            await context.addInitScript(({ dark }) => {
+              if (dark) localStorage.setItem('vereda:dark-mode', 'on');
+              else localStorage.removeItem('vereda:dark-mode');
+            }, { dark: theme.dark });
+            const page = await context.newPage();
+            const pageErrors = [];
+            page.on('pageerror', (error) => pageErrors.push(String(error)));
+
+            const themeReport = { theme: theme.name, setup: null, checks: [], pageErrors };
+            themeReport.setup = await check('abrir Ateliê e publicação', async () => {
+              await page.goto(`https://escrevaral.com/?audit=${Date.now()}-${theme.name}`, {
+                waitUntil: 'networkidle', timeout: 90000,
+              });
+              const resolvedTheme = await page.evaluate(() => document.documentElement.dataset.theme || 'alvorada');
+              if (theme.dark && resolvedTheme !== 'scriptorium') throw new Error(`Tema esperado scriptorium; recebido ${resolvedTheme}`);
+              if (!theme.dark && resolvedTheme === 'scriptorium') throw new Error('Alvorada abriu como scriptorium');
+              const visibleEntry = page.locator('[data-view-target="academia"]:visible').first();
+              if (await visibleEntry.count()) await visibleEntry.click();
+              else await page.evaluate(() => document.querySelector('[data-view-target="academia"]')?.click());
+              await page.locator('[data-view-panel="academia"]').waitFor({ state: 'visible', timeout: 20000 });
+              await page.locator('[data-action="switch-atelier-publicar"]').click();
+              await page.waitForFunction(() => document.querySelector('.academy-view')?.dataset.atelierActive === 'publicar');
+              return { resolvedTheme };
+            });
+
+            if (themeReport.setup.status === 'ok') {
+              themeReport.checks.push(await check('Limpar busca', async () => {
+                const search = page.locator('[data-rights-search]');
+                const clear = page.locator('[data-rights-search-clear]');
+                await search.fill('contrato');
+                await clear.waitFor({ state: 'visible', timeout: 10000 });
+                const attrs = {
+                  ariaLabel: await clear.getAttribute('aria-label'),
+                  variant: await clear.getAttribute('data-variant'),
+                  size: await clear.getAttribute('data-size'),
+                  iconOnly: await clear.getAttribute('data-icon-only'),
+                };
+                if (attrs.ariaLabel !== 'Limpar busca' || attrs.variant !== 'ghost' || attrs.size !== 'compact' || attrs.iconOnly !== 'true') {
+                  throw new Error(`Contrato inesperado: ${JSON.stringify(attrs)}`);
+                }
+                const box = await clear.boundingBox();
+                await clear.click();
+                const value = await search.inputValue();
+                const hidden = await clear.isHidden();
+                if (value !== '' || !hidden) throw new Error(`Após clique: value=${JSON.stringify(value)}, hidden=${hidden}`);
+                return { attrs, renderedHeight: box ? Math.round(box.height) : null, value, hidden };
+              }));
+
+              themeReport.checks.push(await check('Ver cuidados', async () => {
+                const track = page.locator('details.academy-publishing-track');
+                await track.evaluate((element) => { element.open = true; });
+                const button = page.locator('[data-action="scroll-rights"]');
+                const variant = await button.getAttribute('data-variant');
+                const before = await page.evaluate(() => scrollY);
+                await button.click();
+                await page.waitForTimeout(700);
+                const after = await page.evaluate(() => scrollY);
+                const position = await page.locator('[data-rights-lab]').evaluate((element) => {
+                  const rect = element.getBoundingClientRect();
+                  return { top: rect.top, bottom: rect.bottom, viewport: innerHeight };
+                });
+                if (variant !== 'secondary') throw new Error(`Variante inesperada: ${variant}`);
+                if (!(position.bottom > 0 && position.top < position.viewport)) throw new Error(`Direitos não visível: ${JSON.stringify(position)}`);
+                return { variant, scrollBefore: before, scrollAfter: after, position };
+              }));
+
+              themeReport.checks.push(await check('Abrir Anatomia do Livro', async () => {
+                const track = page.locator('details.academy-publishing-track');
+                await track.evaluate((element) => { element.open = true; });
+                const link = page.locator('a.academy-anatomy-btn');
+                const attrs = {
+                  tag: await link.evaluate((element) => element.tagName),
+                  href: await link.getAttribute('href'),
+                  target: await link.getAttribute('target'),
+                  variant: await link.getAttribute('data-variant'),
+                };
+                if (attrs.tag !== 'A' || attrs.href !== './anatomia-do-livro.html' || attrs.target !== '_blank' || attrs.variant !== 'secondary') {
+                  throw new Error(`Semântica inesperada: ${JSON.stringify(attrs)}`);
+                }
+                await link.scrollIntoViewIfNeeded();
+                const popupPromise = context.waitForEvent('page', { timeout: 15000 });
+                await link.click();
+                const popup = await popupPromise;
+                await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
+                const popupUrl = popup.url();
+                await popup.close();
+                if (!new URL(popupUrl).pathname.endsWith('/anatomia-do-livro.html')) throw new Error(`URL inesperada: ${popupUrl}`);
+                return { attrs, popupUrl };
+              }));
+            }
+
+            await page.screenshot({ path: `audit-artifacts/atelier-${theme.name}-v967.png`, fullPage: true }).catch(() => {});
+            themeReport.pageErrors = pageErrors;
+            report.themes.push(themeReport);
+            await context.close();
+          }
+
+          await browser.close();
+          fs.writeFileSync('audit-artifacts/resultado-atelier-v967.json', JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          NODE
+          node /tmp/audit-functional.mjs
+
+      - name: Publicar resultado no PR
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, os
+          path = Path('audit-artifacts/resultado-atelier-v967.json')
+          payload = path.read_text(encoding='utf-8') if path.exists() else '{"error":"relatório ausente"}'
+          run_url = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+          Path('/tmp/comment.md').write_text(
+              "## Auditoria funcional de produção do Ateliê v967\n\n```json\n"
+              + payload + "\n```\n\nWorkflow: " + run_url + "\n",
+              encoding='utf-8'
+          )
+          PY
+          gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md
+
+      - name: Validar resultado
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          data = json.load(open('audit-artifacts/resultado-atelier-v967.json', encoding='utf-8'))
+          failures = []
+          for theme in data['themes']:
+              if theme['setup']['status'] != 'ok':
+                  failures.append(f"{theme['theme']}: setup")
+              for check in theme['checks']:
+                  if check['status'] != 'ok':
+                      failures.append(f"{theme['theme']}: {check['name']}")
+              if theme['pageErrors']:
+                  failures.append(f"{theme['theme']}: pageErrors")
+          if failures:
+              raise SystemExit('Falhas: ' + ', '.join(failures))
+          print('Todos os controles passaram nos dois temas.')
+          PY
