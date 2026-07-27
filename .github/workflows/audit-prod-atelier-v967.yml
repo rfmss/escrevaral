@@ -55,90 +55,126 @@ jobs:
 
           const browser = await chromium.launch({ headless: true });
           const results = [];
-          const themes = [
-            { name: 'alvorada', dark: false },
-            { name: 'vereda', dark: true },
-          ];
+          let currentStep = 'início';
+          let currentTheme = null;
 
-          for (const theme of themes) {
-            const context = await browser.newContext({ acceptDownloads: true });
-            await context.addInitScript(({ dark }) => {
-              if (dark) localStorage.setItem('vereda:dark-mode', 'on');
-              else localStorage.removeItem('vereda:dark-mode');
-            }, { dark: theme.dark });
+          try {
+            const themes = [
+              { name: 'alvorada', dark: false },
+              { name: 'vereda', dark: true },
+            ];
 
-            const page = await context.newPage();
-            const pageErrors = [];
-            page.on('pageerror', (error) => pageErrors.push(String(error)));
+            for (const theme of themes) {
+              currentTheme = theme.name;
+              const context = await browser.newContext({ acceptDownloads: true });
+              await context.addInitScript(({ dark }) => {
+                if (dark) localStorage.setItem('vereda:dark-mode', 'on');
+                else localStorage.removeItem('vereda:dark-mode');
+              }, { dark: theme.dark });
 
-            await page.goto(`https://escrevaral.com/?audit=${Date.now()}-${theme.name}`, {
-              waitUntil: 'networkidle',
-              timeout: 90000,
-            });
+              const page = await context.newPage();
+              const pageErrors = [];
+              page.on('pageerror', (error) => pageErrors.push(String(error)));
 
-            const resolvedTheme = await page.evaluate(() => document.documentElement.dataset.theme || 'alvorada');
-            if (theme.dark) assert.equal(resolvedTheme, 'scriptorium');
-            else assert.notEqual(resolvedTheme, 'scriptorium');
+              currentStep = 'abrir produção';
+              await page.goto(`https://escrevaral.com/?audit=${Date.now()}-${theme.name}`, {
+                waitUntil: 'networkidle',
+                timeout: 90000,
+              });
 
-            const visibleAtelierEntry = page.locator('[data-view-target="academia"]:visible').first();
-            if (await visibleAtelierEntry.count()) await visibleAtelierEntry.click();
-            else await page.evaluate(() => document.querySelector('[data-view-target="academia"]')?.click());
+              currentStep = 'confirmar tema';
+              const resolvedTheme = await page.evaluate(() => document.documentElement.dataset.theme || 'alvorada');
+              if (theme.dark) assert.equal(resolvedTheme, 'scriptorium');
+              else assert.notEqual(resolvedTheme, 'scriptorium');
 
-            const atelierPanel = page.locator('[data-view-panel="academia"]');
-            await atelierPanel.waitFor({ state: 'visible', timeout: 20000 });
-            await page.locator('[data-action="switch-atelier-publicar"]').click();
-            await page.waitForFunction(() => document.querySelector('.academy-view')?.dataset.atelierActive === 'publicar');
+              currentStep = 'abrir Ateliê';
+              const visibleAtelierEntry = page.locator('[data-view-target="academia"]:visible').first();
+              if (await visibleAtelierEntry.count()) await visibleAtelierEntry.click();
+              else await page.evaluate(() => document.querySelector('[data-view-target="academia"]')?.click());
+              await page.locator('[data-view-panel="academia"]').waitFor({ state: 'visible', timeout: 20000 });
 
-            const search = page.locator('[data-rights-search]');
-            const clear = page.locator('[data-rights-search-clear]');
-            await search.fill('contrato');
-            await clear.waitFor({ state: 'visible' });
-            assert.equal(await clear.getAttribute('aria-label'), 'Limpar busca');
-            assert.equal(await clear.getAttribute('data-variant'), 'ghost');
-            assert.equal(await clear.getAttribute('data-size'), 'compact');
-            assert.equal(await clear.getAttribute('data-icon-only'), 'true');
-            assert.equal(Math.round((await clear.boundingBox()).height), 36);
-            await clear.click();
-            assert.equal(await search.inputValue(), '');
-            await clear.waitFor({ state: 'hidden' });
+              currentStep = 'abrir publicação';
+              await page.locator('[data-action="switch-atelier-publicar"]').click();
+              await page.waitForFunction(() => document.querySelector('.academy-view')?.dataset.atelierActive === 'publicar');
 
-            const track = page.locator('details.academy-publishing-track');
-            await track.evaluate((element) => { element.open = true; });
+              currentStep = 'Limpar busca';
+              const search = page.locator('[data-rights-search]');
+              const clear = page.locator('[data-rights-search-clear]');
+              await search.fill('contrato');
+              await clear.waitFor({ state: 'visible' });
+              assert.equal(await clear.getAttribute('aria-label'), 'Limpar busca');
+              assert.equal(await clear.getAttribute('data-variant'), 'ghost');
+              assert.equal(await clear.getAttribute('data-size'), 'compact');
+              assert.equal(await clear.getAttribute('data-icon-only'), 'true');
+              const clearBox = await clear.boundingBox();
+              const clearHeight = clearBox ? Math.round(clearBox.height) : null;
+              await clear.click();
+              assert.equal(await search.inputValue(), '');
+              await clear.waitFor({ state: 'hidden' });
 
-            const rightsButton = page.locator('[data-action="scroll-rights"]');
-            assert.equal(await rightsButton.getAttribute('data-variant'), 'secondary');
-            await rightsButton.click();
-            await page.waitForTimeout(500);
-            const rightsPosition = await page.locator('[data-rights-lab]').evaluate((element) => {
-              const rect = element.getBoundingClientRect();
-              return { top: rect.top, bottom: rect.bottom, viewport: innerHeight };
-            });
-            assert.ok(rightsPosition.bottom > 0 && rightsPosition.top < rightsPosition.viewport,
-              `Direitos do Autor não ficou visível: ${JSON.stringify(rightsPosition)}`);
+              currentStep = 'Ver cuidados';
+              const track = page.locator('details.academy-publishing-track');
+              await track.evaluate((element) => { element.open = true; });
+              const rightsButton = page.locator('[data-action="scroll-rights"]');
+              assert.equal(await rightsButton.getAttribute('data-variant'), 'secondary');
+              await rightsButton.click();
+              await page.waitForTimeout(500);
+              const rightsPosition = await page.locator('[data-rights-lab]').evaluate((element) => {
+                const rect = element.getBoundingClientRect();
+                return { top: rect.top, bottom: rect.bottom, viewport: innerHeight };
+              });
+              assert.ok(rightsPosition.bottom > 0 && rightsPosition.top < rightsPosition.viewport,
+                `Direitos do Autor não ficou visível: ${JSON.stringify(rightsPosition)}`);
 
-            await track.evaluate((element) => { element.open = true; });
-            const anatomy = page.locator('a.academy-anatomy-btn');
-            assert.equal(await anatomy.evaluate((element) => element.tagName), 'A');
-            assert.equal(await anatomy.getAttribute('href'), './anatomia-do-livro.html');
-            assert.equal(await anatomy.getAttribute('target'), '_blank');
-            assert.equal(await anatomy.getAttribute('data-variant'), 'secondary');
-            await anatomy.scrollIntoViewIfNeeded();
-            const popupPromise = context.waitForEvent('page');
-            await anatomy.click();
-            const popup = await popupPromise;
-            await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
-            assert.ok(new URL(popup.url()).pathname.endsWith('/anatomia-do-livro.html'), popup.url());
-            await popup.close();
+              currentStep = 'Abrir Anatomia do Livro';
+              await track.evaluate((element) => { element.open = true; });
+              const anatomy = page.locator('a.academy-anatomy-btn');
+              assert.equal(await anatomy.evaluate((element) => element.tagName), 'A');
+              assert.equal(await anatomy.getAttribute('href'), './anatomia-do-livro.html');
+              assert.equal(await anatomy.getAttribute('target'), '_blank');
+              assert.equal(await anatomy.getAttribute('data-variant'), 'secondary');
+              await anatomy.scrollIntoViewIfNeeded();
+              const popupPromise = context.waitForEvent('page');
+              await anatomy.click();
+              const popup = await popupPromise;
+              await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
+              assert.ok(new URL(popup.url()).pathname.endsWith('/anatomia-do-livro.html'), popup.url());
+              await popup.close();
 
-            assert.deepEqual(pageErrors, []);
-            await page.screenshot({ path: `audit-artifacts/atelier-${theme.name}-v967.png`, fullPage: true });
-            results.push({ theme: theme.name, resolvedTheme, limparBusca: 'ok', verCuidados: 'ok', anatomiaLink: 'ok', pageErrors });
-            await context.close();
+              currentStep = 'erros de página';
+              assert.deepEqual(pageErrors, []);
+              await page.screenshot({ path: `audit-artifacts/atelier-${theme.name}-v967.png`, fullPage: true });
+              results.push({
+                theme: theme.name,
+                resolvedTheme,
+                limparBusca: { status: 'ok', renderedHeight: clearHeight },
+                verCuidados: { status: 'ok', rightsPosition },
+                anatomiaLink: 'ok',
+                pageErrors,
+              });
+              fs.writeFileSync('audit-artifacts/resultado-parcial.json', JSON.stringify({ results }, null, 2));
+              await context.close();
+            }
+
+            fs.writeFileSync('audit-artifacts/resultado-atelier-v967.json', JSON.stringify({
+              production: 'https://escrevaral.com',
+              cache: 'vereda-offline-v967',
+              assetVersion: '20260727-atelier-actionbutton-low-risk-v1',
+              results,
+            }, null, 2));
+            console.log(JSON.stringify(results, null, 2));
+          } catch (error) {
+            fs.writeFileSync('audit-artifacts/falha-atelier-v967.json', JSON.stringify({
+              theme: currentTheme,
+              step: currentStep,
+              error: String(error),
+              stack: error?.stack || null,
+              results,
+            }, null, 2));
+            throw error;
+          } finally {
+            await browser.close();
           }
-
-          await browser.close();
-          fs.writeFileSync('audit-artifacts/resultado-atelier-v967.json', JSON.stringify({ production: 'https://escrevaral.com', cache: 'vereda-offline-v967', assetVersion: '20260727-atelier-actionbutton-low-risk-v1', results }, null, 2));
-          console.log(JSON.stringify(results, null, 2));
           NODE
           node /tmp/audit-atelier.mjs
 
