@@ -1,0 +1,230 @@
+name: Verificação efêmera de produção do Acervo v965
+
+on:
+  push:
+    branches: [agent/archive-actionbutton-low-risk]
+    paths:
+      - ".github/workflows/post-merge-verify-archive-v965.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Verificar propagação e fluxos em produção
+        shell: python
+        run: |
+          import json
+          import time
+          import urllib.request
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright, expect
+
+          BASE = "https://escrevaral.com/"
+          ASSET = "20260726-archive-actionbutton-low-risk-v1"
+          CACHE = "vereda-offline-v965"
+          OUT = Path("reports/auditoria/post-merge-archive-v965")
+          OUT.mkdir(parents=True, exist_ok=True)
+
+          def fetch_text(path):
+              url = BASE + path + ("&" if "?" in path else "?") + f"audit={time.time_ns()}"
+              request = urllib.request.Request(url, headers={
+                  "User-Agent": "Escrevaral production audit",
+                  "Cache-Control": "no-cache",
+                  "Pragma": "no-cache",
+              })
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return response.read().decode("utf-8")
+
+          deadline = time.time() + 600
+          last = {}
+          while time.time() < deadline:
+              try:
+                  html = fetch_text("")
+                  sw = fetch_text("service-worker.js")
+                  last = {
+                      "asset_in_html": ASSET in html,
+                      "asset_in_sw": ASSET in sw,
+                      "cache_in_sw": CACHE in sw,
+                  }
+                  if all(last.values()):
+                      break
+              except Exception as exc:
+                  last = {"erro": str(exc)}
+              time.sleep(10)
+          else:
+              raise AssertionError(f"produção não propagou v965: {last}")
+
+          manuscript = {
+              "id": "auditoria-v965",
+              "title": "Manuscrito de auditoria v965",
+              "kind": "Conto",
+              "type": "manuscrito",
+              "status": "Em escrita",
+              "text": "Uma frase de auditoria para confirmar exportações e navegação.",
+              "description": "Estado temporário criado apenas no contexto isolado do navegador.",
+              "tags": ["auditoria"],
+              "progress": 42,
+              "createdAt": "2026-07-26T12:00:00.000Z",
+              "updatedAt": "2026-07-26T12:00:00.000Z",
+          }
+          storage = json.dumps({
+              "manuscripts": [manuscript],
+              "activeId": manuscript["id"],
+              "archive": {"filter": "all", "statusFilter": "all", "search": "", "sort": "updated"},
+              "layout": {"leftCollapsed": True, "rightCollapsed": True},
+              "ui": {},
+          }, ensure_ascii=False)
+          init_storage = f"""
+          try {{
+            localStorage.setItem('escrevaral-termos-v1', 'auditoria-v965');
+            localStorage.setItem('vrda-first-visit', '1');
+            localStorage.setItem('vereda.manuscripts.v1', {json.dumps(storage)});
+          }} catch (_) {{}}
+          """
+
+          results = {"propagacao": last, "temas": {}}
+
+          def exact_button(page, name):
+              return page.get_by_role("button", name=name, exact=True)
+
+          def assert_contract(locator, variant, size=None, icon_only=False, expected_height=None):
+              expect(locator).to_be_visible()
+              assert "action-button" in (locator.get_attribute("class") or "").split()
+              assert locator.get_attribute("data-component") == "action-button"
+              assert locator.get_attribute("data-variant") == variant
+              if size:
+                  assert locator.get_attribute("data-size") == size
+              else:
+                  assert locator.get_attribute("data-size") is None
+              if icon_only:
+                  assert locator.get_attribute("data-icon-only") == "true"
+                  assert locator.get_attribute("aria-label")
+              if expected_height:
+                  height = locator.evaluate("el => el.getBoundingClientRect().height")
+                  assert abs(height - expected_height) <= 1.5, (height, expected_height)
+              return locator.evaluate("el => { const s=getComputedStyle(el); return {height:el.getBoundingClientRect().height,background:s.backgroundColor,color:s.color,border:s.borderColor}; }")
+
+          def download_from(page, locator, label):
+              with page.expect_download(timeout=20_000) as info:
+                  locator.click()
+              download = info.value
+              path = OUT / "downloads" / label
+              path.parent.mkdir(parents=True, exist_ok=True)
+              download.save_as(path)
+              assert path.exists() and path.stat().st_size > 0
+              return {"arquivo": download.suggested_filename, "bytes": path.stat().st_size}
+
+          with sync_playwright() as playwright:
+              browser = playwright.chromium.launch()
+              for theme_name, theme_id, scheme in (
+                  ("alvorada", None, "light"),
+                  ("vereda", "scriptorium", "dark"),
+              ):
+                  context = browser.new_context(
+                      viewport={"width": 1440, "height": 1000},
+                      color_scheme=scheme,
+                      reduced_motion="reduce",
+                      accept_downloads=True,
+                  )
+                  context.add_init_script(init_storage)
+                  page = context.new_page()
+                  page_errors = []
+                  page.on("pageerror", lambda error: page_errors.append(str(error)))
+                  page.goto(BASE + f"?audit={time.time_ns()}#arquivo", wait_until="domcontentloaded", timeout=60_000)
+                  page.wait_for_selector(".app-shell", timeout=30_000)
+                  page.wait_for_function("() => typeof setView === 'function'", timeout=30_000)
+                  page.evaluate("theme => { if (theme) document.documentElement.dataset.theme=theme; else document.documentElement.removeAttribute('data-theme'); setView('arquivo',{updateRoute:false}); }", theme_id)
+                  page.wait_for_selector('[data-view-panel="arquivo"].is-active', timeout=20_000)
+                  page.wait_for_selector('.project-card', timeout=20_000)
+
+                  theme_result = {"estilos": {}, "downloads": {}}
+
+                  novo = exact_button(page, "Novo manuscrito")
+                  theme_result["estilos"]["novo"] = assert_contract(novo, "primary", expected_height=42)
+                  novo.click()
+                  overlay = page.locator('[data-create-note-overlay]')
+                  expect(overlay).to_be_visible()
+
+                  category = overlay.locator('[data-create-category]').first
+                  if category.count():
+                      category.click()
+                      voltar = exact_button(page, "voltar")
+                      theme_result["estilos"]["voltar"] = assert_contract(voltar, "ghost", "compact", expected_height=36)
+                      voltar.click()
+
+                  fechar = overlay.locator('[data-action="close-create-note"]')
+                  theme_result["estilos"]["fechar"] = assert_contract(fechar, "ghost", "compact", icon_only=True, expected_height=36)
+                  fechar.click()
+                  expect(overlay).to_be_hidden()
+
+                  abrir = exact_button(page, "Abrir no editor")
+                  theme_result["estilos"]["abrir"] = assert_contract(abrir, "primary", expected_height=42)
+                  abrir.click()
+                  page.wait_for_function("() => document.querySelector('.app-shell')?.dataset.view === 'editor'", timeout=10_000)
+                  page.evaluate("() => setView('arquivo',{updateRoute:false})")
+
+                  export_details = page.locator('.archive-detail-panel details').filter(has_text="Exportar").first
+                  if export_details.count():
+                      export_details.evaluate("el => el.open = true")
+                  for fmt, label in (("txt", "texto"), ("md", "markdown"), ("html", "html"), ("docx", "word"), ("epub", "epub"), ("obsidian", "obsidian")):
+                      button = page.locator(f'button[data-action="export-manuscript"][data-export-format="{fmt}"]')
+                      theme_result["estilos"][f"export-{fmt}"] = assert_contract(button, "ghost", "compact", expected_height=36)
+                      theme_result["downloads"][f"export-{fmt}"] = download_from(page, button, f"{theme_name}-{label}")
+
+                  backup_details = page.locator('details.archive-protection').first
+                  if backup_details.count():
+                      backup_details.evaluate("el => el.open = true")
+                  for idx, name in enumerate(("Guardar cópia", "Guardar cópia do acervo")):
+                      button = exact_button(page, name)
+                      theme_result["estilos"][name] = assert_contract(button, "secondary", expected_height=42)
+                      theme_result["downloads"][name] = download_from(page, button, f"{theme_name}-backup-{idx}.esc")
+
+                  for name, key in (("Exportar .rtf", "rtf"), ("Exportar textos", "textos"), ("Exportar para Obsidian", "obsidian-vault")):
+                      button = exact_button(page, name)
+                      theme_result["estilos"][name] = assert_contract(button, "secondary", expected_height=42)
+                      theme_result["downloads"][name] = download_from(page, button, f"{theme_name}-{key}")
+
+                  exact_button(page, "Apagar tudo").click()
+                  modal = page.locator('.master-reset-modal')
+                  expect(modal).to_be_visible()
+                  modal_backup = exact_button(page, "Exportar cópia de segurança")
+                  theme_result["estilos"]["modal-backup"] = assert_contract(modal_backup, "secondary", expected_height=42)
+                  theme_result["downloads"]["modal-backup"] = download_from(page, modal_backup, f"{theme_name}-modal-backup.esc")
+                  cancelar = exact_button(page, "Cancelar")
+                  theme_result["estilos"]["cancelar"] = assert_contract(cancelar, "secondary", expected_height=42)
+                  cancelar.click()
+                  expect(modal).to_be_hidden()
+
+                  assert not page_errors, page_errors
+                  page.screenshot(path=str(OUT / f"acervo-{theme_name}.png"), full_page=False)
+                  results["temas"][theme_name] = theme_result
+                  context.close()
+              browser.close()
+
+          (OUT / "resultado.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+          print(json.dumps(results, ensure_ascii=False, indent=2))
+
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-merge-archive-v965-${{ github.run_id }}
+          path: reports/auditoria/post-merge-archive-v965/
+          retention-days: 14
