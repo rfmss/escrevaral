@@ -1543,6 +1543,10 @@ html {
   padding: 24px;
 }
 
+#master-reset-modal[hidden] {
+  display: none;
+}
+
 .master-reset-backdrop {
   position: absolute;
   inset: 0;
