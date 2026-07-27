@@ -1,0 +1,72 @@
+import { expect, test } from '@playwright/test'
+
+async function waitReady(page: import('@playwright/test').Page) {
+  await page.goto('/')
+  await expect(page.locator('.paper')).toBeVisible()
+  await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+}
+
+test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) => {
+  await waitReady(page)
+  await expect(page.getByText('Oficina de escrita brasileira')).toBeVisible()
+  await expect(page.locator('.brand h1')).toContainText('Escrevaral')
+  await expect(page.locator('.ProseMirror')).toBeEditable()
+  await expect(page.locator('.rail')).toBeVisible()
+  await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
+})
+
+test('Enter após T1 cria parágrafo e Backspace não o absorve no título', async ({ page }) => {
+  await waitReady(page)
+  await page.keyboard.press('Control+N')
+  await page.getByLabel('Título do documento').fill('Estrutura segura')
+  await page.getByRole('button', { name: 'T1', exact: true }).click()
+  await page.locator('.ProseMirror').pressSequentially('Título principal')
+  await page.keyboard.press('Enter')
+  await page.keyboard.type('Parágrafo independente')
+
+  const editor = page.locator('.ProseMirror')
+  await expect(editor.locator('h1')).toHaveText('Título principal')
+  await expect(editor.locator('p')).toContainText('Parágrafo independente')
+
+  await page.keyboard.press('Home')
+  await page.keyboard.press('Backspace')
+  await expect(editor.locator('h1')).toHaveText('Título principal')
+  await expect(editor.locator('p')).toContainText('Parágrafo independente')
+})
+
+test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ context, page }) => {
+  await waitReady(page)
+  const second = await context.newPage()
+  await waitReady(second)
+
+  await page.getByLabel('Título do documento').fill('Versão da aba A')
+  await page.waitForTimeout(100)
+  await second.getByLabel('Título do documento').fill('Versão da aba B')
+  await expect(second.getByRole('alert')).toContainText('Outra aba também escreveu')
+  await expect(second.getByText('Nenhuma versão será apagada silenciosamente.')).toBeVisible()
+
+  await page.reload()
+  await expect(page.getByLabel('Título do documento')).toHaveValue('Versão da aba A')
+})
+
+test('a engine real de revisão é acessada pelo adaptador', async ({ page }) => {
+  await waitReady(page)
+  const editor = page.locator('.ProseMirror')
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.type('Ela entrou para dentro da casa. O coração acelerou, o coração acelerou.')
+  await page.getByRole('button', { name: 'revisao', exact: true }).click()
+  await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
+  await expect(page.getByRole('status')).not.toContainText('não pôde ser concluída', { timeout: 15_000 })
+})
+
+test('mobile não cria overflow e mantém drawers fecháveis', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await waitReady(page)
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
+  await page.getByRole('button', { name: 'Abrir arquivo' }).click()
+  await expect(page.locator('.sidebar')).toHaveClass(/open/)
+  await page.keyboard.press('Escape')
+  await expect(page.locator('.sidebar')).not.toHaveClass(/open/)
+  await page.screenshot({ path: 'test-results/mass-notes-next-mobile.png', fullPage: true })
+})
