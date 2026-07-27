@@ -6,12 +6,18 @@ async function waitReady(page: import('@playwright/test').Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
+async function expectTitleFits(page: import('@playwright/test').Page) {
+  const title = page.getByLabel('Título do documento')
+  await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
+}
+
 test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) => {
   await waitReady(page)
   await expect(page.getByText('Oficina de escrita brasileira')).toBeVisible()
   await expect(page.locator('.brand h1')).toContainText('Escrevaral')
   await expect(page.locator('.ProseMirror')).toBeEditable()
   await expect(page.locator('.rail')).toBeVisible()
+  await expectTitleFits(page)
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
@@ -69,6 +75,7 @@ test('mobile não cria overflow e mantém drawers fecháveis', async ({ page }) 
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
+  await expectTitleFits(page)
   await page.getByRole('button', { name: 'Abrir arquivo' }).click()
   await expect(page.locator('.sidebar')).toHaveClass(/open/)
   await page.keyboard.press('Escape')
