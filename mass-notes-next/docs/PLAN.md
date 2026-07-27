@@ -41,54 +41,69 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 
 ### Gate 3 — Espelho de Voz
 
-Aprovado em Chromium e Firefox:
-
 - `voice-engine.js` intacta e carregada por adaptador;
-- resposta normalizada em contrato TypeScript;
-- aba `Voz` no rail, sem decorations inline;
-- documento vazio sem falso diagnóstico;
-- corpus curto apresentado com baixa confiança;
-- corpus médio com leitura, métricas e hipótese editorial;
-- resultado invalidado quando documento ou conteúdo muda;
+- aba `Voz` sem decorations inline;
+- vazio, corpus curto, corpus médio, falha e obsolescência cobertos;
 - resultado preservado quando apenas o autosave avança a revisão;
-- falha da engine isolada sem quebrar o editor;
+- Chromium e Firefox verdes;
 - preview atualizada somente após gate verde.
 
-Evidência principal: workflow `30314881409`, 15 cenários em Chromium e Firefox, total de 30 execuções.
+Evidência: workflow `30315176567`, 15 cenários em cada navegador, 30 execuções.
 
-## Lote atual — revisão manual do Gate 3
+## Lote atual — Gate 4: Termos que pedem contexto
 
-Antes de iniciar uma nova engine:
+Autorizado pelo mantenedor em 2026-07-27.
 
-1. usar a preview com textos reais curtos e longos;
-2. avaliar linguagem, hierarquia e utilidade das hipóteses;
-3. registrar qualquer P0/P1;
-4. confirmar que o rail continua legível no desktop e mobile;
-5. não iniciar decorations inline.
+Objetivo: integrar `decolonial-engine.js` como leitura contextual do manuscrito, sem acusação, proibição ou substituição automática.
 
-## Próximo lote proposto — Gate 4: termos que pedem contexto
+### Escopo autorizado
 
-Somente após a revisão manual do Gate 3.
+1. criar adaptador tipado para a engine e a base originais;
+2. adicionar uma superfície `Contexto` no rail;
+3. mostrar termo, categoria, motivo, contexto, alternativas e ocorrências;
+4. executar somente por ação explícita;
+5. não modificar nem marcar o texto dentro do Tiptap;
+6. invalidar resultados quando documento ou conteúdo mudar;
+7. tratar vazio, nenhum resultado, múltiplas ocorrências e falha da engine;
+8. executar Chromium e Firefox;
+9. atualizar preview somente após gate verde;
+10. manter plano, memória, changelog e log do lote sincronizados.
 
-Objetivo previsto: integrar o vocabulário decolonizador como leitura contextual, sem acusação e sem substituição automática.
+### Linguagem obrigatória
 
-Escopo preliminar:
+- usar “Termos que pedem contexto”;
+- usar “Por que observar” e “Alternativas possíveis”;
+- não usar “erro”, “proibido” ou “correção automática”;
+- lembrar que narrador, personagem, época, citação e intenção crítica mudam a leitura;
+- nenhuma alternativa é aplicada sem decisão humana.
 
-- adaptador tipado;
-- seção ou aba contextual;
-- termo, categoria, motivo, contexto e alternativas;
-- contagem de ocorrências;
-- nenhuma alteração automática do texto;
-- Chromium e Firefox;
-- documentação e log próprios.
+### Critérios de parada
+
+Interromper o lote em caso de:
+
+- alteração involuntária do manuscrito;
+- falso positivo estrutural grave;
+- perda de resultado ou estado entre documentos;
+- falha que quebre Revisão, Voz ou editor;
+- regressão P0/P1 em Chromium ou Firefox.
+
+## Fora do Gate 4
+
+- decorations inline;
+- substituição automática;
+- RimaLab;
+- paginação física;
+- service worker;
+- Tauri/SQLite;
+- promoção para `main`.
 
 ## Sequência posterior planejada
 
-1. Gate 4 — vocabulário decolonizador;
+1. revisão manual do Gate 4;
 2. RimaLab sem marcações inline;
 3. contrato de posições para issues linguísticas;
 4. decorations ProseMirror;
 5. PWA/offline em nova sessão;
 6. avaliação de promoção arquitetural.
 
-O próximo gate só começa depois da avaliação manual ou de autorização explícita do mantenedor.
+O próximo gate só começa após o Gate 4 ficar verde e sua memória ser atualizada.
