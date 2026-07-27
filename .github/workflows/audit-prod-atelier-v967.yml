@@ -1,0 +1,151 @@
+name: Auditoria de produção Ateliê v967
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    if: github.event.pull_request.head.ref == 'agent/audit-prod-atelier-v967'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Aguardar propagação pública
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 60); do
+            sw="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/service-worker.js?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            html="$(curl -fsSL --max-time 20 -H 'Cache-Control: no-cache' "https://escrevaral.com/?audit=${GITHUB_RUN_ID}-${attempt}" || true)"
+            if grep -q 'vereda-offline-v967' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$sw" \
+              && grep -q '20260727-atelier-actionbutton-low-risk-v1' <<<"$html"; then
+              echo 'Produção v967 propagada.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'A produção não propagou v967 dentro da janela da auditoria.' >&2
+          exit 1
+
+      - name: Instalar Chromium
+        shell: bash
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --silent playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Testar controles nos dois temas
+        shell: bash
+        run: |
+          mkdir -p audit-artifacts
+          cat > /tmp/audit-atelier.mjs <<'NODE'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+
+          const browser = await chromium.launch({ headless: true });
+          const results = [];
+          const themes = [
+            { name: 'alvorada', dark: false },
+            { name: 'vereda', dark: true },
+          ];
+
+          for (const theme of themes) {
+            const context = await browser.newContext({ acceptDownloads: true });
+            await context.addInitScript(({ dark }) => {
+              if (dark) localStorage.setItem('vereda:dark-mode', 'on');
+              else localStorage.removeItem('vereda:dark-mode');
+            }, { dark: theme.dark });
+
+            const page = await context.newPage();
+            const pageErrors = [];
+            page.on('pageerror', (error) => pageErrors.push(String(error)));
+
+            await page.goto(`https://escrevaral.com/?audit=${Date.now()}-${theme.name}`, {
+              waitUntil: 'networkidle',
+              timeout: 90000,
+            });
+
+            const resolvedTheme = await page.evaluate(() => document.documentElement.dataset.theme || 'alvorada');
+            if (theme.dark) assert.equal(resolvedTheme, 'scriptorium');
+            else assert.notEqual(resolvedTheme, 'scriptorium');
+
+            const visibleAtelierEntry = page.locator('[data-view-target="academia"]:visible').first();
+            if (await visibleAtelierEntry.count()) await visibleAtelierEntry.click();
+            else await page.evaluate(() => document.querySelector('[data-view-target="academia"]')?.click());
+
+            const atelierPanel = page.locator('[data-view-panel="academia"]');
+            await atelierPanel.waitFor({ state: 'visible', timeout: 20000 });
+            await page.locator('[data-action="switch-atelier-publicar"]').click();
+            await page.waitForFunction(() => document.querySelector('.academy-view')?.dataset.atelierActive === 'publicar');
+
+            const search = page.locator('[data-rights-search]');
+            const clear = page.locator('[data-rights-search-clear]');
+            await search.fill('contrato');
+            await clear.waitFor({ state: 'visible' });
+            assert.equal(await clear.getAttribute('aria-label'), 'Limpar busca');
+            assert.equal(await clear.getAttribute('data-variant'), 'ghost');
+            assert.equal(await clear.getAttribute('data-size'), 'compact');
+            assert.equal(await clear.getAttribute('data-icon-only'), 'true');
+            assert.equal(Math.round((await clear.boundingBox()).height), 36);
+            await clear.click();
+            assert.equal(await search.inputValue(), '');
+            await clear.waitFor({ state: 'hidden' });
+
+            const track = page.locator('details.academy-publishing-track');
+            await track.evaluate((element) => { element.open = true; });
+
+            const rightsButton = page.locator('[data-action="scroll-rights"]');
+            assert.equal(await rightsButton.getAttribute('data-variant'), 'secondary');
+            await rightsButton.click();
+            await page.waitForTimeout(500);
+            const rightsPosition = await page.locator('[data-rights-lab]').evaluate((element) => {
+              const rect = element.getBoundingClientRect();
+              return { top: rect.top, bottom: rect.bottom, viewport: innerHeight };
+            });
+            assert.ok(rightsPosition.bottom > 0 && rightsPosition.top < rightsPosition.viewport,
+              `Direitos do Autor não ficou visível: ${JSON.stringify(rightsPosition)}`);
+
+            await track.evaluate((element) => { element.open = true; });
+            const anatomy = page.locator('a.academy-anatomy-btn');
+            assert.equal(await anatomy.evaluate((element) => element.tagName), 'A');
+            assert.equal(await anatomy.getAttribute('href'), './anatomia-do-livro.html');
+            assert.equal(await anatomy.getAttribute('target'), '_blank');
+            assert.equal(await anatomy.getAttribute('data-variant'), 'secondary');
+            await anatomy.scrollIntoViewIfNeeded();
+            const popupPromise = context.waitForEvent('page');
+            await anatomy.click();
+            const popup = await popupPromise;
+            await popup.waitForLoadState('domcontentloaded', { timeout: 60000 });
+            assert.ok(new URL(popup.url()).pathname.endsWith('/anatomia-do-livro.html'), popup.url());
+            await popup.close();
+
+            assert.deepEqual(pageErrors, []);
+            await page.screenshot({ path: `audit-artifacts/atelier-${theme.name}-v967.png`, fullPage: true });
+            results.push({ theme: theme.name, resolvedTheme, limparBusca: 'ok', verCuidados: 'ok', anatomiaLink: 'ok', pageErrors });
+            await context.close();
+          }
+
+          await browser.close();
+          fs.writeFileSync('audit-artifacts/resultado-atelier-v967.json', JSON.stringify({ production: 'https://escrevaral.com', cache: 'vereda-offline-v967', assetVersion: '20260727-atelier-actionbutton-low-risk-v1', results }, null, 2));
+          console.log(JSON.stringify(results, null, 2));
+          NODE
+          node /tmp/audit-atelier.mjs
+
+      - name: Publicar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditoria-producao-atelier-v967
+          path: audit-artifacts/
+          if-no-files-found: warn
