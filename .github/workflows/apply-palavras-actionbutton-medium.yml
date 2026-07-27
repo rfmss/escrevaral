@@ -1,0 +1,131 @@
+name: Aplicar Palavras ActionButton médio
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-palavras-actionbutton-medium.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch de produto
+        uses: actions/checkout@v4
+        with:
+          ref: agent/palavras-actionbutton-medium
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Aplicar patch aprovado
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          OLD_VERSION = '20260727-atelier-actionbutton-low-risk-v1'
+          NEW_VERSION = '20260727-palavras-actionbutton-medium-v1'
+
+          def replace_exact(path, old, new, expected=1):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              count = text.count(old)
+              if count != expected:
+                  raise SystemExit(f'{path}: esperado {expected} ocorrência(s), encontrado {count}')
+              p.write_text(text.replace(old, new), encoding='utf-8')
+
+          replace_exact(
+              'lexical-view-controller.js',
+              '''          <button class="secondary-button" data-action="open-create-note" type="button">\n            <span class="material-symbols-outlined" aria-hidden="true">add</span>\n            Começar um texto\n          </button>''',
+              '''          <button class="action-button" data-action="open-create-note" type="button"\n                  data-component="action-button" data-variant="primary">\n            <span class="material-symbols-outlined action-button__icon" aria-hidden="true">add</span>\n            Começar um texto\n          </button>'''
+          )
+          replace_exact(
+              'lexical-view-controller.js',
+              '''        <button class="secondary-button" data-action="switch-view-editor" type="button">\n          <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>\n          Voltar ao texto\n        </button>''',
+              '''        <button class="action-button" data-action="switch-view-editor" type="button"\n                data-component="action-button" data-variant="secondary">\n          <span class="material-symbols-outlined action-button__icon" aria-hidden="true">arrow_back</span>\n          Voltar ao texto\n        </button>'''
+          )
+
+          replace_exact(
+              'styles.css',
+              '''.lexical-empty-state .secondary-button {\n  justify-content: flex-start;\n  min-height: 44px;\n  margin-top: 18px;\n  padding-inline: 0;\n  font-family: Inter, system-ui, sans-serif;\n  font-size: 13px;\n  font-weight: 700;\n}\n\n.lexical-empty-state .secondary-button:hover {\n  border-color: transparent;\n  background: transparent;\n  color: var(--primary);\n}''',
+              '''.lexical-empty-state .action-button {\n  margin-top: 18px;\n}'''
+          )
+
+          distribution_files = [
+              'index.html',
+              'service-worker.js',
+              'ui-dialog.js',
+              'css/14-archive-inspector.css',
+              'css/wood-icons.css',
+          ]
+          for path in distribution_files:
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              if OLD_VERSION not in text:
+                  raise SystemExit(f'{path}: versão antiga ausente')
+              p.write_text(text.replace(OLD_VERSION, NEW_VERSION), encoding='utf-8')
+
+          replace_exact(
+              'service-worker.js',
+              'const CACHE_NAME = "vereda-offline-v967";',
+              'const CACHE_NAME = "vereda-offline-v968";'
+          )
+
+          expected = {
+              'css/14-archive-inspector.css',
+              'css/wood-icons.css',
+              'index.html',
+              'lexical-view-controller.js',
+              'service-worker.js',
+              'styles.css',
+              'ui-dialog.js',
+          }
+          import subprocess
+          changed = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          if changed != expected:
+              raise SystemExit(f'Arquivos alterados inesperados: {sorted(changed)}; esperado: {sorted(expected)}')
+
+          for path in distribution_files:
+              text = Path(path).read_text(encoding='utf-8')
+              if OLD_VERSION in text:
+                  raise SystemExit(f'{path}: versão antiga remanescente')
+          PY
+
+      - name: Validar contrato e escopo
+        shell: bash
+        run: |
+          grep -q 'data-action="open-create-note" type="button"' lexical-view-controller.js
+          grep -q 'data-component="action-button" data-variant="primary"' lexical-view-controller.js
+          grep -q 'data-action="switch-view-editor" type="button"' lexical-view-controller.js
+          grep -q 'data-component="action-button" data-variant="secondary"' lexical-view-controller.js
+          grep -q '^\.lexical-empty-state \.action-button {' styles.css
+          ! grep -q '^\.lexical-empty-state \.secondary-button' styles.css
+          grep -q 'vereda-offline-v968' service-worker.js
+          test "$(git diff --name-only | wc -l)" -eq 7
+
+      - name: Preparar auditor Palavras
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: Rodar auditor Palavras
+        shell: bash
+        run: |
+          python3 -m http.server 8799 >/tmp/escrevaral-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          python3 scripts/auditor-palavras.py --base-url http://127.0.0.1:8799/ --output-dir reports/auditoria/palavras-actionbutton-medium
+
+      - name: Criar único commit na branch de produto
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add lexical-view-controller.js styles.css index.html service-worker.js ui-dialog.js css/14-archive-inspector.css css/wood-icons.css
+          test "$(git diff --cached --name-only | wc -l)" -eq 7
+          git commit -m 'Migra ações controladas de Palavras para ActionButton'
+          git push origin HEAD:agent/palavras-actionbutton-medium
