@@ -46,6 +46,22 @@ test('corpus curto é apresentado como hipótese de baixa confiança', async ({ 
   await expect(page.locator('.voice-disclaimer')).toContainText(/heurística|hipótese|diagnóstico/i)
 })
 
+test('corpus médio produz leitura normalizada e evidência visual', async ({ page }, testInfo) => {
+  await waitReady(page)
+  const editor = await createCleanDocument(page, 'Voz brasileira')
+  const paragraph = 'A mulher atravessou a rua cedo, levando na bolsa uma carta antiga e o cheiro do café da casa. Na feira, as vozes chamavam nomes, preços e lembranças enquanto o ônibus passava devagar pela esquina. '
+  await editor.fill(Array.from({ length: 12 }, () => paragraph).join('\n\n'))
+  await openVoice(page)
+  await page.getByRole('button', { name: 'Escutar minha voz' }).click()
+
+  await expect(page.locator('.voice-reading')).toBeVisible()
+  await expect(page.locator('.voice-confidence')).toContainText(/média/i)
+  await expect(page.locator('.voice-card h2')).not.toBeEmpty()
+  await expect(page.locator('.voice-metrics div')).toHaveCount(3)
+  await expect(page.locator('.voice-section').first()).toBeVisible()
+  await page.screenshot({ path: `test-results/espelho-de-voz-${testInfo.project.name}.png`, fullPage: true })
+})
+
 test('resultado do Espelho de Voz é invalidado quando o texto muda', async ({ page }) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Voz em mudança')
@@ -60,4 +76,24 @@ test('resultado do Espelho de Voz é invalidado quando o texto muda', async ({ p
 
   await expect(page.locator('.voice-reading')).toHaveCount(0)
   await expect(page.getByRole('status')).toContainText(/texto mudou/i)
+})
+
+test('falha controlada da engine não quebra o editor', async ({ page }) => {
+  await waitReady(page)
+  const editor = await createCleanDocument(page, 'Falha isolada')
+  await editor.fill('Uma página pequena para validar o isolamento da engine.')
+  await openVoice(page)
+  await page.evaluate(() => {
+    const target = window as typeof window & {
+      VeredaVoice?: { analyze: (text: string) => unknown }
+      __escrevaralVoiceLoaded?: boolean
+    }
+    target.VeredaVoice = { analyze: () => { throw new Error('falha controlada') } }
+    target.__escrevaralVoiceLoaded = true
+  })
+
+  await page.getByRole('button', { name: 'Escutar minha voz' }).click()
+  await expect(page.getByRole('status')).toContainText(/não pôde concluir/i)
+  await expect(page.locator('.voice-reading')).toHaveCount(0)
+  await expect(editor).toBeEditable()
 })
