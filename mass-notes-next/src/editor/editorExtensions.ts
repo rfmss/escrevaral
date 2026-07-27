@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit'
 
 const PreserveParagraphAfterHeading = Extension.create({
   name: 'preserveParagraphAfterHeading',
+  priority: 1_000,
   addKeyboardShortcuts() {
     return {
       Backspace: () => {
