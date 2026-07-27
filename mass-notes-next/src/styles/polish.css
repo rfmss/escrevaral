@@ -1,0 +1,10 @@
+/* Ajustes de leitura preservando a identidade visual do protótipo. */
+.title-input {
+  font-size: clamp(2rem, 4.6vw, 4rem);
+}
+
+@media (max-width: 520px) {
+  .title-input {
+    font-size: clamp(2rem, 11.5vw, 3.1rem);
+  }
+}
