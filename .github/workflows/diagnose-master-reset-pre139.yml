@@ -1,0 +1,154 @@
+name: Diagnóstico histórico do modal de zerar
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/diagnose-master-reset-pre139.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Obter workflow técnico
+        uses: actions/checkout@v4.2.2
+
+      - name: Obter commit anterior ao PR 139
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: a621be121f9d301d10f1f05900a8c61f1eeb5d4e
+          path: pre139
+
+      - name: Obter squash merge do PR 139
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: f3dd4bfe75c3e55b98dbddb23e00ef852c84ca00
+          path: post139
+
+      - name: Instalar Chromium de auditoria
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Reproduzir e comparar
+        shell: python
+        run: |
+          import json
+          import re
+          import subprocess
+          import time
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          OUT = Path("reports/auditoria/master-reset-pre139")
+          OUT.mkdir(parents=True, exist_ok=True)
+
+          servers = [
+              subprocess.Popen(["python", "-m", "http.server", "8801", "--directory", "pre139"]),
+              subprocess.Popen(["python", "-m", "http.server", "8802", "--directory", "post139"]),
+          ]
+          time.sleep(2)
+
+          manuscript = {
+              "id": "diagnostico-modal",
+              "title": "Diagnóstico do modal",
+              "kind": "Conto",
+              "type": "manuscrito",
+              "status": "Em escrita",
+              "text": "Texto local para abrir o Acervo.",
+              "createdAt": "2026-07-26T12:00:00.000Z",
+              "updatedAt": "2026-07-26T12:00:00.000Z",
+          }
+          storage = json.dumps({
+              "manuscripts": [manuscript],
+              "activeId": manuscript["id"],
+              "archive": {"filter": "all", "statusFilter": "all", "search": "", "sort": "updated"},
+              "layout": {"leftCollapsed": True, "rightCollapsed": True},
+              "ui": {},
+          }, ensure_ascii=False)
+          init = f"""
+          localStorage.setItem('escrevaral-termos-v1','diagnostico');
+          localStorage.setItem('vrda-first-visit','1');
+          localStorage.setItem('vereda.manuscripts.v1',{json.dumps(storage)});
+          """
+
+          def css_diagnosis(root):
+              css_files = list(Path(root).rglob("*.css"))
+              selectors = []
+              for path in css_files:
+                  text = path.read_text(encoding="utf-8", errors="ignore")
+                  for selector in re.findall(r"([^{}]+)\{", text):
+                      compact = " ".join(selector.split())
+                      if "master-reset" in compact and ("secondary-button" in compact or "action-button" in compact or ":has(" in compact):
+                          selectors.append({"arquivo": str(path), "seletor": compact})
+              shell = Path(root, "css/02-shell-navigation.css").read_text(encoding="utf-8")
+              return {
+                  "modal_display_flex": bool(re.search(r"#master-reset-modal\s*\{[^}]*display\s*:\s*flex", shell, re.S)),
+                  "modal_hidden_rule": bool(re.search(r"#master-reset-modal\s*\[hidden\]", shell)),
+                  "seletores_dependentes_da_classe_do_botao": selectors,
+              }
+
+          results = {
+              "pre139": {"commit": "a621be121f9d301d10f1f05900a8c61f1eeb5d4e", "css": css_diagnosis("pre139"), "temas": {}},
+              "post139": {"commit": "f3dd4bfe75c3e55b98dbddb23e00ef852c84ca00", "css": css_diagnosis("post139"), "temas": {}},
+          }
+
+          try:
+              with sync_playwright() as p:
+                  browser = p.chromium.launch()
+                  for version, port in (("pre139", 8801), ("post139", 8802)):
+                      for theme, theme_id in (("alvorada", ""), ("vereda", "scriptorium")):
+                          context = browser.new_context(viewport={"width": 1366, "height": 900})
+                          context.add_init_script(init)
+                          page = context.new_page()
+                          page.goto(f"http://127.0.0.1:{port}/#arquivo", wait_until="domcontentloaded")
+                          page.wait_for_function("() => typeof setView === 'function'")
+                          page.evaluate("theme => { document.documentElement.dataset.theme = theme; setView('arquivo',{updateRoute:false}); }", theme_id)
+                          page.locator('[data-action="master-reset"]').click()
+                          modal = page.locator('#master-reset-modal')
+                          modal.wait_for(state="visible")
+                          cancel = modal.locator('[data-action="cancel-master-reset"]')
+                          before = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
+                          cancel_class = cancel.get_attribute("class")
+                          cancel.click()
+                          page.wait_for_timeout(100)
+                          after = modal.evaluate("el => ({hidden:el.hidden, display:getComputedStyle(el).display, visible:!!(el.offsetWidth||el.offsetHeight||el.getClientRects().length)})")
+                          results[version]["temas"][theme] = {
+                              "classe_cancelar": cancel_class,
+                              "antes": before,
+                              "depois": after,
+                          }
+                          page.screenshot(path=str(OUT / f"{version}-{theme}-apos-cancelar.png"))
+                          context.close()
+                  browser.close()
+          finally:
+              for server in servers:
+                  server.terminate()
+
+          # A reprodução histórica deve provar o mesmo defeito antes e depois.
+          for version in ("pre139", "post139"):
+              assert results[version]["css"]["modal_display_flex"] is True
+              assert results[version]["css"]["modal_hidden_rule"] is False
+              assert results[version]["css"]["seletores_dependentes_da_classe_do_botao"] == []
+              for theme in ("alvorada", "vereda"):
+                  after = results[version]["temas"][theme]["depois"]
+                  assert after == {"hidden": True, "display": "flex", "visible": True}, results
+
+          assert results["pre139"]["temas"]["alvorada"]["classe_cancelar"] == "secondary-button"
+          assert "action-button" in results["post139"]["temas"]["alvorada"]["classe_cancelar"]
+
+          (OUT / "resultado.json").write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+          print(json.dumps(results, ensure_ascii=False, indent=2))
+
+      - name: Guardar evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-master-reset-pre139-${{ github.run_id }}
+          path: reports/auditoria/master-reset-pre139/
+          retention-days: 14
