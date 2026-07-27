@@ -29,6 +29,16 @@
   text-shadow: none;
 }
 
+/* Quatro ferramentas cabem no rail sem abreviações misteriosas. */
+.tabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tab {
+  font-size: .52rem;
+  letter-spacing: .035em;
+}
+
 /* As ações pertencem ao rail, sem cobrir o papel ou competir com o texto. */
 .rail-actions {
   margin-top: 22px;
@@ -57,6 +67,138 @@
   box-shadow: none;
 }
 
+/* Espelho de Voz: leitura editorial, não painel clínico. */
+.voice-message {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.voice-reading {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.voice-confidence {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  font: 900 .6rem "Arial Narrow", sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.voice-confidence strong {
+  padding: 4px 7px;
+  border: 1px solid currentColor;
+}
+
+.confidence-baixa { color: var(--orange); }
+.confidence-média { color: var(--blue-deep); }
+.confidence-alta { color: var(--green); }
+body.night .confidence-alta { color: #8fd2b8; }
+
+.voice-caution,
+.voice-disclaimer {
+  margin: 0;
+  padding: 10px;
+  border-left: 4px solid var(--orange);
+  background: color-mix(in srgb, var(--orange) 9%, transparent);
+  color: var(--muted);
+  font-size: .68rem;
+  line-height: 1.5;
+}
+
+.voice-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--red);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+}
+
+.voice-card h2 {
+  margin: 6px 0 8px;
+  font: 900 1.25rem/1 Impact, "Arial Black", sans-serif;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+}
+
+.voice-card p,
+.audience-reading p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: .7rem;
+  line-height: 1.55;
+}
+
+.voice-gesture {
+  color: var(--blue-deep);
+  font: 900 .56rem "Arial Narrow", sans-serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.voice-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.voice-metrics div {
+  min-width: 0;
+  padding: 9px 6px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.voice-metrics strong {
+  display: block;
+  font: 900 1.15rem Impact, sans-serif;
+}
+
+.voice-metrics span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: .55rem;
+  text-transform: uppercase;
+}
+
+.voice-section {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.voice-section h3 {
+  margin: 0 0 8px;
+  font: 900 .64rem "Arial Narrow", sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.voice-section ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 17px;
+}
+
+.voice-section li {
+  color: var(--muted);
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.voice-disclaimer {
+  border-left-color: var(--blue-deep);
+  font-size: .62rem;
+}
+
 @media (max-width: 820px) {
   /* Remove o stacking context da shell: o overlay fica sobre o texto e atrás do drawer. */
   .app-shell {
@@ -71,5 +213,10 @@
 
   .brand {
     background-size: 72px 4px;
+  }
+
+  .tab {
+    min-height: 44px;
+    font-size: .54rem;
   }
 }
