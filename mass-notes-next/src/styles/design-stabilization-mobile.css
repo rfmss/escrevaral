@@ -1,4 +1,23 @@
-/* Correção explícita da cascata móvel do Gate 6.5. */
+/* Ajustes responsivos finais do Gate 6.5. */
+@media (max-width: 1280px) {
+  .brand {
+    padding-inline: 16px;
+  }
+
+  .brand h1 {
+    font-size: 1.72rem;
+    letter-spacing: -.04em;
+  }
+}
+
+@media (max-width: 1040px) {
+  /* Os acionadores permanecem montados para a devolução de foco, mas ficam atrás do drawer aberto. */
+  .mobile-menu,
+  .mobile-tools {
+    z-index: 60;
+  }
+}
+
 @media (max-width: 520px) {
   .paper {
     padding-inline: 18px;
