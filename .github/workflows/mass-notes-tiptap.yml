@@ -69,7 +69,10 @@ jobs:
           npm run build 2>&1 | tee build.log
           cmp --silent ../anatomia-do-livro.html public/anatomia-do-livro.html
           cmp --silent ../anatomia-do-livro.html dist/anatomia-do-livro.html
+          cmp --silent public/assets/blueprint/anatomia-livro-render.webp dist/assets/blueprint/anatomia-livro-render.webp
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); if(b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP') process.exit(1)"
           sha256sum ../anatomia-do-livro.html > anatomy-sha256.txt
+          sha256sum dist/assets/blueprint/anatomia-livro-render.webp > blueprint-sha256.txt
 
       - name: Instalar Chromium e Firefox
         run: npx playwright install --with-deps chromium firefox
@@ -99,7 +102,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
-          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro.webp; do
+          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro-render.webp; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -117,13 +120,15 @@ jobs:
               && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
               && curl --fail --silent --show-error --location "${base}/anatomia-do-livro.html" -o /tmp/mass-notes-anatomia.html \
-              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro.webp" -o /tmp/mass-notes-blueprint.webp \
+              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro-render.webp" -o /tmp/mass-notes-blueprint.webp \
               && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000 \
               && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 10000 \
               && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -gt 10000 \
+              && test "$(head -c 4 /tmp/mass-notes-blueprint.webp)" = "RIFF" \
+              && test "$(dd if=/tmp/mass-notes-blueprint.webp bs=1 skip=8 count=4 2>/dev/null)" = "WEBP" \
               && grep --quiet 'Anatomia do Livro' /tmp/mass-notes-anatomia.html; then
-              echo "Preview pública respondeu com app, Anatomia e arte Blueprint coerentes."
+              echo "Preview pública respondeu com app, Anatomia e WebP Blueprint coerentes."
               exit 0
             fi
             echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
@@ -142,6 +147,9 @@ jobs:
           path: |
             mass-notes-next/build.log
             mass-notes-next/anatomy-sha256.txt
+            mass-notes-next/blueprint-sha256.txt
+            mass-notes-next/public/anatomia-do-livro.html
+            mass-notes-next/public/assets/blueprint/anatomia-livro-render.webp
             mass-notes-next/package-lock.json
             mass-notes-next/playwright-report/**
             mass-notes-next/test-results/**
