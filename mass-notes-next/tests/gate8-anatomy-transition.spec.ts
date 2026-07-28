@@ -15,15 +15,16 @@ async function openAnatomy(page: Page) {
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
 }
 
-test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ page }, testInfo) => {
+test('a prancha StPageFlip pertence ao canvas e nunca ao papel autoral', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
-  const assetResponse = await page.request.get('/assets/blueprint/anatomia-livro-render.png')
+  const assetResponse = await page.request.get('/assets/blueprint/anatomia-livro-render.webp')
   expect(assetResponse.ok()).toBe(true)
   const asset = await assetResponse.body()
-  expect(asset.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a')
-  expect(asset.length).toBeGreaterThan(10_000)
+  expect(asset.subarray(0, 4).toString('ascii')).toBe('RIFF')
+  expect(asset.subarray(8, 12).toString('ascii')).toBe('WEBP')
+  expect(asset.length).toBe(43_462)
 
   await expect.poll(() => page.evaluate(async () => {
     const raw = getComputedStyle(document.documentElement).getPropertyValue('--anatomy-blueprint-image')
@@ -33,7 +34,7 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
     image.src = match[1]
     try {
       await image.decode()
-      return image.naturalWidth >= 1_000 && image.naturalHeight >= 500
+      return image.naturalWidth === 1_400 && image.naturalHeight === 788
     } catch {
       return false
     }
@@ -44,7 +45,6 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
     const paper = document.querySelector('.paper')!
     const canvas = getComputedStyle(editorShell, '::before')
     const paperStyle = getComputedStyle(paper)
-
     return {
       canvasImage: canvas.backgroundImage,
       canvasPointerEvents: canvas.pointerEvents,
@@ -54,17 +54,16 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
     }
   })
 
-  expect(layers.assetVariable).toContain('anatomia-livro-render.png')
-  expect(layers.canvasImage).toContain('anatomia-livro-render.png')
+  expect(layers.assetVariable).toContain('anatomia-livro-render.webp')
+  expect(layers.canvasImage).toContain('anatomia-livro-render.webp')
   expect(layers.canvasPointerEvents).toBe('none')
   expect(layers.canvasOpacity).toBeGreaterThan(0)
   expect(layers.canvasOpacity).toBeLessThan(0.75)
-  expect(layers.paperImage).not.toContain('anatomia-livro-render.png')
-
+  expect(layers.paperImage).not.toContain('anatomia-livro-render.webp')
   await page.screenshot({ path: testInfo.outputPath('gate8-blueprint-background.png'), fullPage: true })
 })
 
-test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', async ({ page }, testInfo) => {
+test('Ferramentas abre a Anatomia StPageFlip e preserva o editor montado', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
@@ -79,14 +78,15 @@ test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', asy
   await expect(press).toBeVisible()
   await expect(press).toContainText('Anatomia do Livro')
   await expect(page.locator('.experience-view--editor .paper')).toHaveCount(1)
-
   await expect(page.locator('.anatomy-host')).toBeVisible({ timeout: 5_000 })
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
-  await expect(page.getByTitle('Anatomia interativa de um livro')).toBeVisible()
 
   const frame = page.frameLocator('iframe[title="Anatomia interativa de um livro"]')
-  await expect(frame.locator('body')).toBeVisible({ timeout: 12_000 })
-  await expect(frame.locator('body')).toContainText(/Anatomia do Livro/i)
+  await expect(frame.locator('body')).toContainText(/Anatomia do Livro/i, { timeout: 12_000 })
+  await expect(frame.locator('.anatomia-header')).toBeVisible()
+  await expect(frame.locator('.book-wrap')).toBeVisible()
+  await expect(frame.locator('#bookHost')).toBeVisible()
+  await expect(frame.locator('body')).not.toContainText('A Cartografia do Esquecimento')
   await page.screenshot({ path: testInfo.outputPath('gate8-anatomy-host.png'), fullPage: true })
 
   await page.getByRole('button', { name: 'Voltar à mesa de escrita' }).click()
@@ -96,7 +96,7 @@ test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', asy
   await expect(title).toHaveValue('CADERNO PRESERVADO NA ANATOMIA')
 })
 
-test('o HTML de Anatomia é servido como documento independente no iframe', async ({ page }) => {
+test('o HTML servido é exatamente a derivação StPageFlip aprovada', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
   await openAnatomy(page)
@@ -104,23 +104,23 @@ test('o HTML de Anatomia é servido como documento independente no iframe', asyn
   const response = await page.request.get('/anatomia-do-livro.html')
   expect(response.ok()).toBe(true)
   const html = await response.text()
+  expect(Buffer.byteLength(html)).toBe(208_728)
   expect(html).toContain('<!DOCTYPE html>')
-  expect(html).toContain('Anatomia do Livro')
-
-  const frame = page.frameLocator('iframe[title="Anatomia interativa de um livro"]')
-  await expect(frame.locator('.anatomia-header')).toBeHidden({ timeout: 12_000 })
+  expect(html).toContain('Anatomia do Livro — Escrevaral')
+  expect(html).toContain('StPageFlip 2.0.7')
+  expect(html).toContain('class="book-wrap"')
+  expect(html).toContain('id="bookHost"')
+  expect(html).not.toContain('A Cartografia do Esquecimento')
 })
 
 test('movimento reduzido mantém a navegação funcional e não prende a cortina', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
-
   await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
   await page.getByRole('button', { name: 'Abrir Anatomia do Livro' }).click()
   await expect(page.locator('.anatomy-host')).toBeVisible({ timeout: 2_000 })
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 2_000 })
-
   await page.getByRole('button', { name: 'Voltar à mesa de escrita' }).click()
   await expect(page.locator('.paper')).toBeVisible({ timeout: 2_000 })
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 2_000 })
@@ -129,14 +129,12 @@ test('movimento reduzido mantém a navegação funcional e não prende a cortina
 test('Anatomia e retorno não criam overflow horizontal no viewport móvel', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await waitEditor(page)
-
   await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
   await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
   await page.getByRole('button', { name: 'Abrir Anatomia do Livro' }).click()
   await expect(page.locator('.anatomy-host')).toBeVisible({ timeout: 5_000 })
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
-
   await page.getByRole('button', { name: 'Voltar à mesa de escrita' }).click()
   await expect(page.locator('.paper')).toBeVisible({ timeout: 5_000 })
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
