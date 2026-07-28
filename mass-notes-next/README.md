@@ -11,8 +11,9 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições: aprovado sem decorations;
 - estabilização visual: aprovada sem redesign;
-- Gates 1 a 6.5: aprovados em Chromium e Firefox;
-- matriz atual: 45 cenários por navegador, 90 execuções;
+- tema Blueprint Tokon: aprovado sem alterar layout;
+- Gates 1 a 6.75: aprovados em Chromium e Firefox;
+- matriz atual: 50 cenários por navegador, 100 execuções;
 - próximo passo: auditoria manual dos offsets com textos reais antes de qualquer marcação inline.
 
 ## Retomar o projeto
@@ -23,7 +24,8 @@ Leia nesta ordem:
 2. `docs/MEMORY.md` — decisões, contratos e limitações ativas;
 3. `docs/CHANGELOG.md` — mudanças relevantes;
 4. log mais recente em `docs/logs/`;
-5. documentação global em `../docs/_decisoes/` e `../docs/product/`.
+5. `docs/design/BLUEPRINT_THEME.md` — contrato da skin atual;
+6. documentação global em `../docs/_decisoes/` e `../docs/product/`.
 
 Não comece um novo lote antes de revisar o plano e a memória. Um lote não está concluído sem atualizar documentação, testes e evidências.
 
@@ -63,8 +65,20 @@ npm run test:e2e
 - modo noite deve permanecer legível durante toda a troca de tema;
 - em até 1040 px o manuscrito é prioritário e os rails funcionam como drawers;
 - toolbar não depende de rolagem silenciosa no desktop;
+- no tema Blueprint, o canvas é a prancha e a folha permanece papel quente;
+- pauta do papel usa tile de 48 px, não `repeating-linear-gradient`;
 - preview só é atualizada depois de gate verde;
 - a entrada pública não é substituída por esta branch.
+
+## Skin visual atual
+
+```text
+src/styles/theme-blueprint.tokens.css
+src/styles/theme-blueprint.css
+src/styles/theme-blueprint-composition.css
+```
+
+A skin pode ser revertida removendo somente esses imports. Ela não contém lógica de produto.
 
 ## Limites atuais
 
