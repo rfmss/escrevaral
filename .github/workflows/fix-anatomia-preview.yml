@@ -1,0 +1,63 @@
+name: Fix anatomy preview
+
+on:
+  push:
+    branches:
+      - experiment/mass-notes-tiptap
+    paths:
+      - .github/workflows/fix-anatomia-preview.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout public preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: preview-mass-notes-tiptap
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install image support
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Build lightweight Anatomy page
+        run: python scripts/fix-anatomia-preview.py
+
+      - name: Verify generated runtime
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          page = Path('anatomia-do-livro.html').read_text(encoding='utf-8')
+          assert '<title>Anatomia do Livro — Escrevaral</title>' in page
+          assert '--sky:#a9d4e4' in page
+          assert 'assets/anatomia/anatomia-asset-1.webp' in page
+          assert 'assets/anatomia/anatomia-asset-2.webp' in page
+          assert 'data:image/png;base64' not in page
+          assert 'atob(' not in page
+          assert 'anatomia-original.html' not in page
+          assert "document.documentElement.classList.add('is-embedded')" in page
+          assert Path('assets/anatomia/anatomia-asset-1.webp').stat().st_size > 10_000
+          assert Path('assets/anatomia/anatomia-asset-2.webp').stat().st_size > 10_000
+          print('Runtime da Anatomia validado.')
+          PY
+
+      - name: Commit generated page and assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add anatomia-do-livro.html assets/anatomia/anatomia-asset-1.webp assets/anatomia/anatomia-asset-2.webp
+          if git diff --cached --quiet; then
+            echo "Nada para publicar."
+          else
+            git commit -m "fix(preview): publicar Anatomia leve e corrigir iframe"
+            git push origin HEAD:preview-mass-notes-tiptap
+          fi
