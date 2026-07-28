@@ -74,7 +74,7 @@ test('pontuação com posição exata cria decoration sem alterar o documento', 
 
   await analyze(page)
 
-  const decoration = page.locator('[data-review-issue-id]').filter({ hasText: 'tentou mas' })
+  const decoration = page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })
   await expect(decoration).toHaveCount(1)
   await expect(page.locator('.review-located-card')).toContainText('tentou mas')
   await expect(page.getByRole('button', { name: /Ir ao trecho: tentou mas/i })).toBeVisible()
@@ -101,7 +101,7 @@ test('navegação seleciona o fragmento exato mesmo depois de emoji e hardBreak'
 
   await page.getByRole('button', { name: /Ir ao trecho: tentou mas/i }).click()
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('tentou mas')
-  await expect(page.locator('[data-review-issue-id]').filter({ hasText: 'tentou mas' })).toHaveCount(1)
+  await expect(page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })).toHaveCount(1)
 })
 
 test('qualquer edição apaga projeções e exige nova leitura', async ({ page }) => {
@@ -147,7 +147,7 @@ test('fragmentos repetidos usam as duas posições devolvidas pela engine', asyn
   await createDocument(page, 'Ocorrências repetidas', html, plain)
   await analyze(page)
 
-  await expect(page.locator('[data-review-issue-id]').filter({ hasText: 'tentou mas' })).toHaveCount(2)
+  await expect(page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })).toHaveCount(2)
   const jumps = page.getByRole('button', { name: /Ir ao trecho: tentou mas/i })
   await expect(jumps).toHaveCount(2)
   await jumps.nth(1).click()
