@@ -9,14 +9,16 @@ Atualizado em: 2026-07-28
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gates 1, 2, 3, 4, 5, 6, 6.5 e 6.75: verdes;
+- Gates 1, 2, 3, 4, 5, 6, 6.5, 6.75 e 6.9: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições aprovado sem decorations;
+- auditoria editorial de posições aprovada com textos brasileiros reais;
 - estabilização visual aprovada sem redesign;
 - fusão visual Blueprint Tokon aprovada sem alterar layout;
-- matriz atual: 50 cenários por navegador, 100 execuções;
-- próximo passo: auditoria manual do contrato com textos reais antes de decorations ProseMirror.
+- dependências reproduzíveis por overrides, `package-lock.json` e `npm ci`;
+- matriz atual: 59 cenários por navegador, 118 execuções;
+- próximo passo: decisão explícita sobre um gate pequeno de decorations ProseMirror somente de leitura.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -43,7 +45,7 @@ Atualizado em: 2026-07-28
 21. Rimas toantes reconhecidas pela engine não devem ser descartadas apenas para fazer um teste passar.
 22. Nomes acessíveis já usados por testes e usuários são contratos estáveis; mudanças cosméticas devem ser feitas por CSS.
 23. O contrato de posições nasce do Node ProseMirror real, não de HTML reparseado.
-24. Offsets linguísticos usam unidades de código UTF-16; emoji pode ocupar duas unidades.
+24. Offsets linguísticos usam unidades de código UTF-16; emoji pode ocupar duas ou mais unidades.
 25. `documentId` identifica a página; `contentSignature` identifica a estrutura. Um não substitui o outro.
 26. A assinatura estrutural é calculada sobre JSON estável e independe de `revision`.
 27. Separadores `\n\n` entre blocos são virtuais e exigem afinidade explícita.
@@ -65,6 +67,13 @@ Atualizado em: 2026-07-28
 43. O canvas pode ser azul técnico; a folha clara deve permanecer papel quente opaco.
 44. Pautas do papel usam tile de 48 px e `repeat-y`; `repeating-linear-gradient` não deve ser reintroduzido na folha.
 45. Mudanças de skin não autorizam alteração de DOM, grid, larguras, breakpoints, Tiptap, engines ou persistência.
+46. `br.ProseMirror-trailingBreak` e `br.ProseMirror-separator` são placeholders técnicos do DOM, não `hardBreak` autoral nem unidade textual.
+47. Um oráculo DOM independente deve reconstruir apenas texto autoral e ignorar placeholders de edição.
+48. Diferenças do atalho nativo `Home` entre navegadores não invalidam o contrato quando HTML, assinatura e seleção permanecem iguais antes/depois dentro de cada motor.
+49. A família Tiptap deve permanecer travada por versões diretas, overrides e lockfile.
+50. CI e retomadas locais usam `npm ci`; `npm install` não é o caminho normal após o lockfile.
+51. Corpora negativos e auditorias de posição devem usar texto original controlado, mas próximo do uso editorial brasileiro real.
+52. Decorations continuam bloqueadas até gate explícito; aprovação do contrato e da auditoria não equivale a autorização automática para marcação visual.
 
 ## Incidentes que orientam a arquitetura
 
@@ -93,6 +102,8 @@ Atualizado em: 2026-07-28
 - No Gate 6.75, o primeiro auditor lia tokens noturnos no elemento errado, usava nome acessível antigo e capturava a animação da folha; o auditor foi corrigido sem alterar o produto.
 - Um paste do teste do RimaLab disparava análise antes de React refletir a transação no Firefox; o auditor passou a aguardar o ciclo `Alterado/Salvando` → `Salvo`.
 - A primeira pauta Blueprint usava `repeating-linear-gradient` e lavava o papel com ciano. Diagnóstico por camadas provou que grain, halftone e canvas não eram a causa. A pauta passou a ser tile de 48 px.
+- No Gate 6.9, o oráculo DOM contou `ProseMirror-trailingBreak` de parágrafos vazios como quebra autoral; o contrato estava correto e o oráculo foi corrigido.
+- Uma instalação limpa resolveu cópia transitiva incompatível de `@tiptap/core` dentro do StarterKit; overrides e lockfile eliminaram a variação.
 
 ## Contratos técnicos ativos
 
@@ -142,6 +153,16 @@ O contrato aprovado fornece:
 
 A API de QA fica anexada à instância DOM atual do editor como propriedade somente de integração. Isso não autoriza engines a manipular DOM nem constitui API pública estável.
 
+A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo, ensaio, poesia, cordel, canção, Unicode e documento extenso. A evidência consolidada está em `docs/audits/GATE_6_9_POSITION_AUDIT.json`.
+
+### Dependências
+
+- versões Tiptap diretas permanecem exatas;
+- `overrides` impedem resolução transitiva incompatível;
+- `package-lock.json` é obrigatório e versionado;
+- workflow e retomadas usam `npm ci`;
+- alteração de dependência exige atualização consciente do lockfile e repetição da matriz completa.
+
 ### Design e responsividade
 
 - `design-stabilization.css` e `design-stabilization-mobile.css` preservam contraste e responsividade;
@@ -161,13 +182,12 @@ A API de QA fica anexada à instância DOM atual do editor como propriedade some
 
 Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor, para cada infraestrutura linguística e para mudanças visuais transversais. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural, round-trip de posições, contraste ou asserções geométricas.
 
-Matriz atual: 50 cenários por navegador, 100 execuções no Gate 6.75.
+Matriz atual: 59 cenários por navegador, 118 execuções no Gate 6.9.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
-- auditoria ampla do contrato com textos reais e Unicode combinante;
 - decorations inline;
 - navegação acessível entre issue e trecho;
 - aplicação automática de sugestões;
@@ -184,11 +204,13 @@ Ainda não estão aprovados:
 
 1. ler `README.md`, `PLAN.md`, `MEMORY.md` e o log mais recente;
 2. conferir o estado do PR `#155` e o último workflow;
-3. não pressupor que capturas representam o produto atual;
-4. reproduzir qualquer falha antes de corrigir;
-5. declarar se um offset é UTF-16 antes de comparar resultados;
-6. preservar blocos vazios e separar texto visível de estrutura textual derivada;
-7. não iniciar decorations sem auditoria manual e autorização explícita;
-8. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
-9. preservar a separação entre canvas Blueprint e papel quente;
-10. atualizar esta memória ao encerrar o lote.
+3. instalar com `npm ci`, nunca depender de resolução transitiva nova;
+4. não pressupor que capturas representam o produto atual;
+5. reproduzir qualquer falha antes de corrigir;
+6. declarar se um offset é UTF-16 antes de comparar resultados;
+7. preservar blocos vazios e separar texto visível de estrutura textual derivada;
+8. ignorar placeholders técnicos do ProseMirror ao construir oráculos DOM;
+9. não iniciar decorations sem autorização explícita e gate próprio;
+10. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
+11. preservar a separação entre canvas Blueprint e papel quente;
+12. atualizar esta memória ao encerrar o lote.
