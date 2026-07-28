@@ -56,7 +56,7 @@ async function createDocument(page: Page, title: string, html = BASE_HTML, plain
 async function analyze(page: Page) {
   await page.getByRole('tab', { name: 'revisao', exact: true }).click()
   await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
-  await expect(page.locator('#panel-revisao .review-message')).toContainText(/trecho localizado|Nenhuma observação/, { timeout: 15_000 })
+  await expect(page.locator('#panel-revisao .review-message')).toContainText(/trechos? localizados?|Nenhuma observação/, { timeout: 15_000 })
 }
 
 async function snapshot(page: Page) {
