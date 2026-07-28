@@ -60,7 +60,9 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Compilar aplicação
-        run: npm run build 2>&1 | tee build.log
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
 
       - name: Instalar Chromium e Firefox
         run: npx playwright install --with-deps chromium firefox
