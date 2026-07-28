@@ -52,50 +52,62 @@ Evidência: workflow `30315176567`, 15 cenários em cada navegador, 30 execuçõ
 
 ### Gate 4 — Termos que pedem contexto
 
-Aprovado em Chromium e Firefox:
-
-- `decolonial-engine.js` e `decolonial-data.json` permaneceram intactos;
-- base original empacotada e fornecida ao carregamento assíncrono por adaptador;
-- aba `Contexto` adicionada sem alterar ou marcar o manuscrito;
+- `decolonial-engine.js` e `decolonial-data.json` intactos;
+- base original fornecida ao carregamento assíncrono por adaptador;
+- aba `Contexto` sem alterar ou marcar o manuscrito;
 - termo, categoria, motivo, contexto, alternativas e contagem apresentados;
 - linguagem não acusatória e decisão humana explícita;
-- documento vazio, ausência de termos, múltiplas ocorrências, invalidação e falha cobertos;
-- nenhuma alternativa possui ação automática;
+- vazio, ausência de termos, múltiplas ocorrências, invalidação e falha cobertos;
 - nomes de termos preservados integralmente no rail;
-- preview atualizada somente após gate verde.
+- Chromium e Firefox verdes.
 
-Evidência final: commit `741340070f5f37f420aaee0f2f76ad74b7f734f7`, workflow `30316983906`, 21 cenários em cada navegador, 42 execuções.
+Evidência: workflow `30316983906`, 21 cenários em cada navegador, 42 execuções.
 
-## Lote atual — revisão manual do Gate 4
+## Lote atual — Gate 5: RimaLab
 
-Antes de iniciar uma nova engine:
+Autorizado explicitamente pelo mantenedor em 2026-07-27.
 
-1. usar a preview com textos reais de gêneros e épocas diferentes;
-2. avaliar falsos positivos, omissões e linguagem dos cartões;
-3. confirmar que o painel informa sem constranger ou prescrever;
-4. testar rail e rolagem em desktop e mobile;
-5. registrar qualquer P0/P1;
-6. não iniciar substituição automática nem decorations inline.
+Objetivo: integrar `rimalab-engine.js` e `rimalab-data.json` como oficina sonora opcional, distinguindo prosa e verso sem marcar ou alterar o texto.
 
-## Próximo lote proposto — Gate 5: RimaLab
+### Escopo autorizado
 
-Somente após revisão manual ou autorização explícita do mantenedor.
+1. criar adaptador tipado para engine e base originais;
+2. executar somente por ação explícita;
+3. em prosa, apresentar padrões sonoros internos sem fingir métrica de verso;
+4. em verso, apresentar quantidade de versos, metro dominante, variação métrica, esquema de rimas, estrofes, escansão e pares rimados;
+5. preservar a nota pedagógica sobre sinalefa, dicção regional e intenção musical;
+6. invalidar resultado quando documento ou conteúdo mudar, nunca por autosave do mesmo conteúdo;
+7. não modificar Tiptap, schema ou manuscrito;
+8. cobrir vazio, prosa, verso livre, versos rimados, estrofes, falha e mobile;
+9. executar Chromium e Firefox;
+10. atualizar preview somente após gate verde;
+11. manter plano, memória, changelog e log sincronizados.
 
-Objetivo previsto: integrar o RimaLab como leitura sonora opcional, distinguindo prosa e verso, sem marcações dentro do editor no primeiro corte.
+### Linguagem obrigatória
 
-Escopo preliminar:
+- chamar a superfície de **RimaLab** ou **Oficina sonora**;
+- usar “leitura aproximada”, “padrão percebido” e “experimente escutar”;
+- não afirmar que a escansão automática é definitiva;
+- não tratar ausência de rima como defeito;
+- não sugerir que prosa precisa virar verso;
+- nenhuma ação altera o texto.
 
-- adaptador tipado;
-- identificação de prosa ou verso;
-- padrões sonoros para prosa;
-- métrica, escansão e rimas quando houver versos;
-- execução por ação explícita;
-- nenhum ajuste automático no manuscrito;
-- Chromium e Firefox;
-- documentação e log próprios.
+### Critérios de parada
 
-## Fora do próximo gate
+Interromper o lote em caso de:
 
+- alteração involuntária do manuscrito;
+- classificação de prosa como verso de forma estruturalmente enganosa;
+- perda de resultados entre documentos;
+- falha que quebre Revisão, Voz, Contexto ou editor;
+- regressão P0/P1 em Chromium ou Firefox;
+- layout ilegível no rail ou mobile.
+
+## Fora do Gate 5
+
+- busca interativa de palavras para rimar;
+- encyclopedia completa na interface;
+- reprodução de áudio ou leitura em voz alta;
 - decorations inline;
 - aplicação automática de sugestões;
 - paginação física;
@@ -105,11 +117,11 @@ Escopo preliminar:
 
 ## Sequência posterior planejada
 
-1. revisão manual do Gate 4;
-2. Gate 5 — RimaLab sem marcações inline;
+1. Gate 5 — RimaLab sem marcações inline;
+2. revisão manual com prosa, poesia, cordel, letra e verso livre;
 3. contrato de posições para issues linguísticas;
 4. decorations ProseMirror;
 5. PWA/offline em nova sessão;
 6. avaliação de promoção arquitetural.
 
-O Gate 5 só começa depois da avaliação manual ou de autorização explícita do mantenedor.
+O próximo gate só começa depois do Gate 5 verde e da atualização completa da memória.
