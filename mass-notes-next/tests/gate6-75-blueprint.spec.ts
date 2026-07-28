@@ -52,6 +52,7 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
     const root = getComputedStyle(document.documentElement)
     const body = getComputedStyle(document.body)
     const blueprint = getComputedStyle(document.querySelector('.blueprint')!)
+    const paper = getComputedStyle(document.querySelector('.paper')!)
 
     return {
       ink: root.getPropertyValue('--bp-ink').trim(),
@@ -60,6 +61,7 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
       cyanStrong: root.getPropertyValue('--bp-cyan-strong').trim(),
       orange: root.getPropertyValue('--bp-orange').trim(),
       red: root.getPropertyValue('--bp-red').trim(),
+      paperBackground: paper.backgroundColor,
       bodyBackground: body.backgroundImage,
       blueprintBackground: blueprint.backgroundImage,
       blueprintPointerEvents: blueprint.pointerEvents,
@@ -73,6 +75,7 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
     cyanStrong: '#36a7d2',
     orange: '#ff5a19',
     red: '#e31b36',
+    paperBackground: 'rgb(243, 238, 228)',
     blueprintPointerEvents: 'none',
   })
   expect(theme.bodyBackground).toContain('radial-gradient')
@@ -92,16 +95,19 @@ test('modo noite mantém a linguagem Blueprint e contraste alto', async ({ page 
 
   const values = await page.evaluate(() => {
     const body = getComputedStyle(document.body)
+    const paper = getComputedStyle(document.querySelector('.paper')!)
     return {
       canvas: body.getPropertyValue('--bp-canvas').trim(),
       panel: body.getPropertyValue('--bp-panel').trim(),
       text: body.getPropertyValue('--ui-text').trim(),
+      paperBackground: paper.backgroundColor,
     }
   })
 
   expect(values.canvas).toBe('#123442')
   expect(values.panel).toBe('#202628')
   expect(values.text).toBe('#f4f0e9')
+  expect(values.paperBackground).toBe('rgb(32, 38, 40)')
   expect(await elementContrast(page, '.escrevaral-editor')).toBeGreaterThanOrEqual(7)
   expect(await elementContrast(page, '.tab:not(.active)')).toBeGreaterThanOrEqual(4.5)
 
