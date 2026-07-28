@@ -1,3 +1,4 @@
+import { writeFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
 
 test('diagnóstico temporário do empilhamento do papel', async ({ page }, testInfo) => {
@@ -31,6 +32,6 @@ test('diagnóstico temporário do empilhamento do papel', async ({ page }, testI
     return { x, y, stack }
   })
 
-  console.log(`[BLUEPRINT_PAINT_STACK]${JSON.stringify(report)}`)
+  writeFileSync('test-results/blueprint-paint-stack.json', JSON.stringify(report, null, 2))
   expect(report.stack.some((entry) => String(entry.className).includes('paper'))).toBe(true)
 })
