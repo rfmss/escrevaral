@@ -74,54 +74,79 @@ Evidência final histórica: workflow `30319966987`. A documentação do gate re
 
 ### Gate 6 — contrato de posições
 
-Aprovado funcionalmente em Chromium e Firefox:
-
 - snapshot criado diretamente de `editor.state.doc`;
 - identidade do documento separada da assinatura estrutural;
-- assinatura baseada no JSON estrutural, não em `revision` ou apenas no texto;
 - offsets declarados em unidades UTF-16;
 - conversão de pontos e ranges entre texto derivado e posições ProseMirror;
-- afinidade `backward` e `forward` para separadores virtuais;
+- afinidade para separadores virtuais;
 - ranges exclusivamente virtuais colapsam com segurança;
-- títulos, parágrafos, listas, `hardBreak`, acentos, emoji e blocos vazios cobertos;
-- parágrafo vazio final do Tiptap preservado como estrutura válida;
+- títulos, listas, `hardBreak`, acentos, emoji e blocos vazios cobertos;
 - consultas não alteram HTML, seleção, histórico ou manuscrito;
-- nenhuma decoration, marcação ou ação automática criada;
-- build falho não pode mais ser mascarado por `tee` no workflow.
+- nenhuma decoration criada;
+- pipeline preserva o código de saída da compilação.
 
 Evidência funcional: workflow `30323402744`, 40 cenários no Chromium e 40 no Firefox, 80 execuções.
 
-## Lote atual — revisão manual do contrato de posições
+## Lote atual — Gate 6.5: estabilização visual e de experiência
+
+Autorizado em 2026-07-28.
+
+Objetivo: refinar a interface existente antes de qualquer decoration, preservando a identidade editorial e melhorando leitura, hierarquia, contraste, toolbar e responsividade.
+
+Escopo:
+
+1. criar tokens semânticos de texto, superfície, controle, foco e seleção;
+2. corrigir contraste do modo noite em abas, toolbar, biblioteca, ações e atalhos;
+3. impedir que controles habilitados pareçam desabilitados;
+4. reorganizar a toolbar para não ficar cortada no desktop;
+5. preservar nomes acessíveis e adicionar ajuda às abreviações;
+6. reduzir densidade de linhas e caixas sem apagar a estética de caderno;
+7. ajustar larguras dos rails;
+8. transformar biblioteca e ferramentas em drawers a partir de 1024 px;
+9. manter seleção distinta de análise, alerta e erro;
+10. executar toda a matriz anterior em Chromium e Firefox;
+11. revisar capturas reais antes de fechar.
+
+Não autoriza:
+
+- decorations, sublinhados, highlights ou tooltips;
+- alteração das engines, bases ou schema Tiptap;
+- aplicação automática;
+- service worker, Tauri, SQLite, DOCX ou paginação física;
+- promoção para `main`.
+
+Critérios completos: `docs/logs/2026-07-28-gate-6-5-estabilizacao-visual.md`.
+
+## Próximo lote proposto — auditoria manual de offsets
+
+Somente depois do Gate 6.5 verde.
 
 Antes de iniciar decorations:
 
 1. auditar offsets com textos reais extensos;
-2. incluir combinações de emoji, acentos combinantes e pontuação;
+2. incluir emoji, acentos combinantes e pontuação;
 3. experimentar listas aninhadas, citações e múltiplos blocos vazios;
-4. comparar ranges devolvidos pelas engines com o trecho textual esperado;
-5. confirmar afinidade em início e fim de bloco;
-6. registrar qualquer mapeamento ambíguo ou P0/P1;
-7. não mostrar sublinhados, highlights ou tooltips ainda;
-8. não oferecer substituição automática.
+4. comparar ranges das engines com o trecho esperado;
+5. registrar qualquer mapeamento ambíguo ou P0/P1;
+6. não mostrar sublinhados, highlights ou tooltips;
+7. não oferecer substituição automática.
 
-## Próximo lote proposto — decorations ProseMirror
+## Gate posterior proposto — decorations ProseMirror
 
 Somente após revisão manual ou nova autorização explícita.
-
-Objetivo previsto: usar o contrato aprovado para apresentar issues linguísticas ancoradas no editor, começando por uma única engine e mantendo leitura, edição e desfazer intactos.
 
 Escopo preliminar:
 
 - plugin ProseMirror isolado;
 - decorations somente de leitura;
-- identidade de documento e assinatura verificadas antes de aplicar;
+- identidade de documento e assinatura verificadas;
 - descarte de ranges obsoletos;
 - navegação acessível entre issue e trecho;
 - nenhuma substituição automática;
 - Chromium e Firefox;
 - documentação e log próprios.
 
-## Fora do próximo gate
+## Fora dos próximos gates
 
 - aplicação automática de sugestões;
 - correção em massa;
@@ -130,12 +155,3 @@ Escopo preliminar:
 - service worker;
 - Tauri/SQLite;
 - promoção para `main`.
-
-## Sequência posterior planejada
-
-1. revisão manual do Gate 6;
-2. decorations ProseMirror em gate próprio;
-3. PWA/offline em nova sessão;
-4. avaliação de promoção arquitetural.
-
-O gate de decorations só começa após revisão manual ou autorização explícita do mantenedor.
