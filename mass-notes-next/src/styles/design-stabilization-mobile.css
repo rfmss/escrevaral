@@ -1,0 +1,11 @@
+/* Correção explícita da cascata móvel do Gate 6.5. */
+@media (max-width: 520px) {
+  .paper {
+    padding-inline: 18px;
+  }
+
+  .title-input {
+    font-size: clamp(1.65rem, 8.5vw, 1.85rem);
+    letter-spacing: -.03em;
+  }
+}
