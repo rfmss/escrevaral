@@ -19,6 +19,26 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
+  const assetResponse = await page.request.get('/assets/blueprint/anatomia-livro-render.webp')
+  expect(assetResponse.ok()).toBe(true)
+  const asset = await assetResponse.body()
+  expect(asset.subarray(0, 4).toString('ascii')).toBe('RIFF')
+  expect(asset.subarray(8, 12).toString('ascii')).toBe('WEBP')
+
+  await expect.poll(() => page.evaluate(async () => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue('--anatomy-blueprint-image')
+    const match = raw.match(/url\(["']?(.*?)["']?\)/)
+    if (!match) return false
+    const image = new Image()
+    image.src = match[1]
+    try {
+      await image.decode()
+      return image.naturalWidth > 0 && image.naturalHeight > 0
+    } catch {
+      return false
+    }
+  })).toBe(true)
+
   const layers = await page.evaluate(() => {
     const editorShell = document.querySelector('.editor-shell')!
     const paper = document.querySelector('.paper')!
@@ -34,12 +54,12 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
     }
   })
 
-  expect(layers.assetVariable).toContain('anatomia-livro.webp')
-  expect(layers.canvasImage).toContain('anatomia-livro.webp')
+  expect(layers.assetVariable).toContain('anatomia-livro-render.webp')
+  expect(layers.canvasImage).toContain('anatomia-livro-render.webp')
   expect(layers.canvasPointerEvents).toBe('none')
   expect(layers.canvasOpacity).toBeGreaterThan(0)
   expect(layers.canvasOpacity).toBeLessThan(0.75)
-  expect(layers.paperImage).not.toContain('anatomia-livro.webp')
+  expect(layers.paperImage).not.toContain('anatomia-livro-render.webp')
 
   await page.screenshot({ path: testInfo.outputPath('gate8-blueprint-background.png'), fullPage: true })
 })
