@@ -20,19 +20,52 @@
   box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ui-analysis) 62%, transparent);
 }
 
+body.review-marks-hidden .review-decoration,
+body.review-marks-hidden .review-decoration.severity-alta,
+body.review-marks-hidden .review-decoration.severity-baixa {
+  background: transparent;
+  box-shadow: none;
+}
+
 .review-located {
   margin: 18px 0 20px;
   padding-top: 14px;
   border-top: 2px solid color-mix(in srgb, var(--ui-analysis) 72%, var(--ui-border));
 }
 
-.review-located > h3,
+.review-located-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.review-located-heading > h3,
 .review-general-title {
-  margin: 0 0 7px;
+  margin: 0;
   color: var(--ui-text);
   font: 900 .68rem/1.25 "Courier New", ui-monospace, monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.review-visibility {
+  flex: 0 0 auto;
+  padding: 4px 6px;
+  border: 1px solid var(--ui-analysis);
+  background: transparent;
+  color: var(--ui-text);
+  font: 900 .54rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.review-visibility:hover,
+.review-visibility:focus-visible,
+.review-visibility[aria-pressed="true"] {
+  background: var(--ui-analysis);
+  color: var(--ui-panel);
 }
 
 .review-located > p {
@@ -114,7 +147,10 @@
 }
 
 body.night .review-jump:hover,
-body.night .review-jump:focus-visible {
+body.night .review-jump:focus-visible,
+body.night .review-visibility:hover,
+body.night .review-visibility:focus-visible,
+body.night .review-visibility[aria-pressed="true"] {
   color: var(--bp-ink);
 }
 
@@ -123,14 +159,28 @@ body.night .review-jump:focus-visible {
     padding: 13px;
   }
 
-  .review-jump {
+  .review-jump,
+  .review-visibility {
     min-height: 42px;
+  }
+}
+
+@media (max-width: 390px) {
+  .review-located-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .review-visibility {
+    width: 100%;
+    text-align: left;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .review-decoration,
-  .review-jump {
+  .review-jump,
+  .review-visibility {
     transition: none;
   }
 }
