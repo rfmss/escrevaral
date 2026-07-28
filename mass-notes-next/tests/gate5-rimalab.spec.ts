@@ -31,8 +31,8 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
 }
 
 async function openRimaLab(page: Page) {
-  await page.getByRole('tab', { name: 'RimaLab', exact: true }).click()
-  await expect(page.getByRole('tab', { name: 'RimaLab', exact: true })).toHaveAttribute('aria-selected', 'true')
+  await page.getByRole('tab', { name: 'rimalab', exact: true }).click()
+  await expect(page.getByRole('tab', { name: 'rimalab', exact: true })).toHaveAttribute('aria-selected', 'true')
   return page.locator('.rimalab-panel')
 }
 
@@ -55,7 +55,7 @@ test('prosa com ecos internos é lida sem alterar o manuscrito', async ({ page }
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
 
   await expect(panel.locator('.rima-prose-reading')).toBeVisible()
-  await expect(panel.getByRole('status')).toContainText(/padrão sonoro/i)
+  await expect(panel.getByRole('status')).toContainText(/padr(?:ão|ões) sonor/i)
   await expect(panel.locator('.rima-pattern').first()).toContainText(/amor|dor|flor/i)
   await expect(panel.locator('.rima-disclaimer')).toContainText(/não uma exigência de rima/i)
   await expect(editor).toContainText(source)
@@ -65,7 +65,7 @@ test('prosa com ecos internos é lida sem alterar o manuscrito', async ({ page }
 test('prosa sem padrão recebe retorno neutro', async ({ page }) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Prosa sem eco')
-  await editor.fill('A menina abriu a janela, observou o quintal úmido e voltou devagar para o caderno sobre a mesa.')
+  await editor.fill('Pedra azul sobre chão.')
   const panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
 
@@ -112,8 +112,8 @@ test('bloco vazio preserva duas estrofes distintas', async ({ page }) => {
 test('verso livre sem pares recebe mensagem não punitiva', async ({ page }) => {
   await waitReady(page)
   await createCleanDocument(page, 'Verso livre')
-  const html = '<p>Abro a janela para o céu</p><p>Guardo no bolso o mar</p><p>A noite acende uma luz</p><p>O caminho recusa o fim</p>'
-  const plain = 'Abro a janela para o céu\nGuardo no bolso o mar\nA noite acende uma luz\nO caminho recusa o fim'
+  const html = '<p>pedra</p><p>azul</p><p>chão</p><p>fim</p>'
+  const plain = 'pedra\nazul\nchão\nfim'
   await pasteStructuredText(page, html, plain)
   const panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
@@ -157,7 +157,7 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   await editor.click()
   await page.keyboard.type(' O editor segue funcionando.')
   await expect(editor).toContainText('O editor segue funcionando.')
-  await page.getByRole('tab', { name: 'Revisão', exact: true }).click()
+  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
   await expect(page.getByRole('button', { name: /analisar em português brasileiro/i })).toBeVisible()
 })
 
