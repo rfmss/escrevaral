@@ -66,3 +66,25 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - adicionados testes de vazio, ausência de termos, múltiplas ocorrências, integridade do manuscrito, obsolescência, exceção e mobile;
 - matriz aprovada em Chromium e Firefox, com 42 execuções;
 - preview atualizada somente após gate funcional e visual verdes.
+
+### Gate 5 — RimaLab
+
+- integrados `rimalab-engine.js` e `rimalab-data.json` por adaptador, sem modificar os originais;
+- criada união discriminada TypeScript para leituras de prosa e verso;
+- adicionada aba `RimaLab` e oficina sonora separada do Tiptap;
+- prosa passou a apresentar ecos internos sem falsa escansão;
+- verso passou a apresentar resumo, metro dominante, variação métrica, esquema, estrofes, escansão e pares de rima percebidos;
+- preservada a nota da engine sobre sinalefa, dicção regional e intenção musical;
+- ausência de rima recebe mensagem neutra e verso livre não é tratado como defeito;
+- criado serializador sonoro a partir do JSON Tiptap;
+- blocos vazios preservam fronteiras entre estrofes;
+- carregamento da base usa promessa compartilhada e ponte temporária de `fetch` restaurada em `finally`;
+- resultados são descartados após mudança do documento ou do conteúdo, não por autosave;
+- falha controlada do RimaLab permanece isolada do editor e das engines anteriores;
+- seis abas foram organizadas em grade 3 × 2;
+- restaurado o contrato acessível dos nomes das abas após uma capitalização indevida;
+- corpora de ausência de padrão foram substituídos por exemplos foneticamente controlados;
+- rima toante real entre “céu” e “luz” foi preservada como comportamento da engine, não removida para satisfazer o teste;
+- adicionados testes de vazio, prosa com e sem ecos, poema rimado, estrofes, verso livre, integridade, obsolescência, exceção e mobile;
+- matriz aprovada em Chromium e Firefox, com 60 execuções;
+- preview atualizada somente após gate verde.
