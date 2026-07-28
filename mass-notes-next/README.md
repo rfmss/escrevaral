@@ -10,9 +10,10 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - aplicação pública, `main` e service worker: não alterados;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições: aprovado sem decorations;
-- Gates 1 a 6: aprovados em Chromium e Firefox;
-- matriz atual: 40 cenários por navegador, 80 execuções;
-- próximo passo: avaliação manual dos offsets antes de qualquer marcação inline.
+- estabilização visual: aprovada sem redesign;
+- Gates 1 a 6.5: aprovados em Chromium e Firefox;
+- matriz atual: 45 cenários por navegador, 90 execuções;
+- próximo passo: auditoria manual dos offsets com textos reais antes de qualquer marcação inline.
 
 ## Retomar o projeto
 
@@ -58,6 +59,10 @@ npm run test:e2e
 - consultas de posições não alteram o editor;
 - nenhuma engine altera o manuscrito neste estágio;
 - conflito entre abas nunca sobrescreve silenciosamente;
+- design usa tokens semânticos e não depende de herança acidental de cor;
+- modo noite deve permanecer legível durante toda a troca de tema;
+- em até 1040 px o manuscrito é prioritário e os rails funcionam como drawers;
+- toolbar não depende de rolagem silenciosa no desktop;
 - preview só é atualizada depois de gate verde;
 - a entrada pública não é substituída por esta branch.
 
