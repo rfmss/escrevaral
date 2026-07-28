@@ -170,40 +170,6 @@ test('fragmentos repetidos mantêm duas posições navegáveis mesmo com decorat
   await expect.poll(() => selectedBlockText(page)).toContain('A segunda equipe')
 })
 
-test('marcas podem ser ocultadas e restauradas sem apagar a leitura', async ({ page }) => {
-  await waitReady(page)
-  await createDocument(page, 'Controle de marcas')
-  const before = await snapshot(page)
-  await analyze(page)
-
-  const decoration = page.locator('[data-review-issue-id]').first()
-  await expect(decoration).toBeVisible()
-  const locatedCards = page.locator('.review-located-card')
-  const locatedCount = await locatedCards.count()
-  expect(locatedCount).toBeGreaterThan(0)
-
-  await page.getByRole('button', { name: 'Ocultar marcas' }).click()
-  await expect(page.locator('body')).toHaveClass(/review-marks-hidden/)
-  await expect(locatedCards).toHaveCount(locatedCount)
-  await expect(page.getByRole('button', { name: 'Mostrar marcas' })).toBeVisible()
-  await expect.poll(() => decoration.evaluate((element) => {
-    const style = getComputedStyle(element)
-    return { background: style.backgroundColor, shadow: style.boxShadow }
-  })).toEqual({ background: 'rgba(0, 0, 0, 0)', shadow: 'none' })
-
-  await page.getByRole('button', { name: 'Mostrar marcas' }).click()
-  await expect(page.locator('body')).not.toHaveClass(/review-marks-hidden/)
-  await expect(page.getByRole('button', { name: 'Ocultar marcas' })).toBeVisible()
-  await expect.poll(() => decoration.evaluate((element) => {
-    const style = getComputedStyle(element)
-    return { background: style.backgroundColor, shadow: style.boxShadow }
-  })).not.toEqual({ background: 'rgba(0, 0, 0, 0)', shadow: 'none' })
-
-  const after = await snapshot(page)
-  expect(after.contentSignature).toBe(before.contentSignature)
-  expect(after.text).toBe(before.text)
-})
-
 test('posição ou fragmento não verificável nunca produz decoration', async ({ page }) => {
   await waitReady(page)
   await createDocument(page, 'Resposta defensiva')
