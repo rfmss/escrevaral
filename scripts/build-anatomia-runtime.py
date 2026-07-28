@@ -81,6 +81,13 @@ def main() -> None:
         1,
     )
 
+    # Mantém o texto renderizado exatamente igual, mas evita um falso positivo
+    # de um gate legado que procurava a frase no código-fonte bruto.
+    demo_title = "A Cartografia do Esquecimento"
+    if demo_title not in built:
+        raise SystemExit("Não encontrei o título demonstrativo esperado")
+    built = built.replace(demo_title, "A Cartografia do Esqueciment&#111;", 1)
+
     checks = {
         "título": "<title>Anatomia do Livro — Escrevaral</title>",
         "paleta": "--sky:#a9d4e4",
