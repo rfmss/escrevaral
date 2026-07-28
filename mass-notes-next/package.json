@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "prepare:anatomy": "node scripts/prepare-anatomy.mjs",
-    "predev": "npm run prepare:anatomy",
+    "prepare:blueprint": "node scripts/prepare-blueprint.mjs",
+    "prepare:assets": "npm run prepare:anatomy && npm run prepare:blueprint",
+    "predev": "npm run prepare:assets",
     "dev": "vite --host 127.0.0.1",
-    "prebuild": "npm run prepare:anatomy",
+    "prebuild": "npm run prepare:assets",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
