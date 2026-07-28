@@ -152,31 +152,44 @@ Documentação detalhada:
 - `docs/audits/GATE_6_9_POSITION_AUDIT.json`;
 - `../docs/product/MASS_NOTES_TIPTAP_GATE_6_9.md`.
 
-## Lote atual — decisão sobre decorations ProseMirror
+### Gate 7 — marcações somente de leitura da Revisão
 
-A auditoria necessária foi concluída, mas nenhuma decoration está automaticamente autorizada.
+- a engine inicial é exclusivamente a Revisão;
+- ranges localizados são convertidos pelo contrato aprovado e projetados por plugin ProseMirror isolado;
+- `documentId`, `contentSignature`, posição e fragmento precisam corresponder ao snapshot atual;
+- posições ou fragmentos não verificáveis são descartados;
+- qualquer edição ou troca de documento remove imediatamente leitura e marcações obsoletas;
+- cada cartão localizado oferece navegação para o trecho exato sem editar o manuscrito;
+- Unicode, emoji, `hardBreak` e ocorrências repetidas foram cobertos;
+- decorations sobrepostas continuam navegáveis por ocorrência, sem usar a forma do DOM como contrato de produto;
+- marcas podem ser ocultadas e restauradas no painel de Revisão sem apagar cartões, ranges ou leitura;
+- nenhuma sugestão é aplicada e nenhum botão de correção automática foi criado;
+- HTML, texto, assinatura estrutural, histórico e persistência permanecem intactos;
+- a cor de análise permanece distinta da seleção e as marcas não recebem eventos de ponteiro;
+- desktop e mobile foram validados em Chromium e Firefox;
+- a preview passou a usar assets estáveis, fallback visível e verificação do endereço público após a publicação.
 
-O próximo gate depende de autorização explícita e deve permanecer pequeno:
+Evidência final: workflow `30367072054`, 67 cenários por navegador, 134 execuções, zero falhas, zero flakiness; build, Chromium, Firefox, publicação, limpeza de cache e smoke test público aprovados.
 
-1. escolher uma única engine inicial;
-2. criar plugin ProseMirror isolado e somente de leitura;
-3. exigir `documentId` e `contentSignature` atuais;
-4. descartar ranges obsoletos;
-5. navegar de issue para trecho sem mover ou editar o texto;
-6. oferecer forma de ocultar marcações;
-7. preservar seleção, histórico, paste, undo/redo e performance;
-8. validar Chromium e Firefox;
-9. não aplicar sugestões;
-10. atualizar documentação e evidências antes de ampliar o escopo.
+Documentação detalhada:
 
-Critérios de parada:
+- `docs/logs/2026-07-28-gate-7-revisao-inline.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_7.md`.
 
-- decoration aponta para trecho diferente do issue;
-- documento ou assinatura obsoletos continuam visíveis;
-- marcação altera seleção, HTML persistido ou histórico;
-- contraste ou semântica visual confundem seleção, erro e análise;
-- teclado ou leitor de tela não conseguem relacionar issue e trecho;
-- desempenho de digitação degrada perceptivelmente.
+## Lote atual — avaliação manual do Gate 7
+
+Nenhum novo gate começa automaticamente. O próximo passo é avaliação manual na preview isolada:
+
+1. abrir a preview e confirmar que a oficina carrega, sem tela branca;
+2. colar ou escrever um texto representativo em português brasileiro;
+3. executar Revisão e conferir se as marcas apontam para os trechos corretos;
+4. usar “Ir ao trecho” em ocorrências simples e repetidas;
+5. ocultar e restaurar as marcas sem perder a lista de observações;
+6. editar o texto e confirmar que a leitura antiga desaparece;
+7. conferir papel e noite, desktop e mobile;
+8. registrar qualquer falha P0/P1 antes de autorizar ampliação.
+
+Sem falha bloqueadora e somente após autorização explícita, o lote seguinte poderá ser proposto. A integração de novas engines com decorations, aplicação de sugestões ou promoção para `main` não está autorizada por este gate.
 
 ## Fora dos próximos gates
 
