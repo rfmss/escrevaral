@@ -95,5 +95,6 @@ jobs:
           if-no-files-found: warn
           path: |
             mass-notes-next/build.log
+            mass-notes-next/package-lock.json
             mass-notes-next/playwright-report/**
             mass-notes-next/test-results/**
