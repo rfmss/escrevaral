@@ -58,6 +58,13 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
 
   await expect(editor).toContainText(source)
   await expect(page.locator('.context-card button')).toHaveCount(0)
+
+  const headingsFit = await page.locator('.context-card h2').evaluateAll((headings) => headings.every((heading) => {
+    const style = getComputedStyle(heading)
+    return heading.scrollWidth <= heading.clientWidth && style.wordBreak === 'normal'
+  }))
+  expect(headingsFit).toBe(true)
+
   await page.screenshot({ path: `test-results/termos-contexto-${testInfo.project.name}.png`, fullPage: true })
 })
 
@@ -94,7 +101,6 @@ test('falha controlada da engine não quebra o editor', async ({ page }) => {
   await editor.fill('O texto menciona uma lista negra.')
   await openContext(page)
 
-  // Primeiro confirma a carga da engine no build compilado.
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
   await expect(page.locator('.context-card')).toHaveCount(1)
 
