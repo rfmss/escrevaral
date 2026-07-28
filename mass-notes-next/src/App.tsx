@@ -2,8 +2,15 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Library } from './components/Library'
 import { RightRail } from './components/RightRail'
 import { displayTitle, type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
-import { MassNotesEditor } from './editor/MassNotesEditor'
-import { ensureReviewEngine, reviewText, type ReviewIssue } from './engines/reviewAdapter'
+import { MassNotesEditor, type ReviewNavigationRequest } from './editor/MassNotesEditor'
+import type { ReviewDecorationSpec } from './editor/reviewDecorations'
+import type { EditorPositionContract } from './editor/textPositionContract'
+import {
+  ensureReviewEngine,
+  reviewTextDetailed,
+  type LocatedReviewIssue,
+  type ReviewIssue,
+} from './engines/reviewAdapter'
 import {
   createNewDocument,
   DocumentConflictError,
@@ -23,6 +30,10 @@ const CHANNEL = 'escrevaral-mass-notes-next-documents'
 type ConflictState = {
   local: EscrevaralDocument
   persisted: EscrevaralDocument
+}
+
+type LocatedReviewPresentation = LocatedReviewIssue & {
+  positionRange: { from: number; to: number }
 }
 
 function readLocalStorage(key: string): string | null {
@@ -46,6 +57,9 @@ export default function App() {
   const [dirty, setDirty] = useState(false)
   const [conflict, setConflict] = useState<ConflictState | null>(null)
   const [issues, setIssues] = useState<ReviewIssue[]>([])
+  const [locatedIssues, setLocatedIssues] = useState<LocatedReviewPresentation[]>([])
+  const [reviewDecorations, setReviewDecorations] = useState<ReviewDecorationSpec[]>([])
+  const [reviewNavigation, setReviewNavigation] = useState<ReviewNavigationRequest | null>(null)
   const [reviewMessage, setReviewMessage] = useState('Aguardando uma leitura.')
   const [analyzing, setAnalyzing] = useState(false)
   const [focusMode, setFocusMode] = useState(false)
@@ -58,9 +72,21 @@ export default function App() {
   const dirtyRef = useRef(false)
   const channelRef = useRef<BroadcastChannel | null>(null)
   const analysisToken = useRef(0)
+  const navigationSerial = useRef(0)
+  const positionContractRef = useRef<EditorPositionContract | null>(null)
 
   useEffect(() => { draftRef.current = draft }, [draft])
   useEffect(() => { dirtyRef.current = dirty }, [dirty])
+
+  const clearReviewReading = useCallback((message: string) => {
+    analysisToken.current += 1
+    setAnalyzing(false)
+    setIssues([])
+    setLocatedIssues([])
+    setReviewDecorations([])
+    setReviewNavigation(null)
+    setReviewMessage(message)
+  }, [])
 
   const refreshDocuments = useCallback(async () => {
     const rows = await listDocuments()
@@ -112,7 +138,7 @@ export default function App() {
   useEffect(() => {
     document.body.classList.toggle('night', dark)
     writeLocalStorage(THEME_KEY, dark ? 'night' : 'paper')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#221f1d' : '#f3eee5')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#123442' : '#86c7df')
   }, [dark])
 
   useEffect(() => {
@@ -135,12 +161,14 @@ export default function App() {
         setSaveState('Conflito')
       } else {
         setDraft(persisted)
+        positionContractRef.current = null
+        clearReviewReading('O documento mudou em outra aba. Faça uma nova leitura quando quiser.')
         setEditorResetKey((value) => value + 1)
         setSaveState('Salvo')
       }
     }
     return () => channel.close()
-  }, [refreshDocuments])
+  }, [clearReviewReading, refreshDocuments])
 
   const persistDraft = useCallback(async (): Promise<boolean> => {
     const current = draftRef.current
@@ -187,10 +215,8 @@ export default function App() {
     setDirty(true)
     dirtyRef.current = true
     setSaveState('Alterado')
-    setIssues([])
-    setReviewMessage('O texto mudou. Faça uma nova leitura quando quiser.')
-    analysisToken.current += 1
-  }, [])
+    clearReviewReading('O texto mudou. Faça uma nova leitura quando quiser.')
+  }, [clearReviewReading])
 
   const selectDocument = useCallback(async (id: string) => {
     if (id === activeId) {
@@ -205,11 +231,11 @@ export default function App() {
     setDraft(structuredClone(selected))
     setDirty(false)
     setConflict(null)
-    setIssues([])
-    setReviewMessage('Aguardando uma leitura.')
+    positionContractRef.current = null
+    clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
     setSidebarOpen(false)
-  }, [activeId, documents, persistDraft])
+  }, [activeId, clearReviewReading, documents, persistDraft])
 
   const newDocument = useCallback(async () => {
     if (!(await persistDraft())) return
@@ -220,9 +246,11 @@ export default function App() {
     setDraft(created)
     setDirty(false)
     setConflict(null)
+    positionContractRef.current = null
+    clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
     setSidebarOpen(false)
-  }, [persistDraft, refreshDocuments])
+  }, [clearReviewReading, persistDraft, refreshDocuments])
 
   const duplicate = useCallback(async () => {
     const current = draftRef.current
@@ -232,34 +260,85 @@ export default function App() {
     setActiveId(copy.id)
     setDraft(copy)
     setDirty(false)
+    positionContractRef.current = null
+    clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
     setRailOpen(false)
-  }, [persistDraft, refreshDocuments])
+  }, [clearReviewReading, persistDraft, refreshDocuments])
 
   const runReview = useCallback(async () => {
     const current = draftRef.current
+    const contract = positionContractRef.current
     if (!current) return
+    if (!contract || contract.snapshot.documentId !== current.id) {
+      setReviewMessage('O mapa estrutural ainda está sendo preparado. Tente novamente em um instante.')
+      return
+    }
+
     const token = ++analysisToken.current
+    const documentId = current.id
+    const contentSignature = contract.snapshot.contentSignature
+    const text = contract.snapshot.text
     setAnalyzing(true)
     setReviewMessage('A engine está lendo o rascunho localmente…')
+
     try {
-      const result = await reviewText(current.plainText)
-      if (token !== analysisToken.current || draftRef.current?.id !== current.id) return
-      setIssues(result)
-      setReviewMessage(
-        !current.plainText.trim()
-          ? 'A página está vazia.'
-          : result.length
-            ? `${result.length} ${result.length === 1 ? 'observação encontrada' : 'observações encontradas'}.`
-            : 'Nenhuma observação relevante neste recorte.',
-      )
+      const result = await reviewTextDetailed(text)
+      const liveContract = positionContractRef.current
+      if (
+        token !== analysisToken.current ||
+        draftRef.current?.id !== documentId ||
+        !liveContract ||
+        liveContract.snapshot.documentId !== documentId ||
+        liveContract.snapshot.contentSignature !== contentSignature
+      ) return
+
+      const mapped = result.locatedIssues.flatMap<LocatedReviewPresentation>((issue) => {
+        const positionRange = liveContract.textRangeToPositionRange(issue.textRange)
+        if (positionRange.collapsed || positionRange.from === positionRange.to) return []
+        return [{ ...issue, positionRange: { from: positionRange.from, to: positionRange.to } }]
+      })
+
+      setIssues(result.issues)
+      setLocatedIssues(mapped)
+      setReviewDecorations(mapped.map((issue) => ({
+        id: issue.id,
+        from: issue.positionRange.from,
+        to: issue.positionRange.to,
+        severity: issue.severity,
+      })))
+      setReviewNavigation(null)
+
+      if (!text.trim()) {
+        setReviewMessage('A página está vazia.')
+      } else if (result.issues.length || mapped.length) {
+        const observations = result.issues.length
+        const located = mapped.length
+        setReviewMessage(
+          `${observations} ${observations === 1 ? 'observação geral' : 'observações gerais'}; ${located} ${located === 1 ? 'trecho localizado' : 'trechos localizados'}.`,
+        )
+      } else {
+        setReviewMessage('Nenhuma observação relevante neste recorte.')
+      }
     } catch (error) {
       console.error('[Escrevaral] Revisão não concluída.', error)
       setIssues([])
+      setLocatedIssues([])
+      setReviewDecorations([])
       setReviewMessage('A revisão não pôde ser concluída agora.')
     } finally {
       if (token === analysisToken.current) setAnalyzing(false)
     }
+  }, [])
+
+  const navigateReviewIssue = useCallback((issue: LocatedReviewPresentation) => {
+    navigationSerial.current += 1
+    setReviewNavigation({
+      serial: navigationSerial.current,
+      issueId: issue.id,
+      from: issue.positionRange.from,
+      to: issue.positionRange.to,
+    })
   }, [])
 
   const exportTxt = useCallback(() => {
@@ -282,8 +361,10 @@ export default function App() {
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)
+    positionContractRef.current = null
+    clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
-  }, [conflict])
+  }, [clearReviewReading, conflict])
 
   const preserveConflictCopy = useCallback(async () => {
     if (!conflict) return
@@ -297,8 +378,10 @@ export default function App() {
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)
+    positionContractRef.current = null
+    clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
-  }, [conflict, refreshDocuments])
+  }, [clearReviewReading, conflict, refreshDocuments])
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -400,6 +483,9 @@ export default function App() {
                 documentId={draft.id}
                 content={draft.content}
                 resetKey={editorResetKey}
+                reviewDecorations={reviewDecorations}
+                reviewNavigation={reviewNavigation}
+                onPositionContract={(contract) => { positionContractRef.current = contract }}
                 onChange={({ content, plainText }) => mutateDraft((current) => ({ ...current, content, plainText }))}
               />
               <div className="slash" aria-hidden="true" />
@@ -412,9 +498,11 @@ export default function App() {
           open={railOpen}
           analyzing={analyzing}
           issues={issues}
+          locatedIssues={locatedIssues}
           reviewMessage={reviewMessage}
           onClose={() => setRailOpen(false)}
           onAnalyze={() => { void runReview() }}
+          onNavigateIssue={navigateReviewIssue}
           onStatus={(status: DocumentStatus) => mutateDraft((current) => ({ ...current, status }))}
           onDuplicate={() => { void duplicate() }}
           onExport={exportTxt}
