@@ -166,3 +166,23 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - `package-lock.json` foi versionado e o workflow passou a usar `npm ci`;
 - matriz elevada para 59 cenários por navegador, 118 execuções;
 - build, instalação reproduzível, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30358030907`.
+
+### Gate 7 — marcações somente de leitura da Revisão
+
+- criada extensão ProseMirror isolada para `DecorationSet` da Revisão;
+- somente ranges cuja posição e fragmento correspondem ao snapshot atual recebem marca;
+- projections carregam identidade do documento e assinatura estrutural;
+- qualquer edição ou troca de documento remove leitura e marcações obsoletas;
+- cartões localizados foram separados das observações gerais;
+- “Ir ao trecho” seleciona o range exato sem editar o manuscrito;
+- Unicode, emoji, `hardBreak`, ocorrências repetidas e ranges sobrepostos foram cobertos;
+- o DOM renderizado deixou de ser tratado como contrato de ocorrência quando decorations se sobrepõem;
+- marcas podem ser ocultadas e restauradas pelo painel de Revisão sem apagar leitura, cartões ou conteúdo;
+- nenhuma sugestão automática ou ação de substituição foi criada;
+- cor de análise foi mantida separada da seleção e as marcas não capturam eventos;
+- tela branca da preview foi tratada com assets estáveis, fallback, purge e smoke test público;
+- falsos negativos de plural, sobreposição e colisão com o nome `document` foram corrigidos sem distorcer o produto;
+- suíte de visibilidade ficou isolada em arquivo dedicado, sem cenário duplicado;
+- matriz elevada para 67 cenários por navegador, 134 execuções;
+- build, Chromium, Firefox, publicação, limpeza de cache e verificação pública aprovados no workflow `30367072054`;
+- Gate 7 encerrado para avaliação manual; nenhuma ampliação automática foi autorizada.
