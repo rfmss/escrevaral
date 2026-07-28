@@ -16,7 +16,9 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - revisão condicional e conflito entre abas;
 - engines legadas por adaptadores;
 - contrato comum de posições textuais;
-- tokens visuais semânticos e responsividade estabilizada;
+- tokens visuais semânticos;
+- skin Blueprint Tokon isolada e reversível;
+- responsividade estabilizada;
 - preview isolada em `preview-mass-notes-tiptap`;
 - PR rascunho `#155`.
 
@@ -103,6 +105,28 @@ Evidência funcional: workflow `30323402744`, 40 cenários no Chromium e 40 no F
 - Gates 1 a 6 novamente verdes.
 
 Evidência funcional e visual: workflow `30327303435`, 45 cenários no Chromium e 45 no Firefox, 90 execuções, zero falhas e zero flakiness.
+
+### Gate 6.75 — fusão visual Blueprint Tokon
+
+- paleta da referência transplantada para tokens próprios;
+- blueprint definido como ambiente e o manuscrito como objeto principal;
+- canvas com ciano, pontos, diagonais e moldura técnica;
+- biblioteca, registro e rail convertidos visualmente em papel técnico;
+- folha central preservada como papel quente opaco;
+- pauta reconstruída como tile de 48 px para impedir lavagem cromática;
+- modo noite recebeu prancha azul profunda e papel técnico escuro;
+- nenhuma alteração de DOM, layout, breakpoints, Tiptap, engines, persistência ou dados;
+- skin dividida em tokens, aplicação e composição;
+- cinco regressões visuais novas por navegador;
+- todos os gates anteriores novamente aprovados.
+
+Evidência funcional e visual: workflow `30333192558`, 50 cenários no Chromium e 50 no Firefox, 100 execuções.
+
+Documentação detalhada:
+
+- `docs/design/BLUEPRINT_THEME.md`;
+- `docs/logs/2026-07-28-gate-6-75-blueprint-theme.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_6_75.md`.
 
 ## Lote atual — auditoria manual do contrato de posições
 
