@@ -16,6 +16,7 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - revisão condicional e conflito entre abas;
 - engines legadas por adaptadores;
 - contrato comum de posições textuais;
+- tokens visuais semânticos e responsividade estabilizada;
 - preview isolada em `preview-mass-notes-tiptap`;
 - PR rascunho `#155`.
 
@@ -87,56 +88,59 @@ Evidência final histórica: workflow `30319966987`. A documentação do gate re
 
 Evidência funcional: workflow `30323402744`, 40 cenários no Chromium e 40 no Firefox, 80 execuções.
 
-## Lote atual — Gate 6.5: estabilização visual e de experiência
+### Gate 6.5 — estabilização visual e de experiência
 
-Autorizado em 2026-07-28.
+- tokens semânticos para texto, superfície, controle, borda, foco, seleção, ação e futura análise;
+- contraste explícito em papel e noite;
+- toolbar agrupada, documentada e sem corte silencioso no desktop;
+- estados ativo, inativo e desabilitado distinguíveis;
+- grain, halftone, blueprint, bordas e sombras refinados;
+- rails ajustados sem cortar a marca;
+- biblioteca e ferramentas convertidas em drawers em até 1040 px;
+- título móvel estabilizado entre Chromium e Firefox;
+- troca de tema sem frames intermediários de baixo contraste;
+- capturas revisadas em desktop, noite, 1024 px e mobile;
+- Gates 1 a 6 novamente verdes.
 
-Objetivo: refinar a interface existente antes de qualquer decoration, preservando a identidade editorial e melhorando leitura, hierarquia, contraste, toolbar e responsividade.
+Evidência funcional e visual: workflow `30327303435`, 45 cenários no Chromium e 45 no Firefox, 90 execuções, zero falhas e zero flakiness.
 
-Escopo:
+## Lote atual — auditoria manual do contrato de posições
 
-1. criar tokens semânticos de texto, superfície, controle, foco e seleção;
-2. corrigir contraste do modo noite em abas, toolbar, biblioteca, ações e atalhos;
-3. impedir que controles habilitados pareçam desabilitados;
-4. reorganizar a toolbar para não ficar cortada no desktop;
-5. preservar nomes acessíveis e adicionar ajuda às abreviações;
-6. reduzir densidade de linhas e caixas sem apagar a estética de caderno;
-7. ajustar larguras dos rails;
-8. transformar biblioteca e ferramentas em drawers a partir de 1024 px;
-9. manter seleção distinta de análise, alerta e erro;
-10. executar toda a matriz anterior em Chromium e Firefox;
-11. revisar capturas reais antes de fechar.
+Nenhuma decoration será criada neste lote.
 
-Não autoriza:
+Objetivo: auditar o contrato aprovado com textos brasileiros reais e estruturas mais complexas antes de permitir marcações dentro do editor.
 
-- decorations, sublinhados, highlights ou tooltips;
-- alteração das engines, bases ou schema Tiptap;
-- aplicação automática;
-- service worker, Tauri, SQLite, DOCX ou paginação física;
-- promoção para `main`.
+Plano:
 
-Critérios completos: `docs/logs/2026-07-28-gate-6-5-estabilizacao-visual.md`.
+1. montar corpus de prosa, ensaio, diálogo, poesia, cordel e letra;
+2. incluir emoji, acentos precompostos, acentos combinantes, travessões, aspas e pontuação brasileira;
+3. experimentar listas aninhadas, citações, títulos consecutivos, `hardBreak` e múltiplos blocos vazios;
+4. gerar ranges conhecidos no texto derivado;
+5. converter para ProseMirror e confirmar o trecho textual correspondente;
+6. testar round-trip nos dois sentidos;
+7. testar início e fim de bloco com afinidade `backward` e `forward`;
+8. incluir documentos extensos;
+9. registrar ambiguidades, P0 e P1;
+10. manter HTML, seleção, histórico e manuscrito intactos;
+11. não mostrar sublinhados, highlights ou tooltips;
+12. não oferecer substituição automática;
+13. atualizar documentação e evidências antes de decidir o próximo gate.
 
-## Próximo lote proposto — auditoria manual de offsets
+Critérios de parada:
 
-Somente depois do Gate 6.5 verde.
-
-Antes de iniciar decorations:
-
-1. auditar offsets com textos reais extensos;
-2. incluir emoji, acentos combinantes e pontuação;
-3. experimentar listas aninhadas, citações e múltiplos blocos vazios;
-4. comparar ranges das engines com o trecho esperado;
-5. registrar qualquer mapeamento ambíguo ou P0/P1;
-6. não mostrar sublinhados, highlights ou tooltips;
-7. não oferecer substituição automática.
+- qualquer range aponta para texto diferente do esperado;
+- comportamento diverge entre Chromium e Firefox;
+- consulta altera seleção, HTML ou histórico;
+- estrutura válida precisa ser descartada para o teste passar;
+- offset não declara claramente UTF-16.
 
 ## Gate posterior proposto — decorations ProseMirror
 
-Somente após revisão manual ou nova autorização explícita.
+Somente após a auditoria manual e nova autorização explícita.
 
 Escopo preliminar:
 
+- uma única engine inicial;
 - plugin ProseMirror isolado;
 - decorations somente de leitura;
 - identidade de documento e assinatura verificadas;
