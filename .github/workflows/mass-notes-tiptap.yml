@@ -65,14 +65,17 @@ jobs:
 
       - name: Compilar aplicação
         run: |
-          set -o pipefail
+          set -euo pipefail
           npm run build 2>&1 | tee build.log
-          cmp --silent ../anatomia-do-livro.html public/anatomia-do-livro.html
-          cmp --silent ../anatomia-do-livro.html dist/anatomia-do-livro.html
-          cmp --silent public/assets/blueprint/anatomia-livro-render.png dist/assets/blueprint/anatomia-livro-render.png
-          node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.png'); const sig=b.subarray(0,8).toString('hex'); const width=b.readUInt32BE(16); const height=b.readUInt32BE(20); if(sig!=='89504e470d0a1a0a'||width<1000||height<500||b.length<10000) process.exit(1)"
-          sha256sum ../anatomia-do-livro.html > anatomy-sha256.txt
-          sha256sum dist/assets/blueprint/anatomia-livro-render.png > blueprint-sha256.txt
+          cmp --silent public/anatomia-do-livro.html dist/anatomia-do-livro.html
+          test "$(wc -c < dist/anatomia-do-livro.html)" -eq 208728
+          test "$(sha256sum dist/anatomia-do-livro.html | cut -d' ' -f1)" = "d618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8"
+          grep --quiet 'StPageFlip 2.0.7' dist/anatomia-do-livro.html
+          grep --quiet 'Anatomia do Livro — Escrevaral' dist/anatomia-do-livro.html
+          cmp --silent public/assets/blueprint/anatomia-livro-render.webp dist/assets/blueprint/anatomia-livro-render.webp
+          node --input-type=module -e "import { createHash } from 'node:crypto'; import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); const sha=createHash('sha256').update(b).digest('hex'); if(b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP'||b.length!==43462||sha!=='64756b9a62bedb60660c1d0794e31bf6bd727aafb29be175549159d7eaa6d362') process.exit(1)"
+          sha256sum dist/anatomia-do-livro.html > anatomy-sha256.txt
+          sha256sum dist/assets/blueprint/anatomia-livro-render.webp > blueprint-sha256.txt
 
       - name: Instalar Chromium e Firefox
         run: npx playwright install --with-deps chromium firefox
@@ -88,7 +91,7 @@ jobs:
           cd dist
           touch .nojekyll
           git init
-          git config user.name "github-actions[bot]"
+          git config user.name "github-actions[bot]]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "preview: ${GITHUB_SHA}"
@@ -102,7 +105,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
-          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro-render.png; do
+          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro-render.webp; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -113,27 +116,30 @@ jobs:
           set -euo pipefail
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
           for attempt in $(seq 1 18); do
-            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-blueprint.png
+            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-blueprint.webp
             if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.js' /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.css' /tmp/mass-notes-index.html \
               && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
               && curl --fail --silent --show-error --location "${base}/anatomia-do-livro.html" -o /tmp/mass-notes-anatomia.html \
-              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro-render.png" -o /tmp/mass-notes-blueprint.png \
+              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro-render.webp" -o /tmp/mass-notes-blueprint.webp \
               && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000 \
-              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 10000 \
-              && test "$(wc -c < /tmp/mass-notes-blueprint.png)" -gt 10000 \
-              && test "$(xxd -p -l 8 /tmp/mass-notes-blueprint.png)" = "89504e470d0a1a0a" \
-              && grep --quiet 'Anatomia do Livro' /tmp/mass-notes-anatomia.html; then
-              echo "Preview pública respondeu com app, Anatomia e prancha PNG coerentes."
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -eq 208728 \
+              && test "$(sha256sum /tmp/mass-notes-anatomia.html | cut -d' ' -f1)" = "d618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8" \
+              && grep --quiet 'StPageFlip 2.0.7' /tmp/mass-notes-anatomia.html \
+              && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -eq 43462 \
+              && test "$(head -c 4 /tmp/mass-notes-blueprint.webp)" = "RIFF" \
+              && test "$(dd if=/tmp/mass-notes-blueprint.webp bs=1 skip=8 count=4 2>/dev/null)" = "WEBP" \
+              && test "$(sha256sum /tmp/mass-notes-blueprint.webp | cut -d' ' -f1)" = "64756b9a62bedb60660c1d0794e31bf6bd727aafb29be175549159d7eaa6d362"; then
+              echo "Preview pública respondeu com a Anatomia StPageFlip correta e a prancha WebP coerente."
               exit 0
             fi
             echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
             sleep 10
           done
-          echo "A preview pública não entregou o conjunto coerente de assets após 3 minutos."
+          echo "A preview pública não entregou o conjunto correto após 3 minutos."
           exit 1
 
       - name: Guardar relatório do Playwright
@@ -148,7 +154,7 @@ jobs:
             mass-notes-next/anatomy-sha256.txt
             mass-notes-next/blueprint-sha256.txt
             mass-notes-next/public/anatomia-do-livro.html
-            mass-notes-next/public/assets/blueprint/anatomia-livro-render.png
+            mass-notes-next/public/assets/blueprint/anatomia-livro-render.webp
             mass-notes-next/package-lock.json
             mass-notes-next/playwright-report/**
             mass-notes-next/test-results/**
