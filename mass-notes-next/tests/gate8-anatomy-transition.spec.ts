@@ -15,7 +15,7 @@ async function openAnatomy(page: Page) {
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
 }
 
-test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ page }) => {
+test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
@@ -40,9 +40,11 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
   expect(layers.canvasOpacity).toBeGreaterThan(0)
   expect(layers.canvasOpacity).toBeLessThan(0.5)
   expect(layers.paperImage).not.toContain('anatomia-livro.webp')
+
+  await page.screenshot({ path: testInfo.outputPath('gate8-blueprint-background.png'), fullPage: true })
 })
 
-test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', async ({ page }) => {
+test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
@@ -65,6 +67,7 @@ test('Ferramentas abre a Anatomia com a Prensa e preserva o editor montado', asy
   const frame = page.frameLocator('iframe[title="Anatomia interativa de um livro"]')
   await expect(frame.locator('body')).toBeVisible({ timeout: 12_000 })
   await expect(frame.locator('body')).toContainText(/Anatomia do Livro/i)
+  await page.screenshot({ path: testInfo.outputPath('gate8-anatomy-host.png'), fullPage: true })
 
   await page.getByRole('button', { name: 'Voltar à mesa de escrita' }).click()
   await expect(page.locator('.page-press--editor')).toBeVisible()
