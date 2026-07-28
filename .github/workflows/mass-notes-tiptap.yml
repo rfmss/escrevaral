@@ -7,6 +7,7 @@ on:
     paths:
       - "mass-notes-next/**"
       - ".github/workflows/mass-notes-tiptap.yml"
+      - "anatomia-do-livro.html"
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
@@ -22,6 +23,7 @@ on:
     paths:
       - "mass-notes-next/**"
       - ".github/workflows/mass-notes-tiptap.yml"
+      - "anatomia-do-livro.html"
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
@@ -65,6 +67,9 @@ jobs:
         run: |
           set -o pipefail
           npm run build 2>&1 | tee build.log
+          cmp --silent ../anatomia-do-livro.html public/anatomia-do-livro.html
+          cmp --silent ../anatomia-do-livro.html dist/anatomia-do-livro.html
+          sha256sum ../anatomia-do-livro.html > anatomy-sha256.txt
 
       - name: Instalar Chromium e Firefox
         run: npx playwright install --with-deps chromium firefox
@@ -94,7 +99,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
-          for path in index.html assets/index.js assets/index.css; do
+          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro.webp; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -105,15 +110,20 @@ jobs:
           set -euo pipefail
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
           for attempt in $(seq 1 18); do
-            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css
+            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-blueprint.webp
             if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.js' /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.css' /tmp/mass-notes-index.html \
               && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
+              && curl --fail --silent --show-error --location "${base}/anatomia-do-livro.html" -o /tmp/mass-notes-anatomia.html \
+              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro.webp" -o /tmp/mass-notes-blueprint.webp \
               && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
-              && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000; then
-              echo "Preview pública respondeu com HTML, JavaScript e CSS coerentes."
+              && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 10000 \
+              && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -gt 10000 \
+              && grep --quiet 'Anatomia do Livro' /tmp/mass-notes-anatomia.html; then
+              echo "Preview pública respondeu com app, Anatomia e arte Blueprint coerentes."
               exit 0
             fi
             echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
@@ -131,6 +141,7 @@ jobs:
           if-no-files-found: warn
           path: |
             mass-notes-next/build.log
+            mass-notes-next/anatomy-sha256.txt
             mass-notes-next/package-lock.json
             mass-notes-next/playwright-report/**
             mass-notes-next/test-results/**
