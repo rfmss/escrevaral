@@ -4,7 +4,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const EXPECTED_PARTS = 5
+const EXPECTED_PARTS = 8
 const EXPECTED_ENCODED_LENGTH = 173_912
 const EXPECTED_GZIP_LENGTH = 130_433
 const EXPECTED_GZIP_SHA256 = '3ef59ed30455181b0682db4d8234c3829583551bb007335300be5325c5bf9a07'
