@@ -86,5 +86,29 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - corpora de ausência de padrão foram substituídos por exemplos foneticamente controlados;
 - rima toante real entre “céu” e “luz” foi preservada como comportamento da engine, não removida para satisfazer o teste;
 - adicionados testes de vazio, prosa com e sem ecos, poema rimado, estrofes, verso livre, integridade, obsolescência, exceção e mobile;
-- matriz aprovada em Chromium e Firefox, com 60 execuções;
 - preview atualizada somente após gate verde.
+
+## 2026-07-28
+
+### Gate 6 — contrato de posições
+
+- criado `textPositionContract.ts` sobre o Node ProseMirror real;
+- declarado contrato de offsets em unidades UTF-16;
+- criada assinatura estrutural determinística a partir do JSON Tiptap;
+- separadas identidade do documento e identidade do conteúdo;
+- modelados blocos, segmentos textuais, `hardBreak`, átomos e separadores virtuais;
+- implementadas conversões de pontos e ranges entre texto derivado e posições ProseMirror;
+- adicionada afinidade anterior ou posterior para offsets em separadores;
+- ranges exclusivamente virtuais passam a colapsar em fronteira segura;
+- blocos vazios e parágrafo final do Tiptap são preservados;
+- API somente-leitura é publicada na instância atual do editor para QA e futura integração;
+- consultas foram comprovadas puras, sem alterar HTML, seleção, histórico ou manuscrito;
+- nenhuma decoration ou marcação visual foi criada;
+- cobertos documento vazio, acentos, emoji, `hardBreak`, títulos, listas, blocos vazios, assinatura, troca de documento, clamp e seleção;
+- corrigida serialização estrita de valores não representáveis por JSON;
+- removido uso incompatível do callback `onDestroy` do Tiptap 3;
+- `build.log` passou a integrar o artefato do workflow;
+- ativado `pipefail` para impedir que `tee` masque falha de compilação;
+- corrigido auditor que tentava apagar parágrafo vazio final válido;
+- auditada a contagem real da suíte: 40 cenários por navegador, 80 execuções;
+- build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30323402744`.
