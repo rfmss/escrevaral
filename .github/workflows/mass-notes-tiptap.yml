@@ -59,6 +59,28 @@ jobs:
       - name: Instalar dependências
         run: npm install --no-audit --no-fund
 
+      - name: Versionar lockfile inicial
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        working-directory: .
+        env:
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          if git ls-remote --exit-code --heads origin "${HEAD_BRANCH}" >/dev/null 2>&1; then
+            git fetch origin "${HEAD_BRANCH}:refs/remotes/origin/${HEAD_BRANCH}"
+          fi
+          if git ls-tree -r --name-only "refs/remotes/origin/${HEAD_BRANCH}" | grep -qx "mass-notes-next/package-lock.json"; then
+            echo "Lockfile já está versionado."
+            exit 0
+          fi
+          cp mass-notes-next/package-lock.json /tmp/mass-notes-package-lock.json
+          git checkout -B "${HEAD_BRANCH}" "refs/remotes/origin/${HEAD_BRANCH}"
+          cp /tmp/mass-notes-package-lock.json mass-notes-next/package-lock.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mass-notes-next/package-lock.json
+          git commit -m "build: versionar lockfile do Mass Notes Next"
+          git push origin HEAD:"${HEAD_BRANCH}"
+
       - name: Compilar aplicação
         run: |
           set -o pipefail
