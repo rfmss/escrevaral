@@ -1,3 +1,23 @@
+.experience-view {
+  width: 100%;
+  min-height: 100vh;
+}
+.experience-view[hidden] { display: none !important; }
+body.experience-anatomy { overflow: hidden; }
+
+.action.anatomy-action {
+  border-color: var(--bp-cyan-strong);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--bp-cyan) 18%, transparent), transparent 62%),
+    var(--ui-panel);
+  box-shadow: inset 5px 0 0 var(--bp-cyan-strong);
+}
+.action.anatomy-action:hover {
+  background: var(--bp-cyan-strong);
+  border-color: var(--bp-cyan-strong);
+  color: var(--bp-ink);
+}
+
 .anatomy-host {
   position: relative;
   z-index: 1;
@@ -74,7 +94,7 @@
   pointer-events: none;
   background:
     linear-gradient(rgba(134, 199, 223, .84), rgba(134, 199, 223, .84)),
-    url('/assets/blueprint/anatomia-livro.webp') center / cover no-repeat,
+    var(--anatomy-blueprint-image) center / cover no-repeat,
     var(--bp-canvas);
 }
 .anatomy-host__loading strong {
