@@ -85,7 +85,8 @@ test('em 1024 o manuscrito ocupa a tela e os rails funcionam como drawers', asyn
   await page.setViewportSize({ width: 1024, height: 768 })
   await waitReady(page)
 
-  await expect(page.getByRole('button', { name: 'Abrir arquivo' })).toBeVisible()
+  const libraryTrigger = page.getByRole('button', { name: 'Abrir arquivo' })
+  await expect(libraryTrigger).toBeVisible()
   await expect(page.getByRole('button', { name: 'Abrir ferramentas' })).toBeVisible()
 
   const initial = await page.locator('.sidebar').evaluate((element) => ({
@@ -95,9 +96,17 @@ test('em 1024 o manuscrito ocupa a tela e os rails funcionam como drawers', asyn
   expect(initial.position).toBe('fixed')
   expect(initial.right).toBeLessThanOrEqual(1)
 
-  await page.getByRole('button', { name: 'Abrir arquivo' }).click()
+  await libraryTrigger.click()
   await expect(page.locator('.sidebar')).toHaveClass(/open/)
   await expect(page.locator('.sidebar')).toHaveAttribute('role', 'dialog')
+
+  const layers = await page.evaluate(() => ({
+    trigger: Number(getComputedStyle(document.querySelector('.mobile-menu')!).zIndex),
+    drawer: Number(getComputedStyle(document.querySelector('.sidebar')!).zIndex),
+  }))
+  expect(layers.trigger).toBeLessThan(layers.drawer)
+
+  await page.screenshot({ path: 'test-results/gate6-5-tablet-1024.png', fullPage: true })
   await page.keyboard.press('Escape')
   await expect(page.locator('.sidebar')).not.toHaveClass(/open/)
 
@@ -105,11 +114,20 @@ test('em 1024 o manuscrito ocupa a tela e os rails funcionam como drawers', asyn
   expect(paperWidth).toBeGreaterThan(760)
 })
 
-test('breakpoints não criam overflow horizontal', async ({ page }) => {
-  for (const width of [1440, 1366, 1024, 820, 430, 390, 320]) {
+test('breakpoints não criam overflow horizontal nem cortam a marca', async ({ page }) => {
+  for (const width of [1440, 1366, 1280, 1024, 820, 430, 390, 320]) {
     await page.setViewportSize({ width, height: width <= 430 ? 844 : 768 })
     await waitReady(page)
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
+
+    if (width > 1040) {
+      const brandFits = await page.locator('.brand h1').evaluate((brand) => {
+        const sidebar = brand.closest('.sidebar')!.getBoundingClientRect()
+        const box = brand.getBoundingClientRect()
+        return brand.scrollWidth <= brand.clientWidth && box.right <= sidebar.right + 1
+      })
+      expect(brandFits).toBe(true)
+    }
   }
 })
 
