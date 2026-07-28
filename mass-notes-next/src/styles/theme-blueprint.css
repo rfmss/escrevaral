@@ -122,20 +122,22 @@ kbd {
 
 .paper {
   border-color: var(--bp-cyan-strong);
-  background:
-    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 9px 9px,
+  background-color: var(--bp-paper);
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
     linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan-strong) 38%, transparent) 70px 71px, transparent 71px),
-    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 22%, transparent) 47px 48px),
-    var(--ui-panel);
+    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 22%, transparent) 47px 48px);
+  background-position: 0 0, 0 0, 0 0;
+  background-size: 9px 9px, auto, auto;
   box-shadow: var(--bp-shadow-graphic), var(--bp-shadow-soft);
 }
 
 body.night .paper {
-  background:
-    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 9px 9px,
+  background-color: var(--bp-panel);
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
     linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan) 28%, transparent) 70px 71px, transparent 71px),
-    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px),
-    var(--ui-panel);
+    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px);
 }
 
 .paper::before {
@@ -276,12 +278,19 @@ body.night .action.reading {
 }
 
 @media (max-width: 820px) {
-  .paper,
+  .paper {
+    background-color: var(--bp-paper);
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 20%, transparent) 47px 48px);
+    background-size: 9px 9px, auto;
+  }
+
   body.night .paper {
-    background:
-      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 9px 9px,
-      repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 20%, transparent) 47px 48px),
-      var(--ui-panel);
+    background-color: var(--bp-panel);
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px);
   }
 }
 
