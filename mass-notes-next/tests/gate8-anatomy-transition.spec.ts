@@ -104,7 +104,7 @@ test('Ferramentas abre a Anatomia original, corrige o menu e preserva o editor m
   await interiorButton.click()
   await expect(interiorButton).toHaveAttribute('aria-pressed', 'true')
   await expect(frame.locator('.stage')).toHaveClass(/(?:uses-pageflip|is-open)/)
-  await expect(frame.locator('#pageFlipBook, #book')).toBeVisible()
+  await expect(frame.locator('.stage.uses-pageflip #pageFlipBook, .stage.is-open:not(.uses-pageflip) #book')).toBeVisible()
   await expect(frame.locator('body')).toContainText('A Cartografia do Esquecimento')
 
   const sky = await frame.locator('html').evaluate((element) => getComputedStyle(element).getPropertyValue('--sky').trim())
