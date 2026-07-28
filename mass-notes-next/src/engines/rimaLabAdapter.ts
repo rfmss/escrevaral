@@ -1,3 +1,4 @@
+import type { JSONContent } from '@tiptap/core'
 import rimaLabDataSource from '../../../rimalab-data.json?raw'
 import rimaLabSource from '../../../rimalab-engine.js?raw'
 
@@ -98,6 +99,36 @@ function number(value: unknown): number {
 
 function positiveInteger(value: unknown): number {
   return Math.max(0, Math.floor(number(value)))
+}
+
+function nodeText(node: JSONContent): string {
+  if (node.type === 'text') return node.text ?? ''
+  if (node.type === 'hardBreak') return '\n'
+  return (node.content ?? []).map(nodeText).join('')
+}
+
+function blockLines(node: JSONContent): string[] {
+  if (node.type === 'doc') return (node.content ?? []).flatMap(blockLines)
+  if (node.type === 'paragraph' || node.type === 'heading') {
+    return nodeText(node).split('\n').map((line) => line.trim())
+  }
+  if (node.type === 'blockquote') return (node.content ?? []).flatMap(blockLines)
+  if (node.type === 'bulletList' || node.type === 'orderedList') {
+    return (node.content ?? []).flatMap(blockLines)
+  }
+  if (node.type === 'listItem') {
+    const parts = (node.content ?? []).flatMap(blockLines).filter(Boolean)
+    return [parts.join(' ').trim()]
+  }
+  if (node.content?.length) return node.content.flatMap(blockLines)
+  const value = nodeText(node).trim()
+  return value ? [value] : []
+}
+
+export function createRimaLabSource(content: JSONContent, fallbackPlainText = ''): string {
+  const lines = blockLines(content)
+  if (!lines.some((line) => line.trim())) return fallbackPlainText.trim()
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()
 }
 
 function requestUrl(input: RequestInfo | URL): string {
