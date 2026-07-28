@@ -4,7 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "prepare:anatomy": "node scripts/prepare-anatomy.mjs",
+    "predev": "npm run prepare:anatomy",
     "dev": "vite --host 127.0.0.1",
+    "prebuild": "npm run prepare:anatomy",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
