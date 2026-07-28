@@ -9,16 +9,18 @@ Atualizado em: 2026-07-28
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gates 1, 2, 3, 4, 5, 6, 6.5, 6.75 e 6.9: verdes;
+- Gates 1, 2, 3, 4, 5, 6, 6.5, 6.75, 6.9 e 7: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
-- contrato de posições aprovado sem decorations;
-- auditoria editorial de posições aprovada com textos brasileiros reais;
+- contrato de posições aprovado e auditado com textos brasileiros reais;
+- primeira projection inline aprovada somente para ranges verificáveis da Revisão;
+- navegação de cartão para trecho e ocultação reversível aprovadas;
 - estabilização visual aprovada sem redesign;
 - fusão visual Blueprint Tokon aprovada sem alterar layout;
 - dependências reproduzíveis por overrides, `package-lock.json` e `npm ci`;
-- matriz atual: 59 cenários por navegador, 118 execuções;
-- próximo passo: decisão explícita sobre um gate pequeno de decorations ProseMirror somente de leitura.
+- preview com assets estáveis, fallback e smoke test público;
+- matriz atual: 67 cenários por navegador, 134 execuções;
+- próximo passo: avaliação manual do Gate 7 na preview, sem iniciar novo gate automaticamente.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -53,7 +55,7 @@ Atualizado em: 2026-07-28
 29. `hardBreak` corresponde a um `\n` e a uma unidade ProseMirror.
 30. Blocos vazios, inclusive o parágrafo final criado pelo Tiptap, são estrutura válida e não devem ser apagados pelo derivado textual.
 31. Consultar o contrato não pode despachar transação, alterar seleção, HTML, histórico ou manuscrito.
-32. Decorations não fazem parte do contrato; terão gate, plugin e política de obsolescência próprios.
+32. Decorations ficam fora do contrato de posições e vivem em plugin isolado, com política de obsolescência própria.
 33. Pipelines com `tee` devem usar `set -o pipefail`; registrar logs nunca pode mascarar falha.
 34. Tokens visuais devem ser semânticos: texto, superfície, controle, ativo, desabilitado, foco, seleção, ação e análise são papéis diferentes.
 35. Modo noite não pode depender de herança acidental de cor.
@@ -73,7 +75,12 @@ Atualizado em: 2026-07-28
 49. A família Tiptap deve permanecer travada por versões diretas, overrides e lockfile.
 50. CI e retomadas locais usam `npm ci`; `npm install` não é o caminho normal após o lockfile.
 51. Corpora negativos e auditorias de posição devem usar texto original controlado, mas próximo do uso editorial brasileiro real.
-52. Decorations continuam bloqueadas até gate explícito; aprovação do contrato e da auditoria não equivale a autorização automática para marcação visual.
+52. O Gate 7 autoriza marcações apenas para ranges verificáveis da Revisão; não autoriza outras engines nem aplicação automática.
+53. Uma marca só existe quando documento, assinatura, posição e fragmento correspondem ao snapshot atual.
+54. Edição ou troca de documento remove projections antigas; não se mapeia leitura obsoleta para texto novo.
+55. A forma do DOM não é contrato para decorations sobrepostas; cartões e navegação por ocorrência são o comportamento observável.
+56. Ocultar marcas muda somente a apresentação e não apaga cartões, ranges, leitura ou conteúdo.
+57. Assets de preview usam nomes estáveis e o workflow precisa validar o endereço público antes de concluir.
 
 ## Incidentes que orientam a arquitetura
 
@@ -104,6 +111,11 @@ Atualizado em: 2026-07-28
 - A primeira pauta Blueprint usava `repeating-linear-gradient` e lavava o papel com ciano. Diagnóstico por camadas provou que grain, halftone e canvas não eram a causa. A pauta passou a ser tile de 48 px.
 - No Gate 6.9, o oráculo DOM contou `ProseMirror-trailingBreak` de parágrafos vazios como quebra autoral; o contrato estava correto e o oráculo foi corrigido.
 - Uma instalação limpa resolveu cópia transitiva incompatível de `@tiptap/core` dentro do StarterKit; overrides e lockfile eliminaram a variação.
+- A preview ficou branca porque HTML cacheado podia apontar para assets hash antigos removidos após force-push; assets estáveis, fallback, purge e smoke test público fecharam a lacuna.
+- O primeiro teste do Gate 7 aceitava apenas “trecho localizado”; o plural correto revelou falso negativo no teste.
+- Decorations sobrepostas fundiram atributos DOM; a suíte passou a provar cartões e navegações reais, não contagem de atributos internos.
+- O prop `document` sombreou o global do navegador; TypeScript impediu `document.body` e a referência passou a ser `window.document.body`.
+- Mudanças concorrentes criaram dois controles de visibilidade e dois testes equivalentes; ficaram apenas o controle contextual e a suíte dedicada.
 
 ## Contratos técnicos ativos
 
@@ -155,6 +167,17 @@ A API de QA fica anexada à instância DOM atual do editor como propriedade some
 
 A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo, ensaio, poesia, cordel, canção, Unicode e documento extenso. A evidência consolidada está em `docs/audits/GATE_6_9_POSITION_AUDIT.json`.
 
+### Decorations da Revisão
+
+- somente observações com posição e fragmento verificáveis recebem projection;
+- a projection carrega identidade do documento e assinatura do conteúdo;
+- o plugin mantém `DecorationSet` fora do JSON e do HTML autoral;
+- `transaction.docChanged` limpa todas as marcas;
+- navegação seleciona range e rola para o trecho sem editar;
+- marks sobrepostas podem dividir ou fundir atributos DOM;
+- visibilidade é apresentação reversível por classe no `body`;
+- nenhuma sugestão é aplicada.
+
 ### Dependências
 
 - versões Tiptap diretas permanecem exatas;
@@ -174,7 +197,7 @@ A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo,
 - em até 1040 px os rails são drawers;
 - acionadores permanecem montados para devolução de foco, mas ficam abaixo do drawer aberto;
 - marca e título possuem regressões geométricas em Chromium e Firefox;
-- seleção, ação principal e futura análise possuem papéis cromáticos separados;
+- seleção, ação principal e análise possuem papéis cromáticos separados;
 - o canvas usa blueprint azul, enquanto o papel claro permanece `#f3eee4`;
 - a pauta é tileada a cada 48 px para não colorir a folha inteira.
 
@@ -182,14 +205,13 @@ A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo,
 
 Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor, para cada infraestrutura linguística e para mudanças visuais transversais. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural, round-trip de posições, contraste ou asserções geométricas.
 
-Matriz atual: 59 cenários por navegador, 118 execuções no Gate 6.9.
+Matriz atual: 67 cenários por navegador, 134 execuções no Gate 7. Workflow `30367072054`: build, navegadores, preview e smoke test público verdes.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
-- decorations inline;
-- navegação acessível entre issue e trecho;
+- decorations para Voz, Contexto, RimaLab ou qualquer outra engine;
 - aplicação automática de sugestões;
 - calibração ampla do RimaLab com cordel, repente, canção, poesia falada e variedades regionais;
 - service worker e abertura offline em nova sessão;
@@ -205,12 +227,13 @@ Ainda não estão aprovados:
 1. ler `README.md`, `PLAN.md`, `MEMORY.md` e o log mais recente;
 2. conferir o estado do PR `#155` e o último workflow;
 3. instalar com `npm ci`, nunca depender de resolução transitiva nova;
-4. não pressupor que capturas representam o produto atual;
-5. reproduzir qualquer falha antes de corrigir;
-6. declarar se um offset é UTF-16 antes de comparar resultados;
-7. preservar blocos vazios e separar texto visível de estrutura textual derivada;
-8. ignorar placeholders técnicos do ProseMirror ao construir oráculos DOM;
-9. não iniciar decorations sem autorização explícita e gate próprio;
-10. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
-11. preservar a separação entre canvas Blueprint e papel quente;
-12. atualizar esta memória ao encerrar o lote.
+4. abrir a preview e executar a avaliação manual do Gate 7 antes de desenvolver;
+5. não pressupor que capturas representam o produto atual;
+6. reproduzir qualquer falha antes de corrigir;
+7. declarar se um offset é UTF-16 antes de comparar resultados;
+8. preservar blocos vazios e separar texto visível de estrutura textual derivada;
+9. ignorar placeholders técnicos do ProseMirror ao construir oráculos DOM;
+10. não ampliar decorations para outra engine sem autorização explícita e gate próprio;
+11. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
+12. preservar a separação entre canvas Blueprint e papel quente;
+13. atualizar esta memória ao encerrar o lote.
