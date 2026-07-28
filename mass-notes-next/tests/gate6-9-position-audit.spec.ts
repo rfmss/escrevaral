@@ -91,7 +91,10 @@ async function waitContractMatchesDom(page: Page) {
 
     const readNode = (node: Node): string => {
       if (node.nodeType === Node.TEXT_NODE) return node.nodeValue ?? ''
-      if (node instanceof HTMLBRElement) return '\n'
+      if (node instanceof HTMLBRElement) {
+        if (node.classList.contains('ProseMirror-trailingBreak') || node.classList.contains('ProseMirror-separator')) return ''
+        return '\n'
+      }
       return Array.from(node.childNodes).map(readNode).join('')
     }
 
@@ -118,7 +121,10 @@ async function auditTargets(page: Page, targets: PositionAuditTarget[]) {
 
     const readNode = (node: Node): string => {
       if (node.nodeType === Node.TEXT_NODE) return node.nodeValue ?? ''
-      if (node instanceof HTMLBRElement) return '\n'
+      if (node instanceof HTMLBRElement) {
+        if (node.classList.contains('ProseMirror-trailingBreak') || node.classList.contains('ProseMirror-separator')) return ''
+        return '\n'
+      }
       return Array.from(node.childNodes).map(readNode).join('')
     }
 
