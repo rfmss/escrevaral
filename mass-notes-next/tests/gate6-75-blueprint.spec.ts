@@ -4,6 +4,7 @@ async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+  await expect.poll(() => page.locator('.paper').evaluate((element) => Number(getComputedStyle(element).opacity))).toBe(1)
 }
 
 function rgb(value: string): [number, number, number] {
@@ -90,11 +91,11 @@ test('modo noite mantém a linguagem Blueprint e contraste alto', async ({ page 
   await expect(page.locator('body')).toHaveClass(/night/)
 
   const values = await page.evaluate(() => {
-    const root = getComputedStyle(document.documentElement)
+    const body = getComputedStyle(document.body)
     return {
-      canvas: root.getPropertyValue('--bp-canvas').trim(),
-      panel: root.getPropertyValue('--bp-panel').trim(),
-      text: root.getPropertyValue('--ui-text').trim(),
+      canvas: body.getPropertyValue('--bp-canvas').trim(),
+      panel: body.getPropertyValue('--bp-panel').trim(),
+      text: body.getPropertyValue('--ui-text').trim(),
     }
   })
 
@@ -155,7 +156,7 @@ test('camadas Blueprint não bloqueiam os controles existentes', async ({ page }
   expect(centerLayer.blueprintPointerEvents).toBe('none')
   expect(centerLayer.className).not.toContain('blueprint')
 
-  const search = page.getByRole('searchbox', { name: 'Buscar no arquivo' })
+  const search = page.getByRole('searchbox', { name: 'Buscar documentos' })
   await search.fill('cena')
   await expect(search).toHaveValue('cena')
 
