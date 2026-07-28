@@ -1,5 +1,13 @@
-/* Diagnóstico e estabilização de composição do Gate 6.75. */
+/* Estabilização de composição do Gate 6.75. */
 .paper {
+  background-color: var(--bp-paper) !important;
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+    linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan-strong) 38%, transparent) 70px 71px, transparent 71px),
+    linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 22%, transparent) 47px 48px, transparent 48px) !important;
+  background-position: 0 0, 0 0, 0 0 !important;
+  background-size: 9px 9px, 100% 100%, 100% 48px !important;
+  background-repeat: repeat, no-repeat, repeat-y !important;
   background-clip: border-box !important;
   background-origin: padding-box !important;
   background-blend-mode: normal, normal, normal !important;
@@ -9,4 +17,28 @@
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   isolation: isolate;
+}
+
+body.night .paper {
+  background-color: var(--bp-panel) !important;
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+    linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan) 28%, transparent) 70px 71px, transparent 71px),
+    linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px, transparent 48px) !important;
+}
+
+@media (max-width: 820px) {
+  .paper {
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 20%, transparent) 47px 48px, transparent 48px) !important;
+    background-size: 9px 9px, 100% 48px !important;
+    background-repeat: repeat, repeat-y !important;
+  }
+
+  body.night .paper {
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px, transparent 48px) !important;
+  }
 }
