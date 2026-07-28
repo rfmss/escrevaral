@@ -1,10 +1,16 @@
 import type { JSONContent } from '@tiptap/core'
+import type { Editor } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { editorExtensions } from './editorExtensions'
+import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
 
 type EditorSnapshot = {
   content: JSONContent
   plainText: string
+}
+
+type PositionContractHost = HTMLElement & {
+  __escrevaralPositionContract?: EditorPositionContract
 }
 
 type Props = {
@@ -12,13 +18,21 @@ type Props = {
   content: JSONContent
   resetKey: number
   onChange: (snapshot: EditorSnapshot) => void
+  onPositionContract?: (contract: EditorPositionContract) => void
 }
 
 export function MassNotesEditor(props: Props) {
   return <MassNotesEditorInstance key={`${props.documentId}:${props.resetKey}`} {...props} />
 }
 
-function MassNotesEditorInstance({ content, onChange }: Props) {
+function MassNotesEditorInstance({ documentId, content, onChange, onPositionContract }: Props) {
+  const publishPositionContract = (current: Editor) => {
+    const contract = createEditorPositionContract(current.state.doc, documentId, current.getJSON())
+    const host = current.view.dom as PositionContractHost
+    host.__escrevaralPositionContract = contract
+    onPositionContract?.(contract)
+  }
+
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -31,8 +45,16 @@ function MassNotesEditorInstance({ content, onChange }: Props) {
         lang: 'pt-BR',
       },
     },
+    onCreate: ({ editor: current }) => {
+      publishPositionContract(current)
+    },
     onUpdate: ({ editor: current }) => {
+      publishPositionContract(current)
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
+    },
+    onDestroy: ({ editor: current }) => {
+      const host = current.view.dom as PositionContractHost
+      delete host.__escrevaralPositionContract
     },
   })
 
