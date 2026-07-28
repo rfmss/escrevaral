@@ -210,7 +210,7 @@ test('hardBreak é texto derivado real com largura ProseMirror unitária', async
   })
 
   expect(result.segment).toBeTruthy()
-  expect(result.segment?.pmTo - (result.segment?.pmFrom ?? 0)).toBe(1)
+  expect((result.segment?.pmTo ?? 0) - (result.segment?.pmFrom ?? 0)).toBe(1)
   expect(result.positionRange.to - result.positionRange.from).toBe(1)
   expect(result.textRange).toMatchObject({ from: result.offset, to: result.offset + 1, collapsed: false })
 })
@@ -218,7 +218,7 @@ test('hardBreak é texto derivado real com largura ProseMirror unitária', async
 test('títulos e listas mantêm ordem monotônica através de wrappers', async ({ page }) => {
   await waitReady(page)
   await createCleanDocument(page, 'Estrutura aninhada')
-  const expected = 'Título\n\nprimeiro\n\nsegundo'
+  const expected = 'Título\n\nprimeiro\n\nsegundo\n\n'
   await pasteStructuredText(page, '<h3>Título</h3><ul><li>primeiro</li><li>segundo</li></ul>', expected)
   await waitContractText(page, expected)
 
@@ -232,14 +232,15 @@ test('títulos e listas mantêm ordem monotônica através de wrappers', async (
     })
     return {
       text: contract.snapshot.text,
-      blockTypes: contract.snapshot.blocks.map((block) => block.nodeType),
+      blocks: contract.snapshot.blocks,
       ranges,
       signature: contract.snapshot.contentSignature,
     }
   })
 
   expect(result.text).toBe(expected)
-  expect(result.blockTypes).toEqual(['heading', 'paragraph', 'paragraph'])
+  expect(result.blocks.map((block) => block.nodeType)).toEqual(['heading', 'paragraph', 'paragraph', 'paragraph'])
+  expect(result.blocks.at(-1)).toMatchObject({ empty: true })
   expect(result.ranges[0].to).toBeLessThan(result.ranges[1].from)
   expect(result.ranges[1].to).toBeLessThan(result.ranges[2].from)
   expect(result.signature).toMatch(/^pm-json-v1-[0-9a-f]{8}-\d+$/)
@@ -284,9 +285,12 @@ test('assinatura estrutural muda quando o mesmo texto vira título', async ({ pa
   await expect.poll(async () => (await readSnapshot(page)).contentSignature).not.toBe(before.contentSignature)
   const after = await readSnapshot(page)
 
-  expect(after.text).toBe(before.text)
+  expect(after.text.replace(/\n+$/, '')).toBe(before.text)
+  expect(before.blocks).toHaveLength(1)
   expect(before.blocks[0].nodeType).toBe('paragraph')
+  expect(after.blocks).toHaveLength(2)
   expect(after.blocks[0].nodeType).toBe('heading')
+  expect(after.blocks[1]).toMatchObject({ nodeType: 'paragraph', empty: true })
   expect(after.contentSignature).not.toBe(before.contentSignature)
 })
 
