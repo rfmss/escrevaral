@@ -68,6 +68,7 @@ export function RightRail({
   const [voiceReading, setVoiceReading] = useState<VoiceReading | null>(null)
   const [voiceMessage, setVoiceMessage] = useState('Aguardando uma escuta.')
   const [voiceAnalyzing, setVoiceAnalyzing] = useState(false)
+  const [reviewMarksVisible, setReviewMarksVisible] = useState(true)
   const voiceToken = useRef(0)
   const panelRef = useModalDrawer<HTMLElement>(open, onClose)
   const words = countWords(document.plainText)
@@ -80,9 +81,24 @@ export function RightRail({
     setVoiceMessage('O texto mudou. Faça uma nova escuta quando quiser.')
   }, [document.id, document.plainText])
 
+  useEffect(() => {
+    setReviewMarksVisible(true)
+    document.body.classList.remove('review-marks-hidden')
+  }, [document.id, locatedIssues])
+
+  useEffect(() => () => document.body.classList.remove('review-marks-hidden'), [])
+
   const readText = () => {
     setTab('revisao')
     onAnalyze()
+  }
+
+  const toggleReviewMarks = () => {
+    setReviewMarksVisible((visible) => {
+      const next = !visible
+      document.body.classList.toggle('review-marks-hidden', !next)
+      return next
+    })
   }
 
   const runVoice = async () => {
@@ -193,7 +209,17 @@ export function RightRail({
 
             {locatedIssues.length > 0 && (
               <section className="review-located" aria-labelledby="review-located-title">
-                <h3 id="review-located-title">Trechos localizados</h3>
+                <div className="review-located-heading">
+                  <h3 id="review-located-title">Trechos localizados</h3>
+                  <button
+                    type="button"
+                    className="review-visibility"
+                    aria-pressed={!reviewMarksVisible}
+                    onClick={toggleReviewMarks}
+                  >
+                    {reviewMarksVisible ? 'Ocultar marcas' : 'Mostrar marcas'}
+                  </button>
+                </div>
                 <p>A marca apenas aponta o trecho. O texto não será alterado.</p>
                 <div className="review-located-list">
                   {locatedIssues.map((issue) => (
