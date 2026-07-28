@@ -170,6 +170,31 @@ test('fragmentos repetidos mantêm duas posições navegáveis mesmo com decorat
   await expect.poll(() => selectedBlockText(page)).toContain('A segunda equipe')
 })
 
+test('marcações podem ser ocultadas e reexibidas sem apagar a leitura', async ({ page }) => {
+  await waitReady(page)
+  await createDocument(page, 'Controle de marcações')
+  const before = await snapshot(page)
+  await analyze(page)
+
+  await expect(page.locator('[data-review-issue-id]')).not.toHaveCount(0)
+  const locatedCards = page.locator('.review-located-card')
+  const locatedCount = await locatedCards.count()
+  expect(locatedCount).toBeGreaterThan(0)
+
+  await page.getByRole('button', { name: 'Ocultar marcações' }).click()
+  await expect(page.locator('[data-review-issue-id]')).toHaveCount(0)
+  await expect(locatedCards).toHaveCount(locatedCount)
+  await expect(page.getByRole('button', { name: 'Mostrar marcações' })).toBeVisible()
+
+  await page.getByRole('button', { name: 'Mostrar marcações' }).click()
+  await expect(page.locator('[data-review-issue-id]')).not.toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Ocultar marcações' })).toBeVisible()
+
+  const after = await snapshot(page)
+  expect(after.contentSignature).toBe(before.contentSignature)
+  expect(after.text).toBe(before.text)
+})
+
 test('posição ou fragmento não verificável nunca produz decoration', async ({ page }) => {
   await waitReady(page)
   await createDocument(page, 'Resposta defensiva')
