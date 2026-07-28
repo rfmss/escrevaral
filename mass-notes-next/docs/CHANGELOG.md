@@ -112,3 +112,23 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - corrigido auditor que tentava apagar parágrafo vazio final válido;
 - auditada a contagem real da suíte: 40 cenários por navegador, 80 execuções;
 - build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30323402744`.
+
+### Gate 6.5 — estabilização visual e de experiência
+
+- criada camada visual reversível em `design-stabilization.css` e `design-stabilization-mobile.css`;
+- introduzidos tokens semânticos para superfícies, texto, controle, borda, ativo, desabilitado, foco, seleção, ação e futura análise;
+- corrigido contraste explícito de papel e noite em biblioteca, tabs, toolbar, ações, atalhos e conteúdo;
+- toolbar passou a quebrar linha no desktop, sem rolagem horizontal silenciosa;
+- grupos da toolbar receberam nomes e ajuda nativa para abreviações;
+- estados ativo, inativo e desabilitado passaram a usar papéis visuais distintos;
+- rails foram estreitados com proteção geométrica da marca;
+- biblioteca e ferramentas passaram a operar como drawers a partir de 1040 px;
+- acionadores móveis permanecem montados para retorno de foco, mas ficam abaixo do drawer aberto;
+- título móvel ganhou padding e escala com folga para métricas de Chromium e Firefox;
+- reduzidas opacidades de grain, halftone e blueprint;
+- reduzida densidade de bordas, caixas e linhas sem remover a estética editorial;
+- transições cromáticas dos controles foram removidas para impedir contraste insuficiente durante a troca de tema;
+- adicionados testes de contraste, toolbar, 1024 px, breakpoints, marca e estados de controle;
+- matriz elevada para 45 cenários por navegador, 90 execuções;
+- build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30327303435`;
+- artefato final sem falhas ou flakiness.
