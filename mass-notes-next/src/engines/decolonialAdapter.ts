@@ -15,6 +15,8 @@ export type ContextTerm = {
 
 type LegacyEntry = Record<string, unknown>
 
+let loadingPromise: Promise<boolean> | null = null
+
 declare global {
   interface Window {
     VeredaDecolonial?: {
@@ -66,9 +68,7 @@ function requestUrl(input: RequestInfo | URL): string {
   return input.url
 }
 
-function executeClassicScriptWithLocalData(): void {
-  if (document.querySelector('script[data-escrevaral-engine="decolonial-engine.js"]')) return
-
+async function loadEngineWithLocalData(): Promise<boolean> {
   const originalFetch = window.fetch
   window.fetch = ((input: RequestInfo | URL, init?: RequestInit) => {
     const url = requestUrl(input)
@@ -82,10 +82,23 @@ function executeClassicScriptWithLocalData(): void {
   }) as typeof window.fetch
 
   try {
-    const script = document.createElement('script')
-    script.dataset.escrevaralEngine = 'decolonial-engine.js'
-    script.textContent = `${decolonialSource}\n//# sourceURL=decolonial-engine.js`
-    document.head.append(script)
+    if (!document.querySelector('script[data-escrevaral-engine="decolonial-engine.js"]')) {
+      const script = document.createElement('script')
+      script.dataset.escrevaralEngine = 'decolonial-engine.js'
+      script.textContent = `${decolonialSource}\n//# sourceURL=decolonial-engine.js`
+      document.head.append(script)
+    }
+
+    const engine = window.VeredaDecolonial
+    if (!engine) return false
+
+    // A engine inicia uma carga ao ser executada. Mantemos a ponte local ativa
+    // também durante esta espera para que chamadas concorrentes usem a mesma base.
+    await engine.ensureLoaded()
+    await Promise.resolve()
+
+    window.__escrevaralDecolonialLoaded = engine.isLoaded() && !engine.hasLoadError()
+    return window.__escrevaralDecolonialLoaded
   } finally {
     window.fetch = originalFetch
   }
@@ -93,18 +106,16 @@ function executeClassicScriptWithLocalData(): void {
 
 export async function ensureDecolonialEngine(): Promise<boolean> {
   if (window.__escrevaralDecolonialLoaded && window.VeredaDecolonial?.isLoaded()) return true
+  if (loadingPromise) return loadingPromise
 
-  try {
-    executeClassicScriptWithLocalData()
-    const engine = window.VeredaDecolonial
-    if (!engine) return false
-    await engine.ensureLoaded()
-    window.__escrevaralDecolonialLoaded = engine.isLoaded() && !engine.hasLoadError()
-    return window.__escrevaralDecolonialLoaded
-  } catch (error) {
+  loadingPromise = loadEngineWithLocalData().catch((error) => {
     console.error('[Escrevaral] Não foi possível carregar Termos que pedem contexto.', error)
     return false
-  }
+  })
+
+  const loaded = await loadingPromise
+  if (!loaded) loadingPromise = null
+  return loaded
 }
 
 export async function detectContextTerms(sourceText: string): Promise<ContextTerm[]> {
