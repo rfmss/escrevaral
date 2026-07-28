@@ -88,6 +88,40 @@ jobs:
           git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push --force origin HEAD:refs/heads/preview-mass-notes-tiptap
 
+      - name: Renovar cache da preview
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        continue-on-error: true
+        working-directory: .
+        run: |
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
+          for path in index.html assets/index.js assets/index.css; do
+            curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
+          done
+
+      - name: Verificar preview pública
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        working-directory: .
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
+          for attempt in $(seq 1 18); do
+            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css
+            if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/mass-notes-index.html \
+              && grep --quiet './assets/index.js' /tmp/mass-notes-index.html \
+              && grep --quiet './assets/index.css' /tmp/mass-notes-index.html \
+              && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
+              && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
+              && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
+              && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000; then
+              echo "Preview pública respondeu com HTML, JavaScript e CSS coerentes."
+              exit 0
+            fi
+            echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
+            sleep 10
+          done
+          echo "A preview pública não entregou o conjunto coerente de assets após 3 minutos."
+          exit 1
+
       - name: Guardar relatório do Playwright
         if: always()
         uses: actions/upload-artifact@v4
