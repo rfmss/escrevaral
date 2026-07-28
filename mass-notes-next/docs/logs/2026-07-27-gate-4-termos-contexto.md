@@ -1,7 +1,7 @@
 # Log — Gate 4: Termos que pedem contexto
 
 Data: 2026-07-27
-Estado: em andamento
+Estado: concluído
 Branch: `experiment/mass-notes-tiptap`
 PR: `#155` (rascunho)
 
@@ -36,110 +36,122 @@ A engine expõe `window.VeredaDecolonial` com:
 
 1. A interface se chama **Termos que pedem contexto**.
 2. Um resultado não é uma acusação, proibição ou ordem de substituição.
-3. Narrador, personagem, época, citação e intenção crítica precisam permanecer visíveis na orientação.
-4. Não haverá botão de aplicar alternativa.
+3. Narrador, personagem, época, citação e intenção crítica permanecem visíveis na orientação.
+4. Não há botão de aplicar alternativa.
 5. O usuário examina o contexto e decide.
-6. Resultados ficam fora do editor neste gate.
+6. Resultados permanecem fora do editor neste gate.
 
-## Riscos
+## Implementação final
 
-- a engine carrega a base por `fetch('decolonial-data.json')` relativo;
-- duplicar manualmente a base criaria risco de divergência;
-- uma quinta aba pode apertar o rail;
-- resultados podem soar prescritivos se a linguagem da interface for inadequada;
-- o autosave não pode invalidar uma leitura do mesmo conteúdo;
-- falha da base não pode quebrar outras engines.
-
-## Plano técnico
-
-1. criar `src/engines/decolonialAdapter.ts`;
-2. fornecer a base original ao carregamento da engine sem modificar o script;
-3. normalizar retorno em contrato TypeScript;
-4. criar `src/components/ContextPanel.tsx`;
-5. adicionar aba `Contexto` ao rail;
-6. invalidar por `document.id` e `plainText`;
-7. testar vazio, nenhum termo, termo com múltiplas ocorrências, alternativas, invalidação e falha;
-8. rodar Chromium e Firefox;
-9. só publicar preview depois do gate verde;
-10. fechar plano, memória, changelog e documentação global.
-
-## Critério de aprovação
-
-- engine e base intactas;
-- nenhuma mudança automática no texto;
-- resultados reproduzíveis e contados corretamente;
-- linguagem contextual e não acusatória;
-- ausência de regressão nas engines anteriores;
-- Chromium e Firefox verdes;
-- preview publicada somente após gate verde.
-
-## Implementação inicial
-
-- adaptador criado em `src/engines/decolonialAdapter.ts`;
-- base original fornecida à engine durante o carregamento, sem cópia editada;
-- painel criado em `src/components/ContextPanel.tsx`;
-- aba `Contexto` adicionada ao rail;
-- cinco abas organizadas em duas linhas equilibradas;
-- seis cenários novos adicionados ao Playwright;
-- workflow passou a observar engine e base.
+- adaptador: `src/engines/decolonialAdapter.ts`;
+- painel: `src/components/ContextPanel.tsx`;
+- aba `Contexto` no rail;
+- cinco abas organizadas em duas linhas;
+- base original importada como recurso raw e entregue à engine durante a inicialização;
+- carregamento serializado por promessa compartilhada;
+- ponte temporária de `fetch` restaurada em `finally`;
+- invalidação por `document.id` e `plainText`;
+- nenhuma alteração automática no manuscrito;
+- seis cenários novos em Chromium e Firefox;
+- captura visual específica nos dois navegadores;
+- regressão geométrica para nomes de termos.
 
 ## Tentativa 1
 
 - commit testado: `d367f4838e913f973e921f1d15223bb98ce21fea`;
 - workflow: `30316002586`;
-- build TypeScript/Vite: aprovado;
+- build: aprovado;
 - testes: falharam antes de exercer a engine;
-- preview: corretamente bloqueada.
+- preview: bloqueada.
 
-### Causa
+### Causa e decisão
 
-O helper novo esperava `data-document-id` em `.note-card.active`, mas esse atributo não faz parte do contrato da biblioteca. Todos os cenários ficaram presos tentando observar um identificador inexistente.
+O helper esperava `data-document-id`, atributo inexistente na biblioteca. O produto não recebeu atributo de teste; a sincronização passou a usar contagem visível de páginas e título vazio.
 
-### Decisão
-
-Não adicionar atributo de teste ao produto. A criação passa a ser sincronizada pela contagem visível de páginas e pelo título vazio do documento recém-criado.
-
-### Correção
-
-- helper alterado no commit `75a1347d819234c21e3b3298a219fd4450085786`;
-- nenhuma mudança de produto foi necessária.
+Correção: `75a1347d819234c21e3b3298a219fd4450085786`.
 
 ## Tentativa 2
 
 - commit testado: `6ae7659f7b71fa8e20842aa92236b512ec2d7b0b`;
 - workflow: `30316388382`;
-- build TypeScript/Vite: aprovado;
-- página vazia e layout mobile: aprovados;
+- build: aprovado;
+- vazio e mobile: aprovados;
 - quatro fluxos com engine: falharam;
-- preview: corretamente bloqueada.
+- preview: bloqueada.
 
 ### Falha real — concorrência na inicialização
 
-Ao executar o script, a engine chama `ensureLoaded()` imediatamente. O adaptador restaurava o `fetch` original e depois chamava `ensureLoaded()` novamente. As duas cargas concorriam: uma recebia a base empacotada e a segunda tentava buscar `decolonial-data.json` no servidor. A segunda falha marcava `_loadError`, tornando a engine indisponível mesmo quando a primeira carga havia recebido os dados.
+A engine chama `ensureLoaded()` ao ser executada. O adaptador restaurava o `fetch` original e iniciava uma segunda carga. Uma chamada recebia a base empacotada; a outra tentava buscar o arquivo no servidor e marcava `_loadError`.
 
-### Decisão
+### Decisão e correção
 
-A ponte de `fetch` local deve permanecer ativa até a inicialização da engine terminar. Uma única promessa compartilhada passa a representar o carregamento; chamadas concorrentes aguardam o mesmo resultado.
+- manter a ponte local até a inicialização terminar;
+- representar o carregamento por uma promessa compartilhada;
+- fazer chamadas concorrentes aguardarem o mesmo resultado;
+- restaurar `fetch` em `finally`.
 
-### Correção de produto
-
-- inicialização serializada por `loadingPromise`;
-- ponte local mantida durante `ensureLoaded()`;
-- `fetch` global restaurado em `finally`;
-- correção no commit `109acf3108340a5484ccbb127fbc75166f437797`.
+Correção: `109acf3108340a5484ccbb127fbc75166f437797`.
 
 ### Falha do auditor
 
-O cenário de exceção tentava importar `/src/engines/decolonialAdapter.ts` no build Vite de preview. Arquivos TypeScript de fonte não existem como rota no build compilado.
+O teste de exceção importava TypeScript de fonte no build compilado. O cenário passou a carregar a engine pelo produto e só depois substituir temporariamente a API global por uma exceção controlada.
 
-### Correção do auditor
+Correção: `fa00d3b84b52a703037e978e3282c1b5c010fbc7`.
 
-O cenário agora realiza uma leitura real para confirmar a carga e, em seguida, substitui temporariamente `window.VeredaDecolonial.detectText` por uma exceção controlada. A correção está no commit `fa00d3b84b52a703037e978e3282c1b5c010fbc7`.
+## Tentativa 3 — gate funcional
 
-## Próxima execução
+- commit registrado no fechamento documental: `e6c9886813ce5873a1e7702b40246d94cc8cb6ba`;
+- workflow: `30316728298`;
+- build: aprovado;
+- Chromium: aprovado;
+- Firefox: aprovado;
+- 21 cenários por navegador, 42 execuções;
+- preview: publicada.
 
-Repetir build e matriz completa em Chromium e Firefox. Preview permanece bloqueada até gate verde.
+Foram comprovados:
+
+- vazio sem falso alerta;
+- dois termos e três ocorrências contados corretamente;
+- texto sem ocorrências com retorno neutro;
+- manuscrito preservado byte a byte no fluxo exercitado;
+- nenhum botão de substituição nos cartões;
+- invalidação após edição;
+- exceção isolada;
+- editor funcional após falha;
+- mobile sem overflow;
+- gates anteriores sem regressão.
+
+## Revisão visual
+
+As capturas mostraram que o contador ao lado do nome fazia “DENEGRIR” quebrar no meio. A contagem foi movida para linha própria; `word-break`, `overflow-wrap` e `hyphens` foram restringidos para o nome do termo.
+
+- commit visual: `741340070f5f37f420aaee0f2f76ad74b7f734f7`;
+- workflow: `30316983906`;
+- build, Chromium, Firefox e preview: aprovados;
+- teste geométrico confirma `scrollWidth <= clientWidth` nos títulos dos cartões.
+
+## Evidência final
+
+- engine e base originais: intactas;
+- aplicação pública, `main` e service worker: intactos;
+- matriz: 21 cenários em Chromium e Firefox, 42 execuções;
+- preview: `preview-mass-notes-tiptap`;
+- capturas: `termos-contexto-chromium.png` e `termos-contexto-firefox.png`;
+- artefatos preservados pelo workflow por 14 dias.
+
+## Limitações honestas
+
+Ainda dependem de avaliação humana:
+
+- falsos positivos e omissões em corpus amplo;
+- adequação da linguagem para gêneros, épocas e narradores diferentes;
+- leitor de tela real;
+- teclado virtual real;
+- textos extensos com muitas ocorrências;
+- eventual navegação do cartão até o trecho correspondente.
 
 ## Decisão final
 
-Pendente.
+**Gate 4 aprovado para avaliação manual e continuidade experimental.**
+
+A aprovação não autoriza merge, publicação pública, alteração automática do texto ou decorations inline. O próximo gate proposto é o RimaLab, somente após revisão manual ou autorização explícita.
