@@ -1,7 +1,7 @@
 # Log — Gate 5: RimaLab
 
 Data: 2026-07-27
-Estado: em andamento
+Estado: aprovado para avaliação manual
 Branch: `experiment/mass-notes-tiptap`
 PR: `#155` (rascunho)
 
@@ -47,51 +47,16 @@ A engine expõe `window.VeredaRimaLab` com:
 7. Não há ação automática sobre o manuscrito.
 8. Busca de palavras que rimam e enciclopédia completa ficam fora do primeiro corte.
 
-## Riscos
-
-- a engine carrega `rimalab-data.json` por caminho relativo;
-- a inicialização imediata pode concorrer com chamadas do adaptador;
-- quebras de linha do Tiptap precisam chegar intactas à engine;
-- prosa poética pode ser classificada como verso ou prosa dependendo da diagramação;
-- escansão automática pode soar definitiva se a interface ocultar a ressalva;
-- uma sexta aba pode apertar o rail;
-- listas longas de versos e pares podem degradar a leitura no mobile.
-
-## Plano técnico
-
-1. criar `src/engines/rimaLabAdapter.ts`;
-2. fornecer a base original durante toda a inicialização assíncrona;
-3. normalizar prosa e verso em união discriminada TypeScript;
-4. criar `src/components/RimaLabPanel.tsx`;
-5. adicionar aba `RimaLab` ao rail;
-6. invalidar por `document.id` e `plainText`;
-7. testar vazio, prosa sem padrão, prosa com padrão, verso livre, verso rimado, estrofes, invalidação e falha;
-8. verificar integridade do manuscrito e ausência de botões de aplicação;
-9. rodar Chromium e Firefox;
-10. só publicar preview depois do gate verde;
-11. fechar plano, memória, changelog e documentação global.
-
-## Critério de aprovação
-
-- engine e base intactas;
-- nenhuma mudança automática no texto;
-- prosa e verso apresentados com linguagem distinta;
-- nota acadêmica sempre visível em análises métricas;
-- resultados obsoletos descartados;
-- falha isolada do editor e das engines anteriores;
-- rail e mobile legíveis;
-- Chromium e Firefox verdes;
-- preview publicada somente após gate verde.
-
-## Implementação inicial
+## Implementação
 
 - adaptador criado com união discriminada de prosa e verso;
 - engine e base originais carregadas por ponte temporária de `fetch`;
 - carregamento serializado por promessa compartilhada;
-- serializador próprio transforma JSON Tiptap em linhas sonoras e preserva blocos vazios como fronteiras de estrofe;
+- serializador próprio transforma JSON Tiptap em linhas sonoras;
+- blocos vazios são preservados como fronteiras de estrofe;
 - painel criado com ecos de prosa, resumo de verso, esquema, estrofes, escansão, pares e ressalva;
 - sexta aba organizada em grade 3 × 2;
-- nove cenários novos adicionados, elevando a matriz para 30 por navegador;
+- nove cenários novos elevaram a matriz para 30 por navegador;
 - workflow passou a observar engine e base do RimaLab.
 
 ## Tentativa 1
@@ -100,14 +65,14 @@ A engine expõe `window.VeredaRimaLab` com:
 - workflow: `30318459430`;
 - TypeScript/Vite: aprovado;
 - testes RimaLab: seis de nove cenários aprovados em cada navegador;
-- gates anteriores: várias falhas por contrato acessível de abas;
+- gates anteriores: falharam em cascata por contrato acessível de abas;
 - preview: corretamente bloqueada.
 
 ### Regressão de contrato acessível
 
-Os rótulos das abas foram capitalizados e “revisao” recebeu acento. Os testes anteriores usam os nomes acessíveis estáveis em minúsculas. A mudança não agregava funcionalidade e quebrou Revisão, Voz, Contexto e drawers.
+Os rótulos das abas foram capitalizados e “revisao” recebeu acento. Os testes anteriores usam nomes acessíveis estáveis em minúsculas.
 
-**Decisão:** restaurar os nomes acessíveis originais (`pulso`, `revisao`, `voz`, `contexto`, `ferramentas`) e acrescentar `rimalab` no mesmo padrão. A aparência continua em caixa alta pelo CSS.
+**Decisão:** restaurar `pulso`, `revisao`, `voz`, `contexto` e `ferramentas`, acrescentando `rimalab` no mesmo padrão. A aparência em caixa alta continua sendo responsabilidade do CSS.
 
 ### Premissa textual do auditor
 
@@ -117,20 +82,75 @@ O teste procurava a expressão singular “padrão sonoro”, mas o resultado co
 
 ### Corpus supostamente neutro
 
-A frase escolhida para “prosa sem padrão” produziu três grupos de assonância reais para a heurística: `abriu/observou/voltou`, `janela/mesa` e `quintal/devagar`.
+A frase escolhida para “prosa sem padrão” produziu três grupos de assonância reais: `abriu/observou/voltou`, `janela/mesa` e `quintal/devagar`.
 
-**Decisão:** substituir o corpus artificial por palavras com finais fonéticos deliberadamente distintos, em vez de enfraquecer a engine.
+**Decisão:** usar corpus foneticamente controlado em vez de enfraquecer a engine.
 
 ### Verso livre com rima toante
 
 O corpus terminava em “céu”, “mar”, “luz” e “fim”. A engine percebeu uma rima toante entre “céu” e “luz”.
 
-**Decisão:** o teste de ausência de pares passa a usar finais foneticamente distintos. A leitura original não será tratada como bug.
+**Decisão:** preservar a leitura da engine e substituir apenas o corpus do cenário de ausência de pares.
 
-## Próxima execução
+## Tentativa 2 — gate verde
 
-Repetir build e a matriz completa de 60 execuções. A preview permanece bloqueada até gate verde.
+- commit documentado: `63590c6eb9e4531ea42d0d154f7460431de34289`;
+- workflow: `30319511220`;
+- TypeScript/Vite: aprovado;
+- Chromium: 30 de 30 cenários aprovados;
+- Firefox: 30 de 30 cenários aprovados;
+- total: 60 execuções de navegador;
+- preview: publicada após gate verde;
+- gates 1 a 4: aprovados novamente;
+- manuscrito: preservado;
+- falha controlada: isolada;
+- mobile: sem overflow;
+- seis abas: legíveis e acessíveis.
+
+## Inspeção visual
+
+As capturas confirmaram:
+
+- resumo sonoro legível;
+- hierarquia clara entre modo, esquema, escansão e pares;
+- nota pedagógica visível;
+- grade de abas estável;
+- nenhum resultado cobrindo o papel;
+- rolagem interna do rail preservada.
+
+A primeira captura do Chromium ocorreu antes de o autosave refletir o título novo na biblioteca. O teste passou a aguardar o título ativo antes de gerar evidência; não houve perda de dados.
+
+## Matriz aprovada
+
+O Gate 5 cobre em Chromium e Firefox:
+
+1. página vazia sem falsa leitura;
+2. prosa com ecos internos;
+3. prosa sem padrão com retorno neutro;
+4. poema rimado com esquema, escansão e pares;
+5. duas estrofes preservadas por bloco vazio;
+6. verso livre sem pares com linguagem não punitiva;
+7. invalidação após edição;
+8. falha controlada sem quebrar editor ou Revisão;
+9. mobile, seis abas e ausência de overflow.
+
+Somados aos gates anteriores: 30 cenários por navegador, 60 execuções.
+
+## Limites
+
+Ainda não foram aprovados:
+
+- calibração ampla com cordel, repente, canção e variedades regionais;
+- busca interativa de palavras para rimar;
+- enciclopédia completa na nova interface;
+- reprodução de áudio;
+- contrato de posições;
+- decorations inline;
+- alteração automática do manuscrito;
+- service worker e promoção para a aplicação pública.
 
 ## Decisão final
 
-Pendente.
+**Gate 5 aprovado para avaliação manual e continuidade experimental.**
+
+A aprovação não autoriza merge, publicação pública, decorations ou aplicação automática. O próximo lote permanece bloqueado até avaliação manual ou nova autorização explícita.
