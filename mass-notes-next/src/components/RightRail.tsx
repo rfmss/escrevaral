@@ -101,6 +101,10 @@ export function RightRail({
     })
   }
 
+  const openAnatomy = () => {
+    window.dispatchEvent(new Event('escrevaral:open-anatomy'))
+  }
+
   const runVoice = async () => {
     const token = ++voiceToken.current
     setVoiceAnalyzing(true)
@@ -316,6 +320,9 @@ export function RightRail({
 
         {tab === 'ferramentas' && (
           <section id="panel-ferramentas" role="tabpanel" aria-labelledby="tab-ferramentas" className="panel active">
+            <div className="section-label">Objeto editorial</div>
+            <button className="action anatomy-action" type="button" onClick={openAnatomy}>Abrir Anatomia do Livro</button>
+            <div className="section-label">Arquivo e ambiente</div>
             <button className="action primary" type="button" onClick={onExport}>Exportar .txt</button>
             <button className="action" type="button" onClick={onDuplicate}>Duplicar página</button>
             <button className="action" type="button" onClick={onFocus}>Modo concentração</button>
