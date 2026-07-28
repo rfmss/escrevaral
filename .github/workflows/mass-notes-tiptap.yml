@@ -13,6 +13,8 @@ on:
       - "voice-engine.js"
       - "decolonial-engine.js"
       - "decolonial-data.json"
+      - "rimalab-engine.js"
+      - "rimalab-data.json"
       - "js/data/criterios-data.js"
   pull_request:
     branches:
@@ -26,6 +28,8 @@ on:
       - "voice-engine.js"
       - "decolonial-engine.js"
       - "decolonial-data.json"
+      - "rimalab-engine.js"
+      - "rimalab-data.json"
       - "js/data/criterios-data.js"
   workflow_dispatch:
 
