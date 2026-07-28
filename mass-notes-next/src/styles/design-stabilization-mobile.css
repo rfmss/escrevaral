@@ -5,7 +5,7 @@
   }
 
   .title-input {
-    font-size: clamp(1.65rem, 8.5vw, 1.85rem);
-    letter-spacing: -.03em;
+    font-size: clamp(1.55rem, 8vw, 1.75rem);
+    letter-spacing: -.035em;
   }
 }
