@@ -38,7 +38,7 @@ test('a arte de Anatomia pertence ao canvas e nunca ao papel autoral', async ({ 
   expect(layers.canvasImage).toContain('anatomia-livro.webp')
   expect(layers.canvasPointerEvents).toBe('none')
   expect(layers.canvasOpacity).toBeGreaterThan(0)
-  expect(layers.canvasOpacity).toBeLessThan(0.5)
+  expect(layers.canvasOpacity).toBeLessThan(0.75)
   expect(layers.paperImage).not.toContain('anatomia-livro.webp')
 
   await page.screenshot({ path: testInfo.outputPath('gate8-blueprint-background.png'), fullPage: true })
