@@ -2,4 +2,4 @@ dist/
 playwright-report/
 test-results/
 public/anatomia-do-livro.html
-public/assets/blueprint/anatomia-livro-render.png
+public/assets/blueprint/anatomia-livro-render.webp
