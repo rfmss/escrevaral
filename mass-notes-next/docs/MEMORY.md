@@ -9,11 +9,10 @@ Atualizado em: 2026-07-27
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gate 1: verde;
-- Gate 2: verde em Chromium e Firefox;
-- Gate 3: verde em Chromium e Firefox;
-- engines integradas: Revisão e Espelho de Voz;
-- próximo passo: avaliação manual do Espelho de Voz antes do Gate 4.
+- Gates 1, 2, 3 e 4: verdes;
+- navegadores obrigatórios: Chromium e Firefox;
+- engines integradas: Revisão, Espelho de Voz e Termos que pedem contexto;
+- próximo passo: avaliação manual do Gate 4 antes do RimaLab.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -29,6 +28,9 @@ Atualizado em: 2026-07-27
 10. Documentação, testes e logs fazem parte da definição de pronto.
 11. Uma análise linguística é invalidada por mudança do documento ou do conteúdo, não por autosave do mesmo conteúdo.
 12. Voz, público e ecos literários devem ser apresentados como hipóteses heurísticas, nunca diagnóstico definitivo.
+13. Termos contextuais não são erros nem palavras proibidas; narrador, personagem, época, citação e intenção crítica fazem parte da decisão.
+14. Nenhuma alternativa contextual pode alterar o manuscrito sem ação humana explícita e um gate próprio.
+15. Bases carregadas por caminho relativo devem ser fornecidas pelo adaptador durante toda a inicialização assíncrona, sem editar a engine ou manter cópia manual divergente.
 
 ## Incidentes que orientam a arquitetura
 
@@ -38,6 +40,9 @@ Atualizado em: 2026-07-27
 - O histórico Tiptap inicialmente atravessava documentos; foi isolado remontando a instância por documento.
 - O workflow passou a bloquear a publicação da preview quando o gate falha.
 - O Espelho de Voz inicialmente desaparecia após autosave porque a revisão persistida era confundida com mudança semântica; Firefox revelou a condição temporal.
+- O vocabulário contextual inicialmente falhou porque duas chamadas concorrentes de `ensureLoaded()` usaram fontes de dados diferentes; o carregamento passou a usar uma promessa compartilhada e a ponte local permanece ativa até a conclusão.
+- Um teste tentou importar TypeScript de fonte no build compilado; testes de falha agora atuam sobre a API global já carregada pelo produto.
+- A primeira captura contextual quebrou “DENEGRIR” no meio; nomes de termos agora ocupam linha própria e possuem regressão geométrica.
 
 ## Contratos técnicos ativos
 
@@ -64,11 +69,13 @@ Cada adaptador deve:
 - não manipular DOM;
 - receber snapshot explícito;
 - permitir descarte de resultado obsoleto;
-- preservar disclaimers e níveis de confiança importantes para a interpretação.
+- preservar disclaimers, contexto e níveis de confiança importantes para a interpretação;
+- coordenar carregamento assíncrono sem alterar `fetch` além do menor intervalo necessário;
+- restaurar qualquer ponte global em `finally`.
 
 ### Qualidade
 
-Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor e para cada nova engine integrada.
+Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor e para cada nova engine integrada. Capturas são evidência complementar; não substituem interação nem asserções geométricas.
 
 ## Limitações conhecidas
 
@@ -80,8 +87,9 @@ Ainda não estão aprovados:
 - paginação física;
 - leitores de tela reais;
 - teclado virtual real;
-- RimaLab e vocabulário decolonizador na nova shell;
+- RimaLab na nova shell;
 - decorations inline;
+- aplicação automática de alternativas contextuais;
 - promoção para a entrada pública.
 
 ## Como retomar
