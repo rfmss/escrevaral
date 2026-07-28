@@ -302,11 +302,44 @@ function normalizedRange(range: { from: number; to: number }, maximum: number): 
   return first <= second ? { from: first, to: second } : { from: second, to: first }
 }
 
+function textRangeContainsEditableContent(
+  snapshot: TextPositionSnapshot,
+  range: { from: number; to: number },
+): boolean {
+  return snapshot.segments.some((segment) =>
+    segment.kind !== 'blockSeparator'
+    && segment.textTo > range.from
+    && segment.textFrom < range.to)
+}
+
+function positionRangeContainsEditableContent(
+  snapshot: TextPositionSnapshot,
+  range: { from: number; to: number },
+): boolean {
+  return snapshot.segments.some((segment) => {
+    if (segment.kind === 'blockSeparator') return false
+    const minimum = Math.min(segment.pmFrom, segment.pmTo)
+    const maximum = Math.max(segment.pmFrom, segment.pmTo)
+    return maximum > range.from && minimum < range.to
+  })
+}
+
 export function textRangeToPositionRange(
   snapshot: TextPositionSnapshot,
   requestedRange: { from: number; to: number },
 ): PositionRange {
   const range = normalizedRange(requestedRange, snapshot.text.length)
+
+  if (range.from === range.to) {
+    const point = textOffsetToPosition(snapshot, range.from, 'forward')
+    return { from: point, to: point, collapsed: true }
+  }
+
+  if (!textRangeContainsEditableContent(snapshot, range)) {
+    const collapse = textOffsetToPosition(snapshot, range.from, 'backward')
+    return { from: collapse, to: collapse, collapsed: true }
+  }
+
   const from = textOffsetToPosition(snapshot, range.from, 'forward')
   const to = textOffsetToPosition(snapshot, range.to, 'backward')
 
@@ -321,6 +354,17 @@ export function positionRangeToTextRange(
   requestedRange: { from: number; to: number },
 ): PositionRange {
   const range = normalizedRange(requestedRange, snapshot.docSize)
+
+  if (range.from === range.to) {
+    const point = positionToTextOffset(snapshot, range.from, 'forward')
+    return { from: point, to: point, collapsed: true }
+  }
+
+  if (!positionRangeContainsEditableContent(snapshot, range)) {
+    const collapse = positionToTextOffset(snapshot, range.from, 'backward')
+    return { from: collapse, to: collapse, collapsed: true }
+  }
+
   const from = positionToTextOffset(snapshot, range.from, 'forward')
   const to = positionToTextOffset(snapshot, range.to, 'backward')
 
