@@ -1,47 +1,37 @@
 import { createHash } from 'node:crypto'
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const EXPECTED_PARTS = 5
-const EXPECTED_ENCODED_LENGTH = 9_960
-const EXPECTED_DECODED_LENGTH = 7_468
-const EXPECTED_SHA256 = '16b3a73100a51c42402a4b5b756539d28de25eea744efcf18456893e904f381a'
+const PNG_SIGNATURE = '89504e470d0a1a0a'
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const sourceDirectory = resolve(projectRoot, 'assets-source', 'runtime')
-const target = resolve(projectRoot, 'public', 'assets', 'blueprint', 'anatomia-livro-render.webp')
+const anatomySource = resolve(projectRoot, '..', 'anatomia-do-livro.html')
+const target = resolve(projectRoot, 'public', 'assets', 'blueprint', 'anatomia-livro-render.png')
 
-const partNames = (await readdir(sourceDirectory))
-  .filter((name) => /^anatomia-livro\.part-\d+\.b64$/.test(name))
-  .sort()
+const html = await readFile(anatomySource, 'utf8')
+const embeddedPngs = [...html.matchAll(/data:image\/png;base64,([A-Za-z0-9+/=]+)/g)]
+  .map((match) => match[1])
+  .sort((left, right) => right.length - left.length)
 
-if (partNames.length !== EXPECTED_PARTS) {
-  throw new Error(`A prancha runtime exige ${EXPECTED_PARTS} partes; foram encontradas ${partNames.length}.`)
+if (!embeddedPngs.length) {
+  throw new Error('O HTML da Anatomia não contém uma prancha PNG embutida.')
 }
 
-const partContents = await Promise.all(
-  partNames.map((name) => readFile(resolve(sourceDirectory, name), 'utf8')),
-)
-const encoded = partContents.join('').replace(/\s/g, '')
+const decoded = Buffer.from(embeddedPngs[0], 'base64')
+const signature = decoded.subarray(0, 8).toString('hex')
 
-if (encoded.length !== EXPECTED_ENCODED_LENGTH) {
-  throw new Error(`Base64 da prancha incompleto: ${encoded.length}/${EXPECTED_ENCODED_LENGTH} caracteres.`)
+if (signature !== PNG_SIGNATURE) {
+  throw new Error('A maior imagem embutida da Anatomia não decodificou para PNG.')
 }
 
-const decoded = Buffer.from(encoded, 'base64')
+const width = decoded.readUInt32BE(16)
+const height = decoded.readUInt32BE(20)
+if (width < 1_000 || height < 500) {
+  throw new Error(`Prancha embutida pequena demais para o canvas: ${width}×${height}.`)
+}
+
 const sha256 = createHash('sha256').update(decoded).digest('hex')
-
-if (decoded.subarray(0, 4).toString('ascii') !== 'RIFF' || decoded.subarray(8, 12).toString('ascii') !== 'WEBP') {
-  throw new Error('A fonte da prancha não decodificou para um WebP RIFF válido.')
-}
-if (decoded.length !== EXPECTED_DECODED_LENGTH) {
-  throw new Error(`WebP runtime incompleto: ${decoded.length}/${EXPECTED_DECODED_LENGTH} bytes.`)
-}
-if (sha256 !== EXPECTED_SHA256) {
-  throw new Error(`SHA-256 inesperado para a prancha runtime: ${sha256}.`)
-}
-
 await mkdir(dirname(target), { recursive: true })
 await writeFile(target, decoded)
-console.log(`[Mass Notes] prancha Blueprint preparada: ${decoded.length} bytes, SHA-256 ${sha256}.`)
+console.log(`[Mass Notes] prancha Blueprint extraída da Anatomia: ${width}×${height}, ${decoded.length} bytes, SHA-256 ${sha256}.`)
