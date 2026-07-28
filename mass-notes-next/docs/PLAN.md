@@ -18,6 +18,7 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - contrato comum de posições textuais;
 - tokens visuais semânticos;
 - skin Blueprint Tokon isolada e reversível;
+- dependências reproduzíveis por `package-lock.json` e `npm ci`;
 - responsividade estabilizada;
 - preview isolada em `preview-mass-notes-tiptap`;
 - PR rascunho `#155`.
@@ -128,51 +129,54 @@ Documentação detalhada:
 - `docs/logs/2026-07-28-gate-6-75-blueprint-theme.md`;
 - `../docs/product/MASS_NOTES_TIPTAP_GATE_6_75.md`.
 
-## Lote atual — auditoria manual do contrato de posições
+### Gate 6.9 — auditoria editorial do contrato de posições
 
-Nenhuma decoration será criada neste lote.
+- seis corpora originais em português brasileiro: prosa/dialogue, ensaio, poesia, cordel, canção e Unicode;
+- 39 ranges editoriais auditados por navegador;
+- travessões, aspas curvas, acentos precompostos, acento combinante, emoji, ZWJ, bandeira e reticências cobertos;
+- blockquote, lista numerada, lista aninhada, títulos, blocos vazios, estrofes e `hardBreak` cobertos;
+- documento extenso com 180 parágrafos, 181 blocos e 23.940 unidades UTF-16;
+- equivalência entre texto derivado e oráculo DOM autoral;
+- round-trip, monotonicidade, afinidade e posições esperadas aprovados;
+- HTML, seleção, assinatura, histórico e manuscrito preservados;
+- `ProseMirror-trailingBreak` e `ProseMirror-separator` classificados como placeholders técnicos, não texto autoral;
+- zero decorations;
+- dependências Tiptap fixadas por overrides;
+- `package-lock.json` versionado e CI convertido para `npm ci`.
 
-Objetivo: auditar o contrato aprovado com textos brasileiros reais e estruturas mais complexas antes de permitir marcações dentro do editor.
+Evidência detalhada: workflow `30357397681`. Evidência final reproduzível: workflow `30358030907`, 59 cenários por navegador, 118 execuções.
 
-Plano:
+Documentação detalhada:
 
-1. montar corpus de prosa, ensaio, diálogo, poesia, cordel e letra;
-2. incluir emoji, acentos precompostos, acentos combinantes, travessões, aspas e pontuação brasileira;
-3. experimentar listas aninhadas, citações, títulos consecutivos, `hardBreak` e múltiplos blocos vazios;
-4. gerar ranges conhecidos no texto derivado;
-5. converter para ProseMirror e confirmar o trecho textual correspondente;
-6. testar round-trip nos dois sentidos;
-7. testar início e fim de bloco com afinidade `backward` e `forward`;
-8. incluir documentos extensos;
-9. registrar ambiguidades, P0 e P1;
-10. manter HTML, seleção, histórico e manuscrito intactos;
-11. não mostrar sublinhados, highlights ou tooltips;
-12. não oferecer substituição automática;
-13. atualizar documentação e evidências antes de decidir o próximo gate.
+- `docs/logs/2026-07-28-gate-6-9-auditoria-posicoes-reais.md`;
+- `docs/audits/GATE_6_9_POSITION_AUDIT.json`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_6_9.md`.
+
+## Lote atual — decisão sobre decorations ProseMirror
+
+A auditoria necessária foi concluída, mas nenhuma decoration está automaticamente autorizada.
+
+O próximo gate depende de autorização explícita e deve permanecer pequeno:
+
+1. escolher uma única engine inicial;
+2. criar plugin ProseMirror isolado e somente de leitura;
+3. exigir `documentId` e `contentSignature` atuais;
+4. descartar ranges obsoletos;
+5. navegar de issue para trecho sem mover ou editar o texto;
+6. oferecer forma de ocultar marcações;
+7. preservar seleção, histórico, paste, undo/redo e performance;
+8. validar Chromium e Firefox;
+9. não aplicar sugestões;
+10. atualizar documentação e evidências antes de ampliar o escopo.
 
 Critérios de parada:
 
-- qualquer range aponta para texto diferente do esperado;
-- comportamento diverge entre Chromium e Firefox;
-- consulta altera seleção, HTML ou histórico;
-- estrutura válida precisa ser descartada para o teste passar;
-- offset não declara claramente UTF-16.
-
-## Gate posterior proposto — decorations ProseMirror
-
-Somente após a auditoria manual e nova autorização explícita.
-
-Escopo preliminar:
-
-- uma única engine inicial;
-- plugin ProseMirror isolado;
-- decorations somente de leitura;
-- identidade de documento e assinatura verificadas;
-- descarte de ranges obsoletos;
-- navegação acessível entre issue e trecho;
-- nenhuma substituição automática;
-- Chromium e Firefox;
-- documentação e log próprios.
+- decoration aponta para trecho diferente do issue;
+- documento ou assinatura obsoletos continuam visíveis;
+- marcação altera seleção, HTML persistido ou histórico;
+- contraste ou semântica visual confundem seleção, erro e análise;
+- teclado ou leitor de tela não conseguem relacionar issue e trecho;
+- desempenho de digitação degrada perceptivelmente.
 
 ## Fora dos próximos gates
 
