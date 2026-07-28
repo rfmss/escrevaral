@@ -1,6 +1,6 @@
 # Plano vivo — Mass Notes Next
 
-Atualizado em: 2026-07-27
+Atualizado em: 2026-07-28
 
 ## Norte do produto
 
@@ -63,57 +63,69 @@ Evidência: workflow `30316983906`, 21 cenários em cada navegador, 42 execuçõ
 
 ### Gate 5 — RimaLab
 
-Aprovado funcionalmente em Chromium e Firefox:
-
 - `rimalab-engine.js` e `rimalab-data.json` permanecem intactos;
-- engine e base são carregadas por adaptador tipado e ponte temporária de `fetch`;
 - prosa e verso possuem contratos e apresentações diferentes;
 - JSON Tiptap é convertido em fonte sonora sem alterar o documento;
 - blocos vazios preservam fronteiras de estrofe;
-- prosa apresenta ecos internos sem falsa escansão;
-- verso apresenta resumo, metro dominante, variação, esquema, estrofes, escansão e pares percebidos;
 - ausência de rima recebe retorno neutro;
 - nota sobre sinalefa, dicção regional e intenção musical permanece visível;
-- resultados são invalidados somente após mudança de documento ou conteúdo;
 - falha do RimaLab não quebra editor nem engines anteriores;
-- seis abas cabem em grade 3 × 2 no desktop e mobile;
+- seis abas cabem em grade 3 × 2;
 - nenhuma ação altera o manuscrito.
 
-Evidência funcional: workflow `30319511220`, 30 cenários em cada navegador, 60 execuções.
+Evidência final: workflow `30319966987`, 30 cenários em cada navegador, 60 execuções.
 
-## Lote atual — revisão manual do Gate 5
+## Lote atual — Gate 6: contrato de posições
 
-Antes de iniciar positions/decorations:
+Autorizado explicitamente pelo mantenedor em 2026-07-28.
 
-1. experimentar prosa, poesia, cordel, repente, letra de música e verso livre;
-2. comparar a escansão com leitura humana e variações regionais;
-3. observar falsos pares de rima e omissões úteis;
-4. confirmar que prosa poética recebe linguagem adequada;
-5. avaliar legibilidade de textos com 20 ou mais versos;
-6. testar rail e rolagem em desktop e mobile;
-7. registrar qualquer P0/P1;
-8. não iniciar marcação inline nem aplicação automática.
+Objetivo: criar um contrato comum, puro e reversível entre texto derivado, offsets de resultados linguísticos e posições ProseMirror, ainda sem mostrar decorations ou oferecer aplicação automática.
 
-## Próximo lote proposto — contrato de posições
+### Escopo autorizado
 
-Somente após a revisão manual ou nova autorização explícita.
+1. gerar snapshot textual diretamente do documento ProseMirror real;
+2. identificar documento e conteúdo estrutural sem depender da revisão de autosave;
+3. declarar offsets como unidades UTF-16, compatíveis com strings JavaScript e posições internas do ProseMirror;
+4. mapear offset textual para posição ProseMirror com afinidade anterior ou posterior;
+5. mapear posição ProseMirror para offset textual;
+6. mapear intervalos nos dois sentidos;
+7. preservar títulos, parágrafos, listas, citações, `hardBreak` e blocos vazios;
+8. tratar separadores derivados sem fingir que eles existem como texto editável;
+9. cobrir acentos, emoji, listas, títulos, quebras, documento vazio e troca de documento;
+10. provar que consultas ao contrato não alteram HTML, seleção ou manuscrito;
+11. executar Chromium e Firefox;
+12. atualizar preview somente após gate verde;
+13. manter plano, memória, changelog, log e documentação global sincronizados.
 
-Objetivo previsto: criar um contrato comum entre texto derivado, posições ProseMirror e resultados das engines, ainda sem aplicar decorations automaticamente.
+### Contratos obrigatórios
 
-Escopo preliminar:
+- JSON/Node ProseMirror continua sendo a fonte estrutural de autoridade;
+- `document.revision` não identifica conteúdo semântico;
+- a assinatura estrutural muda quando a estrutura muda, mesmo com o mesmo texto;
+- offsets usam unidades de código UTF-16, não contagem visual de caracteres;
+- separadores de blocos recebem afinidade explícita;
+- ranges compostos apenas por separadores colapsam com segurança;
+- nenhuma API de mapeamento altera editor, seleção ou histórico;
+- nenhuma marcação visual aparece neste gate.
 
-- snapshot textual com mapeamento de offsets;
-- identificação estável de documento e conteúdo;
-- conversão segura entre offsets de texto e posições ProseMirror;
-- casos com acentos, emoji, listas, títulos e quebras;
-- nenhuma alteração automática;
-- Chromium e Firefox;
-- documentação e log próprios.
+### Critérios de parada
 
-## Fora do próximo lote
+Interromper o lote em caso de:
 
-- decorations inline já visíveis;
+- mapeamento não monotônico;
+- perda de correspondência em acentos ou emoji;
+- assinatura igual para estruturas diferentes;
+- alteração do manuscrito durante consulta;
+- criação involuntária de decorations;
+- regressão P0/P1 em qualquer gate anterior;
+- divergência entre Chromium e Firefox.
+
+## Fora do Gate 6
+
+- decorations inline visíveis;
+- sublinhados, highlights ou tooltips ancorados;
 - substituição automática;
+- aplicação de sugestões;
 - áudio ou leitura em voz alta;
 - paginação física;
 - service worker;
@@ -122,10 +134,10 @@ Escopo preliminar:
 
 ## Sequência posterior planejada
 
-1. revisão manual do Gate 5;
-2. contrato de posições para issues linguísticas;
-3. decorations ProseMirror;
+1. Gate 6 — contrato de posições sem marcações;
+2. revisão manual e auditoria de offsets com textos reais;
+3. decorations ProseMirror em gate próprio;
 4. PWA/offline em nova sessão;
 5. avaliação de promoção arquitetural.
 
-O próximo gate só começa após revisão manual ou autorização explícita do mantenedor.
+O gate de decorations só começa após o contrato de posições ficar verde e receber avaliação ou autorização explícita.
