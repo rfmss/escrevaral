@@ -49,3 +49,20 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - adicionados testes de vazio, baixa confiança, corpus médio, obsolescência e exceção;
 - matriz aprovada em Chromium e Firefox, com 30 execuções;
 - preview atualizada após gate verde.
+
+### Gate 4 — Termos que pedem contexto
+
+- integrados `decolonial-engine.js` e `decolonial-data.json` por adaptador, sem modificar os originais;
+- criada aba `Contexto` e painel editorial separado do Tiptap;
+- apresentados termo, categoria, ocorrências, motivo, contexto e alternativas possíveis;
+- adotada linguagem não acusatória, sem palavras proibidas ou correção automática;
+- nenhuma alternativa possui botão de aplicação;
+- resultados são descartados após mudança do documento ou do conteúdo;
+- carregamento da base foi serializado para impedir concorrência entre chamadas de `ensureLoaded()`;
+- a ponte temporária de `fetch` é restaurada em `finally`;
+- falha controlada da engine permanece isolada do editor;
+- cinco abas foram organizadas em duas linhas no rail;
+- nomes de termos passaram a ocupar linha própria, com regressão contra corte ou quebra artificial;
+- adicionados testes de vazio, ausência de termos, múltiplas ocorrências, integridade do manuscrito, obsolescência, exceção e mobile;
+- matriz aprovada em Chromium e Firefox, com 42 execuções;
+- preview atualizada somente após gate funcional e visual verdes.
