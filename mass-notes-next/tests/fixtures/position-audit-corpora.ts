@@ -49,7 +49,7 @@ export const positionAuditCorpora: PositionAuditCorpus[] = [
     targets: [
       { label: 'português brasileiro', value: 'português brasileiro' },
       { label: 'citação primeira', value: 'A norma organiza parte da conversa' },
-      { label: 'citação segunda', value: 'NENHUMA ESCOLHA', occurrence: 0 },
+      { label: 'citação segunda', value: 'Nenhuma escolha' },
       { label: 'lista principal', value: 'Observar o ritmo da frase.' },
       { label: 'lista aninhada', value: 'Preservar oralidades sem caricatura.' },
       { label: 'travessia citação-lista', value: 'consciente.\n\nObservar' },
