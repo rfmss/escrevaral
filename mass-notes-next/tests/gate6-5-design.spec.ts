@@ -99,6 +99,7 @@ test('em 1024 o manuscrito ocupa a tela e os rails funcionam como drawers', asyn
   await libraryTrigger.click()
   await expect(page.locator('.sidebar')).toHaveClass(/open/)
   await expect(page.locator('.sidebar')).toHaveAttribute('role', 'dialog')
+  await expect.poll(() => page.locator('.sidebar').evaluate((element) => element.getBoundingClientRect().left >= -1)).toBe(true)
 
   const layers = await page.evaluate(() => ({
     trigger: Number(getComputedStyle(document.querySelector('.mobile-menu')!).zIndex),
@@ -123,8 +124,10 @@ test('breakpoints não criam overflow horizontal nem cortam a marca', async ({ p
     if (width > 1040) {
       const brandFits = await page.locator('.brand h1').evaluate((brand) => {
         const sidebar = brand.closest('.sidebar')!.getBoundingClientRect()
-        const box = brand.getBoundingClientRect()
-        return brand.scrollWidth <= brand.clientWidth && box.right <= sidebar.right + 1
+        const range = document.createRange()
+        range.selectNodeContents(brand)
+        const renderedText = range.getBoundingClientRect()
+        return renderedText.left >= sidebar.left - 1 && renderedText.right <= sidebar.right - 8
       })
       expect(brandFits).toBe(true)
     }
