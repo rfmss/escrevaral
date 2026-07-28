@@ -8,6 +8,7 @@ import './styles/design-stabilization-mobile.css'
 import './styles/theme-blueprint.tokens.css'
 import './styles/theme-blueprint.css'
 import './styles/theme-blueprint-composition.css'
+import './styles/review-decorations.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
