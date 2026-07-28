@@ -9,14 +9,15 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - preview: `https://raw.githack.com/rfmss/escrevaral/preview-mass-notes-tiptap/index.html`;
 - aplicação pública, `main` e service worker: não alterados;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
-- contrato de posições: aprovado sem decorations;
-- auditoria editorial de posições: aprovada com textos brasileiros reais;
+- contrato de posições: aprovado e auditado com textos brasileiros reais;
+- primeira decoration: aprovada somente para ranges verificáveis de pontuação da Revisão;
+- navegação cartão → trecho e ocultação reversível: aprovadas;
 - estabilização visual: aprovada sem redesign;
 - tema Blueprint Tokon: aprovado sem alterar layout;
 - dependências: travadas por overrides, `package-lock.json` e `npm ci`;
-- Gates 1 a 6.9: aprovados em Chromium e Firefox;
-- matriz atual: 59 cenários por navegador, 118 execuções;
-- próximo passo: decisão explícita sobre um gate pequeno de decorations somente de leitura.
+- Gates 1 a 7: aprovados em Chromium e Firefox;
+- matriz atual: 67 cenários por navegador, 134 execuções;
+- próximo passo: avaliação manual do Gate 7, sem iniciar novo gate automaticamente.
 
 ## Retomar o projeto
 
@@ -65,28 +66,36 @@ npm run test:e2e
 - blocos vazios e separadores virtuais são preservados;
 - placeholders `ProseMirror-trailingBreak` e `ProseMirror-separator` não são texto autoral;
 - consultas de posições não alteram o editor;
-- nenhuma engine altera o manuscrito neste estágio;
-- nenhuma decoration está autorizada neste estágio;
+- apenas ocorrências posicionadas da Revisão podem receber decoration neste estágio;
+- qualquer edição ou troca de documento remove marks obsoletas;
+- alertas sem posição exata permanecem no painel;
+- marcas podem ser ocultadas sem apagar a leitura;
+- nenhuma action aplica, corrige ou substitui texto;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - design usa tokens semânticos e não depende de herança acidental de cor;
+- seleção e análise possuem cores diferentes;
 - modo noite deve permanecer legível durante toda a troca de tema;
 - em até 1040 px o manuscrito é prioritário e os rails funcionam como drawers;
 - toolbar não depende de rolagem silenciosa no desktop;
 - no tema Blueprint, o canvas é a prancha e a folha permanece papel quente;
 - pauta do papel usa tile de 48 px, não `repeating-linear-gradient`;
-- preview só é atualizada depois de gate verde;
+- sombra difusa da folha permanece zerada para não reintroduzir o halo cinza;
+- preview só é atualizada depois de gate verde e verificação pública;
 - a entrada pública não é substituída por esta branch.
 
-## Skin visual atual
+## Camadas visuais atuais
 
 ```text
+src/styles/design-stabilization.css
+src/styles/design-stabilization-mobile.css
 src/styles/theme-blueprint.tokens.css
 src/styles/theme-blueprint.css
 src/styles/theme-blueprint-composition.css
+src/styles/review-decorations.css
 ```
 
-A skin pode ser revertida removendo somente esses imports. Ela não contém lógica de produto.
+As skins não contêm lógica de produto. A decoration linguística é projeção efêmera e não integra o JSON do documento.
 
 ## Limites atuais
 
-Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, decorations inline, navegação issue–trecho, aplicação automática de alternativas ou promoção para `main`.
+Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
