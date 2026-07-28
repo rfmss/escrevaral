@@ -8,8 +8,9 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - PR: `#155` (rascunho);
 - preview: `https://raw.githack.com/rfmss/escrevaral/preview-mass-notes-tiptap/index.html`;
 - aplicação pública, `main` e service worker: não alterados;
-- engines integradas: Revisão e Espelho de Voz;
-- Gates 1, 2 e 3: aprovados em Chromium e Firefox.
+- engines integradas: Revisão, Espelho de Voz e Termos que pedem contexto;
+- Gates 1, 2, 3 e 4: aprovados em Chromium e Firefox;
+- próximo passo: avaliação manual do painel Contexto antes do RimaLab.
 
 ## Retomar o projeto
 
@@ -45,10 +46,11 @@ npm run test:e2e
 - engines entram somente por adaptadores tipados;
 - nenhuma engine conhece React, Tiptap ou DOM;
 - análises são locais e resultados heurísticos são apresentados como hipóteses;
+- termos contextuais não são erros ou proibições e nunca são substituídos automaticamente;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - preview só é atualizada depois de gate verde;
 - a entrada pública não é substituída por esta branch.
 
 ## Limites atuais
 
-Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, decorations inline ou promoção para `main`.
+Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, RimaLab, decorations inline, aplicação automática de alternativas ou promoção para `main`.
