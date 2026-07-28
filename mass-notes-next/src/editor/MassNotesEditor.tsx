@@ -93,27 +93,27 @@ function MassNotesEditorInstance({ documentId, content, onChange, onPositionCont
   return (
     <>
       <div className="editor-toolbar" role="toolbar" aria-label="Formatação do texto">
-        <div className="toolbar-group">
-          <button type="button" onClick={() => editor.chain().focus().undo().run()} disabled={!state.canUndo} aria-label="Desfazer">↶</button>
-          <button type="button" onClick={() => editor.chain().focus().redo().run()} disabled={!state.canRedo} aria-label="Refazer">↷</button>
+        <div className="toolbar-group" role="group" aria-label="Histórico">
+          <button type="button" title="Desfazer" onClick={() => editor.chain().focus().undo().run()} disabled={!state.canUndo} aria-label="Desfazer">↶</button>
+          <button type="button" title="Refazer" onClick={() => editor.chain().focus().redo().run()} disabled={!state.canRedo} aria-label="Refazer">↷</button>
         </div>
-        <div className="toolbar-group">
-          <button type="button" className={state.h1 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>T1</button>
-          <button type="button" className={state.h2 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>T2</button>
-          <button type="button" className={state.h3 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>T3</button>
-          <button type="button" className={state.blockquote ? 'active' : ''} onClick={() => editor.chain().focus().toggleBlockquote().run()}>Citação</button>
+        <div className="toolbar-group" role="group" aria-label="Estrutura do texto">
+          <button type="button" title="Título de nível 1" className={state.h1 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>T1</button>
+          <button type="button" title="Título de nível 2" className={state.h2 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>T2</button>
+          <button type="button" title="Título de nível 3" className={state.h3 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>T3</button>
+          <button type="button" title="Transformar em citação" className={state.blockquote ? 'active' : ''} onClick={() => editor.chain().focus().toggleBlockquote().run()}>Citação</button>
         </div>
-        <div className="toolbar-group">
-          <button type="button" className={state.bold ? 'active' : ''} aria-pressed={state.bold} onClick={() => editor.chain().focus().toggleBold().run()}><strong>N</strong></button>
-          <button type="button" className={state.italic ? 'active' : ''} aria-pressed={state.italic} onClick={() => editor.chain().focus().toggleItalic().run()}><em>I</em></button>
-          <button type="button" className={state.underline ? 'active' : ''} aria-pressed={state.underline} onClick={() => editor.chain().focus().toggleUnderline().run()}><u>S</u></button>
-          <button type="button" className={state.strike ? 'active' : ''} aria-pressed={state.strike} onClick={() => editor.chain().focus().toggleStrike().run()}><s>T</s></button>
+        <div className="toolbar-group" role="group" aria-label="Ênfase">
+          <button type="button" title="Negrito" className={state.bold ? 'active' : ''} aria-pressed={state.bold} onClick={() => editor.chain().focus().toggleBold().run()}><strong>N</strong></button>
+          <button type="button" title="Itálico" className={state.italic ? 'active' : ''} aria-pressed={state.italic} onClick={() => editor.chain().focus().toggleItalic().run()}><em>I</em></button>
+          <button type="button" title="Sublinhado" className={state.underline ? 'active' : ''} aria-pressed={state.underline} onClick={() => editor.chain().focus().toggleUnderline().run()}><u>S</u></button>
+          <button type="button" title="Tachado" className={state.strike ? 'active' : ''} aria-pressed={state.strike} onClick={() => editor.chain().focus().toggleStrike().run()}><s>T</s></button>
         </div>
-        <div className="toolbar-group">
-          <button type="button" className={state.bulletList ? 'active' : ''} onClick={() => editor.chain().focus().toggleBulletList().run()}>• Lista</button>
-          <button type="button" className={state.orderedList ? 'active' : ''} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1. Lista</button>
-          <button type="button" onClick={addLink}>Link</button>
-          <button type="button" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>Limpar</button>
+        <div className="toolbar-group" role="group" aria-label="Listas e vínculos">
+          <button type="button" title="Lista com marcadores" className={state.bulletList ? 'active' : ''} onClick={() => editor.chain().focus().toggleBulletList().run()}>• Lista</button>
+          <button type="button" title="Lista numerada" className={state.orderedList ? 'active' : ''} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1. Lista</button>
+          <button type="button" title="Adicionar ou editar link" onClick={addLink}>Link</button>
+          <button type="button" title="Limpar formatação do bloco e da seleção" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>Limpar</button>
         </div>
       </div>
       <EditorContent editor={editor} />
