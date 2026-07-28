@@ -94,9 +94,11 @@ test('falha controlada da engine não quebra o editor', async ({ page }) => {
   await editor.fill('O texto menciona uma lista negra.')
   await openContext(page)
 
-  await page.evaluate(async () => {
-    const module = await import('/src/engines/decolonialAdapter.ts')
-    await module.ensureDecolonialEngine()
+  // Primeiro confirma a carga da engine no build compilado.
+  await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
+  await expect(page.locator('.context-card')).toHaveCount(1)
+
+  await page.evaluate(() => {
     const engine = (window as typeof window & { VeredaDecolonial?: { detectText: () => unknown } }).VeredaDecolonial
     if (engine) engine.detectText = () => { throw new Error('falha simulada') }
   })
