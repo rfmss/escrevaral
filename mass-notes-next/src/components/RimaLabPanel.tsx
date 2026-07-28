@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
-import { analyzeRimaLab, type RimaLabReading, type RimaVerseScan } from '../engines/rimaLabAdapter'
+import { analyzeRimaLab, createRimaLabSource, type RimaLabReading, type RimaVerseScan } from '../engines/rimaLabAdapter'
 
 type Props = {
   document: EscrevaralDocument
@@ -44,15 +44,16 @@ export function RimaLabPanel({ document }: Props) {
 
   const run = async () => {
     const token = ++tokenRef.current
+    const source = createRimaLabSource(document.content, document.plainText)
     setAnalyzing(true)
     setMessage('O RimaLab está escutando ritmo, finais e repetições sonoras localmente…')
 
     try {
-      const result = await analyzeRimaLab(document.plainText)
+      const result = await analyzeRimaLab(source)
       if (token !== tokenRef.current) return
       setReading(result)
       setMessage(
-        !document.plainText.trim()
+        !source.trim()
           ? 'A página está vazia. Escreva um pouco antes de abrir a oficina sonora.'
           : !result
             ? 'Não foi possível formar uma leitura sonora deste recorte.'
