@@ -152,3 +152,17 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - matriz elevada para 50 cenários por navegador, 100 execuções;
 - build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30333192558`;
 - layout, Tiptap, engines, persistência, `main` e aplicação pública permaneceram intactos.
+
+### Gate 6.9 — auditoria editorial de posições
+
+- criados seis corpora originais em português brasileiro: prosa/dialogue, ensaio, poesia, cordel, canção e Unicode;
+- auditados 39 ranges editoriais por navegador, incluindo travessões, aspas curvas, acentos, acento combinante, emoji com ZWJ, bandeira e `hardBreak`;
+- cobertos blockquote, lista numerada, lista aninhada, títulos, blocos vazios e fronteiras entre estrofes;
+- validado documento extenso com 180 parágrafos, 181 blocos e 23.940 unidades UTF-16;
+- comprovadas equivalência textual, posições esperadas, round-trip, monotonicidade e afinidade em Chromium e Firefox;
+- consultas intensivas preservaram HTML, seleção, assinatura e manuscrito, sem criar decorations;
+- o oráculo DOM passou a ignorar `ProseMirror-trailingBreak` e `ProseMirror-separator`, distinguindo placeholders técnicos de `hardBreak` autoral;
+- dependências transitivas Tiptap foram fixadas por `overrides`;
+- `package-lock.json` foi versionado e o workflow passou a usar `npm ci`;
+- matriz elevada para 59 cenários por navegador, 118 execuções;
+- build, instalação reproduzível, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30358030907`.
