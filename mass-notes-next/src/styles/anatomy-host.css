@@ -1,0 +1,95 @@
+.anatomy-host {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(161deg, transparent 0 57%, var(--bp-diagonal) 57.15% 57.42%, transparent 57.58%),
+    radial-gradient(circle at 2px 2px, var(--bp-dot) 1px, transparent 1.25px) 0 0 / 8px 8px,
+    var(--bp-canvas);
+}
+
+.anatomy-host__bar {
+  position: relative;
+  z-index: 2;
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 9px clamp(14px, 3vw, 34px);
+  border-bottom: 2px solid var(--bp-cyan-strong);
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-panel-strong);
+}
+
+.anatomy-host__bar div { display: grid; gap: 3px; }
+.anatomy-host__bar span {
+  color: var(--blue-deep);
+  font: 900 .57rem/1.2 "Courier New", monospace;
+  letter-spacing: .16em;
+}
+.anatomy-host__bar strong {
+  font: 900 clamp(1.15rem, 2.3vw, 1.8rem)/.95 Impact, "Arial Black", sans-serif;
+  text-transform: uppercase;
+}
+.anatomy-host__bar button {
+  min-height: 38px;
+  border: 1px solid var(--bp-ink);
+  padding: 8px 12px;
+  background: var(--ui-panel);
+  font: 900 .64rem/1.2 "Courier New", monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.anatomy-host__bar button:hover { background: var(--bp-red); color: #fff; border-color: var(--bp-red); }
+
+.anatomy-host__stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(8px, 1.6vw, 18px);
+}
+.anatomy-host__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--bp-cyan-strong);
+  background: var(--bp-paper);
+  box-shadow: var(--bp-shadow-graphic), 0 22px 64px rgba(0, 0, 0, .18);
+}
+.anatomy-host__loading {
+  position: absolute;
+  z-index: 1;
+  inset: clamp(8px, 1.6vw, 18px);
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  text-align: center;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(134, 199, 223, .84), rgba(134, 199, 223, .84)),
+    url('/assets/blueprint/anatomia-livro.webp') center / cover no-repeat,
+    var(--bp-canvas);
+}
+.anatomy-host__loading strong {
+  font: 900 clamp(1.15rem, 3vw, 2rem)/1 Impact, "Arial Black", sans-serif;
+  text-transform: uppercase;
+}
+.anatomy-host__loading span {
+  font: 800 .68rem/1.45 "Courier New", monospace;
+  letter-spacing: .08em;
+}
+
+@media (max-width: 700px) {
+  .anatomy-host { max-height: none; }
+  .anatomy-host__bar { align-items: stretch; flex-direction: column; gap: 8px; }
+  .anatomy-host__bar button { width: 100%; }
+  .anatomy-host__stage { min-height: calc(100vh - 122px); padding: 0; }
+  .anatomy-host__frame { border-inline: 0; }
+}
