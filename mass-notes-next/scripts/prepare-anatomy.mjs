@@ -4,18 +4,18 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const EXPECTED_PARTS = 5
-const EXPECTED_ENCODED_LENGTH = 173_912
+const EXPECTED_PARTS = 8
+const EXPECTED_ENCODED_LENGTH = 199_686
 const EXPECTED_GZIP_LENGTH = 130_433
 const EXPECTED_GZIP_SHA256 = '3ef59ed30455181b0682db4d8234c3829583551bb007335300be5325c5bf9a07'
 const EXPECTED_HTML_LENGTH = 208_728
 const EXPECTED_HTML_SHA256 = 'd618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8'
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const sourceDirectory = resolve(projectRoot, 'assets-source', 'runtime')
+const sourceDirectory = resolve(projectRoot, 'assets-source', 'anatomy')
 const target = resolve(projectRoot, 'public', 'anatomia-do-livro.html')
-const partNames = (await readdir(sourceDirectory)).filter((name) => /^anatomia-livro\.part-\d+\.b64$/.test(name)).sort()
-if (partNames.length !== EXPECTED_PARTS) throw new Error(`A Anatomia de runtime exige ${EXPECTED_PARTS} partes; foram encontradas ${partNames.length}.`)
+const partNames = (await readdir(sourceDirectory)).filter((name) => /^anatomia-refinada\.part-\d+\.b64$/.test(name)).sort()
+if (partNames.length !== EXPECTED_PARTS) throw new Error(`A Anatomia refinada exige ${EXPECTED_PARTS} partes; foram encontradas ${partNames.length}.`)
 const encoded = (await Promise.all(partNames.map((name) => readFile(resolve(sourceDirectory, name), 'utf8')))).join('').replace(/\s/g, '')
 if (encoded.length !== EXPECTED_ENCODED_LENGTH) throw new Error(`Pacote da Anatomia incompleto: ${encoded.length}/${EXPECTED_ENCODED_LENGTH} caracteres.`)
 const compressed = Buffer.from(encoded, 'base64')
