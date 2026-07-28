@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { expect, test, type Page } from '@playwright/test'
 
 async function waitEditor(page: Page) {
@@ -15,7 +16,7 @@ async function openAnatomy(page: Page) {
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
 }
 
-test('a prancha StPageFlip pertence ao canvas e nunca ao papel autoral', async ({ page }, testInfo) => {
+test('a prancha azul pertence ao canvas e nunca ao papel autoral', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
@@ -25,6 +26,7 @@ test('a prancha StPageFlip pertence ao canvas e nunca ao papel autoral', async (
   expect(asset.subarray(0, 4).toString('ascii')).toBe('RIFF')
   expect(asset.subarray(8, 12).toString('ascii')).toBe('WEBP')
   expect(asset.length).toBe(43_462)
+  expect(createHash('sha256').update(asset).digest('hex')).toBe('9c1fd7429b09df2087f2ac38f0ddf097ed32719ac5dde02877303eaa0c25a028')
 
   await expect.poll(() => page.evaluate(async () => {
     const raw = getComputedStyle(document.documentElement).getPropertyValue('--anatomy-blueprint-image')
@@ -63,7 +65,7 @@ test('a prancha StPageFlip pertence ao canvas e nunca ao papel autoral', async (
   await page.screenshot({ path: testInfo.outputPath('gate8-blueprint-background.png'), fullPage: true })
 })
 
-test('Ferramentas abre a Anatomia StPageFlip e preserva o editor montado', async ({ page }, testInfo) => {
+test('Ferramentas abre a Anatomia azul e preserva o editor montado', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
 
@@ -82,11 +84,14 @@ test('Ferramentas abre a Anatomia StPageFlip e preserva o editor montado', async
   await expect(page.locator('.page-press')).toBeHidden({ timeout: 5_000 })
 
   const frame = page.frameLocator('iframe[title="Anatomia interativa de um livro"]')
-  await expect(frame.locator('body')).toContainText(/Anatomia do Livro/i, { timeout: 12_000 })
-  await expect(frame.locator('.anatomia-header')).toBeVisible()
-  await expect(frame.locator('.book-wrap')).toBeVisible()
-  await expect(frame.locator('#bookHost')).toBeVisible()
-  await expect(frame.locator('body')).not.toContainText('A Cartografia do Esquecimento')
+  await expect(frame.locator('#page-title')).toContainText(/Anatomia do Livro/i, { timeout: 12_000 })
+  await expect(frame.locator('.stage-panel')).toBeVisible()
+  await expect(frame.locator('#stage')).toBeVisible()
+  await expect(frame.locator('#book')).toBeAttached()
+  await expect(frame.locator('#pageFlipBook')).toBeAttached()
+  await expect(frame.locator('.anatomia-header')).toBeHidden()
+  const sky = await frame.locator('html').evaluate((element) => getComputedStyle(element).getPropertyValue('--sky').trim())
+  expect(sky.toLowerCase()).toBe('#a9d4e4')
   await page.screenshot({ path: testInfo.outputPath('gate8-anatomy-host.png'), fullPage: true })
 
   await page.getByRole('button', { name: 'Voltar à mesa de escrita' }).click()
@@ -96,7 +101,7 @@ test('Ferramentas abre a Anatomia StPageFlip e preserva o editor montado', async
   await expect(title).toHaveValue('CADERNO PRESERVADO NA ANATOMIA')
 })
 
-test('o HTML servido é exatamente a derivação StPageFlip aprovada', async ({ page }) => {
+test('o HTML servido é exatamente a derivação azul aprovada', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitEditor(page)
   await openAnatomy(page)
@@ -105,12 +110,14 @@ test('o HTML servido é exatamente a derivação StPageFlip aprovada', async ({ 
   expect(response.ok()).toBe(true)
   const html = await response.text()
   expect(Buffer.byteLength(html)).toBe(208_728)
+  expect(createHash('sha256').update(html).digest('hex')).toBe('d618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8')
   expect(html).toContain('<!DOCTYPE html>')
   expect(html).toContain('Anatomia do Livro — Escrevaral')
   expect(html).toContain('StPageFlip 2.0.7')
-  expect(html).toContain('class="book-wrap"')
-  expect(html).toContain('id="bookHost"')
-  expect(html).not.toContain('A Cartografia do Esquecimento')
+  expect(html).toContain('--sky:#a9d4e4')
+  expect(html).toContain('class="stage-panel"')
+  expect(html).toContain('id="pageFlipBook"')
+  expect(html).not.toContain('--paper:#f1e7d4')
 })
 
 test('movimento reduzido mantém a navegação funcional e não prende a cortina', async ({ page }) => {

@@ -72,8 +72,10 @@ jobs:
           test "$(sha256sum dist/anatomia-do-livro.html | cut -d' ' -f1)" = "d618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8"
           grep --quiet 'StPageFlip 2.0.7' dist/anatomia-do-livro.html
           grep --quiet 'Anatomia do Livro — Escrevaral' dist/anatomia-do-livro.html
+          grep --quiet -- '--sky:#a9d4e4' dist/anatomia-do-livro.html
+          ! grep --quiet -- '--paper:#f1e7d4' dist/anatomia-do-livro.html
           cmp --silent public/assets/blueprint/anatomia-livro-render.webp dist/assets/blueprint/anatomia-livro-render.webp
-          node --input-type=module -e "import { createHash } from 'node:crypto'; import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); const sha=createHash('sha256').update(b).digest('hex'); if(b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP'||b.length!==43462||sha!=='64756b9a62bedb60660c1d0794e31bf6bd727aafb29be175549159d7eaa6d362') process.exit(1)"
+          node --input-type=module -e "import { createHash } from 'node:crypto'; import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); const sha=createHash('sha256').update(b).digest('hex'); if(b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP'||b.length!==43462||sha!=='9c1fd7429b09df2087f2ac38f0ddf097ed32719ac5dde02877303eaa0c25a028') process.exit(1)"
           sha256sum dist/anatomia-do-livro.html > anatomy-sha256.txt
           sha256sum dist/assets/blueprint/anatomia-livro-render.webp > blueprint-sha256.txt
 
@@ -91,7 +93,7 @@ jobs:
           cd dist
           touch .nojekyll
           git init
-          git config user.name "github-actions[bot]]"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "preview: ${GITHUB_SHA}"
@@ -129,11 +131,13 @@ jobs:
               && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -eq 208728 \
               && test "$(sha256sum /tmp/mass-notes-anatomia.html | cut -d' ' -f1)" = "d618b69aeab6551c5b0815024c8a9b7ec545ffe970776084be5e86b06a344fd8" \
               && grep --quiet 'StPageFlip 2.0.7' /tmp/mass-notes-anatomia.html \
+              && grep --quiet -- '--sky:#a9d4e4' /tmp/mass-notes-anatomia.html \
+              && ! grep --quiet -- '--paper:#f1e7d4' /tmp/mass-notes-anatomia.html \
               && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -eq 43462 \
               && test "$(head -c 4 /tmp/mass-notes-blueprint.webp)" = "RIFF" \
               && test "$(dd if=/tmp/mass-notes-blueprint.webp bs=1 skip=8 count=4 2>/dev/null)" = "WEBP" \
-              && test "$(sha256sum /tmp/mass-notes-blueprint.webp | cut -d' ' -f1)" = "64756b9a62bedb60660c1d0794e31bf6bd727aafb29be175549159d7eaa6d362"; then
-              echo "Preview pública respondeu com a Anatomia StPageFlip correta e a prancha WebP coerente."
+              && test "$(sha256sum /tmp/mass-notes-blueprint.webp | cut -d' ' -f1)" = "9c1fd7429b09df2087f2ac38f0ddf097ed32719ac5dde02877303eaa0c25a028"; then
+              echo "Preview pública respondeu com a Anatomia azul correta e a prancha WebP coerente."
               exit 0
             fi
             echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."

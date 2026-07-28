@@ -4,7 +4,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const EXPECTED_LENGTH = 43_462
-const EXPECTED_SHA256 = '64756b9a62bedb60660c1d0794e31bf6bd727aafb29be175549159d7eaa6d362'
+const EXPECTED_SHA256 = '9c1fd7429b09df2087f2ac38f0ddf097ed32719ac5dde02877303eaa0c25a028'
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const anatomySource = resolve(projectRoot, 'public', 'anatomia-do-livro.html')
@@ -12,22 +12,24 @@ const target = resolve(projectRoot, 'public', 'assets', 'blueprint', 'anatomia-l
 
 const html = await readFile(anatomySource, 'utf8')
 const embeddedWebps = [...html.matchAll(/data:image\/webp;base64,([A-Za-z0-9+/=]+)/g)]
-  .map((match) => match[1])
-  .sort((left, right) => right.length - left.length)
+  .map((match) => Buffer.from(match[1], 'base64'))
 
-if (!embeddedWebps.length) {
-  throw new Error('A Anatomia StPageFlip não contém a prancha WebP incorporada.')
+const decoded = embeddedWebps.find((candidate) => {
+  const sha256 = createHash('sha256').update(candidate).digest('hex')
+  return candidate.length === EXPECTED_LENGTH && sha256 === EXPECTED_SHA256
+})
+
+if (!decoded) {
+  const inventory = embeddedWebps.map((candidate) => ({
+    length: candidate.length,
+    sha256: createHash('sha256').update(candidate).digest('hex'),
+  }))
+  throw new Error(`A prancha Blueprint canônica não foi encontrada: ${JSON.stringify(inventory)}`)
 }
-
-const decoded = Buffer.from(embeddedWebps[0], 'base64')
-const sha256 = createHash('sha256').update(decoded).digest('hex')
 if (decoded.subarray(0, 4).toString('ascii') !== 'RIFF' || decoded.subarray(8, 12).toString('ascii') !== 'WEBP') {
-  throw new Error('A maior imagem incorporada não decodificou para WebP RIFF.')
-}
-if (decoded.length !== EXPECTED_LENGTH || sha256 !== EXPECTED_SHA256) {
-  throw new Error(`Prancha WebP inesperada: ${decoded.length} bytes, SHA-256 ${sha256}.`)
+  throw new Error('A prancha incorporada não decodificou para WebP RIFF.')
 }
 
 await mkdir(dirname(target), { recursive: true })
 await writeFile(target, decoded)
-console.log(`[Mass Notes] prancha Blueprint preparada: ${decoded.length} bytes, SHA-256 ${sha256}.`)
+console.log(`[Mass Notes] prancha Blueprint preparada: ${decoded.length} bytes, SHA-256 ${EXPECTED_SHA256}.`)
