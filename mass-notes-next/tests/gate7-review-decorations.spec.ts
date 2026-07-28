@@ -67,6 +67,15 @@ async function snapshot(page: Page) {
   })
 }
 
+async function selectedBlockText(page: Page): Promise<string> {
+  return page.evaluate(() => {
+    const selection = window.getSelection()
+    const node = selection?.anchorNode
+    const element = node instanceof Element ? node : node?.parentElement
+    return element?.closest('p, h1, h2, h3, blockquote')?.textContent ?? ''
+  })
+}
+
 test('pontuação com posição exata cria decoration sem alterar o documento', async ({ page }) => {
   await waitReady(page)
   await createDocument(page, 'Decoration segura')
@@ -132,7 +141,7 @@ test('trocar de documento não transporta decoration nem navegação', async ({ 
   await expect(page.locator('.review-located-card')).toHaveCount(0)
 })
 
-test('fragmentos repetidos usam as duas posições devolvidas pela engine', async ({ page }) => {
+test('fragmentos repetidos mantêm duas posições navegáveis mesmo com decorations sobrepostas', async ({ page }) => {
   await waitReady(page)
   const html = [
     '<p>A primeira equipe abriu o caderno e tentou mas não conseguiu fechar a revisão durante a manhã.</p>',
@@ -147,11 +156,18 @@ test('fragmentos repetidos usam as duas posições devolvidas pela engine', asyn
   await createDocument(page, 'Ocorrências repetidas', html, plain)
   await analyze(page)
 
-  await expect(page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })).toHaveCount(2)
+  const pont49Cards = page.locator('.review-located-card').filter({ hasText: 'PONT-49' })
+  await expect(pont49Cards).toHaveCount(2)
   const jumps = page.getByRole('button', { name: /Ir ao trecho: tentou mas/i })
   await expect(jumps).toHaveCount(2)
+
+  await jumps.nth(0).click()
+  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('tentou mas')
+  await expect.poll(() => selectedBlockText(page)).toContain('A primeira equipe')
+
   await jumps.nth(1).click()
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('tentou mas')
+  await expect.poll(() => selectedBlockText(page)).toContain('A segunda equipe')
 })
 
 test('posição ou fragmento não verificável nunca produz decoration', async ({ page }) => {
