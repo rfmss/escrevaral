@@ -20,7 +20,8 @@ async function createCleanDocument(page: Page, title: string) {
 }
 
 async function pasteStructuredText(page: Page, html: string, plain: string) {
-  await page.locator('.ProseMirror').evaluate((element, payload) => {
+  const editor = page.locator('.ProseMirror')
+  await editor.evaluate((element, payload) => {
     const transfer = new DataTransfer()
     transfer.setData('text/html', payload.html)
     transfer.setData('text/plain', payload.plain)
@@ -28,6 +29,12 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
     Object.defineProperty(event, 'clipboardData', { value: transfer })
     element.dispatchEvent(event)
   }, { html, plain })
+
+  const finalVisibleLine = plain.split('\n').filter(Boolean).at(-1) ?? plain
+  await expect(editor).toContainText(finalVisibleLine)
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible()
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
 }
 
 async function openRimaLab(page: Page) {
