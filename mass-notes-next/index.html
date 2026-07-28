@@ -6,9 +6,45 @@
     <meta name="theme-color" content="#f3eee5" />
     <meta name="robots" content="noindex,nofollow" />
     <title>Escrevaral — Mass Notes Next</title>
+    <style>
+      .preview-fallback {
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+        gap: 0.75rem;
+        padding: 2rem;
+        text-align: center;
+        color: #171a1d;
+        background: #f3eee5;
+        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      .preview-fallback strong {
+        font: 900 2.5rem/0.9 Impact, "Arial Black", sans-serif;
+        text-transform: uppercase;
+      }
+      .preview-fallback span {
+        max-width: 36rem;
+        color: #5e6468;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <main class="preview-fallback" role="status" data-preview-fallback>
+        <strong>Escrevaral</strong>
+        <span>Abrindo a oficina de escrita…</span>
+      </main>
+    </div>
+    <noscript>Esta preview precisa de JavaScript para abrir o editor.</noscript>
+    <script>
+      window.setTimeout(() => {
+        const fallback = document.querySelector('[data-preview-fallback] span')
+        if (fallback) fallback.textContent = 'A preview não conseguiu carregar. Atualize a página ou consulte o estado do gate no pull request.'
+      }, 12000)
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
