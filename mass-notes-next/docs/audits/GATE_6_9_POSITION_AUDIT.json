@@ -1,0 +1,79 @@
+{
+  "gate": "6.9",
+  "status": "approved",
+  "workflowRun": 30358030907,
+  "referenceEvidenceRun": 30357397681,
+  "suite": {
+    "total": 118,
+    "expected": 118,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0
+  },
+  "audit": {
+    "testsPerBrowser": 9,
+    "executions": 18,
+    "targetRangesPerBrowser": 39,
+    "offsetEncoding": "utf-16",
+    "crossBrowserEvidenceEquivalent": true,
+    "decorationsCreated": 0
+  },
+  "corpora": [
+    {
+      "id": "prosa-dialogo",
+      "targets": 6,
+      "textLength": 426,
+      "blocks": 7,
+      "signature": "pm-json-v1-473cdfd1-889"
+    },
+    {
+      "id": "ensaio-estrutura",
+      "targets": 7,
+      "textLength": 482,
+      "blocks": 9,
+      "signature": "pm-json-v1-5f38eb16-1304"
+    },
+    {
+      "id": "poesia-estofes",
+      "targets": 5,
+      "textLength": 188,
+      "blocks": 8,
+      "signature": "pm-json-v1-095c9fb6-652"
+    },
+    {
+      "id": "cordel",
+      "targets": 5,
+      "textLength": 225,
+      "blocks": 10,
+      "signature": "pm-json-v1-817555f0-803"
+    },
+    {
+      "id": "cancao-hardbreak",
+      "targets": 4,
+      "textLength": 168,
+      "blocks": 4,
+      "signature": "pm-json-v1-bda90fce-580"
+    },
+    {
+      "id": "unicode-brasileiro",
+      "targets": 8,
+      "textLength": 272,
+      "blocks": 5,
+      "signature": "pm-json-v1-c3b60201-603"
+    },
+    {
+      "id": "documento-extenso",
+      "targets": 4,
+      "textLength": 23940,
+      "blocks": 181
+    }
+  ],
+  "decisions": [
+    "documentId varia entre sessões e não participa da equivalência do conteúdo",
+    "o atalho Home pode selecionar regiões diferentes entre navegadores, mas a consulta deve preservar a seleção existente dentro de cada navegador",
+    "ProseMirror-trailingBreak e ProseMirror-separator são placeholders estruturais do DOM e não hardBreaks autorais",
+    "hardBreak autoral continua representado por uma unidade UTF-16 e uma unidade ProseMirror",
+    "nenhuma marcação visual foi autorizada neste gate",
+    "package-lock.json é versionado e o CI usa npm ci"
+  ]
+}
