@@ -3,9 +3,19 @@ import { averageSentenceLength, countWords, type DocumentStatus, type Escrevaral
 import type { ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
 import { ContextPanel } from './ContextPanel'
+import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
-type Tab = 'pulso' | 'revisao' | 'voz' | 'contexto' | 'ferramentas'
+const TABS = [
+  { id: 'pulso', label: 'Pulso' },
+  { id: 'revisao', label: 'Revisão' },
+  { id: 'voz', label: 'Voz' },
+  { id: 'contexto', label: 'Contexto' },
+  { id: 'rimalab', label: 'RimaLab' },
+  { id: 'ferramentas', label: 'Ferramentas' },
+] as const
+
+type Tab = typeof TABS[number]['id']
 
 type Props = {
   document: EscrevaralDocument
@@ -106,19 +116,19 @@ export function RightRail({
         <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
       </div>
       <div className="tabs" role="tablist" aria-label="Ferramentas">
-        {(['pulso', 'revisao', 'voz', 'contexto', 'ferramentas'] as const).map((item) => (
+        {TABS.map((item) => (
           <button
-            key={item}
-            id={`tab-${item}`}
+            key={item.id}
+            id={`tab-${item.id}`}
             type="button"
             role="tab"
-            className={`tab ${tab === item ? 'active' : ''}`}
-            aria-selected={tab === item}
-            aria-controls={`panel-${item}`}
-            tabIndex={tab === item ? 0 : -1}
-            onClick={() => setTab(item)}
+            className={`tab ${tab === item.id ? 'active' : ''}`}
+            aria-selected={tab === item.id}
+            aria-controls={`panel-${item.id}`}
+            tabIndex={tab === item.id ? 0 : -1}
+            onClick={() => setTab(item.id)}
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </div>
@@ -234,6 +244,12 @@ export function RightRail({
         {tab === 'contexto' && (
           <section id="panel-contexto" role="tabpanel" aria-labelledby="tab-contexto" className="panel active">
             <ContextPanel document={document} />
+          </section>
+        )}
+
+        {tab === 'rimalab' && (
+          <section id="panel-rimalab" role="tabpanel" aria-labelledby="tab-rimalab" className="panel active">
+            <RimaLabPanel document={document} />
           </section>
         )}
 
