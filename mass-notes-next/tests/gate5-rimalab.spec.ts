@@ -91,6 +91,7 @@ test('poema rimado apresenta esquema, escansão, pares e ressalva', async ({ pag
   await expect(editor).toContainText('No quintal eu vi a flor')
   await expect(editor).toContainText('eu voltei para cantar')
   await expect(panel.locator('.rima-reading button')).toHaveCount(0)
+  await expect(page.locator('.note-card.active')).toContainText('Quadra sonora')
   await page.screenshot({ path: `test-results/rimalab-${testInfo.project.name}.png`, fullPage: true })
 })
 
