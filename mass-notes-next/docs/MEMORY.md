@@ -9,12 +9,13 @@ Atualizado em: 2026-07-28
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gates 1, 2, 3, 4, 5, 6 e 6.5: verdes;
+- Gates 1, 2, 3, 4, 5, 6, 6.5 e 6.75: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições aprovado sem decorations;
 - estabilização visual aprovada sem redesign;
-- matriz atual: 45 cenários por navegador, 90 execuções;
+- fusão visual Blueprint Tokon aprovada sem alterar layout;
+- matriz atual: 50 cenários por navegador, 100 execuções;
 - próximo passo: auditoria manual do contrato com textos reais antes de decorations ProseMirror.
 
 ## Decisões que não devem ser reabertas sem evidência
@@ -59,6 +60,11 @@ Atualizado em: 2026-07-28
 38. Desktop não deve depender de rolagem horizontal silenciosa na toolbar; mobile pode usar rolagem explícita com alvos maiores.
 39. O laranja de seleção não deve ser reutilizado como linguagem de análise linguística.
 40. Capturas visuais devem ser feitas depois do fim das transições relevantes e nunca substituem medições geométricas.
+41. No tema Blueprint, o blueprint é o ambiente e o manuscrito é o objeto principal.
+42. Paleta, aplicação e composição do papel permanecem em arquivos separados e reversíveis.
+43. O canvas pode ser azul técnico; a folha clara deve permanecer papel quente opaco.
+44. Pautas do papel usam tile de 48 px e `repeat-y`; `repeating-linear-gradient` não deve ser reintroduzido na folha.
+45. Mudanças de skin não autorizam alteração de DOM, grid, larguras, breakpoints, Tiptap, engines ou persistência.
 
 ## Incidentes que orientam a arquitetura
 
@@ -76,14 +82,17 @@ Atualizado em: 2026-07-28
 - Um corpus chamado de verso sem rima continha rima toante entre “céu” e “luz”; o auditor foi corrigido, não a engine.
 - O `plainText` geral apagava fronteiras de estrofe; o RimaLab passou a usar serialização própria.
 - O primeiro build do Gate 6 falhou por tipagem estrita da serialização e pelo uso incorreto de `onDestroy` no Tiptap 3.
-- O primeiro registro de `build.log` usou `tee` sem `pipefail`, mascarou a falha e deixou os testes abrirem uma página 404. O workflow agora preserva o código de saída.
-- O primeiro auditor do contrato tentou remover o parágrafo vazio final que o Tiptap cria depois de lista ou título. O auditor passou a preservar a estrutura em vez de enfraquecer o contrato.
-- A documentação do Gate 5 dizia 30 cenários por navegador, mas a suíte executável anterior continha 31. A contagem auditada do Gate 6 foi 40 por navegador.
-- No Gate 6.5, uma regra de 1280 px sobrescreveu o padding móvel e voltou a cortar o título; a cascata passou a ter correção móvel explícita.
-- Firefox revelou overflow subpixel no título mesmo quando Chromium já passava; a escala móvel ganhou folga real.
-- A marca aparecia completa, mas sem respiro; o auditor passou a medir a caixa do texto renderizado com `Range` e a escala foi ajustada.
-- A captura inicial de 1024 px ocorria durante a transição do drawer; o teste passou a aguardar sua posição final.
-- Firefox capturou o instante intermediário da troca de tema com contraste insuficiente; as transições cromáticas dos controles foram removidas.
+- O primeiro registro de `build.log` usou `tee` sem `pipefail`, mascarou a falha e deixou os testes abrirem uma página 404.
+- O primeiro auditor do contrato tentou remover o parágrafo vazio final que o Tiptap cria depois de lista ou título.
+- A documentação do Gate 5 dizia 30 cenários por navegador, mas a suíte executável anterior continha 31.
+- No Gate 6.5, uma regra de 1280 px sobrescreveu o padding móvel e voltou a cortar o título.
+- Firefox revelou overflow subpixel no título mesmo quando Chromium já passava.
+- A marca aparecia completa, mas sem respiro; o auditor passou a medir a caixa do texto renderizado com `Range`.
+- A captura inicial de 1024 px ocorria durante a transição do drawer.
+- Firefox capturou o instante intermediário da troca de tema com contraste insuficiente; as transições cromáticas foram removidas.
+- No Gate 6.75, o primeiro auditor lia tokens noturnos no elemento errado, usava nome acessível antigo e capturava a animação da folha; o auditor foi corrigido sem alterar o produto.
+- Um paste do teste do RimaLab disparava análise antes de React refletir a transação no Firefox; o auditor passou a aguardar o ciclo `Alterado/Salvando` → `Salvo`.
+- A primeira pauta Blueprint usava `repeating-linear-gradient` e lavava o papel com ciano. Diagnóstico por camadas provou que grain, halftone e canvas não eram a causa. A pauta passou a ser tile de 48 px.
 
 ## Contratos técnicos ativos
 
@@ -135,7 +144,8 @@ A API de QA fica anexada à instância DOM atual do editor como propriedade some
 
 ### Design e responsividade
 
-- `design-stabilization.css` e `design-stabilization-mobile.css` são camadas finais e reversíveis;
+- `design-stabilization.css` e `design-stabilization-mobile.css` preservam contraste e responsividade;
+- `theme-blueprint.tokens.css`, `theme-blueprint.css` e `theme-blueprint-composition.css` formam a skin Blueprint;
 - papel e noite possuem tokens próprios;
 - conteúdo autoral usa contraste alto;
 - controles ativos, inativos e desabilitados devem ser visualmente distinguíveis;
@@ -143,13 +153,15 @@ A API de QA fica anexada à instância DOM atual do editor como propriedade some
 - em até 1040 px os rails são drawers;
 - acionadores permanecem montados para devolução de foco, mas ficam abaixo do drawer aberto;
 - marca e título possuem regressões geométricas em Chromium e Firefox;
-- seleção, ação principal e futura análise possuem papéis cromáticos separados.
+- seleção, ação principal e futura análise possuem papéis cromáticos separados;
+- o canvas usa blueprint azul, enquanto o papel claro permanece `#f3eee4`;
+- a pauta é tileada a cada 48 px para não colorir a folha inteira.
 
 ### Qualidade
 
 Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor, para cada infraestrutura linguística e para mudanças visuais transversais. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural, round-trip de posições, contraste ou asserções geométricas.
 
-Matriz atual: 45 cenários por navegador, 90 execuções, sem flakiness no Gate 6.5.
+Matriz atual: 50 cenários por navegador, 100 execuções no Gate 6.75.
 
 ## Limitações conhecidas
 
@@ -178,4 +190,5 @@ Ainda não estão aprovados:
 6. preservar blocos vazios e separar texto visível de estrutura textual derivada;
 7. não iniciar decorations sem auditoria manual e autorização explícita;
 8. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
-9. atualizar esta memória ao encerrar o lote.
+9. preservar a separação entre canvas Blueprint e papel quente;
+10. atualizar esta memória ao encerrar o lote.
