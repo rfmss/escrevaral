@@ -7,12 +7,12 @@ import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
 const TABS = [
-  { id: 'pulso', label: 'Pulso' },
-  { id: 'revisao', label: 'Revisão' },
-  { id: 'voz', label: 'Voz' },
-  { id: 'contexto', label: 'Contexto' },
-  { id: 'rimalab', label: 'RimaLab' },
-  { id: 'ferramentas', label: 'Ferramentas' },
+  { id: 'pulso', label: 'pulso' },
+  { id: 'revisao', label: 'revisao' },
+  { id: 'voz', label: 'voz' },
+  { id: 'contexto', label: 'contexto' },
+  { id: 'rimalab', label: 'rimalab' },
+  { id: 'ferramentas', label: 'ferramentas' },
 ] as const
 
 type Tab = typeof TABS[number]['id']
