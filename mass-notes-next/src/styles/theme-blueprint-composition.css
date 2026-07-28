@@ -27,6 +27,41 @@ body.night .paper {
     linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px, transparent 48px) !important;
 }
 
+.editor-shell {
+  isolation: isolate;
+}
+
+.editor-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(color-mix(in srgb, var(--bp-canvas) 34%, transparent), color-mix(in srgb, var(--bp-canvas) 52%, transparent)),
+    var(--anatomy-blueprint-image) center / cover no-repeat;
+  background-blend-mode: normal, multiply;
+  opacity: .34;
+  filter: saturate(.86) contrast(.96);
+}
+
+.editor-shell > .paper {
+  position: relative;
+  z-index: 1;
+}
+
+body.night .editor-shell::before {
+  opacity: .18;
+  filter: saturate(.65) brightness(.64) contrast(1.08);
+}
+
+@media (max-width: 1040px) {
+  .editor-shell::before {
+    background-position: center top;
+    opacity: .24;
+  }
+}
+
 @media (max-width: 820px) {
   .paper {
     background-image:
@@ -40,5 +75,9 @@ body.night .paper {
     background-image:
       radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
       linear-gradient(180deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px, transparent 48px) !important;
+  }
+
+  .editor-shell::before {
+    opacity: .16;
   }
 }
