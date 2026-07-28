@@ -23,7 +23,6 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 ### Gate 1 — fundação
 
 - documento estruturado;
-- Enter após título;
 - histórico isolado por documento;
 - conflito entre abas;
 - primeira engine real: Revisão;
@@ -45,8 +44,7 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - aba `Voz` sem decorations inline;
 - vazio, corpus curto, corpus médio, falha e obsolescência cobertos;
 - resultado preservado quando apenas o autosave avança a revisão;
-- Chromium e Firefox verdes;
-- preview atualizada somente após gate verde.
+- Chromium e Firefox verdes.
 
 Evidência: workflow `30315176567`, 15 cenários em cada navegador, 30 execuções.
 
@@ -63,53 +61,60 @@ Evidência: workflow `30315176567`, 15 cenários em cada navegador, 30 execuçõ
 
 Evidência: workflow `30316983906`, 21 cenários em cada navegador, 42 execuções.
 
-## Lote atual — Gate 5: RimaLab
+### Gate 5 — RimaLab
 
-Autorizado explicitamente pelo mantenedor em 2026-07-27.
+Aprovado funcionalmente em Chromium e Firefox:
 
-Objetivo: integrar `rimalab-engine.js` e `rimalab-data.json` como oficina sonora opcional, distinguindo prosa e verso sem marcar ou alterar o texto.
+- `rimalab-engine.js` e `rimalab-data.json` permanecem intactos;
+- engine e base são carregadas por adaptador tipado e ponte temporária de `fetch`;
+- prosa e verso possuem contratos e apresentações diferentes;
+- JSON Tiptap é convertido em fonte sonora sem alterar o documento;
+- blocos vazios preservam fronteiras de estrofe;
+- prosa apresenta ecos internos sem falsa escansão;
+- verso apresenta resumo, metro dominante, variação, esquema, estrofes, escansão e pares percebidos;
+- ausência de rima recebe retorno neutro;
+- nota sobre sinalefa, dicção regional e intenção musical permanece visível;
+- resultados são invalidados somente após mudança de documento ou conteúdo;
+- falha do RimaLab não quebra editor nem engines anteriores;
+- seis abas cabem em grade 3 × 2 no desktop e mobile;
+- nenhuma ação altera o manuscrito.
 
-### Escopo autorizado
+Evidência funcional: workflow `30319511220`, 30 cenários em cada navegador, 60 execuções.
 
-1. criar adaptador tipado para engine e base originais;
-2. executar somente por ação explícita;
-3. em prosa, apresentar padrões sonoros internos sem fingir métrica de verso;
-4. em verso, apresentar quantidade de versos, metro dominante, variação métrica, esquema de rimas, estrofes, escansão e pares rimados;
-5. preservar a nota pedagógica sobre sinalefa, dicção regional e intenção musical;
-6. invalidar resultado quando documento ou conteúdo mudar, nunca por autosave do mesmo conteúdo;
-7. não modificar Tiptap, schema ou manuscrito;
-8. cobrir vazio, prosa, verso livre, versos rimados, estrofes, falha e mobile;
-9. executar Chromium e Firefox;
-10. atualizar preview somente após gate verde;
-11. manter plano, memória, changelog e log sincronizados.
+## Lote atual — revisão manual do Gate 5
 
-### Linguagem obrigatória
+Antes de iniciar positions/decorations:
 
-- chamar a superfície de **RimaLab** ou **Oficina sonora**;
-- usar “leitura aproximada”, “padrão percebido” e “experimente escutar”;
-- não afirmar que a escansão automática é definitiva;
-- não tratar ausência de rima como defeito;
-- não sugerir que prosa precisa virar verso;
-- nenhuma ação altera o texto.
+1. experimentar prosa, poesia, cordel, repente, letra de música e verso livre;
+2. comparar a escansão com leitura humana e variações regionais;
+3. observar falsos pares de rima e omissões úteis;
+4. confirmar que prosa poética recebe linguagem adequada;
+5. avaliar legibilidade de textos com 20 ou mais versos;
+6. testar rail e rolagem em desktop e mobile;
+7. registrar qualquer P0/P1;
+8. não iniciar marcação inline nem aplicação automática.
 
-### Critérios de parada
+## Próximo lote proposto — contrato de posições
 
-Interromper o lote em caso de:
+Somente após a revisão manual ou nova autorização explícita.
 
-- alteração involuntária do manuscrito;
-- classificação de prosa como verso de forma estruturalmente enganosa;
-- perda de resultados entre documentos;
-- falha que quebre Revisão, Voz, Contexto ou editor;
-- regressão P0/P1 em Chromium ou Firefox;
-- layout ilegível no rail ou mobile.
+Objetivo previsto: criar um contrato comum entre texto derivado, posições ProseMirror e resultados das engines, ainda sem aplicar decorations automaticamente.
 
-## Fora do Gate 5
+Escopo preliminar:
 
-- busca interativa de palavras para rimar;
-- encyclopedia completa na interface;
-- reprodução de áudio ou leitura em voz alta;
-- decorations inline;
-- aplicação automática de sugestões;
+- snapshot textual com mapeamento de offsets;
+- identificação estável de documento e conteúdo;
+- conversão segura entre offsets de texto e posições ProseMirror;
+- casos com acentos, emoji, listas, títulos e quebras;
+- nenhuma alteração automática;
+- Chromium e Firefox;
+- documentação e log próprios.
+
+## Fora do próximo lote
+
+- decorations inline já visíveis;
+- substituição automática;
+- áudio ou leitura em voz alta;
 - paginação física;
 - service worker;
 - Tauri/SQLite;
@@ -117,11 +122,10 @@ Interromper o lote em caso de:
 
 ## Sequência posterior planejada
 
-1. Gate 5 — RimaLab sem marcações inline;
-2. revisão manual com prosa, poesia, cordel, letra e verso livre;
-3. contrato de posições para issues linguísticas;
-4. decorations ProseMirror;
-5. PWA/offline em nova sessão;
-6. avaliação de promoção arquitetural.
+1. revisão manual do Gate 5;
+2. contrato de posições para issues linguísticas;
+3. decorations ProseMirror;
+4. PWA/offline em nova sessão;
+5. avaliação de promoção arquitetural.
 
-O próximo gate só começa depois do Gate 5 verde e da atualização completa da memória.
+O próximo gate só começa após revisão manual ou autorização explícita do mantenedor.
