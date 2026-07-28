@@ -9,9 +9,10 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - preview: `https://raw.githack.com/rfmss/escrevaral/preview-mass-notes-tiptap/index.html`;
 - aplicação pública, `main` e service worker: não alterados;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
-- Gates 1 a 5: aprovados em Chromium e Firefox;
-- matriz atual: 30 cenários por navegador, 60 execuções;
-- próximo passo: avaliação manual do RimaLab antes do contrato de posições.
+- contrato de posições: aprovado sem decorations;
+- Gates 1 a 6: aprovados em Chromium e Firefox;
+- matriz atual: 40 cenários por navegador, 80 execuções;
+- próximo passo: avaliação manual dos offsets antes de qualquer marcação inline.
 
 ## Retomar o projeto
 
@@ -51,6 +52,10 @@ npm run test:e2e
 - escansão do RimaLab é aproximação pedagógica, não veredito;
 - prosa e verso recebem leituras diferentes;
 - ausência de rima não é defeito;
+- offsets do contrato usam UTF-16;
+- identidade do documento e assinatura estrutural são verificações diferentes;
+- blocos vazios e separadores virtuais são preservados;
+- consultas de posições não alteram o editor;
 - nenhuma engine altera o manuscrito neste estágio;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - preview só é atualizada depois de gate verde;
@@ -58,4 +63,4 @@ npm run test:e2e
 
 ## Limites atuais
 
-Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, contrato de posições, decorations inline, aplicação automática de alternativas ou promoção para `main`.
+Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, decorations inline, navegação issue–trecho, aplicação automática de alternativas ou promoção para `main`.
