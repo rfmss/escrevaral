@@ -7,6 +7,8 @@ on:
       - "mass-notes-next/**"
       - ".github/workflows/mass-notes-tiptap.yml"
       - "anatomia-do-livro.html"
+      - "anatomia-original.html"
+      - "scripts/build-anatomia-runtime.py"
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
@@ -22,6 +24,8 @@ on:
       - "mass-notes-next/**"
       - ".github/workflows/mass-notes-tiptap.yml"
       - "anatomia-do-livro.html"
+      - "anatomia-original.html"
+      - "scripts/build-anatomia-runtime.py"
       - "analise-engine.js"
       - "syntax-engine.js"
       - "punctuation-engine.js"
@@ -51,6 +55,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
+      - name: Python para preparar a Anatomia
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar runtime fiel e leve da Anatomia
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/build-anatomia-runtime.py
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
+          grep --quiet "document.documentElement.classList.add('is-embedded')" mass-notes-next/public/anatomia-do-livro.html
+          grep --quiet 'assets/anatomia/anatomia-asset-1.webp' mass-notes-next/public/anatomia-do-livro.html
+          grep --quiet 'assets/anatomia/anatomia-asset-2.webp' mass-notes-next/public/anatomia-do-livro.html
+          ! grep --quiet 'data:image/png;base64' mass-notes-next/public/anatomia-do-livro.html
+          ! grep --quiet 'atob(' mass-notes-next/public/anatomia-do-livro.html
+
       - name: Node.js
         uses: actions/setup-node@v4.4.0
         with:
@@ -66,17 +88,26 @@ jobs:
           set -euo pipefail
           npm run build 2>&1 | tee build.log
           cmp --silent public/anatomia-do-livro.html dist/anatomia-do-livro.html
-          test "$(wc -c < dist/anatomia-do-livro.html)" -gt 5000
+          test "$(wc -c < dist/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < dist/anatomia-do-livro.html)" -lt 500000
           grep --quiet 'Anatomia do Livro — Escrevaral' dist/anatomia-do-livro.html
           grep --quiet 'page-flip@2.0.7' dist/anatomia-do-livro.html
           grep --quiet -- '--sky:#a9d4e4' dist/anatomia-do-livro.html
           grep --quiet 'class="stage-panel"' dist/anatomia-do-livro.html
           grep --quiet 'id="pageFlipBook"' dist/anatomia-do-livro.html
+          grep --quiet "document.documentElement.classList.add('is-embedded')" dist/anatomia-do-livro.html
           ! grep --quiet -- '--paper:#f1e7d4' dist/anatomia-do-livro.html
           ! grep --quiet 'A Cartografia do Esquecimento' dist/anatomia-do-livro.html
+          ! grep --quiet 'atob(' dist/anatomia-do-livro.html
+          ! grep --quiet 'anatomia-original.html' dist/anatomia-do-livro.html
+          for asset in anatomia-asset-1.webp anatomia-asset-2.webp; do
+            cmp --silent "public/assets/anatomia/${asset}" "dist/assets/anatomia/${asset}"
+            node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/anatomia/${asset}'); if(b.length<10000||b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP') process.exit(1)"
+          done
           cmp --silent public/assets/blueprint/anatomia-livro-render.webp dist/assets/blueprint/anatomia-livro-render.webp
           node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); if(b.length<1000||b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP') process.exit(1)"
           sha256sum dist/anatomia-do-livro.html > anatomy-sha256.txt
+          sha256sum dist/assets/anatomia/anatomia-asset-1.webp dist/assets/anatomia/anatomia-asset-2.webp > anatomy-assets-sha256.txt
           sha256sum dist/assets/blueprint/anatomia-livro-render.webp > blueprint-sha256.txt
 
       - name: Instalar Chromium e Firefox
@@ -107,7 +138,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
-          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/blueprint/anatomia-livro-render.webp; do
+          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/anatomia/anatomia-asset-1.webp assets/anatomia/anatomia-asset-2.webp assets/blueprint/anatomia-livro-render.webp; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -118,26 +149,35 @@ jobs:
           set -euo pipefail
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
           for attempt in $(seq 1 18); do
-            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-blueprint.webp
+            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-anatomia-1.webp /tmp/mass-notes-anatomia-2.webp /tmp/mass-notes-blueprint.webp
             if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.js' /tmp/mass-notes-index.html \
               && grep --quiet './assets/index.css' /tmp/mass-notes-index.html \
               && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
               && curl --fail --silent --show-error --location "${base}/anatomia-do-livro.html" -o /tmp/mass-notes-anatomia.html \
+              && curl --fail --silent --show-error --location "${base}/assets/anatomia/anatomia-asset-1.webp" -o /tmp/mass-notes-anatomia-1.webp \
+              && curl --fail --silent --show-error --location "${base}/assets/anatomia/anatomia-asset-2.webp" -o /tmp/mass-notes-anatomia-2.webp \
               && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro-render.webp" -o /tmp/mass-notes-blueprint.webp \
               && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000 \
-              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 5000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 50000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -lt 500000 \
               && grep --quiet 'Anatomia do Livro — Escrevaral' /tmp/mass-notes-anatomia.html \
               && grep --quiet 'page-flip@2.0.7' /tmp/mass-notes-anatomia.html \
               && grep --quiet -- '--sky:#a9d4e4' /tmp/mass-notes-anatomia.html \
+              && grep --quiet "document.documentElement.classList.add('is-embedded')" /tmp/mass-notes-anatomia.html \
               && ! grep --quiet -- '--paper:#f1e7d4' /tmp/mass-notes-anatomia.html \
               && ! grep --quiet 'A Cartografia do Esquecimento' /tmp/mass-notes-anatomia.html \
+              && ! grep --quiet 'atob(' /tmp/mass-notes-anatomia.html \
+              && test "$(wc -c < /tmp/mass-notes-anatomia-1.webp)" -gt 10000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia-2.webp)" -gt 10000 \
+              && test "$(head -c 4 /tmp/mass-notes-anatomia-1.webp)" = "RIFF" \
+              && test "$(head -c 4 /tmp/mass-notes-anatomia-2.webp)" = "RIFF" \
               && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -gt 1000 \
               && test "$(head -c 4 /tmp/mass-notes-blueprint.webp)" = "RIFF" \
               && test "$(dd if=/tmp/mass-notes-blueprint.webp bs=1 skip=8 count=4 2>/dev/null)" = "WEBP"; then
-              echo "Preview pública respondeu com a Anatomia azul direta e o fundo técnico válido."
+              echo "Preview pública respondeu com a Anatomia original otimizada e o fundo técnico válido."
               exit 0
             fi
             echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
@@ -156,8 +196,11 @@ jobs:
           path: |
             mass-notes-next/build.log
             mass-notes-next/anatomy-sha256.txt
+            mass-notes-next/anatomy-assets-sha256.txt
             mass-notes-next/blueprint-sha256.txt
             mass-notes-next/public/anatomia-do-livro.html
+            mass-notes-next/public/assets/anatomia/anatomia-asset-1.webp
+            mass-notes-next/public/assets/anatomia/anatomia-asset-2.webp
             mass-notes-next/public/assets/blueprint/anatomia-livro-render.webp
             mass-notes-next/package-lock.json
             mass-notes-next/playwright-report/**
