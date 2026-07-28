@@ -50,48 +50,54 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 
 Evidência: workflow `30315176567`, 15 cenários em cada navegador, 30 execuções.
 
-## Lote atual — Gate 4: Termos que pedem contexto
+### Gate 4 — Termos que pedem contexto
 
-Autorizado pelo mantenedor em 2026-07-27.
+Aprovado em Chromium e Firefox:
 
-Objetivo: integrar `decolonial-engine.js` como leitura contextual do manuscrito, sem acusação, proibição ou substituição automática.
+- `decolonial-engine.js` e `decolonial-data.json` permaneceram intactos;
+- base original empacotada e fornecida ao carregamento assíncrono por adaptador;
+- aba `Contexto` adicionada sem alterar ou marcar o manuscrito;
+- termo, categoria, motivo, contexto, alternativas e contagem apresentados;
+- linguagem não acusatória e decisão humana explícita;
+- documento vazio, ausência de termos, múltiplas ocorrências, invalidação e falha cobertos;
+- nenhuma alternativa possui ação automática;
+- nomes de termos preservados integralmente no rail;
+- preview atualizada somente após gate verde.
 
-### Escopo autorizado
+Evidência final: commit `741340070f5f37f420aaee0f2f76ad74b7f734f7`, workflow `30316983906`, 21 cenários em cada navegador, 42 execuções.
 
-1. criar adaptador tipado para a engine e a base originais;
-2. adicionar uma superfície `Contexto` no rail;
-3. mostrar termo, categoria, motivo, contexto, alternativas e ocorrências;
-4. executar somente por ação explícita;
-5. não modificar nem marcar o texto dentro do Tiptap;
-6. invalidar resultados quando documento ou conteúdo mudar;
-7. tratar vazio, nenhum resultado, múltiplas ocorrências e falha da engine;
-8. executar Chromium e Firefox;
-9. atualizar preview somente após gate verde;
-10. manter plano, memória, changelog e log do lote sincronizados.
+## Lote atual — revisão manual do Gate 4
 
-### Linguagem obrigatória
+Antes de iniciar uma nova engine:
 
-- usar “Termos que pedem contexto”;
-- usar “Por que observar” e “Alternativas possíveis”;
-- não usar “erro”, “proibido” ou “correção automática”;
-- lembrar que narrador, personagem, época, citação e intenção crítica mudam a leitura;
-- nenhuma alternativa é aplicada sem decisão humana.
+1. usar a preview com textos reais de gêneros e épocas diferentes;
+2. avaliar falsos positivos, omissões e linguagem dos cartões;
+3. confirmar que o painel informa sem constranger ou prescrever;
+4. testar rail e rolagem em desktop e mobile;
+5. registrar qualquer P0/P1;
+6. não iniciar substituição automática nem decorations inline.
 
-### Critérios de parada
+## Próximo lote proposto — Gate 5: RimaLab
 
-Interromper o lote em caso de:
+Somente após revisão manual ou autorização explícita do mantenedor.
 
-- alteração involuntária do manuscrito;
-- falso positivo estrutural grave;
-- perda de resultado ou estado entre documentos;
-- falha que quebre Revisão, Voz ou editor;
-- regressão P0/P1 em Chromium ou Firefox.
+Objetivo previsto: integrar o RimaLab como leitura sonora opcional, distinguindo prosa e verso, sem marcações dentro do editor no primeiro corte.
 
-## Fora do Gate 4
+Escopo preliminar:
+
+- adaptador tipado;
+- identificação de prosa ou verso;
+- padrões sonoros para prosa;
+- métrica, escansão e rimas quando houver versos;
+- execução por ação explícita;
+- nenhum ajuste automático no manuscrito;
+- Chromium e Firefox;
+- documentação e log próprios.
+
+## Fora do próximo gate
 
 - decorations inline;
-- substituição automática;
-- RimaLab;
+- aplicação automática de sugestões;
 - paginação física;
 - service worker;
 - Tauri/SQLite;
@@ -100,10 +106,10 @@ Interromper o lote em caso de:
 ## Sequência posterior planejada
 
 1. revisão manual do Gate 4;
-2. RimaLab sem marcações inline;
+2. Gate 5 — RimaLab sem marcações inline;
 3. contrato de posições para issues linguísticas;
 4. decorations ProseMirror;
 5. PWA/offline em nova sessão;
 6. avaliação de promoção arquitetural.
 
-O próximo gate só começa após o Gate 4 ficar verde e sua memória ser atualizada.
+O Gate 5 só começa depois da avaliação manual ou de autorização explícita do mantenedor.
