@@ -62,6 +62,9 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
       orange: root.getPropertyValue('--bp-orange').trim(),
       red: root.getPropertyValue('--bp-red').trim(),
       paperBackground: paper.backgroundColor,
+      paperImage: paper.backgroundImage,
+      paperSize: paper.backgroundSize,
+      paperRepeat: paper.backgroundRepeat,
       bodyBackground: body.backgroundImage,
       blueprintBackground: blueprint.backgroundImage,
       blueprintPointerEvents: blueprint.pointerEvents,
@@ -81,6 +84,9 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
   expect(theme.bodyBackground).toContain('radial-gradient')
   expect(theme.bodyBackground.match(/linear-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
   expect(theme.blueprintBackground).toContain('repeating-linear-gradient')
+  expect(theme.paperImage).not.toContain('repeating-linear-gradient')
+  expect(theme.paperSize).toContain('100% 48px')
+  expect(theme.paperRepeat).toContain('repeat-y')
   expect(await elementContrast(page, '.escrevaral-editor')).toBeGreaterThanOrEqual(7)
 
   await page.screenshot({ path: 'test-results/gate6-75-blueprint-paper.png', fullPage: true })
