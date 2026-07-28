@@ -38,11 +38,11 @@ body.night .paper {
   z-index: 0;
   pointer-events: none;
   background:
-    linear-gradient(color-mix(in srgb, var(--bp-canvas) 34%, transparent), color-mix(in srgb, var(--bp-canvas) 52%, transparent)),
-    var(--anatomy-blueprint-image) center / cover no-repeat;
-  background-blend-mode: normal, multiply;
-  opacity: .34;
-  filter: saturate(.86) contrast(.96);
+    linear-gradient(color-mix(in srgb, var(--bp-canvas) 10%, transparent), color-mix(in srgb, var(--bp-canvas) 18%, transparent)),
+    var(--anatomy-blueprint-image) center 46% / 100% auto no-repeat;
+  background-blend-mode: normal, normal;
+  opacity: .58;
+  filter: saturate(.78) contrast(1.12);
 }
 
 .editor-shell > .paper {
@@ -51,14 +51,14 @@ body.night .paper {
 }
 
 body.night .editor-shell::before {
-  opacity: .18;
-  filter: saturate(.65) brightness(.64) contrast(1.08);
+  opacity: .22;
+  filter: saturate(.58) brightness(.62) contrast(1.12);
 }
 
 @media (max-width: 1040px) {
   .editor-shell::before {
-    background-position: center top;
-    opacity: .24;
+    background-position: center 30%;
+    opacity: .38;
   }
 }
 
@@ -78,6 +78,6 @@ body.night .editor-shell::before {
   }
 
   .editor-shell::before {
-    opacity: .16;
+    opacity: .24;
   }
 }
