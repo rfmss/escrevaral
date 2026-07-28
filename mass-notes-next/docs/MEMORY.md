@@ -1,6 +1,6 @@
 # Memória consolidada — Mass Notes Next
 
-Atualizado em: 2026-07-27
+Atualizado em: 2026-07-28
 
 ## Estado atual
 
@@ -9,11 +9,12 @@ Atualizado em: 2026-07-27
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gates 1, 2, 3, 4 e 5: verdes;
+- Gates 1, 2, 3, 4, 5 e 6: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
-- matriz atual: 30 cenários por navegador, 60 execuções;
-- próximo passo: avaliação manual do RimaLab antes do contrato de posições.
+- contrato de posições aprovado sem decorations;
+- matriz atual: 40 cenários por navegador, 80 execuções;
+- próximo passo: avaliação manual do contrato antes de decorations ProseMirror.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -38,7 +39,18 @@ Atualizado em: 2026-07-27
 19. O RimaLab recebe uma serialização sonora derivada do JSON Tiptap; o `plainText` geral não deve ser usado quando apagar fronteiras de verso ou estrofe.
 20. Blocos vazios são preservados como separadores de estrofe na fonte sonora.
 21. Rimas toantes reconhecidas pela engine não devem ser descartadas apenas para fazer um teste passar.
-22. Nomes acessíveis já usados por testes e usuários são contratos estáveis; mudanças cosméticas devem ser feitas por CSS, não renomeando a interface sem motivo.
+22. Nomes acessíveis já usados por testes e usuários são contratos estáveis; mudanças cosméticas devem ser feitas por CSS.
+23. O contrato de posições nasce do Node ProseMirror real, não de HTML reparseado.
+24. Offsets linguísticos usam unidades de código UTF-16; emoji pode ocupar duas unidades.
+25. `documentId` identifica a página; `contentSignature` identifica a estrutura. Um não substitui o outro.
+26. A assinatura estrutural é calculada sobre JSON estável e independe de `revision`.
+27. Separadores `\n\n` entre blocos são virtuais e exigem afinidade explícita.
+28. Ranges formados apenas por separadores virtuais colapsam em fronteira segura.
+29. `hardBreak` corresponde a um `\n` e a uma unidade ProseMirror.
+30. Blocos vazios, inclusive o parágrafo final criado pelo Tiptap, são estrutura válida e não devem ser apagados pelo derivado textual.
+31. Consultar o contrato não pode despachar transação, alterar seleção, HTML, histórico ou manuscrito.
+32. Decorations não fazem parte do contrato; terão gate, plugin e política de obsolescência próprios.
+33. Pipelines com `tee` devem usar `set -o pipefail`; registrar logs nunca pode mascarar falha.
 
 ## Incidentes que orientam a arquitetura
 
@@ -51,10 +63,14 @@ Atualizado em: 2026-07-27
 - O vocabulário contextual inicialmente falhou porque duas chamadas concorrentes de `ensureLoaded()` usaram fontes de dados diferentes; o carregamento passou a usar uma promessa compartilhada.
 - Um teste tentou importar TypeScript de fonte no build compilado; testes de falha agora atuam sobre a API global já carregada pelo produto.
 - A primeira captura contextual quebrou “DENEGRIR” no meio; nomes de termos agora ocupam linha própria e possuem regressão geométrica.
-- O primeiro corte do RimaLab capitalizou e acentuou nomes de abas, quebrando o contrato acessível dos gates anteriores. Os nomes estáveis foram restaurados; a aparência em caixa alta permanece no CSS.
-- Uma frase escolhida como “prosa neutra” continha três padrões sonoros reais para a heurística. Corpora de teste sonoro precisam ser foneticamente controlados.
-- Um corpus chamado de “verso livre sem rima” continha uma rima toante entre “céu” e “luz”. O auditor foi corrigido, não a engine.
-- O `plainText` com dois separadores entre todos os blocos transformaria cada verso em estrofe isolada. O RimaLab passou a usar serialização própria do JSON Tiptap.
+- O primeiro corte do RimaLab alterou nomes acessíveis das abas; o contrato estável foi restaurado.
+- Uma frase chamada de prosa neutra continha padrões sonoros reais; corpora negativos devem ser foneticamente controlados.
+- Um corpus chamado de verso sem rima continha rima toante entre “céu” e “luz”; o auditor foi corrigido, não a engine.
+- O `plainText` geral apagava fronteiras de estrofe; o RimaLab passou a usar serialização própria.
+- O primeiro build do Gate 6 falhou por tipagem estrita da serialização e pelo uso incorreto de `onDestroy` no Tiptap 3.
+- O primeiro registro de `build.log` usou `tee` sem `pipefail`, mascarou a falha e deixou os testes abrirem uma página 404. O workflow agora preserva o código de saída.
+- O primeiro auditor do contrato tentou remover o parágrafo vazio final que o Tiptap cria depois de lista ou título. O auditor passou a preservar a estrutura em vez de enfraquecer o contrato.
+- A documentação do Gate 5 dizia 30 cenários por navegador, mas a suíte executável anterior continha 31. A contagem auditada atual é 40 por navegador.
 
 ## Contratos técnicos ativos
 
@@ -86,18 +102,37 @@ Cada adaptador deve:
 - restaurar qualquer ponte global em `finally`;
 - criar derivado textual específico quando a engine depender de estrutura que o `plainText` geral não preserva.
 
+### Posições
+
+O contrato aprovado fornece:
+
+- snapshot versão 1;
+- `documentId`;
+- `contentSignature`;
+- codificação `utf-16`;
+- texto derivado;
+- blocos e segmentos;
+- conversão offset → posição com afinidade;
+- conversão posição → offset com afinidade;
+- conversão de ranges nos dois sentidos;
+- clamp defensivo;
+- colapso de ranges exclusivamente virtuais.
+
+A API de QA fica anexada à instância DOM atual do editor como propriedade somente de integração. Isso não autoriza engines a manipular DOM nem constitui API pública estável.
+
 ### Qualidade
 
-Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor e para cada nova engine integrada. Capturas são evidência complementar; não substituem interação, corpus controlado nem asserções geométricas.
+Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor e para cada infraestrutura linguística. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural ou round-trip de posições.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
-- calibração ampla do RimaLab com cordel, repente, canção, poesia falada e variedades regionais;
-- contrato comum de offsets e posições ProseMirror;
+- auditoria ampla do contrato com textos reais e Unicode combinante;
 - decorations inline;
+- navegação acessível entre issue e trecho;
 - aplicação automática de sugestões;
+- calibração ampla do RimaLab com cordel, repente, canção, poesia falada e variedades regionais;
 - service worker e abertura offline em nova sessão;
 - Tauri e SQLite;
 - DOCX;
@@ -112,5 +147,7 @@ Ainda não estão aprovados:
 2. conferir o estado do PR `#155` e o último workflow;
 3. não pressupor que capturas representam o produto atual;
 4. reproduzir qualquer falha antes de corrigir;
-5. usar textos foneticamente controlados ao testar ausência de padrões;
-6. atualizar esta memória ao encerrar o lote.
+5. declarar se um offset é UTF-16 antes de comparar resultados;
+6. preservar blocos vazios e separar texto visível de estrutura textual derivada;
+7. não iniciar decorations sem revisão manual ou autorização explícita;
+8. atualizar esta memória ao encerrar o lote.
