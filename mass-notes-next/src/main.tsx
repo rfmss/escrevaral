@@ -4,6 +4,7 @@ import App from './App'
 import './styles/app.css'
 import './styles/polish.css'
 import './styles/design-stabilization.css'
+import './styles/design-stabilization-mobile.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
