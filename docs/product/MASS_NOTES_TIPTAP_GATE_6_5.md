@@ -6,7 +6,8 @@
 
 - branch: `experiment/mass-notes-tiptap`;
 - pull request: `#155` (rascunho);
-- workflow final: `30327303435`;
+- workflow funcional: `30327303435`;
+- workflow de fechamento documental: `30327866008`;
 - matriz: 45 cenários em Chromium e 45 em Firefox;
 - total: 90 execuções, sem falha e sem flakiness;
 - preview: branch `preview-mass-notes-tiptap`;
@@ -134,15 +135,17 @@ Firefox capturou controles no meio da transição de tema, com contraste insufic
 
 ## Evidências finais
 
-- workflow: `30327303435`;
+- workflow funcional: `30327303435`;
 - commit funcional: `2031f51349f8355b2a847eb49a9c540c55b27674`;
+- workflow de fechamento: `30327866008`;
+- árvore documental fechada: `3a0eca5e982495222fe22f78e375bafafd44fbbf`;
 - Chromium: 45/45;
 - Firefox: 45/45;
 - total: 90/90;
 - falhas: zero;
 - flakiness: zero;
-- preview publicada após gate verde;
-- capturas de papel, noite, 1024 px e mobile incluídas no artefato.
+- preview publicada após os dois gates verdes;
+- capturas de papel, noite, 1024 px e mobile incluídas no artefato final.
 
 Log detalhado: `mass-notes-next/docs/logs/2026-07-28-gate-6-5-estabilizacao-visual.md`.
 
