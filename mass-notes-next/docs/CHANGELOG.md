@@ -132,3 +132,23 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - matriz elevada para 45 cenários por navegador, 90 execuções;
 - build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30327303435`;
 - artefato final sem falhas ou flakiness.
+
+### Gate 6.75 — fusão visual Blueprint Tokon
+
+- extraída e tokenizada a paleta do protótipo Blueprint Tokon;
+- adotada a regra “o blueprint é o ambiente; o manuscrito é o objeto principal”;
+- criada camada de tokens em `theme-blueprint.tokens.css`;
+- aplicada skin visual em `theme-blueprint.css` sem alterar layout ou comportamento;
+- criada proteção de composição em `theme-blueprint-composition.css`;
+- canvas recebeu ciano, pontos, diagonais e moldura técnica;
+- laterais, registro e painéis receberam papel técnico e filetes ciano;
+- folha central permaneceu papel quente opaco;
+- modo noite recebeu prancha azul profunda e papel técnico escuro;
+- pauta inicialmente criada com `repeating-linear-gradient` lavava o papel com ciano;
+- diagnóstico por camadas provou que grain, halftone e canvas não eram a causa;
+- pauta substituída por tile linear de 48 px com `repeat-y`;
+- teste do RimaLab sincronizado com o ciclo de atualização após paste, sem mudar engine ou produto;
+- adicionados testes de tokens, contraste, geometria, camadas, pauta e breakpoints;
+- matriz elevada para 50 cenários por navegador, 100 execuções;
+- build, Chromium, Firefox, gates anteriores e preview aprovados no workflow `30333192558`;
+- layout, Tiptap, engines, persistência, `main` e aplicação pública permaneceram intactos.
