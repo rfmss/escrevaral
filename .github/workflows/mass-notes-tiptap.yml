@@ -11,6 +11,8 @@ on:
       - "syntax-engine.js"
       - "punctuation-engine.js"
       - "voice-engine.js"
+      - "decolonial-engine.js"
+      - "decolonial-data.json"
       - "js/data/criterios-data.js"
   pull_request:
     branches:
@@ -22,6 +24,8 @@ on:
       - "syntax-engine.js"
       - "punctuation-engine.js"
       - "voice-engine.js"
+      - "decolonial-engine.js"
+      - "decolonial-data.json"
       - "js/data/criterios-data.js"
   workflow_dispatch:
 
