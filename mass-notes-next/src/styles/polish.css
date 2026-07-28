@@ -228,10 +228,8 @@ body.night .confidence-alta { color: #8fd2b8; }
 }
 
 .context-card-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
+  display: grid;
+  gap: 8px;
 }
 
 .context-card-head > div {
@@ -256,13 +254,15 @@ body.night .confidence-alta { color: #8fd2b8; }
 
 .context-card h2 {
   margin: 4px 0 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   font: 900 1.08rem/1.05 Impact, "Arial Black", sans-serif;
   text-transform: uppercase;
 }
 
 .context-count {
-  flex: 0 0 auto;
+  justify-self: start;
   padding: 4px 6px;
   border: 1px solid var(--orange);
   color: var(--orange);
