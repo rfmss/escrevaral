@@ -1,0 +1,12 @@
+/* Diagnóstico e estabilização de composição do Gate 6.75. */
+.paper {
+  background-clip: border-box !important;
+  background-origin: padding-box !important;
+  background-blend-mode: normal, normal, normal !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  isolation: isolate;
+}
