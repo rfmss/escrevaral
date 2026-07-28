@@ -76,7 +76,7 @@ function stableSerialize(value: unknown): string {
     return `{${entries.join(',')}}`
   }
 
-  return JSON.stringify(value)
+  return JSON.stringify(value) ?? 'null'
 }
 
 export function createContentSignature(content: JSONContent): string {
