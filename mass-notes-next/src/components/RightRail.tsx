@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
-import type { ReviewIssue } from '../engines/reviewAdapter'
+import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
 import { ContextPanel } from './ContextPanel'
 import { RimaLabPanel } from './RimaLabPanel'
@@ -17,14 +17,20 @@ const TABS = [
 
 type Tab = typeof TABS[number]['id']
 
+type LocatedReviewPresentation = LocatedReviewIssue & {
+  positionRange: { from: number; to: number }
+}
+
 type Props = {
   document: EscrevaralDocument
   open: boolean
   analyzing: boolean
   issues: ReviewIssue[]
+  locatedIssues: LocatedReviewPresentation[]
   reviewMessage: string
   onClose: () => void
   onAnalyze: () => void
+  onNavigateIssue: (issue: LocatedReviewPresentation) => void
   onStatus: (status: DocumentStatus) => void
   onDuplicate: () => void
   onExport: () => void
@@ -47,9 +53,11 @@ export function RightRail({
   open,
   analyzing,
   issues,
+  locatedIssues,
   reviewMessage,
   onClose,
   onAnalyze,
+  onNavigateIssue,
   onStatus,
   onDuplicate,
   onExport,
@@ -182,6 +190,33 @@ export function RightRail({
               {analyzing ? 'Lendo o texto…' : 'Analisar em português brasileiro'}
             </button>
             <p className="review-message" role="status">{reviewMessage}</p>
+
+            {locatedIssues.length > 0 && (
+              <section className="review-located" aria-labelledby="review-located-title">
+                <h3 id="review-located-title">Trechos localizados</h3>
+                <p>A marca apenas aponta o trecho. O texto não será alterado.</p>
+                <div className="review-located-list">
+                  {locatedIssues.map((issue) => (
+                    <article key={issue.id} className={`review-located-card severity-${issue.severity}`}>
+                      <span className="review-source">{issue.ruleId}</span>
+                      <strong>{issue.title}</strong>
+                      <blockquote>{issue.fragment}</blockquote>
+                      {issue.detail && <p>{issue.detail}</p>}
+                      <button
+                        type="button"
+                        className="review-jump"
+                        onClick={() => onNavigateIssue(issue)}
+                        aria-label={`Ir ao trecho: ${issue.fragment}`}
+                      >
+                        Ir ao trecho
+                      </button>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {issues.length > 0 && <h3 className="review-general-title">Observações gerais</h3>}
             <div className="review-list">
               {issues.map((issue) => (
                 <article key={issue.id} className={`review-card severity-${issue.severity}`}>
