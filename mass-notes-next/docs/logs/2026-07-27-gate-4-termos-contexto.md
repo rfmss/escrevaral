@@ -73,9 +73,40 @@ A engine expõe `window.VeredaDecolonial` com:
 - Chromium e Firefox verdes;
 - preview publicada somente após gate verde.
 
-## Registro de execução
+## Implementação inicial
 
-A preencher.
+- adaptador criado em `src/engines/decolonialAdapter.ts`;
+- base original fornecida à engine durante o carregamento, sem cópia editada;
+- painel criado em `src/components/ContextPanel.tsx`;
+- aba `Contexto` adicionada ao rail;
+- cinco abas organizadas em duas linhas equilibradas;
+- seis cenários novos adicionados ao Playwright;
+- workflow passou a observar engine e base.
+
+## Tentativa 1
+
+- commit testado: `d367f4838e913f973e921f1d15223bb98ce21fea`;
+- workflow: `30316002586`;
+- build TypeScript/Vite: aprovado;
+- testes: falharam antes de exercer a engine;
+- preview: corretamente bloqueada.
+
+### Causa
+
+O helper novo esperava `data-document-id` em `.note-card.active`, mas esse atributo não faz parte do contrato da biblioteca. Todos os cenários ficaram presos tentando observar um identificador inexistente.
+
+### Decisão
+
+Não adicionar atributo de teste ao produto. A criação passa a ser sincronizada pela contagem visível de páginas e pelo título vazio do documento recém-criado.
+
+### Correção
+
+- helper alterado no commit `75a1347d819234c21e3b3298a219fd4450085786`;
+- nenhuma mudança de produto foi necessária.
+
+## Próxima execução
+
+Repetir build e matriz completa em Chromium e Firefox. Preview permanece bloqueada até gate verde.
 
 ## Decisão final
 
