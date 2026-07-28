@@ -5,6 +5,8 @@ import './styles/app.css'
 import './styles/polish.css'
 import './styles/design-stabilization.css'
 import './styles/design-stabilization-mobile.css'
+import './styles/theme-blueprint.tokens.css'
+import './styles/theme-blueprint.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
