@@ -33,5 +33,26 @@ test('diagnóstico temporário do empilhamento do papel', async ({ page }, testI
   })
 
   writeFileSync('test-results/blueprint-paint-stack.json', JSON.stringify(report, null, 2))
+  await page.screenshot({ path: 'test-results/blueprint-paint-1-normal.png', fullPage: true })
+
+  await page.evaluate(() => {
+    for (const selector of ['.grain', '.halftone']) {
+      const element = document.querySelector<HTMLElement>(selector)
+      if (element) element.style.display = 'none'
+    }
+  })
+  await page.screenshot({ path: 'test-results/blueprint-paint-2-no-texture.png', fullPage: true })
+
+  await page.evaluate(() => {
+    const element = document.querySelector<HTMLElement>('.blueprint')
+    if (element) element.style.display = 'none'
+  })
+  await page.screenshot({ path: 'test-results/blueprint-paint-3-no-blueprint.png', fullPage: true })
+
+  await page.locator('.paper').evaluate((element) => {
+    element.style.background = 'rgb(243, 238, 228)'
+  })
+  await page.screenshot({ path: 'test-results/blueprint-paint-4-solid-paper.png', fullPage: true })
+
   expect(report.stack.some((entry) => String(entry.className).includes('paper'))).toBe(true)
 })
