@@ -1,6 +1,6 @@
 import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { editorExtensions } from './editorExtensions'
 import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
@@ -43,6 +43,8 @@ function MassNotesEditorInstance({
   onChange,
   onPositionContract,
 }: Props) {
+  const [reviewDecorationsVisible, setReviewDecorationsVisible] = useState(true)
+
   const publishPositionContract = (current: Editor) => {
     const contract = createEditorPositionContract(current.state.doc, documentId, current.getJSON())
     const host = current.view.dom as PositionContractHost
@@ -72,10 +74,14 @@ function MassNotesEditorInstance({
   })
 
   useEffect(() => {
+    if (reviewDecorations.length) setReviewDecorationsVisible(true)
+  }, [reviewDecorations])
+
+  useEffect(() => {
     if (!editor) return
-    if (reviewDecorations.length) editor.commands.setReviewDecorations(reviewDecorations)
+    if (reviewDecorations.length && reviewDecorationsVisible) editor.commands.setReviewDecorations(reviewDecorations)
     else editor.commands.clearReviewDecorations()
-  }, [editor, reviewDecorations])
+  }, [editor, reviewDecorations, reviewDecorationsVisible])
 
   useEffect(() => {
     if (!editor || !reviewNavigation) return
@@ -148,6 +154,17 @@ function MassNotesEditorInstance({
           <button type="button" title="Adicionar ou editar link" onClick={addLink}>Link</button>
           <button type="button" title="Limpar formatação do bloco e da seleção" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>Limpar</button>
         </div>
+        {reviewDecorations.length > 0 && (
+          <div className="toolbar-group" role="group" aria-label="Marcações da revisão">
+            <button
+              type="button"
+              aria-pressed={reviewDecorationsVisible}
+              onClick={() => setReviewDecorationsVisible((visible) => !visible)}
+            >
+              {reviewDecorationsVisible ? 'Ocultar marcações' : 'Mostrar marcações'}
+            </button>
+          </div>
+        )}
       </div>
       <EditorContent editor={editor} />
     </>
