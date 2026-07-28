@@ -30,7 +30,7 @@ export function ExperienceShell() {
   useEffect(() => clearTimers, [clearTimers])
 
   useEffect(() => {
-    const assetUrl = `${import.meta.env.BASE_URL}assets/blueprint/anatomia-livro-render.png`
+    const assetUrl = `${import.meta.env.BASE_URL}assets/blueprint/anatomia-livro-render.webp`
     document.documentElement.style.setProperty('--anatomy-blueprint-image', `url("${assetUrl}")`)
     return () => {
       document.documentElement.style.removeProperty('--anatomy-blueprint-image')
