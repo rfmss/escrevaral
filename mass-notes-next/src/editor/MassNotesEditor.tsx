@@ -1,5 +1,4 @@
-import type { JSONContent } from '@tiptap/core'
-import type { Editor } from '@tiptap/core'
+import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { editorExtensions } from './editorExtensions'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
@@ -51,10 +50,6 @@ function MassNotesEditorInstance({ documentId, content, onChange, onPositionCont
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
-    },
-    onDestroy: ({ editor: current }) => {
-      const host = current.view.dom as PositionContractHost
-      delete host.__escrevaralPositionContract
     },
   })
 
