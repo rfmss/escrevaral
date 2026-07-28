@@ -104,6 +104,38 @@ Não adicionar atributo de teste ao produto. A criação passa a ser sincronizad
 - helper alterado no commit `75a1347d819234c21e3b3298a219fd4450085786`;
 - nenhuma mudança de produto foi necessária.
 
+## Tentativa 2
+
+- commit testado: `6ae7659f7b71fa8e20842aa92236b512ec2d7b0b`;
+- workflow: `30316388382`;
+- build TypeScript/Vite: aprovado;
+- página vazia e layout mobile: aprovados;
+- quatro fluxos com engine: falharam;
+- preview: corretamente bloqueada.
+
+### Falha real — concorrência na inicialização
+
+Ao executar o script, a engine chama `ensureLoaded()` imediatamente. O adaptador restaurava o `fetch` original e depois chamava `ensureLoaded()` novamente. As duas cargas concorriam: uma recebia a base empacotada e a segunda tentava buscar `decolonial-data.json` no servidor. A segunda falha marcava `_loadError`, tornando a engine indisponível mesmo quando a primeira carga havia recebido os dados.
+
+### Decisão
+
+A ponte de `fetch` local deve permanecer ativa até a inicialização da engine terminar. Uma única promessa compartilhada passa a representar o carregamento; chamadas concorrentes aguardam o mesmo resultado.
+
+### Correção de produto
+
+- inicialização serializada por `loadingPromise`;
+- ponte local mantida durante `ensureLoaded()`;
+- `fetch` global restaurado em `finally`;
+- correção no commit `109acf3108340a5484ccbb127fbc75166f437797`.
+
+### Falha do auditor
+
+O cenário de exceção tentava importar `/src/engines/decolonialAdapter.ts` no build Vite de preview. Arquivos TypeScript de fonte não existem como rota no build compilado.
+
+### Correção do auditor
+
+O cenário agora realiza uma leitura real para confirmar a carga e, em seguida, substitui temporariamente `window.VeredaDecolonial.detectText` por uma exceção controlada. A correção está no commit `fa00d3b84b52a703037e978e3282c1b5c010fbc7`.
+
 ## Próxima execução
 
 Repetir build e matriz completa em Chromium e Firefox. Preview permanece bloqueada até gate verde.
