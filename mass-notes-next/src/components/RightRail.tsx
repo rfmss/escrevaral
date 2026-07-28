@@ -83,10 +83,10 @@ export function RightRail({
 
   useEffect(() => {
     setReviewMarksVisible(true)
-    document.body.classList.remove('review-marks-hidden')
+    window.document.body.classList.remove('review-marks-hidden')
   }, [document.id, locatedIssues])
 
-  useEffect(() => () => document.body.classList.remove('review-marks-hidden'), [])
+  useEffect(() => () => window.document.body.classList.remove('review-marks-hidden'), [])
 
   const readText = () => {
     setTab('revisao')
@@ -96,7 +96,7 @@ export function RightRail({
   const toggleReviewMarks = () => {
     setReviewMarksVisible((visible) => {
       const next = !visible
-      document.body.classList.toggle('review-marks-hidden', !next)
+      window.document.body.classList.toggle('review-marks-hidden', !next)
       return next
     })
   }
