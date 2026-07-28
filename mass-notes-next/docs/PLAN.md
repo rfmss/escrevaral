@@ -16,6 +16,7 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - revisão condicional e conflito entre abas;
 - engines legadas por adaptadores;
 - contrato comum de posições textuais;
+- primeira decoration ProseMirror somente de leitura;
 - tokens visuais semânticos;
 - skin Blueprint Tokon isolada e reversível;
 - dependências reproduzíveis por `package-lock.json` e `npm ci`;
@@ -131,7 +132,7 @@ Documentação detalhada:
 
 ### Gate 6.9 — auditoria editorial do contrato de posições
 
-- seis corpora originais em português brasileiro: prosa/dialogue, ensaio, poesia, cordel, canção e Unicode;
+- seis corpora originais em português brasileiro: prosa/diálogo, ensaio, poesia, cordel, canção e Unicode;
 - 39 ranges editoriais auditados por navegador;
 - travessões, aspas curvas, acentos precompostos, acento combinante, emoji, ZWJ, bandeira e reticências cobertos;
 - blockquote, lista numerada, lista aninhada, títulos, blocos vazios, estrofes e `hardBreak` cobertos;
@@ -167,13 +168,14 @@ Documentação detalhada:
 - HTML, texto, assinatura estrutural, histórico e persistência permanecem intactos;
 - a cor de análise permanece distinta da seleção e as marcas não recebem eventos de ponteiro;
 - desktop e mobile foram validados em Chromium e Firefox;
-- a preview passou a usar assets estáveis, fallback visível e verificação do endereço público após a publicação.
+- o halo cinza ao lado da folha foi removido sem eliminar a sombra gráfica seca;
+- a preview usa assets estáveis, fallback visível e verificação do endereço público após a publicação.
 
 Evidência final: workflow `30367072054`, 67 cenários por navegador, 134 execuções, zero falhas, zero flakiness; build, Chromium, Firefox, publicação, limpeza de cache e smoke test público aprovados.
 
 Documentação detalhada:
 
-- `docs/logs/2026-07-28-gate-7-revisao-inline.md`;
+- `docs/logs/2026-07-28-gate-7-review-decorations.md`;
 - `../docs/product/MASS_NOTES_TIPTAP_GATE_7.md`.
 
 ## Lote atual — avaliação manual do Gate 7
@@ -187,7 +189,8 @@ Nenhum novo gate começa automaticamente. O próximo passo é avaliação manual
 5. ocultar e restaurar as marcas sem perder a lista de observações;
 6. editar o texto e confirmar que a leitura antiga desaparece;
 7. conferir papel e noite, desktop e mobile;
-8. registrar qualquer falha P0/P1 antes de autorizar ampliação.
+8. avaliar densidade visual e sobreposição em textos com muitas ocorrências;
+9. registrar qualquer falha P0/P1 antes de autorizar ampliação.
 
 Sem falha bloqueadora e somente após autorização explícita, o lote seguinte poderá ser proposto. A integração de novas engines com decorations, aplicação de sugestões ou promoção para `main` não está autorizada por este gate.
 
@@ -195,6 +198,7 @@ Sem falha bloqueadora e somente após autorização explícita, o lote seguinte 
 
 - aplicação automática de sugestões;
 - correção em massa;
+- tooltips dentro do editor;
 - áudio ou leitura em voz alta;
 - paginação física;
 - service worker;
