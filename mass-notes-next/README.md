@@ -10,11 +10,13 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - aplicação pública, `main` e service worker: não alterados;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições: aprovado sem decorations;
+- auditoria editorial de posições: aprovada com textos brasileiros reais;
 - estabilização visual: aprovada sem redesign;
 - tema Blueprint Tokon: aprovado sem alterar layout;
-- Gates 1 a 6.75: aprovados em Chromium e Firefox;
-- matriz atual: 50 cenários por navegador, 100 execuções;
-- próximo passo: auditoria manual dos offsets com textos reais antes de qualquer marcação inline.
+- dependências: travadas por overrides, `package-lock.json` e `npm ci`;
+- Gates 1 a 6.9: aprovados em Chromium e Firefox;
+- matriz atual: 59 cenários por navegador, 118 execuções;
+- próximo passo: decisão explícita sobre um gate pequeno de decorations somente de leitura.
 
 ## Retomar o projeto
 
@@ -24,17 +26,20 @@ Leia nesta ordem:
 2. `docs/MEMORY.md` — decisões, contratos e limitações ativas;
 3. `docs/CHANGELOG.md` — mudanças relevantes;
 4. log mais recente em `docs/logs/`;
-5. `docs/design/BLUEPRINT_THEME.md` — contrato da skin atual;
-6. documentação global em `../docs/_decisoes/` e `../docs/product/`.
+5. `docs/audits/GATE_6_9_POSITION_AUDIT.json` — evidência consolidada dos offsets;
+6. `docs/design/BLUEPRINT_THEME.md` — contrato da skin atual;
+7. documentação global em `../docs/_decisoes/` e `../docs/product/`.
 
 Não comece um novo lote antes de revisar o plano e a memória. Um lote não está concluído sem atualizar documentação, testes e evidências.
 
 ## Executar
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
+
+Não use `npm install` como caminho normal: o lockfile é parte do contrato de reprodutibilidade.
 
 ## Validar
 
@@ -58,8 +63,10 @@ npm run test:e2e
 - offsets do contrato usam UTF-16;
 - identidade do documento e assinatura estrutural são verificações diferentes;
 - blocos vazios e separadores virtuais são preservados;
+- placeholders `ProseMirror-trailingBreak` e `ProseMirror-separator` não são texto autoral;
 - consultas de posições não alteram o editor;
 - nenhuma engine altera o manuscrito neste estágio;
+- nenhuma decoration está autorizada neste estágio;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - design usa tokens semânticos e não depende de herança acidental de cor;
 - modo noite deve permanecer legível durante toda a troca de tema;
