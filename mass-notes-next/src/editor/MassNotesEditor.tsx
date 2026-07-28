@@ -1,6 +1,8 @@
 import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
+import { useEffect } from 'react'
 import { editorExtensions } from './editorExtensions'
+import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
 
 type EditorSnapshot = {
@@ -12,10 +14,19 @@ type PositionContractHost = HTMLElement & {
   __escrevaralPositionContract?: EditorPositionContract
 }
 
+export type ReviewNavigationRequest = {
+  serial: number
+  issueId: string
+  from: number
+  to: number
+}
+
 type Props = {
   documentId: string
   content: JSONContent
   resetKey: number
+  reviewDecorations?: ReviewDecorationSpec[]
+  reviewNavigation?: ReviewNavigationRequest | null
   onChange: (snapshot: EditorSnapshot) => void
   onPositionContract?: (contract: EditorPositionContract) => void
 }
@@ -24,7 +35,14 @@ export function MassNotesEditor(props: Props) {
   return <MassNotesEditorInstance key={`${props.documentId}:${props.resetKey}`} {...props} />
 }
 
-function MassNotesEditorInstance({ documentId, content, onChange, onPositionContract }: Props) {
+function MassNotesEditorInstance({
+  documentId,
+  content,
+  reviewDecorations = [],
+  reviewNavigation,
+  onChange,
+  onPositionContract,
+}: Props) {
   const publishPositionContract = (current: Editor) => {
     const contract = createEditorPositionContract(current.state.doc, documentId, current.getJSON())
     const host = current.view.dom as PositionContractHost
@@ -52,6 +70,21 @@ function MassNotesEditorInstance({ documentId, content, onChange, onPositionCont
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
     },
   })
+
+  useEffect(() => {
+    if (!editor) return
+    if (reviewDecorations.length) editor.commands.setReviewDecorations(reviewDecorations)
+    else editor.commands.clearReviewDecorations()
+  }, [editor, reviewDecorations])
+
+  useEffect(() => {
+    if (!editor || !reviewNavigation) return
+    const maximum = editor.state.doc.content.size
+    const from = Math.max(0, Math.min(maximum, reviewNavigation.from))
+    const to = Math.max(from, Math.min(maximum, reviewNavigation.to))
+    if (from === to) return
+    editor.chain().focus().setTextSelection({ from, to }).scrollIntoView().run()
+  }, [editor, reviewNavigation])
 
   const state = useEditorState({
     editor,
