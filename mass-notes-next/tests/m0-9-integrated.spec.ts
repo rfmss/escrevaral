@@ -313,7 +313,6 @@ test('conflito misto entre manuscrito e metadados preserva as duas versões', as
   await expect(second.getByRole('button', { name: 'Página favorita' })).toHaveAttribute('aria-pressed', 'true')
   await waitSaved(second)
 
-  await page.reload()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão textual remota do M0.9')
   const records = await allRecords(page)
   expect(records.some((item) => item.title === 'Versão textual remota do M0.9')).toBe(true)
