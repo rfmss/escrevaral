@@ -6,16 +6,9 @@ Atualizado em: 2026-07-29
 
 Este arquivo é a memória operacional executável do milestone **M0.9 — Candidata Integrada do Escrevaral**.
 
-Ele existe para que qualquer pessoa, IA ou plataforma consiga:
+Ele existe para permitir que qualquer pessoa, IA ou plataforma retome a auditoria sem histórico de conversa, execute os mesmos critérios e mantenha decisões, achados, notas, severidades e evidências sincronizados.
 
-- retomar a auditoria sem depender de histórico de conversa;
-- saber qual é a linha de base validada;
-- executar as mesmas jornadas e critérios;
-- registrar decisões importantes no momento em que forem tomadas;
-- manter notas, severidades, evidências e veredito sincronizados;
-- impedir que uma nova feature seja iniciada antes de uma visão integrada do produto.
-
-Este documento deve ser atualizado sempre que houver mudança de escopo, decisão importante, novo P0/P1/P2, alteração de severidade, correção aceita, nova evidência, mudança de nota ou mudança de veredito.
+Deve ser atualizado sempre que houver mudança de escopo, decisão importante, novo P0/P1/P2, alteração de severidade, correção aceita, nova evidência ou mudança de veredito.
 
 ## Estado executivo
 
@@ -27,14 +20,15 @@ Este documento deve ser atualizado sempre que houver mudança de escopo, decisã
 - Gates 1 a 13 e Gate 10.5: concluídos;
 - matriz atual: 116 cenários por navegador, 232 execuções;
 - cabeça funcional da primeira tranche: `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
-- cabeça documental preparada para validação: `14df8547ddb99ee8ecbb822b765b98d67a06c769`;
 - nota provisória: 85/100;
 - beta fechada: `SHIP COM CONDIÇÕES` provisório;
 - lançamento público: `NO-SHIP` provisório;
 - substituição integral: `NO-SHIP` provisório;
 - P0 abertos: 0;
 - P1 abertos: 0;
-- próxima ação: validar a cabeça documental e executar a segunda tranche.
+- próxima ação: validar a cabeça documental atual e executar a segunda tranche.
+
+A cabeça documental exata e seus workflows são registrados no corpo do PR somente depois da CI, pois inserir o próprio SHA em um arquivo cria um novo commit e invalida a evidência.
 
 ## Pergunta central
 
@@ -75,7 +69,8 @@ Concluído:
 
 Pendente:
 
-- CI verde na cabeça documental preparada;
+- CI verde na cabeça documental atual;
+- atualização executiva do PR com a evidência exata;
 - segunda tranche;
 - decisões finais para P2;
 - veredito final;
@@ -184,6 +179,7 @@ Pendentes:
 | 2026-07-29 | M09-D004 | Avaliar beta, lançamento e substituição separadamente. | Objetivos têm exigências diferentes. | Três vereditos independentes. |
 | 2026-07-29 | M09-D005 | Classificar a falha inicial do RimaLab como temporal de teste. | Autosave já estava em `Salvo`; casos M0.9 passaram. | Produto não mudou; convergência final preservada. |
 | 2026-07-29 | M09-D006 | Notas e vereditos permanecem provisórios. | Fases obrigatórias ainda faltam. | M0.9 continua aberto. |
+| 2026-07-29 | M09-D007 | Registrar o SHA documental exato no PR após a CI. | Um arquivo não pode registrar o próprio SHA sem criar outro commit. | Evidência final fica verificável sem ciclo infinito. |
 
 ## Registro de achados
 
@@ -201,7 +197,8 @@ Pendentes:
 | 2026-07-29 | `323e8a1e131a3692932e960e9285570df49a1460` | Gate 13 | 222/222, preview, Argila e coerência verdes |
 | 2026-07-29 | `f3ab89db816557984ed19bc8ab17d2d96137d946` | primeira execução M0.9 | 231/232; 10/10 casos novos verdes; falha temporal antiga |
 | 2026-07-29 | `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510` | primeira tranche funcional | Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811`; 232/232 e smoke verde |
-| 2026-07-29 | `14df8547ddb99ee8ecbb822b765b98d67a06c769` | cabeça documental preparada | validação exata em andamento |
+
+A evidência da cabeça documental atual será anexada ao PR depois da conclusão dos workflows, sem novo commit no branch.
 
 ## Paridade com o Escrevaral antigo
 
@@ -239,7 +236,7 @@ Pendentes:
 
 ## Critério de encerramento
 
-O milestone só encerra quando não houver P0 aberto, todo P1 tiver decisão explícita, a matriz integral estiver verde, workflows e preview estiverem verdes, veredito final estiver registrado, documentação apontar para a cabeça exata e o PR continuar em rascunho e não incorporado.
+O milestone só encerra quando não houver P0 aberto, todo P1 tiver decisão explícita, a matriz integral estiver verde, workflows e preview estiverem verdes, veredito final estiver registrado, documentação estiver sincronizada e o PR continuar em rascunho e não incorporado.
 
 ## Protocolo de atualização
 
