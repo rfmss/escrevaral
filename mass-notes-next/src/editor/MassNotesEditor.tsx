@@ -2,6 +2,7 @@ import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { useEffect } from 'react'
 import { editorExtensions } from './editorExtensions'
+import { publishLexicalSelection } from './lexicalSelectionBridge'
 import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
 
@@ -12,19 +13,6 @@ type EditorSnapshot = {
 
 type PositionContractHost = HTMLElement & {
   __escrevaralPositionContract?: EditorPositionContract
-}
-
-export type LexicalSelectionSnapshot = {
-  documentId: string
-  from: number
-  to: number
-  text: string
-}
-
-declare global {
-  interface Window {
-    __escrevaralLexicalSelection?: LexicalSelectionSnapshot
-  }
 }
 
 export type ReviewNavigationRequest = {
@@ -63,17 +51,15 @@ function MassNotesEditorInstance({
     onPositionContract?.(contract)
   }
 
-  const publishLexicalSelection = (current: Editor) => {
+  const publishCurrentLexicalSelection = (current: Editor) => {
     const { from, to, empty } = current.state.selection
     const selected = empty ? '' : current.state.doc.textBetween(from, to, ' ', ' ').trim()
-    const snapshot: LexicalSelectionSnapshot = {
+    publishLexicalSelection({
       documentId,
       from,
       to,
       text: selected.length <= 120 ? selected : '',
-    }
-    window.__escrevaralLexicalSelection = snapshot
-    window.dispatchEvent(new CustomEvent('escrevaral:lexical-selection', { detail: snapshot }))
+    })
   }
 
   const editor = useEditor({
@@ -90,15 +76,15 @@ function MassNotesEditorInstance({
     },
     onCreate: ({ editor: current }) => {
       publishPositionContract(current)
-      publishLexicalSelection(current)
+      publishCurrentLexicalSelection(current)
     },
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
-      publishLexicalSelection(current)
+      publishCurrentLexicalSelection(current)
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
     },
     onSelectionUpdate: ({ editor: current }) => {
-      publishLexicalSelection(current)
+      publishCurrentLexicalSelection(current)
     },
   })
 
