@@ -102,7 +102,7 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
         <button className="icon-btn" type="button" onClick={onNew} aria-label="Novo documento">＋</button>
       </div>
 
-      <section className="library-filters" aria-label="Filtrar e ordenar biblioteca">
+      <section className="library-filters" aria-label="Controles da biblioteca">
         <div className="library-filter-label">Estado</div>
         <div className="library-status-filters" role="group" aria-label="Filtrar por estado">
           {STATUS_FILTERS.map((item) => (
@@ -127,20 +127,30 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           <span aria-hidden="true">★</span> Somente favoritas
         </button>
 
-        <label className="library-select-field" htmlFor="library-tag-filter">
-          <span>Tag</span>
-          <select id="library-tag-filter" value={tag} onChange={(event) => setTag(event.target.value)}>
+        <div className="library-select-field">
+          <label htmlFor="library-tag-filter">Tag</label>
+          <select
+            id="library-tag-filter"
+            aria-label="Filtrar por tag"
+            value={tag}
+            onChange={(event) => setTag(event.target.value)}
+          >
             <option value="">Todas as tags</option>
             {tags.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
-        </label>
+        </div>
 
-        <label className="library-select-field" htmlFor="library-sort">
-          <span>Ordenar</span>
-          <select id="library-sort" value={sort} onChange={(event) => setSort(event.target.value as LibrarySort)}>
+        <div className="library-select-field">
+          <label htmlFor="library-sort">Ordenar</label>
+          <select
+            id="library-sort"
+            aria-label="Ordenar páginas"
+            value={sort}
+            onChange={(event) => setSort(event.target.value as LibrarySort)}
+          >
             {SORT_OPTIONS.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
-        </label>
+        </div>
 
         <div className="library-filter-summary" aria-live="polite">
           <span>{visible.length} de {documents.length} {documents.length === 1 ? 'página' : 'páginas'}</span>
@@ -165,10 +175,13 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           >
             <span className="note-stripe" aria-hidden="true" />
             <span className="note-copy">
-              <span className="note-title">{document.favorite && <span className="note-favorite" aria-label="Favorita">★</span>}{displayTitle(document)}</span>
+              <span className="note-title">
+                {document.favorite && <span className="note-favorite" aria-hidden="true">★</span>}
+                <span className="note-title-text">{displayTitle(document)}</span>
+              </span>
               <span className="note-meta" title={`Alterada em ${absoluteTime(document.updatedAt)}`}>{document.status} · {relativeTime(document.updatedAt)}</span>
               {document.tags.length > 0 && (
-                <span className="note-tags" aria-label={`Tags: ${document.tags.join(', ')}`}>
+                <span className="note-tags" aria-label={`Marcadores: ${document.tags.join(', ')}`}>
                   {document.tags.slice(0, 2).map((item) => <span key={item}>{item}</span>)}
                   {document.tags.length > 2 && <span>+{document.tags.length - 2}</span>}
                 </span>
