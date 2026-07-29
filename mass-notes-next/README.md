@@ -12,12 +12,13 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - contrato de posições: aprovado e auditado com textos brasileiros reais;
 - primeira decoration: aprovada somente para ranges verificáveis de pontuação da Revisão;
 - navegação cartão → trecho e ocultação reversível: aprovadas;
-- estabilização visual: aprovada sem redesign;
-- tema Blueprint Tokon: aprovado sem alterar layout;
+- estabilização visual e tema Blueprint Tokon: aprovados sem alterar a fundação;
+- Anatomia do Livro: integrada, publicada e preservada por runtime gerado na CI;
+- exportação estrutural: TXT, Markdown e HTML gerados localmente a partir do JSON Tiptap;
 - dependências: travadas por overrides, `package-lock.json` e `npm ci`;
-- Gates 1 a 7: aprovados em Chromium e Firefox;
-- matriz atual: 67 cenários por navegador, 134 execuções;
-- próximo passo: avaliação manual do Gate 7, sem iniciar novo gate automaticamente.
+- Gates 1 a 9A: aprovados em Chromium e Firefox;
+- matriz atual: 80 cenários por navegador, 160 execuções;
+- próximo passo lógico: Gate 9B, cópia nativa e restauração segura, sem DOCX/ePub neste corte.
 
 ## Retomar o projeto
 
@@ -50,9 +51,27 @@ npx playwright install chromium firefox
 npm run test:e2e
 ```
 
+## Organização da fonte
+
+```text
+src/
+├── components/   # apresentação e interação React
+├── domain/       # contratos do documento
+├── editor/       # Tiptap, ProseMirror, posições e decorations
+├── engines/      # adaptadores tipados para engines legadas
+├── export/       # serialização e entrega de arquivos
+├── pages/        # páginas especiais integradas
+├── storage/      # IndexedDB, migração e conflitos
+├── styles/       # camadas visuais por responsabilidade
+└── transitions/  # transições explícitas entre superfícies
+```
+
+Serialização, download e interface de exportação permanecem separados. Novos formatos não devem ser implementados diretamente em `App.tsx` ou `RightRail.tsx`.
+
 ## Princípios ativos
 
 - Tiptap/ProseMirror cuida de documento, cursor, seleção e histórico;
+- JSON Tiptap é a fonte estrutural; HTML, Markdown e texto são derivados;
 - IndexedDB é a fonte principal dos documentos;
 - engines entram somente por adaptadores tipados;
 - nenhuma engine conhece React, Tiptap ou DOM;
@@ -71,6 +90,8 @@ npm run test:e2e
 - alertas sem posição exata permanecem no painel;
 - marcas podem ser ocultadas sem apagar a leitura;
 - nenhuma action aplica, corrige ou substitui texto;
+- exportar não altera JSON, título, histórico, seleção, revisão ou persistência;
+- HTML exportado escapa conteúdo e só preserva links com protocolos permitidos;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - design usa tokens semânticos e não depende de herança acidental de cor;
 - seleção e análise possuem cores diferentes;
@@ -92,10 +113,13 @@ src/styles/theme-blueprint.tokens.css
 src/styles/theme-blueprint.css
 src/styles/theme-blueprint-composition.css
 src/styles/review-decorations.css
+src/styles/export-panel.css
+src/styles/anatomy-host.css
+src/styles/page-press-transition.css
 ```
 
 As skins não contêm lógica de produto. A decoration linguística é projeção efêmera e não integra o JSON do documento.
 
 ## Limites atuais
 
-Ainda não estão aprovados service worker/offline em nova sessão, Tauri, SQLite, DOCX, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
+Ainda não estão aprovados cópia nativa/restauração do Next, DOCX, RTF, ePub, exportação múltipla, service worker/offline em nova sessão, Tauri, SQLite, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
