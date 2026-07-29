@@ -104,11 +104,33 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - workflow `30449369857` aprovou build, Chromium, Firefox, publicação, cache e verificação pública;
 - candidata Argila `30449371552` e coerência `30449371768` também ficaram verdes.
 
+### Gate 12 — metadados editoriais
+
+- criado `src/components/DocumentMetadataEditor.tsx` na aba Pulso;
+- criado `src/styles/document-metadata.css` com controles responsivos e chips removíveis;
+- favorito passou a ser alternado explicitamente na página ativa;
+- tags passaram a ser editadas como conjunto atômico separado por vírgulas;
+- tags são deduplicadas por caixa e acentos, limitadas a 8 itens de 32 caracteres e removíveis uma a uma;
+- estado, favorito e tags passaram a usar a mesma `revision`, o mesmo autosave, recuperação, IndexedDB e conflito do manuscrito;
+- introduzido `DraftMutationKind` para distinguir efeitos de `manuscript` e `metadata` sem criar uma segunda persistência;
+- título, JSON Tiptap e texto derivado continuam invalidando leituras linguísticas quando mudam;
+- estado, favorito e tags preservam editor montado, seleção, posição e decorations ainda válidas;
+- BroadcastChannel passou a anunciar o tipo da mutação junto de identidade e revisão;
+- mensagens antigas sem tipo usam comparação defensiva do manuscrito;
+- atualização remota limpa de metadados não reinicia o Tiptap;
+- conflito com rascunho local continua exigindo escolha explícita e nunca faz merge silencioso;
+- a mensagem de conflito passou a abranger escrita e organização editorial;
+- adicionados sete cenários por navegador para favorito, tags, limites, não invalidação, atualização remota, conflito e mobile;
+- a primeira execução revelou somente contratos de teste: wording antigo, suposição indevida sobre localStorage e seletor ambíguo de “Pronto”;
+- fixtures passaram a descobrir a página ativa pelo estado real e seletores foram delimitados ao painel Pulso;
+- matriz elevada para 105 cenários por navegador, 210 execuções;
+- workflow `30452750643` aprovou build, Chromium, Firefox, publicação, cache e verificação pública;
+- candidata Argila `30452747030` e coerência `30452747019` também ficaram verdes.
+
 ## Próximo lote proposto
 
-- Gate 12: edição segura e unitária de favorito e tags;
-- definir revisão e conflito para mudanças exclusivamente de metadados antes do código;
-- nenhuma edição ou exclusão em massa;
-- nenhuma hierarquia persistente sem migração;
-- nenhuma sincronização em nuvem ou colaboração;
-- nenhuma promoção para `main`.
+- Gate 13: importação auditável do `.esc` legado;
+- validar e pré-visualizar o arquivo antes de qualquer escrita;
+- converter por adaptador isolado e importar somente como novas cópias;
+- preservar `legacySourceId` para rastreabilidade sem reutilizar IDs;
+- nenhuma sincronização, colaboração, hierarquia persistente ou promoção para `main`.
