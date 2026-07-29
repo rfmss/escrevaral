@@ -4,6 +4,12 @@ const ACTIVE_KEY = 'escrevaral-mass-notes-next-active'
 const RECOVERY_KEY = 'escrevaral-mass-notes-next-recovery'
 const KNOWN_ANATOMY_EXTERNAL_SCRIPT = 'https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js'
 
+type ContractHost = HTMLElement & {
+  __escrevaralPositionContract?: {
+    snapshot: { text: string }
+  }
+}
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
@@ -15,6 +21,11 @@ async function waitSaved(page: Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible({ timeout: 5_000 })
   await page.keyboard.press('Control+S')
   await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+}
+
+async function waitEditorContract(page: Page, expectedText: string) {
+  await expect.poll(() => page.getByLabel('Texto do documento').evaluate((element) =>
+    (element as ContractHost).__escrevaralPositionContract?.snapshot.text ?? null)).toBe(expectedText)
 }
 
 async function createCleanDocument(page: Page, title: string) {
@@ -153,7 +164,8 @@ test('movimento reduzido encurta a transição editorial sem bloquear navegaçã
   const press = page.locator('.page-press')
   await expect(press).toBeVisible()
   const durationMs = await press.evaluate((node) => {
-    const raw = getComputedStyle(node).animationDuration.split(',')[0]?.trim() ?? '0s'
+    const firstDuration = getComputedStyle(node).animationDuration.split(',')[0]?.trim()
+    const raw = firstDuration || '0s'
     return raw.endsWith('ms') ? Number.parseFloat(raw) : Number.parseFloat(raw) * 1_000
   })
   expect(durationMs).toBeLessThanOrEqual(300)
@@ -332,17 +344,24 @@ test('corpus separado confirma cada engine sem alterar o texto observado', async
 
   const runWithStableText = async (source: string, action: () => Promise<void>) => {
     await editor.fill(source)
+    await waitEditorContract(page, source)
     await waitSaved(page)
     const before = await editor.innerText()
     await action()
     expect(await editor.innerText()).toBe(before)
   }
 
-  await runWithStableText('Ela entrou para dentro da casa. Ela tentou mas não conseguiu encerrar a revisão. O coração acelerou, o coração acelerou.', async () => {
+  const reviewCorpus = [
+    '🌿 A oficina abriu cedo e cada pessoa trouxe um caderno para trabalhar com atenção.',
+    'Ela tentou mas não conseguiu terminar a revisão antes do café.',
+    'Depois, releu as páginas com calma, conferiu os títulos e guardou o arquivo para continuar no fim da tarde.',
+  ].join('\n\n')
+
+  await runWithStableText(reviewCorpus, async () => {
     await page.getByRole('tab', { name: 'revisao', exact: true }).click()
     await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
-    await expect(page.getByRole('status')).toContainText(/observa|trecho/i, { timeout: 15_000 })
-    await expect.poll(() => page.locator('.review-card, .review-located-card').count()).toBeGreaterThan(0)
+    await expect(page.locator('[data-review-issue-id*="PONT-49"]').first()).toBeVisible({ timeout: 15_000 })
+    await expect(page.locator('.review-located-card').filter({ hasText: 'PONT-49' })).not.toHaveCount(0)
   })
 
   await runWithStableText('A narradora alterna frases curtas e longas, repete imagens de janela e mantém uma voz próxima, reflexiva e cuidadosa com quem lê.', async () => {
