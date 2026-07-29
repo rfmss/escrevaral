@@ -91,8 +91,10 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - adicionados cinco cenários por navegador para busca, seleção durável, não mutação, termo desconhecido e mobile;
 - restaurada a suíte robusta do RimaLab após uma simplificação acidental durante a estabilização;
 - documentWidth e rail permanecem sem overflow; diferenças subpixel de até 1 px são aceitas somente na caixa transformada;
+- o fixture estrutural do Gate 9 passou a sincronizar a DOM Tiptap com o estado React antes de baixar o arquivo;
 - matriz elevada para 91 cenários por navegador, 182 execuções;
-- workflow `30420965045` aprovou build, Chromium, Firefox, publicação, renovação de cache e verificação pública.
+- workflow funcional `30420965045` aprovou a implementação;
+- workflow final `30422368445` validou a cabeça `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a` com build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes.
 
 ## Próximo lote proposto
 
