@@ -15,10 +15,11 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - estabilização visual e tema Blueprint Tokon: aprovados sem alterar a fundação;
 - Anatomia do Livro: integrada, publicada e preservada por runtime gerado na CI;
 - exportação estrutural: TXT, Markdown e HTML gerados localmente a partir do JSON Tiptap;
+- cópia nativa: envelope JSON versionado e restauração sempre como novas cópias;
 - dependências: travadas por overrides, `package-lock.json` e `npm ci`;
-- Gates 1 a 9A: aprovados em Chromium e Firefox;
-- matriz atual: 80 cenários por navegador, 160 execuções;
-- próximo passo lógico: Gate 9B, cópia nativa e restauração segura, sem DOCX/ePub neste corte.
+- Gates 1 a 9B: aprovados em Chromium e Firefox;
+- matriz atual: 86 cenários por navegador, 172 execuções;
+- próximo passo lógico: Gate 10, Palavras/Léxico, sem ampliar formatos editoriais neste corte.
 
 ## Retomar o projeto
 
@@ -55,18 +56,19 @@ npm run test:e2e
 
 ```text
 src/
+├── backup/       # envelope nativo, versão, validação e download
 ├── components/   # apresentação e interação React
 ├── domain/       # contratos do documento
 ├── editor/       # Tiptap, ProseMirror, posições e decorations
 ├── engines/      # adaptadores tipados para engines legadas
-├── export/       # serialização e entrega de arquivos
+├── export/       # serialização e entrega de formatos editoriais
 ├── pages/        # páginas especiais integradas
-├── storage/      # IndexedDB, migração e conflitos
+├── storage/      # IndexedDB, migração, conflitos e restauração transacional
 ├── styles/       # camadas visuais por responsabilidade
 └── transitions/  # transições explícitas entre superfícies
 ```
 
-Serialização, download e interface de exportação permanecem separados. Novos formatos não devem ser implementados diretamente em `App.tsx` ou `RightRail.tsx`.
+Serialização, download e interface permanecem separados. Novos formatos ou versões de backup não devem ser implementados diretamente em `App.tsx` ou `RightRail.tsx`.
 
 ## Princípios ativos
 
@@ -92,6 +94,9 @@ Serialização, download e interface de exportação permanecem separados. Novos
 - nenhuma action aplica, corrige ou substitui texto;
 - exportar não altera JSON, título, histórico, seleção, revisão ou persistência;
 - HTML exportado escapa conteúdo e só preserva links com protocolos permitidos;
+- cópias nativas declaram schema e versão antes de qualquer documento;
+- arquivos inválidos são rejeitados antes de abrir transação de escrita;
+- restauração nunca reutiliza IDs nem substitui documentos existentes;
 - conflito entre abas nunca sobrescreve silenciosamente;
 - design usa tokens semânticos e não depende de herança acidental de cor;
 - seleção e análise possuem cores diferentes;
@@ -122,4 +127,4 @@ As skins não contêm lógica de produto. A decoration linguística é projeçã
 
 ## Limites atuais
 
-Ainda não estão aprovados cópia nativa/restauração do Next, DOCX, RTF, ePub, exportação múltipla, service worker/offline em nova sessão, Tauri, SQLite, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
+Ainda não estão aprovados importador do `.esc` legado, DOCX, RTF, ePub, exportação múltipla, Obsidian ZIP, service worker/offline em nova sessão, Tauri, SQLite, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
