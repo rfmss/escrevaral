@@ -42,7 +42,8 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 
 ## Evidência atual
 
-- workflow funcional final: `30420965045`;
+- workflow final: `30422368445`;
+- cabeça validada: `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a`;
 - 91 cenários por navegador;
 - 182 execuções aprovadas;
 - build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes;
