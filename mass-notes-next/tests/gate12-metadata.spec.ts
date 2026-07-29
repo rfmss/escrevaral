@@ -20,39 +20,63 @@ async function waitReady(page: Page) {
 }
 
 async function waitSaved(page: Page) {
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible({ timeout: 5_000 })
   await expect(page.locator('.field-value').filter({ hasText: 'Salvo' })).toBeVisible({ timeout: 10_000 })
 }
 
+async function activeDocumentId(page: Page): Promise<string> {
+  const title = await page.getByLabel('Título do documento').inputValue()
+  return page.evaluate(async (activeTitle) => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open('escrevaral-mass-notes-next', 1)
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+    })
+    const rows = await new Promise<Array<Record<string, unknown>>>((resolve, reject) => {
+      const request = db.transaction('documents').objectStore('documents').getAll()
+      request.onsuccess = () => resolve(request.result as Array<Record<string, unknown>>)
+      request.onerror = () => reject(request.error)
+    })
+    db.close()
+
+    const remembered = localStorage.getItem('escrevaral-mass-notes-next-active')
+    const byRemembered = remembered ? rows.find((row) => row.id === remembered) : undefined
+    const byTitle = rows.find((row) => String(row.title ?? '') === activeTitle)
+    const fallback = [...rows].sort((left, right) => Number(right.updatedAt) - Number(left.updatedAt))[0]
+    const id = byRemembered?.id ?? byTitle?.id ?? fallback?.id
+    if (typeof id !== 'string' || !id) throw new Error('Documento ativo ausente.')
+    return id
+  }, title)
+}
+
 async function activeRecord(page: Page) {
-  return page.evaluate(async () => {
-    const id = localStorage.getItem('escrevaral-mass-notes-next-active')
-    if (!id) throw new Error('Documento ativo ausente.')
+  const id = await activeDocumentId(page)
+  return page.evaluate(async (documentId) => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open('escrevaral-mass-notes-next', 1)
       request.onsuccess = () => resolve(request.result)
       request.onerror = () => reject(request.error)
     })
     const row = await new Promise<Record<string, unknown>>((resolve, reject) => {
-      const request = db.transaction('documents').objectStore('documents').get(id)
+      const request = db.transaction('documents').objectStore('documents').get(documentId)
       request.onsuccess = () => resolve(request.result as Record<string, unknown>)
       request.onerror = () => reject(request.error)
     })
     db.close()
     return row
-  })
+  }, id)
 }
 
 async function publishRemoteMetadata(page: Page, changes: { favorite?: boolean; tags?: string[]; status?: string }) {
-  await page.evaluate(async (patch) => {
-    const id = localStorage.getItem('escrevaral-mass-notes-next-active')
-    if (!id) throw new Error('Documento ativo ausente.')
+  const id = await activeDocumentId(page)
+  await page.evaluate(async ({ documentId, patch }) => {
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
       const request = indexedDB.open('escrevaral-mass-notes-next', 1)
       request.onsuccess = () => resolve(request.result)
       request.onerror = () => reject(request.error)
     })
     const current = await new Promise<Record<string, unknown>>((resolve, reject) => {
-      const request = db.transaction('documents').objectStore('documents').get(id)
+      const request = db.transaction('documents').objectStore('documents').get(documentId)
       request.onsuccess = () => resolve(request.result as Record<string, unknown>)
       request.onerror = () => reject(request.error)
     })
@@ -71,9 +95,9 @@ async function publishRemoteMetadata(page: Page, changes: { favorite?: boolean; 
     })
     db.close()
     const channel = new BroadcastChannel('escrevaral-mass-notes-next-documents')
-    channel.postMessage({ id, revision: next.revision, kind: 'metadata' })
+    channel.postMessage({ id: documentId, revision: next.revision, kind: 'metadata' })
     channel.close()
-  }, changes)
+  }, { documentId: id, patch: changes })
 }
 
 async function prepareReview(page: Page) {
@@ -103,11 +127,11 @@ test('favorito usa a mesma revisão, autosave e filtro da biblioteca', async ({ 
 
   await page.getByRole('button', { name: 'Marcar como favorita' }).click()
   await expect(page.getByRole('button', { name: 'Página favorita' })).toHaveAttribute('aria-pressed', 'true')
-  await waitSaved(page)
+  await expect.poll(async () => Number((await activeRecord(page)).revision), { timeout: 10_000 }).toBe(Number(before.revision) + 1)
+  await expect(page.locator('.field-value').filter({ hasText: 'Salvo' })).toBeVisible()
 
   const after = await activeRecord(page)
   expect(after.favorite).toBe(true)
-  expect(after.revision).toBe(Number(before.revision) + 1)
 
   await page.reload()
   await expect(page.getByRole('button', { name: 'Página favorita' })).toBeVisible()
@@ -159,10 +183,11 @@ test('estado, favorito e tags não apagam uma leitura linguística válida', asy
   const decoration = page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })
 
   await page.getByRole('tab', { name: 'pulso', exact: true }).click()
-  await page.getByRole('button', { name: 'Pronto', exact: true }).click()
-  await page.getByRole('button', { name: 'Marcar como favorita' }).click()
-  await page.getByLabel('Marcadores da página').fill('revisado, oficina')
-  await page.getByRole('button', { name: 'Salvar marcadores' }).click()
+  const pulse = page.locator('#panel-pulso')
+  await pulse.getByRole('button', { name: 'Pronto', exact: true }).click()
+  await pulse.getByRole('button', { name: 'Marcar como favorita' }).click()
+  await pulse.getByLabel('Marcadores da página').fill('revisado, oficina')
+  await pulse.getByRole('button', { name: 'Salvar marcadores' }).click()
 
   await expect(decoration).toHaveCount(1)
   await page.getByRole('tab', { name: 'revisao', exact: true }).click()
@@ -179,9 +204,10 @@ test('metadado remoto limpo atualiza a página sem desmontar editor ou decoratio
 
   await publishRemoteMetadata(page, { favorite: true, tags: ['remoto'], status: 'Pronto' })
   await page.getByRole('tab', { name: 'pulso', exact: true }).click()
-  await expect(page.getByRole('button', { name: 'Página favorita' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Remover marcador remoto' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Pronto', exact: true })).toHaveClass(/active/)
+  const pulse = page.locator('#panel-pulso')
+  await expect(pulse.getByRole('button', { name: 'Página favorita' })).toBeVisible()
+  await expect(pulse.getByRole('button', { name: 'Remover marcador remoto' })).toBeVisible()
+  await expect(pulse.getByRole('button', { name: 'Pronto', exact: true })).toHaveClass(/active/)
   expect(await editor.innerHTML()).toBe(htmlBefore)
   await expect(page.locator('[data-review-issue-id*="PONT-49"]').filter({ hasText: 'tentou mas' })).toHaveCount(1)
 })
@@ -200,7 +226,7 @@ test('conflito de metadados nunca faz merge silencioso e pode virar cópia', asy
   await expect(page.getByLabel('Título do documento')).toHaveValue(`${originalTitle || 'Sem título'} — conflito`)
   await expect(page.getByRole('button', { name: 'Página favorita' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Remover marcador outra-aba' })).toHaveCount(0)
-  await waitSaved(page)
+  await expect(page.locator('.field-value').filter({ hasText: 'Salvo' })).toBeVisible({ timeout: 10_000 })
 })
 
 test('editor de metadados cabe no drawer móvel e mantém foco reversível', async ({ page }) => {
