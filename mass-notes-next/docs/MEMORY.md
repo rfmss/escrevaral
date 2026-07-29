@@ -8,15 +8,16 @@ Atualizado em: 2026-07-29
 - PR: `#155`, rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 10 e Gate 10.5 de higiene: verdes;
+- Gates 1 a 11 e Gate 10.5 de higiene: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: 91 cenários por navegador, 182 execuções;
-- cabeça funcional do Gate 10.5: `572af55fc19b59e2c9c9330ce35ccf95be622074`;
-- workflows verdes: coerência `30430515120`, Argila `30430515008`, Mass Notes `30430515420`;
+- matriz atual: 98 cenários por navegador, 196 execuções;
+- cabeça funcional do Gate 11: `1e4ca1784b145b510ba6d3749025230d22f7d632`;
+- workflows verdes: Mass Notes `30449369857`, Argila `30449371552`, coerência `30449371768`;
 - engines integradas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - exportações aprovadas: TXT, Markdown e HTML;
 - cópia nativa aprovada: schema `escrevaral.mass-notes-next.backup`, versão `1`;
-- próximo gate aprovado: organização da biblioteca.
+- biblioteca aprovada: busca, estado, favorito, tag, ordenação, contagem e estado vazio;
+- próximo gate proposto: edição segura de metadados editoriais.
 
 ## Decisões permanentes
 
@@ -40,17 +41,23 @@ Atualizado em: 2026-07-29
 18. Mudança do contrato de backup exige nova versão ou migrador explícito.
 19. O `.esc` legado não é equivalente ao envelope novo e exige adaptador próprio.
 20. O canvas Blueprint é ambiente; o manuscrito permanece o objeto principal.
-21. A seleção lexical possui ponte própria e tipada; não usa estado global improvisado nem depende de o painel estar montado.
-22. O snapshot lexical inclui identidade do documento e posições ProseMirror, além do texto selecionado.
-23. Uma definição registrada pode ser consultada sem ocorrência, mas classe contextual não pode ser inventada sem contexto.
-24. Uma inferência morfológica sem ocorrência e sem registro local não é apresentada como verbete existente.
-25. Palavras/Léxico é somente leitura: não altera JSON, histórico, seleção, autosave ou biblioteca.
-26. Tolerâncias geométricas entre navegadores devem considerar arredondamento subpixel sem tolerar overflow real.
-27. Testes que verificam saídas derivadas devem sincronizar o estado React, não apenas a árvore DOM visível do editor.
-28. O auditor global de versões protege somente a distribuição pública raiz.
-29. Aplicações isoladas com build e cache próprios não devem avançar artificialmente a versão pública.
-30. PRs mistos continuam obrigados a versionar qualquer JS/CSS público real; exclusões são por prefixo explícito e testado.
-31. Alterar a lista de superfícies isoladas exige teste de regressão e documentação do pipeline responsável.
+21. A seleção lexical possui ponte própria e tipada; não usa estado global improvisado.
+22. Definição registrada pode existir sem ocorrência, mas classe contextual não pode ser inventada.
+23. Palavras/Léxico é somente leitura e não altera JSON, histórico, seleção ou autosave.
+24. Tolerâncias geométricas consideram arredondamento subpixel sem tolerar overflow real.
+25. Testes de saídas derivadas sincronizam o estado React, não apenas a DOM visível.
+26. O auditor global de versões protege somente a distribuição pública raiz.
+27. Aplicações isoladas com build próprio não avançam artificialmente a versão pública.
+28. PRs mistos continuam obrigados a versionar qualquer JS/CSS público real.
+29. Alterar superfícies isoladas exige teste de regressão e documentação do pipeline.
+30. Consulta e apresentação da biblioteca vivem separadas em `src/library/` e `components/`.
+31. Filtros da biblioteca são projeções puras e nunca gravam no documento ou IndexedDB.
+32. Aplicar um filtro não pode trocar, fechar ou descartar a página ativa.
+33. Busca e equivalência de tags ignoram caixa e acentos sem reescrever os valores autorais.
+34. Representante de tags equivalentes deve ser determinístico e independente da ordem recente dos documentos.
+35. Ordenação possui desempates explícitos; títulos repetidos não dependem da ordem acidental do banco.
+36. Edição de favorito ou tags exige gate próprio com revisão e conflito definidos.
+37. Operações em massa e hierarquia persistente não entram silenciosamente como extensão da organização visual.
 
 ## Contrato de documento
 
@@ -67,31 +74,54 @@ Cada documento mantém pelo menos:
 - `revision`;
 - eventual `legacySourceId`.
 
+## Contrato de organização da biblioteca
+
+Camada pura: `src/library/libraryQuery.ts`.
+
+Consulta:
+
+- recebe lista de documentos e um objeto `LibraryQuery`;
+- combina `search`, `status`, `favoritesOnly`, `tag` e `sort`;
+- retorna nova lista sem modificar a entrada;
+- busca em título, texto derivado, tags e estado;
+- normaliza somente para comparação, preservando dados armazenados.
+
+Ordenações:
+
+- `updated-desc`: alteração mais recente, depois título e identidade;
+- `created-desc`: criação mais recente, depois título e identidade;
+- `title-asc`: colação `pt-BR`, numérica, depois atualização e identidade.
+
+Tags:
+
+- equivalência usa texto sem diacríticos e em minúsculas;
+- variantes equivalentes aparecem uma única vez no filtro;
+- o rótulo canônico prefere maior informação diacrítica, inicial maiúscula e colação estável;
+- selecionar uma variante encontra documentos com qualquer grafia equivalente;
+- nenhuma tag é alterada no documento.
+
+Interface:
+
+- estado, favorito e tag são filtros combináveis;
+- busca existente participa do mesmo objeto de consulta;
+- contagem mostra visíveis e total;
+- estado vazio explica o recorte e permite limpar filtros;
+- favorito e até duas tags aparecem nos cartões;
+- a página ativa fora do recorte gera aviso, mas permanece aberta;
+- desktop mantém rail; mobile usa drawer com Escape e retorno de foco;
+- filtros não alteram rascunho, seleção, histórico, autosave ou revisão.
+
 ## Contrato de seleção lexical
 
 Snapshot em memória:
 
-- `documentId`: impede transportar seleção para outro documento;
-- `from` e `to`: posições do estado ProseMirror;
-- `text`: recorte normalizado para consulta, limitado a 120 caracteres;
-- publicação em `onCreate`, `onUpdate` e `onSelectionUpdate`;
-- leitura imediata do último snapshot e assinatura para atualizações futuras.
+- `documentId`;
+- `from` e `to` ProseMirror;
+- texto normalizado, limitado a 120 caracteres;
+- publicação em criação, atualização e mudança de seleção;
+- leitura imediata e assinatura para atualizações futuras.
 
-A superfície Palavras aceita seleção curta ou busca digitada. O adaptador carrega localmente:
-
-- `lexical-engine.js`;
-- `lexical-data.json`;
-- `norma-data.json`.
-
-Regras defensivas:
-
-- consulta vazia ou longa demais é recusada;
-- ocorrências são contadas localmente com normalização de acentos;
-- registro explícito é reconhecido pelas bases e chaves declaradas da engine;
-- sem ocorrência e sem registro, o fallback morfológico é descartado;
-- sem ocorrência, uma leitura apenas provável perde função sintática e classe contextual;
-- falha de carregamento gera estado seguro e não interrompe o editor;
-- nenhum serviço externo é consultado.
+A superfície Palavras carrega localmente `lexical-engine.js`, `lexical-data.json` e `norma-data.json`. Sem ocorrência e sem registro, fallback morfológico é descartado. Nenhum serviço externo é consultado.
 
 ## Contrato de cópia nativa
 
@@ -100,89 +130,45 @@ Envelope versão 1:
 - `schema`: `escrevaral.mass-notes-next.backup`;
 - `version`: `1`;
 - `app`: `mass-notes-next`;
-- `exportedAt`: timestamp;
-- `documents`: lista não vazia.
+- `exportedAt`;
+- lista não vazia de documentos.
 
-Validação obrigatória:
-
-- JSON válido;
-- schema e app reconhecidos;
-- versão suportada;
-- data válida;
-- documentos completos;
-- conteúdo Tiptap com raiz `doc`;
-- estados, tags, favorito, datas e revisão válidos;
-- IDs de origem únicos dentro do envelope.
-
-Restauração:
-
-- usa transação IndexedDB de escrita somente depois da validação;
-- usa `add`, não `put` sobre identidades importadas;
-- gera UUID novo para cada item;
-- adiciona `— restaurado` ao título;
-- reinicia revisão local em zero;
-- não troca a página ativa automaticamente;
-- atualiza a biblioteca pelo BroadcastChannel existente.
+Validação ocorre antes de qualquer transação. Restauração usa `add`, gera UUID novo, acrescenta `— restaurado`, reinicia revisão e não troca a página ativa. Favorito e tags restaurados tornam-se imediatamente visíveis aos filtros do Gate 11.
 
 ## Contrato de fronteiras de distribuição
 
-A aplicação pública raiz usa:
-
-- `index.html` com uma versão única em todas as referências;
-- `service-worker.js` com `ASSET_VERSION` igual ao índice;
-- `CACHE_NAME` crescente quando a versão pública muda;
-- `ui-dialog.js` alinhado ao controlador lexical;
-- `scripts/auditor-asset-version.py` para comparar assets públicos com `main`.
-
-O Mass Notes Next usa:
-
-- fonte isolada em `mass-notes-next/`;
-- build Vite próprio;
-- bundles com hash;
-- workflow `Mass Notes Tiptap`;
-- branch `preview-mass-notes-tiptap` como produto de build;
-- purge e smoke público próprios.
-
-Consequências:
-
-- mudanças exclusivas em `mass-notes-next/` não exigem `ASSET_VERSION` ou `CACHE_NAME` novos na aplicação pública;
-- `mass-notes-next/**` é excluído do gatilho do workflow global e do filtro interno do auditor;
-- assets públicos fora desse prefixo continuam bloqueando a CI quando mudam sem versão;
-- `scripts/test-auditor-asset-version.py` protege a fronteira com casos positivos e negativos;
-- não criar tags automáticas para satisfazer auditoria.
+A aplicação pública raiz usa versão única em `index.html`, `ASSET_VERSION`, `CACHE_NAME` crescente e auditor próprio. O Mass Notes usa fonte isolada, build Vite, bundles hashados, workflow e preview próprios. Mudanças em `mass-notes-next/` não exigem versão pública; assets públicos reais continuam auditados.
 
 ## Incidentes relevantes
 
-- O protótipo artesanal exigiu correções repetidas de cursor, Enter, Backspace, paste e histórico; foi substituído por Tiptap.
-- O QA encontrou perda silenciosa entre abas; conflitos passaram a preservar as duas versões.
-- Firefox revelou condições temporais em autosave, tema, paste e troca de documentos; por isso permanece obrigatório.
-- A preview ficou branca por cache apontando para assets hash removidos; publicação passou a usar assets estáveis, purge e smoke público.
-- O primeiro ciclo do Gate 9A teve uma asserção HTML com espaço incorreto; o teste foi corrigido sem alterar o exportador.
-- A primeira execução do Gate 9B teve 171 aprovações e uma falha temporal antiga do Gate 7 no Firefox; a repetição integral terminou 172/172 verde.
-- No início do Gate 10, testes abriram o botão móvel também no desktop e uma regressão antiga fixava seis abas; ambos os contratos de teste foram corrigidos.
-- A palavra “melancolia” revelou que a engine podia inferir `Verbo (imperfeito)` sem uma ocorrência no texto. O adaptador passou a separar definição registrada de classe contextual.
-- O primeiro fluxo de seleção lexical dependia de evento efêmero e perdia o recorte quando Palavras ainda não estava montado. A ponte durável substituiu esse desenho.
-- Uma regravação ampla demais simplificou acidentalmente a suíte do RimaLab. A cobertura robusta anterior foi restaurada integralmente, mudando somente a contagem para sete abas.
-- A penúltima execução terminou com 180/182 porque `getBoundingClientRect()` diferiu cerca de 0,2 px entre engines. O teste passou a aceitar 1 px de arredondamento, mantendo verificações rígidas do documento e do rail.
-- O workflow `30420965045` concluiu a cabeça funcional do Gate 10 com 182/182, publicação, cache e verificação pública verdes.
-- A primeira validação da cabeça documental teve 181/182 no Firefox porque o fixture de exportação verificava a DOM Tiptap antes de o estado React receber o conteúdo. O helper passou a salvar o documento-base, aguardar a alteração estruturada e salvar novamente antes do download.
-- O workflow `30422368445` validou a cabeça final do Gate 10 com 182/182 e preview pública verde.
-- O auditor global tratava qualquer `.js` ou `.css` do monorepo como asset público e exigia versão global para os estilos do Mass Notes. A fronteira foi corrigida em vez de criar uma versão pública falsa.
-- O workflow `30430515120` aprovou três regressões e confirmou zero assets públicos alterados; Argila `30430515008` e Mass Notes `30430515420` permaneceram verdes.
+- O editor artesanal foi substituído por Tiptap após falhas recorrentes de cursor, paste e histórico.
+- Conflitos entre abas passaram a preservar as duas versões após perda silenciosa detectada em QA.
+- Firefox permanece obrigatório por revelar condições temporais não vistas no Chromium.
+- A preview passou a usar publicação controlada, purge e smoke público após cache apontar para hashes removidos.
+- Gate 9B exigiu repetição por falha temporal antiga; a cabeça final ficou 172/172.
+- Gate 10 substituiu evento lexical efêmero por bridge durável e separou definição de classe contextual.
+- A suíte robusta do RimaLab foi restaurada após simplificação acidental durante o Gate 10.
+- Gate 10 terminou 182/182 após corrigir arredondamento subpixel e sincronização de exportação.
+- Gate 10.5 separou o auditor público do build Vite isolado, sem criar versão falsa.
+- A primeira execução do Gate 11 falhou por nomes acessíveis ambíguos e porque o ícone favorito integrava o texto exato do título; controles e estrutura do cartão foram corrigidos.
+- A segunda execução ficou 192/196 porque o rótulo de tags equivalentes dependia da ordem por atualização; a canonicalização tornou o representante estável.
+- A terceira execução ficou 194/196 porque o teste comparava o texto de todo o grupo de chips com um chip individual; a asserção passou a localizar cada chip precisamente.
+- O workflow `30449369857` concluiu o Gate 11 com 196/196, publicação, cache e verificação pública verdes.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
+- edição de favorito e tags na biblioteca;
+- edição ou exclusão em massa;
+- pastas ou hierarquia persistente;
 - importação do `.esc` legado;
 - criptografia ou senha de backup;
 - seleção parcial ou merge de restauração;
 - DOCX, RTF, ePub e Obsidian ZIP;
-- catálogo de sinônimos na superfície nova de Palavras;
-- análise sintática de frases na superfície nova de Palavras;
+- catálogo de sinônimos e análise sintática de frases em Palavras;
 - service worker/offline em nova sessão;
-- Tauri e SQLite;
-- paginação física;
+- Tauri, SQLite e paginação física;
 - decorations para Voz, Contexto, RimaLab ou Palavras;
 - aplicação automática de sugestões;
 - promoção para a entrada pública.
@@ -193,11 +179,9 @@ Ainda não estão aprovados:
 2. ler `PLAN.md`, este arquivo e o log mais recente;
 3. instalar com `npm ci`;
 4. não tocar diretamente na branch de preview;
-5. não alterar engines ou bases para fazer teste passar;
-6. preservar JSON Tiptap como fonte estrutural;
-7. registrar nova versão antes de mudar o envelope nativo;
-8. preservar `lexicalSelectionBridge.ts` como fronteira entre editor e Palavras;
-9. não reclassificar palavra ausente como se houvesse contexto;
-10. não avançar versão pública por mudanças exclusivas de `mass-notes-next/`;
-11. manter testes da fronteira do auditor ao alterar pipelines ou diretórios isolados;
-12. iniciar o Gate 11 inventariando filtros e campos já existentes na biblioteca.
+5. preservar JSON Tiptap como fonte estrutural;
+6. não alterar engines ou bases para fazer teste passar;
+7. não avançar versão pública por mudanças exclusivas de `mass-notes-next/`;
+8. preservar `src/library/libraryQuery.ts` como fronteira pura da organização;
+9. não fazer filtros dispararem troca de página ou persistência;
+10. iniciar o Gate 12 somente após definir revisão e conflito para mudanças exclusivamente de metadados.
