@@ -10,79 +10,75 @@ Atualizado em: 2026-07-29
 - aplicação pública, `main` e service worker: intactos;
 - Gates 1 a 13 e Gate 10.5: verdes;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- primeira tranche M0.9: concluída;
+- duas tranches automatizadas concluídas;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: 116 cenários por navegador, 232 execuções;
-- cabeça funcional da primeira tranche: `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
-- workflows verdes: Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811`;
-- nota provisória geral: 85/100;
+- matriz: 119 cenários por navegador, 238 execuções;
+- cabeça funcional da tranche 2: `2a4333337a04b73a6c034b8fd35bc582994a114b`;
+- workflows verdes: Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508`;
+- nota provisória: 87/100;
 - beta fechada: `SHIP COM CONDIÇÕES` provisório;
 - lançamento público: `NO-SHIP` provisório;
-- substituição integral do produto antigo: `NO-SHIP` provisório;
-- P0 abertos: 0;
-- P1 abertos: 0;
-- Gate 14 está suspenso até o veredito final M0.9.
+- substituição integral: `NO-SHIP` provisório;
+- P0/P1 abertos: 0/0;
+- Gate 14 suspenso até o veredito final.
 
-## Fontes de retomada do milestone
+## Fontes de retomada
 
 1. `M0_9_AUDITORIA_OPERACIONAL.md` — memória executável viva;
 2. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano;
 3. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
-4. `logs/2026-07-29-m0-9-auditoria-integrada-tranche-1.md` — evidência da primeira tranche;
+4. `logs/2026-07-29-m0-9-auditoria-integrada-tranche-2.md` — lote mais recente;
 5. `../../docs/product/MASS_NOTES_TIPTAP_M0_9.md` — contrato global.
 
 ## Decisões permanentes
 
 1. Tiptap/ProseMirror é o motor de edição e JSON Tiptap é a fonte estrutural.
-2. IndexedDB é a fonte principal; localStorage guarda apenas preferências e recuperação emergencial.
+2. IndexedDB é a fonte principal; localStorage guarda preferências e recuperação emergencial.
 3. Nenhuma aba sobrescreve outra silenciosamente.
 4. Engines entram por adaptadores tipados, funcionam localmente e não aplicam texto.
 5. Offsets linguísticos usam UTF-16 sobre o Node ProseMirror real.
 6. Decorations ficam fora do JSON autoral e só são invalidadas quando o manuscrito muda.
 7. Exportadores, backups, importadores e consultas vivem em camadas próprias.
-8. Cópia nativa e `.esc` legado são formatos diferentes e nunca compartilham parser por conveniência.
-9. Documentação, testes e evidências fazem parte da definição de pronto.
-10. A preview é produto de build; a branch de preview nunca recebe edição direta.
-11. Filtros da biblioteca são projeções puras e não alteram documento ou IndexedDB.
-12. Estado, favorito e tags pertencem ao mesmo documento, revisão, autosave e conflito do manuscrito.
-13. Mudanças editoriais preservam leituras textuais válidas; mudanças de manuscrito as invalidam.
-14. Operações em massa, hierarquia persistente e sincronização exigem gates próprios.
-15. Importação sempre valida tudo antes de qualquer escrita.
-16. Um lote legado inválido é rejeitado integralmente.
-17. Selecionar arquivo legado não autoriza gravação; a confirmação explícita é obrigatória.
-18. Importação legada nunca reutiliza IDs atuais nem substitui documentos existentes.
-19. `legacySourceId` é trilha de origem, não identidade atual nem chave de merge.
-20. Reimportação não recebe deduplicação silenciosa ou merge automático.
-21. O milestone M0.9 precede o Gate 14 e qualquer nova feature.
-22. A auditoria geral é memória operacional viva; decisões e achados são registrados no repositório quando mudam.
-23. Durante o M0.9, auditar precede corrigir.
-24. Correção durante a auditoria só é aceita para remover bloqueio de medição ou P0, sempre com documentação e matriz completa posterior.
-25. Beta fechada, lançamento público e substituição do Escrevaral antigo recebem vereditos separados.
-26. O PR permanece em rascunho e `main` intacta durante todo o milestone.
-27. Notas e vereditos da primeira tranche são provisórios enquanto houver fases obrigatórias pendentes.
-28. Uma falha temporal de teste não deve ser promovida a defeito de produto sem reprodução funcional.
-29. Estados intermediários rápidos do autosave podem não ser observáveis; a convergência final para `Salvo` continua obrigatória.
+8. Cópia nativa e `.esc` legado são formatos diferentes e nunca compartilham parser.
+9. Documentação, testes e evidências integram a definição de pronto.
+10. A preview é produto de build e nunca recebe edição direta.
+11. Filtros da biblioteca são projeções puras.
+12. Estado, favorito e tags pertencem à mesma revisão e persistência do manuscrito.
+13. Mudanças editoriais preservam leituras textuais válidas.
+14. Operações em massa, hierarquia e sincronização exigem gates próprios.
+15. Importação valida tudo antes de qualquer escrita.
+16. Lote legado inválido é rejeitado integralmente.
+17. Selecionar arquivo legado não autoriza gravação.
+18. Importação legada nunca reutiliza IDs atuais nem substitui documentos.
+19. `legacySourceId` é trilha de origem, não chave de merge.
+20. Reimportação não recebe deduplicação silenciosa.
+21. M0.9 precede Gate 14 e qualquer nova feature.
+22. A auditoria é memória viva no repositório.
+23. Auditar precede corrigir.
+24. Correção durante M0.9 só remove P0 ou bloqueio de medição e exige matriz completa.
+25. Beta, lançamento público e substituição recebem vereditos separados.
+26. PR permanece em rascunho e `main` intacta.
+27. Notas e vereditos permanecem provisórios até as fases manuais.
+28. Falha temporal de teste não vira defeito sem reprodução funcional.
+29. Estados intermediários rápidos do autosave podem não ser observáveis; `Salvo` final continua obrigatório.
+30. Exportação usa o estado atual React/Tiptap, não uma releitura do IndexedDB.
+31. Conflito é aprovado pela preservação das versões, não pela seleção ativa após recarga.
+32. Documento ativo é uma preferência compartilhada entre abas na origem atual.
+33. Cenários de falha simulada devem estabilizar entradas alheias ao contrato testado.
+34. SHA documental exato é registrado no PR depois da CI para evitar commit autorreferente.
 
-## Primeira tranche M0.9
+## Cobertura transversal aprovada
 
-Criado `tests/m0-9-integrated.spec.ts` com cinco cenários por navegador.
-
-### Jornada de escrita e retomada
-
-Aprovados:
+### Escrita e retomada
 
 - criação de página;
 - título e texto;
-- estado editorial;
-- favorito;
-- tags;
-- autosave;
-- recarga;
-- retomada do conteúdo e dos metadados.
+- estado, favorito e tags;
+- autosave e salvamento explícito;
+- recarga e retomada;
+- organização sem alterar revisão ou descartar rascunho.
 
 ### Engines em sequência
-
-Executadas na mesma página:
 
 - Revisão;
 - Espelho de Voz;
@@ -92,71 +88,73 @@ Executadas na mesma página:
 
 Resultado:
 
-- texto preservado;
-- `revision` preservada;
-- `plainText` preservado;
+- texto, `plainText` e `revision` preservados;
 - nenhuma aplicação automática;
-- frase autoral sentinela ausente de URL e corpo de requisição.
+- frase sentinela ausente de URL e corpo de requisição.
 
-### Organização
+### Conflito misto
 
-Aprovados:
+- mutação de manuscrito em uma aba;
+- mutação editorial em outra;
+- conflito explícito;
+- versão local guardada como cópia;
+- documento remoto e cópia favorita preservados no IndexedDB;
+- nenhuma sobrescrita silenciosa.
 
-- busca e filtro que excluem a página ativa do recorte;
-- página ativa continua aberta;
-- filtros não incrementam revisão;
-- rascunho não é descartado;
-- limpar filtros restaura o cartão ativo.
+A preferência ativa compartilhada pode fazer outra aba abrir a cópia após recarga. Isso é P3 de previsibilidade, não perda de dados.
 
-### Mobile integrado
+### Exportação imediata
 
-Aprovado em 320 e 390 px:
+- versão anterior persistida;
+- título e texto atuais ainda em `Alterado|Salvando`;
+- Markdown contém o estado atual;
+- autosave converge depois para `Salvo`.
 
-- drawer;
-- sete abas;
-- ausência de overflow horizontal bloqueador;
-- fechamento por Escape;
-- retorno de foco ao acionador.
+### Portabilidade combinada
 
-### Escala funcional
+Na mesma sessão:
 
-Aprovados:
+- criar cópia nativa;
+- restaurar como novas cópias;
+- manter página ativa;
+- pré-visualizar `.esc`;
+- cancelar sem escrita;
+- confirmar importação;
+- preservar `legacySourceId`;
+- não substituir documentos existentes.
 
-- 100 documentos no IndexedDB;
-- documento ativo acima de 100 mil caracteres;
-- editor editável;
-- biblioteca pesquisável;
-- página ativa preservada fora do recorte.
+### Mobile e escala
 
-Essa evidência comprova funcionamento, mas ainda não define orçamento de latência ou memória.
+- drawer e sete abas em 320/390 px;
+- Escape e retorno de foco;
+- ausência de overflow bloqueador;
+- 100 documentos;
+- documento acima de 100 mil caracteres;
+- busca funcional e editor editável.
 
-## Incidente da primeira tranche
+## Evidência funcional
 
-Primeira execução:
-
-- cabeça `f3ab89db816557984ed19bc8ab17d2d96137d946`;
-- 231/232;
-- todos os dez casos M0.9 passaram;
-- única falha em helper antigo do RimaLab no Firefox.
-
-Causa:
-
-- o helper exigia observar `Alterado|Salvando` após paste;
-- o autosave já havia convergido para `Salvo` antes da asserção.
-
-Decisão:
-
-- instabilidade temporal de teste;
-- produto não alterado;
-- helper aceita `Alterado|Salvando|Salvo` antes do comando explícito;
-- `Salvo` permanece obrigatório como estado final.
-
-Repetição:
+### Tranche 1
 
 - cabeça `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
 - 232/232;
-- publicação, cache e smoke público verdes;
-- Argila e coerência verdes.
+- Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811`.
+
+### Tranche 2
+
+- cabeça `2a4333337a04b73a6c034b8fd35bc582994a114b`;
+- 238/238;
+- Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508`;
+- publicação, cache e smoke público verdes.
+
+## Incidentes de estabilização
+
+Nenhum exigiu alteração funcional no produto.
+
+- helpers de autosave passaram a aceitar estado já convergido para `Salvo`;
+- salvamento preliminar redundante da exportação foi removido;
+- conflito passou a ser testado pela preservação dos registros, não por seleção independente por aba;
+- falha simulada do RimaLab estabiliza a fonte antes da primeira leitura.
 
 ## Achados provisórios
 
@@ -170,97 +168,91 @@ Nenhum.
 
 ### P2
 
-- `M09-F001`: aplicação nova sem contrato próprio de PWA/offline; bloqueia lançamento público.
-- `M09-F002`: Prova de Autoria ausente; bloqueia substituição integral enquanto não houver decisão explícita.
-- `M09-F003`: exportação sem DOCX, RTF, ePub e Obsidian ZIP; não bloqueia beta, mas bloqueia paridade integral para fluxos dependentes.
+- `M09-F001`: nova aplicação sem PWA/offline próprio; bloqueia lançamento público.
+- `M09-F002`: Prova de Autoria ausente; bloqueia substituição integral sem decisão explícita.
+- `M09-F003`: faltam DOCX, RTF, ePub e Obsidian ZIP; não bloqueia beta, mas bloqueia paridade integral.
 
 ### P3
 
-- `M09-F004`: busca, filtros e ordenação da biblioteca não persistem entre sessões; Gate 14 permanece suspenso.
+- `M09-F004`: busca, filtros e ordenação não persistem entre sessões.
+- `M09-F005`: documento ativo é preferência compartilhada entre abas.
 
 ## Placar provisório
 
-- editor e preservação: 92;
+- editor e preservação: 94;
 - biblioteca: 90;
 - engines: 86;
 - UIX: 82;
 - acessibilidade: 80;
 - responsividade: 89;
-- importação e exportação: 83;
+- importação e exportação: 88;
 - privacidade: 92;
 - desempenho: 84;
 - release: 72;
-- geral: 85.
+- geral: 87.
 
 ## Contrato do documento
 
 Cada documento mantém:
 
-- `id` atual em UUID;
-- `title`;
-- `content` Tiptap;
-- `plainText` derivado;
-- `status`, `tags` e `favorite`;
-- `createdAt`, `updatedAt` e `revision`;
+- UUID atual;
+- título;
+- JSON Tiptap;
+- texto derivado;
+- estado, tags e favorito;
+- datas e revisão;
 - `legacySourceId` opcional.
 
 ## Contrato do `.esc` legado
 
-Fonte real inventariada nos arquivos raiz `vrda-engine.js`, `backup-engine.js` e `archive-engine.js`.
-
-Envelope suportado:
-
-- `format`: `esc` ou `vrda`;
-- `schemaVersion`: exatamente `1`;
-- `checksum`: FNV-1a hexadecimal de oito caracteres;
-- checksum calculado sobre `JSON.stringify(stableSort(payload))`;
-- `payload.manuscripts`: lista não vazia;
-- limite defensivo: 2.000 itens por lote.
-
-O parser `src/import/legacyEscImport.ts` valida todo o lote, cria prévia em memória e converte texto com `plainTextToContent`.
-
-`importLegacyDocumentsAsCopies` usa uma transação única, UUIDs novos, sufixo `— importado`, `revision: 0`, `add` e preservação de `legacySourceId`.
-
-Não existem importação parcial, substituição, merge, escolha automática de versão, deduplicação silenciosa ou upload externo.
+- `format: esc|vrda`;
+- `schemaVersion: 1`;
+- checksum FNV-1a sobre `stableSort(payload)`;
+- `payload.manuscripts` não vazio;
+- limite de 2.000 itens;
+- prévia em memória;
+- transação única;
+- UUIDs novos, `— importado`, `revision: 0` e origem preservada;
+- sem importação parcial, substituição, merge, escolha automática, deduplicação silenciosa ou upload.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
-- persistência de filtros entre sessões;
-- reimportação seletiva ou comparação de versões legadas;
-- deduplicação automática por `legacySourceId`;
+- persistência de filtros;
+- seleção ativa independente por aba;
+- reimportação seletiva ou comparação de versões;
+- deduplicação por `legacySourceId`;
 - importação parcial;
 - operações em massa;
-- pastas ou coleções persistentes;
+- pastas/coleções;
 - DOCX, RTF, ePub e Obsidian ZIP;
-- Prova de Autoria na nova fundação;
+- Prova de Autoria;
 - criptografia de backup;
-- sincronização em nuvem e colaboração;
-- service worker/PWA da aplicação nova;
+- sincronização e colaboração;
+- PWA própria;
 - Tauri, SQLite e paginação física;
 - aplicação automática de sugestões;
 - promoção para `main`.
 
-## Segunda tranche — próxima ação obrigatória
+## Próxima ação obrigatória
 
-1. conflito real entre duas páginas envolvendo manuscrito e metadados;
-2. exportação antes da persistência;
-3. cópia nativa/restauração e importação legada na mesma sessão;
-4. acessibilidade ampliada, zoom, movimento reduzido e tecnologias assistivas/dispositivos reais;
-5. observação integral de rede;
-6. sessão prolongada, latência e memória;
-7. corpus ampliado por engine;
-8. decisões explícitas para os P2;
-9. veredito final e CI na cabeça exata sem commit posterior.
+1. UIX heurística nas seis larguras;
+2. zoom 200%, movimento reduzido e tecnologias assistivas/dispositivos reais;
+3. observação integral de rede;
+4. recuperação emergencial integrada;
+5. sessão prolongada, latência e memória;
+6. corpus ampliado por engine;
+7. decisões explícitas para P2;
+8. veredito final;
+9. CI na cabeça documental final e registro exato no PR.
 
 ## Como retomar
 
 1. conferir branch, PR e workflows;
 2. ler `M0_9_AUDITORIA_OPERACIONAL.md`;
-3. revisar P0/P1, P2 e próxima fase;
+3. revisar achados e próxima fase;
 4. consultar relatório humano e JSON;
 5. não editar a branch de preview;
 6. não adicionar feature durante o diagnóstico;
-7. não enfraquecer checksum, atomicidade ou convergência de salvamento;
-8. iniciar o Gate 14 somente após veredito final explícito do M0.9.
+7. iniciar Gate 14 somente após veredito final explícito.
