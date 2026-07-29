@@ -15,11 +15,12 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - importação legada: `.esc`/`vrda` v1 com checksum, prévia e confirmação explícita;
 - Gates 1 a 13 e Gate 10.5: aprovados;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- duas tranches automatizadas: **119 cenários por navegador, 238 execuções verdes**;
-- nota provisória: **87/100**;
+- três tranches automatizadas: **126 cenários por navegador, 252 execuções verdes**;
+- nota provisória: **88/100**;
 - beta fechada: `SHIP COM CONDIÇÕES` provisório;
 - lançamento público e substituição integral: `NO-SHIP` provisório;
 - P0/P1 abertos: 0/0;
+- P2 abertos: PWA/offline próprio, Prova de Autoria, exportação avançada e dependência externa da Anatomia;
 - Gate 14 suspenso até o veredito final.
 
 ## Retomar o projeto
@@ -29,10 +30,10 @@ Leia nesta ordem:
 1. `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
 2. `docs/audits/M0_9_AUDITORIA_GERAL.md`;
 3. `docs/audits/M0_9_AUDITORIA_GERAL.json`;
-4. `docs/PLAN.md`;
-5. `docs/MEMORY.md`;
-6. `docs/CHANGELOG.md`;
-7. log mais recente em `docs/logs/`;
+4. `docs/logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md`;
+5. `docs/PLAN.md`;
+6. `docs/MEMORY.md`;
+7. `docs/CHANGELOG.md`;
 8. documentação global em `../docs/product/`.
 
 A memória M0.9 é viva. Decisões, achados, severidades, notas e evidências devem ser atualizados quando mudarem.
@@ -91,6 +92,11 @@ Regras de formato, conversão, filtro ou engine não entram diretamente em `App.
 - nenhum documento existente é substituído;
 - exportação usa o estado atual React/Tiptap, inclusive antes do autosave convergir;
 - conflito misto preserva as duas versões;
+- recuperação emergencial retoma o mesmo documento e limpa o envelope após persistir;
+- engines não alteram o snapshot semântico do ProseMirror;
+- automação de zoom equivalente não substitui zoom real, leitor de tela ou dispositivo físico;
+- métricas de CI são detector de regressão, não SLA;
+- a Anatomia carrega atualmente `page-flip@2.0.7` do `unpkg`; isso é P2 aberto e bloqueia promessa offline integral;
 - durante M0.9, auditar precede corrigir e feature nova fica suspensa;
 - preview só é publicada após build, Chromium, Firefox, cache e smoke público verdes.
 
@@ -100,23 +106,29 @@ Em Chromium e Firefox:
 
 - escrita, metadados, autosave e recarga;
 - cinco superfícies linguísticas na mesma sessão sem mutação;
-- sentinela autoral ausente de URL e corpo de requisição;
 - filtros sem alterar revisão ou descartar página ativa;
-- drawer em 320 e 390 px;
 - 100 páginas e documento acima de 100 mil caracteres;
 - conflito misto entre abas com ambas as versões preservadas;
 - exportação do rascunho ainda alterado;
-- cópia nativa, restauração e `.esc` legado na mesma sessão.
+- cópia nativa, restauração e `.esc` legado na mesma sessão;
+- seis larguras entre 320 e 1440 px sem overflow bloqueador;
+- layout CSS equivalente a zoom de 200%;
+- movimento reduzido com transição curta e reversível;
+- rede integral sem texto autoral transmitido;
+- recuperação emergencial integrada;
+- doze ciclos de edição/salvamento com DOM, heap e p95 observados;
+- corpus separado para Revisão, Voz, Contexto, RimaLab e Palavras sem mutação semântica.
 
-Evidência funcional da tranche 2:
+Evidência funcional da tranche 3:
 
-- cabeça `2a4333337a04b73a6c034b8fd35bc582994a114b`;
-- Mass Notes `30467582850`;
-- Argila `30467583011`;
-- coerência `30467584508`.
+- cabeça `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
+- Mass Notes `30478738806`: 252/252, publicação, cache e smoke público;
+- Argila `30478738678`: verde;
+- coerência `30478738607`: verde;
+- artefato `mass-notes-tiptap-30478738806`.
 
-O milestone continua aberto para UIX manual, acessibilidade real, rede integral, desempenho medido, corpus ampliado e decisões sobre P2.
+O milestone continua aberto para revisão humana das capturas, zoom real, leitores de tela, dispositivos físicos, decisões finais sobre P2 e veredito final.
 
 ## Limites atuais
 
-Ainda não estão aprovados reimportação seletiva, deduplicação automática, importação parcial, pastas, operações em massa, sincronização, colaboração, DOCX, RTF, ePub, Obsidian ZIP, PWA própria, Prova de Autoria na nova fundação, Tauri, SQLite, paginação física, aplicação automática de sugestões ou promoção para `main`.
+Ainda não estão aprovados reimportação seletiva, deduplicação automática, importação parcial, pastas, operações em massa, sincronização, colaboração, DOCX, RTF, ePub, Obsidian ZIP, PWA própria, Prova de Autoria na nova fundação, autonomia offline da Anatomia, Tauri, SQLite, paginação física, aplicação automática de sugestões ou promoção para `main`.
