@@ -22,6 +22,18 @@ EMBED_OLD = (
 )
 EMBED_NEW = "if(window.self!==window.top){document.documentElement.classList.add('is-embedded')}"
 
+PAGEFLIP_HANDLER_OLD = """pageFlip.on('flip',e=>{
+    cancelScheduledPageFocus();
+    const raw=Number(e.data);"""
+PAGEFLIP_HANDLER_NEW = """pageFlip.on('flip',e=>{
+    cancelScheduledPageFocus();
+    if(!stage.classList.contains('uses-pageflip')||selectedInteriorIndex===null){
+      cancelPendingProgrammaticFlip();
+      clearPageFocus();
+      return;
+    }
+    const raw=Number(e.data);"""
+
 EMBED_CSS = r"""
 
 /* Correção do modo embutido no Mass Notes. */
@@ -81,6 +93,10 @@ def main() -> None:
         1,
     )
 
+    if PAGEFLIP_HANDLER_OLD not in built:
+        raise SystemExit("Não encontrei o handler de flip para proteger a seleção exterior")
+    built = built.replace(PAGEFLIP_HANDLER_OLD, PAGEFLIP_HANDLER_NEW, 1)
+
     # Mantém o texto renderizado exatamente igual, mas evita um falso positivo
     # de um gate legado que procurava a frase no código-fonte bruto.
     demo_title = "A Cartografia do Esquecimento"
@@ -94,6 +110,7 @@ def main() -> None:
         "StPageFlip": "page-flip@2.0.7",
         "livro": 'id="pageFlipBook"',
         "correção iframe": "html.is-embedded body{grid-template-rows:auto minmax(0,1fr)}",
+        "proteção da seleção exterior": "if(!stage.classList.contains('uses-pageflip')||selectedInteriorIndex===null)",
     }
     for label, needle in checks.items():
         if needle not in built:
