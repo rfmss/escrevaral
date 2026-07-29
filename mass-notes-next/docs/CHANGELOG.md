@@ -169,14 +169,42 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - nota provisória geral elevada para 87/100;
 - beta fechada `SHIP COM CONDIÇÕES`; lançamento público e substituição integral `NO-SHIP`, todos provisórios.
 
+#### Tranche 3 — auditoria não funcional automatizada
+
+- criada `tests/m0-9-nonfunctional.spec.ts` com sete jornadas por navegador;
+- auditadas larguras 320, 390, 768, 1024, 1280 e 1440 px;
+- papel, título e editor permaneceram dentro do viewport, sem overflow horizontal bloqueador;
+- screenshots foram gerados por largura e navegador;
+- layout CSS 640×450 aprovou escrita e drawers como equivalente geométrico a 1280×900 em zoom de 200%;
+- o equivalente automatizado foi explicitamente separado de zoom real, leitores de tela e dispositivos físicos;
+- `prefers-reduced-motion: reduce` foi reconhecido em Chromium e Firefox;
+- transição editorial reduzida ficou em até 300 ms e não prendeu a navegação;
+- observação integral de rede atravessou escrita, cinco engines e Anatomia;
+- nenhuma frase autoral sentinela apareceu em URL ou corpo de requisição;
+- a auditoria revelou GET para `https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js`;
+- a dependência externa não transmite texto autoral, mas foi registrada como `M09-F006` P2 e reforça o bloqueio de offline/lançamento público;
+- recuperação emergencial retomou o mesmo documento, avançou revisão, não duplicou página e limpou o envelope temporário;
+- doze ciclos consecutivos de edição/salvamento não produziram exceção nem crescimento de DOM;
+- Chromium observou p95 de 192 ms e heap estável em 16.100.000 bytes;
+- Firefox observou p95 de 90 ms; API de heap indisponível;
+- as métricas foram classificadas como detector de regressão da CI, não SLA;
+- corpus separado para Revisão, Voz, Contexto, RimaLab e Palavras preservou o snapshot semântico;
+- Revisão localizou `PONT-49` pelo contrato UTF-16 real;
+- diferenças de `innerText` entre navegadores foram removidas da medição em favor do snapshot ProseMirror;
+- nenhum ajuste funcional de produto foi feito para obter verde;
+- matriz elevada para 126 cenários por navegador, 252 execuções;
+- cabeça funcional `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
+- Mass Notes `30478738806`: 252/252, publicação, cache, smoke público e artefato verdes;
+- Argila `30478738678` e coerência `30478738607`: verdes;
+- nenhum P0 ou P1 aberto;
+- nota provisória geral elevada para 88/100;
+- beta fechada permanece `SHIP COM CONDIÇÕES`; lançamento público e substituição integral permanecem `NO-SHIP`.
+
 ## Próximo trabalho autorizado
 
-- auditoria heurística manual nas seis larguras;
-- zoom, movimento reduzido, tecnologias assistivas e dispositivos reais;
-- observação integral de rede;
-- recuperação emergencial integrada;
-- sessão prolongada e medição de latência/memória;
-- corpus ampliado por engine;
-- decisões explícitas para P2;
+- revisão humana das screenshots nas seis larguras;
+- zoom real de 200%, leitores de tela, tecnologias assistivas e dispositivos físicos quando disponíveis;
+- uso prolongado em máquina real;
+- decisões explícitas para os quatro P2;
 - veredito final com evidência na cabeça exata;
 - manter PR em rascunho e `main` intacta.
