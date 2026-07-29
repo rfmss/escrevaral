@@ -51,6 +51,45 @@ function normalizeForMatch(value: string): string {
     .replace(/\s+/g, ' ')
 }
 
+function collectRegisteredTerms(value: unknown, target: Set<string>): void {
+  if (Array.isArray(value)) {
+    value.forEach((item) => {
+      if (typeof item === 'string') {
+        const normalized = normalizeForMatch(item)
+        if (normalized) target.add(normalized)
+      } else {
+        collectRegisteredTerms(item, target)
+      }
+    })
+    return
+  }
+
+  if (!value || typeof value !== 'object') return
+  Object.entries(value as Record<string, unknown>).forEach(([key, item]) => {
+    const normalizedKey = normalizeForMatch(key)
+    if (normalizedKey) target.add(normalizedKey)
+    collectRegisteredTerms(item, target)
+  })
+}
+
+const REGISTERED_TERMS = (() => {
+  const result = new Set<string>()
+  for (const source of [lexicalDataSource, normaDataSource]) {
+    try { collectRegisteredTerms(JSON.parse(source), result) } catch { /* A engine ainda valida a carga em runtime. */ }
+  }
+
+  const objectKey = /["']([^"'\n]+)["']\s*:/g
+  for (const match of lexicalSource.matchAll(objectKey)) {
+    const normalized = normalizeForMatch(match[1])
+    if (normalized) result.add(normalized)
+  }
+  return result
+})()
+
+function isRegisteredTerm(value: string): boolean {
+  return REGISTERED_TERMS.has(normalizeForMatch(value))
+}
+
 function countOccurrences(context: string, query: string): number {
   const haystack = normalizeForMatch(context)
   const needle = normalizeForMatch(query)
@@ -138,10 +177,13 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
   const alternatives = strings(source.alternatives)
   const definition = text(source.definicao).trim()
   const count = countOccurrences(context, cleanWord)
+  const registered = isRegisteredTerm(cleanWord)
   let decision = text(source.decisao) as LexicalDecision
   if (!['classificado', 'provavel', 'ambiguo', 'indeterminado'].includes(decision)) decision = 'indeterminado'
 
-  if (count === 0 && decision !== 'classificado' && !definition && alternatives.length === 0) return null
+  // Sem ocorrência e sem registro explícito, a resposta da engine é apenas um
+  // fallback morfológico. A interface não o apresenta como verbete existente.
+  if (count === 0 && !registered) return null
 
   let className = text(source.className).trim() || 'Classe não determinada'
   let functionName = text(source.functionName).trim()
