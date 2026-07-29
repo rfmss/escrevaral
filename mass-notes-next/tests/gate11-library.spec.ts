@@ -122,10 +122,16 @@ function statusFilters(page: Page) {
   return page.getByRole('group', { name: 'Filtrar por estado' })
 }
 
+function tagFilter(page: Page) {
+  return page.getByRole('combobox', { name: 'Filtrar por tag', exact: true })
+}
+
+function sortControl(page: Page) {
+  return page.getByRole('combobox', { name: 'Ordenar páginas', exact: true })
+}
+
 async function visibleTitles(page: Page): Promise<string[]> {
-  return page.locator('.note-card').evaluateAll((cards) => cards.map((card) => (
-    card.querySelector('.note-title')?.textContent?.replace('★', '').trim() ?? ''
-  )))
+  return page.locator('.note-title-text').allTextContents()
 }
 
 test('combina busca, estado, favorito e tag sem trocar a página ativa', async ({ page }) => {
@@ -134,10 +140,10 @@ test('combina busca, estado, favorito e tag sem trocar a página ativa', async (
   await page.getByLabel('Buscar documentos').fill('agua')
   await statusFilters(page).getByRole('button', { name: 'Pronto', exact: true }).click()
   await page.getByRole('button', { name: 'Somente favoritas' }).click()
-  await page.getByLabel('Tag').selectOption({ label: 'Poesia' })
+  await tagFilter(page).selectOption({ label: 'Poesia' })
 
   await expect(page.locator('.note-card')).toHaveCount(1)
-  await expect(page.locator('.note-title')).toContainText('Água funda')
+  await expect(page.locator('.note-title-text')).toContainText('Água funda')
   await expect(page.getByText('1 de 4 páginas', { exact: true })).toBeVisible()
   await expect(page.getByText('A página ativa continua aberta, mas está fora deste recorte.')).toBeVisible()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Caderno aberto')
@@ -149,20 +155,20 @@ test('ordena por alteração, criação e título com desempate previsível', as
 
   expect(await visibleTitles(page)).toEqual(['Caderno aberto', 'Mar sem fim', 'Água funda', 'Cidade viva'])
 
-  await page.getByLabel('Ordenar').selectOption('created-desc')
+  await sortControl(page).selectOption('created-desc')
   expect(await visibleTitles(page)).toEqual(['Cidade viva', 'Mar sem fim', 'Água funda', 'Caderno aberto'])
 
-  await page.getByLabel('Ordenar').selectOption('title-asc')
+  await sortControl(page).selectOption('title-asc')
   expect(await visibleTitles(page)).toEqual(['Água funda', 'Caderno aberto', 'Cidade viva', 'Mar sem fim'])
 })
 
 test('deduplica tags por acento e caixa e combina tag com favoritas', async ({ page }) => {
   await seedLibrary(page, standardDocuments())
 
-  const tagOptions = await page.getByLabel('Tag').locator('option').allTextContents()
+  const tagOptions = await tagFilter(page).locator('option').allTextContents()
   expect(tagOptions.filter((option) => option.toLocaleLowerCase('pt-BR') === 'poesia')).toHaveLength(1)
 
-  await page.getByLabel('Tag').selectOption({ label: 'Poesia' })
+  await tagFilter(page).selectOption({ label: 'Poesia' })
   await expect(page.locator('.note-card')).toHaveCount(2)
   await expect(page.locator('.note-tags')).toContainText(['Poesia', 'poesia'])
 
@@ -229,7 +235,7 @@ test('biblioteca extensa preserva Unicode e títulos repetidos com ordem estáve
   await expect(page.locator('.note-card')).toHaveCount(24)
 
   await page.getByLabel('Buscar documentos').fill('orbita')
-  await page.getByLabel('Ordenar').selectOption('title-asc')
+  await sortControl(page).selectOption('title-asc')
   const repeated = page.locator('.note-card').filter({ hasText: 'Órbita' })
   await expect(repeated).toHaveCount(2)
   await expect(repeated.first().locator('.note-tags')).toContainText('novo')
@@ -244,12 +250,12 @@ test('drawer móvel mantém filtros utilizáveis, sem overflow e com foco revers
   await trigger.click()
   const library = page.getByRole('dialog', { name: 'Arquivo de documentos' })
   await expect(library).toBeVisible()
-  await expect(page.getByLabel('Ordenar')).toBeVisible()
-  await expect(page.getByLabel('Tag')).toBeVisible()
+  await expect(sortControl(page)).toBeVisible()
+  await expect(tagFilter(page)).toBeVisible()
 
   await statusFilters(page).getByRole('button', { name: 'Em corte', exact: true }).click()
   await expect(page.locator('.note-card')).toHaveCount(1)
-  await expect(page.locator('.note-title')).toContainText('Mar sem fim')
+  await expect(page.locator('.note-title-text')).toContainText('Mar sem fim')
 
   const geometry = await library.evaluate((node) => {
     const rect = node.getBoundingClientRect()
