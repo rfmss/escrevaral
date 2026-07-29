@@ -42,4 +42,6 @@ Ao encerrar cada lote:
 - registrar workflow, commit e limitações honestas;
 - repetir a CI sobre a cabeça documental final.
 
+O Gate 13 não começa automaticamente. Antes de qualquer código, o formato `.esc` legado real deve ser inventariado e o contrato de conversão, pré-visualização e rejeição atômica deve ser aprovado.
+
 Documentação é parte do produto. Um lote sem memória atualizada e evidência final não está concluído.
