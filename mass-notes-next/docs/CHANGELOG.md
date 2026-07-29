@@ -184,5 +184,40 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Commits mec
 - falsos negativos de plural, sobreposição e colisão com o nome `document` foram corrigidos sem distorcer o produto;
 - suíte de visibilidade ficou isolada em arquivo dedicado, sem cenário duplicado;
 - matriz elevada para 67 cenários por navegador, 134 execuções;
-- build, Chromium, Firefox, publicação, limpeza de cache e verificação pública aprovados no workflow `30367072054`;
-- Gate 7 encerrado para avaliação manual; nenhuma ampliação automática foi autorizada.
+- build, Chromium, Firefox, publicação, limpeza de cache e verificação pública aprovados no workflow `30367072054`.
+
+### Gate 8 — Anatomia do Livro integrada
+
+- preservado o arquivo integral recebido em `anatomia-original.html`;
+- criado gerador oficial `scripts/build-anatomia-runtime.py`;
+- imagens incorporadas passam a assets WebP locais durante a CI;
+- runtime público ficou leve, direto e sem loader intermediário;
+- Anatomia abre dentro da aplicação sem desmontar o editor;
+- retorno preserva título, documento e estado;
+- corrigido evento tardio do StPageFlip que reativava item interior depois do retorno à capa;
+- removido workflow temporário que escrevia diretamente na branch de preview;
+- publicação ficou exclusiva do workflow `Mass Notes Tiptap`;
+- matriz elevada para 73 cenários por navegador, 146 execuções;
+- build, Chromium, Firefox, publicação, cache e verificação pública aprovados.
+
+### Gate 9A — exportação estrutural mínima
+
+- criada pasta `src/export/` para serializadores e entrega de arquivos;
+- criada serialização pura em `src/export/documentExport.ts`;
+- criado painel isolado em `src/components/ExportPanel.tsx`;
+- criado estilo dedicado em `src/styles/export-panel.css`;
+- substituído o exportador TXT artesanal de `App.tsx` por callback tipado de formato;
+- TXT, Markdown e HTML passaram a derivar do JSON Tiptap, não apenas de `plainText`;
+- preservados headings, parágrafos, `hardBreak`, negrito, itálico, sublinhado, tachado, links, citações e listas aninhadas conforme cada formato;
+- Markdown recebeu frontmatter com título, situação e tags;
+- HTML passou a ser autônomo, imprimível, escapado e sem dependências externas;
+- links HTML e Markdown ficam restritos a protocolos permitidos;
+- TXT preserva hierarquia legível sem carregar tags HTML;
+- nomes de arquivo são normalizados com Unicode e pontuação;
+- página vazia ainda exporta título e metadados;
+- exportação foi comprovada como operação somente de leitura;
+- painel móvel não cria overflow horizontal;
+- a primeira execução revelou apenas uma asserção com espaço incorreto dentro de `<em>`; o teste foi corrigido sem alteração de produto;
+- sete cenários novos foram aprovados nos dois navegadores;
+- matriz elevada para 80 cenários por navegador, 160 execuções;
+- build, Chromium, Firefox, publicação, renovação de cache e verificação pública aprovados no workflow `30415258895`.
