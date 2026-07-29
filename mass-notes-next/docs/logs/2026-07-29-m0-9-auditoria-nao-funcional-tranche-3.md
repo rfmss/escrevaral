@@ -65,7 +65,7 @@ Após doze ciclos consecutivos:
 - a quantidade de documentos permaneceu estável;
 - o DOM permaneceu em 179 nós no início e no fim;
 - Chromium: p95 de salvamento observado em 192 ms, heap 16.100.000 bytes no início e no fim;
-- Firefox: p95 de salvamento observado em 90 ms; a API de heap não estava disponível;
+- Firefox: p95 de salvamento observado em 90 ms na cabeça funcional; a API de heap não estava disponível;
 - o teste usa limites defensivos de 8 s, 120 nós adicionais e 64 MiB de crescimento quando a medição existe.
 
 Esses números são evidência de regressão em CI, não orçamento universal de desempenho nem benchmark de dispositivo real.
@@ -87,16 +87,22 @@ As execuções intermediárias foram bloqueadas e diagnosticadas antes da repeti
 2. a auditoria de rede revelou a dependência externa real do `unpkg`, registrada como achado em vez de ser ocultada;
 3. o overlay de movimento reduzido é transitório e passou a ter duração capturada por observador instalado antes do clique;
 4. `innerText` do Chromium inclui linhas visuais que não pertencem ao snapshot semântico; o corpus passou a usar paste estruturado e o contrato ProseMirror real;
-5. nenhuma alteração funcional de produto foi feita para obter verde.
+5. uma execução documental sofreu duas falhas antigas no Firefox após os 14 cenários novos passarem: Contexto foi acionado antes de o texto versionado convergir, e a exportação observou o DOM rico antes de o documento estruturado chegar ao armazenamento;
+6. os testes antigos de Contexto passaram a exigir `Salvo` antes da leitura e da falha simulada;
+7. a fixture de exportação passou a focar o editor, exigir salvamento e confirmar no IndexedDB que o texto estruturado foi persistido antes de exportar;
+8. downloads transitórios dos binários Playwright continuam sendo responsabilidade da infraestrutura e não alteram o contrato de produto;
+9. nenhuma alteração funcional de produto foi feita para obter verde.
 
-## Evidência funcional final
+## Evidência funcional
 
-Cabeça: `305d0727ddfaee11f3e7680d0f9168023e9a4284`.
+Cabeça funcional da tranche: `305d0727ddfaee11f3e7680d0f9168023e9a4284`.
 
 - Mass Notes Tiptap `30478738806`: build, Chromium, Firefox, 252/252, publicação, cache e smoke público verdes;
 - Candidata a lançamento Argila `30478738678`: verde;
 - Coerência de versões `30478738607`: verde;
 - artefato: `mass-notes-tiptap-30478738806`.
+
+A estabilização final das fixtures antigas deve receber nova CI completa na cabeça documental/teste final. O SHA e os workflows exatos dessa última cabeça ficam no corpo do PR, sem commit autorreferente posterior.
 
 ## Estado após a tranche
 
@@ -107,7 +113,7 @@ Cabeça: `305d0727ddfaee11f3e7680d0f9168023e9a4284`.
 - beta fechada: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`;
-- M0.9 continua aberto para validação manual real e fechamento documental exato;
+- M0.9 continua aberto para validação manual real e decisões dos P2;
 - Gate 14 permanece suspenso;
 - PR #155 permanece em rascunho;
 - `main` e aplicação pública permanecem intactos.
