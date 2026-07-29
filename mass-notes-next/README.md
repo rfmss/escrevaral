@@ -13,25 +13,29 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - cópia nativa: envelope versionado e restauração como novas cópias;
 - biblioteca: busca, filtros combináveis, ordenação, favorito e tags editáveis;
 - importação legada: `.esc`/`vrda` v1 com checksum, prévia e gravação somente após confirmação;
-- Gates 1 a 13 e Gate 10.5 de higiene: aprovados funcionalmente;
-- matriz anterior ao milestone: 111 cenários por navegador, 222 execuções;
+- Gates 1 a 13 e Gate 10.5 de higiene: aprovados;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- Gate 14 está suspenso até o veredito integrado.
+- primeira tranche M0.9: 116 cenários por navegador, 232 execuções verdes;
+- nota provisória: 85/100;
+- beta fechada: `SHIP COM CONDIÇÕES` provisório;
+- lançamento público e substituição integral: `NO-SHIP` provisório;
+- Gate 14 está suspenso até o veredito final.
 
 ## Retomar o projeto
 
 Leia nesta ordem:
 
 1. `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
-2. `docs/PLAN.md`;
-3. `docs/MEMORY.md`;
-4. `docs/CHANGELOG.md`;
-5. log mais recente em `docs/logs/`;
-6. documentação global em `../docs/product/`.
+2. `docs/audits/M0_9_AUDITORIA_GERAL.md`;
+3. `docs/PLAN.md`;
+4. `docs/MEMORY.md`;
+5. `docs/CHANGELOG.md`;
+6. log mais recente em `docs/logs/`;
+7. documentação global em `../docs/product/`.
 
 A memória M0.9 é viva: decisões, achados, severidades, notas e evidências devem ser atualizados nela no momento em que mudarem.
 
-Não comece um novo gate antes do veredito da auditoria geral. Um lote não está concluído sem documentação, testes e evidências na cabeça final.
+Não comece um novo gate antes do veredito final da auditoria geral. Um lote não está concluído sem documentação, testes e evidências na cabeça final.
 
 ## Executar e validar
 
@@ -91,6 +95,26 @@ Regras de formato, conversão, filtro ou engine não entram diretamente em `App.
 - preview só é publicada depois de build, Chromium, Firefox, cache e smoke público verdes;
 - a aplicação pública raiz permanece fora desta branch.
 
+## Primeira tranche M0.9
+
+Aprovado em Chromium e Firefox:
+
+- escrita, metadados, autosave e recarga;
+- Revisão, Voz, Contexto, RimaLab e Palavras na mesma sessão sem mutação do manuscrito;
+- sentinela autoral ausente de URL e corpo de requisição;
+- filtros sem alterar revisão ou descartar a página ativa;
+- drawer em 320 e 390 px;
+- biblioteca com 100 páginas e documento acima de 100 mil caracteres.
+
+Evidência funcional:
+
+- cabeça `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
+- Mass Notes `30463426867`;
+- Argila `30463426847`;
+- coerência `30463426811`.
+
+O milestone continua aberto.
+
 ## Camadas visuais específicas
 
 ```text
@@ -101,4 +125,4 @@ src/styles/legacy-import.css
 
 ## Limites atuais
 
-Ainda não estão aprovados reimportação seletiva, deduplicação automática entre importações, importação parcial, pastas persistentes, operações em massa, sincronização em nuvem, colaboração, DOCX, RTF, ePub, Obsidian ZIP, service worker da aplicação nova, Tauri, SQLite, paginação física, aplicação automática de sugestões ou promoção para `main`.
+Ainda não estão aprovados reimportação seletiva, deduplicação automática entre importações, importação parcial, pastas persistentes, operações em massa, sincronização em nuvem, colaboração, DOCX, RTF, ePub, Obsidian ZIP, service worker da aplicação nova, Prova de Autoria na nova fundação, Tauri, SQLite, paginação física, aplicação automática de sugestões ou promoção para `main`.
