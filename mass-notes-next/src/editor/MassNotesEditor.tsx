@@ -50,6 +50,19 @@ function MassNotesEditorInstance({
     onPositionContract?.(contract)
   }
 
+  const publishLexicalSelection = (current: Editor) => {
+    const { from, to, empty } = current.state.selection
+    const text = empty ? '' : current.state.doc.textBetween(from, to, ' ', ' ').trim()
+    window.dispatchEvent(new CustomEvent('escrevaral:lexical-selection', {
+      detail: {
+        documentId,
+        from,
+        to,
+        text: text.length <= 120 ? text : '',
+      },
+    }))
+  }
+
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -64,10 +77,15 @@ function MassNotesEditorInstance({
     },
     onCreate: ({ editor: current }) => {
       publishPositionContract(current)
+      publishLexicalSelection(current)
     },
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
+      publishLexicalSelection(current)
       onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
+    },
+    onSelectionUpdate: ({ editor: current }) => {
+      publishLexicalSelection(current)
     },
   })
 
