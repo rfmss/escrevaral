@@ -169,6 +169,35 @@ export async function restoreDocumentsAsCopies(source: EscrevaralDocument[]): Pr
   return restored
 }
 
+export async function importLegacyDocumentsAsCopies(source: EscrevaralDocument[]): Promise<EscrevaralDocument[]> {
+  if (!source.length) return []
+  const db = await database()
+  const tx = db.transaction('documents', 'readwrite')
+  const imported: EscrevaralDocument[] = []
+  const startedAt = Date.now()
+
+  for (const [index, document] of source.entries()) {
+    if (!document.legacySourceId) {
+      tx.abort()
+      throw new Error('Importação legada sem identificador de origem.')
+    }
+    const copy = createDocument({
+      ...structuredClone(document),
+      id: crypto.randomUUID(),
+      title: `${document.title.trim() || 'Sem título'} — importado`,
+      revision: 0,
+      createdAt: startedAt + index,
+      updatedAt: startedAt + index,
+      legacySourceId: document.legacySourceId,
+    })
+    await tx.store.add(copy)
+    imported.push(copy)
+  }
+
+  await tx.done
+  return imported
+}
+
 async function importLegacyDocuments(db: IDBPDatabase<EscrevaralDB>): Promise<void> {
   let raw: string | null = null
   try {
