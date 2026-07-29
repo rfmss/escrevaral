@@ -4,10 +4,10 @@ Esta pasta permite que uma pessoa, IA ou plataforma retome o subprojeto sem depe
 
 ## Estado resumido
 
-- Gates 1 a 11 e Gate 10.5: concluídos;
-- matriz: 98 cenários por navegador, 196 execuções;
-- gate mais recente: organização da biblioteca;
-- próximo gate proposto: edição segura de favorito e tags;
+- Gates 1 a 12 e Gate 10.5: concluídos;
+- matriz: 105 cenários por navegador, 210 execuções;
+- gate mais recente: edição segura de metadados editoriais;
+- próximo gate proposto: importação auditável do `.esc` legado;
 - PR `#155` permanece em rascunho;
 - `main`, aplicação pública e service worker permanecem intactos.
 
@@ -16,10 +16,10 @@ Esta pasta permite que uma pessoa, IA ou plataforma retome o subprojeto sem depe
 1. `PLAN.md` — objetivo, gates e próximo passo proposto;
 2. `MEMORY.md` — estado consolidado, decisões e restrições ativas;
 3. `CHANGELOG.md` — mudanças relevantes em ordem cronológica;
-4. `logs/2026-07-29-gate-11-organizacao-biblioteca.md` — lote mais recente;
+4. `logs/2026-07-29-gate-12-metadados-editoriais.md` — lote mais recente;
 5. demais arquivos em `logs/` — tentativas, falhas e evidências históricas;
 6. documentação global em `../../docs/_decisoes/` e `../../docs/product/`;
-7. contrato global mais recente: `../../docs/product/MASS_NOTES_TIPTAP_GATE_11.md`.
+7. contrato global mais recente: `../../docs/product/MASS_NOTES_TIPTAP_GATE_12.md`.
 
 ## Regra de continuidade
 
