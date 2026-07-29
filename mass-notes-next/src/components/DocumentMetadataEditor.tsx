@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
 import { normalizeLibraryText, parseLibraryTags } from '../library/libraryQuery'
 
@@ -21,12 +21,11 @@ export function DocumentMetadataEditor({ document, onFavorite, onTags }: Props) 
 
   useEffect(() => {
     setTagDraft(document.tags.join(', '))
-    setMessage('')
-  }, [document.id])
+  }, [document.id, document.tags])
 
   useEffect(() => {
-    if (!tagsChanged) setTagDraft(document.tags.join(', '))
-  }, [document.tags, tagsChanged])
+    setMessage('')
+  }, [document.id])
 
   const applyTags = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
