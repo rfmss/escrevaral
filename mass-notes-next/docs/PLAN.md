@@ -6,7 +6,7 @@ Atualizado em: 2026-07-28
 
 Construir uma oficina de escrita feita para português brasileiro, preservando as engines e a identidade do Escrevaral sobre infraestrutura consolidada de edição.
 
-O diferencial do produto não é fabricar cursor, seleção ou histórico. É oferecer leitura linguística local, fluxo de escrita e repertório brasileiro.
+O diferencial do produto não é fabricar cursor, seleção ou histórico. É oferecer leitura linguística local, fluxo de escrita, repertório brasileiro e saída segura para o trabalho de quem escreve.
 
 ## Fundação atual
 
@@ -17,8 +17,10 @@ O diferencial do produto não é fabricar cursor, seleção ou histórico. É of
 - engines legadas por adaptadores;
 - contrato comum de posições textuais;
 - primeira decoration ProseMirror somente de leitura;
+- exportação estrutural derivada do JSON Tiptap;
 - tokens visuais semânticos;
 - skin Blueprint Tokon isolada e reversível;
+- Anatomia do Livro integrada por runtime gerado na CI;
 - dependências reproduzíveis por `package-lock.json` e `npm ci`;
 - responsividade estabilizada;
 - preview isolada em `preview-mass-notes-tiptap`;
@@ -171,28 +173,78 @@ Documentação detalhada:
 - o halo cinza ao lado da folha foi removido sem eliminar a sombra gráfica seca;
 - a preview usa assets estáveis, fallback visível e verificação do endereço público após a publicação.
 
-Evidência final: workflow `30367072054`, 67 cenários por navegador, 134 execuções, zero falhas, zero flakiness; build, Chromium, Firefox, publicação, limpeza de cache e smoke test público aprovados.
+Evidência final: workflow `30367072054`, 67 cenários por navegador, 134 execuções; build, Chromium, Firefox, publicação, limpeza de cache e smoke test público aprovados.
 
 Documentação detalhada:
 
 - `docs/logs/2026-07-28-gate-7-review-decorations.md`;
 - `../docs/product/MASS_NOTES_TIPTAP_GATE_7.md`.
 
-## Lote atual — avaliação manual do Gate 7
+### Gate 8 — Anatomia do Livro integrada
 
-Nenhum novo gate começa automaticamente. O próximo passo é avaliação manual na preview isolada:
+- o original completo permanece em `anatomia-original.html`;
+- `scripts/build-anatomia-runtime.py` gera o runtime leve e assets WebP durante a CI;
+- a experiência abre dentro da aplicação sem desmontar o editor;
+- o retorno preserva documento, título e estado;
+- o guard contra eventos tardios do StPageFlip impede regressão do menu ao voltar do miolo para uma seção exterior;
+- a branch de preview permanece produto de build e não recebe correções diretas;
+- o workflow oficial é exclusivamente `.github/workflows/mass-notes-tiptap.yml`.
 
-1. abrir a preview e confirmar que a oficina carrega, sem tela branca;
-2. colar ou escrever um texto representativo em português brasileiro;
-3. executar Revisão e conferir se as marcas apontam para os trechos corretos;
-4. usar “Ir ao trecho” em ocorrências simples e repetidas;
-5. ocultar e restaurar as marcas sem perder a lista de observações;
-6. editar o texto e confirmar que a leitura antiga desaparece;
-7. conferir papel e noite, desktop e mobile;
-8. avaliar densidade visual e sobreposição em textos com muitas ocorrências;
-9. registrar qualquer falha P0/P1 antes de autorizar ampliação.
+Evidência funcional: workflow `30409965734`, 73 cenários por navegador, 146 execuções; build, publicação, cache e verificação pública aprovados.
 
-Sem falha bloqueadora e somente após autorização explícita, o lote seguinte poderá ser proposto. A integração de novas engines com decorations, aplicação de sugestões ou promoção para `main` não está autorizada por este gate.
+Documentação detalhada:
+
+- `docs/logs/2026-07-28-gate-8-anatomia-do-livro.md`.
+
+### Gate 9A — exportação estrutural mínima
+
+- criada camada pura em `src/export/documentExport.ts`;
+- criada interface isolada em `src/components/ExportPanel.tsx`;
+- estilos ficam em `src/styles/export-panel.css`;
+- TXT, Markdown e HTML são derivados diretamente do JSON Tiptap;
+- títulos, parágrafos, `hardBreak`, negrito, itálico, sublinhado, tachado, links, citações e listas aninhadas são preservados conforme a capacidade de cada formato;
+- HTML escapa conteúdo autoral e só preserva links `http`, `https`, `mailto` e `tel`;
+- Markdown inclui frontmatter local com título, situação e tags;
+- TXT mantém hierarquia legível sem carregar marcação HTML;
+- nomes de arquivo são normalizados de forma segura;
+- página vazia ainda exporta título e metadados;
+- exportar não altera JSON, HTML do editor, texto, título, biblioteca, conflito ou persistência;
+- painel validado em drawer móvel sem overflow horizontal;
+- nenhuma engine, base linguística, Anatomia ou branch de preview foi alterada.
+
+Evidência funcional: workflow `30415258895`, 80 cenários por navegador, 160 execuções; build, Chromium, Firefox, publicação, renovação de cache e verificação pública aprovados.
+
+Documentação detalhada:
+
+- `docs/logs/2026-07-28-gate-9-exportacao-estrutural.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_9.md`.
+
+## Próximo lote proposto — Gate 9B: cópia nativa e restauração segura
+
+O próximo passo lógico fecha a saída completa dos dados antes de novas engines ou formatos editoriais.
+
+Escopo proposto:
+
+1. definir um envelope versionado próprio do Mass Notes Next;
+2. incluir todos os documentos com JSON Tiptap e metadados necessários;
+3. exportar a cópia localmente sem dependência externa;
+4. importar sem apagar ou substituir a biblioteca existente;
+5. restaurar documentos como cópias quando houver colisão de identidade;
+6. validar estrutura, versão e conteúdo antes de escrever no IndexedDB;
+7. rejeitar arquivo corrompido sem alterar o estado atual;
+8. cobrir Unicode, documentos vazios, listas, links, biblioteca grande e conflitos;
+9. manter compatibilidade de leitura com `.esc` legado por adaptador separado, se o contrato puder ser preservado sem ambiguidade.
+
+Fora do Gate 9B:
+
+- DOCX, RTF e ePub;
+- exportação múltipla por formato editorial;
+- Obsidian em ZIP;
+- sincronização em nuvem;
+- File System Access automático;
+- alteração do schema do editor sem migração explícita.
+
+O Gate 9B não começa automaticamente. Antes de implementá-lo, o contrato do envelope, a política de colisão e a estratégia de compatibilidade com `.esc` precisam ser registrados no menor patch possível.
 
 ## Fora dos próximos gates
 
