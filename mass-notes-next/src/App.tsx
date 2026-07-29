@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Library } from './components/Library'
 import { RightRail } from './components/RightRail'
-import { displayTitle, type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
+import { type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
 import { MassNotesEditor, type ReviewNavigationRequest } from './editor/MassNotesEditor'
 import type { ReviewDecorationSpec } from './editor/reviewDecorations'
 import type { EditorPositionContract } from './editor/textPositionContract'
@@ -11,6 +11,7 @@ import {
   type LocatedReviewIssue,
   type ReviewIssue,
 } from './engines/reviewAdapter'
+import { downloadDocumentExport, type ExportFormat } from './export/documentExport'
 import {
   createNewDocument,
   DocumentConflictError,
@@ -341,15 +342,10 @@ export default function App() {
     })
   }, [])
 
-  const exportTxt = useCallback(() => {
+  const exportDocument = useCallback((format: ExportFormat) => {
     const current = draftRef.current
     if (!current) return
-    const blob = new Blob([`${displayTitle(current)}\n\n${current.plainText}`], { type: 'text/plain;charset=utf-8' })
-    const anchor = document.createElement('a')
-    anchor.href = URL.createObjectURL(blob)
-    anchor.download = `${displayTitle(current).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').toLocaleLowerCase('pt-BR') || 'documento'}.txt`
-    anchor.click()
-    setTimeout(() => URL.revokeObjectURL(anchor.href), 1_000)
+    downloadDocumentExport(current, format)
   }, [])
 
   const loadPersistedConflict = useCallback(() => {
@@ -505,7 +501,7 @@ export default function App() {
           onNavigateIssue={navigateReviewIssue}
           onStatus={(status: DocumentStatus) => mutateDraft((current) => ({ ...current, status }))}
           onDuplicate={() => { void duplicate() }}
-          onExport={exportTxt}
+          onExport={exportDocument}
           onFocus={() => setFocusMode((value) => !value)}
           onTheme={() => setDark((value) => !value)}
         />
