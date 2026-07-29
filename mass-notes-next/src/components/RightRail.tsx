@@ -5,12 +5,14 @@ import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
 import type { ExportFormat } from '../export/documentExport'
 import { ContextPanel } from './ContextPanel'
 import { ExportPanel } from './ExportPanel'
+import { LexicalPanel } from './LexicalPanel'
 import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
 const TABS = [
   { id: 'pulso', label: 'pulso' },
   { id: 'revisao', label: 'revisao' },
+  { id: 'palavras', label: 'palavras' },
   { id: 'voz', label: 'voz' },
   { id: 'contexto', label: 'contexto' },
   { id: 'rimalab', label: 'rimalab' },
@@ -200,6 +202,7 @@ export function RightRail({
               <button className="action reading" type="button" onClick={readText} disabled={analyzing}>
                 {analyzing ? 'Lendo o texto…' : 'Ler o texto'}
               </button>
+              <button className="action subtle" type="button" onClick={() => setTab('palavras')}>Consultar palavras</button>
               <button className="action subtle" type="button" onClick={() => setTab('ferramentas')}>Exportar documento</button>
             </div>
           </section>
@@ -217,12 +220,7 @@ export function RightRail({
               <section className="review-located" aria-labelledby="review-located-title">
                 <div className="review-located-heading">
                   <h3 id="review-located-title">Trechos localizados</h3>
-                  <button
-                    type="button"
-                    className="review-visibility"
-                    aria-pressed={!reviewMarksVisible}
-                    onClick={toggleReviewMarks}
-                  >
+                  <button type="button" className="review-visibility" aria-pressed={!reviewMarksVisible} onClick={toggleReviewMarks}>
                     {reviewMarksVisible ? 'Ocultar marcas' : 'Mostrar marcas'}
                   </button>
                 </div>
@@ -234,12 +232,7 @@ export function RightRail({
                       <strong>{issue.title}</strong>
                       <blockquote>{issue.fragment}</blockquote>
                       {issue.detail && <p>{issue.detail}</p>}
-                      <button
-                        type="button"
-                        className="review-jump"
-                        onClick={() => onNavigateIssue(issue)}
-                        aria-label={`Ir ao trecho: ${issue.fragment}`}
-                      >
+                      <button type="button" className="review-jump" onClick={() => onNavigateIssue(issue)} aria-label={`Ir ao trecho: ${issue.fragment}`}>
                         Ir ao trecho
                       </button>
                     </article>
@@ -257,6 +250,12 @@ export function RightRail({
                 </article>
               ))}
             </div>
+          </section>
+        )}
+
+        {tab === 'palavras' && (
+          <section id="panel-palavras" role="tabpanel" aria-labelledby="tab-palavras" className="panel active">
+            <LexicalPanel document={document} />
           </section>
         )}
 
