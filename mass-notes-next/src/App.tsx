@@ -33,8 +33,22 @@ type ConflictState = {
   persisted: EscrevaralDocument
 }
 
+type DraftMutationKind = 'manuscript' | 'metadata'
+
+type DocumentChannelMessage = {
+  id?: string
+  revision?: number
+  kind?: DraftMutationKind
+}
+
 type LocatedReviewPresentation = LocatedReviewIssue & {
   positionRange: { from: number; to: number }
+}
+
+function manuscriptFieldsChanged(left: EscrevaralDocument, right: EscrevaralDocument): boolean {
+  return left.title !== right.title
+    || left.plainText !== right.plainText
+    || JSON.stringify(left.content) !== JSON.stringify(right.content)
 }
 
 function readLocalStorage(key: string): string | null {
@@ -71,6 +85,7 @@ export default function App() {
 
   const draftRef = useRef<EscrevaralDocument | null>(null)
   const dirtyRef = useRef(false)
+  const dirtyKindRef = useRef<DraftMutationKind | null>(null)
   const channelRef = useRef<BroadcastChannel | null>(null)
   const analysisToken = useRef(0)
   const navigationSerial = useRef(0)
@@ -126,6 +141,7 @@ export default function App() {
         setActiveId(candidate.id)
         setDraft(structuredClone(candidate))
         setDirty(recovered)
+        dirtyKindRef.current = recovered ? 'manuscript' : null
         setSaveState(recovered ? 'Alterado' : 'Salvo')
       }
     }
@@ -150,21 +166,27 @@ export default function App() {
     if (!('BroadcastChannel' in window)) return
     const channel = new BroadcastChannel(CHANNEL)
     channelRef.current = channel
-    channel.onmessage = async (event: MessageEvent<{ id?: string; revision?: number }>) => {
+    channel.onmessage = async (event: MessageEvent<DocumentChannelMessage>) => {
       const id = event.data?.id
       if (!id) return
+      const current = draftRef.current
       const persisted = await getDocument(id)
       if (!persisted) return
       await refreshDocuments()
-      if (id !== draftRef.current?.id || persisted.revision <= draftRef.current.revision) return
+      if (!current || id !== current.id || persisted.revision <= current.revision) return
       if (dirtyRef.current) {
-        setConflict({ local: structuredClone(draftRef.current), persisted })
+        setConflict({ local: structuredClone(current), persisted })
         setSaveState('Conflito')
       } else {
+        const kind = event.data?.kind ?? (manuscriptFieldsChanged(current, persisted) ? 'manuscript' : 'metadata')
         setDraft(persisted)
-        positionContractRef.current = null
-        clearReviewReading('O documento mudou em outra aba. Faça uma nova leitura quando quiser.')
-        setEditorResetKey((value) => value + 1)
+        draftRef.current = persisted
+        dirtyKindRef.current = null
+        if (kind === 'manuscript') {
+          positionContractRef.current = null
+          clearReviewReading('O documento mudou em outra aba. Faça uma nova leitura quando quiser.')
+          setEditorResetKey((value) => value + 1)
+        }
         setSaveState('Salvo')
       }
     }
@@ -174,6 +196,7 @@ export default function App() {
   const persistDraft = useCallback(async (): Promise<boolean> => {
     const current = draftRef.current
     if (!current || !dirtyRef.current || conflict) return !conflict
+    const mutationKind = dirtyKindRef.current ?? 'manuscript'
     setSaveState('Salvando')
     try {
       const saved = await saveDocument(current, current.revision)
@@ -181,9 +204,10 @@ export default function App() {
       draftRef.current = saved
       setDirty(false)
       dirtyRef.current = false
+      dirtyKindRef.current = null
       setSaveState('Salvo')
       removeLocalStorage(RECOVERY_KEY)
-      channelRef.current?.postMessage({ id: saved.id, revision: saved.revision })
+      channelRef.current?.postMessage({ id: saved.id, revision: saved.revision, kind: mutationKind } satisfies DocumentChannelMessage)
       await refreshDocuments()
       return true
     } catch (error) {
@@ -205,7 +229,10 @@ export default function App() {
     return () => window.clearTimeout(timer)
   }, [dirty, draft, conflict, persistDraft])
 
-  const mutateDraft = useCallback((updater: (current: EscrevaralDocument) => EscrevaralDocument) => {
+  const mutateDraft = useCallback((
+    updater: (current: EscrevaralDocument) => EscrevaralDocument,
+    kind: DraftMutationKind = 'manuscript',
+  ) => {
     setDraft((current) => {
       if (!current) return current
       const next = updater(current)
@@ -213,10 +240,11 @@ export default function App() {
       draftRef.current = next
       return next
     })
+    dirtyKindRef.current = dirtyKindRef.current === 'manuscript' || kind === 'manuscript' ? 'manuscript' : 'metadata'
     setDirty(true)
     dirtyRef.current = true
     setSaveState('Alterado')
-    clearReviewReading('O texto mudou. Faça uma nova leitura quando quiser.')
+    if (kind === 'manuscript') clearReviewReading('O texto mudou. Faça uma nova leitura quando quiser.')
   }, [clearReviewReading])
 
   const selectDocument = useCallback(async (id: string) => {
@@ -231,6 +259,8 @@ export default function App() {
     writeLocalStorage(ACTIVE_KEY, id)
     setDraft(structuredClone(selected))
     setDirty(false)
+    dirtyRef.current = false
+    dirtyKindRef.current = null
     setConflict(null)
     positionContractRef.current = null
     clearReviewReading('Aguardando uma leitura.')
@@ -246,6 +276,8 @@ export default function App() {
     writeLocalStorage(ACTIVE_KEY, created.id)
     setDraft(created)
     setDirty(false)
+    dirtyRef.current = false
+    dirtyKindRef.current = null
     setConflict(null)
     positionContractRef.current = null
     clearReviewReading('Aguardando uma leitura.')
@@ -261,6 +293,8 @@ export default function App() {
     setActiveId(copy.id)
     setDraft(copy)
     setDirty(false)
+    dirtyRef.current = false
+    dirtyKindRef.current = null
     positionContractRef.current = null
     clearReviewReading('Aguardando uma leitura.')
     setEditorResetKey((value) => value + 1)
@@ -350,16 +384,20 @@ export default function App() {
 
   const loadPersistedConflict = useCallback(() => {
     if (!conflict) return
+    const changedManuscript = manuscriptFieldsChanged(conflict.local, conflict.persisted)
     setDraft(conflict.persisted)
     draftRef.current = conflict.persisted
     setDirty(false)
     dirtyRef.current = false
+    dirtyKindRef.current = null
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)
-    positionContractRef.current = null
-    clearReviewReading('Aguardando uma leitura.')
-    setEditorResetKey((value) => value + 1)
+    if (changedManuscript) {
+      positionContractRef.current = null
+      clearReviewReading('Aguardando uma leitura.')
+      setEditorResetKey((value) => value + 1)
+    }
   }, [clearReviewReading, conflict])
 
   const preserveConflictCopy = useCallback(async () => {
@@ -371,6 +409,7 @@ export default function App() {
     draftRef.current = copy
     setDirty(false)
     dirtyRef.current = false
+    dirtyKindRef.current = null
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)
@@ -455,7 +494,7 @@ export default function App() {
 
           {conflict && (
             <div className="conflict-banner" role="alert">
-              <strong>Outra aba também escreveu nesta página.</strong>
+              <strong>Outra aba também alterou esta página.</strong>
               <span>Nenhuma versão será apagada silenciosamente.</span>
               <div>
                 <button type="button" onClick={loadPersistedConflict}>Carregar outra aba</button>
@@ -499,7 +538,9 @@ export default function App() {
           onClose={() => setRailOpen(false)}
           onAnalyze={() => { void runReview() }}
           onNavigateIssue={navigateReviewIssue}
-          onStatus={(status: DocumentStatus) => mutateDraft((current) => ({ ...current, status }))}
+          onStatus={(status: DocumentStatus) => mutateDraft((current) => ({ ...current, status }), 'metadata')}
+          onFavorite={(favorite) => mutateDraft((current) => ({ ...current, favorite }), 'metadata')}
+          onTags={(tags) => mutateDraft((current) => ({ ...current, tags }), 'metadata')}
           onDuplicate={() => { void duplicate() }}
           onExport={exportDocument}
           onFocus={() => setFocusMode((value) => !value)}
