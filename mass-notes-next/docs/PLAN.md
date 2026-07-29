@@ -20,6 +20,7 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 - Anatomia do Livro por runtime gerado na CI;
 - skin Blueprint Tokon isolada e reversível;
 - biblioteca consultável por camada pura;
+- estado, favorito e tags editáveis pelo mesmo contrato versionado do documento;
 - preview isolada em `preview-mass-notes-tiptap`;
 - auditor global restrito aos assets da aplicação pública raiz;
 - PR rascunho `#155`.
@@ -42,65 +43,69 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 14. **Gate 10 — Palavras/Léxico:** seleção durável e consulta local sem mutação.
 15. **Gate 10.5 — Fronteiras de distribuição:** auditor público separado do build Vite isolado.
 16. **Gate 11 — Organização da biblioteca:** filtros combináveis, ordenação estável, estados vazios e preservação da página ativa.
+17. **Gate 12 — Metadados editoriais:** edição unitária de estado, favorito e tags no mesmo autosave, revisão e conflito do documento.
 
 ## Evidência atual
 
-- cabeça funcional do Gate 11: `1e4ca1784b145b510ba6d3749025230d22f7d632`;
-- Mass Notes: workflow `30449369857`, verde;
-- candidata Argila: workflow `30449371552`, verde;
-- coerência de versões: workflow `30449371768`, verde;
-- 98 cenários por navegador e 196 execuções aprovadas;
+- cabeça funcional do Gate 12: `70226195cd742b714ad53bb2a9c4cd815210d821`;
+- Mass Notes: workflow `30452750643`, verde;
+- candidata Argila: workflow `30452747030`, verde;
+- coerência de versões: workflow `30452747019`, verde;
+- 105 cenários por navegador e 210 execuções aprovadas;
 - build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes;
 - aplicação pública, `main` e service worker intactos;
-- nenhuma migração de schema ou gravação foi introduzida pelo Gate 11.
+- nenhuma migração de schema ou repositório paralelo foi criada.
 
 Documentação detalhada:
 
-- `docs/logs/2026-07-29-gate-11-organizacao-biblioteca.md`;
-- `../docs/product/MASS_NOTES_TIPTAP_GATE_11.md`.
+- `docs/logs/2026-07-29-gate-12-metadados-editoriais.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_12.md`.
 
-## Gate 11 — contrato fechado
+## Gate 12 — contrato fechado
 
-- `src/library/libraryQuery.ts` concentra normalização, filtros, tags e ordenação;
-- busca combina título, texto, tags e estado, ignorando caixa e acentos;
-- estado, favorito, tag e busca são filtros combináveis;
-- ordenação oferece alteração recente, criação recente e título A–Z;
-- desempates usam datas, título e identidade de forma previsível;
-- variantes equivalentes de tag recebem representante canônico determinístico;
-- contagem mostra páginas visíveis e total da biblioteca;
-- estado vazio explica o recorte e oferece limpeza imediata;
-- a página ativa permanece aberta quando fica fora do filtro;
-- rascunho, seleção e autosave não são interrompidos;
-- filtros não escrevem no IndexedDB e não alteram revisão;
-- biblioteca extensa, Unicode, títulos repetidos e drawer móvel foram validados nos dois navegadores.
+- `status`, `favorite` e `tags` continuam no mesmo `EscrevaralDocument`;
+- qualquer mudança nesses campos incrementa a mesma `revision` usada pelo manuscrito;
+- autosave, recuperação emergencial, IndexedDB e conflito entre abas são compartilhados;
+- não existe merge campo a campo ou sobrescrita silenciosa;
+- `DraftMutationKind` distingue `manuscript` de `metadata` sem criar uma segunda persistência;
+- título, conteúdo Tiptap e texto derivado são mutações de manuscrito;
+- estado, favorito e tags são mutações editoriais;
+- mutações editoriais preservam editor montado, seleção, mapa de posições e leituras linguísticas válidas;
+- mutações de manuscrito continuam invalidando leituras e decorations obsoletas;
+- atualizações remotas limpas de metadados são absorvidas sem desmontar o Tiptap;
+- conflito com rascunho local exige escolha explícita entre carregar a outra aba ou guardar a versão local como cópia;
+- favorito é alternado unitariamente;
+- tags são aplicadas atomicamente, deduplicadas por caixa e acentos, limitadas a 8 itens de 32 caracteres e removíveis uma a uma;
+- alterações aparecem imediatamente nos cartões, filtros e cópia nativa;
+- desktop e drawer móvel permanecem acessíveis e sem overflow.
 
-## Próximo lote proposto — Gate 12: metadados editoriais
+## Próximo lote proposto — Gate 13: importação auditável do `.esc` legado
 
-O Gate 11 torna `favorite` e `tags` visíveis e úteis quando já existem em documentos restaurados ou migrados. O próximo ganho lógico é permitir que a pessoa mantenha esses campos no produto novo sem criar um caminho paralelo ou inseguro de persistência.
+O produto novo já escreve, analisa, organiza, exporta, protege cópias nativas e mantém metadados. O próximo risco de produto é a continuidade de quem possui documentos no formato legado: esses dados não devem exigir migração manual nem ser confundidos com o envelope nativo novo.
 
 Escopo proposto:
 
-1. alternar favorito da página ativa por comando explícito;
-2. editar tags da página ativa com normalização, limites e remoção clara;
-3. usar o mesmo contrato de revisão condicional do documento;
-4. preservar conteúdo, histórico Tiptap, seleção e leituras linguísticas quando só metadados mudarem;
-5. tratar conflito entre abas sem sobrescrever silenciosamente;
-6. refletir alterações imediatamente nos filtros e na cópia nativa;
-7. validar teclado, mobile, Unicode, tags duplicadas e falhas de gravação;
-8. manter operações unitárias e reversíveis.
+1. identificar e validar explicitamente o schema do `.esc` legado antes de qualquer escrita;
+2. apresentar uma pré-visualização com quantidade, títulos, avisos e campos recuperáveis;
+3. converter conteúdo legado para JSON Tiptap por adaptador isolado;
+4. preservar texto, título, estado, favorito, tags e origem quando disponíveis;
+5. usar `legacySourceId` para rastreabilidade sem reutilizar identidade de origem;
+6. importar sempre como novas cópias, sem substituir documentos existentes;
+7. rejeitar o lote integralmente quando o arquivo ou conversão for estruturalmente inválido;
+8. cobrir Unicode, documentos vazios, IDs repetidos, versões desconhecidas, biblioteca extensa e mobile;
+9. manter todo processamento local e sem upload externo.
 
-Fora do Gate 12:
+Fora do Gate 13:
 
-- edição em massa;
-- exclusão em massa;
-- pastas ou hierarquia persistente;
 - sincronização em nuvem;
 - colaboração;
+- merge automático com documentos existentes;
+- importação em massa de DOCX, RTF ou ePub;
+- pastas ou hierarquia persistente;
 - taxonomia automática;
-- aplicação automática de sugestões;
 - promoção para `main`.
 
-O Gate 12 não começa automaticamente. Antes do código, deve ser definido se uma alteração exclusivamente de metadados incrementa a mesma `revision` do documento e como o conflito será apresentado sem descartar conteúdo.
+O Gate 13 permanece proposto e não começa antes da revisão do formato legado real e de um contrato de conversão documentado.
 
 ## Fora dos próximos gates
 
