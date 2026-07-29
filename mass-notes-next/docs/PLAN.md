@@ -21,6 +21,7 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 - Anatomia do Livro integrada por runtime gerado na CI;
 - skin Blueprint Tokon isolada e reversível;
 - preview isolada em `preview-mass-notes-tiptap`;
+- auditor global restrito aos assets da aplicação pública raiz;
 - PR rascunho `#155`.
 
 ## Gates concluídos
@@ -39,34 +40,36 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 12. **Gate 9A — Exportação estrutural:** TXT, Markdown e HTML derivados do JSON Tiptap.
 13. **Gate 9B — Cópia nativa:** envelope versionado, validação integral e restauração como novas cópias.
 14. **Gate 10 — Palavras/Léxico:** engine e bases locais por adaptador, seleção durável e consulta sem mutação.
+15. **Gate 10.5 — Fronteiras de distribuição:** auditor público separado do build Vite isolado, com regressão automatizada.
 
 ## Evidência atual
 
-- workflow final: `30422368445`;
-- cabeça validada: `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a`;
-- 91 cenários por navegador;
-- 182 execuções aprovadas;
+- cabeça funcional do Gate 10.5: `572af55fc19b59e2c9c9330ce35ccf95be622074`;
+- coerência de versões: workflow `30430515120`, verde;
+- candidata Argila: workflow `30430515008`, verde;
+- Mass Notes: workflow `30430515420`, verde;
+- 91 cenários por navegador e 182 execuções aprovadas;
 - build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes;
-- `main`, aplicação pública e service worker intactos.
+- aplicação pública, `main` e service worker intactos;
+- nenhuma versão global ou tag foi criada artificialmente.
 
-Documentação detalhada do gate atual:
+Documentação detalhada dos gates atuais:
 
 - `docs/logs/2026-07-29-gate-10-palavras-lexico.md`;
-- `../docs/product/MASS_NOTES_TIPTAP_GATE_10.md`.
+- `docs/logs/2026-07-29-gate-10-5-fronteiras-distribuicao.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_10.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_10_5.md`.
 
-## Gate 10 — contrato fechado
+## Gate 10.5 — contrato fechado
 
-- `lexical-engine.js`, `lexical-data.json` e `norma-data.json` permanecem fontes intactas;
-- `src/engines/lexicalAdapter.ts` isola carregamento, normalização e defesa contra falsos verbetes;
-- `src/editor/lexicalSelectionBridge.ts` mantém o último recorte selecionado com `documentId`, `from`, `to` e texto;
-- a seleção pode anteceder a abertura do painel sem ser perdida;
-- busca digitada e seleção usam o mesmo caminho de leitura;
-- palavra registrada sem ocorrência pode mostrar definição, mas não recebe classe contextual inventada;
-- fallback morfológico sem ocorrência e sem registro local é tratado como ausência segura;
-- nenhum botão aplica, substitui ou reescreve conteúdo;
-- nenhum manuscrito é enviado para serviço externo.
+- `index.html`, `service-worker.js` e assets públicos continuam sujeitos a uma versão global única;
+- qualquer JS/CSS público alterado sem nova versão continua bloqueando a CI;
+- `mass-notes-next/` é uma aplicação Vite independente, com bundle hashado e preview próprios;
+- mudanças exclusivas desse subprojeto não avançam `ASSET_VERSION` nem `CACHE_NAME` da aplicação pública;
+- PRs mistos filtram somente os assets isolados e continuam auditando mudanças públicas reais;
+- o workflow possui regressões Python para assets públicos, preview isolada, relatórios e fontes não distribuídas.
 
-## Próximo lote proposto — Gate 11: organização da biblioteca
+## Próximo lote aprovado — Gate 11: organização da biblioteca
 
 O ciclo essencial já fecha escrita, análise linguística, consulta lexical, exportação e preservação. O próximo ganho deve melhorar a recuperação dos próprios textos sem alterar o contrato estrutural do editor.
 
@@ -91,7 +94,7 @@ Fora do Gate 11:
 - reescrita generativa;
 - promoção para `main`.
 
-O Gate 11 não começa automaticamente. Antes do código, devem ser inventariadas as capacidades já existentes de estado, tags, favorito e busca para evitar duplicação de conceito.
+Antes do código do Gate 11, devem ser inventariadas as capacidades já existentes de estado, tags, favorito e busca para evitar duplicação de conceito.
 
 ## Fora dos próximos gates
 
