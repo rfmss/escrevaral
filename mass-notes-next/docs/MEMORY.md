@@ -8,12 +8,14 @@ Atualizado em: 2026-07-29
 - PR `#155`: aberto, mesclável e em rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 13 e Gate 10.5: verdes;
+- Gates 1 a 13 e Gate 10.5: verdes funcionalmente;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz: 111 cenários por navegador, 222 execuções;
+- matriz anterior ao milestone: 111 cenários por navegador, 222 execuções;
 - cabeça funcional do Gate 13: `323e8a1e131a3692932e960e9285570df49a1460`;
 - workflows verdes: Mass Notes `30457008816`, Argila `30457009394`, coerência `30457008762`;
-- próximo gate proposto: preferências locais e retomada previsível da biblioteca.
+- milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
+- memória executável: `M0_9_AUDITORIA_OPERACIONAL.md`;
+- Gate 14 está suspenso até o veredito M0.9.
 
 ## Decisões permanentes
 
@@ -37,6 +39,38 @@ Atualizado em: 2026-07-29
 18. Importação legada nunca reutiliza IDs atuais nem substitui documentos existentes.
 19. `legacySourceId` é trilha de origem, não identidade atual nem chave de merge.
 20. Reimportação não recebe deduplicação silenciosa ou merge automático.
+21. O milestone M0.9 precede o Gate 14 e qualquer nova feature.
+22. A auditoria geral é memória operacional viva; decisões e achados são registrados no repositório quando mudam.
+23. Durante o M0.9, auditar precede corrigir.
+24. Correção durante a auditoria só é aceita para remover bloqueio de medição ou P0, sempre com documentação e matriz completa posterior.
+25. Beta fechada, lançamento público e substituição do Escrevaral antigo recebem vereditos separados.
+26. O PR permanece em rascunho e `main` intacta durante todo o milestone.
+
+## Contrato do milestone M0.9
+
+Fonte executável: `docs/M0_9_AUDITORIA_OPERACIONAL.md`.
+
+Esse documento contém:
+
+- fases e matriz transversal;
+- placar vivo por área;
+- registro cumulativo de decisões;
+- registro de achados e severidades;
+- evidências por cabeça e workflow;
+- matriz de paridade com o produto antigo;
+- critérios de encerramento.
+
+Atualização obrigatória quando houver:
+
+- mudança de escopo;
+- decisão de produto ou arquitetura;
+- novo P0, P1 ou P2;
+- alteração de severidade;
+- correção aceita;
+- nova evidência de CI;
+- mudança de nota ou veredito.
+
+Nenhuma sessão deve depender do histórico de conversa para saber o próximo passo.
 
 ## Contrato do documento
 
@@ -166,10 +200,13 @@ Ainda não estão aprovados:
 ## Como retomar
 
 1. conferir branch, PR e workflows;
-2. ler `PLAN.md`, este arquivo e o log mais recente;
-3. instalar com `npm ci`;
-4. não editar a branch de preview;
-5. manter importação em `src/import/` e persistência em `src/storage/`;
-6. não enfraquecer checksum ou atomicidade para aceitar fixtures;
-7. não usar `legacySourceId` como ID atual;
-8. iniciar o Gate 14 somente após revisar o contrato de preferências.
+2. ler `M0_9_AUDITORIA_OPERACIONAL.md` antes de qualquer outro lote;
+3. revisar P0/P1 abertos, placar e próxima fase;
+4. ler `PLAN.md`, este arquivo e o log mais recente;
+5. instalar com `npm ci`;
+6. não editar a branch de preview;
+7. não adicionar feature durante o diagnóstico;
+8. manter importação em `src/import/` e persistência em `src/storage/`;
+9. não enfraquecer checksum ou atomicidade para aceitar fixtures;
+10. não usar `legacySourceId` como ID atual;
+11. iniciar o Gate 14 somente após veredito explícito do M0.9.
