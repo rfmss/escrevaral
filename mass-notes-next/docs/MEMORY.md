@@ -5,261 +5,189 @@ Atualizado em: 2026-07-29
 ## Estado atual
 
 - branch: `experiment/mass-notes-tiptap`;
-- PR `#155`: aberto, mesclável e em rascunho;
+- PR `#155`: aberto e em rascunho;
 - preview: `preview-mass-notes-tiptap`;
-- aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 13 e Gate 10.5: verdes;
-- milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- três tranches automatizadas concluídas;
+- aplicação pública, `main` e service worker público: intactos;
+- Gates 1 a 13 e Gate 10.5: concluídos;
+- M0.9: encerrado como auditoria técnica e decisória;
+- milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz: 126 cenários por navegador, 252 execuções;
-- cabeça funcional da tranche 3: `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
-- workflows verdes: Mass Notes `30478738806`, Argila `30478738678`, coerência `30478738607`;
-- nota provisória: 88/100;
-- beta fechada: `SHIP COM CONDIÇÕES` provisório;
-- lançamento público: `NO-SHIP` provisório;
-- substituição integral: `NO-SHIP` provisório;
-- P0/P1 abertos: 0/0;
-- P2 abertos: 4;
-- Gate 14 suspenso até o veredito final.
+- matriz atual: **138 cenários por navegador, 276 execuções**;
+- cabeça funcional E0/E1: `d44791ff1a317610c9dd152360cfbb9b168c503a`;
+- Mass Notes `30493491424`, Argila `30493491638` e coerência `30493491411`: verdes;
+- corpus contextual v1: 8/14 → 14/14 casos únicos;
+- P0/P1 conhecidos nas engines: 0/0;
+- beta fechada online: `SHIP COM CONDIÇÕES`;
+- lançamento público: `NO-SHIP`;
+- substituição integral: `NO-SHIP`;
+- Gate 14: suspenso.
 
 ## Fontes de retomada
 
-1. `M0_9_AUDITORIA_OPERACIONAL.md` — memória executável viva;
-2. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano;
-3. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
-4. `logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md` — lote mais recente;
-5. `../../docs/product/MASS_NOTES_TIPTAP_M0_9.md` — contrato global.
+1. `M1_0_ENGINES_SUPERIORES.md` — memória operacional do programa atual;
+2. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
+3. `logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — transição de governança;
+4. `PLAN.md` — sequência autorizada;
+5. `CHANGELOG.md` — histórico técnico;
+6. `M0_9_AUDITORIA_OPERACIONAL.md` e `M0_9_ERRATA_MATRIZ.md` — histórico da auditoria;
+7. contratos globais em `../../docs/product/`.
 
-## Decisões permanentes
+## Decisões permanentes de fundação
 
-1. Tiptap/ProseMirror é o motor de edição e JSON Tiptap é a fonte estrutural.
+1. Tiptap/ProseMirror é o motor de edição; JSON Tiptap é a fonte estrutural.
 2. IndexedDB é a fonte principal; localStorage guarda preferências e recuperação emergencial.
 3. Nenhuma aba sobrescreve outra silenciosamente.
-4. Engines entram por adaptadores tipados, funcionam localmente e não aplicam texto.
-5. Offsets linguísticos usam UTF-16 sobre o Node ProseMirror real.
-6. Decorations ficam fora do JSON autoral e só são invalidadas quando o manuscrito muda.
-7. Exportadores, backups, importadores e consultas vivem em camadas próprias.
-8. Cópia nativa e `.esc` legado são formatos diferentes e nunca compartilham parser.
-9. Documentação, testes e evidências integram a definição de pronto.
-10. A preview é produto de build e nunca recebe edição direta.
-11. Filtros da biblioteca são projeções puras.
-12. Estado, favorito e tags pertencem à mesma revisão e persistência do manuscrito.
-13. Mudanças editoriais preservam leituras textuais válidas.
-14. Operações em massa, hierarquia e sincronização exigem gates próprios.
-15. Importação valida tudo antes de qualquer escrita.
-16. Lote legado inválido é rejeitado integralmente.
-17. Selecionar arquivo legado não autoriza gravação.
-18. Importação legada nunca reutiliza IDs atuais nem substitui documentos.
-19. `legacySourceId` é trilha de origem, não chave de merge.
-20. Reimportação não recebe deduplicação silenciosa.
-21. M0.9 precede Gate 14 e qualquer nova feature.
-22. A auditoria é memória viva no repositório.
-23. Auditar precede corrigir.
-24. Correção durante M0.9 só remove P0 ou bloqueio de medição e exige matriz completa.
-25. Beta, lançamento público e substituição recebem vereditos separados.
-26. PR permanece em rascunho e `main` intacta.
-27. Notas e vereditos permanecem provisórios até as fases manuais.
-28. Falha temporal de teste não vira defeito sem reprodução funcional.
-29. Estados intermediários rápidos do autosave podem não ser observáveis; `Salvo` final continua obrigatório.
-30. Exportação usa o estado atual React/Tiptap, não uma releitura do IndexedDB.
-31. Conflito é aprovado pela preservação das versões, não pela seleção ativa após recarga.
-32. Documento ativo é uma preferência compartilhada entre abas na origem atual.
-33. Cenários de falha simulada devem estabilizar entradas alheias ao contrato testado.
-34. SHA documental exato é registrado no PR depois da CI para evitar commit autorreferente.
-35. Equivalência de viewport não pode ser apresentada como zoom real ou validação de dispositivo.
-36. Leitor de tela e tecnologia assistiva só recebem status aprovado quando executados de verdade.
-37. Métricas do runner detectam regressão e não constituem SLA, benchmark universal ou promessa de hardware.
-38. Para não mutação autoral entre navegadores, o snapshot semântico ProseMirror é a referência; `innerText` pode incluir espaçamento visual específico do browser.
-39. Toda origem externa observada deve ser inventariada, classificada e restrita; allowlist não apaga o achado.
-40. A Anatomia depende atualmente de `page-flip@2.0.7` no `unpkg`; isso é P2 e impede promessa offline integral.
-41. Nenhuma frase autoral sentinela pode aparecer em URL ou corpo de requisição, inclusive ao atravessar superfícies especiais.
-42. Recuperação emergencial deve retomar o mesmo ID, avançar revisão, não duplicar a biblioteca e limpar o envelope após persistência.
+4. Documento, metadados e favorito compartilham revisão, autosave e conflito.
+5. Engines entram por adaptadores tipados e funcionam localmente.
+6. Nenhuma engine aplica texto ou alternativa automaticamente.
+7. Offsets linguísticos usam UTF-16 sobre o Node ProseMirror real.
+8. Decorations não pertencem ao JSON autoral.
+9. Exportadores, backups, importadores, consultas e engines vivem em camadas próprias.
+10. Cópia nativa e `.esc` legado são formatos distintos e nunca compartilham parser.
+11. Importação valida o lote inteiro antes de qualquer escrita.
+12. Restauração e importação criam UUIDs novos e nunca substituem documentos atuais.
+13. `legacySourceId` é trilha de origem, não chave de merge.
+14. Filtros da biblioteca são projeções puras.
+15. Exportação usa o estado React/Tiptap atual, não uma releitura atrasada do IndexedDB.
+16. Recuperação emergencial retoma o mesmo ID, avança revisão, não duplica página e limpa o envelope.
+17. A preview é produto de build; nunca recebe edição direta.
+18. Documentação, testes e evidência integram a definição de pronto.
+19. SHA documental exato é registrado no PR depois da CI, evitando commit autorreferente.
+20. PR permanece em rascunho e `main` intacta até autorização explícita.
 
-## Cobertura transversal aprovada
+## Decisões permanentes de qualidade
 
-### Escrita e retomada
+21. Chromium e Firefox são obrigatórios.
+22. Falha temporal de teste não vira defeito de produto sem diagnóstico.
+23. Estado final `Salvo` é obrigatório; estados intermediários podem convergir rápido demais para serem observados.
+24. Conflito é avaliado pela preservação das versões, não pela seleção ativa compartilhada após recarga.
+25. Snapshot semântico ProseMirror é a referência de não mutação; `innerText` pode variar visualmente entre navegadores.
+26. Métricas de runner detectam regressão; não são SLA ou benchmark universal.
+27. Viewport equivalente não pode ser apresentado como zoom real ou validação física.
+28. Leitor de tela, tecnologia assistiva e dispositivo só recebem status aprovado quando executados de verdade.
+29. Toda origem externa deve ser inventariada e restrita; allowlist não elimina o achado.
+30. Nenhuma frase autoral pode aparecer em URL ou corpo de requisição.
 
-- criação de página;
-- título e texto;
-- estado, favorito e tags;
-- autosave e salvamento explícito;
-- recarga e retomada;
-- organização sem alterar revisão ou descartar rascunho;
-- recuperação emergencial do mesmo documento;
-- envelope temporário limpo após salvamento;
-- doze ciclos adicionais sem exceção de página.
+## Decisões permanentes das engines
 
-### Engines em sequência e corpus separado
+31. O legado é baseline e fonte de capacidade, não autoridade infalível.
+32. “100%” sem corpus, bordas, métricas e comparação reproduzível não comprova maturidade.
+33. Superioridade não significa mais alertas; significa melhor acerto, explicação e segurança.
+34. Diacríticos participam da decisão gramatical; normalização serve à busca, não à classificação final.
+35. Contexto suficiente pode gerar leitura `provável`; não deve virar certeza falsa.
+36. Ausência de evidência deve produzir `ambíguo` ou `indeterminado`, não fallback convincente.
+37. Toda regra linguística nova exige caso reproduzível antes da implementação.
+38. Toda regra contextual recebe controles negativos contra generalização excessiva.
+39. Bancas e corpora externos são instrumentos de comparação, não dependências pesadas do runtime.
+40. A pessoa que escreve mantém a decisão final; alternativas são leitura, nunca comando.
+41. Quantidade lexical é inventariada separadamente de qualidade lexical.
+42. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
+43. A avaliação humana deve medir correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
+44. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
 
-- Revisão;
-- Espelho de Voz;
-- Termos que pedem contexto;
-- RimaLab;
-- Palavras/Léxico.
+## M0.9 encerrado
+
+O M0.9 produziu:
+
+- jornadas integradas de escrita, metadados, conflito, exportação e portabilidade;
+- cinco superfícies linguísticas em sequência sem mutação;
+- escala de 100 páginas e documento acima de 100 mil caracteres;
+- seis larguras, zoom CSS equivalente e movimento reduzido;
+- auditoria de rede, recuperação emergencial e sessão prolongada;
+- matriz consolidada 124 por navegador, 248 execuções;
+- decisões explícitas para quatro P2.
+
+Vereditos herdados:
+
+- beta fechada online: `SHIP COM CONDIÇÕES`;
+- lançamento público: `NO-SHIP`;
+- substituição integral: `NO-SHIP`.
+
+P2 herdados:
+
+- PWA/offline próprio ausente;
+- Prova de Autoria ausente;
+- DOCX, RTF, ePub e Obsidian ZIP ausentes;
+- Anatomia dependente de `page-flip@2.0.7` no `unpkg`.
+
+As validações de zoom real, leitor de tela, tecnologias assistivas, dispositivos físicos e uso prolongado continuam como dívida de release.
+
+## Baseline histórica das engines legadas
+
+A documentação v916 informa:
+
+- Análise: `CLIQUES_PT` 1000 e `PLEONASMOS` 500;
+- Espelho de Voz: 10 gestos e 9 campos semânticos;
+- RimaLab: enciclopédia 50 e `grammarWords` 348;
+- Léxico: aproximadamente 1.350 sinônimos, 1.020+ definições e 110+ polissemias;
+- Contexto: 600+ entradas em 9 categorias;
+- Sintaxe/Morfologia: bancada 17/17, golden 91/0 e 2.045 formas verbais regulares no presente.
+
+Esses números são alvo de inventário e comparação; não equivalem a prova de qualidade.
+
+## M1.0 — E0 baseline
+
+Corpus v1:
+
+- `enquanto`, `por enquanto`, `enquanto isso`;
+- `publica/pública`;
+- `seria/séria`;
+- `preso` como particípio, adjetivo e substantivo;
+- `larga` como adjetivo e verbo;
+- `canto` como verbo e substantivo.
+
+Resultado anterior à correção:
+
+- 8/14 casos únicos corretos;
+- 6/14 incorretos em ambos os navegadores;
+- 264/276 execuções aprovadas.
+
+Lacunas confirmadas:
+
+- `por enquanto` e `enquanto isso` classificados como substantivo;
+- `publica` classificado como adjetivo;
+- `foi preso` classificado apenas como adjetivo;
+- `estrada larga` classificada como forma verbal;
+- `eu canto` classificado como substantivo.
+
+## M1.0 — primeira tranche E1
+
+A camada contextual nova foi implementada em `src/engines/lexicalAdapter.ts`, preservando `lexical-engine.js` e as bases legadas.
+
+Entregue:
+
+- reconhecimento das duas locuções temporais;
+- decisão sensível a diacrítico para `publica/pública`;
+- particípio provável após auxiliar passivo;
+- verbo provável após pronome sujeito em formas ambíguas registradas;
+- adjetivo pós-nominal com evidência determinante + nome;
+- notas em português claro explicando a evidência;
+- nenhuma substituição automática.
 
 Resultado:
 
-- texto, `plainText` e `revision` preservados na sequência integrada;
-- snapshot semântico preservado no corpus separado;
-- `PONT-49` localizado pelo mapa UTF-16 real;
-- nenhuma aplicação automática;
-- frase sentinela ausente de URL e corpo de requisição.
+- 14/14 casos únicos corretos;
+- 276/276 execuções;
+- nenhuma regressão nos oito casos já corretos;
+- publicação, cache e smoke públicos verdes;
+- Argila e coerência verdes.
 
-### Conflito misto
+A superioridade comprovada é específica às seis fronteiras corrigidas. Não prova ainda superioridade global nem substituição integral.
 
-- mutação de manuscrito em uma aba;
-- mutação editorial em outra;
-- conflito explícito;
-- versão local guardada como cópia;
-- documento remoto e cópia favorita preservados no IndexedDB;
-- nenhuma sobrescrita silenciosa.
+## Cobertura funcional preservada
 
-A preferência ativa compartilhada pode fazer outra aba abrir a cópia após recarga. Isso é P3 de previsibilidade, não perda de dados.
+Continua aprovada:
 
-### Exportação imediata
-
-- versão anterior persistida;
-- título e texto atuais ainda em `Alterado|Salvando`;
-- Markdown contém o estado atual;
-- autosave converge depois para `Salvo`.
-
-### Portabilidade combinada
-
-Na mesma sessão:
-
-- criar cópia nativa;
-- restaurar como novas cópias;
-- manter página ativa;
-- pré-visualizar `.esc`;
-- cancelar sem escrita;
-- confirmar importação;
-- preservar `legacySourceId`;
-- não substituir documentos existentes.
-
-### UIX, responsividade e movimento
-
-- drawer e sete abas em 320/390 px;
-- Escape e retorno de foco;
-- seis larguras entre 320 e 1440 px sem overflow bloqueador;
-- papel, título e editor dentro do viewport;
-- acionadores móveis separados;
-- sidebar e rail presentes em desktop;
-- screenshots por largura e navegador;
-- layout CSS equivalente a 200% com escrita e drawers alcançáveis;
-- movimento reduzido reconhecido e transição em até 300 ms.
-
-### Escala e desempenho na CI
-
-- 100 documentos;
-- documento acima de 100 mil caracteres;
-- busca funcional e editor editável;
-- doze ciclos de edição/salvamento;
-- DOM 179→179 em ambos os navegadores;
-- Chromium: p95 192 ms, heap 16.100.000→16.100.000 bytes;
-- Firefox: p95 90 ms, heap não disponível.
-
-### Rede
-
-- nenhuma transmissão da frase sentinela autoral;
-- única origem externa conhecida: `https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js`;
-- requisição GET sem conteúdo autoral;
-- qualquer outra origem externa continua falhando.
-
-## Evidência funcional
-
-### Tranche 1
-
-- cabeça `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
-- 232/232;
-- Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811`.
-
-### Tranche 2
-
-- cabeça `2a4333337a04b73a6c034b8fd35bc582994a114b`;
-- 238/238;
-- Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508`;
-- publicação, cache e smoke público verdes.
-
-### Tranche 3
-
-- cabeça `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
-- 252/252;
-- Mass Notes `30478738806`, Argila `30478738678`, coerência `30478738607`;
-- publicação, cache, smoke público e artefato `mass-notes-tiptap-30478738806` verdes.
-
-## Incidentes de estabilização
-
-Nenhum exigiu alteração funcional no produto.
-
-- helpers de autosave passaram a aceitar estado já convergido para `Salvo`;
-- salvamento preliminar redundante da exportação foi removido;
-- conflito passou a ser testado pela preservação dos registros, não por seleção independente por aba;
-- falha simulada do RimaLab estabiliza a fonte antes da primeira leitura;
-- nome acessível do drawer alinhado a `Arquivo de documentos`;
-- origem externa da Anatomia foi convertida em achado P2 e allowlist exata, não ocultada;
-- duração do overlay reduzido passou a ser capturada no instante da criação;
-- corpus multiparágrafo usa paste estruturado e snapshot semântico, evitando diferenças de `innerText`.
-
-## Achados provisórios
-
-### P0
-
-Nenhum.
-
-### P1
-
-Nenhum.
-
-### P2
-
-- `M09-F001`: nova aplicação sem PWA/offline próprio; bloqueia lançamento público.
-- `M09-F002`: Prova de Autoria ausente; bloqueia substituição integral sem decisão explícita.
-- `M09-F003`: faltam DOCX, RTF, ePub e Obsidian ZIP; não bloqueia beta, mas bloqueia paridade integral.
-- `M09-F006`: Anatomia carrega `page-flip@2.0.7` do `unpkg`; sem fuga autoral, mas sem autonomia offline integral.
-
-### P3
-
-- `M09-F004`: busca, filtros e ordenação não persistem entre sessões.
-- `M09-F005`: documento ativo é preferência compartilhada entre abas.
-
-## Placar provisório
-
-- editor e preservação: 96;
-- biblioteca: 91;
-- engines: 90;
-- UIX: 87;
-- acessibilidade: 84;
-- responsividade: 94;
-- importação e exportação: 88;
-- privacidade: 90;
-- desempenho: 88;
-- release: 68;
-- geral: 88.
-
-## Contrato do documento
-
-Cada documento mantém:
-
-- UUID atual;
-- título;
-- JSON Tiptap;
-- texto derivado;
-- estado, tags e favorito;
-- datas e revisão;
-- `legacySourceId` opcional.
-
-## Contrato do `.esc` legado
-
-- `format: esc|vrda`;
-- `schemaVersion: 1`;
-- checksum FNV-1a sobre `stableSort(payload)`;
-- `payload.manuscripts` não vazio;
-- limite de 2.000 itens;
-- prévia em memória;
-- transação única;
-- UUIDs novos, `— importado`, `revision: 0` e origem preservada;
-- sem importação parcial, substituição, merge, escolha automática, deduplicação silenciosa ou upload.
+- criação, edição rica, metadados, autosave, recarga e recuperação;
+- revisão inline com posições UTF-16 reais;
+- Voz, Contexto, RimaLab e Palavras;
+- biblioteca, filtros e escala;
+- conflito explícito entre abas;
+- exportação do rascunho atual;
+- cópia nativa e importação `.esc` auditável;
+- ausência de transmissão autoral;
+- não mutação do snapshot semântico pelas engines;
+- responsividade automatizada entre 320 e 1440 px.
 
 ## Limitações conhecidas
 
@@ -267,39 +195,35 @@ Ainda não estão aprovados:
 
 - persistência de filtros;
 - seleção ativa independente por aba;
-- reimportação seletiva ou comparação de versões;
-- deduplicação por `legacySourceId`;
+- reimportação seletiva, comparação ou deduplicação por origem;
 - importação parcial;
-- operações em massa;
-- pastas/coleções;
+- operações em massa e pastas;
 - DOCX, RTF, ePub e Obsidian ZIP;
 - Prova de Autoria;
 - criptografia de backup;
 - sincronização e colaboração;
-- PWA própria;
-- autonomia offline da Anatomia;
-- zoom real de 200%;
-- leitores de tela e dispositivos físicos;
+- PWA própria e autonomia offline da Anatomia;
+- zoom real de 200%, leitores de tela e dispositivos físicos;
 - Tauri, SQLite e paginação física;
 - aplicação automática de sugestões;
 - promoção para `main`.
 
 ## Próxima ação obrigatória
 
-1. revisão humana das screenshots nas seis larguras;
-2. zoom real de 200% e tecnologias assistivas/dispositivos físicos quando disponíveis;
-3. uso prolongado em máquina real;
-4. decisões explícitas para os quatro P2;
-5. veredito final;
-6. CI na cabeça documental final e registro exato no PR.
+1. fechar a documentação e CI da primeira tranche M1.0;
+2. adicionar controles negativos para as novas regras contextuais;
+3. inventariar contagens lexicais reais;
+4. auditar duplicatas, autorreferências, ciclos e lacunas de definição;
+5. escolher uma expansão lexical brasileira pequena, fundamentada e testada;
+6. desenhar a bancada sintático-morfológica integrada;
+7. manter Gate 14 suspenso.
 
 ## Como retomar
 
 1. conferir branch, PR e workflows;
-2. ler `M0_9_AUDITORIA_OPERACIONAL.md`;
-3. revisar achados e próxima fase;
-4. consultar relatório humano, JSON e log da tranche 3;
+2. ler `M1_0_ENGINES_SUPERIORES.md`;
+3. ler o log E0/E1;
+4. identificar caso, engine e evidência da próxima tranche;
 5. não editar a branch de preview;
-6. não adicionar feature durante o diagnóstico;
-7. não afirmar validação física sem executá-la;
-8. iniciar Gate 14 somente após veredito final explícito.
+6. não afirmar superioridade global antes de E2–E4;
+7. não promover para `main`.
