@@ -8,7 +8,7 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - PR: `#155` (rascunho);
 - preview: `https://raw.githack.com/rfmss/escrevaral/preview-mass-notes-tiptap/index.html`;
 - aplicação pública, `main` e service worker: não alterados;
-- engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
+- engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto, RimaLab e Palavras/Léxico;
 - contrato de posições: aprovado e auditado com textos brasileiros reais;
 - primeira decoration: aprovada somente para ranges verificáveis de pontuação da Revisão;
 - navegação cartão → trecho e ocultação reversível: aprovadas;
@@ -16,10 +16,11 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - Anatomia do Livro: integrada, publicada e preservada por runtime gerado na CI;
 - exportação estrutural: TXT, Markdown e HTML gerados localmente a partir do JSON Tiptap;
 - cópia nativa: envelope JSON versionado e restauração sempre como novas cópias;
+- Palavras: consulta lexical local por seleção Tiptap ou busca digitada, sem substituir o manuscrito;
 - dependências: travadas por overrides, `package-lock.json` e `npm ci`;
-- Gates 1 a 9B: aprovados em Chromium e Firefox;
-- matriz atual: 86 cenários por navegador, 172 execuções;
-- próximo passo lógico: Gate 10, Palavras/Léxico, sem ampliar formatos editoriais neste corte.
+- Gates 1 a 10: aprovados em Chromium e Firefox;
+- matriz atual: 91 cenários por navegador, 182 execuções;
+- próximo passo lógico: Gate 11, organização da biblioteca, sem ampliar a escrita ou aplicar sugestões automaticamente.
 
 ## Retomar o projeto
 
@@ -59,7 +60,7 @@ src/
 ├── backup/       # envelope nativo, versão, validação e download
 ├── components/   # apresentação e interação React
 ├── domain/       # contratos do documento
-├── editor/       # Tiptap, ProseMirror, posições e decorations
+├── editor/       # Tiptap, ProseMirror, posições, seleção e decorations
 ├── engines/      # adaptadores tipados para engines legadas
 ├── export/       # serialização e entrega de formatos editoriais
 ├── pages/        # páginas especiais integradas
@@ -68,7 +69,7 @@ src/
 └── transitions/  # transições explícitas entre superfícies
 ```
 
-Serialização, download e interface permanecem separados. Novos formatos ou versões de backup não devem ser implementados diretamente em `App.tsx` ou `RightRail.tsx`.
+Serialização, download, seleção lexical e interface permanecem separados. Novos formatos, versões de backup ou engines não devem ser implementados diretamente em `App.tsx` ou `RightRail.tsx`.
 
 ## Princípios ativos
 
@@ -78,6 +79,10 @@ Serialização, download e interface permanecem separados. Novos formatos ou ver
 - engines entram somente por adaptadores tipados;
 - nenhuma engine conhece React, Tiptap ou DOM;
 - análises são locais e resultados heurísticos são apresentados como hipóteses;
+- Palavras usa um snapshot tipado e durável da seleção, identificado pelo documento e por posições ProseMirror;
+- busca lexical sem ocorrência no texto não recebe classe contextual inventada;
+- um fallback morfológico sem registro local não é apresentado como verbete existente;
+- nenhuma consulta lexical altera seleção, JSON, histórico, autosave ou biblioteca;
 - termos contextuais não são erros ou proibições e nunca são substituídos automaticamente;
 - escansão do RimaLab é aproximação pedagógica, não veredito;
 - prosa e verso recebem leituras diferentes;
@@ -119,12 +124,13 @@ src/styles/theme-blueprint.css
 src/styles/theme-blueprint-composition.css
 src/styles/review-decorations.css
 src/styles/export-panel.css
+src/styles/lexical-panel.css
 src/styles/anatomy-host.css
 src/styles/page-press-transition.css
 ```
 
-As skins não contêm lógica de produto. A decoration linguística é projeção efêmera e não integra o JSON do documento.
+As skins não contêm lógica de produto. Decorations linguísticas e leituras lexicais são projeções efêmeras e não integram o JSON do documento.
 
 ## Limites atuais
 
-Ainda não estão aprovados importador do `.esc` legado, DOCX, RTF, ePub, exportação múltipla, Obsidian ZIP, service worker/offline em nova sessão, Tauri, SQLite, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab, aplicação automática, substituição, correção em massa ou promoção para `main`.
+Ainda não estão aprovados importador do `.esc` legado, DOCX, RTF, ePub, exportação múltipla, Obsidian ZIP, catálogo próprio de sinônimos no painel novo, análise sintática de frases em Palavras, service worker/offline em nova sessão, Tauri, SQLite, paginação física, leitores de tela reais, teclado virtual real, tooltips inline, decorations de Voz/Contexto/RimaLab/Palavras, aplicação automática, substituição, correção em massa ou promoção para `main`.
