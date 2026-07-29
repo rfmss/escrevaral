@@ -117,7 +117,7 @@ test('HTML é autônomo, semântico, escapado e não publica scripts do manuscri
   expect(exported.content).toContain('<meta charset="utf-8">')
   expect(exported.content).toContain('<h2>Capítulo &amp; travessia</h2>')
   expect(exported.content).toContain('<strong>Casa</strong>')
-  expect(exported.content).toContain('<em> azul</em>')
+  expect(exported.content).toContain('<em>azul</em>')
   expect(exported.content).toContain('<blockquote>')
   expect(exported.content).toContain('<ul>')
   expect(exported.content).toContain('<ol>')
