@@ -71,7 +71,7 @@ test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ c
   await page.getByLabel('Título do documento').fill('Versão da aba A')
   await page.waitForTimeout(100)
   await second.getByLabel('Título do documento').fill('Versão da aba B')
-  await expect(second.getByRole('alert')).toContainText('Outra aba também escreveu')
+  await expect(second.getByRole('alert')).toContainText('Outra aba também alterou')
   await expect(second.getByText('Nenhuma versão será apagada silenciosamente.')).toBeVisible()
 
   await page.reload()
