@@ -18,8 +18,6 @@ Atualize este documento sempre que houver mudança de escopo, decisão important
 - matriz atual: **126 cenários por navegador, 252 execuções**;
 - cabeça funcional da tranche 3: `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
 - Mass Notes `30478738806`, Argila `30478738678` e coerência `30478738607`: verdes;
-- cabeça documental validada da tranche 3: `09d13adbbf8f3125d2e1a99e9bf8064cadc433f6`;
-- CI documental: Mass Notes `30480328183`, Argila `30480327218` e coerência `30480327596`: verdes;
 - nota provisória: **88/100**;
 - beta fechada: `SHIP COM CONDIÇÕES` provisório;
 - lançamento público: `NO-SHIP` provisório;
@@ -28,7 +26,7 @@ Atualize este documento sempre que houver mudança de escopo, decisão important
 - P1 abertos: 0;
 - próxima ação: validação manual real, decisões finais para P2 e veredito final.
 
-A cabeça documental exata e seus workflows também ficam registrados no corpo do PR. Inserir o próprio SHA no arquivo exige uma CI documental posterior; portanto, esta atualização deve ser novamente validada antes de ser considerada a nova cabeça exata.
+A cabeça documental exata e seus workflows devem ser registrados no corpo do PR depois da CI. Inserir o próprio SHA em um arquivo cria outro commit e invalida a evidência.
 
 ## Pergunta central
 
@@ -77,7 +75,7 @@ Pendente:
 - decisão explícita sobre a dependência externa da Anatomia;
 - decisões finais sobre todos os P2;
 - veredito final;
-- CI na nova cabeça documental final e atualização do PR sem commit posterior.
+- CI na cabeça documental final e atualização do PR sem commit posterior.
 
 ## Fases
 
@@ -188,7 +186,7 @@ Aprovados:
 - quantidade de documentos estável;
 - DOM estável em 179 nós;
 - Chromium: p95 de salvamento observado em 192 ms, heap 16.100.000 bytes no início e no fim;
-- Firefox: p95 observado em 90 ms na cabeça funcional e 114 ms na cabeça documental; API de heap indisponível;
+- Firefox: p95 observado em 90 ms; API de heap indisponível;
 - limites defensivos: p95 abaixo de 8 s, crescimento de DOM até 120 nós e heap até 64 MiB quando mensurável.
 
 Os números são sinais de regressão na CI, não benchmark universal nem SLA.
@@ -289,9 +287,8 @@ Pendentes:
 | 2026-07-29 | `2a4333337a04b73a6c034b8fd35bc582994a114b` | tranche 2 funcional | 238/238, Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508` |
 | 2026-07-29 | `623893b731103e5e292dc245503dfd9e27a88fb5` | documentação tranche 2 | 238/238, Mass Notes `30468995728`, Argila `30469003626`, coerência `30468994715` |
 | 2026-07-29 | `305d0727ddfaee11f3e7680d0f9168023e9a4284` | tranche 3 funcional | 252/252, Mass Notes `30478738806`, Argila `30478738678`, coerência `30478738607`; smoke e artefato verdes |
-| 2026-07-29 | `09d13adbbf8f3125d2e1a99e9bf8064cadc433f6` | documentação tranche 3 | 252/252, Mass Notes `30480328183`, Argila `30480327218`, coerência `30480327596`; smoke e artefato `mass-notes-tiptap-30480328183` verdes |
 
-A atualização que inseriu a evidência exata criou uma nova cabeça documental; ela precisa de uma última CI antes do registro definitivo no PR.
+A evidência da cabeça documental final desta tranche será anexada ao PR depois da conclusão dos workflows, sem novo commit no branch.
 
 ## Paridade com o Escrevaral antigo
 
@@ -326,7 +323,7 @@ Pendentes:
 - validação manual real;
 - decisões finais dos P2;
 - veredito final;
-- nova cabeça documental final validada sem commit posterior.
+- cabeça documental final validada sem commit posterior.
 
 ## Critério de encerramento
 
@@ -334,10 +331,11 @@ O milestone só encerra quando não houver P0 aberto, todo P1 tiver decisão exp
 
 ## Próxima ação autorizada
 
-1. validar a nova cabeça documental criada por esta atualização;
-2. revisar humanamente as capturas das seis larguras;
-3. executar zoom real de 200%, leitor de tela e dispositivos físicos quando disponíveis;
-4. tomar decisão explícita para `M09-F001`, `M09-F002`, `M09-F003` e `M09-F006`;
-5. emitir veredito final separado para beta, lançamento e substituição;
-6. atualizar somente o corpo do PR depois da CI, sem commit posterior;
-7. manter Gate 14 suspenso até o encerramento explícito.
+1. revisar humanamente as capturas das seis larguras;
+2. executar zoom real de 200%, leitor de tela e dispositivos físicos quando disponíveis;
+3. tomar decisão explícita para `M09-F001`, `M09-F002`, `M09-F003` e `M09-F006`;
+4. emitir veredito final separado para beta, lançamento e substituição;
+5. sincronizar documentação;
+6. validar a cabeça documental exata;
+7. atualizar somente o corpo do PR, sem commit posterior;
+8. manter Gate 14 suspenso até o encerramento explícito.
