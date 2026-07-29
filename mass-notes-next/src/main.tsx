@@ -12,6 +12,7 @@ import './styles/review-decorations.css'
 import './styles/export-panel.css'
 import './styles/lexical-panel.css'
 import './styles/library-organization.css'
+import './styles/document-metadata.css'
 import './styles/anatomy-host.css'
 import './styles/page-press-transition.css'
 
