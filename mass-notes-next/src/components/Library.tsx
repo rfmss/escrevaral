@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
-import { displayTitle, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
+import { useMemo, useState } from 'react'
+import { displayTitle, type EscrevaralDocument } from '../domain/document'
 import {
   collectLibraryTags,
   DEFAULT_LIBRARY_QUERY,
   hasActiveLibraryFilters,
-  parseLibraryTags,
   queryLibraryDocuments,
   type LibrarySort,
   type LibraryStatusFilter,
@@ -19,8 +18,6 @@ type Props = {
   onSearch: (value: string) => void
   onSelect: (id: string) => void
   onNew: () => void
-  onFavorite: (favorite: boolean) => void
-  onTags: (tags: string[]) => void
   onClose: () => void
 }
 
@@ -53,29 +50,13 @@ function absoluteTime(timestamp: number): string {
   }).format(timestamp)
 }
 
-export function Library({
-  documents,
-  activeId,
-  search,
-  open,
-  onSearch,
-  onSelect,
-  onNew,
-  onFavorite,
-  onTags,
-  onClose,
-}: Props) {
+export function Library({ documents, activeId, search, open, onSearch, onSelect, onNew, onClose }: Props) {
   const panelRef = useModalDrawer<HTMLElement>(open, onClose)
   const [status, setStatus] = useState<LibraryStatusFilter>(DEFAULT_LIBRARY_QUERY.status)
   const [favoritesOnly, setFavoritesOnly] = useState(DEFAULT_LIBRARY_QUERY.favoritesOnly)
   const [tag, setTag] = useState(DEFAULT_LIBRARY_QUERY.tag)
   const [sort, setSort] = useState<LibrarySort>(DEFAULT_LIBRARY_QUERY.sort)
   const activeDocument = documents.find((document) => document.id === activeId) ?? null
-  const [tagDraft, setTagDraft] = useState('')
-
-  useEffect(() => {
-    setTagDraft(activeDocument?.tags.join(', ') ?? '')
-  }, [activeDocument?.id, activeDocument?.tags])
 
   const tags = useMemo(() => collectLibraryTags(documents), [documents])
   const query = useMemo(() => ({ search, status, favoritesOnly, tag, sort }), [favoritesOnly, search, sort, status, tag])
@@ -83,22 +64,12 @@ export function Library({
   const filtersActive = hasActiveLibraryFilters(query)
   const activeVisible = activeId ? visible.some((document) => document.id === activeId) : true
 
-  useEffect(() => {
-    if (tag && !tags.some((candidate) => candidate === tag)) setTag('')
-  }, [tag, tags])
-
   const clearFilters = () => {
     onSearch('')
     setStatus(DEFAULT_LIBRARY_QUERY.status)
     setFavoritesOnly(DEFAULT_LIBRARY_QUERY.favoritesOnly)
     setTag(DEFAULT_LIBRARY_QUERY.tag)
     setSort(DEFAULT_LIBRARY_QUERY.sort)
-  }
-
-  const saveTags = () => {
-    const parsed = parseLibraryTags(tagDraft)
-    setTagDraft(parsed.join(', '))
-    onTags(parsed)
   }
 
   return (
@@ -130,47 +101,6 @@ export function Library({
         />
         <button className="icon-btn" type="button" onClick={onNew} aria-label="Novo documento">＋</button>
       </div>
-
-      {activeDocument && (
-        <section className="library-active" aria-labelledby="library-active-title">
-          <div className="library-active-heading">
-            <div>
-              <span className="section-label" id="library-active-title">Página ativa</span>
-              <strong title={displayTitle(activeDocument)}>{displayTitle(activeDocument)}</strong>
-            </div>
-            <button
-              className={`library-favorite ${activeDocument.favorite ? 'active' : ''}`}
-              type="button"
-              aria-pressed={activeDocument.favorite}
-              aria-label={activeDocument.favorite ? 'Remover página ativa dos favoritos' : 'Marcar página ativa como favorita'}
-              onClick={() => onFavorite(!activeDocument.favorite)}
-            >
-              <span aria-hidden="true">★</span>
-              <span>{activeDocument.favorite ? 'Favorita' : 'Favoritar'}</span>
-            </button>
-          </div>
-          <form
-            className="library-tag-editor"
-            onSubmit={(event) => {
-              event.preventDefault()
-              saveTags()
-            }}
-          >
-            <label htmlFor="library-active-tags">Tags da página ativa</label>
-            <div>
-              <input
-                id="library-active-tags"
-                value={tagDraft}
-                maxLength={280}
-                onChange={(event) => setTagDraft(event.target.value)}
-                placeholder="memória, poesia, capítulo"
-              />
-              <button type="submit">Salvar</button>
-            </div>
-            <small>Até 8 tags, separadas por vírgula.</small>
-          </form>
-        </section>
-      )}
 
       <section className="library-filters" aria-label="Filtrar e ordenar biblioteca">
         <div className="library-filter-label">Estado</div>
