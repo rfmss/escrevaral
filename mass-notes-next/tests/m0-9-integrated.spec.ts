@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test'
+import { expect, test, type Download, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
   await page.goto('/')
@@ -8,7 +8,8 @@ async function waitReady(page: Page) {
 }
 
 async function waitSaved(page: Page) {
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible({ timeout: 5_000 })
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible({ timeout: 5_000 })
+  await page.keyboard.press('Control+S')
   await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
 }
 
@@ -45,6 +46,63 @@ async function activeRecord(page: Page): Promise<Record<string, unknown>> {
     if (!record) throw new Error('Documento ativo não encontrado.')
     return record
   }, title)
+}
+
+async function allRecords(page: Page): Promise<Array<Record<string, unknown>>> {
+  return page.evaluate(async () => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open('escrevaral-mass-notes-next', 1)
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+    })
+    const rows = await new Promise<Array<Record<string, unknown>>>((resolve, reject) => {
+      const request = db.transaction('documents').objectStore('documents').getAll()
+      request.onsuccess = () => resolve(request.result as Array<Record<string, unknown>>)
+      request.onerror = () => reject(request.error)
+    })
+    db.close()
+    return rows
+  })
+}
+
+async function readDownload(download: Download): Promise<string> {
+  const stream = await download.createReadStream()
+  const chunks: Buffer[] = []
+  for await (const chunk of stream) chunks.push(Buffer.from(chunk))
+  return Buffer.concat(chunks).toString('utf8')
+}
+
+function stableSort(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stableSort)
+  if (!value || typeof value !== 'object') return value
+  return Object.keys(value as Record<string, unknown>).sort().reduce<Record<string, unknown>>((result, key) => {
+    result[key] = stableSort((value as Record<string, unknown>)[key])
+    return result
+  }, {})
+}
+
+function fnv1a(value: string): string {
+  let hash = 0x811c9dc5
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index)
+    hash = Math.imul(hash, 0x01000193)
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0')
+}
+
+function legacyEnvelope(id: string, title: string, text: string) {
+  const payload = {
+    activeId: id,
+    manuscripts: [{ id, title, text, type: 'manuscrito', status: 'Em escrita', tags: ['m0.9'] }],
+  }
+  return {
+    format: 'esc',
+    schemaVersion: 1,
+    createdWith: '.esc - editor',
+    exportedAt: '2026-07-29T12:00:00.000Z',
+    checksum: fnv1a(JSON.stringify(stableSort(payload))),
+    payload,
+  }
 }
 
 test('jornada integrada preserva escrita, metadados e retomada após recarga', async ({ page }) => {
@@ -232,4 +290,100 @@ test('biblioteca com 100 páginas e documento de 100 mil caracteres continua uti
   await expect(page.locator('.note-title-text')).toHaveText('Documento 099')
   await expect(page.getByLabel('Texto do documento')).toBeEditable()
   await expect(page.getByText('A página ativa continua aberta, mas está fora deste recorte.')).toBeVisible()
+})
+
+test('conflito misto entre manuscrito e metadados preserva as duas versões', async ({ context, page }) => {
+  await waitReady(page)
+  const second = await context.newPage()
+  await waitReady(second)
+  const originalTitle = await second.getByLabel('Título do documento').inputValue()
+
+  await page.getByLabel('Título do documento').fill('Versão textual remota do M0.9')
+  await second.getByRole('tab', { name: 'pulso', exact: true }).click()
+  await second.getByRole('button', { name: 'Marcar como favorita' }).click()
+  await page.keyboard.press('Control+S')
+
+  const banner = second.getByRole('alert')
+  await expect(banner).toContainText('Outra aba também alterou esta página', { timeout: 12_000 })
+  await expect(banner).toContainText('Nenhuma versão será apagada silenciosamente')
+  await banner.getByRole('button', { name: 'Guardar a minha como cópia' }).click()
+
+  await expect(second.getByLabel('Título do documento')).toHaveValue(`${originalTitle.trim() || 'Sem título'} — conflito`)
+  await second.getByRole('tab', { name: 'pulso', exact: true }).click()
+  await expect(second.getByRole('button', { name: 'Página favorita' })).toHaveAttribute('aria-pressed', 'true')
+  await waitSaved(second)
+
+  await page.reload()
+  await expect(page.getByLabel('Título do documento')).toHaveValue('Versão textual remota do M0.9')
+  const records = await allRecords(page)
+  expect(records.some((item) => item.title === 'Versão textual remota do M0.9')).toBe(true)
+  expect(records.some((item) => item.title === `${originalTitle.trim() || 'Sem título'} — conflito` && item.favorite === true)).toBe(true)
+})
+
+test('exportação usa o rascunho atual antes de depender da cópia persistida', async ({ page }) => {
+  await waitReady(page)
+  const editor = await createCleanDocument(page, 'Base anterior')
+  await editor.fill('Texto anterior já conhecido.')
+  await waitSaved(page)
+
+  await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
+  const freshTitle = 'Exportação imediata do rascunho'
+  const freshText = 'Esta versão acabou de mudar e precisa entrar no arquivo agora.'
+  await page.getByLabel('Título do documento').fill(freshTitle)
+  await editor.fill(freshText)
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible({ timeout: 2_000 })
+
+  const downloadPromise = page.waitForEvent('download')
+  await page.locator('[data-export-format="md"]').click()
+  const exported = await readDownload(await downloadPromise)
+  expect(exported).toContain(`# ${freshTitle}`)
+  expect(exported).toContain(freshText)
+  await waitSaved(page)
+})
+
+test('cópia nativa, restauração e acervo legado convivem na mesma sessão sem substituir a página ativa', async ({ page }) => {
+  test.setTimeout(70_000)
+  await waitReady(page)
+  const activeTitle = await page.getByLabel('Título do documento').inputValue()
+  const beforeCount = await page.locator('.note-card').count()
+  await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
+
+  const backupPromise = page.waitForEvent('download')
+  await page.locator('[data-backup-action="create"]').click()
+  const nativeText = await readDownload(await backupPromise)
+  const nativeEnvelope = JSON.parse(nativeText) as { documents: unknown[] }
+  expect(nativeEnvelope.documents.length).toBe(beforeCount)
+
+  await page.getByLabel('Selecionar cópia nativa').setInputFiles({
+    name: 'm0-9.esc.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(nativeText),
+  })
+  await expect(page.locator('.backup-message')).toContainText(`${beforeCount} documentos restaurados`)
+  await expect(page.locator('.note-card')).toHaveCount(beforeCount * 2)
+  await expect(page.getByLabel('Título do documento')).toHaveValue(activeTitle)
+
+  const legacy = legacyEnvelope('m09-legado-combinado', 'Documento legado combinado', 'Texto legado com memória e emoji 🧵.')
+  await page.getByLabel('Selecionar acervo esc legado').setInputFiles({
+    name: 'm0-9-legado.esc',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(legacy)),
+  })
+  await expect(page.getByRole('heading', { name: 'Prévia do acervo legado' })).toBeVisible()
+  await page.getByRole('button', { name: 'Cancelar' }).click()
+  await expect(page.locator('.note-card')).toHaveCount(beforeCount * 2)
+
+  await page.getByLabel('Selecionar acervo esc legado').setInputFiles({
+    name: 'm0-9-legado.esc',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(legacy)),
+  })
+  await page.getByRole('button', { name: 'Importar como novas cópias' }).click()
+  await expect(page.locator('.backup-message')).toContainText('1 documento importado')
+  await expect(page.locator('.note-card')).toHaveCount(beforeCount * 2 + 1)
+  await expect(page.getByLabel('Título do documento')).toHaveValue(activeTitle)
+
+  const records = await allRecords(page)
+  expect(records.filter((item) => item.legacySourceId === 'm09-legado-combinado')).toHaveLength(1)
+  expect(records.some((item) => item.title === 'Documento legado combinado — importado')).toBe(true)
 })
