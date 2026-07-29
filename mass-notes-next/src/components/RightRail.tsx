@@ -4,6 +4,7 @@ import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
 import type { ExportFormat } from '../export/documentExport'
 import { ContextPanel } from './ContextPanel'
+import { DocumentMetadataEditor } from './DocumentMetadataEditor'
 import { ExportPanel } from './ExportPanel'
 import { LexicalPanel } from './LexicalPanel'
 import { RimaLabPanel } from './RimaLabPanel'
@@ -36,6 +37,8 @@ type Props = {
   onAnalyze: () => void
   onNavigateIssue: (issue: LocatedReviewPresentation) => void
   onStatus: (status: DocumentStatus) => void
+  onFavorite: (favorite: boolean) => void
+  onTags: (tags: string[]) => void
   onDuplicate: () => void
   onExport: (format: ExportFormat) => void
   onFocus: () => void
@@ -63,6 +66,8 @@ export function RightRail({
   onAnalyze,
   onNavigateIssue,
   onStatus,
+  onFavorite,
+  onTags,
   onDuplicate,
   onExport,
   onFocus,
@@ -196,6 +201,8 @@ export function RightRail({
                 </button>
               ))}
             </div>
+
+            <DocumentMetadataEditor document={document} onFavorite={onFavorite} onTags={onTags} />
 
             <div className="rail-actions" aria-label="Ações rápidas">
               <div className="section-label">Ações</div>
