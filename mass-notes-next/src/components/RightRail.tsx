@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
+import type { ExportFormat } from '../export/documentExport'
 import { ContextPanel } from './ContextPanel'
+import { ExportPanel } from './ExportPanel'
 import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
@@ -33,7 +35,7 @@ type Props = {
   onNavigateIssue: (issue: LocatedReviewPresentation) => void
   onStatus: (status: DocumentStatus) => void
   onDuplicate: () => void
-  onExport: () => void
+  onExport: (format: ExportFormat) => void
   onFocus: () => void
   onTheme: () => void
 }
@@ -198,7 +200,7 @@ export function RightRail({
               <button className="action reading" type="button" onClick={readText} disabled={analyzing}>
                 {analyzing ? 'Lendo o texto…' : 'Ler o texto'}
               </button>
-              <button className="action subtle" type="button" onClick={onExport}>Exportar cena</button>
+              <button className="action subtle" type="button" onClick={() => setTab('ferramentas')}>Exportar documento</button>
             </div>
           </section>
         )}
@@ -322,8 +324,9 @@ export function RightRail({
           <section id="panel-ferramentas" role="tabpanel" aria-labelledby="tab-ferramentas" className="panel active">
             <div className="section-label">Objeto editorial</div>
             <button className="action anatomy-action" type="button" onClick={openAnatomy}>Abrir Anatomia do Livro</button>
+            <div className="section-label">Exportar documento</div>
+            <ExportPanel document={document} onExport={onExport} />
             <div className="section-label">Arquivo e ambiente</div>
-            <button className="action primary" type="button" onClick={onExport}>Exportar .txt</button>
             <button className="action" type="button" onClick={onDuplicate}>Duplicar página</button>
             <button className="action" type="button" onClick={onFocus}>Modo concentração</button>
             <button className="action" type="button" onClick={onTheme}>Alternar papel / noite</button>
