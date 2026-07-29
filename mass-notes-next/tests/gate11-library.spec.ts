@@ -170,7 +170,8 @@ test('deduplica tags por acento e caixa e combina tag com favoritas', async ({ p
 
   await tagFilter(page).selectOption({ label: 'Poesia' })
   await expect(page.locator('.note-card')).toHaveCount(2)
-  await expect(page.locator('.note-tags')).toContainText(['Poesia', 'poesia'])
+  await expect(page.locator('.note-card').filter({ hasText: 'Água funda' }).locator('.note-tags > span').first()).toHaveText('Poesia')
+  await expect(page.locator('.note-card').filter({ hasText: 'Mar sem fim' }).locator('.note-tags > span').first()).toHaveText('poesia')
 
   await page.getByRole('button', { name: 'Somente favoritas' }).click()
   await expect(page.locator('.note-card')).toHaveCount(2)
