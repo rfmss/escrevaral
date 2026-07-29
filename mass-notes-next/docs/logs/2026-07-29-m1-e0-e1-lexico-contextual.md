@@ -25,7 +25,7 @@ Cada caso exige:
 - decisão não indeterminada quando há evidência;
 - consulta totalmente local;
 - nenhuma substituição automática;
-- manuscrito idêntico antes e depois da leitura.
+- manuscrito estruturalmente idêntico antes e depois da leitura.
 
 Arquivos:
 
@@ -94,6 +94,26 @@ Delta do corpus:
 - depois: 14/14 casos únicos aprovados;
 - ganho: +6 casos contextuais, sem regressão nos 8 anteriores;
 - matriz total: 138 cenários por navegador, 276 execuções.
+
+## Estabilização da medição de não mutação
+
+Na primeira CI da documentação consolidada, 275/276 casos passaram. O único bloqueio ocorreu em `enquanto-oracao` no Firefox, depois de a classificação linguística já ter sido aprovada.
+
+Diagnóstico:
+
+- a asserção guardava `innerText` e depois usava `toHaveText`;
+- o Firefox preservou o mesmo conteúdo e a mesma estrutura, mas a serialização visual de quebras entre parágrafos foi normalizada de forma diferente;
+- o diff mostrava somente remoção visual de quebras, não alteração autoral;
+- nenhuma regra linguística ou comportamento de produto falhou.
+
+Correção de teste:
+
+- a prova de não mutação passou a capturar e comparar `innerHTML` exato antes e depois da consulta;
+- o editor continua obrigado a permanecer editável;
+- classe, decisão, ocorrência e ausência de substituição automática continuam obrigatórias;
+- nenhuma alteração funcional foi feita no produto.
+
+A decisão segue a regra permanente do projeto: estrutura semântica/estrutural é a referência de preservação; serialização visual de `innerText` não é canônica entre navegadores.
 
 ## Por que isto supera o legado integrado
 
