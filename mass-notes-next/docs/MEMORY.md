@@ -8,16 +8,17 @@ Atualizado em: 2026-07-29
 - PR: `#155`, rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 11 e Gate 10.5 de higiene: verdes;
+- Gates 1 a 12 e Gate 10.5 de higiene: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: 98 cenários por navegador, 196 execuções;
-- cabeça funcional do Gate 11: `1e4ca1784b145b510ba6d3749025230d22f7d632`;
-- workflows verdes: Mass Notes `30449369857`, Argila `30449371552`, coerência `30449371768`;
+- matriz atual: 105 cenários por navegador, 210 execuções;
+- cabeça funcional do Gate 12: `70226195cd742b714ad53bb2a9c4cd815210d821`;
+- workflows verdes: Mass Notes `30452750643`, Argila `30452747030`, coerência `30452747019`;
 - engines integradas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - exportações aprovadas: TXT, Markdown e HTML;
 - cópia nativa aprovada: schema `escrevaral.mass-notes-next.backup`, versão `1`;
 - biblioteca aprovada: busca, estado, favorito, tag, ordenação, contagem e estado vazio;
-- próximo gate proposto: edição segura de metadados editoriais.
+- metadados aprovados: edição unitária de estado, favorito e tags no mesmo contrato versionado do documento;
+- próximo gate proposto: importação auditável do `.esc` legado.
 
 ## Decisões permanentes
 
@@ -29,7 +30,7 @@ Atualizado em: 2026-07-29
 6. Toda análise é local e apresentada como hipótese de trabalho.
 7. Nenhuma engine aplica ou substitui texto automaticamente.
 8. Offsets linguísticos usam UTF-16 e nascem do Node ProseMirror real.
-9. Decorations ficam fora do JSON autoral e são removidas quando o conteúdo muda.
+9. Decorations ficam fora do JSON autoral e são removidas quando o manuscrito muda.
 10. A preview é produto de build e nunca recebe correção direta.
 11. `npm ci`, lockfile e versões Tiptap exatas integram o contrato de reprodução.
 12. Documentação, testes e evidências fazem parte da definição de pronto.
@@ -56,8 +57,21 @@ Atualizado em: 2026-07-29
 33. Busca e equivalência de tags ignoram caixa e acentos sem reescrever os valores autorais.
 34. Representante de tags equivalentes deve ser determinístico e independente da ordem recente dos documentos.
 35. Ordenação possui desempates explícitos; títulos repetidos não dependem da ordem acidental do banco.
-36. Edição de favorito ou tags exige gate próprio com revisão e conflito definidos.
-37. Operações em massa e hierarquia persistente não entram silenciosamente como extensão da organização visual.
+36. Estado, favorito e tags são parte do mesmo `EscrevaralDocument` e da mesma `revision` do manuscrito.
+37. Não existe repositório, tabela, autosave ou regra de conflito paralela para metadados.
+38. Uma alteração editorial nunca recebe merge silencioso com uma alteração concorrente.
+39. `DraftMutationKind` distingue somente efeitos derivados: `manuscript` invalida leituras; `metadata` preserva leituras textuais válidas.
+40. Título, `content` Tiptap e `plainText` são mutações de manuscrito.
+41. Estado, favorito e tags são mutações editoriais.
+42. Mudança editorial atualiza `updatedAt`, incrementa `revision`, participa da recuperação emergencial e é transmitida por BroadcastChannel.
+43. Atualização remota limpa de metadados não desmonta o editor, não reinicia o mapa de posições e não apaga decorations válidas.
+44. Se há rascunho local sujo, qualquer revisão remota mais nova abre conflito, independentemente do campo alterado.
+45. Resolver conflito carregando a outra aba só reinicia o editor quando o manuscrito realmente difere.
+46. Guardar conflito como cópia preserva integralmente a versão local e gera identidade nova.
+47. Favorito é uma ação unitária explícita.
+48. Tags são aplicadas como conjunto atômico, não salvas caractere por caractere.
+49. Tags são limitadas a 8 itens de 32 caracteres, deduplicadas por caixa e acentos e removíveis individualmente.
+50. Operações em massa, taxonomia automática e hierarquia persistente exigem gates próprios.
 
 ## Contrato de documento
 
@@ -74,66 +88,80 @@ Cada documento mantém pelo menos:
 - `revision`;
 - eventual `legacySourceId`.
 
+Não houve migração de schema no Gate 12. Os campos já existiam em documentos novos, restaurados e migrados.
+
+## Contrato de mutações e persistência
+
+A fronteira de coordenação fica no `App.tsx`:
+
+- `DraftMutationKind = 'manuscript' | 'metadata'`;
+- `dirtyKindRef` acumula a categoria mais forte enquanto há alterações não salvas;
+- se qualquer mudança de manuscrito ocorre no lote, a publicação é classificada como `manuscript`;
+- `saveDocument(current, current.revision)` continua sendo a única gravação normal;
+- sucesso incrementa revisão, limpa recuperação e publica `{ id, revision, kind }`;
+- conflito continua sendo detectado pelo repositório com revisão esperada;
+- o canal não contém o documento nem autoriza gravação: ele apenas anuncia que a fonte IndexedDB mudou.
+
+Efeitos derivados:
+
+- `manuscript`: limpa Revisão, issues, decorations, navegação e pode reiniciar o editor em atualização remota;
+- `metadata`: mantém posição estrutural, Tiptap montado, seleção e leituras baseadas no mesmo conteúdo;
+- mensagens antigas sem `kind` usam comparação defensiva de título, `plainText` e JSON Tiptap para inferir o efeito correto.
+
+## Contrato do editor de metadados
+
+Superfície: `src/components/DocumentMetadataEditor.tsx`, dentro da aba Pulso.
+
+Favorito:
+
+- botão com `aria-pressed`;
+- alternância imediata da página ativa;
+- participa do autosave normal;
+- aparece nos cartões e no filtro após a atualização da biblioteca.
+
+Tags:
+
+- entrada textual separada por vírgulas;
+- `parseLibraryTags` normaliza espaços, limita comprimento e quantidade;
+- equivalência usa `normalizeLibraryText`;
+- a primeira grafia informada no conjunto é preservada;
+- salvar aplica o conjunto completo de uma vez;
+- remoção por chip gera nova alteração editorial unitária;
+- lista vazia remove todos os marcadores;
+- nenhum valor é enviado para serviço externo.
+
+Estado:
+
+- os chips já existentes passam a usar a categoria `metadata`;
+- mudar estado não invalida a leitura linguística;
+- o valor continua no documento, backup, cartões e filtros.
+
 ## Contrato de organização da biblioteca
 
 Camada pura: `src/library/libraryQuery.ts`.
 
-Consulta:
-
-- recebe lista de documentos e um objeto `LibraryQuery`;
 - combina `search`, `status`, `favoritesOnly`, `tag` e `sort`;
 - retorna nova lista sem modificar a entrada;
 - busca em título, texto derivado, tags e estado;
-- normaliza somente para comparação, preservando dados armazenados.
-
-Ordenações:
-
-- `updated-desc`: alteração mais recente, depois título e identidade;
-- `created-desc`: criação mais recente, depois título e identidade;
-- `title-asc`: colação `pt-BR`, numérica, depois atualização e identidade.
-
-Tags:
-
-- equivalência usa texto sem diacríticos e em minúsculas;
-- variantes equivalentes aparecem uma única vez no filtro;
-- o rótulo canônico prefere maior informação diacrítica, inicial maiúscula e colação estável;
-- selecionar uma variante encontra documentos com qualquer grafia equivalente;
-- nenhuma tag é alterada no documento.
-
-Interface:
-
-- estado, favorito e tag são filtros combináveis;
-- busca existente participa do mesmo objeto de consulta;
-- contagem mostra visíveis e total;
-- estado vazio explica o recorte e permite limpar filtros;
-- favorito e até duas tags aparecem nos cartões;
-- a página ativa fora do recorte gera aviso, mas permanece aberta;
-- desktop mantém rail; mobile usa drawer com Escape e retorno de foco;
+- normaliza somente para comparação, preservando dados armazenados;
+- variantes equivalentes aparecem uma vez no filtro;
+- ordenações usam desempates explícitos;
+- página ativa fora do recorte gera aviso, mas permanece aberta;
 - filtros não alteram rascunho, seleção, histórico, autosave ou revisão.
+
+As mudanças do Gate 12 aparecem na biblioteca somente depois de passar pelo mesmo estado React e pelo autosave; não há escrita direta a partir do rail esquerdo.
 
 ## Contrato de seleção lexical
 
-Snapshot em memória:
+Snapshot em memória inclui `documentId`, posições ProseMirror e texto normalizado. A superfície Palavras carrega localmente `lexical-engine.js`, `lexical-data.json` e `norma-data.json`. Sem ocorrência e sem registro, fallback morfológico é descartado. Nenhum serviço externo é consultado.
 
-- `documentId`;
-- `from` e `to` ProseMirror;
-- texto normalizado, limitado a 120 caracteres;
-- publicação em criação, atualização e mudança de seleção;
-- leitura imediata e assinatura para atualizações futuras.
-
-A superfície Palavras carrega localmente `lexical-engine.js`, `lexical-data.json` e `norma-data.json`. Sem ocorrência e sem registro, fallback morfológico é descartado. Nenhum serviço externo é consultado.
+Mudar apenas estado, favorito ou tags não altera a seleção lexical nem o conteúdo consultado.
 
 ## Contrato de cópia nativa
 
-Envelope versão 1:
+Envelope versão 1 usa schema `escrevaral.mass-notes-next.backup`, app `mass-notes-next`, data e lista não vazia de documentos. Validação ocorre antes de qualquer transação. Restauração usa `add`, gera UUID novo, acrescenta `— restaurado`, reinicia revisão e não troca a página ativa.
 
-- `schema`: `escrevaral.mass-notes-next.backup`;
-- `version`: `1`;
-- `app`: `mass-notes-next`;
-- `exportedAt`;
-- lista não vazia de documentos.
-
-Validação ocorre antes de qualquer transação. Restauração usa `add`, gera UUID novo, acrescenta `— restaurado`, reinicia revisão e não troca a página ativa. Favorito e tags restaurados tornam-se imediatamente visíveis aos filtros do Gate 11.
+Estado, favorito e tags editados no Gate 12 integram a próxima cópia nativa porque já pertencem ao documento versionado; nenhuma alteração no schema foi necessária.
 
 ## Contrato de fronteiras de distribuição
 
@@ -150,23 +178,28 @@ A aplicação pública raiz usa versão única em `index.html`, `ASSET_VERSION`,
 - A suíte robusta do RimaLab foi restaurada após simplificação acidental durante o Gate 10.
 - Gate 10 terminou 182/182 após corrigir arredondamento subpixel e sincronização de exportação.
 - Gate 10.5 separou o auditor público do build Vite isolado, sem criar versão falsa.
-- A primeira execução do Gate 11 falhou por nomes acessíveis ambíguos e porque o ícone favorito integrava o texto exato do título; controles e estrutura do cartão foram corrigidos.
-- A segunda execução ficou 192/196 porque o rótulo de tags equivalentes dependia da ordem por atualização; a canonicalização tornou o representante estável.
-- A terceira execução ficou 194/196 porque o teste comparava o texto de todo o grupo de chips com um chip individual; a asserção passou a localizar cada chip precisamente.
-- O workflow `30449369857` concluiu o Gate 11 com 196/196, publicação, cache e verificação pública verdes.
+- Gate 11 estabilizou nomes acessíveis, texto exato de títulos e canonicalização de tags antes de concluir 196/196.
+- A primeira execução do Gate 12 concluiu os 210 casos, mas teve 12 falhas: quatro testes antigos fixavam a palavra “escreveu”, três cenários por navegador presumiam que o documento inicial já estivesse no localStorage e um cenário por navegador usava “Pronto” sem distinguir filtro de estado editorial.
+- A mensagem de conflito mais ampla foi preservada; os testes antigos passaram a verificar “alterou”.
+- O helper do Gate 12 passou a descobrir o documento ativo por chave lembrada, título atual ou registro mais recente, sem impor comportamento inexistente ao produto.
+- Controles de estado nos testes passaram a ser localizados dentro de `#panel-pulso`.
+- O workflow `30452750643` concluiu o Gate 12 com 210/210, publicação, cache e verificação pública verdes.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
-- edição de favorito e tags na biblioteca;
-- edição ou exclusão em massa;
-- pastas ou hierarquia persistente;
+- edição ou exclusão de metadados em massa;
+- filtros salvos entre sessões;
+- pastas, coleções ou hierarquia persistente;
+- taxonomia ou sugestão automática de tags;
+- merge campo a campo entre abas;
 - importação do `.esc` legado;
 - criptografia ou senha de backup;
 - seleção parcial ou merge de restauração;
 - DOCX, RTF, ePub e Obsidian ZIP;
 - catálogo de sinônimos e análise sintática de frases em Palavras;
+- sincronização em nuvem e colaboração;
 - service worker/offline em nova sessão;
 - Tauri, SQLite e paginação física;
 - decorations para Voz, Contexto, RimaLab ou Palavras;
@@ -183,5 +216,7 @@ Ainda não estão aprovados:
 6. não alterar engines ou bases para fazer teste passar;
 7. não avançar versão pública por mudanças exclusivas de `mass-notes-next/`;
 8. preservar `src/library/libraryQuery.ts` como fronteira pura da organização;
-9. não fazer filtros dispararem troca de página ou persistência;
-10. iniciar o Gate 12 somente após definir revisão e conflito para mudanças exclusivamente de metadados.
+9. preservar uma única gravação versionada para manuscrito e metadados;
+10. não invalidar leitura linguística quando apenas estado, favorito ou tags mudarem;
+11. não fazer merge silencioso entre revisões concorrentes;
+12. antes do Gate 13, inventariar o formato `.esc` legado real e documentar conversão e rejeição atômica.
