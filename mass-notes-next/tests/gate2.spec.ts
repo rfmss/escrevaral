@@ -116,7 +116,7 @@ test('conflito preserva a versão local como nova página', async ({ context, pa
   await page.waitForTimeout(100)
   await second.getByLabel('Título do documento').fill('Versão local B')
 
-  await expect(second.getByRole('alert')).toContainText('Outra aba também escreveu')
+  await expect(second.getByRole('alert')).toContainText('Outra aba também alterou')
   await second.getByRole('button', { name: 'Guardar a minha como cópia' }).click()
   await expect(second.getByRole('alert')).toHaveCount(0)
   await expect(second.getByLabel('Título do documento')).toHaveValue('Versão local B — conflito')
