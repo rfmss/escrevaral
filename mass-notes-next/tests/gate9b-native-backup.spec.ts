@@ -159,5 +159,5 @@ test('painel de backup permanece utilizável no drawer móvel', async ({ page })
     return rect.left >= 0 && rect.right <= window.innerWidth && document.documentElement.scrollWidth <= window.innerWidth
   })
   expect(fits).toBe(true)
-  await expect(page.locator('[data-backup-action]')).toHaveCount(2)
+  await expect(page.locator('[data-backup-action]')).toHaveCount(3)
 })
