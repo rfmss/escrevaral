@@ -103,10 +103,14 @@ Durante a estabilização, uma regravação ampla simplificou acidentalmente o a
 
 A penúltima execução terminou com 180/182 aprovações porque `getBoundingClientRect()` retornou aproximadamente 342,2 px para um rail de 342 px. Documento e rail já estavam sem overflow. A asserção passou a aceitar 1 px de diferença subpixel entre Chromium e Firefox, mantendo as verificações rígidas de `scrollWidth`.
 
+### Sincronização da exportação
+
+A primeira validação da cabeça documental terminou com 181/182 no Firefox. O fixture do Gate 9 confirmava a árvore visível do Tiptap, mas podia iniciar o download antes de o estado React receber o conteúdo estruturado. O teste passou a salvar o documento-base vazio, aguardar a alteração do paste, salvar novamente e só então abrir o painel de exportação. O exportador não foi alterado.
+
 ## Evidência
 
-- cabeça funcional: `d430db3d7c5ff94177691aace5dd2cd55408e55e`;
-- workflow: `30420965045`;
+- cabeça final validada: `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a`;
+- workflow final: `30422368445`;
 - matriz: 91 cenários por navegador, 182 execuções;
 - build: aprovado;
 - Chromium: aprovado;
