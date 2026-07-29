@@ -72,9 +72,32 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - repetição integral e cabeça documental final concluíram com 172/172 execuções aprovadas;
 - build, Chromium, Firefox, publicação, cache e verificação pública ficaram verdes no workflow `30417867701`.
 
+## 2026-07-29
+
+### Gate 10 — Palavras/Léxico
+
+- integrada `lexical-engine.js` sem alterar sua fonte;
+- incorporadas localmente `lexical-data.json` e `norma-data.json` pelo adaptador tipado;
+- criado `src/editor/lexicalSelectionBridge.ts` para manter o último recorte selecionado mesmo antes da abertura do painel;
+- criado `src/components/LexicalPanel.tsx` com busca digitada e consumo da seleção Tiptap;
+- adicionada a sétima aba do rail, `Palavras`;
+- exibidos definição, classe, confiança, função, campo, ocorrências e leituras alternativas disponíveis;
+- consultas permanecem locais e somente de leitura;
+- removida qualquer oferta de substituição automática no corte novo;
+- ocorrências passam a ser contadas com normalização de acentos;
+- palavra registrada sem ocorrência pode preservar definição, mas perde classe contextual não comprovada;
+- fallback morfológico sem registro e sem ocorrência passa a ser tratado como ausência segura;
+- criada folha isolada `src/styles/lexical-panel.css`;
+- adicionados cinco cenários por navegador para busca, seleção durável, não mutação, termo desconhecido e mobile;
+- restaurada a suíte robusta do RimaLab após uma simplificação acidental durante a estabilização;
+- documentWidth e rail permanecem sem overflow; diferenças subpixel de até 1 px são aceitas somente na caixa transformada;
+- matriz elevada para 91 cenários por navegador, 182 execuções;
+- workflow `30420965045` aprovou build, Chromium, Firefox, publicação, renovação de cache e verificação pública.
+
 ## Próximo lote proposto
 
-- Gate 10: Palavras/Léxico por adaptador tipado e seleção explícita;
-- nenhuma aplicação automática de sinônimos;
-- nenhum serviço externo;
-- nenhuma ampliação de formatos editoriais no mesmo lote.
+- Gate 11: organização da biblioteca sobre estado, favorito, tags, busca e datas já existentes;
+- nenhuma exclusão em massa neste corte;
+- nenhuma hierarquia persistente sem contrato de migração;
+- nenhuma aplicação automática de sugestões;
+- nenhuma promoção para `main`.
