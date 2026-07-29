@@ -14,6 +14,19 @@ type PositionContractHost = HTMLElement & {
   __escrevaralPositionContract?: EditorPositionContract
 }
 
+export type LexicalSelectionSnapshot = {
+  documentId: string
+  from: number
+  to: number
+  text: string
+}
+
+declare global {
+  interface Window {
+    __escrevaralLexicalSelection?: LexicalSelectionSnapshot
+  }
+}
+
 export type ReviewNavigationRequest = {
   serial: number
   issueId: string
@@ -52,15 +65,15 @@ function MassNotesEditorInstance({
 
   const publishLexicalSelection = (current: Editor) => {
     const { from, to, empty } = current.state.selection
-    const text = empty ? '' : current.state.doc.textBetween(from, to, ' ', ' ').trim()
-    window.dispatchEvent(new CustomEvent('escrevaral:lexical-selection', {
-      detail: {
-        documentId,
-        from,
-        to,
-        text: text.length <= 120 ? text : '',
-      },
-    }))
+    const selected = empty ? '' : current.state.doc.textBetween(from, to, ' ', ' ').trim()
+    const snapshot: LexicalSelectionSnapshot = {
+      documentId,
+      from,
+      to,
+      text: selected.length <= 120 ? selected : '',
+    }
+    window.__escrevaralLexicalSelection = snapshot
+    window.dispatchEvent(new CustomEvent('escrevaral:lexical-selection', { detail: snapshot }))
   }
 
   const editor = useEditor({
