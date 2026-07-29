@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
 import { readLexicalWord, type LexicalReading } from '../engines/lexicalAdapter'
-
-type LexicalSelectionEvent = CustomEvent<{
-  documentId: string
-  text: string
-  from: number
-  to: number
-}>
+import {
+  readLatestLexicalSelection,
+  subscribeLexicalSelection,
+  type LexicalSelectionSnapshot,
+} from '../editor/lexicalSelectionBridge'
 
 type Props = {
   document: EscrevaralDocument
@@ -24,52 +22,71 @@ function normalizeQuery(value: string): string {
   return value.trim().replace(/\s+/g, ' ').slice(0, 120)
 }
 
+function isUsableSelection(snapshot: LexicalSelectionSnapshot | null): snapshot is LexicalSelectionSnapshot {
+  if (!snapshot) return false
+  const selected = normalizeQuery(snapshot.text)
+  return Boolean(selected) && selected.split(/\s+/).length <= 4
+}
+
 export function LexicalPanel({ document }: Props) {
   const [query, setQuery] = useState('')
   const [reading, setReading] = useState<LexicalReading | null>(null)
   const [message, setMessage] = useState('Selecione uma palavra no texto ou faça uma busca local.')
   const [busy, setBusy] = useState(false)
+  const requestToken = useRef(0)
+  const contextRef = useRef(document.plainText)
 
-  const run = async (value: string) => {
+  useEffect(() => {
+    contextRef.current = document.plainText
+  }, [document.plainText])
+
+  const run = useCallback(async (value: string) => {
     const clean = normalizeQuery(value)
+    const token = ++requestToken.current
     setQuery(clean)
+
     if (!clean) {
       setReading(null)
       setMessage('Selecione uma palavra no texto ou faça uma busca local.')
+      setBusy(false)
       return
     }
+
     setBusy(true)
     setMessage('Consultando o vocabulário local…')
     try {
-      const result = await readLexicalWord(clean, document.plainText)
+      const result = await readLexicalWord(clean, contextRef.current)
+      if (token !== requestToken.current) return
       setReading(result)
       setMessage(result ? 'Leitura lexical concluída.' : 'Não encontrei uma leitura local para este recorte.')
     } catch (error) {
+      if (token !== requestToken.current) return
       console.error('[Escrevaral] Leitura lexical não concluída.', error)
       setReading(null)
       setMessage('O vocabulário local não pôde ser aberto nesta sessão.')
     } finally {
-      setBusy(false)
+      if (token === requestToken.current) setBusy(false)
     }
-  }
+  }, [document.id])
 
   useEffect(() => {
-    const onSelection = (event: Event) => {
-      const detail = (event as LexicalSelectionEvent).detail
-      if (!detail || detail.documentId !== document.id) return
-      const selected = normalizeQuery(detail.text)
-      if (!selected || selected.split(/\s+/).length > 4) return
-      void run(selected)
-    }
-    window.addEventListener('escrevaral:lexical-selection', onSelection)
-    return () => window.removeEventListener('escrevaral:lexical-selection', onSelection)
-  }, [document.id, document.plainText])
-
-  useEffect(() => {
+    requestToken.current += 1
     setReading(null)
     setQuery('')
+    setBusy(false)
     setMessage('Selecione uma palavra no texto ou faça uma busca local.')
   }, [document.id])
+
+  useEffect(() => {
+    const consume = (snapshot: LexicalSelectionSnapshot) => {
+      if (snapshot.documentId !== document.id || !isUsableSelection(snapshot)) return
+      void run(snapshot.text)
+    }
+
+    const latest = readLatestLexicalSelection(document.id)
+    if (isUsableSelection(latest)) void run(latest.text)
+    return subscribeLexicalSelection(consume)
+  }, [document.id, run])
 
   return (
     <section className="lexical-panel" aria-labelledby="lexical-panel-title">
