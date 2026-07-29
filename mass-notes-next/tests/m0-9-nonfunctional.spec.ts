@@ -344,9 +344,9 @@ test('corpus separado confirma cada engine sem alterar o texto observado', async
 
   const runWithStableText = async (source: string, action: () => Promise<void>) => {
     await editor.fill(source)
-    await waitEditorContract(page, source)
-    await waitSaved(page)
     const before = await editor.innerText()
+    await waitEditorContract(page, before)
+    await waitSaved(page)
     await action()
     expect(await editor.innerText()).toBe(before)
   }
