@@ -4,32 +4,35 @@ Esta pasta permite retomar o subprojeto sem depender do histórico de uma conver
 
 ## Estado resumido
 
-- Gates 1 a 13 e Gate 10.5: concluídos funcionalmente;
-- matriz anterior ao milestone: 111 cenários por navegador, 222 execuções;
-- gate mais recente: importação auditável do `.esc` legado;
+- Gates 1 a 13 e Gate 10.5: concluídos;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- Gate 14 está suspenso até o veredito da auditoria geral;
+- primeira tranche: 116 cenários por navegador, 232 execuções verdes;
+- nota provisória: 85/100;
+- beta fechada: `SHIP COM CONDIÇÕES` provisório;
+- lançamento público e substituição integral: `NO-SHIP` provisório;
+- Gate 14 está suspenso até o veredito final;
 - PR `#155` permanece em rascunho;
 - `main`, aplicação pública e service worker permanecem intactos.
 
 ## Ordem de leitura
 
 1. `M0_9_AUDITORIA_OPERACIONAL.md` — execução, decisões, achados, placar e evidências do milestone atual;
-2. `PLAN.md` — objetivo, gates e sequência aprovada;
-3. `MEMORY.md` — decisões e restrições permanentes;
-4. `CHANGELOG.md` — mudanças relevantes;
-5. log mais recente em `logs/`;
-6. demais arquivos em `logs/`;
-7. contratos globais em `../../docs/product/`.
+2. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano e veredito provisório;
+3. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
+4. `PLAN.md` — objetivo, gates e sequência aprovada;
+5. `MEMORY.md` — decisões e restrições permanentes;
+6. `CHANGELOG.md` — mudanças relevantes;
+7. log mais recente em `logs/`;
+8. contratos globais em `../../docs/product/`.
 
 ## Regra de continuidade
 
-Antes de cada lote ou sessão de auditoria:
+Antes de cada sessão de auditoria:
 
 - conferir branch, PR e workflows;
 - ler a memória operacional M0.9;
-- revisar plano e memória consolidada;
-- localizar P0/P1 abertos e a próxima fase incompleta;
+- revisar P0/P1 abertos e P2 pendentes de decisão;
+- localizar a próxima fase incompleta;
 - declarar qual evidência será produzida;
 - não iniciar feature nova durante o diagnóstico.
 
@@ -42,12 +45,13 @@ Ao tomar decisão importante:
 
 Ao encerrar:
 
+- atualizar relatório humano e JSON;
 - atualizar plano, memória e changelog;
 - criar ou completar log técnico e contrato global;
 - atualizar o corpo do PR;
 - registrar workflow, commit e limitações;
 - repetir a CI sobre a cabeça documental final.
 
-O Gate 14 permanece apenas proposto e está suspenso. Persistir preferências da biblioteca não pode começar antes do veredito M0.9.
+O Gate 14 permanece apenas proposto e suspenso. Persistir preferências da biblioteca não pode começar antes do veredito M0.9.
 
 Documentação é parte do produto. Um lote sem memória atualizada e evidência final não está concluído.
