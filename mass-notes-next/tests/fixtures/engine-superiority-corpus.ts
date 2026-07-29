@@ -4,15 +4,16 @@ export type EngineSuperiorityCase = {
   query: string
   expectedClass: RegExp
   rationale: string
-  source: 'bancada-legada' | 'superioridade-contextual'
+  source: 'bancada-legada' | 'superioridade-contextual' | 'controle-negativo'
 }
 
 /**
- * Corpus v1 — fronteiras morfossintáticas em português brasileiro.
+ * Corpus v1.1 — fronteiras morfossintáticas em português brasileiro.
  *
  * Os casos legados vêm da bancada gramatical de 2026-06-27. Os casos de
  * superioridade contextual acrescentam pares mínimos que uma consulta de
- * dicionário sem contexto não consegue resolver.
+ * dicionário sem contexto não consegue resolver. Os controles negativos
+ * impedem que uma regra aprovada seja aplicada a uma estrutura vizinha.
  */
 export const ENGINE_SUPERIORITY_CASES: EngineSuperiorityCase[] = [
   {
@@ -126,5 +127,21 @@ export const ENGINE_SUPERIORITY_CASES: EngineSuperiorityCase[] = [
     expectedClass: /substantivo/i,
     rationale: 'Nome antecedido por determinante.',
     source: 'superioridade-contextual',
+  },
+  {
+    id: 'larga-verbo-sujeito-nominal',
+    text: 'A menina larga a mochila quando chega em casa.',
+    query: 'larga',
+    expectedClass: /verbo/i,
+    rationale: 'O sujeito nominal não pode acionar falsamente a regra de adjetivo pós-nominal.',
+    source: 'controle-negativo',
+  },
+  {
+    id: 'estreita-verbo-sujeito-nominal',
+    text: 'O corredor estreita os olhos diante da luz forte.',
+    query: 'estreita',
+    expectedClass: /verbo/i,
+    rationale: 'O determinante do objeto à direita favorece a leitura verbal, não adjetiva.',
+    source: 'controle-negativo',
   },
 ]
