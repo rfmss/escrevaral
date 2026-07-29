@@ -144,6 +144,31 @@ export async function saveConflictAsCopy(local: EscrevaralDocument): Promise<Esc
   return saveDocument(copy, 0)
 }
 
+export async function restoreDocumentsAsCopies(source: EscrevaralDocument[]): Promise<EscrevaralDocument[]> {
+  if (!source.length) return []
+  const db = await database()
+  const tx = db.transaction('documents', 'readwrite')
+  const restored: EscrevaralDocument[] = []
+  const startedAt = Date.now()
+
+  for (const [index, document] of source.entries()) {
+    const copy = createDocument({
+      ...structuredClone(document),
+      id: crypto.randomUUID(),
+      title: `${document.title.trim() || 'Sem título'} — restaurado`,
+      revision: 0,
+      createdAt: startedAt + index,
+      updatedAt: startedAt + index,
+      legacySourceId: null,
+    })
+    await tx.store.add(copy)
+    restored.push(copy)
+  }
+
+  await tx.done
+  return restored
+}
+
 async function importLegacyDocuments(db: IDBPDatabase<EscrevaralDB>): Promise<void> {
   let raw: string | null = null
   try {
