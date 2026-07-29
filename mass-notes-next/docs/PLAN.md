@@ -1,6 +1,6 @@
 # Plano vivo — Mass Notes Next
 
-Atualizado em: 2026-07-28
+Atualizado em: 2026-07-29
 
 ## Norte do produto
 
@@ -15,6 +15,7 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 - engines legadas por adaptadores tipados;
 - contrato de posições UTF-16 auditado;
 - decorations somente de leitura da Revisão;
+- consulta Palavras/Léxico somente de leitura;
 - exportação TXT, Markdown e HTML;
 - cópia nativa versionada e restauração não destrutiva;
 - Anatomia do Livro integrada por runtime gerado na CI;
@@ -37,47 +38,59 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 11. **Gate 8 — Anatomia do Livro:** runtime fiel gerado em CI e transição preservando o editor.
 12. **Gate 9A — Exportação estrutural:** TXT, Markdown e HTML derivados do JSON Tiptap.
 13. **Gate 9B — Cópia nativa:** envelope versionado, validação integral e restauração como novas cópias.
+14. **Gate 10 — Palavras/Léxico:** engine e bases locais por adaptador, seleção durável e consulta sem mutação.
 
 ## Evidência atual
 
-- workflow funcional final: `30417867701`;
-- 86 cenários por navegador;
-- 172 execuções aprovadas;
+- workflow funcional final: `30420965045`;
+- 91 cenários por navegador;
+- 182 execuções aprovadas;
 - build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes;
 - `main`, aplicação pública e service worker intactos.
 
 Documentação detalhada do gate atual:
 
-- `docs/logs/2026-07-28-gate-9b-copia-nativa.md`;
-- `../docs/product/MASS_NOTES_TIPTAP_GATE_9B.md`.
+- `docs/logs/2026-07-29-gate-10-palavras-lexico.md`;
+- `../docs/product/MASS_NOTES_TIPTAP_GATE_10.md`.
 
-## Próximo lote proposto — Gate 10: Palavras / Léxico
+## Gate 10 — contrato fechado
 
-O ciclo essencial já fecha escrita, leitura linguística, organização básica, exportação e preservação. O próximo diferencial de produto deve ser a consulta lexical local do Escrevaral anterior.
+- `lexical-engine.js`, `lexical-data.json` e `norma-data.json` permanecem fontes intactas;
+- `src/engines/lexicalAdapter.ts` isola carregamento, normalização e defesa contra falsos verbetes;
+- `src/editor/lexicalSelectionBridge.ts` mantém o último recorte selecionado com `documentId`, `from`, `to` e texto;
+- a seleção pode anteceder a abertura do painel sem ser perdida;
+- busca digitada e seleção usam o mesmo caminho de leitura;
+- palavra registrada sem ocorrência pode mostrar definição, mas não recebe classe contextual inventada;
+- fallback morfológico sem ocorrência e sem registro local é tratado como ausência segura;
+- nenhum botão aplica, substitui ou reescreve conteúdo;
+- nenhum manuscrito é enviado para serviço externo.
+
+## Próximo lote proposto — Gate 11: organização da biblioteca
+
+O ciclo essencial já fecha escrita, análise linguística, consulta lexical, exportação e preservação. O próximo ganho deve melhorar a recuperação dos próprios textos sem alterar o contrato estrutural do editor.
 
 Escopo proposto:
 
-1. inventariar a engine lexical e suas bases sem modificá-las;
-2. criar adaptador TypeScript defensivo em `src/engines/`;
-3. definir contrato explícito para seleção atual e consulta digitada;
-4. oferecer definição, classe gramatical, polissemia, locuções e sinônimos disponíveis;
-5. manter toda consulta local;
-6. não alterar nem substituir automaticamente o manuscrito;
-7. invalidar resultados quando documento ou seleção mudarem;
-8. validar vazio, palavra desconhecida, acentos, flexões, seleção de frase e mobile;
-9. preservar o contrato de posições e não depender da forma acidental do DOM.
+1. transformar estado, favorito, tags e data de alteração em filtros claros e combináveis;
+2. oferecer ordenação previsível por atualização, título e criação;
+3. preservar busca textual, documento ativo e rascunhos durante mudanças de filtro;
+4. tornar estados vazios e contagens compreensíveis em desktop e mobile;
+5. manter operações unitárias e reversíveis, sem exclusão em massa neste corte;
+6. não criar hierarquia ou pasta persistente sem contrato de migração explícito;
+7. validar biblioteca extensa, títulos repetidos, Unicode, teclado e drawers nos dois navegadores;
+8. atualizar memória, contrato de produto e evidência pública antes de encerrar.
 
-Fora do Gate 10:
+Fora do Gate 11:
 
-- aplicação automática de sinônimos;
+- exclusão em massa;
+- sincronização em nuvem;
+- colaboração;
+- pastas aninhadas sem migração;
+- aplicação automática de sugestões;
 - reescrita generativa;
-- consulta em serviços externos;
-- análise de precisão por gênero;
-- DOCX, RTF, ePub ou Obsidian ZIP;
-- importação do `.esc` legado;
 - promoção para `main`.
 
-O Gate 10 não começa automaticamente. Antes do código, a engine/base lexical e o contrato de seleção devem ser lidos e registrados no menor patch possível.
+O Gate 11 não começa automaticamente. Antes do código, devem ser inventariadas as capacidades já existentes de estado, tags, favorito e busca para evitar duplicação de conceito.
 
 ## Fora dos próximos gates
 
