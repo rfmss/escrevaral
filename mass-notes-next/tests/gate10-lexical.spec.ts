@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test'
 
 async function openWords(page: import('@playwright/test').Page) {
   await page.goto('/')
-  await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
+  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
+  if (await opener.isVisible()) await opener.click()
   await page.getByRole('tab', { name: 'palavras', exact: true }).click()
 }
 
@@ -20,18 +21,11 @@ test('seleção do Tiptap alimenta Palavras sem alterar o manuscrito', async ({ 
   await page.goto('/')
   const editor = page.getByLabel('Texto do documento')
   const before = await editor.innerText()
-  await editor.evaluate((element) => {
-    const node = element.firstChild?.firstChild ?? element.firstChild
-    if (!node) return
-    const range = document.createRange()
-    range.setStart(node, 0)
-    range.setEnd(node, Math.min(5, node.textContent?.length ?? 0))
-    const selection = window.getSelection()
-    selection?.removeAllRanges()
-    selection?.addRange(range)
-    element.dispatchEvent(new Event('mouseup', { bubbles: true }))
-  })
-  await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
+  await editor.click()
+  await page.keyboard.press('Home')
+  for (let index = 0; index < 5; index += 1) await page.keyboard.press('Shift+ArrowRight')
+  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
+  if (await opener.isVisible()) await opener.click()
   await page.getByRole('tab', { name: 'palavras', exact: true }).click()
   await expect(page.getByLabel('Palavra ou expressão curta')).not.toHaveValue('')
   await expect(editor).toHaveText(before)
