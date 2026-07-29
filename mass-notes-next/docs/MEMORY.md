@@ -10,16 +10,17 @@ Atualizado em: 2026-07-29
 - aplicação pública, `main` e service worker: intactos;
 - Gates 1 a 13 e Gate 10.5: verdes;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- duas tranches automatizadas concluídas;
+- três tranches automatizadas concluídas;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz: 119 cenários por navegador, 238 execuções;
-- cabeça funcional da tranche 2: `2a4333337a04b73a6c034b8fd35bc582994a114b`;
-- workflows verdes: Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508`;
-- nota provisória: 87/100;
+- matriz: 126 cenários por navegador, 252 execuções;
+- cabeça funcional da tranche 3: `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
+- workflows verdes: Mass Notes `30478738806`, Argila `30478738678`, coerência `30478738607`;
+- nota provisória: 88/100;
 - beta fechada: `SHIP COM CONDIÇÕES` provisório;
 - lançamento público: `NO-SHIP` provisório;
 - substituição integral: `NO-SHIP` provisório;
 - P0/P1 abertos: 0/0;
+- P2 abertos: 4;
 - Gate 14 suspenso até o veredito final.
 
 ## Fontes de retomada
@@ -27,7 +28,7 @@ Atualizado em: 2026-07-29
 1. `M0_9_AUDITORIA_OPERACIONAL.md` — memória executável viva;
 2. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano;
 3. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
-4. `logs/2026-07-29-m0-9-auditoria-integrada-tranche-2.md` — lote mais recente;
+4. `logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md` — lote mais recente;
 5. `../../docs/product/MASS_NOTES_TIPTAP_M0_9.md` — contrato global.
 
 ## Decisões permanentes
@@ -66,6 +67,14 @@ Atualizado em: 2026-07-29
 32. Documento ativo é uma preferência compartilhada entre abas na origem atual.
 33. Cenários de falha simulada devem estabilizar entradas alheias ao contrato testado.
 34. SHA documental exato é registrado no PR depois da CI para evitar commit autorreferente.
+35. Equivalência de viewport não pode ser apresentada como zoom real ou validação de dispositivo.
+36. Leitor de tela e tecnologia assistiva só recebem status aprovado quando executados de verdade.
+37. Métricas do runner detectam regressão e não constituem SLA, benchmark universal ou promessa de hardware.
+38. Para não mutação autoral entre navegadores, o snapshot semântico ProseMirror é a referência; `innerText` pode incluir espaçamento visual específico do browser.
+39. Toda origem externa observada deve ser inventariada, classificada e restrita; allowlist não apaga o achado.
+40. A Anatomia depende atualmente de `page-flip@2.0.7` no `unpkg`; isso é P2 e impede promessa offline integral.
+41. Nenhuma frase autoral sentinela pode aparecer em URL ou corpo de requisição, inclusive ao atravessar superfícies especiais.
+42. Recuperação emergencial deve retomar o mesmo ID, avançar revisão, não duplicar a biblioteca e limpar o envelope após persistência.
 
 ## Cobertura transversal aprovada
 
@@ -76,9 +85,12 @@ Atualizado em: 2026-07-29
 - estado, favorito e tags;
 - autosave e salvamento explícito;
 - recarga e retomada;
-- organização sem alterar revisão ou descartar rascunho.
+- organização sem alterar revisão ou descartar rascunho;
+- recuperação emergencial do mesmo documento;
+- envelope temporário limpo após salvamento;
+- doze ciclos adicionais sem exceção de página.
 
-### Engines em sequência
+### Engines em sequência e corpus separado
 
 - Revisão;
 - Espelho de Voz;
@@ -88,7 +100,9 @@ Atualizado em: 2026-07-29
 
 Resultado:
 
-- texto, `plainText` e `revision` preservados;
+- texto, `plainText` e `revision` preservados na sequência integrada;
+- snapshot semântico preservado no corpus separado;
+- `PONT-49` localizado pelo mapa UTF-16 real;
 - nenhuma aplicação automática;
 - frase sentinela ausente de URL e corpo de requisição.
 
@@ -123,14 +137,34 @@ Na mesma sessão:
 - preservar `legacySourceId`;
 - não substituir documentos existentes.
 
-### Mobile e escala
+### UIX, responsividade e movimento
 
 - drawer e sete abas em 320/390 px;
 - Escape e retorno de foco;
-- ausência de overflow bloqueador;
+- seis larguras entre 320 e 1440 px sem overflow bloqueador;
+- papel, título e editor dentro do viewport;
+- acionadores móveis separados;
+- sidebar e rail presentes em desktop;
+- screenshots por largura e navegador;
+- layout CSS equivalente a 200% com escrita e drawers alcançáveis;
+- movimento reduzido reconhecido e transição em até 300 ms.
+
+### Escala e desempenho na CI
+
 - 100 documentos;
 - documento acima de 100 mil caracteres;
-- busca funcional e editor editável.
+- busca funcional e editor editável;
+- doze ciclos de edição/salvamento;
+- DOM 179→179 em ambos os navegadores;
+- Chromium: p95 192 ms, heap 16.100.000→16.100.000 bytes;
+- Firefox: p95 90 ms, heap não disponível.
+
+### Rede
+
+- nenhuma transmissão da frase sentinela autoral;
+- única origem externa conhecida: `https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js`;
+- requisição GET sem conteúdo autoral;
+- qualquer outra origem externa continua falhando.
 
 ## Evidência funcional
 
@@ -147,6 +181,13 @@ Na mesma sessão:
 - Mass Notes `30467582850`, Argila `30467583011`, coerência `30467584508`;
 - publicação, cache e smoke público verdes.
 
+### Tranche 3
+
+- cabeça `305d0727ddfaee11f3e7680d0f9168023e9a4284`;
+- 252/252;
+- Mass Notes `30478738806`, Argila `30478738678`, coerência `30478738607`;
+- publicação, cache, smoke público e artefato `mass-notes-tiptap-30478738806` verdes.
+
 ## Incidentes de estabilização
 
 Nenhum exigiu alteração funcional no produto.
@@ -154,7 +195,11 @@ Nenhum exigiu alteração funcional no produto.
 - helpers de autosave passaram a aceitar estado já convergido para `Salvo`;
 - salvamento preliminar redundante da exportação foi removido;
 - conflito passou a ser testado pela preservação dos registros, não por seleção independente por aba;
-- falha simulada do RimaLab estabiliza a fonte antes da primeira leitura.
+- falha simulada do RimaLab estabiliza a fonte antes da primeira leitura;
+- nome acessível do drawer alinhado a `Arquivo de documentos`;
+- origem externa da Anatomia foi convertida em achado P2 e allowlist exata, não ocultada;
+- duração do overlay reduzido passou a ser capturada no instante da criação;
+- corpus multiparágrafo usa paste estruturado e snapshot semântico, evitando diferenças de `innerText`.
 
 ## Achados provisórios
 
@@ -171,6 +216,7 @@ Nenhum.
 - `M09-F001`: nova aplicação sem PWA/offline próprio; bloqueia lançamento público.
 - `M09-F002`: Prova de Autoria ausente; bloqueia substituição integral sem decisão explícita.
 - `M09-F003`: faltam DOCX, RTF, ePub e Obsidian ZIP; não bloqueia beta, mas bloqueia paridade integral.
+- `M09-F006`: Anatomia carrega `page-flip@2.0.7` do `unpkg`; sem fuga autoral, mas sem autonomia offline integral.
 
 ### P3
 
@@ -179,17 +225,17 @@ Nenhum.
 
 ## Placar provisório
 
-- editor e preservação: 94;
-- biblioteca: 90;
-- engines: 86;
-- UIX: 82;
-- acessibilidade: 80;
-- responsividade: 89;
+- editor e preservação: 96;
+- biblioteca: 91;
+- engines: 90;
+- UIX: 87;
+- acessibilidade: 84;
+- responsividade: 94;
 - importação e exportação: 88;
-- privacidade: 92;
-- desempenho: 84;
-- release: 72;
-- geral: 87.
+- privacidade: 90;
+- desempenho: 88;
+- release: 68;
+- geral: 88.
 
 ## Contrato do documento
 
@@ -231,28 +277,29 @@ Ainda não estão aprovados:
 - criptografia de backup;
 - sincronização e colaboração;
 - PWA própria;
+- autonomia offline da Anatomia;
+- zoom real de 200%;
+- leitores de tela e dispositivos físicos;
 - Tauri, SQLite e paginação física;
 - aplicação automática de sugestões;
 - promoção para `main`.
 
 ## Próxima ação obrigatória
 
-1. UIX heurística nas seis larguras;
-2. zoom 200%, movimento reduzido e tecnologias assistivas/dispositivos reais;
-3. observação integral de rede;
-4. recuperação emergencial integrada;
-5. sessão prolongada, latência e memória;
-6. corpus ampliado por engine;
-7. decisões explícitas para P2;
-8. veredito final;
-9. CI na cabeça documental final e registro exato no PR.
+1. revisão humana das screenshots nas seis larguras;
+2. zoom real de 200% e tecnologias assistivas/dispositivos físicos quando disponíveis;
+3. uso prolongado em máquina real;
+4. decisões explícitas para os quatro P2;
+5. veredito final;
+6. CI na cabeça documental final e registro exato no PR.
 
 ## Como retomar
 
 1. conferir branch, PR e workflows;
 2. ler `M0_9_AUDITORIA_OPERACIONAL.md`;
 3. revisar achados e próxima fase;
-4. consultar relatório humano e JSON;
+4. consultar relatório humano, JSON e log da tranche 3;
 5. não editar a branch de preview;
 6. não adicionar feature durante o diagnóstico;
-7. iniciar Gate 14 somente após veredito final explícito.
+7. não afirmar validação física sem executá-la;
+8. iniciar Gate 14 somente após veredito final explícito.
