@@ -1,4 +1,14 @@
-import { displayTitle, type EscrevaralDocument } from '../domain/document'
+import { useEffect, useMemo, useState } from 'react'
+import { displayTitle, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
+import {
+  collectLibraryTags,
+  DEFAULT_LIBRARY_QUERY,
+  hasActiveLibraryFilters,
+  parseLibraryTags,
+  queryLibraryDocuments,
+  type LibrarySort,
+  type LibraryStatusFilter,
+} from '../library/libraryQuery'
 import { useModalDrawer } from './useModalDrawer'
 
 type Props = {
@@ -9,8 +19,23 @@ type Props = {
   onSearch: (value: string) => void
   onSelect: (id: string) => void
   onNew: () => void
+  onFavorite: (favorite: boolean) => void
+  onTags: (tags: string[]) => void
   onClose: () => void
 }
+
+const STATUS_FILTERS: Array<{ value: LibraryStatusFilter; label: string }> = [
+  { value: 'all', label: 'Todas' },
+  { value: 'Rascunho', label: 'Rascunho' },
+  { value: 'Em corte', label: 'Em corte' },
+  { value: 'Pronto', label: 'Pronto' },
+]
+
+const SORT_OPTIONS: Array<{ value: LibrarySort; label: string }> = [
+  { value: 'updated-desc', label: 'Alteração recente' },
+  { value: 'created-desc', label: 'Criação recente' },
+  { value: 'title-asc', label: 'Título (A–Z)' },
+]
 
 function relativeTime(timestamp: number): string {
   const minutes = Math.max(0, Math.floor((Date.now() - timestamp) / 60_000))
@@ -21,17 +46,60 @@ function relativeTime(timestamp: number): string {
   return `${Math.floor(hours / 24)} d`
 }
 
-export function Library({ documents, activeId, search, open, onSearch, onSelect, onNew, onClose }: Props) {
+function absoluteTime(timestamp: number): string {
+  return new Intl.DateTimeFormat('pt-BR', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(timestamp)
+}
+
+export function Library({
+  documents,
+  activeId,
+  search,
+  open,
+  onSearch,
+  onSelect,
+  onNew,
+  onFavorite,
+  onTags,
+  onClose,
+}: Props) {
   const panelRef = useModalDrawer<HTMLElement>(open, onClose)
-  const query = search.trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR')
-  const visible = documents.filter((document) => {
-    if (!query) return true
-    const haystack = `${document.title} ${document.plainText} ${document.tags.join(' ')}`
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLocaleLowerCase('pt-BR')
-    return haystack.includes(query)
-  })
+  const [status, setStatus] = useState<LibraryStatusFilter>(DEFAULT_LIBRARY_QUERY.status)
+  const [favoritesOnly, setFavoritesOnly] = useState(DEFAULT_LIBRARY_QUERY.favoritesOnly)
+  const [tag, setTag] = useState(DEFAULT_LIBRARY_QUERY.tag)
+  const [sort, setSort] = useState<LibrarySort>(DEFAULT_LIBRARY_QUERY.sort)
+  const activeDocument = documents.find((document) => document.id === activeId) ?? null
+  const [tagDraft, setTagDraft] = useState('')
+
+  useEffect(() => {
+    setTagDraft(activeDocument?.tags.join(', ') ?? '')
+  }, [activeDocument?.id, activeDocument?.tags])
+
+  const tags = useMemo(() => collectLibraryTags(documents), [documents])
+  const query = useMemo(() => ({ search, status, favoritesOnly, tag, sort }), [favoritesOnly, search, sort, status, tag])
+  const visible = useMemo(() => queryLibraryDocuments(documents, query), [documents, query])
+  const filtersActive = hasActiveLibraryFilters(query)
+  const activeVisible = activeId ? visible.some((document) => document.id === activeId) : true
+
+  useEffect(() => {
+    if (tag && !tags.some((candidate) => candidate === tag)) setTag('')
+  }, [tag, tags])
+
+  const clearFilters = () => {
+    onSearch('')
+    setStatus(DEFAULT_LIBRARY_QUERY.status)
+    setFavoritesOnly(DEFAULT_LIBRARY_QUERY.favoritesOnly)
+    setTag(DEFAULT_LIBRARY_QUERY.tag)
+    setSort(DEFAULT_LIBRARY_QUERY.sort)
+  }
+
+  const saveTags = () => {
+    const parsed = parseLibraryTags(tagDraft)
+    setTagDraft(parsed.join(', '))
+    onTags(parsed)
+  }
 
   return (
     <aside
@@ -63,6 +131,99 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
         <button className="icon-btn" type="button" onClick={onNew} aria-label="Novo documento">＋</button>
       </div>
 
+      {activeDocument && (
+        <section className="library-active" aria-labelledby="library-active-title">
+          <div className="library-active-heading">
+            <div>
+              <span className="section-label" id="library-active-title">Página ativa</span>
+              <strong title={displayTitle(activeDocument)}>{displayTitle(activeDocument)}</strong>
+            </div>
+            <button
+              className={`library-favorite ${activeDocument.favorite ? 'active' : ''}`}
+              type="button"
+              aria-pressed={activeDocument.favorite}
+              aria-label={activeDocument.favorite ? 'Remover página ativa dos favoritos' : 'Marcar página ativa como favorita'}
+              onClick={() => onFavorite(!activeDocument.favorite)}
+            >
+              <span aria-hidden="true">★</span>
+              <span>{activeDocument.favorite ? 'Favorita' : 'Favoritar'}</span>
+            </button>
+          </div>
+          <form
+            className="library-tag-editor"
+            onSubmit={(event) => {
+              event.preventDefault()
+              saveTags()
+            }}
+          >
+            <label htmlFor="library-active-tags">Tags da página ativa</label>
+            <div>
+              <input
+                id="library-active-tags"
+                value={tagDraft}
+                maxLength={280}
+                onChange={(event) => setTagDraft(event.target.value)}
+                placeholder="memória, poesia, capítulo"
+              />
+              <button type="submit">Salvar</button>
+            </div>
+            <small>Até 8 tags, separadas por vírgula.</small>
+          </form>
+        </section>
+      )}
+
+      <section className="library-filters" aria-label="Filtrar e ordenar biblioteca">
+        <div className="library-filter-label">Estado</div>
+        <div className="library-status-filters" role="group" aria-label="Filtrar por estado">
+          {STATUS_FILTERS.map((item) => (
+            <button
+              key={item.value}
+              type="button"
+              className={status === item.value ? 'active' : ''}
+              aria-pressed={status === item.value}
+              onClick={() => setStatus(item.value)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        <button
+          className={`library-favorites-filter ${favoritesOnly ? 'active' : ''}`}
+          type="button"
+          aria-pressed={favoritesOnly}
+          onClick={() => setFavoritesOnly((value) => !value)}
+        >
+          <span aria-hidden="true">★</span> Somente favoritas
+        </button>
+
+        <label className="library-select-field" htmlFor="library-tag-filter">
+          <span>Tag</span>
+          <select id="library-tag-filter" value={tag} onChange={(event) => setTag(event.target.value)}>
+            <option value="">Todas as tags</option>
+            {tags.map((item) => <option key={item} value={item}>{item}</option>)}
+          </select>
+        </label>
+
+        <label className="library-select-field" htmlFor="library-sort">
+          <span>Ordenar</span>
+          <select id="library-sort" value={sort} onChange={(event) => setSort(event.target.value as LibrarySort)}>
+            {SORT_OPTIONS.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+          </select>
+        </label>
+
+        <div className="library-filter-summary" aria-live="polite">
+          <span>{visible.length} de {documents.length} {documents.length === 1 ? 'página' : 'páginas'}</span>
+          {filtersActive && <button type="button" onClick={clearFilters}>Limpar filtros</button>}
+        </div>
+      </section>
+
+      {!activeVisible && activeDocument && (
+        <p className="library-active-outside" role="status">
+          A página ativa continua aberta, mas está fora deste recorte.
+        </p>
+      )}
+
       <nav className="notes" aria-label="Documentos">
         {visible.map((document, index) => (
           <button
@@ -74,18 +235,30 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           >
             <span className="note-stripe" aria-hidden="true" />
             <span className="note-copy">
-              <span className="note-title">{displayTitle(document)}</span>
-              <span className="note-meta">{document.status} · {relativeTime(document.updatedAt)}</span>
+              <span className="note-title">{document.favorite && <span className="note-favorite" aria-label="Favorita">★</span>}{displayTitle(document)}</span>
+              <span className="note-meta" title={`Alterada em ${absoluteTime(document.updatedAt)}`}>{document.status} · {relativeTime(document.updatedAt)}</span>
+              {document.tags.length > 0 && (
+                <span className="note-tags" aria-label={`Tags: ${document.tags.join(', ')}`}>
+                  {document.tags.slice(0, 2).map((item) => <span key={item}>{item}</span>)}
+                  {document.tags.length > 2 && <span>+{document.tags.length - 2}</span>}
+                </span>
+              )}
             </span>
             <span className="note-num">{String(index + 1).padStart(2, '0')}</span>
           </button>
         ))}
-        {!visible.length && <p className="empty-library">Nenhum texto encontrado.</p>}
+        {!visible.length && (
+          <div className="empty-library" role="status">
+            <strong>Nenhuma página neste recorte.</strong>
+            <span>Altere a busca ou limpe os filtros para rever a biblioteca.</span>
+            {filtersActive && <button type="button" onClick={clearFilters}>Limpar filtros</button>}
+          </div>
+        )}
       </nav>
 
       <footer className="sidebar-footer">
-        <span>{documents.length} {documents.length === 1 ? 'página' : 'páginas'}</span>
-        <span>local</span>
+        <span>{visible.length} visíveis</span>
+        <span>{documents.length} no arquivo · local</span>
       </footer>
     </aside>
   )
