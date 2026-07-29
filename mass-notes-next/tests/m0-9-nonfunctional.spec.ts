@@ -23,9 +23,13 @@ async function waitSaved(page: Page) {
   await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
 }
 
+async function editorContractText(page: Page): Promise<string | null> {
+  return page.getByLabel('Texto do documento').evaluate((element) =>
+    (element as ContractHost).__escrevaralPositionContract?.snapshot.text ?? null)
+}
+
 async function waitEditorContract(page: Page, expectedText: string) {
-  await expect.poll(() => page.getByLabel('Texto do documento').evaluate((element) =>
-    (element as ContractHost).__escrevaralPositionContract?.snapshot.text ?? null)).toBe(expectedText)
+  await expect.poll(() => editorContractText(page)).toBe(expectedText)
 }
 
 async function createCleanDocument(page: Page, title: string) {
@@ -38,6 +42,22 @@ async function createCleanDocument(page: Page, title: string) {
   await page.keyboard.press('Control+A')
   await page.keyboard.press('Backspace')
   return editor
+}
+
+async function pasteStructuredText(page: Page, html: string, plain: string) {
+  const editor = page.getByLabel('Texto do documento')
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.press('Backspace')
+  await editor.evaluate((element, payload) => {
+    const transfer = new DataTransfer()
+    transfer.setData('text/html', payload.html)
+    transfer.setData('text/plain', payload.plain)
+    const event = new Event('paste', { bubbles: true, cancelable: true })
+    Object.defineProperty(event, 'clipboardData', { value: transfer })
+    element.dispatchEvent(event)
+  }, { html, plain })
+  await waitEditorContract(page, plain)
 }
 
 async function activeRecord(page: Page): Promise<Record<string, unknown>> {
@@ -157,17 +177,34 @@ test('layout equivalente a zoom de 200% mantém escrita e drawers alcançáveis'
 test('movimento reduzido encurta a transição editorial sem bloquear navegação', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await waitReady(page)
+  await expect.poll(() => page.evaluate(() => matchMedia('(prefers-reduced-motion: reduce)').matches)).toBe(true)
   await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
+
+  await page.evaluate(() => {
+    const target = window as Window & { __m09PagePressDuration?: number | null }
+    target.__m09PagePressDuration = null
+    const capture = () => {
+      const node = document.querySelector('.page-press')
+      if (!(node instanceof HTMLElement)) return false
+      const firstDuration = getComputedStyle(node).animationDuration.split(',')[0]?.trim()
+      const raw = firstDuration || '0s'
+      const parsed = raw.endsWith('ms') ? Number.parseFloat(raw) : Number.parseFloat(raw) * 1_000
+      target.__m09PagePressDuration = Number.isFinite(parsed) ? parsed : 0
+      return true
+    }
+    if (capture()) return
+    const observer = new MutationObserver(() => {
+      if (capture()) observer.disconnect()
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+  })
 
   const started = Date.now()
   await page.getByRole('button', { name: 'Abrir Anatomia do Livro' }).click()
-  const press = page.locator('.page-press')
-  await expect(press).toBeVisible()
-  const durationMs = await press.evaluate((node) => {
-    const firstDuration = getComputedStyle(node).animationDuration.split(',')[0]?.trim()
-    const raw = firstDuration || '0s'
-    return raw.endsWith('ms') ? Number.parseFloat(raw) : Number.parseFloat(raw) * 1_000
-  })
+  await expect.poll(() => page.evaluate(() =>
+    (window as Window & { __m09PagePressDuration?: number | null }).__m09PagePressDuration ?? null)).not.toBeNull()
+  const durationMs = await page.evaluate(() =>
+    (window as Window & { __m09PagePressDuration?: number | null }).__m09PagePressDuration ?? 0)
   expect(durationMs).toBeLessThanOrEqual(300)
   await expect(page.getByRole('main', { name: 'Anatomia do Livro' })).toBeVisible({ timeout: 1_000 })
   expect(Date.now() - started).toBeLessThan(1_000)
@@ -344,11 +381,11 @@ test('corpus separado confirma cada engine sem alterar o texto observado', async
 
   const runWithStableText = async (source: string, action: () => Promise<void>) => {
     await editor.fill(source)
-    const before = await editor.innerText()
-    await waitEditorContract(page, before)
+    await waitEditorContract(page, source)
     await waitSaved(page)
+    const before = await editorContractText(page)
     await action()
-    expect(await editor.innerText()).toBe(before)
+    expect(await editorContractText(page)).toBe(before)
   }
 
   const reviewCorpus = [
@@ -356,13 +393,20 @@ test('corpus separado confirma cada engine sem alterar o texto observado', async
     'Ela tentou mas não conseguiu terminar a revisão antes do café.',
     'Depois, releu as páginas com calma, conferiu os títulos e guardou o arquivo para continuar no fim da tarde.',
   ].join('\n\n')
+  const reviewHtml = [
+    '<p>🌿 A oficina abriu cedo e cada pessoa trouxe um caderno para trabalhar com atenção.</p>',
+    '<p>Ela tentou mas não conseguiu terminar a revisão antes do café.</p>',
+    '<p>Depois, releu as páginas com calma, conferiu os títulos e guardou o arquivo para continuar no fim da tarde.</p>',
+  ].join('')
 
-  await runWithStableText(reviewCorpus, async () => {
-    await page.getByRole('tab', { name: 'revisao', exact: true }).click()
-    await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
-    await expect(page.locator('[data-review-issue-id*="PONT-49"]').first()).toBeVisible({ timeout: 15_000 })
-    await expect(page.locator('.review-located-card').filter({ hasText: 'PONT-49' })).not.toHaveCount(0)
-  })
+  await pasteStructuredText(page, reviewHtml, reviewCorpus)
+  await waitSaved(page)
+  const reviewBefore = await editorContractText(page)
+  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
+  await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
+  await expect(page.locator('[data-review-issue-id*="PONT-49"]').first()).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('.review-located-card').filter({ hasText: 'PONT-49' })).not.toHaveCount(0)
+  expect(await editorContractText(page)).toBe(reviewBefore)
 
   await runWithStableText('A narradora alterna frases curtas e longas, repete imagens de janela e mantém uma voz próxima, reflexiva e cuidadosa com quem lê.', async () => {
     await page.getByRole('tab', { name: 'voz', exact: true }).click()
