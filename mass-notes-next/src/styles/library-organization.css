@@ -139,6 +139,13 @@
   gap: 5px;
 }
 
+.note-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .note-favorite {
   flex: 0 0 auto;
   color: var(--orange);
