@@ -37,89 +37,105 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 15. Gate 10.5 — fronteiras de distribuição.
 16. Organização da biblioteca.
 17. Metadados editoriais.
-18. **Gate 13 — importação auditável do `.esc` legado:** prévia, validação integral, conversão e novas cópias rastreáveis.
+18. Gate 13 — importação auditável do `.esc` legado.
 
-## Evidência funcional anterior ao M0.9
+## Gate 13 — evidência fechada
 
-- cabeça funcional do Gate 13: `323e8a1e131a3692932e960e9285570df49a1460`;
-- Mass Notes: workflow `30457008816`, verde;
-- candidata Argila: workflow `30457009394`, verde;
-- coerência de versões: workflow `30457008762`, verde;
-- 111 cenários por navegador e 222 execuções aprovadas;
-- build, Chromium, Firefox, publicação, cache e smoke público verdes;
-- aplicação pública, `main` e service worker intactos.
+- cabeça funcional: `323e8a1e131a3692932e960e9285570df49a1460`;
+- Mass Notes `30457008816`: 222/222, publicação, cache e smoke público verdes;
+- Argila `30457009394`: verde;
+- coerência `30457008762`: verde;
+- log: `docs/logs/2026-07-29-gate-13-importacao-esc-legado.md`;
+- contrato global: `../docs/product/MASS_NOTES_TIPTAP_GATE_13.md`.
 
-## Gate 13 — contrato fechado funcionalmente
+Contrato:
 
-- formato aceito: envelope JSON `format: esc|vrda`, `schemaVersion: 1`, checksum FNV-1a e `payload.manuscripts`;
-- `src/import/legacyEscImport.ts` concentra parsing, validação, checksum, conversão e plano de prévia;
-- selecionar arquivo não grava; a prévia existe somente em memória;
-- cancelar não altera a biblioteca;
-- versão, checksum, payload, limite, identificadores e conteúdos são validados antes da transação;
-- IDs ausentes ou duplicados invalidam todo o lote;
-- texto legado é convertido com `plainTextToContent`;
-- estado, tags, favorito e datas são mapeados de forma conservadora;
-- confirmação importa o lote inteiro em uma transação IndexedDB;
-- cada documento recebe UUID novo, sufixo `— importado`, `revision: 0` e `legacySourceId` preservado;
+- envelope `format: esc|vrda`, `schemaVersion: 1`, checksum FNV-1a e `payload.manuscripts`;
+- seleção cria prévia em memória, sem escrita;
+- cancelar não altera biblioteca;
+- lote inteiro é validado antes da transação;
+- confirmação cria UUIDs novos, sufixo `— importado`, `revision: 0` e preserva `legacySourceId`;
 - nenhum documento existente é substituído;
-- não há merge automático, deduplicação silenciosa ou importação parcial;
-- processamento permanece local;
-- desktop e drawer móvel foram validados em Chromium e Firefox.
+- não há merge, importação parcial ou deduplicação silenciosa.
 
 ## Milestone atual — M0.9: Candidata Integrada do Escrevaral
 
-O produto atingiu massa crítica. Antes de qualquer novo gate, será auditado como uma oficina integrada, não como uma sequência de capacidades isoladas.
+O produto será auditado como oficina integrada antes de qualquer novo gate.
 
-Memória executável e registro vivo:
+Fontes:
 
-- `docs/M0_9_AUDITORIA_OPERACIONAL.md`.
+- memória viva: `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
+- relatório: `docs/audits/M0_9_AUDITORIA_GERAL.md`;
+- estado estruturado: `docs/audits/M0_9_AUDITORIA_GERAL.json`;
+- contrato global: `../docs/product/MASS_NOTES_TIPTAP_M0_9.md`.
 
-Objetivos:
+## Primeira tranche M0.9 — concluída
 
-1. fechar a linha de base documental do Gate 13;
-2. testar jornadas completas que atravessem editor, biblioteca, engines e preservação;
-3. medir UIX, acessibilidade, responsividade, privacidade, desempenho e release;
-4. comparar explicitamente o produto novo com o Escrevaral antigo;
-5. emitir notas, severidades e veredito com evidências;
-6. responder separadamente sobre beta fechada, lançamento público e substituição do produto antigo.
+Suíte criada:
 
-Regras:
+- `tests/m0-9-integrated.spec.ts`;
+- cinco cenários por navegador;
+- matriz total: 116 cenários por navegador, 232 execuções.
 
-- auditar antes de corrigir;
-- não adicionar feature durante o diagnóstico;
-- correção somente quando necessária para medir ou remover bloqueio P0;
-- repetir a matriz completa após qualquer correção;
-- manter PR em rascunho, `main` e aplicação pública intactos.
+Jornadas aprovadas:
 
-Entregáveis:
+1. escrita → metadados → autosave → recarga;
+2. Revisão → Voz → Contexto → RimaLab → Palavras sem mutação;
+3. busca/filtros sem alterar revisão nem descartar página ativa;
+4. drawer integrado em 320 e 390 px;
+5. 100 páginas e documento acima de 100 mil caracteres.
 
-- suíte transversal Playwright;
-- `docs/audits/M0_9_AUDITORIA_GERAL.md`;
-- `docs/audits/M0_9_AUDITORIA_GERAL.json`;
-- log técnico do milestone;
-- contrato global em `docs/product/`;
-- atualização de README, PLAN, MEMORY, CHANGELOG e PR;
-- CI e smoke público na cabeça exata final.
+Privacidade:
+
+- frase sentinela autoral não apareceu em URL ou corpo de requisição durante as engines.
+
+Incidente:
+
+- primeira execução: 231/232;
+- todos os 10 casos novos passaram;
+- única falha em helper antigo do RimaLab, pois o autosave já estava em `Salvo`;
+- produto não alterado;
+- helper estabilizado sem remover convergência obrigatória para `Salvo`.
+
+Evidência verde:
+
+- cabeça `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
+- Mass Notes `30463426867`: 232/232, publicação, cache e smoke público;
+- Argila `30463426847`: verde;
+- coerência `30463426811`: verde.
+
+Veredito provisório:
+
+- nota geral: 85/100;
+- beta fechada: `SHIP COM CONDIÇÕES`;
+- lançamento público: `NO-SHIP`;
+- substituição integral: `NO-SHIP`;
+- P0: 0;
+- P1: 0;
+- P2: PWA/offline próprio ausente, Prova de Autoria ausente e exportação sem paridade integral.
+
+## Segunda tranche M0.9 — próxima ação
+
+Prioridades:
+
+1. conflito real entre duas páginas envolvendo manuscrito e metadados;
+2. exportação antes da persistência;
+3. cópia nativa/restauração e importação legada na mesma sessão;
+4. acessibilidade ampliada, zoom, movimento reduzido e tecnologias assistivas/dispositivos reais;
+5. observação integral de rede;
+6. sessão prolongada, latência e memória;
+7. corpus ampliado por engine;
+8. decisões explícitas para cada P2;
+9. veredito final e cabeça exata sem commit posterior.
 
 ## Gate 14 — suspenso
 
-Gate 14 continua proposto, mas não pode começar antes do veredito M0.9.
+Gate 14 continua proposto, mas não pode começar antes do veredito final M0.9.
 
 Escopo futuro preservado:
 
-1. persistir somente `search`, `status`, `favoritesOnly`, `tag` e `sort` em armazenamento de preferências;
-2. validar e normalizar valores lidos antes de aplicá-los;
-3. oferecer “Restaurar visão padrão”;
-4. nunca persistir rascunho, seleção, documento ativo ou resultados de engines nesse contrato;
-5. não escrever no IndexedDB nem incrementar `revision`;
-6. manter filtros incompatíveis com dados removidos em fallback seguro;
-7. cobrir nova sessão, armazenamento corrompido, mobile e teclado.
-
-Fora do Gate 14:
-
-- pastas, coleções ou hierarquia;
-- operações em massa;
-- sincronização em nuvem;
-- colaboração;
-- taxonomia automática;
-- promoção para `main`.
+- persistir somente busca, estado, favorito, tag e ordenação como preferências;
+- validar valores lidos;
+- oferecer restauração da visão padrão;
+- não persistir rascunho, seleção, documento ativo ou resultados de engines;
+- não escrever no IndexedDB nem incrementar revisão.
