@@ -66,6 +66,7 @@ Fontes:
 - `docs/audits/M0_9_AUDITORIA_GERAL.md`;
 - `docs/audits/M0_9_AUDITORIA_GERAL.json`;
 - `docs/logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md`;
+- `docs/logs/2026-07-29-m0-9-decisoes-p2.md`;
 - `../docs/product/MASS_NOTES_TIPTAP_M0_9.md`.
 
 ## Tranches automatizadas — concluídas
@@ -118,28 +119,75 @@ Evidência funcional da tranche 3:
 - coerência `30478738607`: verde;
 - artefato `mass-notes-tiptap-30478738806`.
 
-Veredito provisório:
+Evidência documental validada antes da tranche decisória:
+
+- cabeça `4939b3429f166664e377ed2251f28f87345308af`;
+- Mass Notes `30482560502`: 252/252, publicação, cache e smoke público;
+- Argila `30482553803`: verde;
+- coerência `30482553920`: verde.
+
+## Decisões dos P2 — concluídas
+
+Fonte: `docs/logs/2026-07-29-m0-9-decisoes-p2.md`.
+
+### M09-F001 — PWA/offline próprio ausente
+
+- aceito somente para beta fechada explicitamente online;
+- bloqueia lançamento público;
+- exige gate de release próprio depois do M0.9.
+
+### M09-F006 — dependência externa da Anatomia
+
+- aceito somente para beta online, com aviso de dependência de conexão;
+- `page-flip@2.0.7` deverá ser vendorizado, empacotado localmente ou removido antes de promessa offline ou lançamento público;
+- integra o futuro gate de release/autonomia.
+
+### M09-F002 — Prova de Autoria ausente
+
+- não bloqueia beta fechada da oficina de escrita;
+- não pode ser apresentada como paridade entregue;
+- bloqueia substituição integral até restauração da capacidade ou aposentadoria formal da promessa.
+
+### M09-F003 — paridade de exportação incompleta
+
+- TXT, Markdown e HTML permanecem o contrato atual;
+- não bloqueia beta fechada;
+- DOCX é o primeiro candidato a gate posterior, condicionado à evidência de uso;
+- RTF, ePub e Obsidian ZIP serão priorizados por demanda;
+- substituição integral permanece bloqueada para fluxos dependentes.
+
+## Vereditos após decisões
 
 - nota geral: 88/100;
 - beta fechada: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`;
 - P0/P1: 0/0;
-- P2: PWA/offline próprio ausente, Prova de Autoria ausente, exportação sem paridade avançada e dependência externa da Anatomia;
-- P3: preferências da biblioteca não persistem e documento ativo é compartilhado entre abas.
+- os quatro P2 possuem decisão explícita, mas seus bloqueios permanecem ativos onde indicado.
 
-## Próxima tranche — fechamento manual e decisão
+Condições mínimas da beta fechada:
+
+1. beta pequena e acompanhada;
+2. uso online, sem promessa de instalação/offline;
+3. aviso de dependência de conexão para a Anatomia;
+4. exportação limitada a TXT, Markdown e HTML;
+5. Prova de Autoria indisponível;
+6. canal direto para incidentes de dados, acessibilidade e engines;
+7. validação humana mínima antes de convidar participantes externos.
+
+## Próxima tranche — validação humana mínima e encerramento
 
 Prioridades:
 
 1. revisão humana das screenshots nas seis larguras;
 2. zoom real de 200% no navegador;
-3. leitores de tela, tecnologias assistivas e dispositivos físicos quando disponíveis;
-4. uso prolongado em máquina real;
-5. decisão explícita para `M09-F001`, `M09-F002`, `M09-F003` e `M09-F006`;
-6. veredito final separado para beta, lançamento e substituição;
-7. CI na cabeça documental final;
-8. registro exato no PR sem commit posterior.
+3. teclado completo e leitor de tela quando disponível;
+4. pelo menos um dispositivo físico móvel e um desktop;
+5. uso prolongado em máquina real;
+6. registrar resultados, inclusive limitações não executáveis;
+7. emitir veredito final do M0.9;
+8. validar a cabeça documental final;
+9. atualizar somente o corpo do PR, sem commit posterior.
 
 O que a automação não autoriza afirmar:
 
@@ -148,6 +196,15 @@ O que a automação não autoriza afirmar:
 - que dispositivos físicos foram auditados;
 - que as métricas da CI valem para todo hardware;
 - que a Anatomia funciona offline.
+
+## Sequência recomendada depois do M0.9
+
+1. decidir autorização operacional da beta fechada;
+2. gate de release/autonomia: service worker próprio e `page-flip` local;
+3. gate de portabilidade começando por DOCX, se confirmado por uso;
+4. gate ou aposentadoria formal da Prova de Autoria;
+5. reavaliar lançamento público e substituição integral;
+6. somente depois retomar Gate 14 ou repriorizá-lo conforme evidência da beta.
 
 ## Gate 14 — suspenso
 
