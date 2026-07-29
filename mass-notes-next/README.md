@@ -17,8 +17,9 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - exportação estrutural: TXT, Markdown e HTML gerados localmente a partir do JSON Tiptap;
 - cópia nativa: envelope JSON versionado e restauração sempre como novas cópias;
 - Palavras: consulta lexical local por seleção Tiptap ou busca digitada, sem substituir o manuscrito;
+- fronteira de distribuição: a preview Vite possui pipeline próprio e não força versão global da aplicação pública;
 - dependências: travadas por overrides, `package-lock.json` e `npm ci`;
-- Gates 1 a 10: aprovados em Chromium e Firefox;
+- Gates 1 a 10 e Gate 10.5 de higiene: aprovados;
 - matriz atual: 91 cenários por navegador, 182 execuções;
 - próximo passo lógico: Gate 11, organização da biblioteca, sem ampliar a escrita ou aplicar sugestões automaticamente.
 
@@ -51,6 +52,13 @@ Não use `npm install` como caminho normal: o lockfile é parte do contrato de r
 npm run build
 npx playwright install chromium firefox
 npm run test:e2e
+```
+
+A coerência de versões da aplicação pública é validada separadamente por:
+
+```bash
+python3 scripts/test-auditor-asset-version.py
+python3 scripts/auditor-asset-version.py
 ```
 
 ## Organização da fonte
@@ -112,7 +120,10 @@ Serialização, download, seleção lexical e interface permanecem separados. No
 - pauta do papel usa tile de 48 px, não `repeating-linear-gradient`;
 - sombra difusa da folha permanece zerada para não reintroduzir o halo cinza;
 - preview só é atualizada depois de gate verde e verificação pública;
-- a entrada pública não é substituída por esta branch.
+- a entrada pública não é substituída por esta branch;
+- o auditor global de versões considera apenas JS/CSS distribuídos pela aplicação pública raiz;
+- `mass-notes-next/` usa build Vite, hashes e preview próprios e não exige avanço artificial de `ASSET_VERSION`;
+- PRs mistos continuam exigindo nova versão quando qualquer asset público real muda.
 
 ## Camadas visuais atuais
 
