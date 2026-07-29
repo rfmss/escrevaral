@@ -11,7 +11,8 @@ Atualizado em: 2026-07-29
 - Gates 1 a 10: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - matriz atual: 91 cenários por navegador, 182 execuções;
-- workflow funcional final: `30420965045`;
+- workflow final: `30422368445`;
+- cabeça funcional e documental validada: `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a`;
 - engines integradas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - exportações aprovadas: TXT, Markdown e HTML;
 - cópia nativa aprovada: schema `escrevaral.mass-notes-next.backup`, versão `1`;
@@ -45,6 +46,7 @@ Atualizado em: 2026-07-29
 24. Uma inferência morfológica sem ocorrência e sem registro local não é apresentada como verbete existente.
 25. Palavras/Léxico é somente leitura: não altera JSON, histórico, seleção, autosave ou biblioteca.
 26. Tolerâncias geométricas entre navegadores devem considerar arredondamento subpixel sem tolerar overflow real.
+27. Testes que verificam saídas derivadas devem sincronizar o estado React, não apenas a árvore DOM visível do editor.
 
 ## Contrato de documento
 
@@ -131,7 +133,9 @@ Restauração:
 - O primeiro fluxo de seleção lexical dependia de evento efêmero e perdia o recorte quando Palavras ainda não estava montado. A ponte durável substituiu esse desenho.
 - Uma regravação ampla demais simplificou acidentalmente a suíte do RimaLab. A cobertura robusta anterior foi restaurada integralmente, mudando somente a contagem para sete abas.
 - A penúltima execução terminou com 180/182 porque `getBoundingClientRect()` diferiu cerca de 0,2 px entre engines. O teste passou a aceitar 1 px de arredondamento, mantendo verificações rígidas do documento e do rail.
-- O workflow `30420965045` concluiu com 182/182, publicação, cache e verificação pública verdes.
+- O workflow `30420965045` concluiu a cabeça funcional com 182/182, publicação, cache e verificação pública verdes.
+- A primeira validação da cabeça documental teve 181/182 no Firefox porque o fixture de exportação verificava a DOM Tiptap antes de o estado React receber o conteúdo. O helper passou a salvar o documento-base, aguardar a alteração estruturada e salvar novamente antes do download.
+- O workflow final `30422368445` validou a cabeça `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a` com 182/182 e preview pública verde.
 
 ## Limitações conhecidas
 
