@@ -118,6 +118,39 @@ test('Ferramentas abre a Anatomia original, corrige o menu e preserva o editor m
   await expect(title).toHaveValue('CADERNO PRESERVADO NA ANATOMIA')
 })
 
+test('voltar do miolo para a seção exterior mantém o botão correto em laranja', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitEditor(page)
+  await openAnatomy(page)
+
+  const frame = page.frameLocator('iframe[title="Anatomia interativa de um livro"]')
+  const interiorButton = frame.getByRole('button', { name: 'Falsa folha de rosto', exact: true })
+  const coverButton = frame.getByRole('button', { name: 'Capa', exact: true })
+  const stage = frame.locator('.stage')
+
+  await interiorButton.click()
+  await expect(interiorButton).toHaveAttribute('aria-pressed', 'true')
+  await expect(stage).toHaveClass(/uses-pageflip/)
+
+  await coverButton.click()
+  await expect(coverButton).toHaveAttribute('aria-pressed', 'true')
+  await expect(interiorButton).toHaveAttribute('aria-pressed', 'false')
+  await expect(stage).not.toHaveClass(/uses-pageflip/)
+  await expect(frame.locator('#book')).toBeVisible()
+  await expect(frame.locator('.pageflip-shell')).toBeHidden()
+  await expect(frame.locator('#caption h2')).toHaveText('Capa')
+  await expect(frame.locator('#headerState')).toHaveText('Capa')
+
+  // O evento de flip pode chegar depois do clique exterior. A seleção não pode regredir.
+  await page.waitForTimeout(1_600)
+  await expect(coverButton).toHaveAttribute('aria-pressed', 'true')
+  await expect(interiorButton).toHaveAttribute('aria-pressed', 'false')
+  await expect(stage).not.toHaveClass(/uses-pageflip/)
+  await expect(frame.locator('#book')).toBeVisible()
+  await expect(frame.locator('.pageflip-shell')).toBeHidden()
+  await expect(frame.locator('#caption h2')).toHaveText('Capa')
+})
+
 test('o HTML público é azul, direto e não contém loader intermediário', async ({ page }) => {
   const response = await page.request.get('/anatomia-do-livro.html')
   expect(response.ok()).toBe(true)
@@ -132,6 +165,7 @@ test('o HTML público é azul, direto e não contém loader intermediário', asy
   expect(html).toContain('assets/anatomia/anatomia-asset-1.webp')
   expect(html).toContain('assets/anatomia/anatomia-asset-2.webp')
   expect(html).toContain("document.documentElement.classList.add('is-embedded')")
+  expect(html).toContain("if(!stage.classList.contains('uses-pageflip')||selectedInteriorIndex===null)")
   expect(html).not.toContain('--paper:#f1e7d4')
   expect(html).not.toContain('data:image/png;base64')
   expect(html).not.toContain('atob(')
