@@ -6,6 +6,12 @@ async function waitReady(page: Page) {
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
+async function waitSaved(page: Page) {
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible({ timeout: 5_000 })
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+}
+
 async function createCleanDocument(page: Page, title: string) {
   const initialCount = await page.locator('.note-card').count()
   await page.keyboard.press('Control+N')
@@ -39,6 +45,7 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
   const editor = await createCleanDocument(page, 'Leitura de contexto')
   const source = 'Ele tentou denegrir a colega e repetiu que iria denegrir seu trabalho. Depois citou uma lista negra em um documento antigo.'
   await editor.fill(source)
+  await waitSaved(page)
   await openContext(page)
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
 
@@ -55,7 +62,6 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
   await expect(listaNegra).toContainText('1 ocorrência')
   await expect(page.locator('.context-disclaimer')).toContainText(/decisão final é de quem escreve/i)
   await expect(page.locator('.context-disclaimer')).toContainText(/nenhuma alternativa é aplicada automaticamente/i)
-
   await expect(editor).toContainText(source)
   await expect(page.locator('.context-card button')).toHaveCount(0)
 
@@ -72,6 +78,7 @@ test('texto sem ocorrências recebe retorno neutro', async ({ page }) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Sem termos da base')
   await editor.fill('A menina abriu a janela, ouviu a chuva no quintal e voltou para a mesa com o caderno nas mãos.')
+  await waitSaved(page)
   await openContext(page)
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
 
@@ -83,6 +90,7 @@ test('resultado contextual é invalidado quando o conteúdo muda', async ({ page
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Contexto em mudança')
   await editor.fill('O relatório usava a expressão lista negra em uma citação antiga.')
+  await waitSaved(page)
   await openContext(page)
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
   await expect(page.locator('.context-card')).toHaveCount(1)
@@ -99,6 +107,7 @@ test('falha controlada da engine não quebra o editor', async ({ page }) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Falha contextual')
   await editor.fill('O texto menciona uma lista negra.')
+  await waitSaved(page)
   await openContext(page)
 
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
