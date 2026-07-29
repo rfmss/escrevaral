@@ -52,6 +52,25 @@ function matchesSearch(document: EscrevaralDocument, search: string): boolean {
   return haystack.includes(query)
 }
 
+function diacriticCount(value: string): number {
+  return (value.normalize('NFD').match(/[\u0300-\u036f]/g) ?? []).length
+}
+
+function compareTagVariants(a: string, b: string): number {
+  const byDiacritics = diacriticCount(b) - diacriticCount(a)
+  if (byDiacritics !== 0) return byDiacritics
+
+  const aStartsUppercase = /^\p{Lu}/u.test(a)
+  const bStartsUppercase = /^\p{Lu}/u.test(b)
+  if (aStartsUppercase !== bStartsUppercase) return aStartsUppercase ? -1 : 1
+
+  return a.localeCompare(b, 'pt-BR', {
+    sensitivity: 'variant',
+    caseFirst: 'upper',
+    numeric: true,
+  })
+}
+
 export function queryLibraryDocuments(
   documents: EscrevaralDocument[],
   query: LibraryQuery,
@@ -80,11 +99,15 @@ export function collectLibraryTags(documents: EscrevaralDocument[]): string[] {
     for (const rawTag of document.tags) {
       const tag = rawTag.trim()
       const normalized = normalizeLibraryText(tag)
-      if (!normalized || byNormalizedTag.has(normalized)) continue
-      byNormalizedTag.set(normalized, tag)
+      if (!normalized) continue
+      const current = byNormalizedTag.get(normalized)
+      if (!current || compareTagVariants(tag, current) < 0) byNormalizedTag.set(normalized, tag)
     }
   }
-  return [...byNormalizedTag.values()].sort((a, b) => a.localeCompare(b, 'pt-BR', { sensitivity: 'base' }))
+  return [...byNormalizedTag.values()].sort((a, b) => (
+    a.localeCompare(b, 'pt-BR', { sensitivity: 'base', numeric: true })
+    || compareTagVariants(a, b)
+  ))
 }
 
 export function hasActiveLibraryFilters(query: LibraryQuery): boolean {
