@@ -55,9 +55,11 @@ A engine não conhece React ou Tiptap. O editor publica somente o snapshot; o pa
 
 Uma futura ação de substituição, catálogo de sinônimos ou análise de frase exige gate separado, com comando Tiptap explícito, histórico reversível e testes próprios. Não é permitido introduzir aplicação automática como extensão silenciosa deste gate.
 
+Os testes de superfícies derivadas devem aguardar a sincronização entre a árvore visível do Tiptap e o estado React usado por exportação ou persistência. Verificar apenas a DOM não comprova que o snapshot autoral já foi propagado.
+
 ## Evidência
 
-Workflow `30420965045`: build, Chromium, Firefox, publicação, cache e verificação pública aprovados; 91 cenários por navegador e 182 execuções verdes.
+Workflow final `30422368445`, cabeça `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a`: build, Chromium, Firefox, publicação, cache e verificação pública aprovados; 91 cenários por navegador e 182 execuções verdes.
 
 ## Fora do gate
 
