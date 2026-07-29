@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
 import { readLexicalWord, type LexicalReading } from '../engines/lexicalAdapter'
 
-export type LexicalSelection = {
+type LexicalSelectionEvent = CustomEvent<{
+  documentId: string
   text: string
   from: number
   to: number
-}
+}>
 
 type Props = {
   document: EscrevaralDocument
-  selection: LexicalSelection | null
 }
 
 const DECISION_LABELS = {
@@ -24,7 +24,7 @@ function normalizeQuery(value: string): string {
   return value.trim().replace(/\s+/g, ' ').slice(0, 120)
 }
 
-export function LexicalPanel({ document, selection }: Props) {
+export function LexicalPanel({ document }: Props) {
   const [query, setQuery] = useState('')
   const [reading, setReading] = useState<LexicalReading | null>(null)
   const [message, setMessage] = useState('Selecione uma palavra no texto ou faça uma busca local.')
@@ -54,10 +54,16 @@ export function LexicalPanel({ document, selection }: Props) {
   }
 
   useEffect(() => {
-    const selected = normalizeQuery(selection?.text ?? '')
-    if (!selected || selected.split(/\s+/).length > 4) return
-    void run(selected)
-  }, [selection?.from, selection?.to, selection?.text])
+    const onSelection = (event: Event) => {
+      const detail = (event as LexicalSelectionEvent).detail
+      if (!detail || detail.documentId !== document.id) return
+      const selected = normalizeQuery(detail.text)
+      if (!selected || selected.split(/\s+/).length > 4) return
+      void run(selected)
+    }
+    window.addEventListener('escrevaral:lexical-selection', onSelection)
+    return () => window.removeEventListener('escrevaral:lexical-selection', onSelection)
+  }, [document.id, document.plainText])
 
   useEffect(() => {
     setReading(null)
