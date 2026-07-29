@@ -9,18 +9,19 @@ Atualizado em: 2026-07-28
 - preview: branch `preview-mass-notes-tiptap`;
 - aplicação pública e `main`: intactas;
 - editor artesanal anterior: referência de UX, não fundação técnica;
-- Gates 1, 2, 3, 4, 5, 6, 6.5, 6.75, 6.9 e 7: verdes;
+- Gates 1, 2, 3, 4, 5, 6, 6.5, 6.75, 6.9, 7, 8 e 9A: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
 - engines integradas: Revisão, Espelho de Voz, Termos que pedem contexto e RimaLab;
 - contrato de posições aprovado e auditado com textos brasileiros reais;
 - primeira projection inline aprovada somente para ranges verificáveis da Revisão;
 - navegação de cartão para trecho e ocultação reversível aprovadas;
-- estabilização visual aprovada sem redesign;
-- fusão visual Blueprint Tokon aprovada sem alterar layout;
+- estabilização visual e fusão Blueprint Tokon aprovadas sem alterar a fundação;
+- Anatomia do Livro integrada por runtime fiel e leve gerado na CI;
+- exportação estrutural local aprovada em TXT, Markdown e HTML;
 - dependências reproduzíveis por overrides, `package-lock.json` e `npm ci`;
 - preview com assets estáveis, fallback e smoke test público;
-- matriz atual: 67 cenários por navegador, 134 execuções;
-- próximo passo: avaliação manual do Gate 7 na preview, sem iniciar novo gate automaticamente.
+- matriz atual: 80 cenários por navegador, 160 execuções;
+- próximo passo lógico proposto: Gate 9B, cópia nativa e restauração segura.
 
 ## Decisões que não devem ser reabertas sem evidência
 
@@ -81,6 +82,15 @@ Atualizado em: 2026-07-28
 55. A forma do DOM não é contrato para decorations sobrepostas; cartões e navegação por ocorrência são o comportamento observável.
 56. Ocultar marcas muda somente a apresentação e não apaga cartões, ranges, leitura ou conteúdo.
 57. Assets de preview usam nomes estáveis e o workflow precisa validar o endereço público antes de concluir.
+58. `anatomia-original.html` é a fonte preservada; o runtime público é gerado durante a CI e não deve ser reconstruído manualmente.
+59. `preview-mass-notes-tiptap` é produto de build. Correções definitivas pertencem à branch de fonte.
+60. Exportações partem do JSON Tiptap; `plainText` não substitui a estrutura quando o formato consegue representá-la.
+61. Serialização pura, download do navegador e interface React ficam em módulos separados.
+62. HTML exportado escapa conteúdo e só mantém links com protocolos `http`, `https`, `mailto` ou `tel`.
+63. Exportar é operação somente de leitura: não altera JSON, título, seleção, histórico, revisão, biblioteca ou persistência.
+64. Cada formato preserva somente a semântica que consegue representar honestamente; TXT não finge possuir rich text.
+65. DOCX, RTF, ePub, Obsidian e exportação múltipla exigem gates próprios e não entram por acréscimo oportunista ao serializador atual.
+66. Exportação de documento não é cópia de segurança. Backup precisa de envelope versionado, validação, política de colisão e restauração não destrutiva.
 
 ## Incidentes que orientam a arquitetura
 
@@ -116,6 +126,8 @@ Atualizado em: 2026-07-28
 - Decorations sobrepostas fundiram atributos DOM; a suíte passou a provar cartões e navegações reais, não contagem de atributos internos.
 - O prop `document` sombreou o global do navegador; TypeScript impediu `document.body` e a referência passou a ser `window.document.body`.
 - Mudanças concorrentes criaram dois controles de visibilidade e dois testes equivalentes; ficaram apenas o controle contextual e a suíte dedicada.
+- O StPageFlip emitiu evento tardio depois do retorno do miolo; o handler passou a ignorá-lo quando o palco não usa pageflip ou não há índice interior selecionado.
+- A primeira execução do Gate 9A falhou porque o teste esperava um espaço dentro da tag `<em>` que não existia no HTML correto; a asserção foi corrigida sem alterar o exportador.
 
 ## Contratos técnicos ativos
 
@@ -178,6 +190,20 @@ A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo,
 - visibilidade é apresentação reversível por classe no `body`;
 - nenhuma sugestão é aplicada.
 
+### Exportação estrutural
+
+- `src/export/documentExport.ts` contém a serialização pura e o download isolado;
+- `src/components/ExportPanel.tsx` contém somente a interface dos formatos;
+- `src/styles/export-panel.css` contém a apresentação do painel;
+- a API aceita um `EscrevaralDocument` e um `ExportFormat` explícito;
+- formatos aprovados: `txt`, `md` e `html`;
+- títulos, parágrafos, headings, `hardBreak`, marks, blockquote e listas são percorridos pelo JSON;
+- conteúdo HTML e atributos são escapados;
+- protocolos não permitidos são descartados, preservando o texto visível;
+- nomes de arquivo são normalizados sem depender do DOM;
+- o download usa `Blob` e URL temporária, revogada após o disparo;
+- falhas futuras de um formato não devem contaminar os demais.
+
 ### Dependências
 
 - versões Tiptap diretas permanecem exatas;
@@ -199,24 +225,27 @@ A auditoria editorial aprovada cobre 39 ranges por navegador em prosa, diálogo,
 - marca e título possuem regressões geométricas em Chromium e Firefox;
 - seleção, ação principal e análise possuem papéis cromáticos separados;
 - o canvas usa blueprint azul, enquanto o papel claro permanece `#f3eee4`;
-- a pauta é tileada a cada 48 px para não colorir a folha inteira.
+- a pauta é tileada a cada 48 px para não colorir a folha inteira;
+- o painel de exportação usa o rail existente e não cria modal, overlay ou camada visual paralela.
 
 ### Qualidade
 
-Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor, para cada infraestrutura linguística e para mudanças visuais transversais. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural, round-trip de posições, contraste ou asserções geométricas.
+Toda regressão relevante deve virar teste quando automatizável. Chromium e Firefox são obrigatórios para o editor, para cada infraestrutura linguística, para exportação e para mudanças visuais transversais. Capturas são evidência complementar; não substituem interação, corpus controlado, assinatura estrutural, round-trip de posições, conteúdo real do download, contraste ou asserções geométricas.
 
-Matriz atual: 67 cenários por navegador, 134 execuções no Gate 7. Workflow `30367072054`: build, navegadores, preview e smoke test público verdes.
+Matriz atual: 80 cenários por navegador, 160 execuções no Gate 9A. Workflow `30415258895`: build, navegadores, publicação, renovação de cache e verificação pública verdes.
 
 ## Limitações conhecidas
 
 Ainda não estão aprovados:
 
+- cópia nativa e restauração do Mass Notes Next;
+- compatibilidade de restauração com `.esc` legado;
+- DOCX, RTF, ePub, Obsidian e exportação múltipla;
 - decorations para Voz, Contexto, RimaLab ou qualquer outra engine;
 - aplicação automática de sugestões;
 - calibração ampla do RimaLab com cordel, repente, canção, poesia falada e variedades regionais;
 - service worker e abertura offline em nova sessão;
 - Tauri e SQLite;
-- DOCX;
 - paginação física;
 - leitores de tela reais;
 - teclado virtual real;
@@ -227,7 +256,7 @@ Ainda não estão aprovados:
 1. ler `README.md`, `PLAN.md`, `MEMORY.md` e o log mais recente;
 2. conferir o estado do PR `#155` e o último workflow;
 3. instalar com `npm ci`, nunca depender de resolução transitiva nova;
-4. abrir a preview e executar a avaliação manual do Gate 7 antes de desenvolver;
+4. abrir a preview e verificar os três downloads do Gate 9A antes de desenvolver outro lote;
 5. não pressupor que capturas representam o produto atual;
 6. reproduzir qualquer falha antes de corrigir;
 7. declarar se um offset é UTF-16 antes de comparar resultados;
@@ -236,4 +265,6 @@ Ainda não estão aprovados:
 10. não ampliar decorations para outra engine sem autorização explícita e gate próprio;
 11. preservar os tokens semânticos e testar os dois temas ao alterar componentes;
 12. preservar a separação entre canvas Blueprint e papel quente;
-13. atualizar esta memória ao encerrar o lote.
+13. para o Gate 9B, registrar primeiro o envelope versionado, a política de colisão e a restauração não destrutiva;
+14. não misturar cópia de segurança com novos formatos editoriais;
+15. atualizar esta memória ao encerrar o lote.
