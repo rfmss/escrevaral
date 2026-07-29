@@ -20,6 +20,15 @@ export type LexicalReading = {
 
 type LegacyReading = Record<string, unknown>
 
+type ContextualOverride = {
+  className: string
+  decision: LexicalDecision
+  functionName?: string
+  field?: string
+  note: string
+  syntacticFunction?: string
+}
+
 let loadingPromise: Promise<boolean> | null = null
 
 declare global {
@@ -32,6 +41,59 @@ declare global {
     __escrevaralLexicalLoaded?: boolean
   }
 }
+
+const SUBJECT_PRONOUNS = new Set([
+  'eu', 'tu', 'ele', 'ela', 'nós', 'vós', 'eles', 'elas', 'você', 'vocês',
+])
+
+const DETERMINERS = new Set([
+  'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas',
+  'este', 'esta', 'estes', 'estas', 'esse', 'essa', 'esses', 'essas',
+  'aquele', 'aquela', 'aqueles', 'aquelas',
+])
+
+const PASSIVE_AUXILIARIES = new Set([
+  'sou', 'és', 'é', 'somos', 'sois', 'são',
+  'fui', 'foi', 'fomos', 'foram',
+  'era', 'éramos', 'eram', 'será', 'serão', 'seria', 'seriam',
+  'seja', 'sejam', 'fosse', 'fossem', 'sido',
+])
+
+const PARTICIPLE_FORMS = new Map<string, string>([
+  ['preso', 'prender'], ['presa', 'prender'], ['presos', 'prender'], ['presas', 'prender'],
+  ['contido', 'conter'], ['contida', 'conter'], ['contidos', 'conter'], ['contidas', 'conter'],
+  ['oculto', 'ocultar'], ['oculta', 'ocultar'], ['ocultos', 'ocultar'], ['ocultas', 'ocultar'],
+])
+
+const AMBIGUOUS_PRESENT_FORMS = new Map<string, string>([
+  ['canto', 'cantar'],
+  ['larga', 'largar'],
+  ['estreita', 'estreitar'],
+])
+
+const POST_NOMINAL_ADJECTIVES = new Set([
+  'larga', 'largo', 'largas', 'largos',
+  'estreita', 'estreito', 'estreitas', 'estreitos',
+])
+
+const FIXED_EXPRESSIONS = new Map<string, ContextualOverride>([
+  ['por enquanto', {
+    className: 'Locução adverbial',
+    decision: 'classificado',
+    functionName: 'Valor temporal',
+    field: 'tempo',
+    note: 'A expressão inteira situa a ação no tempo; não é a soma isolada de “por” e “enquanto”.',
+    syntacticFunction: 'Adjunto adverbial de tempo',
+  }],
+  ['enquanto isso', {
+    className: 'Locução adverbial',
+    decision: 'classificado',
+    functionName: 'Conector temporal',
+    field: 'tempo',
+    note: 'A expressão inteira conecta acontecimentos simultâneos ou próximos no discurso.',
+    syntacticFunction: 'Adjunto adverbial de tempo',
+  }],
+])
 
 function text(value: unknown): string {
   return typeof value === 'string' ? value : value == null ? '' : String(value)
@@ -49,6 +111,87 @@ function normalizeForMatch(value: string): string {
     .replace(/[^\p{L}\p{N}'’-]+/gu, ' ')
     .trim()
     .replace(/\s+/g, ' ')
+}
+
+function normalizePreservingDiacritics(value: string): string {
+  return value
+    .toLocaleLowerCase('pt-BR')
+    .replace(/[^\p{L}\p{N}'’-]+/gu, ' ')
+    .trim()
+    .replace(/\s+/g, ' ')
+}
+
+function tokenize(value: string): string[] {
+  return normalizePreservingDiacritics(value).match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) ?? []
+}
+
+function findTokenSequence(tokens: string[], queryTokens: string[]): number {
+  if (queryTokens.length === 0 || queryTokens.length > tokens.length) return -1
+  for (let index = 0; index <= tokens.length - queryTokens.length; index += 1) {
+    if (queryTokens.every((token, offset) => tokens[index + offset] === token)) return index
+  }
+  return -1
+}
+
+function contextualOverride(query: string, context: string): ContextualOverride | null {
+  const cleanQuery = normalizePreservingDiacritics(query)
+  const fixed = FIXED_EXPRESSIONS.get(cleanQuery)
+  if (fixed) return fixed
+
+  const contextTokens = tokenize(context)
+  const queryTokens = tokenize(cleanQuery)
+  const index = findTokenSequence(contextTokens, queryTokens)
+  if (index < 0 || queryTokens.length !== 1) return null
+
+  const token = queryTokens[0]
+  const previous = contextTokens[index - 1] ?? ''
+  const twoBefore = contextTokens[index - 2] ?? ''
+
+  // Acento é informação gramatical, não mero detalhe de busca.
+  // “publica” é forma de publicar; “pública” permanece adjetivo na engine base.
+  if (token === 'publica') {
+    return {
+      className: 'Verbo flexionado',
+      decision: 'classificado',
+      functionName: 'Forma do verbo publicar',
+      note: 'Sem acento, “publica” é forma verbal. A forma adjetiva correspondente é “pública”.',
+      syntacticFunction: 'Núcleo do predicado verbal',
+    }
+  }
+
+  const participleLemma = PARTICIPLE_FORMS.get(token)
+  if (participleLemma && PASSIVE_AUXILIARIES.has(previous)) {
+    return {
+      className: 'Verbo no particípio',
+      decision: 'provavel',
+      functionName: `Particípio do verbo ${participleLemma}`,
+      note: `Depois do auxiliar “${previous}”, a leitura mais provável é uma construção de voz passiva.`,
+      syntacticFunction: 'Núcleo verbal da voz passiva',
+    }
+  }
+
+  const verbLemma = AMBIGUOUS_PRESENT_FORMS.get(token)
+  if (verbLemma && SUBJECT_PRONOUNS.has(previous)) {
+    return {
+      className: 'Verbo flexionado',
+      decision: 'provavel',
+      functionName: `Forma do verbo ${verbLemma}`,
+      note: `Depois do pronome sujeito “${previous}”, a leitura verbal é a mais provável neste contexto.`,
+      syntacticFunction: 'Núcleo do predicado verbal',
+    }
+  }
+
+  if (POST_NOMINAL_ADJECTIVES.has(token) && DETERMINERS.has(twoBefore) && previous) {
+    return {
+      className: 'Adjetivo',
+      decision: 'provavel',
+      functionName: 'Caracterização nominal',
+      note: `Depois do nome “${previous}”, a palavra atua provavelmente como característica desse nome.`,
+      syntacticFunction: 'Adjunto adnominal',
+    }
+  }
+
+  return null
 }
 
 function collectRegisteredTerms(value: unknown, target: Set<string>): void {
@@ -190,6 +333,16 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
   let field = text(source.field).trim()
   let note = text(source.note).trim()
   let syntacticFunction = text(source.funcaoSintatica).trim()
+
+  const contextual = contextualOverride(cleanWord, context)
+  if (contextual) {
+    className = contextual.className
+    decision = contextual.decision
+    functionName = contextual.functionName ?? functionName
+    field = contextual.field ?? field
+    note = contextual.note
+    syntacticFunction = contextual.syntacticFunction ?? syntacticFunction
+  }
 
   if (count === 0 && decision === 'provavel') {
     className = 'Classe não determinada sem contexto'
