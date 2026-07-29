@@ -1,6 +1,6 @@
 # Memória consolidada — Mass Notes Next
 
-Atualizado em: 2026-07-28
+Atualizado em: 2026-07-29
 
 ## Estado atual
 
@@ -8,14 +8,14 @@ Atualizado em: 2026-07-28
 - PR: `#155`, rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 9B: verdes;
+- Gates 1 a 10: verdes;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: 86 cenários por navegador, 172 execuções;
-- workflow final: `30417867701`;
-- engines integradas: Revisão, Espelho de Voz, Contexto e RimaLab;
+- matriz atual: 91 cenários por navegador, 182 execuções;
+- workflow funcional final: `30420965045`;
+- engines integradas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - exportações aprovadas: TXT, Markdown e HTML;
 - cópia nativa aprovada: schema `escrevaral.mass-notes-next.backup`, versão `1`;
-- próximo gate proposto: Palavras/Léxico.
+- próximo gate proposto: organização da biblioteca.
 
 ## Decisões permanentes
 
@@ -39,6 +39,12 @@ Atualizado em: 2026-07-28
 18. Mudança do contrato de backup exige nova versão ou migrador explícito.
 19. O `.esc` legado não é equivalente ao envelope novo e exige adaptador próprio.
 20. O canvas Blueprint é ambiente; o manuscrito permanece o objeto principal.
+21. A seleção lexical possui ponte própria e tipada; não usa estado global improvisado nem depende de o painel estar montado.
+22. O snapshot lexical inclui identidade do documento e posições ProseMirror, além do texto selecionado.
+23. Uma definição registrada pode ser consultada sem ocorrência, mas classe contextual não pode ser inventada sem contexto.
+24. Uma inferência morfológica sem ocorrência e sem registro local não é apresentada como verbete existente.
+25. Palavras/Léxico é somente leitura: não altera JSON, histórico, seleção, autosave ou biblioteca.
+26. Tolerâncias geométricas entre navegadores devem considerar arredondamento subpixel sem tolerar overflow real.
 
 ## Contrato de documento
 
@@ -54,6 +60,32 @@ Cada documento mantém pelo menos:
 - `createdAt` e `updatedAt`;
 - `revision`;
 - eventual `legacySourceId`.
+
+## Contrato de seleção lexical
+
+Snapshot em memória:
+
+- `documentId`: impede transportar seleção para outro documento;
+- `from` e `to`: posições do estado ProseMirror;
+- `text`: recorte normalizado para consulta, limitado a 120 caracteres;
+- publicação em `onCreate`, `onUpdate` e `onSelectionUpdate`;
+- leitura imediata do último snapshot e assinatura para atualizações futuras.
+
+A superfície Palavras aceita seleção curta ou busca digitada. O adaptador carrega localmente:
+
+- `lexical-engine.js`;
+- `lexical-data.json`;
+- `norma-data.json`.
+
+Regras defensivas:
+
+- consulta vazia ou longa demais é recusada;
+- ocorrências são contadas localmente com normalização de acentos;
+- registro explícito é reconhecido pelas bases e chaves declaradas da engine;
+- sem ocorrência e sem registro, o fallback morfológico é descartado;
+- sem ocorrência, uma leitura apenas provável perde função sintática e classe contextual;
+- falha de carregamento gera estado seguro e não interrompe o editor;
+- nenhum serviço externo é consultado.
 
 ## Contrato de cópia nativa
 
@@ -94,6 +126,12 @@ Restauração:
 - A preview ficou branca por cache apontando para assets hash removidos; publicação passou a usar assets estáveis, purge e smoke público.
 - O primeiro ciclo do Gate 9A teve uma asserção HTML com espaço incorreto; o teste foi corrigido sem alterar o exportador.
 - A primeira execução do Gate 9B teve 171 aprovações e uma falha temporal antiga do Gate 7 no Firefox; a repetição integral terminou 172/172 verde.
+- No início do Gate 10, testes abriram o botão móvel também no desktop e uma regressão antiga fixava seis abas; ambos os contratos de teste foram corrigidos.
+- A palavra “melancolia” revelou que a engine podia inferir `Verbo (imperfeito)` sem uma ocorrência no texto. O adaptador passou a separar definição registrada de classe contextual.
+- O primeiro fluxo de seleção lexical dependia de evento efêmero e perdia o recorte quando Palavras ainda não estava montado. A ponte durável substituiu esse desenho.
+- Uma regravação ampla demais simplificou acidentalmente a suíte do RimaLab. A cobertura robusta anterior foi restaurada integralmente, mudando somente a contagem para sete abas.
+- A penúltima execução terminou com 180/182 porque `getBoundingClientRect()` diferiu cerca de 0,2 px entre engines. O teste passou a aceitar 1 px de arredondamento, mantendo verificações rígidas do documento e do rail.
+- O workflow `30420965045` concluiu com 182/182, publicação, cache e verificação pública verdes.
 
 ## Limitações conhecidas
 
@@ -103,10 +141,12 @@ Ainda não estão aprovados:
 - criptografia ou senha de backup;
 - seleção parcial ou merge de restauração;
 - DOCX, RTF, ePub e Obsidian ZIP;
+- catálogo de sinônimos na superfície nova de Palavras;
+- análise sintática de frases na superfície nova de Palavras;
 - service worker/offline em nova sessão;
 - Tauri e SQLite;
 - paginação física;
-- decorations para Voz, Contexto ou RimaLab;
+- decorations para Voz, Contexto, RimaLab ou Palavras;
 - aplicação automática de sugestões;
 - promoção para a entrada pública.
 
@@ -119,4 +159,6 @@ Ainda não estão aprovados:
 5. não alterar engines ou bases para fazer teste passar;
 6. preservar JSON Tiptap como fonte estrutural;
 7. registrar nova versão antes de mudar o envelope nativo;
-8. iniciar o Gate 10 somente após inventariar engine e bases de Palavras/Léxico.
+8. preservar `lexicalSelectionBridge.ts` como fronteira entre editor e Palavras;
+9. não reclassificar palavra ausente como se houvesse contexto;
+10. iniciar o Gate 11 somente após inventariar filtros e campos já existentes na biblioteca.
