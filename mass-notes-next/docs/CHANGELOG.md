@@ -127,10 +127,43 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - workflow `30452750643` aprovou build, Chromium, Firefox, publicação, cache e verificação pública;
 - candidata Argila `30452747030` e coerência `30452747019` também ficaram verdes.
 
-## Próximo lote proposto
+### Gate 13 — importação auditável do `.esc` legado
 
-- Gate 13: importação auditável do `.esc` legado;
-- validar e pré-visualizar o arquivo antes de qualquer escrita;
-- converter por adaptador isolado e importar somente como novas cópias;
-- preservar `legacySourceId` para rastreabilidade sem reutilizar IDs;
-- nenhuma sincronização, colaboração, hierarquia persistente ou promoção para `main`.
+- inventariado o formato legado real em `vrda-engine.js`, `backup-engine.js` e `archive-engine.js`;
+- criado `src/import/legacyEscImport.ts` para parsing, validação, checksum, conversão e prévia;
+- aceitos somente envelopes `format: esc|vrda`, `schemaVersion: 1`, checksum FNV-1a e `payload.manuscripts` não vazio;
+- seleção do arquivo passou a criar apenas um plano em memória, sem escrita;
+- criada prévia com quantidade, formato, títulos, tipo legado, palavras e estado convertido;
+- cancelamento descarta o plano sem alterar a biblioteca;
+- IDs ausentes ou duplicados, versões futuras, checksum inválido, payload inválido e lotes acima do limite rejeitam todo o arquivo;
+- texto legado é convertido para JSON Tiptap por `plainTextToContent`;
+- estado, tags, favorito e datas são mapeados de modo conservador;
+- criada `importLegacyDocumentsAsCopies` com uma única transação IndexedDB;
+- documentos importados recebem UUID novo, `revision: 0`, sufixo `— importado` e `legacySourceId` preservado;
+- nenhum documento existente é substituído;
+- não há importação parcial, merge ou deduplicação silenciosa;
+- criada folha `src/styles/legacy-import.css`;
+- adicionados seis cenários por navegador para prévia, cancelamento, metadados, corrupção, reimportação e mobile;
+- primeira matriz ficou 219/222 por duas expectativas antigas do Gate 9B e uma condição temporal isolada do Gate 12 no Firefox;
+- todos os cenários novos do Gate 13 passaram na primeira execução;
+- expectativa do Gate 9B foi atualizada para as três ações legítimas do painel;
+- segunda matriz aprovou 222/222 sem alterar o contrato do importador;
+- workflow `30457008816` aprovou build, Chromium, Firefox, publicação, cache e smoke público;
+- candidata Argila `30457009394` e coerência `30457008762` ficaram verdes.
+
+### M0.9 — Candidata Integrada do Escrevaral
+
+- criada `docs/M0_9_AUDITORIA_OPERACIONAL.md` como memória executável e viva;
+- registradas fases de jornada, engines, portabilidade, UIX, acessibilidade, privacidade, desempenho e release;
+- criado placar vivo, registro de decisões, achados, evidências e matriz de paridade;
+- definido que beta, lançamento público e substituição do produto antigo terão vereditos separados;
+- Gate 14 foi suspenso até a conclusão da auditoria;
+- nenhuma feature nova será iniciada antes do diagnóstico integrado.
+
+## Próximo trabalho autorizado
+
+- fechar a linha de base documental do Gate 13;
+- criar e executar a suíte transversal M0.9;
+- produzir relatório, JSON de notas/severidades, log e contrato global;
+- emitir veredito com evidência na cabeça exata;
+- manter PR em rascunho e `main` intacta.
