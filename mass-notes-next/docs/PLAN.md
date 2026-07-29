@@ -63,6 +63,7 @@ O produto é auditado como oficina integrada antes de qualquer novo gate.
 Fontes:
 
 - `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
+- `docs/M0_9_ERRATA_MATRIZ.md`;
 - `docs/audits/M0_9_AUDITORIA_GERAL.md`;
 - `docs/audits/M0_9_AUDITORIA_GERAL.json`;
 - `docs/logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md`;
@@ -73,9 +74,11 @@ Fontes:
 
 Suítes:
 
-- `tests/m0-9-integrated.spec.ts` — oito jornadas por navegador;
-- `tests/m0-9-nonfunctional.spec.ts` — sete jornadas por navegador;
-- matriz total: **126 cenários por navegador, 252 execuções**.
+- `tests/m0-9-integrated.spec.ts`;
+- `tests/m0-9-nonfunctional.spec.ts`;
+- matriz consolidada atual: **124 cenários por navegador, 248 execuções**.
+
+A cabeça funcional inicial da tranche 3 executou 126/252. Depois, duas fixtures antigas foram consolidadas sem remover a cobertura semântica da tranche; `docs/M0_9_ERRATA_MATRIZ.md` é a referência autoritativa para essa mudança.
 
 Jornadas integradas aprovadas:
 
@@ -107,8 +110,8 @@ Privacidade e rede:
 
 Desempenho observado na CI:
 
-- Chromium: p95 192 ms, DOM 179→179, heap 16.100.000→16.100.000 bytes;
-- Firefox: p95 90 ms, DOM 179→179, heap indisponível;
+- Chromium: p95 192 ms, DOM 179→179, heap 16.100.000→16.100.000 bytes na evidência funcional;
+- Firefox: p95 90 ms, DOM 179→179, heap indisponível na evidência funcional;
 - interpretação obrigatória: detector de regressão, não SLA ou benchmark universal.
 
 Evidência funcional da tranche 3:
@@ -119,10 +122,10 @@ Evidência funcional da tranche 3:
 - coerência `30478738607`: verde;
 - artefato `mass-notes-tiptap-30478738806`.
 
-Evidência documental validada antes da tranche decisória:
+Evidência consolidada posterior:
 
 - cabeça `4939b3429f166664e377ed2251f28f87345308af`;
-- Mass Notes `30482560502`: 252/252, publicação, cache e smoke público;
+- Mass Notes `30482560502`: 248/248, publicação, cache e smoke público;
 - Argila `30482553803`: verde;
 - coerência `30482553920`: verde.
 
