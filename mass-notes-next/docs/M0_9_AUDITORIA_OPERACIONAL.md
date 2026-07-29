@@ -32,17 +32,18 @@ Este documento deve ser atualizado sempre que houver:
 - PR: `#155`, aberto e em rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - milestone: **M0.9 — Candidata Integrada do Escrevaral**;
-- estado do milestone: **em execução**;
+- estado do milestone: **em execução — primeira tranche automatizada concluída**;
 - último gate funcional: Gate 13 — importação auditável do `.esc` legado;
-- matriz funcional anterior ao M0.9: 111 cenários por navegador, 222 execuções;
-- veredito atual: **não emitido**;
-- próxima ação obrigatória: fechar a linha de base documental do Gate 13 e executar a matriz transversal.
+- matriz atual: 116 cenários por navegador, 232 execuções;
+- cabeça da primeira tranche verde: `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
+- veredito provisório: beta fechada `SHIP COM CONDIÇÕES`; lançamento público `NO-SHIP`; substituição integral `NO-SHIP`;
+- próxima ação obrigatória: segunda tranche com conflito real, portabilidade integrada, acessibilidade ampliada e corpus por engine.
 
 ## Pergunta central
 
 > O Mass Notes Next já pode ser usado de forma recorrente, segura, compreensível e prazerosa por uma pessoa que escreve em português brasileiro?
 
-A auditoria deve responder separadamente:
+A auditoria responde separadamente:
 
 1. está pronto para beta fechada?
 2. está pronto para lançamento público?
@@ -63,23 +64,31 @@ A auditoria deve responder separadamente:
 11. Não declarar engine integrada apenas pela existência de arquivo; exigir entrada real, saída observável e teste de borda.
 12. O milestone só termina com evidência na cabeça exata, sem commit posterior.
 
-## Linha de base obrigatória
+## Linha de base
 
-Antes da auditoria transversal:
+Concluído:
 
-- conferir cabeça da branch e do PR;
-- confirmar PR aberto, mesclável, não incorporado e em rascunho;
-- conferir workflows associados à cabeça;
-- ler README, índice operacional, PLAN, MEMORY, CHANGELOG, log mais recente e contratos globais;
-- localizar inconsistências entre código, documentação, PR e CI;
-- fechar formalmente o Gate 13 em changelog, log técnico, contrato global e corpo do PR;
-- repetir CI na cabeça documental exata.
+- branch, PR e workflows conferidos;
+- PR confirmado aberto, mesclável, não incorporado e em rascunho;
+- README, índice, PLAN, MEMORY e CHANGELOG atualizados;
+- Gate 13 registrado em log e contrato global;
+- relatório e JSON M0.9 criados;
+- primeira matriz transversal executada.
+
+Pendente:
+
+- corpo do PR atualizado com Gate 13 e M0.9;
+- segunda tranche da auditoria;
+- veredito final;
+- CI na cabeça documental final sem commit posterior.
 
 ## Fases da auditoria
 
 ### Fase 1 — jornadas integradas
 
 Cobrir primeira visita, criação, escrita, edição longa, troca entre páginas, organização, fechamento e retorno, autosave, recuperação e conflitos entre abas.
+
+Estado: **parcial**. Criação, escrita, metadados, autosave, recarga e organização foram aprovados. Conflito real transversal ainda está pendente.
 
 ### Fase 2 — engines
 
@@ -98,9 +107,13 @@ Corpora obrigatórios:
 - texto ambíguo e insuficiente;
 - documento com pelo menos 20 mil caracteres.
 
+Estado: **parcial**. As cinco superfícies foram executadas em sequência sem mutação; corpus ampliado consolidado ainda está pendente.
+
 ### Fase 3 — portabilidade e preservação
 
 Auditar TXT, Markdown, HTML, cópia nativa e `.esc` legado, incluindo arquivos inválidos, versões futuras, duplicidade, Unicode, cancelamento, atomicidade e ausência de sobrescrita.
+
+Estado: **forte por gates, transversal pendente**.
 
 ### Fase 4 — UIX e design
 
@@ -108,38 +121,51 @@ Auditar compreensão, hierarquia, densidade, linguagem, feedback, estados vazios
 
 Larguras mínimas: 320, 390, 768, 1024, 1280 e 1440 px.
 
+Estado: **parcial**. 320 e 390 px foram aprovados na jornada integrada; heurística manual integral permanece pendente.
+
 ### Fase 5 — acessibilidade
 
 Auditar teclado, foco, Escape, retorno de foco, nomes acessíveis, tabs, regiões, status, alertas, contraste, zoom de 200%, movimento reduzido e independência de cor.
+
+Estado: **parcial**. Teclado, tabs, Escape e retorno de foco aprovados; tecnologias assistivas reais pendentes.
 
 ### Fase 6 — privacidade e rede
 
 Observar requisições durante escrita, autosave, todas as engines, exportação, cópia e importação. Conteúdo autoral não pode sair da aplicação.
 
+Estado: **parcial**. A frase sentinela não apareceu em URL ou corpo de requisição durante a sequência de engines.
+
 ### Fase 7 — desempenho e resistência
 
 Auditar documentos de 20 mil e 100 mil caracteres, biblioteca com 100 páginas, alternância rápida, engines repetidas, múltiplas abas, lote legado grande e uso prolongado.
+
+Estado: **parcial**. 100 páginas e documento acima de 100 mil caracteres permaneceram utilizáveis. Latência, memória e sessão prolongada ainda não foram medidas.
 
 ### Fase 8 — release
 
 Auditar branch, PR, isolamento da preview, hashes, cache, smoke público, coerência, Argila, `main`, service worker público e ausência de edição direta na branch publicada.
 
-## Matriz transversal mínima
+Estado: **parcial forte**. Pipeline e isolamento verdes; aplicação nova continua sem service worker próprio.
 
-A suíte M0.9 deve incluir cenários que atravessem vários gates na mesma sessão:
+## Matriz transversal
+
+Concluídos:
 
 1. primeira visita → escrita → metadados → autosave → recarga;
-2. edição rica → Revisão → mudança editorial → preservação das marcas;
-3. seleção lexical → troca de aba → retorno → seleção preservada;
-4. documento longo → Voz → Contexto → RimaLab → ausência de mutação;
-5. busca e filtros → página ativa fora do recorte → rascunho preservado;
-6. conflito entre abas envolvendo manuscrito e metadados;
-7. exportação depois de alteração ainda não persistida;
-8. cópia nativa e restauração na mesma sessão;
-9. importação `.esc` com prévia, cancelamento e confirmação;
-10. mobile completo com drawers, foco, teclado e ausência de overflow;
-11. interceptação de rede durante engines;
-12. biblioteca extensa e documento de 100 mil caracteres.
+2. documento longo → Revisão → Voz → Contexto → RimaLab → Palavras → ausência de mutação;
+3. busca e filtros → página ativa fora do recorte → revisão preservada;
+4. mobile 320/390 → sete abas → foco e ausência de overflow;
+5. biblioteca com 100 páginas e documento acima de 100 mil caracteres;
+6. interceptação sentinela de rede durante engines.
+
+Pendentes:
+
+1. edição rica → Revisão → mudança editorial → preservação das marcas;
+2. seleção lexical → troca de aba → retorno → seleção preservada em jornada transversal;
+3. conflito entre abas envolvendo manuscrito e metadados;
+4. exportação depois de alteração ainda não persistida;
+5. cópia nativa e restauração na mesma sessão;
+6. importação `.esc` combinada com demais operações na mesma sessão.
 
 ## Regra de severidade
 
@@ -148,27 +174,23 @@ A suíte M0.9 deve incluir cenários que atravessem vários gates na mesma sess�
 - **P2:** defeito relevante com alternativa, inconsistência de UX ou paridade importante ausente.
 - **P3:** acabamento, clareza ou melhoria não bloqueadora.
 
-## Placar vivo
-
-Use `—` enquanto não houver evidência suficiente.
+## Placar vivo provisório
 
 | Área | Nota | Estado | Evidência principal |
 |---|---:|---|---|
-| Editor e preservação | — | não auditado transversalmente | — |
-| Biblioteca | — | não auditado transversalmente | — |
-| Engines | — | não auditado transversalmente | — |
-| UIX | — | não auditado transversalmente | — |
-| Acessibilidade | — | não auditado transversalmente | — |
-| Responsividade | — | não auditado transversalmente | — |
-| Importação e exportação | — | não auditado transversalmente | — |
-| Privacidade | — | não auditado transversalmente | — |
-| Desempenho | — | não auditado transversalmente | — |
-| Release | — | não auditado transversalmente | — |
-| **Geral** | **—** | **em execução** | — |
+| Editor e preservação | 92 | forte, incompleto | escrita/metadados/recarga/escala verdes |
+| Biblioteca | 90 | forte | filtros não mutam revisão; 100 páginas verdes |
+| Engines | 86 | forte, corpus pendente | cinco superfícies em sequência sem mutação |
+| UIX | 82 | parcial | gates visuais + mobile integrado; heurística manual pendente |
+| Acessibilidade | 80 | parcial | teclado/foco/drawers verdes; leitores reais pendentes |
+| Responsividade | 89 | forte | 320/390 integrados e regressões anteriores |
+| Importação e exportação | 83 | forte no escopo atual | contratos seguros; paridade avançada ausente |
+| Privacidade | 92 | parcial forte | local-first + sentinela de rede verde |
+| Desempenho | 84 | funcional, sem orçamento | 100 páginas/100 mil caracteres verdes |
+| Release | 72 | incompleto | CI/preview fortes; PWA própria ausente |
+| **Geral** | **85** | **veredito provisório** | candidata forte para beta, incompleta para público/substituição |
 
 ## Registro de decisões
-
-Cada decisão permanente deve ser acrescentada sem apagar as anteriores.
 
 | Data | ID | Decisão | Razão | Impacto |
 |---|---|---|---|---|
@@ -176,57 +198,62 @@ Cada decisão permanente deve ser acrescentada sem apagar as anteriores.
 | 2026-07-29 | M09-D002 | A auditoria é memória operacional viva. | Decisões e achados não podem depender da conversa. | Este arquivo passa a ser leitura obrigatória. |
 | 2026-07-29 | M09-D003 | Preservar o PR como rascunho e `main` intacta. | O milestone mede prontidão, não autoriza promoção. | Nenhum merge ou release durante a auditoria. |
 | 2026-07-29 | M09-D004 | Avaliar beta, lançamento e substituição separadamente. | Esses objetivos possuem riscos e exigências diferentes. | O veredito final terá três respostas independentes. |
+| 2026-07-29 | M09-D005 | Classificar a falha inicial do RimaLab como instabilidade temporal de teste. | Todos os casos M0.9 passaram; o autosave já estava em `Salvo` antes da observação intermediária. | Produto não mudou; helper observa qualquer estado válido e exige convergência final. |
+| 2026-07-29 | M09-D006 | Emitir notas e veredito apenas como provisórios após a primeira tranche. | UIX manual, tecnologias assistivas, conflito real e portabilidade transversal ainda faltam. | M0.9 permanece aberto. |
 
 ## Registro de achados
 
-Não registrar suposição como achado. Todo item precisa de reprodução ou evidência.
-
 | ID | Severidade | Área | Estado | Resumo | Evidência | Decisão |
 |---|---|---|---|---|---|---|
-| — | — | — | nenhum achado registrado | — | — | — |
+| M09-F001 | P2 | release | aberto | aplicação nova sem service worker/PWA próprio | arquitetura e limitações atuais | bloqueia lançamento público |
+| M09-F002 | P2 | paridade | aberto | Prova de Autoria ausente | comparação com produto antigo | bloqueia substituição integral |
+| M09-F003 | P2 | portabilidade | aberto | faltam DOCX, RTF, ePub e Obsidian ZIP | formatos atuais TXT/MD/HTML | não bloqueia beta; bloqueia paridade integral |
+| M09-F004 | P3 | biblioteca | aceito | filtros e ordenação não persistem entre sessões | Gate 14 ainda não iniciado | avaliar após veredito |
 
-Estados permitidos: `aberto`, `mitigado`, `aceito`, `corrigido`, `não reproduzido`, `fora do escopo`.
+P0 abertos: **0**.
+
+P1 abertos: **0**.
 
 ## Registro de evidências
 
 | Data | Cabeça | Evidência | Resultado |
 |---|---|---|---|
-| 2026-07-29 | `323e8a1e131a3692932e960e9285570df49a1460` | Gate 13 funcional, 222/222, preview, Argila e coerência | verde funcional; documentação ainda precisava fechamento |
+| 2026-07-29 | `323e8a1e131a3692932e960e9285570df49a1460` | Gate 13 funcional, 222/222, preview, Argila e coerência | verde funcional |
+| 2026-07-29 | `f3ab89db816557984ed19bc8ab17d2d96137d946` | primeira execução M0.9 | 231/232; 10/10 casos novos verdes; falha temporal antiga do RimaLab |
+| 2026-07-29 | `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510` | Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811` | 232/232, publicação, cache e smoke público verdes |
 
 ## Paridade com o Escrevaral antigo
 
-A classificação deve usar uma destas categorias:
-
-- preservada integralmente;
-- preservada parcialmente;
-- presente apenas como capacidade interna;
-- ausente;
-- deliberadamente excluída;
-- exige novo gate.
-
 | Área antiga | Estado no produto novo | Evidência | Lacuna |
 |---|---|---|---|
-| Análise Geral | em auditoria | adaptador de Revisão | medir cobertura real |
-| Sintaxe/Morfologia | em auditoria | carregada pela Revisão e Palavras | medir superfície e bordas |
-| Pontuação | em auditoria | Revisão inline | medir posições e repetição |
-| Espelho de Voz | em auditoria | adapter dedicado | medir textos curtos/longos |
-| RimaLab | em auditoria | adapter dedicado | medir prosa/verso |
-| Léxico | em auditoria | Palavras/Léxico | medir verbetes e contexto |
-| Sinônimos | em auditoria | base legada disponível | confirmar exposição atual |
-| Decolonial | em auditoria | Termos que pedem contexto | medir linguagem e ocorrências |
-| Exportação | parcial conhecida | TXT/MD/HTML | faltam DOCX/RTF/ePub/Obsidian |
-| Prova de Autoria | ausente conhecida | nenhuma superfície atual | exige decisão de milestone posterior |
-| PWA/offline | ausente na aplicação nova | sem service worker próprio | lacuna de lançamento, não do editor |
+| Análise Geral | preservada parcialmente | Revisão real e sequência integrada | medir corpus ampliado |
+| Sintaxe/Morfologia | presente como capacidade interna | carregada pela Revisão e Palavras | superfície/autonomia não comprovada |
+| Pontuação | preservada parcialmente | Revisão inline UTF-16 | ampliar corpus transversal |
+| Espelho de Voz | preservada parcialmente | leitura real integrada | ampliar textos/gestos |
+| RimaLab | preservada parcialmente | prosa, verso e sequência integrada | ampliar corpus |
+| Léxico | preservada parcialmente | Palavras/Léxico real | medir catálogo e sinônimos |
+| Sinônimos | presente apenas como capacidade interna/parcial | bases legadas | confirmar experiência exposta |
+| Decolonial | preservada parcialmente | Contexto real | ampliar categorias e bordas |
+| Exportação | preservada parcialmente | TXT/MD/HTML | faltam DOCX/RTF/ePub/Obsidian |
+| Prova de Autoria | ausente | nenhuma superfície atual | exige decisão explícita |
+| PWA/offline | ausente na aplicação nova | sem service worker próprio | exige gate de release |
 
-## Entregáveis finais
+## Entregáveis
 
+Criados:
+
+- `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
 - `docs/audits/M0_9_AUDITORIA_GERAL.md`;
 - `docs/audits/M0_9_AUDITORIA_GERAL.json`;
-- suíte transversal Playwright;
-- log técnico datado;
-- contrato global em `docs/product/`;
-- README, PLAN, MEMORY e CHANGELOG atualizados;
+- `tests/m0-9-integrated.spec.ts`;
+- log e contrato global do Gate 13.
+
+Pendentes:
+
+- log técnico específico do M0.9;
+- contrato global M0.9;
 - corpo do PR atualizado;
+- segunda tranche;
 - cabeça final validada sem commit posterior.
 
 ## Critério de encerramento
@@ -239,7 +266,7 @@ O milestone só encerra quando:
 - matriz completa estiver verde em Chromium e Firefox;
 - workflows globais estiverem verdes;
 - preview pública responder;
-- notas e veredito estiverem registrados;
+- notas e veredito final estiverem registrados;
 - a documentação apontar para a cabeça exata validada;
 - não houver commit posterior à evidência;
 - PR continuar em rascunho e não incorporado.
