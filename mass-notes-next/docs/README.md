@@ -5,68 +5,107 @@ Esta pasta permite retomar o subprojeto sem depender do histórico de uma conver
 ## Estado resumido
 
 - Gates 1 a 13 e Gate 10.5: concluídos;
-- milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- matriz consolidada atual: 124 cenários por navegador, 248 execuções verdes;
-- evidência funcional histórica da tranche 3: 126 por navegador, 252 execuções;
-- tranche decisória dos quatro P2: concluída;
-- nota provisória: 88/100;
-- beta fechada: `SHIP COM CONDIÇÕES`;
+- M0.9: encerrado como auditoria técnica e decisória;
+- milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
+- matriz atual: **138 cenários por navegador, 276 execuções**;
+- primeira tranche M1.0: corpus lexical contextual 8/14 → 14/14 casos únicos;
+- beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público e substituição integral: `NO-SHIP`;
-- P0/P1 abertos: 0/0;
-- quatro P2 com decisão explícita e bloqueios preservados onde indicado;
-- Gate 14 suspenso até o veredito final;
-- PR `#155` permanece em rascunho;
-- `main`, aplicação pública e service worker permanecem intactos.
+- P0/P1 conhecidos nas engines: 0/0;
+- PR `#155`: aberto e em rascunho;
+- `main`, aplicação pública e service worker público: intactos;
+- Gate 14: suspenso.
 
 ## Ordem de leitura
 
-1. `M0_9_AUDITORIA_OPERACIONAL.md` — execução, decisões, achados, placar e evidências;
-2. `M0_9_ERRATA_MATRIZ.md` — número autoritativo da matriz consolidada atual;
-3. `logs/2026-07-29-m0-9-decisoes-p2.md` — decisões por objetivo e sequência posterior;
-4. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano;
-5. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
-6. `logs/2026-07-29-m0-9-auditoria-nao-funcional-tranche-3.md` — auditoria automatizada;
-7. `PLAN.md` — objetivo e sequência aprovada;
-8. `MEMORY.md` — decisões permanentes;
-9. `CHANGELOG.md` — mudanças relevantes;
-10. contratos globais em `../../docs/product/`.
+1. `M1_0_ENGINES_SUPERIORES.md` — memória executável do programa atual;
+2. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline, seis lacunas e ganho comprovado;
+3. `logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — decisão de transição;
+4. `PLAN.md` — objetivo e sequência aprovada;
+5. `MEMORY.md` — decisões permanentes e estado consolidado;
+6. `CHANGELOG.md` — mudanças relevantes;
+7. `M0_9_AUDITORIA_OPERACIONAL.md` e `M0_9_ERRATA_MATRIZ.md` — histórico e evidência da auditoria;
+8. `logs/2026-07-29-m0-9-decisoes-p2.md` — bloqueios de beta, lançamento e substituição;
+9. contratos globais em `../../docs/product/`.
 
 ## Regra de continuidade
 
 Antes de cada sessão:
 
 - conferir branch, PR e workflows;
-- ler a memória operacional M0.9 e a errata da matriz;
-- ler as decisões dos quatro P2;
-- localizar a próxima fase incompleta;
-- declarar a evidência que será produzida;
-- não iniciar feature nova durante o diagnóstico.
+- ler `M1_0_ENGINES_SUPERIORES.md`;
+- localizar a fase incompleta E1, E2, E3 ou E4;
+- declarar qual engine, caso e evidência serão beneficiados;
+- não alterar regra linguística sem caso reproduzível;
+- não usar volume de dados ou alertas como prova isolada de qualidade.
 
-Ao tomar decisão importante:
+Ao implementar uma melhoria de engine:
 
-- registrar em `M0_9_AUDITORIA_OPERACIONAL.md` ou no log decisório correspondente;
-- atualizar placar, paridade ou achados;
-- atualizar `PLAN.md` e `MEMORY.md` quando permanente;
-- registrar commit e evidência.
+- congelar a baseline antes da correção;
+- registrar entrada, esperado, observado e fonte;
+- preferir `ambíguo` ou `indeterminado` a classificação falsa;
+- preservar texto, metadados, revisão e autonomia autoral;
+- manter processamento local e sem substituição automática;
+- adicionar controles negativos contra generalização excessiva;
+- repetir a matriz integral em Chromium e Firefox;
+- documentar ganho, custo e limites.
 
-Ao encerrar:
+Ao encerrar um lote:
 
-- atualizar relatório humano e JSON;
-- atualizar plano, memória e changelog;
-- criar ou completar log e contrato global;
-- atualizar o corpo do PR;
-- repetir CI na cabeça documental exata;
-- registrar SHA e workflows no PR sem criar commit posterior.
+- atualizar `M1_0_ENGINES_SUPERIORES.md`;
+- criar ou completar log técnico;
+- atualizar `PLAN.md`, `MEMORY.md` e `CHANGELOG.md`;
+- atualizar contrato global quando a promessa mudar;
+- validar a cabeça documental exata;
+- registrar SHA e workflows no corpo do PR sem criar commit posterior.
 
-## Decisões vigentes dos P2
+## Baseline histórica a superar
 
-- PWA/offline próprio ausente: aceito apenas para beta fechada online; bloqueia lançamento público;
-- `page-flip` externo da Anatomia: aceito apenas para beta online; deve ser local antes de lançamento/offline;
-- Prova de Autoria ausente: não bloqueia beta, mas bloqueia substituição integral sem restauração ou aposentadoria formal;
-- DOCX, RTF, ePub e Obsidian ZIP ausentes: não bloqueiam beta; DOCX é o primeiro candidato posterior, condicionado à evidência de uso.
+A documentação v916 do legado informa aproximadamente:
 
-## Limites da automação atual
+- 1.350 entradas de sinônimos;
+- 1.020+ definições;
+- 110+ casos de polissemia;
+- 600+ entradas contextuais em 9 categorias;
+- 2.045 formas verbais regulares no presente;
+- bancada sintática 17/17 e golden 91/0;
+- 10 gestos e 9 campos semânticos no Espelho de Voz;
+- enciclopédia 50 e `grammarWords` 348 no RimaLab.
 
-A tranche 3 aprovou seis larguras, zoom CSS equivalente, movimento reduzido, rede, recuperação, sessão prolongada e corpus por engine. Isso não equivale a validação com zoom real, leitor de tela, tecnologia assistiva ou dispositivo físico; essas etapas devem continuar explicitamente pendentes até serem executadas de verdade.
+Esses números são adversário de inventário, não selo automático de qualidade.
 
-Gate 14 permanece apenas proposto e suspenso. O próximo passo é validação humana mínima e encerramento explícito do M0.9; documentação é parte do produto.
+## Primeira evidência M1.0
+
+Baseline do corpus v1:
+
+- 8/14 casos únicos corretos;
+- falhas em `por enquanto`, `enquanto isso`, `publica`, `foi preso`, `estrada larga` e `eu canto`;
+- 264/276 execuções aprovadas.
+
+Após a camada contextual tipada:
+
+- 14/14 casos únicos corretos;
+- 276/276 execuções aprovadas;
+- nenhuma regressão nos oito casos já corretos;
+- nenhuma alteração em motores ou dados legados;
+- nenhuma mutação do manuscrito ou substituição automática.
+
+Evidência funcional:
+
+- cabeça `d44791ff1a317610c9dd152360cfbb9b168c503a`;
+- Mass Notes `30493491424`;
+- Argila `30493491638`;
+- coerência `30493491411`;
+- artefato `mass-notes-tiptap-30493491424`.
+
+## Bloqueios herdados de release
+
+Continuam vigentes:
+
+- PWA/offline próprio ausente;
+- `page-flip` externo da Anatomia;
+- Prova de Autoria ausente;
+- DOCX, RTF, ePub e Obsidian ZIP ausentes;
+- zoom real, tecnologias assistivas e dispositivos físicos ainda não validados.
+
+Esses itens não bloqueiam pesquisa e melhoria das engines, mas continuam bloqueando as promessas correspondentes de lançamento ou substituição integral.
