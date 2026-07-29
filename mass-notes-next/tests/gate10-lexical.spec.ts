@@ -69,13 +69,13 @@ test('painel Palavras cabe no drawer móvel sem overflow horizontal', async ({ p
     return {
       viewport: window.innerWidth,
       documentWidth: document.documentElement.scrollWidth,
-      panelRight: panel?.right ?? 0,
+      panelWidth: panel?.width ?? 0,
       railWidth: rail?.scrollWidth ?? 0,
       railClient: rail?.clientWidth ?? 0,
     }
   })
 
   expect(sizes.documentWidth).toBeLessThanOrEqual(sizes.viewport)
-  expect(sizes.panelRight).toBeLessThanOrEqual(sizes.viewport + 1)
+  expect(sizes.panelWidth).toBeLessThanOrEqual(sizes.railClient)
   expect(sizes.railWidth).toBeLessThanOrEqual(sizes.railClient)
 })
