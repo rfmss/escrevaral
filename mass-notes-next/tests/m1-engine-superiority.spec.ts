@@ -26,7 +26,7 @@ for (const item of ENGINE_SUPERIORITY_CASES) {
   test(`corpus lexical ${item.id}: ${item.rationale}`, async ({ page }) => {
     await waitReady(page)
     const editor = await stabilizeDocument(page, item.text)
-    const before = await editor.innerText()
+    const before = await editor.evaluate((element) => element.innerHTML)
 
     await openWords(page)
     await page.getByLabel('Palavra ou expressão curta').fill(item.query)
@@ -39,6 +39,7 @@ for (const item of ENGINE_SUPERIORITY_CASES) {
     await expect(reading.locator('.lexical-decision')).not.toContainText(/indeterminada/i)
     await expect(reading).toContainText(/ocorrências/i)
     await expect(page.getByRole('button', { name: /substituir|trocar|aplicar/i })).toHaveCount(0)
-    await expect(editor).toHaveText(before)
+    await expect(editor).toBeEditable()
+    expect(await editor.evaluate((element) => element.innerHTML)).toBe(before)
   })
 }
