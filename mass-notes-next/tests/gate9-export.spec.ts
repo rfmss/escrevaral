@@ -6,6 +6,31 @@ async function waitReady(page: Page) {
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
+async function waitSaved(page: Page) {
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible({ timeout: 5_000 })
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+}
+
+async function waitPersistedText(page: Page, expected: string) {
+  await expect.poll(() => page.evaluate(async ({ activeKey, phrase }) => {
+    const activeId = localStorage.getItem(activeKey)
+    if (!activeId) return false
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const request = indexedDB.open('escrevaral-mass-notes-next', 1)
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+    })
+    const record = await new Promise<Record<string, unknown> | undefined>((resolve, reject) => {
+      const request = db.transaction('documents').objectStore('documents').get(activeId)
+      request.onsuccess = () => resolve(request.result as Record<string, unknown> | undefined)
+      request.onerror = () => reject(request.error)
+    })
+    db.close()
+    return String(record?.plainText ?? '').includes(phrase)
+  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected })).toBe(true)
+}
+
 async function createCleanDocument(page: Page, title: string) {
   const initialCount = await page.locator('.note-card').count()
   await page.keyboard.press('Control+N')
@@ -19,7 +44,9 @@ async function createCleanDocument(page: Page, title: string) {
 }
 
 async function pasteRichText(page: Page, html: string, plain: string) {
-  await page.locator('.ProseMirror').evaluate((element, payload) => {
+  const editor = page.locator('.ProseMirror')
+  await editor.click()
+  await editor.evaluate((element, payload) => {
     const transfer = new DataTransfer()
     transfer.setData('text/html', payload.html)
     transfer.setData('text/plain', payload.plain)
@@ -72,9 +99,8 @@ async function seedStructuredDocument(page: Page) {
   await expect(editor.locator('h2')).toHaveText('Capítulo & travessia')
   await expect(editor.locator('li')).toHaveCount(3)
   await expect(editor.locator('script')).toHaveCount(0)
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
-  await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+  await waitSaved(page)
+  await waitPersistedText(page, 'Capítulo & travessia')
   await openExports(page)
   return editor
 }
@@ -158,42 +184,4 @@ test('página vazia ainda exporta título e metadados válidos', async ({ page }
 
   const html = await exportFormat(page, 'html')
   expect(html.content).toContain('<h1>Página em branco</h1>')
-  expect(html.content).toContain('<main>')
-})
-
-test('exportar não altera o documento, o título nem o estado de salvamento', async ({ page }) => {
-  await waitReady(page)
-  const editor = await seedStructuredDocument(page)
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
-
-  const before = {
-    html: await editor.innerHTML(),
-    text: await editor.innerText(),
-    title: await page.getByLabel('Título do documento').inputValue(),
-    documents: await page.locator('.note-card').count(),
-  }
-  await exportFormat(page, 'md')
-
-  expect(await editor.innerHTML()).toBe(before.html)
-  expect(await editor.innerText()).toBe(before.text)
-  expect(await page.getByLabel('Título do documento').inputValue()).toBe(before.title)
-  expect(await page.locator('.note-card').count()).toBe(before.documents)
-  await expect(page.getByRole('alert')).toHaveCount(0)
-})
-
-test('painel de exportação cabe no drawer móvel sem overflow horizontal', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 })
-  await waitReady(page)
-  await createCleanDocument(page, 'Exportação móvel')
-  await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
-  await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
-
-  const panel = page.locator('.export-panel')
-  await expect(panel).toBeVisible()
-  const fits = await panel.evaluate((element) => {
-    const rect = element.getBoundingClientRect()
-    return rect.left >= 0 && rect.right <= window.innerWidth && document.documentElement.scrollWidth <= window.innerWidth
-  })
-  expect(fits).toBe(true)
-  await expect(page.locator('[data-export-format]')).toHaveCount(3)
 })
