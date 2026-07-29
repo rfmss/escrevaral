@@ -15,36 +15,26 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 
 ### Engines locais
 
-- integrada Revisão por adaptador;
-- integrado Espelho de Voz com confiança, métricas e exercícios;
-- integrados Termos que pedem contexto com linguagem não acusatória;
-- integrado RimaLab com contratos distintos para prosa e verso;
+- integradas Revisão, Espelho de Voz, Contexto e RimaLab por adaptadores;
 - engines e bases originais permaneceram intactas;
 - nenhuma análise recebeu aplicação automática.
 
 ## 2026-07-28
 
-### Contrato de posições e revisão inline
+### Posições, revisão inline e visual
 
 - criado contrato UTF-16 sobre o Node ProseMirror real;
 - auditados corpora brasileiros, Unicode, listas, títulos, `hardBreak` e blocos vazios;
 - adicionadas decorations somente para ranges verificáveis da Revisão;
 - criada navegação cartão → trecho e ocultação reversível;
-- leituras antigas passam a desaparecer após edição ou troca de documento.
-
-### Estabilização visual e Blueprint Tokon
-
-- introduzidos tokens semânticos e contraste explícito;
-- estabilizados toolbar, drawers, título móvel e modo noite;
-- adotado o blueprint como ambiente e o manuscrito como objeto principal;
-- preservados layout, Tiptap, engines e persistência.
+- estabilizados contraste, toolbar, drawers, título móvel e modo noite;
+- adotado o Blueprint Tokon sem alterar editor, engines ou persistência.
 
 ### Anatomia do Livro
 
 - preservado o original completo em `anatomia-original.html`;
 - criado runtime leve e fiel gerado durante a CI;
 - integrada abertura e retorno sem desmontar o editor;
-- removido workflow obsoleto que escrevia diretamente na preview;
 - publicação passou a verificar assets e endereço público.
 
 ### Gate 9A — exportação estrutural
@@ -61,40 +51,27 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - criado `src/backup/nativeBackup.ts`;
 - definido envelope `escrevaral.mass-notes-next.backup`, versão `1`;
 - adicionada cópia completa da biblioteca em `*.esc.json`;
-- incluído o rascunho ativo mesmo antes do próximo autosave;
-- implementada validação integral de schema, versão, documentos, conteúdo Tiptap e IDs;
-- arquivos inválidos passam a ser rejeitados antes de qualquer escrita;
-- adicionada restauração transacional sempre como novas cópias;
-- novos UUIDs impedem colisão e substituição de documentos existentes;
-- biblioteca passa a refletir restaurações pelo BroadcastChannel existente;
-- adicionados testes de envelope, estrutura, rejeição atômica, versão futura, IDs duplicados e mobile;
-- primeira execução teve uma falha temporal antiga do Gate 7 no Firefox, com os testes novos verdes;
-- repetição integral e cabeça documental final concluíram com 172/172 execuções aprovadas;
-- build, Chromium, Firefox, publicação, cache e verificação pública ficaram verdes no workflow `30417867701`.
+- implementada validação integral antes de qualquer escrita;
+- restauração passa a criar UUIDs novos e nunca substituir documentos existentes;
+- biblioteca reflete restaurações pelo BroadcastChannel existente;
+- matriz final do lote ficou 172/172;
+- build, navegadores, publicação, cache e verificação pública ficaram verdes.
 
 ## 2026-07-29
 
 ### Gate 10 — Palavras/Léxico
 
 - integrada `lexical-engine.js` sem alterar sua fonte;
-- incorporadas localmente `lexical-data.json` e `norma-data.json` pelo adaptador tipado;
-- criado `src/editor/lexicalSelectionBridge.ts` para manter o último recorte selecionado mesmo antes da abertura do painel;
-- criado `src/components/LexicalPanel.tsx` com busca digitada e consumo da seleção Tiptap;
+- incorporadas localmente `lexical-data.json` e `norma-data.json`;
+- criado `src/editor/lexicalSelectionBridge.ts` para seleção durável;
+- criado `src/components/LexicalPanel.tsx` com busca digitada e seleção Tiptap;
 - adicionada a sétima aba do rail, `Palavras`;
-- exibidos definição, classe, confiança, função, campo, ocorrências e leituras alternativas disponíveis;
-- consultas permanecem locais e somente de leitura;
-- removida qualquer oferta de substituição automática no corte novo;
-- ocorrências passam a ser contadas com normalização de acentos;
-- palavra registrada sem ocorrência pode preservar definição, mas perde classe contextual não comprovada;
-- fallback morfológico sem registro e sem ocorrência passa a ser tratado como ausência segura;
+- definição registrada passou a ser separada de classe contextual não comprovada;
+- fallback sem registro e sem ocorrência passou a gerar ausência segura;
 - criada folha isolada `src/styles/lexical-panel.css`;
-- adicionados cinco cenários por navegador para busca, seleção durável, não mutação, termo desconhecido e mobile;
-- restaurada a suíte robusta do RimaLab após uma simplificação acidental durante a estabilização;
-- documentWidth e rail permanecem sem overflow; diferenças subpixel de até 1 px são aceitas somente na caixa transformada;
-- o fixture estrutural do Gate 9 passou a sincronizar a DOM Tiptap com o estado React antes de baixar o arquivo;
+- restaurada a suíte robusta do RimaLab;
 - matriz elevada para 91 cenários por navegador, 182 execuções;
-- workflow funcional `30420965045` aprovou a implementação;
-- workflow final `30422368445` validou a cabeça do Gate 10 com build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes.
+- workflow final `30422368445` aprovou build, navegadores, publicação, cache e preview.
 
 ### Gate 10.5 — fronteiras de distribuição
 
@@ -102,14 +79,36 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - `mass-notes-next/` foi reconhecido como aplicação Vite com build e preview próprios;
 - mudanças isoladas não avançam artificialmente `ASSET_VERSION` ou `CACHE_NAME`;
 - PRs mistos continuam auditando qualquer asset público real;
-- adicionada regressão Python para assets públicos, preview isolada, relatórios e fontes não distribuídas;
-- coerência `30430515120`, Argila `30430515008` e Mass Notes `30430515420` ficaram verdes;
-- Mass Notes permaneceu com 182/182, publicação e verificação pública aprovadas.
+- adicionada regressão Python da fronteira;
+- coerência, Argila e Mass Notes ficaram verdes sem criar versão pública falsa.
 
-## Próximo lote aprovado
+### Gate 11 — organização da biblioteca
 
-- Gate 11: organização da biblioteca sobre estado, favorito, tags, busca e datas já existentes;
-- nenhuma exclusão em massa neste corte;
-- nenhuma hierarquia persistente sem contrato de migração;
-- nenhuma aplicação automática de sugestões;
+- criada camada pura `src/library/libraryQuery.ts`;
+- busca passou a combinar título, texto, tags e estado com normalização de caixa e acentos;
+- adicionados filtros combináveis por estado, favorito e tag;
+- adicionadas ordenações por alteração recente, criação recente e título A–Z;
+- definidos desempates estáveis para datas, títulos repetidos e identidade;
+- variantes equivalentes de tag passaram a receber rótulo canônico determinístico;
+- cartões exibem favorito, estado, tempo relativo e até duas tags;
+- adicionadas contagens de páginas visíveis e total;
+- criado estado vazio explicativo com limpeza imediata dos filtros;
+- página ativa permanece aberta e recebe aviso quando fica fora do recorte;
+- filtros não escrevem no IndexedDB, não incrementam revisão e não interrompem rascunho ou autosave;
+- criada folha `src/styles/library-organization.css`;
+- adicionados sete cenários por navegador para combinações, ordenação, tags, estado vazio, rascunho, biblioteca extensa e mobile;
+- nomes acessíveis ambíguos foram substituídos por contratos precisos;
+- o ícone favorito foi separado do texto exato do título para preservar compatibilidade;
+- canonicalização de tags deixou de depender da ordem de atualização;
+- matriz elevada para 98 cenários por navegador, 196 execuções;
+- workflow `30449369857` aprovou build, Chromium, Firefox, publicação, cache e verificação pública;
+- candidata Argila `30449371552` e coerência `30449371768` também ficaram verdes.
+
+## Próximo lote proposto
+
+- Gate 12: edição segura e unitária de favorito e tags;
+- definir revisão e conflito para mudanças exclusivamente de metadados antes do código;
+- nenhuma edição ou exclusão em massa;
+- nenhuma hierarquia persistente sem migração;
+- nenhuma sincronização em nuvem ou colaboração;
 - nenhuma promoção para `main`.
