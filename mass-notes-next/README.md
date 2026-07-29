@@ -13,21 +13,25 @@ Experimento isolado que preserva a identidade visual e as engines do Escrevaral/
 - cópia nativa: envelope versionado e restauração como novas cópias;
 - biblioteca: busca, filtros combináveis, ordenação, favorito e tags editáveis;
 - importação legada: `.esc`/`vrda` v1 com checksum, prévia e gravação somente após confirmação;
-- Gates 1 a 13 e Gate 10.5 de higiene: aprovados;
-- matriz atual: 111 cenários por navegador, 222 execuções;
-- próximo passo proposto: Gate 14, preferências locais e retomada previsível da biblioteca.
+- Gates 1 a 13 e Gate 10.5 de higiene: aprovados funcionalmente;
+- matriz anterior ao milestone: 111 cenários por navegador, 222 execuções;
+- milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
+- Gate 14 está suspenso até o veredito integrado.
 
 ## Retomar o projeto
 
 Leia nesta ordem:
 
-1. `docs/PLAN.md`;
-2. `docs/MEMORY.md`;
-3. `docs/CHANGELOG.md`;
-4. log mais recente em `docs/logs/`;
-5. documentação global em `../docs/product/`.
+1. `docs/M0_9_AUDITORIA_OPERACIONAL.md`;
+2. `docs/PLAN.md`;
+3. `docs/MEMORY.md`;
+4. `docs/CHANGELOG.md`;
+5. log mais recente em `docs/logs/`;
+6. documentação global em `../docs/product/`.
 
-Não comece um novo lote antes de revisar plano e memória. Um lote não está concluído sem documentação, testes e evidências na cabeça final.
+A memória M0.9 é viva: decisões, achados, severidades, notas e evidências devem ser atualizados nela no momento em que mudarem.
+
+Não comece um novo gate antes do veredito da auditoria geral. Um lote não está concluído sem documentação, testes e evidências na cabeça final.
 
 ## Executar e validar
 
@@ -83,6 +87,7 @@ Regras de formato, conversão, filtro ou engine não entram diretamente em `App.
 - `legacySourceId` preserva somente a origem auditável; não é a identidade atual do documento;
 - nenhum documento existente é substituído e não há merge campo a campo;
 - lotes inválidos são rejeitados integralmente;
+- durante o M0.9, auditar precede corrigir e feature nova fica suspensa;
 - preview só é publicada depois de build, Chromium, Firefox, cache e smoke público verdes;
 - a aplicação pública raiz permanece fora desta branch.
 
