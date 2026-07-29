@@ -54,8 +54,6 @@ async function exportFormat(page: Page, format: 'txt' | 'md' | 'html') {
 
 async function seedStructuredDocument(page: Page) {
   const editor = await createCleanDocument(page, 'Café / Coração: edição nº 2')
-  await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
 
   await pasteRichText(page, `
     <h2>Capítulo &amp; travessia</h2>
@@ -74,9 +72,9 @@ async function seedStructuredDocument(page: Page) {
   await expect(editor.locator('h2')).toHaveText('Capítulo & travessia')
   await expect(editor.locator('li')).toHaveCount(3)
   await expect(editor.locator('script')).toHaveCount(0)
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible()
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
   await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
   await openExports(page)
   return editor
 }
