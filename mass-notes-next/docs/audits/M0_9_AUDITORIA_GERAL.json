@@ -1,0 +1,94 @@
+{
+  "milestone": "M0.9 — Candidata Integrada do Escrevaral",
+  "updatedAt": "2026-07-29",
+  "status": "in_progress_first_automated_tranche_complete",
+  "head": "a3989f8dfe24cd8a8d035a2c494f5263f1bd3510",
+  "evidence": {
+    "massNotesWorkflow": 30463426867,
+    "argilaWorkflow": 30463426847,
+    "coherenceWorkflow": 30463426811,
+    "scenariosPerBrowser": 116,
+    "totalExecutions": 232,
+    "browsers": ["chromium", "firefox"],
+    "publicPreviewSmoke": "passed"
+  },
+  "provisionalVerdicts": {
+    "closedBeta": "ship_with_conditions",
+    "publicLaunch": "no_ship",
+    "replaceLegacyProduct": "no_ship"
+  },
+  "provisionalScores": {
+    "editorAndPreservation": 92,
+    "library": 90,
+    "engines": 86,
+    "uix": 82,
+    "accessibility": 80,
+    "responsiveness": 89,
+    "importExport": 83,
+    "privacy": 92,
+    "performance": 84,
+    "release": 72,
+    "overall": 85
+  },
+  "findings": [
+    {
+      "id": "M09-F001",
+      "severity": "P2",
+      "area": "release",
+      "status": "open",
+      "summary": "A aplicação nova ainda não possui contrato próprio de PWA/offline.",
+      "blocks": ["public_launch"]
+    },
+    {
+      "id": "M09-F002",
+      "severity": "P2",
+      "area": "parity",
+      "status": "open",
+      "summary": "Prova de Autoria não possui superfície equivalente na nova aplicação.",
+      "blocks": ["replace_legacy_product"]
+    },
+    {
+      "id": "M09-F003",
+      "severity": "P2",
+      "area": "portability",
+      "status": "open",
+      "summary": "Exportação não possui paridade com DOCX, RTF, ePub e Obsidian ZIP.",
+      "blocks": ["replace_legacy_product"]
+    },
+    {
+      "id": "M09-F004",
+      "severity": "P3",
+      "area": "library_preferences",
+      "status": "accepted_for_now",
+      "summary": "Busca, filtros e ordenação não persistem entre sessões.",
+      "blocks": []
+    }
+  ],
+  "openP0": 0,
+  "openP1": 0,
+  "stabilizationIncident": {
+    "type": "test_timing",
+    "productChanged": false,
+    "summary": "Um teste antigo do RimaLab exigia observar estado intermediário do autosave; o estado já havia convergido para Salvo no Firefox.",
+    "resolution": "Aceitar Alterado, Salvando ou Salvo antes de Ctrl+S, mantendo Salvo como convergência obrigatória."
+  },
+  "completedIntegratedScenarios": [
+    "write_metadata_autosave_reload",
+    "all_engines_sequence_without_mutation_or_sentinel_network_leak",
+    "library_filters_preserve_active_document_and_revision",
+    "mobile_drawer_320_390_focus_and_overflow",
+    "100_documents_and_100k_character_document"
+  ],
+  "remainingWork": [
+    "manual_uix_heuristics",
+    "assistive_technology_and_real_devices",
+    "complete_network_observation",
+    "real_two_page_conflict_journey",
+    "native_backup_and_legacy_import_same_session",
+    "export_before_persistence",
+    "long_session_latency_and_memory",
+    "expanded_engine_corpora",
+    "explicit_decisions_for_p2_findings",
+    "final_exact_head_evidence"
+  ]
+}
