@@ -8,16 +8,21 @@ Igualar as capacidades linguísticas úteis do Escrevaral legado e superá-las e
 
 Este programa não aceita como prova frases como “100% concluído” sem corpus, métrica, bordas, falhas registradas e comparação reproduzível.
 
-## Estado de entrada
+## Estado atual
 
 - branch: `experiment/mass-notes-tiptap`;
 - PR `#155`: aberto e em rascunho;
 - `main` e aplicação pública: intactos;
-- M0.9: auditoria técnica concluída, com 124 cenários por navegador e 248 execuções na matriz consolidada;
+- M0.9: encerrado como auditoria, sem autorizar lançamento ou substituição;
+- M1.0: **em execução**;
+- matriz atual: **138 cenários por navegador, 276 execuções**;
+- cabeça funcional E0/E1: `d44791ff1a317610c9dd152360cfbb9b168c503a`;
+- Mass Notes `30493491424`, Argila `30493491638` e coerência `30493491411`: verdes;
 - engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - famílias legadas carregadas localmente por adaptadores tipados;
 - P0/P1 conhecidos nas engines: 0/0;
-- lacunas principais: profundidade lexical, superfície sintático-morfológica autônoma e prova qualitativa de utilidade.
+- primeiro delta contextual comprovado: corpus v1 passou de 8/14 para 14/14 casos únicos;
+- lacunas principais restantes: profundidade lexical, superfície sintático-morfológica autônoma e prova qualitativa das cinco engines.
 
 ## Adversário mensurável
 
@@ -81,16 +86,16 @@ Meta de candidata superior:
 
 ### E0 — Baseline e corpus
 
-Estado: **em execução**.
+Estado: **concluída**.
 
-Entregáveis:
+Entregues:
 
 - corpus v1 de 14 casos morfossintáticos;
 - testes em Chromium e Firefox;
 - comparação com a bancada legada;
 - inventário de falhas reais antes de alterar regras.
 
-Casos iniciais:
+Casos:
 
 - `enquanto` em oração, `por enquanto` e `enquanto isso`;
 - `publica/pública`;
@@ -99,15 +104,41 @@ Casos iniciais:
 - `larga` como adjetivo e verbo;
 - `canto` como verbo e substantivo.
 
+Baseline medida:
+
+- 8/14 casos únicos aprovados;
+- 6/14 casos únicos incorretos;
+- 264/276 execuções passaram antes da correção;
+- falhas idênticas em Chromium e Firefox.
+
 ### E1 — Léxico e Sintaxe contextual
 
-Objetivo:
+Estado: **primeira tranche concluída; fase continua aberta**.
 
-- corrigir o corpus E0 sem lookup cego por forma normalizada;
-- preservar diacríticos na decisão;
-- representar particípio adjetivado e substantivação;
-- explicar a evidência contextual;
-- expor uma bancada sintático-morfológica integrada, não um painel técnico invasivo.
+Entregue:
+
+- locuções `por enquanto` e `enquanto isso`;
+- decisão sensível a diacrítico para `publica/pública`;
+- particípio após auxiliar de voz passiva;
+- forma verbal após pronome sujeito em itens ambíguos registrados;
+- adjetivo pós-nominal com evidência determinante + nome;
+- notas que explicam a evidência usada;
+- decisão provável, e não certeza falsa, quando a regra depende de contexto.
+
+Resultado:
+
+- 14/14 casos únicos aprovados;
+- 276/276 execuções aprovadas;
+- nenhuma regressão nos oito casos já corretos;
+- nenhuma alteração em `lexical-engine.js` ou nos dados legados;
+- ganho implementado na camada contextual tipada do produto novo.
+
+Pendente em E1:
+
+- ampliar negativos para impedir generalização excessiva;
+- cobrir mais formas verbais e particípios ambíguos;
+- criar experiência sintático-morfológica integrada;
+- testar regionalismos, oralidade e ordem marcada.
 
 ### E2 — Profundidade lexical auditável
 
@@ -136,6 +167,23 @@ Responder separadamente:
 3. existe alguma promessa antiga que deve ser aposentada em vez de copiada?
 4. pode substituir integralmente o Escrevaral antigo?
 
+## Evidência E0/E1
+
+Log:
+
+- `docs/logs/2026-07-29-m1-e0-e1-lexico-contextual.md`.
+
+Cabeça funcional:
+
+- `d44791ff1a317610c9dd152360cfbb9b168c503a`.
+
+Workflows:
+
+- Mass Notes `30493491424`: 276/276, publicação, cache e smoke público;
+- Argila `30493491638`: verde;
+- coerência `30493491411`: verde;
+- artefato `mass-notes-tiptap-30493491424`.
+
 ## Regras de execução
 
 - não aumentar contagem de alertas como objetivo;
@@ -149,9 +197,9 @@ Responder separadamente:
 
 ## Próxima ação
 
-1. executar corpus E0;
-2. classificar cada falha como engine, adapter, UI, fixture ou expectativa incorreta;
-3. corrigir o menor conjunto de regras que melhora contexto sem degradar casos existentes;
-4. repetir a matriz integral;
-5. registrar baseline e delta;
-6. iniciar inventário lexical quantitativo e qualitativo.
+1. criar negativos para as cinco regras contextuais novas;
+2. inventariar contagens reais de definições, sinônimos, polissemia e entradas contextuais;
+3. auditar duplicatas, autorreferências, alternativas circulares e lacunas de definição;
+4. selecionar a primeira expansão lexical brasileira com fonte e corpus;
+5. iniciar desenho da bancada sintático-morfológica integrada;
+6. repetir a matriz e registrar o delta.
