@@ -39,7 +39,7 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 17. Metadados editoriais.
 18. **Gate 13 — importação auditável do `.esc` legado:** prévia, validação integral, conversão e novas cópias rastreáveis.
 
-## Evidência atual
+## Evidência funcional anterior ao M0.9
 
 - cabeça funcional do Gate 13: `323e8a1e131a3692932e960e9285570df49a1460`;
 - Mass Notes: workflow `30457008816`, verde;
@@ -49,12 +49,7 @@ Construir uma oficina de escrita para português brasileiro sobre infraestrutura
 - build, Chromium, Firefox, publicação, cache e smoke público verdes;
 - aplicação pública, `main` e service worker intactos.
 
-Documentação detalhada:
-
-- `docs/logs/2026-07-29-gate-13-importacao-esc-legado.md`;
-- `../docs/product/MASS_NOTES_TIPTAP_GATE_13.md`.
-
-## Gate 13 — contrato fechado
+## Gate 13 — contrato fechado funcionalmente
 
 - formato aceito: envelope JSON `format: esc|vrda`, `schemaVersion: 1`, checksum FNV-1a e `payload.manuscripts`;
 - `src/import/legacyEscImport.ts` concentra parsing, validação, checksum, conversão e plano de prévia;
@@ -71,11 +66,46 @@ Documentação detalhada:
 - processamento permanece local;
 - desktop e drawer móvel foram validados em Chromium e Firefox.
 
-## Próximo lote proposto — Gate 14: preferências da biblioteca
+## Milestone atual — M0.9: Candidata Integrada do Escrevaral
 
-Objetivo: retomar busca, filtros e ordenação de forma previsível entre sessões sem transformar preferências de interface em estado autoral.
+O produto atingiu massa crítica. Antes de qualquer novo gate, será auditado como uma oficina integrada, não como uma sequência de capacidades isoladas.
 
-Escopo proposto:
+Memória executável e registro vivo:
+
+- `docs/M0_9_AUDITORIA_OPERACIONAL.md`.
+
+Objetivos:
+
+1. fechar a linha de base documental do Gate 13;
+2. testar jornadas completas que atravessem editor, biblioteca, engines e preservação;
+3. medir UIX, acessibilidade, responsividade, privacidade, desempenho e release;
+4. comparar explicitamente o produto novo com o Escrevaral antigo;
+5. emitir notas, severidades e veredito com evidências;
+6. responder separadamente sobre beta fechada, lançamento público e substituição do produto antigo.
+
+Regras:
+
+- auditar antes de corrigir;
+- não adicionar feature durante o diagnóstico;
+- correção somente quando necessária para medir ou remover bloqueio P0;
+- repetir a matriz completa após qualquer correção;
+- manter PR em rascunho, `main` e aplicação pública intactos.
+
+Entregáveis:
+
+- suíte transversal Playwright;
+- `docs/audits/M0_9_AUDITORIA_GERAL.md`;
+- `docs/audits/M0_9_AUDITORIA_GERAL.json`;
+- log técnico do milestone;
+- contrato global em `docs/product/`;
+- atualização de README, PLAN, MEMORY, CHANGELOG e PR;
+- CI e smoke público na cabeça exata final.
+
+## Gate 14 — suspenso
+
+Gate 14 continua proposto, mas não pode começar antes do veredito M0.9.
+
+Escopo futuro preservado:
 
 1. persistir somente `search`, `status`, `favoritesOnly`, `tag` e `sort` em armazenamento de preferências;
 2. validar e normalizar valores lidos antes de aplicá-los;
@@ -83,7 +113,7 @@ Escopo proposto:
 4. nunca persistir rascunho, seleção, documento ativo ou resultados de engines nesse contrato;
 5. não escrever no IndexedDB nem incrementar `revision`;
 6. manter filtros incompatíveis com dados removidos em fallback seguro;
-7. cobrir nova sessão, armazenamento corrompido, mobile e leitores de teclado.
+7. cobrir nova sessão, armazenamento corrompido, mobile e teclado.
 
 Fora do Gate 14:
 
@@ -93,5 +123,3 @@ Fora do Gate 14:
 - colaboração;
 - taxonomia automática;
 - promoção para `main`.
-
-O Gate 14 permanece proposto e não foi iniciado.
