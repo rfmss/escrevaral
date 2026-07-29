@@ -1,16 +1,17 @@
 {
   "milestone": "M0.9 — Candidata Integrada do Escrevaral",
   "updatedAt": "2026-07-29",
-  "status": "in_progress_first_automated_tranche_complete",
-  "head": "a3989f8dfe24cd8a8d035a2c494f5263f1bd3510",
+  "status": "in_progress_two_automated_tranches_complete",
+  "head": "2a4333337a04b73a6c034b8fd35bc582994a114b",
   "evidence": {
-    "massNotesWorkflow": 30463426867,
-    "argilaWorkflow": 30463426847,
-    "coherenceWorkflow": 30463426811,
-    "scenariosPerBrowser": 116,
-    "totalExecutions": 232,
+    "massNotesWorkflow": 30467582850,
+    "argilaWorkflow": 30467583011,
+    "coherenceWorkflow": 30467584508,
+    "scenariosPerBrowser": 119,
+    "totalExecutions": 238,
     "browsers": ["chromium", "firefox"],
-    "publicPreviewSmoke": "passed"
+    "publicPreviewSmoke": "passed",
+    "artifact": "mass-notes-tiptap-30467582850"
   },
   "provisionalVerdicts": {
     "closedBeta": "ship_with_conditions",
@@ -18,17 +19,17 @@
     "replaceLegacyProduct": "no_ship"
   },
   "provisionalScores": {
-    "editorAndPreservation": 92,
+    "editorAndPreservation": 94,
     "library": 90,
     "engines": 86,
     "uix": 82,
     "accessibility": 80,
     "responsiveness": 89,
-    "importExport": 83,
+    "importExport": 88,
     "privacy": 92,
     "performance": 84,
     "release": 72,
-    "overall": 85
+    "overall": 87
   },
   "findings": [
     {
@@ -62,33 +63,57 @@
       "status": "accepted_for_now",
       "summary": "Busca, filtros e ordenação não persistem entre sessões.",
       "blocks": []
+    },
+    {
+      "id": "M09-F005",
+      "severity": "P3",
+      "area": "multi_tab_preferences",
+      "status": "accepted_for_now",
+      "summary": "A preferência de documento ativo é compartilhada entre abas; criar uma cópia pode mudar o documento aberto por outra aba após recarga.",
+      "blocks": []
     }
   ],
   "openP0": 0,
   "openP1": 0,
-  "stabilizationIncident": {
-    "type": "test_timing",
-    "productChanged": false,
-    "summary": "Um teste antigo do RimaLab exigia observar estado intermediário do autosave; o estado já havia convergido para Salvo no Firefox.",
-    "resolution": "Aceitar Alterado, Salvando ou Salvo antes de Ctrl+S, mantendo Salvo como convergência obrigatória."
-  },
+  "stabilizationIncidents": [
+    {
+      "type": "autosave_timing",
+      "productChanged": false,
+      "summary": "Helpers antigos exigiam observar Alterado ou Salvando, mas o Firefox podia já ter convergido para Salvo.",
+      "resolution": "Aceitar estados de persistência válidos e manter Salvo como convergência final obrigatória."
+    },
+    {
+      "type": "active_document_expectation",
+      "productChanged": false,
+      "summary": "O teste de conflito pressupunha seleção ativa persistida independentemente por aba.",
+      "resolution": "Validar preservação dos dois registros e registrar a preferência compartilhada como P3."
+    },
+    {
+      "type": "engine_failure_fixture_synchronization",
+      "productChanged": false,
+      "summary": "O cenário de falha simulada do RimaLab misturava exceção da engine com atualização de documento ainda em trânsito.",
+      "resolution": "Estabilizar a fonte antes da primeira leitura e manter o teste focado no isolamento após exceção."
+    }
+  ],
   "completedIntegratedScenarios": [
     "write_metadata_autosave_reload",
     "all_engines_sequence_without_mutation_or_sentinel_network_leak",
     "library_filters_preserve_active_document_and_revision",
     "mobile_drawer_320_390_focus_and_overflow",
-    "100_documents_and_100k_character_document"
+    "100_documents_and_100k_character_document",
+    "mixed_manuscript_metadata_conflict_preserves_both_versions",
+    "export_current_draft_before_persistence_converges",
+    "native_backup_restore_and_legacy_import_same_session"
   ],
   "remainingWork": [
-    "manual_uix_heuristics",
-    "assistive_technology_and_real_devices",
+    "manual_uix_heuristics_all_widths",
+    "zoom_reduced_motion_assistive_technology_and_real_devices",
     "complete_network_observation",
-    "real_two_page_conflict_journey",
-    "native_backup_and_legacy_import_same_session",
-    "export_before_persistence",
+    "integrated_emergency_recovery",
     "long_session_latency_and_memory",
     "expanded_engine_corpora",
     "explicit_decisions_for_p2_findings",
+    "final_verdict",
     "final_exact_head_evidence"
   ]
 }
