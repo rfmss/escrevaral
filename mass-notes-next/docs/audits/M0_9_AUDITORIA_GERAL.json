@@ -1,17 +1,17 @@
 {
   "milestone": "M0.9 — Candidata Integrada do Escrevaral",
   "updatedAt": "2026-07-29",
-  "status": "in_progress_two_automated_tranches_complete",
-  "head": "2a4333337a04b73a6c034b8fd35bc582994a114b",
+  "status": "in_progress_three_automated_tranches_complete",
+  "head": "305d0727ddfaee11f3e7680d0f9168023e9a4284",
   "evidence": {
-    "massNotesWorkflow": 30467582850,
-    "argilaWorkflow": 30467583011,
-    "coherenceWorkflow": 30467584508,
-    "scenariosPerBrowser": 119,
-    "totalExecutions": 238,
+    "massNotesWorkflow": 30478738806,
+    "argilaWorkflow": 30478738678,
+    "coherenceWorkflow": 30478738607,
+    "scenariosPerBrowser": 126,
+    "totalExecutions": 252,
     "browsers": ["chromium", "firefox"],
     "publicPreviewSmoke": "passed",
-    "artifact": "mass-notes-tiptap-30467582850"
+    "artifact": "mass-notes-tiptap-30478738806"
   },
   "provisionalVerdicts": {
     "closedBeta": "ship_with_conditions",
@@ -19,17 +19,17 @@
     "replaceLegacyProduct": "no_ship"
   },
   "provisionalScores": {
-    "editorAndPreservation": 94,
-    "library": 90,
-    "engines": 86,
-    "uix": 82,
-    "accessibility": 80,
-    "responsiveness": 89,
+    "editorAndPreservation": 96,
+    "library": 91,
+    "engines": 90,
+    "uix": 87,
+    "accessibility": 84,
+    "responsiveness": 94,
     "importExport": 88,
-    "privacy": 92,
-    "performance": 84,
-    "release": 72,
-    "overall": 87
+    "privacy": 90,
+    "performance": 88,
+    "release": 68,
+    "overall": 88
   },
   "findings": [
     {
@@ -71,10 +71,54 @@
       "status": "accepted_for_now",
       "summary": "A preferência de documento ativo é compartilhada entre abas; criar uma cópia pode mudar o documento aberto por outra aba após recarga.",
       "blocks": []
+    },
+    {
+      "id": "M09-F006",
+      "severity": "P2",
+      "area": "release_network_dependency",
+      "status": "open",
+      "summary": "A Anatomia carrega page-flip@2.0.7 do unpkg em tempo de execução; não há vazamento autoral, mas a superfície não é autônoma/offline.",
+      "blocks": ["public_launch", "offline_promise"]
     }
   ],
   "openP0": 0,
   "openP1": 0,
+  "knownExternalRequests": [
+    {
+      "method": "GET",
+      "url": "https://unpkg.com/page-flip@2.0.7/dist/js/page-flip.browser.js",
+      "containsAuthorText": false,
+      "findingId": "M09-F006"
+    }
+  ],
+  "nonFunctionalMeasurements": {
+    "viewports": [320, 390, 768, 1024, 1280, 1440],
+    "zoomEquivalentViewport": {
+      "cssWidth": 640,
+      "cssHeight": 450,
+      "physicalReference": "1280x900_at_200_percent",
+      "limitation": "does_not_replace_real_browser_zoom"
+    },
+    "reducedMotion": {
+      "recognizedBy": ["chromium", "firefox"],
+      "maxObservedTransitionMs": 300
+    },
+    "sessionCycles": 12,
+    "chromium": {
+      "p95SaveMs": 192,
+      "initialDomNodes": 179,
+      "finalDomNodes": 179,
+      "initialHeapBytes": 16100000,
+      "finalHeapBytes": 16100000
+    },
+    "firefox": {
+      "p95SaveMs": 90,
+      "initialDomNodes": 179,
+      "finalDomNodes": 179,
+      "heapMeasurement": "unavailable"
+    },
+    "interpretation": "ci_regression_signal_not_sla"
+  },
   "stabilizationIncidents": [
     {
       "type": "autosave_timing",
@@ -93,6 +137,30 @@
       "productChanged": false,
       "summary": "O cenário de falha simulada do RimaLab misturava exceção da engine com atualização de documento ainda em trânsito.",
       "resolution": "Estabilizar a fonte antes da primeira leitura e manter o teste focado no isolamento após exceção."
+    },
+    {
+      "type": "drawer_accessible_name",
+      "productChanged": false,
+      "summary": "A tranche 3 buscava Arquivo de páginas, mas o nome acessível real é Arquivo de documentos.",
+      "resolution": "Alinhar o teste ao contrato acessível verdadeiro."
+    },
+    {
+      "type": "known_external_dependency",
+      "productChanged": false,
+      "summary": "A auditoria de rede revelou o carregamento externo de page-flip pela Anatomia.",
+      "resolution": "Registrar M09-F006, permitir apenas a URL exata e continuar falhando para qualquer outra origem ou vazamento autoral."
+    },
+    {
+      "type": "transient_reduced_motion_overlay",
+      "productChanged": false,
+      "summary": "No Firefox, o overlay reduzido desaparecia antes da leitura posterior do estilo.",
+      "resolution": "Capturar a duração no instante de criação por MutationObserver instalado antes do clique."
+    },
+    {
+      "type": "browser_inner_text_serialization",
+      "productChanged": false,
+      "summary": "O Chromium acrescenta linhas visuais em innerText para parágrafos estruturados.",
+      "resolution": "Usar paste estruturado e o snapshot semântico do contrato ProseMirror para sincronização e não mutação."
     }
   ],
   "completedIntegratedScenarios": [
@@ -103,15 +171,20 @@
     "100_documents_and_100k_character_document",
     "mixed_manuscript_metadata_conflict_preserves_both_versions",
     "export_current_draft_before_persistence_converges",
-    "native_backup_restore_and_legacy_import_same_session"
+    "native_backup_restore_and_legacy_import_same_session",
+    "six_viewports_geometry_drawers_and_screenshots",
+    "css_zoom_equivalent_layout",
+    "reduced_motion_transition",
+    "full_network_observation_with_known_external_dependency",
+    "integrated_emergency_recovery",
+    "twelve_cycle_session_metrics",
+    "separate_corpus_for_each_engine_without_semantic_mutation"
   ],
   "remainingWork": [
-    "manual_uix_heuristics_all_widths",
-    "zoom_reduced_motion_assistive_technology_and_real_devices",
-    "complete_network_observation",
-    "integrated_emergency_recovery",
-    "long_session_latency_and_memory",
-    "expanded_engine_corpora",
+    "human_uix_review_of_screenshots",
+    "real_browser_zoom_200_percent",
+    "screen_readers_assistive_technology_and_physical_devices",
+    "real_device_long_session",
     "explicit_decisions_for_p2_findings",
     "final_verdict",
     "final_exact_head_evidence"
