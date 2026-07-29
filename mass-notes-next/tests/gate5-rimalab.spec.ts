@@ -32,7 +32,10 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
 
   const finalVisibleLine = plain.split('\n').filter(Boolean).at(-1) ?? plain
   await expect(editor).toContainText(finalVisibleLine)
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando/ })).toBeVisible()
+  // O autosave pode atravessar Alterado/Salvando antes da asserção no Firefox.
+  // O contrato relevante aqui é que existe um estado de persistência observável
+  // e que Ctrl+S converge para Salvo, não a duração de um estado intermediário.
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
   await page.keyboard.press('Control+S')
   await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
 }
