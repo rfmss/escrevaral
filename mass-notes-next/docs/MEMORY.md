@@ -8,14 +8,28 @@ Atualizado em: 2026-07-29
 - PR `#155`: aberto, mesclável e em rascunho;
 - preview: `preview-mass-notes-tiptap`;
 - aplicação pública, `main` e service worker: intactos;
-- Gates 1 a 13 e Gate 10.5: verdes funcionalmente;
-- navegadores obrigatórios: Chromium e Firefox;
-- matriz anterior ao milestone: 111 cenários por navegador, 222 execuções;
-- cabeça funcional do Gate 13: `323e8a1e131a3692932e960e9285570df49a1460`;
-- workflows verdes: Mass Notes `30457008816`, Argila `30457009394`, coerência `30457008762`;
+- Gates 1 a 13 e Gate 10.5: verdes;
 - milestone atual: **M0.9 — Candidata Integrada do Escrevaral**;
-- memória executável: `M0_9_AUDITORIA_OPERACIONAL.md`;
-- Gate 14 está suspenso até o veredito M0.9.
+- primeira tranche M0.9: concluída;
+- navegadores obrigatórios: Chromium e Firefox;
+- matriz atual: 116 cenários por navegador, 232 execuções;
+- cabeça funcional da primeira tranche: `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
+- workflows verdes: Mass Notes `30463426867`, Argila `30463426847`, coerência `30463426811`;
+- nota provisória geral: 85/100;
+- beta fechada: `SHIP COM CONDIÇÕES` provisório;
+- lançamento público: `NO-SHIP` provisório;
+- substituição integral do produto antigo: `NO-SHIP` provisório;
+- P0 abertos: 0;
+- P1 abertos: 0;
+- Gate 14 está suspenso até o veredito final M0.9.
+
+## Fontes de retomada do milestone
+
+1. `M0_9_AUDITORIA_OPERACIONAL.md` — memória executável viva;
+2. `audits/M0_9_AUDITORIA_GERAL.md` — relatório humano;
+3. `audits/M0_9_AUDITORIA_GERAL.json` — estado estruturado;
+4. `logs/2026-07-29-m0-9-auditoria-integrada-tranche-1.md` — evidência da primeira tranche;
+5. `../../docs/product/MASS_NOTES_TIPTAP_M0_9.md` — contrato global.
 
 ## Decisões permanentes
 
@@ -45,32 +59,138 @@ Atualizado em: 2026-07-29
 24. Correção durante a auditoria só é aceita para remover bloqueio de medição ou P0, sempre com documentação e matriz completa posterior.
 25. Beta fechada, lançamento público e substituição do Escrevaral antigo recebem vereditos separados.
 26. O PR permanece em rascunho e `main` intacta durante todo o milestone.
+27. Notas e vereditos da primeira tranche são provisórios enquanto houver fases obrigatórias pendentes.
+28. Uma falha temporal de teste não deve ser promovida a defeito de produto sem reprodução funcional.
+29. Estados intermediários rápidos do autosave podem não ser observáveis; a convergência final para `Salvo` continua obrigatória.
 
-## Contrato do milestone M0.9
+## Primeira tranche M0.9
 
-Fonte executável: `docs/M0_9_AUDITORIA_OPERACIONAL.md`.
+Criado `tests/m0-9-integrated.spec.ts` com cinco cenários por navegador.
 
-Esse documento contém:
+### Jornada de escrita e retomada
 
-- fases e matriz transversal;
-- placar vivo por área;
-- registro cumulativo de decisões;
-- registro de achados e severidades;
-- evidências por cabeça e workflow;
-- matriz de paridade com o produto antigo;
-- critérios de encerramento.
+Aprovados:
 
-Atualização obrigatória quando houver:
+- criação de página;
+- título e texto;
+- estado editorial;
+- favorito;
+- tags;
+- autosave;
+- recarga;
+- retomada do conteúdo e dos metadados.
 
-- mudança de escopo;
-- decisão de produto ou arquitetura;
-- novo P0, P1 ou P2;
-- alteração de severidade;
-- correção aceita;
-- nova evidência de CI;
-- mudança de nota ou veredito.
+### Engines em sequência
 
-Nenhuma sessão deve depender do histórico de conversa para saber o próximo passo.
+Executadas na mesma página:
+
+- Revisão;
+- Espelho de Voz;
+- Termos que pedem contexto;
+- RimaLab;
+- Palavras/Léxico.
+
+Resultado:
+
+- texto preservado;
+- `revision` preservada;
+- `plainText` preservado;
+- nenhuma aplicação automática;
+- frase autoral sentinela ausente de URL e corpo de requisição.
+
+### Organização
+
+Aprovados:
+
+- busca e filtro que excluem a página ativa do recorte;
+- página ativa continua aberta;
+- filtros não incrementam revisão;
+- rascunho não é descartado;
+- limpar filtros restaura o cartão ativo.
+
+### Mobile integrado
+
+Aprovado em 320 e 390 px:
+
+- drawer;
+- sete abas;
+- ausência de overflow horizontal bloqueador;
+- fechamento por Escape;
+- retorno de foco ao acionador.
+
+### Escala funcional
+
+Aprovados:
+
+- 100 documentos no IndexedDB;
+- documento ativo acima de 100 mil caracteres;
+- editor editável;
+- biblioteca pesquisável;
+- página ativa preservada fora do recorte.
+
+Essa evidência comprova funcionamento, mas ainda não define orçamento de latência ou memória.
+
+## Incidente da primeira tranche
+
+Primeira execução:
+
+- cabeça `f3ab89db816557984ed19bc8ab17d2d96137d946`;
+- 231/232;
+- todos os dez casos M0.9 passaram;
+- única falha em helper antigo do RimaLab no Firefox.
+
+Causa:
+
+- o helper exigia observar `Alterado|Salvando` após paste;
+- o autosave já havia convergido para `Salvo` antes da asserção.
+
+Decisão:
+
+- instabilidade temporal de teste;
+- produto não alterado;
+- helper aceita `Alterado|Salvando|Salvo` antes do comando explícito;
+- `Salvo` permanece obrigatório como estado final.
+
+Repetição:
+
+- cabeça `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`;
+- 232/232;
+- publicação, cache e smoke público verdes;
+- Argila e coerência verdes.
+
+## Achados provisórios
+
+### P0
+
+Nenhum.
+
+### P1
+
+Nenhum.
+
+### P2
+
+- `M09-F001`: aplicação nova sem contrato próprio de PWA/offline; bloqueia lançamento público.
+- `M09-F002`: Prova de Autoria ausente; bloqueia substituição integral enquanto não houver decisão explícita.
+- `M09-F003`: exportação sem DOCX, RTF, ePub e Obsidian ZIP; não bloqueia beta, mas bloqueia paridade integral para fluxos dependentes.
+
+### P3
+
+- `M09-F004`: busca, filtros e ordenação da biblioteca não persistem entre sessões; Gate 14 permanece suspenso.
+
+## Placar provisório
+
+- editor e preservação: 92;
+- biblioteca: 90;
+- engines: 86;
+- UIX: 82;
+- acessibilidade: 80;
+- responsividade: 89;
+- importação e exportação: 83;
+- privacidade: 92;
+- desempenho: 84;
+- release: 72;
+- geral: 85.
 
 ## Contrato do documento
 
@@ -97,87 +217,11 @@ Envelope suportado:
 - `payload.manuscripts`: lista não vazia;
 - limite defensivo: 2.000 itens por lote.
 
-O parser `src/import/legacyEscImport.ts`:
+O parser `src/import/legacyEscImport.ts` valida todo o lote, cria prévia em memória e converte texto com `plainTextToContent`.
 
-- lê JSON localmente;
-- valida formato, versão, payload, checksum e limite;
-- exige `id` legado não vazio e único no lote;
-- exige conteúdo textual em `text` ou `content`;
-- cria um `LegacyEscImportPlan` em memória;
-- não conhece IndexedDB nem React;
-- converte texto com `plainTextToContent`;
-- mapeia estado de forma conservadora;
-- normaliza tags pelos contratos da biblioteca;
-- converte `pinned` ou `favorite` para favorito;
-- preserva datas válidas e usa fallback previsível.
+`importLegacyDocumentsAsCopies` usa uma transação única, UUIDs novos, sufixo `— importado`, `revision: 0`, `add` e preservação de `legacySourceId`.
 
-Mapeamento de estado:
-
-- pronto, finalizado, publicado ou concluído → `Pronto`;
-- corte, revisão ou edição → `Em corte`;
-- demais valores → `Rascunho`.
-
-## Contrato de prévia e confirmação
-
-Superfície: `BackupPanel`, seção “Trazer acervo antigo”.
-
-- aceita somente nome terminado em `.esc`;
-- seleção limpa qualquer plano anterior;
-- arquivo válido mostra quantidade, formato e até cinco itens;
-- cada item apresenta título, tipo legado, palavras e estado convertido;
-- cancelar descarta o plano sem escrita;
-- confirmação chama uma única função transacional;
-- mensagens são anunciadas por `role=status`;
-- a interface cabe no drawer móvel sem overflow.
-
-## Contrato transacional
-
-`importLegacyDocumentsAsCopies`:
-
-- recebe somente documentos já convertidos e validados;
-- abre uma transação `readwrite` única;
-- exige `legacySourceId` em todos os itens;
-- gera UUID novo para cada documento;
-- acrescenta `— importado` ao título;
-- inicia `revision` em zero;
-- atribui novos tempos de criação e atualização em ordem estável;
-- mantém `legacySourceId`;
-- usa `add`, nunca `put` sobre identidade de origem;
-- só publica BroadcastChannel depois do sucesso integral.
-
-Não existem:
-
-- importação parcial;
-- substituição de documentos;
-- merge campo a campo;
-- escolha automática de “mais novo”;
-- deduplicação silenciosa entre importações;
-- upload externo.
-
-## Cópia nativa versus importação legada
-
-Cópia nativa:
-
-- schema `escrevaral.mass-notes-next.backup`, versão 1;
-- preserva JSON Tiptap completo;
-- restaura com sufixo `— restaurado`;
-- não preserva `legacySourceId` da fonte como identidade de restauração.
-
-Importação legada:
-
-- lê envelope `esc|vrda` v1;
-- converte texto simples para JSON Tiptap;
-- usa sufixo `— importado`;
-- preserva `legacySourceId` somente para auditoria.
-
-## Incidentes do Gate 13
-
-- A primeira matriz ficou em 219/222.
-- Dois testes do Gate 9B ainda exigiam exatamente duas ações no painel; o novo importador tornou três ações corretas.
-- Um teste móvel do Gate 12 sofreu condição temporal única no Firefox ao clicar em “Salvar marcadores” enquanto o botão ainda estabilizava.
-- Todos os seis cenários novos do Gate 13 passaram já na primeira matriz.
-- A segunda matriz passou 222/222 sem alterar o contrato do importador.
-- Workflow funcional final: `30457008816`.
+Não existem importação parcial, substituição, merge, escolha automática de versão, deduplicação silenciosa ou upload externo.
 
 ## Limitações conhecidas
 
@@ -190,23 +234,33 @@ Ainda não estão aprovados:
 - operações em massa;
 - pastas ou coleções persistentes;
 - DOCX, RTF, ePub e Obsidian ZIP;
+- Prova de Autoria na nova fundação;
 - criptografia de backup;
 - sincronização em nuvem e colaboração;
-- service worker da aplicação nova;
+- service worker/PWA da aplicação nova;
 - Tauri, SQLite e paginação física;
 - aplicação automática de sugestões;
 - promoção para `main`.
 
+## Segunda tranche — próxima ação obrigatória
+
+1. conflito real entre duas páginas envolvendo manuscrito e metadados;
+2. exportação antes da persistência;
+3. cópia nativa/restauração e importação legada na mesma sessão;
+4. acessibilidade ampliada, zoom, movimento reduzido e tecnologias assistivas/dispositivos reais;
+5. observação integral de rede;
+6. sessão prolongada, latência e memória;
+7. corpus ampliado por engine;
+8. decisões explícitas para os P2;
+9. veredito final e CI na cabeça exata sem commit posterior.
+
 ## Como retomar
 
 1. conferir branch, PR e workflows;
-2. ler `M0_9_AUDITORIA_OPERACIONAL.md` antes de qualquer outro lote;
-3. revisar P0/P1 abertos, placar e próxima fase;
-4. ler `PLAN.md`, este arquivo e o log mais recente;
-5. instalar com `npm ci`;
-6. não editar a branch de preview;
-7. não adicionar feature durante o diagnóstico;
-8. manter importação em `src/import/` e persistência em `src/storage/`;
-9. não enfraquecer checksum ou atomicidade para aceitar fixtures;
-10. não usar `legacySourceId` como ID atual;
-11. iniciar o Gate 14 somente após veredito explícito do M0.9.
+2. ler `M0_9_AUDITORIA_OPERACIONAL.md`;
+3. revisar P0/P1, P2 e próxima fase;
+4. consultar relatório humano e JSON;
+5. não editar a branch de preview;
+6. não adicionar feature durante o diagnóstico;
+7. não enfraquecer checksum, atomicidade ou convergência de salvamento;
+8. iniciar o Gate 14 somente após veredito final explícito do M0.9.
