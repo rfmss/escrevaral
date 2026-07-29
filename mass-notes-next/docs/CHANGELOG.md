@@ -94,9 +94,19 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - o fixture estrutural do Gate 9 passou a sincronizar a DOM Tiptap com o estado React antes de baixar o arquivo;
 - matriz elevada para 91 cenários por navegador, 182 execuções;
 - workflow funcional `30420965045` aprovou a implementação;
-- workflow final `30422368445` validou a cabeça `31f6fbe92b3a6742affe26ad797046d9b2ae0e3a` com build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes.
+- workflow final `30422368445` validou a cabeça do Gate 10 com build, Chromium, Firefox, publicação, renovação de cache e verificação pública verdes.
 
-## Próximo lote proposto
+### Gate 10.5 — fronteiras de distribuição
+
+- o auditor global passou a considerar somente JS/CSS da aplicação pública raiz;
+- `mass-notes-next/` foi reconhecido como aplicação Vite com build e preview próprios;
+- mudanças isoladas não avançam artificialmente `ASSET_VERSION` ou `CACHE_NAME`;
+- PRs mistos continuam auditando qualquer asset público real;
+- adicionada regressão Python para assets públicos, preview isolada, relatórios e fontes não distribuídas;
+- coerência `30430515120`, Argila `30430515008` e Mass Notes `30430515420` ficaram verdes;
+- Mass Notes permaneceu com 182/182, publicação e verificação pública aprovadas.
+
+## Próximo lote aprovado
 
 - Gate 11: organização da biblioteca sobre estado, favorito, tags, busca e datas já existentes;
 - nenhuma exclusão em massa neste corte;
