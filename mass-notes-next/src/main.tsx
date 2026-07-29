@@ -11,6 +11,7 @@ import './styles/theme-blueprint-composition.css'
 import './styles/review-decorations.css'
 import './styles/export-panel.css'
 import './styles/lexical-panel.css'
+import './styles/library-organization.css'
 import './styles/anatomy-host.css'
 import './styles/page-press-transition.css'
 
