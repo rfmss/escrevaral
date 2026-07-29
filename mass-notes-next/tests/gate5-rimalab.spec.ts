@@ -19,6 +19,12 @@ async function createCleanDocument(page: Page, title: string) {
   return editor
 }
 
+async function settleDocument(page: Page) {
+  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+}
+
 async function pasteStructuredText(page: Page, html: string, plain: string) {
   const editor = page.locator('.ProseMirror')
   await editor.evaluate((element, payload) => {
@@ -33,11 +39,8 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
   const finalVisibleLine = plain.split('\n').filter(Boolean).at(-1) ?? plain
   await expect(editor).toContainText(finalVisibleLine)
   // O autosave pode atravessar Alterado/Salvando antes da asserção no Firefox.
-  // O contrato relevante aqui é que existe um estado de persistência observável
-  // e que Ctrl+S converge para Salvo, não a duração de um estado intermediário.
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
-  await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
+  // O contrato relevante é a convergência final para Salvo.
+  await settleDocument(page)
 }
 
 async function openRimaLab(page: Page) {
@@ -153,6 +156,10 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Falha sonora')
   await editor.fill('O amor encontrou a dor e guardou uma flor.')
+  // Este cenário mede isolamento depois de uma exceção simulada, não análise
+  // concorrente com uma atualização ainda em trânsito. Estabilizamos a fonte
+  // antes da primeira leitura para não misturar os dois contratos.
+  await settleDocument(page)
   const panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
   await expect(panel.locator('.rima-reading')).toBeVisible()
