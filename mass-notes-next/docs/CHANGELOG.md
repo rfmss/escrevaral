@@ -154,16 +154,30 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 ### M0.9 — Candidata Integrada do Escrevaral
 
 - criada `docs/M0_9_AUDITORIA_OPERACIONAL.md` como memória executável e viva;
+- criados relatório humano, JSON estruturado, log técnico e contrato global do milestone;
 - registradas fases de jornada, engines, portabilidade, UIX, acessibilidade, privacidade, desempenho e release;
 - criado placar vivo, registro de decisões, achados, evidências e matriz de paridade;
 - definido que beta, lançamento público e substituição do produto antigo terão vereditos separados;
 - Gate 14 foi suspenso até a conclusão da auditoria;
-- nenhuma feature nova será iniciada antes do diagnóstico integrado.
+- nenhuma feature nova será iniciada antes do diagnóstico integrado;
+- criada `tests/m0-9-integrated.spec.ts` com cinco jornadas por navegador;
+- aprovadas escrita + metadados + recarga, cinco engines em sequência, filtros sem mutação, mobile 320/390 e escala de 100 páginas com documento acima de 100 mil caracteres;
+- frase autoral sentinela não apareceu em URL ou corpo de requisição durante a sequência de engines;
+- primeira execução ficou 231/232: todos os 10 casos M0.9 passaram e a única falha foi temporal em helper antigo do RimaLab;
+- o produto não foi alterado; o helper passou a aceitar autosave já convergido para `Salvo` e manteve `Salvo` como estado final obrigatório;
+- segunda execução aprovou 232/232;
+- workflow `30463426867` aprovou build, Chromium, Firefox, publicação, cache e smoke público;
+- candidata Argila `30463426847` e coerência `30463426811` ficaram verdes;
+- nenhum P0 ou P1 foi aberto na primeira tranche;
+- P2 provisórios: PWA/offline próprio ausente, Prova de Autoria ausente e paridade de exportação incompleta;
+- nota provisória geral: 85/100;
+- beta fechada recebeu `SHIP COM CONDIÇÕES` provisório; lançamento público e substituição integral permanecem `NO-SHIP`.
 
 ## Próximo trabalho autorizado
 
-- fechar a linha de base documental do Gate 13;
-- criar e executar a suíte transversal M0.9;
-- produzir relatório, JSON de notas/severidades, log e contrato global;
-- emitir veredito com evidência na cabeça exata;
+- executar segunda tranche M0.9;
+- cobrir conflito real entre abas, portabilidade na mesma sessão e exportação antes da persistência;
+- ampliar acessibilidade, rede, desempenho e corpus por engine;
+- tomar decisões explícitas para P2;
+- emitir veredito final com evidência na cabeça exata;
 - manter PR em rascunho e `main` intacta.
