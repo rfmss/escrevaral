@@ -2,7 +2,7 @@
 
 Data: 2026-07-29
 
-Estado: em execução
+Estado: em execução — duas tranches automatizadas concluídas
 
 ## Objetivo
 
@@ -24,24 +24,17 @@ O milestone emite respostas independentes para:
 - manter `main` e aplicação pública intactas;
 - não editar branch de preview;
 - não enfraquecer teste para obter verde;
-- corrigir durante a auditoria somente bloqueio P0 ou impedimento da medição;
-- documentar decisão, achado e evidência no momento em que mudam;
+- corrigir somente P0 ou impedimento da medição;
+- documentar decisão, achado e evidência quando mudam;
 - repetir matriz completa após correção;
-- nenhum texto autoral pode sair em requisição de rede.
+- nenhum texto autoral pode sair em requisição de rede;
+- registrar SHA documental exato no PR após CI, sem commit autorreferente.
 
 ## Memória operacional
 
-Fonte executável:
-
-- `mass-notes-next/docs/M0_9_AUDITORIA_OPERACIONAL.md`.
-
-Relatório humano:
-
-- `mass-notes-next/docs/audits/M0_9_AUDITORIA_GERAL.md`.
-
-Relatório estruturado:
-
-- `mass-notes-next/docs/audits/M0_9_AUDITORIA_GERAL.json`.
+- executável: `mass-notes-next/docs/M0_9_AUDITORIA_OPERACIONAL.md`;
+- relatório humano: `mass-notes-next/docs/audits/M0_9_AUDITORIA_GERAL.md`;
+- relatório estruturado: `mass-notes-next/docs/audits/M0_9_AUDITORIA_GERAL.json`.
 
 ## Áreas obrigatórias
 
@@ -64,14 +57,14 @@ Relatório estruturado:
 - P2: defeito relevante, inconsistência importante ou lacuna de paridade;
 - P3: acabamento e melhoria não bloqueadora.
 
-## Primeira tranche aprovada
+## Cobertura automatizada aprovada
 
-Cabeça funcional: `a3989f8dfe24cd8a8d035a2c494f5263f1bd3510`.
+Cabeça funcional da tranche 2: `2a4333337a04b73a6c034b8fd35bc582994a114b`.
 
 Matriz:
 
-- 116 cenários por navegador;
-- 232 execuções;
+- 119 cenários por navegador;
+- 238 execuções;
 - Chromium e Firefox.
 
 Jornadas:
@@ -80,14 +73,47 @@ Jornadas:
 - cinco superfícies de engines em sequência sem mutação;
 - sentinela autoral ausente de URL/corpo de requisição;
 - filtros sem mutar revisão ou descartar página ativa;
-- drawer integrado em 320 e 390 px;
-- 100 páginas e documento acima de 100 mil caracteres.
+- drawer em 320 e 390 px;
+- 100 páginas e documento acima de 100 mil caracteres;
+- conflito misto entre manuscrito e metadados preservando as duas versões;
+- exportação do rascunho atual antes do autosave convergir;
+- cópia nativa, restauração e `.esc` legado na mesma sessão.
 
 Evidências:
 
-- Mass Notes `30463426867`: verde, 232/232, publicação, cache e smoke público;
-- Argila `30463426847`: verde;
-- coerência `30463426811`: verde.
+- Mass Notes `30467582850`: 238/238, publicação, cache e smoke público;
+- Argila `30467583011`: verde;
+- coerência `30467584508`: verde;
+- artefato `mass-notes-tiptap-30467582850`.
+
+## Contratos transversais aprovados
+
+### Conflito
+
+- revisão remota mais nova abre conflito explícito;
+- nenhuma versão é apagada silenciosamente;
+- versão local pode virar cópia com UUID novo;
+- documento remoto e cópia local permanecem no IndexedDB;
+- metadados locais são preservados na cópia.
+
+A preferência de documento ativo é compartilhada entre abas. Isso não é perda de dados, mas deve permanecer documentado até eventual gate próprio.
+
+### Exportação
+
+- usa o estado React/Tiptap atual;
+- não depende de releitura do IndexedDB;
+- inclui título e conteúdo ainda em `Alterado|Salvando`;
+- não impede convergência posterior do autosave.
+
+### Portabilidade combinada
+
+- cópia nativa e importação legada mantêm parsers próprios;
+- restauração cria novas cópias;
+- prévia legada pode ser cancelada sem escrita;
+- confirmação legada usa transação única;
+- página ativa permanece aberta;
+- nenhum documento existente é substituído;
+- `legacySourceId` permanece auditável.
 
 ## Achados provisórios
 
@@ -103,7 +129,8 @@ P2:
 
 P3:
 
-- preferências da biblioteca não persistem.
+- preferências da biblioteca não persistem;
+- documento ativo é preferência compartilhada entre abas.
 
 ## Veredito provisório
 
@@ -111,22 +138,22 @@ P3:
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`.
 
-Nota provisória: 85/100.
+Nota provisória: 87/100.
 
 ## Limite do veredito
 
-A primeira tranche não encerra o milestone. Ainda são obrigatórios:
+As tranches automatizadas não encerram o milestone. Ainda são obrigatórios:
 
-- conflito transversal real;
-- portabilidade combinada;
-- acessibilidade ampliada e tecnologias assistivas/dispositivos reais;
-- auditoria heurística manual;
-- rede completa;
+- auditoria heurística manual nas larguras definidas;
+- zoom 200%, movimento reduzido, leitores de tela e dispositivos reais;
+- observação integral de rede;
+- recuperação emergencial integrada;
 - sessão prolongada e medição de latência/memória;
 - corpus ampliado por engine;
 - decisões explícitas para P2;
+- veredito final;
 - CI na cabeça documental final sem commit posterior.
 
 ## Critério final
 
-O M0.9 só encerra sem P0 aberto, com todo P1 decidido, matriz integral verde, preview pública válida, documentação sincronizada e PR ainda em rascunho.
+O M0.9 só encerra sem P0 aberto, com todo P1 decidido, matriz integral verde, preview pública válida, documentação sincronizada, veredito registrado e PR ainda em rascunho e não incorporado.
