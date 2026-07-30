@@ -13,6 +13,7 @@ O objetivo atual não é apenas portar o Escrevaral antigo: é demonstrar, por c
 - React, TypeScript, Vite e Tiptap/ProseMirror;
 - JSON estrutural, IndexedDB, autosave, recuperação e conflitos;
 - engines locais por adaptadores tipados;
+- snapshot vivo do Tiptap para análises acionadas pela interface;
 - Revisão inline e Palavras/Léxico somente de leitura;
 - exportação TXT, Markdown e HTML;
 - cópia nativa versionada;
@@ -172,18 +173,42 @@ Achados prioritários:
 5. **P2:** quatro textos de definição repetidos entre chaves;
 6. **P2:** 124 regras de polissemia sem cartão explícito de alternativas.
 
+### Estabilização do snapshot vivo
+
+Durante a validação E2, o Firefox revelou que uma ferramenta podia analisar uma projeção React anterior ao conteúdo já presente no Tiptap. O caso observável foi o RimaLab responder “página vazia” diante de quatro versos visíveis e salvos.
+
+Entregue:
+
+- `src/editor/editorSnapshotBridge.ts`;
+- publicação síncrona de JSON, texto e assinatura em `MassNotesEditor`;
+- RimaLab, Contexto e Palavras/Léxico leem o snapshot vivo no clique;
+- resultado assíncrono é descartado se a assinatura mudar;
+- invalidade é acionada por edição real, não por renderização tardia.
+
+Evidência funcional:
+
+- cabeça `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`;
+- Mass Notes `30505264198`: auditor E2, build, 288/288, publicação, cache e smoke;
+- Argila `30505264208` e coerência `30505264199`: verdes;
+- artefato `mass-notes-tiptap-30505264198`.
+
+Log:
+
+- `logs/2026-07-29-m1-e2-snapshot-vivo-engines.md`.
+
 Ordem E2 aprovada:
 
-1. validar a cabeça documental e a estabilização temporal do teste antigo;
-2. remover apenas `quica`, a duplicata comprovadamente idêntica, com teste;
-3. agrupar os 68 conflitos por domínio editorial;
-4. consolidar lotes pequenos comparando e, quando necessário, combinando redações;
-5. corrigir autorreferências separando alias de busca e sinônimo real;
-6. decidir o destino dos aliases `ode2`, `contemplar2`, `denso2`, `silencio2`;
-7. preencher ou retirar `leitor_modelo` da cobertura;
-8. impedir novas duplicatas por CI;
-9. só então escolher expansão lexical brasileira fundamentada;
-10. repetir auditoria e matriz integral após cada lote.
+1. validar a cabeça documental exata;
+2. registrar SHA, workflows e artefato no PR;
+3. remover apenas `quica`, a duplicata comprovadamente idêntica, com teste;
+4. agrupar os 68 conflitos por domínio editorial;
+5. consolidar lotes pequenos comparando e, quando necessário, combinando redações;
+6. corrigir autorreferências separando alias de busca e sinônimo real;
+7. decidir o destino dos aliases `ode2`, `contemplar2`, `denso2`, `silencio2`;
+8. preencher ou retirar `leitor_modelo` da cobertura;
+9. impedir novas duplicatas por CI;
+10. só então escolher expansão lexical brasileira fundamentada;
+11. repetir auditoria e matriz integral após cada lote.
 
 Critério: superar qualidade antes de aumentar volume. Nenhuma lista cresce sem revisão e regressão.
 
@@ -228,6 +253,7 @@ M1.0 não apaga nem reclassifica essas dívidas.
 - preview nunca recebe edição direta;
 - cada correção linguística exige baseline e caso reproduzível;
 - toda regra nova recebe casos positivos e negativos;
+- engines acionadas pela interface usam o snapshot vivo do Tiptap;
 - motores e bases legadas permanecem baseline enquanto a camada nova demonstra ganhos;
 - CI completa após código e novamente após documentação final;
 - SHA exato e workflows são registrados no PR sem commit autorreferente.
