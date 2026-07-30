@@ -12,6 +12,7 @@ type Listener = (snapshot: LiveEditorSnapshot) => void
 
 const snapshots = new Map<string, LiveEditorSnapshot>()
 const listeners = new Set<Listener>()
+let latestSnapshot: LiveEditorSnapshot | null = null
 
 export function publishLiveEditorSnapshot(
   documentId: string,
@@ -25,12 +26,17 @@ export function publishLiveEditorSnapshot(
     contentSignature: createContentSignature(content),
   }
   snapshots.set(documentId, snapshot)
+  latestSnapshot = snapshot
   listeners.forEach((listener) => listener(snapshot))
   return snapshot
 }
 
 export function readLiveEditorSnapshot(documentId: string): LiveEditorSnapshot | null {
   return snapshots.get(documentId) ?? null
+}
+
+export function readLatestLiveEditorSnapshot(): LiveEditorSnapshot | null {
+  return latestSnapshot
 }
 
 export function subscribeLiveEditorSnapshot(listener: Listener): () => void {
