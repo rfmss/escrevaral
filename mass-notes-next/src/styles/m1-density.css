@@ -107,6 +107,7 @@
 
 /* Uma linha, sem remoção de ações. Em larguras estreitas o próprio grupo rola horizontalmente. */
 .editor-viewport .editor-toolbar {
+  position: sticky !important;
   top: 0 !important;
   z-index: 12;
   flex-wrap: nowrap !important;
