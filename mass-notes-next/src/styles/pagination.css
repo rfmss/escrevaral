@@ -69,7 +69,7 @@ body,
   padding-bottom: var(--escrevaral-page-margin-bottom);
   overflow: visible;
   border: 0 !important;
-  background: transparent !important;
+  background-color: var(--bp-paper, var(--escrevaral-page-surface)) !important;
   box-shadow: none !important;
   filter: none !important;
   isolation: isolate;
@@ -78,7 +78,7 @@ body,
 body.night .paper {
   --escrevaral-page-surface: var(--bp-panel, var(--ui-panel, var(--paper)));
   --escrevaral-page-border: color-mix(in srgb, var(--bp-cyan, var(--blue)) 58%, var(--ui-text));
-  background: transparent !important;
+  background-color: var(--bp-panel, var(--escrevaral-page-surface)) !important;
 }
 
 .paper::before {
@@ -132,27 +132,27 @@ body.night .paper {
     drop-shadow(0 22px 28px var(--shadow));
 }
 
+/* Cobre o fundo contínuo do wrapper somente nos intervalos entre folhas. */
 .paper::after {
-  content: "PÁGINA 1 · ÁREA DE ESCRITA" !important;
+  content: "" !important;
   position: absolute !important;
-  left: auto !important;
-  right: 20px !important;
-  top: 14px !important;
-  bottom: auto !important;
-  z-index: 2;
+  inset: 0 !important;
+  z-index: 1;
   width: auto !important;
   height: auto !important;
-  background: transparent !important;
-  color: var(--blue-deep);
-  font: 900 .6rem/1.2 "Courier New", ui-monospace, monospace;
-  letter-spacing: .13em;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 var(--escrevaral-page-height),
+    var(--bp-canvas, var(--ui-canvas, var(--paper-2))) var(--escrevaral-page-height) var(--escrevaral-page-cycle)
+  ) !important;
 }
 
 .title-input,
 .deck,
 .escrevaral-editor {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .escrevaral-page-break {
@@ -221,7 +221,6 @@ body.focus-mode .editor-shell {
     scroll-padding-block: 76px 58px;
   }
 
-  .paper::after,
   .escrevaral-page-break::after {
     font-size: .5rem;
     letter-spacing: .09em;
