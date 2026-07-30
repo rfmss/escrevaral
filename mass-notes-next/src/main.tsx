@@ -19,14 +19,26 @@ import './styles/page-press-transition.css'
 import './styles/m1-usability.css'
 import './styles/pagination.css'
 
-function RightRailAccessibilityBridge() {
+function ApplicationAccessibilityBridge() {
   useEffect(() => {
     const enhance = () => {
-      const scroller = document.querySelector<HTMLElement>('.rail-scroll')
-      if (!scroller) return false
-      scroller.tabIndex = 0
-      scroller.setAttribute('aria-label', 'Conteúdo das ferramentas')
-      return true
+      const editorViewport = document.querySelector<HTMLElement>('.editor-shell')
+      const railScroller = document.querySelector<HTMLElement>('.rail-scroll')
+
+      if (editorViewport) {
+        editorViewport.classList.add('editor-viewport')
+        editorViewport.tabIndex = 0
+        editorViewport.setAttribute('role', 'region')
+        editorViewport.setAttribute('aria-label', 'Viewport do manuscrito')
+        editorViewport.dataset.scrollOwner = 'manuscript'
+      }
+
+      if (railScroller) {
+        railScroller.tabIndex = 0
+        railScroller.setAttribute('aria-label', 'Conteúdo das ferramentas')
+      }
+
+      return Boolean(editorViewport && railScroller)
     }
 
     if (enhance()) return
@@ -47,6 +59,6 @@ function RightRailAccessibilityBridge() {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ExperienceShell />
-    <RightRailAccessibilityBridge />
+    <ApplicationAccessibilityBridge />
   </StrictMode>,
 )
