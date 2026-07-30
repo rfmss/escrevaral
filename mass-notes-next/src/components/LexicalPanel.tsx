@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
 import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { readLexicalWord, type LexicalReading } from '../engines/lexicalAdapter'
+import { readVerbFormationSupplement } from '../engines/verbFormationSupplement'
 import {
   readLatestLexicalSelection,
   subscribeLexicalSelection,
@@ -96,6 +97,8 @@ export function LexicalPanel({ document }: Props) {
     return subscribeLexicalSelection(consume)
   }, [document.id, run])
 
+  const formation = reading ? readVerbFormationSupplement(query) : null
+
   return (
     <section className="lexical-panel" aria-labelledby="lexical-panel-title">
       <h3 id="lexical-panel-title" className="sr-only">Palavras</h3>
@@ -126,6 +129,35 @@ export function LexicalPanel({ document }: Props) {
           <p className="lexical-decision">{DECISION_LABELS[reading.decision]}</p>
           {reading.definition && <p className="lexical-definition">{reading.definition}</p>}
           {reading.note && <p>{reading.note}</p>}
+
+          {formation && (
+            <section className="verb-formation" aria-labelledby="verb-formation-title">
+              <div className="verb-formation-heading">
+                <span>Tempo verbal</span>
+                <h3 id="verb-formation-title">{formation.tense}</h3>
+                <strong>{formation.construction}</strong>
+              </div>
+              {formation.inputNote && <p className="verb-formation-note">{formation.inputNote}</p>}
+              <div className="verb-formation-section">
+                <h4>Entendendo a forma</h4>
+                <p>A forma indica uma ação futura e coloca o pronome no interior do verbo.</p>
+                <dl>
+                  <div><dt>Futuro sem pronome</dt><dd>{formation.baseFuture}</dd></div>
+                  <div><dt>Formação</dt><dd>{formation.decomposition}</dd></div>
+                  <div><dt>Forma normativa</dt><dd>{formation.canonicalForm}</dd></div>
+                </dl>
+              </div>
+              <div className="verb-formation-section">
+                <h4>Ajuste ortográfico</h4>
+                <p>{formation.orthographicAdjustment}</p>
+              </div>
+              <div className="verb-formation-section">
+                <h4>Equivale a</h4>
+                <ul>{formation.equivalents.map((item) => <li key={item}>{item}</li>)}</ul>
+              </div>
+            </section>
+          )}
+
           <dl>
             {reading.syntacticFunction && <div><dt>Função no contexto</dt><dd>{reading.syntacticFunction}</dd></div>}
             {reading.functionName && <div><dt>Função gramatical</dt><dd>{reading.functionName}</dd></div>}
