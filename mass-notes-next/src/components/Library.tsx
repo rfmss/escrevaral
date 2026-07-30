@@ -85,7 +85,12 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
       <header className="brand">
         <div className="eyebrow">Oficina de escrita brasileira</div>
         <h1>Escreva<span>ral</span></h1>
-        <div className="issue">MOTOR TIPTAP // FUNDAÇÃO 01</div>
+        <nav className="brand-links" aria-label="Contato e canais do Escrevaral">
+          <a aria-label="Contato do Escrevaral" href="mailto:oi@escrevaral.com">Contato</a>
+          <a aria-label="Código do Escrevaral no GitHub" href="https://github.com/rfmss/escrevaral" target="_blank" rel="noreferrer">Código</a>
+          <a aria-label="Escrevaral no Instagram" href="https://www.instagram.com/escrevaral/" target="_blank" rel="noreferrer">@escrevaral</a>
+          <a aria-label="Rafa Mass no X" href="https://x.com/rafamass" target="_blank" rel="noreferrer">@rafamass</a>
+        </nav>
         <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar arquivo">×</button>
       </header>
 
