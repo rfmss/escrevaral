@@ -142,7 +142,7 @@ function buildFromClitic(
   const effectiveContext = contextForClitic(parsed, context)
   const lookup = analyzeSimpleVerbSurface(parsed.baseSurface, effectiveContext, { forceVerb: true })
   if (lookup.candidates.length === 0) {
-    if (lookup.registeredIrregular) {
+    if (lookup.exactRegisteredIrregular) {
       const safe = safeRegisteredIrregular(surface)
       return {
         ...safe,
@@ -215,7 +215,7 @@ export function analyzeVerbMorphology(
   if (parsedClitic) return buildFromClitic(surface, parsedClitic, context)
 
   const lookup = analyzeSimpleVerbSurface(surface, context)
-  if (lookup.candidates.length === 0) return lookup.registeredIrregular ? safeRegisteredIrregular(surface) : null
+  if (lookup.candidates.length === 0) return lookup.exactRegisteredIrregular ? safeRegisteredIrregular(surface) : null
 
   const primary = lookup.candidates[0]
   const canonicalForm = primary.canonicalSurface
