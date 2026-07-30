@@ -1,5 +1,8 @@
 import { expect, test, type Download, type Page } from '@playwright/test'
 
+const ACTIVE_KEY = 'escrevaral-mass-notes-next-active'
+const RECOVERY_KEY = 'escrevaral-mass-notes-next-recovery'
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
@@ -22,7 +25,20 @@ async function hasPersistedText(page: Page, expected: string): Promise<boolean> 
     })
     db.close()
     return String(record?.plainText ?? '').includes(phrase)
-  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected })
+  }, { activeKey: ACTIVE_KEY, phrase: expected })
+}
+
+async function hasRecoveryText(page: Page, expected: string): Promise<boolean> {
+  return page.evaluate(({ recoveryKey, phrase }) => {
+    try {
+      const raw = localStorage.getItem(recoveryKey)
+      if (!raw) return false
+      const recovery = JSON.parse(raw) as { document?: { plainText?: string } }
+      return String(recovery.document?.plainText ?? '').includes(phrase)
+    } catch {
+      return false
+    }
+  }, { recoveryKey: RECOVERY_KEY, phrase: expected })
 }
 
 async function waitPersistedText(page: Page, expected: string) {
@@ -36,11 +52,12 @@ async function persistCurrentDraft(page: Page, expected: string) {
   const saveState = page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })
   await expect.poll(async () => {
     if (await hasPersistedText(page, expected)) return 'persisted'
+    if (await hasRecoveryText(page, expected)) return 'recovery'
     return (await saveState.textContent())?.trim() ?? ''
   }, {
     timeout: 20_000,
     intervals: [100, 250, 500],
-  }).toMatch(/^(persisted|Alterado|Salvando)$/)
+  }).toMatch(/^(persisted|recovery|Alterado|Salvando)$/)
 
   if (await hasPersistedText(page, expected)) return
   await page.keyboard.press('Control+S')
