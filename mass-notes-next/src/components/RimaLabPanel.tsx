@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
+import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { analyzeRimaLab, createRimaLabSource, type RimaLabReading, type RimaVerseScan } from '../engines/rimaLabAdapter'
 
 type Props = {
@@ -40,17 +41,30 @@ export function RimaLabPanel({ document }: Props) {
     setReading(null)
     setAnalyzing(false)
     setMessage('O texto mudou. Escute novamente quando quiser.')
-  }, [document.id, document.plainText])
+
+    return subscribeLiveEditorSnapshot((snapshot) => {
+      if (snapshot.documentId !== document.id) return
+      tokenRef.current += 1
+      setReading(null)
+      setAnalyzing(false)
+      setMessage('O texto mudou. Escute novamente quando quiser.')
+    })
+  }, [document.id])
 
   const run = async () => {
+    const live = readLiveEditorSnapshot(document.id)
+    const content = live?.content ?? document.content
+    const plainText = live?.plainText ?? document.plainText
+    const signature = live?.contentSignature ?? JSON.stringify(document.content)
+    const source = createRimaLabSource(content, plainText)
     const token = ++tokenRef.current
-    const source = createRimaLabSource(document.content, document.plainText)
     setAnalyzing(true)
     setMessage('O RimaLab está escutando ritmo, finais e repetições sonoras localmente…')
 
     try {
       const result = await analyzeRimaLab(source)
-      if (token !== tokenRef.current) return
+      const current = readLiveEditorSnapshot(document.id)
+      if (token !== tokenRef.current || (current && current.contentSignature !== signature)) return
       setReading(result)
       setMessage(
         !source.trim()
