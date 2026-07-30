@@ -75,6 +75,7 @@ test('tablet mantém a janela imóvel e rola somente o manuscrito', async ({ pag
   await waitReady(page)
   await pasteLongDocument(page)
   await expectIsolatedScroll(page)
+  await page.screenshot({ path: 'test-results/obs01-scroll-tablet.png', fullPage: false })
 })
 
 test('celular mantém a janela imóvel e o manuscrito em viewport próprio', async ({ page }) => {
@@ -82,6 +83,7 @@ test('celular mantém a janela imóvel e o manuscrito em viewport próprio', asy
   await waitReady(page)
   await pasteLongDocument(page)
   await expectIsolatedScroll(page)
+  await page.screenshot({ path: 'test-results/obs01-scroll-mobile.png', fullPage: false })
 })
 
 test('desktop apresenta folhas visuais sem fragmentar o Tiptap', async ({ page }) => {
@@ -92,7 +94,10 @@ test('desktop apresenta folhas visuais sem fragmentar o Tiptap', async ({ page }
   await expect(page.locator('.ProseMirror')).toHaveCount(1)
   const paper = page.locator('.paper')
   await expect(paper).toHaveAttribute('data-page-count', /[5-9]|[1-9][0-9]+/)
-  await expect(page.locator('.escrevaral-page-break')).toHaveCount(await paper.evaluate((element) => Number(element.getAttribute('data-page-count')) - 1))
+  const breaks = page.locator('.escrevaral-page-break')
+  await expect(breaks).toHaveCount(await paper.evaluate((element) => Number(element.getAttribute('data-page-count')) - 1))
+  await breaks.first().scrollIntoViewIfNeeded()
+  await page.screenshot({ path: 'test-results/obs01-pagination-desktop.png', fullPage: false })
 })
 
 test('cursor acompanha a escrita no viewport central e histórico atravessa páginas', async ({ page }) => {
