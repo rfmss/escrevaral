@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
+import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { detectContextTerms, type ContextTerm } from '../engines/decolonialAdapter'
 
 type Props = {
@@ -21,19 +22,31 @@ export function ContextPanel({ document }: Props) {
     setTerms([])
     setAnalyzing(false)
     setMessage('O texto mudou. Examine o contexto novamente quando quiser.')
-  }, [document.id, document.plainText])
+
+    return subscribeLiveEditorSnapshot((snapshot) => {
+      if (snapshot.documentId !== document.id) return
+      tokenRef.current += 1
+      setTerms([])
+      setAnalyzing(false)
+      setMessage('O texto mudou. Examine o contexto novamente quando quiser.')
+    })
+  }, [document.id])
 
   const run = async () => {
+    const live = readLiveEditorSnapshot(document.id)
+    const plainText = live?.plainText ?? document.plainText
+    const signature = live?.contentSignature ?? JSON.stringify(document.content)
     const token = ++tokenRef.current
     setAnalyzing(true)
     setMessage('Examinando termos e contextos localmente…')
 
     try {
-      const result = await detectContextTerms(document.plainText)
-      if (token !== tokenRef.current) return
+      const result = await detectContextTerms(plainText)
+      const current = readLiveEditorSnapshot(document.id)
+      if (token !== tokenRef.current || (current && current.contentSignature !== signature)) return
       setTerms(result)
       setMessage(
-        !document.plainText.trim()
+        !plainText.trim()
           ? 'A página está vazia. Escreva um pouco antes de examinar o contexto.'
           : result.length
             ? `${result.length} ${result.length === 1 ? 'termo pede' : 'termos pedem'} uma leitura de contexto.`
