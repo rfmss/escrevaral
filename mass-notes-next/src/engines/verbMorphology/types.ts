@@ -47,6 +47,7 @@ export type VerbClitic = {
 
 export type VerbCandidate = {
   lemma: string
+  canonicalSurface: string
   formType: VerbFormType
   mood?: VerbMood
   tense?: VerbTense
