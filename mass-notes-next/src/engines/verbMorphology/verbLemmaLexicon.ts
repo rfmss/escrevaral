@@ -5,13 +5,13 @@ import { normalizeVerbSurface, stripVerbDiacritics } from './normalization'
 
 const CORE_LEMMAS = [
   'abrir', 'acabar', 'achar', 'ajudar', 'amar', 'analisar', 'andar', 'aprender',
-  'buscar', 'cantar', 'carregar', 'chegar', 'chover', 'começar', 'comer', 'conhecer',
-  'continuar', 'correr', 'cortar', 'criar', 'deixar', 'dever', 'dormir', 'escrever',
-  'esperar', 'estudar', 'falar', 'fechar', 'ficar', 'gostar', 'ler', 'lembrar',
-  'morar', 'mover', 'nascer', 'olhar', 'ouvir', 'partir', 'passar', 'pensar',
-  'perceber', 'perder', 'permanecer', 'precisar', 'procurar', 'publicar', 'receber',
-  'resolver', 'responder', 'seguir', 'sentir', 'tentar', 'terminar', 'trabalhar',
-  'usar', 'vender', 'viver', 'voltar', 'varrer',
+  'buscar', 'cantar', 'carregar', 'chamar', 'chegar', 'chover', 'começar', 'comer',
+  'conhecer', 'continuar', 'correr', 'cortar', 'criar', 'deixar', 'dever', 'dormir',
+  'escrever', 'esperar', 'estudar', 'falar', 'fechar', 'ficar', 'gostar', 'largar',
+  'ler', 'lembrar', 'morar', 'mover', 'nascer', 'olhar', 'ouvir', 'partir', 'passar',
+  'pensar', 'perceber', 'perder', 'permanecer', 'precisar', 'procurar', 'publicar',
+  'receber', 'resolver', 'responder', 'seguir', 'sentir', 'tentar', 'terminar',
+  'trabalhar', 'usar', 'vender', 'viver', 'voltar', 'varrer',
 ]
 
 function addIfLemma(target: Set<string>, value: unknown): void {
