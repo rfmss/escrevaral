@@ -208,6 +208,8 @@ jobs:
             mass-notes-next/build.log
             mass-notes-next/e2-lexical-inventory.json
             mass-notes-next/e2-lexical-inventory.md
+            mass-notes-next/e2-definition-duplicates.json
+            mass-notes-next/e2-definition-duplicates.md
             mass-notes-next/anatomy-sha256.txt
             mass-notes-next/anatomy-assets-sha256.txt
             mass-notes-next/blueprint-sha256.txt
