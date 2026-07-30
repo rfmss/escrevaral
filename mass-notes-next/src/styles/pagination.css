@@ -1,0 +1,233 @@
+/* OBS-01 — paginação visual e rolagem isolada sem fragmentar o Tiptap. */
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.experience-view--editor {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app-shell {
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+  overflow: hidden !important;
+}
+
+.workspace {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.editor-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  overflow-anchor: none;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-deep) color-mix(in srgb, var(--ui-panel-strong, var(--paper-2)) 76%, transparent);
+  scroll-padding-block: 92px 72px;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.editor-shell::-webkit-scrollbar { width: 11px; }
+.editor-shell::-webkit-scrollbar-track {
+  background: color-mix(in srgb, var(--ui-panel-strong, var(--paper-2)) 76%, transparent);
+}
+.editor-shell::-webkit-scrollbar-thumb {
+  min-height: 48px;
+  border: 2px solid color-mix(in srgb, var(--ui-panel, var(--paper)) 92%, transparent);
+  border-radius: 999px;
+  background: var(--blue-deep);
+}
+
+.paper {
+  --escrevaral-page-height: 1123px;
+  --escrevaral-page-gap: 32px;
+  --escrevaral-page-cycle: calc(var(--escrevaral-page-height) + var(--escrevaral-page-gap));
+  --escrevaral-page-margin-top: 58px;
+  --escrevaral-page-margin-bottom: 72px;
+  --escrevaral-document-height: var(--escrevaral-page-height);
+  --escrevaral-page-surface: var(--bp-paper, var(--ui-panel, var(--paper)));
+  --escrevaral-page-border: color-mix(in srgb, var(--bp-cyan-strong, var(--blue-deep)) 74%, var(--bp-ink, var(--ink)));
+
+  width: min(210mm, 100%) !important;
+  max-width: 100%;
+  min-height: var(--escrevaral-document-height) !important;
+  padding-bottom: var(--escrevaral-page-margin-bottom);
+  overflow: visible;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  isolation: isolate;
+}
+
+body.night .paper {
+  --escrevaral-page-surface: var(--bp-panel, var(--ui-panel, var(--paper)));
+  --escrevaral-page-border: color-mix(in srgb, var(--bp-cyan, var(--blue)) 58%, var(--ui-text));
+  background: transparent !important;
+}
+
+.paper::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: none;
+  opacity: 1 !important;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      var(--escrevaral-page-border) 0 1px,
+      transparent 1px calc(var(--escrevaral-page-height) - 1px),
+      var(--escrevaral-page-border) calc(var(--escrevaral-page-height) - 1px) var(--escrevaral-page-height),
+      transparent var(--escrevaral-page-height) var(--escrevaral-page-cycle)
+    ),
+    linear-gradient(
+      90deg,
+      var(--escrevaral-page-border) 0 1px,
+      transparent 1px calc(100% - 1px),
+      var(--escrevaral-page-border) calc(100% - 1px) 100%
+    ),
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot, rgba(34, 110, 144, .12)) 1px, transparent 1.2px),
+    linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan-strong, var(--blue)) 30%, transparent) 70px 71px, transparent 71px),
+    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong, var(--blue)) 17%, transparent) 47px 48px),
+    var(--escrevaral-page-surface) !important;
+  background-size:
+    100% var(--escrevaral-page-cycle),
+    100% var(--escrevaral-page-cycle),
+    9px 9px,
+    100% var(--escrevaral-page-cycle),
+    100% 48px,
+    100% 100% !important;
+  background-repeat: repeat-y, repeat-y, repeat, repeat-y, repeat, repeat !important;
+  background-position: 0 0 !important;
+  -webkit-mask-image: repeating-linear-gradient(
+    to bottom,
+    #000 0 var(--escrevaral-page-height),
+    transparent var(--escrevaral-page-height) var(--escrevaral-page-cycle)
+  );
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    #000 0 var(--escrevaral-page-height),
+    transparent var(--escrevaral-page-height) var(--escrevaral-page-cycle)
+  );
+  filter:
+    drop-shadow(10px 12px 0 rgba(36, 135, 184, .10))
+    drop-shadow(0 22px 28px var(--shadow));
+}
+
+.paper::after {
+  content: "PÁGINA 1 · ÁREA DE ESCRITA" !important;
+  position: absolute !important;
+  left: auto !important;
+  right: 20px !important;
+  top: 14px !important;
+  bottom: auto !important;
+  z-index: 2;
+  width: auto !important;
+  height: auto !important;
+  background: transparent !important;
+  color: var(--blue-deep);
+  font: 900 .6rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .13em;
+}
+
+.title-input,
+.deck,
+.escrevaral-editor {
+  position: relative;
+  z-index: 1;
+}
+
+.escrevaral-page-break {
+  display: block !important;
+  position: relative;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  pointer-events: none;
+  user-select: none;
+}
+
+.escrevaral-page-break::after {
+  content: "PÁGINA " attr(data-page-number);
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--escrevaral-page-margin-top) - 20px);
+  color: var(--blue-deep);
+  font: 900 .56rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .13em;
+  white-space: nowrap;
+}
+
+body.focus-mode .app-shell,
+body.focus-mode .workspace {
+  height: 100dvh !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+}
+
+body.focus-mode .editor-shell {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 100dvh !important;
+}
+
+@media (max-width: 1040px) {
+  body { overflow: hidden !important; }
+
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .workspace {
+    height: 100dvh;
+    min-height: 0;
+    max-height: 100dvh;
+  }
+
+  .sidebar,
+  .rail {
+    height: 100dvh;
+    min-height: 0;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 520px) {
+  .editor-shell {
+    scroll-padding-block: 76px 58px;
+  }
+
+  .paper::after,
+  .escrevaral-page-break::after {
+    font-size: .5rem;
+    letter-spacing: .09em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-shell { scroll-behavior: auto; }
+}
