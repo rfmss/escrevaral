@@ -18,6 +18,7 @@ import './styles/anatomy-host.css'
 import './styles/page-press-transition.css'
 import './styles/m1-usability.css'
 import './styles/pagination.css'
+import './styles/pagination-controls.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
