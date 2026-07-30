@@ -12,12 +12,12 @@ Atualizado em: 2026-07-29
 - M0.9: encerrado como auditoria técnica e decisória;
 - milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: **144 cenários por navegador, 288 execuções**;
-- cabeça funcional E1 estabilizada: `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
-- Mass Notes `30501052382`, Argila `30501052355` e coerência `30501052360`: verdes;
-- corpus contextual: baseline 8/14 → primeira tranche 14/14 → v1.1 integrado 16/16;
-- controles diretos do resolvedor: 4 por navegador;
-- P0/P1 conhecidos nas engines: 0/0;
+- matriz funcional: **144 cenários por navegador, 288 execuções**;
+- E1: corpus contextual 8/14 → 14/14 → v1.1 integrado 16/16;
+- controles diretos do resolvedor: quatro por navegador;
+- E2: baseline lexical quantitativa concluída e integrada à CI;
+- cobertura efetiva: 1.343 sinônimos, 936 definições, 175 polissemias, 606 entradas contextuais e 2.045 formas regulares brutas;
+- achados E2: uma família P0 de integridade e duas famílias P1; não alteram os vereditos funcionais herdados;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`;
@@ -25,14 +25,15 @@ Atualizado em: 2026-07-29
 
 ## Fontes de retomada
 
-1. `M1_0_ENGINES_SUPERIORES.md` — memória operacional do programa atual;
-2. `logs/2026-07-29-m1-e1-controles-negativos.md` — estabilização contextual mais recente;
-3. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
-4. `logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — transição de governança;
-5. `PLAN.md` — sequência autorizada;
-6. `CHANGELOG.md` — histórico técnico;
-7. `M0_9_AUDITORIA_OPERACIONAL.md` e `M0_9_ERRATA_MATRIZ.md` — histórico da auditoria;
-8. contratos globais em `../../docs/product/`.
+1. `M1_0_ENGINES_SUPERIORES.md` — memória operacional do programa;
+2. `logs/2026-07-29-m1-e2-inventario-lexical.md` — medição e decisões E2;
+3. `docs/audits/M1_E2_LEXICAL_INVENTORY.md` — inventário humano;
+4. `docs/audits/M1_E2_LEXICAL_INVENTORY.json` — snapshot estruturado;
+5. `logs/2026-07-29-m1-e1-controles-negativos.md` — estabilização contextual;
+6. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
+7. `PLAN.md` — sequência autorizada;
+8. `CHANGELOG.md` — histórico técnico;
+9. contratos globais em `../../docs/product/`.
 
 ## Decisões permanentes de fundação
 
@@ -50,7 +51,7 @@ Atualizado em: 2026-07-29
 12. Restauração e importação criam UUIDs novos e nunca substituem documentos atuais.
 13. `legacySourceId` é trilha de origem, não chave de merge.
 14. Filtros da biblioteca são projeções puras.
-15. Exportação usa o estado React/Tiptap atual, não uma releitura atrasada do IndexedDB.
+15. Exportação usa o estado React/Tiptap atual, não releitura atrasada do IndexedDB.
 16. Recuperação emergencial retoma o mesmo ID, avança revisão, não duplica página e limpa o envelope.
 17. A preview é produto de build; nunca recebe edição direta.
 18. Documentação, testes e evidência integram a definição de pronto.
@@ -63,43 +64,41 @@ Atualizado em: 2026-07-29
 22. Falha temporal de teste não vira defeito de produto sem diagnóstico.
 23. Estado final `Salvo` é obrigatório; estados intermediários podem convergir rápido demais para serem observados.
 24. Conflito é avaliado pela preservação das versões, não pela seleção ativa compartilhada após recarga.
-25. Snapshot semântico ProseMirror é a referência de não mutação; `innerText` pode variar visualmente entre navegadores.
-26. Métricas de runner detectam regressão; não são SLA ou benchmark universal.
+25. Snapshot semântico ProseMirror é a referência de não mutação; `innerText` pode variar entre navegadores.
+26. Métricas de runner detectam regressão; não são SLA universal.
 27. Viewport equivalente não pode ser apresentado como zoom real ou validação física.
 28. Leitor de tela, tecnologia assistiva e dispositivo só recebem status aprovado quando executados de verdade.
 29. Toda origem externa deve ser inventariada e restrita; allowlist não elimina o achado.
 30. Nenhuma frase autoral pode aparecer em URL ou corpo de requisição.
+31. Uma prova de persistência pode ganhar janela maior quando mantém a leitura direta do banco e a mesma condição de sucesso.
 
 ## Decisões permanentes das engines
 
-31. O legado é baseline e fonte de capacidade, não autoridade infalível.
-32. “100%” sem corpus, bordas, métricas e comparação reproduzível não comprova maturidade.
-33. Superioridade não significa mais alertas; significa melhor acerto, explicação e segurança.
-34. Diacríticos participam da decisão gramatical; normalização serve à busca, não à classificação final.
-35. Contexto suficiente pode gerar leitura `provável`; não deve virar certeza falsa.
-36. Ausência de evidência deve produzir `ambíguo` ou `indeterminado`, não fallback convincente.
-37. Toda regra linguística nova exige caso reproduzível antes da implementação.
-38. Toda regra contextual recebe controles negativos contra generalização excessiva.
-39. Bancas e corpora externos são instrumentos de comparação, não dependências pesadas do runtime.
-40. A pessoa que escreve mantém a decisão final; alternativas são leitura, nunca comando.
-41. Quantidade lexical é inventariada separadamente de qualidade lexical.
-42. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
-43. A avaliação humana deve medir correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
-44. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
-45. Regras contextuais vivem em módulo puro sempre que possível; adaptadores de carga não devem concentrar heurística linguística.
-46. Padrões locais visualmente iguais devem observar contexto à direita antes de classificar verbo como adjetivo.
+32. O legado é baseline e fonte de capacidade, não autoridade infalível.
+33. “100%” sem corpus, bordas, métricas e comparação reproduzível não comprova maturidade.
+34. Superioridade não significa mais alertas; significa melhor acerto, explicação e segurança.
+35. Diacríticos participam da decisão gramatical; normalização serve à busca, não à classificação final.
+36. Contexto suficiente pode gerar leitura `provável`; não deve virar certeza falsa.
+37. Ausência de evidência deve produzir `ambíguo` ou `indeterminado`, não fallback convincente.
+38. Toda regra linguística nova exige caso reproduzível antes da implementação.
+39. Toda regra contextual recebe controles negativos contra generalização excessiva.
+40. Bancas e corpora externos são instrumentos de comparação, não dependências pesadas do runtime.
+41. A pessoa que escreve mantém a decisão final; alternativas são leitura, nunca comando.
+42. Quantidade lexical é inventariada separadamente de qualidade lexical.
+43. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
+44. A avaliação humana mede correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
+45. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
+46. Regras contextuais vivem em módulo puro sempre que possível; adaptadores de carga não concentram heurística.
+47. Padrões locais visualmente iguais observam contexto à direita antes de classificar verbo como adjetivo.
+48. Declarações sobrescritas não contam como cobertura efetiva.
+49. Chave repetida com redações diferentes é conflito editorial, não duplicata descartável automaticamente.
+50. A última declaração descreve o comportamento atual, não necessariamente a melhor definição.
+51. Alias ortográfico e sinônimo editorial são relações distintas.
+52. Expansão lexical fica bloqueada enquanto a integridade mínima das bases não estiver estabilizada.
 
 ## M0.9 encerrado
 
-O M0.9 produziu:
-
-- jornadas integradas de escrita, metadados, conflito, exportação e portabilidade;
-- cinco superfícies linguísticas em sequência sem mutação;
-- escala de 100 páginas e documento acima de 100 mil caracteres;
-- seis larguras, zoom CSS equivalente e movimento reduzido;
-- auditoria de rede, recuperação emergencial e sessão prolongada;
-- matriz consolidada 124 por navegador, 248 execuções;
-- decisões explícitas para quatro P2.
+O M0.9 produziu jornadas integradas, escala, auditoria de rede, recuperação, matriz consolidada 248/248 e decisões explícitas de release.
 
 Vereditos herdados:
 
@@ -112,9 +111,8 @@ P2 herdados:
 - PWA/offline próprio ausente;
 - Prova de Autoria ausente;
 - DOCX, RTF, ePub e Obsidian ZIP ausentes;
-- Anatomia dependente de `page-flip@2.0.7` no `unpkg`.
-
-As validações de zoom real, leitor de tela, tecnologias assistivas, dispositivos físicos e uso prolongado continuam como dívida de release.
+- Anatomia dependente de `page-flip@2.0.7` no `unpkg`;
+- validações físicas de acessibilidade e uso prolongado pendentes.
 
 ## Baseline histórica das engines legadas
 
@@ -125,69 +123,73 @@ A documentação v916 informa:
 - RimaLab: enciclopédia 50 e `grammarWords` 348;
 - Léxico: aproximadamente 1.350 sinônimos, 1.020+ definições e 110+ polissemias;
 - Contexto: 600+ entradas em 9 categorias;
-- Sintaxe/Morfologia: bancada 17/17, golden 91/0 e 2.045 formas verbais regulares no presente.
+- Sintaxe/Morfologia: bancada 17/17, golden 91/0 e 2.045 formas regulares no presente.
 
 Esses números são alvo de inventário e comparação; não equivalem a prova de qualidade.
 
-## M1.0 — E0 baseline
+## M1.0 — E0 e E1
 
-Corpus v1:
+E0 mediu 8/14 casos corretos e seis lacunas repetidas em ambos os navegadores.
 
-- `enquanto`, `por enquanto`, `enquanto isso`;
-- `publica/pública`;
-- `seria/séria`;
-- `preso` como particípio, adjetivo e substantivo;
-- `larga` como adjetivo e verbo;
-- `canto` como verbo e substantivo.
+E1 entregou:
 
-Resultado anterior à correção:
-
-- 8/14 casos únicos corretos;
-- 6/14 incorretos em ambos os navegadores;
-- 264/276 execuções aprovadas.
-
-Lacunas confirmadas:
-
-- `por enquanto` e `enquanto isso` classificados como substantivo;
-- `publica` classificado como adjetivo;
-- `foi preso` classificado apenas como adjetivo;
-- `estrada larga` classificada como forma verbal;
-- `eu canto` classificado como substantivo.
-
-## M1.0 — E1 contextual e estabilização
-
-A camada contextual nova preserva `lexical-engine.js` e as bases legadas. A heurística foi isolada em `src/engines/contextualLexicalResolver.ts`; `lexicalAdapter.ts` permanece responsável pela carga local, adaptação e composição da leitura.
-
-Entregue na primeira tranche:
-
-- reconhecimento das duas locuções temporais;
-- decisão sensível a diacrítico para `publica/pública`;
+- locuções temporais;
+- decisão sensível a diacrítico;
 - particípio provável após auxiliar passivo;
-- verbo provável após pronome sujeito em formas ambíguas registradas;
-- adjetivo pós-nominal com evidência determinante + nome;
-- notas em português claro explicando a evidência;
-- nenhuma substituição automática.
+- verbo provável após pronome sujeito;
+- adjetivo pós-nominal com evidência;
+- resolvedor contextual puro;
+- controles negativos de locução, diacrítico, particípio, substantivação e sujeito nominal;
+- objeto explícito à direita impedindo falso adjetivo.
 
-Estabilização inicial:
+Resultado funcional estabilizado:
 
-- locuções exigem ocorrência exata no contexto;
-- `pública`, `ficou preso` e `os presos` são controles que não recebem override indevido;
-- `A menina larga a mochila` e `O corredor estreita os olhos` preservam leitura verbal;
-- objeto explícito à direita é avaliado antes da hipótese adjetiva;
-- quatro testes diretos exercitam o resolvedor puro;
-- dois casos integrados comprovam Tiptap, persistência e não mutação.
-
-Resultado:
-
-- 16/16 casos integrados corretos;
+- corpus integrado v1.1: 16/16;
 - quatro controles diretos por navegador;
-- 288/288 execuções;
+- matriz: 288/288;
 - nenhuma regressão nos 14 casos anteriores;
-- publicação, cache e smoke públicos verdes;
-- Argila e coerência verdes;
-- artefato `mass-notes-tiptap-30501052382`.
+- nenhuma mutação ou substituição automática.
 
-A superioridade comprovada continua específica às fronteiras cobertas. Não prova superioridade global nem substituição integral.
+A superioridade comprovada continua específica às fronteiras cobertas.
+
+## M1.0 — E2 inventário lexical
+
+Infraestrutura:
+
+- `scripts/audit-lexical-inventory.mjs`;
+- `scripts/audit-definition-duplicates.mjs`;
+- `npm run audit:lexicon` na CI;
+- relatórios completos preservados em artefato;
+- snapshots versionados em `docs/audits/M1_E2_LEXICAL_INVENTORY.*`.
+
+Cobertura efetiva:
+
+- 1.343 entradas de sinônimos;
+- 7.766 alternativas brutas e 7.763 pares normalizados;
+- 936 definições efetivas a partir de 1.011 declarações;
+- 175 regras de polissemia e 55 cartões de alternativas;
+- 606 entradas contextuais em nove categorias;
+- 527 entradas completas no léxico local;
+- 95 locuções brutas, 94 normalizadas;
+- 2.045 formas regulares brutas, 2.028 normalizadas;
+- RimaLab com enciclopédia 50 e `grammarWords` 407.
+
+Integridade:
+
+- P0: 69 grupos de definições repetidas, 75 declarações sobrescritas, 68 conflitos e uma duplicata idêntica (`quica`);
+- P1: oito autorreferências de sinônimos após normalização;
+- P1: aliases técnicos `ode2`, `contemplar2`, `denso2`, `silencio2` expostos;
+- P2: `leitor_modelo` vazio;
+- P2: quatro textos duplicados entre chaves;
+- P2: 124 regras de polissemia sem cartão explícito.
+
+Decisão:
+
+- não ampliar vocabulário;
+- não remover conflitos em massa;
+- consolidar pequenos lotes com teste por verbete;
+- separar aliases de busca e sinônimos;
+- impedir novas duplicatas pela CI.
 
 ## Cobertura funcional preservada
 
@@ -225,20 +227,20 @@ Ainda não estão aprovados:
 
 ## Próxima ação obrigatória
 
-1. validar a cabeça documental exata dos controles negativos;
-2. registrar essa cabeça e workflows no PR;
-3. inventariar contagens lexicais reais;
-4. auditar duplicatas, autorreferências, ciclos e lacunas de definição;
-5. escolher uma expansão lexical brasileira pequena, fundamentada e testada;
-6. desenhar a bancada sintático-morfológica integrada;
-7. manter Gate 14 suspenso.
+1. validar a cabeça documental em 288/288;
+2. registrar SHA, workflows e artefato no PR;
+3. consolidar `quica`, a única duplicata idêntica, com teste;
+4. priorizar os 68 conflitos por famílias editoriais;
+5. corrigir autorreferências preservando aliases úteis;
+6. decidir o destino das quatro chaves técnicas;
+7. manter expansão lexical e Gate 14 bloqueados.
 
 ## Como retomar
 
 1. conferir branch, PR e workflows;
 2. ler `M1_0_ENGINES_SUPERIORES.md`;
-3. ler `logs/2026-07-29-m1-e1-controles-negativos.md`;
-4. identificar caso, engine e evidência da próxima tranche;
+3. ler `logs/2026-07-29-m1-e2-inventario-lexical.md`;
+4. regenerar a auditoria com `npm run audit:lexicon` quando dados mudarem;
 5. não editar a branch de preview;
 6. não afirmar superioridade global antes de E2–E4;
 7. não promover para `main`.
