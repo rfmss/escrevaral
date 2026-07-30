@@ -2,7 +2,8 @@
 
 Atualizado em: 2026-07-30  
 Head funcional de referência: `986b21f1d5a1136d8bdce5affe60c061a033930f`  
-Estado: E2-V v1 funcionalmente estabilizado; PR #155 em rascunho
+Head documental validada: `d5eeb3b4ac53bf623331b5e119a66ad2efdc297f`  
+Estado: E2-V v1 estabilizado; PR #155 em rascunho
 
 ## Placar atual
 
@@ -26,7 +27,7 @@ Estado: E2-V v1 funcionalmente estabilizado; PR #155 em rascunho
 
 ## Evidência que alterou a nota
 
-O aumento de Morfologia verbal de 7,0 para 7,8 está preso à cabeça funcional `986b21f1d5a1136d8bdce5affe60c061a033930f`:
+O aumento de Morfologia verbal de 7,0 para 7,8 está preso à cabeça funcional `986b21f1d5a1136d8bdce5affe60c061a033930f` e foi revalidado na cabeça documental `d5eeb3b4ac53bf623331b5e119a66ad2efdc297f`:
 
 - engine verbal própria, tipada e independente da engine lexical;
 - 34 casos linguísticos positivos, negativos e contextuais;
@@ -36,6 +37,15 @@ O aumento de Morfologia verbal de 7,0 para 7,8 está preso à cabeça funcional 
 - HTML autoral preservado e nenhuma substituição automática;
 - matriz integral **350/350** em Chromium e Firefox;
 - publicação, cache, smoke, Argila e coerência verdes.
+
+Evidência documental final:
+
+- Mass Notes `30585419280`;
+- Argila `30585419262`;
+- coerência `30585419245`;
+- artefato `mass-notes-tiptap-30585419280`;
+- artifact ID `8776474903`;
+- digest `sha256:8c2dcbefec1d91dd8ceb1dfdb1f33d9280cc9558044c6997d5912cac0b5ebbf8`.
 
 O avanço não altera Sintaxe, Proveniência ou Validação humana. Testes verdes comprovam reprodutibilidade do corpus versionado, não cobertura universal nem consenso acadêmico.
 
@@ -77,4 +87,5 @@ A ordem não significa abandonar o Pack Verbal. O próximo passo imediato é a t
 | Data | Head | Fase | Nota geral | Morfologia verbal | Veredito | Próxima exigência |
 |---|---|---|---:|---:|---|---|
 | 2026-07-30 | `19c03095e8e70e5c504fbd22b5d8e559ffdff983` | Baseline Eva | 6,475 | 7,0 | Promissor; E2-V ainda em estabilização. | Corpus verde, controles negativos e limites explícitos. |
-| 2026-07-30 | `986b21f1d5a1136d8bdce5affe60c061a033930f` | E2-V v1 | 6,595 | 7,8 | Engine morfológica reproduzível; ainda não é cobertura completa. | Corpus adversarial, proveniência por regra, métricas e banca humana. |
+| 2026-07-30 | `986b21f1d5a1136d8bdce5affe60c061a033930f` | E2-V v1 funcional | 6,595 | 7,8 | Engine morfológica reproduzível; ainda não é cobertura completa. | Corpus adversarial, proveniência por regra, métricas e banca humana. |
+| 2026-07-30 | `d5eeb3b4ac53bf623331b5e119a66ad2efdc297f` | Fechamento documental | 6,595 | 7,8 | Parecer, scorecard e planilha revalidados em 350/350. | Iniciar E2-V adversarial e proveniência. |
