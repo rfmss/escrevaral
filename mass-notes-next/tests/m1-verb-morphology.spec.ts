@@ -25,13 +25,21 @@ async function setManuscript(page: Page, manuscript: string) {
   const editor = page.getByLabel('Texto do documento')
   await editor.fill(manuscript)
   await expect.poll(async () => normalized(await editor.innerText())).toBe(normalized(manuscript))
+  await expect.poll(() => editor.evaluate((element, expected) => {
+    const host = element as HTMLElement & {
+      __escrevaralPositionContract?: { snapshot?: { text?: string } }
+    }
+    return normalized(host.__escrevaralPositionContract?.snapshot?.text ?? '') === normalized(expected)
+  }, manuscript), {
+    intervals: [50, 100, 250],
+  }).toBe(true)
   return editor
 }
 
 async function consult(page: Page, query: string) {
   await page.getByLabel('Palavra ou expressão curta').fill(query)
   await page.getByRole('button', { name: 'Consultar' }).click()
-  await expect(page.getByRole('status')).not.toContainText(/consultando/i)
+  await expect(page.getByRole('status')).toContainText(/concluída|não encontrei|não pôde/iu)
 }
 
 async function assertVerbCase(page: Page, item: VerbMorphologyCase) {
