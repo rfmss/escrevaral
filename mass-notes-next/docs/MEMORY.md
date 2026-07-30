@@ -18,6 +18,8 @@ Atualizado em: 2026-07-29
 - E2: baseline lexical quantitativa concluída e integrada à CI;
 - cobertura efetiva: 1.343 sinônimos, 936 definições, 175 polissemias, 606 entradas contextuais e 2.045 formas regulares brutas;
 - achados E2: uma família P0 de integridade e duas famílias P1; não alteram os vereditos funcionais herdados;
+- RimaLab, Contexto e Palavras/Léxico analisam o snapshot vivo do Tiptap no instante da ação;
+- cabeça funcional do snapshot vivo: `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`, Mass Notes `30505264198` em 288/288;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`;
@@ -26,14 +28,15 @@ Atualizado em: 2026-07-29
 ## Fontes de retomada
 
 1. `M1_0_ENGINES_SUPERIORES.md` — memória operacional do programa;
-2. `logs/2026-07-29-m1-e2-inventario-lexical.md` — medição e decisões E2;
-3. `docs/audits/M1_E2_LEXICAL_INVENTORY.md` — inventário humano;
-4. `docs/audits/M1_E2_LEXICAL_INVENTORY.json` — snapshot estruturado;
-5. `logs/2026-07-29-m1-e1-controles-negativos.md` — estabilização contextual;
-6. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
-7. `PLAN.md` — sequência autorizada;
-8. `CHANGELOG.md` — histórico técnico;
-9. contratos globais em `../../docs/product/`.
+2. `logs/2026-07-29-m1-e2-snapshot-vivo-engines.md` — fronteira entre Tiptap e engines;
+3. `logs/2026-07-29-m1-e2-inventario-lexical.md` — medição e decisões E2;
+4. `docs/audits/M1_E2_LEXICAL_INVENTORY.md` — inventário humano;
+5. `docs/audits/M1_E2_LEXICAL_INVENTORY.json` — snapshot estruturado;
+6. `logs/2026-07-29-m1-e1-controles-negativos.md` — estabilização contextual;
+7. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
+8. `PLAN.md` — sequência autorizada;
+9. `CHANGELOG.md` — histórico técnico;
+10. contratos globais em `../../docs/product/`.
 
 ## Decisões permanentes de fundação
 
@@ -71,30 +74,34 @@ Atualizado em: 2026-07-29
 29. Toda origem externa deve ser inventariada e restrita; allowlist não elimina o achado.
 30. Nenhuma frase autoral pode aparecer em URL ou corpo de requisição.
 31. Uma prova de persistência pode ganhar janela maior quando mantém a leitura direta do banco e a mesma condição de sucesso.
+32. Timeout ampliado não substitui investigação quando a falha migra entre superfícies.
 
 ## Decisões permanentes das engines
 
-32. O legado é baseline e fonte de capacidade, não autoridade infalível.
-33. “100%” sem corpus, bordas, métricas e comparação reproduzível não comprova maturidade.
-34. Superioridade não significa mais alertas; significa melhor acerto, explicação e segurança.
-35. Diacríticos participam da decisão gramatical; normalização serve à busca, não à classificação final.
-36. Contexto suficiente pode gerar leitura `provável`; não deve virar certeza falsa.
-37. Ausência de evidência deve produzir `ambíguo` ou `indeterminado`, não fallback convincente.
-38. Toda regra linguística nova exige caso reproduzível antes da implementação.
-39. Toda regra contextual recebe controles negativos contra generalização excessiva.
-40. Bancas e corpora externos são instrumentos de comparação, não dependências pesadas do runtime.
-41. A pessoa que escreve mantém a decisão final; alternativas são leitura, nunca comando.
-42. Quantidade lexical é inventariada separadamente de qualidade lexical.
-43. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
-44. A avaliação humana mede correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
-45. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
-46. Regras contextuais vivem em módulo puro sempre que possível; adaptadores de carga não concentram heurística.
-47. Padrões locais visualmente iguais observam contexto à direita antes de classificar verbo como adjetivo.
-48. Declarações sobrescritas não contam como cobertura efetiva.
-49. Chave repetida com redações diferentes é conflito editorial, não duplicata descartável automaticamente.
-50. A última declaração descreve o comportamento atual, não necessariamente a melhor definição.
-51. Alias ortográfico e sinônimo editorial são relações distintas.
-52. Expansão lexical fica bloqueada enquanto a integridade mínima das bases não estiver estabilizada.
+33. O legado é baseline e fonte de capacidade, não autoridade infalível.
+34. “100%” sem corpus, bordas, métricas e comparação reproduzível não comprova maturidade.
+35. Superioridade não significa mais alertas; significa melhor acerto, explicação e segurança.
+36. Diacríticos participam da decisão gramatical; normalização serve à busca, não à classificação final.
+37. Contexto suficiente pode gerar leitura `provável`; não deve virar certeza falsa.
+38. Ausência de evidência deve produzir `ambíguo` ou `indeterminado`, não fallback convincente.
+39. Toda regra linguística nova exige caso reproduzível antes da implementação.
+40. Toda regra contextual recebe controles negativos contra generalização excessiva.
+41. Bancas e corpora externos são instrumentos de comparação, não dependências pesadas do runtime.
+42. A pessoa que escreve mantém a decisão final; alternativas são leitura, nunca comando.
+43. Quantidade lexical é inventariada separadamente de qualidade lexical.
+44. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
+45. A avaliação humana mede correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
+46. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
+47. Regras contextuais vivem em módulo puro sempre que possível; adaptadores de carga não concentram heurística.
+48. Padrões locais visualmente iguais observam contexto à direita antes de classificar verbo como adjetivo.
+49. Declarações sobrescritas não contam como cobertura efetiva.
+50. Chave repetida com redações diferentes é conflito editorial, não duplicata descartável automaticamente.
+51. A última declaração descreve o comportamento atual, não necessariamente a melhor definição.
+52. Alias ortográfico e sinônimo editorial são relações distintas.
+53. Expansão lexical fica bloqueada enquanto a integridade mínima das bases não estiver estabilizada.
+54. Engine acionada pela interface analisa o snapshot vivo do Tiptap, não apenas a projeção React ou o estado persistido.
+55. Toda análise assíncrona captura uma assinatura estrutural e perde validade se o texto mudar.
+56. Publicação tardia de props não deve invalidar uma análise feita sobre a mesma assinatura.
 
 ## M0.9 encerrado
 
@@ -191,6 +198,26 @@ Decisão:
 - separar aliases de busca e sinônimos;
 - impedir novas duplicatas pela CI.
 
+## M1.0 — snapshot vivo das engines
+
+Três execuções E2 sucessivas terminaram 287/288 em superfícies antigas diferentes. O caso decisivo mostrou quatro versos no ProseMirror e o RimaLab respondendo “página vazia”.
+
+Correção:
+
+- criado `src/editor/editorSnapshotBridge.ts`;
+- o editor publica sincronamente JSON, texto e assinatura estrutural;
+- RimaLab, Contexto e Palavras/Léxico consultam o snapshot no instante da ação;
+- respostas são descartadas se uma edição real alterar a assinatura durante a análise;
+- a Revisão continua usando o contrato estrutural vivo que já possuía.
+
+Evidência:
+
+- cabeça `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`;
+- Mass Notes `30505264198`: auditor E2, build, 288/288, publicação, cache e smoke;
+- Argila `30505264208` e coerência `30505264199`: verdes;
+- artefato `mass-notes-tiptap-30505264198`;
+- digest `sha256:cd0627c79d7e2337d7077241246dcdf52a531de954bbcceebc5d00fae071523f`.
+
 ## Cobertura funcional preservada
 
 Continua aprovada:
@@ -239,8 +266,9 @@ Ainda não estão aprovados:
 
 1. conferir branch, PR e workflows;
 2. ler `M1_0_ENGINES_SUPERIORES.md`;
-3. ler `logs/2026-07-29-m1-e2-inventario-lexical.md`;
-4. regenerar a auditoria com `npm run audit:lexicon` quando dados mudarem;
-5. não editar a branch de preview;
-6. não afirmar superioridade global antes de E2–E4;
-7. não promover para `main`.
+3. ler `logs/2026-07-29-m1-e2-snapshot-vivo-engines.md`;
+4. ler `logs/2026-07-29-m1-e2-inventario-lexical.md`;
+5. regenerar a auditoria com `npm run audit:lexicon` quando dados mudarem;
+6. não editar a branch de preview;
+7. não afirmar superioridade global antes de E2–E4;
+8. não promover para `main`.
