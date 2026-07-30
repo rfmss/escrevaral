@@ -40,7 +40,7 @@ export function analyzeSimpleVerbSurface(
   const irregular = analyzeIrregularVerbForm(value)
   const regular = analyzeRegularVerbForm(value)
   const knownRegular = regular.filter((candidate) => isKnownVerbLemma(candidate.lemma))
-  const regularCandidates = knownRegular.length > 0 ? knownRegular : regular
+  const regularCandidates = options.forceVerb ? (knownRegular.length > 0 ? knownRegular : regular) : knownRegular
   const derived = irregularNegativeImperatives(irregular.candidates, context)
   const ranked = rankVerbCandidates(value, [...irregular.candidates, ...derived, ...regularCandidates], context, options)
   return { ...ranked, registeredIrregular: irregular.registered }
