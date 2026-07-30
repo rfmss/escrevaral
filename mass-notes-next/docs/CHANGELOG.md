@@ -218,11 +218,23 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - duas execuções E2 passaram auditoria e build, mas terminaram 287/288 por timeout do mesmo helper do Gate 9 no Firefox;
 - a falha migrou de HTML para TXT, confirmando instabilidade temporal e não regressão de produto;
 - a prova continua lendo o IndexedDB e exigindo a mesma frase;
-- somente a janela de convergência foi ampliada de 8 para 20 segundos, com intervalos explícitos.
+- a janela de convergência foi ampliada de 8 para 20 segundos, com intervalos explícitos.
+
+#### Snapshot vivo das engines
+
+- uma terceira execução revelou quatro versos no ProseMirror e o RimaLab respondendo “página vazia”;
+- confirmado que ferramentas podiam ler uma projeção React um ciclo atrás do editor;
+- criado `src/editor/editorSnapshotBridge.ts`;
+- `MassNotesEditor` passou a publicar sincronamente JSON, texto e assinatura estrutural;
+- RimaLab, Contexto e Palavras/Léxico passaram a ler o snapshot vivo no instante da ação;
+- análises assíncronas descartam respostas quando uma edição muda a assinatura;
+- cabeça `3c9c6d74e7638392a5bacfe4a2e82565e8af2583` passou auditor E2, build, 288/288, publicação, cache e smoke;
+- Argila `30505264208` e coerência `30505264199` passaram;
+- nenhuma base, regra linguística, asserção ou matriz foi reduzida.
 
 ## Próximo trabalho autorizado
 
-- validar a cabeça documental e a estabilização em 288/288;
+- validar a cabeça documental exata em 288/288;
 - consolidar `quica` com teste de não regressão;
 - revisar os 68 conflitos em lotes editoriais pequenos;
 - corrigir autorreferências separando aliases de sinônimos;
