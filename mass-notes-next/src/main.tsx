@@ -17,6 +17,7 @@ import './styles/legacy-import.css'
 import './styles/anatomy-host.css'
 import './styles/page-press-transition.css'
 import './styles/m1-usability.css'
+import './styles/pagination.css'
 
 function RightRailAccessibilityBridge() {
   useEffect(() => {
