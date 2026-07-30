@@ -10,6 +10,9 @@ export type SimpleVerbLookup = RankedVerbCandidates & {
   registeredIrregular: boolean
 }
 
+const PREPOSITIONS = new Set(['a', 'de', 'em', 'para', 'por', 'sem', 'até', 'após', 'antes'])
+const SUBJUNCTIVE_TRIGGERS = new Set(['quando', 'se', 'caso', 'embora', 'quem', 'onde', 'como'])
+
 function irregularNegativeImperatives(
   candidates: VerbCandidate[],
   context: VerbSelectionContext,
@@ -32,6 +35,30 @@ function irregularNegativeImperatives(
     }))
 }
 
+function disambiguatePersonalInfinitive(
+  candidates: VerbCandidate[],
+  context: VerbSelectionContext,
+): VerbCandidate[] {
+  const before = verbTokens(context.before ?? '')
+  const previous = normalizeVerbSurface(before.at(-1) ?? '')
+  const twoBefore = normalizeVerbSurface(before.at(-2) ?? '')
+  const hasFutureSubjunctive = candidates.some((candidate) => candidate.tense === 'futuro do subjuntivo')
+  const hasPersonalInfinitive = candidates.some((candidate) => candidate.formType === 'infinitivo pessoal')
+
+  let filtered = candidates
+  if (hasFutureSubjunctive && hasPersonalInfinitive) {
+    if (PREPOSITIONS.has(previous) || PREPOSITIONS.has(twoBefore)) {
+      filtered = candidates.filter((candidate) => candidate.tense !== 'futuro do subjuntivo')
+    } else if (SUBJUNCTIVE_TRIGGERS.has(previous) || SUBJUNCTIVE_TRIGGERS.has(twoBefore)) {
+      filtered = candidates.filter((candidate) => candidate.formType !== 'infinitivo pessoal')
+    }
+  }
+
+  return filtered.map((candidate) => candidate.formType === 'infinitivo pessoal'
+    ? { ...candidate, mood: undefined }
+    : candidate)
+}
+
 export function analyzeSimpleVerbSurface(
   value: string,
   context: VerbSelectionContext,
@@ -40,7 +67,8 @@ export function analyzeSimpleVerbSurface(
   const irregular = analyzeIrregularVerbForm(value)
   const regular = analyzeRegularVerbForm(value)
   const knownRegular = regular.filter((candidate) => isKnownVerbLemma(candidate.lemma))
-  const regularCandidates = options.forceVerb ? (knownRegular.length > 0 ? knownRegular : regular) : knownRegular
+  const acceptedRegular = options.forceVerb ? (knownRegular.length > 0 ? knownRegular : regular) : knownRegular
+  const regularCandidates = disambiguatePersonalInfinitive(acceptedRegular, context)
   const derived = irregularNegativeImperatives(irregular.candidates, context)
   const ranked = rankVerbCandidates(value, [...irregular.candidates, ...derived, ...regularCandidates], context, options)
   return { ...ranked, registeredIrregular: irregular.registered }
