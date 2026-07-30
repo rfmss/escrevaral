@@ -31,6 +31,11 @@ async function waitReady(page: Page) {
     Boolean((element as ContractHost).__escrevaralPositionContract))).toBe(true)
 }
 
+async function waitSaved(page: Page) {
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 15_000 })
+}
+
 async function createDocument(page: Page, title: string, html = BASE_HTML, plain = BASE_TEXT) {
   const initialCount = await page.locator('.note-card').count()
   await page.keyboard.press('Control+N')
@@ -133,6 +138,7 @@ test('trocar de documento não transporta decoration nem navegação', async ({ 
   await createDocument(page, 'Documento com leitura')
   await analyze(page)
   await expect(page.locator('[data-review-issue-id]')).not.toHaveCount(0)
+  await waitSaved(page)
 
   await page.keyboard.press('Control+N')
   await expect(page.getByLabel('Título do documento')).toHaveValue('')
