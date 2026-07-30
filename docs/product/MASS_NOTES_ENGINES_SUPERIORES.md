@@ -2,7 +2,7 @@
 
 Data: 2026-07-29
 
-Estado: **M1.0 em execução — E0 concluída e primeira tranche E1 aprovada**
+Estado: **M1.0 em execução — E0 concluída, primeira tranche E1 e controles negativos iniciais aprovados**
 
 ## Decisão
 
@@ -18,7 +18,11 @@ Também é permitido afirmar, com escopo explícito:
 
 > A camada contextual nova superou a baseline integrada em seis fronteiras do corpus morfossintático v1, elevando o resultado de 8/14 para 14/14 casos únicos.
 
-Essa afirmação não equivale a superioridade global das engines.
+Após a estabilização inicial, também é permitido afirmar:
+
+> O corpus integrado v1.1 passou 16/16 casos únicos e os primeiros controles negativos impediram generalização indevida entre adjetivo e verbo com sujeito nominal.
+
+Essas afirmações não equivalem a superioridade global das engines.
 
 ## Promessas proibidas até o veredito final
 
@@ -94,21 +98,41 @@ Após a primeira camada contextual tipada:
 - nenhuma mutação do manuscrito;
 - nenhuma substituição automática.
 
+Evidência funcional da primeira tranche:
+
+- cabeça `7a3ff060442c8c610676caef5085fa581f6e4024`;
+- Mass Notes `30495155369`;
+- Argila `30495155514`;
+- coerência `30495155428`;
+- artefato `mass-notes-tiptap-30495155369`.
+
+## Estabilização inicial aprovada
+
+A camada contextual foi isolada em módulo puro e recebeu controles positivos e negativos para as fronteiras já cobertas.
+
+- corpus integrado v1.1: 16/16 casos únicos;
+- controles diretos: quatro por navegador;
+- matriz: 144 cenários por navegador, 288 execuções;
+- `A menina larga a mochila` e `O corredor estreita os olhos` preservam leitura verbal;
+- locuções ausentes, `pública`, `ficou preso` e `os presos` não recebem override indevido;
+- nenhuma regressão nos 14 casos anteriores;
+- nenhuma mutação ou substituição automática.
+
 Evidência funcional:
 
-- cabeça `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`;
-- Argila `30493491638`;
-- coerência `30493491411`;
-- artefato `mass-notes-tiptap-30493491424`.
+- cabeça `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
+- Mass Notes `30501052382`;
+- Argila `30501052355`;
+- coerência `30501052360`;
+- artefato `mass-notes-tiptap-30501052382`.
 
 ## Próxima fronteira
 
 Antes de ampliar vocabulário ou interface:
 
-1. criar controles negativos para as regras contextuais novas;
-2. medir as contagens reais das bases;
-3. auditar duplicatas, autorreferências, ciclos e definições frágeis;
+1. medir as contagens reais das bases;
+2. auditar duplicatas, autorreferências, ciclos e definições frágeis;
+3. ampliar controles negativos junto com novas regras;
 4. escolher expansão lexical brasileira pequena e fundamentada;
 5. desenhar uma bancada sintático-morfológica integrada;
 6. ampliar a avaliação humana das cinco engines.
