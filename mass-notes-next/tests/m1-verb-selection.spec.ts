@@ -18,6 +18,14 @@ async function setText(page: Page, manuscript: string) {
   const editor = page.getByLabel('Texto do documento')
   await editor.fill(manuscript)
   await expect.poll(async () => normalized(await editor.innerText())).toBe(normalized(manuscript))
+  await expect.poll(() => editor.evaluate((element, expected) => {
+    const host = element as HTMLElement & {
+      __escrevaralPositionContract?: { snapshot?: { text?: string } }
+    }
+    return normalized(host.__escrevaralPositionContract?.snapshot?.text ?? '') === normalized(expected)
+  }, manuscript), {
+    intervals: [50, 100, 250],
+  }).toBe(true)
   return editor
 }
 
@@ -36,6 +44,7 @@ test('a ocorrência selecionada governa a leitura quando a forma se repete', asy
   await selectWithKeyboard(page, ['Control+Home', 'ArrowRight', 'ArrowRight'], 5)
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('canto')
   await expect(page.getByLabel('Palavra ou expressão curta')).toHaveValue('canto')
+  await expect(page.getByRole('status')).toContainText(/concluída/iu)
   await expect(page.locator('[data-verb-analysis]')).toHaveCount(0)
 
   await editor.click()
