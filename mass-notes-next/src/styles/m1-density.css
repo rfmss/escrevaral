@@ -105,11 +105,34 @@
   font-size: .82rem !important;
 }
 
-/* Uma linha, sem remoção de ações. Em larguras estreitas o próprio grupo rola horizontalmente. */
-.editor-viewport .editor-toolbar {
-  position: sticky !important;
-  top: 0 !important;
+/* Uma linha, sem remoção de ações. O dock usa a mesma instância React da toolbar. */
+.editor-toolbar-slot {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.editor-toolbar-slot.is-detached {
+  min-height: 52px;
+}
+
+.editor-toolbar-dock {
+  position: fixed;
+  z-index: 54;
+  height: 0;
+  pointer-events: none;
+}
+
+.editor-toolbar-dock[hidden] {
+  display: none;
+}
+
+.editor-viewport .editor-toolbar,
+.editor-toolbar-dock .editor-toolbar {
+  position: relative !important;
+  top: auto !important;
   z-index: 12;
+  width: 100%;
   flex-wrap: nowrap !important;
   align-items: center;
   gap: 3px !important;
@@ -125,6 +148,11 @@
   box-shadow: 0 7px 16px color-mix(in srgb, var(--shadow) 42%, transparent);
   scrollbar-width: thin;
   overscroll-behavior-inline: contain;
+}
+
+.editor-toolbar-dock .editor-toolbar {
+  margin: 0 !important;
+  pointer-events: auto;
 }
 
 .editor-toolbar .toolbar-group {
@@ -298,8 +326,8 @@
     width: 62px;
   }
 
-  .editor-viewport .editor-toolbar {
-    margin-inline: -8px !important;
+  .editor-viewport .editor-toolbar,
+  .editor-toolbar-dock .editor-toolbar {
     padding-inline: 4px !important;
   }
 }
