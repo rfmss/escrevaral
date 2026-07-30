@@ -10,7 +10,10 @@ Fontes permanentes:
 
 1. `../../docs/product/METODO_APRESENTACAO_MELHORIAS.md` — contrato do método;
 2. `../../docs/product/TEMPLATE_APRESENTACAO_MELHORIA.md` — ficha copiável;
-3. `logs/2026-07-30-observacao-01-paginacao-rolagem.md` — primeira aplicação oficial.
+3. `logs/2026-07-30-observacao-01-paginacao-rolagem.md` — primeira aplicação oficial;
+4. `personas/EVA_CHARA.md` — persona de rigor linguístico;
+5. `personas/EVA_CHARA_PROMPT.md` — protocolo de convocação;
+6. `personas/EVA_CHARA_SCORECARD.md` — rubrica e progresso.
 
 ## Comportamento esperado em cada nova tarefa
 
@@ -36,6 +39,26 @@ Ao receber uma observação de produto:
 - **A:** arquitetura ou ação escolhida;
 - **R:** resultado reproduzível;
 - **O:** o que permanece aberto.
+
+### Eva Chara — banca de excelência linguística
+
+Eva Chara é uma persona crítica fictícia. Ela não representa Evanildo Bechara, a ABL ou qualquer especialista real.
+
+Chamada oficial:
+
+> **Eva Chara, entre em banca.**
+
+Convocá-la obrigatoriamente:
+
+- antes de criar ou ampliar engine, regra, corpus ou léxico;
+- diante de ambiguidade, sobregeração ou conflito entre engines;
+- antes de fechar uma tranche linguística;
+- antes de declarar superioridade, cobertura ou excelência;
+- quando uma nota da rubrica puder mudar.
+
+O parecer deve informar notas por dimensão, evidências na cabeça exata, limites, fonte/corpus ausente, menor próximo passo seguro e decisão de prosseguir, pausar ou bloquear.
+
+Regra: **nota geral não compensa dimensão crítica**.
 
 ### Baseline → teste vermelho → correção mínima → matriz verde
 
@@ -64,6 +87,12 @@ Obrigatório quando a mudança puder afetar:
 
 O diagnóstico deve mapear causa, alternativas, riscos, arquivos, critérios e reversão antes de escrever código.
 
+## Fluxo conjunto para trabalho linguístico
+
+`CLARO → parecer Eva → corpus vermelho → menor correção → matriz integral → evidência → atualização da rubrica`.
+
+Toda regra linguística nova exige caso positivo e negativo. Teste verde prova comportamento reproduzível; não substitui fonte, teoria linguística ou banca humana.
+
 ## Apresentação padrão
 
 Toda melhoria deve ter duas camadas:
@@ -84,4 +113,4 @@ Não apresentar uma lista de commits como se fosse uma demonstração de produto
 
 ## Limite permanente
 
-O método melhora decisão e comunicação, mas não autoriza merge, promoção, Gate 14 ou lançamento público. O PR permanece em rascunho até autorização explícita.
+O método e Eva Chara melhoram decisão e comunicação, mas não autorizam merge, promoção, Gate 14 ou lançamento público. O PR permanece em rascunho até autorização explícita.
