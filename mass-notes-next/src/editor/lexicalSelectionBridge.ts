@@ -3,6 +3,8 @@ export type LexicalSelectionSnapshot = {
   from: number
   to: number
   text: string
+  before: string
+  after: string
 }
 
 type Listener = (snapshot: LexicalSelectionSnapshot) => void
