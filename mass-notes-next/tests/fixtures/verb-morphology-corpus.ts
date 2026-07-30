@@ -148,7 +148,7 @@ export const COMPOUND_VERB_CASES: VerbMorphologyCase[] = [
     id: 'mais-que-perfeito-composto',
     manuscript: 'Ela tinha cantado antes da chuva.',
     query: 'tinha cantado',
-    expected: ['cantar', 'Pretérito mais-que-perfeito composto', 'Locução verbal', 'tempo composto'],
+    expected: ['cantar', 'Pretérito mais-que-perfeito composto', 'Locução verbal', 'Tempo composto'],
   },
   {
     id: 'futuro-composto',
@@ -160,13 +160,13 @@ export const COMPOUND_VERB_CASES: VerbMorphologyCase[] = [
     id: 'futuro-perifrastico',
     manuscript: 'Ela vai cantar depois do intervalo.',
     query: 'vai cantar',
-    expected: ['cantar', 'Futuro perifrástico', 'Locução verbal', 'valor prospectivo'],
+    expected: ['cantar', 'Futuro perifrástico', 'Locução verbal', 'Valor prospectivo'],
   },
   {
     id: 'progressivo',
     manuscript: 'Ela estava cantando quando chegamos.',
     query: 'estava cantando',
-    expected: ['cantar', 'Pretérito imperfeito progressivo', 'Locução verbal', 'aspecto progressivo'],
+    expected: ['cantar', 'Pretérito imperfeito progressivo', 'Locução verbal', 'Aspecto progressivo'],
   },
   {
     id: 'passiva',
