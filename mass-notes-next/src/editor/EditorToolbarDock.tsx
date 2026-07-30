@@ -24,7 +24,7 @@ export function EditorToolbarDock({ children }: Props) {
   useEffect(() => {
     const slot = slotRef.current
     if (!slot || !dock) return
-    const viewport = slot.closest<HTMLElement>('.editor-viewport')
+    const viewport = slot.closest<HTMLElement>('.editor-shell')
     if (!viewport) return
 
     const update = () => {
