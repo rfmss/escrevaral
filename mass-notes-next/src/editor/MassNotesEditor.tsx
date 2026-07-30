@@ -67,11 +67,15 @@ function MassNotesEditorInstance({
   const publishCurrentLexicalSelection = (current: Editor) => {
     const { from, to, empty } = current.state.selection
     const selected = empty ? '' : current.state.doc.textBetween(from, to, ' ', ' ').trim()
+    const maximum = current.state.doc.content.size
+    const contextRadius = 180
     publishLexicalSelection({
       documentId,
       from,
       to,
       text: selected.length <= 120 ? selected : '',
+      before: current.state.doc.textBetween(Math.max(0, from - contextRadius), from, ' ', ' ').trim(),
+      after: current.state.doc.textBetween(to, Math.min(maximum, to + contextRadius), ' ', ' ').trim(),
     })
   }
 
