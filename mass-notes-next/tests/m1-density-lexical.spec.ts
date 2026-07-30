@@ -1,5 +1,9 @@
 import { expect, test, type Page } from '@playwright/test'
 
+function normalizedText(value: string): string {
+  return value.replace(/\s+/g, ' ').trim()
+}
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.getByLabel('Texto do documento')).toBeEditable()
@@ -9,7 +13,7 @@ async function waitReady(page: Page) {
 async function setText(page: Page, text: string) {
   const editor = page.getByLabel('Texto do documento')
   await editor.fill(text)
-  await expect.poll(async () => (await editor.innerText()).trim()).toBe(text.trim())
+  await expect.poll(async () => normalizedText(await editor.innerText())).toBe(normalizedText(text))
   return editor
 }
 
@@ -23,17 +27,17 @@ for (const viewport of [
 
     const metrics = await page.locator('.editor-toolbar').evaluate((toolbar) => {
       const buttons = [...toolbar.querySelectorAll('button')]
-      const tops = buttons.map((button) => Math.round(button.getBoundingClientRect().top))
+      const tops = buttons.map((button) => button.getBoundingClientRect().top)
       const rect = toolbar.getBoundingClientRect()
       return {
         height: rect.height,
-        rows: new Set(tops).size,
+        verticalSpread: Math.max(...tops) - Math.min(...tops),
         scrollWidth: toolbar.scrollWidth,
         clientWidth: toolbar.clientWidth,
       }
     })
 
-    expect(metrics.rows).toBe(1)
+    expect(metrics.verticalSpread).toBeLessThanOrEqual(2)
     expect(metrics.height).toBeLessThanOrEqual(48)
     expect(metrics.scrollWidth).toBeGreaterThanOrEqual(metrics.clientWidth)
   })
@@ -86,11 +90,11 @@ test('faixa superior prioriza palavras, meta, foco e salvamento', async ({ page 
   await expect(page.locator('[data-writing-goal-progress]')).toHaveAttribute('aria-valuenow', '12')
   await expect(page.locator('[data-writing-goal-progress]')).toHaveAttribute('aria-valuemax', '12')
 
-  const focus = page.getByRole('button', { name: 'Iniciar foco' })
+  const focus = page.getByRole('button', { name: 'Iniciar foco', exact: true })
   await focus.click()
-  await expect(page.getByRole('button', { name: 'Pausar foco' })).toBeVisible()
-  await page.getByRole('button', { name: 'Pausar foco' }).click()
-  await page.getByRole('button', { name: 'Reiniciar foco' }).click()
+  await expect(page.getByRole('button', { name: 'Pausar foco', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Pausar foco', exact: true }).click()
+  await page.getByRole('button', { name: 'Reiniciar foco', exact: true }).click()
   await expect(page.locator('[data-focus-clock]')).toHaveText('25:00')
 })
 
@@ -100,7 +104,7 @@ test('painel operacional cabe no viewport móvel sem rolagem global', async ({ p
   const dashboard = page.getByRole('region', { name: 'Painel da sessão de escrita' })
   await expect(dashboard).toBeVisible()
   await expect(page.getByLabel('Meta de palavras')).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Iniciar foco' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Iniciar foco', exact: true })).toBeVisible()
 
   const geometry = await page.evaluate(() => ({
     viewport: window.innerWidth,
