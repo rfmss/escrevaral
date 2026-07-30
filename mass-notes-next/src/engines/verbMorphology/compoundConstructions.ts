@@ -69,11 +69,21 @@ export function analyzeCompoundVerb(
   if (tokens.length < 2 || tokens.length > 3) return []
 
   const auxiliaryLookup = analyzeSimpleVerbSurface(tokens[0], context, { forceVerb: true })
-  const mainLookup = analyzeSimpleVerbSurface(tokens.at(-1) ?? '', context, { forceVerb: true })
+  const mainContext: VerbSelectionContext = {
+    ...context,
+    before: tokens.slice(0, -1).join(' '),
+    after: '',
+  }
+  const mainLookup = analyzeSimpleVerbSurface(tokens.at(-1) ?? '', mainContext, { forceVerb: true })
   const results: CompoundVerbResult[] = []
 
   if (tokens.length === 3) {
-    const middleLookup = analyzeSimpleVerbSurface(tokens[1], context, { forceVerb: true })
+    const middleContext: VerbSelectionContext = {
+      ...context,
+      before: tokens[0],
+      after: tokens[2],
+    }
+    const middleLookup = analyzeSimpleVerbSurface(tokens[1], middleContext, { forceVerb: true })
     const auxiliary = selectLemma(auxiliaryLookup.candidates, 'ter') ?? selectLemma(auxiliaryLookup.candidates, 'haver')
     const middle = middleLookup.candidates.find((candidate) => candidate.lemma === 'ser' && candidate.formType === 'particípio')
     const main = selectForm(mainLookup.candidates, 'particípio')
