@@ -15,13 +15,14 @@ Este programa não aceita como prova frases como “100% concluído” sem corpu
 - `main` e aplicação pública: intactos;
 - M0.9: encerrado como auditoria, sem autorizar lançamento ou substituição;
 - M1.0: **em execução**;
-- matriz atual: **138 cenários por navegador, 276 execuções**;
-- cabeça funcional E0/E1: `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`, Argila `30493491638` e coerência `30493491411`: verdes;
+- matriz atual: **144 cenários por navegador, 288 execuções**;
+- cabeça funcional E1 estabilizada: `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
+- Mass Notes `30501052382`, Argila `30501052355` e coerência `30501052360`: verdes;
 - engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - famílias legadas carregadas localmente por adaptadores tipados;
 - P0/P1 conhecidos nas engines: 0/0;
 - primeiro delta contextual comprovado: corpus v1 passou de 8/14 para 14/14 casos únicos;
+- estabilização inicial: corpus integrado v1.1 em 16/16 e quatro controles diretos por navegador;
 - lacunas principais restantes: profundidade lexical, superfície sintático-morfológica autônoma e prova qualitativa das cinco engines.
 
 ## Adversário mensurável
@@ -113,9 +114,9 @@ Baseline medida:
 
 ### E1 — Léxico e Sintaxe contextual
 
-Estado: **primeira tranche concluída; fase continua aberta**.
+Estado: **primeira tranche e estabilização inicial concluídas; fase continua aberta**.
 
-Entregue:
+Entregue na primeira tranche:
 
 - locuções `por enquanto` e `enquanto isso`;
 - decisão sensível a diacrítico para `publica/pública`;
@@ -125,18 +126,30 @@ Entregue:
 - notas que explicam a evidência usada;
 - decisão provável, e não certeza falsa, quando a regra depende de contexto.
 
+Estabilização inicial:
+
+- criado `src/engines/contextualLexicalResolver.ts` como módulo puro;
+- `lexicalAdapter.ts` voltou a concentrar somente carga, validação e composição;
+- locuções exigem ocorrência exata no contexto;
+- controles negativos preservam `pública`, `ficou preso` e `os presos` sem override indevido;
+- `A menina larga a mochila` e `O corredor estreita os olhos` recebem leitura verbal provável;
+- marcador de objeto à direita é avaliado antes da hipótese adjetiva pós-nominal;
+- criado `tests/m1-contextual-resolver.spec.ts`;
+- corpus integrado ampliado de 14 para 16 casos únicos.
+
 Resultado:
 
-- 14/14 casos únicos aprovados;
-- 276/276 execuções aprovadas;
-- nenhuma regressão nos oito casos já corretos;
+- baseline crítica: 14/14 casos únicos aprovados;
+- corpus integrado v1.1: 16/16 casos únicos aprovados;
+- quatro controles diretos por navegador;
+- 288/288 execuções aprovadas;
+- nenhuma regressão nos 14 casos anteriores;
 - nenhuma alteração em `lexical-engine.js` ou nos dados legados;
-- ganho implementado na camada contextual tipada do produto novo.
+- nenhuma mutação do manuscrito ou substituição automática.
 
 Pendente em E1:
 
-- ampliar negativos para impedir generalização excessiva;
-- cobrir mais formas verbais e particípios ambíguos;
+- ampliar negativos junto com novas formas verbais e particípios ambíguos;
 - criar experiência sintático-morfológica integrada;
 - testar regionalismos, oralidade e ordem marcada.
 
@@ -169,20 +182,21 @@ Responder separadamente:
 
 ## Evidência E0/E1
 
-Log:
+Logs:
 
-- `docs/logs/2026-07-29-m1-e0-e1-lexico-contextual.md`.
+- `docs/logs/2026-07-29-m1-e0-e1-lexico-contextual.md`;
+- `docs/logs/2026-07-29-m1-e1-controles-negativos.md`.
 
-Cabeça funcional:
+Cabeça funcional estabilizada:
 
-- `d44791ff1a317610c9dd152360cfbb9b168c503a`.
+- `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`.
 
 Workflows:
 
-- Mass Notes `30493491424`: 276/276, publicação, cache e smoke público;
-- Argila `30493491638`: verde;
-- coerência `30493491411`: verde;
-- artefato `mass-notes-tiptap-30493491424`.
+- Mass Notes `30501052382`: 288/288, publicação, cache e smoke público;
+- Argila `30501052355`: verde;
+- coerência `30501052360`: verde;
+- artefato `mass-notes-tiptap-30501052382`.
 
 ## Regras de execução
 
@@ -197,7 +211,7 @@ Workflows:
 
 ## Próxima ação
 
-1. criar negativos para as cinco regras contextuais novas;
+1. validar a cabeça documental exata desta estabilização;
 2. inventariar contagens reais de definições, sinônimos, polissemia e entradas contextuais;
 3. auditar duplicatas, autorreferências, alternativas circulares e lacunas de definição;
 4. selecionar a primeira expansão lexical brasileira com fonte e corpus;
