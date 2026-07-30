@@ -105,7 +105,7 @@ Resultado antes da correção:
 
 ## E1 — Léxico e Sintaxe contextual
 
-Estado: **primeira tranche concluída; fase aberta**.
+Estado: **primeira tranche e estabilização inicial concluídas; fase aberta**.
 
 Entregue:
 
@@ -114,28 +114,34 @@ Entregue:
 - particípio provável após auxiliar de voz passiva;
 - leitura verbal provável após pronome sujeito;
 - leitura adjetival pós-nominal com evidência nominal;
+- resolvedor contextual puro em `src/engines/contextualLexicalResolver.ts`;
+- controles negativos de locução, diacrítico, particípio, substantivação e sujeito nominal;
+- objeto explícito à direita impedindo falso adjetivo em `larga/estreita`;
 - notas explicando a evidência contextual;
 - camada tipada no produto novo, sem alterar motor ou dados legados.
 
-Resultado:
+Resultado atual:
 
-- 14/14 casos únicos aprovados;
-- matriz elevada para **138 cenários por navegador, 276 execuções**;
-- cabeça funcional `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`: 276/276, publicação, cache e smoke;
-- Argila `30493491638` e coerência `30493491411`: verdes;
-- artefato `mass-notes-tiptap-30493491424`.
+- baseline crítica preservada em 14/14 casos únicos;
+- corpus integrado v1.1 em **16/16 casos únicos**;
+- quatro controles diretos por navegador;
+- matriz elevada para **144 cenários por navegador, 288 execuções**;
+- cabeça funcional `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
+- Mass Notes `30501052382`: 288/288, publicação, cache e smoke;
+- Argila `30501052355` e coerência `30501052360`: verdes;
+- artefato `mass-notes-tiptap-30501052382`.
 
-Log:
+Logs:
 
-- `logs/2026-07-29-m1-e0-e1-lexico-contextual.md`.
+- `logs/2026-07-29-m1-e0-e1-lexico-contextual.md`;
+- `logs/2026-07-29-m1-e1-controles-negativos.md`.
 
 Próximos passos de E1:
 
-1. adicionar controles negativos para todas as regras novas;
-2. ampliar formas verbais, particípios e ordem marcada;
-3. testar oralidade e regionalismos sem impor norma indevida;
-4. desenhar uma experiência sintático-morfológica integrada e discreta.
+1. ampliar formas verbais, particípios e ordem marcada com positivos e negativos;
+2. testar oralidade e regionalismos sem impor norma indevida;
+3. desenhar uma experiência sintático-morfológica integrada e discreta;
+4. não ampliar regex ou dicionário para esconder ambiguidade.
 
 ## E2 — profundidade lexical auditável
 
@@ -200,9 +206,8 @@ M1.0 não apaga nem reclassifica essas dívidas.
 
 ## Próxima ação autorizada
 
-1. terminar a sincronização documental E0/E1;
+1. concluir a sincronização documental dos controles negativos E1;
 2. validar a cabeça documental exata;
 3. atualizar o corpo do PR, mantendo rascunho;
-4. iniciar controles negativos de E1;
-5. iniciar inventário E2;
-6. não iniciar Gate 14.
+4. iniciar o inventário quantitativo e qualitativo E2;
+5. não iniciar Gate 14.
