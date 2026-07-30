@@ -42,8 +42,9 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
 
   const before = await editor.innerText()
   await editor.click()
-  await page.keyboard.press('Home')
+  await page.keyboard.press('Control+Home')
   for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('Shift+ArrowRight')
+  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toMatch(/melancolia/i)
 
   const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
   if (await opener.isVisible()) await opener.click()
