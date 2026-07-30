@@ -51,6 +51,7 @@ test('toolbar permanece colada ao viewport do manuscrito sem mover a janela', as
 
   const viewport = page.locator('.editor-viewport')
   await viewport.evaluate((element) => { element.scrollTop = Math.floor(element.scrollHeight * 0.55) })
+  await expect(page.locator('.editor-toolbar-dock')).toHaveAttribute('data-toolbar-docked', 'true')
 
   const geometry = await page.evaluate(() => {
     const scroll = document.querySelector<HTMLElement>('.editor-viewport')!
