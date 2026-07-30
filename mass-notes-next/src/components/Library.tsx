@@ -86,6 +86,7 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
         <div className="eyebrow">Oficina de escrita brasileira</div>
         <h1>Escreva<span>ral</span></h1>
         <nav className="brand-links" aria-label="Contato e canais do Escrevaral">
+          <a aria-label="Contato do desenvolvedor" href="mailto:rafamass@proton.me">Dev</a>
           <a aria-label="Contato do Escrevaral" href="mailto:oi@escrevaral.com">Contato</a>
           <a aria-label="Código do Escrevaral no GitHub" href="https://github.com/rfmss/escrevaral" target="_blank" rel="noreferrer">Código</a>
           <a aria-label="Escrevaral no Instagram" href="https://www.instagram.com/escrevaral/" target="_blank" rel="noreferrer">@escrevaral</a>
