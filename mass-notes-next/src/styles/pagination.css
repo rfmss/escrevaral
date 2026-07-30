@@ -2,34 +2,74 @@
 html,
 body,
 #root {
+  width: 100%;
   height: 100%;
+  min-width: 0;
   min-height: 0 !important;
   overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 .experience-view--editor {
+  width: 100%;
   height: 100dvh;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
 }
 
 .app-shell {
+  width: 100%;
   height: 100dvh !important;
+  min-width: 0;
   min-height: 0 !important;
   max-height: 100dvh !important;
   overflow: hidden !important;
 }
 
 .workspace {
+  width: 100%;
   height: 100%;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
 }
 
+.registration,
+.conflict-banner {
+  flex: 0 0 auto;
+}
+
+.sidebar,
+.rail {
+  min-width: 0;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.notes,
+.rail-scroll {
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  touch-action: pan-y;
+}
+
+/* .editor-shell permanece como nome estrutural legado; .editor-viewport é o contrato de rolagem. */
 .editor-shell {
   flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
   min-height: 0;
   max-height: 100%;
+}
+
+.editor-viewport {
   overflow-x: hidden !important;
   overflow-y: auto !important;
   overscroll-behavior: contain;
@@ -42,30 +82,41 @@ body,
   touch-action: pan-y;
 }
 
-.editor-shell::-webkit-scrollbar { width: 11px; }
-.editor-shell::-webkit-scrollbar-track {
+.editor-viewport::-webkit-scrollbar { width: 11px; }
+.editor-viewport::-webkit-scrollbar-track {
   background: color-mix(in srgb, var(--ui-panel-strong, var(--paper-2)) 76%, transparent);
 }
-.editor-shell::-webkit-scrollbar-thumb {
+.editor-viewport::-webkit-scrollbar-thumb {
   min-height: 48px;
   border: 2px solid color-mix(in srgb, var(--ui-panel, var(--paper)) 92%, transparent);
   border-radius: 999px;
   background: var(--blue-deep);
 }
 
+.editor-viewport:focus-visible {
+  outline-offset: -4px;
+}
+
 .paper {
+  --escrevaral-page-width: 794px;
   --escrevaral-page-height: 1123px;
   --escrevaral-page-gap: 32px;
   --escrevaral-page-cycle: calc(var(--escrevaral-page-height) + var(--escrevaral-page-gap));
-  --escrevaral-page-margin-top: 58px;
-  --escrevaral-page-margin-bottom: 72px;
+  --escrevaral-page-margin-top: 57px;
+  --escrevaral-page-margin-right: 68px;
+  --escrevaral-page-margin-bottom: 76px;
+  --escrevaral-page-margin-left: 68px;
+  --escrevaral-page-content-width: 658px;
+  --escrevaral-page-content-height: 990px;
   --escrevaral-document-height: var(--escrevaral-page-height);
   --escrevaral-page-surface: var(--bp-paper, var(--ui-panel, var(--paper)));
   --escrevaral-page-border: color-mix(in srgb, var(--bp-cyan-strong, var(--blue-deep)) 74%, var(--bp-ink, var(--ink)));
 
   width: min(210mm, 100%) !important;
   max-width: 100%;
+  min-width: 0;
   min-height: var(--escrevaral-document-height) !important;
+  margin-inline: auto;
   padding-bottom: var(--escrevaral-page-margin-bottom);
   overflow: visible;
   border: 0 !important;
@@ -150,9 +201,14 @@ body.night .paper {
 
 .title-input,
 .deck,
+.editor-toolbar,
 .escrevaral-editor {
   position: relative;
   z-index: 2;
+}
+
+.editor-toolbar {
+  max-width: 100%;
 }
 
 .escrevaral-page-break {
@@ -184,7 +240,7 @@ body.focus-mode .workspace {
   max-height: 100dvh !important;
 }
 
-body.focus-mode .editor-shell {
+body.focus-mode .editor-viewport {
   height: auto !important;
   min-height: 0 !important;
   max-height: 100dvh !important;
@@ -217,7 +273,7 @@ body.focus-mode .editor-shell {
 }
 
 @media (max-width: 520px) {
-  .editor-shell {
+  .editor-viewport {
     scroll-padding-block: 76px 58px;
   }
 
@@ -228,5 +284,11 @@ body.focus-mode .editor-shell {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .editor-shell { scroll-behavior: auto; }
+  .editor-viewport {
+    scroll-behavior: auto;
+  }
+
+  .paper {
+    animation: none !important;
+  }
 }
