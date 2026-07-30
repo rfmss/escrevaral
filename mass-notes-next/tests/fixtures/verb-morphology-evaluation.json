@@ -1,90 +1,18 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "purpose": "Conjunto adversarial separado do corpus de desenvolvimento. Não deve ser importado pelos testes de regressão durante a implementação das regras.",
   "cases": [
-    {
-      "id": "eval-homografo-acordo",
-      "phenomenon": "homografo",
-      "manuscript": "O acordo foi assinado ontem.",
-      "query": "acordo",
-      "expectedBehavior": "não afirmar leitura verbal sem evidência contextual suficiente"
-    },
-    {
-      "id": "eval-homografo-acordo-verbo",
-      "phenomenon": "homografo",
-      "manuscript": "Eu acordo antes do nascer do sol.",
-      "query": "acordo",
-      "expectedBehavior": "reconhecer acordar no presente do indicativo"
-    },
-    {
-      "id": "eval-homografo-jogo",
-      "phenomenon": "homografo",
-      "manuscript": "O jogo terminou empatado.",
-      "query": "jogo",
-      "expectedBehavior": "não afirmar leitura verbal sem evidência contextual suficiente"
-    },
-    {
-      "id": "eval-defectivo-abolir",
-      "phenomenon": "defectivo",
-      "manuscript": "A comissão pretende abolir a exigência.",
-      "query": "abolir",
-      "expectedBehavior": "reconhecer infinitivo sem inventar paradigma não atestado"
-    },
-    {
-      "id": "eval-defectivo-reaver",
-      "phenomenon": "defectivo",
-      "manuscript": "Eles esperam reaver os documentos.",
-      "query": "reaver",
-      "expectedBehavior": "reconhecer infinitivo e declarar limites paradigmáticos"
-    },
-    {
-      "id": "eval-participio-duplo-aceitado",
-      "phenomenon": "participio-duplo",
-      "manuscript": "O conselho tinha aceitado a proposta.",
-      "query": "tinha aceitado",
-      "expectedBehavior": "reconhecer tempo composto sem prescrever variante única"
-    },
-    {
-      "id": "eval-participio-duplo-aceito",
-      "phenomenon": "participio-duplo",
-      "manuscript": "O texto foi aceito pela comissão.",
-      "query": "foi aceito",
-      "expectedBehavior": "reconhecer passiva e registrar a variante participial"
-    },
-    {
-      "id": "eval-locucao-chegar-a",
-      "phenomenon": "construcao-limitrofe",
-      "manuscript": "Ela chegou a escrever três versões.",
-      "query": "chegou a escrever",
-      "expectedBehavior": "não confundir valor aspectual com futuro perifrástico"
-    },
-    {
-      "id": "eval-locucao-voltar-a",
-      "phenomenon": "construcao-limitrofe",
-      "manuscript": "Ela voltou a cantar depois de anos.",
-      "query": "voltou a cantar",
-      "expectedBehavior": "reconhecer valor reiterativo sem tratá-lo como tempo composto"
-    },
-    {
-      "id": "eval-irregular-alto-risco-prover",
-      "phenomenon": "irregular-alto-risco",
-      "manuscript": "O arquivo provê evidências suficientes.",
-      "query": "provê",
-      "expectedBehavior": "distinguir prover de provir"
-    },
-    {
-      "id": "eval-irregular-alto-risco-intervir",
-      "phenomenon": "irregular-alto-risco",
-      "manuscript": "Se ela intervier, registraremos a decisão.",
-      "query": "intervier",
-      "expectedBehavior": "reconhecer futuro do subjuntivo de intervir"
-    },
-    {
-      "id": "eval-diacritico-pode-pode",
-      "phenomenon": "diacritico",
-      "manuscript": "Ontem ele pôde sair; hoje não pode.",
-      "query": "pôde",
-      "expectedBehavior": "preservar a oposição diacrítica entre passado e presente"
-    }
+    {"id":"eval-homografo-acordo","phenomenon":"homografo","manuscript":"O acordo foi assinado ontem.","query":"acordo","shouldFind":false,"includes":[],"excludes":[]},
+    {"id":"eval-homografo-acordo-verbo","phenomenon":"homografo","manuscript":"Eu acordo antes do nascer do sol.","query":"acordo","shouldFind":true,"includes":["acordar","Presente do indicativo","1ª pessoa do singular"],"excludes":[]},
+    {"id":"eval-homografo-jogo","phenomenon":"homografo","manuscript":"O jogo terminou empatado.","query":"jogo","shouldFind":false,"includes":[],"excludes":[]},
+    {"id":"eval-defectivo-abolir","phenomenon":"defectivo","manuscript":"A comissão pretende abolir a exigência.","query":"abolir","shouldFind":true,"includes":["abolir","Infinitivo"],"excludes":[]},
+    {"id":"eval-defectivo-reaver","phenomenon":"defectivo","manuscript":"Eles esperam reaver os documentos.","query":"reaver","shouldFind":true,"includes":["reaver","Infinitivo"],"excludes":[]},
+    {"id":"eval-participio-duplo-aceitado","phenomenon":"participio-duplo","manuscript":"O conselho tinha aceitado a proposta.","query":"tinha aceitado","shouldFind":true,"includes":["aceitar","Locução verbal","Tempo composto"],"excludes":[]},
+    {"id":"eval-participio-duplo-aceito","phenomenon":"participio-duplo","manuscript":"O texto foi aceito pela comissão.","query":"foi aceito","shouldFind":true,"includes":["aceitar","Passiva"],"excludes":[]},
+    {"id":"eval-locucao-chegar-a","phenomenon":"construcao-limitrofe","manuscript":"Ela chegou a escrever três versões.","query":"chegou a escrever","shouldFind":false,"includes":[],"excludes":["Futuro perifrástico"]},
+    {"id":"eval-locucao-voltar-a","phenomenon":"construcao-limitrofe","manuscript":"Ela voltou a cantar depois de anos.","query":"voltou a cantar","shouldFind":false,"includes":[],"excludes":["Tempo composto"]},
+    {"id":"eval-irregular-alto-risco-prover","phenomenon":"irregular-alto-risco","manuscript":"O arquivo provê evidências suficientes.","query":"provê","shouldFind":true,"includes":["prover","Presente do indicativo","3ª pessoa do singular"],"excludes":["provir"]},
+    {"id":"eval-irregular-alto-risco-intervir","phenomenon":"irregular-alto-risco","manuscript":"Se ela intervier, registraremos a decisão.","query":"intervier","shouldFind":true,"includes":["intervir","Futuro do subjuntivo","3ª pessoa do singular"],"excludes":[]},
+    {"id":"eval-diacritico-pode-pode","phenomenon":"diacritico","manuscript":"Ontem ele pôde sair; hoje não pode.","query":"pôde","shouldFind":true,"includes":["poder","Pretérito perfeito do indicativo","3ª pessoa do singular"],"excludes":["Presente do indicativo"]}
   ]
 }
