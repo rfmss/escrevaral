@@ -26,10 +26,21 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
   await page.goto('/')
   const editor = page.getByLabel('Texto do documento')
   await expect(editor).toBeEditable()
-  await editor.fill('Melancolia atravessa a casa sem pedir licença.')
+  const manuscript = 'Melancolia atravessa a casa sem pedir licença.'
+  await editor.fill(manuscript)
   await expect(editor).toContainText('Melancolia atravessa')
-  const before = await editor.innerText()
 
+  await expect.poll(() => editor.evaluate((element, expected) => {
+    const host = element as HTMLElement & {
+      __escrevaralPositionContract?: { snapshot?: { text?: string } }
+    }
+    return host.__escrevaralPositionContract?.snapshot?.text === expected
+  }, manuscript), {
+    timeout: 8_000,
+    intervals: [50, 100, 250],
+  }).toBe(true)
+
+  const before = await editor.innerText()
   await editor.click()
   await page.keyboard.press('Home')
   for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('Shift+ArrowRight')
