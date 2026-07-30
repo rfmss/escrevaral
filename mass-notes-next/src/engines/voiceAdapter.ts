@@ -1,4 +1,5 @@
 import voiceSource from '../../../voice-engine.js?raw'
+import { readLatestLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 
 export type VoiceConfidence = 'baixa' | 'média' | 'alta'
 
@@ -137,7 +138,8 @@ export async function analyzeVoice(
   sourceText: string,
   context: Record<string, unknown> = {},
 ): Promise<VoiceReading | null> {
-  const clean = sourceText.trim()
+  const liveText = readLatestLiveEditorSnapshot()?.plainText
+  const clean = (liveText ?? sourceText).trim()
   if (!clean) return null
   if (!ensureVoiceEngine() || !window.VeredaVoice) {
     throw new Error('O Espelho de Voz não está disponível.')
