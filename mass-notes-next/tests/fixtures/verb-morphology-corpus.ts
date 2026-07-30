@@ -178,7 +178,7 @@ export const COMPOUND_VERB_CASES: VerbMorphologyCase[] = [
     id: 'composta-passiva',
     manuscript: 'Ela teria sido carregada até a casa.',
     query: 'teria sido carregada',
-    expected: ['carregar', 'Futuro do pretérito composto', 'Passiva', 'tempo composto em voz passiva'],
+    expected: ['carregar', 'Futuro do pretérito composto', 'Passiva', 'Tempo composto em voz passiva'],
   },
 ]
 
