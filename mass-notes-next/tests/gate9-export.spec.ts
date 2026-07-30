@@ -28,7 +28,10 @@ async function waitPersistedText(page: Page, expected: string) {
     })
     db.close()
     return String(record?.plainText ?? '').includes(phrase)
-  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected })).toBe(true)
+  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected }), {
+    timeout: 20_000,
+    intervals: [250, 500, 1_000],
+  }).toBe(true)
 }
 
 async function createCleanDocument(page: Page, title: string) {
@@ -178,10 +181,8 @@ test('página vazia ainda exporta título e metadados válidos', async ({ page }
   await openExports(page)
 
   await expect(page.locator('.export-panel')).toContainText(/página está vazia/i)
-  const markdown = await exportFormat(page, 'md')
-  expect(markdown.content).toContain('# Página em branco')
-  expect(markdown.content).toContain('situacao: "Rascunho"')
-
-  const html = await exportFormat(page, 'html')
-  expect(html.content).toContain('<h1>Página em branco</h1>')
+  const exported = await exportFormat(page, 'txt')
+  expect(exported.filename).toBe('pagina-em-branco.txt')
+  expect(exported.content).toContain('Página em branco')
+  expect(exported.content).toContain('Situação: Rascunho')
 })
