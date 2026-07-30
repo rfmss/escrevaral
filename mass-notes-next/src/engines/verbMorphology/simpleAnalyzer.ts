@@ -1,6 +1,6 @@
 import { rankVerbCandidates } from './contextResolver'
 import { analyzeIrregularVerbForm } from './irregularLexicon'
-import { normalizeVerbSurface, verbTokens } from './normalization'
+import { normalizeVerbSurface, stripVerbDiacritics, verbTokens } from './normalization'
 import { analyzeRegularVerbForm } from './regularParadigms'
 import { isKnownVerbLemma } from './verbLemmaLexicon'
 import type { RankedVerbCandidates } from './contextResolver'
@@ -8,6 +8,7 @@ import type { VerbCandidate, VerbSelectionContext } from './types'
 
 export type SimpleVerbLookup = RankedVerbCandidates & {
   registeredIrregular: boolean
+  exactRegisteredIrregular: boolean
 }
 
 const PREPOSITIONS = new Set(['a', 'de', 'em', 'para', 'por', 'sem', 'até', 'após', 'antes'])
@@ -64,12 +65,22 @@ export function analyzeSimpleVerbSurface(
   context: VerbSelectionContext,
   options: { forceVerb?: boolean } = {},
 ): SimpleVerbLookup {
-  const irregular = analyzeIrregularVerbForm(value)
-  const regular = analyzeRegularVerbForm(value)
+  const surface = normalizeVerbSurface(value)
+  const irregular = analyzeIrregularVerbForm(surface)
+  const exactCuratedIrregular = irregular.candidates.some((candidate) => (
+    normalizeVerbSurface(candidate.canonicalSurface) === surface
+  ))
+  const exactRegisteredIrregular = exactCuratedIrregular
+    || (irregular.registered && stripVerbDiacritics(surface) === surface)
+  const regular = analyzeRegularVerbForm(surface)
   const knownRegular = regular.filter((candidate) => isKnownVerbLemma(candidate.lemma))
   const acceptedRegular = options.forceVerb ? (knownRegular.length > 0 ? knownRegular : regular) : knownRegular
   const regularCandidates = disambiguatePersonalInfinitive(acceptedRegular, context)
   const derived = irregularNegativeImperatives(irregular.candidates, context)
-  const ranked = rankVerbCandidates(value, [...irregular.candidates, ...derived, ...regularCandidates], context, options)
-  return { ...ranked, registeredIrregular: irregular.registered }
+  const ranked = rankVerbCandidates(surface, [...irregular.candidates, ...derived, ...regularCandidates], context, options)
+  return {
+    ...ranked,
+    registeredIrregular: irregular.registered,
+    exactRegisteredIrregular,
+  }
 }
