@@ -1,5 +1,6 @@
 import { Placeholder } from '@tiptap/extensions'
 import StarterKit from '@tiptap/starter-kit'
+import { Pagination } from './paginationExtension'
 import { ReviewDecorations } from './reviewDecorations'
 
 export const editorExtensions = [
@@ -21,5 +22,6 @@ export const editorExtensions = [
         : 'A página espera. Ataque primeiro. Escreva em português brasileiro.',
     includeChildren: true,
   }),
+  Pagination,
   ReviewDecorations,
 ]
