@@ -69,7 +69,7 @@ export function WritingDashboardFields() {
     <div className="writing-dashboard-fields">
       <div className="reg-field writing-metric">
         <span className="field-label">Palavras</span>
-        <output className="field-value writing-word-count" data-writing-word-count>{words}</output>
+        <span className="field-value writing-word-count" data-writing-word-count>{words}</span>
       </div>
 
       <div className="reg-field writing-goal">
