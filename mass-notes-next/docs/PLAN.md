@@ -32,7 +32,6 @@ Resultado consolidado herdado:
 
 - 124 cenários por navegador, 248 execuções;
 - Chromium e Firefox obrigatórios;
-- P0/P1: 0/0;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
 - substituição integral: `NO-SHIP`;
@@ -120,16 +119,13 @@ Entregue:
 - notas explicando a evidência contextual;
 - camada tipada no produto novo, sem alterar motor ou dados legados.
 
-Resultado atual:
+Resultado:
 
 - baseline crítica preservada em 14/14 casos únicos;
 - corpus integrado v1.1 em **16/16 casos únicos**;
 - quatro controles diretos por navegador;
-- matriz elevada para **144 cenários por navegador, 288 execuções**;
-- cabeça funcional `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
-- Mass Notes `30501052382`: 288/288, publicação, cache e smoke;
-- Argila `30501052355` e coerência `30501052360`: verdes;
-- artefato `mass-notes-tiptap-30501052382`.
+- matriz funcional em **144 cenários por navegador, 288 execuções**;
+- nenhuma regressão nos 14 casos anteriores.
 
 Logs:
 
@@ -145,17 +141,49 @@ Próximos passos de E1:
 
 ## E2 — profundidade lexical auditável
 
-Estado: **próxima fase quantitativa e qualitativa**.
+Estado: **baseline quantitativa concluída; integridade em execução**.
 
-Ordem:
+Infraestrutura:
 
-1. contar definições, sinônimos, polissemia, entradas contextuais e formas verbais reais;
-2. comparar os números medidos com a baseline declarada do legado;
-3. detectar duplicatas, autorreferências e ciclos de alternativas;
-4. localizar verbetes sem definição útil e definições genéricas;
-5. separar cobertura real de chaves técnicas ou duplicadas;
-6. escolher a primeira expansão lexical brasileira com fonte e corpus;
-7. repetir auditoria e matriz integral.
+- `scripts/audit-lexical-inventory.mjs` mede as estruturas efetivas;
+- `scripts/audit-definition-duplicates.mjs` preserva linha, redação descartada e redação retida;
+- `npm run audit:lexicon` é obrigatório na CI;
+- relatórios completos entram no artefato;
+- baseline resumida e decisões estão em `docs/audits/M1_E2_LEXICAL_INVENTORY.*`;
+- log operacional: `logs/2026-07-29-m1-e2-inventario-lexical.md`.
+
+Cobertura medida:
+
+- sinônimos: 1.343 entradas, 7.766 alternativas brutas;
+- definições: 936 efetivas, derivadas de 1.011 declarações;
+- polissemia: 175 regras, 55 cartões explícitos de alternativas;
+- Contexto: 606 entradas em nove categorias;
+- léxico editorial local: 527 entradas completas;
+- locuções: 95 brutas, 94 normalizadas;
+- formas regulares no presente: 2.045 brutas, 2.028 normalizadas;
+- RimaLab: enciclopédia 50 e `grammarWords` 407.
+
+Achados prioritários:
+
+1. **P0:** 69 grupos de chaves de definição repetidas, 75 declarações sobrescritas e 68 conflitos de redação;
+2. **P1:** oito autorreferências de sinônimos após normalização;
+3. **P1:** quatro aliases numéricos expostos como verbetes;
+4. **P2:** `leitor_modelo` vazio;
+5. **P2:** quatro textos de definição repetidos entre chaves;
+6. **P2:** 124 regras de polissemia sem cartão explícito de alternativas.
+
+Ordem E2 aprovada:
+
+1. validar a cabeça documental e a estabilização temporal do teste antigo;
+2. remover apenas `quica`, a duplicata comprovadamente idêntica, com teste;
+3. agrupar os 68 conflitos por domínio editorial;
+4. consolidar lotes pequenos comparando e, quando necessário, combinando redações;
+5. corrigir autorreferências separando alias de busca e sinônimo real;
+6. decidir o destino dos aliases `ode2`, `contemplar2`, `denso2`, `silencio2`;
+7. preencher ou retirar `leitor_modelo` da cobertura;
+8. impedir novas duplicatas por CI;
+9. só então escolher expansão lexical brasileira fundamentada;
+10. repetir auditoria e matriz integral após cada lote.
 
 Critério: superar qualidade antes de aumentar volume. Nenhuma lista cresce sem revisão e regressão.
 
@@ -206,8 +234,8 @@ M1.0 não apaga nem reclassifica essas dívidas.
 
 ## Próxima ação autorizada
 
-1. concluir a sincronização documental dos controles negativos E1;
-2. validar a cabeça documental exata;
-3. atualizar o corpo do PR, mantendo rascunho;
-4. iniciar o inventário quantitativo e qualitativo E2;
-5. não iniciar Gate 14.
+1. validar esta cabeça documental em 288/288;
+2. registrar SHA, workflows e artefato no PR;
+3. iniciar o lote seguro `quica` com teste de não regressão;
+4. preparar a primeira bancada de conflitos editoriais;
+5. não ampliar vocabulário e não iniciar Gate 14.
