@@ -169,9 +169,9 @@ function scoreCandidate(
   }
 
   if (PREPOSITIONS.has(previous) && candidate.formType === 'finita') score -= 35
-  if (PREPOSITIONS.has(previous) && candidate.formType === 'infinitivo') {
+  if (PREPOSITIONS.has(previous) && ['infinitivo', 'infinitivo pessoal'].includes(candidate.formType)) {
     score += 30
-    evidence.push(`A preposição “${previous}” pode introduzir um infinitivo.`)
+    evidence.push(`A preposição “${previous}” pode introduzir um infinitivo, inclusive pessoal.`)
   }
 
   if (previous === 'não') {
