@@ -202,11 +202,27 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 - publicação, cache, smoke e artefato `mass-notes-tiptap-30493491424` aprovados;
 - superioridade comprovada apenas nas seis fronteiras corrigidas, não globalmente.
 
+#### E1 — controles negativos e isolamento do resolvedor
+
+- criado `src/engines/contextualLexicalResolver.ts` como módulo puro;
+- `lexicalAdapter.ts` passou a delegar a decisão contextual;
+- locuções só recebem override quando a expressão exata está presente;
+- controles preservam `pública`, `ficou preso` e `os presos` sem invasão de regra;
+- sujeito nominal seguido de objeto explícito passou a favorecer verbo antes do adjetivo pós-nominal;
+- adicionados `A menina larga a mochila` e `O corredor estreita os olhos` ao corpus integrado;
+- criado `tests/m1-contextual-resolver.spec.ts` com quatro controles por navegador;
+- corpus integrado passou para 16/16 casos únicos;
+- matriz passou para **288/288**;
+- cabeça funcional `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
+- Mass Notes `30501052382`, Argila `30501052355` e coerência `30501052360` verdes;
+- publicação, cache, smoke e artefato `mass-notes-tiptap-30501052382` aprovados;
+- nenhuma regressão nos 14 casos anteriores.
+
 ## Próximo trabalho autorizado
 
-- adicionar controles negativos para as regras contextuais novas;
 - inventariar definições, sinônimos, polissemia, contexto e formas verbais reais;
 - auditar duplicatas, autorreferências, ciclos e definições fracas;
+- ampliar negativos junto com novas formas contextuais;
 - selecionar expansão lexical brasileira pequena, fundamentada e testada;
 - desenhar bancada sintático-morfológica integrada;
 - manter PR em rascunho, Gate 14 suspenso e `main` intacta.
