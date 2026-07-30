@@ -12,10 +12,11 @@ Atualizado em: 2026-07-29
 - M0.9: encerrado como auditoria técnica e decisória;
 - milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
 - navegadores obrigatórios: Chromium e Firefox;
-- matriz atual: **138 cenários por navegador, 276 execuções**;
-- cabeça funcional E0/E1: `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`, Argila `30493491638` e coerência `30493491411`: verdes;
-- corpus contextual v1: 8/14 → 14/14 casos únicos;
+- matriz atual: **144 cenários por navegador, 288 execuções**;
+- cabeça funcional E1 estabilizada: `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
+- Mass Notes `30501052382`, Argila `30501052355` e coerência `30501052360`: verdes;
+- corpus contextual: baseline 8/14 → primeira tranche 14/14 → v1.1 integrado 16/16;
+- controles diretos do resolvedor: 4 por navegador;
 - P0/P1 conhecidos nas engines: 0/0;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público: `NO-SHIP`;
@@ -25,12 +26,13 @@ Atualizado em: 2026-07-29
 ## Fontes de retomada
 
 1. `M1_0_ENGINES_SUPERIORES.md` — memória operacional do programa atual;
-2. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
-3. `logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — transição de governança;
-4. `PLAN.md` — sequência autorizada;
-5. `CHANGELOG.md` — histórico técnico;
-6. `M0_9_AUDITORIA_OPERACIONAL.md` e `M0_9_ERRATA_MATRIZ.md` — histórico da auditoria;
-7. contratos globais em `../../docs/product/`.
+2. `logs/2026-07-29-m1-e1-controles-negativos.md` — estabilização contextual mais recente;
+3. `logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — baseline e primeiro ganho;
+4. `logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — transição de governança;
+5. `PLAN.md` — sequência autorizada;
+6. `CHANGELOG.md` — histórico técnico;
+7. `M0_9_AUDITORIA_OPERACIONAL.md` e `M0_9_ERRATA_MATRIZ.md` — histórico da auditoria;
+8. contratos globais em `../../docs/product/`.
 
 ## Decisões permanentes de fundação
 
@@ -84,6 +86,8 @@ Atualizado em: 2026-07-29
 42. Definições, sinônimos e polissemia precisam de auditoria de duplicatas, autorreferências, ciclos e utilidade.
 43. A avaliação humana deve medir correção, especificidade, clareza, utilidade, respeito autoral e adequação brasileira.
 44. A candidata superior exige média humana mínima 4,0 e nenhuma engine abaixo de 3,5.
+45. Regras contextuais vivem em módulo puro sempre que possível; adaptadores de carga não devem concentrar heurística linguística.
+46. Padrões locais visualmente iguais devem observar contexto à direita antes de classificar verbo como adjetivo.
 
 ## M0.9 encerrado
 
@@ -150,11 +154,11 @@ Lacunas confirmadas:
 - `estrada larga` classificada como forma verbal;
 - `eu canto` classificado como substantivo.
 
-## M1.0 — primeira tranche E1
+## M1.0 — E1 contextual e estabilização
 
-A camada contextual nova foi implementada em `src/engines/lexicalAdapter.ts`, preservando `lexical-engine.js` e as bases legadas.
+A camada contextual nova preserva `lexical-engine.js` e as bases legadas. A heurística foi isolada em `src/engines/contextualLexicalResolver.ts`; `lexicalAdapter.ts` permanece responsável pela carga local, adaptação e composição da leitura.
 
-Entregue:
+Entregue na primeira tranche:
 
 - reconhecimento das duas locuções temporais;
 - decisão sensível a diacrítico para `publica/pública`;
@@ -164,15 +168,26 @@ Entregue:
 - notas em português claro explicando a evidência;
 - nenhuma substituição automática.
 
+Estabilização inicial:
+
+- locuções exigem ocorrência exata no contexto;
+- `pública`, `ficou preso` e `os presos` são controles que não recebem override indevido;
+- `A menina larga a mochila` e `O corredor estreita os olhos` preservam leitura verbal;
+- objeto explícito à direita é avaliado antes da hipótese adjetiva;
+- quatro testes diretos exercitam o resolvedor puro;
+- dois casos integrados comprovam Tiptap, persistência e não mutação.
+
 Resultado:
 
-- 14/14 casos únicos corretos;
-- 276/276 execuções;
-- nenhuma regressão nos oito casos já corretos;
+- 16/16 casos integrados corretos;
+- quatro controles diretos por navegador;
+- 288/288 execuções;
+- nenhuma regressão nos 14 casos anteriores;
 - publicação, cache e smoke públicos verdes;
-- Argila e coerência verdes.
+- Argila e coerência verdes;
+- artefato `mass-notes-tiptap-30501052382`.
 
-A superioridade comprovada é específica às seis fronteiras corrigidas. Não prova ainda superioridade global nem substituição integral.
+A superioridade comprovada continua específica às fronteiras cobertas. Não prova superioridade global nem substituição integral.
 
 ## Cobertura funcional preservada
 
@@ -210,8 +225,8 @@ Ainda não estão aprovados:
 
 ## Próxima ação obrigatória
 
-1. fechar a documentação e CI da primeira tranche M1.0;
-2. adicionar controles negativos para as novas regras contextuais;
+1. validar a cabeça documental exata dos controles negativos;
+2. registrar essa cabeça e workflows no PR;
 3. inventariar contagens lexicais reais;
 4. auditar duplicatas, autorreferências, ciclos e lacunas de definição;
 5. escolher uma expansão lexical brasileira pequena, fundamentada e testada;
@@ -222,7 +237,7 @@ Ainda não estão aprovados:
 
 1. conferir branch, PR e workflows;
 2. ler `M1_0_ENGINES_SUPERIORES.md`;
-3. ler o log E0/E1;
+3. ler `logs/2026-07-29-m1-e1-controles-negativos.md`;
 4. identificar caso, engine e evidência da próxima tranche;
 5. não editar a branch de preview;
 6. não afirmar superioridade global antes de E2–E4;
