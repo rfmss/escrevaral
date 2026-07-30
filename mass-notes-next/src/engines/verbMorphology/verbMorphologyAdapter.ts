@@ -19,6 +19,24 @@ const SUBJECT_LABELS: Record<string, string> = {
   '3:plural': 'eles/elas/vocês',
 }
 
+const PRESENT_IR: Record<string, string> = {
+  '1:singular': 'vou',
+  '2:singular': 'vais',
+  '3:singular': 'vai',
+  '1:plural': 'vamos',
+  '2:plural': 'ides',
+  '3:plural': 'vão',
+}
+
+const CONDITIONAL_IR: Record<string, string> = {
+  '1:singular': 'iria',
+  '2:singular': 'irias',
+  '3:singular': 'iria',
+  '1:plural': 'iríamos',
+  '2:plural': 'iríeis',
+  '3:plural': 'iriam',
+}
+
 function deriveContext(surface: string, context: VerbSelectionContext): VerbSelectionContext {
   if (context.before != null || context.after != null || !context.fullText) return context
   const source = context.fullText
@@ -32,9 +50,12 @@ function deriveContext(surface: string, context: VerbSelectionContext): VerbSele
   }
 }
 
+function grammarSlot(candidate: VerbCandidate): string {
+  return candidate.person && candidate.number ? `${candidate.person}:${candidate.number}` : ''
+}
+
 function subjectLabel(candidate: VerbCandidate): string {
-  if (!candidate.person || !candidate.number) return ''
-  return SUBJECT_LABELS[`${candidate.person}:${candidate.number}`] ?? ''
+  return SUBJECT_LABELS[grammarSlot(candidate)] ?? ''
 }
 
 function encliticInfinitive(lemma: string, clitics: VerbClitic[]): string {
@@ -55,6 +76,7 @@ function cliticBeforeVerb(clitics: VerbClitic[]): string {
 
 function simpleEquivalents(candidate: VerbCandidate, clitics: VerbClitic[]): string[] {
   if (clitics.length === 0) return []
+  const slot = grammarSlot(candidate)
   const subject = subjectLabel(candidate)
   const pronoun = cliticBeforeVerb(clitics)
   const equivalents: string[] = []
@@ -62,11 +84,11 @@ function simpleEquivalents(candidate: VerbCandidate, clitics: VerbClitic[]): str
   if (subject) equivalents.push(`${subject} ${pronoun} ${candidate.canonicalSurface}`)
   if (candidate.tense === 'futuro do presente') {
     const infinitive = encliticInfinitive(candidate.lemma, clitics)
-    equivalents.push(`${subject || 'o sujeito'} vai ${infinitive}`)
+    equivalents.push(`${subject || 'o sujeito'} ${PRESENT_IR[slot] || 'vai'} ${infinitive}`)
   }
   if (candidate.tense === 'futuro do pretérito') {
     const infinitive = encliticInfinitive(candidate.lemma, clitics)
-    equivalents.push(`${subject || 'o sujeito'} iria ${infinitive}`)
+    equivalents.push(`${subject || 'o sujeito'} ${CONDITIONAL_IR[slot] || 'iria'} ${infinitive}`)
   }
   return uniqueStrings(equivalents)
 }
