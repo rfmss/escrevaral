@@ -94,6 +94,25 @@ test('faixa superior prioriza palavras, meta, foco e salvamento', async ({ page 
   await expect(page.locator('[data-focus-clock]')).toHaveText('25:00')
 })
 
+test('painel operacional cabe no viewport móvel sem rolagem global', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 640 })
+  await waitReady(page)
+  const dashboard = page.getByRole('region', { name: 'Painel da sessão de escrita' })
+  await expect(dashboard).toBeVisible()
+  await expect(page.getByLabel('Meta de palavras')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Iniciar foco' })).toBeVisible()
+
+  const geometry = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    documentWidth: document.documentElement.scrollWidth,
+    windowY: window.scrollY,
+    dashboardWidth: document.querySelector<HTMLElement>('.writing-dashboard')?.getBoundingClientRect().width ?? 0,
+  }))
+  expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewport + 1)
+  expect(geometry.dashboardWidth).toBeLessThanOrEqual(geometry.viewport + 1)
+  expect(geometry.windowY).toBe(0)
+})
+
 test('leitura de varre-lo-ei explica futuro do presente e mesóclise', async ({ page }) => {
   await waitReady(page)
   const source = 'Amanhã varre-lo-ei antes que as visitas cheguem.'
@@ -119,6 +138,7 @@ test('assinatura técnica dá lugar a contato e canais essenciais', async ({ pag
   await waitReady(page)
   const brand = page.locator('.brand')
   await expect(brand).not.toContainText('MOTOR TIPTAP')
+  await expect(brand.getByRole('link', { name: 'Contato do desenvolvedor' })).toHaveAttribute('href', 'mailto:rafamass@proton.me')
   await expect(brand.getByRole('link', { name: 'Contato do Escrevaral' })).toHaveAttribute('href', 'mailto:oi@escrevaral.com')
   await expect(brand.getByRole('link', { name: 'Código do Escrevaral no GitHub' })).toHaveAttribute('href', 'https://github.com/rfmss/escrevaral')
   await expect(brand.getByRole('link', { name: 'Escrevaral no Instagram' })).toHaveAttribute('href', 'https://www.instagram.com/escrevaral/')
