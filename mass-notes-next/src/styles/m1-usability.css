@@ -1,4 +1,12 @@
 /* M1 QA — a lateral de ferramentas ocupa o espaço restante e oferece rolagem própria. */
+@media (min-width: 1041px) {
+  .rail {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}
+
 .rail-scroll {
   flex: 1 1 auto;
   min-height: 0;
