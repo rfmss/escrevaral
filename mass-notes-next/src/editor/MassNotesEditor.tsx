@@ -2,6 +2,7 @@ import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { useEffect } from 'react'
 import { editorExtensions } from './editorExtensions'
+import { publishLiveEditorSnapshot } from './editorSnapshotBridge'
 import { publishLexicalSelection } from './lexicalSelectionBridge'
 import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
@@ -44,6 +45,17 @@ function MassNotesEditorInstance({
   onChange,
   onPositionContract,
 }: Props) {
+  const currentSnapshot = (current: Editor): EditorSnapshot => ({
+    content: current.getJSON(),
+    plainText: current.getText({ blockSeparator: '\n\n' }),
+  })
+
+  const publishSnapshot = (current: Editor): EditorSnapshot => {
+    const snapshot = currentSnapshot(current)
+    publishLiveEditorSnapshot(documentId, snapshot.content, snapshot.plainText)
+    return snapshot
+  }
+
   const publishPositionContract = (current: Editor) => {
     const contract = createEditorPositionContract(current.state.doc, documentId, current.getJSON())
     const host = current.view.dom as PositionContractHost
@@ -75,13 +87,14 @@ function MassNotesEditorInstance({
       },
     },
     onCreate: ({ editor: current }) => {
+      publishSnapshot(current)
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
     },
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
-      onChange({ content: current.getJSON(), plainText: current.getText({ blockSeparator: '\n\n' }) })
+      onChange(publishSnapshot(current))
     },
     onSelectionUpdate: ({ editor: current }) => {
       publishCurrentLexicalSelection(current)
