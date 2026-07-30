@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "policy": {
+    "verifiedRequiresSource": true,
+    "allowedStatuses": ["pending", "partial", "verified", "disputed"],
+    "note": "Uma regra só pode ser marcada como verified quando possuir fonte identificável, escopo, tradição ou uso descrito e licença ou condição de uso registrada."
+  },
+  "rules": [
+    {
+      "id": "regular-paradigms",
+      "phenomenon": "paradigmas-regulares",
+      "implementation": ["src/engines/verbMorphology/regularParadigms.ts"],
+      "status": "pending",
+      "tradition": "a documentar",
+      "usage": "cobertura funcional versionada; validação externa pendente",
+      "divergences": [],
+      "sources": []
+    },
+    {
+      "id": "personal-infinitive",
+      "phenomenon": "infinitivo-pessoal",
+      "implementation": ["src/engines/verbMorphology/regularParadigms.ts", "src/engines/verbMorphology/contextResolver.ts"],
+      "status": "pending",
+      "tradition": "a documentar",
+      "usage": "inclui contexto governado por preposição",
+      "divergences": [],
+      "sources": []
+    },
+    {
+      "id": "curated-irregulars",
+      "phenomenon": "irregulares-frequentes",
+      "implementation": ["src/engines/verbMorphology/irregularLexicon.ts"],
+      "status": "partial",
+      "tradition": "léxico curado; critérios de frequência e risco ainda não publicados",
+      "usage": "não representa paradigma universal",
+      "divergences": [],
+      "sources": []
+    },
+    {
+      "id": "clitic-placement",
+      "phenomenon": "cliticos",
+      "implementation": ["src/engines/verbMorphology/cliticParser.ts"],
+      "status": "pending",
+      "tradition": "a documentar",
+      "usage": "próclise, ênclise e mesóclise com apresentação não prescritiva",
+      "divergences": ["variação de registro e uso brasileiro contemporâneo"],
+      "sources": []
+    },
+    {
+      "id": "compound-constructions",
+      "phenomenon": "locucoes-e-compostos",
+      "implementation": ["src/engines/verbMorphology/compoundConstructions.ts"],
+      "status": "pending",
+      "tradition": "a documentar",
+      "usage": "tempos compostos, progressivo, futuro perifrástico e passiva",
+      "divergences": ["fronteira entre locução verbal, perífrase aspectual e combinação livre"],
+      "sources": []
+    },
+    {
+      "id": "contextual-homographs",
+      "phenomenon": "homografos-e-diacriticos",
+      "implementation": ["src/engines/verbMorphology/contextResolver.ts", "src/engines/verbMorphology/normalization.ts"],
+      "status": "partial",
+      "tradition": "proteções contextuais e diacríticas versionadas",
+      "usage": "evita transferir automaticamente análise entre formas com diacríticos distintos",
+      "divergences": [],
+      "sources": []
+    },
+    {
+      "id": "defective-verbs",
+      "phenomenon": "verbos-defectivos",
+      "implementation": [],
+      "status": "pending",
+      "tradition": "não implementado",
+      "usage": "reservado para tranche adversarial",
+      "divergences": ["descrições paradigmáticas variam entre tradições e usos"],
+      "sources": []
+    },
+    {
+      "id": "double-participles",
+      "phenomenon": "participios-duplos",
+      "implementation": [],
+      "status": "pending",
+      "tradition": "não implementado",
+      "usage": "reservado para tranche adversarial sem prescrição automática",
+      "divergences": ["seleção por auxiliar, voz, registro e uso efetivo"],
+      "sources": []
+    }
+  ]
+}
