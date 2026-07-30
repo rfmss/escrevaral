@@ -38,7 +38,7 @@ function isUsableSelection(snapshot: LexicalSelectionSnapshot | null): snapshot 
 
 function lexicalSupportsVerb(reading: LexicalReading | null): boolean {
   if (!reading) return false
-  const contract = [reading.className, reading.functionName, reading.syntacticFunction, reading.note].join(' ')
+  const contract = [reading.className, reading.functionName, reading.syntacticFunction].join(' ')
   return /\b(verbo|verbal|particípio|gerúndio|infinitivo|auxiliar)\b/iu.test(contract)
 }
 
@@ -46,12 +46,22 @@ function isExplicitVerbConstruction(analysis: VerbAnalysis): boolean {
   return analysis.clitics.length > 0 || analysis.primary.formType === 'locução verbal'
 }
 
+function hasStrongContextualVerbEvidence(analysis: VerbAnalysis): boolean {
+  if (analysis.decision !== 'classificado') return false
+  return analysis.evidence.some((item) => /sujeito|concorda|conector próximo|negação imediatamente|introduzir um infinitivo/iu.test(item))
+}
+
 function presentableVerbAnalysis(
   reading: LexicalReading | null,
   analysis: VerbAnalysis | null,
 ): VerbAnalysis | null {
   if (!analysis) return null
-  if (!reading || lexicalSupportsVerb(reading) || isExplicitVerbConstruction(analysis)) return analysis
+  if (
+    !reading
+    || lexicalSupportsVerb(reading)
+    || isExplicitVerbConstruction(analysis)
+    || hasStrongContextualVerbEvidence(analysis)
+  ) return analysis
   return null
 }
 
