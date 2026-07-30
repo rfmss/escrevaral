@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
+import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { readLexicalWord, type LexicalReading } from '../engines/lexicalAdapter'
 import {
   readLatestLexicalSelection,
@@ -34,11 +35,6 @@ export function LexicalPanel({ document }: Props) {
   const [message, setMessage] = useState('Selecione uma palavra no texto ou faça uma busca local.')
   const [busy, setBusy] = useState(false)
   const requestToken = useRef(0)
-  const contextRef = useRef(document.plainText)
-
-  useEffect(() => {
-    contextRef.current = document.plainText
-  }, [document.plainText])
 
   const run = useCallback(async (value: string) => {
     const clean = normalizeQuery(value)
@@ -52,11 +48,15 @@ export function LexicalPanel({ document }: Props) {
       return
     }
 
+    const live = readLiveEditorSnapshot(document.id)
+    const context = live?.plainText ?? document.plainText
+    const signature = live?.contentSignature ?? JSON.stringify(document.content)
     setBusy(true)
     setMessage('Consultando o vocabulário local…')
     try {
-      const result = await readLexicalWord(clean, contextRef.current)
-      if (token !== requestToken.current) return
+      const result = await readLexicalWord(clean, context)
+      const current = readLiveEditorSnapshot(document.id)
+      if (token !== requestToken.current || (current && current.contentSignature !== signature)) return
       setReading(result)
       setMessage(result ? 'Leitura lexical concluída.' : 'Não encontrei uma leitura local para este recorte.')
     } catch (error) {
@@ -67,7 +67,7 @@ export function LexicalPanel({ document }: Props) {
     } finally {
       if (token === requestToken.current) setBusy(false)
     }
-  }, [document.id])
+  }, [document.content, document.id, document.plainText])
 
   useEffect(() => {
     requestToken.current += 1
@@ -75,6 +75,14 @@ export function LexicalPanel({ document }: Props) {
     setQuery('')
     setBusy(false)
     setMessage('Selecione uma palavra no texto ou faça uma busca local.')
+
+    return subscribeLiveEditorSnapshot((snapshot) => {
+      if (snapshot.documentId !== document.id) return
+      requestToken.current += 1
+      setReading(null)
+      setBusy(false)
+      setMessage('O texto mudou. Consulte novamente para usar o contexto atual.')
+    })
   }, [document.id])
 
   useEffect(() => {
