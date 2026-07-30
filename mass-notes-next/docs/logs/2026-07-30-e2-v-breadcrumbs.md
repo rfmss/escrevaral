@@ -49,6 +49,51 @@ Cabeça: `81c4b0752e101ca2d9404a954cb575b9175bbffe`
 
 Classificação: **B0 verde; feature verbal autorizada a começar**.
 
+## V0–V6 — Primeira candidata integrada
+
+Cabeça testada: `1ab5e3825888fff2e4428a70da91fae524e395ec`  
+Mass Notes: `30567353563`  
+Job: `90955115548`
+
+Entregas presentes:
+
+- contrato tipado de análise verbal;
+- paradigmas regulares por regra;
+- irregulares frequentes em dados curados;
+- reconhecimento seguro do inventário irregular legado;
+- próclise, ênclise e mesóclise;
+- tempos compostos, progressivo, futuro perifrástico e voz passiva;
+- contexto exato da ocorrência selecionada;
+- cartão verbal genérico e independente do verbete lexical;
+- corpus verbal positivo, negativo e contextual;
+- seis cenários novos por navegador.
+
+Resultado:
+
+- auditoria, TypeScript e build: aprovados;
+- Argila e coerência: aprovadas;
+- matriz: 350 execuções iniciadas, **317 aprovadas e 33 falhas**;
+- publicação, cache e smoke: bloqueados corretamente.
+
+### Causas provadas
+
+1. **Sobregeração morfológica:** qualquer palavra terminada como uma flexão possível podia gerar lemas inexistentes, por exemplo `melancolia → melancoliar/melancolier/melancoliir`.
+2. **Precedência indevida:** uma hipótese verbal fraca ocultava classes contextuais já resolvidas pela engine lexical, como conjunção, advérbio, substantivo e adjetivo.
+3. **Compatibilidade de rótulo:** `Forma verbal analisada` não satisfazia o contrato histórico `/verbo/i`.
+4. **Ambiguidade estrutural:** `cantarem` foi escolhido como infinitivo pessoal mesmo depois do conector `quando`.
+5. **Expectativa editorial:** a banca procurava `tempo composto` em minúsculas, enquanto o cartão apresenta `Tempo composto`.
+6. **Falha antiga isolada:** uma criação de documento no Gate 6 falhou uma vez no Firefox; nenhuma correção foi aplicada sem repetição.
+
+### Correções da segunda candidata
+
+- formas regulares simples só são apresentadas quando o lema reconstruído existe no inventário local;
+- construções explícitas com clíticos e locuções continuam podendo analisar lemas produtivos;
+- a classe lexical contextual tem precedência, exceto quando ela própria reconhece verbo/particípio ou a construção é explicitamente verbal;
+- o heading passa a `Verbo — forma analisada`;
+- `quando/se/caso` favorecem futuro do subjuntivo; preposições favorecem infinitivo pessoal;
+- infinitivo pessoal deixa de receber rótulo de modo subjuntivo;
+- capitalização do corpus de locuções é alinhada à interface sem afrouxar a classificação.
+
 ## Guardrails ativos
 
 - baseline e feature permanecem em commits separáveis;
@@ -56,4 +101,6 @@ Classificação: **B0 verde; feature verbal autorizada a começar**.
 - nenhuma promoção para `main`;
 - PR permanece rascunho;
 - Gate 14 suspenso;
-- nenhuma rede, substituição automática ou alteração do JSON autoral.
+- nenhuma rede, substituição automática ou alteração do JSON autoral;
+- nenhuma falha antiga é alterada sem repetição;
+- nenhum retry ou aumento global de timeout foi adicionado.
