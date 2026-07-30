@@ -25,9 +25,11 @@ Estado: E2-V em estabilização; PR #155 em rascunho
 
 ## Arquivos da planilha
 
-- `EVA_CHARA_PROGRESSO.xlsx` — painel humano com fórmulas, gráfico, backlog e histórico;
-- `EVA_CHARA_PROGRESSO.csv` — versão textual legível por agentes e ferramentas;
-- este arquivo — interpretação normativa e regras de atualização.
+- `EVA_CHARA_PROGRESSO.csv` — fonte versionada, textual e legível por agentes;
+- este arquivo — interpretação normativa e regras de atualização;
+- `eva_chara_progresso_escrevaral.xlsx` — artefato humano gerado, com fórmulas, gráfico, backlog e histórico; deve ser regenerado a partir da fonte versionada quando houver mudança de nota.
+
+O binário `.xlsx` não é a fonte de verdade do repositório. Isso impede que agentes dependam de um formato opaco e mantém o progresso auditável em diff.
 
 ## Como atualizar
 
