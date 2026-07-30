@@ -1,0 +1,7 @@
+/* OBS-01 — controles do manuscrito permanecem alcançáveis durante a rolagem interna. */
+.editor-viewport .editor-toolbar {
+  position: sticky !important;
+  top: -1px;
+  z-index: 5;
+  max-width: 100%;
+}
