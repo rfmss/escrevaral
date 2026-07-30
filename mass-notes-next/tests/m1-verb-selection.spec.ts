@@ -22,7 +22,8 @@ async function setText(page: Page, manuscript: string) {
     const host = element as HTMLElement & {
       __escrevaralPositionContract?: { snapshot?: { text?: string } }
     }
-    return normalized(host.__escrevaralPositionContract?.snapshot?.text ?? '') === normalized(expected)
+    const normalize = (value: string) => value.replace(/\s+/g, ' ').trim()
+    return normalize(host.__escrevaralPositionContract?.snapshot?.text ?? '') === normalize(expected)
   }, manuscript), {
     intervals: [50, 100, 250],
   }).toBe(true)
