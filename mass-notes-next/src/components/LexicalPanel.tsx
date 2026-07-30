@@ -2,12 +2,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { EscrevaralDocument } from '../domain/document'
 import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { readLexicalWord, type LexicalReading } from '../engines/lexicalAdapter'
-import { readVerbFormationSupplement } from '../engines/verbFormationSupplement'
+import { analyzeVerbMorphology } from '../engines/verbMorphology/verbMorphologyAdapter'
+import type { VerbAnalysis } from '../engines/verbMorphology/types'
 import {
   readLatestLexicalSelection,
   subscribeLexicalSelection,
   type LexicalSelectionSnapshot,
 } from '../editor/lexicalSelectionBridge'
+import { VerbAnalysisCard } from './VerbAnalysisCard'
 
 type Props = {
   document: EscrevaralDocument
@@ -24,6 +26,10 @@ function normalizeQuery(value: string): string {
   return value.trim().replace(/\s+/g, ' ').slice(0, 120)
 }
 
+function comparable(value: string): string {
+  return normalizeQuery(value).toLocaleLowerCase('pt-BR').replace(/[‐‑‒–—―]/g, '-')
+}
+
 function isUsableSelection(snapshot: LexicalSelectionSnapshot | null): snapshot is LexicalSelectionSnapshot {
   if (!snapshot) return false
   const selected = normalizeQuery(snapshot.text)
@@ -33,17 +39,20 @@ function isUsableSelection(snapshot: LexicalSelectionSnapshot | null): snapshot 
 export function LexicalPanel({ document }: Props) {
   const [query, setQuery] = useState('')
   const [reading, setReading] = useState<LexicalReading | null>(null)
+  const [verbAnalysis, setVerbAnalysis] = useState<VerbAnalysis | null>(null)
   const [message, setMessage] = useState('Selecione uma palavra no texto ou faça uma busca local.')
   const [busy, setBusy] = useState(false)
   const requestToken = useRef(0)
+  const selectionRef = useRef<LexicalSelectionSnapshot | null>(null)
 
-  const run = useCallback(async (value: string) => {
+  const run = useCallback(async (value: string, suppliedSelection?: LexicalSelectionSnapshot | null) => {
     const clean = normalizeQuery(value)
     const token = ++requestToken.current
     setQuery(clean)
 
     if (!clean) {
       setReading(null)
+      setVerbAnalysis(null)
       setMessage('Selecione uma palavra no texto ou faça uma busca local.')
       setBusy(false)
       return
@@ -52,19 +61,35 @@ export function LexicalPanel({ document }: Props) {
     const live = readLiveEditorSnapshot(document.id)
     const context = live?.plainText ?? document.plainText
     const signature = live?.contentSignature ?? JSON.stringify(document.content)
+    const selected = suppliedSelection && comparable(suppliedSelection.text) === comparable(clean)
+      ? suppliedSelection
+      : selectionRef.current && comparable(selectionRef.current.text) === comparable(clean)
+        ? selectionRef.current
+        : null
+    const verbal = analyzeVerbMorphology(clean, {
+      text: clean,
+      before: selected?.before,
+      after: selected?.after,
+      fullText: context,
+    })
+
     setBusy(true)
-    setMessage('Consultando o vocabulário local…')
+    setMessage('Consultando as leituras locais…')
     try {
-      const result = await readLexicalWord(clean, context)
+      const lexical = await readLexicalWord(clean, context)
       const current = readLiveEditorSnapshot(document.id)
       if (token !== requestToken.current || (current && current.contentSignature !== signature)) return
-      setReading(result)
-      setMessage(result ? 'Leitura lexical concluída.' : 'Não encontrei uma leitura local para este recorte.')
+      setReading(lexical)
+      setVerbAnalysis(verbal)
+      setMessage(lexical || verbal ? 'Leitura local concluída.' : 'Não encontrei uma leitura local para este recorte.')
     } catch (error) {
       if (token !== requestToken.current) return
       console.error('[Escrevaral] Leitura lexical não concluída.', error)
       setReading(null)
-      setMessage('O vocabulário local não pôde ser aberto nesta sessão.')
+      setVerbAnalysis(verbal)
+      setMessage(verbal
+        ? 'A leitura verbal local foi concluída; o vocabulário geral não pôde ser aberto nesta sessão.'
+        : 'O vocabulário local não pôde ser aberto nesta sessão.')
     } finally {
       if (token === requestToken.current) setBusy(false)
     }
@@ -72,7 +97,9 @@ export function LexicalPanel({ document }: Props) {
 
   useEffect(() => {
     requestToken.current += 1
+    selectionRef.current = null
     setReading(null)
+    setVerbAnalysis(null)
     setQuery('')
     setBusy(false)
     setMessage('Selecione uma palavra no texto ou faça uma busca local.')
@@ -81,6 +108,7 @@ export function LexicalPanel({ document }: Props) {
       if (snapshot.documentId !== document.id) return
       requestToken.current += 1
       setReading(null)
+      setVerbAnalysis(null)
       setBusy(false)
       setMessage('O texto mudou. Consulte novamente para usar o contexto atual.')
     })
@@ -88,16 +116,21 @@ export function LexicalPanel({ document }: Props) {
 
   useEffect(() => {
     const consume = (snapshot: LexicalSelectionSnapshot) => {
-      if (snapshot.documentId !== document.id || !isUsableSelection(snapshot)) return
-      void run(snapshot.text)
+      if (snapshot.documentId !== document.id) return
+      selectionRef.current = snapshot
+      if (!isUsableSelection(snapshot)) return
+      void run(snapshot.text, snapshot)
     }
 
     const latest = readLatestLexicalSelection(document.id)
-    if (isUsableSelection(latest)) void run(latest.text)
+    if (latest) selectionRef.current = latest
+    if (isUsableSelection(latest)) void run(latest.text, latest)
     return subscribeLexicalSelection(consume)
   }, [document.id, run])
 
-  const formation = reading ? readVerbFormationSupplement(query) : null
+  const hasResult = Boolean(reading || verbAnalysis)
+  const displayWord = reading?.displayWord || query
+  const displayClass = verbAnalysis ? 'Forma verbal analisada' : reading?.className || 'Classe não determinada'
 
   return (
     <section className="lexical-panel" aria-labelledby="lexical-panel-title">
@@ -120,51 +153,27 @@ export function LexicalPanel({ document }: Props) {
       </form>
       <p className="lexical-message" role="status" aria-live="polite">{message}</p>
 
-      {reading && (
+      {hasResult && (
         <article className="lexical-reading">
           <div className="lexical-heading">
-            <h2>{reading.displayWord}</h2>
-            <span>{reading.className}</span>
+            <h2>{displayWord}</h2>
+            <span>{displayClass}</span>
           </div>
-          <p className="lexical-decision">{DECISION_LABELS[reading.decision]}</p>
-          {reading.definition && <p className="lexical-definition">{reading.definition}</p>}
-          {reading.note && <p>{reading.note}</p>}
+          {!verbAnalysis && reading && <p className="lexical-decision">{DECISION_LABELS[reading.decision]}</p>}
+          {!verbAnalysis && reading?.definition && <p className="lexical-definition">{reading.definition}</p>}
+          {!verbAnalysis && reading?.note && <p>{reading.note}</p>}
 
-          {formation && (
-            <section className="verb-formation" aria-labelledby="verb-formation-title">
-              <div className="verb-formation-heading">
-                <span>Tempo verbal</span>
-                <h3 id="verb-formation-title">{formation.tense}</h3>
-                <strong>{formation.construction}</strong>
-              </div>
-              {formation.inputNote && <p className="verb-formation-note">{formation.inputNote}</p>}
-              <div className="verb-formation-section">
-                <h4>Entendendo a forma</h4>
-                <p>A forma indica uma ação futura e coloca o pronome no interior do verbo.</p>
-                <dl>
-                  <div><dt>Futuro sem pronome</dt><dd>{formation.baseFuture}</dd></div>
-                  <div><dt>Formação</dt><dd>{formation.decomposition}</dd></div>
-                  <div><dt>Forma normativa</dt><dd>{formation.canonicalForm}</dd></div>
-                </dl>
-              </div>
-              <div className="verb-formation-section">
-                <h4>Ajuste ortográfico</h4>
-                <p>{formation.orthographicAdjustment}</p>
-              </div>
-              <div className="verb-formation-section">
-                <h4>Equivale a</h4>
-                <ul>{formation.equivalents.map((item) => <li key={item}>{item}</li>)}</ul>
-              </div>
-            </section>
+          {verbAnalysis && <VerbAnalysisCard analysis={verbAnalysis} />}
+
+          {reading && (
+            <dl>
+              {!verbAnalysis && reading.syntacticFunction && <div><dt>Função no contexto</dt><dd>{reading.syntacticFunction}</dd></div>}
+              {!verbAnalysis && reading.functionName && <div><dt>Função gramatical</dt><dd>{reading.functionName}</dd></div>}
+              {!verbAnalysis && reading.field && <div><dt>Campo</dt><dd>{reading.field}</dd></div>}
+              <div><dt>Ocorrências</dt><dd>{reading.count}</dd></div>
+            </dl>
           )}
-
-          <dl>
-            {reading.syntacticFunction && <div><dt>Função no contexto</dt><dd>{reading.syntacticFunction}</dd></div>}
-            {reading.functionName && <div><dt>Função gramatical</dt><dd>{reading.functionName}</dd></div>}
-            {reading.field && <div><dt>Campo</dt><dd>{reading.field}</dd></div>}
-            <div><dt>Ocorrências</dt><dd>{reading.count}</dd></div>
-          </dl>
-          {reading.alternatives.length > 0 && (
+          {!verbAnalysis && reading && reading.alternatives.length > 0 && (
             <section className="lexical-alternatives" aria-labelledby="lexical-alternatives-title">
               <h3 id="lexical-alternatives-title">Outras leituras possíveis</h3>
               <ul>{reading.alternatives.map((item) => <li key={item}>{item}</li>)}</ul>
