@@ -101,12 +101,24 @@ function decisionWithCandidates(decision: VerbDecision, candidates: VerbCandidat
   return decision
 }
 
+function contextForClitic(parsed: ParsedCliticVerb, context: VerbSelectionContext): VerbSelectionContext {
+  if (parsed.placement !== 'próclise') return context
+  const words = parsed.surface.split(' ')
+  const prefix = words.slice(0, -2).join(' ').trim()
+  if (!prefix) return context
+  return {
+    ...context,
+    before: `${context.before ?? ''} ${prefix}`.trim(),
+  }
+}
+
 function buildFromClitic(
   surface: string,
   parsed: ParsedCliticVerb,
   context: VerbSelectionContext,
 ): VerbAnalysis | null {
-  const lookup = analyzeSimpleVerbSurface(parsed.baseSurface, context, { forceVerb: true })
+  const effectiveContext = contextForClitic(parsed, context)
+  const lookup = analyzeSimpleVerbSurface(parsed.baseSurface, effectiveContext, { forceVerb: true })
   if (lookup.candidates.length === 0) {
     if (lookup.registeredIrregular) {
       const safe = safeRegisteredIrregular(surface)
