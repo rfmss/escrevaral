@@ -2,7 +2,7 @@
 
 Data: 2026-07-29
 
-Estado: **M1.0 em execução — E0 concluída, primeira tranche E1 e controles negativos iniciais aprovados**
+Estado: **M1.0 em execução — E0 concluída, E1 contextual estabilizada e baseline E2 inventariada**
 
 ## Decisão
 
@@ -18,9 +18,11 @@ Também é permitido afirmar, com escopo explícito:
 
 > A camada contextual nova superou a baseline integrada em seis fronteiras do corpus morfossintático v1, elevando o resultado de 8/14 para 14/14 casos únicos.
 
-Após a estabilização inicial, também é permitido afirmar:
-
 > O corpus integrado v1.1 passou 16/16 casos únicos e os primeiros controles negativos impediram generalização indevida entre adjetivo e verbo com sujeito nominal.
+
+Sobre cobertura, a formulação permitida é:
+
+> O inventário E2 mediu a cobertura efetiva atual e revelou diferenças entre declarações históricas, declarações brutas e chaves realmente disponíveis no runtime.
 
 Essas afirmações não equivalem a superioridade global das engines.
 
@@ -32,7 +34,9 @@ Essas afirmações não equivalem a superioridade global das engines.
 - “100% preciso”;
 - “cobertura completa do português brasileiro”;
 - “melhor que o legado” sem delimitar corpus, versão e resultado;
-- transformar contagem de entradas em prova de utilidade.
+- transformar contagem de entradas em prova de utilidade;
+- contar declarações sobrescritas como definições disponíveis;
+- afirmar que 936 definições efetivas superam a baseline histórica de 1.020+.
 
 ## Critérios obrigatórios
 
@@ -46,8 +50,11 @@ Essas afirmações não equivalem a superioridade global das engines.
 8. comparação separa quantidade, acerto, utilidade e experiência;
 9. avaliação humana usa rubrica versionada;
 10. alternativas nunca são aplicadas automaticamente;
-11. o PR permanece em rascunho;
-12. `main` e a aplicação pública permanecem intactos.
+11. chaves repetidas não podem ser aceitas como cobertura adicional;
+12. conflitos editoriais não podem ser removidos em massa sem comparação;
+13. alias ortográfico e sinônimo editorial devem ser diferenciados;
+14. o PR permanece em rascunho;
+15. `main` e a aplicação pública permanecem intactos.
 
 ## Ordem aprovada
 
@@ -72,70 +79,67 @@ A documentação v916 do legado informa aproximadamente:
 
 Esses valores são alvo de inventário, não selo de qualidade.
 
-## Primeira evidência aprovada
+## Evidência E0/E1 aprovada
 
-Corpus v1 de 14 casos únicos:
-
-- locuções `por enquanto` e `enquanto isso`;
-- `enquanto` em oração;
-- pares `publica/pública` e `seria/séria`;
-- `preso` como particípio, adjetivo e substantivo;
-- `larga` como adjetivo e verbo;
-- `canto` como verbo e substantivo.
-
-Baseline:
+Baseline E0:
 
 - 8/14 casos únicos corretos;
 - seis lacunas repetidas nos dois navegadores;
 - 264/276 execuções aprovadas.
 
-Após a primeira camada contextual tipada:
+Após a primeira camada contextual:
 
 - 14/14 casos únicos corretos;
 - 276/276 execuções aprovadas;
-- nenhuma regressão nos oito casos já corretos;
 - nenhuma alteração em `lexical-engine.js` ou nas bases legadas;
-- nenhuma mutação do manuscrito;
-- nenhuma substituição automática.
+- nenhuma mutação ou substituição automática.
 
-Evidência funcional da primeira tranche:
-
-- cabeça `7a3ff060442c8c610676caef5085fa581f6e4024`;
-- Mass Notes `30495155369`;
-- Argila `30495155514`;
-- coerência `30495155428`;
-- artefato `mass-notes-tiptap-30495155369`.
-
-## Estabilização inicial aprovada
-
-A camada contextual foi isolada em módulo puro e recebeu controles positivos e negativos para as fronteiras já cobertas.
+Após a estabilização inicial:
 
 - corpus integrado v1.1: 16/16 casos únicos;
 - controles diretos: quatro por navegador;
-- matriz: 144 cenários por navegador, 288 execuções;
+- matriz funcional: 144 cenários por navegador, 288 execuções;
 - `A menina larga a mochila` e `O corredor estreita os olhos` preservam leitura verbal;
-- locuções ausentes, `pública`, `ficou preso` e `os presos` não recebem override indevido;
-- nenhuma regressão nos 14 casos anteriores;
-- nenhuma mutação ou substituição automática.
+- nenhuma regressão nos 14 casos anteriores.
 
-Evidência funcional:
+## Baseline E2 — cobertura efetiva
 
-- cabeça `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
-- Mass Notes `30501052382`;
-- Argila `30501052355`;
-- coerência `30501052360`;
-- artefato `mass-notes-tiptap-30501052382`.
+A auditoria reproduzível mede as estruturas realmente carregadas:
 
-## Próxima fronteira
+- 1.343 entradas de sinônimos;
+- 7.766 alternativas brutas de sinônimos;
+- 936 definições efetivas derivadas de 1.011 declarações;
+- 175 regras de polissemia;
+- 55 cartões explícitos de alternativas;
+- 606 entradas contextuais em nove categorias;
+- 527 entradas completas no léxico editorial local;
+- 95 locuções brutas e 94 normalizadas;
+- 2.045 formas regulares brutas no presente e 2.028 normalizadas;
+- RimaLab com enciclopédia 50 e `grammarWords` 407.
+
+Achados de integridade:
+
+- uma família **P0**: 69 grupos de definições repetidas, 75 declarações sobrescritas e 68 conflitos de redação;
+- uma única duplicata idêntica: `quica`;
+- duas famílias **P1**: oito autorreferências de sinônimos e quatro aliases numéricos expostos;
+- `leitor_modelo` vazio;
+- quatro textos de definição repetidos entre chaves;
+- 124 regras de polissemia sem cartão explícito de alternativas.
+
+O inventário E2 não demonstra superioridade lexical. Ele demonstra que a cobertura histórica não pode ser usada sem auditoria e estabelece a fila de correção.
+
+## Decisão de integridade
 
 Antes de ampliar vocabulário ou interface:
 
-1. medir as contagens reais das bases;
-2. auditar duplicatas, autorreferências, ciclos e definições frágeis;
-3. ampliar controles negativos junto com novas regras;
-4. escolher expansão lexical brasileira pequena e fundamentada;
-5. desenhar uma bancada sintático-morfológica integrada;
-6. ampliar a avaliação humana das cinco engines.
+1. validar a cabeça documental e a matriz integral;
+2. consolidar `quica` com teste de não regressão;
+3. revisar os 68 conflitos em lotes pequenos;
+4. corrigir autorreferências sem destruir aliases úteis;
+5. decidir o destino de `ode2`, `contemplar2`, `denso2` e `silencio2`;
+6. preencher ou retirar `leitor_modelo` da cobertura;
+7. impedir novas colisões pela CI;
+8. só então escolher uma expansão lexical brasileira fundamentada.
 
 ## Fronteira de release
 
