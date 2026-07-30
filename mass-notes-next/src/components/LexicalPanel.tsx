@@ -81,7 +81,10 @@ export function LexicalPanel({ document }: Props) {
       if (token !== requestToken.current || (current && current.contentSignature !== signature)) return
       setReading(lexical)
       setVerbAnalysis(verbal)
-      setMessage(lexical || verbal ? 'Leitura local concluída.' : 'Não encontrei uma leitura local para este recorte.')
+      if (lexical && verbal) setMessage('Leitura lexical concluída. Leitura verbal disponível.')
+      else if (lexical) setMessage('Leitura lexical concluída.')
+      else if (verbal) setMessage('Leitura verbal concluída.')
+      else setMessage('Não encontrei uma leitura local para este recorte.')
     } catch (error) {
       if (token !== requestToken.current) return
       console.error('[Escrevaral] Leitura lexical não concluída.', error)
