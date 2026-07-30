@@ -12,7 +12,8 @@
     "prebuild": "npm run prepare:assets",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "audit:lexicon": "node scripts/audit-lexical-inventory.mjs --json e2-lexical-inventory.json --markdown e2-lexical-inventory.md && node scripts/audit-definition-duplicates.mjs --json e2-definition-duplicates.json --markdown e2-definition-duplicates.md",
+    "audit:verb": "node scripts/audit-verb-evidence.mjs",
+    "audit:lexicon": "node scripts/audit-lexical-inventory.mjs --json e2-lexical-inventory.json --markdown e2-lexical-inventory.md && node scripts/audit-definition-duplicates.mjs --json e2-definition-duplicates.json --markdown e2-definition-duplicates.md && npm run audit:verb",
     "test:e2e": "playwright test",
     "check": "npm run audit:lexicon && npm run build && npm run test:e2e"
   },
@@ -30,9 +31,9 @@
     "@playwright/test": "1.55.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.4",
     "typescript": "7.0.2",
     "vite": "8.1.5",
+    "@vitejs/plugin-react": "6.0.4",
     "@types/node": "^24.0.0"
   },
   "overrides": {
