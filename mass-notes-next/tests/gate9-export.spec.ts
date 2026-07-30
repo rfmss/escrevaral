@@ -6,14 +6,8 @@ async function waitReady(page: Page) {
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
-async function waitSaved(page: Page) {
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible({ timeout: 5_000 })
-  await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
-}
-
-async function waitPersistedText(page: Page, expected: string) {
-  await expect.poll(() => page.evaluate(async ({ activeKey, phrase }) => {
+async function hasPersistedText(page: Page, expected: string): Promise<boolean> {
+  return page.evaluate(async ({ activeKey, phrase }) => {
     const activeId = localStorage.getItem(activeKey)
     if (!activeId) return false
     const db = await new Promise<IDBDatabase>((resolve, reject) => {
@@ -28,10 +22,30 @@ async function waitPersistedText(page: Page, expected: string) {
     })
     db.close()
     return String(record?.plainText ?? '').includes(phrase)
-  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected }), {
+  }, { activeKey: 'escrevaral-mass-notes-next-active', phrase: expected })
+}
+
+async function waitPersistedText(page: Page, expected: string) {
+  await expect.poll(() => hasPersistedText(page, expected), {
     timeout: 20_000,
     intervals: [250, 500, 1_000],
   }).toBe(true)
+}
+
+async function persistCurrentDraft(page: Page, expected: string) {
+  const saveState = page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })
+  await expect.poll(async () => {
+    if (await hasPersistedText(page, expected)) return 'persisted'
+    return (await saveState.textContent())?.trim() ?? ''
+  }, {
+    timeout: 20_000,
+    intervals: [100, 250, 500],
+  }).toMatch(/^(persisted|Alterado|Salvando)$/)
+
+  if (await hasPersistedText(page, expected)) return
+  await page.keyboard.press('Control+S')
+  await expect(saveState.filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+  await waitPersistedText(page, expected)
 }
 
 async function createCleanDocument(page: Page, title: string) {
@@ -102,8 +116,7 @@ async function seedStructuredDocument(page: Page) {
   await expect(editor.locator('h2')).toHaveText('Capítulo & travessia')
   await expect(editor.locator('li')).toHaveCount(3)
   await expect(editor.locator('script')).toHaveCount(0)
-  await waitSaved(page)
-  await waitPersistedText(page, 'Capítulo & travessia')
+  await persistCurrentDraft(page, 'Capítulo & travessia')
   await openExports(page)
   return editor
 }
