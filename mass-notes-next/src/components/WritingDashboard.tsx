@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { SaveState } from '../domain/document'
-import { readLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
+import { readLatestLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 
 const GOAL_KEY = 'escrevaral-mass-notes-next-writing-goal'
 const FOCUS_DURATION_SECONDS = 25 * 60
@@ -24,24 +23,13 @@ function formatClock(seconds: number): string {
   return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`
 }
 
-type Props = {
-  documentId: string
-  fallbackText: string
-  saveState: SaveState
-}
-
-export function WritingDashboard({ documentId, fallbackText, saveState }: Props) {
-  const [text, setText] = useState(() => readLiveEditorSnapshot(documentId)?.plainText ?? fallbackText)
+export function WritingDashboardFields() {
+  const [text, setText] = useState(() => readLatestLiveEditorSnapshot()?.plainText ?? '')
   const [goal, setGoal] = useState(readGoal)
   const [remaining, setRemaining] = useState(FOCUS_DURATION_SECONDS)
   const [running, setRunning] = useState(false)
 
-  useEffect(() => {
-    setText(readLiveEditorSnapshot(documentId)?.plainText ?? fallbackText)
-    return subscribeLiveEditorSnapshot((snapshot) => {
-      if (snapshot.documentId === documentId) setText(snapshot.plainText)
-    })
-  }, [documentId, fallbackText])
+  useEffect(() => subscribeLiveEditorSnapshot((snapshot) => setText(snapshot.plainText)), [])
 
   useEffect(() => {
     try { localStorage.setItem(GOAL_KEY, String(goal)) } catch { /* Preferência de interface opcional. */ }
@@ -78,7 +66,7 @@ export function WritingDashboard({ documentId, fallbackText, saveState }: Props)
   }
 
   return (
-    <header className="registration writing-dashboard" role="region" aria-label="Painel da sessão de escrita">
+    <div className="writing-dashboard-fields">
       <div className="reg-field writing-metric">
         <span className="field-label">Palavras</span>
         <output className="field-value writing-word-count" data-writing-word-count>{words}</output>
@@ -128,11 +116,6 @@ export function WritingDashboard({ documentId, fallbackText, saveState }: Props)
           <button type="button" className="writing-focus-reset" aria-label="Reiniciar foco" onClick={resetFocus}>↺</button>
         </div>
       </div>
-
-      <div className="reg-field writing-save-state">
-        <span className="field-label">Última tinta</span>
-        <span className={`field-value save-${saveState.toLocaleLowerCase('pt-BR')}`} aria-live="polite">{saveState}</span>
-      </div>
-    </header>
+    </div>
   )
 }
