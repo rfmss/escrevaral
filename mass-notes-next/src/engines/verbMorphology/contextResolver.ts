@@ -54,6 +54,7 @@ const SUBJUNCTIVE_ATTRACTORS = new Set([
 ])
 
 const NOMINAL_SUFFIXES = /(?:ção|são|ções|dade|tude|eza|ez|ismo|ncia|mento|agem|ista|ura|aria|ório)$/u
+const FINITE_VERB_HINT = /(?:o|as|a|amos|ais|am|es|e|emos|eis|em|imos|is|ei|aste|ou|aram|i|este|eu|eram|iste|iu|iram|ava|avas|ávamos|áveis|avam|ia|ias|íamos|íeis|iam|asse|asses|ássemos|ásseis|assem|esse|esses|êssemos|êsseis|essem|isse|isses|íssemos|ísseis|issem)$/u
 
 function words(value = ''): string[] {
   return verbTokens(value)
@@ -154,12 +155,15 @@ function scoreCandidate(
   }
 
   const nominalSubjectPattern = DETERMINERS.has(twoBefore) && previous && !NOMINAL_SUFFIXES.test(previous)
-  if (nominalSubjectPattern && candidate.person === 3 && candidate.number === 'singular') {
-    if (DIRECT_OBJECT_MARKERS.has(next)) {
+  if (nominalSubjectPattern && candidate.formType === 'finita') {
+    if (candidate.person === 3 && candidate.number === 'singular' && DIRECT_OBJECT_MARKERS.has(next)) {
       score += 35
       evidence.push(`O grupo nominal antes e o possível complemento iniciado por “${next}” favorecem a leitura verbal.`)
+    } else if (next && FINITE_VERB_HINT.test(next)) {
+      score -= 70
+      evidence.push(`A forma “${next}” à direita ocupa provavelmente o núcleo verbal; a palavra selecionada tende a caracterizar o nome anterior.`)
     } else if (candidate.tense === 'presente' || candidate.mood === 'imperativo') {
-      score -= 28
+      score -= 18
       evidence.push('Sem complemento ou outro sinal verbal à direita, a posição pós-nominal permanece ambígua.')
     }
   }
