@@ -173,56 +173,58 @@ As entradas registram mudanças de arquitetura, produto e qualidade. Logs detalh
 
 #### E0 — corpus e baseline
 
-- criado `tests/fixtures/engine-superiority-corpus.ts` com 14 casos únicos;
-- criado `tests/m1-engine-superiority.spec.ts`, um caso independente por ambiguidade e navegador;
-- corpus cobre locuções, diacríticos, particípio, substantivação e formas ambíguas;
+- criado corpus com 14 casos únicos e teste independente por ambiguidade e navegador;
 - baseline aprovou 8/14 casos únicos;
-- seis lacunas apareceram nos dois navegadores:
-  - `por enquanto`;
-  - `enquanto isso`;
-  - `publica`;
-  - `foi preso`;
-  - `estrada larga`;
-  - `eu canto`;
+- seis lacunas apareceram nos dois navegadores;
 - baseline terminou com 264/276 execuções aprovadas e publicação bloqueada.
 
 #### E1 — primeira camada contextual
 
-- `lexicalAdapter.ts` recebeu camada contextual tipada, sem alterar `lexical-engine.js` ou dados legados;
-- adicionadas locuções temporais fixas;
-- diacrítico passou a participar da decisão `publica/pública`;
-- auxiliar passivo passou a sustentar leitura de particípio;
-- pronome sujeito passou a sustentar leitura verbal provável;
-- determinante + nome passou a sustentar adjetivo pós-nominal provável;
-- cada regra explica a evidência em português claro;
+- `lexicalAdapter.ts` recebeu camada contextual tipada sem alterar dados legados;
+- adicionadas locuções, decisão sensível a diacrítico, particípio, pronome sujeito e adjetivo pós-nominal;
 - corpus passou de 8/14 para 14/14 casos únicos;
-- matriz passou para **276/276**;
-- cabeça funcional `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`, Argila `30493491638` e coerência `30493491411` verdes;
-- publicação, cache, smoke e artefato `mass-notes-tiptap-30493491424` aprovados;
-- superioridade comprovada apenas nas seis fronteiras corrigidas, não globalmente.
+- matriz passou para 276/276;
+- superioridade comprovada apenas nas seis fronteiras corrigidas.
 
 #### E1 — controles negativos e isolamento do resolvedor
 
 - criado `src/engines/contextualLexicalResolver.ts` como módulo puro;
-- `lexicalAdapter.ts` passou a delegar a decisão contextual;
 - locuções só recebem override quando a expressão exata está presente;
-- controles preservam `pública`, `ficou preso` e `os presos` sem invasão de regra;
+- controles preservam `pública`, `ficou preso` e `os presos`;
 - sujeito nominal seguido de objeto explícito passou a favorecer verbo antes do adjetivo pós-nominal;
-- adicionados `A menina larga a mochila` e `O corredor estreita os olhos` ao corpus integrado;
-- criado `tests/m1-contextual-resolver.spec.ts` com quatro controles por navegador;
+- adicionados `A menina larga a mochila` e `O corredor estreita os olhos`;
+- criado `tests/m1-contextual-resolver.spec.ts`;
 - corpus integrado passou para 16/16 casos únicos;
-- matriz passou para **288/288**;
-- cabeça funcional `8579aa9b92589c57bd02df0f7eead5eebf99f1e8`;
-- Mass Notes `30501052382`, Argila `30501052355` e coerência `30501052360` verdes;
-- publicação, cache, smoke e artefato `mass-notes-tiptap-30501052382` aprovados;
+- matriz passou para 288/288;
 - nenhuma regressão nos 14 casos anteriores.
+
+#### E2 — inventário lexical reproduzível
+
+- criado `scripts/audit-lexical-inventory.mjs` para executar e contar as estruturas efetivas;
+- criado `scripts/audit-definition-duplicates.mjs` para preservar linha, redação descartada e redação retida;
+- `npm run audit:lexicon` passou a integrar a CI Mass Notes;
+- relatórios JSON e Markdown passaram a compor o artefato;
+- snapshots foram versionados em `docs/audits/M1_E2_LEXICAL_INVENTORY.*`;
+- medidos 1.343 sinônimos, 936 definições, 175 polissemias, 606 entradas contextuais e 2.045 formas regulares brutas;
+- identificados 69 grupos de definição repetidos, 75 declarações sobrescritas e 68 conflitos de redação;
+- apenas `quica` é duplicata idêntica;
+- encontradas oito autorreferências de sinônimos e quatro aliases numéricos expostos;
+- `leitor_modelo` foi identificado como definição vazia;
+- 124 regras de polissemia não possuem cartão explícito de alternativas;
+- expansão lexical foi bloqueada até estabilização mínima da integridade.
+
+#### Estabilização da prova de exportação
+
+- duas execuções E2 passaram auditoria e build, mas terminaram 287/288 por timeout do mesmo helper do Gate 9 no Firefox;
+- a falha migrou de HTML para TXT, confirmando instabilidade temporal e não regressão de produto;
+- a prova continua lendo o IndexedDB e exigindo a mesma frase;
+- somente a janela de convergência foi ampliada de 8 para 20 segundos, com intervalos explícitos.
 
 ## Próximo trabalho autorizado
 
-- inventariar definições, sinônimos, polissemia, contexto e formas verbais reais;
-- auditar duplicatas, autorreferências, ciclos e definições fracas;
-- ampliar negativos junto com novas formas contextuais;
-- selecionar expansão lexical brasileira pequena, fundamentada e testada;
-- desenhar bancada sintático-morfológica integrada;
-- manter PR em rascunho, Gate 14 suspenso e `main` intacta.
+- validar a cabeça documental e a estabilização em 288/288;
+- consolidar `quica` com teste de não regressão;
+- revisar os 68 conflitos em lotes editoriais pequenos;
+- corrigir autorreferências separando aliases de sinônimos;
+- decidir o destino das quatro chaves técnicas;
+- não ampliar vocabulário, não iniciar Gate 14 e manter `main` intacta.
