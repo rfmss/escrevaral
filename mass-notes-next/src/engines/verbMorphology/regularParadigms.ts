@@ -229,7 +229,6 @@ export function analyzeRegularVerbForm(value: string): VerbCandidate[] {
     if (!bareSurface.endsWith(rule.ending)) continue
     const stemLength = bareSurface.length - rule.ending.length
     if (stemLength < 1) continue
-    const originalStem = surface.slice(0, surface.length - rule.canonicalEnding.length)
     const bareStem = bareSurface.slice(0, stemLength)
     if (!bareStem) continue
 
@@ -238,7 +237,7 @@ export function analyzeRegularVerbForm(value: string): VerbCandidate[] {
       if (lemma.length < 4) continue
       const candidate: VerbCandidate = {
         lemma,
-        canonicalSurface: `${originalStem}${rule.canonicalEnding}`,
+        canonicalSurface: `${lemmaStem}${rule.canonicalEnding}`,
         formType: rule.formType,
         mood: rule.mood,
         tense: rule.tense,
