@@ -20,6 +20,8 @@ Este programa não aceita como prova frases como “100% concluído” sem corpu
 - E2 quantitativo: baseline reproduzível criada e integrada à CI;
 - cobertura medida: 1.343 sinônimos, 936 definições, 175 regras de polissemia, 606 entradas contextuais e 2.045 formas regulares brutas;
 - achados de integridade E2: uma família P0 e duas famílias P1; eles não reclassificam os vereditos funcionais do M0.9;
+- RimaLab, Contexto e Palavras/Léxico leem o snapshot vivo do Tiptap no instante da ação;
+- cabeça funcional do snapshot vivo: `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`, com Mass Notes `30505264198` em 288/288;
 - engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
 - famílias legadas carregadas localmente por adaptadores tipados;
 - lacunas principais restantes: consolidação das bases, superfície sintático-morfológica autônoma e prova qualitativa das cinco engines.
@@ -176,6 +178,32 @@ Decisão E2:
 - separar alias ortográfico de sinônimo editorial;
 - manter contagem separada de qualidade.
 
+#### Snapshot vivo das engines
+
+Durante a validação E2, três execuções terminaram 287/288 em casos antigos diferentes. O artefato do terceiro caso mostrou o editor com quatro versos e o RimaLab respondendo “página vazia”.
+
+Diagnóstico:
+
+- o Tiptap já possuía o conteúdo atual;
+- o painel podia receber uma projeção React um ciclo atrás no instante do clique;
+- aumentar timeout não resolveria essa fronteira de estado.
+
+Correção:
+
+- criado `src/editor/editorSnapshotBridge.ts`;
+- `MassNotesEditor` publica JSON, texto e assinatura estrutural em `onCreate` e `onUpdate`;
+- RimaLab, Contexto e Palavras/Léxico consultam o snapshot vivo ao iniciar a análise;
+- respostas são descartadas se a assinatura mudar durante a execução;
+- resultados são invalidados por edição real do editor, não pela chegada tardia de props.
+
+Evidência:
+
+- cabeça `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`;
+- Mass Notes `30505264198`: auditor E2, build, 288/288, publicação, cache e smoke verdes;
+- Argila `30505264208` e coerência `30505264199`: verdes;
+- artefato `mass-notes-tiptap-30505264198`;
+- digest `sha256:cd0627c79d7e2337d7077241246dcdf52a531de954bbcceebc5d00fae071523f`.
+
 ### E3 — Qualidade das cinco engines
 
 Estado: **planejada**.
@@ -202,7 +230,8 @@ Logs:
 
 - `docs/logs/2026-07-29-m1-e0-e1-lexico-contextual.md`;
 - `docs/logs/2026-07-29-m1-e1-controles-negativos.md`;
-- `docs/logs/2026-07-29-m1-e2-inventario-lexical.md`.
+- `docs/logs/2026-07-29-m1-e2-inventario-lexical.md`;
+- `docs/logs/2026-07-29-m1-e2-snapshot-vivo-engines.md`.
 
 Auditorias:
 
@@ -212,9 +241,8 @@ Auditorias:
 Cabeças de medição E2:
 
 - inventário inicial: `a326a8026109bee417880c1486dff686267c0766`;
-- classificação das colisões: `d55940cf9a2b1d0a789ba3dabc919eb664816885`.
-
-As duas medições passaram auditoria e build. Cada uma terminou 287/288 por timeout do mesmo helper antigo de persistência no Firefox, em casos diferentes de exportação. A janela da prova foi estabilizada sem remover a leitura direta do IndexedDB nem reduzir a asserção.
+- classificação das colisões: `d55940cf9a2b1d0a789ba3dabc919eb664816885`;
+- estabilização do snapshot vivo: `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`.
 
 ## Regras de execução
 
@@ -223,6 +251,8 @@ As duas medições passaram auditoria e build. Cada uma terminou 287/288 por tim
 - usar corpora e ferramentas externas como banca, não como muleta;
 - nunca alterar regra sem caso de regressão reproduzível;
 - toda correção deve registrar ganho e possível custo;
+- engines iniciadas pela interface analisam o snapshot vivo do Tiptap;
+- uma resposta perde validade se a assinatura da entrada mudar;
 - não contar declarações sobrescritas como cobertura efetiva;
 - não consolidar definições conflitantes sem comparar as redações;
 - manter PR em rascunho e `main` intacta;
@@ -231,10 +261,11 @@ As duas medições passaram auditoria e build. Cada uma terminou 287/288 por tim
 
 ## Próxima ação
 
-1. validar a cabeça documental e a estabilização do teste em 288/288;
-2. consolidar primeiro `quica`, a única duplicata idêntica, com teste de não regressão;
-3. priorizar os 68 conflitos por famílias editoriais e revisar pequenos lotes;
-4. corrigir autorreferências separando aliases de sinônimos;
-5. decidir o destino das quatro chaves técnicas;
-6. preencher ou retirar `leitor_modelo` da cobertura;
-7. não iniciar expansão lexical nem Gate 14 antes dessa integridade mínima.
+1. validar a cabeça documental exata em 288/288;
+2. registrar SHA, workflows e artefato no PR;
+3. consolidar primeiro `quica`, a única duplicata idêntica, com teste de não regressão;
+4. priorizar os 68 conflitos por famílias editoriais e revisar pequenos lotes;
+5. corrigir autorreferências separando aliases de sinônimos;
+6. decidir o destino das quatro chaves técnicas;
+7. preencher ou retirar `leitor_modelo` da cobertura;
+8. não iniciar expansão lexical nem Gate 14 antes dessa integridade mínima.
