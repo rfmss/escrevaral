@@ -24,6 +24,10 @@ Sobre cobertura, a formulação permitida é:
 
 > O inventário E2 mediu a cobertura efetiva atual e revelou diferenças entre declarações históricas, declarações brutas e chaves realmente disponíveis no runtime.
 
+Sobre integração, a formulação permitida é:
+
+> As engines acionadas pela interface analisam o snapshot vivo do Tiptap e descartam respostas que ficaram antigas durante a execução.
+
 Essas afirmações não equivalem a superioridade global das engines.
 
 ## Promessas proibidas até o veredito final
@@ -50,11 +54,13 @@ Essas afirmações não equivalem a superioridade global das engines.
 8. comparação separa quantidade, acerto, utilidade e experiência;
 9. avaliação humana usa rubrica versionada;
 10. alternativas nunca são aplicadas automaticamente;
-11. chaves repetidas não podem ser aceitas como cobertura adicional;
-12. conflitos editoriais não podem ser removidos em massa sem comparação;
-13. alias ortográfico e sinônimo editorial devem ser diferenciados;
-14. o PR permanece em rascunho;
-15. `main` e a aplicação pública permanecem intactos.
+11. uma análise iniciada pela interface usa o snapshot vivo do Tiptap;
+12. resposta assíncrona é descartada se a assinatura do texto mudar;
+13. chaves repetidas não podem ser aceitas como cobertura adicional;
+14. conflitos editoriais não podem ser removidos em massa sem comparação;
+15. alias ortográfico e sinônimo editorial devem ser diferenciados;
+16. o PR permanece em rascunho;
+17. `main` e a aplicação pública permanecem intactos.
 
 ## Ordem aprovada
 
@@ -127,6 +133,20 @@ Achados de integridade:
 - 124 regras de polissemia sem cartão explícito de alternativas.
 
 O inventário E2 não demonstra superioridade lexical. Ele demonstra que a cobertura histórica não pode ser usada sem auditoria e estabelece a fila de correção.
+
+## Evidência de integração viva
+
+Uma execução no Firefox mostrou quatro versos presentes no ProseMirror e o RimaLab respondendo “página vazia”. A ferramenta usava uma projeção React que podia ficar um ciclo atrás do editor.
+
+Foi criado `src/editor/editorSnapshotBridge.ts`. O Tiptap publica sincronamente JSON, texto e assinatura estrutural. RimaLab, Contexto e Palavras/Léxico usam essa entrada no instante da ação e descartam resultados se ocorrer nova edição.
+
+Cabeça funcional:
+
+- `3c9c6d74e7638392a5bacfe4a2e82565e8af2583`;
+- Mass Notes `30505264198`: auditor E2, build, 288/288, publicação, cache e smoke público;
+- Argila `30505264208` e coerência `30505264199`: verdes;
+- artefato `mass-notes-tiptap-30505264198`;
+- digest `sha256:cd0627c79d7e2337d7077241246dcdf52a531de954bbcceebc5d00fae071523f`.
 
 ## Decisão de integridade
 
