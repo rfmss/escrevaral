@@ -1,16 +1,16 @@
 # Scorecard Eva Chara — progresso rumo à excelência
 
 Atualizado em: 2026-07-30  
-Head de referência inicial: `19c03095e8e70e5c504fbd22b5d8e559ffdff983`  
-Estado: E2-V em estabilização; PR #155 em rascunho
+Head funcional de referência: `986b21f1d5a1136d8bdce5affe60c061a033930f`  
+Estado: E2-V v1 funcionalmente estabilizado; PR #155 em rascunho
 
-## Placar inicial
+## Placar atual
 
 | Dimensão | Peso | Atual | Meta | Lacuna | Estado |
 |---|---:|---:|---:|---:|---|
 | Concepção linguística | 10% | 8,5 | 9,5 | 1,0 | Em rota |
 | Autoria, contexto e não automatismo | 10% | 9,0 | 9,5 | 0,5 | Em rota |
-| Morfologia verbal | 15% | 7,0 | 9,0 | 2,0 | Atenção |
+| Morfologia verbal | 15% | 7,8 | 9,0 | 1,2 | Em rota |
 | Léxico e polissemia | 10% | 6,5 | 9,0 | 2,5 | Crítico |
 | Sintaxe e estrutura oracional | 15% | 4,5 | 9,0 | 4,5 | Crítico |
 | Variação, registro e norma | 10% | 6,5 | 9,0 | 2,5 | Crítico |
@@ -18,10 +18,26 @@ Estado: E2-V em estabilização; PR #155 em rascunho
 | Engenharia e auditabilidade | 10% | 8,5 | 9,5 | 1,0 | Em rota |
 | Validação humana e acadêmica | 10% | 4,0 | 9,0 | 5,0 | Crítico |
 
+- nota ponderada atual: **6,595/10**;
 - nota ponderada inicial: **6,475/10**;
 - meta ponderada: **9,15/10**;
 - dimensões críticas: **5**;
 - regra: a nota geral nunca compensa dimensão crítica.
+
+## Evidência que alterou a nota
+
+O aumento de Morfologia verbal de 7,0 para 7,8 está preso à cabeça funcional `986b21f1d5a1136d8bdce5affe60c061a033930f`:
+
+- engine verbal própria, tipada e independente da engine lexical;
+- 34 casos linguísticos positivos, negativos e contextuais;
+- paradigmas regulares, formas nominais, irregulares frequentes, clíticos e locuções;
+- ocorrência selecionada e snapshot vivo;
+- distinções adversariais como `canto`, `sabia/sábia`, `larga` e `pública`;
+- HTML autoral preservado e nenhuma substituição automática;
+- matriz integral **350/350** em Chromium e Firefox;
+- publicação, cache, smoke, Argila e coerência verdes.
+
+O avanço não altera Sintaxe, Proveniência ou Validação humana. Testes verdes comprovam reprodutibilidade do corpus versionado, não cobertura universal nem consenso acadêmico.
 
 ## Arquivos da planilha
 
@@ -44,7 +60,7 @@ Uma nota só muda quando houver, na mesma cabeça:
 
 Toda atualização deve acrescentar uma linha ao histórico da planilha com data, SHA, fase, nota, veredito e próxima exigência.
 
-## Ordem inicial pela lacuna ponderada
+## Ordem atual pela lacuna ponderada
 
 1. validação humana e acadêmica;
 2. sintaxe e estrutura oracional;
@@ -54,4 +70,11 @@ Toda atualização deve acrescentar uma linha ao histórico da planilha com data
 6. morfologia verbal;
 7. concepção, autoria e engenharia.
 
-A ordem não significa abandonar o Pack Verbal em curso. O próximo passo lógico continua sendo estabilizar E2-V; a rubrica impede apenas que seu fechamento seja confundido com excelência global.
+A ordem não significa abandonar o Pack Verbal. O próximo passo imediato é a tranche adversarial e de proveniência do E2-V; a rubrica impede apenas que seu fechamento v1 seja confundido com excelência global.
+
+## Histórico
+
+| Data | Head | Fase | Nota geral | Morfologia verbal | Veredito | Próxima exigência |
+|---|---|---|---:|---:|---|---|
+| 2026-07-30 | `19c03095e8e70e5c504fbd22b5d8e559ffdff983` | Baseline Eva | 6,475 | 7,0 | Promissor; E2-V ainda em estabilização. | Corpus verde, controles negativos e limites explícitos. |
+| 2026-07-30 | `986b21f1d5a1136d8bdce5affe60c061a033930f` | E2-V v1 | 6,595 | 7,8 | Engine morfológica reproduzível; ainda não é cobertura completa. | Corpus adversarial, proveniência por regra, métricas e banca humana. |
