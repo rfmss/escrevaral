@@ -36,6 +36,25 @@ function isUsableSelection(snapshot: LexicalSelectionSnapshot | null): snapshot 
   return Boolean(selected) && selected.split(/\s+/).length <= 4
 }
 
+function lexicalSupportsVerb(reading: LexicalReading | null): boolean {
+  if (!reading) return false
+  const contract = [reading.className, reading.functionName, reading.syntacticFunction, reading.note].join(' ')
+  return /\b(verbo|verbal|particípio|gerúndio|infinitivo|auxiliar)\b/iu.test(contract)
+}
+
+function isExplicitVerbConstruction(analysis: VerbAnalysis): boolean {
+  return analysis.clitics.length > 0 || analysis.primary.formType === 'locução verbal'
+}
+
+function presentableVerbAnalysis(
+  reading: LexicalReading | null,
+  analysis: VerbAnalysis | null,
+): VerbAnalysis | null {
+  if (!analysis) return null
+  if (!reading || lexicalSupportsVerb(reading) || isExplicitVerbConstruction(analysis)) return analysis
+  return null
+}
+
 export function LexicalPanel({ document }: Props) {
   const [query, setQuery] = useState('')
   const [reading, setReading] = useState<LexicalReading | null>(null)
@@ -79,11 +98,12 @@ export function LexicalPanel({ document }: Props) {
       const lexical = await readLexicalWord(clean, context)
       const current = readLiveEditorSnapshot(document.id)
       if (token !== requestToken.current || (current && current.contentSignature !== signature)) return
+      const presentedVerb = presentableVerbAnalysis(lexical, verbal)
       setReading(lexical)
-      setVerbAnalysis(verbal)
-      if (lexical && verbal) setMessage('Leitura lexical concluída. Leitura verbal disponível.')
+      setVerbAnalysis(presentedVerb)
+      if (lexical && presentedVerb) setMessage('Leitura lexical concluída. Leitura verbal disponível.')
       else if (lexical) setMessage('Leitura lexical concluída.')
-      else if (verbal) setMessage('Leitura verbal concluída.')
+      else if (presentedVerb) setMessage('Leitura verbal concluída.')
       else setMessage('Não encontrei uma leitura local para este recorte.')
     } catch (error) {
       if (token !== requestToken.current) return
@@ -133,7 +153,7 @@ export function LexicalPanel({ document }: Props) {
 
   const hasResult = Boolean(reading || verbAnalysis)
   const displayWord = reading?.displayWord || query
-  const displayClass = verbAnalysis ? 'Forma verbal analisada' : reading?.className || 'Classe não determinada'
+  const displayClass = verbAnalysis ? 'Verbo — forma analisada' : reading?.className || 'Classe não determinada'
 
   return (
     <section className="lexical-panel" aria-labelledby="lexical-panel-title">
