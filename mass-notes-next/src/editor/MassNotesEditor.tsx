@@ -1,6 +1,7 @@
 import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { useEffect } from 'react'
+import { EditorToolbarDock } from './EditorToolbarDock'
 import { editorExtensions } from './editorExtensions'
 import { publishLiveEditorSnapshot } from './editorSnapshotBridge'
 import { publishLexicalSelection } from './lexicalSelectionBridge'
@@ -153,32 +154,36 @@ function MassNotesEditorInstance({
     }
   }
 
+  const toolbar = (
+    <div className="editor-toolbar" role="toolbar" aria-label="Formatação do texto">
+      <div className="toolbar-group" role="group" aria-label="Histórico">
+        <button type="button" title="Desfazer" onClick={() => editor.chain().focus().undo().run()} disabled={!state.canUndo} aria-label="Desfazer">↶</button>
+        <button type="button" title="Refazer" onClick={() => editor.chain().focus().redo().run()} disabled={!state.canRedo} aria-label="Refazer">↷</button>
+      </div>
+      <div className="toolbar-group" role="group" aria-label="Estrutura do texto">
+        <button type="button" title="Título de nível 1" aria-label="T1" className={state.h1 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>T1</button>
+        <button type="button" title="Título de nível 2" aria-label="T2" className={state.h2 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>T2</button>
+        <button type="button" title="Título de nível 3" aria-label="T3" className={state.h3 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>T3</button>
+        <button type="button" title="Transformar em citação" aria-label="Citação" className={state.blockquote ? 'active' : ''} onClick={() => editor.chain().focus().toggleBlockquote().run()}>❝</button>
+      </div>
+      <div className="toolbar-group" role="group" aria-label="Ênfase">
+        <button type="button" title="Negrito" className={state.bold ? 'active' : ''} aria-label="N" aria-pressed={state.bold} onClick={() => editor.chain().focus().toggleBold().run()}><strong>N</strong></button>
+        <button type="button" title="Itálico" className={state.italic ? 'active' : ''} aria-label="I" aria-pressed={state.italic} onClick={() => editor.chain().focus().toggleItalic().run()}><em>I</em></button>
+        <button type="button" title="Sublinhado" className={state.underline ? 'active' : ''} aria-label="S" aria-pressed={state.underline} onClick={() => editor.chain().focus().toggleUnderline().run()}><u>S</u></button>
+        <button type="button" title="Tachado" className={state.strike ? 'active' : ''} aria-label="T" aria-pressed={state.strike} onClick={() => editor.chain().focus().toggleStrike().run()}><s>T</s></button>
+      </div>
+      <div className="toolbar-group" role="group" aria-label="Listas e vínculos">
+        <button type="button" title="Lista com marcadores" aria-label="• Lista" className={state.bulletList ? 'active' : ''} onClick={() => editor.chain().focus().toggleBulletList().run()}>•</button>
+        <button type="button" title="Lista numerada" aria-label="1. Lista" className={state.orderedList ? 'active' : ''} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1.</button>
+        <button type="button" title="Adicionar ou editar link" aria-label="Link" onClick={addLink}>↗</button>
+        <button type="button" title="Limpar formatação do bloco e da seleção" aria-label="Limpar" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>×</button>
+      </div>
+    </div>
+  )
+
   return (
     <>
-      <div className="editor-toolbar" role="toolbar" aria-label="Formatação do texto">
-        <div className="toolbar-group" role="group" aria-label="Histórico">
-          <button type="button" title="Desfazer" onClick={() => editor.chain().focus().undo().run()} disabled={!state.canUndo} aria-label="Desfazer">↶</button>
-          <button type="button" title="Refazer" onClick={() => editor.chain().focus().redo().run()} disabled={!state.canRedo} aria-label="Refazer">↷</button>
-        </div>
-        <div className="toolbar-group" role="group" aria-label="Estrutura do texto">
-          <button type="button" title="Título de nível 1" aria-label="T1" className={state.h1 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>T1</button>
-          <button type="button" title="Título de nível 2" aria-label="T2" className={state.h2 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>T2</button>
-          <button type="button" title="Título de nível 3" aria-label="T3" className={state.h3 ? 'active' : ''} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>T3</button>
-          <button type="button" title="Transformar em citação" aria-label="Citação" className={state.blockquote ? 'active' : ''} onClick={() => editor.chain().focus().toggleBlockquote().run()}>❝</button>
-        </div>
-        <div className="toolbar-group" role="group" aria-label="Ênfase">
-          <button type="button" title="Negrito" className={state.bold ? 'active' : ''} aria-label="N" aria-pressed={state.bold} onClick={() => editor.chain().focus().toggleBold().run()}><strong>N</strong></button>
-          <button type="button" title="Itálico" className={state.italic ? 'active' : ''} aria-label="I" aria-pressed={state.italic} onClick={() => editor.chain().focus().toggleItalic().run()}><em>I</em></button>
-          <button type="button" title="Sublinhado" className={state.underline ? 'active' : ''} aria-label="S" aria-pressed={state.underline} onClick={() => editor.chain().focus().toggleUnderline().run()}><u>S</u></button>
-          <button type="button" title="Tachado" className={state.strike ? 'active' : ''} aria-label="T" aria-pressed={state.strike} onClick={() => editor.chain().focus().toggleStrike().run()}><s>T</s></button>
-        </div>
-        <div className="toolbar-group" role="group" aria-label="Listas e vínculos">
-          <button type="button" title="Lista com marcadores" aria-label="• Lista" className={state.bulletList ? 'active' : ''} onClick={() => editor.chain().focus().toggleBulletList().run()}>•</button>
-          <button type="button" title="Lista numerada" aria-label="1. Lista" className={state.orderedList ? 'active' : ''} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1.</button>
-          <button type="button" title="Adicionar ou editar link" aria-label="Link" onClick={addLink}>↗</button>
-          <button type="button" title="Limpar formatação do bloco e da seleção" aria-label="Limpar" onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}>×</button>
-        </div>
-      </div>
+      <EditorToolbarDock>{toolbar}</EditorToolbarDock>
       <EditorContent editor={editor} />
     </>
   )
