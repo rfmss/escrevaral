@@ -1,5 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 
+const RECOVERY_KEY = 'escrevaral-mass-notes-next-recovery'
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
@@ -96,15 +98,29 @@ test('toolbar preserva seleção e listas continuam estruturadas', async ({ page
 test('recupera edição interrompida antes do autosave', async ({ context, page }) => {
   await waitReady(page)
   const editor = await newDocument(page, 'Recuperação imediata')
-  await page.keyboard.type('Este trecho precisa sobreviver ao fechamento abrupto.')
+  const interruptedText = 'Este trecho precisa sobreviver ao fechamento abrupto.'
+  await page.keyboard.type(interruptedText)
+  await expect(editor).toHaveText(interruptedText)
 
-  await page.waitForFunction(() => localStorage.getItem('escrevaral-mass-notes-next-recovery')?.includes('fechamento abrupto'))
+  await expect.poll(() => page.evaluate(({ key, expected }) => {
+    try {
+      const raw = localStorage.getItem(key)
+      if (!raw) return ''
+      const recovery = JSON.parse(raw) as { document?: { plainText?: string } }
+      return recovery.document?.plainText ?? ''
+    } catch {
+      return ''
+    }
+  }, { key: RECOVERY_KEY, expected: interruptedText }), {
+    timeout: 8_000,
+    intervals: [50, 100, 250],
+  }).toBe(interruptedText)
   await page.close()
 
   const restored = await context.newPage()
   await waitReady(restored)
   await expect(restored.getByLabel('Título do documento')).toHaveValue('Recuperação imediata')
-  await expect(restored.locator('.ProseMirror')).toContainText('Este trecho precisa sobreviver ao fechamento abrupto.')
+  await expect(restored.locator('.ProseMirror')).toHaveText(interruptedText)
 })
 
 test('conflito preserva a versão local como nova página', async ({ context, page }) => {
@@ -113,8 +129,11 @@ test('conflito preserva a versão local como nova página', async ({ context, pa
   await waitReady(second)
 
   await page.getByLabel('Título do documento').fill('Versão persistida A')
-  await page.waitForTimeout(100)
+  await expect(page.locator('.field-value').filter({ hasText: /^Alterado$/ })).toBeVisible()
   await second.getByLabel('Título do documento').fill('Versão local B')
+  await expect(second.locator('.field-value').filter({ hasText: /^Alterado$/ })).toBeVisible()
+  await page.keyboard.press('Control+S')
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible()
 
   await expect(second.getByRole('alert')).toContainText('Outra aba também alterou')
   await second.getByRole('button', { name: 'Guardar a minha como cópia' }).click()
