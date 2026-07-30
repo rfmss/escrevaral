@@ -71,7 +71,7 @@ test('toolbar permanece colada ao viewport do manuscrito sem mover a janela', as
 test('faixa superior prioriza palavras, meta, foco e salvamento', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
-  await setText(page, 'Uma oficina viva acompanha palavras e preserva o ritmo da pessoa que escreve.')
+  await setText(page, 'Uma oficina acompanha palavras e preserva o ritmo da pessoa que escreve.')
 
   const dashboard = page.getByRole('region', { name: 'Painel da sessão de escrita' })
   await expect(dashboard).toBeVisible()
