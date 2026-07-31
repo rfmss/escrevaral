@@ -11,14 +11,79 @@ const duplicatedEvaluationIds = evaluationIds.filter((id, index) => evaluationId
 const overlap = developmentIds.filter((id) => evaluationIds.includes(id))
 
 const allowedStatuses = new Set(provenance.policy.allowedStatuses)
+const requiredRuleFields = provenance.policy.requiredRuleFields ?? [
+  'id',
+  'phenomenon',
+  'implementation',
+  'status',
+  'scope',
+  'tradition',
+  'usage',
+  'divergences',
+  'sources',
+  'licenseOrTerms',
+]
+const placeholderPatterns = provenance.policy.placeholderPatterns ?? ['a documentar', 'pendente', 'não registrado']
+const placeholderRegex = new RegExp(placeholderPatterns.join('|'), 'iu')
+
+function fieldIsMissing(rule, field) {
+  const value = rule[field]
+  if (Array.isArray(value)) return false
+  return typeof value !== 'string' || value.trim().length === 0
+}
+
+function verifiedFieldIsIncomplete(rule, field) {
+  const value = rule[field]
+  if (field === 'sources') return !Array.isArray(value) || value.length === 0
+  if (field === 'divergences') return !Array.isArray(value)
+  if (field === 'implementation') return !Array.isArray(value)
+  return typeof value !== 'string' || value.trim().length === 0 || placeholderRegex.test(value)
+}
+
 const invalidRules = provenance.rules.filter((rule) => !allowedStatuses.has(rule.status))
-const unverifiableRules = provenance.rules.filter((rule) => rule.status === 'verified' && (!Array.isArray(rule.sources) || rule.sources.length === 0))
-const missingRuleFields = provenance.rules.filter((rule) => !rule.id || !rule.phenomenon || !rule.status || !Array.isArray(rule.sources))
+const missingRuleFields = provenance.rules
+  .map((rule) => ({
+    id: rule.id ?? '(sem id)',
+    fields: requiredRuleFields.filter((field) => fieldIsMissing(rule, field)),
+  }))
+  .filter((item) => item.fields.length > 0)
+const verifiedWithoutEvidence = provenance.rules
+  .filter((rule) => rule.status === 'verified')
+  .map((rule) => ({
+    id: rule.id,
+    fields: requiredRuleFields.filter((field) => verifiedFieldIsIncomplete(rule, field)),
+  }))
+  .filter((item) => item.fields.length > 0)
+
+const invalidEvaluationCases = evaluation.cases
+  .map((item) => {
+    const missing = []
+    if (!item.id) missing.push('id')
+    if (!item.phenomenon) missing.push('phenomenon')
+    if (!item.manuscript) missing.push('manuscript')
+    if (!item.query) missing.push('query')
+    if (typeof item.shouldFind !== 'boolean') missing.push('shouldFind')
+    if (!Array.isArray(item.includes)) missing.push('includes')
+    if (!Array.isArray(item.excludes)) missing.push('excludes')
+    if ('targetExpected' in item && typeof item.targetExpected !== 'boolean') missing.push('targetExpected')
+    if ('targetExpected' in item && !item.targetLabel) missing.push('targetLabel')
+    return { id: item.id ?? '(sem id)', fields: missing }
+  })
+  .filter((item) => item.fields.length > 0)
 
 const phenomenonCounts = evaluation.cases.reduce((counts, item) => {
   counts[item.phenomenon] = (counts[item.phenomenon] ?? 0) + 1
   return counts
 }, {})
+
+const personalInfinitiveCases = evaluation.cases.filter((item) => item.phenomenon === 'infinitivo-pessoal')
+const personalInfinitivePolarity = {
+  positive: personalInfinitiveCases.filter((item) => item.targetExpected === true).length,
+  negative: personalInfinitiveCases.filter((item) => item.targetExpected === false).length,
+}
+const missingPersonalInfinitivePolarity = []
+if (personalInfinitivePolarity.positive === 0) missingPersonalInfinitivePolarity.push('positive')
+if (personalInfinitivePolarity.negative === 0) missingPersonalInfinitivePolarity.push('negative')
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -30,6 +95,8 @@ const report = {
     count: evaluationIds.length,
     uniqueCount: new Set(evaluationIds).size,
     byPhenomenon: phenomenonCounts,
+    targetTranche: evaluation.targetTranche ?? null,
+    personalInfinitivePolarity,
   },
   provenance: {
     rules: provenance.rules.length,
@@ -43,8 +110,10 @@ const report = {
     duplicatedEvaluationIds,
     overlap,
     invalidRuleIds: invalidRules.map((rule) => rule.id),
-    verifiedWithoutSources: unverifiableRules.map((rule) => rule.id),
-    missingRequiredFields: missingRuleFields.map((rule) => rule.id ?? '(sem id)'),
+    missingRuleFields,
+    verifiedWithoutEvidence,
+    invalidEvaluationCases,
+    missingPersonalInfinitivePolarity,
   },
 }
 
@@ -58,6 +127,7 @@ if (provenance.rules.length === 0) violations.push('provenance-empty')
 console.log(`E2-V desenvolvimento: ${developmentIds.length} casos`)
 console.log(`E2-V avaliação separada: ${evaluationIds.length} casos`)
 console.log(`E2-V fenômenos adversariais: ${Object.keys(phenomenonCounts).length}`)
+console.log(`E2-V infinitivo pessoal: ${personalInfinitivePolarity.positive} positivos e ${personalInfinitivePolarity.negative} negativos`)
 console.log(`E2-V regras com proveniência: ${provenance.rules.length}`)
 
 if (violations.length > 0) {
@@ -65,4 +135,4 @@ if (violations.length > 0) {
   process.exit(1)
 }
 
-console.log('Auditoria E2-V aprovada: corpora separados e política de proveniência íntegra.')
+console.log('Auditoria E2-V aprovada: corpora separados, polaridade mínima e política de proveniência íntegras.')
