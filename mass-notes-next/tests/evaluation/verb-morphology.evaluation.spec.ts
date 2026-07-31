@@ -45,9 +45,7 @@ async function consult(page: Page, query: string) {
 
 async function primaryText(card: Locator): Promise<string> {
   const heading = card.locator('.verb-formation-heading')
-  const classification = card.locator('.verb-formation-section').filter({
-    has: card.getByRole('heading', { name: 'Classificação', exact: true }),
-  })
+  const classification = card.locator('.verb-formation-section').first()
   return normalized(`${await heading.innerText()} ${await classification.innerText()}`)
 }
 
