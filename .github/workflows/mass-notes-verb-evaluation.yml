@@ -1,4 +1,4 @@
-name: Banca E2-V adversarial
+name: Banca E2-V — infinitivo pessoal
 
 on:
   push:
@@ -64,10 +64,10 @@ jobs:
       - name: Instalar Chromium e Firefox
         run: npx playwright install --with-deps chromium firefox
 
-      - name: Executar banca e publicar métricas
+      - name: Executar banca do fenômeno-alvo e publicar métricas
         run: |
           set +e
-          npm run test:verb:evaluation
+          npm run test:verb:evaluation:target
           evaluation_status=$?
           set -e
 
@@ -80,7 +80,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e2-v-adversarial-${{ github.run_id }}
+          name: e2-v-infinitivo-pessoal-${{ github.run_id }}
           retention-days: 30
           if-no-files-found: warn
           path: |
@@ -89,4 +89,4 @@ jobs:
             mass-notes-next/e2-v-evaluation-summary.json
             mass-notes-next/e2-v-evaluation-summary.md
             mass-notes-next/playwright-report-evaluation/**
-            mass-notes-next/test-results/**
+            mass-notes-next/test-results-evaluation/**
