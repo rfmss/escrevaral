@@ -30,26 +30,31 @@ async function consult(page: Page, query: string) {
 }
 
 async function evaluateCase(page: Page, item: EvaluationCase) {
-  await test.step(`${item.phenomenon}: ${item.id}`, async () => {
-    const editor = await setManuscript(page, item.manuscript)
-    const htmlBefore = await editor.innerHTML()
-    await consult(page, item.query)
-    const card = page.locator('[data-verb-analysis]')
+  const editor = await setManuscript(page, item.manuscript)
+  const htmlBefore = await editor.innerHTML()
+  await consult(page, item.query)
+  const card = page.locator('[data-verb-analysis]')
 
-    if (item.shouldFind) {
-      await expect(card).toBeVisible()
-      for (const expected of item.includes) await expect(card).toContainText(expected)
-      for (const excluded of item.excludes) await expect(card).not.toContainText(excluded)
-    } else {
-      await expect(card).toHaveCount(0)
-    }
+  if (item.shouldFind) {
+    await expect(card).toBeVisible()
+    for (const expected of item.includes) await expect(card).toContainText(expected)
+    for (const excluded of item.excludes) await expect(card).not.toContainText(excluded)
+  } else {
+    await expect(card).toHaveCount(0)
+  }
 
-    expect(await editor.innerHTML()).toBe(htmlBefore)
-  })
+  expect(await editor.innerHTML()).toBe(htmlBefore)
 }
 
-test('banca E2-V adversarial mede fenômenos sem integrar o gate de regressão', async ({ page }) => {
-  test.setTimeout(180_000)
-  await waitReady(page)
-  for (const item of evaluation.cases) await evaluateCase(page, item)
+test.describe('banca E2-V adversarial fora do gate de regressão', () => {
+  test.beforeEach(async ({ page }) => {
+    await waitReady(page)
+  })
+
+  for (const item of evaluation.cases) {
+    test(`${item.phenomenon}: ${item.id}`, async ({ page }) => {
+      test.setTimeout(45_000)
+      await evaluateCase(page, item)
+    })
+  }
 })
