@@ -16,6 +16,7 @@
     "audit:lexicon": "node scripts/audit-lexical-inventory.mjs --json e2-lexical-inventory.json --markdown e2-lexical-inventory.md && node scripts/audit-definition-duplicates.mjs --json e2-definition-duplicates.json --markdown e2-definition-duplicates.md && npm run audit:verb",
     "test:e2e": "playwright test",
     "test:verb:evaluation": "playwright test --config=playwright.evaluation.config.ts",
+    "report:verb:evaluation": "node scripts/report-verb-evaluation.mjs",
     "check": "npm run audit:lexicon && npm run build && npm run test:e2e"
   },
   "dependencies": {
