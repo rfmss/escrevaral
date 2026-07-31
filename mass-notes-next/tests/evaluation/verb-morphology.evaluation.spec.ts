@@ -1,7 +1,21 @@
+import { readFileSync } from 'node:fs'
 import { expect, test, type Page } from '@playwright/test'
-import evaluation from '../fixtures/verb-morphology-evaluation.json'
 
-type EvaluationCase = (typeof evaluation.cases)[number]
+type EvaluationCase = {
+  id: string
+  phenomenon: string
+  manuscript: string
+  query: string
+  shouldFind: boolean
+  includes: string[]
+  excludes: string[]
+  targetExpected?: boolean
+  targetLabel?: string
+}
+
+const evaluation = JSON.parse(
+  readFileSync(new URL('../fixtures/verb-morphology-evaluation.json', import.meta.url), 'utf8'),
+) as { cases: EvaluationCase[] }
 
 function normalized(value: string): string {
   return value.replace(/\s+/g, ' ').trim()
