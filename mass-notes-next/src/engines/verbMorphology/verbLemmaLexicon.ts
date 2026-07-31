@@ -10,7 +10,7 @@ const CORE_LEMMAS = [
   'escrever', 'esperar', 'estudar', 'falar', 'fechar', 'ficar', 'gostar', 'largar',
   'ler', 'lembrar', 'morar', 'mover', 'nascer', 'olhar', 'ouvir', 'partir', 'passar',
   'pensar', 'perceber', 'perder', 'permanecer', 'precisar', 'procurar', 'publicar',
-  'receber', 'resolver', 'responder', 'seguir', 'sentir', 'tentar', 'terminar',
+  'receber', 'resolver', 'responder', 'sair', 'seguir', 'sentir', 'tentar', 'terminar',
   'trabalhar', 'usar', 'vender', 'viver', 'voltar', 'varrer',
 ]
 
