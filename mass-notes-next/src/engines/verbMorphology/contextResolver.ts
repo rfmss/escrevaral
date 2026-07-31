@@ -149,6 +149,11 @@ function scoreCandidate(
     }
   }
 
+  if (candidate.formType === 'infinitivo pessoal' && twoBefore === 'é' && previous === 'melhor') {
+    score += 35
+    evidence.push('A construção avaliativa “é melhor” pode introduzir um infinitivo pessoal flexionado.')
+  }
+
   if (DETERMINERS.has(previous) && candidate.formType === 'finita') {
     score -= 85
     evidence.push(`O determinante “${previous}” imediatamente antes favorece uma leitura nominal.`)
