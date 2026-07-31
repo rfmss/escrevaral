@@ -149,7 +149,13 @@ function scoreCandidate(
     }
   }
 
-  if (candidate.formType === 'infinitivo pessoal' && twoBefore === 'é' && previous === 'melhor') {
+  const hasVisiblePersonalInflection = normalizeVerbSurface(candidate.canonicalSurface) !== normalizeVerbSurface(candidate.lemma)
+  if (
+    candidate.formType === 'infinitivo pessoal'
+    && hasVisiblePersonalInflection
+    && twoBefore === 'é'
+    && previous === 'melhor'
+  ) {
     score += 35
     evidence.push('A construção avaliativa “é melhor” pode introduzir um infinitivo pessoal flexionado.')
   }
