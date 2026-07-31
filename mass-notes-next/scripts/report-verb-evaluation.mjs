@@ -105,6 +105,10 @@ for (const entry of entries) {
   apply(byPhenomenon[entry.phenomenon], entry)
 }
 
+const infrastructureErrors = []
+if (entries.length === 0) infrastructureErrors.push('Nenhuma execução Playwright foi registrada.')
+if (unmatchedSpecs.length > 0) infrastructureErrors.push(`${unmatchedSpecs.length} especificações não correspondem ao corpus versionado.`)
+
 const report = {
   generatedAt: new Date().toISOString(),
   source: {
@@ -118,6 +122,7 @@ const report = {
   byPhenomenon: Object.fromEntries(Object.entries(byPhenomenon).map(([key, value]) => [key, finalize(value)])),
   failures: entries.filter((entry) => !entry.passed),
   unmatchedSpecs,
+  infrastructureErrors,
 }
 
 writeFileSync('e2-v-evaluation-summary.json', `${JSON.stringify(report, null, 2)}\n`)
@@ -133,9 +138,11 @@ const phenomenonRows = Object.entries(report.byPhenomenon)
   .map(([phenomenon, item]) => `| ${phenomenon} | ${item.total} | ${item.passed} | ${item.failed} | ${percent(item.passRate)} | ${percent(item.precision)} | ${percent(item.recall)} |`)
   .join('\n')
 
-const failureLines = report.failures.length === 0
+const infrastructureLines = infrastructureErrors.map((item) => `- **Erro de infraestrutura:** ${item}`)
+const contractFailureLines = report.failures.map((item) => `- \`${item.project}\` · \`${item.id}\` · ${item.targetExpected === true ? 'contrato positivo' : item.targetExpected === false ? 'contrato negativo' : 'contrato geral'} · status \`${item.status}\`${item.error ? ` — ${item.error.split('\n')[0]}` : ''}`)
+const failureLines = [...infrastructureLines, ...contractFailureLines].length === 0
   ? '- Nenhuma falha observada.'
-  : report.failures.map((item) => `- \`${item.project}\` · \`${item.id}\` · ${item.targetExpected === true ? 'contrato positivo' : item.targetExpected === false ? 'contrato negativo' : 'contrato geral'} · status \`${item.status}\`${item.error ? ` — ${item.error.split('\n')[0]}` : ''}`).join('\n')
+  : [...infrastructureLines, ...contractFailureLines].join('\n')
 
 const markdown = `# Avaliação E2-V separada
 
