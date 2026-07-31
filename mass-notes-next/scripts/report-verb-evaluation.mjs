@@ -105,6 +105,7 @@ for (const entry of entries) {
   apply(byPhenomenon[entry.phenomenon], entry)
 }
 
+const executedCaseIds = new Set(entries.map((entry) => entry.id))
 const infrastructureErrors = []
 if (entries.length === 0) infrastructureErrors.push('Nenhuma execução Playwright foi registrada.')
 if (unmatchedSpecs.length > 0) infrastructureErrors.push(`${unmatchedSpecs.length} especificações não correspondem ao corpus versionado.`)
@@ -114,7 +115,8 @@ const report = {
   source: {
     evaluationSchemaVersion: evaluation.schemaVersion,
     targetTranche: evaluation.targetTranche ?? null,
-    cases: evaluation.cases.length,
+    corpusCases: evaluation.cases.length,
+    executedCases: executedCaseIds.size,
     executions: entries.length,
   },
   overall: finalize(overall),
@@ -149,7 +151,8 @@ const markdown = `# Avaliação E2-V separada
 Gerado em: ${report.generatedAt}
 
 - tranche-alvo: \`${report.source.targetTranche ?? 'não declarada'}\`;
-- casos: **${report.source.cases}**;
+- casos no corpus separado: **${report.source.corpusCases}**;
+- casos executados nesta banca: **${report.source.executedCases}**;
 - execuções observadas: **${report.source.executions}**;
 - taxa geral de aprovação: **${percent(report.overall.passRate)}**;
 - precisão contratual do alvo: **${percent(report.overall.precision)}**;
@@ -174,7 +177,7 @@ ${failureLines}
 
 ## Limite metodológico
 
-VP, VN, FP e FN são calculados apenas para casos que declaram \`targetExpected\`. Uma falha positiva pode representar ausência da análise-alvo ou erro de pessoa/modo; o detalhe permanece no relatório Playwright e não deve ser reduzido a uma alegação linguística sem inspeção.
+VP, VN, FP e FN são calculados apenas para casos que declaram \`targetExpected\`. Para contratos negativos, a ausência de cartão conta como ausência da classificação-alvo; ela não comprova cobertura lexical geral. Alternativas explicitamente ambíguas não são confundidas com a leitura principal.
 `
 
 writeFileSync('e2-v-evaluation-summary.md', markdown)
