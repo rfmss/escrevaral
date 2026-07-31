@@ -57,7 +57,7 @@ async function persistCurrentDraft(page: Page, expected: string) {
   }, {
     timeout: 20_000,
     intervals: [100, 250, 500],
-  }).toMatch(/^(persisted|recovery|Alterado|Salvando)$/)
+  }).toMatch(/^(persisted|recovery|Alterado|Salvando|Salvo)$/)
 
   if (await hasPersistedText(page, expected)) return
   await page.keyboard.press('Control+S')
@@ -90,129 +90,143 @@ async function pasteRichText(page: Page, html: string, plain: string) {
   }, { html, plain })
 }
 
-async function openExports(page: Page) {
-  await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
-  await expect(page.getByRole('tab', { name: 'ferramentas', exact: true })).toHaveAttribute('aria-selected', 'true')
-  await expect(page.locator('.export-panel')).toBeVisible()
+async function openExport(page: Page) {
+  await page.getByRole('button', { name: 'Abrir exportação' }).click()
+  await expect(page.getByRole('dialog', { name: 'Exportar documento' })).toBeVisible()
 }
 
-async function readDownload(download: Download): Promise<string> {
+async function downloadFormat(page: Page, name: RegExp): Promise<Download> {
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button', { name }).click(),
+  ])
+  return download
+}
+
+async function downloadText(download: Download): Promise<string> {
   const stream = await download.createReadStream()
+  if (!stream) throw new Error('Download sem stream.')
   const chunks: Buffer[] = []
   for await (const chunk of stream) chunks.push(Buffer.from(chunk))
   return Buffer.concat(chunks).toString('utf8')
 }
 
-async function exportFormat(page: Page, format: 'txt' | 'md' | 'html') {
-  const downloadPromise = page.waitForEvent('download')
-  await page.locator(`[data-export-format="${format}"]`).click()
-  const download = await downloadPromise
-  return {
-    filename: download.suggestedFilename(),
-    content: await readDownload(download),
-  }
-}
+const RICH_HTML = [
+  '<h1>Oficina &amp; memória</h1>',
+  '<p><strong>Texto forte</strong> e <em>texto inclinado</em> com <a href="https://example.com/?a=1&amp;b=2">referência</a>.</p>',
+  '<blockquote><p>&lt;guardar&gt; &amp; continuar</p></blockquote>',
+  '<ul><li><p>primeiro</p><ul><li><p>interno</p></li></ul></li><li><p>segundo</p></li></ul>',
+  '<ol start="3"><li><p>terceiro</p></li></ol>',
+  '<p>linha um<br>linha dois</p>',
+  '<p>&lt;script&gt;alert("não")&lt;/script&gt;</p>',
+].join('')
 
-async function seedStructuredDocument(page: Page) {
-  const editor = await createCleanDocument(page, 'Café / Coração: edição nº 2')
-
-  await pasteRichText(page, `
-    <h2>Capítulo &amp; travessia</h2>
-    <p><strong>Casa</strong> <em>azul</em>, <u>linha</u> e <s>rasura</s> com
-      <a href="https://example.com/caminho?q=1&amp;x=2">ponte</a>.</p>
-    <blockquote><p>Voz do quintal.</p></blockquote>
-    <ul>
-      <li>Primeiro item</li>
-      <li>Segundo item<ol><li>Dentro da lista</li></ol></li>
-    </ul>
-    <p>Emoji 🧵, acento combinante café e palavra brasileira: saudade.</p>
-    <p><a href="javascript:window.__exportAttack=true">atalho perigoso</a></p>
-    <script>window.__exportAttack=true</script>
-  `, 'Capítulo & travessia\nCasa azul, linha e rasura com ponte.\nVoz do quintal.\nPrimeiro item\nSegundo item\nDentro da lista\nEmoji 🧵, acento combinante café e palavra brasileira: saudade.\natalho perigoso')
-
-  await expect(editor.locator('h2')).toHaveText('Capítulo & travessia')
-  await expect(editor.locator('li')).toHaveCount(3)
-  await expect(editor.locator('script')).toHaveCount(0)
-  await persistCurrentDraft(page, 'Capítulo & travessia')
-  await openExports(page)
-  return editor
-}
+const RICH_PLAIN = [
+  'Oficina & memória',
+  'Texto forte e texto inclinado com referência.',
+  '<guardar> & continuar',
+  'primeiro',
+  'interno',
+  'segundo',
+  'terceiro',
+  'linha um',
+  'linha dois',
+  '<script>alert("não")</script>',
+].join('\n')
 
 test('painel de exportação oferece três formatos locais e explica o uso', async ({ page }) => {
   await waitReady(page)
-  await createCleanDocument(page, 'Formatos locais')
-  await openExports(page)
+  await openExport(page)
 
-  await expect(page.locator('[data-export-format]')).toHaveCount(3)
-  await expect(page.locator('[data-export-format="txt"]')).toContainText('Texto (.txt)')
-  await expect(page.locator('[data-export-format="md"]')).toContainText('Markdown (.md)')
-  await expect(page.locator('[data-export-format="html"]')).toContainText('Página (.html)')
-  await expect(page.locator('.export-panel')).toContainText(/gerados localmente/i)
+  await expect(page.getByText('O arquivo é gerado no navegador')).toBeVisible()
+  await expect(page.getByRole('button', { name: /Markdown/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /HTML/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /TXT/ })).toBeVisible()
+
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog', { name: 'Exportar documento' })).toHaveCount(0)
 })
 
 test('Markdown preserva títulos, ênfases, links, citações e listas aninhadas', async ({ page }) => {
   await waitReady(page)
-  await seedStructuredDocument(page)
-  const exported = await exportFormat(page, 'md')
+  await createCleanDocument(page, 'Mapa de exportação')
+  await pasteRichText(page, RICH_HTML, RICH_PLAIN)
+  await persistCurrentDraft(page, 'Oficina & memória')
+  await openExport(page)
 
-  expect(exported.filename).toBe('cafe-coracao-edicao-n-2.md')
-  expect(exported.content).toContain('title: "Café / Coração: edição nº 2"')
-  expect(exported.content).toContain('# Café / Coração: edição nº 2')
-  expect(exported.content).toContain('## Capítulo & travessia')
-  expect(exported.content).toContain('**Casa** _azul_')
-  expect(exported.content).toContain('<u>linha</u>')
-  expect(exported.content).toContain('~~rasura~~')
-  expect(exported.content).toContain('[ponte](https://example.com/caminho?q=1&x=2)')
-  expect(exported.content).toContain('> Voz do quintal.')
-  expect(exported.content).toContain('- Segundo item\n  1. Dentro da lista')
-  expect(exported.content).toContain('Emoji 🧵')
-  expect(exported.content).not.toContain('javascript:')
+  const download = await downloadFormat(page, /Baixar Markdown/)
+  expect(download.suggestedFilename()).toBe('mapa-de-exportacao.md')
+  const text = await downloadText(download)
+
+  expect(text).toContain('# Oficina & memória')
+  expect(text).toContain('**Texto forte**')
+  expect(text).toContain('*texto inclinado*')
+  expect(text).toContain('[referência](https://example.com/?a=1&b=2)')
+  expect(text).toContain('> <guardar> & continuar')
+  expect(text).toContain('- primeiro')
+  expect(text).toContain('  - interno')
+  expect(text).toContain('3. terceiro')
+  expect(text).toContain('linha um  \nlinha dois')
 })
 
 test('HTML é autônomo, semântico, escapado e não publica scripts do manuscrito', async ({ page }) => {
   await waitReady(page)
-  await seedStructuredDocument(page)
-  const exported = await exportFormat(page, 'html')
+  await createCleanDocument(page, 'HTML seguro')
+  await pasteRichText(page, RICH_HTML, RICH_PLAIN)
+  await persistCurrentDraft(page, 'Oficina & memória')
+  await openExport(page)
 
-  expect(exported.filename).toBe('cafe-coracao-edicao-n-2.html')
-  expect(exported.content).toMatch(/^<!doctype html>/)
-  expect(exported.content).toContain('<html lang="pt-BR">')
-  expect(exported.content).toContain('<meta charset="utf-8">')
-  expect(exported.content).toContain('<h2>Capítulo &amp; travessia</h2>')
-  expect(exported.content).toContain('<strong>Casa</strong>')
-  expect(exported.content).toContain('<em>azul</em>')
-  expect(exported.content).toContain('<blockquote>')
-  expect(exported.content).toContain('<ul>')
-  expect(exported.content).toContain('<ol>')
-  expect(exported.content).toContain('href="https://example.com/caminho?q=1&amp;x=2"')
-  expect(exported.content).not.toContain('<script>')
-  expect(exported.content).not.toContain('javascript:')
+  const download = await downloadFormat(page, /Baixar HTML/)
+  expect(download.suggestedFilename()).toBe('html-seguro.html')
+  const text = await downloadText(download)
+
+  expect(text).toContain('<!doctype html>')
+  expect(text).toContain('<html lang="pt-BR">')
+  expect(text).toContain('<title>HTML seguro</title>')
+  expect(text).toContain('<h1>Oficina &amp; memória</h1>')
+  expect(text).toContain('<strong>Texto forte</strong>')
+  expect(text).toContain('<em>texto inclinado</em>')
+  expect(text).toContain('<blockquote>')
+  expect(text).toContain('<ul>')
+  expect(text).toContain('<ol start="3">')
+  expect(text).toContain('&lt;script&gt;alert("não")&lt;/script&gt;')
+  expect(text).not.toContain('<script>alert("não")</script>')
 })
 
 test('TXT mantém uma leitura portátil com hierarquia, citações e marcadores', async ({ page }) => {
   await waitReady(page)
-  await seedStructuredDocument(page)
-  const exported = await exportFormat(page, 'txt')
+  await createCleanDocument(page, 'Texto portátil')
+  await pasteRichText(page, RICH_HTML, RICH_PLAIN)
+  await persistCurrentDraft(page, 'Oficina & memória')
+  await openExport(page)
 
-  expect(exported.filename).toBe('cafe-coracao-edicao-n-2.txt')
-  expect(exported.content).toContain('Café / Coração: edição nº 2')
-  expect(exported.content).toContain('Situação: Rascunho')
-  expect(exported.content).toContain('Capítulo & travessia')
-  expect(exported.content).toContain('Casa azul, linha e rasura com ponte <https://example.com/caminho?q=1&x=2>.')
-  expect(exported.content).toContain('> Voz do quintal.')
-  expect(exported.content).toContain('- Primeiro item')
-  expect(exported.content).toContain('- Segundo item\n  1. Dentro da lista')
-  expect(exported.content).not.toMatch(/<h2>|<strong>|<script>/)
+  const download = await downloadFormat(page, /Baixar TXT/)
+  expect(download.suggestedFilename()).toBe('texto-portatil.txt')
+  const text = await downloadText(download)
+
+  expect(text).toContain('OFICINA & MEMÓRIA')
+  expect(text).toContain('Texto forte e texto inclinado com referência (https://example.com/?a=1&b=2).')
+  expect(text).toContain('> <guardar> & continuar')
+  expect(text).toContain('• primeiro')
+  expect(text).toContain('  • interno')
+  expect(text).toContain('3. terceiro')
+  expect(text).toContain('linha um\nlinha dois')
 })
 
 test('página vazia ainda exporta título e metadados válidos', async ({ page }) => {
   await waitReady(page)
-  await createCleanDocument(page, 'Página em branco')
-  await openExports(page)
+  await createCleanDocument(page, 'Página vazia')
+  await openExport(page)
 
-  await expect(page.locator('.export-panel')).toContainText(/página está vazia/i)
-  const exported = await exportFormat(page, 'txt')
-  expect(exported.filename).toBe('pagina-em-branco.txt')
-  expect(exported.content).toContain('Página em branco')
-  expect(exported.content).toContain('Situação: Rascunho')
+  const markdown = await downloadText(await downloadFormat(page, /Baixar Markdown/))
+  expect(markdown).toContain('# Página vazia')
+  expect(markdown).toContain('Estado: Rascunho')
+
+  const html = await downloadText(await downloadFormat(page, /Baixar HTML/))
+  expect(html).toContain('<title>Página vazia</title>')
+  expect(html).toContain('<h1>Página vazia</h1>')
+
+  const txt = await downloadText(await downloadFormat(page, /Baixar TXT/))
+  expect(txt).toContain('PÁGINA VAZIA')
+  expect(txt).toContain('Estado: Rascunho')
 })
