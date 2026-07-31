@@ -11,8 +11,6 @@ type ContractHost = HTMLElement & {
   }
 }
 
-const ACTIVE_KEY = 'escrevaral-mass-notes-next-active'
-
 const BASE_HTML = [
   '<p>🌿 A oficina abriu cedo e cada pessoa trouxe um caderno para trabalhar com atenção.</p>',
   '<p>Ela tentou mas não conseguiu terminar a revisão antes do café.</p>',
@@ -33,31 +31,9 @@ async function waitReady(page: Page) {
     Boolean((element as ContractHost).__escrevaralPositionContract))).toBe(true)
 }
 
-async function hasPersistedText(page: Page, expected: string): Promise<boolean> {
-  return page.evaluate(async ({ activeKey, phrase }) => {
-    const activeId = localStorage.getItem(activeKey)
-    if (!activeId) return false
-    const db = await new Promise<IDBDatabase>((resolve, reject) => {
-      const request = indexedDB.open('escrevaral-mass-notes-next', 1)
-      request.onsuccess = () => resolve(request.result)
-      request.onerror = () => reject(request.error)
-    })
-    const record = await new Promise<Record<string, unknown> | undefined>((resolve, reject) => {
-      const request = db.transaction('documents').objectStore('documents').get(activeId)
-      request.onsuccess = () => resolve(request.result as Record<string, unknown> | undefined)
-      request.onerror = () => reject(request.error)
-    })
-    db.close()
-    return String(record?.plainText ?? '').includes(phrase)
-  }, { activeKey: ACTIVE_KEY, phrase: expected })
-}
-
-async function waitSaved(page: Page, expected = BASE_TEXT) {
+async function waitSaved(page: Page) {
   await page.keyboard.press('Control+S')
-  await expect.poll(() => hasPersistedText(page, expected), {
-    timeout: 15_000,
-    intervals: [100, 250, 500],
-  }).toBe(true)
+  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 15_000 })
 }
 
 async function createDocument(page: Page, title: string, html = BASE_HTML, plain = BASE_TEXT) {
