@@ -83,10 +83,10 @@ test('tokens Blueprint e verniz Escrevaral estão ativos no papel', async ({ pag
     cyanStrong: '#36a7d2',
     orange: '#ff5a19',
     red: '#e31b36',
-    varnishIndigo: '#1a2f5b',
-    varnishSepia: '#3b2b1e',
-    varnishCream: '#e7d1ad',
-    paperBackground: 'rgb(243, 238, 228)',
+    varnishIndigo: '#202a38',
+    varnishSepia: '#3a2b1b',
+    varnishCream: '#ead8b9',
+    paperBackground: 'rgb(240, 228, 207)',
     blueprintPointerEvents: 'none',
   })
   expect(theme.bodyBackground).toContain('radial-gradient')
@@ -123,7 +123,7 @@ test('modo noite mantém a linguagem Blueprint e contraste alto', async ({ page 
   expect(values.canvas).toBe('#123442')
   expect(values.panel).toBe('#202628')
   expect(values.text).toBe('#f4f0e9')
-  expect(values.paperBackground).toBe('rgb(32, 38, 40)')
+  expect(values.paperBackground).toBe('rgb(26, 36, 50)')
   expect(await elementContrast(page, '.escrevaral-editor')).toBeGreaterThanOrEqual(7)
   expect(await elementContrast(page, '.tab:not(.active)')).toBeGreaterThanOrEqual(4.5)
 
