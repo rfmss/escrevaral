@@ -10,15 +10,12 @@
 :root {
   --esv-indigo: #1a2f5b;
   --esv-indigo-deep: #14233a;
-  --esv-indigo-soft: #334d70;
   --esv-sepia: #3b2b1e;
   --esv-sepia-soft: #7d6044;
   --esv-paper: #f3eee4;
   --esv-paper-warm: #eadcc6;
   --esv-cream: #e7d1ad;
-  --esv-charcoal: #1f1f1f;
   --esv-line: rgba(26, 47, 91, .38);
-  --esv-line-soft: rgba(59, 43, 30, .14);
   --esv-fiber: rgba(59, 43, 30, .055);
   --esv-oxide: #a3422f;
 }
@@ -152,11 +149,14 @@ body.night .halftone {
   opacity: .78;
 }
 
-.brand h1 span,
+.brand h1 span {
+  color: var(--esv-sepia);
+  background-color: transparent;
+}
+
 .deck::before,
 .note-stripe,
 .slash {
-  color: var(--esv-sepia);
   background-color: var(--esv-sepia);
 }
 
@@ -296,6 +296,10 @@ body.night .brand {
   background-repeat: no-repeat, repeat, no-repeat;
 }
 
+body.night .brand h1 span {
+  color: var(--esv-cream);
+}
+
 body.night .eyebrow,
 body.night .field-label,
 body.night .metric-label,
@@ -365,8 +369,7 @@ body.night .action.reading {
 }
 
 @media (max-width: 820px) {
-  .paper,
-  body.night .paper {
+  .paper {
     background-image:
       radial-gradient(circle at 2px 2px, rgba(59, 43, 30, .04) .55px, transparent .85px),
       radial-gradient(ellipse at 16% 10%, rgba(255, 255, 255, .2), transparent 38%),
