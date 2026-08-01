@@ -1,0 +1,133 @@
+name: Executor efêmero — M1 E2 quica
+
+on:
+  push:
+    branches:
+      - experiment/mass-notes-tiptap
+    paths:
+      - .github/workflows/m1-e2-quica-executor.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: m1-e2-quica-executor
+  cancel-in-progress: false
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Baixar a branch experimental
+        uses: actions/checkout@v4
+        with:
+          ref: experiment/mass-notes-tiptap
+          fetch-depth: 0
+
+      - name: Remover somente a declaração morta de quica
+        shell: python
+        run: |
+          from pathlib import Path
+
+          source = Path('lexical-engine.js')
+          needle = '    "quica":        "Advérbio de dúvida equivalente a \'talvez\'. Literário e formal; mais raro que \'talvez\' no português brasileiro atual.",\n'
+          content = source.read_text(encoding='utf-8')
+          count = content.count(needle)
+          if count != 2:
+              raise SystemExit(f'Esperadas 2 declarações idênticas de quica; encontradas {count}.')
+          source.write_text(content.replace(needle, '', 1), encoding='utf-8')
+          if source.read_text(encoding='utf-8').count(needle) != 1:
+              raise SystemExit('A deduplicação não preservou exatamente uma declaração de quica.')
+
+      - name: Atualizar snapshots documentais do inventário
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          json_path = Path('mass-notes-next/docs/audits/M1_E2_LEXICAL_INVENTORY.json')
+          data = json.loads(json_path.read_text(encoding='utf-8'))
+          data['date'] = '2026-08-01'
+          data['measuredEffectiveCoverage']['definitionRawDeclarations'] = 1010
+          data['definitionDuplicates'].update({
+              'rawDeclarations': 1010,
+              'effectiveKeys': 936,
+              'duplicateGroups': 68,
+              'overwrittenDeclarations': 74,
+              'identicalGroups': 0,
+              'normalizedEquivalentGroups': 0,
+              'conflictingGroups': 68,
+          })
+          data['definitionDuplicates'].pop('onlyIdenticalKey', None)
+          finding = next(item for item in data['mechanicalFindings'] if item['code'] == 'definitions.duplicate-raw-key')
+          finding['count'] = 68
+          finding['detail'] = '68 grupos têm definições conflitantes; o JavaScript retém silenciosamente apenas a última declaração.'
+          json_path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          md_path = Path('mass-notes-next/docs/audits/M1_E2_LEXICAL_INVENTORY.md')
+          text = md_path.read_text(encoding='utf-8')
+          replacements = {
+              'as 1.011 declarações brutas de definição': 'as 1.010 declarações brutas de definição',
+              '- 1.011 declarações brutas;': '- 1.010 declarações brutas;',
+              '- 69 grupos com chave repetida;': '- 68 grupos com chave repetida;',
+              '- 75 declarações descartadas pela semântica normal de objetos JavaScript;': '- 74 declarações descartadas pela semântica normal de objetos JavaScript;',
+              '- um grupo idêntico: `quica`;': '- zero grupos idênticos após a remoção segura de `quica`;',
+          }
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Trecho esperado ausente no snapshot Markdown: {old}')
+              text = text.replace(old, new, 1)
+          marker = 'A última ocorrência de cada chave é a única visível no runtime.'
+          note = ('O lote seguro de `quica` removeu uma declaração idêntica sem alterar a definição efetiva. '
+                  'Os 68 grupos restantes são todos conflitantes e continuam bloqueados para revisão editorial em lotes separados.\n\n')
+          if note not in text:
+              text = text.replace(marker, note + marker, 1)
+          md_path.write_text(text, encoding='utf-8')
+
+      - name: Instalar dependências
+        working-directory: mass-notes-next
+        run: npm ci
+
+      - name: Auditar léxico e proveniência
+        working-directory: mass-notes-next
+        run: npm run audit:lexicon
+
+      - name: Conferir contagens regeneradas
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path('mass-notes-next/e2-definition-duplicates.json').read_text(encoding='utf-8'))
+          expected = {
+              'rawDeclarations': 1010,
+              'effectiveKeys': 936,
+              'duplicateGroups': 68,
+              'overwrittenDeclarations': 74,
+              'identicalGroups': 0,
+              'normalizedEquivalentGroups': 0,
+              'conflictingGroups': 68,
+          }
+          if report['counts'] != expected:
+              raise SystemExit(f'Contagens inesperadas: {report["counts"]}')
+
+      - name: Testar contrato estático de quica
+        working-directory: mass-notes-next
+        run: npx playwright test tests/m1-e2-quica-source.spec.ts
+
+      - name: Compilar
+        working-directory: mass-notes-next
+        run: npm run build
+
+      - name: Criar commit atômico e remover o executor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/m1-e2-quica-executor.yml
+          git add lexical-engine.js \
+            mass-notes-next/docs/audits/M1_E2_LEXICAL_INVENTORY.json \
+            mass-notes-next/docs/audits/M1_E2_LEXICAL_INVENTORY.md
+          git diff --cached --check
+          git commit -m "fix(lexico): remove duplicata idêntica de quica"
+          git push origin HEAD:experiment/mass-notes-tiptap
