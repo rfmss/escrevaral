@@ -44,7 +44,7 @@ async function elementContrast(page: Page, selector: string): Promise<number> {
   return contrastRatio(rgb(values.foreground), rgb(values.background))
 }
 
-test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => {
+test('tokens Blueprint e verniz Escrevaral estão ativos no papel', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
@@ -52,6 +52,7 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
     const root = getComputedStyle(document.documentElement)
     const body = getComputedStyle(document.body)
     const blueprint = getComputedStyle(document.querySelector('.blueprint')!)
+    const sidebar = getComputedStyle(document.querySelector('.sidebar')!)
     const paper = getComputedStyle(document.querySelector('.paper')!)
 
     return {
@@ -61,6 +62,9 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
       cyanStrong: root.getPropertyValue('--bp-cyan-strong').trim(),
       orange: root.getPropertyValue('--bp-orange').trim(),
       red: root.getPropertyValue('--bp-red').trim(),
+      varnishIndigo: root.getPropertyValue('--esv-indigo').trim(),
+      varnishSepia: root.getPropertyValue('--esv-sepia').trim(),
+      varnishCream: root.getPropertyValue('--esv-cream').trim(),
       paperBackground: paper.backgroundColor,
       paperImage: paper.backgroundImage,
       paperSize: paper.backgroundSize,
@@ -68,6 +72,7 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
       bodyBackground: body.backgroundImage,
       blueprintBackground: blueprint.backgroundImage,
       blueprintPointerEvents: blueprint.pointerEvents,
+      sidebarBackground: sidebar.backgroundImage,
     }
   })
 
@@ -78,13 +83,18 @@ test('tokens e atmosfera Blueprint estão ativos no papel', async ({ page }) => 
     cyanStrong: '#36a7d2',
     orange: '#ff5a19',
     red: '#e31b36',
+    varnishIndigo: '#1a2f5b',
+    varnishSepia: '#3b2b1e',
+    varnishCream: '#e7d1ad',
     paperBackground: 'rgb(243, 238, 228)',
     blueprintPointerEvents: 'none',
   })
   expect(theme.bodyBackground).toContain('radial-gradient')
   expect(theme.bodyBackground.match(/linear-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
   expect(theme.blueprintBackground).toContain('repeating-linear-gradient')
+  expect(theme.sidebarBackground.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
   expect(theme.paperImage).not.toContain('repeating-linear-gradient')
+  expect(theme.paperImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
   expect(theme.paperSize).toContain('100% 48px')
   expect(theme.paperRepeat).toContain('repeat-y')
   expect(await elementContrast(page, '.escrevaral-editor')).toBeGreaterThanOrEqual(7)
