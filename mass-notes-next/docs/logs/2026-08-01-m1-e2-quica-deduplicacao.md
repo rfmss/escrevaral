@@ -3,7 +3,7 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho  
-Estado: **alteração mínima aplicada; matriz integral em validação**
+Estado: **alteração lexical aprovada; matriz integral vermelha por uma ocorrência não relacionada em Firefox; preview bloqueada**
 
 > **Eva Chara, entre em banca.**
 
@@ -40,9 +40,16 @@ Não foram alterados:
 - sinônimos, aliases ou regras de polissemia;
 - componentes, interface, seleção ou persistência;
 - comportamento efetivo da engine;
-- `main`, aplicação pública ou service worker público.
+- `main` ou aplicação pública.
 
 A auditoria e o adaptador Mass Notes consomem a fonte única `lexical-engine.js`. Não existe uma segunda cópia versionada dessa engine dentro de `mass-notes-next`.
+
+Como `lexical-engine.js` é um asset público do Escrevaral legado, a alteração exigiu renovação mecânica da distribuição na branch experimental:
+
+- `ASSET_VERSION`: `20260801-lexical-quica-dedup-v1`;
+- `CACHE_NAME`: `vereda-offline-v970`;
+- lista e estratégia do service worker preservadas;
+- nenhuma mudança aplicada em `main`.
 
 ## A — Ação mínima
 
@@ -51,11 +58,14 @@ A auditoria e o adaptador Mass Notes consomem a fonte única `lexical-engine.js`
 3. regenerada a auditoria lexical;
 4. atualizados os snapshots documentais;
 5. criado contrato estático de fonte;
-6. delegados build e matriz integral ao workflow oficial Mass Notes.
+6. renovados somente os identificadores públicos exigidos pelo gate de distribuição;
+7. delegados build e matriz integral ao workflow oficial Mass Notes.
 
-## R — Resultado técnico aplicado
+## R — Resultado lexical e de distribuição
 
 Cabeça da alteração lexical: `8d34b69bed9ce573108e01fcb409e3c0d4d7093b`.
+
+Cabeça final anterior a este registro documental: `6b27991d60194e8dad42aeae0503956c8717b097`.
 
 Contagens reproduzidas pelo auditor:
 
@@ -66,7 +76,7 @@ Contagens reproduzidas pelo auditor:
 - 0 grupos idênticos;
 - 68 grupos conflitantes.
 
-Executor efêmero final: `30723436245` — verde.
+Executor efêmero lexical `30723436245`: verde.
 
 Dentro do executor:
 
@@ -75,15 +85,55 @@ Dentro do executor:
 - `npm run audit:lexicon`: verde;
 - E2-V evidência e proveniência: verdes;
 - contrato estático em Chromium e Firefox: `2/2`;
-- executor removido no próprio commit final.
+- executor removido do repositório.
 
-Uma tentativa anterior (`30723389788`) executou auditoria e teste com sucesso, mas o build isolado encontrou a fronteira já conhecida da fonte direta da Anatomia. O executor não mascarou a falha: o passo foi retirado, e build/publicação permanecem sob responsabilidade do workflow oficial Mass Notes, que prepara os assets segundo o contrato do projeto.
+Na cabeça final anterior ao registro:
 
-Este documento não declara a matriz integral verde antes do encerramento dos workflows da cabeça documental final.
+- coerência de versões `30723668260`: verde;
+- candidata Argila `30723668286`: verde;
+- banca E2-V `30723668297`: verde;
+- fronteira pública `30723668263`: verde;
+- build Mass Notes: verde;
+- auditoria lexical: verde;
+- testes específicos de `quica`: verdes nos dois navegadores.
+
+## Matriz integral vermelha preservada
+
+Workflow Mass Notes: `30723668283`.
+
+Resultado:
+
+- Chromium: `177/177`;
+- Firefox: `176/177`;
+- total: `353/354`;
+- alteração lexical, auditorias, build e contratos de `quica`: verdes;
+- preview, cache da preview e smoke público: corretamente ignorados após a falha;
+- artifact ID: `8825709424`;
+- digest: `sha256:ff44c814a764ac21426457e7436f504821928b692b99cae4ecd8b5303c796fad`.
+
+Única falha:
+
+```text
+tests/m0-9-integrated.spec.ts
+conflito misto entre manuscrito e metadados preserva as duas versões
+Firefox: alerta de conflito não encontrado em 12 segundos
+```
+
+O mesmo cenário passou em Chromium. A falha não envolve a engine lexical, `quica`, o inventário, a distribuição ou o E2-V. Ela ocorreu na coordenação assíncrona entre duas abas e ainda não está classificada como intermitência ou defeito reproduzível.
+
+Decisão metodológica:
+
+- não aumentar timeout;
+- não alterar a engine lexical;
+- não publicar preview vermelha;
+- registrar a ocorrência;
+- reexecutar a mesma cabeça funcional por um commit somente documental;
+- somente alterar teste ou produto se a fronteira entre abas falhar novamente.
 
 ## O — O que permanece aberto
 
-- validação da cabeça documental final em build e matriz integral;
+- reexecução integral após este registro documental;
+- classificação da falha entre abas como ocorrência isolada ou risco reproduzível;
 - 68 conflitos editoriais de definições;
 - oito autorreferências de sinônimos;
 - quatro aliases técnicos;
@@ -91,11 +141,12 @@ Este documento não declara a matriz integral verde antes do encerramento dos wo
 - cartões de polissemia ausentes;
 - expansão lexical bloqueada.
 
-## Parecer Eva — parcial
+## Parecer Eva — banca vermelha
 
 - dimensão: Léxico e polissemia, nota 6,5;
 - ganho demonstrado: integridade mecânica e auditabilidade;
 - nota mantida: a remoção de uma duplicata idêntica não comprova qualidade lexical nova;
-- falsos positivos/negativos linguísticos: não se aplicam, pois o runtime efetivo foi preservado;
-- decisão: `PROSSEGUIR COM CONDIÇÕES`;
-- condição principal: fechar a matriz oficial e não tocar nos 68 conflitos neste lote.
+- resultado lexical: aprovado dentro do lote;
+- resultado integrado: ainda não fechado por uma falha não relacionada;
+- decisão: `PAUSAR` fechamento e publicação até a nova matriz;
+- condição principal: não tocar nos 68 conflitos nem mascarar a falha entre abas.
