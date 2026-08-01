@@ -44,7 +44,7 @@ async function elementContrast(page: Page, selector: string): Promise<number> {
   return contrastRatio(rgb(values.foreground), rgb(values.background))
 }
 
-test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async ({ page }) => {
+test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composição', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
@@ -54,6 +54,7 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
     const railElement = document.querySelector<HTMLElement>('.rail')!
     const paperElement = document.querySelector<HTMLElement>('.paper')!
     const brandElement = document.querySelector<HTMLElement>('.brand')!
+    const eyebrowElement = brandElement.querySelector<HTMLElement>('.eyebrow')!
     const wordmarkElement = brandElement.querySelector<HTMLElement>('h1')!
     const linksElement = brandElement.querySelector<HTMLElement>('.brand-links')!
 
@@ -64,6 +65,7 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
     const seal = getComputedStyle(brandElement, '::before')
     const sealFrame = getComputedStyle(brandElement, '::after')
     const brandRect = brandElement.getBoundingClientRect()
+    const eyebrowRect = eyebrowElement.getBoundingClientRect()
     const wordmarkRect = wordmarkElement.getBoundingClientRect()
     const linksRect = linksElement.getBoundingClientRect()
 
@@ -71,7 +73,9 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
       indigo: root.getPropertyValue('--esv-indigo').trim(),
       indigoDeep: root.getPropertyValue('--esv-indigo-deep').trim(),
       sepia: root.getPropertyValue('--esv-sepia').trim(),
+      paperToken: root.getPropertyValue('--esv-paper').trim(),
       cream: root.getPropertyValue('--esv-cream').trim(),
+      oxide: root.getPropertyValue('--esv-oxide').trim(),
       sidebarBackground: sidebar.backgroundColor,
       sidebarImage: sidebar.backgroundImage,
       railBackground: rail.backgroundColor,
@@ -86,15 +90,21 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
       sealWidth: Number.parseFloat(seal.width),
       sealHeight: Number.parseFloat(seal.height),
       sealBackground: seal.backgroundColor,
+      sealImage: seal.backgroundImage,
       sealColor: seal.color,
       sealBorderWidth: seal.borderTopWidth,
       sealFrameDisplay: sealFrame.display,
       wordmarkText: wordmarkElement.textContent?.trim() ?? '',
       wordmarkVisibility: wordmark.visibility,
       wordmarkOpacity: Number(wordmark.opacity),
+      eyebrowLeft: eyebrowRect.left - brandRect.left,
+      eyebrowBottom: eyebrowRect.bottom - brandRect.top,
       wordmarkLeft: wordmarkRect.left - brandRect.left,
+      wordmarkTop: wordmarkRect.top - brandRect.top,
       wordmarkRight: wordmarkRect.right - brandRect.left,
+      wordmarkBottom: wordmarkRect.bottom - brandRect.top,
       linksTop: linksRect.top - brandRect.top,
+      linksBottom: linksRect.bottom - brandRect.top,
       brandWidth: brandRect.width,
       brandHeight: brandRect.height,
       viewport: document.documentElement.clientWidth,
@@ -103,18 +113,20 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
   })
 
   expect(visual).toMatchObject({
-    indigo: '#1a2f5b',
-    indigoDeep: '#14233a',
-    sepia: '#3b2b1e',
-    cream: '#e7d1ad',
-    sidebarBackground: 'rgb(20, 35, 58)',
-    railBackground: 'rgb(20, 35, 58)',
-    paperBackground: 'rgb(243, 238, 228)',
+    indigo: '#202a38',
+    indigoDeep: '#182230',
+    sepia: '#3a2b1b',
+    paperToken: '#f0e4cf',
+    cream: '#ead8b9',
+    oxide: '#8b4b29',
+    sidebarBackground: 'rgb(24, 34, 48)',
+    railBackground: 'rgb(24, 34, 48)',
+    paperBackground: 'rgb(240, 228, 207)',
     sealDisplay: 'grid',
     sealWidth: 44,
     sealHeight: 44,
-    sealBackground: 'rgb(26, 47, 91)',
-    sealColor: 'rgb(243, 238, 228)',
+    sealBackground: 'rgb(24, 34, 48)',
+    sealColor: 'rgb(240, 228, 207)',
     sealBorderWidth: '1px',
     sealFrameDisplay: 'block',
     wordmarkVisibility: 'visible',
@@ -124,15 +136,21 @@ test('o selo SCR VRL apoia o wordmark e o verniz preserva a composição', async
   expect(visual.sealContent).toContain('SCR')
   expect(visual.sealContent).toContain('VRL')
   expect(visual.wordmarkText.toLocaleUpperCase('pt-BR')).toBe('ESCREVARAL')
+  expect(visual.eyebrowLeft).toBeGreaterThanOrEqual(visual.sealLeft + visual.sealWidth + 10)
   expect(visual.wordmarkLeft).toBeGreaterThanOrEqual(visual.sealLeft + visual.sealWidth + 10)
+  expect(visual.wordmarkTop).toBeGreaterThanOrEqual(visual.eyebrowBottom + 6)
+  expect(visual.wordmarkBottom).toBeLessThanOrEqual(visual.linksTop - 6)
   expect(visual.wordmarkRight).toBeLessThanOrEqual(visual.brandWidth - 12)
   expect(visual.sealTop + visual.sealHeight).toBeLessThanOrEqual(visual.linksTop)
-  expect(visual.sealTop + visual.sealHeight).toBeLessThanOrEqual(visual.brandHeight)
-  expect(visual.sidebarImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(3)
+  expect(visual.linksBottom).toBeLessThanOrEqual(visual.brandHeight - 10)
+  expect(visual.sidebarImage).toContain('url(')
+  expect(visual.sidebarImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
+  expect(visual.paperImage).toContain('url(')
   expect(visual.paperImage).not.toContain('repeating-linear-gradient')
-  expect(visual.paperImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
+  expect(visual.paperImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(3)
   expect(visual.paperSize).toContain('100% 48px')
   expect(visual.paperRepeat).toContain('repeat-y')
+  expect(visual.sealImage).toContain('url(')
   expect(visual.scroll).toBeLessThanOrEqual(visual.viewport)
   expect(await elementContrast(page, '.sidebar .search')).toBeGreaterThanOrEqual(4.5)
   expect(await elementContrast(page, '.rail .tab:not(.active)')).toBeGreaterThanOrEqual(4.5)
