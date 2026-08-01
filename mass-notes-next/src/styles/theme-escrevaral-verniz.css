@@ -245,7 +245,7 @@ body.night .rima-scan {
   display: grid !important;
   position: absolute;
   left: 22px;
-  top: 42px;
+  top: 40px;
   right: auto;
   width: 44px;
   height: 44px;
@@ -274,7 +274,7 @@ body.night .rima-scan {
   display: block !important;
   position: absolute;
   left: 26px;
-  top: 46px;
+  top: 44px;
   right: auto;
   width: 36px;
   height: 36px;
