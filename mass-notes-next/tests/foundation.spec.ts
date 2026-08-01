@@ -21,17 +21,25 @@ test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) 
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('ações ficam integradas ao rail sem adesivos sobre o papel', async ({ page }) => {
+test('ações ficam integradas ao rail e o selo permanece restrito à marca', async ({ page }) => {
   await waitReady(page)
 
   await expect(page.locator('.slash')).toBeHidden()
   await expect(page.locator('.impact-button')).toBeHidden()
 
-  const brandDecorations = await page.locator('.brand').evaluate((node) => ({
-    before: getComputedStyle(node, '::before').display,
-    after: getComputedStyle(node, '::after').display,
-  }))
-  expect(brandDecorations).toEqual({ before: 'none', after: 'none' })
+  const brandSeal = await page.locator('.brand').evaluate((node) => {
+    const seal = getComputedStyle(node, '::before')
+    const frame = getComputedStyle(node, '::after')
+    return {
+      content: seal.content,
+      before: seal.display,
+      after: frame.display,
+    }
+  })
+  expect(brandSeal.before).toBe('grid')
+  expect(brandSeal.after).toBe('block')
+  expect(brandSeal.content).toContain('SCR')
+  expect(brandSeal.content).toContain('VRL')
 
   const readButton = page.getByRole('button', { name: 'Ler o texto', exact: true })
   await expect(readButton).toBeVisible()
