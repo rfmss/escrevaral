@@ -1,7 +1,7 @@
 {
   "schema": "escrevaral.m1-e2.lexical-inventory-baseline",
   "version": 1,
-  "date": "2026-07-29",
+  "date": "2026-08-01",
   "repository": "rfmss/escrevaral",
   "branch": "experiment/mass-notes-tiptap",
   "measurementHeads": {
@@ -30,7 +30,7 @@
     "synonymAlternativesRaw": 7766,
     "synonymDirectedPairsUniqueNormalized": 7763,
     "definitions": 936,
-    "definitionRawDeclarations": 1011,
+    "definitionRawDeclarations": 1010,
     "polysemyRules": 175,
     "polysemyAlternativeCards": 55,
     "contextEntries": 606,
@@ -47,39 +47,54 @@
     "rimaLabGrammarWords": 407
   },
   "definitionDuplicates": {
-    "rawDeclarations": 1011,
+    "rawDeclarations": 1010,
     "effectiveKeys": 936,
-    "duplicateGroups": 69,
-    "overwrittenDeclarations": 75,
-    "identicalGroups": 1,
+    "duplicateGroups": 68,
+    "overwrittenDeclarations": 74,
+    "identicalGroups": 0,
     "normalizedEquivalentGroups": 0,
-    "conflictingGroups": 68,
-    "onlyIdenticalKey": "quica"
+    "conflictingGroups": 68
   },
   "mechanicalFindings": [
     {
       "severity": "P0",
       "code": "definitions.duplicate-raw-key",
-      "count": 69,
+      "count": 68,
       "detail": "68 grupos têm definições conflitantes; o JavaScript retém silenciosamente apenas a última declaração."
     },
     {
       "severity": "P1",
       "code": "synonyms.self-reference",
       "count": 8,
-      "examples": ["avo", "gaúcho", "anacoluto", "canonico", "autoficcao", "aguardar", "ansiar", "contundente"]
+      "examples": [
+        "avo",
+        "gaúcho",
+        "anacoluto",
+        "canonico",
+        "autoficcao",
+        "aguardar",
+        "ansiar",
+        "contundente"
+      ]
     },
     {
       "severity": "P1",
       "code": "definitions.technical-alias",
       "count": 4,
-      "examples": ["ode2", "contemplar2", "denso2", "silencio2"]
+      "examples": [
+        "ode2",
+        "contemplar2",
+        "denso2",
+        "silencio2"
+      ]
     },
     {
       "severity": "P2",
       "code": "definitions.empty-or-short",
       "count": 1,
-      "examples": ["leitor_modelo"]
+      "examples": [
+        "leitor_modelo"
+      ]
     },
     {
       "severity": "P2",

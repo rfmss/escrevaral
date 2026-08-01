@@ -36,7 +36,7 @@ O comando gera relatórios completos em JSON e Markdown, incluindo linhas e text
 | RimaLab — enciclopédia | 50 | 50 |
 | RimaLab — `grammarWords` | 348 | 407 |
 
-A documentação histórica acerta a ordem de grandeza, mas não descreve a cobertura efetiva atual com precisão. Em particular, as 1.011 declarações brutas de definição resultam em apenas 936 chaves ativas.
+A documentação histórica acerta a ordem de grandeza, mas não descreve a cobertura efetiva atual com precisão. Em particular, as 1.010 declarações brutas de definição resultam em apenas 936 chaves ativas.
 
 ## Cobertura complementar
 
@@ -53,13 +53,15 @@ A documentação histórica acerta a ordem de grandeza, mas não descreve a cobe
 
 O bloco `DEFINICOES` contém:
 
-- 1.011 declarações brutas;
+- 1.010 declarações brutas;
 - 936 chaves efetivas;
-- 69 grupos com chave repetida;
-- 75 declarações descartadas pela semântica normal de objetos JavaScript;
-- um grupo idêntico: `quica`;
+- 68 grupos com chave repetida;
+- 74 declarações descartadas pela semântica normal de objetos JavaScript;
+- zero grupos idênticos após a remoção segura de `quica`;
 - zero grupos apenas equivalentes após normalização;
 - **68 grupos com textos conflitantes**.
+
+O lote seguro de `quica` removeu uma declaração idêntica sem alterar a definição efetiva. Os 68 grupos restantes são todos conflitantes e continuam bloqueados para revisão editorial em lotes separados.
 
 A última ocorrência de cada chave é a única visível no runtime. As anteriores não aumentam cobertura e não podem ser contadas como definições disponíveis.
 
