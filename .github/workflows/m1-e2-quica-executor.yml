@@ -131,3 +131,5 @@ jobs:
           git diff --cached --check
           git commit -m "fix(lexico): remove duplicata idêntica de quica"
           git push origin HEAD:experiment/mass-notes-tiptap
+
+# O segundo push garante que o workflow já exista na revisão anterior.
