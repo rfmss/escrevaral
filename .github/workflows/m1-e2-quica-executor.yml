@@ -1,9 +1,9 @@
 name: Executor efêmero — M1 E2 quica
 
 on:
-  push:
+  pull_request:
     branches:
-      - experiment/mass-notes-tiptap
+      - main
     paths:
       - .github/workflows/m1-e2-quica-executor.yml
 
@@ -24,6 +24,7 @@ jobs:
         with:
           ref: experiment/mass-notes-tiptap
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Remover somente a declaração morta de quica
         shell: python
@@ -131,5 +132,3 @@ jobs:
           git diff --cached --check
           git commit -m "fix(lexico): remove duplicata idêntica de quica"
           git push origin HEAD:experiment/mass-notes-tiptap
-
-# O segundo push garante que o workflow já exista na revisão anterior.
