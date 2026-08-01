@@ -21,7 +21,7 @@ import './styles/m1-usability.css'
 import './styles/pagination.css'
 import './styles/pagination-controls.css'
 import './styles/m1-density.css'
-import './styles/theme-escrevaral-verniz.css'
+import './styles/theme-escrevaral-verniz-material.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
