@@ -1,6 +1,6 @@
 # Tema Blueprint Tokon
 
-Atualizado em: 2026-07-28
+Atualizado em: 2026-08-01
 Estado: aprovado para continuidade experimental
 
 ## Objetivo
@@ -36,19 +36,35 @@ Fundir a linguagem visual do protótipo Blueprint Tokon com o Mass Notes Next se
 - painéis linguísticos: cartões de relatório, sem aparência clínica;
 - modo noite: prancha azul profunda e papel técnico escuro, com os mesmos papéis semânticos.
 
+## Verniz Escrevaral — índigo, sépia e matéria impressa
+
+A camada adicionada em 2026-08-01 preserva a arquitetura Blueprint e troca somente o acabamento perceptivo:
+
+- canvas ciano é reinterpretado visualmente como índigo mineral `#1a2f5b`;
+- sépia `#3b2b1e` entra em marcas, ornamentos e pequenos acentos editoriais;
+- creme `#e7d1ad` substitui o branco óptico nas linhas sobre fundos escuros;
+- painéis recebem fibra fina, nuvens tonais discretas e tinta aparentemente absorvida;
+- o papel autoral continua em `#f3eee4`, opaco e prioritário para leitura;
+- o modo noite mantém o papel técnico aprovado em `#202628` e aplica o verniz ao ambiente ao redor;
+- ruído pontilhado é reduzido e o grão contínuo assume a materialidade principal.
+
+O verniz não transforma o editor em cartaz. Ele usa o cartaz de identidade como fonte de cor e matéria, mantendo o produto, a densidade e a hierarquia atuais.
+
 ## Arquitetura da skin
 
 ```text
 src/styles/theme-blueprint.tokens.css
 src/styles/theme-blueprint.css
 src/styles/theme-blueprint-composition.css
+src/styles/theme-escrevaral-verniz.css
 ```
 
-- `tokens`: paleta da referência e mapeamento semântico;
-- `skin`: aplicação visual ao produto existente;
-- `composition`: garante que o papel permaneça quente e opaco, sem lavagem cromática do canvas.
+- `tokens`: paleta da referência Blueprint e mapeamento semântico estável;
+- `skin`: aplicação visual Blueprint ao produto existente;
+- `composition`: garante que o papel permaneça quente e opaco, sem lavagem cromática do canvas;
+- `verniz`: última camada, somente cores, textura e acabamento índigo/sépia.
 
-Os arquivos são carregados por último. Remover seus imports reverte somente a skin Blueprint.
+Os arquivos são carregados por último na ordem acima. Remover somente o import de `theme-escrevaral-verniz.css` reverte o novo acabamento sem tocar a skin Blueprint. Remover os quatro imports reverte toda a skin.
 
 ## Restrições comprovadas
 
@@ -77,7 +93,11 @@ A regressão permanente exige:
 - repetição `repeat-y`;
 - ausência de `repeating-linear-gradient` dentro da folha.
 
+O verniz acrescenta duas camadas radiais de fibra e variação tonal, mas preserva integralmente esse contrato.
+
 ## Evidência
+
+Baseline Blueprint:
 
 - workflow funcional: `30333192558`;
 - Chromium: 50/50;
@@ -86,3 +106,10 @@ A regressão permanente exige:
 - preview publicada após gate verde;
 - capturas revisadas em papel, noite e mobile;
 - `main`, aplicação pública e service worker intactos.
+
+Verniz Escrevaral:
+
+- contrato visual protegido em `tests/gate6-75-blueprint.spec.ts`;
+- tokens Blueprint originais permanecem estáveis para compatibilidade;
+- tokens `--esv-*`, fibra dos painéis, textura do papel e geometria existente são testados;
+- publicação continua condicionada à matriz integral, cache e smoke verdes.
