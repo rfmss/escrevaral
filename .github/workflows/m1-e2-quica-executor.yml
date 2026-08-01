@@ -117,10 +117,6 @@ jobs:
         working-directory: mass-notes-next
         run: npx playwright test tests/m1-e2-quica-source.spec.ts
 
-      - name: Compilar
-        working-directory: mass-notes-next
-        run: npm run build
-
       - name: Criar commit atômico e remover o executor
         run: |
           git config user.name "github-actions[bot]"
