@@ -11,10 +11,11 @@ Experimento isolado que preserva a identidade editorial e as engines locais do E
 - Gates 1 a 13 e Gate 10.5: concluídos;
 - M0.9: encerrado como auditoria técnica, sem autorizar lançamento ou substituição;
 - milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
-- matriz atual: **138 cenários por navegador, 276 execuções**;
-- engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab e Palavras/Léxico;
-- primeira superioridade contextual: corpus morfossintático v1 passou de 8/14 para 14/14 casos únicos;
-- P0/P1 conhecidos nas engines: 0/0;
+- matriz funcional de referência: **176 cenários por navegador, 352 execuções**;
+- engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab, Palavras/Léxico e análise morfológica verbal;
+- E2-V: 34 casos de desenvolvimento e 24 casos em conjunto adversarial separado;
+- infinitivo pessoal: primeira família verbal com proveniência verificada e avaliação separada em **24/24**;
+- P0/P1 funcionais conhecidos nas engines: 0/0;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público e substituição integral: `NO-SHIP`;
 - Gate 14 permanece suspenso.
@@ -23,25 +24,26 @@ Experimento isolado que preserva a identidade editorial e as engines locais do E
 
 Leia nesta ordem:
 
-1. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases, baseline e próximo trabalho;
-2. `docs/logs/2026-07-29-m1-e0-e1-lexico-contextual.md` — primeira comparação e ganho comprovado;
-3. `docs/logs/2026-07-29-m0-9-encerramento-m1-abertura.md` — fronteira entre auditoria e evolução;
-4. `docs/PLAN.md` — sequência aprovada;
-5. `docs/MEMORY.md` — decisões permanentes;
-6. `docs/CHANGELOG.md` — mudanças relevantes;
-7. `docs/M0_9_ERRATA_MATRIZ.md` e demais artefatos M0.9 — histórico da auditoria;
+1. `docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md` — fechamento CLARO mais recente e limites;
+2. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases e adversário mensurável;
+3. `docs/PLAN.md` — sequência aprovada;
+4. `docs/personas/EVA_CHARA_SCORECARD.md` — rubrica e prioridades;
+5. `docs/linguistics/verb-provenance.json` — estado das famílias verbais e suas evidências;
+6. `docs/logs/2026-07-29-m1-e2-inventario-lexical.md` — integridade lexical pendente;
+7. `docs/MEMORY.md` e `docs/CHANGELOG.md` — decisões permanentes e mudanças relevantes;
 8. contratos globais em `../docs/product/`.
 
-Não declare superioridade global por contagem ou por um corpus pequeno. Cada avanço exige baseline, caso reproduzível, correção mínima, matriz integral, documentação e evidência na cabeça exata.
+Não declare superioridade global por contagem ou por corpus pequeno. Cada avanço exige baseline, caso reproduzível, correção mínima, matriz integral, documentação e evidência na cabeça exata.
 
 ## Executar e validar
 
 ```bash
 npm ci
-npm run dev
+npm run audit:lexicon
 npm run build
 npx playwright install chromium firefox
 npm run test:e2e
+npm run test:verb:evaluation:target
 ```
 
 Fronteira pública:
@@ -90,47 +92,54 @@ Regras de formato, conversão, filtro ou engine não entram diretamente em `App.
 - diacríticos participam da decisão gramatical, não apenas da busca;
 - contexto pode produzir leitura `provável`; ausência de evidência deve produzir ambiguidade ou indeterminação honesta;
 - toda nova regra linguística exige caso positivo e negativo versionado;
-- métricas de CI detectam regressão e não constituem SLA;
+- corpus de desenvolvimento e conjunto de avaliação permanecem separados;
+- uma família só recebe estado `verified` com fontes, escopo, divergências, licença e avaliação integralmente aprovada;
+- métricas de CI detectam regressão e não constituem SLA ou consenso linguístico;
 - automação de zoom equivalente não substitui zoom real, leitor de tela ou dispositivo físico;
 - a Anatomia ainda carrega `page-flip@2.0.7` do `unpkg`, bloqueando promessa offline integral;
 - preview só é publicada após build, Chromium, Firefox, cache e smoke público verdes.
 
-## Primeira evidência M1.0
+## Evidências M1.0 consolidadas
 
-Corpus v1:
+### Léxico e contexto
+
+O corpus contextual passou de 8/14 para 14/14 casos únicos e depois recebeu controles negativos adicionais. As correções cobrem fronteiras delimitadas como:
 
 - `enquanto`, `por enquanto` e `enquanto isso`;
-- `publica/pública`;
-- `seria/séria`;
+- `publica/pública` e `seria/séria`;
 - `preso` como particípio, adjetivo e substantivo;
 - `larga` como adjetivo e verbo;
 - `canto` como verbo e substantivo.
 
-Baseline anterior à correção:
+Esse ganho não constitui superioridade lexical global.
 
-- 8/14 casos únicos aprovados;
-- 6 lacunas contextuais repetidas em Chromium e Firefox;
-- 264/276 execuções aprovadas.
+### E2-V — infinitivo pessoal
 
-Após a camada contextual tipada:
+A cabeça funcional `0e5177d5c801a4a9b8833af35baa059af486f6c4` demonstrou:
 
-- 14/14 casos únicos aprovados;
-- **276/276 execuções**;
-- cabeça funcional `d44791ff1a317610c9dd152360cfbb9b168c503a`;
-- Mass Notes `30493491424`: build, navegadores, publicação, cache e smoke público verdes;
-- Argila `30493491638` e coerência `30493491411`: verdes;
-- artefato `mass-notes-tiptap-30493491424`.
+- 12 casos separados do fenômeno;
+- oito positivos e quatro negativos por navegador;
+- distinções contra infinitivo impessoal, uso substantivado e futuro do subjuntivo;
+- reconhecimento de sujeito expresso e recuperável, incluindo `É melhor sairmos agora`;
+- Chromium `12/12` e Firefox `12/12`;
+- precisão, recall e acurácia de 100% dentro do conjunto contratado;
+- matriz integral **352/352**;
+- nenhuma alteração automática do manuscrito.
 
-A superioridade comprovada é específica a essas seis fronteiras corrigidas. Ainda não constitui prova de superioridade global nem autorização para substituir o legado.
+Workflow da banca: `30718951198`.  
+Workflow integral: `30718951187`.
+
+O estado `verified` vale somente para o escopo declarado em `docs/linguistics/verb-provenance.json`. Não representa uma teoria completa do infinitivo flexionado nem aprovação acadêmica.
 
 ## Próximo trabalho lógico
 
-1. adicionar controles negativos para impedir generalização excessiva das novas regras;
-2. medir as contagens reais de definições, sinônimos, polissemia, contexto e formas verbais;
-3. auditar duplicatas, autorreferências, ciclos e verbetes sem definição útil;
-4. selecionar a primeira expansão lexical brasileira com fonte e corpus;
-5. desenhar uma experiência sintático-morfológica integrada;
-6. ampliar corpora humanos de prosa, poesia, diálogo, ensaio, oralidade e regionalismos.
+1. concluir a **auditoria formal de paridade** entre Escrevaral legado e Mass Notes;
+2. classificar cada capacidade como presente, superior, parcial, ausente, aposentada ou bloqueadora;
+3. separar requisitos de beta pública dos requisitos de substituição integral;
+4. retomar a integridade lexical em pequenos lotes, sem expansão de volume;
+5. fundamentar e avaliar as demais famílias do E2-V;
+6. somente depois abrir Sintaxe v1 com corpus separado desde a primeira regra;
+7. preparar E3 humana com prosa, poesia, diálogo, ensaio, oralidade e regionalismos.
 
 ## Limites atuais
 
