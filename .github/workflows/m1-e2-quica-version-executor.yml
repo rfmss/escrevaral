@@ -1,0 +1,108 @@
+name: Executor efêmero — versão pública de quica
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/m1-e2-quica-version-executor.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: m1-e2-quica-version-executor
+  cancel-in-progress: false
+
+jobs:
+  aplicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Baixar a branch experimental
+        uses: actions/checkout@v4
+        with:
+          ref: experiment/mass-notes-tiptap
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Renovar somente versão e cache públicos
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          old_version = '20260727-rimas-actionbutton-v1'
+          new_version = '20260801-lexical-quica-dedup-v1'
+          files = [
+              Path('index.html'),
+              Path('service-worker.js'),
+              Path('ui-dialog.js'),
+              Path('css/14-archive-inspector.css'),
+              Path('css/wood-icons.css'),
+          ]
+
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              count = text.count(old_version)
+              if count == 0:
+                  raise SystemExit(f'{path}: versão antiga ausente')
+              text = text.replace(old_version, new_version)
+              if old_version in text:
+                  raise SystemExit(f'{path}: versão antiga remanescente')
+              path.write_text(text, encoding='utf-8')
+
+          sw = Path('service-worker.js')
+          text = sw.read_text(encoding='utf-8')
+          old_cache = 'const CACHE_NAME = "vereda-offline-v969";'
+          new_cache = 'const CACHE_NAME = "vereda-offline-v970";'
+          if text.count(old_cache) != 1:
+              raise SystemExit('CACHE_NAME v969 ausente ou duplicado')
+          sw.write_text(text.replace(old_cache, new_cache, 1), encoding='utf-8')
+
+          expected = {
+              'css/14-archive-inspector.css',
+              'css/wood-icons.css',
+              'index.html',
+              'service-worker.js',
+              'ui-dialog.js',
+          }
+          changed = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          if changed != expected:
+              raise SystemExit(f'Escopo inesperado: {sorted(changed)}; esperado: {sorted(expected)}')
+
+      - name: Validar fronteira e coerência da distribuição
+        run: |
+          python3 scripts/test-auditor-asset-version.py
+          GITHUB_BASE_REF=main python3 scripts/auditor-asset-version.py
+
+      - name: Confirmar mudança estritamente mecânica
+        shell: python
+        run: |
+          from pathlib import Path
+
+          new_version = '20260801-lexical-quica-dedup-v1'
+          index = Path('index.html').read_text(encoding='utf-8')
+          sw = Path('service-worker.js').read_text(encoding='utf-8')
+          ui = Path('ui-dialog.js').read_text(encoding='utf-8')
+          if index.count(new_version) < 60:
+              raise SystemExit('index.html não recebeu a versão global em todas as referências')
+          if f'const ASSET_VERSION = "{new_version}";' not in sw:
+              raise SystemExit('ASSET_VERSION não foi alinhado')
+          if 'const CACHE_NAME = "vereda-offline-v970";' not in sw:
+              raise SystemExit('CACHE_NAME não foi incrementado')
+          if f'lexical-view-controller.js?v={new_version}' not in ui:
+              raise SystemExit('ui-dialog.js não foi alinhado')
+
+      - name: Criar commit atômico e remover o executor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/m1-e2-quica-version-executor.yml
+          git add index.html service-worker.js ui-dialog.js \
+            css/14-archive-inspector.css css/wood-icons.css
+          git diff --cached --check
+          git commit -m "chore(distribuicao): renova assets após deduplicação lexical"
+          git push origin HEAD:experiment/mass-notes-tiptap
+
+# Revisão de acionamento: o executor existe na revisão anterior do PR.
