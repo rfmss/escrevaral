@@ -3,7 +3,8 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — permanece aberto e em rascunho  
-Baseline observada: `f80c669e5eb3858f1d1f48dc084fac3c2792d450`
+Baseline observada: `f80c669e5eb3858f1d1f48dc084fac3c2792d450`  
+Cabeça validada: `6bbe116e080ff0c7a82fe8cf153b7ed5f4ac8740`
 
 ## C — cenário observado
 
@@ -66,13 +67,24 @@ Critérios adicionados à banca visual existente:
 - contraste mínimo anterior continua obrigatório;
 - Chromium e Firefox continuam mandatórios no workflow integral.
 
+Validação final:
+
+- workflow Mass Notes Tiptap `30704281515`: verde após repetição das duas flutuações de Firefox;
+- TypeScript e build: verdes;
+- Playwright: **350/350** em Chromium e Firefox;
+- os dez testes dedicados ao verniz — cinco por navegador — passaram;
+- publicação da preview, renovação de cache e smoke público: verdes;
+- artefato: `mass-notes-tiptap-30704281515`;
+- artifact ID: `8820025502`;
+- digest: `sha256:bc8d5e0eeb89624817a8be4525f02eb8655a1ec35fac5f98e658aca49fabc99d`.
+
 Reversão: remover o import de `theme-escrevaral-verniz.css` em `src/main.tsx`. Nenhuma migração ou compensação adicional é necessária.
 
 ## O — o que permanece aberto
 
-- revisão humana das capturas em desktop, mobile e modo noite após a primeira matriz verde;
+- revisão humana das capturas em desktop, mobile e modo noite;
 - ajuste fino de intensidade do grão somente se a captura real mostrar perda de legibilidade;
 - eventual atualização da cor da barra do navegador pode ser avaliada separadamente, pois exigiria tocar a lógica de `theme-color` e não é necessária para provar o verniz;
-- nenhuma promoção de preview deve ocorrer antes de build, Chromium, Firefox, cache e smoke verdes.
+- nenhuma promoção para `main`, Gate 14 ou lançamento sem autorização explícita.
 
-Status no momento do registro: **implementado; aguardando matriz integral e revisão das capturas**.
+Status no momento do fechamento: **implementado, matriz integral verde e preview experimental publicada**.
