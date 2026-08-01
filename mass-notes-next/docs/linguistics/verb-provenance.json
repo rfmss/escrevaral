@@ -60,7 +60,7 @@
         "src/engines/verbMorphology/contextResolver.ts",
         "src/engines/verbMorphology/verbLemmaLexicon.ts"
       ],
-      "status": "partial",
+      "status": "verified",
       "scope": "formas flexionadas e não flexionadas com sujeito expresso ou recuperável; inclui primeira pessoa do plural em construção avaliativa como ‘é melhor sairmos’; mede separadamente as fronteiras com infinitivo impessoal, uso substantivado e futuro do subjuntivo",
       "tradition": "contrasta descrição gramatical contemporânea, pesquisa sociolinguística, análise sintática e evidência experimental do português brasileiro; nenhuma fonte isolada é tratada como autoridade absoluta",
       "usage": "o infinitivo flexionado é produtivo, porém variável no português brasileiro; obrigatoriedade, opcionalidade, formalidade e frequência dependem da configuração sintática, do sujeito, do registro e da variedade, portanto a interface deve expor limites e não prescrever automaticamente",
@@ -115,21 +115,21 @@
       ],
       "licenseOrTerms": "fontes consultadas somente para fundamentação, contraste e síntese própria; nenhum texto, corpus, exemplo protegido ou material experimental foi incorporado ao runtime ou aos fixtures",
       "evaluation": {
-        "baselineHead": "d266e5f4b779bf348de393c5d80682cb96814a94",
-        "workflowRun": 30603731926,
-        "artifactId": 8782856605,
+        "baselineHead": "0e5177d5c801a4a9b8833af35baa059af486f6c4",
+        "workflowRun": 30718951198,
+        "artifactId": 8824240160,
+        "artifactDigest": "sha256:06978a08feb9b9226e5034dc2ef105d2560c95629b3cd991db2a93b8d0560bda",
         "browsers": [
           "chromium",
           "firefox"
         ],
         "cases": 12,
         "executions": 24,
-        "passed": 22,
-        "failed": 2,
+        "passed": 24,
+        "failed": 0,
         "precision": 1,
-        "recall": 0.875,
-        "accuracy": 0.9167,
-        "remainingFailure": "eval-inf-pessoal-nos-oculto"
+        "recall": 1,
+        "accuracy": 1
       }
     },
     {
