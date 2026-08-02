@@ -33,6 +33,10 @@ jobs:
         working-directory: mass-notes-next
         run: npm ci --no-audit --no-fund
 
+      - name: Compilar o harness das regressões
+        working-directory: mass-notes-next
+        run: npx tsc -b && npx vite build
+
       - name: Instalar navegadores
         working-directory: mass-notes-next
         run: npx playwright install --with-deps chromium firefox
@@ -59,4 +63,4 @@ jobs:
           git commit -m "fix(storage): serializa salvamentos locais"
           git push origin HEAD:experiment/mass-notes-tiptap
 
-# O build integral permanece sob o workflow oficial Mass Notes, que prepara a Anatomia.
+# O harness ignora apenas o prebuild da Anatomia; o workflow oficial executa o build integral.
