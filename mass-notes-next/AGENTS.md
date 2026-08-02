@@ -8,10 +8,13 @@ Antes de alterar código, corpus, regras linguísticas, interface de análise ou
 
 1. leia `README.md`;
 2. leia `docs/METHODS.md`;
-3. leia `docs/personas/EVA_CHARA.md`;
-4. leia `docs/personas/EVA_CHARA_PROMPT.md`;
-5. consulte `docs/personas/EVA_CHARA_SCORECARD.md` e a planilha de progresso;
-6. registre o próximo risco em breadcrumb antes de atravessar uma fronteira ainda não provada.
+3. leia `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md`;
+4. leia `docs/personas/EVA_CHARA.md`;
+5. leia `docs/personas/EVA_CHARA_PROMPT.md`;
+6. consulte `docs/personas/EVA_CHARA_SCORECARD.md` e a planilha de progresso;
+7. registre o próximo risco em breadcrumb antes de atravessar uma fronteira ainda não provada.
+
+A cápsula de aprendizagem é obrigatória antes de consultar livros, artigos, sites, corpora, repositórios, modelos ou qualquer fonte externa para criar regra, exemplo, explicação, engine ou decisão de persona.
 
 Chamada curta:
 
@@ -29,6 +32,7 @@ Convocação obrigatória:
 
 - antes de criar ou ampliar uma engine linguística;
 - antes de adicionar uma regra, exceção, corpus ou léxico;
+- antes de transformar leitura de fonte externa em hipótese computacional;
 - quando uma classificação puder sobrepor outra engine;
 - diante de sobregeração, ambiguidade ou conflito editorial;
 - antes de declarar superioridade, cobertura ou maturidade;
@@ -59,14 +63,20 @@ Todo parecer deve informar:
 - nenhuma engine substitui texto automaticamente;
 - toda regra nova exige caso positivo e negativo;
 - toda fonte externa exige origem, licença e versão;
+- livros e materiais protegidos são professores temporários, não datasets do produto;
+- nenhum PDF, EPUB, TXT integral ou banco reconstruído de obra protegida entra no repositório;
+- Biblioteca de Autoridade e corpus são camadas distintas;
+- a síntese, a explicação e os exemplos finais devem ser originais ou licenciados;
+- divergências entre fontes devem permanecer visíveis;
 - qualquer alegação sobre português brasileiro deve declarar registro, corpus e limite;
+- a persona primária da leitora-escritora orienta pesquisa sem excluir ou estereotipar o público;
 - uma persona não substitui banca humana independente.
 
 ## Método conjunto
 
 Use sempre:
 
-`CLARO → parecer Eva → teste vermelho → menor correção → matriz integral → evidência → atualização da rubrica`.
+`CLARO → parecer Eva → fonte/páginas → síntese original → corpus vermelho → menor correção → matriz integral → evidência → atualização da rubrica`.
 
 Não apresente lista de commits como demonstração de produto.
 
@@ -78,4 +88,5 @@ Não apresente lista de commits como demonstração de produto.
 - não executar Gate 14;
 - não promover preview vermelha;
 - não apagar breadcrumbs de hipóteses rejeitadas;
+- não incorporar binários de livros ou fontes privadas;
 - diante de risco não medido, pausar e documentar antes de continuar.
