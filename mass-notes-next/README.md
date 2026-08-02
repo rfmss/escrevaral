@@ -10,28 +10,36 @@ Experimento isolado que preserva a identidade editorial e as engines locais do E
 - aplicação pública, `main` e service worker público: intactos;
 - Gates 1 a 13 e Gate 10.5: concluídos;
 - M0.9: encerrado como auditoria técnica, sem autorizar lançamento ou substituição;
-- milestone atual: **M1.0 — Engines superiores ao Escrevaral legado**;
-- matriz funcional de referência: **176 cenários por navegador, 352 execuções**;
+- milestone estrutural: **M1.0 — Engines superiores ao Escrevaral legado**;
+- tranche estratégica ativa: **M1-R0 — Biblioteca de Autoridade e ética de aprendizagem**;
+- baseline funcional validada: cabeça `3bf5a5185c97d2ac49c5bb60b0d4525890528ac7`, **182 cenários por navegador, 364 execuções**;
 - engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab, Palavras/Léxico e análise morfológica verbal;
 - E2-V: 34 casos de desenvolvimento e 24 casos em conjunto adversarial separado;
 - infinitivo pessoal: primeira família verbal com proveniência verificada e avaliação separada em **24/24**;
+- inventário lexical: 1.008 declarações brutas, 936 chaves efetivas e 66 grupos conflitantes;
 - P0/P1 funcionais conhecidos nas engines: 0/0;
 - beta fechada online: `SHIP COM CONDIÇÕES`;
 - lançamento público e substituição integral: `NO-SHIP`;
 - Gate 14 permanece suspenso.
 
+M1-R0 é uma pausa deliberada antes de novas engines ou novos lotes lexicais. O objetivo é aprender com obras, corpora e recursos externos sem copiar, sem incorporar binários protegidos e sem confundir biblioteca de referência com corpus.
+
 ## Retomar o projeto
 
 Leia nesta ordem:
 
-1. `docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md` — fechamento CLARO mais recente e limites;
-2. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases e adversário mensurável;
-3. `docs/PLAN.md` — sequência aprovada;
-4. `docs/personas/EVA_CHARA_SCORECARD.md` — rubrica e prioridades;
-5. `docs/linguistics/verb-provenance.json` — estado das famílias verbais e suas evidências;
-6. `docs/logs/2026-07-29-m1-e2-inventario-lexical.md` — integridade lexical pendente;
-7. `docs/MEMORY.md` e `docs/CHANGELOG.md` — decisões permanentes e mudanças relevantes;
-8. contratos globais em `../docs/product/`.
+1. `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md` — ética, ciclo de fontes, persona e M1-R0;
+2. `AGENTS.md` — obrigações de qualquer agente;
+3. `docs/METHODS.md` — CLARO, banca e validação;
+4. `docs/logs/2026-08-01-m1-e2-algures-outrora.md` — fechamento lexical mais recente e falhas preservadas;
+5. `docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md` — fechamento E2-V e limites;
+6. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases e adversário mensurável;
+7. `docs/PLAN.md` — sequência aprovada anterior à pausa estratégica;
+8. `docs/personas/EVA_CHARA.md`, `EVA_CHARA_PROMPT.md` e `EVA_CHARA_SCORECARD.md`;
+9. `docs/linguistics/verb-provenance.json` — estado das famílias verbais e suas evidências;
+10. `docs/logs/2026-07-29-m1-e2-inventario-lexical.md` — integridade lexical pendente;
+11. `docs/MEMORY.md` e `docs/CHANGELOG.md` — decisões permanentes e mudanças relevantes;
+12. contratos globais em `../docs/product/`.
 
 Não declare superioridade global por contagem ou por corpus pequeno. Cada avanço exige baseline, caso reproduzível, correção mínima, matriz integral, documentação e evidência na cabeça exata.
 
@@ -94,6 +102,11 @@ Regras de formato, conversão, filtro ou engine não entram diretamente em `App.
 - toda nova regra linguística exige caso positivo e negativo versionado;
 - corpus de desenvolvimento e conjunto de avaliação permanecem separados;
 - uma família só recebe estado `verified` com fontes, escopo, divergências, licença e avaliação integralmente aprovada;
+- livros e obras de referência são professores temporários, não datasets do produto;
+- Biblioteca de Autoridade e corpus permanecem separados;
+- PDFs, EPUBs e TXTs integrais protegidos não entram no repositório nem nos artefatos;
+- sínteses, exemplos e explicações finais devem ser originais ou licenciados;
+- a persona primária da leitora-escritora orienta pesquisa sem excluir ou estereotipar outros públicos;
 - métricas de CI detectam regressão e não constituem SLA ou consenso linguístico;
 - automação de zoom equivalente não substitui zoom real, leitor de tela ou dispositivo físico;
 - a Anatomia ainda carrega `page-flip@2.0.7` do `unpkg`, bloqueando promessa offline integral;
@@ -111,7 +124,7 @@ O corpus contextual passou de 8/14 para 14/14 casos únicos e depois recebeu con
 - `larga` como adjetivo e verbo;
 - `canto` como verbo e substantivo.
 
-Esse ganho não constitui superioridade lexical global.
+A duplicata idêntica de `quica` foi removida sem mudar sua definição efetiva. `algures` e `outrora` foram consolidados em uma declaração ativa por verbete, com contratos próprios. Restam 66 conflitos editoriais. Esse ganho não constitui superioridade lexical global.
 
 ### E2-V — infinitivo pessoal
 
@@ -123,23 +136,24 @@ A cabeça funcional `0e5177d5c801a4a9b8833af35baa059af486f6c4` demonstrou:
 - reconhecimento de sujeito expresso e recuperável, incluindo `É melhor sairmos agora`;
 - Chromium `12/12` e Firefox `12/12`;
 - precisão, recall e acurácia de 100% dentro do conjunto contratado;
-- matriz integral **352/352**;
 - nenhuma alteração automática do manuscrito.
-
-Workflow da banca: `30718951198`.  
-Workflow integral: `30718951187`.
 
 O estado `verified` vale somente para o escopo declarado em `docs/linguistics/verb-provenance.json`. Não representa uma teoria completa do infinitivo flexionado nem aprovação acadêmica.
 
-## Próximo trabalho lógico
+## Próximo trabalho lógico — M1-R0
 
-1. concluir a **auditoria formal de paridade** entre Escrevaral legado e Mass Notes;
-2. classificar cada capacidade como presente, superior, parcial, ausente, aposentada ou bloqueadora;
-3. separar requisitos de beta pública dos requisitos de substituição integral;
-4. retomar a integridade lexical em pequenos lotes, sem expansão de volume;
-5. fundamentar e avaliar as demais famílias do E2-V;
-6. somente depois abrir Sintaxe v1 com corpus separado desde a primeira regra;
-7. preparar E3 humana com prosa, poesia, diálogo, ensaio, oralidade e regionalismos.
+1. mapear metadados, sumários, prefácios metodológicos e capítulos relevantes das obras recebidas;
+2. manter os binários apenas como material privado temporário, fora do GitHub e da distribuição;
+3. abrir a primeira pergunta: sujeito expresso, sujeito recuperável/oculto, sujeito indeterminado e oração sem sujeito;
+4. registrar páginas, nomenclaturas, convergências e divergências;
+5. confrontar ao menos duas fontes adequadas quando possível;
+6. escrever síntese e exemplos próprios depois de fechar as fontes;
+7. criar ficha de regra, positivos, negativos e adversariais;
+8. convocar Eva Chara antes de qualquer implementação;
+9. somente depois decidir se Sintaxe v1 pode receber uma primeira regra;
+10. retomar os 66 conflitos lexicais apenas após fechar esta pausa estratégica.
+
+A persona primária de pesquisa é a **leitora-escritora de travessia**: mulher brasileira jovem-adulta, leitora e escritora de ficção, com afinidade especial por romance, fantasia e romantasia. É hipótese estratégica a validar, não totalidade do público nem autorização para estereótipos.
 
 ## Limites atuais
 
