@@ -75,10 +75,13 @@ Executor efêmero: `30726899840`.
   - zero grupos idênticos;
   - 66 grupos conflitantes.
 
-A matriz integral, a publicação da preview e o smoke público permanecem como gate oficial seguinte.
+A infraestrutura efêmera foi removida após a banca e o workflow oficial `Mass Notes Tiptap` foi restaurado integralmente. A cabeça limpa anterior a este registro é `8931c14589141b43fd2461abc669b4867f3194e0`.
+
+Esta atualização estritamente documental abre a matriz integral oficial. A publicação da preview, a renovação de cache e o smoke público permanecem bloqueados até o verde completo.
 
 ## O — O que permanece aberto
 
+- matriz integral oficial da cabeça documental limpa;
 - 66 conflitos editoriais de definições;
 - oito autorreferências de sinônimos;
 - quatro aliases técnicos;
