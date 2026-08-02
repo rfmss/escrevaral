@@ -104,7 +104,7 @@ jobs:
         working-directory: mass-notes-next
         run: npx playwright test tests/m1-e2-algures-outrora-source.spec.ts tests/m1-e2-algures-outrora-regression.spec.ts --project=chromium --project=firefox
 
-      - name: Fechar registro, restaurar workflow e validar fronteira
+      - name: Fechar registro e validar fronteira lexical
         shell: bash
         run: |
           set -euo pipefail
@@ -119,10 +119,7 @@ jobs:
           path.write_text(text, encoding='utf-8')
           PY
 
-          git show b5a7c39dfdba6b7505c38073d6abfe94bc9ed393:.github/workflows/mass-notes-tiptap.yml > .github/workflows/mass-notes-tiptap.yml
-          git rm .github/workflows/m1-e2-algures-outrora-executor.yml
           git rm mass-notes-next/scripts/apply-algures-outrora-tranche.py
-
           git restore mass-notes-next/public/anatomia-do-livro.html
           rm -f \
             mass-notes-next/e2-lexical-inventory.json \
@@ -135,8 +132,6 @@ jobs:
           import subprocess
 
           expected = {
-              '.github/workflows/mass-notes-tiptap.yml',
-              '.github/workflows/m1-e2-algures-outrora-executor.yml',
               'index.html',
               'lexical-engine.js',
               'service-worker.js',
@@ -155,7 +150,7 @@ jobs:
               )
           PY
 
-      - name: Commitar tranche atômica
+      - name: Commitar tranche lexical atômica
         shell: bash
         run: |
           set -euo pipefail
