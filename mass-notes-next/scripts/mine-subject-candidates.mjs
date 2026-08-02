@@ -89,6 +89,55 @@ export function parseConllu(content) {
   })
 }
 
+export function parseSentencePosition(sentId) {
+  const udMatch = /^(?<document>.+)_SENT(?<ordinal>\d+)$/u.exec(sentId)
+  if (udMatch?.groups) {
+    return {
+      documentId: udMatch.groups.document,
+      ordinal: Number(udMatch.groups.ordinal),
+      scheme: 'ud_sent_id',
+    }
+  }
+
+  const projectMatch = /^(?<document>.+)-(?<ordinal>\d+)$/u.exec(sentId)
+  if (projectMatch?.groups) {
+    return {
+      documentId: projectMatch.groups.document,
+      ordinal: Number(projectMatch.groups.ordinal),
+      scheme: 'project_fixture',
+    }
+  }
+
+  return null
+}
+
+function sentencePositionKey(position) {
+  return `${position.documentId}\u0000${position.ordinal}`
+}
+
+function buildSentencePositionIndex(sentences) {
+  const index = new Map()
+  for (const sentence of sentences) {
+    const position = parseSentencePosition(sentence.sentId)
+    if (!position) continue
+    const key = sentencePositionKey(position)
+    if (index.has(key)) {
+      throw new Error(`sent_id duplicado para posição documental: ${sentence.sentId}`)
+    }
+    index.set(key, sentence)
+  }
+  return index
+}
+
+function trustedPreviousSentence(sentence, positionIndex) {
+  const position = parseSentencePosition(sentence.sentId)
+  if (!position || position.ordinal <= 1) return null
+  return positionIndex.get(sentencePositionKey({
+    ...position,
+    ordinal: position.ordinal - 1,
+  })) ?? null
+}
+
 function isFiniteThirdPlural(token) {
   return FINITE_UPOS.has(token.upos)
     && token.features.VerbForm === 'Fin'
@@ -180,10 +229,14 @@ export function mineSubjectCandidates(content, metadata) {
   }
 
   const sentences = parseConllu(content)
+  const positionIndex = buildSentencePositionIndex(sentences)
   const candidates = []
+  let sentencesWithTrustedPreviousContext = 0
+  let candidatesWithTrustedPreviousContext = 0
 
   for (const sentence of sentences) {
-    const previous = sentence.index > 0 ? sentences[sentence.index - 1] : null
+    const previous = trustedPreviousSentence(sentence, positionIndex)
+    if (previous) sentencesWithTrustedPreviousContext += 1
     const sentencePluralNominals = pluralNominals(sentence)
     const previousPluralNominals = previous ? pluralNominals(previous) : []
 
@@ -211,6 +264,7 @@ export function mineSubjectCandidates(content, metadata) {
       if (se.length > 0) exclusions.push('contains_se')
       if (impersonal.length > 0) exclusions.push('impersonal_expletive_signal')
       if (exclusions.length > 0) structuralBucket = 'outside_initial_scope'
+      if (previous) candidatesWithTrustedPreviousContext += 1
 
       candidates.push({
         candidateId: `${sourceId}:${split}:${sentence.sentId}:${target.id}`,
@@ -231,6 +285,7 @@ export function mineSubjectCandidates(content, metadata) {
               sentId: previous.sentId,
               text: previous.text,
               pluralNominals: previousPluralNominals,
+              continuity: 'same_document_consecutive_sentence_id',
             }
           : null,
         target: {
@@ -265,7 +320,7 @@ export function mineSubjectCandidates(content, metadata) {
   }
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: new Date().toISOString(),
     purpose: 'Fila privada de candidatos estruturais; não contém decisão linguística automática.',
     source: {
@@ -282,10 +337,14 @@ export function mineSubjectCandidates(content, metadata) {
       testSplitOpened: false,
       requiresHumanAnnotation: true,
       maySupportVerified: false,
+      fileOrderTrustedAsDiscourseOrder: false,
+      previousContextRequiresSameDocumentConsecutiveId: true,
     },
     counts: {
       sentences: sentences.length,
+      sentencesWithTrustedPreviousContext,
       candidates: candidates.length,
+      candidatesWithTrustedPreviousContext,
       byStructuralBucket: candidates.reduce((counts, candidate) => {
         counts[candidate.structuralBucket] = (counts[candidate.structuralBucket] ?? 0) + 1
         return counts
@@ -332,7 +391,7 @@ function loadApprovedSource(sourceId, revision) {
 }
 
 function printHelp() {
-  console.log(`Uso:\n  node scripts/mine-subject-candidates.mjs \\\n    --input /caminho/fora/do/repo/arquivo.conllu \\\n    --output /caminho/fora/do/repo/candidatos.json \\\n    --source-id ud-portuguese-porttinari-2.18 \\\n    --revision 87a07e1fb761d6d0a6e2a4d82b11b308344dabb9 \\\n    --split train|dev\n\nO comando não baixa dados, rejeita split test e não produz rótulo linguístico.`)
+  console.log(`Uso:\n  node scripts/mine-subject-candidates.mjs \\\n    --input /caminho/fora/do/repo/arquivo.conllu \\\n    --output /caminho/fora/do/repo/candidatos.json \\\n    --source-id ud-portuguese-porttinari-2.18 \\\n    --revision 87a07e1fb761d6d0a6e2a4d82b11b308344dabb9 \\\n    --split train|dev\n\nO comando não baixa dados, rejeita split test, não confia na ordem física do arquivo e não produz rótulo linguístico.`)
 }
 
 function main() {
@@ -364,6 +423,7 @@ function main() {
   writeFileSync(outputPath, `${JSON.stringify(report, null, 2)}\n`, { flag: 'wx' })
   console.log(`Fila privada criada: ${outputPath}`)
   console.log(`Sentenças lidas: ${report.counts.sentences}`)
+  console.log(`Contextos anteriores confiáveis: ${report.counts.sentencesWithTrustedPreviousContext}`)
   console.log(`Candidatos estruturais: ${report.counts.candidates}`)
   console.log('Nenhum rótulo linguístico foi atribuído.')
 }
