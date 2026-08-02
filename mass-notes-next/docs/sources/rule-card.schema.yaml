@@ -201,7 +201,7 @@ implementation:
   uncertainty_visible_required: true
   reversal: string_or_null
 
- evaluation:
+evaluation:
   baseline: string_or_null
   metrics:
     precision: number_or_null
