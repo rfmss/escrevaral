@@ -1,9 +1,9 @@
 name: Executor lexical — algures e outrora
 
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - experiment/mass-notes-tiptap
     paths:
       - .github/workflows/m1-e2-algures-outrora-executor.yml
 
@@ -12,15 +12,15 @@ permissions:
 
 jobs:
   consolidar:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'experiment/mass-notes-tiptap'
+    if: github.ref_name == 'experiment/mass-notes-tiptap'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
-      - name: Checkout da cabeça experimental
+      - name: Checkout da branch experimental
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: experiment/mass-notes-tiptap
           fetch-depth: 0
 
       - name: Node.js
@@ -31,248 +31,7 @@ jobs:
           cache-dependency-path: mass-notes-next/package-lock.json
 
       - name: Aplicar consolidação editorial mínima
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-
-          lexical = Path('lexical-engine.js')
-          source = lexical.read_text(encoding='utf-8')
-
-          replacements = {
-              '    "algures":      "Advérbio de lugar: \'em algum lugar\', \'em alguma parte\'. Literário; mais raro que \'em algum lugar\' no uso corrente.",':
-              '    "algures":      "Advérbio de lugar: \'em algum lugar\', \'em alguma parte\'. Indica um lugar que não se sabe ou não se quer nomear diretamente; em sentido estrito, refere-se ao espaço, não ao tempo.",',
-              '    "outrora":      "Advérbio de tempo: \'em outro tempo\', \'antigamente\', \'antes\'. Literário; mais comum que \'antanho\' e ainda funcional na ficção histórica.",':
-              '    "outrora":      "Advérbio de tempo: \'noutro tempo\', \'antigamente\', \'em tempos passados\'. Situa algo em período anterior, sem exigir data precisa; pode produzir tom retrospectivo ou historicizante.",',
-              '    "algures":      "Advérbio de lugar: \'em algum lugar indefinido\'. Literário; mais preciso que \'em algum lugar\' quando a indeterminação é o efeito.",':
-              '    // algures consolidado acima; conflito editorial fechado em docs/logs/2026-08-01-m1-e2-algures-outrora.md',
-              '    "outrora":      "Advérbio temporal literário: \'em outro tempo\', \'antes\', \'antigamente\'. Útil em ficção histórica e narrativas de memória.",':
-              '    // outrora consolidado acima; conflito editorial fechado em docs/logs/2026-08-01-m1-e2-algures-outrora.md',
-          }
-
-          for old, new in replacements.items():
-              count = source.count(old)
-              if count != 1:
-                  raise SystemExit(f'Reposição lexical insegura: esperado 1, encontrado {count}: {old[:80]}')
-              source = source.replace(old, new)
-
-          lexical.write_text(source, encoding='utf-8')
-
-          old_version = '20260801-lexical-quica-dedup-v1'
-          new_version = '20260801-lexical-algures-outrora-v1'
-
-          index = Path('index.html')
-          index_text = index.read_text(encoding='utf-8')
-          if old_version not in index_text:
-              raise SystemExit('Versão anterior ausente em index.html')
-          index.write_text(index_text.replace(old_version, new_version), encoding='utf-8')
-
-          worker = Path('service-worker.js')
-          worker_text = worker.read_text(encoding='utf-8')
-          if 'const CACHE_NAME = "vereda-offline-v970";' not in worker_text:
-              raise SystemExit('Cache esperado v970 ausente')
-          if old_version not in worker_text:
-              raise SystemExit('Versão anterior ausente no service worker')
-          worker_text = worker_text.replace('const CACHE_NAME = "vereda-offline-v970";', 'const CACHE_NAME = "vereda-offline-v971";')
-          worker_text = worker_text.replace(old_version, new_version)
-          worker.write_text(worker_text, encoding='utf-8')
-
-          tests = Path('mass-notes-next/tests')
-          tests.mkdir(parents=True, exist_ok=True)
-
-          (tests / 'm1-e2-algures-outrora-source.spec.ts').write_text(r'''import { readFileSync } from 'node:fs'
-import { expect, test } from '@playwright/test'
-
-const SOURCE = new URL('../../lexical-engine.js', import.meta.url)
-
-const CASES = [
-  {
-    key: 'algures',
-    definition: "Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Indica um lugar que não se sabe ou não se quer nomear diretamente; em sentido estrito, refere-se ao espaço, não ao tempo.",
-  },
-  {
-    key: 'outrora',
-    definition: "Advérbio de tempo: 'noutro tempo', 'antigamente', 'em tempos passados'. Situa algo em período anterior, sem exigir data precisa; pode produzir tom retrospectivo ou historicizante.",
-  },
-] as const
-
-for (const lexicalCase of CASES) {
-  test(`E2 mantém uma única declaração ativa de ${lexicalCase.key}`, () => {
-    const content = readFileSync(SOURCE, 'utf8')
-    const declarations = content
-      .split('\n')
-      .filter((line) => line.trimStart().startsWith(`"${lexicalCase.key}":`))
-
-    expect(declarations, SOURCE.pathname).toHaveLength(1)
-    expect(declarations[0]).toContain(JSON.stringify(lexicalCase.definition))
-  })
-}
-''', encoding='utf-8')
-
-          (tests / 'm1-e2-algures-outrora-regression.spec.ts').write_text(r'''import { expect, test, type Page } from '@playwright/test'
-
-const CASES = [
-  {
-    key: 'algures',
-    manuscript: 'A carta estava algures entre os papéis.',
-    definition: "Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Indica um lugar que não se sabe ou não se quer nomear diretamente; em sentido estrito, refere-se ao espaço, não ao tempo.",
-  },
-  {
-    key: 'outrora',
-    manuscript: 'Outrora, a estação recebia trens todas as manhãs.',
-    definition: "Advérbio de tempo: 'noutro tempo', 'antigamente', 'em tempos passados'. Situa algo em período anterior, sem exigir data precisa; pode produzir tom retrospectivo ou historicizante.",
-  },
-] as const
-
-async function waitReady(page: Page) {
-  await page.goto('/')
-  await expect(page.getByLabel('Texto do documento')).toBeEditable()
-}
-
-async function openWords(page: Page) {
-  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
-  if (await opener.isVisible()) await opener.click()
-  await page.getByRole('tab', { name: 'palavras', exact: true }).click()
-  await expect(page.locator('#panel-palavras')).toBeVisible()
-}
-
-for (const lexicalCase of CASES) {
-  test(`E2 apresenta a definição consolidada de ${lexicalCase.key} sem alterar o manuscrito`, async ({ page }) => {
-    await waitReady(page)
-    const editor = page.getByLabel('Texto do documento')
-    await editor.fill(lexicalCase.manuscript)
-    const before = await editor.evaluate((element) => element.innerHTML)
-
-    await openWords(page)
-    await page.getByLabel('Palavra ou expressão curta').fill(lexicalCase.key)
-    await page.getByRole('button', { name: 'Consultar' }).click()
-
-    await expect(page.getByRole('status')).toContainText(/leitura lexical concluída/i)
-    const reading = page.locator('.lexical-reading')
-    await expect(reading).toBeVisible()
-    await expect(reading.locator('.lexical-definition')).toHaveText(lexicalCase.definition)
-    await expect(page.getByRole('button', { name: /substituir|trocar|aplicar/i })).toHaveCount(0)
-    expect(await editor.evaluate((element) => element.innerHTML)).toBe(before)
-  })
-}
-''', encoding='utf-8')
-
-          logs = Path('mass-notes-next/docs/logs')
-          logs.mkdir(parents=True, exist_ok=True)
-          (logs / '2026-08-01-m1-e2-algures-outrora.md').write_text(r'''# M1 E2 — consolidação editorial de `algures` e `outrora`
-
-Data: 2026-08-01  
-Branch: `experiment/mass-notes-tiptap`  
-PR: `#155` — aberto e em rascunho  
-Estado: **banca específica verde; matriz integral oficial pendente**
-
-> **Eva Chara, entre em banca.**
-
-## C — Cenário observado
-
-A auditoria de definições registrava 68 grupos conflitantes. O primeiro par editorial coerente era formado por dois advérbios de localização literária:
-
-- `algures`: duas redações concorrentes sobre lugar indefinido;
-- `outrora`: duas redações concorrentes sobre tempo passado.
-
-Em ambos os casos, a semântica do objeto JavaScript fazia a última declaração sobrescrever a primeira. A informação descartada permanecia invisível no produto e a redação efetiva misturava definição lexical com afirmações editoriais não demonstradas.
-
-Baseline:
-
-- 1.010 declarações brutas;
-- 936 chaves efetivas;
-- 68 grupos repetidos;
-- 74 declarações sobrescritas;
-- zero grupos idênticos;
-- 68 grupos conflitantes.
-
-## L — Limite
-
-Este lote consolida somente `algures` e `outrora`.
-
-Não foram alterados:
-
-- outros 66 conflitos editoriais;
-- sinônimos, aliases ou cartões de polissemia;
-- regras contextuais;
-- interface da ferramenta Palavras;
-- qualquer engine além da fonte lexical;
-- `main`, Gate 14 ou a aplicação pública.
-
-## A — Fundamentação e ação mínima
-
-### `algures`
-
-As fontes lexicográficas convergem em dois pontos: é advérbio de lugar e designa algum lugar, especialmente um lugar não sabido ou não nomeado diretamente. A orientação de uso espacial foi preservada porque consultas linguísticas registram como não estrito o emprego temporal em construções como “algures no ano”.
-
-Redação consolidada:
-
-> Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Indica um lugar que não se sabe ou não se quer nomear diretamente; em sentido estrito, refere-se ao espaço, não ao tempo.
-
-### `outrora`
-
-As fontes convergem em `noutro tempo`, `antigamente` e `em tempos passados`. Foram retiradas as restrições artificiais a ficção histórica e narrativas de memória. A nota sobre efeito retrospectivo ou historicizante é orientação editorial do Escrevaral, não uma ampliação do significado lexical.
-
-Redação consolidada:
-
-> Advérbio de tempo: 'noutro tempo', 'antigamente', 'em tempos passados'. Situa algo em período anterior, sem exigir data precisa; pode produzir tom retrospectivo ou historicizante.
-
-Fontes consultadas e parafraseadas:
-
-- Caldas Aulete, verbetes `algures` e `outrora`;
-- Michaelis, verbete `outrora`;
-- Priberam, verbetes `algures` e `outrora`;
-- Infopédia, verbetes `algures` e `outrora`;
-- Ciberdúvidas, consulta “O uso do advérbio algures”.
-
-Ação técnica:
-
-1. uma única declaração ativa por verbete;
-2. redações concorrentes substituídas por sínteses novas e explícitas;
-3. linhas desativadas convertidas em comentários de rastreabilidade, preservando a estabilidade das linhas do restante do inventário;
-4. auditoria lexical regenerada;
-5. contratos estáticos de fonte;
-6. regressões de produto em Chromium e Firefox;
-7. renovação pública `20260801-lexical-algures-outrora-v1` e cache `v971`.
-
-## R — Resultado específico
-
-Executor efêmero: `__RUN_ID__`.
-
-- contratos de fonte e produto: **__TARGETED_RESULT__**;
-- TypeScript e build: verdes;
-- auditoria E2 completa: verde;
-- contagem final esperada e reproduzida:
-  - 1.008 declarações brutas;
-  - 936 chaves efetivas;
-  - 66 grupos repetidos;
-  - 72 declarações sobrescritas;
-  - zero grupos idênticos;
-  - 66 grupos conflitantes.
-
-A matriz integral, a publicação da preview e o smoke público permanecem como gate oficial seguinte.
-
-## O — O que permanece aberto
-
-- 66 conflitos editoriais de definições;
-- oito autorreferências de sinônimos;
-- quatro aliases técnicos;
-- `leitor_modelo` vazio;
-- cartões de polissemia ausentes;
-- expansão lexical bloqueada;
-- nota lexical mantida em 6,5 até existir ganho qualitativo mais amplo e banca humana.
-
-## Parecer Eva — banca específica
-
-- dimensão: Léxico e polissemia;
-- escopo: dois advérbios, sem generalização;
-- ganho: remoção de sobrescrita silenciosa e orientação editorial mais precisa;
-- nota: **6,5**, mantida;
-- decisão: `PROSSEGUIR COM CONDIÇÕES` para a matriz integral;
-- condição: preview somente se todos os contratos oficiais ficarem verdes.
-''', encoding='utf-8')
-          PY
+        run: python3 mass-notes-next/scripts/apply-algures-outrora-tranche.py
 
       - name: Instalar dependências reproduzíveis
         working-directory: mass-notes-next
@@ -317,7 +76,7 @@ A matriz integral, a publicação da preview e o smoke público permanecem como 
         working-directory: mass-notes-next
         run: npx playwright test tests/m1-e2-algures-outrora-source.spec.ts tests/m1-e2-algures-outrora-regression.spec.ts --project=chromium --project=firefox
 
-      - name: Fechar registro e validar fronteira do commit
+      - name: Fechar registro e validar fronteira
         shell: bash
         run: |
           set -euo pipefail
@@ -333,6 +92,7 @@ A matriz integral, a publicação da preview e o smoke público permanecem como 
           PY
 
           git rm .github/workflows/m1-e2-algures-outrora-executor.yml
+          git rm mass-notes-next/scripts/apply-algures-outrora-tranche.py
           git diff --check
 
           python3 - <<'PY'
@@ -345,34 +105,27 @@ A matriz integral, a publicação da preview e o smoke público permanecem como 
               'service-worker.js',
               'mass-notes-next/e2-definition-duplicates.json',
               'mass-notes-next/e2-definition-duplicates.md',
+              'mass-notes-next/scripts/apply-algures-outrora-tranche.py',
               'mass-notes-next/tests/m1-e2-algures-outrora-source.spec.ts',
               'mass-notes-next/tests/m1-e2-algures-outrora-regression.spec.ts',
               'mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md',
           }
-          changed = set(subprocess.check_output(
-              ['git', 'status', '--short'], text=True
-          ).splitlines())
-          paths = {line[3:] for line in changed}
+          lines = subprocess.check_output(['git', 'status', '--short'], text=True).splitlines()
+          paths = {line[3:] for line in lines}
           unexpected = paths - allowed
           missing = allowed - paths
           if unexpected or missing:
-              raise SystemExit(f'Fronteira inválida; inesperados={sorted(unexpected)} ausentes={sorted(missing)}')
+              raise SystemExit(
+                  f'Fronteira inválida; inesperados={sorted(unexpected)} ausentes={sorted(missing)}'
+              )
           PY
 
       - name: Commitar tranche atômica e remover executor
         shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html lexical-engine.js service-worker.js \
-            mass-notes-next/e2-definition-duplicates.json \
-            mass-notes-next/e2-definition-duplicates.md \
-            mass-notes-next/tests/m1-e2-algures-outrora-source.spec.ts \
-            mass-notes-next/tests/m1-e2-algures-outrora-regression.spec.ts \
-            mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md \
-            .github/workflows/m1-e2-algures-outrora-executor.yml
+          git add -A
           git commit -m "feat(lexico): consolidar algures e outrora"
           git push origin HEAD:experiment/mass-notes-tiptap
