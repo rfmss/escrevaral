@@ -3,7 +3,7 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho  
-Estado de entrada: **banca vermelha reproduzida; correção mínima autorizada pela evidência**
+Estado: **correção mínima aplicada e regressões específicas verdes; matriz oficial pendente**
 
 ## C — Cenário observado
 
@@ -27,58 +27,73 @@ A leitura do código mostrou duas fronteiras distintas:
 
 ### Corrida da própria aba
 
-`persistDraft()` não possui trava ou fila. O autosave de 650 ms e `Ctrl+S` podem iniciar duas gravações com a mesma revisão. Uma vence; a outra recebe `DocumentConflictError` contra a gravação da própria aba e exibe um falso conflito externo.
+`persistDraft()` não possuía trava ou fila. O autosave de 650 ms e `Ctrl+S` podiam iniciar duas gravações com a mesma revisão. Uma vencia; a outra recebia `DocumentConflictError` contra a gravação da própria aba e exibia um falso conflito externo.
 
-Além disso, a conclusão de uma gravação substitui o draft por `saved` e limpa `dirty` sem verificar se houve nova edição durante a operação. Em uma gravação suficientemente lenta, uma edição posterior pode perder seu estado de pendência.
+Além disso, a conclusão de uma gravação substituía o draft por `saved` e limpava `dirty` sem verificar se houve nova edição durante a operação. Em uma gravação suficientemente lenta, uma edição posterior podia perder seu estado de pendência.
 
 ### Cenário misto não determinístico
 
-O teste altera primeiro o título e só depois abre a aba Pulso para alterar o favorito. Em execução lenta, o autosave do título pode terminar antes da alteração de metadado. Nesse caso não existem duas versões concorrentes: a segunda aba recebe o título remoto limpa, altera o favorito e salva uma versão combinada. O teste espera conflito, mas não criou a concorrência de forma determinística.
+O teste alterava primeiro o título e só depois abria a aba Pulso para alterar o favorito. Em execução lenta, o autosave do título podia terminar antes da alteração de metadado. Nesse caso não existiam duas versões concorrentes: a segunda aba recebia o título remoto limpo, alterava o favorito e salvava uma versão combinada. O teste esperava conflito, mas não criava a concorrência de forma determinística.
 
-## A — Arquitetura escolhida
+## A — Arquitetura aplicada
 
-Aplicar a menor correção coerente:
+Cabeça funcional: `a90f7a11151b962d183f74e4ee32dbccacd1913f`.
 
-1. serializar chamadas de `persistDraft()` por aba;
-2. coalescer pedidos de salvamento que chegam enquanto uma gravação está ativa;
-3. registrar uma série de mutação local;
-4. se houver edição durante a gravação, rebasear a revisão do draft mais recente e executar nova gravação antes de resolver a promessa;
-5. nunca limpar `dirty` de uma edição posterior;
-6. manter BroadcastChannel, IndexedDB, revisões e política de conflito existentes;
-7. tornar o teste misto realmente concorrente, preparando a aba Pulso antes das duas mutações;
-8. adicionar regressão que dispara dois `Ctrl+S` síncronos e proíbe conflito contra a própria aba.
+A menor correção coerente foi aplicada:
 
-Não fazer:
+1. chamadas de `persistDraft()` são serializadas por aba;
+2. pedidos de salvamento durante uma gravação são coalescidos;
+3. cada edição incrementa uma série de mutação local;
+4. edição ocorrida durante gravação é rebaseada sobre a nova revisão e salva na sequência;
+5. uma gravação antiga não limpa `dirty` de uma edição posterior;
+6. `conflictRef` torna o bloqueio de novas gravações síncrono, sem esperar novo render React;
+7. BroadcastChannel, IndexedDB, esquema e política de conflito foram preservados;
+8. o cenário misto prepara a aba Pulso antes das duas mutações, tornando a concorrência determinística;
+9. nova regressão dispara salvamentos sobrepostos e exige preservação da edição posterior após recarga.
 
-- aumentar timeout;
-- adicionar retry ao Playwright;
-- reduzir a matriz;
-- tocar em engines linguísticas;
-- alterar esquema do IndexedDB;
-- fazer merge ou executar Gate 14.
+Não foram usados:
 
-## R — Resultado exigido
+- aumento de timeout;
+- retry no Playwright;
+- redução da matriz;
+- alteração em engines linguísticas;
+- mudança de esquema do IndexedDB;
+- merge ou Gate 14.
 
-O lote só fecha se:
+## R — Resultado específico
 
-- dois pedidos simultâneos de `Ctrl+S` terminarem em `Salvo`, sem banner de conflito;
-- edição feita durante gravação permanecer pendente e for salva na sequência;
-- conflito real entre abas continuar preservando as duas versões;
-- o cenário misto produzir conflito de forma determinística;
-- os testes anteriormente vermelhos passarem em Chromium e Firefox;
-- matriz integral, build, Argila e coerência ficarem verdes;
-- preview só for publicada após o verde integral.
+Executor efêmero: `30724776606` — verde.
+
+O harness executou seis contratos em Chromium e Firefox:
+
+- fila de salvamento sem conflito contra a própria aba;
+- preservação de edição posterior à primeira gravação;
+- conflito misto real entre manuscrito e metadados;
+- troca de documento sem transportar decorations ou navegação.
+
+Resultado: **6/6**.
+
+Também ficaram verdes no executor:
+
+- aplicação exata do patch;
+- TypeScript e build Vite do harness;
+- remoção do workflow e do script temporários;
+- commit atômico contendo apenas `App.tsx`, o ajuste do cenário misto e a regressão da fila.
+
+Os workflows disparados pelo push do `GITHUB_TOKEN` aparecem como `action_required`, comportamento esperado do GitHub para impedir recursão automática. Este registro documental é o commit humano que reabre a validação oficial completa.
 
 ## O — O que permanece aberto
 
+- build e matriz oficial da cabeça documental final;
+- Argila, coerência, publicação, cache da preview e smoke público;
 - o lote não cria sincronização ou colaboração;
 - BroadcastChannel continua sendo apenas aviso entre abas do mesmo navegador;
 - não há merge automático de conteúdo;
 - conflitos reais continuam exigindo decisão autoral;
-- a deduplicação lexical continua aguardando fechamento integrado depois desta estabilização.
+- o fechamento integrado da deduplicação lexical depende do verde oficial.
 
 ## Decisão
 
 `PROSSEGUIR COM CONDIÇÕES`.
 
-A correção deve ficar restrita à fila de salvamento, às referências de conflito e aos testes que reproduzem as duas corridas. Nenhuma outra refatoração de `App.tsx` está autorizada.
+A correção funcional passou na banca específica. O fechamento e a publicação permanecem pausados até a matriz oficial integral da cabeça documental ficar verde.
