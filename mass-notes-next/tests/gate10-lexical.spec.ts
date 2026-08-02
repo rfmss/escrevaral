@@ -27,8 +27,12 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
   const editor = page.getByLabel('Texto do documento')
   await expect(editor).toBeEditable()
   const manuscript = 'Melancolia atravessa a casa sem pedir licença.'
-  await editor.fill(manuscript)
-  await expect(editor).toContainText('Melancolia atravessa')
+
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.press('Backspace')
+  await page.keyboard.insertText(manuscript)
+  await expect(editor).toHaveText(manuscript)
 
   await expect.poll(() => editor.evaluate((element, expected) => {
     const host = element as HTMLElement & {
