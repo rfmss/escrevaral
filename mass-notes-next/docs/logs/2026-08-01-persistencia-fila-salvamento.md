@@ -3,97 +3,97 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho  
-Estado: **correção mínima aplicada e regressões específicas verdes; matriz oficial pendente**
+Estado: **fechado e validado na matriz integral**
 
 ## C — Cenário observado
 
-A deduplicação lexical de `quica` passou em auditoria, build e testes próprios. Duas execuções integrais consecutivas falharam fora do léxico:
+Duas matrizes consecutivas, executadas durante o lote lexical de `quica`, revelaram uma fronteira preexistente da persistência:
 
-1. workflow `30723668283`: Firefox não recebeu o alerta esperado no cenário misto entre manuscrito e metadados;
-2. workflow `30724005784`: o mesmo cenário voltou a falhar em Firefox e o teste de troca de documento entrou em `Conflito` na própria aba ao tentar salvar.
+1. `30723668283`: Firefox não produziu o conflito misto esperado entre manuscrito e metadados;
+2. `30724005784`: a falha se repetiu em Firefox e Chromium exibiu `Conflito` contra a própria aba durante a troca de documento.
 
-A segunda execução terminou em `352/354`:
+O segundo artefato mostrou dois comportamentos distintos:
 
-- `gate7-review-decorations.spec.ts`: Chromium aguardava `Salvo`, mas a captura mostrou `Conflito` e o banner “Outra aba também alterou esta página” em um teste com uma única página;
-- `m0-9-integrated.spec.ts`: Firefox terminou com título e favorito combinados e estado `Salvo`, sem produzir conflito entre as duas versões locais.
+- autosave e `Ctrl+S` podiam iniciar gravações paralelas com a mesma revisão;
+- o cenário misto do teste não criava concorrência de forma determinística.
 
-Evidência do artefato `8825821657`, digest `sha256:f35684e3523b981597e44c7a3f7f733cf6383927e02bdbb0f29d846df742b9ee`.
+## L — Limite
 
-## L — Limite e impacto
+A correção ficou restrita à coordenação de salvamento e às regressões correspondentes. Não houve:
 
-O problema não pertence à engine lexical.
-
-A leitura do código mostrou duas fronteiras distintas:
-
-### Corrida da própria aba
-
-`persistDraft()` não possuía trava ou fila. O autosave de 650 ms e `Ctrl+S` podiam iniciar duas gravações com a mesma revisão. Uma vencia; a outra recebia `DocumentConflictError` contra a gravação da própria aba e exibia um falso conflito externo.
-
-Além disso, a conclusão de uma gravação substituía o draft por `saved` e limpava `dirty` sem verificar se houve nova edição durante a operação. Em uma gravação suficientemente lenta, uma edição posterior podia perder seu estado de pendência.
-
-### Cenário misto não determinístico
-
-O teste alterava primeiro o título e só depois abria a aba Pulso para alterar o favorito. Em execução lenta, o autosave do título podia terminar antes da alteração de metadado. Nesse caso não existiam duas versões concorrentes: a segunda aba recebia o título remoto limpo, alterava o favorito e salvava uma versão combinada. O teste esperava conflito, mas não criava a concorrência de forma determinística.
+- aumento de timeout;
+- retry no Playwright;
+- mudança no esquema do IndexedDB;
+- merge automático de conteúdo;
+- alteração nas engines linguísticas;
+- alteração em `main`;
+- execução do Gate 14.
 
 ## A — Arquitetura aplicada
 
 Cabeça funcional: `a90f7a11151b962d183f74e4ee32dbccacd1913f`.
 
-A menor correção coerente foi aplicada:
+Mudanças mínimas:
 
-1. chamadas de `persistDraft()` são serializadas por aba;
-2. pedidos de salvamento durante uma gravação são coalescidos;
-3. cada edição incrementa uma série de mutação local;
-4. edição ocorrida durante gravação é rebaseada sobre a nova revisão e salva na sequência;
-5. uma gravação antiga não limpa `dirty` de uma edição posterior;
-6. `conflictRef` torna o bloqueio de novas gravações síncrono, sem esperar novo render React;
-7. BroadcastChannel, IndexedDB, esquema e política de conflito foram preservados;
-8. o cenário misto prepara a aba Pulso antes das duas mutações, tornando a concorrência determinística;
-9. nova regressão dispara salvamentos sobrepostos e exige preservação da edição posterior após recarga.
+1. `persistDraft()` serializa gravações por aba;
+2. pedidos durante uma gravação são coalescidos;
+3. cada edição incrementa uma série local de mutação;
+4. edição ocorrida durante a gravação é rebaseada sobre a revisão salva e persistida na sequência;
+5. uma conclusão antiga não limpa o estado `dirty` de edição posterior;
+6. `conflictRef` bloqueia nova gravação de forma síncrona quando existe conflito real;
+7. BroadcastChannel, revisões e política de preservação das duas versões foram mantidos;
+8. o teste misto prepara as duas superfícies antes das mutações concorrentes;
+9. uma regressão dedicada dispara salvamentos sobrepostos e verifica a edição final após recarga.
 
-Não foram usados:
+## R — Resultado reproduzível
 
-- aumento de timeout;
-- retry no Playwright;
-- redução da matriz;
-- alteração em engines linguísticas;
-- mudança de esquema do IndexedDB;
-- merge ou Gate 14.
+Banca específica `30724776606`:
 
-## R — Resultado específico
+- seis contratos em Chromium e Firefox;
+- **6/6**;
+- nenhum conflito contra a própria aba;
+- edição posterior preservada após recarga;
+- conflito misto real preserva as duas versões;
+- troca de documento não transporta decorations.
 
-Executor efêmero: `30724776606` — verde.
+Cabeça documental validada: `2302c90be43c116d600c0e6d18027c12a48988f9`.
 
-O harness executou seis contratos em Chromium e Firefox:
+Matriz oficial `30724861899`:
 
-- fila de salvamento sem conflito contra a própria aba;
-- preservação de edição posterior à primeira gravação;
-- conflito misto real entre manuscrito e metadados;
-- troca de documento sem transportar decorations ou navegação.
+- **356/356** em Chromium e Firefox;
+- nova regressão da fila: verde nos dois navegadores;
+- conflito misto: verde nos dois navegadores;
+- troca de documento: verde nos dois navegadores;
+- auditoria lexical e E2-V: verdes;
+- TypeScript e build: verdes;
+- publicação da preview: verde;
+- renovação de cache: verde;
+- smoke público: verde;
+- artefato `mass-notes-tiptap-30724861899`;
+- artifact ID `8826061044`;
+- digest `sha256:a44a6fd373dbb01dc1a3787b452b9228dfdab65a493bb93b2841fe01f5719846`.
 
-Resultado: **6/6**.
+Desempenho observado na matriz:
 
-Também ficaram verdes no executor:
-
-- aplicação exata do patch;
-- TypeScript e build Vite do harness;
-- remoção do workflow e do script temporários;
-- commit atômico contendo apenas `App.tsx`, o ajuste do cenário misto e a regressão da fila.
-
-Os workflows disparados pelo push do `GITHUB_TOKEN` aparecem como `action_required`, comportamento esperado do GitHub para impedir recursão automática. Este registro documental é o commit humano que reabre a validação oficial completa.
+- Chromium: `p95SaveMs` 197 ms;
+- Firefox: `p95SaveMs` 135 ms;
+- sessão prolongada, DOM e quantidade de páginas: verdes.
 
 ## O — O que permanece aberto
 
-- build e matriz oficial da cabeça documental final;
-- Argila, coerência, publicação, cache da preview e smoke público;
-- o lote não cria sincronização ou colaboração;
-- BroadcastChannel continua sendo apenas aviso entre abas do mesmo navegador;
-- não há merge automático de conteúdo;
-- conflitos reais continuam exigindo decisão autoral;
-- o fechamento integrado da deduplicação lexical depende do verde oficial.
+- BroadcastChannel continua limitado a abas do mesmo navegador;
+- não existe sincronização remota ou colaboração;
+- conflitos reais continuam sem merge automático e exigem decisão autoral;
+- uso prolongado em dispositivos físicos ainda pertence ao gate humano;
+- a próxima frente continua sendo integridade lexical, não uma nova engine.
 
 ## Decisão
 
-`PROSSEGUIR COM CONDIÇÕES`.
+`PROSSEGUIR` para o próximo pequeno lote lexical, preservando:
 
-A correção funcional passou na banca específica. O fechamento e a publicação permanecem pausados até a matriz oficial integral da cabeça documental ficar verde.
+- uma família editorial por tranche;
+- redações descartada e retida registradas;
+- teste por verbete;
+- matriz integral;
+- PR em rascunho;
+- `main` e Gate 14 intactos.
