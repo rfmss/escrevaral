@@ -1,0 +1,1576 @@
+{
+  "schema": "escrevaral.m1-e2.definition-duplicates",
+  "version": 1,
+  "date": "2026-08-02",
+  "counts": {
+    "rawDeclarations": 1008,
+    "effectiveKeys": 936,
+    "duplicateGroups": 66,
+    "overwrittenDeclarations": 72,
+    "identicalGroups": 0,
+    "normalizedEquivalentGroups": 0,
+    "conflictingGroups": 66
+  },
+  "duplicateGroups": [
+    {
+      "key": "silencio",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1707,
+          "retained": false,
+          "characters": 161,
+          "text": "Ausência de som; estado de quem não fala. Na ficção, o silêncio é tão expressivo quanto a palavra — pode ser personagem, escolha ou ausência. Use-o com intenção.",
+          "preview": "Ausência de som; estado de quem não fala. Na ficção, o silêncio é tão expressivo quanto a palavra — pode ser personagem, escolha ou ausência. Use-o com intenção."
+        },
+        {
+          "line": 2578,
+          "retained": false,
+          "characters": 348,
+          "text": "O silêncio na ficção não é ausência — é presença de outra qualidade. O que a personagem não diz é tão revelador quanto o que diz. O silêncio que o texto preserva ao redor de um assunto sinaliza tabu, dor, limite. Na ficção contemporânea, o silêncio pode ser estratégia narrativa: deixar o leitor chegar à conclusão que a narração não quer formular.",
+          "preview": "O silêncio na ficção não é ausência — é presença de outra qualidade. O que a personagem não diz é tão revelador quanto o que diz. O silêncio que o texto preserva ao redor de um as…"
+        },
+        {
+          "line": 2775,
+          "retained": true,
+          "characters": 328,
+          "text": "O silêncio na ficção não é ausência — é presença de outra natureza. O que não é dito carrega tanto quanto o que é dito. O silêncio entre personagens pode ser proteção, punição, cumplicidade ou incomunicabilidade. Aprender a escrever o silêncio — o que o circunda, o que ele pesa — é uma das habilidades mais avançadas da ficção.",
+          "preview": "O silêncio na ficção não é ausência — é presença de outra natureza. O que não é dito carrega tanto quanto o que é dito. O silêncio entre personagens pode ser proteção, punição, cu…"
+        }
+      ],
+      "discardedDeclarations": 2,
+      "retainedLine": 2775,
+      "retainedText": "O silêncio na ficção não é ausência — é presença de outra natureza. O que não é dito carrega tanto quanto o que é dito. O silêncio entre personagens pode ser proteção, punição, cumplicidade ou incomunicabilidade. Aprender a escrever o silêncio — o que o circunda, o que ele pesa — é uma das habilidades mais avançadas da ficção."
+    },
+    {
+      "key": "saudade",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1708,
+          "retained": false,
+          "characters": 157,
+          "text": "Sentimento de ausência com afeto: sentir falta de alguém ou algo amado. Palavra de difícil tradução; marca a afetividade brasileira e a narrativa de memória.",
+          "preview": "Sentimento de ausência com afeto: sentir falta de alguém ou algo amado. Palavra de difícil tradução; marca a afetividade brasileira e a narrativa de memória."
+        },
+        {
+          "line": 2110,
+          "retained": true,
+          "characters": 219,
+          "text": "A palavra portuguesa sem equivalente perfeito em nenhuma outra língua: presença dolorosa do ausente. Na literatura brasileira, saudade não é apenas nostalgia — é um modo de relação com o tempo, com o lugar, com a morte.",
+          "preview": "A palavra portuguesa sem equivalente perfeito em nenhuma outra língua: presença dolorosa do ausente. Na literatura brasileira, saudade não é apenas nostalgia — é um modo de relaçã…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2110,
+      "retainedText": "A palavra portuguesa sem equivalente perfeito em nenhuma outra língua: presença dolorosa do ausente. Na literatura brasileira, saudade não é apenas nostalgia — é um modo de relação com o tempo, com o lugar, com a morte."
+    },
+    {
+      "key": "solidao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1709,
+          "retained": false,
+          "characters": 139,
+          "text": "Estado de estar só; mas também sensação de desconexão mesmo entre pessoas. Diferente de 'isolamento' (físico) e de 'abandono' (relacional).",
+          "preview": "Estado de estar só; mas também sensação de desconexão mesmo entre pessoas. Diferente de 'isolamento' (físico) e de 'abandono' (relacional)."
+        },
+        {
+          "line": 2109,
+          "retained": true,
+          "characters": 233,
+          "text": "Estado de estar só — não como fato, mas como sentimento. A solidão de um personagem em multidão é mais densa do que a solidão física. Na literatura brasileira, a solidão é tema central: Lima Barreto, Clarice, Carolina Maria de Jesus.",
+          "preview": "Estado de estar só — não como fato, mas como sentimento. A solidão de um personagem em multidão é mais densa do que a solidão física. Na literatura brasileira, a solidão é tema ce…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2109,
+      "retainedText": "Estado de estar só — não como fato, mas como sentimento. A solidão de um personagem em multidão é mais densa do que a solidão física. Na literatura brasileira, a solidão é tema central: Lima Barreto, Clarice, Carolina Maria de Jesus."
+    },
+    {
+      "key": "lacuna",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1729,
+          "retained": false,
+          "characters": 152,
+          "text": "Substantivo: 'falta', 'espaço vazio', 'o que não foi dito'. Na ficção, as lacunas são tão poderosas quanto o que está escrito — o que o leitor preenche.",
+          "preview": "Substantivo: 'falta', 'espaço vazio', 'o que não foi dito'. Na ficção, as lacunas são tão poderosas quanto o que está escrito — o que o leitor preenche."
+        },
+        {
+          "line": 2172,
+          "retained": true,
+          "characters": 231,
+          "text": "O vazio que faz sentido. Na teoria literária, a lacuna é o que o texto não diz e o leitor preenche — com experiência, medo, desejo. Toda história tem lacunas deliberadas; o escritor escolhe o que ocultar tanto quanto o que mostrar.",
+          "preview": "O vazio que faz sentido. Na teoria literária, a lacuna é o que o texto não diz e o leitor preenche — com experiência, medo, desejo. Toda história tem lacunas deliberadas; o escrit…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2172,
+      "retainedText": "O vazio que faz sentido. Na teoria literária, a lacuna é o que o texto não diz e o leitor preenche — com experiência, medo, desejo. Toda história tem lacunas deliberadas; o escritor escolhe o que ocultar tanto quanto o que mostrar."
+    },
+    {
+      "key": "eufemismo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1738,
+          "retained": false,
+          "characters": 178,
+          "text": "Figura de linguagem: substituição de palavra ou ideia desagradável por outra mais suave. Ex.: 'passou dessa para melhor' em vez de 'morreu'. Cuidado: o excesso apaga a realidade.",
+          "preview": "Figura de linguagem: substituição de palavra ou ideia desagradável por outra mais suave. Ex.: 'passou dessa para melhor' em vez de 'morreu'. Cuidado: o excesso apaga a realidade."
+        },
+        {
+          "line": 1775,
+          "retained": false,
+          "characters": 190,
+          "text": "Substituição de palavra ou ideia desagradável por outra mais suave. 'Passou dessa para melhor.' 'Terceira idade.' Cuidado: o excesso de eufemismo apaga a realidade — escolha com consciência.",
+          "preview": "Substituição de palavra ou ideia desagradável por outra mais suave. 'Passou dessa para melhor.' 'Terceira idade.' Cuidado: o excesso de eufemismo apaga a realidade — escolha com c…"
+        },
+        {
+          "line": 1913,
+          "retained": true,
+          "characters": 167,
+          "text": "Substituição de uma palavra por outra de sentido suavizado. 'Faleceu' por 'morreu'; 'passou para a outra' por 'morreu'. Na ficção, eufemismos revelam quem evita o que.",
+          "preview": "Substituição de uma palavra por outra de sentido suavizado. 'Faleceu' por 'morreu'; 'passou para a outra' por 'morreu'. Na ficção, eufemismos revelam quem evita o que."
+        }
+      ],
+      "discardedDeclarations": 2,
+      "retainedLine": 1913,
+      "retainedText": "Substituição de uma palavra por outra de sentido suavizado. 'Faleceu' por 'morreu'; 'passou para a outra' por 'morreu'. Na ficção, eufemismos revelam quem evita o que."
+    },
+    {
+      "key": "anacoluto",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1740,
+          "retained": false,
+          "characters": 148,
+          "text": "Figura de sintaxe: ruptura da estrutura gramatical da frase, geralmente para expressar emoção ou pensamento fragmentado. Recurso de voz e oralidade.",
+          "preview": "Figura de sintaxe: ruptura da estrutura gramatical da frase, geralmente para expressar emoção ou pensamento fragmentado. Recurso de voz e oralidade."
+        },
+        {
+          "line": 1920,
+          "retained": true,
+          "characters": 163,
+          "text": "Ruptura da construção gramatical esperada, deixando um termo em suspenso. 'Eu, aquele assunto... prefiro não falar.' Revela perturbação, pudor, memória incompleta.",
+          "preview": "Ruptura da construção gramatical esperada, deixando um termo em suspenso. 'Eu, aquele assunto... prefiro não falar.' Revela perturbação, pudor, memória incompleta."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1920,
+      "retainedText": "Ruptura da construção gramatical esperada, deixando um termo em suspenso. 'Eu, aquele assunto... prefiro não falar.' Revela perturbação, pudor, memória incompleta."
+    },
+    {
+      "key": "zeugma",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1742,
+          "retained": false,
+          "characters": 125,
+          "text": "Figura de sintaxe: omissão de uma palavra já expressa antes. 'Uns votaram sim; outros, [votaram] não.' Cria ritmo e concisão.",
+          "preview": "Figura de sintaxe: omissão de uma palavra já expressa antes. 'Uns votaram sim; outros, [votaram] não.' Cria ritmo e concisão."
+        },
+        {
+          "line": 1921,
+          "retained": true,
+          "characters": 149,
+          "text": "Omissão de um termo que apareceu antes e está subentendido. 'Ela amou a música; eu, a poesia.' Cria ritmo econômico — o que não é dito une as partes.",
+          "preview": "Omissão de um termo que apareceu antes e está subentendido. 'Ela amou a música; eu, a poesia.' Cria ritmo econômico — o que não é dito une as partes."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1921,
+      "retainedText": "Omissão de um termo que apareceu antes e está subentendido. 'Ela amou a música; eu, a poesia.' Cria ritmo econômico — o que não é dito une as partes."
+    },
+    {
+      "key": "anafora",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1745,
+          "retained": false,
+          "characters": 120,
+          "text": "Figura de repetição: repetição de uma palavra no início de versos ou orações consecutivas. Cria ênfase e ritmo litânico.",
+          "preview": "Figura de repetição: repetição de uma palavra no início de versos ou orações consecutivas. Cria ênfase e ritmo litânico."
+        },
+        {
+          "line": 1910,
+          "retained": true,
+          "characters": 185,
+          "text": "Repetição de uma palavra ou expressão no início de versos ou orações consecutivas. Cria ritmo e ênfase. 'Quero a paz. Quero o silêncio. Quero o sono.' A anáfora não é tique — é escolha.",
+          "preview": "Repetição de uma palavra ou expressão no início de versos ou orações consecutivas. Cria ritmo e ênfase. 'Quero a paz. Quero o silêncio. Quero o sono.' A anáfora não é tique — é es…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1910,
+      "retainedText": "Repetição de uma palavra ou expressão no início de versos ou orações consecutivas. Cria ritmo e ênfase. 'Quero a paz. Quero o silêncio. Quero o sono.' A anáfora não é tique — é escolha."
+    },
+    {
+      "key": "catafora",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1747,
+          "retained": false,
+          "characters": 120,
+          "text": "Referência que aponta para algo que ainda virá no texto ('Ele disse isso: a verdade dói.'). Cria expectativa e suspense.",
+          "preview": "Referência que aponta para algo que ainda virá no texto ('Ele disse isso: a verdade dói.'). Cria expectativa e suspense."
+        },
+        {
+          "line": 1911,
+          "retained": true,
+          "characters": 137,
+          "text": "Referência que aponta para algo que ainda vai ser dito. 'Vou te contar: ela desapareceu.' O 'isso' antes do 'isso' — suspense de sintaxe.",
+          "preview": "Referência que aponta para algo que ainda vai ser dito. 'Vou te contar: ela desapareceu.' O 'isso' antes do 'isso' — suspense de sintaxe."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1911,
+      "retainedText": "Referência que aponta para algo que ainda vai ser dito. 'Vou te contar: ela desapareceu.' O 'isso' antes do 'isso' — suspense de sintaxe."
+    },
+    {
+      "key": "analepse",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1748,
+          "retained": false,
+          "characters": 124,
+          "text": "Recurso narrativo: retorno ao passado dentro da narrativa (flashback). Não confundir com 'prolepse' (antecipação do futuro).",
+          "preview": "Recurso narrativo: retorno ao passado dentro da narrativa (flashback). Não confundir com 'prolepse' (antecipação do futuro)."
+        },
+        {
+          "line": 2025,
+          "retained": true,
+          "characters": 151,
+          "text": "Retorno narrativo ao passado — o equivalente literário do flashback. Pode ser completa (cena em tempo real) ou sumária (resumo do que aconteceu antes).",
+          "preview": "Retorno narrativo ao passado — o equivalente literário do flashback. Pode ser completa (cena em tempo real) ou sumária (resumo do que aconteceu antes)."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2025,
+      "retainedText": "Retorno narrativo ao passado — o equivalente literário do flashback. Pode ser completa (cena em tempo real) ou sumária (resumo do que aconteceu antes)."
+    },
+    {
+      "key": "prolepse",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1749,
+          "retained": false,
+          "characters": 125,
+          "text": "Recurso narrativo: antecipação de evento futuro dentro da narrativa (flash-forward). Cria ironia, pressentimento ou suspense.",
+          "preview": "Recurso narrativo: antecipação de evento futuro dentro da narrativa (flash-forward). Cria ironia, pressentimento ou suspense."
+        },
+        {
+          "line": 2024,
+          "retained": true,
+          "characters": 168,
+          "text": "Antevisão de eventos futuros dentro da narrativa — o equivalente literário do flashforward. Gera suspense ou ironia trágica: 'Naquela noite foi a última vez que a viu.'",
+          "preview": "Antevisão de eventos futuros dentro da narrativa — o equivalente literário do flashforward. Gera suspense ou ironia trágica: 'Naquela noite foi a última vez que a viu.'"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2024,
+      "retainedText": "Antevisão de eventos futuros dentro da narrativa — o equivalente literário do flashforward. Gera suspense ou ironia trágica: 'Naquela noite foi a última vez que a viu.'"
+    },
+    {
+      "key": "cronotopo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1752,
+          "retained": false,
+          "characters": 152,
+          "text": "Conceito de Bakhtin: a relação entre tempo e espaço numa obra. Cada gênero literário tem seu cronotopo próprio (o da estrada, o da sala de estar, etc.).",
+          "preview": "Conceito de Bakhtin: a relação entre tempo e espaço numa obra. Cada gênero literário tem seu cronotopo próprio (o da estrada, o da sala de estar, etc.)."
+        },
+        {
+          "line": 2026,
+          "retained": true,
+          "characters": 183,
+          "text": "Conceito de Bakhtin: a interconexão entre tempo e espaço na narrativa. O tempo de uma narrativa não existe sem o espaço — e vice-versa. A estrada, o salão, a fronteira são cronotopos.",
+          "preview": "Conceito de Bakhtin: a interconexão entre tempo e espaço na narrativa. O tempo de uma narrativa não existe sem o espaço — e vice-versa. A estrada, o salão, a fronteira são cronoto…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2026,
+      "retainedText": "Conceito de Bakhtin: a interconexão entre tempo e espaço na narrativa. O tempo de uma narrativa não existe sem o espaço — e vice-versa. A estrada, o salão, a fronteira são cronotopos."
+    },
+    {
+      "key": "metafora",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1760,
+          "retained": false,
+          "characters": 214,
+          "text": "Figura de comparação implícita: atribui a um elemento as qualidades de outro sem usar 'como'. 'Sua voz era seda' ≠ 'Sua voz era como seda' (símile). Bechara: a metáfora é a figura central de toda criação literária.",
+          "preview": "Figura de comparação implícita: atribui a um elemento as qualidades de outro sem usar 'como'. 'Sua voz era seda' ≠ 'Sua voz era como seda' (símile). Bechara: a metáfora é a figura…"
+        },
+        {
+          "line": 1861,
+          "retained": true,
+          "characters": 218,
+          "text": "Figura de linguagem que transfere o sentido de uma palavra para outra por semelhança implícita, sem 'como': 'a vida é uma batalha', 'o tempo passou rápido'. A boa metáfora ilumina o que a explicação direta não alcança.",
+          "preview": "Figura de linguagem que transfere o sentido de uma palavra para outra por semelhança implícita, sem 'como': 'a vida é uma batalha', 'o tempo passou rápido'. A boa metáfora ilumina…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1861,
+      "retainedText": "Figura de linguagem que transfere o sentido de uma palavra para outra por semelhança implícita, sem 'como': 'a vida é uma batalha', 'o tempo passou rápido'. A boa metáfora ilumina o que a explicação direta não alcança."
+    },
+    {
+      "key": "hiperbole",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1761,
+          "retained": false,
+          "characters": 169,
+          "text": "Figura de exagero: amplifica ou diminui além do real para dar intensidade. 'Já te disse mil vezes.' Usada com medida, gera força; usada com excesso, perde credibilidade.",
+          "preview": "Figura de exagero: amplifica ou diminui além do real para dar intensidade. 'Já te disse mil vezes.' Usada com medida, gera força; usada com excesso, perde credibilidade."
+        },
+        {
+          "line": 1863,
+          "retained": true,
+          "characters": 195,
+          "text": "Exagero expressivo deliberado para intensificar um efeito: 'chorei um rio', 'esperei uma eternidade'. Não é mentira: é amplificação poética. A hipérbole bem colocada cria humor, emoção ou ênfase.",
+          "preview": "Exagero expressivo deliberado para intensificar um efeito: 'chorei um rio', 'esperei uma eternidade'. Não é mentira: é amplificação poética. A hipérbole bem colocada cria humor, e…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1863,
+      "retainedText": "Exagero expressivo deliberado para intensificar um efeito: 'chorei um rio', 'esperei uma eternidade'. Não é mentira: é amplificação poética. A hipérbole bem colocada cria humor, emoção ou ênfase."
+    },
+    {
+      "key": "ironia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1764,
+          "retained": false,
+          "characters": 180,
+          "text": "Dizer o contrário do que se quer comunicar, esperando que o leitor perceba a divergência. Exige conivência; sem ela, vira confusão ou ofensa. Difere do sarcasmo por ser mais sutil.",
+          "preview": "Dizer o contrário do que se quer comunicar, esperando que o leitor perceba a divergência. Exige conivência; sem ela, vira confusão ou ofensa. Difere do sarcasmo por ser mais sutil."
+        },
+        {
+          "line": 1862,
+          "retained": false,
+          "characters": 210,
+          "text": "Figura de linguagem que diz o oposto do que quer significar, criando duplo sentido. Requer cumplicidade do leitor para ser decodificada. Ironia mal sinalizada pode ser tomada ao pé da letra — o contexto é tudo.",
+          "preview": "Figura de linguagem que diz o oposto do que quer significar, criando duplo sentido. Requer cumplicidade do leitor para ser decodificada. Ironia mal sinalizada pode ser tomada ao p…"
+        },
+        {
+          "line": 2139,
+          "retained": false,
+          "characters": 177,
+          "text": "Dizer o oposto do que se pensa — ou mostrar a distância entre o que parece e o que é. A ironia de Machado de Assis é estrutural: não é a frase que ironiza, é o narrador inteiro.",
+          "preview": "Dizer o oposto do que se pensa — ou mostrar a distância entre o que parece e o que é. A ironia de Machado de Assis é estrutural: não é a frase que ironiza, é o narrador inteiro."
+        },
+        {
+          "line": 2582,
+          "retained": true,
+          "characters": 345,
+          "text": "A ironia é a distância entre o que é dito e o que é entendido — a narração que diz o contrário do que significa, ou que coloca numa mesma frase dois sentidos em tensão. A ironia literária exige leitor capaz de ler nas entrelinhas. A ironia dramática, especificamente, é quando o leitor sabe mais do que a personagem sobre o que está acontecendo.",
+          "preview": "A ironia é a distância entre o que é dito e o que é entendido — a narração que diz o contrário do que significa, ou que coloca numa mesma frase dois sentidos em tensão. A ironia l…"
+        }
+      ],
+      "discardedDeclarations": 3,
+      "retainedLine": 2582,
+      "retainedText": "A ironia é a distância entre o que é dito e o que é entendido — a narração que diz o contrário do que significa, ou que coloca numa mesma frase dois sentidos em tensão. A ironia literária exige leitor capaz de ler nas entrelinhas. A ironia dramática, especificamente, é quando o leitor sabe mais do que a personagem sobre o que está acontecendo."
+    },
+    {
+      "key": "paradoxo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1766,
+          "retained": false,
+          "characters": 174,
+          "text": "Afirmação aparentemente contraditória que contém uma verdade profunda. 'O silêncio gritou.' 'Quanto mais aprendo, menos sei.' Força o leitor a reconciliar dois polos opostos.",
+          "preview": "Afirmação aparentemente contraditória que contém uma verdade profunda. 'O silêncio gritou.' 'Quanto mais aprendo, menos sei.' Força o leitor a reconciliar dois polos opostos."
+        },
+        {
+          "line": 1916,
+          "retained": true,
+          "characters": 163,
+          "text": "Afirmação que parece contraditória mas contém verdade profunda. 'A morte é o começo.' Diferente da antítese: o paradoxo mantém os opostos convivendo, sem resolver.",
+          "preview": "Afirmação que parece contraditória mas contém verdade profunda. 'A morte é o começo.' Diferente da antítese: o paradoxo mantém os opostos convivendo, sem resolver."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1916,
+      "retainedText": "Afirmação que parece contraditória mas contém verdade profunda. 'A morte é o começo.' Diferente da antítese: o paradoxo mantém os opostos convivendo, sem resolver."
+    },
+    {
+      "key": "antitese",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1767,
+          "retained": false,
+          "characters": 155,
+          "text": "Aproximação de ideias contrárias em estrutura paralela. 'Amei e odiei; construí e destruí.' Cria contraste e tensão sem a aparente contradição do paradoxo.",
+          "preview": "Aproximação de ideias contrárias em estrutura paralela. 'Amei e odiei; construí e destruí.' Cria contraste e tensão sem a aparente contradição do paradoxo."
+        },
+        {
+          "line": 1915,
+          "retained": true,
+          "characters": 137,
+          "text": "Aproximação de ideias contrárias numa mesma frase. 'Amor é fogo que arde sem se ver' (Camões). A antítese não contradiz — ilumina tensão.",
+          "preview": "Aproximação de ideias contrárias numa mesma frase. 'Amor é fogo que arde sem se ver' (Camões). A antítese não contradiz — ilumina tensão."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1915,
+      "retainedText": "Aproximação de ideias contrárias numa mesma frase. 'Amor é fogo que arde sem se ver' (Camões). A antítese não contradiz — ilumina tensão."
+    },
+    {
+      "key": "sinestesia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1769,
+          "retained": false,
+          "characters": 184,
+          "text": "Mistura de sentidos: descrever uma sensação com linguagem de outro sentido. 'Grito azul', 'cheiro doce do medo', 'silêncio quente'. Usada com intenção, cria imagens densas e originais.",
+          "preview": "Mistura de sentidos: descrever uma sensação com linguagem de outro sentido. 'Grito azul', 'cheiro doce do medo', 'silêncio quente'. Usada com intenção, cria imagens densas e origi…"
+        },
+        {
+          "line": 1865,
+          "retained": true,
+          "characters": 204,
+          "text": "Figura que mistura percepções de sentidos diferentes: 'voz doce', 'silêncio frio', 'luz gritante'. Cria imagens sensoriais complexas e inesperadas. Frequente em poesia modernista e surrealista brasileira.",
+          "preview": "Figura que mistura percepções de sentidos diferentes: 'voz doce', 'silêncio frio', 'luz gritante'. Cria imagens sensoriais complexas e inesperadas. Frequente em poesia modernista …"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1865,
+      "retainedText": "Figura que mistura percepções de sentidos diferentes: 'voz doce', 'silêncio frio', 'luz gritante'. Cria imagens sensoriais complexas e inesperadas. Frequente em poesia modernista e surrealista brasileira."
+    },
+    {
+      "key": "aliteracao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1770,
+          "retained": false,
+          "characters": 177,
+          "text": "Repetição de sons consonantais para criar efeito sonoro ou rítmico. 'Pedro pedreiro penseiro.' Em poesia, é recurso de musicalidade; em prosa, pode criar atmosfera ou oralidade.",
+          "preview": "Repetição de sons consonantais para criar efeito sonoro ou rítmico. 'Pedro pedreiro penseiro.' Em poesia, é recurso de musicalidade; em prosa, pode criar atmosfera ou oralidade."
+        },
+        {
+          "line": 1864,
+          "retained": true,
+          "characters": 176,
+          "text": "Repetição de consoantes próximas para criar efeito sonoro: 'o rato roeu a roupa'. Na prosa poética, a aliteração cria musicalidade e reforça o sentido — o som imita o conteúdo.",
+          "preview": "Repetição de consoantes próximas para criar efeito sonoro: 'o rato roeu a roupa'. Na prosa poética, a aliteração cria musicalidade e reforça o sentido — o som imita o conteúdo."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1864,
+      "retainedText": "Repetição de consoantes próximas para criar efeito sonoro: 'o rato roeu a roupa'. Na prosa poética, a aliteração cria musicalidade e reforça o sentido — o som imita o conteúdo."
+    },
+    {
+      "key": "onomatopeia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1771,
+          "retained": false,
+          "characters": 166,
+          "text": "Palavra que imita o som da coisa que designa: 'sussurro', 'murmúrio', 'fragor', 'tic-tac'. Na prosa, podem criar presença sensorial; em excesso, parecem artificiosas.",
+          "preview": "Palavra que imita o som da coisa que designa: 'sussurro', 'murmúrio', 'fragor', 'tic-tac'. Na prosa, podem criar presença sensorial; em excesso, parecem artificiosas."
+        },
+        {
+          "line": 2044,
+          "retained": true,
+          "characters": 173,
+          "text": "Palavra que imita o som de algo. 'Tic-tac', 'toc-toc', 'zum'. Na literatura brasileira, a onomatopeia é recurso oral poderoso — especialmente no cordel e na poesia concreta.",
+          "preview": "Palavra que imita o som de algo. 'Tic-tac', 'toc-toc', 'zum'. Na literatura brasileira, a onomatopeia é recurso oral poderoso — especialmente no cordel e na poesia concreta."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2044,
+      "retainedText": "Palavra que imita o som de algo. 'Tic-tac', 'toc-toc', 'zum'. Na literatura brasileira, a onomatopeia é recurso oral poderoso — especialmente no cordel e na poesia concreta."
+    },
+    {
+      "key": "gradacao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1774,
+          "retained": false,
+          "characters": 163,
+          "text": "Sequência de termos em intensidade crescente ou decrescente. 'Um suspiro, uma lágrima, um soluço, um grito.' Cria ritmo acumulativo e direciona a emoção do leitor.",
+          "preview": "Sequência de termos em intensidade crescente ou decrescente. 'Um suspiro, uma lágrima, um soluço, um grito.' Cria ritmo acumulativo e direciona a emoção do leitor."
+        },
+        {
+          "line": 1914,
+          "retained": true,
+          "characters": 175,
+          "text": "Encadeamento de ideias em ordem crescente ou decrescente de intensidade. 'Chorou, gritou, implorou.' A gradação é escada narrativa — sobe ou desce, nunca fica no mesmo degrau.",
+          "preview": "Encadeamento de ideias em ordem crescente ou decrescente de intensidade. 'Chorou, gritou, implorou.' A gradação é escada narrativa — sobe ou desce, nunca fica no mesmo degrau."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1914,
+      "retainedText": "Encadeamento de ideias em ordem crescente ou decrescente de intensidade. 'Chorou, gritou, implorou.' A gradação é escada narrativa — sobe ou desce, nunca fica no mesmo degrau."
+    },
+    {
+      "key": "narrador",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1777,
+          "retained": false,
+          "characters": 210,
+          "text": "Instância que conta a história; não confundir com o autor. Homodiegético: narrador dentro da história (1ª pessoa). Heterodiegético: narrador fora da história (3ª pessoa). A voz do narrador define o tom de tudo.",
+          "preview": "Instância que conta a história; não confundir com o autor. Homodiegético: narrador dentro da história (1ª pessoa). Heterodiegético: narrador fora da história (3ª pessoa). A voz do…"
+        },
+        {
+          "line": 1979,
+          "retained": true,
+          "characters": 196,
+          "text": "Instância que conta a história — não confundir com o autor. O narrador tem perspectiva, voz, posição no mundo narrado e grau de confiabilidade. Escolher o narrador é escolher o que pode ser visto.",
+          "preview": "Instância que conta a história — não confundir com o autor. O narrador tem perspectiva, voz, posição no mundo narrado e grau de confiabilidade. Escolher o narrador é escolher o qu…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1979,
+      "retainedText": "Instância que conta a história — não confundir com o autor. O narrador tem perspectiva, voz, posição no mundo narrado e grau de confiabilidade. Escolher o narrador é escolher o que pode ser visto."
+    },
+    {
+      "key": "antagonista",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1780,
+          "retained": false,
+          "characters": 192,
+          "text": "Força ou personagem que se opõe ao protagonista. Não precisa ser malvado: pode ser uma ideia, o ambiente, o próprio protagonista (conflito interno). Quanto mais complex, mais viva a narrativa.",
+          "preview": "Força ou personagem que se opõe ao protagonista. Não precisa ser malvado: pode ser uma ideia, o ambiente, o próprio protagonista (conflito interno). Quanto mais complex, mais viva…"
+        },
+        {
+          "line": 1976,
+          "retained": true,
+          "characters": 171,
+          "text": "Força que se opõe ao protagonista. Não é necessariamente o vilão — pode ser um sistema, a natureza, o próprio protagonista. O antagonismo é a pressão que revela o caráter.",
+          "preview": "Força que se opõe ao protagonista. Não é necessariamente o vilão — pode ser um sistema, a natureza, o próprio protagonista. O antagonismo é a pressão que revela o caráter."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1976,
+      "retainedText": "Força que se opõe ao protagonista. Não é necessariamente o vilão — pode ser um sistema, a natureza, o próprio protagonista. O antagonismo é a pressão que revela o caráter."
+    },
+    {
+      "key": "enredo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1781,
+          "retained": false,
+          "characters": 207,
+          "text": "Sequência de eventos da narrativa, com relação de causa e efeito. Diferente da história (o que aconteceu) e do discurso (como se conta). Um bom enredo convence que os eventos não poderiam ser de outra forma.",
+          "preview": "Sequência de eventos da narrativa, com relação de causa e efeito. Diferente da história (o que aconteceu) e do discurso (como se conta). Um bom enredo convence que os eventos não …"
+        },
+        {
+          "line": 2031,
+          "retained": false,
+          "characters": 172,
+          "text": "A sequência organizada de eventos de uma narrativa. Diferente de 'história' (tudo que aconteceu): o enredo é o que o texto escolhe mostrar, na ordem em que escolhe mostrar.",
+          "preview": "A sequência organizada de eventos de uma narrativa. Diferente de 'história' (tudo que aconteceu): o enredo é o que o texto escolhe mostrar, na ordem em que escolhe mostrar."
+        },
+        {
+          "line": 2473,
+          "retained": true,
+          "characters": 381,
+          "text": "O enredo é a sequência de eventos organizados com causalidade — o que acontece e por quê. E. M. Forster distinguiu estória (o que acontece em ordem cronológica) de enredo (o que acontece com nexo causal): 'O rei morreu, depois a rainha morreu' é estória; 'O rei morreu, e depois a rainha morreu de tristeza' é enredo. O enredo cria necessidade onde a estória cria apenas sequência.",
+          "preview": "O enredo é a sequência de eventos organizados com causalidade — o que acontece e por quê. E. M. Forster distinguiu estória (o que acontece em ordem cronológica) de enredo (o que a…"
+        }
+      ],
+      "discardedDeclarations": 2,
+      "retainedLine": 2473,
+      "retainedText": "O enredo é a sequência de eventos organizados com causalidade — o que acontece e por quê. E. M. Forster distinguiu estória (o que acontece em ordem cronológica) de enredo (o que acontece com nexo causal): 'O rei morreu, depois a rainha morreu' é estória; 'O rei morreu, e depois a rainha morreu de tristeza' é enredo. O enredo cria necessidade onde a estória cria apenas sequência."
+    },
+    {
+      "key": "cena",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1783,
+          "retained": false,
+          "characters": 184,
+          "text": "Unidade dramática da narrativa: momento mostrado em tempo real, com ação, diálogo e presença física. Oposto de 'sumário' (resumo do tempo passado). A cena é onde o leitor vive, não lê.",
+          "preview": "Unidade dramática da narrativa: momento mostrado em tempo real, com ação, diálogo e presença física. Oposto de 'sumário' (resumo do tempo passado). A cena é onde o leitor vive, nã…"
+        },
+        {
+          "line": 1941,
+          "retained": true,
+          "characters": 156,
+          "text": "Unidade narrativa com tempo real e presença dos personagens. A cena acontece 'agora' — diálogo, ação, sensação. É o oposto do sumário, que comprime o tempo.",
+          "preview": "Unidade narrativa com tempo real e presença dos personagens. A cena acontece 'agora' — diálogo, ação, sensação. É o oposto do sumário, que comprime o tempo."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1941,
+      "retainedText": "Unidade narrativa com tempo real e presença dos personagens. A cena acontece 'agora' — diálogo, ação, sensação. É o oposto do sumário, que comprime o tempo."
+    },
+    {
+      "key": "climax",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1784,
+          "retained": false,
+          "characters": 189,
+          "text": "Ponto de maior tensão ou intensidade da narrativa; o momento em que o conflito central atinge seu ápice. Após o clímax, começa a resolução. Em narrativas não lineares, pode estar deslocado.",
+          "preview": "Ponto de maior tensão ou intensidade da narrativa; o momento em que o conflito central atinge seu ápice. Após o clímax, começa a resolução. Em narrativas não lineares, pode estar …"
+        },
+        {
+          "line": 1850,
+          "retained": false,
+          "characters": 238,
+          "text": "Ponto de maior tensão dramática de uma narrativa; o momento em que o conflito central se resolve ou se agudiza ao máximo. Após o clímax, a história pode caminhar para o desfecho. Não confundir com o fim: o clímax é a crise, não a solução.",
+          "preview": "Ponto de maior tensão dramática de uma narrativa; o momento em que o conflito central se resolve ou se agudiza ao máximo. Após o clímax, a história pode caminhar para o desfecho. …"
+        },
+        {
+          "line": 1943,
+          "retained": true,
+          "characters": 157,
+          "text": "O ponto de maior tensão ou virada decisiva de uma narrativa. Não é o final — é o momento em que a pergunta central do texto encontra seu pico de intensidade.",
+          "preview": "O ponto de maior tensão ou virada decisiva de uma narrativa. Não é o final — é o momento em que a pergunta central do texto encontra seu pico de intensidade."
+        }
+      ],
+      "discardedDeclarations": 2,
+      "retainedLine": 1943,
+      "retainedText": "O ponto de maior tensão ou virada decisiva de uma narrativa. Não é o final — é o momento em que a pergunta central do texto encontra seu pico de intensidade."
+    },
+    {
+      "key": "desfecho",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1785,
+          "retained": false,
+          "characters": 175,
+          "text": "Resolução final da narrativa após o clímax; o estado das coisas ao final. Não precisa ser 'feliz' nem 'explicativo' — um bom desfecho é inevitável e ainda assim surpreendente.",
+          "preview": "Resolução final da narrativa após o clímax; o estado das coisas ao final. Não precisa ser 'feliz' nem 'explicativo' — um bom desfecho é inevitável e ainda assim surpreendente."
+        },
+        {
+          "line": 2028,
+          "retained": true,
+          "characters": 181,
+          "text": "A resolução ou a conclusão da narrativa — o que acontece depois do clímax. Pode ser fechado (tudo resolvido) ou aberto (ambíguo). Desfechos abertos exigem que o texto os justifique.",
+          "preview": "A resolução ou a conclusão da narrativa — o que acontece depois do clímax. Pode ser fechado (tudo resolvido) ou aberto (ambíguo). Desfechos abertos exigem que o texto os justifiqu…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2028,
+      "retainedText": "A resolução ou a conclusão da narrativa — o que acontece depois do clímax. Pode ser fechado (tudo resolvido) ou aberto (ambíguo). Desfechos abertos exigem que o texto os justifique."
+    },
+    {
+      "key": "conflito",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1786,
+          "retained": false,
+          "characters": 176,
+          "text": "Tensão entre forças opostas que move a narrativa: homem vs. homem, homem vs. natureza, homem vs. sociedade, homem vs. si mesmo. Sem conflito, não há história — apenas registro.",
+          "preview": "Tensão entre forças opostas que move a narrativa: homem vs. homem, homem vs. natureza, homem vs. sociedade, homem vs. si mesmo. Sem conflito, não há história — apenas registro."
+        },
+        {
+          "line": 2030,
+          "retained": true,
+          "characters": 191,
+          "text": "A tensão central que move a narrativa — entre personagem e personagem, personagem e mundo, personagem e si mesmo. Sem conflito, não há história. A escolha do tipo de conflito define o gênero.",
+          "preview": "A tensão central que move a narrativa — entre personagem e personagem, personagem e mundo, personagem e si mesmo. Sem conflito, não há história. A escolha do tipo de conflito defi…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2030,
+      "retainedText": "A tensão central que move a narrativa — entre personagem e personagem, personagem e mundo, personagem e si mesmo. Sem conflito, não há história. A escolha do tipo de conflito define o gênero."
+    },
+    {
+      "key": "ponto",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1787,
+          "retained": false,
+          "characters": 167,
+          "text": "Em 'ponto de vista': posição do narrador ou da câmera narrativa; de onde e como a história é percebida. Define o que o leitor sabe, quando sabe e em que medida confia.",
+          "preview": "Em 'ponto de vista': posição do narrador ou da câmera narrativa; de onde e como a história é percebida. Define o que o leitor sabe, quando sabe e em que medida confia."
+        },
+        {
+          "line": 2081,
+          "retained": true,
+          "characters": 188,
+          "text": "O fim de uma frase — e do que ela contém. Na prosa, o ponto não é apenas gramática: é decisão de ritmo. Frases curtas, muitos pontos, respiração rápida. Frases longas, leitura que acumula.",
+          "preview": "O fim de uma frase — e do que ela contém. Na prosa, o ponto não é apenas gramática: é decisão de ritmo. Frases curtas, muitos pontos, respiração rápida. Frases longas, leitura que…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2081,
+      "retainedText": "O fim de uma frase — e do que ela contém. Na prosa, o ponto não é apenas gramática: é decisão de ritmo. Frases curtas, muitos pontos, respiração rápida. Frases longas, leitura que acumula."
+    },
+    {
+      "key": "voz",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1788,
+          "retained": false,
+          "characters": 197,
+          "text": "Em narrativa: a personalidade que emerge da escrita — o ritmo, a seleção de palavras, o que se diz e o que se omite. A voz é o que faz dois textos sobre o mesmo assunto parecerem mundos diferentes.",
+          "preview": "Em narrativa: a personalidade que emerge da escrita — o ritmo, a seleção de palavras, o que se diz e o que se omite. A voz é o que faz dois textos sobre o mesmo assunto parecerem …"
+        },
+        {
+          "line": 1985,
+          "retained": true,
+          "characters": 194,
+          "text": "Na narrativa: o estilo e a personalidade que marcam como o texto fala. A voz é o que faz um parágrafo soar como Guimarães Rosa e não como qualquer outro. É o que não se imita — só se desenvolve.",
+          "preview": "Na narrativa: o estilo e a personalidade que marcam como o texto fala. A voz é o que faz um parágrafo soar como Guimarães Rosa e não como qualquer outro. É o que não se imita — só…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1985,
+      "retainedText": "Na narrativa: o estilo e a personalidade que marcam como o texto fala. A voz é o que faz um parágrafo soar como Guimarães Rosa e não como qualquer outro. É o que não se imita — só se desenvolve."
+    },
+    {
+      "key": "ritmo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1789,
+          "retained": false,
+          "characters": 192,
+          "text": "Padrão de velocidade, variação e ênfase ao longo do texto. Controlado por extensão das frases, pontuação, escolha de palavras, alternância de cenas e sumários. O ritmo é a respiração da prosa.",
+          "preview": "Padrão de velocidade, variação e ênfase ao longo do texto. Controlado por extensão das frases, pontuação, escolha de palavras, alternância de cenas e sumários. O ritmo é a respira…"
+        },
+        {
+          "line": 1940,
+          "retained": true,
+          "characters": 184,
+          "text": "No texto em prosa: a cadência das frases — curtas e longas, pausa e velocidade. No verso: o padrão de sílabas e acentos. O ritmo é o pulso do texto; o leitor o sente antes de perceber.",
+          "preview": "No texto em prosa: a cadência das frases — curtas e longas, pausa e velocidade. No verso: o padrão de sílabas e acentos. O ritmo é o pulso do texto; o leitor o sente antes de perc…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1940,
+      "retainedText": "No texto em prosa: a cadência das frases — curtas e longas, pausa e velocidade. No verso: o padrão de sílabas e acentos. O ritmo é o pulso do texto; o leitor o sente antes de perceber."
+    },
+    {
+      "key": "dialogo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1791,
+          "retained": false,
+          "characters": 185,
+          "text": "Reprodução da fala entre personagens. Em ficção, o diálogo precisa fazer mais de uma coisa ao mesmo tempo: revelar personagem, avançar conflito, fornecer informação — nunca só conversa.",
+          "preview": "Reprodução da fala entre personagens. Em ficção, o diálogo precisa fazer mais de uma coisa ao mesmo tempo: revelar personagem, avançar conflito, fornecer informação — nunca só con…"
+        },
+        {
+          "line": 1852,
+          "retained": true,
+          "characters": 201,
+          "text": "Fala dos personagens — um dos recursos mais difíceis da ficção. Um bom diálogo não é transcrição de conversa real: é seleção e condensação. Cada fala revela caráter, oculta intenção ou tensiona a cena.",
+          "preview": "Fala dos personagens — um dos recursos mais difíceis da ficção. Um bom diálogo não é transcrição de conversa real: é seleção e condensação. Cada fala revela caráter, oculta intenç…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1852,
+      "retainedText": "Fala dos personagens — um dos recursos mais difíceis da ficção. Um bom diálogo não é transcrição de conversa real: é seleção e condensação. Cada fala revela caráter, oculta intenção ou tensiona a cena."
+    },
+    {
+      "key": "rascunho",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1792,
+          "retained": false,
+          "characters": 202,
+          "text": "Versão inicial de um texto, não destinada a leitores. O rascunho é o espaço de liberdade — onde se pode errar e descobrir. A diferença entre escritores e não-escritores está na disposição de reescrever.",
+          "preview": "Versão inicial de um texto, não destinada a leitores. O rascunho é o espaço de liberdade — onde se pode errar e descobrir. A diferença entre escritores e não-escritores está na di…"
+        },
+        {
+          "line": 2089,
+          "retained": true,
+          "characters": 195,
+          "text": "A primeira versão de um texto — sem compromisso com a forma definitiva. O rascunho é permissão: você pode escrever mal, desistir do parágrafo, contradizer-se. O rascunho existe para ser superado.",
+          "preview": "A primeira versão de um texto — sem compromisso com a forma definitiva. O rascunho é permissão: você pode escrever mal, desistir do parágrafo, contradizer-se. O rascunho existe pa…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2089,
+      "retainedText": "A primeira versão de um texto — sem compromisso com a forma definitiva. O rascunho é permissão: você pode escrever mal, desistir do parágrafo, contradizer-se. O rascunho existe para ser superado."
+    },
+    {
+      "key": "revisao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1793,
+          "retained": false,
+          "characters": 187,
+          "text": "Processo de releitura crítica e reescrita do texto. Diferente de correção (erros formais): a revisão questiona estrutura, ritmo, necessidade de cada palavra. Boa revisão é nova escritura.",
+          "preview": "Processo de releitura crítica e reescrita do texto. Diferente de correção (erros formais): a revisão questiona estrutura, ritmo, necessidade de cada palavra. Boa revisão é nova es…"
+        },
+        {
+          "line": 2093,
+          "retained": true,
+          "characters": 209,
+          "text": "O trabalho de melhorar o texto depois do rascunho — cortar, reorganizar, clarear, aprofundar. A revisão é onde a maior parte da escrita acontece. Hemingway: 'O primeiro rascunho de qualquer coisa é uma merda.'",
+          "preview": "O trabalho de melhorar o texto depois do rascunho — cortar, reorganizar, clarear, aprofundar. A revisão é onde a maior parte da escrita acontece. Hemingway: 'O primeiro rascunho d…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2093,
+      "retainedText": "O trabalho de melhorar o texto depois do rascunho — cortar, reorganizar, clarear, aprofundar. A revisão é onde a maior parte da escrita acontece. Hemingway: 'O primeiro rascunho de qualquer coisa é uma merda.'"
+    },
+    {
+      "key": "quilombo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1797,
+          "retained": false,
+          "characters": 198,
+          "text": "Originalmente: comunidade de pessoas escravizadas que fugiam e se organizavam em resistência. Hoje: também símbolo de resistência cultural afro-brasileira. Quilombo dos Palmares = maior da história.",
+          "preview": "Originalmente: comunidade de pessoas escravizadas que fugiam e se organizavam em resistência. Hoje: também símbolo de resistência cultural afro-brasileira. Quilombo dos Palmares =…"
+        },
+        {
+          "line": 2608,
+          "retained": true,
+          "characters": 363,
+          "text": "O quilombo na ficção é ao mesmo tempo espaço histórico e símbolo de resistência. Os quilombos foram comunidades de pessoas escravizadas que resistiram, que criaram cultura e território próprios. Na ficção contemporânea, o quilombo aparece como memória, como herança e como modelo de organização coletiva que a narrativa pode questionar, celebrar ou reinterpretar.",
+          "preview": "O quilombo na ficção é ao mesmo tempo espaço histórico e símbolo de resistência. Os quilombos foram comunidades de pessoas escravizadas que resistiram, que criaram cultura e terri…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2608,
+      "retainedText": "O quilombo na ficção é ao mesmo tempo espaço histórico e símbolo de resistência. Os quilombos foram comunidades de pessoas escravizadas que resistiram, que criaram cultura e território próprios. Na ficção contemporânea, o quilombo aparece como memória, como herança e como modelo de organização coletiva que a narrativa pode questionar, celebrar ou reinterpretar."
+    },
+    {
+      "key": "favela",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1800,
+          "retained": false,
+          "characters": 190,
+          "text": "Assentamento urbano de baixa renda, especialmente no Rio de Janeiro e São Paulo. Espaço de grande produção cultural; evite tratar como sinônimo de violência ou pobreza apenas — é comunidade.",
+          "preview": "Assentamento urbano de baixa renda, especialmente no Rio de Janeiro e São Paulo. Espaço de grande produção cultural; evite tratar como sinônimo de violência ou pobreza apenas — é …"
+        },
+        {
+          "line": 2609,
+          "retained": true,
+          "characters": 381,
+          "text": "A favela na ficção brasileira tem sido frequentemente narrada de fora — como cenário de violência, curiosidade sociológica ou exotismo. A ficção de autoria periférica mudou essa equação: narrar a favela de dentro, com intimidade, humor, amor e a complexidade que qualquer comunidade humana tem. A favela na ficção é, antes de tudo, lugar onde pessoas vivem suas histórias inteiras.",
+          "preview": "A favela na ficção brasileira tem sido frequentemente narrada de fora — como cenário de violência, curiosidade sociológica ou exotismo. A ficção de autoria periférica mudou essa e…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2609,
+      "retainedText": "A favela na ficção brasileira tem sido frequentemente narrada de fora — como cenário de violência, curiosidade sociológica ou exotismo. A ficção de autoria periférica mudou essa equação: narrar a favela de dentro, com intimidade, humor, amor e a complexidade que qualquer comunidade humana tem. A favela na ficção é, antes de tudo, lugar onde pessoas vivem suas histórias inteiras."
+    },
+    {
+      "key": "euforia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1809,
+          "retained": false,
+          "characters": 192,
+          "text": "Estado de exaltação e bem-estar intenso; pode ser real, artificial ou maníaco. Em personagens, desconfie da euforia — ela raramente sustenta. Como recurso narrativo, a euforia prepara a queda.",
+          "preview": "Estado de exaltação e bem-estar intenso; pode ser real, artificial ou maníaco. Em personagens, desconfie da euforia — ela raramente sustenta. Como recurso narrativo, a euforia pre…"
+        },
+        {
+          "line": 2099,
+          "retained": true,
+          "characters": 162,
+          "text": "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir.",
+          "preview": "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2099,
+      "retainedText": "Alegria intensa, explosiva — o oposto da melancolia. Na ficção, a euforia é perigosa: ela precede a queda, ou revela que a personagem não sabe o que está por vir."
+    },
+    {
+      "key": "laconico",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1817,
+          "retained": false,
+          "characters": 184,
+          "text": "Adjetivo: que diz muito em poucas palavras; conciso ao extremo. Da cidade de Lacedemônia (Esparta), onde a brevidade era virtude militar. Modelo estilístico: cada palavra carrega peso.",
+          "preview": "Adjetivo: que diz muito em poucas palavras; conciso ao extremo. Da cidade de Lacedemônia (Esparta), onde a brevidade era virtude militar. Modelo estilístico: cada palavra carrega …"
+        },
+        {
+          "line": 2059,
+          "retained": true,
+          "characters": 185,
+          "text": "De poucas palavras — mas densas. Um personagem lacônico revela muito no que não diz. Um texto lacônico obriga o leitor a trabalhar. 'Uma boa frase é aquela que não pode ser mais curta.'",
+          "preview": "De poucas palavras — mas densas. Um personagem lacônico revela muito no que não diz. Um texto lacônico obriga o leitor a trabalhar. 'Uma boa frase é aquela que não pode ser mais c…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2059,
+      "retainedText": "De poucas palavras — mas densas. Um personagem lacônico revela muito no que não diz. Um texto lacônico obriga o leitor a trabalhar. 'Uma boa frase é aquela que não pode ser mais curta.'"
+    },
+    {
+      "key": "prolixo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1818,
+          "retained": false,
+          "characters": 155,
+          "text": "Adjetivo: que usa muitas palavras onde poucas bastariam; difuso, excessivo. Vício a evitar na prosa narrativa; às vezes intencional como voz de personagem.",
+          "preview": "Adjetivo: que usa muitas palavras onde poucas bastariam; difuso, excessivo. Vício a evitar na prosa narrativa; às vezes intencional como voz de personagem."
+        },
+        {
+          "line": 2060,
+          "retained": true,
+          "characters": 159,
+          "text": "Que se estende além do necessário — palavras demais para o que precisa ser dito. A prolixidade esconde insegurança ou preguiça de editar. O oposto do lacônico.",
+          "preview": "Que se estende além do necessário — palavras demais para o que precisa ser dito. A prolixidade esconde insegurança ou preguiça de editar. O oposto do lacônico."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2060,
+      "retainedText": "Que se estende além do necessário — palavras demais para o que precisa ser dito. A prolixidade esconde insegurança ou preguiça de editar. O oposto do lacônico."
+    },
+    {
+      "key": "eloquente",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1819,
+          "retained": false,
+          "characters": 160,
+          "text": "Adjetivo: que se expressa com eficácia, clareza e força persuasiva. Pode ser um orador, um gesto, um silêncio — a eloquência não é necessariamente verborrágica.",
+          "preview": "Adjetivo: que se expressa com eficácia, clareza e força persuasiva. Pode ser um orador, um gesto, um silêncio — a eloquência não é necessariamente verborrágica."
+        },
+        {
+          "line": 2061,
+          "retained": true,
+          "characters": 166,
+          "text": "Que se exprime com facilidade, clareza e poder persuasivo. Na ficção, um personagem eloquente tem autoridade no discurso — mas eloquência demais pode soar artificial.",
+          "preview": "Que se exprime com facilidade, clareza e poder persuasivo. Na ficção, um personagem eloquente tem autoridade no discurso — mas eloquência demais pode soar artificial."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2061,
+      "retainedText": "Que se exprime com facilidade, clareza e poder persuasivo. Na ficção, um personagem eloquente tem autoridade no discurso — mas eloquência demais pode soar artificial."
+    },
+    {
+      "key": "contundente",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1820,
+          "retained": false,
+          "characters": 166,
+          "text": "Adjetivo: que atinge com força; que causa impacto. 'Argumento contundente', 'cena contundente'. Mais específico que 'forte' por implicar que o golpe encontrou o alvo.",
+          "preview": "Adjetivo: que atinge com força; que causa impacto. 'Argumento contundente', 'cena contundente'. Mais específico que 'forte' por implicar que o golpe encontrou o alvo."
+        },
+        {
+          "line": 2066,
+          "retained": true,
+          "characters": 159,
+          "text": "Que impacta com força direta — dói onde bate. Uma frase contundente não deixa espaço para desviar. No jornalismo literário, a contundência é a virtude central.",
+          "preview": "Que impacta com força direta — dói onde bate. Uma frase contundente não deixa espaço para desviar. No jornalismo literário, a contundência é a virtude central."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2066,
+      "retainedText": "Que impacta com força direta — dói onde bate. Uma frase contundente não deixa espaço para desviar. No jornalismo literário, a contundência é a virtude central."
+    },
+    {
+      "key": "plausivel",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1821,
+          "retained": false,
+          "characters": 185,
+          "text": "Adjetivo: que pode ser verdade dentro do contexto dado; crível, convincente. Diferente de 'verossímil' (parece real) — o plausível refere-se à lógica interna; o verossímil, à aparência.",
+          "preview": "Adjetivo: que pode ser verdade dentro do contexto dado; crível, convincente. Diferente de 'verossímil' (parece real) — o plausível refere-se à lógica interna; o verossímil, à apar…"
+        },
+        {
+          "line": 2072,
+          "retained": true,
+          "characters": 172,
+          "text": "Que pode ser aceito como possível dentro de uma lógica razoável. Diferente de verossímil (que depende do mundo interno do texto): o plausível é medido pelo mundo do leitor.",
+          "preview": "Que pode ser aceito como possível dentro de uma lógica razoável. Diferente de verossímil (que depende do mundo interno do texto): o plausível é medido pelo mundo do leitor."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2072,
+      "retainedText": "Que pode ser aceito como possível dentro de uma lógica razoável. Diferente de verossímil (que depende do mundo interno do texto): o plausível é medido pelo mundo do leitor."
+    },
+    {
+      "key": "ambiguo",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1822,
+          "retained": false,
+          "characters": 163,
+          "text": "Adjetivo: que admite mais de uma interpretação; de sentido duplo ou incerto. A ambiguidade bem controlada é riqueza literária; mal controlada, é falta de precisão.",
+          "preview": "Adjetivo: que admite mais de uma interpretação; de sentido duplo ou incerto. A ambiguidade bem controlada é riqueza literária; mal controlada, é falta de precisão."
+        },
+        {
+          "line": 2063,
+          "retained": true,
+          "characters": 211,
+          "text": "Que pode ser entendido de mais de um modo. A ambiguidade pode ser fraqueza (imprecisão) ou virtude (riqueza semântica). Na literatura, o melhor da ambiguidade é quando o leitor não sabe qual leitura é 'correta'.",
+          "preview": "Que pode ser entendido de mais de um modo. A ambiguidade pode ser fraqueza (imprecisão) ou virtude (riqueza semântica). Na literatura, o melhor da ambiguidade é quando o leitor nã…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2063,
+      "retainedText": "Que pode ser entendido de mais de um modo. A ambiguidade pode ser fraqueza (imprecisão) ou virtude (riqueza semântica). Na literatura, o melhor da ambiguidade é quando o leitor não sabe qual leitura é 'correta'."
+    },
+    {
+      "key": "suspense",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1832,
+          "retained": false,
+          "characters": 194,
+          "text": "Estado de incerteza e expectativa que mantém o leitor em tensão. Criado pela pergunta 'o que vai acontecer?' — diferente do mistério ('o que aconteceu?'). Hitchcock: suspense = bomba sob a mesa.",
+          "preview": "Estado de incerteza e expectativa que mantém o leitor em tensão. Criado pela pergunta 'o que vai acontecer?' — diferente do mistério ('o que aconteceu?'). Hitchcock: suspense = bo…"
+        },
+        {
+          "line": 1933,
+          "retained": true,
+          "characters": 170,
+          "text": "Tensão mantida pela incerteza sobre o que vai acontecer. O leitor sabe menos do que quer, ou sabe algo que o personagem não sabe — e isso é o gatilho da virada de página.",
+          "preview": "Tensão mantida pela incerteza sobre o que vai acontecer. O leitor sabe menos do que quer, ou sabe algo que o personagem não sabe — e isso é o gatilho da virada de página."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1933,
+      "retainedText": "Tensão mantida pela incerteza sobre o que vai acontecer. O leitor sabe menos do que quer, ou sabe algo que o personagem não sabe — e isso é o gatilho da virada de página."
+    },
+    {
+      "key": "flashback",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1833,
+          "retained": false,
+          "characters": 181,
+          "text": "Retorno ao passado dentro da narrativa; analepse. Em português: 'retrospectiva'. Funciona melhor quando motivado por algo no presente — não como enciclopédia de fundo do personagem.",
+          "preview": "Retorno ao passado dentro da narrativa; analepse. Em português: 'retrospectiva'. Funciona melhor quando motivado por algo no presente — não como enciclopédia de fundo do personage…"
+        },
+        {
+          "line": 2022,
+          "retained": true,
+          "characters": 167,
+          "text": "Retorno ao passado dentro da narrativa. Pode ser cena completa ou fragmento de memória. Risco: interromper o ritmo; benefício: criar profundidade temporal e emocional.",
+          "preview": "Retorno ao passado dentro da narrativa. Pode ser cena completa ou fragmento de memória. Risco: interromper o ritmo; benefício: criar profundidade temporal e emocional."
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2022,
+      "retainedText": "Retorno ao passado dentro da narrativa. Pode ser cena completa ou fragmento de memória. Risco: interromper o ritmo; benefício: criar profundidade temporal e emocional."
+    },
+    {
+      "key": "oralidade",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1837,
+          "retained": false,
+          "characters": 195,
+          "text": "Característica de um texto que reproduz ou evoca a língua falada. Na ficção brasileira, é recurso de identidade e voz: de Guimarães Rosa a Carolina Maria de Jesus, a oralidade é estilo, não erro.",
+          "preview": "Característica de um texto que reproduz ou evoca a língua falada. Na ficção brasileira, é recurso de identidade e voz: de Guimarães Rosa a Carolina Maria de Jesus, a oralidade é e…"
+        },
+        {
+          "line": 2131,
+          "retained": true,
+          "characters": 219,
+          "text": "A cultura e a linguagem do que é falado — não transcrito. No Brasil, a oralidade carrega saberes que a escrita não fixou. Na ficção, respeitar a oralidade é não transformar a fala do personagem em texto limpo sem razão.",
+          "preview": "A cultura e a linguagem do que é falado — não transcrito. No Brasil, a oralidade carrega saberes que a escrita não fixou. Na ficção, respeitar a oralidade é não transformar a fala…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2131,
+      "retainedText": "A cultura e a linguagem do que é falado — não transcrito. No Brasil, a oralidade carrega saberes que a escrita não fixou. Na ficção, respeitar a oralidade é não transformar a fala do personagem em texto limpo sem razão."
+    },
+    {
+      "key": "coloquial",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1838,
+          "retained": false,
+          "characters": 178,
+          "text": "Adjetivo: pertencente ao registro informal da língua, da conversa cotidiana. Em ficção, o coloquial pode ser marca de voz, de personagem, de lugar — não é equivalente a 'errado'.",
+          "preview": "Adjetivo: pertencente ao registro informal da língua, da conversa cotidiana. Em ficção, o coloquial pode ser marca de voz, de personagem, de lugar — não é equivalente a 'errado'."
+        },
+        {
+          "line": 1982,
+          "retained": true,
+          "characters": 191,
+          "text": "Registro informal e espontâneo da língua — o da conversa, da intimidade, da proximidade social. Na ficção, o coloquial diz o nível de confiança entre personagens e o universo social do texto.",
+          "preview": "Registro informal e espontâneo da língua — o da conversa, da intimidade, da proximidade social. Na ficção, o coloquial diz o nível de confiança entre personagens e o universo soci…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1982,
+      "retainedText": "Registro informal e espontâneo da língua — o da conversa, da intimidade, da proximidade social. Na ficção, o coloquial diz o nível de confiança entre personagens e o universo social do texto."
+    },
+    {
+      "key": "registro",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1841,
+          "retained": false,
+          "characters": 188,
+          "text": "Variedade de língua adaptada à situação de comunicação: formal/informal, técnico/cotidiano, oral/escrito. Misturar registros com intenção é recurso poderoso; misturar sem intenção é ruído.",
+          "preview": "Variedade de língua adaptada à situação de comunicação: formal/informal, técnico/cotidiano, oral/escrito. Misturar registros com intenção é recurso poderoso; misturar sem intenção…"
+        },
+        {
+          "line": 1984,
+          "retained": true,
+          "characters": 187,
+          "text": "Variedade da língua usada de acordo com o contexto: formal/informal, oral/escrito, técnico/poético. Misturar registros intencionalmente é recurso literário; misturar sem perceber é ruído.",
+          "preview": "Variedade da língua usada de acordo com o contexto: formal/informal, oral/escrito, técnico/poético. Misturar registros intencionalmente é recurso literário; misturar sem perceber …"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 1984,
+      "retainedText": "Variedade da língua usada de acordo com o contexto: formal/informal, oral/escrito, técnico/poético. Misturar registros intencionalmente é recurso literário; misturar sem perceber é ruído."
+    },
+    {
+      "key": "haiku",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1859,
+          "retained": false,
+          "characters": 229,
+          "text": "Forma japonesa de poema brevíssimo: 17 sílabas em três versos (5-7-5). Origem na escola de Matsuo Bashō. Capta um instante sensorial com precisão. Em português, a contagem silábica é adaptada. O haiku não explica — apenas mostra.",
+          "preview": "Forma japonesa de poema brevíssimo: 17 sílabas em três versos (5-7-5). Origem na escola de Matsuo Bashō. Capta um instante sensorial com precisão. Em português, a contagem silábic…"
+        },
+        {
+          "line": 2038,
+          "retained": true,
+          "characters": 194,
+          "text": "Forma poética japonesa de 17 sílabas — 5-7-5. Busca o instante, a imagem, o silêncio ao redor. No Brasil, o haiku ganhou espaço na Semana de Arte Moderna e nas práticas de escrita contemporânea.",
+          "preview": "Forma poética japonesa de 17 sílabas — 5-7-5. Busca o instante, a imagem, o silêncio ao redor. No Brasil, o haiku ganhou espaço na Semana de Arte Moderna e nas práticas de escrita…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2038,
+      "retainedText": "Forma poética japonesa de 17 sílabas — 5-7-5. Busca o instante, a imagem, o silêncio ao redor. No Brasil, o haiku ganhou espaço na Semana de Arte Moderna e nas práticas de escrita contemporânea."
+    },
+    {
+      "key": "vergonha",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1876,
+          "retained": false,
+          "characters": 168,
+          "text": "Sentimento de exposição do que se julga inferior ou errado em si mesmo. Na narrativa, é força interna de grande potência: esconde, mente, paralisa e, às vezes, liberta.",
+          "preview": "Sentimento de exposição do que se julga inferior ou errado em si mesmo. Na narrativa, é força interna de grande potência: esconde, mente, paralisa e, às vezes, liberta."
+        },
+        {
+          "line": 2773,
+          "retained": true,
+          "characters": 280,
+          "text": "A vergonha é diferente da culpa: a culpa diz 'fiz uma coisa ruim', a vergonha diz 'sou uma coisa ruim'. Na ficção, a personagem com vergonha faz de tudo para que ninguém veja o que ela sente que é. Essa dinâmica — esconder, evitar, fugir da exposição — é motor narrativo poderoso.",
+          "preview": "A vergonha é diferente da culpa: a culpa diz 'fiz uma coisa ruim', a vergonha diz 'sou uma coisa ruim'. Na ficção, a personagem com vergonha faz de tudo para que ninguém veja o qu…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2773,
+      "retainedText": "A vergonha é diferente da culpa: a culpa diz 'fiz uma coisa ruim', a vergonha diz 'sou uma coisa ruim'. Na ficção, a personagem com vergonha faz de tudo para que ninguém veja o que ela sente que é. Essa dinâmica — esconder, evitar, fugir da exposição — é motor narrativo poderoso."
+    },
+    {
+      "key": "culpa",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1877,
+          "retained": false,
+          "characters": 179,
+          "text": "Consciência dolorosa de ter causado um dano — real ou imaginado. Diferente de vergonha (o que os outros veem), a culpa é o que a personagem sabe de si. Motor narrativo silencioso.",
+          "preview": "Consciência dolorosa de ter causado um dano — real ou imaginado. Diferente de vergonha (o que os outros veem), a culpa é o que a personagem sabe de si. Motor narrativo silencioso."
+        },
+        {
+          "line": 2772,
+          "retained": true,
+          "characters": 297,
+          "text": "A culpa na ficção precisa de objeto: a personagem é culpada de algo específico. A culpa difusa (sentir-se culpada sem saber de quê) é estado — e pode ser interessante, mas é mais difícil de narrar. Culpa é o que a personagem não consegue desfazer: ela carrega o peso do que fez e o que isso mudou.",
+          "preview": "A culpa na ficção precisa de objeto: a personagem é culpada de algo específico. A culpa difusa (sentir-se culpada sem saber de quê) é estado — e pode ser interessante, mas é mais …"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2772,
+      "retainedText": "A culpa na ficção precisa de objeto: a personagem é culpada de algo específico. A culpa difusa (sentir-se culpada sem saber de quê) é estado — e pode ser interessante, mas é mais difícil de narrar. Culpa é o que a personagem não consegue desfazer: ela carrega o peso do que fez e o que isso mudou."
+    },
+    {
+      "key": "floresta",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1896,
+          "retained": false,
+          "characters": 175,
+          "text": "Ecossistema denso, de alta biodiversidade e linguagem própria. Na narrativa brasileira, a floresta não é cenário: é força ativa, com leis que personagens urbanos não entendem.",
+          "preview": "Ecossistema denso, de alta biodiversidade e linguagem própria. Na narrativa brasileira, a floresta não é cenário: é força ativa, com leis que personagens urbanos não entendem."
+        },
+        {
+          "line": 2500,
+          "retained": true,
+          "characters": 411,
+          "text": "A floresta na ficção é espaço de abundância e de ameaça ao mesmo tempo — onde a vida pulsa com intensidade que a cidade não tem, e onde o ser humano não é o centro. Na ficção brasileira, a floresta é frequentemente a Amazônia, mas também a Mata Atlântica devastada, o Cerrado queimado, o Pantanal alagado. Escrever floresta é escrever um ecossistema com presença própria, não um cenário vazio aguardando enredo.",
+          "preview": "A floresta na ficção é espaço de abundância e de ameaça ao mesmo tempo — onde a vida pulsa com intensidade que a cidade não tem, e onde o ser humano não é o centro. Na ficção bras…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2500,
+      "retainedText": "A floresta na ficção é espaço de abundância e de ameaça ao mesmo tempo — onde a vida pulsa com intensidade que a cidade não tem, e onde o ser humano não é o centro. Na ficção brasileira, a floresta é frequentemente a Amazônia, mas também a Mata Atlântica devastada, o Cerrado queimado, o Pantanal alagado. Escrever floresta é escrever um ecossistema com presença própria, não um cenário vazio aguardando enredo."
+    },
+    {
+      "key": "focalizacao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1924,
+          "retained": false,
+          "characters": 222,
+          "text": "Perspectiva pela qual a história é narrada — quem vê, o quê e quanto. Genette distingue: focalização zero (narrador onisciente), interna (personagem vê) e externa (câmera fria). A focalização determina o que o leitor sabe.",
+          "preview": "Perspectiva pela qual a história é narrada — quem vê, o quê e quanto. Genette distingue: focalização zero (narrador onisciente), interna (personagem vê) e externa (câmera fria). A…"
+        },
+        {
+          "line": 2857,
+          "retained": true,
+          "characters": 341,
+          "text": "Quem percebe a história — não quem a conta, mas por qual perspectiva o mundo é filtrado. A distinção entre narrador e focalizador (de Gérard Genette) é útil: em 'ela saiu sem que ninguém visse', o narrador sabe; mas em 'ela saiu, sem avisar ninguém', a focalização pode ser da própria personagem. Toda escolha de foco é uma escolha política.",
+          "preview": "Quem percebe a história — não quem a conta, mas por qual perspectiva o mundo é filtrado. A distinção entre narrador e focalizador (de Gérard Genette) é útil: em 'ela saiu sem que …"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2857,
+      "retainedText": "Quem percebe a história — não quem a conta, mas por qual perspectiva o mundo é filtrado. A distinção entre narrador e focalizador (de Gérard Genette) é útil: em 'ela saiu sem que ninguém visse', o narrador sabe; mas em 'ela saiu, sem avisar ninguém', a focalização pode ser da própria personagem. Toda escolha de foco é uma escolha política."
+    },
+    {
+      "key": "perspectiva",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 1925,
+          "retained": false,
+          "characters": 159,
+          "text": "Em narrativa: posição de visão do narrador ou personagem. Em poesia: ângulo de tratamento do tema. A perspectiva não é neutra — toda escolha revela quem conta.",
+          "preview": "Em narrativa: posição de visão do narrador ou personagem. Em poesia: ângulo de tratamento do tema. A perspectiva não é neutra — toda escolha revela quem conta."
+        },
+        {
+          "line": 2298,
+          "retained": true,
+          "characters": 262,
+          "text": "O ângulo a partir do qual a história é contada. A perspectiva não é apenas técnica: ela governa o que pode ser sabido, o que é distorcido, o que fica fora de campo. Mudar de perspectiva muda a história — o mesmo evento tem peso diferente dependendo de quem o vê.",
+          "preview": "O ângulo a partir do qual a história é contada. A perspectiva não é apenas técnica: ela governa o que pode ser sabido, o que é distorcido, o que fica fora de campo. Mudar de persp…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2298,
+      "retainedText": "O ângulo a partir do qual a história é contada. A perspectiva não é apenas técnica: ela governa o que pode ser sabido, o que é distorcido, o que fica fora de campo. Mudar de perspectiva muda a história — o mesmo evento tem peso diferente dependendo de quem o vê."
+    },
+    {
+      "key": "tragedia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2003,
+          "retained": false,
+          "characters": 215,
+          "text": "Gênero dramático que conduz o protagonista à ruína por uma falha (hártia/hamártia). Aristóteles: catarse pelo terror e pela piedade. Na ficção contemporânea, a tragédia se mistura ao cotidiano — não há mais coturno.",
+          "preview": "Gênero dramático que conduz o protagonista à ruína por uma falha (hártia/hamártia). Aristóteles: catarse pelo terror e pela piedade. Na ficção contemporânea, a tragédia se mistura…"
+        },
+        {
+          "line": 2583,
+          "retained": true,
+          "characters": 374,
+          "text": "A tragédia é a forma narrativa em que a personagem, por falha ou destino, vai ao fundo — sem saída, sem redenção fácil. A tragédia clássica exige grandeza no que cai: o tamanho da queda é proporcional ao tamanho do que era antes. A ficção brasileira contemporânea tem suas próprias tragédias — menos aristocráticas, mais urgentes, enraizadas em estruturas sociais concretas.",
+          "preview": "A tragédia é a forma narrativa em que a personagem, por falha ou destino, vai ao fundo — sem saída, sem redenção fácil. A tragédia clássica exige grandeza no que cai: o tamanho da…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2583,
+      "retainedText": "A tragédia é a forma narrativa em que a personagem, por falha ou destino, vai ao fundo — sem saída, sem redenção fácil. A tragédia clássica exige grandeza no que cai: o tamanho da queda é proporcional ao tamanho do que era antes. A ficção brasileira contemporânea tem suas próprias tragédias — menos aristocráticas, mais urgentes, enraizadas em estruturas sociais concretas."
+    },
+    {
+      "key": "comedia",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2004,
+          "retained": false,
+          "characters": 202,
+          "text": "Gênero dramático de tom leve, com situações engraçadas, mal-entendidos e desfecho feliz ou neutro. Mas a melhor comédia toca no amargo: rir do que não conseguimos resolver. Machado de Assis sabia disso.",
+          "preview": "Gênero dramático de tom leve, com situações engraçadas, mal-entendidos e desfecho feliz ou neutro. Mas a melhor comédia toca no amargo: rir do que não conseguimos resolver. Machad…"
+        },
+        {
+          "line": 2584,
+          "retained": true,
+          "characters": 338,
+          "text": "A comédia não é o gênero menos sério — é o gênero que sobrevive ao que a tragédia não consegue. A comédia termina em integração (casamento, festa, reconciliação) onde a tragédia termina em dissolução. A comédia que leva a sério o que narra é tão exigente quanto a tragédia: o riso precisa de timing, de observação precisa e de humanidade.",
+          "preview": "A comédia não é o gênero menos sério — é o gênero que sobrevive ao que a tragédia não consegue. A comédia termina em integração (casamento, festa, reconciliação) onde a tragédia t…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2584,
+      "retainedText": "A comédia não é o gênero menos sério — é o gênero que sobrevive ao que a tragédia não consegue. A comédia termina em integração (casamento, festa, reconciliação) onde a tragédia termina em dissolução. A comédia que leva a sério o que narra é tão exigente quanto a tragédia: o riso precisa de timing, de observação precisa e de humanidade."
+    },
+    {
+      "key": "gritar",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2049,
+          "retained": false,
+          "characters": 156,
+          "text": "Elevar a voz ao máximo — de raiva, medo, alegria ou desespero. O grito é raro numa boa narrativa; exatamente por isso, quando aparece, precisa ser merecido.",
+          "preview": "Elevar a voz ao máximo — de raiva, medo, alegria ou desespero. O grito é raro numa boa narrativa; exatamente por isso, quando aparece, precisa ser merecido."
+        },
+        {
+          "line": 2762,
+          "retained": true,
+          "characters": 352,
+          "text": "O grito é o limite do suportável — quando o que estava contido precisa sair com força. Na ficção, o grito raro é mais poderoso do que o grito constante. A personagem que finalmente grita depois de páginas de contenção tem mais peso do que aquela que grita em toda cena de tensão. O silêncio antes do grito muitas vezes vale mais do que o próprio grito.",
+          "preview": "O grito é o limite do suportável — quando o que estava contido precisa sair com força. Na ficção, o grito raro é mais poderoso do que o grito constante. A personagem que finalment…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2762,
+      "retainedText": "O grito é o limite do suportável — quando o que estava contido precisa sair com força. Na ficção, o grito raro é mais poderoso do que o grito constante. A personagem que finalmente grita depois de páginas de contenção tem mais peso do que aquela que grita em toda cena de tensão. O silêncio antes do grito muitas vezes vale mais do que o próprio grito."
+    },
+    {
+      "key": "ciume",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2103,
+          "retained": false,
+          "characters": 217,
+          "text": "Medo de perder algo ou alguém para outro — mistura de amor, insegurança e raiva. Na ficção, o ciúme é motor narrativo clássico; o risco é virar clichê. A personagem que sente ciúme está admitindo que precisa do outro.",
+          "preview": "Medo de perder algo ou alguém para outro — mistura de amor, insegurança e raiva. Na ficção, o ciúme é motor narrativo clássico; o risco é virar clichê. A personagem que sente ciúm…"
+        },
+        {
+          "line": 2771,
+          "retained": true,
+          "characters": 276,
+          "text": "O ciúme é medo de perda vestido de possessividade. A personagem ciumenta raramente sabe que é medo o que está sentindo — e essa falta de consciência é o que torna o ciúme dramaticamente rico. Ciúme sem reflexão interna é comportamento; ciúme com reflexão interna é psicologia.",
+          "preview": "O ciúme é medo de perda vestido de possessividade. A personagem ciumenta raramente sabe que é medo o que está sentindo — e essa falta de consciência é o que torna o ciúme dramatic…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2771,
+      "retainedText": "O ciúme é medo de perda vestido de possessividade. A personagem ciumenta raramente sabe que é medo o que está sentindo — e essa falta de consciência é o que torna o ciúme dramaticamente rico. Ciúme sem reflexão interna é comportamento; ciúme com reflexão interna é psicologia."
+    },
+    {
+      "key": "memoria",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2124,
+          "retained": false,
+          "characters": 187,
+          "text": "A capacidade de reter e acessar o passado — sempre seletiva, sempre reescrita no presente. Proust soube disso: a memória não é arquivo, é invenção. A memória de uma personagem é política.",
+          "preview": "A capacidade de reter e acessar o passado — sempre seletiva, sempre reescrita no presente. Proust soube disso: a memória não é arquivo, é invenção. A memória de uma personagem é p…"
+        },
+        {
+          "line": 2576,
+          "retained": true,
+          "characters": 353,
+          "text": "A memória na ficção é reconstituição, não reprodução. O que a personagem lembra é moldado pelo que ela é agora — ela não acessa o passado puro, acessa o passado filtrado pela experiência subsequente. Por isso a memória literária é sempre parcial, seletiva, emotiva. A ficção que entende isso usa a memória como território de ambiguidade, não de certeza.",
+          "preview": "A memória na ficção é reconstituição, não reprodução. O que a personagem lembra é moldado pelo que ela é agora — ela não acessa o passado puro, acessa o passado filtrado pela expe…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2576,
+      "retainedText": "A memória na ficção é reconstituição, não reprodução. O que a personagem lembra é moldado pelo que ela é agora — ela não acessa o passado puro, acessa o passado filtrado pela experiência subsequente. Por isso a memória literária é sempre parcial, seletiva, emotiva. A ficção que entende isso usa a memória como território de ambiguidade, não de certeza."
+    },
+    {
+      "key": "exilio",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2128,
+          "retained": false,
+          "characters": 213,
+          "text": "O afastamento forçado ou voluntário do lugar de origem — geográfico, cultural ou linguístico. Na tradição literária brasileira, o exílio aparece no corpo dos que foram escravizados, nos retirantes, nos imigrantes.",
+          "preview": "O afastamento forçado ou voluntário do lugar de origem — geográfico, cultural ou linguístico. Na tradição literária brasileira, o exílio aparece no corpo dos que foram escravizado…"
+        },
+        {
+          "line": 2575,
+          "retained": true,
+          "characters": 389,
+          "text": "O exílio na ficção é o estado de quem não cabe onde está — por expulsão, por escolha forçada, por não pertencer ao lugar que habita. O exílio geográfico e o exílio interior têm estruturas narrativas distintas: o primeiro é a distância física da terra de origem; o segundo é a incapacidade de estar em casa mesmo quando se está nela. O Brasil tem uma longa história de escritoras no exílio.",
+          "preview": "O exílio na ficção é o estado de quem não cabe onde está — por expulsão, por escolha forçada, por não pertencer ao lugar que habita. O exílio geográfico e o exílio interior têm es…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2575,
+      "retainedText": "O exílio na ficção é o estado de quem não cabe onde está — por expulsão, por escolha forçada, por não pertencer ao lugar que habita. O exílio geográfico e o exílio interior têm estruturas narrativas distintas: o primeiro é a distância física da terra de origem; o segundo é a incapacidade de estar em casa mesmo quando se está nela. O Brasil tem uma longa história de escritoras no exílio."
+    },
+    {
+      "key": "humor",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2140,
+          "retained": false,
+          "characters": 203,
+          "text": "O riso que emerge de incongruência, surpresa ou reconhecimento. Na ficção, o humor não é decoração: é modo de conhecimento. Quem ri de uma personagem também a entende — às vezes melhor do que quem chora.",
+          "preview": "O riso que emerge de incongruência, surpresa ou reconhecimento. Na ficção, o humor não é decoração: é modo de conhecimento. Quem ri de uma personagem também a entende — às vezes m…"
+        },
+        {
+          "line": 2581,
+          "retained": true,
+          "characters": 360,
+          "text": "O humor na ficção brasileira tem longa tradição — da ironia de Machado de Assis ao absurdo de Murilo Rubião, do grotesco regionalista ao humor periférico contemporâneo. O humor que funciona na ficção não é decoração: é modo de ver, de sobreviver, de resistir. A personagem que tem senso de humor tem uma forma de olhar para o mundo que não se dobra facilmente.",
+          "preview": "O humor na ficção brasileira tem longa tradição — da ironia de Machado de Assis ao absurdo de Murilo Rubião, do grotesco regionalista ao humor periférico contemporâneo. O humor qu…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2581,
+      "retainedText": "O humor na ficção brasileira tem longa tradição — da ironia de Machado de Assis ao absurdo de Murilo Rubião, do grotesco regionalista ao humor periférico contemporâneo. O humor que funciona na ficção não é decoração: é modo de ver, de sobreviver, de resistir. A personagem que tem senso de humor tem uma forma de olhar para o mundo que não se dobra facilmente."
+    },
+    {
+      "key": "subversao",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2225,
+          "retained": false,
+          "characters": 260,
+          "text": "O gesto de desfazer o que se esperava — na forma, no tema ou no personagem. A subversão literária não é destruição: é revelar que o convencional tinha uma fissura por onde algo mais verdadeiro poderia entrar. Subverter exige conhecer a fundo o que se subverte.",
+          "preview": "O gesto de desfazer o que se esperava — na forma, no tema ou no personagem. A subversão literária não é destruição: é revelar que o convencional tinha uma fissura por onde algo ma…"
+        },
+        {
+          "line": 2418,
+          "retained": true,
+          "characters": 391,
+          "text": "A subversão na ficção é o movimento que usa as convenções de um gênero para contrariá-las de dentro. A subversão literária não ignora a tradição: a conhece bem o suficiente para desviar dela com precisão. O conto de fadas subvertido, o romance policial que não resolve o crime, a ficção científica que rejeita o progresso — cada subversão produz sentido em relação ao que estava subvertendo.",
+          "preview": "A subversão na ficção é o movimento que usa as convenções de um gênero para contrariá-las de dentro. A subversão literária não ignora a tradição: a conhece bem o suficiente para d…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2418,
+      "retainedText": "A subversão na ficção é o movimento que usa as convenções de um gênero para contrariá-las de dentro. A subversão literária não ignora a tradição: a conhece bem o suficiente para desviar dela com precisão. O conto de fadas subvertido, o romance policial que não resolve o crime, a ficção científica que rejeita o progresso — cada subversão produz sentido em relação ao que estava subvertendo."
+    },
+    {
+      "key": "ambiguidade",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2226,
+          "retained": false,
+          "characters": 262,
+          "text": "A capacidade de um texto de sustentar mais de uma leitura ao mesmo tempo — sem que uma cancele a outra. A ambiguidade não é imprecisão: é precisão dupla. Nos grandes textos, ela é intencional: o que a personagem quer e o que a personagem faz não é a mesma coisa.",
+          "preview": "A capacidade de um texto de sustentar mais de uma leitura ao mesmo tempo — sem que uma cancele a outra. A ambiguidade não é imprecisão: é precisão dupla. Nos grandes textos, ela é…"
+        },
+        {
+          "line": 2693,
+          "retained": true,
+          "characters": 333,
+          "text": "A ambiguidade é quando o texto sustenta duas leituras ao mesmo tempo sem decidir por uma. A ficção que sustenta ambiguidade resiste à resolução fácil: não responde onde poderia, deixa aberto onde poderia fechar. A ambiguidade que funciona não é indecisão da escritora — é confiança de que a complexidade não precisa ser simplificada.",
+          "preview": "A ambiguidade é quando o texto sustenta duas leituras ao mesmo tempo sem decidir por uma. A ficção que sustenta ambiguidade resiste à resolução fácil: não responde onde poderia, d…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2693,
+      "retainedText": "A ambiguidade é quando o texto sustenta duas leituras ao mesmo tempo sem decidir por uma. A ficção que sustenta ambiguidade resiste à resolução fácil: não responde onde poderia, deixa aberto onde poderia fechar. A ambiguidade que funciona não é indecisão da escritora — é confiança de que a complexidade não precisa ser simplificada."
+    },
+    {
+      "key": "vulnerabilidade",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2230,
+          "retained": false,
+          "characters": 274,
+          "text": "O estado de quem pode ser ferido — e que se expõe mesmo assim. A vulnerabilidade em ficção não é fraqueza: é condição para que algo real aconteça entre personagens. O que não pode ser ferido também não pode ser tocado. A cena mais vulnerável é quase sempre a mais memorável.",
+          "preview": "O estado de quem pode ser ferido — e que se expõe mesmo assim. A vulnerabilidade em ficção não é fraqueza: é condição para que algo real aconteça entre personagens. O que não pode…"
+        },
+        {
+          "line": 2515,
+          "retained": true,
+          "characters": 353,
+          "text": "A vulnerabilidade na ficção é o que torna a personagem humana — o ponto em que ela pode ser atingida, onde a armadura cede, onde o que é mais essencial fica exposto. A personagem sem vulnerabilidade não tem interior que o leitor possa alcançar. A vulnerabilidade bem escrita não é fraqueza: é a abertura que permite a conexão entre personagem e leitora.",
+          "preview": "A vulnerabilidade na ficção é o que torna a personagem humana — o ponto em que ela pode ser atingida, onde a armadura cede, onde o que é mais essencial fica exposto. A personagem …"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2515,
+      "retainedText": "A vulnerabilidade na ficção é o que torna a personagem humana — o ponto em que ela pode ser atingida, onde a armadura cede, onde o que é mais essencial fica exposto. A personagem sem vulnerabilidade não tem interior que o leitor possa alcançar. A vulnerabilidade bem escrita não é fraqueza: é a abertura que permite a conexão entre personagem e leitora."
+    },
+    {
+      "key": "luz",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2259,
+          "retained": false,
+          "characters": 285,
+          "text": "O oposto da escuridão — mas também atenção, revelação, exposição. A luz em ficção pode ser alívio ou ameaça: iluminar é tornar visível, e nem sempre o que a personagem quer é ser vista. A metáfora da luz como compreensão é antiga, mas na cena concreta ela precisa ter origem e direção.",
+          "preview": "O oposto da escuridão — mas também atenção, revelação, exposição. A luz em ficção pode ser alívio ou ameaça: iluminar é tornar visível, e nem sempre o que a personagem quer é ser …"
+        },
+        {
+          "line": 2776,
+          "retained": true,
+          "characters": 303,
+          "text": "A luz na ficção é revelação — literal e metafórica. Onde a luz cai (e onde não cai) organiza a percepção da cena. A luz da manhã tem qualidade diferente da da tarde, e ambas são diferentes da luz artificial. A escritora que controla a luz da cena controla o que o leitor pode ver e o que fica na sombra.",
+          "preview": "A luz na ficção é revelação — literal e metafórica. Onde a luz cai (e onde não cai) organiza a percepção da cena. A luz da manhã tem qualidade diferente da da tarde, e ambas são d…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2776,
+      "retainedText": "A luz na ficção é revelação — literal e metafórica. Onde a luz cai (e onde não cai) organiza a percepção da cena. A luz da manhã tem qualidade diferente da da tarde, e ambas são diferentes da luz artificial. A escritora que controla a luz da cena controla o que o leitor pode ver e o que fica na sombra."
+    },
+    {
+      "key": "amor",
+      "classification": "conflitante",
+      "occurrences": [
+        {
+          "line": 2283,
+          "retained": false,
+          "characters": 259,
+          "text": "O estado de quem faz do outro parte de si mesma. O amor na ficção não é sentimento: é condição — muda o que a personagem vê, escolhe, teme. O que ela faz por amor e o que ela deixa de fazer por amor revelam o peso que essa palavra tem no universo da história.",
+          "preview": "O estado de quem faz do outro parte de si mesma. O amor na ficção não é sentimento: é condição — muda o que a personagem vê, escolhe, teme. O que ela faz por amor e o que ela deix…"
+        },
+        {
+          "line": 2770,
+          "retained": true,
+          "characters": 320,
+          "text": "Amor como substantivo na ficção é o estado — o que a personagem está dentro. Diferente de 'amar' (o ato), o amor é condição. Essa condição molda como a personagem vê, o que tolera, o que arrisca. Na ficção contemporânea, o amor que mais importa raramente é o romântico isolado: é o que existe junto com outros conflitos.",
+          "preview": "Amor como substantivo na ficção é o estado — o que a personagem está dentro. Diferente de 'amar' (o ato), o amor é condição. Essa condição molda como a personagem vê, o que tolera…"
+        }
+      ],
+      "discardedDeclarations": 1,
+      "retainedLine": 2770,
+      "retainedText": "Amor como substantivo na ficção é o estado — o que a personagem está dentro. Diferente de 'amar' (o ato), o amor é condição. Essa condição molda como a personagem vê, o que tolera, o que arrisca. Na ficção contemporânea, o amor que mais importa raramente é o romântico isolado: é o que existe junto com outros conflitos."
+    }
+  ]
+}
