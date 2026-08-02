@@ -48,16 +48,20 @@ function makeDocument(
 }
 
 function standardDocuments(): SeedDocument[] {
+  // BroadcastChannel atravessa contextos paralelos do mesmo navegador. IDs únicos
+  // impedem que duas bancas independentes pareçam duas abas do mesmo documento.
+  const namespace = crypto.randomUUID()
+  const id = (value: string) => `${namespace}-${value}`
   const now = Date.now()
   return [
-    makeDocument('active-open', 'Caderno aberto', {
+    makeDocument(id('active-open'), 'Caderno aberto', {
       text: 'Rascunho ativo sobre lembranças do quintal.',
       status: 'Rascunho',
       tags: ['memória'],
       createdAt: now - 6 * 86_400_000,
       updatedAt: now - 5 * 60_000,
     }),
-    makeDocument('water-deep', 'Água funda', {
+    makeDocument(id('water-deep'), 'Água funda', {
       text: 'Um poema atravessa o mar e volta pela chuva.',
       status: 'Pronto',
       tags: ['Poesia', 'mar'],
@@ -65,7 +69,7 @@ function standardDocuments(): SeedDocument[] {
       createdAt: now - 4 * 86_400_000,
       updatedAt: now - 2 * 3_600_000,
     }),
-    makeDocument('living-city', 'Cidade viva', {
+    makeDocument(id('living-city'), 'Cidade viva', {
       text: 'Ensaio sobre a cidade, suas janelas e calçadas.',
       status: 'Pronto',
       tags: ['ensaio'],
@@ -73,7 +77,7 @@ function standardDocuments(): SeedDocument[] {
       createdAt: now - 1 * 86_400_000,
       updatedAt: now - 1 * 86_400_000,
     }),
-    makeDocument('endless-sea', 'Mar sem fim', {
+    makeDocument(id('endless-sea'), 'Mar sem fim', {
       text: 'Versos de travessia e retorno.',
       status: 'Em corte',
       tags: ['poesia', 'travessia'],
