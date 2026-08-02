@@ -12,7 +12,10 @@ Experimento isolado que preserva a identidade editorial e as engines locais do E
 - M0.9: encerrado como auditoria técnica, sem autorizar lançamento ou substituição;
 - milestone estrutural: **M1.0 — Engines superiores ao Escrevaral legado**;
 - tranche estratégica ativa: **M1-R0 — Biblioteca de Autoridade e ética de aprendizagem**;
-- baseline funcional validada: cabeça `3bf5a5185c97d2ac49c5bb60b0d4525890528ac7`, **182 cenários por navegador, 364 execuções**;
+- última cabeça integral validada antes da abertura do mapa de fontes: `8ac6020ba0d431d9781e40f1b631a4b3c53c663d`, **182 cenários por navegador, 364 execuções**;
+- Biblioteca de Autoridade inicial: **nove obras registradas**, sem binários no repositório;
+- pergunta ativa: sujeito expresso, recuperável/oculto, indeterminado e oração sem sujeito;
+- engine de Sintaxe de produção: **não autorizada**;
 - engines expostas: Revisão, Espelho de Voz, Contexto, RimaLab, Palavras/Léxico e análise morfológica verbal;
 - E2-V: 34 casos de desenvolvimento e 24 casos em conjunto adversarial separado;
 - infinitivo pessoal: primeira família verbal com proveniência verificada e avaliação separada em **24/24**;
@@ -29,17 +32,22 @@ M1-R0 é uma pausa deliberada antes de novas engines ou novos lotes lexicais. O 
 Leia nesta ordem:
 
 1. `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md` — ética, ciclo de fontes, persona e M1-R0;
-2. `AGENTS.md` — obrigações de qualquer agente;
-3. `docs/METHODS.md` — CLARO, banca e validação;
-4. `docs/logs/2026-08-01-m1-e2-algures-outrora.md` — fechamento lexical mais recente e falhas preservadas;
-5. `docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md` — fechamento E2-V e limites;
-6. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases e adversário mensurável;
-7. `docs/PLAN.md` — sequência aprovada anterior à pausa estratégica;
-8. `docs/personas/EVA_CHARA.md`, `EVA_CHARA_PROMPT.md` e `EVA_CHARA_SCORECARD.md`;
-9. `docs/linguistics/verb-provenance.json` — estado das famílias verbais e suas evidências;
-10. `docs/logs/2026-07-29-m1-e2-inventario-lexical.md` — integridade lexical pendente;
-11. `docs/MEMORY.md` e `docs/CHANGELOG.md` — decisões permanentes e mudanças relevantes;
-12. contratos globais em `../docs/product/`.
+2. `docs/memory/2026-08-02-m1-r0-biblioteca-e-mapa-sujeito.md` — memória operacional atual e primeiro mapa comparativo;
+3. `docs/sources/source-registry.yaml` — registro machine-readable das nove obras e seus limites;
+4. `docs/sources/rule-card.schema.yaml` — contrato da ficha obrigatória por regra;
+5. `AGENTS.md` — obrigações de qualquer agente;
+6. `docs/METHODS.md` — CLARO, banca e validação;
+7. `docs/logs/2026-08-01-m1-e2-algures-outrora.md` — fechamento lexical mais recente e falhas preservadas;
+8. `docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md` — fechamento E2-V e limites;
+9. `docs/M1_0_ENGINES_SUPERIORES.md` — missão, critérios, fases e adversário mensurável;
+10. `docs/PLAN.md` — sequência aprovada anterior à pausa estratégica;
+11. `docs/personas/EVA_CHARA.md`, `EVA_CHARA_PROMPT.md` e `EVA_CHARA_SCORECARD.md`;
+12. `docs/linguistics/verb-provenance.json` — estado das famílias verbais e suas evidências;
+13. `docs/logs/2026-07-29-m1-e2-inventario-lexical.md` — integridade lexical pendente;
+14. `docs/MEMORY.md` e `docs/CHANGELOG.md` — histórico consolidado anterior e mudanças relevantes;
+15. contratos globais em `../docs/product/`.
+
+A tabela de disponibilidade presente na abertura histórica da cápsula não deve ser usada como estado corrente. `docs/sources/source-registry.yaml` é a referência atual da Biblioteca de Autoridade.
 
 Não declare superioridade global por contagem ou por corpus pequeno. Cada avanço exige baseline, caso reproduzível, correção mínima, matriz integral, documentação e evidência na cabeça exata.
 
@@ -140,18 +148,28 @@ A cabeça funcional `0e5177d5c801a4a9b8833af35baa059af486f6c4` demonstrou:
 
 O estado `verified` vale somente para o escopo declarado em `docs/linguistics/verb-provenance.json`. Não representa uma teoria completa do infinitivo flexionado nem aprovação acadêmica.
 
-## Próximo trabalho lógico — M1-R0
+## Estado M1-R0
 
-1. mapear metadados, sumários, prefácios metodológicos e capítulos relevantes das obras recebidas;
-2. manter os binários apenas como material privado temporário, fora do GitHub e da distribuição;
-3. abrir a primeira pergunta: sujeito expresso, sujeito recuperável/oculto, sujeito indeterminado e oração sem sujeito;
-4. registrar páginas, nomenclaturas, convergências e divergências;
-5. confrontar ao menos duas fontes adequadas quando possível;
-6. escrever síntese e exemplos próprios depois de fechar as fontes;
-7. criar ficha de regra, positivos, negativos e adversariais;
-8. convocar Eva Chara antes de qualquer implementação;
-9. somente depois decidir se Sintaxe v1 pode receber uma primeira regra;
-10. retomar os 66 conflitos lexicais apenas após fechar esta pausa estratégica.
+Concluído:
+
+1. ética de aprendizagem e Biblioteca de Autoridade formalizadas;
+2. nove obras registradas com papel, escopo, cautelas e restrições;
+3. duas gramáticas centrais consultadas no recorte da primeira pergunta;
+4. primeiro mapa de convergências, divergências e fronteiras criado;
+5. exemplos originais de pesquisa criados, ainda fora de corpus;
+6. contrato da ficha de regra criado;
+7. nenhuma engine, nota ou corpus alterado.
+
+Próximo trabalho lógico:
+
+1. fechar a leitura comparativa de `se`, passiva pronominal e concordância;
+2. fechar a divergência sobre `ter` existencial, marcando variante e registro;
+3. consultar pontualmente o *Novo dicionário de dúvidas* para `haver`, `ter` e construções com `se`;
+4. preencher a primeira ficha de regra sem autorizar implementação;
+5. pesquisar corpus brasileiro aberto e licenciado;
+6. separar desenvolvimento e avaliação;
+7. convocar Eva Chara com negativos adversariais;
+8. decidir entre abrir uma família mínima de Sintaxe v1 ou continuar pesquisando.
 
 A persona primária de pesquisa é a **leitora-escritora de travessia**: mulher brasileira jovem-adulta, leitora e escritora de ficção, com afinidade especial por romance, fantasia e romantasia. É hipótese estratégica a validar, não totalidade do público nem autorização para estereótipos.
 
