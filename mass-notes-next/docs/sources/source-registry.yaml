@@ -1,0 +1,238 @@
+version: 1
+updated_at: 2026-08-02
+status: active_private_research_registry
+policy:
+  authority_library_is_not_corpus: true
+  raw_files_in_repository: false
+  raw_files_in_distribution: false
+  final_explanations_must_be_original_or_licensed: true
+  final_examples_must_be_original_or_licensed: true
+  source_disagreement_must_be_preserved: true
+  source_location_required_for_rule_cards: true
+  source_of_truth: docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md
+
+current_research_question:
+  id: m1-r0-subject-boundaries
+  question: >-
+    Como distinguir sujeito expresso, sujeito recuperável ou oculto,
+    sujeito indeterminado e oração sem sujeito sem depender apenas
+    da forma isolada do verbo?
+  status: source_mapping
+  production_engine_open: false
+  development_corpus_open: false
+  evaluation_corpus_open: false
+  human_validation_open: false
+
+sources:
+  - id: bechara-licoes-20e
+    title: Lições de Português pela análise sintática
+    authors: [Evanildo Bechara]
+    edition: 20a edição revista e ampliada
+    year: 2018
+    isbn: "9788520940808"
+    language_scope: português, com uso prioritário como referência para pt-BR
+    authority_role: primary_syntax
+    research_status: consulted_current_question
+    relevant_locations:
+      - "Lição II — termos essenciais da oração"
+      - "Lição IV, §§ 1–4 — sujeito indeterminado, oração sem sujeito e verbos impessoais"
+      - "marcadores digitais [10]–[11] no arquivo privado"
+    known_value:
+      - separa sujeito indeterminado de oração sem sujeito
+      - inclui intenção comunicativa na indeterminação
+      - relaciona impessoalidade à ausência de atribuição a um participante
+      - oferece contraste entre haver e existir
+    cautions:
+      - orientação normativa e tradição terminológica precisam ser separadas de descrição de uso
+      - exemplos da obra são material de estudo, não corpus distribuível
+    rights:
+      protected_work: true
+      database_reconstruction_allowed: false
+      repository_storage_allowed: false
+      use_mode: private_consultation_and_original_synthesis
+
+  - id: cunha-cintra-nova-gramatica-7e
+    title: Nova gramática do português contemporâneo
+    authors: [Celso Cunha, Lindley Cintra]
+    edition: 7a edição, 2a impressão
+    year: 2017
+    isbn: "9788583000310"
+    language_scope: português pluricêntrico, com seções e exemplos brasileiros e europeus
+    authority_role: primary_comparative_grammar
+    research_status: consulted_current_question
+    relevant_locations:
+      - "pp. 138–145 — representação do sujeito, sujeito oculto, indeterminado e oração sem sujeito"
+      - "pp. 141–142 — sujeito oculto determinado"
+      - "p. 142 — sujeito indeterminado"
+      - "pp. 143–144 — oração sem sujeito"
+    known_value:
+      - define sujeito oculto como identificável por desinência ou contexto contíguo
+      - restringe a seção de indeterminação aos padrões de terceira pessoa do plural e se impessoal
+      - documenta ter existencial na linguagem coloquial do Brasil e em usos literários
+      - registra usos figurados de verbos meteorológicos com sujeito expresso
+    cautions:
+      - mistura variedades nacionais e épocas; todo uso precisa de marcação de variante e registro
+      - exemplos da obra são material de estudo, não corpus distribuível
+    rights:
+      protected_work: true
+      database_reconstruction_allowed: false
+      repository_storage_allowed: false
+      use_mode: private_consultation_and_original_synthesis
+
+  - id: bechara-duvidas-2e
+    title: Novo dicionário de dúvidas da língua portuguesa
+    authors: [Evanildo Bechara, Shahira Mahmud]
+    edition: 2a edição
+    year: 2018
+    isbn: "9788520943267"
+    language_scope: português com forte orientação para a tradição e o uso brasileiro monitorado
+    authority_role: targeted_usage_reference
+    research_status: registered_not_yet_consulted_for_current_question
+    known_value:
+      - contrasta tradição, concessões e usos em consolidação
+      - permite consultas localizadas por construção
+    cautions:
+      - não converter verbetes em base de dados
+      - confrontar recomendações com gramáticas e corpus
+    rights:
+      protected_work: true
+      database_reconstruction_allowed: false
+      repository_storage_allowed: false
+      use_mode: private_targeted_consultation
+
+  - id: nascentes-sinonimos-4e
+    title: Dicionário de sinônimos
+    authors: [Antenor Nascentes]
+    edition: 4a edição revista e atualizada, 2a reimpressão
+    year: 2018
+    isbn: "9788583000938"
+    language_scope: português
+    authority_role: lexical_nuance_reference
+    research_status: registered
+    known_value:
+      - organiza grupos por diferenças de sentido e uso contextual
+      - oferece fundamento metodológico para separar proximidade de equivalência
+    cautions:
+      - não copiar verbetes nem reconstruir grupos em banco de dados
+      - confirmar vitalidade contemporânea com corpus brasileiro licenciado
+    rights:
+      protected_work: true
+      database_reconstruction_allowed: false
+      repository_storage_allowed: false
+      use_mode: private_consultation_and_original_lexical_synthesis
+
+  - id: sacconi-nao-erre-mais-1e
+    title: Não erre mais!
+    authors: [Luiz Antonio Sacconi]
+    edition: 1a edição desta reformulação
+    year: 2018
+    isbn: "9788582304242"
+    language_scope: norma culta brasileira segundo orientação normativa do autor
+    authority_role: secondary_normative_and_didactic
+    research_status: registered
+    known_value:
+      - reúne dúvidas recorrentes e exercícios
+      - oferece contraste normativo explícito
+    cautions:
+      - tom prescritivo não representa sozinho a política editorial do Escrevaral
+      - não usar como autoridade exclusiva
+    rights:
+      protected_work: true
+      repository_storage_allowed: false
+      use_mode: private_secondary_consultation
+
+  - id: bechara-compreender-textos-1e
+    title: Compreender e interpretar os textos
+    authors: [Evanildo Bechara, Shahira Mahmud, Fatima Amendoeira Maciel]
+    edition: 1a edição
+    year: 2020
+    isbn: "9788520944578"
+    language_scope: português brasileiro em contexto didático e de provas
+    authority_role: text_semantics_and_cohesion_reference
+    research_status: registered_for_later_phase
+    known_value:
+      - polissemia, sinonímia e alterações semânticas
+      - coesão, coerência, intertextualidade e tipologia textual
+    cautions:
+      - finalidade de concursos não equivale ao contexto de oficina literária
+      - exemplos de prova não entram automaticamente em corpus
+    rights:
+      protected_work: true
+      repository_storage_allowed: false
+      use_mode: private_consultation_and_original_synthesis
+
+  - id: moreno-guia-pontuacao-v4
+    title: Guia prático do português correto — volume 4, pontuação
+    authors: [Cláudio Moreno]
+    edition: edição de 2011
+    year: 2011
+    isbn: "9788525423320"
+    language_scope: português brasileiro
+    authority_role: punctuation_norm_and_processing_reference
+    research_status: registered_for_later_phase
+    known_value:
+      - relaciona pontuação, segmentação e esforço de processamento do leitor
+      - distingue convenção, clareza e preferência estilística
+    cautions:
+      - paginação do TXT privado precisa ser confirmada na edição impressa
+      - não converter perguntas e respostas em base do produto
+    rights:
+      protected_work: true
+      repository_storage_allowed: false
+      use_mode: private_consultation_and_original_synthesis
+
+  - id: lukeman-arte-pontuacao-br-2011
+    title: A arte da pontuação
+    original_title: "A Dash of Style: The Art and Mastery of Punctuation"
+    authors: [Noah Lukeman]
+    translator: Marcelo Dias Almada
+    edition: edição brasileira
+    year: 2011
+    isbn: "9788580630121"
+    language_scope: obra originalmente escrita em inglês; tradução brasileira
+    authority_role: literary_craft_reference
+    research_status: registered_for_later_phase
+    known_value:
+      - trata pontuação como ritmo, andamento, foco e construção de cena
+      - dirige-se explicitamente a escritores
+    cautions:
+      - não é autoridade normativa de português brasileiro
+      - OCR privado é ruidoso e exige conferência na edição impressa
+      - generalizações sobre perfis de escritores são hipóteses de ofício, não diagnósticos
+    rights:
+      protected_work: true
+      repository_storage_allowed: false
+      use_mode: private_craft_consultation_and_original_synthesis
+
+  - id: squarisi-cunha-1001-dicas
+    title: 1001 dicas de português — manual descomplicado
+    authors: [Dad Squarisi, Paulo José Cunha]
+    edition: edição de 2015
+    year: 2015
+    isbn: "9788572449168"
+    language_scope: português brasileiro
+    authority_role: secondary_quick_reference
+    research_status: registered
+    known_value:
+      - identifica dúvidas frequentes em situação real de escrita
+      - oferece linguagem didática e consulta rápida
+    cautions:
+      - não usar como fonte única para regra linguística
+      - paginação do TXT privado precisa ser confirmada na edição impressa
+    rights:
+      protected_work: true
+      repository_storage_allowed: false
+      use_mode: private_secondary_consultation
+
+raw_material_disposal:
+  repository_copy_created: false
+  distribution_copy_created: false
+  allowed_persistent_derivatives:
+    - bibliographic_metadata
+    - source_locations
+    - original_summaries
+    - recorded_disagreements
+    - original_examples
+    - licensed_or_original_corpora
+    - tests_and_metrics
+    - implementation_decisions
