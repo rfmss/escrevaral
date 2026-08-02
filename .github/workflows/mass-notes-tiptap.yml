@@ -119,15 +119,21 @@ jobs:
           path.write_text(text, encoding='utf-8')
           PY
 
-          git show HEAD^:.github/workflows/mass-notes-tiptap.yml > .github/workflows/mass-notes-tiptap.yml
+          git show b5a7c39dfdba6b7505c38073d6abfe94bc9ed393:.github/workflows/mass-notes-tiptap.yml > .github/workflows/mass-notes-tiptap.yml
           git rm .github/workflows/m1-e2-algures-outrora-executor.yml
           git rm mass-notes-next/scripts/apply-algures-outrora-tranche.py
+
+          git restore \
+            mass-notes-next/e2-lexical-inventory.json \
+            mass-notes-next/e2-lexical-inventory.md \
+            mass-notes-next/e2-v-evidence-audit.json
+          git clean -fd mass-notes-next/public/assets/anatomia/
           git diff --check
 
           python3 - <<'PY'
           import subprocess
 
-          allowed = {
+          expected = {
               '.github/workflows/mass-notes-tiptap.yml',
               '.github/workflows/m1-e2-algures-outrora-executor.yml',
               'index.html',
@@ -139,30 +145,12 @@ jobs:
               'mass-notes-next/tests/m1-e2-algures-outrora-source.spec.ts',
               'mass-notes-next/tests/m1-e2-algures-outrora-regression.spec.ts',
               'mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md',
-              'mass-notes-next/public/anatomia-do-livro.html',
-              'mass-notes-next/public/assets/anatomia/anatomia-asset-1.webp',
-              'mass-notes-next/public/assets/anatomia/anatomia-asset-2.webp',
           }
           lines = subprocess.check_output(['git', 'status', '--short'], text=True).splitlines()
           paths = {line[3:] for line in lines}
-          unexpected = paths - allowed
-          required = {
-              '.github/workflows/mass-notes-tiptap.yml',
-              '.github/workflows/m1-e2-algures-outrora-executor.yml',
-              'index.html',
-              'lexical-engine.js',
-              'service-worker.js',
-              'mass-notes-next/e2-definition-duplicates.json',
-              'mass-notes-next/e2-definition-duplicates.md',
-              'mass-notes-next/scripts/apply-algures-outrora-tranche.py',
-              'mass-notes-next/tests/m1-e2-algures-outrora-source.spec.ts',
-              'mass-notes-next/tests/m1-e2-algures-outrora-regression.spec.ts',
-              'mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md',
-          }
-          missing = required - paths
-          if unexpected or missing:
+          if paths != expected:
               raise SystemExit(
-                  f'Fronteira inválida; inesperados={sorted(unexpected)} ausentes={sorted(missing)}'
+                  f'Fronteira inválida; encontrados={sorted(paths)} esperados={sorted(expected)}'
               )
           PY
 
