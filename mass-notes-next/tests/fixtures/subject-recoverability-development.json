@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "split": "development",
+  "purpose": "Conjunto sintético e original para desenhar a fronteira entre sujeito recuperável e terceira pessoa plural indeterminada. Pode orientar hipótese; não pode validar a engine.",
+  "evidenceLevel": "synthetic_research",
+  "maySupportVerified": false,
+  "mustNotBeImportedByEvaluationRunner": true,
+  "targetPhenomenon": "third_person_plural_subject_recoverability",
+  "contextWindow": "oração atual e período imediatamente anterior",
+  "cases": [
+    {
+      "id": "dev-rec-fiction-sentinels",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "As sentinelas cruzaram o pátio. Bateram três vezes no portão.",
+      "target": "Bateram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "As sentinelas"
+      },
+      "rationale": "O período anterior oferece referente plural compatível.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-dialogue-musicians",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— Os músicos já chegaram? — Chegaram e deixaram os instrumentos no palco.",
+      "target": "Chegaram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "Os músicos"
+      },
+      "rationale": "A pergunta introduz o referente plural retomado na resposta.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-essay-researchers",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Os pesquisadores revisaram as amostras. Encontraram duas inconsistências no método.",
+      "target": "Encontraram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "Os pesquisadores"
+      },
+      "rationale": "A continuidade tópica favorece a retomada de pesquisadores.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-news-firefighters",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Os bombeiros entraram no galpão ao amanhecer. Retiraram quatro pessoas do local.",
+      "target": "Retiraram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "Os bombeiros"
+      },
+      "rationale": "O referente plural agente permanece no período contíguo.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-oral-brothers",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Aí meus irmãos chegaram. Ficaram conversando até tarde.",
+      "target": "Ficaram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "meus irmãos"
+      },
+      "rationale": "A fala mantém meus irmãos como tópico imediatamente anterior.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-fiction-owls",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "As corujas rodearam a torre. Sumiram quando o sino tocou.",
+      "target": "Sumiram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "As corujas"
+      },
+      "rationale": "O único referente plural animado é retomado.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-dialogue-publishers",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— E as editoras? — Responderam ontem, mas pediram mais prazo.",
+      "target": "Responderam",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "as editoras"
+      },
+      "rationale": "A elipse na resposta recupera o tópico da pergunta.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-rec-essay-hypotheses",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "As hipóteses foram comparadas. Permaneceram distintas após o controle.",
+      "target": "Permaneceram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "As hipóteses"
+      },
+      "rationale": "A predicação seguinte retoma o sujeito plural inanimado.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-fiction-door",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Bateram três vezes no portão antes do amanhecer.",
+      "target": "Bateram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "Não há referente plural expresso ou recuperável no recorte.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-dialogue-school",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— Telefonaram da escola enquanto você dormia.",
+      "target": "Telefonaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A origem da chamada não identifica quem telefonou.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-essay-neutrality",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Afirmaram durante anos que o método era neutro.",
+      "target": "Afirmaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A terceira pessoa plural não encontra referente no recorte.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-news-cables",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Roubaram os cabos de energia durante a madrugada.",
+      "target": "Roubaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "O agente humano é pressuposto, mas não identificado.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-oral-street",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Disseram que a rua vai fechar amanhã.",
+      "target": "Disseram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A fonte da informação permanece não identificada.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-fiction-name",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Chamaram meu nome no fundo do corredor.",
+      "target": "Chamaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "Há agente pressuposto sem referente disponível.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-dialogue-silence",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— Pediram silêncio de novo? — Pediram.",
+      "target": "Pediram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A repetição confirma o evento, mas não identifica o agente.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-ind-news-note",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Publicaram uma nota sem identificar a autoria.",
+      "target": "Publicaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "Nenhum referente plural antecedente é fornecido.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-amb-fiction-guards-travelers",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Os guardas observaram os viajantes. Depois gritaram do outro lado do pátio.",
+      "target": "gritaram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "Guardas e viajantes são referentes plurais compatíveis.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-amb-dialogue-actresses-directors",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— As atrizes encontraram as diretoras? — Disseram que a cena mudaria.",
+      "target": "Disseram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "A resposta pode retomar atrizes ou diretoras.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-amb-essay-authors-reviewers",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Os autores criticaram os revisores porque ignoraram o contexto.",
+      "target": "ignoraram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "A oração admite mais de um antecedente plural plausível.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-amb-news-inspectors-merchants",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Os fiscais ouviram os comerciantes. Relataram irregularidades no mercado.",
+      "target": "Relataram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "A continuidade favorece fiscais, mas comerciantes também são compatíveis.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-exp-fiction-wolves",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Os lobos cercaram a fogueira.",
+      "target": "cercaram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "Os lobos"
+      },
+      "rationale": "O sujeito plural está materialmente expresso.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-exp-dialogue-students",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— As alunas chegaram cedo.",
+      "target": "chegaram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "As alunas"
+      },
+      "rationale": "O sintagma nominal antecede diretamente o verbo.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-exp-essay-data",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Os dados sustentaram a hipótese principal.",
+      "target": "sustentaram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "Os dados"
+      },
+      "rationale": "O sujeito plural inanimado está expresso.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "dev-exp-oral-neighbors",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Meus vizinhos trouxeram bolo ontem.",
+      "target": "trouxeram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "Meus vizinhos"
+      },
+      "rationale": "A fala contém sujeito plural expresso.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    }
+  ]
+}
