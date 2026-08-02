@@ -33,10 +33,6 @@ jobs:
         working-directory: mass-notes-next
         run: npm ci --no-audit --no-fund
 
-      - name: Compilar
-        working-directory: mass-notes-next
-        run: npm run build
-
       - name: Instalar navegadores
         working-directory: mass-notes-next
         run: npx playwright install --with-deps chromium firefox
@@ -62,3 +58,5 @@ jobs:
           git diff --cached --check
           git commit -m "fix(storage): serializa salvamentos locais"
           git push origin HEAD:experiment/mass-notes-tiptap
+
+# O build integral permanece sob o workflow oficial Mass Notes, que prepara a Anatomia.
