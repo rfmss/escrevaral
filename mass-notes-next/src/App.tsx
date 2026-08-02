@@ -86,6 +86,10 @@ export default function App() {
   const draftRef = useRef<EscrevaralDocument | null>(null)
   const dirtyRef = useRef(false)
   const dirtyKindRef = useRef<DraftMutationKind | null>(null)
+  const conflictRef = useRef<ConflictState | null>(null)
+  const mutationSerialRef = useRef(0)
+  const savePromiseRef = useRef<Promise<boolean> | null>(null)
+  const saveRequestedRef = useRef(false)
   const channelRef = useRef<BroadcastChannel | null>(null)
   const analysisToken = useRef(0)
   const navigationSerial = useRef(0)
@@ -93,6 +97,7 @@ export default function App() {
 
   useEffect(() => { draftRef.current = draft }, [draft])
   useEffect(() => { dirtyRef.current = dirty }, [dirty])
+  useEffect(() => { conflictRef.current = conflict }, [conflict])
 
   const clearReviewReading = useCallback((message: string) => {
     analysisToken.current += 1
@@ -175,7 +180,9 @@ export default function App() {
       await refreshDocuments()
       if (!current || id !== current.id || persisted.revision <= current.revision) return
       if (dirtyRef.current) {
-        setConflict({ local: structuredClone(current), persisted })
+        const nextConflict = { local: structuredClone(current), persisted }
+        conflictRef.current = nextConflict
+        setConflict(nextConflict)
         setSaveState('Conflito')
       } else {
         const kind = event.data?.kind ?? (manuscriptFieldsChanged(current, persisted) ? 'manuscript' : 'metadata')
@@ -194,33 +201,71 @@ export default function App() {
   }, [clearReviewReading, refreshDocuments])
 
   const persistDraft = useCallback(async (): Promise<boolean> => {
-    const current = draftRef.current
-    if (!current || !dirtyRef.current || conflict) return !conflict
-    const mutationKind = dirtyKindRef.current ?? 'manuscript'
-    setSaveState('Salvando')
-    try {
-      const saved = await saveDocument(current, current.revision)
-      setDraft(saved)
-      draftRef.current = saved
-      setDirty(false)
-      dirtyRef.current = false
-      dirtyKindRef.current = null
-      setSaveState('Salvo')
-      removeLocalStorage(RECOVERY_KEY)
-      channelRef.current?.postMessage({ id: saved.id, revision: saved.revision, kind: mutationKind } satisfies DocumentChannelMessage)
-      await refreshDocuments()
-      return true
-    } catch (error) {
-      if (error instanceof DocumentConflictError) {
-        setConflict({ local: error.local, persisted: error.persisted })
-        setSaveState('Conflito')
-        return false
+    saveRequestedRef.current = true
+    if (savePromiseRef.current) return savePromiseRef.current
+
+    const runQueue = async (): Promise<boolean> => {
+      while (saveRequestedRef.current) {
+        saveRequestedRef.current = false
+        if (conflictRef.current) return false
+
+        const current = draftRef.current
+        if (!current || !dirtyRef.current) continue
+
+        const snapshot = structuredClone(current)
+        const mutationSerial = mutationSerialRef.current
+        const mutationKind = dirtyKindRef.current ?? 'manuscript'
+        setSaveState('Salvando')
+
+        try {
+          const saved = await saveDocument(snapshot, snapshot.revision)
+          const latest = draftRef.current
+          const changedDuringSave = mutationSerialRef.current !== mutationSerial
+
+          if (latest && latest.id === saved.id && changedDuringSave) {
+            const rebased = { ...latest, revision: saved.revision }
+            setDraft(rebased)
+            draftRef.current = rebased
+            setDirty(true)
+            dirtyRef.current = true
+            setSaveState('Alterado')
+            saveRequestedRef.current = true
+          } else if (latest?.id === saved.id) {
+            setDraft(saved)
+            draftRef.current = saved
+            setDirty(false)
+            dirtyRef.current = false
+            dirtyKindRef.current = null
+            setSaveState('Salvo')
+            removeLocalStorage(RECOVERY_KEY)
+          }
+
+          channelRef.current?.postMessage({ id: saved.id, revision: saved.revision, kind: mutationKind } satisfies DocumentChannelMessage)
+          await refreshDocuments()
+        } catch (error) {
+          if (error instanceof DocumentConflictError) {
+            const nextConflict = { local: error.local, persisted: error.persisted }
+            conflictRef.current = nextConflict
+            setConflict(nextConflict)
+            setSaveState('Conflito')
+            return false
+          }
+          console.error('[Escrevaral] Falha ao salvar.', error)
+          setSaveState('Falha')
+          return false
+        }
       }
-      console.error('[Escrevaral] Falha ao salvar.', error)
-      setSaveState('Falha')
-      return false
+      return !conflictRef.current
     }
-  }, [conflict, refreshDocuments])
+
+    const task = runQueue()
+    savePromiseRef.current = task
+    try {
+      return await task
+    } finally {
+      if (savePromiseRef.current === task) savePromiseRef.current = null
+    }
+  }, [refreshDocuments])
 
   useEffect(() => {
     if (!dirty || !draft || conflict) return
@@ -233,6 +278,7 @@ export default function App() {
     updater: (current: EscrevaralDocument) => EscrevaralDocument,
     kind: DraftMutationKind = 'manuscript',
   ) => {
+    mutationSerialRef.current += 1
     setDraft((current) => {
       if (!current) return current
       const next = updater(current)
@@ -261,6 +307,7 @@ export default function App() {
     setDirty(false)
     dirtyRef.current = false
     dirtyKindRef.current = null
+    conflictRef.current = null
     setConflict(null)
     positionContractRef.current = null
     clearReviewReading('Aguardando uma leitura.')
@@ -278,6 +325,7 @@ export default function App() {
     setDirty(false)
     dirtyRef.current = false
     dirtyKindRef.current = null
+    conflictRef.current = null
     setConflict(null)
     positionContractRef.current = null
     clearReviewReading('Aguardando uma leitura.')
@@ -390,6 +438,7 @@ export default function App() {
     setDirty(false)
     dirtyRef.current = false
     dirtyKindRef.current = null
+    conflictRef.current = null
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)
@@ -410,6 +459,7 @@ export default function App() {
     setDirty(false)
     dirtyRef.current = false
     dirtyKindRef.current = null
+    conflictRef.current = null
     setConflict(null)
     setSaveState('Salvo')
     removeLocalStorage(RECOVERY_KEY)

@@ -298,10 +298,24 @@ test('conflito misto entre manuscrito e metadados preserva as duas versões', as
   await waitReady(second)
   const originalTitle = await second.getByLabel('Título do documento').inputValue()
 
-  await page.getByLabel('Título do documento').fill('Versão textual remota do M0.9')
   await second.getByRole('tab', { name: 'pulso', exact: true }).click()
-  await second.getByRole('button', { name: 'Marcar como favorita' }).click()
-  await page.keyboard.press('Control+S')
+  const favoriteButton = second.getByRole('button', { name: 'Marcar como favorita' })
+  await favoriteButton.click({ trial: true })
+  await favoriteButton.click()
+  await page.getByLabel('Título do documento').evaluate(async (element, title) => {
+    const input = element as HTMLInputElement
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set
+    if (!setter) throw new Error('Setter nativo do título indisponível.')
+    setter.call(input, title)
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+      key: 's',
+      ctrlKey: true,
+      bubbles: true,
+      cancelable: true,
+    }))
+  }, 'Versão textual remota do M0.9')
 
   const banner = second.getByRole('alert')
   await expect(banner).toContainText('Outra aba também alterou esta página', { timeout: 12_000 })
