@@ -123,7 +123,7 @@ jobs:
           git rm .github/workflows/m1-e2-algures-outrora-executor.yml
           git rm mass-notes-next/scripts/apply-algures-outrora-tranche.py
 
-          git restore \
+          rm -f \
             mass-notes-next/e2-lexical-inventory.json \
             mass-notes-next/e2-lexical-inventory.md \
             mass-notes-next/e2-v-evidence-audit.json
