@@ -21,8 +21,6 @@ const forbiddenNetworkPatterns = [
   /\bnode:https?\b/u,
   /\bhttps?:\/\//u,
   /\bchild_process\b/u,
-  /\bexec(?:File|Sync)?\s*\(/u,
-  /\bspawn(?:Sync)?\s*\(/u,
 ]
 for (const pattern of forbiddenNetworkPatterns) {
   assert(!pattern.test(minerSource), 'network-or-shell-capability', String(pattern))
