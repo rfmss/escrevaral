@@ -3,7 +3,7 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho  
-Estado: **banca específica verde; matriz integral oficial pendente**
+Estado: **fechado e validado na matriz integral**
 
 > **Eva Chara, entre em banca.**
 
@@ -58,30 +58,65 @@ Ação técnica:
 3. linhas desativadas convertidas em comentários de rastreabilidade, preservando as linhas do restante do inventário;
 4. auditoria lexical regenerada;
 5. contratos estáticos e regressões de produto nos dois navegadores;
-6. versão pública `20260801-lexical-algures-outrora-v1` e cache `v971`.
+6. versão pública `20260801-lexical-algures-outrora-v1` e cache `v971`;
+7. carregador `lexical-view-controller.js` alinhado ao mesmo identificador em `ui-dialog.js`.
 
-## R — Resultado específico
+## R — Resultado reproduzível
 
-Executor efêmero: `30726899840`.
+Banca específica `30726899840`:
 
 - contratos de fonte e produto: **8/8**;
 - TypeScript e build: verdes;
-- auditoria E2 completa: verde;
-- contagem final:
-  - 1.008 declarações brutas;
-  - 936 chaves efetivas;
-  - 66 grupos repetidos;
-  - 72 declarações sobrescritas;
-  - zero grupos idênticos;
-  - 66 grupos conflitantes.
+- auditoria E2 completa: verde.
 
-A infraestrutura efêmera foi removida após a banca e o workflow oficial `Mass Notes Tiptap` foi restaurado integralmente. A cabeça limpa anterior a este registro é `8931c14589141b43fd2461abc669b4867f3194e0`.
+A infraestrutura efêmera foi removida após a banca e o workflow oficial `Mass Notes Tiptap` foi restaurado integralmente.
 
-Esta atualização estritamente documental abre a matriz integral oficial. A publicação da preview, a renovação de cache e o smoke público permanecem bloqueados até o verde completo.
+A primeira abertura da matriz revelou uma divergência exclusivamente distributiva: `index.html` e o service worker já usavam a versão nova, mas `ui-dialog.js` ainda carregava o controlador lexical com o identificador anterior de `quica`. A cabeça vermelha foi preservada, a referência foi alinhada sem alterar redações ou comportamento lexical e a validação foi reaberta.
+
+Cabeça funcional e distributiva validada: `8f391c56de481755650ad2beb598f91beda02c17`.
+
+Matriz oficial `30727039290`:
+
+- **364/364** em Chromium e Firefox;
+- quatro novos contratos por navegador para `algures` e `outrora`;
+- testes de fonte e produto dos dois verbetes: verdes;
+- TypeScript e build: verdes;
+- auditoria lexical e E2-V: verdes;
+- publicação da preview: verde;
+- renovação de cache: verde;
+- smoke público: verde;
+- artefato `mass-notes-tiptap-30727039290`;
+- artifact ID `8826796653`;
+- digest `sha256:55cdffd520da476682608f283ee417b67e1efc09f0999eae7cc67152bec78ff0`.
+
+Contagem final reproduzida:
+
+- 1.008 declarações brutas;
+- 936 chaves efetivas;
+- 66 grupos repetidos;
+- 72 declarações sobrescritas;
+- zero grupos idênticos;
+- 66 grupos conflitantes.
+
+Desempenho observado:
+
+- Chromium: `p95SaveMs` 218 ms;
+- Firefox: `p95SaveMs` 137 ms;
+- DOM, memória disponível e quantidade de páginas permaneceram dentro dos contratos.
+
+Também ficaram verdes na mesma cabeça:
+
+- coerência de versões `30727039289`;
+- candidata Argila `30727039249`;
+- banca E2-V `30727039328`;
+- Validação de Palavras `30727039267`;
+- fronteira pública `30727039333`;
+- todos os demais workflows oficiais disparados pelo PR.
+
+Este commit é somente o fechamento documental da evidência acima. Ele não modifica engine, definição, distribuição, interface ou teste; sua própria cabeça deve repetir a matriz oficial antes de ser tratada como cabeça final da tranche.
 
 ## O — O que permanece aberto
 
-- matriz integral oficial da cabeça documental limpa;
 - 66 conflitos editoriais de definições;
 - oito autorreferências de sinônimos;
 - quatro aliases técnicos;
@@ -90,11 +125,11 @@ Esta atualização estritamente documental abre a matriz integral oficial. A pub
 - expansão lexical bloqueada;
 - nota lexical mantida em 6,5 até ganho qualitativo mais amplo e banca humana.
 
-## Parecer Eva
+## Parecer Eva — fechamento
 
 - dimensão: Léxico e polissemia;
 - escopo: dois advérbios, sem generalização;
-- ganho: remoção de sobrescrita silenciosa e orientação editorial mais precisa;
+- ganho: remoção de sobrescrita silenciosa, melhor delimitação semântica e distribuição coerente;
 - nota: **6,5**, mantida;
-- decisão: `PROSSEGUIR COM CONDIÇÕES` para a matriz integral;
-- condição: preview somente com todos os contratos oficiais verdes.
+- decisão: `PROSSEGUIR COM CONDIÇÕES` para o próximo pequeno lote editorial;
+- condição: uma família por tranche, fontes e redações registradas, regressões próprias e matriz integral.
