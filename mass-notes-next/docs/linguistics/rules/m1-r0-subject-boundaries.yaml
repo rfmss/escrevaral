@@ -1,0 +1,436 @@
+version: 1
+
+identity:
+  id: m1-r0-subject-boundaries
+  phenomenon: subject_presence_and_recoverability
+  title: Sujeito recuperável, indeterminado e oração sem sujeito
+  status: source_mapped
+  created_at: 2026-08-02
+  updated_at: 2026-08-02
+  owner: Escrevaral
+
+research_question:
+  question: >-
+    Como distinguir sujeito expresso, sujeito recuperável ou oculto,
+    sujeito indeterminado e oração sem sujeito sem depender apenas
+    da forma isolada do verbo?
+  why_it_matters_to_writers: >-
+    Uma oficina para ficção precisa explicar quem realiza, experimenta
+    ou sustenta um processo sem apagar elipses legítimas, vozes de personagem,
+    variação brasileira ou escolhas estilísticas.
+  non_goals:
+    - realizar análise sintática completa da oração
+    - substituir revisão humana
+    - decidir automaticamente entre norma, uso e estilo
+    - aplicar reescrita ao manuscrito
+    - cobrir todos os valores do pronome se nesta primeira família
+
+scope:
+  language_variant: pt-BR
+  registers:
+    - escrita monitorada
+    - prosa ficcional
+    - diálogo ficcional marcado como fala
+    - uso coloquial brasileiro quando explicitamente identificado
+  genres:
+    - romance
+    - fantasia
+    - conto
+    - ensaio
+    - narrativa geral
+  time_scope: português brasileiro contemporâneo, com tradição gramatical registrada
+  confidence_vocabulary:
+    - determined
+    - probable
+    - ambiguous
+    - indeterminate
+    - not_applicable
+  known_exclusions:
+    - fragmentos sem verbo ou sem contexto suficiente
+    - análise universal de sujeito em orações complexas
+    - classificação completa de voz verbal
+    - recomendação normativa automática para ter existencial
+
+sources:
+  minimum_independent_sources_when_possible: 2
+  items:
+    - source_id: bechara-licoes-20e
+      bibliographic_reference: >-
+        BECHARA, Evanildo. Lições de Português pela análise sintática.
+        20a ed. rev. e ampl. Rio de Janeiro: Nova Fronteira, 2018.
+      edition: 20a edição revista e ampliada
+      locations:
+        - Lição II — termos essenciais da oração
+        - Lição IV, §§ 1–6
+        - marcadores digitais [10]–[14] na cópia privada
+      source_role: primary_normative
+      language_variant: português com aplicação prioritária ao pt-BR monitorado
+      source_position_summary: >-
+        Separa sujeito indeterminado de oração sem sujeito; considera intenção
+        comunicativa na indeterminação; distingue se indeterminador de passiva
+        pela estrutura do complemento e pela concordância; trata ter por haver
+        como inadequado na língua culta, embora reconheça expansão coloquial
+        e literária brasileira.
+      direct_quote_required: false
+      copied_examples_allowed: false
+      limitations:
+        - orientação normativa precisa ser separada da descrição de uso
+        - exemplos da obra não entram no corpus do produto
+
+    - source_id: cunha-cintra-nova-gramatica-7e
+      bibliographic_reference: >-
+        CUNHA, Celso; CINTRA, Lindley. Nova gramática do português
+        contemporâneo. 7a ed. Rio de Janeiro: Lexikon, 2017.
+      edition: 7a edição, 2a impressão
+      locations:
+        - pp. 138–145 — o sujeito
+        - pp. 141–142 — sujeito oculto determinado
+        - p. 142 — sujeito indeterminado
+        - pp. 143–144 — oração sem sujeito
+        - p. 163 — transformação passiva e passiva pronominal
+        - seção sobre valores de se e concordância
+      source_role: comparative_grammar
+      language_variant: português pluricêntrico com usos brasileiros marcados
+      source_position_summary: >-
+        Define sujeito oculto como identificável por flexão ou contexto;
+        concentra a indeterminação na terceira pessoa do plural e no se com
+        terceira pessoa do singular; trata o nome concordante como sujeito
+        da passiva pronominal; documenta ter existencial no português coloquial
+        brasileiro e em literatura.
+      direct_quote_required: false
+      copied_examples_allowed: false
+      limitations:
+        - mistura variedades nacionais, gêneros e épocas
+        - todo exemplo precisa de marcação de variante e registro
+
+    - source_id: bechara-duvidas-2e
+      bibliographic_reference: >-
+        BECHARA, Evanildo; MAHMUD, Shahira. Novo dicionário de dúvidas da
+        língua portuguesa. 2a ed. Rio de Janeiro: Nova Fronteira, 2018.
+      edition: 2a edição
+      locations:
+        - verbete Sujeito indeterminado
+        - verbetes Haver, fazer; Haver, ter; Ter, haver
+      source_role: usage_reference
+      language_variant: português com orientação ao uso brasileiro monitorado
+      source_position_summary: >-
+        Reafirma os dois mecanismos principais de indeterminação e registra
+        simultaneamente a condenação normativa de ter existencial na língua
+        culta e sua ampla vitalidade coloquial e literária brasileira.
+      direct_quote_required: false
+      copied_examples_allowed: false
+      limitations:
+        - verbete de dúvida não substitui gramática nem corpus
+        - recomendações normativas precisam de rótulo de registro
+
+synthesis:
+  original_summary: >-
+    A ausência gráfica de sujeito se divide em pelo menos três situações.
+    Há sujeito recuperável quando flexão ou contexto identificam um referente;
+    há sujeito indeterminado quando se pressupõe participante, mas ele não pode
+    ou não deve ser identificado; e há oração sem sujeito quando o processo não
+    é atribuído a participante algum. A forma verbal isolada nunca basta.
+    Construções com se exigem distinguir passiva pronominal de indeterminação,
+    e ter existencial exige separar descrição sintática de recomendação de registro.
+  consensus:
+    - ausência de sujeito escrito não equivale automaticamente a indeterminação
+    - sujeito recuperável pode depender de desinência ou contexto contíguo
+    - sujeito indeterminado pressupõe participante não identificado
+    - oração sem sujeito não pressupõe participante oculto
+    - terceira pessoa do plural é indício, não prova isolada
+    - se exige análise de estrutura, regência e concordância
+    - verbos meteorológicos podem ser pessoais em uso figurado
+    - haver existencial e fazer temporal integram o núcleo tradicional de impessoalidade
+  disagreements:
+    - topic: terminologia para sujeito não expresso mas identificável
+      positions:
+        - source_id: cunha-cintra-nova-gramatica-7e
+          position: sujeito oculto determinado
+        - source_id: bechara-licoes-20e
+          position: distingue sujeito oculto de indeterminado e de oração sem sujeito
+      product_consequence: >-
+        Preferir sujeito recuperável como explicação de produto, preservando
+        sujeito oculto determinado no mapa terminológico.
+      unresolved: true
+
+    - topic: extensão dos processos de indeterminação
+      positions:
+        - source_id: bechara-licoes-20e
+          position: inclui terceira pessoa singular ou plural, forma infinita e se
+        - source_id: cunha-cintra-nova-gramatica-7e
+          position: seção principal concentra terceira pessoa plural e se com terceira singular
+      product_consequence: dividir o fenômeno em famílias observáveis e avaliáveis
+      unresolved: true
+
+    - topic: ter existencial no português brasileiro
+      positions:
+        - source_id: bechara-licoes-20e
+          position: inadequado na língua culta, mas difundido na conversação e em literatura brasileira
+        - source_id: bechara-duvidas-2e
+          position: mantém a recomendação culta e registra expansão coloquial e literária
+        - source_id: cunha-cintra-nova-gramatica-7e
+          position: documenta o uso coloquial brasileiro e sua presença literária
+      product_consequence: >-
+        A análise sintática pode reconhecer uso existencial provável, mas qualquer
+        recomendação deve declarar registro e jamais chamar o uso de erro universal.
+      unresolved: true
+
+  terminology_map:
+    - concept_id: subject_explicit
+      preferred_product_label: sujeito expresso
+      source_labels:
+        bechara-licoes-20e: sujeito
+        cunha-cintra-nova-gramatica-7e: sujeito
+      rationale: termo transparente e tradicional
+
+    - concept_id: subject_recoverable
+      preferred_product_label: sujeito recuperável
+      source_labels:
+        bechara-licoes-20e: sujeito oculto em contraste com outras classes
+        cunha-cintra-nova-gramatica-7e: sujeito oculto determinado
+      rationale: destaca a evidência disponível sem afirmar que algo está escondido fisicamente
+
+    - concept_id: subject_indeterminate
+      preferred_product_label: sujeito indeterminado
+      source_labels:
+        bechara-licoes-20e: sujeito indeterminado
+        cunha-cintra-nova-gramatica-7e: sujeito indeterminado
+      rationale: consenso terminológico suficiente
+
+    - concept_id: subjectless_clause
+      preferred_product_label: oração sem sujeito
+      source_labels:
+        bechara-licoes-20e: oração sem sujeito; sujeito inexistente menos adequado
+        cunha-cintra-nova-gramatica-7e: oração sem sujeito; sujeito inexistente
+      rationale: descreve a estrutura sem inventar participante vazio
+
+  must_be_writable_after_closing_sources: true
+
+observable_evidence:
+  positive_signals:
+    - signal: desinência pessoal identifica participante sem sujeito expresso concorrente
+      strength: strong
+      limitations: formas homônimas ou sincréticas podem reduzir a confiança
+
+    - signal: sujeito explícito em oração ou período contíguo permanece compatível com o verbo seguinte
+      strength: strong
+      limitations: mudança de tópico, coordenação e discurso indireto podem criar concorrência
+
+    - signal: terceira pessoa do plural sem referente plural recuperável
+      strength: medium
+      limitations: contexto anterior pode transformar o caso em sujeito recuperável
+
+    - signal: verbo na terceira pessoa singular com se e complemento preposicionado
+      strength: strong
+      limitations: ainda exige verificar regência, lexicalização e outros valores de se
+
+    - signal: verbo meteorológico em uso literal sem participante
+      strength: strong
+      limitations: sentido figurado ou sujeito expresso bloqueia a classificação
+
+    - signal: haver existencial ou fazer temporal em construção impessoal
+      strength: strong
+      limitations: distinguir usos pessoais e auxiliares
+
+    - signal: ter existencial sem sujeito expresso em registro coloquial brasileiro
+      strength: medium
+      limitations: análise sintática e recomendação normativa devem permanecer separadas
+
+  negative_signals:
+    - signal: sintagma nominal plural concorda com verbo plural em construção com se
+      blocks_classification: subject_indeterminate
+
+    - signal: complemento introduzido por preposição não pode ser sujeito passivo simples
+      blocks_classification: passive_pronominal_with_that_complement
+
+    - signal: sujeito explícito compatível está presente
+      blocks_classification: subject_indeterminate_or_subjectless
+
+    - signal: referente compatível aparece em oração ou período contíguo
+      blocks_classification: subject_indeterminate
+
+    - signal: verbo meteorológico tem sujeito expresso ou sentido figurado pessoal
+      blocks_classification: subjectless_clause
+
+  context_window_required: >-
+    Oração atual, oração anterior e, quando a continuidade referencial for plausível,
+    período imediatamente anterior. Ampliação futura deve ser medida em corpus.
+  lexical_information_required:
+    - valência e regência do verbo
+    - sentidos impessoais tradicionais
+    - usos meteorológicos literais e figurados
+    - lexicalizações com se
+  syntactic_information_required:
+    - fronteiras de oração
+    - candidatos nominais e concordância
+    - pessoa e número verbal
+    - presença e função de preposição
+    - papel provável de se
+    - continuidade referencial
+  cases_that_must_return_ambiguous:
+    - terceira pessoa plural com mais de um referente contextual compatível
+    - se com estrutura insuficiente para separar passiva e indeterminação
+    - ter existencial sem marcação segura de registro quando a interface pedir recomendação
+    - verbo meteorológico com leitura literal e figurada concorrentes
+
+examples:
+  originals_only_unless_license_recorded: true
+  research_examples:
+    - id: recoverable-inflection-nos
+      text: Fechamos as janelas antes da chuva.
+      expected_reading: subject_recoverable
+      rationale: a desinência identifica nós
+      source_text_copied: false
+
+    - id: recoverable-previous-period
+      text: Lia apagou a vela. Depois abriu a porta.
+      expected_reading: subject_recoverable
+      rationale: Lia permanece referente compatível no período contíguo
+      source_text_copied: false
+
+    - id: indeterminate-third-plural
+      text: Bateram à porta durante a madrugada.
+      expected_reading: subject_indeterminate_probable
+      rationale: não há referente plural no exemplo isolado
+      source_text_copied: false
+
+    - id: indeterminate-se-preposition
+      text: Precisa-se de leitoras-beta.
+      expected_reading: subject_indeterminate
+      rationale: complemento preposicionado e verbo singular
+      source_text_copied: false
+
+    - id: subjectless-weather
+      text: Choveu sobre as torres durante três dias.
+      expected_reading: subjectless_clause
+      rationale: uso meteorológico literal
+      source_text_copied: false
+
+    - id: subjectless-haver
+      text: Havia três mapas sobre a mesa.
+      expected_reading: subjectless_clause
+      rationale: haver existencial na escrita monitorada
+      source_text_copied: false
+
+    - id: subjectless-ter-colloquial
+      text: Tinha três luas no céu daquela história.
+      expected_reading: subjectless_clause_probable_register_colloquial
+      rationale: uso existencial brasileiro; recomendação de registro permanece separada
+      source_text_copied: false
+
+  negative_controls:
+    - id: weather-personal
+      text: As torres amanheceram cobertas de névoa.
+      must_not_return: subjectless_clause
+      rationale: há sujeito expresso e uso predicativo
+
+    - id: explicit-third-plural
+      text: Os guardas bateram à porta durante a madrugada.
+      must_not_return: subject_indeterminate
+      rationale: há sujeito expresso
+
+    - id: recoverable-third-plural-context
+      text: Os guardas chegaram tarde. Bateram à porta durante a madrugada.
+      must_not_return: subject_indeterminate_determined
+      rationale: o período anterior oferece referente plural recuperável
+
+    - id: passive-se-agreement
+      text: Vendiam-se grimórios na feira.
+      must_not_return: subject_indeterminate_determined
+      rationale: grimórios é candidato a sujeito da passiva pronominal e concorda com o verbo
+
+    - id: personal-fazer-age
+      text: Lia faz hoje vinte anos.
+      must_not_return: subjectless_clause
+      rationale: fazer tem sujeito expresso em uso de idade
+
+  adversarial_pairs:
+    - id: third-plural-context-pair
+      a: Bateram à porta durante a madrugada.
+      b: Os guardas chegaram tarde. Bateram à porta durante a madrugada.
+      distinction: indeterminação provável versus sujeito recuperável por contexto
+
+    - id: se-passive-indeterminate-pair
+      a: Vendiam-se grimórios na feira.
+      b: Precisava-se de grimórios na oficina.
+      distinction: passiva pronominal com concordância versus indeterminação com complemento preposicionado
+
+    - id: weather-literal-figurative-pair
+      a: Amanheceu com chuva sobre as torres.
+      b: As torres amanheceram cobertas de névoa.
+      distinction: construção impessoal versus verbo pessoal com sujeito expresso
+
+corpora:
+  development:
+    id: null
+    status: not_open
+    provenance: null
+    license: null
+    overlap_with_evaluation_forbidden: true
+  evaluation:
+    id: null
+    status: not_open
+    provenance: null
+    license: null
+    overlap_with_development_forbidden: true
+  genres_required:
+    - prosa ficcional
+    - diálogo
+    - ensaio
+    - jornalismo brasileiro
+    - oralidade transcrita licenciada
+  variation_required:
+    - escrita monitorada
+    - fala de personagem
+    - coloquial brasileiro
+    - usos figurados
+    - inversão sintática
+
+implementation:
+  state: not_authorized
+  architecture_location: null
+  runtime_dependency: null
+  local_first_required: true
+  applies_text_automatically: false
+  output_explanation_required: true
+  uncertainty_visible_required: true
+  reversal: null
+
+evaluation:
+  baseline: null
+  metrics:
+    precision: null
+    recall: null
+    accuracy: null
+    false_positives: null
+    false_negatives: null
+  browsers:
+    required: [chromium, firefox]
+  integral_matrix_required: true
+  technical_green_is_not_linguistic_truth: true
+  known_failures:
+    - nenhuma engine ou avaliação foi aberta por esta ficha
+
+human_review:
+  required_before_verified: true
+  eva_decision: proceed_with_conditions
+  reviewer_profile: >-
+    Linguista de português brasileiro e escritora ou editora de ficção,
+    independentes da implementação.
+  evidence: >-
+    Duas gramáticas centrais e um dicionário de dúvidas foram comparados;
+    faltam corpus, avaliação separada e banca humana externa.
+  score_change_authorized: false
+
+rights_and_provenance:
+  raw_source_in_repository: false
+  raw_source_in_distribution: false
+  source_licenses_checked: true
+  derived_text_is_original: true
+  examples_are_original_or_licensed: true
+  corpus_license_compatible: null
+  removal_process_defined: true
+  notes: >-
+    As obras foram consultadas como material privado temporário. O repositório
+    preserva apenas metadados, localizações, síntese original, divergências,
+    exemplos próprios e decisões de pesquisa.
