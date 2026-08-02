@@ -1,0 +1,241 @@
+version: 1
+schema_name: escrevaral_authority_rule_card
+status: active_draft_contract
+
+required_sections:
+  - identity
+  - research_question
+  - scope
+  - sources
+  - synthesis
+  - observable_evidence
+  - examples
+  - corpora
+  - implementation
+  - evaluation
+  - human_review
+  - rights_and_provenance
+
+identity:
+  id: string
+  phenomenon: string
+  title: string
+  status:
+    allowed:
+      - hypothesis
+      - source_mapped
+      - synthesized
+      - corpus_development
+      - corpus_evaluation
+      - implemented_experimental
+      - validated_limited
+      - verified_limited
+      - rejected
+      - retired
+  created_at: date
+  updated_at: date
+  owner: string
+
+research_question:
+  question: string
+  why_it_matters_to_writers: string
+  non_goals:
+    type: list
+    item: string
+
+scope:
+  language_variant:
+    allowed: [pt-BR, pt-PT, mixed_marked, historical_marked]
+  registers:
+    type: list
+    item: string
+  genres:
+    type: list
+    item: string
+  time_scope: string
+  confidence_vocabulary:
+    allowed:
+      - determined
+      - probable
+      - ambiguous
+      - indeterminate
+      - not_applicable
+  known_exclusions:
+    type: list
+    item: string
+
+sources:
+  minimum_independent_sources_when_possible: 2
+  items:
+    - source_id: string
+      bibliographic_reference: string
+      edition: string
+      locations:
+        type: list
+        item: string
+      source_role:
+        allowed:
+          - primary_normative
+          - primary_descriptive
+          - comparative_grammar
+          - usage_reference
+          - corpus_evidence
+          - literary_craft
+          - didactic_secondary
+          - benchmark_tool
+      language_variant: string
+      source_position_summary: string
+      direct_quote_required: false
+      copied_examples_allowed: false
+      limitations:
+        type: list
+        item: string
+
+synthesis:
+  original_summary: string
+  consensus:
+    type: list
+    item: string
+  disagreements:
+    type: list
+    item:
+      topic: string
+      positions:
+        type: list
+        item:
+          source_id: string
+          position: string
+      product_consequence: string
+      unresolved: boolean
+  terminology_map:
+    type: list
+    item:
+      concept_id: string
+      preferred_product_label: string
+      source_labels:
+        type: map
+      rationale: string
+  must_be_writable_after_closing_sources: true
+
+observable_evidence:
+  positive_signals:
+    type: list
+    item:
+      signal: string
+      strength:
+        allowed: [weak, medium, strong]
+      limitations: string
+  negative_signals:
+    type: list
+    item:
+      signal: string
+      blocks_classification: string
+  context_window_required: string
+  lexical_information_required:
+    type: list
+    item: string
+  syntactic_information_required:
+    type: list
+    item: string
+  cases_that_must_return_ambiguous:
+    type: list
+    item: string
+
+examples:
+  originals_only_unless_license_recorded: true
+  research_examples:
+    type: list
+    item:
+      id: string
+      text: string
+      expected_reading: string
+      rationale: string
+      source_text_copied: false
+  negative_controls:
+    type: list
+    item:
+      id: string
+      text: string
+      must_not_return: string
+      rationale: string
+  adversarial_pairs:
+    type: list
+    item:
+      id: string
+      a: string
+      b: string
+      distinction: string
+
+corpora:
+  development:
+    id: string_or_null
+    status: string
+    provenance: string
+    license: string_or_null
+    overlap_with_evaluation_forbidden: true
+  evaluation:
+    id: string_or_null
+    status: string
+    provenance: string
+    license: string_or_null
+    overlap_with_development_forbidden: true
+  genres_required:
+    type: list
+    item: string
+  variation_required:
+    type: list
+    item: string
+
+implementation:
+  state:
+    allowed:
+      - not_authorized
+      - authorized_experimental
+      - implemented
+      - rejected
+  architecture_location: string_or_null
+  runtime_dependency: string_or_null
+  local_first_required: true
+  applies_text_automatically: false
+  output_explanation_required: true
+  uncertainty_visible_required: true
+  reversal: string_or_null
+
+ evaluation:
+  baseline: string_or_null
+  metrics:
+    precision: number_or_null
+    recall: number_or_null
+    accuracy: number_or_null
+    false_positives: integer_or_null
+    false_negatives: integer_or_null
+  browsers:
+    required: [chromium, firefox]
+  integral_matrix_required: true
+  technical_green_is_not_linguistic_truth: true
+  known_failures:
+    type: list
+    item: string
+
+human_review:
+  required_before_verified: true
+  eva_decision:
+    allowed:
+      - proceed
+      - proceed_with_conditions
+      - pause
+      - block
+      - pending
+  reviewer_profile: string_or_null
+  evidence: string_or_null
+  score_change_authorized: false
+
+rights_and_provenance:
+  raw_source_in_repository: false
+  raw_source_in_distribution: false
+  source_licenses_checked: true
+  derived_text_is_original: true
+  examples_are_original_or_licensed: true
+  corpus_license_compatible: boolean_or_null
+  removal_process_defined: boolean
+  notes: string
