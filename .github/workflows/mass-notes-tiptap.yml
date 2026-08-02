@@ -1,43 +1,67 @@
 name: Mass Notes Tiptap
 
 on:
+  push:
+    branches: [experiment/mass-notes-tiptap]
+    paths:
+      - "mass-notes-next/**"
+      - ".github/workflows/mass-notes-tiptap.yml"
+      - "anatomia-do-livro.html"
+      - "anatomia-original.html"
+      - "scripts/build-anatomia-runtime.py"
+      - "analise-engine.js"
+      - "syntax-engine.js"
+      - "punctuation-engine.js"
+      - "voice-engine.js"
+      - "lexical-engine.js"
+      - "lexical-data.json"
+      - "norma-data.json"
+      - "js/data/synonym-data.js"
+      - "decolonial-engine.js"
+      - "decolonial-data.json"
+      - "rimalab-engine.js"
+      - "rimalab-data.json"
+      - "js/data/criterios-data.js"
   pull_request:
     branches: [main]
     paths:
       - "mass-notes-next/**"
       - ".github/workflows/mass-notes-tiptap.yml"
-      - ".github/workflows/m1-e2-algures-outrora-executor.yml"
-      - "index.html"
-      - "service-worker.js"
+      - "anatomia-do-livro.html"
+      - "anatomia-original.html"
+      - "scripts/build-anatomia-runtime.py"
+      - "analise-engine.js"
+      - "syntax-engine.js"
+      - "punctuation-engine.js"
+      - "voice-engine.js"
       - "lexical-engine.js"
+      - "lexical-data.json"
+      - "norma-data.json"
+      - "js/data/synonym-data.js"
+      - "decolonial-engine.js"
+      - "decolonial-data.json"
+      - "rimalab-engine.js"
+      - "rimalab-data.json"
+      - "js/data/criterios-data.js"
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: m1-e2-algures-outrora-${{ github.event.pull_request.number }}
+  group: mass-notes-tiptap-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  consolidar:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'experiment/mass-notes-tiptap'
-    runs-on: ubuntu-24.04
+  foundation:
+    runs-on: ubuntu-latest
     timeout-minutes: 30
-
+    defaults:
+      run:
+        working-directory: mass-notes-next
     steps:
-      - name: Checkout da cabeça experimental
+      - name: Checkout
         uses: actions/checkout@v4.2.2
-        with:
-          ref: experiment/mass-notes-tiptap
-          fetch-depth: 0
-
-      - name: Confirmar fronteira efêmera
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f mass-notes-next/scripts/apply-algures-outrora-tranche.py
-          test -f .github/workflows/m1-e2-algures-outrora-executor.yml
-          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
 
       - name: Python para preparar a Anatomia
         uses: actions/setup-python@v5
@@ -45,11 +69,17 @@ jobs:
           python-version: "3.12"
 
       - name: Gerar runtime fiel e leve da Anatomia
+        working-directory: .
         run: |
           python -m pip install --disable-pip-version-check pillow
           python scripts/build-anatomia-runtime.py
           test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
           test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
+          grep --quiet "document.documentElement.classList.add('is-embedded')" mass-notes-next/public/anatomia-do-livro.html
+          grep --quiet 'assets/anatomia/anatomia-asset-1.webp' mass-notes-next/public/anatomia-do-livro.html
+          grep --quiet 'assets/anatomia/anatomia-asset-2.webp' mass-notes-next/public/anatomia-do-livro.html
+          ! grep --quiet 'data:image/png;base64' mass-notes-next/public/anatomia-do-livro.html
+          ! grep --quiet 'atob(' mass-notes-next/public/anatomia-do-livro.html
 
       - name: Node.js
         uses: actions/setup-node@v4.4.0
@@ -58,104 +88,135 @@ jobs:
           cache: npm
           cache-dependency-path: mass-notes-next/package-lock.json
 
-      - name: Aplicar consolidação editorial mínima
-        run: python3 mass-notes-next/scripts/apply-algures-outrora-tranche.py
-
       - name: Instalar dependências reproduzíveis
-        working-directory: mass-notes-next
         run: npm ci --no-audit --no-fund
 
-      - name: Regenerar e verificar auditorias
-        working-directory: mass-notes-next
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm run audit:lexicon
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-
-          report = json.loads(Path('e2-definition-duplicates.json').read_text(encoding='utf-8'))
-          expected = {
-              'rawDeclarations': 1008,
-              'effectiveKeys': 936,
-              'duplicateGroups': 66,
-              'overwrittenDeclarations': 72,
-              'identicalGroups': 0,
-              'normalizedEquivalentGroups': 0,
-              'conflictingGroups': 66,
-          }
-          if report['counts'] != expected:
-              raise SystemExit(f'Contagens inesperadas: {report["counts"]}')
-          keys = {group['key'] for group in report['duplicateGroups']}
-          if {'algures', 'outrora'} & keys:
-              raise SystemExit('Os verbetes consolidados ainda aparecem como duplicados')
-          PY
+      - name: Inventariar bases linguísticas do E2
+        run: npm run audit:lexicon
 
       - name: Compilar aplicação
-        working-directory: mass-notes-next
-        run: npm run build
+        run: |
+          set -euo pipefail
+          npm run build 2>&1 | tee build.log
+          cmp --silent public/anatomia-do-livro.html dist/anatomia-do-livro.html
+          test "$(wc -c < dist/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < dist/anatomia-do-livro.html)" -lt 500000
+          grep --quiet 'Anatomia do Livro — Escrevaral' dist/anatomia-do-livro.html
+          grep --quiet 'page-flip@2.0.7' dist/anatomia-do-livro.html
+          grep --quiet -- '--sky:#a9d4e4' dist/anatomia-do-livro.html
+          grep --quiet 'class="stage-panel"' dist/anatomia-do-livro.html
+          grep --quiet 'id="pageFlipBook"' dist/anatomia-do-livro.html
+          grep --quiet "document.documentElement.classList.add('is-embedded')" dist/anatomia-do-livro.html
+          ! grep --quiet -- '--paper:#f1e7d4' dist/anatomia-do-livro.html
+          ! grep --quiet 'A Cartografia do Esquecimento' dist/anatomia-do-livro.html
+          ! grep --quiet 'atob(' dist/anatomia-do-livro.html
+          ! grep --quiet 'anatomia-original.html' dist/anatomia-do-livro.html
+          for asset in anatomia-asset-1.webp anatomia-asset-2.webp; do
+            cmp --silent "public/assets/anatomia/${asset}" "dist/assets/anatomia/${asset}"
+            node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/anatomia/${asset}'); if(b.length<10000||b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP') process.exit(1)"
+          done
+          cmp --silent public/assets/blueprint/anatomia-livro-render.webp dist/assets/blueprint/anatomia-livro-render.webp
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; const b=readFileSync('dist/assets/blueprint/anatomia-livro-render.webp'); if(b.length<1000||b.subarray(0,4).toString('ascii')!=='RIFF'||b.subarray(8,12).toString('ascii')!=='WEBP') process.exit(1)"
+          sha256sum dist/anatomia-do-livro.html > anatomy-sha256.txt
+          sha256sum dist/assets/anatomia/anatomia-asset-1.webp dist/assets/anatomia/anatomia-asset-2.webp > anatomy-assets-sha256.txt
+          sha256sum dist/assets/blueprint/anatomia-livro-render.webp > blueprint-sha256.txt
 
       - name: Instalar Chromium e Firefox
-        working-directory: mass-notes-next
         run: npx playwright install --with-deps chromium firefox
 
-      - name: Executar contratos dos dois verbetes
-        working-directory: mass-notes-next
-        run: npx playwright test tests/m1-e2-algures-outrora-source.spec.ts tests/m1-e2-algures-outrora-regression.spec.ts --project=chromium --project=firefox
+      - name: Testar fundação nos navegadores
+        run: npm run test:e2e
 
-      - name: Fechar registro e validar fronteira lexical
-        shell: bash
+      - name: Publicar preview estática isolada
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import os
-          from pathlib import Path
-
-          path = Path('mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md')
-          text = path.read_text(encoding='utf-8')
-          text = text.replace('__RUN_ID__', os.environ['GITHUB_RUN_ID'])
-          text = text.replace('__TARGETED_RESULT__', '8/8')
-          path.write_text(text, encoding='utf-8')
-          PY
-
-          git rm mass-notes-next/scripts/apply-algures-outrora-tranche.py
-          git restore mass-notes-next/public/anatomia-do-livro.html
-          rm -f \
-            mass-notes-next/e2-lexical-inventory.json \
-            mass-notes-next/e2-lexical-inventory.md \
-            mass-notes-next/e2-v-evidence-audit.json
-          git clean -fd mass-notes-next/public/assets/anatomia/
-          git diff --check
-
-          python3 - <<'PY'
-          import subprocess
-
-          expected = {
-              'index.html',
-              'lexical-engine.js',
-              'service-worker.js',
-              'mass-notes-next/e2-definition-duplicates.json',
-              'mass-notes-next/e2-definition-duplicates.md',
-              'mass-notes-next/scripts/apply-algures-outrora-tranche.py',
-              'mass-notes-next/tests/m1-e2-algures-outrora-source.spec.ts',
-              'mass-notes-next/tests/m1-e2-algures-outrora-regression.spec.ts',
-              'mass-notes-next/docs/logs/2026-08-01-m1-e2-algures-outrora.md',
-          }
-          lines = subprocess.check_output(['git', 'status', '--short'], text=True).splitlines()
-          paths = {line[3:] for line in lines}
-          if paths != expected:
-              raise SystemExit(
-                  f'Fronteira inválida; encontrados={sorted(paths)} esperados={sorted(expected)}'
-              )
-          PY
-
-      - name: Commitar tranche lexical atômica
-        shell: bash
-        run: |
-          set -euo pipefail
+          cd dist
+          touch .nojekyll
+          git init
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "feat(lexico): consolidar algures e outrora"
-          git push origin HEAD:experiment/mass-notes-tiptap
+          git add .
+          git commit -m "preview: ${GITHUB_SHA}"
+          git branch -M preview-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/preview-mass-notes-tiptap
+
+      - name: Renovar cache da preview
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        continue-on-error: true
+        working-directory: .
+        run: |
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
+          for path in index.html assets/index.js assets/index.css anatomia-do-livro.html assets/anatomia/anatomia-asset-1.webp assets/anatomia/anatomia-asset-2.webp assets/blueprint/anatomia-livro-render.webp; do
+            curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
+          done
+
+      - name: Verificar preview pública
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        working-directory: .
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-mass-notes-tiptap"
+          for attempt in $(seq 1 18); do
+            rm -f /tmp/mass-notes-index.html /tmp/mass-notes-app.js /tmp/mass-notes-app.css /tmp/mass-notes-anatomia.html /tmp/mass-notes-anatomia-1.webp /tmp/mass-notes-anatomia-2.webp /tmp/mass-notes-blueprint.webp
+            if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/mass-notes-index.html \
+              && grep --quiet './assets/index.js' /tmp/mass-notes-index.html \
+              && grep --quiet './assets/index.css' /tmp/mass-notes-index.html \
+              && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/mass-notes-app.js \
+              && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/mass-notes-app.css \
+              && curl --fail --silent --show-error --location "${base}/anatomia-do-livro.html" -o /tmp/mass-notes-anatomia.html \
+              && curl --fail --silent --show-error --location "${base}/assets/anatomia/anatomia-asset-1.webp" -o /tmp/mass-notes-anatomia-1.webp \
+              && curl --fail --silent --show-error --location "${base}/assets/anatomia/anatomia-asset-2.webp" -o /tmp/mass-notes-anatomia-2.webp \
+              && curl --fail --silent --show-error --location "${base}/assets/blueprint/anatomia-livro-render.webp" -o /tmp/mass-notes-blueprint.webp \
+              && test "$(wc -c < /tmp/mass-notes-app.js)" -gt 1000 \
+              && test "$(wc -c < /tmp/mass-notes-app.css)" -gt 1000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -gt 50000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia.html)" -lt 500000 \
+              && grep --quiet 'Anatomia do Livro — Escrevaral' /tmp/mass-notes-anatomia.html \
+              && grep --quiet 'page-flip@2.0.7' /tmp/mass-notes-anatomia.html \
+              && grep --quiet -- '--sky:#a9d4e4' /tmp/mass-notes-anatomia.html \
+              && grep --quiet "document.documentElement.classList.add('is-embedded')" /tmp/mass-notes-anatomia.html \
+              && ! grep --quiet -- '--paper:#f1e7d4' /tmp/mass-notes-anatomia.html \
+              && ! grep --quiet 'A Cartografia do Esquecimento' /tmp/mass-notes-anatomia.html \
+              && ! grep --quiet 'atob(' /tmp/mass-notes-anatomia.html \
+              && test "$(wc -c < /tmp/mass-notes-anatomia-1.webp)" -gt 10000 \
+              && test "$(wc -c < /tmp/mass-notes-anatomia-2.webp)" -gt 10000 \
+              && test "$(head -c 4 /tmp/mass-notes-anatomia-1.webp)" = "RIFF" \
+              && test "$(head -c 4 /tmp/mass-notes-anatomia-2.webp)" = "RIFF" \
+              && test "$(wc -c < /tmp/mass-notes-blueprint.webp)" -gt 1000 \
+              && test "$(head -c 4 /tmp/mass-notes-blueprint.webp)" = "RIFF" \
+              && test "$(dd if=/tmp/mass-notes-blueprint.webp bs=1 skip=8 count=4 2>/dev/null)" = "WEBP"; then
+              echo "Preview pública respondeu com a Anatomia original otimizada e o fundo técnico válido."
+              exit 0
+            fi
+            echo "Preview ainda não convergiu no CDN (tentativa ${attempt}/18)."
+            sleep 10
+          done
+          echo "A preview pública não entregou o conjunto correto após 3 minutos."
+          exit 1
+
+      - name: Guardar relatório do Playwright
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mass-notes-tiptap-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            mass-notes-next/build.log
+            mass-notes-next/e2-lexical-inventory.json
+            mass-notes-next/e2-lexical-inventory.md
+            mass-notes-next/e2-definition-duplicates.json
+            mass-notes-next/e2-definition-duplicates.md
+            mass-notes-next/anatomy-sha256.txt
+            mass-notes-next/anatomy-assets-sha256.txt
+            mass-notes-next/blueprint-sha256.txt
+            mass-notes-next/public/anatomia-do-livro.html
+            mass-notes-next/public/assets/anatomia/anatomia-asset-1.webp
+            mass-notes-next/public/assets/anatomia/anatomia-asset-2.webp
+            mass-notes-next/public/assets/blueprint/anatomia-livro-render.webp
+            mass-notes-next/package-lock.json
+            mass-notes-next/playwright-report/**
+            mass-notes-next/test-results/**
