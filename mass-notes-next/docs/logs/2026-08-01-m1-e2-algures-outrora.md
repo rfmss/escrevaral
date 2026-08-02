@@ -3,7 +3,7 @@
 Data: 2026-08-01  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho  
-Estado: **fechado e validado na matriz integral**
+Estado: **conteúdo lexical fechado; preparação determinística da banca aplicada; matriz final pendente**
 
 > **Eva Chara, entre em banca.**
 
@@ -113,10 +113,41 @@ Também ficaram verdes na mesma cabeça:
 - fronteira pública `30727039333`;
 - todos os demais workflows oficiais disparados pelo PR.
 
-Este commit é somente o fechamento documental da evidência acima. Ele não modifica engine, definição, distribuição, interface ou teste; sua própria cabeça deve repetir a matriz oficial antes de ser tratada como cabeça final da tranche.
+## Repetição da cabeça documental e estabilização da banca
+
+A cabeça documental `35776a5b4aca329ed32a382dc77269d499105312` foi submetida à matriz oficial `30727473648` e preservou dois resultados vermelhos distintos em execuções consecutivas:
+
+1. primeira execução: **363/364**; o Firefox entrou uma vez em `Conflito` durante a jornada não funcional de rede, apesar de o cenário usar uma única página. A preview foi corretamente bloqueada;
+2. reexecução da mesma cabeça: a jornada anterior passou, mas outro contrato terminou em **363/364** porque `locator.fill()` anexou o novo manuscrito ao conteúdo Tiptap já existente no Firefox, em vez de substituí-lo.
+
+O segundo trace mostrou o documento resultante como:
+
+```text
+Melancolia atravessa a casa sem pedir licença.O elevador parou entre dois andares.
+```
+
+O contrato de posição agiu corretamente ao rejeitar esse texto como diferente do manuscrito esperado. Portanto, não havia falha na seleção lexical nem na projeção de posições: a preparação do teste era não determinística para `contenteditable` no Firefox.
+
+Correção mínima aplicada somente à banca:
+
+- foco explícito no editor;
+- `Control+A` e `Backspace` para esvaziar o documento;
+- inserção pelo teclado, passando pela transação real do Tiptap;
+- igualdade exata do manuscrito antes de consultar o contrato de posição.
+
+Não houve:
+
+- mudança em engine, definição ou interface;
+- aumento de timeout;
+- retry no Playwright;
+- ocultação de conflito real;
+- alteração na política de persistência.
+
+A primeira ocorrência de conflito não se repetiu na segunda execução e continua registrada como ocorrência não classificada. A cabeça que contém a preparação determinística e este registro deve passar pela matriz integral antes do fechamento definitivo e da atualização do corpo do PR.
 
 ## O — O que permanece aberto
 
+- matriz integral da cabeça com a banca estabilizada;
 - 66 conflitos editoriais de definições;
 - oito autorreferências de sinônimos;
 - quatro aliases técnicos;
@@ -125,11 +156,11 @@ Este commit é somente o fechamento documental da evidência acima. Ele não mod
 - expansão lexical bloqueada;
 - nota lexical mantida em 6,5 até ganho qualitativo mais amplo e banca humana.
 
-## Parecer Eva — fechamento
+## Parecer Eva — fechamento condicionado
 
 - dimensão: Léxico e polissemia;
 - escopo: dois advérbios, sem generalização;
 - ganho: remoção de sobrescrita silenciosa, melhor delimitação semântica e distribuição coerente;
 - nota: **6,5**, mantida;
-- decisão: `PROSSEGUIR COM CONDIÇÕES` para o próximo pequeno lote editorial;
+- decisão: `PAUSAR` o próximo lote até a matriz da banca estabilizada;
 - condição: uma família por tranche, fontes e redações registradas, regressões próprias e matriz integral.
