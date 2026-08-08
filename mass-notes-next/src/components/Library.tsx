@@ -21,6 +21,8 @@ type Props = {
   onClose: () => void
 }
 
+const BRAND_LOGO = `${import.meta.env.BASE_URL}brand/escrevaral-logo.svg`
+
 const STATUS_FILTERS: Array<{ value: LibraryStatusFilter; label: string }> = [
   { value: 'all', label: 'Todas' },
   { value: 'Rascunho', label: 'Rascunho' },
@@ -83,8 +85,11 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
       tabIndex={-1}
     >
       <header className="brand">
+        <div className="brand-logo-plate" aria-hidden="true">
+          <img className="brand-logo" src={BRAND_LOGO} alt="" width="300" height="180" />
+        </div>
+        <h1 className="sr-only">Escrevaral</h1>
         <div className="eyebrow">Oficina de escrita brasileira</div>
-        <h1>Escreva<span>ral</span></h1>
         <nav className="brand-links" aria-label="Contato e canais do Escrevaral">
           <a aria-label="Contato do desenvolvedor" href="mailto:rafamass@proton.me">Dev</a>
           <a aria-label="Contato do Escrevaral" href="mailto:oi@escrevaral.com">Contato</a>
