@@ -44,9 +44,15 @@ async function elementContrast(page: Page, selector: string): Promise<number> {
   return contrastRatio(rgb(values.foreground), rgb(values.background))
 }
 
-test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composição', async ({ page }) => {
+test('o logo oficial fornecido substitui o selo tipográfico sem romper o verniz material', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
+
+  const logo = page.locator('.brand-logo')
+  const symbolLink = page.locator('link[rel="icon"]')
+  await expect(logo).toBeVisible()
+  await expect(logo).toHaveAttribute('src', /brand\/escrevaral-logo\.svg$/)
+  await expect(symbolLink).toHaveAttribute('href', /brand\/escrevaral-symbol\.svg$/)
 
   const visual = await page.evaluate(() => {
     const root = getComputedStyle(document.documentElement)
@@ -54,20 +60,22 @@ test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composiçã
     const railElement = document.querySelector<HTMLElement>('.rail')!
     const paperElement = document.querySelector<HTMLElement>('.paper')!
     const brandElement = document.querySelector<HTMLElement>('.brand')!
+    const logoElement = brandElement.querySelector<HTMLImageElement>('.brand-logo')!
+    const logoPlateElement = brandElement.querySelector<HTMLElement>('.brand-logo-plate')!
     const eyebrowElement = brandElement.querySelector<HTMLElement>('.eyebrow')!
-    const wordmarkElement = brandElement.querySelector<HTMLElement>('h1')!
+    const headingElement = brandElement.querySelector<HTMLElement>('h1')!
     const linksElement = brandElement.querySelector<HTMLElement>('.brand-links')!
 
     const sidebar = getComputedStyle(sidebarElement)
     const rail = getComputedStyle(railElement)
     const paper = getComputedStyle(paperElement)
-    const wordmark = getComputedStyle(wordmarkElement)
-    const seal = getComputedStyle(brandElement, '::before')
-    const sealFrame = getComputedStyle(brandElement, '::after')
+    const oldSeal = getComputedStyle(brandElement, '::before')
+    const oldSealFrame = getComputedStyle(brandElement, '::after')
     const brandRect = brandElement.getBoundingClientRect()
+    const logoRect = logoPlateElement.getBoundingClientRect()
     const eyebrowRect = eyebrowElement.getBoundingClientRect()
-    const wordmarkRect = wordmarkElement.getBoundingClientRect()
     const linksRect = linksElement.getBoundingClientRect()
+    const heading = getComputedStyle(headingElement)
 
     return {
       indigo: root.getPropertyValue('--esv-indigo').trim(),
@@ -83,26 +91,20 @@ test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composiçã
       paperImage: paper.backgroundImage,
       paperSize: paper.backgroundSize,
       paperRepeat: paper.backgroundRepeat,
-      sealContent: seal.content,
-      sealDisplay: seal.display,
-      sealLeft: Number.parseFloat(seal.left),
-      sealTop: Number.parseFloat(seal.top),
-      sealWidth: Number.parseFloat(seal.width),
-      sealHeight: Number.parseFloat(seal.height),
-      sealBackground: seal.backgroundColor,
-      sealImage: seal.backgroundImage,
-      sealColor: seal.color,
-      sealBorderWidth: seal.borderTopWidth,
-      sealFrameDisplay: sealFrame.display,
-      wordmarkText: wordmarkElement.textContent?.trim() ?? '',
-      wordmarkVisibility: wordmark.visibility,
-      wordmarkOpacity: Number(wordmark.opacity),
-      eyebrowLeft: eyebrowRect.left - brandRect.left,
+      oldSealDisplay: oldSeal.display,
+      oldSealFrameDisplay: oldSealFrame.display,
+      headingText: headingElement.textContent?.trim() ?? '',
+      headingWidth: Number.parseFloat(heading.width),
+      headingHeight: Number.parseFloat(heading.height),
+      logoSrc: logoElement.getAttribute('src') ?? '',
+      logoNaturalWidth: logoElement.naturalWidth,
+      logoNaturalHeight: logoElement.naturalHeight,
+      logoLeft: logoRect.left - brandRect.left,
+      logoTop: logoRect.top - brandRect.top,
+      logoRight: logoRect.right - brandRect.left,
+      logoBottom: logoRect.bottom - brandRect.top,
+      eyebrowTop: eyebrowRect.top - brandRect.top,
       eyebrowBottom: eyebrowRect.bottom - brandRect.top,
-      wordmarkLeft: wordmarkRect.left - brandRect.left,
-      wordmarkTop: wordmarkRect.top - brandRect.top,
-      wordmarkRight: wordmarkRect.right - brandRect.left,
-      wordmarkBottom: wordmarkRect.bottom - brandRect.top,
       linksTop: linksRect.top - brandRect.top,
       linksBottom: linksRect.bottom - brandRect.top,
       brandWidth: brandRect.width,
@@ -122,26 +124,21 @@ test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composiçã
     sidebarBackground: 'rgb(24, 34, 48)',
     railBackground: 'rgb(24, 34, 48)',
     paperBackground: 'rgb(240, 228, 207)',
-    sealDisplay: 'grid',
-    sealWidth: 44,
-    sealHeight: 44,
-    sealBackground: 'rgb(24, 34, 48)',
-    sealColor: 'rgb(240, 228, 207)',
-    sealBorderWidth: '1px',
-    sealFrameDisplay: 'block',
-    wordmarkVisibility: 'visible',
-    wordmarkOpacity: 1,
+    oldSealDisplay: 'none',
+    oldSealFrameDisplay: 'none',
+    headingText: 'Escrevaral',
+    logoNaturalWidth: 300,
+    logoNaturalHeight: 180,
   })
 
-  expect(visual.sealContent).toContain('SCR')
-  expect(visual.sealContent).toContain('VRL')
-  expect(visual.wordmarkText.toLocaleUpperCase('pt-BR')).toBe('ESCREVARAL')
-  expect(visual.eyebrowLeft).toBeGreaterThanOrEqual(visual.sealLeft + visual.sealWidth + 10)
-  expect(visual.wordmarkLeft).toBeGreaterThanOrEqual(visual.sealLeft + visual.sealWidth + 10)
-  expect(visual.wordmarkTop).toBeGreaterThanOrEqual(visual.eyebrowBottom + 6)
-  expect(visual.wordmarkBottom).toBeLessThanOrEqual(visual.linksTop - 6)
-  expect(visual.wordmarkRight).toBeLessThanOrEqual(visual.brandWidth - 12)
-  expect(visual.sealTop + visual.sealHeight).toBeLessThanOrEqual(visual.linksTop)
+  expect(visual.headingWidth).toBeLessThanOrEqual(1)
+  expect(visual.headingHeight).toBeLessThanOrEqual(1)
+  expect(visual.logoSrc).toContain('brand/escrevaral-logo.svg')
+  expect(visual.logoLeft).toBeGreaterThanOrEqual(12)
+  expect(visual.logoTop).toBeGreaterThanOrEqual(8)
+  expect(visual.logoRight).toBeLessThanOrEqual(visual.brandWidth - 12)
+  expect(visual.logoBottom).toBeLessThanOrEqual(visual.eyebrowTop - 6)
+  expect(visual.eyebrowBottom).toBeLessThanOrEqual(visual.linksTop - 6)
   expect(visual.linksBottom).toBeLessThanOrEqual(visual.brandHeight - 10)
   expect(visual.sidebarImage).toContain('url(')
   expect(visual.sidebarImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(2)
@@ -150,7 +147,6 @@ test('o selo SCR VRL apoia o wordmark e o verniz material preserva a composiçã
   expect(visual.paperImage.match(/radial-gradient/g)?.length ?? 0).toBeGreaterThanOrEqual(3)
   expect(visual.paperSize).toContain('100% 48px')
   expect(visual.paperRepeat).toContain('repeat-y')
-  expect(visual.sealImage).toContain('url(')
   expect(visual.scroll).toBeLessThanOrEqual(visual.viewport)
   expect(await elementContrast(page, '.sidebar .search')).toBeGreaterThanOrEqual(4.5)
   expect(await elementContrast(page, '.rail .tab:not(.active)')).toBeGreaterThanOrEqual(4.5)
