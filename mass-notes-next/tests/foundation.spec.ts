@@ -21,25 +21,28 @@ test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) 
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('ações ficam integradas ao rail e o selo permanece restrito à marca', async ({ page }) => {
+test('ações ficam integradas ao rail e o logo oficial permanece restrito à marca', async ({ page }) => {
   await waitReady(page)
 
   await expect(page.locator('.slash')).toBeHidden()
   await expect(page.locator('.impact-button')).toBeHidden()
 
-  const brandSeal = await page.locator('.brand').evaluate((node) => {
+  const brand = page.locator('.brand')
+  const logo = brand.locator('.brand-logo')
+  await expect(logo).toBeVisible()
+  await expect(logo).toHaveAttribute('src', /brand\/escrevaral-logo\.svg$/)
+  await expect(page.locator('.brand-logo')).toHaveCount(1)
+
+  const brandSeal = await brand.evaluate((node) => {
     const seal = getComputedStyle(node, '::before')
     const frame = getComputedStyle(node, '::after')
     return {
-      content: seal.content,
       before: seal.display,
       after: frame.display,
     }
   })
-  expect(brandSeal.before).toBe('grid')
-  expect(brandSeal.after).toBe('block')
-  expect(brandSeal.content).toContain('SCR')
-  expect(brandSeal.content).toContain('VRL')
+  expect(brandSeal.before).toBe('none')
+  expect(brandSeal.after).toBe('none')
 
   const readButton = page.getByRole('button', { name: 'Ler o texto', exact: true })
   await expect(readButton).toBeVisible()
