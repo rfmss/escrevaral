@@ -1,0 +1,141 @@
+{
+  "schema": "escrevaral.m1-e2.lexical-inventory-baseline",
+  "version": 1,
+  "date": "2026-08-01",
+  "repository": "rfmss/escrevaral",
+  "branch": "experiment/mass-notes-tiptap",
+  "measurementHeads": {
+    "initialInventory": "a326a8026109bee417880c1486dff686267c0766",
+    "duplicateClassification": "d55940cf9a2b1d0a789ba3dabc919eb664816885"
+  },
+  "sources": [
+    "lexical-engine.js",
+    "lexical-data.json",
+    "norma-data.json",
+    "js/data/synonym-data.js",
+    "decolonial-data.json",
+    "rimalab-data.json"
+  ],
+  "declaredHistoricalBaseline": {
+    "synonymEntriesApprox": 1350,
+    "definitionsMinimum": 1020,
+    "polysemyRulesMinimum": 110,
+    "contextEntriesMinimum": 600,
+    "presentRegularVerbForms": 2045,
+    "rimaLabEncyclopedia": 50,
+    "rimaLabGrammarWords": 348
+  },
+  "measuredEffectiveCoverage": {
+    "synonymEntries": 1343,
+    "synonymAlternativesRaw": 7766,
+    "synonymDirectedPairsUniqueNormalized": 7763,
+    "definitions": 936,
+    "definitionRawDeclarations": 1010,
+    "polysemyRules": 175,
+    "polysemyAlternativeCards": 55,
+    "contextEntries": 606,
+    "contextCategories": 9,
+    "contextAlternativesRaw": 1685,
+    "localLexiconEntries": 527,
+    "locutionsRaw": 95,
+    "locutionsUniqueNormalized": 94,
+    "presentRegularVerbFormsRaw": 2045,
+    "presentRegularVerbFormsUniqueNormalized": 2028,
+    "irregularVerbFormsRaw": 2000,
+    "irregularVerbFormsUniqueNormalized": 1936,
+    "rimaLabEncyclopedia": 50,
+    "rimaLabGrammarWords": 407
+  },
+  "definitionDuplicates": {
+    "rawDeclarations": 1010,
+    "effectiveKeys": 936,
+    "duplicateGroups": 68,
+    "overwrittenDeclarations": 74,
+    "identicalGroups": 0,
+    "normalizedEquivalentGroups": 0,
+    "conflictingGroups": 68
+  },
+  "mechanicalFindings": [
+    {
+      "severity": "P0",
+      "code": "definitions.duplicate-raw-key",
+      "count": 68,
+      "detail": "68 grupos têm definições conflitantes; o JavaScript retém silenciosamente apenas a última declaração."
+    },
+    {
+      "severity": "P1",
+      "code": "synonyms.self-reference",
+      "count": 8,
+      "examples": [
+        "avo",
+        "gaúcho",
+        "anacoluto",
+        "canonico",
+        "autoficcao",
+        "aguardar",
+        "ansiar",
+        "contundente"
+      ]
+    },
+    {
+      "severity": "P1",
+      "code": "definitions.technical-alias",
+      "count": 4,
+      "examples": [
+        "ode2",
+        "contemplar2",
+        "denso2",
+        "silencio2"
+      ]
+    },
+    {
+      "severity": "P2",
+      "code": "definitions.empty-or-short",
+      "count": 1,
+      "examples": [
+        "leitor_modelo"
+      ]
+    },
+    {
+      "severity": "P2",
+      "code": "definitions.duplicate-text",
+      "count": 4
+    },
+    {
+      "severity": "P2",
+      "code": "polysemy.without-alternative-card",
+      "count": 124
+    }
+  ],
+  "decisions": [
+    "Não ampliar o vocabulário antes de estabilizar a integridade das bases.",
+    "Não remover definições conflitantes automaticamente.",
+    "Preservar a última declaração como descrição do comportamento atual até revisão editorial.",
+    "Tratar contagem como cobertura, não como prova de qualidade.",
+    "Regenerar relatórios completos com npm run audit:lexicon."
+  ],
+  "ciObservations": [
+    {
+      "workflow": 30502779282,
+      "head": "a326a8026109bee417880c1486dff686267c0766",
+      "audit": "success",
+      "build": "success",
+      "matrix": "287/288",
+      "diagnosis": "timeout temporal no helper de persistência do Gate 9 no Firefox; sem relação com os dados auditados"
+    },
+    {
+      "workflow": 30503599280,
+      "head": "d55940cf9a2b1d0a789ba3dabc919eb664816885",
+      "audit": "success",
+      "build": "success",
+      "matrix": "287/288",
+      "diagnosis": "mesmo timeout temporal migrou de HTML para TXT; helper estabilizado sem reduzir a asserção"
+    }
+  ],
+  "releaseBoundary": {
+    "mergeAuthorized": false,
+    "mainTouched": false,
+    "gate14Started": false,
+    "globalSuperiorityClaimAuthorized": false
+  }
+}

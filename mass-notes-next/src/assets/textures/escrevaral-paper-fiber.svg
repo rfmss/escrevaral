@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <filter id="fiber" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.24" numOctaves="2" seed="29" stitchTiles="stitch"/>
+    <feColorMatrix values="0.42 0 0 0 0.20  0 0.30 0 0 0.14  0 0 0.18 0 0.08  0 0 0 0.24 0"/>
+  </filter>
+  <rect width="240" height="240" filter="url(#fiber)" opacity="0.36"/>
+  <g fill="none" stroke="#76583a" stroke-linecap="round" opacity="0.14">
+    <path d="M8 31c26-3 43 4 68 0s42-3 67 1 51-1 88 2" stroke-width="0.45"/>
+    <path d="M21 86c18 2 38-2 58 0s49 4 77 0 48 1 70-1" stroke-width="0.35"/>
+    <path d="M5 157c31-2 54 3 82 0s55-1 78 1 41-2 70 0" stroke-width="0.4"/>
+    <path d="M27 214c23 1 40-3 64 0s49 2 73-1 42 2 65 0" stroke-width="0.32"/>
+  </g>
+  <g fill="#6d5034" opacity="0.09">
+    <ellipse cx="46" cy="52" rx="1.4" ry="0.35" transform="rotate(-8 46 52)"/>
+    <ellipse cx="185" cy="112" rx="1.1" ry="0.3" transform="rotate(13 185 112)"/>
+    <ellipse cx="103" cy="191" rx="1.6" ry="0.32" transform="rotate(-4 103 191)"/>
+  </g>
+</svg>

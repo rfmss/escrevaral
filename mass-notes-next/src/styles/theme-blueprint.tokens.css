@@ -1,0 +1,112 @@
+/* Gate 6.75 — tokens visuais extraídos do protótipo Blueprint Tokon. */
+
+:root {
+  --bp-ink: #161817;
+  --bp-paper: #f3eee4;
+  --bp-paper-2: #e9e1d4;
+  --bp-cyan: #86c7df;
+  --bp-cyan-strong: #36a7d2;
+  --bp-cyan-pale: #d8f0f8;
+  --bp-orange: #ff5a19;
+  --bp-red: #e31b36;
+
+  --bp-canvas: #86c7df;
+  --bp-panel: #f3eee4;
+  --bp-panel-strong: #e9e1d4;
+  --bp-control: #faf6ee;
+  --bp-control-hover: #d8f0f8;
+  --bp-text-secondary: #414846;
+  --bp-text-subtle: #66706d;
+  --bp-line: rgba(22, 24, 23, .18);
+  --bp-grid: rgba(34, 132, 172, .16);
+  --bp-grid-strong: rgba(54, 167, 210, .54);
+  --bp-dot: rgba(22, 24, 23, .075);
+  --bp-paper-dot: rgba(22, 24, 23, .055);
+  --bp-diagonal: rgba(255, 255, 255, .34);
+  --bp-frame: rgba(255, 255, 255, .48);
+  --bp-shadow-graphic: 8px 10px 0 rgba(22, 24, 23, .18);
+  /* A prancha usa sombra gráfica seca. Blur difuso criava um gradiente cinza ao lado da folha. */
+  --bp-shadow-soft: 0 0 0 rgba(22, 24, 23, 0);
+
+  /* Compatibilidade com a camada existente. */
+  --paper: var(--bp-paper);
+  --paper-2: var(--bp-paper-2);
+  --ink: var(--bp-ink);
+  --blue: var(--bp-cyan);
+  --blue-deep: #087da9;
+  --red: var(--bp-red);
+  --orange: var(--bp-orange);
+  --line: var(--bp-grid-strong);
+  --shadow: rgba(22, 24, 23, .18);
+  --panel: rgba(243, 238, 228, .95);
+
+  --ui-canvas: var(--bp-canvas);
+  --ui-panel: var(--bp-panel);
+  --ui-panel-strong: var(--bp-panel-strong);
+  --ui-control: var(--bp-control);
+  --ui-control-hover: var(--bp-control-hover);
+  --ui-text: var(--bp-ink);
+  --ui-text-secondary: var(--bp-text-secondary);
+  --ui-text-subtle: var(--bp-text-subtle);
+  --ui-border: var(--bp-cyan-strong);
+  --ui-border-soft: rgba(54, 167, 210, .38);
+  --ui-active: var(--bp-ink);
+  --ui-active-text: var(--bp-paper);
+  --ui-disabled: #747c79;
+  --ui-focus: var(--bp-orange);
+  --ui-selection: rgba(255, 90, 25, .56);
+  --ui-selection-text: #111412;
+  --ui-action: var(--bp-red);
+  --ui-action-text: #fff;
+  --ui-analysis: #7058a4;
+}
+
+body.night {
+  --bp-canvas: #123442;
+  --bp-panel: #202628;
+  --bp-panel-strong: #182023;
+  --bp-control: #283235;
+  --bp-control-hover: #33454b;
+  --bp-text-secondary: #d5dddc;
+  --bp-text-subtle: #aab8ba;
+  --bp-line: rgba(216, 240, 248, .18);
+  --bp-grid: rgba(134, 199, 223, .18);
+  --bp-grid-strong: rgba(134, 199, 223, .42);
+  --bp-dot: rgba(216, 240, 248, .08);
+  --bp-paper-dot: rgba(216, 240, 248, .045);
+  --bp-diagonal: rgba(134, 199, 223, .14);
+  --bp-frame: rgba(134, 199, 223, .28);
+  --bp-shadow-graphic: 8px 10px 0 rgba(0, 0, 0, .32);
+  --bp-shadow-soft: 0 0 0 rgba(0, 0, 0, 0);
+
+  --paper: #202628;
+  --paper-2: #182023;
+  --ink: #f4f0e9;
+  --blue: #62b9da;
+  --blue-deep: #9adcf3;
+  --red: #ff6570;
+  --orange: #ff8a3d;
+  --line: var(--bp-grid-strong);
+  --shadow: rgba(0, 0, 0, .42);
+  --panel: rgba(32, 38, 40, .96);
+
+  --ui-canvas: var(--bp-canvas);
+  --ui-panel: var(--bp-panel);
+  --ui-panel-strong: var(--bp-panel-strong);
+  --ui-control: var(--bp-control);
+  --ui-control-hover: var(--bp-control-hover);
+  --ui-text: #f4f0e9;
+  --ui-text-secondary: var(--bp-text-secondary);
+  --ui-text-subtle: var(--bp-text-subtle);
+  --ui-border: #62b9da;
+  --ui-border-soft: rgba(134, 199, 223, .28);
+  --ui-active: #f4f0e9;
+  --ui-active-text: #161817;
+  --ui-disabled: #859194;
+  --ui-focus: #ffae68;
+  --ui-selection: rgba(255, 90, 25, .7);
+  --ui-selection-text: #111412;
+  --ui-action: #ff6570;
+  --ui-action-text: #161817;
+  --ui-analysis: #c5afff;
+}

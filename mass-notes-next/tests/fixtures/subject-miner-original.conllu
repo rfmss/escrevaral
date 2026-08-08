@@ -1,0 +1,72 @@
+# sent_id = project-dev-001
+# text = As sentinelas cruzaram o pátio.
+1	As	o	DET	_	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	_
+2	sentinelas	sentinela	NOUN	_	Gender=Fem|Number=Plur	3	nsubj	_	_
+3	cruzaram	cruzar	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
+4	o	o	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	5	det	_	_
+5	pátio	pátio	NOUN	_	Gender=Masc|Number=Sing	3	obj	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = project-dev-002
+# text = Bateram três vezes no portão.
+1	Bateram	bater	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
+2	três	três	NUM	_	NumType=Card	3	nummod	_	_
+3	vezes	vez	NOUN	_	Gender=Fem|Number=Plur	1	obl	_	_
+4-5	no	_	_	_	_	_	_	_	_
+4	em	em	ADP	_	_	6	case	_	_
+5	o	o	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	6	det	_	_
+6	portão	portão	NOUN	_	Gender=Masc|Number=Sing	1	obl	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = project-dev-003
+# text = Os guardas observaram os viajantes.
+1	Os	o	DET	_	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	2	det	_	_
+2	guardas	guarda	NOUN	_	Gender=Masc|Number=Plur	3	nsubj	_	_
+3	observaram	observar	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
+4	os	o	DET	_	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	5	det	_	_
+5	viajantes	viajante	NOUN	_	Gender=Masc|Number=Plur	3	obj	_	SpaceAfter=No
+6	.	.	PUNCT	_	_	3	punct	_	_
+
+# sent_id = project-dev-004
+# text = Depois gritaram do outro lado do pátio.
+1	Depois	depois	ADV	_	_	2	advmod	_	_
+2	gritaram	gritar	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
+3-4	do	_	_	_	_	_	_	_	_
+3	de	de	ADP	_	_	5	case	_	_
+4	o	o	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	5	det	_	_
+5	outro	outro	ADJ	_	Gender=Masc|Number=Sing	6	amod	_	_
+6	lado	lado	NOUN	_	Gender=Masc|Number=Sing	2	obl	_	_
+7-8	do	_	_	_	_	_	_	_	_
+7	de	de	ADP	_	_	9	case	_	_
+8	o	o	DET	_	Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
+9	pátio	pátio	NOUN	_	Gender=Masc|Number=Sing	6	nmod	_	SpaceAfter=No
+10	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = project-dev-005
+# text = Venderam-se grimórios na feira.
+1	Venderam	vender	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	SpaceAfter=No
+2	-se	se	PRON	_	Person=3|PronType=Prs	1	expl:pass	_	_
+3	grimórios	grimório	NOUN	_	Gender=Masc|Number=Plur	1	nsubj:pass	_	_
+4-5	na	_	_	_	_	_	_	_	_
+4	em	em	ADP	_	_	6	case	_	_
+5	a	o	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+6	feira	feira	NOUN	_	Gender=Fem|Number=Sing	1	obl	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	1	punct	_	_
+
+# sent_id = project-dev-006
+# text = Foram encontradas duas chaves.
+1	Foram	ser	AUX	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	2	aux:pass	_	_
+2	encontradas	encontrar	VERB	_	Gender=Fem|Number=Plur|VerbForm=Part|Voice=Pass	0	root	_	_
+3	duas	dois	NUM	_	Gender=Fem|NumType=Card	4	nummod	_	_
+4	chaves	chave	NOUN	_	Gender=Fem|Number=Plur	2	nsubj:pass	_	SpaceAfter=No
+5	.	.	PUNCT	_	_	2	punct	_	_
+
+# sent_id = project-dev-007
+# text = As portas rangeram durante a noite.
+1	As	o	DET	_	Definite=Def|Gender=Fem|Number=Plur|PronType=Art	2	det	_	_
+2	portas	porta	NOUN	_	Gender=Fem|Number=Plur	3	nsubj	_	_
+3	rangeram	ranger	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	root	_	_
+4	durante	durante	ADP	_	_	6	case	_	_
+5	a	o	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+6	noite	noite	NOUN	_	Gender=Fem|Number=Sing	3	obl	_	SpaceAfter=No
+7	.	.	PUNCT	_	_	3	punct	_	_

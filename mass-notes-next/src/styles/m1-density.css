@@ -1,0 +1,339 @@
+/* OBS-02/03 — densidade operacional, área nobre e suplemento verbal. */
+
+/* A faixa superior preserva a célula React de salvamento e recebe três métricas vivas pelo portal. */
+.registration.writing-dashboard {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 56px;
+}
+
+.registration.writing-dashboard > .reg-field:nth-of-type(-n + 3) {
+  display: none;
+}
+
+.registration.writing-dashboard > .reg-field:nth-of-type(4) {
+  order: 4;
+}
+
+.writing-dashboard-fields {
+  display: contents;
+}
+
+.writing-dashboard-fields .writing-metric { order: 1; }
+.writing-dashboard-fields .writing-goal { order: 2; }
+.writing-dashboard-fields .writing-focus { order: 3; }
+
+.registration.writing-dashboard .reg-field {
+  min-width: 0;
+  min-height: 56px;
+  padding: 7px 12px;
+}
+
+.writing-word-count {
+  color: var(--ui-text, var(--ink));
+  font-size: 1rem;
+}
+
+.writing-goal-row,
+.writing-focus-row {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.writing-goal-row .field-value {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.writing-goal input {
+  width: min(76px, 46%);
+  min-width: 50px;
+  height: 24px;
+  margin: 0;
+  padding: 2px 5px;
+  border: 1px solid var(--ui-border, var(--line));
+  border-radius: 2px;
+  color: var(--ui-text, var(--ink));
+  background: var(--ui-control, var(--paper));
+  font: 800 .72rem/1 "Arial Narrow", sans-serif;
+}
+
+.writing-goal-progress {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  margin-top: 5px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ui-border, var(--blue)) 28%, transparent);
+}
+
+.writing-goal-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--bp-red, var(--red));
+  transition: width .2s ease;
+}
+
+.writing-focus-row button {
+  min-width: 0;
+  height: 27px;
+  padding: 2px 6px;
+  border: 1px solid var(--ui-border, var(--line));
+  border-radius: 2px;
+  color: var(--ui-text, var(--ink));
+  background: transparent;
+  font: 900 .68rem/1 "Arial Narrow", sans-serif;
+}
+
+.writing-focus-toggle {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.writing-focus-toggle[aria-pressed="true"] {
+  color: var(--ui-active-text, var(--paper));
+  background: var(--ui-active, var(--ink));
+}
+
+.writing-focus-reset {
+  flex: 0 0 28px;
+  font-size: .82rem !important;
+}
+
+/* Uma linha, sem remoção de ações. O dock usa a mesma instância React da toolbar. */
+.editor-toolbar-slot {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.editor-toolbar-slot.is-detached {
+  min-height: 52px;
+}
+
+.editor-toolbar-dock {
+  position: fixed;
+  z-index: 54;
+  height: 0;
+  pointer-events: none;
+}
+
+.editor-toolbar-dock[hidden] {
+  display: none;
+}
+
+.editor-viewport .editor-toolbar,
+.editor-toolbar-dock .editor-toolbar {
+  position: relative !important;
+  top: auto !important;
+  z-index: 12;
+  width: 100%;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 3px !important;
+  min-height: 38px;
+  max-height: 44px;
+  margin: 0 0 14px !important;
+  padding: 4px 6px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap;
+  border-color: var(--ui-border-soft, var(--line));
+  background: color-mix(in srgb, var(--ui-panel-strong, var(--paper-2)) 97%, transparent) !important;
+  box-shadow: 0 7px 16px color-mix(in srgb, var(--shadow) 42%, transparent);
+  scrollbar-width: thin;
+  overscroll-behavior-inline: contain;
+}
+
+.editor-toolbar-dock .editor-toolbar {
+  margin: 0 !important;
+  pointer-events: auto;
+}
+
+.editor-toolbar .toolbar-group {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1px !important;
+}
+
+.editor-toolbar .toolbar-group + .toolbar-group {
+  padding-left: 4px !important;
+}
+
+.editor-toolbar button {
+  min-width: 28px !important;
+  min-height: 28px !important;
+  height: 28px;
+  padding: 0 6px !important;
+  line-height: 1 !important;
+}
+
+.escrevaral-editor {
+  scroll-margin-top: 52px;
+}
+
+/* A assinatura técnica sai da interface; ficam somente canais úteis e verificados. */
+.brand-links {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  max-width: 205px;
+  margin-top: 12px;
+  font: 800 .58rem/1.25 "Arial Narrow", "Roboto Condensed", sans-serif;
+  letter-spacing: .045em;
+}
+
+.brand-links a {
+  color: var(--ui-text-secondary, var(--muted));
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--blue-deep) 55%, transparent);
+}
+
+.brand-links a:hover,
+.brand-links a:focus-visible {
+  color: var(--blue-deep);
+  border-bottom-color: currentColor;
+}
+
+/* Suplemento editorial curado: não altera a saída da engine nem o manuscrito. */
+.verb-formation {
+  display: grid;
+  gap: 11px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--blue-deep) 64%, var(--line));
+  border-left: 5px solid var(--blue-deep);
+  background: color-mix(in srgb, var(--blue) 9%, var(--panel));
+}
+
+.verb-formation-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.verb-formation-heading > span,
+.verb-formation-section h4 {
+  color: var(--blue-deep);
+  font: 900 .54rem/1.2 "Arial Narrow", "Roboto Condensed", sans-serif;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.verb-formation-heading h3 {
+  margin: 0;
+  font: 900 .86rem/1.2 Inter, system-ui, sans-serif;
+}
+
+.verb-formation-heading strong {
+  justify-self: start;
+  padding: 3px 6px;
+  border: 1px solid var(--blue-deep);
+  font-size: .6rem;
+}
+
+.verb-formation-note {
+  margin: 0;
+  padding: 8px;
+  border-left: 4px solid var(--orange);
+  color: var(--ui-text-secondary, var(--muted));
+  background: color-mix(in srgb, var(--orange) 8%, transparent);
+  font-size: .65rem;
+  line-height: 1.48;
+}
+
+.verb-formation-section {
+  display: grid;
+  gap: 6px;
+}
+
+.verb-formation-section h4,
+.verb-formation-section p,
+.verb-formation-section ul,
+.verb-formation-section dl {
+  margin: 0;
+}
+
+.verb-formation-section p,
+.verb-formation-section li {
+  color: var(--ui-text-secondary, var(--muted));
+  font-size: .67rem;
+  line-height: 1.52;
+}
+
+.verb-formation-section ul {
+  display: grid;
+  gap: 4px;
+  padding-left: 17px;
+}
+
+.verb-formation-section dl {
+  display: grid;
+  gap: 5px;
+}
+
+.verb-formation-section dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: 8px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--ui-border-soft, var(--line));
+}
+
+.verb-formation-section dt {
+  color: var(--blue-deep);
+  font-size: .54rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.verb-formation-section dd {
+  margin: 0;
+  font: 800 .66rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1040px) {
+  .registration.writing-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 96px;
+  }
+
+  .registration.writing-dashboard .reg-field {
+    min-height: 48px;
+    padding-block: 5px;
+  }
+
+  /* Reverte a regra legada que escondia genericamente o segundo e o terceiro .reg-field. */
+  .writing-dashboard-fields .reg-field {
+    display: block !important;
+  }
+
+  .registration.writing-dashboard > .reg-field:nth-of-type(4) { order: 4; }
+}
+
+@media (max-width: 520px) {
+  .registration.writing-dashboard {
+    padding-inline: 48px;
+  }
+
+  .writing-goal input {
+    width: 62px;
+  }
+
+  .editor-viewport .editor-toolbar,
+  .editor-toolbar-dock .editor-toolbar {
+    padding-inline: 4px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .writing-goal-progress > span {
+    transition: none;
+  }
+}

@@ -1,0 +1,302 @@
+/* Gate 6.75 — skin Blueprint Tokon. Somente apresentação; nenhuma geometria funcional. */
+
+body {
+  background:
+    linear-gradient(161deg, transparent 0 57%, var(--bp-diagonal) 57.15% 57.42%, transparent 57.58%),
+    linear-gradient(17deg, transparent 0 71%, color-mix(in srgb, var(--bp-diagonal) 78%, transparent) 71.15% 71.42%, transparent 71.58%),
+    radial-gradient(circle at 2px 2px, var(--bp-dot) 1px, transparent 1.25px) 0 0 / 8px 8px,
+    var(--bp-canvas);
+}
+
+.app-shell {
+  background: transparent;
+}
+
+.blueprint {
+  opacity: 1;
+  background:
+    linear-gradient(90deg, transparent 18px, var(--bp-frame) 18px 19px, transparent 19px calc(100% - 19px), var(--bp-frame) calc(100% - 19px) calc(100% - 18px), transparent calc(100% - 18px)),
+    linear-gradient(0deg, transparent 18px, var(--bp-frame) 18px 19px, transparent 19px calc(100% - 19px), var(--bp-frame) calc(100% - 19px) calc(100% - 18px), transparent calc(100% - 18px)),
+    repeating-linear-gradient(0deg, transparent 0 92px, var(--bp-grid) 92px 93px),
+    repeating-linear-gradient(90deg, transparent 0 140px, color-mix(in srgb, var(--bp-grid) 62%, transparent) 140px 141px);
+  box-shadow: inset 0 0 0 18px color-mix(in srgb, var(--bp-frame) 32%, transparent);
+}
+
+.grain { opacity: .045; }
+.halftone { opacity: .018; }
+body.night .grain { opacity: .025; }
+body.night .halftone { opacity: .014; }
+
+.sidebar,
+.rail {
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    color-mix(in srgb, var(--ui-panel) 98%, transparent);
+  border-color: var(--bp-cyan-strong);
+  backdrop-filter: none;
+}
+
+.brand {
+  background:
+    linear-gradient(90deg, var(--bp-red) 0 38px, var(--bp-cyan-strong) 38px 92px, transparent 92px) top 20px right 22px / 92px 4px no-repeat,
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-panel);
+  border-bottom-color: var(--bp-cyan-strong);
+}
+
+.brand h1,
+.title-input,
+.metric-value,
+.voice-card h2,
+.context-card h2,
+.rima-mode-card h2 {
+  text-rendering: geometricPrecision;
+}
+
+.eyebrow,
+.field-label,
+.metric-label,
+.note-meta,
+.shortcut,
+.status,
+.engine-mark,
+.section-label,
+.issue,
+.tab,
+.action,
+kbd {
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.side-tools,
+.sidebar-footer,
+.rail-title,
+.tabs {
+  border-color: var(--bp-grid-strong);
+}
+
+.search,
+.icon-btn,
+.drawer-close,
+.mobile-menu,
+.mobile-tools,
+.action,
+.tab,
+.chip,
+.conflict-banner button,
+kbd {
+  border-color: color-mix(in srgb, var(--bp-cyan-strong) 76%, var(--bp-ink));
+}
+
+.note-card {
+  border-bottom-color: var(--bp-grid-strong);
+}
+
+.note-card:hover {
+  background:
+    radial-gradient(circle at 2px 2px, color-mix(in srgb, var(--bp-cyan-strong) 20%, transparent) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-control-hover);
+}
+
+.note-card.active {
+  background:
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, .09) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-active);
+}
+
+.registration {
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-panel-strong);
+  border-bottom-color: var(--bp-cyan-strong);
+  backdrop-filter: none;
+}
+
+.reg-field {
+  border-right-color: var(--bp-grid-strong);
+}
+
+.editor-shell {
+  background: transparent;
+}
+
+.paper {
+  border-color: var(--bp-cyan-strong);
+  background-color: var(--bp-paper);
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+    linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan-strong) 38%, transparent) 70px 71px, transparent 71px),
+    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 22%, transparent) 47px 48px);
+  background-position: 0 0, 0 0, 0 0;
+  background-size: 9px 9px, auto, auto;
+  box-shadow: var(--bp-shadow-graphic), var(--bp-shadow-soft);
+}
+
+body.night .paper {
+  background-color: var(--bp-panel);
+  background-image:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+    linear-gradient(90deg, transparent 0 70px, color-mix(in srgb, var(--bp-cyan) 28%, transparent) 70px 71px, transparent 71px),
+    repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px);
+}
+
+.paper::before {
+  color: var(--blue-deep);
+  font-family: "Courier New", ui-monospace, monospace;
+}
+
+.paper::after {
+  background: repeating-linear-gradient(90deg, var(--bp-cyan-strong) 0 20px, transparent 20px 26px);
+}
+
+.title-input {
+  border-bottom-color: var(--bp-ink);
+}
+
+body.night .title-input {
+  border-bottom-color: var(--ui-text);
+}
+
+.deck::before {
+  background: var(--bp-red);
+}
+
+.editor-toolbar {
+  border-color: var(--bp-ink);
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-panel-strong);
+  backdrop-filter: none;
+}
+
+body.night .editor-toolbar {
+  border-color: var(--bp-cyan-strong);
+}
+
+.toolbar-group + .toolbar-group {
+  border-left-color: var(--bp-grid-strong);
+}
+
+.editor-toolbar button:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bp-cyan-strong) 74%, var(--bp-ink));
+}
+
+.editor-toolbar button.active,
+.editor-toolbar button[aria-pressed="true"] {
+  background: var(--bp-ink);
+  color: var(--bp-paper);
+}
+
+body.night .editor-toolbar button.active,
+body.night .editor-toolbar button[aria-pressed="true"] {
+  background: var(--ui-active);
+  color: var(--ui-active-text);
+}
+
+.rail-title {
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    var(--ui-panel-strong);
+  border-bottom-color: var(--bp-cyan-strong);
+}
+
+.tabs {
+  background: var(--ui-panel-strong);
+}
+
+.tab {
+  border-color: var(--bp-grid-strong);
+}
+
+.tab.active {
+  background: var(--bp-ink);
+  color: var(--bp-paper);
+}
+
+body.night .tab.active {
+  background: var(--ui-active);
+  color: var(--ui-active-text);
+}
+
+.metric,
+.shortcut,
+.rail-actions,
+.voice-section,
+.context-section,
+.rima-section {
+  border-color: var(--bp-grid-strong);
+}
+
+.review-card,
+.voice-card,
+.context-card,
+.rima-mode-card,
+.rima-scan {
+  background:
+    radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px) 0 0 / 9px 9px,
+    var(--ui-panel);
+  border-color: var(--bp-grid-strong);
+}
+
+.voice-confidence,
+.voice-metrics div,
+.context-chip,
+.rima-summary div,
+.rima-pattern,
+.rima-stanzas div,
+.rima-pairs div {
+  border-color: var(--bp-grid-strong);
+}
+
+.action.primary {
+  background: var(--bp-red);
+  border-color: var(--bp-red);
+}
+
+.action.reading {
+  background: color-mix(in srgb, var(--bp-cyan-strong) 82%, var(--bp-ink));
+  border-color: color-mix(in srgb, var(--bp-cyan-strong) 82%, var(--bp-ink));
+}
+
+body.night .action.reading {
+  background: var(--bp-cyan);
+  border-color: var(--bp-cyan);
+  color: var(--bp-ink);
+}
+
+.drawer-overlay {
+  background:
+    linear-gradient(161deg, transparent 0 57%, rgba(255, 255, 255, .18) 57.2% 57.5%, transparent 57.7%),
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, .15) 1px, transparent 1.2px) 0 0 / 8px 8px,
+    rgba(31, 125, 164, .68);
+  backdrop-filter: grayscale(.55) contrast(.85) brightness(.94);
+}
+
+.sidebar.open,
+.rail.open {
+  box-shadow: var(--bp-shadow-graphic), 0 24px 70px rgba(0, 0, 0, .34);
+}
+
+@media (max-width: 820px) {
+  .paper {
+    background-color: var(--bp-paper);
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan-strong) 20%, transparent) 47px 48px);
+    background-size: 9px 9px, auto;
+  }
+
+  body.night .paper {
+    background-color: var(--bp-panel);
+    background-image:
+      radial-gradient(circle at 2px 2px, var(--bp-paper-dot) 1px, transparent 1.2px),
+      repeating-linear-gradient(0deg, transparent 0 47px, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 47px 48px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper,
+  .panel {
+    animation: none;
+  }
+}

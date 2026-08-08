@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "split": "evaluation_reserved",
+  "purpose": "Conjunto sintético original, reservado e separado do desenvolvimento. Não deve ser aberto durante a implementação e não substitui avaliação observada ou humana.",
+  "evidenceLevel": "synthetic_reserved",
+  "maySupportVerified": false,
+  "sealedUntil": "implementation_hypothesis_frozen",
+  "mustNotBeImportedByDevelopmentRunner": true,
+  "targetPhenomenon": "third_person_plural_subject_recoverability",
+  "contextWindow": "oração atual e período imediatamente anterior",
+  "cases": [
+    {
+      "id": "eval-rec-fiction-riders",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Os cavaleiros alcançaram a ponte ao anoitecer. Esconderam as tochas antes de atravessar.",
+      "target": "Esconderam",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "Os cavaleiros"
+      },
+      "rationale": "O período anterior fornece o referente plural agente.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-rec-dialogue-translators",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— As tradutoras aceitaram o prazo? — Aceitaram, mas solicitaram uma revisão final.",
+      "target": "Aceitaram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "As tradutoras"
+      },
+      "rationale": "O tópico da pergunta é retomado na resposta.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-rec-essay-schools",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "As escolas adotaram critérios distintos. Produziram, por isso, resultados pouco comparáveis.",
+      "target": "Produziram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "As escolas"
+      },
+      "rationale": "As escolas permanecem como sujeito discursivo.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-rec-news-agents",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Os agentes vistoriaram o terminal durante a manhã. Encontraram duas portas destrancadas.",
+      "target": "Encontraram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "Os agentes"
+      },
+      "rationale": "O único grupo agente disponível é retomado.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-rec-oral-cousins",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Daí minhas primas chegaram. Ficaram ali na cozinha mesmo.",
+      "target": "Ficaram",
+      "expected": {
+        "label": "subject_recoverable",
+        "confidence": "probable",
+        "referent": "minhas primas"
+      },
+      "rationale": "A fala mantém minhas primas como tópico contíguo.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-ind-fiction-window",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "Quebraram a janela da torre durante a tempestade.",
+      "target": "Quebraram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "O agente é pressuposto sem referente no recorte.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-ind-dialogue-clinic",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— Ligaram da clínica para confirmar o horário.",
+      "target": "Ligaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A instituição de origem não identifica a pessoa que ligou.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-ind-essay-progress",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Repetiram por décadas que todo progresso era inevitável.",
+      "target": "Repetiram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "A fonte da afirmação permanece não identificada.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-ind-news-documents",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Encontraram documentos no terreno abandonado.",
+      "target": "Encontraram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "Não há sujeito plural expresso nem antecedente recuperável.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-ind-oral-bus",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Falaram que o ônibus não passa hoje.",
+      "target": "Falaram",
+      "expected": {
+        "label": "subject_indeterminate",
+        "confidence": "probable",
+        "referent": null
+      },
+      "rationale": "Quem falou não é identificado.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-amb-fiction-healers-soldiers",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "As curandeiras receberam os soldados. Contaram que a estrada estava bloqueada.",
+      "target": "Contaram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "Curandeiras e soldados podem ser o referente plural.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-amb-dialogue-teachers-parents",
+      "genre": "dialogo",
+      "register": "fala_de_personagem",
+      "manuscript": "— Os professores encontraram os pais? — Explicaram o novo calendário.",
+      "target": "Explicaram",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "A resposta não resolve qual grupo explicou.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-amb-essay-editors-authors",
+      "genre": "ensaio",
+      "register": "escrita_monitorada",
+      "manuscript": "Os editores consultaram os autores antes que publicassem a nota.",
+      "target": "publicassem",
+      "expected": {
+        "label": "subject_ambiguous",
+        "confidence": "ambiguous",
+        "referent": null
+      },
+      "rationale": "A subordinada admite mais de um antecedente plural.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-exp-fiction-gates",
+      "genre": "prosa_ficcional",
+      "register": "escrita_monitorada",
+      "manuscript": "As portas rangeram durante a noite.",
+      "target": "rangeram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "As portas"
+      },
+      "rationale": "O sujeito plural está expresso.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-exp-news-ministers",
+      "genre": "jornalismo_simulado",
+      "register": "escrita_monitorada",
+      "manuscript": "Os ministros divulgaram o relatório no fim da tarde.",
+      "target": "divulgaram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "Os ministros"
+      },
+      "rationale": "O grupo agente aparece na mesma oração.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    },
+    {
+      "id": "eval-exp-oral-friends",
+      "genre": "oralidade_simulada",
+      "register": "coloquial_brasileiro",
+      "manuscript": "Meus amigos trouxeram as cadeiras.",
+      "target": "trouxeram",
+      "expected": {
+        "label": "subject_explicit",
+        "confidence": "determined",
+        "referent": "Meus amigos"
+      },
+      "rationale": "A fala apresenta sujeito plural expresso.",
+      "provenance": {
+        "type": "project_original",
+        "copied": false,
+        "rights": "texto original criado para pesquisa interna do Escrevaral"
+      }
+    }
+  ]
+}

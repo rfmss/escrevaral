@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 3,
+  "policy": {
+    "verifiedRequiresSource": true,
+    "allowedStatuses": [
+      "pending",
+      "partial",
+      "verified",
+      "disputed"
+    ],
+    "requiredRuleFields": [
+      "id",
+      "phenomenon",
+      "implementation",
+      "status",
+      "scope",
+      "tradition",
+      "usage",
+      "divergences",
+      "sources",
+      "licenseOrTerms"
+    ],
+    "requiredSourceFields": [
+      "id",
+      "kind",
+      "citation",
+      "locator",
+      "supports",
+      "licenseOrTerms"
+    ],
+    "placeholderPatterns": [
+      "a documentar",
+      "pendente",
+      "não registrado"
+    ],
+    "note": "Uma regra só pode ser marcada como verified quando possuir fonte identificável, escopo, tradição ou uso descrito, divergências registradas, licença ou condição de uso concreta e avaliação separada integralmente aprovada."
+  },
+  "rules": [
+    {
+      "id": "regular-paradigms",
+      "phenomenon": "paradigmas-regulares",
+      "implementation": [
+        "src/engines/verbMorphology/regularParadigms.ts"
+      ],
+      "status": "pending",
+      "scope": "paradigmas regulares em -ar, -er e -ir cobertos pela implementação versionada; extensão e exceções ainda não validadas externamente",
+      "tradition": "a documentar",
+      "usage": "cobertura funcional em português brasileiro; estratificação por registro e gênero textual pendente",
+      "divergences": [
+        "formas coincidentes entre tempos e modos exigem contexto"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "personal-infinitive",
+      "phenomenon": "infinitivo-pessoal",
+      "implementation": [
+        "src/engines/verbMorphology/regularParadigms.ts",
+        "src/engines/verbMorphology/contextResolver.ts",
+        "src/engines/verbMorphology/verbLemmaLexicon.ts"
+      ],
+      "status": "verified",
+      "scope": "formas flexionadas e não flexionadas com sujeito expresso ou recuperável; inclui primeira pessoa do plural em construção avaliativa como ‘é melhor sairmos’; mede separadamente as fronteiras com infinitivo impessoal, uso substantivado e futuro do subjuntivo",
+      "tradition": "contrasta descrição gramatical contemporânea, pesquisa sociolinguística, análise sintática e evidência experimental do português brasileiro; nenhuma fonte isolada é tratada como autoridade absoluta",
+      "usage": "o infinitivo flexionado é produtivo, porém variável no português brasileiro; obrigatoriedade, opcionalidade, formalidade e frequência dependem da configuração sintática, do sujeito, do registro e da variedade, portanto a interface deve expor limites e não prescrever automaticamente",
+      "divergences": [
+        "a tradição normativa tende a formular regras categóricas onde estudos de uso registram variação e opcionalidade",
+        "a flexão pode ser obrigatória, opcional ou bloqueada conforme tipo de oração, controle e presença de sujeito lexical",
+        "formas de primeira e terceira pessoa do singular coincidem superficialmente com o infinitivo impessoal",
+        "formas de terceira pessoa do plural podem coincidir com o futuro do subjuntivo",
+        "aceitabilidade, produtividade e formalidade variam entre falantes e contextos brasileiros"
+      ],
+      "sources": [
+        {
+          "id": "cunha-cintra-2025",
+          "kind": "gramática de referência",
+          "citation": "CUNHA, Celso; CINTRA, Luís F. Lindley. Nova gramática do português contemporâneo. 8. ed. Rio de Janeiro: Lexikon, 2025. ISBN 9786588871638.",
+          "locator": "ISBN 9786588871638",
+          "supports": "paradigma morfológico e distinção tradicional entre infinitivo pessoal e impessoal em uma descrição contemporânea que considera variedades nacionais",
+          "licenseOrTerms": "obra protegida por direitos autorais; usada somente como referência bibliográfica e síntese própria, sem reprodução ou incorporação de texto"
+        },
+        {
+          "id": "canever-2017",
+          "kind": "tese de doutorado",
+          "citation": "CANEVER, Fernanda. Infinitivo flexionado em português brasileiro: frequência e percepções sociolinguísticas. 2017. Tese (Doutorado em Semiótica e Linguística Geral) — Universidade de São Paulo, São Paulo, 2017.",
+          "locator": "DOI 10.11606/T.8.2018.tde-04042018-184015",
+          "supports": "variação, frequência e contextos sintáticos opcionais do infinitivo flexionado no português brasileiro",
+          "licenseOrTerms": "consulta no repositório institucional da USP; uso bibliográfico e paráfrase analítica, sem presumir licença de redistribuição do texto ou de exemplos"
+        },
+        {
+          "id": "ribeiro-2023",
+          "kind": "dissertação de mestrado",
+          "citation": "RIBEIRO, Juliana Campos Câmara. O infinitivo flexionado na gramática do português brasileiro: questões sobre língua-I e ensino. 2023. Dissertação (Mestrado em Linguística) — Universidade de Brasília, Brasília, 2023.",
+          "locator": "Repositório UnB 10482/49747",
+          "supports": "descrição do fenômeno no português brasileiro, controvérsias de aquisição, ensino e relação entre gramática do falante e tradição escolar",
+          "licenseOrTerms": "consulta no repositório institucional da UnB; metadados e síntese própria, sem incorporar ou redistribuir o PDF"
+        },
+        {
+          "id": "modesto-soto-franca-2022",
+          "kind": "artigo experimental revisado por pares",
+          "citation": "MODESTO, Marcello; SOTO, Marije; IMPROTA FRANÇA, Aniela. Experimental evidence of the production of inflected infinitives by Brazilian Portuguese speakers. Revista da ABRALIN, v. 21, n. 1, 2022.",
+          "locator": "DOI 10.25189/rabralin.v21i1.2065",
+          "supports": "evidência experimental de produtividade e variabilidade da flexão infinitiva entre falantes de português brasileiro",
+          "licenseOrTerms": "todos os direitos reservados aos autores segundo a página do periódico; apenas resultados agregados e referência bibliográfica são usados, sem copiar itens experimentais"
+        },
+        {
+          "id": "vargas-2018",
+          "kind": "artigo diacrônico revisado por pares",
+          "citation": "VARGAS, Sarah Leite. O infinitivo flexionado do português paulista dos séculos XVIII, XIX e XX: um estudo sintático-diacrônico. Estudos Linguísticos, v. 47, n. 1, p. 56–69, 2018.",
+          "locator": "DOI 10.21165/el.v47i1.2017",
+          "supports": "uso histórico no português paulista, relação com sujeito nulo e evidência de ocorrência fora de fronteiras normativas rígidas",
+          "licenseOrTerms": "política do periódico permite consulta e reprodução de exemplar para uso próprio; o projeto usa somente citação, síntese e metadados, preservando autoria"
+        }
+      ],
+      "licenseOrTerms": "fontes consultadas somente para fundamentação, contraste e síntese própria; nenhum texto, corpus, exemplo protegido ou material experimental foi incorporado ao runtime ou aos fixtures",
+      "evaluation": {
+        "baselineHead": "0e5177d5c801a4a9b8833af35baa059af486f6c4",
+        "workflowRun": 30718951198,
+        "artifactId": 8824240160,
+        "artifactDigest": "sha256:06978a08feb9b9226e5034dc2ef105d2560c95629b3cd991db2a93b8d0560bda",
+        "browsers": [
+          "chromium",
+          "firefox"
+        ],
+        "cases": 12,
+        "executions": 24,
+        "passed": 24,
+        "failed": 0,
+        "precision": 1,
+        "recall": 1,
+        "accuracy": 1
+      }
+    },
+    {
+      "id": "curated-irregulars",
+      "phenomenon": "irregulares-frequentes",
+      "implementation": [
+        "src/engines/verbMorphology/irregularLexicon.ts"
+      ],
+      "status": "partial",
+      "scope": "léxico curado de formas frequentes e de alto risco; não representa paradigma universal",
+      "tradition": "léxico curado; critérios de frequência e risco ainda não publicados",
+      "usage": "cobertura funcional em português brasileiro sem alegação de exaustividade",
+      "divergences": [
+        "critérios de frequência, produtividade e variantes de uso ainda não medidos"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "clitic-placement",
+      "phenomenon": "cliticos",
+      "implementation": [
+        "src/engines/verbMorphology/cliticParser.ts"
+      ],
+      "status": "pending",
+      "scope": "próclise, ênclise e mesóclise reconhecidas pela arquitetura atual",
+      "tradition": "a documentar",
+      "usage": "apresentação descritiva e não prescritiva; variação brasileira contemporânea não estratificada",
+      "divergences": [
+        "variação de registro e uso brasileiro contemporâneo"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "compound-constructions",
+      "phenomenon": "locucoes-e-compostos",
+      "implementation": [
+        "src/engines/verbMorphology/compoundConstructions.ts"
+      ],
+      "status": "pending",
+      "scope": "tempos compostos, progressivo, futuro perifrástico e passiva reconhecidos pela implementação atual",
+      "tradition": "a documentar",
+      "usage": "cobertura funcional; variação aspectual e de registro ainda não medida",
+      "divergences": [
+        "fronteira entre locução verbal, perífrase aspectual e combinação livre"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "contextual-homographs",
+      "phenomenon": "homografos-e-diacriticos",
+      "implementation": [
+        "src/engines/verbMorphology/contextResolver.ts",
+        "src/engines/verbMorphology/normalization.ts"
+      ],
+      "status": "partial",
+      "scope": "proteções contextuais e diacríticas para ocorrências selecionadas e formas cobertas pelo corpus",
+      "tradition": "proteções contextuais e diacríticas versionadas",
+      "usage": "evita transferir automaticamente análise entre formas com diacríticos distintos",
+      "divergences": [
+        "homógrafos sem contexto suficiente devem permanecer ambíguos ou indeterminados"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "defective-verbs",
+      "phenomenon": "verbos-defectivos",
+      "implementation": [],
+      "status": "pending",
+      "scope": "não implementado; reservado para avaliação adversarial e tranche própria",
+      "tradition": "a documentar",
+      "usage": "não implementado",
+      "divergences": [
+        "descrições paradigmáticas variam entre tradições e usos"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    },
+    {
+      "id": "double-participles",
+      "phenomenon": "participios-duplos",
+      "implementation": [],
+      "status": "pending",
+      "scope": "não implementado; reservado para avaliação adversarial sem prescrição automática",
+      "tradition": "a documentar",
+      "usage": "não implementado",
+      "divergences": [
+        "seleção por auxiliar, voz, registro e uso efetivo"
+      ],
+      "sources": [],
+      "licenseOrTerms": "pendente — nenhuma fonte bibliográfica registrada"
+    }
+  ]
+}

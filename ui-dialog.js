@@ -249,7 +249,7 @@ _installMesaPortatilEntries();
 document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('script[data-post-app-controller="palavras"]')) return;
   const script = document.createElement('script');
-  script.src = './lexical-view-controller.js?v=20260727-rimas-actionbutton-v1';
+  script.src = './lexical-view-controller.js?v=20260801-lexical-algures-outrora-v1';
   script.defer = true;
   script.dataset.postAppController = 'palavras';
   document.body.appendChild(script);

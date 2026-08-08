@@ -1659,7 +1659,6 @@
     "outrossim":    "Conjunção aditiva formal equivalente a 'além disso', 'igualmente'. Arcaísmo frequente em textos jurídicos e na prosa do século XIX; soa antiquado na ficção contemporânea.",
     "mormente":     "Advérbio de especificação: 'principalmente', 'sobretudo'. Uso erudito; intercambiável com 'especialmente' ou 'sobretudo' em registro contemporâneo.",
     "quica":        "Advérbio de dúvida equivalente a 'talvez'. Literário e formal; mais raro que 'talvez' no português brasileiro atual.",
-    "quica":        "Advérbio de dúvida equivalente a 'talvez'. Literário e formal; mais raro que 'talvez' no português brasileiro atual.",
     "hodierno":     "Adjetivo formal que significa 'atual', 'do tempo presente', 'contemporâneo'. Registro erudito; raro e arcaizante na prosa narrativa moderna.",
     "doravante":    "Advérbio temporal formal: 'daqui em diante', 'a partir de agora'. Frequente em textos jurídicos e normativos; funcional em diálogos formais.",
     "destarte":     "Advérbio de modo arcaico: 'deste modo', 'assim sendo'. Quase exclusivo da prosa literária do século XIX e de paródia formal.",
@@ -1672,9 +1671,9 @@
     "sobremaneira": "Advérbio de intensidade: 'em demasia', 'excessivamente', 'muito'. Uso literário e formal; evitar em prosa coloquial.",
     "malgrado":     "Preposição ou conjunção concessiva: 'apesar de', 'não obstante'. Uso literário formal; intercambiável com 'apesar de'.",
     "alhures":      "Advérbio de lugar: 'em outro lugar', 'em outra parte'. Arcaísmo literário; raro em prosa contemporânea.",
-    "algures":      "Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Literário; mais raro que 'em algum lugar' no uso corrente.",
+    "algures":      "Advérbio de lugar: 'em algum lugar', 'em alguma parte'. Indica um lugar que não se sabe ou não se quer nomear diretamente; em sentido estrito, refere-se ao espaço, não ao tempo.",
     "antanho":      "Advérbio de tempo: 'outrora', 'em tempos passados', 'antigamente'. Literário e arcaizante; frequente em poesia.",
-    "outrora":      "Advérbio de tempo: 'em outro tempo', 'antigamente', 'antes'. Literário; mais comum que 'antanho' e ainda funcional na ficção histórica.",
+    "outrora":      "Advérbio de tempo: 'noutro tempo', 'antigamente', 'em tempos passados'. Situa algo em período anterior, sem exigir data precisa; pode produzir tom retrospectivo ou historicizante.",
     "dantes":       "Advérbio de tempo: 'antes', 'anteriormente'. Arcaísmo; usado com efeito historicizante ou irônico.",
     "ademais":      "Advérbio aditivo: 'além disso', 'também', 'ainda mais'. Registro formal; mais vivo que 'outrossim' no uso culto contemporâneo.",
     "mister":       "Substantivo formal: 'necessidade', 'precisão'. 'É mister que...' = 'É necessário que...'. Uso jurídico e formal literário.",
@@ -1689,11 +1688,11 @@
     "tampouco":     "Advérbio negativo: 'também não', 'nem'. Formal; preciso e elegante; menos corrente que 'também não' na fala espontânea.",
     "afim":         "Adjetivo: 'semelhante', 'aparentado', 'relacionado'. Não confundir com 'a fim de' (locução prepositiva final).",
     "jaez":         "Substantivo: 'tipo', 'qualidade', 'espécie'. 'Da mesma jaez' = 'do mesmo tipo'. Uso coloquial ou arcaico; produtivo na ficção de época.",
-    "algures":      "Advérbio de lugar: 'em algum lugar indefinido'. Literário; mais preciso que 'em algum lugar' quando a indeterminação é o efeito.",
+    // algures consolidado acima; conflito editorial fechado em docs/logs/2026-08-01-m1-e2-algures-outrora.md
     "ato":          "Substantivo polissêmico. 1. Ação realizada. 2. Parte de uma peça teatral. 3. 'No ato' = imediatamente. 4. 'Ato contínuo' = logo em seguida (locução formal).",
     "suso":         "Advérbio arcaico: 'acima', 'anteriormente' (em texto). Uso exclusivamente jurídico ou paródico; substituível por 'acima'.",
     "infra":        "Advérbio formal (do latim): 'abaixo', 'a seguir' (em texto). Uso jurídico, acadêmico e técnico.",
-    "outrora":      "Advérbio temporal literário: 'em outro tempo', 'antes', 'antigamente'. Útil em ficção histórica e narrativas de memória.",
+    // outrora consolidado acima; conflito editorial fechado em docs/logs/2026-08-01-m1-e2-algures-outrora.md
     // CONTEMPORÂNEO — neologismos e registro de uso
     "impactar":     "Verbo de neologismo corporativo: 'causar impacto em', 'afetar fortemente'. Em prosa literária, prefira 'afetar', 'transformar', 'abalar' — mais precisos.",
     "alavancar":    "Verbo do vocabulário de negócios: 'impulsionar', 'potencializar'. Em prosa literária, use verbos mais específicos ao contexto da ação.",

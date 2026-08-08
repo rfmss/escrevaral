@@ -1,0 +1,186 @@
+/* Gate 7 — projeções linguísticas somente de leitura. */
+
+.review-decoration {
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--ui-analysis) 17%, transparent);
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--ui-analysis) 78%, transparent);
+  text-decoration: none;
+  pointer-events: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.review-decoration.severity-alta {
+  background: color-mix(in srgb, var(--ui-analysis) 24%, transparent);
+  box-shadow: inset 0 -3px 0 var(--ui-analysis);
+}
+
+.review-decoration.severity-baixa {
+  background: color-mix(in srgb, var(--ui-analysis) 11%, transparent);
+  box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--ui-analysis) 62%, transparent);
+}
+
+body.review-marks-hidden .review-decoration,
+body.review-marks-hidden .review-decoration.severity-alta,
+body.review-marks-hidden .review-decoration.severity-baixa {
+  background: transparent;
+  box-shadow: none;
+}
+
+.review-located {
+  margin: 18px 0 20px;
+  padding-top: 14px;
+  border-top: 2px solid color-mix(in srgb, var(--ui-analysis) 72%, var(--ui-border));
+}
+
+.review-located-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.review-located-heading > h3,
+.review-general-title {
+  margin: 0;
+  color: var(--ui-text);
+  font: 900 .68rem/1.25 "Courier New", ui-monospace, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.review-visibility {
+  flex: 0 0 auto;
+  padding: 4px 6px;
+  border: 1px solid var(--ui-analysis);
+  background: transparent;
+  color: var(--ui-text);
+  font: 900 .54rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.review-visibility:hover,
+.review-visibility:focus-visible,
+.review-visibility[aria-pressed="true"] {
+  background: var(--ui-analysis);
+  color: var(--ui-panel);
+}
+
+.review-located > p {
+  margin: 0 0 11px;
+  color: var(--ui-text-secondary);
+  font-size: .7rem;
+  line-height: 1.45;
+}
+
+.review-located-list {
+  display: grid;
+  gap: 10px;
+}
+
+.review-located-card {
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid var(--ui-border-soft);
+  border-left: 5px solid var(--ui-analysis);
+  background:
+    radial-gradient(circle at 2px 2px, color-mix(in srgb, var(--ui-analysis) 9%, transparent) 1px, transparent 1.2px) 0 0 / 9px 9px,
+    var(--ui-panel);
+}
+
+.review-located-card > strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--ui-text);
+  font-size: .75rem;
+  line-height: 1.35;
+}
+
+.review-source {
+  display: block;
+  color: var(--ui-analysis);
+  font: 900 .56rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.review-located-card blockquote {
+  margin: 9px 0;
+  padding: 7px 8px;
+  overflow-wrap: anywhere;
+  border-left: 3px solid color-mix(in srgb, var(--ui-analysis) 70%, transparent);
+  background: color-mix(in srgb, var(--ui-analysis) 8%, transparent);
+  color: var(--ui-text);
+  font: 600 .69rem/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.review-located-card > p {
+  margin: 7px 0 0;
+  color: var(--ui-text-secondary);
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.review-jump {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 9px;
+  border: 1px solid var(--ui-analysis);
+  background: transparent;
+  color: var(--ui-text);
+  font: 900 .62rem/1.2 "Courier New", ui-monospace, monospace;
+  letter-spacing: .08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.review-jump:hover,
+.review-jump:focus-visible {
+  background: var(--ui-analysis);
+  color: var(--ui-panel);
+}
+
+.review-general-title {
+  margin-top: 18px;
+}
+
+body.night .review-jump:hover,
+body.night .review-jump:focus-visible,
+body.night .review-visibility:hover,
+body.night .review-visibility:focus-visible,
+body.night .review-visibility[aria-pressed="true"] {
+  color: var(--bp-ink);
+}
+
+@media (max-width: 1040px) {
+  .review-located-card {
+    padding: 13px;
+  }
+
+  .review-jump,
+  .review-visibility {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 390px) {
+  .review-located-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .review-visibility {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-decoration,
+  .review-jump,
+  .review-visibility {
+    transition: none;
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "escrevaral-mass-notes-next",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "prepare:anatomy": "node scripts/prepare-anatomy.mjs",
+    "prepare:blueprint": "node scripts/prepare-blueprint.mjs",
+    "prepare:assets": "npm run prepare:anatomy && npm run prepare:blueprint",
+    "predev": "npm run prepare:assets",
+    "dev": "vite --host 127.0.0.1",
+    "prebuild": "npm run prepare:assets",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "audit:verb": "node scripts/audit-verb-evidence.mjs",
+    "audit:subject-corpus": "node scripts/audit-subject-corpus.mjs",
+    "audit:subject-miner": "node scripts/audit-subject-miner.mjs",
+    "mine:subject-candidates": "node scripts/mine-subject-candidates.mjs",
+    "audit:lexicon": "node scripts/audit-lexical-inventory.mjs --json e2-lexical-inventory.json --markdown e2-lexical-inventory.md && node scripts/audit-definition-duplicates.mjs --json e2-definition-duplicates.json --markdown e2-definition-duplicates.md && npm run audit:verb && npm run audit:subject-corpus && npm run audit:subject-miner",
+    "test:e2e": "playwright test",
+    "test:verb:evaluation": "playwright test --config=playwright.evaluation.config.ts",
+    "test:verb:evaluation:target": "playwright test --config=playwright.evaluation.config.ts --grep infinitivo-pessoal",
+    "report:verb:evaluation": "node scripts/report-verb-evaluation.mjs",
+    "check": "npm run audit:lexicon && npm run build && npm run test:e2e"
+  },
+  "dependencies": {
+    "@tiptap/core": "3.29.1",
+    "@tiptap/extensions": "3.29.1",
+    "@tiptap/pm": "3.29.1",
+    "@tiptap/react": "3.29.1",
+    "@tiptap/starter-kit": "3.29.1",
+    "idb": "8.0.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "19.2.3",
+    "typescript": "7.0.2",
+    "vite": "8.1.5",
+    "@vitejs/plugin-react": "6.0.4",
+    "@types/node": "^24.0.0"
+  },
+  "overrides": {
+    "@tiptap/core": "3.29.1",
+    "@tiptap/extensions": "3.29.1",
+    "@tiptap/pm": "3.29.1"
+  }
+}
