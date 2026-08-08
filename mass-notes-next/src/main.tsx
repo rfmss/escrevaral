@@ -22,6 +22,7 @@ import './styles/pagination.css'
 import './styles/pagination-controls.css'
 import './styles/m1-density.css'
 import './styles/theme-escrevaral-verniz-material.css'
+import './styles/brand-official.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
