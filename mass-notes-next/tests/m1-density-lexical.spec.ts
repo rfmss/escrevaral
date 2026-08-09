@@ -12,6 +12,10 @@ async function waitReady(page: Page) {
 
 async function setText(page: Page, text: string) {
   const editor = page.getByLabel('Texto do documento')
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.press('Backspace')
+  await expect.poll(async () => normalizedText(await editor.innerText())).toBe('')
   await editor.fill(text)
   await expect.poll(async () => normalizedText(await editor.innerText())).toBe(normalizedText(text))
   return editor
