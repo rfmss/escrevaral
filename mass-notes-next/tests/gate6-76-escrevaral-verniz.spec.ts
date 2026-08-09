@@ -52,7 +52,7 @@ test('o logo oficial fornecido substitui o selo tipográfico sem romper o verniz
   const symbolLink = page.locator('link[rel="icon"]')
   await expect(logo).toBeVisible()
   await expect(logo).toHaveAttribute('src', /brand\/escrevaral-logo\.svg$/)
-  await expect(symbolLink).toHaveAttribute('href', /brand\/escrevaral-symbol\.svg$/)
+  await expect(symbolLink).toHaveAttribute('href', /brand\/escrevaral-favicon\.svg$/)
 
   const visual = await page.evaluate(() => {
     const root = getComputedStyle(document.documentElement)
