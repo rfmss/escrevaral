@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "mapVersion": "2026-08-09.1",
+  "project": "Escrevaral",
+  "branch": "experiment/mass-notes-tiptap",
+  "pullRequest": 155,
+  "goal": "Terminar, uma por vez, as caixas da linguagem computacional do português brasileiro; prová-las; só depois consolidá-las no Cofre e transplantá-las para a casca de produto escolhida.",
+  "processRule": "Primeiro terminamos uma coisa; depois começamos outra.",
+  "currentFocus": "M1-R0 — primeira fronteira sintática: terceira pessoa do plural sem sujeito expresso, distinguindo sujeito recuperável pelo contexto de sujeito indeterminado.",
+  "nextAction": "Concluir o piloto humano cego com Anotador A e Anotador B; medir acordo bruto, Cohen's kappa e matriz de confusão; preservar desacordos; convocar Eva antes de qualquer teste vermelho de Sintaxe.",
+  "statusLegend": {
+    "done": "Concluído e versionado/evidenciado",
+    "active": "Em andamento; é parte da frente atual",
+    "todo": "Ainda ticável; não concluído oficialmente",
+    "deferred": "Deliberadamente depois; não abrir agora"
+  },
+  "rules": [
+    "Ticks no HTML são acompanhamento local e não alteram o estado oficial do repositório.",
+    "O estado oficial só muda quando este JSON e a memória correspondente forem atualizados com evidência.",
+    "Sintaxe de produção permanece not_authorized até nova banca Eva.",
+    "Main permanece intacta; PR #155 permanece draft; Gate 14 permanece suspenso.",
+    "O Cofre é destino arquitetural posterior, não a próxima implementação."
+  ],
+  "sections": [
+    {
+      "id": "foundation",
+      "title": "1. Fundação técnica",
+      "estimate": 95,
+      "tasks": [
+        {"id":"foundation-editor","label":"Editor estrutural Tiptap/ProseMirror","status":"done"},
+        {"id":"foundation-json","label":"Documento autoral em JSON estruturado","status":"done"},
+        {"id":"foundation-idb","label":"Persistência em IndexedDB","status":"done"},
+        {"id":"foundation-autosave","label":"Autosave e recuperação emergencial","status":"done"},
+        {"id":"foundation-conflict","label":"Conflitos entre abas preservados sem sobrescrita silenciosa","status":"done"},
+        {"id":"foundation-library","label":"Biblioteca, tags, favoritos, filtros e ordenação","status":"done"},
+        {"id":"foundation-import","label":"Importação segura e cópia nativa","status":"done"},
+        {"id":"foundation-export","label":"Exportação TXT, Markdown e HTML","status":"done"},
+        {"id":"foundation-snapshot","label":"Snapshot vivo para engines e invalidação de leitura obsoleta","status":"done"},
+        {"id":"foundation-local","label":"Engines locais e nenhuma substituição automática do manuscrito","status":"done"},
+        {"id":"foundation-browsers","label":"Chromium + Firefox + CI + preview protegida","status":"done"},
+        {"id":"foundation-governance","label":"CLARO, Eva Chara e governança de fontes","status":"done"}
+      ]
+    },
+    {
+      "id": "morphology",
+      "title": "2. Caixa A — Morfologia",
+      "estimate": 68,
+      "tasks": [
+        {"id":"morph-engine","label":"Engine morfológica própria e tipada","status":"done"},
+        {"id":"morph-contract","label":"Contrato de entrada/saída, pessoa, número, modo, tempo, voz e alternativas","status":"done"},
+        {"id":"morph-dev-eval","label":"Desenvolvimento separado da avaliação","status":"done"},
+        {"id":"morph-infinitive","label":"Infinitivo pessoal: primeira família verified no escopo declarado","status":"done"},
+        {"id":"morph-regular","label":"Fechar avaliação e proveniência de paradigmas regulares","status":"todo"},
+        {"id":"morph-irregular","label":"Fechar irregulares frequentes","status":"todo"},
+        {"id":"morph-clitics","label":"Fechar clíticos e colocação","status":"todo"},
+        {"id":"morph-compounds","label":"Fechar locuções e construções compostas","status":"todo"},
+        {"id":"morph-homographs","label":"Fechar homógrafos e diacríticos","status":"todo"},
+        {"id":"morph-defective","label":"Fechar verbos defectivos","status":"todo"},
+        {"id":"morph-participles","label":"Fechar particípios duplos","status":"todo"},
+        {"id":"morph-human","label":"Banca humana de Morfologia","status":"todo"},
+        {"id":"morph-close","label":"Parecer Eva e fechamento da Caixa A","status":"todo"}
+      ]
+    },
+    {
+      "id": "syntax",
+      "title": "3. Caixa B — Sintaxe e estrutura oracional",
+      "estimate": 23,
+      "tasks": [
+        {"id":"syntax-authority","label":"Biblioteca de Autoridade e mapa conceitual inicial","status":"done"},
+        {"id":"syntax-boundaries","label":"Separar sujeito expresso, recuperável, indeterminado e oração sem sujeito","status":"done"},
+        {"id":"syntax-original-cases","label":"Exemplos, negativos e corpus sintético originais","status":"done"},
+        {"id":"syntax-eval-sealed","label":"Avaliação sintética reservada e lacrada","status":"done"},
+        {"id":"syntax-porttinari","label":"Porttinari train/dev autenticados; test lacrado","status":"done"},
+        {"id":"syntax-miner","label":"Minerador CoNLL-U local, não decisório e sem rede","status":"done"},
+        {"id":"syntax-continuity","label":"Reconstrução de continuidade documental por sent_id","status":"done"},
+        {"id":"syntax-pool","label":"Pool de 67 candidatos intersentenciais com predecessor comprovado","status":"done"},
+        {"id":"syntax-blind-packages","label":"Protocolo cego e pacotes A/B preparados","status":"done"},
+        {"id":"syntax-annotator-a","label":"Anotador A — 16 julgamentos independentes","status":"active"},
+        {"id":"syntax-annotator-b","label":"Anotador B — 16 julgamentos independentes","status":"active"},
+        {"id":"syntax-agreement","label":"Calcular acordo bruto","status":"todo"},
+        {"id":"syntax-kappa","label":"Calcular Cohen's kappa","status":"todo"},
+        {"id":"syntax-confusion","label":"Construir matriz de confusão","status":"todo"},
+        {"id":"syntax-disagreements","label":"Preservar e estudar todos os desacordos","status":"todo"},
+        {"id":"syntax-eva-pilot","label":"Nova banca Eva sobre o piloto humano","status":"todo"},
+        {"id":"syntax-red-test","label":"Se autorizado: primeiro teste vermelho da Sintaxe mínima","status":"todo"},
+        {"id":"syntax-min-impl","label":"Menor implementação da primeira fronteira","status":"todo"},
+        {"id":"syntax-first-eval","label":"Negativos, avaliação reservada e matriz integral da primeira fronteira","status":"todo"},
+        {"id":"syntax-se","label":"Fronteira futura: se passivo × indeterminador","status":"todo"},
+        {"id":"syntax-impersonal","label":"Fronteira futura: oração sem sujeito e verbos impessoais","status":"todo"},
+        {"id":"syntax-existential","label":"Fronteira futura: haver/existir/ter existencial","status":"todo"},
+        {"id":"syntax-agreement-grammar","label":"Concordância","status":"todo"},
+        {"id":"syntax-regency","label":"Regência","status":"todo"},
+        {"id":"syntax-coordination","label":"Coordenação e subordinação","status":"todo"},
+        {"id":"syntax-relations","label":"Relações entre orações","status":"todo"},
+        {"id":"syntax-ellipsis","label":"Elipse e anáfora","status":"todo"},
+        {"id":"syntax-fiction","label":"Sintaxe em diálogo e ficção","status":"todo"},
+        {"id":"syntax-human-wide","label":"Banca humana ampla de Sintaxe","status":"todo"},
+        {"id":"syntax-close","label":"Parecer Eva e fechamento da Caixa B","status":"todo"}
+      ]
+    },
+    {
+      "id": "lexicon",
+      "title": "4. Caixa C — Léxico, sentido e polissemia",
+      "estimate": 53,
+      "tasks": [
+        {"id":"lex-inventory","label":"Inventário lexical e auditor de duplicatas","status":"done"},
+        {"id":"lex-identical","label":"Duplicatas idênticas eliminadas","status":"done"},
+        {"id":"lex-algures-outrora","label":"Algures e outrora consolidados com fontes e testes","status":"done"},
+        {"id":"lex-method","label":"Metodologia editorial e fonte de sinonímia definidas","status":"done"},
+        {"id":"lex-conflicts","label":"Resolver 66 grupos conflitantes restantes em pequenas tranches","status":"todo"},
+        {"id":"lex-selfrefs","label":"Resolver autorreferências de sinônimos","status":"todo"},
+        {"id":"lex-aliases","label":"Resolver aliases técnicos expostos","status":"todo"},
+        {"id":"lex-empty","label":"Resolver verbete vazio e cartões de polissemia ausentes","status":"todo"},
+        {"id":"lex-provenance","label":"Proveniência por famílias lexicais","status":"todo"},
+        {"id":"lex-register","label":"Registrar conotação, intensidade e restrições contextuais onde couber","status":"todo"},
+        {"id":"lex-human","label":"Banca humana lexical","status":"todo"},
+        {"id":"lex-close","label":"Parecer Eva e fechamento da Caixa C","status":"todo"}
+      ]
+    },
+    {
+      "id": "variation",
+      "title": "5. Caixa D — Variação, registro, norma e contexto",
+      "estimate": 43,
+      "tasks": [
+        {"id":"variation-ptbr","label":"pt-BR definido como alvo primário","status":"done"},
+        {"id":"variation-philosophy","label":"Norma, uso, frequência e recomendação separados conceitualmente","status":"done"},
+        {"id":"variation-context","label":"Base Contexto/Decolonial herdada e inventariada","status":"done"},
+        {"id":"variation-formality","label":"Corpus estratificado por formalidade","status":"todo"},
+        {"id":"variation-oral","label":"Corpus de oralidade","status":"todo"},
+        {"id":"variation-region","label":"Corpus/registros regionais","status":"todo"},
+        {"id":"variation-generation","label":"Estratificação geracional quando houver evidência","status":"todo"},
+        {"id":"variation-fiction","label":"Corpus de ficção, diálogo e prosa literária","status":"todo"},
+        {"id":"variation-frequency","label":"Frequência observada separada de tradição normativa/prestígio","status":"todo"},
+        {"id":"variation-decolonial","label":"Decidir destino da superfície antiga Vocabulário Decolonizador","status":"todo"},
+        {"id":"variation-human","label":"Banca humana de variação/registro","status":"todo"},
+        {"id":"variation-close","label":"Parecer Eva e fechamento da Caixa D","status":"todo"}
+      ]
+    },
+    {
+      "id": "review",
+      "title": "6. Caixa E — Pontuação e revisão",
+      "estimate": 48,
+      "tasks": [
+        {"id":"review-functional","label":"Revisão e pontuação funcionais na fundação nova","status":"done"},
+        {"id":"review-location","label":"Localização de problemas no texto","status":"done"},
+        {"id":"review-books","label":"Fontes específicas de pontuação disponíveis para estudo","status":"done"},
+        {"id":"review-norm-style","label":"Norma e efeito estilístico separados conceitualmente","status":"done"},
+        {"id":"review-source-study","label":"Estudar sistematicamente as fontes de pontuação","status":"todo"},
+        {"id":"review-own-rules","label":"Mapear regras próprias e seus limites","status":"todo"},
+        {"id":"review-levels","label":"Separar obrigatório / recomendável / estilístico","status":"todo"},
+        {"id":"review-cases","label":"Positivos, negativos e ambiguidades","status":"todo"},
+        {"id":"review-delegacy","label":"Reduzir dependência intelectual do núcleo legado onde necessário","status":"todo"},
+        {"id":"review-human","label":"Avaliação humana de revisão/pontuação","status":"todo"},
+        {"id":"review-close","label":"Parecer Eva e fechamento da Caixa E","status":"todo"}
+      ]
+    },
+    {
+      "id": "voice",
+      "title": "7. Caixa F — Voz, estilo e oficina",
+      "estimate": 40,
+      "tasks": [
+        {"id":"voice-functional","label":"Espelho de Voz funcional com métricas, hipóteses e exercícios","status":"done"},
+        {"id":"voice-no-auto","label":"Nenhuma alteração automática do manuscrito","status":"done"},
+        {"id":"voice-fiction-corpus","label":"Corpus de ficção, romance, fantasia e diálogo","status":"todo"},
+        {"id":"voice-other-genres","label":"Corpus de poesia e ensaio","status":"todo"},
+        {"id":"voice-metric-vs-style","label":"Separar observação quantitativa de interpretação estilística","status":"todo"},
+        {"id":"voice-false-advice","label":"Testar falsos conselhos e sobreinterpretação","status":"todo"},
+        {"id":"voice-e3","label":"E3 humana e comparação com escritores","status":"todo"},
+        {"id":"voice-close","label":"Parecer Eva e fechamento da Caixa F","status":"todo"}
+      ]
+    },
+    {
+      "id": "rimalab",
+      "title": "8. Caixa G — Som, verso e RimaLab",
+      "estimate": 42,
+      "tasks": [
+        {"id":"rima-functional","label":"RimaLab funcional e integrado ao snapshot vivo","status":"done"},
+        {"id":"rima-scan","label":"Validar escansão","status":"todo"},
+        {"id":"rima-rhymes","label":"Validar rimas e esquemas","status":"todo"},
+        {"id":"rima-pronunciation","label":"Considerar pronúncia brasileira, regionalidade e dicção","status":"todo"},
+        {"id":"rima-prose-verse","label":"Separar verso de prosa quando necessário","status":"todo"},
+        {"id":"rima-corpus","label":"Corpus especializado","status":"todo"},
+        {"id":"rima-human","label":"Banca humana de Som/Verso","status":"todo"},
+        {"id":"rima-close","label":"Parecer Eva e fechamento da Caixa G","status":"todo"}
+      ]
+    },
+    {
+      "id": "science",
+      "title": "9. Camada transversal — ciência e confiabilidade",
+      "estimate": 70,
+      "tasks": [
+        {"id":"science-claro","label":"CLARO, Eva, Biblioteca de Autoridade e source registry","status":"done"},
+        {"id":"science-rulecard","label":"Rule cards, positivos, negativos e ambiguidade","status":"done"},
+        {"id":"science-dev-eval","label":"Desenvolvimento separado da avaliação","status":"done"},
+        {"id":"science-ci","label":"CI, browsers e bloqueio de preview vermelha","status":"done"},
+        {"id":"science-provenance-all","label":"Aplicar proveniência completa a todas as caixas","status":"todo"},
+        {"id":"science-human-independent","label":"Bancas humanas independentes por domínio","status":"todo"},
+        {"id":"science-agreement","label":"Medir concordância humana quando aplicável","status":"active"},
+        {"id":"science-genres","label":"Corpora estratificados por gênero e registro","status":"todo"},
+        {"id":"science-writers","label":"Validação com escritoras/escritores","status":"todo"},
+        {"id":"science-e3","label":"E3 — avaliação humana geral das engines","status":"todo"},
+        {"id":"science-eva-gate","label":"Gate Eva: nota geral >= 9, todas as dimensões >= 8 e nenhum P0 linguístico","status":"todo"}
+      ]
+    },
+    {
+      "id": "vault",
+      "title": "10. Cofre — somente depois das caixas",
+      "estimate": 0,
+      "tasks": [
+        {"id":"vault-format","label":"Definir formato definitivo dos pacotes","status":"deferred"},
+        {"id":"vault-separate","label":"Separar engines da aplicação","status":"deferred"},
+        {"id":"vault-no-react","label":"Remover dependência de React/Tiptap/DOM/window do núcleo","status":"deferred"},
+        {"id":"vault-contracts","label":"Contratos serializáveis e versionados","status":"deferred"},
+        {"id":"vault-layers","label":"Consolidar knowledge, provenance, evaluation e governance","status":"deferred"},
+        {"id":"vault-migrations","label":"Definir migrations e compatibilidade entre versões","status":"deferred"},
+        {"id":"vault-transplant-test","label":"Teste de transplante em ambiente vazio","status":"deferred"},
+        {"id":"vault-repeat","label":"Repetir prova de transplante para todas as caixas","status":"deferred"},
+        {"id":"vault-v1","label":"Lacrar Cofre v1","status":"deferred"}
+      ]
+    },
+    {
+      "id": "shell",
+      "title": "11. Casca/layout definitivo — depois do Cofre",
+      "estimate": null,
+      "tasks": [
+        {"id":"shell-brand","label":"Identidade conceitual e logo oficial","status":"done"},
+        {"id":"shell-lab","label":"Produto atual utilizável como laboratório","status":"done"},
+        {"id":"shell-layout","label":"Escolher layout definitivo","status":"deferred"},
+        {"id":"shell-stack","label":"Decidir framework/plataformas definitivas","status":"deferred"},
+        {"id":"shell-rebuild","label":"Construir a casca final","status":"deferred"},
+        {"id":"shell-connect","label":"Conectar Cofre à casca final","status":"deferred"},
+        {"id":"shell-integration","label":"Testes finais de integração e migração","status":"deferred"}
+      ]
+    },
+    {
+      "id": "legacy-product",
+      "title": "12. Capacidades de produto fora do núcleo linguístico",
+      "estimate": null,
+      "tasks": [
+        {"id":"legacy-authorship","label":"Prova de Autoria — PORTAR / INTEGRAR / ADIAR / APOSENTAR","status":"deferred"},
+        {"id":"legacy-pwa","label":"PWA/offline — decidir destino","status":"deferred"},
+        {"id":"legacy-formats","label":"DOCX, RTF, ePub, Obsidian e exportação múltipla — decidir por necessidade","status":"deferred"},
+        {"id":"legacy-workshop","label":"Ateliê, Prática e Leituras — decidir destino","status":"deferred"},
+        {"id":"legacy-pagination","label":"Paginação física — decidir necessidade","status":"deferred"},
+        {"id":"legacy-desktop","label":"Tauri/SQLite — somente se houver decisão de produto","status":"deferred"},
+        {"id":"legacy-sync","label":"Sync e colaboração — somente se houver decisão de produto","status":"deferred"}
+      ]
+    },
+    {
+      "id": "release",
+      "title": "13. Reta final de substituição/lançamento",
+      "estimate": null,
+      "tasks": [
+        {"id":"release-accessibility","label":"QA humano de acessibilidade, leitor de tela, zoom real e dispositivos físicos","status":"todo"},
+        {"id":"release-long-use","label":"Uso prolongado e segurança operacional","status":"todo"},
+        {"id":"release-backup","label":"Backup/migração final da casca escolhida","status":"deferred"},
+        {"id":"release-e4","label":"E4 — veredito formal de substituição","status":"deferred"},
+        {"id":"release-gate14","label":"Gate 14","status":"deferred"},
+        {"id":"release-merge","label":"Decisão explícita de merge/main","status":"deferred"},
+        {"id":"release-public","label":"Lançamento público","status":"deferred"}
+      ]
+    }
+  ]
+}
