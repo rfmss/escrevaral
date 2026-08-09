@@ -7,12 +7,16 @@ Este arquivo governa qualquer agente de IA que trabalhe dentro de `mass-notes-ne
 Antes de alterar código, corpus, regras linguísticas, interface de análise ou documentação de superioridade:
 
 1. leia `README.md`;
-2. leia `docs/METHODS.md`;
-3. leia `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md`;
-4. leia `docs/personas/EVA_CHARA.md`;
-5. leia `docs/personas/EVA_CHARA_PROMPT.md`;
-6. consulte `docs/personas/EVA_CHARA_SCORECARD.md` e a planilha de progresso;
-7. registre o próximo risco em breadcrumb antes de atravessar uma fronteira ainda não provada.
+2. leia `docs/memory/MAPA_MESTRE_DO_PROJETO.md`;
+3. consulte `docs/project-map/mapa.json` para o estado oficial e a próxima frente;
+4. leia `docs/METHODS.md`;
+5. leia `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md`;
+6. leia `docs/personas/EVA_CHARA.md`;
+7. leia `docs/personas/EVA_CHARA_PROMPT.md`;
+8. consulte `docs/personas/EVA_CHARA_SCORECARD.md` e a planilha de progresso;
+9. registre o próximo risco em breadcrumb antes de atravessar uma fronteira ainda não provada.
+
+O mapa mestre é obrigatório para planejamento e handoff. Ele registra a ordem estratégica: **terminar uma caixa linguística por vez; provar as caixas; somente depois consolidá-las no Cofre e transplantá-las para a casca escolhida.** Itens marcados `deferred` em `docs/project-map/mapa.json` não estão autorizados como próxima frente só porque aparecem no roadmap. Ticks locais feitos em `docs/project-map/index.html` não alteram o estado oficial.
 
 A cápsula de aprendizagem é obrigatória antes de consultar livros, artigos, sites, corpora, repositórios, modelos ou qualquer fonte externa para criar regra, exemplo, explicação, engine ou decisão de persona.
 
