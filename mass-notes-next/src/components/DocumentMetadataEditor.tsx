@@ -14,14 +14,15 @@ function sameTags(left: string[], right: string[]): boolean {
 }
 
 export function DocumentMetadataEditor({ document, onFavorite, onTags }: Props) {
-  const [tagDraft, setTagDraft] = useState(document.tags.join(', '))
+  const documentTagsText = document.tags.join(', ')
+  const [tagDraft, setTagDraft] = useState(documentTagsText)
   const [message, setMessage] = useState('')
   const parsedTags = useMemo(() => parseLibraryTags(tagDraft), [tagDraft])
   const tagsChanged = !sameTags(parsedTags, document.tags)
 
   useEffect(() => {
-    setTagDraft(document.tags.join(', '))
-  }, [document.id, document.tags])
+    setTagDraft(documentTagsText)
+  }, [document.id, documentTagsText])
 
   useEffect(() => {
     setMessage('')
