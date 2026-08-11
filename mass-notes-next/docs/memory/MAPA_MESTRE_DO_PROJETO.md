@@ -1,6 +1,6 @@
 # Escrevaral — Mapa Mestre do Projeto
 
-Atualizado em: 2026-08-09  
+Atualizado em: 2026-08-11  
 Estado: **memória canônica de orientação e handoff**  
 Branch: `experiment/mass-notes-tiptap`  
 PR: `#155` — aberto e em rascunho
@@ -42,7 +42,8 @@ Princípios permanentes:
 - livros são professores temporários, não datasets;
 - toda regra importante precisa de fonte, escopo, positivos, negativos e proveniência;
 - teste verde prova comportamento reproduzível, não verdade linguística;
-- banca humana é necessária quando a distinção linguística depende de julgamento humano.
+- pré-banca sintética pode amadurecer protocolo, mas não equivale a banca humana;
+- banca humana continua necessária quando o estado pretendido exige julgamento humano independente.
 
 ---
 
@@ -88,7 +89,7 @@ O mapa mestre organiza o núcleo em sete caixas linguísticas:
 6. **Voz, estilo e oficina** — métricas, ritmo, padrões e hipóteses estilísticas sem converter gosto em regra.
 7. **Som, verso e RimaLab** — escansão, rimas, esquemas e padrões sonoros.
 
-A camada transversal de ciência e confiabilidade acompanha todas elas: CLARO, Eva, corpus, proveniência, avaliação separada, CI e banca humana.
+A camada transversal de ciência e confiabilidade acompanha todas elas: CLARO, Eva, corpus, proveniência, avaliação separada, CI, pré-banca sintética quando útil e banca humana na maturidade pertinente.
 
 ---
 
@@ -109,7 +110,7 @@ Leitura de planejamento, não métrica científica:
 | Ciência/confiabilidade | ~70% |
 | Cofre | 0% deliberadamente |
 
-Esses percentuais servem apenas para orientação. A rubrica Eva e a evidência por fenômeno continuam sendo as referências de maturidade linguística.
+Esses percentuais servem apenas para orientação. A rubrica Eva e a evidência por fenômeno continuam sendo as referências de maturidade linguística. A criação de infraestrutura sintética não eleva, por si só, nenhuma nota linguística ou humana.
 
 ---
 
@@ -133,24 +134,65 @@ Já foi concluído:
 - reconstrução de continuidade por documento + ordinal;
 - pool de 67 candidatos intersentenciais com predecessor documental comprovado;
 - protocolo cego;
-- pacotes A e B preparados.
+- pacotes A e B preparados privadamente;
+- contrato da pré-banca sintética;
+- três perfis sintéticos de julgamento;
+- harness model-agnostic com Ollama local por padrão e endpoint remoto somente por opt-in;
+- auditoria que impede vazamento estrutural e impede que saída sintética seja tratada como gold humano.
 
 ### O próximo quadrado
 
 ```text
-☐ Anotador A — 16 julgamentos
-☐ Anotador B — 16 julgamentos
-☐ acordo bruto
-☐ Cohen's kappa
-☐ matriz de confusão
-☐ preservar e estudar desacordos
+☐ recuperar ou regenerar deterministicamente o pacote privado de 16 casos
+☐ eleger uma baseline local após auditoria de licença, privacidade e competência pt-BR
+☐ executar a pré-banca sintética cega
+☐ medir consenso sintético e acordo bruto por pares
+☐ calcular Cohen's kappa sintético por pares
+☐ construir matrizes de confusão sintéticas
+☐ preservar baixa confiança e todos os desacordos
+☐ refinar o protocolo sem abrir a avaliação lacrada
 ☐ nova banca Eva
-☐ decidir se cabe o primeiro teste vermelho da Sintaxe
+☐ decidir se cabe o primeiro teste vermelho experimental da Sintaxe
 ```
 
-**Não escrever engine sintática antes dessa sequência.**
+Depois, somente quando o protocolo estiver suficientemente maduro:
+
+```text
+□ banca humana independente
+□ acordo/kappa humano
+□ comunidade de anotação em ferramenta apropriada
+□ verified somente com a evidência humana pertinente
+```
+
+**Não marcar os quadrados humanos como concluídos com respostas de IA.**
+
+**Não escrever engine sintática antes da pré-banca e da nova decisão Eva.**
 
 Sintaxe de produção permanece `not_authorized`.
+
+### Sequência de maturidade aprovada
+
+```text
+pool observado
+        ↓
+pré-banca sintética cega
+        ↓
+consenso / discordância / baixa confiança sintéticos
+        ↓
+refino do protocolo
+        ↓
+banca Eva
+        ↓
+implementação experimental + avaliação separada, se autorizada
+        ↓
+banca humana independente quando madura
+        ↓
+comunidade quando protocolo e interface estiverem estáveis
+        ↓
+verified somente com evidência humana pertinente
+```
+
+A função da automação é reduzir desperdício de atenção humana e expor fragilidades cedo; **não é baixar a régua final**.
 
 ---
 
@@ -179,7 +221,8 @@ Não significa:
 - que houve teste;
 - que Eva aprovou;
 - que a evidência linguística existe;
-- que uma nota pode subir.
+- que uma nota pode subir;
+- que uma pré-banca sintética virou validação humana.
 
 Para oficializar um tick, atualizar `docs/project-map/mapa.json` junto da evidência correspondente.
 
@@ -201,9 +244,10 @@ Especialmente:
 - formatos adicionais de exportação;
 - Ateliê/Prática/Leituras;
 - Gate 14;
-- promoção para `main`.
+- promoção para `main`;
+- infraestrutura comunitária de anotação antes de o protocolo estar maduro.
 
-Quando o núcleo linguístico estiver suficientemente maduro, essas decisões serão reabertas por tranche própria.
+Label Studio ou ferramenta equivalente é uma opção futura para a fase comunitária, não uma dependência a ser implantada agora.
 
 ---
 
@@ -211,7 +255,7 @@ Quando o núcleo linguístico estiver suficientemente maduro, essas decisões se
 
 Se este projeto for movido, copiado ou retomado em outro ambiente, a primeira mensagem operacional deve ser:
 
-> **O Escrevaral está construindo, uma por vez, caixas auditáveis da linguagem computacional do português brasileiro. O destino é consolidá-las num Cofre independente de interface. Não construa o Cofre agora. Continue a tranche linguística aberta. A frente atual é o piloto humano cego da primeira Sintaxe, distinguindo sujeito recuperável pelo contexto de sujeito indeterminado. Leia `AGENTS.md`, `docs/project-map/mapa.json`, este mapa mestre e a memória da Meta Cofre antes de alterar qualquer engine.**
+> **O Escrevaral está construindo, uma por vez, caixas auditáveis da linguagem computacional do português brasileiro. O destino é consolidá-las num Cofre independente de interface. Não construa o Cofre agora. Continue a tranche linguística aberta. A frente atual é a pré-banca sintética cega da primeira Sintaxe, distinguindo sujeito recuperável pelo contexto de sujeito indeterminado. A saída sintética não é gold nem validação humana; ela serve para amadurecer o protocolo antes da banca humana independente. Leia `AGENTS.md`, `docs/project-map/mapa.json`, este mapa mestre e `docs/memory/2026-08-11-m1-r0-prebanca-sintetica.md` antes de alterar qualquer engine.**
 
 Arquivos mínimos de retomada:
 
@@ -219,11 +263,12 @@ Arquivos mínimos de retomada:
 2. `docs/project-map/mapa.json`;
 3. `docs/project-map/index.html`;
 4. `docs/memory/MAPA_MESTRE_DO_PROJETO.md`;
-5. `docs/memory/2026-08-09-meta-cofre-e-ordem-de-trabalho.md`;
-6. `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md`;
-7. `docs/METHODS.md`;
-8. `docs/personas/EVA_CHARA_SCORECARD.md`;
-9. memória/log da tranche linguística aberta.
+5. `docs/memory/2026-08-11-m1-r0-prebanca-sintetica.md`;
+6. `docs/memory/2026-08-09-meta-cofre-e-ordem-de-trabalho.md`;
+7. `docs/governance/CAPSULA_DE_APRENDIZAGEM_E_BIBLIOTECA_DE_AUTORIDADE.md`;
+8. `docs/METHODS.md`;
+9. `docs/personas/EVA_CHARA_SCORECARD.md`;
+10. memória/log da tranche linguística aberta.
 
 ---
 
@@ -236,6 +281,8 @@ Arquivos mínimos de retomada:
 - corpus privado: não versionar;
 - fontes protegidas: não incorporar;
 - nenhuma saída linguística: aplicar automaticamente ao manuscrito;
+- nenhum consenso sintético: declarar como consenso humano;
+- nenhuma nota humana: subir por resultado de LLM;
 - nenhuma nota: subir apenas por volume de código, testes ou corpus;
 - uma caixa por vez.
 
