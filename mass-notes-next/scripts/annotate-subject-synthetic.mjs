@@ -145,13 +145,7 @@ async function callOllama({ baseUrl, model, messages, temperature }) {
   const response = await fetch(`${normalizeBaseUrl(baseUrl)}/api/chat`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      model,
-      messages,
-      stream: false,
-      format: 'json',
-      options: { temperature },
-    }),
+    body: JSON.stringify({ model, messages, stream: false, format: 'json', options: { temperature } }),
   })
   if (!response.ok) throw new Error(`Ollama respondeu ${response.status}.`)
   const data = await response.json()
@@ -164,14 +158,9 @@ async function callOpenAICompatible({ baseUrl, model, messages, temperature, api
   const response = await fetch(`${normalizeBaseUrl(baseUrl)}/v1/chat/completions`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({
-      model,
-      messages,
-      temperature,
-      response_format: { type: 'json_object' },
-    }),
+    body: JSON.stringify({ model, messages, temperature, response_format: { type: 'json_object' } }),
   })
-  if (!response.ok) throw new Error(`Endpoint OpenAI-compatible respondeu ${response.status}.`)
+  if (!response.ok) throw new Error(`Endpoint OpenAI-compatible respondeu ${response.status}; confirme suporte a response_format=json_object.`)
   const data = await response.json()
   return data?.choices?.[0]?.message?.content
 }
@@ -179,12 +168,8 @@ async function callOpenAICompatible({ baseUrl, model, messages, temperature, api
 async function callModel(runtime, profile, messages) {
   const model = profile.model ?? runtime.model
   if (!model) throw new Error(`Modelo não definido para ${profile.id}.`)
-  if (runtime.provider === 'ollama') {
-    return { model, raw: await callOllama({ ...runtime, model, messages, temperature: profile.temperature ?? 0.1 }) }
-  }
-  if (runtime.provider === 'openai-compatible') {
-    return { model, raw: await callOpenAICompatible({ ...runtime, model, messages, temperature: profile.temperature ?? 0.1 }) }
-  }
+  if (runtime.provider === 'ollama') return { model, raw: await callOllama({ ...runtime, model, messages, temperature: profile.temperature ?? 0.1 }) }
+  if (runtime.provider === 'openai-compatible') return { model, raw: await callOpenAICompatible({ ...runtime, model, messages, temperature: profile.temperature ?? 0.1 }) }
   throw new Error(`Provider não suportado: ${runtime.provider}`)
 }
 
@@ -235,9 +220,7 @@ function confusionForPair(cases, leftId, rightId) {
   if (compared === 0) return { compared: 0, rawAgreement: null, kappa: null, confusion: matrix }
   const rawAgreement = agreements / compared
   let expected = 0
-  for (const label of SYNTHETIC_LABELS) {
-    expected += ((leftCounts[label] ?? 0) / compared) * ((rightCounts[label] ?? 0) / compared)
-  }
+  for (const label of SYNTHETIC_LABELS) expected += ((leftCounts[label] ?? 0) / compared) * ((rightCounts[label] ?? 0) / compared)
   const kappa = expected === 1 ? null : (rawAgreement - expected) / (1 - expected)
   return { compared, rawAgreement, kappa, confusion: matrix }
 }
@@ -246,10 +229,7 @@ export function computePanelMetrics(cases, profileIds) {
   const pairwise = []
   for (let left = 0; left < profileIds.length; left += 1) {
     for (let right = left + 1; right < profileIds.length; right += 1) {
-      pairwise.push({
-        pair: [profileIds[left], profileIds[right]],
-        ...confusionForPair(cases, profileIds[left], profileIds[right]),
-      })
+      pairwise.push({ pair: [profileIds[left], profileIds[right]], ...confusionForPair(cases, profileIds[left], profileIds[right]) })
     }
   }
   const decisions = cases.map((item) => item.decision)
@@ -286,6 +266,7 @@ async function main() {
   const inputPath = args.input ? assertOutsideRepository(args.input, 'A entrada privada') : null
   if (!inputPath) throw new Error('--input é obrigatório.')
   const cases = loadCases(inputPath)
+  if (cases.length === 0) throw new Error('Pacote de entrada vazio: nenhum caso para anotar.')
   const limit = args.limit ? Number(args.limit) : cases.length
   if (!Number.isInteger(limit) || limit < 1) throw new Error('--limit deve ser inteiro positivo.')
 
@@ -295,9 +276,7 @@ async function main() {
     baseUrl: args['base-url'] ?? (args.provider === 'openai-compatible' ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:11434'),
     apiKey: args['api-key-env'] ? process.env[args['api-key-env']] : null,
   }
-  if (!isLoopback(runtime.baseUrl) && !asBoolean(args['allow-remote'])) {
-    throw new Error('Endpoint remoto bloqueado. Use --allow-remote true conscientemente.')
-  }
+  if (!isLoopback(runtime.baseUrl) && !asBoolean(args['allow-remote'])) throw new Error('Endpoint remoto bloqueado. Use --allow-remote true conscientemente.')
 
   const selected = cases.slice(0, limit)
   const firstBlind = buildBlindCase(selected[0])
