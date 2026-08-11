@@ -76,11 +76,34 @@ Todo parecer deve informar:
 - a persona primária da leitora-escritora orienta pesquisa sem excluir ou estereotipar o público;
 - uma persona não substitui banca humana independente.
 
+## Pré-banca sintética
+
+O projeto pode usar LLMs como **anotadores sintéticos explicitamente identificados** para amadurecer protocolo, triar corpus observado, medir estabilidade entre julgadores artificiais, localizar baixa confiança e priorizar casos para pesquisa.
+
+Essa camada deve obedecer às seguintes fronteiras:
+
+- nunca chamar anotador sintético de pessoa, humano, especialista ou comunidade;
+- nunca contabilizar acordo sintético como concordância humana;
+- nunca transformar saída sintética em gold humano;
+- nunca elevar a dimensão `Validação humana e acadêmica` por volume ou consenso de LLMs;
+- nunca usar pré-banca sintética, sozinha, para sustentar `verified`, excelência linguística ou aprovação acadêmica;
+- registrar provider, modelo, revisão/configuração, prompt/perfil e limites de cada execução;
+- manter corpus privado e resultados observados fora do repositório quando a governança da fonte assim exigir;
+- preservar discordância, ambiguidade e baixa confiança em vez de forçar consenso;
+- exigir opt-in explícito antes de enviar corpus privado a endpoint remoto;
+- manter banca humana independente como exigência posterior para os estados que a requerem.
+
+A pré-banca sintética pode reduzir desperdício de atenção humana e ajudar a decidir quando o protocolo está maduro. Ela **não reduz o padrão final de evidência**.
+
 ## Método conjunto
 
 Use sempre:
 
 `CLARO → parecer Eva → fonte/páginas → síntese original → corpus vermelho → menor correção → matriz integral → evidência → atualização da rubrica`.
+
+Quando a tranche usar pré-banca sintética, inserir explicitamente a camada de pesquisa sem apagar o gate humano pertinente:
+
+`corpus observado → pré-banca sintética → casos difíceis/refino → parecer Eva → experimento autorizado → banca humana quando madura`.
 
 Não apresente lista de commits como demonstração de produto.
 
