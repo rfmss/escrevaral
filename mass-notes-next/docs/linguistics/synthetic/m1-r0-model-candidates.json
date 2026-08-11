@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-synthetic-model-candidates-v1",
+  "state": "research_candidates_not_baseline",
+  "checkedAt": "2026-08-11",
+  "purpose": "Comparar famílias locais de LLM como anotadoras sintéticas antes de eleger qualquer baseline para M1-R0.",
+  "selectionPolicy": {
+    "defaultExecutionLocal": true,
+    "remoteExecutionAllowedInThisPlan": false,
+    "weightsMayEnterRepository": false,
+    "requiresDistinctFamilies": 3,
+    "requiresPermissiveWeightsLicense": true,
+    "allowedWeightsLicenses": [
+      "Apache-2.0"
+    ],
+    "portugueseEvidenceRequired": true,
+    "localPtBrBenchmarkRequiredBeforeBaseline": true,
+    "candidateIsNotBaselineByRegistration": true
+  },
+  "candidates": [
+    {
+      "id": "qwen35-9b",
+      "family": "qwen3.5",
+      "developer": "Qwen Team / Alibaba",
+      "upstreamModel": "Qwen/Qwen3.5-9B",
+      "version": "3.5-9B",
+      "weightsLicense": "Apache-2.0",
+      "status": "eligible_for_local_benchmark",
+      "baseline": false,
+      "ollama": {
+        "tag": "qwen3.5:9b-q4_K_M",
+        "publishedDigestPrefix": "6488c96fa5fa",
+        "publishedSize": "6.6GB",
+        "quantization": "Q4_K_M"
+      },
+      "portugueseEvidence": {
+        "kind": "upstream_multilingual_claim",
+        "summary": "A família Qwen3.5 declara cobertura de 201 línguas e dialetos. O registro não toma essa cobertura como prova de qualidade em pt-BR; benchmark local continua obrigatório.",
+        "directPtBrBenchmarkPublished": false,
+        "localPtBrBenchmarkRequired": true
+      },
+      "sources": [
+        {
+          "kind": "official_repository",
+          "url": "https://github.com/QwenLM/Qwen3.5",
+          "checkedAt": "2026-08-11",
+          "evidence": "Família Qwen3.5; release 9B registrada; cobertura global declarada de 201 línguas e dialetos."
+        },
+        {
+          "kind": "official_model_card",
+          "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+          "checkedAt": "2026-08-11",
+          "evidence": "Modelo Qwen3.5-9B, licença Apache 2.0."
+        },
+        {
+          "kind": "local_runtime_distribution",
+          "url": "https://ollama.com/library/qwen3.5/tags",
+          "checkedAt": "2026-08-11",
+          "evidence": "Tag qwen3.5:9b-q4_K_M, digest público abreviado 6488c96fa5fa, 6.6GB."
+        }
+      ],
+      "risks": [
+        "Cobertura multilíngue ampla não demonstra por si só competência sintática em português brasileiro.",
+        "Modelo multimodal maior que o necessário para a tarefa textual; comparar custo e estabilidade.",
+        "Digest local completo deve ser capturado na execução, não inferido deste registro."
+      ]
+    },
+    {
+      "id": "mistral-nemo-12b",
+      "family": "mistral-nemo",
+      "developer": "Mistral AI + NVIDIA",
+      "upstreamModel": "mistralai/Mistral-Nemo-Instruct-2407",
+      "version": "Instruct-2407-12B",
+      "weightsLicense": "Apache-2.0",
+      "status": "eligible_for_local_benchmark",
+      "baseline": false,
+      "ollama": {
+        "tag": "mistral-nemo:12b",
+        "publishedDigestPrefix": "e7e06d107c6c",
+        "publishedSize": "7.1GB",
+        "quantization": "Q4_0"
+      },
+      "portugueseEvidence": {
+        "kind": "upstream_direct_benchmark",
+        "summary": "Mistral declara português entre os idiomas fortes do NeMo; o model card publica MMLU em português de 63,3%. Isso é evidência upstream, não validação do fenômeno M1-R0.",
+        "directPtBrBenchmarkPublished": true,
+        "publishedMetric": {
+          "benchmark": "MMLU",
+          "language": "Portuguese",
+          "scorePercent": 63.3
+        },
+        "localPtBrBenchmarkRequired": true
+      },
+      "sources": [
+        {
+          "kind": "official_release",
+          "url": "https://mistral.ai/news/mistral-nemo/",
+          "checkedAt": "2026-08-11",
+          "evidence": "12B, Apache 2.0, multilingual; português explicitamente citado."
+        },
+        {
+          "kind": "official_model_card",
+          "url": "https://huggingface.co/mistralai/Mistral-Nemo-Instruct-2407",
+          "checkedAt": "2026-08-11",
+          "evidence": "Apache 2.0; benchmark MMLU Portuguese 63,3%."
+        },
+        {
+          "kind": "local_runtime_distribution",
+          "url": "https://ollama.com/library/mistral-nemo:12b",
+          "checkedAt": "2026-08-11",
+          "evidence": "Tag mistral-nemo:12b, digest público abreviado e7e06d107c6c, 7.1GB."
+        }
+      ],
+      "risks": [
+        "Benchmark geral em português não mede correferência discursiva nem sujeito indeterminado.",
+        "A quantização do Ollama precisa ser registrada como parte da evidência.",
+        "Modelo mais antigo que os demais; pode servir como diversidade de família, não como favorito presumido."
+      ]
+    },
+    {
+      "id": "granite33-8b",
+      "family": "granite3.3",
+      "developer": "IBM Granite Team",
+      "upstreamModel": "ibm-granite/granite-3.3-8b-instruct",
+      "version": "3.3-8B-Instruct",
+      "weightsLicense": "Apache-2.0",
+      "status": "eligible_for_local_benchmark",
+      "baseline": false,
+      "ollama": {
+        "tag": "granite3.3:8b",
+        "publishedDigestPrefix": "fd429f23b909",
+        "publishedSize": "4.9GB",
+        "quantization": "Q4_K_M"
+      },
+      "portugueseEvidence": {
+        "kind": "upstream_supported_language",
+        "summary": "O model card oficial inclui português entre os 12 idiomas suportados. O registro não presume qualidade para a fronteira M1-R0; benchmark local continua obrigatório.",
+        "directPtBrBenchmarkPublished": false,
+        "localPtBrBenchmarkRequired": true
+      },
+      "sources": [
+        {
+          "kind": "official_repository",
+          "url": "https://github.com/ibm-granite/granite-3.3-language-models",
+          "checkedAt": "2026-08-11",
+          "evidence": "Família 2B/8B multilíngue sob Apache 2.0 para pesquisa e uso comercial."
+        },
+        {
+          "kind": "official_model_card",
+          "url": "https://huggingface.co/ibm-granite/granite-3.3-8b-instruct",
+          "checkedAt": "2026-08-11",
+          "evidence": "Português listado entre os idiomas suportados; Apache 2.0."
+        },
+        {
+          "kind": "local_runtime_distribution",
+          "url": "https://ollama.com/library/granite3.3:8b",
+          "checkedAt": "2026-08-11",
+          "evidence": "Tag granite3.3:8b, digest público abreviado fd429f23b909, 4.9GB."
+        }
+      ],
+      "risks": [
+        "Idioma suportado não equivale a benchmark sintático específico.",
+        "Dados sintéticos de treino podem correlacionar erros com outras famílias; desacordos devem ser preservados.",
+        "Digest local completo deve ser capturado na execução."
+      ]
+    }
+  ],
+  "rotations": [
+    {
+      "id": "round-a",
+      "assignments": {
+        "s1_contextual_conservative": "qwen35-9b",
+        "s2_discourse_referent": "mistral-nemo-12b",
+        "s3_adversarial_ambiguity": "granite33-8b"
+      }
+    },
+    {
+      "id": "round-b",
+      "assignments": {
+        "s1_contextual_conservative": "mistral-nemo-12b",
+        "s2_discourse_referent": "granite33-8b",
+        "s3_adversarial_ambiguity": "qwen35-9b"
+      }
+    },
+    {
+      "id": "round-c",
+      "assignments": {
+        "s1_contextual_conservative": "granite33-8b",
+        "s2_discourse_referent": "qwen35-9b",
+        "s3_adversarial_ambiguity": "mistral-nemo-12b"
+      }
+    }
+  ],
+  "executionPolicy": {
+    "provider": "ollama",
+    "baseUrl": "http://127.0.0.1:11434",
+    "profileMajorOrder": true,
+    "structuredJsonSchema": true,
+    "captureLocalModelDigest": true,
+    "seedBaseByProfile": {
+      "s1_contextual_conservative": 1100,
+      "s2_discourse_referent": 2200,
+      "s3_adversarial_ambiguity": 3300
+    },
+    "firstOperationalPilotCases": 4,
+    "fullPrivatePackageCases": 16,
+    "rotationOrder": [
+      "round-a",
+      "round-b",
+      "round-c"
+    ],
+    "stopOnMissingModel": true,
+    "keepPrivateInputOutsideRepository": true,
+    "keepObservedOutputOutsideRepository": true,
+    "keepAliveDuringProfile": "10m",
+    "unloadAfterProfile": true,
+    "capturePrivateInputSha256": true,
+    "sameProfileSeedAcrossModels": true
+  },
+  "interpretation": {
+    "threeRotationsPurpose": "Separar, por desenho, efeito do perfil de anotação do efeito da família de pesos.",
+    "candidateRegistrationDoesNotElectBaseline": true,
+    "syntheticAgreementIsNotHumanAgreement": true,
+    "humanValidationStillRequiredLater": true
+  }
+}
