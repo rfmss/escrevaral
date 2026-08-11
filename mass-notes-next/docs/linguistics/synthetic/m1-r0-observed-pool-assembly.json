@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-observed-pool-assembly-v1",
+  "state": "method_locked_private_output",
+  "purpose": "Reconstruir deterministicamente o pool observado Porttinari train+dev com continuidade documental entre splits, sem abrir test e sem decidir rótulo linguístico.",
+  "source": {
+    "sourceId": "ud-portuguese-porttinari-2.18",
+    "repository": "UniversalDependencies/UD_Portuguese-Porttinari",
+    "revision": "87a07e1fb761d6d0a6e2a4d82b11b308344dabb9",
+    "license": "CC BY 4.0",
+    "files": {
+      "train": {
+        "filename": "pt_porttinari-ud-train.conllu",
+        "gitBlobSha": "6dac8d4a5b6bf208dc9146291e7b9014e404bc59",
+        "sha256": "b685d552f23dd0155072b11b1282d6e52dc7f4b57f335cc3486be23ef68c4ead",
+        "expectedSentences": 5893
+      },
+      "dev": {
+        "filename": "pt_porttinari-ud-dev.conllu",
+        "gitBlobSha": "19e5a75cec5087a7aa92dc112e21e9f9d74bdaa7",
+        "expectedSentences": 842
+      }
+    },
+    "allowedSplits": [
+      "train",
+      "dev"
+    ],
+    "blockedSplits": [
+      "test"
+    ]
+  },
+  "expectedAggregate": {
+    "sentences": 6735,
+    "sentencesWithTrustedPreviousContext": 2448,
+    "candidates": 2217,
+    "candidatesWithTrustedPreviousContext": 829,
+    "byStructuralBucket": {
+      "explicit_subject_control": 1088,
+      "no_direct_subject_candidate": 183,
+      "outside_initial_scope": 946
+    },
+    "crossSplitSentenceContinuity": {
+      "trainTargetPreviousDev": 270,
+      "devTargetPreviousTrain": 256
+    },
+    "noDirectWithTrustedPreviousContext": 67,
+    "noDirectTrustedPreviousByTargetSplit": {
+      "train": 56,
+      "dev": 11
+    },
+    "noDirectTrustedPreviousByTargetDeprel": {
+      "conj": 32,
+      "root": 14,
+      "ccomp": 7,
+      "advcl": 7,
+      "acl:relcl": 5,
+      "parataxis": 1,
+      "ccomp:speech": 1
+    }
+  },
+  "assemblyPolicy": {
+    "mineEachSplitWithExistingMinerFirst": true,
+    "rebuildOnlyPreviousContextAcrossCombinedSentenceIndex": true,
+    "documentPositionParser": "parseSentencePosition_from_mine-subject-candidates",
+    "trustedPreviousRule": "same_document_exact_ordinal_minus_one",
+    "physicalFileOrderTrusted": false,
+    "preserveTargetSplit": true,
+    "preserveCandidateId": true,
+    "automaticLinguisticDecision": false,
+    "humanAnnotationMustRemainPending": true,
+    "testSplitOpened": false,
+    "outputMustStayOutsideRepository": true,
+    "writeMode": "exclusive_no_overwrite"
+  },
+  "boundaries": {
+    "mayCreateHumanGold": false,
+    "mayCountAsHumanValidation": false,
+    "mayAuthorizeVerified": false,
+    "mayAuthorizeProductionSyntax": false,
+    "reservedSyntheticEvaluationOpened": false,
+    "testSplitOpened": false
+  }
+}
