@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-subject-synthetic-panel-v1",
+  "state": "research_only",
+  "purpose": "Pré-banca sintética para amadurecer o protocolo de sujeito recuperável versus indeterminado antes de convocar banca humana independente.",
+  "labels": [
+    {
+      "id": "subject_recoverable",
+      "definition": "O sujeito não está expresso na oração-alvo, mas um referente plural suficientemente identificável pode ser recuperado do contexto textual fornecido."
+    },
+    {
+      "id": "subject_indeterminate",
+      "definition": "O sujeito não está expresso e os participantes não podem ser identificados de modo suficiente a partir do contexto textual fornecido."
+    },
+    {
+      "id": "subject_ambiguous",
+      "definition": "O contexto admite mais de uma leitura relevante, há referentes concorrentes ou a evidência é insuficiente para escolher com segurança entre recuperável e indeterminado."
+    },
+    {
+      "id": "explicit_subject_control",
+      "definition": "A oração-alvo apresenta sujeito expresso identificável no próprio texto e funciona como controle do protocolo."
+    },
+    {
+      "id": "outside_initial_scope_or_annotation_issue",
+      "definition": "O caso não pertence de forma segura à fronteira inicial ou há problema de segmentação, alvo, construção ou anotação que impede o julgamento contratado."
+    }
+  ],
+  "recoveryScopes": ["same_sentence", "previous_sentence", "both", "none", "uncertain"],
+  "profiles": [
+    {
+      "id": "s1_contextual_conservative",
+      "title": "Contextual conservadora",
+      "temperature": 0.1,
+      "instruction": "Exija evidência textual explícita ou anaforicamente forte. Não complete lacunas por plausibilidade jornalística ou conhecimento de mundo. Prefira ambiguidade quando o referente competir com outra leitura."
+    },
+    {
+      "id": "s2_discourse_referent",
+      "title": "Referência discursiva",
+      "temperature": 0.2,
+      "instruction": "Concentre-se na continuidade discursiva entre a sentença anterior e a sentença-alvo. Identifique o referente mínimo recuperável, mas não trate simples proximidade de um plural como prova de correferência."
+    },
+    {
+      "id": "s3_adversarial_ambiguity",
+      "title": "Ambiguidade adversarial",
+      "temperature": 0.3,
+      "instruction": "Procure leituras concorrentes, generalizações, mudanças de tópico, elipses incertas e sinais de que o caso está fora do escopo. Sua função é impedir consenso fácil produzido por excesso de confiança."
+    }
+  ],
+  "consensus": {
+    "stableSynthetic": {
+      "requiresUnanimity": true,
+      "minimumConfidencePerAnnotator": 0.82
+    },
+    "provisionalSynthetic": {
+      "minimumMajority": 2,
+      "minimumMeanConfidence": 0.75
+    },
+    "otherwise": "needs_review"
+  },
+  "boundaries": {
+    "countsAsHumanValidation": false,
+    "mayIncreaseHumanAcademicScore": false,
+    "mayCreateHumanGold": false,
+    "mayAuthorizeVerified": false,
+    "maySupportResearchRedTestsAfterEvaGate": true,
+    "rawObservedCorpusMayEnterRepository": false,
+    "defaultExecutionLocal": true,
+    "remoteExecutionRequiresExplicitOptIn": true,
+    "humanValidationStillRequiredBeforeVerifiedOrExcellence": true
+  },
+  "inspirations": [
+    {
+      "repository": "refuel-ai/autolabel",
+      "revision": "404dcd014276b343ce6653670c0f75778e392e11",
+      "license": "MIT",
+      "role": "Referência de fluxo config-first, dry-run, confiança, explicação, cache e roteamento para revisão. Nenhum código foi copiado nesta tranche."
+    },
+    {
+      "repository": "HumanSignal/label-studio",
+      "revision": "f010f38324df5d15cecd32358bb64b67079491d8",
+      "license": "Apache-2.0",
+      "role": "Destino futuro possível para anotação comunitária/humana, pre-label e integração por API. Não é dependência do produto nesta tranche."
+    }
+  ]
+}
