@@ -16,6 +16,8 @@ Antes de alterar código, corpus, regras linguísticas, interface de análise ou
 8. consulte `docs/personas/EVA_CHARA_SCORECARD.md` e a planilha de progresso;
 9. registre o próximo risco em breadcrumb antes de atravessar uma fronteira ainda não provada.
 
+Para qualquer alteração de **layout, UX, casca visual, interação de escrita ou uso do Stitch**, leia também `docs/memory/2026-08-12-plano-de-voo-escrever-examinar.md`. Essa frente trabalha **uma tela/estado por vez**: a escrita deve permanecer silenciosa; a oficina aparece sob demanda; Stitch é laboratório visual, não fonte de verdade; regressões incidentais podem ser ignoradas apenas no mockup e nunca no produto real. Não abra a próxima tela sem aprovação humana explícita da tela atual.
+
 O mapa mestre é obrigatório para planejamento e handoff. Ele registra a ordem estratégica: **terminar uma caixa linguística por vez; provar as caixas; somente depois consolidá-las no Cofre e transplantá-las para a casca escolhida.** Itens marcados `deferred` em `docs/project-map/mapa.json` não estão autorizados como próxima frente só porque aparecem no roadmap. Ticks locais feitos em `docs/project-map/index.html` não alteram o estado oficial.
 
 A cápsula de aprendizagem é obrigatória antes de consultar livros, artigos, sites, corpora, repositórios, modelos ou qualquer fonte externa para criar regra, exemplo, explicação, engine ou decisão de persona.
