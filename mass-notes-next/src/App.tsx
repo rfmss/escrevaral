@@ -1,166 +1,185 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import type { JSONContent } from '@tiptap/core'
+import { MassNotesEditor } from './editor/MassNotesEditor'
+import type { TextPositionContract } from './editor/textPositionContract'
 import { Library } from './components/Library'
 import { RightRail } from './components/RightRail'
-import { type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
-import { MassNotesEditor, type ReviewNavigationRequest } from './editor/MassNotesEditor'
-import type { ReviewDecorationSpec } from './editor/reviewDecorations'
-import type { EditorPositionContract } from './editor/textPositionContract'
 import {
-  ensureReviewEngine,
-  reviewTextDetailed,
-  type LocatedReviewIssue,
-  type ReviewIssue,
-} from './engines/reviewAdapter'
-import { downloadDocumentExport, type ExportFormat } from './export/documentExport'
-import {
-  createNewDocument,
-  DocumentConflictError,
+  createDocument,
   duplicateDocument,
   getDocument,
-  initializeRepository,
   listDocuments,
+  removeDocument,
   saveConflictAsCopy,
   saveDocument,
 } from './storage/documentRepository'
+import type { EscrevaralDocument, DocumentStatus } from './domain/document'
+import { createEmptyDocument } from './domain/document'
+import { analyzeWithLegacyEngine, type ReviewIssue } from './engines/reviewAdapter'
+import { clearReviewReading, getReviewReading, setReviewReading } from './editor/reviewDecorations'
+import { downloadDocumentExport, type DocumentExportFormat } from './export/documentExport'
 
-const ACTIVE_KEY = 'escrevaral-mass-notes-next-active'
-const RECOVERY_KEY = 'escrevaral-mass-notes-next-recovery'
-const THEME_KEY = 'escrevaral-mass-notes-next-theme'
-const CHANNEL = 'escrevaral-mass-notes-next-documents'
+const RECOVERY_KEY = 'escrevaral:mass-notes-next:recovery'
+const LAST_DOCUMENT_KEY = 'escrevaral:mass-notes-next:last-document'
+const THEME_KEY = 'escrevaral:mass-notes-next:night'
+const CHANNEL_NAME = 'escrevaral:mass-notes-next:documents'
+const AUTOSAVE_DELAY = 900
 
+type SaveState = 'Salvo' | 'Salvando' | 'Alterado' | 'Conflito' | 'Falha'
+type RecoveryEnvelope = {
+  savedAt: string
+  draft: EscrevaralDocument
+}
+type PendingSave = {
+  document: EscrevaralDocument
+  kind: 'manuscript' | 'metadata' | null
+}
+type EditorSessionState = {
+  draft: EscrevaralDocument
+  dirty: boolean
+  dirtyKind: 'manuscript' | 'metadata' | null
+  conflict: ConflictState | null
+  positionContract: TextPositionContract | null
+  editorResetKey: number
+}
 type ConflictState = {
   local: EscrevaralDocument
   persisted: EscrevaralDocument
 }
 
-type DraftMutationKind = 'manuscript' | 'metadata'
-
-type DocumentChannelMessage = {
-  id?: string
-  revision?: number
-  kind?: DraftMutationKind
+const initialContent: JSONContent = {
+  type: 'doc',
+  content: [
+    { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'Primeira luz' }] },
+    { type: 'paragraph', content: [{ type: 'text', text: 'Escreva aqui. O manuscrito é seu; a análise só observa quando você pedir.' }] },
+  ],
 }
 
-type LocatedReviewPresentation = LocatedReviewIssue & {
-  positionRange: { from: number; to: number }
+function nowIso() {
+  return new Date().toISOString()
 }
 
-function manuscriptFieldsChanged(left: EscrevaralDocument, right: EscrevaralDocument): boolean {
-  return left.title !== right.title
-    || left.plainText !== right.plainText
-    || JSON.stringify(left.content) !== JSON.stringify(right.content)
+function readLocalStorage<T>(key: string): T | null {
+  try {
+    const raw = localStorage.getItem(key)
+    return raw ? JSON.parse(raw) as T : null
+  } catch {
+    return null
+  }
 }
 
-function readLocalStorage(key: string): string | null {
-  try { return localStorage.getItem(key) } catch { return null }
+function writeLocalStorage(key: string, value: unknown) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+  } catch {
+    // Persistência principal continua no IndexedDB mesmo se o recovery envelope não couber.
+  }
 }
 
-function writeLocalStorage(key: string, value: string): void {
-  try { localStorage.setItem(key, value) } catch { /* O IndexedDB continua sendo a fonte do documento. */ }
+function removeLocalStorage(key: string) {
+  try {
+    localStorage.removeItem(key)
+  } catch {
+    // Nada a fazer: a cópia principal continua no IndexedDB.
+  }
 }
 
-function removeLocalStorage(key: string): void {
-  try { localStorage.removeItem(key) } catch { /* Nada a remover em modo restrito. */ }
+function manuscriptFieldsChanged(a: EscrevaralDocument, b: EscrevaralDocument) {
+  return a.title !== b.title || JSON.stringify(a.content) !== JSON.stringify(b.content)
+}
+
+function metadataFieldsChanged(a: EscrevaralDocument, b: EscrevaralDocument) {
+  return a.status !== b.status || a.favorite !== b.favorite || JSON.stringify(a.tags) !== JSON.stringify(b.tags)
+}
+
+function sameDocument(a: EscrevaralDocument, b: EscrevaralDocument) {
+  return !manuscriptFieldsChanged(a, b) && !metadataFieldsChanged(a, b)
 }
 
 export default function App() {
   const [documents, setDocuments] = useState<EscrevaralDocument[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
   const [draft, setDraft] = useState<EscrevaralDocument | null>(null)
-  const [saveState, setSaveState] = useState<SaveState>('Carregando')
   const [search, setSearch] = useState('')
-  const [dirty, setDirty] = useState(false)
-  const [conflict, setConflict] = useState<ConflictState | null>(null)
-  const [issues, setIssues] = useState<ReviewIssue[]>([])
-  const [locatedIssues, setLocatedIssues] = useState<LocatedReviewPresentation[]>([])
-  const [reviewDecorations, setReviewDecorations] = useState<ReviewDecorationSpec[]>([])
-  const [reviewNavigation, setReviewNavigation] = useState<ReviewNavigationRequest | null>(null)
-  const [reviewMessage, setReviewMessage] = useState('Aguardando uma leitura.')
-  const [analyzing, setAnalyzing] = useState(false)
-  const [focusMode, setFocusMode] = useState(false)
-  const [dark, setDark] = useState(() => readLocalStorage(THEME_KEY) === 'night')
+  const [saveState, setSaveState] = useState<SaveState>('Salvo')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [railOpen, setRailOpen] = useState(false)
+  const [focusMode, setFocusMode] = useState(false)
+  const [dark, setDark] = useState(false)
+  const [analyzing, setAnalyzing] = useState(false)
+  const [issues, setIssues] = useState<ReviewIssue[]>([])
+  const [locatedIssues, setLocatedIssues] = useState<Array<ReviewIssue & { from: number; to: number }>>([])
+  const [reviewMessage, setReviewMessage] = useState('Aguardando uma leitura.')
+  const [reviewNavigation, setReviewNavigation] = useState<{ from: number; to: number; key: number } | null>(null)
+  const [conflict, setConflict] = useState<ConflictState | null>(null)
   const [editorResetKey, setEditorResetKey] = useState(0)
-
   const draftRef = useRef<EscrevaralDocument | null>(null)
+  const activeIdRef = useRef<string | null>(null)
   const dirtyRef = useRef(false)
-  const dirtyKindRef = useRef<DraftMutationKind | null>(null)
+  const dirtyKindRef = useRef<'manuscript' | 'metadata' | null>(null)
   const conflictRef = useRef<ConflictState | null>(null)
-  const mutationSerialRef = useRef(0)
-  const savePromiseRef = useRef<Promise<boolean> | null>(null)
-  const saveRequestedRef = useRef(false)
+  const positionContractRef = useRef<TextPositionContract | null>(null)
+  const saveQueueRef = useRef<PendingSave | null>(null)
+  const saveLoopRef = useRef<Promise<void> | null>(null)
   const channelRef = useRef<BroadcastChannel | null>(null)
-  const analysisToken = useRef(0)
-  const navigationSerial = useRef(0)
-  const positionContractRef = useRef<EditorPositionContract | null>(null)
-
-  useEffect(() => { draftRef.current = draft }, [draft])
-  useEffect(() => { dirtyRef.current = dirty }, [dirty])
-  useEffect(() => { conflictRef.current = conflict }, [conflict])
-
-  const clearReviewReading = useCallback((message: string) => {
-    analysisToken.current += 1
-    setAnalyzing(false)
-    setIssues([])
-    setLocatedIssues([])
-    setReviewDecorations([])
-    setReviewNavigation(null)
-    setReviewMessage(message)
-  }, [])
 
   const refreshDocuments = useCallback(async () => {
-    const rows = await listDocuments()
-    setDocuments(rows)
-    return rows
+    const next = await listDocuments()
+    setDocuments(next)
+    return next
   }, [])
 
-  useEffect(() => {
-    let cancelled = false
-    async function boot() {
-      await initializeRepository()
-      ensureReviewEngine()
-      const rows = await refreshDocuments()
-      if (cancelled) return
-      const remembered = readLocalStorage(ACTIVE_KEY)
-      const initial = rows.find((item) => item.id === remembered) ?? rows[0]
-      let candidate = initial
-      let recovered = false
+  const changeActiveDocument = useCallback((document: EscrevaralDocument) => {
+    setActiveId(document.id)
+    activeIdRef.current = document.id
+    setDraft(document)
+    draftRef.current = document
+    setConflict(null)
+    conflictRef.current = null
+    setSaveState('Salvo')
+    setEditorResetKey((value) => value + 1)
+    setIssues([])
+    setLocatedIssues([])
+    setReviewNavigation(null)
+    setReviewMessage('Aguardando uma leitura.')
+    writeLocalStorage(LAST_DOCUMENT_KEY, document.id)
+  }, [])
 
-      try {
-        const recovery = JSON.parse(readLocalStorage(RECOVERY_KEY) ?? 'null') as { document?: EscrevaralDocument } | null
-        if (
-          recovery?.document?.id &&
-          recovery.document.id === initial?.id &&
-          recovery.document.revision === initial.revision &&
-          recovery.document.updatedAt > initial.updatedAt
-        ) {
-          candidate = recovery.document
-          recovered = true
-        }
-      } catch {
-        removeLocalStorage(RECOVERY_KEY)
-      }
-
-      if (candidate) {
-        setActiveId(candidate.id)
-        setDraft(structuredClone(candidate))
-        setDirty(recovered)
-        dirtyKindRef.current = recovered ? 'manuscript' : null
-        setSaveState(recovered ? 'Alterado' : 'Salvo')
-      }
+  const bootstrap = useCallback(async () => {
+    const recovered = readLocalStorage<RecoveryEnvelope>(RECOVERY_KEY)
+    if (recovered?.draft?.id) {
+      changeActiveDocument(recovered.draft)
+      setSaveState('Alterado')
+      dirtyRef.current = true
+      dirtyKindRef.current = 'manuscript'
+      setDocuments(await listDocuments())
+      return
     }
-    boot().catch((error) => {
-      console.error('[Escrevaral] Falha ao iniciar.', error)
-      setSaveState('Falha')
-    })
-    return () => { cancelled = true }
-  }, [refreshDocuments])
+
+    let collection = await listDocuments()
+    if (!collection.length) {
+      const first = createEmptyDocument({ title: 'Caderno sem nome', content: initialContent })
+      await createDocument(first)
+      collection = [first]
+    }
+    setDocuments(collection)
+    const lastId = readLocalStorage<string>(LAST_DOCUMENT_KEY)
+    const active = collection.find((item) => item.id === lastId) ?? collection[0]
+    changeActiveDocument(active)
+  }, [changeActiveDocument])
+
+  useEffect(() => {
+    void bootstrap()
+  }, [bootstrap])
+
+  useEffect(() => {
+    const nextDark = readLocalStorage<boolean>(THEME_KEY) ?? false
+    setDark(nextDark)
+  }, [])
 
   useEffect(() => {
     document.body.classList.toggle('night', dark)
-    writeLocalStorage(THEME_KEY, dark ? 'night' : 'paper')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#123442' : '#86c7df')
+    writeLocalStorage(THEME_KEY, dark)
   }, [dark])
 
   useEffect(() => {
@@ -168,263 +187,183 @@ export default function App() {
   }, [focusMode])
 
   useEffect(() => {
-    if (!('BroadcastChannel' in window)) return
-    const channel = new BroadcastChannel(CHANNEL)
+    const channel = new BroadcastChannel(CHANNEL_NAME)
     channelRef.current = channel
-    channel.onmessage = async (event: MessageEvent<DocumentChannelMessage>) => {
-      const id = event.data?.id
-      if (!id) return
-      const current = draftRef.current
-      const persisted = await getDocument(id)
-      if (!persisted) return
+    channel.onmessage = async (event: MessageEvent<{ type: string; documentId?: string }>) => {
+      if (event.data.type !== 'saved' || !event.data.documentId) return
+      const incomingId = event.data.documentId
+      const incoming = await getDocument(incomingId)
+      if (!incoming) return
       await refreshDocuments()
-      if (!current || id !== current.id || persisted.revision <= current.revision) return
-      if (dirtyRef.current) {
-        const nextConflict = { local: structuredClone(current), persisted }
-        conflictRef.current = nextConflict
-        setConflict(nextConflict)
-        setSaveState('Conflito')
-      } else {
-        const kind = event.data?.kind ?? (manuscriptFieldsChanged(current, persisted) ? 'manuscript' : 'metadata')
-        setDraft(persisted)
-        draftRef.current = persisted
-        dirtyKindRef.current = null
-        if (kind === 'manuscript') {
-          positionContractRef.current = null
-          clearReviewReading('O documento mudou em outra aba. Faça uma nova leitura quando quiser.')
-          setEditorResetKey((value) => value + 1)
-        }
-        setSaveState('Salvo')
+      if (incomingId !== activeIdRef.current) return
+
+      const current = draftRef.current
+      if (!current) return
+      if (!dirtyRef.current && !conflictRef.current) {
+        changeActiveDocument(incoming)
+        return
       }
+      if (sameDocument(current, incoming)) return
+      const nextConflict = { local: current, persisted: incoming }
+      conflictRef.current = nextConflict
+      setConflict(nextConflict)
+      setSaveState('Conflito')
     }
-    return () => channel.close()
-  }, [clearReviewReading, refreshDocuments])
+    return () => {
+      channel.close()
+      channelRef.current = null
+    }
+  }, [changeActiveDocument, refreshDocuments])
 
-  const persistDraft = useCallback(async (): Promise<boolean> => {
-    saveRequestedRef.current = true
-    if (savePromiseRef.current) return savePromiseRef.current
+  const queueSave = useCallback((pending: PendingSave) => {
+    saveQueueRef.current = pending
+    if (saveLoopRef.current) return saveLoopRef.current
 
-    const runQueue = async (): Promise<boolean> => {
-      while (saveRequestedRef.current) {
-        saveRequestedRef.current = false
-        if (conflictRef.current) return false
-
-        const current = draftRef.current
-        if (!current || !dirtyRef.current) continue
-
-        const snapshot = structuredClone(current)
-        const mutationSerial = mutationSerialRef.current
-        const mutationKind = dirtyKindRef.current ?? 'manuscript'
+    const run = async () => {
+      while (saveQueueRef.current) {
+        const current = saveQueueRef.current
+        saveQueueRef.current = null
         setSaveState('Salvando')
-
         try {
-          const saved = await saveDocument(snapshot, snapshot.revision)
-          const latest = draftRef.current
-          const changedDuringSave = mutationSerialRef.current !== mutationSerial
-
-          if (latest && latest.id === saved.id && changedDuringSave) {
-            const rebased = { ...latest, revision: saved.revision }
-            setDraft(rebased)
-            draftRef.current = rebased
-            setDirty(true)
-            dirtyRef.current = true
-            setSaveState('Alterado')
-            saveRequestedRef.current = true
-          } else if (latest?.id === saved.id) {
-            setDraft(saved)
-            draftRef.current = saved
-            setDirty(false)
-            dirtyRef.current = false
-            dirtyKindRef.current = null
-            setSaveState('Salvo')
-            removeLocalStorage(RECOVERY_KEY)
-          }
-
-          channelRef.current?.postMessage({ id: saved.id, revision: saved.revision, kind: mutationKind } satisfies DocumentChannelMessage)
+          const saved = await saveDocument(current.document)
+          setDraft(saved)
+          draftRef.current = saved
+          setSaveState('Salvo')
+          dirtyRef.current = false
+          dirtyKindRef.current = null
+          removeLocalStorage(RECOVERY_KEY)
+          channelRef.current?.postMessage({ type: 'saved', documentId: saved.id })
           await refreshDocuments()
         } catch (error) {
-          if (error instanceof DocumentConflictError) {
-            const nextConflict = { local: error.local, persisted: error.persisted }
-            conflictRef.current = nextConflict
-            setConflict(nextConflict)
-            setSaveState('Conflito')
-            return false
+          saveQueueRef.current = null
+          const message = error instanceof Error ? error.message : String(error)
+          if (message.includes('Revision conflict')) {
+            const persisted = await getDocument(current.document.id)
+            if (persisted) {
+              const nextConflict = { local: current.document, persisted }
+              conflictRef.current = nextConflict
+              setConflict(nextConflict)
+              setSaveState('Conflito')
+              return
+            }
           }
-          console.error('[Escrevaral] Falha ao salvar.', error)
           setSaveState('Falha')
-          return false
         }
       }
-      return !conflictRef.current
     }
 
-    const task = runQueue()
-    savePromiseRef.current = task
-    try {
-      return await task
-    } finally {
-      if (savePromiseRef.current === task) savePromiseRef.current = null
-    }
+    saveLoopRef.current = run().finally(() => {
+      saveLoopRef.current = null
+    })
+    return saveLoopRef.current
   }, [refreshDocuments])
 
-  useEffect(() => {
-    if (!dirty || !draft || conflict) return
-    writeLocalStorage(RECOVERY_KEY, JSON.stringify({ capturedAt: Date.now(), document: draft }))
-    const timer = window.setTimeout(() => { void persistDraft() }, 650)
-    return () => window.clearTimeout(timer)
-  }, [dirty, draft, conflict, persistDraft])
+  const persistDraft = useCallback(async () => {
+    const current = draftRef.current
+    if (!current || conflictRef.current) return
+    const next = { ...current, updatedAt: nowIso() }
+    await queueSave({ document: next, kind: dirtyKindRef.current })
+  }, [queueSave])
 
-  const mutateDraft = useCallback((
-    updater: (current: EscrevaralDocument) => EscrevaralDocument,
-    kind: DraftMutationKind = 'manuscript',
-  ) => {
-    mutationSerialRef.current += 1
+  useEffect(() => {
+    if (!draft || !dirtyRef.current || conflict) return
+    const timer = window.setTimeout(() => { void persistDraft() }, AUTOSAVE_DELAY)
+    return () => window.clearTimeout(timer)
+  }, [conflict, draft, persistDraft])
+
+  const mutateDraft = useCallback((mutator: (current: EscrevaralDocument) => EscrevaralDocument, kind: 'manuscript' | 'metadata' = 'manuscript') => {
     setDraft((current) => {
       if (!current) return current
-      const next = updater(current)
-      next.updatedAt = Date.now()
+      const next = mutator(current)
       draftRef.current = next
+      dirtyRef.current = true
+      dirtyKindRef.current = kind
+      setSaveState('Alterado')
+      writeLocalStorage(RECOVERY_KEY, { savedAt: nowIso(), draft: next } satisfies RecoveryEnvelope)
       return next
     })
-    dirtyKindRef.current = dirtyKindRef.current === 'manuscript' || kind === 'manuscript' ? 'manuscript' : 'metadata'
-    setDirty(true)
-    dirtyRef.current = true
-    setSaveState('Alterado')
-    if (kind === 'manuscript') clearReviewReading('O texto mudou. Faça uma nova leitura quando quiser.')
-  }, [clearReviewReading])
-
-  const selectDocument = useCallback(async (id: string) => {
-    if (id === activeId) {
-      setSidebarOpen(false)
-      return
-    }
-    if (!(await persistDraft())) return
-    const selected = documents.find((item) => item.id === id) ?? await getDocument(id)
-    if (!selected) return
-    setActiveId(id)
-    writeLocalStorage(ACTIVE_KEY, id)
-    setDraft(structuredClone(selected))
-    setDirty(false)
-    dirtyRef.current = false
-    dirtyKindRef.current = null
-    conflictRef.current = null
-    setConflict(null)
-    positionContractRef.current = null
-    clearReviewReading('Aguardando uma leitura.')
-    setEditorResetKey((value) => value + 1)
-    setSidebarOpen(false)
-  }, [activeId, clearReviewReading, documents, persistDraft])
+  }, [])
 
   const newDocument = useCallback(async () => {
-    if (!(await persistDraft())) return
-    const created = await createNewDocument()
+    const first = createEmptyDocument()
+    const saved = await createDocument(first)
     await refreshDocuments()
-    setActiveId(created.id)
-    writeLocalStorage(ACTIVE_KEY, created.id)
-    setDraft(created)
-    setDirty(false)
-    dirtyRef.current = false
-    dirtyKindRef.current = null
-    conflictRef.current = null
-    setConflict(null)
-    positionContractRef.current = null
-    clearReviewReading('Aguardando uma leitura.')
-    setEditorResetKey((value) => value + 1)
-    setSidebarOpen(false)
-  }, [clearReviewReading, persistDraft, refreshDocuments])
+    changeActiveDocument(saved)
+  }, [changeActiveDocument, refreshDocuments])
+
+  const selectDocument = useCallback(async (id: string) => {
+    if (id === activeIdRef.current) return
+    if (dirtyRef.current && draftRef.current && !conflictRef.current) await persistDraft()
+    const next = await getDocument(id)
+    if (next) changeActiveDocument(next)
+  }, [changeActiveDocument, persistDraft])
 
   const duplicate = useCallback(async () => {
     const current = draftRef.current
-    if (!current || !(await persistDraft())) return
+    if (!current) return
     const copy = await duplicateDocument(current)
     await refreshDocuments()
-    setActiveId(copy.id)
-    setDraft(copy)
-    setDirty(false)
-    dirtyRef.current = false
-    dirtyKindRef.current = null
-    positionContractRef.current = null
-    clearReviewReading('Aguardando uma leitura.')
-    setEditorResetKey((value) => value + 1)
-    setRailOpen(false)
-  }, [clearReviewReading, persistDraft, refreshDocuments])
+    changeActiveDocument(copy)
+  }, [changeActiveDocument, refreshDocuments])
+
+  const remove = useCallback(async (id: string) => {
+    await removeDocument(id)
+    const next = await refreshDocuments()
+    if (id === activeIdRef.current) {
+      const replacement = next[0] ?? await createDocument(createEmptyDocument())
+      changeActiveDocument(replacement)
+      if (!next.length) setDocuments([replacement])
+    }
+  }, [changeActiveDocument, refreshDocuments])
+
+  const reviewDecorations = useMemo(() => getReviewReading(draft.id), [draft?.id, issues, locatedIssues])
 
   const runReview = useCallback(async () => {
     const current = draftRef.current
-    const contract = positionContractRef.current
     if (!current) return
-    if (!contract || contract.snapshot.documentId !== current.id) {
-      setReviewMessage('O mapa estrutural ainda está sendo preparado. Tente novamente em um instante.')
-      return
-    }
-
-    const token = ++analysisToken.current
-    const documentId = current.id
-    const contentSignature = contract.snapshot.contentSignature
-    const text = contract.snapshot.text
     setAnalyzing(true)
-    setReviewMessage('A engine está lendo o rascunho localmente…')
-
+    setReviewMessage('Lendo o texto em português brasileiro…')
     try {
-      const result = await reviewTextDetailed(text)
-      const liveContract = positionContractRef.current
-      if (
-        token !== analysisToken.current ||
-        draftRef.current?.id !== documentId ||
-        !liveContract ||
-        liveContract.snapshot.documentId !== documentId ||
-        liveContract.snapshot.contentSignature !== contentSignature
-      ) return
-
-      const mapped = result.locatedIssues.flatMap<LocatedReviewPresentation>((issue) => {
-        const positionRange = liveContract.textRangeToPositionRange(issue.textRange)
-        if (positionRange.collapsed || positionRange.from === positionRange.to) return []
-        return [{ ...issue, positionRange: { from: positionRange.from, to: positionRange.to } }]
+      const result = await analyzeWithLegacyEngine(current.plainText)
+      const contract = positionContractRef.current
+      const located = result.issues.flatMap((issue) => {
+        if (!contract || issue.start == null || issue.end == null) return []
+        const mapped = contract.textRangeToEditorRange(issue.start, issue.end)
+        if (!mapped || !mapped.exact) return []
+        return [{ ...issue, from: mapped.from, to: mapped.to }]
       })
-
       setIssues(result.issues)
-      setLocatedIssues(mapped)
-      setReviewDecorations(mapped.map((issue) => ({
-        id: issue.id,
-        from: issue.positionRange.from,
-        to: issue.positionRange.to,
-        severity: issue.severity,
+      setLocatedIssues(located)
+      setReviewReading(current.id, located.map((issue) => ({
+        from: issue.from,
+        to: issue.to,
+        className: issue.severity === 'alta' ? 'review-high' : issue.severity === 'média' ? 'review-medium' : 'review-low',
       })))
-      setReviewNavigation(null)
-
-      if (!text.trim()) {
-        setReviewMessage('A página está vazia.')
-      } else if (result.issues.length || mapped.length) {
-        const observations = result.issues.length
-        const located = mapped.length
-        setReviewMessage(
-          `${observations} ${observations === 1 ? 'observação geral' : 'observações gerais'}; ${located} ${located === 1 ? 'trecho localizado' : 'trechos localizados'}.`,
-        )
-      } else {
-        setReviewMessage('Nenhuma observação relevante neste recorte.')
-      }
-    } catch (error) {
-      console.error('[Escrevaral] Revisão não concluída.', error)
+      setReviewMessage(result.message)
+    } catch {
       setIssues([])
       setLocatedIssues([])
-      setReviewDecorations([])
-      setReviewMessage('A revisão não pôde ser concluída agora.')
+      setReviewReading(current.id, [])
+      setReviewMessage('Não consegui concluir esta leitura. O manuscrito permaneceu intacto.')
     } finally {
-      if (token === analysisToken.current) setAnalyzing(false)
+      setAnalyzing(false)
     }
   }, [])
 
-  const navigateReviewIssue = useCallback((issue: LocatedReviewPresentation) => {
-    navigationSerial.current += 1
-    setReviewNavigation({
-      serial: navigationSerial.current,
-      issueId: issue.id,
-      from: issue.positionRange.from,
-      to: issue.positionRange.to,
-    })
+  const clearReviewReading = useCallback((message: string) => {
+    const current = draftRef.current
+    if (current) clearReviewReading(current.id)
+    setIssues([])
+    setLocatedIssues([])
+    setReviewNavigation(null)
+    setReviewMessage(message)
   }, [])
 
-  const exportDocument = useCallback((format: ExportFormat) => {
+  const navigateReviewIssue = useCallback((issue: ReviewIssue & { from: number; to: number }) => {
+    setReviewNavigation({ from: issue.from, to: issue.to, key: Date.now() })
+  }, [])
+
+  const exportDocument = useCallback((format: DocumentExportFormat) => {
     const current = draftRef.current
     if (!current) return
     downloadDocumentExport(current, format)
@@ -539,7 +478,7 @@ export default function App() {
             <div className="reg-field"><span className="field-label">Caderno</span><span className="field-value">ESCREVARAL</span></div>
             <div className="reg-field"><span className="field-label">Fundação</span><span className="field-value">TIPTAP / 01</span></div>
             <div className="reg-field"><span className="field-label">Página</span><span className="field-value">{pageNumber}</span></div>
-            <div className="reg-field"><span className="field-label">Última tinta</span><span className={`field-value save-${saveState.toLocaleLowerCase('pt-BR')}`} aria-live="polite">{saveState}</span></div>
+            <div className="reg-field save-field"><span className="field-label">Última tinta</span><span className={`field-value save-${saveState.toLocaleLowerCase('pt-BR')}`} aria-live="polite">{saveState}</span></div>
           </header>
 
           {conflict && (
