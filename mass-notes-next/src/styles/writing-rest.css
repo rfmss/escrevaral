@@ -57,13 +57,13 @@
     display: none;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:last-of-type {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:nth-of-type(4) {
     display: block;
     padding: 0;
     border: 0;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:last-of-type .field-label {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:nth-of-type(4) .field-label {
     display: none;
   }
 
@@ -229,7 +229,7 @@
 
   body.writing-rest.workshop-open .writing-workshop-toggle {
     left: auto;
-    right: 18px;
+    right: 64px;
     top: 12px;
     padding: 8px 10px;
     background: color-mix(in srgb, var(--paper) 88%, transparent);
