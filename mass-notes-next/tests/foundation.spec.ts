@@ -6,26 +6,45 @@ async function waitReady(page: import('@playwright/test').Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
+async function openWorkshop(page: import('@playwright/test').Page) {
+  const reveal = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+  if (await reveal.isVisible().catch(() => false)) await reveal.click()
+  await expect(page.locator('body')).toHaveClass(/workshop-open/)
+  await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
+}
+
 async function expectTitleFits(page: import('@playwright/test').Page) {
   const title = page.getByLabel('Título do documento')
   await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
 }
 
-test('preserva o look and feel editorial e inicia com Tiptap', async ({ page }) => {
+test('inicia pela escrita silenciosa e mantém a oficina convocável', async ({ page }) => {
   await waitReady(page)
+
+  await expect(page.locator('body')).toHaveClass(/writing-rest/)
+  await expect(page.locator('body')).not.toHaveClass(/workshop-open/)
+  await expect(page.locator('.ProseMirror')).toBeEditable()
+  await expect(page.locator('.sidebar')).toBeHidden()
+  await expect(page.locator('.rail')).toBeHidden()
+  await expect(page.locator('.editor-toolbar')).toBeHidden()
+  await expect(page.locator('.blueprint')).toBeHidden()
+  await expect(page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })).toBeVisible()
+  await expectTitleFits(page)
+
+  await openWorkshop(page)
   await expect(page.getByText('Oficina de escrita brasileira')).toBeVisible()
   await expect(page.locator('.brand h1')).toContainText('Escrevaral')
-  await expect(page.locator('.ProseMirror')).toBeEditable()
   await expect(page.locator('.rail')).toBeVisible()
-  await expectTitleFits(page)
+
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('ações ficam integradas ao rail e o logo oficial permanece restrito à marca', async ({ page }) => {
+test('ações permanecem na oficina e o logo oficial continua restrito à marca', async ({ page }) => {
   await waitReady(page)
 
   await expect(page.locator('.slash')).toBeHidden()
   await expect(page.locator('.impact-button')).toBeHidden()
+  await openWorkshop(page)
 
   const brand = page.locator('.brand')
   const logo = brand.locator('.brand-logo')
@@ -52,6 +71,7 @@ test('ações ficam integradas ao rail e o logo oficial permanece restrito à ma
 
 test('Enter após T1 cria parágrafo e a junção padrão permanece reversível', async ({ page }) => {
   await waitReady(page)
+  await openWorkshop(page)
   await page.keyboard.press('Control+N')
   await page.getByLabel('Título do documento').fill('Estrutura segura')
   await page.getByRole('button', { name: 'T1', exact: true }).click()
@@ -89,12 +109,13 @@ test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ c
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão da aba A')
 })
 
-test('a engine real de revisão é acessada pelo adaptador', async ({ page }) => {
+test('a engine real de revisão continua acessível quando a oficina é convocada', async ({ page }) => {
   await waitReady(page)
   const editor = page.locator('.ProseMirror')
   await editor.click()
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Ela entrou para dentro da casa. O coração acelerou, o coração acelerou.')
+  await openWorkshop(page)
   await page.getByRole('tab', { name: 'revisao', exact: true }).click()
   await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
   await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma|página está vazia/i, { timeout: 15_000 })
