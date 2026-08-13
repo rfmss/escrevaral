@@ -1,4 +1,4 @@
-import { expect, test, type Page } from './support/workshop-test'
+import { expect, test, type Page } from '@playwright/test'
 
 async function openWords(page: Page) {
   await page.goto('/')
