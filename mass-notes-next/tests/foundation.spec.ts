@@ -1,19 +1,19 @@
-import { expect, test } from '@playwright/test'
+import { expect, test } from 'playwright/test'
 
-async function waitReady(page: import('@playwright/test').Page) {
+async function waitReady(page: import('playwright/test').Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
-async function openWorkshop(page: import('@playwright/test').Page) {
+async function openWorkshop(page: import('playwright/test').Page) {
   const reveal = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
   if (await reveal.isVisible().catch(() => false)) await reveal.click()
   await expect(page.locator('body')).toHaveClass(/workshop-open/)
   await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
 }
 
-async function expectTitleFits(page: import('@playwright/test').Page) {
+async function expectTitleFits(page: import('playwright/test').Page) {
   const title = page.getByLabel('Título do documento')
   await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
 }
