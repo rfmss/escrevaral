@@ -3,6 +3,9 @@ import { test as base } from 'playwright/test'
 export * from 'playwright/test'
 
 type Page = import('playwright/test').Page
+type BrowserContext = import('playwright/test').BrowserContext
+
+const wrappedContexts = new WeakSet<BrowserContext>()
 
 async function openWorkshopAfterNavigation(page: Page) {
   const viewport = page.viewportSize()
@@ -58,9 +61,22 @@ function installWorkshopNavigationContract(page: Page) {
   }) as Page['goForward']
 }
 
+function installWorkshopContextContract(context: BrowserContext) {
+  if (wrappedContexts.has(context)) return
+  wrappedContexts.add(context)
+
+  const rawNewPage = context.newPage.bind(context)
+  context.newPage = (async () => {
+    const page = await rawNewPage()
+    installWorkshopNavigationContract(page)
+    return page
+  }) as BrowserContext['newPage']
+}
+
 export const test = base.extend({
   page: async ({ page }, use) => {
     installWorkshopNavigationContract(page)
+    installWorkshopContextContract(page.context())
     await use(page)
   },
 })
