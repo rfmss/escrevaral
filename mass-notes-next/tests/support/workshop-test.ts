@@ -1,8 +1,8 @@
-import { test as base } from '@playwright/test'
+import { test as base } from 'playwright/test'
 
-export * from '@playwright/test'
+export * from 'playwright/test'
 
-type Page = import('@playwright/test').Page
+type Page = import('playwright/test').Page
 
 async function openWorkshopAfterNavigation(page: Page) {
   const viewport = page.viewportSize()
