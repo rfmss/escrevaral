@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@playwright/test": ["tests/support/workshop-test.ts"]
+    }
+  }
+}
