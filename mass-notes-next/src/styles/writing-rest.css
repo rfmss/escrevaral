@@ -53,17 +53,21 @@
     pointer-events: none;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration .reg-field {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field {
     display: none;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration .reg-field:last-child {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:last-of-type {
     display: block;
     padding: 0;
     border: 0;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration .field-label {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration > .reg-field:last-of-type .field-label {
+    display: none;
+  }
+
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .registration .writing-dashboard-fields {
     display: none;
   }
 
