@@ -1,6 +1,7 @@
 import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { WritingDashboardBridge } from './components/WritingDashboardBridge'
+import { WritingRestChrome } from './components/WritingRestChrome'
 import { ExperienceShell } from './ExperienceShell'
 import './styles/app.css'
 import './styles/polish.css'
@@ -23,6 +24,7 @@ import './styles/pagination-controls.css'
 import './styles/m1-density.css'
 import './styles/theme-escrevaral-verniz-material.css'
 import './styles/brand-official.css'
+import './styles/writing-rest.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
@@ -66,5 +68,6 @@ createRoot(document.getElementById('root')!).render(
     <ExperienceShell />
     <ApplicationAccessibilityBridge />
     <WritingDashboardBridge />
+    <WritingRestChrome />
   </StrictMode>,
 )
