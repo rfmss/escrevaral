@@ -119,12 +119,13 @@
   }
 
   body.writing-rest:not(.workshop-open):not(.focus-mode) .paper {
-    width: min(720px, 100%);
-    min-height: 70vh;
+    width: min(720px, 100%) !important;
+    max-width: 720px !important;
+    min-height: 70vh !important;
     margin: 30vh auto 20vh;
     padding: 0 0 20vh;
     border: 0;
-    background: transparent;
+    background: transparent !important;
     box-shadow: none;
     animation: none;
     transform: none;
@@ -239,8 +240,9 @@
     opacity: .72;
   }
 
-  body.focus-mode .writing-workshop-toggle {
-    display: none;
+  body.focus-mode .writing-workshop-toggle,
+  body.experience-anatomy .writing-workshop-toggle {
+    display: none !important;
   }
 }
 
