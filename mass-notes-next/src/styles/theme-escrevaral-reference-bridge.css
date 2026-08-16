@@ -1,0 +1,10 @@
+/* Contratos técnicos preservados sem mudar a composição canônica enviada. */
+.sync { position: relative; }
+.sync-save {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
