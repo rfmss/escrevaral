@@ -116,8 +116,8 @@ function MassNotesEditorInstance({
     if (!activeParagraph) {
       const topLevel = host.children.item($from.index(0))
       activeParagraph = paragraphFromNode(topLevel)
-      if (!activeParagraph && $from.parent.type.name === 'paragraph') {
-        const nestedParagraphs = topLevel?.querySelectorAll('p') ?? []
+      if (!activeParagraph && $from.parent.type.name === 'paragraph' && topLevel) {
+        const nestedParagraphs = topLevel.querySelectorAll<HTMLParagraphElement>('p')
         if (nestedParagraphs.length === 1) activeParagraph = nestedParagraphs.item(0)
       }
     }
