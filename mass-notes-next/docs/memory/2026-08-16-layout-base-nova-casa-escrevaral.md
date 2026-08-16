@@ -29,6 +29,20 @@ Título, documentos, troca de documento e busca usam o estado real. `Ctrl/Cmd + 
 
 `WritingResearchBridge` resolve apenas a casca desktop: expõe o `RightRail` real, entra diretamente em `revisao`, preserva observações/trechos/`Ir ao trecho` e restaura o fechamento. Não cria engine nem fonte de dados nova.
 
+### 5 — Tags
+
+O `+` de **Tags** no painel de análise deixou de ser cenográfico. `WritingTagsBridge` abre o editor de metadados que já existia em `DocumentMetadataEditor`, sem criar outro armazenamento ou parser.
+
+O circuito reutiliza:
+
+- `draft.tags` como estado documental real;
+- `parseLibraryTags` para trim, deduplicação e limites;
+- máximo de 8 tags e 32 caracteres por tag;
+- `onTags`/`mutateDraft(..., 'metadata')` existentes;
+- o mesmo autosave e o mesmo controle de conflito do documento.
+
+No desktop, a casca mostra somente o recorte necessário do `RightRail`/`panel-pulso`, foca `Marcadores da página` e mantém o fechamento real. Ao salvar, as tags canônicas do painel de análise atualizam imediatamente e persistem após reload.
+
 **Notas continua deferido** porque ainda não há domínio dedicado de notas comprovado no código atual.
 
 ## Evidência do gate
@@ -37,11 +51,10 @@ Título, documentos, troca de documento e busca usam o estado real. `Ctrl/Cmd + 
 - Documento/busca/Metas — run `31977140397`: **14/14**;
 - Exportar — run `31977786808`: **15/15**;
 - Configurações — run `31978656658`: **16/16**;
-- Pesquisa — run `31979455640`, head `a7ce7c08b1ac6391400c7331c9f53491c7758013`: **17/17**, build, publicação e smoke público verdes.
+- Pesquisa — run `31979455640`, head `a7ce7c08b1ac6391400c7331c9f53491c7758013`: **17/17**;
+- Tags — run `31979828644`, head `b768f3e2f4158a7073b2bd153618d19283650cac`: **18/18**, build, publicação e smoke público verdes.
 
-A primeira tentativa de Pesquisa (`31979310542`) falhou somente porque o botão legado de fechamento estava oculto no desktop; abertura, aba Revisão e execução real da engine já estavam corretas. O fechamento foi corrigido antes do gate final.
-
-Também permanecem verdes geometria canônica, Tiptap, colagem estruturada, recuperação, conflitos, drawers móveis e foco automático.
+A banca de Tags prova abertura do editor real, foco do campo, salvamento, atualização do painel canônico e persistência após recarregar. Também permanecem verdes geometria canônica, Tiptap, colagem estruturada, recuperação, conflitos, drawers móveis, Pesquisa e foco automático.
 
 ## Dívidas registradas, não concorrentes
 
@@ -51,6 +64,4 @@ Também permanecem verdes geometria canônica, Tiptap, colagem estruturada, recu
 
 ## Foco atual e próximo gate
 
-A única frente ativa é **o Escrevaral atual na nova casa aprovada**. Continuar conectando um comportamento visível por vez, somente quando houver destino real.
-
-Próximo candidato limpo identificado: o `+` de **Tags** no painel de análise, porque `draft.tags`, parsing, autosave e conflito já existem.
+A única frente ativa é **o Escrevaral atual na nova casa aprovada**. Continuar conectando um comportamento visível por vez, somente quando houver destino real. Nenhum controle deve ganhar funcionalidade inventada apenas para preencher a interface.
