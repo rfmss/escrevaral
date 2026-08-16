@@ -113,7 +113,25 @@ A nova superfície `WritingConfigBridge` intercepta apenas a abertura do control
 
 A implementação não cria novo estado de domínio. Para o tema, o bridge deixa o handler React original executar somente após uma escolha explícita dentro do painel; para os demais destinos, aciona os controles reais já montados na casa.
 
-A superfície visual fica em `theme-escrevaral-paper-home-config.css`. `Notas` e `Pesquisa` permanecem fora desta tranche porque ainda não existe um domínio próprio equivalente que justifique promover esses botões a funcionalidades novas.
+A superfície visual fica em `theme-escrevaral-paper-home-config.css`.
+
+## Circuito funcional 4 — Pesquisa
+
+O botão **Pesquisa** já possuía um destino de domínio real no `App`: abrir o rail de ferramentas e executar `runReview()`. A revisão usa o contrato estrutural vivo do Tiptap, chama `reviewTextDetailed`, mapeia observações localizadas para posições do ProseMirror e projeta marcas/navegação sem alterar o manuscrito.
+
+O problema era de casca: no desktop da nova casa, o `RightRail` real continuava dentro de `.reference-mobile-legacy`, que permanecia oculto acima do breakpoint móvel. Assim, a engine podia rodar sem que a pessoa visse o resultado.
+
+`WritingResearchBridge` corrige somente essa integração:
+
+- preserva o handler React existente que abre o rail e chama a revisão real;
+- não cria nova engine, novo formato de issue ou nova fonte de dados;
+- enquanto Pesquisa está aberta no desktop, expõe o `RightRail` real como painel da casa canônica;
+- seleciona diretamente a aba existente `revisao`;
+- mantém as observações gerais, trechos localizados, marcas no texto e navegação `Ir ao trecho` já existentes;
+- restaura o controle real de fechamento do rail, que a folha legada escondia no desktop;
+- ao fechar, remove o estado visual transitório da casca.
+
+A superfície desktop fica em `theme-escrevaral-paper-home-research.css`. **Notas continua deferido**: a inspeção atual não encontrou um domínio dedicado de notas que justifique inventar comportamento para o botão.
 
 ## Evidência do gate
 
@@ -125,6 +143,8 @@ Após o circuito de Exportar, o workflow `Escrevaral Paper Home Preview`, run `3
 
 Após o circuito de Configurações, o workflow `Escrevaral Paper Home Preview`, run `31978656658`, no head `15603540df32ea4ffe48c4c6e301f1cdd39fee1e`, fechou **16/16 testes verdes** e publicou novamente a preview com smoke público verde.
 
+Após o circuito de Pesquisa, o workflow `Escrevaral Paper Home Preview`, run `31979455640`, no head `a7ce7c08b1ac6391400c7331c9f53491c7758013`, fechou **17/17 testes verdes**; build, publicação e smoke público também ficaram verdes. A primeira tentativa desse gate (`31979310542`) já provava abertura, seleção da revisão e execução da engine, mas falhou apenas porque o controle legado de fechamento ainda estava oculto no desktop; isso foi corrigido antes do gate final.
+
 A banca passou a provar explicitamente:
 
 - `Metas abre a preferência real e sincroniza o rodapé`;
@@ -134,7 +154,10 @@ A banca passou a provar explicitamente:
 - os três formatos usam filename correto e contêm o texto vivo recém-editado;
 - `Config abre destinos reais sem alternar o tema por acidente`;
 - abrir Config mantém o tema atual, e somente a escolha explícita alterna Papel/Noite;
-- Concentração dentro de Config aciona o foco real e `Escape` continua devolvendo a casa.
+- Concentração dentro de Config aciona o foco real e `Escape` continua devolvendo a casa;
+- `Pesquisa abre a revisão local real e entra diretamente no recorte de revisão`;
+- o estado de revisão deixa `Aguardando uma leitura.` após a execução real da engine;
+- o painel de Pesquisa pode ser fechado novamente na casa desktop.
 
 Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, foco automático, build TypeScript/Vite, publicação da preview e smoke público.
 
@@ -161,4 +184,4 @@ O objetivo imediato é continuar consolidando essa experiência real, preservand
 
 Continuar a nova casa a partir do estado validado, conectando ou refinando **um comportamento visível por vez** e somente quando houver destino real no produto.
 
-Antes de implementar o próximo controle, verificar primeiro se seu destino já existe no código e reutilizá-lo. Nenhum botão cenográfico deve ser promovido a funcionalidade inventada apenas para preencher a interface.
+Antes de implementar o próximo controle, verificar primeiro se seu destino já existe no código e reutilizá-lo. O próximo candidato limpo já identificado é o `+` de **Tags** no painel de análise, porque `draft.tags`, parsing, autosave e conflito já existem. Nenhum botão cenográfico deve ser promovido a funcionalidade inventada apenas para preencher a interface.
