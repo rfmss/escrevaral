@@ -8,6 +8,26 @@
 }
 
 @media (min-width: 1100px) {
+  /* A referência usa uma folha inset: 12px à esquerda, 20px à direita,
+     10px no topo e 10px na base. Regras legadas não podem expandi-la. */
+  .experience-view--editor .app-shell {
+    min-height: 0 !important;
+    height: calc(100vh - 20px) !important;
+    max-height: calc(100vh - 20px) !important;
+  }
+
+  /* O lockup legado desliga pseudo-elementos com !important. Nesta casa,
+     o wordmark tipográfico da referência é deliberadamente a marca visível. */
+  .experience-view--editor .brand::before {
+    content: "ESCREVARAL" !important;
+    display: block !important;
+  }
+
+  .experience-view--editor .brand::after {
+    content: "ESCRITA COM INTENÇÃO" !important;
+    display: block !important;
+  }
+
   /* A referência mantém a faixa de formatação em 80px mesmo em desktop baixo. */
   .experience-view--editor .editor-toolbar-slot,
   .experience-view--editor .editor-toolbar,
