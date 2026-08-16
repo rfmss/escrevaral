@@ -1,23 +1,14 @@
 import { useEffect } from 'react'
 
 const WRITING_INPUT = /^(insert|delete|history)/
-
-function asElement(node: Node | null): Element | null {
-  if (!node) return null
-  return node instanceof Element ? node : node.parentElement
-}
+const SYNC_FOCUS_LINE_EVENT = 'escrevaral:sync-focus-line'
 
 function clearFocusLine() {
   document.querySelectorAll('.ProseMirror p.focus-line').forEach((paragraph) => paragraph.classList.remove('focus-line'))
 }
 
-function setFocusLine() {
-  const selection = window.getSelection()
-  const editor = asElement(selection?.anchorNode ?? null)?.closest<HTMLElement>('.ProseMirror')
-  if (!editor) return
-
-  const paragraph = asElement(selection?.anchorNode ?? null)?.closest('p')
-  editor.querySelectorAll('p').forEach((item) => item.classList.toggle('focus-line', item === paragraph))
+function syncFocusLine() {
+  document.dispatchEvent(new CustomEvent(SYNC_FOCUS_LINE_EVENT))
 }
 
 function focusToggleButton(): HTMLButtonElement | null {
@@ -46,17 +37,17 @@ export function WritingAutoFocusBridge() {
       if (!WRITING_INPUT.test(inputType)) return
 
       enterFocusMode()
-      window.requestAnimationFrame(setFocusLine)
+      window.requestAnimationFrame(syncFocusLine)
     }
 
     const onKeyUp = (event: KeyboardEvent) => {
       if (event.key === 'Escape' || !document.body.classList.contains('focus-mode')) return
       const target = event.target
-      if (target instanceof Element && target.closest('.ProseMirror')) setFocusLine()
+      if (target instanceof Element && target.closest('.ProseMirror')) syncFocusLine()
     }
 
     const onSelectionChange = () => {
-      if (document.body.classList.contains('focus-mode')) setFocusLine()
+      if (document.body.classList.contains('focus-mode')) syncFocusLine()
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -67,7 +58,7 @@ export function WritingAutoFocusBridge() {
     }
 
     const bodyObserver = new MutationObserver(() => {
-      if (document.body.classList.contains('focus-mode')) window.requestAnimationFrame(setFocusLine)
+      if (document.body.classList.contains('focus-mode')) window.requestAnimationFrame(syncFocusLine)
       else clearFocusLine()
     })
 
