@@ -31,6 +31,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
+      - name: Python para preparar a Anatomia
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar runtime da Anatomia
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/build-anatomia-runtime.py
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
+
       - name: Node.js
         uses: actions/setup-node@v4.4.0
         with:
