@@ -1,0 +1,98 @@
+/* Passada de integridade: nenhum controle visível deve sugerir uma capacidade inexistente. */
+
+button[data-integrity-static="true"] {
+  cursor: default;
+  opacity: 1;
+}
+
+button[data-integrity-static="true"] .chevron {
+  display: none;
+}
+
+.left-rail .current-project .project-row {
+  padding-right: 22px;
+}
+
+.left-rail .research {
+  height: 92px;
+}
+
+.left-rail .research li.reference-integrity-research-copy {
+  position: relative;
+  height: auto;
+  min-height: 34px;
+  padding-top: 10px;
+  font-size: 0;
+  line-height: 1.35;
+}
+
+.left-rail .research li.reference-integrity-research-copy > * {
+  display: none;
+}
+
+.left-rail .research li.reference-integrity-research-copy::after {
+  content: "Use Pesquisa para executar a revisão local do documento ativo.";
+  display: block;
+  max-width: 180px;
+  font: 11px/1.45 Literata, Georgia, serif;
+  color: var(--ink);
+}
+
+.left-rail .quick-box[hidden],
+.analysis-panel .distribution-section[hidden],
+.analysis-panel .versions a[hidden],
+.statusbar .language button[hidden] {
+  display: none !important;
+}
+
+body.reference-tags-empty .analysis-panel .tags > div:last-child > button {
+  display: none;
+}
+
+body.reference-tags-empty .analysis-panel .tags::after {
+  content: "Nenhuma tag";
+  display: block;
+  margin-top: 8px;
+  font: 11px/1.4 Literata, Georgia, serif;
+  color: rgba(17,18,15,.58);
+}
+
+.analysis-panel .tags > div:last-child > button {
+  cursor: pointer;
+}
+
+.analysis-panel .versions .version:first-of-type b {
+  text-transform: lowercase;
+}
+
+body.reference-analysis-collapsed .paper-shell {
+  grid-template-columns: 280px minmax(600px,1fr) 52px;
+}
+
+body.reference-analysis-collapsed .analysis-panel {
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow: hidden;
+}
+
+body.reference-analysis-collapsed .analysis-panel > section {
+  display: none !important;
+}
+
+body.reference-analysis-collapsed .analysis-panel .analysis-head {
+  justify-content: center;
+}
+
+body.reference-analysis-collapsed .analysis-panel .analysis-head .eyebrow {
+  display: none;
+}
+
+body.reference-analysis-collapsed .analysis-panel .analysis-head .chevron {
+  transform: rotate(135deg) translate(-1px,-1px);
+}
+
+@media (max-width: 1450px) and (min-width: 1100px) {
+  body.reference-analysis-collapsed .paper-shell {
+    grid-template-columns: 250px minmax(560px,1fr) 52px;
+  }
+}
