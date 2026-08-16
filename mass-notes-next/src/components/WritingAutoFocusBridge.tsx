@@ -15,6 +15,7 @@ function focusToggleButton(): HTMLButtonElement | null {
   return document.querySelector<HTMLButtonElement>('.paper-shell .statusbar .play')
 }
 
+/* A referência entra no foco total na primeira ação real de escrita. */
 function enterFocusMode() {
   if (document.body.classList.contains('focus-mode')) {
     publishFocusLineMode(true)
@@ -23,6 +24,7 @@ function enterFocusMode() {
   focusToggleButton()?.click()
 }
 
+/* Escape devolve a casa e mantém o cursor no manuscrito. */
 function leaveFocusMode() {
   if (!document.body.classList.contains('focus-mode')) return
   publishFocusLineMode(false)
