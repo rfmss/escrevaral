@@ -104,7 +104,7 @@ Em 16/08/2026 a banca da nova casa fechou verde primeiro com 12/12 testes no gat
 
 Após o primeiro circuito funcional, o workflow `Escrevaral Paper Home Preview`, run `31977140397`, no head `42a8e2916b8e98381067a49c70ef502e815e1c4d`, fechou **14/14 testes verdes**.
 
-Após o circuito de Exportar, o workflow `Escrevaral Paper Home Preview`, run `31977786808`, no head `2722caf4aa48796d79e242bdf9e8cbd4f9d0db22`, fechou **15/15 testes verdes**.
+Após o circuito de Exportar, o workflow `Escrevaral Paper Home Preview`, run `31977786808`, no head `2722caf4aa48796d79e242bdf9e8cbd4f9d0db22`, fechou **15/15 testes verdes** e publicou a preview com smoke público verde.
 
 A banca passou a provar explicitamente:
 
