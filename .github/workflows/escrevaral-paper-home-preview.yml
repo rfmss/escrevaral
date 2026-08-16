@@ -64,6 +64,7 @@ jobs:
         run: >-
           npx playwright test --project=chromium
           tests/reference-home.spec.ts
+          tests/reference-actions.spec.ts
           tests/gate2.spec.ts
 
       - name: Anexar prova visual à preview
