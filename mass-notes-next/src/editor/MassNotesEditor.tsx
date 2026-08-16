@@ -7,8 +7,6 @@ import { publishLexicalSelection } from './lexicalSelectionBridge'
 import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
 
-const SYNC_FOCUS_LINE_EVENT = 'escrevaral:sync-focus-line'
-
 type EditorSnapshot = {
   content: JSONContent
   plainText: string
@@ -80,62 +78,6 @@ function MassNotesEditorInstance({
     })
   }
 
-  const paragraphFromNode = (node: Node | null): HTMLParagraphElement | null => {
-    if (!node) return null
-    const element = node instanceof Element ? node : node.parentElement
-    if (element instanceof HTMLParagraphElement) return element
-    return element?.closest<HTMLParagraphElement>('p') ?? null
-  }
-
-  const syncFocusLine = (current: Editor) => {
-    const host = current.view.dom as HTMLElement
-    const paragraphs = host.querySelectorAll('p')
-    if (!document.body.classList.contains('focus-mode')) {
-      paragraphs.forEach((paragraph) => paragraph.classList.remove('focus-line'))
-      return
-    }
-
-    const { from, $from } = current.state.selection
-    let activeParagraph: HTMLParagraphElement | null = null
-
-    for (let depth = $from.depth; depth > 0 && !activeParagraph; depth -= 1) {
-      activeParagraph = paragraphFromNode(current.view.nodeDOM($from.before(depth)))
-    }
-
-    if (!activeParagraph) {
-      const domPosition = current.view.domAtPos(from, -1)
-      const siblings = domPosition.node.childNodes
-      const candidates: Array<Node | null> = [
-        domPosition.node,
-        siblings.item(domPosition.offset),
-        siblings.item(Math.max(0, domPosition.offset - 1)),
-      ]
-      activeParagraph = candidates.map(paragraphFromNode).find(Boolean) ?? null
-    }
-
-    if (!activeParagraph) {
-      const topLevel = host.children.item($from.index(0))
-      activeParagraph = paragraphFromNode(topLevel)
-      if (!activeParagraph && $from.parent.type.name === 'paragraph' && topLevel) {
-        const nestedParagraphs = topLevel.querySelectorAll<HTMLParagraphElement>('p')
-        if (nestedParagraphs.length === 1) activeParagraph = nestedParagraphs.item(0)
-      }
-    }
-
-    if (!activeParagraph) {
-      try {
-        const coords = current.view.coordsAtPos(from)
-        const point = document.elementFromPoint((coords.left + coords.right) / 2, (coords.top + coords.bottom) / 2)
-        const paragraph = point?.closest<HTMLParagraphElement>('p') ?? null
-        if (paragraph && host.contains(paragraph)) activeParagraph = paragraph
-      } catch {
-        activeParagraph = null
-      }
-    }
-
-    paragraphs.forEach((paragraph) => paragraph.classList.toggle('focus-line', paragraph === activeParagraph))
-  }
-
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -152,26 +94,16 @@ function MassNotesEditorInstance({
       publishSnapshot(current)
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
-      syncFocusLine(current)
     },
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
-      syncFocusLine(current)
       onChange(publishSnapshot(current))
     },
     onSelectionUpdate: ({ editor: current }) => {
       publishCurrentLexicalSelection(current)
-      syncFocusLine(current)
     },
   })
-
-  useEffect(() => {
-    if (!editor) return
-    const sync = () => syncFocusLine(editor)
-    document.addEventListener(SYNC_FOCUS_LINE_EVENT, sync)
-    return () => document.removeEventListener(SYNC_FOCUS_LINE_EVENT, sync)
-  }, [editor])
 
   useEffect(() => {
     if (!editor) return
