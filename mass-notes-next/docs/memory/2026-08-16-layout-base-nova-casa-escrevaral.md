@@ -54,11 +54,41 @@ A responsabilidade fica separada:
 - o **Tiptap/ProseMirror** conhece a seleção real e projeta a decoração transitória do parágrafo ativo;
 - o **documento** permanece limpo, sem estado visual persistido no texto.
 
+## Circuito funcional 1 — Documento, busca e Metas
+
+A inspeção do código real mostrou que o primeiro circuito já estava parcialmente conectado antes desta rodada:
+
+- o título visível edita o `draft` real;
+- os documentos do rail esquerdo vêm do repositório real;
+- selecionar outro documento preserva o draft atual antes da troca;
+- a busca canônica filtra os documentos reais por título e texto;
+- `Ctrl/Cmd + K` leva o foco à busca da casa;
+- a toolbar da referência já opera sobre o Tiptap real.
+
+Em 16/08/2026 o botão **Metas**, que ainda era cenográfico, recebeu destino real sem criar novo subsistema:
+
+- a meta diária usa uma única preferência local compartilhada pela sessão de escrita;
+- o valor padrão da nova casa é `1.200` palavras;
+- clicar em **Metas** abre um painel de papel acessível para alterar a meta;
+- a alteração atualiza imediatamente número, barra e porcentagem de `META DIÁRIA` no rodapé;
+- a preferência persiste somente no navegador e reaparece após recarregar;
+- o painel pode ser fechado por controle explícito, overlay ou `Escape`;
+- nenhuma informação de meta entra no manuscrito ou no IndexedDB documental.
+
+O contrato compartilhado fica em `src/writing/writingGoal.ts`; a superfície da casa é conectada por `WritingGoalsBridge`, preservando a separação entre preferência de interface e documento autoral.
+
 ## Evidência do gate
 
-Em 16/08/2026 a banca da nova casa fechou verde com 12/12 testes do gate, incluindo explicitamente `digitação entra no foco total e Escape devolve a casa`.
+Em 16/08/2026 a banca da nova casa fechou verde primeiro com 12/12 testes no gate do foco automático.
 
-Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, build TypeScript/Vite, publicação da preview e smoke público.
+Após o primeiro circuito funcional, o workflow `Escrevaral Paper Home Preview`, run `31977140397`, no head `42a8e2916b8e98381067a49c70ef502e815e1c4d`, fechou **14/14 testes verdes**.
+
+Além dos contratos anteriores, a banca passou a provar explicitamente:
+
+- `Metas abre a preferência real e sincroniza o rodapé`;
+- `Ctrl+K leva à busca real e a busca continua filtrando documentos reais`.
+
+Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, foco automático, build TypeScript/Vite, publicação da preview e smoke público.
 
 ## Higiene de branches — registrada e deferida
 
@@ -81,6 +111,6 @@ O objetivo imediato é continuar consolidando essa experiência real, preservand
 
 ## Próximo gate
 
-Continuar a nova casa a partir do estado validado, conectando ou refinando um comportamento por vez e somente quando houver destino real no produto.
+Continuar a nova casa a partir do estado validado, conectando ou refinando **um comportamento visível por vez** e somente quando houver destino real no produto.
 
-Nenhum botão cenográfico deve ser promovido a funcionalidade sem um destino real.
+Antes de implementar o próximo controle, verificar primeiro se seu destino já existe no código e reutilizá-lo. Nenhum botão cenográfico deve ser promovido a funcionalidade inventada apenas para preencher a interface.
