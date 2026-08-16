@@ -2,6 +2,8 @@ import { Extension } from '@tiptap/core'
 import { Plugin, PluginKey, type EditorState } from '@tiptap/pm/state'
 import { Decoration, DecorationSet } from '@tiptap/pm/view'
 
+export const FOCUS_LINE_MODE_EVENT = 'escrevaral:focus-line-mode'
+
 const focusLineKey = new PluginKey<boolean>('escrevaralFocusLine')
 
 declare module '@tiptap/core' {
@@ -52,6 +54,16 @@ export const FocusLineDecoration = Extension.create({
         },
         props: {
           decorations: (state) => focusLineKey.getState(state) ? activeParagraphDecoration(state) : DecorationSet.empty,
+        },
+        view: (view) => {
+          const sync = (event: Event) => {
+            const enabled = (event as CustomEvent<{ enabled?: boolean }>).detail?.enabled === true
+            view.dispatch(view.state.tr.setMeta(focusLineKey, enabled))
+          }
+          document.addEventListener(FOCUS_LINE_MODE_EVENT, sync)
+          return {
+            destroy: () => document.removeEventListener(FOCUS_LINE_MODE_EVENT, sync),
+          }
         },
       }),
     ]
