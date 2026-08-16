@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { FOCUS_LINE_MODE_EVENT } from '../editor/focusLineDecoration'
 
 const WRITING_INPUT = /^(insert|delete|history)/
 
@@ -6,24 +7,8 @@ function editorElement(): HTMLElement | null {
   return document.querySelector<HTMLElement>('.ProseMirror')
 }
 
-function clearFocusLine() {
-  editorElement()?.querySelectorAll('p.focus-line').forEach((paragraph) => paragraph.classList.remove('focus-line'))
-}
-
-function setFocusLine() {
-  const editor = editorElement()
-  if (!editor) return
-
-  const selection = window.getSelection()
-  const node = selection?.anchorNode ?? null
-  const element = node instanceof Element ? node : node?.parentElement ?? null
-  const paragraph = element?.closest<HTMLParagraphElement>('p') ?? null
-
-  editor.querySelectorAll('p').forEach((item) => item.classList.toggle('focus-line', item === paragraph))
-}
-
-function scheduleFocusLine() {
-  window.requestAnimationFrame(() => window.requestAnimationFrame(setFocusLine))
+function publishFocusLineMode(enabled: boolean) {
+  document.dispatchEvent(new CustomEvent(FOCUS_LINE_MODE_EVENT, { detail: { enabled } }))
 }
 
 function focusToggleButton(): HTMLButtonElement | null {
@@ -31,14 +16,17 @@ function focusToggleButton(): HTMLButtonElement | null {
 }
 
 function enterFocusMode() {
-  if (!document.body.classList.contains('focus-mode')) focusToggleButton()?.click()
-  scheduleFocusLine()
+  if (document.body.classList.contains('focus-mode')) {
+    publishFocusLineMode(true)
+    return
+  }
+  focusToggleButton()?.click()
 }
 
 function leaveFocusMode() {
   if (!document.body.classList.contains('focus-mode')) return
+  publishFocusLineMode(false)
   focusToggleButton()?.click()
-  clearFocusLine()
   window.requestAnimationFrame(() => editorElement()?.focus())
 }
 
@@ -54,14 +42,6 @@ export function WritingAutoFocusBridge() {
       enterFocusMode()
     }
 
-    const onKeyUp = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape' && document.body.classList.contains('focus-mode')) setFocusLine()
-    }
-
-    const onSelectionChange = () => {
-      if (document.body.classList.contains('focus-mode')) setFocusLine()
-    }
-
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape' || !document.body.classList.contains('focus-mode')) return
       event.preventDefault()
@@ -70,23 +50,18 @@ export function WritingAutoFocusBridge() {
     }
 
     const bodyObserver = new MutationObserver(() => {
-      if (document.body.classList.contains('focus-mode')) scheduleFocusLine()
-      else clearFocusLine()
+      publishFocusLineMode(document.body.classList.contains('focus-mode'))
     })
 
     document.addEventListener('input', onInput)
-    document.addEventListener('keyup', onKeyUp)
-    document.addEventListener('selectionchange', onSelectionChange)
     document.addEventListener('keydown', onKeyDown, true)
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
 
     return () => {
       document.removeEventListener('input', onInput)
-      document.removeEventListener('keyup', onKeyUp)
-      document.removeEventListener('selectionchange', onSelectionChange)
       document.removeEventListener('keydown', onKeyDown, true)
       bodyObserver.disconnect()
-      clearFocusLine()
+      publishFocusLineMode(false)
     }
   }, [])
 
