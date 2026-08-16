@@ -99,6 +99,22 @@ O bridge de exportação:
 
 A superfície fica em `WritingExportBridge` e `theme-escrevaral-paper-home-export.css`. O exportador de domínio continua sendo a única fonte de geração de arquivos.
 
+## Circuito funcional 3 — Configurações
+
+O botão **Config.** deixou de alternar o tema imediatamente ao primeiro clique. Esse comportamento era funcional, mas semanticamente pobre e podia produzir mudança visual acidental.
+
+A nova superfície `WritingConfigBridge` intercepta apenas a abertura do controle canônico e expõe destinos que já existiam na aplicação:
+
+- **Aparência**: alternar entre Papel e Modo noite usando o mesmo estado e a mesma persistência de tema já existentes no `App`;
+- **Concentração**: acionar o controle real de foco da barra inferior;
+- **Tela cheia**: acionar o controle real de fullscreen da barra inferior;
+- **Anatomia do Livro**: acionar o mesmo comando real já exposto no rodapé;
+- **Idioma**: mostrar `Português (BR)` como locale de produto, sem inventar seletor de idioma.
+
+A implementação não cria novo estado de domínio. Para o tema, o bridge deixa o handler React original executar somente após uma escolha explícita dentro do painel; para os demais destinos, aciona os controles reais já montados na casa.
+
+A superfície visual fica em `theme-escrevaral-paper-home-config.css`. `Notas` e `Pesquisa` permanecem fora desta tranche porque ainda não existe um domínio próprio equivalente que justifique promover esses botões a funcionalidades novas.
+
 ## Evidência do gate
 
 Em 16/08/2026 a banca da nova casa fechou verde primeiro com 12/12 testes no gate do foco automático.
@@ -107,13 +123,18 @@ Após o primeiro circuito funcional, o workflow `Escrevaral Paper Home Preview`,
 
 Após o circuito de Exportar, o workflow `Escrevaral Paper Home Preview`, run `31977786808`, no head `2722caf4aa48796d79e242bdf9e8cbd4f9d0db22`, fechou **15/15 testes verdes** e publicou a preview com smoke público verde.
 
+Após o circuito de Configurações, o workflow `Escrevaral Paper Home Preview`, run `31978656658`, no head `15603540df32ea4ffe48c4c6e301f1cdd39fee1e`, fechou **16/16 testes verdes** e publicou novamente a preview com smoke público verde.
+
 A banca passou a provar explicitamente:
 
 - `Metas abre a preferência real e sincroniza o rodapé`;
 - `Ctrl+K leva à busca real e a busca continua filtrando documentos reais`;
 - `Exportar abre escolhas reais e gera TXT, Markdown e HTML a partir do texto vivo`;
 - o clique inicial em Exportar não gera download acidental;
-- os três formatos usam filename correto e contêm o texto vivo recém-editado.
+- os três formatos usam filename correto e contêm o texto vivo recém-editado;
+- `Config abre destinos reais sem alternar o tema por acidente`;
+- abrir Config mantém o tema atual, e somente a escolha explícita alterna Papel/Noite;
+- Concentração dentro de Config aciona o foco real e `Escape` continua devolvendo a casa.
 
 Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, foco automático, build TypeScript/Vite, publicação da preview e smoke público.
 
