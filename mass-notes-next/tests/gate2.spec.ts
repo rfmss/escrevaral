@@ -141,9 +141,11 @@ test('conflito preserva a versão local como nova página', async ({ context, pa
   await expect(second.getByLabel('Título do documento')).toHaveValue('Versão local B — conflito')
 
   await page.reload()
-  await expect(page.getByText('Versão local B — conflito', { exact: true })).toBeVisible()
-  await expect(page.getByText('Versão persistida A', { exact: true })).toBeVisible()
-  await page.getByText('Versão persistida A', { exact: true }).click()
+  const conflictCopy = page.locator('.left-rail .chapter').filter({ hasText: 'Versão local B — conflito' })
+  const persistedRow = page.locator('.left-rail .chapter').filter({ hasText: 'Versão persistida A' })
+  await expect(conflictCopy).toBeVisible()
+  await expect(persistedRow).toBeVisible()
+  await persistedRow.click()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão persistida A')
 })
 
