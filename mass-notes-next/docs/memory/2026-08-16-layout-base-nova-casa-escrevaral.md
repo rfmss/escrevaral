@@ -16,19 +16,15 @@ Operações reais de escrita (`insert*`, `delete*`, `history*`) entram automatic
 ## Circuitos funcionais ligados
 
 ### 1 — Documento, busca e Metas
-
 Título, documentos, troca de documento e busca usam o estado real. `Ctrl/Cmd + K` foca a busca canônica. A toolbar opera sobre o Tiptap real. **Metas** usa preferência local compartilhada, padrão `1.200` palavras, atualiza o rodapé e não contamina o documento.
 
 ### 2 — Exportar
-
 **Exportar** abre escolha explícita e reutiliza `src/export/documentExport.ts` para TXT, Markdown e HTML. Usa o snapshot vivo do Tiptap e o título atual; geração local, sem segundo pipeline.
 
 ### 3 — Configurações
-
 **Config.** abre painel real sem trocar tema por acidente. Expõe Papel/Noite, Concentração, Tela cheia, Anatomia do Livro e `Português (BR)`, reaproveitando estados/controles existentes.
 
 ### 4 — Pesquisa
-
 **Pesquisa** reutiliza o destino real já presente no `App`: `setRailOpen(true)` + `runReview()`. A revisão usa o contrato estrutural vivo do Tiptap, `reviewTextDetailed`, mapeamento para posições ProseMirror, marcas e navegação.
 
 `WritingResearchBridge` resolve apenas a casca desktop: expõe o `RightRail` real, entra diretamente em `revisao`, preserva observações/trechos/`Ir ao trecho` e restaura o fechamento. Não cria engine nem fonte de dados nova.
