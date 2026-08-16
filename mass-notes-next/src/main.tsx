@@ -2,6 +2,7 @@ import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { WritingAutoFocusBridge } from './components/WritingAutoFocusBridge'
 import { WritingDashboardBridge } from './components/WritingDashboardBridge'
+import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
 import { ExperienceShell } from './ExperienceShell'
 import './styles/app.css'
@@ -32,6 +33,7 @@ import './styles/theme-escrevaral-paper-home-tools.css'
 import './styles/theme-escrevaral-paper-home-states.css'
 import './styles/theme-escrevaral-reference.css'
 import './styles/theme-escrevaral-reference-bridge.css'
+import './styles/theme-escrevaral-paper-home-goals.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
@@ -76,6 +78,7 @@ createRoot(document.getElementById('root')!).render(
     <ApplicationAccessibilityBridge />
     <WritingAutoFocusBridge />
     <WritingDashboardBridge />
+    <WritingGoalsBridge />
     <WritingRestChrome />
   </StrictMode>,
 )
