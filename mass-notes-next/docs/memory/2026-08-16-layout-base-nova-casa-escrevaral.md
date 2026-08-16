@@ -7,21 +7,15 @@
 
 ## Decisão
 
-O layout de papel técnico enviado em 16/08/2026 passa a ser a casa visual de referência do Escrevaral.
+O layout de papel técnico enviado em 16/08/2026 é a casa visual de referência do Escrevaral. Não cria uma segunda aplicação: envolve a fundação React/Tiptap existente e preserva documento estruturado, IndexedDB, autosave, recuperação, conflitos entre abas, snapshots/engines/adapters e português brasileiro como locale de produto.
 
-A decisão não cria uma segunda aplicação. A nova casa envolve a fundação já existente em React/Tiptap e preserva documento estruturado, IndexedDB, autosave, recuperação, conflitos entre abas, snapshots/engines/adapters e português brasileiro como locale de produto.
+O Cofre continua separado e portátil. Nenhuma regra linguística migra para CSS, HTML ou componentes de interface.
 
-O Cofre continua uma camada separada e portátil. Nenhuma regra linguística deve migrar para CSS, HTML ou componentes de interface.
+## Casa e foco automático
 
-## Tranche 1 — casa visual
+A casa canônica usa o layout aprovado como shell real. Operações de escrita (`insert*`, `delete*`, `history*`) entram automaticamente em foco; topbar, rails, toolbar e statusbar saem da superfície; o parágrafo do cursor fica em primeiro plano; `Escape` devolve a casa. A linha ativa é uma Decoration nativa do ProseMirror, sem estado visual persistido no manuscrito.
 
-A casa canônica usa o layout aprovado como shell real, mantendo editor e documento existentes como fonte de comportamento. Breakpoints móveis existentes permanecem até rodada própria; nenhum controle é inventado só porque aparece no mockup.
-
-A fidelidade inicial manteve a importação tipográfica presente no CSS de referência. O fechamento definitivo da promessa offline ainda exige empacotar/localizar essas fontes ou aprovar equivalentes locais; isso é uma dívida separada da conexão funcional dos controles.
-
-## Contrato de escrita — foco automático
-
-Operações reais de escrita (`insert*`, `delete*`, `history*`) entram automaticamente em foco. Topbar, rails, toolbar e statusbar saem da superfície; o parágrafo do cursor fica em primeiro plano; `Escape` devolve a casa. A linha ativa é projetada por Decoration nativa do ProseMirror, sem gravar estado visual no manuscrito.
+A fidelidade inicial ainda carrega a importação tipográfica remota da referência. O fechamento definitivo da promessa offline exige empacotar/localizar essas fontes ou aprovar equivalentes locais; essa dívida é separada da conexão funcional dos controles.
 
 ## Circuito funcional 1 — Documento, busca e Metas
 
@@ -31,7 +25,7 @@ Operações reais de escrita (`insert*`, `delete*`, `history*`) entram automatic
 - busca filtra documentos reais;
 - `Ctrl/Cmd + K` foca a busca canônica;
 - toolbar opera sobre Tiptap real;
-- **Metas** usa preferência local compartilhada, padrão `1.200` palavras, atualiza rodapé imediatamente e não contamina o documento.
+- **Metas** usa preferência local compartilhada, padrão `1.200` palavras, atualiza o rodapé e não contamina o documento.
 
 ## Circuito funcional 2 — Exportar
 
@@ -39,7 +33,7 @@ Operações reais de escrita (`insert*`, `delete*`, `history*`) entram automatic
 
 ## Circuito funcional 3 — Configurações
 
-**Config.** abre um painel real, sem trocar tema por acidente. Expõe Papel/Noite, Concentração, Tela cheia, Anatomia do Livro e o locale fixo `Português (BR)`, todos reaproveitando estados/controles existentes.
+**Config.** abre painel real sem trocar tema por acidente. Expõe Papel/Noite, Concentração, Tela cheia, Anatomia do Livro e o locale fixo `Português (BR)`, reaproveitando estados/controles existentes.
 
 ## Circuito funcional 4 — Pesquisa
 
@@ -59,7 +53,7 @@ A superfície fica em `theme-escrevaral-paper-home-research.css`. **Notas contin
 
 ## Evidência do gate
 
-A progressão validada da nova casa é:
+Progressão validada:
 
 - foco automático: **12/12**;
 - Documento/busca/Metas — run `31977140397`, head `42a8e2916b8e98381067a49c70ef502e815e1c4d`: **14/14**;
@@ -69,7 +63,7 @@ A progressão validada da nova casa é:
 
 A primeira tentativa de Pesquisa (`31979310542`) já provava abertura, seleção da revisão e execução da engine, mas falhou apenas porque o botão legado de fechamento estava escondido no desktop. Isso foi corrigido antes do gate final.
 
-Também permanecem verdes geometria da referência, Tiptap, colagem estruturada, recuperação, conflitos, drawers móveis, foco automático e smoke público.
+Também permanecem verdes geometria da referência, Tiptap, colagem estruturada, recuperação, conflitos, drawers móveis e foco automático.
 
 ## Higiene de branches — registrada e deferida
 
@@ -81,4 +75,4 @@ A única frente ativa é **o Escrevaral atual na nova casa aprovada**. Não abri
 
 ## Próximo gate
 
-Continuar conectando **um comportamento visível por vez**, somente quando houver destino real. O próximo candidato limpo já identificado é o `+` de **Tags** no painel de análise, porque `draft.tags`, parsing, autosave e conflito já existem. Nenhum botão cenográfico deve ganhar funcionalidade inventada.
+Continuar conectando **um comportamento visível por vez**, somente quando houver destino real. O próximo candidato limpo identificado é o `+` de **Tags** no painel de análise, porque `draft.tags`, parsing, autosave e conflito já existem. Nenhum botão cenográfico deve ganhar funcionalidade inventada.
