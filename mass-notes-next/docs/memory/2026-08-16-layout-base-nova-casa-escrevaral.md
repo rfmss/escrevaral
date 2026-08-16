@@ -77,16 +77,42 @@ Em 16/08/2026 o botão **Metas**, que ainda era cenográfico, recebeu destino re
 
 O contrato compartilhado fica em `src/writing/writingGoal.ts`; a superfície da casa é conectada por `WritingGoalsBridge`, preservando a separação entre preferência de interface e documento autoral.
 
+## Circuito funcional 2 — Exportar
+
+O botão **Exportar** do topo deixou de disparar HTML diretamente e passou a abrir uma escolha explícita da casa.
+
+A implementação reutiliza o exportador já existente em `src/export/documentExport.ts`, sem criar segundo pipeline. O painel oferece:
+
+- **TXT** (`.txt`) para leitura simples e portátil;
+- **Markdown** (`.md`) preservando estrutura textual compatível com outros editores;
+- **HTML** (`.html`) como documento autônomo para abrir ou imprimir.
+
+O bridge de exportação:
+
+- intercepta o controle canônico `Exportar` antes do comportamento legado de HTML direto;
+- lê o snapshot vivo do Tiptap para não perder alterações ainda não persistidas no corpo do texto;
+- combina esse snapshot com o documento real e com o título visível atual;
+- chama `downloadDocumentExport` do pipeline já existente;
+- mantém a geração inteiramente local;
+- não altera o manuscrito, não cria cópia de documento e não exige rede.
+
+A superfície fica em `WritingExportBridge` e `theme-escrevaral-paper-home-export.css`. O exportador de domínio continua sendo a única fonte de geração de arquivos.
+
 ## Evidência do gate
 
 Em 16/08/2026 a banca da nova casa fechou verde primeiro com 12/12 testes no gate do foco automático.
 
 Após o primeiro circuito funcional, o workflow `Escrevaral Paper Home Preview`, run `31977140397`, no head `42a8e2916b8e98381067a49c70ef502e815e1c4d`, fechou **14/14 testes verdes**.
 
-Além dos contratos anteriores, a banca passou a provar explicitamente:
+Após o circuito de Exportar, o workflow `Escrevaral Paper Home Preview`, run `31977786808`, no head `2722caf4aa48796d79e242bdf9e8cbd4f9d0db22`, fechou **15/15 testes verdes**.
+
+A banca passou a provar explicitamente:
 
 - `Metas abre a preferência real e sincroniza o rodapé`;
-- `Ctrl+K leva à busca real e a busca continua filtrando documentos reais`.
+- `Ctrl+K leva à busca real e a busca continua filtrando documentos reais`;
+- `Exportar abre escolhas reais e gera TXT, Markdown e HTML a partir do texto vivo`;
+- o clique inicial em Exportar não gera download acidental;
+- os três formatos usam filename correto e contêm o texto vivo recém-editado.
 
 Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, foco automático, build TypeScript/Vite, publicação da preview e smoke público.
 
