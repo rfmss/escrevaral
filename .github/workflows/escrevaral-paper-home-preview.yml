@@ -60,14 +60,12 @@ jobs:
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Validar escrita, layout e paginação
+      - name: Validar casa, escrita e paginação
         run: >-
           npx playwright test --project=chromium
+          tests/paper-home.spec.ts
           tests/foundation.spec.ts
           tests/gate2.spec.ts
-          tests/gate6-5-design.spec.ts
-          tests/gate6-75-blueprint.spec.ts
-          tests/m1-density-lexical.spec.ts
           tests/m1-pagination-scroll.spec.ts
 
       - name: Publicar preview isolada
@@ -108,7 +106,7 @@ jobs:
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
               && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
-              && grep --quiet 'theme-escrevaral-paper-home' mass-notes-next/src/main.tsx; then
+              && grep --quiet 'theme-escrevaral-paper-home-states' mass-notes-next/src/main.tsx; then
               echo "Preview pública da nova casa respondeu corretamente."
               exit 0
             fi

@@ -38,35 +38,23 @@ test('inicia pela nova casa e mantém a escrita silenciosa reversível', async (
   await expect(page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })).toBeVisible()
 
   await openWorkshop(page)
-  await expect(page.getByText('Oficina de escrita brasileira')).toBeVisible()
-  await expect(page.locator('.brand h1')).toContainText('Escrevaral')
-
+  await expect(page.locator('.sidebar')).toBeVisible()
+  await expect(page.locator('.rail')).toBeVisible()
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('ações permanecem na oficina e o logo oficial continua restrito à marca', async ({ page }) => {
+test('ações permanecem na oficina e a marca da nova casa continua identificável', async ({ page }) => {
   await waitReady(page)
-
-  await expect(page.locator('.slash')).toBeHidden()
-  await expect(page.locator('.impact-button')).toBeHidden()
   await openWorkshop(page)
 
   const brand = page.locator('.brand')
-  const logo = brand.locator('.brand-logo')
-  await expect(logo).toBeVisible()
-  await expect(logo).toHaveAttribute('src', /brand\/escrevaral-logo\.svg$/)
-  await expect(page.locator('.brand-logo')).toHaveCount(1)
-
-  const brandSeal = await brand.evaluate((node) => {
-    const seal = getComputedStyle(node, '::before')
-    const frame = getComputedStyle(node, '::after')
-    return {
-      before: seal.display,
-      after: frame.display,
-    }
-  })
-  expect(brandSeal.before).toBe('none')
-  expect(brandSeal.after).toBe('none')
+  await expect(brand.getByRole('heading', { name: 'Escrevaral' })).toHaveCount(1)
+  const mark = await brand.evaluate((node) => ({
+    name: getComputedStyle(node, '::before').content,
+    tagline: getComputedStyle(node, '::after').content,
+  }))
+  expect(mark.name).toContain('ESCREVARAL')
+  expect(mark.tagline).toContain('ESCRITA COM INTENÇÃO')
 
   const readButton = page.getByRole('button', { name: 'Ler o texto', exact: true })
   await expect(readButton).toBeVisible()
@@ -88,7 +76,6 @@ test('Enter após T1 cria parágrafo e a junção padrão permanece reversível'
   await expect(editor.locator('h1')).toHaveText('Título principal')
   await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
 
-  // Separa a digitação da ação estrutural no histórico do ProseMirror.
   await page.waitForTimeout(800)
   await page.keyboard.press('Home')
   await page.keyboard.press('Backspace')

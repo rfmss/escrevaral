@@ -28,6 +28,7 @@ import './styles/writing-rest.css'
 import './styles/theme-escrevaral-paper-home.css'
 import './styles/theme-escrevaral-paper-home-editor.css'
 import './styles/theme-escrevaral-paper-home-tools.css'
+import './styles/theme-escrevaral-paper-home-states.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
