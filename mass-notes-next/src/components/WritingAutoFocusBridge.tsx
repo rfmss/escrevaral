@@ -14,15 +14,26 @@ function clearFocusLine() {
 function setFocusLine() {
   const selection = window.getSelection()
   const editor = asElement(selection?.anchorNode ?? null)?.closest<HTMLElement>('.ProseMirror')
-  if (!editor || document.activeElement !== editor) return
+  if (!editor) return
 
   const paragraph = asElement(selection?.anchorNode ?? null)?.closest('p')
   editor.querySelectorAll('p').forEach((item) => item.classList.toggle('focus-line', item === paragraph))
 }
 
+function focusToggleButton(): HTMLButtonElement | null {
+  return document.querySelector<HTMLButtonElement>('.paper-shell .statusbar .play')
+}
+
 function enterFocusMode() {
   if (document.body.classList.contains('focus-mode')) return
-  document.querySelector<HTMLButtonElement>('.paper-shell .statusbar .play')?.click()
+  focusToggleButton()?.click()
+}
+
+function leaveFocusMode() {
+  if (!document.body.classList.contains('focus-mode')) return
+  focusToggleButton()?.click()
+  clearFocusLine()
+  window.requestAnimationFrame(() => document.querySelector<HTMLElement>('.ProseMirror')?.focus())
 }
 
 export function WritingAutoFocusBridge() {
@@ -45,12 +56,14 @@ export function WritingAutoFocusBridge() {
     }
 
     const onSelectionChange = () => {
-      if (!document.body.classList.contains('focus-mode')) return
-      if (document.activeElement?.closest('.ProseMirror')) setFocusLine()
+      if (document.body.classList.contains('focus-mode')) setFocusLine()
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && document.body.classList.contains('focus-mode')) clearFocusLine()
+      if (event.key !== 'Escape' || !document.body.classList.contains('focus-mode')) return
+      event.preventDefault()
+      event.stopPropagation()
+      leaveFocusMode()
     }
 
     const bodyObserver = new MutationObserver(() => {
@@ -61,14 +74,14 @@ export function WritingAutoFocusBridge() {
     document.addEventListener('input', onInput)
     document.addEventListener('keyup', onKeyUp)
     document.addEventListener('selectionchange', onSelectionChange)
-    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('keydown', onKeyDown, true)
     bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
 
     return () => {
       document.removeEventListener('input', onInput)
       document.removeEventListener('keyup', onKeyUp)
       document.removeEventListener('selectionchange', onSelectionChange)
-      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('keydown', onKeyDown, true)
       bodyObserver.disconnect()
       clearFocusLine()
     }
