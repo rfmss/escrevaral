@@ -1,10 +1,17 @@
-import { expect, test, type Page } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
+import { expect, test, type Download, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper-shell')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+}
+
+async function downloadedText(download: Download): Promise<string> {
+  const path = await download.path()
+  expect(path).not.toBeNull()
+  return readFile(path!, 'utf8')
 }
 
 test('Metas abre a preferência real e sincroniza o rodapé', async ({ page }) => {
@@ -50,4 +57,49 @@ test('Ctrl+K leva à busca real e a busca continua filtrando documentos reais', 
   await search.fill(title)
   await expect(page.locator('.left-rail .chapter')).toHaveCount(1)
   await expect(page.locator('.left-rail .chapter').first()).toContainText(title)
+})
+
+test('Exportar abre escolhas reais e gera TXT, Markdown e HTML a partir do texto vivo', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  await page.getByLabel('Título do documento').fill('Exportação canônica')
+  const editor = page.locator('.ProseMirror')
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.type('Trecho vivo para exportação.')
+  await page.keyboard.press('Escape')
+
+  const downloads: Download[] = []
+  page.on('download', (download) => downloads.push(download))
+
+  const exportar = page.getByRole('button', { name: 'Exportar', exact: true })
+  await expect(exportar).toHaveAttribute('aria-controls', 'writing-export-panel')
+  await exportar.click()
+
+  const panel = page.getByRole('dialog', { name: 'Exportar documento' })
+  await expect(panel).toBeVisible()
+  await expect(exportar).toHaveAttribute('aria-expanded', 'true')
+  await page.waitForTimeout(150)
+  expect(downloads).toHaveLength(0)
+
+  const formats = [
+    { format: 'txt', extension: '.txt' },
+    { format: 'md', extension: '.md' },
+    { format: 'html', extension: '.html' },
+  ] as const
+
+  for (const { format, extension } of formats) {
+    const downloadPromise = page.waitForEvent('download')
+    await panel.locator(`[data-reference-export-format="${format}"]`).click()
+    const download = await downloadPromise
+    expect(download.suggestedFilename()).toBe(`exportacao-canonica${extension}`)
+    const content = await downloadedText(download)
+    expect(content).toContain('Trecho vivo para exportação.')
+  }
+
+  expect(downloads).toHaveLength(3)
+  await panel.getByLabel('Fechar exportação').click()
+  await expect(panel).toBeHidden()
+  await expect(exportar).toHaveAttribute('aria-expanded', 'false')
 })
