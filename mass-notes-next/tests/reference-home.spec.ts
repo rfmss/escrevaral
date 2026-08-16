@@ -131,6 +131,29 @@ test('manuscrito permanece limpo e sem grid visual concorrente', async ({ page }
   expect(surface.pageBreakAfter).toBe('none')
 })
 
+test('digitação entra no foco total e Escape devolve a casa', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const editor = page.locator('.ProseMirror')
+  await editor.click()
+  await page.keyboard.press('End')
+  await page.keyboard.type(' foco')
+
+  await expect.poll(() => page.evaluate(() => document.body.classList.contains('focus-mode'))).toBe(true)
+  await expect(page.locator('.topbar')).toBeHidden()
+  await expect(page.locator('.left-rail')).toBeHidden()
+  await expect(page.locator('.analysis-panel')).toBeHidden()
+  await expect(page.locator('.statusbar')).toBeHidden()
+  await expect(page.locator('.formatbar')).toBeHidden()
+  await expect(editor.locator('p.focus-line')).toHaveCount(1)
+
+  await page.keyboard.press('Escape')
+  await expect.poll(() => page.evaluate(() => document.body.classList.contains('focus-mode'))).toBe(false)
+  await expect(page.locator('.topbar')).toBeVisible()
+  await expect(editor.locator('p.focus-line')).toHaveCount(0)
+})
+
 test('toolbar da referência opera sobre o Tiptap real', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
@@ -145,6 +168,7 @@ test('toolbar da referência opera sobre o Tiptap real', async ({ page }) => {
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Texto da referência')
   await page.keyboard.press('Control+A')
+  await page.keyboard.press('Escape')
   await page.getByRole('button', { name: 'N', exact: true }).click()
   await expect(editor.locator('strong')).toHaveText('Texto da referência')
   await expect(page.locator('.field-value').filter({ hasText: /^Alterado$/ })).toBeVisible()
@@ -164,6 +188,7 @@ test('documentos reais alimentam rail, busca e contagem', async ({ page }) => {
   await editor.click()
   await page.keyboard.type('um dois três quatro cinco')
   await expect(page.locator('.big-count')).toHaveText('5')
+  await page.keyboard.press('Escape')
 
   const search = page.locator('.search input[aria-label="Buscar documentos"]')
   await search.fill('Documento de verificação')
