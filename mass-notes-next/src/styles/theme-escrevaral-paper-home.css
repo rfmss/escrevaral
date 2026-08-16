@@ -1,0 +1,668 @@
+/*
+ * Escrevaral — Paper Home
+ * Tranche 1: transplanta o layout-base aprovado para a aplicação Tiptap real.
+ *
+ * Regra: esta folha só muda a casca. Estado documental, IndexedDB, autosave,
+ * conflitos, engines e contratos continuam nos módulos existentes.
+ *
+ * Nenhuma fonte remota: a casa precisa permanecer funcional offline.
+ */
+
+:root {
+  --home-paper: #f3efe4;
+  --home-ink: #11120f;
+  --home-blue: #087fc3;
+  --home-orange: #ff5317;
+  --home-line: rgba(20, 22, 19, .31);
+  --home-dash: rgba(0, 124, 193, .55);
+  --home-page-shadow: rgba(85, 85, 85, .13);
+}
+
+@media (min-width: 1100px) {
+  body:not(.experience-anatomy) {
+    min-width: 1100px;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--home-ink);
+    background: #d8d5cb;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  body:not(.experience-anatomy) .grain { opacity: .035; }
+  body:not(.experience-anatomy) .halftone { display: none; }
+
+  .experience-view--editor {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .experience-view--editor .app-shell {
+    position: relative;
+    display: grid;
+    grid-template-columns: 280px minmax(600px, 1fr) 280px;
+    width: calc(100vw - 32px);
+    height: calc(100vh - 20px);
+    min-height: 0;
+    max-height: none;
+    margin: 10px 20px 10px 12px;
+    overflow: hidden;
+    color: var(--home-ink);
+    background-color: var(--home-paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.083'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 31% 18%, rgba(255, 250, 240, .65), transparent 58%),
+      radial-gradient(ellipse at 88% 68%, rgba(185, 174, 151, .12), transparent 44%),
+      repeating-linear-gradient(1deg, transparent 0 31px, rgba(60, 45, 20, .015) 32px 33px);
+    border: 1px dashed var(--home-dash);
+    box-shadow: 0 4px 30px var(--home-page-shadow);
+  }
+
+  .experience-view--editor .app-shell::before,
+  .experience-view--editor .app-shell::after {
+    content: "";
+    position: absolute;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .experience-view--editor .app-shell::before {
+    inset: -1px;
+    border-left: 2px solid transparent;
+    border-image: linear-gradient(to bottom, var(--home-orange) 0 8%, transparent 8% 100%) 1;
+  }
+
+  .experience-view--editor .app-shell::after {
+    left: 11px;
+    right: 11px;
+    bottom: 57px;
+    border-top: 1px dashed rgba(7, 133, 196, .37);
+    transform: rotate(-.08deg);
+  }
+
+  .experience-view--editor .blueprint { display: none; }
+
+  .experience-view--editor .sidebar,
+  .experience-view--editor .rail,
+  .experience-view--editor .workspace {
+    min-width: 0;
+    min-height: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  .experience-view--editor .sidebar {
+    border-right: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .brand {
+    min-height: 92px;
+    height: 92px;
+    padding: 15px 20px 12px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .brand::before {
+    content: "ESCREVARAL";
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    display: block;
+    width: max-content;
+    height: auto;
+    color: var(--home-ink);
+    background: none;
+    opacity: 1;
+    transform: scaleX(1.06);
+    transform-origin: left top;
+    font: 900 35px/39px Impact, "Arial Black", "Arial Narrow", sans-serif;
+    letter-spacing: -.8px;
+    clip-path: none;
+  }
+
+  .experience-view--editor .brand::after {
+    content: "ESCRITA COM INTENÇÃO";
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    display: block;
+    width: max-content;
+    height: auto;
+    margin-top: 5px;
+    border: 0;
+    color: var(--home-ink);
+    opacity: 1;
+    transform: none;
+    font: 700 10px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: 3.2px;
+  }
+
+  .experience-view--editor .brand-logo-plate,
+  .experience-view--editor .brand-links,
+  .experience-view--editor .brand > .eyebrow,
+  .experience-view--editor .brand > .issue {
+    display: none;
+  }
+
+  .experience-view--editor .side-tools {
+    min-height: 56px;
+    padding: 10px 14px 9px 24px;
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 9px;
+    border-bottom: 1px solid #9f9b92;
+  }
+
+  .experience-view--editor .side-tools .search {
+    height: 34px;
+    padding: 0 9px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    background: transparent;
+    font: 12px/1 Georgia, serif;
+  }
+
+  .experience-view--editor .side-tools .search:focus {
+    border-color: var(--home-blue);
+    box-shadow: 0 0 0 1px var(--home-blue);
+  }
+
+  .experience-view--editor .side-tools .icon-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #444;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font: 18px/30px Arial, sans-serif;
+  }
+
+  .experience-view--editor .library-filters {
+    padding: 10px 16px 10px 24px;
+    border-bottom: 1px solid #9f9b92;
+    background: transparent;
+  }
+
+  .experience-view--editor .library-filter-label,
+  .experience-view--editor .library-select-field label,
+  .experience-view--editor .library-filter-summary {
+    font: 700 9px/1.2 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .library-status-filters { gap: 4px; }
+
+  .experience-view--editor .library-status-filters button,
+  .experience-view--editor .library-favorites-filter,
+  .experience-view--editor .library-select-field select,
+  .experience-view--editor .library-filter-summary button {
+    border-radius: 0;
+    border-color: #999;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .experience-view--editor .notes {
+    padding: 8px 16px 10px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 18, 15, .32) transparent;
+  }
+
+  .experience-view--editor .note-card {
+    position: relative;
+    min-height: 54px;
+    grid-template-columns: 20px minmax(0, 1fr) 30px;
+    gap: 8px;
+    padding: 0 7px 0 8px;
+    border: 0;
+    border-bottom: 1px dashed #aaa;
+    color: var(--home-ink);
+    background: transparent;
+  }
+
+  .experience-view--editor .note-card:hover {
+    background: rgba(8, 127, 195, .05);
+  }
+
+  .experience-view--editor .note-card.active {
+    color: var(--home-ink);
+    background: transparent;
+    outline: 1px solid #777;
+    outline-offset: -1px;
+  }
+
+  .experience-view--editor .note-card.active::before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background:
+      repeating-linear-gradient(179deg, transparent 0 4px, rgba(246, 176, 141, .33) 4px 5px),
+      var(--home-orange);
+  }
+
+  .experience-view--editor .note-stripe {
+    width: 11px;
+    height: 11px;
+    border: 1px solid var(--home-ink);
+    border-radius: 50%;
+    background: transparent;
+    transform: none;
+  }
+
+  .experience-view--editor .note-card:not(.active) .note-stripe {
+    width: 12px;
+    height: 15px;
+    border-radius: 0;
+  }
+
+  .experience-view--editor .note-title {
+    font: 400 13px/1.15 Georgia, serif;
+  }
+
+  .experience-view--editor .note-meta,
+  .experience-view--editor .note-num {
+    font: 9.5px/1.2 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .experience-view--editor .note-num {
+    color: #555;
+    text-align: right;
+  }
+
+  .experience-view--editor .sidebar-footer {
+    min-height: 46px;
+    padding: 0 16px 0 24px;
+    border-top: 1px solid var(--home-line);
+    color: #555;
+    background: transparent;
+    align-items: center;
+    font: 9px/1 "Arial Narrow", Arial, sans-serif;
+  }
+
+  .experience-view--editor .workspace { border: 0; }
+
+  .experience-view--editor .registration {
+    min-height: 92px;
+    height: 92px;
+    grid-template-columns: 1.25fr .9fr .55fr .85fr;
+    border-bottom: 1px solid var(--home-line);
+    background: transparent;
+    backdrop-filter: none;
+    font-family: "Arial Narrow", Arial, sans-serif;
+  }
+
+  .experience-view--editor .reg-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 18px;
+    border-right: 1px dashed var(--home-dash);
+  }
+
+  .experience-view--editor .field-label {
+    color: var(--home-blue);
+    font: 700 11px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .09em;
+  }
+
+  .experience-view--editor .field-value {
+    margin-top: 7px;
+    color: var(--home-ink);
+    font: 700 15px/1.1 Georgia, serif;
+  }
+
+  .experience-view--editor .save-salvo { color: #136b43; }
+  .experience-view--editor .save-salvando,
+  .experience-view--editor .save-alterado { color: var(--home-orange); }
+  .experience-view--editor .save-conflito,
+  .experience-view--editor .save-falha { color: #b3271f; }
+
+  .experience-view--editor .conflict-banner {
+    border-bottom: 1px solid #b3271f;
+    background: rgba(255, 83, 23, .08);
+    font-family: Georgia, serif;
+  }
+
+  .experience-view--editor .editor-shell {
+    flex: 1;
+    min-height: 0;
+    padding: 0;
+    overflow: auto;
+    display: block;
+    background: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 18, 15, .32) transparent;
+  }
+
+  .experience-view--editor .paper {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .experience-view--editor .paper::before,
+  .experience-view--editor .paper::after,
+  .experience-view--editor .slash { display: none; }
+
+  .experience-view--editor .title-input {
+    width: calc(100% - 52px);
+    height: 62px;
+    margin: 0 26px;
+    padding: 12px 0 8px;
+    border: 0;
+    border-bottom: 1px dashed var(--home-dash);
+    color: var(--home-ink);
+    background: transparent;
+    font: 600 27px/1.1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .02em;
+    text-transform: none;
+  }
+
+  .experience-view--editor .title-input:focus {
+    border-bottom-color: var(--home-blue);
+    box-shadow: none;
+  }
+
+  .experience-view--editor .deck {
+    min-height: 28px;
+    margin: 0 26px;
+    padding: 6px 0 5px;
+    border: 0;
+    color: #666;
+  }
+
+  .experience-view--editor .status,
+  .experience-view--editor .engine-mark {
+    font: 700 9px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+  }
+
+  .experience-view--editor .editor-toolbar-slot {
+    position: sticky;
+    top: 0;
+    z-index: 14;
+    min-height: 70px;
+    border-top: 1px solid var(--home-line);
+    border-bottom: 1px solid var(--home-line);
+    background: color-mix(in srgb, var(--home-paper) 96%, transparent);
+  }
+
+  .editor-toolbar-dock {
+    z-index: 100;
+    border-bottom: 1px solid var(--home-line);
+    background: color-mix(in srgb, var(--home-paper) 97%, transparent);
+    box-shadow: 0 5px 14px rgba(17, 18, 15, .08);
+  }
+
+  .experience-view--editor .editor-toolbar,
+  .editor-toolbar-dock .editor-toolbar {
+    min-height: 70px;
+    padding: 10px 24px;
+    gap: 0;
+    border: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+  }
+
+  .experience-view--editor .toolbar-group,
+  .editor-toolbar-dock .toolbar-group {
+    min-height: 38px;
+    padding: 0 13px;
+    gap: 5px;
+    border-right: 1px solid #bbb;
+  }
+
+  .experience-view--editor .toolbar-group:first-child,
+  .editor-toolbar-dock .toolbar-group:first-child { padding-left: 0; }
+
+  .experience-view--editor .toolbar-group:last-child,
+  .editor-toolbar-dock .toolbar-group:last-child { border-right: 0; }
+
+  .experience-view--editor .editor-toolbar button,
+  .editor-toolbar-dock .editor-toolbar button {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 7px;
+    border: 0;
+    border-radius: 0;
+    color: var(--home-ink);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    font: 17px/1 Georgia, serif;
+  }
+
+  .experience-view--editor .editor-toolbar button:hover,
+  .editor-toolbar-dock .editor-toolbar button:hover,
+  .experience-view--editor .editor-toolbar button.active,
+  .editor-toolbar-dock .editor-toolbar button.active {
+    color: var(--home-blue);
+    background: rgba(8, 127, 195, .07);
+    box-shadow: inset 0 -2px 0 var(--home-blue);
+    transform: none;
+  }
+
+  .experience-view--editor .tiptap.escrevaral-editor {
+    width: min(820px, calc(100% - 90px));
+    min-height: calc(100vh - 310px);
+    margin: 0 auto;
+    padding: 58px 18px 100px;
+    outline: none;
+    color: var(--home-ink);
+    background: transparent;
+    font: 18px/1.95 Georgia, "Times New Roman", serif;
+  }
+
+  .experience-view--editor .tiptap.escrevaral-editor p { margin: 0 0 32px; }
+
+  .experience-view--editor .tiptap.escrevaral-editor h1,
+  .experience-view--editor .tiptap.escrevaral-editor h2,
+  .experience-view--editor .tiptap.escrevaral-editor h3 {
+    font-family: "Arial Narrow", Arial, sans-serif;
+  }
+
+  .experience-view--editor .rail {
+    border-left: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .rail-title {
+    min-height: 92px;
+    height: 92px;
+    padding: 0 18px 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--home-line);
+    color: var(--home-orange);
+    background: transparent;
+    font: 700 11px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .tabs {
+    min-height: 54px;
+    padding: 8px 12px;
+    gap: 4px;
+    overflow-x: auto;
+    border-bottom: 1px solid #999;
+    background: transparent;
+    scrollbar-width: none;
+  }
+
+  .experience-view--editor .tabs::-webkit-scrollbar { display: none; }
+
+  .experience-view--editor .tab {
+    min-width: max-content;
+    padding: 5px 7px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    color: #666;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    font: 700 9px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .tab:hover,
+  .experience-view--editor .tab.active {
+    color: var(--home-blue);
+    border-bottom-color: var(--home-blue);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .experience-view--editor .rail-scroll {
+    padding: 0 18px 18px 22px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 18, 15, .32) transparent;
+  }
+
+  .experience-view--editor .panel { padding: 0; }
+
+  .experience-view--editor .metric,
+  .experience-view--editor .voice-section,
+  .experience-view--editor .rail-actions,
+  .experience-view--editor .section-label {
+    border-color: #aaa;
+  }
+
+  .experience-view--editor .metric {
+    padding: 13px 2px 14px;
+    border-bottom: 1px solid #aaa;
+  }
+
+  .experience-view--editor .metric-label,
+  .experience-view--editor .section-label {
+    color: var(--home-blue);
+    font: 700 11px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+  }
+
+  .experience-view--editor .metric-value {
+    color: var(--home-orange);
+    font: 700 42px/.95 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: -.03em;
+  }
+
+  .experience-view--editor .metric small,
+  .experience-view--editor .panel-intro,
+  .experience-view--editor .review-message,
+  .experience-view--editor .voice-message {
+    color: #555;
+    font-family: Georgia, serif;
+  }
+
+  .experience-view--editor .chip,
+  .experience-view--editor .action,
+  .experience-view--editor .review-visibility,
+  .experience-view--editor .review-jump { border-radius: 0; }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .app-shell {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .sidebar,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .rail,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .registration,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .title-input,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .deck,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .editor-toolbar-slot,
+  body.focus-mode:not(.experience-anatomy) .editor-toolbar-dock {
+    display: none !important;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .workspace,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .editor-shell,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .paper {
+    width: 100%;
+    height: 100vh;
+    max-height: none;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .tiptap.escrevaral-editor {
+    width: min(780px, calc(100vw - 48px));
+    min-height: 100vh;
+    padding: 14vh 24px 20vh;
+    font-size: 21px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 1450px) {
+    .experience-view--editor .app-shell {
+      grid-template-columns: 250px minmax(560px, 1fr) 250px;
+    }
+
+    .experience-view--editor .brand::before {
+      font-size: 32px;
+      transform: scaleX(1.03);
+    }
+
+    .experience-view--editor .brand::after {
+      font-size: 9px;
+      letter-spacing: 2.6px;
+    }
+
+    .experience-view--editor .registration {
+      grid-template-columns: 1.15fr .8fr .5fr .75fr;
+    }
+
+    .experience-view--editor .reg-field {
+      padding-left: 13px;
+      padding-right: 13px;
+    }
+
+    .experience-view--editor .field-value { font-size: 13px; }
+
+    .experience-view--editor .tiptap.escrevaral-editor {
+      width: min(760px, calc(100% - 64px));
+      font-size: 17px;
+    }
+  }
+
+  @media (max-height: 820px) {
+    .experience-view--editor .brand,
+    .experience-view--editor .registration,
+    .experience-view--editor .rail-title {
+      min-height: 82px;
+      height: 82px;
+    }
+
+    .experience-view--editor .library-filters {
+      max-height: 126px;
+      overflow: auto;
+    }
+
+    .experience-view--editor .editor-toolbar-slot,
+    .experience-view--editor .editor-toolbar,
+    .editor-toolbar-dock .editor-toolbar {
+      min-height: 58px;
+    }
+
+    .experience-view--editor .tiptap.escrevaral-editor {
+      padding-top: 42px;
+      padding-bottom: 70px;
+    }
+  }
+}

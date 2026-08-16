@@ -25,6 +25,7 @@ import './styles/m1-density.css'
 import './styles/theme-escrevaral-verniz-material.css'
 import './styles/brand-official.css'
 import './styles/writing-rest.css'
+import './styles/theme-escrevaral-paper-home.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
