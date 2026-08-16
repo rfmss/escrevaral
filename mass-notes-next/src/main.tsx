@@ -1,5 +1,6 @@
 import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
+import { WritingAutoFocusBridge } from './components/WritingAutoFocusBridge'
 import { WritingDashboardBridge } from './components/WritingDashboardBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
 import { ExperienceShell } from './ExperienceShell'
@@ -73,6 +74,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ExperienceShell />
     <ApplicationAccessibilityBridge />
+    <WritingAutoFocusBridge />
     <WritingDashboardBridge />
     <WritingRestChrome />
   </StrictMode>,
