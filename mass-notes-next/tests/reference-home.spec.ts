@@ -58,7 +58,7 @@ test('favicon invertido e wordmark não recebem branding legado', async ({ page 
   expect(favicon).toContain('<rect width="612" height="612" rx="120.83" fill="#F3EEE4"/>')
   expect(favicon).toContain('<path fill="#3B271C"')
 
-  const brandState = await page.locator('.brand').evaluate((element) => {
+  const brandState = await page.locator('.topbar .brand').evaluate((element) => {
     const style = getComputedStyle(element)
     return {
       backgroundColor: style.backgroundColor,
@@ -71,7 +71,7 @@ test('favicon invertido e wordmark não recebem branding legado', async ({ page 
   expect(brandState.backgroundImage).toBe('none')
   expect(brandState.beforeContent).toBe('none')
   expect(brandState.afterContent).toBe('none')
-  await expect(page.locator('.brand-name')).toHaveCount(1)
+  await expect(page.locator('.topbar .brand-name')).toHaveCount(1)
 })
 
 test('geometria desktop segue exatamente a folha de referência', async ({ page }) => {
