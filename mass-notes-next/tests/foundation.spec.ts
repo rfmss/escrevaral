@@ -18,23 +18,28 @@ async function expectTitleFits(page: import('playwright/test').Page) {
   await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
 }
 
-test('inicia pela escrita silenciosa e mantém a oficina convocável', async ({ page }) => {
+test('inicia pela nova casa e mantém a escrita silenciosa reversível', async ({ page }) => {
   await waitReady(page)
 
   await expect(page.locator('body')).toHaveClass(/writing-rest/)
-  await expect(page.locator('body')).not.toHaveClass(/workshop-open/)
+  await expect(page.locator('body')).toHaveClass(/workshop-open/)
   await expect(page.locator('.ProseMirror')).toBeEditable()
+  await expect(page.locator('.sidebar')).toBeVisible()
+  await expect(page.locator('.rail')).toBeVisible()
+  await expect(page.locator('.editor-toolbar')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
+  await expectTitleFits(page)
+
+  await page.getByRole('button', { name: 'Voltar à escrita silenciosa' }).click()
+  await expect(page.locator('body')).not.toHaveClass(/workshop-open/)
   await expect(page.locator('.sidebar')).toBeHidden()
   await expect(page.locator('.rail')).toBeHidden()
   await expect(page.locator('.editor-toolbar')).toBeHidden()
-  await expect(page.locator('.blueprint')).toBeHidden()
   await expect(page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })).toBeVisible()
-  await expectTitleFits(page)
 
   await openWorkshop(page)
   await expect(page.getByText('Oficina de escrita brasileira')).toBeVisible()
   await expect(page.locator('.brand h1')).toContainText('Escrevaral')
-  await expect(page.locator('.rail')).toBeVisible()
 
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
