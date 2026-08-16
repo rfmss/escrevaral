@@ -1,0 +1,105 @@
+name: Escrevaral Paper Home Preview
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - "mass-notes-next/src/**"
+      - "mass-notes-next/tests/**"
+      - "mass-notes-next/package.json"
+      - "mass-notes-next/package-lock.json"
+      - "mass-notes-next/vite.config.ts"
+      - ".github/workflows/escrevaral-paper-home-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: escrevaral-paper-home-preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: mass-notes-next
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mass-notes-next/package-lock.json
+
+      - name: Instalar dependências reproduzíveis
+        run: npm ci --no-audit --no-fund
+
+      - name: Compilar a casa real
+        run: npm run build
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validar escrita, layout e paginação
+        run: >-
+          npx playwright test --project=chromium
+          tests/foundation.spec.ts
+          tests/gate2.spec.ts
+          tests/gate6-5-design.spec.ts
+          tests/gate6-75-blueprint.spec.ts
+          tests/m1-density-lexical.spec.ts
+          tests/m1-pagination-scroll.spec.ts
+
+      - name: Publicar preview isolada
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd dist
+          touch .nojekyll
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "preview paper-home: ${GITHUB_SHA}"
+          git branch -M preview-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/preview-escrevaral-paper-home
+
+      - name: Renovar cache público
+        continue-on-error: true
+        working-directory: .
+        run: |
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
+          for path in index.html assets/index.js assets/index.css; do
+            curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
+          done
+
+      - name: Verificar preview pública
+        working-directory: .
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
+          for attempt in $(seq 1 18); do
+            rm -f /tmp/escrevaral-home-index.html /tmp/escrevaral-home-app.js /tmp/escrevaral-home-app.css
+            if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/escrevaral-home-index.html \
+              && grep --quiet './assets/index.js' /tmp/escrevaral-home-index.html \
+              && grep --quiet './assets/index.css' /tmp/escrevaral-home-index.html \
+              && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/escrevaral-home-app.js \
+              && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
+              && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
+              && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
+              && grep --quiet 'theme-escrevaral-paper-home' mass-notes-next/src/main.tsx; then
+              echo "Preview pública da nova casa respondeu corretamente."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "A preview da nova casa não convergiu no CDN."
+          exit 1
