@@ -21,17 +21,18 @@ A decisão não cria uma segunda aplicação. A nova casa envolve a fundação j
 
 O Cofre continua uma camada separada e portátil. Nenhuma regra linguística deve migrar para CSS, HTML ou componentes de interface.
 
-## Tranche 1
+## Tranche 1 — casa visual
 
-A primeira implementação é deliberadamente pequena e reversível:
+A primeira implementação foi deliberadamente pequena e reversível:
 
 1. transplantar a linguagem visual do layout aprovado para a aplicação Tiptap real;
 2. manter o editor e o documento existentes como fonte de comportamento;
 3. manter os breakpoints móveis atuais até haver uma rodada visual própria para tablet/celular;
-4. não carregar fontes remotas: a aparência usa fallbacks locais para preservar funcionamento offline;
-5. não implementar ainda Metas, Notas, Pesquisa ou Configurações novas só porque aparecem no mockup.
+4. não criar funcionalidades apenas porque aparecem no mockup; cada controle passa a ser ligado depois, um por vez, somente quando houver destino real no produto.
 
 A composição é dividida entre `theme-escrevaral-paper-home.css`, `theme-escrevaral-paper-home-editor.css` e `theme-escrevaral-paper-home-tools.css`, todas carregadas por último. A divisão mantém cada módulo abaixo dos guardrails de tamanho da doutrina e não altera contratos de domínio nem persistência.
+
+A fidelidade inicial manteve a importação tipográfica presente no CSS de referência. O fechamento definitivo da promessa offline ainda exige empacotar/localizar essas fontes ou aprovar equivalentes locais; isso não deve ser confundido com a conexão funcional dos controles da casa.
 
 ## Contrato de escrita — foco automático
 
