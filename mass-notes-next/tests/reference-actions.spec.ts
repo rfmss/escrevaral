@@ -130,3 +130,28 @@ test('Config abre destinos reais sem alternar o tema por acidente', async ({ pag
   await page.keyboard.press('Escape')
   await expect(page.locator('body')).not.toHaveClass(/focus-mode/)
 })
+
+test('Pesquisa abre a revisão local real e entra diretamente no recorte de revisão', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const pesquisa = page.getByRole('button', { name: 'Pesquisa', exact: true })
+  await expect(pesquisa).toHaveAttribute('aria-controls', 'text-tools')
+  await expect(pesquisa).toHaveAttribute('aria-expanded', 'false')
+  await pesquisa.click()
+
+  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  await expect(rail).toBeVisible()
+  await expect(page.locator('body')).toHaveClass(/reference-research-open/)
+  await expect(pesquisa).toHaveAttribute('aria-expanded', 'true')
+  await expect(rail.locator('#tab-revisao')).toHaveAttribute('aria-selected', 'true')
+  await expect(rail.locator('#panel-revisao')).toBeVisible()
+
+  await expect.poll(async () => (await rail.locator('.review-message').textContent())?.trim() ?? '')
+    .not.toBe('Aguardando uma leitura.')
+
+  await rail.getByLabel('Fechar ferramentas').click()
+  await expect(rail).toBeHidden()
+  await expect(page.locator('body')).not.toHaveClass(/reference-research-open/)
+  await expect(pesquisa).toHaveAttribute('aria-expanded', 'false')
+})
