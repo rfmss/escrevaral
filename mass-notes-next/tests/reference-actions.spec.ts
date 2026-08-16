@@ -155,3 +155,30 @@ test('Pesquisa abre a revisão local real e entra diretamente no recorte de revi
   await expect(page.locator('body')).not.toHaveClass(/reference-research-open/)
   await expect(pesquisa).toHaveAttribute('aria-expanded', 'false')
 })
+
+test('Tags abre o editor real, salva no documento e reaparece após recarregar', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const trigger = page.getByRole('button', { name: 'Editar tags do documento' })
+  await expect(trigger).toHaveAttribute('aria-controls', 'text-tools')
+  await trigger.click()
+
+  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  await expect(rail).toBeVisible()
+  await expect(page.locator('body')).toHaveClass(/reference-tags-open/)
+  await expect(rail.locator('#tab-pulso')).toHaveAttribute('aria-selected', 'true')
+
+  const input = rail.getByLabel('Marcadores da página')
+  await expect(input).toBeFocused()
+  await input.fill('memória, gate-tag, memória')
+  await rail.getByRole('button', { name: 'Salvar marcadores' }).click()
+  await expect(rail.locator('.metadata-message')).toContainText('Marcadores atualizados.')
+  await expect(page.locator('.analysis-panel .tags')).toContainText('# gate-tag')
+
+  await expect(page.locator('.field-value').filter({ hasText: 'Salvo' })).toBeVisible({ timeout: 5000 })
+  await rail.getByLabel('Fechar ferramentas').click()
+  await expect(rail).toBeHidden()
+  await page.reload()
+  await expect(page.locator('.analysis-panel .tags')).toContainText('# gate-tag')
+})
