@@ -125,21 +125,17 @@ export function WritingIntegrityBridge() {
       }
     }
 
-    const observer = new MutationObserver(syncIntegrity)
-    observer.observe(root, { childList: true, subtree: true, characterData: true })
-
-    const bodyObserver = new MutationObserver(syncIntegrity)
-    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
-
+    const timer = window.setInterval(syncIntegrity, 250)
     root.addEventListener('click', onClick)
     root.addEventListener('input', syncIntegrity)
-    syncIntegrity()
+    root.addEventListener('change', syncIntegrity)
+    requestAnimationFrame(syncIntegrity)
 
     return () => {
-      observer.disconnect()
-      bodyObserver.disconnect()
+      window.clearInterval(timer)
       root.removeEventListener('click', onClick)
       root.removeEventListener('input', syncIntegrity)
+      root.removeEventListener('change', syncIntegrity)
       document.body.classList.remove('reference-analysis-collapsed', 'reference-tags-empty')
     }
   }, [])
