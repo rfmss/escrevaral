@@ -7,6 +7,8 @@ import { publishLexicalSelection } from './lexicalSelectionBridge'
 import { type ReviewDecorationSpec } from './reviewDecorations'
 import { createEditorPositionContract, type EditorPositionContract } from './textPositionContract'
 
+const SYNC_FOCUS_LINE_EVENT = 'escrevaral:sync-focus-line'
+
 type EditorSnapshot = {
   content: JSONContent
   plainText: string
@@ -78,6 +80,33 @@ function MassNotesEditorInstance({
     })
   }
 
+  const syncFocusLine = (current: Editor) => {
+    const host = current.view.dom as HTMLElement
+    const paragraphs = host.querySelectorAll('p')
+    if (!document.body.classList.contains('focus-mode')) {
+      paragraphs.forEach((paragraph) => paragraph.classList.remove('focus-line'))
+      return
+    }
+
+    const { $from } = current.state.selection
+    let activeParagraph: HTMLParagraphElement | null = null
+
+    for (let depth = $from.depth; depth > 0 && !activeParagraph; depth -= 1) {
+      const node = current.view.nodeDOM($from.before(depth))
+      const element = node instanceof Element ? node : node?.parentElement
+      if (element instanceof HTMLParagraphElement) activeParagraph = element
+      else activeParagraph = element?.closest<HTMLParagraphElement>('p') ?? null
+    }
+
+    if (!activeParagraph) {
+      const domAtSelection = current.view.domAtPos(current.state.selection.from).node
+      const element = domAtSelection instanceof Element ? domAtSelection : domAtSelection.parentElement
+      activeParagraph = element?.closest<HTMLParagraphElement>('p') ?? null
+    }
+
+    paragraphs.forEach((paragraph) => paragraph.classList.toggle('focus-line', paragraph === activeParagraph))
+  }
+
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -94,16 +123,26 @@ function MassNotesEditorInstance({
       publishSnapshot(current)
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
+      syncFocusLine(current)
     },
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
+      syncFocusLine(current)
       onChange(publishSnapshot(current))
     },
     onSelectionUpdate: ({ editor: current }) => {
       publishCurrentLexicalSelection(current)
+      syncFocusLine(current)
     },
   })
+
+  useEffect(() => {
+    if (!editor) return
+    const sync = () => syncFocusLine(editor)
+    document.addEventListener(SYNC_FOCUS_LINE_EVENT, sync)
+    return () => document.removeEventListener(SYNC_FOCUS_LINE_EVENT, sync)
+  }, [editor])
 
   useEffect(() => {
     if (!editor) return
