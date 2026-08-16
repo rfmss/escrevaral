@@ -17,7 +17,7 @@ test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
   await expect(page.locator('.document-title .eyebrow')).toHaveText('DOCUMENTO')
   await expect(page.locator('.mode .eyebrow')).toHaveText('MODO')
   await expect(page.locator('.mode')).toContainText('Escrita')
-  await expect(page.getByRole('searchbox', { name: 'Buscar documentos' })).toBeVisible()
+  await expect(page.locator('.topbar .search input')).toBeVisible()
 
   const actions = page.locator('.main-actions > button')
   await expect(actions).toHaveCount(5)
@@ -136,7 +136,7 @@ test('documentos reais alimentam rail, busca e contagem', async ({ page }) => {
   await page.keyboard.type('um dois três quatro cinco')
   await expect(page.locator('.big-count')).toHaveText('5')
 
-  const search = page.getByRole('searchbox', { name: 'Buscar documentos' })
+  const search = page.locator('.topbar .search input')
   await search.fill('Documento de verificação')
   await expect(page.locator('.left-rail .chapter')).toHaveCount(1)
   await expect(page.locator('.left-rail .chapter')).toContainText('Documento de verificação')
