@@ -17,7 +17,7 @@ test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
   await expect(page.locator('.document-title .eyebrow')).toHaveText('DOCUMENTO')
   await expect(page.locator('.mode .eyebrow')).toHaveText('MODO')
   await expect(page.locator('.mode')).toContainText('Escrita')
-  await expect(page.locator('.topbar .search input')).toBeVisible()
+  await expect(page.locator('.search input[aria-label="Buscar documentos"]')).toBeVisible()
 
   const actions = page.locator('.main-actions > button')
   await expect(actions).toHaveCount(5)
@@ -43,6 +43,35 @@ test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
   await expect(page.locator('.statusbar')).toContainText('META DIÁRIA')
   await expect(page.locator('.statusbar')).toContainText('FOCO')
   await expect(page.locator('.statusbar')).toContainText('Português (BR)')
+})
+
+test('favicon invertido e wordmark não recebem branding legado', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+  await expect(page).toHaveTitle('Escrevaral')
+
+  const faviconHref = await page.evaluate(() => document.querySelector<HTMLLinkElement>('link[rel="icon"]')?.href ?? '')
+  expect(faviconHref).toContain('brand/escrevaral-favicon.svg')
+  const faviconResponse = await page.request.get(faviconHref)
+  expect(faviconResponse.ok()).toBe(true)
+  const favicon = await faviconResponse.text()
+  expect(favicon).toContain('<rect width="612" height="612" rx="120.83" fill="#F3EEE4"/>')
+  expect(favicon).toContain('<path fill="#3B271C"')
+
+  const brandState = await page.locator('.brand').evaluate((element) => {
+    const style = getComputedStyle(element)
+    return {
+      backgroundColor: style.backgroundColor,
+      backgroundImage: style.backgroundImage,
+      beforeContent: getComputedStyle(element, '::before').content,
+      afterContent: getComputedStyle(element, '::after').content,
+    }
+  })
+  expect(brandState.backgroundColor).toBe('rgba(0, 0, 0, 0)')
+  expect(brandState.backgroundImage).toBe('none')
+  expect(brandState.beforeContent).toBe('none')
+  expect(brandState.afterContent).toBe('none')
+  await expect(page.locator('.brand-name')).toHaveCount(1)
 })
 
 test('geometria desktop segue exatamente a folha de referência', async ({ page }) => {
@@ -136,7 +165,7 @@ test('documentos reais alimentam rail, busca e contagem', async ({ page }) => {
   await page.keyboard.type('um dois três quatro cinco')
   await expect(page.locator('.big-count')).toHaveText('5')
 
-  const search = page.locator('.topbar .search input')
+  const search = page.locator('.search input[aria-label="Buscar documentos"]')
   await search.fill('Documento de verificação')
   await expect(page.locator('.left-rail .chapter')).toHaveCount(1)
   await expect(page.locator('.left-rail .chapter')).toContainText('Documento de verificação')

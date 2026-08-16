@@ -8,3 +8,54 @@
   opacity: 0;
   pointer-events: none;
 }
+
+/*
+ * Correção visual pós-inspeção humana.
+ * A referência usa o papel do shell também atrás do wordmark. Camadas antigas
+ * de branding ainda definiam material/fundo para `.brand`; como esta folha é
+ * carregada por último, neutralizamos somente essa herança sem tocar na
+ * geometria canônica do topo.
+ */
+.paper-shell .brand {
+  color: var(--ink) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  isolation: isolate;
+}
+
+.paper-shell .brand.blueprint-corners::before,
+.paper-shell .brand.blueprint-corners::after {
+  content: none !important;
+  display: none !important;
+}
+
+.paper-shell .brand-name {
+  position: relative;
+  z-index: 1;
+  color: var(--ink) !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.paper-shell .brand-name::before {
+  content: none !important;
+  display: none !important;
+}
+
+.paper-shell .brand-name span {
+  color: var(--ink) !important;
+}
+
+.paper-shell .brand-name b {
+  color: var(--blue) !important;
+}
+
+.paper-shell .brand-tagline {
+  position: relative;
+  z-index: 1;
+  color: var(--ink) !important;
+  background: transparent !important;
+}
