@@ -60,13 +60,17 @@ jobs:
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Validar casa, escrita e paginação
+      - name: Validar referência e contratos do editor
         run: >-
           npx playwright test --project=chromium
-          tests/paper-home.spec.ts
-          tests/foundation.spec.ts
+          tests/reference-home.spec.ts
           tests/gate2.spec.ts
-          tests/m1-pagination-scroll.spec.ts
+
+      - name: Anexar prova visual à preview
+        run: |
+          if test -f test-results/escrevaral-reference-home.png; then
+            cp test-results/escrevaral-reference-home.png dist/reference-home.png
+          fi
 
       - name: Publicar preview isolada
         env:
@@ -88,7 +92,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
-          for path in index.html assets/index.js assets/index.css; do
+          for path in index.html assets/index.js assets/index.css reference-home.png; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -106,11 +110,11 @@ jobs:
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
               && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
-              && grep --quiet 'theme-escrevaral-paper-home-states' mass-notes-next/src/main.tsx; then
-              echo "Preview pública da nova casa respondeu corretamente."
+              && grep --quiet 'theme-escrevaral-reference.css' mass-notes-next/src/main.tsx; then
+              echo "Preview pública da referência canônica respondeu corretamente."
               exit 0
             fi
             sleep 10
           done
-          echo "A preview da nova casa não convergiu no CDN."
+          echo "A preview da referência canônica não convergiu no CDN."
           exit 1
