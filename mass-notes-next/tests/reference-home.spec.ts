@@ -7,7 +7,7 @@ async function waitReady(page: Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
-test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
+test('estrutura canônica reproduz a prancha sem prometer domínios inexistentes', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
@@ -17,6 +17,7 @@ test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
   await expect(page.locator('.document-title .eyebrow')).toHaveText('DOCUMENTO')
   await expect(page.locator('.mode .eyebrow')).toHaveText('MODO')
   await expect(page.locator('.mode')).toContainText('Escrita')
+  await expect(page.locator('.mode button')).toBeDisabled()
   await expect(page.locator('.search input[aria-label="Buscar documentos"]')).toBeVisible()
 
   const actions = page.locator('.main-actions > button')
@@ -27,22 +28,62 @@ test('estrutura canônica reproduz a prancha enviada', async ({ page }) => {
   await expect(actions.nth(3)).toContainText('Exportar')
   await expect(actions.nth(4)).toContainText('Config.')
 
-  await expect(page.locator('.left-rail')).toContainText('PROJETO ATUAL')
+  await expect(page.locator('.left-rail')).toContainText('BIBLIOTECA LOCAL')
+  await expect(page.locator('.left-rail')).toContainText('DOCUMENTOS LOCAIS')
   await expect(page.locator('.left-rail')).toContainText('DOCUMENTOS')
-  await expect(page.locator('.left-rail')).toContainText('PESQUISA')
-  await expect(page.locator('.left-rail')).toContainText('CAIXA RÁPIDA')
+  await expect(page.locator('.left-rail')).toContainText('REVISÃO LOCAL')
+  await expect(page.locator('.left-rail .quick-box')).toBeHidden()
 
   await expect(page.locator('.analysis-panel')).toContainText('ANÁLISE')
   await expect(page.locator('.analysis-panel')).toContainText('CONTAGEM')
-  await expect(page.locator('.analysis-panel')).toContainText('DISTRIBUIÇÃO')
+  await expect(page.locator('.analysis-panel .distribution-section')).toBeHidden()
   await expect(page.locator('.analysis-panel')).toContainText('LINGUAGEM')
   await expect(page.locator('.analysis-panel')).toContainText('TAGS')
-  await expect(page.locator('.analysis-panel')).toContainText('VERSÕES')
+  await expect(page.locator('.analysis-panel')).toContainText('ESTADO LOCAL')
 
   await expect(page.locator('.statusbar')).toContainText('SINCRONIZADO')
   await expect(page.locator('.statusbar')).toContainText('META DIÁRIA')
   await expect(page.locator('.statusbar')).toContainText('FOCO')
+  await expect(page.locator('.statusbar .focus strong')).toHaveText('Pronto')
   await expect(page.locator('.statusbar')).toContainText('Português (BR)')
+})
+
+test('controles sem domínio ficam estáticos e análise recolhe de verdade', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  await expect(page.locator('.left-rail .current-project .project-row button')).toBeHidden()
+  await expect(page.locator('.left-rail .research li').first()).toHaveAttribute('aria-label', /Use Pesquisa/)
+  await expect(page.locator('.left-rail .research li').nth(1)).toBeHidden()
+
+  await expect(page.locator('.formatbar > label').nth(1).getByRole('button')).toBeDisabled()
+  await expect(page.locator('.formatbar > label').nth(2).getByRole('button')).toHaveCount(2)
+  await expect(page.locator('.formatbar > label').nth(2).getByRole('button').first()).toBeDisabled()
+  await expect(page.locator('.formatbar > label').nth(2).getByRole('button').last()).toBeDisabled()
+  await expect(page.locator('.statusbar .language button')).toBeHidden()
+
+  const versions = page.locator('.analysis-panel .versions')
+  await expect(versions.locator('h3')).toHaveText('ESTADO LOCAL')
+  await expect(versions.locator('.section-title a')).toBeHidden()
+  await expect(versions.locator('.version').first().locator('b')).toHaveText(/^rev\. \d+$/)
+
+  await expect(page.locator('.analysis-panel .tags > div:last-child > button')).toBeHidden()
+  await expect(page.locator('.analysis-panel .tags .add')).toBeVisible()
+
+  const workspace = page.locator('.workspace')
+  const beforeWidth = await workspace.evaluate((element) => element.getBoundingClientRect().width)
+  const toggle = page.getByRole('button', { name: 'Recolher análise' })
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await toggle.click()
+  await expect(page.locator('body')).toHaveClass(/reference-analysis-collapsed/)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(page.locator('.analysis-panel .count')).toBeHidden()
+  const collapsedWidth = await workspace.evaluate((element) => element.getBoundingClientRect().width)
+  expect(collapsedWidth).toBeGreaterThan(beforeWidth + 150)
+
+  await page.getByRole('button', { name: 'Expandir análise' }).click()
+  await expect(page.locator('body')).not.toHaveClass(/reference-analysis-collapsed/)
+  await expect(page.locator('.analysis-panel .count')).toBeVisible()
 })
 
 test('favicon invertido e wordmark não recebem branding legado', async ({ page }) => {
@@ -151,6 +192,7 @@ test('digitação entra no foco total e Escape devolve a casa', async ({ page })
   await page.keyboard.press('Escape')
   await expect.poll(() => page.evaluate(() => document.body.classList.contains('focus-mode'))).toBe(false)
   await expect(page.locator('.topbar')).toBeVisible()
+  await expect(page.locator('.statusbar .focus strong')).toHaveText('Pronto')
   await expect(editor.locator('p.focus-line')).toHaveCount(0)
 })
 
