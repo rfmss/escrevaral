@@ -146,26 +146,6 @@ test('digitação entra no foco total e Escape devolve a casa', async ({ page })
   await expect(page.locator('.analysis-panel')).toBeHidden()
   await expect(page.locator('.statusbar')).toBeHidden()
   await expect(page.locator('.formatbar')).toBeHidden()
-
-  const focusDebug = await editor.evaluate((element) => {
-    const selection = window.getSelection()
-    const anchor = selection?.anchorNode ?? null
-    const anchorElement = anchor instanceof Element ? anchor : anchor?.parentElement ?? null
-    return {
-      bodyClass: document.body.className,
-      activeElement: document.activeElement?.className ?? '',
-      pCount: element.querySelectorAll('p').length,
-      focusLineCount: element.querySelectorAll('p.focus-line').length,
-      childTags: Array.from(element.children).map((child) => `${child.tagName}.${child.className}`),
-      anchorNode: anchor?.nodeName ?? null,
-      anchorElement: anchorElement?.tagName ?? null,
-      anchorParagraph: anchorElement?.closest('p')?.textContent ?? null,
-      selectionText: selection?.toString() ?? '',
-      html: element.innerHTML,
-    }
-  })
-  console.log('FOCUS_DEBUG', JSON.stringify(focusDebug))
-
   await expect(editor.locator('p.focus-line')).toHaveCount(1)
 
   await page.keyboard.press('Escape')
