@@ -6,6 +6,7 @@
 - Destino recomendado do primeiro PR: `experiment/mass-notes-tiptap`
 - Estado: **proposta operacional para deliberação humana**
 - Escopo desta versão: governança, contrato portátil e transplante-piloto de Morfologia Verbal
+- Doutrina vinculante: `2026-08-16-doutrina-do-produto-escrevaral-cofre.md`
 
 > **Eva Chara, entre em banca.**
 
@@ -14,6 +15,8 @@
 Construir um núcleo linguístico local, explicável e serializável que receba texto e contexto, devolva leituras com evidência e incerteza e possa ser conectado a qualquer editor por adaptadores, sem depender de React, Tiptap, DOM, CSS, IndexedDB ou da aplicação Escrevaral.
 
 O Cofre é o gerador. O editor é a festa. O adaptador é o cabo entre os dois.
+
+Este plano obedece à Doutrina de Produto e Engenharia registrada nesta branch. O objetivo não é produzir uma demonstração convincente nem validar a identidade técnica da pessoa mantenedora. É formar um legado offline, modular e auditável para escritores brasileiros. Soluções agradáveis que criem dívida previsível devem ser contestadas e registradas antes de entrar no produto.
 
 Este documento não autoriza uma migração geral, não abre Sintaxe de produção e não declara nenhuma caixa linguística concluída. A primeira autorização proposta é estreita:
 
@@ -117,7 +120,10 @@ O núcleo do Cofre não pode importar ou acessar:
 
 ### 4.2 Fronteira linguística
 
-- português brasileiro é o alvo primário, com variante e registro explícitos;
+- português brasileiro (`pt-BR`) é o único idioma e locale de produto;
+- qualquer locale diferente de `pt-BR` é rejeitado explicitamente pelo contrato;
+- inglês não entra em runtime, corpus, avaliação, mensagens ou promessa de produto;
+- de projetos voltados ao inglês, somente código neutro em relação ao idioma pode ser considerado, após auditoria de licença e validação própria em `pt-BR`;
 - norma, uso, descrição, hipótese computacional e orientação editorial são camadas separadas;
 - falta de evidência produz `provável`, `ambíguo` ou `indeterminado`, nunca certeza decorativa;
 - nenhuma regra crítica depende silenciosamente de uma única obra;
@@ -133,6 +139,16 @@ O núcleo do Cofre não pode importar ou acessar:
 - referências bibliográficas não podem sugerir endosso de autores ou editoras;
 - citação dá rastreabilidade, não substitui licença;
 - Biblioteca de Autoridade e corpus permanecem separados.
+
+### 4.4 Fronteira de manutenção
+
+- HTML é casca e bootstrap, nunca depósito de lógica de produto;
+- interface, adaptador, orquestração, engine, conhecimento e proveniência permanecem em módulos distintos;
+- arquivos acima de 350 linhas não geradas exigem revisão explícita de divisão;
+- arquivos acima de 600 linhas não geradas exigem justificativa arquitetural registrada ou separação;
+- dependências cíclicas e imports de tecnologia hospedeira no núcleo são bloqueados;
+- uma tela funcionando não conta como arquitetura validada;
+- dívida técnica conhecida não pode ser escondida para produzir sensação de avanço.
 
 ---
 
