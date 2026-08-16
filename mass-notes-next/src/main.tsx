@@ -30,6 +30,7 @@ import './styles/theme-escrevaral-paper-home-editor.css'
 import './styles/theme-escrevaral-paper-home-tools.css'
 import './styles/theme-escrevaral-paper-home-states.css'
 import './styles/theme-escrevaral-reference.css'
+import './styles/theme-escrevaral-reference-bridge.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
