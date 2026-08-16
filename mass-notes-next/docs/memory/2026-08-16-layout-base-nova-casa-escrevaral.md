@@ -31,7 +31,7 @@ A primeira implementação é deliberadamente pequena e reversível:
 4. não carregar fontes remotas: a aparência usa fallbacks locais para preservar funcionamento offline;
 5. não implementar ainda Metas, Notas, Pesquisa ou Configurações novas só porque aparecem no mockup.
 
-A folha `theme-escrevaral-paper-home.css` é carregada por último e funciona como camada de composição. Ela não altera contratos de domínio nem persistência.
+A composição é dividida entre `theme-escrevaral-paper-home.css`, `theme-escrevaral-paper-home-editor.css` e `theme-escrevaral-paper-home-tools.css`, todas carregadas por último. A divisão mantém cada módulo abaixo dos guardrails de tamanho da doutrina e não altera contratos de domínio nem persistência.
 
 ## Próximo gate
 
