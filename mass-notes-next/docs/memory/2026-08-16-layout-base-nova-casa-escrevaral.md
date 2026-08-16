@@ -60,23 +60,27 @@ Em 16/08/2026 a banca da nova casa fechou verde com 12/12 testes do gate, inclui
 
 Também permaneceram verdes os contratos de geometria da referência, toolbar Tiptap, colagem estruturada, recuperação, conflito entre abas, drawers móveis, build TypeScript/Vite, publicação da preview e smoke público.
 
-## Higiene de branches
+## Higiene de branches — registrada e deferida
 
-Com a casa nova estabilizada, o repositório deve começar a reduzir branches históricas.
+Há branches históricas a eliminar, e a regra de segurança já foi estabelecida: nenhuma branch deve ser apagada sem verificar se seus commits relevantes estão preservados.
 
-Regra de poda:
+Em 16/08/2026 a pessoa mantenedora decidiu **não abrir essa frente agora**. A poda fica registrada como dívida de higiene de repositório e será retomada em uma rodada própria.
 
-1. **não apagar** `main`, a branch ativa da nova casa, a branch ativa do Cofre ou qualquer branch que ainda seja base/head de trabalho deliberadamente aberto;
-2. branches de preview podem ser removidas quando sua PR correspondente estiver integrada e a preview não for mais necessária;
-3. branches `agent/*`, `codex/*`, `staging/*`, `restore*`, `backup*`, experimentos e features antigas devem ser eliminadas apenas depois de verificar se seus commits relevantes já estão absorvidos ou preservados por tag/commit alcançável;
-4. nenhuma branch histórica deve ser mantida apenas como “memória”: decisões e estado canônico pertencem a `docs/memory`, ao mapa mestre e ao histórico Git;
-5. a poda deve ocorrer em lotes pequenos, com lista explícita de manter/apagar/revisar antes de cada lote destrutivo.
+Até lá:
+
+- não iniciar auditoria adicional de branches durante o trabalho da nova casa;
+- não apagar branches como efeito colateral de outra tarefa;
+- manter `main`, a branch ativa da nova casa e demais frentes deliberadamente abertas intactas;
+- usar `docs/memory` e o histórico Git como memória, sem transformar a limpeza do repositório em prioridade concorrente.
+
+## Foco atual
+
+A única frente ativa desta sessão é **o Escrevaral atual na nova casa aprovada**.
+
+O objetivo imediato é continuar consolidando essa experiência real, preservando a fidelidade visual e os contratos já provados. Não abrir Cofre, poda de branches, redesign paralelo ou outra frente enquanto não houver nova decisão explícita.
 
 ## Próximo gate
 
-1. terminar a inspeção humana da nova casa;
-2. integrar a branch da casa quando aprovada;
-3. auditar e podar o primeiro lote de branches antigas com segurança;
-4. depois continuar os controles públicos do layout, um grupo por vez, conectando-os apenas a destinos reais.
+Continuar a nova casa a partir do estado validado, conectando ou refinando um comportamento por vez e somente quando houver destino real no produto.
 
 Nenhum botão cenográfico deve ser promovido a funcionalidade sem um destino real.
