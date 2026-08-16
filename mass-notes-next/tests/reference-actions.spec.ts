@@ -103,3 +103,30 @@ test('Exportar abre escolhas reais e gera TXT, Markdown e HTML a partir do texto
   await expect(panel).toBeHidden()
   await expect(exportar).toHaveAttribute('aria-expanded', 'false')
 })
+
+test('Config abre destinos reais sem alternar o tema por acidente', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const config = page.getByRole('button', { name: 'Config.', exact: true })
+  await expect(config).toHaveAttribute('aria-controls', 'writing-config-panel')
+  await expect(page.locator('body')).not.toHaveClass(/night/)
+  await config.click()
+
+  const panel = page.getByRole('dialog', { name: 'Configurações' })
+  await expect(panel).toBeVisible()
+  await expect(config).toHaveAttribute('aria-expanded', 'true')
+  await expect(page.locator('body')).not.toHaveClass(/night/)
+  await expect(panel).toContainText('Português (BR)')
+
+  await panel.getByRole('button', { name: /Usar modo noite/ }).click()
+  await expect(page.locator('body')).toHaveClass(/night/)
+  await panel.getByRole('button', { name: /Usar papel/ }).click()
+  await expect(page.locator('body')).not.toHaveClass(/night/)
+
+  await panel.getByRole('button', { name: /Entrar no foco/ }).click()
+  await expect(panel).toBeHidden()
+  await expect(page.locator('body')).toHaveClass(/focus-mode/)
+  await page.keyboard.press('Escape')
+  await expect(page.locator('body')).not.toHaveClass(/focus-mode/)
+})
