@@ -80,6 +80,13 @@ function MassNotesEditorInstance({
     })
   }
 
+  const paragraphFromNode = (node: Node | null): HTMLParagraphElement | null => {
+    if (!node) return null
+    const element = node instanceof Element ? node : node.parentElement
+    if (element instanceof HTMLParagraphElement) return element
+    return element?.closest<HTMLParagraphElement>('p') ?? null
+  }
+
   const syncFocusLine = (current: Editor) => {
     const host = current.view.dom as HTMLElement
     const paragraphs = host.querySelectorAll('p')
@@ -88,20 +95,42 @@ function MassNotesEditorInstance({
       return
     }
 
-    const { $from } = current.state.selection
+    const { from, $from } = current.state.selection
     let activeParagraph: HTMLParagraphElement | null = null
 
     for (let depth = $from.depth; depth > 0 && !activeParagraph; depth -= 1) {
-      const node = current.view.nodeDOM($from.before(depth))
-      const element = node instanceof Element ? node : node?.parentElement
-      if (element instanceof HTMLParagraphElement) activeParagraph = element
-      else activeParagraph = element?.closest<HTMLParagraphElement>('p') ?? null
+      activeParagraph = paragraphFromNode(current.view.nodeDOM($from.before(depth)))
     }
 
     if (!activeParagraph) {
-      const domAtSelection = current.view.domAtPos(current.state.selection.from).node
-      const element = domAtSelection instanceof Element ? domAtSelection : domAtSelection.parentElement
-      activeParagraph = element?.closest<HTMLParagraphElement>('p') ?? null
+      const domPosition = current.view.domAtPos(from, -1)
+      const siblings = domPosition.node.childNodes
+      const candidates: Array<Node | null> = [
+        domPosition.node,
+        siblings.item(domPosition.offset),
+        siblings.item(Math.max(0, domPosition.offset - 1)),
+      ]
+      activeParagraph = candidates.map(paragraphFromNode).find(Boolean) ?? null
+    }
+
+    if (!activeParagraph) {
+      const topLevel = host.children.item($from.index(0))
+      activeParagraph = paragraphFromNode(topLevel)
+      if (!activeParagraph && $from.parent.type.name === 'paragraph') {
+        const nestedParagraphs = topLevel?.querySelectorAll('p') ?? []
+        if (nestedParagraphs.length === 1) activeParagraph = nestedParagraphs.item(0)
+      }
+    }
+
+    if (!activeParagraph) {
+      try {
+        const coords = current.view.coordsAtPos(from)
+        const point = document.elementFromPoint((coords.left + coords.right) / 2, (coords.top + coords.bottom) / 2)
+        const paragraph = point?.closest<HTMLParagraphElement>('p') ?? null
+        if (paragraph && host.contains(paragraph)) activeParagraph = paragraph
+      } catch {
+        activeParagraph = null
+      }
     }
 
     paragraphs.forEach((paragraph) => paragraph.classList.toggle('focus-line', paragraph === activeParagraph))
