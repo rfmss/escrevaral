@@ -11,7 +11,7 @@ test('Metas abre a preferência real e sincroniza o rodapé', async ({ page }) =
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
-  const metas = page.getByRole('button', { name: 'Metas' })
+  const metas = page.getByRole('button', { name: 'Metas', exact: true })
   await expect(metas).toHaveAttribute('aria-controls', 'writing-goals-panel')
   await metas.click()
 
@@ -27,7 +27,7 @@ test('Metas abre a preferência real e sincroniza o rodapé', async ({ page }) =
   await expect(daily).toHaveAttribute('data-writing-goal', '1500')
   await expect(daily).toContainText('/ 1.500 palavras')
 
-  await page.getByRole('button', { name: 'Fechar metas' }).last().click()
+  await panel.getByLabel('Fechar metas').click()
   await expect(panel).toBeHidden()
   await expect(metas).toHaveAttribute('aria-expanded', 'false')
 
@@ -42,7 +42,7 @@ test('Ctrl+K leva à busca real e a busca continua filtrando documentos reais', 
   await waitReady(page)
 
   await page.keyboard.press('Control+K')
-  const search = page.getByLabel('Buscar documentos')
+  const search = page.locator('.topbar .search input[aria-label="Buscar documentos"]')
   await expect(search).toBeFocused()
 
   const title = (await page.locator('.left-rail .chapter').first().locator('.chapter-copy b').textContent())?.replace(/^\d{2}\s+—\s+/, '').trim() ?? ''
