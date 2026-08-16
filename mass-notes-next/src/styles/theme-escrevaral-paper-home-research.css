@@ -49,6 +49,12 @@
     text-transform: uppercase;
   }
 
+  body.reference-research-open .reference-mobile-legacy #text-tools .drawer-close {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
   body.reference-research-open .reference-mobile-legacy #text-tools .tabs {
     background: transparent;
     border-bottom: 1px solid var(--line);
