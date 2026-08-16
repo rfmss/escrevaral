@@ -595,7 +595,7 @@ export default function App() {
           <section className="documents">
             <div className="section-title"><span className="eyebrow">DOCUMENTOS</span><button className="icon-square add" type="button" onClick={() => { void newDocument() }} aria-label="Novo documento">＋</button></div>
             {filteredDocuments.map((item, index) => (
-              <button className={`chapter note-card ${item.id === activeId ? 'active' : ''}`} type="button" key={item.id} onClick={() => { void selectDocument(item.id) }}>
+              <button className={`chapter ${item.id === activeId ? 'active' : ''}`} type="button" key={item.id} onClick={() => { void selectDocument(item.id) }}>
                 <span className={`doc-symbol ${item.id === activeId ? 'round' : ''}`} />
                 <span className="chapter-copy"><b>{String(index + 1).padStart(2, '0')} — {item.title.trim() || 'Sem título'}</b><small>{countWords(item.plainText).toLocaleString('pt-BR')} palavras</small></span>
                 <time>{formatDate(item.updatedAt)}</time>
@@ -660,7 +660,7 @@ export default function App() {
 
         <footer className="statusbar">
           <div className="regmark"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="7" /><path d="M16 2v8M16 22v8M2 16h8M22 16h8" /></svg></div>
-          <div className="sync"><span className="eyebrow">{saveState === 'Salvo' ? 'SINCRONIZADO' : saveState.toLocaleUpperCase('pt-BR')}</span><i className={saveState === 'Falha' || saveState === 'Conflito' ? 'sync-error' : ''} /><time className={`field-value save-${saveState.toLocaleLowerCase('pt-BR')}`}>{formatDateTime(draft.updatedAt)}</time></div>
+          <div className="sync"><span className="eyebrow">{saveState === 'Salvo' ? 'SINCRONIZADO' : saveState.toLocaleUpperCase('pt-BR')}</span><i className={saveState === 'Falha' || saveState === 'Conflito' ? 'sync-error' : ''} /><span className={`sync-save field-value save-${saveState.toLocaleLowerCase('pt-BR')}`} aria-live="polite">{saveState}</span><time>{formatDateTime(draft.updatedAt)}</time></div>
           <div className="daily"><span className="eyebrow">META DIÁRIA</span><strong>{words.toLocaleString('pt-BR')} <small>/ {dailyGoal.toLocaleString('pt-BR')} palavras</small></strong><div className="progress"><i style={{ width: `${dailyProgress}%` }} /></div><b>{dailyProgress}%</b></div>
           <div className="focus"><span className="eyebrow">FOCO</span><strong>60 min</strong><button className="play" type="button" onClick={() => setFocusMode((value) => !value)}>{focusMode ? 'Ⅱ' : '▶'}</button></div>
           <div className="language"><span>IDIOMA<strong>Português (BR)</strong></span><button type="button" aria-label="Selecionar idioma"><span className="chevron" aria-hidden="true" /></button></div>
@@ -669,7 +669,7 @@ export default function App() {
         </footer>
       </main>
 
-      <div className="reference-mobile-legacy" aria-hidden="true">
+      <div className="reference-mobile-legacy">
         <Library
           documents={documents}
           activeId={activeId}
