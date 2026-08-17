@@ -43,73 +43,118 @@ Gate: run `31982558518`, head `eebc7c57d800520f62b649a45a2cbf762cba6284`, **23/2
 
 ### A3b — Ownership único da busca/biblioteca canônica
 
-Problema eliminado:
-- `Library` mantinha `status`, `favoritesOnly`, `tag` e `sort` internamente;
-- `App` mantinha outra string `search` e o rail canônico fazia um filtro próprio de título + texto.
+O `App` é dono de uma única `LibraryQuery`; `Library` é controlado por `query` + `onQueryChange`; busca do topo, rail e drawer usam `queryLibraryDocuments`. Filtros e busca descrevem o mesmo recorte nos dois sentidos, sem store global nem bridge de dados.
 
-Estado final:
-- `App` é dono de uma única `LibraryQuery`;
-- `Library` é controlado por `query` + `onQueryChange`;
-- busca do topo edita `libraryQuery.search`;
-- rail canônico e drawer usam `queryLibraryDocuments(documents, libraryQuery)`;
-- filtros feitos no drawer aparecem no rail;
-- busca feita no topo reaparece no drawer;
-- `Limpar filtros` limpa o mesmo estado compartilhado;
-- nenhuma store global nem bridge de filtro foi criada.
-
-Gate: run `31982950132`, head `37ed8ece9b1b8a3f46002e332d36e8e4ef0da2fa`, **24/24**, build, publicação e smoke público verdes.
+Gate: run `31982950132`, head `37ed8ece9b1b8a3f46002e332d36e8e4ef0da2fa`, **24/24**, build/publicação/smoke verdes.
 
 ### T1 — Tipografia e promessa offline
 
 Objetivo fechado: preservar Anton, Oswald e Literata sem chamada de rede em runtime.
 
 Entregue:
-- `Anton-Regular.ttf`, `Oswald-wght.ttf` e `Literata-opsz-wght.ttf` foram vendorados em `src/assets/fonts/` a partir do repositório oficial `google/fonts`;
-- os Git blob SHAs dos binários locais são idênticos aos oficiais usados na importação;
-- `OFL-Anton.txt`, `OFL-Oswald.txt`, `OFL-Literata.txt` e `PROVENANCE.md` ficam junto dos ativos;
-- `paper-home-fonts.css` define `@font-face` local;
-- o `@import` de `fonts.googleapis.com` foi removido do CSS canônico;
-- o workflow falha se `fonts.googleapis.com` ou `fonts.gstatic.com` reaparecerem no `dist`;
-- o workflow também prova presença e tamanho exato dos três TTF gerados;
-- Playwright prova `document.fonts.check()` para Anton, Oswald e Literata e ausência de requests ao Google Fonts.
+- TTFs vendorados em `src/assets/fonts/` a partir do repositório oficial `google/fonts`;
+- Git blob SHAs dos binários locais idênticos aos oficiais usados na importação;
+- OFLs e `PROVENANCE.md` junto dos ativos;
+- `theme-escrevaral-fonts.css` define `@font-face` local;
+- `@import` de `fonts.googleapis.com` removido;
+- CI falha se `fonts.googleapis.com` ou `fonts.gstatic.com` reaparecerem no `dist`;
+- CI prova presença/tamanho dos TTF;
+- Playwright prova carregamento local das três famílias e ausência de requests ao Google Fonts.
 
 Bootstrap de ativos:
-- run `31983310996`: baixou/verificou os binários oficiais, adicionou licenças/proveniência e removeu o workflow efêmero no mesmo commit;
-- run `31983423267`: removeu o import remoto e removeu o segundo bootstrap efêmero no mesmo commit.
+- run `31983310996`: baixou/verificou binários, adicionou licenças/proveniência e removeu o workflow efêmero;
+- run `31983423267`: removeu import remoto e o segundo bootstrap efêmero.
 
-Falhas intermediárias registradas:
-- run `31983487995`: build verde e ausência de Google Fonts verde; a banca usava glob com hash, mas o Vite preservou os nomes exatos dos TTF;
-- run `31983539259`: prova de assets corrigida e 24/25 contratos verdes; o único vermelho expôs um race antigo no resumo do Espelho de Voz, não relacionado às fontes.
+Falhas intermediárias:
+- run `31983487995`: banca esperava hash no nome dos assets; o Vite preservou os nomes exatos;
+- run `31983539259`: 24/25; expôs race antigo no resumo do Espelho de Voz.
 
 Correção de robustez descoberta durante T1:
-- `WritingVoiceBridge` agora observa somente mutações de `#panel-voz` e captura o resultado no ciclo em que `voiceReading` é renderizado;
-- o polling de 250 ms continua apenas como fallback;
-- a engine de Voz não foi alterada.
+- `WritingVoiceBridge` observa mutações de `#panel-voz` e captura o resultado no ciclo de render;
+- polling de 250 ms permanece apenas como fallback;
+- engine de Voz não foi alterada.
 
-Gate final:
-- run `31985024414`;
-- head funcional `e710ce6cb31d3513213bb71a4b3d77727eaf0e17`;
-- **25/25 contratos verdes**;
+Gate final: run `31985024414`, head funcional `e710ce6cb31d3513213bb71a4b3d77727eaf0e17`, **25/25**, build/prova offline/publicação/smoke verdes.
+
+### T2 — Bundle principal
+
+Objetivo: reduzir o caminho inicial por **fronteiras naturais**, sem `manualChunks` cosmético, sem alterar engines e sem depender de rede.
+
+#### Linha de base T1
+
+- `index.js`: aproximadamente `2.210.880 B`;
+- gzip: aproximadamente `638.760 B`.
+
+#### Medição antes do corte
+
+Massas opcionais encontradas no boot:
+- Léxico/Palavras: ~699 KB crus (`lexical-engine.js` + `lexical-data.json` + `norma-data.json`);
+- Revisão: ~199 KB crus (`analise`, `syntax`, `punctuation`, `criterios`);
+- Contexto/decolonial: ~275 KB de dados + engine pequena;
+- RimaLab e Voz: menores.
+
+#### T2a — Revisão sob demanda
+
+Mudanças:
+- imports `?raw` da revisão passaram para `dynamic import()` em `reviewAdapter.ts`;
+- `ensureReviewEngine()` virou carregador assíncrono idempotente;
+- `App` deixou de inicializar revisão no boot;
+- `tests/reference-lazy-review.spec.ts` prova ausência dos quatro scripts no boot e instalação somente após `Pesquisa`.
+
+Gate: run `31985686591`, **26/26**, publicação/smoke verdes.
+
+Medida após T2a:
+- `index.js`: `2.013.010 B`;
+- gzip: `577.239 B`;
+- quatro chunks locais de revisão gerados sob demanda.
+
+#### T2b — Palavras/Léxico sob demanda
+
+Mudanças:
+- `LexicalPanel` passou a `React.lazy` + `Suspense` dentro da aba `palavras` já condicional;
+- engine lexical e dados não foram reescritos;
+- foi restaurada uma rota desktop canônica **Consultar palavras** dentro de Linguagem, usando o mesmo `RightRail` real;
+- fluxo validado: selecionar no Tiptap → foco total → `Escape` → Consultar palavras → seleção continua disponível;
+- Gate 10 completo voltou à banca: consulta, seleção viva, nenhuma substituição automática, fallback seguro e drawer móvel.
+
+Falhas intermediárias registradas:
+- run `31985918681`: **27/31**; revelou que Palavras não tinha rota desktop canônica visível;
+- run `31986244244`: **27/31**; rota já existia, mas os testes tinham nome `Consultar` ambíguo e ignoravam o modo foco;
+- run `31986446376`: **30/31**; produto verde, único erro era `getByRole('status')` colidindo com o status do Espelho de Voz;
+- seletores foram ancorados no próprio painel lexical; nenhuma gambiarra no produto para satisfazer a banca.
+
+Gate final T2b:
+- run `31986614621`;
+- head `b038ab829963da73cd2f439337fe3181921333d9`;
+- **31/31 testes verdes**;
 - build, prova offline, publicação e smoke público verdes.
+
+Medida final T2:
+- `index.js`: **1.098.042 B**;
+- gzip medido: **307.233 B**;
+- `LexicalPanel.js`: `917.020 B` / ~`271,69 kB` gzip, carregado sob demanda;
+- revisão permanece em quatro chunks sob demanda.
+
+Resultado contra a linha de base T1:
+- redução minificada do chunk inicial: **50,3%**;
+- redução gzip do chunk inicial: **51,9%**.
+
+O Vite ainda avisa sobre chunks acima de 500 kB (`index.js` e `LexicalPanel.js`). Isso permanece documentado, mas T2 atingiu o critério de saída: redução material comprovada, sem regressão de comportamento e sem nova dependência de rede. Não continuar fragmentando apenas para eliminar warning.
 
 ## FILA PRONTA
 
-Nenhuma tranche funcional adicional está liberada sem nova entidade/contrato. A ordem lógica continua pelas dívidas técnicas que reduzem risco sem inventar produto.
+A fila funcional adicional permanece vazia sem novas entidades. Próxima tranche técnica: **T3 — reduzir bridges de transição**, uma integração consolidada por vez.
 
-### Próximo: T2 — Bundle principal
+### Próximo: T3 — Bridges de transição
 
-Problema comprovado no gate T1:
-- `dist/assets/index.js`: ~2,21 MB minificado / ~639 kB gzip;
-- Vite mantém warning de chunk principal acima de 500 kB.
+Objetivo:
+1. inventariar bridges atuais e classificar `estável / transitório / ainda necessário`;
+2. promover para ownership React somente integrações cujo comportamento já esteja consolidado;
+3. começar pelo bridge mais simples/baixo risco;
+4. não reescrever shell, engines ou domínio;
+5. manter os 31 contratos atuais verdes.
 
-Objetivo da rodada:
-1. medir quais módulos dominam o bundle;
-2. separar experiências pesadas que não precisam carregar junto do editor inicial;
-3. preferir `dynamic import()` em fronteiras naturais já existentes, sem quebrar offline;
-4. preservar Tiptap, autosave, recuperação, conflito, drawers e gates canônicos;
-5. não alterar UX só para melhorar métrica.
-
-Critério de saída: redução comprovada do chunk inicial, sem regressão nos 25 contratos e sem nova dependência de rede.
+Critério de saída da primeira tranche T3: menos manipulação imperativa de DOM para um circuito já consolidado, mesma UX e mesma fonte de dados.
 
 ## BLOQUEADO POR MODELO — não implementar cenograficamente
 
@@ -140,13 +185,13 @@ Locale atual: `pt-BR`. Internacionalização é decisão separada e não nasce d
 ## DÍVIDA TÉCNICA
 
 ### T1 — Tipografia/offline — **CONCLUÍDO**
-Fechado no run `31985024414`, com 25/25 contratos e smoke público verde.
+Run `31985024414`, 25/25, smoke verde.
 
-### T2 — Bundle principal — **PRÓXIMO**
-Chunk inicial continua acima de 500 kB gzip. Abrir rodada própria de medição e code splitting.
+### T2 — Bundle principal — **CONCLUÍDO**
+Run `31986614621`, 31/31, ~50% de redução no chunk inicial, smoke verde.
 
-### T3 — Bridges de transição
-Depois da estabilização, promover integrações consolidadas ao React proprietário do shell e reduzir manipulação transitória de DOM.
+### T3 — Bridges de transição — **PRÓXIMO**
+Promover integrações consolidadas ao React proprietário do shell e reduzir manipulação imperativa de DOM, sem refactor amplo.
 
 ## Fora desta fila
 
