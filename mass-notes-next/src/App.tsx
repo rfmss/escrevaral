@@ -577,12 +577,12 @@ export default function App() {
           </div>
           <div className="mode">
             <span className="eyebrow">MODO</span>
-            <button type="button">Escrita <span className="chevron" aria-hidden="true" /></button>
+            <button type="button" disabled aria-disabled="true" aria-label="Modo atual: Escrita">Escrita</button>
           </div>
           <label className="search"><span className="search-icon" /><input placeholder="Buscar" value={libraryQuery.search} onChange={(event) => setLibraryQuery((current) => ({ ...current, search: event.target.value }))} aria-label="Buscar documentos" /><kbd>CTRL + K</kbd></label>
           <nav className="main-actions" aria-label="Ações principais">
             <button type="button"><svg className="ui-icon target-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10.5" /><circle cx="16" cy="16" r="3" /><path d="M16 1v9M16 22v9M1 16h9M22 16h9" /></svg><small>Metas</small></button>
-            <button type="button" onClick={() => setRailOpen(true)}><svg className="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5.5h17v22H8zM11 3.5h11v4H11zM12 11h9M12 15h9M12 19h9M12 23h7" /></svg><small>Notas</small></button>
+            <button type="button" disabled aria-disabled="true" aria-label="Notas — ainda não disponível"><svg className="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5.5h17v22H8zM11 3.5h11v4H11zM12 11h9M12 15h9M12 19h9M12 23h7" /></svg><small>Notas</small></button>
             <button type="button" onClick={() => { setRailOpen(true); void runReview() }}><svg className="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13.5" cy="13.5" r="9.5" /><path d="m20.5 20.5 8 8" /></svg><small>Pesquisa</small></button>
             <button type="button" onClick={() => exportDocument('html')}><svg className="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 18v10h22V18M16 23V3M10 9l6-6 6 6" /></svg><small>Exportar</small></button>
             <button type="button" onClick={() => setDark((value) => !value)}><svg className="ui-icon gear-svg" viewBox="0 0 32 32" aria-hidden="true"><path d="m13.2 3-.8 3.2-2.5 1.1L7 5.6 4.6 8l1.7 2.9-1.1 2.5-3.2.8v3.4l3.2.8 1.1 2.6-1.7 2.8L7 26.2l2.9-1.7 2.5 1.1.8 3.2h3.4l.8-3.2 2.6-1.1 2.8 1.7 2.4-2.4-1.7-2.8 1.1-2.6 3.2-.8v-3.4l-3.2-.8-1.1-2.5L25.2 8l-2.4-2.4L20 7.3l-2.6-1.1-.8-3.2z" /><circle cx="14.9" cy="15.9" r="4.7" /></svg><small>Config.</small></button>
@@ -618,22 +618,8 @@ export default function App() {
               </button>
             ))}
           </section>
-          <section className="research">
-            <span className="eyebrow">PESQUISA</span>
-            <ul>
-              <li><span className="folder" />Personagens <b>9</b></li>
-              <li><span className="folder" />Locações <b>14</b></li>
-              <li><span className="folder" />Referências <b>23</b></li>
-              <li><span className="folder" />Inspiração <b>7</b></li>
-              <li><span className="trash" />Lixeira <b>3</b></li>
-            </ul>
-          </section>
           <div className="rail-code code-two">BUILD 2529G</div>
           <div className="rail-code code-three">PAPER STOCK 2529G/M²</div>
-          <section className="quick-box">
-            <div><span className="eyebrow">CAIXA RÁPIDA</span><p>Arraste notas, imagens<br />ou trechos para salvar<br />aqui.</p></div>
-            <div className="dropzone">↗<br /><span>⌟</span></div>
-          </section>
         </aside>
 
         <section className="workspace" aria-label="Editor">
@@ -663,9 +649,6 @@ export default function App() {
           <section className="count">
             <h3>CONTAGEM</h3><strong className="big-count">{words.toLocaleString('pt-BR')}</strong><b>palavras</b>
             <div className="stats"><div><strong>{characters.toLocaleString('pt-BR')}</strong><small>caracteres</small></div><div><strong>{readMinutes}:{readSeconds}</strong><small>tempo de leitura</small></div><div><strong>{pages}</strong><small>páginas</small></div></div>
-          </section>
-          <section className="distribution-section"><h3 className="blue">DISTRIBUIÇÃO</h3>
-            <div className="distribution"><div><span>Diálogos</span><i><b style={{ width: '18%' }} /></i><strong>18%</strong></div><div><span>Descrição</span><i><b style={{ width: '41%' }} /></i><strong>41%</strong></div><div><span>Narração</span><i><b style={{ width: '41%' }} /></i><strong>41%</strong></div></div>
           </section>
           <section className="language-section"><h3 className="blue">LINGUAGEM</h3>
             <dl><dt>Frases</dt><dd>{sentenceCount}</dd><dt>Média por frase</dt><dd>{averageSentence} palavras</dd><dt>Complexidade</dt><dd>—</dd><dt>Voz predominante</dt><dd>—</dd><dt>Tempo verbal</dt><dd>—</dd></dl>
@@ -698,16 +681,16 @@ export default function App() {
               ))}
             </div>
           </section>
-          <section className="tags"><div className="section-title"><h3 className="blue">TAGS</h3><button className="icon-square add" type="button">＋</button></div><div>{(draft.tags.length ? draft.tags : ['mistério', 'retorno', 'cidade', 'passado', 'segredos']).slice(0, 5).map((tag) => <button type="button" key={tag}># {tag}</button>)}</div></section>
-          <section className="versions"><div className="section-title"><h3 className="blue">VERSÕES</h3><a href="#" onClick={(event) => event.preventDefault()}>Ver todas</a></div><div className="version"><b>v{Math.max(1, draft.revision + 1)}.0</b><time>{formatDateTime(draft.updatedAt)}</time><em>Atual</em></div><div className="version"><b>local</b><time>IndexedDB</time></div></section>
+          <section className="tags"><div className="section-title"><h3 className="blue">TAGS</h3><button className="icon-square add" type="button">＋</button></div><div>{draft.tags.slice(0, 5).map((tag) => <button type="button" key={tag}># {tag}</button>)}</div></section>
+          <section className="versions" aria-label="Estado local do documento"><div className="section-title"><h3 className="blue">ESTADO LOCAL</h3></div><div className="version"><b>rev. {Math.max(1, draft.revision + 1)}</b><time>{formatDateTime(draft.updatedAt)}</time><em>Atual</em></div><div className="version"><b>local</b><time>IndexedDB</time></div></section>
         </aside>
 
         <footer className="statusbar">
           <div className="regmark"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="7" /><path d="M16 2v8M16 22v8M2 16h8M22 16h8" /></svg></div>
           <div className="sync"><span className="eyebrow">{saveState === 'Salvo' ? 'SINCRONIZADO' : saveState.toLocaleUpperCase('pt-BR')}</span><i className={saveState === 'Falha' || saveState === 'Conflito' ? 'sync-error' : ''} /><span className={`sync-save field-value save-${saveState.toLocaleLowerCase('pt-BR')}`} aria-live="polite">{saveState}</span><time>{formatDateTime(draft.updatedAt)}</time></div>
           <div className="daily"><span className="eyebrow">META DIÁRIA</span><strong>{words.toLocaleString('pt-BR')} <small>/ {dailyGoal.toLocaleString('pt-BR')} palavras</small></strong><div className="progress"><i style={{ width: `${dailyProgress}%` }} /></div><b>{dailyProgress}%</b></div>
-          <div className="focus"><span className="eyebrow">FOCO</span><strong>60 min</strong><button className="play" type="button" onClick={() => setFocusMode((value) => !value)}>{focusMode ? 'Ⅱ' : '▶'}</button></div>
-          <div className="language"><span>IDIOMA<strong>Português (BR)</strong></span><button type="button" aria-label="Selecionar idioma"><span className="chevron" aria-hidden="true" /></button></div>
+          <div className="focus"><span className="eyebrow">FOCO</span><strong>{focusMode ? 'Ativo' : 'Pronto'}</strong><button className="play" type="button" aria-pressed={focusMode} onClick={() => setFocusMode((value) => !value)}>{focusMode ? 'Ⅱ' : '▶'}</button></div>
+          <div className="language"><span>IDIOMA<strong>Português (BR)</strong></span></div>
           <div className="book"><button type="button" className="footer-button" aria-label="Abrir Anatomia do Livro" onClick={openAnatomy}><svg className="footer-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 6.5c5-1.5 9-.2 13 3v18c-4-3.2-8-4.4-13-3zM29 6.5c-5-1.5-9-.2-13 3v18c4-3.2 8-4.4 13-3zM8 10v9M24 10v9" /></svg></button></div>
           <div className="fullscreen"><button type="button" className="footer-button" aria-label="Tela cheia" onClick={toggleFullscreen}><svg className="footer-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 12V3h9M20 3h9v9M29 20v9h-9M12 29H3v-9M4 4l9 9M28 4l-9 9M28 28l-9-9M4 28l9-9" /></svg></button></div>
         </footer>
