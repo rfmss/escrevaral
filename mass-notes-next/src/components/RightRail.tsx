@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
@@ -6,9 +6,10 @@ import type { ExportFormat } from '../export/documentExport'
 import { ContextPanel } from './ContextPanel'
 import { DocumentMetadataEditor } from './DocumentMetadataEditor'
 import { ExportPanel } from './ExportPanel'
-import { LexicalPanel } from './LexicalPanel'
 import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
+
+const LexicalPanel = lazy(() => import('./LexicalPanel').then((module) => ({ default: module.LexicalPanel })))
 
 const TABS = [
   { id: 'pulso', label: 'pulso' },
@@ -262,7 +263,9 @@ export function RightRail({
 
         {tab === 'palavras' && (
           <section id="panel-palavras" role="tabpanel" aria-labelledby="tab-palavras" className="panel active">
-            <LexicalPanel document={document} />
+            <Suspense fallback={<p className="panel-intro" role="status">Preparando consulta local…</p>}>
+              <LexicalPanel document={document} />
+            </Suspense>
           </section>
         )}
 
