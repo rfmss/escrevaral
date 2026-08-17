@@ -86,7 +86,7 @@ export function WritingVoiceBridge() {
 
     const onClick = (event: MouseEvent) => {
       const target = event.target instanceof Element ? event.target : null
-      if (target?.closest('.reference-voice-open')) revealVoice()
+      if (target?.closest('button.reference-voice-open')) revealVoice()
     }
 
     const timer = window.setInterval(syncVoiceProjection, 250)
