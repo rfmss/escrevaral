@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test'
 
+function libraryTrigger(page: import('@playwright/test').Page) {
+  return page.locator('.current-project button[aria-controls="document-library"]')
+}
+
 test('Biblioteca local expõe filtros reais de estado, favorito, tag e ordenação', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await page.goto('/')
@@ -22,8 +26,9 @@ test('Biblioteca local expõe filtros reais de estado, favorito, tag e ordenaç�
   await expect(tools).toBeHidden()
   await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 8_000 })
 
-  const trigger = page.getByRole('button', { name: 'Abrir biblioteca local' })
+  const trigger = libraryTrigger(page)
   await expect(trigger).toHaveAttribute('aria-controls', 'document-library')
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await trigger.click()
 
   const library = page.locator('.reference-mobile-legacy #document-library.sidebar.open')
@@ -46,7 +51,7 @@ test('Biblioteca local expõe filtros reais de estado, favorito, tag e ordenaç�
   await library.getByLabel('Fechar arquivo').click()
   await expect(library).toBeHidden()
   await expect(page.locator('body')).not.toHaveClass(/reference-library-open/)
-  await expect(page.getByRole('button', { name: 'Abrir biblioteca local' })).toHaveAttribute('aria-expanded', 'false')
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
 })
 
 test('gatilho canônico da Biblioteca não depende mais do botão móvel escondido', async ({ page }) => {
@@ -59,7 +64,7 @@ test('gatilho canônico da Biblioteca não depende mais do botão móvel escondi
   await mobileTrigger.evaluate((element) => element.remove())
   await expect(page.locator('.mobile-menu')).toHaveCount(0)
 
-  const trigger = page.getByRole('button', { name: 'Abrir biblioteca local' })
+  const trigger = libraryTrigger(page)
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await trigger.click()
 
@@ -70,5 +75,5 @@ test('gatilho canônico da Biblioteca não depende mais do botão móvel escondi
 
   await library.getByLabel('Fechar arquivo').click()
   await expect(library).toBeHidden()
-  await expect(page.getByRole('button', { name: 'Abrir biblioteca local' })).toHaveAttribute('aria-expanded', 'false')
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
 })
