@@ -93,6 +93,7 @@ jobs:
           tests/reference-lazy-review.spec.ts
           tests/reference-actions.spec.ts
           tests/gate2.spec.ts
+          tests/gate10-lexical.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
