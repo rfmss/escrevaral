@@ -25,9 +25,11 @@ function syncIntegrity() {
     setText(project.querySelector('.project-row strong'), 'DOCUMENTOS LOCAIS')
     const projectButton = project.querySelector<HTMLButtonElement>('.project-row button')
     if (projectButton) {
-      projectButton.hidden = true
-      projectButton.tabIndex = -1
-      projectButton.setAttribute('aria-hidden', 'true')
+      projectButton.hidden = false
+      projectButton.tabIndex = 0
+      projectButton.removeAttribute('aria-hidden')
+      projectButton.setAttribute('aria-label', 'Abrir biblioteca local')
+      projectButton.setAttribute('aria-controls', 'document-library')
     }
   }
 
