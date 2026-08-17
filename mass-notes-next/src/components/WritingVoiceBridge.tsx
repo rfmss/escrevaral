@@ -37,6 +37,11 @@ function currentDocumentSignature(): string {
   return `${title}\u0000${text}`
 }
 
+function mutationTouchesVoicePanel(mutation: MutationRecord): boolean {
+  const target = mutation.target instanceof Element ? mutation.target : mutation.target.parentElement
+  return Boolean(target?.closest('.reference-mobile-legacy #panel-voz'))
+}
+
 export function WritingVoiceBridge() {
   useEffect(() => {
     const root = document.getElementById('root')
@@ -112,12 +117,18 @@ export function WritingVoiceBridge() {
       if (target?.closest('button.reference-voice-open')) revealVoice()
     }
 
+    const voiceObserver = new MutationObserver((mutations) => {
+      if (mutations.some(mutationTouchesVoicePanel)) syncVoiceProjection()
+    })
+    voiceObserver.observe(root, { childList: true, subtree: true, characterData: true })
+
     const timer = window.setInterval(syncVoiceProjection, 250)
     root.addEventListener('click', onClick)
     root.addEventListener('input', syncVoiceProjection)
     requestAnimationFrame(syncVoiceProjection)
 
     return () => {
+      voiceObserver.disconnect()
       window.clearInterval(timer)
       root.removeEventListener('click', onClick)
       root.removeEventListener('input', syncVoiceProjection)
