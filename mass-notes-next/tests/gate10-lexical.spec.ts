@@ -83,7 +83,7 @@ test('palavra sem leitura local recebe estado seguro', async ({ page }) => {
   await openWords(page)
   await page.getByLabel('Palavra ou expressão curta').fill('zzlexicalinexistente')
   await page.getByRole('button', { name: 'Consultar', exact: true }).click()
-  await expect(page.getByRole('status')).toContainText(/não encontrei uma leitura local/i)
+  await expect(page.locator('#panel-palavras .lexical-message')).toContainText(/não encontrei uma leitura local/i)
   await expect(page.locator('.lexical-reading')).toHaveCount(0)
 })
 
