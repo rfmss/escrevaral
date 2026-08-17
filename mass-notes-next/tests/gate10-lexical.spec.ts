@@ -24,7 +24,7 @@ test('busca lexical local apresenta definição e evita classe falsa sem context
   await openWords(page)
   const input = page.getByLabel('Palavra ou expressão curta')
   await input.fill('melancolia')
-  await page.getByRole('button', { name: 'Consultar' }).click()
+  await page.getByRole('button', { name: 'Consultar', exact: true }).click()
 
   const reading = page.locator('.lexical-reading')
   await expect(page.getByRole('heading', { name: 'melancolia', exact: false })).toBeVisible()
@@ -61,6 +61,9 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
   for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('Shift+ArrowRight')
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toMatch(/melancolia/i)
 
+  // A edição colocou a casa em foco total. Escape restaura a casa sem apagar
+  // o snapshot lexical da seleção; só então a ação canônica volta a ser visível.
+  await page.keyboard.press('Escape')
   await revealWords(page)
 
   await expect(page.getByLabel('Palavra ou expressão curta')).toHaveValue(/melancolia/i)
@@ -71,7 +74,7 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
 test('consulta lexical nunca oferece substituição automática', async ({ page }) => {
   await openWords(page)
   await page.getByLabel('Palavra ou expressão curta').fill('canto')
-  await page.getByRole('button', { name: 'Consultar' }).click()
+  await page.getByRole('button', { name: 'Consultar', exact: true }).click()
   await expect(page.locator('.lexical-reading')).toBeVisible()
   await expect(page.getByRole('button', { name: /substituir|trocar|aplicar/i })).toHaveCount(0)
 })
@@ -79,7 +82,7 @@ test('consulta lexical nunca oferece substituição automática', async ({ page 
 test('palavra sem leitura local recebe estado seguro', async ({ page }) => {
   await openWords(page)
   await page.getByLabel('Palavra ou expressão curta').fill('zzlexicalinexistente')
-  await page.getByRole('button', { name: 'Consultar' }).click()
+  await page.getByRole('button', { name: 'Consultar', exact: true }).click()
   await expect(page.getByRole('status')).toContainText(/não encontrei uma leitura local/i)
   await expect(page.locator('.lexical-reading')).toHaveCount(0)
 })
