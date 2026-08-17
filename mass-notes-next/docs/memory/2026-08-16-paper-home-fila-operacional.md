@@ -59,21 +59,57 @@ Estado final:
 
 Gate: run `31982950132`, head `37ed8ece9b1b8a3f46002e332d36e8e4ef0da2fa`, **24/24**, build, publicação e smoke público verdes.
 
+### T1 — Tipografia e promessa offline
+
+Objetivo fechado: preservar Anton, Oswald e Literata sem chamada de rede em runtime.
+
+Entregue:
+- `Anton-Regular.ttf`, `Oswald-wght.ttf` e `Literata-opsz-wght.ttf` foram vendorados em `src/assets/fonts/` a partir do repositório oficial `google/fonts`;
+- os Git blob SHAs dos binários locais são idênticos aos oficiais usados na importação;
+- `OFL-Anton.txt`, `OFL-Oswald.txt`, `OFL-Literata.txt` e `PROVENANCE.md` ficam junto dos ativos;
+- `paper-home-fonts.css` define `@font-face` local;
+- o `@import` de `fonts.googleapis.com` foi removido do CSS canônico;
+- o workflow falha se `fonts.googleapis.com` ou `fonts.gstatic.com` reaparecerem no `dist`;
+- o workflow também prova presença e tamanho exato dos três TTF gerados;
+- Playwright prova `document.fonts.check()` para Anton, Oswald e Literata e ausência de requests ao Google Fonts.
+
+Bootstrap de ativos:
+- run `31983310996`: baixou/verificou os binários oficiais, adicionou licenças/proveniência e removeu o workflow efêmero no mesmo commit;
+- run `31983423267`: removeu o import remoto e removeu o segundo bootstrap efêmero no mesmo commit.
+
+Falhas intermediárias registradas:
+- run `31983487995`: build verde e ausência de Google Fonts verde; a banca usava glob com hash, mas o Vite preservou os nomes exatos dos TTF;
+- run `31983539259`: prova de assets corrigida e 24/25 contratos verdes; o único vermelho expôs um race antigo no resumo do Espelho de Voz, não relacionado às fontes.
+
+Correção de robustez descoberta durante T1:
+- `WritingVoiceBridge` agora observa somente mutações de `#panel-voz` e captura o resultado no ciclo em que `voiceReading` é renderizado;
+- o polling de 250 ms continua apenas como fallback;
+- a engine de Voz não foi alterada.
+
+Gate final:
+- run `31985024414`;
+- head funcional `e710ce6cb31d3513213bb71a4b3d77727eaf0e17`;
+- **25/25 contratos verdes**;
+- build, prova offline, publicação e smoke público verdes.
+
 ## FILA PRONTA
 
-Nenhuma tranche funcional adicional está liberada sem nova entidade/contrato. A ordem lógica passa para as dívidas técnicas resolvíveis sem inventar produto.
+Nenhuma tranche funcional adicional está liberada sem nova entidade/contrato. A ordem lógica continua pelas dívidas técnicas que reduzem risco sem inventar produto.
 
-### Próximo: T1 — Tipografia e promessa offline
+### Próximo: T2 — Bundle principal
 
-Objetivo: remover o `@import` de Google Fonts em runtime **sem perder a linguagem tipográfica da referência**.
+Problema comprovado no gate T1:
+- `dist/assets/index.js`: ~2,21 MB minificado / ~639 kB gzip;
+- Vite mantém warning de chunk principal acima de 500 kB.
 
-Plano preferencial:
-1. vendorizar Anton, Oswald e Literata sob licença OFL;
-2. adicionar `@font-face` local;
-3. remover qualquer dependência de `fonts.googleapis.com` / `fonts.gstatic.com` em runtime;
-4. testar que CSS e fontes servem pela preview e que a casa continua visualmente estável.
+Objetivo da rodada:
+1. medir quais módulos dominam o bundle;
+2. separar experiências pesadas que não precisam carregar junto do editor inicial;
+3. preferir `dynamic import()` em fronteiras naturais já existentes, sem quebrar offline;
+4. preservar Tiptap, autosave, recuperação, conflito, drawers e gates canônicos;
+5. não alterar UX só para melhorar métrica.
 
-Plano de contingência — somente se a vendorização binária não for segura/reprodutível: stack local equivalente, com a perda visual explicitamente registrada. Não aplicar silenciosamente.
+Critério de saída: redução comprovada do chunk inicial, sem regressão nos 25 contratos e sem nova dependência de rede.
 
 ## BLOQUEADO POR MODELO — não implementar cenograficamente
 
@@ -103,11 +139,11 @@ Locale atual: `pt-BR`. Internacionalização é decisão separada e não nasce d
 
 ## DÍVIDA TÉCNICA
 
-### T1 — Tipografia/offline — **EM EXECUÇÃO**
-O CSS canônico ainda importa Google Fonts em runtime. Prioridade máxima entre as dívidas porque contradiz a promessa offline.
+### T1 — Tipografia/offline — **CONCLUÍDO**
+Fechado no run `31985024414`, com 25/25 contratos e smoke público verde.
 
-### T2 — Bundle principal
-O build continua avisando que o chunk JS principal ultrapassa 500 kB. Abrir rodada própria de code splitting depois de T1.
+### T2 — Bundle principal — **PRÓXIMO**
+Chunk inicial continua acima de 500 kB gzip. Abrir rodada própria de medição e code splitting.
 
 ### T3 — Bridges de transição
 Depois da estabilização, promover integrações consolidadas ao React proprietário do shell e reduzir manipulação transitória de DOM.
