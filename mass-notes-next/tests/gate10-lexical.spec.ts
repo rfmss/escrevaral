@@ -1,12 +1,23 @@
 import { expect, test, type Page } from '@playwright/test'
 
+async function revealWords(page: Page) {
+  const viewport = page.viewportSize()
+  if ((viewport?.width ?? 1280) >= 1100) {
+    const canonical = page.locator('.analysis-panel .reference-lexical-open')
+    await expect(canonical).toBeVisible()
+    await canonical.click()
+  } else {
+    const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
+    await opener.click()
+    await page.getByRole('tab', { name: 'palavras', exact: true }).click()
+  }
+  await expect(page.locator('#panel-palavras')).toBeVisible()
+}
+
 async function openWords(page: Page) {
   await page.goto('/')
   await expect(page.getByLabel('Texto do documento')).toBeEditable()
-  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
-  if (await opener.isVisible()) await opener.click()
-  await page.getByRole('tab', { name: 'palavras', exact: true }).click()
-  await expect(page.locator('#panel-palavras')).toBeVisible()
+  await revealWords(page)
 }
 
 test('busca lexical local apresenta definição e evita classe falsa sem contexto', async ({ page }) => {
@@ -50,9 +61,7 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
   for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('Shift+ArrowRight')
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toMatch(/melancolia/i)
 
-  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
-  if (await opener.isVisible()) await opener.click()
-  await page.getByRole('tab', { name: 'palavras', exact: true }).click()
+  await revealWords(page)
 
   await expect(page.getByLabel('Palavra ou expressão curta')).toHaveValue(/melancolia/i)
   await expect(page.locator('.lexical-reading')).toBeVisible()
