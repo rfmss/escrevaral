@@ -3,11 +3,13 @@
 - Registrada em: 2026-08-16
 - Branch: `feat/escrevaral-paper-home`
 - Base: `experiment/mass-notes-tiptap`
-- Estado: **casa implementada e validada**
+- Estado: **casa implementada, funcional e em estabilização técnica**
 
 ## Decisão
 
 O layout de papel técnico aprovado é a casa visual canônica do Escrevaral. Ele envolve a fundação React/Tiptap existente e preserva documento estruturado, IndexedDB, autosave, recuperação, conflitos entre abas, snapshots/engines/adapters e português brasileiro como locale de produto. O Cofre continua separado e portátil.
+
+A regra operacional consolidada está em `docs/memory/2026-08-16-paper-home-fila-operacional.md`: **nenhuma superfície pode parecer funcional sem ter destino real**.
 
 ## Foco automático
 
@@ -25,43 +27,56 @@ Título, documentos, troca de documento e busca usam o estado real. `Ctrl/Cmd + 
 **Config.** abre painel real sem trocar tema por acidente. Expõe Papel/Noite, Concentração, Tela cheia, Anatomia do Livro e `Português (BR)`, reaproveitando estados/controles existentes.
 
 ### 4 — Pesquisa
-**Pesquisa** reutiliza o destino real já presente no `App`: `setRailOpen(true)` + `runReview()`. A revisão usa o contrato estrutural vivo do Tiptap, `reviewTextDetailed`, mapeamento para posições ProseMirror, marcas e navegação.
-
-`WritingResearchBridge` resolve apenas a casca desktop: expõe o `RightRail` real, entra diretamente em `revisao`, preserva observações/trechos/`Ir ao trecho` e restaura o fechamento. Não cria engine nem fonte de dados nova.
+**Pesquisa** reutiliza `setRailOpen(true)` + `runReview()`. A revisão usa o contrato estrutural vivo do Tiptap, `reviewTextDetailed`, mapeamento para posições ProseMirror, marcas e navegação. `WritingResearchBridge` só resolve a superfície desktop; não cria engine.
 
 ### 5 — Tags
+O `+` de Tags abre `DocumentMetadataEditor`; usa `draft.tags`, `parseLibraryTags`, os limites reais, `onTags`, autosave e conflito existentes. Tags persistem após reload.
 
-O `+` de **Tags** no painel de análise deixou de ser cenográfico. `WritingTagsBridge` abre o editor de metadados que já existia em `DocumentMetadataEditor`, sem criar outro armazenamento ou parser.
+### 6 — Integridade da casa
+A passada de integridade removeu ou tornou estática toda affordance sem domínio: projeto fictício, pastas de pesquisa fictícias, dropzone, distribuição inventada, versões sem histórico, timer inexistente, seletores sem contrato e `Notas` sem domínio. O recolhimento do painel de análise passou a ser real.
 
-O circuito reutiliza:
+### 7 — Estado editorial
+`Rascunho / Em corte / Pronto` e favorito foram promovidos para o painel canônico usando os mesmos metadados do documento, sem segundo autosave.
 
-- `draft.tags` como estado documental real;
-- `parseLibraryTags` para trim, deduplicação e limites;
-- máximo de 8 tags e 32 caracteres por tag;
-- `onTags`/`mutateDraft(..., 'metadata')` existentes;
-- o mesmo autosave e o mesmo controle de conflito do documento.
+### 8 — Espelho de Voz
+A seção Linguagem ganhou `Escutar voz`, que abre a aba `voz` real. A análise só roda por ação explícita em `Escutar minha voz`; confiança, hipótese, métricas e disclaimer continuam pertencendo à engine existente. O resumo canônico é apenas projeção transitória e é invalidado quando o texto/título muda.
 
-No desktop, a casca mostra somente o recorte necessário do `RightRail`/`panel-pulso`, foca `Marcadores da página` e mantém o fechamento real. Ao salvar, as tags canônicas do painel de análise atualizam imediatamente e persistem após reload.
+### 9 — Biblioteca local avançada
+A área **Biblioteca local / Documentos locais** abre o `Library` real com busca, status, favoritas, tag e ordenação.
 
-**Notas continua deferido** porque ainda não há domínio dedicado de notas comprovado no código atual.
+### 10 — Ownership único de `LibraryQuery`
+O `App` passou a possuir uma única `LibraryQuery`. `Library` é controlado por `query`/`onQueryChange`; a busca do topo e o rail canônico usam o mesmo objeto e `queryLibraryDocuments`. Filtros no drawer e busca no topo descrevem o mesmo recorte nos dois sentidos.
 
-## Evidência do gate
+## Evidência dos gates
 
 - foco automático: **12/12**;
 - Documento/busca/Metas — run `31977140397`: **14/14**;
 - Exportar — run `31977786808`: **15/15**;
 - Configurações — run `31978656658`: **16/16**;
-- Pesquisa — run `31979455640`, head `a7ce7c08b1ac6391400c7331c9f53491c7758013`: **17/17**;
-- Tags — run `31979828644`, head `b768f3e2f4158a7073b2bd153618d19283650cac`: **18/18**, build, publicação e smoke público verdes.
+- Pesquisa — run `31979455640`: **17/17**;
+- Tags — run `31979828644`: **18/18**;
+- integridade — run `31981328908`, head `7d679e9e49af388e15524ab9ed71bd762d8e0fee`: **20/20**;
+- Estado editorial — run `31981555309`, head `12884a16639b088fde1b0666368571ed3a3e77ac`: **21/21**;
+- Espelho de Voz — run `31982237519`, head `ea3e9fb4bde5d0981b92d5927e0e8f10e2acff98`: **22/22**;
+- Biblioteca avançada — run `31982558518`, head `eebc7c57d800520f62b649a45a2cbf762cba6284`: **23/23**;
+- ownership único da biblioteca — run `31982950132`, head `37ed8ece9b1b8a3f46002e332d36e8e4ef0da2fa`: **24/24**.
 
-A banca de Tags prova abertura do editor real, foco do campo, salvamento, atualização do painel canônico e persistência após recarregar. Também permanecem verdes geometria canônica, Tiptap, colagem estruturada, recuperação, conflitos, drawers móveis, Pesquisa e foco automático.
+Todos os gates finais acima preservaram build TypeScript/Vite, publicação da preview e smoke público verdes.
 
-## Dívidas registradas, não concorrentes
+## Bloqueios deliberados
 
-- poda de branches: deferida;
-- Cofre: frente separada;
-- tipografia remota da referência: precisa ser localizada/empacotada para fechar definitivamente a promessa offline.
+Continuam fora da superfície funcional até existir domínio apropriado:
+- Notas / Caixa rápida;
+- Projetos;
+- biblioteca de personagens/locações/referências/anexos;
+- histórico real de versões;
+- distribuição narrativa;
+- fonte/tamanho/alinhamento/task-list editáveis;
+- seletor de modo;
+- seletor de idioma.
 
-## Foco atual e próximo gate
+## Próxima frente
 
-A única frente ativa é **o Escrevaral atual na nova casa aprovada**. Continuar conectando um comportamento visível por vez, somente quando houver destino real. Nenhum controle deve ganhar funcionalidade inventada apenas para preencher a interface.
+A fila funcional liberada está vazia. A próxima frente lógica é **T1 — remover a dependência de Google Fonts em runtime sem perder a tipografia da referência**. A solução preferida é vendorizar Anton, Oswald e Literata sob OFL e usar `@font-face` local; fallback visual só deve ser adotado se a vendorização segura não for possível.
+
+Poda de branches e Cofre permanecem registrados e deferidos.
