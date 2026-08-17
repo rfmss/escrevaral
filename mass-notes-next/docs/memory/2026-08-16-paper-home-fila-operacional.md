@@ -5,160 +5,137 @@
 - Base: `experiment/mass-notes-tiptap`
 - Regra: **nenhuma superfície pode parecer funcional sem ter destino real**.
 
-## Objetivo desta fila
+## Estados da fila
 
-Manter o trabalho da nova casa ordenado sem transformar lacunas do mockup em funcionalidades inventadas. Cada item deve estar em um destes estados:
+- **CONCLUÍDO** — implementado, testado, publicado e com smoke público verde.
+- **EM VALIDAÇÃO** — implementação pronta; gate público ainda precisa fechar.
+- **FILA PRONTA** — existe infraestrutura real, mas a tranche ainda não foi implementada.
+- **BLOQUEADO POR MODELO** — falta entidade, persistência ou engine; não criar cenografia.
+- **DÍVIDA TÉCNICA** — não é feature autoral, mas precisa ser fechada antes da estabilização final.
 
-- **RESOLVER AGORA** — já existe domínio/infraestrutura real e falta apenas expor corretamente na casa;
-- **FILA PRONTA** — existe base suficiente, mas merece tranche própria e teste de aceitação;
-- **BLOQUEADO POR MODELO** — o produto ainda não possui a entidade, persistência ou engine necessária;
-- **DÍVIDA TÉCNICA** — não muda o domínio autoral, mas precisa ser fechada antes de considerar a casa estabilizada.
+## CONCLUÍDO
 
-## Tranche atual — passada de integridade
+### I1 — Passada de integridade
 
-### Resolvido agora
+Objetivo: retirar toda affordance que prometia capacidade inexistente.
 
-1. **Modo**
-   - `Escrita` é o único modo real atual.
-   - O controle deixa de sugerir um menu inexistente e passa a ser estático.
+Resolvido:
+- `Modo: Escrita` virou estado estático, não seletor falso;
+- `ROMANCE DE FICÇÃO` virou **Biblioteca local / Documentos locais**;
+- pastas e contagens fictícias de pesquisa foram removidas da experiência efetiva;
+- Caixa rápida/dropzone foi ocultada enquanto não houver domínio de notas/anexos;
+- distribuição fictícia `18 / 41 / 41` foi retirada;
+- tags de exemplo foram removidas e documento sem tags mostra estado vazio honesto;
+- `VERSÕES` virou **ESTADO LOCAL / rev. N**; `Ver todas` foi retirado porque `revision` não é histórico recuperável;
+- `FOCO 60 min` virou estado real `Pronto / Ativo`;
+- seletor de idioma foi retirado; `Português (BR)` continua como locale real;
+- fonte/tamanho sem contrato Tiptap foram desabilitados;
+- recolher/expandir análise passou a funcionar de verdade;
+- `Notas` ficou explicitamente indisponível enquanto o domínio estiver bloqueado.
 
-2. **Projeto atual**
-   - Não existe entidade `Project` no domínio atual.
-   - O texto fictício `ROMANCE DE FICÇÃO` e o botão morto de abrir projeto deixam de representar capacidade inexistente.
-   - A superfície passa a se assumir como **Biblioteca local / Documentos locais**, usando somente a contagem real agregada dos documentos.
-
-3. **Pesquisa lateral**
-   - As pastas e contagens fictícias de Personagens/Locações/Referências/Inspiração/Lixeira são removidas da experiência efetiva.
-   - A área lateral passa a apontar somente para a **revisão local real**, já exposta pelo botão Pesquisa.
-
-4. **Caixa rápida**
-   - Não existe domínio de notas/attachments/drop persistente.
-   - A dropzone cenográfica deixa de ser exibida até existir uma implementação real.
-
-5. **Distribuição**
-   - Os percentuais `18 / 41 / 41` não provinham de engine nem de estado documental.
-   - A seção fica oculta até haver classificador aprovado para diálogo/descrição/narração.
-
-6. **Tags vazias**
-   - Os marcadores de exemplo `mistério / retorno / cidade / passado / segredos` não são dados do documento.
-   - Documento sem tags passa a mostrar estado vazio honesto.
-   - Tags reais continuam vindo de `draft.tags` e os chips passam a abrir o editor real de tags.
-
-7. **Versões**
-   - `revision` é contador técnico de concorrência/autosave; não é histórico de versões recuperável.
-   - A casa deixa de chamar esse contador de versão semântica e passa a exibir **Estado local / rev. N**.
-   - `Ver todas` fica indisponível até existir histórico persistido.
-
-8. **Foco**
-   - Não existe cronômetro de 60 minutos.
-   - O rodapé deixa de mostrar `60 min` e passa a refletir somente o estado real `Pronto / Ativo`.
-
-9. **Idioma**
-   - O produto é `Português (BR)` por doutrina atual.
-   - O seletor cenográfico fica removido; o locale continua visível como estado estático.
-
-10. **Fonte e tamanho**
-    - O editor ainda não possui contrato de persistência para família/tamanho tipográfico por trecho/documento.
-    - Os controles visuais deixam de aceitar clique até essa capacidade existir.
-    - Negrito, itálico, sublinhado e listas continuam reais e ativos.
-
-11. **Recolher análise**
-    - Esse controle pode ser resolvido sem domínio novo.
-    - Passa a recolher/expandir de fato o rail de análise e ceder largura ao manuscrito.
-
-## FILA PRONTA — próxima ordem lógica
+Gate:
+- run `31981328908`;
+- head `7d679e9e49af388e15524ab9ed71bd762d8e0fee`;
+- **20/20 testes verdes**;
+- build, publicação e smoke público verdes.
 
 ### A1 — Estado editorial canônico
 
-**Base já existente:** `DocumentStatus`, `favorite`, `DocumentMetadataEditor`, autosave e conflito.
+Base reutilizada: `DocumentStatus`, `favorite`, `DocumentMetadataEditor`, autosave, IndexedDB e conflito.
 
-Objetivo:
-- expor `Rascunho / Em corte / Pronto` na casa canônica;
-- expor favorito sem abrir o rail legado;
-- preservar uma única fonte: `draft.status` e `draft.favorite`.
+Entregue:
+- `Rascunho / Em corte / Pronto` no painel canônico;
+- favorito `☆ / ★` no painel canônico;
+- nenhuma segunda fonte de estado: os controles delegam aos mesmos handlers reais de metadados;
+- reload preserva estado e favorito.
 
-Aceitação:
-- alteração imediata na casa;
-- autosave real;
-- reload preserva;
-- conflito entre abas continua protegido.
+Gate:
+- run `31981555309`;
+- head `12884a16639b088fde1b0666368571ed3a3e77ac`;
+- **21/21 testes verdes**;
+- build, publicação e smoke público verdes.
 
 ### A2 — Espelho de Voz na análise canônica
 
-**Base já existente:** `src/engines/voiceAdapter.ts`, leitura local, métricas e confiança.
+Base reutilizada: `src/engines/voiceAdapter.ts` e a aba `voz` real do `RightRail`.
+
+Entregue:
+- lançador **Escutar voz** dentro de Linguagem;
+- abrir o Espelho não executa análise automaticamente;
+- somente `Escutar minha voz` dispara a leitura local;
+- confiança, hipótese, métricas e disclaimer continuam vindos da engine existente;
+- resumo canônico apenas projeta o resultado real;
+- o último resumo permanece enquanto título/texto não mudarem e é invalidado quando o conteúdo muda.
+
+Falhas intermediárias registradas:
+- run `31981905728`: leitura funcionou, mas o fechamento reabria o rail porque a classe do `<body>` também satisfazia o seletor do lançador;
+- run `31982071581`: fechamento corrigido; o resumo canônico era perdido quando a aba interna voltava a `pulso`;
+- ambos foram corrigidos antes do gate final, sem alteração da engine.
+
+Gate final:
+- run `31982237519`;
+- head `ea3e9fb4bde5d0981b92d5927e0e8f10e2acff98`;
+- **22/22 testes verdes**;
+- build, publicação e smoke público verdes.
+
+## EM VALIDAÇÃO
+
+### A3a — Biblioteca avançada real acessível pela casa
+
+Motivo do desdobramento: a `Library` já possui `queryLibraryDocuments`, filtros de status, favoritos, tags e ordenação. Já o rail canônico mantém uma filtragem simplificada própria. Expor a Biblioteca real pode ser feito agora; fundir os dois ownerships exige refactor no `App` e fica em A3b.
+
+Implementado para validação:
+- botão da área **Biblioteca local / Documentos locais** agora abre o `Library` real;
+- no desktop, o mesmo drawer real recebe a linguagem de papel da casa;
+- filtros testados: estado, somente favoritas, tag e ordenação;
+- nenhuma segunda query foi criada.
+
+Gate em execução:
+- run `31982558518`;
+- head `eebc7c57d800520f62b649a45a2cbf762cba6284`;
+- expectativa: **23 contratos**.
+
+Só mover para CONCLUÍDO se Playwright, build, publicação e smoke público fecharem verdes.
+
+## FILA PRONTA
+
+### A3b — Unificar ownership da busca/biblioteca canônica
+
+Base: `library/libraryQuery.ts`.
+
+Problema atual:
+- `Library` usa `queryLibraryDocuments` e `collectLibraryTags`;
+- o rail canônico ainda filtra somente uma string simplificada de título + texto no `App`.
 
 Objetivo:
-- oferecer ação explícita de leitura, nunca análise automática a cada tecla;
-- preencher somente campos realmente suportados pela leitura;
-- manter disclaimer e confiança;
-- não converter hipótese heurística em diagnóstico autoral.
+- fazer a casa consumir uma única `LibraryQuery`;
+- eliminar duplicação de normalização/filtro;
+- preservar busca por título/texto/tag/status, favoritos e ordenação determinística pt-BR.
 
-Aceitação:
-- texto vazio não inventa resultado;
-- texto vivo do Tiptap é usado;
-- nenhuma chamada de rede;
-- troca de documento invalida leitura anterior.
-
-### A3 — Busca/biblioteca canônica com query real
-
-**Base já existente:** `library/libraryQuery.ts` com busca, status, favoritos, tags e ordenação.
-
-Objetivo:
-- parar de manter uma segunda filtragem simplificada na casca;
-- reutilizar `queryLibraryDocuments` e `collectLibraryTags` onde fizer sentido;
-- evitar divergência entre biblioteca real e rail canônico.
-
-Aceitação:
-- busca por título, texto, tag e status coerente;
-- ordenação determinística pt-BR;
-- nenhuma duplicação de regra de normalização.
+Critério: não resolver por mais um bridge de filtro. Esta tranche deve mexer no ownership React/`App`.
 
 ## BLOQUEADO POR MODELO — não implementar cenograficamente
 
 ### B1 — Notas / Caixa rápida
 
-Falta:
-- entidade de nota;
-- relação nota ↔ documento/projeto;
-- persistência;
-- política para texto, imagem e arquivo;
-- recuperação/conflito/exportação.
-
-Até isso existir, **Notas não deve fingir ser um caderno paralelo**.
+Falta entidade de nota, relação nota ↔ documento/projeto, persistência, política para texto/imagem/arquivo, recuperação, conflito e exportação. `Notas` permanece desabilitado.
 
 ### B2 — Projetos
 
-Falta:
-- entidade `Project`;
-- membership documento ↔ projeto;
-- nome, metadados, criação/seleção;
-- migração dos documentos atuais.
-
-Até isso existir, a casa trabalha como biblioteca local de documentos.
+Falta entidade `Project`, membership documento ↔ projeto, criação/seleção, metadados e migração. Até lá, a casa é uma biblioteca local de documentos.
 
 ### B3 — Biblioteca de pesquisa documental
 
-Falta:
-- entidades para personagem, locação, referência, inspiração e anexos;
-- persistência e busca;
-- relação com documentos/projetos;
-- importação/remoção.
-
-A revisão linguística local **não deve ser confundida** com essa futura biblioteca de pesquisa.
+Faltam entidades e persistência para personagem, locação, referência, inspiração e anexos. A revisão linguística local não deve ser confundida com essa futura biblioteca.
 
 ### B4 — Histórico real de versões
 
 Estado atual:
-- IndexedDB guarda apenas o documento corrente;
+- IndexedDB guarda o documento corrente;
 - `saveDocument` sobrescreve o registro e incrementa `revision`;
-- o live snapshot é memória transitória, não arquivo histórico.
+- live snapshot é memória transitória.
 
-Para `Ver todas` existir corretamente será necessário, no mínimo:
-- schema IndexedDB v2 ou store separado de snapshots;
-- política de captura/compactação/retenção;
-- restauração sem destruir a versão atual;
-- tratamento de conflito e migração;
-- testes de espaço e recuperação.
+Para `Ver todas` existir corretamente será necessário store/schema de snapshots, política de retenção, restauração segura, migração e testes de espaço/conflito.
 
 ### B5 — Distribuição narrativa
 
@@ -166,55 +143,45 @@ Falta engine aprovada para classificar diálogo / descrição / narração. Não
 
 ### B6 — Fonte, tamanho, alinhamento e task list completos
 
-Falta definir:
-- extensões Tiptap correspondentes;
-- atributos serializáveis no JSON;
-- comportamento de paste/import/export;
-- compatibilidade com documentos existentes.
-
-Alinhamentos e lista de tarefas permanecem explicitamente desabilitados até essa tranche.
+Faltam extensões Tiptap correspondentes, atributos serializáveis, contrato de paste/import/export e compatibilidade com documentos existentes.
 
 ### B7 — Seletor de modo
 
-Hoje existe um único modo real: Escrita. Um seletor só deve voltar quando houver pelo menos dois modos com contrato claro.
+Hoje há um único modo real: Escrita. Só reabrir este controle quando houver pelo menos dois modos com contrato claro.
 
 ### B8 — Seletor de idioma
 
-Locale de produto atual: `pt-BR`. Internacionalização da interface/engines é decisão separada e não deve nascer de uma seta visual.
+Locale atual: `pt-BR`. Internacionalização é decisão separada e não nasce de uma seta visual.
 
 ## DÍVIDA TÉCNICA
 
 ### T1 — Tipografia e promessa offline — prioridade alta
 
-`theme-escrevaral-reference.css` ainda importa Google Fonts em runtime. Isso conflita com a promessa de funcionamento offline.
+`theme-escrevaral-reference.css` ainda importa Google Fonts em runtime. Isso conflita com a promessa offline.
 
-Próxima decisão necessária:
-- empacotar fontes com licença adequada no produto; **ou**
-- aprovar stack local equivalente e aceitar a diferença visual.
-
-Não encerrar estabilização offline sem resolver esse ponto.
+Fechamento necessário:
+- empacotar fontes com licença adequada; **ou**
+- aprovar stack local equivalente e aceitar diferença visual.
 
 ### T2 — Bundle principal
 
-O build atual avisa que o chunk JS principal ultrapassa 500 kB. Não é regressão funcional da casa, mas deve entrar em rodada própria de code splitting quando a superfície estiver estável.
+O build continua avisando que o chunk JS principal ultrapassa 500 kB. Abrir rodada própria de code splitting quando a superfície estabilizar.
 
 ### T3 — Bridges de transição
 
-A nova casa usa bridges para conectar o DOM canônico à fundação existente. Isso é aceitável durante estabilização, mas depois dos circuitos consolidados deve haver auditoria para promover integrações estáveis ao React proprietário do shell e reduzir manipulação transitória de DOM.
+Os bridges são aceitáveis durante estabilização. Depois dos circuitos consolidados, promover integrações estáveis ao React proprietário do shell e reduzir manipulação transitória de DOM.
 
-## Frentes explicitamente fora desta fila
+## Fora desta fila
 
-- **Cofre**: arquitetura linguística separada; não misturar com esta branch.
-- **Poda de branches**: dívida registrada e deferida; não executar como efeito colateral.
+- **Cofre**: arquitetura linguística separada; não misturar nesta branch.
+- **Poda de branches**: registrada e deferida; não executar como efeito colateral.
 
-## Regra de passagem entre itens
+## Regra para tirar um item da fila
 
-Um item só sai da fila quando:
-
-1. há destino de domínio real;
-2. não cria segunda fonte de dados;
-3. há teste Playwright do comportamento visível;
-4. build TypeScript/Vite passa;
-5. contratos de Tiptap, autosave, recuperação e conflito continuam verdes;
-6. preview pública e smoke fecham verdes;
-7. esta memória e o PR são atualizados com head/run comprovados.
+1. destino de domínio real;
+2. nenhuma segunda fonte de dados;
+3. teste Playwright do comportamento visível;
+4. TypeScript/Vite verde;
+5. Tiptap, autosave, recuperação e conflito continuam verdes;
+6. preview pública + smoke verdes;
+7. esta memória e o PR registram run/head comprovados.
