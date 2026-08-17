@@ -6,7 +6,6 @@ import { MassNotesEditor, type ReviewNavigationRequest } from './editor/MassNote
 import type { ReviewDecorationSpec } from './editor/reviewDecorations'
 import type { EditorPositionContract } from './editor/textPositionContract'
 import {
-  ensureReviewEngine,
   reviewTextDetailed,
   type LocatedReviewIssue,
   type ReviewIssue,
@@ -120,7 +119,6 @@ export default function App() {
     let cancelled = false
     async function boot() {
       await initializeRepository()
-      ensureReviewEngine()
       const rows = await refreshDocuments()
       if (cancelled) return
       const remembered = readLocalStorage(ACTIVE_KEY)
