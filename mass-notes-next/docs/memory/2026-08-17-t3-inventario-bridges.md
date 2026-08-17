@@ -4,83 +4,108 @@
 - Branch: `feat/escrevaral-paper-home`
 - Princípio: promover apenas circuitos consolidados para ownership React; **não** reescrever engines/domínio nem trocar um bridge simples por uma abstração maior.
 
-## Classificação operacional
+## PROMOVIDO
 
-### PROMOVIDO — remover bridge
-
-#### Estado editorial — T3a
+### T3a — Estado editorial
 
 Antes:
 - `WritingEditorialStateBridge` criava a seção por DOM imperativo;
 - fazia polling a cada 300 ms;
-- lia/cliqueava controles escondidos de `#panel-pulso` para status/favorito.
+- clicava controles escondidos de `#panel-pulso` para status/favorito.
 
 Depois:
 - `.reference-editorial-state` é JSX do `App`;
 - `Rascunho / Em corte / Pronto` chama `mutateDraft(..., 'metadata')` diretamente;
 - favorito altera `draft.favorite` diretamente;
-- autosave, IndexedDB e conflito continuam sendo os mesmos;
-- `WritingEditorialStateBridge.tsx` foi removido do repo.
+- `WritingEditorialStateBridge.tsx` foi removido.
 
-Prova estrutural/comportamental:
-- o teste remove o conteúdo de `#panel-pulso` do DOM;
-- status e favorito canônicos continuam alterando e salvando;
-- portanto a casa não depende mais dos controles escondidos do Pulso.
+Falhas intermediárias:
+- `31986992006`: patch textual procurou ponto antigo; nenhum commit de produto;
+- `31987048305`: workflow efêmero não iniciou corretamente; nenhum commit de produto;
+- `31987159791`: bootstrap simplificado executou e se removeu.
 
-Falhas de bootstrap documentadas:
-- run `31986992006`: patch textual procurou um ponto antigo do `App.tsx`; commit de produto não ocorreu;
-- run `31987048305`: workflow efêmero falhou no parsing/startup; produto não foi alterado;
-- run `31987159791`: bootstrap simplificado executou e se removeu corretamente.
-
-Gate final T3a:
+Gate final:
 - run `31987285323`;
 - head `641f0afab5eb8653814a268b129142640848c3de`;
-- **32/32 testes verdes**;
-- TypeScript/Vite, tipografia offline, publicação e smoke público verdes;
-- `index.js`: `1.096.192 B`, gzip `306.730 B`.
+- **32/32**;
+- build, offline, publicação e smoke verdes.
 
-### PRÓXIMO — promover
+A prova remove o conteúdo de `#panel-pulso` e status/favorito continuam salvando.
 
-#### Biblioteca — T3b
+### T3b — Biblioteca
 
-Bridge atual: `WritingLibraryBridge`.
+Antes:
+- `WritingLibraryBridge` fazia polling de `#document-library.open`;
+- sincronizava ARIA/body class por DOM;
+- abria a Biblioteca clicando em `.mobile-menu`, um gatilho móvel escondido no desktop;
+- `WritingIntegrityBridge` ainda reescrevia `ROMANCE DE FICÇÃO` para Biblioteca local.
 
-Motivo para promover agora:
-- `App` já é dono de `sidebarOpen`;
-- o botão canônico da left rail já existe no JSX;
-- o bridge apenas faz polling de `open`, clica no botão móvel escondido e sincroniza ARIA/body class;
-- não há engine nem dado novo envolvido.
+Depois:
+- `App` já nasce com **BIBLIOTECA LOCAL / DOCUMENTOS LOCAIS**;
+- o botão canônico chama `setSidebarOpen(true)` diretamente;
+- `aria-controls="document-library"` e `aria-expanded={sidebarOpen}` pertencem ao JSX;
+- `reference-library-open` deriva de `sidebarOpen` em `useEffect` React;
+- a reescrita do bloco `current-project` saiu do `WritingIntegrityBridge`;
+- `WritingLibraryBridge.tsx` foi removido do repo;
+- `LibraryQuery`, filtros e drawer permaneceram inalterados.
 
-Plano:
-1. tornar `BIBLIOTECA LOCAL / DOCUMENTOS LOCAIS` texto real no JSX do `App`;
-2. botão canônico chama `setSidebarOpen(true)` diretamente;
-3. `aria-controls` / `aria-expanded` vêm de `sidebarOpen`;
-4. body class `reference-library-open` passa a derivar de `sidebarOpen` em efeito React;
-5. retirar do `WritingIntegrityBridge` a reescrita desse bloco;
-6. remover `WritingLibraryBridge.tsx` após gate;
-7. manter `LibraryQuery`, filtros e drawer exatamente como estão.
+Falhas intermediárias:
+- `31987548190`: primeiro patcher falhou antes do commit de produto porque o literal multilinha perdeu indentação;
+- `31987605476`: segundo bootstrap estrutural executou e se removeu corretamente;
+- `31987647482`: produto abriu a Biblioteca nos dois testes, mas o locator por nome deixou de resolver quando o `aria-label` mudou no estado aberto; corrigida apenas a banca, ancorando pelo `aria-controls` estável.
 
-Critério: testes atuais da Biblioteca + nova prova de que a abertura não depende de `.mobile-menu`.
+Gate final:
+- run `31987876116`;
+- head `7c2b5f4d6cbfb95bafc6c0efe7d62ecc65f1b337`;
+- **33/33 testes verdes**;
+- build, tipografia offline, publicação e smoke público verdes;
+- `index.js`: `1.094.923 B`, gzip `306.571 B`.
 
-### CANDIDATO POSTERIOR — auditar antes de promover
+Prova forte:
+- o teste remove `.mobile-menu` do DOM;
+- o gatilho canônico continua abrindo/fechando o `Library` real e sincronizando `aria-expanded`/body class;
+- portanto a dependência do bridge móvel morreu de fato.
 
-#### Metas — `WritingGoalsBridge`
+## PRÓXIMO — T3c: retirar cenografia morta da fonte
 
-O bridge possui lógica real própria (preferência local, assinatura do live snapshot, modal e sincronização do rodapé), mas ainda encontra o gatilho e altera o statusbar por DOM. Pode ser promovido depois de Biblioteca, porém exige decidir ownership da preferência de meta no `App` antes de remover o bridge.
+`WritingIntegrityBridge` continua necessário, mas ainda gasta polling para neutralizar markup que já sabemos que não deve existir funcionalmente.
 
-#### Exportar — `WritingExportBridge`
+Tranche aprovada por lógica de baixo risco:
+1. `Modo` nasce estático/desabilitado no JSX;
+2. `Notas` nasce desabilitado e sem `onClick`;
+3. remover da fonte as pastas/contagens fictícias de Pesquisa e a Caixa rápida sem domínio;
+4. remover a distribuição `18/41/41` da fonte;
+5. remover tags-fallback fictícias;
+6. `VERSÕES` nasce como **ESTADO LOCAL / rev. N**, sem `Ver todas`;
+7. `FOCO` nasce como `Pronto / Ativo`, sem `60 min`;
+8. idioma nasce como texto fixo, sem seletor;
+9. retirar do `WritingIntegrityBridge` somente os blocos correspondentes.
 
-O modal e o pipeline de exportação são reais, mas o bridge intercepta o botão canônico e lê snapshot/título por bridge/DOM. Não promover até definir props/ownership explícitos para o modal.
+Não mexer nesta tranche:
+- recolher/expandir análise, que ainda é comportamento implementado pelo bridge;
+- controles tipográficos sem contrato Tiptap;
+- bridges de Metas/Exportar/Config/Pesquisa/Tags/Voz/Palavras.
 
-#### Config. — `WritingConfigBridge`
+Critério de saída T3c:
+- os valores cenográficos deixam de existir no DOM de origem, não apenas ficam escondidos;
+- comportamento/geometry continuam verdes;
+- **33 contratos atuais + uma prova de ausência na fonte**.
 
-O modal é real, mas aciona tema/foco/fullscreen/Anatomia clicando controles existentes. Candidato a receber callbacks explícitos depois que os circuitos menores forem removidos.
+## CANDIDATOS POSTERIORES — auditar antes de promover
 
-### AINDA NECESSÁRIO NESTA FASE
+### Metas — `WritingGoalsBridge`
+Tem preferência local, modal e snapshot real, mas ainda encontra gatilho e altera statusbar por DOM. Exige definir ownership da meta no `App` antes de remover.
 
-#### Integridade — `WritingIntegrityBridge`
+### Exportar — `WritingExportBridge`
+Modal/pipeline reais, mas intercepta botão e lê snapshot/título por bridges. Exige props/callbacks explícitos.
 
-Ainda protege a casa de cenografia que permanece no JSX legado: modo, Notas, pesquisa documental fictícia, quick box, distribuição, versões, foco/idioma e controles tipográficos sem contrato. Não remover como bloco. A estratégia correta é retirar uma cenografia real do JSX por tranche e diminuir o bridge junto.
+### Config. — `WritingConfigBridge`
+Modal real, mas aciona tema/foco/fullscreen/Anatomia clicando controles existentes. Exige callbacks explícitos.
+
+## AINDA NECESSÁRIO NESTA FASE
+
+### `WritingIntegrityBridge`
+Não remover como bloco. T3c deve apenas reduzir as responsabilidades cujo markup cenográfico já pode ser corrigido na fonte. O bridge continua protegendo recolhimento de análise e controles tipográficos sem contrato.
 
 ## Regra de T3
 
