@@ -1,0 +1,65 @@
+name: T2 Lazy Lexical Panel
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - ".github/workflows/t2-lazy-lexical-panel.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: feat/escrevaral-paper-home
+          fetch-depth: 0
+
+      - name: Tornar Palavras uma fronteira lazy real
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('mass-notes-next/src/components/RightRail.tsx')
+          source = path.read_text()
+          before = source
+
+          source = source.replace(
+              "import { useEffect, useRef, useState } from 'react'",
+              "import { lazy, Suspense, useEffect, useRef, useState } from 'react'",
+              1,
+          )
+          source = source.replace("import { LexicalPanel } from './LexicalPanel'\n", '', 1)
+          marker = "import { useModalDrawer } from './useModalDrawer'\n\n"
+          lazy_decl = "const LexicalPanel = lazy(() => import('./LexicalPanel').then((module) => ({ default: module.LexicalPanel })))\n\n"
+          if marker not in source:
+              raise SystemExit('marcador de imports do RightRail não encontrado')
+          source = source.replace(marker, marker + lazy_decl, 1)
+
+          old_render = "            <LexicalPanel document={document} />"
+          new_render = "            <Suspense fallback={<p className=\"panel-intro\" role=\"status\">Preparando consulta local…</p>}>\n              <LexicalPanel document={document} />\n            </Suspense>"
+          if old_render not in source:
+              raise SystemExit('render estático do LexicalPanel não encontrado')
+          source = source.replace(old_render, new_render, 1)
+
+          if source == before:
+              raise SystemExit('RightRail não foi alterado')
+          if "import { LexicalPanel } from './LexicalPanel'" in source:
+              raise SystemExit('import estático do LexicalPanel ainda existe')
+          if "lazy(() => import('./LexicalPanel')" not in source:
+              raise SystemExit('fronteira lazy não foi criada')
+          path.write_text(source)
+          PY
+
+      - name: Commitar patch e remover bootstrap
+        run: |
+          git rm .github/workflows/t2-lazy-lexical-panel.yml
+          git add mass-notes-next/src/components/RightRail.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "perf: carregar Palavras somente sob demanda"
+          git push origin HEAD:feat/escrevaral-paper-home
