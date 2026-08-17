@@ -16,6 +16,9 @@ function syncIntegrity() {
   const modeButton = document.querySelector<HTMLButtonElement>('.topbar .mode button')
   setDisabled(modeButton, 'Modo atual: Escrita')
 
+  const notesButton = document.querySelector<HTMLButtonElement>('.main-actions > button:nth-child(2)')
+  setDisabled(notesButton, 'Notas — ainda não disponível')
+
   const project = document.querySelector<HTMLElement>('.left-rail .current-project')
   if (project) {
     setText(project.querySelector('.eyebrow'), 'BIBLIOTECA LOCAL')
