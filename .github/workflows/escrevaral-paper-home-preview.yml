@@ -61,9 +61,12 @@ jobs:
         run: |
           set -euo pipefail
           ! grep -R -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' dist
-          test "$(find dist/assets -maxdepth 1 -type f -name 'Anton-Regular-*.ttf' | wc -l)" -eq 1
-          test "$(find dist/assets -maxdepth 1 -type f -name 'Oswald-wght-*.ttf' | wc -l)" -eq 1
-          test "$(find dist/assets -maxdepth 1 -type f -name 'Literata-opsz-wght-*.ttf' | wc -l)" -eq 1
+          test -f dist/assets/Anton-Regular.ttf
+          test -f dist/assets/Oswald-wght.ttf
+          test -f dist/assets/Literata-opsz-wght.ttf
+          test "$(wc -c < dist/assets/Anton-Regular.ttf)" -eq 170812
+          test "$(wc -c < dist/assets/Oswald-wght.ttf)" -eq 172088
+          test "$(wc -c < dist/assets/Literata-opsz-wght.ttf)" -eq 955132
 
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
