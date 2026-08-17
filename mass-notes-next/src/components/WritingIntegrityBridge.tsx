@@ -1,9 +1,5 @@
 import { useEffect } from 'react'
 
-function setText(element: Element | null, value: string) {
-  if (element && element.textContent !== value) element.textContent = value
-}
-
 function setDisabled(button: HTMLButtonElement | null, label?: string) {
   if (!button) return
   button.disabled = true
@@ -13,69 +9,12 @@ function setDisabled(button: HTMLButtonElement | null, label?: string) {
 }
 
 function syncIntegrity() {
-  const modeButton = document.querySelector<HTMLButtonElement>('.topbar .mode button')
-  setDisabled(modeButton, 'Modo atual: Escrita')
-
-  const notesButton = document.querySelector<HTMLButtonElement>('.main-actions > button:nth-child(2)')
-  setDisabled(notesButton, 'Notas — ainda não disponível')
-
-  const research = document.querySelector<HTMLElement>('.left-rail .research')
-  if (research) {
-    setText(research.querySelector('.eyebrow'), 'REVISÃO LOCAL')
-    research.setAttribute('aria-label', 'Revisão local do documento')
-    const rows = Array.from(research.querySelectorAll<HTMLLIElement>('li'))
-    rows.forEach((row, index) => {
-      row.hidden = index > 0
-      if (index === 0) {
-        row.classList.add('reference-integrity-research-copy')
-        row.setAttribute('aria-label', 'Use Pesquisa para executar a revisão local do documento ativo.')
-      }
-    })
-  }
-
-  const quickBox = document.querySelector<HTMLElement>('.left-rail .quick-box')
-  if (quickBox) {
-    quickBox.hidden = true
-    quickBox.setAttribute('aria-hidden', 'true')
-  }
-
-  const distribution = document.querySelector<HTMLElement>('.analysis-panel .distribution-section')
-  if (distribution) {
-    distribution.hidden = true
-    distribution.setAttribute('aria-hidden', 'true')
-  }
-
   const tagsSection = document.querySelector<HTMLElement>('.analysis-panel .tags')
   const realTagsInput = document.querySelector<HTMLInputElement>('.reference-mobile-legacy #document-tags')
   const hasRealTags = Boolean(realTagsInput?.value.trim())
   document.body.classList.toggle('reference-tags-empty', !hasRealTags)
   if (tagsSection) {
     tagsSection.setAttribute('aria-label', hasRealTags ? 'Tags do documento' : 'Tags do documento: nenhuma tag')
-  }
-
-  const versions = document.querySelector<HTMLElement>('.analysis-panel .versions')
-  if (versions) {
-    setText(versions.querySelector('h3'), 'ESTADO LOCAL')
-    versions.setAttribute('aria-label', 'Estado local do documento')
-    const allVersions = versions.querySelector<HTMLAnchorElement>('.section-title a')
-    if (allVersions) {
-      allVersions.hidden = true
-      allVersions.tabIndex = -1
-      allVersions.setAttribute('aria-hidden', 'true')
-    }
-    const revision = versions.querySelector<HTMLElement>('.version b')
-    const match = revision?.textContent?.match(/^v(\d+)\.0$/)
-    if (revision && match) revision.textContent = `rev. ${match[1]}`
-  }
-
-  const focusValue = document.querySelector<HTMLElement>('.statusbar .focus strong')
-  setText(focusValue, document.body.classList.contains('focus-mode') ? 'Ativo' : 'Pronto')
-
-  const languageButton = document.querySelector<HTMLButtonElement>('.statusbar .language button')
-  if (languageButton) {
-    languageButton.hidden = true
-    languageButton.tabIndex = -1
-    languageButton.setAttribute('aria-hidden', 'true')
   }
 
   const fontButton = document.querySelector<HTMLButtonElement>('.formatbar > label:nth-child(2) button')
