@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { WritingAutoFocusBridge } from './components/WritingAutoFocusBridge'
 import { WritingConfigBridge } from './components/WritingConfigBridge'
 import { WritingDashboardBridge } from './components/WritingDashboardBridge'
-import { WritingEditorialStateBridge } from './components/WritingEditorialStateBridge'
 import { WritingExportBridge } from './components/WritingExportBridge'
 import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
@@ -102,7 +101,6 @@ createRoot(document.getElementById('root')!).render(
     <WritingConfigBridge />
     <WritingResearchBridge />
     <WritingTagsBridge />
-    <WritingEditorialStateBridge />
     <WritingVoiceBridge />
     <WritingLexicalBridge />
     <WritingLibraryBridge />

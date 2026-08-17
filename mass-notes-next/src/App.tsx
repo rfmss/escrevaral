@@ -653,6 +653,34 @@ export default function App() {
           <section className="language-section"><h3 className="blue">LINGUAGEM</h3>
             <dl><dt>Frases</dt><dd>{sentenceCount}</dd><dt>Média por frase</dt><dd>{averageSentence} palavras</dd><dt>Complexidade</dt><dd>—</dd><dt>Voz predominante</dt><dd>—</dd><dt>Tempo verbal</dt><dd>—</dd></dl>
           </section>
+          <section className="reference-editorial-state" aria-labelledby="reference-editorial-state-title">
+            <div className="reference-editorial-heading">
+              <h3 id="reference-editorial-state-title">ESTADO EDITORIAL</h3>
+              <button
+                className={`reference-editorial-favorite ${draft.favorite ? 'active' : ''}`}
+                type="button"
+                aria-pressed={draft.favorite}
+                aria-label={draft.favorite ? 'Remover documento dos favoritos' : 'Marcar documento como favorito'}
+                onClick={() => mutateDraft((current) => ({ ...current, favorite: !current.favorite }), 'metadata')}
+              >
+                {draft.favorite ? '★' : '☆'}
+              </button>
+            </div>
+            <div className="reference-editorial-status" role="group" aria-label="Estado editorial do documento">
+              {(['Rascunho', 'Em corte', 'Pronto'] as DocumentStatus[]).map((status) => (
+                <button
+                  key={status}
+                  type="button"
+                  data-editorial-status={status}
+                  className={draft.status === status ? 'active' : ''}
+                  aria-pressed={draft.status === status}
+                  onClick={() => mutateDraft((current) => ({ ...current, status }), 'metadata')}
+                >
+                  {status}
+                </button>
+              ))}
+            </div>
+          </section>
           <section className="tags"><div className="section-title"><h3 className="blue">TAGS</h3><button className="icon-square add" type="button">＋</button></div><div>{(draft.tags.length ? draft.tags : ['mistério', 'retorno', 'cidade', 'passado', 'segredos']).slice(0, 5).map((tag) => <button type="button" key={tag}># {tag}</button>)}</div></section>
           <section className="versions"><div className="section-title"><h3 className="blue">VERSÕES</h3><a href="#" onClick={(event) => event.preventDefault()}>Ver todas</a></div><div className="version"><b>v{Math.max(1, draft.revision + 1)}.0</b><time>{formatDateTime(draft.updatedAt)}</time><em>Atual</em></div><div className="version"><b>local</b><time>IndexedDB</time></div></section>
         </aside>
