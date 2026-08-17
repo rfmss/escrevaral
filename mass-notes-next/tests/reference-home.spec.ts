@@ -67,7 +67,8 @@ test('controles sem domínio ficam estáticos e análise recolhe de verdade', as
   await expect(versions.locator('.section-title a')).toBeHidden()
   await expect(versions.locator('.version').first().locator('b')).toHaveText(/^rev\. \d+$/)
 
-  await expect(page.locator('.analysis-panel .tags > div:last-child > button')).toBeHidden()
+  const fallbackTags = page.locator('.analysis-panel .tags > div:last-child > button')
+  expect(await fallbackTags.evaluateAll((buttons) => buttons.every((button) => getComputedStyle(button).display === 'none'))).toBe(true)
   await expect(page.locator('.analysis-panel .tags .add')).toBeVisible()
 
   const workspace = page.locator('.workspace')
