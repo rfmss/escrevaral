@@ -1,0 +1,102 @@
+name: T3 Promote Library
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - ".github/workflows/t3-promote-library.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: feat/escrevaral-paper-home
+          fetch-depth: 0
+
+      - name: Promover Biblioteca ao App
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          app = Path('mass-notes-next/src/App.tsx')
+          source = app.read_text()
+
+          focus_effect = """  useEffect(() => {
+            document.body.classList.toggle('focus-mode', focusMode)
+          }, [focusMode])
+
+          """
+          library_effect = """  useEffect(() => {
+            document.body.classList.toggle('reference-library-open', sidebarOpen)
+            return () => document.body.classList.remove('reference-library-open')
+          }, [sidebarOpen])
+
+          """
+          if focus_effect not in source:
+              raise SystemExit('efeito de foco não encontrado')
+          if 'reference-library-open' not in source:
+              source = source.replace(focus_effect, focus_effect + library_effect, 1)
+
+          old_project = """          <section className=\"current-project\">
+            <span className=\"eyebrow\">PROJETO ATUAL</span>
+            <div className=\"project-row\"><strong>ROMANCE DE FICÇÃO</strong><button className=\"icon-square\" type=\"button\" aria-label=\"Abrir projeto\"><span className=\"chevron\" aria-hidden=\"true\" /></button></div>
+            <small>{projectWords.toLocaleString('pt-BR')} palavras</small>
+          </section>
+          """
+          new_project = """          <section className=\"current-project\">
+            <span className=\"eyebrow\">BIBLIOTECA LOCAL</span>
+            <div className=\"project-row\">
+              <strong>DOCUMENTOS LOCAIS</strong>
+              <button
+                className=\"icon-square\"
+                type=\"button\"
+                aria-label={sidebarOpen ? 'Biblioteca local aberta' : 'Abrir biblioteca local'}
+                aria-controls=\"document-library\"
+                aria-expanded={sidebarOpen}
+                onClick={() => setSidebarOpen(true)}
+              >
+                <span className=\"chevron\" aria-hidden=\"true\" />
+              </button>
+            </div>
+            <small>{projectWords.toLocaleString('pt-BR')} palavras</small>
+          </section>
+          """
+          if old_project not in source:
+              raise SystemExit('bloco cenográfico de projeto não encontrado')
+          source = source.replace(old_project, new_project, 1)
+          app.write_text(source)
+
+          main = Path('mass-notes-next/src/main.tsx')
+          source = main.read_text()
+          source = source.replace("import { WritingLibraryBridge } from './components/WritingLibraryBridge'\n", '', 1)
+          source = source.replace('    <WritingLibraryBridge />\n', '', 1)
+          if 'WritingLibraryBridge' in source:
+              raise SystemExit('WritingLibraryBridge ainda montado em main.tsx')
+          main.write_text(source)
+
+          integrity = Path('mass-notes-next/src/components/WritingIntegrityBridge.tsx')
+          source = integrity.read_text()
+          start = source.find("  const project = document.querySelector<HTMLElement>('.left-rail .current-project')")
+          end_marker = "\n\n  const research = document.querySelector<HTMLElement>('.left-rail .research')"
+          end = source.find(end_marker, start)
+          if start < 0 or end < 0:
+              raise SystemExit('bloco de integridade da Biblioteca não encontrado')
+          source = source[:start] + "  const research = document.querySelector<HTMLElement>('.left-rail .research')" + source[end + len(end_marker):]
+          integrity.write_text(source)
+          PY
+
+      - name: Commitar promoção e remover bridge
+        run: |
+          git rm .github/workflows/t3-promote-library.yml
+          git rm mass-notes-next/src/components/WritingLibraryBridge.tsx
+          git add mass-notes-next/src/App.tsx mass-notes-next/src/main.tsx mass-notes-next/src/components/WritingIntegrityBridge.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "refactor: dar ownership React à Biblioteca"
+          git push origin HEAD:feat/escrevaral-paper-home
