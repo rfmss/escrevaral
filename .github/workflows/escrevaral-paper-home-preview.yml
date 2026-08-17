@@ -57,6 +57,14 @@ jobs:
       - name: Compilar a casa real
         run: npm run build
 
+      - name: Provar build sem fontes remotas
+        run: |
+          set -euo pipefail
+          ! grep -R -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' dist
+          test "$(find dist/assets -maxdepth 1 -type f -name 'Anton-Regular-*.ttf' | wc -l)" -eq 1
+          test "$(find dist/assets -maxdepth 1 -type f -name 'Oswald-wght-*.ttf' | wc -l)" -eq 1
+          test "$(find dist/assets -maxdepth 1 -type f -name 'Literata-opsz-wght-*.ttf' | wc -l)" -eq 1
+
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
 
@@ -69,6 +77,7 @@ jobs:
           tests/reference-voice.spec.ts
           tests/reference-library.spec.ts
           tests/reference-library-query.spec.ts
+          tests/reference-offline-fonts.spec.ts
           tests/reference-actions.spec.ts
           tests/gate2.spec.ts
 
@@ -116,8 +125,9 @@ jobs:
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
               && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
+              && ! grep -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' /tmp/escrevaral-home-app.css \
               && grep --quiet 'theme-escrevaral-reference.css' mass-notes-next/src/main.tsx; then
-              echo "Preview pública da referência canônica respondeu corretamente."
+              echo "Preview pública da referência canônica respondeu corretamente e sem fontes remotas."
               exit 0
             fi
             sleep 10
