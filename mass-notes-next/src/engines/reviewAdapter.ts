@@ -1,8 +1,3 @@
-import criteriaSource from '../../../js/data/criterios-data.js?raw'
-import syntaxSource from '../../../syntax-engine.js?raw'
-import punctuationSource from '../../../punctuation-engine.js?raw'
-import analysisSource from '../../../analise-engine.js?raw'
-
 export type ReviewIssue = {
   id: string
   title: string
@@ -22,6 +17,10 @@ export type ReviewReading = {
   locatedIssues: LocatedReviewIssue[]
 }
 
+type RawModule = { default: string }
+
+let loadingPromise: Promise<boolean> | null = null
+
 declare global {
   interface Window {
     VeredaAnalise?: {
@@ -40,19 +39,36 @@ function executeClassicScript(source: string, id: string): void {
   document.head.append(script)
 }
 
-export function ensureReviewEngine(): boolean {
+async function loadReviewEngine(): Promise<boolean> {
+  const [criteria, syntax, punctuation, analysis] = await Promise.all([
+    import('../../../js/data/criterios-data.js?raw') as Promise<RawModule>,
+    import('../../../syntax-engine.js?raw') as Promise<RawModule>,
+    import('../../../punctuation-engine.js?raw') as Promise<RawModule>,
+    import('../../../analise-engine.js?raw') as Promise<RawModule>,
+  ])
+
+  executeClassicScript(criteria.default, 'criterios-data.js')
+  executeClassicScript(syntax.default, 'syntax-engine.js')
+  executeClassicScript(punctuation.default, 'punctuation-engine.js')
+  executeClassicScript(analysis.default, 'analise-engine.js')
+  window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
+  return window.__escrevaralReviewLoaded
+}
+
+export async function ensureReviewEngine(): Promise<boolean> {
   if (window.__escrevaralReviewLoaded && window.VeredaAnalise?.analisar) return true
-  try {
-    executeClassicScript(criteriaSource, 'criterios-data.js')
-    executeClassicScript(syntaxSource, 'syntax-engine.js')
-    executeClassicScript(punctuationSource, 'punctuation-engine.js')
-    executeClassicScript(analysisSource, 'analise-engine.js')
-    window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
-    return window.__escrevaralReviewLoaded
-  } catch (error) {
-    console.error('[Escrevaral] Não foi possível carregar a engine de revisão.', error)
-    return false
-  }
+  if (loadingPromise) return loadingPromise
+
+  loadingPromise = loadReviewEngine()
+    .catch((error) => {
+      console.error('[Escrevaral] Não foi possível carregar a engine de revisão.', error)
+      return false
+    })
+    .finally(() => {
+      loadingPromise = null
+    })
+
+  return loadingPromise
 }
 
 function normalizeSeverity(value: unknown): ReviewIssue['severity'] {
@@ -143,7 +159,7 @@ function normalizeLocatedIssue(item: unknown, text: string, index: number): Loca
 
 export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   if (!text.trim()) return { issues: [], locatedIssues: [] }
-  if (!ensureReviewEngine() || !window.VeredaAnalise) {
+  if (!(await ensureReviewEngine()) || !window.VeredaAnalise) {
     throw new Error('A engine de revisão não está disponível.')
   }
 
