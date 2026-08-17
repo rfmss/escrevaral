@@ -19,63 +19,33 @@ jobs:
           ref: feat/escrevaral-paper-home
           fetch-depth: 0
 
-      - name: Promover estado editorial ao App
+      - name: Patch React ownership
+        env:
+          EDITORIAL_B64: "ICAgICAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT0icmVmZXJlbmNlLWVkaXRvcmlhbC1zdGF0ZSIgYXJpYS1sYWJlbGxlZGJ5PSJyZWZlcmVuY2UtZWRpdG9yaWFsLXN0YXRlLXRpdGxlIj4KICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InJlZmVyZW5jZS1lZGl0b3JpYWwtaGVhZGluZyI+CiAgICAgICAgICAgICAgPGgzIGlkPSJyZWZlcmVuY2UtZWRpdG9yaWFsLXN0YXRlLXRpdGxlIj5FU1RBRE8gRURJVE9SSUFMPC9oMz4KICAgICAgICAgICAgICA8YnV0dG9uCiAgICAgICAgICAgICAgICBjbGFzc05hbWU9e2ByZWZlcmVuY2UtZWRpdG9yaWFsLWZhdm9yaXRlICR7ZHJhZnQuZmF2b3JpdGUgPyAnYWN0aXZlJyA6ICcnfWB9CiAgICAgICAgICAgICAgICB0eXBlPSJidXR0b24iCiAgICAgICAgICAgICAgICBhcmlhLXByZXNzZWQ9e2RyYWZ0LmZhdm9yaXRlfQogICAgICAgICAgICAgICAgYXJpYS1sYWJlbD17ZHJhZnQuZmF2b3JpdGUgPyAnUmVtb3ZlciBkb2N1bWVudG8gZG9zIGZhdm9yaXRvcycgOiAnTWFyY2FyIGRvY3VtZW50byBjb21vIGZhdm9yaXRvJ30KICAgICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG11dGF0ZURyYWZ0KChjdXJyZW50KSA9PiAoeyAuLi5jdXJyZW50LCBmYXZvcml0ZTogIWN1cnJlbnQuZmF2b3JpdGUgfSksICdtZXRhZGF0YScpfQogICAgICAgICAgICAgID4KICAgICAgICAgICAgICAgIHtkcmFmdC5mYXZvcml0ZSA/ICfimIUnIDogJ+KYhid9CiAgICAgICAgICAgICAgPC9idXR0b24+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0icmVmZXJlbmNlLWVkaXRvcmlhbC1zdGF0dXMiIHJvbGU9Imdyb3VwIiBhcmlhLWxhYmVsPSJFc3RhZG8gZWRpdG9yaWFsIGRvIGRvY3VtZW50byI+CiAgICAgICAgICAgICAgeyhbJ1Jhc2N1bmhvJywgJ0VtIGNvcnRlJywgJ1Byb250byddIGFzIERvY3VtZW50U3RhdHVzW10pLm1hcCgoc3RhdHVzKSA9PiAoCiAgICAgICAgICAgICAgICA8YnV0dG9uCiAgICAgICAgICAgICAgICAgIGtleT17c3RhdHVzfQogICAgICAgICAgICAgICAgICB0eXBlPSJidXR0b24iCiAgICAgICAgICAgICAgICAgIGRhdGEtZWRpdG9yaWFsLXN0YXR1cz17c3RhdHVzfQogICAgICAgICAgICAgICAgICBjbGFzc05hbWU9e2RyYWZ0LnN0YXR1cyA9PT0gc3RhdHVzID8gJ2FjdGl2ZScgOiAnJ30KICAgICAgICAgICAgICAgICAgYXJpYS1wcmVzc2VkPXtkcmFmdC5zdGF0dXMgPT09IHN0YXR1c30KICAgICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gbXV0YXRlRHJhZnQoKGN1cnJlbnQpID0+ICh7IC4uLmN1cnJlbnQsIHN0YXR1cyB9KSwgJ21ldGFkYXRhJyl9CiAgICAgICAgICAgICAgICA+CiAgICAgICAgICAgICAgICAgIHtzdGF0dXN9CiAgICAgICAgICAgICAgICA8L2J1dHRvbj4KICAgICAgICAgICAgICApKX0KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8L3NlY3Rpb24+Cg=="
         run: |
           python - <<'PY'
+          import base64, os
           from pathlib import Path
-
           app = Path('mass-notes-next/src/App.tsx')
           source = app.read_text()
           marker = '          <section className="tags">'
-          editorial = '''          <section className="reference-editorial-state" aria-labelledby="reference-editorial-state-title">
-            <div className="reference-editorial-heading">
-              <h3 id="reference-editorial-state-title">ESTADO EDITORIAL</h3>
-              <button
-                className={`reference-editorial-favorite ${draft.favorite ? 'active' : ''}`}
-                type="button"
-                aria-pressed={draft.favorite}
-                aria-label={draft.favorite ? 'Remover documento dos favoritos' : 'Marcar documento como favorito'}
-                onClick={() => mutateDraft((current) => ({ ...current, favorite: !current.favorite }), 'metadata')}
-              >
-                {draft.favorite ? '★' : '☆'}
-              </button>
-            </div>
-            <div className="reference-editorial-status" role="group" aria-label="Estado editorial do documento">
-              {(['Rascunho', 'Em corte', 'Pronto'] as DocumentStatus[]).map((status) => (
-                <button
-                  key={status}
-                  type="button"
-                  data-editorial-status={status}
-                  className={draft.status === status ? 'active' : ''}
-                  aria-pressed={draft.status === status}
-                  onClick={() => mutateDraft((current) => ({ ...current, status }), 'metadata')}
-                >
-                  {status}
-                </button>
-              ))}
-            </div>
-          </section>
-'''
+          editorial = base64.b64decode(os.environ['EDITORIAL_B64']).decode()
           if marker not in source:
-              raise SystemExit('ponto estável tags não encontrado em App.tsx')
+              raise SystemExit('tags marker ausente')
           if 'className="reference-editorial-state"' in source:
-              raise SystemExit('estado editorial já existe no JSX do App')
-          source = source.replace(marker, editorial + marker, 1)
-          app.write_text(source)
+              raise SystemExit('editorial já promovido')
+          app.write_text(source.replace(marker, editorial + marker, 1))
 
           main = Path('mass-notes-next/src/main.tsx')
           source = main.read_text()
-          before = source
           source = source.replace("import { WritingEditorialStateBridge } from './components/WritingEditorialStateBridge'\n", '', 1)
           source = source.replace('    <WritingEditorialStateBridge />\n', '', 1)
-          if source == before:
-              raise SystemExit('WritingEditorialStateBridge não estava montado em main.tsx')
           if 'WritingEditorialStateBridge' in source:
-              raise SystemExit('WritingEditorialStateBridge ainda aparece em main.tsx')
+              raise SystemExit('bridge ainda montado')
           main.write_text(source)
           PY
 
-      - name: Commitar promoção e remover bootstrap
+      - name: Commit
         run: |
           git rm .github/workflows/t3-promote-editorial-state.yml
           git add mass-notes-next/src/App.tsx mass-notes-next/src/main.tsx
