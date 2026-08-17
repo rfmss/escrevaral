@@ -48,3 +48,27 @@ test('Biblioteca local expõe filtros reais de estado, favorito, tag e ordenaç�
   await expect(page.locator('body')).not.toHaveClass(/reference-library-open/)
   await expect(page.getByRole('button', { name: 'Abrir biblioteca local' })).toHaveAttribute('aria-expanded', 'false')
 })
+
+test('gatilho canônico da Biblioteca não depende mais do botão móvel escondido', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await page.goto('/')
+  await expect(page.locator('.paper-shell')).toBeVisible()
+
+  const mobileTrigger = page.locator('.mobile-menu')
+  await expect(mobileTrigger).toHaveCount(1)
+  await mobileTrigger.evaluate((element) => element.remove())
+  await expect(page.locator('.mobile-menu')).toHaveCount(0)
+
+  const trigger = page.getByRole('button', { name: 'Abrir biblioteca local' })
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  await trigger.click()
+
+  const library = page.locator('.reference-mobile-legacy #document-library.sidebar.open')
+  await expect(library).toBeVisible()
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+  await expect(page.locator('body')).toHaveClass(/reference-library-open/)
+
+  await library.getByLabel('Fechar arquivo').click()
+  await expect(library).toBeHidden()
+  await expect(page.getByRole('button', { name: 'Abrir biblioteca local' })).toHaveAttribute('aria-expanded', 'false')
+})
