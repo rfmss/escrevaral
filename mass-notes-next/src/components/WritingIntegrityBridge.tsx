@@ -19,20 +19,6 @@ function syncIntegrity() {
   const notesButton = document.querySelector<HTMLButtonElement>('.main-actions > button:nth-child(2)')
   setDisabled(notesButton, 'Notas — ainda não disponível')
 
-  const project = document.querySelector<HTMLElement>('.left-rail .current-project')
-  if (project) {
-    setText(project.querySelector('.eyebrow'), 'BIBLIOTECA LOCAL')
-    setText(project.querySelector('.project-row strong'), 'DOCUMENTOS LOCAIS')
-    const projectButton = project.querySelector<HTMLButtonElement>('.project-row button')
-    if (projectButton) {
-      projectButton.hidden = false
-      projectButton.tabIndex = 0
-      projectButton.removeAttribute('aria-hidden')
-      projectButton.setAttribute('aria-label', 'Abrir biblioteca local')
-      projectButton.setAttribute('aria-controls', 'document-library')
-    }
-  }
-
   const research = document.querySelector<HTMLElement>('.left-rail .research')
   if (research) {
     setText(research.querySelector('.eyebrow'), 'REVISÃO LOCAL')

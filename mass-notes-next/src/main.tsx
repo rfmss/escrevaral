@@ -7,7 +7,6 @@ import { WritingExportBridge } from './components/WritingExportBridge'
 import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
 import { WritingLexicalBridge } from './components/WritingLexicalBridge'
-import { WritingLibraryBridge } from './components/WritingLibraryBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
 import { WritingTagsBridge } from './components/WritingTagsBridge'
@@ -103,7 +102,6 @@ createRoot(document.getElementById('root')!).render(
     <WritingTagsBridge />
     <WritingVoiceBridge />
     <WritingLexicalBridge />
-    <WritingLibraryBridge />
     <WritingIntegrityBridge />
     <WritingRestChrome />
   </StrictMode>,

@@ -167,6 +167,11 @@ export default function App() {
   }, [focusMode])
 
   useEffect(() => {
+    document.body.classList.toggle('reference-library-open', sidebarOpen)
+    return () => document.body.classList.remove('reference-library-open')
+  }, [sidebarOpen])
+
+  useEffect(() => {
     if (!('BroadcastChannel' in window)) return
     const channel = new BroadcastChannel(CHANNEL)
     channelRef.current = channel
@@ -587,8 +592,20 @@ export default function App() {
         <aside className="left-rail">
           <div className="rail-code code-one">PAPER FRAMEWORK 01.4</div>
           <section className="current-project">
-            <span className="eyebrow">PROJETO ATUAL</span>
-            <div className="project-row"><strong>ROMANCE DE FICÇÃO</strong><button className="icon-square" type="button" aria-label="Abrir projeto"><span className="chevron" aria-hidden="true" /></button></div>
+            <span className="eyebrow">BIBLIOTECA LOCAL</span>
+            <div className="project-row">
+              <strong>DOCUMENTOS LOCAIS</strong>
+              <button
+                className="icon-square"
+                type="button"
+                aria-label={sidebarOpen ? 'Biblioteca local aberta' : 'Abrir biblioteca local'}
+                aria-controls="document-library"
+                aria-expanded={sidebarOpen}
+                onClick={() => setSidebarOpen(true)}
+              >
+                <span className="chevron" aria-hidden="true" />
+              </button>
+            </div>
             <small>{projectWords.toLocaleString('pt-BR')} palavras</small>
           </section>
           <section className="documents">
