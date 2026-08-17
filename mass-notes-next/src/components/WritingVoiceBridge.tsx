@@ -31,41 +31,64 @@ function openVoiceTab(): boolean {
   return true
 }
 
-function syncVoiceProjection() {
-  const launcher = ensureLauncher()
-  if (!launcher) return
-
-  const button = launcher.querySelector<HTMLButtonElement>('.reference-voice-open')
-  const summary = launcher.querySelector<HTMLElement>('.reference-voice-summary')
-  const railOpen = Boolean(document.querySelector('.reference-mobile-legacy #text-tools.rail.open'))
-  const voiceOpen = document.body.classList.contains('reference-voice-open') && railOpen
-
-  button?.setAttribute('aria-expanded', String(voiceOpen))
-  if (!railOpen) document.body.classList.remove('reference-voice-open')
-
-  const title = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-card h2')?.textContent?.trim()
-  const gesture = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-gesture')?.textContent?.trim()
-  const confidence = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-confidence strong')?.textContent?.trim()
-  const message = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-message')?.textContent?.trim()
-
-  if (summary) {
-    if (title) {
-      const parts = [title]
-      if (gesture && gesture !== 'indefinido') parts.push(gesture)
-      if (confidence) parts.push(`confiança ${confidence}`)
-      summary.textContent = parts.join(' · ')
-      summary.dataset.voiceReading = 'ready'
-    } else {
-      summary.textContent = message || 'Leitura ainda não executada.'
-      delete summary.dataset.voiceReading
-    }
-  }
+function currentDocumentSignature(): string {
+  const title = document.querySelector<HTMLInputElement>('.document-title input')?.value ?? ''
+  const text = document.querySelector<HTMLElement>('.ProseMirror')?.innerText ?? ''
+  return `${title}\u0000${text}`
 }
 
 export function WritingVoiceBridge() {
   useEffect(() => {
     const root = document.getElementById('root')
     if (!root) return
+
+    let lastSummary = ''
+    let lastSignature = ''
+
+    const syncVoiceProjection = () => {
+      const launcher = ensureLauncher()
+      if (!launcher) return
+
+      const button = launcher.querySelector<HTMLButtonElement>('.reference-voice-open')
+      const summary = launcher.querySelector<HTMLElement>('.reference-voice-summary')
+      const railOpen = Boolean(document.querySelector('.reference-mobile-legacy #text-tools.rail.open'))
+      const voiceOpen = document.body.classList.contains('reference-voice-open') && railOpen
+      const signature = currentDocumentSignature()
+
+      button?.setAttribute('aria-expanded', String(voiceOpen))
+      if (!railOpen) document.body.classList.remove('reference-voice-open')
+
+      const title = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-card h2')?.textContent?.trim()
+      const gesture = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-gesture')?.textContent?.trim()
+      const confidence = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-confidence strong')?.textContent?.trim()
+      const message = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-message')?.textContent?.trim()
+
+      if (!summary) return
+
+      if (title) {
+        const parts = [title]
+        if (gesture && gesture !== 'indefinido') parts.push(gesture)
+        if (confidence) parts.push(`confiança ${confidence}`)
+        lastSummary = parts.join(' · ')
+        lastSignature = signature
+        summary.textContent = lastSummary
+        summary.dataset.voiceReading = 'ready'
+        return
+      }
+
+      if (lastSummary && lastSignature === signature) {
+        summary.textContent = lastSummary
+        summary.dataset.voiceReading = 'ready'
+        return
+      }
+
+      if (lastSignature && lastSignature !== signature) {
+        lastSummary = ''
+        lastSignature = ''
+      }
+      summary.textContent = message || 'Leitura ainda não executada.'
+      delete summary.dataset.voiceReading
+    }
 
     const revealVoice = () => {
       document.body.classList.remove('reference-research-open', 'reference-tags-open')
@@ -91,11 +114,13 @@ export function WritingVoiceBridge() {
 
     const timer = window.setInterval(syncVoiceProjection, 250)
     root.addEventListener('click', onClick)
+    root.addEventListener('input', syncVoiceProjection)
     requestAnimationFrame(syncVoiceProjection)
 
     return () => {
       window.clearInterval(timer)
       root.removeEventListener('click', onClick)
+      root.removeEventListener('input', syncVoiceProjection)
       document.body.classList.remove('reference-voice-open')
       document.querySelector('.reference-voice-launcher')?.remove()
     }
