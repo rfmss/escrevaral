@@ -85,6 +85,7 @@ jobs:
           npx playwright test --project=chromium
           tests/reference-home.spec.ts
           tests/reference-integrity.spec.ts
+          tests/reference-source-integrity.spec.ts
           tests/reference-editorial.spec.ts
           tests/reference-voice.spec.ts
           tests/reference-library.spec.ts
