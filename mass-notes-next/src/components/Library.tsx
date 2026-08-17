@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { displayTitle, type EscrevaralDocument } from '../domain/document'
 import {
   collectLibraryTags,
   DEFAULT_LIBRARY_QUERY,
   hasActiveLibraryFilters,
   queryLibraryDocuments,
+  type LibraryQuery,
   type LibrarySort,
   type LibraryStatusFilter,
 } from '../library/libraryQuery'
@@ -13,9 +14,9 @@ import { useModalDrawer } from './useModalDrawer'
 type Props = {
   documents: EscrevaralDocument[]
   activeId: string | null
-  search: string
+  query: LibraryQuery
   open: boolean
-  onSearch: (value: string) => void
+  onQueryChange: (query: LibraryQuery) => void
   onSelect: (id: string) => void
   onNew: () => void
   onClose: () => void
@@ -52,27 +53,16 @@ function absoluteTime(timestamp: number): string {
   }).format(timestamp)
 }
 
-export function Library({ documents, activeId, search, open, onSearch, onSelect, onNew, onClose }: Props) {
+export function Library({ documents, activeId, query, open, onQueryChange, onSelect, onNew, onClose }: Props) {
   const panelRef = useModalDrawer<HTMLElement>(open, onClose)
-  const [status, setStatus] = useState<LibraryStatusFilter>(DEFAULT_LIBRARY_QUERY.status)
-  const [favoritesOnly, setFavoritesOnly] = useState(DEFAULT_LIBRARY_QUERY.favoritesOnly)
-  const [tag, setTag] = useState(DEFAULT_LIBRARY_QUERY.tag)
-  const [sort, setSort] = useState<LibrarySort>(DEFAULT_LIBRARY_QUERY.sort)
   const activeDocument = documents.find((document) => document.id === activeId) ?? null
-
   const tags = useMemo(() => collectLibraryTags(documents), [documents])
-  const query = useMemo(() => ({ search, status, favoritesOnly, tag, sort }), [favoritesOnly, search, sort, status, tag])
   const visible = useMemo(() => queryLibraryDocuments(documents, query), [documents, query])
   const filtersActive = hasActiveLibraryFilters(query)
   const activeVisible = activeId ? visible.some((document) => document.id === activeId) : true
 
-  const clearFilters = () => {
-    onSearch('')
-    setStatus(DEFAULT_LIBRARY_QUERY.status)
-    setFavoritesOnly(DEFAULT_LIBRARY_QUERY.favoritesOnly)
-    setTag(DEFAULT_LIBRARY_QUERY.tag)
-    setSort(DEFAULT_LIBRARY_QUERY.sort)
-  }
+  const patchQuery = (patch: Partial<LibraryQuery>) => onQueryChange({ ...query, ...patch })
+  const clearFilters = () => onQueryChange({ ...DEFAULT_LIBRARY_QUERY })
 
   return (
     <aside
@@ -106,8 +96,8 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           className="search"
           id="document-search"
           type="search"
-          value={search}
-          onChange={(event) => onSearch(event.target.value)}
+          value={query.search}
+          onChange={(event) => patchQuery({ search: event.target.value })}
           placeholder="Buscar no arquivo…"
         />
         <button className="icon-btn" type="button" onClick={onNew} aria-label="Novo documento">＋</button>
@@ -120,9 +110,9 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
             <button
               key={item.value}
               type="button"
-              className={status === item.value ? 'active' : ''}
-              aria-pressed={status === item.value}
-              onClick={() => setStatus(item.value)}
+              className={query.status === item.value ? 'active' : ''}
+              aria-pressed={query.status === item.value}
+              onClick={() => patchQuery({ status: item.value })}
             >
               {item.label}
             </button>
@@ -130,10 +120,10 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
         </div>
 
         <button
-          className={`library-favorites-filter ${favoritesOnly ? 'active' : ''}`}
+          className={`library-favorites-filter ${query.favoritesOnly ? 'active' : ''}`}
           type="button"
-          aria-pressed={favoritesOnly}
-          onClick={() => setFavoritesOnly((value) => !value)}
+          aria-pressed={query.favoritesOnly}
+          onClick={() => patchQuery({ favoritesOnly: !query.favoritesOnly })}
         >
           <span aria-hidden="true">★</span> Somente favoritas
         </button>
@@ -143,8 +133,8 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           <select
             id="library-tag-filter"
             aria-label="Filtrar por tag"
-            value={tag}
-            onChange={(event) => setTag(event.target.value)}
+            value={query.tag}
+            onChange={(event) => patchQuery({ tag: event.target.value })}
           >
             <option value="">Todas as tags</option>
             {tags.map((item) => <option key={item} value={item}>{item}</option>)}
@@ -156,8 +146,8 @@ export function Library({ documents, activeId, search, open, onSearch, onSelect,
           <select
             id="library-sort"
             aria-label="Ordenar páginas"
-            value={sort}
-            onChange={(event) => setSort(event.target.value as LibrarySort)}
+            value={query.sort}
+            onChange={(event) => patchQuery({ sort: event.target.value as LibrarySort })}
           >
             {SORT_OPTIONS.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
           </select>
