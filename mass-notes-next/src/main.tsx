@@ -7,6 +7,7 @@ import { WritingEditorialStateBridge } from './components/WritingEditorialStateB
 import { WritingExportBridge } from './components/WritingExportBridge'
 import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
+import { WritingLexicalBridge } from './components/WritingLexicalBridge'
 import { WritingLibraryBridge } from './components/WritingLibraryBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
@@ -49,6 +50,7 @@ import './styles/theme-escrevaral-paper-home-research.css'
 import './styles/theme-escrevaral-paper-home-tags.css'
 import './styles/theme-escrevaral-paper-home-editorial.css'
 import './styles/theme-escrevaral-paper-home-voice.css'
+import './styles/theme-escrevaral-paper-home-lexical.css'
 import './styles/theme-escrevaral-paper-home-library.css'
 import './styles/theme-escrevaral-paper-home-integrity.css'
 
@@ -102,6 +104,7 @@ createRoot(document.getElementById('root')!).render(
     <WritingTagsBridge />
     <WritingEditorialStateBridge />
     <WritingVoiceBridge />
+    <WritingLexicalBridge />
     <WritingLibraryBridge />
     <WritingIntegrityBridge />
     <WritingRestChrome />
