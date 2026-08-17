@@ -38,6 +38,8 @@ button[data-integrity-static="true"] .chevron {
   color: var(--ink);
 }
 
+.left-rail .current-project .project-row button[hidden],
+.left-rail .research li[hidden],
 .left-rail .quick-box[hidden],
 .analysis-panel .distribution-section[hidden],
 .analysis-panel .versions a[hidden],
