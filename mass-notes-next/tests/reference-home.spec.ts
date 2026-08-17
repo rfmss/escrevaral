@@ -52,7 +52,10 @@ test('controles sem domínio ficam estáticos e análise recolhe de verdade', as
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
-  await expect(page.locator('.left-rail .current-project .project-row button')).toBeHidden()
+  const libraryTrigger = page.locator('.left-rail .current-project .project-row button')
+  await expect(libraryTrigger).toBeVisible()
+  await expect(libraryTrigger).toHaveAttribute('aria-label', 'Abrir biblioteca local')
+  await expect(libraryTrigger).toHaveAttribute('aria-controls', 'document-library')
   await expect(page.locator('.left-rail .research li').first()).toHaveAttribute('aria-label', /Use Pesquisa/)
   await expect(page.locator('.left-rail .research li').nth(1)).toBeHidden()
 
