@@ -1,0 +1,48 @@
+name: T2 Remove Eager Review Bootstrap
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - ".github/workflows/t2-remove-eager-review-bootstrap.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: feat/escrevaral-paper-home
+          fetch-depth: 0
+
+      - name: Remover inicialização antecipada da revisão
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('mass-notes-next/src/App.tsx')
+          source = path.read_text()
+          before = source
+          source = source.replace('  ensureReviewEngine,\n', '', 1)
+          source = source.replace('      ensureReviewEngine()\n', '', 1)
+          if source == before:
+              raise SystemExit('App.tsx não continha o bootstrap esperado de revisão')
+          if 'ensureReviewEngine' in source:
+              raise SystemExit('ensureReviewEngine ainda aparece em App.tsx')
+          path.write_text(source)
+          PY
+
+      - name: Commitar patch e remover bootstrap
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git rm .github/workflows/t2-remove-eager-review-bootstrap.yml
+          git add mass-notes-next/src/App.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "perf: retirar revisão do caminho inicial"
+          git push origin HEAD:feat/escrevaral-paper-home
