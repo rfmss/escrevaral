@@ -1,0 +1,89 @@
+name: T3 Promote Editorial State
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - ".github/workflows/t3-promote-editorial-state.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: feat/escrevaral-paper-home
+          fetch-depth: 0
+
+      - name: Promover estado editorial ao App
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          app = Path('mass-notes-next/src/App.tsx')
+          source = app.read_text()
+          needle = '''          <section className="language-section"><h3 className="blue">LINGUAGEM</h3>
+            <dl><dt>Frases</dt><dd>{sentenceCount}</dd><dt>Média por frase</dt><dd>{averageSentence} palavras</dd><dt>Complexidade</dt><dd>—</dd><dt>Voz predominante</dt><dd>—</dd><dt>Tempo verbal</dt><dd>—</dd></dl>
+          </section>
+          <section className="tags">'''
+          replacement = '''          <section className="language-section"><h3 className="blue">LINGUAGEM</h3>
+            <dl><dt>Frases</dt><dd>{sentenceCount}</dd><dt>Média por frase</dt><dd>{averageSentence} palavras</dd><dt>Complexidade</dt><dd>—</dd><dt>Voz predominante</dt><dd>—</dd><dt>Tempo verbal</dt><dd>—</dd></dl>
+          </section>
+          <section className="reference-editorial-state" aria-labelledby="reference-editorial-state-title">
+            <div className="reference-editorial-heading">
+              <h3 id="reference-editorial-state-title">ESTADO EDITORIAL</h3>
+              <button
+                className={`reference-editorial-favorite ${draft.favorite ? 'active' : ''}`}
+                type="button"
+                aria-pressed={draft.favorite}
+                aria-label={draft.favorite ? 'Remover documento dos favoritos' : 'Marcar documento como favorito'}
+                onClick={() => mutateDraft((current) => ({ ...current, favorite: !current.favorite }), 'metadata')}
+              >
+                {draft.favorite ? '★' : '☆'}
+              </button>
+            </div>
+            <div className="reference-editorial-status" role="group" aria-label="Estado editorial do documento">
+              {(['Rascunho', 'Em corte', 'Pronto'] as DocumentStatus[]).map((status) => (
+                <button
+                  key={status}
+                  type="button"
+                  data-editorial-status={status}
+                  className={draft.status === status ? 'active' : ''}
+                  aria-pressed={draft.status === status}
+                  onClick={() => mutateDraft((current) => ({ ...current, status }), 'metadata')}
+                >
+                  {status}
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="tags">'''
+          if needle not in source:
+              raise SystemExit('ponto de inserção editorial não encontrado em App.tsx')
+          source = source.replace(needle, replacement, 1)
+          app.write_text(source)
+
+          main = Path('mass-notes-next/src/main.tsx')
+          source = main.read_text()
+          before = source
+          source = source.replace("import { WritingEditorialStateBridge } from './components/WritingEditorialStateBridge'\n", '', 1)
+          source = source.replace('    <WritingEditorialStateBridge />\n', '', 1)
+          if source == before:
+              raise SystemExit('WritingEditorialStateBridge não estava montado em main.tsx')
+          if 'WritingEditorialStateBridge' in source:
+              raise SystemExit('WritingEditorialStateBridge ainda aparece em main.tsx')
+          main.write_text(source)
+          PY
+
+      - name: Commitar promoção e remover bootstrap
+        run: |
+          git rm .github/workflows/t3-promote-editorial-state.yml
+          git add mass-notes-next/src/App.tsx mass-notes-next/src/main.tsx
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "refactor: dar ownership React ao estado editorial"
+          git push origin HEAD:feat/escrevaral-paper-home
