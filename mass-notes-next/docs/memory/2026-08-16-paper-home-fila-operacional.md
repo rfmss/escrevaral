@@ -63,7 +63,7 @@ Entregue:
 - lançador **Escutar voz** dentro de Linguagem;
 - abrir o Espelho não executa análise automaticamente;
 - somente `Escutar minha voz` dispara a leitura local;
-- confiança, hipótese, métricas e disclaimer continuam vindos da engine existente;
+- confiança, hipótese, métricas e disclaimer continuam vindo da engine existente;
 - resumo canônico apenas projeta o resultado real;
 - o último resumo permanece enquanto título/texto não mudarem e é invalidado quando o conteúdo muda.
 
@@ -78,41 +78,48 @@ Gate final:
 - **22/22 testes verdes**;
 - build, publicação e smoke público verdes.
 
-## EM VALIDAÇÃO
-
 ### A3a — Biblioteca avançada real acessível pela casa
 
-Motivo do desdobramento: a `Library` já possui `queryLibraryDocuments`, filtros de status, favoritos, tags e ordenação. Já o rail canônico mantém uma filtragem simplificada própria. Expor a Biblioteca real pode ser feito agora; fundir os dois ownerships exige refactor no `App` e fica em A3b.
+Motivo do desdobramento: a `Library` já possuía filtros reais de estado, favoritos, tags e ordenação. Primeiro a casa passou a oferecer acesso direto a essa infraestrutura sem criar uma segunda query.
 
-Implementado para validação:
-- botão da área **Biblioteca local / Documentos locais** agora abre o `Library` real;
-- no desktop, o mesmo drawer real recebe a linguagem de papel da casa;
-- filtros testados: estado, somente favoritas, tag e ordenação;
-- nenhuma segunda query foi criada.
+Entregue:
+- botão da área **Biblioteca local / Documentos locais** abre o `Library` real;
+- no desktop, o drawer real recebe a linguagem de papel da casa;
+- filtros reais de estado, somente favoritas, tag e ordenação foram preservados;
+- o teste prepara metadados reais, filtra e encontra o documento ativo pelo mesmo `Library`.
 
-Gate em execução:
+Gate:
 - run `31982558518`;
 - head `eebc7c57d800520f62b649a45a2cbf762cba6284`;
-- expectativa: **23 contratos**.
+- **23/23 testes verdes**;
+- build, publicação e smoke público verdes.
 
-Só mover para CONCLUÍDO se Playwright, build, publicação e smoke público fecharem verdes.
+## EM VALIDAÇÃO
+
+### A3b — Ownership único da busca/biblioteca canônica
+
+Problema anterior:
+- `Library` mantinha `status`, `favoritesOnly`, `tag` e `sort` internamente;
+- `App` mantinha outra string `search` e o rail canônico fazia um filtro próprio apenas de título + texto.
+
+Implementado:
+- `App` passa a ser dono de uma única `LibraryQuery`;
+- `Library` vira componente controlado por `query` + `onQueryChange`;
+- o campo de busca do topo edita `libraryQuery.search`;
+- o rail canônico usa `queryLibraryDocuments(documents, libraryQuery)`;
+- filtros feitos no drawer e busca feita no topo passam a descrever exatamente o mesmo recorte;
+- nenhuma store global nem bridge de filtro foi criada.
+
+Gate em execução:
+- run `31982950132`;
+- head `37ed8ece9b1b8a3f46002e332d36e8e4ef0da2fa`;
+- expectativa: **24 contratos**.
+
+Só mover para CONCLUÍDO se build, Playwright, publicação e smoke público fecharem verdes.
 
 ## FILA PRONTA
 
-### A3b — Unificar ownership da busca/biblioteca canônica
-
-Base: `library/libraryQuery.ts`.
-
-Problema atual:
-- `Library` usa `queryLibraryDocuments` e `collectLibraryTags`;
-- o rail canônico ainda filtra somente uma string simplificada de título + texto no `App`.
-
-Objetivo:
-- fazer a casa consumir uma única `LibraryQuery`;
-- eliminar duplicação de normalização/filtro;
-- preservar busca por título/texto/tag/status, favoritos e ordenação determinística pt-BR.
-
-Critério: não resolver por mais um bridge de filtro. Esta tranche deve mexer no ownership React/`App`.
+Nenhuma tranche funcional adicional está liberada sem nova entidade/contrato. Depois de A3b, a ordem lógica passa para as dívidas técnicas que podem ser resolvidas sem inventar produto, começando por **T1 — tipografia/offline**.
 
 ## BLOQUEADO POR MODELO — não implementar cenograficamente
 
