@@ -12,6 +12,7 @@ import {
   type ReviewIssue,
 } from './engines/reviewAdapter'
 import { downloadDocumentExport, type ExportFormat } from './export/documentExport'
+import { DEFAULT_LIBRARY_QUERY, queryLibraryDocuments, type LibraryQuery } from './library/libraryQuery'
 import {
   createNewDocument,
   DocumentConflictError,
@@ -68,7 +69,7 @@ export default function App() {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [draft, setDraft] = useState<EscrevaralDocument | null>(null)
   const [saveState, setSaveState] = useState<SaveState>('Carregando')
-  const [search, setSearch] = useState('')
+  const [libraryQuery, setLibraryQuery] = useState<LibraryQuery>(() => ({ ...DEFAULT_LIBRARY_QUERY }))
   const [dirty, setDirty] = useState(false)
   const [conflict, setConflict] = useState<ConflictState | null>(null)
   const [issues, setIssues] = useState<ReviewIssue[]>([])
@@ -527,7 +528,7 @@ export default function App() {
   const readMinutes = Math.floor(readingSeconds / 60)
   const readSeconds = String(readingSeconds % 60).padStart(2, '0')
   const pages = Math.max(1, Math.ceil(words / 290))
-  const filteredDocuments = documents.filter((item) => !search.trim() || `${item.title} ${item.plainText}`.toLocaleLowerCase('pt-BR').includes(search.trim().toLocaleLowerCase('pt-BR')))
+  const filteredDocuments = queryLibraryDocuments(documents, libraryQuery)
   const projectWords = documents.reduce((sum, item) => sum + countWords(item.plainText), 0)
   const dailyGoal = 1200
   const dailyProgress = Math.min(100, Math.round(words / dailyGoal * 100))
@@ -575,7 +576,7 @@ export default function App() {
             <span className="eyebrow">MODO</span>
             <button type="button">Escrita <span className="chevron" aria-hidden="true" /></button>
           </div>
-          <label className="search"><span className="search-icon" /><input placeholder="Buscar" value={search} onChange={(event) => setSearch(event.target.value)} aria-label="Buscar documentos" /><kbd>CTRL + K</kbd></label>
+          <label className="search"><span className="search-icon" /><input placeholder="Buscar" value={libraryQuery.search} onChange={(event) => setLibraryQuery((current) => ({ ...current, search: event.target.value }))} aria-label="Buscar documentos" /><kbd>CTRL + K</kbd></label>
           <nav className="main-actions" aria-label="Ações principais">
             <button type="button"><svg className="ui-icon target-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10.5" /><circle cx="16" cy="16" r="3" /><path d="M16 1v9M16 22v9M1 16h9M22 16h9" /></svg><small>Metas</small></button>
             <button type="button" onClick={() => setRailOpen(true)}><svg className="ui-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 5.5h17v22H8zM11 3.5h11v4H11zM12 11h9M12 15h9M12 19h9M12 23h7" /></svg><small>Notas</small></button>
@@ -673,9 +674,9 @@ export default function App() {
         <Library
           documents={documents}
           activeId={activeId}
-          search={search}
+          query={libraryQuery}
           open={sidebarOpen}
-          onSearch={setSearch}
+          onQueryChange={setLibraryQuery}
           onSelect={(id) => { void selectDocument(id) }}
           onNew={() => { void newDocument() }}
           onClose={() => setSidebarOpen(false)}
