@@ -10,6 +10,7 @@ import { WritingLexicalBridge } from './components/WritingLexicalBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
 import { WritingTagsBridge } from './components/WritingTagsBridge'
+import { WritingToolsBridge } from './components/WritingToolsBridge'
 import { WritingVoiceBridge } from './components/WritingVoiceBridge'
 import { ExperienceShell } from './ExperienceShell'
 import './styles/app.css'
@@ -103,6 +104,7 @@ createRoot(document.getElementById('root')!).render(
     <WritingTagsBridge />
     <WritingVoiceBridge />
     <WritingLexicalBridge />
+    <WritingToolsBridge />
     <WritingIntegrityBridge />
     <WritingRestChrome />
   </StrictMode>,
