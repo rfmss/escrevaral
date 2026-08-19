@@ -1,5 +1,5 @@
 import type { JSONContent } from '@tiptap/core'
-import { Fragment, useEffect, useRef, useState, type ReactNode } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { readLatestLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import { useModalDrawer } from './useModalDrawer'
@@ -93,7 +93,7 @@ export function WritingReaderBridge() {
 
   const close = () => setOpen(false)
 
-  const openReader = () => {
+  const openReader = useCallback(() => {
     const snapshot = readLatestLiveEditorSnapshot()
     const trigger = triggerRef.current
     if (!snapshot?.plainText.trim()) {
@@ -111,7 +111,7 @@ export function WritingReaderBridge() {
     setFontIndex(1)
     setRuler(false)
     setOpen(true)
-  }
+  }, [])
 
   useEffect(() => {
     const bind = () => {
@@ -121,7 +121,8 @@ export function WritingReaderBridge() {
       trigger.disabled = false
       trigger.removeAttribute('aria-disabled')
       trigger.removeAttribute('data-integrity-static')
-      trigger.textContent = open ? 'Leitura' : 'Escrita'
+      const expectedText = open ? 'Leitura' : 'Escrita'
+      if (trigger.textContent !== expectedText) trigger.textContent = expectedText
       trigger.setAttribute('aria-label', open ? 'Modo atual: Leitura' : 'Abrir modo Leitura')
       trigger.setAttribute('aria-controls', 'writing-reader-overlay')
       trigger.setAttribute('aria-expanded', String(open))
@@ -140,10 +141,9 @@ export function WritingReaderBridge() {
   useEffect(() => {
     const trigger = triggerRef.current
     if (!trigger) return
-    const onClick = () => openReader()
-    trigger.addEventListener('click', onClick)
-    return () => trigger.removeEventListener('click', onClick)
-  })
+    trigger.addEventListener('click', openReader)
+    return () => trigger.removeEventListener('click', openReader)
+  }, [openReader, open])
 
   useEffect(() => {
     document.body.classList.toggle('writing-reader-open', open)
