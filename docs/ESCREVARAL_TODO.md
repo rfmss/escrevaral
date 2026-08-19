@@ -7,6 +7,7 @@
 
 - [x] Centralizar o shell canônico no desktop sem alterar o contrato móvel.
 - [x] Criar Gate 22 para 1366 / 1440 / 1920 px: margens simétricas e sem overflow horizontal.
+- [x] Corrigir bancas fossilizadas que ainda exigiam `Notas` desabilitado, `MODO` estático, `SINCRONIZADO` e margem 12/20.
 - [ ] Executar o workflow consolidado no head atual e obter build + Playwright verdes.
 - [ ] Confirmar que `preview-escrevaral-paper-home` foi publicada a partir do MESMO SHA aprovado.
 - [ ] Corrigir somente os testes/vermelhos reais encontrados pela banca consolidada.
@@ -44,7 +45,8 @@
 - [ ] Validar Gate 26 do temporizador no mesmo head publicado.
 - [x] Modo Leitor real da `main`: slot `MODO` reativado, leitura limpa, estrutura Tiptap, autoscroll, 4 ritmos, 4 tamanhos, régua, Escape/foco e aviso para página vazia.
 - [ ] Validar Gate 27 do Leitor no mesmo head publicado.
-- [ ] Auditar player de sons ambiente da `main` e restaurar apenas se o domínio continuar válido no produto novo.
+- [x] Auditar player de sons ambiente da `main`: função real confirmada, mas as quatro faixas usam CDN remoto do Pixabay.
+- [ ] Sons ambiente: só transplantar depois de obter arquivos locais com licença/proveniência; não usar URLs remotas na casa offline.
 - [ ] Auditar chip/feedback compacto da Prova de Autoria na topbar e marcos de escrita.
 - [ ] Auditar UX offline/PWA: atualização disponível, recuperação e nudges de cópia de segurança sem duplicar `BackupPanel`.
 - [ ] Auditar atalhos e feedbacks transitórios da `main` que tenham função real, não decoração.
