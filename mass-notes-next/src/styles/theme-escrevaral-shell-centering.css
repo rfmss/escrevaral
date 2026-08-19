@@ -1,0 +1,8 @@
+/* Gate visual de entrega: o papel precisa ocupar o viewport com respiro simétrico.
+   Mantemos a estratégia móvel da referência (shell interno mínimo de 1120px) intacta. */
+@media (min-width: 1100px) {
+  body:not(.experience-anatomy) .paper-shell {
+    width: calc(100vw - 32px);
+    margin: 10px auto;
+  }
+}
