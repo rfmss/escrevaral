@@ -139,7 +139,7 @@ export function WritingOfflineBridge() {
   }, [])
 
   useEffect(() => {
-    if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return
+    if (!import.meta.env.PROD || navigator.webdriver || !('serviceWorker' in navigator)) return
 
     let cancelled = false
     let interval = 0
