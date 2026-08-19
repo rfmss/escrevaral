@@ -79,6 +79,7 @@ test('texto suficiente recebe leitura editorial da Precision sem acionar Revisã
   const panel = await openTools(page)
   await panel.getByLabel('Guia do documento').selectOption('roteiro-tv')
 
+  expect(await page.locator('script[data-escrevaral-engine="analise-engine.js"]').count()).toBe(0)
   const button = panel.getByRole('button', { name: 'Avaliar aderência ao guia' })
   await expect(button).toBeEnabled()
   await button.click()
@@ -87,7 +88,7 @@ test('texto suficiente recebe leitura editorial da Precision sem acionar Revisã
   await expect(panel.locator('.precision-reading .metric-value')).toHaveText(/^\d{1,3}$/)
   await expect(panel.locator('.precision-reading .review-card').first()).toBeVisible()
   await expect(panel.getByRole('status')).toContainText(/guia|base|desenvolvimento|cobertos/i)
-  await expect(page.locator('#panel-revisao')).toHaveCount(0)
+  expect(await page.locator('script[data-escrevaral-engine="analise-engine.js"]').count()).toBe(0)
 })
 
 test('resultado de aderência é invalidado quando o manuscrito muda', async ({ page }) => {
@@ -107,7 +108,7 @@ test('resultado de aderência é invalidado quando o manuscrito muda', async ({ 
   await expect(panel.getByRole('status')).toContainText(/texto mudou/i)
 })
 
-test('Precision cabe no drawer móvel sem overflow horizontal', async ({ page }) => {
+test('Precision cabe no drawer móvel e mantém as sete rotas na mesma régua', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
   await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
@@ -115,12 +116,18 @@ test('Precision cabe no drawer móvel sem overflow horizontal', async ({ page })
   const panel = await openTools(page)
   await expect(panel.getByLabel('Guia do documento')).toBeVisible()
 
-  const sizes = await page.evaluate(() => ({
-    viewport: window.innerWidth,
-    body: document.documentElement.scrollWidth,
-    rail: document.querySelector('.rail')?.scrollWidth ?? 0,
-    railClient: document.querySelector('.rail')?.clientWidth ?? 0,
-  }))
+  const sizes = await page.evaluate(() => {
+    const tabs = Array.from(document.querySelectorAll<HTMLElement>('#text-tools .tab'))
+    const tops = tabs.map((tab) => tab.getBoundingClientRect().top)
+    return {
+      viewport: window.innerWidth,
+      body: document.documentElement.scrollWidth,
+      rail: document.querySelector('.rail')?.scrollWidth ?? 0,
+      railClient: document.querySelector('.rail')?.clientWidth ?? 0,
+      tabTopSpread: tops.length ? Math.max(...tops) - Math.min(...tops) : 999,
+    }
+  })
   expect(sizes.body).toBeLessThanOrEqual(sizes.viewport)
   expect(sizes.rail).toBeLessThanOrEqual(sizes.railClient)
+  expect(sizes.tabTopSpread).toBeLessThanOrEqual(1)
 })
