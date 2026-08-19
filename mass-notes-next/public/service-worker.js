@@ -1,5 +1,6 @@
 const CACHE_PREFIX = 'escrevaral-paper-home-offline-'
-const CACHE_NAME = `${CACHE_PREFIX}v1`
+const BUILD_ID = '__ESCREVARAL_BUILD_ID__'
+const CACHE_NAME = `${CACHE_PREFIX}${BUILD_ID}`
 const CORE_ASSETS = [
   './',
   './index.html',
