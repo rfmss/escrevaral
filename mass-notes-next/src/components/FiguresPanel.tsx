@@ -88,7 +88,7 @@ export function FiguresPanel({ document }: Props) {
         </div>
       )}
 
-      <p className="voice-disclaimer figures-disclaimer">
+      <p className="figures-disclaimer">
         A engine afirma apenas padrões formais de alta evidência. Personificação e oxímoro entram como hipótese. Metáfora, metonímia e ironia não são declaradas por regra nesta etapa.
       </p>
     </section>
