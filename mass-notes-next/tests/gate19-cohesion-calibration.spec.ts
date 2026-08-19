@@ -33,7 +33,7 @@ test('C4: revisão mostra coesão observável sem fingir medir coerência', asyn
   await expect(card).toBeVisible()
   await expect(card).toContainText(/conclusão 1/i)
   await expect(card).toContainText(/contraste 1/i)
-  await expect(card).toContainText(/Marcadores referenciais: 1/i)
+  await expect(card).toContainText(/Marcadores referenciais: 2/i)
   await expect(card).toContainText(/manuscrito \(1\)/i)
   await expect(card).toContainText(/não mede coerência/i)
 })
