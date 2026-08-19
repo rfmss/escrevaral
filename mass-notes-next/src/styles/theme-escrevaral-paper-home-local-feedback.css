@@ -1,0 +1,42 @@
+.local-save-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 78px;
+  z-index: 10020;
+  width: min(520px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 1px solid var(--ink, #11120f);
+  background: var(--paper, #f3efe4);
+  box-shadow: 4px 4px 0 rgba(17, 18, 15, .14);
+  color: var(--ink, #11120f);
+  font: 500 12px/1.35 Literata, Georgia, serif;
+}
+
+.local-save-hint-mark {
+  color: var(--blue, #087fc3);
+  font-size: 13px;
+}
+
+.local-save-hint button {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  background: transparent;
+  font: 20px/1 Arial, sans-serif;
+}
+
+@media (max-width: 1099px) {
+  .local-save-hint {
+    bottom: 20px;
+    width: min(460px, calc(100vw - 24px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .local-save-hint { transition: none; }
+}
