@@ -14,17 +14,17 @@ type Particle = {
 
 export const WRITING_GOAL_ACHIEVED_EVENT = 'escrevaral:writing-goal-achieved'
 
-export function celebrateWritingGoal(words: number, goal: number): void {
-  window.dispatchEvent(new CustomEvent(WRITING_GOAL_ACHIEVED_EVENT, {
-    detail: { words, goal },
-  }))
+export type WritingConfettiReason = 'goal' | 'session'
 
+export function burstWritingConfetti(reason: WritingConfettiReason): void {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  document.querySelector('[data-writing-goal-confetti]')?.remove()
+  document.querySelector('[data-writing-confetti]')?.remove()
 
   const canvas = document.createElement('canvas')
-  canvas.dataset.writingGoalConfetti = 'true'
+  canvas.dataset.writingConfetti = reason
+  if (reason === 'goal') canvas.dataset.writingGoalConfetti = 'true'
+  if (reason === 'session') canvas.dataset.writingSessionConfetti = 'true'
   canvas.setAttribute('aria-hidden', 'true')
   canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;z-index:9999;pointer-events:none;'
   canvas.width = window.innerWidth
@@ -107,4 +107,11 @@ export function celebrateWritingGoal(words: number, goal: number): void {
   }
 
   window.requestAnimationFrame(draw)
+}
+
+export function celebrateWritingGoal(words: number, goal: number): void {
+  window.dispatchEvent(new CustomEvent(WRITING_GOAL_ACHIEVED_EVENT, {
+    detail: { words, goal },
+  }))
+  burstWritingConfetti('goal')
 }
