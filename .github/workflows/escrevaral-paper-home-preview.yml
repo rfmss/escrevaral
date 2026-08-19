@@ -103,6 +103,7 @@ jobs:
           tests/gate14-precision.spec.ts
           tests/gate15-proof.spec.ts
           tests/gate16-linguistic-calibration.spec.ts
+          tests/gate17-verb-calibration.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
