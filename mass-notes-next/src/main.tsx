@@ -8,6 +8,7 @@ import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
 import { WritingLexicalBridge } from './components/WritingLexicalBridge'
 import { WritingLocalFeedbackBridge } from './components/WritingLocalFeedbackBridge'
+import { WritingOfflineBridge } from './components/WritingOfflineBridge'
 import { WritingProofStatusBridge } from './components/WritingProofStatusBridge'
 import { WritingReaderBridge } from './components/WritingReaderBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
@@ -106,6 +107,7 @@ createRoot(document.getElementById('root')!).render(
     <WritingDashboardBridge />
     <WritingGoalsBridge />
     <WritingLocalFeedbackBridge />
+    <WritingOfflineBridge />
     <WritingProofStatusBridge />
     <WritingReaderBridge />
     <WritingExportBridge />
