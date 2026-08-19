@@ -46,6 +46,7 @@ test('Gate 29: lembrete de cópia abre o BackupPanel existente sem duplicar UI',
 
 test('Gate 29: exportar a cópia registra a data do último backup', async ({ page }) => {
   await waitReady(page)
+  await page.getByRole('button', { name: 'Abrir oficina de ferramentas' }).click()
   await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
   await expect(page.locator('.backup-panel')).toBeVisible()
 
