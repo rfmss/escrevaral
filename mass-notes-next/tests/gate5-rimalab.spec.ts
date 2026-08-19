@@ -2,14 +2,14 @@ import { expect, test, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
   await page.goto('/')
-  await expect(page.locator('.paper')).toBeVisible()
+  await expect(page.locator('.paper-shell')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
 async function createCleanDocument(page: Page, title: string) {
-  const initialCount = await page.locator('.note-card').count()
+  const initialCount = await page.locator('.chapter').count()
   await page.keyboard.press('Control+N')
-  await expect(page.locator('.note-card')).toHaveCount(initialCount + 1)
+  await expect(page.locator('.chapter')).toHaveCount(initialCount + 1)
   await expect(page.getByLabel('Título do documento')).toHaveValue('')
   await page.getByLabel('Título do documento').fill(title)
   const editor = page.locator('.ProseMirror')
@@ -20,9 +20,9 @@ async function createCleanDocument(page: Page, title: string) {
 }
 
 async function settleDocument(page: Page) {
-  await expect(page.locator('.field-value').filter({ hasText: /Alterado|Salvando|Salvo/ })).toBeVisible()
+  if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
   await page.keyboard.press('Control+S')
-  await expect(page.locator('.field-value').filter({ hasText: /^Salvo$/ })).toBeVisible({ timeout: 12_000 })
+  await expect(page.locator('.statusbar .sync-save')).toHaveText('Salvo', { timeout: 12_000 })
 }
 
 async function pasteStructuredText(page: Page, html: string, plain: string) {
@@ -43,19 +43,27 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
 
 async function ensureToolsOpen(page: Page) {
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
-  if (await dialog.isVisible().catch(() => false)) return
-  await page.keyboard.press('Escape')
+  if (await dialog.isVisible().catch(() => false)) return dialog
+  if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
   const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
   await expect(launcher).toBeVisible()
   await launcher.click()
   await expect(dialog).toBeVisible()
+  return dialog
+}
+
+async function closeTools(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (!await dialog.isVisible().catch(() => false)) return
+  await dialog.getByRole('button', { name: 'Fechar ferramentas' }).click()
+  await expect(dialog).toBeHidden()
 }
 
 async function openRimaLab(page: Page) {
-  await ensureToolsOpen(page)
-  await page.getByRole('tab', { name: 'rimalab', exact: true }).click()
-  await expect(page.getByRole('tab', { name: 'rimalab', exact: true })).toHaveAttribute('aria-selected', 'true')
-  return page.locator('.rimalab-panel')
+  const dialog = await ensureToolsOpen(page)
+  await dialog.getByRole('tab', { name: 'rimalab', exact: true }).click()
+  await expect(dialog.getByRole('tab', { name: 'rimalab', exact: true })).toHaveAttribute('aria-selected', 'true')
+  return dialog.locator('.rimalab-panel')
 }
 
 test('página vazia não recebe falsa leitura sonora', async ({ page }) => {
@@ -117,7 +125,7 @@ test('poema rimado apresenta esquema, escansão, pares, som e classe gramatical'
   await expect(editor).toContainText('No quintal eu vi a flor')
   await expect(editor).toContainText('eu voltei para cantar')
   await expect(panel.locator('.rima-reading button')).toHaveCount(0)
-  await expect(page.locator('.note-card.active')).toContainText('Quadra sonora')
+  await expect(page.locator('.chapter.active')).toContainText('Quadra sonora')
   await page.screenshot({ path: `test-results/rimalab-${testInfo.project.name}.png`, fullPage: true })
 })
 
@@ -173,14 +181,16 @@ test('resultado sonoro é invalidado quando o conteúdo muda', async ({ page }) 
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Som em mudança')
   await editor.fill('O amor atravessou a dor e encontrou uma flor.')
-  const panel = await openRimaLab(page)
+  let panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
   await expect(panel.locator('.rima-reading')).toBeVisible()
 
+  await closeTools(page)
   await editor.click()
   await page.keyboard.press('End')
   await page.keyboard.type(' Depois o narrador mudou o ritmo.')
 
+  panel = await openRimaLab(page)
   await expect(panel.locator('.rima-reading')).toHaveCount(0)
   await expect(panel.getByRole('status')).toContainText(/texto mudou/i)
   await expect(panel.getByRole('button', { name: 'Copiar análise' })).toHaveCount(0)
@@ -191,7 +201,7 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   const editor = await createCleanDocument(page, 'Falha sonora')
   await editor.fill('O amor encontrou a dor e guardou uma flor.')
   await settleDocument(page)
-  const panel = await openRimaLab(page)
+  let panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
   await expect(panel.locator('.rima-reading')).toBeVisible()
 
@@ -203,12 +213,14 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
 
   await expect(panel.getByRole('status')).toContainText(/não pôde concluir/i)
   await expect(editor).toBeEditable()
+  await closeTools(page)
   await editor.click()
   await page.keyboard.type(' O editor segue funcionando.')
   await expect(editor).toContainText('O editor segue funcionando.')
-  await ensureToolsOpen(page)
-  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
-  await expect(page.getByRole('button', { name: /analisar em português brasileiro/i })).toBeVisible()
+  panel = await openRimaLab(page)
+  const dialog = panel.locator('xpath=ancestor::*[@role="dialog"]')
+  await dialog.getByRole('tab', { name: 'revisao', exact: true }).click()
+  await expect(dialog.getByRole('button', { name: /analisar em português brasileiro/i })).toBeVisible()
 })
 
 test('RimaLab permanece acessível e sem overflow no mobile', async ({ page }) => {
@@ -219,7 +231,7 @@ test('RimaLab permanece acessível e sem overflow no mobile', async ({ page }) =
   await expect(dialog).toBeVisible()
   const panel = await openRimaLab(page)
   await expect(panel.getByText(/ausência de rima não é defeito/i)).toBeVisible()
-  await expect(page.getByRole('tab')).toHaveCount(7)
+  await expect(dialog.getByRole('tab')).toHaveCount(7)
 
   const sizes = await page.evaluate(() => ({
     viewport: window.innerWidth,
