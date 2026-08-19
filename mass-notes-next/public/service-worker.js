@@ -1,17 +1,10 @@
 const CACHE_PREFIX = 'escrevaral-paper-home-offline-'
 const BUILD_ID = '__ESCREVARAL_BUILD_ID__'
 const CACHE_NAME = `${CACHE_PREFIX}${BUILD_ID}`
-const CORE_ASSETS = [
-  './',
-  './index.html',
-  './assets/index.js',
-  './assets/index.css',
-  './brand/escrevaral-logo.svg',
-  './brand/escrevaral-favicon.svg',
-]
+const PRECACHE_ASSETS = __ESCREVARAL_PRECACHE_ASSETS__
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)))
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(['./', ...PRECACHE_ASSETS])))
 })
 
 self.addEventListener('activate', (event) => {
