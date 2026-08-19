@@ -62,6 +62,20 @@ test('corpus médio produz leitura normalizada e evidência visual', async ({ pa
   await page.screenshot({ path: `test-results/espelho-de-voz-${testInfo.project.name}.png`, fullPage: true })
 })
 
+test('temperatura e campos semânticos da engine chegam à interface', async ({ page }) => {
+  await waitReady(page)
+  const editor = await createCleanDocument(page, 'Sinais de voz')
+  const paragraph = 'A saudade atravessou a noite em silêncio, entre perda e memória. Na rua, o ônibus dobrou a esquina do bairro enquanto a cidade respirava sob a chuva.'
+  await editor.fill(Array.from({ length: 10 }, () => paragraph).join('\n\n'))
+  await openVoice(page)
+  await page.getByRole('button', { name: 'Escutar minha voz' }).click()
+
+  await expect(page.getByRole('heading', { name: 'Temperatura' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Campos' })).toBeVisible()
+  await expect(page.locator('.voice-signal-section').filter({ hasText: 'melancolia' })).toBeVisible()
+  await expect(page.locator('.voice-signal-section').filter({ hasText: 'cidade' })).toBeVisible()
+})
+
 test('resultado do Espelho de Voz é invalidado quando o texto muda', async ({ page }) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Voz em mudança')
