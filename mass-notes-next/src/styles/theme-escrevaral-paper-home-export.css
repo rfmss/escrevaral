@@ -19,6 +19,9 @@
   top: 112px;
   right: 84px;
   width: min(430px, calc(100vw - 48px));
+  max-height: calc(100vh - 136px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 22px 24px 18px;
   color: var(--ink);
   background:
@@ -150,4 +153,13 @@ body.night .writing-export-options > button {
 
 @media (max-width: 1180px) {
   .writing-export-panel { right: 24px; }
+}
+
+@media (max-width: 1099px) {
+  .writing-export-panel {
+    top: 16px;
+    right: 12px;
+    width: min(430px, calc(100vw - 24px));
+    max-height: calc(100vh - 32px);
+  }
 }
