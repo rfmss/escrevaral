@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { averageSentenceLength, countWords, type DocumentStatus, type EscrevaralDocument } from '../domain/document'
 import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
-import { analyzeVoice, type VoiceReading } from '../engines/voiceAdapter'
+import { analyzeVoice, type VoiceReading, type VoiceSignal } from '../engines/voiceAdapter'
 import type { ExportFormat } from '../export/documentExport'
 import { ContextPanel } from './ContextPanel'
 import { DocumentMetadataEditor } from './DocumentMetadataEditor'
@@ -54,6 +54,30 @@ function VoiceList({ title, items }: { title: string; items: string[] }) {
       <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
     </section>
   )
+}
+
+function VoiceSignals({ title, items }: { title: string; items: VoiceSignal[] }) {
+  if (!items.length) return null
+  return (
+    <section className="voice-section voice-signal-section">
+      <h3>{title}</h3>
+      <ul>
+        {items.map((item) => (
+          <li key={item.label}>
+            <strong>{item.label}</strong> · sinal {item.score}/100 · {item.hits} {item.hits === 1 ? 'ocorrência' : 'ocorrências'}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+function voiceContext(document: EscrevaralDocument): Record<string, unknown> {
+  const type = document.type?.trim() || ''
+  const kind = document.kind?.trim() || ''
+  const templateId = document.templateId?.trim() || ''
+  const formato = [type, kind, templateId].filter(Boolean).join(' ')
+  return formato ? { type, kind, templateId, formato } : {}
 }
 
 export function RightRail({
@@ -121,7 +145,7 @@ export function RightRail({
     setVoiceMessage('O Espelho de Voz está escutando o rascunho localmente…')
 
     try {
-      const result = await analyzeVoice(document.plainText, { formato: 'prosa' })
+      const result = await analyzeVoice(document.plainText, voiceContext(document))
       if (token !== voiceToken.current) return
       setVoiceReading(result)
       setVoiceMessage(
@@ -150,7 +174,7 @@ export function RightRail({
       tabIndex={-1}
     >
       <div className="rail-title">
-        <span>Copiar / Desenvolver / Aprovar</span>
+        <span>Ferramentas do texto</span>
         <button className="drawer-close" data-drawer-initial type="button" onClick={onClose} aria-label="Fechar ferramentas">×</button>
       </div>
       <div className="tabs" role="tablist" aria-label="Ferramentas">
@@ -301,6 +325,8 @@ export function RightRail({
                 <VoiceList title="Pontos para observar" items={voiceReading.blindSpots} />
                 <VoiceList title="Exercícios" items={voiceReading.exercises} />
                 <VoiceList title="Ecos para leitura" items={voiceReading.voice.echoes} />
+                <VoiceSignals title="Temperatura" items={voiceReading.emotional} />
+                <VoiceSignals title="Campos" items={voiceReading.fields} />
 
                 {(voiceReading.audience.core || voiceReading.audience.secondary || voiceReading.audience.risk) && (
                   <section className="voice-section audience-reading">
