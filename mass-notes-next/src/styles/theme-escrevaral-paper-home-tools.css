@@ -1,4 +1,40 @@
 /* Escrevaral — Paper Home / ferramentas, foco e desktop compacto. */
+
+/* Sete ferramentas formam uma única régua. Em larguras estreitas, a própria régua rola;
+   o painel não cria uma terceira linha órfã nem empurra a página horizontalmente. */
+.experience-view--editor .reference-mobile-legacy #text-tools .tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+}
+
+.experience-view--editor .reference-mobile-legacy #text-tools .tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.experience-view--editor .reference-mobile-legacy #text-tools .tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.experience-view--editor .precision-panel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--home-line, var(--line));
+}
+
+.experience-view--editor .precision-panel > .search {
+  width: 100%;
+  min-width: 0;
+}
+
 @media (min-width: 1100px) {
   /* COLUNA DIREITA -------------------------------------------------------- */
 
