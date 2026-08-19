@@ -66,9 +66,10 @@ test('Gate 29: lembrete de cópia abre o BackupPanel existente sem duplicar UI',
   const nudge = page.locator('.offline-feedback-backup')
   await expect(nudge).toBeVisible()
   await expect(nudge).toContainText('cópia de segurança')
-  expect(await page.locator('.backup-panel').count()).toBe(1)
+  expect(await page.locator('.backup-panel').count()).toBe(0)
 
   await nudge.getByRole('button', { name: 'Abrir cópia' }).click()
+  await expect(page.locator('.backup-panel')).toHaveCount(1)
   await expect(page.locator('.backup-panel')).toBeVisible()
   await expect(page.getByRole('tab', { name: 'ferramentas', exact: true })).toHaveAttribute('aria-selected', 'true')
 })
