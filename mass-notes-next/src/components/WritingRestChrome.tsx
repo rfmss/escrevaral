@@ -13,16 +13,6 @@ export function WritingRestChrome() {
     }
   }, [workshopOpen])
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && workshopOpen && !document.body.classList.contains('focus-mode')) {
-        setWorkshopOpen(false)
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [workshopOpen])
-
   return (
     <button
       className="writing-workshop-toggle"
