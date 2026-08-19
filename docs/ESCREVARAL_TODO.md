@@ -40,7 +40,8 @@
 - [x] Salvamento: trocar o rótulo enganoso `SINCRONIZADO` por `SALVO LOCALMENTE`.
 - [x] Primeiro uso: restaurar aviso único “Texto salvo aqui, neste navegador. Sem internet, sem nuvem.”.
 - [ ] Validar Gates 23–24 no mesmo head publicado.
-- [ ] Pomodoro real da `main`: 25 min, iniciar/pausar/resetar, histórico local de rodadas, toast e celebração ao concluir.
+- [x] Pomodoro real da `main`: 25 min, iniciar/pausar/resetar, histórico local compatível, toast e celebração ao concluir.
+- [ ] Validar Gate 26 do temporizador no mesmo head publicado.
 - [ ] Modo Leitor real da `main`: leitura limpa + rolagem automática + controle de velocidade.
 - [ ] Auditar player de sons ambiente da `main` e restaurar apenas se o domínio continuar válido no produto novo.
 - [ ] Auditar chip/feedback compacto da Prova de Autoria na topbar e marcos de escrita.
