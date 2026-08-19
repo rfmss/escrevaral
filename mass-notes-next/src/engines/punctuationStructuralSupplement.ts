@@ -49,6 +49,22 @@ function isIntegratedComplement(term: LocatedTerm | undefined): boolean {
   return funcao.startsWith('Objeto ') || funcao.startsWith('Predicativo ')
 }
 
+function isTransparentDeterminer(term: LocatedTerm | undefined): boolean {
+  return term?.funcao === 'Artigo / contração'
+}
+
+function complementAfterComma(terms: LocatedTerm[], commaIndex: number): LocatedTerm | undefined {
+  const first = terms[commaIndex + 1]
+  if (!isTransparentDeterminer(first)) return first
+
+  // O syntax-engine conserva artigos como termos próprios. Para detectar
+  // “publicou, o relatório”, atravessamos somente determinantes; não pulamos
+  // preposições/advérbios porque isso transformaria adjuntos em falsos objetos.
+  let index = commaIndex + 1
+  while (index < terms.length && isTransparentDeterminer(terms[index])) index += 1
+  return terms[index]
+}
+
 function punctuationIssue(
   ruleId: 'PONT-SYNT-03' | 'PONT-SYNT-04',
   sentence: string,
@@ -69,9 +85,7 @@ function punctuationIssue(
     criterio: subjectVerb
       ? 'Não se usa vírgula para separar diretamente o sujeito do verbo.'
       : 'Não se usa vírgula para separar diretamente o verbo de complemento ou predicativo integrado.',
-    exemplo: subjectVerb
-      ? 'A pesquisadora publicou o relatório.'
-      : 'A pesquisadora publicou o relatório.',
+    exemplo: 'A pesquisadora publicou o relatório.',
     acao: subjectVerb
       ? 'Remova a vírgula entre o sujeito e o verbo.'
       : 'Remova a vírgula entre o verbo e o complemento ou predicativo.',
@@ -120,19 +134,20 @@ export function calibrateStructuralPunctuation(
       if (comma.text !== ',') continue
 
       const left = terms[index - 1]
-      const right = terms[index + 1]
+      const immediateRight = terms[index + 1]
 
-      if (isSubject(left) && isPredicateVerb(right)) {
+      if (isSubject(left) && isPredicateVerb(immediateRight)) {
         const legacyAlreadyFound = rawIssues.some((issue) => {
           const issuePos = Number(issue.pos)
           return issue.ruleId === 'PONT-01' && Number.isInteger(issuePos) && issuePos >= offset && issuePos < offset + sentence.length
         })
-        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, left, right))
+        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, left, immediateRight))
         continue
       }
 
-      if (isPredicateVerb(left) && isIntegratedComplement(right)) {
-        issues.push(punctuationIssue('PONT-SYNT-04', sentence, offset, left, right))
+      const complement = complementAfterComma(terms, index)
+      if (isPredicateVerb(left) && isIntegratedComplement(complement)) {
+        issues.push(punctuationIssue('PONT-SYNT-04', sentence, offset, left, complement!))
       }
     }
   }
