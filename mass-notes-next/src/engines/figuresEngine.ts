@@ -170,7 +170,7 @@ function words(value: string): string[] {
 }
 
 function surfaceWords(value: string): string[] {
-  return value.toLocaleLowerCase('pt-BR').match(/\p{L}+(?:['’-]\p{L}+)?/gu) ?? []
+  return value.normalize('NFC').toLocaleLowerCase('pt-BR').match(/\p{L}+(?:['’-]\p{L}+)?/gu) ?? []
 }
 
 function compactFragment(text: string, from: number, to: number): string {
@@ -372,13 +372,14 @@ function repeatedEdgeFindings(text: string, units: Unit[], type: 'anafora' | 'ep
 }
 
 function tokenClass(surfaceToken: string): string {
-  const token = normalize(surfaceToken)
-  if (surfaceToken === 'é') return 'V'
+  const surface = surfaceToken.normalize('NFC')
+  const token = normalize(surface)
+  if (surface === 'é') return 'V'
   if (DETERMINERS.has(token)) return 'DET'
   if (PRONOUNS.has(token)) return 'PRO'
   if (PREPOSITIONS.has(token)) return 'PREP'
   if (CONJUNCTIONS.has(token)) return 'CONJ'
-  if (VERB_FORMS.has(token) || (token.length >= 4 && /(ar|er|ir|ou|ava|avam|iam|ando|endo|indo|ado|ido|aram|eram|iram|asse|esse|isse|aria|eria|iria)$/u.test(token))) return 'V'
+  if (VERB_FORMS.has(token) || (token.length >= 4 && /(ar|er|ir|ou|ava|avam|iam|ando|endo|indo|aram|eram|iram|asse|esse|isse|aria|eria|iria)$/u.test(token))) return 'V'
   if (token.endsWith('mente')) return 'ADV'
   return 'X'
 }
