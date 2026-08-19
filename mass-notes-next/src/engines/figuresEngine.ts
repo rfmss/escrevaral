@@ -112,10 +112,10 @@ const GENERIC_EDGE_WORDS = new Set([
 ])
 
 const DETERMINERS = new Set(['a', 'as', 'o', 'os', 'um', 'uma', 'uns', 'umas', 'este', 'esta', 'esse', 'essa', 'aquele', 'aquela'])
-const PRONOUNS = new Set(['eu', 'tu', 'ele', 'ela', 'nos', 'nós', 'vos', 'vós', 'eles', 'elas', 'me', 'te', 'se', 'lhe', 'lhes', 'quem'])
-const PREPOSITIONS = new Set(['a', 'ante', 'apos', 'após', 'ate', 'até', 'com', 'contra', 'de', 'desde', 'em', 'entre', 'para', 'per', 'perante', 'por', 'sem', 'sob', 'sobre'])
+const PRONOUNS = new Set(['eu', 'tu', 'ele', 'ela', 'nos', 'vos', 'eles', 'elas', 'me', 'te', 'se', 'lhe', 'lhes', 'quem'])
+const PREPOSITIONS = new Set(['a', 'ante', 'apos', 'ate', 'com', 'contra', 'de', 'desde', 'em', 'entre', 'para', 'per', 'perante', 'por', 'sem', 'sob', 'sobre'])
 const CONJUNCTIONS = new Set(['e', 'nem', 'ou', 'mas', 'porque', 'pois', 'quando', 'enquanto', 'embora', 'se', 'como'])
-const VERB_FORMS = new Set(['e', 'é', 'era', 'foi', 'sao', 'são', 'esta', 'está', 'estao', 'estão', 'tem', 'têm', 'teve', 'ha', 'há', 'havia', 'vai', 'vao', 'vão', 'vem'])
+const VERB_FORMS = new Set(['era', 'foi', 'sao', 'esta', 'estao', 'tem', 'teve', 'ha', 'havia', 'vai', 'vao', 'vem'])
 
 const ANTITHESIS_PAIRS = [
   ['vida', 'morte'],
@@ -142,8 +142,10 @@ const INANIMATE_NOUNS = new Set([
 
 const HUMAN_VERB_STEMS = [
   'abrac', 'acord', 'cant', 'cham', 'chor', 'convers', 'danc', 'dorm', 'escut', 'esper', 'fal', 'grit', 'ment',
-  'olh', 'ri', 'rindo', 'sorr', 'sussurr', 'caminh', 'lembr', 'esquec', 'recus', 'ped',
+  'olh', 'ri', 'sorr', 'sussurr', 'caminh', 'lembr', 'esquec', 'recus', 'ped',
 ] as const
+
+const HUMAN_VERB_SUFFIX = /^(?:ar|er|ir|a|am|ou|ava|avam|aram|e|em|eu|ia|iam|iu|iram|ando|endo|indo|asse|assem|esse|essem|isse|issem|aria|ariam|eria|eriam|iria|iriam)$/u
 
 const OXYMORON_PAIRS = [
   ['silencio', 'ensurdecedor'],
@@ -165,6 +167,10 @@ function normalize(value: string): string {
 
 function words(value: string): string[] {
   return normalize(value).match(/\p{L}+(?:['’-]\p{L}+)?/gu) ?? []
+}
+
+function surfaceWords(value: string): string[] {
+  return value.toLocaleLowerCase('pt-BR').match(/\p{L}+(?:['’-]\p{L}+)?/gu) ?? []
 }
 
 function compactFragment(text: string, from: number, to: number): string {
@@ -365,18 +371,20 @@ function repeatedEdgeFindings(text: string, units: Unit[], type: 'anafora' | 'ep
   return findings
 }
 
-function tokenClass(token: string): string {
+function tokenClass(surfaceToken: string): string {
+  const token = normalize(surfaceToken)
+  if (surfaceToken === 'é') return 'V'
   if (DETERMINERS.has(token)) return 'DET'
   if (PRONOUNS.has(token)) return 'PRO'
   if (PREPOSITIONS.has(token)) return 'PREP'
   if (CONJUNCTIONS.has(token)) return 'CONJ'
-  if (VERB_FORMS.has(token) || (token.length >= 4 && /(ar|er|ir|ava|avam|iam|ando|endo|indo|ado|ido|aram|eram|iram|asse|esse|isse|aria|eria|iria)$/u.test(token))) return 'V'
+  if (VERB_FORMS.has(token) || (token.length >= 4 && /(ar|er|ir|ou|ava|avam|iam|ando|endo|indo|ado|ido|aram|eram|iram|asse|esse|isse|aria|eria|iria)$/u.test(token))) return 'V'
   if (token.endsWith('mente')) return 'ADV'
   return 'X'
 }
 
 function structureSignature(unit: Unit): { signature: string; size: number } | null {
-  const tokens = words(unit.text)
+  const tokens = surfaceWords(unit.text)
   if (tokens.length < 4) return null
   const slice = tokens.slice(0, Math.min(8, tokens.length))
   return { signature: slice.map(tokenClass).join('-'), size: tokens.length }
@@ -517,6 +525,13 @@ function detectAntithesis(text: string, sentences: Unit[]): FigureFinding[] {
   return findings
 }
 
+function looksLikeHumanVerb(token: string): boolean {
+  return HUMAN_VERB_STEMS.some((stem) => {
+    if (!token.startsWith(stem)) return false
+    return HUMAN_VERB_SUFFIX.test(token.slice(stem.length))
+  })
+}
+
 function detectPersonification(text: string, sentences: Unit[]): FigureFinding[] {
   const findings: FigureFinding[] = []
   for (const sentence of sentences) {
@@ -535,7 +550,7 @@ function detectPersonification(text: string, sentences: Unit[]): FigureFinding[]
     let verb = ''
     for (let index = nounIndex + 1; index < Math.min(tokens.length, nounIndex + 8); index += 1) {
       const token = tokens[index] ?? ''
-      if (HUMAN_VERB_STEMS.some((stem) => token.startsWith(stem))) {
+      if (looksLikeHumanVerb(token)) {
         verb = token
         break
       }
