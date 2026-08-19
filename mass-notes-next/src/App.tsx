@@ -720,6 +720,7 @@ export default function App() {
           onStatus={(status: DocumentStatus) => mutateDraft((current) => ({ ...current, status }), 'metadata')}
           onFavorite={(favorite) => mutateDraft((current) => ({ ...current, favorite }), 'metadata')}
           onTags={(tags) => mutateDraft((current) => ({ ...current, tags }), 'metadata')}
+          onTemplateId={(templateId) => mutateDraft((current) => ({ ...current, templateId }), 'metadata')}
           onDuplicate={() => { void duplicate() }}
           onExport={exportDocument}
           onFocus={() => setFocusMode((value) => !value)}
