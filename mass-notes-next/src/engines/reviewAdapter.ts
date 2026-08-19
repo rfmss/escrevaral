@@ -1,3 +1,4 @@
+import { analyzeTextCohesion } from './cohesionSupplement'
 import { analyzeNormativeVerbCalibration } from './normativeVerbSupplement'
 import {
   calibrateStructuralPunctuation,
@@ -69,7 +70,6 @@ async function loadReviewEngine(): Promise<boolean> {
   executeClassicScript(punctuation.default, 'punctuation-engine.js')
   executeClassicScript(analysis.default, 'analise-engine.js')
 
-  // Inicializa syntax engine para habilitar analyzeDeep()
   const syntaxInitialized = await window.syntaxEngine?.init?.() ?? false
   if (!syntaxInitialized) {
     console.warn('[Escrevaral] Syntax engine não inicializada. Análise sintática pode estar incompleta.')
@@ -154,9 +154,6 @@ function normalizeLocatedIssue(item: unknown, text: string, index: number): Loca
   const requestedPosition = Number(source.pos)
   if (!fragment || !Number.isInteger(requestedPosition) || requestedPosition < 0) return null
 
-  // Algumas regras removem espaços periféricos do fragmento. Aceitamos apenas
-  // um realinhamento local e determinístico; nunca buscamos a primeira ocorrência
-  // global, pois isso quebraria textos com fragmentos repetidos.
   let from = requestedPosition
   if (text.slice(from, from + fragment.length) !== fragment) {
     const local = text.slice(requestedPosition, requestedPosition + fragment.length + 4)
@@ -195,6 +192,36 @@ function mergeGeneralIssues(base: ReviewIssue[], calibrated: ReviewIssue[]): Rev
   return merged
 }
 
+function cohesionObservation(text: string): ReviewIssue[] {
+  const reading = analyzeTextCohesion(text)
+  if (reading.sentenceCount < 2) return []
+
+  const relationCounts = new Map<string, number>()
+  for (const marker of reading.sequentialMarkers) {
+    relationCounts.set(marker.relation, (relationCounts.get(marker.relation) ?? 0) + marker.count)
+  }
+
+  const parts: string[] = []
+  if (relationCounts.size) {
+    parts.push(`Conectores explícitos: ${[...relationCounts.entries()].map(([relation, count]) => `${relation} ${count}`).join(', ')}.`)
+  }
+  if (reading.referentialMarkers) {
+    parts.push(`Marcadores referenciais: ${reading.referentialMarkers}.`)
+  }
+  if (reading.recurrences.length) {
+    parts.push(`Recorrências entre frases: ${reading.recurrences.slice(0, 5).map((item) => `${item.word} (${item.transitions})`).join(', ')}.`)
+  }
+  if (!parts.length) return []
+
+  parts.push('O mapa descreve ligações formais observáveis; não mede coerência, intenção nem qualidade do texto.')
+  return [{
+    id: 'C4-COESAO-MAPA',
+    title: 'Mapa de coesão observável',
+    detail: parts.join(' '),
+    severity: 'baixa',
+  }]
+}
+
 export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   if (!text.trim()) return { issues: [], locatedIssues: [] }
   if (!(await ensureReviewEngine()) || !window.VeredaAnalise) {
@@ -203,7 +230,6 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
 
   const result = window.VeredaAnalise.analisar(text)
 
-  // Análise profunda de pontuação + calibração estrutural pt-BR.
   try {
     const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
     if (deepResult?.issues) {
@@ -224,7 +250,6 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
       }
     }
   } catch (error) {
-    // Degradação graciosa: mantém análise básica sem syntax.
     console.error('[Escrevaral] Erro na análise sintática profunda. Usando análise básica.', error)
   }
 
@@ -234,7 +259,10 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
     .filter((item): item is LocatedReviewIssue => Boolean(item))
   const issues = mergeGeneralIssues(
     interpretedIssues(interpreted),
-    analyzeNormativeVerbCalibration(text),
+    [
+      ...analyzeNormativeVerbCalibration(text),
+      ...cohesionObservation(text),
+    ],
   )
 
   return {
