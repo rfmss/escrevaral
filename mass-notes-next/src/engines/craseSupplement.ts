@@ -12,7 +12,7 @@ function issue(id: string, title: string, detail: string): CraseCalibrationIssue
 export function analyzeCraseCalibration(text: string): CraseCalibrationIssue[] {
   const issues: CraseCalibrationIssue[] = []
 
-  for (const match of text.matchAll(/\bà\s+partir\s+de\b/giu)) {
+  for (const match of text.matchAll(/(?<!\p{L})à\s+partir\s+de(?!\p{L})/giu)) {
     issues.push(issue(
       `C5-CRASE-PARTIR-${match.index}`,
       'Não há crase em “a partir de”',
@@ -20,7 +20,7 @@ export function analyzeCraseCalibration(text: string): CraseCalibrationIssue[] {
     ))
   }
 
-  const singularPronouns = /\bà\s+(ela|ele|você|mim|ti|nós|vós)\b/giu
+  const singularPronouns = /(?<!\p{L})à\s+(ela|ele|você|mim|ti|nós|vós)(?!\p{L})/giu
   for (const match of text.matchAll(singularPronouns)) {
     issues.push(issue(
       `C5-CRASE-PRONOME-${match.index}`,
@@ -29,7 +29,7 @@ export function analyzeCraseCalibration(text: string): CraseCalibrationIssue[] {
     ))
   }
 
-  const pluralPronouns = /\bàs\s+(elas|eles|vocês)\b/giu
+  const pluralPronouns = /(?<!\p{L})às\s+(elas|eles|vocês)(?!\p{L})/giu
   for (const match of text.matchAll(pluralPronouns)) {
     issues.push(issue(
       `C5-CRASE-PRONOME-${match.index}`,
