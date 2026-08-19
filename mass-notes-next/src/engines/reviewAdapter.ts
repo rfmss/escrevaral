@@ -27,6 +27,13 @@ declare global {
       analisar: (text: string) => unknown
       interpretarResultado?: (result: unknown) => unknown
     }
+    VeredaPunctuation?: {
+      analyzeDeep?: (text: string) => Promise<{ issues: unknown[] }>
+    }
+    syntaxEngine?: {
+      init: () => Promise<void>
+      _isReady?: () => boolean
+    }
     __escrevaralReviewLoaded?: boolean
   }
 }
@@ -51,6 +58,10 @@ async function loadReviewEngine(): Promise<boolean> {
   executeClassicScript(syntax.default, 'syntax-engine.js')
   executeClassicScript(punctuation.default, 'punctuation-engine.js')
   executeClassicScript(analysis.default, 'analise-engine.js')
+
+  // Inicializa syntax engine para habilitar analyzeDeep()
+  await window.syntaxEngine?.init?.()
+
   window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
   return window.__escrevaralReviewLoaded
 }
@@ -164,6 +175,37 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   }
 
   const result = window.VeredaAnalise.analisar(text)
+
+  // Análise profunda de pontuação (restaura funcionalidade perdida)
+  const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
+  if (deepResult?.issues?.length) {
+    // Extrai issues existentes de pontuação
+    const resultObj = result as Record<string, unknown>
+    const normaObj = resultObj?.norma as Record<string, unknown> | undefined
+    const pontuacaoObj = normaObj?.pontuacao as Record<string, unknown> | undefined
+    const existingIssues = Array.isArray(pontuacaoObj?.issues)
+      ? (pontuacaoObj.issues as Record<string, unknown>[])
+      : []
+
+    // Cria Set para detectar duplicatas por ruleId + pos
+    const existingKeys = new Set(
+      existingIssues.map(
+        (i) => `${i.ruleId ?? i.id}-${i.pos}`
+      )
+    )
+
+    // Filtra issues novas (não duplicadas)
+    const newIssues = deepResult.issues.filter(
+      (i: Record<string, unknown>) =>
+        !existingKeys.has(`${i.ruleId ?? i.id}-${i.pos}`)
+    )
+
+    // Adiciona issues novas ao resultado
+    if (newIssues.length && pontuacaoObj) {
+      pontuacaoObj.issues = [...existingIssues, ...newIssues]
+    }
+  }
+
   const interpreted = window.VeredaAnalise.interpretarResultado?.(result)
   const locatedIssues = punctuationItems(result)
     .map((item, index) => normalizeLocatedIssue(item, text, index))
