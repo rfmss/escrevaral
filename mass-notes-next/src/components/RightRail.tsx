@@ -9,6 +9,7 @@ import { ExportPanel } from './ExportPanel'
 import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
+const AuthorshipProofPanel = lazy(() => import('./AuthorshipProofPanel').then((module) => ({ default: module.AuthorshipProofPanel })))
 const LexicalPanel = lazy(() => import('./LexicalPanel').then((module) => ({ default: module.LexicalPanel })))
 const PrecisionPanel = lazy(() => import('./PrecisionPanel').then((module) => ({ default: module.PrecisionPanel })))
 
@@ -362,6 +363,9 @@ export function RightRail({
           <section id="panel-ferramentas" role="tabpanel" aria-labelledby="tab-ferramentas" className="panel active">
             <Suspense fallback={<p className="panel-intro" role="status">Preparando guia editorial…</p>}>
               <PrecisionPanel document={document} onTemplateId={onTemplateId} />
+            </Suspense>
+            <Suspense fallback={<p className="panel-intro" role="status">Preparando registro de autoria…</p>}>
+              <AuthorshipProofPanel document={document} />
             </Suspense>
             <div className="section-label">Objeto editorial</div>
             <button className="action anatomy-action" type="button" onClick={openAnatomy}>Abrir Anatomia do Livro</button>
