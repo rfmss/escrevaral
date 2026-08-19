@@ -111,7 +111,8 @@ test('revisão profunda inicializa syntax e projeta achado sintático no painel'
   const editor = page.locator('.ProseMirror')
   await editor.click()
   await page.keyboard.press('Control+A')
-  await page.keyboard.type('Os autores chegaram cedo e abriram a oficina enquanto todos aguardavam uma leitura cuidadosa do texto brasileiro.')
+  const source = 'Os autores chegaram cedo e abriram a oficina enquanto todos aguardavam uma leitura cuidadosa do texto brasileiro.'
+  await page.keyboard.type(source)
   const dialog = await openReview(page)
 
   await expect(dialog.getByRole('status')).toHaveText(/observa|Nenhuma/i, { timeout: 15_000 })
@@ -120,18 +121,27 @@ test('revisão profunda inicializa syntax e projeta achado sintático no painel'
   }).syntaxEngine?._isReady?.()))
   expect(syntaxReady).toBe(true)
 
-  await page.evaluate(() => {
+  await page.evaluate((text) => {
     const target = window as typeof window & {
-      syntaxEngine?: { analisarPeriodo?: (text: string) => unknown }
+      VeredaPunctuation?: {
+        analyzeDeep?: (value: string) => Promise<{ issues: unknown[]; ruleCount?: number; resumo?: unknown }>
+      }
     }
-    if (!target.syntaxEngine) throw new Error('syntaxEngine ausente')
-    target.syntaxEngine.analisarPeriodo = () => ({
-      resumo: {
-        alertas: [{ descricao: 'Concordância sintática de integração.' }],
-        apostos: [],
-      },
+    if (!target.VeredaPunctuation) throw new Error('VeredaPunctuation ausente')
+    target.VeredaPunctuation.analyzeDeep = async () => ({
+      issues: [{
+        ruleId: 'PONT-SYNT-01',
+        categoria: 'concordância verbal',
+        criterio: 'Concordância sintática de integração.',
+        acao: 'Revise a concordância entre sujeito e verbo.',
+        fragment: text.slice(0, 48),
+        pos: 0,
+        severity: 'alta',
+      }],
+      ruleCount: 1,
+      resumo: { alta: 1, media: 0, baixa: 0 },
     })
-  })
+  }, source)
 
   await dialog.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
   await expect(dialog.locator('.review-located-card').filter({ hasText: 'PONT-SYNT-01' })).toBeVisible({ timeout: 15_000 })
