@@ -28,7 +28,12 @@ async function openReview(page: Page) {
 
 async function expectTitleFits(page: Page) {
   const title = page.getByLabel('Título do documento')
-  await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
+  await expect.poll(() => title.evaluate((node) => {
+    const rect = node.getBoundingClientRect()
+    return rect.left >= 0
+      && rect.right <= window.innerWidth + 1
+      && document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1
+  })).toBe(true)
 }
 
 test('shell canônico mantém manuscrito, biblioteca, análise e status acessíveis', async ({ page }) => {
