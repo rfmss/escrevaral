@@ -106,6 +106,7 @@ jobs:
           tests/gate17-verb-calibration.spec.ts
           tests/gate18-lexical-nuance.spec.ts
           tests/gate19-cohesion-calibration.spec.ts
+          tests/gate20-lexical-provenance.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
