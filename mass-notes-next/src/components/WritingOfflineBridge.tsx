@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { readNativeBackupExportedAt } from '../backup/nativeBackup'
-import { getDocument, listDocuments } from '../storage/documentRepository'
+import { getDocument, initializeRepository, listDocuments } from '../storage/documentRepository'
 
 const RECOVERY_KEY = 'escrevaral-mass-notes-next-recovery'
 const PAGE_MARK_KEY = 'escrevaral-offline-page-mark-v1'
@@ -47,6 +47,7 @@ async function hasRecoverableDraft(): Promise<boolean> {
     const revision = recovery.document?.revision
     const updatedAt = recovery.document?.updatedAt
     if (!id || !Number.isInteger(revision) || !Number.isFinite(updatedAt)) return false
+    await initializeRepository()
     const persisted = await getDocument(id)
     return Boolean(
       persisted
@@ -99,11 +100,14 @@ export function WritingOfflineBridge() {
 
     const loads = registerPageLoad()
     if (loads >= 2 && readStorage(sessionStorage, BACKUP_DISMISSED_KEY) !== '1') {
-      void listDocuments().then((documents) => {
-        if (cancelled || !documents.some((item) => item.plainText.trim())) return
-        const lastExport = readNativeBackupExportedAt()
-        if (!lastExport || Date.now() - lastExport >= BACKUP_WARNING_MS) setBackupNudge(true)
-      })
+      void initializeRepository()
+        .then(() => listDocuments())
+        .then((documents) => {
+          if (cancelled || !documents.some((item) => item.plainText.trim())) return
+          const lastExport = readNativeBackupExportedAt()
+          if (!lastExport || Date.now() - lastExport >= BACKUP_WARNING_MS) setBackupNudge(true)
+        })
+        .catch(() => {})
     }
 
     const onBackupExported = () => setBackupNudge(false)
@@ -138,7 +142,6 @@ export function WritingOfflineBridge() {
     if (!import.meta.env.PROD || !('serviceWorker' in navigator)) return
 
     let cancelled = false
-    let registration: ServiceWorkerRegistration | null = null
     let interval = 0
 
     const exposeWaitingWorker = (worker: ServiceWorker | null) => {
@@ -150,21 +153,20 @@ export function WritingOfflineBridge() {
     }
     navigator.serviceWorker.addEventListener('controllerchange', onControllerChange)
 
-    void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}service-worker.js`).then((next) => {
+    void navigator.serviceWorker.register(`${import.meta.env.BASE_URL}service-worker.js`).then((registration) => {
       if (cancelled) return
-      registration = next
-      exposeWaitingWorker(next.waiting)
+      exposeWaitingWorker(registration.waiting)
 
-      next.addEventListener('updatefound', () => {
-        const worker = next.installing
+      registration.addEventListener('updatefound', () => {
+        const worker = registration.installing
         if (!worker) return
         worker.addEventListener('statechange', () => {
           if (worker.state === 'installed') exposeWaitingWorker(worker)
         })
       })
 
-      void next.update().catch(() => {})
-      interval = window.setInterval(() => { void next.update().catch(() => {}) }, 30 * 60 * 1000)
+      void registration.update().catch(() => {})
+      interval = window.setInterval(() => { void registration.update().catch(() => {}) }, 30 * 60 * 1000)
     }).catch((error) => {
       console.error('[Escrevaral] Modo offline não pôde ser ativado.', error)
     })
@@ -173,7 +175,6 @@ export function WritingOfflineBridge() {
       cancelled = true
       window.clearInterval(interval)
       navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange)
-      registration = null
     }
   }, [])
 
