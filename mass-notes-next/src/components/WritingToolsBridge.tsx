@@ -12,6 +12,7 @@ export function WritingToolsBridge() {
 
     let launcher: HTMLButtonElement | null = null
     let railObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
 
     const syncOpenState = () => {
       const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
@@ -51,14 +52,17 @@ export function WritingToolsBridge() {
     }
 
     if (!install()) {
-      const observer = new MutationObserver(() => {
-        if (install()) observer.disconnect()
+      rootObserver = new MutationObserver(() => {
+        if (install()) {
+          rootObserver?.disconnect()
+          rootObserver = null
+        }
       })
-      observer.observe(root, { childList: true, subtree: true })
-      return () => observer.disconnect()
+      rootObserver.observe(root, { childList: true, subtree: true })
     }
 
     return () => {
+      rootObserver?.disconnect()
       railObserver?.disconnect()
       if (launcher) {
         launcher.removeEventListener('click', openTools, true)
