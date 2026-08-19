@@ -25,7 +25,24 @@
 - [x] Precision: guia/template persistente, separada da Revisão.
 - [x] Proof/Autoria: cadência + sessões + hash em armazenamento isolado.
 - [x] Oficina: entrada desktop real para o rail completo.
+- [ ] Exportação avançada comprovada na `main`: DOCX.
+- [ ] Exportação avançada comprovada na `main`: EPUB 3 offline.
+- [ ] Exportação avançada comprovada na `main`: Obsidian/vault — confirmar contrato exato antes do transplante.
 - [ ] Validar a tranche funcional inteira no workflow atual antes de declará-la verde.
+
+## Paridade fina / microcomportamentos
+
+- [x] Meta diária: restaurar celebração com confete ao cruzar a meta uma única vez.
+- [x] Meta diária: respeitar `prefers-reduced-motion` sem perder o evento lógico de meta atingida.
+- [x] Salvamento: trocar o rótulo enganoso `SINCRONIZADO` por `SALVO LOCALMENTE`.
+- [x] Primeiro uso: restaurar aviso único “Texto salvo aqui, neste navegador. Sem internet, sem nuvem.”.
+- [ ] Validar Gates 23–24 no mesmo head publicado.
+- [ ] Pomodoro real da `main`: 25 min, iniciar/pausar/resetar, histórico local de rodadas, toast e celebração ao concluir.
+- [ ] Modo Leitor real da `main`: leitura limpa + rolagem automática + controle de velocidade.
+- [ ] Auditar player de sons ambiente da `main` e restaurar apenas se o domínio continuar válido no produto novo.
+- [ ] Auditar chip/feedback compacto da Prova de Autoria na topbar e marcos de escrita.
+- [ ] Auditar UX offline/PWA: atualização disponível, recuperação e nudges de cópia de segurança sem duplicar `BackupPanel`.
+- [ ] Auditar atalhos e feedbacks transitórios da `main` que tenham função real, não decoração.
 
 ## Calibração linguística
 
@@ -76,7 +93,8 @@
 
 ## Regra operacional
 
-1. Corrigir P0 antes de adicionar nova feature.
+1. Corrigir P0 antes de adicionar nova feature; auditoria e registro de perdas podem continuar em paralelo.
 2. Um bloco só vira `[x]` quando implementação e banca correspondente estão coerentes.
 3. Código escrito sem CI/preview do mesmo SHA continua pendente de validação.
 4. Cada relatório de andamento deve trazer o resumo deste TODO acumulado.
+5. Paridade significa preservar capacidade real, não reproduzir layout ou ornamento da `main`.
