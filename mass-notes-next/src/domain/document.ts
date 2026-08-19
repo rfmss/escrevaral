@@ -14,6 +14,9 @@ export type EscrevaralDocument = {
   updatedAt: number
   revision: number
   legacySourceId?: string | null
+  type?: string | null
+  kind?: string | null
+  templateId?: string | null
 }
 
 export type SaveState = 'Carregando' | 'Alterado' | 'Salvando' | 'Salvo' | 'Conflito' | 'Falha'
@@ -37,6 +40,9 @@ export function createDocument(overrides: Partial<EscrevaralDocument> = {}): Esc
     updatedAt: overrides.updatedAt ?? timestamp,
     revision: overrides.revision ?? 0,
     legacySourceId: overrides.legacySourceId ?? null,
+    type: overrides.type ?? null,
+    kind: overrides.kind ?? null,
+    templateId: overrides.templateId ?? null,
   }
 }
 
