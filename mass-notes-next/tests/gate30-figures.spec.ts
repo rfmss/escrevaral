@@ -16,16 +16,25 @@ async function writeText(page: Page, text: string) {
 }
 
 async function openFigures(page: Page) {
-  await page.keyboard.press('Escape')
-  const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
-  await expect(launcher).toBeVisible()
-  await launcher.click()
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
-  await expect(dialog).toBeVisible()
-  await page.getByRole('tab', { name: 'voz', exact: true }).click()
-  const figures = page.getByRole('region', { name: 'Figuras de linguagem' })
+  if (!await dialog.isVisible().catch(() => false)) {
+    if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
+    const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+    await expect(launcher).toBeVisible()
+    await launcher.click()
+    await expect(dialog).toBeVisible()
+  }
+  await dialog.getByRole('tab', { name: 'voz', exact: true }).click()
+  const figures = dialog.getByRole('region', { name: 'Figuras de linguagem' })
   await expect(figures).toBeVisible()
   return figures
+}
+
+async function closeTools(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (!await dialog.isVisible().catch(() => false)) return
+  await dialog.getByRole('button', { name: 'Fechar ferramentas' }).click()
+  await expect(dialog).toBeHidden()
 }
 
 test('Gate 30: mapa retórico encontra padrões em várias escalas sem corrigir o texto', async ({ page }) => {
@@ -90,13 +99,15 @@ test('Gate 30: leitura semântica incerta permanece explicitamente limitada', as
 test('Gate 30: resultado é invalidado quando o manuscrito muda', async ({ page }) => {
   await waitReady(page)
   const editor = await writeText(page, 'Eu espero a chuva. Eu espero a noite. Eu espero o dia chegar devagar.')
-  const figures = await openFigures(page)
+  let figures = await openFigures(page)
   await figures.getByRole('button', { name: 'Mapear figuras de linguagem' }).click()
   await expect(figures.locator('.figures-reading')).toBeVisible()
 
+  await closeTools(page)
   await editor.click()
   await editor.fill('Agora a página tomou outro caminho e abandonou a repetição anterior.')
 
+  figures = await openFigures(page)
   await expect(figures.locator('.figures-reading')).toHaveCount(0)
   await expect(figures.locator('.figures-message')).toContainText(/texto mudou/i)
 })
