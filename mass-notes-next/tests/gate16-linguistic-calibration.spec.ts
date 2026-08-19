@@ -14,6 +14,13 @@ async function leaveFocus(page: Page) {
   }
 }
 
+async function closeReviewDialog(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (!await dialog.isVisible().catch(() => false)) return
+  await dialog.getByRole('button', { name: 'Fechar ferramentas' }).click()
+  await expect(dialog).toBeHidden()
+}
+
 async function reviewDialog(page: Page) {
   await leaveFocus(page)
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
@@ -21,16 +28,16 @@ async function reviewDialog(page: Page) {
     await page.getByRole('button', { name: 'Pesquisa' }).click()
   }
   await expect(dialog).toBeVisible()
-  await expect(page.getByRole('tab', { name: 'revisao', exact: true })).toHaveAttribute('aria-selected', 'true')
+  await expect(dialog.getByRole('tab', { name: 'revisao', exact: true })).toHaveAttribute('aria-selected', 'true')
   return dialog
 }
 
 test('C1: vínculos sintáticos essenciais governam a vírgula normativa', async ({ page }) => {
   await waitReady(page)
   const editor = page.locator('.ProseMirror')
-  const dialog = await reviewDialog(page)
 
   for (const calibrationCase of punctuationCalibrationC1) {
+    await closeReviewDialog(page)
     await editor.fill(calibrationCase.text)
     const activeDialog = await reviewDialog(page)
     await activeDialog.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
