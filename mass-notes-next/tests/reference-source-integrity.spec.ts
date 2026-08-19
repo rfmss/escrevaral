@@ -5,9 +5,11 @@ test('cenografia sem domínio não nasce mais no DOM canônico', async ({ page }
   await page.goto('/')
   await expect(page.locator('.paper-shell')).toBeVisible()
 
-  const mode = page.getByRole('button', { name: 'Modo atual: Escrita' })
-  await expect(mode).toBeDisabled()
-  await expect(mode).toHaveAttribute('aria-disabled', 'true')
+  // MODO deixou de ser cenográfico: agora abre o Leitor real.
+  const mode = page.getByRole('button', { name: 'Abrir modo Leitura' })
+  await expect(mode).toBeEnabled()
+  await expect(mode).toHaveText('Escrita')
+  await expect(mode).toHaveAttribute('aria-controls', 'writing-reader-overlay')
 
   await expect(page.locator('.left-rail .research')).toHaveCount(0)
   await expect(page.locator('.left-rail .quick-box')).toHaveCount(0)
