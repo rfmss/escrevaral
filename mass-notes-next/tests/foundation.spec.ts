@@ -1,89 +1,78 @@
-import { expect, test } from 'playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 
-async function waitReady(page: import('playwright/test').Page) {
+async function waitReady(page: Page) {
   await page.goto('/')
-  await expect(page.locator('.paper')).toBeVisible()
-  await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+  await expect(page.locator('.paper-shell')).toBeVisible()
+  await expect(page.locator('.ProseMirror')).toBeEditable()
+  await expect(page.locator('.sync-save')).toContainText(/Salvo|Alterado/)
 }
 
-async function openWorkshop(page: import('playwright/test').Page) {
-  const reveal = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
-  if (await reveal.isVisible().catch(() => false)) await reveal.click()
-  await expect(page.locator('body')).toHaveClass(/workshop-open/)
-  await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
+async function leaveFocus(page: Page) {
+  if (await page.locator('body').evaluate((body) => body.classList.contains('focus-mode'))) {
+    await page.keyboard.press('Escape')
+    await expect(page.locator('body')).not.toHaveClass(/focus-mode/)
+  }
 }
 
-async function expectTitleFits(page: import('playwright/test').Page) {
+async function openReview(page: Page) {
+  await leaveFocus(page)
+  const research = page.getByRole('button', { name: 'Pesquisa' })
+  await expect(research).toBeVisible()
+  await research.click()
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  await expect(dialog).toBeVisible()
+  const tab = page.getByRole('tab', { name: 'revisao', exact: true })
+  await expect(tab).toHaveAttribute('aria-selected', 'true')
+  return dialog
+}
+
+async function expectTitleFits(page: Page) {
   const title = page.getByLabel('Título do documento')
   await expect.poll(() => title.evaluate((node) => node.scrollWidth <= node.clientWidth)).toBe(true)
 }
 
-test('inicia pela nova casa e mantém a escrita silenciosa reversível', async ({ page }) => {
+test('shell canônico mantém manuscrito, biblioteca, análise e status acessíveis', async ({ page }) => {
   await waitReady(page)
 
-  await expect(page.locator('body')).toHaveClass(/writing-rest/)
-  await expect(page.locator('body')).toHaveClass(/workshop-open/)
-  await expect(page.locator('.ProseMirror')).toBeEditable()
-  await expect(page.locator('.sidebar')).toBeVisible()
-  await expect(page.locator('.rail')).toBeVisible()
-  await expect(page.locator('.editor-toolbar')).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
+  await expect(page.locator('.topbar')).toBeVisible()
+  await expect(page.locator('.left-rail')).toBeVisible()
+  await expect(page.locator('.workspace')).toBeVisible()
+  await expect(page.locator('.analysis-panel')).toBeVisible()
+  await expect(page.locator('.statusbar')).toBeVisible()
+  await expect(page.locator('.formatbar')).toBeVisible()
   await expectTitleFits(page)
-
-  await page.getByRole('button', { name: 'Voltar à escrita silenciosa' }).click()
-  await expect(page.locator('body')).not.toHaveClass(/workshop-open/)
-  await expect(page.locator('.sidebar')).toBeHidden()
-  await expect(page.locator('.rail')).toBeHidden()
-  await expect(page.locator('.editor-toolbar')).toBeHidden()
-  await expect(page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })).toBeVisible()
-
-  await openWorkshop(page)
-  await expect(page.locator('.sidebar')).toBeVisible()
-  await expect(page.locator('.rail')).toBeVisible()
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true)
   await page.screenshot({ path: 'test-results/mass-notes-next-desktop.png', fullPage: true })
 })
 
-test('ações permanecem na oficina e a marca da nova casa continua identificável', async ({ page }) => {
+test('marca e ações principais da casa canônica continuam identificáveis', async ({ page }) => {
   await waitReady(page)
-  await openWorkshop(page)
 
-  const brand = page.locator('.brand')
-  await expect(brand.getByRole('heading', { name: 'Escrevaral' })).toHaveCount(1)
-  const mark = await brand.evaluate((node) => ({
-    name: getComputedStyle(node, '::before').content,
-    tagline: getComputedStyle(node, '::after').content,
-  }))
-  expect(mark.name).toContain('ESCREVARAL')
-  expect(mark.tagline).toContain('ESCRITA COM INTENÇÃO')
-
-  const readButton = page.getByRole('button', { name: 'Ler o texto', exact: true })
-  await expect(readButton).toBeVisible()
-  await readButton.click()
-  await expect(page.getByRole('tab', { name: 'revisao', exact: true })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.locator('.brand-name')).toContainText(/ESCREVARAL/i)
+  await expect(page.locator('.brand-tagline')).toHaveText(/ESCRITA COM INTENÇÃO/i)
+  await expect(page.getByRole('button', { name: 'Abrir oficina de ferramentas' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Pesquisa' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Exportar' })).toBeVisible()
 })
 
-test('Enter após T1 cria parágrafo e a junção padrão permanece reversível', async ({ page }) => {
+test('parágrafos permanecem estruturais e o undo do Tiptap continua reversível', async ({ page }) => {
   await waitReady(page)
-  await openWorkshop(page)
   await page.keyboard.press('Control+N')
   await page.getByLabel('Título do documento').fill('Estrutura segura')
-  await page.getByRole('button', { name: 'T1', exact: true }).click()
-  await page.locator('.ProseMirror').pressSequentially('Título principal')
-  await page.keyboard.press('Enter')
-  await page.keyboard.type('Parágrafo independente')
-
   const editor = page.locator('.ProseMirror')
-  await expect(editor.locator('h1')).toHaveText('Título principal')
-  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
-
-  await page.waitForTimeout(800)
-  await page.keyboard.press('Home')
+  await editor.click()
+  await page.keyboard.press('Control+A')
   await page.keyboard.press('Backspace')
-  await expect(editor.locator('h1')).toContainText('Título principalParágrafo independente')
+  await page.keyboard.type('Primeiro parágrafo')
+  await page.keyboard.press('Enter')
+  await page.keyboard.type('Segundo parágrafo')
+
+  await expect(editor.locator('p')).toHaveCount(2)
+  await expect(editor.locator('p').nth(0)).toHaveText('Primeiro parágrafo')
+  await expect(editor.locator('p').nth(1)).toHaveText('Segundo parágrafo')
 
   await page.keyboard.press('Control+z')
-  await expect(editor.locator('h1')).toHaveText('Título principal')
-  await expect(editor.locator('p').first()).toContainText('Parágrafo independente')
+  await expect(editor.locator('p').nth(1)).not.toContainText('Segundo parágrafo')
 })
 
 test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ context, page }) => {
@@ -101,16 +90,15 @@ test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ c
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão da aba A')
 })
 
-test('a engine real de revisão continua acessível quando a oficina é convocada', async ({ page }) => {
+test('a engine real de revisão continua acessível pela Pesquisa canônica', async ({ page }) => {
   await waitReady(page)
   const editor = page.locator('.ProseMirror')
   await editor.click()
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Ela entrou para dentro da casa. O coração acelerou, o coração acelerou.')
-  await openWorkshop(page)
-  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
-  await page.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
-  await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma|página está vazia/i, { timeout: 15_000 })
+  const dialog = await openReview(page)
+
+  await expect(dialog.getByRole('status')).toHaveText(/observa|Nenhuma|página está vazia/i, { timeout: 15_000 })
 })
 
 test('revisão profunda inicializa syntax e projeta achado sintático no painel', async ({ page }) => {
@@ -119,13 +107,9 @@ test('revisão profunda inicializa syntax e projeta achado sintático no painel'
   await editor.click()
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Os autores chegaram cedo e abriram a oficina enquanto todos aguardavam uma leitura cuidadosa do texto brasileiro.')
-  await openWorkshop(page)
-  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
+  const dialog = await openReview(page)
 
-  const analyze = page.getByRole('button', { name: 'Analisar em português brasileiro' })
-  await analyze.click()
-  await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma/i, { timeout: 15_000 })
-
+  await expect(dialog.getByRole('status')).toHaveText(/observa|Nenhuma/i, { timeout: 15_000 })
   const syntaxReady = await page.evaluate(() => Boolean((window as typeof window & {
     syntaxEngine?: { _isReady?: () => boolean }
   }).syntaxEngine?._isReady?.()))
@@ -133,9 +117,7 @@ test('revisão profunda inicializa syntax e projeta achado sintático no painel'
 
   await page.evaluate(() => {
     const target = window as typeof window & {
-      syntaxEngine?: {
-        analisarPeriodo?: (text: string) => unknown
-      }
+      syntaxEngine?: { analisarPeriodo?: (text: string) => unknown }
     }
     if (!target.syntaxEngine) throw new Error('syntaxEngine ausente')
     target.syntaxEngine.analisarPeriodo = () => ({
@@ -146,9 +128,9 @@ test('revisão profunda inicializa syntax e projeta achado sintático no painel'
     })
   })
 
-  await analyze.click()
-  await expect(page.locator('.review-located-card').filter({ hasText: 'PONT-SYNT-01' })).toBeVisible({ timeout: 15_000 })
-  await expect(page.locator('.review-located-card').filter({ hasText: 'Concordância sintática de integração.' })).toBeVisible()
+  await dialog.getByRole('button', { name: 'Analisar em português brasileiro' }).click()
+  await expect(dialog.locator('.review-located-card').filter({ hasText: 'PONT-SYNT-01' })).toBeVisible({ timeout: 15_000 })
+  await expect(dialog.locator('.review-located-card').filter({ hasText: 'Concordância sintática de integração.' })).toBeVisible()
 })
 
 test('mobile não cria overflow e mantém drawers fecháveis', async ({ page }) => {
