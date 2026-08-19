@@ -6,6 +6,9 @@ on:
     paths:
       - "mass-notes-next/src/**"
       - "mass-notes-next/tests/**"
+      - "mass-notes-next/public/service-worker.js"
+      - "mass-notes-next/public/manifest.webmanifest"
+      - "mass-notes-next/index.html"
       - "mass-notes-next/package.json"
       - "mass-notes-next/package-lock.json"
       - "mass-notes-next/vite.config.ts"
@@ -39,7 +42,7 @@ jobs:
       - name: Gerar runtime da Anatomia
         working-directory: .
         run: |
-          python -m pip install --disable-pip-version-check pillow
+          python -m pip install --disable-pip-check pillow
           python scripts/build-anatomia-runtime.py
           test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
           test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
@@ -76,6 +79,15 @@ jobs:
           test "$(wc -c < dist/assets/Anton-Regular.ttf)" -eq 170812
           test "$(wc -c < dist/assets/Oswald-wght.ttf)" -eq 172088
           test "$(wc -c < dist/assets/Literata-opsz-wght.ttf)" -eq 955132
+
+      - name: Provar shell offline e manifesto PWA
+        run: |
+          set -euo pipefail
+          test -f dist/service-worker.js
+          test -f dist/manifest.webmanifest
+          grep --quiet "escrevaral-paper-home-offline-" dist/service-worker.js
+          grep --quiet "SKIP_WAITING" dist/service-worker.js
+          grep --quiet 'rel="manifest"' dist/index.html
 
       - name: Instalar Chromium
         run: npx playwright install --with-deps chromium
@@ -116,6 +128,7 @@ jobs:
           tests/gate26-pomodoro.spec.ts
           tests/gate27-reader-mode.spec.ts
           tests/gate28-proof-status.spec.ts
+          tests/gate29-offline-pwa.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
