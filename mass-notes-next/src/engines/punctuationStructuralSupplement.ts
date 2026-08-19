@@ -57,12 +57,19 @@ function complementAfterComma(terms: LocatedTerm[], commaIndex: number): Located
   const first = terms[commaIndex + 1]
   if (!isTransparentDeterminer(first)) return first
 
-  // O syntax-engine conserva artigos como termos próprios. Para detectar
-  // “publicou, o relatório”, atravessamos somente determinantes; não pulamos
-  // preposições/advérbios porque isso transformaria adjuntos em falsos objetos.
   let index = commaIndex + 1
   while (index < terms.length && isTransparentDeterminer(terms[index])) index += 1
   return terms[index]
+}
+
+function directSubjectBeforeComma(terms: LocatedTerm[], commaIndex: number): LocatedTerm | undefined {
+  for (let index = commaIndex - 1; index >= 0; index -= 1) {
+    const term = terms[index]
+    if (term.text === ',') return undefined
+    if (isPredicateVerb(term)) return undefined
+    if (isSubject(term)) return term
+  }
+  return undefined
 }
 
 function punctuationIssue(
@@ -135,13 +142,14 @@ export function calibrateStructuralPunctuation(
 
       const left = terms[index - 1]
       const immediateRight = terms[index + 1]
+      const subject = directSubjectBeforeComma(terms, index)
 
-      if (isSubject(left) && isPredicateVerb(immediateRight)) {
+      if (subject && isPredicateVerb(immediateRight)) {
         const legacyAlreadyFound = rawIssues.some((issue) => {
           const issuePos = Number(issue.pos)
           return issue.ruleId === 'PONT-01' && Number.isInteger(issuePos) && issuePos >= offset && issuePos < offset + sentence.length
         })
-        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, left, immediateRight))
+        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, subject, immediateRight))
         continue
       }
 
