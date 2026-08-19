@@ -114,10 +114,19 @@ export function WritingReaderBridge() {
   }, [])
 
   useEffect(() => {
+    let boundTrigger: HTMLButtonElement | null = null
+
     const bind = () => {
       const trigger = findModeTrigger()
       if (!trigger) return false
-      triggerRef.current = trigger
+
+      if (boundTrigger !== trigger) {
+        boundTrigger?.removeEventListener('click', openReader)
+        boundTrigger = trigger
+        triggerRef.current = trigger
+        trigger.addEventListener('click', openReader)
+      }
+
       trigger.disabled = false
       trigger.removeAttribute('aria-disabled')
       trigger.removeAttribute('data-integrity-static')
@@ -135,15 +144,12 @@ export function WritingReaderBridge() {
     if (!root) return
     const observer = new MutationObserver(bind)
     observer.observe(root, { childList: true, subtree: true })
-    return () => observer.disconnect()
-  }, [open])
-
-  useEffect(() => {
-    const trigger = triggerRef.current
-    if (!trigger) return
-    trigger.addEventListener('click', openReader)
-    return () => trigger.removeEventListener('click', openReader)
-  }, [openReader, open])
+    return () => {
+      observer.disconnect()
+      boundTrigger?.removeEventListener('click', openReader)
+      if (triggerRef.current === boundTrigger) triggerRef.current = null
+    }
+  }, [open, openReader])
 
   useEffect(() => {
     document.body.classList.toggle('writing-reader-open', open)
