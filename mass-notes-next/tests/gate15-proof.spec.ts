@@ -3,14 +3,14 @@ import { expect, test, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
   await page.goto('/')
-  await expect(page.locator('.paper')).toBeVisible()
+  await expect(page.locator('.paper-shell')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
 async function createCleanDocument(page: Page, title: string) {
-  const initialCount = await page.locator('.note-card').count()
+  const initialCount = await page.locator('.chapter').count()
   await page.keyboard.press('Control+N')
-  await expect(page.locator('.note-card')).toHaveCount(initialCount + 1)
+  await expect(page.locator('.chapter')).toHaveCount(initialCount + 1)
   await page.getByLabel('Título do documento').fill(title)
   const editor = page.locator('.ProseMirror')
   await editor.click()
@@ -21,21 +21,21 @@ async function createCleanDocument(page: Page, title: string) {
 
 async function ensureToolsOpen(page: Page) {
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
-  if (await dialog.isVisible().catch(() => false)) return
-
-  await page.keyboard.press('Escape')
+  if (await dialog.isVisible().catch(() => false)) return dialog
+  if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
   const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
   await expect(launcher).toBeVisible()
   await launcher.click()
   await expect(dialog).toBeVisible()
+  return dialog
 }
 
 async function openProof(page: Page) {
-  await ensureToolsOpen(page)
-  const tab = page.getByRole('tab', { name: 'ferramentas', exact: true })
+  const dialog = await ensureToolsOpen(page)
+  const tab = dialog.getByRole('tab', { name: 'ferramentas', exact: true })
   await tab.click()
   await expect(tab).toHaveAttribute('aria-selected', 'true')
-  const panel = page.locator('.proof-panel')
+  const panel = dialog.locator('.proof-panel')
   await expect(panel).toBeVisible()
   return panel
 }
@@ -43,7 +43,7 @@ async function openProof(page: Page) {
 async function typeOrganically(page: Page, value: string) {
   const editor = page.locator('.ProseMirror')
   await editor.click()
-  await page.keyboard.pressSequentially(value, { delay: 55 })
+  await page.keyboard.type(value, { delay: 55 })
   await expect(editor).toContainText(value)
 }
 
@@ -72,7 +72,7 @@ test('Autoria começa neutra e não promete prova antes de haver escrita orgâni
   await expect(panel).toContainText(/não guarda as teclas nem o conteúdo digitado/i)
   await expect(panel.getByRole('button', { name: 'Baixar .prova.esc' })).toBeDisabled()
   await expect(panel.locator('.proof-summary')).toContainText(/0|—/)
-  await expect(page.getByRole('tab')).toHaveCount(7)
+  await expect(page.getByRole('dialog', { name: 'Ferramentas do texto' }).getByRole('tab')).toHaveCount(7)
 })
 
 test('digitação real forma cadência e persiste sem texto literal', async ({ page }) => {
