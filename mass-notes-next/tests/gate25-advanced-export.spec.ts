@@ -56,3 +56,32 @@ test('exportação avançada permanece lazy e gera DOCX, EPUB e Obsidian localme
   expect(obsidianText).toContain('fonte: "Escrevaral"')
   expect(obsidianText).toContain('Primeiro capítulo.')
 })
+
+test('seis formatos cabem no modal sem criar overflow da página', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await waitReady(page)
+  await page.getByRole('button', { name: 'Exportar', exact: true }).click()
+
+  const panel = page.getByRole('dialog', { name: 'Exportar documento' })
+  await expect(panel).toBeVisible()
+  await expect(panel.locator('[data-reference-export-format]')).toHaveCount(6)
+
+  const sizes = await page.evaluate(() => {
+    const panel = document.querySelector<HTMLElement>('.writing-export-panel')
+    const rect = panel?.getBoundingClientRect()
+    return {
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+      pageWidth: document.documentElement.scrollWidth,
+      top: rect?.top ?? -1,
+      bottom: rect?.bottom ?? Number.POSITIVE_INFINITY,
+      panelScrollWidth: panel?.scrollWidth ?? 0,
+      panelClientWidth: panel?.clientWidth ?? 0,
+    }
+  })
+
+  expect(sizes.pageWidth).toBeLessThanOrEqual(sizes.viewportWidth)
+  expect(sizes.top).toBeGreaterThanOrEqual(0)
+  expect(sizes.bottom).toBeLessThanOrEqual(sizes.viewportHeight)
+  expect(sizes.panelScrollWidth).toBeLessThanOrEqual(sizes.panelClientWidth)
+})
