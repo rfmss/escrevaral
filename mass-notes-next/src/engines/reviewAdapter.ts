@@ -28,10 +28,14 @@ declare global {
       interpretarResultado?: (result: unknown) => unknown
     }
     VeredaPunctuation?: {
-      analyzeDeep?: (text: string) => Promise<{ issues: unknown[] }>
+      analyzeDeep?: (text: string) => Promise<{
+        issues: unknown[]
+        ruleCount?: number
+        resumo?: string
+      }>
     }
     syntaxEngine?: {
-      init: () => Promise<void>
+      init: () => Promise<boolean>
       _isReady?: () => boolean
     }
     __escrevaralReviewLoaded?: boolean
@@ -60,7 +64,10 @@ async function loadReviewEngine(): Promise<boolean> {
   executeClassicScript(analysis.default, 'analise-engine.js')
 
   // Inicializa syntax engine para habilitar analyzeDeep()
-  await window.syntaxEngine?.init?.()
+  const syntaxInitialized = await window.syntaxEngine?.init?.() ?? false
+  if (!syntaxInitialized) {
+    console.warn('[Escrevaral] Syntax engine não inicializada. Análise sintática pode estar incompleta.')
+  }
 
   window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
   return window.__escrevaralReviewLoaded
@@ -177,33 +184,23 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   const result = window.VeredaAnalise.analisar(text)
 
   // Análise profunda de pontuação (restaura funcionalidade perdida)
-  const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
-  if (deepResult?.issues?.length) {
-    // Extrai issues existentes de pontuação
-    const resultObj = result as Record<string, unknown>
-    const normaObj = resultObj?.norma as Record<string, unknown> | undefined
-    const pontuacaoObj = normaObj?.pontuacao as Record<string, unknown> | undefined
-    const existingIssues = Array.isArray(pontuacaoObj?.issues)
-      ? (pontuacaoObj.issues as Record<string, unknown>[])
-      : []
-
-    // Cria Set para detectar duplicatas por ruleId + pos
-    const existingKeys = new Set(
-      existingIssues.map(
-        (i) => `${i.ruleId ?? i.id}-${i.pos}`
-      )
-    )
-
-    // Filtra issues novas (não duplicadas)
-    const newIssues = deepResult.issues.filter(
-      (i: Record<string, unknown>) =>
-        !existingKeys.has(`${i.ruleId ?? i.id}-${i.pos}`)
-    )
-
-    // Adiciona issues novas ao resultado
-    if (newIssues.length && pontuacaoObj) {
-      pontuacaoObj.issues = [...existingIssues, ...newIssues]
+  try {
+    const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
+    if (deepResult?.issues) {
+      // Substitui pontuação inteira (simplificado e mais eficiente)
+      const resultObj = result as Record<string, unknown>
+      const normaObj = resultObj?.norma as Record<string, unknown> | undefined
+      if (normaObj) {
+        normaObj.pontuacao = {
+          issues: deepResult.issues,
+          ruleCount: deepResult.ruleCount,
+          resumo: deepResult.resumo,
+        }
+      }
     }
+  } catch (error) {
+    // Degradção graciosa: mantém análise básica sem syntax
+    console.error('[Escrevaral] Erro na análise sintática profunda. Usando análise básica.', error)
   }
 
   const interpreted = window.VeredaAnalise.interpretarResultado?.(result)
