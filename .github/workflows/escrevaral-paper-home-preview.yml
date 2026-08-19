@@ -111,6 +111,7 @@ jobs:
           tests/gate22-shell-centering.spec.ts
           tests/gate23-goal-celebration.spec.ts
           tests/gate24-local-save-feedback.spec.ts
+          tests/gate25-advanced-export.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
