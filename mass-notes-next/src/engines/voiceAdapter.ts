@@ -3,6 +3,12 @@ import { readLatestLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 
 export type VoiceConfidence = 'baixa' | 'média' | 'alta'
 
+export type VoiceSignal = {
+  label: string
+  hits: number
+  score: number
+}
+
 export type VoiceReading = {
   counts: {
     words: number
@@ -19,6 +25,8 @@ export type VoiceReading = {
   }
   confidence: VoiceConfidence
   confidenceNote: string
+  emotional: VoiceSignal[]
+  fields: VoiceSignal[]
   voice: {
     gesture: string
     title: string
@@ -85,6 +93,18 @@ function strings(value: unknown): string[] {
   return Array.isArray(value) ? value.map(text).filter(Boolean) : []
 }
 
+function signals(value: unknown): VoiceSignal[] {
+  if (!Array.isArray(value)) return []
+  return value.map((entry) => {
+    const source = object(entry)
+    return {
+      label: text(source.label).trim(),
+      hits: Math.max(0, Math.floor(number(source.hits))),
+      score: Math.max(0, Math.min(100, Math.round(number(source.score)))),
+    }
+  }).filter((entry) => entry.label && entry.hits > 0)
+}
+
 function normalizeConfidence(value: unknown): VoiceConfidence {
   const raw = text(value).toLocaleLowerCase('pt-BR')
   if (raw === 'alta') return 'alta'
@@ -116,6 +136,8 @@ function normalizeVoiceResult(result: unknown): VoiceReading {
     },
     confidence,
     confidenceNote: text(root.confiancaNote ?? root.confidenceNote),
+    emotional: signals(root.emotional),
+    fields: signals(root.fields),
     voice: {
       gesture: text(voice.gesture) || 'indefinido',
       title: text(voice.title) || 'Voz ainda em formação',
