@@ -1,6 +1,8 @@
 import type { Editor, JSONContent } from '@tiptap/core'
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { countWords } from '../domain/document'
+import { publishProofKey, publishProofStructural } from '../proof/proofEventBridge'
 import { editorExtensions } from './editorExtensions'
 import { publishLiveEditorSnapshot } from './editorSnapshotBridge'
 import { publishLexicalSelection } from './lexicalSelectionBridge'
@@ -14,6 +16,12 @@ type EditorSnapshot = {
 
 type PositionContractHost = HTMLElement & {
   __escrevaralPositionContract?: EditorPositionContract
+}
+
+type PendingStructural = {
+  token: number
+  type: 'paste' | 'cut'
+  wordsBefore: number
 }
 
 export type ReviewNavigationRequest = {
@@ -45,6 +53,9 @@ function MassNotesEditorInstance({
   onChange,
   onPositionContract,
 }: Props) {
+  const pendingStructuralRef = useRef<PendingStructural | null>(null)
+  const structuralTokenRef = useRef(0)
+
   const currentSnapshot = (current: Editor): EditorSnapshot => ({
     content: current.getJSON(),
     plainText: current.getText({ blockSeparator: '\n\n' }),
@@ -78,6 +89,14 @@ function MassNotesEditorInstance({
     })
   }
 
+  const beginStructural = (type: PendingStructural['type'], plainText: string) => {
+    const token = ++structuralTokenRef.current
+    pendingStructuralRef.current = { token, type, wordsBefore: countWords(plainText) }
+    window.setTimeout(() => {
+      if (pendingStructuralRef.current?.token === token) pendingStructuralRef.current = null
+    }, 0)
+  }
+
   const editor = useEditor({
     extensions: editorExtensions,
     content,
@@ -89,6 +108,28 @@ function MassNotesEditorInstance({
         spellcheck: 'true',
         lang: 'pt-BR',
       },
+      handleDOMEvents: {
+        keydown: (_view, event) => {
+          if (event.isComposing) return false
+          const key = event.key.toLocaleLowerCase('pt-BR')
+          if (event.ctrlKey || event.metaKey) {
+            if (key === 'z') publishProofStructural(documentId, event.shiftKey ? 'redo' : 'undo')
+            else if (key === 'y') publishProofStructural(documentId, 'redo')
+            return false
+          }
+          if (event.altKey) return false
+          publishProofKey(documentId, event)
+          return false
+        },
+        paste: (view) => {
+          beginStructural('paste', view.state.doc.textBetween(0, view.state.doc.content.size, '\n\n', ' '))
+          return false
+        },
+        cut: (view) => {
+          beginStructural('cut', view.state.doc.textBetween(0, view.state.doc.content.size, '\n\n', ' '))
+          return false
+        },
+      },
     },
     onCreate: ({ editor: current }) => {
       publishSnapshot(current)
@@ -98,7 +139,13 @@ function MassNotesEditorInstance({
     onUpdate: ({ editor: current }) => {
       publishPositionContract(current)
       publishCurrentLexicalSelection(current)
-      onChange(publishSnapshot(current))
+      const snapshot = publishSnapshot(current)
+      const pending = pendingStructuralRef.current
+      if (pending) {
+        pendingStructuralRef.current = null
+        publishProofStructural(documentId, pending.type, countWords(snapshot.plainText) - pending.wordsBefore)
+      }
+      onChange(snapshot)
     },
     onSelectionUpdate: ({ editor: current }) => {
       publishCurrentLexicalSelection(current)
