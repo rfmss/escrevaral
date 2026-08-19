@@ -246,6 +246,9 @@ async function importLegacyDocuments(db: IDBPDatabase<EscrevaralDB>): Promise<vo
         createdAt,
         updatedAt,
         legacySourceId: sourceId || null,
+        type: typeof legacy.type === 'string' && legacy.type.trim() ? legacy.type.trim() : null,
+        kind: typeof legacy.kind === 'string' && legacy.kind.trim() ? legacy.kind.trim() : null,
+        templateId: typeof legacy.templateId === 'string' && legacy.templateId.trim() ? legacy.templateId.trim() : null,
       }),
     )
   }
