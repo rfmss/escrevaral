@@ -10,6 +10,7 @@ import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
 const LexicalPanel = lazy(() => import('./LexicalPanel').then((module) => ({ default: module.LexicalPanel })))
+const PrecisionPanel = lazy(() => import('./PrecisionPanel').then((module) => ({ default: module.PrecisionPanel })))
 
 const TABS = [
   { id: 'pulso', label: 'pulso' },
@@ -40,6 +41,7 @@ type Props = {
   onStatus: (status: DocumentStatus) => void
   onFavorite: (favorite: boolean) => void
   onTags: (tags: string[]) => void
+  onTemplateId: (templateId: string | null) => void
   onDuplicate: () => void
   onExport: (format: ExportFormat) => void
   onFocus: () => void
@@ -93,6 +95,7 @@ export function RightRail({
   onStatus,
   onFavorite,
   onTags,
+  onTemplateId,
   onDuplicate,
   onExport,
   onFocus,
@@ -357,6 +360,9 @@ export function RightRail({
 
         {tab === 'ferramentas' && (
           <section id="panel-ferramentas" role="tabpanel" aria-labelledby="tab-ferramentas" className="panel active">
+            <Suspense fallback={<p className="panel-intro" role="status">Preparando guia editorial…</p>}>
+              <PrecisionPanel document={document} onTemplateId={onTemplateId} />
+            </Suspense>
             <div className="section-label">Objeto editorial</div>
             <button className="action anatomy-action" type="button" onClick={openAnatomy}>Abrir Anatomia do Livro</button>
             <div className="section-label">Exportar documento</div>
