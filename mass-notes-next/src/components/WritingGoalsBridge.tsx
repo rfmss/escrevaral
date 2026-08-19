@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { readLatestLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import {
@@ -7,6 +7,7 @@ import {
   subscribeWritingGoal,
   writeWritingGoal,
 } from '../writing/writingGoal'
+import { celebrateWritingGoal } from '../writing/writingGoalCelebration'
 import { useModalDrawer } from './useModalDrawer'
 
 function countWords(value: string): number {
@@ -24,6 +25,12 @@ export function WritingGoalsBridge() {
   const [goal, setGoal] = useState(readWritingGoal)
   const [text, setText] = useState(() => readLatestLiveEditorSnapshot()?.plainText ?? '')
   const panelRef = useModalDrawer<HTMLElement>(open, () => setOpen(false))
+
+  const words = useMemo(() => countWords(text), [text])
+  const progress = Math.min(100, Math.round(words / goal * 100))
+  const remaining = Math.max(0, goal - words)
+  const reached = goal > 0 && words >= goal
+  const previousReached = useRef(reached)
 
   useEffect(() => subscribeLiveEditorSnapshot((snapshot) => setText(snapshot.plainText)), [])
   useEffect(() => subscribeWritingGoal(setGoal), [])
@@ -62,9 +69,12 @@ export function WritingGoalsBridge() {
     trigger?.setAttribute('aria-expanded', String(open))
   }, [open, trigger])
 
-  const words = useMemo(() => countWords(text), [text])
-  const progress = Math.min(100, Math.round(words / goal * 100))
-  const remaining = Math.max(0, goal - words)
+  useEffect(() => {
+    if (reached && !previousReached.current) {
+      celebrateWritingGoal(words, goal)
+    }
+    previousReached.current = reached
+  }, [goal, reached, words])
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -79,9 +89,10 @@ export function WritingGoalsBridge() {
       if (bar) bar.style.width = `${progress}%`
       if (percent) percent.textContent = `${progress}%`
       daily.dataset.writingGoal = String(goal)
+      daily.dataset.goalReached = String(reached)
     })
     return () => window.cancelAnimationFrame(frame)
-  }, [goal, progress, words])
+  }, [goal, progress, reached, words])
 
   const updateGoal = (value: string) => {
     setGoal(writeWritingGoal(value))
