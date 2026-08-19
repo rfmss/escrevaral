@@ -1,16 +1,18 @@
 import type { JSONContent } from '@tiptap/core'
 import { displayTitle, type EscrevaralDocument } from '../domain/document'
+import type { AdvancedExportFormat } from './advancedDocumentExport'
 
-export type ExportFormat = 'txt' | 'md' | 'html'
+export type BasicExportFormat = 'txt' | 'md' | 'html'
+export type ExportFormat = BasicExportFormat | AdvancedExportFormat
 
 export type DocumentExport = {
   format: ExportFormat
   filename: string
   mimeType: string
-  content: string
+  content: string | Uint8Array
 }
 
-const FORMAT_META: Record<ExportFormat, { extension: string; mimeType: string }> = {
+const FORMAT_META: Record<BasicExportFormat, { extension: string; mimeType: string }> = {
   txt: { extension: 'txt', mimeType: 'text/plain;charset=utf-8' },
   md: { extension: 'md', mimeType: 'text/markdown;charset=utf-8' },
   html: { extension: 'html', mimeType: 'text/html;charset=utf-8' },
@@ -66,7 +68,7 @@ function safeHref(value: unknown): string | null {
   }
 }
 
-function textWithMarks(node: JSONContent, format: ExportFormat): string {
+function textWithMarks(node: JSONContent, format: BasicExportFormat): string {
   const raw = node.text ?? ''
   const boundary = format === 'md' ? raw.match(/^(\s*)([\s\S]*?)(\s*)$/) : null
   const leading = boundary?.[1] ?? ''
@@ -112,7 +114,7 @@ function textWithMarks(node: JSONContent, format: ExportFormat): string {
   return `${leading}${rendered}${trailing}`
 }
 
-function renderInline(node: JSONContent, format: ExportFormat): string {
+function renderInline(node: JSONContent, format: BasicExportFormat): string {
   if (node.type === 'text') return textWithMarks(node, format)
   if (node.type === 'hardBreak') return format === 'html' ? '<br>' : '\n'
   return childNodes(node).map((child) => renderInline(child, format)).join('')
@@ -301,7 +303,7 @@ function createHtmlContent(document: EscrevaralDocument): string {
   ].join('\n')
 }
 
-export function createDocumentExport(document: EscrevaralDocument, format: ExportFormat): DocumentExport {
+export function createDocumentExport(document: EscrevaralDocument, format: BasicExportFormat): DocumentExport {
   const meta = FORMAT_META[format]
   const content = format === 'txt'
     ? createTextContent(document)
@@ -317,9 +319,17 @@ export function createDocumentExport(document: EscrevaralDocument, format: Expor
   }
 }
 
-export function downloadDocumentExport(document: EscrevaralDocument, format: ExportFormat): DocumentExport {
-  const exported = createDocumentExport(document, format)
-  const blob = new Blob([exported.content], { type: exported.mimeType })
+function blobPart(content: string | Uint8Array): BlobPart {
+  if (typeof content === 'string') return content
+  return new Uint8Array(content).buffer
+}
+
+export async function downloadDocumentExport(document: EscrevaralDocument, format: ExportFormat): Promise<DocumentExport> {
+  const exported: DocumentExport = format === 'docx' || format === 'epub' || format === 'obsidian'
+    ? await import('./advancedDocumentExport').then((module) => module.createAdvancedDocumentExport(document, format))
+    : createDocumentExport(document, format)
+
+  const blob = new Blob([blobPart(exported.content)], { type: exported.mimeType })
   const url = URL.createObjectURL(blob)
   const anchor = window.document.createElement('a')
   anchor.href = url
