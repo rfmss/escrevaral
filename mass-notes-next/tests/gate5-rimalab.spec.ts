@@ -135,7 +135,7 @@ test('buscador de rimas legado permanece disponível no painel atual', async ({ 
   await panel.getByLabel('Palavra para buscar rimas').fill('amor')
   await panel.getByRole('button', { name: 'Buscar no vocabulário' }).click()
 
-  await expect(panel.getByRole('status')).toContainText(/possibilidade|encontrada/i)
+  await expect(panel.getByText(/possibilidade|encontrada/i).last()).toBeVisible()
   await expect(panel.getByLabel('Resultados do buscador de rimas')).toContainText(/dor|flor/i)
   await expect(panel.getByLabel('Resultados do buscador de rimas')).toContainText(/substantivo/i)
 })
@@ -145,8 +145,10 @@ test('referência métrica da engine pode ser consultada sem sair do RimaLab', a
   const panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir referência' }).click()
 
-  await expect(panel.getByText('Regra de ouro da métrica', { exact: true })).toBeVisible()
-  await expect(panel.getByText(/última sílaba tônica/i).first()).toBeVisible()
+  const rule = panel.locator('details.rima-pattern').filter({ hasText: 'Regra de ouro da métrica' })
+  await expect(rule.locator('summary')).toBeVisible()
+  await rule.locator('summary').click()
+  await expect(rule.getByText(/última sílaba tônica/i)).toBeVisible()
 })
 
 test('bloco vazio preserva duas estrofes distintas', async ({ page }) => {
@@ -217,8 +219,7 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   await editor.click()
   await page.keyboard.type(' O editor segue funcionando.')
   await expect(editor).toContainText('O editor segue funcionando.')
-  panel = await openRimaLab(page)
-  const dialog = panel.locator('xpath=ancestor::*[@role="dialog"]')
+  const dialog = await ensureToolsOpen(page)
   await dialog.getByRole('tab', { name: 'revisao', exact: true }).click()
   await expect(dialog.getByRole('button', { name: /analisar em português brasileiro/i })).toBeVisible()
 })
