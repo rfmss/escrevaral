@@ -1,7 +1,7 @@
 import lexicalDataSource from '../../../lexical-data.json?raw'
 import normaDataSource from '../../../norma-data.json?raw'
 import lexicalSource from '../../../lexical-engine.js?raw'
-import synonymSource from '../../../js/data/synonym-data.js?raw'
+import { getCuratedSynonyms } from './curatedSynonymCorpus'
 import { resolveContextualLexicalReading } from './contextualLexicalResolver'
 import { readLexicalSynonymNuances, type LexicalSynonymNuance } from './lexicalNuanceSupplement'
 
@@ -41,8 +41,6 @@ declare global {
       hasLoadError: () => boolean
       analyze: (word: string, text?: string) => unknown
     }
-    getSynonyms?: (word: string) => unknown
-    SINONIMOS?: Record<string, string[]>
     __escrevaralLexicalLoaded?: boolean
   }
 }
@@ -178,7 +176,6 @@ async function loadEngineWithLocalData(): Promise<boolean> {
   }) as typeof window.fetch
 
   try {
-    executeClassicScript(synonymSource, 'synonym-data.js')
     executeClassicScript(lexicalSource, 'lexical-engine.js')
 
     const engine = window.VeredaLexical
@@ -218,15 +215,11 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
   const definition = text(source.definicao).trim()
   const count = countOccurrences(context, cleanWord)
   const registered = isRegisteredTerm(cleanWord)
-  const synonyms = strings(window.getSynonyms?.(cleanWord))
-    .filter((item, index, all) => normalizeForMatch(item) !== normalizeForMatch(cleanWord) && all.indexOf(item) === index)
-    .slice(0, 12)
+  const synonyms = getCuratedSynonyms(cleanWord)
   const synonymNuances = readLexicalSynonymNuances(cleanWord, synonyms)
   let decision = text(source.decisao) as LexicalDecision
   if (!['classificado', 'provavel', 'ambiguo', 'indeterminado'].includes(decision)) decision = 'indeterminado'
 
-  // Sem ocorrência e sem registro explícito, a resposta da engine é apenas um
-  // fallback morfológico. A interface não o apresenta como verbete existente.
   if (count === 0 && !registered) return null
 
   let className = text(source.className).trim() || 'Classe não determinada'
