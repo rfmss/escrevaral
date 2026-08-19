@@ -7,7 +7,16 @@ import {
   subscribeWritingGoal,
   writeWritingGoal,
 } from '../writing/writingGoal'
-import { celebrateWritingGoal } from '../writing/writingGoalCelebration'
+import { burstWritingConfetti, celebrateWritingGoal } from '../writing/writingGoalCelebration'
+import {
+  formatWritingSessionTime,
+  readWritingSessionRounds,
+  recordWritingSessionRound,
+  WRITING_SESSION_COMPLETED_EVENT,
+  WRITING_SESSION_MINUTES,
+  WRITING_SESSION_SECONDS,
+  writingSessionCompletionMessage,
+} from '../writing/writingPomodoro'
 import { useModalDrawer } from './useModalDrawer'
 
 function countWords(value: string): number {
@@ -24,7 +33,13 @@ export function WritingGoalsBridge() {
   const [trigger, setTrigger] = useState<HTMLButtonElement | null>(null)
   const [goal, setGoal] = useState(readWritingGoal)
   const [text, setText] = useState(() => readLatestLiveEditorSnapshot()?.plainText ?? '')
+  const [sessionSeconds, setSessionSeconds] = useState(WRITING_SESSION_SECONDS)
+  const [sessionActive, setSessionActive] = useState(false)
+  const [rounds, setRounds] = useState(readWritingSessionRounds)
+  const [sessionMessage, setSessionMessage] = useState('')
   const panelRef = useModalDrawer<HTMLElement>(open, () => setOpen(false))
+  const sessionDeadline = useRef<number | null>(null)
+  const sessionMessageTimer = useRef<number | null>(null)
 
   const words = useMemo(() => countWords(text), [text])
   const progress = Math.min(100, Math.round(words / goal * 100))
@@ -34,6 +49,9 @@ export function WritingGoalsBridge() {
 
   useEffect(() => subscribeLiveEditorSnapshot((snapshot) => setText(snapshot.plainText)), [])
   useEffect(() => subscribeWritingGoal(setGoal), [])
+  useEffect(() => () => {
+    if (sessionMessageTimer.current) window.clearTimeout(sessionMessageTimer.current)
+  }, [])
 
   useEffect(() => {
     const find = () => {
@@ -77,6 +95,38 @@ export function WritingGoalsBridge() {
   }, [goal, reached, words])
 
   useEffect(() => {
+    if (!sessionActive || sessionDeadline.current == null) return
+
+    const finishSession = () => {
+      sessionDeadline.current = null
+      setSessionActive(false)
+      setSessionSeconds(WRITING_SESSION_SECONDS)
+      const nextRounds = recordWritingSessionRound()
+      setRounds(nextRounds)
+      const message = writingSessionCompletionMessage(nextRounds.length)
+      setSessionMessage(message)
+      window.dispatchEvent(new CustomEvent(WRITING_SESSION_COMPLETED_EVENT, {
+        detail: { total: nextRounds.length, mins: WRITING_SESSION_MINUTES },
+      }))
+      burstWritingConfetti('session')
+      if (sessionMessageTimer.current) window.clearTimeout(sessionMessageTimer.current)
+      sessionMessageTimer.current = window.setTimeout(() => setSessionMessage(''), 4_000)
+    }
+
+    const tick = () => {
+      const deadline = sessionDeadline.current
+      if (deadline == null) return
+      const next = Math.max(0, Math.ceil((deadline - Date.now()) / 1000))
+      setSessionSeconds(next)
+      if (next <= 0) finishSession()
+    }
+
+    tick()
+    const timer = window.setInterval(tick, 250)
+    return () => window.clearInterval(timer)
+  }, [sessionActive])
+
+  useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       const daily = document.querySelector<HTMLElement>('.statusbar .daily')
       if (!daily) return
@@ -98,9 +148,29 @@ export function WritingGoalsBridge() {
     setGoal(writeWritingGoal(value))
   }
 
-  if (!open) return null
+  const startOrPauseSession = () => {
+    if (sessionActive) {
+      const deadline = sessionDeadline.current
+      if (deadline != null) setSessionSeconds(Math.max(0, Math.ceil((deadline - Date.now()) / 1000)))
+      sessionDeadline.current = null
+      setSessionActive(false)
+      return
+    }
 
-  return createPortal(
+    const seconds = sessionSeconds > 0 ? sessionSeconds : WRITING_SESSION_SECONDS
+    sessionDeadline.current = Date.now() + seconds * 1000
+    setSessionActive(true)
+    setSessionMessage('')
+  }
+
+  const resetSession = () => {
+    sessionDeadline.current = null
+    setSessionActive(false)
+    setSessionSeconds(WRITING_SESSION_SECONDS)
+    setSessionMessage('')
+  }
+
+  const layer = open ? (
     <div className="writing-goal-layer">
       <button className="writing-goal-overlay" type="button" aria-label="Fechar metas" onClick={() => setOpen(false)} />
       <section
@@ -155,12 +225,37 @@ export function WritingGoalsBridge() {
           />
         </label>
 
+        <section className="writing-session-timer" aria-labelledby="writing-session-title">
+          <div className="writing-session-copy">
+            <span id="writing-session-title">TEMPORIZADOR DE ESCRITA</span>
+            <small>{WRITING_SESSION_MINUTES} min · {rounds.length} {rounds.length === 1 ? 'rodada concluída' : 'rodadas concluídas'}</small>
+          </div>
+          <strong data-writing-session-display>{formatWritingSessionTime(sessionSeconds)}</strong>
+          <div className="writing-session-actions">
+            <button type="button" aria-pressed={sessionActive} onClick={startOrPauseSession}>
+              {sessionActive ? 'Pausar' : sessionSeconds === WRITING_SESSION_SECONDS ? 'Começar' : 'Continuar'}
+            </button>
+            <button type="button" onClick={resetSession} disabled={!sessionActive && sessionSeconds === WRITING_SESSION_SECONDS}>Reiniciar</button>
+          </div>
+        </section>
+
         <footer>
-          <span>A meta fica somente neste navegador.</span>
+          <span>Meta e rodadas ficam somente neste navegador.</span>
           <button type="button" onClick={() => setGoal(writeWritingGoal(DEFAULT_WRITING_GOAL))}>Restaurar 1.200</button>
         </footer>
       </section>
-    </div>,
+    </div>
+  ) : null
+
+  return createPortal(
+    <>
+      {layer}
+      {sessionMessage && (
+        <div className="pomodoro-done-toast is-visible" role="status" aria-live="polite">
+          {sessionMessage}
+        </div>
+      )}
+    </>,
     document.body,
   )
 }
