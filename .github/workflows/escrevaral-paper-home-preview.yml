@@ -110,6 +110,7 @@ jobs:
           tests/gate21-crase-calibration.spec.ts
           tests/gate22-shell-centering.spec.ts
           tests/gate23-goal-celebration.spec.ts
+          tests/gate24-local-save-feedback.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
