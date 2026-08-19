@@ -66,9 +66,11 @@ export function PrecisionPanel({ document, onTemplateId }: Props) {
       tokenRef.current += 1
       setReading(null)
       setBusy(false)
-      setMessage('O texto mudou. Avalie novamente para usar a versão atual.')
+      setMessage(templateId
+        ? 'O texto mudou. Avalie novamente para usar a versão atual.'
+        : 'Associe um guia editorial ao documento para avaliar sua aderência.')
     })
-  }, [document.id, templateId, words])
+  }, [document.id, templateId])
 
   const run = async () => {
     if (!templateId) return
