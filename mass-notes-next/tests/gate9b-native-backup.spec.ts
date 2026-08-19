@@ -71,7 +71,7 @@ test('cópia nativa exporta envelope versionado com toda a biblioteca', async ({
 
 test('restauração válida cria novas cópias sem substituir a biblioteca atual', async ({ page }) => {
   await waitReady(page)
-  const beforeCount = await page.locator('.note-card').count()
+  const beforeCount = await page.locator('.chapter').count()
   const currentTitle = await page.getByLabel('Título do documento').inputValue()
   await openBackup(page)
 
@@ -85,9 +85,9 @@ test('restauração válida cria novas cópias sem substituir a biblioteca atual
   })
 
   await expect(page.locator('.backup-message')).toContainText('2 documentos restaurados')
-  await expect(page.locator('.note-card')).toHaveCount(beforeCount + 2)
-  await expect(page.getByText('Documento A — restaurado', { exact: true })).toBeVisible()
-  await expect(page.getByText('Documento B — restaurado', { exact: true })).toBeVisible()
+  await expect(page.locator('.chapter')).toHaveCount(beforeCount + 2)
+  await expect(page.locator('.chapter').filter({ hasText: 'Documento A — restaurado' })).toBeVisible()
+  await expect(page.locator('.chapter').filter({ hasText: 'Documento B — restaurado' })).toBeVisible()
   await expect(page.getByLabel('Título do documento')).toHaveValue(currentTitle)
 })
 
@@ -100,8 +100,11 @@ test('documento restaurado preserva estrutura Tiptap e metadados editoriais', as
     buffer: Buffer.from(JSON.stringify(envelope([nativeDocument('origem-estrutura', 'Estrutura nativa')]))),
   })
 
-  await expect(page.getByText('Estrutura nativa — restaurado', { exact: true })).toBeVisible()
-  await page.getByText('Estrutura nativa — restaurado', { exact: true }).click()
+  await expect(page.locator('.backup-message')).toContainText('1 documento restaurado')
+  await page.getByRole('button', { name: 'Fechar ferramentas' }).click()
+  const restored = page.locator('.chapter').filter({ hasText: 'Estrutura nativa — restaurado' })
+  await expect(restored).toBeVisible()
+  await restored.click()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Estrutura nativa — restaurado')
   await expect(page.locator('.ProseMirror h2')).toHaveText('Capítulo restaurado')
   await expect(page.locator('.ProseMirror')).toContainText('emoji 🧵 e saudade')
@@ -110,7 +113,7 @@ test('documento restaurado preserva estrutura Tiptap e metadados editoriais', as
 
 test('arquivo inválido é rejeitado antes de qualquer gravação', async ({ page }) => {
   await waitReady(page)
-  const beforeCount = await page.locator('.note-card').count()
+  const beforeCount = await page.locator('.chapter').count()
   await openBackup(page)
 
   await page.getByLabel('Selecionar cópia nativa').setInputFiles({
@@ -120,12 +123,12 @@ test('arquivo inválido é rejeitado antes de qualquer gravação', async ({ pag
   })
 
   await expect(page.locator('.backup-message')).toContainText(/origem|data|documento/i)
-  await expect(page.locator('.note-card')).toHaveCount(beforeCount)
+  await expect(page.locator('.chapter')).toHaveCount(beforeCount)
 })
 
 test('versão futura e identificadores duplicados são recusados', async ({ page }) => {
   await waitReady(page)
-  const beforeCount = await page.locator('.note-card').count()
+  const beforeCount = await page.locator('.chapter').count()
   await openBackup(page)
 
   await page.getByLabel('Selecionar cópia nativa').setInputFiles({
@@ -144,7 +147,7 @@ test('versão futura e identificadores duplicados são recusados', async ({ page
     ]))),
   })
   await expect(page.locator('.backup-message')).toContainText('Identificador duplicado')
-  await expect(page.locator('.note-card')).toHaveCount(beforeCount)
+  await expect(page.locator('.chapter')).toHaveCount(beforeCount)
 })
 
 test('painel de backup permanece utilizável no drawer móvel', async ({ page }) => {
