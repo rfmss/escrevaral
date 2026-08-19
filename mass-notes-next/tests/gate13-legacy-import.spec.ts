@@ -7,6 +7,7 @@ type LegacyManuscript = {
   type?: string
   status?: string
   kind?: string
+  templateId?: string
   tags?: string[] | string
   pinned?: boolean
   createdAt?: string
@@ -100,7 +101,7 @@ test('arquivo legado válido é pré-visualizado antes de qualquer gravação', 
   await expect(page.getByText('Caderno antigo — importado', { exact: true })).toBeVisible()
 })
 
-test('conversão preserva texto e mapeia estado, tags, favorito e origem', async ({ page }) => {
+test('conversão preserva texto, contexto editorial, estado, tags, favorito e origem', async ({ page }) => {
   await waitReady(page)
   await openImport(page)
   await uploadLegacy(page, legacyEnvelope([{
@@ -108,6 +109,8 @@ test('conversão preserva texto e mapeia estado, tags, favorito e origem', async
     title: 'Texto em revisão',
     text: 'Linha com memória.\n\nOutra linha com emoji 🪶.',
     type: 'crônica',
+    kind: 'texto-literário',
+    templateId: 'cronica-literaria',
     status: 'Em revisão',
     tags: ['Memória', 'memória', 'crônica'],
     pinned: true,
@@ -126,6 +129,9 @@ test('conversão preserva texto e mapeia estado, tags, favorito e origem', async
   const rows = await readDocumentByLegacyId(page, 'origem-rastreavel')
   expect(rows).toHaveLength(1)
   expect(rows[0].title).toBe('Texto em revisão — importado')
+  expect(rows[0].type).toBe('crônica')
+  expect(rows[0].kind).toBe('texto-literário')
+  expect(rows[0].templateId).toBe('cronica-literaria')
 })
 
 test('cancelar a prévia não altera a biblioteca', async ({ page }) => {
