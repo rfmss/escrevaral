@@ -210,6 +210,22 @@ export function LexicalPanel({ document }: Props) {
             </section>
           )}
 
+          {reading && reading.synonymNuances.length > 0 && (
+            <section className="lexical-alternatives lexical-nuances" aria-labelledby="lexical-nuances-title">
+              <h3 id="lexical-nuances-title">Matizes entre alternativas</h3>
+              <ul>
+                {reading.synonymNuances.map((item) => (
+                  <li key={item.candidate}>
+                    <strong>{item.candidate}</strong>
+                    {item.register && <> · {item.register}</>}
+                    <span> — {item.focus}</span>
+                    <p>{item.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {verbAnalysis && <VerbAnalysisCard analysis={verbAnalysis} />}
 
           {reading && (
