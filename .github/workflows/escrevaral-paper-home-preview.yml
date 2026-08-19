@@ -34,6 +34,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
+      - name: Registrar execução em andamento
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/escrevaral-ci-status
+          mkdir /tmp/escrevaral-ci-status
+          cd /tmp/escrevaral-ci-status
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf 'source_sha=%s\nrun_id=%s\nrun_attempt=%s\nstate=started\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > status.txt
+          git add status.txt
+          git commit -m "status paper-home: ${GITHUB_SHA}"
+          git branch -M status-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/status-escrevaral-paper-home
+
       - name: Python para preparar a Anatomia
         uses: actions/setup-python@v5
         with:
