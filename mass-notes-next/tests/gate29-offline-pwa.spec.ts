@@ -13,6 +13,8 @@ test('Gate 29: shell offline e manifesto ficam locais e versionados', async ({ r
   expect(source).toContain("const CACHE_PREFIX = 'escrevaral-paper-home-offline-'")
   expect(source).toContain("request.mode === 'navigate'")
   expect(source).toContain("type === 'SKIP_WAITING'")
+  expect(source).toContain('./assets/LexicalPanel.js')
+  expect(source).not.toContain('__ESCREVARAL_')
 
   const manifest = await request.get('/manifest.webmanifest')
   expect(manifest.ok()).toBe(true)
