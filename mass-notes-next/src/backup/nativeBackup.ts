@@ -3,6 +3,7 @@ import { createDocument, type DocumentStatus, type EscrevaralDocument } from '..
 
 export const NATIVE_BACKUP_SCHEMA = 'escrevaral.mass-notes-next.backup'
 export const NATIVE_BACKUP_VERSION = 1
+export const NATIVE_BACKUP_LAST_EXPORT_KEY = 'escrevaral-mass-notes-next-last-backup-v1'
 
 export type NativeBackupEnvelope = {
   schema: typeof NATIVE_BACKUP_SCHEMA
@@ -113,11 +114,25 @@ export function nativeBackupFilename(date = new Date()): string {
   return `escrevaral-copia-${stamp}.esc.json`
 }
 
+export function readNativeBackupExportedAt(): number | null {
+  try {
+    const value = Number(window.localStorage.getItem(NATIVE_BACKUP_LAST_EXPORT_KEY))
+    return Number.isFinite(value) && value > 0 ? value : null
+  } catch {
+    return null
+  }
+}
+
+export function markNativeBackupExported(exportedAt = Date.now()): void {
+  try { window.localStorage.setItem(NATIVE_BACKUP_LAST_EXPORT_KEY, String(exportedAt)) } catch { /* O download continua válido sem a preferência. */ }
+}
+
 export function downloadNativeBackup(documents: EscrevaralDocument[]): void {
   const blob = new Blob([serializeNativeBackup(documents)], { type: 'application/json;charset=utf-8' })
   const anchor = window.document.createElement('a')
   anchor.href = URL.createObjectURL(blob)
   anchor.download = nativeBackupFilename()
   anchor.click()
+  markNativeBackupExported()
   window.setTimeout(() => URL.revokeObjectURL(anchor.href), 1_000)
 }
