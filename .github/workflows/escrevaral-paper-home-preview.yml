@@ -20,7 +20,7 @@ permissions:
 
 concurrency:
   group: escrevaral-paper-home-preview
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   preview:
