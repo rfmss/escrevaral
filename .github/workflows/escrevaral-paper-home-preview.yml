@@ -112,6 +112,7 @@ jobs:
           tests/gate23-goal-celebration.spec.ts
           tests/gate24-local-save-feedback.spec.ts
           tests/gate25-advanced-export.spec.ts
+          tests/gate26-pomodoro.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
