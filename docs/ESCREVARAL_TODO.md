@@ -25,9 +25,12 @@
 - [x] Precision: guia/template persistente, separada da Revisão.
 - [x] Proof/Autoria: cadência + sessões + hash em armazenamento isolado.
 - [x] Oficina: entrada desktop real para o rail completo.
-- [ ] Exportação avançada comprovada na `main`: DOCX.
-- [ ] Exportação avançada comprovada na `main`: EPUB 3 offline.
-- [ ] Exportação avançada comprovada na `main`: Obsidian/vault — confirmar contrato exato antes do transplante.
+- [x] Exportação do documento ativo: DOCX offline, via motor legado carregado lazy.
+- [x] Exportação do documento ativo: EPUB 3 offline, via motor legado carregado lazy.
+- [x] Exportação do documento ativo: Markdown preparado para Obsidian.
+- [ ] Validar Gate 25 de exportação avançada no mesmo head publicado.
+- [ ] Exportação RTF da `main`: depende do contrato de página/escopo e deve ser transplantada em bloco próprio.
+- [ ] Exportação de acervo como vault Obsidian `.zip`: depende de seleção/escopo da biblioteca e deve ser transplantada em bloco próprio.
 - [ ] Validar a tranche funcional inteira no workflow atual antes de declará-la verde.
 
 ## Paridade fina / microcomportamentos
@@ -65,6 +68,7 @@
 
 - [x] Sete abas da Oficina em uma única faixa, sem linha órfã.
 - [x] Corrigir assimetria do shell (`12px` à esquerda / `20px` à direita).
+- [x] Exportação com seis formatos: altura limitada ao viewport e scroll interno, inclusive mobile.
 - [ ] Conferir centralização real após publicação do head atual.
 - [ ] Revisar largura útil do manuscrito em 1366 e 1440 px.
 - [ ] Revisar excesso de largura/espaço vazio em 1920 px.
