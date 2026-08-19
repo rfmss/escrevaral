@@ -1,7 +1,7 @@
 import decolonialDataSource from '../../../decolonial-data.json?raw'
 import decolonialSource from '../../../decolonial-engine.js?raw'
 
-export type ContextTerm = {
+export type ContextEntry = {
   id: string
   term: string
   category: string
@@ -9,8 +9,17 @@ export type ContextTerm = {
   reason: string
   context: string
   alternatives: string[]
-  count: number
   contextual: boolean
+}
+
+export type ContextTerm = ContextEntry & {
+  count: number
+}
+
+export type ContextCategory = {
+  id: string
+  label: string
+  count: number
 }
 
 type LegacyEntry = Record<string, unknown>
@@ -44,7 +53,7 @@ function number(value: unknown): number {
   return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 0
 }
 
-function normalizeEntry(value: unknown, index: number): ContextTerm {
+function normalizeBaseEntry(value: unknown, index: number): ContextEntry {
   const source = value && typeof value === 'object' ? value as LegacyEntry : {}
   const term = text(source.avoid ?? source.term).trim()
   const category = text(source.category).trim() || 'contexto'
@@ -57,9 +66,23 @@ function normalizeEntry(value: unknown, index: number): ContextTerm {
     reason: text(source.reason).trim(),
     context: text(source.context).trim(),
     alternatives: strings(source.alternatives),
-    count: number(source.count),
     contextual: Boolean(source.contextual),
   }
+}
+
+function normalizeTerm(value: unknown, index: number): ContextTerm {
+  return {
+    ...normalizeBaseEntry(value, index),
+    count: number(value && typeof value === 'object' ? (value as LegacyEntry).count : 0),
+  }
+}
+
+function normalizeCategory(value: unknown, index: number): ContextCategory | null {
+  const source = value && typeof value === 'object' ? value as LegacyEntry : {}
+  const id = text(source.id).trim()
+  const label = text(source.label).trim()
+  if (!id || !label) return null
+  return { id, label, count: number(source.count) }
 }
 
 function requestUrl(input: RequestInfo | URL): string {
@@ -129,7 +152,29 @@ export async function detectContextTerms(sourceText: string): Promise<ContextTer
   if (!Array.isArray(result)) return []
 
   return result
-    .map(normalizeEntry)
+    .map(normalizeTerm)
     .filter((entry) => entry.term && entry.count > 0)
     .sort((a, b) => b.count - a.count || a.term.localeCompare(b.term, 'pt-BR'))
+}
+
+export async function listContextCategories(): Promise<ContextCategory[]> {
+  if (!(await ensureDecolonialEngine()) || !window.VeredaDecolonial) {
+    throw new Error('As categorias contextuais não estão disponíveis.')
+  }
+
+  const result = window.VeredaDecolonial.listCategories()
+  if (!Array.isArray(result)) return []
+  return result
+    .map(normalizeCategory)
+    .filter((entry): entry is ContextCategory => entry !== null)
+}
+
+export async function searchContextEntries(query = '', category = 'all'): Promise<ContextEntry[]> {
+  if (!(await ensureDecolonialEngine()) || !window.VeredaDecolonial) {
+    throw new Error('O vocabulário contextual não está disponível.')
+  }
+
+  const result = window.VeredaDecolonial.listEntries({ query, category })
+  if (!Array.isArray(result)) return []
+  return result.map(normalizeBaseEntry)
 }
