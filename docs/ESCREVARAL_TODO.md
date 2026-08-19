@@ -42,7 +42,8 @@
 - [ ] Validar Gates 23–24 no mesmo head publicado.
 - [x] Pomodoro real da `main`: 25 min, iniciar/pausar/resetar, histórico local compatível, toast e celebração ao concluir.
 - [ ] Validar Gate 26 do temporizador no mesmo head publicado.
-- [ ] Modo Leitor real da `main`: leitura limpa + rolagem automática + controle de velocidade.
+- [x] Modo Leitor real da `main`: slot `MODO` reativado, leitura limpa, estrutura Tiptap, autoscroll, 4 ritmos, 4 tamanhos, régua, Escape/foco e aviso para página vazia.
+- [ ] Validar Gate 27 do Leitor no mesmo head publicado.
 - [ ] Auditar player de sons ambiente da `main` e restaurar apenas se o domínio continuar válido no produto novo.
 - [ ] Auditar chip/feedback compacto da Prova de Autoria na topbar e marcos de escrita.
 - [ ] Auditar UX offline/PWA: atualização disponível, recuperação e nudges de cópia de segurança sem duplicar `BackupPanel`.
@@ -92,7 +93,6 @@
 - Histórico recuperável de versões.
 - Distribuição narrativa.
 - Controles tipográficos estruturais.
-- Seletor de modo sem contrato real.
 - Seletor de idioma sem contrato real.
 - Integrações de rede opcionais para Prova de Autoria.
 
