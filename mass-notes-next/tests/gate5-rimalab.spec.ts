@@ -38,12 +38,21 @@ async function pasteStructuredText(page: Page, html: string, plain: string) {
 
   const finalVisibleLine = plain.split('\n').filter(Boolean).at(-1) ?? plain
   await expect(editor).toContainText(finalVisibleLine)
-  // O autosave pode atravessar Alterado/Salvando antes da asserção no Firefox.
-  // O contrato relevante é a convergência final para Salvo.
   await settleDocument(page)
 }
 
+async function ensureToolsOpen(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (await dialog.isVisible().catch(() => false)) return
+  await page.keyboard.press('Escape')
+  const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  await expect(launcher).toBeVisible()
+  await launcher.click()
+  await expect(dialog).toBeVisible()
+}
+
 async function openRimaLab(page: Page) {
+  await ensureToolsOpen(page)
   await page.getByRole('tab', { name: 'rimalab', exact: true }).click()
   await expect(page.getByRole('tab', { name: 'rimalab', exact: true })).toHaveAttribute('aria-selected', 'true')
   return page.locator('.rimalab-panel')
@@ -181,9 +190,6 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Falha sonora')
   await editor.fill('O amor encontrou a dor e guardou uma flor.')
-  // Este cenário mede isolamento depois de uma exceção simulada, não análise
-  // concorrente com uma atualização ainda em trânsito. Estabilizamos a fonte
-  // antes da primeira leitura para não misturar os dois contratos.
   await settleDocument(page)
   const panel = await openRimaLab(page)
   await panel.getByRole('button', { name: 'Abrir oficina sonora' }).click()
@@ -200,6 +206,7 @@ test('falha controlada do RimaLab não quebra editor nem outras ferramentas', as
   await editor.click()
   await page.keyboard.type(' O editor segue funcionando.')
   await expect(editor).toContainText('O editor segue funcionando.')
+  await ensureToolsOpen(page)
   await page.getByRole('tab', { name: 'revisao', exact: true }).click()
   await expect(page.getByRole('button', { name: /analisar em português brasileiro/i })).toBeVisible()
 })
