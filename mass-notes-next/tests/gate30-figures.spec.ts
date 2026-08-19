@@ -1,3 +1,4 @@
+// Gate de estabilização: este arquivo participa da banca consolidada da branch.
 import { expect, test, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
