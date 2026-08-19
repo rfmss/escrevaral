@@ -58,6 +58,26 @@ test('Gate 30: som e enumeração são lidos como recursos, não como erro', asy
   await expect(figures).toContainText(/textura sonora|acelerar o texto/i)
 })
 
+test('Gate 30: copula acentuada preserva o paralelismo sintático', async ({ page }) => {
+  await waitReady(page)
+  await writeText(page, 'A casa é silêncio antigo. A rua é ruído constante.')
+  const figures = await openFigures(page)
+
+  await figures.getByRole('button', { name: 'Mapear figuras de linguagem' }).click()
+
+  await expect(figures).toContainText('Paralelismo sintático')
+})
+
+test('Gate 30: nomes parecidos com radicais verbais não viram personificação', async ({ page }) => {
+  await waitReady(page)
+  await writeText(page, 'O rio pedra a paisagem num desenho falso. A cidade fica ao fundo, sem ação humana atribuída a ela.')
+  const figures = await openFigures(page)
+
+  await figures.getByRole('button', { name: 'Mapear figuras de linguagem' }).click()
+
+  await expect(figures.getByText('Personificação possível', { exact: true })).toHaveCount(0)
+})
+
 test('Gate 30: leitura semântica incerta permanece explicitamente limitada', async ({ page }) => {
   await waitReady(page)
   await writeText(page, 'A tarde ficou quieta na varanda. Uma cadeira vazia permaneceu ao lado da mesa.')
