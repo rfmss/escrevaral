@@ -7,6 +7,7 @@ async function waitReady(page: Page) {
 }
 
 async function openBackup(page: Page) {
+  await page.getByRole('button', { name: 'Abrir oficina de ferramentas' }).click()
   await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
   await expect(page.locator('.backup-panel')).toBeVisible()
 }
