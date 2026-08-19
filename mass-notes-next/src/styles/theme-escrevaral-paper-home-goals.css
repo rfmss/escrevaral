@@ -19,6 +19,9 @@
   top: 112px;
   right: 292px;
   width: min(390px, calc(100vw - 48px));
+  max-height: calc(100vh - 136px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 22px 24px 18px;
   color: var(--ink);
   background:
@@ -121,7 +124,8 @@
   border-bottom: 1px solid var(--line);
 }
 
-.writing-goal-input > span {
+.writing-goal-input > span,
+.writing-session-copy > span {
   font-family: Oswald, Arial Narrow, sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -146,6 +150,63 @@
   box-shadow: 0 0 0 2px rgba(8,127,195,.16);
 }
 
+.writing-session-timer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px 18px;
+  align-items: center;
+  padding: 18px 0 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-session-copy {
+  min-width: 0;
+}
+
+.writing-session-copy span,
+.writing-session-copy small {
+  display: block;
+}
+
+.writing-session-copy small {
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.writing-session-timer > strong {
+  color: var(--blue);
+  font: 600 34px/1 Oswald, Arial Narrow, sans-serif;
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.writing-session-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.writing-session-actions button {
+  min-height: 36px;
+  border: 1px solid rgba(17,18,15,.55);
+  background: transparent;
+  font: 600 11px Oswald, Arial Narrow, sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.writing-session-actions button:first-child {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.writing-session-actions button:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
 .writing-goal-panel footer {
   display: flex;
   align-items: center;
@@ -167,7 +228,30 @@
   text-transform: uppercase;
 }
 
-body.night .writing-goal-panel {
+.pomodoro-done-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 78px;
+  z-index: 10030;
+  width: min(460px, calc(100vw - 32px));
+  transform: translateX(-50%) translateY(8px);
+  padding: 12px 14px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  box-shadow: 4px 4px 0 rgba(17,18,15,.14);
+  opacity: 0;
+  font: 600 12px/1.35 Literata, Georgia, serif;
+  text-align: center;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.pomodoro-done-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+body.night .writing-goal-panel,
+body.night .pomodoro-done-toast {
   color: #ece7da;
   background: #202628;
   border-color: rgba(236,231,218,.55);
@@ -183,6 +267,21 @@ body.night .writing-goal-input input {
   .writing-goal-panel { right: 24px; }
 }
 
+@media (max-width: 1099px) {
+  .writing-goal-panel {
+    top: 16px;
+    right: 12px;
+    width: min(390px, calc(100vw - 24px));
+    max-height: calc(100vh - 32px);
+  }
+
+  .pomodoro-done-toast {
+    bottom: 20px;
+    width: min(460px, calc(100vw - 24px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .writing-goal-meter i { transition: none; }
+  .writing-goal-meter i,
+  .pomodoro-done-toast { transition: none; }
 }
