@@ -1,3 +1,8 @@
+import {
+  calibrateStructuralPunctuation,
+  type StructuralSyntaxEngine,
+} from './punctuationStructuralSupplement'
+
 export type ReviewIssue = {
   id: string
   title: string
@@ -31,10 +36,10 @@ declare global {
       analyzeDeep?: (text: string) => Promise<{
         issues: unknown[]
         ruleCount?: number
-        resumo?: string
+        resumo?: unknown
       }>
     }
-    syntaxEngine?: {
+    syntaxEngine?: StructuralSyntaxEngine & {
       init: () => Promise<boolean>
       _isReady?: () => boolean
     }
@@ -183,23 +188,28 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
 
   const result = window.VeredaAnalise.analisar(text)
 
-  // Análise profunda de pontuação (restaura funcionalidade perdida)
+  // Análise profunda de pontuação + calibração estrutural pt-BR.
   try {
     const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
     if (deepResult?.issues) {
-      // Substitui pontuação inteira (simplificado e mais eficiente)
+      const calibratedIssues = calibrateStructuralPunctuation(
+        text,
+        deepResult.issues,
+        window.syntaxEngine,
+      )
+
       const resultObj = result as Record<string, unknown>
       const normaObj = resultObj?.norma as Record<string, unknown> | undefined
       if (normaObj) {
         normaObj.pontuacao = {
-          issues: deepResult.issues,
-          ruleCount: deepResult.ruleCount,
+          issues: calibratedIssues,
+          ruleCount: typeof deepResult.ruleCount === 'number' ? deepResult.ruleCount + 2 : undefined,
           resumo: deepResult.resumo,
         }
       }
     }
   } catch (error) {
-    // Degradção graciosa: mantém análise básica sem syntax
+    // Degradação graciosa: mantém análise básica sem syntax.
     console.error('[Escrevaral] Erro na análise sintática profunda. Usando análise básica.', error)
   }
 
