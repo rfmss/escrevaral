@@ -53,6 +53,7 @@ import './styles/theme-escrevaral-paper-home-voice.css'
 import './styles/theme-escrevaral-paper-home-lexical.css'
 import './styles/theme-escrevaral-paper-home-library.css'
 import './styles/theme-escrevaral-paper-home-integrity.css'
+import './styles/theme-escrevaral-shell-centering.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
