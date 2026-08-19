@@ -19,6 +19,14 @@ async function createCleanDocument(page: Page, title: string) {
 }
 
 async function openVoice(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (!await dialog.isVisible().catch(() => false)) {
+    await page.keyboard.press('Escape')
+    const launcher = page.getByRole('button', { name: 'Escutar voz' })
+    await expect(launcher).toBeVisible()
+    await launcher.click()
+    await expect(dialog).toBeVisible()
+  }
   await page.getByRole('tab', { name: 'voz', exact: true }).click()
   await expect(page.getByRole('tab', { name: 'voz', exact: true })).toHaveAttribute('aria-selected', 'true')
 }
