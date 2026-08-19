@@ -129,6 +129,7 @@ jobs:
           tests/gate27-reader-mode.spec.ts
           tests/gate28-proof-status.spec.ts
           tests/gate29-offline-pwa.spec.ts
+          tests/gate30-figures.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
