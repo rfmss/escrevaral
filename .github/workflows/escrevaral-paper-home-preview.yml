@@ -109,6 +109,7 @@ jobs:
           tests/gate20-lexical-provenance.spec.ts
           tests/gate21-crase-calibration.spec.ts
           tests/gate22-shell-centering.spec.ts
+          tests/gate23-goal-celebration.spec.ts
 
       - name: Anexar prova visual à preview
         run: |
