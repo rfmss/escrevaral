@@ -9,6 +9,9 @@ const FORMATS: Array<{ format: ExportFormat; label: string; detail: string }> = 
   { format: 'txt', label: 'Texto', detail: '.txt · leitura simples e portátil' },
   { format: 'md', label: 'Markdown', detail: '.md · estrutura preservada para outros editores' },
   { format: 'html', label: 'Página', detail: '.html · documento autônomo para abrir ou imprimir' },
+  { format: 'docx', label: 'Word', detail: '.docx · Word e LibreOffice, gerado localmente' },
+  { format: 'epub', label: 'ePub · KDP', detail: '.epub · EPUB 3 para leitores e fluxo KDP' },
+  { format: 'obsidian', label: 'Obsidian', detail: '.md · metadados prontos para um cofre local' },
 ]
 
 function findExportTrigger(): HTMLButtonElement | null {
@@ -75,9 +78,13 @@ export function WritingExportBridge() {
 
       const persisted = await getDocument(live.documentId)
       if (!persisted) throw new Error('documento indisponível')
+      if (!live.plainText.trim() && (format === 'docx' || format === 'epub' || format === 'obsidian')) {
+        setMessage('Escreva algum conteúdo antes de gerar este formato.')
+        return
+      }
 
       const liveTitle = document.querySelector<HTMLInputElement>('.reference-document-title')?.value
-      const exported = downloadDocumentExport({
+      const exported = await downloadDocumentExport({
         ...persisted,
         title: liveTitle ?? persisted.title,
         content: live.content,
