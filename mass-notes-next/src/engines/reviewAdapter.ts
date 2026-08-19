@@ -1,4 +1,5 @@
 import { analyzeTextCohesion } from './cohesionSupplement'
+import { analyzeCraseCalibration } from './craseSupplement'
 import { analyzeNormativeVerbCalibration } from './normativeVerbSupplement'
 import {
   calibrateStructuralPunctuation,
@@ -261,6 +262,7 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
     interpretedIssues(interpreted),
     [
       ...analyzeNormativeVerbCalibration(text),
+      ...analyzeCraseCalibration(text),
       ...cohesionObservation(text),
     ],
   )
