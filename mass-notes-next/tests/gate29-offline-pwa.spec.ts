@@ -25,6 +25,35 @@ test('Gate 29: shell offline e manifesto ficam locais e versionados', async ({ r
   expect(payload.display).toBe('standalone')
 })
 
+test('Gate 29: service worker instala o bundle offline completo', async ({ page }) => {
+  await waitReady(page)
+
+  const result = await page.evaluate(async () => {
+    const prefix = 'escrevaral-paper-home-offline-'
+    const registration = await navigator.serviceWorker.register('./service-worker.js')
+    await navigator.serviceWorker.ready
+
+    const cacheNames = await caches.keys()
+    const cacheName = cacheNames.find((name) => name.startsWith(prefix)) ?? null
+    const cache = cacheName ? await caches.open(cacheName) : null
+    const shell = cache ? await cache.match('./index.html') : null
+    const lazyTool = cache ? await cache.match('./assets/LexicalPanel.js') : null
+
+    await registration.unregister()
+    await Promise.all(cacheNames.filter((name) => name.startsWith(prefix)).map((name) => caches.delete(name)))
+
+    return {
+      cacheName,
+      shell: Boolean(shell),
+      lazyTool: Boolean(lazyTool),
+    }
+  })
+
+  expect(result.cacheName).toMatch(/^escrevaral-paper-home-offline-/)
+  expect(result.shell).toBe(true)
+  expect(result.lazyTool).toBe(true)
+})
+
 test('Gate 29: lembrete de cópia abre o BackupPanel existente sem duplicar UI', async ({ page }) => {
   await page.addInitScript(() => {
     sessionStorage.setItem('escrevaral-offline-page-mark-v1', 'pagina-anterior')
