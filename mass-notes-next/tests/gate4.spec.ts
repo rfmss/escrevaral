@@ -40,7 +40,7 @@ test('página vazia não recebe falso alerta contextual', async ({ page }) => {
   await expect(page.locator('.context-card')).toHaveCount(0)
 })
 
-test('termos são contados e apresentados sem alterar o manuscrito', async ({ page }, testInfo) => {
+test('termos são contados, exportáveis e apresentados sem alterar o manuscrito', async ({ page }, testInfo) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Leitura de contexto')
   const source = 'Ele tentou denegrir a colega e repetiu que iria denegrir seu trabalho. Depois citou uma lista negra em um documento antigo.'
@@ -49,7 +49,7 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
   await openContext(page)
   await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
 
-  await expect(page.getByRole('status')).toContainText(/2 termos pedem/i)
+  await expect(page.getByRole('status').first()).toContainText(/2 termos pedem/i)
   await expect(page.locator('.context-card')).toHaveCount(2)
 
   const denegrir = page.locator('.context-card').filter({ hasText: 'denegrir' })
@@ -57,13 +57,17 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
   await expect(denegrir).toContainText('Por que observar')
   await expect(denegrir).toContainText('Alternativas possíveis')
   await expect(denegrir).toContainText('difamar')
+  await expect(denegrir.getByRole('button', { name: 'Copiar alternativa difamar' })).toBeVisible()
 
   const listaNegra = page.locator('.context-card').filter({ hasText: 'lista negra' })
   await expect(listaNegra).toContainText('1 ocorrência')
   await expect(page.locator('.context-disclaimer')).toContainText(/decisão final é de quem escreve/i)
   await expect(page.locator('.context-disclaimer')).toContainText(/nenhuma alternativa é aplicada automaticamente/i)
   await expect(editor).toContainText(source)
-  await expect(page.locator('.context-card button')).toHaveCount(0)
+
+  const download = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Baixar TXT' }).click()
+  await expect((await download).suggestedFilename()).toMatch(/leitura-de-contexto-contexto\.txt/i)
 
   const headingsFit = await page.locator('.context-card h2').evaluateAll((headings) => headings.every((heading) => {
     const style = getComputedStyle(heading)
@@ -72,6 +76,45 @@ test('termos são contados e apresentados sem alterar o manuscrito', async ({ pa
   expect(headingsFit).toBe(true)
 
   await page.screenshot({ path: `test-results/termos-contexto-${testInfo.project.name}.png`, fullPage: true })
+})
+
+test('alternativa contextual só é copiada por ação explícita', async ({ page }) => {
+  await waitReady(page)
+  const editor = await createCleanDocument(page, 'Cópia explícita')
+  await editor.fill('O texto tentou denegrir a pessoa citada.')
+  await waitSaved(page)
+  await openContext(page)
+  await page.getByRole('button', { name: 'Examinar termos no texto' }).click()
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async (value: string) => {
+          ;(window as typeof window & { __contextCopied?: string }).__contextCopied = value
+        },
+      },
+    })
+  })
+
+  await page.getByRole('button', { name: 'Copiar alternativa difamar' }).click()
+  await expect.poll(() => page.evaluate(() => (window as typeof window & { __contextCopied?: string }).__contextCopied ?? '')).toBe('difamar')
+  await expect(editor).toContainText('denegrir')
+})
+
+test('vocabulário completo continua consultável por busca e categoria', async ({ page }) => {
+  await waitReady(page)
+  await openContext(page)
+  await page.getByRole('button', { name: 'Abrir vocabulário' }).click()
+  await expect(page.getByLabel('Buscar no vocabulário contextual')).toBeVisible()
+  await expect(page.getByLabel('Filtrar categoria contextual')).toBeVisible()
+
+  await page.getByLabel('Buscar no vocabulário contextual').fill('denegrir')
+  await page.getByRole('button', { name: 'Buscar no vocabulário' }).click()
+
+  const glossary = page.getByLabel('Entradas do vocabulário contextual')
+  await expect(glossary).toContainText('denegrir')
+  await expect(glossary).toContainText('difamar')
 })
 
 test('texto sem ocorrências recebe retorno neutro', async ({ page }) => {
@@ -101,6 +144,7 @@ test('resultado contextual é invalidado quando o conteúdo muda', async ({ page
 
   await expect(page.locator('.context-card')).toHaveCount(0)
   await expect(page.getByRole('status')).toContainText(/texto mudou/i)
+  await expect(page.getByRole('button', { name: 'Baixar TXT' })).toHaveCount(0)
 })
 
 test('falha controlada da engine não quebra o editor', async ({ page }) => {
