@@ -19,8 +19,19 @@ async function createCleanDocument(page: Page, title: string) {
   return editor
 }
 
-async function openProof(page: Page) {
+async function ensureToolsOpen(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (await dialog.isVisible().catch(() => false)) return
+
   await page.keyboard.press('Escape')
+  const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  await expect(launcher).toBeVisible()
+  await launcher.click()
+  await expect(dialog).toBeVisible()
+}
+
+async function openProof(page: Page) {
+  await ensureToolsOpen(page)
   const tab = page.getByRole('tab', { name: 'ferramentas', exact: true })
   await tab.click()
   await expect(tab).toHaveAttribute('aria-selected', 'true')
@@ -143,7 +154,7 @@ test('nova sessão preserva histórico e zera somente a sessão ativa', async ({
 
   await panel.getByRole('button', { name: 'Nova sessão' }).click()
   await expect(panel.getByRole('status')).toContainText(/nova sessão de autoria iniciada/i)
-  await expect(panel.locator('.proof-summary')).toContainText('2')
+  await expect(panel.locator('.proof-summary > div').nth(3).locator('strong')).toHaveText('2')
   await expect(panel.locator('.proof-history')).toContainText(/Sessões anteriores \(1\)/i)
   await expect(panel.getByRole('button', { name: 'Baixar .prova.esc' })).toBeDisabled()
 })
