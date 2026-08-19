@@ -3,6 +3,7 @@ import { averageSentenceLength, countWords, type DocumentStatus, type Escrevaral
 import type { LocatedReviewIssue, ReviewIssue } from '../engines/reviewAdapter'
 import { analyzeVoice, type VoiceReading, type VoiceSignal } from '../engines/voiceAdapter'
 import type { ExportFormat } from '../export/documentExport'
+import { BackupPanel } from './BackupPanel'
 import { ContextPanel } from './ContextPanel'
 import { DocumentMetadataEditor } from './DocumentMetadataEditor'
 import { ExportPanel } from './ExportPanel'
@@ -371,6 +372,8 @@ export function RightRail({
             <button className="action anatomy-action" type="button" onClick={openAnatomy}>Abrir Anatomia do Livro</button>
             <div className="section-label">Exportar documento</div>
             <ExportPanel document={document} onExport={onExport} />
+            <div className="section-label">Cópia de segurança</div>
+            <BackupPanel document={document} />
             <div className="section-label">Arquivo e ambiente</div>
             <button className="action" type="button" onClick={onDuplicate}>Duplicar página</button>
             <button className="action" type="button" onClick={onFocus}>Modo concentração</button>
