@@ -6,7 +6,22 @@ async function waitReady(page: Page) {
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
+async function ensureToolsOpen(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (await dialog.isVisible().catch(() => false)) return
+
+  let launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  if (!await launcher.isVisible().catch(() => false)) {
+    await page.keyboard.press('Escape')
+    launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  }
+  await expect(launcher).toBeVisible()
+  await launcher.click()
+  await expect(dialog).toBeVisible()
+}
+
 async function openTools(page: Page) {
+  await ensureToolsOpen(page)
   const tab = page.getByRole('tab', { name: 'ferramentas', exact: true })
   await tab.click()
   await expect(tab).toHaveAttribute('aria-selected', 'true')
