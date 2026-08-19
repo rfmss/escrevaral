@@ -1,3 +1,4 @@
+import { analyzeNormativeVerbCalibration } from './normativeVerbSupplement'
 import {
   calibrateStructuralPunctuation,
   type StructuralSyntaxEngine,
@@ -180,6 +181,20 @@ function normalizeLocatedIssue(item: unknown, text: string, index: number): Loca
   }
 }
 
+function mergeGeneralIssues(base: ReviewIssue[], calibrated: ReviewIssue[]): ReviewIssue[] {
+  const seen = new Set(base.map((item) => `${item.title}\u0000${item.detail}`))
+  const merged = [...base]
+
+  for (const item of calibrated) {
+    const key = `${item.title}\u0000${item.detail}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    merged.push(item)
+  }
+
+  return merged
+}
+
 export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   if (!text.trim()) return { issues: [], locatedIssues: [] }
   if (!(await ensureReviewEngine()) || !window.VeredaAnalise) {
@@ -217,9 +232,13 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   const locatedIssues = punctuationItems(result)
     .map((item, index) => normalizeLocatedIssue(item, text, index))
     .filter((item): item is LocatedReviewIssue => Boolean(item))
+  const issues = mergeGeneralIssues(
+    interpretedIssues(interpreted),
+    analyzeNormativeVerbCalibration(text),
+  )
 
   return {
-    issues: interpretedIssues(interpreted),
+    issues,
     locatedIssues,
   }
 }
