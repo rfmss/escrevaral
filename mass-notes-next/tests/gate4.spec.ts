@@ -25,7 +25,18 @@ async function createCleanDocument(page: Page, title: string) {
   return editor
 }
 
+async function ensureToolsOpen(page: Page) {
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (await dialog.isVisible().catch(() => false)) return
+  await page.keyboard.press('Escape')
+  const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  await expect(launcher).toBeVisible()
+  await launcher.click()
+  await expect(dialog).toBeVisible()
+}
+
 async function openContext(page: Page) {
+  await ensureToolsOpen(page)
   await page.getByRole('tab', { name: 'contexto', exact: true }).click()
   await expect(page.getByRole('tab', { name: 'contexto', exact: true })).toHaveAttribute('aria-selected', 'true')
 }
