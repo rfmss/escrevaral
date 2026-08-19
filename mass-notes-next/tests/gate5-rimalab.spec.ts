@@ -86,7 +86,7 @@ test('prosa sem padrão recebe retorno neutro', async ({ page }) => {
   await expect(panel.getByRole('status')).toContainText(/não apresentou um padrão sonoro recorrente/i)
 })
 
-test('poema rimado apresenta esquema, escansão, pares e ressalva', async ({ page }, testInfo) => {
+test('poema rimado apresenta esquema, escansão, pares, som e classe gramatical', async ({ page }, testInfo) => {
   await waitReady(page)
   const editor = await createCleanDocument(page, 'Quadra sonora')
   const html = '<p>No quintal eu vi a flor</p><p>e guardei comigo a dor</p><p>quando a tarde virou mar</p><p>eu voltei para cantar</p>'
@@ -100,12 +100,36 @@ test('poema rimado apresenta esquema, escansão, pares e ressalva', async ({ pag
   await expect(panel.locator('.rima-scan')).toHaveCount(4)
   await expect(panel.locator('.rima-scheme')).toBeVisible()
   await expect(panel.locator('.rima-pairs')).toContainText(/flor \/ dor|mar \/ cantar/i)
+  await expect(panel.locator('.rima-pairs small').first()).toContainText(/\/.+\/.*\/.+\//)
+  await expect(panel.locator('.rima-pairs small').first()).toContainText(/substantivo/i)
   await expect(panel.locator('.rima-disclaimer')).toContainText(/aproximação pedagógica/i)
+  await expect(panel.getByRole('button', { name: 'Copiar análise' })).toBeVisible()
+  await expect(panel.getByRole('button', { name: 'Baixar TXT' })).toBeVisible()
   await expect(editor).toContainText('No quintal eu vi a flor')
   await expect(editor).toContainText('eu voltei para cantar')
   await expect(panel.locator('.rima-reading button')).toHaveCount(0)
   await expect(page.locator('.note-card.active')).toContainText('Quadra sonora')
   await page.screenshot({ path: `test-results/rimalab-${testInfo.project.name}.png`, fullPage: true })
+})
+
+test('buscador de rimas legado permanece disponível no painel atual', async ({ page }) => {
+  await waitReady(page)
+  const panel = await openRimaLab(page)
+  await panel.getByLabel('Palavra para buscar rimas').fill('amor')
+  await panel.getByRole('button', { name: 'Buscar no vocabulário' }).click()
+
+  await expect(panel.getByRole('status')).toContainText(/possibilidade|encontrada/i)
+  await expect(panel.getByLabel('Resultados do buscador de rimas')).toContainText(/dor|flor/i)
+  await expect(panel.getByLabel('Resultados do buscador de rimas')).toContainText(/substantivo/i)
+})
+
+test('referência métrica da engine pode ser consultada sem sair do RimaLab', async ({ page }) => {
+  await waitReady(page)
+  const panel = await openRimaLab(page)
+  await panel.getByRole('button', { name: 'Abrir referência' }).click()
+
+  await expect(panel.getByText('Regra de ouro da métrica', { exact: true })).toBeVisible()
+  await expect(panel.getByText(/última sílaba tônica/i).first()).toBeVisible()
 })
 
 test('bloco vazio preserva duas estrofes distintas', async ({ page }) => {
@@ -150,6 +174,7 @@ test('resultado sonoro é invalidado quando o conteúdo muda', async ({ page }) 
 
   await expect(panel.locator('.rima-reading')).toHaveCount(0)
   await expect(panel.getByRole('status')).toContainText(/texto mudou/i)
+  await expect(panel.getByRole('button', { name: 'Copiar análise' })).toHaveCount(0)
 })
 
 test('falha controlada do RimaLab não quebra editor nem outras ferramentas', async ({ page }) => {
