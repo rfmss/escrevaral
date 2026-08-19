@@ -11,6 +11,7 @@ import { RimaLabPanel } from './RimaLabPanel'
 import { useModalDrawer } from './useModalDrawer'
 
 const AuthorshipProofPanel = lazy(() => import('./AuthorshipProofPanel').then((module) => ({ default: module.AuthorshipProofPanel })))
+const FiguresPanel = lazy(() => import('./FiguresPanel').then((module) => ({ default: module.FiguresPanel })))
 const LexicalPanel = lazy(() => import('./LexicalPanel').then((module) => ({ default: module.LexicalPanel })))
 const PrecisionPanel = lazy(() => import('./PrecisionPanel').then((module) => ({ default: module.PrecisionPanel })))
 
@@ -345,6 +346,11 @@ export function RightRail({
                 <p className="voice-disclaimer">{voiceReading.disclaimer}</p>
               </div>
             )}
+
+            <div className="section-label">Figuras de linguagem</div>
+            <Suspense fallback={<p className="panel-intro">Preparando mapa retórico local…</p>}>
+              <FiguresPanel document={document} />
+            </Suspense>
           </section>
         )}
 
