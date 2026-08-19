@@ -8,6 +8,7 @@ import { WritingGoalsBridge } from './components/WritingGoalsBridge'
 import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
 import { WritingLexicalBridge } from './components/WritingLexicalBridge'
 import { WritingLocalFeedbackBridge } from './components/WritingLocalFeedbackBridge'
+import { WritingProofStatusBridge } from './components/WritingProofStatusBridge'
 import { WritingReaderBridge } from './components/WritingReaderBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
 import { WritingRestChrome } from './components/WritingRestChrome'
@@ -58,6 +59,7 @@ import './styles/theme-escrevaral-paper-home-integrity.css'
 import './styles/theme-escrevaral-shell-centering.css'
 import './styles/theme-escrevaral-paper-home-local-feedback.css'
 import './styles/theme-escrevaral-paper-home-reader.css'
+import './styles/theme-escrevaral-paper-home-proof-status.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
@@ -104,6 +106,7 @@ createRoot(document.getElementById('root')!).render(
     <WritingDashboardBridge />
     <WritingGoalsBridge />
     <WritingLocalFeedbackBridge />
+    <WritingProofStatusBridge />
     <WritingReaderBridge />
     <WritingExportBridge />
     <WritingConfigBridge />
