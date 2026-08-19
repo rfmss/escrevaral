@@ -7,7 +7,7 @@ async function waitReady(page: Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
-test('estrutura canônica reproduz a prancha sem prometer domínios inexistentes', async ({ page }) => {
+test('estrutura canônica reproduz a casa sem prometer domínios inexistentes', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
@@ -16,14 +16,16 @@ test('estrutura canônica reproduz a prancha sem prometer domínios inexistentes
   await expect(page.locator('.brand-tagline')).toHaveText('ESCRITA COM INTENÇÃO')
   await expect(page.locator('.document-title .eyebrow')).toHaveText('DOCUMENTO')
   await expect(page.locator('.mode .eyebrow')).toHaveText('MODO')
-  await expect(page.locator('.mode')).toContainText('Escrita')
-  await expect(page.locator('.mode button')).toBeDisabled()
+  const mode = page.getByRole('button', { name: 'Abrir modo Leitura' })
+  await expect(mode).toBeEnabled()
+  await expect(mode).toHaveText('Escrita')
+  await expect(mode).toHaveAttribute('aria-controls', 'writing-reader-overlay')
   await expect(page.locator('.search input[aria-label="Buscar documentos"]')).toBeVisible()
 
   const actions = page.locator('.main-actions > button')
   await expect(actions).toHaveCount(5)
   await expect(actions.nth(0)).toContainText('Metas')
-  await expect(actions.nth(1)).toContainText('Notas')
+  await expect(actions.nth(1)).toContainText('Oficina')
   await expect(actions.nth(2)).toContainText('Pesquisa')
   await expect(actions.nth(3)).toContainText('Exportar')
   await expect(actions.nth(4)).toContainText('Config.')
@@ -41,7 +43,7 @@ test('estrutura canônica reproduz a prancha sem prometer domínios inexistentes
   await expect(page.locator('.analysis-panel')).toContainText('TAGS')
   await expect(page.locator('.analysis-panel')).toContainText('ESTADO LOCAL')
 
-  await expect(page.locator('.statusbar')).toContainText('SINCRONIZADO')
+  await expect(page.locator('.statusbar')).toContainText('SALVO LOCALMENTE')
   await expect(page.locator('.statusbar')).toContainText('META DIÁRIA')
   await expect(page.locator('.statusbar')).toContainText('FOCO')
   await expect(page.locator('.statusbar .focus strong')).toHaveText('Pronto')
@@ -120,7 +122,7 @@ test('favicon invertido e wordmark não recebem branding legado', async ({ page 
   await expect(page.locator('.topbar .brand-name')).toHaveCount(1)
 })
 
-test('geometria desktop segue exatamente a folha de referência', async ({ page }) => {
+test('geometria desktop mantém a folha centralizada e os três planos alinhados', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 })
   await waitReady(page)
 
@@ -140,10 +142,11 @@ test('geometria desktop segue exatamente a folha de referência', async ({ page 
     }
   })
 
-  expect(geometry.shell.left).toBeCloseTo(12, 0)
+  expect(geometry.shell.left).toBeCloseTo(16, 0)
   expect(geometry.shell.top).toBeCloseTo(10, 0)
-  expect(geometry.shell.right).toBeCloseTo(1346, 0)
+  expect(geometry.shell.right).toBeCloseTo(1350, 0)
   expect(geometry.shell.bottom).toBeCloseTo(758, 0)
+  expect(geometry.shell.left).toBeCloseTo(1366 - geometry.shell.right, 0)
   expect(geometry.topbar.height).toBeCloseTo(92, 0)
   expect(geometry.left.width).toBeCloseTo(250, 0)
   expect(geometry.right.width).toBeCloseTo(250, 0)
