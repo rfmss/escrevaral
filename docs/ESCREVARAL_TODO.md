@@ -47,7 +47,9 @@
 - [ ] Validar Gate 27 do Leitor no mesmo head publicado.
 - [x] Auditar player de sons ambiente da `main`: função real confirmada, mas as quatro faixas usam CDN remoto do Pixabay.
 - [ ] Sons ambiente: só transplantar depois de obter arquivos locais com licença/proveniência; não usar URLs remotas na casa offline.
-- [ ] Auditar chip/feedback compacto da Prova de Autoria na topbar e marcos de escrita.
+- [x] Prova de Autoria: restaurar feedback transitório “Sinais de autoria guardados aqui” no primeiro evento.
+- [x] Prova de Autoria: restaurar indicador compacto de integridade após 50 palavras, usando o `ProofSummary.integrity` real no bloco ESTADO LOCAL.
+- [ ] Validar Gate 28 do indicador compacto de autoria no mesmo head publicado.
 - [ ] Auditar UX offline/PWA: atualização disponível, recuperação e nudges de cópia de segurança sem duplicar `BackupPanel`.
 - [ ] Auditar atalhos e feedbacks transitórios da `main` que tenham função real, não decoração.
 
