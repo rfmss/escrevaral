@@ -21,7 +21,7 @@ async function openReview(page: Page) {
   await research.click()
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
   await expect(dialog).toBeVisible()
-  const tab = page.getByRole('tab', { name: 'revisao', exact: true })
+  const tab = dialog.getByRole('tab', { name: 'revisao', exact: true })
   await expect(tab).toHaveAttribute('aria-selected', 'true')
   return dialog
 }
@@ -72,7 +72,7 @@ test('parágrafos permanecem estruturais e o undo do Tiptap continua reversível
   await expect(editor.locator('p').nth(1)).toHaveText('Segundo parágrafo')
 
   await page.keyboard.press('Control+z')
-  await expect(editor.locator('p').nth(1)).not.toContainText('Segundo parágrafo')
+  await expect(editor).not.toContainText('Segundo parágrafo')
 })
 
 test('duas abas não sobrescrevem silenciosamente o mesmo documento', async ({ context, page }) => {
