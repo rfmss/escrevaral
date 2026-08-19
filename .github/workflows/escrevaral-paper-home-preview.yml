@@ -98,6 +98,7 @@ jobs:
           tests/gate3-voice.spec.ts
           tests/gate4.spec.ts
           tests/gate5-rimalab.spec.ts
+          tests/gate9b-native-backup.spec.ts
           tests/gate10-lexical.spec.ts
           tests/gate13-legacy-import.spec.ts
           tests/gate14-precision.spec.ts
