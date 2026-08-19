@@ -3,6 +3,7 @@ import normaDataSource from '../../../norma-data.json?raw'
 import lexicalSource from '../../../lexical-engine.js?raw'
 import synonymSource from '../../../js/data/synonym-data.js?raw'
 import { resolveContextualLexicalReading } from './contextualLexicalResolver'
+import { readLexicalSynonymNuances, type LexicalSynonymNuance } from './lexicalNuanceSupplement'
 
 export type LexicalDecision = 'classificado' | 'provavel' | 'ambiguo' | 'indeterminado'
 
@@ -25,6 +26,7 @@ export type LexicalReading = {
   count: number
   alternatives: string[]
   synonyms: string[]
+  synonymNuances: LexicalSynonymNuance[]
   contextSnippet: LexicalContextSnippet | null
 }
 
@@ -219,6 +221,7 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
   const synonyms = strings(window.getSynonyms?.(cleanWord))
     .filter((item, index, all) => normalizeForMatch(item) !== normalizeForMatch(cleanWord) && all.indexOf(item) === index)
     .slice(0, 12)
+  const synonymNuances = readLexicalSynonymNuances(cleanWord, synonyms)
   let decision = text(source.decisao) as LexicalDecision
   if (!['classificado', 'provavel', 'ambiguo', 'indeterminado'].includes(decision)) decision = 'indeterminado'
 
@@ -264,6 +267,7 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
     count,
     alternatives,
     synonyms,
+    synonymNuances,
     contextSnippet: count > 0 ? createContextSnippet(context, cleanWord) : null,
   }
 }
