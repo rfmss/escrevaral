@@ -21,6 +21,7 @@ async function createCleanDocument(page: Page, title: string) {
 async function ensureToolsOpen(page: Page) {
   const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
   if (await dialog.isVisible().catch(() => false)) return dialog
+  if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
   const launcher = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
   await expect(launcher).toBeVisible()
   await launcher.click()
