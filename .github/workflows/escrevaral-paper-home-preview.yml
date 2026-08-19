@@ -58,7 +58,9 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Compilar a casa real
-        run: npm run build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/escrevaral-build.log
 
       - name: Medir bundle inicial T2
         run: |
@@ -93,43 +95,77 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Validar referência, transplante e contratos do editor
-        run: >-
-          npx playwright test --project=chromium
-          tests/reference-home.spec.ts
-          tests/reference-integrity.spec.ts
-          tests/reference-source-integrity.spec.ts
-          tests/reference-editorial.spec.ts
-          tests/reference-voice.spec.ts
-          tests/reference-library.spec.ts
-          tests/reference-library-query.spec.ts
-          tests/reference-offline-fonts.spec.ts
-          tests/reference-lazy-review.spec.ts
-          tests/reference-actions.spec.ts
-          tests/foundation.spec.ts
-          tests/gate2.spec.ts
-          tests/gate3-voice.spec.ts
-          tests/gate4.spec.ts
-          tests/gate5-rimalab.spec.ts
-          tests/gate9b-native-backup.spec.ts
-          tests/gate10-lexical.spec.ts
-          tests/gate13-legacy-import.spec.ts
-          tests/gate14-precision.spec.ts
-          tests/gate15-proof.spec.ts
-          tests/gate16-linguistic-calibration.spec.ts
-          tests/gate17-verb-calibration.spec.ts
-          tests/gate18-lexical-nuance.spec.ts
-          tests/gate19-cohesion-calibration.spec.ts
-          tests/gate20-lexical-provenance.spec.ts
-          tests/gate21-crase-calibration.spec.ts
-          tests/gate22-shell-centering.spec.ts
-          tests/gate23-goal-celebration.spec.ts
-          tests/gate24-local-save-feedback.spec.ts
-          tests/gate25-advanced-export.spec.ts
-          tests/gate26-pomodoro.spec.ts
-          tests/gate27-reader-mode.spec.ts
-          tests/gate28-proof-status.spec.ts
-          tests/gate29-offline-pwa.spec.ts
-          tests/gate30-figures.spec.ts
+        run: |
+          set -o pipefail
+          npx playwright test --project=chromium \
+            tests/reference-home.spec.ts \
+            tests/reference-integrity.spec.ts \
+            tests/reference-source-integrity.spec.ts \
+            tests/reference-editorial.spec.ts \
+            tests/reference-voice.spec.ts \
+            tests/reference-library.spec.ts \
+            tests/reference-library-query.spec.ts \
+            tests/reference-offline-fonts.spec.ts \
+            tests/reference-lazy-review.spec.ts \
+            tests/reference-actions.spec.ts \
+            tests/foundation.spec.ts \
+            tests/gate2.spec.ts \
+            tests/gate3-voice.spec.ts \
+            tests/gate4.spec.ts \
+            tests/gate5-rimalab.spec.ts \
+            tests/gate9b-native-backup.spec.ts \
+            tests/gate10-lexical.spec.ts \
+            tests/gate13-legacy-import.spec.ts \
+            tests/gate14-precision.spec.ts \
+            tests/gate15-proof.spec.ts \
+            tests/gate16-linguistic-calibration.spec.ts \
+            tests/gate17-verb-calibration.spec.ts \
+            tests/gate18-lexical-nuance.spec.ts \
+            tests/gate19-cohesion-calibration.spec.ts \
+            tests/gate20-lexical-provenance.spec.ts \
+            tests/gate21-crase-calibration.spec.ts \
+            tests/gate22-shell-centering.spec.ts \
+            tests/gate23-goal-celebration.spec.ts \
+            tests/gate24-local-save-feedback.spec.ts \
+            tests/gate25-advanced-export.spec.ts \
+            tests/gate26-pomodoro.spec.ts \
+            tests/gate27-reader-mode.spec.ts \
+            tests/gate28-proof-status.spec.ts \
+            tests/gate29-offline-pwa.spec.ts \
+            tests/gate30-figures.spec.ts \
+            2>&1 | tee /tmp/escrevaral-playwright.log
+
+      - name: Persistir diagnóstico automático em falha
+        if: ${{ failure() }}
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          report=/tmp/escrevaral-ci-failure.txt
+          {
+            echo "source_sha=${GITHUB_SHA}"
+            echo "run_id=${GITHUB_RUN_ID}"
+            echo "run_attempt=${GITHUB_RUN_ATTEMPT}"
+            echo
+            echo "===== BUILD ====="
+            if test -f /tmp/escrevaral-build.log; then tail -n 240 /tmp/escrevaral-build.log; else echo "build log unavailable"; fi
+            echo
+            echo "===== PLAYWRIGHT ====="
+            if test -f /tmp/escrevaral-playwright.log; then tail -n 400 /tmp/escrevaral-playwright.log; else echo "playwright log unavailable"; fi
+          } > "$report"
+          rm -rf /tmp/escrevaral-ci-diagnostic
+          mkdir /tmp/escrevaral-ci-diagnostic
+          cd /tmp/escrevaral-ci-diagnostic
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp "$report" failure.txt
+          git add failure.txt
+          git commit -m "diagnostic paper-home: ${GITHUB_SHA}"
+          git branch -M diagnostic-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/diagnostics-escrevaral-paper-home
 
       - name: Anexar prova visual à preview
         run: |
