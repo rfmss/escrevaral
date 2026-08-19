@@ -113,6 +113,44 @@ test('a engine real de revisão continua acessível quando a oficina é convocad
   await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma|página está vazia/i, { timeout: 15_000 })
 })
 
+test('revisão profunda inicializa syntax e projeta achado sintático no painel', async ({ page }) => {
+  await waitReady(page)
+  const editor = page.locator('.ProseMirror')
+  await editor.click()
+  await page.keyboard.press('Control+A')
+  await page.keyboard.type('Os autores chegaram cedo e abriram a oficina enquanto todos aguardavam uma leitura cuidadosa do texto brasileiro.')
+  await openWorkshop(page)
+  await page.getByRole('tab', { name: 'revisao', exact: true }).click()
+
+  const analyze = page.getByRole('button', { name: 'Analisar em português brasileiro' })
+  await analyze.click()
+  await expect(page.getByRole('status')).toHaveText(/observa|Nenhuma/i, { timeout: 15_000 })
+
+  const syntaxReady = await page.evaluate(() => Boolean((window as typeof window & {
+    syntaxEngine?: { _isReady?: () => boolean }
+  }).syntaxEngine?._isReady?.()))
+  expect(syntaxReady).toBe(true)
+
+  await page.evaluate(() => {
+    const target = window as typeof window & {
+      syntaxEngine?: {
+        analisarPeriodo?: (text: string) => unknown
+      }
+    }
+    if (!target.syntaxEngine) throw new Error('syntaxEngine ausente')
+    target.syntaxEngine.analisarPeriodo = () => ({
+      resumo: {
+        alertas: [{ descricao: 'Concordância sintática de integração.' }],
+        apostos: [],
+      },
+    })
+  })
+
+  await analyze.click()
+  await expect(page.locator('.review-located-card').filter({ hasText: 'PONT-SYNT-01' })).toBeVisible({ timeout: 15_000 })
+  await expect(page.locator('.review-located-card').filter({ hasText: 'Concordância sintática de integração.' })).toBeVisible()
+})
+
 test('mobile não cria overflow e mantém drawers fecháveis', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
