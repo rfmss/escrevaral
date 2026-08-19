@@ -20,7 +20,7 @@ async function openWords(page: Page) {
   await revealWords(page)
 }
 
-test('busca lexical local apresenta definição e evita classe falsa sem contexto', async ({ page }) => {
+test('busca lexical local apresenta definição, sinônimos e evita classe falsa sem contexto', async ({ page }) => {
   await openWords(page)
   const input = page.getByLabel('Palavra ou expressão curta')
   await input.fill('melancolia')
@@ -31,9 +31,12 @@ test('busca lexical local apresenta definição e evita classe falsa sem context
   await expect(reading).toContainText(/tristeza difusa/i)
   await expect(reading).toContainText('Classe não determinada sem contexto')
   await expect(reading).toContainText('Ocorrências')
+  await expect(page.getByRole('heading', { name: 'Sinônimos para consulta' })).toBeVisible()
+  await expect(page.locator('.lexical-synonyms')).toContainText(/tristeza suave|nostalgia/i)
+  await expect(page.locator('.lexical-synonyms button')).toHaveCount(0)
 })
 
-test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera o manuscrito', async ({ page }) => {
+test('seleção do Tiptap preserva contexto destacado e não altera o manuscrito', async ({ page }) => {
   await page.goto('/')
   const editor = page.getByLabel('Texto do documento')
   await expect(editor).toBeEditable()
@@ -68,6 +71,9 @@ test('seleção do Tiptap permanece disponível ao abrir Palavras e não altera 
 
   await expect(page.getByLabel('Palavra ou expressão curta')).toHaveValue(/melancolia/i)
   await expect(page.locator('.lexical-reading')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'No trecho' })).toBeVisible()
+  await expect(page.locator('.lexical-context')).toContainText(manuscript)
+  await expect(page.locator('.lexical-context mark')).toHaveText(/melancolia/i)
   await expect(editor).toHaveText(before)
 })
 
