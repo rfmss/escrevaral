@@ -34,7 +34,7 @@
 .proof-capture-toast {
   position: fixed;
   left: 50%;
-  bottom: 78px;
+  bottom: 128px;
   z-index: 10035;
   width: min(420px, calc(100vw - 32px));
   transform: translateX(-50%);
@@ -54,7 +54,7 @@ body.night .proof-capture-toast {
 
 @media (max-width: 1099px) {
   .proof-capture-toast {
-    bottom: 20px;
+    bottom: 72px;
     width: min(420px, calc(100vw - 24px));
   }
 }
