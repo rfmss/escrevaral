@@ -1,0 +1,141 @@
+type RawIssue = Record<string, unknown>
+
+type SyntaxTerm = {
+  text?: string
+  funcao?: string | null
+}
+
+type SyntaxPeriod = {
+  termos?: SyntaxTerm[]
+}
+
+export type StructuralSyntaxEngine = {
+  analisarPeriodo?: (text: string) => SyntaxPeriod
+}
+
+type LocatedTerm = SyntaxTerm & {
+  start: number
+  end: number
+}
+
+function locateTerms(sentence: string, terms: SyntaxTerm[]): LocatedTerm[] {
+  let cursor = 0
+  const located: LocatedTerm[] = []
+
+  for (const term of terms) {
+    const token = String(term.text ?? '')
+    if (!token) continue
+    const start = sentence.indexOf(token, cursor)
+    if (start < 0) continue
+    const end = start + token.length
+    located.push({ ...term, start, end })
+    cursor = end
+  }
+
+  return located
+}
+
+function isSubject(term: LocatedTerm | undefined): boolean {
+  return Boolean(term?.funcao?.includes('Sujeito'))
+}
+
+function isPredicateVerb(term: LocatedTerm | undefined): boolean {
+  const funcao = term?.funcao ?? ''
+  return funcao === 'Núcleo do predicado' || funcao === 'Verbo de ligação'
+}
+
+function isIntegratedComplement(term: LocatedTerm | undefined): boolean {
+  const funcao = term?.funcao ?? ''
+  return funcao.startsWith('Objeto ') || funcao.startsWith('Predicativo ')
+}
+
+function punctuationIssue(
+  ruleId: 'PONT-SYNT-03' | 'PONT-SYNT-04',
+  sentence: string,
+  sentenceOffset: number,
+  left: LocatedTerm,
+  right: LocatedTerm,
+): RawIssue {
+  const from = sentenceOffset + left.start
+  const fragment = sentence.slice(left.start, right.end)
+  const subjectVerb = ruleId === 'PONT-SYNT-03'
+
+  return {
+    ruleId,
+    categoria: subjectVerb
+      ? 'vírgula proibida — sujeito/verbo'
+      : 'vírgula proibida — verbo/complemento',
+    fonte: 'calibração pt-BR C1 — sintaxe estrutural',
+    criterio: subjectVerb
+      ? 'Não se usa vírgula para separar diretamente o sujeito do verbo.'
+      : 'Não se usa vírgula para separar diretamente o verbo de complemento ou predicativo integrado.',
+    exemplo: subjectVerb
+      ? 'A pesquisadora publicou o relatório.'
+      : 'A pesquisadora publicou o relatório.',
+    acao: subjectVerb
+      ? 'Remova a vírgula entre o sujeito e o verbo.'
+      : 'Remova a vírgula entre o verbo e o complemento ou predicativo.',
+    fragment,
+    pos: from,
+    severity: 'alta',
+    calibrationClass: 'norma_consolidada',
+  }
+}
+
+function sentenceSlices(text: string): Array<{ sentence: string; offset: number }> {
+  const slices: Array<{ sentence: string; offset: number }> = []
+  let cursor = 0
+
+  for (const sentence of text.split(/[.!?]+\s+/).filter(Boolean)) {
+    const offset = text.indexOf(sentence, cursor)
+    if (offset < 0) continue
+    slices.push({ sentence, offset })
+    cursor = offset + sentence.length
+  }
+
+  return slices
+}
+
+export function calibrateStructuralPunctuation(
+  text: string,
+  currentIssues: unknown[],
+  syntaxEngine?: StructuralSyntaxEngine,
+): unknown[] {
+  if (!syntaxEngine?.analisarPeriodo) return currentIssues
+
+  const issues: unknown[] = [...currentIssues]
+  const rawIssues = currentIssues.filter((item): item is RawIssue => Boolean(item && typeof item === 'object'))
+
+  for (const { sentence, offset } of sentenceSlices(text)) {
+    let period: SyntaxPeriod
+    try {
+      period = syntaxEngine.analisarPeriodo(sentence)
+    } catch {
+      continue
+    }
+
+    const terms = locateTerms(sentence, period.termos ?? [])
+    for (let index = 1; index < terms.length - 1; index += 1) {
+      const comma = terms[index]
+      if (comma.text !== ',') continue
+
+      const left = terms[index - 1]
+      const right = terms[index + 1]
+
+      if (isSubject(left) && isPredicateVerb(right)) {
+        const legacyAlreadyFound = rawIssues.some((issue) => {
+          const issuePos = Number(issue.pos)
+          return issue.ruleId === 'PONT-01' && Number.isInteger(issuePos) && issuePos >= offset && issuePos < offset + sentence.length
+        })
+        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, left, right))
+        continue
+      }
+
+      if (isPredicateVerb(left) && isIntegratedComplement(right)) {
+        issues.push(punctuationIssue('PONT-SYNT-04', sentence, offset, left, right))
+      }
+    }
+  }
+
+  return issues
+}
