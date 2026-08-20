@@ -3,8 +3,8 @@
 > Fonte de verdade operacional da branch `feat/escrevaral-paper-home`.
 > Atualizar ao fechar ou abrir cada bloco. Não apagar histórico útil; mover itens concluídos para a seção correspondente.
 >
-> **Checkpoint técnico verde:** `ac18cc3015219e2beba4d763d5d227554427fa44` — workflow `32325175646` — 127/127, build, offline/PWA, preview e smoke público verdes no mesmo SHA.
-> O checkpoint também incorpora a estabilização dos flakes de escrita do Gate 30 e de seleção lexical do Gate 10 sem alterar as engines correspondentes.
+> **Checkpoint técnico verde:** `d790e418541cca6bc6419c0a8ea1566259b08c12` — workflow `32326717166` — 127/127, build, offline/PWA, preview e smoke público verdes no mesmo SHA.
+> O checkpoint incorpora a estabilização dos flakes de escrita/seleção, a remoção do polling contínuo do `WritingIntegrityBridge` e a unificação de `countWords()` em `domain/document.ts`.
 > Commits documentais posteriores não invalidam esse checkpoint enquanto não alterarem produto, testes ou workflow.
 
 ## P0 — bloqueadores de entrega
@@ -90,8 +90,9 @@
 
 - [x] Montar matriz exata de duplicações antes de criar `text-utils.ts`: `countWords()` é equivalente entre `App.tsx` e `domain/document.ts`; normalização/tokenização das engines não é.
 - [x] Só extrair utilitário quando implementação, contrato e Unicode forem equivalentes; decisão atual: não criar `text-utils.ts` genérico.
-- [ ] Remover a duplicação local de `countWords()` de `App.tsx` usando `domain/document.ts`.
-- [ ] Auditar/reduzir bridges restantes; primeiro débito comprovado: `WritingIntegrityBridge.tsx` usa polling de DOM a cada 250 ms e seletores estruturais frágeis.
+- [x] Remover a duplicação local de `countWords()` de `App.tsx` usando `domain/document.ts`.
+- [x] Remover polling de 250 ms de `WritingIntegrityBridge.tsx`; sincronização agora é dirigida a eventos e mutações filtradas de Tags.
+- [ ] Continuar auditoria dos bridges restantes e eliminar somente dependências DOM comprovadamente frágeis.
 - [x] Manter engines pesadas lazy; não fragmentar bundle apenas para silenciar warning do Vite.
 - [x] Atualizar PR/handoff com o checkpoint verde e as pendências reais.
 
