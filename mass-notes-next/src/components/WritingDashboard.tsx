@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { countWords } from '../domain/document'
 import { readLatestLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import {
   normalizeWritingGoal,
@@ -8,10 +9,6 @@ import {
 } from '../writing/writingGoal'
 
 const FOCUS_DURATION_SECONDS = 25 * 60
-
-function countWords(value: string): number {
-  return value.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0
-}
 
 function formatClock(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
