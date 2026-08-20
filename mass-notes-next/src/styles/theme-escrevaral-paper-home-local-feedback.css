@@ -49,15 +49,13 @@
   font: 500 12px/1.35 Literata, Georgia, serif;
 }
 
-/* O aviso de versão é feedback de sistema, não conteúdo do documento.
- * Em desktop ele fica no canto superior direito da folha e não cobre
- * título, navegação nem a área de escrita. */
+/* Feedback de sistema não ocupa o chrome primário do documento. Em desktop
+ * o aviso fica acima da barra de status; título, menu e toolbar permanecem
+ * sempre livres para leitura e ação. */
 .offline-update-banner {
-  top: 106px;
-  left: auto;
-  right: 28px;
-  width: min(420px, calc(100vw - 56px));
-  transform: none;
+  top: auto;
+  bottom: 78px;
+  width: min(460px, calc(100vw - 64px));
   grid-template-columns: auto minmax(0, 1fr) auto auto;
 }
 
@@ -116,6 +114,7 @@
 
   .offline-update-banner {
     top: 12px;
+    bottom: auto;
     left: 50%;
     right: auto;
     transform: translateX(-50%);
