@@ -230,6 +230,7 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   }
 
   const result = window.VeredaAnalise.analisar(text)
+  let locatedPunctuationItems = punctuationItems(result)
 
   try {
     const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
@@ -239,6 +240,7 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
         deepResult.issues,
         window.syntaxEngine,
       )
+      locatedPunctuationItems = calibratedIssues
 
       const resultObj = result as Record<string, unknown>
       const normaObj = resultObj?.norma as Record<string, unknown> | undefined
@@ -255,7 +257,7 @@ export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   }
 
   const interpreted = window.VeredaAnalise.interpretarResultado?.(result)
-  const locatedIssues = punctuationItems(result)
+  const locatedIssues = locatedPunctuationItems
     .map((item, index) => normalizeLocatedIssue(item, text, index))
     .filter((item): item is LocatedReviewIssue => Boolean(item))
   const issues = mergeGeneralIssues(
