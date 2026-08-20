@@ -152,6 +152,8 @@ jobs:
             tests/gate28-proof-status.spec.ts \
             tests/gate29-offline-pwa.spec.ts \
             tests/gate30-figures.spec.ts \
+            tests/gate31-release-smoke.spec.ts \
+            tests/gate32-release-visual.spec.ts \
             2>&1 | tee /tmp/escrevaral-playwright.log
 
       - name: Persistir diagnóstico automático em falha
@@ -191,6 +193,11 @@ jobs:
           if test -f test-results/escrevaral-reference-home.png; then
             cp test-results/escrevaral-reference-home.png dist/reference-home.png
           fi
+          for image in release-1366 release-1440 release-1920 release-390; do
+            if test -f "test-results/${image}.png"; then
+              cp "test-results/${image}.png" "dist/${image}.png"
+            fi
+          done
 
       - name: Publicar preview isolada
         env:
@@ -212,7 +219,7 @@ jobs:
         working-directory: .
         run: |
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
-          for path in index.html assets/index.js assets/index.css reference-home.png; do
+          for path in index.html assets/index.js assets/index.css reference-home.png release-1366.png release-1440.png release-1920.png release-390.png; do
             curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
           done
 
@@ -222,17 +229,25 @@ jobs:
           set -euo pipefail
           base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
           for attempt in $(seq 1 18); do
-            rm -f /tmp/escrevaral-home-index.html /tmp/escrevaral-home-app.js /tmp/escrevaral-home-app.css
+            rm -f /tmp/escrevaral-home-index.html /tmp/escrevaral-home-app.js /tmp/escrevaral-home-app.css /tmp/release-1366.png /tmp/release-1440.png /tmp/release-1920.png /tmp/release-390.png
             if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/escrevaral-home-index.html \
               && grep --quiet './assets/index.js' /tmp/escrevaral-home-index.html \
               && grep --quiet './assets/index.css' /tmp/escrevaral-home-index.html \
               && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/escrevaral-home-app.js \
               && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
+              && curl --fail --silent --show-error --location "${base}/release-1366.png" -o /tmp/release-1366.png \
+              && curl --fail --silent --show-error --location "${base}/release-1440.png" -o /tmp/release-1440.png \
+              && curl --fail --silent --show-error --location "${base}/release-1920.png" -o /tmp/release-1920.png \
+              && curl --fail --silent --show-error --location "${base}/release-390.png" -o /tmp/release-390.png \
               && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
               && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1366.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1440.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1920.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-390.png)" -gt 1000 \
               && ! grep -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' /tmp/escrevaral-home-app.css \
               && grep --quiet 'theme-escrevaral-reference.css' mass-notes-next/src/main.tsx; then
-              echo "Preview pública da referência canônica respondeu corretamente e sem fontes remotas."
+              echo "Preview pública da referência canônica respondeu corretamente, sem fontes remotas e com provas visuais do release."
               exit 0
             fi
             sleep 10
