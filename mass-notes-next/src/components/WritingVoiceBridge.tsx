@@ -121,7 +121,7 @@ export function WritingVoiceBridge() {
     }
 
     const revealVoice = () => {
-      document.body.classList.remove('reference-research-open', 'reference-tags-open')
+      document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-tags-open', 'reference-lexical-open')
       document.body.classList.add('reference-voice-open')
       document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
