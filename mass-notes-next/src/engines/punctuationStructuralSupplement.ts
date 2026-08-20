@@ -103,6 +103,25 @@ function punctuationIssue(
   }
 }
 
+function replaceOverlappingLegacyIssue(issues: unknown[], preciseIssue: RawIssue): void {
+  const preciseFrom = Number(preciseIssue.pos)
+  const preciseFragment = String(preciseIssue.fragment ?? '')
+  if (!Number.isInteger(preciseFrom) || !preciseFragment) return
+  const preciseTo = preciseFrom + preciseFragment.length
+
+  for (let index = issues.length - 1; index >= 0; index -= 1) {
+    const candidate = issues[index]
+    if (!candidate || typeof candidate !== 'object') continue
+    const raw = candidate as RawIssue
+    if (raw.ruleId !== 'PONT-01') continue
+    const candidateFrom = Number(raw.pos)
+    const candidateFragment = String(raw.fragment ?? '')
+    if (!Number.isInteger(candidateFrom) || !candidateFragment) continue
+    const candidateTo = candidateFrom + candidateFragment.length
+    if (candidateFrom < preciseTo && candidateTo > preciseFrom) issues.splice(index, 1)
+  }
+}
+
 function sentenceSlices(text: string): Array<{ sentence: string; offset: number }> {
   const slices: Array<{ sentence: string; offset: number }> = []
   let cursor = 0
@@ -125,7 +144,6 @@ export function calibrateStructuralPunctuation(
   if (!syntaxEngine?.analisarPeriodo) return currentIssues
 
   const issues: unknown[] = [...currentIssues]
-  const rawIssues = currentIssues.filter((item): item is RawIssue => Boolean(item && typeof item === 'object'))
 
   for (const { sentence, offset } of sentenceSlices(text)) {
     let period: SyntaxPeriod
@@ -145,11 +163,9 @@ export function calibrateStructuralPunctuation(
       const subject = directSubjectBeforeComma(terms, index)
 
       if (subject && isPredicateVerb(immediateRight)) {
-        const legacyAlreadyFound = rawIssues.some((issue) => {
-          const issuePos = Number(issue.pos)
-          return issue.ruleId === 'PONT-01' && Number.isInteger(issuePos) && issuePos >= offset && issuePos < offset + sentence.length
-        })
-        if (!legacyAlreadyFound) issues.push(punctuationIssue('PONT-SYNT-03', sentence, offset, subject, immediateRight))
+        const preciseIssue = punctuationIssue('PONT-SYNT-03', sentence, offset, subject, immediateRight)
+        replaceOverlappingLegacyIssue(issues, preciseIssue)
+        issues.push(preciseIssue)
         continue
       }
 
