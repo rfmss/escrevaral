@@ -79,13 +79,36 @@ export function WritingOfflineBridge() {
   const reloadOnControllerChange = useRef(false)
 
   useEffect(() => {
+    let saveObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
     const sync = () => setSaveSafe(currentSaveIsSafe())
-    sync()
-    const root = document.getElementById('root')
-    if (!root) return
-    const observer = new MutationObserver(sync)
-    observer.observe(root, { childList: true, characterData: true, subtree: true })
-    return () => observer.disconnect()
+
+    const bind = () => {
+      if (saveObserver) return true
+      const saveNode = document.querySelector<HTMLElement>('.statusbar .sync-save')
+      if (!saveNode) return false
+      sync()
+      saveObserver = new MutationObserver(sync)
+      saveObserver.observe(saveNode, { childList: true, characterData: true, subtree: true })
+      return true
+    }
+
+    if (!bind()) {
+      const root = document.getElementById('root')
+      if (!root) return
+      rootObserver = new MutationObserver(() => {
+        if (bind()) {
+          rootObserver?.disconnect()
+          rootObserver = null
+        }
+      })
+      rootObserver.observe(root, { childList: true, subtree: true })
+    }
+
+    return () => {
+      saveObserver?.disconnect()
+      rootObserver?.disconnect()
+    }
   }, [])
 
   useEffect(() => {
