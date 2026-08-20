@@ -134,7 +134,10 @@ export function WritingGoalsBridge() {
 
       if (amount) amount.innerHTML = `${words.toLocaleString('pt-BR')} <small>/ ${goal.toLocaleString('pt-BR')} palavras</small>`
       if (bar) bar.style.width = `${progress}%`
-      if (percent) percent.textContent = `${progress}%`
+      if (percent) {
+        percent.textContent = reached ? 'META ✓' : `${progress}%`
+        percent.setAttribute('aria-label', reached ? 'Meta diária alcançada' : `${progress}% da meta diária`)
+      }
       daily.dataset.writingGoal = String(goal)
       daily.dataset.goalReached = String(reached)
     })
