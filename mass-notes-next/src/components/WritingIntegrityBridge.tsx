@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+const INTEGRITY_SELECTOR = '.analysis-panel .tags, .reference-mobile-legacy #document-tags'
+
 function syncIntegrity() {
   const tagsSection = document.querySelector<HTMLElement>('.analysis-panel .tags')
   const realTagsInput = document.querySelector<HTMLInputElement>('.reference-mobile-legacy #document-tags')
@@ -17,10 +19,25 @@ function syncIntegrity() {
   }
 }
 
+function touchesIntegrity(node: Node): boolean {
+  const element = node instanceof Element ? node : node.parentElement
+  if (!element) return false
+  return Boolean(element.closest(INTEGRITY_SELECTOR) || element.querySelector(INTEGRITY_SELECTOR))
+}
+
 export function WritingIntegrityBridge() {
   useEffect(() => {
     const root = document.getElementById('root')
     if (!root) return
+
+    let syncFrame = 0
+    const queueSync = () => {
+      if (syncFrame) return
+      syncFrame = window.requestAnimationFrame(() => {
+        syncFrame = 0
+        syncIntegrity()
+      })
+    }
 
     const onClick = (event: MouseEvent) => {
       const target = event.target instanceof Element ? event.target : null
@@ -40,17 +57,26 @@ export function WritingIntegrityBridge() {
       }
     }
 
-    const timer = window.setInterval(syncIntegrity, 250)
+    const observer = new MutationObserver((mutations) => {
+      const relevant = mutations.some((mutation) => {
+        if (touchesIntegrity(mutation.target)) return true
+        return [...mutation.addedNodes, ...mutation.removedNodes].some(touchesIntegrity)
+      })
+      if (relevant) queueSync()
+    })
+
+    observer.observe(root, { childList: true, subtree: true, characterData: true })
     root.addEventListener('click', onClick)
-    root.addEventListener('input', syncIntegrity)
-    root.addEventListener('change', syncIntegrity)
-    requestAnimationFrame(syncIntegrity)
+    root.addEventListener('input', queueSync)
+    root.addEventListener('change', queueSync)
+    queueSync()
 
     return () => {
-      window.clearInterval(timer)
+      observer.disconnect()
+      if (syncFrame) window.cancelAnimationFrame(syncFrame)
       root.removeEventListener('click', onClick)
-      root.removeEventListener('input', syncIntegrity)
-      root.removeEventListener('change', syncIntegrity)
+      root.removeEventListener('input', queueSync)
+      root.removeEventListener('change', queueSync)
       document.body.classList.remove('reference-analysis-collapsed', 'reference-tags-empty')
     }
   }, [])
