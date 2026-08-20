@@ -27,15 +27,18 @@ test('atingir a meta celebra uma vez e continuar escrevendo não repete a celebr
   await editor.click()
   await page.keyboard.insertText('um dois três quatro')
   await expect(page.locator('.statusbar .daily')).toHaveAttribute('data-goal-reached', 'false')
+  await expect(page.locator('.statusbar .daily > b')).toHaveText('80%')
 
   await page.keyboard.insertText(' cinco')
   await expect(page.locator('.statusbar .daily')).toHaveAttribute('data-goal-reached', 'true')
+  await expect(page.locator('.statusbar .daily > b')).toHaveText('META ✓')
   await expect(page.locator('[data-writing-goal-confetti]')).toHaveCount(1)
   await expect.poll(() => page.evaluate(() => (
     (window as Window & { __escrevaralGoalCelebrations?: number }).__escrevaralGoalCelebrations ?? 0
   ))).toBe(1)
 
   await page.keyboard.insertText(' seis sete')
+  await expect(page.locator('.statusbar .daily > b')).toHaveText('META ✓')
   await expect.poll(() => page.evaluate(() => (
     (window as Window & { __escrevaralGoalCelebrations?: number }).__escrevaralGoalCelebrations ?? 0
   ))).toBe(1)
@@ -65,6 +68,7 @@ test('preferência por movimento reduzido preserva o evento sem animar confete',
 
   await editor.click()
   await page.keyboard.insertText('palavra')
+  await expect(page.locator('.statusbar .daily > b')).toHaveText('META ✓')
   await expect.poll(() => page.evaluate(() => (
     (window as Window & { __escrevaralGoalCelebrations?: number }).__escrevaralGoalCelebrations ?? 0
   ))).toBe(1)
