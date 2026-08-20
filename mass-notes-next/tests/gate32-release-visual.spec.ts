@@ -63,6 +63,69 @@ test('Gate 32: desktop baixo preserva espaço útil do manuscrito em 1366x768', 
   expect(geometry.rightBottom).toBeLessThanOrEqual(geometry.statusTop + 1)
 })
 
+test('Gate 32: consulta Palavras ocupa a coluna direita sem cobrir o manuscrito', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const trigger = page.getByRole('button', { name: 'Consultar palavras', exact: true })
+  await expect(trigger).toBeVisible()
+  await trigger.click()
+
+  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  await expect(rail).toBeVisible()
+  await expect(page.locator('body')).toHaveClass(/reference-lexical-open/)
+
+  const geometry = await page.evaluate(() => {
+    const workspace = document.querySelector('.workspace')?.getBoundingClientRect()
+    const shell = document.querySelector('.paper-shell')?.getBoundingClientRect()
+    const contextual = document.querySelector('.reference-mobile-legacy #text-tools.rail.open')?.getBoundingClientRect()
+    const overlay = document.querySelector<HTMLElement>('.drawer-overlay')
+    const tabs = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools .tabs')
+    return {
+      workspaceWidth: workspace?.width ?? 0,
+      workspaceRight: workspace?.right ?? 0,
+      railLeft: contextual?.left ?? 0,
+      railRight: contextual?.right ?? 0,
+      shellRight: shell?.right ?? 0,
+      overlayDisplay: overlay ? getComputedStyle(overlay).display : 'none',
+      tabsDisplay: tabs ? getComputedStyle(tabs).display : 'none',
+    }
+  })
+
+  expect(geometry.workspaceWidth).toBeGreaterThanOrEqual(560)
+  expect(geometry.railLeft).toBeGreaterThanOrEqual(geometry.workspaceRight - 1)
+  expect(Math.abs(geometry.railRight - geometry.shellRight)).toBeLessThanOrEqual(1)
+  expect(geometry.overlayDisplay).toBe('none')
+  expect(geometry.tabsDisplay).toBe('none')
+})
+
+test('Gate 32: Oficina usa o mesmo rail lateral e mantém a régua de ferramentas', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  await page.getByRole('button', { name: 'Abrir oficina de ferramentas' }).click()
+  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  await expect(rail).toBeVisible()
+  await expect(page.locator('body')).toHaveClass(/reference-tools-open/)
+
+  const geometry = await page.evaluate(() => {
+    const workspace = document.querySelector('.workspace')?.getBoundingClientRect()
+    const contextual = document.querySelector('.reference-mobile-legacy #text-tools.rail.open')?.getBoundingClientRect()
+    const tabs = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools .tabs')
+    const overlay = document.querySelector<HTMLElement>('.drawer-overlay')
+    return {
+      workspaceRight: workspace?.right ?? 0,
+      railLeft: contextual?.left ?? 0,
+      tabsDisplay: tabs ? getComputedStyle(tabs).display : 'none',
+      overlayDisplay: overlay ? getComputedStyle(overlay).display : 'none',
+    }
+  })
+
+  expect(geometry.railLeft).toBeGreaterThanOrEqual(geometry.workspaceRight - 1)
+  expect(geometry.tabsDisplay).not.toBe('none')
+  expect(geometry.overlayDisplay).toBe('none')
+})
+
 test('Gate 32: release móvel permanece contido em 390px', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
