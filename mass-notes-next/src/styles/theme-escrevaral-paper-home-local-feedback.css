@@ -49,8 +49,15 @@
   font: 500 12px/1.35 Literata, Georgia, serif;
 }
 
+/* O aviso de versão é feedback de sistema, não conteúdo do documento.
+ * Em desktop ele fica no canto superior direito da folha e não cobre
+ * título, navegação nem a área de escrita. */
 .offline-update-banner {
-  top: 18px;
+  top: 106px;
+  left: auto;
+  right: 28px;
+  width: min(420px, calc(100vw - 56px));
+  transform: none;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
 }
 
@@ -107,7 +114,13 @@
     width: min(520px, calc(100vw - 24px));
   }
 
-  .offline-update-banner { top: 12px; }
+  .offline-update-banner {
+    top: 12px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
   .offline-feedback-card { bottom: 82px; }
 }
 
