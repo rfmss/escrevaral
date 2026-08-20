@@ -23,6 +23,10 @@ function ensureLauncher(): HTMLButtonElement | null {
   return button
 }
 
+function findToolsRail(): HTMLElement | null {
+  return document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
+}
+
 function openLexicalTab(): boolean {
   const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
   const tab = rail?.querySelector<HTMLButtonElement>('#tab-palavras')
@@ -36,13 +40,26 @@ export function WritingLexicalBridge() {
     const root = document.getElementById('root')
     if (!root) return
 
+    let railObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
+
     const sync = () => {
       const button = ensureLauncher()
       if (!button) return
-      const railOpen = Boolean(document.querySelector('.reference-mobile-legacy #text-tools.rail.open'))
+      const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const lexicalOpen = document.body.classList.contains('reference-lexical-open') && railOpen
       button.setAttribute('aria-expanded', String(lexicalOpen))
       if (!railOpen) document.body.classList.remove('reference-lexical-open')
+    }
+
+    const installRailObserver = () => {
+      if (railObserver) return true
+      const rail = findToolsRail()
+      if (!rail || !ensureLauncher()) return false
+      railObserver = new MutationObserver(sync)
+      railObserver.observe(rail, { attributes: true, attributeFilter: ['class'] })
+      sync()
+      return true
     }
 
     const reveal = () => {
@@ -67,12 +84,26 @@ export function WritingLexicalBridge() {
       if (target?.closest('button.reference-lexical-open')) reveal()
     }
 
-    const timer = window.setInterval(sync, 250)
+    const bodyObserver = new MutationObserver(sync)
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+
+    if (!installRailObserver()) {
+      rootObserver = new MutationObserver(() => {
+        if (installRailObserver()) {
+          rootObserver?.disconnect()
+          rootObserver = null
+        }
+      })
+      rootObserver.observe(root, { childList: true, subtree: true })
+    }
+
     root.addEventListener('click', onClick)
     requestAnimationFrame(sync)
 
     return () => {
-      window.clearInterval(timer)
+      railObserver?.disconnect()
+      rootObserver?.disconnect()
+      bodyObserver.disconnect()
       root.removeEventListener('click', onClick)
       document.body.classList.remove('reference-lexical-open')
       document.querySelector('.reference-lexical-launcher')?.remove()
