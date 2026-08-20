@@ -14,7 +14,8 @@
 /*
  * Gate 32: em telas móveis a casa deixa de manter a prancha desktop de 1120px.
  * Biblioteca e ferramentas continuam nos drawers existentes; o centro vira uma
- * coluna de escrita real, com o título acessível entre os dois acionadores.
+ * coluna de escrita real, com o título acessível e Exportar preservado como
+ * única ação principal compacta fora dos drawers.
  */
 @media (max-width: 1099px) {
   body:not(.experience-anatomy) {
@@ -36,6 +37,7 @@
   }
 
   body:not(.experience-anatomy) .paper-shell > .topbar {
+    position: relative;
     grid-column: 1;
     grid-row: 1;
     display: block;
@@ -46,7 +48,6 @@
   body:not(.experience-anatomy) .topbar > .brand,
   body:not(.experience-anatomy) .topbar > .mode,
   body:not(.experience-anatomy) .topbar > .search,
-  body:not(.experience-anatomy) .topbar > .main-actions,
   body:not(.experience-anatomy) .paper-shell > .left-rail,
   body:not(.experience-anatomy) .paper-shell > .analysis-panel,
   body:not(.experience-anatomy) .paper-shell > .statusbar {
@@ -56,7 +57,7 @@
   body:not(.experience-anatomy) .document-title {
     width: 100%;
     height: 68px;
-    padding: 9px 58px 8px;
+    padding: 9px 106px 8px 58px;
     border-right: 0;
     overflow: hidden;
   }
@@ -77,6 +78,48 @@
   body:not(.experience-anatomy) .reference-document-title {
     min-width: 0;
     font-size: clamp(19px, 6vw, 24px);
+  }
+
+  body:not(.experience-anatomy) .topbar > .main-actions {
+    position: absolute;
+    top: 9px;
+    right: 56px;
+    z-index: 65;
+    display: block !important;
+    width: 40px;
+    height: 40px;
+  }
+
+  body:not(.experience-anatomy) .topbar > .main-actions > button {
+    display: none !important;
+  }
+
+  body:not(.experience-anatomy) .topbar > .main-actions > button:nth-child(4) {
+    display: grid !important;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    place-items: center;
+    border: 1px solid #333;
+    background: var(--paper);
+  }
+
+  body:not(.experience-anatomy) .topbar > .main-actions > button:nth-child(4) .ui-icon {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+  }
+
+  body:not(.experience-anatomy) .topbar > .main-actions > button:nth-child(4) small {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   body:not(.experience-anatomy) .workspace {
@@ -124,6 +167,8 @@
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0;
+    transform: none !important;
+    animation: none !important;
   }
 
   body:not(.experience-anatomy) .editor .escrevaral-editor {
