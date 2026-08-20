@@ -35,13 +35,25 @@ function locateTerms(sentence: string, terms: SyntaxTerm[]): LocatedTerm[] {
   return located
 }
 
+function normalizeToken(value: string): string {
+  return value.normalize('NFD').replace(/\p{M}+/gu, '').toLocaleLowerCase('pt-BR')
+}
+
 function isSubject(term: LocatedTerm | undefined): boolean {
   return Boolean(term?.funcao?.includes('Sujeito'))
 }
 
+function surfaceLooksLikeFiniteVerb(term: LocatedTerm | undefined): boolean {
+  const token = normalizeToken(String(term?.text ?? ''))
+  if (!token || token.length < 3) return false
+  return /(?:ou|eu|iu|ei|aram|eram|iram|ava|avam|ia|iam|asse|assem|esse|essem|isse|issem|aria|ariam|eria|eriam|iria|iriam)$/u.test(token)
+}
+
 function isPredicateVerb(term: LocatedTerm | undefined): boolean {
   const funcao = term?.funcao ?? ''
-  return funcao === 'Núcleo do predicado' || funcao === 'Verbo de ligação'
+  return funcao === 'Núcleo do predicado'
+    || funcao === 'Verbo de ligação'
+    || surfaceLooksLikeFiniteVerb(term)
 }
 
 function isIntegratedComplement(term: LocatedTerm | undefined): boolean {
@@ -51,6 +63,11 @@ function isIntegratedComplement(term: LocatedTerm | undefined): boolean {
 
 function isTransparentDeterminer(term: LocatedTerm | undefined): boolean {
   return term?.funcao === 'Artigo / contração'
+}
+
+function isPrepositionalMarker(term: LocatedTerm | undefined): boolean {
+  const funcao = term?.funcao ?? ''
+  return funcao === 'Preposição' || funcao === 'Artigo / contração'
 }
 
 function complementAfterComma(terms: LocatedTerm[], commaIndex: number): LocatedTerm | undefined {
@@ -66,8 +83,11 @@ function directSubjectBeforeComma(terms: LocatedTerm[], commaIndex: number): Loc
   for (let index = commaIndex - 1; index >= 0; index -= 1) {
     const term = terms[index]
     if (term.text === ',') return undefined
-    if (isPredicateVerb(term)) return undefined
     if (isSubject(term)) return term
+    if (isPredicateVerb(term)) {
+      if (isPrepositionalMarker(terms[index - 1])) continue
+      return undefined
+    }
   }
   return undefined
 }
