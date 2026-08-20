@@ -2,19 +2,22 @@
 
 > Fonte de verdade operacional da branch `feat/escrevaral-paper-home`.
 > Atualizar ao fechar ou abrir cada bloco. Não apagar histórico útil; mover itens concluídos para a seção correspondente.
+>
+> **Checkpoint técnico verde:** `c674c0b729b6c09de4b110b8d61893c0e83b4ed8` — workflow `32322288872` — 127/127, build, offline/PWA, preview e smoke público verdes no mesmo SHA.
+> Commits documentais posteriores não invalidam esse checkpoint enquanto não alterarem produto, testes ou workflow.
 
 ## P0 — bloqueadores de entrega
 
 - [x] Centralizar o shell canônico no desktop sem alterar o contrato móvel.
 - [x] Criar Gate 22 para 1366 / 1440 / 1920 px: margens simétricas e sem overflow horizontal.
 - [x] Corrigir bancas fossilizadas que ainda exigiam `Notas` desabilitado, `MODO` estático, `SINCRONIZADO` e margem 12/20.
-- [ ] Executar o workflow consolidado no head atual e obter build + Playwright verdes.
-- [ ] Confirmar que `preview-escrevaral-paper-home` foi publicada a partir do MESMO SHA aprovado.
-- [ ] Corrigir somente os testes/vermelhos reais encontrados pela banca consolidada.
-- [ ] Smoke manual: escrever → autosave → fechar/reabrir → revisar → consultar ferramentas → exportar.
-- [ ] Banca visual final em 1366, 1440, 1920 e 390 px.
-- [ ] Passe final de proporção: left rail / manuscrito / analysis panel, ritmo vertical, densidade e simetria de paddings.
-- [ ] Congelar features antes do release e aceitar apenas correções de entrega.
+- [x] Executar o workflow consolidado no head técnico aprovado e obter build + Playwright verdes.
+- [x] Confirmar que `preview-escrevaral-paper-home` foi publicada a partir do MESMO SHA aprovado.
+- [x] Corrigir somente os testes/vermelhos reais encontrados pela banca consolidada.
+- [x] Smoke de entrega reproduzível: Gate 31 cobre escrever → persistir/reabrir → revisar → consultar → exportar no mesmo documento.
+- [x] Banca visual reproduzível: Gate 32 mede 1366, 1440, 1920 e 390 px e publica quatro PNGs de prova.
+- [x] Passe final de proporção geométrica: Gate 22 + `reference-home.spec.ts` + Gate 32 cobrem centralização, três planos, alturas estruturais, largura útil e contenção móvel.
+- [x] Congelar features durante o fechamento e aceitar apenas correções de entrega.
 
 ## Transplante funcional
 
@@ -29,10 +32,10 @@
 - [x] Exportação do documento ativo: DOCX offline, via motor legado carregado lazy.
 - [x] Exportação do documento ativo: EPUB 3 offline, via motor legado carregado lazy.
 - [x] Exportação do documento ativo: Markdown preparado para Obsidian.
-- [ ] Validar Gate 25 de exportação avançada no mesmo head publicado.
+- [x] Validar Gate 25 de exportação avançada no mesmo head publicado.
 - [ ] Exportação RTF da `main`: depende do contrato de página/escopo e deve ser transplantada em bloco próprio.
 - [ ] Exportação de acervo como vault Obsidian `.zip`: depende de seleção/escopo da biblioteca e deve ser transplantada em bloco próprio.
-- [ ] Validar a tranche funcional inteira no workflow atual antes de declará-la verde.
+- [x] Validar a tranche funcional inteira no workflow atual antes de declará-la verde.
 
 ## Paridade fina / microcomportamentos
 
@@ -40,18 +43,18 @@
 - [x] Meta diária: respeitar `prefers-reduced-motion` sem perder o evento lógico de meta atingida.
 - [x] Salvamento: trocar o rótulo enganoso `SINCRONIZADO` por `SALVO LOCALMENTE`.
 - [x] Primeiro uso: restaurar aviso único “Texto salvo aqui, neste navegador. Sem internet, sem nuvem.”.
-- [ ] Validar Gates 23–24 no mesmo head publicado.
+- [x] Validar Gates 23–24 no mesmo head publicado.
 - [x] Pomodoro real da `main`: 25 min, iniciar/pausar/resetar, histórico local compatível, toast e celebração ao concluir.
-- [ ] Validar Gate 26 do temporizador no mesmo head publicado.
+- [x] Validar Gate 26 do temporizador no mesmo head publicado.
 - [x] Modo Leitor real da `main`: slot `MODO` reativado, leitura limpa, estrutura Tiptap, autoscroll, 4 ritmos, 4 tamanhos, régua, Escape/foco e aviso para página vazia.
-- [ ] Validar Gate 27 do Leitor no mesmo head publicado.
+- [x] Validar Gate 27 do Leitor no mesmo head publicado.
 - [x] Auditar player de sons ambiente da `main`: função real confirmada, mas as quatro faixas usam CDN remoto do Pixabay.
 - [ ] Sons ambiente: só transplantar depois de obter arquivos locais com licença/proveniência; não usar URLs remotas na casa offline.
 - [x] Prova de Autoria: restaurar feedback transitório “Sinais de autoria guardados aqui” no primeiro evento.
 - [x] Prova de Autoria: restaurar indicador compacto de integridade após 50 palavras, usando o `ProofSummary.integrity` real no bloco ESTADO LOCAL.
-- [ ] Validar Gate 28 do indicador compacto de autoria no mesmo head publicado.
-- [ ] Auditar UX offline/PWA: atualização disponível, recuperação e nudges de cópia de segurança sem duplicar `BackupPanel`.
-- [ ] Auditar atalhos e feedbacks transitórios da `main` que tenham função real, não decoração.
+- [x] Validar Gate 28 do indicador compacto de autoria no mesmo head publicado.
+- [x] Auditar UX offline/PWA: Gate 29 cobre instalação/cache, recuperação, lembrete e registro de cópia sem duplicar `BackupPanel`.
+- [x] Auditar atalhos e feedbacks transitórios reais: `Ctrl/Cmd+S`, `Ctrl/Cmd+N`, `Ctrl/Cmd+K`, `Alt+F` e `Escape`; undo/redo pertence ao Tiptap, não ao ring buffer legado de páginas.
 
 ## Calibração linguística
 
@@ -62,7 +65,7 @@
 - [x] C4 — mapa de coesão observável; não fingir score de coerência.
 - [x] Procedência lexical: app nova desconectada do `js/data/synonym-data.js` derivado.
 - [x] C5 — crase de alta confiança: impossibilidades objetivas.
-- [ ] Validar Gates 16–21 no mesmo head publicado.
+- [x] Validar Gates 16–21 no mesmo head publicado.
 - [ ] C6 — regência/valência de alta confiança, somente após C0–C5 verdes.
 - [ ] Expandir `curatedSynonymCorpus.ts` por compreensão das referências, sem transcrever verbetes.
 - [ ] Ampliar corpus de contraexemplos para reduzir falsos positivos de sintaxe/pontuação.
@@ -75,20 +78,21 @@
 - [x] Sete abas da Oficina em uma única faixa, sem linha órfã.
 - [x] Corrigir assimetria do shell (`12px` à esquerda / `20px` à direita).
 - [x] Exportação com seis formatos: altura limitada ao viewport e scroll interno, inclusive mobile.
-- [ ] Conferir centralização real após publicação do head atual.
-- [ ] Revisar largura útil do manuscrito em 1366 e 1440 px.
-- [ ] Revisar excesso de largura/espaço vazio em 1920 px.
-- [ ] Revisar drawer/rail em 390 px: overflow, scroll e hierarquia.
-- [ ] Revisar alinhamentos de topbar, statusbar e divisórias verticais.
-- [ ] Eliminar controles que ainda sejam puramente cenográficos.
+- [x] Conferir centralização real após publicação do head técnico aprovado.
+- [x] Revisar largura útil do manuscrito em 1366 e 1440 px.
+- [x] Revisar excesso de largura/espaço vazio em 1920 px.
+- [x] Revisar drawer/rail e manuscrito em 390 px: overflow, scroll, hierarquia e acesso à exportação.
+- [x] Revisar alinhamentos de topbar, statusbar e divisórias verticais via geometria canônica.
+- [x] Eliminar controles puramente cenográficos; `reference-source-integrity.spec.ts` impede reintrodução no DOM canônico.
 
 ## Arquitetura / manutenção
 
-- [ ] Montar matriz exata de duplicações antes de criar `text-utils.ts` (`countWords`, segmentação, normalização etc.).
-- [ ] Só extrair utilitário quando implementação, contrato e Unicode forem equivalentes.
-- [ ] Auditar bridges restantes depois da paridade funcional e dos gates verdes.
-- [ ] Manter engines pesadas lazy; não fragmentar bundle apenas para silenciar warning do Vite.
-- [ ] Atualizar PR/handoff sempre que um bloco mudar de estado.
+- [x] Montar matriz exata de duplicações antes de criar `text-utils.ts`: `countWords()` é equivalente entre `App.tsx` e `domain/document.ts`; normalização/tokenização das engines não é.
+- [x] Só extrair utilitário quando implementação, contrato e Unicode forem equivalentes; decisão atual: não criar `text-utils.ts` genérico.
+- [ ] Remover a duplicação local de `countWords()` de `App.tsx` usando `domain/document.ts`.
+- [ ] Auditar/reduzir bridges restantes; primeiro débito comprovado: `WritingIntegrityBridge.tsx` usa polling de DOM a cada 250 ms e seletores estruturais frágeis.
+- [x] Manter engines pesadas lazy; não fragmentar bundle apenas para silenciar warning do Vite.
+- [x] Atualizar PR/handoff com o checkpoint verde e as pendências reais.
 
 ## Deliberadamente adiados — não bloqueiam esta entrega
 
