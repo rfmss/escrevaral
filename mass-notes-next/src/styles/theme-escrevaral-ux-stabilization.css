@@ -1,6 +1,6 @@
 /* Escrevaral — estabilização UX pós-inspeção humana.
- * Escopo deliberadamente visual: reduz colisões e ruído em desktop baixo
- * sem alterar domínio, persistência, engines ou a composição móvel.
+ * Escopo deliberadamente visual: reduz colisões e ruído em desktop baixo,
+ * preserva o manuscrito como área nobre e mantém a composição móvel intacta.
  */
 
 @media (min-width: 1100px) {
@@ -24,14 +24,225 @@
   .paper-shell .analysis-panel {
     overscroll-behavior: contain;
     scroll-padding-bottom: 32px;
+    padding-bottom: 28px;
   }
 
-  /* O rodapé ocupa sua própria linha do grid. O respiro adicional garante
-     que o último controle das laterais possa ser alcançado sem ficar colado
-     à borda superior da barra de status. */
-  .paper-shell .left-rail,
-  .paper-shell .analysis-panel {
-    padding-bottom: 28px;
+  /* Ferramentas contextuais não são modais no desktop. Elas ocupam a coluna
+     direita e o grid reserva espaço real para o rail, portanto nada cobre a
+     seleção nem o manuscrito. A Oficina geral conserva as abas; entradas
+     específicas (Palavras/Voz/Pesquisa/Tags) mostram somente seu contexto. */
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .paper-shell .analysis-panel {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy {
+    display: contents !important;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools.rail.open {
+    position: fixed !important;
+    z-index: 70 !important;
+    top: 102px !important;
+    right: 16px !important;
+    bottom: 70px !important;
+    left: auto !important;
+    width: var(--ux-context-rail) !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    color: var(--ink) !important;
+    background: var(--paper) !important;
+    border: 1px solid rgba(63, 61, 55, .34) !important;
+    box-shadow: none !important;
+    --panel: var(--paper);
+    --muted: #565b57;
+    --blue-deep: var(--blue);
+    --line: rgba(63, 61, 55, .34);
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools.rail.open::before {
+    inset: 7px !important;
+    border-color: rgba(8, 127, 193, .20) !important;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .rail-title {
+    min-height: 54px !important;
+    height: 54px !important;
+    padding: 0 14px 0 18px !important;
+    background: transparent !important;
+    border-bottom-color: rgba(63, 61, 55, .34) !important;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .tabs {
+    min-height: 44px !important;
+    padding: 6px 10px !important;
+    background: transparent !important;
+    border-bottom-color: rgba(63, 61, 55, .34) !important;
+  }
+
+  body:is(
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .tabs {
+    display: none !important;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .rail-scroll,
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .panel {
+    background: transparent !important;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools input,
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools textarea,
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools select {
+    color: var(--ink) !important;
+    background: transparent !important;
+    border-color: rgba(63, 61, 55, .38) !important;
+  }
+
+  /* No desktop o rail contextual não bloqueia a casa. O overlay permanece
+     apenas no comportamento móvel, onde o drawer continua modal. */
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .drawer-overlay {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  body.night:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools.rail.open {
+    color: #f4f0e9 !important;
+    background: #202628 !important;
+    border-color: rgba(244, 240, 233, .34) !important;
+    --panel: #202628;
+    --muted: #d5dddc;
+    --blue-deep: #70c9ef;
+    --line: rgba(244, 240, 233, .28);
+  }
+}
+
+/* Em desktop compacto o rail cresce somente até onde o manuscrito pode ceder.
+ * Em 1100 px sobra exatamente o mínimo de 560 px para a coluna de escrita. */
+@media (min-width: 1100px) and (max-width: 1450px) {
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) {
+    --ux-context-rail: clamp(258px, calc(100vw - 842px), 360px);
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .paper-shell {
+    grid-template-columns: 250px minmax(560px, 1fr) var(--ux-context-rail) !important;
+  }
+}
+
+@media (min-width: 1451px) {
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) {
+    --ux-context-rail: 380px;
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .paper-shell {
+    grid-template-columns: 280px minmax(600px, 1fr) var(--ux-context-rail) !important;
   }
 }
 
@@ -47,7 +258,6 @@
     margin-bottom: 28px;
   }
 
-  /* Compactação apenas vertical: não altera largura, ordem ou conteúdo. */
   .paper-shell .analysis-head {
     height: 48px;
   }
