@@ -1,5 +1,4 @@
-/* Gate visual de entrega: o papel precisa ocupar o viewport com respiro simétrico.
-   Mantemos a estratégia móvel da referência (shell interno mínimo de 1120px) intacta. */
+/* Gate visual de entrega: o papel precisa ocupar o viewport com respiro simétrico. */
 .reference-document-title {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -9,5 +8,142 @@
   body:not(.experience-anatomy) .paper-shell {
     width: calc(100vw - 32px);
     margin: 10px auto;
+  }
+}
+
+/*
+ * Gate 32: em telas móveis a casa deixa de manter a prancha desktop de 1120px.
+ * Biblioteca e ferramentas continuam nos drawers existentes; o centro vira uma
+ * coluna de escrita real, com o título acessível entre os dois acionadores.
+ */
+@media (max-width: 1099px) {
+  body:not(.experience-anatomy) {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  body:not(.experience-anatomy) .paper-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 68px minmax(0, 1fr);
+    min-width: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
+  }
+
+  body:not(.experience-anatomy) .paper-shell > .topbar {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+    min-width: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  body:not(.experience-anatomy) .topbar > .brand,
+  body:not(.experience-anatomy) .topbar > .mode,
+  body:not(.experience-anatomy) .topbar > .search,
+  body:not(.experience-anatomy) .topbar > .main-actions,
+  body:not(.experience-anatomy) .paper-shell > .left-rail,
+  body:not(.experience-anatomy) .paper-shell > .analysis-panel,
+  body:not(.experience-anatomy) .paper-shell > .statusbar {
+    display: none !important;
+  }
+
+  body:not(.experience-anatomy) .document-title {
+    width: 100%;
+    height: 68px;
+    padding: 9px 58px 8px;
+    border-right: 0;
+    overflow: hidden;
+  }
+
+  body:not(.experience-anatomy) .document-title .eyebrow {
+    font-size: 10px;
+  }
+
+  body:not(.experience-anatomy) .document-title > div {
+    min-width: 0;
+    margin-top: 3px;
+  }
+
+  body:not(.experience-anatomy) .document-number {
+    display: none;
+  }
+
+  body:not(.experience-anatomy) .reference-document-title {
+    min-width: 0;
+    font-size: clamp(19px, 6vw, 24px);
+  }
+
+  body:not(.experience-anatomy) .workspace {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100vw !important;
+    height: auto !important;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  body:not(.experience-anatomy) .formatbar {
+    flex: 0 0 54px;
+    width: 100%;
+    height: 54px;
+    min-height: 54px;
+    padding: 6px 10px;
+    overflow: hidden;
+  }
+
+  body:not(.experience-anatomy) .formatbar > label {
+    display: none;
+  }
+
+  body:not(.experience-anatomy) .format-actions {
+    min-width: 0;
+    padding-left: 0;
+    gap: 14px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  body:not(.experience-anatomy) .format-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  body:not(.experience-anatomy) .format-actions button,
+  body:not(.experience-anatomy) .format-actions .divider {
+    flex: 0 0 auto;
+  }
+
+  body:not(.experience-anatomy) .editor.editor-shell.paper {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+  }
+
+  body:not(.experience-anatomy) .editor .escrevaral-editor {
+    width: 100%;
+    max-width: 760px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 42px 24px 72px !important;
+    font-size: 18px;
+    line-height: 1.8;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .paper-shell {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .workspace {
+    width: 100vw !important;
+    height: 100vh !important;
   }
 }
