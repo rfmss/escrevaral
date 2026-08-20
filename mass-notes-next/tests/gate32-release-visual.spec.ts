@@ -40,6 +40,29 @@ for (const width of [1366, 1440, 1920]) {
   })
 }
 
+test('Gate 32: desktop baixo preserva espaço útil do manuscrito em 1366x768', async ({ page }) => {
+  await page.setViewportSize({ width: 1366, height: 768 })
+  await waitReady(page)
+
+  const geometry = await page.evaluate(() => {
+    const rect = (selector: string) => document.querySelector(selector)?.getBoundingClientRect()
+    const left = rect('.left-rail')
+    const right = rect('.analysis-panel')
+    const status = rect('.statusbar')
+    const editorContent = document.querySelector<HTMLElement>('.editor .escrevaral-editor')
+    return {
+      editorPaddingTop: editorContent ? Number.parseFloat(getComputedStyle(editorContent).paddingTop) : 999,
+      leftBottom: left?.bottom ?? 999,
+      rightBottom: right?.bottom ?? 999,
+      statusTop: status?.top ?? -1,
+    }
+  })
+
+  expect(geometry.editorPaddingTop).toBeLessThanOrEqual(32)
+  expect(geometry.leftBottom).toBeLessThanOrEqual(geometry.statusTop + 1)
+  expect(geometry.rightBottom).toBeLessThanOrEqual(geometry.statusTop + 1)
+})
+
 test('Gate 32: release móvel permanece contido em 390px', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
