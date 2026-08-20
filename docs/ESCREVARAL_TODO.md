@@ -3,7 +3,8 @@
 > Fonte de verdade operacional da branch `feat/escrevaral-paper-home`.
 > Atualizar ao fechar ou abrir cada bloco. Não apagar histórico útil; mover itens concluídos para a seção correspondente.
 >
-> **Checkpoint técnico verde:** `c674c0b729b6c09de4b110b8d61893c0e83b4ed8` — workflow `32322288872` — 127/127, build, offline/PWA, preview e smoke público verdes no mesmo SHA.
+> **Checkpoint técnico verde:** `ac18cc3015219e2beba4d763d5d227554427fa44` — workflow `32325175646` — 127/127, build, offline/PWA, preview e smoke público verdes no mesmo SHA.
+> O checkpoint também incorpora a estabilização dos flakes de escrita do Gate 30 e de seleção lexical do Gate 10 sem alterar as engines correspondentes.
 > Commits documentais posteriores não invalidam esse checkpoint enquanto não alterarem produto, testes ou workflow.
 
 ## P0 — bloqueadores de entrega
