@@ -115,6 +115,7 @@ export function WritingReaderBridge() {
 
   useEffect(() => {
     let boundTrigger: HTMLButtonElement | null = null
+    let observer: MutationObserver | null = null
 
     const bind = () => {
       const trigger = findModeTrigger()
@@ -139,13 +140,21 @@ export function WritingReaderBridge() {
       return true
     }
 
-    bind()
-    const root = document.getElementById('root')
-    if (!root) return
-    const observer = new MutationObserver(bind)
-    observer.observe(root, { childList: true, subtree: true })
+    if (!bind()) {
+      const root = document.getElementById('root')
+      if (root) {
+        observer = new MutationObserver(() => {
+          if (bind()) {
+            observer?.disconnect()
+            observer = null
+          }
+        })
+        observer.observe(root, { childList: true, subtree: true })
+      }
+    }
+
     return () => {
-      observer.disconnect()
+      observer?.disconnect()
       boundTrigger?.removeEventListener('click', openReader)
       if (triggerRef.current === boundTrigger) triggerRef.current = null
     }
