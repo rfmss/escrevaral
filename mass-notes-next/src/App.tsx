@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Library } from './components/Library'
 import { RightRail } from './components/RightRail'
-import { type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
+import { countWords, type DocumentStatus, type EscrevaralDocument, type SaveState } from './domain/document'
 import { MassNotesEditor, type ReviewNavigationRequest } from './editor/MassNotesEditor'
 import type { ReviewDecorationSpec } from './editor/reviewDecorations'
 import type { EditorPositionContract } from './editor/textPositionContract'
@@ -522,7 +522,6 @@ export default function App() {
     return <main className="boot-screen"><strong>Escrevaral</strong><span>Preparando a oficina de escrita…</span></main>
   }
 
-  const countWords = (text: string) => text.trim() ? (text.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) ?? []).length : 0
   const words = countWords(draft.plainText)
   const characters = draft.plainText.length
   const sentenceCount = draft.plainText.split(/[.!?…]+/).map((value) => value.trim()).filter(Boolean).length
