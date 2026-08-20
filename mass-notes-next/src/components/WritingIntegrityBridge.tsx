@@ -1,13 +1,5 @@
 import { useEffect } from 'react'
 
-function setDisabled(button: HTMLButtonElement | null, label?: string) {
-  if (!button) return
-  button.disabled = true
-  button.setAttribute('aria-disabled', 'true')
-  button.dataset.integrityStatic = 'true'
-  if (label) button.setAttribute('aria-label', label)
-}
-
 function syncIntegrity() {
   const tagsSection = document.querySelector<HTMLElement>('.analysis-panel .tags')
   const realTagsInput = document.querySelector<HTMLInputElement>('.reference-mobile-legacy #document-tags')
@@ -16,13 +8,6 @@ function syncIntegrity() {
   if (tagsSection) {
     tagsSection.setAttribute('aria-label', hasRealTags ? 'Tags do documento' : 'Tags do documento: nenhuma tag')
   }
-
-  const fontButton = document.querySelector<HTMLButtonElement>('.formatbar > label:nth-child(2) button')
-  setDisabled(fontButton, 'Fonte atual: Literata')
-
-  document.querySelectorAll<HTMLButtonElement>('.formatbar > label:nth-child(3) .size button').forEach((button) => {
-    setDisabled(button, 'Tamanho de fonte fixo nesta versão')
-  })
 
   const analysisToggle = document.querySelector<HTMLButtonElement>('.analysis-panel .analysis-head .icon-square')
   if (analysisToggle) {

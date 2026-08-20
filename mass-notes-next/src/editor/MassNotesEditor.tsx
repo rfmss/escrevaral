@@ -191,13 +191,13 @@ function MassNotesEditorInstance({
         </label>
         <label>
           Fonte
-          <button type="button" aria-label="Fonte Literata">
+          <button type="button" disabled aria-disabled="true" data-integrity-static="true" aria-label="Fonte atual: Literata">
             Literata <span className="chevron" aria-hidden="true" />
           </button>
         </label>
         <label>
           Tamanho
-          <div className="size"><span>16</span><button type="button" aria-label="Diminuir fonte">−</button><button type="button" aria-label="Aumentar fonte">＋</button></div>
+          <div className="size"><span>16</span><button type="button" disabled aria-disabled="true" data-integrity-static="true" aria-label="Tamanho de fonte fixo nesta versão">−</button><button type="button" disabled aria-disabled="true" data-integrity-static="true" aria-label="Tamanho de fonte fixo nesta versão">＋</button></div>
         </label>
         <div className="format-actions">
           <button type="button" title="Negrito" aria-label="N" aria-pressed={state.bold} className={state.bold ? 'active' : ''} onClick={() => editor.chain().focus().toggleBold().run()}><b>B</b></button>
