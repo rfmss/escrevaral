@@ -57,6 +57,9 @@ export function WritingLocalFeedbackBridge() {
   }, [])
 
   useEffect(() => {
+    let labelObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
+
     const applyLocalSemantics = () => {
       const sync = document.querySelector<HTMLElement>('.statusbar .sync')
       const label = sync?.querySelector<HTMLElement>('.eyebrow')
@@ -69,12 +72,32 @@ export function WritingLocalFeedbackBridge() {
       return true
     }
 
-    applyLocalSemantics()
-    const root = document.getElementById('root')
-    if (!root) return
-    const observer = new MutationObserver(applyLocalSemantics)
-    observer.observe(root, { childList: true, characterData: true, subtree: true })
-    return () => observer.disconnect()
+    const bind = () => {
+      const label = document.querySelector<HTMLElement>('.statusbar .sync .eyebrow')
+      if (!label || !applyLocalSemantics()) return false
+      if (!labelObserver) {
+        labelObserver = new MutationObserver(applyLocalSemantics)
+        labelObserver.observe(label, { childList: true, characterData: true, subtree: true })
+      }
+      return true
+    }
+
+    if (!bind()) {
+      const root = document.getElementById('root')
+      if (!root) return
+      rootObserver = new MutationObserver(() => {
+        if (bind()) {
+          rootObserver?.disconnect()
+          rootObserver = null
+        }
+      })
+      rootObserver.observe(root, { childList: true, subtree: true })
+    }
+
+    return () => {
+      labelObserver?.disconnect()
+      rootObserver?.disconnect()
+    }
   }, [])
 
   if (!hintVisible) return null
