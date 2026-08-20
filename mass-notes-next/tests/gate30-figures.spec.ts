@@ -10,8 +10,10 @@ async function waitReady(page: Page) {
 async function writeText(page: Page, text: string) {
   const editor = page.locator('.ProseMirror')
   await editor.click()
-  await editor.fill(text)
-  await expect(editor).toContainText(text.slice(0, Math.min(40, text.length)))
+  await page.keyboard.press('Control+A')
+  await page.keyboard.press('Backspace')
+  await page.keyboard.insertText(text)
+  await expect(editor).toHaveText(text)
   return editor
 }
 
