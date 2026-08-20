@@ -61,8 +61,17 @@ test('seleção do Tiptap preserva contexto destacado e não altera o manuscrito
   const before = await editor.innerText()
   await editor.click()
   await page.keyboard.press('Control+Home')
-  for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('Shift+ArrowRight')
-  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toMatch(/melancolia/i)
+  await page.keyboard.down('Shift')
+  for (let index = 0; index < 'Melancolia'.length; index += 1) await page.keyboard.press('ArrowRight')
+  await page.keyboard.up('Shift')
+  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('Melancolia')
+
+  // O DOM e o estado do ProseMirror não fecham necessariamente no mesmo tick
+  // sob carga de CI. Dois frames preservam a seleção real antes do Escape.
+  await page.evaluate(() => new Promise<void>((resolve) => {
+    requestAnimationFrame(() => requestAnimationFrame(() => resolve()))
+  }))
+  await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('Melancolia')
 
   // A edição colocou a casa em foco total. Escape restaura a casa sem apagar
   // o snapshot lexical da seleção; só então a ação canônica volta a ser visível.
