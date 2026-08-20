@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { countWords } from '../domain/document'
 import { readLatestLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
 import {
   DEFAULT_WRITING_GOAL,
@@ -18,10 +19,6 @@ import {
   writingSessionCompletionMessage,
 } from '../writing/writingPomodoro'
 import { useModalDrawer } from './useModalDrawer'
-
-function countWords(value: string): number {
-  return value.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0
-}
 
 function findGoalsTrigger(): HTMLButtonElement | null {
   return Array.from(document.querySelectorAll<HTMLButtonElement>('.main-actions > button'))
