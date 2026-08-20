@@ -63,7 +63,7 @@ export function WritingLexicalBridge() {
     }
 
     const reveal = () => {
-      document.body.classList.remove('reference-research-open', 'reference-tags-open', 'reference-voice-open')
+      document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-tags-open', 'reference-voice-open')
       document.body.classList.add('reference-lexical-open')
       document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
