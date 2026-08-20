@@ -23,6 +23,14 @@ function ensureLauncher(): HTMLElement | null {
   return launcher
 }
 
+function findToolsRail(): HTMLElement | null {
+  return document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
+}
+
+function findVoicePanel(): HTMLElement | null {
+  return document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz')
+}
+
 function openVoiceTab(): boolean {
   const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
   const tab = rail?.querySelector<HTMLButtonElement>('#tab-voz')
@@ -37,11 +45,6 @@ function currentDocumentSignature(): string {
   return `${title}\u0000${text}`
 }
 
-function mutationTouchesVoicePanel(mutation: MutationRecord): boolean {
-  const target = mutation.target instanceof Element ? mutation.target : mutation.target.parentElement
-  return Boolean(target?.closest('.reference-mobile-legacy #panel-voz'))
-}
-
 export function WritingVoiceBridge() {
   useEffect(() => {
     const root = document.getElementById('root')
@@ -49,6 +52,9 @@ export function WritingVoiceBridge() {
 
     let lastSummary = ''
     let lastSignature = ''
+    let railObserver: MutationObserver | null = null
+    let panelObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
 
     const syncVoiceProjection = () => {
       const launcher = ensureLauncher()
@@ -56,17 +62,18 @@ export function WritingVoiceBridge() {
 
       const button = launcher.querySelector<HTMLButtonElement>('.reference-voice-open')
       const summary = launcher.querySelector<HTMLElement>('.reference-voice-summary')
-      const railOpen = Boolean(document.querySelector('.reference-mobile-legacy #text-tools.rail.open'))
+      const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const voiceOpen = document.body.classList.contains('reference-voice-open') && railOpen
       const signature = currentDocumentSignature()
 
       button?.setAttribute('aria-expanded', String(voiceOpen))
       if (!railOpen) document.body.classList.remove('reference-voice-open')
 
-      const title = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-card h2')?.textContent?.trim()
-      const gesture = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-gesture')?.textContent?.trim()
-      const confidence = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-confidence strong')?.textContent?.trim()
-      const message = document.querySelector<HTMLElement>('.reference-mobile-legacy #panel-voz .voice-message')?.textContent?.trim()
+      const panel = findVoicePanel()
+      const title = panel?.querySelector<HTMLElement>('.voice-card h2')?.textContent?.trim()
+      const gesture = panel?.querySelector<HTMLElement>('.voice-gesture')?.textContent?.trim()
+      const confidence = panel?.querySelector<HTMLElement>('.voice-confidence strong')?.textContent?.trim()
+      const message = panel?.querySelector<HTMLElement>('.voice-message')?.textContent?.trim()
 
       if (!summary) return
 
@@ -95,6 +102,24 @@ export function WritingVoiceBridge() {
       delete summary.dataset.voiceReading
     }
 
+    const installObservers = () => {
+      const launcher = ensureLauncher()
+      const rail = findToolsRail()
+      const panel = findVoicePanel()
+      if (!launcher || !rail || !panel) return false
+
+      if (!railObserver) {
+        railObserver = new MutationObserver(syncVoiceProjection)
+        railObserver.observe(rail, { attributes: true, attributeFilter: ['class'] })
+      }
+      if (!panelObserver) {
+        panelObserver = new MutationObserver(syncVoiceProjection)
+        panelObserver.observe(panel, { childList: true, subtree: true, characterData: true })
+      }
+      syncVoiceProjection()
+      return true
+    }
+
     const revealVoice = () => {
       document.body.classList.remove('reference-research-open', 'reference-tags-open')
       document.body.classList.add('reference-voice-open')
@@ -117,19 +142,28 @@ export function WritingVoiceBridge() {
       if (target?.closest('button.reference-voice-open')) revealVoice()
     }
 
-    const voiceObserver = new MutationObserver((mutations) => {
-      if (mutations.some(mutationTouchesVoicePanel)) syncVoiceProjection()
-    })
-    voiceObserver.observe(root, { childList: true, subtree: true, characterData: true })
+    const bodyObserver = new MutationObserver(syncVoiceProjection)
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
 
-    const timer = window.setInterval(syncVoiceProjection, 250)
+    if (!installObservers()) {
+      rootObserver = new MutationObserver(() => {
+        if (installObservers()) {
+          rootObserver?.disconnect()
+          rootObserver = null
+        }
+      })
+      rootObserver.observe(root, { childList: true, subtree: true })
+    }
+
     root.addEventListener('click', onClick)
     root.addEventListener('input', syncVoiceProjection)
     requestAnimationFrame(syncVoiceProjection)
 
     return () => {
-      voiceObserver.disconnect()
-      window.clearInterval(timer)
+      railObserver?.disconnect()
+      panelObserver?.disconnect()
+      rootObserver?.disconnect()
+      bodyObserver.disconnect()
       root.removeEventListener('click', onClick)
       root.removeEventListener('input', syncVoiceProjection)
       document.body.classList.remove('reference-voice-open')
