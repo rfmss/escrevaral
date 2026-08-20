@@ -1,0 +1,67 @@
+/* Escrevaral — estabilização UX pós-inspeção humana.
+ * Escopo deliberadamente visual: reduz colisões e ruído em desktop baixo
+ * sem alterar domínio, persistência, engines ou a composição móvel.
+ */
+
+@media (min-width: 1100px) {
+  /* O texto é a camada primária. Divisórias auxiliares continuam presentes,
+     mas deixam de competir com o manuscrito. */
+  .paper-shell .document-title,
+  .paper-shell .main-actions button,
+  .paper-shell .statusbar > div {
+    border-color: rgba(0, 124, 193, .32);
+  }
+
+  .paper-shell .left-rail section,
+  .paper-shell .analysis-panel section,
+  .paper-shell .analysis-head,
+  .paper-shell .stats > div,
+  .paper-shell .chapter {
+    border-color: rgba(63, 61, 55, .34);
+  }
+
+  .paper-shell .left-rail,
+  .paper-shell .analysis-panel {
+    overscroll-behavior: contain;
+    scroll-padding-bottom: 32px;
+  }
+
+  /* O rodapé ocupa sua própria linha do grid. O respiro adicional garante
+     que o último controle das laterais possa ser alcançado sem ficar colado
+     à borda superior da barra de status. */
+  .paper-shell .left-rail,
+  .paper-shell .analysis-panel {
+    padding-bottom: 28px;
+  }
+}
+
+@media (min-width: 1100px) and (max-height: 820px) {
+  /* Em 1366×768 a referência antiga desperdiçava 54 px antes da primeira
+     linha. Mantemos ar de página, mas devolvemos altura útil ao manuscrito. */
+  .paper-shell .editor .escrevaral-editor {
+    padding-top: 30px !important;
+    padding-bottom: 44px !important;
+  }
+
+  .paper-shell .editor .escrevaral-editor p {
+    margin-bottom: 28px;
+  }
+
+  /* Compactação apenas vertical: não altera largura, ordem ou conteúdo. */
+  .paper-shell .analysis-head {
+    height: 48px;
+  }
+
+  .paper-shell .analysis-panel .count {
+    padding-top: 6px;
+  }
+
+  .paper-shell .analysis-panel .language-section {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .paper-shell .analysis-panel dl {
+    line-height: 18px;
+  }
+}
