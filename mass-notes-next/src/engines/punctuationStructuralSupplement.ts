@@ -18,6 +18,10 @@ type LocatedTerm = SyntaxTerm & {
   end: number
 }
 
+const INTERCALATION_STARTERS = new Set([
+  'segundo', 'conforme', 'como', 'alias', 'inclusive', 'porem', 'contudo',
+])
+
 function locateTerms(sentence: string, terms: SyntaxTerm[]): LocatedTerm[] {
   let cursor = 0
   const located: LocatedTerm[] = []
@@ -90,6 +94,21 @@ function directSubjectBeforeComma(terms: LocatedTerm[], commaIndex: number): Loc
     }
   }
   return undefined
+}
+
+function isIntercalatedClosingComma(terms: LocatedTerm[], commaIndex: number): boolean {
+  let previousComma = -1
+  for (let index = commaIndex - 1; index >= 0; index -= 1) {
+    if (terms[index]?.text === ',') {
+      previousComma = index
+      break
+    }
+  }
+  if (previousComma < 0 || previousComma + 1 >= commaIndex) return false
+
+  const starter = terms[previousComma + 1]
+  const token = normalizeToken(String(starter?.text ?? ''))
+  return starter?.funcao === 'Conjunção' || INTERCALATION_STARTERS.has(token)
 }
 
 function punctuationIssue(
@@ -177,6 +196,7 @@ export function calibrateStructuralPunctuation(
     for (let index = 1; index < terms.length - 1; index += 1) {
       const comma = terms[index]
       if (comma.text !== ',') continue
+      if (isIntercalatedClosingComma(terms, index)) continue
 
       const left = terms[index - 1]
       const immediateRight = terms[index + 1]
