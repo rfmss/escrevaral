@@ -5,6 +5,10 @@ function findResearchTrigger(): HTMLButtonElement | null {
     .find((button) => button.querySelector('small')?.textContent?.trim() === 'Pesquisa') ?? null
 }
 
+function findToolsRail(): HTMLElement | null {
+  return document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
+}
+
 function openReviewTab(): boolean {
   const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
   const tab = rail?.querySelector<HTMLButtonElement>('#tab-revisao')
@@ -37,14 +41,27 @@ export function WritingResearchBridge() {
   useEffect(() => {
     if (!trigger) return
 
+    let railObserver: MutationObserver | null = null
+    let rootObserver: MutationObserver | null = null
+
     const syncState = () => {
-      const railOpen = Boolean(document.querySelector('.reference-mobile-legacy #text-tools.rail.open'))
+      const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const researchOpen = document.body.classList.contains('reference-research-open') && railOpen
       trigger.setAttribute('aria-expanded', String(researchOpen))
       if (!railOpen) document.body.classList.remove('reference-research-open')
     }
 
+    const installRailObserver = () => {
+      if (railObserver) return true
+      const rail = findToolsRail()
+      if (!rail) return false
+      railObserver = new MutationObserver(syncState)
+      railObserver.observe(rail, { attributes: true, attributeFilter: ['class'] })
+      return true
+    }
+
     const revealResearch = () => {
+      document.body.classList.remove('reference-tools-open', 'reference-voice-open', 'reference-lexical-open', 'reference-tags-open')
       document.body.classList.add('reference-research-open')
       trigger.setAttribute('aria-expanded', 'true')
 
@@ -64,17 +81,31 @@ export function WritingResearchBridge() {
     trigger.setAttribute('aria-controls', 'text-tools')
     trigger.setAttribute('aria-expanded', 'false')
 
-    const root = document.getElementById('root')
-    const observer = root
-      ? new MutationObserver(syncState)
-      : null
-    observer?.observe(root!, { attributes: true, attributeFilter: ['class'], subtree: true })
+    const bodyObserver = new MutationObserver(syncState)
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+
+    if (!installRailObserver()) {
+      const root = document.getElementById('root')
+      if (root) {
+        rootObserver = new MutationObserver(() => {
+          if (installRailObserver()) {
+            rootObserver?.disconnect()
+            rootObserver = null
+          }
+        })
+        rootObserver.observe(root, { childList: true, subtree: true })
+      }
+    }
+
+    syncState()
 
     return () => {
       trigger.removeEventListener('click', revealResearch)
       trigger.removeAttribute('aria-controls')
       trigger.removeAttribute('aria-expanded')
-      observer?.disconnect()
+      railObserver?.disconnect()
+      rootObserver?.disconnect()
+      bodyObserver.disconnect()
       document.body.classList.remove('reference-research-open')
     }
   }, [trigger])
