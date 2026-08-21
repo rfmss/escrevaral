@@ -49,7 +49,9 @@ export function WritingLexicalBridge() {
       const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const lexicalOpen = document.body.classList.contains('reference-lexical-open') && railOpen
       button.setAttribute('aria-expanded', String(lexicalOpen))
-      if (!railOpen) document.body.classList.remove('reference-lexical-open')
+      if (!railOpen && document.body.classList.contains('reference-lexical-open')) {
+        document.body.classList.remove('reference-lexical-open')
+      }
     }
 
     const installRailObserver = () => {
