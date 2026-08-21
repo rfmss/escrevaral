@@ -1,5 +1,11 @@
 import { expect, test, type Page } from '@playwright/test'
 
+/* ALERTA QA VISUAL -------------------------------------------------------
+ * Verde funcional não equivale a release visual. Estados abertos de ferramenta
+ * também são parte da casa e precisam permanecer coerentes com o papel claro.
+ * Se um rail voltar a parecer um produto dark sobreposto, este gate deve cair.
+ */
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper-shell')).toBeVisible()
@@ -77,10 +83,26 @@ test('Gate 32: consulta Palavras ocupa a coluna direita sem cobrir o manuscrito'
 
   const geometry = await page.evaluate(() => {
     const workspace = document.querySelector('.workspace')?.getBoundingClientRect()
-    const shell = document.querySelector('.paper-shell')?.getBoundingClientRect()
-    const contextual = document.querySelector('.reference-mobile-legacy #text-tools.rail.open')?.getBoundingClientRect()
+    const shellElement = document.querySelector<HTMLElement>('.paper-shell')
+    const shell = shellElement?.getBoundingClientRect()
+    const contextualElement = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
+    const contextual = contextualElement?.getBoundingClientRect()
     const overlay = document.querySelector<HTMLElement>('.drawer-overlay')
     const tabs = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools .tabs')
+
+    const luminance = (value: string) => {
+      const numbers = value.match(/[\d.]+/g)?.slice(0, 3).map(Number) ?? []
+      if (numbers.length !== 3) return 0
+      const [r, g, b] = numbers.map((channel) => {
+        const c = channel / 255
+        return c <= .03928 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4)
+      })
+      return .2126 * r + .7152 * g + .0722 * b
+    }
+
+    const shellBackground = shellElement ? getComputedStyle(shellElement).backgroundColor : 'rgb(0, 0, 0)'
+    const railBackground = contextualElement ? getComputedStyle(contextualElement).backgroundColor : 'rgb(0, 0, 0)'
+
     return {
       workspaceWidth: workspace?.width ?? 0,
       workspaceRight: workspace?.right ?? 0,
@@ -89,6 +111,8 @@ test('Gate 32: consulta Palavras ocupa a coluna direita sem cobrir o manuscrito'
       shellRight: shell?.right ?? 0,
       overlayDisplay: overlay ? getComputedStyle(overlay).display : 'none',
       tabsDisplay: tabs ? getComputedStyle(tabs).display : 'none',
+      shellLuminance: luminance(shellBackground),
+      railLuminance: luminance(railBackground),
     }
   })
 
@@ -97,6 +121,16 @@ test('Gate 32: consulta Palavras ocupa a coluna direita sem cobrir o manuscrito'
   expect(Math.abs(geometry.railRight - geometry.shellRight)).toBeLessThanOrEqual(1)
   expect(geometry.overlayDisplay).toBe('none')
   expect(geometry.tabsDisplay).toBe('none')
+  expect(
+    geometry.railLuminance,
+    'ALERTA QA VISUAL: o rail Palavras voltou a uma superfície escura no tema claro',
+  ).toBeGreaterThan(.55)
+  expect(
+    Math.abs(geometry.railLuminance - geometry.shellLuminance),
+    'ALERTA QA VISUAL: o rail Palavras deixou de parecer parte da mesma casa de papel',
+  ).toBeLessThan(.22)
+
+  await page.screenshot({ path: 'test-results/release-1366-palavras.png', fullPage: true })
 })
 
 test('Gate 32: Oficina usa o mesmo rail lateral e mantém a régua de ferramentas', async ({ page }) => {
@@ -124,6 +158,8 @@ test('Gate 32: Oficina usa o mesmo rail lateral e mantém a régua de ferramenta
   expect(geometry.railLeft).toBeGreaterThanOrEqual(geometry.workspaceRight - 1)
   expect(geometry.tabsDisplay).not.toBe('none')
   expect(geometry.overlayDisplay).toBe('none')
+
+  await page.screenshot({ path: 'test-results/release-1366-oficina.png', fullPage: true })
 })
 
 test('Gate 32: release móvel permanece contido em 390px', async ({ page }) => {
