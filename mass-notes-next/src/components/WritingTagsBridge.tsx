@@ -65,14 +65,25 @@ export function WritingTagsBridge() {
 
     const revealTags = () => {
       document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-voice-open', 'reference-lexical-open')
-      document.body.classList.add('reference-tags-open')
       trigger.setAttribute('aria-expanded', 'true')
-
-      document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
       let attempts = 0
       const settle = () => {
         attempts += 1
+        const rail = findToolsRail()
+        const railOpen = Boolean(rail?.classList.contains('open'))
+
+        if (!railOpen) {
+          if (attempts === 1) document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
+          if (attempts < 8) {
+            requestAnimationFrame(settle)
+          } else {
+            syncState()
+          }
+          return
+        }
+
+        document.body.classList.add('reference-tags-open')
         if (openRealTagsEditor() || attempts >= 8) {
           syncState()
           return
