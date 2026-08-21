@@ -61,6 +61,7 @@ import './styles/theme-escrevaral-shell-centering.css'
 import './styles/theme-escrevaral-paper-home-local-feedback.css'
 import './styles/theme-escrevaral-paper-home-reader.css'
 import './styles/theme-escrevaral-paper-home-proof-status.css'
+import './styles/theme-escrevaral-ux-stabilization.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
