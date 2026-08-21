@@ -67,7 +67,9 @@ export function WritingVoiceBridge() {
       const signature = currentDocumentSignature()
 
       button?.setAttribute('aria-expanded', String(voiceOpen))
-      if (!railOpen) document.body.classList.remove('reference-voice-open')
+      if (!railOpen && document.body.classList.contains('reference-voice-open')) {
+        document.body.classList.remove('reference-voice-open')
+      }
 
       const panel = findVoicePanel()
       const title = panel?.querySelector<HTMLElement>('.voice-card h2')?.textContent?.trim()
