@@ -123,14 +123,20 @@ export function WritingVoiceBridge() {
     }
 
     const revealVoice = () => {
-      document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-tags-open', 'reference-lexical-open')
-      document.body.classList.add('reference-voice-open')
+      document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-tags-open', 'reference-lexical-open', 'reference-voice-open')
       document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
       let attempts = 0
       const settle = () => {
         attempts += 1
-        if (openVoiceTab() || attempts >= 8) {
+        const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
+        if (railOpen) {
+          document.body.classList.add('reference-voice-open')
+          openVoiceTab()
+          syncVoiceProjection()
+          return
+        }
+        if (attempts >= 8) {
           syncVoiceProjection()
           return
         }
