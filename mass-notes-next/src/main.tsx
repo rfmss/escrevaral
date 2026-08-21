@@ -1,21 +1,5 @@
-import { StrictMode, useEffect } from 'react'
+import { lazy, StrictMode, Suspense, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { WritingAutoFocusBridge } from './components/WritingAutoFocusBridge'
-import { WritingConfigBridge } from './components/WritingConfigBridge'
-import { WritingDashboardBridge } from './components/WritingDashboardBridge'
-import { WritingExportBridge } from './components/WritingExportBridge'
-import { WritingGoalsBridge } from './components/WritingGoalsBridge'
-import { WritingIntegrityBridge } from './components/WritingIntegrityBridge'
-import { WritingLexicalBridge } from './components/WritingLexicalBridge'
-import { WritingLocalFeedbackBridge } from './components/WritingLocalFeedbackBridge'
-import { WritingOfflineBridge } from './components/WritingOfflineBridge'
-import { WritingProofStatusBridge } from './components/WritingProofStatusBridge'
-import { WritingReaderBridge } from './components/WritingReaderBridge'
-import { WritingResearchBridge } from './components/WritingResearchBridge'
-import { WritingRestChrome } from './components/WritingRestChrome'
-import { WritingTagsBridge } from './components/WritingTagsBridge'
-import { WritingToolsBridge } from './components/WritingToolsBridge'
-import { WritingVoiceBridge } from './components/WritingVoiceBridge'
 import { ExperienceShell } from './ExperienceShell'
 import './styles/app.css'
 import './styles/polish.css'
@@ -63,6 +47,8 @@ import './styles/theme-escrevaral-paper-home-reader.css'
 import './styles/theme-escrevaral-paper-home-proof-status.css'
 import './styles/theme-escrevaral-ux-stabilization.css'
 
+const DeferredWritingBridges = lazy(() => import('./DeferredWritingBridges'))
+
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
     const enhance = () => {
@@ -100,25 +86,26 @@ function ApplicationAccessibilityBridge() {
   return null
 }
 
+function DeferredBridgeMount() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => setReady(true))
+    return () => window.cancelAnimationFrame(frame)
+  }, [])
+
+  if (!ready) return null
+  return (
+    <Suspense fallback={null}>
+      <DeferredWritingBridges />
+    </Suspense>
+  )
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ExperienceShell />
     <ApplicationAccessibilityBridge />
-    <WritingAutoFocusBridge />
-    <WritingDashboardBridge />
-    <WritingGoalsBridge />
-    <WritingLocalFeedbackBridge />
-    <WritingOfflineBridge />
-    <WritingProofStatusBridge />
-    <WritingReaderBridge />
-    <WritingExportBridge />
-    <WritingConfigBridge />
-    <WritingResearchBridge />
-    <WritingTagsBridge />
-    <WritingVoiceBridge />
-    <WritingLexicalBridge />
-    <WritingToolsBridge />
-    <WritingIntegrityBridge />
-    <WritingRestChrome />
+    <DeferredBridgeMount />
   </StrictMode>,
 )
