@@ -9,6 +9,25 @@ function findToolsRail(): HTMLElement | null {
   return document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
 }
 
+function projectResearchTabs(enabled: boolean): void {
+  if (!window.matchMedia('(min-width: 1100px)').matches) return
+  const tabs = findToolsRail()?.querySelector<HTMLElement>('.tabs')
+  if (!tabs) return
+
+  if (enabled) {
+    tabs.style.setProperty('display', 'flex', 'important')
+    tabs.querySelectorAll<HTMLButtonElement>('[role="tab"]').forEach((tab) => {
+      tab.style.display = tab.id === 'tab-revisao' ? '' : 'none'
+    })
+    return
+  }
+
+  tabs.style.removeProperty('display')
+  tabs.querySelectorAll<HTMLButtonElement>('[role="tab"]').forEach((tab) => {
+    tab.style.removeProperty('display')
+  })
+}
+
 function openReviewTab(): boolean {
   const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
   const tab = rail?.querySelector<HTMLButtonElement>('#tab-revisao')
@@ -48,6 +67,7 @@ export function WritingResearchBridge() {
       const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const researchOpen = document.body.classList.contains('reference-research-open') && railOpen
       trigger.setAttribute('aria-expanded', String(researchOpen))
+      projectResearchTabs(researchOpen)
       if (!railOpen && document.body.classList.contains('reference-research-open')) {
         document.body.classList.remove('reference-research-open')
       }
@@ -121,6 +141,7 @@ export function WritingResearchBridge() {
       railObserver?.disconnect()
       rootObserver?.disconnect()
       bodyObserver.disconnect()
+      projectResearchTabs(false)
       document.body.classList.remove('reference-research-open')
     }
   }, [trigger])
