@@ -66,12 +66,26 @@ export function WritingLexicalBridge() {
 
     const reveal = () => {
       document.body.classList.remove('reference-tools-open', 'reference-research-open', 'reference-tags-open', 'reference-voice-open')
-      document.body.classList.add('reference-lexical-open')
-      document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
+      const button = ensureLauncher()
+      button?.setAttribute('aria-expanded', 'true')
 
       let attempts = 0
       const settle = () => {
         attempts += 1
+        const rail = findToolsRail()
+        const railOpen = Boolean(rail?.classList.contains('open'))
+
+        if (!railOpen) {
+          if (attempts === 1) document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
+          if (attempts < 12) {
+            requestAnimationFrame(settle)
+          } else {
+            sync()
+          }
+          return
+        }
+
+        document.body.classList.add('reference-lexical-open')
         if (openLexicalTab() || attempts >= 12) {
           sync()
           return
