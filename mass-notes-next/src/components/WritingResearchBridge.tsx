@@ -64,13 +64,25 @@ export function WritingResearchBridge() {
 
     const revealResearch = () => {
       document.body.classList.remove('reference-tools-open', 'reference-voice-open', 'reference-lexical-open', 'reference-tags-open')
-      document.body.classList.add('reference-research-open')
       trigger.setAttribute('aria-expanded', 'true')
-      document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
       let attempts = 0
       const settle = () => {
         attempts += 1
+        const rail = findToolsRail()
+        const railOpen = Boolean(rail?.classList.contains('open'))
+
+        if (!railOpen) {
+          if (attempts === 1) document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
+          if (attempts < 6) {
+            requestAnimationFrame(settle)
+          } else {
+            syncState()
+          }
+          return
+        }
+
+        document.body.classList.add('reference-research-open')
         if (openReviewTab() || attempts >= 6) {
           syncState()
           return
