@@ -1,8 +1,34 @@
 import { expect, test, type Page } from '@playwright/test'
 
 async function waitReady(page: Page) {
-  await page.goto('/')
-  await expect(page.locator('.paper-shell')).toBeVisible()
+  const consoleMessages: string[] = []
+  const pageErrors: string[] = []
+  page.on('console', (message) => consoleMessages.push(`[${message.type()}] ${message.text()}`))
+  page.on('pageerror', (error) => pageErrors.push(error.message))
+
+  await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 10_000 })
+
+  try {
+    await page.locator('.paper-shell').waitFor({ state: 'visible', timeout: 6_000 })
+  } catch (error) {
+    const diagnostics = await page.evaluate(() => ({
+      readyState: document.readyState,
+      bodyText: document.body.innerText.slice(0, 1600),
+      rootHtml: document.getElementById('root')?.innerHTML.slice(0, 2200) ?? '',
+      resources: performance.getEntriesByType('resource').slice(-20).map((entry) => entry.name),
+    }))
+    throw new Error([
+      'Bootstrap do Escrevaral não alcançou .paper-shell.',
+      `readyState=${diagnostics.readyState}`,
+      `body=${diagnostics.bodyText}`,
+      `root=${diagnostics.rootHtml}`,
+      `console=${consoleMessages.join(' | ') || '(vazio)'}`,
+      `pageerror=${pageErrors.join(' | ') || '(vazio)'}`,
+      `resources=${diagnostics.resources.join(' | ') || '(vazio)'}`,
+      `cause=${error instanceof Error ? error.message : String(error)}`,
+    ].join('\n'))
+  }
+
   await expect(page.locator('.ProseMirror')).toBeEditable()
   await expect(page.locator('.sync-save')).toContainText(/Salvo|Alterado/)
 }
