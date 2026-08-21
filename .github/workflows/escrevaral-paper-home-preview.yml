@@ -11,6 +11,7 @@ on:
       - "mass-notes-next/index.html"
       - "mass-notes-next/package.json"
       - "mass-notes-next/package-lock.json"
+      - "mass-notes-next/playwright.config.ts"
       - "mass-notes-next/vite.config.ts"
       - ".github/workflows/escrevaral-paper-home-preview.yml"
   workflow_dispatch:
