@@ -49,7 +49,9 @@ export function WritingTagsBridge() {
       const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const tagsOpen = document.body.classList.contains('reference-tags-open') && railOpen
       trigger.setAttribute('aria-expanded', String(tagsOpen))
-      if (!railOpen) document.body.classList.remove('reference-tags-open')
+      if (!railOpen && document.body.classList.contains('reference-tags-open')) {
+        document.body.classList.remove('reference-tags-open')
+      }
     }
 
     const installRailObserver = () => {
