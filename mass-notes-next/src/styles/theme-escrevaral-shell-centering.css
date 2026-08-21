@@ -12,6 +12,43 @@
 }
 
 /*
+ * Em desktops compactos, o grid canônico do topo não pode conservar todas as
+ * colunas rígidas da prancha de 1920px: isso empurrava as ações finais para
+ * fora do papel em 1366px. Mantemos as cinco ações e tornamos somente o topo
+ * elástico, sem alterar a geometria do manuscrito ou dos rails.
+ */
+@media (min-width: 1100px) and (max-width: 1450px) {
+  body:not(.experience-anatomy) .paper-shell > .topbar {
+    grid-template-columns:
+      250px
+      minmax(300px, 1fr)
+      120px
+      minmax(170px, 210px)
+      minmax(280px, 320px);
+  }
+
+  body:not(.experience-anatomy) .topbar > .brand {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  body:not(.experience-anatomy) .topbar > .document-title {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  body:not(.experience-anatomy) .topbar > .mode {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  body:not(.experience-anatomy) .topbar > .search {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+/*
  * Gate 32: em telas móveis a casa deixa de manter a prancha desktop de 1120px.
  * Biblioteca e ferramentas continuam nos drawers existentes; o centro vira uma
  * coluna de escrita real, com o título acessível e Exportar preservado como
