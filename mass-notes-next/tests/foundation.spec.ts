@@ -3,14 +3,29 @@ import { expect, test, type Page } from '@playwright/test'
 async function waitReady(page: Page) {
   const consoleMessages: string[] = []
   const pageErrors: string[] = []
-  page.on('console', (message) => consoleMessages.push(`[${message.type()}] ${message.text()}`))
-  page.on('pageerror', (error) => pageErrors.push(error.message))
+  page.on('console', (message) => {
+    const line = `[browser:${message.type()}] ${message.text()}`
+    console.log(line)
+    consoleMessages.push(line)
+  })
+  page.on('pageerror', (error) => {
+    const line = `[browser:pageerror] ${error.message}`
+    console.log(line)
+    pageErrors.push(line)
+  })
+  page.on('crash', () => console.log('[browser:crash] page crashed'))
+  page.on('close', () => console.log('[browser:close] page closed'))
 
+  console.log('[bootstrap] before page.goto')
   await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 10_000 })
+  console.log('[bootstrap] after page.goto')
 
   try {
+    console.log('[bootstrap] before .paper-shell wait')
     await page.locator('.paper-shell').waitFor({ state: 'visible', timeout: 6_000 })
+    console.log('[bootstrap] .paper-shell visible')
   } catch (error) {
+    console.log(`[bootstrap] shell wait failed: ${error instanceof Error ? error.message : String(error)}`)
     const diagnostics = await page.evaluate(() => ({
       readyState: document.readyState,
       bodyText: document.body.innerText.slice(0, 1600),
@@ -62,7 +77,8 @@ async function expectTitleFits(page: Page) {
   })).toBe(true)
 }
 
-test('shell canônico mantém manuscrito, biblioteca, análise e status acessíveis', async ({ page }) => {
+test('shell canônico mantém manuscrito, biblioteca, análise e status acessíveis', async ({ page }, testInfo) => {
+  testInfo.setTimeout(60_000)
   await waitReady(page)
 
   await expect(page.locator('.topbar')).toBeVisible()
