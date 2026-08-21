@@ -90,8 +90,23 @@ function DeferredBridgeMount() {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setReady(true))
-    return () => window.cancelAnimationFrame(frame)
+    let cancelled = false
+    const mount = () => {
+      window.setTimeout(() => {
+        if (!cancelled) setReady(true)
+      }, 0)
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', mount, { once: true })
+      return () => {
+        cancelled = true
+        document.removeEventListener('DOMContentLoaded', mount)
+      }
+    }
+
+    mount()
+    return () => { cancelled = true }
   }, [])
 
   if (!ready) return null
