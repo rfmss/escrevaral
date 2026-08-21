@@ -48,7 +48,9 @@ export function WritingResearchBridge() {
       const railOpen = Boolean(findToolsRail()?.classList.contains('open'))
       const researchOpen = document.body.classList.contains('reference-research-open') && railOpen
       trigger.setAttribute('aria-expanded', String(researchOpen))
-      if (!railOpen) document.body.classList.remove('reference-research-open')
+      if (!railOpen && document.body.classList.contains('reference-research-open')) {
+        document.body.classList.remove('reference-research-open')
+      }
     }
 
     const installRailObserver = () => {
