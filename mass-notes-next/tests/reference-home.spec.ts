@@ -151,7 +151,7 @@ test('geometria desktop mantém a folha centralizada e os três planos alinhados
   expect(geometry.left.width).toBeCloseTo(250, 0)
   expect(geometry.right.width).toBeCloseTo(250, 0)
   expect(geometry.toolbar.height).toBeCloseTo(68, 0)
-  expect(geometry.footer.height).toBeCloseTo(60, 0)
+  expect(geometry.footer.height).toBeCloseTo(56, 0)
   expect(geometry.workspace.left).toBeCloseTo(geometry.left.right, 0)
   expect(geometry.workspace.right).toBeCloseTo(geometry.right.left, 0)
 })
