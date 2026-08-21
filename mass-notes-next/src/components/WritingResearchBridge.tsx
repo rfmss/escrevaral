@@ -66,6 +66,7 @@ export function WritingResearchBridge() {
       document.body.classList.remove('reference-tools-open', 'reference-voice-open', 'reference-lexical-open', 'reference-tags-open')
       document.body.classList.add('reference-research-open')
       trigger.setAttribute('aria-expanded', 'true')
+      document.querySelector<HTMLButtonElement>('.mobile-tools')?.click()
 
       let attempts = 0
       const settle = () => {
