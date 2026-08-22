@@ -99,7 +99,7 @@ test('marca e ações principais da casa canônica continuam identificáveis', a
   await expect(page.locator('.brand-tagline')).toHaveText(/ESCRITA COM INTENÇÃO/i)
   await expect(page.getByRole('button', { name: 'Abrir oficina de ferramentas' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Pesquisa' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Exportar' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Exportar', exact: true })).toBeVisible()
 })
 
 test('parágrafos permanecem estruturais e o undo do Tiptap continua reversível', async ({ page }) => {
