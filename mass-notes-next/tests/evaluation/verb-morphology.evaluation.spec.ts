@@ -32,20 +32,12 @@ async function openLexicalPanel(page: Page) {
   const input = page.locator('#lexical-query:visible')
   if (await input.count()) return
 
-  /* O rail lexical continua sendo a superfície real avaliada. No chrome novo,
-     primeiro é preciso abrir a análise pela ação pública Pesquisa; só então a
-     aba Palavras existe de forma interativa. Nenhuma expectativa linguística muda. */
-  const rail = page.locator('#text-tools')
-  if (!(await rail.isVisible())) {
-    const researchLauncher = page.getByRole('button', { name: 'Pesquisa', exact: true })
-    await expect(researchLauncher).toBeVisible()
-    await researchLauncher.click()
-    await expect(rail).toBeVisible()
-  }
-
-  const lexicalTab = page.getByRole('tab', { name: 'palavras', exact: true })
-  await expect(lexicalTab).toBeVisible()
-  await lexicalTab.click()
+  /* O chrome atual possui um launcher público dedicado a Palavras. Usá-lo evita
+     abrir Pesquisa, que por contrato projeta somente a aba Revisão. Nenhuma
+     expectativa linguística, corpus ou heurística muda. */
+  const lexicalLauncher = page.getByRole('button', { name: 'Consultar palavras', exact: true })
+  await expect(lexicalLauncher).toBeVisible()
+  await lexicalLauncher.click()
 
   await expect(panel).toBeVisible()
   await expect(page.locator('#lexical-query:visible')).toBeVisible()
