@@ -15,7 +15,18 @@ export function WritingRestChrome() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setWorkshopOpen(false)
+      if (event.key !== 'Escape') return
+
+      // Escape respeita a pilha de superfícies: um drawer/modal aberto fecha
+      // primeiro pelo proprietário (App/RightRail). Só um Escape sem camada
+      // transitória devolve a pessoa à escrita silenciosa. Isso evita fechar
+      // Biblioteca/Palavras e Oficina no mesmo gesto.
+      const transientSurfaceOpen = Boolean(
+        document.querySelector('.drawer-overlay, .sidebar.open, #text-tools.rail.open'),
+      )
+      if (transientSurfaceOpen) return
+
+      setWorkshopOpen(false)
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
