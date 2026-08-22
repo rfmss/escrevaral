@@ -60,11 +60,11 @@ async function openReview(page: Page) {
   const research = page.getByRole('button', { name: 'Pesquisa' })
   await expect(research).toBeVisible()
   await research.click()
-  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
-  await expect(dialog).toBeVisible()
-  const tab = dialog.getByRole('tab', { name: 'revisao', exact: true })
+  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  await expect(rail).toBeVisible()
+  const tab = rail.getByRole('tab', { name: 'revisao', exact: true })
   await expect(tab).toHaveAttribute('aria-selected', 'true')
-  return dialog
+  return rail
 }
 
 async function expectTitleFits(page: Page) {
