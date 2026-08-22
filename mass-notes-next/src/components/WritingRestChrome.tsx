@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export function WritingRestChrome() {
-  const [workshopOpen, setWorkshopOpen] = useState(true)
+  const [workshopOpen, setWorkshopOpen] = useState(false)
 
   useEffect(() => {
     document.body.classList.add('writing-rest')
