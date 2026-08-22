@@ -19,11 +19,13 @@ for (const viewport of [
     const paper = page.locator('.paper')
     const editor = page.locator('.ProseMirror')
     const title = page.getByLabel('Título do documento')
+    const library = page.locator('.paper-shell > .left-rail')
+    const analysis = page.locator('.paper-shell > .analysis-panel')
 
     await expect(body).not.toHaveClass(/workshop-open/)
     await expect(editor).toBeEditable()
-    await expect(page.locator('.sidebar')).toBeHidden()
-    await expect(page.locator('.rail')).toBeHidden()
+    await expect(library).toBeHidden()
+    await expect(analysis).toBeHidden()
     await expect(page.locator('.editor-toolbar')).toBeHidden()
     await expect(page.locator('.blueprint')).toBeHidden()
     await expect(page.locator('.impact-button')).toBeHidden()
@@ -66,13 +68,13 @@ for (const viewport of [
 
     await page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' }).click()
     await expect(body).toHaveClass(/workshop-open/)
-    await expect(page.locator('.sidebar')).toBeVisible()
-    await expect(page.locator('.rail')).toBeVisible()
+    await expect(library).toBeVisible()
+    await expect(analysis).toBeVisible()
     await expect(page.getByRole('button', { name: 'Voltar à escrita silenciosa' })).toBeVisible()
 
     await page.keyboard.press('Escape')
     await expect(body).not.toHaveClass(/workshop-open/)
-    await expect(page.locator('.sidebar')).toBeHidden()
-    await expect(page.locator('.rail')).toBeHidden()
+    await expect(library).toBeHidden()
+    await expect(analysis).toBeHidden()
   })
 }
