@@ -1,0 +1,6195 @@
+import{_ as e,b as t,g as n,h as r,m as i,v as a}from"./index.js";var o=t(a(),1),s=`(function precisionEngine(global) {
+  function analyze(template, text) {
+    const normalizedText = normalize(text);
+    const words = countWords(normalizedText);
+
+    if (template.id === "flash-fiction") {
+      return analyzeFlashFiction(normalizedText, words);
+    }
+
+    if (template.id === "cronica") {
+      return analyzeCronica(normalizedText, words);
+    }
+
+    if (template.id === "conto-curto") {
+      return analyzeContoCurto(normalizedText, words);
+    }
+
+    if (template.id === "ensaio") {
+      return analyzeEnsaio(normalizedText, words);
+    }
+
+    if (template.oficio === "estudo-vestibular" || template.id === "redacao-enem") {
+      return analyzeEnem(normalizedText, words);
+    }
+
+    if (template.oficio === "roteiro" || template.id === "roteiro-tv") {
+      return analyzeRoteiro(normalizedText, words);
+    }
+
+    if (template.oficio === "poesia" || template.id === "poesia-lirica") {
+      return analyzePoesia(normalizedText, words);
+    }
+
+    if (template.id === "romance-comercial" || template.id === "romance-literario") {
+      return analyzeRomance(normalizedText, words);
+    }
+
+    if (template.id === "ficcao-cientifica") {
+      return analyzeFiccaoCientifica(normalizedText, words);
+    }
+
+    if (template.id === "fantasia-brasileira") {
+      return analyzeFanfaziaBrasileira(normalizedText, words);
+    }
+
+    if (template.id === "policial-noir") {
+      return analyzePolicialNoir(normalizedText, words);
+    }
+
+    if (template.id === "terror-horror") {
+      return analyzeTerrorHorror(normalizedText, words);
+    }
+
+    if (template.id === "memoir") {
+      return analyzeMemoir(normalizedText, words);
+    }
+
+    if (template.id === "romance-sentimental" || template.id === "fanfiction") {
+      return analyzeRomance(normalizedText, words);
+    }
+
+    if (template.id === "romantasy" || template.id === "sci-fi-romantico" || template.id === "new-adult") {
+      return analyzeRomantasy(normalizedText, words);
+    }
+
+    if (template.id === "suspense-psicologico") {
+      return analyzeSuspensePsicologico(normalizedText, words);
+    }
+
+    if (template.id === "soneto") {
+      return analyzeSoneto(normalizedText, words);
+    }
+
+    if (template.id === "slam") {
+      return analyzeSlam(normalizedText, words);
+    }
+
+    if (template.id === "livro-reportagem") {
+      return analyzeMemoir(normalizedText, words);
+    }
+
+    if (template.oficio === "jornalismo") {
+      return analyzeJornalismo(normalizedText, words);
+    }
+
+    if (template.oficio === "comercial-tecnica") {
+      return analyzeComercialTecnica(template, normalizedText, words);
+    }
+
+    if (template.oficio === "mercado-editorial" || template.oficio === "objeto-livro" || template.oficio === "direitos-autorais") {
+      return analyzePlanejamento(template, normalizedText, words);
+    }
+
+    return analyzeGeneric(template, normalizedText, words);
+  }
+
+  function analyzeFlashFiction(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const lastSentence = getLastSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map((item) => item.trim()).filter(Boolean);
+    const sensoryHits = countMatches(text, /\\b(cheiro|som|ruído|luz|sombra|gosto|frio|calor|mão|olho|porta|mesa|xícara|café|janela|roupa|casaco|sangue|água|terra|pele|voz|chão|madeira|pedra|fumaça|vento|chuva|barulho|silêncio|couro|vela|areia|sal|pão|ferro|barro|neblina|poeira|carne|cinza)\\b/gi);
+    const turnHits = countMatches(text, /\\b(mas|porém|então|quando|até que|só que|de repente|na verdade|descobriu|percebeu)\\b/gi);
+    const explanationHits = countMatches(text, /\\b(porque|pois|significava|sentia|pensava|lembrava|explicou|entendeu que)\\b/gi);
+    const repeatedRatio = getTopWordRatio(text);
+    const firstLastEcho = getEchoScore(firstSentence, lastSentence);
+
+    const checks = [
+      createCheck("Limite do subformato", words > 0 && words <= 500, getRangeScore(words, 80, 500), "Até 500 palavras mantém a compressão do flash."),
+      createCheck("Imagem âncora", sensoryHits >= 2, Math.min(100, sensoryHits * 28), "Procure um objeto, gesto ou detalhe sensorial que carregue peso."),
+      createCheck("Abertura com pergunta", firstSentence.length > 20 && firstSentence.length < 180, scoreOpening(firstSentence), "A primeira frase precisa abrir tensão, não explicar o mundo."),
+      createCheck("Virada perceptível", turnHits > 0, Math.min(100, turnHits * 34), "Uma mudança de leitura ajuda o texto a fechar com força."),
+      createCheck("Fechamento em eco", firstLastEcho >= 20, firstLastEcho, "O fim pode espelhar, contrariar ou iluminar a abertura."),
+      createCheck("Compressão", explanationHits <= 3 && repeatedRatio < 0.18, scoreCompression(explanationHits, repeatedRatio), "Ficção-relâmpago perde força quando explica ou repete demais."),
+      createCheck("Respiração do texto", paragraphs.length >= 2 && sentences.length >= 3, Math.min(100, paragraphs.length * 22 + sentences.length * 8), "Blocos e frases precisam dar ritmo sem virar resumo."),
+    ];
+
+    return summarize(checks, words, 500);
+  }
+
+  function analyzeCronica(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const lastSentence = getLastSentence(text);
+    const everydayHits = countMatches(text, /\\b(rua|casa|janela|mesa|ônibus|metro|fila|padaria|café|cozinha|praça|vizinho|chuva|calçada|telefone|mercado|porta|feira|quintal|portão|corredor|bairro|esquina|loja|banco|escola|bicicleta|sacada|varanda|boteco|bar|ônibus|moto|sinal|calor)\\b/gi);
+    const reflectionHits = countMatches(text, /\\b(talvez|parece|penso|percebo|lembro|como se|no fundo|afinal|ninguém|todo mundo|a gente)\\b/gi);
+    const toneHits = countMatches(text, /\\b(riso|sorriso|silêncio|saudade|ironia|estranho|bonito|triste|leve|pequeno|delicado)\\b/gi);
+    const paragraphs = text.split(/\\n+/).map((item) => item.trim()).filter(Boolean);
+    const echo = getEchoScore(firstSentence, lastSentence);
+
+    const checks = [
+      createCheck("Tamanho de crônica", words >= 180 && words <= 1200, getRangeScore(words, 180, 1200), "A crônica costuma respirar melhor entre recorte breve e desenvolvimento suficiente."),
+      createCheck("Cena cotidiana", everydayHits >= 2, Math.min(100, everydayHits * 24), "O texto precisa encostar em uma cena comum antes de abrir reflexão."),
+      createCheck("Olhar autoral", reflectionHits >= 2, Math.min(100, reflectionHits * 24), "A crônica ganha assinatura quando o olhar aparece sem virar sermão."),
+      createCheck("Tom perceptível", toneHits >= 2, Math.min(100, toneHits * 26), "Humor, afeto, melancolia ou ironia ajudam a sustentar a voz."),
+      createCheck("Fecho com eco", echo >= 16, echo, "O final deve deixar uma ressonância, não apenas encerrar o assunto."),
+      createCheck("Respiração em blocos", paragraphs.length >= 3, Math.min(100, paragraphs.length * 22), "Parágrafos curtos ajudam a crônica a andar com leveza."),
+    ];
+
+    return summarize(checks, words, 1200);
+  }
+
+  function analyzeContoCurto(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const actionHits = countMatches(text, /\\b(pegou|olhou|disse|entrou|saiu|correu|parou|abriu|fechou|sentou|levantou|tocou|esperou|voltou|caminhou|falou|respondeu|gritou|sussurrou|chorou|riu|sorriu|abraçou|empurrou|puxou|jogou|largou|chegou|partiu|segurou|atirou|derrubou|ergueu|apontou)\\b/gi);
+    const conflictHits = countMatches(text, /\\b(mas|porém|medo|segredo|dívida|culpa|perda|ameaça|mentira|escolha|impossível|nunca|último|contra)\\b/gi);
+    const characterHits = countMatches(text, /\\b(ela|ele|eu|mãe|pai|filho|filha|irmão|irmã|mulher|homem|menino|menina|velho|velha)\\b/gi);
+    const turnHits = countMatches(text, /\\b(então|quando|até que|de repente|percebeu|descobriu|naquela hora|só então)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+
+    const checks = [
+      createCheck("Tamanho de conto curto", words >= 500 && words <= 3500, getRangeScore(words, 500, 3500), "O conto curto precisa de espaço para cena, conflito e consequência."),
+      createCheck("Personagem em cena", characterHits >= 4, Math.min(100, characterHits * 12), "Alguém precisa atravessar o acontecimento, não só uma ideia."),
+      createCheck("Conflito ativo", conflictHits >= 2, Math.min(100, conflictHits * 26), "O conto precisa de resistência, risco ou escolha."),
+      createCheck("Ação concreta", actionHits >= 4, Math.min(100, actionHits * 14), "Cenas ganham força quando algo acontece diante do leitor."),
+      createCheck("Virada ou mudança", turnHits >= 1, Math.min(100, turnHits * 34), "Alguma coisa deve mudar de estado no percurso."),
+      createCheck("Voz em cena", dialogueHits >= 2 || firstSentence.length < 170, dialogueHits >= 2 ? 86 : scoreOpening(firstSentence), "Diálogo ou abertura precisa puxar o leitor para dentro da cena."),
+      createCheck("Progressão narrativa", sentences.length >= 10, Math.min(100, sentences.length * 8), "O texto precisa avançar em etapas, não só descrever uma situação."),
+    ];
+
+    return summarize(checks, words, 3500);
+  }
+
+  function analyzeEnsaio(text, words) {
+    const paragraphs = text.split(/\\n+/).map((item) => item.trim()).filter(Boolean);
+    const thesisHits = countMatches(text, /\\b(defendo|proponho|acredito|tese|ideia|questão|problema|argumento|sustento|pretendo)\\b/gi);
+    const connectorHits = countMatches(text, /\\b(portanto|porém|assim|além disso|no entanto|contudo|porque|pois|desse modo|por outro lado|em primeiro lugar)\\b/gi);
+    const counterpointHits = countMatches(text, /\\b(por outro lado|no entanto|contudo|ainda assim|embora|mas|objeção|contraponto|limite)\\b/gi);
+    const evidenceHits = countMatches(text, /\\b(exemplo|caso|dados|história|experiência|autor|livro|pesquisa|cena|episódio)\\b/gi);
+    const questionHits = countMatches(text, /\\?/g);
+
+    const checks = [
+      createCheck("Tamanho de ensaio", words >= 700 && words <= 5000, getRangeScore(words, 700, 5000), "O ensaio precisa desenvolver uma ideia sem perder direção."),
+      createCheck("Tese identificável", thesisHits >= 1 || questionHits >= 1, Math.min(100, thesisHits * 38 + questionHits * 18), "Uma tese ou pergunta central orienta a leitura."),
+      createCheck("Progressão argumentativa", connectorHits >= 4, Math.min(100, connectorHits * 16), "Conectores ajudam o pensamento a avançar com clareza."),
+      createCheck("Contraponto", counterpointHits >= 1, Math.min(100, counterpointHits * 34), "Reconhecer tensão deixa o ensaio mais confiável."),
+      createCheck("Exemplos ou evidências", evidenceHits >= 2, Math.min(100, evidenceHits * 24), "Ideias ficam mais fortes quando encostam em exemplos."),
+      createCheck("Organização em blocos", paragraphs.length >= 4, Math.min(100, paragraphs.length * 18), "Parágrafos bem marcados dão percurso ao raciocínio."),
+    ];
+
+    return summarize(checks, words, 5000);
+  }
+
+  function analyzeEnem(text, words) {
+    const paragraphs = text.split(/\\n+/).map((item) => item.trim()).filter(Boolean);
+    const sentences = splitSentences(text);
+    const connectorHits = countMatches(text, /\\b(além disso|ademais|outrossim|soma-se a isso|nesse sentido|isso ocorre porque|haja vista|no entanto|contudo|todavia|portanto|dessa forma|desse modo|diante do exposto|a fim de|para que|por meio de)\\b/gi);
+    const repertoryHits = countMatches(text, /\\b(segundo|de acordo com|conforme|filósofo|sociólogo|constituição|lei|ibge|onu|unesco|obra|livro|filme|história|pesquisa|dados)\\b/gi);
+    const thesisHits = countMatches(text, /\\b(problema|persistência|desafio|decorre|deve-se|causa|consequência|necessário|torna-se)\\b/gi);
+    const informalHits = countMatches(text, /\\b(tipo|né|pra|tá|coisa|legal|muito top|aí|daí)\\b/gi);
+    const copiedMotivatorHits = countMatches(text, /\\b(texto motivador|como mostra o texto|na coletânea)\\b/gi);
+    const agentHits = countMatches(text, /\\b(estado|governo|ministério|escola|mídia|empresas|sociedade civil|família|ongs|poder público)\\b/gi);
+    const actionHits = countMatches(text, /\\b(deve|devem|promover|criar|ampliar|fiscalizar|implementar|garantir|realizar|desenvolver|regulamentar)\\b/gi);
+    const meansHits = countMatches(text, /\\b(por meio de|mediante|através de|com campanhas|por intermédio|em parceria)\\b/gi);
+    const purposeHits = countMatches(text, /\\b(a fim de|para que|com o objetivo de|com a finalidade de|visando)\\b/gi);
+    const effectHits = countMatches(text, /\\b(com isso|assim|desse modo|dessa forma|resultado|efeito|reduzir|mitigar|combater|assegurar)\\b/gi);
+    const interventionScore = [agentHits, actionHits, meansHits, purposeHits, effectHits].filter(Boolean).length;
+
+    const checks = [
+      createCheck("C1 - norma padrão", informalHits === 0 && words >= 80, Math.max(0, 96 - informalHits * 22), "Evite informalidade, marcas de fala e deslizes acumulados de registro."),
+      createCheck("C2 - proposta e recorte", words >= 120 && copiedMotivatorHits === 0, getRangeScore(words, 120, 450) - copiedMotivatorHits * 18, "Mostre que entendeu o tema real sem copiar os textos motivadores."),
+      createCheck("C3 - tese e argumentos", thesisHits >= 3 && repertoryHits >= 1, Math.min(100, thesisHits * 12 + repertoryHits * 24), "Tese, repertório e argumentos precisam trabalhar juntos."),
+      createCheck("C4 - coesão", connectorHits >= 4 && paragraphs.length >= 3, Math.min(100, connectorHits * 13 + paragraphs.length * 10), "Use conectivos com função clara e parágrafos em progressão."),
+      createCheck("C5 - intervenção", interventionScore >= 4, interventionScore * 20, "Inclua agente, ação, meio, finalidade e efeito respeitando direitos humanos."),
+      createCheck("Arquitetura ENEM", paragraphs.length >= 4 && sentences.length >= 8, Math.min(100, paragraphs.length * 18 + sentences.length * 4), "Introdução, dois desenvolvimentos e proposta final deixam a correção mais legível."),
+    ];
+
+    return summarize(checks, words, 450);
+  }
+
+  function analyzeRoteiro(text, words) {
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const actionHits = countMatches(text, /\\b(EXT\\.|INT\\.|CORTE|FADE|CENA|CLOSE|PLANO|PANORÂMICA)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const sluglineHits = countMatches(text, /^(EXT\\.|INT\\.|EXTERIOR|INTERIOR)\\s/gm);
+    const actionDescHits = countMatches(text, /\\b(entra|sai|olha|corre|para|abre|fecha|senta|levanta|caminha|pega|larga|vira)\\b/gi);
+    const parentheticalHits = countMatches(text, /\\([\\w\\s]+\\)/g);
+    const sentences = splitSentences(text);
+
+    const checks = [
+      createCheck("Cenas marcadas", sluglineHits >= 1, Math.min(100, sluglineHits * 34), "Cada nova cena começa com linha de cabeçalho: INT./EXT. LOCAL — DIA/NOITE."),
+      createCheck("Ações visíveis", actionDescHits >= 4, Math.min(100, actionDescHits * 12), "Roteiro descreve o que a câmera vê, não o que o personagem sente."),
+      createCheck("Diálogo presente", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "A fala revela relação de poder, necessidade ou segredo — nunca informação pura."),
+      createCheck("Frases curtas na ação", sentences.length >= 5, Math.min(100, sentences.length * 10), "Linhas de ação idealmente têm 3 linhas ou menos."),
+      createCheck("Ritmo de blocos", paragraphs.length >= 4, Math.min(100, paragraphs.length * 14), "Blocos curtos dão ritmo visual na leitura e agilidade na decupagem."),
+      createCheck("Volume de cena", words >= 100, Math.min(100, words), "Uma cena com menos de 100 palavras pode ser curta demais para respirar."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePoesia(text, words) {
+    const lines = text.split(/\\n/).map(s => s.trim()).filter(Boolean);
+    const stanzas = text.split(/\\n{2,}/).map(s => s.trim()).filter(Boolean);
+    const imageryHits = countMatches(text, /\\b(luz|sombra|água|terra|vento|fogo|olho|mão|boca|corpo|noite|pedra|rio|mar|folha|raiz|chuva|voz|silêncio|osso|sangue|pele|chama|brasa|cinza|névoa|bruma|gelo|ardor|tremor|abismo|pétala|espinho|grão|âmago|íris|âncora|faísca|véu|âmbar|musgo|lama|galho|poeira|areia|semente|sussurro)\\b/gi);
+    const repetitionHits = countMatches(text, /\\b(\\w{4,})\\b(?=.*\\b\\1\\b)/gi);
+    const questionHits = countMatches(text, /\\?/g);
+    const enjambmentHits = lines.filter(l => l.length > 0 && !/[.!?:;,—]$/.test(l)).length;
+    const shortLines = lines.filter(l => l.split(/\\s+/).length <= 5).length;
+
+    const checks = [
+      createCheck("Imagens concretas", imageryHits >= 3, Math.min(100, imageryHits * 16), "Poesia vive de imagens que engancham sentido e sensação ao mesmo tempo."),
+      createCheck("Corte de verso ativo", enjambmentHits >= 2, Math.min(100, enjambmentHits * 16), "O encavalgamento (verso que quebra antes da pontuação) cria tensão e ritmo."),
+      createCheck("Variação de verso", shortLines >= 1 && lines.length >= 3, Math.min(100, shortLines * 20 + lines.length * 5), "Versos curtos e longos alternados criam música e ênfase."),
+      createCheck("Estrofes ou blocos", stanzas.length >= 2 || lines.length >= 4, Math.min(100, stanzas.length * 32 + lines.length * 8), "Divisão em estrofes organiza o movimento do poema."),
+      createCheck("Pergunta ou tensão", questionHits >= 1 || repetitionHits >= 1, Math.min(100, questionHits * 38 + repetitionHits * 20), "Perguntas sem resposta e repetições controladas constroem densidade."),
+      createCheck("Compressão do dizer", words <= 200, words <= 200 ? 90 : Math.max(30, 120 - words / 5), "Poesia trabalha com o mínimo que carrega o máximo."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeRomance(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const lastSentence = getLastSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const characterHits = countMatches(text, /\\b(ela|ele|eu|mãe|pai|filho|filha|irmão|irmã|nome próprio|homem|mulher|menino|menina)\\b/gi);
+    const sensoryHits = countMatches(text, /\\b(olhou|sentiu|cheirou|ouviu|tocou|percebeu|viu|notou|reconheceu|enxergou)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const actionHits = countMatches(text, /\\b(pegou|correu|abriu|fechou|entrou|saiu|sentou|levantou|disse|respondeu|virou|puxou)\\b/gi);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+    const echo = getEchoScore(firstSentence, lastSentence);
+
+    const checks = [
+      createCheck("Tamanho de capítulo", words >= 800, Math.min(100, words / 8), "Capítulos de romance geralmente têm entre 1.500 e 5.000 palavras."),
+      createCheck("Personagem ativo", characterHits >= 4 && actionHits >= 3, Math.min(100, characterHits * 8 + actionHits * 10), "Alguém precisa agir, não apenas existir na cena."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 22), "Percepção do personagem ancorando a cena deixa o leitor dentro, não fora."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 12), "Alterne frases curtas de ação com longas de reflexão ou descrição."),
+      createCheck("Diálogo ou voz", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "Diálogo que muda a relação dos personagens vale mais do que diálogo de exposição."),
+      createCheck("Cena com arco", echo >= 12 || sentences.length >= 20, Math.max(echo, Math.min(100, sentences.length * 5)), "Uma cena que começa em um estado e termina em outro — mínimo de mudança."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeFiccaoCientifica(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const novumHits = countMatches(text, /\\b(tecnologia|sistema|nave|planeta|espaço|robô|androide|código|mutação|colônia|rede|algoritmo|vírus|futuro|passado|portal|dimensão|estação|satélite|nanobot|ia|inteligência artificial|realidade virtual)\\b/gi);
+    const characterHits = countMatches(text, /\\b(ela|ele|eu|comandante|cientista|engenheira|piloto|detetive|agente|androide|humano|criatura)\\b/gi);
+    const tensionHits = countMatches(text, /\\b(mas|porém|então|de repente|descobriu|percebeu|falhou|quebrou|explodiu|errou|ameaça|alerta|perigo|risco|colapso)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    const checks = [
+      createCheck("Tamanho de cena", words >= 400, Math.min(100, words / 5), "Cenas de FC precisam de espaço para situar o leitor no mundo."),
+      createCheck("Novum presente", novumHits >= 2, Math.min(100, novumHits * 18), "O elemento de FC precisa aparecer nas primeiras páginas — não como catálogo, mas como realidade do personagem."),
+      createCheck("Abertura com ancoragem", firstSentence.length >= 20 && firstSentence.length <= 200, scoreOpening(firstSentence), "A FC pede uma abertura que coloca o leitor no mundo antes de explicá-lo."),
+      createCheck("Personagem em cena", characterHits >= 3, Math.min(100, characterHits * 14), "Tecnologia sem personagem vira manual — coloque alguém em relação com o novum."),
+      createCheck("Conflito com o sistema", tensionHits >= 2, Math.min(100, tensionHits * 22), "FC fica sem força quando o mundo funciona perfeitamente. Introduza uma falha ou ameaça."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 12), "Alterne frase técnica com gesto humano para não virar relatório."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeFanfaziaBrasileira(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const territorioHits = countMatches(text, /\\b(cerrado|sertão|caatinga|nordeste|quilombo|favela|terreiro|mata|rio|morro|aldeia|comunidade|roça|mangue)\\b/gi);
+    const magiaHits = countMatches(text, /\\b(encantado|feitiço|magia|bruxo|benzedeira|rezadeira|orixá|entidade|visagem|assombração|cura|ritual|espírito|ancestral|caboclo|encantaria|pajelança)\\b/gi);
+    const sensoryHits = countMatches(text, /\\b(cheiro|som|terra|raiz|sangue|luz|sombra|barro|cinza|fumaça|erva|folha|água|fogo|vento)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const tensionHits = countMatches(text, /\\b(mas|porém|então|de repente|percebeu|sentiu|ouviu|chamou|respondeu|apareceu|desapareceu|medo|perigo)\\b/gi);
+
+    const checks = [
+      createCheck("Tamanho de cena", words >= 300, Math.min(100, words / 3.5), "A fantasia brasileira precisa de espaço para ancorar mundo e personagem."),
+      createCheck("Território reconhecível", territorioHits >= 1, Math.min(100, territorioHits * 30), "Fantasias enraizadas num território brasileiro concreto têm chão para a magia pousar."),
+      createCheck("Magia ou sobrenatural", magiaHits >= 1, Math.min(100, magiaHits * 25), "O elemento fantástico precisa ser tratado como real dentro do mundo, não como adereço."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 18), "Paisagem e corpo ancoram a fantasia — substitua generalização por cheiro, textura e som."),
+      createCheck("Tensão ou movimento", tensionHits >= 2, Math.min(100, tensionHits * 22), "Fantasia sem conflito vira decoração. Introduza uma força que perturba o equilíbrio."),
+      createCheck("Voz e diálogo", dialogueHits >= 1 || paragraphs.length >= 3, Math.min(100, dialogueHits * 20 + paragraphs.length * 12), "A voz da comunidade ou do personagem deve aparecer — em fala, narração ou monólogo interior."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePolicialNoir(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const criminalHits = countMatches(text, /\\b(crime|corpo|cadáver|detetive|delegado|suspeito|alibi|pista|evidência|motivo|testemunha|investigação|culpado|delegacia|polícia|assassino|assassinato|morte|sangue|arma|faca|pistola|tiro)\\b/gi);
+    const noirHits = countMatches(text, /\\b(noite|sombra|beco|chuva|fumaça|neon|bar|whisky|cidade|rua|escuro|calçada|sirene|vidro|traíra|traidor|mentira|segredo)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const tensionHits = countMatches(text, /\\b(mas|porém|então|de repente|descobriu|percebeu|suspeita|virou|fugiu|mentiu|escondeu|revelou|confessou|atirou|correu)\\b/gi);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const shortSentences = lengths.filter(l => l <= 10).length;
+    const hasNoir = shortSentences >= 3;
+
+    const checks = [
+      createCheck("Crime ou tensão presente", criminalHits >= 2, Math.min(100, criminalHits * 20), "Policial sem crime ou ameaça explícita perde o centro de gravidade do gênero."),
+      createCheck("Atmosfera noir", noirHits >= 2, Math.min(100, noirHits * 22), "Noir vive de atmosfera — cidade noturna, detalhes sombrios, sensação de inevitabilidade."),
+      createCheck("Diálogo cortante", dialogueHits >= 3, Math.min(100, dialogueHits * 12), "Falas curtas e parciais são o motor do noir — cada linha esconde mais do que revela."),
+      createCheck("Ritmo de suspeita", tensionHits >= 2, Math.min(100, tensionHits * 22), "A história precisa criar, manter e trair expectativas com regularidade."),
+      createCheck("Frases de corte", hasNoir, hasNoir ? 90 : Math.min(60, shortSentences * 20), "Frases curtas criam o ritmo sincopado característico do noir."),
+      createCheck("Ponto de observação", firstSentence.length >= 15 && firstSentence.length <= 180, scoreOpening(firstSentence), "A abertura precisa colocar o olhar do narrador na cena, não no backstory."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeTerrorHorror(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const fearHits = countMatches(text, /\\b(medo|terror|pavor|horror|assustador|sombra|escuro|frio|arrepio|grito|sangue|morte|cadáver|fantasma|criatura|monstro|perigo|ameaça|correndo|fugindo|preso|armadilha|silêncio|sussurro|passos|porta|chave|trancado|vítima|predador)\\b/gi);
+    const atmosphereHits = countMatches(text, /\\b(noite|escuridão|névoa|chuva|vento|crepúsculo|isolado|abandonado|vazio|podre|mohoso|fétido|gelado|úmido|sussurro|rangeu|estalou|gemeu|rasgou)\\b/gi);
+    const sensoryHits = countMatches(text, /\\b(cheiro|odor|fedor|frio|calor|arrepio|suor|coração|respiração|pulso|tremeu|engoliu|pele|olhos|ouviu|viu|sentiu|tocou)\\b/gi);
+    const tensionHits = countMatches(text, /\\b(mas|porém|então|de repente|percebeu|descobriu|ouviu|viu|notou|parou|congelou|recuou|correu|escondeu|esperou|não|nunca|ninguém|nada)\\b/gi);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const shortSentences = lengths.filter(l => l <= 8).length;
+    const hasRhythm = shortSentences >= 3;
+
+    const checks = [
+      createCheck("Atmosfera de medo", fearHits >= 3 || atmosphereHits >= 2, Math.min(100, fearHits * 14 + atmosphereHits * 18), "Terror precisa de um ambiente que ameaça — antes do monstro aparecer, o lugar já assusta."),
+      createCheck("Âncoras sensoriais", sensoryHits >= 3, Math.min(100, sensoryHits * 18), "Medo físico: frio na nuca, suor nas mãos, coração acelerado — o corpo do personagem sente antes da mente entender."),
+      createCheck("Abertura perturbadora", firstSentence.length >= 15 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase precisa criar desconforto imediato — algo errado, algo fora do lugar."),
+      createCheck("Tensão sustentada", tensionHits >= 3, Math.min(100, tensionHits * 16), "Terror vive de antecipação — o que pode acontecer assusta mais do que o que já aconteceu."),
+      createCheck("Ritmo cortante", hasRhythm, hasRhythm ? 90 : Math.min(60, shortSentences * 22), "Frases curtas em momentos de clímax criam o pulso do terror. Frases longas desaceleram e criam tensão diferente."),
+      createCheck("Cenário ou presença", atmosphereHits >= 2 || paragraphs.length >= 3, Math.min(100, atmosphereHits * 22 + paragraphs.length * 14), "O espaço em que o perigo existe precisa de detalhes que você escolhe com cuidado."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeMemoir(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const firstPersonHits = countMatches(text, /\\b(eu|meu|minha|meus|minhas|me|mim|comigo|fui|estava|senti|lembro|pensei|via|ouvia|dizia|precisava|queria|sabia)\\b/gi);
+    const temporalHits = countMatches(text, /\\b(quando|naquela|nesse dia|na época|antes|depois|anos|meses|criança|jovem|adulto|hoje|ontem|naquela tarde|naquele momento|àquela hora|de repente|uma vez|sempre|nunca)\\b/gi);
+    const sceneHits = countMatches(text, /\\b(casa|rua|escola|família|mãe|pai|irmão|irmã|avó|avô|cidade|bairro|quarto|mesa|cozinha|janela|porta|cheiro|voz|mão|olho|corpo|sorriso)\\b/gi);
+    const reflectionHits = countMatches(text, /\\b(aprendi|percebi|entendi|hoje sei|olhando para trás|naquela época não sabia|só depois|agora entendo|me pergunto|ainda carrego|nunca esqueci|permanece|ficou)\\b/gi);
+
+    const checks = [
+      createCheck("Voz em primeira pessoa", firstPersonHits >= 5, Math.min(100, firstPersonHits * 8), "Memória é contada de dentro — o 'eu' que viveu e o 'eu' que narra convivem no texto."),
+      createCheck("Cena específica", sceneHits >= 4, Math.min(100, sceneHits * 12), "Memória de qualidade ancora em cenas concretas — não em abstrações, mas em lugares, pessoas e objetos reais."),
+      createCheck("Âncoras temporais", temporalHits >= 3, Math.min(100, temporalHits * 18), "O leitor precisa saber quando: época, idade, estação, hora — qualquer âncora que situa a cena no tempo."),
+      createCheck("Reflexão sobre a experiência", reflectionHits >= 1, Math.min(100, reflectionHits * 40), "Memória não é só relato — o narrador presente comenta, questiona ou reavalia o que o narrador passado viveu."),
+      createCheck("Abertura com cena", firstSentence.length >= 20, scoreOpening(firstSentence), "Boa memória começa em cena, não em declaração. 'Era um dia comum' é fraco; 'O cheiro de naftalina do guarda-roupa da minha avó' abre um mundo."),
+      createCheck("Tamanho para desenvolver", words >= 300, Math.min(100, words / 3), "Memória precisa de espaço para a cena respirar e a reflexão aparecer sem pressa."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeJornalismo(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const sourceHits = countMatches(text, /\\b(segundo|de acordo com|afirmou|declarou|disse|informou|confirmou|revelou|explicou|apontou|pesquisa|estudo|relatório|dados|levantamento|instituto|especialista|fonte)\\b/gi);
+    const factHits = countMatches(text, /\\b(\\d+%|\\d+ mil|\\d+ bilhões|\\d+ milhões|em \\d{4}|janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\\b/gi);
+    const wHits = countMatches(text, /\\b(quem|o que|quando|onde|por que|como|qual)\\b/gi);
+    const shortParas = paragraphs.filter(p => p.split(/\\s+/).filter(Boolean).length <= 60).length;
+    const hasTightParas = shortParas >= Math.max(2, Math.floor(paragraphs.length * 0.5));
+
+    const checks = [
+      createCheck("Lede informativo", firstSentence.length >= 20 && firstSentence.length <= 250, scoreOpening(firstSentence), "O primeiro parágrafo deve responder ao menos duas perguntas fundamentais: quem, o quê, quando ou onde."),
+      createCheck("Atribuição de fonte", sourceHits >= 1, Math.min(100, sourceHits * 28), "Informação jornalística precisa de origem: quem disse, quem pesquisou, de onde vieram os dados."),
+      createCheck("Dados ou fatos concretos", factHits >= 1, Math.min(100, factHits * 30), "Números, datas e nomes próprios ancoram o texto — generalização sem evidência enfraquece o texto jornalístico."),
+      createCheck("Perguntas fundamentais respondidas", wHits >= 3, Math.min(100, wHits * 18), "Quem, o quê, quando, onde, por que e como — responder ao menos quatro orienta o leitor sem deixar lacunas."),
+      createCheck("Parágrafos curtos", hasTightParas, hasTightParas ? 88 : Math.min(60, shortParas * 18), "Jornalismo respira melhor em parágrafos de até 4 linhas — facilita leitura em tela e em papel."),
+      createCheck("Volume informativo", words >= 200, Math.min(100, words / 2), "Um texto jornalístico com menos de 200 palavras raramente desenvolve argumento, contexto e fonte de forma equilibrada."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeComercialTecnica(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+    const callHits = countMatches(text, /\\b(clique|acesse|saiba|descubra|faça|experimente|cadastre|baixe|veja|aproveite|solicite|reserve|garanta|compre|assine)\\b/gi);
+    const benefitHits = countMatches(text, /\\b(vantagem|benefício|resultado|economia|ganho|melhora|solução|facilidade|segurança|eficiência|praticidade|valor|retorno)\\b/gi);
+    const concretHits = countMatches(text, /\\b(\\d+%|\\d+ vezes|\\d+ anos?|\\d+ dias?|\\d+ horas?|\\d+\\s?reais?|\\d+\\s?R\\$)\\b/gi);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasTightSentences = lengths.some(l => l <= 8);
+    const hasBullets = /•|-\\s|\\d+\\.\\s/.test(text);
+
+    const checks = [
+      createCheck("Abertura com proposta clara", firstSentence.length >= 15 && firstSentence.length <= 180, scoreOpening(firstSentence), "A primeira frase deve responder por que o leitor deveria continuar lendo."),
+      createCheck("Benefício concreto", benefitHits >= 1, Math.min(100, benefitHits * 30), "O que o leitor ganha? Mostre o resultado, não apenas o processo."),
+      createCheck("Dados ou prova", concretHits >= 1, Math.min(100, concretHits * 35), "Números específicos constroem credibilidade — percentual, prazo, preço ou tempo."),
+      createCheck("Chamada para ação", callHits >= 1, Math.min(100, callHits * 40), "Textos comerciais precisam dizer explicitamente o que fazer a seguir."),
+      createCheck("Frases diretas", hasTightSentences, hasTightSentences ? 88 : Math.min(60, lengths.length * 10), "Frases curtas aumentam clareza e ritmo de leitura em textos comerciais."),
+      createCheck("Estrutura escaneável", hasBullets || paragraphs.length >= 3, Math.min(100, (hasBullets ? 50 : 0) + paragraphs.length * 12), "Listas, tópicos ou parágrafos curtos ajudam leitores a encontrar o que precisam."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzePlanejamento(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const hasBullets = /•|-\\s|\\d+\\.\\s/.test(text);
+    const dateHits = countMatches(text, /\\b(\\d{1,2}\\/\\d{1,2}|\\d{4}|jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez|janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\\b/gi);
+    const actionHits = countMatches(text, /\\b(enviar|contratar|negociar|publicar|registrar|lançar|submeter|revisar|assinar|contatar|pesquisar|verificar)\\b/gi);
+    const firstSentence = getFirstSentence(text);
+
+    const checks = [
+      createCheck("Conteúdo iniciado", words >= 30, Math.min(100, words * 3), "Preencha as seções do guia com as informações reais do seu projeto."),
+      createCheck("Itens ou etapas listadas", hasBullets || paragraphs.length >= 3, Math.min(100, (hasBullets ? 50 : 0) + paragraphs.length * 15), "Listas e etapas tornam o planejamento acionável e revisável."),
+      createCheck("Datas ou prazos", dateHits >= 1, Math.min(100, dateHits * 30), "Datas concretas transformam intenção em comprometimento."),
+      createCheck("Ações concretas", actionHits >= 1, Math.min(100, actionHits * 28), "Verbos de ação (enviar, negociar, publicar) indicam próximos passos reais."),
+      createCheck("Abertura descritiva", firstSentence.length >= 15, firstSentence.length >= 15 ? 85 : Math.min(60, firstSentence.length * 4), "A primeira linha deve situar o contexto do planejamento."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeRomantasy(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const romanceHits = countMatches(text, /\\b(coração|olhares|tensão|sentiu|queria|desejo|pele|mão|beijo|perto|longe|sorriso|raiva|ciúme|proteção|cuidado|ternura|força|frágil|vulnerável)\\b/gi);
+    const fantasyHits = countMatches(text, /\\b(magia|feitiço|encantamento|poder|luz|sombra|reino|dragão|elfo|fada|portal|destino|profecia|sangue|laço|vínculo|ancestral|maldição|dom|herança)\\b/gi);
+    const tensionHits = countMatches(text, /\\b(mas|porém|não podia|precisava|resistiu|cedeu|afastou|aproximou|evitou|buscou|negava|queria|odiava|amava|temia|precisava)\\b/gi);
+    const dialogueHits = countMatches(text, /[—"]/g);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    const checks = [
+      createCheck("Romance presente", romanceHits >= 3, Math.min(100, romanceHits * 14), "Romantasy vive da tensão entre dois protagonistas — atração, conflito, aproximação e recuo precisam coexistir no texto."),
+      createCheck("Elemento fantástico", fantasyHits >= 2, Math.min(100, fantasyHits * 22), "O mundo com magia precisa tocar a história diretamente — não como cenário neutro, mas como força que complica o arco romântico."),
+      createCheck("Tensão interna", tensionHits >= 3, Math.min(100, tensionHits * 18), "A personagem quer o que não pode ter — pelo mundo, pelo passado, pela missão ou pelo próprio coração."),
+      createCheck("Voz e diálogo", dialogueHits >= 2, Math.min(100, dialogueHits * 14), "Romantasy precisa de personagens com voz própria — o que dizem revela mais do que o que pensam."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 88 : Math.min(55, lengths.length * 15), "Alterne frases longas para mundo e emoção com frases curtas para ação e tensão."),
+      createCheck("Abertura no mundo", firstSentence.length >= 15 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase deve situar o leitor — no corpo da personagem, no cheiro do mundo ou no peso de algo que está por acontecer."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSuspensePsicologico(text, words) {
+    const firstSentence = getFirstSentence(text);
+    const sentences = splitSentences(text);
+    const internalHits = countMatches(text, /\\b(pensou|lembrou|imaginou|duvidou|sabia|não sabia|sentia|desconfiava|percebia|suspeitava|acordou|sonhou|se perguntou|talvez|seria|estaria|e se|como se|parecia)\\b/gi);
+    const unreliableHits = countMatches(text, /\\b(mas não tinha certeza|ou era|talvez fosse|estava errada|não tinha certeza|enganava|mentia|lembrava errado|não conseguia explicar|não fazia sentido|impossível|deve ter sido|achou que)\\b/gi);
+    const tensionHits = countMatches(text, /\\b(silêncio|ninguém|sozinha|sozinho|escuro|trancada|presa|seguia|olhava|observava|descobriu|revelou|escondeu|mentiu|sabia demais|sabia de menos)\\b/gi);
+    const revelationHits = countMatches(text, /\\b(na verdade|só então|então percebeu|foi só quando|finalmente|de repente|tudo mudou|nunca tinha pensado|agora entendia|foi aí que)\\b/gi);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasShortBursts = lengths.filter(l => l <= 8).length >= 2;
+
+    const checks = [
+      createCheck("Mente em foco", internalHits >= 4, Math.min(100, internalHits * 12), "Suspense psicológico acontece dentro da cabeça — o texto precisa habitar o pensamento da narradora, não apenas descrever eventos."),
+      createCheck("Narradora não confiável", unreliableHits >= 1, Math.min(100, unreliableHits * 45), "A narradora não precisa mentir para o leitor — basta que ela mente para si mesma, que lembre errado, que interprete torto."),
+      createCheck("Tensão de ameaça", tensionHits >= 3, Math.min(100, tensionHits * 18), "O perigo pode ser externo ou interno — a sensação de não estar segura, de não poder confiar, é o motor do suspense."),
+      createCheck("Preparação para virada", revelationHits >= 1, Math.min(100, revelationHits * 42), "Suspense psicológico vive de revelações que reescrevem o que o leitor achava que sabia."),
+      createCheck("Ritmo cortado", hasShortBursts, hasShortBursts ? 88 : 42, "Frases curtas no momento de tensão criam o pulso do suspense — a resposta física antes da explicação."),
+      createCheck("Abertura perturbadora", firstSentence.length >= 15, scoreOpening(firstSentence), "Boa abertura de suspense cria imediatamente uma pergunta sem resposta ou um detalhe fora do lugar."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSoneto(text, words) {
+    const lines = text.split(/\\n/).map(s => s.trim()).filter(Boolean);
+    const lineCount = lines.length;
+    const hasStructure = lineCount >= 12 && lineCount <= 16;
+    const hasFourteen = lineCount === 14;
+    const rhymeEndHits = lines.map(l => l.split(/\\s+/).pop() || "");
+    const lastWords = rhymeEndHits.map(w => w.replace(/[^a-záéíóúãõâêôüç]/gi, "").toLowerCase());
+    const uniqueEndings = new Set(lastWords).size;
+    const rhymeVariety = uniqueEndings <= 6 && uniqueEndings >= 2;
+    const volta = lineCount >= 9 ? lines[8] : "";
+    const voltaHits = /\\b(mas|porém|contudo|entretanto|no entanto|assim|logo|então|e assim|todavia|decerto|por isso|portanto)\\b/i.test(volta);
+    const hasPunctuation = countMatches(text, /[,;:—.!?]/g) >= 4;
+
+    const checks = [
+      createCheck("Catorze versos", hasFourteen, hasFourteen ? 100 : Math.max(10, Math.min(80, 100 - Math.abs(14 - lineCount) * 15)), "O soneto petrarquiano tem exatamente 14 versos — dois quartetos e dois tercetos. Mais ou menos quebra a forma."),
+      createCheck("Estrutura de estrofes", hasStructure, hasStructure ? 90 : Math.min(50, lineCount * 5), "A divisão visual em quarteto-quarteto-terceto-terceto é parte da forma — não decore apenas, distribua as ideias nela."),
+      createCheck("Virada no 9º verso", voltaHits, voltaHits ? 95 : 35, "A volta: o 9º verso muda o ângulo — introduz uma contradição, uma conclusão, uma surpresa. É o coração do soneto."),
+      createCheck("Rima presente", rhymeVariety, rhymeVariety ? 85 : 45, "O soneto vive de rima — o esquema mais comum é ABBA ABBA CDC DCD ou variante. Consistência é mais importante que perfeição."),
+      createCheck("Pontuação expressiva", hasPunctuation, hasPunctuation ? 85 : Math.min(55, hasPunctuation ? 85 : 30), "Pontuação em soneto é estrutural — a vírgula sustém, o ponto finaliza, os dois-pontos anunciam. Cada sinal pesa."),
+      createCheck("Compressão verbal", words >= 60 && words <= 120, getRangeScore(words, 60, 130), "Um soneto entre 70 e 100 palavras tem densidade: cada termo precisa trabalhar — ornamento sem função ocupa o espaço da imagem."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeSlam(text, words) {
+    const sentences = splitSentences(text);
+    const lines = text.split(/\\n/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+    const urgencyHits = countMatches(text, /\\b(agora|hoje|preciso|precisa|não pode|não dá|chega|basta|olha|escuta|veja|sente|existe|resiste|persiste|levanta|grita|fala|diz|nega|rompe|rompa|viva|luta|lute|chore|ria)\\b/gi);
+    const questionHits = countMatches(text, /[?]/g);
+    const repetitionPattern = (() => {
+      const firstWords = lines.slice(0, -1).map(l => l.split(/\\s+/)[0]?.toLowerCase()).filter(Boolean);
+      const freq = firstWords.reduce((m, w) => { m[w] = (m[w] || 0) + 1; return m; }, {});
+      return Object.values(freq).some(v => v >= 2);
+    })();
+    const shortLines = lines.filter(l => l.split(/\\s+/).filter(Boolean).length <= 8).length;
+    const hasRhythm = shortLines >= Math.max(2, lines.length * 0.3);
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const hasVariety = lengths.some(l => l <= 6) && lengths.some(l => l >= 12);
+
+    const checks = [
+      createCheck("Urgência e presença", urgencyHits >= 4, Math.min(100, urgencyHits * 14), "Slam acontece no presente — o poema fala de dentro, com corpo, sem distância. Verbos de ação e interpelação criam presença."),
+      createCheck("Pergunta ao público", questionHits >= 1, Math.min(100, questionHits * 35), "A pergunta retórica é a ferramenta central do slam — confronta, convida, incomoda. Sem ela, o poema fecha em si mesmo."),
+      createCheck("Repetição rítmica", repetitionPattern, repetitionPattern ? 90 : 40, "Anáfora — repetir a mesma palavra no início de versos seguidos — é o ritmo do slam. Cria ondas, hipnose, ênfase."),
+      createCheck("Versos curtos com gesto", hasRhythm, hasRhythm ? 85 : Math.min(55, shortLines * 14), "Slam é falado em voz alta. Verso curto cria pausa natural, espaço para respirar e para o público absorver."),
+      createCheck("Ritmo variado", hasVariety, hasVariety ? 85 : 45, "Alterne versos curtos (impacto) com longos (desenvolvimento) — o fluxo entre eles é o que cria o ritmo performático."),
+      createCheck("Abertura que chama", firstSentence.length >= 5 && firstSentence.length <= 120, scoreOpening(firstSentence), "Slam começa sem introdução — a primeira linha já está no assunto. Sem preâmbulo: direto ao coração do que precisa ser dito."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function analyzeGeneric(template, text, words) {
+    const sentences = splitSentences(text);
+    const paragraphs = text.split(/\\n+/).map(s => s.trim()).filter(Boolean);
+    const firstSentence = getFirstSentence(text);
+
+    // Variedade de comprimento das frases
+    const lengths = sentences.map(s => s.split(/\\s+/).filter(Boolean).length);
+    const avgLen = lengths.length ? lengths.reduce((a, b) => a + b, 0) / lengths.length : 0;
+    const hasVariety = lengths.length >= 3 && lengths.some(l => l <= 8) && lengths.some(l => l >= 15);
+
+    // Densidade de advérbios em -mente
+    const menteHits = countMatches(text, /\\w+mente\\b/gi);
+    const menteDensity = words > 0 ? menteHits / words : 0;
+
+    // Proporção de frases interrogativas ou exclamativas (dinamismo)
+    const dynamicHits = countMatches(text, /[?!]/g);
+
+    const checks = [
+      createCheck("Texto em andamento", words >= 50, Math.min(100, words * 2), "Um rascunho maior permite pistas mais precisas."),
+      createCheck("Abertura com força", firstSentence.length >= 20 && firstSentence.length <= 200, scoreOpening(firstSentence), "A primeira frase carrega o convite para o texto inteiro."),
+      createCheck("Variedade de ritmo", hasVariety, hasVariety ? 90 : Math.min(60, lengths.length * 15), "Alterne frases curtas e longas para criar fluxo e ênfase."),
+      createCheck("Uso moderado de advérbios", menteDensity < 0.04, menteDensity < 0.04 ? 90 : Math.max(20, 90 - Math.round((menteDensity - 0.04) * 1000)), "Advérbios em -mente usados em excesso enfraquecem verbos precisos."),
+      createCheck("Paragrafação presente", paragraphs.length >= 2, Math.min(100, paragraphs.length * 30), "Blocos de texto ajudam a respirar entre as ideias."),
+      createCheck("Forma escolhida", Boolean(template?.id), template?.id ? 100 : 40, "Abrir um guia de escrita ativa análise mais específica."),
+    ];
+
+    return summarize(checks, words, 0);
+  }
+
+  function summarize(checks, words, limit) {
+    const score = Math.round(checks.reduce((total, check) => total + check.score, 0) / checks.length);
+    const gaps = checks.filter(c => c.passed === false);
+    const strengths = checks.filter(c => c.passed === true);
+    const status = score >= 88 ? "Elementos do guia bem cobertos"
+      : score >= 70 ? "Boa base em desenvolvimento"
+      : score >= 50 ? "Ainda em formação"
+      : "Rascunho inicial";
+
+    return {
+      score,
+      status,
+      words,
+      limit,
+      checks,
+      gaps,
+      strengths,
+    };
+  }
+
+  function createCheck(label, passed, score, hint) {
+    return {
+      label,
+      passed,
+      score: Math.max(0, Math.min(100, Math.round(score))),
+      hint,
+    };
+  }
+
+  function normalize(text) {
+    return (text || "").replace(/\\u00a0/g, " ").trim();
+  }
+
+  function countWords(text) {
+    return text ? text.split(/\\s+/).filter(Boolean).length : 0;
+  }
+
+  function splitSentences(text) {
+    return text.split(/[.!?]+/).map((item) => item.trim()).filter(Boolean);
+  }
+
+  function getFirstSentence(text) {
+    return splitSentences(text)[0] || "";
+  }
+
+  function getLastSentence(text) {
+    const sentences = splitSentences(text);
+    return sentences[sentences.length - 1] || "";
+  }
+
+  function countMatches(text, pattern) {
+    return (text.match(pattern) || []).length;
+  }
+
+  function getRangeScore(value, idealMin, max) {
+    if (!value) {
+      return 0;
+    }
+
+    if (value > max) {
+      return Math.max(0, 100 - (value - max));
+    }
+
+    if (value < idealMin) {
+      return Math.round((value / idealMin) * 72);
+    }
+
+    return 100;
+  }
+
+  function scoreOpening(sentence) {
+    if (!sentence) {
+      return 0;
+    }
+
+    let score = 45;
+    if (sentence.length <= 150) score += 20;
+    if (/[?]/.test(sentence)) score += 15;
+    if (/\\b(hoje|quando|antes|depois|ninguém|ela|ele|eu|ainda)\\b/i.test(sentence)) score += 10;
+    if (/\\b(era|foi|estava)\\b/i.test(sentence) && sentence.length > 120) score -= 10;
+    return score;
+  }
+
+  function scoreCompression(explanationHits, repeatedRatio) {
+    const explanationScore = Math.max(0, 100 - explanationHits * 18);
+    const repetitionScore = Math.max(0, 100 - repeatedRatio * 420);
+    return Math.round((explanationScore + repetitionScore) / 2);
+  }
+
+  function getTopWordRatio(text) {
+    const words = text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\\u0300-\\u036f]/g, "")
+      .match(/[a-z]{4,}/g) || [];
+
+    if (!words.length) {
+      return 0;
+    }
+
+    const counts = words.reduce((map, word) => {
+      map[word] = (map[word] || 0) + 1;
+      return map;
+    }, {});
+    const top = Math.max(...Object.values(counts));
+    return top / words.length;
+  }
+
+  function getEchoScore(firstSentence, lastSentence) {
+    const firstWords = getRelevantWords(firstSentence);
+    const lastWords = getRelevantWords(lastSentence);
+
+    if (!firstWords.length || !lastWords.length) {
+      return 0;
+    }
+
+    const shared = firstWords.filter((word) => lastWords.includes(word)).length;
+    return Math.min(100, shared * 32 + Math.min(firstWords.length, lastWords.length) * 3);
+  }
+
+  function getRelevantWords(value) {
+    return (
+      value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\\u0300-\\u036f]/g, "")
+        .match(/[a-z]{4,}/g) || []
+    ).slice(0, 12);
+  }
+
+  global.VeredaPrecision = {
+    analyze,
+  };
+})(window);
+`,c=`{
+  "oficios": [
+    {
+      "id": "ficcao",
+      "label": "Ficção",
+      "icon": "auto_stories",
+      "count": 10
+    },
+    {
+      "id": "roteiro",
+      "label": "Roteiro",
+      "icon": "movie",
+      "count": 6
+    },
+    {
+      "id": "poesia",
+      "label": "Poesia",
+      "icon": "format_quote",
+      "count": 5
+    },
+    {
+      "id": "nao-ficcao",
+      "label": "Não ficção",
+      "icon": "article",
+      "count": 4
+    },
+    {
+      "id": "jornalismo",
+      "label": "Jornalismo",
+      "icon": "newspaper",
+      "count": 4
+    },
+    {
+      "id": "comercial-tecnica",
+      "label": "Comercial e técnica",
+      "icon": "workspaces",
+      "count": 7
+    },
+    {
+      "id": "estudo-vestibular",
+      "label": "Estudo e vestibular",
+      "icon": "school",
+      "count": 12
+    },
+    {
+      "id": "mercado-editorial",
+      "label": "Mercado editorial",
+      "icon": "storefront",
+      "count": 6
+    },
+    {
+      "id": "objeto-livro",
+      "label": "Objeto livro",
+      "icon": "book_4",
+      "count": 6
+    },
+    {
+      "id": "direitos-autorais",
+      "label": "Direitos do autor",
+      "icon": "gavel",
+      "count": 3
+    }
+  ],
+  "templates": [
+    {
+      "id": "roteiro-tv",
+      "oficio": "roteiro",
+      "label": "Roteiro de TV",
+      "icon": "movie",
+      "title": "Roteirista de série",
+      "kind": "Roteiro de TV",
+      "editorMode": "screenplay",
+      "chapter": "Teaser",
+      "description": "Estrutura inicial para episódio de série, com teaser, atos e gancho final.",
+      "guidance": {
+        "meta": [
+          "Formato",
+          "Episódio de série",
+          "Cenas visíveis",
+          "Atos + gancho"
+        ],
+        "sections": [
+          [
+            "Teaser",
+            "A cena que prende antes da abertura."
+          ],
+          [
+            "Ato 1",
+            "O conflito nasce e muda a rotina."
+          ],
+          [
+            "Ato 2",
+            "A pressão cresce e cobra escolha."
+          ],
+          [
+            "Ato 3",
+            "A consequência chega em cena."
+          ],
+          [
+            "Tag / gancho",
+            "Última imagem que puxa o próximo episódio."
+          ]
+        ],
+        "reminders": [
+          "Escreva o que a câmera vê.",
+          "Troque sentimento abstrato por gesto observável.",
+          "Uma página tende a equivaler a cerca de um minuto."
+        ],
+        "sketch": "# [TÍTULO DO EPISÓDIO]\\n\\nSérie: [nome da série]\\nEpisódio: [número ou título]\\nFormato: [drama, comédia, docuficção, minissérie]\\n\\n## TEASER\\n\\nINT./EXT. [LOCAL] - [DIA/NOITE]\\n\\n[Abra com uma imagem forte. O que a câmera vê primeiro?]\\n\\n[Personagem] [faz uma ação visível].\\n\\nPERSONAGEM\\n[fala curta, se houver]\\n\\n## ATO 1\\n\\n[Apresente o conflito central do episódio. O que muda para o personagem?]\\n\\n## ATO 2\\n\\n[A pressão aumenta. Uma escolha fica mais difícil.]\\n\\n## ATO 3\\n\\n[A consequência chega. Algo precisa se resolver ou quebrar.]\\n\\n## TAG / GANCHO\\n\\n[Última imagem do episódio. O que faz o público querer continuar?]",
+        "blueprint": "ROTEIRO DE TV\\n\\nUma série vive de premissa, voz de personagem e gancho de episódio.\\n\\nO roteiro de TV tem lógica própria: cada episódio entrega e promete ao mesmo tempo. O espectador precisa sentir que valeu assistir e que precisa ver o próximo. A série forte tem arquitetura de temporada — não episódios soltos.\\n\\nComo se constrói: premissa do mundo em uma frase → personagem com desejo e contradição → conflito do episódio que avança o arco maior → gancho de saída.\\n\\nConectivos do roteiro TV: \\"até que\\" e \\"mas então\\" (virada de ato) · \\"o que ninguém sabe ainda\\" (informação privilegiada para o espectador) · \\"enquanto isso\\" (paralelo que comenta o eixo principal)"
+      },
+      "steps": [
+        {
+          "eyebrow": "Comece pela cena",
+          "title": "Você vai escrever uma série.",
+          "body": "Não precisa dominar todos os termos técnicos agora. O formato vai aparecer enquanto você escreve: cena, ação, fala e silêncio.",
+          "items": [],
+          "primary": "Quero começar",
+          "secondary": "Me conta mais primeiro"
+        },
+        {
+          "eyebrow": "O que é um roteiro?",
+          "title": "Um roteiro é um guia de imagens.",
+          "body": "Você não escreve \\"ela estava triste\\". Você escreve o que a câmera vê: \\"Ela olha para a xícara. O café esfriou.\\"",
+          "tip": "Em média, uma página de roteiro equivale a cerca de 1 minuto de cena.",
+          "primary": "Entendi, continuar"
+        },
+        {
+          "eyebrow": "Como o guia funciona",
+          "title": "A estrutura já está pronta para escrever.",
+          "body": "Cada seção tem uma função clara, sem virar aula. Você troca o marcador pela cena que quer colocar no mundo.",
+          "items": [
+            [
+              "Teaser",
+              "A cena que prende antes da abertura",
+              "done"
+            ],
+            [
+              "Ato 1, 2 e 3",
+              "Onde o conflito nasce, cresce e resolve",
+              "done"
+            ],
+            [
+              "Tag / gancho",
+              "A cena final que puxa para o próximo episódio",
+              "done"
+            ]
+          ],
+          "primary": "Ver o guia"
+        },
+        {
+          "eyebrow": "Antes de abrir",
+          "title": "Pronto para escrever.",
+          "body": "Escolha uma imagem de TV que você gostaria de assistir. Só isso. O resto pode nascer em rascunho.",
+          "items": [
+            [
+              "Pense em uma cena visível",
+              "Algo que a câmera consiga acompanhar.",
+              "todo"
+            ],
+            [
+              "Preencha primeiro o teaser",
+              "O episódio inteiro não precisa aparecer hoje.",
+              "todo"
+            ],
+            [
+              "Rascunho ainda não é roteiro final",
+              "Toda versão boa começa torta.",
+              "todo"
+            ]
+          ],
+          "primary": "Criar roteiro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Central do Brasil, de Marcos Bernstein e João Emanuel Carneiro, pela apresentação de personagem por ação visível.",
+        "why": "O roteiro forte não explica psicologia: mostra gesto, lugar, silêncio e consequência.",
+        "references": [
+          "Glória Perez",
+          "George Moura",
+          "Anna Muylaert",
+          "Kleber Mendonça Filho"
+        ],
+        "placeholder": "INT. COZINHA - AMANHECER\\n\\nA mãe coloca três pratos na mesa. Só há duas pessoas em casa.\\n\\nO filho percebe o terceiro prato, mas não pergunta nada."
+      }
+    },
+    {
+      "id": "flash-fiction",
+      "oficio": "ficcao",
+      "label": "Ficção-relâmpago",
+      "icon": "edit_note",
+      "title": "Ficção-relâmpago",
+      "kind": "Ficção-relâmpago",
+      "chapter": "Imagem âncora",
+      "description": "Guia para uma história breve, com imagem âncora, tensão, virada e fechamento.",
+      "guidance": {
+        "meta": [
+          "Subformato",
+          "Relâmpago - até 500 palavras",
+          "Imagem âncora",
+          "Virada"
+        ],
+        "sections": [
+          [
+            "Premissa",
+            "Uma frase: o conflito em estado bruto."
+          ],
+          [
+            "Imagem âncora",
+            "Objeto, gesto ou detalhe sensorial que carrega o peso."
+          ],
+          [
+            "Abertura",
+            "Entre em cena e crie uma pergunta."
+          ],
+          [
+            "Desenvolvimento",
+            "Aprofunde a tensão sem explicar demais."
+          ],
+          [
+            "Virada",
+            "Algo muda para o leitor ou para o personagem."
+          ],
+          [
+            "Fechamento",
+            "A última frase conversa com a primeira."
+          ]
+        ],
+        "reminders": [
+          "Cada palavra precisa justificar sua presença.",
+          "Ficção-relâmpago vive de imagem, não de explicação.",
+          "Quando terminar, teste cortar 20%."
+        ],
+        "blueprint": "FICÇÃO-RELÂMPAGO\\n\\nCompressão máxima — cada palavra decide se fica.\\n\\nNão é conto curto encurtado: é uma forma própria onde o não-dito pesa mais que o dito. Abre no meio. Não apresenta personagem — ele já está em ação. O final deve recontextualizar tudo que veio antes em uma linha. Regra prática: se a palavra pode sair sem perda, sai.\\n\\nConectivos: mas (virada) · até que (ruptura) · só então (revelação que muda tudo) · e (acúmulo veloz, sem pausa para respirar)",
+        "sketch": "[PERSONAGEM] [AÇÃO. SEM CONTEXTO.]\\n\\n[O CONFLITO — uma frase.]\\n\\n[A VIRADA — uma linha que recontextualiza tudo acima.]\\n\\n[até 500 palavras · conte ao terminar]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Menos de 1.000 palavras",
+          "title": "Uma história inteira em poucas linhas.",
+          "body": "Ficção-relâmpago não é conto incompleto. É uma forma própria: cada palavra precisa justificar sua presença.",
+          "primary": "Quero escrever",
+          "secondary": "O que é ficção-relâmpago?"
+        },
+        {
+          "eyebrow": "Subformatos",
+          "title": "Ficção-relâmpago não é só tamanho.",
+          "body": "Escolha o fôlego certo para o que você quer contar.",
+          "items": [
+            [
+              "Micro - até 100 palavras",
+              "Um momento, uma virada, nenhum desperdício.",
+              "info"
+            ],
+            [
+              "Relâmpago - até 500 palavras",
+              "Cabe abertura, conflito e fechamento.",
+              "done"
+            ],
+            [
+              "Ficção súbita - até 1.000 palavras",
+              "Mais espaço sem perder tensão.",
+              "warn"
+            ]
+          ],
+          "primary": "Continuar"
+        },
+        {
+          "eyebrow": "O segredo do formato",
+          "title": "Começa com uma imagem, não com uma ideia.",
+          "body": "Pense em cena: uma mulher reconhece um casaco, dois irmãos dividem o último item, alguém espera uma ligação que não vem.",
+          "primary": "Entendi"
+        },
+        {
+          "eyebrow": "Antes de abrir",
+          "title": "Três coisas para levar.",
+          "body": "A primeira versão precisa existir antes de ser elegante.",
+          "items": [
+            [
+              "A primeira frase cria uma pergunta",
+              "O leitor precisa querer atravessar a próxima linha.",
+              "todo"
+            ],
+            [
+              "O fim conversa com a abertura",
+              "A virada aparece sem explicação demais.",
+              "todo"
+            ],
+            [
+              "Depois, corte 20%",
+              "O que sobrar tende a ficar mais vivo.",
+              "todo"
+            ]
+          ],
+          "primary": "Criar flash"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Millôr Fernandes e suas formas brevíssimas, pela compressão radical de vida, erro e fim.",
+        "why": "A ficção-relâmpago brasileira funciona quando uma imagem pequena carrega uma vida inteira.",
+        "references": [
+          "Millôr Fernandes",
+          "Rubem Braga",
+          "Bartolomeu Campos de Queirós",
+          "Carlos Drummond de Andrade"
+        ],
+        "placeholder": "A chave continuou na porta três dias depois do enterro. Ninguém teve coragem de tirá-la. Era a última coisa da casa que ainda esperava alguém voltar."
+      }
+    },
+    {
+      "id": "cronica",
+      "oficio": "nao-ficcao",
+      "label": "Crônica",
+      "icon": "article",
+      "title": "Crônica",
+      "kind": "Crônica",
+      "chapter": "Cena cotidiana",
+      "description": "Guia para transformar uma observação do cotidiano em texto breve com olhar autoral.",
+      "guidance": {
+        "meta": [
+          "Cotidiano",
+          "Olhar autoral",
+          "Leveza",
+          "Fecho reflexivo"
+        ],
+        "sections": [
+          [
+            "Cena cotidiana",
+            "Um recorte pequeno: fila, ônibus, cozinha, praça, conversa."
+          ],
+          [
+            "Olhar",
+            "O que só você percebeu nessa cena?"
+          ],
+          [
+            "Desvio",
+            "A crônica ganha vida quando o comum aponta para outra coisa."
+          ],
+          [
+            "Tom",
+            "Pode ser lírico, irônico, afetivo, seco ou melancólico."
+          ],
+          [
+            "Fecho",
+            "Uma frase que abre ressonância sem fechar demais."
+          ]
+        ],
+        "reminders": [
+          "A crônica nasce pequena e aponta para algo maior.",
+          "Evite explicar a moral do texto.",
+          "Deixe uma fresta para o leitor entrar."
+        ],
+        "blueprint": "CRÔNICA\\n\\nUm detalhe do cotidiano que, visto de perto, revela algo maior.\\n\\nA crônica começa sempre no pequeno — uma cena, um gesto, uma frase ouvida no ônibus. A voz é pessoal e direta: o cronista está presente, não disfarçado de narrador onisciente. O detalhe escolhido é o argumento: a forma e o conteúdo são a mesma coisa. O final não explica o que a crônica significa — o leitor chega sozinho, ou não chega.\\n\\nConectivos: outro dia (âncora temporal cotidiana) · mas há nisso (virada que amplia o detalhe) · o que me espanta (voz do cronista que interpreta sem explicar)",
+        "sketch": "[CENA COTIDIANA — o detalhe concreto. Uma frase que situa sem contextualizar demais.]\\n\\n[O CRONISTA APARECE — não como personagem, como voz que observa e interpreta.]\\n\\n[O QUE ESSE DETALHE REVELA — sem declarar. A crônica mostra, não conclui.]\\n\\n[FINAL — abre uma fresta. O leitor completa.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Cena mínima",
+          "title": "Uma crônica começa quando o comum pisca.",
+          "body": "Pegue uma cena de todos os dias e olhe de novo. O texto nasce desse segundo olhar.",
+          "primary": "Criar crônica"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Rubem Braga, pela capacidade de transformar um acontecimento mínimo em ressonância humana.",
+        "why": "A crônica não é o fato cotidiano: é o que o fato desperta quando alguém olha de novo.",
+        "references": [
+          "Rubem Braga",
+          "Paulo Mendes Campos",
+          "Fernando Sabino",
+          "Luis Fernando Verissimo",
+          "Moacyr Scliar"
+        ],
+        "placeholder": "A fila do pão andava devagar, mas ninguém reclamava. Havia uma chuva fina lá fora e, por algum acordo silencioso, todos pareciam adiando a volta para casa."
+      }
+    },
+    {
+      "id": "conto-curto",
+      "oficio": "ficcao",
+      "label": "Conto curto",
+      "icon": "auto_stories",
+      "title": "Conto curto",
+      "kind": "Conto curto",
+      "chapter": "Conflito central",
+      "description": "Guia para narrativa curta com personagem, conflito, cena e consequência.",
+      "guidance": {
+        "meta": [
+          "Personagem",
+          "Conflito",
+          "Cena",
+          "Consequência"
+        ],
+        "sections": [
+          [
+            "Personagem em situação",
+            "Quem está em cena e o que essa pessoa quer?"
+          ],
+          [
+            "Conflito",
+            "O que impede, ameaça ou transforma esse desejo?"
+          ],
+          [
+            "Cena progressiva",
+            "Cada bloco precisa alterar a pressão do conto."
+          ],
+          [
+            "Ponto de virada",
+            "Algo muda de estado: informação, relação, escolha."
+          ],
+          [
+            "Consequência",
+            "O fim mostra o preço da travessia."
+          ]
+        ],
+        "reminders": [
+          "Conto não é resumo de enredo: é acontecimento em cena.",
+          "O conflito precisa cobrar alguma coisa.",
+          "O final deve parecer inevitável depois que chega."
+        ],
+        "blueprint": "CONTO CURTO\\n\\nUma cena com consequência — não um romance comprimido.\\n\\nAbre in medias res: o personagem já está em movimento. Revela-se pelo que faz, não pelo que o narrador descreve. O conflito pode ser interno — uma decisão, um silêncio, um não-gesto. A virada não precisa ser dramática: um olhar diferente já basta. O final abre uma fresta, não fecha uma porta.\\n\\nConectivos: mas / porém (virada) · até que / quando (ruptura) · só então / foi aí que (revelação) · como sempre / mais uma vez (ironia por contraste)",
+        "sketch": "[PERSONAGEM] [AÇÃO EM MOVIMENTO]. [DETALHE QUE REVELA — não descreve].\\n\\n[O QUE IMPEDE OU COBRA UMA ESCOLHA]\\n\\n— [FALA QUE REVELA O CONFLITO SEM NOMEAR ELE]\\n\\n[VIRADA — uma linha. Algo muda de direção.]\\n\\n[CONSEQUÊNCIA — mínima. Um gesto ou silêncio que pesa diferente agora.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Conflito central",
+          "title": "Um conto curto precisa de pressão.",
+          "body": "Comece por alguém querendo algo diante de uma resistência concreta.",
+          "primary": "Criar conto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Dalton Trevisan e Lygia Fagundes Telles, pela entrada imediata em cena e pela tensão sem sobra.",
+        "why": "O conto curto precisa instalar personagem, desejo e ameaça sem explicar o mundo antes.",
+        "references": [
+          "Dalton Trevisan",
+          "Clarice Lispector",
+          "Lygia Fagundes Telles",
+          "João Antônio",
+          "Rubem Fonseca"
+        ],
+        "placeholder": "Nelsa voltou para buscar o guarda-chuva e encontrou o irmão sentado no escuro. Ele segurava o envelope que ela tinha escondido havia vinte anos."
+      }
+    },
+    {
+      "id": "ensaio",
+      "oficio": "nao-ficcao",
+      "label": "Ensaio",
+      "icon": "subject",
+      "title": "Ensaio",
+      "kind": "Ensaio",
+      "chapter": "Tese provisória",
+      "description": "Guia para defender uma ideia com percurso, tensão argumentativa e voz própria.",
+      "guidance": {
+        "meta": [
+          "Tese",
+          "Argumento",
+          "Contraponto",
+          "Conclusão aberta"
+        ],
+        "sections": [
+          [
+            "Tese provisória",
+            "O que você quer investigar ou sustentar?"
+          ],
+          [
+            "Contexto",
+            "Por que essa questão importa agora?"
+          ],
+          [
+            "Argumento",
+            "Ideias organizadas em progressão, não em acúmulo."
+          ],
+          [
+            "Contraponto",
+            "O texto ganha confiança quando reconhece tensão."
+          ],
+          [
+            "Fecho",
+            "Conclusão que entrega caminho, não só resumo."
+          ]
+        ],
+        "reminders": [
+          "Ensaio pode pensar em voz alta, mas precisa de direção.",
+          "Evite parágrafos que só repetem a tese.",
+          "Um bom contraponto fortalece a ideia central."
+        ],
+        "blueprint": "ENSAIO\\n\\nUma ideia colocada em risco pelo próprio pensamento que a desenvolve.\\n\\nO ensaio começa com uma tese que o ensaísta não tem certeza de poder sustentar — a dúvida é o motor. Cada parágrafo avança o argumento, mas também o complica: o ensaio honesto encontra a objeção antes que o leitor encontre. O repertório (leitura, experiência, dado) serve ao argumento — não o contrário. O final não fecha: abre uma pergunta maior do que a que abriu o ensaio.\\n\\nConectivos: no entanto (objeção que o ensaísta levanta contra si) · o que isso significa é (interpretação que avança) · mas se (hipótese alternativa que o ensaio precisa enfrentar)",
+        "sketch": "[TESE PROVISÓRIA — a ideia que o ensaio vai testar. Não uma certeza: uma aposta.]\\n\\n[PRIMEIRO ARGUMENTO — avança a tese com repertório concreto.]\\n\\n[A OBJEÇÃO — o que enfraquece a tese. O ensaio honesto a levanta antes do leitor.]\\n\\n[RESPOSTA À OBJEÇÃO — como o argumento sobrevive à crítica.]\\n\\n[FINAL — uma pergunta maior. O ensaio termina onde o pensamento continua.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Ideia em movimento",
+          "title": "Um ensaio pensa com o leitor.",
+          "body": "Comece por uma tese provisória e deixe o texto provar, ajustar ou tensionar essa ideia.",
+          "primary": "Criar ensaio"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Antonio Candido, pelo rigor que pensa literatura como sistema vivo, sem perder clareza.",
+        "why": "O ensaio literário convence quando a ideia tem voz, percurso e coragem de se corrigir em público.",
+        "references": [
+          "Antonio Candido",
+          "Alfredo Bosi",
+          "Roberto Schwarz",
+          "Silviano Santiago",
+          "Flora Sussekind"
+        ],
+        "placeholder": "Toda leitura começa antes do livro. Começa no repertório, no medo, na classe social, na lembrança que o leitor traz sem declarar."
+      }
+    },
+    {
+      "id": "romance-comercial",
+      "oficio": "ficcao",
+      "label": "Romance comercial",
+      "icon": "menu_book",
+      "title": "Romance comercial",
+      "kind": "Romance comercial",
+      "chapter": "Premissa e gancho",
+      "description": "Guia para narrativa longa com enredo forte, personagem com objetivo claro e experiência emocional garantida. Não tem certeza? Comece por aqui.",
+      "guidance": {
+        "meta": [
+          "Ficção",
+          "80.000 a 120.000 palavras",
+          "Três atos",
+          "Gancho de capítulo"
+        ],
+        "sections": [
+          [
+            "Promessa ao leitor",
+            "Que tipo de experiência este romance entrega: suspense, romance, aventura, drama histórico?"
+          ],
+          [
+            "Protagonista",
+            "Quem deseja algo com força suficiente para sustentar muitas páginas?"
+          ],
+          [
+            "Conflito externo",
+            "Qual obstáculo concreto impede o objetivo?"
+          ],
+          [
+            "Viradas",
+            "Quais mudanças de rumo renovam a leitura ao longo dos atos?"
+          ],
+          [
+            "Gancho de capítulo",
+            "O que faz o leitor continuar depois de cada bloco?"
+          ]
+        ],
+        "reminders": [
+          "Defina o gênero antes de escrever: cada público traz expectativas próprias.",
+          "Capítulos curtos ajudam quando o motor é enredo.",
+          "O romance comercial não é menor: ele firma outro contrato com o leitor."
+        ],
+        "blueprint": "ROMANCE COMERCIAL\\n\\nUma promessa feita na primeira página e cumprida na última.\\n\\nO gênero define o contrato com o leitor antes de qualquer cena: suspense entrega tensão, romance sentimental entrega resolução emocional, thriller entrega adrenalina. O protagonista quer algo com urgência — e o obstáculo é proporcional ao desejo. Pacing é tudo: capítulos curtos, ganchos no final de cada um, revelações dosadas. O leitor precisa virar a página às 23h mesmo sabendo que tem trabalho amanhã.\\n\\nConectivos de pacing: então (aceleração) · mas (obstáculo que surge) · de repente / sem aviso (ruptura de expectativa) · o que ela não sabia ainda (suspense antecipado)",
+        "sketch": "GÊNERO: [suspense / romance / thriller / fantasia comercial]\\nPROMESSA: [o que o leitor vai receber — em uma frase]\\n\\n[CENA DE ABERTURA — gancho imediato. Não apresenta: já está no meio do problema.]\\n\\n[PERSONAGEM PRINCIPAL] quer [DESEJO CLARO]. O problema é [OBSTÁCULO PROPORCIONAL].\\n\\n[GANCHO DO CAPÍTULO 1 — última linha. O leitor precisa virar a página.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Ficção de fôlego",
+          "title": "Um romance comercial promete travessia.",
+          "body": "Comece pela experiência do leitor: que tensão, desejo ou pergunta sustenta o livro inteiro?",
+          "primary": "Criar romance"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Luiz Alfredo Garcia-Roza, pela cena policial limpa, objetiva e imediatamente legível.",
+        "why": "O romance comercial respeita a experiência do leitor: pergunta clara, ritmo e promessa de continuidade.",
+        "references": [
+          "Luiz Alfredo Garcia-Roza",
+          "Patricia Melo",
+          "Raphael Montes",
+          "Tony Bellotto"
+        ],
+        "placeholder": "O corpo apareceu no único elevador que não tinha câmera. No bolso do paletó, havia uma foto da síndica tirada naquele mesmo dia."
+      }
+    },
+    {
+      "id": "poesia-lirica",
+      "oficio": "poesia",
+      "label": "Poesia lírica",
+      "icon": "format_quote",
+      "title": "Poesia lírica",
+      "kind": "Poesia lírica",
+      "chapter": "Imagem e som",
+      "description": "Guia para poema com consciência de imagem, emoção, som e virada final.",
+      "guidance": {
+        "meta": [
+          "Poesia",
+          "Verso livre ou forma fixa",
+          "Imagem + som",
+          "Leitura em voz alta"
+        ],
+        "sections": [
+          [
+            "Núcleo sensível",
+            "Que emoção, pergunta ou imagem pede poema?"
+          ],
+          [
+            "Imagem central",
+            "Qual objeto, cena ou gesto carrega o sentido?"
+          ],
+          [
+            "Música do verso",
+            "Onde o poema respira, repete, corta ou acelera?"
+          ],
+          [
+            "Virada",
+            "Que mudança de imagem ou pensamento abre o final?"
+          ],
+          [
+            "Leitura em voz alta",
+            "O poema aguenta ser ouvido?"
+          ]
+        ],
+        "reminders": [
+          "Poesia existe no som antes de existir na explicação.",
+          "Evite dizer a emoção cedo demais: deixe a imagem trabalhar.",
+          "A última linha precisa mudar a temperatura do poema."
+        ],
+        "blueprint": "POESIA LÍRICA\\n\\nUma imagem que carrega mais do que consegue explicar.\\n\\nComeça no concreto — objeto, gesto, corpo, paisagem. Nunca no sentimento abstrato. O verso revela-se pelo corte: onde a linha termina muda o que a próxima significa. A virada é o verso que muda de fora para dentro, de imagem para sentido, de pergunta para silêncio. O final abre — nunca fecha. O poema termina onde o leitor começa.\\n\\nSonoridade: aliteração e assonância trabalham sem ser declaradas. Leia em voz alta — onde o ouvido tropeça, o verso pede revisão.",
+        "sketch": "[TÍTULO — ou o primeiro verso faz esse trabalho]\\n\\n[IMAGEM CONCRETA — objeto, gesto, corpo, paisagem. Não o sentimento: o que o provoca.]\\n\\n[SEGUNDO VERSO — não explica. Aprofunda ou desloca.]\\n\\n[ONDE O VERSO CORTA? Experimente quebrar aqui — o branco é parte do poema.]\\n\\n[VIRADA — o verso que muda de fora para dentro.]\\n\\n[ÚLTIMO VERSO — abre, não fecha.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Imagem e respiração",
+          "title": "Um poema começa quando a linguagem escuta.",
+          "body": "Escolha uma imagem concreta e leia cada verso em voz alta. O sentido também mora no som.",
+          "primary": "Criar poema"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Carlos Drummond de Andrade e Adelia Prado, pela imagem concreta que sustenta pensamento e emoção.",
+        "why": "A poesia lírica não precisa explicar o sentimento quando encontra uma imagem com peso sonoro.",
+        "references": [
+          "Carlos Drummond de Andrade",
+          "Adelia Prado",
+          "Ferreira Gullar",
+          "Ana Cristina Cesar",
+          "Cora Coralina"
+        ],
+        "placeholder": "no varal, a camisa do meu pai\\nbate no vento\\ncomo se ainda tivesse peito"
+      }
+    },
+    {
+      "id": "reportagem",
+      "oficio": "jornalismo",
+      "label": "Reportagem",
+      "icon": "newspaper",
+      "title": "Reportagem",
+      "kind": "Reportagem",
+      "chapter": "Pauta e apuração",
+      "description": "Guia para texto jornalístico com pauta clara, fontes, contexto e apuração verificável.",
+      "guidance": {
+        "meta": [
+          "Jornalismo",
+          "Apuração factual",
+          "Fontes múltiplas",
+          "Lide forte"
+        ],
+        "sections": [
+          [
+            "Pauta",
+            "Qual pergunta pública este texto precisa responder?"
+          ],
+          [
+            "Lide",
+            "O que o leitor precisa saber primeiro?"
+          ],
+          [
+            "Fontes",
+            "Quem confirma, contradiz ou contextualiza a história?"
+          ],
+          [
+            "Contexto",
+            "Que dado ou histórico impede leitura superficial?"
+          ],
+          [
+            "Checagem",
+            "O que precisa ser verificado antes da publicação?"
+          ]
+        ],
+        "reminders": [
+          "A melhor pauta nasce de uma pergunta concreta.",
+          "Fonte única raramente sustenta reportagem.",
+          "A clareza do lide não substitui a profundidade da apuração."
+        ],
+        "blueprint": "REPORTAGEM\\n\\nUm fato verificado que revela algo que o leitor precisava saber.\\n\\nA pauta começa com uma pergunta, não com uma tese: o jornalista não sabe a resposta antes de apurar. A abertura (lide) responde quem, o quê, quando, onde — mas o porquê e o como são o corpo da reportagem. Cada afirmação precisa de fonte. Cada fonte precisa de atribuição. As vozes em conflito precisam aparecer: reportagem com uma única perspectiva é release.\\n\\nConectivos: segundo [FONTE] (atribuição obrigatória) · no entanto / por outro lado (segunda voz que contesta) · dados do [INSTITUTO/PESQUISA] mostram (ancoragem em evidência) · procurado pela reportagem, [NOME] não respondeu (transparência de apuração)",
+        "sketch": "[LIDE — quem, o quê, quando, onde. Uma frase. Sem adjetivo, sem opinião.]\\n\\n[CONTEXTO — por que isso importa agora? O que estava acontecendo antes disso?]\\n\\n[VOZ PRINCIPAL — quem viveu isso. Citação direta com atribuição.]\\n\\n[VOZ DE CONTESTAÇÃO — quem discorda ou tem perspectiva diferente.]\\n\\n[DADO OU DOCUMENTO que sustenta o argumento central.]\\n\\n[CONSEQUÊNCIA — o que muda por causa disso?]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Apuração antes de opinião",
+          "title": "Reportagem é o ofício de ir atrás.",
+          "body": "Comece pela pergunta que move a pauta e liste o que ainda precisa ser confirmado.",
+          "primary": "Criar reportagem"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Eliane Brum e Daniela Arbex, pela apuração que encontra personagem sem abandonar o rigor.",
+        "why": "A reportagem forte transforma dado em experiência verificável, com fonte, contexto e rosto humano.",
+        "references": [
+          "Eliane Brum",
+          "Daniela Arbex",
+          "Zuenir Ventura",
+          "Ruy Castro",
+          "Fernando Morais"
+        ],
+        "placeholder": "Às 5h17, a primeira moradora abriu a janela e viu a água na altura do portão. Às 6h, a rua já não tinha nome: era um braço do rio."
+      }
+    },
+    {
+      "id": "newsletter-editorial",
+      "oficio": "jornalismo",
+      "label": "Newsletter editorial",
+      "icon": "alternate_email",
+      "title": "Newsletter editorial",
+      "kind": "Newsletter editorial",
+      "chapter": "Edição e voz",
+      "description": "Guia para publicação periódica por e-mail, com voz consistente, curadoria e relação direta com o leitor.",
+      "guidance": {
+        "meta": [
+          "Conteúdo editorial",
+          "Periodicidade",
+          "Voz própria",
+          "Relação direta"
+        ],
+        "sections": [
+          [
+            "Promessa da edição",
+            "Por que esta edição merece chegar à caixa de entrada?"
+          ],
+          [
+            "Abertura",
+            "Gancho pessoal, editorial ou informativo."
+          ],
+          [
+            "Corpo",
+            "Ideia principal, curadoria ou narrativa da semana."
+          ],
+          [
+            "Ritual",
+            "Quadro recorrente que cria familiaridade."
+          ],
+          [
+            "Chamada final",
+            "O que o leitor faz, pensa ou espera depois?"
+          ]
+        ],
+        "reminders": [
+          "Newsletter é contrato de periodicidade e voz.",
+          "Você não precisa falar com todos: precisa ser reconhecível para os seus leitores.",
+          "A edição boa parece conversa, mas tem estrutura."
+        ],
+        "blueprint": "NEWSLETTER EDITORIAL\\n\\nUma voz consistente entregando valor para quem escolheu receber.\\n\\nA newsletter começa pela relação: o leitor abriu porque confia na voz, não porque foi impulsionado pelo algoritmo. Cada edição tem um tema central e uma promessa clara no assunto do email. A curadoria é o produto: o que você escolheu cobrir e por que importa. O CTA (chamada à ação) é consequência natural do conteúdo — não apêndice comercial.\\n\\nConectivos: esta semana / nesta edição (âncora temporal que cria hábito) · o que me chamou atenção foi (voz editorial que interpreta, não só informa) · vale a pena porque (justifica a curadoria)",
+        "sketch": "ASSUNTO DO EMAIL: [O QUE O LEITOR RECEBE — específico, não genérico]\\n\\n[ABERTURA — a voz editorial. Uma observação, pergunta ou detalhe que prende.]\\n\\n[TEMA CENTRAL — o que esta edição cobre e por que importa agora.]\\n\\n[CURADORIA — 2 a 3 itens selecionados com razão explícita para cada escolha.]\\n\\n[CTA — o que o leitor faz agora? Natural, não forçado.]\\n\\n[FECHAMENTO — a voz que despede. Consistente com o tom da abertura.]"
+      },
+      "steps": [
+        {
+          "eyebrow": "Audiência própria",
+          "title": "Uma newsletter cria encontro recorrente.",
+          "body": "Defina a promessa da edição antes de escrever. O leitor abriu espaço na caixa de entrada dele.",
+          "primary": "Criar newsletter"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Newsletters brasileiras de curadoria e jornalismo explicativo, pela voz recorrente e contrato direto com o leitor.",
+        "why": "A newsletter funciona quando a pessoa reconhece uma voz e entende por que aquela edição precisava existir.",
+        "references": [
+          "Meio",
+          "Rádio Novelo",
+          "Nexo Jornal",
+          "Agência Bori"
+        ],
+        "placeholder": "Bom dia. Esta edição começa com uma pergunta simples: quem ganha quando uma cidade esquece seus próprios escritores?"
+      }
+    },
+    {
+      "id": "romance-literario",
+      "oficio": "ficcao",
+      "label": "Romance literário",
+      "icon": "local_library",
+      "title": "Romance literário",
+      "kind": "Romance literário",
+      "chapter": "Voz e fissura",
+      "description": "Guia para narrativa longa em que linguagem, ambiguidade e consciência formal carregam tanto peso quanto a trama. Para quem já tem voz e quer refiná-la.",
+      "guidance": {
+        "meta": [
+          "Ficção",
+          "Voz",
+          "Ambiguidade",
+          "Forma"
+        ],
+        "sections": [
+          [
+            "Voz inevitável",
+            "Que frase só este narrador poderia dizer?"
+          ],
+          [
+            "Ferida central",
+            "Que conflito íntimo move o livro?"
+          ],
+          [
+            "Forma",
+            "O texto pede fragmento, fluxo ou capítulos?"
+          ],
+          [
+            "Imagem recorrente",
+            "Que objeto retorna transformado?"
+          ],
+          [
+            "Acúmulo",
+            "O romance faz ressoar, não apenas resolver."
+          ]
+        ],
+        "reminders": [
+          "A voz é o produto.",
+          "Ambiguidade não é confusão.",
+          "A forma precisa participar do sentido."
+        ],
+        "blueprint": "ROMANCE LITERÁRIO\\n\\nUma voz inevitável contando uma ferida que não se resolve por ação externa.\\n\\nA primeira frase já é a voz — não apresenta, já habita. O conflito central é interno, mas se manifesta em cenas concretas. Imagens recorrentes acumulam sentido sem serem declaradas símbolo. Cada cena adiciona camada — o leitor descobre devagar, não de uma vez.\\n\\nConectivos: no entanto / ainda assim (tensão interna) · de modo que / de tal forma que (acúmulo de consequências) · anos depois / naquele momento (saltos temporais com peso)",
+        "sketch": "[FRASE DE ABERTURA QUE JÁ É A VOZ — ritmo, mundo e ferida de uma vez.]\\n\\n[NOME] não sabia como explicar [A FERIDA CENTRAL] para quem nunca tinha [EXPERIÊNCIA DEFINIDORA].\\n\\n[CENA QUE REVELA O CONFLITO SEM EXPLICAR — deixa o leitor chegar sozinho.]\\n\\n[IMAGEM RECORRENTE — objeto, gesto ou paisagem que vai atravessar o livro. Introduz sem marcar como símbolo.]\\n\\n[CENA SEGUINTE QUE ADICIONA CAMADA — avança o conflito sem resolver nada.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Romance literário tem uma lógica própria.",
+          "body": "Guia para narrativa longa em que linguagem, ambiguidade e consciência formal carregam a travessia.",
+          "primary": "Criar romance literário"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Raduan Nassar, Clarice Lispector e Hilda Hilst, pela voz como acontecimento.",
+        "why": "O romance literário se sustenta quando forma e tema são inseparáveis.",
+        "references": [
+          "Raduan Nassar",
+          "Clarice Lispector",
+          "Hilda Hilst",
+          "João Gilberto Noll",
+          "Marilene Felinto"
+        ],
+        "placeholder": "Fazia anos que ele não atravessava aquela rua, mas a rua continuava atravessando tudo que ele dizia."
+      }
+    },
+    {
+      "id": "ficcao-cientifica",
+      "oficio": "ficcao",
+      "label": "Ficção científica",
+      "icon": "rocket_launch",
+      "title": "Ficção científica",
+      "kind": "Ficção científica",
+      "chapter": "Hipótese e humanidade",
+      "description": "Guia para extrapolar tecnologia, sociedade ou futuro sem perder o conflito humano.",
+      "guidance": {
+        "meta": [
+          "Hipótese",
+          "Mundo possível",
+          "Custo humano",
+          "Presente revelado"
+        ],
+        "sections": [
+          [
+            "E se...",
+            "Qual hipótese desloca o mundo conhecido?"
+          ],
+          [
+            "Regra",
+            "O que mudou e quais são os limites?"
+          ],
+          [
+            "Custo humano",
+            "Quem paga o preço?"
+          ],
+          [
+            "Cotidiano alterado",
+            "Como o novo mundo aparece em gestos simples?"
+          ],
+          [
+            "Comentário",
+            "O futuro ilumina o agora."
+          ]
+        ],
+        "reminders": [
+          "Tecnologia sem consequência vira cenário.",
+          "Explique regras por ação.",
+          "O estranho fica forte quando toca o familiar."
+        ],
+        "blueprint": "FICÇÃO CIENTÍFICA\\n\\nUma hipótese sobre o mundo transformada em experiência humana concreta.\\n\\nO \\"e se\\" precisa ter regra: o que é possível, o que é proibido, qual o custo. O cotidiano alterado é onde a FC respira — quem compra pão dentro do mundo estranho? O custo humano é onde mora o comentário. FC forte é espelho do presente — o mundo imaginado revela o que o mundo real esconde.\\n\\nConectivos: por causa disso / em decorrência (causalidade da hipótese) · diferente do que / ao contrário de (contraste com o real) · no entanto / apesar disso (resistência humana à regra)",
+        "sketch": "Em [ANO/CONTEXTO], [A MUDANÇA QUE DEFINE O MUNDO] era tão comum que [PERSONAGEM] não pensava mais nisso.\\n\\nAté [O EVENTO QUE FORÇA A PENSAR].\\n\\n[REGRA DO MUNDO — o que é possível, proibido, qual o custo. Mostre, não explique.]\\n\\n— [FALA QUE REVELA O CUSTO HUMANO — não o conceito, a pessoa que perde algo.]\\n\\n[CENA DO COTIDIANO ALTERADO — o ordinário vivido dentro do mundo estranho.]\\n\\n[O QUE ESTE MUNDO DIZ SOBRE O NOSSO — não declare, deixe emergir da cena.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Ficção científica tem uma lógica própria.",
+          "body": "Guia para extrapolar tecnologia, sociedade ou futuro sem perder o conflito humano.",
+          "primary": "Criar ficção científica"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "André Carneiro, Jeronymo Monteiro e Bráulio Tavares, pela especulação ligada ao humano.",
+        "why": "A ficção científica brasileira ganha força quando a ideia revela solidão, poder, medo ou desigualdade.",
+        "references": [
+          "André Carneiro",
+          "Jeronymo Monteiro",
+          "Bráulio Tavares",
+          "Fábio Fernandes",
+          "Roberto de Sousa Causo"
+        ],
+        "placeholder": "O aplicativo avisou que ela morreria às 16h12. Às 16h11, o filho ligou perguntando se ainda tinha feijão."
+      }
+    },
+    {
+      "id": "fantasia-brasileira",
+      "oficio": "ficcao",
+      "label": "Fantasia brasileira",
+      "icon": "auto_fix_high",
+      "title": "Fantasia brasileira",
+      "kind": "Fantasia brasileira",
+      "chapter": "Maravilhoso cotidiano",
+      "description": "Guia para fantástico, magia ou absurdo instalados no cotidiano brasileiro.",
+      "guidance": {
+        "meta": [
+          "Fantástico",
+          "Cotidiano",
+          "Regra do espanto",
+          "Consequência"
+        ],
+        "sections": [
+          [
+            "Evento impossível",
+            "O que acontece sem pedir licença ao real?"
+          ],
+          [
+            "Normalidade",
+            "Como as pessoas seguem vivendo?"
+          ],
+          [
+            "Regra mágica",
+            "Que limite organiza o espanto?"
+          ],
+          [
+            "Raiz local",
+            "Que território ancora a fantasia?"
+          ],
+          [
+            "Consequência",
+            "O impossível muda alguma coisa."
+          ]
+        ],
+        "reminders": [
+          "Trate o impossível com seriedade.",
+          "Escute o cotidiano brasileiro.",
+          "Toda magia cobra algum preço."
+        ],
+        "blueprint": "FANTASIA BRASILEIRA\\n\\nO impossível acontece como se sempre tivesse acontecido — sem explicação, sem espanto narrativo.\\n\\nO cotidiano não para por causa do espanto. A regra mágica não é anunciada: é mostrada em ação, com custo. A raiz local — folclore, paisagem, crença, história — alimenta o impossível sem virar decoração. A consequência pode ser microscópica: um vizinho que some, uma fruta que não apodrece mais.\\n\\nConectivos: como sempre / naturalmente (naturaliza o impossível) · mas desta vez (a diferença) · enquanto isso (cotidiano paralelo ao espanto)",
+        "sketch": "[O IMPOSSÍVEL aconteceu como sempre acontece: sem aviso e sem explicação.]\\n\\n[NOME] [AÇÃO ORDINÁRIA — pagar conta, esperar ônibus, cozinhar] enquanto [O ESPANTO SE INSTALAVA].\\n\\nNinguém perguntou por quê. Em [LUGAR CONCRETO], certas coisas simplesmente [VERBO QUE NATURALIZA].\\n\\n[A REGRA MÁGICA — mostrada em ação, não anunciada. Tem lógica própria.]\\n\\n[RAIZ LOCAL — de onde vem esse impossível? Folclore, crença, paisagem, história.]\\n\\n[CONSEQUÊNCIA — o que muda? Pode ser mínimo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Fantasia brasileira tem uma lógica própria.",
+          "body": "Guia para fantástico, magia ou absurdo instalados no cotidiano brasileiro.",
+          "primary": "Criar fantasia brasileira"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Murilo Rubião e José J. Veiga, pelo fantástico que entra na sala sem explicar origem.",
+        "why": "A fantasia brasileira pode nascer da invasão do absurdo no dia comum.",
+        "references": [
+          "Murilo Rubião",
+          "José J. Veiga",
+          "Lygia Fagundes Telles",
+          "Aline Valek"
+        ],
+        "placeholder": "Na terça-feira, a sombra da igreja descolou da parede e foi beber água no coreto."
+      }
+    },
+    {
+      "id": "terror-horror",
+      "oficio": "ficcao",
+      "label": "Terror e horror",
+      "icon": "dark_mode",
+      "title": "Terror e horror",
+      "kind": "Terror e horror",
+      "chapter": "Medo ancorado",
+      "description": "Guia para medo psicológico, social, corporal ou sobrenatural com detalhe familiar.",
+      "guidance": {
+        "meta": [
+          "Medo",
+          "Atmosfera",
+          "Escalada",
+          "Perturbação"
+        ],
+        "sections": [
+          [
+            "Medo central",
+            "O que ameaça corpo, casa ou memória?"
+          ],
+          [
+            "Detalhe familiar",
+            "Que objeto comum fica errado?"
+          ],
+          [
+            "Escalada",
+            "Como o desconforto cresce?"
+          ],
+          [
+            "Revelação",
+            "O que se descobre tarde demais?"
+          ],
+          [
+            "Resíduo",
+            "Que imagem continua depois do fim?"
+          ]
+        ],
+        "reminders": [
+          "O medo mais forte começa reconhecível.",
+          "Evite explicar o monstro cedo.",
+          "Violência sem ponto de vista vira ruído."
+        ],
+        "blueprint": "TERROR E HORROR\\n\\nO medo central não é o monstro — é o que o monstro representa.\\n\\nComeça no familiar deslocado: algo comum com uma diferença de um grau. A escalada é gradual — cada cena piora um pouco, nunca tudo de uma vez. A revelação joga com o que o leitor sabe vs o que o personagem sabe. O final não resolve: deixa resíduo. Uma imagem, um cheiro, um som que não sai.\\n\\nConectivos: mas havia algo errado (primeiro deslocamento) · pior ainda / e então (escalada) · só que / no entanto (subverte expectativa) · como se (o familiar que não é mais familiar)",
+        "sketch": "[DETALHE COMUM — objeto, cômodo ou gesto familiar.] Mas havia algo errado com [O MÍNIMO DESLOCAMENTO — não o monstro, a diferença de um grau].\\n\\n[NOME] não conseguia nomear o que era. Só sabia que [REAÇÃO FÍSICA — não \\"sentiu medo\\", o corpo que reage].\\n\\n[ESCALADA — o detalhe errado se expande. Cada cena piora um pouco.]\\n\\n[REVELAÇÃO — o que o leitor entende que o personagem ainda não entendeu.]\\n\\n[RESÍDUO — a imagem, o som, o cheiro que permanece depois de fechar o livro.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Terror e horror tem uma lógica própria.",
+          "body": "Guia para medo psicológico, social, corporal ou sobrenatural com detalhe familiar.",
+          "primary": "Criar terror e horror"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Rubem Fonseca e autores de horror literário, pela violência tratada como normalidade perturbadora.",
+        "why": "O horror brasileiro muitas vezes nasce da casa, da rua e da naturalização do brutal.",
+        "references": [
+          "Rubem Fonseca",
+          "Marcelino Freire",
+          "Cristhiano Aguiar",
+          "Ana Paula Maia"
+        ],
+        "placeholder": "A geladeira começou a repetir a voz da avó morta sempre que alguém deixava a porta aberta."
+      }
+    },
+    {
+      "id": "fanfiction",
+      "oficio": "ficcao",
+      "label": "Fanfiction",
+      "icon": "diversity_3",
+      "title": "Fanfiction",
+      "kind": "Fanfiction",
+      "chapter": "Variação e afeto",
+      "description": "Guia para praticar voz, diálogo e emoção dentro de universo já amado.",
+      "guidance": {
+        "meta": [
+          "Comunidade",
+          "Universo compartilhado",
+          "Voz",
+          "Variação"
+        ],
+        "sections": [
+          [
+            "Canon ou AU",
+            "Você segue ou desloca as regras?"
+          ],
+          [
+            "Desejo da cena",
+            "Que relação o leitor veio procurar?"
+          ],
+          [
+            "Voz",
+            "O personagem fala como ele mesmo?"
+          ],
+          [
+            "Comunidade",
+            "Que promessa afetiva existe?"
+          ],
+          [
+            "Aprendizado",
+            "Que técnica você treina aqui?"
+          ]
+        ],
+        "reminders": [
+          "Fanfic é laboratório.",
+          "Respeite expectativa antes de subverter.",
+          "Use o universo pronto para treinar cena e voz."
+        ],
+        "blueprint": "FANFICTION\\n\\nEntrega o que o original não entregou — e mantém os personagens reconhecíveis.\\n\\nO pacto com a comunidade vem antes do primeiro parágrafo: tags, avisos, classificação. A voz do personagem é o critério de tudo — tom, vocabulário, o que ele diria e jamais diria. A cena desejada (o encontro, o confronto, a reparação) é o centro. Fanfic boa aprende técnica com o original e vai além dele.\\n\\nConectivos: os mesmos que o original usaria — a fanfic habita o universo linguístico da obra. Desvio de tom é o erro mais comum e o mais difícil de corrigir depois.",
+        "sketch": "[CONTEXTO — canon, AU ou divergência. Uma linha que situa o leitor da comunidade.]\\n\\n[NOME DO PERSONAGEM] nunca tinha [A CENA QUE O ORIGINAL NÃO DEU].\\n\\n— [FALA QUE SOA COMO O PERSONAGEM — tom, vocabulário, o que ele diria e o que jamais diria.]\\n\\n[AVANÇO DA CENA DESEJADA — o que esta fanfic entrega que o original não entregou.]\\n\\nTags: [CLASSIFICAÇÃO] | [AVISOS] | [RELAÇÃO CENTRAL]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Fanfiction tem uma lógica própria.",
+          "body": "Guia para praticar voz, diálogo e emoção dentro de universo já amado.",
+          "primary": "Criar fanfiction"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Comunidades brasileiras de Wattpad, Spirit e AO3, pela prática intensa de diálogo e serialização.",
+        "why": "Fanfic ensina a escrever com leitor real do outro lado.",
+        "references": [
+          "Babi Dewet",
+          "Wattpad Brasil",
+          "Spirit Fanfics",
+          "AO3 em português"
+        ],
+        "placeholder": "Ela conhecia aquela fala de todos os episódios. O problema é que, naquela noite, ele disse a frase olhando para outra pessoa."
+      }
+    },
+    {
+      "id": "policial-noir",
+      "oficio": "ficcao",
+      "label": "Policial e noir",
+      "icon": "search",
+      "title": "Policial e noir",
+      "kind": "Policial e noir",
+      "chapter": "Crime e investigação",
+      "description": "Guia para ficção policial, noir e suspense com crime, investigador, pistas e revelação.",
+      "guidance": {
+        "meta": [
+          "Policial",
+          "Noir",
+          "Crime",
+          "Suspense"
+        ],
+        "sections": [
+          [
+            "Crime central",
+            "O que aconteceu? Que pergunta a investigação precisa responder?"
+          ],
+          [
+            "Investigador",
+            "Quem investiga e que ferida ou obsessão traz para o caso?"
+          ],
+          [
+            "Suspeitos e pistas",
+            "Que evidências guiam — e quais foram plantadas para enganar?"
+          ],
+          [
+            "Atmosfera",
+            "O ambiente é personagem no noir: cidade, luz, cheiro, som."
+          ],
+          [
+            "Revelação",
+            "Quem fez? Por quê? A resposta precisa ser surpreendente e inevitável ao mesmo tempo."
+          ]
+        ],
+        "reminders": [
+          "Plante a solução cedo — o leitor precisa ter tido chance de resolver.",
+          "O investigador interessante tem problema pessoal que o caso vai tocar.",
+          "Pistas falsas precisam ter lógica própria — não podem parecer arbitrárias depois."
+        ],
+        "blueprint": "POLICIAL E NOIR\\n\\nUm crime que revela o que a sociedade prefere não ver.\\n\\nO crime é o pretexto — o que importa é o que ele expõe: corrupção, desigualdade, violência estrutural. A atmosfera precede a trama: clima, luz, cheiro, som definem o noir antes do primeiro corpo aparecer. O detetive carrega uma ferida própria que o qualifica para entender esse crime específico. A revelação não é só quem fez — é por que o mundo permitiu que acontecesse.\\n\\nConectivos: havia algo errado com (atmosfera perturbada) · não era a primeira vez (padrão que expõe o sistema) · o que ninguém queria admitir (o que o crime revela além do crime)",
+        "sketch": "[ATMOSFERA — clima, luz, cheiro. O noir começa antes do crime.]\\n\\n[O CRIME — o que aconteceu. Mostre, não explique.]\\n\\n[NOME DO DETETIVE/INVESTIGADOR] não era a pessoa óbvia para este caso. Mas havia [A FERIDA QUE O QUALIFICA PARA ENTENDER ESTE CRIME].\\n\\n[O QUE O CRIME REVELA ALÉM DO CRIME — a camada social, política, moral.]\\n\\n[PISTA QUE PARECE APONTAR PARA UM LADO — mas aponta para outro.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção policial",
+          "title": "Policial não é só mistério — é moral.",
+          "body": "O crime é o pretexto. O que o romance policial investiga de verdade é a sociedade, a justiça e o preço de saber a verdade. O melhor noir brasileiro usa o crime para revelar a cidade.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da investigação",
+          "title": "Crime, investigador, revelação.",
+          "body": "Plant e payoff são a base do gênero: tudo que importa na revelação final precisa ter sido plantado antes. O leitor deve poder reler e encontrar as pistas que ignorou.",
+          "items": [
+            [
+              "Crime com pergunta",
+              "O que aconteceu cria uma tensão que só a revelação dissolve.",
+              "done"
+            ],
+            [
+              "Investigador com ferida",
+              "O caso toca algo pessoal — isso é o que diferencia thriller de exercício.",
+              "done"
+            ],
+            [
+              "Revelação inevitável e surpreendente",
+              "O leitor não previu, mas reconhece: 'claro, era isso'.",
+              "done"
+            ]
+          ],
+          "primary": "Criar policial"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Rubem Fonseca, Luiz Alfredo Garcia-Roza e Patricia Melo, pelo policial com alma e violência brasileira.",
+        "why": "O policial brasileiro mais forte usa o crime para revelar a cidade, a classe e a moral — não só o mistério.",
+        "references": [
+          "Rubem Fonseca",
+          "Luiz Alfredo Garcia-Roza",
+          "Patricia Melo",
+          "Tony Bellotto",
+          "Marçal Aquino"
+        ],
+        "placeholder": "O corpo foi encontrado na terça-feira. A delegada chegou na quinta. Em dois dias, alguém tinha apagado tudo que importava."
+      }
+    },
+    {
+      "id": "romance-sentimental",
+      "oficio": "ficcao",
+      "label": "Romance sentimental",
+      "icon": "favorite",
+      "title": "Romance sentimental",
+      "kind": "Romance sentimental",
+      "chapter": "Obstáculo e entrega",
+      "description": "Guia para romance com arco de relacionamento, HEA ou HFN, tensão emocional e personagens com química.",
+      "guidance": {
+        "meta": [
+          "Romance",
+          "HEA / HFN",
+          "Tensão emocional",
+          "Química"
+        ],
+        "sections": [
+          [
+            "Protagonistas",
+            "Quem são os dois — e o que cada um quer além do relacionamento?"
+          ],
+          [
+            "Atração inicial",
+            "O que os aproxima no começo — e o que já planta o obstáculo?"
+          ],
+          [
+            "Obstáculo central",
+            "O que os impede de ficarem juntos? Precisa ser crível e doloroso o suficiente para sustentar o livro."
+          ],
+          [
+            "Ponto de ruptura",
+            "O momento em que parece que não vai funcionar — o leitor precisa acreditar."
+          ],
+          [
+            "Resolução",
+            "Como o obstáculo é superado de dentro para fora? A resolução precisa ser ganha, não dada."
+          ]
+        ],
+        "reminders": [
+          "O obstáculo precisa ser interno tanto quanto externo — desentendimento puro não sustenta um romance.",
+          "Química se constrói em cena, não em descrição: o que eles fazem juntos que só eles fariam?",
+          "HEA (felizes para sempre) ou HFN (felizes por agora) — defina antes de escrever: o tom do livro muda."
+        ],
+        "blueprint": "ROMANCE SENTIMENTAL\\n\\nDois personagens que deveriam ficar juntos — e o que impede que isso aconteça.\\n\\nO obstáculo precisa ser real e proporcional: interno (medo, trauma, crença) ou externo (circunstância, terceiro). A tensão é construída em encontros e afastamentos — cada reaproximação revela mais sobre cada um. O crescimento emocional de ambos é obrigatório: eles precisam mudar para que a história funcione. O final é satisfatório, não surpreendente — o leitor sabe que vai acontecer, mas precisa sentir que mereceu.\\n\\nConectivos: apesar de (obstáculo que persiste) · pela primeira vez (virada que muda a percepção de um sobre o outro) · mas desta vez (a mesma situação que agora significa diferente)",
+        "sketch": "[PERSONAGEM A] [SITUAÇÃO QUE REVELA QUEM ELE/ELA É — sem apresentar.]\\n\\n[PERSONAGEM B] entrou [COMO ENTRA — a primeira impressão que vai ser revista.]\\n\\nO problema não era [O OBSTÁCULO APARENTE]. Era [O OBSTÁCULO REAL — interno, que cada um carrega].\\n\\n[CENA DE TENSÃO — eles estão próximos. O que impede que se aproximem mais?]\\n\\n[A VIRADA EMOCIONAL — o momento em que algo muda na percepção de um sobre o outro.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção romântica",
+          "title": "Romance sentimental tem uma promessa implícita.",
+          "body": "O leitor chega sabendo que vai haver final feliz — ou pelo menos esperançoso. A tensão não está no 'se' mas no 'como'. O seu trabalho é tornar o obstáculo tão real que o leitor duvide da promessa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do romance sentimental",
+          "title": "Atração, obstáculo, entrega.",
+          "body": "A química se constrói em cena — o que esses dois fazem juntos que mais ninguém faria? O obstáculo precisa doer. A resolução precisa ser conquistada.",
+          "items": [
+            [
+              "Química em cena",
+              "Mostre, não descreva: o que eles fazem juntos que cria tensão.",
+              "done"
+            ],
+            [
+              "Obstáculo crível",
+              "Externo e interno — desentendimento puro não segura o livro.",
+              "done"
+            ],
+            [
+              "Resolução ganha",
+              "A decisão vem de dentro deles — não de acidente ou terceiros.",
+              "done"
+            ]
+          ],
+          "primary": "Criar romance"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Thalita Rebouças, Babi Dewet e a tradição do romance de banca, pela leitura que prende sem pedir desculpa.",
+        "why": "O romance sentimental brasileiro forte tem personagens que o leitor quer ver felizes — e obstáculos que fazem o leitor duvidar que isso vai acontecer.",
+        "references": [
+          "Thalita Rebouças",
+          "Babi Dewet",
+          "Ana Lua",
+          "Nicholas Sparks adaptado",
+          "Colleen Hoover em tradução"
+        ],
+        "placeholder": "Ele era exatamente o tipo de pessoa que ela havia prometido a si mesma que nunca mais ia amar."
+      }
+    },
+    {
+      "id": "romantasy",
+      "oficio": "ficcao",
+      "label": "Romantasy",
+      "icon": "auto_awesome",
+      "title": "Romantasy",
+      "kind": "Romantasy",
+      "chapter": "Magia e coração",
+      "description": "Guia para fantasia com arco romântico central — mundos com magia, tensão entre protagonistas e HEA.",
+      "guidance": {
+        "meta": [
+          "Fantasia",
+          "Romance",
+          "HEA",
+          "Mundo com magia"
+        ],
+        "sections": [
+          [
+            "O mundo e a magia",
+            "Qual é o sistema de magia e como ele interfere no relacionamento?"
+          ],
+          [
+            "Protagonistas",
+            "O que cada um quer — e o que a magia ou o mundo impede que tenham?"
+          ],
+          [
+            "Tensão romantasy",
+            "No romantasy, o obstáculo emocional e o obstáculo do mundo se entrelaçam. Um não resolve sem o outro."
+          ],
+          [
+            "O ponto de virada",
+            "Quando o relacionamento e o arco do mundo colidem — o momento mais alto do livro."
+          ],
+          [
+            "Resolução dupla",
+            "O final precisa resolver o romance E o conflito do mundo. Um sem o outro frustra o leitor."
+          ]
+        ],
+        "reminders": [
+          "O sistema de magia deve afetar o relacionamento diretamente — não ser cenário de fundo.",
+          "A tensão 'enemies to lovers' funciona bem no romantasy porque o conflito do mundo justifica a resistência inicial.",
+          "O HEA precisa ser ganho tanto no arco emocional quanto no arco de mundo — um sem o outro não satisfaz."
+        ],
+        "blueprint": "ROMANTASY\\n\\nUm mundo com magia — e dois personagens que não deveriam se envolver.\\n\\nO obstáculo tem duas camadas: o mundo (política, profecia, guerra, magia) e o interior de cada um (medo, lealdade, trauma). O relacionamento avança quando o mundo pressiona — e recua quando o mundo exige. A resolução é uma conquista dupla: eles vencem o conflito do mundo E constroem o relacionamento. A magia não é decoração: ela muda o que é possível entre eles.\\n\\nConectivos: apesar da profecia (obstáculo externo) · contra todas as regras (transgressão que define o relacionamento) · quando a batalha terminar (a promessa que ancora a tensão)",
+        "sketch": "[PROTAGONISTA A] descobriu que [HABILIDADE OU CONDIÇÃO NO MUNDO MÁGICO] — o que mudou tudo.\\n\\n[PROTAGONISTA B] era exatamente a pessoa que [RAZÃO PARA NÃO PODEREM ESTAR JUNTOS].\\n\\nO problema não era [OBSTÁCULO APARENTE DO MUNDO]. Era [O QUE CADA UM CARREGAVA POR DENTRO].\\n\\n[CENA DE TENSÃO — magia e desejo no mesmo momento.]\\n\\n[A ESCOLHA — quando o arco do mundo exige que um dos dois abra mão de algo.]\\n\\n[A CONQUISTA DUPLA — o que mudou no mundo e o que mudou entre eles.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Fantasia romântica",
+          "title": "No romantasy, o mundo e o coração quebram juntos.",
+          "body": "O leitor quer dois finais ao mesmo tempo: que eles fiquem juntos e que o mundo seja salvo. Você não pode entregar só um. A magia precisa fazer parte do que os aproxima — e do que os separa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do romantasy",
+          "title": "Dois obstáculos. Uma resolução.",
+          "body": "O sistema de magia deve afetar o relacionamento diretamente. A tensão 'enemies to lovers' funciona bem aqui porque o conflito do mundo justifica a resistência. O final precisa ser ganho nas duas frentes.",
+          "items": [
+            [
+              "Magia integrada",
+              "O sistema de magia interfere no relacionamento — não é só cenário.",
+              "done"
+            ],
+            [
+              "Obstáculo duplo",
+              "Externo (mundo, política, profecia) e interno (medo, lealdade, trauma).",
+              "done"
+            ],
+            [
+              "Resolução dupla",
+              "O romance e o conflito do mundo se resolvem juntos — não separados.",
+              "done"
+            ]
+          ],
+          "primary": "Criar romantasy"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "new-adult",
+      "oficio": "ficcao",
+      "label": "New Adult",
+      "icon": "school",
+      "title": "New Adult",
+      "kind": "New Adult",
+      "chapter": "Identidade e primeiros passos",
+      "description": "Guia para ficção com protagonistas de 18 a 25 anos — identidade, primeiro amor adulto, independência e as escolhas que definem quem você vai ser.",
+      "guidance": {
+        "meta": [
+          "Contemporary",
+          "18-25",
+          "Identidade",
+          "Primeiro amor adulto"
+        ],
+        "sections": [
+          [
+            "Protagonista em transição",
+            "Ela ou ele está saindo de um mundo conhecido para um novo. Que mundo é esse e o que deixou para trás?"
+          ],
+          [
+            "O primeiro amor adulto",
+            "Diferente do amor adolescente — tem corpo, tem consequência, tem escolha. O que está em jogo além do coração?"
+          ],
+          [
+            "A construção de identidade",
+            "Quem o protagonista pensa que é no início — e quem descobre que é no final?"
+          ],
+          [
+            "O conflito central",
+            "Família, expectativa, pressão externa. O que o mundo adulto está pedindo que vai contra o que ela quer de verdade?"
+          ],
+          [
+            "A escolha definitiva",
+            "O New Adult termina com uma escolha que define o adulto que o protagonista vai ser."
+          ]
+        ],
+        "reminders": [
+          "O New Adult não é só YA com mais conteúdo adulto — é sobre a transição e a identidade, não só a idade.",
+          "O relacionamento pode ser mais intenso e físico que no YA, mas o núcleo emocional é o mesmo: quem sou eu com essa pessoa?",
+          "A pressão familiar e social é mais presente no NA — pais, expectativas de carreira, dinheiro entram no conflito."
+        ],
+        "blueprint": "NEW ADULT\\n\\nUm protagonista no limiar: deixou um mundo para trás e ainda não encontrou o novo.\\n\\nA história acontece na janela entre 18 e 25 anos — universidade, primeiro emprego, primeiro apartamento. A identidade está sendo construída em tempo real. O amor (ou o relacionamento) acelera esse processo: com essa pessoa, quem me torno? O conflito externo (família, expectativa, pressão) reflete o conflito interno (quem sou versus quem deveria ser). O final não é 'felizes para sempre' obrigatório — é 'sei quem sou e o que quero'.\\n\\nConectivos: pela primeira vez por conta própria (autonomia nova) · diferente de tudo que conhecia (a quebra do mundo anterior) · antes de saber o que era (o amor que chegou antes da identidade)",
+        "sketch": "[PROTAGONISTA] chegou em [LUGAR NOVO — universidade, cidade, trabalho] sem saber que [O QUE ESTAVA PRESTES A DESCOBRIR SOBRE SI MESMA].\\n\\n[PERSONAGEM SECUNDÁRIO IMPORTANTE — família, amigo, interesse amoroso] carregava [EXPECTATIVA OU PRESSÃO].\\n\\nO problema não era [CONFLITO APARENTE]. Era [QUEM ELA ACHAVA QUE TINHA QUE SER].\\n\\n[CENA QUE MOSTRA A TRANSIÇÃO — um momento em que age como adulta pela primeira vez.]\\n\\n[A ESCOLHA — entre o que esperam dela e o que ela quer de verdade.]\\n\\n[O ADULTO QUE ELA ESCOLHE SER.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção para jovens adultos",
+          "title": "New Adult é sobre quem você escolhe ser.",
+          "body": "Não é YA com mais cenas adultas. É a história de alguém que saiu do mundo que conhecia e ainda não sabe quem é no novo. O relacionamento acelera essa descoberta — com essa pessoa, quem me torno?",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do New Adult",
+          "title": "Identidade em construção. Amor como espelho.",
+          "body": "A pressão familiar e social é mais presente aqui do que no YA. O conflito externo reflete o interno. O final define o adulto que o protagonista vai ser — não precisa ser HEA, mas precisa ser uma escolha.",
+          "items": [
+            [
+              "Transição real",
+              "O protagonista está entre dois mundos — o que deixou e o que ainda não é.",
+              "done"
+            ],
+            [
+              "Amor como formação",
+              "O relacionamento revela quem o protagonista está se tornando.",
+              "done"
+            ],
+            [
+              "Escolha definitória",
+              "O clímax é uma escolha que define o adulto — não só o romance.",
+              "done"
+            ]
+          ],
+          "primary": "Criar New Adult"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "suspense-psicologico",
+      "oficio": "ficcao",
+      "label": "Suspense psicológico",
+      "icon": "psychology",
+      "title": "Suspense psicológico",
+      "kind": "Suspense psicológico",
+      "chapter": "Mente e dúvida",
+      "description": "Guia para suspense com narradora não confiável, tensão interna e revelações que reescrevem o que o leitor pensava saber.",
+      "guidance": {
+        "meta": [
+          "Suspense",
+          "Narradora não confiável",
+          "Revelação",
+          "Tensão psicológica"
+        ],
+        "sections": [
+          [
+            "A narradora",
+            "O que ela sabe — e o que ela esconde de si mesma? A não confiabilidade precisa ter raiz emocional real."
+          ],
+          [
+            "O segredo central",
+            "Qual é a verdade que o livro inteiro está construindo para revelar?"
+          ],
+          [
+            "As camadas de suspeita",
+            "Quem mais pode ser culpado? O suspense psicológico planta dúvida em múltiplas direções."
+          ],
+          [
+            "A revelação",
+            "Quando e como o leitor descobre — e como isso recontextualiza tudo que leu antes?"
+          ],
+          [
+            "O aftermath",
+            "O que sobra depois da verdade? O suspense psicológico não termina na revelação."
+          ]
+        ],
+        "reminders": [
+          "A narradora não confiável funciona quando o leitor a entende mesmo sem confiar nela — a empatia precisa existir.",
+          "Cada pista falsa precisa ser tecnicamente honesta: nada que impeça o leitor de ter descoberto sozinho.",
+          "O ritmo do suspense psicológico é interno: a tensão vem dos pensamentos, não das ações."
+        ],
+        "blueprint": "SUSPENSE PSICOLÓGICO\\n\\nAlgo aconteceu. A narradora não tem certeza do que foi — ou não quer ter.\\n\\nA estrutura gira em torno da revelação: tudo que vem antes a constrói, tudo que vem depois a recontextualiza. A narradora não confiável não é um truque: é uma personagem com razões reais para distorcer o que percebe. O leitor sabe que algo está errado antes de saber o quê — e continua lendo para descobrir. O ritmo é interno: pensamento, interpretação, dúvida. A ação acelera a revelação, mas não substitui a tensão psicológica.\\n\\nConectivos: mas eu sabia (a certeza que vai ser desmentida) · da mesma forma que antes (o padrão que está prestes a quebrar) · algo estava errado (a intuição que o leitor compartilha com a narradora)",
+        "sketch": "[NARRADORA] sabia que [CERTEZA INICIAL — que vai ser questionada].\\n\\nMas [EVENTO OU PESSOA] plantou a primeira dúvida.\\n\\nEla tentou [AÇÃO PARA CONTROLAR OU ENTENDER] — e isso só piorou.\\n\\n[CENA QUE REVELA A PRIMEIRA CAMADA — algo que recontextualiza o que veio antes.]\\n\\n[O MOMENTO EM QUE ELA (E O LEITOR) COMEÇA A DUVIDAR DE TUDO.]\\n\\n[A VERDADE — e o que sobra depois que ela chega.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Suspense e tensão psicológica",
+          "title": "A tensão vem de dentro, não de fora.",
+          "body": "No suspense psicológico, a narradora não confiável não é truque — é personagem. O leitor sente que algo está errado antes de saber o quê. A revelação reescreve o livro inteiro. O ritmo é feito de pensamentos, não de perseguições.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do suspense psicológico",
+          "title": "Dúvida → revelação → recontextualização.",
+          "body": "Cada pista falsa precisa ser tecnicamente honesta. A empatia com a narradora precisa existir mesmo quando o leitor não confia nela. O aftermath — o que sobra depois da verdade — é parte da história.",
+          "items": [
+            [
+              "Narradora com raiz",
+              "A não confiabilidade tem razão emocional real — não é arbitrária.",
+              "done"
+            ],
+            [
+              "Pistas honestas",
+              "O leitor poderia ter descoberto sozinho — a revelação deve ser possível.",
+              "done"
+            ],
+            [
+              "Aftermath real",
+              "A história não termina na revelação — o que sobra é parte do livro.",
+              "done"
+            ]
+          ],
+          "primary": "Criar suspense psicológico"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "sci-fi-romantico",
+      "oficio": "ficcao",
+      "label": "Ficção científica romântica",
+      "icon": "rocket_launch",
+      "title": "Ficção científica romântica",
+      "kind": "Ficção científica romântica",
+      "chapter": "Futuro e coração",
+      "description": "Guia para ficção científica com arco romântico central — tecnologia, distância (literal ou temporal) e a persistência do sentimento.",
+      "guidance": {
+        "meta": [
+          "Ficção científica",
+          "Romance",
+          "Tecnologia",
+          "Futuro"
+        ],
+        "sections": [
+          [
+            "O mundo e a tecnologia",
+            "Como a tecnologia ou o cenário científico afeta diretamente o relacionamento?"
+          ],
+          [
+            "Protagonistas",
+            "O que cada um quer — e o que a realidade do mundo futurista impede?"
+          ],
+          [
+            "O obstáculo sci-fi",
+            "A distância, o tempo, a tecnologia ou a política do futuro são o obstáculo central — não apenas o pano de fundo."
+          ],
+          [
+            "A tensão",
+            "O relacionamento avança quando a tecnologia permite — e recua quando ela separa."
+          ],
+          [
+            "A resolução",
+            "Como o amor persiste apesar do que o mundo científico impõe?"
+          ]
+        ],
+        "reminders": [
+          "A ficção científica romântica funciona quando o elemento sci-fi cria o obstáculo, não só o cenário.",
+          "Distância (espaço, tempo, realidade alternativa) é um dos obstáculos mais poderosos no gênero.",
+          "A tecnologia pode criar empatia ou criar separação — os melhores exemplos usam os dois."
+        ],
+        "blueprint": "FICÇÃO CIENTÍFICA ROMÂNTICA\\n\\nDois personagens que se encontram onde o mundo científico os separaria.\\n\\nA tecnologia ou o cenário futurista são o obstáculo, não a decoração. A distância (temporal, espacial, virtual) justifica a dificuldade de estar juntos. O relacionamento avança quando a tecnologia permite, recua quando ela separa. A resolução é uma conquista dupla: eles encontram um jeito de estar juntos apesar do mundo que os separa.\\n\\nConectivos: mesmo separados por (a distância que o mundo impõe) · quando a tecnologia falhou (o momento em que o humano prevalece) · do outro lado de (o que os divide e o que os conecta ao mesmo tempo)",
+        "sketch": "[PROTAGONISTA A] estava em [LUGAR OU TEMPO] quando [COMO O ENCONTRO ACONTECE].\\n\\n[PROTAGONISTA B] vinha de [CONTEXTO SCI-FI — planeta, época, realidade alternativa].\\n\\nO problema não era [O OBSTÁCULO TECNOLÓGICO APARENTE]. Era [O QUE CADA UM CARREGAVA POR DENTRO].\\n\\n[CENA EM QUE A TECNOLOGIA OS CONECTA — e o que ela não consegue conectar.]\\n\\n[O MOMENTO EM QUE A TECNOLOGIA OS SEPARA DE NOVO.]\\n\\n[A ESCOLHA — o que cada um abre mão para estar com o outro apesar do mundo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ficção científica e romance",
+          "title": "O futuro cria o obstáculo. O coração persiste.",
+          "body": "A ficção científica romântica funciona quando o elemento sci-fi é o obstáculo, não só o cenário. Distância temporal, espacial ou virtual justifica a dificuldade de estar juntos — e torna o amor mais improvável e mais poderoso.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da fic-rom",
+          "title": "Tecnologia que separa. Sentimento que persiste.",
+          "body": "A tecnologia pode criar empatia ou criar separação — os melhores exemplos usam os dois. A resolução é dupla: encontrar um jeito de estar juntos apesar do mundo que os separa.",
+          "items": [
+            [
+              "Sci-fi como obstáculo",
+              "A tecnologia ou o cenário futurista cria a separação — não só a ambientação.",
+              "done"
+            ],
+            [
+              "Distância como tensão",
+              "Espaço, tempo ou realidade alternativa justifica a dificuldade.",
+              "done"
+            ],
+            [
+              "Resolução humana",
+              "O que o sentimento conquista onde a tecnologia falhou.",
+              "done"
+            ]
+          ],
+          "primary": "Criar ficção científica romântica"
+        }
+      ],
+      "text": ""
+    },
+    {
+      "id": "roteiro-filme",
+      "oficio": "roteiro",
+      "label": "Roteiro de filme",
+      "icon": "theaters",
+      "title": "Roteiro de filme",
+      "kind": "Roteiro de filme",
+      "chapter": "Premissa visual",
+      "description": "Guia para curta ou longa com conflito visual, viradas de ato e cena final forte.",
+      "guidance": {
+        "meta": [
+          "Cinema",
+          "Três atos",
+          "Imagem",
+          "Arco fechado"
+        ],
+        "sections": [
+          [
+            "Premissa visual",
+            "Em uma frase: personagem + desejo + obstáculo — tudo que a câmera pode acompanhar."
+          ],
+          [
+            "Personagem e desejo",
+            "Quem quer o quê com urgência suficiente para uma hora e meia?"
+          ],
+          [
+            "Virada do segundo ato",
+            "Que acontecimento força a mudança de rota e eleva as apostas?"
+          ],
+          [
+            "Clímax visual",
+            "A cena que entrega o conflito — o que a câmera vê no pico da tensão?"
+          ],
+          [
+            "Desfecho",
+            "O que mudou para sempre no mundo ou no personagem?"
+          ]
+        ],
+        "reminders": [
+          "Escreva o que a câmera vê — nunca emoção abstrata.",
+          "Uma página tende a equivaler a um minuto de tela.",
+          "Todo personagem entra em cena querendo algo concreto."
+        ],
+        "format": {
+          "label": "Screenplay · 1 pág = ~1 min de tela",
+          "rules": [
+            "INT./EXT. [LOCAL] — DIA/NOITE — slug line em maiúsculas",
+            "Ação em 3ª pessoa, tempo presente, o que a câmera vê",
+            "PERSONAGEM centralizado em maiúsculas antes da fala",
+            "Diálogo abaixo do nome, recuado ao centro",
+            "(entre parênteses) para marcações de tom — usar com parcimônia"
+          ]
+        },
+        "blueprint_note": "Modo screenplay: editor formata automaticamente INT./EXT., personagem e diálogo. O blueprint vive no guia de ofício do roteiro de filme."
+      },
+      "editorMode": "screenplay",
+      "steps": [
+        {
+          "eyebrow": "Roteiro de cinema",
+          "title": "Um roteiro de filme é um guia de imagens.",
+          "body": "Você não escreve \\"ela estava com saudade\\". Você escreve o que a câmera vê: \\"Ela dobra a carta. Não envia.\\" O sentimento mora na cena — não na descrição.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura dos três atos",
+          "title": "Cada ato tem uma função diferente.",
+          "body": "O primeiro ato planta. O segundo ato pressiona. O terceiro ato entrega. O erro mais comum é chegar cedo demais ao clímax.",
+          "items": [
+            [
+              "Ato 1 — até 25%",
+              "Apresenta mundo, personagem e virada que inicia a jornada.",
+              "done"
+            ],
+            [
+              "Ato 2 — de 25% a 75%",
+              "A pressão cresce. Cada tentativa falha ou custa.",
+              "done"
+            ],
+            [
+              "Ato 3 — últimos 25%",
+              "Clímax visual e desfecho.",
+              "done"
+            ]
+          ],
+          "primary": "Criar roteiro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Kleber Mendonça Filho, Anna Muylaert e Petra Costa, pela imagem que carrega argumento.",
+        "why": "O cinema brasileiro forte nasce quando a cena visual é inseparável do ponto de vista.",
+        "references": [
+          "Kleber Mendonça Filho",
+          "Anna Muylaert",
+          "Petra Costa",
+          "Laís Bodanzky",
+          "Karim Aïnouz"
+        ],
+        "placeholder": "INT. [LOCAL] — [DIA/NOITE]\\n\\n[PERSONAGEM] entra em quadro. [Ação visual que revela quem ele é antes de qualquer fala.]\\n\\nPERSONAGEM\\nDiálogo que avança ação — não explica.\\n\\n[Virada: algo muda o rumo da cena.]\\n\\nEXT. [LOCAL] — CONTÍNUO\\n\\n[A cena seguinte começa no momento de maior tensão da anterior.]",
+        "placeholderNote": "Exemplo de abertura em formato screenplay. O editor formata automaticamente INT./EXT., personagem e diálogo."
+      }
+    },
+    {
+      "id": "documentario",
+      "oficio": "roteiro",
+      "label": "Documentário",
+      "icon": "videocam",
+      "title": "Documentário",
+      "kind": "Documentário",
+      "chapter": "Pergunta e escuta",
+      "description": "Guia para tratamento documental com pergunta central, personagem real e abertura ao inesperado.",
+      "guidance": {
+        "meta": [
+          "Não ficção audiovisual",
+          "Tratamento",
+          "Personagem real",
+          "Escuta"
+        ],
+        "sections": [
+          [
+            "Pergunta central",
+            "O documentário precisa de uma pergunta que não sabe responder antes de filmar."
+          ],
+          [
+            "Personagem real",
+            "Quem carrega a história? Que vida ou ponto de vista ancora o filme?"
+          ],
+          [
+            "Escuta",
+            "Onde a câmera precisa esperar em vez de dirigir?"
+          ],
+          [
+            "Estrutura",
+            "Como o material bruto vai se organizar: cronológico, temático, ensaístico?"
+          ],
+          [
+            "Posição do documentarista",
+            "Você está dentro ou fora? Essa escolha muda tudo."
+          ]
+        ],
+        "reminders": [
+          "O melhor documentário acontece quando algo inesperado entra no plano.",
+          "Evite narração que explica o que a imagem já mostra.",
+          "A pergunta do filme pode mudar durante a rodagem — e está tudo bem."
+        ],
+        "blueprint": "DOCUMENTÁRIO\\n\\nUma pergunta que o documentarista não sabe responder antes de filmar.\\n\\nComeça na pessoa, não no tema. A pergunta central não é o assunto óbvio — é o que o assunto esconde. O silêncio e o desvio de rota têm tanto valor quanto a pauta planejada. A forma serve à pergunta: cronológica, temática, por personagem, ensaio — decidir cedo libera o olhar. Não há posição neutra: só posições declaradas ou não declaradas.\\n\\nConectivos que constroem argumento no corte: portanto / assim (conclusão visual) · por outro lado (segunda voz) · enquanto isso (paralelo que comenta) · anos depois (salto com consequência)",
+        "sketch": "[CENA DE ABERTURA — não o tema, a pessoa. Onde ela está, o que faz, o que diz sem saber que vai para o filme.]\\n\\nA pergunta que este documentário tenta responder não é [O TEMA ÓBVIO]. É [A PERGUNTA REAL].\\n\\n[NOME] não é um caso isolado. [DADO que transforma história individual em coletiva.]\\n\\n[ESTRUTURA — cronológica, temática, por personagem? A forma serve à pergunta.]\\n\\n[POSIÇÃO — invisível, participante, provocador ou confessional?]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Não ficção audiovisual",
+          "title": "Documentário não captura o real — ele o constrói.",
+          "body": "Toda escolha de câmera, montagem e narração é uma posição. O melhor documentário sabe disso e usa essa consciência a favor da história.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do documentário",
+          "title": "Pergunta, personagem, posição.",
+          "body": "Comece pela pergunta que o filme precisa responder. Encontre quem a carrega. Decida onde você, documentarista, se coloca nessa história.",
+          "items": [
+            [
+              "Pergunta que não sabe a resposta",
+              "Se já sabe, é ilustração — não documentário.",
+              "done"
+            ],
+            [
+              "Personagem com vida própria",
+              "A câmera segue — não dirige.",
+              "done"
+            ],
+            [
+              "Posição honesta",
+              "Dentro ou fora, mas consistente.",
+              "done"
+            ]
+          ],
+          "primary": "Criar documentário"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Petra Costa, Eduardo Coutinho e Silvio Tendler, pela escuta que transforma o real em narrativa.",
+        "why": "O documentário brasileiro forte tem ponto de vista — não é neutro, mas é honesto sobre a sua posição.",
+        "references": [
+          "Eduardo Coutinho",
+          "Petra Costa",
+          "Silvio Tendler",
+          "Karim Aïnouz",
+          "Kleber Mendonça Filho"
+        ],
+        "placeholder": "A câmera espera. A mulher dobra uma camisa, desfaz a dobra e pergunta se pode começar de novo."
+      }
+    },
+    {
+      "id": "dramaturgia",
+      "oficio": "roteiro",
+      "label": "Dramaturgia",
+      "icon": "comedy_mask",
+      "title": "Dramaturgia",
+      "kind": "Dramaturgia",
+      "chapter": "Conflito em cena",
+      "description": "Guia para teatro com conflito ao vivo, rubrica precisa, palavra que age e tensão pela presença.",
+      "guidance": {
+        "meta": [
+          "Teatro",
+          "Cena",
+          "Rubrica",
+          "Conflito ao vivo"
+        ],
+        "sections": [
+          [
+            "Conflito central",
+            "O que os personagens querem — e por que não podem ter ao mesmo tempo?"
+          ],
+          [
+            "Palavra que age",
+            "No teatro, cada fala é uma ação: pede, recusa, seduz, ameaça, mente."
+          ],
+          [
+            "Rubrica",
+            "O que a rubrica diz que a palavra não pode dizer sozinha?"
+          ],
+          [
+            "Espaço cênico",
+            "Onde acontece e como o espaço físico cria ou complica o conflito?"
+          ],
+          [
+            "Tempo dramático",
+            "O teatro existe no presente contínuo: o que está acontecendo agora, diante do público?"
+          ]
+        ],
+        "reminders": [
+          "Cada fala é uma ação — o personagem quer algo com ela.",
+          "Rubrica demais engessa a encenação: confie no texto.",
+          "O silêncio no teatro é tão escrito quanto a fala."
+        ],
+        "format": {
+          "label": "Texto dramático · teatro",
+          "rules": [
+            "PERSONAGEM: em maiúsculas antes de cada fala",
+            "Rubrica em itálico ou entre parênteses — descreve corpo, espaço, silêncio",
+            "Cada fala é uma ação — o personagem quer algo com ela",
+            "Sem narrador: tudo que o público sabe vem de fala ou rubrica",
+            "Rubrica curta — confie no ator; texto longo engessa a encenação"
+          ]
+        },
+        "blueprint_note": "Modo teatro: editor formata falas, rubricas e divisões de ato. O blueprint vive no guia de dramaturgia."
+      },
+      "editorMode": "teatro",
+      "steps": [
+        {
+          "eyebrow": "Escrita para o palco",
+          "title": "Teatro é conflito diante de quem assiste.",
+          "body": "Diferente do romance, o teatro não tem narrador explicando. Tudo que o público precisa saber deve estar na ação, na fala e no silêncio dos corpos em cena.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática do teatro",
+          "title": "Fala, ação, silêncio.",
+          "body": "Cada fala é uma ação — o personagem sempre quer algo com ela. O silêncio é tão escrito quanto o diálogo.",
+          "items": [
+            [
+              "Conflito ao vivo",
+              "O que os dois personagens querem não pode coexistir.",
+              "done"
+            ],
+            [
+              "Palavra que age",
+              "Cada fala pede, recusa, seduz, ameaça ou mente.",
+              "done"
+            ],
+            [
+              "Silêncio escrito",
+              "A rubrica de silêncio é dramaturgia — não ausência.",
+              "done"
+            ]
+          ],
+          "primary": "Criar peça"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Nelson Rodrigues, Plínio Marcos e Denise Stoklos, pelo conflito que queima em cena.",
+        "why": "A dramaturgia brasileira forte coloca corpos em atrito — o texto existe para ser dito diante de alguém.",
+        "references": [
+          "Nelson Rodrigues",
+          "Plínio Marcos",
+          "Denise Stoklos",
+          "Zé Celso Martinez Corrêa",
+          "Leilah Assunção"
+        ],
+        "placeholder": "[PERSONAGEM A entra. Não diz nada. O silêncio já é fala.]\\n\\nPERSONAGEM A\\nUma linha. Só uma — que não diz o que parece dizer.\\n\\nPERSONAGEM B\\nResposta que muda o que a linha anterior significava.\\n\\n[Rubrica mínima: só o que a palavra não consegue fazer.]\\n\\nPERSONAGEM A\\n[Pausa.] Sim.",
+        "placeholderNote": "Exemplo de cena em formato teatro. A rubrica serve à palavra — não a descreve."
+      }
+    },
+    {
+      "id": "roteiro-games",
+      "oficio": "roteiro",
+      "label": "Roteiro de games",
+      "icon": "sports_esports",
+      "title": "Roteiro de games",
+      "kind": "Roteiro de games",
+      "chapter": "Escolha e consequência",
+      "description": "Guia para narrativa interativa com escolhas ramificadas, diálogos, missões e mundo jogável.",
+      "guidance": {
+        "meta": [
+          "Interatividade",
+          "Escolha",
+          "Consequência",
+          "Mundo jogável"
+        ],
+        "sections": [
+          [
+            "Premissa do mundo",
+            "Que regras governam esse universo — e o que o jogador pode fazer nele?"
+          ],
+          [
+            "Protagonista jogável",
+            "Quem o jogador habita? Com que escolha o personagem começa?"
+          ],
+          [
+            "Escolha ramificada",
+            "Cada decisão precisa ter peso: uma opção cômoda e uma que custa."
+          ],
+          [
+            "Diálogo em árvore",
+            "O que o jogador pode perguntar — e o que cada resposta revela ou fecha?"
+          ],
+          [
+            "Arco de missão",
+            "Como a história principal se ramifica sem perder a coerência do mundo?"
+          ]
+        ],
+        "reminders": [
+          "Escolha sem consequência é ilusão — o jogador percebe.",
+          "O mundo precisa ter regras consistentes antes de ter história.",
+          "Diálogo de game é diferente de diálogo literário: o jogador quer agência, não contemplação."
+        ],
+        "blueprint": "ROTEIRO DE GAMES\\n\\nA história acontece no espaço entre as escolhas do jogador — não apesar delas.\\n\\nO mundo precisa de regras claras antes de qualquer diálogo. Ramificação sem consequência real é ilusão de escolha. Cada linha de diálogo tem função: informação, tom, pista ou desvio — sem preenchimento. O arco de missão usa o gameplay para contar história: o que o jogador faz deve ser o que o personagem precisa aprender.\\n\\nConectivos narrativos: se... então (lógica de escolha) · porque (motivação visível) · apesar de (conflito entre desejo e obstáculo) · em troca (custo de cada decisão)",
+        "sketch": "MUNDO: [NOME]\\n[O QUE É POSSÍVEL. O QUE É PROIBIDO. QUAL O CUSTO DE CADA REGRA.]\\n\\nMISSÃO PRINCIPAL: [EM UMA FRASE — o que o jogador faz e por que importa ao personagem]\\n\\nPERSONAGEM: [NOME] — [UMA ESCOLHA QUE DEFINE O INÍCIO]\\n\\nESCOLHA — Cena [X]:\\n  A) [OPÇÃO — consequência real, não cosmética]\\n  B) [OPÇÃO — consequência que muda a narrativa]\\n\\nDIÁLOGO — [NPC]:\\n[NPC]: [LINHA COM VOZ PRÓPRIA E FUNÇÃO CLARA]\\n[JOGADOR]: [RESPOSTA QUE REVELA ALGO DO PERSONAGEM]\\n\\nARCO: [COMO ESSA MISSÃO CONSTRÓI O PERSONAGEM]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Narrativa interativa",
+          "title": "No game, o jogador é o protagonista.",
+          "body": "A história acontece pelas escolhas de quem joga. Seu trabalho é construir um mundo onde cada decisão tem peso e cada caminho parece ter sido escrito para aquela pessoa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática do roteiro de game",
+          "title": "Escolha, consequência, mundo consistente.",
+          "body": "Não é como escrever um livro com bifurcações. É construir um sistema onde o jogador descobre a história pela ação — não pela leitura.",
+          "items": [
+            [
+              "Escolha com peso real",
+              "Uma opção cômoda, uma que custa — ambas com consequência.",
+              "done"
+            ],
+            [
+              "Mundo com regras",
+              "O jogador aprende as regras jogando — não lendo manual.",
+              "done"
+            ],
+            [
+              "Diálogo que age",
+              "Cada linha de diálogo revela, fecha ou abre possibilidade.",
+              "done"
+            ]
+          ],
+          "primary": "Criar roteiro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Disco Elysium e 80 Days, pelo diálogo que é personagem — e pela escolha que revela quem você é.",
+        "why": "O roteiro de game forte usa a interatividade como ferramenta narrativa, não apenas como mecânica.",
+        "references": [
+          "Disco Elysium",
+          "80 Days",
+          "The Last of Us",
+          "Celeste",
+          "Hades"
+        ],
+        "placeholder": "OPÇÃO A: Entregar a água ao vilarejo.\\nOPÇÃO B: Guardar a água para atravessar o sertão.\\n\\nA escolha altera quem abre a próxima porta."
+      }
+    },
+    {
+      "id": "podcast-ficcional",
+      "oficio": "roteiro",
+      "label": "Podcast ficcional",
+      "icon": "graphic_eq",
+      "title": "Podcast ficcional",
+      "kind": "Podcast ficcional",
+      "chapter": "Cena sonora",
+      "description": "Guia para drama em áudio com diálogo, ambiência, vozes distintas e narrativa sem imagem.",
+      "guidance": {
+        "meta": [
+          "Áudio",
+          "Voz",
+          "Ambiência",
+          "Cena sem imagem"
+        ],
+        "sections": [
+          [
+            "Premissa sonora",
+            "O que acontece — e por que funciona sem imagem?"
+          ],
+          [
+            "Vozes distintas",
+            "Cada personagem precisa ser reconhecível só pela voz e pelo ritmo de fala."
+          ],
+          [
+            "Ambiência",
+            "Sons de ambiente são cenário: o que o ouvinte ouve que o coloca no lugar?"
+          ],
+          [
+            "Estrutura de episódio",
+            "Como a narrativa se divide em episódios que prendem e deixam gancho?"
+          ],
+          [
+            "Narrador ou não",
+            "A história se conta sozinha em cenas, ou tem uma voz que enquadra?"
+          ]
+        ],
+        "reminders": [
+          "No áudio, a ambiguidade de voz confunde — cada personagem precisa de ritmo e vocabulário próprios.",
+          "Som de ambiente é dramaturgia: chuva, passos, silêncio.",
+          "O gancho de episódio precisa ser sonoro: uma fala, um som, uma revelação."
+        ],
+        "format": {
+          "label": "Roteiro de áudio · drama sem imagem",
+          "rules": [
+            "SOM: [descrição do ambiente] — cenário auditivo antes da cena",
+            "VOZ / PERSONAGEM: [fala] — cada voz precisa ser reconhecível só pelo ritmo",
+            "Não há ação visual: o ouvinte só recebe o que é dito ou ouvido",
+            "Silencio: [descrição] — o silêncio também é roteirizado",
+            "Cada personagem tem ritmo e vocabulário únicos — sem isso, confunde"
+          ]
+        },
+        "blueprint": "PODCAST FICCIONAL\\n\\nA história existe no que o ouvinte imagina — não no que é mostrado.\\n\\nA premissa precisa justificar o áudio: o que só funciona quando se ouve? Voz é rosto: cada personagem soa diferente antes de qualquer descrição. O design sonoro — foley, trilha, silêncio — é narrativa, não decoração. O episódio termina no momento de maior tensão: o ouvinte decide pausar a qualquer momento. Narrador ou imersão direta é a primeira decisão — define o pacto com o ouvinte.\\n\\nConectivos de audio storytelling: enquanto (ação paralela sonora) · de repente / então (ruptura que o ouvido percebe antes do cérebro) · [pausa] como marcação dramática — o silêncio é connectivo",
+        "sketch": "SÉRIE: [TÍTULO]\\nFORMATO: [DURAÇÃO] · [Nº EPISÓDIOS] · [NARRADOR OU IMERSÃO DIRETA]\\n\\nEP. 01 — [TÍTULO DO EPISÓDIO]\\n\\n[ABERTURA SONORA — o som que define o mundo antes de qualquer fala.]\\n\\n[PRIMEIRA VOZ — uma linha que prende antes do tema aparecer.]\\n\\n[NOME]: [FALA QUE REVELA QUEM ESSA VOZ É — ritmo, vocabulário, o que não diz]\\n\\n[AMBIÊNCIA — foley, trilha, silêncio. Design sonoro como narrativa.]\\n\\n[GANCHO DE SAÍDA — termina no momento de maior tensão.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Drama em áudio",
+          "title": "Podcast ficcional conta história só com som.",
+          "body": "Sem imagem, tudo que o ouvinte precisa saber chega pelo diálogo, pela ambiência e pelo silêncio. Cada voz precisa ser reconhecível antes de qualquer descrição.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática do áudio",
+          "title": "Voz, ambiente, gancho.",
+          "body": "No podcast ficcional, o ambiente é cenário, a voz é personagem e o gancho de episódio precisa ser sonoro — uma fala, um som, uma revelação.",
+          "items": [
+            [
+              "Vozes distintas",
+              "Cada personagem reconhecível só pelo ritmo e vocabulário.",
+              "done"
+            ],
+            [
+              "Ambiência como dramaturgia",
+              "Sons constroem espaço — chuva, passos, silêncio.",
+              "done"
+            ],
+            [
+              "Gancho sonoro",
+              "A última fala ou som que faz clicar no próximo episódio.",
+              "done"
+            ]
+          ],
+          "primary": "Criar podcast"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Liminal e Radio Drama Lab, pelo som que constrói o espaço que o olho não vê.",
+        "why": "O podcast ficcional brasileiro ainda é raro — quem domina a gramática do áudio dramático tem espaço.",
+        "references": [
+          "Welcome to Night Vale",
+          "Liminal",
+          "The Black Tapes",
+          "Rádio Novela CBN",
+          "Estúdio Quindim"
+        ],
+        "placeholder": "SOM: [Ambiente que situa — ventilador, feira, chuva.]\\n\\nPERSONAGEM\\n[Fala que abre a cena — o ouvinte só tem voz e som.]"
+      }
+    },
+    {
+      "id": "slam",
+      "oficio": "poesia",
+      "label": "Slam e palavra falada",
+      "icon": "mic",
+      "title": "Slam e palavra falada",
+      "kind": "Slam e palavra falada",
+      "chapter": "Voz e urgência",
+      "description": "Guia para poema performático com ritmo, presença e urgência pública. Você tem 3 minutos.",
+      "guidance": {
+        "meta": [
+          "Performance",
+          "3 minutos",
+          "Voz",
+          "Corpo"
+        ],
+        "sections": [
+          [
+            "Tese em voz alta",
+            "O que você defende com o corpo, não só com a cabeça?"
+          ],
+          [
+            "Imagem de abertura",
+            "A cena ou detalhe concreto que ancora o poema."
+          ],
+          [
+            "Escalada",
+            "Como a urgência cresce verso a verso — sem chegar ao ápice cedo demais?"
+          ],
+          [
+            "Virada",
+            "O momento em que o poema muda de temperatura."
+          ],
+          [
+            "Eco final",
+            "A frase que a plateia leva embora."
+          ]
+        ],
+        "reminders": [
+          "Slam tem 3 minutos: cada palavra precisa de combustão.",
+          "Leia em voz alta em cada estágio — o ouvido encontra o que o olho ignora.",
+          "O corpo é parte do texto: como esse poema quer ser dito?"
+        ],
+        "format": {
+          "label": "Slam · poema performático · até 3 min",
+          "rules": [
+            "3 minutos máximos — cada palavra precisa ter combustão própria",
+            "Não há rima obrigatória, mas há ritmo — leia em voz alta em cada versão",
+            "Abertura ancorada em imagem concreta — não declare a tese logo de entrada",
+            "Escalada progressiva: não queime o ápice na primeira estrofe",
+            "A última frase fica depois que você parar de falar"
+          ]
+        },
+        "blueprint_note": "Modo slam: editor conta tempo e palavras para performance. O blueprint vive no guia de slam."
+      },
+      "editorMode": "slam",
+      "steps": [
+        {
+          "eyebrow": "Poesia performática",
+          "title": "Slam é poesia que precisa ser dita.",
+          "body": "Diferente do poema de página, o slam existe no tempo real. Você tem até 3 minutos. A plateia responde com o corpo — antes de aplaudir, ela já sentiu.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do slam",
+          "title": "Escalada, virada, eco.",
+          "body": "Um slam forte sobe de temperatura. Não começa no ápice — chega até ele. A última frase precisa ecoar depois que você para de falar.",
+          "items": [
+            [
+              "Abertura ancorada",
+              "Começa com imagem concreta, não com a tese já declarada.",
+              "done"
+            ],
+            [
+              "Escalada progressiva",
+              "A urgência cresce a cada estrofe.",
+              "done"
+            ],
+            [
+              "Eco final",
+              "A última linha que a plateia leva para casa.",
+              "done"
+            ]
+          ],
+          "primary": "Criar slam"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Bará, Luz Ribeiro e Ryane Leão, pela urgência que transforma escuta em ação.",
+        "why": "O slam brasileiro carrega território, identidade e política — não como tema, mas como voz.",
+        "references": [
+          "Bará",
+          "Luz Ribeiro",
+          "Ryane Leão",
+          "Sérgio Vaz",
+          "Emicida"
+        ],
+        "placeholder": "[Começa no concreto — uma cena, um corpo, um lugar. Não a tese ainda.]\\n\\n[Escala. A urgência cresce verso a verso. O slam não explica — ele acusa, pergunta, nomeia.]\\n\\n[A virada: o que o poema descobriu que você não sabia quando começou?]\\n\\n[Eco final: a última linha precisa sobreviver ao aplauso. Uma imagem, não uma conclusão.]",
+        "placeholderNote": "Exemplo de estrutura de slam. Escreva em voz alta — o slam existe na performance, não no papel."
+      }
+    },
+    {
+      "id": "soneto",
+      "oficio": "poesia",
+      "label": "Soneto",
+      "icon": "format_list_numbered",
+      "title": "Soneto",
+      "kind": "Soneto",
+      "chapter": "Forma clássica",
+      "description": "Guia para soneto petrarquiano com 14 versos, dois quartetos e dois tercetos, e virada obrigatória no 9º verso.",
+      "guidance": {
+        "meta": [
+          "Poesia",
+          "14 versos",
+          "Forma fixa",
+          "Decassílabo"
+        ],
+        "sections": [
+          [
+            "Estrutura",
+            "Dois quartetos expõem o tema. Dois tercetos viram o jogo. O 9º verso é a chave."
+          ],
+          [
+            "Métrica",
+            "Decassílabo: 10 sílabas poéticas. Conta até a última sílaba tônica, não a última palavra."
+          ],
+          [
+            "A volta",
+            "O 9º verso marca a virada — muda perspectiva, contradiz ou aprofunda os quartetos."
+          ],
+          [
+            "Rima",
+            "Petrarquiano: ABBA ABBA CDC DCD. Camonianas: ABBA ABBA CDE CDE."
+          ]
+        ],
+        "reminders": [
+          "Leia em voz alta para sentir a métrica — os olhos mentem, a boca não.",
+          "A virada no 9º verso é o coração do soneto — não chegue lá sem preparação.",
+          "Rima forçada mata o poema. Se a palavra é a segunda escolha, é a escolha errada."
+        ],
+        "format": {
+          "label": "Soneto petrarquiano · ABBA ABBA CDC DCD",
+          "rules": [
+            "14 versos: 2 quartetos (4v) + 2 tercetos (3v)",
+            "Decassílabo: 10 sílabas poéticas — conta até a última tônica",
+            "Rima ABBA ABBA nos quartetos — mesma rima nos dois",
+            "A volta começa no 9º verso — mudança de perspectiva obrigatória",
+            "Tercetos: CDC DCD ou CDE CDE — ambos válidos"
+          ]
+        },
+        "blueprint_note": "Modo soneto: editor conta sílabas e sinaliza rima. O blueprint vive no guia do soneto."
+      },
+      "editorMode": "soneto",
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Soneto tem uma lógica própria.",
+          "body": "Guia para soneto petrarquiano com 14 versos, dois quartetos e dois tercetos, e virada obrigatória no 9º verso.",
+          "primary": "Criar soneto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Gregório de Matos, Cruz e Sousa, Olavo Bilac e Augusto dos Anjos — cada um deformou a forma à sua maneira.",
+        "why": "O soneto brasileiro sobrevive porque é uma luta com a língua. A forma não aprisiona: ela atrita.",
+        "references": [
+          "Gregório de Matos",
+          "Cruz e Sousa",
+          "Olavo Bilac",
+          "Augusto dos Anjos",
+          "Carlos Drummond de Andrade"
+        ],
+        "placeholder": "1º Quarteto — expõe\\nA  [primeiro verso — tema ou imagem de abertura]\\nB  [segundo verso]\\nB  [terceiro verso — aprofunda]\\nA  [quarto verso — fecha a rima A]\\n\\n2º Quarteto — desenvolve\\nA  [quinto verso — avança o argumento]\\nB  [sexto verso]\\nB  [sétimo verso]\\nA  [oitavo verso — prepara a virada]\\n\\n1º Terceto — vira\\nC  [nono verso — aqui o poema dobra]\\nD  [décimo verso]\\nC  [décimo primeiro verso]\\n\\n2º Terceto — remata\\nD  [décimo segundo verso]\\nC  [décimo terceiro verso]\\nD  [décimo quarto verso — o remate. A última linha é o poema inteiro.]",
+        "placeholderNote": "Estrutura do soneto petrarquiano. O editor conta sílabas por verso (meta: 10 — decassílabo)."
+      }
+    },
+    {
+      "id": "poesia-digital",
+      "oficio": "poesia",
+      "label": "Poesia digital",
+      "icon": "phone_iphone",
+      "title": "Poesia digital",
+      "kind": "Poesia digital",
+      "chapter": "Tela e impacto",
+      "description": "Guia para poema curto pensado para tela: imagem final forte, brevidade e circulação orgânica.",
+      "guidance": {
+        "meta": [
+          "Tela",
+          "Imagem final",
+          "Brevidade",
+          "Compartilhamento"
+        ],
+        "sections": [
+          [
+            "Imagem única",
+            "O poema digital vive ou morre pela força de uma única imagem."
+          ],
+          [
+            "Brevidade que pesa",
+            "Cada linha ocupa espaço de tela — o que não é essencial sai."
+          ],
+          [
+            "Linha final",
+            "A última linha precisa mudar a leitura do que veio antes."
+          ],
+          [
+            "Legibilidade visual",
+            "Como o poema aparece na tela? Quebras de linha, espaço, tamanho."
+          ],
+          [
+            "Compartilhabilidade",
+            "O que faz alguém querer mandar esse poema para outra pessoa?"
+          ]
+        ],
+        "reminders": [
+          "O poema digital compete com tudo na timeline — precisa parar o scroll na primeira linha.",
+          "Evite explicar a imagem: deixe ela trabalhar sozinha.",
+          "Leia em voz alta mesmo sendo poesia de tela — o ritmo ainda importa."
+        ],
+        "blueprint": "POESIA DIGITAL\\n\\nUm poema que funciona fora do contexto em que foi criado.\\n\\nCada palavra ganha ou perde o poema — nada de ornamento. A quebra de linha e o espaço em branco são parte do texto, não formatação. A linha final não resume: abre. É o poema inteiro em miniatura. O teste definitivo: funciona sem contexto, fora do feed, numa captura de tela sem legenda?\\n\\nFormato visual: poema digital convive com imagem, tipografia e scroll. Brevidade não é limitação — é a forma.",
+        "sketch": "[TÍTULO — ou o primeiro verso faz esse trabalho]\\n\\n[A IMAGEM — uma cena, objeto ou gesto. Sem contexto, sem explicação.]\\n\\n[O QUE PODE SAIR? Teste remover uma linha inteira.]\\n\\n[A LINHA FINAL — não resumo. Abertura. O poema inteiro em miniatura.]\\n\\n[Como aparece na tela? Quebra de linha e espaço são parte do texto.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Poesia para tela",
+          "title": "Poesia digital para no scroll — ou some.",
+          "body": "Na timeline, o poema compete com vídeo, imagem e notícia. A primeira linha precisa ser razão suficiente para o leitor parar. A última precisa ser razão para compartilhar.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática da tela",
+          "title": "Imagem, brevidade, linha final.",
+          "body": "Tudo que não é essencial sai. O poema digital é o oposto do ensaio: menos é mais, desde que o menos seja preciso.",
+          "items": [
+            [
+              "Imagem única e forte",
+              "Um objeto, cena ou gesto que nenhum outro poema usaria assim.",
+              "done"
+            ],
+            [
+              "Brevidade que pesa",
+              "Cada linha ocupa espaço de atenção — corte o que não carrega.",
+              "done"
+            ],
+            [
+              "Linha final surpreendente",
+              "Muda a leitura do que veio antes.",
+              "done"
+            ]
+          ],
+          "primary": "Criar poema"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Beve Lemos, Ana Martins Marques e a geração do Instagram poético brasileiro.",
+        "why": "Poesia digital forte tem imagem que funciona tanto na tela quanto impressa — a plataforma amplifica, não substitui.",
+        "references": [
+          "Beve Lemos",
+          "Ana Martins Marques",
+          "Mariana Salles",
+          "Edimilson de Almeida Pereira"
+        ],
+        "placeholder": "guardei teu silêncio\\nnuma pasta chamada\\ncoisas que ainda respondem"
+      }
+    },
+    {
+      "id": "letra-musica",
+      "oficio": "poesia",
+      "label": "Letra de música",
+      "icon": "music_note",
+      "title": "Letra de música",
+      "kind": "Letra de música",
+      "chapter": "Refrão e imagem",
+      "description": "Guia para letra em função de melodia: refrão que gruda, imagem que canta e verso que respira.",
+      "guidance": {
+        "meta": [
+          "Canção",
+          "Refrão",
+          "Métrica",
+          "Voz cantada"
+        ],
+        "sections": [
+          [
+            "Imagem central",
+            "Que objeto, gesto ou cena ancora a canção inteira?"
+          ],
+          [
+            "Estrofe",
+            "Conta a história ou situação. Prepara o refrão."
+          ],
+          [
+            "Refrão",
+            "A parte que repete e intensifica. Precisa valer a repêtição."
+          ],
+          [
+            "Ponte",
+            "A seção que quebra o padrão e renova a escuta antes da última entrada do refrão."
+          ],
+          [
+            "Métrica e respiração",
+            "O verso cabe na melodia? Leia em voz alta no ritmo da música."
+          ]
+        ],
+        "reminders": [
+          "Letra de música existe na voz — leia em voz alta no ritmo antes de qualquer versão final.",
+          "O refrão precisa funcionar isolado — é o que as pessoas vão cantarolar.",
+          "Sílabas demais travam a melodia: prefira versões mais curtas ao reescrever."
+        ],
+        "format": {
+          "label": "Letra de canção · verso que cabe na melodia",
+          "rules": [
+            "Estrofe — conta a história, prepara o refrão sem entregá-lo",
+            "Refrão — a parte que repete; precisa valer cada vez que volta",
+            "Ponte — quebra o padrão, renova a escuta antes do pico final",
+            "Sílabas precisam caber na melodia — leia em voz alta no ritmo",
+            "O refrão precisa funcionar isolado — é o que as pessoas cantarolam"
+          ]
+        },
+        "blueprint": "LETRA DE MÚSICA\\n\\nA letra serve à voz — não ao contrário.\\n\\nA imagem central ancora toda a canção: estrofe prepara, refrão entrega, ponte justifica o último refrão ser diferente. Estrofe 2 avança — não repete a estrofe 1 com outras palavras. O refrão precisa valer cada vez que volta: melodia, imagem e emoção concentradas numa estrutura que o ouvinte quer cantar junto. Cante em voz alta antes de considerar pronto — onde a sílaba força, a letra ainda não serve à música.\\n\\nConectivos rítmicos: e (acúmulo) · mas (virada emocional) · porque / que (causa que o refrão confirma) · [pausa silábica] como respiração",
+        "sketch": "[TÍTULO]\\n\\nEstrofe 1:\\n[IMAGEM QUE SITUA — começa no meio da cena]\\n[PREPARA O REFRÃO SEM ENTREGÁ-LO]\\n\\nRefrão:\\n[A PARTE QUE REPETE — precisa valer cada vez]\\n[LINHA QUE O OUVINTE QUER CANTAR JUNTO]\\n\\nEstrofe 2:\\n[O QUE MUDA DEPOIS DO REFRÃO — avança, não repete]\\n\\nPonte:\\n[RUPTURA DE RITMO OU TOM — justifica o último refrão ser diferente]\\n\\n[Cante em voz alta. Onde a sílaba força, revise.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Letra é poesia que canta",
+          "title": "Letra de música tem regras que o poema não tem.",
+          "body": "Sílabas precisam caber na melodia. O refrão precisa valer cada vez que volta. A estrofe prepara — o refrão entrega. A ponte renova antes do pico final.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da canção",
+          "title": "Estrofe, refrão, ponte.",
+          "body": "Não é fórmula — é função. Cada seção tem um papel específico na experiência de quem ouve.",
+          "items": [
+            [
+              "Estrofe",
+              "Conta. Situa. Prepara o refrão sem antecipar.",
+              "done"
+            ],
+            [
+              "Refrão",
+              "Intensifica. Repete. Precisa valer a repetição.",
+              "done"
+            ],
+            [
+              "Ponte",
+              "Quebra e renova. Torna a última entrada do refrão mais forte.",
+              "done"
+            ]
+          ],
+          "primary": "Criar letra"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Renato Russo, Caetano Veloso e Elza Soares, por letras em que imagem e melodia são insepáráveis.",
+        "why": "A letra brasileira forte tem imagem que sobrevive sem a música — mas ganha dimensão nova quando cantada.",
+        "references": [
+          "Renato Russo",
+          "Caetano Veloso",
+          "Elza Soares",
+          "Criolo",
+          "Liniker"
+        ],
+        "placeholder": "Estrofe 1:\\n[Situa. Prepara o refrão sem entregá-lo.]\\n\\nRefrão:\\n[A parte que repete — precisa valer cada vez que volta.]\\n\\nEstrofe 2:\\n[Aprofunda ou desloca. Mesma melodia, nova informação.]\\n\\nPonte:\\n[Quebra o padrão. Renova a escuta antes do pico final.]"
+      }
+    },
+    {
+      "id": "memoir",
+      "oficio": "nao-ficcao",
+      "label": "Memória e autobiografia",
+      "icon": "history_edu",
+      "title": "Memória e autobiografia",
+      "kind": "Memória e autobiografia",
+      "chapter": "Cena lembrada",
+      "description": "Guia para narrar vida real por cenas, transformação e recorte significativo — não cronologia.",
+      "guidance": {
+        "meta": [
+          "Memória",
+          "Eu narrador",
+          "Cena",
+          "Transformação"
+        ],
+        "sections": [
+          [
+            "Cena âncora",
+            "Não começar pela vida toda: começar por uma cena específica que condensa o que importa."
+          ],
+          [
+            "O narrador como personagem",
+            "Quem você era então? Quem narra agora? A distância entre os dois é onde o memoir vive."
+          ],
+          [
+            "Seleção e recorte",
+            "Memoir não é diário nem autobiografia completa: é um recorte significativo com arco."
+          ],
+          [
+            "Verdade e memória",
+            "O que você lembra nem sempre foi assim. Que licença você toma — e por quê?"
+          ],
+          [
+            "Transformação",
+            "O que mudou? O memoir precisa ter arco: antes, durante e depois."
+          ]
+        ],
+        "reminders": [
+          "Memoir começa em cena — não em 'nasci em...'",
+          "A distância entre quem viveu e quem narra é o espaço onde o texto respira.",
+          "Memória não é julgamento: o leitor vai tirar as próprias conclusões."
+        ],
+        "blueprint": "MEMÓRIA E AUTOBIOGRAFIA\\n\\nO passado visto pelos olhos de quem já sabe o que aconteceu depois.\\n\\nComeça na cena concreta — um detalhe sensorial, não o resumo do que foi sentido. A dupla voz — o eu que viveu e o eu que narra anos depois — é onde o memoir ganha profundidade. O que você não consegue explicar ainda é a pergunta que o livro tenta responder. Memoir honesto não julga o passado: ilumina o que o tempo trouxe de clareza ou de nova confusão.\\n\\nConectivos: naquele tempo / anos depois (salto temporal com peso) · só que / mas (ruptura entre o que eu achava e o que era) · hoje sei que / só entendi depois (voz do presente comentando o passado)",
+        "sketch": "[ANO, ESTAÇÃO OU TEMPO EMOCIONAL — não a data, o tempo que ainda dói ou ainda brilha.]\\n\\n[NOME DE QUEM ESTAVA LÁ] [AÇÃO OU FALA que revela quem essa pessoa era — sem apresentar.]\\n\\nEu tinha [IDADE] anos e não sabia ainda que [O QUE SÓ ENTENDEU MUITO DEPOIS].\\n\\n[DETALHE SENSORIAL — cheiro, luz, textura, som. Não \\"lembro que era triste\\".]\\n\\n[SALTO NO TEMPO — onde você está agora, olhando para trás.]\\n\\nO que ainda não consigo explicar é [A PERGUNTA QUE O LIVRO TENTA RESPONDER — não a resposta]."
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Não ficção pessoal",
+          "title": "Memoir não é conta tudo — é contar o que importa.",
+          "body": "A vida não tem arco narrativo. O memoir cria um. Você escolhe o recorte, a cena de entrada e o ponto de chegada — e essa escolha revela tanto quanto o conteúdo.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do memoir",
+          "title": "Cena, distância, transformação.",
+          "body": "Entre em cena antes de explicar. Mostre quem você era. Deixe o narrador de hoje aparecer na distância entre o que viveu e o que entende agora.",
+          "items": [
+            [
+              "Cena antes de cronologia",
+              "Começa no momento mais significativo — não no início.",
+              "done"
+            ],
+            [
+              "Dois narradadores",
+              "Quem viveu e quem conta são diferentes — use essa distância.",
+              "done"
+            ],
+            [
+              "Arco de transformação",
+              "O que mudou? O leitor precisa sentir que valeu a travessia.",
+              "done"
+            ]
+          ],
+          "primary": "Criar memoir"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Carolina Maria de Jesus, Eliane Brum e João Paulo Cuenca, pelo memoir que transforma vida em literatura.",
+        "why": "O memoir brasileiro mais forte começa por onde doi — não por onde é seguro.",
+        "references": [
+          "Carolina Maria de Jesus",
+          "Eliane Brum",
+          "João Paulo Cuenca",
+          "Conceição Evaristo",
+          "Noemi Jaffe"
+        ],
+        "placeholder": "Naquele dia, aprendi que adulto também mente olhando para o chão."
+      }
+    },
+    {
+      "id": "livro-reportagem",
+      "oficio": "nao-ficcao",
+      "label": "Livro-reportagem",
+      "icon": "library_books",
+      "title": "Livro-reportagem",
+      "kind": "Livro-reportagem",
+      "chapter": "Apuração longa",
+      "description": "Guia para investigação em livro com personagens reais, documentos, arco narrativo e profundidade.",
+      "guidance": {
+        "meta": [
+          "Jornalismo narrativo",
+          "Pesquisa longa",
+          "Personagens reais",
+          "Capítulos"
+        ],
+        "sections": [
+          [
+            "Tese do livro",
+            "Que revelação ou argumento só um livro tem espaço para desenvolver?"
+          ],
+          [
+            "Personagem que carrega",
+            "Quem é a pessoa ou caso que ancora a investigação e humaniza o tema?"
+          ],
+          [
+            "Fontes e documentos",
+            "O que já existe e o que precisa ser apurado especificamente para este livro?"
+          ],
+          [
+            "Estrutura de capítulos",
+            "Como o material se organiza: cronológico, temático, por personagem?"
+          ],
+          [
+            "Narrativa x reportagem",
+            "Onde o livro escolhe cena narrativa e onde prefere dado e análise?"
+          ]
+        ],
+        "reminders": [
+          "Livro-reportagem precisa de uma tese que apenas um livro pode sustentar — não uma matéria longa.",
+          "Personagem real é pessoa — verifique, humanize, respeite a complexidade.",
+          "A cena narrativa é a técnica que diferencia livro-reportagem de relatório."
+        ],
+        "blueprint": "LIVRO-REPORTAGEM\\n\\nUma história individual que carrega uma história coletiva.\\n\\nComeça na pessoa, não no tema — a cena concreta antes do contexto. A pergunta central é formulada como pergunta, não como tese: o jornalista não sabe a resposta antes de apurar. Precisamos de mais de uma voz para não virar panfleto. A posição do jornalista — invisível, participante, provocador — não é neutra: só declarada ou não declarada.\\n\\nConectivos: no entanto / mas (tensão entre vozes) · segundo [FONTE] (atribuição que ancora) · anos antes / na mesma época (paralelo temporal que revela padrão) · o que ninguém sabia ainda (suspense factual)",
+        "sketch": "[CENA DE ABERTURA COM O PERSONAGEM REAL — onde ela está, o que faz, o que diz sem saber que vai para o livro.]\\n\\n[NOME] não é um caso isolado. [DADO que transforma história individual em coletiva.]\\n\\nA pergunta que este livro tenta responder é: [A PERGUNTA CENTRAL — não a tese, a pergunta.]\\n\\n[SEGUNDO PERSONAGEM OU VIA DE ENTRADA — a segunda voz que impede o panfleto.]\\n\\n[POSIÇÃO DO JORNALISTA — você aparece? Quando? Para testemunhar ou perguntar?]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Jornalismo narrativo longo",
+          "title": "Livro-reportagem tem tese que só um livro sustenta.",
+          "body": "Não é uma matéria de revista expandida. É uma investigação que precisa de profundidade, tempo e espaço que o jornalismo diário não tem.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do livro-reportagem",
+          "title": "Tese, personagem, cena narrativa.",
+          "body": "A cena narrativa é a técnica que diferencia o livro-reportagem do relatório. Você apura como jornalista e conta como escritor.",
+          "items": [
+            [
+              "Tese de livro",
+              "Algo que só este livro pode revelar — não uma matéria mais longa.",
+              "done"
+            ],
+            [
+              "Personagem que humaniza",
+              "O caso abstrato vira real quando tem rosto e voz.",
+              "done"
+            ],
+            [
+              "Cena antes de dado",
+              "O leitor entra pela narrativa — o dado sustenta por baixo.",
+              "done"
+            ]
+          ],
+          "primary": "Criar livro-reportagem"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Eliane Brum, Daniela Arbex e Leandro Roque de Oliveira, pelo jornalismo que tem alma literária.",
+        "why": "O livro-reportagem brasileiro forte usa a cena narrativa como ferramenta — não como adorno.",
+        "references": [
+          "Eliane Brum",
+          "Daniela Arbex",
+          "Zuenir Ventura",
+          "Fernando Morais",
+          "Ruy Castro"
+        ],
+        "placeholder": "O processo tinha 842 páginas. A história, porém, começava num recibo dobrado dentro de uma Bíblia."
+      }
+    },
+    {
+      "id": "critica-cultural",
+      "oficio": "jornalismo",
+      "label": "Crítica cultural",
+      "icon": "reviews",
+      "title": "Crítica cultural",
+      "kind": "Crítica cultural",
+      "chapter": "Tese sobre obra",
+      "description": "Guia para análise de obra cultural com argumento próprio, contexto e posição crítica.",
+      "guidance": {
+        "meta": [
+          "Crítica",
+          "Tese",
+          "Contexto",
+          "Argumento"
+        ],
+        "sections": [
+          [
+            "Tese sobre a obra",
+            "O que você argumenta sobre este livro, filme ou disco — além do que gostou ou não?"
+          ],
+          [
+            "Descrição mínima",
+            "O suficiente para o leitor entender do que se trata — sem spoilers desnecessários."
+          ],
+          [
+            "Contexto",
+            "Onde esta obra se situa: na trajetória do artista, no gênero, no momento cultural."
+          ],
+          [
+            "Argumento e evidência",
+            "O que na obra sustenta ou contradíz a sua tese?"
+          ],
+          [
+            "Posição",
+            "Crítica sem posição é sinopse. A tese precisa ser defendível e contestada."
+          ]
+        ],
+        "reminders": [
+          "Crítica não é resumo: é argumento sobre o que a obra faz ou deixa de fazer.",
+          "O leitor não precisa concordar — precisa entender o raciocínio e poder contestar.",
+          "Evite começar com 'o livro fala sobre' — comece pelo que você argumenta."
+        ],
+        "blueprint": "CRÍTICA CULTURAL\\n\\nUma tese sobre uma obra — não um resumo com nota.\\n\\nA crítica começa com uma posição: o crítico concorda ou discorda, e precisa sustentar isso. O repertório (outras obras, contexto histórico, teoria) serve para iluminar — não para exibir erudição. A análise vai ao texto: cita, descreve, interpreta passagens específicas. O leitor que não viu a obra deve querer ver (ou evitar) depois de ler a crítica.\\n\\nConectivos: ao contrário de (comparação que posiciona) · o que [AUTOR] faz aqui é (interpretação de escolha formal) · isso funciona porque / isso falha porque (sustenta a tese com análise concreta)",
+        "sketch": "[OBRA] — [AUTOR/DIRETOR/ARTISTA]\\n\\n[TESE — a posição do crítico em uma frase. Não resumo: julgamento fundamentado.]\\n\\n[O QUE A OBRA FAZ — análise de uma escolha formal ou narrativa específica.]\\n\\n[POR QUE FUNCIONA OU FALHA — argumento sustentado com passagem concreta.]\\n\\n[REPERTÓRIO — obra ou contexto que ilumina, não que impressiona.]\\n\\n[CONCLUSÃO — o que fica depois de fechar o livro / sair do cinema / terminar o álbum.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Crítica com argumento",
+          "title": "Crítica é posição — não avaliação.",
+          "body": "Dizer que gostou ou não é opinião. Crítica é diferente: você argumenta o que a obra faz, como faz e o que isso significa no contexto em que aparece.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da crítica",
+          "title": "Tese, argumento, posição.",
+          "body": "O leitor não precisa concordar. Precisa entender o raciocínio e poder contestá-lo. Crítica sem posição é sinopse.",
+          "items": [
+            [
+              "Tese sobre a obra",
+              "Além de gostar — o que você argumenta?",
+              "done"
+            ],
+            [
+              "Evidência da obra",
+              "Que elementos sustentam sua tese?",
+              "done"
+            ],
+            [
+              "Posição defendível",
+              "Você pode ser contestado — e isso é bom sinal.",
+              "done"
+            ]
+          ],
+          "primary": "Criar crítica"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Silviano Santiago, Alcir Pécora e Beatriz Sarlo, pela crítica que pensa — não apenas avalia.",
+        "why": "Crítica cultural forte tem voz reconhecível e argumento que sobrevive ao tempo — não é apenas a opinião de quem viu.",
+        "references": [
+          "Silviano Santiago",
+          "Alcir Pécora",
+          "Luís Augusto Fischer",
+          "Maria Esther Maciel",
+          "Paulo Scott"
+        ],
+        "placeholder": "O problema do filme não está no que ele mostra, mas na pressa com que tenta nos dizer o que sentir."
+      }
+    },
+    {
+      "id": "coluna-opiniao",
+      "oficio": "jornalismo",
+      "label": "Coluna de opinião",
+      "icon": "edit_square",
+      "title": "Coluna de opinião",
+      "kind": "Coluna de opinião",
+      "chapter": "Tese e provocação",
+      "description": "Guia para texto opinativo com tese ousada, voz reconhecível e conclusão que provoca posição.",
+      "guidance": {
+        "meta": [
+          "Opinião",
+          "Tese",
+          "Voz",
+          "Recorrência"
+        ],
+        "sections": [
+          [
+            "Tese ousada",
+            "Uma afirmação que poucos teriam coragem de fazer — e que você consegue sustentar."
+          ],
+          [
+            "Gancho de abertura",
+            "O fato, cena ou provocação que justifica escrever hoje sobre isso."
+          ],
+          [
+            "Argumento central",
+            "Por que a tese se sustenta? Dado, observação ou lógica que o leitor não pode ignorar."
+          ],
+          [
+            "Contraponto honesto",
+            "Reconhecer a objeção principal fortalece — não enfraquece — a coluna."
+          ],
+          [
+            "Fecho provocador",
+            "A conclusão que força o leitor a tomar posição."
+          ]
+        ],
+        "reminders": [
+          "Coluna é voz, não relatório: o leitor precisa sentir quem escreveu.",
+          "A tese precisa ser suficientemente ousada para valer o espaço.",
+          "Evite concluir com 'portanto, é preciso refletir' — o leitor já sabe disso."
+        ],
+        "blueprint": "COLUNA DE OPINIÃO\\n\\nUm argumento singular sobre um fato real — com posição clara e repertório honesto.\\n\\nA coluna começa com o fato que motivou o texto, não com a opinião sobre ele. O argumento central é único: coluna que diz três coisas não diz nenhuma. O repertório sustenta — não decora: dado, referência ou exemplo concreto para cada ponto. O leitor pode discordar, mas não pode dizer que não entendeu a posição.\\n\\nConectivos: o problema não é [X], é [Y] (reencadramento do debate) · isso importa porque (conexão entre o fato e o argumento mais amplo) · no entanto / ainda assim (objeção que o colunista enfrenta antes do leitor)",
+        "sketch": "[O FATO QUE MOTIVOU — concreto, recente, verificável.]\\n\\n[A TESE — a posição do colunista em uma frase. Sem eufemismo.]\\n\\n[O ARGUMENTO CENTRAL — desenvolvido com repertório concreto.]\\n\\n[A OBJEÇÃO MAIS ÓBVIA — e por que o argumento sobrevive a ela.]\\n\\n[CONCLUSÃO — o que o leitor deveria fazer, pensar ou perceber depois disso.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Voz e tese",
+          "title": "Coluna de opinião é argumento com voz.",
+          "body": "Não é análise neutra nem desabafo. É uma posição defendida com lógica e numa voz que o leitor reconhece — e que espera encontrar de novo na próxima edição.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da coluna",
+          "title": "Tese, argumento, fecho provocador.",
+          "body": "A coluna precisa tomar partido. Uma conclusão vaga é mais um artigo genérico do que uma coluna.",
+          "items": [
+            [
+              "Tese ousada",
+              "Algo que você pode sustentar e que poucos diriam assim.",
+              "done"
+            ],
+            [
+              "Argumento com dado ou observação",
+              "Não opinião sobre opinião — raciocínio.",
+              "done"
+            ],
+            [
+              "Fecho que provoca posição",
+              "O leitor termina e precisa decidir se concorda.",
+              "done"
+            ]
+          ],
+          "primary": "Criar coluna"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Luís Fernando Verrissimo, Eliane Brum e João Paulo Cuenca, por colunas em que voz e argumento são insepáráveis.",
+        "why": "A coluna brasileira forte tem uma voz que o leitor reconhece antes de terminar o segundo parágrafo.",
+        "references": [
+          "Luís Fernando Verrissimo",
+          "Eliane Brum",
+          "João Paulo Cuenca",
+          "Djamila Ribeiro",
+          "Artur Xexéo"
+        ],
+        "placeholder": "O país chama de polêmica aquilo que ainda não teve coragem de chamar pelo nome."
+      }
+    },
+    {
+      "id": "copywriting",
+      "oficio": "comercial-tecnica",
+      "label": "Copywriting",
+      "icon": "campaign",
+      "title": "Copywriting",
+      "kind": "Copywriting",
+      "chapter": "Promessa e conversão",
+      "description": "Guia para escrita persuasiva com promessa clara, prova e chamada para ação.",
+      "guidance": {
+        "meta": [
+          "Persuasão",
+          "Promessa",
+          "Prova",
+          "Ação"
+        ],
+        "sections": [
+          [
+            "Promessa central",
+            "O que o leitor ganha ou resolve? Em uma frase direta, sem floreio."
+          ],
+          [
+            "Dor ou desejo",
+            "Que problema, frustração ou aspiração move o leitor neste momento?"
+          ],
+          [
+            "Prova",
+            "Por que acreditar? Dado, depoimento, resultado concreto ou demonstração."
+          ],
+          [
+            "Objeção principal",
+            "Qual resistência o leitor tem antes de agir? Responda antes que ele pergunte."
+          ],
+          [
+            "CTA — chamada para ação",
+            "O que o leitor faz agora? Um único passo, claro e fácil."
+          ]
+        ],
+        "reminders": [
+          "Copy fraco promete demais e prova de menos. Inverta: prove primeiro, prometa com razão.",
+          "A melhor copy parece conversa, não anuncio.",
+          "Um único CTA forte é mais eficaz do que três opções."
+        ],
+        "blueprint": "COPYWRITING\\n\\nUma promessa que o produto cumpre — comunicada para quem precisa ouvir exatamente isso.\\n\\nCopy começa no problema do leitor, não na qualidade do produto. A promessa central é uma: copy que promete três coisas não entrega nenhuma. Prova vem antes do CTA: depoimento, dado, resultado concreto. O CTA diz o que fazer, não o que o produto é.\\n\\nConectivos: porque (justifica a promessa com evidência) · imagine (ativa o desejo antes da solução) · sem [DOR QUE O LEITOR QUER EVITAR] (negativo que aproxima) · agora (urgência que converte)",
+        "sketch": "[O PROBLEMA DO LEITOR — não o produto. A dor que ele reconhece.]\\n\\n[A PROMESSA — uma frase. O que muda depois do produto.]\\n\\n[PROVA — dado, depoimento ou resultado concreto. Específico, não genérico.]\\n\\n[CTA — o que fazer agora. Verbo de ação + o que o leitor ganha ao agir.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Escrita persuasiva",
+          "title": "Copy não é grito — é conversa com alvo.",
+          "body": "O erro mais comum é tentar convencer a todos. Copy forte fala com uma pessoa específica, no momento certo, sobre uma única coisa que importa para ela.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura da persuasão",
+          "title": "Promessa, prova, ação.",
+          "body": "A fórmula clássica funciona porque respeita a lógica de decisão humana: o leitor precisa entender o que ganha, acreditar que é real, e saber o que fazer.",
+          "items": [
+            [
+              "Promessa clara",
+              "O que ele ganha, em linguagem dele — não no seu.",
+              "done"
+            ],
+            [
+              "Prova concreta",
+              "Dado, resultado ou demonstração — não apenas afirmação.",
+              "done"
+            ],
+            [
+              "Um CTA, só um",
+              "Quanto mais escolhas, menos ação.",
+              "done"
+            ]
+          ],
+          "primary": "Criar copy"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Ogilvy, Claude Hopkins e a prática brasileira de copy em nichos de nicho.",
+        "why": "Copy eficaz não convence pelo volume de argumentos, mas pela precísão de um único ponto irrecusável.",
+        "references": [
+          "David Ogilvy",
+          "Claude Hopkins",
+          "Gary Halbert",
+          "Copy brasileira de mídia de performance"
+        ],
+        "placeholder": "Não é só uma agenda. É o lugar onde sua semana para de mandar em você."
+      }
+    },
+    {
+      "id": "conteudo-digital",
+      "oficio": "comercial-tecnica",
+      "label": "Conteúdo digital",
+      "icon": "language",
+      "title": "Conteúdo digital",
+      "kind": "Conteúdo digital",
+      "chapter": "Explicação útil",
+      "description": "Guia para conteúdo informativo, claro e encontrável — útil sem perder voz.",
+      "guidance": {
+        "meta": [
+          "Conteúdo",
+          "Clareza",
+          "SEO humano",
+          "Utilidade"
+        ],
+        "sections": [
+          [
+            "Promessa de utilidade",
+            "O leitor chegou porque quer resolver algo. O que exatamente você vai resolver?"
+          ],
+          [
+            "Público específico",
+            "Quem é a pessoa que precisa deste conteúdo — e o que já sabe sobre o assunto?"
+          ],
+          [
+            "Estrutura de fácil escaneamento",
+            "Títulos, listas, parágrafos curtos — o leitor digital escaneia antes de ler."
+          ],
+          [
+            "Voz reconhecível",
+            "Conteúdo genérico é esquecido. Que perspectiva ou experiência só você traz?"
+          ],
+          [
+            "CTA claro",
+            "O que o leitor faz depois de ler? Um único passo seguinte, específico."
+          ]
+        ],
+        "reminders": [
+          "Conteúdo útil resolve um problema real — não apenas informa.",
+          "O título decide se o conteúdo existe — escreva o título antes do corpo.",
+          "Voz própria é o único diferencial que o SEO não replica."
+        ],
+        "blueprint": "CONTEÚDO DIGITAL\\n\\nUm gancho que prende, um valor que entrega, uma razão para voltar.\\n\\nO algoritmo distribui o que prende — mas o que fideliza é o valor real entregue. O gancho (título, primeira linha, thumbnail) precisa prometer algo específico e verdadeiro. O corpo entrega o prometido: sem enrolação, sem padding. O formato (carrossel, vídeo curto, thread, artigo) é parte do conteúdo — não embalagem.\\n\\nConectivos: por que [X] quando você pode [Y] (reencadramento que prende) · o que ninguém te conta sobre (promessa de acesso privilegiado) · aqui está como (entrega direta após o gancho)",
+        "sketch": "FORMATO: [carrossel / thread / vídeo / artigo / story]\\nCANAL: [Instagram / LinkedIn / YouTube / newsletter / blog]\\n\\nGANCHO: [O que o leitor/espectador recebe — específico, verdadeiro, urgente.]\\n\\n[VALOR 1 — o primeiro ponto concreto. Sem introdução.]\\n\\n[VALOR 2 — avança. Não repete o 1 com outras palavras.]\\n\\n[CTA — o que fazer agora. Natural para o canal e para o conteúdo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Conteúdo que resolve",
+          "title": "Conteúdo digital é útil primeiro, elegante depois.",
+          "body": "O leitor chegou porque quer resolver algo. Se o texto não entrega isso nos primeiros parágrafos, ele sai. A voz vem depois da utilidade — não antes.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do conteúdo digital",
+          "title": "Título, problema, solução, próximo passo.",
+          "body": "O leitor digital escaneia antes de ler. Títulos descritivos, parágrafos curtos e listas facilitam a decisão de continuar.",
+          "items": [
+            [
+              "Título que promete",
+              "O leitor decide em 3 segundos se vale continuar.",
+              "done"
+            ],
+            [
+              "Estrutura escaneável",
+              "Subtítulos, listas, parágrafos curtos.",
+              "done"
+            ],
+            [
+              "Próximo passo claro",
+              "O que o leitor faz depois de ler?",
+              "done"
+            ]
+          ],
+          "primary": "Criar conteúdo"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Ann Handley e o jornalismo de marca, pela clareza que não sacrifica a voz.",
+        "why": "Conteúdo digital forte resolve e encanta ao mesmo tempo — o leitor lembra quem escreveu.",
+        "references": [
+          "Ann Handley",
+          "Content Marketing Institute",
+          "Ferramentas de SEO semântico"
+        ],
+        "placeholder": "Você já ouviu esse termo. Mas o que ele muda na sua vida prática ainda costuma ficar fora da explicação."
+      }
+    },
+    {
+      "id": "ux-writing",
+      "oficio": "comercial-tecnica",
+      "label": "UX writing",
+      "icon": "touch_app",
+      "title": "UX writing",
+      "kind": "UX writing",
+      "chapter": "Microtexto útil",
+      "description": "Guia para botões, mensagens, erros e fluxos com clareza humana e voz consistente.",
+      "guidance": {
+        "meta": [
+          "Interface",
+          "Microcopy",
+          "Clareza",
+          "Ação"
+        ],
+        "sections": [
+          [
+            "Voz da interface",
+            "Que personalidade tem este produto? Formal, amigável, direta, encorajadora?"
+          ],
+          [
+            "Botão que age",
+            "O texto do botão diz o que acontece quando o usuário clica — não só 'Enviar'."
+          ],
+          [
+            "Mensagem de erro humana",
+            "Erros são o momento em que o produto mais precisa de empatia."
+          ],
+          [
+            "Onboarding em microtexto",
+            "Como o produto apresenta funcionalidades sem manual?"
+          ],
+          [
+            "Consistência de voz",
+            "O mesmo produto não pode ter voz diferente em cada tela."
+          ]
+        ],
+        "reminders": [
+          "Botão ideal: verbo + objeto. 'Salvar rascunho' é melhor que 'OK'.",
+          "Mensagem de erro: o que aconteceu + como resolver. Nunca culpe o usuário.",
+          "UX writing é design — trabalhe com o designer desde o wireframe."
+        ],
+        "blueprint": "UX WRITING\\n\\nCada palavra na interface é uma decisão de produto.\\n\\nUX writing não decora: remove fricção. O usuário lê a interface em busca de ação — cada palavra que não ajuda atrapalha. Tom é consistente com a personalidade do produto: formal, amigável, técnico — mas sempre um só. O estado de erro é onde o UX writing mais importa: não acusa, não assusta, resolve.\\n\\nPrincípios de redação: ativo antes de passivo · verbo antes de substantivo · o usuário é sujeito da frase · erro = o que aconteceu + o que fazer agora",
+        "sketch": "PRODUTO: [NOME] — [O QUE FAZ EM UMA FRASE]\\nVOZ DO PRODUTO: [formal / amigável / técnico / leve]\\n\\nONBOARDING:\\n[TÍTULO DA TELA] — [O QUE O USUÁRIO FAZ AQUI, não o que a tela é]\\n[BOTÃO PRINCIPAL] — [VERBO + O QUE O USUÁRIO GANHA]\\n\\nESTADO DE ERRO:\\n[O QUE ACONTECEU — sem culpar.] [O QUE FAZER AGORA — ação concreta.]\\n\\nESTADO VAZIO:\\n[O QUE AINDA NÃO TEM] — [CONVITE PARA A PRIMEIRA AÇÃO]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Escrita de interface",
+          "title": "UX writing é design com palavras.",
+          "body": "Cada palavra da interface é uma decisão de design. Botão, erro, título de tela — tudo guia ou atrapalha o usuário. A boa copy de interface passa despercebida porque funciona.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática do UX writing",
+          "title": "Voz consistente, ação clara, erro humano.",
+          "body": "Três momentos críticos: o botão (o que acontece quando clico?), o erro (o que deu errado e como resolvo?) e o estado vazio (o que faço agora?).",
+          "items": [
+            [
+              "Botão: verbo + objeto",
+              "'Salvar rascunho' é melhor que 'Confirmar'.",
+              "done"
+            ],
+            [
+              "Erro: o que + como",
+              "Nunca culpe o usuário. Ofereça caminho.",
+              "done"
+            ],
+            [
+              "Voz consistente",
+              "O mesmo produto não pode soar diferente em cada tela.",
+              "done"
+            ]
+          ],
+          "primary": "Criar microtexto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Slack, Duolingo e o Escrevaral próprio, pela voz que é consistente sem ser roboto.",
+        "why": "UX writing forte é impossível de notar quando funciona — e impossível de ignorar quando falha.",
+        "references": [
+          "Torrey Podmajersky",
+          "Kinneret Yifrah",
+          "Nielsen Norman Group",
+          "NN/g UX Writing"
+        ],
+        "placeholder": "Não conseguimos salvar agora. Seu texto continua aqui. Tente novamente em alguns segundos."
+      }
+    },
+    {
+      "id": "roteiro-youtube",
+      "oficio": "comercial-tecnica",
+      "label": "Roteiro para vídeo",
+      "icon": "smart_display",
+      "title": "Roteiro para vídeo",
+      "kind": "Roteiro para vídeo",
+      "chapter": "Gancho e retenção",
+      "description": "Guia para YouTube, Reels ou vídeo explicativo com gancho nos primeiros 15 segundos, ritmo e entrega.",
+      "guidance": {
+        "meta": [
+          "Vídeo",
+          "Gancho",
+          "Retenção",
+          "Fala"
+        ],
+        "sections": [
+          [
+            "Gancho — primeiros 15 segundos",
+            "Por que o espectador fica? O que ele ganha se assistir até o fim?"
+          ],
+          [
+            "Promessa do vídeo",
+            "O que você vai mostrar, provar ou resolver — de forma específica."
+          ],
+          [
+            "Corpo — ritmo e cortes",
+            "O vídeo respira? Cada bloco tem uma ideia única e dura o tempo necessário."
+          ],
+          [
+            "Fala natural",
+            "Roteiro de vídeo é escrito para ser falado — não lido em voz alta."
+          ],
+          [
+            "CTA — chamada final",
+            "O que o espectador faz agora? Um único pedido claro."
+          ]
+        ],
+        "reminders": [
+          "Os primeiros 15 segundos decidem se o vídeo existe para aquela pessoa.",
+          "Escreva como fala — depois leia em voz alta e corrija o que travar.",
+          "Um vídeo, uma ideia. Dois temas = dois vídeos."
+        ],
+        "blueprint": "ROTEIRO PARA VÍDEO\\n\\nOs primeiros 30 segundos decidem se o vídeo vai ser assistido até o fim.\\n\\nO hook visual e verbal precisa prometer algo específico antes que o espectador decida sair. A estrutura segue o prometido: entrega o que o título prometeu, sem desvio. Cada corte, B-roll e pausa são parte do roteiro — não decisão de edição. O CTA fica no momento de maior engajamento — não necessariamente no final.\\n\\nConectivos de vídeo: mas primeiro (suspense antes da entrega) · o que a maioria não sabe é (promessa de insight) · aqui está o que aconteceu (narrativa que ancora) · e é por isso que (conexão entre o conteúdo e a vida do espectador)",
+        "sketch": "TÍTULO: [O QUE O ESPECTADOR RECEBE — específico, pesquisável]\\nTHUMBNAIL: [O QUE A IMAGEM PROMETE — consistente com o título]\\n\\nHOOK (0–30s): [PROBLEMA OU PROMESSA que prende antes do espectador sair.]\\n\\nDESENVOLVIMENTO:\\n[PONTO 1 — entrega parte do prometido]\\n[PONTO 2 — aprofunda ou gira]\\n[PONTO 3 — o mais valioso, guardado para sustentar até aqui]\\n\\nCTA: [MOMENTO DE MAIOR ENGAJAMENTO] — [O QUE O ESPECTADOR FAZ AGORA]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Roteiro audiovisual",
+          "title": "Os primeiros 15 segundos decidem tudo.",
+          "body": "O algoritmo mostra o vídeo. O thumbnail faz clicar. Mas os primeiros 15 segundos decidem se a pessoa fica — e se o vídeo tem alcance. Comece pelo gancho antes de qualquer outra coisa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do roteiro de vídeo",
+          "title": "Gancho, promessa, entrega, CTA.",
+          "body": "Escreva para ser falado — não lido. Depois leia em voz alta e corte tudo que fizer você travar.",
+          "items": [
+            [
+              "Gancho nos primeiros 15s",
+              "A razão para ficar — entregue cedo.",
+              "done"
+            ],
+            [
+              "Um vídeo, uma ideia",
+              "Dois temas = dois vídeos separados.",
+              "done"
+            ],
+            [
+              "CTA único",
+              "Um pedido no final — não três opções.",
+              "done"
+            ]
+          ],
+          "primary": "Criar roteiro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Nerdologia, Meteoro Brasil e Manual do Mundo, pelo roteiro que ensina sem entediar.",
+        "why": "Vídeo brasileiro forte começa com razão para ficar — e entrega o que prometeu.",
+        "references": [
+          "Nerdologia",
+          "Meteoro Brasil",
+          "Manual do Mundo",
+          "Porta dos Fundos",
+          "Felipe Castanhari"
+        ],
+        "placeholder": "Esse dado parece pequeno. Mas ele explica por que sua cidade esquenta mais do que a previsão diz."
+      }
+    },
+    {
+      "id": "ghostwriting",
+      "oficio": "comercial-tecnica",
+      "label": "Ghostwriting",
+      "icon": "person_edit",
+      "title": "Ghostwriting",
+      "kind": "Ghostwriting",
+      "chapter": "Voz do outro",
+      "description": "Guia para escrever na voz de outra pessoa com entrevista, captura de voz e discrição.",
+      "guidance": {
+        "meta": [
+          "Voz alheia",
+          "Entrevista",
+          "Discrição",
+          "Estrutura"
+        ],
+        "sections": [
+          [
+            "Captura de voz",
+            "Que palavras, ritmo e repetições são exclusivamente desta pessoa?"
+          ],
+          [
+            "Entrevista como matéria-prima",
+            "O ghostwriter ouve antes de escrever. Que perguntas revelam a voz real?"
+          ],
+          [
+            "Estrutura da narrativa",
+            "Como organizar para parecer que a pessoa escolheu essa ordem naturalmente?"
+          ],
+          [
+            "Discrição e confidencialidade",
+            "O que é ético revelar? Onde estão os limites do que pode ser escrito?"
+          ],
+          [
+            "Revisão com a fonte",
+            "Como garantir que o texto soa como a pessoa, não como você?"
+          ]
+        ],
+        "reminders": [
+          "Seu trabalho é desaparecer no texto — o leitor deve ouvir a pessoa, não o escritor.",
+          "Grave as entrevistas e transcreva: a voz está nos detalhes da fala.",
+          "Ghostwriting tem contrato — defina confidencialidade antes de começar."
+        ],
+        "blueprint": "GHOSTWRITING\\n\\nO ghost desaparece — o que fica é a voz do cliente.\\n\\nO trabalho começa em escuta profunda: tom, vocabulário, ritmo, o que o cliente nunca diria. Um documento de voz (voice guide) antes de escrever a primeira linha. O rascunho parece ter sido escrito pelo cliente — não pela versão melhorada do cliente. O ghost não existe no texto final: seu trabalho é invisível e indiscutível.\\n\\nPerguntas de captura de voz: como você explicaria isso para um amigo? Que palavras você jamais usaria? Qual o tom que te representa — e qual te envergonha?",
+        "sketch": "CLIENTE: [NOME/EMPRESA]\\nPROJETO: [LIVRO / COLUNA / PERFIL / DISCURSO]\\n\\nPERFIL DE VOZ:\\nTom: [ADJETIVOS QUE DEFINEM — e os que jamais definem]\\nVocabulário: [PALAVRAS QUE USA — e as que evita]\\nRitmo: [FRASES CURTAS / LONGAS / MISTAS]\\n\\n[RASCUNHO NA VOZ DO CLIENTE — não na voz ideal, na voz real.]\\n\\n[TESTE: o cliente reconhece isso como dele? Se não, o ghost ainda está visível.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Autoria assistida",
+          "title": "No ghostwriting, você escreve para desaparecer.",
+          "body": "O objetivo não é mostrar seu talento — é fazer o texto soar como a pessoa que assina. Isso exige ouvir muito antes de escrever qualquer coisa.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do ghostwriting",
+          "title": "Captura de voz, entrevista, revisão.",
+          "body": "Três fases: entender como a pessoa pensa e fala, escrever na voz dela, refinar até que ela reconheça o texto como seu.",
+          "items": [
+            [
+              "Captura de voz",
+              "Ritmo, vocabulário, expressões recorrentes.",
+              "done"
+            ],
+            [
+              "Entrevista como matéria",
+              "Grave, transcreva, encontre a voz no detalhe.",
+              "done"
+            ],
+            [
+              "Revisão até sumir",
+              "O texto é bom quando você some nele.",
+              "done"
+            ]
+          ],
+          "primary": "Criar texto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Autobiografias de atletas e empreendedores — escritas por quem não assina.",
+        "why": "O bom ghostwriter some no texto — o leitor termina e pensa que a pessoa é escritora nata.",
+        "references": [
+          "Andrew Crofts",
+          "Mark Levine",
+          "Prática brasileira de autoria assistida"
+        ],
+        "placeholder": "Eu não queria contar essa história como exemplo de superação. Queria contar porque foi ali que parei de fingir certeza."
+      }
+    },
+    {
+      "id": "quadrinhos",
+      "oficio": "comercial-tecnica",
+      "label": "Escrita para quadrinhos",
+      "icon": "view_comfy",
+      "title": "Escrita para quadrinhos",
+      "kind": "Escrita para quadrinhos",
+      "chapter": "Painel e página",
+      "description": "Guia para roteiro de HQ com página, painel, legenda, balão e colaboração visual.",
+      "guidance": {
+        "meta": [
+          "HQ",
+          "Painel",
+          "Página",
+          "Imagem + palavra"
+        ],
+        "sections": [
+          [
+            "Página como unidade",
+            "O leitor vê a página antes de ler o painel: como ela conduz o olhar?"
+          ],
+          [
+            "Painel com função",
+            "Cada painel carrega informação que o anterior não tinha."
+          ],
+          [
+            "Balão e legenda",
+            "O que o balão diz que a imagem não pode — e vice-versa?"
+          ],
+          [
+            "Roteiro para o desenhista",
+            "Como descrever a cena sem engessar o desenho?"
+          ],
+          [
+            "Ritmo visual",
+            "Quadrinhos têm tempo: pausa, aceleração e silêncio visual."
+          ]
+        ],
+        "reminders": [
+          "Não escreva o que a imagem já mostra — balão e painel são parceiros, não réplicas.",
+          "Deixe espaço para o desenhista interpretar — o roteiro guia, não ilustra.",
+          "A página de virada é o lugar do impacto: o leitor a vê de uma vez."
+        ],
+        "blueprint": "ESCRITA PARA QUADRINHOS\\n\\nO roteiro de quadrinhos escreve o que o desenhista precisa desenhar — não o que o leitor vai ler.\\n\\nCada página tem uma função narrativa. Cada quadro tem uma ação visual. O diálogo é econômico: o desenho faz o que as palavras não precisam fazer. A sequência de quadros cria ritmo — mais quadros = cena mais lenta, menos quadros = corte abrupto. Onomatopeia, balão de pensamento e narrador têm voz distinta.\\n\\nRegra fundamental: se o diálogo descreve o que o quadro já mostra, corte o diálogo.",
+        "sketch": "PÁGINA [X]\\n\\nQuadro 1: [AÇÃO VISUAL — o que o desenhista precisa mostrar. Sem adjetivo desnecessário.]\\n[PERSONAGEM]: [DIÁLOGO — que não repete o que o quadro mostra]\\n\\nQuadro 2: [AÇÃO VISUAL — avanço. O que mudou desde o quadro anterior?]\\n\\nQuadro 3: [AÇÃO VISUAL — o momento que justifica toda a página.]\\n[PERSONAGEM]: [LINHA QUE FECHA OU ABRE — raramente as duas]\\n\\n[SFX / onomatopeia se necessário — parte do desenho, não decoração]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Linguagem híbrida",
+          "title": "Em quadrinhos, imagem e palavra dividem o trabalho.",
+          "body": "O que a imagem mostra, o balão não repete. O roteirista escreve para o desenhista — não para o leitor. Isso muda tudo.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A gramática dos quadrinhos",
+          "title": "Painel, página, ritmo visual.",
+          "body": "Cada painel é uma escolha de foco. A virada de página é o momento de impacto — use com intenção.",
+          "items": [
+            [
+              "Painel com informação nova",
+              "Cada painel carrega algo que o anterior não tinha.",
+              "done"
+            ],
+            [
+              "Balão complementa, não repete",
+              "Imagem e palavra trabalham juntos, não em eco.",
+              "done"
+            ],
+            [
+              "Página de virada com impacto",
+              "O leitor vê toda a página de uma vez.",
+              "done"
+            ]
+          ],
+          "primary": "Criar roteiro de HQ"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Laerte, Nik e Moon & Bá, pela linguagem híbrida que só quadrinhos permitem.",
+        "why": "O roteiro de HQ forte confia no desenhista: dá liberdade e direção ao mesmo tempo.",
+        "references": [
+          "Laerte",
+          "Fern​ndo Gonsales",
+          "Rafael Grampá",
+          "Moon e Bá",
+          "Mauricio de Sousa"
+        ],
+        "placeholder": "PAINEL 1: A mesa posta para dois.\\nPAINEL 2: Uma cadeira vazia.\\nBALÃO: Hoje ele vem."
+      }
+    },
+    {
+      "id": "escrita-tecnica",
+      "oficio": "comercial-tecnica",
+      "label": "Escrita técnica",
+      "icon": "science",
+      "title": "Escrita técnica",
+      "kind": "Escrita técnica",
+      "chapter": "Rigor e narrativa",
+      "description": "Guia para relatório, ensaio acadêmico, divulgação ou documento técnico com clareza e precisão.",
+      "guidance": {
+        "meta": [
+          "Rigor",
+          "Método",
+          "Dados",
+          "Narrativa"
+        ],
+        "sections": [
+          [
+            "Objetivo do documento",
+            "O que este texto precisa fazer? Informar, convencer, documentar ou orientar?"
+          ],
+          [
+            "Público técnico ou leigo",
+            "Quem vai ler — e qual é o nível de conhecimento esperado?"
+          ],
+          [
+            "Estrutura lógica",
+            "Introdução, desenvolvimento e conclusão — cada seção com função clara."
+          ],
+          [
+            "Dados e evidência",
+            "Que dados sustentam as afirmações? Como são apresentados?"
+          ],
+          [
+            "Clareza sem simplificação",
+            "Técnico não significa obscuro: precisão e clareza coexistem."
+          ]
+        ],
+        "reminders": [
+          "Escreva a conclusão antes do corpo — isso garante que o texto tem direção.",
+          "Evite jargão desnecessário: se o leitor precisa de glossário para cada parágrafo, reescreva.",
+          "Dado isolado sugere — série histórica confirma. Contextualize sempre."
+        ],
+        "blueprint": "ESCRITA TÉCNICA\\n\\nO leitor precisa fazer algo — o texto existe para que ele consiga.\\n\\nClareza antes de elegância: o texto técnico não precisa impressionar, precisa funcionar. Estrutura previsível reduz carga cognitiva: o leitor sabe onde está a informação antes de procurar. Voz ativa, verbos de ação, frases curtas — cada escolha serve à compreensão. Teste definitivo: alguém sem contexto consegue executar a tarefa lendo este documento?\\n\\nConectivos técnicos: primeiro / em seguida / por fim (sequência de passos) · nota: / atenção: / aviso: (hierarquia de informação) · por exemplo (caso concreto que ancora o abstrato)",
+        "sketch": "DOCUMENTO: [TIPO — manual, guia, especificação, procedimento]\\nPÚBLICO: [QUEM LÊ — nível técnico, contexto de uso]\\nOBJETIVO: [O QUE O LEITOR FAZ DEPOIS DE LER]\\n\\n[SEÇÃO 1 — TÍTULO QUE DIZ O QUE É, NÃO O QUE CONTÉM]\\n\\n[PASSOS EM ORDEM. Cada passo = uma ação. Verbo no imperativo.]\\n\\nNota: [INFORMAÇÃO CRÍTICA QUE O LEITOR PODE IGNORAR SEM PERCEBER]\\n\\n[TESTE — como o leitor sabe que deu certo?]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Escrita de precisão",
+          "title": "Escrita técnica é clara — não necessariamente simples.",
+          "body": "Rigor e acessibilidade não são opostos. O texto técnico forte é preciso sem ser obscuro: cada afirmação tem sustentação, cada dado tem contexto.",
+          "primary": "Entendi",
+          "secondary": "Me conta mais"
+        },
+        {
+          "eyebrow": "A estrutura do documento técnico",
+          "title": "Objetivo, evidência, conclusão.",
+          "body": "Escreva a conclusão antes do corpo: isso garante que o texto sabe para onde vai. Dado sem contexto é ruído — não informação.",
+          "items": [
+            [
+              "Conclusão antes do corpo",
+              "Saber o destino garante que o texto não perde a direção.",
+              "done"
+            ],
+            [
+              "Dado com contexto",
+              "Série histórica, comparação, limitações.",
+              "done"
+            ],
+            [
+              "Clareza sem simplificação",
+              "Precisão e legibilidade coexistem.",
+              "done"
+            ]
+          ],
+          "primary": "Criar documento"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Relatórios do IPEA e divulgação científica da Fiocruz, pela precisão que não exclui o leitor.",
+        "why": "Escrita técnica forte é precisa sem ser opaca — o leitor entende e confia.",
+        "references": [
+          "ABNT",
+          "Chicago Manual of Style",
+          "Strunk & White",
+          "Manuais de divulgação científica"
+        ],
+        "placeholder": "O dado isolado sugere melhora. A série histórica, porém, mostra outra coisa: a queda começou antes da política analisada."
+      }
+    },
+    {
+      "id": "redacao-enem",
+      "oficio": "estudo-vestibular",
+      "label": "Redação ENEM completa",
+      "icon": "assignment",
+      "title": "Redação ENEM completa",
+      "kind": "Redação ENEM completa",
+      "chapter": "Projeto até revisão",
+      "description": "Guia para construir a redação dissertativo-argumentativa do ENEM pelas cinco competências da banca.",
+      "guidance": {
+        "meta": [
+          "ENEM",
+          "5 competências",
+          "Até 30 linhas",
+          "1000 pontos"
+        ],
+        "sections": [
+          [
+            "Competência 1",
+            "Norma padrão: ortografia, concordância, regência, pontuação e escolha formal de palavras."
+          ],
+          [
+            "Competência 2",
+            "Compreensão da proposta: tema real, recorte correto e repertório pertinente."
+          ],
+          [
+            "Competência 3",
+            "Seleção e organização: tese, argumentos relevantes e progressão lógica."
+          ],
+          [
+            "Competência 4",
+            "Coesão: conectivos precisos, retomadas claras e parágrafos que avançam."
+          ],
+          [
+            "Competência 5",
+            "Intervenção: agente, ação, meio, finalidade e efeito, sempre respeitando direitos humanos."
+          ]
+        ],
+        "reminders": [
+          "Use os primeiros minutos para fazer projeto de texto.",
+          "Não copie frases dos textos motivadores.",
+          "A conclusão do ENEM resolve; ela não apenas resume."
+        ],
+        "blueprint_note": "Modo ENEM: folha oficial com 30 linhas e placeholder nota mil. O blueprint das 5 competências vive nas seções do guia."
+      },
+      "editorMode": "enem",
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Redação ENEM completa tem uma lógica própria.",
+          "body": "Guia para construir a redação dissertativo-argumentativa do ENEM pelas cinco competências da banca.",
+          "primary": "Criar redação enem completa"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Redações nota 1000 do ENEM e matrizes oficiais de correção do Inep.",
+        "why": "A redação ENEM forte mostra domínio formal e projeto argumentativo antes de tentar impressionar.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas de redação do Inep",
+          "Corretores de redação",
+          "Pré-vestibulares brasileiros"
+        ],
+        "placeholder": "A exclusão digital como herança da desigualdade brasileira\\n\\nA Revolução Industrial do século XIX transformou as relações de trabalho e aprofundou abismos sociais que persistem, sob novas formas, na contemporaneidade. No Brasil do século XXI, a ausência de acesso à internet e às tecnologias digitais configura uma nova dimensão dessa desigualdade estrutural, comprometendo o exercício pleno da cidadania por milhões de brasileiros.\\n\\nNesse contexto, o fosso digital resulta de uma combinação de fatores históricos e econômicos. De acordo com dados da PNAD Contínua, mais de 40 milhões de brasileiros não têm acesso à internet, concentrados sobretudo nas regiões Norte e Nordeste e nas periferias urbanas. Essa realidade não é acidental: ela reflete séculos de investimento desigual em infraestrutura, em que regiões historicamente marginalizadas seguem desprovidas de condições básicas para a conectividade. Assim, a exclusão digital reproduz e amplifica a exclusão social já existente, criando um ciclo de difícil rompimento.\\n\\nAlém disso, mesmo quando o acesso técnico existe, a falta de letramento digital impede o aproveitamento real das oportunidades oferecidas pela rede. A filósofa Hannah Arendt argumentava que a participação na vida pública é condição essencial da dignidade humana; no mundo contemporâneo, essa participação passa crescentemente pelo espaço digital — onde se concentram o mercado de trabalho, a educação, os serviços públicos e o debate cívico. Sem habilidades digitais, o cidadão permanece à margem desse espaço, privado de direitos que, na prática, só existem online.\\n\\nDiante desse cenário, é imperativo que o Estado adote medidas estruturais para garantir a inclusão digital como direito fundamental. O Ministério das Comunicações, em parceria com municípios e organizações da sociedade civil, deve implementar programas de conectividade nas regiões mais vulneráveis, com subsídio de tarifas para famílias de baixa renda. Paralelamente, escolas públicas precisam integrar, em seus currículos, módulos de letramento digital orientados à autonomia e ao pensamento crítico. Somente assim a tecnologia cumprirá seu potencial de igualar, e não de aprofundar, as distâncias sociais no Brasil.",
+        "placeholderTitle": "A exclusão digital como herança da desigualdade brasileira",
+        "placeholderNote": "Exemplo de redação nota mil — tema: inclusão digital. Apague tudo para começar do zero; o exemplo volta se o editor ficar vazio."
+      }
+    },
+    {
+      "id": "projeto-texto-enem",
+      "oficio": "estudo-vestibular",
+      "label": "Projeto de texto",
+      "icon": "schema",
+      "title": "Projeto de texto",
+      "kind": "Projeto de texto",
+      "chapter": "10 minutos decisivos",
+      "description": "Guia para planejar tese, argumentos, repertório e intervenção antes de escrever a redação.",
+      "guidance": {
+        "meta": [
+          "Planejamento",
+          "Tema real",
+          "Tese",
+          "Argumentos"
+        ],
+        "sections": [
+          [
+            "Tema real",
+            "Transforme a frase da proposta em problema concreto, sem fugir do recorte."
+          ],
+          [
+            "Tese",
+            "Diga por que o problema existe ou persiste."
+          ],
+          [
+            "Argumento 1",
+            "Escolha uma causa, obstáculo ou agente social para desenvolver."
+          ],
+          [
+            "Argumento 2",
+            "Traga outro eixo, diferente do primeiro, para ampliar a análise."
+          ],
+          [
+            "Intervenção",
+            "Já defina agente e ação antes de escrever a introdução."
+          ]
+        ],
+        "reminders": [
+          "Projeto curto evita repetição.",
+          "Repertório precisa servir ao argumento.",
+          "Se a tese é vaga, o texto inteiro fica instável."
+        ],
+        "blueprint": "PROJETO DE TEXTO — ENEM\\n\\nCinco minutos antes de escrever a primeira linha da redação.\\n\\nO projeto de texto é o mapa: tese, dois argumentos, proposta de intervenção. Quem escreve sem projeto tende a perder o fio condutor no segundo parágrafo. O tema real não é o assunto do título — é o recorte que a proposta cobra. A proposta de intervenção precisa estar no projeto antes de aparecer na redação.\\n\\nEstrutura mínima do projeto: tema real → tese (por que o problema persiste?) → argumento 1 → argumento 2 → agente + ação + meio + finalidade + efeito",
+        "sketch": "TEMA REAL: [O que a proposta efetivamente cobra — não o assunto do título]\\n\\nTESE: [Por que esse problema persiste? Uma frase que abre dois caminhos argumentativos.]\\n\\nARGUMENTO 1: [Causa, obstáculo ou consequência — com repertório já definido]\\nREPERTÓRIO 1: [Dado, autor, obra, lei, fato histórico — pertinente e interpretado]\\n\\nARGUMENTO 2: [Segunda perspectiva — diferente do argumento 1, não repetição]\\nREPERTÓRIO 2: [Fonte diferente do repertório 1]\\n\\nPROPOSTA: [AGENTE] deve [AÇÃO] por meio de [MEIO], a fim de [FINALIDADE], gerando [EFEITO]."
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Projeto de texto tem uma lógica própria.",
+          "body": "Guia para planejar tese, argumentos, repertório e intervenção antes de escrever a redação.",
+          "primary": "Criar projeto de texto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Projeto de texto: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Um bom projeto antecipa a redação inteira em poucas linhas.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Tema: [x]. Tese: [x ocorre por causa de y e z]. Desenvolvimento I: [y]. Desenvolvimento II: [z]. Intervenção: [agente + ação]."
+      }
+    },
+    {
+      "id": "introducao-enem",
+      "oficio": "estudo-vestibular",
+      "label": "Introdução ENEM",
+      "icon": "start",
+      "title": "Introdução ENEM",
+      "kind": "Introdução ENEM",
+      "chapter": "Contexto e tese",
+      "description": "Guia para abrir a redação com repertório pertinente, problema delimitado e tese clara.",
+      "guidance": {
+        "meta": [
+          "Introdução",
+          "Repertório",
+          "Delimitação",
+          "Tese"
+        ],
+        "sections": [
+          [
+            "Contextualização",
+            "Comece por dado, obra, conceito, marco histórico ou fenômeno social pertinente."
+          ],
+          [
+            "Ponte",
+            "Mostre como o repertório se conecta ao tema da proposta."
+          ],
+          [
+            "Problema",
+            "Delimite o que está em discussão no Brasil contemporâneo."
+          ],
+          [
+            "Tese",
+            "Anuncie os dois eixos que serão defendidos no desenvolvimento."
+          ]
+        ],
+        "reminders": [
+          "Evite aberturas genéricas.",
+          "Não use repertório que você não consegue explicar.",
+          "A tese deve orientar o resto do texto."
+        ],
+        "blueprint": "INTRODUÇÃO ENEM\\n\\nContextualização + delimitação + tese — nesta ordem, sem inversão.\\n\\nA contextualização usa repertório pertinente para chegar ao tema: dado histórico, referência cultural, situação concreta — sem copiar os textos motivadores. A delimitação recorta o problema: o tema é amplo, a redação trata de um aspecto específico. A tese fecha o parágrafo com dois caminhos argumentativos que os próximos parágrafos vão percorrer.\\n\\nConectivos da introdução: nesse contexto / diante disso (liga contextualização ao problema) · no Brasil (delimita o espaço) · torna-se necessário analisar / é imprescindível compreender (abre os argumentos)",
+        "sketch": "[CONTEXTUALIZAÇÃO — repertório que chega ao tema sem copiar os textos motivadores.]\\n\\n[DELIMITAÇÃO — o recorte específico que esta redação vai tratar.]\\n\\n[TESE — por que o problema persiste, abrindo dois caminhos argumentativos.]\\n\\n[Competência 1: norma culta · Competência 2: tema real e recorte correto]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Introdução ENEM tem uma lógica própria.",
+          "body": "Guia para abrir a redação com repertório pertinente, problema delimitado e tese clara.",
+          "primary": "Criar introdução enem"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Introdução ENEM: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "A introdução boa entrega direção, não enfeite.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Embora [repertório] evidencie [valor ou problema], observa-se, no Brasil, [tema]. Tal quadro decorre de [causa 1] e [causa 2], fatores que precisam ser enfrentados."
+      }
+    },
+    {
+      "id": "desenvolvimento-enem",
+      "oficio": "estudo-vestibular",
+      "label": "Desenvolvimento ENEM",
+      "icon": "format_align_left",
+      "title": "Desenvolvimento ENEM",
+      "kind": "Desenvolvimento ENEM",
+      "chapter": "Argumento em progressão",
+      "description": "Guia para parágrafos de desenvolvimento com tópico frasal, explicação, repertório e conclusão parcial.",
+      "guidance": {
+        "meta": [
+          "Argumentação",
+          "Tópico frasal",
+          "Repertório",
+          "C-03 e C-04"
+        ],
+        "sections": [
+          [
+            "Tópico frasal",
+            "Primeira frase que anuncia o argumento do parágrafo."
+          ],
+          [
+            "Explicação",
+            "Desdobre a causa, consequência ou mecanismo do problema."
+          ],
+          [
+            "Repertório",
+            "Use dado, conceito ou exemplo como prova, não como decoração."
+          ],
+          [
+            "Conclusão parcial",
+            "Retome a tese e feche o raciocínio antes de passar ao próximo parágrafo."
+          ]
+        ],
+        "reminders": [
+          "Cada parágrafo precisa defender uma ideia principal.",
+          "Não empilhe repertórios.",
+          "Conectivo errado confunde a lógica."
+        ],
+        "blueprint": "DESENVOLVIMENTO ENEM\\n\\nTópico frasal → argumento → repertório interpretado → conclusão parcial.\\n\\nO tópico frasal é a miniatura do parágrafo: diz o que vem sem entregar tudo. O repertório não é enfeite — é a prova do argumento. Precisa ser interpretado, não apenas citado. A conclusão parcial fecha o parágrafo e prepara a transição para o próximo. Cada parágrafo de desenvolvimento serve à tese — se não serve, não entra.\\n\\nConectivos do desenvolvimento: além disso / outrossim (adiciona argumento) · sob essa perspectiva / nesse viés (retoma a linha argumentativa) · conforme [FONTE] / de acordo com [REFERÊNCIA] (atribuição do repertório) · portanto / logo (conclusão parcial)",
+        "sketch": "PARÁGRAFO 1:\\n[TÓPICO FRASAL — miniatura do argumento.]\\n[ARGUMENTO — desenvolvido com causa, consequência ou exemplo.]\\n[REPERTÓRIO — dado, autor ou fato interpretado, não apenas citado.]\\n[CONCLUSÃO PARCIAL — fecha e prepara a transição.]\\n\\nPARÁGRAFO 2:\\n[TÓPICO FRASAL — segunda perspectiva, diferente do parágrafo 1.]\\n[ARGUMENTO 2 — não repetição do 1.]\\n[REPERTÓRIO 2 — fonte diferente.]\\n[CONCLUSÃO PARCIAL.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Desenvolvimento ENEM tem uma lógica própria.",
+          "body": "Guia para parágrafos de desenvolvimento com tópico frasal, explicação, repertório e conclusão parcial.",
+          "primary": "Criar desenvolvimento enem"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Desenvolvimento ENEM: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "O desenvolvimento precisa provar a tese por etapas.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Em primeiro plano, [argumento] intensifica [problema]. Isso ocorre porque [explicação]. Nesse sentido, [repertório] demonstra que [conexão]. Logo, [fecho parcial]."
+      }
+    },
+    {
+      "id": "proposta-intervencao",
+      "oficio": "estudo-vestibular",
+      "label": "Proposta de intervenção",
+      "icon": "task_alt",
+      "title": "Proposta de intervenção",
+      "kind": "Proposta de intervenção",
+      "chapter": "Cinco elementos",
+      "description": "Guia para formular solução completa no ENEM com agente, ação, meio, finalidade e efeito.",
+      "guidance": {
+        "meta": [
+          "C-05",
+          "Agente",
+          "Ação",
+          "Direitos humanos"
+        ],
+        "sections": [
+          [
+            "Agente",
+            "Quem tem legitimidade para agir: Estado, escola, mídia, empresas, famílias ou sociedade civil."
+          ],
+          [
+            "Ação",
+            "O que será feito: criar, ampliar, fiscalizar, promover, regulamentar, capacitar."
+          ],
+          [
+            "Meio",
+            "Como a ação será executada: campanhas, políticas públicas, parcerias, leis, formação."
+          ],
+          [
+            "Finalidade",
+            "Para que a ação existe, ligada ao problema analisado."
+          ],
+          [
+            "Efeito",
+            "Resultado concreto esperado, sem fórmula vaga."
+          ]
+        ],
+        "reminders": [
+          "Não transforme punição em solução principal.",
+          "Detalhe pelo menos um elemento.",
+          "Respeite os direitos humanos."
+        ],
+        "blueprint": "PROPOSTA DE INTERVENÇÃO\\n\\nCinco elementos obrigatórios — sem um deles, a competência 5 não pontua.\\n\\nAgente: quem tem responsabilidade e poder para agir. Ação: o que esse agente deve fazer — verbo específico, não genérico. Meio: como essa ação acontece na prática. Finalidade: para que — o objetivo direto da ação. Efeito: o resultado concreto para a sociedade ou para o problema tratado. Respeito aos direitos humanos: a proposta não pode violar dignidade, liberdade ou igualdade.\\n\\nConectivos: deve [AÇÃO], por meio de [MEIO], a fim de [FINALIDADE], [GERÚNDIO] [EFEITO]",
+        "sketch": "[DIANTE DISSO / PORTANTO — retoma a tese antes de propor.]\\n\\n[AGENTE — ministério, escola, empresa, ONG, governo municipal. Quem tem poder real de agir.]\\ndeve [AÇÃO — verbo específico: implementar, criar, ampliar, regulamentar — não \\"fazer algo\\"],\\npor meio de [MEIO — como concretamente isso acontece],\\na fim de [FINALIDADE — objetivo direto da ação],\\n[GERÚNDIO — garantindo / assegurando / promovendo] [EFEITO CONCRETO PARA A SOCIEDADE].\\n\\n[Competência 5: agente ✓ · ação ✓ · meio ✓ · finalidade ✓ · efeito ✓ · direitos humanos ✓]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Proposta de intervenção tem uma lógica própria.",
+          "body": "Guia para formular solução completa no ENEM com agente, ação, meio, finalidade e efeito.",
+          "primary": "Criar proposta de intervenção"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Proposta de intervenção: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "A conclusão do ENEM é uma solução detalhada, não uma frase de encerramento.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Diante disso, [agente] deve [ação], por meio de [meio], a fim de [finalidade]. Assim, será possível [efeito concreto], respeitando [garantia/direito]."
+      }
+    },
+    {
+      "id": "repertorio-sociocultural",
+      "oficio": "estudo-vestibular",
+      "label": "Repertório sociocultural",
+      "icon": "public",
+      "title": "Repertório sociocultural",
+      "kind": "Repertório sociocultural",
+      "chapter": "Referência com função",
+      "description": "Guia para escolher e aplicar repertório de filosofia, literatura, história, ciência, direito e dados.",
+      "guidance": {
+        "meta": [
+          "C-03",
+          "Pertinência",
+          "Autoria",
+          "Conexão"
+        ],
+        "sections": [
+          [
+            "Filosofia",
+            "Use conceito para explicar causa ou valor em disputa."
+          ],
+          [
+            "Dados e pesquisa",
+            "Traga fonte confiável e conecte o número ao argumento."
+          ],
+          [
+            "Literatura e arte",
+            "Use obra como analogia ou retrato do problema."
+          ],
+          [
+            "História e ciência",
+            "Mostre origem, permanência ou efeito verificável."
+          ],
+          [
+            "Direito e sociologia",
+            "Compare garantia formal e realidade social."
+          ]
+        ],
+        "reminders": [
+          "Não invente citação.",
+          "Repertório sem explicação perde força.",
+          "Uma referência simples e bem conectada vale mais que nome difícil solto."
+        ],
+        "blueprint": "REPERTÓRIO SOCIOCULTURAL\\n\\nRepertório pertinente e interpretado — não erudição decorativa.\\n\\nO repertório serve ao argumento: cita-se porque ilumina, não porque impressiona. Pertinência: o dado, autor ou fato se conecta diretamente ao argumento do parágrafo. Interpretação: não basta citar — é preciso dizer o que aquilo significa para o argumento. Variedade: dois repertórios iguais valem menos que dois de áreas diferentes.\\n\\nFontes válidas: dados de pesquisa e institutos · filosofia e sociologia · literatura brasileira e mundial · história · legislação · artes e cultura · fatos jornalísticos verificáveis",
+        "sketch": "ARGUMENTO: [O ponto que o repertório vai sustentar]\\n\\nREPERTÓRIO ESCOLHIDO: [dado / autor / obra / fato / lei]\\nFONTE: [Instituto / filósofo / escritor / pesquisa]\\nINTERPRETAÇÃO: [O que isso significa para o argumento — não apenas o que é]\\n\\nCOMO ENCAIXAR NO PARÁGRAFO:\\n\\"[Conforme / De acordo com / Segundo] [FONTE], [REPERTÓRIO]. [Isso revela / Esse dado demonstra / Nesse sentido] [CONEXÃO COM O ARGUMENTO].\\""
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Repertório sociocultural tem uma lógica própria.",
+          "body": "Guia para escolher e aplicar repertório de filosofia, literatura, história, ciência, direito e dados.",
+          "primary": "Criar repertório sociocultural"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Repertório sociocultural: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "O repertório funciona quando participa do argumento.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "De acordo com [fonte], [dado ou conceito]. Essa informação evidencia que [tema] não se limita a [aparência do problema], mas envolve [argumento central]."
+      }
+    },
+    {
+      "id": "coesao-conectivos",
+      "oficio": "estudo-vestibular",
+      "label": "Coesão e conectivos",
+      "icon": "link",
+      "title": "Coesão e conectivos",
+      "kind": "Coesão e conectivos",
+      "chapter": "Progressão lógica",
+      "description": "Guia para organizar progressão textual com conectivos de adição, causa, oposição, conclusão, exemplo e finalidade.",
+      "guidance": {
+        "meta": [
+          "C-04",
+          "Coesão",
+          "Conectivos",
+          "Retomada"
+        ],
+        "sections": [
+          [
+            "Adição e progressão",
+            "Além disso; ademais; soma-se a isso; de igual modo."
+          ],
+          [
+            "Causa e explicação",
+            "Isso ocorre porque; tal fato se deve a; em virtude de."
+          ],
+          [
+            "Oposição",
+            "No entanto; contudo; apesar disso; embora."
+          ],
+          [
+            "Conclusão",
+            "Portanto; dessa forma; diante do exposto; assim."
+          ],
+          [
+            "Finalidade",
+            "A fim de; para que; com o objetivo de; por meio de."
+          ]
+        ],
+        "reminders": [
+          "Conectivo bonito não salva relação lógica errada.",
+          "Varie retomadas: problema, questão, cenário, entrave.",
+          "Coesão também é ordem de ideias."
+        ],
+        "blueprint": "COESÃO E CONECTIVOS\\n\\nOs conectivos organizam a lógica — não são enfeite de transição.\\n\\nCoesão é a costura entre frases e parágrafos: o leitor sabe onde está e para onde vai. Cada conectivo tem função específica — usá-lo errado inverte o sentido do argumento. Retomada nominal e pronominal evita repetição sem perder clareza. Parágrafos que começam com \\"além disso\\" sem antes ter dito \\"isso\\" perdem coesão.\\n\\nConectivos por função:\\nAdição: além disso · outrossim · também\\nContraste: no entanto · todavia · contudo · apesar de\\nCausa: porque · pois · visto que · uma vez que\\nConsequência: portanto · logo · assim · dessa forma\\nConcessão: embora · ainda que · mesmo que\\nConclusão: em suma · diante disso · portanto",
+        "sketch": "TEXTO PARA REVISAR:\\n[COLE SEU TEXTO AQUI]\\n\\nVERIFICAÇÃO:\\n[ ] Cada parágrafo tem tópico frasal?\\n[ ] Os conectivos estão corretos para a relação lógica pretendida?\\n[ ] As retomadas (este, essa, tal, o qual) têm referente claro?\\n[ ] Nenhum parágrafo começa sem conexão com o anterior?"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Coesão e conectivos tem uma lógica própria.",
+          "body": "Guia para organizar progressão textual com conectivos de adição, causa, oposição, conclusão, exemplo e finalidade.",
+          "primary": "Criar coesão e conectivos"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Coesão e conectivos: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Coesão é a engenharia discreta que permite a banca acompanhar o raciocínio.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Além disso, [argumento 2] amplia o problema. Isso ocorre porque [causa]. Portanto, [conclusão parcial] torna-se indispensável para compreender [tema]."
+      }
+    },
+    {
+      "id": "fuvest-unicamp",
+      "oficio": "estudo-vestibular",
+      "label": "Redação Fuvest e Unicamp",
+      "icon": "account_balance",
+      "title": "Redação Fuvest e Unicamp",
+      "kind": "Redação Fuvest e Unicamp",
+      "chapter": "Banca e gênero",
+      "description": "Guia para adaptar escrita a propostas de vestibular que cobram autoria, gênero textual e leitura de coletânea.",
+      "guidance": {
+        "meta": [
+          "Fuvest",
+          "Unicamp",
+          "Coletânea",
+          "Gênero textual"
+        ],
+        "sections": [
+          [
+            "Leitura da proposta",
+            "Identifique tema, gênero, interlocutor e finalidade antes de escrever."
+          ],
+          [
+            "Coletânea",
+            "Use os textos como ponto de partida, não como muleta."
+          ],
+          [
+            "Gênero",
+            "Respeite carta, artigo, dissertação, manifesto, crônica ou outro formato pedido."
+          ],
+          [
+            "Autoria",
+            "Mostre posição própria e controle de linguagem."
+          ],
+          [
+            "Adequação",
+            "A banca avalia se o texto cumpre a situação comunicativa."
+          ]
+        ],
+        "reminders": [
+          "Fuvest e Unicamp não seguem a fórmula ENEM.",
+          "Gênero textual manda na estrutura.",
+          "Interlocutor muda tom, vocabulário e estratégia."
+        ],
+        "blueprint": "REDAÇÃO FUVEST E UNICAMP\\n\\nPropostas diferentes exigem leituras diferentes — não use a estrutura do ENEM.\\n\\nFuvest: dissertação argumentativa com tema social, filosófico ou cultural. Exige posição clara, argumento desenvolvido e linguagem culta formal. Unicamp: proposta mais livre — pode ser carta, artigo, crônica, editorial. Exige adequação ao gênero solicitado: forma errada zera antes do conteúdo. Ambas pedem repertório interpretado — não acúmulo de citações.\\n\\nDiferença central: ENEM tem estrutura fixa (5 competências). Fuvest e Unicamp avaliam adequação ao gênero + argumento + linguagem. Leia a proposta duas vezes antes de definir o gênero.",
+        "sketch": "VESTIBULAR: [FUVEST / UNICAMP / ANO]\\nGÊNERO SOLICITADO: [dissertação / carta / artigo / crônica / editorial]\\nTEMA: [O que a proposta efetivamente cobra]\\n\\n[ABERTURA adequada ao gênero — não necessariamente contextualização ENEM]\\n\\n[DESENVOLVIMENTO — argumento com repertório interpretado]\\n\\n[FECHAMENTO adequado ao gênero — carta tem despedida, dissertação tem conclusão]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Redação Fuvest e Unicamp tem uma lógica própria.",
+          "body": "Guia para adaptar escrita a propostas de vestibular que cobram autoria, gênero textual e leitura de coletânea.",
+          "primary": "Criar redação fuvest e unicamp"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Fuvest e Unicamp: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Nessas bancas, a forma solicitada muda o contrato do texto.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Antes de defender uma tese, identifique quem fala, para quem fala e com que finalidade. A boa resposta nasce dessa situação comunicativa."
+      }
+    },
+    {
+      "id": "dissertacao-escolar",
+      "oficio": "estudo-vestibular",
+      "label": "Dissertação escolar",
+      "icon": "edit_note",
+      "title": "Dissertação escolar",
+      "kind": "Dissertação escolar",
+      "chapter": "Tese e argumento",
+      "description": "Guia para provas e trabalhos escolares com tese, argumentos, evidência e conclusão coerente.",
+      "guidance": {
+        "meta": [
+          "Escola",
+          "Tese",
+          "Argumentos",
+          "Conclusão"
+        ],
+        "sections": [
+          [
+            "Tese defensável",
+            "Uma afirmação clara que você consegue sustentar com evidências."
+          ],
+          [
+            "Argumento 1",
+            "Primeiro eixo com tópico frasal, evidência e análise."
+          ],
+          [
+            "Argumento 2",
+            "Segundo eixo diferente do primeiro para ampliar a análise."
+          ],
+          [
+            "Contraponto",
+            "Uma objeção reconhecida que fortalece o raciocínio."
+          ],
+          [
+            "Conclusão coerente",
+            "Retoma a tese sem copiar a introdução; entrega percurso."
+          ]
+        ],
+        "reminders": [
+          "Cada parágrafo defende uma ideia.",
+          "Evidência sem análise não convence.",
+          "A conclusão entrega caminho, não só resumo."
+        ],
+        "blueprint": "DISSERTAÇÃO ESCOLAR\\n\\nIntrodução + desenvolvimento + conclusão — mas com argumento real em cada parte.\\n\\nA introdução apresenta o tema e a tese: o que será defendido. Cada parágrafo de desenvolvimento sustenta a tese com argumento e evidência. A conclusão retoma a tese e indica uma saída — não repete o desenvolvimento. O erro mais comum é confundir dissertação com lista de informações sobre o tema.\\n\\nConectivos essenciais: primeiramente / em segundo lugar (organiza a progressão) · por exemplo / como pode ser observado (ancora no concreto) · portanto / em conclusão (fecha o argumento)",
+        "sketch": "INTRODUÇÃO:\\n[APRESENTAÇÃO DO TEMA — o que é, por que importa agora.]\\n[TESE — a posição que será defendida. Uma frase clara.]\\n\\nDESENVOLVIMENTO 1:\\n[ARGUMENTO — sustenta a tese com razão ou evidência.]\\n[EXEMPLO OU DADO — concreto, não genérico.]\\n\\nDESENVOLVIMENTO 2:\\n[SEGUNDO ARGUMENTO — diferente do primeiro, não repetição.]\\n\\nCONCLUSÃO:\\n[RETOMADA DA TESE — com as palavras do desenvolvimento, não as da introdução.]\\n[SAÍDA — uma implicação ou proposta. Não resumo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Dissertação escolar tem uma lógica própria.",
+          "body": "Guia para provas e trabalhos escolares com tese, argumentos, evidência e conclusão coerente.",
+          "primary": "Criar dissertação escolar"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Dissertação escolar: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Dissertação funciona quando técnica, público e voz trabalham juntos.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Este texto defende que [tese], pois [argumento 1] e [argumento 2] mostram a importância de [tema]."
+      }
+    },
+    {
+      "id": "resumo-resenha",
+      "oficio": "estudo-vestibular",
+      "label": "Resumo e resenha",
+      "icon": "rate_review",
+      "title": "Resumo e resenha",
+      "kind": "Resumo e resenha",
+      "chapter": "Síntese e crítica",
+      "description": "Guia para resumir com fidelidade e resenhar com avaliação crítica clara.",
+      "guidance": {
+        "meta": [
+          "Síntese",
+          "Fidelidade",
+          "Avaliação",
+          "Referência"
+        ],
+        "sections": [
+          [
+            "Identificação da obra",
+            "Título, autoria, contexto e tema geral em poucas linhas."
+          ],
+          [
+            "Síntese fiel",
+            "Explique as ideias principais sem opinar ainda."
+          ],
+          [
+            "Estrutura",
+            "Como o texto se organiza: partes, movimentos, progressão."
+          ],
+          [
+            "Avaliação crítica",
+            "O que a obra faz bem e onde há limite ou tensão."
+          ],
+          [
+            "Relevância",
+            "Para que leitor ou debate essa obra importa?"
+          ]
+        ],
+        "reminders": [
+          "Resumo é fiel, não inventa.",
+          "Resenha diferencia síntese de opinião.",
+          "Evidência vem da própria obra."
+        ],
+        "blueprint": "RESUMO E RESENHA\\n\\nResumo diz o que a obra faz. Resenha diz o que a obra vale.\\n\\nResumo: síntese fiel, sem opinião, sem omissão de partes essenciais. Resenha: apresenta, resume brevemente e avalia — com critério explícito. O resenhista precisa dizer por que a obra funciona ou falha: não basta gostar ou não gostar. Repertório na resenha serve para posicionar a obra dentro de um campo — não para exibir leitura.\\n\\nConectivos do resumo: primeiramente / em seguida / por fim (fidelidade à estrutura da obra) · o autor argumenta que / a obra defende (atribuição que preserva a voz original)\\nConectivos da resenha: no entanto / apesar disso (avaliação crítica) · ao contrário de [OUTRA OBRA] (posicionamento no campo)",
+        "sketch": "OBRA: [TÍTULO] — [AUTOR] ([ANO])\\n\\nRESUMO:\\n[O QUE A OBRA FAZ — tese central, estrutura, principais argumentos. Sem opinião.]\\n\\nRESENHA:\\n[AVALIAÇÃO — o que funciona, o que falha, por quê. Com critério explícito.]\\n[REPERTÓRIO — onde esta obra se posiciona dentro do campo.]\\n[PARA QUEM — quem deveria ler e por qual razão.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Resumo e resenha tem uma lógica própria.",
+          "body": "Guia para resumir com fidelidade e resenhar com avaliação crítica clara.",
+          "primary": "Criar resumo e resenha"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Resumo e resenha: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Resumo e resenha funciona quando técnica, público e voz trabalham juntos.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "A obra [título], de [autor], apresenta [tema central]. Sua principal contribuição está em [avaliação crítica]."
+      }
+    },
+    {
+      "id": "interpretacao-literaria",
+      "oficio": "estudo-vestibular",
+      "label": "Interpretação literária",
+      "icon": "search",
+      "title": "Interpretação literária",
+      "kind": "Interpretação literária",
+      "chapter": "Texto e evidência",
+      "description": "Guia para analisar textos literários e responder questões com evidência do próprio texto.",
+      "guidance": {
+        "meta": [
+          "Literatura",
+          "Análise",
+          "Evidência",
+          "Resposta"
+        ],
+        "sections": [
+          [
+            "Primeira leitura",
+            "O que acontece no texto? Quem fala? Qual situação?"
+          ],
+          [
+            "Elementos formais",
+            "Voz, imagem, tempo, espaço, tom, ritmo, escolha de palavras."
+          ],
+          [
+            "Evidências do texto",
+            "Trechos concretos que sustentam a interpretação."
+          ],
+          [
+            "Hipótese de leitura",
+            "Qual interpretação você defende com base nas evidências?"
+          ],
+          [
+            "Resposta argumentativa",
+            "Texto curto que explica como o sentido é construído."
+          ]
+        ],
+        "reminders": [
+          "A leitura nasce do texto, não de opinião solta.",
+          "Não confunda autor com narrador automaticamente.",
+          "Contexto ilumina, não substitui a análise."
+        ],
+        "blueprint": "INTERPRETAÇÃO LITERÁRIA\\n\\nO texto diz mais do que as palavras — a análise vai até o que não está explícito.\\n\\nInterpretação começa na observação: o que o texto faz, não o que ele 'quer dizer'. Escolhas formais (narrador, tempo verbal, ponto de vista, ritmo) são significado, não ornamento. O contexto histórico e biográfico ilumina — mas não determina: o texto responde por si. Análise sem citação é impressão; citação sem análise é resumo.\\n\\nConectivos analíticos: ao usar [RECURSO], o autor (conecta forma e sentido) · isso sugere / isso indica (interpretação fundamentada, não afirmação absoluta) · no entanto, é possível ler (abertura para segunda leitura)",
+        "sketch": "TEXTO: [TÍTULO] — [AUTOR]\\n\\nOBSERVAÇÃO: [O QUE O TEXTO FAZ — escolha formal específica, não tema geral.]\\n\\nCITAÇÃO: \\"[TRECHO RELEVANTE]\\" ([LINHA / PARÁGRAFO])\\n\\nANÁLISE: [O QUE ESSA ESCOLHA PRODUZ — efeito de sentido, tom, perspectiva.]\\n\\nCONTEXTO: [O QUE O CONTEXTO HISTÓRICO OU BIOGRÁFICO ILUMINA — sem determinar.]\\n\\nINTERPRETAÇÃO: [O QUE O TEXTO DIZ ALÉM DO EXPLÍCITO.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Interpretação literária tem uma lógica própria.",
+          "body": "Guia para analisar textos literários e responder questões com evidência do próprio texto.",
+          "primary": "Criar interpretação literária"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Interpretação literária: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Interpretação funciona quando técnica, público e voz trabalham juntos.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "O recurso de [figura/voz/imagem] revela [efeito de sentido], pois o trecho [evidência] indica [interpretação]."
+      }
+    },
+    {
+      "id": "revisao-gramatical",
+      "oficio": "estudo-vestibular",
+      "label": "Revisão gramatical",
+      "icon": "fact_check",
+      "title": "Revisão gramatical",
+      "kind": "Revisão gramatical",
+      "chapter": "C-01 sem tropeços",
+      "description": "Guia para revisar concordância, regência, crase, pontuação, acentuação e informalidade.",
+      "guidance": {
+        "meta": [
+          "Norma padrão",
+          "C-01",
+          "Revisão",
+          "Clareza"
+        ],
+        "sections": [
+          [
+            "Concordância",
+            "Sujeito-verbo e nome-adjetivo: trechos a conferir."
+          ],
+          [
+            "Regência e crase",
+            "Verbos que pedem preposição; casos de crase."
+          ],
+          [
+            "Pontuação",
+            "Vírgula entre sujeito e verbo? Apostos, enumerações, períodos longos."
+          ],
+          [
+            "Coesão e clareza",
+            "Pronomes ambíguos, repetições, conectivos imprecisos."
+          ],
+          [
+            "Informalidade",
+            "Gírias, contrações, registros que quebram a norma culta."
+          ]
+        ],
+        "reminders": [
+          "Corrija verbos primeiro, depois pontuação.",
+          "A correção não deve apagar a voz do texto.",
+          "Informalidade vira ponto perdido na C-01."
+        ],
+        "blueprint": "REVISÃO GRAMATICAL\\n\\nRevisar não é corrigir — é adequar ao que o texto quer ser.\\n\\nA norma culta serve à comunicação: regra sem função não é revisão, é pedantismo. Prioridade: concordância, regência, pontuação e coesão. Segundo nível: ortografia, crase e uso de pronomes. Cada intervenção precisa de razão: o revisor explica, não apenas corrige.\\n\\nPontos críticos: concordância verbal e nominal · regência de verbos (assistir a, visar a, obedecer a) · vírgula antes de 'que' relativo restritivo (proibida) · crase antes de pronomes demonstrativos (essa, aquela) · uso de 'há' vs 'a' para tempo",
+        "sketch": "TEXTO PARA REVISAR:\\n[COLE O TEXTO AQUI]\\n\\nPRIORIDADE 1 — Concordância:\\n[ ] Verbal: sujeito e verbo concordam?\\n[ ] Nominal: substantivo, adjetivo e artigo concordam?\\n\\nPRIORIDADE 2 — Regência:\\n[ ] Verbos de regência específica estão corretos?\\n\\nPRIORIDADE 3 — Pontuação:\\n[ ] Vírgula antes de 'que' restritivo (deve ser removida)?\\n[ ] Vocativo isolado por vírgulas?\\n\\nPRIORIDADE 4 — Coesão:\\n[ ] Pronomes têm referente claro?"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Revisão gramatical tem uma lógica própria.",
+          "body": "Guia para revisar concordância, regência, crase, pontuação, acentuação e informalidade.",
+          "primary": "Criar revisão gramatical"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Revisão gramatical: matriz ENEM, cartilhas oficiais e práticas de pré-vestibular brasileiro.",
+        "why": "Revisão funciona quando técnica, público e voz trabalham juntos.",
+        "references": [
+          "Matriz ENEM",
+          "Cartilhas do Inep",
+          "Fuvest",
+          "Unicamp",
+          "Professores de redação"
+        ],
+        "placeholder": "Revise primeiro os verbos, depois a pontuação, depois as retomadas. A nota da forma costuma cair por acúmulo, não por um deslize isolado."
+      }
+    },
+    {
+      "id": "mapa-lancamento-editorial",
+      "oficio": "mercado-editorial",
+      "label": "Mapa de lançamento",
+      "icon": "rocket_launch",
+      "title": "Mapa de lançamento",
+      "kind": "Mapa de lançamento",
+      "chapter": "Da gaveta ao leitor",
+      "description": "Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.",
+      "guidance": {
+        "meta": [
+          "Lançamento",
+          "Estratégia",
+          "Autopublicação",
+          "Editoras"
+        ],
+        "sections": [
+          [
+            "Diagnóstico",
+            "O livro está em escrita, revisão, pronto para leitores beta ou pronto para submissão?"
+          ],
+          [
+            "Caminho",
+            "Independente, tradicional ou híbrido: cada rota muda custos, tempo, controle e distribuição."
+          ],
+          [
+            "Posicionamento",
+            "Gênero, público, comparáveis e promessa de leitura."
+          ],
+          [
+            "Ativos",
+            "Sinopse, bio, capa, página de venda, lista de leitores e material de lançamento."
+          ],
+          [
+            "Calendário",
+            "Pré-lançamento, abertura, semana decisiva e sustentação."
+          ]
+        ],
+        "reminders": [
+          "Publicar é projeto, não só botão.",
+          "A estratégia certa depende do livro e da vida do autor.",
+          "Marketing não substitui texto pronto."
+        ],
+        "blueprint": "MAPA DE LANÇAMENTO EDITORIAL\\n\\nUm livro sem plano de lançamento depende de sorte — e sorte não é estratégia.\\n\\nO lançamento começa 90 dias antes da publicação. Público-alvo definido antes de qualquer ação: quem compra este livro e onde ele está? Cada canal de divulgação tem sua lógica: imprensa, redes sociais, eventos e livrarias não são intercambiáveis. Orçamento realista antes de qualquer compromisso.\\n\\nFases: pré-lançamento (construir expectativa) · lançamento (concentrar energia na primeira semana) · pós-lançamento (sustentar visibilidade)",
+        "sketch": "LIVRO: [TÍTULO] — [AUTOR]\\nDATA DE LANÇAMENTO: [DATA]\\nPÚBLICO-ALVO: [QUEM COMPRA — específico, não \\"leitores em geral\\"]\\n\\nPRÉ-LANÇAMENTO (–90 a –1 dias):\\n[ ] [AÇÃO 1 — ARCs, trechos, resenhas antecipadas]\\n[ ] [AÇÃO 2 — construção de audiência]\\n\\nLANÇAMENTO (semana 1):\\n[ ] [EVENTO / LIVE / PRESENÇA]\\n[ ] [META DE VENDAS / VISIBILIDADE]\\n\\nPÓS-LANÇAMENTO:\\n[ ] [COMO SUSTENTAR POR 30 / 60 / 90 DIAS]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Mapa de lançamento tem uma lógica própria.",
+          "body": "Guia para transformar manuscrito em projeto de publicação, com decisão entre caminho independente e editorial.",
+          "primary": "Criar mapa de lançamento"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Mapa de lançamento: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "A clareza estratégica reduz ansiedade e evita gasto antes da hora.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Meu livro está em [fase]. O caminho mais coerente agora é [rota], porque [motivo]. Antes de lançar, preciso concluir [ativo 1], [ativo 2] e [ativo 3]."
+      }
+    },
+    {
+      "id": "autopublicacao-independente",
+      "oficio": "mercado-editorial",
+      "label": "Autopublicação independente",
+      "icon": "bolt",
+      "title": "Autopublicação independente",
+      "kind": "Autopublicação independente",
+      "chapter": "Controle e responsabilidade",
+      "description": "Guia para publicar por conta própria com revisão, capa, distribuição, preço, audiência e sustentação.",
+      "guidance": {
+        "meta": [
+          "Independente",
+          "KDP",
+          "POD",
+          "Audiência"
+        ],
+        "sections": [
+          [
+            "Texto editorial-ready",
+            "Revisão gramatical, revisão de estilo, leitores beta e edição profissional quando possível."
+          ],
+          [
+            "Capa e identidade",
+            "Capa como sinal de gênero e promessa comercial, legível também em miniatura."
+          ],
+          [
+            "Distribuição",
+            "E-book, impressão sob demanda, plataformas brasileiras e estratégia wide ou exclusiva."
+          ],
+          [
+            "Preço e lançamento",
+            "Pré-venda, preço inicial, janela de impulso e metas realistas."
+          ],
+          [
+            "Audiência",
+            "Newsletter, redes, leitores antecipados, resenhas e continuidade."
+          ]
+        ],
+        "reminders": [
+          "Autonomia cobra gestão.",
+          "Capa ruim derruba confiança antes da primeira página.",
+          "Anúncio amplifica livro que já tem promessa clara."
+        ],
+        "blueprint": "AUTOPUBLICAÇÃO INDEPENDENTE\\n\\nO autor é o editor — com todas as decisões e custos que isso implica.\\n\\nAutopublicação de qualidade exige os mesmos processos da edição tradicional: revisão profissional, diagramação, capa e ISBN. Plataformas de distribuição (Amazon KDP, Clube de Autores, Draft2Digital) têm modelos diferentes. Preço e royalty definem margem real: calcule antes de publicar. Marketing é responsabilidade do autor — planeje antes de lançar.\\n\\nCustos mínimos reais: revisão + capa + diagramação + ISBN. O que parece economizado em edição custa em credibilidade.",
+        "sketch": "PROJETO: [TÍTULO]\\nFORMATO: [ebook / impresso / ambos]\\nPLATAFORMA: [Amazon KDP / Clube de Autores / Draft2Digital / própria]\\n\\nINVESTIMENTO:\\nRevisão: R$ [VALOR]\\nCapa: R$ [VALOR]\\nDiagramação: R$ [VALOR]\\nISBN: R$ [VALOR — gratuito pela Biblioteca Nacional]\\n\\nPREÇO DE VENDA: R$ [VALOR]\\nROYALTY ESTIMADO: R$ [VALOR POR VENDA]\\nPONTO DE EQUILÍBRIO: [QUANTAS VENDAS COBREM O INVESTIMENTO]\\n\\nPLANO DE MARKETING: [3 AÇÕES CONCRETAS PRÉ-LANÇAMENTO]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Autopublicação independente tem uma lógica própria.",
+          "body": "Guia para publicar por conta própria com revisão, capa, distribuição, preço, audiência e sustentação.",
+          "primary": "Criar autopublicação independente"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Autopublicação independente: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "O autor independente precisa pensar como pequena editora.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Antes de subir o arquivo, vou validar texto, capa, descrição e preço. Só depois faz sentido convidar leitores e investir energia em divulgação."
+      }
+    },
+    {
+      "id": "submissao-editoras",
+      "oficio": "mercado-editorial",
+      "label": "Submissão a editoras",
+      "icon": "mark_email_read",
+      "title": "Submissão a editoras",
+      "kind": "Submissão a editoras",
+      "chapter": "Query e proposta",
+      "description": "Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras ou agentes.",
+      "guidance": {
+        "meta": [
+          "Editoras",
+          "Agentes",
+          "Query letter",
+          "Sinopse"
+        ],
+        "sections": [
+          [
+            "Manuscrito",
+            "Ficção costuma exigir texto completo e revisado; não ficção pode pedir proposta editorial."
+          ],
+          [
+            "Query",
+            "Pitch breve com gancho, premissa, público, comparáveis e bio pertinente."
+          ],
+          [
+            "Sinopse",
+            "Resumo de uma a duas páginas com arco completo, inclusive final."
+          ],
+          [
+            "Pesquisa",
+            "Editoras, agentes, catálogo, janelas de submissão e adequação do livro."
+          ],
+          [
+            "Acompanhamento",
+            "Planilha de envios, datas, respostas e versões."
+          ]
+        ],
+        "reminders": [
+          "Rejeição não é diagnóstico total da obra.",
+          "Não envie sem ler diretrizes.",
+          "Agente legítimo ganha quando o autor ganha."
+        ],
+        "blueprint": "SUBMISSÃO A EDITORAS\\n\\nCada editora tem uma porta — e submeter pela porta errada é não submeter.\\n\\nPesquise o catálogo antes de enviar: a editora que publica o que você escreveu. Sinopse é argumento de venda, não resumo: por que este livro, para quem, por que agora. A carta de apresentação revela o autor antes que o editor leia uma página. Guarde o arquivo exato enviado: versões divergentes em contratos são problemas reais.\\n\\nItens de uma submissão completa: carta de apresentação · sinopse (1 página) · amostra (primeiros capítulos ou completo) · bio do autor · informações de contato",
+        "sketch": "EDITORA: [NOME]\\nRAZÃO DA ESCOLHA: [POR QUE ESTA EDITORA — catálogo, linha editorial]\\n\\nCARTA DE APRESENTAÇÃO:\\n[TÍTULO], [GÊNERO], [NÚMERO DE PALAVRAS].\\n[O LIVRO EM 2 FRASES — o que acontece e por que importa.]\\n[POR QUE ESTA EDITORA — específico, não genérico.]\\n[QUEM É O AUTOR — relevante para este livro.]\\n\\nSINOPSE (1 página):\\n[PROTAGONISTA + CONFLITO + O QUE ESTÁ EM JOGO — sem spoiler do final]\\n\\nAMOSTRA: [CONFORME POLÍTICA DA EDITORA — leia antes de enviar]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Submissão a editoras tem uma lógica própria.",
+          "body": "Guia para preparar manuscrito, sinopse, proposta editorial e abordagem a editoras ou agentes.",
+          "primary": "Criar submissão a editoras"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Submissão a editoras: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "Submissão profissional é adequação de catálogo, clareza de pitch e paciência documentada.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Prezada equipe, apresento [título], um [gênero] de [tamanho] palavras, voltado a leitores de [comparáveis]. A obra acompanha [premissa] e investiga [tema]."
+      }
+    },
+    {
+      "id": "comparativo-publicacao",
+      "oficio": "mercado-editorial",
+      "label": "Comparativo de publicação",
+      "icon": "compare_arrows",
+      "title": "Comparativo de publicação",
+      "kind": "Comparativo de publicação",
+      "chapter": "Escolha de rota",
+      "description": "Guia para comparar independente, tradicional e híbrido por royalties, controle, tempo, custo e distribuição.",
+      "guidance": {
+        "meta": [
+          "Decisão",
+          "Royalties",
+          "Controle",
+          "Distribuição"
+        ],
+        "sections": [
+          [
+            "Royalties",
+            "Independente tende a pagar mais por unidade; editora paga menos, mas pode distribuir melhor."
+          ],
+          [
+            "Controle",
+            "Autor independente decide tudo; publicação tradicional divide decisões com equipe editorial."
+          ],
+          [
+            "Tempo",
+            "Independente pode sair em semanas; editoras podem levar anos."
+          ],
+          [
+            "Custo inicial",
+            "Independente banca revisão, capa e divulgação; editora assume produção."
+          ],
+          [
+            "Objetivo",
+            "Nicho, velocidade, prestígio, livrarias, prêmios ou carreira longa."
+          ]
+        ],
+        "reminders": [
+          "Não existe rota universalmente superior.",
+          "A mesma autora pode usar rotas diferentes em livros diferentes.",
+          "Decida pelo projeto, não pelo orgulho."
+        ],
+        "blueprint": "COMPARATIVO DE PUBLICAÇÃO\\n\\nAutopublicação vs publicação tradicional vs coedição — critérios reais, não ideologia.\\n\\nPublicação tradicional: editor assume custo e risco, author cede parte do controle criativo e recebe royalty menor. Autopublicação: autor assume custo e risco, controla tudo, recebe royalty maior por venda, mas vende menos sem estrutura. Coedição: autor co-financia e co-decide — modelos variam muito, leia o contrato antes do entusiasmo.\\n\\nPerguntas que decidem: você tem audiência própria? O livro tem apelo de mercado ou nicho muito específico? Você tem capital para investir sem retorno garantido? Você quer controle criativo total ou prefere uma equipe editorial?",
+        "sketch": "LIVRO: [TÍTULO] — [GÊNERO] — [PÚBLICO]\\n\\nPUBLICAÇÃO TRADICIONAL:\\nPrós: [sem custo / distribuição / credibilidade]\\nContras: [longo prazo / perda de controle / royalty baixo]\\nAdequado se: [CRITÉRIO]\\n\\nAUTOPUBLICAÇÃO:\\nPrós: [controle / royalty maior / velocidade]\\nContras: [investimento / marketing próprio / credibilidade a construir]\\nAdequado se: [CRITÉRIO]\\n\\nDECISÃO: [QUAL E POR QUÊ — com base nos critérios acima]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Comparativo de publicação tem uma lógica própria.",
+          "body": "Guia para comparar independente, tradicional e híbrido por royalties, controle, tempo, custo e distribuição.",
+          "primary": "Criar comparativo de publicação"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Comparativo de publicação: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "Comparar rotas torna a decisão menos romântica e mais honesta.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Para este livro, eu valorizo mais [critério] do que [critério]. Por isso, a rota mais coerente neste momento é [rota]."
+      }
+    },
+    {
+      "id": "checklist-lancamento",
+      "oficio": "mercado-editorial",
+      "label": "Checklist de lançamento",
+      "icon": "checklist",
+      "title": "Checklist de lançamento",
+      "kind": "Checklist de lançamento",
+      "chapter": "Antes de publicar",
+      "description": "Guia para checar manuscrito, capa, ISBN, sinopse, leitores antecipados, preço e comunicação.",
+      "guidance": {
+        "meta": [
+          "Checklist",
+          "Pré-lançamento",
+          "ISBN",
+          "Leitores beta"
+        ],
+        "sections": [
+          [
+            "Qualidade",
+            "Texto completo, revisão, leitura crítica e última conferência de arquivo."
+          ],
+          [
+            "Objeto",
+            "Capa, miolo, ISBN, ficha quando aplicável e arquivos finais."
+          ],
+          [
+            "Venda",
+            "Sinopse de quarta capa, página de venda, categorias, palavras-chave e preço."
+          ],
+          [
+            "Prova social",
+            "Leitores antecipados, resenhas honestas e contatos de imprensa ou comunidade."
+          ],
+          [
+            "Psicologia",
+            "Preparar-se para crítica, silêncio, ajustes e continuidade."
+          ]
+        ],
+        "reminders": [
+          "Checklist existe para baixar a febre da ansiedade.",
+          "Não lance para compensar cansaço.",
+          "Depois do lançamento ainda existe trabalho."
+        ],
+        "blueprint": "CHECKLIST DE LANÇAMENTO\\n\\nO que precisa estar pronto antes de o livro estar disponível.\\n\\nChecklist de lançamento não começa no dia do lançamento — começa 90 dias antes. Cada item tem prazo real: 'em breve' não é prazo. ISBN, depósito legal e registro de direito autoral têm processos com tempo mínimo. Distribuidoras têm lead time: livro impresso leva semanas para chegar às livrarias.",
+        "sketch": "LIVRO: [TÍTULO]\\nLANÇAMENTO: [DATA]\\n\\n–90 DIAS:\\n[ ] Revisão final entregue\\n[ ] Capa aprovada\\n[ ] ISBN solicitado (gratuito — Biblioteca Nacional)\\n[ ] Depósito legal agendado\\n\\n–30 DIAS:\\n[ ] Arquivo enviado para gráfica ou plataforma digital\\n[ ] Página de pré-venda ativa\\n[ ] ARCs enviados para resenhistas\\n\\n–7 DIAS:\\n[ ] Evento de lançamento confirmado\\n[ ] Materiais de divulgação prontos\\n\\nDIA DO LANÇAMENTO:\\n[ ] Disponível nas plataformas combinadas\\n[ ] Primeiro conteúdo de divulgação publicado"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Checklist de lançamento tem uma lógica própria.",
+          "body": "Guia para checar manuscrito, capa, ISBN, sinopse, leitores antecipados, preço e comunicação.",
+          "primary": "Criar checklist de lançamento"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Checklist de lançamento: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "O lançamento ganha força quando as partes invisíveis foram resolvidas antes.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Meu livro só entra em lançamento quando texto, capa, sinopse, página de venda e lista de leitores estiverem minimamente testados."
+      }
+    },
+    {
+      "id": "mentalidade-autor-publicado",
+      "oficio": "mercado-editorial",
+      "label": "Mentalidade de autor",
+      "icon": "psychology",
+      "title": "Mentalidade de autor",
+      "kind": "Mentalidade de autor",
+      "chapter": "Coragem prática",
+      "description": "Guia para lidar com perfeccionismo, rejeição, marketing, audiência e continuidade de carreira.",
+      "guidance": {
+        "meta": [
+          "Carreira",
+          "Rejeição",
+          "Marketing",
+          "Continuidade"
+        ],
+        "sections": [
+          [
+            "Perfeccionismo",
+            "Livro publicado aprende com o mundo; livro perfeito imaginário não encontra leitor."
+          ],
+          [
+            "Rejeição",
+            "Um não pode ser catálogo, momento, mercado ou encaixe, não sentença sobre talento."
+          ],
+          [
+            "Audiência",
+            "Plataforma nasce de relação contínua, não de número vazio."
+          ],
+          [
+            "Marketing",
+            "Divulgação é ponte entre voz e leitor certo."
+          ],
+          [
+            "Ritmo",
+            "Carreira literária é biblioteca, não evento único."
+          ]
+        ],
+        "reminders": [
+          "Coragem não elimina medo.",
+          "Crítica negativa faz parte da vida pública do livro.",
+          "A próxima obra também é estratégia."
+        ],
+        "blueprint": "MENTALIDADE DE AUTOR PUBLICADO\\n\\nPublicar é o começo, não o fim — e rejeição é dado, não sentença.\\n\\nO processo editorial é longo: meses entre submissão e resposta, anos entre contrato e lançamento. Rejeição é parte do processo — não da qualidade do livro. Autores publicados submetem para múltiplas editoras simultaneamente (salvo quando a política é exclusividade). A obra publicada pertence ao leitor — o que o autor queria dizer importa menos do que o que o texto faz.\\n\\nO que ninguém te conta: a maioria dos avanços não paga o tempo investido. A segunda obra é mais difícil de publicar que a primeira. Marketing é responsabilidade do autor mesmo na publicação tradicional.",
+        "sketch": "CRENÇA QUE ME TRAVA: [IDENTIFIQUE — medo de rejeição, síndrome do impostor, perfeccionismo]\\n\\nO QUE É VERDADE SOBRE ISSO: [A realidade, não a catástrofe.]\\n\\nO QUE AUTORES PUBLICADOS FAZEM DIFERENTE:\\n[ ] Submetem mesmo sem certeza\\n[ ] Continuam escrevendo a próxima obra enquanto a anterior circula\\n[ ] Tratam rejeição como informação, não como identidade\\n[ ] Constroem audiência antes de precisar dela\\n\\nPRÓXIMA AÇÃO CONCRETA: [UMA COISA — não uma lista]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Mentalidade de autor tem uma lógica própria.",
+          "body": "Guia para lidar com perfeccionismo, rejeição, marketing, audiência e continuidade de carreira.",
+          "primary": "Criar mentalidade de autor"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Mentalidade de autor: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "A técnica precisa de uma psicologia capaz de executar.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Meu livro não precisa provar minha existência inteira. Ele precisa encontrar seus leitores possíveis e me ensinar a publicar melhor o próximo."
+      }
+    },
+    {
+      "id": "publicar-kdp",
+      "oficio": "mercado-editorial",
+      "label": "Publicar no Amazon KDP",
+      "icon": "rocket_launch",
+      "title": "Publicar no Amazon KDP",
+      "kind": "Projeto KDP",
+      "chapter": "Pronto para publicar",
+      "editorMode": "kdp",
+      "description": "Tudo que você precisa para publicar seu livro no Kindle Direct Publishing — do título à precificação, com checklist de envio.",
+      "guidance": {
+        "meta": [
+          "KDP",
+          "Amazon",
+          "Autopublicação",
+          "ePub"
+        ],
+        "sections": [
+          [
+            "O livro",
+            "Título definitivo, subtítulo (opcional mas recomendado), nome do autor como vai aparecer no KDP e nome da série se for uma."
+          ],
+          [
+            "A sinopse",
+            "O texto da contracapa — 400 a 800 caracteres. É a sua venda. Começa com o gancho, apresenta o conflito, termina com a promessa sem spoiler."
+          ],
+          [
+            "Palavras-chave",
+            "7 palavras-chave para indexação na Amazon. Pense no que sua leitora digita quando procura um livro como o seu."
+          ],
+          [
+            "Categorias",
+            "Escolha 2 categorias BISAC. Para romance: Fiction > Romance > Contemporary. Para fantasia: Fiction > Fantasy > Romantic."
+          ],
+          [
+            "Precificação",
+            "R$9,99 para iniciantes no KU (Kindle Unlimited). R$14,99 para quem tem catálogo. Acima de R$9,99 e abaixo de R$199,99 dá 70% de royalties."
+          ],
+          [
+            "Checklist final",
+            "Revisão concluída, capa com as dimensões corretas (2560×1600px), ISBN (opcional para ebooks), conta KDP ativa com dados bancários."
+          ]
+        ],
+        "reminders": [
+          "A sinopse no KDP é o que vende o livro — invista tanto tempo nela quanto num capítulo.",
+          "Palavras-chave de nicho convertem mais que termos genéricos: 'romance fantasy com magia' > 'romance'.",
+          "Kindle Unlimited exige exclusividade por 90 dias mas dá visibilidade enorme para quem está começando.",
+          "A capa é responsável por 80% da decisão de compra. Não publique com capa amadora."
+        ],
+        "blueprint": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\\n\\n═══ IDENTIDADE DO LIVRO ═══\\n\\nTítulo: \\nSubtítulo: \\nNome do autor(a): \\nSérie (se houver): \\nVolume: \\n\\n═══ SINOPSE (400–800 caracteres) ═══\\n\\n[Gancho: situação que cria tensão ou curiosidade imediata]\\n\\n[Conflito: o que está em jogo para a protagonista]\\n\\n[Promessa: o que o leitor vai sentir — sem spoiler do final]\\n\\n═══ PALAVRAS-CHAVE (7 no máximo) ═══\\n\\n1. \\n2. \\n3. \\n4. \\n5. \\n6. \\n7. \\n\\n═══ CATEGORIAS ═══\\n\\nPrincipal: \\nSecundária: \\n\\n═══ PRECIFICAÇÃO ═══\\n\\nPreço em R$: \\nKindle Unlimited (exclusividade 90 dias): [ ] Sim  [ ] Não\\nMotivo: \\n\\n═══ CHECKLIST FINAL ═══\\n\\n[ ] Revisão completa (sem erros gramaticais visíveis)\\n[ ] Capa criada (2560×1600px, JPEG ou TIFF)\\n[ ] Conta KDP com dados bancários cadastrados\\n[ ] ISBN (opcional — KDP oferece gratuito)\\n[ ] Manuscrito exportado em ePub ou DOCX\\n[ ] Prévia aprovada no KDP Previewer\\n[ ] Página do livro revisada antes de publicar\\n\\n═══ SOBRE A AUTORA (para o final do livro) ═══\\n\\n[Texto de 100–200 palavras em primeira pessoa. Onde encontrar você nas redes. Próximos lançamentos.]\\n\\n═══ LINKS ÚTEIS ═══\\n\\nKDP: kdp.amazon.com\\nKDP Previewer: kdp.amazon.com/en_US/help/topic/G202131170\\nBISAC categories: bisg.org/page/bisac-subject-codes-list",
+        "sketch": "# [TÍTULO DO LIVRO]\\n## [Subtítulo se houver]\\n\\n*por [Nome da Autora]*\\n\\n---\\n\\n### Sinopse\\n\\n[Seu gancho aqui — a primeira frase que faz a leitora querer saber mais.]\\n\\n[O conflito central em 2-3 frases.]\\n\\n[A promessa emocional — sem spoiler.]\\n\\n---\\n\\n[Aqui começa o conteúdo do livro]\\n\\n---\\n\\n### Sobre a autora\\n\\n[Sua bio curta aqui.]\\n\\n*Siga no Instagram: @*  \\n*Próximo lançamento: *"
+      },
+      "steps": [
+        {
+          "eyebrow": "Publicação independente",
+          "title": "Seu livro pode estar na Amazon esta semana.",
+          "body": "O Kindle Direct Publishing é gratuito e paga até 70% de royalties. Este guia te leva do manuscrito pronto ao botão de publicar — passo a passo, sem surpresas técnicas.",
+          "primary": "Começar o projeto KDP",
+          "secondary": "Como funciona o KDP"
+        },
+        {
+          "eyebrow": "A estrutura do projeto",
+          "title": "Seis partes. Uma publicação.",
+          "body": "Identidade do livro, sinopse, palavras-chave, categorias, precificação e checklist final. Preencha cada parte e o projeto estará pronto para gerar o arquivo e publicar.",
+          "items": [
+            [
+              "Identidade",
+              "Título, subtítulo, autora, série — como aparece na Amazon.",
+              "done"
+            ],
+            [
+              "Sinopse",
+              "400–800 caracteres que vendem o livro. Gancho, conflito, promessa.",
+              "done"
+            ],
+            [
+              "Palavras-chave",
+              "7 termos que sua leitora digita para encontrar livros como o seu.",
+              "done"
+            ],
+            [
+              "Categorias",
+              "2 categorias BISAC — onde seu livro vai aparecer nos resultados.",
+              "done"
+            ],
+            [
+              "Precificação",
+              "R$9,99 para estrear no KU. 70% de royalties acima de R$9,99.",
+              "done"
+            ],
+            [
+              "Checklist",
+              "Capa, ISBN, conta bancária, prévia aprovada. Tudo conferido.",
+              "done"
+            ]
+          ],
+          "primary": "Criar projeto KDP"
+        }
+      ],
+      "text": "PROJETO DE PUBLICAÇÃO — KINDLE DIRECT PUBLISHING\\n\\n━━━ IDENTIDADE DO LIVRO ━━━\\n\\nTítulo:\\nSubtítulo (opcional):\\nNome da autora/autor (como aparece na Amazon):\\nSérie (se houver):\\nVolume:\\n\\n\\n━━━ SINOPSE (400–800 caracteres) ━━━\\n\\n[Gancho — a primeira frase que cria curiosidade ou tensão:]\\n\\n\\n[Conflito central — o que está em jogo para a protagonista:]\\n\\n\\n[Promessa emocional — o que a leitora vai sentir (sem spoiler do final):]\\n\\n\\n━━━ PALAVRAS-CHAVE ━━━\\n\\nPense no que sua leitora digita quando procura um livro como o seu.\\n\\n1.\\n2.\\n3.\\n4.\\n5.\\n6.\\n7.\\n\\n\\n━━━ CATEGORIAS ━━━\\n\\nPrincipal:\\nSecundária:\\n\\nExemplos comuns:\\n• Romance contemporâneo → Fiction > Romance > Contemporary\\n• Fantasia romântica → Fiction > Fantasy > Romantic\\n• Suspense psicológico → Fiction > Thrillers > Psychological\\n\\n\\n━━━ PRECIFICAÇÃO ━━━\\n\\nPreço em R$:\\nKindle Unlimited (exclusividade por 90 dias): [ ] Sim  [ ] Não\\n\\nReferência: acima de R$9,99 e abaixo de R$199,99 = 70% de royalties.\\nPara estrear: R$9,99–R$12,99 no KU gera mais downloads e reviews iniciais.\\n\\n\\n━━━ CHECKLIST FINAL ━━━\\n\\n[ ] Revisão completa — sem erros gramaticais visíveis\\n[ ] Capa criada — 2560×1600 pixels, JPEG ou TIFF\\n[ ] Conta KDP ativa — com dados bancários cadastrados\\n[ ] ISBN — opcional (o KDP oferece um gratuito)\\n[ ] Manuscrito exportado — ePub ou DOCX limpo\\n[ ] Prévia aprovada no KDP Previewer antes de publicar\\n[ ] Página do livro revisada — título, sinopse, categorias confirmados\\n\\n\\n━━━ SOBRE A AUTORA ━━━\\n\\n[Texto de 100–200 palavras em primeira pessoa.\\nOnde encontrar você: Instagram, Wattpad, site.]\\n\\nPróximo lançamento:\\n\\n\\n━━━ LINKS DE APOIO ━━━\\n\\nKDP: kdp.amazon.com\\nPreviewer: kdp.amazon.com/pt_BR/help/topic/G202131170\\nCategorias BISAC: bisg.org/page/bisac-subject-codes-list\\nPreços por gênero: kdp.amazon.com/pt_BR/help/topic/G201541130"
+    },
+    {
+      "id": "anatomia-fisica-livro",
+      "oficio": "objeto-livro",
+      "label": "Partes físicas do livro",
+      "icon": "view_in_ar",
+      "title": "Partes físicas do livro",
+      "kind": "Partes físicas do livro",
+      "chapter": "Capa, lombada e miolo",
+      "description": "Guia para entender capa, contracapa, lombada, orelhas, guardas, corte e miolo como arquitetura de leitura.",
+      "guidance": {
+        "meta": [
+          "Objeto livro",
+          "Capa",
+          "Lombada",
+          "Miolo"
+        ],
+        "sections": [
+          [
+            "Capa",
+            "Frente visual do livro: promessa, gênero, autoria e reconhecimento."
+          ],
+          [
+            "Contracapa",
+            "Espaço de sinopse, prova social, código de barras e argumento de venda."
+          ],
+          [
+            "Lombada",
+            "Identificação na estante: título, autor e marca editorial."
+          ],
+          [
+            "Orelhas e guardas",
+            "Transição entre embalagem, contexto e entrada na obra."
+          ],
+          [
+            "Corte e miolo",
+            "As bordas e o conjunto de páginas que sustentam a experiência física."
+          ]
+        ],
+        "reminders": [
+          "Nada no objeto livro é neutro.",
+          "A capa conversa com gênero antes de conversar com gosto pessoal.",
+          "A lombada é a vitrine quando o livro está na estante."
+        ],
+        "blueprint": "PARTES FÍSICAS DO LIVRO\\n\\nCada parte do livro tem nome, função e posição — e editores esperam que o autor saiba.\\n\\nA capa comunica antes de qualquer palavra: gênero, público e posicionamento. A lombada é o único elemento visível na prateleira. A quarta capa vende para quem já pegou o livro na mão. As páginas de abertura (rosto, créditos, dedicatória) definem o tom antes do capítulo 1.",
+        "sketch": "CAPA:\\nTítulo: []\\nSubtítulo: [se houver]\\nAutor: []\\nElemento visual: []\\n\\nLOMBADA: [TÍTULO ABREVIADO + AUTOR + EDITORA]\\n\\nQUARTA CAPA:\\n[SINOPSE — 3 a 5 linhas. Prende, não resume.]\\n[DEPOIMENTO OU SELOS — se houver]\\nISBN + código de barras: []\\n\\nPÁGINAS DE ABERTURA:\\nFalsa folha de rosto: [TÍTULO]\\nFolha de rosto: [TÍTULO + AUTOR + EDITORA]\\nFicha catalográfica: [verso da folha de rosto — obrigatória]\\nDedicatória: []\\nEpígrafe: []"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Partes físicas do livro tem uma lógica própria.",
+          "body": "Guia para entender capa, contracapa, lombada, orelhas, guardas, corte e miolo como arquitetura de leitura.",
+          "primary": "Criar partes físicas do livro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Partes físicas do livro: anatomia editorial, produção gráfica e design de livros.",
+        "why": "Conhecer o objeto ajuda o escritor a pensar leitura, venda e produção.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "A capa promete [experiência]. A lombada identifica [obra/autoria]. A contracapa convence o leitor de que [benefício de leitura]."
+      }
+    },
+    {
+      "id": "miolo-pre-pos-texto",
+      "oficio": "objeto-livro",
+      "label": "Miolo, pré e pós-texto",
+      "icon": "chrome_reader_mode",
+      "title": "Miolo, pré e pós-texto",
+      "kind": "Miolo, pré e pós-texto",
+      "chapter": "Arquitetura interna",
+      "description": "Guia para organizar pré-texto, corpo da obra e pós-texto de livros literários, técnicos ou acadêmicos.",
+      "guidance": {
+        "meta": [
+          "Miolo",
+          "Pré-texto",
+          "Texto",
+          "Pós-texto"
+        ],
+        "sections": [
+          [
+            "Pré-texto",
+            "Falsa folha de rosto, folha de rosto, ficha, dedicatória, epígrafe, sumário e apresentação."
+          ],
+          [
+            "Texto",
+            "Capítulos, partes, seções, cenas e progressão principal da obra."
+          ],
+          [
+            "Pós-texto",
+            "Epílogo, posfácio, notas, glossário, referências, índice, sobre o autor e colofão."
+          ],
+          [
+            "Recto e verso",
+            "Páginas ímpares ficam à direita; aberturas importantes costumam começar nelas."
+          ],
+          [
+            "Fólio",
+            "Numeração e títulos correntes como orientação silenciosa de leitura."
+          ]
+        ],
+        "reminders": [
+          "A ordem do miolo guia a travessia do leitor.",
+          "Nem todo livro precisa de todos os elementos.",
+          "Páginas protocolares também constroem autoridade."
+        ],
+        "blueprint": "MIOLO, PRÉ E PÓS-TEXTO\\n\\nA estrutura interna do livro segue normas que facilitam a leitura e o registro.\\n\\nPré-texto: tudo antes do capítulo 1 — sumário, apresentação, prefácio, lista de abreviaturas. Miolo: o conteúdo principal — organizado em partes, capítulos ou seções. Pós-texto: referências, glossário, índice, apêndices — tudo que serve ao leitor depois da leitura. Numeração de páginas: pré-texto em romano, miolo em arábico a partir da introdução.",
+        "sketch": "PRÉ-TEXTO:\\n[ ] Sumário\\n[ ] Apresentação ou Prefácio (quem escreve: autor ou outro)\\n[ ] Lista de abreviaturas (se necessário)\\n\\nMIOLO:\\n[ ] Estrutura: [partes / capítulos / seções]\\n[ ] Numeração: começa em qual página?\\n[ ] Cabeçalho: [título do capítulo / nome do autor]\\n\\nPÓS-TEXTO:\\n[ ] Referências (obrigatório se o texto cita fontes)\\n[ ] Glossário (termos que o leitor pode não conhecer)\\n[ ] Índice remissivo (para não ficção densa)\\n[ ] Apêndices (material complementar do autor)"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Miolo, pré e pós-texto tem uma lógica própria.",
+          "body": "Guia para organizar pré-texto, corpo da obra e pós-texto de livros literários, técnicos ou acadêmicos.",
+          "primary": "Criar miolo, pré e pós-texto"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Miolo, pré e pós-texto: anatomia editorial, produção gráfica e design de livros.",
+        "why": "A arquitetura interna decide como o leitor entra, atravessa e sai do livro.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "Este livro terá [pré-textos], seguido por [estrutura do corpo] e encerrado com [pós-textos], porque o leitor precisa de [função]."
+      }
+    },
+    {
+      "id": "ritos-entrada-livro",
+      "oficio": "objeto-livro",
+      "label": "Ritos de entrada",
+      "icon": "meeting_room",
+      "title": "Ritos de entrada",
+      "kind": "Ritos de entrada",
+      "chapter": "Antes do capítulo 1",
+      "description": "Guia para folha de rosto, ficha catalográfica, dedicatória, epígrafe, agradecimentos, sumário e prefácio.",
+      "guidance": {
+        "meta": [
+          "Pré-texto",
+          "Epígrafe",
+          "Sumário",
+          "Prefácio"
+        ],
+        "sections": [
+          [
+            "Folha de rosto",
+            "Certidão de nascimento da obra: título, autor, editora e edição."
+          ],
+          [
+            "Verso da folha",
+            "Direitos, ISBN, ficha catalográfica e dados de publicação."
+          ],
+          [
+            "Dedicatória",
+            "Gesto breve e íntimo, geralmente em página própria."
+          ],
+          [
+            "Epígrafe",
+            "Frase que abre uma frequência de leitura."
+          ],
+          [
+            "Sumário e prefácio",
+            "Mapa e porta de entrada crítica ou afetiva."
+          ]
+        ],
+        "reminders": [
+          "Epígrafe não é decoração: ela afina o ouvido.",
+          "Prefácio assinado por terceiro muda a autoridade de entrada.",
+          "Sumário precisa ser útil, não apenas bonito."
+        ],
+        "blueprint": "RITOS DE ENTRADA\\n\\nAs primeiras páginas do livro são a primeira experiência do leitor — antes do capítulo 1.\\n\\nFolha de guarda: página que cola a capa ao miolo — silêncio antes da imersão. Folha de rosto: título, autor, editora — a certidão do livro. Ficha catalográfica: ISBN, CDD, dados de catalogação — obrigatória no verso da folha de rosto. Dedicatória e epígrafe: opcionais, mas cada um revela algo sobre a obra antes de ela começar.",
+        "sketch": "FOLHA DE GUARDA: [em branco ou com elemento visual]\\n\\nFOLHA DE ROSTO:\\nTítulo: []\\nSubtítulo: []\\nAutor: []\\nEditora: [] · Cidade: [] · Ano: []\\n\\nFICHA CATALOGRÁFICA (verso):\\n[Gerada pela Biblioteca Nacional ou bibliotecário habilitado]\\n\\nDEDICATÓRIA:\\n[A quem — e por quê, se o autor quiser que o leitor saiba]\\n\\nEPÍGRAFE:\\n\\"[CITAÇÃO]\\" — [AUTOR, OBRA]\\n[A epígrafe é uma lente para o livro inteiro. Escolha com cuidado.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Ritos de entrada tem uma lógica própria.",
+          "body": "Guia para folha de rosto, ficha catalográfica, dedicatória, epígrafe, agradecimentos, sumário e prefácio.",
+          "primary": "Criar ritos de entrada"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Ritos de entrada: anatomia editorial, produção gráfica e design de livros.",
+        "why": "As páginas iniciais dizem ao leitor que tipo de pacto está começando.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "Antes do capítulo 1, o leitor atravessa [elementos]. Cada um prepara uma camada: identidade, contexto, afeto e orientação."
+      }
+    },
+    {
+      "id": "arquivo-digital-livro",
+      "oficio": "objeto-livro",
+      "label": "Livro como arquivo digital",
+      "icon": "folder_open",
+      "title": "Livro como arquivo digital",
+      "kind": "Livro como arquivo digital",
+      "chapter": "Pastas e formatos",
+      "description": "Guia para organizar manuscrito, capítulos, pré-texto, pós-texto e arquivos finais em formatos profissionais.",
+      "guidance": {
+        "meta": [
+          "Arquivo",
+          ".docx",
+          ".pdf",
+          ".epub"
+        ],
+        "sections": [
+          [
+            "Pastas",
+            "Pré-texto, texto, pós-texto, pesquisa, versões e finais."
+          ],
+          [
+            "Manuscrito",
+            "Arquivo editável limpo, com estilos consistentes e nome versionado."
+          ],
+          [
+            "Produção",
+            "PDF de impressão, EPUB, capa, imagens, fontes e metadados."
+          ],
+          [
+            "Envio",
+            "Cada editora ou plataforma tem diretrizes próprias de formato."
+          ],
+          [
+            "Backup",
+            "Versões datadas e cópias em locais diferentes."
+          ]
+        ],
+        "reminders": [
+          "Arquivo bagunçado vira custo de produção.",
+          "Nomeie versões com data.",
+          "Guarde editável e final; eles têm funções diferentes."
+        ],
+        "blueprint": "LIVRO COMO ARQUIVO DIGITAL\\n\\nFormato, metadado e DRM definem o que o leitor pode ou não pode fazer com o livro.\\n\\nEPUB é o padrão universal: funciona em Kindle (com conversão), Kobo, Apple Books e leitores abertos. PDF preserva o layout mas é menos amigável em telas pequenas. MOBI/AZW3 é proprietário da Amazon — gerado automaticamente no KDP. Metadados (título, autor, ISBN, descrição) são o que as lojas usam para encontrar e exibir o livro. DRM protege contra pirataria mas restringe o leitor — decisão do autor ou editora.",
+        "sketch": "ARQUIVO MASTER: [formato fonte — InDesign / Word / Google Docs]\\n\\nFORMATOS DE SAÍDA:\\n[ ] EPUB (universal)\\n[ ] PDF (impressão e leitura em tela grande)\\n[ ] MOBI/AZW3 (Amazon — gerado pelo KDP)\\n\\nMETADADOS:\\nTítulo: []\\nAutor: []\\nISBN digital: [diferente do ISBN impresso]\\nDescrição: [a sinopse que aparece nas lojas]\\nCategorias: [gênero principal + subgênero]\\nPalavras-chave: [o que o leitor pesquisa para encontrar este livro]\\n\\nDRM: [ ] sim [ ] não — [razão da escolha]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Livro como arquivo digital tem uma lógica própria.",
+          "body": "Guia para organizar manuscrito, capítulos, pré-texto, pós-texto e arquivos finais em formatos profissionais.",
+          "primary": "Criar livro como arquivo digital"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Livro como arquivo digital: anatomia editorial, produção gráfica e design de livros.",
+        "why": "A organização do arquivo antecipa revisão, submissão e publicação.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "Meu arquivo mestre fica em [local] e os finais em [pasta]. Cada versão recebe data para que eu saiba exatamente o que foi enviado ou publicado."
+      }
+    },
+    {
+      "id": "pagina-capitulo",
+      "oficio": "objeto-livro",
+      "label": "Página de capítulo",
+      "icon": "article",
+      "title": "Página de capítulo",
+      "kind": "Página de capítulo",
+      "chapter": "Mancha e respiro",
+      "description": "Guia para entender abertura de capítulo, mancha tipográfica, margens, ornamentos, subdivisões e fólio.",
+      "guidance": {
+        "meta": [
+          "Capítulo",
+          "Mancha tipográfica",
+          "Margens",
+          "Fólio"
+        ],
+        "sections": [
+          [
+            "Abertura",
+            "Capítulos importantes costumam iniciar em página ímpar com respiro superior."
+          ],
+          [
+            "Título",
+            "Número, nome do capítulo e eventual ornamento."
+          ],
+          [
+            "Mancha",
+            "Área ocupada pelo texto; margens definem conforto de leitura."
+          ],
+          [
+            "Separadores",
+            "Vinhetas, asteriscos ou espaços marcam troca de cena."
+          ],
+          [
+            "Fólio",
+            "Número e título corrente orientam sem chamar atenção."
+          ]
+        ],
+        "reminders": [
+          "O branco também escreve.",
+          "Margem interna precisa considerar a lombada.",
+          "Ornamento bom serve à pausa, não ao excesso."
+        ],
+        "blueprint": "PÁGINA DE CAPÍTULO\\n\\nA abertura de capítulo é uma segunda primeira impressão — cada vez.\\n\\nNúmero e título do capítulo definem expectativa antes de qualquer linha. Epígrafe de capítulo (opcional) é uma lente específica para aquele momento da obra. A primeira linha do capítulo precisa prender com a mesma urgência da primeira linha do livro. Espaço em branco no início não é perda de página: é respiração que prepara a leitura.",
+        "sketch": "CAPÍTULO [NÚMERO]: [TÍTULO — se houver]\\n\\nEPÍGRAFE (opcional):\\n\\"[CITAÇÃO]\\" — [AUTOR]\\n\\nPRIMEIRA LINHA:\\n[A linha que prende. Não apresenta — já está no meio. Não explica — já age.]\\n\\nFUNÇÃO DESTE CAPÍTULO NA ESTRUTURA:\\n[ ] Apresenta personagem ou situação nova\\n[ ] Avança o conflito central\\n[ ] Vira a direção da narrativa\\n[ ] Prepara a resolução\\n\\nGANCHO DE SAÍDA:\\n[A última linha — o que leva o leitor ao próximo capítulo.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Página de capítulo tem uma lógica própria.",
+          "body": "Guia para entender abertura de capítulo, mancha tipográfica, margens, ornamentos, subdivisões e fólio.",
+          "primary": "Criar página de capítulo"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Página de capítulo: anatomia editorial, produção gráfica e design de livros.",
+        "why": "A página de capítulo cria cerimônia e ritmo para a leitura.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "Este capítulo começa com [respiro/título/ornamento] porque a entrada precisa sugerir [tom da cena ou parte]."
+      }
+    },
+    {
+      "id": "glossario-do-livro",
+      "oficio": "objeto-livro",
+      "label": "Glossário do livro",
+      "icon": "dictionary",
+      "title": "Glossário do livro",
+      "kind": "Glossário do livro",
+      "chapter": "Vocabulário editorial",
+      "description": "Guia com termos essenciais para conversar com editores, revisores, designers e diagramadores.",
+      "guidance": {
+        "meta": [
+          "Glossário",
+          "ISBN",
+          "Sangria",
+          "Colofão"
+        ],
+        "sections": [
+          [
+            "Mancha tipográfica",
+            "Área da página ocupada pelo texto, delimitada pelas margens."
+          ],
+          [
+            "Fólio",
+            "Número da página; pode ser visível ou cego."
+          ],
+          [
+            "Recto e verso",
+            "Recto é página direita ímpar; verso é página esquerda par."
+          ],
+          [
+            "Sangria",
+            "Área que ultrapassa o corte para evitar bordas brancas."
+          ],
+          [
+            "ISBN, ficha e colofão",
+            "Identificação comercial, catalogação e nota final de produção."
+          ]
+        ],
+        "reminders": [
+          "Nomear bem ajuda a pedir bem.",
+          "Vocabulário editorial reduz ruído com profissionais.",
+          "Termo técnico serve para clareza, não para pose."
+        ],
+        "blueprint": "GLOSSÁRIO DO LIVRO\\n\\nUm glossário serve ao leitor — não exibe o vocabulário do autor.\\n\\nIncluir no glossário: termos técnicos que o público-alvo pode não conhecer. Não incluir: palavras que qualquer leitor do nível de instrução esperado conhece. Ordem alfabética é o padrão — mas obras com universo próprio podem usar ordem temática. Cada entrada tem: termo → definição curta e objetiva → exemplo de uso no texto (opcional).",
+        "sketch": "PÚBLICO DO LIVRO: [NÍVEL DE INSTRUÇÃO E ÁREA DE INTERESSE]\\nCRITÉRIO DE INCLUSÃO: [O que entra — termos que [PÚBLICO] pode não conhecer]\\n\\nFORMATO DE CADA ENTRADA:\\n[TERMO]: [Definição objetiva. Sem jargão adicional. Uma frase.]\\nEx. no texto: \\"[citação da página onde aparece]\\" (p. [X])\\n\\nTERMOS MAPEADOS ATÉ AGORA:\\n[TERMO 1]: []\\n[TERMO 2]: []\\n[TERMO 3]: []\\n\\n[Revisar após a revisão final — termos novos podem ter entrado nos últimos capítulos.]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Glossário do livro tem uma lógica própria.",
+          "body": "Guia com termos essenciais para conversar com editores, revisores, designers e diagramadores.",
+          "primary": "Criar glossário do livro"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Glossário do livro: anatomia editorial, produção gráfica e design de livros.",
+        "why": "Quem conhece os termos participa melhor das decisões editoriais.",
+        "references": [
+          "Produção editorial",
+          "Design editorial",
+          "Diagramadores",
+          "Editoras brasileiras",
+          "Câmara Brasileira do Livro"
+        ],
+        "placeholder": "Quando eu disser [termo], quero me referir a [definição]. Se houver dúvida, registro exemplo visual antes de pedir alteração."
+      }
+    },
+    {
+      "id": "direitos-primeiro-mapa",
+      "oficio": "direitos-autorais",
+      "label": "Primeiro mapa de direitos",
+      "icon": "policy",
+      "title": "Primeiro mapa de direitos",
+      "kind": "Primeiro mapa de direitos",
+      "chapter": "Criação e prova",
+      "description": "Guia para entender o que o Escrevaral orienta, o que a lei protege e quando consultar fonte oficial.",
+      "guidance": {
+        "meta": [
+          "Orientação",
+          "LDA",
+          "Registro",
+          "Fontes oficiais"
+        ],
+        "sections": [
+          [
+            "Criação",
+            "Texto expresso nasce protegido; ideia, gênero e método não bastam."
+          ],
+          [
+            "Rastro",
+            "Versões, backups, e-mails e prova de autoria ajudam a reconstruir processo."
+          ],
+          [
+            "Registro",
+            "O EDA/FBN pode registrar obra intelectual e emitir certidão."
+          ],
+          [
+            "Limite",
+            "O Escrevaral não substitui advogado, órgão oficial ou edital atualizado."
+          ],
+          [
+            "Rotina",
+            "Antes de contrato ou litígio, confira fontes oficiais no dia."
+          ]
+        ],
+        "reminders": [
+          "Proteção automática não dispensa prova.",
+          "Fonte oficial envelhece melhor que print de blog.",
+          "Quando houver dinheiro ou conflito, procure especialista."
+        ],
+        "blueprint": "PRIMEIRO MAPA DE DIREITOS\\n\\nTexto expresso nasce protegido — ideia, gênero e método não bastam.\\n\\nNo Brasil, o direito autoral nasce com a criação: não precisa de registro para existir. Registro no EDA (Escritório de Direitos Autorais) ou FBN cria evidência com data certa — não cria o direito. O que é protegido: expressão original da ideia. O que não é: a ideia em si, o gênero, o estilo. Contrato editorial cede direitos patrimoniais — direitos morais (autoria) são irrenunciáveis.\\n\\nLimites: o Escrevaral gera evidência técnica local — não substitui registro oficial nem consultoria jurídica.",
+        "sketch": "OBRA: [TÍTULO]\\nCRIAÇÃO: [DATA / PERÍODO]\\n\\nO QUE TENHO COMO EVIDÊNCIA:\\n[ ] Prova de autoria Escrevaral (hash local com data)\\n[ ] Versões salvas com data (backup com timestamp)\\n[ ] Emails ou mensagens com trechos datados\\n[ ] Registro EDA/FBN (se feito)\\n\\nO QUE AINDA PRECISO:\\n[ ] Registro oficial (quando houver valor comercial ou risco de conflito)\\n[ ] Consultoria jurídica antes de contratos\\n\\nNOTA: Fonte oficial envelhece melhor que print de blog. Antes de assinar ou litigar, consulte a lei atualizada e, se necessário, um advogado."
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Primeiro mapa de direitos tem uma lógica própria.",
+          "body": "Guia para entender o que o Escrevaral orienta, o que a lei protege e quando consultar fonte oficial.",
+          "primary": "Criar primeiro mapa de direitos"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Primeiro mapa de direitos: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "O escritor ganha segurança quando separa criação, prova, mercado e fonte oficial.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "O Escrevaral me mostra o mapa. Antes de assinar, registrar ou litigar, eu confiro a fonte oficial atualizada e, se necessário, consulto especialista."
+      }
+    },
+    {
+      "id": "checklist-submissao-direitos",
+      "oficio": "direitos-autorais",
+      "label": "Checklist de submissão e direitos",
+      "icon": "outbox",
+      "title": "Checklist de submissão e direitos",
+      "kind": "Checklist de submissão e direitos",
+      "chapter": "Envio editorial",
+      "description": "Guia para submeter manuscrito guardando versão, edital, data, exclusividade e política de ineditismo.",
+      "guidance": {
+        "meta": [
+          "Submissão",
+          "Edital",
+          "Ineditismo",
+          "Exclusividade"
+        ],
+        "sections": [
+          [
+            "Versão enviada",
+            "Guarde o arquivo exato que saiu da sua mão."
+          ],
+          [
+            "Regras",
+            "Salve edital, formulário, política de simultâneas e prazo de resposta."
+          ],
+          [
+            "Comunicação",
+            "Guarde e-mail, protocolo, confirmação e resposta."
+          ],
+          [
+            "Ineditismo",
+            "Veja se rede social, blog, newsletter ou plataforma contam como publicação."
+          ],
+          [
+            "Direitos",
+            "Submissão não é cessão; contrato vem depois."
+          ]
+        ],
+        "reminders": [
+          "Não envie uma versão que você não consegue recuperar.",
+          "Exclusividade sem prazo é sinal de alerta.",
+          "Cada editora define sua porta de entrada."
+        ],
+        "blueprint": "CHECKLIST DE SUBMISSÃO E DIREITOS\\n\\nO que verificar antes de enviar a obra — e o que guardar depois.\\n\\nSubmissão não é cessão: você envia para avaliação, não para publicação automática. Exclusividade sem prazo definido é cláusula abusiva — questione antes de assinar. Ineditismo: publicar no blog, Instagram ou qualquer plataforma pública pode comprometer o requisito de ineditismo de alguns editais. Guarde tudo: o arquivo exato enviado, o edital, a política da editora e toda comunicação.",
+        "sketch": "SUBMISSÃO:\\nEnviado para: [EDITORA / EDITAL / AGENTE]\\nData: []\\nArquivo enviado: [NOME DO ARQUIVO + VERSÃO]\\nPolítica de exclusividade: [ ] sim [ ] não · Prazo: []\\n\\nVERIFICAÇÃO ANTES DE ENVIAR:\\n[ ] A obra é inédita conforme a política desta editora?\\n[ ] O formato segue as especificações do edital?\\n[ ] Tenho cópia exata do arquivo enviado?\\n\\nAPÓS O ENVIO:\\n[ ] Protocolo ou confirmação de recebimento guardado\\n[ ] Prazo de resposta anotado: [DATA]\\n[ ] Se não houver resposta até [DATA]: [AÇÃO]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Checklist de submissão e direitos tem uma lógica própria.",
+          "body": "Guia para submeter manuscrito guardando versão, edital, data, exclusividade e política de ineditismo.",
+          "primary": "Criar checklist de submissão e direitos"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Checklist de submissão e direitos: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "Submeter melhor é conseguir provar o que foi enviado, quando e sob quais regras.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Enviei [obra] para [editora/agente] em [data], seguindo [edital/política]. A versão preservada é [arquivo]."
+      }
+    },
+    {
+      "id": "leitura-contrato-editorial",
+      "oficio": "direitos-autorais",
+      "label": "Leitura de contrato editorial",
+      "icon": "contract",
+      "title": "Leitura de contrato editorial",
+      "kind": "Leitura de contrato editorial",
+      "chapter": "Antes de assinar",
+      "description": "Guia para marcar prazo, território, direitos cedidos, preferência, royalties e reversão antes de assinar.",
+      "guidance": {
+        "meta": [
+          "Contrato",
+          "Licença",
+          "Cessão",
+          "Reversão"
+        ],
+        "sections": [
+          [
+            "Escopo",
+            "Quais direitos, mídias e territórios entram no contrato?"
+          ],
+          [
+            "Prazo",
+            "Por quanto tempo a editora explora a obra?"
+          ],
+          [
+            "Dinheiro",
+            "Royalties, adiantamento, base de cálculo e prestação de contas."
+          ],
+          [
+            "Preferência",
+            "A editora prende seu próximo livro? Por quanto tempo?"
+          ],
+          [
+            "Saída",
+            "Quando os direitos voltam para você?"
+          ]
+        ],
+        "reminders": [
+          "Direitos autorais se interpretam restritivamente.",
+          "Ceda só o necessário.",
+          "Contrato alto, amplo ou confuso merece advogado."
+        ],
+        "blueprint": "LEITURA DE CONTRATO EDITORIAL\\n\\nAssinar sem ler é ceder sem negociar.\\n\\nCláusulas críticas: prazo de vigência, território, direitos cedidos (impressão, digital, audiovisual, tradução), royalty e adiantamento, prazo de prestação de contas, cláusula de reversão. Direitos morais são irrenunciáveis na lei brasileira — nenhum contrato pode removê-los. Exclusividade ampla e indefinida é sinal de alerta. Consultoria jurídica vale o custo quando há dinheiro ou direito patrimonial em jogo.\\n\\nRegra prática: se não entende uma cláusula, não assina até entender.",
+        "sketch": "CONTRATO: [EDITORA] × [AUTOR] — [OBRA]\\n\\nVERIFICAÇÃO:\\nDireitos cedidos: [ ] impressão [ ] ebook [ ] audiovisual [ ] tradução [ ] outros\\nTerritório: [ ] Brasil [ ] lusofonia [ ] mundial\\nPrazo de vigência: [] anos · Renovação automática: [ ] sim [ ] não\\nRoyalty: []% sobre [preço de capa / receita líquida]\\nAdiantamento: R$ [] · Forma de pagamento: []\\nPrazo de prestação de contas: []\\nCláusula de reversão: [ ] existe · Condição: []\\n\\nPONTOS PARA NEGOCIAR: [O QUE PARECE DESBALANCEADO — leve para um advogado]"
+      },
+      "editorMode": null,
+      "steps": [
+        {
+          "eyebrow": "Ofício",
+          "title": "Leitura de contrato editorial tem uma lógica própria.",
+          "body": "Guia para marcar prazo, território, direitos cedidos, preferência, royalties e reversão antes de assinar.",
+          "primary": "Criar leitura de contrato editorial"
+        }
+      ],
+      "text": "",
+      "model": {
+        "exemplar": "Leitura de contrato editorial: prática editorial brasileira, autopublicação e lançamento de livros.",
+        "why": "O contrato deve dizer exatamente o que sai da mão do autor, por quanto tempo e em troca de quê.",
+        "references": [
+          "Amazon KDP",
+          "Clube de Autores",
+          "Editoras brasileiras",
+          "Agentes literários",
+          "Feiras literárias"
+        ],
+        "placeholder": "Antes de assinar, eu preciso entender escopo, prazo, território, remuneração, preferência e reversão."
+      }
+    }
+  ]
+}`;function l(e){return e&&typeof e==`object`&&!Array.isArray(e)?e:{}}function u(e){return Array.isArray(e)?e:[]}function d(e){return typeof e==`string`?e:e==null?``:String(e)}function f(e){let t=Number(e);return Number.isFinite(t)?t:0}var p=(()=>{try{let e=l(JSON.parse(c)),t=new Map;return u(e.oficios).forEach(e=>{let n=l(e),r=d(n.id).trim(),i=d(n.label).trim();r&&t.set(r,i||r)}),{templates:u(e.templates).map(l),oficioLabels:t}}catch{return{templates:[],oficioLabels:new Map}}})();function m(){return p.templates.map(e=>{let t=d(e.id).trim(),n=d(e.oficio).trim();return{id:t,label:d(e.label).trim()||t,title:d(e.title).trim(),oficio:n,oficioLabel:p.oficioLabels.get(n)||n||`Outros`,kind:d(e.kind).trim()}}).filter(e=>e.id)}function h(e){return p.templates.find(t=>d(t.id)===e)??null}function g(e){let t=l(e),n=d(t.label).trim();return n?{label:n,passed:t.passed===!0,score:Math.max(0,Math.min(100,Math.round(f(t.score)))),hint:d(t.hint).trim()}:null}function _(e){let t=l(e),n=u(t.checks).map(g).filter(e=>e!==null);return{score:Math.max(0,Math.min(100,Math.round(f(t.score)))),status:d(t.status).trim()||`Leitura editorial concluída`,words:Math.max(0,Math.floor(f(t.words))),limit:Math.max(0,Math.floor(f(t.limit))),checks:n,gaps:n.filter(e=>!e.passed),strengths:n.filter(e=>e.passed)}}function v(){if(window.__escrevaralPrecisionLoaded&&window.VeredaPrecision?.analyze)return!0;try{if(!document.querySelector(`script[data-escrevaral-engine="precision-engine.js"]`)){let e=document.createElement(`script`);e.dataset.escrevaralEngine=`precision-engine.js`,e.textContent=`${s}\n//# sourceURL=precision-engine.js`,document.head.append(e)}return window.__escrevaralPrecisionLoaded=!!window.VeredaPrecision?.analyze,window.__escrevaralPrecisionLoaded}catch(e){return console.error(`[Escrevaral] Não foi possível carregar Aderência ao guia.`,e),!1}}async function y(e,t){let n=t.trim(),r=h(e);if(!n||!r)return null;if(!v()||!window.VeredaPrecision)throw Error(`A leitura de aderência ao guia não está disponível.`);return _(window.VeredaPrecision.analyze(r,n))}var b=e();function x({title:e,items:t}){return t.length?(0,b.jsxs)(`section`,{className:`precision-checks`,children:[(0,b.jsx)(`h4`,{className:`section-label`,children:e}),(0,b.jsx)(`div`,{className:`review-list`,children:t.map(e=>(0,b.jsxs)(`article`,{className:`review-card ${e.passed?`severity-baixo`:`severity-moderado`}`,children:[(0,b.jsx)(`strong`,{children:e.label}),(0,b.jsxs)(`p`,{children:[e.score,`/100`,e.hint?` · ${e.hint}`:``]})]},e.label))})]}):null}function S({document:e,onTemplateId:t}){let a=(0,o.useMemo)(()=>m(),[]),s=(0,o.useMemo)(()=>{let e=new Map;return a.forEach(t=>{let n=e.get(t.oficioLabel)??[];n.push(t),e.set(t.oficioLabel,n)}),e},[a]),[c,l]=(0,o.useState)(null),[u,d]=(0,o.useState)(`Associe um guia editorial ao documento para avaliar sua aderência.`),[f,p]=(0,o.useState)(!1),h=(0,o.useRef)(0),g=e.templateId?.trim()||``,_=a.find(e=>e.id===g)??null,v=n(e.plainText);(0,o.useEffect)(()=>(h.current+=1,l(null),p(!1),d(g?v<50?`O guia já está associado. A avaliação abre a partir de 50 palavras.`:`Guia associado. Avalie quando quiser.`:`Associe um guia editorial ao documento para avaliar sua aderência.`),r(t=>{t.documentId===e.id&&(h.current+=1,l(null),p(!1),d(g?`O texto mudou. Avalie novamente para usar a versão atual.`:`Associe um guia editorial ao documento para avaliar sua aderência.`))})),[e.id,g]);let S=async()=>{if(!g)return;let t=i(e.id),r=t?.plainText??e.plainText,a=t?.contentSignature??JSON.stringify(e.content);if(n(r)<50){d(`Escreva ao menos 50 palavras antes de avaliar a aderência ao guia.`);return}let o=++h.current;p(!0),d(`Comparando o texto ao guia editorial localmente…`);try{let t=await y(g,r),n=i(e.id);if(o!==h.current||n&&n.contentSignature!==a)return;l(t),d(t?t.status:`Não foi possível formar uma leitura para este guia.`)}catch(e){if(console.error(`[Escrevaral] Aderência ao guia não concluída.`,e),o!==h.current)return;l(null),d(`A leitura de aderência não pôde ser concluída agora.`)}finally{o===h.current&&p(!1)}};return(0,b.jsxs)(`section`,{className:`precision-panel`,"aria-labelledby":`precision-title`,children:[(0,b.jsx)(`div`,{className:`section-label`,id:`precision-title`,children:`Forma editorial`}),(0,b.jsx)(`p`,{className:`panel-intro`,children:`O guia avalia estrutura e expectativas do gênero. Não é correção ortográfica nem gramatical.`}),(0,b.jsx)(`label`,{className:`section-label`,htmlFor:`precision-template`,children:`Guia do documento`}),(0,b.jsxs)(`select`,{id:`precision-template`,className:`search`,value:g,onChange:e=>t(e.target.value||null),children:[(0,b.jsx)(`option`,{value:``,children:`Sem guia associado`}),[...s.entries()].map(([e,t])=>(0,b.jsx)(`optgroup`,{label:e,children:t.map(e=>(0,b.jsx)(`option`,{value:e.id,children:e.label},e.id))},e))]}),g&&!_&&(0,b.jsxs)(`p`,{className:`review-message`,children:[`O guia legado “`,g,`” não existe mais na base atual.`]}),_&&(0,b.jsxs)(`p`,{className:`review-message`,children:[_.oficioLabel,` · `,_.kind||_.title||_.label]}),(0,b.jsx)(`button`,{className:`action primary`,type:`button`,onClick:()=>{S()},disabled:f||!_||v<50,children:f?`Avaliando aderência…`:`Avaliar aderência ao guia`}),(0,b.jsx)(`p`,{className:`review-message`,role:`status`,children:u}),c&&(0,b.jsxs)(`div`,{className:`precision-reading`,children:[(0,b.jsxs)(`div`,{className:`metric`,children:[(0,b.jsx)(`div`,{className:`metric-label`,children:`Aderência`}),(0,b.jsx)(`div`,{className:`metric-value`,children:c.score}),(0,b.jsx)(`small`,{children:c.status})]}),(0,b.jsx)(x,{title:`Elementos já cobertos`,items:c.strengths}),(0,b.jsx)(x,{title:`Pontos do guia ainda abertos`,items:c.gaps}),(0,b.jsx)(`p`,{className:`context-disclaimer`,children:`Leitura heurística do gênero. O guia orienta; não obriga o texto a caber numa fórmula.`})]})]})}export{S as PrecisionPanel};
+//# sourceMappingURL=PrecisionPanel.js.map
