@@ -5,6 +5,24 @@
  */
 
 @media (min-width: 1100px) {
+  /* O paper-home é carregado depois de writing-rest.css e possui regras de
+     geometria mais genéricas para .paper. No repouso, o contrato aprovado é
+     deliberadamente outro: página estreita, sem moldura e iniciando a cerca
+     de 30% da altura da janela. Reafirmamos apenas esse estado aqui, sem
+     deslocar a Oficina nem os estados contextuais. */
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .paper {
+    width: min(720px, 100%) !important;
+    max-width: 720px !important;
+    min-height: 70vh !important;
+    margin: 30vh auto 20vh !important;
+    padding: 0 0 20vh !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
   /* O paper-home legado escondia o único gatilho explícito entre repouso e
      oficina. O gate final precisa preservar esse controle: pequeno no repouso,
      visível por teclado/leitor de tela e acima do shell de papel. */
