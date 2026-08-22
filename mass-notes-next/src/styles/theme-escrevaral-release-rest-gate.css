@@ -15,7 +15,8 @@
     pointer-events: none !important;
   }
 
-  body.writing-rest:not(.workshop-open):not(.focus-mode) .escrevaral-editor {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .escrevaral-editor,
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .escrevaral-editor * {
     text-transform: none !important;
   }
 }
