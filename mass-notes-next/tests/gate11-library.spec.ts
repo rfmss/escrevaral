@@ -122,6 +122,10 @@ async function seedLibrary(page: Page, documents: SeedDocument[], activeId = doc
   await expect(page.locator('.note-card')).toHaveCount(documents.length)
 }
 
+function librarySearch(page: Page) {
+  return page.locator('#document-library').getByLabel('Buscar documentos')
+}
+
 function statusFilters(page: Page) {
   return page.getByRole('group', { name: 'Filtrar por estado' })
 }
@@ -141,7 +145,7 @@ async function visibleTitles(page: Page): Promise<string[]> {
 test('combina busca, estado, favorito e tag sem trocar a página ativa', async ({ page }) => {
   await seedLibrary(page, standardDocuments())
 
-  await page.getByLabel('Buscar documentos').fill('agua')
+  await librarySearch(page).fill('agua')
   await statusFilters(page).getByRole('button', { name: 'Pronto', exact: true }).click()
   await page.getByRole('button', { name: 'Somente favoritas' }).click()
   await tagFilter(page).selectOption({ label: 'Poesia' })
@@ -185,7 +189,7 @@ test('deduplica tags por acento e caixa e combina tag com favoritas', async ({ p
 test('estado vazio explica o recorte e limpar filtros restaura a biblioteca', async ({ page }) => {
   await seedLibrary(page, standardDocuments())
 
-  await page.getByLabel('Buscar documentos').fill('texto inexistente')
+  await librarySearch(page).fill('texto inexistente')
   await statusFilters(page).getByRole('button', { name: 'Pronto', exact: true }).click()
 
   await expect(page.locator('.note-card')).toHaveCount(0)
@@ -194,7 +198,7 @@ test('estado vazio explica o recorte e limpar filtros restaura a biblioteca', as
 
   await page.getByRole('button', { name: 'Limpar filtros' }).first().click()
   await expect(page.locator('.note-card')).toHaveCount(4)
-  await expect(page.getByLabel('Buscar documentos')).toHaveValue('')
+  await expect(librarySearch(page)).toHaveValue('')
   await expect(statusFilters(page).getByRole('button', { name: 'Todas', exact: true })).toHaveAttribute('aria-pressed', 'true')
 })
 
@@ -239,7 +243,7 @@ test('biblioteca extensa preserva Unicode e títulos repetidos com ordem estáve
   await seedLibrary(page, documents, 'chapter-0')
   await expect(page.locator('.note-card')).toHaveCount(24)
 
-  await page.getByLabel('Buscar documentos').fill('orbita')
+  await librarySearch(page).fill('orbita')
   await sortControl(page).selectOption('title-asc')
   const repeated = page.locator('.note-card').filter({ hasText: 'Órbita' })
   await expect(repeated).toHaveCount(2)
