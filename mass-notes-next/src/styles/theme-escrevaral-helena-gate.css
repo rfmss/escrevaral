@@ -7,14 +7,15 @@
 @media (min-width: 1100px) {
   /* O paper-home é carregado depois de writing-rest.css e possui regras de
      geometria mais genéricas para .paper. No repouso, o contrato aprovado é
-     deliberadamente outro: página estreita, sem moldura e iniciando a cerca
-     de 30% da altura da janela. Reafirmamos apenas esse estado aqui, sem
-     deslocar a Oficina nem os estados contextuais. */
+     deliberadamente outro: página estreita, sem moldura e com o topo ótico
+     entre 28% e 32% da viewport. Como .paper vive abaixo da topbar do shell,
+     o recuo precisa descontar essa faixa estrutural em vez de somá-la duas
+     vezes. */
   body.writing-rest:not(.workshop-open):not(.focus-mode) .paper {
     width: min(720px, 100%) !important;
     max-width: 720px !important;
     min-height: 70vh !important;
-    margin: 30vh auto 20vh !important;
+    margin: calc(30vh - 102px) auto 20vh !important;
     padding: 0 0 20vh !important;
     border: 0 !important;
     background: transparent !important;
