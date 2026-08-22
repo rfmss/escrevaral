@@ -1,0 +1,299 @@
+/*
+ * Escrevaral — Paper Home
+ * Tranche 1: transplanta o layout-base aprovado para a aplicação Tiptap real.
+ *
+ * Regra: esta folha só muda a casca. Estado documental, IndexedDB, autosave,
+ * conflitos, engines e contratos continuam nos módulos existentes.
+ *
+ * Nenhuma fonte remota: a casa precisa permanecer funcional offline.
+ */
+
+:root {
+  --home-paper: #f3efe4;
+  --home-ink: #11120f;
+  --home-blue: #087fc3;
+  --home-orange: #ff5317;
+  --home-line: rgba(20, 22, 19, .31);
+  --home-dash: rgba(0, 124, 193, .55);
+  --home-page-shadow: rgba(85, 85, 85, .13);
+}
+
+@media (min-width: 1100px) {
+  body:not(.experience-anatomy) {
+    min-width: 1100px;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--home-ink);
+    background: #d8d5cb;
+    font-family: Georgia, "Times New Roman", serif;
+  }
+
+  body:not(.experience-anatomy) .grain {
+    opacity: .035;
+  }
+
+  body:not(.experience-anatomy) .halftone {
+    display: none;
+  }
+
+  .experience-view--editor {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .experience-view--editor .app-shell {
+    position: relative;
+    display: grid;
+    grid-template-columns: 280px minmax(600px, 1fr) 280px;
+    width: calc(100vw - 32px);
+    height: calc(100vh - 20px);
+    min-height: 0;
+    max-height: none;
+    margin: 10px 20px 10px 12px;
+    overflow: hidden;
+    color: var(--home-ink);
+    background-color: var(--home-paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.083'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 31% 18%, rgba(255, 250, 240, .65), transparent 58%),
+      radial-gradient(ellipse at 88% 68%, rgba(185, 174, 151, .12), transparent 44%),
+      repeating-linear-gradient(1deg, transparent 0 31px, rgba(60, 45, 20, .015) 32px 33px);
+    border: 1px dashed var(--home-dash);
+    box-shadow: 0 4px 30px var(--home-page-shadow);
+  }
+
+  .experience-view--editor .app-shell::before,
+  .experience-view--editor .app-shell::after {
+    content: "";
+    position: absolute;
+    z-index: 30;
+    pointer-events: none;
+  }
+
+  .experience-view--editor .app-shell::before {
+    inset: -1px;
+    border-left: 2px solid transparent;
+    border-image: linear-gradient(to bottom, var(--home-orange) 0 8%, transparent 8% 100%) 1;
+  }
+
+  .experience-view--editor .app-shell::after {
+    left: 11px;
+    right: 11px;
+    bottom: 57px;
+    border-top: 1px dashed rgba(7, 133, 196, .37);
+    transform: rotate(-.08deg);
+  }
+
+  .experience-view--editor .blueprint {
+    display: none;
+  }
+
+  .experience-view--editor .sidebar,
+  .experience-view--editor .rail,
+  .experience-view--editor .workspace {
+    min-width: 0;
+    min-height: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  /* COLUNA ESQUERDA ------------------------------------------------------- */
+
+  .experience-view--editor .sidebar {
+    border-right: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .brand {
+    min-height: 92px;
+    height: 92px;
+    padding: 15px 20px 12px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .brand::before {
+    content: "ESCREVARAL";
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    display: block;
+    width: max-content;
+    height: auto;
+    color: var(--home-ink);
+    background: none;
+    opacity: 1;
+    transform: scaleX(1.06);
+    transform-origin: left top;
+    font: 900 35px/39px Impact, "Arial Black", "Arial Narrow", sans-serif;
+    letter-spacing: -.8px;
+    clip-path: none;
+  }
+
+  .experience-view--editor .brand::after {
+    content: "ESCRITA COM INTENÇÃO";
+    position: relative;
+    inset: auto;
+    z-index: 2;
+    display: block;
+    width: max-content;
+    height: auto;
+    margin-top: 5px;
+    border: 0;
+    color: var(--home-ink);
+    opacity: 1;
+    transform: none;
+    font: 700 10px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: 3.2px;
+  }
+
+  .experience-view--editor .brand-logo-plate,
+  .experience-view--editor .brand-links,
+  .experience-view--editor .brand > .eyebrow,
+  .experience-view--editor .brand > .issue {
+    display: none;
+  }
+
+  .experience-view--editor .side-tools {
+    min-height: 56px;
+    padding: 10px 14px 9px 24px;
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 9px;
+    border-bottom: 1px solid #9f9b92;
+  }
+
+  .experience-view--editor .side-tools .search {
+    height: 34px;
+    padding: 0 9px;
+    border: 1px solid #aaa;
+    border-radius: 0;
+    background: transparent;
+    font: 12px/1 Georgia, serif;
+  }
+
+  .experience-view--editor .side-tools .search:focus {
+    border-color: var(--home-blue);
+    box-shadow: 0 0 0 1px var(--home-blue);
+  }
+
+  .experience-view--editor .side-tools .icon-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #444;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font: 18px/30px Arial, sans-serif;
+  }
+
+  .experience-view--editor .library-filters {
+    padding: 10px 16px 10px 24px;
+    border-bottom: 1px solid #9f9b92;
+    background: transparent;
+  }
+
+  .experience-view--editor .library-filter-label,
+  .experience-view--editor .library-select-field label,
+  .experience-view--editor .library-filter-summary {
+    font: 700 9px/1.2 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .library-status-filters {
+    gap: 4px;
+  }
+
+  .experience-view--editor .library-status-filters button,
+  .experience-view--editor .library-favorites-filter,
+  .experience-view--editor .library-select-field select,
+  .experience-view--editor .library-filter-summary button {
+    border-radius: 0;
+    border-color: #999;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .experience-view--editor .notes {
+    padding: 8px 16px 10px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 18, 15, .32) transparent;
+  }
+
+  .experience-view--editor .note-card {
+    position: relative;
+    min-height: 54px;
+    grid-template-columns: 20px minmax(0, 1fr) 30px;
+    gap: 8px;
+    padding: 0 7px 0 8px;
+    border: 0;
+    border-bottom: 1px dashed #aaa;
+    color: var(--home-ink);
+    background: transparent;
+  }
+
+  .experience-view--editor .note-card:hover {
+    background: rgba(8, 127, 195, .05);
+  }
+
+  .experience-view--editor .note-card.active {
+    color: var(--home-ink);
+    background: transparent;
+    outline: 1px solid #777;
+    outline-offset: -1px;
+  }
+
+  .experience-view--editor .note-card.active::before {
+    content: "";
+    position: absolute;
+    left: -9px;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background:
+      repeating-linear-gradient(179deg, transparent 0 4px, rgba(246, 176, 141, .33) 4px 5px),
+      var(--home-orange);
+  }
+
+  .experience-view--editor .note-stripe {
+    width: 11px;
+    height: 11px;
+    border: 1px solid var(--home-ink);
+    border-radius: 50%;
+    background: transparent;
+    transform: none;
+  }
+
+  .experience-view--editor .note-card:not(.active) .note-stripe {
+    width: 12px;
+    height: 15px;
+    border-radius: 0;
+  }
+
+  .experience-view--editor .note-title {
+    font: 400 13px/1.15 Georgia, serif;
+  }
+
+  .experience-view--editor .note-meta,
+  .experience-view--editor .note-num {
+    font: 9.5px/1.2 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .experience-view--editor .note-num {
+    color: #555;
+    text-align: right;
+  }
+
+  .experience-view--editor .sidebar-footer {
+    min-height: 46px;
+    padding: 0 16px 0 24px;
+    border-top: 1px solid var(--home-line);
+    color: #555;
+    background: transparent;
+    align-items: center;
+    font: 9px/1 "Arial Narrow", Arial, sans-serif;
+  }
+
+}

@@ -1,5 +1,6 @@
 import { Placeholder } from '@tiptap/extensions'
 import StarterKit from '@tiptap/starter-kit'
+import { FocusLineDecoration } from './focusLineDecoration'
 import { Pagination } from './paginationExtension'
 import { ReviewDecorations } from './reviewDecorations'
 
@@ -24,4 +25,5 @@ export const editorExtensions = [
   }),
   Pagination,
   ReviewDecorations,
+  FocusLineDecoration,
 ]

@@ -1,0 +1,205 @@
+.writing-config-layer {
+  position: fixed;
+  z-index: 4000;
+  inset: 0;
+}
+
+.writing-config-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: rgba(17, 18, 15, .16);
+  cursor: default;
+}
+
+.writing-config-panel {
+  position: absolute;
+  top: 112px;
+  right: 24px;
+  width: min(420px, calc(100vw - 48px));
+  padding: 22px 24px 18px;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.58), transparent 54%),
+    var(--paper);
+  border: 1px solid rgba(17,18,15,.45);
+  box-shadow: 8px 10px 0 rgba(17,18,15,.08), 0 18px 50px rgba(17,18,15,.18);
+  outline: none;
+}
+
+.writing-config-panel::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  pointer-events: none;
+  border: 1px dashed rgba(8,127,195,.28);
+}
+
+.writing-config-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.writing-config-panel header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-config-panel h2 {
+  margin: 5px 0 0;
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.writing-config-section {
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.writing-config-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  color: var(--blue);
+}
+
+.writing-config-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.writing-config-row span {
+  min-width: 0;
+}
+
+.writing-config-row strong {
+  display: block;
+  margin-bottom: 3px;
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.writing-config-row small {
+  display: block;
+  max-width: 245px;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.writing-config-row b {
+  padding: 7px 9px;
+  border: 1px solid rgba(17,18,15,.56);
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.writing-config-row:hover b,
+.writing-config-row:focus-visible b {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.writing-config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.writing-config-grid button {
+  min-height: 72px;
+  padding: 12px;
+  border: 1px solid rgba(17,18,15,.36);
+  background: rgba(255,255,255,.12);
+  color: inherit;
+  text-align: left;
+}
+
+.writing-config-grid button:hover,
+.writing-config-grid button:focus-visible {
+  border-color: var(--blue);
+}
+
+.writing-config-grid span {
+  display: block;
+  margin-bottom: 7px;
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 9px;
+  letter-spacing: .12em;
+  color: var(--orange);
+}
+
+.writing-config-grid strong {
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.writing-config-panel footer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 14px;
+}
+
+.writing-config-panel footer span,
+.writing-config-panel footer small {
+  font-family: Oswald, Arial Narrow, sans-serif;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.writing-config-panel footer strong {
+  font-size: 11px;
+}
+
+.writing-config-panel footer small {
+  color: #666;
+}
+
+body.night .writing-config-panel {
+  color: #ece7da;
+  background: #202628;
+  border-color: rgba(236,231,218,.55);
+}
+
+body.night .writing-config-row b,
+body.night .writing-config-grid button {
+  border-color: rgba(236,231,218,.42);
+}
+
+body.night .writing-config-panel footer small {
+  color: #b8c0be;
+}
+
+@media (max-width: 620px) {
+  .writing-config-panel {
+    top: 84px;
+    right: 18px;
+    width: calc(100vw - 36px);
+  }
+  .writing-config-grid { grid-template-columns: 1fr; }
+}

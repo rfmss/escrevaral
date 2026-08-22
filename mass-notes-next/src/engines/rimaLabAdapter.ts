@@ -23,6 +23,10 @@ export type RimaPair = {
   to: number
   wordA: string
   wordB: string
+  soundA: string
+  soundB: string
+  classA: string
+  classB: string
   classification: string
 }
 
@@ -31,6 +35,19 @@ export type RimaStanza = {
   verses: string[]
   scheme: string
   schemeName: string
+}
+
+export type RimaFinderResult = {
+  word: string
+  grammaticalClass: string
+  type: 'exata' | 'toante'
+}
+
+export type RimaEncyclopediaEntry = {
+  title: string
+  tags: string[]
+  body: string
+  sample: string
 }
 
 export type RimaProseReading = {
@@ -66,6 +83,9 @@ declare global {
     VeredaRimaLab?: {
       analyze: (text: string) => unknown
       nameScheme: (scheme: string) => string
+      exportAnalysisText: (analysis: unknown, title?: string) => string
+      findRhymes: (word: string, limit?: number) => unknown[]
+      getEncyclopedia: () => unknown[]
       ensureLoaded: () => Promise<void>
       isLoaded: () => boolean
       hasLoadError: () => boolean
@@ -220,7 +240,35 @@ function normalizeRhyme(value: unknown): RimaPair | null {
     to: positiveInteger(source.to),
     wordA,
     wordB,
+    soundA: text(source.soundA).trim(),
+    soundB: text(source.soundB).trim(),
+    classA: text(source.classA).trim(),
+    classB: text(source.classB).trim(),
     classification: text(source.classification).trim() || 'percebida',
+  }
+}
+
+function normalizeFinderResult(value: unknown): RimaFinderResult | null {
+  const source = object(value)
+  const word = text(source.word).trim()
+  const type = text(source.type).trim()
+  if (!word || (type !== 'exata' && type !== 'toante')) return null
+  return {
+    word,
+    grammaticalClass: text(source.cls).trim(),
+    type,
+  }
+}
+
+function normalizeEncyclopediaEntry(value: unknown): RimaEncyclopediaEntry | null {
+  const source = object(value)
+  const title = text(source.title).trim()
+  if (!title) return null
+  return {
+    title,
+    tags: strings(source.tags),
+    body: text(source.body).trim(),
+    sample: text(source.sample).trim(),
   }
 }
 
@@ -283,4 +331,37 @@ export async function analyzeRimaLab(sourceText: string): Promise<RimaLabReading
   }
 
   return normalizeResult(window.VeredaRimaLab.analyze(clean), window.VeredaRimaLab)
+}
+
+export async function findRimaLabRhymes(word: string, limit = 16): Promise<RimaFinderResult[]> {
+  const clean = word.trim()
+  if (clean.length < 2) return []
+  if (!(await ensureRimaLabEngine()) || !window.VeredaRimaLab) {
+    throw new Error('O buscador de rimas não está disponível.')
+  }
+
+  return array(window.VeredaRimaLab.findRhymes(clean, limit))
+    .map(normalizeFinderResult)
+    .filter((entry): entry is RimaFinderResult => entry !== null)
+}
+
+export async function getRimaLabEncyclopedia(): Promise<RimaEncyclopediaEntry[]> {
+  if (!(await ensureRimaLabEngine()) || !window.VeredaRimaLab) {
+    throw new Error('A referência métrica não está disponível.')
+  }
+
+  return array(window.VeredaRimaLab.getEncyclopedia())
+    .map(normalizeEncyclopediaEntry)
+    .filter((entry): entry is RimaEncyclopediaEntry => entry !== null)
+}
+
+export async function createRimaLabReport(sourceText: string, title = 'Análise de Rimas'): Promise<string> {
+  const clean = sourceText.trim()
+  if (!clean) return ''
+  if (!(await ensureRimaLabEngine()) || !window.VeredaRimaLab) {
+    throw new Error('A exportação do RimaLab não está disponível.')
+  }
+
+  const analysis = window.VeredaRimaLab.analyze(clean)
+  return window.VeredaRimaLab.exportAnalysisText(analysis, title)
 }

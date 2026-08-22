@@ -1,21 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
+import { countWords } from '../domain/document'
 import { readLatestLiveEditorSnapshot, subscribeLiveEditorSnapshot } from '../editor/editorSnapshotBridge'
+import {
+  normalizeWritingGoal,
+  readWritingGoal,
+  subscribeWritingGoal,
+  writeWritingGoal,
+} from '../writing/writingGoal'
 
-const GOAL_KEY = 'escrevaral-mass-notes-next-writing-goal'
 const FOCUS_DURATION_SECONDS = 25 * 60
-
-function countWords(value: string): number {
-  return value.match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu)?.length ?? 0
-}
-
-function readGoal(): number {
-  try {
-    const value = Number(localStorage.getItem(GOAL_KEY))
-    return Number.isFinite(value) && value >= 1 ? Math.min(100_000, Math.floor(value)) : 1_000
-  } catch {
-    return 1_000
-  }
-}
 
 function formatClock(seconds: number): string {
   const minutes = Math.floor(seconds / 60)
@@ -25,15 +18,12 @@ function formatClock(seconds: number): string {
 
 export function WritingDashboardFields() {
   const [text, setText] = useState(() => readLatestLiveEditorSnapshot()?.plainText ?? '')
-  const [goal, setGoal] = useState(readGoal)
+  const [goal, setGoal] = useState(readWritingGoal)
   const [remaining, setRemaining] = useState(FOCUS_DURATION_SECONDS)
   const [running, setRunning] = useState(false)
 
   useEffect(() => subscribeLiveEditorSnapshot((snapshot) => setText(snapshot.plainText)), [])
-
-  useEffect(() => {
-    try { localStorage.setItem(GOAL_KEY, String(goal)) } catch { /* Preferência de interface opcional. */ }
-  }, [goal])
+  useEffect(() => subscribeWritingGoal(setGoal), [])
 
   useEffect(() => {
     if (!running) return
@@ -55,9 +45,9 @@ export function WritingDashboardFields() {
   const clock = formatClock(remaining)
 
   const updateGoal = (value: string) => {
-    const parsed = Number(value)
-    if (!Number.isFinite(parsed)) return
-    setGoal(Math.max(1, Math.min(100_000, Math.floor(parsed))))
+    const next = normalizeWritingGoal(value)
+    setGoal(next)
+    writeWritingGoal(next)
   }
 
   const resetFocus = () => {

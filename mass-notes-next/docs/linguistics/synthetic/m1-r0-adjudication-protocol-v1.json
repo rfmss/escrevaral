@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-adjudication-protocol-v1",
+  "state": "research_protocol_not_corpus",
+  "createdAt": "2026-08-22",
+  "purpose": "Preparar a banca humana do banco adversarial M1-R0 sem abrir implementação sintática, sem converter casos sintéticos em gold e sem elevar estado de verificação.",
+  "governance": {
+    "ruleCard": "docs/linguistics/rules/m1-r0-subject-boundaries.yaml",
+    "adversarialBank": "docs/linguistics/synthetic/m1-r0-adversarial-bank-v1.json",
+    "implementationAuthorized": false,
+    "runtimeUseAuthorized": false,
+    "developmentCorpusOpened": false,
+    "evaluationCorpusOpened": false,
+    "humanGoldMayBeCreatedByThisProtocolAlone": false,
+    "verifiedMayBeGrantedByThisProtocolAlone": false,
+    "technicalGreenIsNotLinguisticTruth": true
+  },
+  "reviewDesign": {
+    "minimumIndependentReviewers": 2,
+    "reviewMode": "blind_to_project_expected_label",
+    "requiredPerCaseFields": [
+      "reviewerLabel",
+      "confidence",
+      "evidenceSpanOrReason",
+      "competingReading",
+      "scopeFit",
+      "notes"
+    ],
+    "confidenceScale": {
+      "min": 0,
+      "max": 1,
+      "interpretation": {
+        "0.90-1.00": "leitura fortemente sustentada pelo recorte",
+        "0.75-0.89": "leitura sustentada, com ressalvas menores",
+        "0.50-0.74": "leitura provisória; há concorrência relevante",
+        "0.00-0.49": "evidência insuficiente para decisão segura"
+      }
+    }
+  },
+  "labels": [
+    {
+      "id": "subject_recoverable",
+      "definition": "Há participante não expresso na oração-alvo, mas suficientemente recuperável por flexão ou contexto fornecido."
+    },
+    {
+      "id": "subject_indeterminate_probable",
+      "definition": "Há indício forte de participante não identificável no recorte, mas a classificação depende de contexto que poderia alterar a leitura."
+    },
+    {
+      "id": "subject_indeterminate",
+      "definition": "A construção sustenta participante não identificado e a evidência estrutural disponível é suficiente para a família prevista pela rule card."
+    },
+    {
+      "id": "subjectless_clause",
+      "definition": "O processo não é atribuído a participante sintático recuperável na leitura contratada."
+    },
+    {
+      "id": "ambiguous",
+      "definition": "Há leituras concorrentes relevantes ou evidência insuficiente para escolher entre categorias com segurança."
+    },
+    {
+      "id": "outside_scope_or_annotation_issue",
+      "definition": "O caso não pode ser julgado de modo válido dentro da fronteira M1-R0 ou precisa de correção de segmentação/anotação."
+    }
+  ],
+  "evidencePolicy": {
+    "mustUseTextualOrStructuralEvidence": true,
+    "worldKnowledgeAloneIsInsufficient": true,
+    "proximityOfAPluralAloneIsInsufficientForCoreference": true,
+    "surfaceVerbLemmaAloneIsInsufficientForImpersonality": true,
+    "explicitCompatibleSubjectBlocksIndeterminateOrSubjectlessByDefault": true,
+    "figurativeMeteorologicalUseMustNotBeForcedToSubjectless": true,
+    "seRequiresRegencyAgreementAndConstructionCheck": true,
+    "normativeRegisterRecommendationMustRemainSeparateFromSyntacticClassification": true
+  },
+  "caseReviewMap": [
+    {
+      "caseId": "third-plural-isolated",
+      "focus": ["third_person_plural", "absence_of_recoverable_plural_in_supplied_context"],
+      "reviewQuestion": "O recorte sustenta indeterminação provável sem inventar referente fora do contexto?"
+    },
+    {
+      "caseId": "third-plural-recoverable-context",
+      "focus": ["previous_sentence_reference", "plural_compatibility", "discourse_continuity"],
+      "reviewQuestion": "O referente plural anterior é suficientemente forte para recuperar o sujeito?"
+    },
+    {
+      "caseId": "first-plural-recoverable",
+      "focus": ["personal_inflection"],
+      "reviewQuestion": "A flexão verbal basta para recuperar o participante sem sujeito expresso?"
+    },
+    {
+      "caseId": "se-indeterminate-preposition",
+      "focus": ["se_construction", "prepositional_complement", "regency"],
+      "reviewQuestion": "A estrutura bloqueia leitura passiva simples e sustenta indeterminação?"
+    },
+    {
+      "caseId": "se-passive-agreement-control",
+      "focus": ["se_construction", "nominal_candidate", "number_agreement"],
+      "reviewQuestion": "Há evidência suficiente para impedir que o caso seja rotulado automaticamente como sujeito indeterminado?"
+    },
+    {
+      "caseId": "weather-literal",
+      "focus": ["literal_meteorological_use"],
+      "reviewQuestion": "O uso é meteorológico literal e sem participante expresso?"
+    },
+    {
+      "caseId": "weather-figurative-personal",
+      "focus": ["explicit_nominal", "figurative_reading"],
+      "reviewQuestion": "O sintagma expresso e o uso figurado bloqueiam uma classificação automática como oração sem sujeito?"
+    },
+    {
+      "caseId": "haver-existential",
+      "focus": ["existential_haver"],
+      "reviewQuestion": "O verbo está em uso existencial impessoal no recorte?"
+    },
+    {
+      "caseId": "haver-auxiliary-control",
+      "focus": ["auxiliary_haver", "explicit_subject"],
+      "reviewQuestion": "O uso auxiliar e o sujeito expresso bloqueiam a leitura impessoal?"
+    },
+    {
+      "caseId": "fazer-temporal",
+      "focus": ["temporal_fazer"],
+      "reviewQuestion": "O uso temporal integra a família tradicional de oração sem sujeito nesta leitura?"
+    },
+    {
+      "caseId": "fazer-personal-age-control",
+      "focus": ["personal_fazer", "explicit_subject"],
+      "reviewQuestion": "O sujeito expresso bloqueia a leitura impessoal?"
+    },
+    {
+      "caseId": "third-plural-competing-referents",
+      "focus": ["multiple_plural_candidates", "coreference_competition"],
+      "reviewQuestion": "Há competição suficiente para exigir ambiguidade em vez de inventar um referente?"
+    }
+  ],
+  "adjudication": {
+    "unanimousHighConfidence": {
+      "condition": "todos os revisores concordam e cada confiança >= 0.82",
+      "result": "human_consensus_candidate"
+    },
+    "majorityWithReservations": {
+      "condition": "há maioria, mas pelo menos um revisor diverge ou confiança média < 0.82",
+      "result": "needs_adjudication"
+    },
+    "labelConflict": {
+      "condition": "há divisão entre recuperável, indeterminado, sem sujeito ou ambíguo",
+      "result": "rule_card_refinement_candidate"
+    },
+    "scopeConflict": {
+      "condition": "qualquer revisor marca outside_scope_or_annotation_issue com justificativa estrutural",
+      "result": "case_repair_before_reuse"
+    }
+  },
+  "sourceAnchors": [
+    {
+      "sourceId": "bechara-licoes-20e",
+      "role": "fronteira entre sujeito indeterminado e oração sem sujeito; construção com se; usos impessoais"
+    },
+    {
+      "sourceId": "cunha-cintra-nova-gramatica-7e",
+      "role": "sujeito recuperável por flexão/contexto; terceira pessoa plural; passiva pronominal; oração sem sujeito"
+    },
+    {
+      "sourceId": "bechara-duvidas-2e",
+      "role": "uso e registro de haver/fazer/ter; apoio comparativo, não substituto de gramática"
+    }
+  ],
+  "provenance": {
+    "copiedSourceExamples": false,
+    "rawSourcesInRepository": false,
+    "projectAuthoredProtocol": true,
+    "sourceExamplesMayNotBeCopiedIntoBankWithoutLicenseRecord": true
+  },
+  "releaseLocks": {
+    "doNotModifyRuntimeEngine": true,
+    "doNotAddHeuristic": true,
+    "doNotChangeSyntaxGateState": true,
+    "doNotCreateEvaluationGoldAutomatically": true,
+    "doNotRaiseAcademicScoreFromSyntheticOrProtocolWorkAlone": true
+  },
+  "nextAllowedStep": "Aplicar este protocolo em banca humana independente; registrar apenas decisões, divergências e necessidade de refino. Implementação continua bloqueada até autorização explícita posterior."
+}

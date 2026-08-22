@@ -1,9 +1,17 @@
 import lexicalDataSource from '../../../lexical-data.json?raw'
 import normaDataSource from '../../../norma-data.json?raw'
 import lexicalSource from '../../../lexical-engine.js?raw'
+import { getCuratedSynonyms } from './curatedSynonymCorpus'
 import { resolveContextualLexicalReading } from './contextualLexicalResolver'
+import { readLexicalSynonymNuances, type LexicalSynonymNuance } from './lexicalNuanceSupplement'
 
 export type LexicalDecision = 'classificado' | 'provavel' | 'ambiguo' | 'indeterminado'
+
+export type LexicalContextSnippet = {
+  before: string
+  match: string
+  after: string
+}
 
 export type LexicalReading = {
   word: string
@@ -17,6 +25,9 @@ export type LexicalReading = {
   syntacticFunction: string
   count: number
   alternatives: string[]
+  synonyms: string[]
+  synonymNuances: LexicalSynonymNuance[]
+  contextSnippet: LexicalContextSnippet | null
 }
 
 type LegacyReading = Record<string, unknown>
@@ -109,10 +120,40 @@ function countOccurrences(context: string, query: string): number {
   return count
 }
 
+function createContextSnippet(context: string, query: string): LexicalContextSnippet | null {
+  const cleanContext = context.replace(/\s+/g, ' ').trim()
+  const cleanQuery = query.trim()
+  if (!cleanContext || !cleanQuery) return null
+
+  const escaped = cleanQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const match = cleanContext.match(new RegExp(escaped, 'iu'))
+  if (!match || match.index === undefined) return null
+
+  const from = match.index
+  const to = from + match[0].length
+  const radius = 72
+  const prefixStart = Math.max(0, from - radius)
+  const suffixEnd = Math.min(cleanContext.length, to + radius)
+
+  return {
+    before: `${prefixStart > 0 ? '…' : ''}${cleanContext.slice(prefixStart, from)}`,
+    match: cleanContext.slice(from, to),
+    after: `${cleanContext.slice(to, suffixEnd)}${suffixEnd < cleanContext.length ? '…' : ''}`,
+  }
+}
+
 function requestUrl(input: RequestInfo | URL): string {
   if (typeof input === 'string') return input
   if (input instanceof URL) return input.href
   return input.url
+}
+
+function executeClassicScript(source: string, id: string): void {
+  if (document.querySelector(`script[data-escrevaral-engine="${id}"]`)) return
+  const script = document.createElement('script')
+  script.dataset.escrevaralEngine = id
+  script.textContent = `${source}\n//# sourceURL=${id}`
+  document.head.append(script)
 }
 
 async function loadEngineWithLocalData(): Promise<boolean> {
@@ -135,12 +176,7 @@ async function loadEngineWithLocalData(): Promise<boolean> {
   }) as typeof window.fetch
 
   try {
-    if (!document.querySelector('script[data-escrevaral-engine="lexical-engine.js"]')) {
-      const script = document.createElement('script')
-      script.dataset.escrevaralEngine = 'lexical-engine.js'
-      script.textContent = `${lexicalSource}\n//# sourceURL=lexical-engine.js`
-      document.head.append(script)
-    }
+    executeClassicScript(lexicalSource, 'lexical-engine.js')
 
     const engine = window.VeredaLexical
     if (!engine) return false
@@ -179,11 +215,11 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
   const definition = text(source.definicao).trim()
   const count = countOccurrences(context, cleanWord)
   const registered = isRegisteredTerm(cleanWord)
+  const synonyms = getCuratedSynonyms(cleanWord)
+  const synonymNuances = readLexicalSynonymNuances(cleanWord, synonyms)
   let decision = text(source.decisao) as LexicalDecision
   if (!['classificado', 'provavel', 'ambiguo', 'indeterminado'].includes(decision)) decision = 'indeterminado'
 
-  // Sem ocorrência e sem registro explícito, a resposta da engine é apenas um
-  // fallback morfológico. A interface não o apresenta como verbete existente.
   if (count === 0 && !registered) return null
 
   let className = text(source.className).trim() || 'Classe não determinada'
@@ -223,5 +259,8 @@ export async function readLexicalWord(word: string, context: string): Promise<Le
     syntacticFunction,
     count,
     alternatives,
+    synonyms,
+    synonymNuances,
+    contextSnippet: count > 0 ? createContextSnippet(context, cleanWord) : null,
   }
 }

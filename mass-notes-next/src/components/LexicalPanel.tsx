@@ -168,7 +168,7 @@ export function LexicalPanel({ document }: Props) {
   return (
     <section className="lexical-panel" aria-labelledby="lexical-panel-title">
       <h3 id="lexical-panel-title" className="sr-only">Palavras</h3>
-      <p className="panel-intro">Significado, classe e outras leituras são calculados no navegador. Nada é substituído no manuscrito.</p>
+      <p className="panel-intro">Significado, classe, contexto e sinônimos são consultados no navegador. Nada é substituído no manuscrito.</p>
       <form className="lexical-search" onSubmit={(event) => { event.preventDefault(); void run(query) }}>
         <label htmlFor="lexical-query">Palavra ou expressão curta</label>
         <div>
@@ -195,6 +195,36 @@ export function LexicalPanel({ document }: Props) {
           {!verbAnalysis && reading && <p className="lexical-decision">{DECISION_LABELS[reading.decision]}</p>}
           {!verbAnalysis && reading?.definition && <p className="lexical-definition">{reading.definition}</p>}
           {!verbAnalysis && reading?.note && <p>{reading.note}</p>}
+
+          {reading?.contextSnippet && (
+            <section className="lexical-context" aria-labelledby="lexical-context-title">
+              <h3 id="lexical-context-title">No trecho</h3>
+              <p>{reading.contextSnippet.before}<mark>{reading.contextSnippet.match}</mark>{reading.contextSnippet.after}</p>
+            </section>
+          )}
+
+          {reading && reading.synonyms.length > 0 && (
+            <section className="lexical-synonyms" aria-labelledby="lexical-synonyms-title">
+              <h3 id="lexical-synonyms-title">Sinônimos para consulta</h3>
+              <div>{reading.synonyms.map((item) => <span key={item}>{item}</span>)}</div>
+            </section>
+          )}
+
+          {reading && reading.synonymNuances.length > 0 && (
+            <section className="lexical-alternatives lexical-nuances" aria-labelledby="lexical-nuances-title">
+              <h3 id="lexical-nuances-title">Matizes entre alternativas</h3>
+              <ul>
+                {reading.synonymNuances.map((item) => (
+                  <li key={item.candidate}>
+                    <strong>{item.candidate}</strong>
+                    {item.register && <> · {item.register}</>}
+                    <span> — {item.focus}</span>
+                    <p>{item.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {verbAnalysis && <VerbAnalysisCard analysis={verbAnalysis} />}
 

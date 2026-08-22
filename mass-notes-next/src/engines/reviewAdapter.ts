@@ -1,7 +1,10 @@
-import criteriaSource from '../../../js/data/criterios-data.js?raw'
-import syntaxSource from '../../../syntax-engine.js?raw'
-import punctuationSource from '../../../punctuation-engine.js?raw'
-import analysisSource from '../../../analise-engine.js?raw'
+import { analyzeTextCohesion } from './cohesionSupplement'
+import { analyzeCraseCalibration } from './craseSupplement'
+import { analyzeNormativeVerbCalibration } from './normativeVerbSupplement'
+import {
+  calibrateStructuralPunctuation,
+  type StructuralSyntaxEngine,
+} from './punctuationStructuralSupplement'
 
 export type ReviewIssue = {
   id: string
@@ -22,11 +25,26 @@ export type ReviewReading = {
   locatedIssues: LocatedReviewIssue[]
 }
 
+type RawModule = { default: string }
+
+let loadingPromise: Promise<boolean> | null = null
+
 declare global {
   interface Window {
     VeredaAnalise?: {
       analisar: (text: string) => unknown
       interpretarResultado?: (result: unknown) => unknown
+    }
+    VeredaPunctuation?: {
+      analyzeDeep?: (text: string) => Promise<{
+        issues: unknown[]
+        ruleCount?: number
+        resumo?: unknown
+      }>
+    }
+    syntaxEngine?: StructuralSyntaxEngine & {
+      init: () => Promise<boolean>
+      _isReady?: () => boolean
     }
     __escrevaralReviewLoaded?: boolean
   }
@@ -40,19 +58,42 @@ function executeClassicScript(source: string, id: string): void {
   document.head.append(script)
 }
 
-export function ensureReviewEngine(): boolean {
-  if (window.__escrevaralReviewLoaded && window.VeredaAnalise?.analisar) return true
-  try {
-    executeClassicScript(criteriaSource, 'criterios-data.js')
-    executeClassicScript(syntaxSource, 'syntax-engine.js')
-    executeClassicScript(punctuationSource, 'punctuation-engine.js')
-    executeClassicScript(analysisSource, 'analise-engine.js')
-    window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
-    return window.__escrevaralReviewLoaded
-  } catch (error) {
-    console.error('[Escrevaral] Não foi possível carregar a engine de revisão.', error)
-    return false
+async function loadReviewEngine(): Promise<boolean> {
+  const [criteria, syntax, punctuation, analysis] = await Promise.all([
+    import('../../../js/data/criterios-data.js?raw') as Promise<RawModule>,
+    import('../../../syntax-engine.js?raw') as Promise<RawModule>,
+    import('../../../punctuation-engine.js?raw') as Promise<RawModule>,
+    import('../../../analise-engine.js?raw') as Promise<RawModule>,
+  ])
+
+  executeClassicScript(criteria.default, 'criterios-data.js')
+  executeClassicScript(syntax.default, 'syntax-engine.js')
+  executeClassicScript(punctuation.default, 'punctuation-engine.js')
+  executeClassicScript(analysis.default, 'analise-engine.js')
+
+  const syntaxInitialized = await window.syntaxEngine?.init?.() ?? false
+  if (!syntaxInitialized) {
+    console.warn('[Escrevaral] Syntax engine não inicializada. Análise sintática pode estar incompleta.')
   }
+
+  window.__escrevaralReviewLoaded = Boolean(window.VeredaAnalise?.analisar)
+  return window.__escrevaralReviewLoaded
+}
+
+export async function ensureReviewEngine(): Promise<boolean> {
+  if (window.__escrevaralReviewLoaded && window.VeredaAnalise?.analisar) return true
+  if (loadingPromise) return loadingPromise
+
+  loadingPromise = loadReviewEngine()
+    .catch((error) => {
+      console.error('[Escrevaral] Não foi possível carregar a engine de revisão.', error)
+      return false
+    })
+    .finally(() => {
+      loadingPromise = null
+    })
+
+  return loadingPromise
 }
 
 function normalizeSeverity(value: unknown): ReviewIssue['severity'] {
@@ -114,9 +155,6 @@ function normalizeLocatedIssue(item: unknown, text: string, index: number): Loca
   const requestedPosition = Number(source.pos)
   if (!fragment || !Number.isInteger(requestedPosition) || requestedPosition < 0) return null
 
-  // Algumas regras removem espaços periféricos do fragmento. Aceitamos apenas
-  // um realinhamento local e determinístico; nunca buscamos a primeira ocorrência
-  // global, pois isso quebraria textos com fragmentos repetidos.
   let from = requestedPosition
   if (text.slice(from, from + fragment.length) !== fragment) {
     const local = text.slice(requestedPosition, requestedPosition + fragment.length + 4)
@@ -141,20 +179,98 @@ function normalizeLocatedIssue(item: unknown, text: string, index: number): Loca
   }
 }
 
+function mergeGeneralIssues(base: ReviewIssue[], calibrated: ReviewIssue[]): ReviewIssue[] {
+  const seen = new Set(base.map((item) => `${item.title}\u0000${item.detail}`))
+  const merged = [...base]
+
+  for (const item of calibrated) {
+    const key = `${item.title}\u0000${item.detail}`
+    if (seen.has(key)) continue
+    seen.add(key)
+    merged.push(item)
+  }
+
+  return merged
+}
+
+function cohesionObservation(text: string): ReviewIssue[] {
+  const reading = analyzeTextCohesion(text)
+  if (reading.sentenceCount < 2) return []
+
+  const relationCounts = new Map<string, number>()
+  for (const marker of reading.sequentialMarkers) {
+    relationCounts.set(marker.relation, (relationCounts.get(marker.relation) ?? 0) + marker.count)
+  }
+
+  const parts: string[] = []
+  if (relationCounts.size) {
+    parts.push(`Conectores explícitos: ${[...relationCounts.entries()].map(([relation, count]) => `${relation} ${count}`).join(', ')}.`)
+  }
+  if (reading.referentialMarkers) {
+    parts.push(`Marcadores referenciais: ${reading.referentialMarkers}.`)
+  }
+  if (reading.recurrences.length) {
+    parts.push(`Recorrências entre frases: ${reading.recurrences.slice(0, 5).map((item) => `${item.word} (${item.transitions})`).join(', ')}.`)
+  }
+  if (!parts.length) return []
+
+  parts.push('O mapa descreve ligações formais observáveis; não mede coerência, intenção nem qualidade do texto.')
+  return [{
+    id: 'C4-COESAO-MAPA',
+    title: 'Mapa de coesão observável',
+    detail: parts.join(' '),
+    severity: 'baixa',
+  }]
+}
+
 export async function reviewTextDetailed(text: string): Promise<ReviewReading> {
   if (!text.trim()) return { issues: [], locatedIssues: [] }
-  if (!ensureReviewEngine() || !window.VeredaAnalise) {
+  if (!(await ensureReviewEngine()) || !window.VeredaAnalise) {
     throw new Error('A engine de revisão não está disponível.')
   }
 
   const result = window.VeredaAnalise.analisar(text)
+  let locatedPunctuationItems = punctuationItems(result)
+
+  try {
+    const deepResult = await window.VeredaPunctuation?.analyzeDeep?.(text)
+    if (deepResult?.issues) {
+      const calibratedIssues = calibrateStructuralPunctuation(
+        text,
+        deepResult.issues,
+        window.syntaxEngine,
+      )
+      locatedPunctuationItems = calibratedIssues
+
+      const resultObj = result as Record<string, unknown>
+      const normaObj = resultObj?.norma as Record<string, unknown> | undefined
+      if (normaObj) {
+        normaObj.pontuacao = {
+          issues: calibratedIssues,
+          ruleCount: typeof deepResult.ruleCount === 'number' ? deepResult.ruleCount + 2 : undefined,
+          resumo: deepResult.resumo,
+        }
+      }
+    }
+  } catch (error) {
+    console.error('[Escrevaral] Erro na análise sintática profunda. Usando análise básica.', error)
+  }
+
   const interpreted = window.VeredaAnalise.interpretarResultado?.(result)
-  const locatedIssues = punctuationItems(result)
+  const locatedIssues = locatedPunctuationItems
     .map((item, index) => normalizeLocatedIssue(item, text, index))
     .filter((item): item is LocatedReviewIssue => Boolean(item))
+  const issues = mergeGeneralIssues(
+    interpretedIssues(interpreted),
+    [
+      ...analyzeNormativeVerbCalibration(text),
+      ...analyzeCraseCalibration(text),
+      ...cohesionObservation(text),
+    ],
+  )
 
   return {
-    issues: interpretedIssues(interpreted),
+    issues,
     locatedIssues,
   }
 }

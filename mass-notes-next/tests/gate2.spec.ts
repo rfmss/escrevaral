@@ -71,6 +71,7 @@ test('toolbar preserva seleção e listas continuam estruturadas', async ({ page
     selection?.removeAllRanges()
     selection?.addRange(range)
   })
+  await page.keyboard.press('Escape')
   await page.getByRole('button', { name: 'N', exact: true }).click()
   await expect(editor.locator('strong')).toHaveText('Texto selecionado')
 
@@ -86,6 +87,7 @@ test('toolbar preserva seleção e listas continuam estruturadas', async ({ page
     selection?.removeAllRanges()
     selection?.addRange(range)
   })
+  await page.keyboard.press('Escape')
   await page.getByRole('button', { name: '• Lista', exact: true }).click()
   await expect(editor.locator('ul li')).toHaveCount(1)
   await editor.locator('li').first().click()
@@ -102,7 +104,7 @@ test('recupera edição interrompida antes do autosave', async ({ context, page 
   await page.keyboard.type(interruptedText)
   await expect(editor).toHaveText(interruptedText)
 
-  await expect.poll(() => page.evaluate(({ key, expected }) => {
+  await expect.poll(() => page.evaluate(({ key }) => {
     try {
       const raw = localStorage.getItem(key)
       if (!raw) return ''
@@ -111,7 +113,7 @@ test('recupera edição interrompida antes do autosave', async ({ context, page 
     } catch {
       return ''
     }
-  }, { key: RECOVERY_KEY, expected: interruptedText }), {
+  }, { key: RECOVERY_KEY }), {
     timeout: 8_000,
     intervals: [50, 100, 250],
   }).toBe(interruptedText)
@@ -141,9 +143,11 @@ test('conflito preserva a versão local como nova página', async ({ context, pa
   await expect(second.getByLabel('Título do documento')).toHaveValue('Versão local B — conflito')
 
   await page.reload()
-  await expect(page.getByText('Versão local B — conflito', { exact: true })).toBeVisible()
-  await expect(page.getByText('Versão persistida A', { exact: true })).toBeVisible()
-  await page.getByText('Versão persistida A', { exact: true }).click()
+  const conflictCopy = page.locator('.left-rail .chapter').filter({ hasText: 'Versão local B — conflito' })
+  const persistedRow = page.locator('.left-rail .chapter').filter({ hasText: 'Versão persistida A' })
+  await expect(conflictCopy).toBeVisible()
+  await expect(persistedRow).toBeVisible()
+  await persistedRow.click()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Versão persistida A')
 })
 

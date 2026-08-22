@@ -3,7 +3,9 @@
 .lexical-search,
 .lexical-reading,
 .lexical-reading dl,
-.lexical-alternatives {
+.lexical-alternatives,
+.lexical-context,
+.lexical-synonyms {
   min-width: 0;
   max-width: 100%;
 }
@@ -15,7 +17,9 @@
 }
 
 .lexical-search label,
-.lexical-alternatives h3 {
+.lexical-alternatives h3,
+.lexical-context h3,
+.lexical-synonyms h3 {
   font-family: "Arial Narrow", "Roboto Condensed", sans-serif;
   font-size: .58rem;
   font-weight: 900;
@@ -100,7 +104,8 @@
 
 .lexical-definition,
 .lexical-reading > p,
-.lexical-alternatives li {
+.lexical-alternatives li,
+.lexical-context p {
   margin: 0;
   color: var(--muted);
   font-size: .68rem;
@@ -109,6 +114,48 @@
 
 .lexical-definition {
   color: var(--ink);
+}
+
+.lexical-context,
+.lexical-synonyms {
+  display: grid;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.lexical-context h3,
+.lexical-synonyms h3 {
+  margin: 0;
+}
+
+.lexical-context p {
+  padding: 9px 10px;
+  border-left: 3px solid var(--blue-deep);
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+}
+
+.lexical-context mark {
+  padding: 1px 2px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--orange) 42%, transparent);
+  font-weight: 800;
+}
+
+.lexical-synonyms > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.lexical-synonyms span {
+  max-width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 74%, var(--blue) 26%);
+  font-size: .62rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .lexical-reading dl {

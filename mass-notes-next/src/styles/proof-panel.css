@@ -1,0 +1,123 @@
+.proof-panel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--home-line, var(--line));
+}
+
+.proof-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--ui-border-soft, var(--line));
+}
+
+.proof-summary > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding: 10px;
+  border-right: 1px solid var(--ui-border-soft, var(--line));
+  border-bottom: 1px solid var(--ui-border-soft, var(--line));
+}
+
+.proof-summary > div:nth-child(2n) { border-right: 0; }
+.proof-summary > div:nth-last-child(-n + 2) { border-bottom: 0; }
+
+.proof-summary strong {
+  color: var(--blue-deep);
+  font: 900 1.35rem/1 "Arial Narrow", "Roboto Condensed", sans-serif;
+}
+
+.proof-summary span,
+.proof-note,
+.proof-message,
+.proof-recent small,
+.proof-history span {
+  color: var(--ui-text-secondary, var(--muted));
+  font-size: .64rem;
+  line-height: 1.45;
+}
+
+.proof-message,
+.proof-note {
+  margin: 0;
+}
+
+.proof-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.proof-actions .action {
+  min-width: 0;
+  margin-top: 0;
+  text-align: center;
+}
+
+.proof-recent,
+.proof-author,
+.proof-history {
+  min-width: 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--ui-border-soft, var(--line));
+}
+
+.proof-recent ul {
+  display: grid;
+  gap: 0;
+  margin: 7px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proof-recent li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--ui-border-soft, var(--line));
+  font-size: .66rem;
+}
+
+.proof-recent li:last-child { border-bottom: 0; }
+
+.proof-history summary {
+  cursor: pointer;
+  color: var(--blue-deep);
+  font-size: .66rem;
+  font-weight: 800;
+}
+
+.proof-history > div {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.proof-history article {
+  display: grid;
+  gap: 2px;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--ui-border-soft, var(--line));
+  font-size: .66rem;
+}
+
+.proof-author {
+  display: grid;
+  gap: 7px;
+}
+
+.proof-author .search {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 420px) {
+  .proof-actions {
+    grid-template-columns: 1fr;
+  }
+}

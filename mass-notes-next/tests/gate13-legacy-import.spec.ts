@@ -7,6 +7,7 @@ type LegacyManuscript = {
   type?: string
   status?: string
   kind?: string
+  templateId?: string
   tags?: string[] | string
   pinned?: boolean
   createdAt?: string
@@ -15,13 +16,21 @@ type LegacyManuscript = {
 
 async function waitReady(page: Page) {
   await page.goto('/')
-  await expect(page.locator('.paper')).toBeVisible()
+  await expect(page.locator('.paper-shell')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
 }
 
 async function openImport(page: Page) {
-  await page.getByRole('tab', { name: 'ferramentas', exact: true }).click()
-  await expect(page.locator('.backup-panel')).toBeVisible()
+  const dialog = page.getByRole('dialog', { name: 'Ferramentas do texto' })
+  if (!await dialog.isVisible().catch(() => false)) {
+    if (await page.locator('body.focus-mode').count()) await page.keyboard.press('Escape')
+    await page.getByRole('button', { name: 'Abrir oficina de ferramentas' }).click()
+    await expect(dialog).toBeVisible()
+  }
+  await dialog.getByRole('tab', { name: 'ferramentas', exact: true }).click()
+  const panel = dialog.locator('.backup-panel')
+  await expect(panel).toBeVisible()
+  return { dialog, panel }
 }
 
 function stableSort(value: unknown): unknown {
@@ -55,8 +64,8 @@ function legacyEnvelope(manuscripts: LegacyManuscript[], overrides: Record<strin
   }
 }
 
-async function uploadLegacy(page: Page, value: unknown, name = 'acervo-antigo.esc') {
-  await page.getByLabel('Selecionar acervo esc legado').setInputFiles({
+async function uploadLegacy(panel: import('@playwright/test').Locator, value: unknown, name = 'acervo-antigo.esc') {
+  await panel.getByLabel('Selecionar acervo esc legado').setInputFiles({
     name,
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(value)),
@@ -82,90 +91,99 @@ async function readDocumentByLegacyId(page: Page, legacySourceId: string) {
 
 test('arquivo legado válido é pré-visualizado antes de qualquer gravação', async ({ page }) => {
   await waitReady(page)
-  const before = await page.locator('.note-card').count()
-  await openImport(page)
-  await uploadLegacy(page, legacyEnvelope([
+  const before = await page.locator('.chapter').count()
+  const { panel } = await openImport(page)
+  await uploadLegacy(panel, legacyEnvelope([
     { id: 'legado-1', title: 'Caderno antigo', text: 'Primeiro parágrafo.\n\nSegundo parágrafo.', type: 'manuscrito' },
     { id: 'legado-2', title: 'Poema guardado', text: 'Chuva no telhado', type: 'poema' },
   ]))
 
-  await expect(page.getByRole('heading', { name: 'Prévia do acervo legado' })).toBeVisible()
-  await expect(page.getByText('Caderno antigo', { exact: true })).toBeVisible()
-  await expect(page.getByText('Poema guardado', { exact: true })).toBeVisible()
-  await expect(page.locator('.note-card')).toHaveCount(before)
+  await expect(panel.getByRole('heading', { name: 'Prévia do acervo legado' })).toBeVisible()
+  await expect(panel.getByText('Caderno antigo', { exact: true })).toBeVisible()
+  await expect(panel.getByText('Poema guardado', { exact: true })).toBeVisible()
+  await expect(page.locator('.chapter')).toHaveCount(before)
 
-  await page.getByRole('button', { name: 'Importar como novas cópias' }).click()
-  await expect(page.locator('.backup-message')).toContainText('2 documentos importados')
-  await expect(page.locator('.note-card')).toHaveCount(before + 2)
-  await expect(page.getByText('Caderno antigo — importado', { exact: true })).toBeVisible()
+  await panel.getByRole('button', { name: 'Importar como novas cópias' }).click()
+  await expect(panel.locator('.backup-message')).toContainText('2 documentos importados')
+  await expect(page.locator('.chapter')).toHaveCount(before + 2)
+  await expect(page.locator('.chapter').filter({ hasText: 'Caderno antigo — importado' })).toBeVisible()
 })
 
-test('conversão preserva texto e mapeia estado, tags, favorito e origem', async ({ page }) => {
+test('conversão preserva texto, contexto editorial, estado, tags, favorito e origem', async ({ page }) => {
   await waitReady(page)
-  await openImport(page)
-  await uploadLegacy(page, legacyEnvelope([{
+  const { dialog, panel } = await openImport(page)
+  await uploadLegacy(panel, legacyEnvelope([{
     id: 'origem-rastreavel',
     title: 'Texto em revisão',
     text: 'Linha com memória.\n\nOutra linha com emoji 🪶.',
     type: 'crônica',
+    kind: 'texto-literário',
+    templateId: 'cronica-literaria',
     status: 'Em revisão',
     tags: ['Memória', 'memória', 'crônica'],
     pinned: true,
     createdAt: '2024-02-03T10:00:00.000Z',
   }]))
-  await page.getByRole('button', { name: 'Importar como novas cópias' }).click()
-  await page.getByText('Texto em revisão — importado', { exact: true }).click()
+  await panel.getByRole('button', { name: 'Importar como novas cópias' }).click()
+  await dialog.getByRole('button', { name: 'Fechar ferramentas' }).click()
+  const imported = page.locator('.chapter').filter({ hasText: 'Texto em revisão — importado' })
+  await expect(imported).toBeVisible()
+  await imported.click()
 
   await expect(page.locator('.ProseMirror')).toContainText('Outra linha com emoji 🪶.')
-  await page.getByRole('tab', { name: 'pulso', exact: true }).click()
-  await expect(page.getByRole('button', { name: 'Página favorita' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Em corte', exact: true }).last()).toHaveClass(/active/)
-  await expect(page.getByRole('button', { name: 'Remover marcador Memória' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Remover marcador crônica' })).toBeVisible()
+  const tools = await openImport(page)
+  await tools.dialog.getByRole('tab', { name: 'pulso', exact: true }).click()
+  await expect(tools.dialog.getByRole('button', { name: 'Página favorita' })).toBeVisible()
+  await expect(tools.dialog.getByRole('button', { name: 'Em corte', exact: true })).toHaveClass(/active/)
+  await expect(tools.dialog.getByRole('button', { name: 'Remover marcador Memória' })).toBeVisible()
+  await expect(tools.dialog.getByRole('button', { name: 'Remover marcador crônica' })).toBeVisible()
 
   const rows = await readDocumentByLegacyId(page, 'origem-rastreavel')
   expect(rows).toHaveLength(1)
   expect(rows[0].title).toBe('Texto em revisão — importado')
+  expect(rows[0].type).toBe('crônica')
+  expect(rows[0].kind).toBe('texto-literário')
+  expect(rows[0].templateId).toBe('cronica-literaria')
 })
 
 test('cancelar a prévia não altera a biblioteca', async ({ page }) => {
   await waitReady(page)
-  const before = await page.locator('.note-card').count()
-  await openImport(page)
-  await uploadLegacy(page, legacyEnvelope([{ id: 'cancelado', title: 'Não importar', text: 'Rascunho.' }]))
-  await page.getByRole('button', { name: 'Cancelar' }).click()
-  await expect(page.getByRole('heading', { name: 'Prévia do acervo legado' })).toHaveCount(0)
-  await expect(page.locator('.note-card')).toHaveCount(before)
+  const before = await page.locator('.chapter').count()
+  const { panel } = await openImport(page)
+  await uploadLegacy(panel, legacyEnvelope([{ id: 'cancelado', title: 'Não importar', text: 'Rascunho.' }]))
+  await panel.getByRole('button', { name: 'Cancelar' }).click()
+  await expect(panel.getByRole('heading', { name: 'Prévia do acervo legado' })).toHaveCount(0)
+  await expect(page.locator('.chapter')).toHaveCount(before)
   expect(await readDocumentByLegacyId(page, 'cancelado')).toHaveLength(0)
 })
 
 test('assinatura inválida e extensão errada são rejeitadas sem gravação', async ({ page }) => {
   await waitReady(page)
-  const before = await page.locator('.note-card').count()
-  await openImport(page)
+  const before = await page.locator('.chapter').count()
+  const { panel } = await openImport(page)
   const corrupt = legacyEnvelope([{ id: 'corrompido', title: 'Corrompido', text: 'Texto.' }], { checksum: '00000000' })
-  await uploadLegacy(page, corrupt)
-  await expect(page.locator('.backup-message')).toContainText('assinatura')
-  await expect(page.locator('.note-card')).toHaveCount(before)
+  await uploadLegacy(panel, corrupt)
+  await expect(panel.locator('.backup-message')).toContainText('assinatura')
+  await expect(page.locator('.chapter')).toHaveCount(before)
 
-  await uploadLegacy(page, legacyEnvelope([{ id: 'extensao', title: 'Extensão', text: 'Texto.' }]), 'arquivo.json')
-  await expect(page.locator('.backup-message')).toContainText('extensão .esc')
-  await expect(page.locator('.note-card')).toHaveCount(before)
+  await uploadLegacy(panel, legacyEnvelope([{ id: 'extensao', title: 'Extensão', text: 'Texto.' }]), 'arquivo.json')
+  await expect(panel.locator('.backup-message')).toContainText('extensão .esc')
+  await expect(page.locator('.chapter')).toHaveCount(before)
 })
 
 test('versão futura e identificadores duplicados invalidam o lote inteiro', async ({ page }) => {
   await waitReady(page)
-  const before = await page.locator('.note-card').count()
-  await openImport(page)
-  await uploadLegacy(page, legacyEnvelope([{ id: 'futuro', title: 'Futuro', text: 'Texto.' }], { schemaVersion: 99 }))
-  await expect(page.locator('.backup-message')).toContainText('Versão legada não suportada')
+  const before = await page.locator('.chapter').count()
+  const { panel } = await openImport(page)
+  await uploadLegacy(panel, legacyEnvelope([{ id: 'futuro', title: 'Futuro', text: 'Texto.' }], { schemaVersion: 99 }))
+  await expect(panel.locator('.backup-message')).toContainText('Versão legada não suportada')
 
-  await uploadLegacy(page, legacyEnvelope([
+  await uploadLegacy(panel, legacyEnvelope([
     { id: 'duplicado', title: 'Primeiro', text: 'Um.' },
     { id: 'duplicado', title: 'Segundo', text: 'Dois.' },
   ]))
-  await expect(page.locator('.backup-message')).toContainText('Identificador legado duplicado')
-  await expect(page.locator('.note-card')).toHaveCount(before)
+  await expect(panel.locator('.backup-message')).toContainText('Identificador legado duplicado')
+  await expect(page.locator('.chapter')).toHaveCount(before)
   expect(await readDocumentByLegacyId(page, 'duplicado')).toHaveLength(0)
 })
 
@@ -173,10 +191,10 @@ test('prévia legada cabe no drawer móvel e continua cancelável', async ({ pag
   await page.setViewportSize({ width: 390, height: 844 })
   await waitReady(page)
   await page.getByRole('button', { name: 'Abrir ferramentas' }).click()
-  await openImport(page)
-  await uploadLegacy(page, legacyEnvelope([{ id: 'mobile', title: 'Acervo móvel com título comprido para testar quebra segura', text: 'Texto.' }]))
+  const { panel } = await openImport(page)
+  await uploadLegacy(panel, legacyEnvelope([{ id: 'mobile', title: 'Acervo móvel com título comprido para testar quebra segura', text: 'Texto.' }]))
 
-  const preview = page.locator('.legacy-import-preview')
+  const preview = panel.locator('.legacy-import-preview')
   await expect(preview).toBeVisible()
   const geometry = await preview.evaluate((node) => ({
     scrollWidth: node.scrollWidth,
@@ -185,6 +203,6 @@ test('prévia legada cabe no drawer móvel e continua cancelável', async ({ pag
   }))
   expect(geometry.scrollWidth).toBeLessThanOrEqual(geometry.clientWidth + 1)
   expect(geometry.overflow).toBeLessThanOrEqual(1)
-  await page.getByRole('button', { name: 'Cancelar' }).click()
+  await panel.getByRole('button', { name: 'Cancelar' }).click()
   await expect(preview).not.toBeVisible()
 })

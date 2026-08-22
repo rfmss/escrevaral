@@ -62,6 +62,10 @@ function parseTimestamp(value: unknown, fallback: number): number {
   return fallback
 }
 
+function optionalString(value: unknown): string | null {
+  return typeof value === 'string' && value.trim() ? value.trim() : null
+}
+
 function mapStatus(value: unknown): DocumentStatus {
   const normalized = String(value ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('pt-BR')
   if (/pronto|finaliz|publicad|concluid/.test(normalized)) return 'Pronto'
@@ -83,7 +87,9 @@ function validateManuscript(value: unknown, index: number, seen: Set<string>, im
   const title = String(value.title ?? value.name ?? '').trim() || 'Sem título'
   const textValue = value.text ?? value.content ?? ''
   if (typeof textValue !== 'string') throw new LegacyEscValidationError(`“${title}”: conteúdo textual inválido.`)
-  const type = String(value.type ?? 'manuscrito')
+  const type = String(value.type ?? 'manuscrito').trim() || 'manuscrito'
+  const kind = optionalString(value.kind)
+  const templateId = optionalString(value.templateId)
   const tags = parseLibraryTags(Array.isArray(value.tags) ? value.tags.map(String).join(',') : String(value.tags ?? ''))
   const status = mapStatus(value.status ?? value.kind)
   const createdAt = parseTimestamp(value.createdAt ?? value.created, importedAt + index)
@@ -100,6 +106,9 @@ function validateManuscript(value: unknown, index: number, seen: Set<string>, im
     updatedAt,
     revision: 0,
     legacySourceId: sourceId,
+    type,
+    kind,
+    templateId,
   })
 
   return {

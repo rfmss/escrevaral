@@ -1,0 +1,112 @@
+/* Escrevaral — Paper Home / legibilidade e estados.
+ * Carregada por último: corrige apenas contraste, estados e invariantes
+ * visuais da casa aprovada; não altera domínio, persistência ou engines.
+ */
+:root {
+  --home-muted: #565b57;
+  --home-disabled: #747b77;
+}
+
+@media (min-width: 1100px) {
+  /* A referência usa uma folha inset: 12px à esquerda, 20px à direita,
+     10px no topo e 10px na base. Regras legadas não podem expandi-la. */
+  .experience-view--editor .app-shell {
+    min-height: 0 !important;
+    height: calc(100vh - 20px) !important;
+    max-height: calc(100vh - 20px) !important;
+  }
+
+  /* O lockup legado desliga pseudo-elementos com !important. Nesta casa,
+     o wordmark tipográfico da referência é deliberadamente a marca visível. */
+  .experience-view--editor .brand::before {
+    content: "ESCREVARAL" !important;
+    display: block !important;
+  }
+
+  .experience-view--editor .brand::after {
+    content: "ESCRITA COM INTENÇÃO" !important;
+    display: block !important;
+  }
+
+  /* A referência mantém a faixa de formatação em 80px mesmo em desktop baixo. */
+  .experience-view--editor .editor-toolbar-slot,
+  .experience-view--editor .editor-toolbar,
+  .editor-toolbar-dock .editor-toolbar {
+    min-height: 80px;
+    height: 80px;
+  }
+
+  /* A moldura superior da referência permanece em 92px. */
+  .experience-view--editor .brand,
+  .experience-view--editor .registration,
+  .experience-view--editor .rail-title {
+    min-height: 92px;
+    height: 92px;
+  }
+
+  .experience-view--editor .tab,
+  .experience-view--editor .metric small,
+  .experience-view--editor .panel-intro,
+  .experience-view--editor .review-message,
+  .experience-view--editor .voice-message,
+  .experience-view--editor .note-num,
+  .experience-view--editor .sidebar-footer {
+    color: var(--home-muted);
+  }
+
+  .experience-view--editor .editor-toolbar button:disabled,
+  .editor-toolbar-dock .editor-toolbar button:disabled {
+    color: var(--home-disabled);
+    opacity: 1;
+    background: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  body.night:not(.experience-anatomy) {
+    --home-paper: #1a2432;
+    --home-ink: #f4f0e9;
+    --home-blue: #70c9ef;
+    --home-orange: #ff8a3d;
+    --home-line: rgba(218, 229, 232, .34);
+    --home-dash: rgba(112, 201, 239, .58);
+    --home-page-shadow: rgba(0, 0, 0, .36);
+    --home-muted: #d5dddc;
+    --home-disabled: #9ba8ac;
+    background: #10171f;
+  }
+
+  body.night:not(.experience-anatomy) .experience-view--editor .app-shell {
+    color: var(--home-ink);
+    background-color: var(--home-paper);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 31% 18%, rgba(112, 201, 239, .055), transparent 58%),
+      radial-gradient(ellipse at 88% 68%, rgba(255, 138, 61, .035), transparent 44%),
+      repeating-linear-gradient(1deg, transparent 0 31px, rgba(255, 255, 255, .012) 32px 33px);
+  }
+
+  body.night:not(.experience-anatomy) .experience-view--editor .side-tools .search,
+  body.night:not(.experience-anatomy) .experience-view--editor .side-tools .icon-btn,
+  body.night:not(.experience-anatomy) .experience-view--editor .library-status-filters button,
+  body.night:not(.experience-anatomy) .experience-view--editor .library-favorites-filter,
+  body.night:not(.experience-anatomy) .experience-view--editor .library-select-field select,
+  body.night:not(.experience-anatomy) .experience-view--editor .library-filter-summary button {
+    color: var(--home-ink);
+    border-color: rgba(244, 240, 233, .5);
+  }
+
+  body.night:not(.experience-anatomy) .experience-view--editor .note-card,
+  body.night:not(.experience-anatomy) .experience-view--editor .field-value,
+  body.night:not(.experience-anatomy) .experience-view--editor .title-input,
+  body.night:not(.experience-anatomy) .experience-view--editor .tiptap.escrevaral-editor,
+  body.night:not(.experience-anatomy) .experience-view--editor .editor-toolbar button,
+  body.night:not(.experience-anatomy) .editor-toolbar-dock .editor-toolbar button {
+    color: var(--home-ink);
+  }
+
+  body.night:not(.experience-anatomy) .experience-view--editor .editor-toolbar button:disabled,
+  body.night:not(.experience-anatomy) .editor-toolbar-dock .editor-toolbar button:disabled {
+    color: var(--home-disabled);
+  }
+}
