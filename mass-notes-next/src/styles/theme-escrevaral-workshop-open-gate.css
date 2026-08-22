@@ -1,11 +1,12 @@
 /* Gate de transição repouso → oficina.
- * No desktop, `workshop-open` significa voltar à casa completa: biblioteca e
- * ferramentas estruturais precisam reaparecer mesmo quando seus drawers
- * móveis não carregam a classe transitória `open`.
+ * `workshop-open` volta à casa completa. A composição atual vive em
+ * `.paper-shell`; `.sidebar/.rail` permanecem apenas como drawers legados
+ * usados por superfícies contextuais. O gate precisa portanto restaurar o
+ * chrome canônico, e não somente os drawers auxiliares.
  */
 @media (min-width: 821px) {
-  body.writing-rest.workshop-open:not(.focus-mode) .sidebar,
-  body.writing-rest.workshop-open:not(.focus-mode) .rail {
+  body.writing-rest.workshop-open:not(.experience-anatomy) .sidebar,
+  body.writing-rest.workshop-open:not(.experience-anatomy) .rail {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -13,11 +14,81 @@
     transform: none !important;
   }
 
-  body.writing-rest.workshop-open:not(.focus-mode) .sidebar {
+  body.writing-rest.workshop-open:not(.experience-anatomy) .sidebar,
+  body.writing-rest.workshop-open:not(.experience-anatomy) .rail {
     position: relative !important;
   }
+}
 
-  body.writing-rest.workshop-open:not(.focus-mode) .rail {
-    position: relative !important;
+@media (min-width: 1100px) {
+  /* Oficina vence o recorte de repouso/foco e recompõe a casa declarativa. */
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell {
+    display: grid !important;
+    grid-template-rows: 92px minmax(0, 1fr) 60px !important;
+    width: calc(100vw - 32px) !important;
+    height: calc(100vh - 20px) !important;
+    margin: 10px 20px 10px 12px !important;
+    overflow: hidden !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .topbar {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .left-rail {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .workspace {
+    display: flex !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .formatbar {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .analysis-panel {
+    display: block !important;
+    visibility: visible;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .statusbar {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell .editor.editor-shell.paper {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Se a Oficina for aberta enquanto a classe de foco ainda converge no DOM,
+     o frame intermediário não pode esconder chrome nem apagar parágrafos. */
+  body.writing-rest.workshop-open.focus-mode:not(.experience-anatomy) .paper-shell .editor .escrevaral-editor p {
+    opacity: 1 !important;
+  }
+}
+
+@media (min-width: 1100px) and (max-height: 820px) {
+  body.writing-rest.workshop-open:not(.experience-anatomy) .paper-shell {
+    grid-template-rows: 92px minmax(0, 1fr) 56px !important;
   }
 }
