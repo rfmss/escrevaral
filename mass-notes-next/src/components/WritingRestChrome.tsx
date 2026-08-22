@@ -24,7 +24,12 @@ export function WritingRestChrome() {
   const toggleWorkshop = () => {
     setWorkshopOpen((value) => {
       const next = !value
-      if (next) {
+
+      // No desktop, o chrome da oficina é governado pela classe workshop-open:
+      // biblioteca, análise e launchers reaparecem pela própria composição.
+      // Acionar os botões móveis aqui criava drawers modais e overlays sobre a
+      // interface desktop, interceptando cliques (inclusive a Oficina real).
+      if (next && window.matchMedia('(max-width: 820px)').matches) {
         window.requestAnimationFrame(() => {
           const sidebar = document.querySelector<HTMLElement>('.sidebar')
           const rail = document.querySelector<HTMLElement>('#text-tools.rail')
