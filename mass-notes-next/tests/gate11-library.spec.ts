@@ -94,6 +94,17 @@ async function waitReady(page: Page) {
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
 }
 
+async function openDesktopLibrary(page: Page) {
+  const viewport = page.viewportSize()
+  if (viewport && viewport.width <= 820) return
+  const library = page.getByRole('dialog', { name: 'Arquivo de documentos' })
+  if (await library.isVisible()) return
+  const trigger = page.getByRole('button', { name: 'Abrir biblioteca local' })
+  await expect(trigger).toBeVisible()
+  await trigger.click()
+  await expect(library).toBeVisible()
+}
+
 async function seedLibrary(page: Page, documents: SeedDocument[], activeId = documents[0].id) {
   await page.goto('/')
   await waitReady(page)
@@ -119,6 +130,7 @@ async function seedLibrary(page: Page, documents: SeedDocument[], activeId = doc
   }, { rows: documents, active: activeId })
   await page.reload()
   await waitReady(page)
+  await openDesktopLibrary(page)
   await expect(page.locator('.note-card')).toHaveCount(documents.length)
 }
 
