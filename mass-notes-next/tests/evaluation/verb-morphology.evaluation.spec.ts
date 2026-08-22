@@ -62,7 +62,7 @@ async function consult(page: Page, query: string) {
   await openLexicalPanel(page)
   const input = page.locator('#lexical-query:visible')
   await input.fill(query)
-  await page.getByRole('button', { name: 'Consultar' }).click()
+  await page.getByRole('button', { name: 'Consultar', exact: true }).click()
   await expect(page.getByRole('status')).toContainText(/concluída|não encontrei|não pôde/iu)
 }
 
