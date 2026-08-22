@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import App from './App'
+import { WritingRestChrome } from './components/WritingRestChrome'
 import { AnatomyPage } from './pages/AnatomyPage'
 import { PagePressTransition } from './transitions/PagePressTransition'
 
@@ -80,6 +81,7 @@ export function ExperienceShell() {
     <>
       <section className="experience-view experience-view--editor" hidden={view !== 'editor'} aria-hidden={view !== 'editor'}>
         <App />
+        <WritingRestChrome />
       </section>
 
       {anatomyMounted && (
