@@ -48,8 +48,6 @@ function makeDocument(
 }
 
 function standardDocuments(): SeedDocument[] {
-  // BroadcastChannel atravessa contextos paralelos do mesmo navegador. IDs únicos
-  // impedem que duas bancas independentes pareçam duas abas do mesmo documento.
   const namespace = crypto.randomUUID()
   const id = (value: string) => `${namespace}-${value}`
   const now = Date.now()
@@ -174,10 +172,8 @@ test('ordena por alteração, criação e título com desempate previsível', as
   await seedLibrary(page, standardDocuments())
 
   expect(await visibleTitles(page)).toEqual(['Caderno aberto', 'Mar sem fim', 'Água funda', 'Cidade viva'])
-
   await sortControl(page).selectOption('created-desc')
   expect(await visibleTitles(page)).toEqual(['Cidade viva', 'Mar sem fim', 'Água funda', 'Caderno aberto'])
-
   await sortControl(page).selectOption('title-asc')
   expect(await visibleTitles(page)).toEqual(['Água funda', 'Caderno aberto', 'Cidade viva', 'Mar sem fim'])
 })
@@ -187,12 +183,10 @@ test('deduplica tags por acento e caixa e combina tag com favoritas', async ({ p
 
   const tagOptions = await tagFilter(page).locator('option').allTextContents()
   expect(tagOptions.filter((option) => option.toLocaleLowerCase('pt-BR') === 'poesia')).toHaveLength(1)
-
   await tagFilter(page).selectOption({ label: 'Poesia' })
   await expect(page.locator('.note-card')).toHaveCount(2)
   await expect(page.locator('.note-card').filter({ hasText: 'Água funda' }).locator('.note-tags > span').first()).toHaveText('Poesia')
   await expect(page.locator('.note-card').filter({ hasText: 'Mar sem fim' }).locator('.note-tags > span').first()).toHaveText('poesia')
-
   await page.getByRole('button', { name: 'Somente favoritas' }).click()
   await expect(page.locator('.note-card')).toHaveCount(2)
   await expect(page.getByText('2 de 4 páginas', { exact: true })).toBeVisible()
@@ -203,11 +197,9 @@ test('estado vazio explica o recorte e limpar filtros restaura a biblioteca', as
 
   await librarySearch(page).fill('texto inexistente')
   await statusFilters(page).getByRole('button', { name: 'Pronto', exact: true }).click()
-
   await expect(page.locator('.note-card')).toHaveCount(0)
   await expect(page.getByText('Nenhuma página neste recorte.')).toBeVisible()
   await expect(page.getByText('0 de 4 páginas', { exact: true })).toBeVisible()
-
   await page.getByRole('button', { name: 'Limpar filtros' }).first().click()
   await expect(page.locator('.note-card')).toHaveCount(4)
   await expect(librarySearch(page)).toHaveValue('')
@@ -217,12 +209,17 @@ test('estado vazio explica o recorte e limpar filtros restaura a biblioteca', as
 test('mudar filtros não perde o rascunho ativo nem força troca de documento', async ({ page }) => {
   await seedLibrary(page, standardDocuments())
 
+  const library = page.getByRole('dialog', { name: 'Arquivo de documentos' })
+  await page.keyboard.press('Escape')
+  await expect(library).not.toBeVisible()
+
   await page.getByLabel('Título do documento').fill('Rascunho ainda aberto')
   const editor = page.locator('.ProseMirror')
   await editor.click()
   await page.keyboard.press('Control+A')
   await page.keyboard.type('Trecho que precisa sobreviver à organização da biblioteca.')
 
+  await openDesktopLibrary(page)
   await statusFilters(page).getByRole('button', { name: 'Pronto', exact: true }).click()
   await expect(page.getByLabel('Título do documento')).toHaveValue('Rascunho ainda aberto')
   await expect(editor).toContainText('sobreviver à organização')
@@ -254,7 +251,6 @@ test('biblioteca extensa preserva Unicode e títulos repetidos com ordem estáve
 
   await seedLibrary(page, documents, 'chapter-0')
   await expect(page.locator('.note-card')).toHaveCount(24)
-
   await librarySearch(page).fill('orbita')
   await sortControl(page).selectOption('title-asc')
   const repeated = page.locator('.note-card').filter({ hasText: 'Órbita' })
@@ -273,7 +269,6 @@ test('drawer móvel mantém filtros utilizáveis, sem overflow e com foco revers
   await expect(library).toBeVisible()
   await expect(sortControl(page)).toBeVisible()
   await expect(tagFilter(page)).toBeVisible()
-
   await statusFilters(page).getByRole('button', { name: 'Em corte', exact: true }).click()
   await expect(page.locator('.note-card')).toHaveCount(1)
   await expect(page.locator('.note-title-text')).toContainText('Mar sem fim')
