@@ -24,8 +24,15 @@ function normalized(value: string): string {
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.getByLabel('Texto do documento')).toBeEditable()
-  const opener = page.getByRole('button', { name: 'Abrir ferramentas' })
-  if (await opener.isVisible()) await opener.click()
+
+  const restOpener = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+  if (await restOpener.isVisible()) await restOpener.click()
+
+  const currentOpener = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  const legacyOpener = page.getByRole('button', { name: 'Abrir ferramentas' })
+  if (await currentOpener.isVisible()) await currentOpener.click()
+  else if (await legacyOpener.isVisible()) await legacyOpener.click()
+
   await page.getByRole('tab', { name: 'palavras', exact: true }).click()
   await expect(page.locator('#panel-palavras')).toBeVisible()
 }
