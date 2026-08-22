@@ -63,6 +63,7 @@ import './styles/theme-escrevaral-paper-home-reader.css'
 import './styles/theme-escrevaral-paper-home-proof-status.css'
 import './styles/theme-escrevaral-ux-stabilization.css'
 import './styles/theme-escrevaral-contextual-rail-visual-qa.css'
+import './styles/theme-escrevaral-helena-gate.css'
 
 function ApplicationAccessibilityBridge() {
   useEffect(() => {
