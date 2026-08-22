@@ -24,6 +24,14 @@
     transform: none !important;
   }
 
+  /* No repouso o título é metadado do manuscrito, não manchete. Ele precisa
+     permanecer tipograficamente subordinado ao corpo de escrita (19.5px). */
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .reference-document-title,
+  body.writing-rest:not(.workshop-open):not(.focus-mode) input[aria-label="Título do documento"] {
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+  }
+
   /* O paper-home legado escondia o único gatilho explícito entre repouso e
      oficina. O gate final precisa preservar esse controle: pequeno no repouso,
      visível por teclado/leitor de tela e acima do shell de papel. */
