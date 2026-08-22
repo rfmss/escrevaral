@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
 
 export function WritingRestChrome() {
   const [workshopOpen, setWorkshopOpen] = useState(false)
@@ -22,7 +21,7 @@ export function WritingRestChrome() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
-  return createPortal(
+  return (
     <button
       className="writing-workshop-toggle"
       type="button"
@@ -31,7 +30,6 @@ export function WritingRestChrome() {
       onClick={() => setWorkshopOpen((value) => !value)}
     >
       {workshopOpen ? 'Escrever' : 'Escrevaral'}
-    </button>,
-    document.body,
+    </button>
   )
 }
