@@ -32,18 +32,13 @@ async function openLexicalPanel(page: Page) {
   const input = page.locator('#lexical-query:visible')
   if (await input.count()) return
 
-  /* A navegação pública vigente renomeia o antigo launcher "Notas" para
-     "Oficina" depois que a bridge instala o contrato real. Esperar pelo rótulo
-     visível elimina a corrida de montagem sem acionar controles escondidos. */
-  const workshopTools = page.locator('.main-actions > button').filter({
-    has: page.locator('small', { hasText: /^Oficina$/ }),
-  })
-  await expect(workshopTools).toBeVisible()
-  await workshopTools.click()
+  /* A superfície pública atual expõe Palavras diretamente na análise.
+     Navegar por esse gatilho evita depender do antigo launcher "Notas/Oficina"
+     e continua exercitando a bridge real sem tocar em expectativas linguísticas. */
+  const lexicalLauncher = page.getByRole('button', { name: 'Consultar palavras' })
+  await expect(lexicalLauncher).toBeVisible()
+  await lexicalLauncher.click()
 
-  const tab = page.getByRole('tab', { name: 'palavras', exact: true })
-  await expect(tab).toBeVisible()
-  await tab.click()
   await expect(panel).toBeVisible()
   await expect(page.locator('#lexical-query:visible')).toBeVisible()
 }
