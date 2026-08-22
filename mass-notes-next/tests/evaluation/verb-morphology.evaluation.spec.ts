@@ -21,20 +21,29 @@ function normalized(value: string): string {
   return value.replace(/\s+/g, ' ').trim()
 }
 
-async function waitReady(page: Page) {
-  await page.goto('/')
-  await expect(page.getByLabel('Texto do documento')).toBeEditable()
-
+async function openLexicalPanel(page: Page) {
   const restOpener = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
   if (await restOpener.isVisible()) await restOpener.click()
+
+  const panel = page.locator('#panel-palavras')
+  const input = page.locator('#lexical-query:visible')
+  if (await input.count()) return
 
   const currentOpener = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
   const legacyOpener = page.getByRole('button', { name: 'Abrir ferramentas' })
   if (await currentOpener.isVisible()) await currentOpener.click()
   else if (await legacyOpener.isVisible()) await legacyOpener.click()
 
-  await page.getByRole('tab', { name: 'palavras', exact: true }).click()
-  await expect(page.locator('#panel-palavras')).toBeVisible()
+  const tab = page.getByRole('tab', { name: 'palavras', exact: true })
+  if (await tab.isVisible()) await tab.click()
+  await expect(panel).toBeVisible()
+  await expect(page.locator('#lexical-query:visible')).toBeVisible()
+}
+
+async function waitReady(page: Page) {
+  await page.goto('/')
+  await expect(page.getByLabel('Texto do documento')).toBeEditable()
+  await openLexicalPanel(page)
 }
 
 async function setManuscript(page: Page, manuscript: string) {
@@ -45,7 +54,11 @@ async function setManuscript(page: Page, manuscript: string) {
 }
 
 async function consult(page: Page, query: string) {
-  await page.getByLabel('Palavra ou expressão curta').fill(query)
+  /* Alterar o manuscrito pode recolher chrome contextual. A banca deve navegar
+     pela UI vigente antes de consultar, sem mudar nenhuma expectativa linguística. */
+  await openLexicalPanel(page)
+  const input = page.locator('#lexical-query:visible')
+  await input.fill(query)
   await page.getByRole('button', { name: 'Consultar' }).click()
   await expect(page.getByRole('status')).toContainText(/concluída|não encontrei|não pôde/iu)
 }
