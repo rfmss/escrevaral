@@ -18,9 +18,9 @@ export function WritingRestChrome() {
       if (event.key !== 'Escape') return
 
       // Escape respeita a pilha de superfícies: um drawer/modal aberto fecha
-      // primeiro pelo proprietário (App/RightRail). Só um Escape sem camada
-      // transitória devolve a pessoa à escrita silenciosa. Isso evita fechar
-      // Biblioteca/Palavras e Oficina no mesmo gesto.
+      // primeiro pelo proprietário (App/RightRail). Este listener roda na fase
+      // de captura para observar a camada transitória antes que o handler dono
+      // a remova no bubbling. Só um Escape sem camada aberta volta ao repouso.
       const transientSurfaceOpen = Boolean(
         document.querySelector('.drawer-overlay, .sidebar.open, #text-tools.rail.open'),
       )
@@ -28,8 +28,8 @@ export function WritingRestChrome() {
 
       setWorkshopOpen(false)
     }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+    window.addEventListener('keydown', onKeyDown, true)
+    return () => window.removeEventListener('keydown', onKeyDown, true)
   }, [])
 
   const toggleWorkshop = () => {
