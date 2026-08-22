@@ -5,6 +5,13 @@
  */
 
 @media (min-width: 1100px) {
+  /* O paper-home legado escondia o único gatilho explícito entre repouso e
+     oficina. O gate final precisa preservar esse controle: pequeno no repouso,
+     visível por teclado/leitor de tela e acima do shell de papel. */
+  body:not(.experience-anatomy) .writing-workshop-toggle {
+    display: block !important;
+  }
+
   /* HEL-001 / HEL-002 / HEL-019 — rail contextual subordinado ao manuscrito. */
   body:is(
     .reference-tools-open,
