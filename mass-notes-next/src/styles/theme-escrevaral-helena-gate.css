@@ -4,6 +4,14 @@
  * e impedir que estados contextuais pareçam um segundo produto.
  */
 
+/* O manuscrito precisa preservar literalmente a caixa digitada pela pessoa
+   autora. Camadas tipográficas podem usar caixa alta em chrome/labels, nunca
+   no conteúdo semântico do ProseMirror. */
+body:not(.experience-anatomy) .ProseMirror,
+body:not(.experience-anatomy) .ProseMirror * {
+  text-transform: none !important;
+}
+
 @media (min-width: 1100px) {
   /* O paper-home é carregado depois de writing-rest.css e possui regras de
      geometria mais genéricas para .paper. No repouso, o contrato aprovado é
