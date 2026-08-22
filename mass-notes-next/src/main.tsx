@@ -12,7 +12,6 @@ import { WritingOfflineBridge } from './components/WritingOfflineBridge'
 import { WritingProofStatusBridge } from './components/WritingProofStatusBridge'
 import { WritingReaderBridge } from './components/WritingReaderBridge'
 import { WritingResearchBridge } from './components/WritingResearchBridge'
-import { WritingRestChrome } from './components/WritingRestChrome'
 import { WritingTagsBridge } from './components/WritingTagsBridge'
 import { WritingToolsBridge } from './components/WritingToolsBridge'
 import { WritingVoiceBridge } from './components/WritingVoiceBridge'
@@ -121,6 +120,5 @@ createRoot(document.getElementById('root')!).render(
     <WritingLexicalBridge />
     <WritingToolsBridge />
     <WritingIntegrityBridge />
-    <WritingRestChrome />
   </StrictMode>,
 )
