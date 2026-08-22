@@ -1,0 +1,23 @@
+/* Gate de transição repouso → oficina.
+ * No desktop, `workshop-open` significa voltar à casa completa: biblioteca e
+ * ferramentas estruturais precisam reaparecer mesmo quando seus drawers
+ * móveis não carregam a classe transitória `open`.
+ */
+@media (min-width: 821px) {
+  body.writing-rest.workshop-open:not(.focus-mode) .sidebar,
+  body.writing-rest.workshop-open:not(.focus-mode) .rail {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  body.writing-rest.workshop-open:not(.focus-mode) .sidebar {
+    position: relative !important;
+  }
+
+  body.writing-rest.workshop-open:not(.focus-mode) .rail {
+    position: relative !important;
+  }
+}
