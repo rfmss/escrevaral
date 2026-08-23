@@ -67,6 +67,20 @@
     min-height: 0 !important;
   }
 
+  /* A árvore React mantém os drawers contextuais dentro de
+     `.reference-mobile-legacy`. Em desktop esse invólucro fica oculto por
+     padrão; quando uma bridge contextual está ativa ele precisa virar apenas
+     um invólucro estrutural, sem criar geometria própria. Assim Pesquisa,
+     Palavras, Voz, Tags e Ferramentas podem projetar o `.rail.open` real sem
+     reexpor a UI móvel inteira. */
+  body.writing-rest.workshop-open.reference-research-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.workshop-open.reference-lexical-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.workshop-open.reference-voice-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.workshop-open.reference-tags-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.workshop-open.reference-tools-open:not(.experience-anatomy) .reference-mobile-legacy {
+    display: contents !important;
+  }
+
   /* Se a Oficina for aberta enquanto a classe de foco ainda converge no DOM,
      o frame intermediário não pode esconder chrome nem apagar parágrafos. */
   body.writing-rest.workshop-open.focus-mode:not(.experience-anatomy) .paper-shell .editor .escrevaral-editor p {
