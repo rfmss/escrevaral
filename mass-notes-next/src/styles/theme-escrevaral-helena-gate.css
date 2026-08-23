@@ -68,6 +68,19 @@ body:not(.experience-anatomy) .ProseMirror * {
     grid-template-columns: 250px minmax(560px, 1fr) var(--ux-context-rail) !important;
   }
 
+  /* O rail legado é fixed e vive fora da árvore do grid. Reservamos um respiro
+     óptico de 8px no fim da coluna de escrita para que nenhuma borda, scrollbar
+     ou hit-area do manuscrito possa ficar sob o drawer contextual. */
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .paper-shell .workspace {
+    margin-right: 8px;
+  }
+
   body:not(.night):is(
     .reference-tools-open,
     .reference-lexical-open,
