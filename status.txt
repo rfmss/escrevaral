@@ -1,0 +1,4 @@
+source_sha=6cd6fa8b230b60c14beaa9db581e06f85117bd16
+run_id=32644258086
+state=delivered
+url=https://raw.githack.com/rfmss/escrevaral/preview-escrevaral-delivery/index.html
