@@ -92,7 +92,9 @@ async function evaluateTargetCase(card: Locator, item: EvaluationCase) {
 async function evaluateCase(page: Page, item: EvaluationCase) {
   await setManuscript(page, item.manuscript)
   await consult(page, item.query)
-  const card = page.locator('[data-verb-formation-card]')
+  /* VerbAnalysisCard expõe este contrato estável; o seletor antigo
+     data-verb-formation-card nunca existiu no componente. */
+  const card = page.locator('[data-verb-analysis]')
   await evaluateTargetCase(card, item)
 }
 
