@@ -67,18 +67,37 @@
     min-height: 0 !important;
   }
 
-  /* A árvore React mantém os drawers contextuais dentro de
-     `.reference-mobile-legacy`. Em desktop esse invólucro fica oculto por
-     padrão; quando uma bridge contextual está ativa ele precisa virar apenas
-     um invólucro estrutural, sem criar geometria própria. Assim Pesquisa,
-     Palavras, Voz, Tags e Ferramentas podem projetar o `.rail.open` real sem
-     reexpor a UI móvel inteira. */
-  body.writing-rest.workshop-open.reference-research-open:not(.experience-anatomy) .reference-mobile-legacy,
-  body.writing-rest.workshop-open.reference-lexical-open:not(.experience-anatomy) .reference-mobile-legacy,
-  body.writing-rest.workshop-open.reference-voice-open:not(.experience-anatomy) .reference-mobile-legacy,
-  body.writing-rest.workshop-open.reference-tags-open:not(.experience-anatomy) .reference-mobile-legacy,
-  body.writing-rest.workshop-open.reference-tools-open:not(.experience-anatomy) .reference-mobile-legacy {
+  /*
+   * A árvore React mantém os drawers contextuais dentro de
+   * `.reference-mobile-legacy`. O repouso esconde genericamente `.rail`, mas
+   * uma ação explícita da pessoa autora (Pesquisa, Palavras, Voz, Tags ou
+   * Ferramentas) deve poder abrir a superfície contextual sem exigir que a
+   * Oficina inteira esteja aberta. O estado `reference-*-open` é o contrato
+   * público da bridge; por isso ele vence somente para o drawer ativo.
+   */
+  body.writing-rest.reference-research-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.reference-lexical-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.reference-voice-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.reference-tags-open:not(.experience-anatomy) .reference-mobile-legacy,
+  body.writing-rest.reference-tools-open:not(.experience-anatomy) .reference-mobile-legacy {
     display: contents !important;
+  }
+
+  body.writing-rest.reference-research-open:not(.experience-anatomy) #text-tools.rail.open,
+  body.writing-rest.reference-lexical-open:not(.experience-anatomy) #text-tools.rail.open,
+  body.writing-rest.reference-voice-open:not(.experience-anatomy) #text-tools.rail.open,
+  body.writing-rest.reference-tags-open:not(.experience-anatomy) #text-tools.rail.open,
+  body.writing-rest.reference-tools-open:not(.experience-anatomy) #text-tools.rail.open {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* Expor o invólucro contextual não deve ressuscitar a Biblioteca legada.
+     Ela só aparece quando o próprio estado `open` da Biblioteca a autoriza. */
+  body.writing-rest:not(.experience-anatomy) .reference-mobile-legacy > .sidebar:not(.open) {
+    display: none !important;
   }
 
   /* Se a Oficina for aberta enquanto a classe de foco ainda converge no DOM,
