@@ -1,24 +1,11 @@
 /* Gate de transição repouso → oficina.
  * `workshop-open` volta à casa completa. A composição atual vive em
  * `.paper-shell`; `.sidebar/.rail` permanecem apenas como drawers legados
- * usados por superfícies contextuais. O gate precisa portanto restaurar o
- * chrome canônico, e não somente os drawers auxiliares.
+ * usados por superfícies contextuais e não devem receber geometria global.
+ * Cada bridge contextual (Pesquisa, Palavras, Voz, Tags, Oficina) continua
+ * dona da posição/visibilidade do seu drawer, evitando que este gate vença
+ * regras específicas com `position: relative !important`.
  */
-@media (min-width: 821px) {
-  body.writing-rest.workshop-open:not(.experience-anatomy) .sidebar,
-  body.writing-rest.workshop-open:not(.experience-anatomy) .rail {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    transform: none !important;
-  }
-
-  body.writing-rest.workshop-open:not(.experience-anatomy) .sidebar,
-  body.writing-rest.workshop-open:not(.experience-anatomy) .rail {
-    position: relative !important;
-  }
-}
 
 @media (min-width: 1100px) {
   /* Oficina vence o recorte de repouso/foco e recompõe a casa declarativa. */
