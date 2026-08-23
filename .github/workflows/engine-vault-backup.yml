@@ -1,0 +1,126 @@
+name: Cofre de engines do Escrevaral
+
+on:
+  push:
+    branches: [backup-engines-vault-2026-08-23]
+    paths:
+      - ".github/workflows/engine-vault-backup.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  vault:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout com histórico completo
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Montar cofre das engines
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          LEGACY_MAIN="a09a743082984de997800647ab6dfe3c448f81f6"
+          OUR_PR="a029cc4fea0dd7dd4524f553031667f7ff9a0c06"
+          CURRENT_MAIN="6cd6fa8b230b60c14beaa9db581e06f85117bd16"
+
+          rm -rf engine-vault
+          mkdir -p engine-vault
+
+          extract_snapshot() {
+            local sha="$1"
+            local label="$2"
+            local include_ts="$3"
+            local dest="engine-vault/${label}"
+            local list="/tmp/${label}.files"
+
+            mkdir -p "$dest"
+
+            git cat-file -e "${sha}^{commit}"
+
+            if [ "$include_ts" = "yes" ]; then
+              git ls-tree -r --name-only "$sha" \
+                | grep -E '^[^/]+-engine\.js$|^[^/]+-data\.json$|^js/data/|^synonyms/|^META_ENGINES_100\.md$|^mass-notes-next/src/engines/' \
+                | sort -u > "$list"
+            else
+              git ls-tree -r --name-only "$sha" \
+                | grep -E '^[^/]+-engine\.js$|^[^/]+-data\.json$|^js/data/|^synonyms/|^META_ENGINES_100\.md$' \
+                | sort -u > "$list"
+            fi
+
+            while IFS= read -r path; do
+              mkdir -p "$dest/$(dirname "$path")"
+              git show "${sha}:${path}" > "$dest/$path"
+            done < "$list"
+
+            {
+              echo "snapshot=${label}"
+              echo "source_sha=${sha}"
+              echo "files=$(wc -l < "$list")"
+              echo
+              echo "Arquivos preservados:"
+              cat "$list"
+            } > "$dest/MANIFEST.txt"
+          }
+
+          extract_snapshot "$LEGACY_MAIN" "01-main-legada-pre-merge" "no"
+          extract_snapshot "$OUR_PR" "02-nosso-experimento-pr155" "yes"
+          extract_snapshot "$CURRENT_MAIN" "03-main-atual-pos-merge" "yes"
+
+          cat > engine-vault/README.md <<'EOF'
+          # Cofre de engines — Escrevaral
+
+          Backup preparado para permitir um recomeço do produto sem perder o trabalho linguístico e documental.
+
+          ## Snapshots
+
+          1. `01-main-legada-pre-merge` — a `main` anterior à promoção da nova aplicação.
+             SHA: `a09a743082984de997800647ab6dfe3c448f81f6`
+          2. `02-nosso-experimento-pr155` — a cabeça do nosso Escrevaral imediatamente antes do merge do PR #155.
+             SHA: `a029cc4fea0dd7dd4524f553031667f7ff9a0c06`
+          3. `03-main-atual-pos-merge` — cópia de segurança da `main` já consolidada após o merge.
+             SHA: `6cd6fa8b230b60c14beaa9db581e06f85117bd16`
+
+          ## O que entrou
+
+          - todas as engines JavaScript da raiz (`*-engine.js`);
+          - todo `mass-notes-next/src/engines/**` nos snapshots que possuem a aplicação nova, incluindo adapters, supplements e morfologia verbal;
+          - arquivos `*-data.json` da raiz;
+          - `js/data/**` e `synonyms/**`, porque várias engines antigas dependem desses dados;
+          - `META_ENGINES_100.md`, quando presente;
+          - um `MANIFEST.txt` por snapshot com a lista exata dos arquivos e o SHA de origem.
+
+          Não foram incluídos layout, CSS, componentes React, deploy, CI ou páginas do produto. Este ZIP é deliberadamente um cofre de lógica de engines e seus dados de apoio mais diretos.
+          EOF
+
+          find engine-vault -type f -print0 | sort -z | xargs -0 sha256sum > engine-vault/SHA256-FILES.txt
+          zip -9 -rq escrevaral-engines-cofre-2026-08-23.zip engine-vault
+          sha256sum escrevaral-engines-cofre-2026-08-23.zip > SHA256SUMS.txt
+          ls -lh escrevaral-engines-cofre-2026-08-23.zip
+          cat SHA256SUMS.txt
+
+      - name: Publicar ZIP em branch de download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/engine-vault-publish
+          mkdir /tmp/engine-vault-publish
+          cp escrevaral-engines-cofre-2026-08-23.zip /tmp/engine-vault-publish/
+          cp SHA256SUMS.txt /tmp/engine-vault-publish/
+          cp engine-vault/README.md /tmp/engine-vault-publish/README.md
+
+          cd /tmp/engine-vault-publish
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "backup: cofre das engines 2026-08-23"
+          git branch -M engine-vault-download-2026-08-23
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/engine-vault-download-2026-08-23
