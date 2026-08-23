@@ -69,7 +69,7 @@ async function consult(page: Page, query: string) {
 async function primaryText(card: Locator): Promise<string> {
   const heading = card.locator('.verb-formation-heading')
   const classification = card.locator('.verb-formation-section').first()
-  return normalized(`${await heading.innerText()} ${await classification.innerText()}`)
+  return normalized(`${await heading.textContent() ?? ''} ${await classification.textContent() ?? ''}`)
 }
 
 async function evaluateTargetCase(card: Locator, item: EvaluationCase) {
