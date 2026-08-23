@@ -1,0 +1,76 @@
+.legacy-import-preview {
+  margin-top: 0.8rem;
+  padding: 0.85rem;
+  border: 1px solid var(--line, rgba(19, 52, 66, 0.28));
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--paper, #f7f0df) 88%, transparent);
+}
+
+.legacy-import-preview h4 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.legacy-import-preview > p {
+  margin: 0.35rem 0;
+}
+
+.legacy-import-preview ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.7rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legacy-import-preview li {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.legacy-import-preview li strong,
+.legacy-import-preview li span {
+  overflow-wrap: anywhere;
+}
+
+.legacy-import-preview li span {
+  font-size: 0.76rem;
+  opacity: 0.78;
+}
+
+.legacy-import-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.legacy-import-actions button {
+  min-width: 0;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid currentColor;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.legacy-import-actions button:last-child {
+  font-weight: 700;
+}
+
+.legacy-import-actions button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+@media (max-width: 420px) {
+  .legacy-import-actions {
+    grid-template-columns: 1fr;
+  }
+}

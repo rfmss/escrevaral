@@ -1,0 +1,257 @@
+name: Escrevaral Paper Home Preview
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - "mass-notes-next/src/**"
+      - "mass-notes-next/tests/**"
+      - "mass-notes-next/public/service-worker.js"
+      - "mass-notes-next/public/manifest.webmanifest"
+      - "mass-notes-next/index.html"
+      - "mass-notes-next/package.json"
+      - "mass-notes-next/package-lock.json"
+      - "mass-notes-next/playwright.config.ts"
+      - "mass-notes-next/vite.config.ts"
+      - ".github/workflows/escrevaral-paper-home-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: escrevaral-paper-home-preview
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: mass-notes-next
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Registrar execução em andamento
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/escrevaral-ci-status
+          mkdir /tmp/escrevaral-ci-status
+          cd /tmp/escrevaral-ci-status
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf 'source_sha=%s\nrun_id=%s\nrun_attempt=%s\nstate=started\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > status.txt
+          git add status.txt
+          git commit -m "status paper-home: ${GITHUB_SHA}"
+          git branch -M status-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/status-escrevaral-paper-home
+
+      - name: Python para preparar a Anatomia
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar runtime da Anatomia
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/build-anatomia-runtime.py
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
+
+      - name: Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mass-notes-next/package-lock.json
+
+      - name: Instalar dependências reproduzíveis
+        run: npm ci --no-audit --no-fund
+
+      - name: Compilar a casa real
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee /tmp/escrevaral-build.log
+
+      - name: Medir bundle inicial T2
+        run: |
+          set -euo pipefail
+          test -f dist/assets/index.js
+          main_bytes="$(wc -c < dist/assets/index.js)"
+          gzip_bytes="$(gzip -c dist/assets/index.js | wc -c)"
+          echo "T2 main index.js: ${main_bytes} bytes; gzip: ${gzip_bytes} bytes"
+          find dist/assets -maxdepth 1 -type f -printf '%f %s bytes\n' | sort -k2 -nr | head -20
+
+      - name: Provar build sem fontes remotas
+        run: |
+          set -euo pipefail
+          ! grep -R -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' dist
+          test -f dist/assets/Anton-Regular.ttf
+          test -f dist/assets/Oswald-wght.ttf
+          test -f dist/assets/Literata-opsz-wght.ttf
+          test "$(wc -c < dist/assets/Anton-Regular.ttf)" -eq 170812
+          test "$(wc -c < dist/assets/Oswald-wght.ttf)" -eq 172088
+          test "$(wc -c < dist/assets/Literata-opsz-wght.ttf)" -eq 955132
+
+      - name: Provar shell offline e manifesto PWA
+        run: |
+          set -euo pipefail
+          test -f dist/service-worker.js
+          test -f dist/manifest.webmanifest
+          grep --quiet "escrevaral-paper-home-offline-" dist/service-worker.js
+          grep --quiet "SKIP_WAITING" dist/service-worker.js
+          grep --quiet 'rel="manifest"' dist/index.html
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Validar referência, transplante e contratos do editor
+        run: |
+          set -o pipefail
+          npx playwright test --project=chromium \
+            tests/reference-home.spec.ts \
+            tests/reference-integrity.spec.ts \
+            tests/reference-source-integrity.spec.ts \
+            tests/reference-editorial.spec.ts \
+            tests/reference-voice.spec.ts \
+            tests/reference-library.spec.ts \
+            tests/reference-library-query.spec.ts \
+            tests/reference-offline-fonts.spec.ts \
+            tests/reference-lazy-review.spec.ts \
+            tests/reference-actions.spec.ts \
+            tests/foundation.spec.ts \
+            tests/gate2.spec.ts \
+            tests/gate3-voice.spec.ts \
+            tests/gate4.spec.ts \
+            tests/gate5-rimalab.spec.ts \
+            tests/gate9b-native-backup.spec.ts \
+            tests/gate10-lexical.spec.ts \
+            tests/gate13-legacy-import.spec.ts \
+            tests/gate14-precision.spec.ts \
+            tests/gate15-proof.spec.ts \
+            tests/gate16-linguistic-calibration.spec.ts \
+            tests/gate17-verb-calibration.spec.ts \
+            tests/gate18-lexical-nuance.spec.ts \
+            tests/gate19-cohesion-calibration.spec.ts \
+            tests/gate20-lexical-provenance.spec.ts \
+            tests/gate21-crase-calibration.spec.ts \
+            tests/gate22-shell-centering.spec.ts \
+            tests/gate23-goal-celebration.spec.ts \
+            tests/gate24-local-save-feedback.spec.ts \
+            tests/gate25-advanced-export.spec.ts \
+            tests/gate26-pomodoro.spec.ts \
+            tests/gate27-reader-mode.spec.ts \
+            tests/gate28-proof-status.spec.ts \
+            tests/gate29-offline-pwa.spec.ts \
+            tests/gate30-figures.spec.ts \
+            tests/gate31-release-smoke.spec.ts \
+            tests/gate32-release-visual.spec.ts \
+            2>&1 | tee /tmp/escrevaral-playwright.log
+
+      - name: Persistir diagnóstico automático em falha
+        if: ${{ failure() }}
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          report=/tmp/escrevaral-ci-failure.txt
+          {
+            echo "source_sha=${GITHUB_SHA}"
+            echo "run_id=${GITHUB_RUN_ID}"
+            echo "run_attempt=${GITHUB_RUN_ATTEMPT}"
+            echo
+            echo "===== BUILD ====="
+            if test -f /tmp/escrevaral-build.log; then tail -n 240 /tmp/escrevaral-build.log; else echo "build log unavailable"; fi
+            echo
+            echo "===== PLAYWRIGHT ====="
+            if test -f /tmp/escrevaral-playwright.log; then tail -n 400 /tmp/escrevaral-playwright.log; else echo "playwright log unavailable"; fi
+          } > "$report"
+          rm -rf /tmp/escrevaral-ci-diagnostic
+          mkdir /tmp/escrevaral-ci-diagnostic
+          cd /tmp/escrevaral-ci-diagnostic
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cp "$report" failure.txt
+          git add failure.txt
+          git commit -m "diagnostic paper-home: ${GITHUB_SHA}"
+          git branch -M diagnostic-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/diagnostics-escrevaral-paper-home
+
+      - name: Anexar prova visual à preview
+        run: |
+          if test -f test-results/escrevaral-reference-home.png; then
+            cp test-results/escrevaral-reference-home.png dist/reference-home.png
+          fi
+          for image in release-1366 release-1440 release-1920 release-390; do
+            if test -f "test-results/${image}.png"; then
+              cp "test-results/${image}.png" "dist/${image}.png"
+            fi
+          done
+
+      - name: Publicar preview isolada
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd dist
+          touch .nojekyll
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "preview paper-home: ${GITHUB_SHA}"
+          git branch -M preview-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/preview-escrevaral-paper-home
+
+      - name: Renovar cache público
+        continue-on-error: true
+        working-directory: .
+        run: |
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
+          for path in index.html assets/index.js assets/index.css reference-home.png release-1366.png release-1440.png release-1920.png release-390.png; do
+            curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
+          done
+
+      - name: Verificar preview pública
+        working-directory: .
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-paper-home"
+          for attempt in $(seq 1 18); do
+            rm -f /tmp/escrevaral-home-index.html /tmp/escrevaral-home-app.js /tmp/escrevaral-home-app.css /tmp/release-1366.png /tmp/release-1440.png /tmp/release-1920.png /tmp/release-390.png
+            if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/escrevaral-home-index.html \
+              && grep --quiet './assets/index.js' /tmp/escrevaral-home-index.html \
+              && grep --quiet './assets/index.css' /tmp/escrevaral-home-index.html \
+              && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/escrevaral-home-app.js \
+              && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-home-app.css \
+              && curl --fail --silent --show-error --location "${base}/release-1366.png" -o /tmp/release-1366.png \
+              && curl --fail --silent --show-error --location "${base}/release-1440.png" -o /tmp/release-1440.png \
+              && curl --fail --silent --show-error --location "${base}/release-1920.png" -o /tmp/release-1920.png \
+              && curl --fail --silent --show-error --location "${base}/release-390.png" -o /tmp/release-390.png \
+              && test "$(wc -c < /tmp/escrevaral-home-app.js)" -gt 1000 \
+              && test "$(wc -c < /tmp/escrevaral-home-app.css)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1366.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1440.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-1920.png)" -gt 1000 \
+              && test "$(wc -c < /tmp/release-390.png)" -gt 1000 \
+              && ! grep -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' /tmp/escrevaral-home-app.css \
+              && grep --quiet 'theme-escrevaral-reference.css' mass-notes-next/src/main.tsx; then
+              echo "Preview pública da referência canônica respondeu corretamente, sem fontes remotas e com provas visuais do release."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "A preview da referência canônica não convergiu no CDN."
+          exit 1

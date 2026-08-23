@@ -1,0 +1,34 @@
+.export-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.export-panel .panel-intro {
+  margin: 0;
+}
+
+.export-options {
+  display: grid;
+  gap: 8px;
+}
+
+.export-options .action {
+  display: grid;
+  width: 100%;
+  gap: 3px;
+  text-align: left;
+}
+
+.export-options .action strong {
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.export-options .action span {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  opacity: 0.78;
+  text-transform: none;
+}

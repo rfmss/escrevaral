@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Falha quando os identificadores de distribuição do Escrevaral divergem."""
+"""Falha quando os identificadores da distribuição pública do Escrevaral divergem."""
 
 from __future__ import annotations
 
@@ -16,6 +16,11 @@ UI_DIALOG = ROOT / "ui-dialog.js"
 VERSION_PATTERN = re.compile(r"[?&]v=([0-9]{8}-[A-Za-z0-9._-]+)")
 ASSET_PATTERN = re.compile(r'const ASSET_VERSION = "([^"]+)";')
 CACHE_PATTERN = re.compile(r'const CACHE_NAME = "vereda-offline-v(\d+)";')
+DISTRIBUTION_EXCLUDED_PREFIXES = (
+    "reports/",
+    # Aplicação Vite independente, com build, hashes e preview próprios.
+    "mass-notes-next/",
+)
 
 
 def fail(message: str) -> None:
@@ -31,6 +36,14 @@ def single_index_version(index_text: str, label: str) -> tuple[str, int]:
     if len(unique_versions) != 1:
         fail(f"{label} mistura versões: {', '.join(unique_versions)}")
     return unique_versions[0], len(versions)
+
+
+def is_public_distributed_asset(path: str) -> bool:
+    """Retorna True somente para JS/CSS servidos pela aplicação pública raiz."""
+    return (
+        path.endswith((".js", ".css"))
+        and not path.startswith(DISTRIBUTION_EXCLUDED_PREFIXES)
+    )
 
 
 def compare_with_base(index_version: str, cache_number: int) -> list[str]:
@@ -65,17 +78,13 @@ def compare_with_base(index_version: str, cache_number: int) -> list[str]:
     base_cache = int(base_cache_match.group(1))
 
     changed_files = [line.strip() for line in changed_output.splitlines() if line.strip()]
-    distributed_changes = sorted(
-        path for path in changed_files
-        if path.endswith((".js", ".css"))
-        and not path.startswith("reports/")
-    )
+    distributed_changes = sorted(filter(is_public_distributed_asset, changed_files))
 
     if distributed_changes and index_version == base_version:
         preview = ", ".join(distributed_changes[:8])
         suffix = "…" if len(distributed_changes) > 8 else ""
         fail(
-            "JavaScript ou CSS mudou sem nova versão global: "
+            "JavaScript ou CSS público mudou sem nova versão global: "
             f"{preview}{suffix}"
         )
 
@@ -130,7 +139,7 @@ def main() -> None:
     print(
         "[asset-version] aprovado "
         f"versao={asset_version} referencias={reference_count} cache=v{cache_number} "
-        f"arquivos_distribuidos_alterados={len(distributed_changes)}"
+        f"arquivos_publicos_alterados={len(distributed_changes)}"
     )
 
 

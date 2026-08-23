@@ -1,0 +1,211 @@
+/* Gate 10 — superfície Palavras. Leitura local, sem mutação do manuscrito. */
+.lexical-panel,
+.lexical-search,
+.lexical-reading,
+.lexical-reading dl,
+.lexical-alternatives,
+.lexical-context,
+.lexical-synonyms {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.lexical-search {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.lexical-search label,
+.lexical-alternatives h3,
+.lexical-context h3,
+.lexical-synonyms h3 {
+  font-family: "Arial Narrow", "Roboto Condensed", sans-serif;
+  font-size: .58rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.lexical-search > div {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.lexical-search input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  padding: 10px 11px;
+  outline: none;
+}
+
+.lexical-search input:focus {
+  border-color: var(--blue-deep);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 28%, transparent);
+}
+
+.lexical-search .action {
+  margin-top: 0;
+  text-align: center;
+}
+
+.lexical-message {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.lexical-reading {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue-deep);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.lexical-heading {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.lexical-heading h2 {
+  min-width: 0;
+  margin: 0;
+  font: 900 1.2rem/1.05 Impact, "Arial Black", sans-serif;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.lexical-heading span,
+.lexical-decision {
+  justify-self: start;
+  max-width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  font-size: .58rem;
+  line-height: 1.3;
+}
+
+.lexical-decision {
+  margin: 0;
+  color: var(--blue-deep);
+  font-weight: 800;
+}
+
+.lexical-definition,
+.lexical-reading > p,
+.lexical-alternatives li,
+.lexical-context p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .68rem;
+  line-height: 1.55;
+}
+
+.lexical-definition {
+  color: var(--ink);
+}
+
+.lexical-context,
+.lexical-synonyms {
+  display: grid;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.lexical-context h3,
+.lexical-synonyms h3 {
+  margin: 0;
+}
+
+.lexical-context p {
+  padding: 9px 10px;
+  border-left: 3px solid var(--blue-deep);
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+}
+
+.lexical-context mark {
+  padding: 1px 2px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--orange) 42%, transparent);
+  font-weight: 800;
+}
+
+.lexical-synonyms > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.lexical-synonyms span {
+  max-width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 74%, var(--blue) 26%);
+  font-size: .62rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.lexical-reading dl {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.lexical-reading dl > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.lexical-reading dt {
+  color: var(--blue-deep);
+  font-size: .54rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lexical-reading dd {
+  min-width: 0;
+  margin: 0;
+  font-size: .68rem;
+  overflow-wrap: anywhere;
+}
+
+.lexical-alternatives ul {
+  display: grid;
+  gap: 6px;
+  margin: 7px 0 0;
+  padding-left: 17px;
+}
+
+.lexical-disclaimer {
+  padding: 9px;
+  border-left: 4px solid var(--orange);
+  background: color-mix(in srgb, var(--orange) 8%, transparent);
+  font-size: .62rem !important;
+}
+
+@media (max-width: 820px) {
+  #panel-palavras,
+  .lexical-panel {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}

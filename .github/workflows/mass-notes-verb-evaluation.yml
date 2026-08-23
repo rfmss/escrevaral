@@ -1,0 +1,92 @@
+name: Banca E2-V — infinitivo pessoal
+
+on:
+  push:
+    branches: [experiment/mass-notes-tiptap]
+    paths:
+      - "mass-notes-next/**"
+      - ".github/workflows/mass-notes-verb-evaluation.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "mass-notes-next/**"
+      - ".github/workflows/mass-notes-verb-evaluation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mass-notes-verb-evaluation-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  evaluation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: mass-notes-next
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Python para preparar a Anatomia
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar runtime fiel e leve da Anatomia
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/build-anatomia-runtime.py
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -gt 50000
+          test "$(wc -c < mass-notes-next/public/anatomia-do-livro.html)" -lt 500000
+
+      - name: Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mass-notes-next/package-lock.json
+
+      - name: Instalar dependências reproduzíveis
+        run: npm ci --no-audit --no-fund
+
+      - name: Auditar proveniência e separação dos corpora
+        run: npm run audit:verb
+
+      - name: Compilar aplicação
+        run: npm run build
+
+      - name: Instalar Chromium e Firefox
+        run: npx playwright install --with-deps chromium firefox
+
+      - name: Executar banca do fenômeno-alvo e publicar métricas
+        run: |
+          set +e
+          npm run test:verb:evaluation:target
+          evaluation_status=$?
+          set -e
+
+          npm run report:verb:evaluation
+          cat e2-v-evaluation-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+          exit "$evaluation_status"
+
+      - name: Guardar evidências da banca
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2-v-infinitivo-pessoal-${{ github.run_id }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            mass-notes-next/e2-v-evidence-audit.json
+            mass-notes-next/e2-v-adversarial-results.json
+            mass-notes-next/e2-v-evaluation-summary.json
+            mass-notes-next/e2-v-evaluation-summary.md
+            mass-notes-next/playwright-report-evaluation/**
+            mass-notes-next/test-results-evaluation/**

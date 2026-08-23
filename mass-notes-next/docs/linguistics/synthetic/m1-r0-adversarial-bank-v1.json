@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-adversarial-bank-v1",
+  "state": "research_bank_not_corpus",
+  "createdAt": "2026-08-22",
+  "purpose": "Materializar negativos e pares mínimos autorais para a fronteira sujeito recuperável / sujeito indeterminado / oração sem sujeito, sem abrir implementação sintática nem corpus de avaliação.",
+  "governance": {
+    "ruleCard": "docs/linguistics/rules/m1-r0-subject-boundaries.yaml",
+    "implementationAuthorized": false,
+    "runtimeUseAuthorized": false,
+    "evaluationCorpusOpened": false,
+    "developmentCorpusOpened": false,
+    "technicalGreenIsNotLinguisticTruth": true,
+    "humanReviewRequiredBeforeVerified": true
+  },
+  "provenance": {
+    "examplesAuthoredByProject": true,
+    "copiedSourceExamples": false,
+    "rawSourcesInRepository": false,
+    "sourceIds": [
+      "bechara-licoes-20e",
+      "cunha-cintra-nova-gramatica-7e",
+      "bechara-duvidas-2e"
+    ],
+    "note": "As fontes sustentam a distinção conceitual registrada na rule card; as frases deste banco são originais do projeto e não reproduzem exemplos das obras."
+  },
+  "labelPolicy": {
+    "allowed": [
+      "subject_recoverable",
+      "subject_indeterminate_probable",
+      "subject_indeterminate",
+      "subjectless_clause",
+      "ambiguous"
+    ],
+    "mustPreserveUncertainty": true,
+    "mustNotEmitNormativeRewrite": true
+  },
+  "cases": [
+    {
+      "id": "third-plural-isolated",
+      "kind": "positive_boundary",
+      "text": "Chamaram pelo nome dela no corredor.",
+      "expected": "subject_indeterminate_probable",
+      "mustNotReturn": ["subject_recoverable"],
+      "rationale": "Terceira pessoa do plural sem referente plural recuperável no recorte."
+    },
+    {
+      "id": "third-plural-recoverable-context",
+      "kind": "negative_control",
+      "text": "Os vigias chegaram cedo. Chamaram pelo nome dela no corredor.",
+      "expected": "subject_recoverable",
+      "mustNotReturn": ["subject_indeterminate", "subject_indeterminate_probable"],
+      "rationale": "O período anterior fornece referente plural compatível."
+    },
+    {
+      "id": "first-plural-recoverable",
+      "kind": "positive_boundary",
+      "text": "Voltamos antes que a ponte fechasse.",
+      "expected": "subject_recoverable",
+      "mustNotReturn": ["subject_indeterminate", "subjectless_clause"],
+      "rationale": "A flexão verbal identifica participante recuperável."
+    },
+    {
+      "id": "se-indeterminate-preposition",
+      "kind": "positive_boundary",
+      "text": "Precisa-se de silêncio para ouvir o rio.",
+      "expected": "subject_indeterminate",
+      "mustNotReturn": ["subjectless_clause"],
+      "rationale": "Construção com se e complemento preposicionado, conforme a fronteira descrita na rule card."
+    },
+    {
+      "id": "se-passive-agreement-control",
+      "kind": "negative_control",
+      "text": "Alugavam-se quartos no andar de cima.",
+      "expected": "ambiguous",
+      "mustNotReturn": ["subject_indeterminate"],
+      "rationale": "O sintagma nominal plural concordante é candidato à leitura passiva; a engine não deve forçar indeterminação."
+    },
+    {
+      "id": "weather-literal",
+      "kind": "positive_boundary",
+      "text": "Nevou nas montanhas durante a madrugada.",
+      "expected": "subjectless_clause",
+      "mustNotReturn": ["subject_recoverable", "subject_indeterminate"],
+      "rationale": "Uso meteorológico literal sem participante expresso."
+    },
+    {
+      "id": "weather-figurative-personal",
+      "kind": "negative_control",
+      "text": "As cinzas choveram sobre o pátio.",
+      "expected": "ambiguous",
+      "mustNotReturn": ["subjectless_clause"],
+      "rationale": "Há sintagma nominal plural expresso e leitura figurada; meteorologia lexical isolada não basta."
+    },
+    {
+      "id": "haver-existential",
+      "kind": "positive_boundary",
+      "text": "Havia duas cartas sob o assoalho.",
+      "expected": "subjectless_clause",
+      "mustNotReturn": ["subject_recoverable"],
+      "rationale": "Haver existencial integra o núcleo tradicional de impessoalidade registrado na síntese."
+    },
+    {
+      "id": "haver-auxiliary-control",
+      "kind": "negative_control",
+      "text": "Eles haviam deixado duas cartas sob o assoalho.",
+      "expected": "subject_recoverable",
+      "mustNotReturn": ["subjectless_clause"],
+      "rationale": "Haver funciona como auxiliar e há sujeito expresso; a forma lexical não autoriza impessoalidade."
+    },
+    {
+      "id": "fazer-temporal",
+      "kind": "positive_boundary",
+      "text": "Fazia cinco anos que ninguém abria a sala.",
+      "expected": "subjectless_clause",
+      "mustNotReturn": ["subject_recoverable"],
+      "rationale": "Fazer temporal sem sujeito expresso, dentro do núcleo descrito pela rule card."
+    },
+    {
+      "id": "fazer-personal-age-control",
+      "kind": "negative_control",
+      "text": "Mara faz vinte anos amanhã.",
+      "expected": "subject_recoverable",
+      "mustNotReturn": ["subjectless_clause"],
+      "rationale": "Uso pessoal com sujeito expresso bloqueia leitura impessoal."
+    },
+    {
+      "id": "third-plural-competing-referents",
+      "kind": "ambiguity_guard",
+      "text": "Os músicos falaram com os técnicos. Depois disseram que a passagem estava fechada.",
+      "expected": "ambiguous",
+      "mustNotReturn": ["subject_indeterminate"],
+      "rationale": "Há mais de um referente plural contextual plausível; a política exige preservar ambiguidade em vez de inventar referente."
+    }
+  ],
+  "pairSets": [
+    {
+      "id": "third-plural-context",
+      "a": "third-plural-isolated",
+      "b": "third-plural-recoverable-context",
+      "distinction": "indeterminação provável versus sujeito recuperável por contexto"
+    },
+    {
+      "id": "weather-literal-figurative",
+      "a": "weather-literal",
+      "b": "weather-figurative-personal",
+      "distinction": "meteorológico literal impessoal versus leitura figurada com sujeito expresso"
+    },
+    {
+      "id": "haver-existential-auxiliary",
+      "a": "haver-existential",
+      "b": "haver-auxiliary-control",
+      "distinction": "haver existencial impessoal versus haver auxiliar pessoal"
+    },
+    {
+      "id": "fazer-temporal-personal",
+      "a": "fazer-temporal",
+      "b": "fazer-personal-age-control",
+      "distinction": "fazer temporal impessoal versus fazer pessoal com sujeito expresso"
+    }
+  ],
+  "nextAllowedStep": "Submeter o banco à banca Eva/humana e usar as divergências para refinar a rule card; não abrir engine nem mudar implementation.state sem autorização explícita."
+}

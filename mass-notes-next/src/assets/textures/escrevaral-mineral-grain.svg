@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="3" seed="17" stitchTiles="stitch"/>
+    <feComponentTransfer>
+      <feFuncR type="gamma" amplitude="1" exponent="1.7" offset="0"/>
+      <feFuncG type="gamma" amplitude="1" exponent="1.7" offset="0"/>
+      <feFuncB type="gamma" amplitude="1" exponent="1.7" offset="0"/>
+      <feFuncA type="table" tableValues="0 0.28"/>
+    </feComponentTransfer>
+  </filter>
+  <rect width="180" height="180" filter="url(#grain)" opacity="0.36"/>
+  <g fill="#ead8b9" opacity="0.12">
+    <circle cx="19" cy="27" r="0.7"/>
+    <circle cx="73" cy="18" r="0.45"/>
+    <circle cx="142" cy="43" r="0.6"/>
+    <circle cx="118" cy="119" r="0.5"/>
+    <circle cx="39" cy="151" r="0.65"/>
+    <circle cx="166" cy="164" r="0.45"/>
+  </g>
+</svg>

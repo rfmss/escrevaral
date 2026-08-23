@@ -58,13 +58,22 @@ def audit_tree(files: set[str]) -> None:
         "Saídas geradas voltaram ao Git: " + ", ".join(report_files[:20]),
     )
 
-    nested_workers = sorted(
-        path for path in files if path.endswith("/service-worker.js")
+    # A raiz publicada e a aplicação Mass Notes possuem escopos PWA distintos.
+    # O worker de mass-notes-next/public é um asset-fonte da aplicação isolada e
+    # só é publicado dentro da sua própria preview/build; não disputa o escopo
+    # do service-worker.js canônico da raiz.
+    allowed_scoped_workers = {"mass-notes-next/public/service-worker.js"}
+    nested_workers = sorted(path for path in files if path.endswith("/service-worker.js"))
+    unexpected_workers = sorted(set(nested_workers) - allowed_scoped_workers)
+    require(
+        not unexpected_workers,
+        "Workers aninhados permanecem limitados aos escopos explicitamente autorizados",
+        "Service worker duplicado ou movido fora dos escopos autorizados: " + ", ".join(unexpected_workers),
     )
     require(
-        not nested_workers,
-        "Service worker permanece exclusivamente na raiz",
-        "Service worker duplicado ou movido: " + ", ".join(nested_workers),
+        allowed_scoped_workers.issubset(files),
+        "Worker isolado da aplicação Mass Notes permanece versionado no seu escopo",
+        "Worker isolado esperado ausente: mass-notes-next/public/service-worker.js",
     )
 
 
@@ -99,6 +108,16 @@ def audit_runtime_surface() -> None:
         'const ASSET_VERSION = "' in worker,
         "Service worker mantém versão global de assets",
         "ASSET_VERSION não foi encontrado no service-worker.js",
+    )
+
+    scoped_worker_path = ROOT / "mass-notes-next" / "public" / "service-worker.js"
+    scoped_worker = scoped_worker_path.read_text(encoding="utf-8")
+    require(
+        "escrevaral-paper-home-offline-" in scoped_worker
+        and "__ESCREVARAL_BUILD_ID__" in scoped_worker
+        and "__ESCREVARAL_PRECACHE_ASSETS__" in scoped_worker,
+        "Worker Mass Notes mantém cache/build/precache próprios e isolados",
+        "Worker Mass Notes perdeu o contrato de cache/build/precache isolado",
     )
 
 

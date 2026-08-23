@@ -1,0 +1,22 @@
+/* Release rest gate — contrato final do estado de escrita silenciosa.
+ *
+ * A casa visual atual possui superfícies canônicas próprias (`.left-rail` e
+ * `.analysis-panel`) além dos drawers legados. O repouso precisa ocultar as
+ * superfícies reais, não apenas os bridges antigos. Também neutraliza qualquer
+ * transformação tipográfica herdada: o manuscrito deve preservar exatamente a
+ * caixa digitada pela pessoa autora.
+ */
+
+@media (min-width: 821px) {
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .paper-shell > .left-rail,
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .paper-shell > .analysis-panel {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .escrevaral-editor,
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .escrevaral-editor * {
+    text-transform: none !important;
+  }
+}

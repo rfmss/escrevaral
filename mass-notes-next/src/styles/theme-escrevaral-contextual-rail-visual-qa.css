@@ -1,0 +1,121 @@
+/* Escrevaral — contrato visual dos rails contextuais.
+ * Este arquivo é carregado por último de propósito: o tema claro não pode
+ * herdar a massa azul-marinho dos drawers legados. Ferramentas devem parecer
+ * gavetas da mesma escrivaninha, não um segundo produto sobre o manuscrito.
+ */
+
+@media (min-width: 1100px) {
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools.rail.open {
+    color: #171a1d !important;
+    background-color: #f3eee5 !important;
+    background-image: linear-gradient(rgba(255,255,255,.13), rgba(255,255,255,.13)) !important;
+    border-color: rgba(63,61,55,.34) !important;
+    box-shadow: inset 0 0 0 7px rgba(8,127,193,.035) !important;
+    --panel: #f3eee5;
+    --muted: #565b57;
+    --blue-deep: #1f86bb;
+    --line: rgba(63,61,55,.34);
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .rail-title {
+    color: var(--orange) !important;
+    background: transparent !important;
+    border-bottom-color: rgba(63,61,55,.34) !important;
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools .drawer-close {
+    color: #171a1d !important;
+    background: transparent !important;
+    border-color: var(--blue) !important;
+    box-shadow: none !important;
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools :is(.panel-intro, .review-message, .voice-message) {
+    color: #5d625e !important;
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools :is(.metric, .voice-section, .rail-actions, .section-label) {
+    border-color: rgba(63,61,55,.30) !important;
+  }
+
+  /* Palavras: busca compacta e resultado editorial em papel sobre papel. */
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-search > div {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-search .action.primary {
+    width: auto;
+    min-width: 112px;
+    min-height: 38px;
+    padding: 8px 14px;
+    color: #171a1d;
+    background: #e8c39b;
+    border: 1px solid #9b6b3c;
+    box-shadow: none;
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-search .action.primary:hover:not(:disabled) {
+    color: #171a1d;
+    background: #e5b77f;
+    transform: none;
+    box-shadow: none;
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-reading {
+    border: 0;
+    border-top: 4px solid #90bdd3;
+    background: #f2eee6;
+    box-shadow: inset 0 0 0 1px rgba(63,61,55,.22);
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-heading h2,
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-definition {
+    color: #171a1d;
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-heading span,
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-decision,
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-synonyms span {
+    background: transparent;
+    border-color: rgba(63,61,55,.32);
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-context p {
+    background: #edf0ed;
+  }
+
+  body:not(.night).reference-lexical-open #panel-palavras .lexical-disclaimer {
+    background: #f5eadc;
+  }
+}

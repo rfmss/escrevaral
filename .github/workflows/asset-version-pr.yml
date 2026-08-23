@@ -10,7 +10,9 @@ on:
       - "ui-dialog.js"
       - "**/*.js"
       - "**/*.css"
+      - "!mass-notes-next/**"
       - "scripts/auditor-asset-version.py"
+      - "scripts/test-auditor-asset-version.py"
       - ".github/workflows/asset-version-pr.yml"
   workflow_dispatch:
 
@@ -36,6 +38,9 @@ jobs:
         uses: actions/setup-python@v5.6.0
         with:
           python-version: "3.12"
+
+      - name: Testar fronteira da distribuição pública
+        run: python3 scripts/test-auditor-asset-version.py
 
       - name: Validar coerência de distribuição
         run: python3 scripts/auditor-asset-version.py

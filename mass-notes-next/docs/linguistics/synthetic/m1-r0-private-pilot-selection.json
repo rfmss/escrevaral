@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "m1-r0-private-synthetic-pilot-selection-v1",
+  "state": "method_locked_cases_private",
+  "purpose": "Selecionar deterministicamente a primeira amostra observada da pré-banca sintética sem usar a resposta linguística como critério.",
+  "source": {
+    "sourceId": "ud-portuguese-porttinari-2.18",
+    "revision": "87a07e1fb761d6d0a6e2a4d82b11b308344dabb9",
+    "allowedSplits": ["train", "dev"],
+    "blockedSplits": ["test"]
+  },
+  "candidatePool": {
+    "structuralBucket": "no_direct_subject_candidate",
+    "requiresTrustedPreviousContext": true,
+    "requiredContinuity": "same_document_consecutive_sentence_id",
+    "requiresNoExclusions": true,
+    "requiresPendingHumanAnnotation": true,
+    "expectedEligibleCount": 67,
+    "expectedTargetSplitCounts": {
+      "train": 56,
+      "dev": 11
+    },
+    "stratificationField": "target.deprel",
+    "expectedStratumCounts": {
+      "conj": 32,
+      "root": 14,
+      "ccomp": 7,
+      "advcl": 7,
+      "acl:relcl": 5,
+      "parataxis": 1,
+      "ccomp:speech": 1
+    },
+    "sampleSize": 12,
+    "samplingIntent": "coverage_first_protocol_maturation_not_population_estimate",
+    "fixedStratumQuotas": {
+      "conj": 4,
+      "root": 2,
+      "ccomp": 2,
+      "advcl": 1,
+      "acl:relcl": 1,
+      "parataxis": 1,
+      "ccomp:speech": 1
+    },
+    "selectionSalt": "escrevaral:m1-r0:synthetic-pilot-v1:no-direct"
+  },
+  "controlPool": {
+    "structuralBucket": "explicit_subject_control",
+    "requiresTrustedPreviousContext": true,
+    "requiredContinuity": "same_document_consecutive_sentence_id",
+    "requiresNoExclusions": true,
+    "requiresPendingHumanAnnotation": true,
+    "sampleSize": 4,
+    "selectionSalt": "escrevaral:m1-r0:synthetic-pilot-v1:control"
+  },
+  "ordering": {
+    "selectionMethod": "sha256_of_fixed_salt_null_candidate_id_ascending",
+    "presentationSalt": "escrevaral:m1-r0:synthetic-pilot-v1:presentation",
+    "operationalPilot": {
+      "size": 4,
+      "noDirectCases": 3,
+      "explicitControls": 1,
+      "noDirectCasesMustUseDistinctStrata": true,
+      "selectionSalt": "escrevaral:m1-r0:synthetic-pilot-v1:operational-four"
+    },
+    "remainingCasesMethod": "sha256_of_presentation_salt_null_candidate_id_ascending"
+  },
+  "outputs": {
+    "selectedPackageSize": 16,
+    "observedPackageMustStayOutsideRepository": true,
+    "selectionManifestMustStayOutsideRepository": true,
+    "manifestMayContainObservedText": false,
+    "packageMayContainObservedText": true,
+    "writeMode": "exclusive_no_overwrite",
+    "intendedConsumer": "run-subject-synthetic-rotation.mjs"
+  },
+  "boundaries": {
+    "usesLinguisticAnswerForSelection": false,
+    "usesModelOutputForSelection": false,
+    "usesHumanLabelForSelection": false,
+    "syntheticAgreementCountsAsHumanAgreement": false,
+    "mayCreateHumanGold": false,
+    "mayAuthorizeVerified": false,
+    "mayAuthorizeProductionSyntax": false,
+    "testSplitOpened": false
+  }
+}

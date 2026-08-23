@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-02",
+  "purpose": "Triagem de corpora para a primeira família sintática: terceira pessoa do plural com sujeito recuperável versus sujeito indeterminado.",
+  "policy": {
+    "rawBooksAllowed": false,
+    "externalTextRequiresExplicitLicense": true,
+    "developmentAndEvaluationMustRemainSeparate": true,
+    "officialTestSplitsMayNotGuideImplementation": true,
+    "sourceVersionMustBePinned": true,
+    "currentImplementationState": "not_authorized"
+  },
+  "sources": [
+    {
+      "id": "ud-portuguese-porttinari-2.18",
+      "title": "UD Portuguese Porttinari",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "news"
+      ],
+      "annotationLevel": "gold manually revised",
+      "version": "UD 2.18 / Porttinari 3.0",
+      "revision": "87a07e1fb761d6d0a6e2a4d82b11b308344dabb9",
+      "repository": "UniversalDependencies/UD_Portuguese-Porttinari",
+      "license": "CC BY 4.0",
+      "includesText": true,
+      "status": "accepted_for_development_mining",
+      "intendedRole": "observed_development_primary",
+      "textMayEnterRepository": true,
+      "conditions": [
+        "usar apenas ocorrências mínimas selecionadas, com atribuição, sentence id, split e revisão fixada",
+        "limitar desenvolvimento aos splits train e dev",
+        "não consultar o split test para desenhar a hipótese",
+        "submeter cada rótulo sintático a revisão humana independente da anotação UD"
+      ],
+      "risks": [
+        "domínio jornalístico não representa ficção, diálogo ou oralidade",
+        "relações UD não equivalem automaticamente aos rótulos explicativos do Escrevaral"
+      ]
+    },
+    {
+      "id": "ud-portuguese-petrogold-2.18",
+      "title": "UD Portuguese PetroGold",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "academic"
+      ],
+      "annotationLevel": "fully revised",
+      "version": "UD 2.18",
+      "revision": "5814c7f92b88b64ccb9ba2d8ef33c64535dc881f",
+      "repository": "UniversalDependencies/UD_Portuguese-PetroGold",
+      "license": "CC BY-SA 4.0",
+      "includesText": true,
+      "status": "reserved_for_external_evaluation_review",
+      "intendedRole": "observed_evaluation_candidate_academic",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não consultar ocorrências-alvo antes de congelar a hipótese de implementação",
+        "avaliar compatibilidade de ShareAlike para qualquer derivado distribuído",
+        "preservar documento, sentence id, split, revisão e atribuição"
+      ],
+      "risks": [
+        "domínio petróleo e gás é altamente especializado",
+        "não substitui ensaio geral ou prosa literária"
+      ]
+    },
+    {
+      "id": "ud-portuguese-dantestocks-2.18",
+      "title": "UD Portuguese DANTEStocks",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "social"
+      ],
+      "annotationLevel": "automatic processing with manual revision",
+      "version": "UD 2.18 / DANTEStocks 2.1.1",
+      "revision": "4268e8e1b2c95708136e34f38b8e8af96de86dd2",
+      "repository": "UniversalDependencies/UD_Portuguese-DANTEStocks",
+      "license": "CC BY 4.0",
+      "includesText": true,
+      "status": "reserved_for_external_evaluation_review",
+      "intendedRole": "observed_evaluation_candidate_social",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não consultar ocorrências-alvo antes de congelar a hipótese de implementação",
+        "preservar tweet id ou sentence id, split, revisão e atribuição",
+        "fazer revisão ética de conteúdo e dados pessoais antes de qualquer trecho distribuído"
+      ],
+      "risks": [
+        "tweets de mercado financeiro não equivalem a diálogo espontâneo",
+        "ruído de plataforma e domínio podem dominar o fenômeno"
+      ]
+    },
+    {
+      "id": "ud-portuguese-gsd-2.18",
+      "title": "UD Portuguese GSD",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "blog",
+        "news"
+      ],
+      "annotationLevel": "converted and partially automatically repaired",
+      "version": "UD 2.18",
+      "revision": "c91edee46c9d096c684dda4848637dff5f4299e9",
+      "repository": "UniversalDependencies/UD_Portuguese-GSD",
+      "license": "CC BY-SA 4.0 for annotations; underlying text has separate copyright caveat",
+      "includesText": true,
+      "status": "benchmark_only_rights_caveat",
+      "intendedRole": "external_comparison_only",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não copiar frases para fixtures",
+        "usar apenas métricas agregadas ou IDs quando juridicamente seguro"
+      ],
+      "risks": [
+        "a licença das anotações não resolve os direitos do texto subjacente",
+        "há legado de conversão e reparos automáticos"
+      ]
+    },
+    {
+      "id": "ud-portuguese-bosque-2.18",
+      "title": "UD Portuguese Bosque",
+      "languageVariant": "mixed_pt-BR_pt-PT",
+      "genres": [
+        "news"
+      ],
+      "annotationLevel": "manually annotated source converted to UD",
+      "version": "UD 2.18",
+      "revision": "release-2.18",
+      "repository": "UniversalDependencies/UD_Portuguese-Bosque",
+      "license": "CC BY-SA 4.0",
+      "includesText": true,
+      "status": "conditional_variant_filter_required",
+      "intendedRole": "benchmark_after_variant_filter",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "separar CETENFolha de CETEMPúblico antes de qualquer alegação sobre pt-BR",
+        "não usar mistura de variantes como avaliação brasileira"
+      ],
+      "risks": [
+        "mistura português brasileiro e europeu"
+      ]
+    },
+    {
+      "id": "carolina-1.3",
+      "title": "Corpus Carolina",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "multigenre"
+      ],
+      "annotationLevel": "corpus contemporâneo com metadados documentais",
+      "version": "1.3",
+      "revision": "2024-11-26",
+      "repository": "corpus-carolina",
+      "license": "licença por documento; cabeçalhos do corpus sob CC BY-NC-SA 4.0",
+      "includesText": true,
+      "status": "conditional_document_license_filter_required",
+      "intendedRole": "future_fiction_and_essay_source",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "aceitar somente documentos cuja licença individual seja inequívoca e compatível",
+        "registrar licença, proveniência e remoção por documento"
+      ],
+      "risks": [
+        "não existe uma única licença permissiva aplicável a todo o conteúdo",
+        "a cobertura de ficção precisa ser confirmada documento a documento"
+      ]
+    },
+    {
+      "id": "c-oral-brasil-i",
+      "title": "C-ORAL-BRASIL I",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "spontaneous_speech",
+        "dialogue",
+        "monologue"
+      ],
+      "annotationLevel": "spoken corpus with prosodic annotation",
+      "version": "official release",
+      "revision": "official-download",
+      "repository": "c-oral-brasil",
+      "license": "CC BY-NC-SA 4.0",
+      "includesText": true,
+      "status": "benchmark_only_noncommercial",
+      "intendedRole": "future_orality_benchmark",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não incorporar transcrições ao produto ou fixtures distribuídas sem revisão jurídica ou permissão adicional"
+      ],
+      "risks": [
+        "cláusula não comercial",
+        "transcrição de fala exige cuidado adicional com participantes"
+      ]
+    },
+    {
+      "id": "coraa",
+      "title": "CORAA",
+      "languageVariant": "pt-BR",
+      "genres": [
+        "spontaneous_speech",
+        "prepared_speech"
+      ],
+      "annotationLevel": "automatic speech recognition corpus",
+      "version": "published release",
+      "revision": "paper-release",
+      "repository": "coraa",
+      "license": "CC BY-NC-ND 4.0",
+      "includesText": true,
+      "status": "rejected_for_vendoring",
+      "intendedRole": "aggregate_benchmark_only",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não criar derivados textuais distribuídos"
+      ],
+      "risks": [
+        "cláusulas não comercial e sem derivações"
+      ]
+    },
+    {
+      "id": "ud-portuguese-cintil-2.18",
+      "title": "UD Portuguese CINTIL",
+      "languageVariant": "Portuguese_mixed",
+      "genres": [
+        "news",
+        "fiction",
+        "nonfiction",
+        "grammar_examples"
+      ],
+      "annotationLevel": "treebank",
+      "version": "UD 2.18",
+      "revision": "release-2.18",
+      "repository": "UniversalDependencies/UD_Portuguese-CINTIL",
+      "license": "CC BY-NC-ND 4.0",
+      "includesText": true,
+      "status": "rejected_for_vendoring",
+      "intendedRole": "metadata_only",
+      "textMayEnterRepository": false,
+      "conditions": [
+        "não incorporar texto ou derivados ao corpus distribuído"
+      ],
+      "risks": [
+        "cláusulas não comercial e sem derivações",
+        "não é corpus especificamente brasileiro"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,308 @@
+/* Escrevaral — Paper Home / ferramentas, foco e desktop compacto. */
+
+/* Sete ferramentas formam uma única régua. Em larguras estreitas, a própria régua rola;
+   o painel não cria uma terceira linha órfã nem empurra a página horizontalmente. */
+.experience-view--editor .reference-mobile-legacy #text-tools .tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+}
+
+.experience-view--editor .reference-mobile-legacy #text-tools .tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.experience-view--editor .reference-mobile-legacy #text-tools .tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.experience-view--editor .precision-panel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--home-line, var(--line));
+}
+
+.experience-view--editor .precision-panel > .search {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1100px) {
+  /* A entrada geral da Oficina expõe o mesmo rail funcional usado pelas pontes
+     específicas, mas sem trocar a aba nem reduzir a largura do manuscrito. */
+  body.reference-tools-open .experience-view--editor .reference-mobile-legacy {
+    display: contents;
+  }
+
+  body.reference-tools-open .experience-view--editor .reference-mobile-legacy #text-tools.rail.open {
+    position: fixed;
+    z-index: 4001;
+    top: 112px;
+    right: 24px;
+    bottom: 24px;
+    left: auto;
+    display: flex;
+    width: min(520px, calc(100vw - 48px));
+    max-width: 520px;
+    height: auto;
+    min-height: 0;
+    transform: none;
+    color: var(--home-ink, var(--ink));
+    background:
+      radial-gradient(ellipse at 20% 8%, rgba(255,255,255,.58), transparent 52%),
+      var(--home-paper, var(--paper));
+    border: 1px solid rgba(17,18,15,.45);
+    box-shadow: 8px 10px 0 rgba(17,18,15,.08), 0 18px 50px rgba(17,18,15,.18);
+  }
+
+  body.reference-tools-open .experience-view--editor .reference-mobile-legacy #text-tools.rail.open::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 8px;
+    pointer-events: none;
+    border: 1px dashed rgba(8,127,193,.28);
+  }
+
+  body.reference-tools-open .experience-view--editor .reference-mobile-legacy #text-tools.rail.open > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  body.reference-tools-open .experience-view--editor .reference-mobile-legacy #text-tools .drawer-close {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body.reference-tools-open .drawer-overlay {
+    position: fixed;
+    z-index: 4000;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: rgba(17,18,15,.16);
+  }
+
+  body.night.reference-tools-open .experience-view--editor .reference-mobile-legacy #text-tools.rail.open {
+    color: #ece7da;
+    background: #202628;
+    border-color: rgba(236,231,218,.55);
+  }
+
+  /* COLUNA DIREITA -------------------------------------------------------- */
+
+  .experience-view--editor .rail {
+    border-left: 1px solid var(--home-line);
+  }
+
+  .experience-view--editor .rail-title {
+    min-height: 92px;
+    height: 92px;
+    padding: 0 18px 0 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--home-line);
+    color: var(--home-orange);
+    background: transparent;
+    font: 700 11px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .tabs {
+    min-height: 54px;
+    padding: 8px 12px;
+    gap: 4px;
+    overflow-x: auto;
+    border-bottom: 1px solid #999;
+    background: transparent;
+    scrollbar-width: none;
+  }
+
+  .experience-view--editor .tabs::-webkit-scrollbar { display: none; }
+
+  .experience-view--editor .tab {
+    min-width: max-content;
+    padding: 5px 7px;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    border-radius: 0;
+    color: #666;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    font: 700 9px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  .experience-view--editor .tab:hover,
+  .experience-view--editor .tab.active {
+    color: var(--home-blue);
+    border-bottom-color: var(--home-blue);
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .experience-view--editor .rail-scroll {
+    padding: 0 18px 18px 22px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(17, 18, 15, .32) transparent;
+  }
+
+  .experience-view--editor .panel {
+    padding: 0;
+  }
+
+  .experience-view--editor .metric,
+  .experience-view--editor .voice-section,
+  .experience-view--editor .rail-actions,
+  .experience-view--editor .section-label {
+    border-color: #aaa;
+  }
+
+  .experience-view--editor .metric {
+    padding: 13px 2px 14px;
+    border-bottom: 1px solid #aaa;
+  }
+
+  .experience-view--editor .metric-label,
+  .experience-view--editor .section-label {
+    color: var(--home-blue);
+    font: 700 11px/1 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: .08em;
+  }
+
+  .experience-view--editor .metric-value {
+    color: var(--home-orange);
+    font: 700 42px/.95 "Arial Narrow", Arial, sans-serif;
+    letter-spacing: -.03em;
+  }
+
+  .experience-view--editor .metric small,
+  .experience-view--editor .panel-intro,
+  .experience-view--editor .review-message,
+  .experience-view--editor .voice-message {
+    color: #555;
+    font-family: Georgia, serif;
+  }
+
+  .experience-view--editor .chip,
+  .experience-view--editor .action,
+  .experience-view--editor .review-visibility,
+  .experience-view--editor .review-jump {
+    border-radius: 0;
+  }
+
+  /* FOCO ---------------------------------------------------------------- */
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .app-shell {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .sidebar,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .rail,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .registration,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .title-input,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .deck,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .editor-toolbar-slot,
+  body.focus-mode:not(.experience-anatomy) .editor-toolbar-dock {
+    display: none !important;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .workspace,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .editor-shell,
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .paper {
+    width: 100%;
+    height: 100vh;
+    max-height: none;
+  }
+
+  body.focus-mode:not(.experience-anatomy) .experience-view--editor .tiptap.escrevaral-editor {
+    width: min(780px, calc(100vw - 48px));
+    min-height: 100vh;
+    padding: 14vh 24px 20vh;
+    font-size: 21px;
+    line-height: 1.8;
+  }
+
+  /* TELAS MENORES DE DESKTOP ------------------------------------------- */
+
+  @media (max-width: 1450px) {
+    .experience-view--editor .app-shell {
+      grid-template-columns: 250px minmax(560px, 1fr) 250px;
+    }
+
+    .experience-view--editor .brand::before {
+      font-size: 32px;
+      transform: scaleX(1.03);
+    }
+
+    .experience-view--editor .brand::after {
+      font-size: 9px;
+      letter-spacing: 2.6px;
+    }
+
+    .experience-view--editor .registration {
+      grid-template-columns: 1.15fr .8fr .5fr .75fr;
+    }
+
+    .experience-view--editor .reg-field {
+      padding-left: 13px;
+      padding-right: 13px;
+    }
+
+    .experience-view--editor .field-value {
+      font-size: 13px;
+    }
+
+    .experience-view--editor .tiptap.escrevaral-editor {
+      width: min(760px, calc(100% - 64px));
+      font-size: 17px;
+    }
+  }
+
+  @media (max-height: 820px) {
+    .experience-view--editor .brand,
+    .experience-view--editor .registration,
+    .experience-view--editor .rail-title {
+      min-height: 82px;
+      height: 82px;
+    }
+
+    .experience-view--editor .library-filters {
+      max-height: 126px;
+      overflow: auto;
+    }
+
+    .experience-view--editor .editor-toolbar-slot,
+    .experience-view--editor .editor-toolbar,
+    .editor-toolbar-dock .editor-toolbar {
+      min-height: 58px;
+    }
+
+    .experience-view--editor .tiptap.escrevaral-editor {
+      padding-top: 42px;
+      padding-bottom: 70px;
+    }
+  }
+}

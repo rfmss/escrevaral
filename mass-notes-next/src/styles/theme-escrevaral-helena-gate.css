@@ -1,0 +1,331 @@
+/* Helena gate — correções estruturais de release visual.
+ * Esta folha é carregada por último para arbitrar apenas a composição final.
+ * Objetivo: preservar o manuscrito como área nobre, reduzir ruído permanente
+ * e impedir que estados contextuais pareçam um segundo produto.
+ */
+
+/* O manuscrito precisa preservar literalmente a caixa digitada pela pessoa
+   autora. Camadas tipográficas podem usar caixa alta em chrome/labels, nunca
+   no conteúdo semântico do ProseMirror. */
+body:not(.experience-anatomy) .ProseMirror,
+body:not(.experience-anatomy) .ProseMirror * {
+  text-transform: none !important;
+}
+
+@media (min-width: 1100px) {
+  /* O paper-home é carregado depois de writing-rest.css e possui regras de
+     geometria mais genéricas para .paper. No repouso, o contrato aprovado é
+     deliberadamente outro: página estreita, sem moldura e com o topo ótico
+     entre 28% e 32% da viewport. Como .paper vive abaixo da topbar do shell,
+     o recuo precisa descontar essa faixa estrutural em vez de somá-la duas
+     vezes. */
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .paper {
+    width: min(720px, 100%) !important;
+    max-width: 720px !important;
+    min-height: 70vh !important;
+    margin: calc(30vh - 102px) auto 20vh !important;
+    padding: 0 0 20vh !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* No repouso o título é metadado do manuscrito, não manchete. Ele precisa
+     permanecer tipograficamente subordinado ao corpo de escrita (19.5px). */
+  body.writing-rest:not(.workshop-open):not(.focus-mode) .reference-document-title,
+  body.writing-rest:not(.workshop-open):not(.focus-mode) input[aria-label="Título do documento"] {
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* O paper-home legado escondia o único gatilho explícito entre repouso e
+     oficina. O gate final precisa preservar esse controle: pequeno no repouso,
+     visível por teclado/leitor de tela e acima do shell de papel. */
+  body:not(.experience-anatomy) .writing-workshop-toggle {
+    display: block !important;
+  }
+
+  /* HEL-001 / HEL-002 / HEL-019 — rail contextual subordinado ao manuscrito. */
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) {
+    --ux-context-rail: clamp(258px, calc(100vw - 842px), 320px);
+  }
+
+  body:is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .paper-shell {
+    grid-template-columns: 250px minmax(560px, 1fr) var(--ux-context-rail) !important;
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools.rail.open {
+    color: #171a1d !important;
+    background-color: #f3eee5 !important;
+    background-image:
+      linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.16)),
+      radial-gradient(circle at 18% 12%, rgba(8,127,195,.025), transparent 36%) !important;
+    border: 1px solid rgba(63,61,55,.28) !important;
+    box-shadow: inset 0 0 0 6px rgba(8,127,193,.025) !important;
+  }
+
+  body:not(.night):is(
+    .reference-tools-open,
+    .reference-lexical-open,
+    .reference-voice-open,
+    .reference-research-open,
+    .reference-tags-open
+  ) .reference-mobile-legacy #text-tools :is(
+    .rail-scroll,
+    .panel,
+    .metadata-editor,
+    .voice-reading,
+    .voice-card,
+    .voice-section,
+    .review-card,
+    .review-located-card,
+    .lexical-reading
+  ) {
+    background-color: transparent !important;
+  }
+
+  /* HEL-012 / HEL-013 — Tags precisa parecer estado real, não botão morto. */
+  body:not(.night).reference-tags-open #text-tools .metadata-editor {
+    margin-top: 6px;
+    padding-top: 10px;
+    gap: 8px;
+  }
+
+  body:not(.night).reference-tags-open #text-tools .metadata-tags-form input {
+    height: 40px;
+    color: #171a1d !important;
+    background: rgba(255,255,255,.18) !important;
+    border-color: rgba(63,61,55,.42) !important;
+  }
+
+  body:not(.night).reference-tags-open #text-tools .metadata-apply {
+    min-height: 38px;
+    color: #f3eee5 !important;
+    background: #242522 !important;
+    border-color: #242522 !important;
+  }
+
+  body:not(.night).reference-tags-open #text-tools .metadata-apply:disabled {
+    opacity: 1 !important;
+    color: #66635d !important;
+    background: #e8e1d6 !important;
+    border-color: #aaa198 !important;
+  }
+
+  body:not(.night).reference-tags-open #text-tools :is(.metadata-tags-form small, .metadata-note, .metadata-message) {
+    color: #5d625e !important;
+  }
+
+  /* HEL-003 / HEL-006 / HEL-007 — uma única régua ótica para o topo. */
+  .paper-shell .topbar {
+    grid-template-columns:
+      250px
+      minmax(260px, 1fr)
+      112px
+      minmax(190px, 224px)
+      minmax(340px, 390px);
+  }
+
+  .paper-shell .brand,
+  .paper-shell .document-title,
+  .paper-shell .mode,
+  .paper-shell .search,
+  .paper-shell .main-actions {
+    min-width: 0;
+  }
+
+  .paper-shell .document-title {
+    padding-left: 22px;
+    padding-right: 18px;
+  }
+
+  .paper-shell .mode {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .paper-shell .search {
+    margin-left: 12px;
+    margin-right: 12px;
+    padding-left: 10px;
+    padding-right: 8px;
+    gap: 9px;
+  }
+
+  .paper-shell .search kbd {
+    font-size: 9px;
+    letter-spacing: .02em;
+    color: #6b6861;
+  }
+
+  .paper-shell .main-actions {
+    grid-template-columns: 1.12fr 1.12fr 1.12fr .86fr .78fr;
+  }
+
+  .paper-shell .main-actions button {
+    min-width: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .paper-shell .main-actions button:nth-last-child(-n + 2) {
+    opacity: .78;
+  }
+
+  .paper-shell .main-actions button:nth-last-child(-n + 2):hover,
+  .paper-shell .main-actions button:nth-last-child(-n + 2):focus-visible {
+    opacity: 1;
+  }
+
+  /* HEL-003 / HEL-004 / HEL-014 — toolbar derivada do mesmo eixo editorial. */
+  .paper-shell .formatbar {
+    display: grid;
+    grid-template-columns: 104px 116px 110px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 0;
+    min-width: 0;
+    padding-left: 22px;
+    padding-right: 18px;
+  }
+
+  .paper-shell .formatbar label,
+  .paper-shell .formatbar label:nth-child(2),
+  .paper-shell .formatbar label:nth-child(3) {
+    width: auto;
+    min-width: 0;
+    height: 42px;
+    padding: 0 12px;
+    border-right: 1px solid rgba(63,61,55,.24);
+    justify-content: center;
+  }
+
+  .paper-shell .formatbar label:first-child {
+    padding-left: 0;
+  }
+
+  .paper-shell .formatbar label button {
+    min-width: 0;
+    padding: 4px 0;
+    font-size: 12px;
+  }
+
+  .paper-shell .formatbar .size {
+    gap: 7px;
+    margin-top: 3px;
+  }
+
+  .paper-shell .formatbar .size button {
+    width: 22px;
+    height: 22px;
+    opacity: .58;
+  }
+
+  .paper-shell .format-actions {
+    min-width: 0;
+    justify-self: stretch;
+    padding-left: 12px;
+    gap: 4px;
+  }
+
+  .paper-shell .format-actions .divider {
+    margin-left: 4px;
+    margin-right: 4px;
+    opacity: .55;
+  }
+
+  .paper-shell .editor .escrevaral-editor {
+    padding-left: 54px !important;
+    padding-right: 54px !important;
+  }
+
+  /* HEL-005 — hierarquia inequívoca na biblioteca. */
+  .paper-shell .left-rail {
+    padding-top: 18px;
+  }
+
+  .paper-shell .left-rail .current-project {
+    height: auto;
+    min-height: 92px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+  }
+
+  .paper-shell .left-rail .project-row {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .paper-shell .left-rail .documents {
+    padding-top: 14px !important;
+  }
+
+  .paper-shell .left-rail .documents > .section-title {
+    min-height: 38px;
+    height: auto;
+    margin-bottom: 4px;
+  }
+
+  .paper-shell .left-rail .current-project + .documents {
+    border-top: 0;
+  }
+
+  /* HEL-015 / HEL-016 — footer na mesma baseline e Foco como um conjunto. */
+  .paper-shell .statusbar {
+    align-items: stretch;
+  }
+
+  .paper-shell .statusbar > div {
+    display: flex;
+    align-items: center;
+    min-height: 0;
+  }
+
+  .paper-shell .statusbar .focus {
+    gap: 8px;
+  }
+
+  .paper-shell .statusbar .focus .play {
+    flex: 0 0 auto;
+    align-self: center;
+  }
+
+  .paper-shell .statusbar :is(.book, .fullscreen) .footer-button {
+    width: 100%;
+    height: 100%;
+    min-height: 40px;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1320px) {
+  .paper-shell .topbar {
+    grid-template-columns: 250px minmax(235px, 1fr) 102px minmax(170px, 190px) minmax(320px, 350px);
+  }
+
+  .paper-shell .main-actions small {
+    font-size: 11px;
+  }
+
+  .paper-shell .formatbar {
+    grid-template-columns: 96px 108px 104px minmax(0, 1fr);
+  }
+}

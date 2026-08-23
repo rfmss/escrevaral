@@ -1,0 +1,47 @@
+/* Ajustes responsivos finais do Gate 6.5. */
+.brand h1 {
+  font-size: 1.9rem;
+}
+
+/* A troca papel/noite não atravessa estados cromáticos ilegíveis. */
+.icon-btn,
+.drawer-close,
+.mobile-menu,
+.mobile-tools,
+.editor-toolbar button,
+.action,
+.tab,
+.chip,
+.conflict-banner button {
+  transition: none;
+}
+
+@media (max-width: 1280px) {
+  .brand {
+    padding-inline: 16px;
+  }
+
+  .brand h1 {
+    font-size: 1.66rem;
+    letter-spacing: -.04em;
+  }
+}
+
+@media (max-width: 1040px) {
+  /* Os acionadores permanecem montados para a devolução de foco, mas ficam atrás do drawer aberto. */
+  .mobile-menu,
+  .mobile-tools {
+    z-index: 60;
+  }
+}
+
+@media (max-width: 520px) {
+  .paper {
+    padding-inline: 18px;
+  }
+
+  .title-input {
+    font-size: clamp(1.55rem, 8vw, 1.75rem);
+    letter-spacing: -.035em;
+  }
+}
