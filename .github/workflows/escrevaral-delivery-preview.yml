@@ -1,0 +1,143 @@
+name: Escrevaral Delivery Preview
+
+on:
+  push:
+    branches: [feat/escrevaral-paper-home]
+    paths:
+      - "mass-notes-next/**"
+      - "scripts/build-anatomia-runtime.py"
+      - "anatomia-original.html"
+      - ".github/workflows/escrevaral-delivery-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: escrevaral-delivery-preview
+  cancel-in-progress: true
+
+jobs:
+  delivery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: mass-notes-next
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Registrar entrega em andamento
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/escrevaral-delivery-status
+          mkdir /tmp/escrevaral-delivery-status
+          cd /tmp/escrevaral-delivery-status
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf 'source_sha=%s\nrun_id=%s\nstate=started\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" > status.txt
+          git add status.txt
+          git commit -m "delivery status: ${GITHUB_SHA}"
+          git branch -M status-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/status-escrevaral-delivery
+
+      - name: Python para Anatomia
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Preparar Anatomia
+        working-directory: .
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/build-anatomia-runtime.py
+
+      - name: Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: mass-notes-next/package-lock.json
+
+      - name: Instalar e compilar
+        run: |
+          set -euo pipefail
+          npm ci --no-audit --no-fund
+          npm run build
+          test -f dist/index.html
+          test -f dist/assets/index.js
+          test -f dist/assets/index.css
+          test -f dist/service-worker.js
+          test -f dist/manifest.webmanifest
+          ! grep -R -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' dist
+          test -f dist/assets/Anton-Regular.ttf
+          test -f dist/assets/Oswald-wght.ttf
+          test -f dist/assets/Literata-opsz-wght.ttf
+
+      - name: Publicar entrega estática
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd dist
+          touch .nojekyll
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "delivery: ${GITHUB_SHA}"
+          git branch -M delivery-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/preview-escrevaral-delivery
+
+      - name: Renovar cache e verificar entrega pública
+        working-directory: .
+        run: |
+          set -euo pipefail
+          base="https://raw.githack.com/${GITHUB_REPOSITORY}/preview-escrevaral-delivery"
+          for path in index.html assets/index.js assets/index.css; do
+            curl --silent --show-error --request DELETE "https://raw.githack.com/purge?url=${base}/${path}" || true
+          done
+          for attempt in $(seq 1 18); do
+            rm -f /tmp/escrevaral-delivery-index.html /tmp/escrevaral-delivery-js /tmp/escrevaral-delivery-css
+            if curl --fail --silent --show-error --location "${base}/index.html" -o /tmp/escrevaral-delivery-index.html \
+              && grep --quiet './assets/index.js' /tmp/escrevaral-delivery-index.html \
+              && grep --quiet './assets/index.css' /tmp/escrevaral-delivery-index.html \
+              && curl --fail --silent --show-error --location "${base}/assets/index.js" -o /tmp/escrevaral-delivery-js \
+              && curl --fail --silent --show-error --location "${base}/assets/index.css" -o /tmp/escrevaral-delivery-css \
+              && test "$(wc -c < /tmp/escrevaral-delivery-js)" -gt 1000 \
+              && test "$(wc -c < /tmp/escrevaral-delivery-css)" -gt 1000 \
+              && ! grep -E 'fonts\.googleapis\.com|fonts\.gstatic\.com' /tmp/escrevaral-delivery-css; then
+              echo "Entrega pública respondeu corretamente: ${base}/index.html"
+              exit 0
+            fi
+            sleep 10
+          done
+          exit 1
+
+      - name: Registrar entrega concluída
+        if: success()
+        working-directory: .
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/escrevaral-delivery-status
+          mkdir /tmp/escrevaral-delivery-status
+          cd /tmp/escrevaral-delivery-status
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf 'source_sha=%s\nrun_id=%s\nstate=delivered\nurl=https://raw.githack.com/%s/preview-escrevaral-delivery/index.html\n' "$GITHUB_SHA" "$GITHUB_RUN_ID" "$GITHUB_REPOSITORY" > status.txt
+          git add status.txt
+          git commit -m "delivery complete: ${GITHUB_SHA}"
+          git branch -M status-build
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:refs/heads/status-escrevaral-delivery
