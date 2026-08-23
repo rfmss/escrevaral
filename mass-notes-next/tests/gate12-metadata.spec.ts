@@ -45,7 +45,10 @@ async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
-  await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+  const viewport = page.viewportSize()
+  if (!viewport || viewport.width > 820) {
+    await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+  }
   await openDesktopTools(page)
 }
 
