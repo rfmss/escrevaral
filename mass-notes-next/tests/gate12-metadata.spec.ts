@@ -12,11 +12,41 @@ const REVIEW_TEXT = [
   'Depois, releu as páginas com calma, conferiu os títulos e guardou o arquivo para continuar no fim da tarde.',
 ].join('\n\n')
 
+async function openDesktopTools(page: Page) {
+  const viewport = page.viewportSize()
+  if (viewport && viewport.width <= 820) return
+
+  const metadata = page.locator('.metadata-editor')
+  if (await metadata.isVisible()) return
+
+  const workshop = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+  if (await workshop.isVisible()) await workshop.click()
+
+  const trigger = page.getByRole('button', { name: 'Abrir oficina de ferramentas' })
+  if (await trigger.isVisible()) await trigger.click()
+
+  await expect(metadata).toBeVisible()
+}
+
+async function openDesktopLibrary(page: Page) {
+  const viewport = page.viewportSize()
+  if (viewport && viewport.width <= 820) return
+
+  const library = page.getByRole('dialog', { name: 'Arquivo de documentos' })
+  if (await library.isVisible()) return
+
+  const trigger = page.getByRole('button', { name: 'Abrir biblioteca local' })
+  await expect(trigger).toBeVisible()
+  await trigger.click()
+  await expect(library).toBeVisible()
+}
+
 async function waitReady(page: Page) {
   await page.goto('/')
   await expect(page.locator('.paper')).toBeVisible()
   await expect(page.locator('.ProseMirror')).toBeEditable()
   await expect(page.locator('.field-value').filter({ hasText: /Salvo|Alterado/ })).toBeVisible()
+  await openDesktopTools(page)
 }
 
 async function waitSaved(page: Page) {
@@ -134,7 +164,9 @@ test('favorito usa a mesma revisão, autosave e filtro da biblioteca', async ({ 
   expect(after.favorite).toBe(true)
 
   await page.reload()
+  await openDesktopTools(page)
   await expect(page.getByRole('button', { name: 'Página favorita' })).toBeVisible()
+  await openDesktopLibrary(page)
   await page.getByRole('button', { name: 'Somente favoritas' }).click()
   await expect(page.locator('.note-title-text')).toContainText(title || 'Sem título')
 })
@@ -150,7 +182,9 @@ test('marcadores são aplicados atomicamente, deduplicados e persistidos', async
   await waitSaved(page)
 
   await page.reload()
+  await openDesktopTools(page)
   await expect(page.getByLabel('Marcadores da página')).toHaveValue('Poesia, MEMÓRIA, ensaio')
+  await openDesktopLibrary(page)
   const options = await page.getByRole('combobox', { name: 'Filtrar por tag' }).locator('option').allTextContents()
   expect(options.filter((item) => item.toLocaleLowerCase('pt-BR') === 'poesia')).toHaveLength(1)
   expect(options.filter((item) => item.toLocaleLowerCase('pt-BR') === 'memória')).toHaveLength(1)
@@ -173,6 +207,7 @@ test('limites de marcadores e remoção unitária permanecem previsíveis', asyn
   await waitSaved(page)
 
   await page.reload()
+  await openDesktopTools(page)
   await expect(page.locator('.metadata-tag-list button')).toHaveCount(7)
   await expect(page.getByRole('button', { name: 'Remover marcador dois' })).toHaveCount(0)
 })
