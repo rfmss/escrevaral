@@ -59,6 +59,8 @@ test('paste de Word e Google Docs produz documento estruturado e seguro', async 
 test('toolbar preserva seleção e listas continuam estruturadas', async ({ page }) => {
   await waitReady(page)
   const editor = await newDocument(page, 'Seleção e listas')
+  const workshopTrigger = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+  if (await workshopTrigger.isVisible()) await workshopTrigger.click()
   await page.keyboard.type('Texto selecionado')
 
   await editor.evaluate((element) => {
