@@ -68,19 +68,26 @@
   }
 
   /*
-   * A árvore React mantém os drawers contextuais dentro de
-   * `.reference-mobile-legacy`. O repouso esconde genericamente `.rail`, mas
-   * uma ação explícita da pessoa autora (Pesquisa, Palavras, Voz, Tags ou
-   * Ferramentas) deve poder abrir a superfície contextual sem exigir que a
-   * Oficina inteira esteja aberta. O estado `reference-*-open` é o contrato
-   * público da bridge; por isso ele vence somente para o drawer ativo.
+   * A árvore React mantém a Biblioteca e os drawers contextuais dentro de
+   * `.reference-mobile-legacy`. O repouso pode esconder esse invólucro, mas
+   * uma ação explícita da pessoa autora deve revelar somente a superfície
+   * solicitada. `reference-library-open` é o contrato público da Biblioteca;
+   * os demais estados pertencem às bridges contextuais.
    */
+  body.writing-rest.reference-library-open:not(.experience-anatomy) .reference-mobile-legacy,
   body.writing-rest.reference-research-open:not(.experience-anatomy) .reference-mobile-legacy,
   body.writing-rest.reference-lexical-open:not(.experience-anatomy) .reference-mobile-legacy,
   body.writing-rest.reference-voice-open:not(.experience-anatomy) .reference-mobile-legacy,
   body.writing-rest.reference-tags-open:not(.experience-anatomy) .reference-mobile-legacy,
   body.writing-rest.reference-tools-open:not(.experience-anatomy) .reference-mobile-legacy {
     display: contents !important;
+  }
+
+  body.writing-rest.reference-library-open:not(.experience-anatomy) #document-library.sidebar.open {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
   body.writing-rest.reference-research-open:not(.experience-anatomy) #text-tools.rail.open,
