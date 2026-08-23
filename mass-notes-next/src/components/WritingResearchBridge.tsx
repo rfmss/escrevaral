@@ -6,7 +6,8 @@ function findResearchTrigger(): HTMLButtonElement | null {
 }
 
 function findToolsRail(): HTMLElement | null {
-  return document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail')
+  const rails = Array.from(document.querySelectorAll<HTMLElement>('#text-tools.rail'))
+  return rails.find((rail) => !rail.closest('.reference-mobile-legacy')) ?? rails[0] ?? null
 }
 
 function projectResearchTabs(enabled: boolean): void {
@@ -29,9 +30,9 @@ function projectResearchTabs(enabled: boolean): void {
 }
 
 function openReviewTab(): boolean {
-  const rail = document.querySelector<HTMLElement>('.reference-mobile-legacy #text-tools.rail.open')
+  const rail = findToolsRail()
   const tab = rail?.querySelector<HTMLButtonElement>('#tab-revisao')
-  if (!rail || !tab) return false
+  if (!rail?.classList.contains('open') || !tab) return false
   if (tab.getAttribute('aria-selected') !== 'true') tab.click()
   return true
 }
