@@ -4,6 +4,11 @@ async function revealWords(page: Page) {
   const viewport = page.viewportSize()
   if ((viewport?.width ?? 1280) >= 1100) {
     const canonical = page.locator('.analysis-panel .reference-lexical-open')
+    if (!(await canonical.isVisible())) {
+      const workshop = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral', exact: true })
+      await expect(workshop).toBeVisible()
+      await workshop.click()
+    }
     await expect(canonical).toBeVisible()
     await canonical.click()
   } else {
@@ -73,8 +78,9 @@ test('seleção do Tiptap preserva contexto destacado e não altera o manuscrito
   }))
   await expect.poll(() => page.evaluate(() => window.getSelection()?.toString() ?? '')).toBe('Melancolia')
 
-  // A edição colocou a casa em foco total. Escape restaura a casa sem apagar
-  // o snapshot lexical da seleção; só então a ação canônica volta a ser visível.
+  // A edição colocou a casa em foco total. Escape restaura a escrita silenciosa
+  // sem apagar o snapshot lexical; revealWords usa então o caminho público da
+  // casa atual (Oficina → Consultar palavras) quando o launcher estiver oculto.
   await page.keyboard.press('Escape')
   await revealWords(page)
 
