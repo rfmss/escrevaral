@@ -60,7 +60,9 @@ async function openReview(page: Page) {
   const research = page.getByRole('button', { name: 'Pesquisa' })
   await expect(research).toBeVisible()
   await research.click()
-  const rail = page.locator('.reference-mobile-legacy #text-tools.rail.open')
+  /* O chrome atual projeta a Pesquisa no rail canônico; a cópia dentro de
+     .reference-mobile-legacy permanece deliberadamente oculta em desktop. */
+  const rail = page.locator('#text-tools.rail.open:visible')
   await expect(rail).toBeVisible()
   const tab = rail.getByRole('tab', { name: 'revisao', exact: true })
   await expect(tab).toHaveAttribute('aria-selected', 'true')
