@@ -5,6 +5,11 @@ async function revealWords(page: Page) {
   const viewport = page.viewportSize()
   if ((viewport?.width ?? 1280) >= 1100) {
     const canonical = page.locator('.analysis-panel .reference-lexical-open')
+    if (!(await canonical.isVisible())) {
+      const workshop = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+      await expect(workshop).toBeVisible()
+      await workshop.click()
+    }
     await expect(canonical).toBeVisible()
     await canonical.click()
   } else {
