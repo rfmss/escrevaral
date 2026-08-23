@@ -25,6 +25,9 @@ test('primeiro movimento informa captura local e chip só aparece depois de 50 p
   await page.keyboard.type(` ${Array.from({ length: 40 }, () => 'um').join(' ')}`, { delay: 35 })
   await page.keyboard.press('Escape')
 
+  const workshopTrigger = page.getByRole('button', { name: 'Abrir a oficina do Escrevaral' })
+  if (await workshopTrigger.isVisible()) await workshopTrigger.click()
+
   const status = page.locator('.analysis-panel .reference-proof-status')
   await expect(status).toBeVisible()
   await expect(status).toContainText('Autoria local')
