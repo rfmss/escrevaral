@@ -1,0 +1,19 @@
+{
+  "name": "Escrevaral — oficina de escrita brasileira",
+  "short_name": "Escrevaral",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3eee5",
+  "theme_color": "#f3eee5",
+  "description": "Oficina de escrita local, com textos salvos neste navegador.",
+  "icons": [
+    {
+      "src": "./brand/escrevaral-favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
