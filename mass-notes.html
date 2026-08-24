@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f4f6f9">
+  <title>Mass Notes + Escrevaral — experimento</title>
+  <meta name="description" content="Experimento isolado da nova interface Mass Notes com engines locais do Escrevaral.">
+  <script>
+    try {
+      if (localStorage.getItem("mass-notes-theme") === "dark") {
+        document.documentElement.dataset.massNotesTheme = "dark";
+      }
+    } catch (_) {}
+  </script>
+  <link rel="stylesheet" href="css/mass-notes/00-tokens.css">
+  <link rel="stylesheet" href="css/mass-notes/01-shell.css">
+  <link rel="stylesheet" href="css/mass-notes/02-components.css">
+  <link rel="stylesheet" href="css/mass-notes/03-responsive.css">
+</head>
+<body>
+  <div class="mn-storage-banner" id="mn-storage-banner" role="alert" hidden>
+    <strong>Armazenamento temporário.</strong>
+    <span id="mn-storage-message">Seus textos permanecem nesta aba, mas ainda não estão preservados no navegador.</span>
+  </div>
+
+  <div class="mn-app" id="mn-app">
+    <aside class="mn-library" id="mn-library" aria-label="Biblioteca de documentos">
+      <header class="mn-library-header">
+        <div class="mn-brand-mark" aria-hidden="true">M</div>
+        <div class="mn-brand-copy">
+          <strong>Mass Notes</strong>
+          <small>com engines do Escrevaral</small>
+        </div>
+        <button class="mn-icon-button mn-mobile-only" type="button" data-action="close-library" aria-label="Fechar biblioteca">×</button>
+      </header>
+
+      <div class="mn-library-actions">
+        <button class="mn-button" type="button" data-action="new-document">＋ Novo documento</button>
+        <label class="mn-search">
+          <span class="mn-sr-only">Buscar documentos</span>
+          <input id="mn-search" type="search" placeholder="Buscar documentos">
+          <button class="mn-icon-button" type="button" data-action="clear-search" aria-label="Limpar busca">×</button>
+        </label>
+      </div>
+
+      <div class="mn-library-scroll">
+        <p class="mn-section-label">Biblioteca</p>
+        <nav aria-label="Visualizações de documentos">
+          <ul class="mn-nav-list" id="mn-smart-views">
+            <li><button class="mn-nav-button" type="button" data-view="all" aria-current="page"><span>Todos os documentos</span><span class="mn-count" data-count="all">0</span></button></li>
+            <li><button class="mn-nav-button" type="button" data-view="recent"><span>Recentes</span><span class="mn-count" data-count="recent">0</span></button></li>
+            <li><button class="mn-nav-button" type="button" data-view="favorite"><span>Favoritos</span><span class="mn-count" data-count="favorite">0</span></button></li>
+          </ul>
+        </nav>
+
+        <p class="mn-section-label">Documentos</p>
+        <ul class="mn-document-list" id="mn-document-list"></ul>
+        <p class="mn-empty" id="mn-document-empty" hidden>Nenhum documento nesta visualização.</p>
+      </div>
+    </aside>
+
+    <main class="mn-main" aria-label="Editor de documentos">
+      <header class="mn-topbar">
+        <button class="mn-icon-button mn-mobile-only" type="button" data-action="open-library" aria-label="Abrir biblioteca" aria-expanded="false">☰</button>
+        <input class="mn-title-input" id="mn-title" type="text" maxlength="180" aria-label="Título do documento" placeholder="Documento sem título">
+        <span class="mn-save-state" id="mn-save-state" aria-live="polite">Inicializando…</span>
+        <button class="mn-icon-button mn-focus-exit" type="button" data-action="toggle-focus" aria-label="Sair do modo foco">⤢</button>
+        <button class="mn-icon-button mn-desktop-only" type="button" data-action="toggle-focus" aria-label="Ativar modo foco">⛶</button>
+        <button class="mn-icon-button" type="button" data-action="toggle-theme" aria-label="Alternar tema">◐</button>
+        <button class="mn-icon-button" type="button" data-action="open-inspector" aria-label="Abrir assistente do texto" aria-expanded="false">☷</button>
+      </header>
+
+      <div class="mn-toolbar" role="toolbar" aria-label="Formatação do documento">
+        <div class="mn-toolbar-group">
+          <button class="mn-toolbar-button" type="button" data-command="undo" aria-label="Desfazer">↶</button>
+          <button class="mn-toolbar-button" type="button" data-command="redo" aria-label="Refazer">↷</button>
+        </div>
+        <div class="mn-toolbar-group">
+          <label class="mn-sr-only" for="mn-block-format">Estilo do bloco</label>
+          <select id="mn-block-format" data-command-select="formatBlock">
+            <option value="p">Parágrafo</option>
+            <option value="h1">Título 1</option>
+            <option value="h2">Título 2</option>
+            <option value="h3">Título 3</option>
+            <option value="blockquote">Citação</option>
+          </select>
+        </div>
+        <div class="mn-toolbar-group">
+          <button class="mn-toolbar-button" type="button" data-command="bold" aria-label="Negrito"><strong>N</strong></button>
+          <button class="mn-toolbar-button" type="button" data-command="italic" aria-label="Itálico"><em>I</em></button>
+          <button class="mn-toolbar-button" type="button" data-command="underline" aria-label="Sublinhado"><u>S</u></button>
+          <button class="mn-toolbar-button" type="button" data-command="strikeThrough" aria-label="Tachado"><s>T</s></button>
+        </div>
+        <div class="mn-toolbar-group">
+          <button class="mn-toolbar-button" type="button" data-command="insertUnorderedList" aria-label="Lista com marcadores">• Lista</button>
+          <button class="mn-toolbar-button" type="button" data-command="insertOrderedList" aria-label="Lista numerada">1. Lista</button>
+        </div>
+        <div class="mn-toolbar-group">
+          <button class="mn-toolbar-button" type="button" data-action="create-link">Link</button>
+          <button class="mn-toolbar-button" type="button" data-command="removeFormat">Limpar</button>
+        </div>
+      </div>
+
+      <div class="mn-editor-scroll" id="mn-editor-scroll">
+        <article class="mn-document" id="mn-document">
+          <div class="mn-editor" id="mn-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Conteúdo do documento" spellcheck="true" lang="pt-BR" data-placeholder="Comece a escrever…"></div>
+        </article>
+      </div>
+
+      <footer class="mn-statusbar">
+        <span id="mn-word-count">0 palavras</span>
+        <span id="mn-character-count">0 caracteres</span>
+        <span class="mn-status-hide-small" id="mn-engine-status">Engines aguardando</span>
+        <span class="mn-status-spacer"></span>
+        <button class="mn-icon-button" type="button" data-action="export-txt" aria-label="Exportar documento como texto">⇩</button>
+        <span>pt-BR</span>
+      </footer>
+    </main>
+
+    <aside class="mn-inspector" id="mn-inspector" aria-label="Assistente do texto">
+      <header class="mn-inspector-header">
+        <strong>Assistente do texto</strong>
+        <button class="mn-icon-button" type="button" data-action="close-inspector" aria-label="Fechar assistente">×</button>
+      </header>
+      <div class="mn-tabs" role="tablist" aria-label="Ferramentas do documento">
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-structure" aria-controls="mn-panel-structure" aria-selected="true" data-panel="structure">Estrutura</button>
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-review" aria-controls="mn-panel-review" aria-selected="false" data-panel="review" tabindex="-1">Revisão</button>
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-voice" aria-controls="mn-panel-voice" aria-selected="false" data-panel="voice" tabindex="-1">Voz</button>
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-rhyme" aria-controls="mn-panel-rhyme" aria-selected="false" data-panel="rhyme" tabindex="-1">Rimas</button>
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-authorship" aria-controls="mn-panel-authorship" aria-selected="false" data-panel="authorship" tabindex="-1">Autoria</button>
+        <button class="mn-tab" type="button" role="tab" id="mn-tab-properties" aria-controls="mn-panel-properties" aria-selected="false" data-panel="properties" tabindex="-1">Propriedades</button>
+      </div>
+
+      <div class="mn-inspector-scroll">
+        <section class="mn-panel" id="mn-panel-structure" role="tabpanel" aria-labelledby="mn-tab-structure" data-panel-content="structure">
+          <div class="mn-panel-card"><h3>Estrutura do documento</h3><p>Títulos H1, H2 e H3 aparecem aqui.</p></div>
+          <ul class="mn-outline-list" id="mn-outline"></ul>
+        </section>
+
+        <section class="mn-panel" id="mn-panel-review" role="tabpanel" aria-labelledby="mn-tab-review" data-panel-content="review" hidden>
+          <div class="mn-panel-card">
+            <div class="mn-engine-heading"><h2>Revisão</h2><span class="mn-engine-state" data-engine-state="review">Aguardando</span></div>
+            <p>Clareza, ritmo, repetição e termos que pedem contexto.</p>
+            <div class="mn-inline-actions"><button class="mn-button mn-secondary" type="button" data-action="run-review">Analisar documento</button></div>
+          </div>
+          <div class="mn-result-list" id="mn-review-results"></div>
+        </section>
+
+        <section class="mn-panel" id="mn-panel-voice" role="tabpanel" aria-labelledby="mn-tab-voice" data-panel-content="voice" hidden>
+          <div class="mn-panel-card">
+            <div class="mn-engine-heading"><h2>Voz do texto</h2><span class="mn-engine-state" data-engine-state="voice">Aguardando</span></div>
+            <p>Leitura local de gesto, ritmo, campos semânticos e repetições.</p>
+            <div class="mn-inline-actions"><button class="mn-button mn-secondary" type="button" data-action="run-voice">Ler a voz</button></div>
+          </div>
+          <div class="mn-result-list" id="mn-voice-results"></div>
+        </section>
+
+        <section class="mn-panel" id="mn-panel-rhyme" role="tabpanel" aria-labelledby="mn-tab-rhyme" data-panel-content="rhyme" hidden>
+          <div class="mn-panel-card">
+            <div class="mn-engine-heading"><h2>Rimas e sonoridade</h2><span class="mn-engine-state" data-engine-state="rhyme">Aguardando</span></div>
+            <p>A engine diferencia prosa e versos antes de apresentar a análise.</p>
+            <div class="mn-inline-actions"><button class="mn-button mn-secondary" type="button" data-action="run-rhyme">Examinar sonoridade</button></div>
+          </div>
+          <div class="mn-result-list" id="mn-rhyme-results"></div>
+        </section>
+
+        <section class="mn-panel" id="mn-panel-authorship" role="tabpanel" aria-labelledby="mn-tab-authorship" data-panel-content="authorship" hidden>
+          <div class="mn-panel-card">
+            <div class="mn-engine-heading"><h2>Autoria local</h2><span class="mn-engine-state" data-engine-state="authorship">Em formação</span></div>
+            <p>Registra ritmo e tipos de evento no editor, sem guardar teclas literais. Não constitui garantia jurídica.</p>
+          </div>
+          <div class="mn-result-list" id="mn-authorship-results"></div>
+        </section>
+
+        <section class="mn-panel" id="mn-panel-properties" role="tabpanel" aria-labelledby="mn-tab-properties" data-panel-content="properties" hidden>
+          <div class="mn-panel-card">
+            <h3>Documento</h3>
+            <div class="mn-property-list">
+              <div class="mn-property"><label for="mn-tags">Tags</label><input id="mn-tags" type="text" placeholder="separe por vírgulas"></div>
+              <div class="mn-property"><label><input id="mn-favorite" type="checkbox"> Favorito</label></div>
+              <div class="mn-property"><label>Criado</label><span id="mn-created">—</span></div>
+              <div class="mn-property"><label>Atualizado</label><span id="mn-updated">—</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <div class="mn-overlay" id="mn-overlay" hidden></div>
+  <div class="mn-toast-region" id="mn-toast-region" aria-live="polite"></div>
+
+  <!-- Engines existentes: permanecem na raiz e não conhecem a nova interface. -->
+  <script src="js/data/criterios-data.js" defer></script>
+  <script src="syntax-engine.js" defer></script>
+  <script src="punctuation-engine.js" defer></script>
+  <script src="analise-engine.js" defer></script>
+  <script src="voice-engine.js" defer></script>
+  <script src="rimalab-engine.js" defer></script>
+  <script src="decolonial-engine.js" defer></script>
+  <script src="proof-engine.js" defer></script>
+  <script src="export-engine.js" defer></script>
+  <script src="pagination-engine.js" defer></script>
+
+  <!-- Nova camada: estado, adaptadores e controladores isolados. -->
+  <script src="js/mass-notes/core/store.js" defer></script>
+  <script src="js/mass-notes/integrations/engines.js" defer></script>
+  <script src="js/mass-notes/controllers/app.js" defer></script>
+  <script src="js/mass-notes/core/bootstrap.js" defer></script>
+</body>
+</html>
