@@ -1,0 +1,1418 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fdf8f2">
+  <title>Escrevaral — laboratório de movimento editorial</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #fdf8f2;
+      --surface: #f9f4ec;
+      --surface-low: #f2ebe0;
+      --surface-mid: #e8dece;
+      --surface-high: #ddd0bc;
+      --card: #fefcf8;
+      --ink: #1a1a1a;
+      --muted: #6f6459;
+      --soft-ink: #40382e;
+      --line: rgba(178, 163, 140, 0.46);
+      --primary: #2a4840;
+      --primary-deep: #17362d;
+      --ochre: #c8955a;
+      --sienna: #a0522d;
+      --sage: #a3b18a;
+      --on-primary: #fdf8f2;
+      --motion-instant: 70ms;
+      --motion-fast: 180ms;
+      --motion-enter: 280ms;
+      --motion-settle: 180ms;
+      --motion-scene: 520ms;
+      --ease-impact: cubic-bezier(.18, .89, .32, 1.18);
+      --ease-snap: cubic-bezier(.2, .9, .3, 1);
+      --ease-exit: cubic-bezier(.7, 0, .84, 0);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        linear-gradient(rgba(42, 72, 64, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 72, 64, 0.026) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    [tabindex="-1"]:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--ochre) 78%, white);
+      outline-offset: 3px;
+    }
+
+    .lab-shell {
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      isolation: isolate;
+    }
+
+    .lab-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto minmax(180px, 1fr);
+      align-items: center;
+      gap: 20px;
+      min-height: 74px;
+      padding: 12px clamp(16px, 3vw, 40px);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 38px;
+      aspect-ratio: 1;
+      flex: 0 0 auto;
+      border: 1px solid var(--primary);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset-inline: 6px;
+      height: 2px;
+      background: var(--primary);
+      transform-origin: left;
+    }
+
+    .brand-mark::before {
+      top: 12px;
+      transform: rotate(-9deg) scaleX(.82);
+    }
+
+    .brand-mark::after {
+      bottom: 11px;
+      transform: rotate(7deg);
+      box-shadow: 0 -8px 0 color-mix(in srgb, var(--sienna) 72%, var(--primary));
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -.02em;
+    }
+
+    .brand-copy span {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: .76rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .workspace-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .workspace-tab {
+      position: relative;
+      min-height: 38px;
+      padding: 8px 15px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .workspace-tab::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 5px;
+      height: 2px;
+      background: var(--sienna);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--motion-fast) var(--ease-snap);
+    }
+
+    .workspace-tab:hover {
+      color: var(--ink);
+    }
+
+    .workspace-tab[aria-current="page"] {
+      color: var(--primary-deep);
+    }
+
+    .workspace-tab[aria-current="page"]::after {
+      transform: scaleX(1);
+    }
+
+    .topbar-actions {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .motion-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .motion-toggle-indicator {
+      width: 26px;
+      height: 14px;
+      padding: 2px;
+      border-radius: 99px;
+      background: var(--primary);
+      transition: background var(--motion-fast) ease;
+    }
+
+    .motion-toggle-indicator::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--on-primary);
+      transform: translateX(12px);
+      transition: transform var(--motion-fast) var(--ease-snap);
+    }
+
+    .motion-toggle[aria-pressed="true"] .motion-toggle-indicator {
+      background: var(--muted);
+    }
+
+    .motion-toggle[aria-pressed="true"] .motion-toggle-indicator::before {
+      transform: translateX(0);
+    }
+
+    .flow-chip {
+      min-width: 90px;
+      padding: 8px 12px;
+      border-left: 3px solid var(--ochre);
+      background: var(--primary-deep);
+      color: var(--on-primary);
+      font-size: .76rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .flow-chip span {
+      display: block;
+    }
+
+    .flow-chip strong {
+      font-size: .98rem;
+      letter-spacing: .02em;
+    }
+
+    .stage {
+      position: relative;
+      min-width: 0;
+      overflow: clip;
+      view-transition-name: workspace;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation: none;
+    }
+
+    ::view-transition-group(workspace) {
+      animation-duration: var(--motion-scene);
+    }
+
+    ::view-transition-old(workspace) {
+      animation: workspace-exit var(--motion-fast) var(--ease-exit) both;
+    }
+
+    ::view-transition-new(workspace) {
+      animation: workspace-enter 360ms var(--ease-snap) both;
+    }
+
+    @keyframes workspace-exit {
+      to {
+        opacity: 0;
+        transform: translate3d(-28px, 0, 0);
+      }
+    }
+
+    @keyframes workspace-enter {
+      from {
+        opacity: 0;
+        transform: translate3d(34px, 0, 0);
+      }
+      72% {
+        opacity: 1;
+        transform: translate3d(-4px, 0, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .stage::before,
+    .stage::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .stage::before {
+      width: min(42vw, 620px);
+      height: 14px;
+      top: 92px;
+      right: -8vw;
+      background: var(--sienna);
+      transform: rotate(-5deg);
+      opacity: .16;
+    }
+
+    .stage::after {
+      width: 1px;
+      top: 34px;
+      bottom: 34px;
+      left: clamp(22px, 4vw, 62px);
+      background: color-mix(in srgb, var(--primary) 28%, transparent);
+    }
+
+    .workspace-panel {
+      display: none;
+      min-height: calc(100svh - 74px);
+      padding: clamp(20px, 4vw, 58px);
+    }
+
+    .workspace-panel.is-active {
+      display: block;
+    }
+
+    .panel-heading {
+      max-width: 1040px;
+      margin: 0 auto 26px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 9px;
+      color: var(--sienna);
+      font-size: .76rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .panel-heading h1 {
+      max-width: 800px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 4.8rem);
+      font-weight: 500;
+      line-height: .96;
+      letter-spacing: -.055em;
+    }
+
+    .panel-heading p {
+      max-width: 660px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+      gap: clamp(18px, 3vw, 36px);
+      max-width: 1220px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .editor-deck {
+      position: relative;
+      min-width: 0;
+    }
+
+    .editor-deck::before {
+      content: "";
+      position: absolute;
+      inset: 16px -12px -12px 18px;
+      z-index: -1;
+      border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+      background: var(--surface-low);
+      transform: rotate(.65deg);
+    }
+
+    .manuscript {
+      position: relative;
+      min-height: 520px;
+      padding: clamp(22px, 4vw, 54px);
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 24px 70px rgba(64, 56, 46, .10);
+      overflow: hidden;
+    }
+
+    .manuscript::before {
+      content: "01 / CENA";
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      color: color-mix(in srgb, var(--muted) 66%, transparent);
+      font-size: .7rem;
+      letter-spacing: .12em;
+    }
+
+    .manuscript-label {
+      margin: 0 0 16px;
+      color: var(--primary);
+      font-size: .76rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .manuscript-title {
+      display: block;
+      width: 100%;
+      margin: 0 0 22px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 0 0 13px;
+      background: transparent;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+    }
+
+    .writing-area {
+      display: block;
+      width: 100%;
+      min-height: 300px;
+      resize: vertical;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: var(--soft-ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .writing-area::placeholder {
+      color: color-mix(in srgb, var(--muted) 62%, transparent);
+    }
+
+    .writing-area:focus {
+      outline-offset: 8px;
+    }
+
+    .editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .button {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .button:hover {
+      border-color: color-mix(in srgb, var(--primary) 50%, var(--line));
+      background: var(--surface-low);
+    }
+
+    .button-primary {
+      border-color: var(--primary-deep);
+      background: var(--primary-deep);
+      color: var(--on-primary);
+    }
+
+    .button-primary:hover {
+      background: var(--primary);
+    }
+
+    .save-state {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .engine-rack {
+      position: sticky;
+      top: 104px;
+      min-width: 0;
+    }
+
+    .rack-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: .76rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .rack-label::after {
+      content: "ASSISTÊNCIA";
+      color: var(--sienna);
+      font-size: .62rem;
+    }
+
+    .engine-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .engine-button {
+      position: relative;
+      display: grid;
+      grid-template-columns: 30px 1fr auto;
+      align-items: center;
+      gap: 11px;
+      width: 100%;
+      min-height: 56px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      text-align: left;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .engine-button::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--primary);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--motion-fast) var(--ease-snap);
+    }
+
+    .engine-button:hover::before,
+    .engine-button[aria-pressed="true"]::before {
+      transform: scaleY(1);
+    }
+
+    .engine-number {
+      color: var(--sienna);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+    }
+
+    .engine-name strong,
+    .engine-name small {
+      display: block;
+    }
+
+    .engine-name strong {
+      font-weight: 600;
+    }
+
+    .engine-name small {
+      margin-top: 2px;
+      color: var(--muted);
+    }
+
+    .engine-arrow {
+      color: var(--muted);
+      font-size: 1.25rem;
+    }
+
+    .assist-panel {
+      position: relative;
+      margin-top: 12px;
+      border: 1px solid var(--primary-deep);
+      background: var(--primary-deep);
+      color: var(--on-primary);
+      overflow: hidden;
+    }
+
+    .assist-panel[hidden] {
+      display: none;
+    }
+
+    .assist-panel::before {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 18px;
+      right: -26px;
+      top: 26px;
+      background: color-mix(in srgb, var(--ochre) 65%, transparent);
+      transform: rotate(-12deg);
+    }
+
+    .assist-annotation {
+      height: 4px;
+      background: var(--ochre);
+      transform-origin: left;
+    }
+
+    .assist-content {
+      position: relative;
+      padding: 20px;
+    }
+
+    .assist-kicker {
+      margin: 0;
+      color: color-mix(in srgb, var(--on-primary) 74%, transparent);
+      font-size: .67rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .assist-title {
+      margin: 7px 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.35rem;
+      font-weight: 500;
+      line-height: .94;
+      letter-spacing: -.045em;
+    }
+
+    .assist-description {
+      margin: 0;
+      color: color-mix(in srgb, var(--on-primary) 82%, transparent);
+      line-height: 1.45;
+    }
+
+    .assist-controls {
+      display: grid;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .assist-control {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 9px 10px;
+      border: 1px solid color-mix(in srgb, var(--on-primary) 24%, transparent);
+      background: color-mix(in srgb, var(--on-primary) 7%, transparent);
+      color: var(--on-primary);
+      cursor: pointer;
+    }
+
+    .assist-control:hover {
+      background: color-mix(in srgb, var(--on-primary) 13%, transparent);
+    }
+
+    .assist-control span:last-child {
+      color: var(--ochre);
+    }
+
+    .assist-return {
+      width: 100%;
+      margin-top: 12px;
+      border-color: color-mix(in srgb, var(--on-primary) 38%, transparent);
+      background: transparent;
+      color: var(--on-primary);
+    }
+
+    .library-grid,
+    .atelier-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .surface-card {
+      position: relative;
+      min-height: 210px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .surface-card::after {
+      content: "";
+      position: absolute;
+      width: 96px;
+      height: 8px;
+      right: -14px;
+      bottom: 18px;
+      background: var(--ochre);
+      transform: rotate(-8deg);
+      opacity: .44;
+    }
+
+    .surface-card span {
+      color: var(--sienna);
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .surface-card h2 {
+      margin: 42px 0 9px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      font-size: 1.55rem;
+    }
+
+    .surface-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .combo-hud {
+      position: fixed;
+      z-index: 40;
+      top: 92px;
+      right: clamp(14px, 3vw, 40px);
+      width: min(320px, calc(100vw - 28px));
+      pointer-events: none;
+    }
+
+    .combo-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-left: 5px solid var(--ochre);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: 0 20px 55px rgba(26, 26, 26, .22);
+      overflow: hidden;
+    }
+
+    .combo-card[hidden] {
+      display: none;
+    }
+
+    .combo-card::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 10px;
+      right: -24px;
+      top: 12px;
+      background: var(--sienna);
+      transform: rotate(-11deg);
+      opacity: .7;
+    }
+
+    .combo-index {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      color: var(--ochre);
+    }
+
+    .combo-copy {
+      position: relative;
+    }
+
+    .combo-copy strong,
+    .combo-copy span {
+      display: block;
+    }
+
+    .combo-copy strong {
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .combo-copy span {
+      margin-top: 2px;
+      color: color-mix(in srgb, var(--paper) 72%, transparent);
+      font-size: .78rem;
+    }
+
+    .status-line {
+      position: fixed;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .reduced-motion *,
+    .reduced-motion *::before,
+    .reduced-motion *::after {
+      scroll-behavior: auto !important;
+    }
+
+    .reduced-motion .workspace-tab::after,
+    .reduced-motion .motion-toggle-indicator,
+    .reduced-motion .motion-toggle-indicator::before,
+    .reduced-motion .engine-button::before {
+      transition-duration: 1ms !important;
+    }
+
+    @media (max-width: 980px) {
+      .lab-topbar {
+        grid-template-columns: 1fr auto;
+      }
+
+      .workspace-tabs {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+      }
+
+      .workspace-tab {
+        flex: 1;
+      }
+
+      .editor-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .engine-rack {
+        position: static;
+      }
+
+      .engine-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .assist-panel {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .lab-topbar {
+        gap: 10px;
+        padding: 10px 12px;
+      }
+
+      .brand-copy span,
+      .motion-toggle-label,
+      .flow-chip span:first-child {
+        display: none;
+      }
+
+      .flow-chip {
+        min-width: auto;
+      }
+
+      .workspace-panel {
+        padding: 22px 14px 42px;
+      }
+
+      .panel-heading h1 {
+        font-size: clamp(2.15rem, 13vw, 3.65rem);
+      }
+
+      .manuscript {
+        min-height: 460px;
+        padding: 22px 18px;
+      }
+
+      .editor-deck::before {
+        inset: 10px -5px -7px 8px;
+      }
+
+      .engine-list,
+      .library-grid,
+      .atelier-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .save-state {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .combo-hud {
+        top: 132px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+    }
+
+    @media (forced-colors: active) {
+      .brand-mark,
+      .workspace-tabs,
+      .motion-toggle,
+      .button,
+      .engine-button,
+      .assist-panel,
+      .surface-card,
+      .manuscript,
+      .combo-card {
+        border: 1px solid CanvasText;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="lab-shell" data-motion="full">
+    <header class="lab-topbar">
+      <div class="brand-lockup">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-copy">
+          <strong>Escrevaral</strong>
+          <span>Laboratório de movimento editorial</span>
+        </div>
+      </div>
+
+      <nav class="workspace-tabs" aria-label="Espaços do laboratório">
+        <button class="workspace-tab" type="button" data-view-target="editor" aria-current="page">Escrever</button>
+        <button class="workspace-tab" type="button" data-view-target="arquivo" aria-current="false">Acervo</button>
+        <button class="workspace-tab" type="button" data-view-target="academia" aria-current="false">Ateliê</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button class="motion-toggle" type="button" aria-pressed="false" aria-label="Usar movimento reduzido">
+          <span class="motion-toggle-indicator" aria-hidden="true"></span>
+          <span class="motion-toggle-label">Movimento</span>
+        </button>
+        <div class="flow-chip" aria-label="Fluxo atual: zero">
+          <span>Fluxo</span>
+          <strong data-flow-value>×0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="stage">
+      <section class="workspace-panel is-active" data-view-panel="editor" aria-labelledby="editor-heading">
+        <div class="panel-heading">
+          <p class="eyebrow">Sequência 01 · assistência</p>
+          <h1 id="editor-heading" tabindex="-1">Escreva como quem encadeia movimentos.</h1>
+          <p>A folha permanece quieta. A energia aparece quando uma ferramenta é chamada, responde e sai de cena.</p>
+        </div>
+
+        <div class="editor-grid">
+          <div class="editor-deck">
+            <article class="manuscript" aria-label="Manuscrito de demonstração">
+              <p class="manuscript-label">Manuscrito em andamento</p>
+              <input class="manuscript-title" type="text" value="A casa depois da maré" aria-label="Título do manuscrito">
+              <textarea class="writing-area" aria-label="Área de escrita" placeholder="Escreva um parágrafo e pressione Enter para iniciar a sequência…"></textarea>
+              <div class="editor-actions">
+                <button class="button button-primary" type="button" data-action="save">Guardar trecho</button>
+                <button class="button" type="button" data-action="insert-sample">Inserir cena de teste</button>
+                <span class="save-state" data-save-state aria-live="polite">Nenhuma alteração guardada.</span>
+              </div>
+            </article>
+          </div>
+
+          <aside class="engine-rack" aria-label="Ferramentas de escrita">
+            <p class="rack-label">Motores de escrita</p>
+            <div class="engine-list">
+              <button class="engine-button" type="button" data-engine="ritmo" aria-pressed="false">
+                <span class="engine-number">01</span>
+                <span class="engine-name"><strong>Ritmo</strong><small>Cadência e pausa</small></span>
+                <span class="engine-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="engine-button" type="button" data-engine="subtexto" aria-pressed="false">
+                <span class="engine-number">02</span>
+                <span class="engine-name"><strong>Subtexto</strong><small>O que não foi dito</small></span>
+                <span class="engine-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="engine-button" type="button" data-engine="atmosfera" aria-pressed="false">
+                <span class="engine-number">03</span>
+                <span class="engine-name"><strong>Atmosfera</strong><small>Corpo e ambiente</small></span>
+                <span class="engine-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="engine-button" type="button" data-engine="corte" aria-pressed="false">
+                <span class="engine-number">04</span>
+                <span class="engine-name"><strong>Corte</strong><small>Entrada e saída</small></span>
+                <span class="engine-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button class="engine-button" type="button" data-engine="continuidade" aria-pressed="false">
+                <span class="engine-number">05</span>
+                <span class="engine-name"><strong>Continuidade</strong><small>Fios da cena</small></span>
+                <span class="engine-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+
+            <section class="assist-panel" data-assist-panel hidden aria-labelledby="assist-title">
+              <div class="assist-annotation" aria-hidden="true"></div>
+              <div class="assist-content">
+                <p class="assist-kicker">Motor convocado</p>
+                <h2 class="assist-title" id="assist-title">Ritmo</h2>
+                <p class="assist-description" data-assist-description>A cena acelera, mas a última frase ainda segura o corpo.</p>
+                <div class="assist-controls" data-assist-controls></div>
+                <button class="button assist-return" type="button" data-action="return-editor">Voltar ao texto</button>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section class="workspace-panel" data-view-panel="arquivo" aria-labelledby="archive-heading">
+        <div class="panel-heading">
+          <p class="eyebrow">Sequência 02 · mudança de espaço</p>
+          <h1 id="archive-heading" tabindex="-1">O Acervo entra. A navegação não se move.</h1>
+          <p>A transição preserva a geografia: o cabeçalho permanece; apenas a superfície de trabalho troca de plano.</p>
+        </div>
+        <div class="library-grid">
+          <article class="surface-card"><span>Hoje · 742 palavras</span><h2>A casa depois da maré</h2><p>Última ação: trecho guardado neste navegador.</p></article>
+          <article class="surface-card"><span>Ontem · 1.106 palavras</span><h2>Os cães do farol</h2><p>Uma cena espera continuidade perto do amanhecer.</p></article>
+          <article class="surface-card"><span>Rascunho · 389 palavras</span><h2>Manual para perder ilhas</h2><p>Notas curtas, duas imagens e uma pergunta sem resposta.</p></article>
+        </div>
+      </section>
+
+      <section class="workspace-panel" data-view-panel="academia" aria-labelledby="atelier-heading">
+        <div class="panel-heading">
+          <p class="eyebrow">Sequência 02 · continuidade espacial</p>
+          <h1 id="atelier-heading" tabindex="-1">O Ateliê chega como uma bancada puxada para perto.</h1>
+          <p>O movimento explica a relação entre espaços. Depois, cessa. O conteúdo não dança enquanto é lido.</p>
+        </div>
+        <div class="atelier-grid">
+          <article class="surface-card"><span>Leitura da cena</span><h2>Ritmo e respiração</h2><p>Encontre blocos que correm, travam ou repetem a mesma força.</p></article>
+          <article class="surface-card"><span>Ofício</span><h2>Subtexto em diálogo</h2><p>Observe o gesto que contradiz a fala sem explicar a contradição.</p></article>
+          <article class="surface-card"><span>Revisão</span><h2>Cortar sem secar</h2><p>Retire a explicação e preserve a imagem que sustenta a cena.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="combo-hud" aria-live="polite" aria-atomic="true">
+      <div class="combo-card" data-combo-card hidden>
+        <span class="combo-index" data-combo-index>×2</span>
+        <span class="combo-copy"><strong data-combo-title>Cena encadeada</strong><span data-combo-detail>trecho · guarda · motor · retorno</span></span>
+      </div>
+    </aside>
+
+    <p class="status-line" data-status-line aria-live="polite"></p>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const shell = document.querySelector(".lab-shell");
+      const panels = [...document.querySelectorAll("[data-view-panel]")];
+      const tabs = [...document.querySelectorAll("[data-view-target]")];
+      const editor = document.querySelector(".writing-area");
+      const titleInput = document.querySelector(".manuscript-title");
+      const saveButton = document.querySelector('[data-action="save"]');
+      const insertSampleButton = document.querySelector('[data-action="insert-sample"]');
+      const saveState = document.querySelector("[data-save-state]");
+      const engineButtons = [...document.querySelectorAll("[data-engine]")];
+      const assistPanel = document.querySelector("[data-assist-panel]");
+      const assistTitle = document.querySelector(".assist-title");
+      const assistDescription = document.querySelector("[data-assist-description]");
+      const assistControls = document.querySelector("[data-assist-controls]");
+      const assistReturn = document.querySelector('[data-action="return-editor"]');
+      const motionToggle = document.querySelector(".motion-toggle");
+      const flowValue = document.querySelector("[data-flow-value]");
+      const flowChip = document.querySelector(".flow-chip");
+      const comboCard = document.querySelector("[data-combo-card]");
+      const comboIndex = document.querySelector("[data-combo-index]");
+      const comboTitle = document.querySelector("[data-combo-title]");
+      const comboDetail = document.querySelector("[data-combo-detail]");
+      const statusLine = document.querySelector("[data-status-line]");
+
+      const systemReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let manualReduced = false;
+      let currentView = "editor";
+      let currentEngine = null;
+      let comboCount = 0;
+      let comboTimer = 0;
+      let assistAnimations = [];
+
+      const sequence = {
+        paragraph: false,
+        saved: false,
+        engine: false,
+        returned: false,
+      };
+
+      const engineContent = {
+        ritmo: {
+          title: "Ritmo",
+          description: "A cena acelera, mas a última frase ainda segura o corpo.",
+          controls: ["Marcar pausas", "Ver repetições", "Comparar extensão"],
+        },
+        subtexto: {
+          title: "Subtexto",
+          description: "A fala pede distância. O gesto continua sentado perto demais.",
+          controls: ["Sublinhar contraste", "Isolar gestos", "Ler sem falas"],
+        },
+        atmosfera: {
+          title: "Atmosfera",
+          description: "Há sal na janela, mas nenhum som devolve o tamanho do mar.",
+          controls: ["Mapear sentidos", "Ler ambiente", "Ver objetos ativos"],
+        },
+        corte: {
+          title: "Corte",
+          description: "A cena termina duas linhas depois de ter encontrado sua saída.",
+          controls: ["Testar encerramento", "Ocultar explicação", "Comparar cortes"],
+        },
+        continuidade: {
+          title: "Continuidade",
+          description: "A chave muda de mão entre dois parágrafos sem atravessar a sala.",
+          controls: ["Rastrear objetos", "Ver tempo da cena", "Conferir posições"],
+        },
+      };
+
+      function isReduced() {
+        return manualReduced || systemReduced.matches;
+      }
+
+      function cancelAnimations(collection = assistAnimations) {
+        collection.forEach((animation) => animation.cancel());
+        collection.length = 0;
+      }
+
+      function announce(message) {
+        statusLine.textContent = "";
+        window.requestAnimationFrame(() => {
+          statusLine.textContent = message;
+        });
+      }
+
+      function setReducedState() {
+        const reduced = isReduced();
+        shell.classList.toggle("reduced-motion", reduced);
+        shell.dataset.motion = reduced ? "reduced" : "full";
+        motionToggle.setAttribute("aria-pressed", String(manualReduced));
+        motionToggle.setAttribute("aria-label", manualReduced ? "Usar movimento completo" : "Usar movimento reduzido");
+      }
+
+      function animateElement(element, keyframes, options) {
+        if (!element || isReduced() || typeof element.animate !== "function") return null;
+        return element.animate(keyframes, options);
+      }
+
+      function renderView(nextView) {
+        panels.forEach((panel) => {
+          const active = panel.dataset.viewPanel === nextView;
+          panel.classList.toggle("is-active", active);
+          panel.setAttribute("aria-hidden", String(!active));
+        });
+
+        tabs.forEach((tab) => {
+          tab.setAttribute("aria-current", tab.dataset.viewTarget === nextView ? "page" : "false");
+        });
+
+        currentView = nextView;
+      }
+
+      async function switchView(nextView) {
+        if (nextView === currentView) return;
+        const outgoing = panels.find((panel) => panel.dataset.viewPanel === currentView);
+        const incoming = panels.find((panel) => panel.dataset.viewPanel === nextView);
+        const heading = incoming?.querySelector("h1");
+
+        const update = () => renderView(nextView);
+        if (!isReduced() && document.startViewTransition) {
+          await document.startViewTransition(update).finished;
+        } else if (!isReduced() && outgoing && incoming) {
+          const exit = outgoing.animate(
+            [
+              { opacity: 1, transform: "translate3d(0, 0, 0)" },
+              { opacity: 0, transform: "translate3d(-28px, 0, 0)" },
+            ],
+            { duration: 180, easing: "cubic-bezier(.7,0,.84,0)", fill: "forwards" },
+          );
+          await exit.finished.catch(() => {});
+          update();
+          outgoing.getAnimations().forEach((animation) => animation.cancel());
+          incoming.animate(
+            [
+              { opacity: 0, transform: "translate3d(34px, 0, 0)" },
+              { opacity: 1, transform: "translate3d(-4px, 0, 0)", offset: .72 },
+              { opacity: 1, transform: "translate3d(0, 0, 0)" },
+            ],
+            { duration: 360, easing: "cubic-bezier(.2,.9,.3,1)" },
+          );
+        } else {
+          update();
+        }
+
+        heading?.focus({ preventScroll: true });
+        announce(`${heading?.textContent || "Espaço"} aberto.`);
+      }
+
+      function animateAssist() {
+        cancelAnimations();
+        if (isReduced()) return;
+
+        const annotation = assistPanel.querySelector(".assist-annotation");
+        const kicker = assistPanel.querySelector(".assist-kicker");
+        const title = assistPanel.querySelector(".assist-title");
+        const description = assistPanel.querySelector(".assist-description");
+        const controls = [...assistPanel.querySelectorAll(".assist-control")];
+        const returnButton = assistPanel.querySelector(".assist-return");
+
+        const panelAnimation = animateElement(assistPanel, [
+          { opacity: 0, transform: "translate3d(30px, 0, 0) scaleX(.985)", transformOrigin: "right center" },
+          { opacity: 1, transform: "translate3d(-5px, 0, 0) scaleX(1.006)", offset: .72 },
+          { opacity: 1, transform: "translate3d(0, 0, 0) scaleX(1)" },
+        ], { duration: 460, easing: "cubic-bezier(.18,.89,.32,1.18)" });
+
+        const annotationAnimation = animateElement(annotation, [
+          { transform: "scaleX(0)" },
+          { transform: "scaleX(1)" },
+        ], { duration: 180, delay: 55, easing: "cubic-bezier(.2,.9,.3,1)", fill: "both" });
+
+        const kickerAnimation = animateElement(kicker, [
+          { opacity: 0, transform: "translate3d(-14px, 0, 0)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" },
+        ], { duration: 180, delay: 105, easing: "ease-out", fill: "both" });
+
+        const titleAnimation = animateElement(title, [
+          { opacity: 0, transform: "translate3d(-28px, 0, 0) skewX(-5deg)" },
+          { opacity: 1, transform: "translate3d(3px, 0, 0) skewX(1deg)", offset: .72 },
+          { opacity: 1, transform: "translate3d(0, 0, 0) skewX(0deg)" },
+        ], { duration: 300, delay: 115, easing: "cubic-bezier(.18,.89,.32,1.18)", fill: "both" });
+
+        const descriptionAnimation = animateElement(description, [
+          { opacity: 0, transform: "translate3d(0, 8px, 0)" },
+          { opacity: 1, transform: "translate3d(0, 0, 0)" },
+        ], { duration: 220, delay: 220, easing: "ease-out", fill: "both" });
+
+        [panelAnimation, annotationAnimation, kickerAnimation, titleAnimation, descriptionAnimation]
+          .filter(Boolean)
+          .forEach((animation) => assistAnimations.push(animation));
+
+        [...controls, returnButton].forEach((control, index) => {
+          const animation = animateElement(control, [
+            { opacity: 0, transform: "translate3d(16px, 0, 0)" },
+            { opacity: 1, transform: "translate3d(0, 0, 0)" },
+          ], {
+            duration: 190,
+            delay: 280 + index * 45,
+            easing: "cubic-bezier(.2,.9,.3,1)",
+            fill: "both",
+          });
+          if (animation) assistAnimations.push(animation);
+        });
+      }
+
+      function summonEngine(engineName) {
+        const content = engineContent[engineName];
+        if (!content) return;
+
+        engineButtons.forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.engine === engineName));
+        });
+
+        assistTitle.textContent = content.title;
+        assistDescription.textContent = content.description;
+        assistControls.replaceChildren(...content.controls.map((label, index) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "assist-control";
+          button.innerHTML = `<span>${label}</span><span aria-hidden="true">0${index + 1}</span>`;
+          button.addEventListener("click", () => announce(`${label}: demonstração sem alterar o manuscrito.`));
+          return button;
+        }));
+
+        assistPanel.hidden = false;
+        currentEngine = engineName;
+        sequence.engine = true;
+        animateAssist();
+        announce(`${content.title} aberto. ${content.description}`);
+        maybeCompleteCombo();
+      }
+
+      function markParagraph() {
+        const paragraphs = editor.value.split(/\n\s*\n|\n/).map((part) => part.trim()).filter(Boolean);
+        if (paragraphs.some((paragraph) => paragraph.length >= 28)) {
+          sequence.paragraph = true;
+        }
+      }
+
+      function resetComboSequence() {
+        Object.keys(sequence).forEach((key) => {
+          sequence[key] = false;
+        });
+      }
+
+      function showCombo(title, detail) {
+        comboCount += 1;
+        flowValue.textContent = `×${comboCount}`;
+        flowChip.setAttribute("aria-label", `Fluxo atual: ${comboCount}`);
+        comboIndex.textContent = `×${Math.max(2, comboCount + 1)}`;
+        comboTitle.textContent = title;
+        comboDetail.textContent = detail;
+        comboCard.hidden = false;
+
+        if (!isReduced()) {
+          comboCard.animate([
+            { opacity: 0, transform: "translate3d(34px, 0, 0) scale(.96)" },
+            { opacity: 1, transform: "translate3d(-5px, 0, 0) scale(1.01)", offset: .72 },
+            { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
+          ], { duration: 330, easing: "cubic-bezier(.18,.89,.32,1.18)" });
+        }
+
+        window.clearTimeout(comboTimer);
+        comboTimer = window.setTimeout(() => {
+          if (isReduced()) {
+            comboCard.hidden = true;
+            return;
+          }
+          const exit = comboCard.animate([
+            { opacity: 1, transform: "translate3d(0,0,0)" },
+            { opacity: 0, transform: "translate3d(18px,0,0)" },
+          ], { duration: 150, easing: "cubic-bezier(.7,0,.84,0)" });
+          exit.finished.finally(() => {
+            comboCard.hidden = true;
+          });
+        }, 1000);
+      }
+
+      function maybeCompleteCombo() {
+        const complete = sequence.paragraph && sequence.saved && sequence.engine && sequence.returned;
+        if (!complete) return;
+        showCombo("Cena encadeada", "trecho · guarda · motor · retorno");
+        announce("Cena encadeada. A sequência foi concluída sem premiar volume bruto de palavras.");
+        resetComboSequence();
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => switchView(tab.dataset.viewTarget));
+      });
+
+      engineButtons.forEach((button) => {
+        button.addEventListener("click", () => summonEngine(button.dataset.engine));
+      });
+
+      editor.addEventListener("input", () => {
+        saveState.textContent = "Alterações ainda não guardadas.";
+        sequence.saved = false;
+        markParagraph();
+      });
+
+      editor.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          window.requestAnimationFrame(markParagraph);
+        }
+      });
+
+      saveButton.addEventListener("click", () => {
+        markParagraph();
+        sequence.saved = editor.value.trim().length > 0;
+        saveState.textContent = sequence.saved ? "Trecho preservado nesta demonstração." : "Escreva algo antes de guardar.";
+        announce(saveState.textContent);
+        maybeCompleteCombo();
+      });
+
+      insertSampleButton.addEventListener("click", () => {
+        editor.value = "Quando a maré saiu, deixou uma colher no meio da sala.\n\n— Você trouxe isso? — ela perguntou.\n\nEle fechou a janela antes de responder.";
+        sequence.paragraph = true;
+        sequence.saved = false;
+        saveState.textContent = "Cena de teste inserida. Falta guardar.";
+        editor.focus();
+        announce("Cena de teste inserida no manuscrito.");
+      });
+
+      titleInput.addEventListener("input", () => {
+        saveState.textContent = "Alterações ainda não guardadas.";
+        sequence.saved = false;
+      });
+
+      assistReturn.addEventListener("click", () => {
+        sequence.returned = currentEngine !== null;
+        editor.focus({ preventScroll: true });
+        announce("Você voltou ao ponto de ruptura.");
+        maybeCompleteCombo();
+      });
+
+      motionToggle.addEventListener("click", () => {
+        manualReduced = !manualReduced;
+        cancelAnimations();
+        setReducedState();
+        announce(manualReduced ? "Movimento reduzido ativado." : "Movimento completo ativado, respeitando a preferência do sistema.");
+      });
+
+      systemReduced.addEventListener?.("change", setReducedState);
+      setReducedState();
+      renderView(currentView);
+    })();
+  </script>
+</body>
+</html>
