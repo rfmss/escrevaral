@@ -38,6 +38,7 @@ Mini-PWAs: pomodoro, bloco (notas), nota (publicação)
 | [08-pomos-bloco-nota.md](08-pomos-bloco-nota.md) | Mini-PWAs: pomodoro dedicado, bloco (notas), nota (publicação) |
 | [09-ativo-reuso.md](09-ativo-reuso.md) | Catálogo de ativos reutilizáveis (sons, fontes, trilhas, engines puras, dados) |
 | [10-requisitos-encore.md](10-requisitos-encore.md) | Requisitos do produto Escrevaral-Encore |
+| [11-sistema-supervisao-cognitiva.md](11-sistema-supervisao-cognitiva.md) | Sistema de Supervisão Cognitiva — Antiprompt (regras de trabalho do autor) |
 
 ## Convenção de núcleos (formato de cada feature nos documentos)
 
