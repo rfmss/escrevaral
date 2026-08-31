@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escrevaral-Encore</title>
+<style>
+  body { max-width: 780px; margin: 2em auto; padding: 0 1em;
+         font-family: Georgia, "Times New Roman", serif; color: #2b2b2b; background: #faf9f7; }
+  header { border-bottom: 2px solid #2b2b2b; padding-bottom: .5em; margin-bottom: 1em; }
+  h1 { font-size: 1.3em; margin: 0; }
+  textarea { width: 100%; min-height: 260px; font: 1.05em/1.6 Georgia, serif;
+             padding: .8em; border: 1px solid #ccc; box-sizing: border-box; }
+  .bar { display: flex; gap: .6em; margin: .6em 0; flex-wrap: wrap; }
+  button { font: 1em/1 sans-serif; padding: .5em .9em; cursor: pointer;
+           border: 1px solid #888; background: #fff; }
+  button:active { background: #eee; }
+  #out { margin-top: 1em; }
+  .finding { background: #fff3d1; border-left: 4px solid #c9a227; padding: .4em .7em; margin: .3em 0; }
+  .muted { color: #777; font-size: .85em; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Escrevaral <span class="muted">— encore</span></h1>
+  <div class="muted">editando offline · um engine por vez</div>
+</header>
+
+<textarea id="text" placeholder="Escreva aqui...">Ela fazê-lo todo dia. Um lugar qualquer.</textarea>
+
+<div class="bar">
+  <button id="analyze">Analisar (morfologia)</button>
+</div>
+
+<div id="out"></div>
+
+<script src="src/core/contracts.js"></script>
+<script src="src/core/runtime.js"></script>
+<script src="src/data/verbos-seed.js"></script>
+<script src="src/core/engines/morphology.js"></script>
+<script>
+(function () {
+  var Encore = window.Encore;
+  var out = document.getElementById("out");
+  var area = document.getElementById("text");
+
+  /* Registra a engine de morfologia com o seed carregado. */
+  var morph = new Encore.core.engines.MorphologyEngine(
+    Encore.data.verbosSeed,
+    Encore.data.exceptionsSeed
+  );
+  Encore.runtime.register(morph);
+
+  document.getElementById("analyze").addEventListener("click", function () {
+    var text = area.value;
+    out.innerHTML = "";
+    /* Roleta: uma engine por vez (aqui só há a morfologia por ora). */
+    Encore.runtime.runOne("VERB-MORPH", text.split(/\s+/)[0], function (findings) {
+      var box = document.createElement("div");
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(primeira palavra não identificada como verbo)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      out.appendChild(box);
+    });
+  });
+})();
+</script>
+</body>
+</html>

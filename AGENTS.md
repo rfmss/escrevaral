@@ -13,7 +13,9 @@ Regra-mãe em ação aqui: **determinar se algo precisa ser melhorado ou colocad
 
 - **Escrevaral-Encore**: nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → Mass Notes → Antigravity). Offline, democrática (iPad 2012/iOS 9 + Android 4/KitKat), baixa RAM, future-proof, visual "Standard Notes + IA writing".
 - Comece pelo [`docs/index.md`](docs/index.md) — documento-mestre por seção.
-- O código ainda não existe; os docs são a base de construção.
+- Código em `src/` (ES5). Primeira engine: morfologia verbal (`src/core/engines/morphology.js`), M3, seed 11 formas.
+- Maturidade por engine em `knowledge/<domínio>/MATURITY.md` (modelo M0–M7). Níveis não podem ser pulados; sem evidência → NO PROMOTION.
+- Conversas NÃO são memória institucional; o estado verdadeiro é o persistido no repo.
 
 ## Convenção técnica-alvo (ao construir código)
 
