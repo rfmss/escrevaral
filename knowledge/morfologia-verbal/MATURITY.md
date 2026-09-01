@@ -1,55 +1,70 @@
 # Morfologia Verbal — Maturidade
 
-**LEVEL:** M3 — TESTED (escala local; ainda não submetido a revisão independente formal)
-**LAST REVIEWED:** 2026-09-01 (gate físico no iPad alvo)
-**STEWARD:** ainda não nomeado (decisão: só nomear quando a engine ganhar corpo)
+**LEVEL:** M3 — TESTED
+**VERSION:** 1.2.0
+**LAST REVIEWED:** 2026-09-01
+**STEWARD:** ainda não nomeado
 
 ## Mission
-Identificar morfologia verbal de palavras do português (lema, tempo, modo, pessoa, número) em ES5 de baixa RAM, via trie de sufixos, para alimentar análise gramatical e realce.
+Identificar morfologia verbal do português brasileiro em ES5 de baixa RAM, com posições preservadas e execução em uma cápsula descartável por vez.
 
 ## Coverage
-- UNKNOWN (apenas seed com 11 formas / 4 exceções)
+- 11 formas curadas no trie;
+- 4 exceções explícitas;
+- 65 lemas core;
+- primeira tranche contextual: infinitivo pessoal regular;
+- distinções delimitadas com infinitivo impessoal, substantivado e futuro do subjuntivo.
+
+Cobertura total do português: UNKNOWN.
 
 ## Knowledge
-- Approved rules: UNKNOWN
-- Candidate rules: UNKNOWN
-- Disputed rules: UNKNOWN
+- Infinitivo pessoal: VERIFIED no Mass Notes dentro da banca upstream declarada; PORTED no Encore.
+- Base ES5 Antigravity: origem inventariada; commit exato ainda ausente.
+- Demais famílias: pending ou partial.
+- Proveniência detalhada: `PROVENANCE.json`.
 
 ## Corpus
-- Correct: 11 formas (verbos-seed) — VERIFIED
-- Incorrect: UNKNOWN
-- Ambiguous: UNKNOWN
-- Don't interfere: 4 exceções (açúcar, coisa, etc.) — VERIFIED
-- Adversarial: UNKNOWN (modelo antigravity tinha; não portado ainda)
+- Regressão legada: 14 casos — VERIFIED.
+- Banca congelada de infinitivo pessoal: 12 casos — VERIFIED no runner local.
+- Casos positivos da banca: 8.
+- Fronteiras negativas da banca: 4.
+- Variação regional, registro e aceitabilidade: UNKNOWN.
+- Banca humana independente: UNKNOWN.
 
 ## Quality
-- Tests: 14/14 (normative + clíticos + não-se-meta) — VERIFIED (node src/test/run-morphology.js)
-- Runtime tests: 5/5 (trecho inteiro via tokenizador; filas "um por vez") — VERIFIED (node src/test/run-runtime.js)
-- Browser QA: análise de frase inteira demonstrada ("fazê-lo"→fazer, "comam"→comer) — VERIFIED
-- Legacy device QA: engine real executada e descartada no iPad MD531GP/A, iOS 9.3.5 (13G36) — VERIFIED fisicamente
-- Regression tests: UNKNOWN
-- Known false positives: UNKNOWN
-- Tokenização de frase inteira IMPLEMENTADA (tokenizer + spans) — VERIFIED
+- Regressão legada: 14/14.
+- Banca congelada da tranche: 12/12.
+- Runtime serializado anterior: 5/5.
+- Sintaxe ES5 dos scripts de dispositivo: VERIFIED.
+- Worker simulado com engine 1.2.0: VERIFIED.
+- Gate físico da versão 1.1.0 no iPad MD531GP/A, iOS 9.3.5: VERIFIED.
+- Gate físico da versão 1.2.0: PENDING.
+- Known false positives fora da banca: UNKNOWN.
 
 ## Runtime
-- Analyzer: Escrevaral.engines.MorphologyEngine (check assíncrono) — VERIFIED
-- Artifact size: ~4.5 KB engine + ~1.9 KB seed (medido) — VERIFIED
-- Peak RAM: não exposto de forma confiável pelo Safari legado; estabilidade e descarte observados, sem medida direta — PARCIAL
-- iPad alvo, partida fria: 2.310 ms, incluindo Worker + cinco importScripts + parse + trie + análise + descarte — VERIFIED fisicamente
-- iPad alvo, repetições com recursos armazenados: 36–48 ms (36, 47, 48 ms) — VERIFIED fisicamente
-- Offline: fechamento e reabertura em modo avião confirmados — VERIFIED fisicamente
-- Legacy status: ES5 puro; cápsula Worker funcional no iOS 9.3.5 — VERIFIED fisicamente
+- Engine + seed + exceções + lemas + tokenizador: ~17.404 bytes.
+- Uma engine por Worker; Worker terminado após a resposta.
+- Peak RAM: não mensurável diretamente no Safari legado; descarte observável.
+- Versão 1.1.0 no iPad:
+  - partida fria: 2.310 ms;
+  - repetições: 36–48 ms;
+  - offline após primeiro carregamento: VERIFIED.
+- Versão 1.2.0 no iPad: PENDING.
 
 ## Highest-value gap
-Ampliar o corpus com regras e lemas provenientes das fontes escolhidas no catálogo, preservando shards e carga unitária, e criar corpus adversarial independente.
+Executar a banca de 12 casos no iPad alvo. Depois, procurar falso-positivos fora da banca e obter revisão humana independente antes de qualquer promoção.
 
 ## Evidence for current level
-M3 continua correto: testes reproduzíveis, tokenização, QA de browser e gate físico no aparelho-alvo. O teste físico remove a incerteza de compatibilidade básica, mas não promove a engine: cobertura, ambiguidades, falso-positivos e adversarial continuam desconhecidos.
+M3 permanece correto. A nova tranche tem proveniência, regressão e banca congelada verde, mas ainda não atravessou o aparelho e não possui validação humana independente. Nenhum nível foi pulado.
 
 ## Promotion candidate
-M4 — ADVERSARIAL: requer corpus adversarial separado, falso-positivos atacados e revisão independente.
+M4 — ADVERSARIAL somente após:
+1. gate físico 1.2.0;
+2. corpus adicional que não tenha orientado a implementação;
+3. falso-positivos medidos;
+4. revisão independente.
 
 ## Changelog
-- 2026-08-31 — scaffold inicial em ES5, seed 11 formas, testes 14/14, runtime 5/5 e QA de browser.
-- 2026-08-31 — tokenização de frase inteira implementada via `src/core/services/tokenizer.js`.
-- 2026-09-01 — gate físico aprovado no iPad MD531GP/A com iOS 9.3.5: offline confirmado; morfologia real em 36–48 ms após partida fria; Worker descartado após cada resposta. Maturidade mantida em M3.
+- 2026-08-31 — seed ES5, 14/14, tokenização e runtime serializado.
+- 2026-09-01 — versão 1.1.0 aprovada fisicamente no iPad alvo; 36–48 ms após partida fria.
+- 2026-09-01 — versão 1.2.0 porta a tranche de infinitivo pessoal do Mass Notes: 65 lemas core, regressão 14/14 e banca congelada 12/12; gate físico pendente; nível mantido em M3.
