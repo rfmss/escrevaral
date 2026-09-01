@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Banca adversarial congelada para verificar paridade da tranche de infinitivo pessoal; não é corpus de desenvolvimento.",
+  "origin": {
+    "repository": "rfmss/escrevaral",
+    "commit": "816ca7ea2140f49b93a5bfaeabd0b898871760e5",
+    "path": "mass-notes-next/tests/fixtures/verb-morphology-evaluation.json",
+    "upstreamSchemaVersion": 3
+  },
+  "targetTranche": "infinitivo-pessoal",
+  "cases": [
+    {
+      "id": "eval-inf-pessoal-nos-expresso",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Ela fechou a porta para nós trabalharmos em silêncio.",
+      "query": "trabalharmos",
+      "shouldFind": true,
+      "includes": [
+        "trabalhar",
+        "Infinitivo pessoal",
+        "1ª pessoa do plural"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-tu-expresso",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Sem tu perceberes o risco, a decisão pareceria simples.",
+      "query": "perceberes",
+      "shouldFind": true,
+      "includes": [
+        "perceber",
+        "Infinitivo pessoal",
+        "2ª pessoa do singular"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-eles-expresso",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "É importante eles chegarem antes da abertura.",
+      "query": "chegarem",
+      "shouldFind": true,
+      "includes": [
+        "chegar",
+        "Infinitivo pessoal",
+        "3ª pessoa do plural"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-nos-oculto",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "É melhor sairmos agora para evitar a chuva.",
+      "query": "sairmos",
+      "shouldFind": true,
+      "includes": [
+        "sair",
+        "Infinitivo pessoal",
+        "1ª pessoa do plural"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-vos-formal",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Antes de partirdes, deixai as chaves sobre a mesa.",
+      "query": "partirdes",
+      "shouldFind": true,
+      "includes": [
+        "partir",
+        "Infinitivo pessoal",
+        "2ª pessoa do plural"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-eu-nao-flexionado",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "O relatório ficou para eu revisar amanhã.",
+      "query": "revisar",
+      "shouldFind": true,
+      "includes": [
+        "revisar",
+        "Infinitivo pessoal",
+        "1ª pessoa do singular"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-ela-nao-flexionado",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "O prazo existe para ela concluir a leitura.",
+      "query": "concluir",
+      "shouldFind": true,
+      "includes": [
+        "concluir",
+        "Infinitivo pessoal",
+        "3ª pessoa do singular"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-pessoal-sujeitos-distintos",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Ela trouxe café para nós terminarmos a revisão.",
+      "query": "terminarmos",
+      "shouldFind": true,
+      "includes": [
+        "terminar",
+        "Infinitivo pessoal",
+        "1ª pessoa do plural"
+      ],
+      "excludes": [
+        "Futuro do subjuntivo"
+      ],
+      "targetExpected": true,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-impessoal-generico",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "É melhor revisar o texto antes da entrega.",
+      "query": "revisar",
+      "shouldFind": true,
+      "includes": [
+        "revisar",
+        "Infinitivo"
+      ],
+      "excludes": [
+        "Infinitivo pessoal"
+      ],
+      "targetExpected": false,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-impessoal-mesmo-sujeito",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Ela saiu cedo para evitar o trânsito.",
+      "query": "evitar",
+      "shouldFind": true,
+      "includes": [
+        "evitar",
+        "Infinitivo"
+      ],
+      "excludes": [
+        "Infinitivo pessoal"
+      ],
+      "targetExpected": false,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-futuro-subjuntivo-homografo",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "Quando eles chegarem, abriremos a sala.",
+      "query": "chegarem",
+      "shouldFind": true,
+      "includes": [
+        "chegar",
+        "Futuro do subjuntivo",
+        "3ª pessoa do plural"
+      ],
+      "excludes": [
+        "Infinitivo pessoal"
+      ],
+      "targetExpected": false,
+      "targetLabel": "Infinitivo pessoal"
+    },
+    {
+      "id": "eval-inf-substantivado",
+      "phenomenon": "infinitivo-pessoal",
+      "manuscript": "O escrever diário exige disciplina.",
+      "query": "escrever",
+      "shouldFind": true,
+      "includes": [
+        "escrever",
+        "Infinitivo"
+      ],
+      "excludes": [
+        "Infinitivo pessoal"
+      ],
+      "targetExpected": false,
+      "targetLabel": "Infinitivo pessoal"
+    }
+  ]
+}
