@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" manifest="cache.appcache">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Encore — Prova do Piso 2012</title>
+    <script>
+        (function () {
+            "use strict";
+            window.__encoreCacheEvents = [];
+            if (!window.applicationCache) return;
+            var names = ["checking", "downloading", "progress", "cached", "noupdate", "updateready", "obsolete", "error"];
+            var i;
+            function remember(event) {
+                window.__encoreCacheEvents.push({
+                    type: event.type,
+                    loaded: typeof event.loaded === "number" ? event.loaded : 0,
+                    total: typeof event.total === "number" ? event.total : 0
+                });
+            }
+            for (i = 0; i < names.length; i += 1) {
+                window.applicationCache.addEventListener(names[i], remember, false);
+            }
+        }());
+    </script>
+    <link rel="stylesheet" href="css/probe.css">
+</head>
+<body>
+    <div class="page">
+        <div class="masthead">
+            <p class="eyebrow">ESCREVARAL ENCORE</p>
+            <h1>Prova do Piso 2012</h1>
+            <p class="purpose">Uma cápsula. Um fragmento. Um trecho. Um achado.</p>
+        </div>
+
+        <div class="status-board" role="status" aria-live="polite">
+            <p><span class="label">Instalação</span> <span id="cache-status">verificando…</span></p>
+            <p><span class="label">Rede</span> <span id="network-status">verificando…</span></p>
+            <p><span class="label">Cápsula</span> <span id="capsule-status">descartada</span></p>
+        </div>
+
+        <div class="test-area">
+            <label for="probe-text">Trecho de teste</label>
+            <textarea id="probe-text" rows="9">A casa ficou em silêncio. Era uma coisa pequena, mas muito difícil de esquecer. O cachorro, que dormia perto da porta, abriu um olho.</textarea>
+
+            <div class="controls">
+                <label for="load-step">Degrau de carga</label>
+                <select id="load-step">
+                    <option value="small">1 — 1.024 entradas</option>
+                    <option value="medium" selected>2 — 8.192 entradas</option>
+                    <option value="large">3 — 32.768 entradas</option>
+                </select>
+                <button id="find-button" type="button">Procurar primeiro achado</button>
+                <button id="next-button" type="button" disabled>Próximo achado</button>
+                <button id="reset-button" type="button" class="quiet">Recomeçar</button>
+            </div>
+        </div>
+
+        <div id="finding" class="finding" hidden>
+            <p class="finding-number" id="finding-number"></p>
+            <p class="finding-quote" id="finding-quote"></p>
+            <p class="finding-message" id="finding-message"></p>
+        </div>
+
+        <div class="measurements">
+            <h2>Registro desta sessão</h2>
+            <dl>
+                <dt>Fragmento carregado</dt><dd id="metric-entries">—</dd>
+                <dt>Tempo até o achado</dt><dd id="metric-time">—</dd>
+                <dt>Posição de retomada</dt><dd id="metric-cursor">0</dd>
+                <dt>Ciclos concluídos</dt><dd id="metric-cycles">0</dd>
+            </dl>
+            <ol id="event-log" class="event-log"></ol>
+        </div>
+
+        <div class="instructions">
+            <h2>Teste no iPad</h2>
+            <ol>
+                <li>Espere a instalação indicar “pronta”.</li>
+                <li>Execute dois ou três achados.</li>
+                <li>Ative o modo avião.</li>
+                <li>Feche e abra novamente esta página.</li>
+                <li>Repita o teste e observe travamentos ou recarregamentos.</li>
+            </ol>
+        </div>
+    </div>
+    <noscript>Esta prova precisa de JavaScript para executar a cápsula.</noscript>
+    <script src="js/probe.js"></script>
+</body>
+</html>
