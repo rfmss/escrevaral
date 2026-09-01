@@ -20,6 +20,7 @@ Objetivo: enxergar o que existe, onde, e com qual maturidade, **antes** de decid
 - [fonte-D-uairer.md](fonte-D-uairer.md)
 - [fonte-E-eskrev.md](fonte-E-eskrev.md)
 - [por-domínio.md](por-dominio.md) — mapa cruzado: cada domínio → onde está mais maduro
+- [prioridade-porting.md](prioridade-porting.md) — proposta de ondas de porting (por decisão) + trade-off do dicionário
 
 ## Fato mais importante (leitura obrigatória)
 
