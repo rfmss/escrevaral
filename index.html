@@ -5,48 +5,212 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Escrevaral-Encore</title>
 <style>
-  body { max-width: 780px; margin: 2em auto; padding: 0 1em;
-         font-family: Georgia, "Times New Roman", serif; color: #2b2b2b; background: #faf9f7; }
-  header { border-bottom: 2px solid #2b2b2b; padding-bottom: .5em; margin-bottom: 1em; }
-  h1 { font-size: 1.3em; margin: 0; }
-  textarea { width: 100%; min-height: 260px; font: 1.05em/1.6 Georgia, serif;
-             padding: .8em; border: 1px solid #ccc; box-sizing: border-box; }
-  .bar { display: flex; gap: .6em; margin: .6em 0; flex-wrap: wrap; }
-  button { font: 1em/1 sans-serif; padding: .5em .9em; cursor: pointer;
-           border: 1px solid #888; background: #fff; }
-  button:active { background: #eee; }
-  #out { margin-top: 1em; }
-  .finding { background: #fff3d1; border-left: 4px solid #c9a227; padding: .4em .7em; margin: .3em 0; }
+  body { 
+    background-color: #f4f1e1; 
+    color: #2a2a2a; 
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.1),
+                -0.2px -0.2px 0px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    margin: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  .wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; }
+  
+  .search-icon-only {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .search-icon-only svg {
+    width: 20px;
+    height: 20px;
+    fill: rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: fill 0.2s;
+  }
+  .search-icon-only svg:hover {
+    fill: rgba(0,0,0,0.6);
+  }
+
+  .layout-referencia {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    outline: none;
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item-header {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  .item-header.highlight {
+    color: #e55a39; 
+  }
+  .item-header .muted-dot {
+    color: rgba(0,0,0,0.2);
+    margin: 0 8px;
+  }
+  .item-header .muted-text {
+    color: rgba(0,0,0,0.4);
+    font-weight: normal;
+  }
+
+  .side-timeline {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    color: rgba(0,0,0,0.4);
+    font-size: 0.85em;
+    padding-top: 5px;
+    font-family: sans-serif;
+  }
+
+  .side-month {
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+  .side-month:first-child { margin-top: 0; }
+
+  .side-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .side-day .letter {
+    font-size: 0.8em;
+    opacity: 0.6;
+  }
+  .side-day.active {
+    background-color: #e55a39;
+    color: #f4f1e1;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  .side-day.active .letter {
+    opacity: 0.9;
+  }
+
+  .muted { color: #999; font-size: .85em; }
+
+  .editor-artesanal {
+    width: 100%;
+    min-height: 50vh;
+    outline: none; 
+  }
+  .editor-artesanal.heavy {
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.15), -0.2px -0.2px 0px rgba(0,0,0,0.05);
+  }
+  .faded { opacity: 0.85; text-shadow: none; }
+  .heavy { font-weight: bold; text-shadow: 1px 1px 0px rgba(0,0,0,0.15); }
+  .editor-artesanal p { margin-top: 0; margin-bottom: 1.2em; }
+  .center-text { text-align: center; }
+
+  .bar { display: flex; gap: .6em; margin: 1em 0; flex-wrap: wrap; justify-content: center; }
+  button { font-family: inherit; font-size: 0.8em; padding: .5em .9em; cursor: pointer;
+           border: 1px solid rgba(0,0,0,0.3); background: transparent; border-radius: 3px; color: inherit; font-weight: bold; }
+  button:active { background: rgba(0,0,0,0.05); }
+  button.active { background: #2a2a2a; color: #f4f1e1; border-color: #2a2a2a; text-shadow: none; }
+  
+  #out { margin-top: 1em; color: inherit; width: 100%; max-width: 700px; }
+  .finding { background: #fff3d1; border-left: 4px solid #c9a227; padding: .4em .7em; margin: .3em 0; color: #2b2b2b; text-shadow: none; }
   .rc { background: #eaf1e6; border-left: 4px solid #5a7d4a; }
   .dec { background: #efe6f0; border-left: 4px solid #7a4a7d; }
   .rim { background: #e8eef5; border-left: 4px solid #4a6a7d; }
   .voz { background: #e9f2ec; border-left: 4px solid #3f7d5a; }
   .pont { background: #f2eee9; border-left: 4px solid #8a6d3b; }
   .sint { background: #ebedf3; border-left: 4px solid #54627d; }
-  .muted { color: #777; font-size: .85em; }
 </style>
 </head>
 <body>
-<header>
-  <h1>Escrevaral <span class="muted">— encore</span></h1>
-  <div class="muted">editando offline · um engine por vez</div>
-</header>
+<div class="wrap">
+  <div class="search-icon-only">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+  </div>
 
-<textarea id="text" placeholder="Escreva aqui...">O amor é fogo que arde sem se ver
-é ferida que dói e não se sente
-é um contentamento descontente</textarea>
+  <div class="layout-referencia">
+    <div class="main-content editor-artesanal" id="text" contenteditable="true" spellcheck="false">
+      
+      <div class="timeline-item">
+        <div class="item-header highlight">Yesterday</div>
+        <div class="item-body">
+            <div class="center-text">
+                <p><strong>JuatVrew</strong></p>
+                <p>Boulevard, Makassar<br>
+                <span class="faded">Street,</span> <span class="heavy">Coffee,</span> Night<br>
+                2026</p>
+            </div>
+            <br>
+            <p>A partir daqui o texto corre livremente.</p>
+            <p>Você pode digitar, apagar e sentir como a tela reage.<br>
+            A textura do papel e o peso da tinta foram simulados via CSS puro.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="item-header">7 June <span class="muted-dot">•</span> <span class="muted-text">Saturday</span></div>
+        <div class="item-body">
+            <p>O amor é fogo que arde sem se ver<br>
+            é ferida que dói e não se sente<br>
+            é um contentamento descontente</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-timeline">
+      <div class="side-month">Jun</div>
+      <div class="side-day active">11 <span class="letter">W</span></div>
+      <div class="side-day">7 <span class="letter">S</span></div>
+      <div class="side-day">4 <span class="letter">W</span></div>
+      <div class="side-month">May</div>
+      <div class="side-day">29 <span class="letter">T</span></div>
+      <div class="side-day">27 <span class="letter">T</span></div>
+      <div class="side-day">21 <span class="letter">W</span></div>
+      <div class="side-day">19 <span class="letter">M</span></div>
+    </div>
+  </div>
 
 <div class="bar">
-  <button id="analyze">Analisar (morfologia)</button>
-  <button id="analyze-rc">Orações adjetivas</button>
-  <button id="analyze-decol">Vocabulário decolonial</button>
-  <button id="analyze-rima">Rima e métrica</button>
-  <button id="analyze-voz">Voz e estilística</button>
-  <button id="analyze-pont">Pontuação</button>
-  <button id="analyze-sint">Sintaxe e funções</button>
+  <button data-engine="VERB-MORPH">Morfologia</button>
+  <button data-engine="REL-CLAUSE">Orações adjetivas</button>
+  <button data-engine="DECOLONIAL">Vocabulário decolonial</button>
+  <button data-engine="RIMA-METRICA">Rima e métrica</button>
+  <button data-engine="VOICE">Voz e estilística</button>
+  <button data-engine="PONTUACAO">Pontuação</button>
+  <button data-engine="SINTAXE">Sintaxe e funções</button>
 </div>
 
 <div id="out"></div>
+</div>
 
 <script src="src/core/contracts.js"></script>
 <script src="src/core/runtime.js"></script>
@@ -67,8 +231,8 @@
   var Encore = window.Encore;
   var out = document.getElementById("out");
   var area = document.getElementById("text");
+  var activeEngine = null;
 
-  /* Registra as engines com o seed carregado. */
   var morph = new Encore.core.engines.MorphologyEngine(
     Encore.data.verbosSeed,
     Encore.data.exceptionsSeed,
@@ -82,144 +246,79 @@
   Encore.runtime.register(new Encore.core.engines.PunctuationEngine());
   Encore.runtime.register(new Encore.core.engines.SintaxeEngine());
 
-  function render(box, cls) {
+  var emptyMsg = {
+    "VERB-MORPH":  "(nenhum verbo do vocabulário identificado)",
+    "REL-CLAUSE":  "(nenhuma oração adjetiva identificada)",
+    "DECOLONIAL":  "(nenhum termo decolonial identificado)",
+    "RIMA-METRICA":"(nada a analisar)",
+    "VOICE":       "(nada a analisar)",
+    "PONTUACAO":   "(nenhuma questão de pontuação identificada)",
+    "SINTAXE":     "(nada a analisar)"
+  };
+
+  var clsMap = {
+    "VERB-MORPH":  "finding",
+    "REL-CLAUSE":  "finding rc",
+    "DECOLONIAL":  "finding dec",
+    "RIMA-METRICA":"finding rim",
+    "VOICE":       "finding voz",
+    "PONTUACAO":   "finding pont",
+    "SINTAXE":     "finding sint"
+  };
+
+  function render(box) {
     out.innerHTML = "";
-    box.className = cls;
     out.appendChild(box);
   }
 
-  document.getElementById("analyze").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("VERB-MORPH", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nenhum verbo do vocabulário identificado)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
-    });
-  });
+  function deactivate() {
+    if (!activeEngine) return;
+    area.classList.remove("heavy");
+    var prev = document.querySelector("button.active");
+    if (prev) prev.classList.remove("active");
+    activeEngine = null;
+  }
 
-  document.getElementById("analyze-rc").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("REL-CLAUSE", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nenhuma oração adjetiva identificada)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding rc";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
-    });
-  });
+  function activate(engineId, btn) {
+    area.classList.add("heavy");
+    btn.classList.add("active");
+    activeEngine = engineId;
+  }
 
-  document.getElementById("analyze-decol").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("DECOLONIAL", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nenhum termo decolonial identificado)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding dec";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
-    });
-  });
+  var buttons = document.querySelectorAll("button[data-engine]");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function () {
+      var engineId = this.getAttribute("data-engine");
 
-  document.getElementById("analyze-rima").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("RIMA-METRICA", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nada a analisar)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding rim";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
+      if (activeEngine === engineId) {
+        deactivate();
+        out.innerHTML = "";
+        return;
       }
-      render(box, "");
-    });
-  });
 
-  document.getElementById("analyze-voz").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("VOICE", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nada a analisar)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding voz";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
-    });
-  });
+      deactivate();
+      activate(engineId, this);
 
-  document.getElementById("analyze-pont").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("PONTUACAO", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nenhuma questão de pontuação identificada)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding pont";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
+      var text = area.innerText || area.textContent;
+      var box = document.createElement("div");
+      var self = this;
+      Encore.runtime.runOne(engineId, text, function (findings) {
+        if (!findings.length) {
+          box.className = "muted";
+          box.textContent = emptyMsg[engineId] || "(nada a analisar)";
+        } else {
+          var cls = clsMap[engineId] || "finding";
+          findings.forEach(function (f) {
+            var d = document.createElement("div");
+            d.className = cls;
+            d.textContent = f.message;
+            box.appendChild(d);
+          });
+        }
+        render(box);
+      });
     });
-  });
-
-  document.getElementById("analyze-sint").addEventListener("click", function () {
-    var text = area.value;
-    var box = document.createElement("div");
-    Encore.runtime.runOne("SINTAXE", text, function (findings) {
-      if (!findings.length) {
-        box.className = "muted";
-        box.textContent = "(nada a analisar)";
-      } else {
-        findings.forEach(function (f) {
-          var d = document.createElement("div");
-          d.className = "finding sint";
-          d.textContent = f.message;
-          box.appendChild(d);
-        });
-      }
-      render(box, "");
-    });
-  });
+  }
 })();
 </script>
 </body>
