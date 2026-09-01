@@ -20,13 +20,13 @@ O **eskrev já implementa exatamente isso**: o dicionário rich de 360k é divid
 | # | Engine | Origem | Porting | Por quê nesta posição |
 |---|---|---|---|---|
 | 1 | **Morfologia verbal** | C (M6 ES5) + B (lemas) | **já feito** (M3) | Base; zero custo |
-| 2 | **Relative-clause (orações adjetivas)** | A escrevaral (8 KB, hardcoded) | fácil | Pequeno, sem dependência externa |
-| 3 | **Ponte/serviço de tokenização** | C antigravity (tokenizer 720 B) | fácil | Infra que desbloqueia análise de frase inteira (gap da morfologia) |
-| 4 | **Decolonial / termos** | A (3 KB logic + 275 KB dados) | fácil (lógica) | Lógica minúscula; dados grandes porém estáticos |
-| 5 | **Rima / métrica** | A (31 KB + 37 KB) | médio | Autônoma (fonética local) |
-| 6 | **Voz / estilística** | A (29 KB) | médio | Autônoma |
-| 7 | **Pontuação** | A (37 KB, usa sintaxe) | médio | Depende da sintaxe |
-| 8 | **Sintaxe / função** | C (M6) + A (85-100%) | difícil | Depende de pt-compromise + morfologia |
+| 2 | **Relative-clause (orações adjetivas)** | A escrevaral (8 KB, hardcoded) | **já feito** (M3, 2026-09-01) | Pequeno, sem dependência externa |
+| 3 | **Ponte/serviço de tokenização** | C antigravity (tokenizer 720 B) | **já feito** (M3) | Infra que desbloqueia análise de frase inteira (gap da morfologia) |
+| 4 | **Decolonial / termos** | A (3 KB logic + 275 KB dados) | **já feito** (M3, 2026-09-01) | Lógica minúscula; dados 215 KB embutidos (606 entradas) |
+| 5 | **Rima / métrica** | A (31 KB + 37 KB) | **já feito** (M3, 2026-09-01, núcleo sem dicionário) | Autônoma (fonética local); dicionário adiado |
+| 6 | **Voz / estilística** | A (29 KB) | **já feito** (M3, 2026-09-01) | Autônoma |
+| 7 | **Pontuação** | A (37 KB, usa sintaxe) | **já feito** (M3, 2026-09-01; analyze síncrona + analyzeDeep degrada) | Parte depende da sintaxe; Encore: analyze autônoma + 2 regras via REL-CLAUSE |
+| 8 | **Sintaxe / função** | C (M6) + A (85-100%) | **já feito** (M3, 2026-09-01; fallback heurístico puro, sem pt-compromise) | Núcleo heurístico próprio + funções sintáticas; dados off-line embutidos (~95 KB) |
 | 9 | **Análise literal literária** | A (122 KB) | difícil | Regras grandes hardcoded |
 | 10 | **Léxico / classes** | C (lexicon shards O(1)) | difícil | 505 KB no A; portar padrão de shards |
 | 11 | **Dicionário grande** | E eskrev (360k → shards por letra) | grande/sob demanda | Estratégia confirmada (ver acima) |
@@ -34,7 +34,8 @@ O **eskrev já implementa exatamente isso**: o dicionário rich de 360k é divid
 | 13 | **Export / import** | A escrevaral | médio | Fecha fluxo do produto |
 
 ## Ponto de partida
-Começamos pelo **#2 e #3** (relative-clause + tokenização) — os mais fáceis não-feitos, que ainda **destravam a morfologia para analisar frases inteiras** (o gap que registramos). Em seguida decolonial e rima/voz.
+Começamos pelo **#3 (tokenização)** e depois **#2 (relative-clause)** — os mais fáceis, que **destravam a morfologia para analisar frases inteiras** e adicionam leitura de orações adjetivas (gap que registramos). Ambos **já feitos**. Em seguida **#4 (decolonial) e #5 (rima/métrica) JÁ FEITOS**. Depois **#6 (voz/estilística)** — JÁ FEITO (M3). Em seguida **#7 (pontuação)** — JÁ FEITO (M3, 2026-09-01). Depois **#8 (sintaxe/função)** — JÁ FEITO (M3, 2026-09-01).
+Próximo: **#9 análise literal literária** (origem A, 122 KB, regras grandes hardcoded).
 
 ## Decisões ainda em aberto (do dono)
 - **Prova de autoria**: formato do "cartório" (ECDSA técnica vs. ritmo humano vs. ambos) — só na onda 4.

@@ -17,6 +17,12 @@
   button:active { background: #eee; }
   #out { margin-top: 1em; }
   .finding { background: #fff3d1; border-left: 4px solid #c9a227; padding: .4em .7em; margin: .3em 0; }
+  .rc { background: #eaf1e6; border-left: 4px solid #5a7d4a; }
+  .dec { background: #efe6f0; border-left: 4px solid #7a4a7d; }
+  .rim { background: #e8eef5; border-left: 4px solid #4a6a7d; }
+  .voz { background: #e9f2ec; border-left: 4px solid #3f7d5a; }
+  .pont { background: #f2eee9; border-left: 4px solid #8a6d3b; }
+  .sint { background: #ebedf3; border-left: 4px solid #54627d; }
   .muted { color: #777; font-size: .85em; }
 </style>
 </head>
@@ -26,10 +32,18 @@
   <div class="muted">editando offline · um engine por vez</div>
 </header>
 
-<textarea id="text" placeholder="Escreva aqui...">Ela fazê-lo todo dia. Um lugar qualquer.</textarea>
+<textarea id="text" placeholder="Escreva aqui...">O amor é fogo que arde sem se ver
+é ferida que dói e não se sente
+é um contentamento descontente</textarea>
 
 <div class="bar">
   <button id="analyze">Analisar (morfologia)</button>
+  <button id="analyze-rc">Orações adjetivas</button>
+  <button id="analyze-decol">Vocabulário decolonial</button>
+  <button id="analyze-rima">Rima e métrica</button>
+  <button id="analyze-voz">Voz e estilística</button>
+  <button id="analyze-pont">Pontuação</button>
+  <button id="analyze-sint">Sintaxe e funções</button>
 </div>
 
 <div id="out"></div>
@@ -39,26 +53,45 @@
 <script src="src/data/verbos-seed.js"></script>
 <script src="src/core/services/tokenizer.js"></script>
 <script src="src/core/engines/morphology.js"></script>
+<script src="src/core/engines/relative-clause.js"></script>
+<script src="src/data/decolonial-data.js"></script>
+<script src="src/core/engines/decolonial.js"></script>
+<script src="src/core/engines/rima-metro.js"></script>
+<script src="src/core/engines/voz-estilistica.js"></script>
+<script src="src/core/engines/pontuacao.js"></script>
+<script src="src/data/syntax-data.js"></script>
+<script src="src/data/norma-data.js"></script>
+<script src="src/core/engines/sintaxe.js"></script>
 <script>
 (function () {
   var Encore = window.Encore;
   var out = document.getElementById("out");
   var area = document.getElementById("text");
 
-  /* Registra a engine de morfologia com o seed carregado. */
+  /* Registra as engines com o seed carregado. */
   var morph = new Encore.core.engines.MorphologyEngine(
     Encore.data.verbosSeed,
     Encore.data.exceptionsSeed,
     Encore.core.services.Tokenizer
   );
   Encore.runtime.register(morph);
+  Encore.runtime.register(new Encore.core.engines.RelativeClauseEngine());
+  Encore.runtime.register(new Encore.core.engines.DecolonialEngine(Encore.data.decolonialData));
+  Encore.runtime.register(new Encore.core.engines.RimaLabEngine());
+  Encore.runtime.register(new Encore.core.engines.VoiceEngine());
+  Encore.runtime.register(new Encore.core.engines.PunctuationEngine());
+  Encore.runtime.register(new Encore.core.engines.SintaxeEngine());
+
+  function render(box, cls) {
+    out.innerHTML = "";
+    box.className = cls;
+    out.appendChild(box);
+  }
 
   document.getElementById("analyze").addEventListener("click", function () {
     var text = area.value;
-    out.innerHTML = "";
-    /* Roleta: uma engine por vez (aqui só há a morfologia por ora). */
+    var box = document.createElement("div");
     Encore.runtime.runOne("VERB-MORPH", text, function (findings) {
-      var box = document.createElement("div");
       if (!findings.length) {
         box.className = "muted";
         box.textContent = "(nenhum verbo do vocabulário identificado)";
@@ -70,7 +103,121 @@
           box.appendChild(d);
         });
       }
-      out.appendChild(box);
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-rc").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("REL-CLAUSE", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nenhuma oração adjetiva identificada)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding rc";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-decol").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("DECOLONIAL", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nenhum termo decolonial identificado)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding dec";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-rima").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("RIMA-METRICA", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nada a analisar)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding rim";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-voz").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("VOICE", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nada a analisar)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding voz";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-pont").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("PONTUACAO", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nenhuma questão de pontuação identificada)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding pont";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
+    });
+  });
+
+  document.getElementById("analyze-sint").addEventListener("click", function () {
+    var text = area.value;
+    var box = document.createElement("div");
+    Encore.runtime.runOne("SINTAXE", text, function (findings) {
+      if (!findings.length) {
+        box.className = "muted";
+        box.textContent = "(nada a analisar)";
+      } else {
+        findings.forEach(function (f) {
+          var d = document.createElement("div");
+          d.className = "finding sint";
+          d.textContent = f.message;
+          box.appendChild(d);
+        });
+      }
+      render(box, "");
     });
   });
 })();
