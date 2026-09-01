@@ -1,0 +1,210 @@
+html {
+    background: #d8d3c4;
+    color: #37352f;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.55;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    width: 88%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 38px 0 72px;
+}
+
+.masthead {
+    border-bottom: 1px solid #aaa391;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+}
+
+.eyebrow,
+.label,
+.finding-number {
+    color: #6e685b;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 31px;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-size: 19px;
+    font-weight: normal;
+    margin-bottom: 12px;
+}
+
+.purpose {
+    color: #5b574d;
+    margin-bottom: 0;
+}
+
+.status-board,
+.test-area,
+.finding,
+.measurements,
+.instructions {
+    background: #efebdc;
+    border: 1px solid #b9b29f;
+    margin: 0 0 18px;
+    padding: 18px;
+}
+
+.status-board p {
+    margin-bottom: 4px;
+}
+
+.status-board p:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    display: inline-block;
+    width: 112px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+}
+
+textarea,
+select,
+button {
+    border: 1px solid #817b6d;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #2f2d28;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+}
+
+textarea {
+    background: #f6f2e5;
+    line-height: 1.65;
+    margin: 0 0 14px;
+    padding: 14px;
+    resize: vertical;
+    width: 100%;
+}
+
+select {
+    background: #f6f2e5;
+    display: block;
+    height: 46px;
+    margin: 0 0 12px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+button {
+    background: #4d4639;
+    color: #f7f1df;
+    cursor: pointer;
+    margin: 0 6px 8px 0;
+    min-height: 48px;
+    padding: 10px 14px;
+}
+
+button.quiet {
+    background: #ded8c8;
+    color: #37352f;
+}
+
+button[disabled] {
+    background: #aaa493;
+    color: #e8e3d6;
+    cursor: default;
+}
+
+.finding {
+    border-left: 5px solid #9a5b38;
+}
+
+.finding-quote {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    margin-bottom: 7px;
+}
+
+.finding-message {
+    margin-bottom: 0;
+}
+
+dl {
+    margin: 0 0 15px;
+}
+
+dt {
+    clear: left;
+    color: #6e685b;
+    float: left;
+    width: 55%;
+}
+
+dd {
+    margin-left: 57%;
+    text-align: right;
+}
+
+.event-log {
+    border-top: 1px solid #c9c2af;
+    clear: both;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    margin: 12px 0 0;
+    max-height: 160px;
+    overflow: auto;
+    padding: 12px 0 0 28px;
+}
+
+.instructions li {
+    margin-bottom: 6px;
+}
+
+@media screen and (max-width: 520px) {
+    html {
+        font-size: 17px;
+    }
+
+    .page {
+        padding-top: 22px;
+        width: 92%;
+    }
+
+    .status-board,
+    .test-area,
+    .finding,
+    .measurements,
+    .instructions {
+        padding: 14px;
+    }
+
+    .label {
+        width: 102px;
+    }
+
+    button {
+        margin-right: 0;
+        width: 100%;
+    }
+}

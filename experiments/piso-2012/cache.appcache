@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# encore-piso-2012-v1
+
+CACHE:
+index.html
+css/probe.css
+js/probe.js
+js/capsule-worker.js
+data/shard-small.js
+data/shard-medium.js
+data/shard-large.js
+
+NETWORK:
+*
