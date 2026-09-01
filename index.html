@@ -37,6 +37,7 @@
 <script src="src/core/contracts.js"></script>
 <script src="src/core/runtime.js"></script>
 <script src="src/data/verbos-seed.js"></script>
+<script src="src/core/services/tokenizer.js"></script>
 <script src="src/core/engines/morphology.js"></script>
 <script>
 (function () {
@@ -47,7 +48,8 @@
   /* Registra a engine de morfologia com o seed carregado. */
   var morph = new Encore.core.engines.MorphologyEngine(
     Encore.data.verbosSeed,
-    Encore.data.exceptionsSeed
+    Encore.data.exceptionsSeed,
+    Encore.core.services.Tokenizer
   );
   Encore.runtime.register(morph);
 
@@ -55,11 +57,11 @@
     var text = area.value;
     out.innerHTML = "";
     /* Roleta: uma engine por vez (aqui só há a morfologia por ora). */
-    Encore.runtime.runOne("VERB-MORPH", text.split(/\s+/)[0], function (findings) {
+    Encore.runtime.runOne("VERB-MORPH", text, function (findings) {
       var box = document.createElement("div");
       if (!findings.length) {
         box.className = "muted";
-        box.textContent = "(primeira palavra não identificada como verbo)";
+        box.textContent = "(nenhum verbo do vocabulário identificado)";
       } else {
         findings.forEach(function (f) {
           var d = document.createElement("div");

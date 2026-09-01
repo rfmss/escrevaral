@@ -24,11 +24,11 @@ Identificar morfologia verbal de palavras do português (lema, tempo, modo, pess
 
 ## Quality
 - Tests: 14/14 (normative + clíticos + não-se-meta) — VERIFIED (node src/test/run-morphology.js)
-- Runtime tests: 3/3 (filas "um por vez") — VERIFIED (node src/test/run-runtime.js)
-- Browser QA: 1 página ES5 sem erro de console; análise demonstrada — VERIFIED (Playwright, chromium)
+- Runtime tests: 5/5 (trecho inteiro via tokenizador; filas "um por vez") — VERIFIED (node src/test/run-runtime.js)
+- Browser QA: 1 página ES5 sem erro de console; análise de frase inteira demonstrada ("fazê-lo"→fazer, "comam"→comer) — VERIFIED (Playwright, chromium)
 - Regression tests: UNKNOWN
 - Known false positives: UNKNOWN
-- Known false negatives: tokenização de texto contínuo NÃO implementada (check usa só a primeira palavra) — GAP conhecido
+- Tokenização de frase inteira IMPLEMENTADA (tokenizer + spans) — VERIFIED
 
 ## Runtime
 - Analyzer: Escrevaral.engines.MorphologyEngine (check assíncrono) — VERIFIED
@@ -38,9 +38,8 @@ Identificar morfologia verbal de palavras do português (lema, tempo, modo, pess
 - Legacy status: ES5 puro, sem import/export no browser (script tags), file:// OK — VERIFIED funcionalmente no chromium
 
 ## Highest-value gap
-1. Tokenizador de texto contínuo (análise por palavra ao longo de uma frase).
-2. Ampliar corpus (das desinências do escrevaral norma-data.json, não por lista manual).
-3. Revisão independente (não posso levantá-lo sozinho — regra 4 do antiprompt).
+~RESOLVIDO~ → agora: ampliar corpus (das desinências do escrevaral norma-data.json) + revisão independente (regra 4 do antiprompt).
+Histórico: gap de tokenização de texto contínuo RESOLVIDO (2026-08-31) via `src/core/services/tokenizer.js` + check percorre todas as palavras com spans corretos.
 
 ## Evidence for current level
 M3 justificado por: testes reproduzíveis 14/14 + 3/3 + QA de browser sem erro. Não é M4+ (falta adversarial) nem M6 (falta medição legado real).
@@ -49,4 +48,5 @@ M3 justificado por: testes reproduzíveis 14/14 + 3/3 + QA de browser sem erro. 
 M4 — ADVERSARIAL: requer corpus adversarial (portar do antigravity) + falso-positivos atacados + revisão independente.
 
 ## Changelog
-- 2026-08-31 — scaffold inicial em ES5, seed 11 formas, testes 14/14, runtime 3/3, QA browser OK.
+- 2026-08-31 — scaffold inicial em ES5, seed 11 formas, testes 14/14, runtime 5/5 (após tokenizador), QA browser OK.
+- 2026-08-31 — gap de tokenização resolvido: engine v1.1.0 percorre frases via tokenizer (spans corretos).

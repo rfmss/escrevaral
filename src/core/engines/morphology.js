@@ -7,12 +7,13 @@
      * Estratégia de baixa RAM: TRIE DE SUFIXOS em vez de tabela de todas as formas.
      */
 
-    function MorphologyEngine(data, exceptionsData) {
+    function MorphologyEngine(data, exceptionsData, tokenizer) {
         this.suffixTrie = {};
         this.exceptions = {};
+        this.tokenizer = tokenizer || null;
         this.id = "VERB-MORPH";
         this.domain = "morfologia-verbal";
-        this.version = "1.0.0";
+        this.version = "1.1.0";
 
         if (data) {
             for (var i = 0; i < data.length; i++) {
@@ -64,24 +65,43 @@
         return node._meta || null;
     };
 
-    /* Contrato: check(snapshot, done). Texto = uma palavra (ou primeira palavra se houver espaço). */
+    /* Contrato: check(snapshot, done). Com tokenizer, percorre o texto inteiro;
+     * sem tokenizer, analisa só a primeira palavra (retrocompatível). */
     MorphologyEngine.prototype.check = function (snapshot, done) {
+        var self = this;
         var findings = [];
-        var word = String(snapshot.text || "").trim().split(/\s+/)[0];
-        if (!word) { done(findings); return; }
+        var text = String(snapshot.text || "").trim();
+        if (!text) { done(findings); return; }
 
-        var meta = this.analyze(word);
-        if (meta) {
-            findings.push(new (global.Encore.contracts.Finding)(
-                this.id,
-                [0, word.length],
-                "Verbo: lema '" + meta.lema + "' — " + meta.modo + " " + meta.tempo +
-                    ", " + meta.pessoa + "ª " + meta.numero + ".",
-                0,
-                0.9
-            ));
+        if (!this.tokenizer) {
+            var only = text.split(/\s+/)[0];
+            var meta0 = this.analyze(only);
+            if (meta0) {
+                findings.push(this._finding([0, only.length], meta0));
+            }
+            done(findings);
+            return;
+        }
+
+        var tokens = this.tokenizer.tokenize(text);
+        for (var i = 0; i < tokens.length; i++) {
+            var meta = this.analyze(tokens[i].value);
+            if (meta) {
+                findings.push(this._finding(tokens[i].span, meta));
+            }
         }
         done(findings);
+    };
+
+    MorphologyEngine.prototype._finding = function (span, meta) {
+        return new (global.Encore.contracts.Finding)(
+            this.id,
+            span,
+            "Verbo: lema '" + meta.lema + "' — " + meta.modo + " " + meta.tempo +
+                ", " + meta.pessoa + "ª " + meta.numero + ".",
+            0,
+            0.9
+        );
     };
 
     MorphologyEngine.prototype.analyze = function (word) {
