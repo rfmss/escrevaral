@@ -5,7 +5,6 @@
         self.postMessage({ type: "error", message: message });
     }
 
-    /* Ponte para módulos ES5 legados que esperam window mesmo dentro do Worker. */
     self.window = self;
 
     try {
@@ -14,6 +13,7 @@
             "../../../src/core/services/tokenizer.js",
             "../../../src/data/verbos-seed.js",
             "../../../src/data/exceptions-seed.js",
+            "../../../src/data/verb-lemmas-core.js",
             "../../../src/core/engines/morphology.js"
         );
     } catch (error) {
@@ -33,7 +33,8 @@
             engine = new self.Encore.core.engines.MorphologyEngine(
                 self.Encore.data.verbosSeed,
                 self.Encore.data.exceptionsSeed,
-                self.Encore.core.services.Tokenizer
+                self.Encore.core.services.Tokenizer,
+                self.Encore.data.verbLemmasCore
             );
             snapshot = new self.Encore.contracts.LinguisticSnapshot(String(request.text || ""));
 
