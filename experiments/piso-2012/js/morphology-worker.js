@@ -5,6 +5,9 @@
         self.postMessage({ type: "error", message: message });
     }
 
+    /* Ponte para módulos ES5 legados que esperam window mesmo dentro do Worker. */
+    self.window = self;
+
     try {
         self.importScripts(
             "../../../src/core/contracts.js",
@@ -14,7 +17,8 @@
             "../../../src/core/engines/morphology.js"
         );
     } catch (error) {
-        fail("Não foi possível carregar a engine.");
+        fail("Não foi possível carregar a engine: " +
+            (error && error.message ? error.message : String(error)));
         return;
     }
 
