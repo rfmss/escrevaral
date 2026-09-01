@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "engine": {
+    "id": "VERB-MORPH",
+    "version": "1.2.0",
+    "domain": "morfologia-verbal"
+  },
+  "decision": {
+    "date": "2026-09-01",
+    "tranche": "infinitivo-pessoal",
+    "reason": "Única família verbal marcada como verified na proveniência do Mass Notes; menor expansão com banca separada e ganho mensurável.",
+    "nonGoals": [
+      "portar o pacote TypeScript inteiro",
+      "alegar cobertura universal",
+      "promover automaticamente a maturidade"
+    ]
+  },
+  "sources": [
+    {
+      "id": "antigravity-es5-base",
+      "role": "arquitetura ES5, trie curta e contrato legado",
+      "originType": "snapshot local inventariado",
+      "originPath": "/home/rafamass/Área de trabalho/2027/escrevaral-antigravity-starter/js/core/linguistic-core/services/morphology-lite.js",
+      "repositoryCommit": null,
+      "localEvidence": [
+        "catalogo/fonte-C-antigravity.md",
+        "catalogo/por-dominio.md"
+      ],
+      "limitation": "O commit exato da fotografia Antigravity não está disponível no GitHub conectado; a lacuna permanece explícita."
+    },
+    {
+      "id": "mass-notes-personal-infinitive",
+      "role": "comportamento, lemas core, contexto e banca adversarial congelada",
+      "repository": "rfmss/escrevaral",
+      "commit": "816ca7ea2140f49b93a5bfaeabd0b898871760e5",
+      "paths": [
+        "mass-notes-next/src/engines/verbMorphology/regularParadigms.ts",
+        "mass-notes-next/src/engines/verbMorphology/contextResolver.ts",
+        "mass-notes-next/src/engines/verbMorphology/simpleAnalyzer.ts",
+        "mass-notes-next/src/engines/verbMorphology/verbLemmaLexicon.ts",
+        "mass-notes-next/tests/fixtures/verb-morphology-evaluation.json",
+        "mass-notes-next/docs/linguistics/verb-provenance.json",
+        "mass-notes-next/docs/logs/2026-08-01-e2v-infinitivo-pessoal-fechamento.md"
+      ],
+      "upstreamEvidence": {
+        "cases": 12,
+        "browserExecutions": 24,
+        "passed": 24,
+        "failed": 0,
+        "workflowRun": 30718951198,
+        "artifactId": 8824240160
+      }
+    }
+  ],
+  "localArtifacts": {
+    "implementation": [
+      "src/core/engines/morphology.js",
+      "src/data/verb-lemmas-core.js"
+    ],
+    "independentBank": [
+      "src/test/fixtures/morphology-personal-infinitive-evaluation.json"
+    ],
+    "runners": [
+      "src/test/run-morphology.js",
+      "src/test/run-morphology-personal-infinitive.js",
+      "src/test/run-runtime.js"
+    ],
+    "deviceGate": [
+      "experiments/piso-2012/morphology-tranche.html",
+      "experiments/piso-2012/js/morphology-tranche-test.js"
+    ]
+  },
+  "reusePolicy": {
+    "method": "Reimplementação ES5 do comportamento; nenhum arquivo TypeScript entra no runtime.",
+    "runtimeData": "Lista pequena de lemas do próprio projeto; nenhum texto de fonte bibliográfica foi incorporado.",
+    "bibliography": "As fontes acadêmicas registradas pelo Mass Notes permanecem como citações e sínteses, sem reprodução de corpus ou texto protegido."
+  },
+  "evidence": {
+    "legacyRegression": "14/14",
+    "frozenPersonalInfinitiveBank": "12/12",
+    "deviceStatus": "pending para a versão 1.2.0",
+    "maturityDecision": "M3 mantido; o gate físico anterior pertence à versão 1.1.0."
+  },
+  "openRisks": [
+    "Cobertura limitada ao léxico core carregado.",
+    "Heurística contextual não é parser oracional.",
+    "Variação regional, registro e aceitabilidade não foram estratificados.",
+    "Banca humana independente permanece ausente."
+  ]
+}
