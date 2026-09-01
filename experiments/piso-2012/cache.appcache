@@ -1,16 +1,18 @@
 CACHE MANIFEST
-# encore-piso-2012-v5-worker-window-bridge
+# encore-piso-2012-v6-personal-infinitive-tranche
 
 CACHE:
 index.html
 easy.html
 morphology.html
+morphology-tranche.html
 css/probe.css
 js/probe.js
 js/easy-test.js
 js/capsule-worker.js
 js/morphology-test.js
 js/morphology-worker.js
+js/morphology-tranche-test.js
 data/shard-small.js
 data/shard-medium.js
 data/shard-large.js
@@ -19,6 +21,7 @@ data/shard-large.js
 ../../src/core/engines/morphology.js
 ../../src/data/verbos-seed.js
 ../../src/data/exceptions-seed.js
+../../src/data/verb-lemmas-core.js
 
 NETWORK:
 *
