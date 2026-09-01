@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" manifest="cache.appcache">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Encore — Morfologia no iPad</title>
+    <link rel="stylesheet" href="css/probe.css">
+    <style>
+        .simple-page { text-align: center; padding-top: 72px; }
+        .simple-page h1 { font-size: 34px; }
+        .simple-page .purpose { margin: 0 auto 32px; max-width: 520px; }
+        #start-test { display: block; font-size: 21px; margin: 0 auto 24px; min-height: 66px; width: 100%; }
+        .test-result { background: #efebdc; border: 1px solid #b9b29f; margin-top: 20px; padding: 28px 18px; }
+        .result-word { font-family: "Courier New", Courier, monospace; font-size: 34px; margin-bottom: 8px; }
+        .result-detail { color: #5b574d; margin-bottom: 10px; }
+        .verbs { font-family: "Courier New", Courier, monospace; font-size: 15px; margin-bottom: 0; }
+    </style>
+</head>
+<body>
+    <main class="page simple-page">
+        <p class="eyebrow">ESCREVARAL ENCORE</p>
+        <h1>Morfologia real</h1>
+        <p class="purpose">Um toque. Uma engine. Uma frase. Depois, a cápsula desaparece.</p>
+        <button id="start-test" type="button">Testar morfologia</button>
+        <div id="result-box" class="test-result" hidden>
+            <p id="result-word" class="result-word"></p>
+            <p id="result-detail" class="result-detail"></p>
+            <p id="verbs" class="verbs"></p>
+        </div>
+    </main>
+    <noscript>Este teste precisa de JavaScript.</noscript>
+    <script src="js/morphology-test.js"></script>
+</body>
+</html>
