@@ -41,6 +41,10 @@ Mini-PWAs: pomodoro, bloco (notas), nota (publicação)
 | [11-sistema-supervisao-cognitiva.md](11-sistema-supervisao-cognitiva.md) | Sistema de Supervisão Cognitiva — Antiprompt (regras de trabalho do autor) |
 | [12-licao-scaffold-agents.md](12-licao-scaffold-agents.md) | Lição aprendida — padrão de scaffold com agents do Antigravity (reuso documentado) |
 
+## Catálogo de engines (inventário das 5 fontes)
+
+[`../catalogo/index.md`](../catalogo/index.md) — inventário de todas as engines existentes em escrevaral, mass-notes, antigravity, uai.rer e eskrev, com mapa de decisão por domínio em [`../catalogo/por-dominio.md`](../catalogo/por-dominio.md). Sem copiar código; serve para decidir o que entra.
+
 ## Convenção de núcleos (formato de cada feature nos documentos)
 
 Cada feature é documentada como **átomo recriável**:
