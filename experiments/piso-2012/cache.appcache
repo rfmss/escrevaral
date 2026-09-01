@@ -1,10 +1,12 @@
 CACHE MANIFEST
-# encore-piso-2012-v2
+# encore-piso-2012-v3-one-tap
 
 CACHE:
 index.html
+easy.html
 css/probe.css
 js/probe.js
+js/easy-test.js
 js/capsule-worker.js
 data/shard-small.js
 data/shard-medium.js
