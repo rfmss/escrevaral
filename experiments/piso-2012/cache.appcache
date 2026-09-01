@@ -1,16 +1,24 @@
 CACHE MANIFEST
-# encore-piso-2012-v3-one-tap
+# encore-piso-2012-v4-real-morphology
 
 CACHE:
 index.html
 easy.html
+morphology.html
 css/probe.css
 js/probe.js
 js/easy-test.js
 js/capsule-worker.js
+js/morphology-test.js
+js/morphology-worker.js
 data/shard-small.js
 data/shard-medium.js
 data/shard-large.js
+../../src/core/contracts.js
+../../src/core/services/tokenizer.js
+../../src/core/engines/morphology.js
+../../src/data/verbos-seed.js
+../../src/data/exceptions-seed.js
 
 NETWORK:
 *
