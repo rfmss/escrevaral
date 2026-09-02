@@ -1,6 +1,6 @@
 # Morfologia Verbal — SPEC
 
-**Engine:** VERB-MORPH · **Domínio:** morfologia-verbal · **Versão:** 1.2.0
+**Engine:** VERB-MORPH · **Domínio:** morfologia-verbal · **Versão:** 1.2.1
 
 ## Missão
 Identificar formas verbais do português brasileiro — lema e flexão — com baixa RAM, offline e em ES5, sem transformar ambiguidade em certeza.
@@ -15,6 +15,7 @@ Identificar formas verbais do português brasileiro — lema e flexão — com b
 - lista explícita de exceções;
 - léxico core de 65 lemas para autorizar regras produtivas;
 - regra contextual delimitada para infinitivo pessoal;
+- guarda nominal imediata: artigo ou possessivo antes da forma prevalece sobre gatilhos verbais distantes;
 - nenhuma tabela universal de conjugações residente;
 - nenhuma dependência de framework, módulo, Promise, `fetch` ou Service Worker.
 
@@ -37,7 +38,7 @@ Identificar formas verbais do português brasileiro — lema e flexão — com b
   - infinitivo substantivado;
 - construção avaliativa delimitada: `é melhor sairmos`.
 
-A regra só deriva uma forma quando o lema está no léxico core carregado.
+A regra só deriva uma forma quando o lema está no léxico core carregado. A versão 1.2.1 também impede que homógrafos como `seus deveres` e `os olhares` sejam promovidos por uma preposição ou conjunção anterior.
 
 ## Limites
 - não é parser oracional;
@@ -45,22 +46,26 @@ A regra só deriva uma forma quando o lema está no léxico core carregado.
 - não resolve universalmente sujeitos recuperáveis;
 - não prescreve obrigatoriedade de flexão;
 - não cobre ainda irregulares amplos, defectivos, particípios duplos ou locuções;
+- a guarda nominal cobre artigos, demonstrativos e possessivos imediatos; não substitui resolução lexical ampla;
 - ambiguidade, registro e variação regional continuam parcialmente desconhecidos.
 
 ## Evidência reproduzível
 - regressão legada: 14/14;
 - runtime serializado: 5/5 na versão anterior, preservado por compatibilidade;
 - banca congelada de infinitivo pessoal: 12/12;
-- origem exata da banca e das regras: [PROVENANCE.json](PROVENANCE.json);
-- gate físico da versão 1.2.0: pendente.
+- banca negativa de trechos intocados do legado: 7/9 antes da correção, 9/9 depois;
+- runtime serializado na versão 1.2.1: 5/5;
+- origem exata das bancas e regras: [PROVENANCE.json](PROVENANCE.json);
+- gate físico da versão 1.2.0: 12/12;
+- gate físico da versão 1.2.1 com 21 casos: pendente.
 
 ## Artefatos
-- engine: 12.519 bytes;
-- seed de formas: 1.895 bytes;
-- exceções: 304 bytes;
-- lemas core: 1.396 bytes;
-- tokenizador: 1.290 bytes;
-- total aproximado do núcleo carregável: 17.404 bytes.
+- engine: 13.334 bytes;
+- seed de formas: 1.896 bytes;
+- exceções: 305 bytes;
+- lemas core: 1.397 bytes;
+- tokenizador: 1.291 bytes;
+- total aproximado do núcleo carregável: 18.223 bytes.
 
 ## Fontes
 - base ES5: inventário Antigravity em `catalogo/fonte-C-antigravity.md`;
