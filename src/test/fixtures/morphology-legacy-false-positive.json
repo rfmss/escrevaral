@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Banca negativa formada por trechos preservados no legado e não usada pela implementação da morfologia Encore 1.2.",
+  "origin": {
+    "repository": "rfmss/escrevaral",
+    "commit": "816ca7ea2140f49b93a5bfaeabd0b898871760e5"
+  },
+  "cases": [
+    {
+      "id": "mass-dev-canto-substantivo",
+      "sourcePath": "mass-notes-next/tests/fixtures/verb-morphology-corpus.ts",
+      "manuscript": "O canto da sala é escuro.",
+      "query": "canto"
+    },
+    {
+      "id": "mass-dev-sabia-adjetivo",
+      "sourcePath": "mass-notes-next/tests/fixtures/verb-morphology-corpus.ts",
+      "manuscript": "A mulher sábia respondeu com calma.",
+      "query": "sábia"
+    },
+    {
+      "id": "mass-dev-larga-adjetivo",
+      "sourcePath": "mass-notes-next/tests/fixtures/verb-morphology-corpus.ts",
+      "manuscript": "A estrada larga cortava o vale.",
+      "query": "larga"
+    },
+    {
+      "id": "mass-dev-publica-adjetivo",
+      "sourcePath": "mass-notes-next/tests/fixtures/verb-morphology-corpus.ts",
+      "manuscript": "A instituição pública local abriu as portas.",
+      "query": "pública"
+    },
+    {
+      "id": "mass-log-melancolia-sobregeracao",
+      "sourcePath": "mass-notes-next/docs/logs/2026-07-30-e2-v-breadcrumbs.md",
+      "manuscript": "Melancolia atravessa a casa sem pedir licença.",
+      "query": "Melancolia"
+    },
+    {
+      "id": "mass-sample-andares-substantivo",
+      "sourcePath": "mass-notes-next/src/storage/documentRepository.ts",
+      "manuscript": "O elevador parou entre dois andares.",
+      "query": "andares"
+    },
+    {
+      "id": "legacy-cliche-deveres-substantivo",
+      "sourcePath": "analise-engine.js",
+      "manuscript": "homens de honra não fugiam de seus deveres",
+      "query": "deveres"
+    },
+    {
+      "id": "legacy-cliche-olhares-substantivo",
+      "sourcePath": "analise-engine.js",
+      "manuscript": "quando os olhares se cruzam tudo muda",
+      "query": "olhares"
+    },
+    {
+      "id": "legacy-sinonimo-deveres-substantivo",
+      "sourcePath": "js/data/synonym-data.js",
+      "manuscript": "direitos e deveres",
+      "query": "deveres"
+    }
+  ]
+}
