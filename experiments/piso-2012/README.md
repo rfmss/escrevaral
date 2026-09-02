@@ -1,6 +1,6 @@
 # Prova do Piso 2012
 
-Experimento isolado do Escrevaral Encore para verificar o piso real no iPad mini de 2012 com iOS 9.3.5 e, depois, em Android 4.4.
+Experimento isolado do Escrevaral Encore para verificar o piso real no iPad mini de 2012 com iOS 9.3.5. Este é o dispositivo de certificação. O Android 4.4 foi adiado e não bloqueia a linha atual.
 
 ## Capacidade testada
 
@@ -82,4 +82,4 @@ APROVADO no iPad alvo para:
 
 `offline -> uma engine -> uma frase -> resposta -> descarte`
 
-O próximo gargalo é a cobertura linguística da morfologia, não a capacidade básica do aparelho.
+A capacidade básica do aparelho está provada. O próximo gargalo é amadurecer outra capacidade linguística, uma cápsula por vez. Nenhuma compatibilidade Android é alegada.
