@@ -34,6 +34,18 @@ Dispositivo: iPad MD531GP/A, iOS 9.3.5 (13G36), Safari.
 
 A partida fria inclui criação do Worker, cinco `importScripts`, interpretação dos arquivos, construção da trie, análise e descarte. A faixa de 36–48 ms representa a repetição com os recursos já armazenados pelo navegador. O teste não mede heap diretamente.
 
+## Evidência física da morfologia 1.2.0 — 2026-09-01
+
+No mesmo iPad alvo, a banca congelada de infinitivo pessoal concluiu 12/12 casos:
+
+- primeira passagem: 4.774 ms;
+- repetições: 1.586, 1.571 e 1.563 ms;
+- mediana das repetições: 1.571 ms;
+- aproximadamente 131 ms por caso na mediana, incluindo criação, carga, análise e descarte do Worker;
+- um Worker foi descartado após cada caso.
+
+A reabertura em modo avião não foi repetida especificamente para a versão 1.2.0 nesta sessão. Portanto, esta evidência aprova execução e descarte físicos da tranche; o offline permanece comprovado para a arquitetura anterior, sem extrapolação silenciosa.
+
 ## Interpretação correta
 
 O gate comprova a arquitetura de roletagem no aparelho-alvo: carregar uma engine, analisar, devolver e descartar. Não comprova cobertura linguística, corpus adversarial nem qualidade normativa da morfologia.
