@@ -120,8 +120,8 @@
   "evidence": {
     "legacyRegression": "14/14",
     "frozenPersonalInfinitiveBank": "12/12",
-    "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: versão 1.2.1, 21/21",
-    "maturityDecision": "M3 mantido até o gate físico 1.2.2 e decisão explícita de promoção; revisão humana dedicada continua ausente.",
+    "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: versão 1.2.2, 29/29",
+    "maturityDecision": "M4 promovido após a banca externa reproduzir falhas, a correção fechar 48/48 casos internos/externos e a versão 1.2.2 atravessar o gate físico 29/29 no iPad alvo; M5 permanece bloqueado pelo Android KitKat e pela reabertura offline específica.",
     "deviceMetrics": {
       "firstRunMs": 4774,
       "repeatRunsMs": [
@@ -173,6 +173,19 @@
         "contração ao como introdutor de infinitivo flexionado"
       ],
       "engineVersion": "1.2.2"
+    },
+    "deviceMetricsV122": {
+      "firstRunMs": 6634,
+      "repeatRunsMs": [
+        3642,
+        3641,
+        3642
+      ],
+      "repeatMedianMs": 3642,
+      "casesPerRun": 29,
+      "repeatMedianPerCaseMs": 125.6,
+      "lifecycle": "um Worker criado e descartado por caso",
+      "offlineReopen": "não repetida especificamente para a versão 1.2.2 nesta sessão"
     }
   },
   "openRisks": [
@@ -181,7 +194,7 @@
     "Variação regional, registro e aceitabilidade não foram estratificados.",
     "Banca humana independente permanece ausente.",
     "A guarda nominal não substitui um resolvedor lexical completo.",
-    "A versão 1.2.2 ainda não atravessou o gate físico de 29 casos.",
-    "O corpus externo usa UPOS convertido e lemas/features automáticos; não substitui revisão humana dedicada."
+    "O corpus externo usa UPOS convertido e lemas/features automáticos; não substitui revisão humana dedicada.",
+    "O gate físico equivalente no Android KitKat permanece pendente."
   ]
 }
