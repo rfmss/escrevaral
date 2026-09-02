@@ -38,7 +38,7 @@ Cobertura total do português: UNKNOWN.
 - Sintaxe ES5 dos scripts de dispositivo: VERIFIED.
 - Worker simulado com engine 1.2.0: VERIFIED.
 - Gate físico da versão 1.1.0 no iPad MD531GP/A, iOS 9.3.5: VERIFIED.
-- Gate físico da versão 1.2.0: PENDING.
+- Gate físico da versão 1.2.0 no iPad MD531GP/A, iOS 9.3.5: VERIFIED — 12/12.
 - Known false positives fora da banca: UNKNOWN.
 
 ## Runtime
@@ -49,22 +49,27 @@ Cobertura total do português: UNKNOWN.
   - partida fria: 2.310 ms;
   - repetições: 36–48 ms;
   - offline após primeiro carregamento: VERIFIED.
-- Versão 1.2.0 no iPad: PENDING.
+- Versão 1.2.0 no iPad:
+  - banca completa: 12/12;
+  - primeira passagem: 4.774 ms;
+  - repetições: 1.586, 1.571 e 1.563 ms;
+  - mediana das repetições: 1.571 ms para 12 Workers descartáveis (~131 ms/caso, incluindo criação, carga, análise e descarte);
+  - reabertura offline específica desta versão: não repetida nesta sessão.
 
 ## Highest-value gap
-Executar a banca de 12 casos no iPad alvo. Depois, procurar falso-positivos fora da banca e obter revisão humana independente antes de qualquer promoção.
+Procurar falso-positivos fora da banca congelada e obter revisão humana independente. A execução física já deixou de ser o gargalo.
 
 ## Evidence for current level
-M3 permanece correto. A nova tranche tem proveniência, regressão e banca congelada verde, mas ainda não atravessou o aparelho e não possui validação humana independente. Nenhum nível foi pulado.
+M3 permanece correto. A tranche tem proveniência, regressão, banca congelada verde e gate físico 12/12 no aparelho-alvo, mas ainda não possui corpus adversarial independente nem validação humana. Nenhum nível foi pulado.
 
 ## Promotion candidate
 M4 — ADVERSARIAL somente após:
-1. gate físico 1.2.0;
-2. corpus adicional que não tenha orientado a implementação;
-3. falso-positivos medidos;
-4. revisão independente.
+1. corpus adicional que não tenha orientado a implementação;
+2. falso-positivos medidos;
+3. revisão independente.
 
 ## Changelog
 - 2026-08-31 — seed ES5, 14/14, tokenização e runtime serializado.
 - 2026-09-01 — versão 1.1.0 aprovada fisicamente no iPad alvo; 36–48 ms após partida fria.
-- 2026-09-01 — versão 1.2.0 porta a tranche de infinitivo pessoal do Mass Notes: 65 lemas core, regressão 14/14 e banca congelada 12/12; gate físico pendente; nível mantido em M3.
+- 2026-09-01 — versão 1.2.0 porta a tranche de infinitivo pessoal do Mass Notes: 65 lemas core, regressão 14/14 e banca congelada 12/12; nível mantido em M3.
+- 2026-09-01 — gate físico 1.2.0 aprovado no iPad alvo: 12/12; 4.774 ms na primeira passagem e 1.563–1.586 ms nas repetições; Worker descartado por caso.
