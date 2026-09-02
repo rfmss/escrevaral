@@ -1,7 +1,7 @@
 # Autoria verificável — Maturidade
 
 **LEVEL:** M3 — TESTED
-**VERSION:** 0.2.1
+**VERSION:** 0.3.0
 **LAST REVIEWED:** 2026-09-02
 **STEWARD:** ainda não nomeado
 
@@ -35,6 +35,9 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - cópia de recuperação fica em compartimento `localStorage` separado da folha;
 - arquivo baixável somente quando o navegador realmente oferece o caminho moderno;
 - transporte para fora do iPad 2012: PENDING;
+- protocolo de fragmentação e remontagem: 15/15 testes locais;
+- geração visual de QR no iPad físico: PENDING;
+- recepção física por outro aparelho: NOT IMPLEMENTED;
 - custo e pico de memória no aparelho: UNKNOWN.
 
 ## Limites
@@ -45,11 +48,13 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - `localStorage` não é o armazenamento final da carteira;
 - a cópia separada prova recuperação local, não portabilidade entre aparelhos;
 - copiar/colar foi recusado como transporte primário no Safari do iOS 9;
+- os QR desta versão não são criptografados e expõem fragmentos reconstruíveis a quem os escanear;
+- testes do protocolo não comprovam leitura óptica pela câmera;
 - segurança adversarial permanece UNKNOWN.
 
 ## Highest-value gap
 
-Transportar o `.scrvrl` para fora do iPad sem depender da prancheta: auditar primeiro o QR fragmentado do Eskrev e medir seu custo antes de portar.
+Executar o emissor QR no iPad certificado e medir rotação, pausa, descarte e reabertura offline antes de construir a câmera receptora.
 
 ## Promotion candidate
 

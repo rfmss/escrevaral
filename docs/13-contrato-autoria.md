@@ -171,10 +171,10 @@ Saída: lançamento com afirmações proporcionais à evidência.
 
 Cada marco só avança quando muda algo observável no mundo: código executado, teste reproduzido ou validação externa. Documento sem gate não promove maturidade.
 
-Decisão atual -> recuperação local do pacote aprovada no iPad; transporte entre aparelhos continua separado e pendente.
+Decisão atual -> recuperação local aprovada; emissor fragmentado `S1` implementado como cápsula separada e ainda pendente no iPad físico.
 
-Próxima ação -> auditar o QR fragmentado do Eskrev antes de portar qualquer código.
+Próxima ação -> abrir `Enviar por QR` no iPad, observar uma volta, pausar, avançar manualmente, fechar e repetir em modo avião.
 
-Critério -> provar que fragmentação, ordem, retomada e reconstrução preservam exatamente o `.scrvrl`, com uma cápsula descartável por bloco.
+Critério -> provar que o emissor desenha um bloco por vez, permanece responsivo e descarta seu Worker ao fechar. A reconstrução exata já está coberta por testes locais; a leitura óptica completa virá com o receptor.
 
-Teste -> medir quantidade de blocos, tempo, RAM e tolerância a interrupção no iPad; nenhum conteúdo será enviado pela rede.
+Teste -> registrar quantidade de blocos, fluidez, pausa, avanço, fechamento e reabertura offline; nenhum conteúdo será enviado pela rede. Como ainda não há criptografia, usar texto sintético nesta prova.

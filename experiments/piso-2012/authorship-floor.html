@@ -19,10 +19,17 @@
         .actions { margin-bottom: 24px; }
         .transfer-panel { background: #efebdc; border: 1px solid #b9b29f; display: none; margin-bottom: 18px; padding: 18px; }
         .transfer-panel textarea { min-height: 150px; }
+        .qr-panel { background: #efebdc; border: 1px solid #b9b29f; display: none; margin-bottom: 18px; padding: 18px; text-align: center; }
+        .qr-code { background: #fff; display: inline-block; min-height: 300px; min-width: 300px; padding: 12px; }
+        .qr-code canvas, .qr-code img { height: 300px !important; width: 300px !important; }
+        .qr-status { font-family: "Courier New", Courier, monospace; font-size: 20px; margin: 14px 0 4px; }
+        .qr-detail { color: #5b574d; margin: 0 0 14px; }
         .download-link { background: #4d4639; border: 1px solid #817b6d; box-sizing: border-box; color: #f7f1df; display: none; font-family: "Courier New", Courier, monospace; font-size: 16px; margin: 0 6px 8px 0; min-height: 48px; padding: 10px 14px; text-decoration: none; }
         .promise-line { border-top: 1px solid #aaa391; color: #4d4639; font-family: "Courier New", Courier, monospace; font-size: 14px; line-height: 1.7; margin-top: 38px; padding-top: 18px; text-align: center; }
         @media screen and (max-width: 520px) {
             .download-link { margin-right: 0; text-align: center; width: 100%; }
+            .qr-code { min-height: 260px; min-width: 260px; padding: 8px; }
+            .qr-code canvas, .qr-code img { height: 260px !important; width: 260px !important; }
         }
     </style>
 </head>
@@ -49,6 +56,7 @@
             <button id="seal-button" type="button">Selar agora</button>
             <button id="tamper-button" class="quiet" type="button" disabled>Testar alteração</button>
             <button id="export-button" class="quiet" type="button" disabled>Guardar cópia</button>
+            <button id="qr-button" class="quiet" type="button" disabled>Enviar por QR</button>
             <button id="saved-import-button" class="quiet" type="button" disabled>Trazer cópia guardada</button>
             <button id="import-button" class="quiet" type="button">Colar outro .scrvrl</button>
             <button id="reset-button" class="quiet" type="button">Recomeçar</button>
@@ -62,6 +70,20 @@
                 <button id="confirm-import-button" type="button">Verificar e trazer</button>
                 <a id="download-link" class="download-link" href="#">Baixar arquivo .scrvrl</a>
                 <button id="close-transfer-button" class="quiet" type="button">Fechar</button>
+            </div>
+        </section>
+
+        <section id="qr-panel" class="qr-panel" aria-live="polite">
+            <h2>Saída do original</h2>
+            <p>Cada QR é um pedaço reconstruível do pacote. Neste teste, use somente texto sintético.</p>
+            <div id="qr-code" class="qr-code"></div>
+            <p id="qr-status" class="qr-status">PREPARANDO</p>
+            <p id="qr-detail" class="qr-detail">Abrindo somente esta função.</p>
+            <div class="actions">
+                <button id="qr-pause-button" type="button">Pausar</button>
+                <button id="qr-back-button" class="quiet" type="button">Anterior</button>
+                <button id="qr-next-button" class="quiet" type="button">Próximo</button>
+                <button id="qr-close-button" class="quiet" type="button">Fechar QR</button>
             </div>
         </section>
 

@@ -122,3 +122,24 @@ No iPad MD531GP/A, iOS 9.3.5, a sequência corrigida foi concluída:
 `Guardar cópia -> CÓPIA GUARDADA -> Recomeçar -> Trazer cópia guardada -> IMPORTADO`
 
 O autor confirmou a recuperação do texto e da mesma raiz, inclusive no fluxo offline, sem seleção ou digitação manual do pacote. Não foram informados tempos nem medido o pico de memória. O gate aprova recuperação local; transporte entre aparelhos permanece pendente.
+
+## Emissor QR S1 — aguardando gate físico
+
+O QR do Eskrev foi auditado no commit `d6b3851444a68921d50b8618340e4d183b6dbed8`. A ideia de blocos numerados foi preservada; módulos, Promises, câmera, clipboard e carga conjunta de bibliotecas foram recusados para o piso 2012.
+
+O novo fluxo é:
+
+`pacote íntegro -> Worker exclusivo -> Base64 UTF-8 -> bloco S1 -> um QR -> próximo bloco -> fechar -> descartar`
+
+Cada bloco contém identidade, posição, total, SHA-256 do pacote completo e CRC-32 do fragmento. O receptor de protocolo aceita ordem livre, repetição e retomada; só libera o pacote quando o SHA-256 final confere. A interface receptora e a câmera não fazem parte deste gate.
+
+Teste físico com texto sintético:
+
+1. selar uma nota e tocar em `Enviar por QR`;
+2. confirmar que aparece `BLOCO 1 DE N` e que os blocos avançam;
+3. tocar em `Pausar`, `Anterior`, `Próximo` e `Retomar`;
+4. tocar em `Fechar QR` e voltar a escrever;
+5. fechar a página, entrar em modo avião, reabrir e repetir;
+6. informar quantidade de blocos e qualquer travamento ou recarregamento.
+
+Este emissor ainda não cifra o pacote. Os QR expõem fragmentos reconstruíveis a quem os escanear; até a criptografia existir, o teste deve usar texto sem valor privado.

@@ -1,6 +1,6 @@
 # Autoria verificável — SPEC
 
-**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.2.1
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.3.0
 
 ## Missão
 
@@ -27,9 +27,14 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - aparelhos modernos podem baixar `.scrvrl`;
 - o piso 2012 guarda uma cópia serializada em compartimento local separado;
 - `Recomeçar` apaga a folha de teste, não essa cópia;
-- transferência externa do iPad 2012 será decidida após testar o QR fragmentado do legado Eskrev.
+- transporte `S1` converte o pacote para Base64 UTF-8 e divide em blocos pequenos;
+- cada bloco leva identidade curta, posição, total, hash SHA-256 do pacote e CRC-32 local;
+- o emissor no iPad mantém o pacote dentro de um Worker e devolve um bloco por vez;
+- o Worker e o QR são descartados ao fechar a função;
+- o receptor pode aceitar blocos fora de ordem, ignorar repetidos e retomar uma sessão salva;
+- a reconstrução só termina quando o SHA-256 do pacote completo confere.
 
-## Fora do escopo 0.2.1
+## Fora do escopo 0.3.0
 
 - assinatura do autor;
 - identidade civil;
@@ -38,7 +43,15 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - registro público;
 - detecção infalível de IA ou plágio;
 - segurança contra chave roubada ou replay.
-- transporte do `.scrvrl` para fora do Safari no iOS 9.
+- criptografia do pacote durante a exposição dos QR;
+- câmera/receptor na interface;
+- transferência física completa do `.scrvrl` para outro aparelho, ainda em gate.
+
+## Quadro do transporte S1
+
+`S1 | id | posição | total | SHA-256 do pacote | CRC-32 do bloco | Base64`
+
+O CRC-32 detecta erro de leitura em um bloco; não é a prova criptográfica. O SHA-256 final é quem confirma a reconstrução exata. O QR carrega fragmentos do pacote privado, portanto esta versão deve ser usada em ambiente controlado: confidencialidade só poderá ser alegada depois de uma camada de criptografia testada.
 
 ## Critérios do gate físico
 
@@ -50,3 +63,6 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 6. registrar tempos sem travamento observado.
 7. guardar em compartimento separado, recomeçar e trazer o pacote em modo avião;
 8. recuperar a mesma raiz e recusar um pacote alterado.
+9. abrir `Enviar por QR`, observar rotação e pausa sem travamento;
+10. fechar o QR e confirmar que a cápsula deixou de residir;
+11. repetir em modo avião.

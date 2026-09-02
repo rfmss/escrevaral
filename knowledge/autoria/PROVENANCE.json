@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "service": {
     "id": "SCRVRL-AUTHORSHIP",
-    "version": "0.1.0"
+    "version": "0.3.0"
   },
   "productDecision": "O Escrevaral é uma carteira de originais verificáveis com uma oficina de escrita dentro, exclusiva para o português brasileiro e escritores do Brasil.",
   "sources": [
@@ -17,6 +17,28 @@
       "role": "pacote, cadeia e assinatura",
       "status": "contrato inventariado; ESM/WebCrypto não portados diretamente",
       "localReference": "docs/07-eskrev.md"
+    },
+    {
+      "id": "eskrev-qr-stream",
+      "role": "antecedente de fragmentação numerada e rotação QR",
+      "repository": "rfmss/eskrev",
+      "commit": "d6b3851444a68921d50b8618340e4d183b6dbed8",
+      "sourcePath": "js/modules/qrStream.js",
+      "status": "protocolo estudado; implementação moderna não portada diretamente",
+      "localReference": "docs/07-eskrev.md"
+    },
+    {
+      "id": "qrcodejs",
+      "role": "geração visual de QR no emissor legado",
+      "repository": "davidshimjs/qrcodejs",
+      "commit": "04f46c6a0708418cb7b96fc563eacae0fbf77674",
+      "sourcePath": "qrcode.min.js",
+      "license": "MIT",
+      "vendoredPath": "src/vendor/qrcodejs/qrcode.min.js",
+      "vendoredGitBlob": "993e88f396640f881b69f98db7a4d17401ef83ca",
+      "vendoredSha256": "c541ef06327885a8415bca8df6071e14189b4855336def4f36db54bde8484f36",
+      "legacyMatch": "mesmo blob usado por rfmss/eskrev em d6b3851444a68921d50b8618340e4d183b6dbed8",
+      "physicalGate": "PENDING"
     },
     {
       "id": "js-sha256",
