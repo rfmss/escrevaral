@@ -37,7 +37,8 @@
 
     var PREPOSITIONS = {
         "a": true, "de": true, "em": true, "para": true, "por": true,
-        "sem": true, "até": true, "após": true, "antes": true
+        "sem": true, "até": true, "após": true, "antes": true,
+        "ao": true
     };
 
     var SUBJUNCTIVE_TRIGGERS = {
@@ -58,6 +59,12 @@
         "aquele": true, "aquela": true, "aqueles": true, "aquelas": true
     };
 
+    var NOMINAL_QUANTIFIERS = {
+        "dois": true, "duas": true, "três": true, "quatro": true,
+        "cinco": true, "seis": true, "sete": true, "oito": true,
+        "nove": true, "dez": true
+    };
+
     function MorphologyEngine(data, exceptionsData, tokenizer, lemmaData) {
         this.suffixTrie = {};
         this.exceptions = {};
@@ -65,7 +72,7 @@
         this.tokenizer = tokenizer || null;
         this.id = "VERB-MORPH";
         this.domain = "morfologia-verbal";
-        this.version = "1.2.1";
+        this.version = "1.2.2";
 
         var i;
         if (data) {
@@ -153,7 +160,7 @@
         var threeBefore = this._tokenBefore(tokens, index, 3);
         var subject = SUBJECTS[previous] || null;
 
-        if (NOMINAL_DETERMINERS[previous]) {
+        if (NOMINAL_DETERMINERS[previous] || NOMINAL_QUANTIFIERS[previous]) {
             return { nominal: true, personal: false, subject: null };
         }
 
