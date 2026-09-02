@@ -42,7 +42,7 @@ Cobertura total do português: UNKNOWN.
 - Gate físico da versão 1.2.0 no iPad MD531GP/A, iOS 9.3.5: VERIFIED — 12/12.
 - Falsos positivos conhecidos fora da banca original: 2 reproduzidos (`deveres`, `olhares`) e corrigidos na banca negativa.
 - Falsos positivos além das bancas atuais: UNKNOWN.
-- Gate físico da versão 1.2.1: PENDING.
+- Gate físico da versão 1.2.1 no iPad MD531GP/A, iOS 9.3.5: VERIFIED — 21/21.
 
 ## Runtime
 - Engine + seed + exceções + lemas + tokenizador: ~18.223 bytes.
@@ -58,20 +58,25 @@ Cobertura total do português: UNKNOWN.
   - repetições: 1.586, 1.571 e 1.563 ms;
   - mediana das repetições: 1.571 ms para 12 Workers descartáveis (~131 ms/caso, incluindo criação, carga, análise e descarte);
   - reabertura offline específica desta versão: não repetida nesta sessão.
-- Versão 1.2.1: gate interno 9/9 negativo + 14/14 regressão + 12/12 tranche + 5/5 runtime; gate físico pendente.
+- Versão 1.2.1:
+  - gate interno: 9/9 negativo + 14/14 regressão + 12/12 tranche + 5/5 runtime;
+  - gate físico: 21/21;
+  - primeira passagem: 4.967 ms;
+  - repetições: 2.662, 2.658 e 2.654 ms;
+  - mediana das repetições: 2.658 ms para 21 Workers descartáveis (~127 ms/caso);
+  - reabertura offline específica desta versão: não repetida nesta sessão.
 
 ## Highest-value gap
-Executar o gate físico de 21 casos da versão 1.2.1. Depois, obter corpus externo e revisão humana; o legado já encontrou e eliminou dois falsos positivos.
+Obter corpus externo à linhagem do projeto e revisão humana. O gate físico e a banca interna já não são o gargalo.
 
 ## Evidence for current level
-M3 permanece correto. A versão 1.2.1 possui regressão, banca de tranche e banca negativa verdes, mas o código corrigido ainda não atravessou o aparelho e não possui corpus externo nem validação humana. Nenhum nível foi pulado.
+M3 permanece correto. A versão 1.2.1 possui regressão, banca de tranche, banca negativa e gate físico verdes, mas ainda não possui corpus externo nem validação humana. Nenhum nível foi pulado.
 
 ## Promotion candidate
 M4 — ADVERSARIAL somente após:
-1. gate físico 1.2.1;
-2. corpus externo que não pertença à linhagem do projeto;
-3. falso-positivos medidos nesse corpus;
-4. revisão humana independente.
+1. corpus externo que não pertença à linhagem do projeto;
+2. falso-positivos medidos nesse corpus;
+3. revisão humana independente.
 
 ## Changelog
 - 2026-08-31 — seed ES5, 14/14, tokenização e runtime serializado.
@@ -79,3 +84,4 @@ M4 — ADVERSARIAL somente após:
 - 2026-09-01 — versão 1.2.0 porta a tranche de infinitivo pessoal do Mass Notes: 65 lemas core, regressão 14/14 e banca congelada 12/12; nível mantido em M3.
 - 2026-09-01 — gate físico 1.2.0 aprovado no iPad alvo: 12/12; 4.774 ms na primeira passagem e 1.563–1.586 ms nas repetições; Worker descartado por caso.
 - 2026-09-02 — banca negativa do legado reproduziu 2 falsos positivos em 9 casos (`deveres`, `olhares`); guarda nominal imediata corrigiu ambos; versão 1.2.1 fechou 9/9 + 14/14 + 12/12 + 5/5; gate físico pendente.
+- 2026-09-02 — gate físico 1.2.1 aprovado no iPad alvo: 21/21; 4.967 ms na primeira passagem e 2.654–2.662 ms nas repetições; mediana ~127 ms/caso.
