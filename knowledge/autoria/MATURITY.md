@@ -1,7 +1,7 @@
 # Autoria verificável — Maturidade
 
 **LEVEL:** M3 — TESTED
-**VERSION:** 0.3.0
+**VERSION:** 0.3.1
 **LAST REVIEWED:** 2026-09-02
 **STEWARD:** ainda não nomeado
 
@@ -35,7 +35,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - cópia de recuperação fica em compartimento `localStorage` separado da folha;
 - arquivo baixável somente quando o navegador realmente oferece o caminho moderno;
 - transporte para fora do iPad 2012: PENDING;
-- protocolo de fragmentação e remontagem: 15/15 testes locais;
+- protocolo de fragmentação e remontagem S2: 18/18 testes locais;
 - geração visual de QR no iPad físico: PENDING;
 - recepção física por outro aparelho: NOT IMPLEMENTED;
 - custo e pico de memória no aparelho: UNKNOWN.
@@ -55,6 +55,21 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 ## Highest-value gap
 
 Executar o emissor QR no iPad certificado e medir rotação, pausa, descarte e reabertura offline antes de construir a câmera receptora.
+
+## Gate físico S1 recusado — 2026-09-02
+
+No iPad certificado, os números avançaram, mas o QR engasgou e os comandos `Próximo` e `Anterior` responderam com atraso. Isso separa o gargalo: Worker e agenda continuaram vivos; o desenho da matriz bloqueou a thread da interface.
+
+Correção S2:
+
+- hash completo retirado de cada quadro e preservado uma vez na carga final;
+- fragmento reduzido de 96 para 72 caracteres;
+- quadro representativo reduzido de aproximadamente 191 para 102 caracteres;
+- rotação ampliada de 700 para 1.800 ms;
+- 40 ms de respiro visual antes do cálculo da matriz;
+- chamada redundante a `clear()` removida.
+
+O S2 continua PENDING até o novo teste físico. O S1 não conta como capacidade aprovada.
 
 ## Promotion candidate
 

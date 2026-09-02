@@ -39,7 +39,7 @@
                 verification = authorship.verifyPackage(request.packageData, self.sha256);
                 if (!verification.valid) throw new Error("Pacote inválido: " + verification.reason);
                 serialized = authorship.exportPackage(request.packageData, self.sha256);
-                transfer = transport.createTransfer(serialized, self.sha256, request.chunkSize || 96);
+                transfer = transport.createTransfer(serialized, self.sha256, request.chunkSize || 72);
                 serialized = null;
                 self.postMessage({
                     type: "ready",

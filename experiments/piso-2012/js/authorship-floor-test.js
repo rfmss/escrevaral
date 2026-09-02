@@ -250,6 +250,7 @@
     function requestQrFrame(index) {
         if (!qrWorker || qrWaiting || !qrTotal) return;
         qrWaiting = true;
+        qrStatus.innerHTML = "ABRINDO BLOCO " + String(index + 1);
         qrWorker.postMessage({ type: "frame", index: index });
     }
 
@@ -257,7 +258,7 @@
         if (qrTimer) window.clearInterval(qrTimer);
         qrTimer = window.setInterval(function () {
             if (!qrPaused && !qrWaiting && qrTotal) requestQrFrame((qrIndex + 1) % qrTotal);
-        }, 700);
+        }, 1800);
     }
 
     function beginQr() {
@@ -280,27 +281,34 @@
                 qrTotal = response.total;
                 qrDetail.innerHTML = "Identidade " + response.id + ". Uma volta completa tem " + qrTotal + " blocos.";
             } else if (response.type === "frame") {
-                qrWaiting = false;
                 qrIndex = response.index;
-                if (!qrInstance) {
-                    qrInstance = new window.QRCode(qrCode, {
-                        width: 300,
-                        height: 300,
-                        colorDark: "#211d18",
-                        colorLight: "#ffffff",
-                        correctLevel: window.QRCode.CorrectLevel.Q
-                    });
-                }
-                qrInstance.clear();
-                qrInstance.makeCode(response.frame);
-                qrStatus.innerHTML = "BLOCO " + response.number + " DE " + response.total;
+                qrStatus.innerHTML = "DESENHANDO BLOCO " + response.number;
+                window.setTimeout(function () {
+                    if (!qrWorker) return;
+                    try {
+                        if (!qrInstance) {
+                            qrInstance = new window.QRCode(qrCode, {
+                                width: 300,
+                                height: 300,
+                                colorDark: "#211d18",
+                                colorLight: "#ffffff",
+                                correctLevel: window.QRCode.CorrectLevel.Q
+                            });
+                        }
+                        qrInstance.makeCode(response.frame);
+                        qrStatus.innerHTML = "BLOCO " + response.number + " DE " + response.total;
+                        qrWaiting = false;
+                    } catch (error) {
+                        failQr("O desenho do QR não terminou.");
+                    }
+                }, 40);
             } else if (response.type === "error") {
                 failQr(response.message || "O transporte não foi preparado.");
             }
         };
         loadQrLibrary(function () {
             if (!qrWorker) return;
-            qrWorker.postMessage({ type: "prepare", packageData: packageData, chunkSize: 96 });
+            qrWorker.postMessage({ type: "prepare", packageData: packageData, chunkSize: 72 });
             startQrRotation();
         });
     }

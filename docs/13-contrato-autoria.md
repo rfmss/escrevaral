@@ -171,7 +171,7 @@ Saída: lançamento com afirmações proporcionais à evidência.
 
 Cada marco só avança quando muda algo observável no mundo: código executado, teste reproduzido ou validação externa. Documento sem gate não promove maturidade.
 
-Decisão atual -> recuperação local aprovada; emissor fragmentado `S1` implementado como cápsula separada e ainda pendente no iPad físico.
+Decisão atual -> recuperação local aprovada; emissor `S1` recusado por travar o desenho no iPad; `S2` aliviado aguarda novo gate físico.
 
 Próxima ação -> abrir `Enviar por QR` no iPad, observar uma volta, pausar, avançar manualmente, fechar e repetir em modo avião.
 

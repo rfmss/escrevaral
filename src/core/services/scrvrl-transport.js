@@ -11,7 +11,7 @@
     var Encore = root.Encore = root.Encore || {};
     var ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     var CRC_TABLE = buildCrcTable();
-    var PROTOCOL = "S1";
+    var PROTOCOL = "S2";
 
     Encore.core = Encore.core || {};
     Encore.core.services = Encore.core.services || {};
@@ -178,8 +178,8 @@
         if (!isFinite(chunkSize) || chunkSize < 32 || chunkSize > 512) {
             throw new Error("tamanho-de-bloco-invalido");
         }
-        encoded = base64Encode(source);
         packageHash = hash(source);
+        encoded = packageHash + ":" + base64Encode(source);
         total = Math.ceil(encoded.length / chunkSize);
         if (total < 1 || total > 99999) throw new Error("pacote-grande-demais");
         return {
@@ -203,7 +203,6 @@
             transfer.id,
             String(index + 1),
             String(transfer.total),
-            transfer.packageHash,
             crc32(payload),
             payload
         ].join("|");
@@ -214,26 +213,25 @@
         var index;
         var total;
         var frame;
-        if (parts.length !== 7 || parts[0] !== PROTOCOL) return { valid: false, reason: "protocolo-invalido" };
+        if (parts.length !== 6 || parts[0] !== PROTOCOL) return { valid: false, reason: "protocolo-invalido" };
         index = Number(parts[2]);
         total = Number(parts[3]);
-        if (!/^[0-9a-f]{12}$/.test(parts[1]) || !/^[0-9a-f]{64}$/.test(parts[4])) {
+        if (!/^[0-9a-f]{12}$/.test(parts[1])) {
             return { valid: false, reason: "identidade-invalida" };
         }
         if (index % 1 !== 0 || total % 1 !== 0 || index < 1 || total < 1 || index > total || total > 99999) {
             return { valid: false, reason: "posicao-invalida" };
         }
-        if (!parts[6] || !/^[A-Za-z0-9+/=]+$/.test(parts[6])) return { valid: false, reason: "dados-invalidos" };
-        if (crc32(parts[6]) !== parts[5]) return { valid: false, reason: "bloco-alterado" };
+        if (!parts[5] || !/^[A-Za-z0-9+/:=]+$/.test(parts[5])) return { valid: false, reason: "dados-invalidos" };
+        if (crc32(parts[5]) !== parts[4]) return { valid: false, reason: "bloco-alterado" };
         frame = {
             valid: true,
             protocol: parts[0],
             id: parts[1],
             index: index,
             total: total,
-            packageHash: parts[4],
-            checksum: parts[5],
-            data: parts[6],
+            checksum: parts[4],
+            data: parts[5],
             raw: String(raw)
         };
         return frame;
@@ -275,14 +273,15 @@
         function add(raw) {
             var parsed = parseFrame(raw);
             var joined;
+            var packageHash;
+            var encodedPackage;
             var serialized;
             if (!parsed.valid) return { valid: false, reason: parsed.reason, complete: false };
             if (!identity) {
-                identity = { id: parsed.id, total: parsed.total, packageHash: parsed.packageHash };
+                identity = { id: parsed.id, total: parsed.total };
                 cells = new Array(parsed.total);
             }
-            if (parsed.id !== identity.id || parsed.total !== identity.total ||
-                    parsed.packageHash !== identity.packageHash) {
+            if (parsed.id !== identity.id || parsed.total !== identity.total) {
                 return { valid: false, reason: "transferencia-misturada", complete: false };
             }
             if (typeof cells[parsed.index - 1] === "string") {
@@ -296,15 +295,23 @@
             received += 1;
             if (received !== identity.total) return status({ accepted: true });
             joined = cells.join("");
+            if (!/^[0-9a-f]{64}:/.test(joined)) {
+                return { valid: false, reason: "cabecalho-final-invalido", complete: false };
+            }
+            packageHash = joined.slice(0, 64);
+            encodedPackage = joined.slice(65);
+            if (packageHash.slice(0, 12) !== identity.id) {
+                return { valid: false, reason: "identidade-final-invalida", complete: false };
+            }
             try {
-                serialized = base64Decode(joined);
+                serialized = base64Decode(encodedPackage);
             } catch (error) {
                 return { valid: false, reason: error.message || "base64-invalido", complete: false };
             }
-            if (hash(serialized) !== identity.packageHash) {
+            if (hash(serialized) !== packageHash) {
                 return { valid: false, reason: "pacote-alterado", complete: false };
             }
-            return status({ complete: true, serialized: serialized, packageHash: identity.packageHash });
+            return status({ complete: true, serialized: serialized, packageHash: packageHash });
         }
 
         function exportState() {

@@ -1,6 +1,6 @@
 # Autoria verificável — SPEC
 
-**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.3.0
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.3.1
 
 ## Missão
 
@@ -27,8 +27,9 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - aparelhos modernos podem baixar `.scrvrl`;
 - o piso 2012 guarda uma cópia serializada em compartimento local separado;
 - `Recomeçar` apaga a folha de teste, não essa cópia;
-- transporte `S1` converte o pacote para Base64 UTF-8 e divide em blocos pequenos;
-- cada bloco leva identidade curta, posição, total, hash SHA-256 do pacote e CRC-32 local;
+- transporte `S2` converte o pacote para Base64 UTF-8 e divide em blocos pequenos;
+- o hash SHA-256 viaja uma vez no início da carga remontada, não em todo QR;
+- cada bloco leva identidade curta, posição, total e CRC-32 local;
 - o emissor no iPad mantém o pacote dentro de um Worker e devolve um bloco por vez;
 - o Worker e o QR são descartados ao fechar a função;
 - o receptor pode aceitar blocos fora de ordem, ignorar repetidos e retomar uma sessão salva;
@@ -47,9 +48,11 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - câmera/receptor na interface;
 - transferência física completa do `.scrvrl` para outro aparelho, ainda em gate.
 
-## Quadro do transporte S1
+## Quadro do transporte S2
 
-`S1 | id | posição | total | SHA-256 do pacote | CRC-32 do bloco | Base64`
+`S2 | id | posição | total | CRC-32 do bloco | fragmento`
+
+A carga remontada começa com `SHA-256 do pacote | Base64`. Isso preserva a conferência final sem obrigar o iPad a redesenhar os 64 caracteres do hash em cada quadro.
 
 O CRC-32 detecta erro de leitura em um bloco; não é a prova criptográfica. O SHA-256 final é quem confirma a reconstrução exata. O QR carrega fragmentos do pacote privado, portanto esta versão deve ser usada em ambiente controlado: confidencialidade só poderá ser alegada depois de uma camada de criptografia testada.
 

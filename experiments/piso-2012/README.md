@@ -123,7 +123,7 @@ No iPad MD531GP/A, iOS 9.3.5, a sequência corrigida foi concluída:
 
 O autor confirmou a recuperação do texto e da mesma raiz, inclusive no fluxo offline, sem seleção ou digitação manual do pacote. Não foram informados tempos nem medido o pico de memória. O gate aprova recuperação local; transporte entre aparelhos permanece pendente.
 
-## Emissor QR S1 — aguardando gate físico
+## Emissor QR S1 — gate físico recusado
 
 O QR do Eskrev foi auditado no commit `d6b3851444a68921d50b8618340e4d183b6dbed8`. A ideia de blocos numerados foi preservada; módulos, Promises, câmera, clipboard e carga conjunta de bibliotecas foram recusados para o piso 2012.
 
@@ -143,3 +143,18 @@ Teste físico com texto sintético:
 6. informar quantidade de blocos e qualquer travamento ou recarregamento.
 
 Este emissor ainda não cifra o pacote. Os QR expõem fragmentos reconstruíveis a quem os escanear; até a criptografia existir, o teste deve usar texto sem valor privado.
+
+No primeiro teste físico, o contador avançou, mas o QR engasgou; `Próximo` e `Anterior` também responderam com atraso. O agendador e o Worker permaneceram ativos, mas o cálculo visual bloqueou a interface. S1 foi recusado.
+
+## Emissor QR S2 — aguardando gate físico
+
+S2 preserva a verificação final e corta trabalho repetido:
+
+- o SHA-256 completo aparece uma vez na carga remontada, em vez de viajar em todo quadro;
+- cada fragmento caiu de 96 para 72 caracteres;
+- um quadro representativo caiu de aproximadamente 191 para 102 caracteres;
+- a rotação passou de 700 para 1.800 ms;
+- a interface recebe 40 ms para mostrar o comando antes de desenhar;
+- a limpeza duplicada do QR foi removida.
+
+Repetir o mesmo teste físico. Aprovação exige QR mudando junto com o número e resposta perceptivelmente imediata de `Pausar`, `Anterior`, `Próximo` e `Fechar QR`.
