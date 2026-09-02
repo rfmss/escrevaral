@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Banca externa de ambiguidade nome/verbo, limitada aos 65 lemas já carregados pelo Encore.",
+  "origin": {
+    "repository": "UniversalDependencies/UD_Portuguese-GSD",
+    "commit": "c91edee46c9d096c684dda4848637dff5f4299e9",
+    "language": "Português brasileiro",
+    "license": "CC BY-SA 4.0",
+    "licensePath": "LICENSE.txt",
+    "annotationCaveat": "UPOS convertido de anotação manual; lemas e features automáticos segundo README do corpus.",
+    "textCaveat": "Somente janelas contextuais curtas são preservadas; o README do corpus separa a licença das anotações dos direitos do texto subjacente."
+  },
+  "cases": [
+    {
+      "id": "gsd-noun-deveres",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0043.conllu",
+      "sentId": "train-s427",
+      "tokenId": 67,
+      "corpusLemma": "dever",
+      "corpusUpos": "NOUN",
+      "manuscript": "dos poderes, dos deveres e da responsabilidade",
+      "query": "deveres",
+      "shouldFind": false,
+      "includes": [],
+      "excludes": []
+    },
+    {
+      "id": "gsd-noun-olhares",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0866.conllu",
+      "sentId": "train-s8597",
+      "tokenId": 33,
+      "corpusLemma": "olhar",
+      "corpusUpos": "NOUN",
+      "manuscript": "sob os olhares atentos do técnico",
+      "query": "olhares",
+      "shouldFind": false,
+      "includes": [],
+      "excludes": []
+    },
+    {
+      "id": "gsd-noun-andares",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0716.conllu",
+      "sentId": "train-s7115",
+      "tokenId": 28,
+      "corpusLemma": "andar",
+      "corpusUpos": "NOUN",
+      "manuscript": "um prédio de três andares no Tatuapé",
+      "query": "andares",
+      "shouldFind": false,
+      "includes": [],
+      "excludes": []
+    },
+    {
+      "id": "gsd-verb-trabalharem",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0493.conllu",
+      "sentId": "train-s4896",
+      "tokenId": 25,
+      "corpusLemma": "trabalhar",
+      "corpusUpos": "VERB",
+      "manuscript": "além de trabalharem com o equilíbrio",
+      "query": "trabalharem",
+      "shouldFind": true,
+      "includes": ["trabalhar", "Infinitivo pessoal", "3ª pessoa do plural"],
+      "excludes": ["Futuro do subjuntivo"]
+    },
+    {
+      "id": "gsd-verb-passarem",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-test-0071.conllu",
+      "sentId": "test-s702",
+      "tokenId": 3,
+      "corpusLemma": "passar",
+      "corpusUpos": "VERB",
+      "manuscript": "Ao passarem pela barreira",
+      "query": "passarem",
+      "shouldFind": true,
+      "includes": ["passar", "Infinitivo pessoal", "3ª pessoa do plural"],
+      "excludes": ["Futuro do subjuntivo"]
+    },
+    {
+      "id": "gsd-verb-receberem",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0374.conllu",
+      "sentId": "train-s3711",
+      "tokenId": 13,
+      "corpusLemma": "receber",
+      "corpusUpos": "VERB",
+      "manuscript": "após receberem um alerta",
+      "query": "receberem",
+      "shouldFind": true,
+      "includes": ["receber", "Infinitivo pessoal", "3ª pessoa do plural"],
+      "excludes": ["Futuro do subjuntivo"]
+    },
+    {
+      "id": "gsd-verb-partirem",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0342.conllu",
+      "sentId": "train-s3400",
+      "tokenId": 16,
+      "corpusLemma": "partir",
+      "corpusUpos": "VERB",
+      "manuscript": "previstos para partirem de16 horas",
+      "query": "partirem",
+      "shouldFind": true,
+      "includes": ["partir", "Infinitivo pessoal", "3ª pessoa do plural"],
+      "excludes": ["Futuro do subjuntivo"]
+    },
+    {
+      "id": "gsd-verb-chegarem",
+      "sourcePath": "not-to-release/documents/pt_gsd-ud-train-0752.conllu",
+      "sentId": "train-s7467",
+      "tokenId": 10,
+      "corpusLemma": "chegar",
+      "corpusUpos": "VERB",
+      "manuscript": "as duas só se enfrentam se chegarem à final",
+      "query": "chegarem",
+      "shouldFind": true,
+      "includes": ["chegar", "Futuro do subjuntivo", "3ª pessoa do plural"],
+      "excludes": ["Infinitivo pessoal"]
+    }
+  ]
+}
