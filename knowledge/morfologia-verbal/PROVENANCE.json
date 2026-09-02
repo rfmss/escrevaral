@@ -121,7 +121,7 @@
     "legacyRegression": "14/14",
     "frozenPersonalInfinitiveBank": "12/12",
     "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: versão 1.2.2, 29/29",
-    "maturityDecision": "M4 promovido após a banca externa reproduzir falhas, a correção fechar 48/48 casos internos/externos e a versão 1.2.2 atravessar o gate físico 29/29 no iPad alvo; M5 permanece bloqueado pelo Android KitKat e pela reabertura offline específica.",
+    "maturityDecision": "M4 promovido após a banca externa reproduzir falhas, a correção fechar 48/48 casos internos/externos e a versão 1.2.2 atravessar o gate físico 29/29 no iPad alvo. O iPad MD531GP/A com iOS 9.3.5 é o dispositivo de certificação; Android KitKat foi adiado e não bloqueia a próxima capacidade.",
     "deviceMetrics": {
       "firstRunMs": 4774,
       "repeatRunsMs": [
@@ -195,6 +195,12 @@
     "Banca humana independente permanece ausente.",
     "A guarda nominal não substitui um resolvedor lexical completo.",
     "O corpus externo usa UPOS convertido e lemas/features automáticos; não substitui revisão humana dedicada.",
-    "O gate físico equivalente no Android KitKat permanece pendente."
-  ]
+    "Android KitKat foi adiado por decisão de escopo; nenhuma compatibilidade nessa plataforma pode ser alegada."
+  ],
+  "scopeDecision": {
+    "date": "2026-09-02",
+    "certificationDevice": "iPad MD531GP/A — iOS 9.3.5 (13G36)",
+    "androidKitKat": "deferred",
+    "consequence": "A ausência de gate Android não bloqueia novas cápsulas; qualquer alegação de compatibilidade permanece restrita ao dispositivo certificado."
+  }
 }
