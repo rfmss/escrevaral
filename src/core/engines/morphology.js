@@ -45,6 +45,19 @@
         "quem": true, "onde": true, "como": true
     };
 
+    var NOMINAL_DETERMINERS = {
+        "o": true, "a": true, "os": true, "as": true,
+        "um": true, "uma": true, "uns": true, "umas": true,
+        "meu": true, "minha": true, "meus": true, "minhas": true,
+        "teu": true, "tua": true, "teus": true, "tuas": true,
+        "seu": true, "sua": true, "seus": true, "suas": true,
+        "nosso": true, "nossa": true, "nossos": true, "nossas": true,
+        "vosso": true, "vossa": true, "vossos": true, "vossas": true,
+        "este": true, "esta": true, "estes": true, "estas": true,
+        "esse": true, "essa": true, "esses": true, "essas": true,
+        "aquele": true, "aquela": true, "aqueles": true, "aquelas": true
+    };
+
     function MorphologyEngine(data, exceptionsData, tokenizer, lemmaData) {
         this.suffixTrie = {};
         this.exceptions = {};
@@ -52,7 +65,7 @@
         this.tokenizer = tokenizer || null;
         this.id = "VERB-MORPH";
         this.domain = "morfologia-verbal";
-        this.version = "1.2.0";
+        this.version = "1.2.1";
 
         var i;
         if (data) {
@@ -139,6 +152,10 @@
         var twoBefore = this._tokenBefore(tokens, index, 2);
         var threeBefore = this._tokenBefore(tokens, index, 3);
         var subject = SUBJECTS[previous] || null;
+
+        if (NOMINAL_DETERMINERS[previous]) {
+            return { nominal: true, personal: false, subject: null };
+        }
 
         if (this._hasTriggerBefore(tokens, index)) {
             return { futureSubjunctive: true, subject: subject };
