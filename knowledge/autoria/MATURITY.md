@@ -17,7 +17,10 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - evento adulterado: rejeitado;
 - elo adulterado: rejeitado;
 - sintaxe ES5 dos serviços e scripts: verificada localmente;
-- gate físico no iPad MD531GP/A, iOS 9.3.5: PARTIAL;
+- gate físico no iPad MD531GP/A, iOS 9.3.5: PASSED para recuperação local;
+- `CÓPIA GUARDADA -> Recomeçar -> Trazer cópia guardada -> IMPORTADO`: confirmado no aparelho;
+- texto e raiz recuperados sem seleção manual;
+- repetição offline: confirmada pelo autor;
 - geração do pacote chegou à tela no aparelho;
 - cópia por `execCommand` falhou e o Safari não ofereceu `Selecionar tudo`.
 
@@ -46,7 +49,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 
 ## Highest-value gap
 
-Executar o gate físico da cópia separada no iPad: guardar, recomeçar, trazer e recuperar a mesma raiz em modo avião.
+Transportar o `.scrvrl` para fora do iPad sem depender da prancheta: auditar primeiro o QR fragmentado do Eskrev e medir seu custo antes de portar.
 
 ## Promotion candidate
 

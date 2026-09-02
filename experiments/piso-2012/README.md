@@ -84,7 +84,7 @@ APROVADO no iPad alvo para:
 
 A capacidade básica do aparelho está provada. O próximo gargalo é amadurecer outra capacidade linguística, uma cápsula por vez. Nenhuma compatibilidade Android é alegada.
 
-## Piso de autoria 0.2.1 — gate físico parcial
+## Piso de autoria 0.2.1 — recuperação local aprovada
 
 `authorship-floor.html` inicia a primeira prova do outro pilar do produto:
 
@@ -114,3 +114,11 @@ Gate do pacote privado:
 O primeiro gate físico chegou a gerar o pacote, mas a cópia por `execCommand` falhou. O Safari do iOS 9 colocou o cursor no código e não ofereceu `Selecionar tudo`. Essa rota foi descartada como experiência principal.
 
 A versão 0.2.1 testa recuperação local sem seleção manual: o pacote serializado fica em uma chave separada da folha. Isso ainda não prova transporte entre aparelhos. Em navegadores modernos permanece o download; para o iPad 2012, o próximo candidato é recuperar e adaptar o QR fragmentado do Eskrev.
+
+## Evidência física da recuperação local — 2026-09-02
+
+No iPad MD531GP/A, iOS 9.3.5, a sequência corrigida foi concluída:
+
+`Guardar cópia -> CÓPIA GUARDADA -> Recomeçar -> Trazer cópia guardada -> IMPORTADO`
+
+O autor confirmou a recuperação do texto e da mesma raiz, inclusive no fluxo offline, sem seleção ou digitação manual do pacote. Não foram informados tempos nem medido o pico de memória. O gate aprova recuperação local; transporte entre aparelhos permanece pendente.

@@ -171,10 +171,10 @@ Saída: lançamento com afirmações proporcionais à evidência.
 
 Cada marco só avança quando muda algo observável no mundo: código executado, teste reproduzido ou validação externa. Documento sem gate não promove maturidade.
 
-Decisão atual -> executar o Marco 2 em fatias verificáveis, sem promover maturidade antes do gate físico.
+Decisão atual -> recuperação local do pacote aprovada no iPad; transporte entre aparelhos continua separado e pendente.
 
-Próxima ação -> guardar uma cópia separada no iPad, recomeçar e trazê-la em modo avião.
+Próxima ação -> auditar o QR fragmentado do Eskrev antes de portar qualquer código.
 
-Critério -> recuperar título, texto, número de cápsulas e a mesma raiz sem selecionar ou digitar o pacote.
+Critério -> provar que fragmentação, ordem, retomada e reconstrução preservam exatamente o `.scrvrl`, com uma cápsula descartável por bloco.
 
-Teste -> confirmar descarte do Worker e distinguir recuperação local de transporte entre aparelhos. Depois, avaliar o QR fragmentado do Eskrev como canal físico do piso 2012.
+Teste -> medir quantidade de blocos, tempo, RAM e tolerância a interrupção no iPad; nenhum conteúdo será enviado pela rede.
