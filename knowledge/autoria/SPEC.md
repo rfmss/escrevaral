@@ -1,6 +1,6 @@
 # Autoria verificável — SPEC
 
-**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.1.0
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.2.0
 
 ## Missão
 
@@ -16,12 +16,15 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 
 - serialização canônica com chaves ordenadas;
 - SHA-256 do título e texto em UTF-8;
+- segundo hash com finais de linha normalizados por `line-endings-v1`;
 - sequência iniciada em `GENESIS`;
 - cada cápsula inclui o hash da anterior;
 - eventos limitados a tipo, tempo relativo e contagens;
 - hora civil marcada como `device-declared`;
 - testemunha independente marcada como `pending`;
 - pacote privado contém o texto; cápsulas não contêm texto.
+- exportação determinística e importação verificável rodam no Worker;
+- aparelhos modernos podem baixar `.scrvrl`; o piso 2012 usa copiar e colar sem digitar hashes.
 
 ## Fora do escopo 0.1.0
 
@@ -41,3 +44,5 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 4. repetir em modo avião;
 5. rejeitar uma cópia com um caractere alterado;
 6. registrar tempos sem travamento observado.
+7. exportar, recomeçar e importar o pacote em modo avião;
+8. recuperar a mesma raiz e recusar um pacote alterado.

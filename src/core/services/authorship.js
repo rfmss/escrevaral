@@ -53,6 +53,10 @@
         return typeof value === "string" ? value : String(value || "");
     }
 
+    function normalizeText(value) {
+        return text(value).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    }
+
     function sanitizeEvent(event) {
         var source = event || {};
         return {
@@ -107,6 +111,9 @@
             document: {
                 titleHash: hash(title),
                 textHash: hash(body),
+                normalizedTitleHash: hash(normalizeText(title)),
+                normalizedTextHash: hash(normalizeText(body)),
+                normalization: "line-endings-v1",
                 titleLength: title.length,
                 characterCount: body.length
             },
@@ -164,6 +171,12 @@
         }
         for (i = 0; i < capsules.length; i += 1) {
             capsule = capsules[i];
+            if (capsule.protocol !== "scrvrl-authorship" || capsule.version !== 1) {
+                return { valid: false, reason: "protocolo-invalido", index: i };
+            }
+            if (capsule.noteId !== text(data.note.id)) {
+                return { valid: false, reason: "nota-incompativel", index: i };
+            }
             if (capsule.sequence !== i + 1) return { valid: false, reason: "sequencia-quebrada", index: i };
             if (capsule.previousHash !== previous) return { valid: false, reason: "elo-quebrado", index: i };
             expected = hash(stableStringify(copyCapsuleWithoutHash(capsule)));
@@ -177,12 +190,44 @@
         if (hash(text(data.note.text)) !== capsule.document.textHash) {
             return { valid: false, reason: "texto-alterado" };
         }
+        if (capsule.document.normalizedTitleHash &&
+                hash(normalizeText(data.note.title)) !== capsule.document.normalizedTitleHash) {
+            return { valid: false, reason: "titulo-normalizado-alterado" };
+        }
+        if (capsule.document.normalizedTextHash &&
+                hash(normalizeText(data.note.text)) !== capsule.document.normalizedTextHash) {
+            return { valid: false, reason: "texto-normalizado-alterado" };
+        }
         return {
             valid: true,
             reason: "integro",
             rootHash: previous,
             capsuleCount: capsules.length,
             witnessStatus: data.witness && data.witness.status ? data.witness.status : "pending"
+        };
+    }
+
+    function exportPackage(packageData, hashFunction) {
+        var result = verifyPackage(packageData, hashFunction);
+        if (!result.valid) throw new Error("Pacote inválido: " + result.reason);
+        return stableStringify(packageData);
+    }
+
+    function importPackage(serialized, hashFunction) {
+        var packageData;
+        var result;
+        try {
+            packageData = JSON.parse(text(serialized));
+        } catch (ignore) {
+            return { valid: false, reason: "json-invalido", packageData: null };
+        }
+        result = verifyPackage(packageData, hashFunction);
+        return {
+            valid: result.valid,
+            reason: result.reason,
+            rootHash: result.rootHash || null,
+            capsuleCount: result.capsuleCount || 0,
+            packageData: result.valid ? packageData : null
         };
     }
 
@@ -203,11 +248,14 @@
 
     var service = {
         stableStringify: stableStringify,
+        normalizeText: normalizeText,
         sanitizeEvents: sanitizeEvents,
         classifyChange: classifyChange,
         buildCapsule: buildCapsule,
         createPackage: createPackage,
-        verifyPackage: verifyPackage
+        verifyPackage: verifyPackage,
+        exportPackage: exportPackage,
+        importPackage: importPackage
     };
 
     Encore.core.services.Authorship = service;

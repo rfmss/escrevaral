@@ -30,6 +30,17 @@
             } else if (request.type === "verify") {
                 result = service.verifyPackage(request.packageData, self.sha256);
                 self.postMessage({ type: "verified", result: result, purpose: request.purpose || "normal" });
+            } else if (request.type === "export") {
+                result = service.verifyPackage(request.packageData, self.sha256);
+                if (!result.valid) throw new Error("Pacote inválido: " + result.reason);
+                self.postMessage({
+                    type: "exported",
+                    serialized: service.exportPackage(request.packageData, self.sha256),
+                    result: result
+                });
+            } else if (request.type === "import") {
+                result = service.importPackage(request.serialized, self.sha256);
+                self.postMessage({ type: "imported", result: result });
             }
         } catch (error) {
             self.postMessage({ type: "error", message: error && error.message ? error.message : String(error) });

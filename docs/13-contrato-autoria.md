@@ -2,7 +2,7 @@
 
 ## Definição do produto
 
-> O Escrevaral é uma carteira de originais verificáveis com uma oficina de escrita dentro. Exclusivo para o português brasileiro e para escritoras e escritores do Brasil.
+> O Escrevaral é uma carteira de originais verificáveis com uma oficina de escrita dentro. Feito no Brasil para quem escreve em português brasileiro.
 
 Promessa pública:
 
@@ -94,7 +94,7 @@ Saída: prova técnica de integridade local, ainda sem assinatura e sem hora ind
 ### Marco 2 — pacote privado `.scrvrl`
 
 - nota, título, histórico e cápsulas;
-- hash exato e normalizado;
+- hash exato e hash normalizado apenas para finais de linha;
 - árvore Merkle privada para provar fragmentos sem publicar a obra inteira;
 - exportar, importar e verificar offline;
 - teste de corrupção e recuperação.
@@ -171,10 +171,10 @@ Saída: lançamento com afirmações proporcionais à evidência.
 
 Cada marco só avança quando muda algo observável no mundo: código executado, teste reproduzido ou validação externa. Documento sem gate não promove maturidade.
 
-Decisão atual -> implementar o Marco 1.
+Decisão atual -> executar o Marco 2 em fatias verificáveis, sem promover maturidade antes do gate físico.
 
-Próxima ação -> abrir `experiments/piso-2012/authorship-floor.html` no iPad.
+Próxima ação -> exportar um pacote no iPad, copiá-lo, recomeçar e importá-lo em modo avião.
 
-Critério -> escrever, esperar o selo, fechar, reabrir offline, recuperar a raiz e capturar “ALTERAÇÃO PEGA”.
+Critério -> recuperar título, texto, número de cápsulas e a mesma raiz; um caractere alterado no pacote deve ser recusado.
 
-Teste -> medir partida fria, repetições e descarte do Worker.
+Teste -> medir exportação e importação; confirmar descarte do Worker e ausência de digitação manual de hashes.

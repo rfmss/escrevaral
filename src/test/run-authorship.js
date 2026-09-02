@@ -9,6 +9,10 @@
     var packageData;
     var result;
     var altered;
+    var serialized;
+    var imported;
+    var normalizedA;
+    var normalizedB;
     var cases = 0;
 
     function assert(condition, message) {
@@ -59,6 +63,7 @@
     assert(result.rootHash === second.capsuleHash, "raiz deve ser a última cápsula");
     assert(JSON.stringify(first).indexOf("Uma casa guardou") === -1, "eventos não devem guardar conteúdo");
     assert(first.process.events[0].forbiddenContent === undefined, "campos não permitidos devem ser removidos");
+    assert(first.document.normalizedTextHash === sha256(authorship.normalizeText("A casa guardou o que recebeu.")), "hash normalizado deve ser registrado");
 
     altered = JSON.parse(JSON.stringify(packageData));
     altered.note.text += "x";
@@ -72,9 +77,27 @@
     altered.capsules[1].previousHash = "quebrado";
     assert(authorship.verifyPackage(altered, sha256).reason === "elo-quebrado", "cadeia quebrada deve falhar");
 
+    altered = JSON.parse(JSON.stringify(packageData));
+    altered.note.id = "outra-nota";
+    assert(authorship.verifyPackage(altered, sha256).reason === "nota-incompativel", "identificador trocado deve falhar");
+
     assert(authorship.classifyChange(4, 7, false).kind === "insert", "inserção deve ser classificada");
     assert(authorship.classifyChange(7, 4, false).kind === "delete", "remoção deve ser classificada");
     assert(authorship.classifyChange(4, 9, true).kind === "paste", "colagem deve ser classificada");
+
+    normalizedA = authorship.normalizeText("linha um\r\nlinha dois\r");
+    normalizedB = authorship.normalizeText("linha um\nlinha dois\n");
+    assert(normalizedA === normalizedB, "normalização deve unificar finais de linha");
+    assert(sha256("linha um\r\nlinha dois\r") !== sha256("linha um\nlinha dois\n"), "hash exato deve preservar diferença de bytes");
+    assert(sha256(normalizedA) === sha256(normalizedB), "hash normalizado deve atravessar sistemas de linha");
+
+    serialized = authorship.exportPackage(packageData, sha256);
+    assert(serialized === authorship.exportPackage(packageData, sha256), "exportação deve ser determinística");
+    imported = authorship.importPackage(serialized, sha256);
+    assert(imported.valid === true && imported.rootHash === second.capsuleHash, "pacote exportado deve importar íntegro");
+    assert(imported.packageData.note.text === note.text, "importação deve recuperar o texto exato");
+    assert(authorship.importPackage("{quebrado", sha256).reason === "json-invalido", "JSON inválido deve ser recusado");
+    assert(authorship.importPackage(serialized.replace("abriu", "abriuX"), sha256).valid === false, "pacote alterado no transporte deve ser recusado");
 
     console.log("AUTORIA: " + cases + "/" + cases);
 }());

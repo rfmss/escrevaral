@@ -84,7 +84,7 @@ APROVADO no iPad alvo para:
 
 A capacidade básica do aparelho está provada. O próximo gargalo é amadurecer outra capacidade linguística, uma cápsula por vez. Nenhuma compatibilidade Android é alegada.
 
-## Piso de autoria 0.1.0 — aguardando gate físico
+## Piso de autoria 0.2.0 — aguardando gate físico
 
 `authorship-floor.html` inicia a primeira prova do outro pilar do produto:
 
@@ -101,3 +101,15 @@ Gate no iPad certificado:
 5. ativar modo avião e reabrir;
 6. obter `RECUPERADO` com a mesma raiz;
 7. repetir três vezes e registrar os tempos.
+
+Gate do pacote privado:
+
+1. depois de `REGISTRADO`, tocar em `Levar .scrvrl`;
+2. copiar o pacote selecionado sem digitar hashes;
+3. tocar em `Recomeçar`;
+4. tocar em `Trazer .scrvrl`, colar e verificar;
+5. confirmar `IMPORTADO`, o texto original e a mesma raiz;
+6. repetir em modo avião;
+7. alterar um único caractere dentro da cópia e confirmar `RECUSADO`.
+
+No piso 2012, copiar/colar é a porta de transporte porque o Safari antigo não oferece download de arquivo compatível de forma confiável. Em aparelhos com `Blob`, `URL.createObjectURL` e atributo `download`, a mesma tela oferece o arquivo `.scrvrl`.

@@ -17,7 +17,13 @@
         .proof-detail { color: #5b574d; margin-bottom: 8px; }
         .proof-hash { color: #6e685b; font-family: "Courier New", Courier, monospace; font-size: 13px; margin: 0; word-break: break-all; }
         .actions { margin-bottom: 24px; }
+        .transfer-panel { background: #efebdc; border: 1px solid #b9b29f; display: none; margin-bottom: 18px; padding: 18px; }
+        .transfer-panel textarea { min-height: 150px; }
+        .download-link { background: #4d4639; border: 1px solid #817b6d; box-sizing: border-box; color: #f7f1df; display: none; font-family: "Courier New", Courier, monospace; font-size: 16px; margin: 0 6px 8px 0; min-height: 48px; padding: 10px 14px; text-decoration: none; }
         .promise-line { border-top: 1px solid #aaa391; color: #4d4639; font-family: "Courier New", Courier, monospace; font-size: 14px; line-height: 1.7; margin-top: 38px; padding-top: 18px; text-align: center; }
+        @media screen and (max-width: 520px) {
+            .download-link { margin-right: 0; text-align: center; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -42,8 +48,22 @@
         <div class="actions">
             <button id="seal-button" type="button">Selar agora</button>
             <button id="tamper-button" class="quiet" type="button" disabled>Testar alteração</button>
+            <button id="export-button" class="quiet" type="button" disabled>Levar .scrvrl</button>
+            <button id="import-button" class="quiet" type="button">Trazer .scrvrl</button>
             <button id="reset-button" class="quiet" type="button">Recomeçar</button>
         </div>
+
+        <section id="transfer-panel" class="transfer-panel" aria-live="polite">
+            <h2 id="transfer-title">Pacote privado</h2>
+            <p id="transfer-instruction">O pacote contém o texto. Guarde como um original.</p>
+            <textarea id="package-transfer" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+            <div class="actions">
+                <button id="copy-button" type="button">Copiar pacote</button>
+                <button id="confirm-import-button" type="button">Verificar e trazer</button>
+                <a id="download-link" class="download-link" href="#">Baixar arquivo .scrvrl</a>
+                <button id="close-transfer-button" class="quiet" type="button">Fechar</button>
+            </div>
+        </section>
 
         <section class="measurements">
             <h2>Registro local</h2>

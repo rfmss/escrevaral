@@ -1,7 +1,7 @@
 # Autoria verificável — Maturidade
 
 **LEVEL:** M3 — TESTED
-**VERSION:** 0.1.0
+**VERSION:** 0.2.0
 **LAST REVIEWED:** 2026-09-02
 **STEWARD:** ainda não nomeado
 
@@ -12,7 +12,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 ## Quality
 
 - vetores SHA-256 conhecidos: 3/3;
-- protocolo de autoria: 10/10;
+- protocolo de autoria e pacote: 20/20;
 - texto adulterado: rejeitado;
 - evento adulterado: rejeitado;
 - elo adulterado: rejeitado;
@@ -26,6 +26,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - uma cápsula Worker por selo;
 - Worker descartado após resposta;
 - pacote persistido em `localStorage` somente no experimento;
+- exportação/importação no Worker; transferência por arquivo moderno ou copiar/colar legado;
 - custo e pico de memória no aparelho: UNKNOWN.
 
 ## Limites
@@ -38,7 +39,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 
 ## Highest-value gap
 
-Executar o gate físico de integridade e continuidade no iPad certificado, inclusive reabertura offline e alteração deliberada.
+Executar o gate físico de integridade, continuidade e pacote no iPad certificado, inclusive reabertura offline, exportação/importação e alteração deliberada.
 
 ## Promotion candidate
 
