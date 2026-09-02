@@ -93,8 +93,8 @@
   "evidence": {
     "legacyRegression": "14/14",
     "frozenPersonalInfinitiveBank": "12/12",
-    "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: 12/12",
-    "maturityDecision": "M3 mantido; regressões internas verdes, gate físico 1.2.1 e validação humana ainda pendentes.",
+    "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: versão 1.2.1, 21/21",
+    "maturityDecision": "M3 mantido; gates internos e físicos aprovados, corpus externo e validação humana ainda pendentes.",
     "deviceMetrics": {
       "firstRunMs": 4774,
       "repeatRunsMs": [
@@ -117,6 +117,19 @@
       ],
       "correction": "artigo ou possessivo imediatamente anterior prevalece como evidência nominal",
       "engineVersion": "1.2.1"
+    },
+    "deviceMetricsV121": {
+      "firstRunMs": 4967,
+      "repeatRunsMs": [
+        2662,
+        2658,
+        2654
+      ],
+      "repeatMedianMs": 2658,
+      "casesPerRun": 21,
+      "repeatMedianPerCaseMs": 126.6,
+      "lifecycle": "um Worker criado e descartado por caso",
+      "offlineReopen": "não repetida especificamente para a versão 1.2.1 nesta sessão"
     }
   },
   "openRisks": [
@@ -124,7 +137,6 @@
     "Heurística contextual não é parser oracional.",
     "Variação regional, registro e aceitabilidade não foram estratificados.",
     "Banca humana independente permanece ausente.",
-    "A versão 1.2.1 ainda não atravessou o gate físico de 21 casos.",
     "A guarda nominal não substitui um resolvedor lexical completo."
   ]
 }
