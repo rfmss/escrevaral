@@ -46,6 +46,19 @@ No mesmo iPad alvo, a banca congelada de infinitivo pessoal concluiu 12/12 casos
 
 A reabertura em modo avião não foi repetida especificamente para a versão 1.2.0 nesta sessão. Portanto, esta evidência aprova execução e descarte físicos da tranche; o offline permanece comprovado para a arquitetura anterior, sem extrapolação silenciosa.
 
+## Evidência física da morfologia 1.2.1 — 2026-09-02
+
+Após a banca negativa do legado reproduzir e corrigir os homógrafos nominais `deveres` e `olhares`, o gate ampliado foi executado no mesmo iPad alvo:
+
+- 21/21 casos;
+- primeira passagem: 4.967 ms;
+- repetições: 2.662, 2.658 e 2.654 ms;
+- mediana das repetições: 2.658 ms;
+- aproximadamente 127 ms por caso na mediana, incluindo criação, carga, análise e descarte do Worker;
+- um Worker descartado após cada caso.
+
+O total cresceu porque a banca passou de 12 para 21 Workers. O custo quente por caso permaneceu na mesma faixa e caiu de aproximadamente 131 para 127 ms. A reabertura em modo avião não foi repetida especificamente para a versão 1.2.1.
+
 ## Interpretação correta
 
 O gate comprova a arquitetura de roletagem no aparelho-alvo: carregar uma engine, analisar, devolver e descartar. Não comprova cobertura linguística, corpus adversarial nem qualidade normativa da morfologia.
