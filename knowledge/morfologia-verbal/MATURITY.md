@@ -1,6 +1,6 @@
 # Morfologia Verbal — Maturidade
 
-**LEVEL:** M3 — TESTED
+**LEVEL:** M4 — ADVERSARIAL
 **VERSION:** 1.2.2
 **LAST REVIEWED:** 2026-09-02
 **STEWARD:** ainda não nomeado
@@ -46,7 +46,7 @@ Cobertura total do português: UNKNOWN.
 - Corpus externo reproduziu 1 falso positivo (`três andares`) e 1 falso negativo (`Ao passarem`); ambos corrigidos na versão 1.2.2.
 - Falsos positivos além das bancas atuais: UNKNOWN.
 - Gate físico da versão 1.2.1 no iPad MD531GP/A, iOS 9.3.5: VERIFIED — 21/21.
-- Gate físico da versão 1.2.2: PENDING.
+- Gate físico da versão 1.2.2 no iPad MD531GP/A, iOS 9.3.5: VERIFIED — 29/29.
 
 ## Runtime
 - Engine + seed + exceções + lemas + tokenizador: ~18.482 bytes.
@@ -62,7 +62,14 @@ Cobertura total do português: UNKNOWN.
   - repetições: 1.586, 1.571 e 1.563 ms;
   - mediana das repetições: 1.571 ms para 12 Workers descartáveis (~131 ms/caso, incluindo criação, carga, análise e descarte);
   - reabertura offline específica desta versão: não repetida nesta sessão.
-- Versão 1.2.2: 8/8 corpus externo + 9/9 legado negativo + 14/14 regressão + 12/12 tranche + 5/5 runtime; gate físico pendente.
+- Versão 1.2.2:
+  - gate interno: 8/8 corpus externo + 9/9 legado negativo + 14/14 regressão + 12/12 tranche + 5/5 runtime;
+  - gate físico: 29/29;
+  - primeira passagem: 6.634 ms;
+  - repetições: 3.642, 3.641 e 3.642 ms;
+  - mediana das repetições: 3.642 ms para 29 Workers descartáveis (~126 ms/caso);
+  - custo quente por caso estável em relação à versão 1.2.1 (~127 ms/caso);
+  - reabertura offline específica desta versão: não repetida nesta sessão.
 - Versão 1.2.1:
   - gate interno: 9/9 negativo + 14/14 regressão + 12/12 tranche + 5/5 runtime;
   - gate físico: 21/21;
@@ -72,16 +79,16 @@ Cobertura total do português: UNKNOWN.
   - reabertura offline específica desta versão: não repetida nesta sessão.
 
 ## Highest-value gap
-Executar o gate físico de 29 casos da versão 1.2.2. Depois, decidir promoção M4 sem confundir anotação convertida com revisão humana dedicada.
+Executar o mesmo gate de runtime e descarte no Android KitKat e repetir a reabertura offline da versão 1.2.2. Em paralelo, obter revisão humana dedicada para não tratar anotação convertida como validação linguística independente.
 
 ## Evidence for current level
-M3 permanece correto por enquanto. A versão 1.2.2 atravessou uma banca externa e todas as regressões, mas o código corrigido ainda não atravessou o aparelho e a anotação externa tem limites documentados. Nenhum nível foi pulado.
+M4 é sustentado por uma banca externa que reproduziu um falso positivo e um falso negativo antes da correção, por 48/48 casos internos/externos após a correção e pelo gate físico 29/29 no iPad alvo. O custo quente permaneceu estável em ~126 ms/caso com um Worker criado e descartado por caso. Isso comprova resistência adversarial delimitada; não comprova cobertura universal, revisão humana nem o piso Android.
 
 ## Promotion candidate
-M4 — ADVERSARIAL somente após:
-1. gate físico 1.2.2;
-2. revisão do escopo e dos limites da banca externa;
-3. decisão explícita de promoção, mantendo revisão humana dedicada como lacuna.
+M5 — RUNTIME somente após:
+1. gate físico equivalente no Android KitKat;
+2. reabertura offline específica da versão 1.2.2;
+3. confirmação de que uma única cápsula permanece ativa por vez, sem regressão observável de descarte.
 
 ## Changelog
 - 2026-08-31 — seed ES5, 14/14, tokenização e runtime serializado.
@@ -90,4 +97,5 @@ M4 — ADVERSARIAL somente após:
 - 2026-09-01 — gate físico 1.2.0 aprovado no iPad alvo: 12/12; 4.774 ms na primeira passagem e 1.563–1.586 ms nas repetições; Worker descartado por caso.
 - 2026-09-02 — banca negativa do legado reproduziu 2 falsos positivos em 9 casos (`deveres`, `olhares`); guarda nominal imediata corrigiu ambos; versão 1.2.1 fechou 9/9 + 14/14 + 12/12 + 5/5; gate físico pendente.
 - 2026-09-02 — gate físico 1.2.1 aprovado no iPad alvo: 21/21; 4.967 ms na primeira passagem e 2.654–2.662 ms nas repetições; mediana ~127 ms/caso.
-- 2026-09-02 — UD Portuguese-GSD reproduziu `três andares` como falso positivo e `Ao passarem` como falso negativo; versão 1.2.2 corrigiu ambos com +259 bytes e fechou 48/48 casos internos/externos; gate físico pendente.
+- 2026-09-02 — UD Portuguese-GSD reproduziu `três andares` como falso positivo e `Ao passarem` como falso negativo; versão 1.2.2 corrigiu ambos com +259 bytes e fechou 48/48 casos internos/externos.
+- 2026-09-02 — gate físico 1.2.2 aprovado no iPad alvo: 29/29; 6.634 ms na primeira passagem e 3.641–3.642 ms nas repetições; mediana ~126 ms/caso; promoção explícita para M4 — ADVERSARIAL.
