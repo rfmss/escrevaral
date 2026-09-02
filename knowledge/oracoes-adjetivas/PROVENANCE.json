@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "engine": {
+    "id": "REL-CLAUSE",
+    "version": "1.1.0",
+    "domain": "oracoes-adjetivas"
+  },
+  "decision": {
+    "date": "2026-09-02",
+    "tranche": "que-relativo-contraido-e-complementos",
+    "reason": "Segunda cápsula escolhida para provar que o protocolo M4 da morfologia é reutilizável antes de construir o armazenamento do produto.",
+    "nonGoals": [
+      "criar parser oracional universal",
+      "cobrir todos os pronomes relativos",
+      "usar a alegação histórica 1915/1915 como evidência reproduzível",
+      "promover antes do gate físico"
+    ]
+  },
+  "sources": [
+    {
+      "id": "legacy-relative-clause-claim",
+      "role": "comportamento atribuído à engine legada",
+      "repository": "rfmss/escrevaral",
+      "auditedCommit": "816ca7ea2140f49b93a5bfaeabd0b898871760e5",
+      "claimedEvidence": "focal 22/22; bateria 1915/1915; P0=0/P1=0",
+      "status": "UNVERIFIED",
+      "limitation": "Nem relative-clause-engine.js nem a bateria 1915 aparecem na árvore GitHub do commit auditado. A afirmação documental é memória histórica, não gate atual."
+    },
+    {
+      "id": "ud-portuguese-gsd-relative-bank",
+      "role": "banca externa de relativos e conjunções integrantes",
+      "repository": "UniversalDependencies/UD_Portuguese-GSD",
+      "commit": "c91edee46c9d096c684dda4848637dff5f4299e9",
+      "language": "português brasileiro",
+      "license": "CC BY-SA 4.0",
+      "licensePath": "LICENSE.txt",
+      "paths": [
+        "not-to-release/documents/pt_gsd-ud-dev-0029.conllu",
+        "not-to-release/documents/pt_gsd-ud-dev-0042.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0668.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0670.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0934.conllu"
+      ],
+      "limitations": [
+        "acl:relcl e PRON/CCONJ sustentam detecção ou abstenção.",
+        "Os rótulos não validam sozinhos explicativa versus restritiva.",
+        "Somente janelas contextuais curtas são preservadas.",
+        "O corpus não entra no runtime ou no cache offline."
+      ]
+    }
+  ],
+  "localArtifacts": {
+    "implementation": "src/core/engines/relative-clause.js",
+    "externalBank": "src/test/fixtures/relative-clause-ud-portuguese-gsd.json",
+    "runners": [
+      "src/test/run-relative-clause.js",
+      "src/test/run-relative-clause-ud-portuguese-gsd.js"
+    ],
+    "deviceGate": [
+      "experiments/piso-2012/relative-clause-tranche.html",
+      "experiments/piso-2012/js/relative-clause-tranche-test.js",
+      "experiments/piso-2012/js/relative-clause-worker.js"
+    ]
+  },
+  "evidence": {
+    "originalBank": "11/11",
+    "externalBank": {
+      "cases": 9,
+      "baseline": "2/9",
+      "corrected": "9/9",
+      "reproduced": [
+        "falsos negativos em na/nas/duma/neste/outro",
+        "falsos positivos em sabemos que e entender que"
+      ],
+      "correction": [
+        "determinantes contraídos e outro curados",
+        "preposição relativa final separada do antecedente",
+        "formas curadas de saber e entender como introdutores de complemento",
+        "guarda comparativa delimitada"
+      ]
+    },
+    "branchSuitesAfterCorrection": "157/157",
+    "deviceStatus": "PENDING — gate de 19 casos no iPad certificado"
+  },
+  "openRisks": [
+    "Antecedentes nus sem determinante permanecem parcialmente desconhecidos.",
+    "A lista de verbos introdutores de complemento não é universal.",
+    "O escopo deliberadamente não cobre todos os pronomes relativos.",
+    "A distinção semântica explicativa/restritiva não recebeu revisão humana independente.",
+    "A bateria legada alegada como 1915/1915 não foi preservada no snapshot GitHub.",
+    "A versão 1.1.0 ainda não atravessou o gate físico no iPad."
+  ]
+}

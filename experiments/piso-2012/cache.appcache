@@ -1,11 +1,12 @@
 CACHE MANIFEST
-# encore-piso-2012-v8-external-corpus
+# encore-piso-2012-v9-relative-clause
 
 CACHE:
 index.html
 easy.html
 morphology.html
 morphology-tranche.html
+relative-clause-tranche.html
 css/probe.css
 js/probe.js
 js/easy-test.js
@@ -13,12 +14,15 @@ js/capsule-worker.js
 js/morphology-test.js
 js/morphology-worker.js
 js/morphology-tranche-test.js
+js/relative-clause-worker.js
+js/relative-clause-tranche-test.js
 data/shard-small.js
 data/shard-medium.js
 data/shard-large.js
 ../../src/core/contracts.js
 ../../src/core/services/tokenizer.js
 ../../src/core/engines/morphology.js
+../../src/core/engines/relative-clause.js
 ../../src/data/verbos-seed.js
 ../../src/data/exceptions-seed.js
 ../../src/data/verb-lemmas-core.js

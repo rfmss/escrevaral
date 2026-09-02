@@ -2,12 +2,14 @@
     "use strict";
 
     /* Escrevaral-Encore — Engine de Orações Adjetivas (ES5, baixa RAM).
-     * Portado de escrevaral (relative-clause-engine.js), aprovado por auditoria
-     * (focal 22/22, bateria 1915/1915, P0=0/P1=0). Reuso de comportamento, não cópia.
+     * Reimplementa comportamento atribuído ao legado relative-clause-engine.js.
+     * A alegação histórica 22/22 + 1915/1915 não possui bateria reproduzível no
+     * snapshot GitHub disponível e, por isso, não conta como evidência atual.
      * Política: abstém-se por padrão — só classifica como explicativa/restritiva
      * quando há evidência textual forte; senão retorna leitura ambígua (preserva a
      * intenção da escritora).
      *
+     * A versão 1.1.0 incorpora fronteiras reproduzidas no UD Portuguese-GSD.
      * Norma ES5/piso: sem Set, sem arrow, sem spread, sem regex \p{L} nem normalize.
      * Normalização de acentos feita por mapa explícito (compatível com iOS 9/KitKat).
      */
@@ -33,8 +35,15 @@
 
     var DETERMINERS = {
         "o": 1, "a": 1, "os": 1, "as": 1, "um": 1, "uma": 1, "uns": 1, "umas": 1,
+        "no": 1, "na": 1, "nos": 1, "nas": 1, "num": 1, "numa": 1, "nuns": 1, "numas": 1,
+        "dum": 1, "duma": 1, "duns": 1, "dumas": 1,
         "este": 1, "esta": 1, "estes": 1, "estas": 1, "esse": 1, "essa": 1, "esses": 1, "essas": 1,
         "aquele": 1, "aquela": 1, "aqueles": 1, "aquelas": 1, "meu": 1, "minha": 1, "meus": 1, "minhas": 1,
+        "neste": 1, "nesta": 1, "nestes": 1, "nestas": 1, "nesse": 1, "nessa": 1, "nesses": 1, "nessas": 1,
+        "naquele": 1, "naquela": 1, "naqueles": 1, "naquelas": 1,
+        "deste": 1, "desta": 1, "destes": 1, "destas": 1, "desse": 1, "dessa": 1, "desses": 1, "dessas": 1,
+        "daquele": 1, "daquela": 1, "daqueles": 1, "daquelas": 1,
+        "outro": 1, "outra": 1, "outros": 1, "outras": 1,
         "seu": 1, "sua": 1, "seus": 1, "suas": 1, "nosso": 1, "nossa": 1, "nossos": 1, "nossas": 1
     };
     var LIMITERS = { "apenas": 1, "somente": 1, "so": 1, "só": 1, "exclusivamente": 1 };
@@ -48,7 +57,15 @@
         "garantiu": 1, "imagina": 1, "imaginam": 1, "informa": 1, "informam": 1, "informou": 1, "lembra": 1, "lembram": 1,
         "nota": 1, "notam": 1, "percebe": 1, "percebem": 1, "percebeu": 1, "pensa": 1, "pensam": 1, "pensou": 1,
         "promete": 1, "prometem": 1, "prometeu": 1, "reconhece": 1, "reconhecem": 1, "responde": 1, "respondem": 1,
-        "respondeu": 1, "revela": 1, "revelam": 1, "revelou": 1, "sabe": 1, "sabem": 1, "sabia": 1
+        "respondeu": 1, "revela": 1, "revelam": 1, "revelou": 1,
+        "sei": 1, "sabe": 1, "sabemos": 1, "sabem": 1, "sabia": 1, "soube": 1, "soubemos": 1,
+        "entendo": 1, "entende": 1, "entendemos": 1, "entendem": 1, "entendeu": 1,
+        "entender": 1, "entenderam": 1
+    };
+    var RELATIVE_PREPOSITIONS = {
+        "a": 1, "ante": 1, "apos": 1, "com": 1, "contra": 1, "de": 1,
+        "desde": 1, "em": 1, "entre": 1, "para": 1, "por": 1, "sem": 1,
+        "sob": 1, "sobre": 1
     };
 
     /* Mapa de desdobramento de acentos → ASCII (equivalente ES5 ao normalize("NFD")). */
@@ -91,6 +108,23 @@
 
     function has(obj, key) {
         return Object.prototype.hasOwnProperty.call(obj, key);
+    }
+
+    function stripRelativePreposition(prefix) {
+        var tokens = words(prefix);
+        var last;
+        var pos;
+        if (!tokens.length) return prefix;
+        last = tokens[tokens.length - 1];
+        if (!has(RELATIVE_PREPOSITIONS, normalize(last))) return prefix;
+        pos = prefix.lastIndexOf(last);
+        return pos < 0 ? prefix : prefix.slice(0, pos).trim();
+    }
+
+    function isComparativeQue(prefix) {
+        var normalized = normalize(prefix);
+        if (!/(?:^| )(?:do|da|dos|das)$/.test(normalized)) return false;
+        return /(?:^| )(?:mais|menos|maior|menor|melhor|pior)(?: |$)/.test(normalized);
     }
 
     /* Antecedente: sintagma nominal antes de "que". Retorna null se "que" for
@@ -204,7 +238,9 @@
             var rawPrefix = text.slice(sentenceStart, match.index);
             var hasComma = /,\s*$/.test(rawPrefix);
             var cleanPrefix = rawPrefix.replace(/,\s*$/, "").trim();
-            var antecedent = extractAntecedent(cleanPrefix);
+            if (isComparativeQue(cleanPrefix)) continue;
+            var antecedentPrefix = stripRelativePreposition(cleanPrefix);
+            var antecedent = extractAntecedent(antecedentPrefix);
             if (!antecedent) continue;
 
             var predicate = predicateAfter(text, match.index + match[0].length);
@@ -233,7 +269,7 @@
     function RelativeClauseEngine() {
         this.id = "REL-CLAUSE";
         this.domain = "oracoes-adjetivas";
-        this.version = "1.0.0";
+        this.version = "1.1.0";
     }
 
     RelativeClauseEngine.prototype.check = function (snapshot, done) {

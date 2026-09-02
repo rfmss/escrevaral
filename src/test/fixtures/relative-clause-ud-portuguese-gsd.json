@@ -1,0 +1,81 @@
+{
+  "corpus": {
+    "repository": "UniversalDependencies/UD_Portuguese-GSD",
+    "commit": "c91edee46c9d096c684dda4848637dff5f4299e9",
+    "language": "português brasileiro",
+    "license": "CC BY-SA 4.0",
+    "scope": "janelas curtas com que relativo ou conjunção integrante; classificação semântica conservadora como ambígua",
+    "limitation": "A relação acl:relcl e a classe PRON/CCONJ sustentam detecção e abstenção; não validam sozinhas a distinção explicativa/restritiva."
+  },
+  "cases": [
+    {
+      "id": "gsd-rel-dois-antecedentes-contraidos",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-dev-0029.conllu",
+      "text": "Quais são os fatores que geram câncer nas pessoas que residem nas cidades ou no campo?",
+      "expected": [
+        { "antecedent": "os fatores", "type": "ambigua" },
+        { "antecedent": "nas pessoas", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-rel-preposicao-em",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-dev-0042.conllu",
+      "text": "Na área em que atuo.",
+      "expected": [
+        { "antecedent": "Na área", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-rel-indefinido-contraido",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-dev-0042.conllu",
+      "text": "duma agenda que obstaculiza os princípios fundamentais da prevenção da Aids.",
+      "expected": [
+        { "antecedent": "duma agenda", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-rel-outro",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0670.conllu",
+      "text": "Outro disco que participou foi Contrastes.",
+      "expected": [
+        { "antecedent": "Outro disco", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-rel-demonstrativo-contraido",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0670.conllu",
+      "text": "Neste projeto que levamos para o superintendente do Banco do Brasil, serão 20 pessoas contratadas diretamente.",
+      "expected": [
+        { "antecedent": "Neste projeto", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-complemento-entender",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0670.conllu",
+      "text": "As forças policiais vão entender que elas de fato podem apertar o gatilho.",
+      "expected": []
+    },
+    {
+      "id": "gsd-complemento-sabemos",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0668.conllu",
+      "text": "Sabemos que o Paulo tem uma importância muito grande para o grupo.",
+      "expected": []
+    },
+    {
+      "id": "gsd-relativo-seguido-de-complemento",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0668.conllu",
+      "text": "O documento cita um parecer do juiz Bitencourt, que afirma que todos os atos praticados estariam dentro do conceito amplo de gestão fraudulenta.",
+      "expected": [
+        { "antecedent": "um parecer do juiz Bitencourt", "type": "ambigua" }
+      ]
+    },
+    {
+      "id": "gsd-rel-regioes",
+      "sourceFile": "not-to-release/documents/pt_gsd-ud-train-0934.conllu",
+      "text": "As regiões que têm menos fluxo de veículos são esquecidas.",
+      "expected": [
+        { "antecedent": "As regiões", "type": "ambigua" }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # UD Portuguese-GSD — atribuição da banca
 
-A fixture `morphology-ud-portuguese-gsd.json` deriva oito anotações e
-janelas contextuais curtas de:
+As fixtures `morphology-ud-portuguese-gsd.json` e
+`relative-clause-ud-portuguese-gsd.json` derivam anotações e janelas
+contextuais curtas de:
 
 - projeto: Universal Dependencies — Portuguese GSD;
 - repositório: `UniversalDependencies/UD_Portuguese-GSD`;
@@ -11,10 +12,15 @@ janelas contextuais curtas de:
 - arquivos e identificadores de sentença: registrados em cada caso da fixture.
 
 O corpus não entra no runtime, no cache offline ou na distribuição do
-Escrevaral. A fixture existe somente para verificação reproduzível. O README
+Escrevaral. As fixtures existem somente para verificação reproduzível. O README
 da fonte informa que UPOS foi convertido de anotação manual, enquanto lemas e
 features são automáticos, e separa os direitos das anotações dos direitos do
 texto subjacente. Por isso, somente o menor contexto necessário foi preservado.
+
+Na fixture de orações adjetivas, `acl:relcl` e a distinção `PRON`/`CCONJ`
+sustentam detecção ou abstenção. Esses rótulos não provam, sozinhos, a leitura
+semântica explicativa/restritiva; os casos positivos externos permanecem
+`ambigua` quando não há evidência textual forte.
 
 Fontes:
 
