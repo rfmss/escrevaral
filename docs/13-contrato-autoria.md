@@ -173,8 +173,8 @@ Cada marco só avança quando muda algo observável no mundo: código executado,
 
 Decisão atual -> executar o Marco 2 em fatias verificáveis, sem promover maturidade antes do gate físico.
 
-Próxima ação -> exportar um pacote no iPad, copiá-lo, recomeçar e importá-lo em modo avião.
+Próxima ação -> guardar uma cópia separada no iPad, recomeçar e trazê-la em modo avião.
 
-Critério -> recuperar título, texto, número de cápsulas e a mesma raiz; um caractere alterado no pacote deve ser recusado.
+Critério -> recuperar título, texto, número de cápsulas e a mesma raiz sem selecionar ou digitar o pacote.
 
-Teste -> medir exportação e importação; confirmar descarte do Worker e ausência de digitação manual de hashes.
+Teste -> confirmar descarte do Worker e distinguir recuperação local de transporte entre aparelhos. Depois, avaliar o QR fragmentado do Eskrev como canal físico do piso 2012.

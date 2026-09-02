@@ -1,6 +1,6 @@
 # Autoria verificável — SPEC
 
-**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.2.0
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.2.1
 
 ## Missão
 
@@ -24,9 +24,12 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - testemunha independente marcada como `pending`;
 - pacote privado contém o texto; cápsulas não contêm texto.
 - exportação determinística e importação verificável rodam no Worker;
-- aparelhos modernos podem baixar `.scrvrl`; o piso 2012 usa copiar e colar sem digitar hashes.
+- aparelhos modernos podem baixar `.scrvrl`;
+- o piso 2012 guarda uma cópia serializada em compartimento local separado;
+- `Recomeçar` apaga a folha de teste, não essa cópia;
+- transferência externa do iPad 2012 será decidida após testar o QR fragmentado do legado Eskrev.
 
-## Fora do escopo 0.1.0
+## Fora do escopo 0.2.1
 
 - assinatura do autor;
 - identidade civil;
@@ -35,6 +38,7 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - registro público;
 - detecção infalível de IA ou plágio;
 - segurança contra chave roubada ou replay.
+- transporte do `.scrvrl` para fora do Safari no iOS 9.
 
 ## Critérios do gate físico
 
@@ -44,5 +48,5 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 4. repetir em modo avião;
 5. rejeitar uma cópia com um caractere alterado;
 6. registrar tempos sem travamento observado.
-7. exportar, recomeçar e importar o pacote em modo avião;
+7. guardar em compartimento separado, recomeçar e trazer o pacote em modo avião;
 8. recuperar a mesma raiz e recusar um pacote alterado.

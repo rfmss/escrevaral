@@ -48,8 +48,9 @@
         <div class="actions">
             <button id="seal-button" type="button">Selar agora</button>
             <button id="tamper-button" class="quiet" type="button" disabled>Testar alteração</button>
-            <button id="export-button" class="quiet" type="button" disabled>Levar .scrvrl</button>
-            <button id="import-button" class="quiet" type="button">Trazer .scrvrl</button>
+            <button id="export-button" class="quiet" type="button" disabled>Guardar cópia</button>
+            <button id="saved-import-button" class="quiet" type="button" disabled>Trazer cópia guardada</button>
+            <button id="import-button" class="quiet" type="button">Colar outro .scrvrl</button>
             <button id="reset-button" class="quiet" type="button">Recomeçar</button>
         </div>
 
@@ -58,7 +59,6 @@
             <p id="transfer-instruction">O pacote contém o texto. Guarde como um original.</p>
             <textarea id="package-transfer" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
             <div class="actions">
-                <button id="copy-button" type="button">Copiar pacote</button>
                 <button id="confirm-import-button" type="button">Verificar e trazer</button>
                 <a id="download-link" class="download-link" href="#">Baixar arquivo .scrvrl</a>
                 <button id="close-transfer-button" class="quiet" type="button">Fechar</button>

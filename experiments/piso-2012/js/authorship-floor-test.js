@@ -3,6 +3,7 @@
 
     var PACKAGE_KEY = "encore-authorship-floor-package-v1";
     var DRAFT_KEY = "encore-authorship-floor-draft-v1";
+    var PORTABLE_KEY = "encore-authorship-floor-portable-v1";
     var titleInput = document.getElementById("note-title");
     var textInput = document.getElementById("note-text");
     var proofWord = document.getElementById("proof-word");
@@ -16,13 +17,13 @@
     var sealButton = document.getElementById("seal-button");
     var tamperButton = document.getElementById("tamper-button");
     var exportButton = document.getElementById("export-button");
+    var savedImportButton = document.getElementById("saved-import-button");
     var importButton = document.getElementById("import-button");
     var resetButton = document.getElementById("reset-button");
     var transferPanel = document.getElementById("transfer-panel");
     var transferTitle = document.getElementById("transfer-title");
     var transferInstruction = document.getElementById("transfer-instruction");
     var packageTransfer = document.getElementById("package-transfer");
-    var copyButton = document.getElementById("copy-button");
     var confirmImportButton = document.getElementById("confirm-import-button");
     var downloadLink = document.getElementById("download-link");
     var closeTransferButton = document.getElementById("close-transfer-button");
@@ -82,6 +83,17 @@
     function writeJSON(key, value) {
         try {
             window.localStorage.setItem(key, JSON.stringify(value));
+            return true;
+        } catch (ignore) { return false; }
+    }
+
+    function readText(key) {
+        try { return window.localStorage.getItem(key) || ""; } catch (ignore) { return ""; }
+    }
+
+    function writeText(key, value) {
+        try {
+            window.localStorage.setItem(key, String(value || ""));
             return true;
         } catch (ignore) { return false; }
     }
@@ -172,12 +184,12 @@
         transferMode = mode;
         clearDownload();
         transferPanel.style.display = "block";
-        packageTransfer.readOnly = mode === "export";
-        copyButton.style.display = mode === "export" ? "inline-block" : "none";
+        packageTransfer.readOnly = false;
+        packageTransfer.style.display = mode === "export" ? "none" : "block";
         confirmImportButton.style.display = mode === "import" ? "inline-block" : "none";
         if (mode === "export") {
-            transferTitle.innerHTML = "Pacote .scrvrl pronto";
-            transferInstruction.innerHTML = "Este bloco contém o texto e a prova. Copie sem digitar nada e guarde em lugar privado.";
+            transferTitle.innerHTML = "Cópia privada guardada";
+            transferInstruction.innerHTML = "Ela ficou em um compartimento separado neste aparelho. Recomeçar não apaga essa cópia.";
         } else {
             transferTitle.innerHTML = "Trazer pacote .scrvrl";
             transferInstruction.innerHTML = "Cole aqui um pacote. Ele só substituirá a folha depois de passar na verificação.";
@@ -189,6 +201,7 @@
     function offerDownload(serialized) {
         var name;
         var blob;
+        if (/iP(?:ad|hone|od).*OS 9_/i.test(window.navigator.userAgent || "")) return;
         if (!("download" in downloadLink) || !window.Blob || !window.URL || !window.URL.createObjectURL) return;
         try {
             name = String(packageData.note.title || "original").replace(/[^a-z0-9_-]+/gi, "-").replace(/^-+|-+$/g, "") || "original";
@@ -347,12 +360,16 @@
         worker.onmessage = function (message) {
             var response = message.data || {};
             if (response.type === "exported" && response.result && response.result.valid) {
-                showTransfer("export");
-                packageTransfer.value = response.serialized;
-                packageTransfer.select();
-                offerDownload(response.serialized);
-                proofWord.innerHTML = "PACOTE PRONTO";
-                proofDetail.innerHTML = "A cópia portátil passou na verificação.";
+                if (writeText(PORTABLE_KEY, response.serialized)) {
+                    showTransfer("export");
+                    savedImportButton.disabled = false;
+                    offerDownload(response.serialized);
+                    proofWord.innerHTML = "CÓPIA GUARDADA";
+                    proofDetail.innerHTML = "O original privado passou na verificação e ficou separado da folha aberta.";
+                } else {
+                    proofWord.innerHTML = "NÃO PASSOU";
+                    proofDetail.innerHTML = "O aparelho não conseguiu guardar outra cópia local.";
+                }
             } else {
                 proofWord.innerHTML = "NÃO PASSOU";
                 proofDetail.innerHTML = "O pacote local não pôde ser exportado.";
@@ -367,27 +384,19 @@
         worker.postMessage({ type: "export", packageData: packageData });
     }
 
-    function copyExport() {
-        var copied = false;
-        if (transferMode !== "export" || !packageTransfer.value) return;
-        packageTransfer.focus();
-        packageTransfer.select();
-        try { copied = document.execCommand && document.execCommand("copy"); } catch (ignore) {}
-        transferInstruction.innerHTML = copied ?
-            "Pacote copiado. Cole onde quiser guardar o original." :
-            "O pacote está selecionado. Use Copiar no menu do iPad.";
-    }
-
     function beginImport() {
         if (worker) return;
         showTransfer("import");
     }
 
-    function importSerialized() {
-        var serialized = packageTransfer.value;
-        if (transferMode !== "import" || !serialized || worker) return;
+    function importPackageText(serialized, source) {
+        if (!serialized || worker) return;
         workerStatus.innerHTML = "sim";
-        transferInstruction.innerHTML = "Verificando conteúdo, cápsulas e cadeia...";
+        if (source === "colado") transferInstruction.innerHTML = "Verificando conteúdo, cápsulas e cadeia...";
+        proofWord.innerHTML = "VERIFICANDO";
+        proofDetail.innerHTML = source === "guardado" ?
+            "Abrindo a cópia separada neste aparelho." :
+            "Conferindo o pacote recebido.";
         worker = new window.Worker("js/authorship-worker.js");
         worker.onmessage = function (message) {
             var response = message.data || {};
@@ -417,18 +426,40 @@
                     exportButton.disabled = false;
                     closeTransfer();
                 } else {
-                    transferInstruction.innerHTML = "Importação cancelada. A folha aberta foi preservada.";
+                    if (source === "colado") transferInstruction.innerHTML = "Importação cancelada. A folha aberta foi preservada.";
+                    proofWord.innerHTML = "CANCELADO";
+                    proofDetail.innerHTML = "A folha aberta foi preservada.";
                 }
             } else {
-                transferInstruction.innerHTML = "RECUSADO: " + (imported && imported.reason ? imported.reason : "pacote inválido") + ".";
+                proofWord.innerHTML = "RECUSADO";
+                proofDetail.innerHTML = "O pacote não passou: " + (imported && imported.reason ? imported.reason : "pacote inválido") + ".";
+                if (source === "colado") transferInstruction.innerHTML = proofDetail.innerHTML;
             }
             discardWorker();
         };
         worker.onerror = function () {
             discardWorker();
-            transferInstruction.innerHTML = "NÃO PASSOU: a verificação não terminou.";
+            proofWord.innerHTML = "NÃO PASSOU";
+            proofDetail.innerHTML = "A verificação do pacote não terminou.";
+            if (source === "colado") transferInstruction.innerHTML = proofDetail.innerHTML;
         };
         worker.postMessage({ type: "import", serialized: serialized });
+    }
+
+    function importSerialized() {
+        if (transferMode !== "import") return;
+        importPackageText(packageTransfer.value, "colado");
+    }
+
+    function importSaved() {
+        var serialized = readText(PORTABLE_KEY);
+        if (!serialized) {
+            savedImportButton.disabled = true;
+            proofWord.innerHTML = "SEM CÓPIA";
+            proofDetail.innerHTML = "Ainda não há um original guardado neste compartimento.";
+            return;
+        }
+        importPackageText(serialized, "guardado");
     }
 
     function resetAll() {
@@ -454,6 +485,7 @@
         proofHash.innerHTML = "Nenhuma raiz criada.";
         tamperButton.disabled = true;
         exportButton.disabled = true;
+        savedImportButton.disabled = !readText(PORTABLE_KEY);
         closeTransfer();
         showIdle();
         titleInput.focus();
@@ -511,8 +543,8 @@
     sealButton.onclick = function () { seal(true); };
     tamperButton.onclick = testTamper;
     exportButton.onclick = exportCurrent;
+    savedImportButton.onclick = importSaved;
     importButton.onclick = beginImport;
-    copyButton.onclick = copyExport;
     confirmImportButton.onclick = importSerialized;
     closeTransferButton.onclick = closeTransfer;
     resetButton.onclick = resetAll;
@@ -521,5 +553,6 @@
         discardWorker();
     }, false);
 
+    savedImportButton.disabled = !readText(PORTABLE_KEY);
     restore();
 }(window, document));

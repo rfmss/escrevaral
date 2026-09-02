@@ -84,7 +84,7 @@ APROVADO no iPad alvo para:
 
 A capacidade básica do aparelho está provada. O próximo gargalo é amadurecer outra capacidade linguística, uma cápsula por vez. Nenhuma compatibilidade Android é alegada.
 
-## Piso de autoria 0.2.0 — aguardando gate físico
+## Piso de autoria 0.2.1 — gate físico parcial
 
 `authorship-floor.html` inicia a primeira prova do outro pilar do produto:
 
@@ -104,12 +104,13 @@ Gate no iPad certificado:
 
 Gate do pacote privado:
 
-1. depois de `REGISTRADO`, tocar em `Levar .scrvrl`;
-2. copiar o pacote selecionado sem digitar hashes;
+1. depois de `REGISTRADO`, tocar em `Guardar cópia`;
+2. confirmar `CÓPIA GUARDADA`;
 3. tocar em `Recomeçar`;
-4. tocar em `Trazer .scrvrl`, colar e verificar;
+4. tocar em `Trazer cópia guardada`;
 5. confirmar `IMPORTADO`, o texto original e a mesma raiz;
 6. repetir em modo avião;
-7. alterar um único caractere dentro da cópia e confirmar `RECUSADO`.
 
-No piso 2012, copiar/colar é a porta de transporte porque o Safari antigo não oferece download de arquivo compatível de forma confiável. Em aparelhos com `Blob`, `URL.createObjectURL` e atributo `download`, a mesma tela oferece o arquivo `.scrvrl`.
+O primeiro gate físico chegou a gerar o pacote, mas a cópia por `execCommand` falhou. O Safari do iOS 9 colocou o cursor no código e não ofereceu `Selecionar tudo`. Essa rota foi descartada como experiência principal.
+
+A versão 0.2.1 testa recuperação local sem seleção manual: o pacote serializado fica em uma chave separada da folha. Isso ainda não prova transporte entre aparelhos. Em navegadores modernos permanece o download; para o iPad 2012, o próximo candidato é recuperar e adaptar o QR fragmentado do Eskrev.
