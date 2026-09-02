@@ -60,7 +60,7 @@ A regra só deriva uma forma quando o lema está no léxico core carregado. A ve
 - origem exata das bancas e regras: [PROVENANCE.json](PROVENANCE.json);
 - gate físico da versão 1.2.0: 12/12;
 - gate físico da versão 1.2.1: 21/21 no iPad MD531GP/A com iOS 9.3.5; mediana quente de 2.658 ms (~127 ms/caso);
-- gate físico da versão 1.2.2 com 29 casos: pendente.
+- gate físico da versão 1.2.2: 29/29 no iPad MD531GP/A com iOS 9.3.5; primeira passagem de 6.634 ms; mediana quente de 3.642 ms (~126 ms/caso).
 
 ## Artefatos
 - engine: 13.593 bytes;
