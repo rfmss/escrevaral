@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# encore-authorship-floor-v1
+
+CACHE:
+authorship-floor.html
+css/probe.css
+js/authorship-floor-test.js
+js/authorship-worker.js
+../../src/vendor/js-sha256/sha256.min.js
+../../src/core/services/authorship.js
+
+NETWORK:
+*

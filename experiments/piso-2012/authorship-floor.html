@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR" manifest="authorship.appcache">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Encore — Piso de autoria</title>
+    <link rel="stylesheet" href="css/probe.css">
+    <style>
+        .authorship-page { padding-top: 32px; }
+        .authorship-page h1 { margin-bottom: 6px; }
+        .writing-paper { background: #f6f2e5; border: 1px solid #b9b29f; margin: 22px 0 16px; padding: 20px; }
+        .writing-paper input { background: transparent; border: 0; border-bottom: 1px solid #b9b29f; display: block; font-size: 23px; margin-bottom: 15px; padding: 8px 3px; width: 100%; }
+        .writing-paper textarea { background: transparent; border: 0; margin: 0; min-height: 180px; padding: 3px; }
+        .proof-box { background: #efebdc; border: 1px solid #b9b29f; border-left: 5px solid #9a5b38; margin-bottom: 16px; padding: 18px; }
+        .proof-word { font-family: "Courier New", Courier, monospace; font-size: 28px; margin-bottom: 5px; }
+        .proof-detail { color: #5b574d; margin-bottom: 8px; }
+        .proof-hash { color: #6e685b; font-family: "Courier New", Courier, monospace; font-size: 13px; margin: 0; word-break: break-all; }
+        .actions { margin-bottom: 24px; }
+        .promise-line { border-top: 1px solid #aaa391; color: #4d4639; font-family: "Courier New", Courier, monospace; font-size: 14px; line-height: 1.7; margin-top: 38px; padding-top: 18px; text-align: center; }
+    </style>
+</head>
+<body>
+    <main class="page authorship-page">
+        <p class="eyebrow">ESCREVARAL ENCORE · PISO 2012</p>
+        <h1>Escreva uma frase</h1>
+        <p class="purpose">Pare por um segundo. O texto será selado sem registrar suas teclas.</p>
+
+        <section class="writing-paper">
+            <label class="label" for="note-title">Título</label>
+            <input id="note-title" type="text" autocomplete="off" placeholder="Título obrigatório">
+            <label class="label" for="note-text">Texto</label>
+            <textarea id="note-text" spellcheck="false" placeholder="Escreva aqui..."></textarea>
+        </section>
+
+        <section class="proof-box" aria-live="polite">
+            <p id="proof-word" class="proof-word">AGUARDANDO</p>
+            <p id="proof-detail" class="proof-detail">A prova começa quando houver título e texto.</p>
+            <p id="proof-hash" class="proof-hash">Nenhuma raiz criada.</p>
+        </section>
+
+        <div class="actions">
+            <button id="seal-button" type="button">Selar agora</button>
+            <button id="tamper-button" class="quiet" type="button" disabled>Testar alteração</button>
+            <button id="reset-button" class="quiet" type="button">Recomeçar</button>
+        </div>
+
+        <section class="measurements">
+            <h2>Registro local</h2>
+            <dl>
+                <dt>Cápsulas</dt><dd id="capsule-count">0</dd>
+                <dt>Eventos sem conteúdo</dt><dd id="event-count">0</dd>
+                <dt>Tempo do último selo</dt><dd id="seal-time">—</dd>
+                <dt>Hora civil</dt><dd id="clock-status">não testemunhada</dd>
+                <dt>Cápsula residente</dt><dd id="worker-status">não</dd>
+            </dl>
+        </section>
+
+        <p class="promise-line">Editor sem IA. Texto no seu aparelho. Processo registrado. Anterioridade verificável.</p>
+    </main>
+    <noscript>Este teste precisa de JavaScript.</noscript>
+    <script src="js/authorship-floor-test.js"></script>
+</body>
+</html>
