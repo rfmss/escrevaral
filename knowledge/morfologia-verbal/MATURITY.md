@@ -79,16 +79,13 @@ Cobertura total do português: UNKNOWN.
   - reabertura offline específica desta versão: não repetida nesta sessão.
 
 ## Highest-value gap
-Executar o mesmo gate de runtime e descarte no Android KitKat e repetir a reabertura offline da versão 1.2.2. Em paralelo, obter revisão humana dedicada para não tratar anotação convertida como validação linguística independente.
+Congelar a versão 1.2.2 como primeira cápsula M4 do cofre e usar o piso já provado para amadurecer a próxima capacidade linguística. A revisão humana dedicada continua necessária antes de alegações amplas de qualidade.
 
 ## Evidence for current level
 M4 é sustentado por uma banca externa que reproduziu um falso positivo e um falso negativo antes da correção, por 48/48 casos internos/externos após a correção e pelo gate físico 29/29 no iPad alvo. O custo quente permaneceu estável em ~126 ms/caso com um Worker criado e descartado por caso. Isso comprova resistência adversarial delimitada; não comprova cobertura universal, revisão humana nem o piso Android.
 
 ## Promotion candidate
-M5 — RUNTIME somente após:
-1. gate físico equivalente no Android KitKat;
-2. reabertura offline específica da versão 1.2.2;
-3. confirmação de que uma única cápsula permanece ativa por vez, sem regressão observável de descarte.
+M5 — RUNTIME permanece futuro. Android KitKat foi adiado por decisão de escopo e não bloqueia a linha certificada no iPad; por isso, nenhuma compatibilidade Android será alegada. A promoção exige evidência nova relevante no dispositivo de referência, não repetição ornamental de gates.
 
 ## Changelog
 - 2026-08-31 — seed ES5, 14/14, tokenização e runtime serializado.
@@ -99,3 +96,4 @@ M5 — RUNTIME somente após:
 - 2026-09-02 — gate físico 1.2.1 aprovado no iPad alvo: 21/21; 4.967 ms na primeira passagem e 2.654–2.662 ms nas repetições; mediana ~127 ms/caso.
 - 2026-09-02 — UD Portuguese-GSD reproduziu `três andares` como falso positivo e `Ao passarem` como falso negativo; versão 1.2.2 corrigiu ambos com +259 bytes e fechou 48/48 casos internos/externos.
 - 2026-09-02 — gate físico 1.2.2 aprovado no iPad alvo: 29/29; 6.634 ms na primeira passagem e 3.641–3.642 ms nas repetições; mediana ~126 ms/caso; promoção explícita para M4 — ADVERSARIAL.
+- 2026-09-02 — Android KitKat adiado por decisão de escopo; iPad MD531GP/A com iOS 9.3.5 passa a ser o dispositivo de certificação e a próxima capacidade linguística deixa de ser bloqueada por uma segunda plataforma.
