@@ -78,8 +78,20 @@
   "evidence": {
     "legacyRegression": "14/14",
     "frozenPersonalInfinitiveBank": "12/12",
-    "deviceStatus": "pending para a versão 1.2.0",
-    "maturityDecision": "M3 mantido; o gate físico anterior pertence à versão 1.1.0."
+    "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: 12/12",
+    "maturityDecision": "M3 mantido; gate físico aprovado, corpus adversarial independente e revisão humana ainda ausentes.",
+    "deviceMetrics": {
+      "firstRunMs": 4774,
+      "repeatRunsMs": [
+        1586,
+        1571,
+        1563
+      ],
+      "repeatMedianMs": 1571,
+      "casesPerRun": 12,
+      "lifecycle": "um Worker criado e descartado por caso",
+      "offlineReopen": "não repetida especificamente para a versão 1.2.0 nesta sessão"
+    }
   },
   "openRisks": [
     "Cobertura limitada ao léxico core carregado.",
