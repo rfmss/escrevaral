@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "engine": {
     "id": "VERB-MORPH",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "domain": "morfologia-verbal"
   },
   "decision": {
@@ -63,6 +63,31 @@
         "analise-engine.js",
         "js/data/synonym-data.js"
       ]
+    },
+    {
+      "id": "ud-portuguese-gsd-external-bank",
+      "role": "banca externa de ambiguidade nome/verbo dentro do léxico core",
+      "repository": "UniversalDependencies/UD_Portuguese-GSD",
+      "commit": "c91edee46c9d096c684dda4848637dff5f4299e9",
+      "language": "português brasileiro",
+      "license": "CC BY-SA 4.0",
+      "licensePath": "LICENSE.txt",
+      "paths": [
+        "not-to-release/documents/pt_gsd-ud-train-0043.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0866.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0716.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0493.conllu",
+        "not-to-release/documents/pt_gsd-ud-test-0071.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0374.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0342.conllu",
+        "not-to-release/documents/pt_gsd-ud-train-0752.conllu"
+      ],
+      "limitations": [
+        "UPOS convertido de anotação manual.",
+        "Lemas e features automáticos segundo o README da fonte.",
+        "Somente janelas contextuais curtas são preservadas na fixture.",
+        "O corpus não entra no runtime ou no cache offline."
+      ]
     }
   ],
   "localArtifacts": {
@@ -72,13 +97,15 @@
     ],
     "independentBank": [
       "src/test/fixtures/morphology-personal-infinitive-evaluation.json",
-      "src/test/fixtures/morphology-legacy-false-positive.json"
+      "src/test/fixtures/morphology-legacy-false-positive.json",
+      "src/test/fixtures/morphology-ud-portuguese-gsd.json"
     ],
     "runners": [
       "src/test/run-morphology.js",
       "src/test/run-morphology-personal-infinitive.js",
       "src/test/run-runtime.js",
-      "src/test/run-morphology-legacy-false-positive.js"
+      "src/test/run-morphology-legacy-false-positive.js",
+      "src/test/run-morphology-ud-portuguese-gsd.js"
     ],
     "deviceGate": [
       "experiments/piso-2012/morphology-tranche.html",
@@ -94,7 +121,7 @@
     "legacyRegression": "14/14",
     "frozenPersonalInfinitiveBank": "12/12",
     "deviceStatus": "verified no iPad MD531GP/A com iOS 9.3.5: versão 1.2.1, 21/21",
-    "maturityDecision": "M3 mantido; gates internos e físicos aprovados, corpus externo e validação humana ainda pendentes.",
+    "maturityDecision": "M3 mantido até o gate físico 1.2.2 e decisão explícita de promoção; revisão humana dedicada continua ausente.",
     "deviceMetrics": {
       "firstRunMs": 4774,
       "repeatRunsMs": [
@@ -130,6 +157,22 @@
       "repeatMedianPerCaseMs": 126.6,
       "lifecycle": "um Worker criado e descartado por caso",
       "offlineReopen": "não repetida especificamente para a versão 1.2.1 nesta sessão"
+    },
+    "externalBank": {
+      "corpus": "UD Portuguese-GSD",
+      "cases": 8,
+      "withinLoadedLemmas": true,
+      "baseline": "6/8",
+      "corrected": "8/8",
+      "reproduced": [
+        "falso positivo: três andares -> infinitivo pessoal",
+        "falso negativo: Ao passarem -> nenhum achado"
+      ],
+      "correction": [
+        "cardinais de dois a dez como evidência nominal imediata",
+        "contração ao como introdutor de infinitivo flexionado"
+      ],
+      "engineVersion": "1.2.2"
     }
   },
   "openRisks": [
@@ -137,6 +180,8 @@
     "Heurística contextual não é parser oracional.",
     "Variação regional, registro e aceitabilidade não foram estratificados.",
     "Banca humana independente permanece ausente.",
-    "A guarda nominal não substitui um resolvedor lexical completo."
+    "A guarda nominal não substitui um resolvedor lexical completo.",
+    "A versão 1.2.2 ainda não atravessou o gate físico de 29 casos.",
+    "O corpus externo usa UPOS convertido e lemas/features automáticos; não substitui revisão humana dedicada."
   ]
 }
