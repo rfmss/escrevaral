@@ -83,3 +83,21 @@ APROVADO no iPad alvo para:
 `offline -> uma engine -> uma frase -> resposta -> descarte`
 
 A capacidade básica do aparelho está provada. O próximo gargalo é amadurecer outra capacidade linguística, uma cápsula por vez. Nenhuma compatibilidade Android é alegada.
+
+## Piso de autoria 0.1.0 — aguardando gate físico
+
+`authorship-floor.html` inicia a primeira prova do outro pilar do produto:
+
+`escrever -> debounce -> SHA-256 -> encadear -> persistir -> reabrir -> verificar adulteração`
+
+O rastro guarda tipos e quantidades de mudança, nunca teclas ou palavras. A hora do aparelho é explicitamente não testemunhada. Uma cápsula Worker calcula cada selo e é terminada após responder.
+
+Gate no iPad certificado:
+
+1. escrever título e uma frase;
+2. aguardar `REGISTRADO`;
+3. tocar em `Testar alteração` e obter `ALTERAÇÃO PEGA`;
+4. fechar a página;
+5. ativar modo avião e reabrir;
+6. obter `RECUPERADO` com a mesma raiz;
+7. repetir três vezes e registrar os tempos.

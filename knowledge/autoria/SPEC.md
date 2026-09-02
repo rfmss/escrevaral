@@ -1,0 +1,43 @@
+# Autoria verificável — SPEC
+
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.1.0
+
+## Missão
+
+Preservar integridade e continuidade do processo de escrita sem enviar o texto ou registrar teclas literais.
+
+## Entrada e saída
+
+- Entrada: nota, eventos quantitativos da sessão, raiz anterior e tempos locais.
+- Saída: cápsula SHA-256 encadeada e pacote privado `scrvrl` verificável.
+- Runtime: um Worker por selo; resposta devolvida; Worker terminado.
+
+## Protocolo atual
+
+- serialização canônica com chaves ordenadas;
+- SHA-256 do título e texto em UTF-8;
+- sequência iniciada em `GENESIS`;
+- cada cápsula inclui o hash da anterior;
+- eventos limitados a tipo, tempo relativo e contagens;
+- hora civil marcada como `device-declared`;
+- testemunha independente marcada como `pending`;
+- pacote privado contém o texto; cápsulas não contêm texto.
+
+## Fora do escopo 0.1.0
+
+- assinatura do autor;
+- identidade civil;
+- timestamp independente;
+- Merkle por fragmento;
+- registro público;
+- detecção infalível de IA ou plágio;
+- segurança contra chave roubada ou replay.
+
+## Critérios do gate físico
+
+1. selar título e texto no iPad alvo;
+2. criar e descartar o Worker;
+3. recuperar pacote e raiz depois de fechar;
+4. repetir em modo avião;
+5. rejeitar uma cópia com um caractere alterado;
+6. registrar tempos sem travamento observado.

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "service": {
+    "id": "SCRVRL-AUTHORSHIP",
+    "version": "0.1.0"
+  },
+  "productDecision": "O Escrevaral é uma carteira de originais verificáveis com uma oficina de escrita dentro, exclusiva para o português brasileiro e escritores do Brasil.",
+  "sources": [
+    {
+      "id": "escrevaral-proof-engine",
+      "role": "ritmo e histórico de escrita",
+      "status": "comportamento inventariado; código moderno não portado diretamente",
+      "localReference": "docs/01-escrevaral-core.md"
+    },
+    {
+      "id": "eskrev-authoria",
+      "role": "pacote, cadeia e assinatura",
+      "status": "contrato inventariado; ESM/WebCrypto não portados diretamente",
+      "localReference": "docs/07-eskrev.md"
+    },
+    {
+      "id": "js-sha256",
+      "role": "primitiva SHA-256 ES5 local",
+      "repository": "emn178/js-sha256",
+      "tag": "v0.11.1",
+      "commit": "7912494a5ae277660131557401b91f11f47c96d2",
+      "sourcePath": "build/sha256.min.js",
+      "license": "MIT",
+      "vendoredPath": "src/vendor/js-sha256/sha256.min.js",
+      "vendoredSha256": "520a831cf3ba0d5d0c745967fbf68926a15a82148f995686cf9e8be56c9d6dfb",
+      "physicalGate": "PENDING"
+    }
+  ],
+  "claims": {
+    "integrity": "locally tested",
+    "processContinuity": "locally tested",
+    "independentTimestamp": "not implemented",
+    "authorSignature": "not implemented",
+    "civilIdentity": "not implemented",
+    "humanOnly": "not claimed"
+  }
+}
