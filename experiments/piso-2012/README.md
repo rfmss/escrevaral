@@ -59,6 +59,19 @@ Após a banca negativa do legado reproduzir e corrigir os homógrafos nominais `
 
 O total cresceu porque a banca passou de 12 para 21 Workers. O custo quente por caso permaneceu na mesma faixa e caiu de aproximadamente 131 para 127 ms. A reabertura em modo avião não foi repetida especificamente para a versão 1.2.1.
 
+## Evidência física da morfologia 1.2.2 — 2026-09-02
+
+Após o corpus externo UD Portuguese-GSD reproduzir um falso positivo (`três andares`) e um falso negativo (`Ao passarem`), a versão corrigida atravessou o gate ampliado no mesmo iPad alvo:
+
+- 29/29 casos;
+- primeira passagem: 6.634 ms;
+- repetições: 3.642, 3.641 e 3.642 ms;
+- mediana das repetições: 3.642 ms;
+- aproximadamente 126 ms por caso na mediana, incluindo criação, carga, análise e descarte do Worker;
+- um Worker descartado após cada caso.
+
+O total cresceu com a banca de 21 para 29 Workers, mas o custo quente por caso permaneceu estável: ~127 ms na versão 1.2.1 e ~126 ms na 1.2.2. A reabertura em modo avião não foi repetida especificamente para a versão 1.2.2.
+
 ## Interpretação correta
 
 O gate comprova a arquitetura de roletagem no aparelho-alvo: carregar uma engine, analisar, devolver e descartar. Não comprova cobertura linguística, corpus adversarial nem qualidade normativa da morfologia.
