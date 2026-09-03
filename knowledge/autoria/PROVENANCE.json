@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "service": {
     "id": "SCRVRL-AUTHORSHIP",
-    "version": "0.3.1"
+    "version": "0.3.2"
   },
   "productDecision": "O Escrevaral é uma carteira de originais verificáveis com uma oficina de escrita dentro, exclusiva para o português brasileiro e escritores do Brasil.",
   "sources": [

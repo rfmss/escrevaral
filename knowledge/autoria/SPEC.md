@@ -1,6 +1,6 @@
 # Autoria verificável — SPEC
 
-**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.3.1
+**Serviço:** SCRVRL-AUTHORSHIP · **Versão:** 0.3.2
 
 ## Missão
 
@@ -30,8 +30,11 @@ Preservar integridade e continuidade do processo de escrita sem enviar o texto o
 - transporte `S2` converte o pacote para Base64 UTF-8 e divide em blocos pequenos;
 - o hash SHA-256 viaja uma vez no início da carga remontada, não em todo QR;
 - cada bloco leva identidade curta, posição, total e CRC-32 local;
-- o emissor no iPad mantém o pacote dentro de um Worker e devolve um bloco por vez;
-- o Worker e o QR são descartados ao fechar a função;
+- depois de cada selo, um único Worker prepara em segundo plano o pacote e a primeira matriz QR;
+- a thread visual recebe somente linhas binárias e desenha todos os módulos escuros em uma operação de Canvas;
+- o Worker mantém no máximo o quadro atual, o anterior e o próximo;
+- fechar o painel limpa o Canvas, mas preserva o preparo enquanto a nota não mudar;
+- editar, trocar de função ou fechar a página descarta imediatamente o Worker;
 - o receptor pode aceitar blocos fora de ordem, ignorar repetidos e retomar uma sessão salva;
 - a reconstrução só termina quando o SHA-256 do pacote completo confere.
 
@@ -67,5 +70,5 @@ O CRC-32 detecta erro de leitura em um bloco; não é a prova criptográfica. O 
 7. guardar em compartimento separado, recomeçar e trazer o pacote em modo avião;
 8. recuperar a mesma raiz e recusar um pacote alterado.
 9. abrir `Enviar por QR`, observar rotação e pausa sem travamento;
-10. fechar o QR e confirmar que a cápsula deixou de residir;
+10. fechar o QR, editar um caractere e confirmar que o preparo anterior foi descartado;
 11. repetir em modo avião.

@@ -1,8 +1,8 @@
 # Autoria verificável — Maturidade
 
 **LEVEL:** M3 — TESTED
-**VERSION:** 0.3.1
-**LAST REVIEWED:** 2026-09-02
+**VERSION:** 0.3.2
+**LAST REVIEWED:** 2026-09-03
 **STEWARD:** ainda não nomeado
 
 ## Mission
@@ -36,7 +36,9 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 - arquivo baixável somente quando o navegador realmente oferece o caminho moderno;
 - transporte para fora do iPad 2012: PENDING;
 - protocolo de fragmentação e remontagem S2: 18/18 testes locais;
-- geração visual de QR no iPad físico: PENDING;
+- Worker de matriz e exportação aquecida: 9/9 testes locais;
+- geração visual S2 no iPad físico: responsiva, porém lenta (~1,5 s por quadro);
+- geração visual S3 no iPad físico: PENDING;
 - recepção física por outro aparelho: NOT IMPLEMENTED;
 - custo e pico de memória no aparelho: UNKNOWN.
 
@@ -54,7 +56,7 @@ Criar prova privada de integridade e continuidade com baixa RAM, sem registrar o
 
 ## Highest-value gap
 
-Executar o emissor QR no iPad certificado e medir rotação, pausa, descarte e reabertura offline antes de construir a câmera receptora.
+Executar o emissor S3 no iPad certificado e medir cadência, pausa, descarte por edição e reabertura offline antes de construir a câmera receptora.
 
 ## Gate físico S1 recusado — 2026-09-02
 
@@ -69,7 +71,21 @@ Correção S2:
 - 40 ms de respiro visual antes do cálculo da matriz;
 - chamada redundante a `clear()` removida.
 
-O S2 continua PENDING até o novo teste físico. O S1 não conta como capacidade aprovada.
+## Gate físico S2 parcial — 2026-09-03
+
+O S2 deixou de engasgar, mas levou aproximadamente 1,5 segundo por quadro. A correção tornou o fluxo utilizável, porém não atingiu a cadência desejada. O gargalo restante é o cálculo da matriz QR no fluxo visual.
+
+Correção S3 candidata:
+
+- pacote e primeira matriz começam a ser preparados depois do selo, antes do pedido;
+- qrcode.js calcula a matriz dentro do Worker, sem DOM;
+- a interface recebe apenas linhas binárias e faz um único preenchimento de Canvas;
+- somente quadro anterior, atual e próximo podem permanecer aquecidos;
+- rotação-alvo de 1.000 ms;
+- `Guardar cópia` reaproveita o pacote já verificado e codificado;
+- qualquer edição descarta o preparo obsoleto.
+
+S3 permanece PENDING até o teste físico. S1 e S2 não contam como transporte aprovado.
 
 ## Promotion candidate
 

@@ -146,7 +146,7 @@ Este emissor ainda não cifra o pacote. Os QR expõem fragmentos reconstruíveis
 
 No primeiro teste físico, o contador avançou, mas o QR engasgou; `Próximo` e `Anterior` também responderam com atraso. O agendador e o Worker permaneceram ativos, mas o cálculo visual bloqueou a interface. S1 foi recusado.
 
-## Emissor QR S2 — aguardando gate físico
+## Emissor QR S2 — gate físico parcial
 
 S2 preserva a verificação final e corta trabalho repetido:
 
@@ -157,4 +157,28 @@ S2 preserva a verificação final e corta trabalho repetido:
 - a interface recebe 40 ms para mostrar o comando antes de desenhar;
 - a limpeza duplicada do QR foi removida.
 
-Repetir o mesmo teste físico. Aprovação exige QR mudando junto com o número e resposta perceptivelmente imediata de `Pausar`, `Anterior`, `Próximo` e `Fechar QR`.
+No iPad certificado, o S2 deixou de engasgar, mas levou aproximadamente 1,5 segundo por quadro. A interface melhorou; a cadência permaneceu insuficiente. S2 não foi promovido.
+
+## Emissor QR S3 — aquecimento limitado
+
+S3 antecipa somente o trabalho que será usado:
+
+- depois do selo, o Worker verifica e segmenta o pacote sem bloquear a escrita;
+- a primeira matriz QR fica pronta antes do toque;
+- qrcode.js calcula módulos no Worker; a interface apenas pinta o Canvas;
+- o cache admite no máximo anterior, atual e próximo;
+- a rotação-alvo cai para 1.000 ms;
+- `Guardar cópia` reaproveita o transporte já preparado;
+- editar a nota descarta imediatamente o preparo antigo;
+- outra função encerra o Worker antes de abrir sua própria cápsula.
+
+Gate físico S3:
+
+1. selar e esperar `QR pronto` em `Trabalho em segundo plano`;
+2. tocar em `Enviar por QR` e observar o tempo até o primeiro quadro;
+3. acompanhar dez trocas e estimar a cadência;
+4. testar `Pausar`, `Anterior`, `Próximo` e `Fechar QR`;
+5. editar um caractere e confirmar que o estado volta a `não` até o novo selo;
+6. repetir em modo avião.
+
+Aprovação exige primeiro quadro sem espera perceptível, comandos imediatos e cadência próxima de um quadro por segundo. O teste continua sintético porque os QR ainda não são cifrados.

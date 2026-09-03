@@ -171,10 +171,10 @@ Saída: lançamento com afirmações proporcionais à evidência.
 
 Cada marco só avança quando muda algo observável no mundo: código executado, teste reproduzido ou validação externa. Documento sem gate não promove maturidade.
 
-Decisão atual -> recuperação local aprovada; emissor `S1` recusado por travar o desenho no iPad; `S2` aliviado aguarda novo gate físico.
+Decisão atual -> recuperação local aprovada; `S1` travou; `S2` respondeu, mas levou cerca de 1,5 segundo por quadro; `S3` prepara pacote e matriz fora da thread visual.
 
-Próxima ação -> abrir `Enviar por QR` no iPad, observar uma volta, pausar, avançar manualmente, fechar e repetir em modo avião.
+Próxima ação -> selar, esperar `QR pronto`, abrir `Enviar por QR`, observar uma volta, pausar, avançar manualmente, editar e repetir em modo avião.
 
-Critério -> provar que o emissor desenha um bloco por vez, permanece responsivo e descarta seu Worker ao fechar. A reconstrução exata já está coberta por testes locais; a leitura óptica completa virá com o receptor.
+Critério -> primeiro quadro praticamente imediato, cadência próxima de um segundo, comandos responsivos e descarte do preparo assim que o texto mudar. A reconstrução exata já está coberta por testes locais; a leitura óptica completa virá com o receptor.
 
-Teste -> registrar quantidade de blocos, fluidez, pausa, avanço, fechamento e reabertura offline; nenhum conteúdo será enviado pela rede. Como ainda não há criptografia, usar texto sintético nesta prova.
+Teste -> registrar quantidade de blocos, tempo até o primeiro, cadência, pausa, avanço, edição e reabertura offline; nenhum conteúdo será enviado pela rede. Como ainda não há criptografia, usar texto sintético nesta prova.

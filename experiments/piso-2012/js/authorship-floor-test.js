@@ -55,11 +55,14 @@
     var downloadUrl = "";
     var qrWorker = null;
     var qrTimer = null;
-    var qrInstance = null;
     var qrIndex = 0;
     var qrTotal = 0;
     var qrWaiting = false;
     var qrPaused = false;
+    var qrReady = false;
+    var qrWarmed = false;
+    var qrOpen = false;
+    var qrPendingExport = false;
 
     function monotonicNow() {
         if (window.performance && typeof window.performance.now === "function") return window.performance.now();
@@ -192,20 +195,37 @@
         resetButton.disabled = locked;
     }
 
-    function stopQr() {
+    function clearQrDrawing() {
+        qrCode.innerHTML = "";
+    }
+
+    function stopQrRotation() {
         if (qrTimer) window.clearInterval(qrTimer);
         qrTimer = null;
+    }
+
+    function discardQrTransport() {
+        stopQrRotation();
         if (qrWorker) {
             try { qrWorker.postMessage({ type: "discard" }); } catch (ignore) {}
             qrWorker.terminate();
         }
         qrWorker = null;
-        qrInstance = null;
+        qrReady = false;
+        qrWarmed = false;
+        qrPendingExport = false;
+        qrWaiting = false;
+        qrTotal = 0;
+        if (!worker) workerStatus.innerHTML = "não";
+    }
+
+    function closeQr() {
+        stopQrRotation();
+        qrOpen = false;
         qrWaiting = false;
         qrPaused = false;
         qrIndex = 0;
-        qrTotal = 0;
-        qrCode.innerHTML = "";
+        clearQrDrawing();
         qrPanel.style.display = "none";
         qrPauseButton.innerHTML = "Pausar";
         qrPauseButton.disabled = false;
@@ -215,36 +235,21 @@
     }
 
     function failQr(message) {
-        if (qrTimer) window.clearInterval(qrTimer);
-        qrTimer = null;
-        if (qrWorker) qrWorker.terminate();
-        qrWorker = null;
+        var exporting = qrPendingExport;
+        discardQrTransport();
         qrWaiting = false;
         qrPaused = true;
-        qrStatus.innerHTML = "NÃO PASSOU";
-        qrDetail.innerHTML = message;
-        qrPauseButton.disabled = true;
-        qrBackButton.disabled = true;
-        qrNextButton.disabled = true;
-    }
-
-    function loadQrLibrary(done) {
-        var script;
-        if (window.QRCode) {
-            done();
-            return;
+        if (exporting) {
+            proofWord.innerHTML = "NÃO PASSOU";
+            proofDetail.innerHTML = "A cópia preparada não pôde ser entregue.";
         }
-        script = document.getElementById("encore-qrcode-library");
-        if (!script) {
-            script = document.createElement("script");
-            script.id = "encore-qrcode-library";
-            script.src = "../../src/vendor/qrcodejs/qrcode.min.js";
-            document.getElementsByTagName("head")[0].appendChild(script);
+        if (qrOpen) {
+            qrStatus.innerHTML = "NÃO PASSOU";
+            qrDetail.innerHTML = message;
+            qrPauseButton.disabled = true;
+            qrBackButton.disabled = true;
+            qrNextButton.disabled = true;
         }
-        script.onload = done;
-        script.onerror = function () {
-            failQr("A biblioteca local de QR não foi carregada.");
-        };
     }
 
     function requestQrFrame(index) {
@@ -258,19 +263,59 @@
         if (qrTimer) window.clearInterval(qrTimer);
         qrTimer = window.setInterval(function () {
             if (!qrPaused && !qrWaiting && qrTotal) requestQrFrame((qrIndex + 1) % qrTotal);
-        }, 1800);
+        }, 1000);
     }
 
-    function beginQr() {
-        if (!packageData || worker || qrWorker || qrButton.disabled || !window.Worker) return;
-        closeTransfer();
-        setWritingLocked(true);
-        qrPanel.style.display = "block";
-        qrPauseButton.disabled = false;
-        qrBackButton.disabled = false;
-        qrNextButton.disabled = false;
-        qrStatus.innerHTML = "PREPARANDO";
-        qrDetail.innerHTML = "A cápsula de transporte está montando blocos pequenos.";
+    function drawQrMatrix(response) {
+        var canvases = qrCode.getElementsByTagName("canvas");
+        var canvas = canvases.length ? canvases[0] : document.createElement("canvas");
+        var context;
+        var count = Number(response.size || 0);
+        var quiet = 4;
+        var side = 300;
+        var scale;
+        var offset;
+        var row;
+        var y;
+        var x;
+        if (!count || !response.rows || response.rows.length !== count) throw new Error("matriz-inválida");
+        if (canvas.width !== side) canvas.width = side;
+        if (canvas.height !== side) canvas.height = side;
+        if (!canvases.length) qrCode.appendChild(canvas);
+        canvas.setAttribute("aria-label", "Bloco QR " + String(response.number) + " de " + String(response.total));
+        context = canvas.getContext("2d");
+        scale = Math.floor(side / (count + quiet * 2));
+        offset = Math.floor((side - count * scale) / 2);
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, side, side);
+        context.fillStyle = "#211d18";
+        context.beginPath();
+        for (y = 0; y < count; y += 1) {
+            row = response.rows[y];
+            for (x = 0; x < count; x += 1) {
+                if (row.charAt(x) === "1") context.rect(offset + x * scale, offset + y * scale, scale, scale);
+            }
+        }
+        context.fill();
+    }
+
+    function finishPreparedExport(serialized) {
+        if (writeText(PORTABLE_KEY, serialized)) {
+            showTransfer("export");
+            savedImportButton.disabled = false;
+            offerDownload(serialized);
+            proofWord.innerHTML = "CÓPIA GUARDADA";
+            proofDetail.innerHTML = "O original preparado em segundo plano ficou separado da folha aberta.";
+        } else {
+            proofWord.innerHTML = "NÃO PASSOU";
+            proofDetail.innerHTML = "O aparelho não conseguiu guardar outra cópia local.";
+        }
+    }
+
+    function prepareQrTransport() {
+        if (!packageData || worker || !window.Worker) return;
+        discardQrTransport();
+        workerStatus.innerHTML = "preparando QR";
         qrWorker = new window.Worker("js/scrvrl-transport-worker.js");
         qrWorker.onerror = function () {
             failQr("A cápsula de transporte encontrou um erro.");
@@ -278,39 +323,54 @@
         qrWorker.onmessage = function (message) {
             var response = message.data || {};
             if (response.type === "ready") {
+                qrReady = true;
                 qrTotal = response.total;
-                qrDetail.innerHTML = "Identidade " + response.id + ". Uma volta completa tem " + qrTotal + " blocos.";
-            } else if (response.type === "frame") {
+                if (qrOpen) {
+                    qrDetail.innerHTML = "Identidade " + response.id + ". Uma volta completa tem " + qrTotal + " blocos.";
+                    requestQrFrame(0);
+                }
+                if (qrPendingExport) qrWorker.postMessage({ type: "export" });
+            } else if (response.type === "warmed") {
+                qrWarmed = true;
+                workerStatus.innerHTML = "QR pronto";
+            } else if (response.type === "matrix") {
                 qrIndex = response.index;
-                qrStatus.innerHTML = "DESENHANDO BLOCO " + response.number;
+                qrStatus.innerHTML = "MOSTRANDO BLOCO " + response.number;
                 window.setTimeout(function () {
                     if (!qrWorker) return;
                     try {
-                        if (!qrInstance) {
-                            qrInstance = new window.QRCode(qrCode, {
-                                width: 300,
-                                height: 300,
-                                colorDark: "#211d18",
-                                colorLight: "#ffffff",
-                                correctLevel: window.QRCode.CorrectLevel.Q
-                            });
-                        }
-                        qrInstance.makeCode(response.frame);
+                        drawQrMatrix(response);
                         qrStatus.innerHTML = "BLOCO " + response.number + " DE " + response.total;
                         qrWaiting = false;
+                        if (qrOpen && !qrTimer) startQrRotation();
                     } catch (error) {
                         failQr("O desenho do QR não terminou.");
                     }
-                }, 40);
+                }, 20);
+            } else if (response.type === "exported") {
+                qrPendingExport = false;
+                finishPreparedExport(response.serialized);
+                workerStatus.innerHTML = qrWarmed ? "QR pronto" : "preparando QR";
             } else if (response.type === "error") {
                 failQr(response.message || "O transporte não foi preparado.");
             }
         };
-        loadQrLibrary(function () {
-            if (!qrWorker) return;
-            qrWorker.postMessage({ type: "prepare", packageData: packageData, chunkSize: 72 });
-            startQrRotation();
-        });
+        qrWorker.postMessage({ type: "prepare", packageData: packageData, chunkSize: 72 });
+    }
+
+    function beginQr() {
+        if (!packageData || worker || qrButton.disabled || !window.Worker) return;
+        closeTransfer();
+        setWritingLocked(true);
+        qrOpen = true;
+        qrPanel.style.display = "block";
+        qrPauseButton.disabled = false;
+        qrBackButton.disabled = false;
+        qrNextButton.disabled = false;
+        qrStatus.innerHTML = qrWarmed ? "ABRINDO" : "PREPARANDO";
+        qrDetail.innerHTML = qrWarmed ? "O primeiro bloco já estava pronto." : "A cápsula está preparando o primeiro bloco.";
+        if (!qrWorker) prepareQrTransport();
+        if (qrReady && !qrWaiting) requestQrFrame(0);
     }
 
     function clearDownload() {
@@ -384,6 +444,7 @@
     }
 
     function handleChange() {
+        discardQrTransport();
         exportButton.disabled = true;
         qrButton.disabled = true;
         tamperButton.disabled = true;
@@ -429,6 +490,7 @@
         worker.onmessage = function (message) {
             var response = message.data || {};
             var elapsed = Math.round(monotonicNow() - sealStarted);
+            var prepareAfter = false;
             if (response.type === "sealed" && response.result && response.result.valid) {
                 packageData = response.packageData;
                 writeJSON(PACKAGE_KEY, packageData);
@@ -446,6 +508,7 @@
                     tamperButton.disabled = false;
                     exportButton.disabled = false;
                     qrButton.disabled = false;
+                    prepareAfter = true;
                 }
             } else {
                 proofWord.innerHTML = "NÃO PASSOU";
@@ -453,6 +516,7 @@
             }
             discardWorker();
             activeSnapshot = null;
+            if (prepareAfter) prepareQrTransport();
             if (titleInput.value !== note.title || textInput.value !== note.text) scheduleSeal();
         };
         worker.postMessage({
@@ -478,6 +542,7 @@
     function testTamper() {
         var altered;
         if (!packageData || worker) return;
+        discardQrTransport();
         altered = JSON.parse(JSON.stringify(packageData));
         altered.note.text += "x";
         workerStatus.innerHTML = "sim";
@@ -494,46 +559,27 @@
                 proofDetail.innerHTML = "O verificador aceitou uma cópia alterada.";
             }
             discardWorker();
+            prepareQrTransport();
         };
         worker.onerror = function () {
             discardWorker();
             proofWord.innerHTML = "NÃO PASSOU";
             proofDetail.innerHTML = "A verificação não terminou.";
+            prepareQrTransport();
         };
         worker.postMessage({ type: "verify", packageData: altered, purpose: "tamper" });
     }
 
     function exportCurrent() {
+        var prepared = qrWarmed;
         if (!packageData || worker || exportButton.disabled) return;
-        workerStatus.innerHTML = "sim";
-        proofWord.innerHTML = "PREPARANDO";
-        proofDetail.innerHTML = "O pacote privado está sendo verificado antes de sair.";
-        worker = new window.Worker("js/authorship-worker.js");
-        worker.onmessage = function (message) {
-            var response = message.data || {};
-            if (response.type === "exported" && response.result && response.result.valid) {
-                if (writeText(PORTABLE_KEY, response.serialized)) {
-                    showTransfer("export");
-                    savedImportButton.disabled = false;
-                    offerDownload(response.serialized);
-                    proofWord.innerHTML = "CÓPIA GUARDADA";
-                    proofDetail.innerHTML = "O original privado passou na verificação e ficou separado da folha aberta.";
-                } else {
-                    proofWord.innerHTML = "NÃO PASSOU";
-                    proofDetail.innerHTML = "O aparelho não conseguiu guardar outra cópia local.";
-                }
-            } else {
-                proofWord.innerHTML = "NÃO PASSOU";
-                proofDetail.innerHTML = "O pacote local não pôde ser exportado.";
-            }
-            discardWorker();
-        };
-        worker.onerror = function () {
-            discardWorker();
-            proofWord.innerHTML = "NÃO PASSOU";
-            proofDetail.innerHTML = "A preparação do pacote não terminou.";
-        };
-        worker.postMessage({ type: "export", packageData: packageData });
+        if (!qrWorker) prepareQrTransport();
+        qrPendingExport = true;
+        proofWord.innerHTML = prepared ? "ENTREGANDO" : "PREPARANDO";
+        proofDetail.innerHTML = prepared ?
+            "A cópia já estava pronta em segundo plano." :
+            "A cópia será guardada assim que o preparo terminar.";
+        if (qrReady && qrWorker) qrWorker.postMessage({ type: "export" });
     }
 
     function beginImport() {
@@ -543,6 +589,7 @@
 
     function importPackageText(serialized, source) {
         if (!serialized || worker) return;
+        discardQrTransport();
         workerStatus.innerHTML = "sim";
         if (source === "colado") transferInstruction.innerHTML = "Verificando conteúdo, cápsulas e cadeia...";
         proofWord.innerHTML = "VERIFICANDO";
@@ -554,6 +601,7 @@
             var response = message.data || {};
             var imported = response.result;
             var accept = true;
+            var prepareAfter = false;
             if (response.type === "imported" && imported && imported.valid && imported.packageData) {
                 if ((titleInput.value || textInput.value) && window.confirm) {
                     accept = window.confirm("O pacote é íntegro. Substituir a folha aberta por este original?");
@@ -578,6 +626,7 @@
                     exportButton.disabled = false;
                     qrButton.disabled = false;
                     closeTransfer();
+                    prepareAfter = true;
                 } else {
                     if (source === "colado") transferInstruction.innerHTML = "Importação cancelada. A folha aberta foi preservada.";
                     proofWord.innerHTML = "CANCELADO";
@@ -589,6 +638,7 @@
                 if (source === "colado") transferInstruction.innerHTML = proofDetail.innerHTML;
             }
             discardWorker();
+            if (prepareAfter) prepareQrTransport();
         };
         worker.onerror = function () {
             discardWorker();
@@ -617,6 +667,7 @@
 
     function resetAll() {
         discardWorker();
+        discardQrTransport();
         if (sealTimer) window.clearTimeout(sealTimer);
         if (draftTimer) window.clearTimeout(draftTimer);
         removeStored(PACKAGE_KEY);
@@ -674,6 +725,7 @@
                 "A prova local sobreviveu ao fechamento.";
             clockStatus.innerHTML = "aguarda testemunha externa";
             if (draftDiffers) scheduleSeal();
+            else prepareQrTransport();
         } else {
             showIdle();
         }
@@ -718,12 +770,13 @@
         qrPauseButton.innerHTML = "Retomar";
         requestQrFrame((qrIndex + 1) % qrTotal);
     };
-    qrCloseButton.onclick = stopQr;
+    qrCloseButton.onclick = closeQr;
     resetButton.onclick = resetAll;
     window.addEventListener("pagehide", function () {
         persistDraft();
         discardWorker();
-        stopQr();
+        closeQr();
+        discardQrTransport();
     }, false);
 
     savedImportButton.disabled = !readText(PORTABLE_KEY);

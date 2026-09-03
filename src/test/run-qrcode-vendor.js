@@ -53,7 +53,7 @@
     });
     qr.makeCode(frame);
     assert(target.markup.indexOf("<table") !== -1, "fallback sem canvas deve desenhar tabela");
-    assert(target.title === frame, "quadro S1 deve chegar inteiro ao gerador");
+    assert(target.title === frame, "quadro S2 deve chegar inteiro ao gerador");
 
     console.log("QRCODE VENDOR: " + cases + "/" + cases);
 }());
