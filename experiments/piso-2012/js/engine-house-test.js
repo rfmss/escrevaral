@@ -12,6 +12,7 @@
     var metricLag = document.getElementById("metric-lag");
     var metricResident = document.getElementById("metric-resident");
     var resultList = document.getElementById("result-list");
+    var cacheMarker = "encore-engine-house-offline-v11";
     var activeWorker = null;
     var activeTimeout = null;
     var running = false;
@@ -152,7 +153,24 @@
         runCase(0);
     }
 
-    function readyOffline(message) {
+    function hasInstalledCache() {
+        try {
+            return window.localStorage.getItem(cacheMarker) === "1";
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function markInstalledCache() {
+        try {
+            window.localStorage.setItem(cacheMarker, "1");
+        } catch (error) {
+            /* AppCache continua válido mesmo se o armazenamento local estiver bloqueado. */
+        }
+    }
+
+    function readyOffline(message, remember) {
+        if (remember) markInstalledCache();
         cacheStatus.innerHTML = message || "pronto";
         testButton.disabled = false;
         testButton.innerHTML = "Testar agora";
@@ -163,11 +181,16 @@
         if (event.type === "checking") cacheStatus.innerHTML = "verificando";
         if (event.type === "downloading") cacheStatus.innerHTML = "guardando arquivos";
         if (event.type === "progress") cacheStatus.innerHTML = "guardando " + event.loaded + " de " + event.total;
-        if (event.type === "cached" || event.type === "noupdate") readyOffline("pronto");
-        if (event.type === "updateready") readyOffline("atualização pronta");
+        if (event.type === "cached" || event.type === "noupdate") readyOffline("pronto", true);
+        if (event.type === "updateready") readyOffline("atualização pronta", true);
         if (event.type === "error") {
-            cacheStatus.innerHTML = "não ficou offline";
-            testHelp.innerHTML = "Recarregue com a internet ligada.";
+            if (hasInstalledCache() || window.applicationCache.status === window.applicationCache.IDLE) {
+                readyOffline("pronto — sem rede", false);
+                testHelp.innerHTML = "O pacote instalado está sendo usado. Pode testar.";
+            } else {
+                cacheStatus.innerHTML = "não ficou offline";
+                testHelp.innerHTML = "Recarregue com a internet ligada.";
+            }
         }
     }
 
@@ -192,8 +215,8 @@
     var i;
     for (i = 0; i < events.length; i += 1) cacheEvent(events[i]);
     for (i = 0; i < eventNames.length; i += 1) window.applicationCache.addEventListener(eventNames[i], cacheEvent, false);
-    if (window.applicationCache.status === window.applicationCache.IDLE) readyOffline("pronto");
-    if (window.applicationCache.status === window.applicationCache.UPDATEREADY) readyOffline("atualização pronta");
+    if (window.applicationCache.status === window.applicationCache.IDLE) readyOffline("pronto", true);
+    if (window.applicationCache.status === window.applicationCache.UPDATEREADY) readyOffline("atualização pronta", true);
 
     window.addEventListener("pagehide", stopWorker, false);
 }());

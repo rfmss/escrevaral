@@ -63,4 +63,14 @@ Na próxima sessão com o iPad MD531GP/A, iOS 9.3.5:
 
 O gate automático executa as sete oficinas em sequência, mantém no máximo um Worker residente, mede tempo e atraso visual e não exige digitação.
 
+No Safari 9, a tentativa de consultar uma atualização do manifesto sem rede também
+dispara o evento `error`. Isso não significa que o cache instalado foi perdido. O
+gate grava a conclusão da instalação e, numa recarga offline, distingue a falha da
+consulta remota da ausência real do pacote. A interface então mostra
+`pronto — sem rede` e permite executar a prova.
+
+O endereço encurtado serve apenas para a primeira entrada online. Em modo avião,
+deve-se recarregar a página final que já está aberta; o encurtador não faz parte do
+pacote offline.
+
 Somente depois desse gate o runtime poderá receber evidência física. Nenhuma engine muda de maturidade por este trabalho.

@@ -20,7 +20,9 @@
         ["manifest-tem-worker", manifest.indexOf("src/core/engine-capsule-worker.js") !== -1],
         ["gate-um-toque", /id="test-button"/.test(floorHtml) && /runCase\(0\)/.test(floorScript)],
         ["gate-sete-oficinas", (floorScript.match(/id: "[A-Z-]+"/g) || []).length === 7],
-        ["gate-descarta-worker", /activeWorker\.terminate\(\)/.test(floorScript)]
+        ["gate-descarta-worker", /activeWorker\.terminate\(\)/.test(floorScript)],
+        ["gate-lembra-cache-instalado", /localStorage\.setItem\(cacheMarker, "1"\)/.test(floorScript)],
+        ["gate-distingue-erro-offline", /pronto — sem rede/.test(floorScript) && /hasInstalledCache\(\)/.test(floorScript)]
     ];
     var manifestPaths = manifest.split(/\r?\n/).filter(function (line) {
         return line && line.charAt(0) !== "#" && line !== "CACHE:" && line !== "NETWORK:" && line !== "*" && line !== "CACHE MANIFEST";
