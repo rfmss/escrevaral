@@ -52,7 +52,7 @@ Essa mudança será feita por engine, com banca de equivalência. Não será tra
 
 Na próxima sessão com o iPad MD531GP/A, iOS 9.3.5:
 
-1. Abrir online e aguardar o AppCache concluir.
+1. Abrir `experiments/piso-2012/engine-house.html` online e aguardar o AppCache concluir.
 2. Ativar modo avião, fechar e reabrir a página.
 3. Testar primeiro Decolonial e Sintaxe, as cápsulas mais pesadas.
 4. Confirmar resultado, escrita responsiva e ausência de recarga.
@@ -60,5 +60,7 @@ Na próxima sessão com o iPad MD531GP/A, iOS 9.3.5:
 6. Editar o manuscrito durante uma lente e confirmar o descarte da análise antiga.
 7. Percorrer Anterior/Próximo numa oficina com vários achados.
 8. Repetir a morfologia 29/29 por causa do tokenizador 1.0.1.
+
+O gate automático executa as sete oficinas em sequência, mantém no máximo um Worker residente, mede tempo e atraso visual e não exige digitação.
 
 Somente depois desse gate o runtime poderá receber evidência física. Nenhuma engine muda de maturidade por este trabalho.

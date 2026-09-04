@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" manifest="cache.appcache">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Encore — Casa das Oficinas</title>
+    <script>
+        (function () {
+            "use strict";
+            window.__engineHouseCacheEvents = [];
+            if (!window.applicationCache) return;
+            var names = ["checking", "downloading", "progress", "cached", "noupdate", "updateready", "obsolete", "error"];
+            var i;
+            function remember(event) {
+                window.__engineHouseCacheEvents.push({
+                    type: event.type,
+                    loaded: typeof event.loaded === "number" ? event.loaded : 0,
+                    total: typeof event.total === "number" ? event.total : 0
+                });
+            }
+            for (i = 0; i < names.length; i += 1) {
+                window.applicationCache.addEventListener(names[i], remember, false);
+            }
+        }());
+    </script>
+    <link rel="stylesheet" href="css/probe.css">
+</head>
+<body>
+    <div class="page">
+        <div class="masthead">
+            <p class="eyebrow">ESCREVARAL ENCORE</p>
+            <h1>Casa das oficinas</h1>
+            <p class="purpose">Um toque. Sete oficinas. Uma cápsula de cada vez.</p>
+        </div>
+
+        <div class="status-board" role="status" aria-live="polite">
+            <p><span class="label">Offline</span> <span id="cache-status">preparando…</span></p>
+            <p><span class="label">Oficina</span> <span id="workshop-status">aguardando</span></p>
+            <p><span class="label">Na memória</span> <span id="resident-status">0</span></p>
+        </div>
+
+        <div class="test-area">
+            <button id="test-button" type="button" disabled>Preparando o teste…</button>
+            <p id="test-help">Espere o aviso “pronto”. Você não precisa digitar nada.</p>
+        </div>
+
+        <div class="measurements">
+            <h2 id="verdict">AINDA NÃO TESTADO</h2>
+            <dl>
+                <dt>Oficinas aprovadas</dt><dd id="metric-passed">0 de 7</dd>
+                <dt>Maior tempo</dt><dd id="metric-slowest">—</dd>
+                <dt>Maior atraso da tela</dt><dd id="metric-lag">—</dd>
+                <dt>Máximo na memória</dt><dd id="metric-resident">0</dd>
+            </dl>
+            <ol id="result-list" class="event-log"></ol>
+        </div>
+
+        <div class="instructions">
+            <h2>Depois do primeiro PASSOU</h2>
+            <ol>
+                <li>Ative o modo avião.</li>
+                <li>Feche esta página.</li>
+                <li>Abra novamente o mesmo link.</li>
+                <li>Toque em “Testar novamente”.</li>
+            </ol>
+        </div>
+    </div>
+    <noscript>Esta prova precisa de JavaScript.</noscript>
+    <script src="js/engine-house-test.js"></script>
+</body>
+</html>

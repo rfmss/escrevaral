@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# encore-piso-2012-v9-relative-clause
+# encore-piso-2012-v10-engine-house
 
 CACHE:
 index.html
@@ -7,6 +7,7 @@ easy.html
 morphology.html
 morphology-tranche.html
 relative-clause-tranche.html
+engine-house.html
 css/probe.css
 js/probe.js
 js/easy-test.js
@@ -16,6 +17,7 @@ js/morphology-worker.js
 js/morphology-tranche-test.js
 js/relative-clause-worker.js
 js/relative-clause-tranche-test.js
+js/engine-house-test.js
 data/shard-small.js
 data/shard-medium.js
 data/shard-large.js
@@ -23,9 +25,18 @@ data/shard-large.js
 ../../src/core/services/tokenizer.js
 ../../src/core/engines/morphology.js
 ../../src/core/engines/relative-clause.js
+../../src/core/engine-capsule-worker.js
+../../src/core/engines/decolonial.js
+../../src/core/engines/rima-metro.js
+../../src/core/engines/voz-estilistica.js
+../../src/core/engines/pontuacao.js
+../../src/core/engines/sintaxe.js
 ../../src/data/verbos-seed.js
 ../../src/data/exceptions-seed.js
 ../../src/data/verb-lemmas-core.js
+../../src/data/decolonial-data.js
+../../src/data/syntax-data.js
+../../src/data/norma-data.js
 
 NETWORK:
 *
