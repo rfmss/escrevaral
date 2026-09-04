@@ -1,8 +1,9 @@
 CACHE MANIFEST
-# escrevaral-encore-offline-v1-capsulas
+# escrevaral-encore-offline-v2-caderno-local
 
 CACHE:
 index.html
+src/core/services/notebook.js
 src/core/engine-capsule-worker.js
 src/core/contracts.js
 src/core/services/tokenizer.js
