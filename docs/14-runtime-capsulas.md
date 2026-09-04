@@ -50,7 +50,7 @@ Essa mudança será feita por engine, com banca de equivalência. Não será tra
 
 ## Gate físico no iPad certificado
 
-Na próxima sessão com o iPad MD531GP/A, iOS 9.3.5:
+Roteiro completo para o iPad MD531GP/A, iOS 9.3.5:
 
 1. Abrir `experiments/piso-2012/engine-house.html` online e aguardar o AppCache concluir.
 2. Ativar modo avião, fechar e reabrir a página.
@@ -73,4 +73,24 @@ O endereço encurtado serve apenas para a primeira entrada online. Em modo aviã
 deve-se recarregar a página final que já está aberta; o encurtador não faz parte do
 pacote offline.
 
-Somente depois desse gate o runtime poderá receber evidência física. Nenhuma engine muda de maturidade por este trabalho.
+### Evidência física em 3 de setembro de 2026 (BRT)
+
+Dispositivo informado pelo autor: iPad MD531GP/A, iOS 9.3.5 (13G36), Safari.
+
+| Estado | Oficinas | Maior tempo | Maior atraso da tela | Máximo residente |
+|---|---:|---:|---:|---:|
+| Online, após instalação v11 | 7/7 | 218 ms | 3 ms | 1 |
+| Modo avião, após recarregar a página | 7/7 | 214 ms | 2 ms | 1 |
+| Modo avião, após encerrar e reabrir o Safari | 7/7 | 221 ms | 4 ms | 1 |
+
+O terceiro ensaio descartou o contexto JavaScript anterior e reconstruiu página,
+orquestrador e Workers a partir do armazenamento local. Isso verifica no aparelho o
+cache offline, a execução sequencial das sete oficinas e o descarte das cápsulas.
+
+Limites da medição: `Máximo residente` é o contador de Workers controlado pelo
+orquestrador, não uma leitura da RAM do sistema; `Maior atraso` é medido por um
+pulso de 100 ms, não por um profiler do iOS. Alternância rápida, cancelamento por
+edição e navegação entre achados continuam como gates interativos separados.
+
+O runtime de cápsulas recebeu evidência física para o piso 2012. Isso não promove
+automaticamente a maturidade linguística de nenhuma engine.
