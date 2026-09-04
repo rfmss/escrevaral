@@ -34,8 +34,8 @@
 
     /* Contrato de engine:
      * Uma engine é um objeto { id, domain, version, check(snapshot, done) }.
-     * check() é SEMPRE assíncrono por contrato (chama done(findings)) para que
-     * o runtime possa executar UM engine por vez (roletagem, baixa RAM) sem travar.
+     * check() devolve por callback, mas pode calcular de forma síncrona. O isolamento
+     * da thread principal pertence à cápsula Worker, não a este contrato.
      */
     Encore.contracts = {
         Finding: Finding,
@@ -47,4 +47,6 @@
             });
         }
     };
-})(typeof global !== "undefined" ? global : window);
+})(typeof global !== "undefined" ? global :
+    (typeof window !== "undefined" ? window :
+        (typeof self !== "undefined" ? self : this)));

@@ -4,11 +4,11 @@
 
 ## Pilares do Encore
 
-- **Democrático / retrocompatível**: roda em iPad 2012 (iOS 9) e Android 4 (KitKat / Chromium 30).
-- **Baixa RAM / simples**: mede **um engine por vez** (roletagem ao acionar a análise).
+- **Piso certificado**: iPad MD531GP/A, iOS 9.3.5 (13G36). Android KitKat está adiado.
+- **Baixa RAM / simples**: recursos ficam no cache em disco; uma oficina por vez entra na RAM.
 - **Offline total** a partir do primeiro acesso.
 - **Future-proof**: spec pura + unidades módulo recriáveis, sem acoplamento a framework.
-- **Visual**: organização estilo Standard Notes + look-and-feel "IA writing".
+- **Produto**: carteira de originais verificáveis com uma oficina PT-BR dentro; nenhuma IA roda no editor.
 
 ## Mapa da linhagem
 
@@ -41,6 +41,7 @@ Mini-PWAs: pomodoro, bloco (notas), nota (publicação)
 | [11-sistema-supervisao-cognitiva.md](11-sistema-supervisao-cognitiva.md) | Sistema de Supervisão Cognitiva — Antiprompt (regras de trabalho do autor) |
 | [12-licao-scaffold-agents.md](12-licao-scaffold-agents.md) | Lição aprendida — padrão de scaffold com agents do Antigravity (reuso documentado) |
 | [13-contrato-autoria.md](13-contrato-autoria.md) | Contrato de autoria, limites probatórios e plano de voo completo |
+| [14-runtime-capsulas.md](14-runtime-capsulas.md) | Cache offline em disco, uma oficina na RAM e gate físico do runtime |
 
 ## Catálogo de engines (inventário das 5 fontes)
 

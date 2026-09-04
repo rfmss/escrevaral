@@ -3,8 +3,8 @@
 
     /* Escrevaral-Encore — Runtime de engines (ES5, baixa RAM).
      * Princípio "um engine por vez" (roletagem): nunca roda todas as engines
-     * simultaneamente. O runtime executa UM engine por chamada e devolve via callback
-     * (não bloqueia a thread principal — crítico no piso iPad 2012 / Android 4.4).
+     * simultaneamente. Este runtime legado serializa chamadas, mas não promete
+     * isolamento da thread principal. A interface usa uma cápsula Worker descartável.
      */
 
     var Encore = global.Encore = global.Encore || {};

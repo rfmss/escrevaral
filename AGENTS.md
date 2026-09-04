@@ -11,16 +11,23 @@ Regra-mãe em ação aqui: **determinar se algo precisa ser melhorado ou colocad
 
 ## Contexto do projeto
 
-- **Escrevaral-Encore**: nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → Mass Notes → Antigravity). Offline, democrática (iPad 2012/iOS 9 + Android 4/KitKat), baixa RAM, future-proof, visual "Standard Notes + IA writing".
+- **Escrevaral-Encore**: carteira de originais verificáveis com uma oficina de escrita dentro. O dispositivo de certificação é o iPad MD531GP/A com iOS 9.3.5 (13G36). Android KitKat está adiado e não sustenta alegação atual de compatibilidade.
 - Comece pelo [`docs/index.md`](docs/index.md) — documento-mestre por seção.
 - **ANTES de portar/importar engines de projetos antigos, leia [`catalogo/index.md`](catalogo/index.md)**: inventário das 5 fontes e mapa de decisão por domínio. Regra: escolher a versão mais madura por domínio; reuso de comportamento, não cópia bruta de bases duplicadas.
-- Código em `src/` (ES5). Primeira engine: morfologia verbal (`src/core/engines/morphology.js`), M3, seed 11 formas.
+- Código em `src/` (ES5). Morfologia verbal (`src/core/engines/morphology.js`) está em M4; os demais níveis devem ser lidos nos respectivos `MATURITY.md`.
 - Maturidade por engine em `knowledge/<domínio>/MATURITY.md` (modelo M0–M7). Níveis não podem ser pulados; sem evidência → NO PROMOTION.
 - Conversas NÃO são memória institucional; o estado verdadeiro é o persistido no repo.
 
 ## Convenção técnica-alvo (ao construir código)
 
 - ES5 puro, sem framework/bundler/`import`-`export` quando o alvo for browser legado.
-- Um engine por vez (roletagem ao acionar a análise) — baixa RAM.
-- Contrato de engine: `check(snapshot, context, callback) → findings[]` (ver docs/03).
-- Offline-first: tudo o que for carregar, prever 1º acesso.
+- Uma oficina por vez: arquivos podem ficar no cache em disco, mas somente a cápsula selecionada entra na RAM.
+- Contrato local de engine: `check(snapshot, callback)`; o contexto pertence a `snapshot.context`. Callback não implica cálculo assíncrono: o isolamento da interface é responsabilidade do Worker.
+- Offline-first: todos os recursos precisam entrar no cache no primeiro acesso. Cache em disco não autoriza carregamento antecipado na RAM.
+- A interface mostra um achado por vez. Enquanto as engines não tiverem cursor próprio, isso não significa que o cálculo parou no primeiro achado.
+
+## Modo de trabalho
+
+- Padrão para arquitetura, implementação e revisão: `gpt-5.6-sol`, esforço `high`.
+- Usar `xhigh` apenas em criptografia, certificação de autoria ou revisão arquitetural de alto impacto.
+- Trabalho mecânico e localizado pode usar `medium`, desde que não reabra decisões estruturais.

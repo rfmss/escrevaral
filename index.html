@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" manifest="encore.appcache">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -212,39 +212,14 @@
 <div id="out"></div>
 </div>
 
-<script src="src/core/contracts.js"></script>
-<script src="src/core/runtime.js"></script>
-<script src="src/data/verbos-seed.js"></script>
-<script src="src/core/services/tokenizer.js"></script>
-<script src="src/core/engines/morphology.js"></script>
-<script src="src/core/engines/relative-clause.js"></script>
-<script src="src/data/decolonial-data.js"></script>
-<script src="src/core/engines/decolonial.js"></script>
-<script src="src/core/engines/rima-metro.js"></script>
-<script src="src/core/engines/voz-estilistica.js"></script>
-<script src="src/core/engines/pontuacao.js"></script>
-<script src="src/data/syntax-data.js"></script>
-<script src="src/data/norma-data.js"></script>
-<script src="src/core/engines/sintaxe.js"></script>
 <script>
 (function () {
-  var Encore = window.Encore;
   var out = document.getElementById("out");
   var area = document.getElementById("text");
   var activeEngine = null;
-
-  var morph = new Encore.core.engines.MorphologyEngine(
-    Encore.data.verbosSeed,
-    Encore.data.exceptionsSeed,
-    Encore.core.services.Tokenizer
-  );
-  Encore.runtime.register(morph);
-  Encore.runtime.register(new Encore.core.engines.RelativeClauseEngine());
-  Encore.runtime.register(new Encore.core.engines.DecolonialEngine(Encore.data.decolonialData));
-  Encore.runtime.register(new Encore.core.engines.RimaLabEngine());
-  Encore.runtime.register(new Encore.core.engines.VoiceEngine());
-  Encore.runtime.register(new Encore.core.engines.PunctuationEngine());
-  Encore.runtime.register(new Encore.core.engines.SintaxeEngine());
+  var activeWorker = null;
+  var activeTimer = null;
+  var requestId = 0;
 
   var emptyMsg = {
     "VERB-MORPH":  "(nenhum verbo do vocabulário identificado)",
@@ -272,17 +247,133 @@
   }
 
   function deactivate() {
-    if (!activeEngine) return;
-    area.classList.remove("heavy");
+    if (activeWorker) {
+      activeWorker.terminate();
+      activeWorker = null;
+    }
+    if (activeTimer) {
+      window.clearTimeout(activeTimer);
+      activeTimer = null;
+    }
     var prev = document.querySelector("button.active");
     if (prev) prev.classList.remove("active");
     activeEngine = null;
   }
 
   function activate(engineId, btn) {
-    area.classList.add("heavy");
     btn.classList.add("active");
     activeEngine = engineId;
+  }
+
+  function showMessage(message, className) {
+    var box = document.createElement("div");
+    box.className = className || "muted";
+    box.textContent = message;
+    render(box);
+  }
+
+  function addNavigation(box, data) {
+    var nav;
+    var previous;
+    var status;
+    var next;
+
+    if (!data.total || data.total < 2 || !activeWorker) return;
+    nav = document.createElement("div");
+    nav.className = "bar";
+    previous = document.createElement("button");
+    previous.textContent = "Anterior";
+    previous.disabled = data.index <= 1;
+    status = document.createElement("span");
+    status.textContent = data.index + " de " + data.total;
+    next = document.createElement("button");
+    next.textContent = "Próximo";
+    next.disabled = data.index >= data.total;
+    previous.addEventListener("click", function () {
+      if (activeWorker) activeWorker.postMessage({ type: "previous" });
+    });
+    next.addEventListener("click", function () {
+      if (activeWorker) activeWorker.postMessage({ type: "next" });
+    });
+    nav.appendChild(previous);
+    nav.appendChild(status);
+    nav.appendChild(next);
+    box.appendChild(nav);
+  }
+
+  function analyze(engineId, text) {
+    var currentRequest = ++requestId;
+    var worker;
+
+    if (!window.Worker) {
+      showMessage("Este navegador não oferece a cápsula de análise.", "muted");
+      return;
+    }
+
+    showMessage("Analisando uma coisa por vez…", "muted");
+    worker = new Worker("src/core/engine-capsule-worker.js");
+    activeWorker = worker;
+    activeTimer = window.setTimeout(function () {
+      if (currentRequest !== requestId || engineId !== activeEngine) return;
+      if (activeWorker) activeWorker.terminate();
+      activeWorker = null;
+      activeTimer = null;
+      showMessage("A oficina demorou demais e foi fechada para proteger a escrita.", "muted");
+    }, 20000);
+
+    worker.onmessage = function (event) {
+      var data = event.data || {};
+      var findings;
+      var box;
+      var finding;
+      var item;
+
+      if (currentRequest !== requestId || engineId !== activeEngine) return;
+      if (activeTimer) {
+        window.clearTimeout(activeTimer);
+        activeTimer = null;
+      }
+      if (data.type === "error") {
+        activeWorker = null;
+        showMessage("Não foi possível carregar esta oficina.", "muted");
+        return;
+      }
+
+      findings = data.findings || [];
+      if (!findings.length) {
+        activeWorker = null;
+        showMessage(emptyMsg[engineId] || "(nada a analisar)", "muted");
+        return;
+      }
+
+      if (data.total < 2) activeWorker = null;
+
+      box = document.createElement("div");
+      finding = findings[0];
+      item = document.createElement("div");
+      item.className = clsMap[engineId] || "finding";
+      item.textContent = finding.message;
+      box.appendChild(item);
+      addNavigation(box, data);
+      render(box);
+    };
+
+    worker.onerror = function () {
+      if (currentRequest !== requestId || engineId !== activeEngine) return;
+      if (activeTimer) {
+        window.clearTimeout(activeTimer);
+        activeTimer = null;
+      }
+      activeWorker = null;
+      showMessage("Não foi possível carregar esta oficina.", "muted");
+    };
+
+    worker.postMessage({
+      type: "analyze",
+      requestId: currentRequest,
+      engineId: engineId,
+      text: text
+    });
   }
 
   var buttons = document.querySelectorAll("button[data-engine]");
@@ -299,26 +390,16 @@
       deactivate();
       activate(engineId, this);
 
-      var text = area.innerText || area.textContent;
-      var box = document.createElement("div");
-      var self = this;
-      Encore.runtime.runOne(engineId, text, function (findings) {
-        if (!findings.length) {
-          box.className = "muted";
-          box.textContent = emptyMsg[engineId] || "(nada a analisar)";
-        } else {
-          var cls = clsMap[engineId] || "finding";
-          findings.forEach(function (f) {
-            var d = document.createElement("div");
-            d.className = cls;
-            d.textContent = f.message;
-            box.appendChild(d);
-          });
-        }
-        render(box);
-      });
+      analyze(engineId, area.innerText || area.textContent);
     });
   }
+
+  area.addEventListener("input", function () {
+    if (!activeEngine) return;
+    requestId++;
+    deactivate();
+    out.innerHTML = "";
+  });
 })();
 </script>
 </body>

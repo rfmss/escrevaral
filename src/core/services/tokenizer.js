@@ -8,7 +8,7 @@
      */
 
     /* Preserva hífen/apóstrofo quando unem letras (clíticos: fazê-lo, dar-te-ei). */
-    var Regex = /[a-zA-ZáàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ]+(?:[-'][a-zA-ZáàãâéêíóôõúçÁÀÃÂÉÊÍÓÔÕÚÇ]+)*/g;
+    var Regex = /[a-zA-ZáàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ]+(?:[-'’][a-zA-ZáàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ]+)*/g;
 
     function tokenize(text) {
         if (!text) return [];
@@ -26,9 +26,9 @@
     var Encore = global.Encore = global.Encore || {};
     Encore.core = Encore.core || {};
     Encore.core.services = Encore.core.services || {};
-    Encore.core.services.Tokenizer = { tokenize: tokenize };
+    Encore.core.services.Tokenizer = { version: "1.0.1", tokenize: tokenize };
 
     if (typeof module !== "undefined" && module.exports) {
-        module.exports = { tokenize: tokenize };
+        module.exports = { version: "1.0.1", tokenize: tokenize };
     }
 })(typeof global !== "undefined" ? global : (typeof window !== "undefined" ? window : this));

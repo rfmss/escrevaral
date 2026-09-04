@@ -1,0 +1,24 @@
+CACHE MANIFEST
+# escrevaral-encore-offline-v1-capsulas
+
+CACHE:
+index.html
+src/core/engine-capsule-worker.js
+src/core/contracts.js
+src/core/services/tokenizer.js
+src/core/engines/morphology.js
+src/core/engines/relative-clause.js
+src/core/engines/decolonial.js
+src/core/engines/rima-metro.js
+src/core/engines/voz-estilistica.js
+src/core/engines/pontuacao.js
+src/core/engines/sintaxe.js
+src/data/verbos-seed.js
+src/data/exceptions-seed.js
+src/data/verb-lemmas-core.js
+src/data/decolonial-data.js
+src/data/syntax-data.js
+src/data/norma-data.js
+
+NETWORK:
+*

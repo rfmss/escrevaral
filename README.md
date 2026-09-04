@@ -1,6 +1,6 @@
 # Escrevaral-Encore
 
-Nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → Mass Notes → Antigravity). **Documento-mestre** do patrimônio e blueprint de construção: offline, democrática (rodando em iPad 2012 / Android 4), baixa RAM, future-proof.
+Carteira de originais verificáveis com uma oficina de escrita dentro. O patrimônio da linhagem Vereda → Uairer → Escrevaral → Mass Notes → Antigravity é reconstruído em ES5, offline e com baixa RAM.
 
 ## Conteúdo
 
@@ -10,10 +10,12 @@ Nova encarnação da linhagem de escrita (Vereda → Uairer → Escrevaral → M
 
 ## Estado
 
-- Repositório novo (a partir de hoje) para proteger o patrimônio documentado contra perda.
-- **Primeiro engine**: morfologia verbal (VERB-MORPH), ES5, M3 (testado), seed 11 formas. Rode `node src/test/run-morphology.js` e `node src/test/run-runtime.js`.
-- Prova no browser: abra `index.html` (file://), digite "cantávamos..." e clique em Analisar.
+- Dispositivo de certificação: iPad MD531GP/A, iOS 9.3.5 (13G36). Android KitKat está adiado.
+- Morfologia verbal (VERB-MORPH): ES5, M4, com gate físico 29/29 no iPad certificado.
+- A página não carrega todas as engines na abertura. Cada oficina entra em um Worker próprio, mostra um achado por vez e sai da RAM ao trocar a lente ou editar o texto.
+- Rode toda a regressão local com `node src/test/run-all.js`.
+- A prova no browser deve ser servida por HTTP(S); Workers não são uma garantia em `file://`.
 
 ## Pilares
 
-Democrático · Offline total · Baixa RAM (um engine por vez) · Retrocompatível (2012) · Future-proof · Visual Standard Notes + "IA writing".
+Editor sem IA · Texto no aparelho · Processo registrado · Anterioridade verificável · Oficina PT-BR · Um recurso por vez.

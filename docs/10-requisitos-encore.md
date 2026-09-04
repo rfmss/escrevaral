@@ -7,10 +7,10 @@ Requisitos de produto consolidados (dos pedidos do autor + apanhado das features
 ## Pilha e compatibilidade
 
 ```
-R0.1 Democrático: roda em iPad 2012 (iOS 9) e Android 4 (KitKat / Chromium 30).
-R0.2 ES5 puro, sem framework/bundler; um engine por vez (roletagem ao acionar análise).
+R0.1 Piso certificado: iPad MD531GP/A, iOS 9.3.5 (13G36). Android KitKat está adiado.
+R0.2 ES5 puro, sem framework/bundler; uma oficina por vez entra na RAM.
 R0.3 Baixa RAM: dados compactos, processing leve por lente.
-R0.4 Offline total a partir do primeiro acesso (pré-carregar tudo no 1º uso).
+R0.4 Offline total a partir do primeiro acesso: cache em disco não significa scripts residentes na RAM.
 R0.5 Future-proof: spec pura separada do código; unidades módulo recriáveis.
 ```
 
@@ -81,9 +81,9 @@ R6.6 Link para as redes do criador (a definir depois).
 
 ## Prioridade de construção sugerida ("ondas do rio rumo ao oceano")
 
-1. **Represa**: contrato de engine ES5 + 1 engine piloto (morfologia verbal) + dados.
-2. **Encanamento**: editor de escrita ES5 offline + typewriter sound.
-3. **Nível do tanque**: demais engines linguísticas (um por vez) + modo leitura.
-4. **Navegação**: pomodoro com trava + modo foco + som ambiente/frequências.
-5. **Carteira**: QR sync/espelho mobile.
-6. **Oceano**: autoria/cartório + exportação + publicação + redes.
+1. **Piso**: runtime ES5 offline, uma cápsula por oficina, regressão e gate no iPad.
+2. **Carteira**: nota, autosave, cadeia de hashes, pacote `.scrvrl`, exportação e validação.
+3. **Oficina**: amadurecer as engines PT-BR por evidência, sem carregar todas na abertura.
+4. **Casa**: calendário, busca, modo leitura, foco, som e ferramentas de permanência.
+5. **Anterioridade externa**: timestamp independente e verificador público, sem enviar o conteúdo.
+6. **Entrega**: recuperação, migração, auditoria, acessibilidade e publicação.

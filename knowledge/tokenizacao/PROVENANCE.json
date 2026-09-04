@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "service": {
+    "id": "TOKENIZER",
+    "version": "1.0.1",
+    "domain": "tokenizacao"
+  },
+  "sources": [
+    {
+      "id": "antigravity-tokenizer",
+      "role": "estrutura ES5 e preservação de spans",
+      "originType": "snapshot local inventariado",
+      "originPath": "/home/rafamass/Área de trabalho/2027/escrevaral-antigravity-starter/js/core/linguistic-core/services/tokenizer.js",
+      "repositoryCommit": null,
+      "localEvidence": [
+        "catalogo/fonte-C-antigravity.md",
+        "docs/03-escrevaral-antigravity.md"
+      ],
+      "limitation": "O commit exato da fotografia Antigravity não está disponível; nenhuma origem mais precisa é alegada."
+    }
+  ],
+  "localArtifacts": {
+    "implementation": "src/core/services/tokenizer.js",
+    "directRunner": "src/test/run-tokenizer.js",
+    "dependentRunner": "src/test/run-runtime.js"
+  },
+  "evidence": {
+    "directBank": "10/10 local",
+    "previousFailures": [
+      "d’água era dividido em d + água",
+      "Müller era dividido em M + ller"
+    ],
+    "correction": "Inclusão explícita de U+2019 e ü/Ü na classe ES5 de letras e conectores.",
+    "deviceStatus": "PENDING — repetir a banca morfológica 29/29 no iPad certificado"
+  },
+  "maturityDecision": "Mantido em M3: a correção tem prova local, mas altera uma dependência da morfologia M4 e ainda não atravessou o gate físico.",
+  "openRisks": [
+    "A classe explícita não pretende cobrir todos os alfabetos Unicode.",
+    "Nomes estrangeiros com caracteres fora da lista ainda podem ser segmentados.",
+    "Android KitKat está fora do escopo de certificação atual."
+  ]
+}
