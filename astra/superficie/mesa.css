@@ -1,0 +1,89 @@
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: #f9f8f3; color: #332c26; font-family: Georgia, 'Times New Roman', serif; }
+body { margin: 0; border-top: 4px solid #574333; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button, select, .file-label { font-family: Arial, sans-serif; font-size: 14px; }
+button, .file-label { display: inline-block; min-height: 44px; padding: 10px 15px; border: 1px solid #c7bcae; background: transparent; border-radius: 3px; cursor: pointer; }
+button:hover, .file-label:hover { background: #eae4d9; }
+button:disabled { opacity: .6; cursor: wait; }
+button:focus, input:focus, textarea:focus, select:focus, a:focus, .file-label:focus-within { outline: 2px solid #795339; outline-offset: 4px; }
+a { color: #67452e; text-underline-offset: 3px; }
+.masthead { max-width: 1280px; margin: auto; padding: 35px 5%; overflow: hidden; }
+.wordmark { display: inline-block; text-decoration: none; color: #453327; font-size: 31px; line-height: 1; letter-spacing: -1.5px; }
+.edition { display: block; padding-top: 10px; font: 10px Arial, sans-serif; letter-spacing: 2px; }
+nav { float: right; padding-top: 1px; }
+nav button { border-color: transparent; margin-left: 8px; }
+nav .primary { border-color: #a99a87; }
+nav .primary span { margin-left: 12px; }
+.paper { width: 90%; max-width: 760px; margin: 65px auto 0; }
+.page-label { font: 11px Arial, sans-serif; letter-spacing: 2px; color: #756857; margin-bottom: 32px; }
+.small-line { display: inline-block; width: 38px; border-top: 1px solid #b1a493; vertical-align: middle; margin-left: 14px; }
+.title { width: 100%; border: 0; background: transparent; padding: 7px 0; font-size: 38px; line-height: 1.3; }
+.title::placeholder { color: #918576; opacity: 1; }
+textarea { display: block; width: 100%; min-height: 48vh; resize: vertical; margin-top: 27px; padding: 8px 1px 36px; border: none; background: transparent; font-size: 21px; line-height: 1.9; overflow-wrap: break-word; }
+textarea::placeholder { color: #8a8072; opacity: 1; }
+textarea:focus, .title:focus { outline: 1px solid #a39889; outline-offset: 10px; }
+.paper-footer { border-top: 1px solid #ded7cb; padding: 16px 0; font: 12px/1.6 Arial, sans-serif; color: #6c6256; overflow: hidden; }
+.privacy { float: right; }
+.colophon { max-width: 1280px; padding: 42px 5% 25px; margin: 25px auto 0; color: #756958; font: 11px/1.8 Arial, sans-serif; }
+.colophon span:first-child { letter-spacing: 2px; margin-right: 24px; }
+.colophon span:last-child { font-family: Georgia, serif; font-style: italic; font-size: 14px; }
+.shelf { width: 90%; max-width: 900px; margin: 10px auto 0; padding: 24px; background: #eee8dc; border: 1px solid #d7cbbb; }
+h2 { font-size: 24px; font-weight: normal; margin: 0 0 16px; }
+.shelf label, select { margin-right: 14px; }
+select { padding: 10px; background: #f9f8f3; border: 1px solid #a99a87; max-width: 100%; }
+.check { display: inline-block; font: 14px/2 Arial, sans-serif; }
+.check input { vertical-align: middle; width: 18px; height: 18px; }
+.quiet { font: 14px/1.7 Arial, sans-serif; color: #63594d; }
+.actions { margin: 20px 0 10px; }
+.actions button, .file-label { margin: 0 7px 8px 0; }
+.file-label { position: relative; overflow: hidden; }
+.file-label input { position: absolute; width: 100%; height: 100%; inset: 0; top: 0; left: 0; opacity: 0; cursor: pointer; }
+.section-head { overflow: hidden; }
+.section-head h2, .section-head > div { display: inline-block; }
+.section-head > button { float: right; }
+.document-list { padding: 0; list-style: none; }
+.document-list li { margin: 0; border-top: 1px solid #d7cbbb; }
+.document-list button { border: none; border-radius: 0; text-align: left; width: 100%; padding: 15px 0; overflow-wrap: break-word; word-wrap: break-word; }
+.document-list small { display: block; margin-top: 7px; color: #6c6256; font-size: 12px; }
+.workshop { padding-top: 30px; margin-top: 20px; border-top: 1px solid #a99a87; }
+.eyebrow { font: 11px Arial, sans-serif; letter-spacing: 1.7px; color: #795339; margin: 0 0 12px; }
+.lenses { margin: 25px 0; }
+.lenses button { margin: 0 7px 8px 0; padding: 15px; }
+.lenses button span { margin-right: 12px; color: #85745d; font-size: 12px; }
+.lenses button[aria-pressed="true"] { background: #493b2e; border-color: #493b2e; color: #fff9ee; }
+.lenses button[aria-pressed="true"] span { color: #d9c5a9; }
+#analysis-status, #archive-status { font: 14px/1.7 Arial, sans-serif; }
+.findings { padding: 0; list-style: none; }
+.finding { border-top: 1px solid #d7cbbb; padding: 22px 0; }
+.finding h3 { font-size: 20px; font-weight: normal; margin: 10px 0; }
+.finding p { font: 14px/1.7 Arial, sans-serif; margin: 8px 0; }
+.finding .meta { font: 12px/1.6 Arial, sans-serif; color: #795339; letter-spacing: .3px; }
+.finding blockquote { margin: 14px 0; padding: 5px 15px; border-left: 2px solid #a98a67; white-space: pre-wrap; overflow-wrap: break-word; font-size: 19px; }
+.finding button { margin: 10px 8px 0 0; }
+.evidence { background: #f0ebe1; padding: 12px 18px; margin-top: 14px; }
+.coverage { padding: 15px 0; }
+.notice { width: 90%; max-width: 760px; margin: auto; padding: 15px; background: #eee8dc; }
+.sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); }
+.skip { position: absolute; left: 12px; top: -80px; padding: 14px; background: #fff; z-index: 2; }
+.skip:focus { top: 10px; }
+body[data-theme="roteiro"] { background-color: #f1e8d5; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(108,80,38,.018) 4px); }
+body[data-theme="roteiro"] .title, body[data-theme="roteiro"] textarea { font-family: 'Courier New', Courier, monospace; }
+body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
+@media (max-width: 650px) {
+  .masthead { padding: 23px 5%; }
+  .wordmark { font-size: 28px; }
+  nav { float: none; margin: 22px 0 0 -10px; }
+  nav button { margin-left: 0; padding: 10px; }
+  .paper { margin-top: 38px; width: 86%; }
+  .title { font-size: 30px; }
+  textarea { font-size: 19px; min-height: 45vh; }
+  .page-label { margin-bottom: 20px; }
+  .shelf { padding: 18px; }
+  .privacy { float: none; display: block; }
+  .section-head > button { float: none; display: block; margin-bottom: 15px; }
+  .lenses button { display: block; width: 100%; text-align: left; }
+  .colophon span { display: block; }
+}
+@media print { .masthead, .shelf, .workshop, .colophon, .paper-footer, .page-label { display: none !important; } body { border: 0; } .paper { width: 100%; margin: 0; max-width: none; } }

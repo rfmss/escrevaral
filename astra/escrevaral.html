@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Uma mesa de escrita em português brasileiro. Manuscritos no seu aparelho, instrumentos que explicam o que encontram.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Escrevaral — mesa de escrita</title>
+  <style>
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: #f9f8f3; color: #332c26; font-family: Georgia, 'Times New Roman', serif; }
+body { margin: 0; border-top: 4px solid #574333; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button, select, .file-label { font-family: Arial, sans-serif; font-size: 14px; }
+button, .file-label { display: inline-block; min-height: 44px; padding: 10px 15px; border: 1px solid #c7bcae; background: transparent; border-radius: 3px; cursor: pointer; }
+button:hover, .file-label:hover { background: #eae4d9; }
+button:disabled { opacity: .6; cursor: wait; }
+button:focus, input:focus, textarea:focus, select:focus, a:focus, .file-label:focus-within { outline: 2px solid #795339; outline-offset: 4px; }
+a { color: #67452e; text-underline-offset: 3px; }
+.masthead { max-width: 1280px; margin: auto; padding: 35px 5%; overflow: hidden; }
+.wordmark { display: inline-block; text-decoration: none; color: #453327; font-size: 31px; line-height: 1; letter-spacing: -1.5px; }
+.edition { display: block; padding-top: 10px; font: 10px Arial, sans-serif; letter-spacing: 2px; }
+nav { float: right; padding-top: 1px; }
+nav button { border-color: transparent; margin-left: 8px; }
+nav .primary { border-color: #a99a87; }
+nav .primary span { margin-left: 12px; }
+.paper { width: 90%; max-width: 760px; margin: 65px auto 0; }
+.page-label { font: 11px Arial, sans-serif; letter-spacing: 2px; color: #756857; margin-bottom: 32px; }
+.small-line { display: inline-block; width: 38px; border-top: 1px solid #b1a493; vertical-align: middle; margin-left: 14px; }
+.title { width: 100%; border: 0; background: transparent; padding: 7px 0; font-size: 38px; line-height: 1.3; }
+.title::placeholder { color: #918576; opacity: 1; }
+textarea { display: block; width: 100%; min-height: 48vh; resize: vertical; margin-top: 27px; padding: 8px 1px 36px; border: none; background: transparent; font-size: 21px; line-height: 1.9; overflow-wrap: break-word; }
+textarea::placeholder { color: #8a8072; opacity: 1; }
+textarea:focus, .title:focus { outline: 1px solid #a39889; outline-offset: 10px; }
+.paper-footer { border-top: 1px solid #ded7cb; padding: 16px 0; font: 12px/1.6 Arial, sans-serif; color: #6c6256; overflow: hidden; }
+.privacy { float: right; }
+.colophon { max-width: 1280px; padding: 42px 5% 25px; margin: 25px auto 0; color: #756958; font: 11px/1.8 Arial, sans-serif; }
+.colophon span:first-child { letter-spacing: 2px; margin-right: 24px; }
+.colophon span:last-child { font-family: Georgia, serif; font-style: italic; font-size: 14px; }
+.shelf { width: 90%; max-width: 900px; margin: 10px auto 0; padding: 24px; background: #eee8dc; border: 1px solid #d7cbbb; }
+h2 { font-size: 24px; font-weight: normal; margin: 0 0 16px; }
+.shelf label, select { margin-right: 14px; }
+select { padding: 10px; background: #f9f8f3; border: 1px solid #a99a87; max-width: 100%; }
+.check { display: inline-block; font: 14px/2 Arial, sans-serif; }
+.check input { vertical-align: middle; width: 18px; height: 18px; }
+.quiet { font: 14px/1.7 Arial, sans-serif; color: #63594d; }
+.actions { margin: 20px 0 10px; }
+.actions button, .file-label { margin: 0 7px 8px 0; }
+.file-label { position: relative; overflow: hidden; }
+.file-label input { position: absolute; width: 100%; height: 100%; inset: 0; top: 0; left: 0; opacity: 0; cursor: pointer; }
+.section-head { overflow: hidden; }
+.section-head h2, .section-head > div { display: inline-block; }
+.section-head > button { float: right; }
+.document-list { padding: 0; list-style: none; }
+.document-list li { margin: 0; border-top: 1px solid #d7cbbb; }
+.document-list button { border: none; border-radius: 0; text-align: left; width: 100%; padding: 15px 0; overflow-wrap: break-word; word-wrap: break-word; }
+.document-list small { display: block; margin-top: 7px; color: #6c6256; font-size: 12px; }
+.workshop { padding-top: 30px; margin-top: 20px; border-top: 1px solid #a99a87; }
+.eyebrow { font: 11px Arial, sans-serif; letter-spacing: 1.7px; color: #795339; margin: 0 0 12px; }
+.lenses { margin: 25px 0; }
+.lenses button { margin: 0 7px 8px 0; padding: 15px; }
+.lenses button span { margin-right: 12px; color: #85745d; font-size: 12px; }
+.lenses button[aria-pressed="true"] { background: #493b2e; border-color: #493b2e; color: #fff9ee; }
+.lenses button[aria-pressed="true"] span { color: #d9c5a9; }
+#analysis-status, #archive-status { font: 14px/1.7 Arial, sans-serif; }
+.findings { padding: 0; list-style: none; }
+.finding { border-top: 1px solid #d7cbbb; padding: 22px 0; }
+.finding h3 { font-size: 20px; font-weight: normal; margin: 10px 0; }
+.finding p { font: 14px/1.7 Arial, sans-serif; margin: 8px 0; }
+.finding .meta { font: 12px/1.6 Arial, sans-serif; color: #795339; letter-spacing: .3px; }
+.finding blockquote { margin: 14px 0; padding: 5px 15px; border-left: 2px solid #a98a67; white-space: pre-wrap; overflow-wrap: break-word; font-size: 19px; }
+.finding button { margin: 10px 8px 0 0; }
+.evidence { background: #f0ebe1; padding: 12px 18px; margin-top: 14px; }
+.coverage { padding: 15px 0; }
+.notice { width: 90%; max-width: 760px; margin: auto; padding: 15px; background: #eee8dc; }
+.sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); }
+.skip { position: absolute; left: 12px; top: -80px; padding: 14px; background: #fff; z-index: 2; }
+.skip:focus { top: 10px; }
+body[data-theme="roteiro"] { background-color: #f1e8d5; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(108,80,38,.018) 4px); }
+body[data-theme="roteiro"] .title, body[data-theme="roteiro"] textarea { font-family: 'Courier New', Courier, monospace; }
+body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
+@media (max-width: 650px) {
+  .masthead { padding: 23px 5%; }
+  .wordmark { font-size: 28px; }
+  nav { float: none; margin: 22px 0 0 -10px; }
+  nav button { margin-left: 0; padding: 10px; }
+  .paper { margin-top: 38px; width: 86%; }
+  .title { font-size: 30px; }
+  textarea { font-size: 19px; min-height: 45vh; }
+  .page-label { margin-bottom: 20px; }
+  .shelf { padding: 18px; }
+  .privacy { float: none; display: block; }
+  .section-head > button { float: none; display: block; margin-bottom: 15px; }
+  .lenses button { display: block; width: 100%; text-align: left; }
+  .colophon span { display: block; }
+}
+@media print { .masthead, .shelf, .workshop, .colophon, .paper-footer, .page-label { display: none !important; } body { border: 0; } .paper { width: 100%; margin: 0; max-width: none; } }
+
+</style>
+</head>
+<body>
+  <a class="skip" href="#manuscrito">Ir ao manuscrito</a>
+  <header class="masthead">
+    <a class="wordmark" href="#manuscrito" aria-label="Escrevaral, ir ao manuscrito">escrevaral<span class="edition">MESA DE ESCRITA</span></a>
+    <nav aria-label="Mesa">
+      <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
+      <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+      <button id="examinar-toggle" class="primary" aria-expanded="false" aria-controls="oficina">Examinar <span aria-hidden="true">↗</span></button>
+    </nav>
+  </header>
+  <noscript><p class="notice">Ative o JavaScript do navegador para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto da folha.</p></noscript>
+  <section id="mesa" class="shelf" hidden aria-labelledby="mesa-heading">
+    <h2 id="mesa-heading">Sua mesa</h2>
+    <label for="tema">Papel</label>
+    <select id="tema"><option value="folha">Folha</option><option value="roteiro">Roteiro</option></select>
+    <label class="check"><input id="som" type="checkbox"> Som de máquina</label>
+    <p class="quiet">O som começa somente se você escolher. Desliga ao sair desta página.</p>
+    <p id="sound-status" class="quiet" role="status"></p>
+    <div class="actions"><button id="export-text">Baixar texto</button><button id="export-backup">Baixar cópia de segurança</button><label class="file-label" for="import-file">Trazer arquivo<input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
+    <p class="quiet">Arquivos trazidos viram novas folhas. O acervo permanece.</p>
+    <p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa</a> <span class="quiet">— arquivo único para abrir sem internet.</span></p>
+    <p class="quiet">A gravação depende do espaço e das permissões do navegador. Guarde também uma cópia de segurança fora dele. Em aparelhos antigos, a abertura de arquivos HTML depende do aplicativo usado.</p>
+    <p class="quiet">Teclado: Ctrl ou ⌘ + Enter abre os instrumentos; Esc volta à escrita; Ctrl ou ⌘ + S guarda a folha.</p>
+  </section>
+  <section id="acervo" class="shelf" hidden aria-labelledby="acervo-heading">
+    <div class="section-head"><h2 id="acervo-heading">Acervo</h2><button id="new-document">Nova folha <span aria-hidden="true">＋</span></button></div>
+    <p class="quiet">Suas folhas ficam neste navegador.</p>
+    <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+  </section>
+  <main class="paper">
+    <div class="page-label" aria-hidden="true"><span>MANUSCRITO</span><span class="small-line"></span></div>
+    <label class="sr-only" for="titulo">Título do manuscrito</label>
+    <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+    <label class="sr-only" for="manuscrito">Manuscrito</label>
+    <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+    <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span><span class="privacy">Só neste aparelho</span></footer>
+    <section id="oficina" class="workshop" hidden aria-labelledby="oficina-heading">
+      <div class="section-head"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Uma lente de cada vez.</h2></div><button id="back-writing">Voltar à escrita</button></div>
+      <p class="quiet">Escolha o que observar. Seu manuscrito permanece como você o escreveu.</p>
+      <div class="lenses" role="group" aria-label="Escolher uma lente">
+        <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>
+        <button data-lens="acentuacao" aria-pressed="false"><span>02</span> Acentuação</button>
+        <button data-lens="pontuacao" aria-pressed="false"><span>03</span> Pontuação</button>
+      </div>
+      <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
+      <ol id="findings" class="findings"></ol>
+      <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
+      <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+    </section>
+  </main>
+  <footer class="colophon"><span>ESCREVARAL</span><span>Um lugar de fazer nada, com tudo que precisa.</span></footer>
+  <script>
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+  root.Escr.knowledge = {
+    version: '1.0.0',
+    sources: {
+      lexical: { title: 'ABL — Vocabulário Ortográfico (referência de conferência; base não incorporada)', url: 'https://www.academia.org.br/nossa-lingua/busca-no-vocabulario' },
+      accent: { title: 'Acordo Ortográfico de 1990, Base VIII (oxítonas)', url: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/decreto/d6583.htm' },
+      mechanical: { title: 'Convenção mecânica editorial local, versão 1 — não é juízo gramatical', url: null }
+    },
+    rules: [
+      { id: 'PTBR-ORT-001', lens: 'ortografia', confidence: 'moderada', severity: 'aviso', source: 'lexical',
+        title: 'Uma grafia para conferir',
+        forms: { 'excessão': 'exceção', 'excessões': 'exceções', 'concerteza': 'com certeza', 'derrepente': 'de repente', 'impecilho': 'empecilho', 'previlégio': 'privilégio' },
+        observation: 'O trecho coincide exatamente com uma entrada da lista local de grafias para conferir.',
+        interpretation: 'Na escrita convencional, a forma de referência é',
+        ambiguity: 'Pode ser invenção, nome, citação sem aspas ou registro intencional de fala.',
+        limit: 'Lista artesanal de seis entradas; não é um dicionário. Palavras desconhecidas ficam sem diagnóstico.' },
+      { id: 'PTBR-ACE-001', lens: 'acentuacao', confidence: 'moderada', severity: 'aviso', source: 'accent',
+        title: 'Um acento para conferir',
+        forms: { 'voce': 'você', 'voces': 'vocês', 'tambem': 'também', 'ninguem': 'ninguém', 'alguem': 'alguém', 'atraves': 'através' },
+        observation: 'O trecho coincide com uma das seis formas sem acento da lista local.',
+        interpretation: 'Se esta é a palavra pretendida, a forma acentuada é',
+        ambiguity: 'Pode ser outra língua, nome ou uma escolha gráfica. A intenção não pode ser inferida.',
+        limit: 'Não resolve pares como pode/pôde, por/pôr, esta/está ou pais/país; não interpreta a sintaxe.' },
+      { id: 'PTBR-PON-001', lens: 'pontuacao', confidence: 'alta', severity: 'informação', source: 'mechanical',
+        title: 'Vírgulas consecutivas', pattern: ',{2,}',
+        observation: 'Há duas ou mais vírgulas consecutivas.',
+        interpretation: 'Pode haver uma tecla repetida.',
+        ambiguity: 'A repetição também pode ser um recurso gráfico deliberado.',
+        limit: 'A certeza é sobre a sequência de sinais, não sobre a intenção. Não determina onde cabe uma vírgula.' },
+      { id: 'PTBR-PON-002', lens: 'pontuacao', confidence: 'alta', severity: 'informação', source: 'mechanical',
+        title: 'Pontos e vírgulas consecutivos', pattern: ';{2,}',
+        observation: 'Há dois ou mais pontos e vírgulas consecutivos.',
+        interpretation: 'Pode haver uma tecla repetida.',
+        ambiguity: 'A sequência pode ter intenção visual ou pertencer a uma notação.',
+        limit: 'Não avalia estilo, reticências, exclamações ou interrogações repetidas.' }
+    ]
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+  var own = Object.prototype.hasOwnProperty;
+  function protectedText(text) {
+    /* Substituição de igual comprimento: índices continuam sendo UTF-16 do original. */
+    return text.replace(/```[\s\S]*?(?:```|$)|`[^`\n]*`|https?:\/\/[^\s]+|www\.[^\s]+|[\w.+-]+@[\w.-]+|"[^"\n]*"|“[^”]*”|‘[^’]*’|«[^»]*»/g, function (s) { return s.replace(/[^\n]/g, ' '); });
+  }
+  function makeFinding(rule, text, start, end, reference, sources) {
+    var snippet = text.slice(start, end);
+    return {
+      id: rule.id, lens: rule.lens, feature: rule.lens,
+      severity: rule.severity, confidence: rule.confidence,
+      message: rule.title + (reference ? ': “' + snippet + '” → “' + reference + '”.' : '.'),
+      start: start, end: end, snippet: snippet,
+      evidence: { observation: rule.observation, interpretation: rule.interpretation + (reference ? ' “' + reference + '”.' : ''), ambiguity: rule.ambiguity, limit: rule.limit, source: sources[rule.source] },
+      reference: reference || null
+    };
+  }
+  function validate(f, text, lens) {
+    if (!f || !/^PTBR-[A-Z]+-[0-9]+$/.test(f.id) || f.lens !== lens || typeof f.feature !== 'string' || !f.feature || typeof f.message !== 'string' || !f.message ||
+        ['erro', 'aviso', 'estilo', 'informação'].indexOf(f.severity) < 0 ||
+        ['alta', 'moderada', 'baixa', 'insuficiente'].indexOf(f.confidence) < 0 ||
+        typeof f.start !== 'number' || typeof f.end !== 'number' || !isFinite(f.start) || !isFinite(f.end) || f.start % 1 || f.end % 1 || f.start < 0 || f.end <= f.start || f.end > text.length || text.slice(f.start, f.end) !== f.snippet ||
+        !f.evidence || !f.evidence.observation || !f.evidence.interpretation || !f.evidence.ambiguity || !f.evidence.limit || !f.evidence.source) {
+      throw new Error('A lente devolveu um diagnóstico fora do contrato.');
+    }
+  }
+  function createVault(knowledge) {
+    var registry = {}, busy = false, maxLength = 200000, maxFindings = 100;
+    function register(lens) {
+      if (!lens || !/^[a-z][a-z0-9-]*$/.test(lens.id) || typeof lens.analyze !== 'function' || own.call(registry, lens.id)) { throw new Error('Lente inválida ou já registrada.'); }
+      registry[lens.id] = lens;
+    }
+    function analyze(lensId, text) {
+      if (busy) { throw new Error('Já existe uma lente em uso.'); }
+      if (typeof text !== 'string') { throw new Error('A lente precisa receber texto.'); }
+      if (text.length > maxLength) { throw new Error('Examine até 200 mil caracteres por vez. O manuscrito continua inteiro na folha.'); }
+      if (!own.call(registry, lensId)) { throw new Error('Esta lente não está disponível.'); }
+      busy = true;
+      try {
+        var result = registry[lensId].analyze(text, maxFindings + 1), i;
+        if (Object.prototype.toString.call(result) !== '[object Array]') { throw new Error('Resposta inválida da lente.'); }
+        for (i = 0; i < result.length; i += 1) { validate(result[i], text, lensId); }
+        result.sort(function (a, b) { return a.start - b.start || a.end - b.end || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0); });
+        return { lens: lensId, knowledgeVersion: knowledge.version, findings: result.slice(0, maxFindings), limited: result.length > maxFindings, coverage: 'Somente as regras locais desta lente foram examinadas. Silêncio não certifica correção.' };
+      } finally { busy = false; }
+    }
+    function builtin(id) {
+      register({ id: id, analyze: function (text, cap) {
+        var clean = protectedText(text), out = [], i, rule, match, regex, token, reference;
+        for (i = 0; i < knowledge.rules.length; i += 1) {
+          rule = knowledge.rules[i];
+          if (rule.lens !== id) { continue; }
+          regex = rule.forms ? /[A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+(?:[-'][A-Za-zÀ-ÖØ-öø-ÿ\u0300-\u036f]+)*/g : new RegExp(rule.pattern, 'g');
+          while ((match = regex.exec(clean))) {
+            reference = null;
+            if (rule.forms) {
+              token = match[0];
+              /* Maiúscula pode ser nome próprio; silêncio deliberado, inclusive no começo da frase. */
+              if (token !== token.toLowerCase() || !own.call(rule.forms, token)) { continue; }
+              reference = rule.forms[token];
+            }
+            out.push(makeFinding(rule, text, match.index, match.index + match[0].length, reference, knowledge.sources));
+            if (out.length >= cap) { return out; }
+          }
+        }
+        return out;
+      } });
+    }
+    builtin('ortografia'); builtin('acentuacao'); builtin('pontuacao');
+    return { register: register, analyze: analyze, maxLength: maxLength };
+  }
+  root.Escr.createVault = createVault;
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function (root) {
+  'use strict';
+  root.Escr = root.Escr || {};
+  var prefix = 'escrevaral.astra.v1.doc.', counter = 0;
+  function uid() { counter += 1; return new Date().getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 10) + '-' + counter; }
+  function valid(doc) {
+    return doc && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+  }
+  function fresh() { return { id: uid(), title: '', text: '', updated: new Date().toISOString(), revision: 0, dismissed: [] }; }
+  function createArchive(storage) {
+    function get(id) { var raw = storage.getItem(prefix + id), doc = raw ? JSON.parse(raw) : null; if (doc && !valid(doc)) { throw new Error('Esta folha não pôde ser lida. Sua cópia guardada foi preservada.'); } return doc; }
+    function list() {
+      var docs = [], unreadable = 0, i, key, doc;
+      for (i = 0; i < storage.length; i += 1) {
+        key = storage.key(i);
+        if (key && key.indexOf(prefix) === 0) {
+          try { doc = get(key.slice(prefix.length)); if (doc) { docs.push(doc); } } catch (e) { unreadable += 1; }
+        }
+      }
+      docs.sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.id < b.id ? -1 : 1; });
+      return { documents: docs, unreadable: unreadable };
+    }
+    function save(doc) {
+      if (!valid(doc)) { throw new Error('A folha não pôde ser guardada. Baixe uma cópia do texto.'); }
+      var current = get(doc.id), copy = JSON.parse(JSON.stringify(doc)), conflict = false;
+      if ((current && current.revision !== doc.revision) || (!current && doc.revision !== 0)) {
+        copy.title = (copy.title || 'Sem título') + ' — versão preservada'; conflict = true;
+      }
+      copy.id = uid(); copy.revision += 1; copy.updated = new Date().toISOString();
+      /* Chave nova por gravação: duas abas nunca escrevem sobre a mesma chave. */
+      storage.setItem(prefix + copy.id, JSON.stringify(copy));
+      /* Só retirar a antecessora depois da nova gravação. Falha aqui deixa uma cópia extra. */
+      if (current && !conflict) { try { storage.removeItem(prefix + doc.id); } catch (e) { /* Cópia extra no acervo. */ } }
+      return { document: copy, conflict: conflict };
+    }
+    return { get: get, list: list, save: save, fresh: fresh };
+  }
+  root.Escr.createArchive = createArchive;
+  root.Escr.freshDocument = fresh;
+  root.Escr.validDocument = valid;
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+  <script>
+(function () {
+  'use strict';
+  var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
+  var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
+  var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
+  var lensButtons = document.querySelectorAll('[data-lens]');
+  function byId(id) { return document.getElementById(id); }
+  function text(node, value) { node.textContent = value; }
+  function listen(node, event, fn) { node.addEventListener(event, fn, false); }
+  function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
+  function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
+  function message(value) { text(saveStatus, value); }
+  function persist() {
+    window.clearTimeout(timer);
+    if (!dirty) { return true; }
+    doc.title = title.value; doc.text = manuscript.value;
+    if (!archive) { message('Sem gravação neste navegador. Baixe uma cópia em Ajustes.'); return false; }
+    try {
+      var saved = archive.save(doc); doc = saved.document; dirty = false;
+      message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
+      try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
+      if (!byId('acervo').hidden) { renderArchive(); }
+      return true;
+    } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
+  }
+  function invalidate() {
+    if (pendingAnalysis === null && !activeLens && !byId('findings').childNodes.length) { return; }
+    window.clearTimeout(pendingAnalysis); pendingAnalysis = null;
+    byId('findings').textContent = ''; snapshot = ''; activeLens = '';
+    for (var i = 0; i < lensButtons.length; i += 1) { lensButtons[i].disabled = false; lensButtons[i].setAttribute('aria-pressed', 'false'); }
+    text(analysisStatus, 'O manuscrito mudou. Escolha uma lente quando quiser examinar de novo.');
+  }
+  function changed() {
+    dirty = true; invalidate(); window.clearTimeout(timer);
+    if (!composing) { timer = window.setTimeout(persist, 1000); }
+  }
+  function showPanel(id, toggle, open) { byId(id).hidden = !open; byId(toggle).setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  function returnToWriting() {
+    showPanel('oficina', 'examinar-toggle', false); showPanel('acervo', 'acervo-toggle', false); showPanel('mesa', 'mesa-toggle', false);
+    manuscript.focus();
+  }
+  function loadDocument(next) {
+    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false;
+    invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
+    byId('reset-dismissed').hidden = !doc.dismissed.length;
+    message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
+  }
+  function renderArchive() {
+    var list = byId('document-list'); list.textContent = '';
+    if (!archive) { text(byId('archive-status'), 'O acervo não está disponível. Sua folha continua aberta.'); return; }
+    try {
+      var result = archive.list();
+      text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
+      result.documents.forEach(function (entry) {
+        var li = document.createElement('li');
+        var b = button(li, entry.title || 'Sem título', function () {
+          var isCurrent = entry.id === doc.id;
+          if (!persist()) { return; }
+          loadDocument(isCurrent ? doc : entry); showPanel('acervo', 'acervo-toggle', false);
+          try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
+          message('Folha aberta.');
+        });
+        var small = document.createElement('small'); text(small, new Date(entry.updated).toLocaleString('pt-BR')); b.appendChild(small); list.appendChild(li);
+      });
+    } catch (e) { text(byId('archive-status'), 'Não foi possível ler o acervo. Nenhum registro foi alterado.'); }
+  }
+  function findingKey(f) { return f.id + '|' + f.snippet; }
+  function renderResult(result) {
+    var list = byId('findings'), visible = 0; list.textContent = '';
+    result.findings.forEach(function (f) {
+      if (doc.dismissed.indexOf(findingKey(f)) !== -1) { return; }
+      visible += 1;
+      var li = document.createElement('li'); li.className = 'finding';
+      paragraph(li, f.id + ' · ' + f.severity + ' · confiança ' + f.confidence, 'meta');
+      var heading = document.createElement('h3'); text(heading, f.message); li.appendChild(heading);
+      var quote = document.createElement('blockquote'); text(quote, snapshot.slice(Math.max(0, f.start - 40), Math.min(snapshot.length, f.end + 40))); li.appendChild(quote);
+      var details = document.createElement('div'); details.className = 'evidence'; details.hidden = true;
+      ['observation', 'interpretation', 'ambiguity', 'limit'].forEach(function (key, i) { paragraph(details, ['Observação: ', 'Interpretação: ', 'Ambiguidade: ', 'Limite: '][i] + f.evidence[key]); });
+      paragraph(details, 'Referência: ' + f.evidence.source.title + '. A consulta desta lente usa somente a base guardada na mesa.');
+      var detailButton = button(li, 'Ver evidência', function () { details.hidden = !details.hidden; detailButton.setAttribute('aria-expanded', details.hidden ? 'false' : 'true'); text(detailButton, details.hidden ? 'Ver evidência' : 'Fechar evidência'); });
+      detailButton.setAttribute('aria-expanded', 'false');
+      button(li, 'Ver na folha', function () { if (snapshot !== manuscript.value) { invalidate(); return; } manuscript.focus(); manuscript.setSelectionRange(f.start, f.end); manuscript.scrollIntoView(true); });
+      button(li, 'Manter minha escolha', function () {
+        if (snapshot !== manuscript.value) { invalidate(); return; }
+        doc.dismissed.push(findingKey(f)); dirty = true; persist(); renderResult(result);
+        byId('reset-dismissed').focus();
+      });
+      li.appendChild(details); list.appendChild(li);
+    });
+    text(analysisStatus, (visible ? visible + (visible === 1 ? ' observação para você examinar.' : ' observações para você examinar.') : 'Nenhum apontamento novo nesta base limitada.') + (result.limited ? ' A leitura foi limitada aos primeiros 100 apontamentos encontrados.' : ''));
+    byId('reset-dismissed').hidden = !doc.dismissed.length;
+  }
+  function examine(lens) {
+    if (pendingAnalysis !== null || composing) { return; }
+    snapshot = manuscript.value; activeLens = lens;
+    byId('findings').textContent = '';
+    text(analysisStatus, 'Observando o manuscrito…');
+    for (var i = 0; i < lensButtons.length; i += 1) { lensButtons[i].disabled = true; lensButtons[i].setAttribute('aria-pressed', lensButtons[i].getAttribute('data-lens') === lens ? 'true' : 'false'); }
+    pendingAnalysis = window.setTimeout(function () {
+      pendingAnalysis = null;
+      try { renderResult(vault.analyze(lens, snapshot)); } catch (e) { text(analysisStatus, e.message); }
+      for (var j = 0; j < lensButtons.length; j += 1) { lensButtons[j].disabled = false; }
+    }, 20);
+  }
+  function download(contents, mime, name) {
+    var urlAPI = window.URL || window.webkitURL;
+    try {
+      var blob = new Blob([contents], { type: mime + ';charset=utf-8' });
+      if (navigator.msSaveBlob) { navigator.msSaveBlob(blob, name); return; }
+      var url = urlAPI.createObjectURL(blob), a = document.createElement('a'); a.href = url; a.download = name;
+      if (!('download' in a)) {
+        var opened = window.open(url, '_blank');
+        message(opened ? 'Arquivo aberto. Use Compartilhar ou Salvar no navegador; se preciso, copie o texto.' : 'O navegador impediu a abertura. Selecione e copie o manuscrito para outro aplicativo.');
+      } else { document.body.appendChild(a); a.click(); document.body.removeChild(a); message('Cópia preparada. Confira o arquivo salvo.'); }
+      window.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 120000);
+    } catch (e) { message('Este navegador não criou o arquivo. Selecione e copie o manuscrito para outro aplicativo.'); }
+  }
+  function exportedDocuments() {
+    var result = archive ? archive.list() : { documents: [], unreadable: 0 };
+    if (result.unreadable) { throw new Error('Há folhas ilegíveis no acervo.'); }
+    var entries = result.documents, current = JSON.parse(JSON.stringify(doc)), found = false;
+    current.title = title.value; current.text = manuscript.value;
+    entries = entries.map(function (entry) { if (entry.id === current.id) { found = true; return current; } return entry; });
+    if (!found) { entries.push(current); }
+    return entries;
+  }
+  function importFile(file) {
+    if (!file) { return; }
+    if (file.size > 5000000) { message('Traga arquivos de até 5 MB por vez.'); return; }
+    if (!persist()) { return; }
+    var reader = new FileReader();
+    reader.onerror = function () { message('O arquivo não pôde ser lido. O acervo permanece.'); };
+    reader.onload = function () {
+      var entries, count = 0, latest = null;
+      try {
+        if (!persist()) { return; }
+        if (/\.json$/i.test(file.name)) {
+          var payload = JSON.parse(reader.result);
+          if (!payload || payload.format !== 'escrevaral-astra' || payload.version !== 1 || Object.prototype.toString.call(payload.documents) !== '[object Array]' || !payload.documents.length || !payload.documents.every(E.validDocument)) { throw new Error('Formato de cópia não reconhecido.'); }
+          entries = payload.documents;
+        } else if (/\.txt$/i.test(file.name) || file.type === 'text/plain') {
+          var entry = E.freshDocument(); entry.title = file.name.replace(/\.txt$/i, ''); entry.text = String(reader.result); entries = [entry];
+        } else { throw new Error('Traga um texto .txt ou uma cópia .json do Escrevaral.'); }
+        if (!archive) {
+          if (doc.text || doc.title || entries.length !== 1) { throw new Error('Sem espaço para guardar novas folhas. Baixe sua escrita antes de trocar de navegador.'); }
+          latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
+        }
+        entries.forEach(function (entry) {
+          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); latest = archive.save(imported).document; count += 1;
+        });
+        loadDocument(latest); message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
+      } catch (e) { message((count ? count + ' folhas já foram trazidas. ' : '') + (e.name === 'QuotaExceededError' ? 'Faltou espaço para guardar o restante.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior permanece.'); }
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+  function stopSound() {
+    byId('som').checked = false;
+    text(byId('sound-status'), 'Som desligado.');
+    if (audio) { try { if (audio.close) { audio.close(); } else if (audio.suspend) { audio.suspend(); } } catch (ignore) { /* Áudio opcional. */ } audio = null; }
+  }
+  function playKey(event) {
+    if (!audio || !byId('som').checked || event.ctrlKey || event.metaKey || event.altKey || composing || event.isComposing || event.repeat) { return; }
+    var key = event.key || '', code = event.keyCode;
+    if (!(key.length === 1 || code === 8 || code === 13 || (!key && code >= 32 && code <= 222))) { return; }
+    try {
+      var oscillator = audio.createOscillator(), gain = audio.createGain(), now = audio.currentTime;
+      oscillator.type = 'triangle'; oscillator.frequency.value = code === 13 ? 420 : code === 8 ? 160 : 850;
+      gain.gain.setValueAtTime(0.018, now); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+      oscillator.connect(gain); gain.connect(audio.destination); oscillator.start(now); oscillator.stop(now + 0.04);
+      oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
+    } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
+  }
+  try {
+    storage = window.localStorage; archive = E.createArchive(storage);
+    var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
+    if (!current) { current = archive.list().documents[0]; }
+    if (current) { loadDocument(current); }
+    if (storage.getItem('escrevaral.astra.theme') === 'roteiro') { byId('tema').value = 'roteiro'; document.body.setAttribute('data-theme', 'roteiro'); }
+  } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
+  listen(title, 'input', changed); listen(manuscript, 'input', changed);
+  listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); });
+  listen(manuscript, 'compositionend', function () { composing = false; changed(); });
+  listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
+  listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
+  listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
+  listen(byId('back-writing'), 'click', returnToWriting);
+  listen(byId('new-document'), 'click', function () { if (!persist()) { return; } loadDocument(E.freshDocument()); showPanel('acervo', 'acervo-toggle', false); title.focus(); });
+  for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
+  listen(byId('reset-dismissed'), 'click', function () { doc.dismissed = []; dirty = true; persist(); byId('reset-dismissed').hidden = true; invalidate(); text(analysisStatus, 'Escolhas liberadas. Escolha uma lente para examinar de novo.'); lensButtons[0].focus(); });
+  listen(byId('tema'), 'change', function () { document.body.setAttribute('data-theme', this.value); try { if (storage) { storage.setItem('escrevaral.astra.theme', this.value); } } catch (ignore) { /* Tema não bloqueia a escrita. */ } });
+  listen(byId('som'), 'change', function () {
+    if (!this.checked) { stopSound(); return; }
+    try { var Audio = window.AudioContext || window.webkitAudioContext; audio = new Audio(); if (audio.resume) { audio.resume(); } text(byId('sound-status'), 'Som ligado, em volume discreto.'); } catch (e) { stopSound(); text(byId('sound-status'), 'O som não está disponível neste navegador.'); }
+  });
+  listen(manuscript, 'keydown', playKey);
+  listen(byId('export-text'), 'click', function () { download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', 'manuscrito.txt'); });
+  listen(byId('export-backup'), 'click', function () { persist(); try { download(JSON.stringify({ format: 'escrevaral-astra', version: 1, documents: exportedDocuments() }, null, 2), 'application/json', 'escrevaral-copia.json'); } catch (e) { message('Não foi possível reunir o acervo. Baixe o texto da folha atual.'); } });
+  listen(byId('import-file'), 'change', function () { importFile(this.files[0]); this.value = ''; });
+  listen(document, 'keydown', function (event) {
+    var code = event.keyCode;
+    if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); }
+    else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
+    else if (code === 27) { returnToWriting(); }
+  });
+  listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); } });
+  listen(window, 'pagehide', persist);
+  listen(window, 'beforeunload', function (event) { if (!persist()) { event.preventDefault(); event.returnValue = 'Há escrita que não foi guardada.'; } });
+}());
+
+</script>
+</body>
+</html>

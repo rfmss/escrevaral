@@ -18,10 +18,10 @@
     };
   }
   function validate(f, text, lens) {
-    if (!f || !/^PTBR-[A-Z]+-[0-9]+$/.test(f.id) || f.lens !== lens || typeof f.message !== 'string' || !f.message ||
+    if (!f || !/^PTBR-[A-Z]+-[0-9]+$/.test(f.id) || f.lens !== lens || typeof f.feature !== 'string' || !f.feature || typeof f.message !== 'string' || !f.message ||
         ['erro', 'aviso', 'estilo', 'informação'].indexOf(f.severity) < 0 ||
         ['alta', 'moderada', 'baixa', 'insuficiente'].indexOf(f.confidence) < 0 ||
-        typeof f.start !== 'number' || typeof f.end !== 'number' || f.start % 1 || f.end % 1 || f.start < 0 || f.end <= f.start || f.end > text.length || text.slice(f.start, f.end) !== f.snippet ||
+        typeof f.start !== 'number' || typeof f.end !== 'number' || !isFinite(f.start) || !isFinite(f.end) || f.start % 1 || f.end % 1 || f.start < 0 || f.end <= f.start || f.end > text.length || text.slice(f.start, f.end) !== f.snippet ||
         !f.evidence || !f.evidence.observation || !f.evidence.interpretation || !f.evidence.ambiguity || !f.evidence.limit || !f.evidence.source) {
       throw new Error('A lente devolveu um diagnóstico fora do contrato.');
     }

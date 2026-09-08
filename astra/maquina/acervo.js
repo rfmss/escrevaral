@@ -4,7 +4,7 @@
   var prefix = 'escrevaral.astra.v1.doc.', counter = 0;
   function uid() { counter += 1; return new Date().getTime().toString(36) + '-' + Math.random().toString(36).slice(2, 10) + '-' + counter; }
   function valid(doc) {
-    return doc && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
+    return doc && typeof doc.id === 'string' && /^[a-z0-9-]+$/.test(doc.id) && typeof doc.title === 'string' && typeof doc.text === 'string' && typeof doc.updated === 'string' && isFinite(Date.parse(doc.updated)) && typeof doc.revision === 'number' && doc.revision >= 0 && doc.revision % 1 === 0 && Object.prototype.toString.call(doc.dismissed) === '[object Array]' && doc.dismissed.every(function (x) { return typeof x === 'string'; });
   }
   function fresh() { return { id: uid(), title: '', text: '', updated: new Date().toISOString(), revision: 0, dismissed: [] }; }
   function createArchive(storage) {

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Uma mesa de escrita em português brasileiro. Manuscritos no seu aparelho, instrumentos que explicam o que encontram.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Escrevaral — mesa de escrita</title>
+  <link rel="stylesheet" href="superficie/mesa.css">
+</head>
+<body>
+  <a class="skip" href="#manuscrito">Ir ao manuscrito</a>
+  <header class="masthead">
+    <a class="wordmark" href="#manuscrito" aria-label="Escrevaral, ir ao manuscrito">escrevaral<span class="edition">MESA DE ESCRITA</span></a>
+    <nav aria-label="Mesa">
+      <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
+      <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+      <button id="examinar-toggle" class="primary" aria-expanded="false" aria-controls="oficina">Examinar <span aria-hidden="true">↗</span></button>
+    </nav>
+  </header>
+  <noscript><p class="notice">Ative o JavaScript do navegador para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto da folha.</p></noscript>
+  <section id="mesa" class="shelf" hidden aria-labelledby="mesa-heading">
+    <h2 id="mesa-heading">Sua mesa</h2>
+    <label for="tema">Papel</label>
+    <select id="tema"><option value="folha">Folha</option><option value="roteiro">Roteiro</option></select>
+    <label class="check"><input id="som" type="checkbox"> Som de máquina</label>
+    <p class="quiet">O som começa somente se você escolher. Desliga ao sair desta página.</p>
+    <p id="sound-status" class="quiet" role="status"></p>
+    <div class="actions"><button id="export-text">Baixar texto</button><button id="export-backup">Baixar cópia de segurança</button><label class="file-label" for="import-file">Trazer arquivo<input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
+    <p class="quiet">Arquivos trazidos viram novas folhas. O acervo permanece.</p>
+    <p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa</a> <span class="quiet">— arquivo único para abrir sem internet.</span></p>
+    <p class="quiet">A gravação depende do espaço e das permissões do navegador. Guarde também uma cópia de segurança fora dele. Em aparelhos antigos, a abertura de arquivos HTML depende do aplicativo usado.</p>
+    <p class="quiet">Teclado: Ctrl ou ⌘ + Enter abre os instrumentos; Esc volta à escrita; Ctrl ou ⌘ + S guarda a folha.</p>
+  </section>
+  <section id="acervo" class="shelf" hidden aria-labelledby="acervo-heading">
+    <div class="section-head"><h2 id="acervo-heading">Acervo</h2><button id="new-document">Nova folha <span aria-hidden="true">＋</span></button></div>
+    <p class="quiet">Suas folhas ficam neste navegador.</p>
+    <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
+  </section>
+  <main class="paper">
+    <div class="page-label" aria-hidden="true"><span>MANUSCRITO</span><span class="small-line"></span></div>
+    <label class="sr-only" for="titulo">Título do manuscrito</label>
+    <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+    <label class="sr-only" for="manuscrito">Manuscrito</label>
+    <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+    <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span><span class="privacy">Só neste aparelho</span></footer>
+    <section id="oficina" class="workshop" hidden aria-labelledby="oficina-heading">
+      <div class="section-head"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Uma lente de cada vez.</h2></div><button id="back-writing">Voltar à escrita</button></div>
+      <p class="quiet">Escolha o que observar. Seu manuscrito permanece como você o escreveu.</p>
+      <div class="lenses" role="group" aria-label="Escolher uma lente">
+        <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>
+        <button data-lens="acentuacao" aria-pressed="false"><span>02</span> Acentuação</button>
+        <button data-lens="pontuacao" aria-pressed="false"><span>03</span> Pontuação</button>
+      </div>
+      <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
+      <ol id="findings" class="findings"></ol>
+      <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
+      <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+    </section>
+  </main>
+  <footer class="colophon"><span>ESCREVARAL</span><span>Um lugar de fazer nada, com tudo que precisa.</span></footer>
+  <script src="conhecimento/base.js"></script>
+  <script src="maquina/cofre.js"></script>
+  <script src="maquina/acervo.js"></script>
+  <script src="superficie/ponte.js"></script>
+</body>
+</html>
