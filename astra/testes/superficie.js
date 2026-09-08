@@ -105,4 +105,18 @@ module.exports = function (h) {
     a.nodes.tema.value = 'roteiro'; a.nodes.tema.emit('change'); assert.strictEqual(a.document.body.getAttribute('data-theme'), 'roteiro');
     var b = setup(a.storage); assert.strictEqual(b.document.body.getAttribute('data-theme'), 'roteiro');
   });
+  test('Ponte: cronologia abre a folha escolhida e preserva escrita antes de trocar', function () {
+    var a = setup();
+    function entries() { return a.nodes['timeline-list'].childNodes.filter(function (n) { return n.className === 'timeline-entry'; }); }
+    assert.strictEqual(a.document.body.getAttribute('data-theme'), 'roteiro');
+    assert.ok(a.nodes['manuscript-date'].textContent.indexOf(' de ') !== -1);
+    a.type('titulo', 'Primeira'); a.type('manuscrito', 'um'); a.flush();
+    a.nodes['timeline-new'].click(); a.type('titulo', 'Segunda'); a.type('manuscrito', 'dois'); a.flush();
+    a.type('manuscrito', 'dois, com uma alteração ainda não guardada');
+    entries().filter(function (b) { return b.getAttribute('title') === 'Primeira'; })[0].click();
+    assert.strictEqual(a.nodes.manuscrito.value, 'um');
+    assert.ok(a.archive().some(function (d) { return d.text === 'dois, com uma alteração ainda não guardada'; }));
+    assert.strictEqual(entries().filter(function (b) { return b.getAttribute('aria-current') === 'true'; })[0].getAttribute('title'), 'Primeira');
+    assert.strictEqual(entries().length, 2);
+  });
 };

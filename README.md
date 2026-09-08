@@ -10,7 +10,7 @@ Esta branch contém uma implementação independente, construída pela [Constitu
 - Tema de roteiro e som opcional, desligado por padrão.
 - HTML, CSS e JavaScript ES5, sem dependências no produto.
 
-Teste a entrega com `node astra/testes/run.js`. O Node serve somente à manutenção, nunca à escrita. Resultado verificado: 195 verificações, incluindo 168 casos do corpus; zero falhas. Compatibilidade física com aparelhos antigos e renderização em navegador ainda não verificadas.
+Teste a entrega com `node astra/testes/run.js`. O Node serve somente à manutenção, nunca à escrita. Resultado verificado: 196 verificações, incluindo 168 casos do corpus; zero falhas. Compatibilidade física com aparelhos antigos e renderização em navegador ainda não verificadas.
 
 [Decisões, fontes e limites](astra/DECISOES.md) · [Bancada](astra/testes/README.md) · [Continuação](astra/HANDOFF.md)
 

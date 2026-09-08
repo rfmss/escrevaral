@@ -9,36 +9,38 @@
   <style>
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { background: #f9f8f3; color: #332c26; font-family: Georgia, 'Times New Roman', serif; }
-body { margin: 0; border-top: 4px solid #574333; }
+html { background: #f4f1e1; color: #2a2a2a; font-family: Georgia, 'Times New Roman', serif; }
+body { margin: 0; min-height: 100vh; }
 button, input, textarea, select { font: inherit; color: inherit; }
 button, select, .file-label { font-family: Arial, sans-serif; font-size: 14px; }
-button, .file-label { display: inline-block; min-height: 44px; padding: 10px 15px; border: 1px solid #c7bcae; background: transparent; border-radius: 3px; cursor: pointer; }
-button:hover, .file-label:hover { background: #eae4d9; }
+button, .file-label { display: inline-block; min-height: 44px; padding: 10px 15px; border: 1px solid #aaa899; background: transparent; border-radius: 2px; cursor: pointer; }
+button:hover, .file-label:hover { background: #e9e5d4; }
 button:disabled { opacity: .6; cursor: wait; }
 button:focus, input:focus, textarea:focus, select:focus, a:focus, .file-label:focus-within { outline: 2px solid #795339; outline-offset: 4px; }
 a { color: #67452e; text-underline-offset: 3px; }
-.masthead { max-width: 1280px; margin: auto; padding: 35px 5%; overflow: hidden; }
-.wordmark { display: inline-block; text-decoration: none; color: #453327; font-size: 31px; line-height: 1; letter-spacing: -1.5px; }
-.edition { display: block; padding-top: 10px; font: 10px Arial, sans-serif; letter-spacing: 2px; }
-nav { float: right; padding-top: 1px; }
-nav button { border-color: transparent; margin-left: 8px; }
-nav .primary { border-color: #a99a87; }
-nav .primary span { margin-left: 12px; }
-.paper { width: 90%; max-width: 760px; margin: 65px auto 0; }
-.page-label { font: 11px Arial, sans-serif; letter-spacing: 2px; color: #756857; margin-bottom: 32px; }
-.small-line { display: inline-block; width: 38px; border-top: 1px solid #b1a493; vertical-align: middle; margin-left: 14px; }
-.title { width: 100%; border: 0; background: transparent; padding: 7px 0; font-size: 38px; line-height: 1.3; }
-.title::placeholder { color: #918576; opacity: 1; }
-textarea { display: block; width: 100%; min-height: 48vh; resize: vertical; margin-top: 27px; padding: 8px 1px 36px; border: none; background: transparent; font-size: 21px; line-height: 1.9; overflow-wrap: break-word; }
-textarea::placeholder { color: #8a8072; opacity: 1; }
-textarea:focus, .title:focus { outline: 1px solid #a39889; outline-offset: 10px; }
-.paper-footer { border-top: 1px solid #ded7cb; padding: 16px 0; font: 12px/1.6 Arial, sans-serif; color: #6c6256; overflow: hidden; }
+/* Mesa baseada nas referências fornecidas: papel contínuo e cronologia lateral. */
+.desk { position: relative; width: 88%; max-width: 820px; margin: 30px auto 0; }
+.paper { margin: 0 140px 0 0; min-width: 0; }
+.title { width: 100%; border: 0; background: transparent; padding: 0; font: 600 26px/1.4 'Courier New', Courier, monospace; letter-spacing: .3px; }
+.title::placeholder { color: #868579; opacity: 1; }
+.manuscript-date { margin: 8px 0 20px; font: 16px/1.5 Arial, sans-serif; color: #706f63; }
+textarea { display: block; width: 100%; min-height: 300px; height: 44vh; resize: vertical; margin: 0; padding: 0 1px 25px; border: 0; background: transparent; font: 22px/1.6 'Courier New', Courier, monospace; letter-spacing: .4px; overflow-wrap: break-word; }
+textarea::placeholder { color: #767568; opacity: 1; }
+textarea:focus, .title:focus { outline: 1px solid #b9b7a7; outline-offset: 7px; }
+.paper-footer { padding: 12px 0; font: 12px/1.6 Arial, sans-serif; color: #6c6a5e; overflow: hidden; }
 .privacy { float: right; }
-.colophon { max-width: 1280px; padding: 42px 5% 25px; margin: 25px auto 0; color: #756958; font: 11px/1.8 Arial, sans-serif; }
-.colophon span:first-child { letter-spacing: 2px; margin-right: 24px; }
+.desk-tools { margin: 0 0 18px; }
+.desk-tools button { margin: 0 7px 10px 0; font: 600 16px/1.4 'Courier New', Courier, monospace; }
+.timeline { position: absolute; top: 4px; right: 0; width: 90px; text-align: center; font-family: Arial, sans-serif; }
+.new-leaf { display: block; width: 44px; height: 44px; min-height: 44px; padding: 0; margin: 0 auto 18px; border-radius: 50%; font: 600 23px/42px Arial, sans-serif; }
+.timeline-month { font-size: 16px; line-height: 1.5; color: #68675c; margin: 18px 0 8px; }
+.timeline-day { font-size: 14px; line-height: 1.5; color: #767568; margin: 6px 0 10px; }
+.timeline-entry { display: block; width: 90px; padding: 11px 4px; min-height: 44px; margin: 0 0 8px; border-color: transparent; font: 15px/1.4 'Courier New', Courier, monospace; }
+.timeline-entry[aria-current="true"] { background: #bf4829; border-color: #bf4829; color: #fffaf1; font-weight: 600; }
+.colophon { width: 88%; max-width: 820px; padding: 28px 140px 25px 0; margin: 0 auto; color: #756f61; font: 11px/1.8 Arial, sans-serif; }
+.colophon span:first-child { letter-spacing: 2px; margin-right: 18px; }
 .colophon span:last-child { font-family: Georgia, serif; font-style: italic; font-size: 14px; }
-.shelf { width: 90%; max-width: 900px; margin: 10px auto 0; padding: 24px; background: #eee8dc; border: 1px solid #d7cbbb; }
+.shelf { width: 88%; max-width: 820px; margin: 20px auto 0; padding: 24px; background: #ede9d8; border: 1px solid #cac6b4; }
 h2 { font-size: 24px; font-weight: normal; margin: 0 0 16px; }
 .shelf label, select { margin-right: 14px; }
 select { padding: 10px; background: #f9f8f3; border: 1px solid #a99a87; max-width: 100%; }
@@ -59,8 +61,8 @@ select { padding: 10px; background: #f9f8f3; border: 1px solid #a99a87; max-widt
 .workshop { padding-top: 30px; margin-top: 20px; border-top: 1px solid #a99a87; }
 .eyebrow { font: 11px Arial, sans-serif; letter-spacing: 1.7px; color: #795339; margin: 0 0 12px; }
 .lenses { margin: 25px 0; }
-.lenses button { margin: 0 7px 8px 0; padding: 15px; }
-.lenses button span { margin-right: 12px; color: #85745d; font-size: 12px; }
+.lenses button { margin: 0 7px 10px 0; padding: 11px 14px; font: 600 16px/1.4 'Courier New', Courier, monospace; }
+.lenses button span { display: none; }
 .lenses button[aria-pressed="true"] { background: #493b2e; border-color: #493b2e; color: #fff9ee; }
 .lenses button[aria-pressed="true"] span { color: #d9c5a9; }
 #analysis-status, #archive-status { font: 14px/1.7 Arial, sans-serif; }
@@ -77,43 +79,47 @@ select { padding: 10px; background: #f9f8f3; border: 1px solid #a99a87; max-widt
 .sr-only { position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); }
 .skip { position: absolute; left: 12px; top: -80px; padding: 14px; background: #fff; z-index: 2; }
 .skip:focus { top: 10px; }
-body[data-theme="roteiro"] { background-color: #f1e8d5; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(108,80,38,.018) 4px); }
-body[data-theme="roteiro"] .title, body[data-theme="roteiro"] textarea { font-family: 'Courier New', Courier, monospace; }
-body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
+body[data-theme="roteiro"] { background-color: #f4f1e1; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(103,92,52,.018) 4px), repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(103,92,52,.012) 5px); }
+body[data-theme="folha"] { background: #f9f8f3; }
+body[data-theme="folha"] textarea { font-family: Georgia, 'Times New Roman', serif; letter-spacing: 0; }
 @media (max-width: 650px) {
-  .masthead { padding: 23px 5%; }
-  .wordmark { font-size: 28px; }
-  nav { float: none; margin: 22px 0 0 -10px; }
-  nav button { margin-left: 0; padding: 10px; }
-  .paper { margin-top: 38px; width: 86%; }
-  .title { font-size: 30px; }
-  textarea { font-size: 19px; min-height: 45vh; }
-  .page-label { margin-bottom: 20px; }
-  .shelf { padding: 18px; }
+  .desk { width: 90%; margin-top: 25px; }
+  .paper { margin-right: 82px; }
+  .timeline { width: 62px; }
+  .timeline-entry { width: 62px; font-size: 14px; }
+  .timeline-month { font-size: 14px; }
+  .timeline-day { font-size: 12px; }
+  .title { font-size: 24px; }
+  .manuscript-date { font-size: 14px; }
+  textarea { font-size: 18px; letter-spacing: 0; min-height: 300px; }
+  .shelf { padding: 18px; width: 90%; }
   .privacy { float: none; display: block; }
+  .desk-tools button { font-size: 14px; }
   .section-head > button { float: none; display: block; margin-bottom: 15px; }
-  .lenses button { display: block; width: 100%; text-align: left; }
+  .lenses button { display: block; width: 100%; text-align: left; font-size: 14px; }
+  .colophon { padding-right: 0; width: 90%; }
   .colophon span { display: block; }
 }
-@media print { .masthead, .shelf, .workshop, .colophon, .paper-footer, .page-label { display: none !important; } body { border: 0; } .paper { width: 100%; margin: 0; max-width: none; } }
+@media (max-width: 430px) {
+  .desk { width: 88%; }
+  .timeline { position: static; width: 100%; text-align: left; margin-bottom: 24px; }
+  .new-leaf { display: inline-block; vertical-align: top; margin: 0 10px 0 0; }
+  #timeline-list { display: inline-block; max-width: 75%; max-height: 102px; overflow: auto; vertical-align: top; }
+  .timeline-entry { display: inline-block; width: auto; min-width: 62px; margin: 0 6px 5px 0; }
+  .timeline-month, .timeline-day { display: inline-block; margin: 0 8px 6px 0; }
+  .paper { margin-right: 0; }
+}
+@media print { .timeline, .desk-tools, .shelf, .workshop, .colophon, .paper-footer { display: none !important; } body { background: white !important; } .desk { width: 100%; margin: 0; max-width: none; } .paper { margin: 0; } }
 
 </style>
 </head>
-<body>
+<body data-theme="roteiro">
   <a class="skip" href="#manuscrito">Ir ao manuscrito</a>
-  <header class="masthead">
-    <a class="wordmark" href="#manuscrito" aria-label="Escrevaral, ir ao manuscrito">escrevaral<span class="edition">MESA DE ESCRITA</span></a>
-    <nav aria-label="Mesa">
-      <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
-      <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
-      <button id="examinar-toggle" class="primary" aria-expanded="false" aria-controls="oficina">Examinar <span aria-hidden="true">↗</span></button>
-    </nav>
-  </header>
   <noscript><p class="notice">Ative o JavaScript do navegador para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto da folha.</p></noscript>
   <section id="mesa" class="shelf" hidden aria-labelledby="mesa-heading">
     <h2 id="mesa-heading">Sua mesa</h2>
     <label for="tema">Papel</label>
-    <select id="tema"><option value="folha">Folha</option><option value="roteiro">Roteiro</option></select>
+    <select id="tema"><option value="roteiro">Roteiro</option><option value="folha">Folha</option></select>
     <label class="check"><input id="som" type="checkbox"> Som de máquina</label>
     <p class="quiet">O som começa somente se você escolher. Desliga ao sair desta página.</p>
     <p id="sound-status" class="quiet" role="status"></p>
@@ -128,13 +134,23 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
     <p class="quiet">Suas folhas ficam neste navegador.</p>
     <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
+  <div class="desk">
+  <aside class="timeline" aria-label="Folhas recentes por data de gravação">
+    <button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha">+</button>
+    <div id="timeline-list"></div>
+  </aside>
   <main class="paper">
-    <div class="page-label" aria-hidden="true"><span>MANUSCRITO</span><span class="small-line"></span></div>
     <label class="sr-only" for="titulo">Título do manuscrito</label>
-    <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+    <input id="titulo" class="title" type="text" placeholder="Título" autocomplete="off" spellcheck="false">
+    <p class="manuscript-date"><time id="manuscript-date" aria-label="Data da folha; atualizada a cada gravação"></time></p>
     <label class="sr-only" for="manuscrito">Manuscrito</label>
     <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
     <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span><span class="privacy">Só neste aparelho</span></footer>
+    <nav class="desk-tools" aria-label="Mesa">
+      <button id="examinar-toggle" class="primary" aria-expanded="false" aria-controls="oficina">Examinar</button>
+      <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
+      <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+    </nav>
     <section id="oficina" class="workshop" hidden aria-labelledby="oficina-heading">
       <div class="section-head"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Uma lente de cada vez.</h2></div><button id="back-writing">Voltar à escrita</button></div>
       <p class="quiet">Escolha o que observar. Seu manuscrito permanece como você o escreveu.</p>
@@ -149,6 +165,7 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
       <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
     </section>
   </main>
+  </div>
   <footer class="colophon"><span>ESCREVARAL</span><span>Um lugar de fazer nada, com tudo que precisa.</span></footer>
   <script>
 (function (root) {
@@ -322,22 +339,62 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var lensButtons = document.querySelectorAll('[data-lens]');
+  var timelineEntries = [], months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
   function text(node, value) { node.textContent = value; }
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
   function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
   function message(value) { text(saveStatus, value); }
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()); }
+  function metadata(entry) { return { id: entry.id, title: entry.title, updated: entry.updated }; }
+  function renderTimeline(refresh, previousId) {
+    var list = byId('timeline-list'), date = new Date(doc.updated), monthKey = '', dayKey = '';
+    text(byId('manuscript-date'), date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear() + ', ' + timeLabel(date));
+    byId('manuscript-date').setAttribute('datetime', doc.updated);
+    if (refresh && archive) {
+      try { timelineEntries = archive.list().documents.map(metadata); } catch (ignore) { /* A folha aberta permanece acessível. */ }
+    }
+    timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
+    if (doc.revision) { timelineEntries.push(metadata(doc)); }
+    timelineEntries.sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.id < b.id ? -1 : 1; });
+    var visible = timelineEntries.slice(0, 12);
+    if (!doc.revision) { visible.unshift(metadata(doc)); }
+    else if (!visible.some(function (entry) { return entry.id === doc.id; })) { visible.push(metadata(doc)); }
+    list.textContent = '';
+    visible.forEach(function (entry) {
+      var when = new Date(entry.updated), month = when.getFullYear() + '-' + when.getMonth(), day = month + '-' + when.getDate();
+      if (month !== monthKey) {
+        var m = paragraph(list, months[when.getMonth()].slice(0, 1).toUpperCase() + months[when.getMonth()].slice(1, 3), 'timeline-month');
+        m.setAttribute('title', months[when.getMonth()] + ' de ' + when.getFullYear()); monthKey = month;
+      }
+      if (day !== dayKey) { paragraph(list, when.getDate() + ' ' + ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][when.getDay()], 'timeline-day'); dayKey = day; }
+      var b = button(list, timeLabel(when), function () {
+        if (entry.id === doc.id || !persist()) { return; }
+        try {
+          var next = archive && archive.get(entry.id);
+          if (!next) { renderTimeline(true); message('Esta folha mudou. Consulte o acervo para abrir a versão guardada.'); return; }
+          loadDocument(next); showPanel('oficina', 'examinar-toggle', false);
+          try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
+        } catch (e) { message('Não foi possível abrir esta folha. Sua escrita permanece aqui.'); }
+      });
+      b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
+      b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when));
+      b.setAttribute('title', entry.title || 'Sem título');
+    });
+  }
   function persist() {
     window.clearTimeout(timer);
     if (!dirty) { return true; }
     doc.title = title.value; doc.text = manuscript.value;
     if (!archive) { message('Sem gravação neste navegador. Baixe uma cópia em Ajustes.'); return false; }
     try {
-      var saved = archive.save(doc); doc = saved.document; dirty = false;
+      var previousId = doc.id, saved = archive.save(doc); doc = saved.document; dirty = false;
       message(saved.conflict ? 'Outra versão foi preservada no acervo.' : 'Guardado neste aparelho.');
       try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Só a preferência de abertura falhou. */ }
       if (!byId('acervo').hidden) { renderArchive(); }
+      renderTimeline(false, previousId);
       return true;
     } catch (e) { message('Não foi possível guardar. Seu texto está na folha; baixe uma cópia em Ajustes.'); return false; }
   }
@@ -362,6 +419,7 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
+    renderTimeline(true);
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
@@ -493,8 +551,10 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
     var currentId = storage.getItem('escrevaral.astra.current'), current = currentId ? archive.get(currentId) : null;
     if (!current) { current = archive.list().documents[0]; }
     if (current) { loadDocument(current); }
-    if (storage.getItem('escrevaral.astra.theme') === 'roteiro') { byId('tema').value = 'roteiro'; document.body.setAttribute('data-theme', 'roteiro'); }
+    var theme = storage.getItem('escrevaral.astra.theme') === 'folha' ? 'folha' : 'roteiro';
+    byId('tema').value = theme; document.body.setAttribute('data-theme', theme);
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
+  renderTimeline(true);
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); });
   listen(manuscript, 'compositionend', function () { composing = false; changed(); });
@@ -502,7 +562,9 @@ body[data-theme="roteiro"] textarea { font-size: 19px; line-height: 1.85; }
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  listen(byId('new-document'), 'click', function () { if (!persist()) { return; } loadDocument(E.freshDocument()); showPanel('acervo', 'acervo-toggle', false); title.focus(); });
+  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); showPanel('acervo', 'acervo-toggle', false); title.focus(); }
+  listen(byId('new-document'), 'click', newDocument);
+  listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
   listen(byId('reset-dismissed'), 'click', function () { doc.dismissed = []; dirty = true; persist(); byId('reset-dismissed').hidden = true; invalidate(); text(analysisStatus, 'Escolhas liberadas. Escolha uma lente para examinar de novo.'); lensButtons[0].focus(); });
   listen(byId('tema'), 'change', function () { document.body.setAttribute('data-theme', this.value); try { if (storage) { storage.setItem('escrevaral.astra.theme', this.value); } } catch (ignore) { /* Tema não bloqueia a escrita. */ } });

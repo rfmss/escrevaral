@@ -37,7 +37,9 @@ As fontes orientam conferência humana; não foram baixados dicionários, obras 
 
 Constituição 3.4, 3.5 e 3.8: a página abre na folha vazia, sem exemplo ocupando o manuscrito. Título opcional. “Examinar” revela a oficina; clicar numa lente dispara uma única execução. Digitar não dispara análise. Edições invalidam os resultados anteriores. “Voltar à escrita” ou Esc recolhe as ferramentas.
 
-A coluna tem largura máxima de 760 px, respiro e fonte de leitura; em telas estreitas os instrumentos empilham. O tema roteiro usa fonte de máquina local e textura CSS de baixo contraste. São escolhas de ergonomia e redução de distração coerentes com a Constituição, não resultados de ensaios neurocientíficos realizados nesta sessão. Não há alegação clínica ou garantia de acessibilidade validada.
+A mesa ocupa até 820 px, com 680 px reservados ao manuscrito e uma cronologia à direita. A referência visual fornecida orienta papel creme contínuo (#f4f1e1), texto de máquina, data abaixo do título e instrumentos sob a folha. Roteiro é o tema inicial; preferências explícitas por Folha são preservadas. A textura usa somente gradientes discretos, sem filtro SVG, fonte remota ou efeito de tinta que prejudique a leitura. O horário ativo recebe laranja queimado com contraste reforçado.
+
+A cronologia abre folhas reais do acervo e o botão + cria uma folha. Ela mostra até 12 folhas recentes, além da atual quando necessário; o acervo completo continua disponível. Datas representam a última gravação, não prova de criação. Os metadados da cronologia ficam em memória durante a digitação para evitar reler todo o acervo a cada salvamento. Em telas de até 430 px, a cronologia passa para cima da folha para preservar a largura de escrita. São escolhas de ergonomia coerentes com a Constituição, não resultados de ensaios neurocientíficos nesta sessão. Não há alegação clínica ou garantia de acessibilidade validada.
 
 “Manter minha escolha” suprime a combinação exata de regra e trecho nesta folha, inclusive outras ocorrências idênticas. “Rever escolhas mantidas” desfaz essa preferência. O manuscrito nunca é substituído pelo resultado.
 
