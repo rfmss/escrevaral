@@ -1,84 +1,19 @@
-# Escrevaral
+# Escrevaral — mesa Astra
 
-Oficina de escrita feita no Brasil, para gente brasileira.
+Baixe [astra/escrevaral.html](astra/escrevaral.html) e abra o arquivo no navegador. A mesa inteira está nele: escrever, guardar e examinar sem conexão. Use Ajustes → Baixar cópia de segurança para guardar o acervo fora do navegador.
 
-[Usar o Escrevaral](https://escrevaral.com)
+Esta branch contém uma implementação independente, construída pela [Constituição](astra/CONSTITUICAO.md). Entrada nova: `astra/index.html` (arquivos separados) ou `astra/escrevaral.html` (arquivo portátil). A entrada herdada na raiz pertence ao produto anterior; não é esta entrega.
 
-Versão: `1.0.0` — Argila, primeiro lançamento público estável.
+- Folha e acervo locais; exportação `.txt`/`.json`; importação como novas folhas.
+- Três lentes sob demanda: ortografia, acentuação e pontuação mecânica.
+- Quatro regras identificadas; evidência, ambiguidade e limites; nenhuma reescrita.
+- Tema de roteiro e som opcional, desligado por padrão.
+- HTML, CSS e JavaScript ES5, sem dependências no produto.
 
-Documentação: [arquitetura](ARCHITECTURE.md) · [lançamentos](docs/release/README.md) · [checklist](docs/release/LAUNCH_CHECKLIST.md) · [mudanças](CHANGELOG.md)
+Teste a entrega com `node astra/testes/run.js`. O Node serve somente à manutenção, nunca à escrita. Resultado verificado: 195 verificações, incluindo 168 casos do corpus; zero falhas. Compatibilidade física com aparelhos antigos e renderização em navegador ainda não verificadas.
 
-## Visão geral
+[Decisões, fontes e limites](astra/DECISOES.md) · [Bancada](astra/testes/README.md) · [Continuação](astra/HANDOFF.md)
 
-O Escrevaral é uma aplicação de escrita que roda no navegador. Não exige conta, servidor próprio do produto ou envio de manuscritos para serviços externos.
+Branch solicitada: `astra/escrevaral-master`. Ela já existia em `816ca7e`; foi preservada e avançada sem reset. Nenhuma outra branch foi alterada ou consultada para reutilizar implementação. Não houve implantação no domínio público.
 
-A aplicação foi construída com HTML, CSS e JavaScript sem framework. O projeto prioriza:
-
-- escrita e leitura em português brasileiro;
-- preservação local dos manuscritos;
-- funcionamento sem internet após a primeira visita;
-- ausência de telemetria identificável;
-- interfaces compreensíveis sem vocabulário técnico;
-- compatibilidade com teclado, mouse e toque.
-
-## Recursos principais
-
-- Editor com modos de escrita, guias de ofício e folha paginada
-- Espelho de Voz para ritmo, vocabulário e estilo
-- RimaLab para métrica, rima e sonoridade
-- Vocabulário Decolonizador para revisão crítica de termos
-- Prova de Autoria com assinatura e marca temporal locais
-- Cópia de segurança exportável
-- Aplicação instalável e preparada para uso sem internet
-
-## Arquitetura
-
-```text
-HTML único de entrada
-├── CSS modular
-├── controladores de interface
-├── engines locais de linguagem
-├── dados linguísticos versionados
-├── armazenamento no navegador
-└── service worker para funcionamento sem internet
-```
-
-Não há framework de interface, serviço de processamento remoto ou dependência externa necessária para editar e preservar um manuscrito.
-
-## Executar localmente
-
-Requer Python 3 para servir os arquivos por HTTP:
-
-```bash
-python3 -m http.server 8799
-```
-
-Depois, abra `http://localhost:8799`.
-
-Service workers exigem `localhost` ou HTTPS. A aplicação não deve ser testada por `file://`.
-
-## Verificação
-
-O repositório mantém auditores automatizados para publicação, privacidade de rede, erros de console, responsividade, integridade de dados, fronteira pública, atualização da PWA, coerência de release e regressões das engines.
-
-Toda mudança de lançamento é validada por GitHub Actions antes da incorporação em `main`. Os critérios da versão 1.0 estão registrados em [docs/release/LAUNCH_CHECKLIST.md](docs/release/LAUNCH_CHECKLIST.md).
-
-## Privacidade
-
-Os manuscritos permanecem no navegador da pessoa usuária. O produto principal não envia o texto para inteligência artificial, servidor de análise ou nuvem de terceiros.
-
-Consulte [privacidade.html](https://escrevaral.com/privacidade.html) para os limites e cuidados do armazenamento local.
-
-## Relatar problemas e sugerir melhorias
-
-Relatos reproduzíveis de erro e sugestões de produto são bem-vindos pelo rastreador de issues.
-
-Este é um repositório de código-fonte público com licença proprietária. O envio de código, modificações ou obras derivadas depende de autorização prévia do titular. Consulte [CONTRIBUTING.md](CONTRIBUTING.md) e [LICENSE](LICENSE) antes de abrir uma contribuição técnica.
-
-Questões de uso: [oi@escrevaral.com](mailto:oi@escrevaral.com)
-
-Questões de segurança: consulte [SECURITY.md](SECURITY.md).
-
-## Autoria
-
-Criado e mantido por [Rafa Mass](https://rafa.pro.br).
+Criado para Rafa Mass / Escrevaral. A licença existente do repositório permanece aplicável.

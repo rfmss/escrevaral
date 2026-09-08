@@ -1,0 +1,1542 @@
+[
+  {
+    "id": "OURO-001",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi excessão aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "excessão",
+        "start": 8,
+        "end": 16,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-002",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi excessões aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "excessões",
+        "start": 8,
+        "end": 17,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-003",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi concerteza aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "concerteza",
+        "start": 8,
+        "end": 18,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-004",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi derrepente aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "derrepente",
+        "start": 8,
+        "end": 18,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-005",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi impecilho aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "impecilho",
+        "start": 8,
+        "end": 17,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-006",
+    "lens": "ortografia",
+    "category": "incorreto",
+    "text": "Escrevi previlégio aqui.",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "previlégio",
+        "start": 8,
+        "end": 18,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Desvio convencional deliberadamente inserido; intenção literária continua possível."
+  },
+  {
+    "id": "OURO-007",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi voce no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "voce",
+        "start": 6,
+        "end": 10,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-008",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi voces no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "voces",
+        "start": 6,
+        "end": 11,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-009",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi tambem no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "tambem",
+        "start": 6,
+        "end": 12,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-010",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi ninguem no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "ninguem",
+        "start": 6,
+        "end": 13,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-011",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi alguem no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "alguem",
+        "start": 6,
+        "end": 12,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-012",
+    "lens": "acentuacao",
+    "category": "incorreto",
+    "text": "Eu vi atraves no papel.",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "atraves",
+        "start": 6,
+        "end": 13,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A forma pretendida está anotada como palavra portuguesa oxítona da base."
+  },
+  {
+    "id": "OURO-013",
+    "lens": "pontuacao",
+    "category": "incorreto",
+    "text": "Cheguei,, esperei.",
+    "expected": [
+      {
+        "id": "PTBR-PON-001",
+        "snippet": ",,",
+        "start": 7,
+        "end": 9,
+        "confidence": "alta"
+      }
+    ],
+    "rationale": "Duplicação mecânica deliberadamente inserida; informação, não erro de estilo."
+  },
+  {
+    "id": "OURO-014",
+    "lens": "pontuacao",
+    "category": "incorreto",
+    "text": "Fiquei;; saí.",
+    "expected": [
+      {
+        "id": "PTBR-PON-002",
+        "snippet": ";;",
+        "start": 6,
+        "end": 8,
+        "confidence": "alta"
+      }
+    ],
+    "rationale": "incorreto"
+  },
+  {
+    "id": "OURO-015",
+    "lens": "pontuacao",
+    "category": "regressão",
+    "text": "Fiquei;; vi,,, saí.",
+    "expected": [
+      {
+        "id": "PTBR-PON-002",
+        "snippet": ";;",
+        "start": 6,
+        "end": 8,
+        "confidence": "alta"
+      },
+      {
+        "id": "PTBR-PON-001",
+        "snippet": ",,,",
+        "start": 11,
+        "end": 14,
+        "confidence": "alta"
+      }
+    ],
+    "rationale": "regressão"
+  },
+  {
+    "id": "OURO-016",
+    "lens": "ortografia",
+    "category": "regressão",
+    "text": "😀 uma excessão",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "excessão",
+        "start": 7,
+        "end": 15,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Offset UTF-16 deve atravessar emoji sem deslocar o trecho selecionado."
+  },
+  {
+    "id": "OURO-017",
+    "lens": "acentuacao",
+    "category": "regressão",
+    "text": "café e voce",
+    "expected": [
+      {
+        "id": "PTBR-ACE-001",
+        "snippet": "voce",
+        "start": 8,
+        "end": 12,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "Acento combinante anterior deve preservar offsets originais."
+  },
+  {
+    "id": "OURO-018",
+    "lens": "ortografia",
+    "category": "regressão",
+    "text": "\"excessão\" mas excessão",
+    "expected": [
+      {
+        "id": "PTBR-ORT-001",
+        "snippet": "excessão",
+        "start": 15,
+        "end": 23,
+        "confidence": "moderada"
+      }
+    ],
+    "rationale": "A citação é protegida; somente a segunda ocorrência é diagnosticada."
+  },
+  {
+    "id": "OURO-019",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Uma exceção, muitas exceções.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-020",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Uma exceção, muitas exceções.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-021",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Uma exceção, muitas exceções.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-022",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Com certeza, foi de repente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-023",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Com certeza, foi de repente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-024",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Com certeza, foi de repente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-025",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Um empecilho; um privilégio.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-026",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Um empecilho; um privilégio.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-027",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Um empecilho; um privilégio.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-028",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Você também conhece alguém?",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-029",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Você também conhece alguém?",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-030",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Você também conhece alguém?",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-031",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Ninguém atravessa por nós.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-032",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Ninguém atravessa por nós.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-033",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Ninguém atravessa por nós.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-034",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Através da janela, vocês.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-035",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Através da janela, vocês.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-036",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Através da janela, vocês.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-037",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Não consultamos nada.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-038",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Não consultamos nada.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-039",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Não consultamos nada.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-040",
+    "lens": "ortografia",
+    "category": "correto",
+    "text": "Ela chegou, esperou; depois saiu.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-041",
+    "lens": "acentuacao",
+    "category": "correto",
+    "text": "Ela chegou, esperou; depois saiu.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-042",
+    "lens": "pontuacao",
+    "category": "correto",
+    "text": "Ela chegou, esperou; depois saiu.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-043",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "Ele pode partir; ontem pôde.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-044",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "Ele pode partir; ontem pôde.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-045",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "Ele pode partir; ontem pôde.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-046",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "Vou por você; vou pôr a mesa.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-047",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "Vou por você; vou pôr a mesa.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-048",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "Vou por você; vou pôr a mesa.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-049",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "Esta casa está vazia.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-050",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "Esta casa está vazia.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-051",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "Esta casa está vazia.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-052",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "Meus pais atravessam o país.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-053",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "Meus pais atravessam o país.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-054",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "Meus pais atravessam o país.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-055",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "O canto seca no canto.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-056",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "O canto seca no canto.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-057",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "O canto seca no canto.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-058",
+    "lens": "ortografia",
+    "category": "ambíguo",
+    "text": "Pode ser são ou São Paulo.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-059",
+    "lens": "acentuacao",
+    "category": "ambíguo",
+    "text": "Pode ser são ou São Paulo.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-060",
+    "lens": "pontuacao",
+    "category": "ambíguo",
+    "text": "Pode ser são ou São Paulo.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-061",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "E o mar. Mas o mar.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-062",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "E o mar. Mas o mar.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-063",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "E o mar. Mas o mar.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-064",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "pra mim tá bom, cê sabe",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-065",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "pra mim tá bom, cê sabe",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-066",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "pra mim tá bom, cê sabe",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-067",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "nóis vai, disse ele",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-068",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "nóis vai, disse ele",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-069",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "nóis vai, disse ele",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-070",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "Ele foi andando lentamente, lentamente, lentamente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-071",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "Ele foi andando lentamente, lentamente, lentamente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-072",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "Ele foi andando lentamente, lentamente, lentamente.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-073",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "Uma frase que continua e continua e respira e continua sem pedir licença ao tamanho da página.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-074",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "Uma frase que continua e continua e respira e continua sem pedir licença ao tamanho da página.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-075",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "Uma frase que continua e continua e respira e continua sem pedir licença ao tamanho da página.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-076",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "Ah!!! Como?! Não?? Sim...",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-077",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "Ah!!! Como?! Não?? Sim...",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-078",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "Ah!!! Como?! Não?? Sim...",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-079",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "chão\nchão\nchão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-080",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "chão\nchão\nchão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-081",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "chão\nchão\nchão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-082",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "Um desinventário do amanhã.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-083",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "Um desinventário do amanhã.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-084",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "Um desinventário do amanhã.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-085",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "idéia, vôo, lingüiça: grafia de outra época.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-086",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "idéia, vôo, lingüiça: grafia de outra época.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-087",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "idéia, vôo, lingüiça: grafia de outra época.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-088",
+    "lens": "ortografia",
+    "category": "não se meta",
+    "text": "a menina que colecionava silêncios",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-089",
+    "lens": "acentuacao",
+    "category": "não se meta",
+    "text": "a menina que colecionava silêncios",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-090",
+    "lens": "pontuacao",
+    "category": "não se meta",
+    "text": "a menina que colecionava silêncios",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-091",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "Excessão é o nome dela.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-092",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "Excessão é o nome dela.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-093",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "Excessão é o nome dela.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-094",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "VOCE é uma sigla.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-095",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "VOCE é uma sigla.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-096",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "VOCE é uma sigla.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-097",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "a superexcessão apareceu",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-098",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "a superexcessão apareceu",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-099",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "a superexcessão apareceu",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-100",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "excessãozinha e prevoce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-101",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "excessãozinha e prevoce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-102",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "excessãozinha e prevoce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-103",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "uma excessão-fantasma",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-104",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "uma excessão-fantasma",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-105",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "uma excessão-fantasma",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-106",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "vocé",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-107",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "vocé",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-108",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "vocé",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-109",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "um nome d'excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-110",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "um nome d'excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-111",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "um nome d'excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-112",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "\"uma excessão,, voce\"",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-113",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "\"uma excessão,, voce\"",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-114",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "\"uma excessão,, voce\"",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-115",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "“voce e excessão;;”",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-116",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "“voce e excessão;;”",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-117",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "“voce e excessão;;”",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-118",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "‘voce e excessão’",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-119",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "‘voce e excessão’",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-120",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "‘voce e excessão’",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-121",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "«voce e excessão»",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-122",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "«voce e excessão»",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-123",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "«voce e excessão»",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-124",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "`voce;; excessão,,`",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-125",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "`voce;; excessão,,`",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-126",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "`voce;; excessão,,`",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-127",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "```js\nvoce;; excessão,,\n```",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-128",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "```js\nvoce;; excessão,,\n```",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-129",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "```js\nvoce;; excessão,,\n```",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-130",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "```\nexcessão,, voce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-131",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "```\nexcessão,, voce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-132",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "```\nexcessão,, voce",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-133",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "https://exemplo.test/voce/excessão,,",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-134",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "https://exemplo.test/voce/excessão,,",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-135",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "https://exemplo.test/voce/excessão,,",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-136",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "www.voce.test/excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-137",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "www.voce.test/excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-138",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "www.voce.test/excessão",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-139",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "voce@exemplo.test",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-140",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "voce@exemplo.test",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-141",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "voce@exemplo.test",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-142",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "um café, só",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-143",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "um café, só",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-144",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "um café, só",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-145",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "1,23; 1.000,00; 12:30",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-146",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "1,23; 1.000,00; 12:30",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-147",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "1,23; 1.000,00; 12:30",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-148",
+    "lens": "ortografia",
+    "category": "adversarial",
+    "text": "---\n...\n?!",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-149",
+    "lens": "acentuacao",
+    "category": "adversarial",
+    "text": "---\n...\n?!",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-150",
+    "lens": "pontuacao",
+    "category": "adversarial",
+    "text": "---\n...\n?!",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-151",
+    "lens": "ortografia",
+    "category": "exceção",
+    "text": "pára, pêlo: uma edição histórica.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-152",
+    "lens": "acentuacao",
+    "category": "exceção",
+    "text": "pára, pêlo: uma edição histórica.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-153",
+    "lens": "pontuacao",
+    "category": "exceção",
+    "text": "pára, pêlo: uma edição histórica.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-154",
+    "lens": "ortografia",
+    "category": "exceção",
+    "text": "Nós lemos a palavra \"concerteza\".",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-155",
+    "lens": "acentuacao",
+    "category": "exceção",
+    "text": "Nós lemos a palavra \"concerteza\".",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-156",
+    "lens": "pontuacao",
+    "category": "exceção",
+    "text": "Nós lemos a palavra \"concerteza\".",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-157",
+    "lens": "ortografia",
+    "category": "exceção",
+    "text": "Ela escreveu “ninguem”.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-158",
+    "lens": "acentuacao",
+    "category": "exceção",
+    "text": "Ela escreveu “ninguem”.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-159",
+    "lens": "pontuacao",
+    "category": "exceção",
+    "text": "Ela escreveu “ninguem”.",
+    "expected": [],
+    "rationale": "Caso de silêncio: não inferir erro a partir de variação, ambiguidade, formato ou ausência no léxico."
+  },
+  {
+    "id": "OURO-160",
+    "lens": "ortografia",
+    "category": "literatura",
+    "text": "Não consultes dicionários.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Machado de Assis, Dom Casmurro, capítulo I",
+      "url": "https://dominiopublico.mec.gov.br/download/texto/bv00180a.pdf",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-161",
+    "lens": "acentuacao",
+    "category": "literatura",
+    "text": "Não consultes dicionários.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Machado de Assis, Dom Casmurro, capítulo I",
+      "url": "https://dominiopublico.mec.gov.br/download/texto/bv00180a.pdf",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-162",
+    "lens": "pontuacao",
+    "category": "literatura",
+    "text": "Não consultes dicionários.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Machado de Assis, Dom Casmurro, capítulo I",
+      "url": "https://dominiopublico.mec.gov.br/download/texto/bv00180a.pdf",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-163",
+    "lens": "ortografia",
+    "category": "literatura",
+    "text": "Liberdade é pouco.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Clarice Lispector, Perto do coração selvagem; fragmento reproduzido pelo IMS",
+      "url": "https://site.claricelispector.ims.com.br/",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-164",
+    "lens": "acentuacao",
+    "category": "literatura",
+    "text": "Liberdade é pouco.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Clarice Lispector, Perto do coração selvagem; fragmento reproduzido pelo IMS",
+      "url": "https://site.claricelispector.ims.com.br/",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-165",
+    "lens": "pontuacao",
+    "category": "literatura",
+    "text": "Liberdade é pouco.",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "Clarice Lispector, Perto do coração selvagem; fragmento reproduzido pelo IMS",
+      "url": "https://site.claricelispector.ims.com.br/",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-166",
+    "lens": "ortografia",
+    "category": "literatura",
+    "text": "O correr da vida embrulha tudo",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "João Guimarães Rosa, Grande sertão: veredas; fragmento reproduzido pelo Instituto Ling",
+      "url": "https://institutoling.org.br/explore/o-sertao-de-joao-guimaraes-rosa",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-167",
+    "lens": "acentuacao",
+    "category": "literatura",
+    "text": "O correr da vida embrulha tudo",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "João Guimarães Rosa, Grande sertão: veredas; fragmento reproduzido pelo Instituto Ling",
+      "url": "https://institutoling.org.br/explore/o-sertao-de-joao-guimaraes-rosa",
+      "checked": "2026-09-08"
+    }
+  },
+  {
+    "id": "OURO-168",
+    "lens": "pontuacao",
+    "category": "literatura",
+    "text": "O correr da vida embrulha tudo",
+    "expected": [],
+    "rationale": "Fragmento mínimo para regressão; não representa avaliação da obra inteira.",
+    "source": {
+      "credit": "João Guimarães Rosa, Grande sertão: veredas; fragmento reproduzido pelo Instituto Ling",
+      "url": "https://institutoling.org.br/explore/o-sertao-de-joao-guimaraes-rosa",
+      "checked": "2026-09-08"
+    }
+  }
+]
