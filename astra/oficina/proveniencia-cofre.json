@@ -4,7 +4,9 @@
   "snapshotCommit": "a029cc4fea0dd7dd4524f553031667f7ff9a0c06",
   "files": {
     "decolonial-data.json": "21634b76e79bb643fcd58524c322d56bc260ff9fada36f6fce6c7dcf69ba54b7",
-    "analise-engine.js": "dea2c567a68986d32e15be9447879a9b359b42ec636260860e3d39398f790638"
+    "analise-engine.js": "dea2c567a68986d32e15be9447879a9b359b42ec636260860e3d39398f790638",
+    "mass-notes-next/src/engines/verbMorphology/irregularLexicon.ts": "c3ecaa966afb7d516bc80c75bc0209e59e19fc3b4f600c71f1d40a345f1fe6f7",
+    "mass-notes-next/src/engines/verbMorphology/regularParadigms.ts": "25f4d13c28f66c43f4b1a09a22f0670d060345f4fe6fc11d4d8c74ece15d47b0"
   },
   "manifest": "227 arquivos conferem; apenas a referência do manifesto a si mesmo diverge.",
   "decolonial": {
@@ -3170,5 +3172,12 @@
       }
     ]
   },
-  "ruleSourcePolicy": "Origem dos dados é documentada; maturidade e alegações etimológicas do pacote não foram herdadas como fatos. Não há calibração bibliográfica presumida."
+  "ruleSourcePolicy": "Origem dos dados é documentada; maturidade e alegações etimológicas do pacote não foram herdadas como fatos. Não há calibração bibliográfica presumida.",
+  "grammar": {
+    "irregularLemmas": 15,
+    "regularLemmas": 22,
+    "localLemmas": 2,
+    "exactVerbSurfaces": 884,
+    "validation": "Recorte lexical com testes; não equivale a revisão individual de todas as flexões nem a desambiguação contextual."
+  }
 }

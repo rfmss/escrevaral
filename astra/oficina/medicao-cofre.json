@@ -1,0 +1,84 @@
+{
+  "measuredAt": "2026-09-09T04:02:41.712Z",
+  "runtime": "v24.19.0",
+  "platform": "linux",
+  "architecture": "x64",
+  "portableBytes": 339350,
+  "coreStartupMs": 13.007,
+  "measurements": [
+    {
+      "lens": "ortografia",
+      "utf16Units": 200000,
+      "medianMs": 4.28,
+      "maxMs": 7.444,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "acentuacao",
+      "utf16Units": 200000,
+      "medianMs": 4.105,
+      "maxMs": 4.251,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "pontuacao",
+      "utf16Units": 200000,
+      "medianMs": 1.62,
+      "maxMs": 1.795,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "decolonial",
+      "utf16Units": 200000,
+      "medianMs": 8.449,
+      "maxMs": 10.051,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "expressoes",
+      "utf16Units": 200000,
+      "medianMs": 9.993,
+      "maxMs": 15.773,
+      "returned": 0,
+      "limited": false
+    },
+    {
+      "lens": "rima",
+      "utf16Units": 120000,
+      "medianMs": 1.951,
+      "maxMs": 4.609,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "metrica",
+      "utf16Units": 120000,
+      "medianMs": 2.155,
+      "maxMs": 3.735,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "morfologia",
+      "utf16Units": 200000,
+      "medianMs": 4.662,
+      "maxMs": 10.769,
+      "returned": 100,
+      "limited": true
+    },
+    {
+      "lens": "sintaxe",
+      "utf16Units": 200000,
+      "medianMs": 10.551,
+      "maxMs": 15.613,
+      "returned": 0,
+      "limited": false
+    }
+  ],
+  "constraints": "Contexto sem DOM; rede bloqueada; Set, Map, Promise, normalize, includes, at e assign ausentes. Medição de V8 nesta máquina, não WebKit nem iPad. Inclui limites do cofre: não extrapolar throughput.",
+  "physicalDevice": "não medido"
+}

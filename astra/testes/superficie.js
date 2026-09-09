@@ -119,4 +119,13 @@ module.exports = function (h) {
     assert.strictEqual(entries().filter(function (b) { return b.getAttribute('aria-current') === 'true'; })[0].getAttribute('title'), 'Primeira');
     assert.strictEqual(entries().length, 2);
   });
+  test('Ponte: as seis lentes novas são acionadas explicitamente e preservam a folha', function () {
+    var a = setup(), samples = { decolonial: 'um cabelo ruim', expressoes: 'subir para cima', rima: 'amor\nflor', metrica: 'o amor', morfologia: 'Eu leio', sintaxe: 'A escritora leu o livro ontem.' };
+    Object.keys(samples).forEach(function (lens) {
+      a.type('manuscrito', samples[lens]); a.flush(); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
+      a.lenses.filter(function (b) { return b.getAttribute('data-lens') === lens; })[0].click(); a.flush(20);
+      assert.ok(a.nodes.findings.childNodes.length > 0); assert.strictEqual(a.nodes.manuscrito.value, samples[lens]);
+      a.type('manuscrito', samples[lens] + ' '); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
+    });
+  });
 };

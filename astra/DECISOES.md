@@ -1,4 +1,6 @@
-# Decisões da entrega mínima
+# Decisões da entrega
+
+Atualização de 9/9/2026: a expansão para nove lentes, as fontes do cofre recebido e a cobertura efetiva estão em [FASE2.md](FASE2.md). As decisões abaixo documentam a fundação; os novos módulos preservam esses contratos.
 
 ## Fronteira da entrega
 
@@ -10,8 +12,8 @@ A branch solicitada já existia: a tentativa de criação devolveu `Reference al
 
 | Mundo | Arquivos | Responsabilidade |
 | --- | --- | --- |
-| Conhecimento | `conhecimento/base.js` | Fontes, quatro regras, duas listas de seis entradas e limites |
-| Máquina | `maquina/cofre.js`, `maquina/acervo.js` | Orquestração, diagnósticos e armazenamento; sem DOM |
+| Conhecimento | `conhecimento/*.js` | Fontes, léxico, paradigmas, catálogos e limites |
+| Máquina | `maquina/*.js` | Orquestração, lentes puras, diagnósticos e armazenamento; sem DOM |
 | Ponte e superfície | `superficie/ponte.js`, `superficie/mesa.css`, `index.html` | Eventos, seleção de trecho e apresentação; nenhuma regra linguística |
 | Oficina de construção | `oficina/empacotar.js`, `testes/` | Empacotamento opcional e bancada; não usados em execução |
 

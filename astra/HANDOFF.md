@@ -1,9 +1,10 @@
 # Continuação colável
 
-Projeto `rfmss/escrevaral`, branch exclusiva `astra/escrevaral-master`. Ela já existia em `816ca7e`; não foi resetada. A entrega nova fica em `astra/`, separada da entrada herdada. Abra `astra/escrevaral.html` (arquivo único sem dependências) ou `astra/index.html` com seus arquivos locais. Leia `astra/CONSTITUICAO.md` intacta e `astra/DECISOES.md` antes de editar.
+HANDOFF — Escrevaral PT-BR
+Repo `rfmss/escrevaral`; somente branch `astra/escrevaral-master`. Trabalhar sozinho, preservar Constituição e acervo. Não consultar/alterar outras branches. Entrada `astra/escrevaral.html` ou `astra/index.html`; leia `CONSTITUICAO.md`, `DECISOES.md` e `FASE2.md`.
 
-Construído: editor, acervo local, exportação/importação, visual creme e máquina inspirado nas referências, cronologia lateral funcional, tema roteiro, som opt-in; conhecimento separado do cofre e da ponte; três lentes, quatro regras, diagnósticos com evidência/confiança/limites, sem reescrita. Quota e concorrência preservam a escrita. Node só na oficina de construção. Fontes em `conhecimento/`, `maquina/`, `superficie/`; recompor a edição portátil com `node astra/oficina/empacotar.js` após mudanças.
+Entregue: editor/acervo local, cronologia e visual creme/monoespaçado; nove lentes sob demanda, sem reescrita. Novas: decolonial (18/606 entradas), expressões (1.447 locuções), rimas/métrica cautelosas, dez classes em léxico restrito e oração simples. 884 formas verbais exatas, ambiguidades preservadas. Não há API, modelo treinado, backend ou telemetria.
 
-Verificado: `node astra/testes/run.js` — 196 verificações, 168 casos do corpus, zero falhas; ES5 aprovado. Nove execuções literárias são só três fragmentos, não validação extensa. DOM simulado; navegador e iPad/iOS 9 não testados. Não há Prova de autoria nem cobertura gramatical completa. Abrir uma URL web não instala a mesa: para uso sem internet, guardar o HTML portátil.
+343 verificações aprovadas: corpus original 168, transplante 47, poesia, gramática, contrato, preservação, ponte simulada e ES5. HTML portátil de 339.350 bytes. Medição V8 com rede/APIs modernas bloqueadas registrada; navegador/iPad físico e calibração bibliográfica individual pendentes. Não houve deploy no domínio citado; não assumir sincronização com repositório dedicado.
 
-Continue apenas nesta branch, primeiro validando abertura/preservação no aparelho e revisão linguística da base; acrescente regras com corpus, preserve a Constituição e nunca altere outras branches.
+Próximo: validar offline/preservação no aparelho; revisar fontes e paradigmas; completar contexto morfossintático e orações complexas. Fases 2B/2C amplas e Prova de autoria pendentes. Snapshot recebido e hashes em `oficina/proveniencia-cofre.json`; apenas dados auditados extraídos, sem executar engines antigas. Regerar com `node astra/oficina/empacotar.js`; testar com `node astra/testes/run.js`.

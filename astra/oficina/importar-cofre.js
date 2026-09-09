@@ -5,7 +5,9 @@ var sourceRoot = process.argv[2], output = path.resolve(__dirname, '..');
 if (!sourceRoot) { throw new Error('Informe a pasta 02-nosso-experimento-pr155 extraída do ZIP fornecido.'); }
 var expected = {
   'decolonial-data.json': '21634b76e79bb643fcd58524c322d56bc260ff9fada36f6fce6c7dcf69ba54b7',
-  'analise-engine.js': 'dea2c567a68986d32e15be9447879a9b359b42ec636260860e3d39398f790638'
+  'analise-engine.js': 'dea2c567a68986d32e15be9447879a9b359b42ec636260860e3d39398f790638',
+  'mass-notes-next/src/engines/verbMorphology/irregularLexicon.ts': 'c3ecaa966afb7d516bc80c75bc0209e59e19fc3b4f600c71f1d40a345f1fe6f7',
+  'mass-notes-next/src/engines/verbMorphology/regularParadigms.ts': '25f4d13c28f66c43f4b1a09a22f0670d060345f4fe6fc11d4d8c74ece15d47b0'
 };
 function read(name) {
   var data = fs.readFileSync(path.join(sourceRoot, name));
@@ -17,6 +19,7 @@ try { acorn = require('acorn'); } catch (e) { var m = { exports: {} }; new Funct
 function literal(node) {
   if (node.type === 'Literal' && typeof node.value === 'string') { return node.value; }
   if (node.type === 'ArrayExpression') { return node.elements.map(literal); }
+  if (node.type === 'ObjectExpression') { var o = {}; node.properties.forEach(function (p) { if (p.computed || p.kind !== 'init') { throw new Error('Somente propriedades literais.'); } o[p.key.name || p.key.value] = literal(p.value); }); return o; }
   throw new Error('A extração exige literais de texto ou listas, sem execução.');
 }
 var found = {};
@@ -74,5 +77,37 @@ var provenance = {
   style: { receivedCliches: found.CLIQUES_PT.length, receivedOverlaps: found.PLEONASMOS.length, activeUnique: style.length, deferred: deferred },
   ruleSourcePolicy: 'Origem dos dados é documentada; maturidade e alegações etimológicas do pacote não foram herdadas como fatos. Não há calibração bibliográfica presumida.'
 };
-fs.writeFileSync(path.join(output, 'oficina', 'proveniencia-cofre.json'), JSON.stringify(provenance, null, 2) + '\n');
 console.log(JSON.stringify({ decolonialReceived: raw.entries.length, decolonialActive: active.length, clichesReceived: found.CLIQUES_PT.length, overlapsReceived: found.PLEONASMOS.length, styleUniqueActive: style.length, styleDeferred: deferred.length }));
+
+/* Apenas tabelas literais dos paradigmas; nenhum resolvedor ou escore herdado é executado. */
+var irregularSource = read('mass-notes-next/src/engines/verbMorphology/irregularLexicon.ts');
+var mark = /const DATA[^=]*=\s*/.exec(irregularSource);
+var irregular = literal(acorn.parseExpressionAt(irregularSource, mark.index + mark[0].length, { ecmaVersion: 'latest' }));
+var regularSource = read('mass-notes-next/src/engines/verbMorphology/regularParadigms.ts'), regular = {};
+['PRESENT', 'PERFECT'].forEach(function (name) { var m = new RegExp('const ' + name + ' =\\s*').exec(regularSource); regular[name] = literal(acorn.parseExpressionAt(regularSource, m.index + m[0].length, { ecmaVersion: 'latest' })); });
+var verbs = {}, lemmas = ['amar', 'andar', 'cantar', 'falar', 'morar', 'olhar', 'comprar', 'estudar', 'trabalhar', 'pensar', 'deixar', 'cortar', 'encontrar', 'esperar', 'correr', 'comer', 'vender', 'beber', 'escrever', 'partir', 'abrir', 'publicar'];
+function verb(surface, lemma, tense, slot) {
+  var key = '$' + surface, tuple = [lemma, tense, slot % 3 + 1, slot < 3 ? 'singular' : 'plural'];
+  verbs[key] = verbs[key] || []; verbs[key].push(tuple);
+}
+Object.keys(irregular).forEach(function (lemma) {
+  Object.keys(irregular[lemma].series).forEach(function (tense) { irregular[lemma].series[tense].split('|').forEach(function (surface, i) { verb(surface, lemma, tense, i); }); });
+});
+lemmas.forEach(function (lemma) {
+  var conj = lemma.slice(-2), stem = lemma.slice(0, -2);
+  ['PRESENT', 'PERFECT'].forEach(function (table) {
+    regular[table][conj].forEach(function (ending, i) {
+      var base = stem;
+      if (table === 'PERFECT' && i === 0 && /car$/.test(lemma)) { base = stem.slice(0, -1) + 'qu'; }
+      verb(base + ending, lemma, table === 'PRESENT' ? 'indicativo:presente' : 'indicativo:pretérito perfeito', i);
+    });
+  });
+});
+[['ler', 'leio|lês|lê|lemos|ledes|leem', 'li|leste|leu|lemos|lestes|leram'], ['sair', 'saio|sais|sai|saímos|saís|saem', 'saí|saíste|saiu|saímos|saístes|saíram']].forEach(function (row) {
+  row[1].split('|').forEach(function (s, i) { verb(s, row[0], 'indicativo:presente', i); }); row[2].split('|').forEach(function (s, i) { verb(s, row[0], 'indicativo:pretérito perfeito', i); });
+});
+writeJS('verbos.js', 'verbData', { version: '2.0.0', forms: verbs, irregularLemmas: Object.keys(irregular), regularLemmas: lemmas, localLemmas: ['ler', 'sair'], source: 'Tabelas literais do cofre recebido; reconhecimento exato, sem remoção de acentos e sem invenção de lemas por sufixo. Ler e sair: complemento local, teste obrigatório.' });
+console.log(JSON.stringify({ irregularLemmas: Object.keys(irregular).length, regularLemmas: lemmas.length, exactVerbSurfaces: Object.keys(verbs).length }));
+
+provenance.grammar = { irregularLemmas: Object.keys(irregular).length, regularLemmas: lemmas.length, localLemmas: 2, exactVerbSurfaces: Object.keys(verbs).length, validation: 'Recorte lexical com testes; não equivale a revisão individual de todas as flexões nem a desambiguação contextual.' };
+fs.writeFileSync(path.join(output, 'oficina', 'proveniencia-cofre.json'), JSON.stringify(provenance, null, 2) + '\n');
