@@ -8,7 +8,7 @@ Esta branch contém uma implementação independente, construída pela [Constitu
 - Folha e acervo locais; exportação `.txt`/`.json`; importação como novas folhas.
 - Nove lentes sob demanda: ortografia, acentuação, pontuação, classes de palavras, oração simples, vocabulário decolonial, expressões, rimas e métrica.
 - Base PT-BR local: 884 formas verbais, 1.447 locuções e 18 observações decoloniais ativas; evidência, ambiguidade e limites; nenhuma reescrita.
-- Tema de roteiro e som opcional, desligado por padrão.
+- Papel gesso/grafite, interface unificada e Courier Prime incorporada só no editor; som opcional, desligado por padrão.
 - HTML, CSS e JavaScript ES5, sem dependências no produto.
 
 Teste a entrega com `node astra/testes/run.js`. O Node serve somente à manutenção, nunca à escrita. Resultado verificado: 351 verificações, incluindo 168 casos do corpus original e 47 de transplante; zero falhas. Compatibilidade física com aparelhos antigos e renderização em navegador ainda não verificadas.
