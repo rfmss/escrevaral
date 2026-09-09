@@ -19,7 +19,7 @@ module.exports = function (h) {
     var html = h.source('index.html'), matches = html.match(/id="[^"]+"/g);
     matches.forEach(function (attr) { nodes[attr.slice(4, -1)] = new Node('div'); });
     ['mesa', 'acervo', 'oficina', 'reset-dismissed'].forEach(function (id) { nodes[id].hidden = true; });
-    var lenses = ['ortografia', 'acentuacao', 'pontuacao'].map(function (id) { var b = new Node('button'); b.setAttribute('data-lens', id); return b; });
+    var lenses = Array.from(html.matchAll(/data-lens="([^"]+)"/g), function (m) { var b = new Node('button'); b.setAttribute('data-lens', m[1]); return b; });
     fakeDocument = new Node('document'); fakeDocument.body = new Node('body'); fakeDocument.hidden = false;
     fakeDocument.getElementById = function (id) { assert.ok(nodes[id], id); return nodes[id]; };
     fakeDocument.querySelectorAll = function () { return lenses; };
@@ -35,7 +35,7 @@ module.exports = function (h) {
     };
     root.window = root;
     h.vm.createContext(root);
-    ['conhecimento/base.js', 'maquina/cofre.js', 'maquina/acervo.js', 'superficie/ponte.js'].forEach(function (file) { h.vm.runInContext(h.source(file), root); });
+    Array.from(html.matchAll(/<script src="([^"]+)"><\/script>/g), function (m) { return m[1]; }).forEach(function (file) { h.vm.runInContext(h.source(file), root); });
     return {
       nodes: nodes, root: root, lenses: lenses, document: fakeDocument, storage: root.localStorage, downloads: downloads,
       type: function (id, val) { nodes[id].value = val; nodes[id].emit('input'); },

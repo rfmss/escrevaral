@@ -2,7 +2,7 @@
   'use strict';
   root.Escr = root.Escr || {};
   root.Escr.knowledge = {
-    version: '1.0.0',
+    version: '2.0.0',
     sources: {
       lexical: { title: 'ABL — Vocabulário Ortográfico (referência de conferência; base não incorporada)', url: 'https://www.academia.org.br/nossa-lingua/busca-no-vocabulario' },
       accent: { title: 'Acordo Ortográfico de 1990, Base VIII (oxítonas)', url: 'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2008/decreto/d6583.htm' },

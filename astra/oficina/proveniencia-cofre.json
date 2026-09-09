@@ -1,0 +1,3174 @@
+{
+  "archiveSha256": "03c78ce4dc2a4740aec68aa81d59a8903408c9c7c64a1c7a6d2358fea15d0594",
+  "snapshot": "02-nosso-experimento-pr155",
+  "snapshotCommit": "a029cc4fea0dd7dd4524f553031667f7ff9a0c06",
+  "files": {
+    "decolonial-data.json": "21634b76e79bb643fcd58524c322d56bc260ff9fada36f6fce6c7dcf69ba54b7",
+    "analise-engine.js": "dea2c567a68986d32e15be9447879a9b359b42ec636260860e3d39398f790638"
+  },
+  "manifest": "227 arquivos conferem; apenas a referência do manifesto a si mesmo diverge.",
+  "decolonial": {
+    "received": 606,
+    "active": 18,
+    "catalog": [
+      {
+        "term": "criado mudo",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feito nas coxas",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "denegrir",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lista negra",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mercado negro",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "magia negra",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ovelha negra",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulata",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulato",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulata tipo exportação",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "da cor do pecado",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amanhã é dia de branco",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "a coisa está preta",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalho de preto",
+        "category": "relacoes",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "negro de alma branca",
+        "category": "relacoes",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "não sou tuas negas",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "samba do crioulo doido",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ter um pé na cozinha",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "inveja branca",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "moreno",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "crioulo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "inhaca",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo ruim",
+        "category": "estetica",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "carapinha",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "produto tabajara",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "solução tupiniquim",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "de traços finos",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "democracia racial",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "doméstica",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "moreno claro",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descobrimento",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descoberta",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "novo mundo",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terceiro mundo",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "subdesenvolvido",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "colônia",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quilombo remanescente",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "índio",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mestiçagem",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "miscigenação",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "horda",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "tribo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "selvagem",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "selvageria",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "escravo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "escrava",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "raça",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "minoria",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sertanejo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "caboclo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "desbravador",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bandeirante",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pacificação",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "integração",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "proteção indígena",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "desordem",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "progresso",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "contribuição",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "primitivo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "folclore",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lenda",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pré-história",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "aculturação",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sincretismo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "magia",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "superstição",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pagão",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fetiche",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "canibalismo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "civilização ocidental",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "exótico",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte primitiva",
+        "category": "estetica",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "dança típica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "alimentação típica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "resgate cultural",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "folclore negro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "língua morta",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dialeto",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "portador de deficiência",
+        "category": "deficiencia",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "necessidades especiais",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "deficiente",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "inválido",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "aleijado",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "perneta",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "manco",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "surdo-mudo",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mudinho",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "retardado",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mongolóide",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mongol",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "débil mental",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "especial",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "criança excepcional",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "louco",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "insano",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fingir demência",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pessoa normal",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "superar a deficiência",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "confinado à cadeira de rodas",
+        "category": "deficiencia",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "preso à cadeira de rodas",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lepra",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "autista",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "histérica",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homossexualismo",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "opção sexual",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "traveco",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "transexualismo",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sexo frágil",
+        "category": "genero",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "coisa de mulher",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalho de homem",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "rainha do lar",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "empoderamento feminino",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dama",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feminismo radical",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ideologia de gênero",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "kit gay",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favelado",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "marginal",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vagabundo",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "malandro",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sem educação",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ignorante",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gentalha",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ralé",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "suburbano",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povão",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "popularesco",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura de massa",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo sem cultura",
+        "category": "classe",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "assistencialismo",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terra de ninguém",
+        "category": "territorio",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "civilizar",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "missão civilizatória",
+        "category": "territorio",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "bárbaro",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lista branca",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalho de escravo",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "coisa de branco",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "errado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "tipo exótico",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "beleza exótica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "traços africanos",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "assimilação",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "interior do país",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lugares remotos",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "selva",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "região atrasada",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favela",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mato",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "invasão",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sem lei",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "nenhures",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mundo não descoberto",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "crença popular",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "esotérico",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mitologia indígena",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "charlatanismo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mito fundador",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homem das cavernas",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "o negro",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "o índio",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "voz de minoria",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "crendice",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "raça inferior",
+        "category": "linguagem",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "cor local",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte ingênua",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "classes baixas",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vazio demográfico",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sem cultura",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente simples",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bissexualismo",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lesbianismo",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feminazi",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "piranha",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cross-dresser como insulto",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "curandeirismo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feitiço",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "medicina primitiva",
+        "category": "conhecimento",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "bugre",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "negona/negão como hipersexualização",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "africano como genérico",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "neguinho/neguinha",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "escravo de",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arruaceiro",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "patrão de forma paternalista",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mendigo",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "região selvagem",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pivete",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arrastão como pânico",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo pixaim",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "boa aparência em ficção como código racial",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pele queimada",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "traços finos como sinônimo de beleza",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "macumba",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "silvícola",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sangue de índio",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feiticeiro",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mão de obra barata",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cigano",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sangue puro",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "miscigenar",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "populações vulneráveis",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalhador braçal",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "caipira como insulto",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "puxado para o negro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalhadora do lar",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "problema social",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "boiola",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "viadagem",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher de respeito",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mãe de família como marcador moral",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sapatona como insulto",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "politicamente correto como insulto",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "discurso do vitimismo",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "acordo de cavalheiros",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem dos excluídos",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "o negro bem apresentado",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo duro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "beleza clássica como código racial",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ciência moderna como única ciência válida",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sabedoria popular como mito",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "magia negra como sinônimo de mal",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feições exóticas",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte ingênua como pejorativo",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "comportamento de homem",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "empreendedor de si mesmo como ideal universal",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobre envergonhado",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quem quer, consegue",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terras devolutas como sinônimo de terras livres",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descobrir o Brasil",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terras virgens",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "imbecil",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bandido",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "viado",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bicha",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "palavra de negro",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "índio preguiçoso",
+        "category": "povos",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "evolução das raças",
+        "category": "conhecimento",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "mestiço como anomalia",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher pública",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "solteirona",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "novo rico",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "plebe",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "falar errado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "serviço de branco",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "interior profundo",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "analfabeto",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gagá",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "doente mental",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bipolar",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "esquizofrênico",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "velhinho",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gordo",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pele cor de chocolate",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "boa gente para um negro",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "representante da sua raça",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "não tem nada a ver com raça",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mérito individual",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber popular como crença",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "intuição natural",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "branqueamento como modernização",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "miscigenação como solução",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "portador de necessidades especiais",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "coitadinho",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gentio",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "nativo como genérico",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo sem escrita",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "remanescente como questionamento",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sotaque carregado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "português correto",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem de periferia",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mau português",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "minoria economicamente ativa",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meritocracia como argumento absoluto",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente humilde",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "coitada a periferia",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "Brasil profundo",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fronteira como vazio",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lugar esquecido pelo poder público",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conquistar o sertão",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher emotiva",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sensível demais para a liderança",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "questão de mulher",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "autista como insulto",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "louco como diagnóstico informal",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo crespo domado",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "negra de feições europeias",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "apresentável",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "falar bem como elogio racial",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "português errado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobre com celular",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "não valorizam a educação",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "comunidade como eufemismo pejorativo",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "zona de risco",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "algoritmo neutro",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fake news",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vocabulário técnico como autoridade",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "senso comum como inferior",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descoberta científica como verdade absoluta",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lugar de fala como censura",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vitimismo",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalhadores informais como irregulares",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "aculturação como progresso",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura pop como rasa",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povos primitivos",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "escolha sexual",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conhecimento científico vs. crenças",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "superstição popular",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher histérica",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "comportamento masculino",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "classe baixa",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobreza como vergonha",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dialeto errado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amizade colorida",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "namoro experimental",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pseudociência indígena",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo rebelde",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "beleza diferente",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lado feminino",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conquistador nato",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "civilizar os indígenas",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo sem história",
+        "category": "povos",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "negro africano",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "área de conflito",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "interior sem lei",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "anão",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "louco perigoso",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feições orientais",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "analfabeto funcional",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ignorância popular",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homem de bem",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "menor carente",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "doença mental",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem neutra",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalho de negro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bugado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "empoderamento",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "senzala digital",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "esquema de pirâmide",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bandido nato",
+        "category": "classe",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "comunidade carente",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bolha ideológica",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "revisionismo histórico",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "politicamente correto",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "padrão de beleza",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "zona sul",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "criança de rua",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "nordestino ignorante",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lavagem cerebral",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "raça negra",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher fatal",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "filtro bolha",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "nativos digitais",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "brecha digital",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "tecnologia como neutro",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "analfabetismo digital",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "desinformação viral",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lavagem cultural",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "imigrantes digitais",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conteúdo viralizado",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "inclusão digital como solução",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meritocracia digital",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura woke",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descolonização como metáfora",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "raça como biologia",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quilombo como passado",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "relação de poder horizontal",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "paternalism",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "relação tóxica",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "relação de dependência emocional",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "família desestruturada",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ausência de figura paterna",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "contato entre culturas",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "miscigenação como harmonia",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amizade entre raças",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terras devolutas",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "desenvolvimento sustentável em território indígena",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favelização",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "zona sul é mais civilizada",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "interior como atraso",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "região de risco",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher guerreira",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "instinto materno",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feminicídio como crime passional",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gênero como ideologia",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher como musa",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vítima de abuso sexual como culpada",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sapatão como insulto",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "deficiente mental",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pessoa especial",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "louco de pedágio",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "autista genial",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "esquizofrênico perigoso",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "folclore como curiosidade",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "música típica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "literatura de cordel como curiosidade regional",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "artesanato como artigo de turismo",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "samba como coisa de negro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura periférica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber popular como superstição",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "medicina alternativa",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conhecimento científico como único válido",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descoberta científica europeia",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "progresso como evolução linear",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "objetivo e imparcial",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "aborígene brasileiro",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "negro retinto",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "africano genérico",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo cigano nômade",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quilombola atrasado",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mestiço como degeneração",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sangue impuro",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "etnia menor",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "selvagem como elogio",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "tribo urbana",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ritmo africano",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "louco varrido",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cegueira moral",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "surdo a razões",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "manco de raciocínio",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "retardado como insulto",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amor de mãe não tem limite",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "brigar é sinal de amor",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ele bate porque te ama",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ciúme é amor",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homem que chora é fraco",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "a amizade entre mulheres não dura",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favela como sinônimo de violência",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "interior como lugar atrasado",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "zona rural como sinônimo de ignorância",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sertão como inferno verde",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "litoral como único Brasil civilizado",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "progresso chegou ao interior",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "país vazio",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quilombo como coisa do passado",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "Amazônia como vazio populacional",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobre coitado",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "classe C",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente simples como elogio à ignorância",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "trabalho pesado não exige inteligência",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobres como caso de polícia",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ascensão social como questão de mérito individual",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favelado como identidade",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "elite intelectual como superior",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "medicina tradicional como superstição",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "oralidade como ausência de cultura",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "analfabeto como ignorante",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber científico como único válido",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "descoberta quando não há novidade",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "terceiro mundo intelectual",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homem de verdade",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "macho alfa",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "homem não chora",
+        "category": "genero",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "boa mãe",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "filha de família",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "esposa perfeita",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher independente como desvio",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sexo oposto",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bagunça tropical",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte popular como decoração",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "literatura menor",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "roupa exótica",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "música popular como inferior",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "caricatura do nordestino",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "teatro de rua como menor",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dança do ventre como vulgar",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "falar difícil",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "jargão de favela",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fala de nordestino",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meme como infantilidade",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "errar a gramática",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "neurótico",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meio autista",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fingir depressão",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "burro como insulto intelectual",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabeça fraca",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "de cadeira",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dislexo",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "criança problemática",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "japonês como genérico para oriental",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "asiático inteligente",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "árabe como terrorista",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "judeu como avarento",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cigano como ladrão",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "latino como genérico",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "negro americano como modelo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber o seu lugar",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dívida de gratidão",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ela gosta assim",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "puxar na raça",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amigo de fachada",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cuidar da casa como natural para mulher",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "brasileiro não sabe português",
+        "category": "linguagem",
+        "status": "observação contextual ativa; etimologia não adotada"
+      },
+      {
+        "term": "língua está se perdendo",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "falar como analfabeto",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "língua certa",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "purismo linguístico",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sem instrução fala errado",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "origem humilde",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo sem ambição",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "faxineira como ameaça de rebaixamento",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente do campo como ignorante",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "chorona",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "muito emotiva para liderar",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher de verdade",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "deu pra louca",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "Norte e Nordeste como problema",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "do mato",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura de periferia",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "acento do interior",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "história oficial",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber de livro",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mito popular",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cultura de massa como inferior",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pesquisa acadêmica como única válida",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "evolução do pensamento humano",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "senso comum como erro",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "iluminismo como origem da razão",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sotaque caipira como errado",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "literatura de massa",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte de rua como vandalismo",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "corpo sarado como ideal",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo liso como profissional",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "funk como barulho",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cinema nacional como inferior",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "filho de peixe peixinho é",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "os dois lados têm razão",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "naturalizar a violência doméstica",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente da sua laia",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meritocracia como solução",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "nordestino como preguiçoso",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "baiano como preguiçoso",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "índio falando português como surpresa",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "negro bem-sucedido como exceção",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "quilombola como passado",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sair da depressão por força de vontade",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "ansiedade moderna",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "criança hiperativa demais",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "se esforçar mais para superar a limitação",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "são pessoas normais também",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher na cozinha",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "comportamento não feminino",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pai de família como identidade moral",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "feminismo como radicalismo",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "é coisa de macho",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher poderosa como exceção",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "território sem lei",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cidade grande como oportunidade única",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "bairro perigoso",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "Nordeste como retrato da seca",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "Sul como padrão de desenvolvimento",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente de bem como classe",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "padrão classe média",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "educação como saída da pobreza",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pobre como problema",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "serviço braçal como inferior",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sotaque carregado como defeito",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "língua pura",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem popular como erro",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "palavrão como ignorância",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "língua de branco",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "a IA não tem preconceito",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dado objetivo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "neutralidade científica",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cancelamento woke",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mimimi de minoria",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "afro-descendente",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "miscigenação como harmonia racial",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "conteúdo inclusivo como marketing",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sotaque neutro",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "área de risco",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem neutra como modismo",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "empreendedorismo como saída da pobreza",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "deficiente superador",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "futuro tecnológico inevitável",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "arte periférica como projeto social",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "índio genérico",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "mulher que sabe demais",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "fragilidade feminina",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "serviço doméstico como dom natural",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "meritocracia",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "classe trabalhadora como massa",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "lenda indígena",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo primitivo",
+        "category": "povos",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "área verde inexplorada",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "cabelo selvagem",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "traços orientais",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "errado linguisticamente",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "linguagem de pobre",
+        "category": "linguagem",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "amizade interracial como exceção",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "sabedoria popular como ingenuidade",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "vítima de pobreza",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "zona de conflito como caos natural",
+        "category": "territorio",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "escritora feminista como militante antes de artista",
+        "category": "genero",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber ancestral como misticismo",
+        "category": "conhecimento",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "violência como algo natural em certas culturas",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "doido",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "incapacitado",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "coitado",
+        "category": "deficiencia",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "gente de bem",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "povo ignorante",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "favor social",
+        "category": "classe",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "traços finos",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "pele morena como café",
+        "category": "estetica",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "saber o lugar",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "dar uma de vítima",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      },
+      {
+        "term": "jogo de vítima",
+        "category": "relacoes",
+        "status": "revisão individual pendente"
+      }
+    ]
+  },
+  "style": {
+    "receivedCliches": 1000,
+    "receivedOverlaps": 527,
+    "activeUnique": 1447,
+    "deferred": [
+      {
+        "term": "finalmente",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "consequentemente",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "malgrado",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "destarte",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "hodiernamente",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "doravante",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "supracitado",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "inegavelmente",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "precipuamente",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— você não entende",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— você nunca vai entender",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— eu precisava te dizer",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— precisava te contar isso",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— foi só um sonho",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— tudo não passou de um sonho",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— precisamos conversar",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— temos que conversar",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— o que você está fazendo aqui",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "— o que você quer de mim",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "foco, força e fé",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "não é você, sou eu",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "no final, o amor verdadeiro venceu tudo",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "não era superstição, era real",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      },
+      {
+        "term": "não é você, sou eu",
+        "kind": "expressão recorrente",
+        "reason": "Fora do casamento de locuções contíguas desta versão."
+      }
+    ]
+  },
+  "ruleSourcePolicy": "Origem dos dados é documentada; maturidade e alegações etimológicas do pacote não foram herdadas como fatos. Não há calibração bibliográfica presumida."
+}

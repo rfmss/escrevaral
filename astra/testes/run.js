@@ -3,7 +3,8 @@ var fs = require('fs'), path = require('path'), vm = require('vm'), assert = req
 var root = path.resolve(__dirname, '..'), passed = 0;
 function test(name, fn) { try { fn(); passed += 1; } catch (e) { console.error('FALHOU: ' + name); throw e; } }
 function source(file) { return fs.readFileSync(path.join(root, file), 'utf8'); }
-function context() { var ctx = {}; vm.createContext(ctx); ['conhecimento/base.js', 'maquina/cofre.js', 'maquina/acervo.js'].forEach(function (file) { vm.runInContext(source(file), ctx); }); return ctx; }
+var runtimeFiles = Array.from(source('index.html').matchAll(/<script src="([^"]+)"><\/script>/g), function (m) { return m[1]; });
+function context() { var ctx = {}; vm.createContext(ctx); runtimeFiles.filter(function (f) { return f !== 'superficie/ponte.js'; }).forEach(function (file) { vm.runInContext(source(file), ctx); }); return ctx; }
 function plain(x) { return JSON.parse(JSON.stringify(x)); }
 function Storage() { this.data = {}; this.fail = false; this.beforeSet = null; }
 Storage.prototype.getItem = function (key) { return Object.prototype.hasOwnProperty.call(this.data, key) ? this.data[key] : null; };
@@ -101,7 +102,7 @@ test('Runtime aceita sintaxe ECMAScript 5', function () {
     if (!native) { throw new Error('Para auditar ES5, instale acorn apenas na oficina de testes.'); }
     var mod = { exports: {} }; new Function('exports', 'module', native)(mod.exports, mod); acorn = mod.exports;
   }
-  ['conhecimento/base.js', 'maquina/cofre.js', 'maquina/acervo.js', 'superficie/ponte.js'].forEach(function (file) { acorn.parse(source(file), { ecmaVersion: 5 }); });
+  runtimeFiles.forEach(function (file) { acorn.parse(source(file), { ecmaVersion: 5 }); });
 });
 test('HTML aponta somente para recursos locais existentes', function () {
   var html = source('index.html'), regex = /(?:src|href)="([^"]+)"/g, match;
@@ -112,10 +113,11 @@ test('Mesa portátil completa, sem script ou folha de estilo externos', function
   var html = source('escrevaral.html'); assert.ok(!/<script\s+src=|<link\s+rel="stylesheet"/.test(html));
   var regex = /<script>([\s\S]*?)<\/script>/g, match, scripts = [];
   while ((match = regex.exec(html))) { scripts.push(match[1]); new vm.Script(match[1]); }
-  assert.strictEqual(scripts.length, 4);
-  var isolated = {}; vm.createContext(isolated); scripts.slice(0, 3).forEach(function (js) { vm.runInContext(js, isolated); });
+  assert.strictEqual(scripts.length, runtimeFiles.length);
+  var isolated = {}; vm.createContext(isolated); scripts.slice(0, -1).forEach(function (js) { vm.runInContext(js, isolated); });
   assert.strictEqual(isolated.Escr.createVault(isolated.Escr.knowledge).analyze('ortografia', 'uma excessão').findings.length, 1);
 });
 var runSurface = require('./superficie.js');
 runSurface({ test: test, source: source, Storage: Storage, vm: vm, assert: assert });
+require('./transplante.js')({ test: test, source: source, assert: assert, E: E, vault: vault, context: context });
 console.log(JSON.stringify({ passed: passed, corpusCases: corpus.length, literaryCases: corpus.filter(function (e) { return e.category === 'literatura'; }).length, failures: 0, runtime: process.version, physicalLegacyDevice: 'não testado', browserRendering: 'não testado' }, null, 2));

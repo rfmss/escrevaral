@@ -69,7 +69,9 @@
       } });
     }
     builtin('ortografia'); builtin('acentuacao'); builtin('pontuacao');
+    (root.Escr.extensions || []).forEach(function (install) { install(register, knowledge); });
     return { register: register, analyze: analyze, maxLength: maxLength };
   }
   root.Escr.createVault = createVault;
+  root.Escr.protectedText = protectedText;
 }(typeof window !== 'undefined' ? window : this));

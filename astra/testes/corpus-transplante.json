@@ -1,0 +1,415 @@
+[
+  {
+    "id": "TRANS-001",
+    "lens": "decolonial",
+    "text": "Era uma terra de ninguém.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-001",
+        "snippet": "terra de ninguém",
+        "start": 8,
+        "end": 24
+      }
+    ]
+  },
+  {
+    "id": "TRANS-002",
+    "lens": "decolonial",
+    "text": "A frase retrata um índio preguiçoso.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-002",
+        "snippet": "índio preguiçoso",
+        "start": 19,
+        "end": 35
+      }
+    ]
+  },
+  {
+    "id": "TRANS-003",
+    "lens": "decolonial",
+    "text": "Foi chamada medicina primitiva.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-004",
+    "lens": "decolonial",
+    "text": "Passou a chamar de evolução das raças.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-003",
+        "snippet": "evolução das raças",
+        "start": 19,
+        "end": 37
+      }
+    ]
+  },
+  {
+    "id": "TRANS-005",
+    "lens": "decolonial",
+    "text": "😀 um cabelo ruim",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-004",
+        "snippet": "cabelo ruim",
+        "start": 6,
+        "end": 17
+      }
+    ]
+  },
+  {
+    "id": "TRANS-006",
+    "lens": "decolonial",
+    "text": "Ele fez trabalho de preto.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-005",
+        "snippet": "trabalho de preto",
+        "start": 8,
+        "end": 25
+      }
+    ]
+  },
+  {
+    "id": "TRANS-007",
+    "lens": "decolonial",
+    "text": "Surgiu a categoria raça inferior.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-006",
+        "snippet": "raça inferior",
+        "start": 19,
+        "end": 32
+      }
+    ]
+  },
+  {
+    "id": "TRANS-008",
+    "lens": "decolonial",
+    "text": "Estava confinado à cadeira de rodas.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-007",
+        "snippet": "confinado à cadeira de rodas",
+        "start": 7,
+        "end": 35
+      }
+    ]
+  },
+  {
+    "id": "TRANS-009",
+    "lens": "decolonial",
+    "text": "O refrão era homem não chora.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-008",
+        "snippet": "homem não chora",
+        "start": 13,
+        "end": 28
+      }
+    ]
+  },
+  {
+    "id": "TRANS-010",
+    "lens": "decolonial",
+    "text": "Tratavam como povo sem cultura.",
+    "category": "observação contextual",
+    "expected": [
+      {
+        "id": "PTBR-DEC-009",
+        "snippet": "povo sem cultura",
+        "start": 14,
+        "end": 30
+      }
+    ]
+  },
+  {
+    "id": "TRANS-011",
+    "lens": "decolonial",
+    "text": "Não existe raça inferior.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-012",
+    "lens": "decolonial",
+    "text": "Ela rejeitou a expressão cabelo ruim.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-013",
+    "lens": "decolonial",
+    "text": "Ele critica o rótulo sexo frágil.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-014",
+    "lens": "decolonial",
+    "text": "— Isso é trabalho de preto.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-015",
+    "lens": "decolonial",
+    "text": "\"cabelo ruim\"",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-016",
+    "lens": "decolonial",
+    "text": "“sexo frágil”",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-017",
+    "lens": "decolonial",
+    "text": "`povo sem cultura`",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-018",
+    "lens": "decolonial",
+    "text": "```\ncabelo ruim\n```",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-019",
+    "lens": "decolonial",
+    "text": "https://exemplo.test/cabelo ruim",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-020",
+    "lens": "decolonial",
+    "text": "cabelo\nruim",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-021",
+    "lens": "decolonial",
+    "text": "cabelos ruins",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-022",
+    "lens": "decolonial",
+    "text": "um cabeloruim",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-023",
+    "lens": "decolonial",
+    "text": "um cabelo ruimmente",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-024",
+    "lens": "decolonial",
+    "text": "homem. Não chora.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-025",
+    "lens": "decolonial",
+    "text": "somos povo sem cultura",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-026",
+    "lens": "decolonial",
+    "text": "sou portador de deficiência",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-027",
+    "lens": "decolonial",
+    "text": "Ela disse cabelo ruim.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-028",
+    "lens": "expressoes",
+    "text": "No final das contas, fiquei.",
+    "category": "observação de estilo",
+    "expected": [
+      {
+        "id": "PTBR-EST-001",
+        "snippet": "No final das contas",
+        "start": 0,
+        "end": 19
+      }
+    ]
+  },
+  {
+    "id": "TRANS-029",
+    "lens": "expressoes",
+    "text": "Foi preciso subir para cima.",
+    "category": "observação de estilo",
+    "expected": [
+      {
+        "id": "PTBR-EST-002",
+        "snippet": "subir para cima",
+        "start": 12,
+        "end": 27
+      }
+    ]
+  },
+  {
+    "id": "TRANS-030",
+    "lens": "expressoes",
+    "text": "😀 uma certeza absoluta",
+    "category": "observação de estilo",
+    "expected": [
+      {
+        "id": "PTBR-EST-002",
+        "snippet": "certeza absoluta",
+        "start": 7,
+        "end": 23
+      }
+    ]
+  },
+  {
+    "id": "TRANS-031",
+    "lens": "expressoes",
+    "text": "\"subir para cima\"",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-032",
+    "lens": "expressoes",
+    "text": "“no final das contas”",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-033",
+    "lens": "expressoes",
+    "text": "`certeza absoluta`",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-034",
+    "lens": "expressoes",
+    "text": "subir. Para cima.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-035",
+    "lens": "expressoes",
+    "text": "subir\npara cima",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-036",
+    "lens": "expressoes",
+    "text": "subir para cimavante",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-037",
+    "lens": "expressoes",
+    "text": "no final das contasse",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-038",
+    "lens": "expressoes",
+    "text": "nóis vai e cê sabe",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-039",
+    "lens": "expressoes",
+    "text": "E o mar. Mas o mar.",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-040",
+    "lens": "expressoes",
+    "text": "https://exemplo.test/subir para cima",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-041",
+    "lens": "expressoes",
+    "text": "café e chão",
+    "category": "não se meta",
+    "expected": []
+  },
+  {
+    "id": "TRANS-042",
+    "lens": "decolonial",
+    "text": "Não consultes dicionários.",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  },
+  {
+    "id": "TRANS-043",
+    "lens": "expressoes",
+    "text": "Não consultes dicionários.",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  },
+  {
+    "id": "TRANS-044",
+    "lens": "decolonial",
+    "text": "Liberdade é pouco.",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  },
+  {
+    "id": "TRANS-045",
+    "lens": "expressoes",
+    "text": "Liberdade é pouco.",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  },
+  {
+    "id": "TRANS-046",
+    "lens": "decolonial",
+    "text": "O correr da vida embrulha tudo",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  },
+  {
+    "id": "TRANS-047",
+    "lens": "expressoes",
+    "text": "O correr da vida embrulha tudo",
+    "category": "literatura: fragmentos já creditados no corpus-ouro",
+    "expected": []
+  }
+]
