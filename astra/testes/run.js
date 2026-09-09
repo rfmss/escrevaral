@@ -95,6 +95,27 @@ test('Sem expansão de armazenamento a cada tecla guardada', function () {
   for (var i = 0; i < 500; i += 1) { d.text += 'a'; d = a.save(d).document; }
   assert.strictEqual(s.length, 1); assert.strictEqual(a.list().documents[0].text.length, 500);
 });
+test('Acervo: criação persiste em salvamentos, conflitos e ordenação', function () {
+  var a = E.createArchive(new Storage()), older = E.freshDocument(), newer = E.freshDocument();
+  older.created = '2026-09-09T22:30:05.000Z'; newer.created = '2026-09-09T22:30:50.000Z';
+  older = a.save(older).document; var parallel = plain(older); newer = a.save(newer).document;
+  older.text = 'continua'; older = a.save(older).document;
+  assert.strictEqual(older.created, '2026-09-09T22:30:05.000Z'); assert.strictEqual(a.list().documents[0].id, newer.id);
+  var conflict = a.save(parallel); assert.ok(conflict.conflict); assert.strictEqual(conflict.document.created, older.created);
+});
+test('Acervo: ordem estável até quando duas criações têm o mesmo milissegundo', function () {
+  var a = E.createArchive(new Storage()), one = E.freshDocument(), two = E.freshDocument();
+  one.created = two.created = '2026-09-09T22:30:05.000Z';
+  one = a.save(one).document; two = a.save(two).document;
+  var before = plain(a.list().documents.map(function (d) { return d.noteId; }));
+  for (var i = 0; i < 10; i += 1) { one = a.save(one).document; }
+  assert.deepStrictEqual(plain(a.list().documents.map(function (d) { return d.noteId; })), before);
+});
+test('Acervo: datas novas inválidas são rejeitadas; cópias antigas continuam válidas', function () {
+  var doc = E.freshDocument(); doc.created = 'ontem'; assert.strictEqual(E.validDocument(doc), false);
+  delete doc.created; assert.strictEqual(E.validDocument(doc), true);
+  doc.createdApproximate = 'sim'; assert.strictEqual(E.validDocument(doc), false);
+});
 test('Runtime aceita sintaxe ECMAScript 5', function () {
   var acorn;
   try { acorn = require('acorn'); } catch (e) {

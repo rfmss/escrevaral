@@ -30,14 +30,15 @@
     <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
   <div class="desk">
-  <aside class="timeline" aria-label="Folhas recentes por data de gravação">
+  <aside class="timeline" aria-label="Folhas por data de criação">
     <button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha">+</button>
-    <div id="timeline-list"></div>
+    <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Toque no horário para abrir a folha.</p>
+    <div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div>
   </aside>
   <main class="paper">
     <label class="sr-only" for="titulo">Título do manuscrito</label>
     <input id="titulo" class="title" type="text" placeholder="Título" autocomplete="off" spellcheck="false">
-    <p class="manuscript-date"><time id="manuscript-date" aria-label="Data da folha; atualizada a cada gravação"></time></p>
+    <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
     <label class="sr-only" for="manuscrito">Manuscrito</label>
     <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
     <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span><span class="privacy">Só neste aparelho</span></footer>

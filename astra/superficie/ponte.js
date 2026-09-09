@@ -4,7 +4,7 @@
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
   var lensButtons = document.querySelectorAll('[data-lens]');
-  var timelineEntries = [], months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
   function text(node, value) { node.textContent = value; }
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
@@ -12,26 +12,29 @@
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
   function message(value) { text(saveStatus, value); }
   function pad(n) { return n < 10 ? '0' + n : String(n); }
-  function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()); }
-  function metadata(entry) { return { id: entry.id, title: entry.title, updated: entry.updated }; }
-  function renderTimeline(refresh, previousId) {
-    var list = byId('timeline-list'), date = new Date(doc.updated), monthKey = '', dayKey = '';
+  function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
+  function noteDate(entry) { return entry.created || entry.updated; }
+  function metadata(entry) { return { id: entry.id, noteId: entry.noteId || entry.id, title: entry.title, created: noteDate(entry), updated: entry.updated, createdApproximate: !entry.created || !!entry.createdApproximate }; }
+  function renderTimeline(refresh, previousId, reveal) {
+    var list = byId('timeline-list'), date = new Date(noteDate(doc)), monthKey = '', dayKey = '', active = null, oldScroll = list.scrollTop;
+    timelineRendering = true;
     text(byId('manuscript-date'), date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear() + ', ' + timeLabel(date));
-    byId('manuscript-date').setAttribute('datetime', doc.updated);
+    byId('manuscript-date').setAttribute('datetime', noteDate(doc));
+    byId('manuscript-date').setAttribute('aria-label', doc.created && !doc.createdApproximate ? 'Data de criação da folha' : 'Data preservada da folha antiga; criação desconhecida');
     if (refresh && archive) {
       try { timelineEntries = archive.list().documents.map(metadata); } catch (ignore) { /* A folha aberta permanece acessível. */ }
     }
     timelineEntries = timelineEntries.filter(function (entry) { return entry.id !== doc.id && entry.id !== previousId; });
-    if (doc.revision) { timelineEntries.push(metadata(doc)); }
-    timelineEntries.sort(function (a, b) { return a.updated < b.updated ? 1 : a.updated > b.updated ? -1 : a.id < b.id ? -1 : 1; });
-    var visible = timelineEntries.slice(0, 12);
-    if (!doc.revision) { visible.unshift(metadata(doc)); }
-    else if (!visible.some(function (entry) { return entry.id === doc.id; })) { visible.push(metadata(doc)); }
+    timelineEntries.push(metadata(doc));
+    timelineEntries.sort(function (a, b) { return Date.parse(a.created) - Date.parse(b.created) || (a.noteId < b.noteId ? -1 : a.noteId > b.noteId ? 1 : 0); });
+    if (reveal) { timelineEntries.forEach(function (entry, i) { if (entry.id === doc.id) { timelineCount = Math.max(timelineCount, timelineEntries.length - i); } }); }
+    var visible = timelineEntries.slice(-timelineCount);
     list.textContent = '';
+    if (visible.length < timelineEntries.length) { var older = button(list, 'Anteriores ↑', olderNotes); older.className = 'timeline-older'; }
     visible.forEach(function (entry) {
-      var when = new Date(entry.updated), month = when.getFullYear() + '-' + when.getMonth(), day = month + '-' + when.getDate();
+      var when = new Date(entry.created), month = when.getFullYear() + '-' + when.getMonth(), day = month + '-' + when.getDate();
       if (month !== monthKey) {
-        var m = paragraph(list, months[when.getMonth()].slice(0, 1).toUpperCase() + months[when.getMonth()].slice(1, 3), 'timeline-month');
+        var m = paragraph(list, months[when.getMonth()].slice(0, 1).toUpperCase() + months[when.getMonth()].slice(1, 3) + ' ' + when.getFullYear(), 'timeline-month');
         m.setAttribute('title', months[when.getMonth()] + ' de ' + when.getFullYear()); monthKey = month;
       }
       if (day !== dayKey) { paragraph(list, when.getDate() + ' ' + ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][when.getDay()], 'timeline-day'); dayKey = day; }
@@ -44,10 +47,19 @@
           try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
         } catch (e) { message('Não foi possível abrir esta folha. Sua escrita permanece aqui.'); }
       });
+      if (entry.id === doc.id) { active = b; }
       b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
-      b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when));
+      b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
       b.setAttribute('title', entry.title || 'Sem título');
     });
+    list.scrollTop = reveal && active ? Math.max(0, active.offsetTop - list.clientHeight / 2 + active.offsetHeight / 2) : oldScroll;
+    timelineRendering = false;
+  }
+  function olderNotes() {
+    if (timelineRendering || timelineCount >= timelineEntries.length) { return; }
+    var list = byId('timeline-list'), oldHeight = list.scrollHeight, oldScroll = list.scrollTop;
+    timelineCount += 40; renderTimeline(false);
+    list.scrollTop = oldScroll + list.scrollHeight - oldHeight;
   }
   function persist() {
     window.clearTimeout(timer);
@@ -84,7 +96,7 @@
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
-    renderTimeline(true);
+    renderTimeline(true, null, true);
   }
   function renderArchive() {
     var list = byId('document-list'); list.textContent = '';
@@ -101,7 +113,7 @@
           try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
           message('Folha aberta.');
         });
-        var small = document.createElement('small'); text(small, new Date(entry.updated).toLocaleString('pt-BR')); b.appendChild(small); list.appendChild(li);
+        var small = document.createElement('small'); text(small, new Date(noteDate(entry)).toLocaleDateString('pt-BR') + ', ' + timeLabel(new Date(noteDate(entry)))); b.appendChild(small); list.appendChild(li);
       });
     } catch (e) { text(byId('archive-status'), 'Não foi possível ler o acervo. Nenhum registro foi alterado.'); }
   }
@@ -184,10 +196,10 @@
         } else { throw new Error('Traga um texto .txt ou uma cópia .json do Escrevaral.'); }
         if (!archive) {
           if (doc.text || doc.title || entries.length !== 1) { throw new Error('Sem espaço para guardar novas folhas. Baixe sua escrita antes de trocar de navegador.'); }
-          latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
+          latest = E.freshDocument(); latest.title = entries[0].title; latest.text = entries[0].text; latest.created = noteDate(entries[0]); latest.createdApproximate = !entries[0].created || !!entries[0].createdApproximate; loadDocument(latest); dirty = true; message('Arquivo aberto apenas nesta folha. Baixe uma cópia antes de sair.'); return;
         }
         entries.forEach(function (entry) {
-          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); latest = archive.save(imported).document; count += 1;
+          var imported = E.freshDocument(); imported.title = entry.title; imported.text = entry.text; imported.dismissed = entry.dismissed.slice(); imported.created = noteDate(entry); imported.createdApproximate = !entry.created || !!entry.createdApproximate; latest = archive.save(imported).document; count += 1;
         });
         loadDocument(latest); message('Arquivo trazido como ' + count + (count === 1 ? ' nova folha.' : ' novas folhas.')); renderArchive();
       } catch (e) { message((count ? count + ' folhas já foram trazidas. ' : '') + (e.name === 'QuotaExceededError' ? 'Faltou espaço para guardar o restante.' : e instanceof SyntaxError ? 'O arquivo não contém uma cópia válida.' : e.message) + ' O acervo anterior permanece.'); }
@@ -219,7 +231,8 @@
     var theme = storage.getItem('escrevaral.astra.theme') === 'folha' ? 'folha' : 'roteiro';
     byId('tema').value = theme; document.body.setAttribute('data-theme', theme);
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
-  renderTimeline(true);
+  renderTimeline(true, null, true);
+  listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); });
   listen(manuscript, 'compositionend', function () { composing = false; changed(); });
@@ -227,7 +240,7 @@
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); showPanel('acervo', 'acervo-toggle', false); title.focus(); }
+  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); dirty = true; persist(); renderTimeline(false, null, true); showPanel('acervo', 'acervo-toggle', false); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }

@@ -22,11 +22,14 @@ textarea:focus, .title:focus { outline: 1px solid #b9b7a7; outline-offset: 7px; 
 .privacy { float: right; }
 .desk-tools { margin: 0 0 18px; }
 .desk-tools button { margin: 0 7px 10px 0; font: 600 16px/1.4 'Courier New', Courier, monospace; }
-.timeline { position: absolute; top: 4px; right: 0; width: 90px; text-align: center; font-family: Arial, sans-serif; }
+.timeline { position: absolute; top: 4px; right: 0; width: 110px; text-align: center; font-family: Arial, sans-serif; }
+#timeline-list { position: relative; height: 330px; height: 44vh; min-height: 180px; max-height: 420px; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; padding: 36px 4px; border-top: 1px solid #d6d1bc; border-bottom: 1px solid #d6d1bc; }
+#timeline-list:focus { outline: 2px solid #795339; outline-offset: 4px; }
+.timeline-older { width: 100%; padding: 8px 0; font-size: 12px; border-color: transparent; }
 .new-leaf { display: block; width: 44px; height: 44px; min-height: 44px; padding: 0; margin: 0 auto 18px; border-radius: 50%; font: 600 23px/42px Arial, sans-serif; }
 .timeline-month { font-size: 16px; line-height: 1.5; color: #68675c; margin: 18px 0 8px; }
 .timeline-day { font-size: 14px; line-height: 1.5; color: #767568; margin: 6px 0 10px; }
-.timeline-entry { display: block; width: 90px; padding: 11px 4px; min-height: 44px; margin: 0 0 8px; border-color: transparent; font: 15px/1.4 'Courier New', Courier, monospace; }
+.timeline-entry { display: block; width: 100%; padding: 11px 2px; min-height: 44px; margin: 0 0 8px; border-color: transparent; font: 15px/1.4 'Courier New', Courier, monospace; white-space: nowrap; }
 .timeline-entry[aria-current="true"] { background: #bf4829; border-color: #bf4829; color: #fffaf1; font-weight: 600; }
 .colophon { width: 88%; max-width: 820px; padding: 28px 140px 25px 0; margin: 0 auto; color: #756f61; font: 11px/1.8 Arial, sans-serif; }
 .colophon span:first-child { letter-spacing: 2px; margin-right: 18px; }
@@ -75,9 +78,9 @@ body[data-theme="folha"] { background: #f9f8f3; }
 body[data-theme="folha"] textarea { font-family: Georgia, 'Times New Roman', serif; letter-spacing: 0; }
 @media (max-width: 650px) {
   .desk { width: 90%; margin-top: 25px; }
-  .paper { margin-right: 82px; }
-  .timeline { width: 62px; }
-  .timeline-entry { width: 62px; font-size: 14px; }
+  .paper { margin-right: 116px; }
+  .timeline { width: 98px; }
+  .timeline-entry { width: 100%; font-size: 14px; }
   .timeline-month { font-size: 14px; }
   .timeline-day { font-size: 12px; }
   .title { font-size: 24px; }
@@ -95,9 +98,9 @@ body[data-theme="folha"] textarea { font-family: Georgia, 'Times New Roman', ser
   .desk { width: 88%; }
   .timeline { position: static; width: 100%; text-align: left; margin-bottom: 24px; }
   .new-leaf { display: inline-block; vertical-align: top; margin: 0 10px 0 0; }
-  #timeline-list { display: inline-block; max-width: 75%; max-height: 102px; overflow: auto; vertical-align: top; }
-  .timeline-entry { display: inline-block; width: auto; min-width: 62px; margin: 0 6px 5px 0; }
-  .timeline-month, .timeline-day { display: inline-block; margin: 0 8px 6px 0; }
+  #timeline-list { display: inline-block; width: 170px; max-width: 75%; height: 148px; min-height: 148px; max-height: 148px; vertical-align: top; text-align: center; padding: 18px 6px; }
+  .timeline-entry { display: block; width: 100%; margin: 0 0 8px; }
+  .timeline-month, .timeline-day { display: block; margin: 6px 0; }
   .paper { margin-right: 0; }
 }
 @media print { .timeline, .desk-tools, .shelf, .workshop, .colophon, .paper-footer { display: none !important; } body { background: white !important; } .desk { width: 100%; margin: 0; max-width: none; } .paper { margin: 0; } }

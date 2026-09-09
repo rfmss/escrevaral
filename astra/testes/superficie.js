@@ -2,11 +2,16 @@
 'use strict';
 module.exports = function (h) {
   var test = h.test, assert = h.assert;
-  function setup(storage) {
+  function setup(storage, clockStart) {
+    var clock = clockStart ? new Date(clockStart).getTime() : Date.now();
+    function ClockDate(value) { return new Date(arguments.length ? value : clock); }
+    ClockDate.parse = Date.parse; ClockDate.UTC = Date.UTC; ClockDate.now = function () { return clock; };
     var nodes = {}, timers = {}, nextTimer = 0, downloads = [], readers = [], events = {}, root, fakeDocument;
-    function Node(tag) { this.tagName = tag; this.childNodes = []; this.attributes = {}; this.handlers = {}; this.value = ''; this.hidden = false; this.disabled = false; this.checked = false; this._text = ''; this.files = []; if (tag === 'a') { this.download = ''; } }
+    function Node(tag) { this.tagName = tag; this.childNodes = []; this.attributes = {}; this.handlers = {}; this.value = ''; this.hidden = false; this.disabled = false; this.checked = false; this._text = ''; this.files = []; this.scrollTop = 0; this.clientHeight = 180; this.offsetHeight = 44; if (tag === 'a') { this.download = ''; } }
     Object.defineProperty(Node.prototype, 'textContent', { get: function () { return this._text + this.childNodes.map(function (n) { return n.textContent; }).join(''); }, set: function (s) { this._text = String(s); this.childNodes = []; } });
-    Node.prototype.appendChild = function (n) { this.childNodes.push(n); return n; };
+    Node.prototype.appendChild = function (n) { n.parentNode = this; this.childNodes.push(n); return n; };
+    Object.defineProperty(Node.prototype, 'offsetTop', { get: function () { return this.parentNode ? this.parentNode.childNodes.indexOf(this) * 44 : 0; } });
+    Object.defineProperty(Node.prototype, 'scrollHeight', { get: function () { return this.childNodes.length * 44; } });
     Node.prototype.removeChild = function (n) { this.childNodes.splice(this.childNodes.indexOf(n), 1); };
     Node.prototype.addEventListener = function (name, fn) { this.handlers[name] = this.handlers[name] || []; this.handlers[name].push(fn); };
     Node.prototype.setAttribute = function (name, val) { this.attributes[name] = String(val); };
@@ -24,7 +29,7 @@ module.exports = function (h) {
     fakeDocument.getElementById = function (id) { assert.ok(nodes[id], id); return nodes[id]; };
     fakeDocument.querySelectorAll = function () { return lenses; };
     fakeDocument.createElement = function (tag) { return new Node(tag); };
-    root = { document: fakeDocument, navigator: {}, console: console, localStorage: storage || new h.Storage(),
+    root = { Date: ClockDate, document: fakeDocument, navigator: {}, console: console, localStorage: storage || new h.Storage(),
       setTimeout: function (fn, delay) { nextTimer += 1; timers[nextTimer] = { fn: fn, delay: delay }; return nextTimer; },
       clearTimeout: function (id) { delete timers[id]; },
       addEventListener: function (name, fn) { events[name] = fn; },
@@ -37,6 +42,7 @@ module.exports = function (h) {
     h.vm.createContext(root);
     Array.from(html.matchAll(/<script src="([^"]+)"><\/script>/g), function (m) { return m[1]; }).forEach(function (file) { h.vm.runInContext(h.source(file), root); });
     return {
+      setTime: function (value) { clock = new Date(value).getTime(); },
       nodes: nodes, root: root, lenses: lenses, document: fakeDocument, storage: root.localStorage, downloads: downloads,
       type: function (id, val) { nodes[id].value = val; nodes[id].emit('input'); },
       flush: function (limit) { Object.keys(timers).forEach(function (id) { if (timers[id] && timers[id].delay <= (limit || 1000)) { var fn = timers[id].fn; delete timers[id]; fn(); } }); },
@@ -81,6 +87,7 @@ module.exports = function (h) {
   test('Ponte: cópia completa restaura em outro acervo sem substituir o anterior', function () {
     var a = setup(); a.type('manuscrito', 'primeira'); a.flush(); a.nodes['new-document'].click(); a.type('manuscrito', 'segunda'); a.flush(); a.nodes['export-backup'].click();
     var b = setup(); b.type('manuscrito', 'existente'); b.flush(); b.import('copia.json', a.downloads[0]); b.finishImport();
+    assert.deepStrictEqual(Array.from(b.archive().filter(function (x) { return x.text !== 'existente'; }).map(function (x) { return x.created; }).sort()), Array.from(a.archive().map(function (x) { return x.created; }).sort()));
     assert.strictEqual(b.archive().length, 3); assert.deepStrictEqual(Array.from(b.archive().map(function (x) { return x.text; }).sort()), ['existente', 'primeira', 'segunda']);
   });
   test('Ponte: importação malformada não altera o acervo', function () {
@@ -128,4 +135,53 @@ module.exports = function (h) {
       a.type('manuscrito', samples[lens] + ' '); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
     });
   });
+  test('Roleta: duas folhas no mesmo minuto mostram segundos e mantêm a criação ao editar', function () {
+    var a = setup(null, '2026-09-09T22:30:05');
+    a.type('titulo', 'Primeira'); a.type('manuscrito', 'um'); a.flush();
+    a.setTime('2026-09-09T22:30:50'); a.nodes['timeline-new'].click(); a.type('titulo', 'Segunda'); a.flush();
+    var rail = a.nodes['timeline-list'];
+    function entries() { return rail.childNodes.filter(function (n) { return n.className === 'timeline-entry'; }); }
+    assert.deepStrictEqual(entries().map(function (n) { return n.textContent; }), ['22:30:05', '22:30:50']);
+    entries()[0].click(); var before = a.nodes['manuscript-date'].getAttribute('datetime');
+    rail.scrollTop = 31; a.setTime('2026-09-10T01:01:12'); a.type('manuscrito', 'um revisado'); a.flush();
+    assert.strictEqual(a.nodes['manuscript-date'].getAttribute('datetime'), before);
+    assert.strictEqual(rail.scrollTop, 31);
+    assert.deepStrictEqual(entries().map(function (n) { return n.textContent; }), ['22:30:05', '22:30:50']);
+    assert.strictEqual(a.archive().filter(function (d) { return d.title === 'Primeira'; })[0].updated, new Date('2026-09-10T01:01:12').toISOString());
+  });
+  test('Roleta: novas folhas vazias no mesmo segundo permanecem distintas e sem foco no teclado', function () {
+    var a = setup(null, '2026-09-09T22:30:05');
+    for (var i = 0; i < 3; i += 1) { a.nodes['timeline-new'].click(); }
+    assert.strictEqual(a.archive().length, 3);
+    assert.strictEqual(new Set(a.archive().map(function (d) { return d.id; })).size, 3);
+    assert.notStrictEqual(a.document.activeElement, a.nodes.titulo);
+    assert.strictEqual(setup(a.storage).archive().length, 3);
+  });
+  test('Roleta: novas folhas revelam o horário ativo e mantêm acessíveis mais de doze datas', function () {
+    var a = setup(null, '2026-09-09T22:30:05');
+    for (var i = 0; i < 20; i += 1) { a.setTime(new Date(2026, 8, 9, 22, 30, i)); a.nodes['timeline-new'].click(); }
+    var rail = a.nodes['timeline-list'];
+    assert.strictEqual(rail.childNodes.filter(function (n) { return n.className === 'timeline-entry'; }).length, 20);
+    assert.ok(rail.scrollTop > 0);
+    assert.strictEqual(rail.childNodes[rail.childNodes.length - 1].getAttribute('aria-current'), 'true');
+  });
+  test('Roleta: rolar para o início acrescenta datas anteriores e preserva a posição visual', function () {
+    var a = setup(null, '2026-09-09T22:30:05');
+    for (var i = 0; i < 85; i += 1) { a.setTime(new Date(2026, 8, 9, 20, i, 5)); a.nodes['timeline-new'].click(); }
+    var rail = a.nodes['timeline-list'];
+    function count() { return rail.childNodes.filter(function (n) { return n.className === 'timeline-entry'; }).length; }
+    assert.strictEqual(count(), 40);
+    var height = rail.scrollHeight; rail.scrollTop = 0; rail.emit('scroll');
+    assert.strictEqual(count(), 80); assert.strictEqual(rail.scrollTop, rail.scrollHeight - height);
+    rail.scrollTop = 0; rail.emit('scroll'); assert.strictEqual(count(), 85);
+  });
+  test('Roleta: folha antiga conserva a data conhecida e não inventa criação', function () {
+    var storage = new h.Storage();
+    storage.setItem('escrevaral.astra.v1.doc.antiga', JSON.stringify({ id: 'antiga', title: 'Antiga', text: 'preservar', updated: '2020-01-02T22:30:05.000Z', revision: 1, dismissed: [] }));
+    var a = setup(storage); assert.ok(/criação desconhecida/.test(a.nodes['manuscript-date'].getAttribute('aria-label')));
+    a.type('manuscrito', 'preservar e continuar'); a.flush();
+    assert.strictEqual(a.archive()[0].created, '2020-01-02T22:30:05.000Z'); assert.strictEqual(a.archive()[0].createdApproximate, true);
+    assert.strictEqual(a.nodes['manuscript-date'].getAttribute('datetime'), '2020-01-02T22:30:05.000Z');
+  });
+
 };

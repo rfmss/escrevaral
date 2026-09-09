@@ -9,7 +9,7 @@ node astra/oficina/empacotar.js --check
 
 O produto não requer Node. A bancada usa módulos internos do Node e seu parser Acorn para a verificação ES5. Se uma distribuição não incluir esse parser interno, a oficina pode fornecer `acorn` separadamente; isso nunca entra no produto.
 
-Resultado executado em 9 de setembro de 2026, Node v24.19.0: 343 verificações aprovadas, zero falhas. Destas, 168 são casos anotados do corpus. Há também 47 casos de transplante, testes de poesia e 52 verificações gramaticais; veja [o balanço da Fase 2](../FASE2.md). As demais verificam contrato, limites, determinismo, desacoplamento, armazenamento, concorrência, quota, corrupção, exportação, importação, edição durante importação, invalidação de diagnósticos, atalhos, tema, sintaxe ES5 e recursos locais da edição portátil.
+Resultado executado em 9 de setembro de 2026, Node v24.19.0: 351 verificações aprovadas, zero falhas. Destas, 168 são casos anotados do corpus. Há também 47 casos de transplante, testes de poesia e 52 verificações gramaticais; veja [o balanço da Fase 2](../FASE2.md). As demais verificam contrato, limites, determinismo, desacoplamento, armazenamento, concorrência, quota, corrupção, exportação, importação, edição durante importação, invalidação de diagnósticos, atalhos, tema, sintaxe ES5 e recursos locais da edição portátil.
 
 `corpus-ouro.json` registra texto, lente, categoria, justificativa e os achados esperados com regra, confiança, trecho e offsets. São casos sintéticos desta oficina, exceto os fragmentos literários creditados. Categorias: correto, incorreto convencional, ambíguo, não se meta, exceção, adversarial, regressão e literatura. Não se atribuem exemplos inventados a escritoras reais.
 
@@ -38,3 +38,5 @@ node astra/oficina/medir-cofre.js
 ```
 
 A importação exige o snapshot fornecido, confere hashes e lê somente literais. Não executa engines herdadas. O resultado da medição desta entrega está em `oficina/medicao-cofre.json`; representa V8/Linux, rede bloqueada e APIs modernas desativadas, sem DOM. Há amostras que atingem o limite de achados. Não substitui medição no navegador ou aparelho.
+
+Atualização da roleta: oito verificações adicionais cobrem segundos, identidade no mesmo milissegundo, criação fixa, cópias antigas, folhas vazias, revelação da nota e carregamento progressivo com posição preservada. A restauração de datas foi adicionada ao teste de backup existente. Movimento e inércia reais continuam pendentes de conferência no aparelho.
