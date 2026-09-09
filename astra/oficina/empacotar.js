@@ -2,6 +2,12 @@
 'use strict';
 var fs = require('fs'), path = require('path'), root = path.resolve(__dirname, '..');
 var html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+/* Marca e ícones também viajam no arquivo portátil, inclusive em navegadores sem favicon SVG. */
+html = html.replace(/(\b(?:src|href)=")((?:superficie\/marca\/)[^"<>]+)(")/g, function (_, before, file, after) {
+  var ext = path.extname(file), mime = ext === '.svg' ? 'image/svg+xml' : ext === '.png' ? 'image/png' : null;
+  if (!mime) { throw new Error('Formato de marca não previsto: ' + file); }
+  return before + 'data:' + mime + ';base64,' + fs.readFileSync(path.join(root, file)).toString('base64') + after;
+});
 html = html.replace(/<link rel="stylesheet" href="([^"]+)">/g, function (_, file) {
   return '<style>\n' + fs.readFileSync(path.join(root, file), 'utf8') + '\n</style>';
 });
