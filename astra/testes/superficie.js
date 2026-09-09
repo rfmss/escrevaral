@@ -15,6 +15,7 @@ module.exports = function (h) {
     Node.prototype.removeChild = function (n) { this.childNodes.splice(this.childNodes.indexOf(n), 1); };
     Node.prototype.addEventListener = function (name, fn) { this.handlers[name] = this.handlers[name] || []; this.handlers[name].push(fn); };
     Node.prototype.setAttribute = function (name, val) { this.attributes[name] = String(val); };
+    Node.prototype.removeAttribute = function (name) { delete this.attributes[name]; };
     Node.prototype.getAttribute = function (name) { return this.attributes[name]; };
     Node.prototype.focus = function () { fakeDocument.activeElement = this; };
     Node.prototype.scrollIntoView = function () {};
@@ -24,6 +25,7 @@ module.exports = function (h) {
     var html = h.source('index.html'), matches = html.match(/id="[^"]+"/g);
     matches.forEach(function (attr) { nodes[attr.slice(4, -1)] = new Node('div'); });
     ['mesa', 'acervo', 'oficina', 'reset-dismissed'].forEach(function (id) { nodes[id].hidden = true; });
+    nodes['timeline-list'].parentNode = new Node('aside');
     var lenses = Array.from(html.matchAll(/data-lens="([^"]+)"/g), function (m) { var b = new Node('button'); b.setAttribute('data-lens', m[1]); return b; });
     fakeDocument = new Node('document'); fakeDocument.body = new Node('body'); fakeDocument.hidden = false;
     fakeDocument.getElementById = function (id) { assert.ok(nodes[id], id); return nodes[id]; };
@@ -53,6 +55,40 @@ module.exports = function (h) {
       shortTimers: function () { return Object.keys(timers).filter(function (id) { return timers[id].delay < 1000; }).length; }
     };
   }
+  test('Interface: painel exclusivo, fechamento e retorno ao controle de origem', function () {
+    var a = setup(); a.nodes['mesa-toggle'].focus(); a.nodes['mesa-toggle'].click();
+    assert.strictEqual(a.nodes.mesa.hidden, false); assert.strictEqual(a.nodes['panel-backdrop'].hidden, false);
+    assert.strictEqual(a.nodes['writing-space'].getAttribute('aria-hidden'), 'true');
+    a.nodes['acervo-toggle'].click();
+    assert.strictEqual(a.nodes.mesa.hidden, true); assert.strictEqual(a.nodes.acervo.hidden, false);
+    assert.strictEqual(a.nodes['mesa-toggle'].getAttribute('aria-expanded'), 'false');
+    a.nodes['acervo-close'].click();
+    assert.strictEqual(a.nodes.acervo.hidden, true); assert.strictEqual(a.nodes['panel-backdrop'].hidden, true);
+    assert.strictEqual(a.nodes['writing-space'].getAttribute('aria-hidden'), undefined);
+    assert.strictEqual(a.document.activeElement, a.nodes['acervo-toggle']);
+    a.nodes['mesa-toggle'].click(); a.nodes['panel-backdrop'].click(); assert.strictEqual(a.nodes.mesa.hidden, true);
+  });
+  test('Interface: título e horário aparecem nesta ordem na folha, roleta e acervo', function () {
+    var a = setup(null, '2026-09-09T22:30:05'); a.type('titulo', 'O sal do mar'); a.type('manuscrito', 'escrita'); a.flush();
+    var b = a.nodes['timeline-list'].childNodes.filter(function (n) { return n.className === 'timeline-entry'; })[0];
+    assert.strictEqual(b.childNodes[0].textContent, 'O sal do mar'); assert.strictEqual(b.childNodes[1].textContent, '22:30:05');
+    assert.ok(a.nodes['manuscript-date'].textContent.indexOf('22:30:05') === 0);
+    a.nodes['acervo-toggle'].click(); b = a.nodes['document-list'].childNodes[0].childNodes[0];
+    assert.strictEqual(b.childNodes[0].textContent, 'O sal do mar'); assert.ok(b.childNodes[1].textContent.indexOf('22:30:05') === 0);
+    assert.strictEqual(b.getAttribute('aria-current'), 'true');
+  });
+  test('Interface: expansão da roleta não troca folha; nova folha recolhe a roleta', function () {
+    var a = setup(); a.type('manuscrito', 'preservar'); a.flush();
+    a.nodes['timeline-toggle'].click(); assert.strictEqual(a.nodes['timeline-toggle'].getAttribute('aria-expanded'), 'true');
+    assert.strictEqual(a.nodes.manuscrito.value, 'preservar');
+    a.nodes['timeline-new'].click(); assert.strictEqual(a.nodes['timeline-toggle'].getAttribute('aria-expanded'), 'false');
+    assert.ok(a.archive().some(function (d) { return d.text === 'preservar'; }));
+  });
+  test('Interface: ponte distingue ponteiro e navegação por teclado', function () {
+    var a = setup(); a.document.emit('mousedown'); assert.strictEqual(a.document.body.getAttribute('data-input'), 'pointer');
+    a.document.emit('keydown', { keyCode: 9 }); assert.strictEqual(a.document.body.getAttribute('data-input'), 'keyboard');
+    a.document.emit('touchstart'); assert.strictEqual(a.document.body.getAttribute('data-input'), 'pointer');
+  });
   test('Ponte: escrita não dispara análise; gravação tardia e reabertura', function () {
     var a = setup(); a.type('titulo', 'O sal'); a.type('manuscrito', 'uma excessão');
     assert.strictEqual(a.archive().length, 0); assert.strictEqual(a.shortTimers(), 0); assert.strictEqual(a.nodes.findings.childNodes.length, 0);
@@ -141,12 +177,12 @@ module.exports = function (h) {
     a.setTime('2026-09-09T22:30:50'); a.nodes['timeline-new'].click(); a.type('titulo', 'Segunda'); a.flush();
     var rail = a.nodes['timeline-list'];
     function entries() { return rail.childNodes.filter(function (n) { return n.className === 'timeline-entry'; }); }
-    assert.deepStrictEqual(entries().map(function (n) { return n.textContent; }), ['22:30:05', '22:30:50']);
+    assert.deepStrictEqual(entries().map(function (n) { return n.childNodes[1].textContent; }), ['22:30:05', '22:30:50']);
     entries()[0].click(); var before = a.nodes['manuscript-date'].getAttribute('datetime');
     rail.scrollTop = 31; a.setTime('2026-09-10T01:01:12'); a.type('manuscrito', 'um revisado'); a.flush();
     assert.strictEqual(a.nodes['manuscript-date'].getAttribute('datetime'), before);
     assert.strictEqual(rail.scrollTop, 31);
-    assert.deepStrictEqual(entries().map(function (n) { return n.textContent; }), ['22:30:05', '22:30:50']);
+    assert.deepStrictEqual(entries().map(function (n) { return n.childNodes[1].textContent; }), ['22:30:05', '22:30:50']);
     assert.strictEqual(a.archive().filter(function (d) { return d.title === 'Primeira'; })[0].updated, new Date('2026-09-10T01:01:12').toISOString());
   });
   test('Roleta: novas folhas vazias no mesmo segundo permanecem distintas e sem foco no teclado', function () {

@@ -3,6 +3,7 @@
   var E = window.Escr, vault = E.createVault(E.knowledge), storage = null, archive = null;
   var doc = E.freshDocument(), dirty = false, timer = null, pendingAnalysis = null, snapshot = '', activeLens = '', composing = false, audio = null;
   var title = byId('titulo'), manuscript = byId('manuscrito'), saveStatus = byId('save-status'), analysisStatus = byId('analysis-status');
+  var activePanel = '', panelTrigger = null, panelIds = ['oficina', 'acervo', 'mesa'], panelToggles = ['examinar-toggle', 'acervo-toggle', 'mesa-toggle'];
   var lensButtons = document.querySelectorAll('[data-lens]');
   var timelineEntries = [], timelineCount = 40, timelineRendering = false, months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   function byId(id) { return document.getElementById(id); }
@@ -10,7 +11,7 @@
   function listen(node, event, fn) { node.addEventListener(event, fn, false); }
   function paragraph(parent, value, className) { var p = document.createElement('p'); if (className) { p.className = className; } text(p, value); parent.appendChild(p); return p; }
   function button(parent, label, fn) { var b = document.createElement('button'); b.type = 'button'; text(b, label); listen(b, 'click', fn); parent.appendChild(b); return b; }
-  function message(value) { text(saveStatus, value); }
+  function message(value) { text(saveStatus, value); text(byId('panel-status'), value); if (activePanel === 'acervo') { text(byId('archive-status'), value); } }
   function pad(n) { return n < 10 ? '0' + n : String(n); }
   function timeLabel(date) { return pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':' + pad(date.getSeconds()); }
   function noteDate(entry) { return entry.created || entry.updated; }
@@ -18,7 +19,7 @@
   function renderTimeline(refresh, previousId, reveal) {
     var list = byId('timeline-list'), date = new Date(noteDate(doc)), monthKey = '', dayKey = '', active = null, oldScroll = list.scrollTop;
     timelineRendering = true;
-    text(byId('manuscript-date'), date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear() + ', ' + timeLabel(date));
+    text(byId('manuscript-date'), timeLabel(date) + ' · ' + date.getDate() + ' de ' + months[date.getMonth()] + ' de ' + date.getFullYear());
     byId('manuscript-date').setAttribute('datetime', noteDate(doc));
     byId('manuscript-date').setAttribute('aria-label', doc.created && !doc.createdApproximate ? 'Data de criação da folha' : 'Data preservada da folha antiga; criação desconhecida');
     if (refresh && archive) {
@@ -38,15 +39,16 @@
         m.setAttribute('title', months[when.getMonth()] + ' de ' + when.getFullYear()); monthKey = month;
       }
       if (day !== dayKey) { paragraph(list, when.getDate() + ' ' + ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][when.getDay()], 'timeline-day'); dayKey = day; }
-      var b = button(list, timeLabel(when), function () {
+      var b = button(list, '', function () {
         if (entry.id === doc.id || !persist()) { return; }
         try {
           var next = archive && archive.get(entry.id);
           if (!next) { renderTimeline(true); message('Esta folha mudou. Consulte o acervo para abrir a versão guardada.'); return; }
-          loadDocument(next); showPanel('oficina', 'examinar-toggle', false);
+          loadDocument(next); collapseTimeline(); showPanel('oficina', 'examinar-toggle', false);
           try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
         } catch (e) { message('Não foi possível abrir esta folha. Sua escrita permanece aqui.'); }
       });
+      noteLabel(b, entry.title, timeLabel(when));
       if (entry.id === doc.id) { active = b; }
       b.className = 'timeline-entry'; b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false');
       b.setAttribute('aria-label', (entry.title || 'Sem título') + ', ' + when.getDate() + ' de ' + months[when.getMonth()] + ' de ' + when.getFullYear() + ', ' + timeLabel(when) + (entry.createdApproximate ? '; data antiga preservada, criação desconhecida' : ''));
@@ -83,16 +85,56 @@
     text(analysisStatus, 'O manuscrito mudou. Escolha uma lente quando quiser examinar de novo.');
   }
   function changed() {
+    growManuscript();
     dirty = true; invalidate(); window.clearTimeout(timer);
     if (!composing) { timer = window.setTimeout(persist, 1000); }
   }
-  function showPanel(id, toggle, open) { byId(id).hidden = !open; byId(toggle).setAttribute('aria-expanded', open ? 'true' : 'false'); }
-  function returnToWriting() {
-    showPanel('oficina', 'examinar-toggle', false); showPanel('acervo', 'acervo-toggle', false); showPanel('mesa', 'mesa-toggle', false);
-    manuscript.focus();
+  function noteLabel(parent, name, when) {
+    var label = document.createElement('span'), stamp = document.createElement('small');
+    label.className = 'note-name'; stamp.className = 'note-time';
+    text(label, name || 'Sem título'); text(stamp, when); parent.appendChild(label); parent.appendChild(stamp);
   }
+  function growManuscript() {
+    if (!manuscript.style) { return; }
+    var scroll = window.pageYOffset;
+    manuscript.style.height = 'auto';
+    manuscript.style.height = Math.max(320, manuscript.scrollHeight || 320) + 'px';
+    if (window.scrollTo && typeof scroll === 'number' && window.pageYOffset !== scroll) { window.scrollTo(0, scroll); }
+  }
+  function revealSelection(start, end) {
+    returnToWriting(); manuscript.setSelectionRange(start, end);
+    if (!window.getComputedStyle || !window.scrollTo) { manuscript.scrollIntoView(true); return; }
+    var mirror = document.createElement('div'), marker = document.createElement('span'), style = window.getComputedStyle(manuscript);
+    mirror.className = 'editor-measure'; mirror.style.width = manuscript.clientWidth + 'px';
+    mirror.style.font = style.font; mirror.style.lineHeight = style.lineHeight; mirror.style.letterSpacing = style.letterSpacing;
+    text(mirror, manuscript.value.slice(0, start)); text(marker, manuscript.value.slice(start, start + 1) || '\u200b');
+    mirror.appendChild(marker); document.body.appendChild(mirror);
+    var y = manuscript.getBoundingClientRect().top + (window.pageYOffset || 0) + marker.offsetTop;
+    document.body.removeChild(mirror); window.scrollTo(0, Math.max(0, y - (window.innerHeight || 600) / 3));
+  }
+  function collapseTimeline() {
+    byId('timeline-toggle').setAttribute('aria-expanded', 'false');
+    byId('timeline-list').parentNode.setAttribute('data-expanded', 'false');
+  }
+  function closePanels(restore) {
+    var trigger = panelTrigger;
+    panelIds.forEach(function (id, i) { byId(id).hidden = true; byId(panelToggles[i]).setAttribute('aria-expanded', 'false'); });
+    activePanel = ''; panelTrigger = null;
+    byId('panel-backdrop').hidden = true; document.body.setAttribute('data-panel', 'closed');
+    byId('writing-space').removeAttribute('aria-hidden');
+    if (restore && trigger && trigger.focus) { trigger.focus(); }
+  }
+  function showPanel(id, toggle, open) {
+    if (!open) { if (activePanel === id) { closePanels(true); } return; }
+    closePanels(false); collapseTimeline();
+    panelTrigger = byId(toggle); activePanel = id; text(byId('panel-status'), '');
+    byId(id).hidden = false; byId(toggle).setAttribute('aria-expanded', 'true');
+    byId('panel-backdrop').hidden = false; document.body.setAttribute('data-panel', 'open');
+    byId(id).focus(); byId('writing-space').setAttribute('aria-hidden', 'true');
+  }
+  function returnToWriting() { closePanels(false); collapseTimeline(); manuscript.focus(); }
   function loadDocument(next) {
-    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false;
+    doc = next; title.value = doc.title; manuscript.value = doc.text; dirty = false; growManuscript();
     invalidate(); text(analysisStatus, 'Nenhuma análise iniciada.');
     byId('reset-dismissed').hidden = !doc.dismissed.length;
     message(doc.revision ? 'Guardado neste aparelho.' : 'A folha é sua.');
@@ -106,14 +148,15 @@
       text(byId('archive-status'), result.unreadable ? 'Algumas folhas não puderam ser lidas. Os registros originais foram preservados.' : result.documents.length ? '' : 'Sua primeira folha começa aqui.');
       result.documents.forEach(function (entry) {
         var li = document.createElement('li');
-        var b = button(li, entry.title || 'Sem título', function () {
+        var b = button(li, '', function () {
           var isCurrent = entry.id === doc.id;
           if (!persist()) { return; }
           loadDocument(isCurrent ? doc : entry); showPanel('acervo', 'acervo-toggle', false);
           try { storage.setItem('escrevaral.astra.current', doc.id); } catch (ignore) { /* Preferência opcional. */ }
           message('Folha aberta.');
         });
-        var small = document.createElement('small'); text(small, new Date(noteDate(entry)).toLocaleDateString('pt-BR') + ', ' + timeLabel(new Date(noteDate(entry)))); b.appendChild(small); list.appendChild(li);
+        noteLabel(b, entry.title, timeLabel(new Date(noteDate(entry))) + ' · ' + new Date(noteDate(entry)).toLocaleDateString('pt-BR'));
+        b.setAttribute('aria-current', entry.id === doc.id ? 'true' : 'false'); list.appendChild(li);
       });
     } catch (e) { text(byId('archive-status'), 'Não foi possível ler o acervo. Nenhum registro foi alterado.'); }
   }
@@ -132,7 +175,7 @@
       paragraph(details, 'Referência: ' + f.evidence.source.title + '. A consulta desta lente usa somente a base guardada na mesa.');
       var detailButton = button(li, 'Ver evidência', function () { details.hidden = !details.hidden; detailButton.setAttribute('aria-expanded', details.hidden ? 'false' : 'true'); text(detailButton, details.hidden ? 'Ver evidência' : 'Fechar evidência'); });
       detailButton.setAttribute('aria-expanded', 'false');
-      button(li, 'Ver na folha', function () { if (snapshot !== manuscript.value) { invalidate(); return; } manuscript.focus(); manuscript.setSelectionRange(f.start, f.end); manuscript.scrollIntoView(true); });
+      button(li, 'Ver na folha', function () { if (snapshot !== manuscript.value) { invalidate(); return; } revealSelection(f.start, f.end); });
       button(li, 'Manter minha escolha', function () {
         if (snapshot !== manuscript.value) { invalidate(); return; }
         doc.dismissed.push(findingKey(f)); dirty = true; persist(); renderResult(result);
@@ -231,7 +274,15 @@
     var theme = storage.getItem('escrevaral.astra.theme') === 'folha' ? 'folha' : 'roteiro';
     byId('tema').value = theme; document.body.setAttribute('data-theme', theme);
   } catch (e) { message('A gravação pode estar indisponível. Sua folha está aberta; baixe uma cópia em Ajustes.'); }
-  renderTimeline(true, null, true);
+  renderTimeline(true, null, true); growManuscript();
+  listen(window, 'resize', growManuscript);
+  listen(window, 'load', growManuscript);
+  listen(byId('timeline-toggle'), 'click', function () { var open = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', open ? 'true' : 'false'); byId('timeline-list').parentNode.setAttribute('data-expanded', open ? 'true' : 'false'); if (open) { renderTimeline(false, null, true); } });
+  listen(byId('mesa-close'), 'click', function () { closePanels(true); });
+  listen(byId('acervo-close'), 'click', function () { closePanels(true); });
+  listen(byId('panel-backdrop'), 'click', function () { closePanels(true); });
+  listen(document, 'mousedown', function () { document.body.setAttribute('data-input', 'pointer'); });
+  listen(document, 'touchstart', function () { document.body.setAttribute('data-input', 'pointer'); });
   listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
   listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); });
@@ -240,7 +291,7 @@
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });
   listen(byId('back-writing'), 'click', returnToWriting);
-  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); dirty = true; persist(); renderTimeline(false, null, true); showPanel('acervo', 'acervo-toggle', false); }
+  function newDocument() { if (!persist()) { return; } loadDocument(E.freshDocument()); dirty = true; persist(); renderTimeline(false, null, true); showPanel('acervo', 'acervo-toggle', false); collapseTimeline(); }
   listen(byId('new-document'), 'click', newDocument);
   listen(byId('timeline-new'), 'click', newDocument);
   for (var i = 0; i < lensButtons.length; i += 1) { listen(lensButtons[i], 'click', function () { examine(this.getAttribute('data-lens')); }); }
@@ -253,12 +304,25 @@
   listen(manuscript, 'keydown', playKey);
   listen(byId('export-text'), 'click', function () { download((title.value ? title.value + '\n\n' : '') + manuscript.value, 'text/plain', 'manuscrito.txt'); });
   listen(byId('export-backup'), 'click', function () { persist(); try { download(JSON.stringify({ format: 'escrevaral-astra', version: 1, documents: exportedDocuments() }, null, 2), 'application/json', 'escrevaral-copia.json'); } catch (e) { message('Não foi possível reunir o acervo. Baixe o texto da folha atual.'); } });
+  listen(byId('import-file'), 'focus', function () { this.parentNode.setAttribute('data-focus', 'true'); });
+  listen(byId('import-file'), 'blur', function () { this.parentNode.setAttribute('data-focus', 'false'); });
   listen(byId('import-file'), 'change', function () { importFile(this.files[0]); this.value = ''; });
   listen(document, 'keydown', function (event) {
     var code = event.keyCode;
-    if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); lensButtons[0].focus(); }
+    if (code === 9) {
+      document.body.setAttribute('data-input', 'keyboard');
+      if (activePanel) {
+        var controls = byId(activePanel).querySelectorAll('button, input, select, a[href], [tabindex="0"]'), focusable = [], j;
+        for (j = 0; j < controls.length; j += 1) { if (!controls[j].disabled && !controls[j].hidden && controls[j].getClientRects().length) { focusable.push(controls[j]); } }
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (!first) { event.preventDefault(); byId(activePanel).focus(); }
+        else if (event.shiftKey && (document.activeElement === first || document.activeElement === byId(activePanel))) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && (document.activeElement === last || document.activeElement === byId(activePanel))) { event.preventDefault(); first.focus(); }
+      }
+    }
+    if ((event.ctrlKey || event.metaKey) && code === 13) { event.preventDefault(); showPanel('oficina', 'examinar-toggle', true); panelTrigger = manuscript; lensButtons[0].focus(); }
     else if ((event.ctrlKey || event.metaKey) && code === 83) { event.preventDefault(); persist(); }
-    else if (code === 27) { returnToWriting(); }
+    else if (code === 27) { if (activePanel) { closePanels(true); } else { collapseTimeline(); } }
   });
   listen(document, 'visibilitychange', function () { if (document.hidden) { persist(); stopSound(); } });
   listen(window, 'pagehide', persist);

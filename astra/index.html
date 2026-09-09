@@ -12,48 +12,61 @@
   <link rel="stylesheet" href="superficie/fonte-editor.css">
   <link rel="stylesheet" href="superficie/mesa.css">
 </head>
-<body data-theme="roteiro">
+<body data-theme="roteiro" data-input="keyboard">
   <a class="skip" href="#manuscrito">Ir ao manuscrito</a>
-  <noscript><p class="notice">Ative o JavaScript do navegador para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto da folha.</p></noscript>
-  <section id="mesa" class="shelf" hidden aria-labelledby="mesa-heading">
-    <h2 id="mesa-heading">Sua mesa</h2>
-    <label for="tema">Papel</label>
-    <select id="tema"><option value="roteiro">Roteiro</option><option value="folha">Folha</option></select>
-    <label class="check"><input id="som" type="checkbox"> Som de máquina</label>
-    <p class="quiet">O som começa somente se você escolher. Desliga ao sair desta página.</p>
-    <p id="sound-status" class="quiet" role="status"></p>
-    <div class="actions"><button id="export-text">Baixar texto</button><button id="export-backup">Baixar cópia de segurança</button><label class="file-label" for="import-file">Trazer arquivo<input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
-    <p class="quiet">Arquivos trazidos viram novas folhas. O acervo permanece.</p>
-    <p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa</a> <span class="quiet">— arquivo único para abrir sem internet.</span></p>
-    <p class="quiet">A gravação depende do espaço e das permissões do navegador. Guarde também uma cópia de segurança fora dele. Em aparelhos antigos, a abertura de arquivos HTML depende do aplicativo usado.</p>
-    <p class="quiet">Teclado: Ctrl ou ⌘ + Enter abre os instrumentos; Esc volta à escrita; Ctrl ou ⌘ + S guarda a folha.</p>
+  <noscript><p class="notice">Ative o JavaScript para guardar e examinar a escrita. Você ainda pode escrever e copiar o texto.</p></noscript>
+  <div id="writing-space">
+    <header class="masthead">
+      <span class="brand-signature"><img class="brand-mark" src="superficie/marca/escrevaral.svg" width="28" height="24" alt="">escrevaral</span>
+      <nav class="desk-tools" aria-label="Mesa">
+        <button id="examinar-toggle" aria-expanded="false" aria-controls="oficina">Examinar</button>
+        <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
+        <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
+      </nav>
+    </header>
+    <div class="desk">
+      <main class="paper">
+        <div class="note-heading">
+          <label class="sr-only" for="titulo">Título do manuscrito</label>
+          <input id="titulo" class="title" type="text" placeholder="Sem título" autocomplete="off" spellcheck="false">
+          <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
+        </div>
+        <label class="sr-only" for="manuscrito">Manuscrito</label>
+        <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
+        <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span></footer>
+      </main>
+      <aside class="timeline" aria-label="Folhas por data de criação">
+        <div class="rail-heading"><button id="timeline-toggle" aria-expanded="false" aria-controls="timeline-list">Folhas <span aria-hidden="true">⌄</span></button><span class="rail-label">FOLHAS</span><button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha">+</button></div>
+        <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Escolha um título para abrir a folha.</p>
+        <div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div>
+      </aside>
+    </div>
+  </div>
+  <div id="panel-backdrop" class="panel-backdrop" hidden></div>
+  <section id="mesa" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="mesa-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">SEU ESPAÇO</p><h2 id="mesa-heading">Ajustes</h2></div><button id="mesa-close" class="close-panel" aria-label="Fechar ajustes">×</button></div>
+    <div class="setting-section"><h3>Ambiente</h3>
+      <div class="setting-row"><label for="tema">Papel</label><select id="tema"><option value="roteiro">Textura sutil</option><option value="folha">Liso</option></select></div>
+      <label class="setting-row check" for="som"><span>Som de máquina</span><input id="som" type="checkbox"></label>
+      <p id="sound-status" class="quiet" role="status">Som desligado.</p><p class="quiet">O som desliga ao sair desta página.</p>
+    </div>
+    <div class="setting-section"><h3>Seus textos</h3>
+      <div class="actions"><button id="export-text">Baixar esta folha <span aria-hidden="true">↓</span></button><button id="export-backup">Baixar cópia do acervo <span aria-hidden="true">↓</span></button><label class="file-label" for="import-file">Trazer arquivo <span aria-hidden="true">↑</span><input id="import-file" type="file" accept=".txt,.json,text/plain,application/json"></label></div>
+      <p id="panel-status" class="quiet" role="status" aria-live="polite"></p>
+      <p class="quiet">Textos e cópias trazidos viram novas folhas. Seu acervo permanece.</p>
+      <p class="quiet">As folhas ficam neste navegador, neste aparelho. Guarde uma cópia do acervo para levá-las com você.</p>
+    </div>
+    <div class="setting-section"><h3>Escrever sem internet</h3><p><a href="escrevaral.html" download="escrevaral.html">Guardar a mesa completa <span aria-hidden="true">↗</span></a></p><p class="quiet">Um arquivo único para abrir offline. Em aparelhos antigos, a abertura depende do aplicativo usado.</p></div>
+    <div class="setting-section"><h3>Atalhos</h3><dl class="shortcuts"><div><dt>Examinar</dt><dd>Ctrl / ⌘ + Enter</dd></div><div><dt>Guardar a folha</dt><dd>Ctrl / ⌘ + S</dd></div><div><dt>Fechar painel</dt><dd>Esc</dd></div></dl></div>
   </section>
-  <section id="acervo" class="shelf" hidden aria-labelledby="acervo-heading">
-    <div class="section-head"><h2 id="acervo-heading">Acervo</h2><button id="new-document">Nova folha <span aria-hidden="true">＋</span></button></div>
-    <p class="quiet">Suas folhas ficam neste navegador.</p>
+  <section id="acervo" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="acervo-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">SUAS FOLHAS</p><h2 id="acervo-heading">Acervo</h2></div><button id="acervo-close" class="close-panel" aria-label="Fechar acervo">×</button></div>
+    <div class="archive-intro"><p class="quiet">Um lugar para voltar aos seus textos.</p><button id="new-document">+ Nova folha</button></div>
     <p id="archive-status" role="status"></p><ul id="document-list" class="document-list"></ul>
   </section>
-  <div class="desk">
-  <aside class="timeline" aria-label="Folhas por data de criação">
-    <button id="timeline-new" class="new-leaf" aria-label="Nova folha" title="Nova folha">+</button>
-    <p id="timeline-hint" class="sr-only">Deslize ou role para percorrer as datas. Toque no horário para abrir a folha.</p>
-    <div id="timeline-list" tabindex="0" role="region" aria-label="Roleta de datas" aria-describedby="timeline-hint"></div>
-  </aside>
-  <main class="paper">
-    <label class="sr-only" for="titulo">Título do manuscrito</label>
-    <input id="titulo" class="title" type="text" placeholder="Título" autocomplete="off" spellcheck="false">
-    <p class="manuscript-date"><time id="manuscript-date" aria-label="Data de criação da folha"></time></p>
-    <label class="sr-only" for="manuscrito">Manuscrito</label>
-    <textarea id="manuscrito" placeholder="A folha é sua." spellcheck="false" autocorrect="off" autocapitalize="off"></textarea>
-    <footer class="paper-footer"><span id="save-status" role="status" aria-live="polite">A folha é sua.</span><span class="privacy">Só neste aparelho</span></footer>
-    <nav class="desk-tools" aria-label="Mesa">
-      <button id="examinar-toggle" class="primary" aria-expanded="false" aria-controls="oficina">Examinar</button>
-      <button id="acervo-toggle" aria-expanded="false" aria-controls="acervo">Acervo</button>
-      <button id="mesa-toggle" aria-expanded="false" aria-controls="mesa">Ajustes</button>
-    </nav>
-    <section id="oficina" class="workshop" hidden aria-labelledby="oficina-heading">
-      <div class="section-head"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Uma lente de cada vez.</h2></div><button id="back-writing">Voltar à escrita</button></div>
-      <p class="quiet">Escolha o que observar. Seu manuscrito permanece como você o escreveu.</p>
+  <section id="oficina" class="sheet" role="dialog" aria-modal="true" tabindex="-1" hidden aria-labelledby="oficina-heading">
+    <div class="sheet-heading"><div><p class="eyebrow">OLHAR DO TEXTO</p><h2 id="oficina-heading">Examinar</h2></div><button id="back-writing" class="close-panel" aria-label="Voltar à escrita">×</button></div>
+    <p class="quiet">Uma lente de cada vez. Escolha o que observar no seu manuscrito.</p>
       <div class="lenses" role="group" aria-label="Escolher uma lente">
         <button data-lens="ortografia" aria-pressed="false"><span>01</span> Ortografia</button>
         <button data-lens="acentuacao" aria-pressed="false"><span>02</span> Acentuação</button>
@@ -65,14 +78,11 @@
         <button data-lens="rima" aria-pressed="false">Rimas</button>
         <button data-lens="metrica" aria-pressed="false">Métrica de versos</button>
       </div>
-      <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
-      <ol id="findings" class="findings"></ol>
-      <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
-      <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
-    </section>
-  </main>
-  </div>
-  <footer class="colophon"><span class="brand-signature"><img class="brand-mark" src="superficie/marca/escrevaral.svg" width="32" height="28" alt="">ESCREVARAL</span><span>Um lugar de fazer nada, com tudo que precisa.</span></footer>
+    <p id="analysis-status" role="status" aria-live="polite">Nenhuma análise iniciada.</p>
+    <ol id="findings" class="findings"></ol>
+    <button id="reset-dismissed" hidden>Rever escolhas mantidas</button>
+    <p class="quiet coverage">Uma base pequena, com limites à vista. Ausência de apontamentos não significa que tudo foi verificado.</p>
+  </section>
   <script src="conhecimento/base.js"></script>
   <script src="maquina/cofre.js"></script>
   <script src="maquina/acervo.js"></script>
