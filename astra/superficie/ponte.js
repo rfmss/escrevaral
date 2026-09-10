@@ -139,12 +139,16 @@
   function updateFocus() {
     if (!window.getComputedStyle || !manuscript.style) { return; }
     var before = byId('focus-before'), after = byId('focus-after');
-    before.hidden = true; after.hidden = true;
-    if (!focusEnabled || composing || !manuscript.value) { return; }
-    var bounds = paragraphBounds(manuscript.value, manuscript.selectionStart, manuscript.selectionEnd);
-    if (!focusMeasure || focusMeasure.value !== manuscript.value || focusMeasure.width !== manuscript.clientWidth || focusMeasure.start !== bounds.start || focusMeasure.end !== bounds.end) {
-      focusMeasure = { value: manuscript.value, width: manuscript.clientWidth, start: bounds.start, end: bounds.end, first: textPosition(bounds.start), last: textPosition(bounds.end) };
+    if (!focusEnabled || !manuscript.value) { before.hidden = true; after.hidden = true; return; }
+    /* A composição tem texto/seleção provisórios. Conservar a geometria estável,
+       sem apagar as máscaras; a rolagem ainda desloca essa mesma geometria. */
+    if (!composing) {
+      var bounds = paragraphBounds(manuscript.value, manuscript.selectionStart, manuscript.selectionEnd);
+      if (!focusMeasure || focusMeasure.value !== manuscript.value || focusMeasure.width !== manuscript.clientWidth || focusMeasure.start !== bounds.start || focusMeasure.end !== bounds.end) {
+        focusMeasure = { value: manuscript.value, width: manuscript.clientWidth, start: bounds.start, end: bounds.end, first: textPosition(bounds.start), last: textPosition(bounds.end) };
+      }
     }
+    if (!focusMeasure) { return; }
     var first = focusMeasure.first, last = focusMeasure.last, height = manuscript.clientHeight;
     var top = Math.max(0, Math.min(height, first.top - manuscript.scrollTop));
     var bottom = Math.max(0, Math.min(height, last.top + last.line - manuscript.scrollTop));
@@ -396,8 +400,6 @@
   listen(byId('clear-search'), 'click', function () { window.clearTimeout(searchTimer); byId('note-search').value = ''; renderTimeline(false); byId('note-search').focus(); });
   listen(byId('timeline-list'), 'scroll', function () { if (this.scrollTop < 24) { olderNotes(); } });
   listen(manuscript, 'input', followTyping);
-  listen(manuscript, 'compositionend', function () { composing = false; followTyping(); });
-  listen(manuscript, 'compositionstart', cancelTypewriter);
   listen(manuscript, 'blur', cancelTypewriter);
   listen(manuscript, 'mousedown', cancelTypewriter);
   listen(manuscript, 'touchstart', cancelTypewriter);
@@ -415,8 +417,13 @@
   listen(byId('leave-focus'), 'click', function () { setImmersion(false); });
   listen(byId('focus-toggle'), 'click', function () { focusEnabled = !focusEnabled; this.setAttribute('aria-pressed', focusEnabled ? 'true' : 'false'); updateFocus(); try { if (storage) { storage.setItem('escrevaral.astra.focus', focusEnabled ? 'on' : 'off'); } } catch (ignore) { /* Préférence facultativa. */ } });
   listen(title, 'input', changed); listen(manuscript, 'input', changed);
-  listen(manuscript, 'compositionstart', function () { composing = true; window.clearTimeout(timer); updateFocus(); });
-  listen(manuscript, 'compositionend', function () { composing = false; changed(); });
+  listen(manuscript, 'compositionstart', function () {
+    cancelTypewriter(); window.clearTimeout(focusTimer); updateFocus();
+    composing = true; window.clearTimeout(timer);
+  });
+  listen(manuscript, 'compositionend', function () {
+    composing = false; focusMeasure = null; updateFocus(); changed(); followTyping();
+  });
   listen(byId('acervo-toggle'), 'click', function () { if (!persist()) { return; } var open = byId('acervo').hidden; showPanel('acervo', 'acervo-toggle', open); if (open) { renderArchive(); } });
   listen(byId('mesa-toggle'), 'click', function () { showPanel('mesa', 'mesa-toggle', byId('mesa').hidden); });
   listen(byId('examinar-toggle'), 'click', function () { var open = byId('oficina').hidden; showPanel('oficina', 'examinar-toggle', open); if (open) { lensButtons[0].focus(); } });

@@ -22,7 +22,7 @@ Revisão online: https://escrevaral-review.rafamass975189.chatgpt.site. Treze le
 
 ## Evidências e limites
 
-453 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 464.192 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
+454 verificações passaram após papel, foco e impressão, incluindo ES5, preservação, offsets, equivalência portátil e execução sem rede/APIs modernas. Testes de lógica e medição em V8/Linux; navegador real e iPad físico desta versão permanecem pendentes. HTML portátil: 464.384 bytes. A visita ao link não instala suporte offline: guardar o arquivo não elimina possíveis restrições do visualizador do aparelho.
 
 Inventário das 68 branches, 17 conjuntos linguísticos, sondas e medições ficam em `oficina/`, fora do runtime. Os catálogos do ZIP recebido têm hashes em `oficina/proveniencia-cofre.json`. Não tratar comentários de maturidade do legado como prova de acerto.
 
@@ -45,3 +45,9 @@ Implementado na superfície, sem mudar engines ou armazenamento:
 - Marcador de nota: borda esquerda reta, sem bloco preenchido, claro/escuro; hover não imita seleção.
 
 Testes acrescentados cobrem entrada/saída do foco, seleção e deslocamento ao mudar altura, impressão de 2.000 linhas sem salvar, HTML literal, estado claro/escuro/foco e eventos de impressão antigos. Bateria ES5/portátil aprovada. Nada disso equivale a renderização ou iPad físico. O pedido explícito adiou os cursores; não implementá-los sem retomada desse escopo.
+
+### Correção de acentos no destaque de parágrafo
+
+A composição (`~` antes de `a`, por exemplo) apagava ambas as máscaras e devolvia contraste a todos os parágrafos. Agora a superfície conserva a geometria anterior durante a composição, inclusive quando o navegador fornece uma seleção provisória diferente. A rolagem desloca as mesmas máscaras sem medir texto provisório. No fim da composição, o destaque é recalculado e a máquina de escrever retoma. Os eventos duplicados de composição foram consolidados. Sem nova API ou temporizador recorrente.
+
+Regressão reproduzida antes da correção e aprovada depois: til, circunflexo e agudo, claro/escuro, foco completo ligado/desligado, seleção transitória, rolagem e desativação do destaque. 454 verificações aprovadas; teclado real de navegador/iPad ainda sem reprodução instrumental.

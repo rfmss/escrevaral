@@ -184,6 +184,50 @@ module.exports = function (h) {
     a.type('titulo', ''); a.type('manuscrito', 'impressão pelo menu antigo'); a.event('print-media', { matches: true });
     assert.strictEqual(a.nodes['print-text'].textContent, 'impressão pelo menu antigo'); assert.strictEqual(a.nodes['print-title'].hidden, true);
   });
+  test('Acentos: composição conserva o parágrafo, inclusive com seleção transitória e rolagem', function () {
+    ['claro', 'escuro'].forEach(function (theme) {
+      [false, true].forEach(function (immersive) {
+        var a = setup(), editor = a.nodes.manuscrito, create = a.document.createElement, measurements = 0;
+        a.root.getComputedStyle = function () { return { lineHeight: '40px', fontSize: '22px', paddingTop: '0px', paddingBottom: '0px' }; };
+        a.document.createElement = function (tag) {
+          var node = create(tag);
+          if (tag === 'span') { Object.defineProperty(node, 'offsetTop', { get: function () {
+            measurements += 1;
+            return (this.parentNode.textContent.match(/\n/g) || []).length * 40;
+          } }); }
+          return node;
+        };
+        a.nodes['theme-' + (theme === 'claro' ? 'light' : 'dark')].click();
+        if (immersive) { a.nodes['immersion-toggle'].click(); }
+        a.type('manuscrito', 'cima\n\nmeio\n\nbaixo'); editor.setSelectionRange(8, 8);
+        a.flush(40); editor.scrollTop = 0; editor.emit('scroll');
+        var before = a.nodes['focus-before'], after = a.nodes['focus-after'];
+        assert.strictEqual(before.hidden, false); assert.strictEqual(before.style.height, '80px');
+        assert.strictEqual(after.hidden, false); assert.strictEqual(after.style.top, '120px');
+        ['~', '^', '´'].forEach(function (accent) {
+          editor.emit('compositionstart', { data: '' }); var count = measurements;
+          assert.strictEqual(before.hidden, false); assert.strictEqual(after.hidden, false);
+          a.type('manuscrito', 'cima\n\nme' + accent + 'io\n\nbaixo');
+          editor.setSelectionRange(0, 0); a.document.emit('selectionchange'); a.flush(40);
+          assert.strictEqual(before.style.height, '80px'); assert.strictEqual(after.style.top, '120px');
+          assert.strictEqual(measurements, count); /* Nenhuma medição do texto provisório. */
+          editor.scrollTop = 20; editor.emit('scroll');
+          assert.strictEqual(before.style.height, '60px'); assert.strictEqual(after.style.top, '100px');
+          assert.strictEqual(measurements, count);
+          editor.value = 'cima\n\nmão\n\nbaixo'; editor.setSelectionRange(9, 9);
+          editor.emit('compositionend', { data: 'ã' });
+          assert.strictEqual(before.hidden, false); assert.strictEqual(after.hidden, false);
+          assert.strictEqual(editor.value, 'cima\n\nmão\n\nbaixo');
+          a.flush(); assert.strictEqual(a.archive()[0].text, editor.value);
+          editor.scrollTop = 0; editor.emit('scroll');
+        });
+        editor.emit('compositionstart'); a.nodes['focus-toggle'].click();
+        assert.strictEqual(before.hidden, true); assert.strictEqual(after.hidden, true);
+        editor.emit('compositionend', { data: '' }); a.flush(40);
+        assert.strictEqual(before.hidden, true); assert.strictEqual(after.hidden, true);
+      });
+    });
+  });
   test('Pastas: meses e dias organizam notas sem trocar a folha aberta', function () {
     var a = setup(null, '2026-08-31T22:30:05'); a.type('titulo', 'Agosto'); a.type('manuscrito', 'mar'); a.flush();
     a.setTime('2026-09-10T09:15:20'); a.nodes['timeline-new'].click(); a.type('titulo', 'Setembro'); a.type('manuscrito', 'vento'); a.flush();
